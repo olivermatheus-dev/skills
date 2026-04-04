@@ -1,175 +1,317 @@
 # Biblioteca de Templates de Hooks
 
-> 50+ templates organizados por categoria. Cada template tem a estrutura base e exemplo aplicado ao universo de vendas/CRM/gestão comercial.
+> 50+ templates organizados por categoria. Cada template tem a estrutura base com `[placeholders]` genéricos.
+> Para usar: substitua os placeholders com os dados reais da persona, do setor e do conteúdo.
+> Ao final de cada categoria: notas de adaptação por plataforma.
 
 ---
 
 ## Categoria 1: Dor (PAS — Problem-Agitate-Solve)
 
-1. "Você [dor comum] e nem percebe."
-   → "Você perde leads toda semana e nem percebe."
+*Gatilho: Loss Aversion + Identidade. A persona se reconhece na dor antes de saber que existe solução.*
 
-2. "O maior problema de [perfil] não é [problema óbvio]. É [problema real]."
-   → "O maior problema de gestores comerciais não é vender pouco. É não saber por que vendem pouco."
+**Templates:**
 
-3. "Se você [sintoma], o problema é maior do que imagina."
-   → "Se seu vendedor improvisa cada ligação, o problema é maior do que imagina."
+1. `"Você [dor específica da persona] e nem percebe."`
+   → Exemplo: "Você [perde X toda semana] e nem percebe."
 
-4. "[Dor] não é falta de sorte. É falta de [solução]."
-   → "Perder lead para concorrente não é falta de sorte. É falta de follow-up."
+2. `"O maior problema de [cargo/perfil] não é [problema óbvio]. É [problema real não-óbvio]."`
+   → Exemplo: "O maior problema de [gestores de área] não é [ter pouco recurso]. É [não saber por que os resultados caem]."
 
-5. "Todo [perfil] passa por isso — mas poucos admitem."
-   → "Todo gestor comercial já perdeu venda por falta de processo — mas poucos admitem."
+3. `"Se você [sintoma comum], o problema é maior do que imagina."`
+   → Exemplo: "Se seu time [improvisa cada [processo]], o problema é maior do que imagina."
 
-6. "O custo invisível de [problema]."
-   → "O custo invisível de não padronizar seu atendimento comercial."
+4. `"[Dor] não é falta de [culpado óbvio]. É falta de [causa real]."`
+   → Exemplo: "[Perder resultado para concorrente] não é falta de [talento]. É falta de [processo]."
 
-7. "Você está [fazendo X]. Seu lead está [sentindo Y]."
-   → "Você está 'pensando na proposta'. Seu lead está fechando com o concorrente."
+5. `"Todo [perfil] já passou por isso — mas poucos admitem."`
+   → Exemplo: "Todo [responsável pela área X] já [viveu essa situação] — mas poucos admitem."
+
+6. `"O custo invisível de [comportamento comum que parece inofensivo]."`
+   → Exemplo: "O custo invisível de [não padronizar esse processo]."
+
+7. `"Você está [fazendo X]. Seu [stakeholder/cliente/lead] está [sentindo Y — algo ruim]."`
+   → Exemplo: "Você está [esperando o momento certo]. [Ele] está [tomando outra decisão]."
+
+**Notas por plataforma:**
+- **LinkedIn:** Tom mais sóbrio. Trocar "você" por "a maioria de [profissão]" reduz a agressividade e aumenta o alcance.
+- **Instagram/TikTok:** "Você" direto funciona bem. Adicionar elemento visual que reforça a dor (expressão de frustração, tela com problema).
+- **Carrossel:** Usar versão curta (template 1 ou 6) como primeiro slide — máximo 8 palavras.
+
+---
 
 ## Categoria 2: Contrarian
 
-8. "[Crença popular] é mentira."
-   → "CRM sozinho salva empresa é a maior mentira do mercado."
+*Gatilho: Pattern Interrupt + Curiosidade. Contradiz o senso comum para forçar atenção consciente.*
 
-9. "Pare de [conselho comum]. Faça [alternativa] em vez disso."
-   → "Pare de contratar mais vendedores. Organize os que você já tem."
+**Templates:**
 
-10. "Todo mundo fala para [X]. Ninguém fala que [Y]."
-    → "Todo mundo fala para usar CRM. Ninguém fala que 73% das empresas abandonam em 3 meses."
+8. `"[Crença popular sobre o setor] é mentira."`
+   → Exemplo: "[A crença mais repetida sobre X] está errada."
 
-11. "[Prática popular] está matando seu [resultado]."
-    → "Seu processo 'flexível' está matando sua taxa de conversão."
+9. `"Pare de [conselho comum no setor]. Faça [alternativa contraintuitiva] em vez disso."`
+   → Exemplo: "Pare de [fazer X]. [Y] gera resultado melhor."
 
-12. "Opinião impopular: [afirmação forte]."
-    → "Opinião impopular: CRM gratuito é mais caro que CRM pago."
+10. `"Todo mundo fala para [X]. Ninguém fala que [dado ou consequência incômoda de X]."`
+    → Exemplo: "Todo mundo fala para [adotar X]. Ninguém fala que [Y% das empresas abandonam em Z meses]."
 
-13. "O conselho que [autoridade] dá está errado para [seu perfil]."
-    → "O conselho de vendas que funciona para enterprises está destruindo PMEs."
+11. `"[Prática popular] está [destruindo / sabotando / travando] seu [resultado importante]."`
+    → Exemplo: "Seu processo '[nome que parece positivo]' está [gerando o efeito oposto]."
 
-14. "E se [crença] estivesse errada?"
-    → "E se o problema do seu time não fosse falta de talento?"
+12. `"Opinião impopular: [afirmação forte e defensável]."`
+    → Exemplo: "Opinião impopular: [versão gratuita de X] é mais cara que a paga."
+
+13. `"O conselho que funciona para [perfil A] está destruindo [perfil B]."`
+    → Exemplo: "O que funciona para [grandes empresas] está destruindo [pequenas]."
+
+14. `"E se [crença que todos têm] estivesse errada?"`
+    → Exemplo: "E se o problema não fosse [o que todo mundo culpa]?"
+
+**Notas por plataforma:**
+- **LinkedIn:** Contrarian funciona bem como post texto. Usar na primeira linha sem imagem — o texto em si é o hook.
+- **Reels/TikTok:** Falar a afirmação contrarian diretamente para a câmera nos primeiros 2 segundos.
+- **Carrossel:** Usar o template 12 ("Opinião impopular") como primeiro slide — alto potencial de salvamento.
+
+---
 
 ## Categoria 3: Número/Lista
 
-15. "[N] [coisas] que [resultado]."
-    → "3 perguntas que seu vendedor deveria fazer — mas não faz."
+*Gatilho: Especificidade + Promessa de valor estruturado. Números específicos parecem mais verdadeiros.*
 
-16. "[N]% de [grupo] fazem [erro]. Você é um deles?"
-    → "78% dos times comerciais não medem conversão por etapa. Você é um deles?"
+**Templates:**
 
-17. "Passei [tempo/quantidade] analisando [coisa]. Aqui está o que descobri."
-    → "Analisei 200+ times comerciais. O padrão dos que vendem mais é simples."
+15. `"[N] [coisas específicas] que [persona] deveria [fazer/saber] — mas [não faz/ignora]."`
+    → Exemplo: "[3] [perguntas] que [todo profissional da área] deveria [fazer] — mas [não faz]."
 
-18. "Em [período], [resultado numérico]. Aqui está como."
-    → "Em 30 dias, esse time de 3 pessoas dobrou as conversões. Aqui está como."
+16. `"[N]% de [grupo] [cometem erro X]. Você é um deles?"`
+    → Exemplo: "[78]% de [profissionais do setor] [fazem isso]. Você é um deles?"
 
-19. "O número que [perfil] ignora — e que muda tudo."
-    → "O número que gestores comerciais ignoram — e que explica 80% das vendas perdidas."
+17. `"Passei [tempo/quantidade] analisando [objeto de estudo]. Aqui está o que descobri."`
+    → Exemplo: "Analisei [N] [casos/empresas/perfis]. O padrão dos que [têm resultado] é simples."
 
-20. "[N] sinais de que [problema]."
-    → "5 sinais de que seus leads estão vazando do funil."
+18. `"Em [período], [resultado numérico específico]. Aqui está como."`
+    → Exemplo: "Em [30 dias], [resultado concreto]. Aqui está como."
+
+19. `"O número que [perfil] ignora — e que [explica / muda] tudo."`
+    → Exemplo: "O número que [a maioria na área] ignora — e que explica [X% dos resultados]."
+
+20. `"[N] sinais de que [problema latente que a persona não percebe]."`
+    → Exemplo: "[5] sinais de que [seu processo está no limite sem que você perceba]."
+
+21. `"[N] de cada [N] [perfil] [cometem erro]. O [N+1]º nunca acontece por acaso."`
+    → Exemplo: "[3] de cada [4] [profissionais] [fazem X sem perceber]. O [4]º nunca acontece por acaso."
+
+**Notas por plataforma:**
+- **LinkedIn:** Números com dado real (pesquisa citável) têm engajamento muito maior que estimativas.
+- **Carrossel:** O número vira o design do primeiro slide — fontes grandes, número centralizado.
+- **Reels:** Falar o número no início com pausa: "[N]. Esse é o número que mudou como eu vejo [tema]."
+
+---
 
 ## Categoria 4: Autoridade/Credibilidade
 
-21. "Depois de [credencial], aprendi que [insight]."
-    → "Depois de estruturar vendas em 50+ PMEs, aprendi que o problema nunca é o vendedor."
+*Gatilho: Social Proof + Autoridade. Credenciais reais ou dados proprietários constroem confiança rápida.*
 
-22. "[Resultado] em [contexto] me ensinou [lição]."
-    → "Triplicar conversão em times de 3 pessoas me ensinou uma coisa: processo > talento."
+**Templates:**
 
-23. "O que [referência respeitada] faz diferente de você."
-    → "O que empresas que crescem 3x ao ano fazem diferente no follow-up."
+22. `"Depois de [credencial verificável], aprendi que [insight contraintuitivo]."`
+    → Exemplo: "Depois de [N anos / N projetos / N análises], aprendi que o problema nunca é [culpado óbvio]."
 
-24. "Eu era [situação anterior]. Até que [virada]."
-    → "Eu era o gestor que culpava o time. Até que olhei os dados."
+23. `"[Resultado específico] em [contexto] me ensinou [lição central do conteúdo]."`
+    → Exemplo: "[Resultado concreto] em [contexto com tamanho/prazo] me ensinou uma coisa: [princípio]."
+
+24. `"O que [referência que a persona admira] faz diferente de [maioria]."`
+    → Exemplo: "O que [perfil de sucesso que a persona aspira] faz diferente em [área do conteúdo]."
+
+25. `"Eu era [situação anterior limitante]. Até que [virada + aprendizado]."`
+    → Exemplo: "Eu era [o tipo de profissional que fazia X errado]. Até que [o que mudou a perspectiva]."
+
+26. `"[N] anos [fazendo X]. Aqui está a única coisa que [realmente importa / muda resultado]."`
+    → Exemplo: "[N anos] [na área / trabalhando com Y]. Aqui está a única coisa que separa [quem consegue resultado de quem não consegue]."
+
+**Notas por plataforma:**
+- **LinkedIn:** Autoridade pessoal ("eu fiz / eu aprendi") performa melhor que autoridade de terceiros.
+- **Instagram:** Combinar com visual que reforce a credencial (print de resultado, ambiente profissional).
+- **Reels:** Começar com "Depois de [N anos]..." diretamente sem introdução — o número âncora.
+
+---
 
 ## Categoria 5: FOMO
 
-25. "Enquanto você [faz X], seu concorrente [faz Y]."
-    → "Enquanto você improvisa, seu concorrente testa 3 scripts por semana."
+*Gatilho: Loss Aversion + Prova Social. A persona sente que está ficando para trás.*
 
-26. "Seus concorrentes já fazem isso. Você não."
-    → "Times que usam gamificação em vendas já existem no Brasil. Você está ficando para trás."
+**Templates:**
 
-27. "[Tendência] está mudando [setor]. Quem não se adaptar..."
-    → "A padronização de processos comerciais está separando quem cresce de quem sobrevive."
+27. `"Enquanto você [faz X menos eficiente], [concorrentes/mercado] [fazem Y mais eficiente]."`
+    → Exemplo: "Enquanto você [improvisa], seu [concorrente / mercado] [testa e aprende sistematicamente]."
 
-28. "Daqui a [tempo], [consequência]. O que você vai ter feito?"
-    → "Daqui a 6 meses, metade dos seus concorrentes vai ter um processo comercial estruturado."
+28. `"[Perfis de referência] já fazem isso. Você não."`
+    → Exemplo: "[Os que crescem mais rápido no setor] já fazem [X]. A maioria ainda não."
+
+29. `"[Tendência] está separando quem [cresce] de quem [estagna]. Em qual lado você está?"`
+    → Exemplo: "[Mudança de comportamento / nova prática] está separando quem [lidera] de quem [sobrevive]."
+
+30. `"Daqui a [período], [consequência previsível]. O que você vai ter feito?"`
+    → Exemplo: "Daqui a [6 meses], [cenário de mercado]. O que você terá feito até lá?"
+
+31. `"Isso já está acontecendo com [perfis parecidos com a persona]. A pergunta é quando vai chegar até você."`
+    → Exemplo: "Isso já está acontecendo com [empresas do mesmo porte / profissionais do mesmo cargo]. A pergunta é quando."
+
+**Notas por plataforma:**
+- **LinkedIn:** FOMO corporativo performa bem — competição entre empresas, não indivíduos.
+- **Instagram/TikTok:** FOMO pessoal e de carreira ressoam mais — "você está ficando para trás".
+- **Cuidado geral:** FOMO exagerado perde credibilidade. Ancorar em dado ou observação real.
+
+---
 
 ## Categoria 6: Story/Narrativa
 
-29. "[Pessoa] me [ação inesperada]. O motivo me surpreendeu."
-    → "Um cliente me ligou dizendo que demitiu o melhor vendedor. O motivo me surpreendeu."
+*Gatilho: Curiosidade narrativa + Identidade. O cérebro é programado para completar histórias.*
 
-30. "Ontem aconteceu algo que mudou como eu vejo [tema]."
-    → "Ontem um lead me mostrou o WhatsApp dele com 47 mensagens não respondidas de vendedores."
+**Templates:**
 
-31. "Eu cometi esse erro por [tempo]. Até que [virada]."
-    → "Eu deixei meu time vender sem script por 2 anos. O que aconteceu quando mudei foi absurdo."
+32. `"[Pessoa / empresa] [ação inesperada]. O motivo me surpreendeu."`
+    → Exemplo: "[Cliente / parceiro / colega] [tomou uma decisão que parecia errada]. O motivo me surpreendeu."
 
-32. "A história de [pessoa] que [resultado] com [método simples]."
-    → "A história do time de 4 pessoas que bateu a meta de um time de 12."
+33. `"Ontem / Semana passada aconteceu algo que mudou como eu vejo [tema]."`
+    → Exemplo: "[Contexto de tempo recente]: [algo que aconteceu que gerou insight]."
 
-33. "Isso aconteceu [quando] e eu nunca esqueci."
-    → "Uma reunião de vendas em 2023 mudou tudo que eu acreditava sobre motivação de time."
+34. `"Eu cometi esse erro por [período]. Até que [virada]."`
+    → Exemplo: "Fiz [X de forma errada] por [N anos]. O que mudou quando [parei de fazer]."
+
+35. `"A história de [personagem em situação parecida com a persona] que [resultado inesperado] com [método simples]."`
+    → Exemplo: "A história de [perfil com restrição de recurso] que [resultado que parecia impossível naquele contexto]."
+
+36. `"POV: [situação cotidiana e específica que a persona vive — já é o início da história]."`
+    → Exemplo: "POV: Você [abre / acessa / verifica] e vê [situação específica que gera frustração ou surpresa]."
+
+37. `"Isso aconteceu [quando/contexto] e eu nunca esqueci."`
+    → Exemplo: "[Situação com contexto específico] mudou tudo que eu acreditava sobre [tema]."
+
+**Notas por plataforma:**
+- **LinkedIn:** Stories de aprendizado pessoal ("eu errei, aprendi") têm engajamento alto — autenticidade funciona.
+- **Reels/TikTok:** POV (template 36) é formato nativo — persona se coloca na cena imediatamente.
+- **Carrossel:** Story como primeiro slide precisa ter o twist implícito — "cliffhanger visual".
+
+---
 
 ## Categoria 7: How-to
 
-34. "Como [resultado] em [tempo] — mesmo se [objeção]."
-    → "Como montar um funil em 15 minutos — mesmo se você nunca usou CRM."
+*Gatilho: Reciprocidade + Especificidade. Promessa de valor prático e acessível.*
 
-35. "O passo-a-passo para [resultado] que ninguém te ensinou."
-    → "O passo-a-passo para padronizar seu time comercial sem gerar resistência."
+**Templates:**
 
-36. "Faça isso [quando] e [resultado]."
-    → "Faça isso nos primeiros 5 minutos com um lead novo e sua taxa de conversão muda."
+38. `"Como [resultado desejado pela persona] em [prazo/quantidade] — mesmo se [objeção comum]."`
+    → Exemplo: "Como [resultado] em [prazo] — mesmo se [limitação que a persona acredita ter]."
 
-37. "[Resultado] não é tão difícil quanto parece. Aqui estão [N] passos."
-    → "Estruturar um processo de vendas não é tão difícil quanto parece."
+39. `"O passo-a-passo para [resultado] que ninguém te ensinou."`
+    → Exemplo: "O passo-a-passo para [fazer X] sem [custo ou consequência que a persona teme]."
+
+40. `"Faça [ação específica] [quando/como] e [resultado mensurável]."`
+    → Exemplo: "Faça [ação] nos primeiros [momento específico] e [resultado diferente do esperado]."
+
+41. `"[Resultado] não é tão [difícil/caro/demorado] quanto parece. Veja como."`
+    → Exemplo: "[Conquista que parece complexa] não é tão [obstáculo percebido] quanto parece."
+
+42. `"A forma mais rápida de [resultado] — sem [sacrifício que a persona quer evitar]."`
+    → Exemplo: "A forma mais rápida de [objetivo] — sem [trade-off negativo comum]."
+
+**Notas por plataforma:**
+- **LinkedIn:** How-to performa melhor com número específico — "em 15 minutos", "em 3 passos".
+- **Carrossel:** Ideal para how-to — cada slide é um passo. O hook do primeiro slide deve prometer o resultado completo.
+- **Reels:** Abrir mostrando o resultado final, depois ir para o processo — "resultado-first" retém atenção.
+
+---
 
 ## Categoria 8: Pergunta Provocativa
 
-38. "Quantos [coisa] você [verbo negativo] este mês?"
-    → "Quantos leads você perdeu este mês por esquecimento?"
+*Gatilho: Curiosidade + Identidade. Perguntas que a persona não consegue responder sem pensar — e isso a faz parar.*
 
-39. "Você sabe [dado crítico do próprio negócio]?"
-    → "Você sabe qual etapa do seu funil perde mais leads?"
+**Templates:**
 
-40. "O que seu [stakeholder] diria se visse [realidade]?"
-    → "O que seu sócio diria se visse quantos leads seu time ignora por semana?"
+43. `"Quantos [recurso/oportunidade] você [perdeu/ignorou] este [período]?"`
+    → Exemplo: "Quantos [leads/clientes/oportunidades] você [perdeu] este [mês/trimestre]?"
 
-41. "Se [cenário hipotético], o que mudaria?"
-    → "Se você soubesse exatamente por que cada venda é perdida, o que faria diferente?"
+44. `"Você sabe [dado crítico do próprio negócio/processo/resultado]?"`
+    → Exemplo: "Você sabe [qual etapa / qual momento / qual métrica] [gera/trava] mais [resultado]?"
 
-42. "Por que [resultado] e não [resultado desejado]?"
-    → "Por que seu melhor vendedor converte 3x mais que os outros?"
+45. `"O que [pessoa importante para a persona] diria se visse [realidade que a persona tenta esconder de si mesma]?"`
+    → Exemplo: "O que [seu sócio / seu cliente / seu time] diria se visse [o que acontece por baixo dos panos]?"
+
+46. `"Se [cenário hipotético com restrição], o que você faria diferente?"`
+    → Exemplo: "Se você soubesse [informação que a persona não tem hoje], o que mudaria [amanhã]?"
+
+47. `"Por que [grupo A que a persona admira] [faz X melhor] e [grupo B — onde a persona está] não?"`
+    → Exemplo: "Por que [quem tem resultado] [converte / retém / cresce] [N]x mais que [a maioria]?"
+
+48. `"[Afirmação sobre a persona que ela gostaria de questionar]. Você pode garantir que não é você?"`
+    → Exemplo: "[Comportamento comum que gera mau resultado]. Você pode garantir que não é você?"
+
+**Notas por plataforma:**
+- **LinkedIn:** Perguntas diretas "Você sabe X?" têm alta taxa de comentário — as pessoas respondem.
+- **Reels/TikTok:** Perguntar diretamente para a câmera com pausa após a pergunta — deixar o silêncio criar tensão.
+- **Carrossel:** A pergunta como primeiro slide sem resposta — a resposta vem nos slides seguintes.
+
+---
 
 ## Categoria 9: Provocação Direta
 
-43. "Isso vai incomodar, mas [verdade dura]."
-    → "Isso vai incomodar: se seu time vende diferente de você, a culpa é sua."
+*Gatilho: Pattern Interrupt + Identidade. Afirmações fortes que provocam reação emocional imediata.*
 
-44. "[Afirmação forte]. E eu vou provar."
-    → "Seu processo de vendas está quebrado. E eu vou provar em 4 slides."
+**Templates:**
 
-45. "A verdade que [perfil] não quer ouvir sobre [tema]."
-    → "A verdade que donos de empresa não querem ouvir sobre o próprio time de vendas."
+49. `"Isso vai incomodar, mas [verdade que a persona evita ouvir]."`
+    → Exemplo: "Isso vai incomodar: [verdade que a persona atribui a outros, não a si mesma]."
+
+50. `"[Afirmação forte sobre problema do setor]. E eu vou provar."`
+    → Exemplo: "[Diagnóstico direto sobre o problema que a persona tem]. E eu vou provar em [N pontos/slides]."
+
+51. `"A verdade que [perfil da persona] não quer ouvir sobre [tema do conteúdo]."`
+    → Exemplo: "A verdade que [cargo/perfil] não quer ouvir sobre [área do próprio trabalho]."
+
+52. `"[Ação da persona] não é [justificativa que ela usa]. É [causa real que ela não quer admitir]."`
+    → Exemplo: "[Comportamento que a persona justifica como estratégico] não é [justificativa]. É [causa real]."
+
+**Notas por plataforma:**
+- **LinkedIn:** Provocação funciona melhor em texto, não em imagem. Vai gerar discordância nos comentários — isso aumenta o alcance.
+- **Reels/TikTok:** Tom sério e direto, sem sorriso no início — a seriedade do rosto reforça a afirmação.
+- **Cuidado:** Provocação sem argumento real vira ofensa. Só usar quando o conteúdo tem a prova.
+
+---
 
 ## Categoria 10: Mistos/Híbridos
 
-46. "[Dado chocante]. Mas aqui está a boa notícia."
-    → "67% dos leads são perdidos por falta de follow-up. Mas aqui está a boa notícia."
+*Combinações de gatilhos que criam efeito composto.*
 
-47. "Eu testei [N] [coisas] e só [N] funcionaram."
-    → "Testei 12 abordagens de primeiro contato. Só 3 convertem acima de 15%."
+**Templates:**
 
-48. "Se você ler só uma coisa sobre [tema] este mês, leia isso."
-    → "Se você ler só uma coisa sobre gestão comercial este mês, leia isso."
+53. `"[Dado chocante / estatística]. Mas aqui está a boa notícia."`
+    → Exemplo: "[N]% de [grupo] [vivem o problema]. Mas aqui está a boa notícia."
 
-49. "[Antes] eu acreditava em [X]. Hoje sei que [Y]."
-    → "Antes eu acreditava que bons vendedores nascem prontos. Hoje sei que processo cria bons vendedores."
+54. `"Testei [N] [abordagens/estratégias/formatos]. Só [N] funcionaram."`
+    → Exemplo: "Testei [N] [variações de X]. Só [resultado específico] converteu acima de [Y]."
 
-50. "O framework de [N] passos que [resultado incrível]."
-    → "O framework de 3 etapas que transforma times desorganizados em máquinas de conversão."
+55. `"Se você ler só uma coisa sobre [tema] este [mês/ano], leia isso."`
+    → Exemplo: "Se você ler só uma coisa sobre [área crítica para a persona] este [período], leia isso."
+
+56. `"[Crença anterior] → [evento de virada] → [nova perspectiva]. Thread."`
+    → Exemplo: "[O que eu acreditava] mudou quando [o que aconteceu]. Aqui está o que aprendi."
+
+57. `"[Dado que parece positivo] → [dado que revela o problema]. Você está do lado certo?"`
+    → Exemplo: "[X%] [conseguem resultado A]. Mas [Y%] [têm o problema oculto que impede escalar]."
+
+---
+
+## Hooks com dados: como integrar o OUTPUT_RESEARCH.md
+
+Quando OUTPUT_RESEARCH.md está disponível, os hooks mais fortes são os que integram dados reais nos slots de especificidade. Padrão:
+
+| Elemento do hook | Substitui por |
+|---|---|
+| `[N]%` | Dado real da Camada 1 da pesquisa |
+| `[resultado específico]` | Resultado do case da Camada 2 |
+| `[afirmação forte]` | Citação da Camada 3 como afirmação direta |
+| `[problema que a persona nega]` | Objeção real da Camada 4 |
+| `[ângulo original]` | Gap da Camada 5 da pesquisa |
+
+Um hook com dado real supera um hook com placeholder em engajamento. Priorizar sempre quando disponível.

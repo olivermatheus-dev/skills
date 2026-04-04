@@ -11,6 +11,8 @@ Montar calendários editoriais equilibrados, distribuindo conteúdo entre pilare
 
 ## Context Files Obrigatórios
 
+> **Caminhos:** todos os context files estão em `[ACTIVE_COMPANY_PATH]/context/`. O output do calendário é salvo em `[ACTIVE_COMPANY_PATH]/contents/` (nível empresa, não de peça individual) — caminhos resolvidos pelo orquestrador no início da sessão.
+
 Carregar ANTES de montar:
 - `CONTENT_PILLARS.md` — pilares, frequência e proporção de funil
 - `PLATFORM_SPECS.md` — horários ideais e frequência por plataforma
@@ -86,5 +88,7 @@ Para cada slot:
 ```
 
 ## Após Montar o Calendário
+
+Salvar o arquivo como `OUTPUT_CALENDAR_[YYYY-MM].md` (use o mês coberto, ex: `OUTPUT_CALENDAR_2026-04.md`) em `[ACTIVE_COMPANY_PATH]/contents/`.
 
 Perguntar: "Quer que eu comece a produzir alguma dessas pautas? Posso pesquisar e escrever o conteúdo (→ Skill 2 Research → Skill 4 Writer) ou criar os slides diretamente (→ Skill 8 Carousel Creator)."

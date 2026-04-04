@@ -1,5 +1,5 @@
 ---
-name: dealflux-content-orchestrator
+name: content
 description: "Orquestra o pipeline de produção de conteúdo para redes sociais. Esta é a PRIMEIRA skill a ser consultada quando o assunto é conteúdo. Funciona como ponto de entrada — roteia para a skill específica conforme a intenção. Use SEMPRE que o usuário quiser produzir conteúdo, gerar ideias, pesquisar temas, criar hooks, escrever posts, adaptar para plataformas, criar carrosséis, montar calendário editorial ou analisar performance. Se o usuário disser 'quero postar', 'preciso de conteúdo', 'o que postar essa semana', 'faz um carrossel', 'analisa meu post', 'gera ideias', 'escreve um post', 'hook para...', 'adapta para LinkedIn' — esta skill é acionada primeiro para entender a intenção e rotear corretamente, mesmo que outra skill pareça mais específica. Se o usuário já tiver contexto suficiente e quiser pular etapas, esta skill permite atalhos diretos sem forçar o pipeline completo."
 ---
 
@@ -40,22 +40,55 @@ Ao receber uma mensagem, identifique a etapa desejada:
 | "ideias", "temas", "sobre o que postar", "sem inspiração", "brainstorm" | **Skill 1** (Ideation) | `OUTPUT_IDEATION.md` |
 | "pesquisar", "aprofundar", "dados sobre", "fundamentar", "estatísticas" | **Skill 2** (Research) | `OUTPUT_RESEARCH.md` |
 | "hook", "gancho", "headline", "chamada", "primeira linha", "scroll-stopper" | **Skill 3** (Hooks) | `OUTPUT_HOOKS.md` |
-| "escrever", "redigir", "criar post", "conteúdo", "texto", "copy", "script" | **Skill 4** (Writer) | `OUTPUT_CONTENT.md` |
-| "adaptar", "LinkedIn", "Instagram", "Reels", "formatar para", "versão para" | **Skill 5A** (Adapter) | `OUTPUT_ADAPTED.md` |
+| "escrever", "redigir", "criar post", "conteúdo", "texto", "copy", "script" | **Skill 4** (Writer) | `OUTPUT_WRITER.md` |
+| "adaptar", "LinkedIn", "Instagram", "Reels", "formatar para", "versão para" | **Skill 5A** (Adapter) | `OUTPUT_ADAPTER.md` |
 | "derivar", "transformar", "formatos", "tierlist", "ranking", "reaproveitar" | **Skill 5B** (Derivatives) | `OUTPUT_DERIVATIVES.md` |
-| "performance", "métricas", "o que funcionou", "analytics", "bombou", "flopou" | **Skill 6** (Analyzer) | `OUTPUT_ANALYSIS.md` + HOOK_LIBRARY atualizado |
-| "calendário", "planejamento", "semana", "mês", "grade", "agenda" | **Skill 7** (Calendar) | `OUTPUT_CALENDAR.md` |
+| "performance", "métricas", "o que funcionou", "analytics", "bombou", "flopou" | **Skill 6** (Analyzer) | `OUTPUT_PERFORMANCE.md` + HOOK_LIBRARY atualizado |
+| "calendário", "planejamento", "semana", "mês", "grade", "agenda" | **Skill 7** (Calendar) | `OUTPUT_CALENDAR_[YYYY-MM].md` |
 | "carrossel", "carousel", "slides", "criar slides", "arte", "post visual" | **Skill 8** (Carousel) | Arquivos HTML dos slides |
+
+---
+
+## Resolução de Empresa e Peça de Conteúdo
+
+### Passo 1 — Identificar empresa ativa
+
+Ao iniciar qualquer sessão de conteúdo:
+
+1. Ler `~/.claude/content-pipeline.md` para obter `companies_root` — **se o arquivo não existir: parar e informar o usuário para executar `install.sh` antes de continuar**
+2. Extrair o slug da empresa do primeiro input do usuário. Formatos aceitos:
+   - `/content empresa-a`
+   - `empresa-a — novo post sobre IA`
+   - `trabalhando para empresa-a`
+   - `continua empresa-a / 2026-04-01-slug`
+3. Resolver: `ACTIVE_COMPANY_PATH = [companies_root]/[slug]`
+4. Verificar se `[ACTIVE_COMPANY_PATH]/context/` existe:
+   - Se **existe** → confirmar para o usuário: "Trabalhando para **[slug]** — contexto em `[ACTIVE_COMPANY_PATH]/context/`"
+   - Se **não existe** → informar: "Empresa `[slug]` não encontrada em `[companies_root]`. Quer criar agora? Use `/setup-briefing`"
+5. Se o usuário **não informar empresa** e houver mais de uma pasta em `[companies_root]` → listar e perguntar qual. Nunca assumir silenciosamente.
+
+### Passo 2 — Identificar peça de conteúdo
+
+Para qualquer skill de produção (Ideation, Research, Hooks, Writer, Adapter, Derivatives, Carousel):
+
+1. Verificar se o usuário referenciou uma peça existente (ex: `continua 2026-04-01-slug-do-post`)
+   - **Continuação:** `CONTENT_PIECE_PATH = [ACTIVE_COMPANY_PATH]/contents/[nome-da-pasta-informada]/`
+   - Carregar `WORKFLOW_STATE.md` dentro dessa pasta para retomar de onde parou
+2. Se for peça nova:
+   - Gerar slug a partir do tema (lowercase, hyphens, sem acentos, max 6 palavras)
+   - `CONTENT_PIECE_PATH = [ACTIVE_COMPANY_PATH]/contents/[YYYY-MM-DD]-[slug]/`
+   - Criar a pasta e iniciar novo `WORKFLOW_STATE.md` dentro dela
+3. Todos os arquivos `OUTPUT_*.md` e `WORKFLOW_STATE.md` são salvos em `[CONTENT_PIECE_PATH]/`
 
 ---
 
 ## Verificação de Pré-requisitos
 
-Antes de rotear para qualquer skill de produção (1-8), verificar se os context files obrigatórios **existem como arquivos no projeto atual**.
+Antes de rotear para qualquer skill de produção (1-8), verificar se os context files obrigatórios **existem em `[ACTIVE_COMPANY_PATH]/context/`**.
 
 ### Como verificar
 
-Procurar os arquivos dentro do projeto. Cada context file é um arquivo `.md` independente. Listar os arquivos disponíveis e cruzar com a tabela abaixo.
+Procurar os arquivos em `[ACTIVE_COMPANY_PATH]/context/`. Cada context file é um arquivo `.md` independente. Listar os disponíveis e cruzar com a tabela abaixo.
 
 ### Mapa de dependências
 
@@ -79,6 +112,8 @@ Procurar os arquivos dentro do projeto. Cada context file é um arquivo `.md` in
    - **Setup rápido:** "Posso preencher só o mínimo para [skill solicitada]. Quer fazer assim?"
 3. Se o usuário recusar ambos: prosseguir com o que tem, mas avisar que a qualidade será menor
 
+> **Nota de caminho:** todos os context files desta empresa estão em `[ACTIVE_COMPANY_PATH]/context/`. Este caminho é resolvido no início da sessão conforme descrito em "Resolução de Empresa e Peça de Conteúdo".
+
 ---
 
 ## Gestão de Estado — WORKFLOW_STATE.md
@@ -87,12 +122,17 @@ A cada transição entre skills, o Claude deve manter atualizado o arquivo `WORK
 
 ### Regras do WORKFLOW_STATE
 
-1. **Criar** na primeira interação do pipeline (se não existir)
-2. **Atualizar** ao final de cada etapa com o resumo do que foi produzido
-3. **Consultar** no início de cada etapa para saber o que já foi feito
-4. O usuário pode baixar este arquivo a qualquer momento para ter visão do progresso
+1. **Localização:** `[CONTENT_PIECE_PATH]/WORKFLOW_STATE.md` — cada peça tem seu próprio estado, separado das demais
+2. **Criar** ao iniciar uma nova peça de conteúdo (se não existir)
+3. **Atualizar** ao final de cada etapa com o resumo do que foi produzido
+4. **Consultar** no início de cada etapa para saber o que já foi feito
+5. O usuário pode baixar este arquivo a qualquer momento para ter visão do progresso
 
-O template do WORKFLOW_STATE.md está em `references/WORKFLOW_STATE.md`.
+O template do WORKFLOW_STATE.md está em `references/WORKFLOW_STATE.md`. Ao criar, adicionar no topo:
+```
+Empresa: [slug]
+Pasta da peça: [CONTENT_PIECE_PATH]
+```
 
 ### Outputs por etapa
 
@@ -104,11 +144,11 @@ Cada skill deve gerar um arquivo `.md` de output ao final da etapa. Estes arquiv
 | Ideation | `OUTPUT_IDEATION.md` | Lista de ideias ranqueadas com metadata |
 | Research | `OUTPUT_RESEARCH.md` | Pesquisa estruturada com fontes e dados |
 | Hooks | `OUTPUT_HOOKS.md` | Hooks ranqueados com scores e justificativas |
-| Writer | `OUTPUT_CONTENT.md` | Conteúdo-pilar com marcações de atomização |
-| Adapter | `OUTPUT_ADAPTED.md` | Versões formatadas por plataforma |
+| Writer | `OUTPUT_WRITER.md` | Conteúdo-pilar com marcações de atomização |
+| Adapter | `OUTPUT_ADAPTER.md` | Versões formatadas por plataforma |
 | Derivatives | `OUTPUT_DERIVATIVES.md` | Mapa de derivados com prioridade |
-| Analyzer | `OUTPUT_ANALYSIS.md` | Análise WHAT-WHY-NEXT + hooks para biblioteca |
-| Calendar | `OUTPUT_CALENDAR.md` | Calendário editorial com slots preenchidos |
+| Analyzer | `OUTPUT_PERFORMANCE.md` | Análise WHAT-WHY-NEXT + hooks para biblioteca |
+| Calendar | `OUTPUT_CALENDAR_[YYYY-MM].md` | Calendário editorial com slots preenchidos |
 | Carousel | Arquivos HTML | Slides standalone prontos para screenshot |
 
 ### Resumo obrigatório entre etapas
@@ -178,7 +218,8 @@ Prosseguir com o que tem. Usar o conhecimento da conversa para compensar. Avisar
 
 ## Templates de Context Files
 
-Todos os templates de context files que o Setup precisa gerar estão em `references/context-templates/`. Consultar ao rodar o Setup ou quando precisar verificar a estrutura esperada de cada arquivo.
+Os templates são os **blueprints** para criar novos context files. Estão em `references/context-templates/`.  
+Os arquivos reais de cada empresa ficam em `[ACTIVE_COMPANY_PATH]/context/`.
 
 Arquivos de template disponíveis:
 - `references/context-templates/COMPANY_PROFILE.md`

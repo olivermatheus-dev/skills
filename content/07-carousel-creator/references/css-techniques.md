@@ -1,5 +1,48 @@
 # Técnicas CSS Avançadas para Slides
 
+> Referência de técnicas CSS usadas na geração de slides. Cada técnica inclui quando usar,
+> código de referência e cuidados de compatibilidade.
+> Os valores de cor devem vir do VISUAL_IDENTITY.md via tokens CSS (`:root` variables).
+
+---
+
+## 0. Tokens CSS — Como usar o VISUAL_IDENTITY
+
+Antes de qualquer técnica, mapear os valores do VISUAL_IDENTITY.md para variáveis CSS no `:root` de cada slide. Isso garante que trocar a paleta ou fonte exige alterar apenas uma linha.
+
+```css
+:root {
+  /* Cores */
+  --bg-deep: [valor do VISUAL_IDENTITY — ex: #0a0a0f];
+  --fg-primary: [ex: #f0f0f0];
+  --fg-secondary: [ex: #a0a0b0];
+  --fg-muted: [ex: #606070];
+  --brand: [cor principal — ex: #6366f1];
+  --brand-accent: [cor de acento — ex: #8b5cf6];
+
+  /* Derivados da brand color (calcular com RGB separado) */
+  --brand-10: rgba(99, 102, 241, 0.10);   /* brand com 10% opacidade */
+  --brand-40: rgba(99, 102, 241, 0.40);   /* brand com 40% opacidade */
+
+  /* Bordas */
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-default: rgba(255,255,255,0.12);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+}
+```
+
+**Como extrair RGB de uma cor hex para usar em rgba():**
+- `#6366f1` → R=99, G=102, B=241 → `rgba(99, 102, 241, 0.10)`
+- Calcular sempre que uma técnica precisar de opacidade variável da brand color
+
+---
+
 ## 1. Mesh Gradients (Background Multi-Ponto)
 
 Mesh gradients criam fundos orgânicos usando radial-gradients empilhados. É a base visual de todo slide.
