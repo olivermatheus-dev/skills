@@ -288,7 +288,9 @@ Campos com ⚠️ não bloqueiam o pipeline, mas reduzem qualidade. Sugerir pree
 > Pipeline pronto: `/content-ideation` gera as primeiras pautas.
 
 Encerrar (modo padrão) com:
-> "Setup concluído para `[slug]`! Você já pode usar `/content` para iniciar a produção de conteúdo. Para retomar qualquer bloco, use a skill específica: `/setup-brand-voice`, `/setup-audience-profiles`, etc."
+> "Setup concluído para `[slug]`! Você já pode usar `/content` para iniciar a produção de conteúdo. Para retomar qualquer bloco, use a skill específica: `/setup-brand-voice`, `/setup-audience-profiles`, etc.
+>
+> **Extensão opcional — Copy Foundation:** Se você vai produzir copy de venda direta (sales pages, VSLs, sequências de email), rode `/setup-copy-foundation [slug]`. A skill destila 7 artefatos (Big Idea, Unique Mechanism, Objections, Value Stack, etc.) a partir do setup que você acabou de fazer."
 
 ---
 

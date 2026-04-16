@@ -7,6 +7,7 @@ setup|flow|setup-brand-voice|skills/setup/flows/company-setup/04-brand-voice|set
 setup|flow|setup-competitor-map|skills/setup/flows/company-setup/05-competitor-map|setup/05-competitor-map|bloco 5: concorrentes e gaps
 setup|flow|setup-content-pillars|skills/setup/flows/company-setup/06-content-pillars|setup/06-content-pillars|bloco 6: pilares e estrategia editorial
 setup|flow|setup-visual-identity|skills/setup/flows/company-setup/07-visual-identity|setup/07-visual-identity|bloco 7: identidade visual e tokens
+setup|flow|setup-copy-foundation|skills/setup/flows/company-setup/08-copy-foundation||bloco 8 opcional: foundation de copy para venda direta
 content|flow|content|skills/content/flows/content-production/00-orchestrator|content/00-orchestrator|orquestrador do pipeline de conteudo
 content|flow|content-ideation|skills/content/flows/content-production/02-ideation|content/02-ideation|gerar ideias
 content|flow|content-research|skills/content/flows/content-production/03-research|content/03-research|pesquisar temas
@@ -17,3 +18,4 @@ content|flow|carousel-creator|skills/content/flows/content-production/07-carouse
 content|flow|content-derivatives|skills/content/flows/content-production/08-derivatives|content/08-derivatives|formatos derivados
 content|flow|editorial-calendar|skills/content/flows/content-production/09-editorial-calendar|content/09-editorial-calendar|calendario editorial
 content|flow|content-performance|skills/content/flows/content-production/10-performance|content/10-performance|analisar performance
+marketing|standalone|company-preview|skills/marketing/standalone/company-preview||gera pagina HTML de preview com todos os materiais da empresa

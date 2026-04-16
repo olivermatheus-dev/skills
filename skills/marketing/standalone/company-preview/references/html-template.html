@@ -1,0 +1,67 @@
+<!--
+  Template base para /company-preview.
+  Substitua TODOS os placeholders {{...}} antes de salvar o arquivo final.
+  Placeholders esperados:
+    {{LANG}}            — pt-BR
+    {{THEME}}           — dark | light
+    {{COMPANY_NAME}}    — nome da empresa (ex: "TestCo")
+    {{COMPANY_SLUG}}    — slug (ex: "testco")
+    {{GENERATED_AT}}    — data ISO (ex: "2026-04-16")
+    {{FONT_IMPORTS}}    — <link> tags para Google Fonts da marca
+    {{CSS_TOKENS}}      — block :root { --brand: ... } com tokens da marca ou fallback
+    {{CSS_LAYOUT}}      — CSS completo do layout (sidebar + main + componentes)
+    {{SIDEBAR_LINKS}}   — <a href="#..."> links, 1 por section disponível
+    {{SECTIONS_HTML}}   — todas as <section> renderizadas em ordem
+    {{FOOTER_NOTE}}     — texto opcional sobre sections ausentes
+    {{INLINE_SCRIPT}}   — JS vanilla (smooth scroll + highlight + copy color)
+-->
+<!DOCTYPE html>
+<html lang="{{LANG}}" data-theme="{{THEME}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{COMPANY_NAME}} — Preview</title>
+  <meta name="description" content="Preview de materiais da empresa {{COMPANY_NAME}}. Gerado em {{GENERATED_AT}}.">
+  {{FONT_IMPORTS}}
+  <style>
+    {{CSS_TOKENS}}
+    {{CSS_LAYOUT}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <aside class="sidebar" aria-label="Navegação">
+    <header class="sidebar-header">
+      <h2 class="company-name">{{COMPANY_NAME}}</h2>
+      <p class="sidebar-meta">Preview · {{GENERATED_AT}}</p>
+    </header>
+    <nav class="sidebar-nav" aria-label="Seções">
+      {{SIDEBAR_LINKS}}
+    </nav>
+    <footer class="sidebar-footer">
+      <p class="sidebar-meta small">Gerado por <code>/company-preview {{COMPANY_SLUG}}</code></p>
+    </footer>
+  </aside>
+
+  <main id="main" class="main">
+    {{SECTIONS_HTML}}
+
+    <footer class="main-footer">
+      {{FOOTER_NOTE}}
+    </footer>
+  </main>
+
+  <button class="mobile-menu-toggle" aria-label="Abrir navegação" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="17" y2="6"/>
+      <line x1="3" y1="10" x2="17" y2="10"/>
+      <line x1="3" y1="14" x2="17" y2="14"/>
+    </svg>
+  </button>
+
+  <script>
+    {{INLINE_SCRIPT}}
+  </script>
+</body>
+</html>
