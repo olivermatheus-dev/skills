@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TestCo — Preview</title>
+  <meta name="description" content="Preview de materiais da empresa TestCo. Gerado em 2026-04-16.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
+  <style>
+    :root {
+      /* Brand — from VISUAL_IDENTITY.md */
+      --brand: #7C5CFF;
+      --brand-subtle: #9F88FF;
+      --brand-accent: #00E0B2;
+      --brand-70: rgba(124, 92, 255, 0.70);
+      --brand-40: rgba(124, 92, 255, 0.40);
+      --brand-10: rgba(124, 92, 255, 0.10);
+      --brand-05: rgba(124, 92, 255, 0.05);
+
+      /* Dark mode neutros */
+      --bg-base: #0A0A0F;
+      --bg-surface: #111116;
+      --bg-elevated: #1A1A22;
+      --fg-primary: #F5F5F7;
+      --fg-secondary: #A8A8B3;
+      --fg-muted: #6B6B78;
+      --border-default: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+
+      /* Semânticas */
+      --success: #00E0B2;
+      --warning: #FFB547;
+      --danger: #FF5C7A;
+      --info: #4A9FFF;
+
+      /* Tipografia */
+      --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+
+      /* Spacing scale */
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+      /* Border radius */
+      --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.5);
+
+      /* Escala de texto */
+      --text-xs: 12px; --text-sm: 14px; --text-base: 16px; --text-lg: 18px;
+      --text-xl: 20px; --text-2xl: 28px; --text-3xl: 36px; --text-4xl: 48px;
+    }
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--fg-primary);
+      background: var(--bg-base);
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(ellipse 800px 600px at 20% 10%, rgba(124, 92, 255, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 800px at 80% 90%, rgba(0, 224, 178, 0.04) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    .skip-link {
+      position: absolute; top: -40px; left: var(--space-4);
+      background: var(--brand); color: white;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      text-decoration: none; z-index: 100;
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    body { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+
+    .sidebar {
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-default);
+      padding: var(--space-5) var(--space-4);
+      display: flex; flex-direction: column; gap: var(--space-5);
+    }
+    .sidebar-header { padding-bottom: var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+    .company-name {
+      font-size: var(--text-xl); font-weight: 700;
+      letter-spacing: -0.02em; margin: 0 0 var(--space-1);
+      color: var(--fg-primary);
+      background: linear-gradient(135deg, var(--fg-primary), var(--brand));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sidebar-meta {
+      font-size: var(--text-xs); color: var(--fg-muted); margin: 0;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .sidebar-meta.small { font-size: 10px; }
+    .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: var(--space-1); }
+    .sidebar-nav a {
+      display: block; padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--fg-secondary); text-decoration: none; border: none;
+      font-size: var(--text-sm); font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar-nav a:hover { background: var(--brand-10); color: var(--fg-primary); }
+    .sidebar-nav a.active { background: var(--brand-10); color: var(--brand); font-weight: 600; }
+    .sidebar-footer { padding-top: var(--space-4); border-top: 1px solid var(--border-subtle); }
+    .sidebar-footer code {
+      background: var(--bg-elevated); padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 11px;
+    }
+
+    .main {
+      padding: var(--space-7); max-width: 920px; width: 100%; margin: 0;
+    }
+    .main > section { margin-bottom: var(--space-8); scroll-margin-top: var(--space-5); }
+
+    h1, h2, h3, h4 { color: var(--fg-primary); margin: 0 0 var(--space-3); letter-spacing: -0.02em; line-height: 1.1; }
+    h1 { font-size: var(--text-4xl); font-weight: 800; margin-bottom: var(--space-4); }
+    h2 { font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-7); padding-bottom: var(--space-2); border-bottom: 1px solid var(--border-default); }
+    h3 { font-size: var(--text-xl); font-weight: 600; margin-top: var(--space-5); }
+    h4 { font-size: var(--text-lg); font-weight: 600; margin-top: var(--space-4); }
+    p { margin: 0 0 var(--space-3); color: var(--fg-secondary); }
+    .main > section > p { color: var(--fg-secondary); }
+    a { color: var(--brand); text-decoration: none; border-bottom: 1px solid var(--brand-40); }
+    a:hover { border-bottom-color: var(--brand); }
+    code { font-family: var(--font-mono); background: var(--bg-surface); padding: 2px 6px; border-radius: var(--radius-sm); font-size: 0.9em; color: var(--brand-subtle); border: 1px solid var(--border-subtle); }
+    strong { color: var(--fg-primary); font-weight: 600; }
+
+    .hero { padding: var(--space-7) 0 var(--space-6); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-6); }
+    .hero .tagline { font-size: var(--text-xl); color: var(--fg-secondary); font-weight: 400; margin: 0 0 var(--space-4); max-width: 640px; }
+    .badge {
+      display: inline-block; padding: var(--space-1) var(--space-3);
+      background: var(--brand-10); color: var(--brand);
+      border-radius: var(--radius-full); font-size: var(--text-xs);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: var(--space-3);
+    }
+    .badge.success { background: rgba(0, 224, 178, 0.1); color: var(--success); }
+    .badge.warning { background: rgba(255, 181, 71, 0.1); color: var(--warning); }
+    .badge.danger { background: rgba(255, 92, 122, 0.1); color: var(--danger); }
+
+    .grid { display: grid; gap: var(--space-4); }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      transition: border-color 0.15s;
+    }
+    .card:hover { border-color: var(--brand-40); }
+    .card h3, .card h4 { margin-top: 0; }
+    .card p:last-child { margin-bottom: 0; }
+
+    dl.kv { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-2) var(--space-4); }
+    dl.kv dt { color: var(--fg-muted); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    dl.kv dd { margin: 0; color: var(--fg-primary); }
+
+    blockquote.hero-quote {
+      font-size: var(--text-2xl); font-weight: 600; line-height: 1.3;
+      color: var(--fg-primary);
+      border-left: 4px solid var(--brand);
+      padding: var(--space-4) var(--space-5);
+      margin: var(--space-5) 0;
+      background: var(--brand-05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    blockquote { margin: var(--space-3) 0; padding: var(--space-3) var(--space-4); border-left: 3px solid var(--border-default); color: var(--fg-secondary); font-style: italic; background: var(--bg-surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-3) 0; }
+    .chip {
+      display: inline-block; padding: var(--space-1) var(--space-3);
+      background: var(--brand-10); color: var(--brand);
+      border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500;
+    }
+    .chip.negative { background: rgba(255, 92, 122, 0.1); color: var(--danger); }
+    .chip.neutral { background: var(--bg-surface); color: var(--fg-secondary); border: 1px solid var(--border-default); }
+    .chip.success { background: rgba(0, 224, 178, 0.1); color: var(--success); }
+
+    .spectrum { margin: var(--space-4) 0; }
+    .spectrum-label { display: flex; justify-content: space-between; font-size: var(--text-sm); color: var(--fg-secondary); margin-bottom: var(--space-2); }
+    .spectrum-track { position: relative; height: 6px; background: var(--bg-surface); border-radius: var(--radius-full); border: 1px solid var(--border-subtle); }
+    .spectrum-marker { position: absolute; top: -5px; width: 16px; height: 16px; background: var(--brand); border-radius: var(--radius-full); box-shadow: var(--shadow-sm); transform: translateX(-50%); }
+    .spectrum-value { text-align: center; font-size: var(--text-xs); color: var(--fg-muted); margin-top: var(--space-1); }
+
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-3); margin: var(--space-4) 0; }
+    .swatch { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); overflow: hidden; cursor: pointer; transition: transform 0.15s; }
+    .swatch:hover { transform: translateY(-2px); }
+    .swatch-color { height: 80px; }
+    .swatch-meta { padding: var(--space-2) var(--space-3); }
+    .swatch-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg-primary); display: block; }
+    .swatch-hex { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); display: block; }
+
+    .font-sample { margin: var(--space-3) 0; padding: var(--space-4); background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-default); }
+    .font-sample-name { font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: var(--space-2); }
+    .font-sample-text { font-size: var(--text-3xl); line-height: 1.1; margin: 0; color: var(--fg-primary); }
+
+    table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
+    th { text-align: left; padding: var(--space-2) var(--space-3); background: var(--bg-surface); color: var(--fg-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; font-size: var(--text-xs); border-bottom: 2px solid var(--border-default); }
+    td { padding: var(--space-3); border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--fg-primary); }
+    tr:last-child td { border-bottom: none; }
+
+    details {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    details[open] { border-color: var(--brand-40); background: var(--bg-elevated); }
+    summary { cursor: pointer; font-weight: 600; color: var(--fg-primary); list-style: none; display: flex; align-items: center; gap: var(--space-2); }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "›"; font-size: 1.2em; color: var(--brand); transition: transform 0.15s; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details > *:not(summary) { margin-top: var(--space-3); }
+
+    ul, ol { padding-left: var(--space-5); }
+    li { margin-bottom: var(--space-2); color: var(--fg-secondary); }
+    li::marker { color: var(--brand); }
+
+    .main-footer {
+      margin-top: var(--space-8); padding-top: var(--space-5);
+      border-top: 1px solid var(--border-default);
+      color: var(--fg-muted); font-size: var(--text-sm);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed; top: var(--space-4); right: var(--space-4);
+      width: 40px; height: 40px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      cursor: pointer; color: var(--fg-primary);
+      align-items: center; justify-content: center;
+      z-index: 50; box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 768px) {
+      body { grid-template-columns: 1fr; }
+      .sidebar { position: fixed; top: 0; left: 0; width: 260px; z-index: 40; transform: translateX(-100%); transition: transform 0.2s; box-shadow: var(--shadow-lg); }
+      .sidebar[data-open="true"] { transform: translateX(0); }
+      .main { padding: var(--space-5) var(--space-4); padding-top: var(--space-8); }
+      .mobile-menu-toggle { display: flex; }
+      h1 { font-size: var(--text-3xl); }
+      h2 { font-size: var(--text-2xl); }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <aside class="sidebar" aria-label="Navegação">
+    <header class="sidebar-header">
+      <h2 class="company-name">TestCo</h2>
+      <p class="sidebar-meta">Preview · 2026-04-16</p>
+    </header>
+    <nav class="sidebar-nav" aria-label="Seções">
+      <a href="#overview">Visão geral</a>
+      <a href="#produto">Produto</a>
+      <a href="#personas">Personas</a>
+      <a href="#brand-voice">Tom de voz</a>
+      <a href="#concorrentes">Concorrentes</a>
+      <a href="#pilares">Pilares</a>
+      <a href="#identidade-visual">Identidade visual</a>
+      <a href="#plataformas">Plataformas</a>
+      <a href="#copy-foundation">Copy foundation</a>
+      <a href="#conteudo-produzido">Conteúdo produzido</a>
+      <a href="#metadata">Metadata</a>
+    </nav>
+    <footer class="sidebar-footer">
+      <p class="sidebar-meta small">Gerado por <code>/company-preview testco</code></p>
+    </footer>
+  </aside>
+
+  <main id="main" class="main">
+
+    <!-- 1. OVERVIEW -->
+    <section id="overview">
+      <div class="hero">
+        <span class="badge">SaaS B2B · DevTools</span>
+        <h1>TestCo</h1>
+        <p class="tagline">Testes E2E que não quebram a cada deploy.</p>
+        <blockquote class="hero-quote">Eliminar o tempo que engenheiros perdem escrevendo e mantendo testes E2E, para que possam focar em entregar produto.</blockquote>
+      </div>
+      <div class="grid grid-2">
+        <dl class="kv">
+          <dt>Modelo</dt><dd>SaaS B2B, self-serve + inside sales</dd>
+          <dt>Estágio</dt><dd>Series A (2025), ~R$ 6M ARR</dd>
+          <dt>Fundação</dt><dd>2021 · 5 anos em mercado</dd>
+          <dt>Tamanho</dt><dd>22 pessoas</dd>
+          <dt>Mercado</dt><dd>Brasil + LatAm (90%)</dd>
+        </dl>
+        <div>
+          <h4>Canais ativos</h4>
+          <div class="chips">
+            <span class="chip">LinkedIn · 4.2k</span>
+            <span class="chip">X/Twitter · 3.1k</span>
+            <span class="chip">YouTube · 800</span>
+            <span class="chip">Blog · 8k/mês</span>
+            <span class="chip">GitHub · 450 stars</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PRODUTO -->
+    <section id="produto">
+      <h2>Produto</h2>
+      <span class="badge">SaaS · Assinatura recorrente</span>
+      <p>Plataforma que automatiza testes end-to-end para aplicação web. Pluga no repo, grava o fluxo uma vez (ou a IA grava a partir de sessão real de usuário), roda tudo a cada deploy. Quando o teste quebra por mudança de UI, a IA conserta sozinha em 90% dos casos.</p>
+      <blockquote class="hero-quote">Testes E2E que se consertam sozinhos — pare de mexer em teste quebrado a cada deploy.</blockquote>
+
+      <h3>Funcionalidades principais</h3>
+      <div class="grid grid-2">
+        <div class="card"><h4>Gravador inteligente</h4><p>Captura fluxos de cliques ou converte sessões reais em testes.</p></div>
+        <div class="card"><h4>Engine de auto-reparo</h4><p>Detecta testes quebrados e sugere fix automático (90% de acerto).</p></div>
+        <div class="card"><h4>Execução paralela em cloud</h4><p>Milhares de testes em minutos sem infra própria.</p></div>
+        <div class="card"><h4>Integração CI/CD</h4><p>GitHub Actions, GitLab CI, CircleCI, Jenkins.</p></div>
+        <div class="card"><h4>Dashboard de flakiness</h4><p>Testes instáveis com heatmap temporal.</p></div>
+      </div>
+
+      <h3>Diferenciais competitivos</h3>
+      <ul>
+        <li>IA proprietária de auto-reparo — 90% de conserto autônomo</li>
+        <li>Setup em 5 min via CLI vs. semanas dos concorrentes</li>
+        <li>Integração com session replay (converte sessões em testes)</li>
+        <li>Transparência do engine — mostra em linguagem natural o que mudou e por quê</li>
+      </ul>
+
+      <h3>Detalhes comerciais</h3>
+      <div class="card">
+        <dl class="kv">
+          <dt>Preço</dt><dd>R$ 499/mês (5 devs) até R$ 4.999/mês (50+ devs)</dd>
+          <dt>Modelo</dt><dd>Assinatura mensal; trial 14 dias</dd>
+          <dt>Time-to-value</dt><dd>Primeiro teste em &lt;10 min · wow moment em ~1 semana</dd>
+          <dt>Objeção principal</dt><dd><em>"Já temos Cypress há 2 anos — migrar vai travar o time por semanas."</em></dd>
+        </dl>
+      </div>
+
+      <h3>Anti-persona</h3>
+      <p>Empresas com &lt;5 devs, times que não rodam CI/CD, produtos mobile-nativos.</p>
+
+      <h3>Limitações</h3>
+      <ul>
+        <li>Foco exclusivo em web (não roda mobile nativo)</li>
+        <li>Não substitui testes unitários</li>
+        <li>Engine precisa de 2-3 execuções históricas antes de funcionar bem</li>
+        <li>Não atende stacks legacy (jQuery puro, PHP SSR sem SPA)</li>
+      </ul>
+    </section>
+
+    <!-- 3. PERSONAS -->
+    <section id="personas">
+      <h2>Personas</h2>
+      <details open>
+        <summary>Ana, a tech lead estica-tempo · Tech Lead / Engineering Manager</summary>
+
+        <div class="grid grid-2">
+          <dl class="kv">
+            <dt>Idade</dt><dd>30-38 · Millennial</dd>
+            <dt>Cargo</dt><dd>Tech Lead / Engineering Manager</dd>
+            <dt>Empresa</dt><dd>Scale-up SaaS B2B, 10-50 engenheiros, Series A-B</dd>
+            <dt>Localização</dt><dd>SP, Floripa, BH, remoto</dd>
+            <dt>Renda</dt><dd>R$ 20-35k/mês</dd>
+          </dl>
+          <div>
+            <h4>Palavras que ela usa</h4>
+            <div class="chips">
+              <span class="chip">flaky test</span>
+              <span class="chip">CI pipeline</span>
+              <span class="chip">blast radius</span>
+              <span class="chip">auto-healing</span>
+              <span class="chip">developer experience</span>
+            </div>
+            <h4>Palavras que a afastam</h4>
+            <div class="chips">
+              <span class="chip negative">solução inovadora</span>
+              <span class="chip negative">revolucionário</span>
+              <span class="chip negative">IA de ponta</span>
+              <span class="chip negative">transformação digital</span>
+            </div>
+          </div>
+        </div>
+
+        <h4>5 Rings of Buying Insight</h4>
+        <blockquote><strong>Gatilho:</strong> "Na última sprint o CI travou 3x por teste flaky — perdi meia tarde procurando o que quebrou e no final era só data mock desatualizado."</blockquote>
+        <blockquote><strong>Sucesso:</strong> "CI verde consistente sem intervenção manual. Deploy sexta à tarde sem medo."</blockquote>
+        <blockquote><strong>Barreira:</strong> "Medo de que a IA 'conserte errado' e a gente passe a confiar em teste que não testa de verdade."</blockquote>
+        <blockquote><strong>Jornada:</strong> Lê Hacker News, YouTube de tech influencers, newsletters (DevTools Digest), Discord de devs.</blockquote>
+        <blockquote><strong>Decisão:</strong> Trial gratuito que funciona sem onboarding forçado + transparência técnica + case de empresa parecida.</blockquote>
+
+        <h4>Dores em 3 Camadas</h4>
+        <div class="grid grid-3">
+          <div class="card"><h4>Superficial</h4><blockquote>"Os testes quebram toda vez que a gente mexe no CSS. Dá uma raiva."</blockquote></div>
+          <div class="card"><h4>Profunda</h4><blockquote>"Perco 6-8h por semana do meu time com manutenção de teste."</blockquote></div>
+          <div class="card"><h4>Medo Oculto</h4><blockquote>"Vou ser lembrada como a tech lead que não cuidou da qualidade."</blockquote></div>
+        </div>
+
+        <h4>Desejos</h4>
+        <div class="grid grid-3">
+          <div class="card"><h4>Declarado</h4><p>"Quero testes que rodem rápido e sejam confiáveis."</p></div>
+          <div class="card"><h4>Real</h4><p>"Quero dormir bem na sexta sabendo que o deploy não vai quebrar."</p></div>
+          <div class="card"><h4>Identidade</h4><p>"Quero ser a tech lead que construiu a cultura de qualidade sem virar pesadelo burocrático."</p></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 4. BRAND VOICE -->
+    <section id="brand-voice">
+      <h2>Tom de Voz</h2>
+      <blockquote class="hero-quote">A marca fala como um engenheiro sênior explicando algo num PR review: direto, preciso, sem inflar, respeitando o tempo de quem lê.</blockquote>
+
+      <h3>O que NÃO somos</h3>
+      <div class="chips">
+        <span class="chip negative">Inovadores disruptivos que transformam o futuro do QA</span>
+        <span class="chip negative">Bot chique que impressiona com promessas vagas</span>
+        <span class="chip negative">Comedy show de DevRel com memes forçados</span>
+      </div>
+
+      <h3>Espectros de Tom</h3>
+      <div class="spectrum">
+        <div class="spectrum-label"><span>Formal</span><span>Casual</span></div>
+        <div class="spectrum-track"><div class="spectrum-marker" style="left: 50%"></div></div>
+        <div class="spectrum-value">3/5 · técnico-direto sem ser engessado</div>
+      </div>
+      <div class="spectrum">
+        <div class="spectrum-label"><span>Sério</span><span>Bem-humorado</span></div>
+        <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+        <div class="spectrum-value">2/5 · humor seco ocasional</div>
+      </div>
+      <div class="spectrum">
+        <div class="spectrum-label"><span>Técnico</span><span>Acessível</span></div>
+        <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+        <div class="spectrum-value">2/5 · profundamente técnico</div>
+      </div>
+      <div class="spectrum">
+        <div class="spectrum-label"><span>Cauteloso</span><span>Provocativo</span></div>
+        <div class="spectrum-track"><div class="spectrum-marker" style="left: 62.5%"></div></div>
+        <div class="spectrum-value">3.5/5 · provocativo contra convenções fracas</div>
+      </div>
+
+      <h3>Vocabulário</h3>
+      <h4>Palavras amadas</h4>
+      <div class="chips">
+        <span class="chip">flaky</span>
+        <span class="chip">pipeline</span>
+        <span class="chip">auto-heal</span>
+        <span class="chip">deterministic</span>
+        <span class="chip">signal vs. noise</span>
+        <span class="chip">mostra o diff</span>
+        <span class="chip">o teste é o contrato</span>
+      </div>
+      <h4>Palavras proibidas</h4>
+      <div class="chips">
+        <span class="chip negative">solução revolucionária</span>
+        <span class="chip negative">potencializamos</span>
+        <span class="chip negative">sinergia</span>
+        <span class="chip negative">transformação digital</span>
+        <span class="chip negative">IA de ponta</span>
+      </div>
+
+      <h3>Exemplos</h3>
+      <div class="grid grid-2">
+        <div class="card" style="border-color: var(--success);">
+          <span class="badge success">Isso soa como a gente</span>
+          <blockquote>"Cypress quebrou de novo. Não é culpa sua — é o setup. Aqui está o que a gente fez com 180 times diferentes: auto-reparo de UI-drift em 90% dos casos, com um diff que você revisa em 30 segundos."</blockquote>
+        </div>
+        <div class="card" style="border-color: var(--danger);">
+          <span class="badge danger">Isso NÃO soa como a gente</span>
+          <blockquote>"A TestCo é a solução inovadora de testes com IA que revoluciona a forma como equipes modernas garantem qualidade no seu pipeline de desenvolvimento ágil."</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CONCORRENTES -->
+    <section id="concorrentes">
+      <h2>Concorrentes</h2>
+
+      <h3>Matriz de Posicionamento</h3>
+      <table>
+        <thead><tr><th>Empresa</th><th>Público</th><th>Posicionamento</th><th>Diferencial</th><th>Preço</th></tr></thead>
+        <tbody>
+          <tr><td>Cypress</td><td>Teams variados</td><td>popular</td><td>Ecossistema consolidado</td><td>US$75+/mês</td></tr>
+          <tr><td>Playwright</td><td>Teams técnicos</td><td>enterprise</td><td>Multi-browser, paralelismo</td><td>gratuito</td></tr>
+          <tr><td>Mabl</td><td>QA enterprise</td><td>enterprise</td><td>IA no-code</td><td>US$4-15k/mês</td></tr>
+          <tr style="background: var(--brand-05);"><td><strong>TestCo</strong></td><td>Tech leads scale-up</td><td>nicho técnico</td><td>IA dev-first + transparência + setup 5 min</td><td>R$499-4.999/mês</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Gaps de Conteúdo Identificados</h3>
+      <ol>
+        <li><strong>"O custo real da flakiness":</strong> ninguém calcula publicamente quanto flakiness custa por dev/ano.</li>
+        <li><strong>Stream de migração ao vivo:</strong> nenhum concorrente faz.</li>
+        <li><strong>Transparência do engine:</strong> todos são caixa-preta.</li>
+        <li><strong>Tech lead de scale-up:</strong> audiência não atendida por nenhum concorrente.</li>
+      </ol>
+
+      <h3>Empresas Referência (inspiração)</h3>
+      <div class="chips">
+        <span class="chip neutral">Vercel · storytelling dev-first</span>
+        <span class="chip neutral">Sentry · transparência radical</span>
+        <span class="chip neutral">Linear · clareza visual</span>
+        <span class="chip neutral">Supabase · conteúdo técnico em vídeo</span>
+      </div>
+    </section>
+
+    <!-- 6. PILARES -->
+    <section id="pilares">
+      <h2>Pilares de Conteúdo</h2>
+
+      <dl class="kv">
+        <dt>Frequência</dt><dd>3 posts/semana + 2 tweets/dia</dd>
+        <dt>Plataformas</dt><dd>Blog, LinkedIn, X, YouTube</dd>
+        <dt>Mix de funil</dt><dd>40% TOFU / 40% MOFU / 20% BOFU</dd>
+      </dl>
+
+      <div class="grid">
+        <div class="card">
+          <span class="badge">40% · Pilar 1</span>
+          <h3>Produtividade de Engenharia</h3>
+          <p>Flaky tests, CI performance, developer experience, tempo de dev sênior.</p>
+          <dl class="kv">
+            <dt>Dor</dt><dd>6-8h/semana em manutenção de teste</dd>
+            <dt>Persona</dt><dd>Ana, tech lead</dd>
+            <dt>Funil</dt><dd>TOFU/MOFU</dd>
+            <dt>Formatos</dt><dd>Blog post longo, thread X, carrossel LinkedIn</dd>
+          </dl>
+        </div>
+
+        <div class="card">
+          <span class="badge">35% · Pilar 2</span>
+          <h3>IA aplicada a qualidade</h3>
+          <p>Auto-reparo de testes, como funciona o engine, limites da IA.</p>
+          <dl class="kv">
+            <dt>Dor</dt><dd>"IA vai consertar errado"</dd>
+            <dt>Persona</dt><dd>Ana + devs sêniores</dd>
+            <dt>Funil</dt><dd>MOFU/BOFU</dd>
+            <dt>Formatos</dt><dd>Blog técnico, vídeo YouTube, thread X</dd>
+          </dl>
+        </div>
+
+        <div class="card">
+          <span class="badge">25% · Pilar 3</span>
+          <h3>Migração e casos de uso reais</h3>
+          <p>Cypress → TestCo, primeiros 30 dias, ROI.</p>
+          <dl class="kv">
+            <dt>Dor</dt><dd>"Migrar vai travar o time"</dd>
+            <dt>Persona</dt><dd>Ana (decisora cética)</dd>
+            <dt>Funil</dt><dd>BOFU</dd>
+            <dt>Formatos</dt><dd>Case study, migração ao vivo, comparativo</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. IDENTIDADE VISUAL -->
+    <section id="identidade-visual">
+      <h2>Identidade Visual</h2>
+      <p>Modo: <strong>Dark</strong> · Base: <strong>Minimalista-Vibrante</strong></p>
+
+      <h3>Tipografia</h3>
+      <div class="grid grid-2">
+        <div class="font-sample">
+          <div class="font-sample-name">Primária · Inter</div>
+          <p class="font-sample-text" style="font-family: 'Inter', sans-serif;">Aa Bb Cc 123</p>
+        </div>
+        <div class="font-sample">
+          <div class="font-sample-name">Mono · JetBrains Mono</div>
+          <p class="font-sample-text" style="font-family: 'JetBrains Mono', monospace;">Aa Bb Cc 123</p>
+        </div>
+      </div>
+
+      <h3>Paleta — Brand</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #7C5CFF"></div>
+          <div class="swatch-meta"><span class="swatch-name">brand</span><span class="swatch-hex">#7C5CFF</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #9F88FF"></div>
+          <div class="swatch-meta"><span class="swatch-name">brand-subtle</span><span class="swatch-hex">#9F88FF</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #00E0B2"></div>
+          <div class="swatch-meta"><span class="swatch-name">brand-accent</span><span class="swatch-hex">#00E0B2</span></div>
+        </div>
+      </div>
+
+      <h3>Paleta — Neutros (Dark)</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #0A0A0F"></div>
+          <div class="swatch-meta"><span class="swatch-name">bg-deep</span><span class="swatch-hex">#0A0A0F</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #111116"></div>
+          <div class="swatch-meta"><span class="swatch-name">bg-surface</span><span class="swatch-hex">#111116</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #1A1A22"></div>
+          <div class="swatch-meta"><span class="swatch-name">bg-elevated</span><span class="swatch-hex">#1A1A22</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #F5F5F7"></div>
+          <div class="swatch-meta"><span class="swatch-name">fg-primary</span><span class="swatch-hex">#F5F5F7</span></div>
+        </div>
+      </div>
+
+      <h3>Paleta — Semânticas</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #4A9FFF"></div>
+          <div class="swatch-meta"><span class="swatch-name">blue</span><span class="swatch-hex">#4A9FFF</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #00E0B2"></div>
+          <div class="swatch-meta"><span class="swatch-name">green</span><span class="swatch-hex">#00E0B2</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #FFB547"></div>
+          <div class="swatch-meta"><span class="swatch-name">amber</span><span class="swatch-hex">#FFB547</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #FF5C7A"></div>
+          <div class="swatch-meta"><span class="swatch-name">red</span><span class="swatch-hex">#FF5C7A</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PLATAFORMAS -->
+    <section id="plataformas">
+      <h2>Plataformas</h2>
+      <p>Plataformas ativas: LinkedIn, X/Twitter, YouTube, Blog</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>LinkedIn</h4>
+          <dl class="kv">
+            <dt>Público</dt><dd>Decisor</dd>
+            <dt>Portrait</dt><dd>1080×1350</dd>
+            <dt>Landscape</dt><dd>1200×628</dd>
+            <dt>Dica</dt><dd>Link no 1º comentário</dd>
+          </dl>
+          <p><em>Case-driven, dados reais, menos sarcástico.</em></p>
+        </div>
+        <div class="card">
+          <h4>X / Twitter</h4>
+          <dl class="kv">
+            <dt>Público</dt><dd>Usuário técnico</dd>
+            <dt>Landscape</dt><dd>1200×675</dd>
+            <dt>Formato</dt><dd>Thread 8-15 tweets</dd>
+            <dt>Código</dt><dd>Imagem via Carbon/Ray.so</dd>
+          </dl>
+          <p><em>Afiado, aceita sarcasmo técnico.</em></p>
+        </div>
+        <div class="card">
+          <h4>YouTube</h4>
+          <dl class="kv">
+            <dt>Thumbnail</dt><dd>1280×720</dd>
+            <dt>Duração</dt><dd>10-20 min</dd>
+            <dt>Código</dt><dd>JetBrains Mono, fundo dark</dd>
+          </dl>
+          <p><em>Narração calma, live coding &gt; slides.</em></p>
+        </div>
+        <div class="card">
+          <h4>Blog</h4>
+          <dl class="kv">
+            <dt>Tamanho</dt><dd>1.500-3.000 palavras</dd>
+            <dt>TL;DR</dt><dd>No topo</dd>
+            <dt>Diagramas</dt><dd>Excalidraw, Mermaid</dd>
+          </dl>
+          <p><em>Aprofundado, benchmarks com metodologia aberta.</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. COPY FOUNDATION -->
+    <section id="copy-foundation">
+      <h2>Copy Foundation</h2>
+      <p>Arsenal de copy para venda direta — 7 artefatos destilados a partir do setup.</p>
+
+      <details open>
+        <summary>Big Idea · Promessa Central</summary>
+        <blockquote class="hero-quote">"Construa cultura de qualidade sem ser a tech lead que mantém os testes."</blockquote>
+        <h4>Variações Testáveis</h4>
+        <ol>
+          <li><strong>Resultado:</strong> "Testes E2E com 90% de taxa de auto-reparo — sem dev mexendo em teste quebrado."</li>
+          <li><strong>Dor:</strong> "Pare de perder 6h da sua sexta-feira consertando testes flaky."</li>
+          <li><strong>Identidade:</strong> "A tech lead que construiu cultura de qualidade sem virar pesadelo burocrático."</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Unique Mechanism · Auto-Heal Engine</summary>
+        <h3 style="color: var(--brand); margin-top: var(--space-3);">Auto-Heal Engine</h3>
+        <blockquote><em>É como um auto-complete, mas para testes quebrados.</em></blockquote>
+        <p>Sistema proprietário que detecta quando um teste E2E quebra por mudança de UI e sugere a correção automaticamente em 90% dos casos. Compara estrutura do DOM antes/depois do refator, identifica o elemento equivalente e gera PR de conserto com diff explicado em linguagem natural.</p>
+        <h4>Prova de unicidade</h4>
+        <ul>
+          <li>Engine proprietário treinado em UI-drift de apps web reais (não wrapper de LLM)</li>
+          <li>Transparência total — cada conserto vira PR revisável</li>
+          <li>Dev-first via CLI — setup em 5 min, zero onboarding forçado</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Mechanism of Failure · O vilão da categoria</summary>
+        <blockquote class="hero-quote" style="border-left-color: var(--danger); background: rgba(255, 92, 122, 0.05);">"A ilusão de que teste E2E é só escrever código — quando na verdade 80% do trabalho é manter o que já foi escrito."</blockquote>
+        <h4>As 3 formas de falhar</h4>
+        <div class="grid">
+          <div class="card">
+            <span class="badge danger">Falha 1</span>
+            <h4>Fragilidade por design</h4>
+            <blockquote>"Os testes quebram toda vez que a gente mexe no CSS. Dá uma raiva."</blockquote>
+            <p><small>Cypress e Playwright foram projetados para execução, não para sobreviver a refator.</small></p>
+          </div>
+          <div class="card">
+            <span class="badge danger">Falha 2</span>
+            <h4>Flakiness invisível</h4>
+            <blockquote>"Na última sprint o CI travou 3x por teste flaky — perdi meia tarde procurando."</blockquote>
+            <p><small>Sem dashboard temporal, você não vê que o teste falha 30% das vezes há 3 meses.</small></p>
+          </div>
+          <div class="card">
+            <span class="badge danger">Falha 3</span>
+            <h4>Dívida invisível</h4>
+            <blockquote>"Perco 6-8h por semana do meu time com manutenção."</blockquote>
+            <p><small>O custo só fica visível se você mede — nenhum framework tradicional entrega esse relatório.</small></p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Objections · As 5 universais</summary>
+        <p>Ordem de peso para Ana: <strong>3 → 1 → 4 → 5 → 2</strong></p>
+        <details>
+          <summary>1. "IA consertando teste parece bom demais pra ser verdade"</summary>
+          <p><strong>Resposta:</strong> 90% de taxa de acerto em 180 empresas, e cada conserto vira PR que você revisa antes de ir pro main.</p>
+        </details>
+        <details>
+          <summary>2. "Nosso stack é específico, não vai se adaptar"</summary>
+          <p><strong>Resposta:</strong> Integração nativa com GitHub Actions, GitLab CI, CircleCI e Jenkins. Já atende 180 scale-ups SaaS.</p>
+        </details>
+        <details>
+          <summary>3. "Já temos Cypress há 2 anos — migrar vai travar o time"</summary>
+          <p><strong>Resposta:</strong> Setup em 5 min via CLI, e o Auto-Heal Engine roda em paralelo ao Cypress. Você não migra, adiciona.</p>
+        </details>
+        <details>
+          <summary>4. "Está fora do orçamento deste trimestre"</summary>
+          <p><strong>Resposta:</strong> Seu time perde R$ 80k/mês com testes flaky. R$ 1.800/mês é 2,25% disso — ROI positivo no 1º mês.</p>
+        </details>
+        <details>
+          <summary>5. "Como sei que não vão sumir em 2 anos?"</summary>
+          <p><strong>Resposta:</strong> 5 anos no mercado, Series A 2025, R$ 6M ARR crescendo 12% MoM, 450 stars GitHub.</p>
+        </details>
+      </details>
+
+      <details>
+        <summary>Value Stack · R$ 16.900 de valor por R$ 1.800</summary>
+        <p><strong>Custo da inação:</strong> R$ 80.000/mês em horas de dev queimadas em manutenção.</p>
+        <table>
+          <thead><tr><th>Benefício</th><th>Entrega</th><th>Valor/mês</th></tr></thead>
+          <tbody>
+            <tr><td>Auto-Heal Engine</td><td>~30h/mês poupadas no time de 20 devs</td><td>R$ 4.500</td></tr>
+            <tr><td>Gravador inteligente</td><td>4h/semana de QA economizadas</td><td>R$ 2.400</td></tr>
+            <tr><td>Execução paralela</td><td>CI 5x mais rápido</td><td>R$ 3.000</td></tr>
+            <tr><td>Integração CI/CD nativa</td><td>Evita 1-2 dias de SRE</td><td>R$ 500</td></tr>
+            <tr><td>Dashboard de flakiness</td><td>Evita ~1 incidente/trimestre</td><td>R$ 5.000</td></tr>
+            <tr><td>Bonus: session replay</td><td>Bugs reportados → testes em minutos</td><td>R$ 1.500</td></tr>
+            <tr style="background: var(--brand-05); font-weight: 600;"><td colspan="2">TOTAL</td><td>R$ 16.900/mês</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Preço real:</strong> R$ 1.800/mês · <strong>Economia:</strong> R$ 15.100/mês · <strong>Anualizada:</strong> R$ 181.200</p>
+      </details>
+
+      <details>
+        <summary>Proof Hierarchy · 5 tiers</summary>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="badge">Tier 1 · Quantitativa</span>
+            <ul><li>90% de taxa de auto-reparo</li><li>NPS 72 (Q1/2026)</li><li>Fintech X: CI 42→8min</li></ul>
+          </div>
+          <div class="card">
+            <span class="badge">Tier 2 · Cases</span>
+            <ul><li>Fintech Series B · migração em 30 dias</li><li><span class="chip negative">Gap: faltam mais cases</span></li></ul>
+          </div>
+          <div class="card">
+            <span class="badge">Tier 3 · Agregada</span>
+            <ul><li>180 empresas ativas</li><li>4 unicórnios (NDA)</li><li>450 stars GitHub</li></ul>
+          </div>
+          <div class="card">
+            <span class="badge">Tier 4 · Autoridade</span>
+            <ul><li>Integrações oficiais (GitHub, GitLab)</li><li><span class="chip negative">Gap: imprensa, prêmios</span></li></ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>CTA Library · 15 CTAs por nível + 6 plataformas</summary>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="badge">Nível 1 · Inconsciente</span>
+            <ul><li>"Descubra quanto sua suite está custando por mês"</li><li>"Rode o diagnóstico de flakiness"</li></ul>
+          </div>
+          <div class="card">
+            <span class="badge">Nível 4 · Produto</span>
+            <ul><li>"Teste grátis por 14 dias — setup em 5 min"</li><li>"Agende demo de 20 min"</li></ul>
+          </div>
+          <div class="card">
+            <span class="badge">Nível 5 · Compra</span>
+            <ul><li>"Começar agora"</li><li>"Ativar o plano Team"</li></ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 10. CONTEÚDO PRODUZIDO -->
+    <section id="conteudo-produzido">
+      <h2>Conteúdo Produzido</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="badge">2026-04-16 · TOFU</span>
+          <h4>Quanto um teste flaky custa por ano em scale-ups brasileiras</h4>
+          <p>Peça em estágio de ideação. Pilar: Produtividade de Engenharia. Persona: Ana.</p>
+          <dl class="kv">
+            <dt>OUTPUT_IDEATION.md</dt><dd><a href="../contents/2026-04-16-custo-flakiness-scaleups/OUTPUT_IDEATION.md">abrir</a></dd>
+            <dt>WORKFLOW_STATE.md</dt><dd><a href="../contents/2026-04-16-custo-flakiness-scaleups/WORKFLOW_STATE.md">abrir</a></dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. METADATA -->
+    <section id="metadata">
+      <h2>Metadata</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Setup State</h4>
+          <dl class="kv">
+            <dt>Blocos completos</dt><dd>7 de 7 + finalização</dd>
+            <dt>Modo</dt><dd>Conversacional</dd>
+            <dt>Perfil</dt><dd>Consolidada</dd>
+            <dt>Iniciado em</dt><dd>2026-04-16</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h4>Copy Session State</h4>
+          <dl class="kv">
+            <dt>Artefatos</dt><dd>7 de 7 (todos draft)</dd>
+            <dt>Modo</dt><dd>Unificado</dd>
+            <dt>Perfis</dt><dd>unificado</dd>
+            <dt>Gerado em</dt><dd>2026-04-16</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <p>Preview gerado em <strong>2026-04-16</strong> · <code>/company-preview testco</code></p>
+      <p class="sidebar-meta small">Todos os materiais listados vêm de <code>companies/testco/</code>. Qualquer atualização nos arquivos-fonte requer regenerar o preview.</p>
+    </footer>
+
+  </main>
+
+  <button class="mobile-menu-toggle" aria-label="Abrir navegação" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="17" y2="6"/>
+      <line x1="3" y1="10" x2="17" y2="10"/>
+      <line x1="3" y1="14" x2="17" y2="14"/>
+    </svg>
+  </button>
+
+  <script>
+    (function() {
+      // Smooth scroll
+      document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', e => {
+          const id = link.getAttribute('href');
+          if (!id.startsWith('#')) return;
+          e.preventDefault();
+          const target = document.querySelector(id);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const sidebar = document.querySelector('.sidebar');
+          if (sidebar) sidebar.setAttribute('data-open', 'false');
+        });
+      });
+
+      // Section highlighting
+      const sections = document.querySelectorAll('.main > section[id]');
+      const navLinks = new Map();
+      document.querySelectorAll('.sidebar-nav a').forEach(a => {
+        const id = a.getAttribute('href').replace('#', '');
+        navLinks.set(id, a);
+      });
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            const link = navLinks.get(id);
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(s => observer.observe(s));
+
+      // Copy color on swatch click
+      document.querySelectorAll('.swatch').forEach(swatch => {
+        swatch.addEventListener('click', async () => {
+          const hex = swatch.querySelector('.swatch-hex')?.textContent?.trim();
+          if (!hex) return;
+          try {
+            await navigator.clipboard.writeText(hex);
+            const nameEl = swatch.querySelector('.swatch-name');
+            const original = nameEl.textContent;
+            nameEl.textContent = 'Copiado!';
+            setTimeout(() => { nameEl.textContent = original; }, 1200);
+          } catch {}
+        });
+      });
+
+      // Mobile menu
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', () => {
+          const open = sidebar.getAttribute('data-open') === 'true';
+          sidebar.setAttribute('data-open', String(!open));
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
