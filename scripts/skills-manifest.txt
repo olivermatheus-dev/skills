@@ -1,0 +1,19 @@
+# area|type|published_name|preferred_source|legacy_source|description
+setup|flow|setup-briefing|skills/setup/flows/company-setup/00-orchestrator|setup/00-orchestrator|orquestrar setup completo de empresa
+setup|flow|setup-company-profile|skills/setup/flows/company-setup/01-company-profile|setup/01-company-profile|bloco 1: perfil institucional
+setup|flow|setup-product-context|skills/setup/flows/company-setup/02-product-context|setup/02-product-context|bloco 2: produto e proposta de valor
+setup|flow|setup-audience-profiles|skills/setup/flows/company-setup/03-audience-profiles|setup/03-audience-profiles|bloco 3: personas e publico-alvo
+setup|flow|setup-brand-voice|skills/setup/flows/company-setup/04-brand-voice|setup/04-brand-voice|bloco 4: tom de voz e vocabulario
+setup|flow|setup-competitor-map|skills/setup/flows/company-setup/05-competitor-map|setup/05-competitor-map|bloco 5: concorrentes e gaps
+setup|flow|setup-content-pillars|skills/setup/flows/company-setup/06-content-pillars|setup/06-content-pillars|bloco 6: pilares e estrategia editorial
+setup|flow|setup-visual-identity|skills/setup/flows/company-setup/07-visual-identity|setup/07-visual-identity|bloco 7: identidade visual e tokens
+content|flow|content|skills/content/flows/content-production/00-orchestrator|content/00-orchestrator|orquestrador do pipeline de conteudo
+content|flow|content-ideation|skills/content/flows/content-production/02-ideation|content/02-ideation|gerar ideias
+content|flow|content-research|skills/content/flows/content-production/03-research|content/03-research|pesquisar temas
+content|flow|hooks-factory|skills/content/flows/content-production/04-hooks-factory|content/04-hooks-factory|criar hooks e headlines
+content|flow|content-writer|skills/content/flows/content-production/05-writer|content/05-writer|escrever conteudo
+content|flow|platform-adapter|skills/content/flows/content-production/06-platform-adapter|content/06-platform-adapter|adaptar para cada rede
+content|flow|carousel-creator|skills/content/flows/content-production/07-carousel-creator|content/07-carousel-creator|criar carrosseis
+content|flow|content-derivatives|skills/content/flows/content-production/08-derivatives|content/08-derivatives|formatos derivados
+content|flow|editorial-calendar|skills/content/flows/content-production/09-editorial-calendar|content/09-editorial-calendar|calendario editorial
+content|flow|content-performance|skills/content/flows/content-production/10-performance|content/10-performance|analisar performance

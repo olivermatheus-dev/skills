@@ -792,7 +792,7 @@ Se você não consegue responder as quatro perguntas com clareza, a skill não e
 
 - **`name` no frontmatter:** kebab-case, sem acentos. Ex: `content-writer`
 - **Pasta no repositório:** número + nome descritivo. Ex: `05-writer`
-- **Nome instalado:** definido no `install.sh`. Ex: `["content/05-writer"]="content-writer"`
+- **Nome instalado:** definido em `scripts/skills-manifest.txt`. Ex: `content|flow|content-writer|skills/content/flows/content-production/05-writer|content/05-writer|escrever conteudo`
 
 O número na pasta define a posição visual no pipeline, não a lógica de execução.
 

@@ -901,8 +901,8 @@ AUDIENCE_[nome].md final: companies/[empresa]/audiences/ (gerado durante a execu
 ### GATHER — Arquivos a consultar
 
 - `audience-framework/02-FLUXO-PROPOSTO.md` — linhas 41-54 (Orquestrador)
-- `content/00-orchestrator/SKILL.md` — exemplo de orquestrador real do projeto
-- `setup/04-audience-profiles/skills/` — os 5 arquivos de sub-skill já criados
+- `skills/content/flows/content-production/00-orchestrator/SKILL.md` — exemplo de orquestrador real do projeto
+- `skills/setup/flows/company-setup/03-audience-profiles/skills/` — os 5 arquivos de sub-skill já criados
 
 ---
 
