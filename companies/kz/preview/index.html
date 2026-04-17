@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kz — Preview</title>
+  <meta name="description" content="Preview de materiais da empresa kz. Gerado em 2026-04-16.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      /* Brand — coral terracota */
+      --brand:           #ef7960;
+      --brand-soft:      #f69a7f;
+      --brand-muted:     #f28b70;
+      --brand-subtle:    #fce0d7;
+      --brand-whisper:   #fef2ee;
+      --brand-deep:      #d66954;
+      --brand-darker:    #bc5a47;
+      --brand-accent:    #6b9e72;
+      --brand-70: rgba(239, 121, 96, 0.70);
+      --brand-40: rgba(239, 121, 96, 0.40);
+      --brand-10: rgba(239, 121, 96, 0.10);
+      --brand-05: rgba(239, 121, 96, 0.05);
+      --brand-03: rgba(239, 121, 96, 0.03);
+
+      /* Neutros — creme (padrão narrativo kz) */
+      --bg-base:         #faf8f5;
+      --bg-surface:      #f4f1ec;
+      --bg-elevated:     #ffffff;
+      --fg-primary:      #2b2b2b;
+      --fg-secondary:    #5a5a5a;
+      --fg-muted:        #8a8a8a;
+      --border-default:  #e8e4dc;
+      --border-subtle:   #f0ede7;
+
+      /* Pastéis calmos */
+      --pastel-sage:     #cfe0d0;
+      --pastel-lavender: #d8d2e3;
+      --pastel-sky:      #cdd8e0;
+      --pastel-butter:   #f1e7c9;
+      --pastel-rose:     #f1d6cc;
+      --pastel-clay:     #ddcfc2;
+
+      /* Semânticas */
+      --success: #6b9e72;
+      --info:    #7a94a8;
+      --warning: #d4a64c;
+      --danger:  #c77166;
+
+      /* Tipografia */
+      --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+
+      /* Radius */
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      /* Sombras suaves */
+      --shadow-xs: 0 1px 2px rgba(43, 43, 43, 0.04);
+      --shadow-sm: 0 2px 8px rgba(43, 43, 43, 0.06);
+      --shadow-md: 0 8px 24px rgba(43, 43, 43, 0.08);
+      --shadow-lg: 0 16px 40px rgba(43, 43, 43, 0.10);
+      --shadow-brand: 0 4px 16px rgba(239, 121, 96, 0.20);
+
+      /* Escala tipográfica */
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --text-lg: 18px;
+      --text-xl: 20px;
+      --text-2xl: 28px;
+      --text-3xl: 36px;
+      --text-4xl: 48px;
+    }
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--fg-primary);
+      background: var(--bg-base);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -40px; left: var(--space-4);
+      background: var(--brand); color: white;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    /* Layout */
+    body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky; top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-default);
+      padding: var(--space-5) var(--space-4);
+      display: flex; flex-direction: column; gap: var(--space-5);
+    }
+    .sidebar-header { padding-bottom: var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+    .company-name {
+      font-size: var(--text-2xl); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.15;
+      margin: 0 0 var(--space-1);
+      color: var(--brand);
+    }
+    .sidebar-meta {
+      font-size: var(--text-xs); color: var(--fg-muted);
+      margin: 0; text-transform: uppercase; letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .sidebar-meta.small { font-size: 10px; }
+    .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: var(--space-1); }
+    .sidebar-nav a {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--fg-secondary);
+      text-decoration: none; border-bottom: none;
+      font-size: var(--text-sm); font-weight: 500;
+      transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+    }
+    .sidebar-nav a:hover { background: var(--brand-10); color: var(--fg-primary); }
+    .sidebar-nav a.active { background: var(--brand-10); color: var(--brand-deep); font-weight: 600; }
+    .sidebar-footer { padding-top: var(--space-4); border-top: 1px solid var(--border-subtle); }
+    .sidebar-footer code {
+      background: var(--bg-elevated);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    /* Main */
+    .main { padding: var(--space-7); max-width: 920px; width: 100%; margin: 0; }
+    .main > section { margin-bottom: var(--space-8); scroll-margin-top: var(--space-5); }
+
+    /* Typography */
+    h1, h2, h3, h4 { color: var(--fg-primary); margin: 0 0 var(--space-3); letter-spacing: -0.01em; line-height: 1.15; }
+    h1 { font-size: var(--text-4xl); font-weight: 800; margin-bottom: var(--space-4); }
+    h2 { font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-7); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-default); }
+    h3 { font-size: var(--text-xl); font-weight: 600; margin-top: var(--space-5); }
+    h4 { font-size: var(--text-lg); font-weight: 600; margin-top: var(--space-4); }
+    p { margin: 0 0 var(--space-3); }
+    a { color: var(--brand-deep); text-decoration: none; border-bottom: 1px solid var(--brand-40); transition: border-color 0.2s; }
+    a:hover { border-bottom-color: var(--brand-deep); }
+    code { font-family: var(--font-mono); background: var(--bg-surface); padding: 2px 6px; border-radius: var(--radius-xs); font-size: 0.9em; color: var(--brand-darker); }
+    pre { background: var(--bg-surface); padding: var(--space-4); border-radius: var(--radius-md); overflow-x: auto; font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.5; border: 1px solid var(--border-subtle); }
+    pre code { background: none; padding: 0; color: var(--fg-primary); }
+    strong { font-weight: 600; color: var(--fg-primary); }
+    em { font-style: italic; color: var(--fg-secondary); }
+    ul, ol { padding-left: var(--space-5); margin: 0 0 var(--space-3); }
+    li { margin-bottom: var(--space-1); }
+    hr { border: none; border-top: 1px solid var(--border-default); margin: var(--space-5) 0; }
+
+    /* Hero */
+    .hero {
+      padding: var(--space-7) 0 var(--space-6);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-5);
+      background:
+        radial-gradient(ellipse 600px 400px at 15% 10%, rgba(239, 121, 96, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 400px at 85% 90%, rgba(239, 121, 96, 0.04) 0%, transparent 60%);
+      border-radius: var(--radius-xl);
+      padding-left: var(--space-5);
+      padding-right: var(--space-5);
+    }
+    .hero h1 {
+      background: linear-gradient(135deg, var(--fg-primary) 0%, var(--brand-deep) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .tagline { font-size: var(--text-xl); color: var(--fg-secondary); font-weight: 400; margin: 0 0 var(--space-4); max-width: 640px; }
+    .hero .badges { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      background: var(--brand-10);
+      color: var(--brand-deep);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge.success { background: rgba(107, 158, 114, 0.15); color: var(--success); }
+    .badge.warning { background: rgba(212, 166, 76, 0.15); color: var(--warning); }
+    .badge.neutral { background: var(--bg-surface); color: var(--fg-secondary); border: 1px solid var(--border-default); }
+    .badge.danger { background: rgba(199, 113, 102, 0.15); color: var(--danger); }
+
+    /* Grid */
+    .grid { display: grid; gap: var(--space-4); }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    /* Card */
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+      box-shadow: var(--shadow-xs);
+    }
+    .card:hover { border-color: var(--brand-40); box-shadow: var(--shadow-sm); }
+    .card h3, .card h4 { margin-top: 0; }
+    .card p:last-child { margin-bottom: 0; }
+    .card.muted { background: var(--bg-surface); border-color: var(--border-subtle); }
+    .card.warning { background: rgba(212, 166, 76, 0.06); border-color: rgba(212, 166, 76, 0.30); }
+    .card.danger { background: rgba(199, 113, 102, 0.06); border-color: rgba(199, 113, 102, 0.30); }
+    .card.success { background: rgba(107, 158, 114, 0.06); border-color: rgba(107, 158, 114, 0.30); }
+    .card.brand { background: var(--brand-whisper); border-color: var(--brand-40); }
+
+    /* Key-value */
+    dl.kv { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2) var(--space-4); align-items: baseline; }
+    dl.kv dt { color: var(--fg-muted); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    dl.kv dd { margin: 0; color: var(--fg-primary); font-size: var(--text-sm); }
+
+    /* Hero quote (Big Idea, Promessa) */
+    blockquote.hero-quote {
+      font-size: var(--text-2xl);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--fg-primary);
+      border-left: 4px solid var(--brand);
+      padding: var(--space-4) var(--space-5);
+      margin: var(--space-5) 0;
+      background: var(--brand-05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: normal;
+    }
+    blockquote {
+      margin: var(--space-3) 0;
+      padding: var(--space-3) var(--space-4);
+      border-left: 3px solid var(--border-default);
+      color: var(--fg-secondary);
+      background: var(--bg-surface);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+    }
+    blockquote.villain {
+      border-left-color: var(--danger);
+      background: rgba(199, 113, 102, 0.06);
+      color: var(--fg-primary);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* Chips */
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-3) 0; }
+    .chip {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      background: var(--brand-10);
+      color: var(--brand-deep);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .chip.negative { background: rgba(199, 113, 102, 0.1); color: var(--danger); }
+    .chip.warning { background: rgba(212, 166, 76, 0.12); color: var(--warning); }
+    .chip.success { background: rgba(107, 158, 114, 0.12); color: var(--success); }
+    .chip.neutral { background: var(--bg-surface); color: var(--fg-secondary); border-color: var(--border-default); }
+    .chip.pastel-sage { background: var(--pastel-sage); color: #2d5a33; }
+    .chip.pastel-lavender { background: var(--pastel-lavender); color: #4b4168; }
+    .chip.pastel-rose { background: var(--pastel-rose); color: #8a4a3b; }
+
+    /* Spectrum slider */
+    .spectrum { margin: var(--space-4) 0; }
+    .spectrum-label { display: flex; justify-content: space-between; font-size: var(--text-sm); color: var(--fg-secondary); margin-bottom: var(--space-2); font-weight: 500; }
+    .spectrum-track { position: relative; height: 6px; background: var(--bg-surface); border-radius: var(--radius-full); border: 1px solid var(--border-subtle); }
+    .spectrum-marker {
+      position: absolute; top: -6px;
+      width: 18px; height: 18px;
+      background: var(--brand);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-brand);
+      transform: translateX(-50%);
+      border: 3px solid var(--bg-base);
+    }
+    .spectrum-value { text-align: center; font-size: var(--text-xs); color: var(--fg-muted); margin-top: var(--space-3); font-weight: 500; }
+    .spectrum-desc { font-size: var(--text-xs); color: var(--fg-muted); margin-top: var(--space-1); font-style: italic; }
+
+    /* Swatches */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-3); margin: var(--space-4) 0; }
+    .swatch {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+      box-shadow: var(--shadow-xs);
+    }
+    .swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .swatch-color { height: 80px; }
+    .swatch-meta { padding: var(--space-2) var(--space-3); }
+    .swatch-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg-primary); display: block; }
+    .swatch-hex { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); display: block; }
+
+    /* Font sample */
+    .font-sample { margin: var(--space-3) 0; padding: var(--space-5); background: var(--bg-elevated); border-radius: var(--radius-md); border: 1px solid var(--border-default); }
+    .font-sample-name { font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: var(--space-2); }
+    .font-sample-text { font-size: var(--text-3xl); line-height: 1.1; margin: 0; font-family: 'Montserrat', sans-serif; }
+    .font-weight-row { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle); }
+    .font-weight-item { display: flex; flex-direction: column; gap: 2px; }
+    .font-weight-sample { font-size: var(--text-xl); font-family: 'Montserrat', sans-serif; }
+    .font-weight-label { font-size: 10px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
+    th { text-align: left; padding: var(--space-2) var(--space-3); background: var(--bg-surface); color: var(--fg-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: var(--text-xs); border-bottom: 2px solid var(--border-default); }
+    td { padding: var(--space-3); border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--brand-03); }
+
+    /* Details/Summary */
+    details {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-3);
+      transition: border-color 0.2s;
+      box-shadow: var(--shadow-xs);
+    }
+    details[open] { border-color: var(--brand-40); }
+    summary { cursor: pointer; font-weight: 600; color: var(--fg-primary); list-style: none; display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-lg); }
+    summary::-webkit-details-marker { display: none; }
+    summary::before {
+      content: "›";
+      font-size: 1.4em;
+      color: var(--brand);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      line-height: 1;
+    }
+    details[open] summary::before { transform: rotate(90deg); }
+    details > *:not(summary) { margin-top: var(--space-4); }
+    .summary-meta { font-weight: 400; font-size: var(--text-sm); color: var(--fg-muted); margin-left: auto; }
+
+    /* Footer */
+    .main-footer {
+      margin-top: var(--space-8);
+      padding: var(--space-5);
+      border-top: 1px solid var(--border-default);
+      color: var(--fg-muted);
+      font-size: var(--text-sm);
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+    }
+    .main-footer code { background: var(--bg-elevated); }
+
+    /* Progress bar */
+    .progress { margin: var(--space-3) 0; }
+    .progress-track { height: 8px; background: var(--bg-surface); border-radius: var(--radius-full); overflow: hidden; border: 1px solid var(--border-subtle); }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--brand) 0%, var(--brand-muted) 100%); border-radius: var(--radius-full); transition: width 0.3s; }
+    .progress-label { display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--fg-muted); margin-top: var(--space-1); font-weight: 500; }
+
+    /* Level cards (tiers, consciousness levels) */
+    .level-card { padding: var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--border-default); background: var(--bg-elevated); }
+    .level-card.tier-1 { border-left: 4px solid var(--brand); }
+    .level-card.tier-2 { border-left: 4px solid var(--brand-muted); }
+    .level-card.tier-3 { border-left: 4px solid var(--pastel-clay); }
+    .level-card.tier-4 { border-left: 4px solid var(--pastel-sky); }
+    .level-card.tier-5 { border-left: 4px solid var(--pastel-lavender); }
+    .level-card.gap { background: rgba(212, 166, 76, 0.06); border-color: rgba(212, 166, 76, 0.30); }
+
+    /* Section header */
+    section > .section-intro { color: var(--fg-secondary); font-size: var(--text-lg); margin-bottom: var(--space-5); max-width: 720px; }
+
+    /* Status row */
+    .status-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .status-item {
+      padding: var(--space-2) var(--space-3);
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      color: var(--fg-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+    .status-item strong { color: var(--fg-primary); font-weight: 600; }
+
+    /* Mobile menu */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: var(--space-4); right: var(--space-4);
+      width: 40px; height: 40px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      color: var(--fg-primary);
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 768px) {
+      body { grid-template-columns: 1fr; }
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0;
+        width: 260px;
+        z-index: 40;
+        transform: translateX(-100%);
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-lg);
+      }
+      .sidebar[data-open="true"] { transform: translateX(0); }
+      .main { padding: var(--space-5) var(--space-4); padding-top: var(--space-8); }
+      .mobile-menu-toggle { display: flex; }
+      h1 { font-size: var(--text-3xl); }
+      h2 { font-size: var(--text-2xl); }
+      dl.kv { grid-template-columns: 1fr; }
+      dl.kv dt { margin-top: var(--space-2); }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <aside class="sidebar" aria-label="Navegação">
+    <header class="sidebar-header">
+      <h2 class="company-name">kz</h2>
+      <p class="sidebar-meta">Preview · 2026-04-16</p>
+    </header>
+    <nav class="sidebar-nav" aria-label="Seções">
+      <a href="#overview">Visão geral</a>
+      <a href="#produto">Produto</a>
+      <a href="#personas">Personas</a>
+      <a href="#brand-voice">Tom de voz</a>
+      <a href="#concorrentes">Concorrentes</a>
+      <a href="#pilares">Pilares</a>
+      <a href="#identidade-visual">Identidade visual</a>
+      <a href="#plataformas">Plataformas</a>
+      <a href="#copy-foundation">Copy foundation</a>
+      <a href="#metadata">Metadata</a>
+    </nav>
+    <footer class="sidebar-footer">
+      <p class="sidebar-meta small">Gerado por <code>/company-preview kz</code></p>
+    </footer>
+  </aside>
+
+  <main id="main" class="main">
+
+    <!-- OVERVIEW -->
+    <section id="overview">
+      <div class="hero">
+        <div class="badges">
+          <span class="badge">SaaS · Saúde Mental</span>
+          <span class="badge neutral">Pré-lançamento</span>
+          <span class="badge success">Setup 8/8 completo</span>
+        </div>
+        <h1>kz</h1>
+        <p class="tagline">Feito por terapeuta, pra terapeuta.</p>
+        <blockquote class="hero-quote">Simplificar a rotina do terapeuta independente para que ele foque no que importa — a relação com o paciente.</blockquote>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Institucional</h4>
+          <dl class="kv">
+            <dt>Modelo</dt><dd>B2B · SaaS recorrente</dd>
+            <dt>Estágio</dt><dd>Lançando (mai/2026)</dd>
+            <dt>Fundação</dt><dd>~2024 (2 anos de build)</dd>
+            <dt>Tamanho</dt><dd>Micro (2 devs + 1 terapeuta advisor)</dd>
+            <dt>Ticket</dt><dd>R$ 100–129/mês</dd>
+            <dt>Mercado</dt><dd>Brasil (pt-BR)</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h4>Canais planejados para lançamento</h4>
+          <div class="chips">
+            <span class="chip">Instagram</span>
+            <span class="chip">LinkedIn (empresa)</span>
+            <span class="chip">Blog</span>
+            <span class="chip">Newsletter</span>
+            <span class="chip neutral">TikTok (futuro)</span>
+          </div>
+          <p style="margin-top: var(--space-4); color: var(--fg-secondary); font-size: var(--text-sm);">
+            Maturidade digital zero — nenhum canal ativo ainda. Liberdade estratégica total.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUTO -->
+    <section id="produto">
+      <h2>Produto</h2>
+      <div class="badges">
+        <span class="badge">SaaS vertical</span>
+        <span class="badge neutral">All-in-one</span>
+      </div>
+      <p class="section-intro">
+        Plataforma all-in-one de gestão de consultório para terapeutas autônomos. Reúne agenda (recorrente), videochamada com sala de espera, prontuário, processos terapêuticos, portal do paciente e WhatsApp nativo — tudo em um sistema <em>feito por terapeuta, para terapeutas</em>.
+      </p>
+
+      <blockquote class="hero-quote">
+        Pare de gerenciar seu consultório em 5 apps. A kz reúne tudo em um só lugar — mais tempo com o paciente, menos com burocracia.
+      </blockquote>
+
+      <h3>Funcionalidades principais</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Pacientes</h4>
+          <p>Cadastro completo com dados pessoais, médicos e de contato.</p>
+        </div>
+        <div class="card">
+          <h4>Agenda</h4>
+          <p>Sessões únicas e recorrentes, com gestão de cancelamentos e exceções.</p>
+        </div>
+        <div class="card">
+          <h4>Videochamada</h4>
+          <p>Atendimento online integrado, sala de espera, controle de áudio/vídeo.</p>
+        </div>
+        <div class="card">
+          <h4>Notas de sessão</h4>
+          <p>Planejamento pré-sessão, anotações e tema da sessão.</p>
+        </div>
+        <div class="card">
+          <h4>Processos terapêuticos</h4>
+          <p>Processos personalizados por paciente, com ferramentas e progresso rastreado.</p>
+        </div>
+        <div class="card">
+          <h4>Portal do paciente</h4>
+          <p>Paciente vê sessões, submete relatos (como tem se sentido) e edita o próprio perfil.</p>
+        </div>
+        <div class="card">
+          <h4>Comunicação WhatsApp</h4>
+          <p>Lembretes, confirmações automatizadas e mensagens via WhatsApp + push notifications.</p>
+        </div>
+        <div class="card">
+          <h4>Perfil público</h4>
+          <p>Página de apresentação profissional com especialidades, abordagem e valor de sessão.</p>
+        </div>
+      </div>
+
+      <h3>Diferenciais competitivos</h3>
+      <div class="grid grid-2">
+        <div class="card brand">
+          <h4>Simplicidade radical</h4>
+          <p>Um sistema único em vez de 5 apps. Reduzir atrito é valor, não estilo.</p>
+        </div>
+        <div class="card brand">
+          <h4>Fluxo terapêutico específico</h4>
+          <p>Anamneses, anotações estruturadas, processos personalizados por paciente.</p>
+        </div>
+        <div class="card brand">
+          <h4>Automação WhatsApp nativa</h4>
+          <p>Confirmações e lembretes no WhatsApp do paciente sem integrações frágeis.</p>
+        </div>
+        <div class="card brand">
+          <h4>Founder-market fit</h4>
+          <p>Fundador é hipnoterapeuta/terapeuta em exercício; decisões passam pela prática real.</p>
+        </div>
+      </div>
+
+      <h3>Detalhes comerciais</h3>
+      <div class="card">
+        <dl class="kv">
+          <dt>Preço</dt><dd>R$ 100–129/mês (plano único no lançamento)</dd>
+          <dt>Modelo</dt><dd>Assinatura recorrente · descontos em trimestral/anual · aprovação manual de novos terapeutas</dd>
+          <dt>Time-to-value</dt><dd>Primeira semana: agenda + 1 videochamada + 1 lembrete WhatsApp automatizado</dd>
+          <dt>Valor consolidado</dt><dd>30 dias: portal do paciente em uso + notas estruturadas acumuladas</dd>
+        </dl>
+      </div>
+
+      <h3>Para quem NÃO é (anti-persona)</h3>
+      <div class="chips">
+        <span class="chip negative">Clínicas grandes com ERP médico</span>
+        <span class="chip negative">Psiquiatras com prescrição + farmácia</span>
+        <span class="chip negative">Quem quer só agenda por R$ 20–30/mês</span>
+      </div>
+
+      <h3>Objeção principal pré-compra <span class="badge warning">a validar em campo</span></h3>
+      <blockquote>"Será que é realmente tudo o que preciso ou vou ter que usar outra ferramenta junto?"</blockquote>
+      <blockquote>"E meus dados clínicos, ficam seguros?"</blockquote>
+      <blockquote>"Vale R$ 100+/mês sendo que uso Google Agenda de graça?"</blockquote>
+
+      <h3>Limitações declaradas</h3>
+      <ul>
+        <li>Não substitui ERP hospitalar ou sistema de clínica com múltiplas unidades</li>
+        <li>Sem módulo de prescrição médica / integração com farmácia</li>
+        <li>Foco em saúde mental e terapia, não medicina clínica geral</li>
+        <li>Versão inicial para uso solo; suporte a secretária + colaboradores em fase futura</li>
+      </ul>
+    </section>
+
+    <!-- PERSONAS -->
+    <section id="personas">
+      <h2>Personas</h2>
+      <p class="section-intro">
+        Modo unificado — persona única (B2B Decisor = Usuário Final). A terapeuta autônoma brasileira, solo, opera simultaneamente como decisora da compra e usuária do sistema.
+      </p>
+
+      <details open>
+        <summary>
+          Mariana — a terapeuta que não quer ser secretária de si mesma
+          <span class="summary-meta">Única persona · ~25% validado</span>
+        </summary>
+
+        <div class="grid grid-2">
+          <div class="card muted">
+            <h4>Perfil base</h4>
+            <dl class="kv">
+              <dt>Idade</dt><dd>28–45 anos (Millennial)</dd>
+              <dt>Cargo</dt><dd>Terapeuta autônoma — dona do próprio consultório</dd>
+              <dt>Empresa</dt><dd>Solo (sem secretária, sem sócios)</dd>
+              <dt>Formação</dt><dd>Psicologia · psicanálise · TCC · hipnoterapia · integrativa</dd>
+              <dt>Renda</dt><dd>R$ 4k–12k/mês · Classe B</dd>
+              <dt>Volume</dt><dd>2–10 sessões/semana (iniciante) → 15–25 (maduro)</dd>
+            </dl>
+          </div>
+          <div class="card muted">
+            <h4>Linguagem</h4>
+            <p style="font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: var(--space-2);">Palavras que ela usa</p>
+            <div class="chips">
+              <span class="chip">tá tudo bagunçado</span>
+              <span class="chip">meu consultório é no WhatsApp</span>
+              <span class="chip">perco paciente por esquecer</span>
+              <span class="chip">queria só atender</span>
+              <span class="chip">não consigo desligar</span>
+            </div>
+            <p style="font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-top: var(--space-3); margin-bottom: var(--space-2);">Palavras que a afastam</p>
+            <div class="chips">
+              <span class="chip negative">escale seu negócio</span>
+              <span class="chip negative">fature X</span>
+              <span class="chip negative">transforme</span>
+              <span class="chip negative">máquina de vendas</span>
+              <span class="chip negative">disrupção</span>
+            </div>
+          </div>
+        </div>
+
+        <h4>5 Rings of Buying Insight (Adele Revella)</h4>
+        <div class="grid grid-2">
+          <div class="card"><strong>1 · Gatilho:</strong> esqueceu um paciente ou marcou sobreposto; passou a noite atrás de link de videochamada; paciente pediu nota e ela demorou um dia pra achar.</div>
+          <div class="card"><strong>2 · Sucesso:</strong> abrir <strong>um</strong> app de manhã e ver a semana organizada; não gastar mais tempo "gerenciando" do que "atendendo".</div>
+          <div class="card danger"><strong>3 · Barreira ⭐ dominante:</strong> "E se eu pagar e não usar?" — medo de cair em sistema pesado e largar no mês 2.</div>
+          <div class="card"><strong>4 · Jornada:</strong> grupos de WhatsApp/Facebook; indicação de colegas; Instagram; busca "sistema para terapeuta".</div>
+          <div class="card"><strong>5 · Decisão:</strong> teste gratuito ou mês inicial + prova social de colega + UI que "cabe na cabeça" na primeira abertura.</div>
+        </div>
+
+        <h4>Dores em 3 camadas</h4>
+        <div class="grid grid-3">
+          <div class="card">
+            <span class="badge">Superficial</span>
+            <blockquote style="margin-top: var(--space-3);">Tá tudo espalhado. Perco tempo entre WhatsApp, Google Agenda, Meet e caderno — e no fim do dia tô cansada de gerenciar, não de atender.</blockquote>
+          </div>
+          <div class="card">
+            <span class="badge warning">Profunda</span>
+            <p style="margin-top: var(--space-3);">Sente que não está sendo a profissional que gostaria de ser. Cada falha administrativa corrói a própria confiança. Quer estar 100% presente na sessão — a energia administrativa rouba isso.</p>
+          </div>
+          <div class="card danger">
+            <span class="badge danger">Medo oculto</span>
+            <p style="margin-top: var(--space-3);">"E se o paciente perceber que eu sou desorganizada e perder confiança em mim como profissional? E se eu pareço amadora?"</p>
+          </div>
+        </div>
+
+        <h4>Desejos</h4>
+        <div class="grid grid-2">
+          <div class="card success">
+            <h4>Funcional</h4>
+            <p><em>"Segunda de manhã abro um app só, vejo a semana, lembretes já foram enviados, notas anteriores na mão, entro na videochamada sem procurar link em email."</em></p>
+          </div>
+          <div class="card brand">
+            <h4>Identidade</h4>
+            <p>Uma <strong>profissional séria, organizada e contemporânea</strong> — que faz terapia moderna sem perder profundidade. Não "terapeuta virada no tempo", nem "terapeuta improvisada". Opera sua clínica como o negócio sério que ela é.</p>
+          </div>
+        </div>
+
+        <h4>Custo da inação</h4>
+        <div class="grid grid-2">
+          <div class="card warning">
+            <dl class="kv">
+              <dt>Financeiro</dt><dd>R$ 500–1.500/mês em pacientes perdidos (esquecimento, no-show, captação mal-feita)</dd>
+              <dt>Tempo</dt><dd>4–8h/semana em administração invisível</dd>
+              <dt>Emocional</dt><dd>Desgaste cumulativo; "consultório nunca fecha"; corrosão da auto-imagem</dd>
+              <dt>Prazo crítico</dt><dd>Quando o volume passa de 10–15 sessões/semana, vira insustentável</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <h4>Anualizado tangível</h4>
+            <p style="font-size: var(--text-2xl); color: var(--brand-deep); font-weight: 700; margin: 0;">R$ 35k–75k/ano</p>
+            <p style="color: var(--fg-secondary); font-size: var(--text-sm); margin-top: var(--space-2);">Em custo real (tempo + receita perdida), sem contar a corrosão qualitativa que compromete a presença na sessão.</p>
+          </div>
+        </div>
+
+        <h4>O que já tentou</h4>
+        <table>
+          <thead>
+            <tr><th>Solução</th><th>Por que tentou</th><th>Por que falhou</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Google Agenda</td><td>Grátis, familiar</td><td>Sem lembrete auto pro paciente, sem notas estruturadas</td></tr>
+            <tr><td>WhatsApp como "CRM"</td><td>Canal natural</td><td>Mistura pessoal/profissional, perde mensagens</td></tr>
+            <tr><td>Google Meet / Zoom</td><td>Grátis</td><td>Link a cada vez, sem sala de espera profissional</td></tr>
+            <tr><td>Caderno / Notion</td><td>Personalização</td><td>Não sincroniza com agenda, sem template terapêutico</td></tr>
+            <tr><td>Doctoralia</td><td>"É pra saúde"</td><td>Foco médico, não em fluxo de terapia</td></tr>
+            <tr><td>iClinic / Ninsaúde</td><td>Sistema "profissional"</td><td>Pesado, categoria médica, largou no trial ou mês 2</td></tr>
+            <tr><td>Agenda R$ 20–40/mês</td><td>Preço</td><td>Só agenda; patchwork continua</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Mapa de consciência</h4>
+        <table>
+          <thead><tr><th>Nível</th><th>Estado</th><th>% estimado</th><th>Conteúdo ideal</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Inconsciente</td><td>"Minha rotina é essa mesmo"</td><td>~20%</td><td>Histórias, bastidores do founder</td></tr>
+            <tr><td>2 · Consciente da dor</td><td>"Isso aqui é chato"</td><td><strong>~35%</strong> ⭐</td><td>Diagnóstico, conteúdo-espelho</td></tr>
+            <tr><td>3 · Buscando solução</td><td>"Deve ter jeito melhor"</td><td>~25%</td><td>Comparativos, frameworks</td></tr>
+            <tr><td>4 · Comparando</td><td>"Qual vale a pena?"</td><td>~15%</td><td>Demo, reviews, cases</td></tr>
+            <tr><td>5 · Decidindo</td><td>"Vou testar"</td><td>~5%</td><td>Prova social, trial, onboarding</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <!-- BRAND VOICE -->
+    <section id="brand-voice">
+      <h2>Tom de voz</h2>
+      <blockquote class="hero-quote">
+        A kz fala como uma colega terapeuta experiente e compreensiva — tem vivência de quem roda consultório, fala com autoridade serena, acolhe antes de informar e simplifica sem banalizar.
+      </blockquote>
+      <p class="section-intro">
+        Público majoritariamente feminino em categoria sensível (saúde mental). Comunicação <strong>pacífica, calma, compreensiva</strong> — nunca agressiva, impositiva ou vendedora.
+      </p>
+
+      <h3>O que NÃO somos</h3>
+      <div class="chips">
+        <span class="chip negative">Guru de produtividade</span>
+        <span class="chip negative">Vendedor empurrando software</span>
+        <span class="chip negative">Consultor corporativo</span>
+        <span class="chip negative">Sistema médico/hospitalar</span>
+        <span class="chip negative">Influencer de tech</span>
+      </div>
+
+      <h3>Espectros de tom</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Formal</span><span>Casual</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 50%"></div></div>
+            <p class="spectrum-value">3 / 5</p>
+            <p class="spectrum-desc">Respeito sem "prezados" — meio termo natural.</p>
+          </div>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Sério</span><span>Bem-humorado</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+            <p class="spectrum-value">2 / 5</p>
+            <p class="spectrum-desc">Leveza pontual em situações administrativas; nunca em temas clínicos.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Técnico</span><span>Acessível</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 75%"></div></div>
+            <p class="spectrum-value">4 / 5</p>
+            <p class="spectrum-desc">"Fluxo de sessão" > "pipeline"; "organizar a agenda" > "otimizar workflow".</p>
+          </div>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Cauteloso</span><span>Provocativo</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+            <p class="spectrum-value">2 / 5</p>
+            <p class="spectrum-desc">Comunicação pacífica; observa o status quo sem atacar; questiona com gentileza.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Vocabulário da marca</h3>
+      <div class="grid grid-2">
+        <div class="card success">
+          <h4>Palavras amadas</h4>
+          <p style="font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-top: var(--space-3);">Sobre o ofício</p>
+          <div class="chips">
+            <span class="chip pastel-sage">presença</span>
+            <span class="chip pastel-sage">escuta</span>
+            <span class="chip pastel-sage">acolher</span>
+            <span class="chip pastel-sage">atender</span>
+            <span class="chip pastel-sage">sessão</span>
+            <span class="chip pastel-sage">ofício</span>
+            <span class="chip pastel-sage">prática</span>
+          </div>
+          <p style="font-size: var(--text-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-top: var(--space-3);">Sobre a kz</p>
+          <div class="chips">
+            <span class="chip pastel-rose">organizar</span>
+            <span class="chip pastel-rose">cabe na sua rotina</span>
+            <span class="chip pastel-rose">feito por terapeuta</span>
+            <span class="chip pastel-rose">tempo que volta pra você</span>
+            <span class="chip pastel-rose">respirar</span>
+            <span class="chip pastel-rose">centralizar</span>
+            <span class="chip pastel-rose">um lugar só</span>
+          </div>
+        </div>
+        <div class="card danger">
+          <h4>Palavras fora do tom</h4>
+          <div class="chips">
+            <span class="chip negative">transforme</span>
+            <span class="chip negative">fature</span>
+            <span class="chip negative">escale</span>
+            <span class="chip negative">dispare</span>
+            <span class="chip negative">revolucione</span>
+            <span class="chip negative">hackeie</span>
+            <span class="chip negative">10x</span>
+            <span class="chip negative">disrupção</span>
+            <span class="chip negative">otimize seu funil</span>
+            <span class="chip negative">máquina de vendas</span>
+            <span class="chip negative">sinergia</span>
+            <span class="chip negative">plataforma disruptiva</span>
+            <span class="chip negative">destrua a concorrência</span>
+            <span class="chip negative">domine seu mercado</span>
+          </div>
+        </div>
+      </div>
+
+      <h3>Exemplos referência</h3>
+      <div class="grid grid-2">
+        <div class="card success">
+          <h4>✅ Soa como a kz</h4>
+          <blockquote>
+            A confirmação da sessão chega no WhatsApp do seu paciente antes de cada atendimento — no horário que você escolher, com a mensagem que você aprovar. Ele confirma. Você vê na agenda. A sessão começa no horário, sem você ter que abrir o celular entre um atendimento e outro.
+            <br><br>
+            <em>Um trabalho a menos. Uma presença a mais na sala.</em>
+          </blockquote>
+        </div>
+        <div class="card danger">
+          <h4>❌ NÃO soa como a kz</h4>
+          <blockquote>
+            REVOLUCIONE sua agenda! Lembretes automáticos que DISPARAM para seus pacientes e aumentam sua taxa de comparecimento em 80%! Pare de perder tempo e ESCALE seu consultório agora!
+          </blockquote>
+        </div>
+      </div>
+
+      <h3>Variações por contexto</h3>
+      <table>
+        <thead><tr><th>Contexto</th><th>Espectros</th><th>Ajuste</th></tr></thead>
+        <tbody>
+          <tr><td>LinkedIn (empresa)</td><td>2/2/3/2</td><td>Um clique mais formal e técnico, mantendo calma. Autoridade da profissão.</td></tr>
+          <tr><td>Instagram (feed + stories)</td><td>3/2/4/2</td><td>Tom padrão. Carrosséis didáticos, reels com bastidores, stories de conversa.</td></tr>
+          <tr><td>Reels / TikTok (futuro)</td><td>3/3/4/2</td><td>Leveza um pouco maior, mantendo respeito.</td></tr>
+          <tr><td>Newsletter / Blog</td><td>2/2/3/2</td><td>Introspectivo, profundo, espaço para reflexão.</td></tr>
+          <tr><td>Comunicação de crise</td><td>2/1/3/1</td><td>Sério, direto, cauteloso. Transparência total.</td></tr>
+          <tr><td>Venda direta (BOFU)</td><td>2/2/4/2</td><td>Mesmo tom, com prova e demo. CTAs suaves: "Quer testar?", "Dá pra ver como funciona aqui".</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Regras transversais</h3>
+      <ol>
+        <li><strong>Respire antes de vender.</strong> Todo BOFU começa acolhendo o contexto, não a promessa.</li>
+        <li><strong>O paciente é tratado com respeito sempre.</strong> Nunca "cliente", raramente "usuário". É "paciente" ou "seu paciente".</li>
+        <li><strong>O terapeuta é um profissional sério.</strong> Nunca "empreendedor do consultório" ou "gestor clínico". É terapeuta.</li>
+        <li><strong>Humor pontual, nunca sobre o sofrimento.</strong> Humor sobre caos administrativo ok; sobre paciente, categoria ou sofrimento clínico — nunca.</li>
+        <li><strong>Autoridade vem da vivência.</strong> Founder terapeuta é a voz primária.</li>
+      </ol>
+    </section>
+
+    <!-- CONCORRENTES -->
+    <section id="concorrentes">
+      <h2>Concorrentes</h2>
+      <p class="section-intro">
+        Mercado brasileiro <strong>maduro e fragmentado</strong>: 15+ verticais diretos + marketplaces + DIY. Líderes por base instalada: Corpora (40k+), Clínica Ágil (30k+), PsicoManager (20k+). IA clínica virou commodity em 5/11 concorrentes em 2026.
+      </p>
+
+      <h3>Matriz de posicionamento</h3>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Preço solo</th>
+              <th>Videoch.</th>
+              <th>Portal c/ relato</th>
+              <th>WhatsApp</th>
+              <th>IA</th>
+              <th>Ecossistema</th>
+              <th>Posicionamento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--brand-05);">
+              <td><strong>kz</strong></td>
+              <td>R$ 100-129</td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>roadmap</td>
+              <td>roadmap</td>
+              <td>feito por terapeuta</td>
+            </tr>
+            <tr><td>Corpora</td><td>freemium+</td><td>✅</td><td>✅ Diário</td><td>✅</td><td>✅</td><td>❌</td><td>feminino-científico (40k+)</td></tr>
+            <tr><td>Clínica Ágil</td><td>R$ 199 (3u)</td><td>✅</td><td>parcial</td><td>✅</td><td>❌</td><td>❌</td><td>sistema completo (30k+)</td></tr>
+            <tr><td>PsicoManager</td><td>—</td><td>✅</td><td>✅ Emoções</td><td>✅</td><td>❌</td><td>❌</td><td>flexível por abordagem (20k+)</td></tr>
+            <tr><td>PersonCare</td><td>R$ 69,90</td><td>✅</td><td>✅ humor/metas</td><td>✅</td><td>✅</td><td>roadmap</td><td>AI-first saúde mental</td></tr>
+            <tr><td>Psicoplanner</td><td>R$ 59-99</td><td>✅</td><td>básico</td><td>✅</td><td>✅</td><td>❌</td><td>preço + humano</td></tr>
+            <tr><td>Allminds</td><td>~R$ 60</td><td>✅</td><td>marketplace</td><td>✅</td><td>❌</td><td>✅ mentoria</td><td>psicólogo empreendedor</td></tr>
+            <tr><td>PsiNota AI</td><td>R$ 0-247</td><td>parcial</td><td>❌</td><td>❌</td><td>✅ tempo real</td><td>❌</td><td>AI-first + compliance CFP</td></tr>
+            <tr><td>Mais Terapias</td><td>R$ 39,90</td><td>—</td><td>compartilh.</td><td>✅</td><td>✅</td><td>rede</td><td>reabilitação multidisciplinar</td></tr>
+            <tr><td>GestorPsi</td><td>R$ 34,50</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>o mais antigo (FAPESP)</td></tr>
+            <tr><td>Terapee</td><td>R$ 55,90</td><td>❌</td><td>❌</td><td>parcial</td><td>❌</td><td>❌</td><td>entry-level</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: var(--text-sm); color: var(--fg-secondary);">
+        <strong>Leitura:</strong> features viraram commodity; diferenciação precisa vir de posicionamento, voz e público. Camada única da kz: founder-market fit comunicado + processos terapêuticos personalizados + tom acolhedor + público ampliado (psi + hipno + integrativos).
+      </p>
+
+      <h3>Concorrentes indiretos</h3>
+      <div class="grid grid-2">
+        <div class="card muted">
+          <h4>Marketplaces</h4>
+          <p><strong>Zenklub</strong> (R$ 16,5M + R$ 45M em rodadas), <strong>Vittude</strong> (R$ 23,7M projetados 2026), Terapia de Bolso, Psitto, <strong>Guia da Alma</strong> (maior holística do Brasil), Doctoralia.</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-secondary); margin-top: var(--space-2);"><em>kz não é vitrine. É o sistema por trás.</em></p>
+        </div>
+        <div class="card muted">
+          <h4>DIY (Google + WhatsApp + Meet + Notion)</h4>
+          <p>Terapeuta opera R$ 0/mês com patchwork. Compete por gratuidade + familiaridade + "tá funcionando, mais ou menos".</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-secondary); margin-top: var(--space-2);"><em>Se seu consultório está em 5 apps, você não está economizando; está pagando em tempo.</em></p>
+        </div>
+      </div>
+
+      <h3>Gaps de conteúdo identificados</h3>
+      <div class="grid grid-2">
+        <div class="card success">
+          <h4>🟢 Temas virgens</h4>
+          <ul>
+            <li>Bastidores de construção do produto (nenhum SaaS do setor faz)</li>
+            <li>Saúde mental <strong>do terapeuta</strong> — ninguém fala do cuidado com o cuidador</li>
+            <li>Hipnoterapeutas + integrativos + holísticos (todos falam para psi clínica)</li>
+            <li>Ritualística do atendimento e transição entre sessões</li>
+            <li>Evolução profissional lenta (oposto ao "escale seu consultório")</li>
+            <li>Comparativos honestos de ferramentas</li>
+          </ul>
+        </div>
+        <div class="card danger">
+          <h4>🔴 Oceano vermelho (NÃO entrar)</h4>
+          <ul>
+            <li>"Como fazer marketing no Instagram"</li>
+            <li>"Ideias de posts para psicólogos"</li>
+            <li>"Ética do marketing psicológico"</li>
+            <li>Conteúdo educativo genérico sobre ansiedade/depressão</li>
+            <li>"Como atrair pacientes online"</li>
+            <li>"Como viralizar reels"</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Vantagens competitivas reais da kz</h3>
+      <div class="grid grid-2">
+        <div class="card brand"><strong>1. Founder-market fit explícito</strong> — único da categoria com narrativa "fundador é terapeuta em exercício".</div>
+        <div class="card brand"><strong>2. Processos terapêuticos personalizados</strong> — concorrentes têm "prontuário + nota"; a kz tem <em>processo</em>.</div>
+        <div class="card brand"><strong>3. Voz acolhedora e pacífica</strong> — gap de ocupação confirmado; ninguém da concorrência tem esse posicionamento.</div>
+        <div class="card brand"><strong>4. "Feito por terapeuta" como slogan declarado</strong> — simples, honesto, memorável.</div>
+        <div class="card brand"><strong>5. Profissionalização da prática</strong> — só Allminds ocupa parcialmente, com discurso empreendedor agressivo demais.</div>
+      </div>
+
+      <h3>Empresas referência (inspiração fora do setor)</h3>
+      <div class="chips">
+        <span class="chip">Nubank</span>
+        <span class="chip">Notion</span>
+        <span class="chip">Basecamp / 37signals</span>
+        <span class="chip">Headspace</span>
+      </div>
+    </section>
+
+    <!-- PILARES -->
+    <section id="pilares">
+      <h2>Pilares de conteúdo</h2>
+
+      <div class="card">
+        <h4>Estratégia global</h4>
+        <dl class="kv">
+          <dt>Frequência</dt><dd>3–4 posts/semana (realista para equipe micro)</dd>
+          <dt>Primárias</dt><dd>Instagram · Newsletter</dd>
+          <dt>Estratégicas</dt><dd>LinkedIn (empresa) · Blog</dd>
+          <dt>Futuras</dt><dd>TikTok (após 90 dias)</dd>
+          <dt>Mix de funil</dt><dd><strong>55% TOFU · 25% MOFU · 20% BOFU</strong></dd>
+        </dl>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="badge">15%</span>
+          <h4>1 · Bastidores de quem entende o ofício</h4>
+          <p>Founder terapeuta mostrando processo de decisão, reflexões, aprendizados da construção. <strong>Autoridade + afinidade</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge success">🟢 Gap virgem</span> Nenhum SaaS do setor mostra construção pública.</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "Por que recusamos incluir módulo de prescrição médica"</em></p>
+        </div>
+        <div class="card">
+          <span class="badge">20%</span>
+          <h4>2 · Rotina mais leve</h4>
+          <p>Sinais de consultório espalhado, checklists, "como fechar a sexta sem levar WhatsApp pra casa". <strong>Awareness + leads</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge warning">🟡 Semi-ocupado</span> Tom acolhedor diferencia do "escale seu consultório".</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "5 sinais de que seu consultório está vivendo em 5 apps"</em></p>
+        </div>
+        <div class="card">
+          <span class="badge">15%</span>
+          <h4>3 · Cuidar de quem cuida</h4>
+          <p>Saúde mental do próprio terapeuta, supervisão, pausas, limites. <strong>Construção de categoria + autoridade emocional</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge success">🟢 TOTALMENTE VIRGEM</span> Maior oportunidade editorial do setor.</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "O cansaço invisível de quem escuta o dia inteiro"</em></p>
+        </div>
+        <div class="card">
+          <span class="badge">10%</span>
+          <h4>4 · Profissionalização da prática</h4>
+          <p>Operar a clínica como negócio sério sem virar empresário. <strong>Autoridade + MOFU</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge warning">🟡 Semi-ocupado</span> Allminds ocupa com discurso empreendedor; kz ocupa com vocabulário terapêutico.</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "Por que padronizar a anamnese NÃO é industrializar a sessão"</em></p>
+        </div>
+        <div class="card brand">
+          <span class="badge">20%</span>
+          <h4>5 · kz por dentro</h4>
+          <p>Demos, comparativos honestos, prova social. <strong>Conversão + quebra de objeção</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge success">🟢 Virgem como comparativo honesto</span></p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "kz vs. Google Agenda + WhatsApp + Meet: honestamente, vale mudar?"</em></p>
+        </div>
+        <div class="card">
+          <span class="badge">20%</span>
+          <h4>6 · Conversa do ofício 🆕</h4>
+          <p>Curadoria de notícias, pesquisas, tendências, indicações. <strong>Awareness + autoridade curadorial</strong>.</p>
+          <p style="margin-top: var(--space-2);"><span class="badge success">🟢 Virgem</span> Ninguém atua como "ponto de atualização" do terapeuta BR.</p>
+          <p style="font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3);"><em>Ex: "O que muda no seu consultório com o CFP 09/2024"</em></p>
+        </div>
+      </div>
+
+      <h3>Temas sazonais</h3>
+      <table>
+        <thead><tr><th>Data</th><th>Gancho</th><th>Pilar</th></tr></thead>
+        <tbody>
+          <tr><td>Janeiro Branco</td><td>Saúde mental · abertura do ano</td><td>6 + 3</td></tr>
+          <tr><td>Carnaval</td><td>Pausa, limites, "como desligar"</td><td>3</td></tr>
+          <tr><td>Aniversário de lançamento</td><td>Bastidores · gratidão</td><td>1 + 5</td></tr>
+          <tr><td>Dia Mundial da Saúde (7/4)</td><td>Saúde integral, categoria ampla</td><td>6</td></tr>
+          <tr><td>Dia do Psicólogo (27/8)</td><td>Celebração da categoria</td><td>1 + 6</td></tr>
+          <tr><td>Setembro Amarelo</td><td>Prevenção — tema sensível</td><td>6 (com cuidado)</td></tr>
+          <tr><td>Outubro Rosa</td><td>Saúde da mulher</td><td>6</td></tr>
+          <tr><td>Dezembro — balanço</td><td>Retrospectiva do ofício + kz</td><td>1 + 4</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Regras de distribuição</h3>
+      <ul>
+        <li>Máximo 2 posts consecutivos do mesmo pilar</li>
+        <li>Pelo menos 1 post por pilar a cada 2 semanas</li>
+        <li>Nunca 3+ posts BOFU (Pilar 5) consecutivos</li>
+        <li><strong>Pilar 6 puxa o volume diário</strong> — pode preencher 2 de cada 4 posts/semana</li>
+        <li><strong>Pilar 1 não depende de vídeo</strong> — vídeo só 1x/mês</li>
+        <li><strong>Pilar 3 nunca após Pilar 5</strong> — tom muda drasticamente, evita whiplash</li>
+        <li>1 slot/semana reservado para conteúdo reativo</li>
+      </ul>
+    </section>
+
+    <!-- IDENTIDADE VISUAL -->
+    <section id="identidade-visual">
+      <h2>Identidade visual</h2>
+      <p class="section-intro">
+        <strong>Calma acima de impacto.</strong> Light como padrão — fundo creme passa serenidade, coerente com o ofício terapêutico. Pastéis calmos, nunca vibrantes. Orgânico e respirado.
+      </p>
+
+      <h3>Tipografia</h3>
+      <div class="font-sample">
+        <div class="font-sample-name">Primária · Montserrat</div>
+        <p class="font-sample-text">Aa Bb Cc 123 — Consultório inteiro em uma tela.</p>
+        <div class="font-weight-row">
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 300;">Light</span><span class="font-weight-label">300</span></div>
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 400;">Regular</span><span class="font-weight-label">400</span></div>
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 500;">Medium</span><span class="font-weight-label">500</span></div>
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 600;">SemiBold</span><span class="font-weight-label">600</span></div>
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 700;">Bold</span><span class="font-weight-label">700</span></div>
+          <div class="font-weight-item"><span class="font-weight-sample" style="font-weight: 800;">ExtraBold</span><span class="font-weight-label">800</span></div>
+        </div>
+      </div>
+
+      <h3>Paleta brand — Coral terracota</h3>
+      <div class="swatches">
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #ef7960"></div><div class="swatch-meta"><span class="swatch-name">brand</span><span class="swatch-hex">#ef7960</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #f69a7f"></div><div class="swatch-meta"><span class="swatch-name">brand-soft</span><span class="swatch-hex">#f69a7f</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #f28b70"></div><div class="swatch-meta"><span class="swatch-name">brand-muted</span><span class="swatch-hex">#f28b70</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #fce0d7"></div><div class="swatch-meta"><span class="swatch-name">brand-subtle</span><span class="swatch-hex">#fce0d7</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #fef2ee"></div><div class="swatch-meta"><span class="swatch-name">brand-whisper</span><span class="swatch-hex">#fef2ee</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #d66954"></div><div class="swatch-meta"><span class="swatch-name">brand-deep</span><span class="swatch-hex">#d66954</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #bc5a47"></div><div class="swatch-meta"><span class="swatch-name">brand-darker</span><span class="swatch-hex">#bc5a47</span></div></div>
+      </div>
+
+      <h3>Paleta neutros (Light — padrão narrativo)</h3>
+      <div class="swatches">
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #faf8f5; border-bottom: 1px solid #e8e4dc;"></div><div class="swatch-meta"><span class="swatch-name">bg-light</span><span class="swatch-hex">#faf8f5</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #ffffff; border-bottom: 1px solid #e8e4dc;"></div><div class="swatch-meta"><span class="swatch-name">bg-surface</span><span class="swatch-hex">#ffffff</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #f4f1ec"></div><div class="swatch-meta"><span class="swatch-name">bg-muted</span><span class="swatch-hex">#f4f1ec</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #2b2b2b"></div><div class="swatch-meta"><span class="swatch-name">fg-primary</span><span class="swatch-hex">#2b2b2b</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #5a5a5a"></div><div class="swatch-meta"><span class="swatch-name">fg-secondary</span><span class="swatch-hex">#5a5a5a</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #8a8a8a"></div><div class="swatch-meta"><span class="swatch-name">fg-muted</span><span class="swatch-hex">#8a8a8a</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #e8e4dc"></div><div class="swatch-meta"><span class="swatch-name">border</span><span class="swatch-hex">#e8e4dc</span></div></div>
+      </div>
+
+      <h3>Pastéis calmos (acentos da plataforma)</h3>
+      <div class="swatches">
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #cfe0d0"></div><div class="swatch-meta"><span class="swatch-name">sage</span><span class="swatch-hex">#cfe0d0</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #d8d2e3"></div><div class="swatch-meta"><span class="swatch-name">lavender</span><span class="swatch-hex">#d8d2e3</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #cdd8e0"></div><div class="swatch-meta"><span class="swatch-name">sky</span><span class="swatch-hex">#cdd8e0</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #f1e7c9"></div><div class="swatch-meta"><span class="swatch-name">butter</span><span class="swatch-hex">#f1e7c9</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #f1d6cc"></div><div class="swatch-meta"><span class="swatch-name">rose</span><span class="swatch-hex">#f1d6cc</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #ddcfc2"></div><div class="swatch-meta"><span class="swatch-name">clay</span><span class="swatch-hex">#ddcfc2</span></div></div>
+      </div>
+
+      <h3>Semânticas (uso pontual)</h3>
+      <div class="swatches">
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #6b9e72"></div><div class="swatch-meta"><span class="swatch-name">success</span><span class="swatch-hex">#6b9e72</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #7a94a8"></div><div class="swatch-meta"><span class="swatch-name">info</span><span class="swatch-hex">#7a94a8</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #d4a64c"></div><div class="swatch-meta"><span class="swatch-name">warning</span><span class="swatch-hex">#d4a64c</span></div></div>
+        <div class="swatch" title="Clique para copiar"><div class="swatch-color" style="background: #c77166"></div><div class="swatch-meta"><span class="swatch-name">danger</span><span class="swatch-hex">#c77166</span></div></div>
+      </div>
+
+      <h3>Modo e mood</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Base narrativa</h4>
+          <p><strong>Light</strong> como padrão e narrativo. Dark mode existe <em>apenas como preferência de conforto ocular dentro da plataforma</em> — não aparece em peças editoriais, posts ou landing pages.</p>
+        </div>
+        <div class="card">
+          <h4>Mood</h4>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Minimalista</span><span>Vibrante</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+          </div>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Clean</span><span>Texturizado</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 0%"></div></div>
+          </div>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Geométrico</span><span>Orgânico</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 75%"></div></div>
+          </div>
+          <div class="spectrum">
+            <div class="spectrum-label"><span>Sóbrio</span><span>Ousado</span></div>
+            <div class="spectrum-track"><div class="spectrum-marker" style="left: 25%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Do's &amp; Don'ts visuais</h3>
+      <div class="grid grid-2">
+        <div class="card success">
+          <h4>✅ Faça</h4>
+          <ul>
+            <li>Fundo creme/off-white com um toque coral em destaque</li>
+            <li>Muito espaço em branco — respira bem</li>
+            <li>Tipografia em pesos moderados (500-700)</li>
+            <li>Ilustrações orgânicas, fotos naturais com luz quente</li>
+            <li>Cantos arredondados (8-16px)</li>
+            <li>Sombras suaves, quase imperceptíveis</li>
+          </ul>
+        </div>
+        <div class="card danger">
+          <h4>❌ Não faça</h4>
+          <ul>
+            <li>Fundo preto em peças narrativas (só dark mode interno)</li>
+            <li>Coral + vermelho + amarelo juntos (satura e agride)</li>
+            <li>Caixa alta em textos longos</li>
+            <li>Ícones 3D ou com gradiente cromado</li>
+            <li>Emojis agressivos (🚀 💥 🔥 ⚡)</li>
+            <li>Stock photos corporativos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATAFORMAS -->
+    <section id="plataformas">
+      <h2>Plataformas</h2>
+      <p class="section-intro">
+        Ativas no lançamento: <strong>Instagram · LinkedIn · Blog · Newsletter</strong>. Futura: TikTok (após 90 dias de consistência).
+      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>📷 Instagram · primária</h4>
+          <dl class="kv">
+            <dt>Dimensões</dt><dd>1080×1350 (carrossel portrait — preferencial)</dd>
+            <dt>Prioritários</dt><dd>Carrossel + Reels + Stories</dd>
+            <dt>Frequência</dt><dd>3–4 posts/semana</dd>
+            <dt>Hashtags</dt><dd>5–10 relevantes (não 30)</dd>
+            <dt>Horários</dt><dd>7h–9h (antes das sessões) · 19h–21h</dd>
+            <dt>Espectros</dt><dd>3/2/4/2 (padrão)</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h4>💼 LinkedIn (empresa) · estratégica</h4>
+          <dl class="kv">
+            <dt>Dimensões</dt><dd>1080×1350 (reaproveita Instagram) · PDF carrossel até 10p</dd>
+            <dt>Prioritários</dt><dd>Texto longo (3000 chars) · PDF carrossel</dd>
+            <dt>Frequência</dt><dd>1–2 posts/semana</dd>
+            <dt>Hashtags</dt><dd>Máx. 3 contextuais</dd>
+            <dt>Horários</dt><dd>8h–10h · 12h–13h (dias úteis)</dd>
+            <dt>Espectros</dt><dd>2/2/3/2 (um clique mais formal)</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h4>📝 Blog · SEO + profundidade</h4>
+          <dl class="kv">
+            <dt>Largura</dt><dd>640–720px · 17–18px desktop</dd>
+            <dt>Prioritários</dt><dd>Long-form (1500–3000 pal.) · comparativo honesto</dd>
+            <dt>Frequência</dt><dd>1 artigo quinzenal (escalar pra semanal em 3 meses)</dd>
+            <dt>Meta title</dt><dd>55–60 chars · palavra-chave no início</dd>
+            <dt>CTA</dt><dd>Meio + fim, nunca intrusivo</dd>
+            <dt>Espectros</dt><dd>2/2/3/2 (profundidade acessível)</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h4>📧 Newsletter · ativo anti-algoritmo</h4>
+          <dl class="kv">
+            <dt>Largura</dt><dd>560–640px · 16–17px</dd>
+            <dt>Fonte</dt><dd>Arial/Helvetica fallback (Montserrat pode quebrar em clients)</dd>
+            <dt>Prioritários</dt><dd>Ensaio profundo quinzenal · curadoria</dd>
+            <dt>Frequência</dt><dd>Quinzenal</dd>
+            <dt>Envio</dt><dd>Terça ou quinta pela manhã</dd>
+            <dt>Espectros</dt><dd>2/2/3/2 (canal mais íntimo)</dd>
+          </dl>
+        </div>
+        <div class="card muted">
+          <h4>🎵 TikTok · futuro</h4>
+          <dl class="kv">
+            <dt>Quando</dt><dd>Após 90 dias de consistência em Instagram</dd>
+            <dt>Duração</dt><dd>15–60s no lançamento · até 3min depois</dd>
+            <dt>Primeiro 1,5s</dt><dd>Define retenção — afirmação forte ou pergunta-espelho</dd>
+            <dt>Legenda</dt><dd>Redundante ao áudio (muita gente vê mudo)</dd>
+          </dl>
+        </div>
+      </div>
+
+      <h3>Regras transversais</h3>
+      <ol>
+        <li><strong>Creme (#faf8f5) como fundo dominante</strong>; coral em pequenos destaques; Montserrat em tudo que permitir.</li>
+        <li><strong>Nunca dark mode</strong> em peças de conteúdo — dark é só interno da plataforma.</li>
+        <li><strong>Não recortar coral em blocos sólidos grandes</strong> — usa como ponto, não como plano.</li>
+        <li><strong>Pastéis para secundários</strong> — sage, lavanda, rosa suave.</li>
+        <li><strong>Stock photos corporativos proibidos.</strong></li>
+        <li><strong>Emojis:</strong> máx. 1–2 por post; preferir 🌱 🤍 ☕ 🧡 🕯️; nunca 🚀 💥 🔥 ⚡ 💰.</li>
+      </ol>
+    </section>
+
+    <!-- COPY FOUNDATION -->
+    <section id="copy-foundation">
+      <h2>Copy Foundation</h2>
+      <p class="section-intro">
+        7 artefatos de copy para venda direta derivados de PRODUCT + AUDIENCE + COMPETITOR + BRAND_VOICE. Todos aprovados em <strong>v1</strong>. Modo unificado (sem bifurcação B2B).
+      </p>
+
+      <!-- BIG IDEA -->
+      <details open>
+        <summary>
+          1 · Big Idea
+          <span class="summary-meta">Promessa central · approved v1</span>
+        </summary>
+
+        <blockquote class="hero-quote">Um sistema feito por terapeuta — para você voltar a ser só terapeuta.</blockquote>
+
+        <h4>Variações testáveis</h4>
+        <div class="grid grid-3">
+          <div class="card">
+            <span class="badge">Resultado</span>
+            <p style="margin-top: var(--space-3);">"Quatro a oito horas por semana de volta para a sessão — em um sistema feito por terapeuta."</p>
+          </div>
+          <div class="card">
+            <span class="badge">Dor</span>
+            <p style="margin-top: var(--space-3);">"Seu consultório não cabe mais em cinco apps — quem fez a kz também não coube."</p>
+          </div>
+          <div class="card">
+            <span class="badge">Identidade</span>
+            <p style="margin-top: var(--space-3);">"Queria só atender — agora você pode. O sistema foi feito por quem queria a mesma coisa."</p>
+          </div>
+        </div>
+
+        <h4>Anatomia</h4>
+        <div class="card muted">
+          <dl class="kv">
+            <dt>Sujeito</dt><dd>Mariana — terapeuta autônoma vivendo como "secretária de si mesma"</dd>
+            <dt>Transformação</dt><dd>De "terapeuta dividida em 5 apps e energia administrativa" → "terapeuta inteira, só atendendo"</dd>
+            <dt>Diferencial</dt><dd>Founder-market fit <em>literal</em> — construído por um terapeuta que viveu a mesma dor</dd>
+          </dl>
+        </div>
+      </details>
+
+      <!-- UNIQUE MECHANISM -->
+      <details>
+        <summary>
+          2 · Unique Mechanism
+          <span class="summary-meta">Sessão Inteira · approved v1</span>
+        </summary>
+
+        <h3 style="color: var(--brand-deep); font-size: var(--text-2xl); margin-top: 0;">Sessão Inteira</h3>
+
+        <blockquote class="hero-quote">"É como uma mesa de trabalho onde tudo já está aberto e à mão — em vez de quatro abas que você precisa lembrar de consultar."</blockquote>
+
+        <p>Sessão Inteira é o jeito da kz organizar a tela onde o terapeuta atende: tudo o que você precisa num atendimento — anotações atuais, notas passadas, planejamento pré-sessão, informações do paciente — em uma tela única, consultável sem sair de contexto.</p>
+        <p>Concorrentes oferecem prontuário, agenda e videochamada como módulos paralelos que você navega. Na kz, a Sessão Inteira é o centro: você abre e já está atendendo — inteira, como você queria.</p>
+
+        <h4>Prova de unicidade</h4>
+        <div class="grid grid-2">
+          <div class="card brand"><strong>Decisão de arquitetura, não tecnologia.</strong> Concorrentes têm módulos paralelos; a kz converge tudo numa tela única.</div>
+          <div class="card brand"><strong>Founder-market fit aplicado ao uso diário.</strong> Nasceu de um terapeuta cansado de alternar entre apps durante o atendimento.</div>
+          <div class="card brand"><strong>Anti-feature-creep como disciplina.</strong> "Simplicidade como disciplina — se uma feature complica, não entra."</div>
+        </div>
+      </details>
+
+      <!-- MECHANISM OF FAILURE -->
+      <details>
+        <summary>
+          3 · Mechanism of Failure
+          <span class="summary-meta">O vilão da categoria · approved v1</span>
+        </summary>
+
+        <blockquote class="villain">A suposição de que consultório se resolve empilhando ferramentas — quando o que a sessão precisa é uma tela só.</blockquote>
+
+        <h4>As 3 formas de falhar</h4>
+        <div class="card">
+          <span class="badge danger">Falha 1</span>
+          <h4>Fragmentação por Soma</h4>
+          <p>A solução (DIY ou vertical) é <strong>coleção de módulos paralelos</strong>, não experiência convergente.</p>
+          <blockquote>"Tá tudo espalhado. Perco tempo entre WhatsApp, Google Agenda, Meet e caderno — tô cansada de gerenciar, não de atender."</blockquote>
+        </div>
+        <div class="card">
+          <span class="badge danger">Falha 2</span>
+          <h4>Desenhado para o Gestor, Não para o Terapeuta</h4>
+          <p>UX herdada de clínica/medicina; solo é caso secundário. Telas carregadas de NFS-e, BI, conta digital.</p>
+          <blockquote>"Queria só atender. Não consigo desligar do trabalho."</blockquote>
+        </div>
+        <div class="card">
+          <span class="badge danger">Falha 3</span>
+          <h4>Sistema Pesado Demais para Uso Real</h4>
+          <p>Verticais empilham features para justificar preço. Terapeuta solo usa 30%, sente que paga por 100%.</p>
+          <blockquote>"E se eu pagar e não usar? Vou cair em mais um sistema pesado que largo no mês 2?"</blockquote>
+        </div>
+
+        <h4>Narrativa de storytelling (plug-and-play)</h4>
+<pre>Antes:     Mariana vivia entre WhatsApp, Google Agenda, Meet e caderno.
+           No fim do dia, cansada de gerenciar — não de atender.
+
+Descobriu: o problema não era ela ser desorganizada. Era a suposição
+           de que consultório se resolve empilhando ferramentas —
+           quando o que a sessão precisa é uma tela só.
+
+Por que:   a categoria nasceu servindo clínicas e foi adaptada para
+           solo. Os sistemas são coleções de módulos paralelos; a
+           experiência é gestão, não atendimento.
+
+Solução:   a kz construiu a Sessão Inteira — uma tela de atendimento
+           onde todos os contextos já estão abertos e à mão.
+
+Agora:     Mariana chega inteira na sessão. O paciente à frente, tudo
+           que ela sabe dele ao alcance. Volta a ser só terapeuta.</pre>
+      </details>
+
+      <!-- OBJECTIONS -->
+      <details>
+        <summary>
+          4 · Objections
+          <span class="summary-meta">5 universais · ordem 3→4→5→1→2</span>
+        </summary>
+
+        <p class="section-intro">Ordem de peso para Mariana (do Ring 3): <strong>#3 (medo de largar)</strong> → #4 (preço) → #5 (confiança) → #1 (escopo) → #2 (context mismatch).</p>
+
+        <details open style="margin-top: var(--space-4);">
+          <summary>#3 · "E se eu pagar e não usar?" <span class="badge danger" style="margin-left: var(--space-2);">⭐ dominante</span></summary>
+          <blockquote>"E se eu pagar e não usar? Vou cair em mais um sistema pesado que largo no mês 2?"</blockquote>
+          <div class="card success">
+            <h4>Resposta curta</h4>
+            <p>"A gente também teria medo. Por isso a kz foi construída pra caber na cabeça já na primeira abertura — não pra ter 'curso de onboarding'."</p>
+          </div>
+          <p>Resposta longa âncora em <em>"simplicidade como disciplina"</em> + mecanismo de saída fácil nos primeiros 7 dias.</p>
+        </details>
+
+        <details>
+          <summary>#4 · "Vale R$ 100+/mês sendo que uso Google Agenda de graça?"</summary>
+          <blockquote>"Vale R$ 100+/mês sendo que uso Google Agenda de graça?"</blockquote>
+          <div class="card success">
+            <h4>Resposta curta</h4>
+            <p>"Google Agenda custa 4-8 horas da sua semana. Se essas horas voltarem pra sessão ou pra você, a kz se paga — e sobra."</p>
+          </div>
+          <p>Honestidade: se tem 0-2 pacientes/semana, talvez ainda não compense. A partir de 3-4, compensa.</p>
+        </details>
+
+        <details>
+          <summary>#5 · "Dados seguros? E vocês são novos?"</summary>
+          <blockquote>"Meus dados clínicos ficam seguros? E vocês são novos, né — como sei que vão estar aqui em 2 anos?"</blockquote>
+          <div class="card success">
+            <h4>Resposta curta</h4>
+            <p>"Dados criptografados, LGPD. Sobre a empresa: pré-lançamento sim, com 2 anos de desenvolvimento e um terapeuta no time de produto."</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>#1 · "Vou precisar complementar com outra ferramenta?"</summary>
+          <blockquote>"Será que resolve mesmo tudo? Vou ter que complementar com outra ferramenta, como sempre?"</blockquote>
+          <div class="card success">
+            <h4>Resposta curta</h4>
+            <p>"A kz cobre agenda, sessão, prontuário, videochamada e comunicação — em uma só tela. Se algo fora disso é crítico, conte antes da assinatura — a gente te ajuda a decidir."</p>
+          </div>
+          <p><em>"Não prometemos ser tudo; prometemos bastar para atender."</em></p>
+        </details>
+
+        <details>
+          <summary>#2 · "Isso é pra psicólogo clínico, não pra hipno/integrativa?"</summary>
+          <blockquote>"Isso é pra psicólogo clínico, né? Eu sou hipnoterapeuta / terapeuta integrativa."</blockquote>
+          <div class="card success">
+            <h4>Resposta curta</h4>
+            <p>"A kz foi construída por um hipnoterapeuta em exercício. Integrativas, psicólogas, psicanalistas e hipnoterapeutas usam o mesmo fluxo — o que muda é o que você anota, não a ferramenta."</p>
+          </div>
+        </details>
+
+        <h4 style="margin-top: var(--space-5);">Objeções específicas (não-universais)</h4>
+        <div class="grid grid-2">
+          <div class="card muted">
+            <p><strong>"Ainda não tem NFS-e / teste psicológico?"</strong></p>
+            <p style="font-size: var(--text-sm);">kz é deliberadamente enxuta. Feature crítica pra você? Conta pro roadmap. Se é clínica/médico, kz pode não ser pra você.</p>
+          </div>
+          <div class="card muted">
+            <p><strong>"E se meu paciente não se adapta ao portal?"</strong></p>
+            <p style="font-size: var(--text-sm);">O portal é opcional por paciente. WhatsApp funciona independente.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- VALUE STACK -->
+      <details>
+        <summary>
+          5 · Value Stack
+          <span class="summary-meta">R$ 2.295/mês em valor · R$ 129 de preço</span>
+        </summary>
+
+        <div class="card warning">
+          <h4>Custo da Inação (status quo sem a kz)</h4>
+          <dl class="kv">
+            <dt>Financeiro</dt><dd>R$ 500–1.500/mês em pacientes perdidos</dd>
+            <dt>Tempo</dt><dd>4–8h/semana em administração invisível → <strong>R$ 2.400–4.800/mês</strong></dd>
+            <dt>Emocional</dt><dd>Corrosão da auto-imagem; "consultório nunca fecha"</dd>
+            <dt>Anualizado</dt><dd><strong>R$ 35k–75k/ano (~R$ 50k média)</strong></dd>
+          </dl>
+        </div>
+
+        <h4>Stack de valor (6 itens)</h4>
+        <table>
+          <thead>
+            <tr><th>#</th><th>Benefício</th><th>Entrega concreta</th><th>Valor/mês</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Agenda + Pacientes centralizados</strong></td><td>Economiza ~1h/semana; elimina dupla marcação</td><td><strong>R$ 600</strong></td></tr>
+            <tr><td>2</td><td><strong>Videochamada + sala de espera</strong></td><td>Sem gerar link; evita ~1 no-show/mês</td><td><strong>R$ 450</strong></td></tr>
+            <tr><td>3</td><td><strong>Notas estruturadas + histórico</strong></td><td>Evita "1 dia procurando nota" × 4/mês</td><td><strong>R$ 600</strong></td></tr>
+            <tr><td>4</td><td><strong>WhatsApp automatizado</strong></td><td>Impede 1-2 no-shows/mês</td><td><strong>R$ 225</strong></td></tr>
+            <tr><td>5</td><td><strong>Portal + Processos personalizados</strong> 🎁</td><td>Continuidade terapêutica entre sessões</td><td><strong>R$ 300</strong></td></tr>
+            <tr><td>6</td><td><strong>Perfil público (captação)</strong></td><td>Substitui Linktree + Doctoralia + site</td><td><strong>R$ 120</strong></td></tr>
+            <tr style="background: var(--brand-05);"><td colspan="3"><strong>TOTAL do stack</strong></td><td><strong style="color: var(--brand-deep); font-size: var(--text-lg);">R$ 2.295</strong></td></tr>
+            <tr><td colspan="3">Preço real</td><td>R$ 129</td></tr>
+            <tr><td colspan="3"><strong>Economia mensal</strong></td><td><strong style="color: var(--success);">R$ 2.166</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4>3 âncoras de preço</h4>
+        <div class="grid grid-3">
+          <div class="card brand">
+            <span class="badge">Âncora 1 ⭐</span>
+            <h4>Custo da Inação</h4>
+            <p><em>"Você já perde entre R$ 500 e R$ 1.500 por mês em pacientes que esqueceram, no-shows sem confirmação e receita captada pela metade. O preço da kz é uma fração disso — e para no primeiro lembrete WhatsApp enviado."</em></p>
+          </div>
+          <div class="card">
+            <span class="badge neutral">Âncora 2</span>
+            <h4>Alternativa humana</h4>
+            <p><em>"Uma secretária meio-período custa R$ 1.500-3.000/mês. A kz faz o que ela faria por R$ 129/mês — sem férias, sem folha, sem perder informação no horário de almoço."</em></p>
+          </div>
+          <div class="card">
+            <span class="badge neutral">Âncora 3</span>
+            <h4>Stack somado</h4>
+            <p><em>"Se você contabilizar o valor de cada parte — 4h recuperadas, no-shows evitados, notas em segundos — o total ultrapassa R$ 2.000/mês. Na kz, você paga R$ 129."</em></p>
+          </div>
+        </div>
+      </details>
+
+      <!-- PROOF HIERARCHY -->
+      <details>
+        <summary>
+          6 · Proof Hierarchy
+          <span class="summary-meta">Pré-lançamento · gaps em Tier 1/2</span>
+        </summary>
+
+        <div class="card warning">
+          <h4>⚠️ Contexto crítico</h4>
+          <p>A kz está pré-lançamento — <strong>Tier 5 é o único tier sólido</strong>. Solução provisória: enquadrar Tier 5 como <strong>Tier 4 narrativo</strong> via origin story do founder. Sustenta os primeiros 30–60 dias até cases reais chegarem.</p>
+        </div>
+
+        <h4>Arsenal atual + gaps</h4>
+        <div class="level-card tier-1 gap">
+          <span class="badge warning">Tier 1 · Quantitativa</span>
+          <p><strong>GAP:</strong> nenhum dado próprio. A coletar: % abertura lembrete WhatsApp, horas recuperadas (self-report), taxa no-show com vs. sem lembrete.</p>
+        </div>
+        <div class="level-card tier-2 gap" style="margin-top: var(--space-2);">
+          <span class="badge warning">Tier 2 · Cases</span>
+          <p><strong>GAP:</strong> zero cases. A coletar: 3 cases publicáveis até dia 30 pós-lançamento (beta + primeiros pagantes).</p>
+        </div>
+        <div class="level-card tier-3" style="margin-top: var(--space-2);">
+          <span class="badge">Tier 3 · Agregada</span>
+          <p>Beta com terapeutas aprovados (volume pequeno, não publicado). A publicar: primeiro número ao dia 30.</p>
+        </div>
+        <div class="level-card tier-4" style="margin-top: var(--space-2);">
+          <span class="badge success">Tier 4 · Autoridade</span>
+          <p>✅ <strong>Founder é hipnoterapeuta/terapeuta em exercício</strong> — autoridade nativa de par.</p>
+        </div>
+        <div class="level-card tier-5" style="margin-top: var(--space-2);">
+          <span class="badge success">Tier 5 · Experiência</span>
+          <p>✅ 2 anos de desenvolvimento · founder terapeuta desde antes da kz · 1 terapeuta product advisor no core team.</p>
+        </div>
+
+        <h4>Roadmap de coleta</h4>
+        <table>
+          <thead><tr><th>Prioridade</th><th>Gap</th><th>Ação</th><th>Deadline</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>Tier 2 vazio</td><td>Entrevistar 3 beta + primeiros pagantes</td><td>Dia 30</td></tr>
+            <tr><td><strong>2</strong></td><td>Tier 1 vazio</td><td>Medir abertura WhatsApp, horas, no-show</td><td>Dia 45</td></tr>
+            <tr><td><strong>3</strong></td><td>Tier 3 estático</td><td>Publicar contagem mensal ativa</td><td>Dia 30 (primeira)</td></tr>
+            <tr><td><strong>4</strong></td><td>Tier 4 externo ausente</td><td>2-3 podcasts + parceria com conselho</td><td>Dia 90</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <!-- CTA LIBRARY -->
+      <details>
+        <summary>
+          7 · CTA Library
+          <span class="summary-meta">15 CTAs base · 7 plataformas</span>
+        </summary>
+
+        <p class="section-intro">Tom pacífico do BRAND_VOICE: <em>"Chamadas à ação suaves: 'Quer testar?', 'Dá pra ver como funciona aqui'. Nunca urgência artificial."</em> Mecanismo de entrada: aprovação manual de novos terapeutas.</p>
+
+        <h4>CTAs por nível de consciência</h4>
+        <div class="level-card tier-5">
+          <span class="badge neutral">Nível 1 · Inconsciente (20%)</span>
+          <ul>
+            <li>Descubra quanto tempo o consultório consome em administração</li>
+            <li>Veja como está a sua semana de atendimento agora</li>
+            <li>Identifique os sinais de que o consultório está levando a sua energia</li>
+          </ul>
+        </div>
+        <div class="level-card tier-4" style="margin-top: var(--space-2);">
+          <span class="badge">Nível 2 · Consciente do sintoma (35% ⭐)</span>
+          <ul>
+            <li>Leia: por que o consultório parece bagunçado (e tem solução simples)</li>
+            <li>Receba o checklist: consultório mais leve em 7 passos</li>
+            <li>Entenda por que você "perde paciente por esquecer" (e não é culpa sua)</li>
+          </ul>
+        </div>
+        <div class="level-card tier-3" style="margin-top: var(--space-2);">
+          <span class="badge">Nível 3 · Buscando solução (25%)</span>
+          <ul>
+            <li>Compare: 5 apps separados vs. um sistema só para o consultório</li>
+            <li>Veja o que muda quando tudo cabe na mesma tela</li>
+            <li>Conheça a ideia por trás da Sessão Inteira</li>
+          </ul>
+        </div>
+        <div class="level-card tier-2" style="margin-top: var(--space-2);">
+          <span class="badge">Nível 4 · Consciente do produto (15%)</span>
+          <ul>
+            <li>Quer conhecer a kz por dentro? Peça seu acesso</li>
+            <li>Converse 20 minutos com o founder (ele é terapeuta)</li>
+            <li>Dá pra ver como funciona aqui</li>
+          </ul>
+        </div>
+        <div class="level-card tier-1" style="margin-top: var(--space-2);">
+          <span class="badge">Nível 5 · Pronto para decidir (5%)</span>
+          <ul>
+            <li>Começar meu consultório na kz</li>
+            <li>Pedir meu acesso agora</li>
+            <li>Quero ativar a minha kz</li>
+          </ul>
+        </div>
+
+        <h4>Por plataforma</h4>
+        <table>
+          <thead><tr><th>Plataforma</th><th>CTA padrão</th></tr></thead>
+          <tbody>
+            <tr><td>📷 <strong>Instagram</strong> (dominante)</td><td>"Link na bio" + <em>"se quiser conhecer a kz"</em> no corpo</td></tr>
+            <tr><td>💼 LinkedIn</td><td>"Se você é terapeuta solo e quer conhecer a kz, o link está no primeiro comentário."</td></tr>
+            <tr><td>🎬 YouTube</td><td>"Link na descrição — sem pressa"</td></tr>
+            <tr><td>📝 Blog</td><td>"Dá pra conhecer a kz por dentro aqui" (inline + lateral + rodapé)</td></tr>
+            <tr><td>📧 Email</td><td>Botão "Conhecer a kz por dentro" (2x: meio + final)</td></tr>
+            <tr><td>🏠 Sales page</td><td>Hero → Stack → FAQ → Footer (verbo sobe a cada seção)</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <!-- RESUMO EXECUTIVO -->
+      <h3>Resumo executivo da copy foundation</h3>
+      <div class="card brand">
+        <dl class="kv">
+          <dt>Promessa</dt><dd>Um sistema feito por terapeuta — para você voltar a ser só terapeuta.</dd>
+          <dt>Mechanism</dt><dd><strong>Sessão Inteira</strong> — mesa de trabalho onde tudo está aberto e à mão</dd>
+          <dt>Vilão</dt><dd>A suposição de que consultório se resolve empilhando ferramentas</dd>
+          <dt>Objeção dominante</dt><dd>"E se eu pagar e não usar?" (#3 da ordem 3→4→5→1→2)</dd>
+          <dt>Âncora de preço</dt><dd>Âncora 1 · Custo da Inação (R$ 500-1.500/mês perdidos)</dd>
+          <dt>CTA BOFU padrão</dt><dd>"Dá pra ver como funciona aqui"</dd>
+          <dt>Revalidação</dt><dd>30 dias após primeiros pagantes reais</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- METADATA -->
+    <section id="metadata">
+      <h2>Metadata</h2>
+      <p class="section-intro">
+        Estado técnico da configuração da kz. Tudo gerado em modo Caminho C (mínimo viável) — contexto ~65% hipótese, a revalidar em 30 dias.
+      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Setup — 8/8 blocos concluídos</h4>
+          <div class="progress">
+            <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+            <div class="progress-label"><span>Progresso</span><span>100%</span></div>
+          </div>
+          <table>
+            <tbody>
+              <tr><td>Bloco 1 · Perfil</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 2 · Produto</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 3 · Público</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 4 · Tom de voz</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 5 · Concorrentes</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 6 · Pilares</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Bloco 7 · Identidade visual</td><td><span class="badge success">✓</span></td></tr>
+              <tr><td>Finalização</td><td><span class="badge success">✓</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h4>Copy Foundation — 7/7 artefatos aprovados</h4>
+          <div class="progress">
+            <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+            <div class="progress-label"><span>Progresso</span><span>100%</span></div>
+          </div>
+          <table>
+            <tbody>
+              <tr><td>BIG_IDEA</td><td><span class="badge success">approved v1</span></td></tr>
+              <tr><td>UNIQUE_MECHANISM</td><td><span class="badge success">approved v1</span></td></tr>
+              <tr><td>MECHANISM_OF_FAILURE</td><td><span class="badge success">approved v1</span></td></tr>
+              <tr><td>OBJECTIONS</td><td><span class="badge success">approved v1</span></td></tr>
+              <tr><td>VALUE_STACK</td><td><span class="badge success">approved v1</span></td></tr>
+              <tr><td>PROOF_HIERARCHY</td><td><span class="badge warning">approved v1 · com gaps</span></td></tr>
+              <tr><td>CTA_LIBRARY</td><td><span class="badge success">approved v1</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3>Estado do contexto</h3>
+      <div class="card muted">
+        <dl class="kv">
+          <dt>Modo</dt><dd>Caminho C · Mínimo viável · Perfil startup</dd>
+          <dt>Maturidade</dt><dd>~25% validado · ~65% hipótese · ~10% estimativa</dd>
+          <dt>Iniciado</dt><dd>2026-04-16</dd>
+          <dt>Revalidação</dt><dd>30 dias após primeiros pagantes reais (~jun–jul/2026)</dd>
+          <dt>Lançamento previsto</dt><dd>Maio/2026</dd>
+        </dl>
+      </div>
+
+      <h3>Arquivos do pacote</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>context/</h4>
+          <ul style="font-family: var(--font-mono); font-size: var(--text-sm);">
+            <li>COMPANY_PROFILE.md</li>
+            <li>PRODUCT_CONTEXT.md</li>
+            <li>AUDIENCE_PROFILES.md</li>
+            <li>BRAND_VOICE.md</li>
+            <li>COMPETITOR_MAP.md</li>
+            <li>CONTENT_PILLARS.md</li>
+            <li>VISUAL_IDENTITY.md</li>
+            <li>PLATFORM_SPECS.md</li>
+            <li>HOOK_LIBRARY.md</li>
+            <li>WORKFLOW_STATE.md</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>context/copy/</h4>
+          <ul style="font-family: var(--font-mono); font-size: var(--text-sm);">
+            <li>INDEX.md</li>
+            <li>COPY_SESSION_STATE.md</li>
+            <li>BIG_IDEA.md</li>
+            <li>UNIQUE_MECHANISM.md</li>
+            <li>MECHANISM_OF_FAILURE.md</li>
+            <li>OBJECTIONS.md</li>
+            <li>VALUE_STACK.md</li>
+            <li>PROOF_HIERARCHY.md</li>
+            <li>CTA_LIBRARY.md</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Campos críticos para revalidação</h3>
+      <ol>
+        <li><strong>Ring 3 da Mariana</strong> ("medo de largar no mês 2") — pergunta aberta nos primeiros 10 fechamentos</li>
+        <li><strong>Custo de inação R$ 500-1.500/mês</strong> — self-report dos primeiros 10 pagantes em 30 dias</li>
+        <li><strong>Distribuição de consciência 20/35/25/15/5</strong> — observar de onde vêm os primeiros pagantes</li>
+        <li><strong>Audiência hipno/integrativa</strong> — validar se chegam ao topo do funil ou permanecem hipótese</li>
+        <li><strong>Tom acolhedor ressoa?</strong> — A/B test com 3-5 posts de tom distinto</li>
+      </ol>
+    </section>
+
+    <footer class="main-footer">
+      <p>Preview gerado em <strong>2026-04-16</strong> por <code>/company-preview kz</code>. Todas as sections presentes.</p>
+      <p style="margin-top: var(--space-2); font-size: var(--text-xs);">Para atualizar: rode <code>/company-preview kz</code> novamente após mudanças no setup ou na copy foundation.</p>
+    </footer>
+  </main>
+
+  <button class="mobile-menu-toggle" aria-label="Abrir navegação" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="17" y2="6"/>
+      <line x1="3" y1="10" x2="17" y2="10"/>
+      <line x1="3" y1="14" x2="17" y2="14"/>
+    </svg>
+  </button>
+
+  <script>
+    (function() {
+      // Smooth scroll com offset
+      document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', e => {
+          const id = link.getAttribute('href');
+          if (!id || !id.startsWith('#')) return;
+          e.preventDefault();
+          const target = document.querySelector(id);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const sidebar = document.querySelector('.sidebar');
+          if (sidebar) sidebar.setAttribute('data-open', 'false');
+        });
+      });
+
+      // Section highlighting
+      const sections = document.querySelectorAll('.main > section[id]');
+      const navLinks = new Map();
+      document.querySelectorAll('.sidebar-nav a').forEach(a => {
+        const id = a.getAttribute('href').replace('#', '');
+        navLinks.set(id, a);
+      });
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            const link = navLinks.get(id);
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(s => observer.observe(s));
+
+      // Copy color on swatch click
+      document.querySelectorAll('.swatch').forEach(swatch => {
+        swatch.addEventListener('click', async () => {
+          const hex = swatch.querySelector('.swatch-hex')?.textContent?.trim();
+          if (!hex) return;
+          try {
+            await navigator.clipboard.writeText(hex);
+            const nameEl = swatch.querySelector('.swatch-name');
+            const original = nameEl.textContent;
+            nameEl.textContent = 'Copiado!';
+            setTimeout(() => { nameEl.textContent = original; }, 1200);
+          } catch {}
+        });
+      });
+
+      // Mobile menu toggle
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', () => {
+          const open = sidebar.getAttribute('data-open') === 'true';
+          sidebar.setAttribute('data-open', String(!open));
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
