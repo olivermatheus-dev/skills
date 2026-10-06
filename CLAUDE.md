@@ -42,3 +42,7 @@ Fluxo típico: `content-ideas` → `ig-post` → `carousel`. Venda: `COPY.md` �
 - Salve a peça na pasta certa (acima).
 - Atualize `tasks.md` se a tarefa estava lá.
 - Aprendizado novo (hook vencedor, objeção nova, frase de cliente) → registre no arquivo de contexto correspondente.
+
+## Construção do hub (roadmap)
+Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (fases e ordem), `IDEIAS.md` (caixa de entrada) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa, com log).
+Ao iniciar uma sessão de construção: leia `roadmap/BACKLOG.md` e o `TASK.md` da tarefa da vez. Ao terminar: atualize status e log, commit + push.

@@ -25,4 +25,4 @@ Para exportar carrosséis em PNG (uma vez): `npm i`.
 - `analisa esse CSV de resultados dos anúncios`
 - `plano de lançamento de 6 semanas`
 
-Veja `CLAUDE.md` para a estrutura e a lista de skills. Ideias futuras em `docs/backlog/`.
+Veja `CLAUDE.md` para a estrutura e a lista de skills. Roadmap de evolução do hub em `roadmap/BACKLOG.md`.
