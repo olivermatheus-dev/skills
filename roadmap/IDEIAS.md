@@ -9,3 +9,5 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-06 · Usuário vai mandar documentação e técnicas de editores profissionais → 002
 - 2026-10-06 · Vídeos de lançamento da kz → 005
 - 2026-10-06 · Editor com timeline, engenharia reversa, filmagem real, lote, Google Ads, interface, pesquisa → DEPOIS.md
+- 2026-10-06 · Inteligência de mercado: anúncios dos concorrentes toda semana, redes próprias e de concorrentes, virais por hashtag/assunto, tendências do Google; tudo centralizado → INTEL.md
+- 2026-10-06 · Tecnologia "GEV/JEV" (nome a confirmar) para ordenar/ranquear de forma barata, sem LLM → INTEL.md

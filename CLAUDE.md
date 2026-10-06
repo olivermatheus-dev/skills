@@ -44,6 +44,6 @@ Fluxo típico: `content-ideas` → `ig-post` → `carousel`. Venda: `COPY.md` �
 - Aprendizado novo (hook vencedor, objeção nova, frase de cliente) → registre no arquivo de contexto correspondente.
 
 ## Construção do hub (roadmap)
-Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).
+Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados), `INTEL.md` (inteligência de mercado, em discussão) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).
 Ao iniciar uma sessão de construção: leia `roadmap/BACKLOG.md` e o `TASK.md` da tarefa da vez. Ao terminar: atualize status e log, faça commit + push.
 Material novo do usuário sobre vídeo/motion → registrar e destilar conforme `roadmap/tasks/002-conhecimento-motion/TASK.md`.

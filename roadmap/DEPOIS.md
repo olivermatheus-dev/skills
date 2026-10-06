@@ -16,4 +16,4 @@ Coisas registradas que **não** fazem parte da prioridade atual. Quando uma volt
 
 ## Gestão
 - **Interface de gestão** de tarefas, projetos e peças (lendo os arquivos do repo).
-- **Central de pesquisa** (mercado, concorrentes, tendências, referências).
+- **Inteligência de mercado** (anúncios de concorrentes semanais, monitoramento de redes e virais, tendências do Google, ranqueador econômico): análise e desenho em `INTEL.md`.

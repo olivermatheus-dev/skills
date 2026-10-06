@@ -27,4 +27,4 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 004 | [Skill de motion graphics v1](tasks/004-skill-motion-v1/TASK.md) | 002, 003 | rascunho |
 | 005 | [Vídeos de lançamento da kz](tasks/005-videos-lancamento-kz/TASK.md) | 004 | rascunho |
 
-Adiado (sem pasta): ver `DEPOIS.md`. Caixa de entrada: `IDEIAS.md`.
+Adiado (sem pasta): ver `DEPOIS.md`. Em discussão: `INTEL.md` (inteligência de mercado). Caixa de entrada: `IDEIAS.md`.
