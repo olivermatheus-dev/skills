@@ -1,40 +1,28 @@
 # Projeto Vídeo — visão
 
-> Documento-mãe do projeto de vídeo. Cada tarefa 1xx detalha uma parte. Atualize aqui quando uma decisão mudar a visão.
+> Documento-mãe do vídeo. Atualize quando uma decisão mudar a visão.
 
-## O que o usuário quer (palavras dele, resumidas)
-- "Praticamente um **aplicativo de edição de vídeo integrado ao Claude Code**, com configurações, presets e skills muito bem definidas."
-- Dois tipos de vídeo: com **base real** (filmagem) e **100% motion design**.
-- Não é uma skill só — é um **conjunto**: começa por um **briefing** (plataforma, formato, duração: Instagram, TikTok, YouTube longo…).
-- **Engenharia reversa:** passar um vídeo de referência e o Claude extrair o estilo — edição, legenda, fonte da legenda (e se varia), estilo dos cortes — para produzir mais vídeos iguais.
-- **Padronização por empresa:** mesma comunicação visual em todos os vídeos; produzir muitos vídeos com a mesma estrutura e direção.
-- **Vários templates por empresa:** cada tipo de conteúdo tem o seu. Vai de uma **moldura com texto estático** em volta do vídeo até uma **edição dinâmica** completa.
-- Parâmetros técnicos de movimento vêm **pré-configurados com qualidade profissional** — não precisa customizar por empresa.
+## Foco agora
+**Motion graphics** (a maior parte dos vídeos): vídeos gerados pelo Claude com HTML/CSS/JS animado → MP4, usando a identidade da marca. Primeiro uso: **vídeos de lançamento da kz**.
 
-## Conceitos (rascunho — validar na 101/102)
+## O que o usuário quer (resumo das palavras dele)
+- Um **conjunto de skills de vídeo**, não uma só, muito bem pensadas e com qualidade de editor profissional.
+- O usuário vai mandar **muita documentação, ideias e técnicas de editores profissionais**. O Claude decide a melhor forma de transformar isso em skills funcionais (tarefa 002, contínua).
+- Começa por um **briefing**: plataforma, formato e duração (Instagram, TikTok, YouTube longo…).
+- **Padronização por empresa**: mesma comunicação visual em todos os vídeos e vários **templates** por empresa (de uma moldura com texto estático até uma edição bem dinâmica).
+- Parâmetros de movimento pré-configurados com qualidade profissional; não precisa personalizar por empresa.
+- Depois (ver `DEPOIS.md`): engenharia reversa de estilo a partir de um vídeo de referência, edição de filmagem real, editor com timeline e produção em lote.
+
+## Conceitos (validar na 003/004)
 | conceito | o que é | onde mora |
 |---|---|---|
-| **Preset global** | defaults técnicos profissionais: timing, easing, safe areas, tamanhos de legenda por formato, ritmo de corte | dentro do editor (`video/presets/`) |
-| **Formato** | plataforma + proporção + duração (reels 9:16 ≤90 s, feed 4:5, YouTube 16:9 longo…) | preset global |
-| **Template de vídeo** | receita de um tipo de conteúdo de uma empresa: layout/moldura, estilo de legenda, ritmo e estilo de corte, overlays, transições, intro/outro, música | `companies/<slug>/video-templates/<nome>/` |
-| **Tokens da marca** | cores, fontes, logo, vetores — lidos pelo template | `companies/<slug>/brand/` |
-| **Briefing** | pedido de um vídeo: template + formato + roteiro + material bruto | pasta do vídeo |
-| **Projeto de vídeo** | briefing + material + render final | local, fora do git |
+| Presets globais | timing, easing, áreas seguras, tamanhos mínimos, ritmo por formato | dentro da skill |
+| Formato | plataforma + proporção + duração (9:16, 4:5, 1:1, 16:9) | preset |
+| Template | receita de um tipo de vídeo de uma empresa: layout, tipografia, animações, transições, ritmo, intro/outro | `companies/<slug>/video-templates/<nome>/` |
+| Marca | cores, fontes, logo, vetores, ícones | `companies/<slug>/brand/` + `context/VISUAL.md` |
+| Projeto de vídeo | briefing + roteiro + cenas + render | `contents/` ou `campaigns/` (MP4 fora do git) |
 
 Fluxo alvo:
 ```
-referência ──(engenharia reversa)──► template da empresa
-roteiro (ig-post) + material bruto ──(briefing)──► projeto de vídeo ──(render)──► MP4
-                                      template + tokens + preset ─┘
+briefing → roteiro (persuasivo) → plano de cenas → HTML/CSS animado (template + marca + presets) → render MP4 → revisão
 ```
-
-## Hipótese de stack (validar na 101)
-- **Render/composição:** Remotion (vídeo como React; templates parametrizados por JSON; lê tokens em JS; render local em MP4).
-- **Base real:** ffmpeg (cortes, reframe, áudio), Whisper (transcrição com tempo por palavra → legendas animadas), detecção de silêncio/cenas.
-- **Engenharia reversa:** ffmpeg extrai frames por troca de cena + Whisper extrai fala/ritmo + o Claude analisa os frames (visão) → rascunho do template; o usuário ajusta.
-- **Preview:** Remotion Studio no navegador local.
-
-## Riscos e limites conhecidos
-- Identificar a **fonte exata** de uma legenda por imagem é aproximado → o Claude sugere a fonte mais parecida do Google Fonts; o usuário confirma.
-- Render de vídeo é pesado: depende da máquina do usuário (CPU/GPU, Windows/Mac).
-- Arquivos pesados ficam fora do git.
