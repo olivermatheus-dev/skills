@@ -1,6 +1,6 @@
 # Auditoria do repositório — out/2026
 
-> Feita por 5 subagentes em paralelo (setup, conteúdo, marketingskills ×2, infra). Nada foi apagado ainda.
+> Feita por 5 subagentes em paralelo. **Status: executada** — o repo já está na estrutura-alvo. Conteúdo antigo recuperável pelo histórico do git (commit `6bde866`).
 
 ## Diagnóstico em 1 frase
 O repo tem ~300k palavras de skills, e menos de 10% disso é conhecimento que o Claude **não** já sabe. O resto é protocolo, estado, template vazio e teoria genérica (AIDA, Cialdini, gerações…).
