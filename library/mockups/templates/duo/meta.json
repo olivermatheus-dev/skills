@@ -1,0 +1,35 @@
+{
+  "id": "duo",
+  "nome": "Notebook + celular",
+  "descricao": "Notebook atrás e celular na frente: mostra que funciona nos dois. Precisa de print do celular em tela2.",
+  "telas": [
+    "tela",
+    "tela2"
+  ],
+  "precisa": [
+    "tela2"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "params": {
+    "reflexo": {
+      "tipo": "bool",
+      "padrao": true
+    },
+    "tema": {
+      "tipo": "opcao",
+      "opcoes": [
+        "",
+        "claro"
+      ],
+      "padrao": ""
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "preview": "preview.png"
+}

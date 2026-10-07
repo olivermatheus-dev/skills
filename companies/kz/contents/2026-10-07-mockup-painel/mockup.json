@@ -1,0 +1,155 @@
+{
+  "empresa": "kz",
+  "escala": 2,
+  "composicoes": [
+    {
+      "id": "a1",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "liso",
+      "transparente": false,
+      "params": {
+        "aparelho": "notebook",
+        "angulo": "frente"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "destaques": [],
+      "arquivo": "png/a1.png"
+    },
+    {
+      "id": "a2",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "gradiente",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador",
+        "angulo": "esquerda"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "destaques": [],
+      "arquivo": "png/a2.png"
+    },
+    {
+      "id": "a3",
+      "template": "zoom",
+      "formato": "4:5",
+      "fundo": "brilho",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "zoom": "proxima-sessao",
+      "destaques": [],
+      "arquivo": "png/a3.png"
+    },
+    {
+      "id": "a4",
+      "template": "cards",
+      "formato": "4:5",
+      "fundo": "desfoque",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "destaques": [
+        {
+          "regiao": "proxima-sessao"
+        },
+        {
+          "regiao": "atalhos"
+        },
+        {
+          "regiao": "proximas-sessoes"
+        }
+      ],
+      "arquivo": "png/a4.png"
+    },
+    {
+      "id": "a5",
+      "template": "anotacoes",
+      "formato": "4:5",
+      "fundo": "liso",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "destaques": [
+        {
+          "regiao": "proxima-sessao"
+        },
+        {
+          "regiao": "atalhos"
+        },
+        {
+          "regiao": "proximas-sessoes"
+        }
+      ],
+      "arquivo": "png/a5.png"
+    },
+    {
+      "id": "a6",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "gradiente",
+      "transparente": false,
+      "params": {
+        "aparelho": "sem-moldura",
+        "angulo": "isometrico"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Seu consultório inteiro em *uma tela*"
+      },
+      "destaques": [],
+      "arquivo": "png/a6.png"
+    }
+  ],
+  "escolhidas": [
+    "a2",
+    "a5"
+  ],
+  "objetivo": "teste da fase A da 028: 6 alternativas a partir do print do painel"
+}

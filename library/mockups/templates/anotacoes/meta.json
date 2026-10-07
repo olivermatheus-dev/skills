@@ -1,0 +1,32 @@
+{
+  "id": "anotacoes",
+  "nome": "Anotações com seta",
+  "descricao": "Tela de frente com 1–4 regiões realçadas e rótulos fora da tela ligados por linha. Para explicar a tela.",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [
+    "destaques com rótulo"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "notebook",
+        "celular",
+        "sem-moldura"
+      ],
+      "padrao": "navegador"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "preview": "preview.png"
+}

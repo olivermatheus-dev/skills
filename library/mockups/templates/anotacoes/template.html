@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · anotações</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Anotações: a tela de frente com 1–4 regiões realçadas e rótulos fora da tela, ligados por linha em cotovelo.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, ds = (MK.cfg.destaques || []).slice(0, 4).filter((d) => d.rotulo);
+  if (!ds.length) throw new Error('o template anotacoes precisa de destaques com rótulo');
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'navegador');
+  const area = MK.cabecalho();
+  const tam = MK.tamChip(), pad = 5, gap = tam;
+  // 1) lados decididos pela posição da região na própria tela (antes de medir o aparelho)
+  const centro = (d) => (MK.paisagem ? (d.x + d.w / 2 - t.ox) / t.w : (d.y + d.h / 2 - t.oy) / t.h);
+  const ord = [...ds].sort((a, b) => centro(a) - centro(b));
+  let lados = [ord.slice(0, Math.ceil(ord.length / 2)), ord.slice(Math.ceil(ord.length / 2))];
+  if (ord.length === 1) lados = centro(ord[0]) > 0.5 ? [[], ord] : [ord, []];
+  // 2) chips com largura máxima pelo espaço do lado (quebram em 2 linhas se preciso) → tamanho da faixa
+  const faixaLat = MK.W * 0.24;
+  const grupos = lados.map((g) => g.map((d) => {
+    const maxW = MK.paisagem ? faixaLat - tam : (area.w - gap * (g.length - 1)) / g.length;
+    const c = MK.chip(d.rotulo, tam, maxW); const b = MK.medir(c);
+    return { d, c, w: b.width, h: b.height };
+  }));
+  const alturaMax = Math.max(...grupos.flat().map((c) => c.h));
+  const faixa = MK.paisagem ? Math.max(...grupos.flat().map((c) => c.w)) + MK.margem : alturaMax + tam * 2.4;
+  const caixa = MK.paisagem
+    ? { w: area.w - 2 * faixa, h: area.h }
+    : { w: area.w, h: area.h - (grupos[0].length ? faixa : 0) - (grupos[1].length ? faixa : 0) };
+  const ap = MK.moldura(tipo, t, caixa, { reflexo: false });
+  const ax = (MK.W - ap.w) / 2;
+  const ay = MK.paisagem ? area.y + (area.h - ap.h) / 2 : area.y + (grupos[0].length ? faixa : 0) + (caixa.h - ap.h) / 2;
+  MK.colocar(ap, ax, ay, 5);
+  const svg = MK.svg();
+  for (const c of grupos.flat()) {
+    c.r = MK.regiaoNoPalco(ap.tela, c.d);
+    MK.el('div', 'mk-realce', { left: c.r.x - pad, top: c.r.y - pad, width: c.r.w + 2 * pad, height: c.r.h + 2 * pad }, MK.palco);
+  }
+  grupos.forEach((grupo, lado) => {
+    if (!MK.paisagem) {
+      grupo.sort((a, b) => a.r.x - b.r.x);
+      let cur = area.x;
+      for (const c of grupo) { c.x = Math.max(cur, Math.min(c.r.x + c.r.w / 2 - c.w / 2, area.x + area.w - c.w)); cur = c.x + c.w + gap; }
+      const sobra = cur - gap - (area.x + area.w);
+      if (sobra > 0) grupo.forEach((c) => (c.x = Math.max(area.x, c.x - sobra)));
+      for (const c of grupo) {
+        c.y = lado === 0 ? ay - tam * 1.6 - c.h : ay + ap.h + tam * 1.6;
+        const cx = c.x + c.w / 2, alvoX = MK.clamp(cx, c.r.x + 10, c.r.x + c.r.w - 10);
+        const y1 = lado === 0 ? c.y + c.h : c.y, y2 = lado === 0 ? c.r.y - pad : c.r.y + c.r.h + pad;
+        const meio = lado === 0 ? ay - tam * 0.8 : ay + ap.h + tam * 0.8;
+        MK.tracar(svg, 'path', { d: `M${cx},${y1} L${cx},${meio} L${alvoX},${meio} L${alvoX},${y2}` });
+        MK.tracar(svg, 'circle', { cx: alvoX, cy: y2, r: 5 });
+      }
+    } else {
+      grupo.sort((a, b) => a.r.y - b.r.y);
+      let cur = area.y;
+      for (const c of grupo) { c.y = Math.max(cur, Math.min(c.r.y + c.r.h / 2 - c.h / 2, area.y + area.h - c.h)); cur = c.y + c.h + gap; }
+      for (const c of grupo) {
+        c.x = lado === 0 ? area.x : area.x + area.w - c.w;
+        const cy = c.y + c.h / 2, alvoY = MK.clamp(cy, c.r.y + 10, c.r.y + c.r.h - 10);
+        const x1 = lado === 0 ? c.x + c.w : c.x, x2 = lado === 0 ? c.r.x - pad : c.r.x + c.r.w + pad;
+        const meio = lado === 0 ? ax - MK.margem * 0.35 : ax + ap.w + MK.margem * 0.35;
+        MK.tracar(svg, 'path', { d: `M${x1},${cy} L${meio},${cy} L${meio},${alvoY} L${x2},${alvoY}` });
+        MK.tracar(svg, 'circle', { cx: x2, cy: alvoY, r: 5 });
+      }
+    }
+    for (const c of grupo) Object.assign(c.c.style, { left: c.x + 'px', top: c.y + 'px' });
+  });
+});
+</script>
+</body>
+</html>

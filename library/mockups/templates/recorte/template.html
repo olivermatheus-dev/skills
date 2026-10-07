@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · recorte</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Recorte: só a tela (ou a região "zoom") com cantos e sombra, para sobrepor em outra peça. Bom com fundo transparente e formato livre.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, z = MK.cfg.zoom;
+  const tt = z ? MK.recorte(t, z) : t;
+  const pad = MK.cfg.formato === 'livre' ? 96 : MK.margem * 1.2;
+  const ap = MK.moldura('sem-moldura', tt, { w: MK.W - 2 * pad, h: MK.H - 2 * pad });
+  MK.colocar(ap, (MK.W - ap.w) / 2, (MK.H - ap.h) / 2);
+});
+</script>
+</body>
+</html>

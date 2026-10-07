@@ -28,3 +28,6 @@ logs/
 *.m4a
 app/dist/
 companies/**/competitors/*/site/
+# estúdio de mockups (028): imagens refazíveis com node tools/mockup/render.mjs <pasta-da-peça>
+companies/*/contents/*mockup*/png/
+companies/*/contents/*mockup*/folha.png

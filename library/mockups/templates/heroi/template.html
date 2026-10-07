@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · herói</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Herói: 1 aparelho em destaque, título opcional em cima.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela;
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'navegador');
+  const angulo = MK.p('angulo', 'frente');
+  const area = MK.cabecalho();
+  const larga = t.w / t.h > 1.2 && tipo !== 'celular';
+  // retrato + tela larga: o aparelho cresce e sangra pela borda (padrão de mockup profissional); notebook só cresce
+  const sangria = Number(MK.p('sangria', MK.retrato && larga ? (tipo === 'notebook' ? 1.08 : angulo === 'frente' ? 1.22 : 1.32) : 1));
+  const giro = angulo === 'frente' ? 1 : angulo === 'isometrico' ? 0.95 : 0.9;
+  const ap = MK.moldura(tipo, t, { w: area.w * giro * sangria, h: area.h * 0.94 * giro * Math.max(1, sangria * 0.9) }, { angulo, reflexo: MK.p('reflexo', true), tema: MK.p('tema', '') });
+  const centro = (MK.W - ap.w) / 2;
+  // ângulo "esquerda" afasta o lado direito: é ele que sangra; "direita", o esquerdo
+  const x = sangria > 1 && tipo !== 'notebook' && angulo !== 'isometrico' ? (angulo === 'direita' ? MK.W - area.x - ap.w : area.x) : centro;
+  const y = area.y + (area.h - ap.h) / 2;
+  if (angulo !== 'isometrico') MK.sombraChao(x + ap.w * 0.06, y + ap.h + Math.min(ap.h * 0.04, 28), ap.w * 0.88);
+  MK.colocar(ap, x, y);
+});
+</script>
+</body>
+</html>

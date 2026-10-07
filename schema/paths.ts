@@ -8,6 +8,8 @@ export const P = {
   tags: (s: string) => join(company(s), 'tags.yml'),
   context: (s: string) => join(company(s), 'context'),
   brand: (s: string) => join(company(s), 'brand'),
+  /** material bruto do estúdio de mockups (028): <AAAA-MM-DD>-<tela>/captura.json + original.png */
+  capturas: (s: string) => join(company(s), 'capturas'),
   board: (s: string) => join(company(s), 'board'),
   personas: (s: string) => join(company(s), 'personas'),
   notes: (s: string) => join(company(s), 'notes'),

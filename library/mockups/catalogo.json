@@ -1,0 +1,98 @@
+{
+  "aparelhos": [
+    {
+      "id": "navegador",
+      "descricao": "janela de navegador própria (bolinhas neutras, endereço opcional), tema claro ou escuro",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado",
+        "isometrico"
+      ]
+    },
+    {
+      "id": "notebook",
+      "descricao": "notebook genérico (tampa escura, base prata), tela 16:10–16:9",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita"
+      ]
+    },
+    {
+      "id": "celular",
+      "descricao": "celular genérico com ilha, grafite ou claro; precisa de print vertical",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado"
+      ]
+    },
+    {
+      "id": "sem-moldura",
+      "descricao": "só a tela com cantos, borda e sombra",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado",
+        "isometrico"
+      ]
+    }
+  ],
+  "fundos": [
+    {
+      "id": "liso",
+      "descricao": "cor de fundo da marca (--bg)"
+    },
+    {
+      "id": "gradiente",
+      "descricao": "degradê tom sobre tom (--bg → --surface-2)"
+    },
+    {
+      "id": "malha",
+      "descricao": "malha de gradiente com os tons suaves da marca (accent-soft, pastéis)"
+    },
+    {
+      "id": "grade",
+      "descricao": "grade fina sobre --bg, some nas bordas"
+    },
+    {
+      "id": "pontos",
+      "descricao": "pontilhado fino sobre --bg, some nas bordas"
+    },
+    {
+      "id": "brilho",
+      "descricao": "brilho suave na cor de destaque atrás do aparelho"
+    },
+    {
+      "id": "desfoque",
+      "descricao": "a própria tela, bem desfocada, ao fundo"
+    },
+    {
+      "id": "transparente",
+      "descricao": "sem fundo (PNG com alfa): para sobrepor"
+    }
+  ],
+  "formatos": {
+    "1:1": [
+      1080,
+      1080
+    ],
+    "4:5": [
+      1080,
+      1350
+    ],
+    "9:16": [
+      1080,
+      1920
+    ],
+    "16:9": [
+      1920,
+      1080
+    ],
+    "livre": "tamanho do recorte + margem para a sombra"
+  }
+}

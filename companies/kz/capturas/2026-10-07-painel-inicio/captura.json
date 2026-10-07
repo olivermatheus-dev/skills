@@ -1,0 +1,65 @@
+{
+  "origem": "print",
+  "arquivo": "original.png",
+  "largura": 1855,
+  "altura": 967,
+  "dpr": 1,
+  "aparelho": "desktop",
+  "corDominante": "#fff9fb",
+  "tags": [
+    "painel",
+    "inicio"
+  ],
+  "dadosFicticios": false,
+  "ocultar": [
+    {
+      "x": 52,
+      "y": 918,
+      "w": 162,
+      "h": 46
+    },
+    {
+      "x": 876,
+      "y": 538,
+      "w": 180,
+      "h": 38
+    },
+    {
+      "x": 876,
+      "y": 598,
+      "w": 180,
+      "h": 38
+    }
+  ],
+  "regioes": {
+    "proxima-sessao": {
+      "x": 355,
+      "y": 108,
+      "w": 445,
+      "h": 198,
+      "rotulo": "Próxima sessão e prontuário a 1 clique"
+    },
+    "atalhos": {
+      "x": 817,
+      "y": 110,
+      "w": 442,
+      "h": 285,
+      "rotulo": "Atalhos: sessão rápida, agenda, novo cliente"
+    },
+    "proximas-sessoes": {
+      "x": 355,
+      "y": 322,
+      "w": 445,
+      "h": 248,
+      "rotulo": "Agenda do dia e as próximas sessões"
+    },
+    "saudacao": {
+      "x": 350,
+      "y": 28,
+      "w": 370,
+      "h": 70
+    }
+  },
+  "data": "2026-10-07",
+  "notas": "Print do painel (Início) da conta do Oliver, 1×. Nomes e e-mails reais borrados em \"ocultar\"; \"Paciente Teste QA\" é fictício. Rótulos das regiões = rascunho, o Oliver ajusta."
+}

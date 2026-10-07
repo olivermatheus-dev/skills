@@ -1,0 +1,20 @@
+{
+  "id": "recorte",
+  "nome": "Só a tela recortada",
+  "descricao": "A tela (ou a região zoom) com cantos e sombra, sem aparelho: para sobrepor em LP, anúncio ou vídeo. Melhor com transparente + livre.",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [],
+  "transparente": true,
+  "animavel": false,
+  "params": {},
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9",
+    "livre"
+  ],
+  "preview": "preview.png"
+}

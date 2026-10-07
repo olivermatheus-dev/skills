@@ -7,7 +7,7 @@ import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
-  COMPANIES, P, STATUS,
+  Capture, Mockup, MockupBrand, COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
@@ -387,6 +387,7 @@ const imagesOf = (dir: string) => list(join(dir, 'png'), /\.(png|jpe?g|webp)$/i)
 const SKIP_DIRS = ['exports', 'render', 'audio', 'png', 'input', 'assets', 'node_modules'];
 function pieceKind(dir: string, videos: string[], hasTimeline: boolean, images: string[]): PieceKind | null {
   if (videos.length || hasTimeline || exists(join(dir, 'composition.html'))) return 'video';
+  if (exists(join(dir, 'mockup.json'))) return 'mockup';
   if (exists(join(dir, 'post.html'))) return 'post';
   if (exists(join(dir, 'carrossel.html')) || images.length > 1) return 'carrossel';
   if (images.length === 1) return 'post';
@@ -565,7 +566,11 @@ export function validateAll():{ file: string; issues: string[] }[] {
     for (const pc of listPieces(d)) {
       if (exists(join(contentsDir(d), pc.path, 'revisao.json'))) tryIt(() => getReview(d, pc.path));
       if (exists(join(contentsDir(d), pc.path, 'peca.json'))) tryIt(() => getPieceMeta(d, pc.path));
+      if (exists(join(contentsDir(d), pc.path, 'mockup.json'))) tryIt(() => readJson(Mockup, join(contentsDir(d), pc.path, 'mockup.json')));
     }
+    // estúdio de mockups (028): capturas e preferências da marca
+    for (const c of list(P.capturas(d), /^\d{4}-\d{2}-\d{2}-/)) if (exists(join(P.capturas(d), c, 'captura.json'))) tryIt(() => readJson(Capture, join(P.capturas(d), c, 'captura.json')));
+    if (exists(join(P.brand(d), 'mockups.json'))) tryIt(() => readJson(MockupBrand, join(P.brand(d), 'mockups.json')));
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

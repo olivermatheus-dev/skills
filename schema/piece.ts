@@ -2,12 +2,12 @@ import { z } from 'zod';
 import { IsoDate, IsoDateTime } from './common';
 
 /**
- * <pasta da peça>/peca.json — ficha da peça (vídeo, carrossel, post ou roteiro): tudo o que NÃO é edição.
+ * <pasta da peça>/peca.json — ficha da peça (vídeo, carrossel, post, roteiro ou mockup): tudo o que NÃO é edição.
  * Nome de exibição (renomear não move a pasta), versão principal, tags, favorito/arquivada, publicação
  * e as notas de texto da peça (legenda, copy, CTA, hashtags, notas livres). Comentários de edição ficam em revisao.json.
  * Opcional: peça sem ficha usa o nome da pasta e o último arquivo exportado.
  */
-export const PIECE_KINDS = ['video', 'carrossel', 'post', 'roteiro'] as const;
+export const PIECE_KINDS = ['video', 'carrossel', 'post', 'roteiro', 'mockup'] as const;
 export const PIECE_NOTE_FIELDS = ['legenda', 'copy', 'cta', 'hashtags', 'notas'] as const;
 
 export const PieceMeta = z.object({

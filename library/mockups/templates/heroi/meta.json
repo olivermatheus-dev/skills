@@ -1,0 +1,55 @@
+{
+  "id": "heroi",
+  "nome": "Herói com 1 aparelho",
+  "descricao": "1 aparelho em destaque (frente ou em ângulo 3D), título opcional em cima. O curinga.",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [],
+  "transparente": true,
+  "animavel": true,
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "notebook",
+        "celular",
+        "sem-moldura"
+      ],
+      "padrao": "navegador (celular se o print for de celular)"
+    },
+    "angulo": {
+      "tipo": "opcao",
+      "opcoes": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado",
+        "isometrico"
+      ],
+      "padrao": "frente"
+    },
+    "reflexo": {
+      "tipo": "bool",
+      "padrao": true
+    },
+    "tema": {
+      "tipo": "opcao",
+      "opcoes": [
+        "",
+        "claro",
+        "escuro"
+      ],
+      "padrao": "",
+      "nota": "celular claro / navegador escuro"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "preview": "preview.png"
+}

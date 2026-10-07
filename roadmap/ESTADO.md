@@ -1,6 +1,6 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca + 028 fase A). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
@@ -12,6 +12,7 @@
 - **Central de peças (2026-10-07):** app → **Conteúdos** = todas as peças (vídeo, carrossel, post, roteiro) em grade com miniatura (vídeo toca ao passar o mouse) ou lista; busca, filtros por tipo/status/tag, favoritos, arquivadas. Cada peça: aba **Ficha** (prévia, arquivos com versão principal, abrir no player/Explorer, renomear, legenda/copy/CTA/hashtags/notas, tags, publicação → `peca.json`, `schema/piece.ts`) + Roteiro + Edição do vídeo. Convenção para agentes/geradores no `protocolo.md` (exports/, png/, `peca.json`). Falta: renomear o arquivo exportado (hoje renomeia só o nome de exibição) e miniatura dos carrosséis gerados pelo novo motor (já funciona se exportar em `png/`).
 - **Roteiro pronto e anotações no roteiro (022 A):** app → **Conteúdos** → **Novo conteúdo** (colar ou enviar .md/.txt/.docx → `contents/AAAA-MM-DD-<tema>/roteiro.md` + tarefa opcional para a IA). Na peça, aba **Roteiro**: selecionar trecho → anotar; Editar; **Aprovar roteiro**. A IA lê com o mesmo `review.mjs` (trecho reencontrado mesmo se as linhas mudarem).
 - **Kit de marca (024):** `brand/brand.json` é a fonte dos tokens → gera o `brand.css` (`npm run brand -- <slug>`; o validate acusa CSS editado à mão). App → Contexto e marca → **Kit de marca**: prévia ao vivo, preset **Minimalista (estilo Apple)**, cores com contraste, fontes, raio/sombras, ícones **Lucide** (`node tools/icon.mjs <nome> --brand <slug>`), fazer / não fazer → bloco no `BRAND.md`. A kz ainda **sem** preset aplicado: decidir no app.
+- **Estúdio de mockups (028 A):** print → `node tools/mockup/captura.mjs <png> --empresa kz` → `node tools/mockup/render.mjs --captura <pasta> --alternativas 6 --formato 4:5` (ou 1 comando com template/aparelho/fundo) → peça tipo **Mockup** na central + `folha.png`. 6 templates (herói, duo, zoom, cards, anotações, recorte), 4 aparelhos com ângulo 3D, fundos da marca, transparente, áreas borradas. Skill `mockup`; contrato em `library/mockups/README.md`. Print em 1× fica macio no zoom: capturar em 2–3×.
 - **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).
 - **Chaves de API por projeto:** app → **Configurações** (grava `companies/<slug>/.env`, fora do git; botão Testar). `.env` da raiz = reserva.
 - **Áudio:** 560 SFX licenciados (EditorPro, comprado, uso comercial) em `library/audio/sfx/`; consultar `library/audio/INDEX.md`. Import de pacotes: `tools/audio/import.mjs`.
@@ -26,6 +27,7 @@
 5. **Revisar o 1º vídeo real** (`companies/kz/contents/2026-10-07-apresentacao-kz/`, v01, 4:5 + 9:16): pontos em `plano.md` > "Para o Oliver conferir" (inclui confirmar se a kz manda lembrete automático).
 6. **ElevenLabs (020):** salvar a chave da kz no app (Configurações → Testar) e mandar os nomes das vozes pré-selecionadas em pt-BR; pronúncia de "kz".
 7. Decisões antigas: mínimo de 6 anúncios por teste no ads-meta? teto de 550–600 palavras por `fmt-*`?
+8. **Mockups (028 A):** ver `contents/2026-10-07-mockup-painel` (app → Conteúdos → Mockup): 2 das 6 servem sem retocar? Liberar fundos além do liso? Respostas às 5 perguntas do `TASK.md` (defaults aplicados). Prints do produto em 2–3× ajudam muito.
 
 ## Próximas tarefas (escolha 1 por sessão)
 | tarefa | o quê | depende de |
@@ -35,7 +37,7 @@
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
-| **028** | Estúdio de mockups (print/link → mockups prontos, editor no app, reuso no vídeo) | 5 perguntas no `TASK.md` |
+| **028 (B–E)** | Mockups: B captura por link (login persistente), C aba Mockups no app, D animações/3D no vídeo, E template a partir de referência | aval da fase A (pendência 8) |
 | **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |
 | 013 · 014 · 009 · 012 | variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
 

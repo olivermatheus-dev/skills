@@ -1,0 +1,39 @@
+{
+  "id": "zoom",
+  "nome": "Zoom no detalhe",
+  "descricao": "Tela inteira + lupa ampliando 1 região, ligadas por linhas. Para \"olha isso aqui\".",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [
+    "zoom"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "notebook",
+        "celular",
+        "sem-moldura"
+      ],
+      "padrao": "navegador"
+    },
+    "ampliacao": {
+      "tipo": "numero",
+      "padrao": "2.2 com print em 2–3×, 1.4 em 1×",
+      "min": 1,
+      "max": 4,
+      "nota": "teto da lupa em × o tamanho do print"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "preview": "preview.png"
+}

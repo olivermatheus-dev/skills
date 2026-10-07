@@ -1,0 +1,5 @@
+{
+  "fundos": ["liso", "gradiente", "brilho", "desfoque"],
+  "padrao": { "formato": "4:5" },
+  "notas": "BRAND.md pede fundo liso creme. Gradiente, brilho e desfoque são tom sobre tom (quase lisos): a validar com o Oliver. Malha, grade e pontos ficam de fora até ele liberar."
+}

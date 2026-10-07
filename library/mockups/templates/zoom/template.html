@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · zoom no detalhe</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Zoom: a tela inteira de frente + uma lupa ampliando a região "zoom", ligada por 2 linhas.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, z = MK.cfg.zoom;
+  if (!z) throw new Error('o template zoom precisa da região de zoom (--zoom <regiao> ou x,y,w,h)');
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'navegador');
+  const area = MK.cabecalho();
+  const gap = MK.margem * 0.7;
+  const ra = z.w / z.h;
+  const maxAmp = Number(MK.p('ampliacao', MK.dpr >= 2 ? 2.2 : 1.4)); // lupa no máximo N× o tamanho do print
+  let ap, lupa = {};
+  if (!MK.paisagem) {
+    ap = MK.moldura(tipo, t, { w: area.w, h: area.h * (tipo === 'celular' ? 0.62 : 0.52) }, { reflexo: false });
+    MK.colocar(ap, (MK.W - ap.w) / 2, area.y);
+    const y1 = area.y + ap.h + gap, h1 = area.y + area.h - y1;
+    lupa.w = Math.min(area.w * 0.92, h1 * ra * 1.15, z.w * maxAmp);
+    lupa.h = lupa.w / ra;
+    lupa.x = (MK.W - lupa.w) / 2;
+    lupa.y = Math.max(area.y + ap.h * 0.55, y1 + (h1 - lupa.h) / 2 - ap.h * 0.1);
+  } else {
+    ap = MK.moldura(tipo, t, { w: area.w * 0.6, h: area.h }, { reflexo: false });
+    MK.colocar(ap, area.x, area.y + (area.h - ap.h) / 2);
+    const x1 = area.x + ap.w + gap, w1 = area.x + area.w - x1;
+    lupa.w = Math.min(w1 + ap.w * 0.12, area.h * 0.8 * ra, z.w * maxAmp);
+    lupa.h = lupa.w / ra;
+    lupa.x = area.x + area.w - lupa.w;
+    lupa.y = area.y + (area.h - lupa.h) / 2;
+  }
+  const r = MK.regiaoNoPalco(ap.tela, z);
+  const pad = 5;
+  MK.el('div', 'mk-realce', { left: r.x - pad, top: r.y - pad, width: r.w + 2 * pad, height: r.h + 2 * pad }, MK.palco);
+  const svg = MK.svg();
+  const linha = (x1, y1, x2, y2) => MK.tracar(svg, 'line', { x1, y1, x2, y2 });
+  if (!MK.paisagem) { linha(r.x - pad, r.y + r.h + pad, lupa.x, lupa.y); linha(r.x + r.w + pad, r.y + r.h + pad, lupa.x + lupa.w, lupa.y); }
+  else { linha(r.x + r.w + pad, r.y - pad, lupa.x, lupa.y); linha(r.x + r.w + pad, r.y + r.h + pad, lupa.x, lupa.y + lupa.h); }
+  const caixa = MK.el('div', 'mk-lupa mk-abs');
+  caixa.appendChild(MK.imagem(MK.recorte(t, z), lupa.w, lupa.h));
+  MK.colocar(caixa, lupa.x, lupa.y, 15);
+  if (z.rotulo) {
+    const tam = MK.tamChip();
+    const c = MK.chip(z.rotulo, tam);
+    c.style.left = MK.clamp(lupa.x + tam * 0.8, area.x, area.x + area.w - MK.medir(c).width) + 'px';
+    c.style.top = lupa.y - c.getBoundingClientRect().height / 2 + 'px';
+    c.style.zIndex = 16;
+  }
+});
+</script>
+</body>
+</html>

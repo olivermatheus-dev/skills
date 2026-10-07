@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · cards flutuando</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Cards: a tela ao fundo (esmaecida) e 1–3 regiões ("destaques") saltando à frente como cards, em cascata.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, ds = (MK.cfg.destaques || []).slice(0, 3);
+  if (!ds.length) throw new Error('o template cards precisa de 1 a 3 destaques (regiões da tela)');
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'navegador');
+  const area = MK.cabecalho();
+  const ap = MK.moldura(tipo, t, { w: area.w * (MK.paisagem ? 0.66 : 1), h: area.h * (MK.paisagem ? 0.9 : 0.58) }, { reflexo: false, angulo: MK.p('angulo', 'frente') });
+  MK.colocar(ap, MK.paisagem ? area.x : (MK.W - ap.w) / 2, MK.paisagem ? area.y + (area.h - ap.h) / 2 : area.y, 2);
+  ap.tela.appendChild(MK.el('div', 'mk-escurecer'));
+
+  const n = ds.length, tam = MK.tamChip();
+  const zona = MK.paisagem
+    ? { x: area.x + area.w * 0.4, y: area.y, w: area.w * 0.6, h: area.h }
+    : { x: area.x, y: area.y + ap.h * 0.45, w: area.w, h: area.y + area.h - (area.y + ap.h * 0.45) };
+  const amp = Number(MK.p('ampliacao', MK.dpr >= 2 ? 1.7 : 1.3));
+  const cards = ds.map((d) => {
+    const tc = MK.recorte(t, d);
+    const w = Math.min(zona.w * 0.8, tc.w * amp);
+    return { d, tc, w, h: w * tc.h / tc.w };
+  });
+  // cascata sem sobrepor: espaço para o rótulo entre um card e outro; se não couber, todos encolhem juntos
+  const vao = tam * 1.8;
+  const somaH = cards.reduce((s, c) => s + c.h, 0);
+  const k = Math.min(1, (zona.h - vao * (n - 1)) / somaH);
+  for (const c of cards) { c.w *= k; c.h *= k; }
+  let y = zona.y + Math.max(0, (zona.h - somaH * k - vao * (n - 1)) / 2);
+  cards.forEach((c, i) => {
+    const esq = i % 2 === 0;
+    const x = n === 1 ? zona.x + (zona.w - c.w) / 2 : esq ? zona.x : zona.x + zona.w - c.w;
+    const caixa = MK.el('div', 'mk-card mk-3d', { width: c.w, height: c.h, transform: `rotateY(${esq ? 5 : -5}deg) translateZ(${20 + i * 10}px)` });
+    caixa.appendChild(MK.imagem(c.tc, c.w, c.h));
+    MK.colocar(caixa, x, y, 20 + i);
+    if (c.d.rotulo) {
+      const ch = MK.chip(c.d.rotulo, tam, zona.w * 0.9);
+      const b = MK.medir(ch);
+      ch.style.left = MK.clamp(esq ? x + tam * 0.8 : x + c.w - b.width - tam * 0.8, area.x, area.x + area.w - b.width) + 'px';
+      ch.style.top = y - b.height * 0.55 + 'px';
+      ch.style.zIndex = 30 + i;
+    }
+    y += c.h + vao;
+  });
+});
+</script>
+</body>
+</html>

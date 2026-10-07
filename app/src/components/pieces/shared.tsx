@@ -19,6 +19,7 @@ export const KIND_LABEL: Record<PieceKind, { label: string; color: string }> = {
   carrossel: { label: 'Carrossel', color: '#0891b2' },
   post: { label: 'Post', color: '#db2777' },
   roteiro: { label: 'Roteiro', color: '#d97706' },
+  mockup: { label: 'Mockup', color: '#059669' },
 };
 export const STATUS_LABEL: Record<NonNullable<Review['status']>, { label: string; color: string }> = {
   rascunho: { label: 'Rascunho', color: '#71717a' },

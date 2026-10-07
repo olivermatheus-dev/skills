@@ -20,9 +20,10 @@ companies/<slug>/
   context/          BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
   brand/            BRAND.md (regras de uso) · brand.json (tokens, editável no app) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  templates de vídeo da empresa
-  contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md…)
+  contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md, mockup.json…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
   board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
+  capturas/         AAAA-MM-DD-<tela>/ (original.png + captura.json: regiões e áreas a borrar) → skill `mockup`
   project.yml · tags.yml · personas/ · notes/ · ideas/ · competitors/   (dados tipados: schema/, validar com npm run validate)
 ```
 **Interface local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto). Ver `app/README.md`. Todo arquivo de dados segue `schema/`; depois de editar à mão, rode `npm run validate`.
@@ -43,6 +44,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `content-ideas` | pautas, calendário, engenharia reversa de criadores |
 | `ig-post` | roteiro de carrossel, reels, post e legenda |
 | `carousel` | gerar o carrossel em HTML e exportar PNG |
+| `mockup` | print → mockups prontos (aparelho, ângulo 3D, fundo, zoom, cards, anotações, transparente), alternativas + folha de contato |
 | `ads-meta` | criar e analisar anúncios Meta/Instagram |
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
 | `launch-plan` | plano de lançamento semana a semana |
