@@ -20,6 +20,11 @@ library/audio/
 5. **Pacote inteiro** (ex.: o que estiver em `_inbox/audio/`): `node tools/audio/import.mjs library/audio/imports/<origem>.map.json --dry` → conferir → rodar. Licença do pacote: `node tools/audio/catalog.mjs license --origin <origem> "<licença>"`.
 6. **`auto: true`** = intensidade, caráter e peso foram **inferidos do nome**, não ouvidos. Ao usar e ouvir, corrija a ficha e tire o `auto`.
 
+## Licenças registradas
+| origem | licença | atribuição | observação |
+|---|---|---|---|
+| EditorPro | `EditorPro-comprado (uso comercial)` | não | pacote comprado pelo Oliver; uso comercial (posts e anúncios) liberado; 560 SFX |
+
 ## Categorias em uso
 | pasta | o quê | origem |
 |---|---|---|

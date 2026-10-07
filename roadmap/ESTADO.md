@@ -44,7 +44,7 @@
 
 - **Máquina local pronta (2026-10-07):** Node 22 fixado em `.nvmrc` + `engines` (fnm troca sozinho), dependências instaladas, Chromium do Playwright, ffmpeg, yt-dlp e Python presentes. `npm run app` corrigido no Windows (caminho com espaço no `vite.config.ts`).
 - **Arquitetura de assets definida:** mapa em `library/README.md`. `library/fx` saiu de `visual/` (alinhado à 014); criados `motion/`, `looks/`, `templates/`. Entrada bruta em `_inbox/{audio,visual,video}/`.
-- **Biblioteca de SFX importada (2026-10-07):** 560 sons do pacote EditorPro (~210 min) em `library/audio/sfx/` (14 categorias, foley com 5 subpastas), catalogados com duração, pico e tom; índice em `library/audio/INDEX.md`. Ferramenta `tools/audio/import.mjs` + `catalog.mjs license|index|search --q`. **Falta: o Oliver informar a licença do EditorPro** (até lá nada aparece na busca). 3 duplicatas exatas ficaram em `_inbox/audio/SFX Risers PRO/` para ele apagar.
+- **Biblioteca de SFX importada (2026-10-07):** 560 sons do pacote EditorPro (~210 min) em `library/audio/sfx/` (14 categorias, foley com 5 subpastas), catalogados com duração, pico e tom; índice em `library/audio/INDEX.md`. Ferramenta `tools/audio/import.mjs` + `catalog.mjs license|index|search --q`. Licença registrada: pacote comprado pelo Oliver, uso comercial liberado (`EditorPro-comprado (uso comercial)`). 3 duplicatas exatas ficaram em `_inbox/audio/SFX Risers PRO/` para ele apagar.
 
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
