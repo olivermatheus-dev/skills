@@ -17,6 +17,8 @@ Transforma texto pronto (roteiro ou texto colado) em slides visuais. Não reescr
 
 ## Processo
 
+**Anotações do Oliver:** se a pasta da peça tem `revisao.json` com anotações abertas (app → Conteúdos → aba Roteiro), comece por `node tools/review.mjs <pasta>`: cada uma vem com o trecho e a linha atual; corrija e rode `… resolve <id> "o que mudou"`. Roteiro pronto do Oliver (colado no app) é a fonte: ajuste forma, nunca o sentido.
+
 1. **Ler** BRAND.md, VOICE.md e o roteiro. Se faltar a empresa ou a peça, pergunte.
 2. **Propor o outline** em **uma única tabela** e esperar o "ok":
 

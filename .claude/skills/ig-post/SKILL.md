@@ -12,6 +12,7 @@ Escreve o **texto**. A peça visual é feita depois por outra skill (ver Handoff
 **Precedência:** duração, hashtags e CTA definidos no `CONTENT_STRATEGY.md` vencem os defaults daqui.
 
 ## Processo
+**Anotações do Oliver:** se a pasta da peça tem `revisao.json` com anotações abertas (app → Conteúdos → aba Roteiro), comece por `node tools/review.mjs <pasta>`: cada uma vem com o trecho e a linha atual; corrija e rode `… resolve <id> "o que mudou"`. Roteiro pronto do Oliver (colado no app) é a fonte: ajuste forma, nunca o sentido.
 1. **Briefing em 1 linha** (confirmar só se ambíguo): formato · pauta · pilar · funil · sinal-alvo (envio, salvar, comentário, clique).
 2. **5 hooks** de tipos diferentes → recomende 1 em uma linha e siga (o usuário pode trocar).
 3. **Escrever** no formato abaixo.

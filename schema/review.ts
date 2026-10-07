@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { IsoDateTime } from './common';
+import { IsoDate, IsoDateTime } from './common';
 
 /**
- * <pasta da peça>/revisao.json — anotações do Oliver num vídeo (tarefa 022, v1 enxuta).
+ * <pasta da peça>/revisao.json — anotações do Oliver numa peça (tarefa 022): vídeo (v1 enxuta) e textos/roteiro (fase A).
  * Âncoras por id (cena, fala, evento) continuam válidas se o tempo mudar; `t` é só a posição vista no player.
  * `tipo`: corrigir (bug) · ajustar (ajuste fino) · template (promover a componente da galeria, tarefa 014) · ok (aprovado, nada a fazer).
  */
@@ -14,6 +14,8 @@ export const ReviewAnchor = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('tempo'), t: T, end: T.optional() }),
   /** `selector` = id estável do elemento no composition.html (ex.: "#h1" ou "[data-bloco=card-1]"); `t` = quando aparece o problema */
   z.object({ kind: z.literal('elemento'), selector: z.string().min(1), t: T, scene: z.string().optional(), event: z.string().optional() }),
+  /** trecho de um texto da peça (roteiro.md, plano.md…): `quote` reencontra o trecho se as linhas mudarem; `line` = 1ª linha quando anotado */
+  z.object({ kind: z.literal('roteiro'), file: z.string().regex(/^[\w.-]+\.(md|txt)$/, 'arquivo .md/.txt da pasta da peça').default('roteiro.md'), quote: z.string().min(1), line: z.number().int().min(1) }),
 ]);
 export type ReviewAnchor = z.infer<typeof ReviewAnchor>;
 
@@ -34,7 +36,11 @@ export const ReviewComment = z.object({
 });
 export type ReviewComment = z.infer<typeof ReviewComment>;
 
+export const REVIEW_STATUS = ['rascunho', 'em_revisao', 'aprovado'] as const;
 export const Review = z.object({
+  status: z.enum(REVIEW_STATUS).optional(),
+  /** trava real: roteiro aprovado antes de produzir; v1 aprovada antes da voz final (data AAAA-MM-DD) */
+  approvals: z.object({ roteiro: IsoDate.optional(), v1: IsoDate.optional(), final: IsoDate.optional() }).optional(),
   comments: z.array(ReviewComment).default([]),
 }).superRefine((r, ctx) => {
   const seen = new Set<string>();

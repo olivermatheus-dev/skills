@@ -24,6 +24,7 @@ export const qk = {
   secrets: (slug: string) => ['secrets', slug] as const,
   pieces: (slug: string) => ['pieces', slug] as const,
   piece: (slug: string, path: string) => ['piece', slug, path] as const,
+  pieceText: (slug: string, path: string, file: string) => ['piece-text', slug, path, file] as const,
 };
 
 // ---------- consultas ----------
@@ -48,6 +49,8 @@ export const q = {
   secrets: (slug: string) => queryOptions({ queryKey: qk.secrets(slug), queryFn: () => api.secrets(slug), enabled: !!slug }),
   pieces: (slug: string) => queryOptions({ queryKey: qk.pieces(slug), queryFn: () => api.pieces(slug), enabled: !!slug }),
   piece: (slug: string, path: string) => queryOptions({ queryKey: qk.piece(slug, path), queryFn: () => api.piece(slug, path), enabled: !!slug && !!path }),
+  // texto com salvar explícito: não recarrega por baixo da edição
+  pieceText: (slug: string, path: string, file: string) => queryOptions({ queryKey: qk.pieceText(slug, path, file), queryFn: () => api.pieceText(slug, path, file), enabled: !!slug && !!path && !!file, staleTime: Infinity, refetchOnWindowFocus: false }),
 };
 
 export const useProjects = () => useQuery(q.projects());
@@ -68,6 +71,7 @@ export const useBrandCss = (slug: string) => useQuery(q.brandCss(slug));
 export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
 export const usePieces = (slug: string) => useQuery(q.pieces(slug));
 export const usePiece = (slug: string, path: string) => useQuery(q.piece(slug, path));
+export const usePieceText = (slug: string, path: string, file: string) => useQuery(q.pieceText(slug, path, file));
 
 // ---------- pré-carga ----------
 /** o que cada tela lê (para pré-carregar ao passar o mouse no menu) */

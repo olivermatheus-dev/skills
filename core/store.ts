@@ -316,9 +316,12 @@ export const listContext = (slug: string) => list(P.context(slug), /\.md$/).map(
 export const getContext = (slug: string, name: string) => read(join(P.context(slug), basename(name)));
 export const saveContext = (slug: string, name: string, txt: string) => write(join(P.context(slug), basename(name)), txt);
 
-// ---------- Validação geral ----------
-// ---------- Peças (vídeos) e revisão por anotações (tarefa 022) ----------
-export interface Piece { path: string; hasTimeline: boolean; videos: string[]; openComments: number; totalComments: number }
+// ---------- Peças (vídeos, carrosséis, roteiros) e revisão por anotações (tarefa 022) ----------
+export type PieceKind = 'video' | 'carrossel' | 'roteiro';
+export interface Piece {
+  path: string; kind: PieceKind; hasTimeline: boolean; videos: string[]; texts: string[];
+  status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number;
+}
 const contentsDir = (slug: string) => join(COMPANIES, slug, 'contents');
 /** caminho da peça relativo a contents/ (ex.: "2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
 function piecePath(slug: string, path: string) {
@@ -326,18 +329,34 @@ function piecePath(slug: string, path: string) {
   return join(contentsDir(slug), path);
 }
 const videosOf = (dir: string) => list(join(dir, 'exports'), /\.mp4$/i).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+/** textos anotáveis da peça: .md/.txt na raiz da pasta, roteiro primeiro */
+const TEXT_FIRST = ['roteiro.md', 'legenda.md', 'plano.md'];
+const textsOf = (dir: string) => list(dir, /^[\w.-]+\.(md|txt)$/i).sort((a, b) => {
+  const ia = TEXT_FIRST.indexOf(a), ib = TEXT_FIRST.indexOf(b);
+  return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
+});
+const SKIP_DIRS = ['exports', 'render', 'audio', 'png', 'input', 'assets', 'node_modules'];
+function pieceKind(dir: string, videos: string[], hasTimeline: boolean): PieceKind | null {
+  if (videos.length || hasTimeline || exists(join(dir, 'composition.html'))) return 'video';
+  if (exists(join(dir, 'carrossel.html')) || exists(join(dir, 'png'))) return 'carrossel';
+  if (textsOf(dir).length || exists(join(dir, 'revisao.json'))) return 'roteiro';
+  return null;
+}
 export function listPieces(slug: string): Piece[] {
   const out: Piece[] = [];
   const walk = (rel: string, depth: number) => {
     const dir = join(contentsDir(slug), rel);
     const videos = videosOf(dir), hasTimeline = exists(join(dir, 'timeline.json'));
-    if (rel && (videos.length || hasTimeline || exists(join(dir, 'revisao.json')))) {
-      let cs: Review['comments'] = [];
-      try { cs = getReview(slug, rel).comments; } catch { /* arquivo inválido: aparece no npm run validate */ }
-      out.push({ path: rel.replace(/\\/g, '/'), hasTimeline, videos, openComments: cs.filter((c) => c.status === 'aberto').length, totalComments: cs.length });
+    const kind = rel ? pieceKind(dir, videos, hasTimeline) : null;
+    if (kind) {
+      const path = rel.replace(/\\/g, '/'); // no Windows o join usa "\": o caminho da peça é sempre com "/"
+      let r: Review = { comments: [] };
+      try { r = getReview(slug, path); } catch { /* arquivo inválido: aparece no npm run validate */ }
+      out.push({ path, kind, hasTimeline, videos, texts: textsOf(dir), status: r.status, approvals: r.approvals,
+        openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length });
     }
     if (depth < 3) for (const d of exists(dir) ? readdirSync(abs(dir)) : []) {
-      if (['exports', 'render', 'audio', 'png', 'input'].includes(d) || d.startsWith('qc')) continue;
+      if (SKIP_DIRS.includes(d) || d.startsWith('qc') || d.startsWith('.')) continue;
       if (statSync(abs(join(dir, d))).isDirectory()) walk(join(rel, d), depth + 1);
     }
   };
@@ -350,7 +369,64 @@ export function getPiece(slug: string, path: string) {
   const tl = join(dir, 'timeline.json');
   // previews = pastas render/<formato>/ com index.html (composição montada): a UI renderiza ao vivo para clicar no elemento
   const previews = exists(join(dir, 'render')) ? readdirSync(abs(join(dir, 'render'))).filter((d) => exists(join(dir, 'render', d, 'index.html'))) : [];
-  return { path, timeline: exists(tl) ? JSON.parse(read(tl)) : null, videos: videosOf(dir), previews, review: getReview(slug, path) };
+  const videos = videosOf(dir), hasTimeline = exists(tl);
+  return { path, kind: pieceKind(dir, videos, hasTimeline) ?? 'roteiro', timeline: hasTimeline ? JSON.parse(read(tl)) : null, videos, texts: textsOf(dir), previews, review: getReview(slug, path) };
+}
+const textFile = (slug: string, path: string, file: string) => {
+  if (!/^[\w.-]+\.(md|txt)$/i.test(file)) throw new ValidationError(file, ['só .md/.txt na raiz da peça']);
+  return join(piecePath(slug, path), file);
+};
+export function getPieceText(slug: string, path: string, file: string) {
+  const f = textFile(slug, path, file);
+  if (!exists(f)) throw new ValidationError(f, ['arquivo não encontrado']);
+  return { file, text: read(f) };
+}
+export function savePieceText(slug: string, path: string, file: string, text: string) {
+  const f = textFile(slug, path, file);
+  if (!exists(piecePath(slug, path))) throw new ValidationError(f, ['peça não encontrada']);
+  write(f, text.endsWith('\n') ? text : `${text}\n`);
+  return { file, text: read(f) };
+}
+
+/**
+ * Novo conteúdo a partir de um roteiro pronto (colado ou enviado): cria contents/AAAA-MM-DD-<tema>/roteiro.md
+ * e, se pedido, a tarefa no quadro para a IA produzir a peça a partir dele.
+ */
+export async function createPiece(slug: string, input: { title: string; text?: string; upload?: { name: string; base64: string }; format?: string; notes?: string; task?: boolean }) {
+  const title = input.title?.trim();
+  if (!title) throw new ValidationError('contents', ['dê um nome ao conteúdo']);
+  let text = input.text ?? '';
+  if (input.upload) {
+    const buf = Buffer.from(input.upload.base64, 'base64');
+    if (/\.docx$/i.test(input.upload.name)) {
+      const { docxToText } = await import('./docx');
+      const t = docxToText(buf);
+      if (t == null) throw new ValidationError(input.upload.name, ['não consegui ler o .docx (salve de novo no Word ou cole o texto)']);
+      text = t;
+    } else if (/\.(md|txt|markdown)$/i.test(input.upload.name)) text = buf.toString('utf8').replace(/^﻿/, '');
+    else throw new ValidationError(input.upload.name, ['envie .md, .txt ou .docx']);
+  }
+  text = text.replace(/\r\n/g, '\n').trim();
+  if (!text) throw new ValidationError('roteiro.md', ['o roteiro está vazio']);
+  if (!/^#\s/m.test(text.split('\n').slice(0, 3).join('\n'))) text = `# ${title}\n\n${text}`;
+  const base = `${today()}-${slugify(title).split('-').slice(0, 6).join('-')}`;
+  let rel = base, n = 2;
+  while (exists(join(contentsDir(slug), rel))) rel = `${base}-${n++}`;
+  write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
+  saveReview(slug, rel, { status: 'rascunho', comments: [] });
+  let task: z.infer<typeof Task> | undefined;
+  if (input.task) {
+    const fmt = input.format?.trim();
+    const body = [
+      '', `Produzir ${fmt ? `um(a) **${fmt}**` : 'a peça'} a partir do roteiro pronto do Oliver: \`contents/${rel}/roteiro.md\`.`,
+      `O roteiro é a fonte: não mudar o sentido. Antes de produzir, ler e resolver as anotações abertas: \`node tools/review.mjs companies/${slug}/contents/${rel}\`.`,
+      ...(input.notes?.trim() ? ['', `Observações do Oliver: ${input.notes.trim()}`] : []),
+      '', '## Checklist', '- [ ] resolver as anotações abertas do roteiro (se houver)', '- [ ] escolher o formato `fmt-*` e produzir na pasta da peça', '- [ ] revisor', '',
+      '## Log', `- ${today()} · criada pela interface (roteiro pronto)`, '',
+    ].join('\n');
+    task = saveTask(slug, { title: `Produzir a partir do roteiro: ${title}`, board: 'conteudo', status: 'todo', assignee: 'ai', links: [`contents/${rel}/roteiro.md`] }, body).data;
+  }
+  return { path: rel, task };
 }
 export function getReview(slug: string, path: string): Review {
   const f = join(piecePath(slug, path), 'revisao.json');
@@ -371,7 +447,8 @@ export const pieceFile = (slug: string, path: string, file: string) => {
   return existsSync(f) ? f : null;
 };
 
-export function validateAll(): { file: string; issues: string[] }[] {
+// ---------- Validação geral ----------
+export function validateAll():{ file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
   const tryIt = (fn: () => unknown) => {
     try { fn(); } catch (e) {

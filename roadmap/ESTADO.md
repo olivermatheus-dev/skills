@@ -1,6 +1,6 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (sessão 023: análise de concorrentes por módulos). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-07 (sessão 022 fase A: roteiro pronto + anotações no roteiro). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
@@ -8,7 +8,9 @@
 - **Concorrentes (023, feita):** 10 da kz com análise completa (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui). App: aba **Análise** + **Comparar**. Rodar de novo/pontual: marcar no app → "roda a fila de concorrentes" (skill `analise-concorrentes`).
 - **Vídeo (003, feita):** `tools/video-kit/` — HyperFrames 0.8.94 + GSAP (do kit do Ludus). Comandos em `tools/video-kit/README.md`, armadilhas em `GUIA-TECNICO.md`, molde em `library/templates/video/base/`, exemplo em `companies/kz/contents/2026-10-07-teste-kit/` (teste, não publicar; v02 com a Thalita).
   - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`; offline: `win-maria`) → aval → **Eleven v4 pela API** (`elevenlabs.mjs`, skill `elevenlabs`: emoção por audio tags em `vo[].el`, tempos exatos, encaixe automático). Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
-- **Revisão de vídeo por anotações (022 v1):** app → **Conteúdos** (player + faixas da `timeline.json`; anota cena/fala/evento/tempo/elemento, tipo corrigir|ajustar|template|ok → `revisao.json`). IA: `node tools/review.mjs <pasta>` (abertas + contexto + quadros) e `… resolve <id> "o que mudou"`. Regras na skill `video`.
+- **Revisão de vídeo por anotações (022 v1):** app → **Conteúdos** (player + faixas da `timeline.json`; anota cena/fala/evento/tempo/elemento — v1.1: modo "Clicar no elemento" renderiza a composição ao vivo e captura o `#id` clicando no quadro, tipo corrigir|ajustar|template|ok → `revisao.json`). IA: `node tools/review.mjs <pasta>` (abertas + contexto + quadros) e `… resolve <id> "o que mudou"`. Regras na skill `video`.
+- **Roteiro pronto e anotações no roteiro (022 A):** app → **Conteúdos** → **Novo conteúdo** (colar ou enviar .md/.txt/.docx → `contents/AAAA-MM-DD-<tema>/roteiro.md` + tarefa opcional para a IA). Na peça, aba **Roteiro**: selecionar trecho → anotar; Editar; **Aprovar roteiro**. A IA lê com o mesmo `review.mjs` (trecho reencontrado mesmo se as linhas mudarem).
+  - ⚠ **v1.1 (clicar no elemento) precisa ser reaplicada** em `app/src/components/pieces/VideoReview.tsx`: a fase A reescreveu a tela e o código da v1.1, feito em paralelo noutra sessão, não ficou no arquivo.
 - **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).
 - **Chaves de API por projeto:** app → **Configurações** (grava `companies/<slug>/.env`, fora do git; botão Testar). `.env` da raiz = reserva.
 - **Áudio:** 560 SFX licenciados (EditorPro, comprado, uso comercial) em `library/audio/sfx/`; consultar `library/audio/INDEX.md`. Import de pacotes: `tools/audio/import.mjs`.
@@ -29,8 +31,8 @@
 |---|---|---|
 | **006** | Meta do MVP: 12 posts da kz | pendências 1–4 |
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
-| **022 (A)** | Conteúdos no app + roteiro com comentários + colar/enviar roteiro pronto | — (pode começar já) |
-| **022 (B)** | Vídeo em faixas (cenas, falas, legendas, SFX, trilha) + comentário por bloco/tempo | 022 A |
+| **022 v1.1** | Reaplicar "clicar no elemento" em `VideoReview.tsx` (código na sessão "022 v1") | — |
+| **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |

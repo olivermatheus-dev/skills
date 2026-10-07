@@ -1,4 +1,5 @@
-// Lê as anotações do Oliver num vídeo (tarefa 022): só as abertas, com o contexto resolvido pela timeline.json
+// Lê as anotações do Oliver numa peça (tarefa 022): só as abertas, com o contexto resolvido pela timeline.json
+// (vídeo) ou pelo próprio texto (roteiro.md/plano.md: o trecho é reencontrado mesmo se as linhas mudaram)
 // (texto da cena, fala, tempo, alvo, trecho do HTML) e os quadros dos tempos anotados extraídos do MP4 (ffmpeg).
 // Uso:
 //   node tools/review.mjs <pasta-da-peça> [--all] [--no-frames]       lista (abertas por padrão)
@@ -71,6 +72,21 @@ function resolveCtx(c) {
     x.lines.push(`elemento ${a.selector} aos ${fmt(a.t)}${s ? ` · cena ${s.id} (${s.block}) · na tela: ${clean(s.on_screen)}` : ''}`);
     const sn = snippet(a.selector); if (sn) x.lines.push(sn);
     const evs = tl?.events.filter((e) => e.target === a.selector).map((e) => `${e.id}@${fmt(evT(e))}`); if (evs?.length) x.lines.push(`eventos que mexem nele: ${evs.join(', ')}`);
+  } else if (a.kind === 'roteiro') {
+    // reencontra o trecho pelo texto (as linhas podem ter mudado desde a anotação)
+    const f = a.file ?? 'roteiro.md', txt = read(f);
+    if (!txt) x.lines.push(`⚠ ${f} não existe mais`);
+    else {
+      const lines = txt.split('\n'), h = a.quote.split('\n').map((l) => l.trim()).find(Boolean)?.slice(0, 80) ?? '';
+      let at = lines[a.line - 1]?.includes(h) ? a.line : null;
+      if (!at) { let d = Infinity; lines.forEach((l, i) => { if (h && l.includes(h) && Math.abs(i + 1 - a.line) < d) { at = i + 1; d = Math.abs(i + 1 - a.line); } }); }
+      x.lines.push(`trecho de ${f}: "${a.quote.replace(/\n/g, ' / ').slice(0, 300)}"`);
+      if (at) {
+        const from = Math.max(1, at - 1), to = Math.min(lines.length, at + a.quote.split('\n').length);
+        x.lines.push(`${f}:${at}${at !== a.line ? ` (anotado na linha ${a.line})` : ''}`);
+        for (let i = from; i <= to; i++) if (lines[i - 1].trim()) x.lines.push(`  ${i === at ? '>' : ' '} ${i}| ${lines[i - 1].slice(0, 200)}`);
+      } else x.lines.push(`⚠ o trecho não está mais em ${f} (texto mudou): confira se a anotação ainda vale`);
+    }
   } else if (a.kind === 'tempo') {
     const s = sceneAt(a.t);
     if (s) { x.lines.push(`cena ${s.id} (${s.block}) ${fmt(s.start)}–${fmt(s.end)} · na tela: ${clean(s.on_screen)}`); const v = tl.vo.find((f) => a.t >= f.start && a.t <= (f.end ?? f.start + 9)); if (v) x.lines.push(`fala ${v.id}: "${v.text}"`); }
@@ -98,7 +114,10 @@ const all = flags.includes('--all');
 const list = review.comments.filter((c) => all || c.status === 'aberto');
 if (!list.length) { console.log(`Nenhuma anotação ${all ? '' : 'aberta '}em ${dir}.`); process.exit(0); }
 console.log(`# Anotações ${all ? '' : 'abertas '}— ${dir}`);
-console.log(`vídeo mais recente: ${latest ?? '(sem MP4 em exports/)'} · ${list.length} anotação(ões)\n`);
+const appr = Object.entries(review.approvals ?? {}).filter(([, d]) => d).map(([k, d]) => `${k} aprovado em ${d}`);
+console.log(`status: ${review.status ?? '—'}${appr.length ? ` · ${appr.join(' · ')}` : ' · roteiro ainda NÃO aprovado'}`);
+if (list.some((c) => c.anchor.kind !== 'roteiro')) console.log(`vídeo mais recente: ${latest ?? '(sem MP4 em exports/)'}`);
+console.log(`${list.length} anotação(ões)\n`);
 const ORDER = { corrigir: 0, ajustar: 1, template: 2, ok: 3 };
 for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?? 9) || a.id.localeCompare(b.id, 'en', { numeric: true }))) {
   const x = resolveCtx(c);

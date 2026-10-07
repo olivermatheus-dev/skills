@@ -5,7 +5,7 @@ Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é 
 ## Ao receber
 0. Ler suas instruções permanentes: `.claude/agent-notes/<seu-nome>.md`.
 1. Ler a tarefa inteira (inclusive o Log: pode haver feedback do Oliver) e a tarefa-mãe (`parent`), se houver.
-2. Ler o contexto da empresa que a sua função exige (cada agente diz quais).
+2. Ler o contexto da empresa que a sua função exige (cada agente diz quais). Tarefa ligada a uma peça (`links: contents/<pasta>/…`) com `revisao.json`: rodar `node tools/review.mjs companies/<slug>/contents/<pasta>` e tratar as anotações abertas antes de produzir.
 3. Mudar `status: doing`.
 4. **Planejar antes de fazer:** escrever em `## Checklist` os passos da sua entrega (3–8 itens objetivos). Se faltar dado essencial que só o Oliver tem → ir direto para o **portão** (abaixo) com a pergunta.
 

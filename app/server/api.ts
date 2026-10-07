@@ -98,6 +98,9 @@ const piece = (q: URLSearchParams) => q.get('path') ?? '';
 on('GET', '/api/projects/:slug/pieces', (p) => S.listPieces(p.slug));
 on('GET', '/api/projects/:slug/piece', (p, _, q) => S.getPiece(p.slug, piece(q)));
 on('PUT', '/api/projects/:slug/piece/review', (p, b, q) => S.saveReview(p.slug, piece(q), b));
+on('POST', '/api/projects/:slug/pieces', (p, b) => S.createPiece(p.slug, b));
+on('GET', '/api/projects/:slug/piece/text', (p, _, q) => S.getPieceText(p.slug, piece(q), q.get('file') ?? ''));
+on('PUT', '/api/projects/:slug/piece/text', (p, b, q) => S.savePieceText(p.slug, piece(q), q.get('file') ?? '', String(b.text ?? '')));
 
 on('GET', '/api/validate', () => S.validateAll());
 
