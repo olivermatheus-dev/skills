@@ -1,12 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { api } from './api';
 import Layout from './components/Layout';
-import { PAGES } from './pages';
-import Projects from './pages/Projects';
+import { PAGES, ProjectsPage } from './pages';
+import { useProjects } from './queries';
 
 function Home() {
-  const { data } = useQuery({ queryKey: ['projects'], queryFn: api.projects });
+  const { data } = useProjects();
   if (!data) return null;
   const last = localStorage.getItem('hub:project');
   const slug = data.find((p) => p.slug === last)?.slug ?? data[0]?.slug;
@@ -17,7 +15,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/projetos" element={<Layout><Projects /></Layout>} />
+      <Route path="/projetos" element={<Layout><ProjectsPage.element /></Layout>} />
       <Route path="/p/:slug" element={<Layout />}>
         {PAGES.map((p) => <Route key={p.path} index={p.path === ''} path={p.path || undefined} element={<p.element />} />)}
         {PAGES.flatMap((p) => (p.children ?? []).map((c) => <Route key={`${p.path}/${c.path}`} path={`${p.path}/${c.path}`} element={<c.element />} />))}

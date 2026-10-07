@@ -17,3 +17,6 @@
 }
 html, body, #root { height: 100%; }
 body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); }
+@keyframes hubToast { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* item otimista ainda não confirmado pelo servidor */
+[data-pending="true"] { opacity: .75; }

@@ -1,9 +1,10 @@
 // Kanban do projeto: colunas backlog · todo · doing · review · done, visões Oliver / IA / todas, arrastar entre colunas.
 import { useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { DndContext, DragOverlay, PointerSensor, useDraggable, useDroppable, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from '@dnd-kit/core';
-import { api } from '../api';
+import type { Task } from '../api';
+import { useTasks } from '../queries';
+import { useTaskActions } from '../components/board/useTaskActions';
 import { Button, Empty, ErrorBox, Input, PageHeader, cx } from '../components/ui';
 import { TaskCard } from '../components/board/TaskCard';
 import { TaskDrawer } from '../components/board/TaskDrawer';
@@ -26,9 +27,8 @@ const lsSet = (k: string, v: string) => { try { localStorage.setItem(k, v); } ca
 
 export default function Board() {
   const { slug = '' } = useParams();
-  const qc = useQueryClient();
-  const key = ['tasks', slug];
-  const q = useQuery({ queryKey: key, queryFn: () => api.tasks(slug), enabled: !!slug });
+  const q = useTasks(slug);
+  const actions = useTaskActions(slug);
   const tasks = q.data ?? [];
 
   const [sp, setSp] = useSearchParams();
@@ -44,24 +44,12 @@ export default function Board() {
   };
   const setView = (v: View) => { lsSet(VIEW_KEY, v); setParam('visao', v); };
 
-  const [creating, setCreating] = useState(false);
+  const [creating, setCreating] = useState<false | Partial<Task>>(false); // rascunho da nova tarefa (volta se a criação falhar)
   const [dragId, setDragId] = useState<string | null>(null);
 
-  const move = useMutation({
-    mutationFn: ({ id, status }: { id: string; status: Status }) => api.moveTask(slug, id, status),
-    onMutate: async ({ id, status }) => {
-      await qc.cancelQueries({ queryKey: key });
-      const prev = qc.getQueryData<TaskDoc[]>(key);
-      qc.setQueryData<TaskDoc[]>(key, (old) => old?.map((t) => (t.data.id === id ? { ...t, data: { ...t.data, status } } : t)));
-      return { prev };
-    },
-    onError: (_e, _v, ctx) => { if (ctx?.prev) qc.setQueryData(key, ctx.prev); },
-    onSettled: () => qc.invalidateQueries({ queryKey: key }),
-  });
-  const moveTo = (id: string, status: Status) => {
-    const t = tasks.find((x) => x.data.id === id);
-    if (t && t.data.status !== status) move.mutate({ id, status });
-  };
+  const [moveError, setMoveError] = useState<unknown>(null);
+  // Mover = otimista: o card troca de coluna no mesmo quadro; erro → volta e avisa.
+  const moveTo = (id: string, status: Status) => actions.move(id, status, { onSuccess: () => setMoveError(null), onError: setMoveError });
 
   const byId = useMemo(() => new Map(tasks.map((t) => [t.data.id, t])), [tasks]);
   const isBlocked = (t: TaskDoc) => t.data.status !== 'done' && t.data.depends.some((d) => byId.get(d)?.data.status !== 'done');
@@ -87,7 +75,7 @@ export default function Board() {
       <PageHeader
         title="Quadro"
         subtitle={q.isSuccess ? `${tasks.length} tarefas · ${waiting} em revisão aguardando o Oliver` : 'Tarefas do projeto (companies/<slug>/board)'}
-        actions={<Button onClick={() => setCreating(true)}>+ Nova tarefa</Button>}
+        actions={<Button onClick={() => setCreating({})}>+ Nova tarefa</Button>}
       />
 
       <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -101,17 +89,24 @@ export default function Board() {
       </div>
 
       {creating && (
-        <NewTaskForm slug={slug} defaultBoard={board === 'todos' ? undefined : board} onCancel={() => setCreating(false)}
-          onDone={(t) => { setCreating(false); setParam('t', t.data.id); }} />
+        <NewTaskForm slug={slug} initial={creating} defaultBoard={board === 'todos' ? undefined : board} onCancel={() => setCreating(false)}
+          onCreate={(data) => {
+            // card provisório na hora + painel aberto; se o servidor der outro id, o painel acompanha
+            const { tempId } = actions.create(data, undefined, {
+              onSuccess: (t) => { if (t.data.id !== tempId && new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', t.data.id); },
+              onError: () => { if (new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', null); setCreating(data); },
+            });
+            setCreating(false); setParam('t', tempId);
+          }} />
       )}
-      {move.error && <div className="mb-3"><ErrorBox error={move.error} /></div>}
+      {moveError ? <div className="mb-3"><ErrorBox error={moveError} /></div> : null}
 
       {q.isLoading ? (
         <div className="flex gap-3">{COLUMNS.map((c) => <div key={c.id} className="flex-1 min-w-56 h-64 rounded-xl bg-surface-2/70 animate-pulse" />)}</div>
       ) : q.isError ? (
         <ErrorBox error={q.error} />
       ) : tasks.length === 0 ? (
-        <Empty title="Nenhuma tarefa ainda" hint="As tarefas ficam em companies/<slug>/board/T-NNNN-*.md." action={<Button onClick={() => setCreating(true)}>+ Nova tarefa</Button>} />
+        <Empty title="Nenhuma tarefa ainda" hint="As tarefas ficam em companies/<slug>/board/T-NNNN-*.md." action={<Button onClick={() => setCreating({})}>+ Nova tarefa</Button>} />
       ) : (
         <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
           <div className="flex gap-3 overflow-x-auto pb-4 -mx-1 px-1 flex-1 items-stretch">
@@ -135,7 +130,7 @@ export default function Board() {
         </DndContext>
       )}
 
-      <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} />
+      <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} actions={actions} />
     </div>
   );
 }

@@ -2,13 +2,15 @@
 // Corpo = markdown puro em companies/<slug>/notes/<id>.md.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Note } from '../api';
 import { Button, ErrorBox, Input, Select, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
 import { tidyMd } from '../components/notes/tidy';
+import { qk, realId, removeDoc, runOptimistic, trackCreate, upsertDoc, useNotes } from '../queries';
+import { toast } from '../components/toast';
 
 type Draft = { slug: string; data: Note; body: string };
 const NO_FOLDER = '__sem_pasta';
@@ -43,7 +45,7 @@ export default function Notes() {
   const qc = useQueryClient();
   const [params, setParams] = useSearchParams();
   const selectedId = params.get('n');
-  const { data: notes, isLoading, error: loadError } = useQuery({ queryKey: ['notes', slug], queryFn: () => api.notes(slug), enabled: !!slug });
+  const { data: notes, isLoading, error: loadError } = useNotes(slug);
   const { byId: tagDefs } = useProjectTags(slug);
 
   const [q, setQ] = useState('');
@@ -56,14 +58,15 @@ export default function Notes() {
   const focusTitle = useRef(false);
 
   const putInCache = useCallback((s: string, doc: Doc<Note>) => {
-    qc.setQueryData<Doc<Note>[]>(['notes', s], (old = []) => {
+    qc.setQueryData<Doc<Note>[]>(qk.notes(s), (old = []) => {
       const rest = old.filter((n) => n.data.id !== doc.data.id);
       return [doc, ...rest];
     });
   }, [qc]);
 
   const auto = useAutosave<Draft>({
-    save: async (d) => { const r = await api.saveNote(d.slug, d.data.id, toPayload(d), tidyMd(d.body)); putInCache(d.slug, r); },
+    // anotação recém-criada: a 1ª gravação espera o arquivo existir (a criação é otimista)
+    save: async (d) => { await realId('note', d.slug, d.data.id); const r = await api.saveNote(d.slug, d.data.id, toPayload(d), tidyMd(d.body)); putInCache(d.slug, r); },
     beacon: (d) => {
       void fetch(`/api/projects/${encodeURIComponent(d.slug)}/notes/${d.data.id}`, {
         method: 'PUT', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ data: toPayload(d), body: tidyMd(d.body) }),
@@ -78,8 +81,8 @@ export default function Notes() {
   }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Seleção: ?n=<id> na URL; sem seleção → a primeira da lista.
-  const select = useCallback(async (id: string | null) => {
-    await auto.flush();
+  const select = useCallback((id: string | null) => {
+    void auto.flush(); // grava o pendente da anotação anterior em segundo plano (já capturado aqui)
     setParams((p) => { const n = new URLSearchParams(p); if (id) n.set('n', id); else n.delete('n'); return n; }, { replace: true });
   }, [auto, setParams]);
 
@@ -106,33 +109,36 @@ export default function Notes() {
     auto.schedule(next);
   };
 
-  const create = useCallback(async () => {
+  // Criar é otimista: o id (data e hora) é gerado aqui, então a anotação abre na hora com o id definitivo.
+  const create = useCallback(() => {
     setActionError(null);
-    try {
-      await auto.flush();
-      const folder = draftRef.current?.data.folder;
-      const r = await api.createNote(slug, { id: newNoteId(notes ?? []), title: 'Sem título', folder, tags: tag ? [tag] : [] }, '');
-      putInCache(slug, r);
-      focusTitle.current = true;
-      setQ('');
-      await select(r.data.id);
-    } catch (e) { setActionError(e); }
-  }, [auto, slug, tag, notes, putInCache, select]);
-
-  const remove = async () => {
-    const cur = draftRef.current;
-    if (!cur || !confirm(`Apagar a anotação "${cur.data.title}"? Isso remove o arquivo.`)) return;
-    setActionError(null);
-    try {
-      auto.cancel();
-      await api.deleteNote(slug, cur.data.id);
-      const rest = (notes ?? []).filter((n) => n.data.id !== cur.data.id);
-      qc.setQueryData(['notes', slug], rest);
-      draftRef.current = null;
-      setDraft(null);
-      await select(rest[0]?.data.id ?? null);
-    } catch (e) { setActionError(e); }
-  };
+    const folder = draftRef.current?.data.folder;
+    const prevSel = draftRef.current?.data.id ?? null;
+    const now = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+    const data: Note = { id: newNoteId(notes ?? []), title: 'Sem título', folder, tags: tag ? [tag] : [], pinned: false, created: now, updated: now };
+    const doc: Doc<Note> = { data, body: '', file: `companies/${slug}/notes/${data.id}.md` };
+    const s = slug;
+    void runOptimistic(qc, {
+      mutationFn: () => {
+        const p = api.createNote(s, { ...data, updated: undefined } as unknown as Note, '');
+        trackCreate('note', s, data.id, p.then((r) => r.data.id));
+        return p;
+      },
+      apply: () => [[qk.notes(s), (old: Doc<Note>[] | undefined) => [doc, ...(old ?? [])]]],
+      // a resposta não substitui o rascunho aberto (o usuário pode já estar digitando)
+      onSuccess: (r) => qc.setQueryData<Doc<Note>[]>(qk.notes(s), (old) => upsertDoc(old, draftRef.current?.data.id === r.data.id ? { ...r, data: { ...r.data, ...draftRef.current.data }, body: draftRef.current.body } : r)),
+      onError: (e) => {
+        setActionError(e);
+        if (draftRef.current?.data.id === data.id) { auto.cancel(); draftRef.current = null; setDraft(null); select(prevSel); }
+      },
+      invalidate: () => [qk.notes(s)],
+      okMessage: false,
+      errorMessage: 'Não foi possível criar a anotação',
+    }, undefined).catch(() => {});
+    focusTitle.current = true;
+    setQ('');
+    select(data.id);
+  }, [auto, slug, tag, notes, select, qc]);
 
   // Ctrl/Cmd+N → nova anotação (Alt+N como alternativa, já que alguns navegadores reservam Ctrl+N).
   useEffect(() => {

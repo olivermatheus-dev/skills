@@ -1,26 +1,21 @@
 // Formulário rápido de nova tarefa (título, quadro, responsável, prioridade).
 import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../api';
-import { Button, ErrorBox, Input, Select } from '../ui';
-import { ASSIGNEES, BOARD_OPTS, PRIORITY_OPTS, assigneeLabel, type BoardName, type Priority, type TaskDoc } from './taskUtils';
+import type { Task } from '../../api';
+import { Button, Input, Select } from '../ui';
+import { ASSIGNEES, BOARD_OPTS, PRIORITY_OPTS, assigneeLabel, type BoardName, type Priority } from './taskUtils';
 
-export function NewTaskForm({ slug, defaultBoard, onDone, onCancel }: {
-  slug: string; defaultBoard?: BoardName; onDone: (t: TaskDoc) => void; onCancel: () => void;
+/** Criar é otimista: o card aparece na hora (onCreate) e o formulário fecha; erro → aviso e o formulário volta. */
+export function NewTaskForm({ defaultBoard, initial = {}, onCreate, onCancel }: {
+  slug: string; initial?: Partial<Task>; defaultBoard?: BoardName; onCreate: (data: Partial<Task> & { title: string }) => void; onCancel: () => void;
 }) {
-  const qc = useQueryClient();
-  const [title, setTitle] = useState('');
-  const [board, setBoard] = useState<BoardName>(defaultBoard ?? 'conteudo');
-  const [assignee, setAssignee] = useState('oliver');
-  const [priority, setPriority] = useState<Priority>('media');
-  const create = useMutation({
-    mutationFn: () => api.createTask(slug, { title: title.trim(), board, assignee, priority, status: 'backlog' }),
-    onSuccess: (t) => { qc.invalidateQueries({ queryKey: ['tasks', slug] }); onDone(t); },
-  });
+  const [title, setTitle] = useState(initial.title ?? '');
+  const [board, setBoard] = useState<BoardName>(initial.board ?? defaultBoard ?? 'conteudo');
+  const [assignee, setAssignee] = useState(initial.assignee ?? 'oliver');
+  const [priority, setPriority] = useState<Priority>(initial.priority ?? 'media');
   return (
     <form
       className="bg-surface border border-border rounded-xl p-3 mb-4 shadow-sm"
-      onSubmit={(e) => { e.preventDefault(); if (title.trim()) create.mutate(); }}
+      onSubmit={(e) => { e.preventDefault(); if (title.trim()) onCreate({ title: title.trim(), board, assignee, priority, status: 'backlog' }); }}
     >
       <div className="flex flex-wrap items-center gap-2">
         <Input autoFocus placeholder="Título da tarefa" value={title} onChange={(e) => setTitle(e.target.value)} className="flex-1 min-w-64"
@@ -34,11 +29,10 @@ export function NewTaskForm({ slug, defaultBoard, onDone, onCancel }: {
         <Select aria-label="Prioridade" value={priority} onChange={(e) => setPriority(e.target.value as Priority)}>
           {PRIORITY_OPTS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
         </Select>
-        <Button type="submit" disabled={!title.trim() || create.isPending}>{create.isPending ? 'Criando…' : 'Criar'}</Button>
+        <Button type="submit" disabled={!title.trim()}>Criar</Button>
         <Button type="button" variant="ghost" onClick={onCancel}>Cancelar</Button>
       </div>
       <div className="text-xs text-muted mt-2">Entra no backlog. Detalhes (prazo, checklist, dependências) no painel da tarefa.</div>
-      <ErrorBox error={create.error} />
     </form>
   );
 }

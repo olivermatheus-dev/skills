@@ -164,6 +164,18 @@ export function archiveTask(slug: string, id: string, who = 'oliver') {
   return { file: dest };
 }
 
+/** Desfazer o arquivamento: volta o arquivo de board/arquivo/ para o quadro. */
+export function unarchiveTask(slug: string, id: string, who = 'oliver') {
+  const dir = join(P.board(slug), 'arquivo');
+  const f = list(dir, new RegExp(`^${id}(-|\\.md)`))[0];
+  if (!f) throw new ValidationError(id, ['tarefa arquivada não encontrada']);
+  if (listTasks(slug).some((t) => t.data.id === id)) throw new ValidationError(id, ['já existe uma tarefa ativa com esse id']);
+  const dest = join(P.board(slug), f);
+  write(dest, `${read(join(dir, f)).trimEnd()}\n- ${today()} · ${who} · desarquivada\n`);
+  rmSync(abs(join(dir, f)));
+  return listTasks(slug).find((t) => t.data.id === id)!;
+}
+
 // ---------- Concorrentes ----------
 export const listCompetitors = (slug: string) =>
   (exists(P.competitors(slug)) ? readdirSync(abs(P.competitors(slug))) : [])

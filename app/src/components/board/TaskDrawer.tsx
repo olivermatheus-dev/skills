@@ -1,7 +1,6 @@
 // Painel de edição da tarefa: campos do frontmatter + corpo em markdown (checklist e log).
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, type Task } from '../../api';
+import type { Task } from '../../api';
 import { MarkdownEditor } from '../Markdown';
 import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea, cx } from '../ui';
 import {
@@ -9,6 +8,9 @@ import {
   type BoardName, type Priority, type Status, type TaskDoc,
 } from './taskUtils';
 import { AssigneeBadge } from './TaskCard';
+import type { useTaskActions } from './useTaskActions';
+
+type Actions = ReturnType<typeof useTaskActions>;
 
 interface Form {
   title: string; board: BoardName; assignee: string; priority: Priority; due: string;
@@ -20,22 +22,21 @@ const toForm = (t: Task): Form => ({
 });
 const splitList = (s: string, re: RegExp) => s.split(re).map((x) => x.trim()).filter(Boolean);
 
-export function TaskDrawer({ slug, task, allTasks, onClose, onMove }: {
-  slug: string; task: TaskDoc | null; allTasks: TaskDoc[]; onClose: () => void; onMove: (id: string, s: Status) => void;
+export function TaskDrawer({ slug, task, allTasks, onClose, onMove, actions }: {
+  slug: string; task: TaskDoc | null; allTasks: TaskDoc[]; onClose: () => void; onMove: (id: string, s: Status) => void; actions: Actions;
 }) {
   const guard = useRef<() => boolean>(() => true);
   return (
     <Drawer open={!!task} onClose={onClose} canClose={() => guard.current()} width="max-w-3xl"
       title={task ? <span className="flex items-center gap-2"><span className="font-mono text-muted text-sm">{task.data.id}</span><AssigneeBadge assignee={task.data.assignee} /></span> : ''}>
-      {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} guard={guard} />}
+      {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} guard={guard} actions={actions} />}
     </Drawer>
   );
 }
 
-function TaskEditor({ slug, task, allTasks, onMove, onClose, guard }: {
-  slug: string; task: TaskDoc; allTasks: TaskDoc[]; onMove: (id: string, s: Status) => void; onClose: () => void; guard: React.MutableRefObject<() => boolean>;
+function TaskEditor({ task, allTasks, onMove, onClose, guard, actions }: {
+  slug: string; task: TaskDoc; allTasks: TaskDoc[]; onMove: (id: string, s: Status) => void; onClose: () => void; guard: React.MutableRefObject<() => boolean>; actions: Actions;
 }) {
-  const qc = useQueryClient();
   const [base, setBase] = useState(() => toForm(task.data));
   const [f, setF] = useState(base);
   const [baseBody, setBaseBody] = useState(task.body);
@@ -53,21 +54,23 @@ function TaskEditor({ slug, task, allTasks, onMove, onClose, guard }: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [task]);
 
-  const save = useMutation({
-    mutationFn: () => api.saveTask(slug, task.data.id, {
+  // Salvar é otimista: o quadro e o painel mostram o novo valor na hora; erro → volta a "não salvo" com o erro.
+  const [saveError, setSaveError] = useState<unknown>(null);
+  const save = () => {
+    const prev = { base, baseBody };
+    const nb = bodyDirty ? normalizeBody(body) : undefined;
+    setSaveError(null); setBase(f); if (nb !== undefined) setBaseBody(body); setSaved(true);
+    void actions.save(task.data.id, {
       title: f.title.trim(), board: f.board, assignee: f.assignee.trim(), priority: f.priority,
       // null limpa o campo (undefined manteria o valor anterior do arquivo)
       due: (f.due || null) as unknown as string | undefined,
       parent: (f.parent.trim() || null) as unknown as string | undefined,
       depends: splitList(f.depends, /[,\s]+/),
       links: splitList(f.links, /\n/),
-    }, bodyDirty ? normalizeBody(body) : undefined),
-    onSuccess: (doc) => {
-      const nf = toForm(doc.data); setBase(nf); setF(nf);
-      setBaseBody(doc.body); setBody(doc.body); setSaved(true);
-      qc.invalidateQueries({ queryKey: ['tasks', slug] });
-    },
-  });
+    }, nb, {
+      onError: (e) => { setSaveError(e); setSaved(false); setBase(prev.base); setBaseBody(prev.baseBody); },
+    });
+  };
 
   const dirty = fieldsDirty || bodyDirty;
   const ck = checklist(body);
@@ -78,15 +81,13 @@ function TaskEditor({ slug, task, allTasks, onMove, onClose, guard }: {
   const okToClose = () => !dirty || confirm('Descartar as alterações não salvas?');
   guard.current = okToClose;
   const close = () => { if (okToClose()) onClose(); };
-  const archive = useMutation({
-    mutationFn: () => api.archiveTask(slug, task.data.id),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['tasks', slug] }); onClose(); },
-  });
+  // Arquivar é otimista (sai do quadro na hora) e tem "Desfazer" no aviso — sem pergunta de confirmação.
+  const archive = () => { actions.archive(task); onClose(); };
   useEffect(() => {
-    const k = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); if (dirty && f.title.trim()) save.mutate(); } };
+    const k = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); if (dirty && f.title.trim()) save(); } };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
-  }, [dirty, f.title, save]);
+  });
 
   return (
     <div>
@@ -168,11 +169,11 @@ function TaskEditor({ slug, task, allTasks, onMove, onClose, guard }: {
       <MarkdownEditor value={body} onChange={setBody} minHeight={260} />
 
       <div className="sticky bottom-0 -mx-6 mt-6 px-6 py-3 bg-surface border-t border-border">
-        {save.error && <div className="-mt-3 mb-3 max-h-40 overflow-y-auto"><ErrorBox error={save.error} /></div>}
+        {saveError ? <div className="-mt-3 mb-3 max-h-40 overflow-y-auto"><ErrorBox error={saveError} /></div> : null}
         <div className="flex items-center gap-3">
-        <Button disabled={!dirty || !f.title.trim() || save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Salvando…' : 'Salvar'}</Button>
+        <Button disabled={!dirty || !f.title.trim()} onClick={save}>Salvar</Button>
         <Button variant="ghost" onClick={close}>Fechar</Button>
-        <Button variant="danger" disabled={archive.isPending} onClick={() => confirm(`Arquivar ${task.data.id}? O arquivo vai para board/arquivo/ (não é apagado).`) && archive.mutate()}>Arquivar</Button>
+        <Button variant="danger" onClick={archive} title="Move o arquivo para board/arquivo/ (não é apagado). Dá para desfazer no aviso.">Arquivar</Button>
         <span className="text-xs text-muted whitespace-nowrap">{dirty ? 'Alterações não salvas · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
         <span className="ml-auto text-xs text-muted font-mono truncate" title={task.file}>{task.file}</span>
         </div>

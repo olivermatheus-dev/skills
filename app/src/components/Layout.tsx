@@ -1,16 +1,33 @@
-import type { ReactNode } from 'react';
+import { Suspense, useEffect, type ReactNode } from 'react';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { api } from '../api';
-import { PAGES } from '../pages';
+import { useQueryClient } from '@tanstack/react-query';
+import { PAGES, preloadAllPages } from '../pages';
+import { prefetchPage, prefetchProject, useProjects, whenIdle } from '../queries';
+import { preloadMarkdownEditor } from './Markdown';
 import { cx, Select } from './ui';
+
+/** esqueleto leve enquanto o código de uma tela chega (nunca tela em branco) */
+export function PageSkeleton() {
+  return (
+    <div className="p-8" aria-busy="true" aria-label="Carregando">
+      <div className="h-7 w-56 rounded-md bg-surface-2 animate-pulse" />
+      <div className="h-4 w-80 rounded-md bg-surface-2/70 animate-pulse mt-3" />
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-8">{[0, 1, 2].map((i) => <div key={i} className="h-40 rounded-xl bg-surface-2/70 animate-pulse" />)}</div>
+    </div>
+  );
+}
 
 export default function Layout({ children }: { children?: ReactNode }) {
   const { slug } = useParams();
   const nav = useNavigate();
-  const { data: projects = [] } = useQuery({ queryKey: ['projects'], queryFn: api.projects });
+  const qc = useQueryClient();
+  const { data: projects = [] } = useProjects();
   useEffect(() => { if (slug) localStorage.setItem('hub:project', slug); }, [slug]);
+
+  // Depois da 1ª pintura: código de todas as telas, editor markdown e listas do projeto → trocar de tela não espera.
+  useEffect(() => whenIdle(() => { preloadAllPages(); void preloadMarkdownEditor(); if (slug) prefetchProject(qc, slug); }), [slug, qc]);
+
+  const warm = (path: string, load: () => Promise<unknown>) => { void load(); if (slug) prefetchPage(qc, slug, path); };
 
   return (
     <div className="flex h-full">
@@ -27,6 +44,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
           <nav className="flex-1 p-2 space-y-0.5">
             {PAGES.map((p) => (
               <NavLink key={p.path} end={p.path === ''} to={`/p/${slug}${p.path ? `/${p.path}` : ''}`}
+                onMouseEnter={() => warm(p.path, p.load)} onFocus={() => warm(p.path, p.load)} onPointerDown={() => warm(p.path, p.load)}
                 className={({ isActive }) => cx('flex items-center gap-2 px-3 py-2 rounded-md text-sm', isActive ? 'bg-accent-soft text-accent font-medium' : 'text-text hover:bg-surface-2')}>
                 <span className="w-4 text-center opacity-70">{p.icon}</span>{p.label}
               </NavLink>
@@ -35,7 +53,9 @@ export default function Layout({ children }: { children?: ReactNode }) {
         )}
         <div className="p-4 text-xs text-muted border-t border-border">Arquivos locais · companies/{slug ?? ''}</div>
       </aside>
-      <main className="flex-1 overflow-y-auto">{children ?? <Outlet />}</main>
+      <main className="flex-1 overflow-y-auto">
+        <Suspense fallback={<PageSkeleton />}>{children ?? <Outlet />}</Suspense>
+      </main>
     </div>
   );
 }
