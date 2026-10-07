@@ -1,6 +1,6 @@
 # 001 — Estrutura de empresa + pasta de marca + `_inbox`
 
-**Status:** pronta · **Depende de:** —
+**Status:** feita (falta só receber os arquivos reais da kz) · **Depende de:** —
 
 ## Objetivo
 Ter a estrutura mínima para as skills de vídeo usarem os arquivos de marca (logo, vetores, ícones, fontes), e a kz já migrada.
@@ -43,9 +43,19 @@ Ter a estrutura mínima para as skills de vídeo usarem os arquivos de marca (lo
 - [ ] Usuário envia os arquivos de marca da kz (logo SVG final, vetores, ícones).
 
 ## Critérios de pronto
-- [ ] Molde e `.gitignore` criados; `CLAUDE.md` e `setup` atualizados
-- [ ] `companies/kz/brand/` com os arquivos reais organizados e a `_inbox/` vazia
+- [x] Molde e `.gitignore` criados; `CLAUDE.md` e `setup` atualizados
+- [x] `companies/kz/brand/` criado com `brand.css` + `BRAND.md` (vindos do antigo VISUAL.md)
+- [ ] Arquivos reais da kz (logo SVG, ícones, prints) organizados e `_inbox/` vazia: aguarda o usuário
 
 ## Log
 - 2026-10-06 — criada.
+- 2026-10-07 — **executada:**
+  - molde `companies/_modelo/`;
+  - contrato de tokens em `brand.css`, com defaults neutros;
+  - `BRAND.md` com seções fixas;
+  - kz migrada, com `VISUAL.md` → `brand/` e `assets/` → `brand/`;
+  - o carrossel agora **linka** `../../brand/brand.css` em vez de copiar tokens. Testado com a kz: render ok;
+  - `tools/contrast.mjs` criado. Ele achou branco sobre coral = 2,8:1, então `--on-primary` da kz virou tinta, e coral como texto = 2,6:1, então o dado grande usa `--accent`;
+  - skill `setup` reescrita com triagem da `_inbox/`;
+  - `.gitignore` para arquivos pesados.
 - 2026-10-07 — incluída a especificação do arquivo de marca (BRAND.md + brand.css), inspirada na skill ludus-video.

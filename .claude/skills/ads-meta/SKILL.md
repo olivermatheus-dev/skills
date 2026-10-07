@@ -10,7 +10,7 @@ Dois modos: **(A) Criar** anúncios ou **(B) Analisar** resultados. Se o pedido 
 ## Antes de começar
 
 1. **Empresa:** se o slug não foi dado, inferir pela lista no `CLAUDE.md`; se houver dúvida, perguntar.
-2. **Ler contexto** em `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`, `VISUAL.md`.
+2. **Ler contexto** em `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`; e `companies/<slug>/brand/BRAND.md` (regras visuais e proibições).
 3. **Ler** `companies/<slug>/campaigns/LOG_ANGULOS.md` (se existir) para não repetir ângulos aposentados.
 4. Confirmar: objetivo (venda, lead, mensagem no WhatsApp, agendamento), destino (LP, WhatsApp, formulário instantâneo), oferta e verba diária.
 5. **Nunca inventar** provas, números ou depoimentos.
@@ -44,7 +44,7 @@ Cada ângulo = um motivo diferente para clicar. Escolher pela persona e pelo ní
 - **Descrição** (≤ 30 caracteres)
 - **CTA do botão** (Saiba mais, Comprar, Enviar mensagem, Cadastre-se...)
 - **Briefing visual**, um formato por ângulo ou mais:
-  - **Estático:** texto na arte (≤ 6 palavras), imagem, hierarquia, cores do `VISUAL.md`
+  - **Estático:** texto na arte (≤ 6 palavras), imagem, hierarquia, cores e regras de `brand/BRAND.md`, logo de `brand/logo/`
   - **Carrossel:** 3–6 cards, um ponto por card, último card com CTA
   - **Vídeo UGC 15–30s:** roteiro curto `0–3s hook | 3–20s desenvolvimento | final CTA`, com falas, texto na tela e cena
 

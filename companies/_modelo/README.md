@@ -1,0 +1,14 @@
+# Molde de empresa
+
+Copiado pela skill `setup` ao cadastrar uma empresa: `cp -r companies/_modelo companies/<slug>`.
+
+```
+context/          6 arquivos de estratégia (criados pela skill setup)
+brand/            BRAND.md (regras) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
+video-templates/  templates de vídeo da empresa
+contents/         AAAA-MM-DD-<tema>/  peças de conteúdo
+campaigns/        AAAA-MM-DD-<campanha>/  anúncios, LPs, cartas
+tasks.md          backlog de marketing e vendas
+```
+
+Nomes de arquivo de marca: `logo-<horizontal|vertical|simbolo>-<cor|branco|preto>.svg`, `icone-<nome>.svg`, `foto-<assunto>-NN.jpg`, `tela-<funcionalidade>-NN.png`.

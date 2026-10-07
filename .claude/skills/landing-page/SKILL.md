@@ -10,7 +10,7 @@ Cria ou revisa a copy de uma página de conversão usando o contexto da empresa.
 ## Antes de começar
 
 1. **Empresa:** se o slug não foi dado, inferir pela lista no `CLAUDE.md`; se houver dúvida, perguntar.
-2. **Ler contexto** em `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md` (obrigatórios); `COMPETITORS.md`, `VISUAL.md` (se existirem).
+2. **Ler contexto** em `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md` (obrigatórios); `COMPETITORS.md` (se existir); e `companies/<slug>/brand/BRAND.md` + `brand.css` para as notas de design.
 3. Se faltar `COPY.md` ou `AUDIENCE.md`, avisar e pedir o mínimo: oferta, preço, público, principal dor, provas disponíveis.
 4. **Nunca inventar** provas, números, depoimentos ou garantias. Onde faltar, deixar `[PROVA: ...]` como marcador.
 

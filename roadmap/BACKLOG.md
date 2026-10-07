@@ -21,7 +21,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 ## Tarefas (em ordem)
 | id | tarefa | depende | status |
 |---|---|---|---|
-| 001 | [Estrutura de empresa + pasta de marca + `_inbox` (kz migrada)](tasks/001-estrutura-e-marca/TASK.md) | — | pronta |
+| 001 | [Estrutura de empresa + pasta de marca + `_inbox` (kz migrada)](tasks/001-estrutura-e-marca/TASK.md) | — | feita (faltam arquivos reais da kz) |
 | 002 | [Base de conhecimento de motion (material do usuário → referências da skill)](tasks/002-conhecimento-motion/TASK.md) | — | contínua |
 | 003 | [Stack de render de motion + protótipo](tasks/003-stack-motion/TASK.md) | 001 | rascunho |
 | 004 | [Motor de motion graphics v1 (skill base de vídeo)](tasks/004-skill-motion-v1/TASK.md) | 002, 003 | rascunho |

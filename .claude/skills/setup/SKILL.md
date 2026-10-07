@@ -1,55 +1,72 @@
 ---
 name: setup
-description: "Cria ou atualiza o contexto de uma empresa (negócio, público, voz, concorrentes, estratégia de conteúdo, visual e copy) em companies/<slug>/context/. Use quando o usuário disser 'nova empresa', 'setup', 'configurar empresa', 'contexto da marca', 'atualizar persona', 'mudou o preço', 'mudei as cores', 'revisar contexto', ou quando outra skill não encontrar os arquivos de contexto."
+description: "Cadastra ou atualiza uma empresa: cria a pasta a partir do molde, organiza os arquivos de marca soltos em _inbox/ (logo, ícones, fotos, prints, manual), extrai os tokens visuais para brand.css e escreve o contexto (negócio, público, voz, concorrentes, estratégia de conteúdo, copy). Use quando o usuário disser 'nova empresa', 'vamos cadastrar', 'registrar empresa', 'setup', 'configurar empresa', 'contexto da marca', 'organiza esses arquivos', 'atualizar persona', 'mudou o preço', 'mudei as cores', 'revisar contexto', ou quando outra skill não encontrar os arquivos da empresa."
 ---
 
 # Setup de empresa
 
-Objetivo: ter **7 arquivos curtos** que qualquer skill lê antes de produzir. Contexto bom = específico (números, nomes, frases reais do cliente). Contexto ruim = teoria genérica.
+Objetivo: em uma conversa, sair com a empresa pronta para produzir, com **marca** (`brand/`) e **contexto** (`context/`) curtos e específicos. Contexto bom tem números, nomes e frases reais do cliente. Contexto ruim é teoria genérica.
 
-## Arquivos (em `companies/<slug>/context/`)
+## Estrutura (molde em `companies/_modelo/`)
+```
+companies/<slug>/
+  context/   BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
+  brand/     BRAND.md (regras) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
+  video-templates/  contents/  campaigns/  tasks.md
+```
 
-| Arquivo | Conteúdo | Máx. |
+## Contexto (`context/`, máximo de palavras)
+| arquivo | conteúdo | máx. |
 |---|---|---|
-| `BUSINESS.md` | o que é, história/fundador, estágio, modelo e preço, oferta (plano, trial, garantia), diferenciais, links, restrições legais do nicho | 700 palavras |
-| `AUDIENCE.md` | 1–2 personas: rotina, dores, desejos, objeções, gatilhos de compra, **frases literais** entre aspas, nível de consciência | 900 |
+| `BUSINESS.md` | o que é, história/fundador, estágio, modelo e preço, oferta (plano, trial, garantia), **funcionalidade → benefício → dor**, diferenciais, links, regras legais do nicho | 800 |
+| `AUDIENCE.md` | 1–2 personas: rotina, dores, desejos, objeções, gatilhos, **frases literais** entre aspas, nível de consciência | 900 |
 | `VOICE.md` | 3–5 traços de tom, faz/não faz, palavras usar/evitar, 2–3 exemplos antes/depois | 450 |
 | `COMPETITORS.md` | tabela concorrente / preço / posicionamento / fraqueza que exploramos + nosso ângulo | 700 |
 | `CONTENT_STRATEGY.md` | pilares (objetivo, % do mix, temas), mix de funil, canais/formatos, frequência, hooks que funcionaram | 550 |
-| `VISUAL.md` | cores (hex + uso), fontes, estilo de imagem, bloco `css :root{}` com `--bg --surface --text --muted --primary --accent --font-heading --font-body --radius` | 350 |
 | `COPY.md` | big idea, mecanismo da falha, mecanismo único, objeções → respostas, value stack, provas, CTAs por funil | 1200 |
 
-Cada arquivo termina com `## A validar` — só o que é hipótese ou dado faltante. Nada de tags de confiança campo a campo.
+Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. Nada de tags de confiança campo a campo.
 
-Também criar, se não existirem: `companies/<slug>/tasks.md` (formato abaixo), `contents/`, `campaigns/`, `assets/`.
+## Marca (`brand/`)
+- `brand.css`: **mesmos nomes de token do molde**, porque as skills dependem deles. Troque só os valores.
+- `BRAND.md`: seções do molde (cores com papel, texto, fundo, formas, logo, imagem, movimento, vídeo, **proibições**, aprendizados). Seção vazia = vale o default das skills.
+- Depois de preencher, rode `node tools/contrast.mjs companies/<slug>/brand/brand.css`. Par reprovado → ajuste `--on-primary` ou `--accent`, ou registre em BRAND.md "não usar X como texto".
 
-## Processo
+## Processo — empresa nova
+1. **Criar a pasta:** `cp -r companies/_modelo companies/<slug>` (slug curto, minúsculo, sem acento). Registrar na tabela de empresas do `CLAUDE.md`.
+2. **Receber arquivos.** Peça para o usuário soltar tudo em `_inbox/` ou arrastar os arquivos para o terminal, o que cola o caminho e permite copiar.
+   - Imagem colada direto no chat só pode ser vista, não salva. Peça o arquivo.
+3. **Triagem da `_inbox/`:** para cada arquivo, classificar → renomear → mover:
+   | tipo | destino | nome |
+   |---|---|---|
+   | logo | `brand/logo/` | `logo-<horizontal\|vertical\|simbolo>-<cor\|branco\|preto>.svg` |
+   | ícone | `brand/icons/` | `icone-<nome>.svg` |
+   | vetor/ilustração | `brand/vectors/` | `vetor-<nome>.svg` |
+   | fonte | `brand/fonts/` | nome original |
+   | foto | `brand/photos/` | `foto-<assunto>-NN.jpg` |
+   | print/gravação do produto | `brand/screenshots/` | `tela-<funcionalidade>-NN.png` |
+   | manual/PDF/briefing | ler e extrair para `BRAND.md`/`context/`; guardar em `brand/` só se for referência útil | — |
+   Na dúvida, mostre a imagem e pergunte. No fim, liste o que foi movido e confirme que a `_inbox/` ficou vazia.
+4. **Extrair a marca:** cores e fontes de SVGs (atributos `fill`/`stroke`), do manual, do CSS do site (se houver acesso à web) ou de prints → `brand.css` + `BRAND.md`. Mostre a paleta extraída e confirme.
+   - Empresa **sem identidade**: proponha uma opção simples (1 cor de marca, 1 fonte do Google Fonts, fundo neutro), já com contraste checado. O usuário aprova.
+5. **Coletar o contexto de uma vez:** peça um "despejo" livre + site, @ do Instagram, LP, prints do produto, depoimentos, preços. Leia o site e a LP antes de perguntar (SaaS: mapeie **funcionalidade → benefício → dor**).
+6. **Perguntar só o que falta:** no máximo 8 perguntas, numa mensagem. Prioridade: oferta e preço, cliente ideal e dor nº 1, concorrentes, diferencial, provas, tom.
+7. **Rascunhar os 6 arquivos de contexto** de uma vez. Onde não souber, coloque a melhor hipótese em `## A validar`.
+8. **Revisão em 1 rodada:** resumo de 10 linhas (big idea, persona, oferta, ângulo vs concorrentes, paleta) → o usuário corrige.
+9. **Checklist do que falta** (logo branco, fotos, preço final…) → linhas no `tasks.md` da empresa.
 
-1. **Coletar de uma vez.** Peça ao usuário um "despejo" livre + o que tiver: site, @ do Instagram, materiais, prints, depoimentos, planilha de preço. Se houver site/IG e acesso à web, leia antes de perguntar.
-2. **Perguntar só o que falta** — no máximo 8 perguntas, numa mensagem, priorizando: oferta e preço, cliente ideal e sua dor nº 1, concorrentes, diferencial, prova existente, tom desejado, cores/fontes.
-3. **Rascunhar os 7 arquivos** de uma vez. Onde não souber, escreva a melhor hipótese e liste em `## A validar`.
-4. **Revisão em 1 rodada:** mostre um resumo de 10 linhas (big idea, persona, oferta, ângulo vs concorrentes) e pergunte o que está errado. Ajuste.
-5. **Registrar a empresa** na tabela de empresas do `CLAUDE.md` da raiz.
+Funciona por partes: dá para fazer só a marca hoje e o contexto amanhã.
 
 ## Atualizar
-
-- Mudança pontual ("mudou o preço") → edite só o arquivo afetado e verifique se `COPY.md` precisa refletir.
-- "Revisar contexto" → leia os 7 arquivos, liste o que está desatualizado ou em `A validar`, proponha as edições.
-- Aprendizados de resultado (post que bombou, anúncio vencedor, objeção nova de venda) → registre no arquivo certo (`CONTENT_STRATEGY` > hooks que funcionaram; `COPY` > objeções; `AUDIENCE` > frases literais).
+- Mudança pontual ("mudou o preço", "mudei as cores") → edite só o arquivo afetado. Cor mudou → rode o contraste. Oferta mudou → confira `COPY.md`.
+- "Revisar contexto" → leia tudo, liste o que está desatualizado ou em `A validar` e proponha as edições.
+- Aprendizado de resultado:
+  - post vencedor → `CONTENT_STRATEGY.md` > hooks que funcionaram;
+  - objeção nova → `COPY.md`;
+  - frase de cliente → `AUDIENCE.md`;
+  - feedback visual do dono → `BRAND.md` > aprendizados.
 
 ## Regras
-
-- Frases do cliente valem ouro: copie literal, não parafraseie.
-- Nicho regulado (saúde, finanças, jurídico): registre em `BUSINESS.md` as regras de publicidade do conselho (ex.: CFP/CRP, CFM) e LGPD.
-- Não crie arquivos extras. Se algo não cabe nos 7, provavelmente não é necessário.
-
-## Formato de `tasks.md`
-
-```
-# Tarefas — <empresa>
-<!-- status: todo | doing | done · tipo: conteudo | anuncio | lp | estrategia | vendas | setup -->
-
-| id | tarefa | tipo | status | prazo | arquivo |
-|---|---|---|---|---|---|
-| 1 | Fechar oferta de lançamento | estrategia | todo | 2026-10-20 | context/BUSINESS.md |
-```
+- Frases do cliente valem ouro: copie literal.
+- Nicho regulado (saúde, finanças, jurídico): regras de publicidade do conselho (ex.: CFP/CRP, CFM) e LGPD em `BUSINESS.md`, e as proibições visuais em `BRAND.md`.
+- Não crie arquivos fora do molde. Se algo não cabe, provavelmente não é necessário.

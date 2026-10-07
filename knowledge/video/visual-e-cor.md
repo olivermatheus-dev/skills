@@ -9,7 +9,9 @@
 
 ## 2. Texto que o vídeo "fala" (títulos, frases)
 - **Cor de tinta** (`--text`, alto contraste). **Nunca cinza** em título ou frase principal.
-- Contraste mínimo **4,5:1** com o fundo (meta: ≥ 7:1 em título).
+- Contraste mínimo **4,5:1** com o fundo (meta: ≥ 7:1 em título). Cor de destaque em palavra de título grande: ≥ 3:1.
+- **Texto sobre a cor da marca** (botão, card de destaque): calcule. Cores claras/quentes (coral, amarelo, verde-claro) quase sempre pedem **texto escuro**, não branco. Ex. real: branco sobre coral #ef7960 = 2,8:1 (reprovado); tinta #2b2b2b = 5,1:1.
+- Ferramenta: `node tools/contrast.mjs <cor1> <cor2>`.
 - **No máximo 1 ênfase por título**, com motivo (a palavra-chave). Ênfase na cor de destaque da marca ou por peso, **nunca em cores aleatórias**.
 
 ## 3. Hierarquia de cores (quem pode usar o quê)

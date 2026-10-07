@@ -9,14 +9,15 @@ Transforma texto pronto (roteiro ou texto colado) em slides visuais. Não reescr
 
 ## Entradas
 
-- `companies/<slug>/context/VISUAL.md` traz o bloco `:root` com `--bg --surface --text --muted --primary --accent --font-heading --font-body --radius`, além das cores e fontes. **Se não existir, pare** e sugira criar antes. Só use o tema padrão do template se o usuário pedir um carrossel genérico.
+- `companies/<slug>/brand/brand.css`: tokens da marca. O template **linka esse arquivo** (`../../brand/brand.css`); não copie tokens para o HTML. Sem `brand.css`, o template usa o tema neutro default. Avise o usuário e sugira a skill `setup`.
+- `companies/<slug>/brand/BRAND.md`: regras de uso (cores com papel, ênfase, proibições). **Proibições são regra dura.**
 - `companies/<slug>/context/VOICE.md`: tom para os textos curtos (tag, CTA, rodapé).
 - `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md`, com o texto slide a slide escrito pela skill ig-post, **ou** texto colado no chat.
-- Fotos ficam em `companies/<slug>/assets/`.
+- Fotos, logo e prints ficam em `companies/<slug>/brand/` (`photos/`, `logo/`, `screenshots/`).
 
 ## Processo
 
-1. **Ler** VISUAL.md, VOICE.md e o roteiro. Se faltar a empresa ou a peça, pergunte.
+1. **Ler** BRAND.md, VOICE.md e o roteiro. Se faltar a empresa ou a peça, pergunte.
 2. **Propor o outline** em **uma única tabela** e esperar o "ok":
 
    | # | tipo | texto |
@@ -25,7 +26,7 @@ Transforma texto pronto (roteiro ou texto colado) em slides visuais. Não reescr
 
    Pergunte o formato só se não estiver claro. O padrão é retrato 1080×1350; use 1080×1080 se o usuário pedir.
 3. **Gerar UM arquivo** `contents/<peça>/carrossel.html` partindo de `references/template.html`:
-   - cole o `:root` do VISUAL.md por cima dos tokens padrão e troque o `<link>` do Google Fonts pelas fontes da marca;
+   - mantenha o `<link rel="stylesheet" href="../../brand/brand.css">`. A marca sobrescreve os tokens default, incluindo as fontes, que são importadas no próprio `brand.css`;
    - cada slide é uma `<section class="slide">`. Para quadrado, use `<body class="square">`;
    - apague do template os tipos que não forem usados. Não invente classes novas sem necessidade.
 4. **Renderizar:**
@@ -34,7 +35,10 @@ Transforma texto pronto (roteiro ou texto colado) em slides visuais. Não reescr
    # ou: npm run carousel -- <caminho/carrossel.html> [pasta-saida]
    ```
    Se der erro de Playwright, rode `npm i` (ou `npm i -D playwright`) e, se pedir, `npx playwright install chromium`.
-5. **Conferir**: abra 1 ou 2 PNGs, procure texto cortado, contraste ruim ou foto quebrada, corrija o HTML e renderize de novo.
+5. **Conferir**:
+   - Abra os PNGs (ou uma folha de contato) e procure texto cortado, contraste ruim, foto quebrada ou quebra de alguma proibição do BRAND.md.
+   - Se usou cor fora dos pares testados, rode `node tools/contrast.mjs <cor-texto> <cor-fundo>`: mínimo 4,5:1 (3:1 só em título grande).
+   - Corrija e renderize de novo.
 6. **Entregar** a lista dos arquivos e um resumo de uma linha por slide.
 
 ## Saída
@@ -57,7 +61,7 @@ companies/<slug>/contents/AAAA-MM-DD-<tema>/
 - **foto+texto**: foto no topo (`.photo-box`) e texto embaixo (`section.slide.photo`).
 - **CTA**: pedido de ação único + botão visual (`.btn`). Sempre o último.
 
-`.inverse` (fundo `--primary`) serve para criar ritmo. Use em no máximo 1 de cada 3 slides.
+`.inverse` (fundo `--inverse-bg` da marca, que por default é `--primary`) serve para criar ritmo. Use em no máximo 1 de cada 3 slides.
 
 ## Regras de design
 
@@ -66,7 +70,7 @@ companies/<slug>/contents/AAAA-MM-DD-<tema>/
 - **Contraste**: texto sobre fundo precisa ser legível no celular. `--accent` e `--primary` são para destaque, não para parágrafo.
 - **Margem segura de 80px** em todos os lados. Nada importante fica no rodapé além da marca e da numeração.
 - **Rodapé** em todo slide com `@handle`/marca à esquerda e `NN/TT →` à direita. A capa leva "arraste →" e o último slide não leva seta.
-- **Estilo vem do VISUAL.md**: fundo claro ou escuro conforme `--bg`. Nada de glassmorphism, glow ou mesh se a marca não pedir.
+- **Estilo vem do brand.css/BRAND.md**. Defaults: fundo liso, título nunca em cinza, no máximo 1 ênfase por título, toda cor com significado, sem gradiente, glow ou mesh se a marca não pedir. Ver `knowledge/video/visual-e-cor.md`, que também vale para imagem estática.
 - Mesma fonte, mesmos tokens e mesma posição de rodapé em todos os slides.
 - Nada de placeholder (`[TEXTO]`, `@suamarca`) no arquivo final.
 
@@ -74,13 +78,13 @@ companies/<slug>/contents/AAAA-MM-DD-<tema>/
 
 ```html
 <section class="slide photo">
-  <div class="photo-box"><img src="../../assets/equipe.jpg" alt=""></div>
+  <div class="photo-box"><img src="../../brand/photos/foto-equipe-01.jpg" alt=""></div>
   <h2>Título</h2><p>Texto curto.</p>
   <div class="footer">...</div>
 </section>
 ```
 
-- O caminho é relativo ao `carrossel.html`: `contents/<peça>/` → `../../assets/<arquivo>`.
+- O caminho é relativo ao `carrossel.html`: `contents/<peça>/` → `../../brand/photos/<arquivo>`.
 - Se a foto ainda não existe, mantenha o `onerror="this.remove()"` do template, que deixa aparecer o gradiente da marca, e avise o usuário qual arquivo falta.
 - Use `object-fit: cover`, que já está no template. Para foto de fundo inteiro, troque `inset` para `0` e coloque o texto sobre uma faixa `--surface`.
 

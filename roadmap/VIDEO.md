@@ -21,7 +21,7 @@ Arquitetura: **motores** (`carousel`, `motion`) concentram o técnico; **formato
 | Presets globais | timing, easing, áreas seguras, tamanhos mínimos, ritmo por formato | dentro da skill |
 | Formato | plataforma + proporção + duração (9:16, 4:5, 1:1, 16:9) | preset |
 | Template | receita de um tipo de vídeo de uma empresa: layout, tipografia, animações, transições, ritmo, intro/outro | `companies/<slug>/video-templates/<nome>/` |
-| Marca | cores, fontes, logo, vetores, ícones | `companies/<slug>/brand/` + `context/VISUAL.md` |
+| Marca | cores, fontes, logo, vetores, ícones | `companies/<slug>/brand/` (`brand.css` tokens + `BRAND.md` regras) |
 | Projeto de vídeo | briefing + roteiro + cenas + render | `contents/` ou `campaigns/` (MP4 fora do git) |
 
 Fluxo alvo:

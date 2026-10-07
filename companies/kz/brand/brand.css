@@ -1,0 +1,47 @@
+/* brand.css — kz. Tokens extraídos do CSS de kz.app.br (Mantine). Regras de uso em BRAND.md. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root{
+  /* Cores — papéis */
+  --bg:#faf8f5;          /* creme: fundo padrão de todas as peças */
+  --surface:#ffffff;
+  --surface-2:#f4f1ec;   /* creme escuro */
+  --text:#2b2b2b;
+  --muted:#5a5a5a;       /* texto 2 — só rótulo de interface; nunca título */
+  --border:#e8e4dc;
+  --primary:#ef7960;     /* coral da marca: pontos de destaque, CTA, logo */
+  --on-primary:#2b2b2b;  /* tinta sobre coral (5,1:1). Branco sobre coral = 2,8:1, reprovado */
+  --accent:#d66954;      /* coral profundo: ênfase em texto sobre claro (#bc5a47 p/ AAA) */
+  --success:#5f9a6b;
+  --warning:#c99a2e;
+  --danger:#c4553f;
+
+  /* Fundo de contraste (slide/cena "inverse"): coral suave, nunca coral em bloco grande */
+  --inverse-bg:#fce0d7;
+  --on-inverse:#2b2b2b;
+
+  /* Extras da marca */
+  --accent-soft:#fce0d7; /* fundo de tag/realce */
+  --pastel-sage:#cfe0d0;
+  --pastel-lavender:#d8d2e3;
+  --pastel-sky:#cdd8e0;
+  --pastel-butter:#f1e7c9;
+  --pastel-rose:#f1d6cc;
+  --pastel-clay:#ddcfc2;
+
+  /* Tipografia */
+  --font-heading:"Montserrat",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:"Montserrat",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --weight-heading:700;
+  --tracking-heading:-0.01em;
+  --leading-heading:1.15;
+  --case-heading:none;
+
+  /* Forma */
+  --radius:16px;
+  --radius-sm:10px;
+  --border-width:1px;
+  --shadow-sm:0 1px 3px rgba(43,43,43,.06);
+  --shadow-md:0 8px 24px rgba(43,43,43,.08);
+  --shadow-lg:0 20px 48px rgba(43,43,43,.12);
+}
