@@ -1,8 +1,9 @@
 // Gera um efeito sonoro por texto com a API da ElevenLabs (Sound Effects).
 // Uso: node tools/audio/elevenlabs-sfx.mjs "soft airy cinematic whoosh, short, no music" --duration 0.8 --out library/audio/sfx/whoosh/Whoosh_Air_Soft_Short_01.mp3 [--influence 0.4]
-// Lê ELEVENLABS_API_KEY do ambiente ou do .env. Depois: node tools/audio/catalog.mjs scan sfx
+// Chave: --slug <empresa> usa a do projeto (app → Configurações); senão a .env geral. Depois: node tools/audio/catalog.mjs scan sfx
 // ⚠ Não testado com chave real neste repo: confira o endpoint e os termos do seu plano.
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { envFor } from '../lib/env.mjs';
 import { dirname } from 'node:path';
 
 const args = process.argv.slice(2);

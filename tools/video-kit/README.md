@@ -28,8 +28,8 @@ Rascunho rápido: `produce.mjs <pasta> --draft` (sem rastro, sobrescreve `-rascu
 
 ## Voz: rascunho grátis → final na ElevenLabs
 1. **Rascunho (sempre o padrão):** `tts.mjs` com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo em `library/voices/`). Serve para aprovar copy, ritmo e cenas.
-2. **Aprovado:** gerar as falas na ElevenLabs (skill de ElevenLabs, tarefa 020), uma fala = um arquivo (`f1.mp3`, `f2.mp3`…).
-3. **Encaixe:** `node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-com-os-arquivos>` (ou `<pasta> f2 arquivo.mp3 [--words tempos.json]`): guarda o original em `audio/vo/final/`, corta o silêncio, padroniza, mede e **reencaixa cenas e eventos**; avisa a fala que mudou mais de 0,6 s.
+2. **Aprovado:** escrever `vo[].el` (texto com emoção para o Eleven v4) e gerar: `node tools/video-kit/scripts/elevenlabs.mjs <pasta> --dry` → `--aprovado` (chave do projeto em app → Configurações; tempos exatos por palavra; encaixa sozinho). Versões: `--takes 3` + `--pick f1=2`. Regras: skill `elevenlabs`.
+3. **Encaixe** (automático pela API; manual quando os arquivos vêm do site): `node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-com-os-arquivos>` (ou `<pasta> f2 arquivo.mp3 [--words tempos.json]`): guarda o original em `audio/vo/final/`, corta o silêncio, padroniza, mede e **reencaixa cenas e eventos**; avisa a fala que mudou mais de 0,6 s.
 4. `check.mjs` → olhar os quadros (palavras estimadas sem `--words`) → ajustes pontuais (`timeline.json`: `lead`, `gap`, `tail`, `min`, `len`; ou `timeline.mjs text|dur`) → `sfx` + `mix` + `produce`.
 
 ## Por que trocar a voz não quebra o vídeo

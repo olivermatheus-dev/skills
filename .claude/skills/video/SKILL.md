@@ -49,7 +49,7 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 5. **Sem "pode seguir", não anime.**
 
 ### 2. Voz e tempos (o áudio manda no relógio)
-- Locução: **v1.0 com voz gratuita** (`tts.mjs`, voz de rascunho da empresa; skill `locucao`); ElevenLabs só depois do aval, encaixada com `fit-vo.mjs`. Sem locução: escolha o BPM e monte a grade (cenas com `len`).
+- Locução: **v1.0 com voz gratuita** (`tts.mjs`, voz de rascunho da empresa; skill `locucao`); voz final só depois do aval: **Eleven v4** pela API com a chave do projeto (skill `elevenlabs`: `vo[].el` com emoção → `elevenlabs.mjs`, que encaixa sozinho). Sem locução: escolha o BPM e monte a grade (cenas com `len`).
 - `timeline.json` nasce do áudio: o `tts.mjs` mede cada fala e monta cenas e eventos (`lead`/`gap`/`tail`/`min`/`len`; eventos presos a palavra, `at` ou `before_end`). ≤ 0,5 s entre falas; pausa ≤ 1 s só na virada (`"pause": true`); a cena dura o que a fala dura.
 - Gestos em `events`; cada SFX aponta para um evento e um asset licenciado do catálogo. Trilha e efeitos: skill `audio` (agente `sound-designer` no médio/alto). Trilhas candidatas trocadas com `timeline.mjs music`.
 

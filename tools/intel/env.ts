@@ -25,12 +25,23 @@ function envFiles() {
   return [process.env.HUB_ENV_FILE, here, process.env.HUB_ROOT && join(process.env.HUB_ROOT, '.env'), join(process.cwd(), '.env')].filter(Boolean) as string[];
 }
 
-export function env(key: string): string | undefined {
+const projectCache = new Map<string, Record<string, string>>();
+/** .env do projeto (companies/<slug>/.env, salvo pela tela Configurações): vem antes da .env geral. */
+function projectEnv(slug: string) {
+  if (!projectCache.has(slug)) {
+    const f = join(process.env.HUB_ROOT ?? fileURLToPath(new URL('../..', import.meta.url)), 'companies', slug, '.env');
+    projectCache.set(slug, existsSync(f) ? parseEnv(readFileSync(f, 'utf8')) : {});
+  }
+  return projectCache.get(slug)!;
+}
+
+export function env(key: string, slug?: string): string | undefined {
   if (key in process.env) return process.env[key] || undefined; // definido (mesmo vazio) no ambiente manda
+  if (slug && /^[a-z0-9][a-z0-9-]*$/.test(slug) && projectEnv(slug)[key]) return projectEnv(slug)[key];
   if (!cache) {
     cache = {};
     for (const f of envFiles().reverse()) if (existsSync(f)) Object.assign(cache, parseEnv(readFileSync(f, 'utf8')));
   }
   return cache[key] || undefined;
 }
-export const resetEnvCache = () => { cache = null; };
+export const resetEnvCache = () => { cache = null; projectCache.clear(); };

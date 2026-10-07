@@ -28,7 +28,8 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 005 | [Formatos: arquitetura e catálogo de mini skills por tipo/estilo de conteúdo](tasks/005-formatos-mini-skills/TASK.md) | 004 | 9 formatos escritos; imagem testada; vídeo depende do kit |
 | 006 | [Meta: 12 posts da kz](tasks/006-meta-12-posts-kz/TASK.md) | 005 | rascunho |
 | 008 | [Biblioteca de áudio inicial (famílias de SFX + 3–5 trilhas base)](tasks/008-biblioteca-audio/TASK.md) | 003 | SFX feitos (560, EditorPro); faltam trilhas e bases |
-| 020 | [Skill de ElevenLabs + catálogo de vozes finais (por projeto)](tasks/020-skill-elevenlabs/TASK.md) | 003 | rascunho |
+| 020 | [Skill de ElevenLabs + catálogo de vozes finais (por projeto)](tasks/020-skill-elevenlabs/TASK.md) | 003 | fazendo (skill, script e chaves por projeto feitos; falta voz da kz + teste real) |
+| 022 | [Revisão com comentários ancorados (roteiro, vídeo em faixas, carrossel) + entrada de roteiros prontos](tasks/022-revisao-comentarios/TASK.md) | 018 | rascunho (fase A primeiro) |
 | 021 | [Gestão de contexto pela própria IA (contexto declarado por tarefa, estado para retomar, log compacto)](tasks/021-gestao-de-contexto/TASK.md) | — | rascunho |
 | 009 | [MCP de edição de vídeo (voz, trilha, duração, texto, prévia, render)](tasks/009-mcp-edicao-video/TASK.md) | 003 | rascunho |
 | 010 | [Enxugar a base de vídeo + níveis de edição (simples · médio · alto)](tasks/010-enxugar-video/TASK.md) | 002 | feita |

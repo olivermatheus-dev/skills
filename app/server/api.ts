@@ -7,6 +7,8 @@ import { join, normalize, extname } from 'node:path';
 import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
 import { P } from '../../schema';
+import * as K from '../../core/secrets';
+import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
 type Handler = (p: Params, body: any, q: URLSearchParams) => unknown | Promise<unknown>;
@@ -75,6 +77,11 @@ on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
 
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
 on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));
+
+// Chaves de API (.env do projeto e .env geral). Nunca devolve o valor inteiro.
+on('GET', '/api/projects/:slug/secrets', (p) => K.listSecrets(p.slug));
+on('PUT', '/api/projects/:slug/secrets/:key', (p, b) => { const r = K.setSecret(b.scope === 'geral' ? null : p.slug, p.key, String(b.value ?? '')); resetEnvCache(); return r; });
+on('POST', '/api/projects/:slug/secrets/:key/test', (p) => K.testSecret(p.slug, p.key));
 
 on('GET', '/api/validate', () => S.validateAll());
 

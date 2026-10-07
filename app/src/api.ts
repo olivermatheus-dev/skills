@@ -4,6 +4,7 @@ export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark
 import type { CollectResult, CompetitorSummary, ProfileSummary } from '../../tools/intel/types';
 export type { CollectResult, CompetitorSummary, ProfileSummary };
 
+export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
 /** `snapshots`: por perfil, as 2 últimas completas + até 10 anteriores leves (seguidores e views/curtidas). `snapshotsTotal`: todas no disco. */
@@ -70,6 +71,10 @@ export const api = {
 
   competitorsSummary: (slug: string) => req<CompetitorSummary[]>('GET', `${pj(slug)}/competitors-summary`),
   collectResults: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<CollectResult[]>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
+
+  secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
+  setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),
+  testSecret: (slug: string, key: string) => req<{ ok: boolean; message: string }>('POST', `${pj(slug)}/secrets/${encodeURIComponent(key)}/test`),
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),
 };

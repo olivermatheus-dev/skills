@@ -59,7 +59,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
     if (!adapter) { res.errors.push(`coleta automática de ${p.platform} ainda não existe (por enquanto: YouTube, TikTok, Instagram e site)`); return res; }
     let snap: SnapshotDraft;
     try {
-      snap = await adapter.collect(p, { runner, maxItems, env, now: opt.now ?? new Date() });
+      snap = await adapter.collect(p, { runner, maxItems, env: (k: string) => env(k, slug), now: opt.now ?? new Date() });
     } catch (e) {
       res.errors.push(String((e as Error)?.message ?? e));
       return res;

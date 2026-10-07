@@ -15,11 +15,12 @@ Todas as vozes que o hub usa, de qualquer empresa, com as características e os 
 | `lang`, `gender` | `pt-BR`, feminina/masculina |
 | `stage` | `draft` (rascunho) ou `final` |
 | `characteristics` | timbre, idade aparente, energia, para que serve, para que **não** serve |
-| `settings` | Windows: `rate` · edge: `rate`, `pitch` · ElevenLabs: `model`, `stability`, `similarity`, `style`, `speed`, `speaker_boost` (os que funcionaram) |
+| `settings` | Windows: `rate` · edge: `rate`, `pitch` · ElevenLabs (**sempre Eleven v4**): `model` (`eleven_v4`), `stability` (`creative`/`natural`/`robust` ou 0–1), `similarity`, `speaker_boost`, `seed`, `language_code` (`pt`). O v4 não tem style nem speed. |
+| `tags_ok`, `tags_ruins` | (ElevenLabs) audio tags já testadas nessa voz |
 | `license` | termos de uso (ElevenLabs: plano que permite uso comercial) |
 | `words` | `exato` (motor dá o tempo de cada palavra) ou `estimado` |
 
-As vozes da ElevenLabs entram aqui ao serem escolhidas (skill de ElevenLabs, tarefa 020), com a ficha completa.
+As vozes da ElevenLabs entram aqui ao serem escolhidas (skill `elevenlabs`), com a ficha completa. Geração: `tools/video-kit/scripts/elevenlabs.mjs`.
 
 ## `companies/<slug>/brand/voices.json`
 ```json

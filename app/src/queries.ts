@@ -19,6 +19,7 @@ export const qk = {
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
+  secrets: (slug: string) => ['secrets', slug] as const,
 };
 
 // ---------- consultas ----------
@@ -38,6 +39,7 @@ export const q = {
   // documento importante com salvar explícito: não recarrega sozinho por baixo da edição
   context: (slug: string, name: string) => queryOptions({ queryKey: qk.context(slug, name), queryFn: () => api.context(slug, name), staleTime: Infinity, refetchOnWindowFocus: false }),
   brandCss: (slug: string) => queryOptions({ queryKey: qk.brandCss(slug), queryFn: () => api.brandCss(slug), enabled: !!slug }),
+  secrets: (slug: string) => queryOptions({ queryKey: qk.secrets(slug), queryFn: () => api.secrets(slug), enabled: !!slug }),
 };
 
 export const useProjects = () => useQuery(q.projects());
@@ -53,6 +55,7 @@ export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSum
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));
 export const useContextDoc = (slug: string, name: string) => useQuery(q.context(slug, name));
 export const useBrandCss = (slug: string) => useQuery(q.brandCss(slug));
+export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
 
 // ---------- pré-carga ----------
 /** o que cada tela lê (para pré-carregar ao passar o mouse no menu) */
@@ -64,6 +67,7 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],
+  configuracoes: (s) => [q.secrets(s)],
 };
 export function prefetchPage(qc: QueryClient, slug: string, path: string) {
   // prefetchQuery respeita o staleTime: se o cache está fresco, não faz nada

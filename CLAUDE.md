@@ -29,7 +29,8 @@ companies/<slug>/
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
-Vídeo: motor em `tools/video-kit/` (README = comandos; voz de rascunho grátis → aval → ElevenLabs → `fit-vo.mjs`). Vozes: `library/voices/` + `companies/<slug>/brand/voices.json`. Ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição). QC do MP4 final antes de entregar → `node tools/video/qc.mjs <pasta> --sheet`.
+Vídeo: motor em `tools/video-kit/` (README = comandos; voz de rascunho grátis → aval → Eleven v4 pela API → `elevenlabs.mjs` encaixa).
+**Chaves de API:** uma por projeto, salvas no app → Configurações (`companies/<slug>/.env`, fora do git); `.env` da raiz é reserva. Scripts leem por `tools/lib/env.mjs`. Vozes: `library/voices/` + `companies/<slug>/brand/voices.json`. Ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição). QC do MP4 final antes de entregar → `node tools/video/qc.mjs <pasta> --sheet`.
 **Onde fica cada asset** (sons, efeitos, templates, marca, entrada bruta): `library/README.md`.
 Biblioteca visual global (ícones, mapas, bandeiras, logos de terceiros): `library/visual/` (sem licença registrada, não usa). Galeria de reuso (componentes de motion, fx, looks): consultar o índice antes de criar, promover o que ficou bom (tarefa 014).
 Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locais, catálogos `sfx.json`/`music.json`/`bases.json` no git, e **sem licença não usa**. Ferramenta: `node tools/audio/catalog.mjs`.
@@ -47,7 +48,8 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `launch-plan` | plano de lançamento semana a semana |
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
-| `locucao` | voz v1.0 gratuita → roteiro no formato ElevenLabs → encaixe do áudio final |
+| `locucao` | voz v1.0 gratuita → voz final → encaixe do áudio final |
+| `elevenlabs` | voz final sempre no Eleven v4: emoção (audio tags), vozes, geração pela API e encaixe |
 | `radar` | descobrir e cadastrar concorrentes, referências e páginas (com perfis) |
 | `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
 

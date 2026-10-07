@@ -27,6 +27,7 @@ companies/<slug>/
   ideas/I-NNNN-*.md        banco de ideias (tarefa 012)
   competitors/<id>/competitor.md · marks.json · snapshots/<plataforma>-<perfil>/<data>.json · media/ (fora do git)
   context/*.md · brand/
+  .env                     chaves de API do projeto (tela Configurações; fora do git; a tela só mostra os 4 últimos caracteres)
 ```
 Coletas são **imutáveis**: cada "Puxar" grava um arquivo novo; o histórico nunca é apagado.
 

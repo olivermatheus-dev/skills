@@ -15,6 +15,7 @@ export const PAGES: PageDef[] = [
   { path: 'personas', label: 'Personas', icon: '☺', ...page(() => import('./Personas')) },
   { path: 'anotacoes', label: 'Anotações', icon: '✎', ...page(() => import('./Notes')) },
   { path: 'contexto', label: 'Contexto e marca', icon: '❖', ...page(() => import('./Context')) },
+  { path: 'configuracoes', label: 'Configurações', icon: '⚙', ...page(() => import('./Settings')) },
 ];
 export const ProjectsPage = page(() => import('./Projects'));
 

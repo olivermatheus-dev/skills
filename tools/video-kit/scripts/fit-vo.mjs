@@ -5,11 +5,12 @@
 //
 // Uso:
 //   node tools/video-kit/scripts/fit-vo.mjs <pasta> <fala> <arquivo> [--words <json>] [--voice <id>]
-//   node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-com-arquivos>      (f1.mp3, f2.mp3… pelo nome)
+//   node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-com-arquivos>      (f1.mp3, f2.mp3… pelo nome;
+//     f1.words.json ao lado = tempos exatos daquela fala, como o elevenlabs.mjs grava)
 // --words: tempos por palavra exatos ([{w, s}] em segundos, relativos ao arquivo original — a API da
 // ElevenLabs "with timestamps" devolve isso). Sem ele, as palavras são estimadas pela proporção do
 // rascunho (words_approx: true) — confira os gestos presos a palavras na folha de contato.
-import { mkdirSync, copyFileSync, readdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, copyFileSync, readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, extname, basename } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { KIT, video, prepVoice, speechBounds, layout, closeWords, r3 } from './lib.mjs';
@@ -21,15 +22,18 @@ const finalDir = join(v.dir, 'audio', 'vo', 'final');
 mkdirSync(finalDir, { recursive: true });
 
 const jobs = opt('dir')
-  ? readdirSync(opt('dir')).filter((f) => /\.(mp3|wav|m4a|flac|ogg)$/i.test(f)).map((f) => ({ id: basename(f, extname(f)), file: join(opt('dir'), f) }))
-  : [{ id: args[1], file: args[2] }];
+  ? readdirSync(opt('dir')).filter((f) => /\.(mp3|wav|m4a|flac|ogg)$/i.test(f)).map((f) => {
+    const id = basename(f, extname(f)), w = join(opt('dir'), `${id}.words.json`);
+    return { id, file: join(opt('dir'), f), words: existsSync(w) ? w : undefined };
+  })
+  : [{ id: args[1], file: args[2], words: opt('words') }];
 if (!jobs.length || !jobs[0].id || !jobs[0].file) {
   console.log('Uso: fit-vo.mjs <pasta> <fala> <arquivo> [--words <json>] | fit-vo.mjs <pasta> --dir <pasta-com-arquivos>');
   process.exit(1);
 }
 
 const report = [];
-for (const { id, file } of jobs) {
+for (const { id, file, words } of jobs) {
   const x = (v.tl.vo || []).find((y) => y.id === id);
   if (!x) { console.log(`? ${basename(file)}: não há fala "${id}" na timeline (pulei)`); continue; }
   const keep = join(finalDir, `${id}${extname(file)}`);
@@ -37,8 +41,8 @@ for (const { id, file } of jobs) {
   const before = x.length;
   const out = join(v.dir, 'audio', 'vo', `${id}.wav`);
   const { offset, length } = prepVoice(keep, out);
-  if (opt('words') && jobs.length === 1) {
-    const exact = JSON.parse(readFileSync(opt('words'), 'utf8'));
+  if (words) {
+    const exact = JSON.parse(readFileSync(words, 'utf8'));
     const { begin } = speechBounds(keep);
     x.words = closeWords(exact.map((w) => ({ w: w.w ?? w.word, s: r3(x.start + Math.max(0, (w.s ?? w.start) - begin + offset)) })), x.start + length);
     delete x.words_approx;
