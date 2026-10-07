@@ -8,7 +8,7 @@ Transformar a documentação, ideias e técnicas de editores profissionais que o
 ## Como funciona
 1. O usuário manda o material (texto no chat, links, PDFs, vídeos de referência). Os arquivos vão para `material/` nesta pasta; os pesados ficam fora do git.
 2. O Claude registra cada material em `INDICE.md` (data · fonte · tema · status: novo/destilado).
-3. Destilação: cada aprendizado vira **regra executável** ("entrada de título: 400–600 ms, ease-out, deslocamento de 40 px + fade") e vai para a referência certa da skill de motion (`.claude/skills/<video>/references/…`), sem duplicar o que já está lá.
+3. Destilação: verificar se é verdade, melhorar e transformar cada aprendizado em **regra executável** ("entrada de título: 400–600 ms, ease-out, deslocamento de 40 px + fade"), em `knowledge/video/<tema>.md`, a base compartilhada por todas as skills de vídeo. Não duplicar o que já existe. Notas de verificação vão no `INDICE.md`.
 4. Conflito entre fontes: escolher a regra mais simples e profissional e anotar o porquê.
 
 ## Temas esperados (organizar as referências por eles)
@@ -22,3 +22,4 @@ Contínua. Cada lote de material termina com o índice atualizado e as referênc
 
 ## Log
 - 2026-10-06 — criada.
+- 2026-10-07 — 1º lote: Etapa 1, cortes e montagem → `knowledge/video/cortes-e-montagem.md`. Criada a pasta `knowledge/video/`.
