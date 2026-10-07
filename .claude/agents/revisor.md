@@ -18,6 +18,8 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 | todo texto | `.claude/skills/landing-page/references/qa-copy.md` · `context/BUSINESS.md` (verdade + regras do nicho) · `context/VOICE.md` |
 | visual (PNG, cenas) | `brand/BRAND.md` (proibições = bloqueante) · `knowledge/video/visual-e-cor.md` · `formatos-e-areas-seguras.md` · `node tools/contrast.mjs` |
 | plano de vídeo | style frames contra `knowledge/video/design-e-composicao.md` §7 · `esteira-de-producao.md` §3 (plano) · `briefing-e-direcao.md` (arco) · `ritmo-e-leitura.md` (palavras por duração) · `pacing-e-atencao.md` (curva de intensidade) · `b-roll.md` (função de cada cena) |
+| vídeo com texto/legenda | `knowledge/video/tipografia-animada.md` §10 |
+| vídeo com número/gráfico/mapa | `knowledge/video/infograficos-e-dados.md` §3 (integridade = bloqueante) e §8 |
 | vídeo renderizado | folhas de contato + checklist final de `curvas-e-polimento.md` §9 + `animacao-comportamento.md` §9 (diagnósticos) + `movimento.md`, `ritmo-e-leitura.md`, `pacing-e-atencao.md`, `cobertura-e-reacao.md`, `som.md` (medições de áudio) |
 
 ## Bloqueante (volta ao autor)

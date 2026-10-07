@@ -16,6 +16,8 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (chat) Etapa 7 — design, composição e direção de arte | hierarquia, composição, tipografia, formas, densidade, style frames, design system, polimento | knowledge/video/design-e-composicao.md | destilado |
 | 2026-10-07 | (chat) Etapa 8 — timing, spacing e física | timing/spacing, easing, princípios de física, sequenciamento, entradas/saídas, personalidade e tokens, diagnóstico | knowledge/video/animacao-comportamento.md (+ correção em movimento.md) | destilado |
 | 2026-10-07 | (chat) Etapa 9 — Graph Editor e micro-polimento | leitura de curvas, assimetria, keyframes de passagem, caminho × tempo, percepção, famílias, inspeção, checklist | knowledge/video/curvas-e-polimento.md (traduzido para GSAP) | destilado |
+| 2026-10-07 | (chat) Etapa 10 — tipografia animada e kinetic type | unidade, ênfase, sincronia com fala, legendas, técnicas, sistema, QC | knowledge/video/tipografia-animada.md | destilado |
+| 2026-10-07 | (chat) Etapa 11 — infográficos, dados, diagramas | escolha da representação, integridade, design de gráfico, motion de dados, mapas, assets, dados em código, QC | knowledge/video/infograficos-e-dados.md + library/visual/ | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -118,3 +120,20 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - parâmetro de posição da timeline para os offsets.
   - **Ideia registrada:** medir a velocidade por quadro no navegador headless, que seria o nosso "speed graph" (tarefas 003/009).
   - **Mudanças no processo:** style frames estáticos entram no plano, com um único aval para roteiro e visual; a ordem de trabalho por cena virou blocking → poses → curvas → offsets → settle → efeitos → som; tokens de duração e famílias de curva por personalidade.
+- **2026-10-07 · Etapas 10–11:** o conteúdo está correto. O que acrescentei:
+  - **Valores para legendas de reels:**
+    - corpo de 48–64 px, em blocos de 2–5 palavras e no máximo ~28–32 caracteres por linha;
+    - base em y ≈ 1250–1400;
+    - entrada em até 200 ms;
+    - stagger por unidade (caractere 15–30 ms, palavra 60–120 ms, linha 100–200 ms);
+    - lead de 2–4 quadros sobre a fala.
+  - **Tipografia:**
+    - contador com `tabular-nums` e valor final parado por ≥ 1 s;
+    - hold de ≥ 60% da vida do texto;
+    - `SplitText` do GSAP para dividir o texto.
+  - **Dados:**
+    - formato numérico brasileiro (`R$ 4,24 mi`);
+    - daltonismo: nunca vermelho × verde sozinhos;
+    - **overshoot proibido em propriedade que codifica valor**, coerente com as molas do kit;
+    - dados em `data/*.json` com fonte e a flag `illustrative`.
+  - **Infraestrutura:** `library/visual/`, com fontes de licença livre e um registro de licenças.

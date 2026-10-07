@@ -17,6 +17,8 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | áudio (trilha e efeitos) | skill `audio` (o agente `sound-designer` faz) · `knowledge/video/sound-design.md` |
 | montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
 | desenhar os frames-chave | `knowledge/video/design-e-composicao.md` · `visual-e-cor.md` |
+| texto animado e legendas | `knowledge/video/tipografia-animada.md` |
+| números, gráficos, diagramas, mapas | `knowledge/video/infograficos-e-dados.md` (dados em `data/*.json`; assets em `library/visual/`) |
 | animar e polir | `knowledge/video/animacao-comportamento.md` · `curvas-e-polimento.md` (⚠️ terminologia AE × GSAP) |
 | escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `transicoes-e-efeitos.md` · `tecnico-hyperframes.md` |
 | voz | skill `locucao` (v1.0 gratuita → roteiro ElevenLabs → encaixe) |

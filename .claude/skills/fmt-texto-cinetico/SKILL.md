@@ -3,6 +3,8 @@ name: fmt-texto-cinetico
 description: "Receita de vídeo só de tipografia animada (10–20 s): gancho → dor → virada → solução → CTA, com tempo por palavra e 1 ideia por tela. Use quando o usuário pedir texto cinético, tipografia animada, kinetic type, vídeo só com texto, reels de frase, 'vídeo sem gravar', 'lettering animado' ou quando não houver tela do produto para mostrar. Usa a skill `video` como motor (plano, render e QA)."
 ---
 
+> Base de conhecimento: `knowledge/video/tipografia-animada.md` (unidade de animação, ênfase, sincronia com a fala, hold).
+
 # Texto cinético
 
 Uma ideia contada só com palavras em movimento. Topo de funil (níveis 1–3): reels e stories que funcionam no mudo, produção rápida, sem depender de print.
