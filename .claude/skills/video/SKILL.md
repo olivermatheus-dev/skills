@@ -16,6 +16,8 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
 | áudio (trilha e efeitos) | skill `audio` (o agente `sound-designer` faz) · `knowledge/video/sound-design.md` |
 | montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
+| desenhar os frames-chave | `knowledge/video/design-e-composicao.md` · `visual-e-cor.md` |
+| animar e polir | `knowledge/video/animacao-comportamento.md` · `curvas-e-polimento.md` (⚠️ terminologia AE × GSAP) |
 | escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `transicoes-e-efeitos.md` · `tecnico-hyperframes.md` |
 | voz | skill `locucao` (v1.0 gratuita → roteiro ElevenLabs → encaixe) |
 
@@ -37,8 +39,9 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 ### 1. Conceito e plano → PARE e peça o aval
 1. Proponha **2–3 conceitos** (1 linha cada) e recomende 1.
 2. Escreva o `plano.md` (molde em `references/plano.md`): recorte, o que muda vs anterior, falas exatas, **folha de batidas**, cor/fundo por cena, **afirmações com fonte**, perguntas.
-3. Confira antes de mostrar: roteiro cabe na duração (≤ ~2,7 palavras/s de locução), arco completo (gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s), nada sem fonte.
-4. **Sem o "pode seguir" do usuário, não escreva código.**
+3. **Style frames:** renderize 2–3 frames-chave **estáticos** (o principal de cada bloco + o **quadro mais cheio**) com o `brand.css` real, e passe pela revisão do frame (`design-e-composicao.md` §7). Eles vão junto do plano: **um único aval cobre roteiro e visual.**
+4. Confira antes de mostrar: roteiro cabe na duração (≤ ~2,7 palavras/s de locução), arco completo (gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s), nada sem fonte.
+5. **Sem o "pode seguir" do usuário, não anime.** (Os style frames estáticos são a única exceção.)
 
 ### 2. Voz e tempos
 - Com locução: **v1.0 com voz gratuita de modelo** (skill `locucao`); a voz final da ElevenLabs só entra depois do aval. Sem locução: escolher **BPM** e montar a grade de batidas.
@@ -50,6 +53,7 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 - **Tokens:** linkar `../../brand/brand.css` (mesmo contrato do carrossel). Nunca hardcodar cor da marca.
 - **Uma timeline GSAP principal** registrada no formato exigido pelo kit (ver `tecnico-hyperframes.md`). Uma cena = um grupo com início/fim vindos do `timeline.json`.
 - **Biblioteca de movimento do kit** (molas `SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`): não reescreva easing à mão.
+- **Ordem de trabalho por cena:** blocking (estados e ordem dos eventos) → poses-chave → curvas → offsets → settle → efeitos → som. Movimento antes de efeito.
 - Regras que mais quebram: fundo liso · título nunca cinza · 1 ênfase por título · toda cor com significado · o cursor conduz (nada muda sozinho no app) · algo novo a cada 2–3 s · transição com motivo (no máximo 2 tipos) · nada some antes de ser lido · animar só transform/opacity.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.
 

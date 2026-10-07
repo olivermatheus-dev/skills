@@ -13,6 +13,9 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 4 — ritmo, pacing e atenção | macro/micro, densidade, interrupt motivado, escala 0–4, diagnóstico, QC | knowledge/video/pacing-e-atencao.md (+ ajuste em ritmo-e-leitura) | destilado |
 | 2026-10-07 | (chat) Etapa 5 — sound design e biblioteca de SFX | funções, hierarquia, biblioteca e metadados, regras por tipo, motion, layering, identidade sonora, QC | knowledge/video/sound-design.md, som.md, library/audio/README.md, skill `audio`, agente `sound-designer` | destilado |
 | 2026-10-07 | (chat) Etapa 6 — transições visuais e efeitos | escada e sistema de decisão, regras por tipo, presets, sistema da marca, QC, teste de remoção | knowledge/video/transicoes-e-efeitos.md | destilado |
+| 2026-10-07 | (chat) Etapa 7 — design, composição e direção de arte | hierarquia, composição, tipografia, formas, densidade, style frames, design system, polimento | knowledge/video/design-e-composicao.md | destilado |
+| 2026-10-07 | (chat) Etapa 8 — timing, spacing e física | timing/spacing, easing, princípios de física, sequenciamento, entradas/saídas, personalidade e tokens, diagnóstico | knowledge/video/animacao-comportamento.md (+ correção em movimento.md) | destilado |
+| 2026-10-07 | (chat) Etapa 9 — Graph Editor e micro-polimento | leitura de curvas, assimetria, keyframes de passagem, caminho × tempo, percepção, famílias, inspeção, checklist | knowledge/video/curvas-e-polimento.md (traduzido para GSAP) | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -104,3 +107,14 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - speed ramp vira curva de tempo;
     - freeze vira hold + anotação.
   - **Sistema da marca:** por vídeo, 1 família principal + 1 alternativa + 1 especial.
+- **2026-10-07 · Etapas 7–9 (motion I, II e III):** o conteúdo está correto, mas escrito no vocabulário do After Effects. O que fiz:
+  - **Conflito de terminologia corrigido.** No AE, "Ease In" é desacelerar **ao chegar**. No GSAP/CSS, isso é `.out`, e `ease-in` significa acelerar. Seguir o material ao pé da letra geraria o código invertido. A tabela de equivalência está em `animacao-comportamento.md` §3, `curvas-e-polimento.md` §2 e `movimento.md`.
+  - **Overshoot recalibrado:** premium de 0–4% e expressivo de até 8–10%. A versão antiga aceitava 5–10% para tudo. A receita `scale 0→110→95→100` foi proibida.
+  - **Graph Editor traduzido para o nosso stack:**
+    - família de ease;
+    - `CustomEase` para handles assimétricos;
+    - um tween com `keyframes` e `easeEach` para keyframes de passagem;
+    - `motionPath` para o caminho espacial;
+    - parâmetro de posição da timeline para os offsets.
+  - **Ideia registrada:** medir a velocidade por quadro no navegador headless, que seria o nosso "speed graph" (tarefas 003/009).
+  - **Mudanças no processo:** style frames estáticos entram no plano, com um único aval para roteiro e visual; a ordem de trabalho por cena virou blocking → poses → curvas → offsets → settle → efeitos → som; tokens de duração e famílias de curva por personalidade.

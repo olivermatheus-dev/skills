@@ -32,6 +32,14 @@ BPM (se houver trilha): … · Transições escolhidas (máx. 2): …
 |---|---|---|---|---|
 Conferido contra `brand/BRAND.md`: sim/não.
 
+## 6b. Style frames
+| arquivo | cena/bloco | o que fixa |
+|---|---|---|
+| `style/01.png` | gancho | |
+| `style/02.png` | quadro mais cheio | |
+Revisão do frame (`design-e-composicao.md` §7): ok / pendências.
+Personalidade de movimento (`animacao-comportamento.md` §8): premium / playful / técnico / cinematográfico.
+
 ## 7. Afirmações sobre o produto
 | afirmação | fonte (LP, BUSINESS.md, print) | status |
 |---|---|---|

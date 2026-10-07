@@ -1,6 +1,6 @@
 # Movimento
 
-> Base: prompts de vídeo e trailer + guia de movimento do Ludus (2026-10-07), verificados e quantificados com os 12 princípios da animação da Disney (antecipação, *follow-through*, *slow in/slow out*) e as diretrizes de movimento de interface (Material Design / Apple HIG). Números = **pontos de partida**.
+> Base: prompts de vídeo e trailer + guia de movimento do Ludus + Etapas 7–9 (2026-10-07), verificados e quantificados com os 12 princípios da animação da Disney (antecipação, *follow-through*, *slow in/slow out*) e as diretrizes de movimento de interface (Material Design / Apple HIG). Números = **pontos de partida**.
 
 ## 1. Princípios
 1. **Nada linear.** Todo movimento tem easing. O linear só vale em loops contínuos (rotação de fundo, *marquee*).
@@ -19,7 +19,9 @@
 | **pop / chegada com vida** | mola com passagem | `back.out(1.4–1.8)` ou mola do kit |
 | **elemento físico** (card caindo, botão) | mola amortecida | mola do kit (sem quicar mais de 1×) |
 
-Overshoot de **5–10%** (escala 1,05–1,10 antes de assentar em 1). Mais que isso parece desenho infantil, salvo pedido da marca.
+Overshoot: **premium 0–4%** (escala 1,02–1,04), **expressivo até 8–10%**. Mais que isso parece desenho infantil, salvo pedido da marca. Nunca `scale 0 → 110 → 95 → 100` como receita (ver `animacao-comportamento.md`).
+
+⚠️ **Terminologia:** no GSAP/CSS, `.out` = **desacelera ao chegar** (o que o After Effects chama de "ease in") e `.in` = acelera ao sair. Siga sempre esta tabela.
 
 ## 2b. Molas nomeadas (preferir a curvas genéricas)
 Uma biblioteca de movimento compartilhada expõe **4 molas** com passagem previsível (forma fechada: passam do alvo o que prometem e assentam sem quicar). Valores do kit do Ludus, validados em vídeo:
@@ -77,7 +79,7 @@ Regra de continuidade em motion: no *match cut*, mantenha **direção, velocidad
 ## 8. Checklist de movimento
 - [ ] Nenhum movimento linear (exceto loops)?
 - [ ] Entradas com ease-out e saídas com ease-in?
-- [ ] Overshoot ≤ 10%?
+- [ ] Overshoot ≤ 4% (premium) / ≤ 10% (expressivo)?
 - [ ] Só 1 protagonista em movimento por momento?
 - [ ] No máximo 2 tipos de transição, sem crossfade solto?
 - [ ] Cursor em curva, com pausa antes do clique?
