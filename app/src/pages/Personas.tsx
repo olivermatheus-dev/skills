@@ -7,6 +7,7 @@ import { Button, Card, Drawer, Empty, ErrorBox, Field, Input, LinesInput, PageHe
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { AWARENESS, AwarenessMeter } from '../components/personas/awareness';
+import { tidyMd } from '../components/notes/tidy';
 
 type Role = Persona['role'];
 const ROLES: { id: Role; label: string; cls: string }[] = [
@@ -101,7 +102,7 @@ function PersonaDrawer({ slug, initial, onClose }: { slug: string; initial: Doc<
   const save = useMutation({
     mutationFn: () => {
       const v = clean();
-      return isNew ? api.createPersona(slug, { ...v, id: undefined }, body) : api.savePersona(slug, v.id, v, body);
+      return isNew ? api.createPersona(slug, { ...v, id: undefined }, tidyMd(body)) : api.savePersona(slug, v.id, v, tidyMd(body));
     },
     onSuccess: () => { void qc.invalidateQueries({ queryKey: ['personas', slug] }); onClose(); },
   });

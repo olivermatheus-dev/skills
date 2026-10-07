@@ -5,7 +5,7 @@ import {
   tablePlugin, markdownShortcutPlugin, toolbarPlugin, UndoRedo, BoldItalicUnderlineToggles, BlockTypeSelect, ListsToggle,
   CreateLink, InsertTable, InsertThematicBreak, codeBlockPlugin, codeMirrorPlugin, Separator,
 } from '@mdxeditor/editor';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 
 // Interface do editor em pt-BR (chaves do MDXEditor; o que faltar cai no texto original em inglês).
 const PT: Record<string, string> = {
@@ -34,7 +34,7 @@ const translate = (key: string, def: string, vars?: Record<string, unknown>) =>
 
 // Tipografia do conteúdo (o preflight do Tailwind zera h1/ul/…; sem plugin typography).
 const CONTENT_CSS = `
-.hub-md { line-height: 1.6; color: var(--color-text); }
+.hub-md { line-height: 1.6; color: var(--color-text); min-height: var(--md-min-h, 240px); }
 .hub-md > * + * { margin-top: .6em; }
 .hub-md h1 { font-size: 1.5em; font-weight: 700; letter-spacing: -.01em; margin-top: 1.1em; }
 .hub-md h2 { font-size: 1.25em; font-weight: 650; margin-top: 1em; }
@@ -60,17 +60,23 @@ if (typeof document !== 'undefined' && !document.getElementById('hub-md-css')) {
 export function MarkdownEditor({ value, onChange, placeholder, minHeight = 240 }: { value: string; onChange: (md: string) => void; placeholder?: string; minHeight?: number }) {
   const ref = useRef<MDXEditorMethods>(null);
   const last = useRef(value);
+  // O MDXEditor reemite o markdown normalizado ao carregar (ex.: "*" → "-"). Isso não é edição do usuário:
+  // só repassamos onChange depois de alguma interação, para não marcar "alterado" nem gravar à toa.
+  const touched = useRef(false);
+  const touch = () => { touched.current = true; };
   // Troca de documento por fora (ex.: outra anotação selecionada) → atualiza o editor.
   useEffect(() => { if (value !== last.current) { ref.current?.setMarkdown(value); last.current = value; } }, [value]);
   return (
-    <div className="border border-border rounded-lg bg-surface overflow-hidden [&_.mdxeditor-toolbar]:bg-surface-2">
+    <div className="border border-border rounded-lg bg-surface overflow-hidden [&_.mdxeditor-toolbar]:bg-surface-2"
+      style={{ '--md-min-h': `${minHeight}px` } as CSSProperties}
+      onKeyDownCapture={touch} onPasteCapture={touch} onCutCapture={touch} onDropCapture={touch} onPointerDownCapture={touch}>
       <MDXEditor
         ref={ref}
         markdown={value}
         placeholder={placeholder}
         translation={translate}
         toMarkdownOptions={{ bullet: '-', rule: '-' }}
-        onChange={(md) => { last.current = md; onChange(md); }}
+        onChange={(md) => { last.current = md; if (touched.current) onChange(md); }}
         contentEditableClassName="hub-md max-w-none px-4 py-3 text-sm"
         plugins={[
           headingsPlugin(), listsPlugin(), quotePlugin(), thematicBreakPlugin(), linkPlugin(), linkDialogPlugin(), tablePlugin(),
@@ -79,7 +85,6 @@ export function MarkdownEditor({ value, onChange, placeholder, minHeight = 240 }
           toolbarPlugin({ toolbarContents: () => (<><UndoRedo /><Separator /><BlockTypeSelect /><BoldItalicUnderlineToggles /><Separator /><ListsToggle /><CreateLink /><InsertTable /><InsertThematicBreak /></>) }),
         ]}
       />
-      <style>{`.mdxeditor [contenteditable] { min-height: ${minHeight}px }`}</style>
     </div>
   );
 }

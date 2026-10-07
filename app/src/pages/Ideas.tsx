@@ -7,6 +7,7 @@ import { api, type Doc, type Idea, type Task } from '../api';
 import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
+import { tidyMd } from '../components/notes/tidy';
 import { FICHA_TEMPLATE, FORMATS, OBJECTIVES, STATUSES, TONES, label, type Objective, type Status, type Tone } from '../components/ideas/meta';
 
 type View = 'quadro' | 'lista';
@@ -201,7 +202,7 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
 
   const persist = async (patch: Partial<Idea> = {}) => {
     const v: Idea = { ...d, ...patch, title: d.title.trim(), format: d.format?.trim() || undefined };
-    const r = isNew && !v.id ? await api.createIdea(slug, { ...v, id: undefined }, body) : await api.saveIdea(slug, v.id, v, body);
+    const r = isNew && !v.id ? await api.createIdea(slug, { ...v, id: undefined }, tidyMd(body)) : await api.saveIdea(slug, v.id, v, tidyMd(body));
     setD(r.data); setDirty(false);
     void qc.invalidateQueries({ queryKey: ['ideas', slug] });
     return r;
@@ -211,7 +212,7 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
     mutationFn: async () => {
       const saved = await persist();
       const rel = relToCompany(saved.file);
-      const t = await api.createTask(slug, { title: saved.data.title, board: 'conteudo', assignee: 'agent:estrategista', links: [rel] } as Partial<Task> & { title: string }, taskBody(saved, rel));
+      const t = await api.createTask(slug, { title: saved.data.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', links: [rel] } as Partial<Task> & { title: string }, taskBody(saved, rel));
       const final = await api.saveIdea(slug, saved.data.id, { ...saved.data, status: 'virou-tarefa', task: t.data.id }, saved.body);
       void qc.invalidateQueries({ queryKey: ['tasks', slug] });
       void qc.invalidateQueries({ queryKey: ['ideas', slug] });

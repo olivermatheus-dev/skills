@@ -1,0 +1,35 @@
+{
+  "channels": {
+    "kind": "youtube#channelListResponse",
+    "items": [{
+      "kind": "youtube#channel", "id": "UCq3Lw0kz8f1sYt7Vn2pR4aQ",
+      "snippet": {
+        "title": "Consultório Leve", "description": "Gestão leve para psicólogos e terapeutas autônomos.",
+        "customUrl": "@consultorioleve", "publishedAt": "2021-03-02T12:00:00Z",
+        "thumbnails": { "default": { "url": "https://yt3.ggpht.com/avatar=s88" }, "high": { "url": "https://yt3.ggpht.com/avatar=s800" } }
+      },
+      "contentDetails": { "relatedPlaylists": { "likes": "", "uploads": "UUq3Lw0kz8f1sYt7Vn2pR4aQ" } },
+      "statistics": { "viewCount": "2210334", "subscriberCount": "48200", "hiddenSubscriberCount": false, "videoCount": "214" },
+      "brandingSettings": { "image": { "bannerExternalUrl": "https://yt3.googleusercontent.com/banner-api" } }
+    }]
+  },
+  "playlistItems": {
+    "items": [
+      { "contentDetails": { "videoId": "aaaaaaaaaa1" } },
+      { "contentDetails": { "videoId": "bbbbbbbbbb2" } },
+      { "contentDetails": { "videoId": "ccccccccc3" } }
+    ]
+  },
+  "videos": {
+    "items": [
+      { "id": "aaaaaaaaaa1", "snippet": { "title": "Faltas de pacientes: a política que funciona", "description": "…", "publishedAt": "2026-09-30T13:00:05Z",
+          "thumbnails": { "high": { "url": "https://i.ytimg.com/vi/aaaaaaaaaa1/hqdefault.jpg" }, "maxres": { "url": "https://i.ytimg.com/vi/aaaaaaaaaa1/maxresdefault.jpg" } } },
+        "contentDetails": { "duration": "PT12M5S" }, "statistics": { "viewCount": "15230", "likeCount": "812", "commentCount": "97" } },
+      { "id": "bbbbbbbbbb2", "snippet": { "title": "O lembrete que salvou minha agenda", "description": "#shorts", "publishedAt": "2026-10-02T18:00:00Z",
+          "thumbnails": { "high": { "url": "https://i.ytimg.com/vi/bbbbbbbbbb2/hqdefault.jpg" } } },
+        "contentDetails": { "duration": "PT48S" }, "statistics": { "viewCount": "48700", "likeCount": "2901" } },
+      { "id": "ccccccccc3", "snippet": { "title": "Live: tira-dúvidas de gestão", "publishedAt": "2026-09-20T22:00:00Z", "thumbnails": {} },
+        "contentDetails": { "duration": "PT1H2M3S" }, "statistics": { "viewCount": "3100", "likeCount": "140", "commentCount": "20" }, "liveStreamingDetails": { "actualStartTime": "2026-09-20T22:00:00Z" } }
+    ]
+  }
+}

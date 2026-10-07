@@ -1,6 +1,8 @@
 // Cliente tipado da API local. Os tipos vêm dos mesmos schemas que validam os arquivos.
 import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef } from '../../schema';
 export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef };
+import type { CollectResult, CompetitorSummary, ProfileSummary } from '../../tools/intel/types';
+export type { CollectResult, CompetitorSummary, ProfileSummary };
 
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
@@ -62,6 +64,9 @@ export const api = {
   setMark: (slug: string, id: string, key: string, mark: Partial<ItemMark>) => req<ItemMark>('PUT', `${pj(slug)}/competitors/${id}/marks`, { key, mark }),
   collect: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<unknown>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
   mediaUrl: (slug: string, compId: string, local?: string) => (local ? `/media/${slug}/${compId}/${local.replace(/^media\//, '')}` : undefined),
+
+  competitorsSummary: (slug: string) => req<CompetitorSummary[]>('GET', `${pj(slug)}/competitors-summary`),
+  collectResults: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<CollectResult[]>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),
 };

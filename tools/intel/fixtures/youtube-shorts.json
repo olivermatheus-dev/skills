@@ -1,0 +1,175 @@
+{
+ "id": "UCq3Lw0kz8f1sYt7Vn2pR4aQ",
+ "channel": "Consultório Leve",
+ "channel_id": "UCq3Lw0kz8f1sYt7Vn2pR4aQ",
+ "title": "Consultório Leve - Shorts",
+ "availability": null,
+ "channel_follower_count": 48200,
+ "description": "Gestão leve para psicólogos e terapeutas autônomos: agenda, financeiro, prontuário e marketing ético. Vídeo novo toda quinta.\n\n📩 contato@consultorio-leve.example",
+ "tags": [
+  "psicologia",
+  "gestão de consultório"
+ ],
+ "thumbnails": [
+  {
+   "url": "https://yt3.googleusercontent.com/banner-consultorioleve=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nfpr-rj",
+   "height": 175,
+   "width": 1060,
+   "preference": -10,
+   "id": "0",
+   "resolution": "1060x175"
+  },
+  {
+   "url": "https://yt3.googleusercontent.com/banner-consultorioleve=s0",
+   "preference": -10,
+   "id": "banner_uncropped"
+  },
+  {
+   "url": "https://yt3.googleusercontent.com/avatar-consultorioleve=s900-c-k-c0x00ffffff-no-rj",
+   "height": 900,
+   "width": 900,
+   "id": "7",
+   "resolution": "900x900"
+  },
+  {
+   "url": "https://yt3.googleusercontent.com/avatar-consultorioleve=s0",
+   "preference": 1,
+   "id": "avatar_uncropped"
+  }
+ ],
+ "uploader_id": "@consultorioleve",
+ "uploader_url": "https://www.youtube.com/@consultorioleve",
+ "modified_date": null,
+ "view_count": null,
+ "playlist_count": null,
+ "uploader": "Consultório Leve",
+ "channel_url": "https://www.youtube.com/channel/UCq3Lw0kz8f1sYt7Vn2pR4aQ",
+ "_type": "playlist",
+ "extractor_key": "YoutubeTab",
+ "extractor": "youtube:tab",
+ "epoch": 1791370800,
+ "webpage_url": "https://www.youtube.com/@consultorioleve/shorts",
+ "webpage_url_basename": "shorts",
+ "entries": [
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "799nKSNrh9U",
+   "url": "https://www.youtube.com/shorts/799nKSNrh9U",
+   "title": "Paciente faltou de novo? Faz isso",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/799nKSNrh9U/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1791126000,
+   "upload_date": "20261004",
+   "view_count": 9800,
+   "live_status": null
+  },
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "CauSDmLhuVt",
+   "url": "https://www.youtube.com/shorts/CauSDmLhuVt",
+   "title": "O lembrete que salvou minha agenda",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/CauSDmLhuVt/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1790694000,
+   "upload_date": "20260929",
+   "view_count": 48700,
+   "live_status": null
+  },
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "qcYezdZ_tDD",
+   "url": "https://www.youtube.com/shorts/qcYezdZ_tDD",
+   "title": "3 frases para cobrar sem constrangimento",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/qcYezdZ_tDD/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1790262000,
+   "upload_date": "20260924",
+   "view_count": 7600,
+   "live_status": null
+  },
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "8hYs5suKcNd",
+   "url": "https://www.youtube.com/shorts/8hYs5suKcNd",
+   "title": "Você ainda anota tudo no papel?",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/8hYs5suKcNd/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1789830000,
+   "upload_date": "20260919",
+   "view_count": 11200,
+   "live_status": null
+  },
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "Zra9A9sKPxZ",
+   "url": "https://www.youtube.com/shorts/Zra9A9sKPxZ",
+   "title": "Psicólogo também precisa de férias (e dá)",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/Zra9A9sKPxZ/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1789398000,
+   "upload_date": "20260914",
+   "view_count": 6900,
+   "live_status": null
+  },
+  {
+   "_type": "url",
+   "ie_key": "Youtube",
+   "id": "9W3qLy7zKUV",
+   "url": "https://www.youtube.com/shorts/9W3qLy7zKUV",
+   "title": "Isso aqui é sigilo de verdade",
+   "description": null,
+   "duration": null,
+   "thumbnails": [
+    {
+     "url": "https://i.ytimg.com/vi/9W3qLy7zKUV/frame0.jpg",
+     "height": 1920,
+     "width": 1080
+    }
+   ],
+   "timestamp": 1788966000,
+   "upload_date": "20260909",
+   "view_count": 8300,
+   "live_status": null
+  }
+ ]
+}

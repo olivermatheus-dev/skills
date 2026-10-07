@@ -42,31 +42,31 @@ export const label = <T extends { id: string; label: string }>(list: T[], id?: s
 /** Ficha de pauta (tarefa 012 §5): contrato de cada peça. */
 export const FICHA_TEMPLATE = `## Objetivo
 
-Um só: informar · novidade · curiosidade · engajar · converter · polêmica (raro, com aval).
+_Um só: informar · novidade · curiosidade · engajar · converter · polêmica (raro, com aval)._
 
 ## Mensagem principal
 
-Em 1 frase: o que a pessoa leva.
+_Em 1 frase: o que a pessoa leva._
 
 ## Público e consciência
 
-Persona e nível de consciência (1 inconsciente do problema → 5 pronto para comprar).
+_Persona e nível de consciência (1 inconsciente do problema → 5 pronto para comprar)._
 
 ## Gancho (nunca engana)
 
-Tipo + texto. A promessa do gancho é entregue no conteúdo, e cedo (até ~60% da duração).
+_Tipo + texto. A promessa do gancho é entregue no conteúdo, e cedo (até ~60% da duração)._
 
 ## Estrutura
 
-Gancho → contexto em 1 frase → loop aberto → entrega em passos → payoff → CTA coerente com o objetivo.
+_Gancho → contexto em 1 frase → loop aberto → entrega em passos → payoff → CTA coerente com o objetivo._
 
 ## Prova/fonte
 
-Fonte de cada afirmação; formato (fmt-*), estilo editorial e tom.
+_Fonte de cada afirmação; formato (fmt-…), estilo editorial e tom._
 
 ## Métrica de sucesso
 
-Ex.: envios (curiosidade/engajamento), comentários, cliques (conversão).
+_Ex.: envios (curiosidade/engajamento), comentários, cliques (conversão)._
 
 ## Observações do Oliver
 

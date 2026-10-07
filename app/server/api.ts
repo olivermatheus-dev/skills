@@ -71,6 +71,9 @@ on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
   return collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems });
 });
 
+// Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
+on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));
+
 on('GET', '/api/validate', () => S.validateAll());
 
 // ---------- infraestrutura ----------
@@ -90,7 +93,7 @@ const readBody = (req: IncomingMessage) => new Promise<any>((res, rej) => {
 const send = (res: ServerResponse, code: number, data: unknown) => {
   res.statusCode = code; res.setHeader('content-type', 'application/json; charset=utf-8'); res.end(JSON.stringify(data ?? null));
 };
-const MIME: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif' };
+const MIME: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon' };
 
 const handler: Connect.NextHandleFunction = async (req, res, next) => {
   const url = new URL(req.url ?? '/', 'http://x');

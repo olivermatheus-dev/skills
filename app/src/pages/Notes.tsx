@@ -8,6 +8,7 @@ import { Button, ErrorBox, Input, Select, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
+import { tidyMd } from '../components/notes/tidy';
 
 type Draft = { slug: string; data: Note; body: string };
 const NO_FOLDER = '__sem_pasta';
@@ -62,10 +63,10 @@ export default function Notes() {
   }, [qc]);
 
   const auto = useAutosave<Draft>({
-    save: async (d) => { const r = await api.saveNote(d.slug, d.data.id, toPayload(d), d.body); putInCache(d.slug, r); },
+    save: async (d) => { const r = await api.saveNote(d.slug, d.data.id, toPayload(d), tidyMd(d.body)); putInCache(d.slug, r); },
     beacon: (d) => {
       void fetch(`/api/projects/${encodeURIComponent(d.slug)}/notes/${d.data.id}`, {
-        method: 'PUT', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ data: toPayload(d), body: d.body }),
+        method: 'PUT', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ data: toPayload(d), body: tidyMd(d.body) }),
       });
     },
   });
@@ -95,9 +96,9 @@ export default function Notes() {
 
   useEffect(() => { if (focusTitle.current && draft) { focusTitle.current = false; titleRef.current?.focus(); titleRef.current?.select(); } }, [draft]);
 
-  const edit = (patch: Partial<Note>, body?: string) => {
+  const edit = (patch: Partial<Note>, body?: string, forId?: string) => {
     const cur = draftRef.current;
-    if (!cur) return;
+    if (!cur || (forId && forId !== cur.data.id)) return; // evento atrasado do editor da anotação anterior
     if (body !== undefined && body === cur.body && !Object.keys(patch).length) return; // editor só normalizou
     const next = { ...cur, data: { ...cur.data, ...patch }, body: body ?? cur.body };
     draftRef.current = next;
@@ -275,7 +276,7 @@ export default function Notes() {
             {auto.state === 'error' && <ErrorBox error={auto.error} />}
             <ErrorBox error={actionError} />
             <div className="note-editor mt-5">
-              <MarkdownEditor key={`${slug}/${draft.data.id}`} value={draft.body} onChange={(md) => edit({}, md)} placeholder="Escreva aqui… (markdown: # título, - lista, **negrito**)" minHeight={420} />
+              <MarkdownEditor key={`${slug}/${draft.data.id}`} value={draft.body} onChange={(md) => edit({}, md, draft.data.id)} placeholder="Escreva aqui… (markdown: # título, - lista, **negrito**)" minHeight={420} />
             </div>
           </div>
         )}

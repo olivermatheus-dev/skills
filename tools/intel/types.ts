@@ -45,3 +45,16 @@ export interface Adapter {
   platform: string;
   collect(profile: Profile, ctx: AdapterCtx): Promise<SnapshotDraft>;
 }
+
+/** resumo leve de um perfil para os cards da lista (sem os itens) */
+export interface ProfileSummary {
+  key: string;
+  platform: string;
+  url: string;
+  handle?: string;
+  snapshots: number;
+  latest?: { collectedAt: string; source: string; items: number; profile: Snapshot['profile']; errors: string[] };
+  /** seguidores na coleta anterior (para o delta) */
+  prevFollowers?: number;
+}
+export interface CompetitorSummary { id: string; profiles: ProfileSummary[]; lastCollected?: string }

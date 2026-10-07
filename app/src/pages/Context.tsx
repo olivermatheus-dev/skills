@@ -6,6 +6,7 @@ import { api, type Project, type TagDef } from '../api';
 import { Button, Card, ErrorBox, Field, Input, Select, Textarea, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { toTag } from '../components/notes/TagsInput';
+import { tidyMd } from '../components/notes/tidy';
 
 const DOCS: Record<string, { label: string; hint: string }> = {
   'BUSINESS.md': { label: 'Negócio', hint: 'Produto, oferta, preço, diferenciais, história.' },
@@ -95,7 +96,7 @@ function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirt
   useEffect(() => () => onDirty(false), [onDirty]);
 
   const save = useMutation({
-    mutationFn: (t: string) => api.saveContext(slug, name, t),
+    mutationFn: (t: string) => api.saveContext(slug, name, tidyMd(t)),
     onSuccess: (_, t) => { setSaved(t); setSavedAt(new Date()); qc.setQueryData(['context', slug, name], { name, text: t }); },
   });
   const doSave = () => { if (dirty && text !== null && !save.isPending) save.mutate(text); };
@@ -107,8 +108,8 @@ function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirt
   const meta = DOCS[name];
 
   return (
-    <div className="max-w-4xl mx-auto px-8 py-6">
-      <div className="flex items-start gap-4 mb-4">
+    <div className="max-w-4xl mx-auto px-8 pb-6">
+      <div className="sticky top-0 z-20 bg-bg/95 backdrop-blur pt-6 pb-3 mb-1 flex items-start gap-4">
         <div className="min-w-0">
           <h2 className="text-2xl font-semibold tracking-tight">{meta?.label ?? name}</h2>
           <div className="text-sm text-muted mt-0.5">{meta?.hint} <span className="font-mono text-xs">context/{name}</span></div>
@@ -218,6 +219,8 @@ function ProjectForm({ slug, onDirty }: { slug: string; onDirty: (v: boolean) =>
 
 // ---------- tags.yml ----------
 type TagRow = TagDef & { _auto?: boolean };
+const TAG_GRID = 'grid grid-cols-[120px_1fr_1fr_150px_28px] gap-2 px-4';
+const TAG_COLORS = ['#4f46e5', '#0891b2', '#16a34a', '#d97706', '#db2777', '#7c3aed', '#dc2626', '#64748b'];
 function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => void }) {
   const qc = useQueryClient();
   const { data, isLoading, error } = useQuery({ queryKey: ['tags', slug], queryFn: () => api.tags(slug) });
@@ -241,15 +244,13 @@ function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => 
       <ErrorBox error={error} />
       {rows && (
         <Card className="p-0 overflow-hidden">
-          <div className="grid grid-cols-[1fr_1fr_150px_32px] gap-2 px-4 py-2 bg-surface-2/60 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-border">
-            <span>Rótulo</span><span>Id (slug)</span><span>Cor</span><span />
+          <div className={cx(TAG_GRID, 'py-2 bg-surface-2/60 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-border')}>
+            <span>Prévia</span><span>Rótulo</span><span>Id (slug)</span><span>Cor</span><span />
           </div>
           {rows.map((t, i) => (
-            <div key={i} className="grid grid-cols-[1fr_1fr_150px_32px] gap-2 px-4 py-2 items-center border-b border-border">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex px-2 py-0.5 rounded-full text-xs font-medium shrink-0" style={{ background: `${t.color}22`, color: t.color }}>{t.label || '—'}</span>
-                <Input className="w-full" value={t.label} placeholder="Rótulo" onChange={(e) => upd(i, { label: e.target.value, ...(t._auto ? { id: toTag(e.target.value) } : {}) })} />
-              </div>
+            <div key={i} className={cx(TAG_GRID, 'py-2 items-center border-b border-border')}>
+              <span className="justify-self-start inline-flex max-w-full truncate px-2 py-0.5 rounded-full text-xs font-medium" style={{ background: `${t.color}22`, color: t.color }}>{t.label || '—'}</span>
+              <Input className="w-full" value={t.label} placeholder="Rótulo" autoFocus={t._auto && !t.label} onChange={(e) => upd(i, { label: e.target.value, ...(t._auto ? { id: toTag(e.target.value) } : {}) })} />
               <Input className={cx('w-full font-mono', dupes.includes(t.id) && 'border-danger')} value={t.id} placeholder="id"
                 onChange={(e) => upd(i, { id: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'), _auto: false })} />
               <div className="flex items-center gap-2">
@@ -261,14 +262,14 @@ function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => 
           ))}
           {!rows.length && <div className="px-4 py-6 text-sm text-muted text-center">Nenhuma tag ainda.</div>}
           <div className="px-4 py-3 flex items-center gap-3">
-            <Button variant="ghost" onClick={() => { setRows([...rows, { id: '', label: '', color: '#4f46e5', _auto: true }]); setDirty(true); }}>+ Nova tag</Button>
+            <Button variant="ghost" onClick={() => { setRows([...rows, { id: '', label: '', color: TAG_COLORS[rows.length % TAG_COLORS.length], _auto: true }]); setDirty(true); }}>+ Nova tag</Button>
             {dupes.length > 0 && <span className="text-xs text-danger">Id repetido: {[...new Set(dupes)].join(', ')}</span>}
             <div className="ml-auto flex items-center gap-3">
               {dirty ? <span className="text-xs text-warn">Não salvo</span> : save.isSuccess ? <span className="text-xs text-ok">Salvo</span> : null}
               <Button onClick={() => save.mutate(rows)} disabled={!dirty || save.isPending || dupes.length > 0}>{save.isPending ? 'Salvando…' : 'Salvar tags'}</Button>
             </div>
           </div>
-          <div className="px-4 pb-3"><ErrorBox error={save.error} /></div>
+          {save.error ? <div className="px-4 pb-3"><ErrorBox error={save.error} /></div> : null}
         </Card>
       )}
     </div>

@@ -26,7 +26,7 @@ function envFiles() {
 }
 
 export function env(key: string): string | undefined {
-  if (process.env[key]) return process.env[key];
+  if (key in process.env) return process.env[key] || undefined; // definido (mesmo vazio) no ambiente manda
   if (!cache) {
     cache = {};
     for (const f of envFiles().reverse()) if (existsSync(f)) Object.assign(cache, parseEnv(readFileSync(f, 'utf8')));

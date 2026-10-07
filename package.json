@@ -7,7 +7,9 @@
     "validate": "tsx tools/validate.ts",
     "typecheck": "tsc --noEmit && tsc --noEmit -p app",
     "app": "vite --config app/vite.config.ts",
-    "app:build": "vite build --config app/vite.config.ts"
+    "app:build": "vite build --config app/vite.config.ts",
+    "collect": "tsx tools/intel/cli.ts",
+    "test:intel": "tsx tools/intel/test.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
