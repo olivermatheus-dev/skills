@@ -47,6 +47,102 @@ function Clock({ video }: { video: React.RefObject<HTMLVideoElement | null> }) {
   return <span className="font-mono text-sm tabular-nums">{fmtT(t)}</span>;
 }
 
+/** seletor estável do elemento clicado: #id ou [data-bloco] dele ou de um ancestral; sem isso, caminho CSS (stable=false) */
+function stableSelector(el: Element): { sel: string; stable: boolean } {
+  for (let n: Element | null = el; n && n.id !== 'root' && n.tagName !== 'BODY'; n = n.parentElement) {
+    if (n.id) return { sel: `#${n.id}`, stable: true };
+    const b = n.getAttribute('data-bloco');
+    if (b) return { sel: `[data-bloco="${b}"]`, stable: true };
+  }
+  const parts: string[] = [];
+  for (let n: Element | null = el; n && n.id !== 'root' && n.tagName !== 'BODY'; n = n.parentElement) {
+    const same = n.parentElement ? [...n.parentElement.children].filter((x) => x.tagName === n!.tagName) : [];
+    parts.unshift(same.length > 1 ? `${n.tagName.toLowerCase()}:nth-of-type(${same.indexOf(n) + 1})` : n.tagName.toLowerCase());
+  }
+  return { sel: ['#root', ...parts].join(' > '), stable: false };
+}
+/** elemento visível no ponto: o de cima com opacidade efetiva > 0 (os estados escondidos do GSAP ficam empilhados) */
+function visibleAt(doc: Document, x: number, y: number): Element | null {
+  const win = doc.defaultView!;
+  return doc.elementsFromPoint(x, y).find((el) => {
+    if (el.id === 'root' || el === doc.body || el === doc.documentElement) return false;
+    let op = 1;
+    for (let n: Element | null = el; n; n = n.parentElement) {
+      const cs = win.getComputedStyle(n);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+      op *= parseFloat(cs.opacity);
+    }
+    return op > 0.05;
+  }) ?? null;
+}
+
+type Hover = { sel: string; stable: boolean; box: { x: number; y: number; w: number; h: number } };
+
+/** composição renderizada ao vivo (render/<fmt>/index.html) num iframe escalado; a timeline GSAP segue o <video> oculto */
+function LivePreview({ src, video, onPick }: { src: string; video: React.RefObject<HTMLVideoElement | null>; onPick: (sel: string, stable: boolean) => void }) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const [size, setSize] = useState({ w: 1080, h: 1920 });
+  const [hover, setHover] = useState<Hover | null>(null);
+  const [error, setError] = useState('');
+  const boxH = Math.round(window.innerHeight * 0.6);
+  const scale = boxH / size.h;
+  const pickRef = useRef(onPick); pickRef.current = onPick;
+
+  useEffect(() => {
+    let raf = 0; let last = -1;
+    const sync = () => {
+      const tl = (frame.current?.contentWindow as (Window & { __timelines?: Record<string, { time: (t: number) => void }> }) | null)?.__timelines?.main;
+      const t = video.current?.currentTime ?? 0;
+      if (tl && t !== last) { tl.time(t); last = t; }
+    };
+    const tick = () => { sync(); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    // seek pausado também pelos eventos: o rAF para quando a janela fica em segundo plano
+    const v = video.current;
+    v?.addEventListener('seeked', sync); v?.addEventListener('timeupdate', sync);
+    frame.current?.addEventListener('load', sync);
+    return () => { cancelAnimationFrame(raf); v?.removeEventListener('seeked', sync); v?.removeEventListener('timeupdate', sync); };
+  }, [video, src]);
+
+  const onLoad = () => {
+    const win = frame.current?.contentWindow as (Window & { __timelines?: Record<string, { pause: () => void }> }) | null;
+    const doc = frame.current?.contentDocument;
+    if (!win || !doc) return;
+    const root = doc.getElementById('root');
+    if (!win.__timelines?.main || !root) { setError('A composição não registrou window.__timelines.main.'); return; }
+    win.__timelines.main.pause();
+    setSize({ w: Number(root.dataset.width) || 1080, h: Number(root.dataset.height) || 1920 });
+    doc.querySelectorAll('audio,video').forEach((m) => { (m as HTMLMediaElement).muted = true; (m as HTMLMediaElement).pause(); });
+    const st = doc.createElement('style'); st.textContent = '*{pointer-events:auto!important;cursor:crosshair!important}'; doc.head.appendChild(st);
+    doc.addEventListener('mousemove', (e) => {
+      const el = visibleAt(doc, e.clientX, e.clientY);
+      if (!el) { setHover(null); return; }
+      const r = el.getBoundingClientRect();
+      setHover({ ...stableSelector(el), box: { x: r.left, y: r.top, w: r.width, h: r.height } });
+    });
+    doc.addEventListener('mouseleave', () => setHover(null));
+    doc.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const el = visibleAt(doc, e.clientX, e.clientY);
+      if (el) { const s = stableSelector(el); pickRef.current(s.sel, s.stable); }
+    }, true);
+  };
+
+  if (error) return <Card className="text-sm text-danger">{error}</Card>;
+  return (
+    <div className="relative rounded-lg overflow-hidden bg-black" style={{ width: size.w * scale, height: boxH }} data-testid="live-preview">
+      <iframe ref={frame} key={src} src={src} onLoad={onLoad} title="Composição ao vivo" className="absolute top-0 left-0 border-0 origin-top-left"
+        style={{ width: size.w, height: size.h, transform: `scale(${scale})` }} />
+      {hover && (
+        <div className="absolute pointer-events-none border-2 border-accent bg-accent/10 z-10"
+          style={{ left: hover.box.x * scale, top: hover.box.y * scale, width: hover.box.w * scale, height: hover.box.h * scale }}>
+          <span className={cx('absolute -top-5 left-0 text-[10px] font-mono px-1 rounded whitespace-nowrap text-white', hover.stable ? 'bg-accent' : 'bg-warn')}>{hover.sel}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Track({ label, children, h = 'h-9' }: { label: string; children: ReactNode; h?: string }) {
   return (
     <div className="flex items-stretch gap-2 mb-1">
@@ -72,10 +168,24 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
   const [text, setText] = useState('');
   const [selector, setSelector] = useState('');
   const [filter, setFilter] = useState<'abertas' | 'todas'>('abertas');
+  // v1.1: clicar no elemento na composição ao vivo (só quando há render/<fmt>/index.html montado)
+  const previews = piece.previews ?? [];
+  const [mode, setMode] = useState<'video' | 'elemento'>('video');
+  const [previewSel, setPreviewSel] = useState('');
+  const preview = previews.includes(previewSel) ? previewSel
+    : [...previews].sort((a, b) => b.length - a.length).find((p) => video.includes(p)) ?? previews[0] ?? '';
+  const live = mode === 'elemento' && !!preview && !!video;
+  const [unstable, setUnstable] = useState(false);
 
   const seek = (t: number, pause = true) => { const v = videoRef.current; if (!v) return; v.currentTime = Math.max(0, Math.min(t, duration)); if (pause) v.pause(); };
-  const pick = (a: VideoAnchor, t: number, sel = '') => { setDraft(a); setSelector(sel); seek(t); };
+  const pick = (a: VideoAnchor, t: number, sel = '') => { setDraft(a); setSelector(sel); setUnstable(false); seek(t); };
   const nowT = () => Math.round((videoRef.current?.currentTime ?? 0) * 100) / 100;
+  const pickElement = (sel: string, stable: boolean) => {
+    videoRef.current?.pause();
+    const t = nowT();
+    setDraft({ kind: 'elemento', selector: sel, t, scene: tl?.scenes.find((s) => t >= s.start && t < s.end)?.id });
+    setSelector(sel); setUnstable(!stable);
+  };
   const areaClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     seek(((e.clientX - r.left) / r.width) * duration);
@@ -111,13 +221,22 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
       <div className="grid gap-6 lg:grid-cols-[auto_1fr] items-start">
         <div className="space-y-2">
           {video ? (
-            <video ref={videoRef} key={video} src={api.pieceFileUrl(slug, path, `exports/${video}`)} controls preload="metadata"
-              className="rounded-lg bg-black max-h-[60vh] w-auto max-w-full" data-testid="player" />
+            <>
+              <video ref={videoRef} key={video} src={api.pieceFileUrl(slug, path, `exports/${video}`)} controls={!live} preload="metadata"
+                className={cx('rounded-lg bg-black max-h-[60vh] w-auto max-w-full', live && 'hidden')} data-testid="player" />
+              {live && <LivePreview src={api.pieceFileUrl(slug, path, `render/${preview}/index.html`)} video={videoRef} onPick={pickElement} />}
+            </>
           ) : <Empty title="Sem MP4 em exports/" hint="Renderize o vídeo para poder anotar sobre ele." />}
           <div className="flex items-center gap-2 flex-wrap">
+            {live && <Button variant="soft" aria-label="Tocar/pausar" onClick={() => { const v = videoRef.current; if (v) void (v.paused ? v.play() : v.pause()); }}>⏯</Button>}
             <Clock video={videoRef} />
             <span className="text-xs text-muted">/ {fmtT(duration)}</span>
             <Button variant="soft" onClick={() => { videoRef.current?.pause(); setDraft({ kind: 'tempo', t: nowT() }); setSelector(''); }}>Anotar neste tempo</Button>
+            {previews.length > 0 && video && (
+              <Button variant={live ? 'primary' : 'soft'} data-testid="modo-elemento" title="Renderiza a composição ao vivo: passe o mouse e clique no elemento para anotar"
+                onClick={() => setMode(live ? 'video' : 'elemento')}>{live ? 'Voltar ao MP4' : 'Clicar no elemento'}</Button>
+            )}
+            {live && previews.length > 1 && <Select aria-label="Composição" value={preview} onChange={(e) => setPreviewSel(e.target.value)}>{previews.map((p) => <option key={p}>{p}</option>)}</Select>}
             {videos.length > 1 && <Select className="ml-auto" aria-label="Versão do vídeo" value={video} onChange={(e) => setVersion(e.target.value)}>{videos.map((v) => <option key={v}>{v}</option>)}</Select>}
           </div>
         </div>
@@ -125,7 +244,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
         <Card>
           <div className="text-sm font-medium mb-2">Nova anotação</div>
           {!draft ? (
-            <p className="text-sm text-muted">Clique numa cena, fala ou evento nas faixas abaixo — ou pause o vídeo e use “Anotar neste tempo”.</p>
+            <p className="text-sm text-muted">Clique numa cena, fala ou evento nas faixas abaixo — ou pause o vídeo e use “Anotar neste tempo”{previews.length > 0 ? ', ou “Clicar no elemento” e clique no quadro' : ''}.</p>
           ) : (
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
@@ -136,6 +255,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
               <TipoPicker value={tipo} onChange={setTipo} />
               <Textarea rows={3} value={text} onChange={(e) => setText(e.target.value)} placeholder={tipo === 'template' ? 'O que virar componente? (ex.: este card de agenda)' : 'O que está errado / o que mudar?'} />
               <Input className="w-full font-mono text-xs" value={selector} onChange={(e) => setSelector(e.target.value)} placeholder="Elemento (opcional): #id ou [data-bloco=nome]" />
+              {unstable && selector && <p className="text-xs text-warn">Sem id estável: gravei o caminho CSS. Peça à IA para dar um <code>id</code> a esse elemento.</p>}
               <div className="flex justify-end"><Button disabled={!text.trim() || saving} onClick={submit}>Salvar anotação</Button></div>
             </div>
           )}

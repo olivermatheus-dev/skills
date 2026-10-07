@@ -1,6 +1,6 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (sessão 022 fase A + 024 kit de marca). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
@@ -10,7 +10,6 @@
   - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`; offline: `win-maria`) → aval → **Eleven v4 pela API** (`elevenlabs.mjs`, skill `elevenlabs`: emoção por audio tags em `vo[].el`, tempos exatos, encaixe automático). Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
 - **Revisão de vídeo por anotações (022 v1):** app → **Conteúdos** (player + faixas da `timeline.json`; anota cena/fala/evento/tempo/elemento — v1.1: modo "Clicar no elemento" renderiza a composição ao vivo e captura o `#id` clicando no quadro, tipo corrigir|ajustar|template|ok → `revisao.json`). IA: `node tools/review.mjs <pasta>` (abertas + contexto + quadros) e `… resolve <id> "o que mudou"`. Regras na skill `video`.
 - **Roteiro pronto e anotações no roteiro (022 A):** app → **Conteúdos** → **Novo conteúdo** (colar ou enviar .md/.txt/.docx → `contents/AAAA-MM-DD-<tema>/roteiro.md` + tarefa opcional para a IA). Na peça, aba **Roteiro**: selecionar trecho → anotar; Editar; **Aprovar roteiro**. A IA lê com o mesmo `review.mjs` (trecho reencontrado mesmo se as linhas mudarem).
-  - ⚠ **v1.1 (clicar no elemento) precisa ser reaplicada** em `app/src/components/pieces/VideoReview.tsx`: a fase A reescreveu a tela e o código da v1.1, feito em paralelo noutra sessão, não ficou no arquivo.
 - **Kit de marca (024):** `brand/brand.json` é a fonte dos tokens → gera o `brand.css` (`npm run brand -- <slug>`; o validate acusa CSS editado à mão). App → Contexto e marca → **Kit de marca**: prévia ao vivo, preset **Minimalista (estilo Apple)**, cores com contraste, fontes, raio/sombras, ícones **Lucide** (`node tools/icon.mjs <nome> --brand <slug>`), fazer / não fazer → bloco no `BRAND.md`. A kz ainda **sem** preset aplicado: decidir no app.
 - **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).
 - **Chaves de API por projeto:** app → **Configurações** (grava `companies/<slug>/.env`, fora do git; botão Testar). `.env` da raiz = reserva.
@@ -32,7 +31,6 @@
 |---|---|---|
 | **006** | Meta do MVP: 12 posts da kz | pendências 1–4 |
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
-| **022 v1.1** | Reaplicar "clicar no elemento" em `VideoReview.tsx` (código na sessão "022 v1") | — |
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
