@@ -2,8 +2,8 @@
 
 Backlog de **construção do repositório**. Tarefas de marketing de cada empresa ficam em `companies/<slug>/tasks.md`.
 
-## Prioridade atual
-**Skills de vídeo em motion graphics, funcionando de verdade, para os vídeos de lançamento da kz** (SaaS para terapeutas). Todo o resto espera.
+## Meta do MVP
+**12 posts da kz prontos para publicar** (carrosséis, posts estáticos e vídeos em motion graphics sobre o produto), produzidos por skills que funcionam de verdade, incluindo **mini skills por tipo e estilo de conteúdo** (3D, diálogos, memes etc.). A interface visual (Vite), a inteligência de mercado e o resto só vêm depois disso.
 
 Princípios:
 - **Só construir o que vai ser usado agora.** Ideia boa, mas não prioritária, vai para `IDEIAS.md` ou `DEPOIS.md`, sem pasta e sem código.
@@ -24,7 +24,8 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 001 | [Estrutura de empresa + pasta de marca + `_inbox` (kz migrada)](tasks/001-estrutura-e-marca/TASK.md) | — | pronta |
 | 002 | [Base de conhecimento de motion (material do usuário → referências da skill)](tasks/002-conhecimento-motion/TASK.md) | — | contínua |
 | 003 | [Stack de render de motion + protótipo](tasks/003-stack-motion/TASK.md) | 001 | rascunho |
-| 004 | [Skill de motion graphics v1](tasks/004-skill-motion-v1/TASK.md) | 002, 003 | rascunho |
-| 005 | [Vídeos de lançamento da kz](tasks/005-videos-lancamento-kz/TASK.md) | 004 | rascunho |
+| 004 | [Motor de motion graphics v1 (skill base de vídeo)](tasks/004-skill-motion-v1/TASK.md) | 002, 003 | rascunho |
+| 005 | [Formatos: arquitetura e catálogo de mini skills por tipo/estilo de conteúdo](tasks/005-formatos-mini-skills/TASK.md) | 004 | rascunho |
+| 006 | [Meta: 12 posts da kz](tasks/006-meta-12-posts-kz/TASK.md) | 005 | rascunho |
 
-Adiado (sem pasta): ver `DEPOIS.md`. Em discussão: `INTEL.md` (inteligência de mercado). Caixa de entrada: `IDEIAS.md`.
+Adiado (sem pasta): ver `DEPOIS.md`. Depois do MVP: interface visual em Vite e `INTEL.md` (inteligência de mercado). Caixa de entrada: `IDEIAS.md`.

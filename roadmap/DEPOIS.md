@@ -15,5 +15,5 @@ Coisas registradas que **não** fazem parte da prioridade atual. Quando uma volt
 - **Evolução do carrossel**: mais formatos (post único, stories, capas, thumbnails) e templates por empresa.
 
 ## Gestão
-- **Interface de gestão** de tarefas, projetos e peças (lendo os arquivos do repo).
+- **Interface visual em Vite** para gerenciar tudo (empresas, projetos, tarefas, ideias, peças exportadas), lendo os arquivos do repo. Só depois do MVP (12 posts da kz).
 - **Inteligência de mercado** (anúncios de concorrentes semanais, monitoramento de redes e virais, tendências do Google, ranqueador econômico): análise e desenho em `INTEL.md`.

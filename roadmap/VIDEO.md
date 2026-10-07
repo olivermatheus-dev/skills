@@ -3,7 +3,9 @@
 > Documento-mãe do vídeo. Atualize quando uma decisão mudar a visão.
 
 ## Foco agora
-**Motion graphics** (a maior parte dos vídeos): vídeos gerados pelo Claude com HTML/CSS/JS animado → MP4, usando a identidade da marca. Primeiro uso: **vídeos de lançamento da kz**.
+**Motion graphics** (a maior parte dos vídeos): vídeos gerados pelo Claude com HTML/CSS/JS animado → MP4, usando a identidade da marca. Primeiro uso: **posts da kz** (meta do MVP: 12 posts). Inclui **3D**, **diálogos animados** e **memes**.
+
+Arquitetura: **motores** (`carousel`, `motion`) concentram o técnico; **formatos** (`fmt-*`, mini skills curtas) descrevem cada tipo/estilo de conteúdo e chamam o motor. Ver tarefa 005.
 
 ## O que o usuário quer (resumo das palavras dele)
 - Um **conjunto de skills de vídeo**, não uma só, muito bem pensadas e com qualidade de editor profissional.

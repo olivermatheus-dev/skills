@@ -1,6 +1,6 @@
 # Hub de marketing
 
-Central de estratégia, conteúdo e vendas com IA para as empresas do Oliver. Responda em pt-BR, direto, sem teoria desnecessária.
+Central de gestão, estratégia, conteúdo e vendas com IA para as empresas do Oliver. Toda a gestão do negócio vive aqui: cada empresa com seus documentos, ideias e peças exportadas. Responda em pt-BR, direto, sem teoria desnecessária.
 
 ## Empresas
 

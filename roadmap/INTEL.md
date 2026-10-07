@@ -6,7 +6,7 @@
 - **Concorrentes**: toda semana, coletar os anúncios que eles estão veiculando e analisar ângulos, ofertas, formatos e criativos.
 - **Redes sociais**: acompanhar os perfis próprios e os dos concorrentes, e achar conteúdos virais por hashtag, assunto ou nicho.
 - **Tendências**: o que está em alta no Google, o que está sendo pesquisado e os assuntos do momento. Encaixar nos conteúdos quando fizer sentido para a marca.
-- **Ranqueador econômico**: tecnologia "GEV/JEV" (nome a confirmar com o usuário) para **ordenar e filtrar** muitos itens de forma barata, sem passar tudo por um LLM.
+- **Ranqueador econômico**: tecnologia **JEV**, para **ordenar e filtrar** muitos itens de forma barata, sem passar tudo por um LLM. O usuário tem vídeos explicando como criar o nosso próprio (registrar em `material/` quando chegarem).
 - **Tudo centralizado**: os dados ficam num lugar só, para que as skills (ideias, anúncios, LP, vídeo) já leiam esses insights.
 - Existe um software de marketing do usuário que precisa de refatoração. Por enquanto o trabalho fica aqui.
 
@@ -53,7 +53,7 @@ Princípio: **usar coletores prontos e pagos por uso** em vez de manter scrapers
 3. **v2:** ranqueador + mais fontes + rodar sozinho toda semana.
 
 ## Perguntas em aberto
-- [ ] "GEV/JEV": qual é exatamente? (link ou nome correto) Será que é um *reranker*/ordenador por embeddings?
+- [x] Tecnologia confirmada: **JEV**. O usuário vai mandar vídeos sobre como construir.
 - [ ] Orçamento mensal aceitável para coletores pagos (Apify, SerpAPI)?
 - [ ] Quantos concorrentes por empresa? Quais redes importam?
-- [ ] O software de marketing existente vai, no futuro, absorver este hub ou ler os dados dele?
+- [x] Decisão (2026-10-07): **toda a gestão do negócio fica neste repo**. O SaaS de marketing do usuário no futuro só puxa ideias daqui e implementa por lá.
