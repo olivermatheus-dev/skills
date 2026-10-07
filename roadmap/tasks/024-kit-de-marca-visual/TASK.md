@@ -1,0 +1,40 @@
+# 024 — Kit de marca visual e editável no app (tokens, fontes, ícones, estilo e anotações)
+
+**Status:** rascunho · **Depende de:** 018 (app) · **Liga com:** 001 (pasta de marca), 019 (visual do app), skills `carousel`, `video` e `fmt-*`, `tools/contrast.mjs`, DEPOIS.md ("tokens.json como fonte única")
+
+## Pedido do Oliver (2026-10-07)
+- O kit de marca precisa ser **visual e fácil**: adicionar e ajustar tokens, fontes e o kit completo **pelo app**, sem editar CSS à mão.
+- Escolher **instruções de estilo visual** (mais minimalista, mais ousado etc.) e deixar **anotações** para direcionar o estilo.
+- O kit alimenta carrosséis, vídeos e tudo o mais: o objetivo é **sair sempre o mais padronizado possível**, com consistência visual.
+- Itens citados: arredondamento, fontes, biblioteca de ícones, cor de fundo, cor principal "e por aí vai".
+
+## O que já existe
+- `companies/<slug>/brand/brand.css`: fonte única de tokens (cores por papel, fontes locais). Carrossel e vídeo linkam direto.
+- `brand/BRAND.md`: regras de uso (essência, cores, texto, fundo, formas, logo, ícones, movimento, som, vídeo, **proibições**). Manda sobre os defaults das skills.
+- Pastas `logo/ icons/ vectors/ fonts/ photos/ screenshots/`. App → Contexto e marca → **Marca**: mostra o `brand.css` **só leitura**.
+
+## Escopo (proposta, a validar com o Oliver)
+1. **Tela "Kit de marca"** no app, por seções, com prévia ao vivo:
+   - **Cores por papel:** fundo, superfície, texto, principal, destaque, borda, estados; seletor de cor + checagem de contraste (`contrast.mjs`) na hora.
+   - **Tipografia:** enviar fonte (.woff2/.ttf, com licença) ou escolher do Google Fonts; papéis título / texto / destaque; pesos e escala de tamanhos.
+   - **Formas:** arredondamento (raio por nível), borda, sombra, espaçamento/densidade.
+   - **Ícones:** biblioteca (ex.: Lucide, Phosphor, Tabler), traço/peso, preenchido ou linha; ícones próprios em `icons/`.
+   - **Logo e assets:** enviar variações (cor, branca, símbolo) e área de respiro.
+   - **Estilo:** presets (minimalista, editorial, ousado, divertido…) que ajustam vários tokens de uma vez + controles (densidade, contraste, quantidade de cor, uso de foto/ilustração).
+   - **Anotações e regras:** "fazer / não fazer", proibições, referências de exemplo (imagens): vão para o `BRAND.md`.
+2. **Grava nos mesmos arquivos** (`brand.css` + seções do `BRAND.md`), validados por schema; as skills seguem lendo como hoje.
+3. **Prévia real:** um slide de carrossel e um quadro de vídeo de amostra renderizados com os tokens enquanto se edita.
+4. Molde em `companies/_modelo/brand/` com todos os tokens, para empresa nova já nascer completa.
+
+## Perguntas em aberto
+- Fonte de verdade: continuar no `brand.css` editado pelo app, ou criar `brand.json` (tokens) que gera o `brand.css` (ver DEPOIS.md)?
+- Quais presets de estilo e o que cada um muda?
+- Biblioteca de ícones padrão (e licença)?
+
+## Critérios de pronto
+- [ ] Mudar cor principal, raio e fonte no app e ver a prévia mudar na hora; arquivos gravados e válidos.
+- [ ] Um carrossel gerado depois da mudança sai com os novos tokens sem nenhum ajuste à mão.
+- [ ] Anotações de estilo feitas no app aparecem no `BRAND.md` e são seguidas pela skill `carousel`.
+
+## Log
+- 2026-10-07 — criada a partir do pedido do Oliver (registro; não iniciada).

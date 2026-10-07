@@ -29,3 +29,4 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Publicidade criativa com IA: método para gerar e escolher boas ideias de campanha → 016
 - 2026-10-07 · Integrações Higgsfield (vídeo IA), Suno (trilhas), ElevenLabs (voz) → 017
 - 2026-10-07 · Vídeos com personagens caricatos (vetores com olhos e expressões) e modelos 3D → `fmt-personagem` no catálogo da 005
+- 2026-10-07 · Kit de marca visual e fácil no app (tokens, fontes, raio, ícones, cores, presets de estilo, anotações) para padronizar carrossel/vídeo → 024
