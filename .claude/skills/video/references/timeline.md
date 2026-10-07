@@ -22,11 +22,14 @@ Tempos em **segundos** (float). `fps` de trabalho 30 (render final pode ser maio
     { "id": "e2", "t": 3.10, "scene": "s2", "type": "click",  "target": "#btn-confirm" }
   ],
   "sfx": [
-    { "event": "e1", "name": "notify", "gain_db": -8 },
-    { "event": "e2", "name": "click",  "gain_db": -12 }
+    { "event": "e1", "asset": "ui-gentle-notify-02", "align": "start", "gain_db": -14, "pan": 0 },
+    { "event": "e2", "asset": "ui-elegant-click-01", "align": "start", "gain_db": -18, "pan": 0 },
+    { "event": "e3", "asset": "whoosh-air-soft-short-01", "align": "peak", "gain_db": -16, "pan": 0.2 }
   ]
 }
 ```
+
+`asset` = id em `library/audio/sfx.json`. `align: "peak"` → o arquivo começa em `t_evento − peak_s` (o pico cai no quadro do evento; use em whoosh/impact). `align: "start"` → começa no evento (clicks, pops). `pan` de −1 a 1 (discreto: até ±0,3).
 
 Regras de validação (o check do kit deve acusar):
 - Silêncio entre falas consecutivas > 0,5 s (exceto cena com `"pause": true`, até 1 s).
@@ -34,5 +37,6 @@ Regras de validação (o check do kit deve acusar):
 - Evento fora da cena a que pertence.
 - Último bloco (`cartão final`) com < 2 s.
 - Texto na tela (no `composition.html`) visível por menos que `máx(1 s; 0,3 s × palavras)`.
+- `sfx` com `asset` fora do catálogo ou sem licença; o mesmo `asset` repetido mais de 3× (usar variantes da família).
 
 Tipos de evento sugeridos: `click`, `press`, `type`, `hover`, `drag`, `notify`, `swap`, `count`, `reveal`, `cut`, `impact`.

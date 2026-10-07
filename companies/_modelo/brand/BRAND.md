@@ -33,6 +33,11 @@ Estilo de foto, biblioteca de ícones, ilustração.
 ## Movimento (opcional)
 Só ajustes sobre o default das skills (ex.: "mais calmo", estilo do cursor).
 
+## Som (identidade sonora)
+Eixos (marque um lado ou o meio): orgânico ↔ digital · suave ↔ agressivo · minimalista ↔ maximalista · elegante ↔ playful · cinematográfico ↔ natural · quente ↔ tecnológico.
+Famílias preferidas da biblioteca (`library/audio/sfx.json`): …  Trilhas da marca (`music.json`, `brand: <slug>`): …  BPM típico: …
+(vazio = default das skills: minimalista premium)
+
 ## Vídeo
 Formatos padrão, voz (serviço + nome), trilha (sintetizada/licenciada), elenco fictício para dados de demonstração.
 

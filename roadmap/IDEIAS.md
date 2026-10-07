@@ -22,3 +22,4 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Chaves de API por `.env` (ex.: ElevenLabs para o agente de vídeo gerar áudio) → APP.md; `.env.example` criado
 - 2026-10-07 · Agentes com instruções e skills próprias, orquestrador que delega, Kanban com visão do Oliver × visão da IA, planejamento em tarefas antes de executar → **implementado** (`.claude/agents/`, skill `orquestrar`, `tools/board.mjs`)
 - 2026-10-07 · Falar com os agentes (instruções e trabalho junto), heartbeat que acorda o agente com tarefa pronta, tarefas recorrentes → **implementado** (`.claude/agent-notes/`, `claude --agent`, `tools/heartbeat.mjs`, `board/recorrentes.json`)
+- 2026-10-07 · Áudio próprio: biblioteca de SFX e trilhas (baixar, gerar, compor), agente especializado em trilhas para objetivos e sensações diferentes → **implementado** (skill `audio`, agente `sound-designer`, `library/audio/`, `tools/audio/`); popular a biblioteca → tarefa 008

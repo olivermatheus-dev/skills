@@ -28,7 +28,8 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 ## Receitas de delegação
 | pedido | cadeia |
 |---|---|
-| vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (plano.md) → revisor → **aval do Oliver** → editor-de-video (voz, cenas, render) → revisor (QA) → Oliver |
+| vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (plano.md) → revisor → **aval do Oliver** → editor-de-video (voz + timeline) → **sound-designer (trilha + efeitos) ∥ editor-de-video (cenas)** → editor-de-video (render) → revisor (QA) → Oliver |
+| trilha sonora / sons | sound-designer (Modo A ou C da skill `audio`) → **Oliver ouve** |
 | carrossel / post | roteirista (roteiro + legenda) → designer (PNG) → revisor → Oliver |
 | LP / carta / VSL | roteirista (landing-page) → revisor → Oliver |
 | anúncios | roteirista (ads-meta: ângulos e textos) → designer e/ou editor-de-video (criativos) → revisor → Oliver |
@@ -60,4 +61,4 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 - **Permissões:** o heartbeat roda com `--permission-mode acceptEdits` e uma lista de ferramentas permitidas (variáveis `HEARTBEAT_PERMISSION_MODE` e `HEARTBEAT_ALLOWED_TOOLS`). Nunca usar o modo que pula permissões.
 
 ## Agentes
-`.claude/agents/`: `estrategista`, `roteirista`, `designer`, `editor-de-video`, `revisor`. Cada um sabe suas skills e a ordem delas.
+`.claude/agents/`: `estrategista`, `roteirista`, `designer`, `editor-de-video`, `sound-designer`, `revisor`. Cada um sabe suas skills e a ordem delas.

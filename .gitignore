@@ -19,3 +19,8 @@ _inbox/
 .env.*
 !.env.example
 logs/
+*.flac
+*.ogg
+*.aif
+*.aiff
+*.m4a

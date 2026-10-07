@@ -27,6 +27,7 @@ companies/<slug>/
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
+Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locais, catálogos `sfx.json`/`music.json`/`bases.json` no git, e **sem licença não usa**. Ferramenta: `node tools/audio/catalog.mjs`.
 
 ## Skills (`.claude/skills/`)
 
@@ -40,6 +41,7 @@ Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
 | `launch-plan` | plano de lançamento semana a semana |
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
+| `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
 
 **Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
@@ -64,6 +66,7 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
   | `roteirista` | roteiros, legendas, LP, carta, VSL, textos de anúncio |
   | `designer` | carrosséis, posts, criativos estáticos (PNG) |
   | `editor-de-video` | plano, voz, cenas e MP4 em motion |
+  | `sound-designer` | trilhas sonoras, efeitos e mix; cuida da biblioteca de áudio |
   | `revisor` | QA de tudo antes de ir para o Oliver |
 
   Todos seguem `.claude/skills/orquestrar/references/protocolo.md` e leem suas instruções permanentes em `.claude/agent-notes/<agente>.md`.

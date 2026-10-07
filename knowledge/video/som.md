@@ -21,8 +21,14 @@
 - **Whoosh** de transição começa **4–8 quadros antes** do movimento (J-cut sonoro).
 - UI SFX baixinhos e curtos: são tempero, não protagonistas. Não colocar SFX em todo corte.
 
+## 2b. Música como narrativa
+- **Não é papel de parede:** varie energia, instrumentação, presença, e até a ausência. **Tirar a música** num momento importante pode pesar mais do que acrescentar.
+- **Entrar e sair em pontos musicais** (começo de frase, mudança harmônica, fim de seção, build, drop, resolução), com fade quando preciso. A estrutura da música e a da história trabalham juntas: editar música é editar narrativa.
+- **Silêncio:** reduzir a densidade antes de um evento costuma funcionar melhor que um riser.
+- Hierarquia completa e sound design: `sound-design.md`.
+
 ## 3. Voz + trilha
-- Com locução, a trilha **abaixa 8–12 dB** enquanto há fala (*ducking*), com ataque de ~100 ms e retorno de ~300–500 ms.
+- Com locução, a trilha **abaixa 8–12 dB** enquanto há fala (*ducking*), com ataque de ~100 ms e retorno de ~300–500 ms. Ducking automático é ponto de partida: **revise as transições** (subidas no meio de frase, buracos).
 - Evite a melodia da trilha na mesma faixa da voz: prefira trilha mais grave ou mais aguda, ou uma melodia simples.
 
 ## 4. Mixagem e entrega
@@ -31,10 +37,8 @@
 - Não esmagar: evite compressão/limitação pesada. A faixa dinâmica (LRA) entre ~4 e 10 LU é saudável para trailer.
 - **Medir sempre** (ex.: `ffmpeg -af loudnorm=print_format=summary` ou `ebur128`) e registrar o valor no `plano.md`.
 
-## 5. Fontes de áudio (em ordem de preferência)
-1. Kit próprio (sintetizado em código: Web Audio API / OfflineAudioContext → WAV) e voz TTS da marca.
-2. Faixa licenciada registrada no `BRAND.md`.
-3. Nunca: áudio de terceiros sem licença.
+## 5. Fontes de áudio
+Sempre **a biblioteca primeiro** (`library/audio/`, catálogo com licença de cada arquivo); depois gerar (IA, síntese em código) ou baixar de fonte com licença compatível, e **catalogar** antes de usar. Nunca áudio sem licença registrada. Processo completo: skill `audio`.
 - Limite honesto: trilha 100% sintetizada é ótima para pulsos, impactos e risers, mas costuma soar menos rica que uma trilha produzida. Para vídeos-chave (lançamento), considerar uma faixa licenciada.
 
 ## 6. Checklist

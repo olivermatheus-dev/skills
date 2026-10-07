@@ -42,6 +42,13 @@ Arquivos em `logo/` — **pendente** (logo estava em revisão em abr/2026; aguar
 ## Movimento
 Mais calmo que o default: preferir molas `GENTLE`/`FAST`, evitar `SOFT` com passagem grande e chicotes agressivos. Nada de partículas festivas, exceto confirmação de pagamento/agendamento.
 
+## Som (identidade sonora)
+- **Eixos:** orgânico (mais que digital) · suave · minimalista · elegante · natural · quente. Coerente com "calma antes de impacto".
+- **Trilha:** acolhedora, 70–95 BPM, piano/cordas leves/pads quentes; nada épico ou agressivo.
+- **Efeitos:** clicks e pops discretos de UI, *air* suave para movimento, soft impacts só na revelação, notificação/sucesso gentil (sem "plim" estridente). Famílias: a definir ao montar a biblioteca.
+- **Proibido:** bass drop, sirene, glitch agressivo, risada pronta.
+- A validar com o Oliver.
+
 ## Vídeo
 - Formatos padrão: 4:5 e 9:16.
 - Voz: a definir.

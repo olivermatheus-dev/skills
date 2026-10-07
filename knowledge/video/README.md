@@ -14,6 +14,7 @@ Regras **executáveis** de edição e motion, já verificadas, para as skills de
 | `pacing-e-atencao.md` | escala de intensidade 0–4, curva de energia, densidade, pattern interrupt motivado, diagnóstico | desenhar a curva do vídeo e revisar o ritmo |
 | `cobertura-e-reacao.md` | função do próximo plano; cutaway, insert, reação, eyeline, shot/reverse, match, smash (com tradução para motion) | escolher cada troca de cena |
 | `b-roll.md` | tipos de B-roll por objetivo, sincronia semântica, fontes e integridade, clichês proibidos | escolher o visual que acompanha a fala |
+| `sound-design.md` | função de cada efeito, sistema de decisão, regras por tipo (whoosh, impact, riser…), motion, layering, anti-genérico, QC em 6 passadas | escolher e posicionar SFX |
 | `som.md` | BPM e cortes, desenho de som de trailer, ducking, −14 LUFS | trilha, SFX, mix |
 | `cortes-e-montagem.md` | motivação do corte, hard/jump/J/L-cut, cut on action, match cut em motion | toda edição e toda troca de cena em motion |
 

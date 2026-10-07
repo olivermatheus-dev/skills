@@ -11,6 +11,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 2 — cobertura, continuidade e reação | cutaway, insert, reação, eyeline, shot/reverse, match, smash, sistema de decisão | knowledge/video/cobertura-e-reacao.md | destilado |
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 3 — B-roll e cobertura visual | 11 tipos de B-roll, sincronia semântica, fontes, integridade, QC | knowledge/video/b-roll.md | destilado |
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 4 — ritmo, pacing e atenção | macro/micro, densidade, interrupt motivado, escala 0–4, diagnóstico, QC | knowledge/video/pacing-e-atencao.md (+ ajuste em ritmo-e-leitura) | destilado |
+| 2026-10-07 | (chat) Etapa 5 — sound design e biblioteca de SFX | funções, hierarquia, biblioteca e metadados, regras por tipo, motion, layering, identidade sonora, QC | knowledge/video/sound-design.md, som.md, library/audio/README.md, skill `audio`, agente `sound-designer` | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -74,3 +75,20 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - a escala de intensidade 0–4 virou **coluna obrigatória** na folha de batidas do `plano.md`, junto com a "função da cena";
     - curva típica de um vídeo curto de produto: 3-2-1/2-3-4-1.
   - **Ligações:** skill `video`, `plano.md`, `editor-de-video` e `revisor` agora apontam para os 3 arquivos novos.
+- **2026-10-07 · Etapa 5 (som):** o conteúdo está correto. O que acrescentei:
+  - **Valores iniciais:**
+    - variação de pops: pitch ±1–2 semitons ou ±5% de ganho;
+    - crossfade de 5–20 ms contra estalos e de 0,3–2 s para ambiência;
+    - pan ≤ ±0,3;
+    - SFX de UI 12–20 dB abaixo da voz;
+    - riser de 1–4 s.
+  - **"O pico do whoosh no quadro de maior velocidade" virou regra executável:**
+    - o catálogo mede `peak_s` de cada arquivo;
+    - o `timeline.json` usa `align: "peak"`, ou seja, o arquivo começa em `t − peak_s`.
+  - **Infraestrutura nova, para não depender de efeitos que ainda não temos:**
+    - `library/audio/`, com os arquivos locais e os catálogos no git;
+    - `tools/audio/catalog.mjs` (scan, search e check, com licença obrigatória), testado;
+    - `tools/audio/elevenlabs-sfx.mjs`, não testado por falta de chave;
+    - skill `audio` (trilha, sound design e curadoria);
+    - agente `sound-designer`;
+    - seção **Som** no `BRAND.md`.

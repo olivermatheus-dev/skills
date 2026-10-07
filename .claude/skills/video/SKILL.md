@@ -14,6 +14,7 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | empresa | `companies/<slug>/brand/BRAND.md` (proibições = regra dura) · `context/AUDIENCE.md` · `context/BUSINESS.md` (o que é verdade) · `context/VOICE.md` |
 | formato pedido | `.claude/skills/fmt-<formato>/SKILL.md`, se existir (receita de cenas) |
 | vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
+| áudio (trilha e efeitos) | skill `audio` (o agente `sound-designer` faz) · `knowledge/video/sound-design.md` |
 | montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
 | escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `tecnico-hyperframes.md` |
 
@@ -41,7 +42,7 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 ### 2. Voz e tempos
 - Com locução: gerar a voz (`locucao.json` → TTS) e extrair o tempo de cada palavra. Sem locução: escolher **BPM** e montar a grade de batidas.
 - `timeline.json` nasce do áudio: falas ≤ 0,5 s de silêncio entre si; pausa ≤ 1 s só na virada (`"pause": true`); cena dura o que a fala dura; mudanças a cada 0,4–1,2 s de fala; cortes nos tempos fortes.
-- Gestos (clique, digitação, entrada) em `events`; cada SFX aponta para um evento.
+- Gestos (clique, digitação, entrada) em `events`; cada SFX aponta para um evento e para um asset do catálogo (`library/audio/sfx.json`). Trilha e efeitos: skill `audio` (Modos A e B).
 
 ### 3. Cenas (`composition.html`)
 - **Tokens:** linkar `../../brand/brand.css` (mesmo contrato do carrossel). Nunca hardcodar cor da marca.
