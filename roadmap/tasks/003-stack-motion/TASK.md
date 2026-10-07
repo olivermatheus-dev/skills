@@ -14,6 +14,9 @@ O usuário **já usa HyperFrames + GSAP em produção** no produto Ludus (skill 
 
 → **HyperFrames + GSAP vira o candidato nº 1.** Antes de pesquisar alternativas, avaliar **reaproveitar o kit do Ludus** de forma genérica (sem regras do Ludus).
 
+## Requisito novo (2026-10-07)
+O kit precisa carregar **cenas isoladas por id** e aplicar **CSS de tema por variante** (tarefa 013), para gerar variantes de anúncio sem reescrever código.
+
 ## Candidatos (pesquisa curta: verificar licença, maturidade, se suporta fontes, SVG, áudio e 60 fps)
 - **HyperFrames + GSAP** (em uso no Ludus): framework HTML → vídeo pensado para agentes.
 - **Remotion**: React → MP4; maduro, com preview no navegador (Studio); licença gratuita para empresas pequenas (confirmar).

@@ -52,6 +52,7 @@ Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/tim
 
 ### 3. Cenas (`composition.html`)
 - Linkar `../../brand/brand.css`; nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`knowledge/video/tecnico.md`); uma cena = um grupo com início/fim do `timeline.json`.
+- **Cena isolada e elástica** (para virar variante sem reescrever): sem cor ou texto fixo dentro (tokens do `brand.css` + `params`/`on_screen` do `timeline.json`), animação em tempo relativo (entrada · hold · saída), sem depender da cena vizinha. Contrato completo: `roadmap/tasks/013-cenas-modulares-variantes/TASK.md`.
 - Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.

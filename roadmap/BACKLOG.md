@@ -32,6 +32,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 010 | [Enxugar a base de vídeo + níveis de edição (simples · médio · alto)](tasks/010-enxugar-video/TASK.md) | 002 | feita |
 | 011 | [Teste A/B de custo: Opus solo × Opus orquestrando Sonnet](tasks/011-teste-custo-ab/TASK.md) | 003, 010 | rascunho |
 | 012 | [Motor de ideias + framework de conteúdo (radar → painel ranqueado → marcação → análise barata → banco de ideias → ficha de pauta → roteiro)](tasks/012-motor-de-ideias/TASK.md) | 007 | rascunho (prioridade alta após o MVP) |
+| 013 | [Cenas modulares + variantes de baixo custo (anúncios em série: tema, voz, duração, formato, gancho)](tasks/013-cenas-modulares-variantes/TASK.md) | 003 | rascunho (o contrato de cena já vale na skill `video`) |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
 Adiado (sem pasta): ver `DEPOIS.md`. Depois do MVP: app em Vite (`APP.md`: projetos, kanban, concorrentes, agentes) e `INTEL.md` (monitoramento de concorrentes e tendências). Caixa de entrada: `IDEIAS.md`.

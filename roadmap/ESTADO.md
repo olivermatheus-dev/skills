@@ -32,6 +32,8 @@
 
 - **Registrado (012):** motor de ideias + framework de conteúdo (radar de concorrentes e páginas, painel ranqueado por outlier score, Oliver marca, análise barata só do marcado com Whisper local + modelo mais barato, banco de ideias, ficha de pauta com objetivo e gancho que nunca engana). Prioridade alta logo após o MVP de vídeo.
 
+- **Registrado (013):** cenas modulares (isoladas, elásticas, sem valor fixo) + `variantes.json` → variantes de anúncio (tema, voz, trilha, CTA, 15 s, formatos, troca de gancho) por script, quase sem token. O contrato de cena já está na skill `video`.
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".
