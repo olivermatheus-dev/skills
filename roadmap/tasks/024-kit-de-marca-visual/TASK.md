@@ -22,7 +22,7 @@
    - **Logo e assets:** enviar variações (cor, branca, símbolo) e área de respiro.
    - **Estilo:** presets (minimalista, editorial, ousado, divertido…) que ajustam vários tokens de uma vez + controles (densidade, contraste, quantidade de cor, uso de foto/ilustração).
    - **Anotações e regras:** "fazer / não fazer", proibições, referências de exemplo (imagens): vão para o `BRAND.md`.
-2. **Grava nos mesmos arquivos** (`brand.css` + seções do `BRAND.md`), validados por schema; as skills seguem lendo como hoje.
+2. **Grava no `brand.json`** (gera o `brand.css`) e nas seções do `BRAND.md`, validados por schema; as skills seguem lendo o `brand.css` como hoje.
 3. **Prévia real:** um slide de carrossel e um quadro de vídeo de amostra renderizados com os tokens enquanto se edita.
 4. Molde em `companies/_modelo/brand/` com todos os tokens, para empresa nova já nascer completa.
 
