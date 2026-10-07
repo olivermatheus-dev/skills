@@ -33,7 +33,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 021 | [Gestão de contexto pela própria IA (contexto declarado por tarefa, estado para retomar, log compacto)](tasks/021-gestao-de-contexto/TASK.md) | — | rascunho |
 | 009 | [MCP de edição de vídeo (voz, trilha, duração, texto, prévia, render)](tasks/009-mcp-edicao-video/TASK.md) | 003 | rascunho |
 | 010 | [Enxugar a base de vídeo + níveis de edição (simples · médio · alto)](tasks/010-enxugar-video/TASK.md) | 002 | feita |
-| 011 | [Teste A/B de custo: Opus solo × Opus orquestrando Sonnet](tasks/011-teste-custo-ab/TASK.md) | 003, 010 | rascunho |
+| 011 | [Teste A/B de custo: Opus solo × Sonnet orquestrando subagentes](tasks/011-teste-custo-ab/TASK.md) | 003, 010 | feita (medida: `RESULTADO.md`; falta a nota cega do Oliver) |
 | 012 | [Motor de ideias + framework de conteúdo (radar → painel ranqueado → marcação → análise barata → banco de ideias → ficha de pauta → roteiro)](tasks/012-motor-de-ideias/TASK.md) | 007 | rascunho (prioridade alta após o MVP) |
 | 013 | [Cenas modulares + variantes de baixo custo (anúncios em série: tema, voz, duração, formato, gancho)](tasks/013-cenas-modulares-variantes/TASK.md) | 003 | rascunho (o contrato de cena já vale na skill `video`) |
 | 014 | [Galeria reutilizável: componentes de motion, fx, looks, áudio + catálogo/índice + import do PC + promover](tasks/014-galeria-reutilizavel/TASK.md) | 003 | rascunho (prioridade alta, junto com o kit) |

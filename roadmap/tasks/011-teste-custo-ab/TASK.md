@@ -1,6 +1,6 @@
 # 011 — Teste A/B de custo e qualidade (solo × orquestrador com subagentes)
 
-Status: rascunho · Depende de: 003 (kit de render), 010 (níveis)
+Status: feita (medição; falta a nota cega do Oliver) · Depende de: 003 (kit de render), 010 (níveis)
 
 ## Pergunta
 O que compensa mais por vídeo: **A)** Opus no esforço médio fazendo tudo sozinho, ou **B)** Opus no médio como orquestrador de subagentes Sonnet no médio?
@@ -20,3 +20,4 @@ B deve custar menos por vídeo (Sonnet faz o grosso), com risco de mais iteraç�
 
 ## Log
 - 2026-10-07: teste registrado a pedido do Oliver.
+- 2026-10-07: rodado como A = Opus 5.5 sozinho × B = Sonnet 5.5 médio orquestrando subagentes Sonnet (vídeo de apresentação da kz). Medido com o novo `tools/usage.mjs`: A US$ 8,91 × B US$ 11,03 até a entrega. Tabela e leitura em `RESULTADO.md`. Vídeos na central (tag `ab-teste`), aguardando os ajustes pontuais do Oliver.

@@ -37,12 +37,12 @@
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **028** | Estúdio de mockups (print/link → mockups prontos, editor no app, reuso no vídeo) | 5 perguntas no `TASK.md` |
 | **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |
-| 011 · 013 · 014 · 009 · 012 | teste de custo · variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
+| 013 · 014 · 009 · 012 | variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
 
 Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 
 ## Caminho até a produção em série (combinado em 2026-10-07)
-1. **Fechar o A/B (011):** medir os tokens das sessões A e B (os MP4 estão em `contents/2026-10-07-ab-sessao/`), nota cega do Oliver → decide o modelo padrão por etapa. Ainda não feito.
+1. ~~Fechar o A/B (011)~~ **medido** (`roadmap/tasks/011-teste-custo-ab/RESULTADO.md`): Opus solo US$ 8,91 × Sonnet + subagentes US$ 11,03 → padrão provisório = vídeo numa sessão Opus sem subagentes. Custo de qualquer sessão: `node tools/usage.mjs <sessão> [--until ISO]`. Falta só a nota cega do Oliver e os ajustes pontuais dele nos 2 vídeos (fichas na central, tag `ab-teste`).
 2. **025 Ficha de produção:** briefing + funil de status + custo por peça (`tools/usage.mjs` lendo os transcripts).
 3. **027 Galeria de formatos:** escolher com o Oliver os formatos dos 12 posts (pergunta em aberto da 005) e dar ficha visual + 1 exemplo a cada um.
 4. **008 Trilhas** (só há SFX; "nunca fundo mudo") e **014 Galeria de componentes** (promover o que ficou bom = qualidade constante).

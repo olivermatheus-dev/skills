@@ -1,0 +1,11 @@
+{
+  "title": "Apresentação KZ · teste B (Sonnet + subagentes)",
+  "tags": [
+    "ab-teste"
+  ],
+  "principal": "exports/B-sonnet-9x16-v06.mp4",
+  "notes": {
+    "notas": "Teste A/B (011): Sonnet 5.5 médio orquestrando subagentes Sonnet. Custo estimado até a entrega (v05): US$ 11,03 (80 min). v06 = ajustes da revisão 022. Aguardando ajustes pontuais do Oliver."
+  },
+  "updatedAt": "2026-10-07T23:02:08Z"
+}
