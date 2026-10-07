@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
-  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
+  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta, PieceStatus, LEGACY_STATUS, pieceCost,
   COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -368,7 +368,10 @@ export interface PieceCover { type: 'video' | 'image'; file: string }
 export interface Piece {
   path: string; kind: PieceKind; title: string; date?: string; hasTimeline: boolean; videos: string[]; images: string[]; texts: string[];
   cover?: PieceCover; tags: string[]; favorite: boolean; archived: boolean; publication?: PieceMeta['publication'];
-  status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number; mtime: number;
+  status?: PieceStatus; approvals?: Review['approvals']; openComments: number; totalComments: number; mtime: number;
+  /** total em US$ das rodadas de IA (peca.json → custo) */
+  cost: number;
+  headline?: string; formato?: string;
 }
 const contentsDir = (slug: string) => join(COMPANIES, slug, 'contents');
 /** caminho da peça relativo a contents/ (ex.: "2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
@@ -406,20 +409,45 @@ export function getPieceMeta(slug: string, path: string): PieceMeta {
   const f = join(piecePath(slug, path), 'peca.json');
   return exists(f) ? readJson(PieceMeta, f) : PieceMeta.parse({});
 }
-/** grava a ficha (merge raso; notes e publication são mesclados campo a campo) */
+/** grava a ficha (merge raso; notes, briefing, producao, publication e resultado são mesclados campo a campo;
+ *  listas — tags, custo, historico — são trocadas inteiras) */
 export function savePieceMeta(slug: string, path: string, patch: Partial<PieceMeta>): PieceMeta {
   const dir = piecePath(slug, path);
   if (!exists(dir)) throw new ValidationError(dir, ['peça não encontrada']);
   const cur = getPieceMeta(slug, path);
-  // campo vazio ("") apaga: na publicação (data/link validados) e no principal/título
-  const pub = patch.publication === undefined ? cur.publication : Object.fromEntries(Object.entries({ ...cur.publication, ...patch.publication }).filter(([, v]) => v !== ''));
-  const next = { ...cur, ...patch, notes: { ...cur.notes, ...patch.notes }, publication: pub && Object.keys(pub).length ? pub : undefined, updatedAt: nowIso() };
-  for (const k of ['title', 'principal'] as const) if (next[k] === '') delete next[k];
+  // campo vazio ("") ou null apaga: nos blocos mesclados e no principal/título/status
+  const merge = <T extends object>(a: T | undefined, b: Partial<T> | undefined) => {
+    if (b === undefined) return a;
+    const o = Object.fromEntries(Object.entries({ ...a, ...b }).filter(([, v]) => v !== '' && v !== null));
+    return Object.keys(o).length ? o : undefined;
+  };
+  const next = {
+    ...cur, ...patch,
+    notes: { ...cur.notes, ...patch.notes },
+    briefing: merge(cur.briefing, patch.briefing) ?? {},
+    producao: merge(cur.producao, patch.producao) ?? {},
+    publication: merge(cur.publication, patch.publication),
+    resultado: merge(cur.resultado, patch.resultado),
+    updatedAt: nowIso(),
+  };
+  for (const k of ['title', 'principal', 'status'] as const) if (!next[k]) delete next[k];
   const f = join(dir, 'peca.json');
   const v = check(PieceMeta, JSON.parse(JSON.stringify(next)), f); // JSON: tira os undefined
-  writeJson(f, v);
+  writeJson(f, compactMeta(v));
   return v;
 }
+/** não grava blocos vazios (os defaults do schema voltam na leitura): peca.json fica legível */
+function compactMeta(m: PieceMeta) {
+  const o: Record<string, unknown> = { ...m };
+  for (const k of ['briefing', 'producao', 'notes'] as const) {
+    const b = Object.fromEntries(Object.entries(m[k]).filter(([, v]) => !(Array.isArray(v) && !v.length)));
+    if (Object.keys(b).length) o[k] = b; else delete o[k];
+  }
+  for (const k of ['custo', 'historico'] as const) if (!m[k].length) delete o[k];
+  return o;
+}
+/** status da peça: o do funil (peca.json) ou, em peça antiga, o do revisao.json traduzido */
+const pieceStatus = (m: PieceMeta, r: Review): PieceStatus | undefined => m.status ?? (r.status && LEGACY_STATUS[r.status]);
 function pieceSummary(slug: string, rel: string): Piece | null {
   const dir = join(contentsDir(slug), rel);
   const videos = videosOf(dir), images = imagesOf(dir), hasTimeline = exists(join(dir, 'timeline.json'));
@@ -434,7 +462,8 @@ function pieceSummary(slug: string, rel: string): Piece | null {
   return {
     path, kind, title: meta.title ?? defaultTitle(path), date: path.match(/^(\d{4}-\d{2}-\d{2})/)?.[1], hasTimeline, videos, images, texts: textsOf(dir),
     cover: coverOf(kind, videos, images, meta.principal), tags: meta.tags, favorite: !!meta.favorite, archived: !!meta.archived, publication: meta.publication,
-    status: r.status, approvals: r.approvals, openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length, mtime,
+    status: pieceStatus(meta, r), approvals: r.approvals, openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length, mtime,
+    cost: pieceCost(meta.custo), headline: meta.briefing.headline, formato: meta.briefing.formato,
   };
 }
 export function listPieces(slug: string): Piece[] {
@@ -460,7 +489,7 @@ export function getPiece(slug: string, path: string) {
   const summary = pieceSummary(slug, path) ?? emptyPiece(path);
   return { ...summary, timeline: exists(tl) ? JSON.parse(read(tl)) : null, previews, review: getReview(slug, path), meta: getPieceMeta(slug, path) };
 }
-const emptyPiece = (path: string): Piece => ({ path, kind: 'roteiro', title: defaultTitle(path), hasTimeline: false, videos: [], images: [], texts: [], tags: [], favorite: false, archived: false, openComments: 0, totalComments: 0, mtime: 0 });
+const emptyPiece = (path: string): Piece => ({ path, kind: 'roteiro', title: defaultTitle(path), hasTimeline: false, videos: [], images: [], texts: [], tags: [], favorite: false, archived: false, openComments: 0, totalComments: 0, mtime: 0, cost: 0 });
 /** caminho absoluto de um arquivo da peça (ou da própria pasta, file vazio), para abrir no Explorer/player */
 export function pieceAbsPath(slug: string, path: string, file = '') {
   const dir = piecePath(slug, path);
@@ -510,11 +539,11 @@ export async function createPiece(slug: string, input: { title: string; text?: s
   let rel = base, n = 2;
   while (exists(join(contentsDir(slug), rel))) rel = `${base}-${n++}`;
   write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
-  saveReview(slug, rel, { status: 'rascunho', comments: [] });
-  savePieceMeta(slug, rel, { title });
+  saveReview(slug, rel, { comments: [] });
+  const fmt = input.format?.trim();
+  savePieceMeta(slug, rel, { title, status: 'roteiro', ...(fmt && /^fmt-[a-z0-9-]+$/.test(fmt) && { briefing: { formato: fmt } as PieceMeta['briefing'] }) });
   let task: z.infer<typeof Task> | undefined;
   if (input.task) {
-    const fmt = input.format?.trim();
     const body = [
       '', `Produzir ${fmt ? `um(a) **${fmt}**` : 'a peça'} a partir do roteiro pronto do Oliver: \`contents/${rel}/roteiro.md\`.`,
       `O roteiro é a fonte: não mudar o sentido. Antes de produzir, ler e resolver as anotações abertas: \`node tools/review.mjs companies/${slug}/contents/${rel}\`.`,

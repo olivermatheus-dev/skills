@@ -47,10 +47,12 @@ Transforma texto pronto (roteiro ou texto colado) em slides visuais. Não reescr
 
 ```
 companies/<slug>/contents/AAAA-MM-DD-<tema>/
+├── peca.json           ← ficha: title, status, briefing (formato fmt-*, headline…), legenda em notes
 ├── roteiro.md
 ├── carrossel.html      ← abre no navegador com todos os slides empilhados para revisão
 └── png/slide-01.png, slide-02.png, ...
 ```
+**Ficha (`peca.json`, regra no `orquestrar/references/protocolo.md` > Ficha de produção):** crie com `briefing` se não existir; ao entregar, `status: revisao`, `producao.formatos: ["png"]`, 1 item em `historico` e o custo da rodada: `node tools/usage.mjs --atual --piece <pasta> --etapa producao`.
 
 ## Tipos de slide (classes do template)
 

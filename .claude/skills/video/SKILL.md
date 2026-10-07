@@ -31,10 +31,11 @@ Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · for
 ## Pasta do vídeo
 `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`):
 ```
-plano.md · locucao.json · timeline.json · composition.html · data/*.json
+peca.json · plano.md · locucao.json · timeline.json · composition.html · data/*.json
 audio/ render/ exports/      ← gerados, fora do git
 ```
 Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/timeline.md`.
+**Ficha (`peca.json`, regra no `protocolo.md` > Ficha de produção):** ao criar a pasta grave `title`, `status` e o `briefing` (headline, tema, objetivo, `formato: fmt-*`, persona, plataformas, proporções, duração, nível). Status: aval do plano → `producao`; entrega → `revisao`. Ao fechar cada etapa: `node tools/usage.mjs --atual --piece <pasta> --etapa <plano|producao|voz|ajustes…>`.
 
 ## Etapas
 
@@ -75,6 +76,7 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 - Entregar: caminhos dos MP4 + saída do `qc.mjs` + **o que o Oliver precisa conferir** (o Claude não escuta: ouvir com fone e no celular; ver pequeno e sem som; prévia na plataforma).
 - **Promover para a galeria:** algo reutilizável (fundo, gráfico, mapa, transição, bloco)? Extraia com parâmetros e tokens para `library/` (genérico) ou `video-templates/` (marca) e registre no catálogo.
 - Registrar no `plano.md`: entregue, em aberto, feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
+- **Fechar a ficha:** `status: revisao`, `principal`, `producao` (duração real, formatos, voz, trilha **com licença**), 1 linha no `historico` (`autor: ia`, versão, o que mudou) e o custo da rodada com `tools/usage.mjs … --piece`.
 
 ## Revisão por anotações (comece por aqui se houver anotações abertas)
 O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e a anotação vai para `<pasta>/revisao.json`. Quando o pedido for "revisa as anotações" ou a pasta tiver `revisao.json` com abertas:

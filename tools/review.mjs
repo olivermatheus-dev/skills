@@ -115,7 +115,9 @@ const list = review.comments.filter((c) => all || c.status === 'aberto');
 if (!list.length) { console.log(`Nenhuma anotação ${all ? '' : 'aberta '}em ${dir}.`); process.exit(0); }
 console.log(`# Anotações ${all ? '' : 'abertas '}— ${dir}`);
 const appr = Object.entries(review.approvals ?? {}).filter(([, d]) => d).map(([k, d]) => `${k} aprovado em ${d}`);
-console.log(`status: ${review.status ?? '—'}${appr.length ? ` · ${appr.join(' · ')}` : ' · roteiro ainda NÃO aprovado'}`);
+// status do funil mora no peca.json (025); revisao.json antigo ainda pode ter o seu
+const meta = existsSync(join(dir, 'peca.json')) ? JSON.parse(readFileSync(join(dir, 'peca.json'), 'utf8')) : {};
+console.log(`status: ${meta.status ?? review.status ?? '—'}${appr.length ? ` · ${appr.join(' · ')}` : ' · roteiro ainda NÃO aprovado'}`);
 if (list.some((c) => c.anchor.kind !== 'roteiro')) console.log(`vídeo mais recente: ${latest ?? '(sem MP4 em exports/)'}`);
 console.log(`${list.length} anotação(ões)\n`);
 const ORDER = { corrigir: 0, ajustar: 1, template: 2, ok: 3 };

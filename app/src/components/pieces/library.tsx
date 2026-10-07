@@ -20,6 +20,7 @@ export function useSaveMeta(slug: string) {
         ...(patch.tags && { tags: patch.tags }),
         ...(patch.favorite !== undefined && { favorite: patch.favorite }),
         ...(patch.archived !== undefined && { archived: patch.archived }),
+        ...(patch.status !== undefined && { status: patch.status || undefined }),
       };
       qc.setQueryData(qk.pieces(slug), (old: PieceInfo[] | undefined) => old?.map(sum));
       qc.setQueryData(qk.piece(slug, path), (old: PieceFull | undefined) => old && { ...old, ...sum(old), meta: { ...old.meta, ...patch, notes: { ...old.meta.notes, ...patch.notes } } });

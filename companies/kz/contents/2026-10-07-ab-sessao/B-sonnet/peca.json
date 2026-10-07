@@ -1,11 +1,112 @@
 {
   "title": "Apresentação KZ · teste B (Sonnet + subagentes)",
+  "status": "revisao",
   "tags": [
     "ab-teste"
   ],
   "principal": "exports/B-sonnet-9x16-v06.mp4",
+  "briefing": {
+    "headline": "Se você é terapeuta, imagine começar cada sessão com tudo à sua frente",
+    "tema": "apresentação da kz",
+    "plataformas": [
+      "instagram"
+    ],
+    "proporcoes": [
+      "9:16"
+    ],
+    "duracao": 62,
+    "nivel": "medio"
+  },
   "notes": {
     "notas": "Teste A/B (011): Sonnet 5.5 médio orquestrando subagentes Sonnet. Custo estimado até a entrega (v05): US$ 11,03 (80 min). v06 = ajustes da revisão 022. Aguardando ajustes pontuais do Oliver."
   },
-  "updatedAt": "2026-10-07T23:02:08Z"
+  "producao": {
+    "formatos": [
+      "9x16"
+    ],
+    "voz": "Carla (Eleven v4)",
+    "agentes": [
+      "editor-de-video",
+      "sound-designer",
+      "revisor"
+    ],
+    "commit": "d91334a"
+  },
+  "custo": [
+    {
+      "data": "2026-10-07T18:39:33Z",
+      "ate": "2026-10-07T19:59:09Z",
+      "etapa": "producao",
+      "sessao": "dff74b09-c6e6-4538-814e-8762b9aa4b8e",
+      "modelo": "claude-sonnet-5-5",
+      "esforco": "medio",
+      "chamadas": 146,
+      "tokens": {
+        "entrada": 304,
+        "saida": 180203,
+        "cacheLeitura": 21208984,
+        "cacheEscrita": 1953292
+      },
+      "usd": 11.03,
+      "minutos": 80,
+      "porModelo": [
+        {
+          "quem": "claude-sonnet-5-5",
+          "chamadas": 24,
+          "usd": 0.85
+        },
+        {
+          "quem": "claude-sonnet-5-5 (subagente)",
+          "chamadas": 122,
+          "usd": 10.19
+        }
+      ],
+      "nota": "A/B 011: até a entrega da v05"
+    },
+    {
+      "data": "2026-10-07T20:34:55Z",
+      "ate": "2026-10-07T21:00:08Z",
+      "etapa": "ajustes",
+      "sessao": "dff74b09-c6e6-4538-814e-8762b9aa4b8e",
+      "modelo": "claude-sonnet-5-5",
+      "esforco": "medio",
+      "chamadas": 26,
+      "tokens": {
+        "entrada": 56,
+        "saida": 14652,
+        "cacheLeitura": 4757870,
+        "cacheEscrita": 377055
+      },
+      "usd": 2.07,
+      "minutos": 25,
+      "porModelo": [
+        {
+          "quem": "claude-sonnet-5-5",
+          "chamadas": 18,
+          "usd": 0.62
+        },
+        {
+          "quem": "claude-sonnet-5-5 (subagente)",
+          "chamadas": 8,
+          "usd": 1.44
+        }
+      ],
+      "nota": "v06: ajustes da revisão 022"
+    }
+  ],
+  "historico": [
+    {
+      "data": "2026-10-07",
+      "versao": "v05",
+      "autor": "ia",
+      "texto": "Teste A/B (011): Sonnet 5.5 orquestrando subagentes Sonnet. Entregue a v05 com o feedback do Oliver."
+    },
+    {
+      "data": "2026-10-07",
+      "versao": "v06",
+      "autor": "ia",
+      "texto": "Ajustes da revisão por anotações (022)."
+    }
+  ],
+  "updatedAt": "2026-10-07T23:22:48Z"
 }

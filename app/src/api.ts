@@ -14,9 +14,9 @@ import type { BrandPreset } from '../../core/brand-presets';
 export type { Brand, BrandFont, BrandToken, BrandPreset };
 export interface BrandKit { brand: Brand; imported: boolean; fonts: string[]; presets: BrandPreset[] }
 export type { Review, ReviewComment };
-import type { PieceMeta } from '../../schema/piece';
+import type { PieceMeta, PieceStatus, CostRound, PieceObservation } from '../../schema/piece';
 import type { Piece as PieceInfo } from '../../core/store';
-export type { PieceMeta, PieceInfo };
+export type { PieceMeta, PieceInfo, PieceStatus, CostRound, PieceObservation };
 export type PieceKind = PieceInfo['kind'];
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */

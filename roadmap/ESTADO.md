@@ -1,6 +1,6 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca + 025 ficha de produção). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
@@ -10,6 +10,7 @@
   - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`; offline: `win-maria`) → aval → **Eleven v4 pela API** (`elevenlabs.mjs`, skill `elevenlabs`: emoção por audio tags em `vo[].el`, tempos exatos, encaixe automático). Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
 - **Revisão de vídeo por anotações (022 v1):** app → **Conteúdos** (player + faixas da `timeline.json`; anota cena/fala/evento/tempo/elemento — v1.1: modo "Clicar no elemento" renderiza a composição ao vivo e captura o `#id` clicando no quadro, tipo corrigir|ajustar|template|ok → `revisao.json`). IA: `node tools/review.mjs <pasta>` (abertas + contexto + quadros) e `… resolve <id> "o que mudou"`. Regras na skill `video`.
 - **Central de peças (2026-10-07):** app → **Conteúdos** = todas as peças (vídeo, carrossel, post, roteiro) em grade com miniatura (vídeo toca ao passar o mouse) ou lista; busca, filtros por tipo/status/tag, favoritos, arquivadas. Cada peça: aba **Ficha** (prévia, arquivos com versão principal, abrir no player/Explorer, renomear, legenda/copy/CTA/hashtags/notas, tags, publicação → `peca.json`, `schema/piece.ts`) + Roteiro + Edição do vídeo. Convenção para agentes/geradores no `protocolo.md` (exports/, png/, `peca.json`). Falta: renomear o arquivo exportado (hoje renomeia só o nome de exibição) e miniatura dos carrosséis gerados pelo novo motor (já funciona se exportar em `png/`).
+- **Ficha de produção (025, feita):** o `peca.json` de cada peça tem briefing (headline, tema, objetivo, `fmt-*`, persona, plataformas, proporções, duração, nível), **status num funil só** (ideia → roteiro → produção → revisão → aprovado → publicado; o do `revisao.json` é legado), custo de IA por rodada, dados de produção (voz, trilha + licença, skills, agentes, commit), histórico de observações e resultado. App → Conteúdos → **Ficha** + filtro/coluna de status e custo na lista. Custo real: `node tools/usage.mjs --atual --piece <pasta> --etapa <etapa>` (bate com o A/B). Regra para os agentes: `protocolo.md` > Ficha de produção.
 - **Roteiro pronto e anotações no roteiro (022 A):** app → **Conteúdos** → **Novo conteúdo** (colar ou enviar .md/.txt/.docx → `contents/AAAA-MM-DD-<tema>/roteiro.md` + tarefa opcional para a IA). Na peça, aba **Roteiro**: selecionar trecho → anotar; Editar; **Aprovar roteiro**. A IA lê com o mesmo `review.mjs` (trecho reencontrado mesmo se as linhas mudarem).
 - **Kit de marca (024):** `brand/brand.json` é a fonte dos tokens → gera o `brand.css` (`npm run brand -- <slug>`; o validate acusa CSS editado à mão). App → Contexto e marca → **Kit de marca**: prévia ao vivo, preset **Minimalista (estilo Apple)**, cores com contraste, fontes, raio/sombras, ícones **Lucide** (`node tools/icon.mjs <nome> --brand <slug>`), fazer / não fazer → bloco no `BRAND.md`. A kz ainda **sem** preset aplicado: decidir no app.
 - **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).
@@ -43,8 +44,8 @@ Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 
 ## Caminho até a produção em série (combinado em 2026-10-07)
 1. ~~Fechar o A/B (011)~~ **medido** (`roadmap/tasks/011-teste-custo-ab/RESULTADO.md`): Opus solo US$ 8,91 × Sonnet + subagentes US$ 11,03 → padrão provisório = vídeo numa sessão Opus sem subagentes. Custo de qualquer sessão: `node tools/usage.mjs <sessão> [--until ISO]`. Falta só a nota cega do Oliver e os ajustes pontuais dele nos 2 vídeos (fichas na central, tag `ab-teste`).
-2. **025 Ficha de produção:** briefing + funil de status + custo por peça (`tools/usage.mjs` lendo os transcripts).
-3. **027 Galeria de formatos:** escolher com o Oliver os formatos dos 12 posts (pergunta em aberto da 005) e dar ficha visual + 1 exemplo a cada um.
+2. ~~**025 Ficha de produção**~~ **feita** (2026-10-07).
+3. **027 Galeria de formatos (próxima):** escolher com o Oliver os formatos dos 12 posts (pergunta em aberto da 005) e dar ficha visual + 1 exemplo a cada um.
 4. **008 Trilhas** (só há SFX; "nunca fundo mudo") e **014 Galeria de componentes** (promover o que ficou bom = qualidade constante).
 5. Pendências do Oliver acima (1–4 e 6) → então **006: os 12 posts**.
 - Em paralelo, sem bloquear: **026** (skills e agentes no app), 022 C/D, 019, 021, 013.

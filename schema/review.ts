@@ -38,6 +38,7 @@ export type ReviewComment = z.infer<typeof ReviewComment>;
 
 export const REVIEW_STATUS = ['rascunho', 'em_revisao', 'aprovado'] as const;
 export const Review = z.object({
+  /** legado: desde a 025 o status mora no peca.json (funil ideia → publicado). Só lido de peças antigas */
   status: z.enum(REVIEW_STATUS).optional(),
   /** trava real: roteiro aprovado antes de produzir; v1 aprovada antes da voz final (data AAAA-MM-DD) */
   approvals: z.object({ roteiro: IsoDate.optional(), v1: IsoDate.optional(), final: IsoDate.optional() }).optional(),

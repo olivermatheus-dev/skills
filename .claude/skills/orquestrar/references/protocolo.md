@@ -14,6 +14,12 @@ Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é 
 - Uma linha de log por marco: `- AAAA-MM-DD · agent:<nome> · o que fez → caminho/do/arquivo`.
 - Salvar entregas na pasta certa da empresa (`contents/…` ou `campaigns/…`) e listar o caminho em `links`.
 - **Peça padrão (central Conteúdos do app):** 1 pasta por peça em `contents/AAAA-MM-DD-<tema>/` (variações em subpastas). Vídeo final em `exports/*.mp4` (versões velhas em `exports/anteriores/`), imagens finais em `png/` (1 imagem = post, várias = carrossel; ou `post.html`/`carrossel.html`). Ficha `peca.json` (`schema/piece.ts`): ao criar a peça grave `title` legível; legenda, copy, CTA e hashtags vão em `notes` (não em arquivo solto). **Leia `notes` antes de escrever texto**: o Oliver pode ter escrito lá no app. Comentários de edição continuam em `revisao.json`.
+- **Ficha de produção (`peca.json`, tarefa 025):** é onde a peça é gerenciada; o Oliver vê e edita no app → Conteúdos → Ficha.
+  - **Ao criar:** `title`, `status` e `briefing` (`headline`, `tema`, `objetivo` atrair|educar|engajar|converter|reter, `formato` fmt-*, `persona` = id em `personas/`, `plataformas`, `proporcoes`, `duracao`, `nivel`). Só o que estiver no pedido/contexto; o resto fica vazio.
+  - **Status (um só funil):** `ideia → roteiro → producao → revisao → aprovado → publicado`. Roteiro aprovado → `producao`; entregou para o Oliver → `revisao`; aval final → `aprovado`. `publicado` quando houver link. Não use o `status` do `revisao.json` (legado).
+  - **Ao fechar cada etapa:** `node tools/usage.mjs --atual --piece companies/<slug>/contents/<pasta> --etapa <pauta|roteiro|plano|producao|voz|trilha|revisao|ajustes|outro> [--esforco medio]` grava o custo real (com subagentes), as skills/agentes usados e o commit. Rodar de novo na mesma etapa substitui. Subagente não roda: quem mede é a sessão principal (o orquestrador, no fim).
+  - **Produção e histórico:** preencha `producao` (duração real, formatos, voz, `trilha.licenca`) e acrescente 1 item em `historico` por versão entregue (`{ data, versao, autor: "ia", texto: o que mudou e por quê }`). Observação do Oliver no histórico = pedido: trate como anotação.
+  - Depois de editar à mão: `npm run validate`.
 - **Só o orquestrador delega.** Se precisar de outro agente, registre no log `PRECISA: agent:<x> para <y>` e termine sua parte.
 
 ## Portão (precisa do Oliver)

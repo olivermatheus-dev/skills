@@ -1,6 +1,6 @@
 // Peças (tarefa 022): tipos de anotação e o cartão de anotação, comuns ao vídeo e ao roteiro.
 import type { ReactNode } from 'react';
-import type { PieceKind, Review, ReviewComment } from '../../api';
+import type { PieceKind, PieceStatus, ReviewComment } from '../../api';
 import { Badge, Card, cx } from '../ui';
 
 export type Anchor = ReviewComment['anchor'];
@@ -20,11 +20,16 @@ export const KIND_LABEL: Record<PieceKind, { label: string; color: string }> = {
   post: { label: 'Post', color: '#db2777' },
   roteiro: { label: 'Roteiro', color: '#d97706' },
 };
-export const STATUS_LABEL: Record<NonNullable<Review['status']>, { label: string; color: string }> = {
-  rascunho: { label: 'Rascunho', color: '#71717a' },
-  em_revisao: { label: 'Em revisão', color: '#d97706' },
+/** funil da peça (peca.json → status), na ordem */
+export const STATUS_LABEL: Record<PieceStatus, { label: string; color: string }> = {
+  ideia: { label: 'Ideia', color: '#a1a1aa' },
+  roteiro: { label: 'Roteiro', color: '#71717a' },
+  producao: { label: 'Produção', color: '#2563eb' },
+  revisao: { label: 'Revisão', color: '#d97706' },
   aprovado: { label: 'Aprovado', color: '#16a34a' },
+  publicado: { label: 'Publicado', color: '#7c3aed' },
 };
+export const fmtUsd = (v: number) => `US$ ${v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export function TipoPicker({ value, onChange }: { value: Tipo; onChange: (t: Tipo) => void }) {
   return (

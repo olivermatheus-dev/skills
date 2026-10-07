@@ -5,7 +5,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, type PieceFull, type PieceInfo, type Review, type ReviewComment } from '../api';
+import { api, type PieceFull, type PieceInfo, type PieceStatus, type Review, type ReviewComment } from '../api';
 import { Badge, Button, Card, Empty, ErrorBox, Input, Select, cx, fmtDate } from '../components/ui';
 import { toast } from '../components/toast';
 import { qk, usePiece, usePieces } from '../queries';
@@ -13,7 +13,7 @@ import NewPiece from '../components/pieces/NewPiece';
 import TextReview from '../components/pieces/TextReview';
 import VideoReview from '../components/pieces/VideoReview';
 import PieceSheet from '../components/pieces/PieceSheet';
-import { KIND_LABEL, STATUS_LABEL } from '../components/pieces/shared';
+import { KIND_LABEL, STATUS_LABEL, fmtUsd } from '../components/pieces/shared';
 import { Star, Thumb, desktop, useSaveMeta } from '../components/pieces/library';
 import { TagChip, useProjectTags } from '../components/notes/TagsInput';
 
@@ -49,7 +49,7 @@ function PieceList() {
     const q = f.q.trim().toLowerCase();
     const out = pieces.filter((p) => (f.arq ? p.archived : !p.archived)
       && (!f.kind || p.kind === f.kind) && (!f.status || (p.status ?? 'sem') === f.status) && (!f.tag || p.tags.includes(f.tag)) && (!f.fav || p.favorite)
-      && (!q || `${p.title} ${p.path} ${p.tags.join(' ')}`.toLowerCase().includes(q)));
+      && (!q || `${p.title} ${p.path} ${p.tags.join(' ')} ${p.headline ?? ''} ${p.formato ?? ''}`.toLowerCase().includes(q)));
     const by: Record<Sort, (a: PieceInfo, b: PieceInfo) => number> = {
       recentes: (a, b) => b.mtime - a.mtime,
       data: (a, b) => (b.date ?? '').localeCompare(a.date ?? '') || b.path.localeCompare(a.path),
@@ -82,7 +82,9 @@ function PieceList() {
       <div className="flex gap-2 flex-wrap items-center mb-5">
         <Input className="w-64" placeholder="Buscar por nome, pasta ou tag…" value={f.q} onChange={(e) => setF('q', e.target.value)} />
         <Select aria-label="Status" value={f.status} onChange={(e) => setF('status', e.target.value)}>
-          <option value="">todo status</option>{Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}<option value="sem">sem status</option>
+          <option value="">todo status</option>
+          {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v.label} ({pieces.filter((p) => !p.archived && p.status === k).length})</option>)}
+          <option value="sem">sem status ({pieces.filter((p) => !p.archived && !p.status).length})</option>
         </Select>
         {allTags.length > 0 && <Select aria-label="Tag" value={f.tag} onChange={(e) => setF('tag', e.target.value)}>
           <option value="">toda tag</option>{allTags.map((t) => <option key={t} value={t}>{byId[t]?.label ?? t}</option>)}
@@ -118,6 +120,7 @@ function PieceList() {
                   {p.date && <span>{fmtDate(p.date)}</span>}
                   {p.videos.length > 1 && <span>· {p.videos.length} versões</span>}
                   {p.images.length > 1 && <span>· {p.images.length} slides</span>}
+                  {p.cost > 0 && <span className="ml-auto tabular-nums" title="custo de IA">{fmtUsd(p.cost)}</span>}
                 </div>
                 <div className="flex items-center gap-1 mt-2 flex-wrap">
                   {p.status && <Badge color={STATUS_LABEL[p.status].color}>{STATUS_LABEL[p.status].label}</Badge>}
@@ -145,6 +148,7 @@ function PieceList() {
               {p.tags.slice(0, 3).map((t) => <TagChip key={t} id={t} def={byId[t]} small />)}
               {p.approvals?.roteiro && <Badge color="#16a34a">roteiro aprovado</Badge>}
               {p.status && <Badge color={STATUS_LABEL[p.status].color}>{STATUS_LABEL[p.status].label}</Badge>}
+              <span className="text-xs w-20 text-right tabular-nums text-muted" title="custo de IA">{p.cost > 0 ? fmtUsd(p.cost) : '—'}</span>
               <span className={cx('text-xs w-24 text-right', p.openComments ? 'text-danger font-medium' : 'text-muted')}>
                 {p.openComments ? `${p.openComments} aberta(s)` : p.totalComments ? 'tudo resolvido' : '—'}
               </span>
@@ -210,7 +214,8 @@ function PieceDetail({ path }: { path: string }) {
         {piece && (
           <div className="flex gap-2 shrink-0 items-center flex-wrap justify-end">
             <Badge color={KIND_LABEL[piece.kind].color}>{KIND_LABEL[piece.kind].label}</Badge>
-            <Select aria-label="Status" value={review.status ?? ''} onChange={(e) => save.mutate({ ...review, status: (e.target.value || undefined) as Review['status'] })}>
+            {piece.cost > 0 && <span className="text-sm text-muted tabular-nums" title="custo de IA da peça (Ficha → Custo de IA)">{fmtUsd(piece.cost)}</span>}
+            <Select aria-label="Status" value={piece.status ?? ''} onChange={(e) => saveMeta.mutate({ path, patch: { status: (e.target.value || '') as PieceStatus } })}>
               <option value="">sem status</option>{Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
             </Select>
             {piece.cover && <Button variant="ghost" onClick={() => desktop(slug, path, 'open', piece.cover!.file)}>{piece.cover.type === 'video' ? 'Abrir no player' : 'Abrir imagem'}</Button>}
@@ -235,7 +240,7 @@ function PieceDetail({ path }: { path: string }) {
             })}
           </div>
           {tab === 'ficha' && <PieceSheet slug={slug} piece={piece} />}
-          {tab === 'roteiro' && <TextReview slug={slug} path={path} texts={piece.texts} review={review} saveReview={(r) => save.mutate(r)} saving={save.isPending} />}
+          {tab === 'roteiro' && <TextReview slug={slug} path={path} texts={piece.texts} review={review} status={piece.status} saveReview={(r) => save.mutate(r)} saving={save.isPending} />}
           {tab === 'video' && (piece.videos.length || piece.timeline
             ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />
             : <Card className="text-sm text-muted">Sem vídeo exportado ainda.</Card>)}

@@ -1,0 +1,38 @@
+{
+  "title": "Apresentação da kz",
+  "status": "revisao",
+  "tags": [],
+  "briefing": {
+    "headline": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
+    "tema": "apresentação da kz",
+    "plataformas": [
+      "instagram"
+    ],
+    "proporcoes": [
+      "4:5",
+      "9:16"
+    ],
+    "duracao": 43,
+    "nivel": "medio"
+  },
+  "producao": {
+    "formatos": [
+      "4x5",
+      "9x16"
+    ],
+    "voz": "Carla (Eleven v4)",
+    "trilha": {
+      "arquivo": "própria (sintetizada no kit, 84 BPM)",
+      "licenca": "própria"
+    }
+  },
+  "historico": [
+    {
+      "data": "2026-10-07",
+      "versao": "v03",
+      "autor": "ia",
+      "texto": "v03 entregue para revisão; pontos a conferir em plano.md > \"Para o Oliver conferir\"."
+    }
+  ],
+  "updatedAt": "2026-10-07T23:19:30Z"
+}

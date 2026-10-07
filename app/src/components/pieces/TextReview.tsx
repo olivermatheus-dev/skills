@@ -2,7 +2,8 @@
 // com quote + linha); modo Editar = texto cru com salvar explícito. A IA lê as anotações com `node tools/review.mjs <pasta>`.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, type Review, type ReviewComment } from '../../api';
+import { api, type PieceStatus, type Review, type ReviewComment } from '../../api';
+import { useSaveMeta } from './library';
 import { Badge, Button, Card, ErrorBox, Select, Textarea, cx, fmtDate } from '../ui';
 import { toast } from '../toast';
 import { qk, usePieceText } from '../../queries';
@@ -37,10 +38,11 @@ function Line({ n, text, mark }: { n: number; text: string; mark?: { h: string; 
   );
 }
 
-export default function TextReview({ slug, path, texts, review, saveReview, saving }: {
-  slug: string; path: string; texts: string[]; review: Review; saveReview: (r: Review) => void; saving: boolean;
+export default function TextReview({ slug, path, texts, review, status, saveReview, saving }: {
+  slug: string; path: string; texts: string[]; review: Review; status?: PieceStatus; saveReview: (r: Review) => void; saving: boolean;
 }) {
   const qc = useQueryClient();
+  const saveMeta = useSaveMeta(slug);
   const [file, setFile] = useState(texts[0] ?? '');
   useEffect(() => { if (!texts.includes(file)) setFile(texts[0] ?? ''); }, [texts, file]);
   const { data, error, isLoading } = usePieceText(slug, path, file);
@@ -103,7 +105,11 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
   const switchFile = (f: string) => { if (dirty && !confirm('Há alterações não salvas. Trocar sem salvar?')) return; setMode('revisar'); setDraft(null); setFile(f); };
 
   const approved = review.approvals?.roteiro;
-  const approve = (on: boolean) => saveReview({ ...review, approvals: { ...review.approvals, roteiro: on ? new Date().toISOString().slice(0, 10) : undefined } });
+  const approve = (on: boolean) => {
+    saveReview({ ...review, approvals: { ...review.approvals, roteiro: on ? new Date().toISOString().slice(0, 10) : undefined } });
+    // roteiro aprovado libera a produção: o funil anda (só para frente, e só se ainda estava antes da produção)
+    if (on && (!status || status === 'ideia' || status === 'roteiro')) saveMeta.mutate({ path, patch: { status: 'producao' } });
+  };
   const shown = located.filter(({ c }) => filter === 'todas' || c.status === 'aberto');
 
   if (!texts.length) return <Card className="text-sm text-muted">Esta peça não tem textos (.md/.txt) na pasta.</Card>;
