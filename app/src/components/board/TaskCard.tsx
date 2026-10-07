@@ -34,13 +34,13 @@ export function TaskCard({ task, blocked, showBoard, dragging, onOpen }: {
     >
       <div className="flex items-center gap-2 text-[11px] text-muted mb-1">
         <PriorityDot priority={t.priority} />
-        <span className="font-mono">{t.id}</span>
-        {showBoard && <span className="truncate">· {BOARD_LABEL[t.board]}</span>}
-        <span className="ml-auto"><AssigneeBadge assignee={t.assignee} /></span>
+        <span className="font-mono whitespace-nowrap shrink-0">{t.id}</span>
+        <span className="ml-auto shrink-0"><AssigneeBadge assignee={t.assignee} /></span>
       </div>
       <div className={cx('text-sm leading-snug font-medium text-text', t.status === 'done' && 'line-through decoration-zinc-300')}>{t.title}</div>
-      {(t.due || ck.all > 0 || t.depends.length > 0 || t.parent) && (
+      {(showBoard || t.due || ck.all > 0 || t.depends.length > 0 || t.parent) && (
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-[11px] text-muted">
+          {showBoard && <span>{BOARD_LABEL[t.board]}</span>}
           {t.due && (
             <span className={cx('inline-flex items-center gap-1', late && 'text-danger font-medium')} title={late ? 'Atrasada' : 'Prazo'}>
               <span aria-hidden>◷</span>{fmtShortDate(t.due)}{late && ' · atrasada'}

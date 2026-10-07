@@ -73,7 +73,7 @@ export const Snapshot = z.object({
   collectedAt: IsoDateTime,
   platform: Platform,
   profileUrl: Url,
-  source: z.enum(['yt-dlp', 'youtube-api', 'apify', 'graph-api', 'manual', 'fixture']),
+  source: z.enum(['yt-dlp', 'youtube-api', 'apify', 'graph-api', 'html', 'manual', 'fixture']),
   profile: ProfileInfo.prefault({}),
   items: z.array(ContentItem).default([]),
   errors: z.array(z.string()).default([]),

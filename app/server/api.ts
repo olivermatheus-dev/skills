@@ -2,7 +2,7 @@
 // Roda só na máquina do Oliver (npm run app). Não há banco: os arquivos do repo são o banco.
 import type { Plugin, Connect } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createReadStream, existsSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync } from 'node:fs';
 import { join, normalize, extname } from 'node:path';
 import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
@@ -48,6 +48,13 @@ on('PUT', '/api/projects/:slug/ideas/:id', (p, b) => S.saveIdea(p.slug, { ...b.d
 on('GET', '/api/projects/:slug/context', (p) => S.listContext(p.slug));
 on('GET', '/api/projects/:slug/context/:name', (p) => ({ name: p.name, text: S.getContext(p.slug, p.name) }));
 on('PUT', '/api/projects/:slug/context/:name', (p, b) => S.saveContext(p.slug, p.name, b.text));
+
+// Marca: brand.css (somente leitura; a interface mostra os tokens). Sem arquivo → text: null.
+on('GET', '/api/projects/:slug/brand-css', (p) => {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(p.slug)) throw new S.ValidationError(p.slug, ['slug inválido']);
+  const file = join(S.ROOT, P.brand(p.slug), 'brand.css');
+  return { file: join(P.brand(p.slug), 'brand.css'), text: existsSync(file) ? readFileSync(file, 'utf8') : null };
+});
 
 // Concorrentes
 on('POST', '/api/detect-link', (_, b) => detectLink(b.url));

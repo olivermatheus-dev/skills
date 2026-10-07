@@ -51,6 +51,7 @@ export const api = {
   contextList: (slug: string) => req<{ name: string; file: string }[]>('GET', `${pj(slug)}/context`),
   context: (slug: string, name: string) => req<{ name: string; text: string }>('GET', `${pj(slug)}/context/${encodeURIComponent(name)}`),
   saveContext: (slug: string, name: string, text: string) => req<null>('PUT', `${pj(slug)}/context/${encodeURIComponent(name)}`, { text }),
+  brandCss: (slug: string) => req<{ file: string; text: string | null }>('GET', `${pj(slug)}/brand-css`),
 
   detectLink: (url: string) => req<DetectedLink | null>('POST', '/api/detect-link', { url }),
   competitors: (slug: string) => req<Doc<Competitor>[]>('GET', `${pj(slug)}/competitors`),
