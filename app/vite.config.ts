@@ -10,4 +10,6 @@ export default defineConfig({
   root: new URL('.', import.meta.url).pathname,
   plugins: [react(), tailwindcss(), hubApi()],
   server: { port: 5173, open: !process.env.HUB_NO_OPEN },
+  preview: { port: 5173, open: !process.env.HUB_NO_OPEN },
+  build: { chunkSizeWarningLimit: 1500 },
 });

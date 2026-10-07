@@ -6,7 +6,8 @@ export type { CollectResult, CompetitorSummary, ProfileSummary };
 
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
-export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; marks: Record<string, ItemMark> }
+/** `snapshots`: por perfil, as 2 últimas completas + até 10 anteriores leves (seguidores e views/curtidas). `snapshotsTotal`: todas no disco. */
+export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; snapshotsTotal: number; marks: Record<string, ItemMark> }
 export interface DetectedLink { platform: string; url: string; handle?: string; externalId?: string; kind: 'perfil' | 'conteudo' }
 
 export class ApiError extends Error {

@@ -25,6 +25,19 @@ function check<T extends z.ZodTypeAny>(schema: T, data: unknown, file: string): 
   return r.data;
 }
 
+// Cache de leitura: arquivo já lido e não modificado (mesmo mtime e tamanho) não é lido nem validado de novo.
+// Coletas são imutáveis, então depois da 1ª leitura custam ~0. Escritas por fora (agentes, editor) mudam o mtime e invalidam sozinhas.
+const cache = new Map<string, { m: number; s: number; v: unknown }>();
+function cached<T>(file: string, load: () => T): T {
+  const st = statSync(abs(file));
+  const hit = cache.get(file);
+  if (hit && hit.m === st.mtimeMs && hit.s === st.size) return hit.v as T;
+  const v = load();
+  cache.set(file, { m: st.mtimeMs, s: st.size, v });
+  return v;
+}
+export const cacheSize = () => cache.size;
+
 const ensureDir = (p: string) => mkdirSync(abs(p), { recursive: true });
 const write = (p: string, txt: string) => { mkdirSync(dirname(abs(p)), { recursive: true }); writeFileSync(abs(p), txt); };
 const read = (p: string) => readFileSync(abs(p), 'utf8');
@@ -69,8 +82,7 @@ export const saveTags = (slug: string, t: unknown) => { const v = check(TagsFile
 // ---------- Markdown genérico com frontmatter YAML ----------
 type Doc<T> = { data: T; body: string; file: string };
 function readDoc<T extends z.ZodTypeAny>(schema: T, file: string): Doc<z.infer<T>> {
-  const { data, body } = parseMd(read(file));
-  return { data: check(schema, data, file), body, file };
+  return cached(file, () => { const { data, body } = parseMd(read(file)); return { data: check(schema, data, file), body, file }; });
 }
 function writeDoc<T extends z.ZodTypeAny>(schema: T, file: string, data: unknown, body: string) {
   const v = check(schema, data, file);
@@ -117,8 +129,7 @@ const TASK_ORDER = ['id', 'title', 'board', 'status', 'assignee', 'priority', 'd
 export function listTasks(slug: string) {
   return list(P.board(slug), /^T-\d{4}.*\.md$/).map((f) => {
     const file = join(P.board(slug), f);
-    const { data, body } = parseSimple(read(file));
-    return { data: check(Task, data, file), body, file };
+    return cached(file, () => { const { data, body } = parseSimple(read(file)); return { data: check(Task, data, file), body, file }; });
   });
 }
 export function nextTaskId(slug: string) {
@@ -181,14 +192,34 @@ export function listSnapshots(slug: string, compId: string) {
   return readdirSync(abs(root)).flatMap((key) =>
     list(join(root, key), /\.json$/).map((f) => {
       const file = join(root, key, f);
-      return { key, file, data: check(Snapshot, JSON.parse(read(file)), file) };
+      return cached(file, () => ({ key, file, data: check(Snapshot, JSON.parse(read(file)), file) }));
     }),
   ).sort((a, b) => a.data.collectedAt.localeCompare(b.data.collectedAt));
 }
 
+/**
+ * Coletas para a tela de detalhe sem carregar o histórico inteiro:
+ * por perfil, as `full` mais recentes completas e até `max` anteriores "leves"
+ * (só seguidores e views/curtidas por item, o que o gráfico e o histórico do item usam).
+ */
+export function listSnapshotsForView(slug: string, compId: string, { full = 2, max = 12 } = {}) {
+  const all = listSnapshots(slug, compId);
+  const byKey = new Map<string, typeof all>();
+  for (const s of all) byKey.set(s.key, [...(byKey.get(s.key) ?? []), s]);
+  const out: typeof all = [];
+  for (const list of byKey.values()) {
+    const keep = list.slice(-max);
+    keep.forEach((s, i) => {
+      if (i >= keep.length - full) return out.push(s);
+      out.push({ ...s, data: { ...s.data, profile: { followers: s.data.profile.followers, links: [] }, items: s.data.items.map((it) => ({ id: it.id, url: it.url, type: it.type, metrics: { views: it.metrics.views, likes: it.metrics.likes } })) } as typeof s.data });
+    });
+  }
+  return { snapshots: out.sort((a, b) => a.data.collectedAt.localeCompare(b.data.collectedAt)), snapshotsTotal: all.length };
+}
+
 // ---------- Marcações ----------
 export const getMarks = (slug: string, compId: string) =>
-  exists(P.marks(slug, compId)) ? check(MarksFile, JSON.parse(read(P.marks(slug, compId))), P.marks(slug, compId)) : {};
+  exists(P.marks(slug, compId)) ? { ...cached(P.marks(slug, compId), () => check(MarksFile, JSON.parse(read(P.marks(slug, compId))), P.marks(slug, compId))) } : {};
 export function setMark(slug: string, compId: string, key: string, mark: Partial<z.input<typeof ItemMark>>) {
   const all = getMarks(slug, compId);
   all[key] = check(ItemMark, { ...(all[key] ?? {}), ...mark, updated: nowIso() }, `${P.marks(slug, compId)}#${key}`);

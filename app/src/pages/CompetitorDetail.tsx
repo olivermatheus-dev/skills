@@ -309,7 +309,7 @@ export default function CompetitorDetail() {
         tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk}
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}
         onIdea={(title, tags, note) => openRow && makeIdea(openRow, title, tags, note)} />
-      {editing && <EditCompetitor slug={slug} open={editing} onClose={() => setEditing(false)} data={c} body={d.body} snapshotsCount={d.snapshots.length} />}
+      {editing && <EditCompetitor slug={slug} open={editing} onClose={() => setEditing(false)} data={c} body={d.body} snapshotsCount={d.snapshotsTotal} />}
     </div>
   );
 }

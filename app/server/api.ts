@@ -62,7 +62,7 @@ on('POST', '/api/detect-link', (_, b) => detectLink(b.url));
 on('GET', '/api/projects/:slug/competitors', (p) => S.listCompetitors(p.slug));
 on('POST', '/api/projects/:slug/competitors', (p, b) => S.saveCompetitor(p.slug, b.data, b.body ?? ''));
 on('GET', '/api/projects/:slug/competitors/:id', (p) => ({
-  ...S.getCompetitor(p.slug, p.id), snapshots: S.listSnapshots(p.slug, p.id), marks: S.getMarks(p.slug, p.id),
+  ...S.getCompetitor(p.slug, p.id), ...S.listSnapshotsForView(p.slug, p.id), marks: S.getMarks(p.slug, p.id),
 }));
 on('PUT', '/api/projects/:slug/competitors/:id', (p, b) => S.saveCompetitor(p.slug, { ...b.data, id: p.id }, b.body ?? ''));
 on('DELETE', '/api/projects/:slug/competitors/:id', (p) => S.deleteCompetitor(p.slug, p.id));
@@ -122,4 +122,9 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
   send(res, 404, { error: `rota não encontrada: ${req.method} ${url.pathname}` });
 };
 
-export const hubApi = (): Plugin => ({ name: 'hub-api', configureServer: (s) => { s.middlewares.use(handler); } });
+export const hubApi = (): Plugin => ({
+  name: 'hub-api',
+  configureServer: (s) => { s.middlewares.use(handler); },
+  // modo rápido (npm run app = build + preview): mesma API sobre o bundle otimizado
+  configurePreviewServer: (s) => { s.middlewares.use(handler); },
+});

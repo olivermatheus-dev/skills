@@ -26,3 +26,4 @@ logs/
 *.aif
 *.aiff
 *.m4a
+app/dist/
