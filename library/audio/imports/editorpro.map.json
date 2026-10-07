@@ -1,0 +1,33 @@
+{
+  "source": "_inbox/audio",
+  "origin": "EditorPro",
+  "author": "EditorPro",
+  "license": "",
+  "attribution": "",
+  "removeDuplicates": false,
+  "folders": {
+    "SFX Whoosh PRO": "whoosh",
+    "SFX Risers PRO": "riser",
+    "SFX Hits PRO": "impact",
+    "SFX Transitions PRO": "transition",
+    "SFX Interface PRO": "ui",
+    "SFX HUDs PRO": "hud",
+    "SFX Ambientes PRO": "ambience",
+    "SFX Natureza PRO": "nature",
+    "SFX Foley": { "category": "foley", "sub": "objetos" },
+    "SFX Diegetic": { "category": "foley", "sub": "objetos" },
+    "SFX Efeitos (Fogo, CO2,etc) PRO": "pyro",
+    "SFX Emoção PRO": "emotion",
+    "SFX Tonalidade PRO": "tonal",
+    "SFX Reverb PRO": "reverb",
+    "SFX Retro PRO": "retro"
+  },
+  "subByName": {
+    "foley": {
+      "passos|andando|andar": "passos",
+      "respir|suspiro|coracao|beijo|vestindo|tecido|toque|passando a mao|pano": "corpo",
+      "grit|risada|garotas|gemendo|comemorando": "pessoas",
+      "porta": "casa"
+    }
+  }
+}

@@ -32,3 +32,4 @@ Ter a biblioteca mínima para os primeiros vídeos sem improviso: famílias de e
 
 ## Log
 - 2026-10-07 — criada.
+- 2026-10-07 — importados 560 SFX do pacote EditorPro (cobre whoosh, swish, UI, impact, riser, transição, tonal, success/notification via HUD, ambiences). Metadados inferidos do nome (`auto: true`). Pendente: licença do EditorPro; ainda faltam trilhas (music) e bases.

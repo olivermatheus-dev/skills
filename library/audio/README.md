@@ -4,17 +4,34 @@ Compartilhada por todas as empresas. **Os arquivos de áudio ficam só na máqui
 
 ```
 library/audio/
-  sfx/<categoria>/<Familia>_NN.wav      efeitos (whoosh, impact, ui, foley…)
+  sfx/<categoria>/[<sub>/]<Familia>_NN.mp3   efeitos (whoosh, impact, ui, foley/passos…)
   music/<id>.wav (+ stems/)             trilhas prontas ou compostas por nós
   bases/<tipo>/…                        loops, one-shots, stems e samples para compor trilhas
   sfx.json · music.json · bases.json    catálogos (metadados + licença)
+  INDEX.md                              índice gerado, 1 linha por família (é o que o Claude lê)
+  imports/<origem>.map.json · .log.json   mapa de cada pacote importado e registro original → novo
 ```
 
 ## Regras
-1. **Procurar no catálogo antes de gerar ou baixar.** `node tools/audio/catalog.mjs search sfx --category whoosh --intensity light --character clean`
+1. **Procurar no catálogo antes de gerar ou baixar.** Comece pelo `INDEX.md`; detalhe com `search` (`--q "porta"` busca pelo nome). `node tools/audio/catalog.mjs search sfx --category whoosh --intensity light --character clean`
 2. **Todo arquivo novo entra no catálogo antes de ser usado:** `node tools/audio/catalog.mjs scan` cria a ficha (duração, canais, pico) e você/agente completa os campos `?`.
 3. **Sem licença registrada = não usa.** `node tools/audio/catalog.mjs check` acusa.
-4. **Nome por família** (consistência sem repetição): `<Categoria>_<Caráter>_<Peso|Intensidade>_<Duração>_NN` → `Whoosh_Cinematic_Soft_Short_01.wav`, `UI_Elegant_Click_03.wav`.
+4. **Nome por família** (consistência sem repetição): nome descritivo + `_NN` da variante → `Whoosh_Fino_Curto_01.mp3`, `Passos_em_Areia_02.mp3`. Para sons novos gerados por nós: `<Categoria>_<Caráter>_<Peso|Intensidade>_<Duração>_NN` → `Whoosh_Cinematic_Soft_Short_01.wav`.
+5. **Pacote inteiro** (ex.: o que estiver em `_inbox/audio/`): `node tools/audio/import.mjs library/audio/imports/<origem>.map.json --dry` → conferir → rodar. Licença do pacote: `node tools/audio/catalog.mjs license --origin <origem> "<licença>"`.
+6. **`auto: true`** = intensidade, caráter e peso foram **inferidos do nome**, não ouvidos. Ao usar e ouvir, corrija a ficha e tire o `auto`.
+
+## Categorias em uso
+| pasta | o quê | origem |
+|---|---|---|
+| `whoosh` · `riser` · `impact` · `transition` | movimento, antecipação, impacto, transição | EditorPro |
+| `ui` · `hud` | cliques, câmera, shutter · interface futurista (alerta, confirmação, scanner) | EditorPro |
+| `ambience` · `nature` | ambientes internos/urbanos · natureza (água, pássaros, vento) | EditorPro |
+| `foley/{objetos,passos,corpo,pessoas,casa}` | sons do dia a dia (Foley + Diegetic do pacote) | EditorPro |
+| `emotion` | camadas por emoção (calma, tensão, suspense, realização) | EditorPro |
+| `tonal` | notas e acordes de instrumento, com tom (`key`) | EditorPro |
+| `reverb` | caudas e reverbs para fechar transições | EditorPro |
+| `pyro` | fogo, CO2, fogos de artifício | EditorPro |
+| `retro` | TV, rádio, fita, telefone antigos | EditorPro |
 
 ## Ficha de SFX (`sfx.json`)
 | campo | valores |

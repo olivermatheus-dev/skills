@@ -1,0 +1,2260 @@
+{
+  "date": "2026-10-07",
+  "origin": "EditorPro",
+  "imported": [
+    {
+      "from": "SFX Foley/Detalhes/35mm Projetor de Filme_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/35mm_Projetor_de_Filme_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Abrindo Lata_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Abrindo_Lata_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Abrindo Porta_byEditorPro.mp3",
+      "to": "sfx/foley/casa/Abrindo_Porta_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Abrindo Porta2_byEditorPro.mp3",
+      "to": "sfx/foley/casa/Abrindo_Porta_02.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Água Corrente em Pedra_byEditorPro.mp3",
+      "to": "sfx/nature/Agua_Corrente_em_Pedra_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Água Onda_byEditorPro.mp3",
+      "to": "sfx/nature/Agua_Onda_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Abafado_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Abafado_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Banheiro Vazio_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Banheiro_Vazio_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Cafeteria Aconchegante_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Cafeteria_Aconchegante_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Carro_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Carro_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Chuva Abafado_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Chuva_Abafado_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Chuva com Trovoada_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Chuva_com_Trovoada_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Chuva Forte Abafado_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Chuva_Forte_Abafado_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Chuva Local Fechado_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Chuva_Local_Fechado_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Cidade ao Fundo_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Cidade_ao_Fundo_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Conversa Festa_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Conversa_Festa_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente em Baixo D´água_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Embaixo_Dagua_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Escola _byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Escola_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Escritorio_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Escritorio_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Escritório Moderno_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Escritorio_Moderno_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente FLoresta_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Floresta_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Floresta2_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Floresta_02.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Floresta3_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Floresta_03.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Floresta Silencio_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Floresta_Silencio_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Loja_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Loja_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Metro_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Metro_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Restaurante_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Restaurante_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Sala de Espera_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Sala_de_Espera_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Sala de Espera2_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Sala_de_Espera_02.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Terminal de Ônibus_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Terminal_de_Onibus_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Trem em Movimento_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Trem_em_Movimento_01.mp3"
+    },
+    {
+      "from": "SFX Ambientes PRO/Ambiente Urbano Diurno_byEditorPro.mp3",
+      "to": "sfx/ambience/Ambiente_Urbano_Diurno_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Andando Lento Carpete_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Andando_Lento_Carpete_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Andar Sobre Folhas Secas_byEditorPro.mp3",
+      "to": "sfx/nature/Andar_sobre_Folhas_Secas_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Andar Sobre Galhos_byEditorPro.mp3",
+      "to": "sfx/nature/Andar_sobre_Galhos_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Angústia Leve Crescente_byEditorPro.mp3",
+      "to": "sfx/emotion/Angustia_Leve_Crescente_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Ansiedade Crescente_byEditorPro.mp3",
+      "to": "sfx/emotion/Ansiedade_Crescente_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Avião Decolando_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Aviao_Decolando_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Barulho Sujeira_byEditorPro.mp3",
+      "to": "sfx/nature/Barulho_Sujeira_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Batendo na Porta_byEditorPro.mp3",
+      "to": "sfx/foley/casa/Batendo_na_Porta_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Bater de Asas_byEditorPro.mp3",
+      "to": "sfx/nature/Bater_de_Asas_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Batida Coração Lento_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Batida_Coracao_Lento_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Batida Coração Rapida_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Batida_Coracao_Rapida_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Batidas Coração_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Batidas_Coracao_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bazuca Co2_byEditorPro.mp3",
+      "to": "sfx/pyro/Bazuca_CO2_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Bebedouro_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Bebedouro_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Bebendo Bebida_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Bebendo_Bebida_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Beijo_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Beijo_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo2_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo3_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo4_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_04.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo5_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_05.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo6_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_06.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo7_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_07.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo8_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_08.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo9_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_09.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo10_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_10.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Bola de Fogo11_byEditorPro.mp3",
+      "to": "sfx/pyro/Bola_de_Fogo_11.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Calma Profunda_byEditorPro.mp3",
+      "to": "sfx/emotion/Calma_Profunda_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Cartoon Shutter_byEditorPro.mp3",
+      "to": "sfx/ui/Cartoon_Shutter_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Cartoon Shutter2_byEditorPro.mp3",
+      "to": "sfx/ui/Cartoon_Shutter_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Cartoon Shutter3_byEditorPro.mp3",
+      "to": "sfx/ui/Cartoon_Shutter_03.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Chacoalhando Mix_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Chacoalhando_Mix_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Chuvoso Trovao_byEditorPro.mp3",
+      "to": "sfx/nature/Chuvoso_Trovao_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Cinematic Drama_byEditorPro.mp3",
+      "to": "sfx/emotion/Cinematic_Drama_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Hit_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Hit_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto2_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_02.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto3_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_03.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto4_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_04.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto5_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_05.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto6_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_06.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto7_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_07.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Cinematic Impacto8_byEditorPro.mp3",
+      "to": "sfx/impact/Cinematic_Impacto_08.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Clareza Emocional_byEditorPro.mp3",
+      "to": "sfx/emotion/Clareza_Emocional_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Clareza Emocional Feliz_byEditorPro.mp3",
+      "to": "sfx/emotion/Clareza_Emocional_Feliz_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Click Botão Rádio Portátil_byEditorPro.mp3",
+      "to": "sfx/retro/Click_Botao_Radio_Portatil_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Click de VCR Gravando_byEditorPro.mp3",
+      "to": "sfx/retro/Click_de_VCR_Gravando_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/CliqueCaneta_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Clique_Caneta_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Clique Mouse_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Clique_Mouse_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Co2_byEditorPro.mp3",
+      "to": "sfx/pyro/CO2_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/CO2_Curto_Abafado_ByEditorPro.mp3",
+      "to": "sfx/pyro/CO2_Curto_Abafado_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/CO2_Curto_Potente_ByEditorPro.mp3",
+      "to": "sfx/pyro/CO2_Curto_Potente_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/CO2_Curto_Potente2_ByEditorPro.mp3",
+      "to": "sfx/pyro/CO2_Curto_Potente_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Co2 jato_byEditorPro.mp3",
+      "to": "sfx/pyro/CO2_Jato_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Conexão Interna_byEditorPro.mp3",
+      "to": "sfx/emotion/Conexao_Interna_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Corda Cabo_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Corda_Cabo_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Corda Cabo2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Corda_Cabo_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Curto_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Curto_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Desligamento de TV Antiga_byEditorPro.mp3",
+      "to": "sfx/retro/Desligamento_de_TV_Antiga_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Desligar Rádio Analógico_byEditorPro.mp3",
+      "to": "sfx/retro/Desligar_Radio_Analogico_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Digitação Digital Holograma_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Digitacao_Digital_Holograma_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera2_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera3_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera4_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera5_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Digital Camera6_byEditorPro.mp3",
+      "to": "sfx/ui/Digital_Camera_06.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Dramaticidade Intensa_byEditorPro.mp3",
+      "to": "sfx/emotion/Dramaticidade_Intensa_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Estalo de Rádio AM_byEditorPro.mp3",
+      "to": "sfx/retro/Estalo_de_Radio_AM_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Expectativa Subjetiva_byEditorPro.mp3",
+      "to": "sfx/emotion/Expectativa_Subjetiva_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Explosão_byEditorPro.mp3",
+      "to": "sfx/impact/Explosao_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Faiscas_byEditorPro.mp3",
+      "to": "sfx/pyro/Faiscas_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Faiscas2_byEditorPro.mp3",
+      "to": "sfx/pyro/Faiscas_02.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Felicidade Sólida_byEditorPro.mp3",
+      "to": "sfx/emotion/Felicidade_Solida_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Fita Casete_byEditorPro.mp3",
+      "to": "sfx/retro/Fita_Cassete_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Fita Casete2_byEditorPro.mp3",
+      "to": "sfx/retro/Fita_Cassete_02.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Fita Cassete Enroscando_byEditorPro.mp3",
+      "to": "sfx/retro/Fita_Cassete_Enroscando_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Fita Emperrada_byEditorPro.mp3",
+      "to": "sfx/retro/Fita_Emperrada_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/FIta Rebobinando_byEditorPro.mp3",
+      "to": "sfx/retro/Fita_Rebobinando_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Flauta C Maior Suave_byEditorPro.mp3",
+      "to": "sfx/tonal/Flauta_C_Maior_Suave_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Flauta C Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Flauta_C_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Flauta G Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Flauta_G_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Afiado_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Afiado_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Afiado2_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Afiado_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Curto_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Curto2_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Curto3_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Curto4_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_04.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Curto Grave_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Curto_Lança-chamas_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_Lanca_chamas_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Curto_Lança-chamas2_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_Lanca_chamas_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Curto_Lança-chamas3_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_Lanca_chamas_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Curto_Lança-chamas4_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Curto_Lanca_chamas_04.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Faisca_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Faisca_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Impacto_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Impacto_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Longo_Lança-chamas_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Longo_Lanca_chamas_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Longo_Lança-chamas2_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Longo_Lanca_chamas_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo Mágico_byEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Magico_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_Rápido_Jato_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Rapido_Jato_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_tiro_único_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Tiro_Unico_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Fogo_tiro_único2_ByEditorPro.mp3",
+      "to": "sfx/pyro/Fogo_Tiro_Unico_02.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Fogueira_byEditorPro.mp3",
+      "to": "sfx/nature/Fogueira_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Folhas Secas_byEditorPro.mp3",
+      "to": "sfx/nature/Folhas_Secas_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click2_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click3_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click4_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click5_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click6_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click7_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_07.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click8_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_08.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click9_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_09.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Futurista Click10_byEditorPro.mp3",
+      "to": "sfx/ui/Futurista_Click_10.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Galhos Quebrando Lentos_byEditorPro.mp3",
+      "to": "sfx/nature/Galhos_Quebrando_Lentos_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Garotas Adolescentes_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Garotas_Adolescentes_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Gelo Copo Vidro_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Gelo_Copo_Vidro_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Gelo Raspando_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Gelo_Raspando_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Grilo_byEditorPro.mp3",
+      "to": "sfx/nature/Grilo_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/gritaria Show_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Gritaria_Show_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Gritaria Showl_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Gritaria_Show_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Homem_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Homem_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Homens_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Homens_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Maluco_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Maluco_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito MeninasbyEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Meninas_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Mulher_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Mulher_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Mulher2_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Mulher_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Mulher3_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Mulher_03.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Grito Publico_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Grito_Publico_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Gritos Comemorando_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Gritos_Comemorando_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Gritos Comemorando2_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Gritos_Comemorando_02.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Hit Orquestra Épico_byEditorPro.mp3",
+      "to": "sfx/impact/Hit_Orquestra_Epico_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Acerto Pop-Up_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Acerto_Pop_Up_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Alerta_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Alerta_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Alerta Intermitente_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Alerta_Intermitente_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Beep Grave_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Beep_Grave_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Boom_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Boom_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Boom Fino Crescente_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Boom_Fino_Crescente_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Confirmação Rápida_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Confirmacao_Rapida_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Erro Forte_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Erro_Forte_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Erro Pop-Up_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Erro_Pop_Up_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Feedback Instantâneo_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Feedback_Instantaneo_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Interferência_drama_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Interferencia_Drama_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Lendo Arquivo_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Lendo_Arquivo_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up2_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up3_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up4_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up5_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Pop-Up6_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Pop_Up_06.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Pulso Relógio_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Pulso_Relogio_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Rise_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Rise_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Rise Fino Crescente_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Rise_Fino_Crescente_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Rise Relógio_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Rise_Relogio_01.mp3"
+    },
+    {
+      "from": "SFX HUDs PRO/HUD Scanner Curto_byEditorPro.mp3",
+      "to": "sfx/hud/HUD_Scanner_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound2_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound3_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound4_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound5_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound6_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound7_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_07.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound8_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_08.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound9_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_09.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound10_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_10.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound11_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_11.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound12_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_12.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound13_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_13.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound14_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_14.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/HUD Sound15_byEditorPro.mp3",
+      "to": "sfx/ui/HUD_Sound_15.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Curto_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Curto2_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Curto_02.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Distorcido_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Distorcido_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Distorcido2_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Distorcido_02.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Distorcido3_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Distorcido_03.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Épico_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Epico_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Grave_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_01.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit2_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_02.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit3_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_03.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit4_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_04.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit5_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_05.mp3"
+    },
+    {
+      "from": "SFX Hits PRO/Impacto Hit6_byEditorPro.mp3",
+      "to": "sfx/impact/Impacto_Hit_06.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Lança Chamas_byEditorPro.mp3",
+      "to": "sfx/pyro/Lanca_Chamas_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Lança Foguetes_byEditorPro.mp3",
+      "to": "sfx/pyro/Lanca_Foguetes_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Lápis Desenho_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Lapis_Desenho_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Lápis Desenho2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Lapis_Desenho_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/LapisEscrevendo_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Lapis_Escrevendo_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Lapis Escrevendo_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Lapis_Escrevendo_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Lápis Rabiscando_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Lapis_Rabiscando_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Leitor de Disco Antigo_byEditorPro.mp3",
+      "to": "sfx/retro/Leitor_de_Disco_Antigo_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Liquido Bebida_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Liquido_Bebida_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Maquina de Gelo_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Maquina_de_Gelo_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Mergulho Água_byEditorPro.mp3",
+      "to": "sfx/nature/Mergulho_Agua_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Motor Jetski_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Motor_Jetski_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Mulher Gemendo Ofegante_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Mulher_Gemendo_Ofegante_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Papel Amassado_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Papel_Amassado_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Papel Amassado2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Papel_Amassado_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Papel Amassado3_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Papel_Amassado_03.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Papel Amassado Forte_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Papel_Amassado_Forte_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Papel Amassado Lento_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Papel_Amassado_Lento_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passando a  Mão_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Passando_a_Mao_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passando a Mão Basquete_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Passando_a_Mao_Basquete_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Pássaros_byEditorPro.mp3",
+      "to": "sfx/nature/Passaros_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Pássaros Cantando_byEditorPro.mp3",
+      "to": "sfx/nature/Passaros_Cantando_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Pássaros Floresta_byEditorPro.mp3",
+      "to": "sfx/nature/Passaros_Floresta_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Pássaros Tropicais ao Amanhecer_byEditorPro.mp3",
+      "to": "sfx/nature/Passaros_Tropicais_ao_Amanhecer_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Areia_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Areia_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Areia2_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Areia_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Grama Molhada_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Grama_Molhada_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Grama Seca_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Grama_Seca_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Paralelepípedo_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Paralelepipedo_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Piso de Madeira_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Piso_de_Madeira_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Piso de Madeira2_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Piso_de_Madeira_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos em Piso de Madeira3_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_em_Piso_de_Madeira_03.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes2_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes3_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_03.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes4_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_04.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes Graves_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_Graves_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Fortes Rapidos_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Fortes_Rapidos_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Graves_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Graves_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Passos Madeira_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Madeira_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Salto Alto1_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Salto_Alto_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Salto Alto2_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Salto_Alto_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Passos Salto Alto Rápido_byEditorPro.mp3",
+      "to": "sfx/foley/passos/Passos_Salto_Alto_Rapido_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Perto de Estrada_byEditorPro.mp3",
+      "to": "sfx/nature/Perto_de_Estrada_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano Am Longo_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_Am_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano C Menor Reflexivo_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_C_Menor_Reflexivo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano Dó Sustentado_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_Do_Sustentado_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/PIano Em Cinemático_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_Em_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano F Maior Expansivo_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_F_Maior_Expansivo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano F Menor Agressivo_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_F_Menor_Agressivo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano G Maior Abertura_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_G_Maior_Abertura_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano G Menor Suave_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_G_Menor_Suave_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Piano Ré Sustentado_byEditorPro.mp3",
+      "to": "sfx/tonal/Piano_Re_Sustentado_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Pistola de Fogo_byEditorPro.mp3",
+      "to": "sfx/pyro/Pistola_de_Fogo_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Pistola de Fogo2_byEditorPro.mp3",
+      "to": "sfx/pyro/Pistola_de_Fogo_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Pistola de Fogo3_byEditorPro.mp3",
+      "to": "sfx/pyro/Pistola_de_Fogo_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Pistola de Fogo4_byEditorPro.mp3",
+      "to": "sfx/pyro/Pistola_de_Fogo_04.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Porta velha batendo_byEditorPro.mp3",
+      "to": "sfx/foley/casa/Porta_Velha_Batendo_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Praia_byEditorPro.mp3",
+      "to": "sfx/nature/Praia_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Praia2_byEditorPro.mp3",
+      "to": "sfx/nature/Praia_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Pressão Ar_byEditorPro.mp3",
+      "to": "sfx/pyro/Pressao_Ar_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos2_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos3_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos4_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_04.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos5_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_05.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima_de_fogos_cinemático_ByEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima_de_fogos_cinemático2_ByEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Cinematico_02.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima_de_fogos_cinemático3_ByEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Cinematico_03.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima_de_fogos_cinemático4_ByEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Cinematico_04.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima_de_fogos_cinemático5_ByEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Cinematico_05.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de fogos Curta_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Curta_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Queima de Fogos Grande_byEditorPro.mp3",
+      "to": "sfx/pyro/Queima_de_Fogos_Grande_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Rádio Antigo com Chiado_byEditorPro.mp3",
+      "to": "sfx/retro/Radio_Antigo_com_Chiado_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Rádio Entrando na Frequência_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Radio_Entrando_na_Frequencia_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Rádio Entrando na Frequência2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Radio_Entrando_na_Frequencia_02.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Realização Súbita_byEditorPro.mp3",
+      "to": "sfx/emotion/Realizacao_Subita_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Rebobinando Dj_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Rebobinando_Dj_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Reflexão Profunda_byEditorPro.mp3",
+      "to": "sfx/emotion/Reflexao_Profunda_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Homem_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Homem_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Respiro Homem_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Homem_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Homem Lento_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Homem_Lento_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Homem Rapido_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Homem_Rapido_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Masculino Forte_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Masculino_Forte_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Respiro Mulher_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Mulher_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Ofegante_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Ofegante_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Respiro Terror_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Respiro_Terror_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Agudo com Delay_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Agudo_com_Delay_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Agudo Esticado_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Agudo_Esticado_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Alto com Delay_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Alto_com_Delay_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Ambiência Profunda_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Ambiencia_Profunda_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Brilhante com Delay_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Brilhante_com_Delay_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Brilhante e Curto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Brilhante_e_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Brilho_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Brilho_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Brilho Contínuo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Brilho_Continuo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb com Cauda de Eco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_com_Cauda_de_Eco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Curto com Delay_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Curto_com_Delay_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Curto com Estalo Seco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Curto_com_Estalo_Seco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Curto com Textura_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Curto_com_Textura_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Curto e Opaco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Curto_e_Opaco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb de Impacto e Abertura_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_de_Impacto_e_Abertura_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb de Transição Curta_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_de_Transicao_Curta_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Distante e Aberto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Distante_e_Aberto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Envolvente e Grave_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Envolvente_e_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Espacial Abrupto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Espacial_Abrupto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Espacial Agudo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Espacial_Agudo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Espacial e Abstrato_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Espacial_e_Abstrato_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Expandido Espacial_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Expandido_Espacial_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Fantasmagórico Curto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Fantasmagorico_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Glitchado Curto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Glitchado_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Grave e Profundo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Grave_e_Profundo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Grave Expandido_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Grave_Expandido_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Impacto e Delay_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Impacto_e_Delay_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Intenso e Seco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Intenso_e_Seco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Lento com Cauda Longa_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Lento_com_Cauda_Longa_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Metálico e Agudo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Metalico_e_Agudo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Profundo com Eco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Profundo_com_Eco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Profundo e Lentificado_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Profundo_e_Lentificado_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Prolongado e Brilhante_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Prolongado_e_Brilhante_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Reverso Cinemático_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Reverso_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Robótico e Seco_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Robotico_e_Seco_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Robótico Prolongado_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Robotico_Prolongado_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Seco com Estalo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Seco_com_Estalo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Subgrave Longo_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Subgrave_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Texturizado e Curto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Texturizado_e_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Reverb PRO/Reverb Vibrante e Curto_byEditorPro.mp3",
+      "to": "sfx/reverb/Reverb_Vibrante_e_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Riacho com Folhagem_byEditorPro.mp3",
+      "to": "sfx/nature/Riacho_com_Folhagem_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Rio_byEditorPro.mp3",
+      "to": "sfx/nature/Rio_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Risada Aplauso_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Risada_Aplauso_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Pessoas/Risada Feminina_byEditorPro.mp3",
+      "to": "sfx/foley/pessoas/Risada_Feminina_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Alta_Energia_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Alta_Energia_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Alta_Energia2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Alta_Energia_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Ambiente_Sombrio_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Ambiente_Sombrio_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Atmosférico2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Atmosferico_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Atmosférico3_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Atmosferico_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Atmosférico4_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Atmosferico_03.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Atmosférico5_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Atmosferico_04.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Cinematic_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Cinematic_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Cinemático_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Cinemático2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Cinematico_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Cinemático3_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Cinematico_03.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Cinemático5_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Cinematico_04.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Clique Curto_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Clique_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Curto_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Curto2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Curto_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Curto_Cinemático_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Curto_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Curto_Cinemático2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Curto_Cinematico_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Curto Distorcido_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Curto_Distorcido_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Épico Tensão_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Epico_Tensao_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Épico Vozes_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Epico_Vozes_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Fantasma Longo_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Fantasma_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Longo Fino_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Longo_Fino_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Mistério Longo.mp3",
+      "to": "sfx/riser/Riser_Misterio_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Ouro Curto_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Ouro_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Reverb Longo_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Reverb_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Reverso_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Reverso_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Rugoso_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Rugoso_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser SciFi Curto_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_SciFi_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/RISER_Suave_Emotivo_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Suave_Emotivo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Sujeira Longo_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Sujeira_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Tonal Longo_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Tonal_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Tonal Reverse_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Tonal_Reverse_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Tonal Vibrante_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Tonal_Vibrante_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Trailer_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Trailer_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Trailer2_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Trailer_02.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Trailer3_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Trailer_03.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser_Trailer4_ByEditorPro.mp3",
+      "to": "sfx/riser/Riser_Trailer_04.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Vento_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Vento_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Vento Longo_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Vento_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Riser Whoosh Perfeito_byEditorPro.mp3",
+      "to": "sfx/riser/Riser_Whoosh_Perfeito_01.mp3"
+    },
+    {
+      "from": "SFX Efeitos (Fogo, CO2,etc) PRO/Rojão_EditorPro.mp3",
+      "to": "sfx/pyro/Rojao_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera2_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera3_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera4_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera5_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera6_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera7_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_07.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera8_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_08.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera9_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_09.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera10_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_10.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera11_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_11.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera12_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_12.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera13_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_13.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera14_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_14.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera15_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_15.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera16_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_16.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Câmera17_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Camera_17.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter vintage_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter vintage2_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter vintage3_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage4_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage5_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage6_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage7_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_07.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage8_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_08.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage9_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_09.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage10_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_10.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage11_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_11.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage12_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_12.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Shutter Vintage13_byEditorPro.mp3",
+      "to": "sfx/ui/Shutter_Vintage_13.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Som de Fita VHS Rodando_byEditorPro.mp3",
+      "to": "sfx/retro/Som_de_Fita_VHS_Rodando_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Splash na Água_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Splash_na_Agua_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Splash na Água2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Splash_na_Agua_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Spray de Grama_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Spray_de_Grama_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Suspense Grave_byEditorPro.mp3",
+      "to": "sfx/emotion/Suspense_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Suspense Intenso_byEditorPro.mp3",
+      "to": "sfx/emotion/Suspense_Intenso_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Suspense Médio_byEditorPro.mp3",
+      "to": "sfx/emotion/Suspense_Medio_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Suspense Silencioso_byEditorPro.mp3",
+      "to": "sfx/emotion/Suspense_Silencioso_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Suspiro Longo_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Suspiro_Longo_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Suspiro Longo2_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Suspiro_Longo_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano2_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_02.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano3_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_03.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano4_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_04.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano5_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_05.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano6_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_06.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano7_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_07.mp3"
+    },
+    {
+      "from": "SFX Foley/Sons do dia a dia/Tecido Pano8_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Tecido_Pano_08.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Teclado _byEditorPro.mp3",
+      "to": "sfx/retro/Teclado_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Teclado_byEditorPro.mp3",
+      "to": "sfx/retro/Teclado_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Teclado Digitando_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Teclado Digitando_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_02.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Teclado Digitando2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_03.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Teclado Digitando2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_04.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Teclado Digitando3_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_05.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Tecladdo Digitando Forte_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_Forte_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Teclado Digitando Lento_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Digitando_Lento_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Teclado Gamer_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Gamer_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Teclado GAMER2_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Gamer_02.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Teclado Mecânico Anos 90_byEditorPro.mp3",
+      "to": "sfx/retro/Teclado_Mecanico_Anos_90_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Teclado Notebook_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Teclado_Notebook_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Telefone Antigo_byEditorPro.mp3",
+      "to": "sfx/retro/Telefone_Antigo_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Telefone Com Chiado Antigo_byEditorPro.mp3",
+      "to": "sfx/retro/Telefone_com_Chiado_Antigo_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Tensão Crescente Fino_byEditorPro.mp3",
+      "to": "sfx/emotion/Tensao_Crescente_Fino_01.mp3"
+    },
+    {
+      "from": "SFX Emoção PRO/Tensão Subjetiva_byEditorPro.mp3",
+      "to": "sfx/emotion/Tensao_Subjetiva_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Toque tecido_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Toque_Tecido_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Transição Crescente Textura_byEditorPro.mp3",
+      "to": "sfx/retro/Transicao_Crescente_Textura_01.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_01.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda2_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_02.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda3_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_03.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda4_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_04.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda5_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_05.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda6_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_06.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda7_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_07.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda8_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_08.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda9_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_09.mp3"
+    },
+    {
+      "from": "SFX Transitions PRO/Transição Profunda10_byEditorPro.mp3",
+      "to": "sfx/transition/Transicao_Profunda_10.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Transition Riser Whoosh_byEditorPro.mp3",
+      "to": "sfx/whoosh/Transition_Riser_Whoosh_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Transmissão com Chiado Retrô_byEditorPro.mp3",
+      "to": "sfx/retro/Transmissao_com_Chiado_Retro_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Trovao com Chuva Forte_byEditorPro.mp3",
+      "to": "sfx/nature/Trovao_com_Chuva_Forte_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv antiga Canal_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Antiga_Canal_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Antiga Ligando_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Antiga_Ligando_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/TV de Tubo Ligando_byEditorPro.mp3",
+      "to": "sfx/retro/TV_de_Tubo_Ligando_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Falhando_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Falhando_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Fora do Ar_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Fora_do_Ar_01.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Fora do Ar_byEditorPro (2).mp3",
+      "to": "sfx/retro/TV_Fora_do_Ar_02.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Fora do Ar3_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Fora_do_Ar_03.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Tv Ligando Grave_byEditorPro.mp3",
+      "to": "sfx/retro/TV_Ligando_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface2_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface3_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface4_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface5_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface6_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/UI_Interface7_byEditorPro.mp3",
+      "to": "sfx/ui/UI_Interface_07.mp3"
+    },
+    {
+      "from": "SFX Risers PRO/Ultra Riser Vibrante_byEditorPro.mp3",
+      "to": "sfx/riser/Ultra_Riser_Vibrante_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Vento Assobio Suspense_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Vento_Assobio_Suspense_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Vento Forte entre Árvores_byEditorPro.mp3",
+      "to": "sfx/nature/Vento_Forte_entre_Arvores_01.mp3"
+    },
+    {
+      "from": "SFX Natureza PRO/Vento nas Montanhas_byEditorPro.mp3",
+      "to": "sfx/nature/Vento_nas_Montanhas_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Vestindo Camiseta_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Vestindo_Camiseta_01.mp3"
+    },
+    {
+      "from": "SFX Diegetic/Vestindo Jaqueta Jeans_byEditorPro.mp3",
+      "to": "sfx/foley/corpo/Vestindo_Jaqueta_Jeans_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão Am_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_Am_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão B Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_B_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão C Arranjo _byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_C_Arranjo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão C Maior_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_C_Maior_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão C Maior Sustentado_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_C_Maior_Sustentado_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão D Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_D_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão Em Leve_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_Em_Leve_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão F Maior Acorde Aberto_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_F_Maior_Acorde_Aberto_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão G Maior_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_G_Maior_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão Ré Maior Cinemático_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_Re_Maior_Cinematico_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violão Sol Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Violao_Sol_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violino Am Arpejo_byEditorPro.mp3",
+      "to": "sfx/tonal/Violino_Am_Arpejo_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violino E Menor_byEditorPro.mp3",
+      "to": "sfx/tonal/Violino_E_Menor_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violino Em Suave_byEditorPro.mp3",
+      "to": "sfx/tonal/Violino_Em_Suave_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violino G Maior Sustentado_byEditorPro.mp3",
+      "to": "sfx/tonal/Violino_G_Maior_Sustentado_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violoncelo Dó Maior Suave_byEditorPro.mp3",
+      "to": "sfx/tonal/Violoncelo_Do_Maior_Suave_01.mp3"
+    },
+    {
+      "from": "SFX Tonalidade PRO/Violoncelo Grave Sustenido_byEditorPro.mp3",
+      "to": "sfx/tonal/Violoncelo_Grave_Sustenido_01.mp3"
+    },
+    {
+      "from": "SFX Foley/Detalhes/Walkie Talkie_byEditorPro.mp3",
+      "to": "sfx/foley/objetos/Walkie_Talkie_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh_Abafado_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Abafado_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Abafado Grave_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Abafado_Grave_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Curto_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Curto2_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Curto_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Curto R to L_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Curto_Direita_para_Esquerda_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino2_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino3_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_03.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino4_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_04.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino5_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_05.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino6_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_06.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino7_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_07.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino8_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_08.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino9_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_09.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fino Curto_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fino_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Fogo_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Fogo_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Gelo_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Gelo_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Gelo2_EditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Gelo_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Hit_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Hit_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Hit2_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Hit_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Hit3_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Hit_03.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Mágico_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Magico_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Mágico2_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Magico_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Médio_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Medio_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Metal Curto_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Metal_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Reverso_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Reverso_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe2_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_02.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe3_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_03.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe4_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_04.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe5_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_05.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe6_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_06.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe7_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_07.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe8_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_08.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe9_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_09.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe10_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_10.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe11_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_11.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe12_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_12.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Swipe13_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Swipe_13.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Tec Curto_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Tec_Curto_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Terror_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Terror_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Trovao_byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Trovao_01.mp3"
+    },
+    {
+      "from": "SFX Whoosh PRO/Whoosh Vibrante _byEditorPro.mp3",
+      "to": "sfx/whoosh/Whoosh_Vibrante_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_01.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera2_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_02.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera3_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_03.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera4_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_04.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera5_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_05.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera6_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_06.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera7_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_07.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera8_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_08.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera9_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_09.mp3"
+    },
+    {
+      "from": "SFX Interface PRO/Zoom Lente Camera10_byEditorPro.mp3",
+      "to": "sfx/ui/Zoom_Lente_Camera_10.mp3"
+    },
+    {
+      "from": "SFX Retro PRO/Zumbido de Linha Telefônica_byEditorPro.mp3",
+      "to": "sfx/retro/Zumbido_de_Linha_Telefonica_01.mp3"
+    }
+  ],
+  "duplicates_removed": [
+    {
+      "file": "SFX Risers PRO/Riser_Atmosférico_ByEditorPro.mp3",
+      "same_as": "SFX Risers PRO/Riser_Atmosférico4_ByEditorPro.mp3"
+    },
+    {
+      "file": "SFX Risers PRO/Riser_Cinemático4_ByEditorPro.mp3",
+      "same_as": "SFX Risers PRO/Riser_Cinemático3_ByEditorPro.mp3"
+    },
+    {
+      "file": "SFX Risers PRO/Riser_Trailer5_ByEditorPro.mp3",
+      "same_as": "SFX Risers PRO/Riser_Trailer2_ByEditorPro.mp3"
+    }
+  ]
+}

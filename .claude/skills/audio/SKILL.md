@@ -15,7 +15,9 @@ A identidade sonora da marca fica em `companies/<slug>/brand/BRAND.md` > **Som**
 **O Claude não escuta.** Ele decide pelo que pode conferir: metadados, sincronia (pico do arquivo × quadro do evento) e medições. Toda entrega diz: "ouvido final: Oliver".
 
 ## Ferramentas
-- Catálogo: `node tools/audio/catalog.mjs search|scan|check` (sem licença o arquivo nem aparece na busca).
+- **Leia primeiro `library/audio/INDEX.md`** (1 linha por família; nunca abra o `sfx.json` inteiro).
+- Catálogo: `node tools/audio/catalog.mjs search|scan|check|license|index` (`search sfx --q "porta"` busca pelo nome; sem licença o arquivo nem aparece na busca).
+- Pacote inteiro do `_inbox`: escreva o mapa em `library/audio/imports/<origem>.map.json` (modelo: `editorpro.map.json`) → `node tools/audio/import.mjs <mapa> --dry` → confira → rode sem `--dry`.
 - Gerar efeito: `node tools/audio/elevenlabs-sfx.mjs "<prompt em inglês>" --duration 0.8 --out library/audio/sfx/<cat>/<Familia>_NN.mp3` (lê `ELEVENLABS_API_KEY` do `.env`).
 - Medir/normalizar: `ffmpeg -i x.wav -af ebur128=peak=true -f null -` · `-af loudnorm=I=-14:TP=-1:LRA=11`.
 - Editar: ffmpeg (`atrim`, `afade`, `acrossfade`, `atempo`, `asetrate` para pitch, `volume`, `pan`, `amix`).
