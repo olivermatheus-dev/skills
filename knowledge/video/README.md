@@ -6,6 +6,7 @@ Regras **executáveis** de edição e motion, já verificadas, para as skills de
 |---|---|---|
 | `qc-final.md` | revisão em 16 passadas (quem confere e como), editorial, **triagem crítico/maior/menor**, sintoma → causa, especificação de entrega social, `qc.mjs`, checklist do Oliver, aprovação | **antes de entregar** qualquer vídeo |
 | `esteira-de-producao.md` | processo: genérico × marca, pasta do vídeo, 5 etapas com portões, QA, export, motion blur | **ler primeiro** em qualquer vídeo |
+| `estilos-editoriais.md` | escolher estilo primário + secundário, 8 controles (0–3), estilos de produto/SaaS em tabela, defaults por `fmt-*`, demais estilos em 1 linha | **planejar** (vai no `plano.md`) |
 | `briefing-e-direcao.md` | as 4 variáveis do pedido, o Claude dirige, verdade, texto, arco de lançamento | planejar qualquer vídeo |
 | `design-e-composicao.md` | o frame parado: hierarquia, composição, grid, spacing, tipografia, formas, densidade, style frames, design system, polimento de pixel, revisão | **antes de animar** qualquer cena |
 | `animacao-comportamento.md` | timing × spacing, easing (⚠️ terminologia AE × GSAP), antecipação, overshoot, bounce, mola, follow-through, stagger, origem, entradas e saídas, personalidade e tokens, diagnósticos | animar |

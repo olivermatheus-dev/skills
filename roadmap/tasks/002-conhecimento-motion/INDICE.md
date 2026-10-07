@@ -21,6 +21,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | material/2026-10-07-etapa12-compositing.md | compositing e integração com live action (121 itens) | knowledge/video/compositing.md (+ fmt-3d-produto, tecnico-hyperframes) | destilado |
 | 2026-10-07 | material/2026-10-07-etapa13-particulas.md | partículas, atmosfera e microdetalhes (128 itens) | knowledge/video/particulas-e-atmosfera.md (+ tecnico-hyperframes, library/visual/fx) | destilado |
 | 2026-10-07 | (chat; não salvo bruto) Etapa 14 — polimento final e QC premium (110 itens) | passadas de revisão, editorial, triagem, áudio, cor, entrega, pós-render | knowledge/video/qc-final.md + tools/video/qc.mjs | destilado |
+| 2026-10-07 | (chat; não salvo bruto) Etapa 15 — biblioteca de estilos editoriais (49 estilos + sistema) | sistema formato + intenção + personalidade, controles, estilos | knowledge/video/estilos-editoriais.md + molde do plano | destilado (encerra a fase de material) |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação

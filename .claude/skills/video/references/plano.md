@@ -9,6 +9,9 @@ Uma frase: o que este vídeo vende e para quem.
 ## 2. Conceito
 Escolhido: … (alternativas consideradas: … / …)
 
+## 2b. Estilo
+Primário + secundário e os 8 controles (0–3) — `knowledge/video/estilos-editoriais.md`. Ex.: *Tech Product + Premium Minimal* · cortes 2 · b-roll 2 · motion 2 · tipo 1 · transições 1 · SFX 2 · música 2 · VFX 1.
+
 ## 3. O que muda em relação ao anterior
 - Pedido do usuário → como o plano atende. ("primeiro vídeo" se não houver)
 

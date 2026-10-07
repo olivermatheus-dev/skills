@@ -8,7 +8,7 @@
   - 6 agentes;
   - Kanban em arquivos;
   - heartbeat e tarefas recorrentes.
-- **Base de vídeo verificada:** `knowledge/video/`, 23 arquivos, Etapas 1–14 do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
+- **Base de vídeo verificada:** `knowledge/video/`, 24 arquivos, Etapas 1–15 (fase de material encerrada) do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
 - **Ferramentas (`tools/`):**
   - `board.mjs` (quadro);
   - `heartbeat.mjs` (agentes sozinhos);
@@ -27,7 +27,8 @@
   2. libera a T-0012 (designer, PNG) e a T-0013 (revisor).
 
   O texto está em `companies/kz/contents/2026-10-07-origin-story/`.
-- **Tarefa 002 (contínua):** o Oliver segue mandando etapas do material de edição e motion. Processo: verificar → destilar em `knowledge/video/<tema>.md` → ligar à skill `video` e aos agentes → registrar no INDICE.
+- **Próxima tarefa: 010** (enxugar a base de vídeo + níveis simples/médio/alto), aguardando o aval do Oliver na proposta do `TASK.md`. Depois, **011** (teste A/B de custo), que precisa do kit de render.
+- **Tarefa 002 (encerrada na Etapa 15):** o Oliver segue mandando etapas do material de edição e motion. Processo: verificar → destilar em `knowledge/video/<tema>.md` → ligar à skill `video` e aos agentes → registrar no INDICE.
 
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
