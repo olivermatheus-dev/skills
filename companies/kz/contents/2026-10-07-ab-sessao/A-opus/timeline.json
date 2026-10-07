@@ -977,7 +977,7 @@
       "lead": 0.1,
       "tail": 0.2,
       "on_screen": "Essa é a|Mais simples de organizar|seus atendimentos|sua rotina",
-      "note": "logo desenha em KZ; pílulas",
+      "note": "Essa é a + logo desenhando já no início da cena; frase e pílulas logo em seguida (sem esperar a palavra)",
       "start": 52.163,
       "end": 58.963
     },
@@ -988,11 +988,11 @@
         "f9"
       ],
       "lead": 0.1,
-      "tail": 2.2,
-      "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas",
-      "note": "logo + CTA; cursor clica",
+      "tail": 3.7,
+      "on_screen": "Conheça a kz|kz.app.br|kz · Plataforma para terapeutas|Plataforma para terapeutas",
+      "note": "logo + título; navegador: aba abre, digita kz.app.br, cursor clica Ir, página carrega (passa do fim da voz)",
       "start": 58.963,
-      "end": 62.494
+      "end": 63.994
     }
   ],
   "events": [
@@ -1265,37 +1265,51 @@
     {
       "id": "e22",
       "type": "reveal",
-      "word": "f8:KZ",
-      "offset": -0.15,
       "target": "#logo",
-      "t": 53.147,
-      "scene": "s8"
+      "t": 52.263,
+      "scene": "s8",
+      "at": 0.1
     },
     {
       "id": "e23",
       "type": "reveal",
-      "word": "f8:simples",
-      "offset": -0.1,
       "target": "#tag",
-      "t": 54.503,
-      "scene": "s8"
+      "t": 53.013,
+      "scene": "s8",
+      "at": 0.85
     },
     {
       "id": "e24",
       "type": "notify",
-      "word": "f8:atendimentos",
-      "offset": -0.1,
       "target": "#p1",
-      "t": 55.823,
-      "scene": "s8"
+      "t": 53.313,
+      "scene": "s8",
+      "at": 1.15
     },
     {
       "id": "e25",
       "type": "notify",
-      "word": "f8:rotina",
+      "target": "#p2",
+      "t": 53.463,
+      "scene": "s8",
+      "at": 1.3
+    },
+    {
+      "id": "e40",
+      "type": "reveal",
+      "word": "f8:organizar",
+      "offset": -0.1,
+      "target": "#feat",
+      "t": 55.103,
+      "scene": "s8"
+    },
+    {
+      "id": "e41",
+      "type": "notify",
+      "word": "f8:cuidar",
       "offset": -0.1,
       "target": "#p2",
-      "t": 57.583,
+      "t": 56.823,
       "scene": "s8"
     },
     {
@@ -1310,17 +1324,33 @@
       "id": "e27",
       "type": "reveal",
       "scene": "s9",
-      "at": 0.6,
-      "target": "#cta",
-      "t": 59.563
+      "at": 0.35,
+      "target": "#nav",
+      "t": 59.313
+    },
+    {
+      "id": "e38",
+      "type": "type",
+      "scene": "s9",
+      "at": 0.85,
+      "target": ".nav-field",
+      "t": 59.813
     },
     {
       "id": "e28",
       "type": "click",
       "scene": "s9",
-      "before_end": 1,
-      "target": "#cta",
-      "t": 61.494
+      "target": ".nav-go",
+      "t": 60.963,
+      "at": 2
+    },
+    {
+      "id": "e39",
+      "type": "reveal",
+      "scene": "s9",
+      "at": 2.45,
+      "target": ".nav-content",
+      "t": 61.413
     }
   ],
   "sfx": [
@@ -1506,11 +1536,28 @@
       "gain_db": -14
     },
     {
+      "event": "e38",
+      "asset": "foley-teclado-notebook-01",
+      "delay": -0.45,
+      "max": 0.75,
+      "gain_db": -18
+    },
+    {
       "event": "e28",
-      "asset": "ui-futurista-click-04",
-      "gain_db": -16,
+      "asset": "foley-clique-mouse-01",
+      "gain_db": -12
+    },
+    {
+      "event": "e39",
+      "synth": "ding",
+      "gain_db": -17
+    },
+    {
+      "event": "e40",
+      "asset": "ui-hud-pop-up-03",
+      "gain_db": -24,
       "max": 0.5
     }
   ],
-  "duration": 62.494
+  "duration": 63.994
 }

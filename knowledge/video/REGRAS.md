@@ -8,6 +8,7 @@
 - **Estilo:** use o default do `fmt-*` (primário + secundário). Ele decide a dose de cortes, motion, transições, SFX e efeitos (`direcao.md`).
 - **Tom** (dramático, épico, animado, inspirador, calmo, urgente, curioso) sai do objetivo da peça e decide música, ritmo, molas e som (`direcao.md`). Campanha temática pode ter abertura e tom próprios; proibições da marca valem sempre.
 - **Arco:** gancho ≤ 2 s → conceito entendido até 8–10 s → produto em uso → virada a 60–70% → revelação → cartão final ≥ 2 s com 1 CTA (anúncio 2–3 s).
+- **O vídeo não precisa durar só o áudio:** o cartão final pode passar do fim da locução (2–4 s) com microanimação, SFX e trilha resolvendo. CTA com site/URL → componente `library/motion/cta/navegador/` (aba abre, URL digitada, cursor clica em Ir, página carrega), mesmo sem fala.
 - **Texto na tela:** ≤ 6 palavras por momento (máx. ~10), grande; botão = verbo. O vídeo conta a história sem som.
 
 ## 2. Ritmo e leitura
@@ -15,6 +16,8 @@
 - **1 ideia por tela.** Texto parado e legível por ≥ max(1 s; 0,3 s × palavras), +0,3 s se houver termo novo. O hold conta a partir de legível **e parado**; ≥ 60% da vida do texto.
 - **Locução ≤ 2,7 palavras/s** (20 s ≈ 45–55 palavras). Silêncio entre falas ≤ 0,5 s; até 1 s só na virada, declarada no plano.
 - **Visual na palavra-chave** ou até 4 quadros antes, nunca depois. SFX/voz da próxima cena entra 4–12 quadros antes do visual (J-cut).
+- ⚠️ **Frase inteira de uma vez, nunca palavra a palavra presa à fala** (feedback do Oliver, 2026-10-07; erro repetido em todos os vídeos até então). O texto na tela é a ideia da fala, não legenda: entra **completo** em cascata curta (≤ 0,5 s no total) no início da fala ou da cena, mesmo que a locução ainda não tenha dito tudo. Proibido: metade da frase na tela esperando o resto, palavra solta ("tudo") e vazio enquanto a narração segue. A frase de impacto também entra inteira (pode diferir da transcrição). Sincronia com a palavra só para **gestos** (clique, pop de card, ícone), nunca para completar texto.
+- **Logo e elementos-chave sem atraso:** a revelação começa no 1º quadro da cena (a logo se desenha enquanto a voz diz "Essa é a…"), não espera a palavra "kz". Em geral: cena nunca começa vazia, e nada importante espera a fala para aparecer.
 - **Intensidade 0–4 por bloco**, nunca 4 contínuo. Curva típica: gancho 3 → conceito 2 → produto 1–2 → build 3 → revelação 4 → cartão 1.
 - **No máximo 2–3 s sem algo novo** (teto, não metrônomo). Novo pode ser a próxima linha de texto. Não saturar texto + visual + gráfico + som ao mesmo tempo.
 - **BPM antes de animar:** calmo 70–95 · médio 96–115 · energia 116–128 (1 batida = 60/BPM s). Troca de ideia em tempo forte a cada 2–4 batidas; sincronia exata só em revelação, título e impacto.

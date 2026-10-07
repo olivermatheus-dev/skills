@@ -4,7 +4,7 @@
 // Marcadores no composition.html: __W__ __H__ __FORMAT__ __DURATION__ __TIMELINE__ __TIME_OFFSET__, __S:<cena>__ (início),
 // __D:<cena>__ (duração), __E:<evento>__ (segundo) e {{i:<ícone>}}
 // (Lucide, runtime/icons.json). No render, a pasta tem: brand/ (companies/<slug>/brand), kit/ (gsap, motion.js,
-// tl.js), data/ e assets/ do vídeo.
+// tl.js), lib/motion/ (galeria library/motion), data/ e assets/ do vídeo.
 //
 // **Motion blur** (padrão): renderiza a 60 quadros duas vezes — a segunda com o relógio meio quadro atrás
 // (`__TIME_OFFSET__`, lido por `M.offset`) —, intercala em 120 amostras/s e cada quadro de 30 soma três:
@@ -68,6 +68,8 @@ function build(format, offset) {
   if (v.companyDir && existsSync(join(v.companyDir, 'brand'))) cpSync(join(v.companyDir, 'brand'), join(dir, 'brand'), { recursive: true });
   for (const f of ['motion.js', 'tl.js']) cpSync(join(KIT, 'runtime', f), join(dir, 'kit', f));
   cpSync(join(HUB, 'node_modules', 'gsap', 'dist', 'gsap.min.js'), join(dir, 'kit', 'gsap.min.js'));
+  // galeria de componentes de motion (library/motion) → lib/motion/<categoria>/<id>/ (ex.: lib/motion/cta/navegador/navegador.js)
+  if (existsSync(join(HUB, 'library', 'motion'))) cpSync(join(HUB, 'library', 'motion'), join(dir, 'lib', 'motion'), { recursive: true });
   for (const d of ['data', 'assets']) if (existsSync(join(v.dir, d))) cpSync(join(v.dir, d), join(dir, d), { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
   return dir;

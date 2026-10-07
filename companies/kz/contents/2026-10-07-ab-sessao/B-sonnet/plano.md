@@ -38,3 +38,12 @@
 - Ouvir com fone e no celular; ver sem som e pequeno.
 - Folga vazia de y>1440 por segurança de interface (rodapé do Reels).
 - QC final (`qc.mjs --sheet`) e trilha ainda não rodados (a pedido).
+
+## v03 (feedback do Oliver sobre o v02)
+- Textos de impacto entram completos (cascata < 0,4 s) no início da fala/cena; cena "mais espaço" refeita (frase inteira desde o início, anéis + avatar com clip-path, sem opacidade sobre linhas).
+- Logo entra no início da s8 (e28/e29 agora por `at`); título final no início da s9.
+- Linha riscada da busca passou para dentro do card; eco do clique só no clique (sem fantasma em 0,0); frags da s6 sem tweens conflitantes; digitação da busca termina antes de ~44 s.
+- Espaçamento: "Iniciar sessão" e "Entrar na chamada" com respiro; "dados ilustrativos" no rodapé.
+- Final: componente da galeria `library/motion/cta/navegador` (criado pela sessão A-opus, reaproveitado sem alterar): "kz.app.br" digitada, clique em Ir, página abre. Vídeo = 65,7 s (cauda de 5 s após a voz). Eventos novos: e43 (entrada), e44 (digitação), e34 (clique, 63,06 s), e45 (carregou, 63,51 s).
+- Áudio: `audio/mix.wav` do v03 = SÓ VOZ (provisório). Mix do v02 salvo em `audio/mix.v02.wav`. Os `sfx` do `timeline.json` apontam para eventos que se moveram (e28 foi para 52,61 s): sound-designer deve refazer SFX/mix.
+- Backups: `timeline.v02.bak.json`, `composition.v01.bak.html`.

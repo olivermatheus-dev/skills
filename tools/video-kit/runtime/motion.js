@@ -103,7 +103,7 @@
           tl.to(cursorEl, { scale: 1, duration: 0.3, ease: spring(0.3) }, at + 0.08)
           if (rippleEl) {
             tl.set(rippleEl, { x: to.x, y: to.y }, at)
-            tl.fromTo(rippleEl, { scale: 0.2, opacity: 0.9 }, { scale: 1.3, opacity: 0, duration: 0.55, ease: 'power2.out' }, at)
+            tl.fromTo(rippleEl, { scale: 0.2, opacity: 0.9 }, { scale: 1.3, opacity: 0, duration: 0.55, ease: 'power2.out', immediateRender: false }, at) // senão o anel aparece desde o quadro 0
           }
         },
         press: (el, at) => tl.to(el, { scale: 0.95, duration: 0.07, yoyo: true, repeat: 1, ease: 'power2.out' }, at),

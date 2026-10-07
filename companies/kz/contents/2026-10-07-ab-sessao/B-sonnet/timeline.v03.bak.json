@@ -31,29 +31,25 @@
         "C",
         "Bb",
         "C",
+        "F",
+        "C",
         "Dm",
-        "Bb",
-        "F",
-        "F",
-        "F",
-        "F",
-        "F"
+        "Bb"
       ],
       "sections": [
         {
           "from": 0,
-          "to": 18,
+          "to": 21,
           "style": "light"
         },
         {
-          "from": 18,
+          "from": 21,
           "to": 99,
           "style": "resolve"
         }
       ],
       "risers": [],
-      "impacts": [],
-      "totalBars": 23
+      "impacts": []
     },
     "file": "audio/music.wav",
     "id": null,
@@ -1428,25 +1424,10 @@
       "max": 3.2
     },
     {
-      "event": "e44",
-      "asset": "foley-teclado-notebook-01",
-      "align": "start",
-      "delay": -0.45,
-      "gain_db": -13,
-      "max": 1.35
-    },
-    {
       "event": "e34",
       "asset": "ui-ui-interface-03",
       "align": "peak",
       "gain_db": -19
-    },
-    {
-      "event": "e45",
-      "asset": "ui-hud-pop-up-04",
-      "align": "peak",
-      "gain_db": -25,
-      "pan": 0.05
     }
   ]
 }

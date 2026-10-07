@@ -37,3 +37,19 @@ Abertura com "Se você é *terapeuta*" grande, que encolhe e sobe; cenas começa
 - Ouvir (o Claude não escuta): quantidade de pops/whooshes e a trilha sob a voz.
 - "Mais espaço para" fica ~1,5 s com pouca coisa na tela antes de "o seu paciente" (só um brilho e o coração).
 - Sala online com fundo pastel, não o preto do app.
+
+---
+
+## v02 · correções pedidas pelo Oliver (16:14–16:40, ~25 min)
+**MP4:** `A-opus/exports/2026-10-07-ab-sessao-A-opus-9x16-v02.mp4` · 64,0 s (cartão final passa 3,7 s do fim da voz). A v01 foi para `exports/anteriores/`.
+
+| pedido | o que mudou |
+|---|---|
+| Texto demorando, frase incompleta ("tudo" sozinho) | Função `phrase`: a frase entra **inteira** em cascata de ≤ 0,5 s no início da fala/cena. A sincronia por palavra fica só para gestos. |
+| Linha atrás dos cards (s5) | Cards sempre opacos; só o conteúdo apaga/acende. A linha aparece só entre os cards. |
+| "Mais espaço para" + vazio (s7) | Frase de impacto inteira no 1º quadro + coração com anel; "o seu *paciente.*" inteira antes da palavra. |
+| Logo atrasada (s8) | Logo se desenha no 1º quadro da cena (antes esperava "KZ", ~1 s), com frase e pílulas em seguida; ícones dos recursos em "organizar". |
+| CTA com microanimação reutilizável | `library/motion/cta/navegador/` (novo): aba abre, digita kz.app.br, cursor clica em Ir, barra carrega, página abre. Teclado, clique e ding licenciados. O `produce.mjs` agora copia `library/motion` para o render. |
+| Registrar como regra | `knowledge/video/REGRAS.md` §1–2, skill `video` (etapa 3), `library/motion/README.md`, armadilha nova no `GUIA-TECNICO.md`, memória de feedback. |
+
+Problemas: o comentário do componente tinha a tag de fechar script e quebrou o build (o HyperFrames embute o JS), corrigido e registrado no GUIA-TECNICO; QC acusou 1,8 s parado na s3, corrigido com o botão "Ir para a sessão" pulsando até o clique.

@@ -31,29 +31,25 @@
         "C",
         "Bb",
         "C",
+        "F",
+        "C",
         "Dm",
-        "Bb",
-        "F",
-        "F",
-        "F",
-        "F",
-        "F"
+        "Bb"
       ],
       "sections": [
         {
           "from": 0,
-          "to": 18,
+          "to": 21,
           "style": "light"
         },
         {
-          "from": 18,
+          "from": 21,
           "to": 99,
           "style": "resolve"
         }
       ],
       "risers": [],
-      "impacts": [],
-      "totalBars": 23
+      "impacts": []
     },
     "file": "audio/music.wav",
     "id": null,
@@ -989,10 +985,10 @@
         "f9"
       ],
       "lead": 0.1,
-      "tail": 5,
+      "tail": 2,
       "on_screen": "Conheça a kz|kz.app.br",
       "start": 59.363,
-      "end": 65.694
+      "end": 62.694
     }
   ],
   "events": [
@@ -1000,9 +996,9 @@
       "id": "e1",
       "type": "reveal",
       "scene": "s1",
-      "at": 0,
+      "at": 0.1,
       "target": "#kick",
-      "t": 0
+      "t": 0.1
     },
     {
       "id": "e2",
@@ -1311,17 +1307,19 @@
       "id": "e28",
       "type": "reveal",
       "scene": "s8",
+      "word": "f8:kz",
+      "offset": -0.1,
       "target": "#logo",
-      "at": 0.05,
-      "t": 52.613
+      "t": 53.597
     },
     {
       "id": "e29",
       "type": "reveal",
       "scene": "s8",
+      "word": "f8:Uma",
+      "offset": -0.1,
       "target": "#tag8",
-      "at": 0.25,
-      "t": 52.813
+      "t": 54.083
     },
     {
       "id": "e30",
@@ -1359,39 +1357,15 @@
       "t": 59.363
     },
     {
-      "id": "e43",
-      "type": "reveal",
-      "scene": "s9",
-      "at": 1.5,
-      "target": "#nav",
-      "t": 60.863
-    },
-    {
-      "id": "e44",
-      "type": "type",
-      "scene": "s9",
-      "at": 2.3,
-      "target": ".nav-text",
-      "t": 61.663
-    },
-    {
       "id": "e34",
       "type": "click",
       "scene": "s9",
-      "at": 3.7,
+      "at": 1.4,
       "target": "#cta",
-      "t": 63.063
-    },
-    {
-      "id": "e45",
-      "type": "reveal",
-      "scene": "s9",
-      "at": 4.15,
-      "target": ".nav-content",
-      "t": 63.513
+      "t": 60.763
     }
   ],
-  "duration": 65.694,
+  "duration": 62.694,
   "sfx": [
     {
       "event": "e9",
@@ -1428,25 +1402,10 @@
       "max": 3.2
     },
     {
-      "event": "e44",
-      "asset": "foley-teclado-notebook-01",
-      "align": "start",
-      "delay": -0.45,
-      "gain_db": -13,
-      "max": 1.35
-    },
-    {
       "event": "e34",
       "asset": "ui-ui-interface-03",
       "align": "peak",
       "gain_db": -19
-    },
-    {
-      "event": "e45",
-      "asset": "ui-hud-pop-up-04",
-      "align": "peak",
-      "gain_db": -25,
-      "pan": 0.05
     }
   ]
 }

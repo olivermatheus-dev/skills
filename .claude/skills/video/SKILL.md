@@ -60,6 +60,8 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 - **Ritmo (feedback do Oliver, 2026-10-07):** nenhuma tela vazia esperando a fala. Toda cena começa com algo entrando no 1º quadro; toda frase falada tem **headline animada** no tempo da palavra (troca a cada frase); cada ideia ganha **ícone ou elemento gráfico** de apoio (relógio que esvazia, alerta, coração, pílula com ícone); entradas e saídas de card têm **efeito sonoro discreto**. Abertura: a 1ª frase grande, entrando animada, depois encolhe e sobe para dar lugar ao resto.
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.
+- **Texto entra como frase inteira** (cascata ≤ 0,5 s) no início da fala/cena, **nunca palavra a palavra esperando a locução**; logo e elementos-chave sem atraso; cena nunca começa vazia. Palavra da fala só dispara gesto (clique, pop, ícone). Regra completa: `knowledge/video/REGRAS.md` §2.
+- Cartão final pode passar do áudio. Site/URL no CTA → `library/motion/cta/navegador/` (`lib/motion/...` no render).
 
 ### 4. Conferir
 - Simples: `node tools/video/timeline.mjs check <pasta>`.
@@ -81,6 +83,13 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 ## Kit (motor de render)
 `tools/video-kit/` (HyperFrames 0.8.94 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
 Ordem: `tts` → `music` (ou trilha do catálogo) → `sfx` → `mix` → `produce --build-only` → `check` (olhar) → `produce` → `qc.mjs --sheet` (olhar).
+
+## Regras de entrega visual (feedback do Oliver, 2026-10-07; teste A/B B-sonnet)
+- **Olhar os frames é obrigatório antes de entregar:** extrair `hyperframes snapshot` (contact sheet + quadros de início/meio/fim de cada cena e de cada entrada/saída de texto) e **inspecionar**: espaçamento, sobreposição (headline saindo por cima de card), camadas, texto cortado, vácuo > 0,5 s. Listar no relatório quais quadros foram vistos.
+- Texto na tela **não** é sincronizado palavra a palavra: frase de impacto entra completa e junta (pode diferir da fala); nunca meia frase, nunca vazio esperando a narração; logo e elementos-chave entram no início da cena.
+- O vídeo **não precisa durar o áudio**: o CTA final pode ter cauda de 2–4 s com microanimação (`library/motion/cta/navegador`: URL digitada + clique) e SFX.
+- Aviso **"dados ilustrativos" sempre no rodapé** (pequeno, embaixo), nunca no meio da tela.
+- **Cards e linhas:** não animar a opacidade de um card que tem linha/conector atrás (a linha aparece por trás ou por cima); use `transform`/`clip-path` no card, tracejado dentro do próprio card, e z-order explícito. Eco de clique e cursor: criar o eco só no instante do clique (`fromTo` com `immediateRender` deixa um fantasma em 0,0); mirar a ponta do cursor na borda do botão para não cobrir texto/ícone.
 
 ## Nunca
 - Animar antes do plano aprovado (exceto nível simples com pedido claro).

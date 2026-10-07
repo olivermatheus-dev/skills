@@ -13,6 +13,8 @@
     <script src="kit/gsap.min.js"></script>
     <script src="kit/motion.js"></script>
     <link rel="stylesheet" href="brand/brand.css" />
+    <link rel="stylesheet" href="lib/motion/cta/navegador/navegador.css" />
+    <script src="lib/motion/cta/navegador/navegador.js"></script>
     <style>
       html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
       * { box-sizing: border-box; }
@@ -35,7 +37,7 @@
       .t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
       .t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
       .btn { display: flex; align-items: center; justify-content: center; gap: 14px; background: var(--primary); color: var(--on-primary-app); border-radius: 18px; font-weight: 700; }
-      #illus { position: absolute; left: 0; right: 0; top: 1408px; text-align: center; font-size: 26px; font-weight: 500; color: var(--muted); opacity: 0; }
+      #illus { position: absolute; left: 0; right: 0; top: 1836px; text-align: center; font-size: 24px; font-weight: 500; color: var(--muted); opacity: 0; }
 
       /* ── s1 · gancho ── */
       #kick { top: 292px; left: 0; right: 0; text-align: center; font-size: 48px; font-weight: 600; opacity: 0; }
@@ -70,31 +72,31 @@
       .rowcheck { position: absolute; right: 36px; top: 70px; font-size: 60px; color: var(--success); opacity: 0; }
       #h3a { top: 330px; opacity: 1; }
       #h3b { top: 300px; }
-      #btn3 { position: absolute; left: 240px; top: 1300px; width: 600px; height: 90px; font-size: 36px; opacity: 0; box-shadow: var(--shadow-md); }
+      #btn3 { position: absolute; left: 240px; top: 1318px; width: 600px; height: 90px; font-size: 36px; opacity: 0; box-shadow: var(--shadow-md); }
       #btn3 .icon { font-size: 40px; }
 
       /* ── s4 · online ── */
-      #h4 { top: 290px; }
-      #app4 { position: absolute; left: 90px; top: 612px; width: 900px; height: 780px; opacity: 0; }
+      #h4 { top: 280px; font-size: 78px; }
+      #app4 { position: absolute; left: 90px; top: 646px; width: 900px; height: 784px; opacity: 0; }
       #bar4 { left: 0; top: 0; width: 900px; height: 92px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 30px; border-radius: 24px; }
       #bar4 b { font-size: 30px; font-weight: 700; }
       #toggle { position: relative; display: flex; background: var(--surface-2); border-radius: 16px; padding: 6px; font-size: 27px; font-weight: 600; }
       #toggle span { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; padding: 12px 0; color: var(--muted); }
       #toggle span.on { color: var(--ink); }
       #tind { position: absolute; left: 6px; top: 6px; bottom: 6px; width: 200px; background: var(--surface); border-radius: 12px; box-shadow: var(--shadow-sm); z-index: 1; }
-      #tile4 { position: absolute; left: 0; top: 112px; width: 900px; height: 330px; border-radius: 24px; background: var(--ink); overflow: hidden; }
+      #tile4 { position: absolute; left: 0; top: 118px; width: 900px; height: 320px; border-radius: 24px; background: var(--ink); overflow: hidden; }
       #tile4 .nmpill { position: absolute; left: 24px; top: 22px; padding: 8px 18px; border-radius: 999px; background: rgba(255,255,255,0.16); color: var(--surface); font-size: 25px; font-weight: 700; opacity: 0; }
       #tile4 .live { position: absolute; right: 24px; top: 22px; display: flex; align-items: center; gap: 10px; color: var(--surface); font-size: 25px; font-weight: 600; opacity: 0; }
       #tile4 .live i { width: 14px; height: 14px; border-radius: 50%; background: var(--success); display: block; }
-      #joinbtn { position: absolute; left: 50%; top: 50%; width: 400px; height: 88px; margin: -44px 0 0 -200px; font-size: 32px; }
+      #joinbtn { position: absolute; left: 50%; top: 50%; width: 420px; height: 92px; margin: -46px 0 0 -210px; font-size: 32px; }
       #bigav { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; margin: -85px 0 0 -85px; font-size: 62px; opacity: 0; }
-      #notes4 { left: 0; top: 462px; width: 900px; height: 318px; }
+      #notes4 { left: 0; top: 466px; width: 900px; height: 318px; }
       #notes4 .tabs { position: absolute; left: 28px; right: 28px; top: 24px; height: 64px; background: var(--surface-2); border-radius: 16px; display: flex; font-size: 27px; font-weight: 600; color: var(--muted); }
       #notes4 .tabs span { flex: 1; display: grid; place-items: center; }
       #notes4 .tabs span.on { background: var(--surface); color: var(--ink); margin: 6px; border-radius: 12px; box-shadow: var(--shadow-sm); }
       #notes4 .ln { position: absolute; left: 32px; right: 32px; height: 14px; border-radius: 7px; background: var(--border); transform-origin: 0 50%; }
       #notes4 .cur { position: absolute; right: 36px; top: 112px; font-size: 40px; color: var(--success); opacity: 0; }
-      #ring4 { position: absolute; left: 76px; top: 598px; width: 928px; height: 808px; border-radius: 34px; border: 5px solid var(--primary); opacity: 0; }
+      #ring4 { position: absolute; left: 76px; top: 632px; width: 928px; height: 812px; border-radius: 34px; border: 5px solid var(--primary); opacity: 0; }
 
       /* ── s5 · antes · durante · depois ── */
       .stt { position: absolute; left: 0; right: 0; top: 270px; text-align: center; font-size: 124px; font-weight: 700; letter-spacing: -0.02em; opacity: 0; }
@@ -133,8 +135,9 @@
       /* ── s6 · menos ── */
       .blk { position: absolute; left: 90px; width: 900px; }
       .mt { text-align: center; font-size: 66px; font-weight: 700; line-height: 1.14; letter-spacing: -0.015em; }
-      .mt .w { display: inline-block; opacity: 0; }
-      .mt .w.acc { font-size: 1.1em; }
+      .mt .line { display: block; }
+      .mt .acc { font-size: 1.1em; }
+      #tag8 .line + .line { font-size: 62px; font-weight: 600; margin-top: 6px; }
       #b1 { top: 296px; height: 260px; }
       #b2 { top: 620px; height: 340px; }
       #b3 { top: 1040px; height: 330px; }
@@ -150,7 +153,7 @@
       #search { position: absolute; left: 70px; top: 150px; width: 760px; height: 96px; border-radius: 24px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 22px; padding: 0 30px; font-size: 32px; font-weight: 500; color: var(--muted); opacity: 0; }
       #search .icon { font-size: 38px; color: var(--ui-muted); }
       #stxt { display: inline-block; white-space: nowrap; clip-path: inset(0 100% 0 0); }
-      #sstrike { position: absolute; left: 70px; top: 198px; height: 6px; width: 760px; border-radius: 3px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+      #sstrike { position: absolute; left: 24px; right: 24px; top: 45px; height: 6px; border-radius: 3px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
 
       /* ── s7 · espaço ── */
       #h7 { top: 470px; font-size: 82px; }
@@ -160,20 +163,18 @@
       #r7a { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
       #r7b { width: 560px; height: 560px; margin: -280px 0 0 -280px; }
       #r7c { width: 720px; height: 720px; margin: -360px 0 0 -360px; }
-      #av7 { position: absolute; left: 50%; top: 1100px; width: 270px; height: 270px; margin: -135px 0 0 -135px; font-size: 96px; opacity: 0; box-shadow: var(--shadow-lg); }
+      #av7 { position: absolute; left: 50%; top: 1100px; width: 270px; height: 270px; margin: -135px 0 0 -135px; font-size: 96px; opacity: 0; }
 
       /* ── s8/s9 · kz ── */
       #logo { position: absolute; left: 50%; top: 330px; width: 460px; margin-left: -230px; opacity: 0; }
       #logo svg { width: 100%; height: auto; display: block; }
       #logo path { fill: var(--logo); }
       #tag8 { top: 740px; font-size: 80px; }
-      #tag8b { top: 1148px; font-size: 54px; font-weight: 600; }
-      #pills { position: absolute; left: 0; right: 0; top: 986px; display: flex; justify-content: center; gap: 20px; }
+            #pills { position: absolute; left: 0; right: 0; top: 986px; display: flex; justify-content: center; gap: 20px; }
       .pill { display: flex; align-items: center; gap: 14px; padding: 14px 30px 14px 16px; border-radius: 999px; font-size: 32px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); opacity: 0; }
       .pill .ib { width: 52px; height: 52px; border-radius: 50%; font-size: 28px; }
-      #title9 { top: 780px; font-size: 96px; }
-      #cta { position: absolute; left: 50%; top: 960px; width: 540px; height: 124px; margin-left: -270px; border-radius: 999px; background: var(--primary); color: var(--on-primary); font-weight: 700; font-size: 46px; display: flex; align-items: center; justify-content: center; gap: 14px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
-      #cta .icon { font-size: 48px; }
+      #title9 { top: 590px; font-size: 88px; }
+      #nav { position: absolute; left: 90px; top: 770px; width: 900px; height: 620px; }
 
       #cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 20; }
       #ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 19; }
@@ -292,8 +293,7 @@
           </div>
           <div class="blk" id="b3">
             <div class="mt" id="m3"></div>
-            <div id="search">{{i:search}}<span id="stxt">Onde anotei aquilo?</span></div>
-            <div id="sstrike"></div>
+            <div id="search">{{i:search}}<span id="stxt">Onde anotei aquilo?</span><i id="sstrike"></i></div>
           </div>
         </div>
 
@@ -314,9 +314,8 @@
             <div class="pill" id="pl2"><span class="ib t-amber">{{i:calendar-days}}</span><span></span></div>
             <div class="pill" id="pl3"><span class="ib t-lilac">{{i:notebook-pen}}</span><span></span></div>
           </div>
-          <div class="hd" id="tag8b"></div>
           <div class="hd" id="title9"></div>
-          <div id="cta"></div>
+          <div id="nav"></div>
         </div>
 
         <div id="illus">dados ilustrativos</div>
@@ -346,38 +345,39 @@
         pills: ['Pacientes', 'Agenda', 'Anotações'],
       }
 
-      /** Escreve uma linha palavra a palavra e devolve {node, t} casando cada palavra com a fala (palavra sem par entra junto com a próxima que tem). */
-      function words(el, text, vo, from) {
-        const said = T.vo(vo).words || []
-        let j = 0
-        const toks = text.replace(/\*([^*]+)\*/g, (_, x) => x.split(' ').map((w) => `\u0001${w}`).join(' ')).split(' ')
-        const t = toks.map((tok) => {
-          const w = tok.replace('\u0001', '')
-          const k = said.findIndex((x, i) => i >= j && x.s >= from - 0.25 && fold(x.w) === fold(w))
-          if (k >= 0) { j = k + 1; return said[k].s }
-          return null
-        })
-        for (let i = t.length - 1, nxt = null; i >= 0; i--) { if (t[i] == null) t[i] = nxt ?? from; else nxt = t[i] }
-        el.innerHTML = toks.map((tok) => `<span class="w${tok.startsWith('\u0001') ? ' acc' : ''}">${tok.replace('\u0001', '')}</span>`).join(' ')
-        return [...el.querySelectorAll('.w')].map((node, i) => ({ node, t: t[i] }))
+      /** Frase de impacto: entra COMPLETA (linhas com stagger curto, total < 0,4 s). `*x*` = ênfase em Fraunces. Nada de palavra solta esperando a fala. */
+      function setLines(el, arr) {
+        el.innerHTML = arr.map((l) => `<span class="line">${l.replace(/\*([^*]+)\*/g, '<span class="acc">$1</span>')}</span>`).join('')
+        return [...el.querySelectorAll('.line')]
       }
-      /** Várias linhas (cada uma um bloco) numa só caixa. */
-      function lines(el, arr, vo, from) {
-        el.innerHTML = arr.map(() => '<span class="line"></span>').join('')
-        return [...el.querySelectorAll('.line')].flatMap((ln, i) => words(ln, arr[i], vo, from))
+      const block = (sel, arr, at, st = 0.12) => {
+        const ls = setLines($(sel), arr)
+        tl.fromTo(ls, { opacity: 0, y: 34 }, { opacity: 1, y: 0, ...M.FAST, stagger: st }, at)
       }
-      const enter = (sel, at, from = { y: 30 }) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, rotation: 0, ...M.FAST }, at)
       const leave = (sel, at, d = 0.28) => tl.to(sel, { opacity: 0, y: -26, duration: d, ease: 'power2.in' }, at)
-      const showWords = (list, dt = 0.12) => list.forEach(({ node, t }) => enter(node, t - dt, { y: 34 }))
       const drift = (sel, s) => tl.fromTo(sel, { scale: 1 }, { scale: 1.03, duration: S[s].dur, ease: 'sine.inOut' }, S[s].start)
 
-      // medir antes de qualquer transform (alvos do cursor)
+      // componente da galeria (library/motion/cta/navegador): monta ANTES de medir o botão "Ir" (alvo do cursor)
+      const [c1, c2] = parts('s9')
+      KitNavegador.mount($('#nav'), {
+        url: c2, tab: 'kz · Plataforma para terapeutas', go: 'Ir',
+        page: `<svg viewBox="2.5 7 43 34" style="width:210px;height:auto"><path fill="var(--logo)" fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><div style="font-size:36px;font-weight:600;text-align:center;line-height:1.3;color:var(--text)">Feito por terapeuta,<br>pra terapeuta.</div>`,
+      })
+
+      // medir antes de qualquer transform (alvos do cursor); a ponta do cursor fica a (10,5) do canto
       const stage = $('#stage').getBoundingClientRect()
       const pt = (sel, fx = 0.5, fy = 0.5) => { const r = $(sel).getBoundingClientRect(); return { x: r.left - stage.left + r.width * fx - 10, y: r.top - stage.top + r.height * fy - 5 } }
-      const P = {
-        join: pt('#joinbtn', 0.62, 0.55),
-        hist: pt('#tabhist', 0.55, 0.55),
-        cta: pt('#cta', 0.72, 0.55),
+      const P = { join: pt('#joinbtn', 0.62, 0.55), hist: pt('#tabhist', 0.55, 0.55), go: pt('#nav .nav-go', 0.5, 0.88) }
+      // cursor próprio: o eco do clique só existe no clique (sem fantasma em 0,0)
+      const Cur = {
+        move: (to, at, d = 0.7) => tl.to('#cursor', { x: to.x, y: to.y, duration: d, ease: 'power3.inOut' }, at),
+        click: (to, at) => {
+          tl.to('#cursor', { scale: 0.82, duration: 0.07, ease: 'power2.out' }, at)
+          tl.to('#cursor', { scale: 1, duration: 0.3, ease: M.spring(0.3) }, at + 0.08)
+          tl.set('#ripple', { x: to.x + 10, y: to.y + 5, scale: 0.2, opacity: 0.9 }, at)
+          tl.to('#ripple', { scale: 1.3, opacity: 0, duration: 0.55, ease: 'power2.out' }, at + 0.001)
+        },
+        press: (el, at) => tl.to(el, { scale: 0.95, duration: 0.07, yoyo: true, repeat: 1, ease: 'power2.out' }, at),
       }
 
       // ── textos que vêm da cena ───────────────────────
@@ -390,13 +390,13 @@
 
       // ── s1 · gancho ──────────────────────────────────
       tl.fromTo('#kick', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e1'))
-      showWords(lines($('#h1'), h1l, 'f1', T.ev('e35')))
+      block('#h1', h1l, T.ev('e35'))
       tl.fromTo('#p1card', { opacity: 0, y: 70, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e2'))
       $$('#p1tiles .tile').forEach((el, i) => {
         tl.to(el.querySelector('.sk'), { opacity: 0, duration: 0.3, ease: 'power2.out' }, T.ev('e3') + i * 0.14)
         tl.fromTo(el, { y: 14 }, { y: 0, ...M.FAST }, T.ev('e3') + i * 0.14)
       })
-      tl.to('#illus', { opacity: 1, duration: 0.4 }, T.ev('e3'))
+      tl.to('#illus', { opacity: 1, duration: 0.4 }, T.ev('e2'))
       drift('#s1', 's1')
       leave('#s1', S.s1.end - 0.3)
 
@@ -417,46 +417,40 @@
 
       // ── s3 · tudo organizado ─────────────────────────
       const [ha, hb1, hb2] = parts('s3')
-      tl.to('#hd2', { opacity: 0, y: -30, duration: 0.3, ease: 'power2.in' }, T.ev('e8'))
-      tl.to('#rows', { y: 120, scale: 0.82, duration: 0.9, ease: M.GENTLE.ease }, T.ev('e8'))
+      tl.to('#hd2', { opacity: 0, y: -30, duration: 0.2, ease: 'power2.in' }, T.ev('e8') - 0.15)
+      tl.to('#rows', { y: 120, scale: 0.78, duration: 0.9, ease: M.GENTLE.ease }, T.ev('e8'))
       tl.to(rowIds.map((r) => r + ' .gl'), { opacity: 0, duration: 0.4 }, T.ev('e8'))
-      showWords(words($('#h3a'), ha, 'f3', T.ev('e8')))
+      block('#h3a', [ha], T.ev('e8') + 0.12)
       $$('.rowcheck').forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e9') + i * 0.17))
-      tl.to('#h3a', { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, T.ev('e36') - 0.15)
-      showWords(lines($('#h3b'), [hb1, hb2], 'f3', T.ev('e36')))
+      tl.to('#h3a', { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, T.ev('e36') - 0.2)
+      block('#h3b', [hb1, hb2], T.ev('e36') - 0.05)
       tl.fromTo('#btn3', { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e10'))
       tl.to('#btn3', { y: -4, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, T.ev('e10') + 0.8)
-      tl.to('#illus', { opacity: 0.0, duration: 0.01 }, S.s3.end - 0.3)
       tl.to('#s23', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s3.end - 0.3)
 
       // ── s4 · online, sem trocar de ferramenta ────────
       const h4 = parts('s4')
       tl.set('#s4', { opacity: 1 }, S.s4.start)
-      showWords(lines($('#h4'), h4, 'f4', S.s4.start))
+      block('#h4', h4, S.s4.start + 0.05)
       tl.fromTo('#app4', { opacity: 0, y: 70, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e11'))
-      tl.to('#illus', { opacity: 1, duration: 0.3 }, T.ev('e11'))
       // Presencial → Online
-      tl.set('#tind', { x: 200 }, 0) // começa em Presencial (direita)
+      tl.set('#tind', { x: 200 }, 0)
       M.stretchTo(tl, '#tind', { x: 0 }, T.ev('e12') - 0.05, { duration: 0.5 })
       tl.set('#tgon', { className: 'on' }, T.ev('e12') + 0.15)
       tl.set('#tgoff', { className: '' }, T.ev('e12') + 0.15)
       // entrar na chamada
-      const C = M.cursor(tl, '#cursor', '#ripple')
-      const fix = (p) => ({ x: p.x + 10, y: p.y + 5 }) // a ponta do cursor, não o canto
       tl.set('#cursor', { x: P.join.x + 260, y: P.join.y + 300 }, 0)
       tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e13') - 0.95)
-      C.move(P.join, T.ev('e13') - 0.95, 0.85)
-      C.click(fix(P.join), T.ev('e13'))
-      C.press('#joinbtn', T.ev('e13'))
+      Cur.move(P.join, T.ev('e13') - 0.95, 0.85)
+      Cur.click(P.join, T.ev('e13'))
+      Cur.press('#joinbtn', T.ev('e13'))
       tl.to('#joinbtn', { opacity: 0, scale: 0.92, duration: 0.2, ease: 'power2.in' }, T.ev('e13') + 0.2)
       tl.to('#cursor', { opacity: 0, duration: 0.25 }, T.ev('e13') + 0.5)
       tl.fromTo('#bigav', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 0.3)
       tl.fromTo('#tile4 .nmpill, #tile4 .live', { opacity: 0, y: -10 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.1 }, T.ev('e13') + 0.5)
       tl.fromTo('#bigav', { boxShadow: '0 0 0 0px rgba(239,121,96,0.35)' }, { boxShadow: '0 0 0 34px rgba(239,121,96,0)', duration: 1.1, ease: 'power2.out', repeat: 2 }, T.ev('e13') + 0.8)
-      // anotações escritas durante a chamada
       $$('#notes4 .ln').forEach((el, i) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power2.out' }, T.ev('e13') + 0.7 + i * 0.4))
       tl.fromTo('#notes4 .cur', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 2.2)
-      // "dentro da sua rotina": a moldura abraça tudo
       tl.fromTo('#ring4', { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e14'))
       tl.to('#ring4', { opacity: 0, duration: 0.5, ease: 'power2.in' }, T.ev('e14') + 1.3)
       drift('#s4', 's4')
@@ -469,14 +463,12 @@
       $('#nxt').textContent = DEMO.next
       tl.set('#s5', { opacity: 1 }, S.s5.start)
       tl.fromTo('#seg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
-      // etapa 1 · Antes
       tl.fromTo('#st1', { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
       tl.fromTo('#pan1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...M.GENTLE }, T.ev('e15') + 0.1)
       $$('#pan1 .ck').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, ...M.FAST }, T.ev('e15') + 0.45 + i * 0.12))
       ;[T.ev('e42'), T.word('f5:com').s - 0.02, T.word('f5:calma').s - 0.05].forEach((t, i) => {
         tl.fromTo($$('#pan1 .tick')[i], { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, ...M.SNAP }, t)
       })
-      // etapa 2 · Durante
       const sw = (outS, outP, inS, inP, at) => {
         tl.to([outS, outP], { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, at - 0.12)
         tl.fromTo(inS, { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, at)
@@ -485,19 +477,17 @@
       M.stretchTo(tl, '#sind', { x: 267 }, T.ev('e16'), { duration: 0.5 })
       sw('#st1', '#pan1', '#st2', '#pan2', T.ev('e16'))
       $$('#nv .ln').forEach((el, i) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, T.ev('e16') + 0.5 + i * 0.28))
-      // "encontra rapidamente": o cursor vai ao Histórico
       tl.set('#tind2', { x: 0 }, 0)
       tl.set('#cursor', { x: P.hist.x + 200, y: P.hist.y + 260 }, T.ev('e17') - 1.2)
       tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e17') - 0.8)
-      C.move(P.hist, T.ev('e17') - 0.75, 0.7)
-      C.click(fix(P.hist), T.ev('e17'))
+      Cur.move(P.hist, T.ev('e17') - 0.75, 0.7)
+      Cur.click(P.hist, T.ev('e17'))
       M.stretchTo(tl, '#tind2', { x: 276 }, T.ev('e17') + 0.05, { duration: 0.45 })
       tl.to('#nv', { opacity: 0, duration: 0.2 }, T.ev('e17') + 0.05)
       tl.fromTo('#hv', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e17') + 0.2)
       tl.to('#cursor', { opacity: 0, duration: 0.25 }, T.ev('e17') + 0.5)
       tl.to('#hi2 .mark', { opacity: 1, duration: 0.35 }, T.ev('e38'))
       tl.fromTo('#hi2', { scale: 1 }, { scale: 1.025, duration: 0.5, ease: M.SOFT.ease }, T.ev('e38'))
-      // etapa 3 · Depois
       M.stretchTo(tl, '#sind', { x: 534 }, T.ev('e18'), { duration: 0.5 })
       sw('#st2', '#pan2', '#st3', '#pan3', T.ev('e18'))
       tl.fromTo('#dn1', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.word('f5:mantém').s - 0.05)
@@ -511,73 +501,65 @@
       // ── s6 · menos, menos, menos ─────────────────────
       const [m1, m2, m3] = parts('s6')
       tl.set('#s6', { opacity: 1 }, S.s6.start)
-      showWords(words($('#m1'), m1, 'f6', T.ev('e20')))
+      block('#m1', [m1], T.ev('e20'))
       const chips = $$('.tab')
-      let x = 0
       const widths = [128, 188, 168, 158, 122]
-      const total = widths.reduce((a, b) => a + b, 0) + 12 * 4
-      x = (900 - total) / 2
+      let x = (900 - (widths.reduce((a, b) => a + b, 0) + 12 * 4)) / 2
       chips.forEach((c, i) => { c.style.left = x + 'px'; c.style.width = widths[i] + 'px'; x += widths[i] + 12 })
       chips.forEach((c, i) => tl.fromTo(c, { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e20') + 0.15 + i * 0.07))
       chips.forEach((c, i) => tl.to(c, { opacity: 0, scale: 0.86, y: 10, duration: 0.28, ease: 'power2.in' }, T.ev('e21') + i * 0.07))
       tl.fromTo('#onetab', { opacity: 0, y: 20, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e21') + 0.42)
-      // 2
-      showWords(words($('#m2'), m2, 'f6', T.ev('e22')))
+      block('#m2', [m2], T.ev('e22'))
+      // 3 fragmentos: entram espalhados (uma só sequência por elemento, sem tweens brigando) e se juntam no cartão
       const spots = [[0, 12, -7], [320, 78, 5], [620, 4, -4]]
-      ;['#fg1', '#fg2', '#fg3'].forEach((f, i) => {
-        tl.fromTo(f, { opacity: 0, x: spots[i][0] - 30, y: spots[i][1] + 30, rotation: 0 }, { opacity: 1, x: spots[i][0], y: spots[i][1], rotation: spots[i][2], ...M.SOFT }, T.word('f6:informações').s + i * 0.12)
-        tl.to(f, { y: spots[i][1] + (i % 2 ? 14 : -14), duration: 1.4, ease: 'sine.inOut' }, T.word('f6:espalhadas').s)
-      })
-      tl.fromTo('#fcard', { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e23') - 0.1)
       const tidy = [[40, 50], [315, 50], [590, 50]]
-      ;['#fg1', '#fg2', '#fg3'].forEach((f, i) => tl.to(f, { x: tidy[i][0], y: tidy[i][1], rotation: 0, duration: 0.8, ease: M.GENTLE.ease }, T.ev('e23') + i * 0.06))
-      // 3
-      showWords(words($('#m3'), m3, 'f6', T.ev('e24')))
-      tl.fromTo('#search', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e39') - 0.1)
-      tl.to('#stxt', { clipPath: 'inset(0 0% 0 0)', duration: 1.5, ease: 'steps(19)' }, T.ev('e39'))
+      const tGather = T.ev('e23')
+      ;['#fg1', '#fg2', '#fg3'].forEach((f, i) => {
+        const t0 = T.ev('e22') + 0.25 + i * 0.1
+        tl.fromTo(f, { opacity: 0, x: spots[i][0] - 30, y: spots[i][1] + 30, rotation: 0 }, { opacity: 1, x: spots[i][0], y: spots[i][1], rotation: spots[i][2], ...M.SOFT }, t0)
+        tl.to(f, { x: tidy[i][0], y: tidy[i][1], rotation: 0, duration: 0.8, ease: M.GENTLE.ease }, tGather + i * 0.06)
+      })
+      tl.fromTo('#fcard', { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, ...M.FAST }, tGather - 0.1)
+      block('#m3', [m3], T.ev('e24'))
+      tl.fromTo('#search', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e24') + 0.25)
+      tl.to('#stxt', { clipPath: 'inset(0 0% 0 0)', duration: 0.95, ease: 'steps(19)' }, T.ev('e24') + 0.55)
       tl.to('#sstrike', { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, T.ev('e25'))
-      tl.to('#search', { opacity: 0.4, duration: 0.4 }, T.ev('e25') + 0.2)
+      tl.to(['#stxt', '#search .icon'], { opacity: 0.4, duration: 0.4 }, T.ev('e25') + 0.2)
       drift('#s6', 's6')
       tl.to('#s6', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s6.end - 0.3)
 
-      // ── s7 · mais espaço ─────────────────────────────
+      // ── s7 · mais espaço (frase completa desde o início; o vazio vira "espaço" desenhado) ──
       const [sp1, sp2] = parts('s7')
       tl.set('#s7', { opacity: 1 }, S.s7.start)
-      showWords(words($('#h7'), sp1, 'f7', S.s7.start))
-      showWords(words($('#h7b'), sp2, 'f7', T.word('f7:importa').s))
-      tl.fromTo('#r7c', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.6, ease: 'power3.out' }, T.ev('e26'))
-      tl.fromTo('#r7b', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.2, ease: 'power3.out' }, T.ev('e26') + 0.3)
+      block('#h7', [sp1], S.s7.start - 0.05, 0)
+      block('#h7b', [sp2], S.s7.start + 0.07, 0)
+      tl.fromTo('#r7c', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.8, ease: 'power3.out' }, S.s7.start + 0.4)
+      tl.fromTo('#r7b', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, S.s7.start + 0.7)
+      tl.fromTo('#av7', { opacity: 1, clipPath: 'circle(0% at 50% 50%)', scale: 0.9 }, { clipPath: 'circle(50% at 50% 50%)', scale: 1, ...M.SOFT }, T.ev('e26'))
       tl.fromTo('#r7a', { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 1.4, ease: 'power3.inOut' }, T.ev('e40'))
-      tl.fromTo('#av7', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e27'))
-      tl.to('#r7a', { scale: 1.12, opacity: 0.0, duration: 1.0, ease: 'power2.out' }, T.ev('e27') + 0.05)
+      tl.to('#r7a', { scale: 1.12, opacity: 0, duration: 1.0, ease: 'power2.out' }, T.ev('e27') + 0.05)
       drift('#s7', 's7')
       tl.to('#s7', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s7.end - 0.3)
 
-      // ── s8 · a kz ────────────────────────────────────
+      // ── s8 · a kz (logo e frase entram juntos, no início da cena) ──
       const [k1, k2] = parts('s8')
       tl.set('#s89', { opacity: 1 }, S.s8.start)
-      tl.fromTo('#logo', { opacity: 1, clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.9, ease: 'power3.out' }, T.ev('e28'))
-      showWords(words($('#tag8'), k1, 'f8', T.ev('e29')))
+      tl.fromTo('#logo', { opacity: 1, clipPath: 'inset(0 100% 0 0)', scale: 0.94 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.7, ease: 'power3.out' }, T.ev('e28'))
+      block('#tag8', [k1, k2], T.ev('e29'))
       ;['#pl1', '#pl2', '#pl3'].forEach((p, i) => {
         $(p + ' span:last-child').textContent = DEMO.pills[i]
         tl.fromTo(p, { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev(['e30', 'e31', 'e32'][i]))
       })
-      showWords(words($('#tag8b'), k2, 'f8', T.word('f8:cuidar').s - 0.05))
       tl.fromTo('#s89', { scale: 1 }, { scale: 1.03, duration: S.s8.dur + S.s9.dur, ease: 'sine.inOut' }, S.s8.start)
 
-      // ── s9 · cartão final ────────────────────────────
-      const [c1, c2] = parts('s9')
-      tl.to(['#tag8', '#pills', '#tag8b'], { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s8.end - 0.3)
-      tl.to('#logo', { y: -20, scale: 0.94, duration: 0.8, ease: M.GENTLE.ease }, S.s8.end - 0.3)
-      $('#title9').textContent = c1
-      $('#cta').innerHTML = `${c2} {{i:chevron-right}}`
-      enter('#title9', T.ev('e33') + 0.05, { y: 34 })
-      tl.fromTo('#cta', { opacity: 0, y: 30, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e33') + 0.45)
-      tl.set('#cursor', { x: P.cta.x + 240, y: P.cta.y + 280 }, S.s9.start)
-      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e34') - 0.85)
-      C.move(P.cta, T.ev('e34') - 0.85, 0.75)
-      C.click(fix(P.cta), T.ev('e34'))
-      C.press('#cta', T.ev('e34'))
+      // ── s9 · cartão final + navegador (cauda além da voz) ──
+      tl.to(['#tag8', '#pills'], { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s8.end - 0.3)
+      tl.to('#logo', { y: -50, scale: 0.62, duration: 0.8, ease: M.GENTLE.ease }, S.s8.end - 0.3)
+      block('#title9', [c1], T.ev('e33'), 0)
+      tl.set('#cursor', { x: P.go.x + 240, y: P.go.y + 300 }, S.s9.start)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e34') - 0.8)
+      KitNavegador.play(tl, $('#nav'), { at: T.ev('e43'), typeAt: T.ev('e44'), clickAt: T.ev('e34'), cursor: Cur, go: P.go })
+      tl.to('#cursor', { opacity: 0, duration: 0.3 }, T.ev('e34') + 0.9)
 
       tl.set({}, {}, T.duration)
       window.__timelines = window.__timelines || {}

@@ -1,6 +1,6 @@
 # kz · sessão (A/B · A-opus v01)
 
-**Status:** v01 entregue para comparação A/B (2026-10-07) · nível médio · 9:16 · 62,5 s
+**Status:** v02 (correções do Oliver) · nível médio · 9:16 · 64,0 s (cartão final passa 3,7 s do fim da voz)
 **Locução:** Carla (Eleven v4), arquivo único `input/voz-final.mp3` (60,1 s), sem gerar outra voz → `split-vo.mjs` (9 falas, tempos por palavra via faster-whisper). Sem aprovação intermediária (regra do teste): decisões registradas aqui.
 
 ## Conceito (escolhido)
@@ -26,7 +26,7 @@
 | s6 build | 38,4–46,3 | abas abrem e fecham; "Menos abas abertas. / Menos informações espalhadas. / Menos tempo tentando lembrar."; papéis "onde foi?" aparecem e voam | whoosh · pops | 3 |
 | s7 virada | 46,3–52,2 | brilho suave; "Mais espaço para o que importa:" palavra a palavra; coração; "o seu *paciente.*" grande | chime | 3 |
 | s8 revelação | 52,2–59,0 | "Essa é a" → logo kz se desenha em "KZ"; "Mais simples de organizar"; pílulas seus atendimentos · sua rotina | piano F maior · pops | 4 |
-| s9 cartão final | 59,0–62,5 | logo · "Conheça a kz" · "Plataforma para terapeutas" · botão kz.app.br; cursor clica | whoosh · pop · click | 1 |
+| s9 cartão final | 59,0–64,0 | logo · "Conheça a kz" · navegador: digita kz.app.br, clica Ir, página carrega (logo + "Plataforma para terapeutas") | whoosh · pop · teclado · clique · ding | 1–2 |
 
 Pausa ≤ 1 s só na virada (s7). Palco 1080×1170 no topo do 9:16 (área segura do Reels); o mesmo HTML gera 4:5.
 
@@ -44,8 +44,16 @@ Creme `--bg` em tudo, com 2 brilhos suaves derivando (mesmo fundo do vídeo 01).
 - Trilha: **própria, sintetizada no kit** (`music.synth`, 84 BPM, Fmaj7–Am–Dm–C–Bb–F–Gm–C, `light` → `resolve` no compasso 18, riser 17→18 antes da revelação). Motivo: a biblioteca não tem nenhuma música catalogada (`library/audio/INDEX.md`: music 0, bases 0), e sem licença não usa. Por isso não houve 2–3 candidatas.
 - SFX: 33 (16 da biblioteca EditorPro licenciada + 17 sintetizados). Mix −14 LUFS.
 
+## v02 · feedback do Oliver na v01 (2026-10-07)
+- Texto sempre como **frase inteira** (cascata ≤ 0,5 s), nunca palavra a palavra esperando a fala: s1 "Imagine começar… à sua frente." inteira em 1,4 s; s3 legenda inteira logo após o encaixe; s7 "Mais espaço para o que importa:" inteira no 1º quadro, "o seu *paciente.*" inteira 0,6 s antes da palavra.
+- s5: cards sempre opacos (antes a opacidade do card deixava a linha aparecer por trás); só o conteúdo apaga/acende.
+- s7 refeita: frase completa + coração com anel pulsando + "o seu paciente."
+- s8: logo se desenha no 1º quadro da cena (antes esperava a palavra "KZ", ~1 s); frase e pílulas logo em seguida; ícones dos recursos (agenda, sessão online, anotações, clientes) em "organizar".
+- s9: CTA **navegador** (componente novo e reutilizável `library/motion/cta/navegador/`): aba abre, digita kz.app.br, cursor clica em Ir, barra carrega, página abre com a logo; SFX de teclado, clique e ding; passa do fim da voz.
+- Regra registrada em `knowledge/video/REGRAS.md` §1–2 e na skill `video`.
+
 ## Entregue
-- `exports/2026-10-07-ab-sessao-A-opus-9x16-v01.mp4` (fora do git) · QC em `qc/`.
+- v01: `exports/2026-10-07-ab-sessao-A-opus-9x16-v01.mp4` · v02: `exports/2026-10-07-ab-sessao-A-opus-9x16-v02.mp4` (fora do git) · QC em `qc/`.
 
 ## Para o Oliver conferir
 1. Ouvir com fone e no celular: trilha sob a voz e a quantidade de pops (aumentei a pedido; ver se não ficou demais).

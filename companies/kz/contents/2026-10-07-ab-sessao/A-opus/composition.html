@@ -12,6 +12,8 @@
     <script src="kit/gsap.min.js"></script>
     <script src="kit/motion.js"></script>
     <link rel="stylesheet" href="brand/brand.css" />
+    <link rel="stylesheet" href="lib/motion/cta/navegador/navegador.css" />
+    <script src="lib/motion/cta/navegador/navegador.js"></script>
     <style>
       html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
       * { box-sizing: border-box; }
@@ -84,7 +86,8 @@
       #prep .chip { font-size: 24px; padding: 10px 16px; opacity: 0; }
       .seal { position: absolute; right: 22px; top: 22px; width: 50px; height: 50px; border-radius: 50%; background: var(--tile-teal); color: var(--tile-teal-ink); display: grid; place-items: center; font-size: 30px; opacity: 0; }
       .m .icon { display: inline-block; vertical-align: -0.08em; margin-right: 18px; color: var(--tile-teal-ink); font-size: 0.9em; }
-      #heart { position: absolute; left: 50%; top: 600px; width: 96px; height: 96px; margin-left: -48px; border-radius: 50%; display: grid; place-items: center; font-size: 50px; opacity: 0; }
+      #heart { position: absolute; left: 50%; top: 520px; width: 128px; height: 128px; margin-left: -64px; border-radius: 50%; display: grid; place-items: center; font-size: 64px; opacity: 0; box-shadow: var(--shadow-md); }
+      #heart-ring { position: absolute; left: 50%; top: 520px; width: 128px; height: 128px; margin-left: -64px; border-radius: 50%; border: 3px solid var(--accent-soft); opacity: 0; }
       #kick8 { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 52px; font-weight: 600; opacity: 0; }
       #cap3 { position: absolute; left: 60px; right: 60px; top: 840px; text-align: center; font-size: 68px; font-weight: 700; line-height: 1.15; letter-spacing: -0.015em; }
       #cap3 .acc { font-size: 1.12em; }
@@ -125,7 +128,8 @@
       /* ── s5 · antes / durante / depois ── */
       #track { position: absolute; left: 132px; top: 160px; width: 6px; height: 820px; border-radius: 3px; background: var(--border); }
       #fill { width: 100%; height: 100%; border-radius: 3px; background: var(--primary); transform-origin: 50% 0; transform: scaleY(0); }
-      .st { position: absolute; left: 60px; right: 60px; height: 300px; display: flex; gap: 34px; align-items: center; padding: 0 44px 0 36px; opacity: 0; }
+      .st { position: absolute; left: 60px; right: 60px; height: 300px; display: flex; gap: 34px; align-items: center; padding: 0 44px 0 36px; opacity: 0; z-index: 1; background: var(--surface); }
+      .st > * { opacity: 0.35; }
       #st1 { top: 40px; } #st2 { top: 425px; } #st3 { top: 810px; }
       .st .ic { width: 84px; height: 84px; border-radius: 50%; font-size: 40px; }
       .st .k { font-size: 24px; font-weight: 700; letter-spacing: 0.1em; color: var(--ui-muted); text-transform: uppercase; }
@@ -145,25 +149,31 @@
 
       /* ── s7 · virada ── */
       #halo { position: absolute; left: 50%; top: 560px; width: 960px; height: 960px; margin: -480px 0 0 -480px; border-radius: 50%; background: radial-gradient(closest-side, var(--ui-glow), transparent); opacity: 0; }
-      #v1 { position: absolute; left: 70px; right: 70px; top: 330px; text-align: center; font-size: 80px; font-weight: 700; line-height: 1.14; letter-spacing: -0.015em; }
-      #v2 { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 84px; font-weight: 700; line-height: 1.1; opacity: 0; }
-      #v2 .acc { font-size: 1.9em; display: block; margin-top: 4px; }
+      #v1 { position: absolute; left: 70px; right: 70px; top: 230px; text-align: center; font-size: 80px; font-weight: 700; line-height: 1.14; letter-spacing: -0.015em; }
+      #v2 { position: absolute; left: 0; right: 0; top: 720px; text-align: center; font-size: 64px; font-weight: 700; line-height: 1.1; }
+      #v2 .acc { font-size: 2.4em; }
+      #v2 .w { display: inline-block; opacity: 0; }
+      #v2 .w.acc { display: block; width: fit-content; margin: -4px auto 0; }
 
       /* ── s8 · revelação ── */
       #logo { position: absolute; left: 50%; top: 250px; width: 480px; margin-left: -240px; clip-path: inset(0 100% 0 0); }
       #logo svg, #endlogo svg { width: 100%; height: auto; display: block; }
       #logo path, #endlogo path { fill: var(--logo); }
       #tag { position: absolute; left: 0; right: 0; top: 720px; text-align: center; font-size: 56px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; }
+      #feat { position: absolute; left: 0; right: 0; top: 990px; display: flex; justify-content: center; gap: 26px; }
+      #feat .ic { width: 96px; height: 96px; border-radius: 26px; font-size: 46px; opacity: 0; box-shadow: var(--shadow-sm); }
       #pills { position: absolute; left: 0; right: 0; top: 840px; display: flex; justify-content: center; gap: 22px; }
       .pill { display: flex; align-items: center; gap: 14px; padding: 18px 32px 18px 18px; border-radius: 999px; font-size: 36px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); opacity: 0; white-space: nowrap; }
       .pill .ic { width: 52px; height: 52px; border-radius: 50%; font-size: 28px; }
 
       /* ── s9 · cartão final ── */
-      #endlogo { opacity: 0; position: absolute; left: 50%; top: 230px; width: 360px; margin-left: -180px; }
-      #endtitle { opacity: 0; position: absolute; left: 0; right: 0; top: 570px; text-align: center; font-size: 84px; font-weight: 700; letter-spacing: -0.015em; }
-      #endsub { position: absolute; left: 0; right: 0; top: 680px; text-align: center; font-size: 36px; font-weight: 500; color: var(--muted); opacity: 0; }
-      #cta { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 800px; display: flex; align-items: center; gap: 14px; background: var(--primary); color: var(--on-primary);
-        font-weight: 700; font-size: 46px; padding: 28px 58px; border-radius: 999px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
+      #endlogo { opacity: 0; position: absolute; left: 50%; top: 40px; width: 220px; margin-left: -110px; }
+      #endtitle { opacity: 0; position: absolute; left: 0; right: 0; top: 240px; text-align: center; font-size: 84px; font-weight: 700; letter-spacing: -0.015em; }
+      #nav { left: 60px; right: 60px; top: 390px; height: 700px; }
+      .pg-logo { width: 260px; }
+      .pg-logo svg { width: 100%; height: auto; display: block; }
+      .pg-logo path { fill: var(--logo); }
+      .pg-sub { font-size: 42px; font-weight: 600; }
       #cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
       #ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
     </style>
@@ -282,6 +292,7 @@
         <!-- s7 · virada -->
         <div class="layer" id="L7">
           <div id="halo"></div>
+          <div id="heart-ring"></div>
           <div id="heart" class="t-coral">{{i:heart-handshake}}</div>
           <div id="v1" class="words"></div>
           <div id="v2"></div>
@@ -295,13 +306,13 @@
             <div class="pill" id="p1"><span class="ic t-teal">{{i:calendar-days}}</span><span></span></div>
             <div class="pill" id="p2"><span class="ic t-lilac">{{i:heart}}</span><span></span></div>
           </div>
+          <div id="feat"><span class="ic t-teal">{{i:calendar-days}}</span><span class="ic t-coral">{{i:video}}</span><span class="ic t-lilac">{{i:notebook-pen}}</span><span class="ic t-sky">{{i:users}}</span></div>
         </div>
         <!-- s9 · cartão final -->
         <div class="layer" id="L9">
           <div id="endlogo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
           <div id="endtitle"></div>
-          <div id="endsub"></div>
-          <div id="cta"></div>
+          <div id="nav"></div>
         </div>
         <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5" stroke-linejoin="round" /></svg>
         <div id="ripple"></div>
@@ -320,24 +331,16 @@
       const E = (id) => T.ev(id)
       const parts = (id) => T.text(id).split('|')
       const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w]/g, '')
-      /** Escreve o texto palavra a palavra (*x* = ênfase em Fraunces) e devolve o tempo de cada palavra casado com a fala. */
-      function words(el, text, vo, from) {
-        const said = T.vo(vo).words || []
-        let j = 0, prev = from
-        const out = []
-        el.innerHTML = text.replace(/\*([^*]+)\*/g, (_, x) => x.split(' ').map((w) => `\u0001${w}`).join(' '))
-          .split(' ').map((w) => {
-            const acc = w.startsWith('\u0001'), clean = w.replace('\u0001', '')
-            const k = said.findIndex((x, i) => i >= j && fold(x.w) === fold(clean))
-            const t = k >= 0 ? T.word(vo, k).s : prev + 0.1
-            if (k >= 0) j = k + 1
-            prev = Math.max(t, from)
-            out.push(prev)
-            return `<span class="w${acc ? ' acc' : ''}">${clean}</span>`
-          }).join(' ')
-        return [...el.querySelectorAll('.w')].map((node, i) => ({ node, t: out[i] }))
-      }
       const enter = (sel, at, from = { y: 30 }) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, ...M.FAST }, at)
+      /** Frase INTEIRA na tela de uma vez (palavras em cascata curta, ≤ 0,5 s no total). *x* = ênfase em Fraunces. */
+      function phrase(el, text, at, from = { y: 30 }, step = 0.04) {
+        el.innerHTML = text.replace(/\*([^*]+)\*/g, (_, x) => x.split(' ').map((w) => '\u0001' + w).join(' '))
+          .split(' ').map((w) => `<span class="w${w.startsWith('\u0001') ? ' acc' : ''}">${w.replace('\u0001', '')}</span>`).join(' ')
+        const nodes = [...el.querySelectorAll('.w')]
+        const k = Math.min(step, 0.5 / Math.max(1, nodes.length))
+        nodes.forEach((n, i) => enter(n, at + i * k, from))
+        return nodes
+      }
       const show = (id, at) => tl.set(id, { opacity: 1 }, at)
       const out = (id, sc, to = { y: -30 }) => tl.to(id, { opacity: 0, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in', ...to }, S[sc].end - 0.3)
       const drift = (id, sc, s = 1.035) => tl.fromTo(id, { scale: 1 }, { scale: s, duration: S[sc].dur, ease: 'sine.inOut' }, S[sc].start)
@@ -351,7 +354,9 @@
       const goRaw = box('#go', 0.5, 0.6)
       const pGo = { x: FO.x + (goRaw.x - FO.x) * FS, y: FO.y + (goRaw.y - FO.y) * FS + FY }
       const pJoin = box('#join', 0.6, 0.6); const RY = -30; pJoin.y += RY
-      const pCta = box('#cta', 0.9, 0.62)
+      const [, url9, tab9, sub9] = parts('s9')
+      KitNavegador.mount($('#nav'), { url: url9, tab: tab9, page: '<div class="pg-logo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div><div class="pg-sub">' + sub9 + '</div>' })
+      const pGoNav = box('#nav .nav-go', 0.45, 0.6)
       const C = M.cursor(tl, '#cursor', '#ripple')
 
       // fundo vivo o vídeo inteiro
@@ -363,9 +368,9 @@
       show('#L1', 0)
       // 1º quadro já comunica: a pergunta entra grande no meio e, em "imagine", encolhe e sobe
       tl.set('#kicker', { y: 330 }, 0)
-      words($('#kicker'), kick, 'f1', 0).forEach(({ node }, i) => tl.fromTo(node, { opacity: 0, y: 60, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, 0.02 + i * 0.09))
+      phrase($('#kicker'), kick, 0, { y: 60, scale: 0.9 }, 0.07)
       tl.to('#kicker', { y: 0, scale: 0.42, ...M.GENTLE, duration: 0.8 }, E('e29') - 0.3)
-      words($('#q'), ask, 'f1', E('e29')).forEach(({ node, t }) => enter(node, t - 0.12, { y: 34 }))
+      phrase($('#q'), ask, E('e29') - 0.2, { y: 34 })
       tl.fromTo('#prep', { opacity: 0, y: 120, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, E('e29') + 0.3)
       tl.fromTo('#prep .chip', { opacity: 0, y: 16, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, stagger: 0.09 }, E('e2'))
       tl.fromTo('#prep', { boxShadow: 'var(--shadow-md)' }, { boxShadow: 'var(--shadow-lg)', duration: 0.4 }, E('e2'))
@@ -376,7 +381,7 @@
       const [h2, ...titles] = parts('s2')
       ;['#b1', '#b2', '#b3', '#b4'].forEach((b, i) => ($(b + ' .n').textContent = titles[i]))
       show('#L2', S.s2.start)
-      words($('#h2'), h2, 'f2', S.s2.start).forEach(({ node }, i) => tl.fromTo(node, { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, S.s2.start + 0.02 + i * 0.08))
+      phrase($('#h2'), h2, S.s2.start + 0.02, { y: 40 }, 0.06)
       $$('.blk h4 .ic').forEach((el, i) => tl.fromTo(el, { scale: 0.5, rotation: -20 }, { scale: 1, rotation: 0, ...M.SOFT }, E(['e4', 'e5', 'e6', 'e7'][i]) + 0.12))
       tl.fromTo('#ficha', { opacity: 0, y: 90, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, E('e3') - 0.05)
       // os blocos chegam um pouco tortos (ainda soltos); em "organizado" se encaixam
@@ -393,7 +398,10 @@
       tl.to('#h2', { opacity: 0, y: -40, duration: 0.3, ease: 'power2.in' }, E('e8'))
       tl.to('#ficha', { scale: FS, y: FY, ...M.GENTLE }, E('e8') + 0.3)
       tl.fromTo('.seal', { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, ...M.SOFT, stagger: 0.08 }, E('e8') + 0.25)
-      words($('#cap3'), T.text('s3').replace('|', ' '), 'f3', E('e30')).forEach(({ node, t }) => enter(node, t - 0.12, { y: 30 }))
+      phrase($('#cap3'), T.text('s3').replace('|', ' '), E('e8') + 0.4)
+      // espera viva até o clique: botão chama atenção, legenda deriva
+      tl.to('#go', { scale: 1.06, duration: 0.45, ease: 'sine.inOut', yoyo: true, repeat: 3 }, E('e8') + 1.0)
+      tl.fromTo('#cap3', { y: 0 }, { y: -16, duration: S.s3.end - E('e8') - 0.4, ease: 'sine.inOut' }, E('e8') + 0.4)
       tl.set('#cursor', { x: pGo.x + 260, y: pGo.y + 300 }, S.s3.start)
       tl.to('#cursor', { opacity: 1, duration: 0.2 }, E('e9') - 1.0)
       C.move(pGo, E('e9') - 1.0, 0.8)
@@ -441,13 +449,14 @@
       show('#L5', S.s5.start)
       enter('#track', S.s5.start, { y: 0 })
       ;[['#st1', 'e14', 'e34', 0.18], ['#st2', 'e15', 'e32', 0.6], ['#st3', 'e16', 'e33', 1]].forEach(([id, ev, chipEv, fill], i) => {
-        tl.fromTo(id, { opacity: 0, y: 40 }, { opacity: 0.4, y: 0, ...M.FAST }, S.s5.start + 0.02 + i * 0.08)
-        tl.fromTo(id, { scale: 1 }, { opacity: 1, scale: 1.03, duration: 0.18, ease: 'power2.out', immediateRender: false }, E(ev) - 0.05)
+        tl.fromTo(id, { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, S.s5.start + 0.02 + i * 0.08)
+        tl.to(id + ' > *', { opacity: 1, duration: 0.2, ease: 'power2.out' }, E(ev) - 0.05)
+        tl.fromTo(id, { scale: 1 }, { scale: 1.03, duration: 0.18, ease: 'power2.out', immediateRender: false }, E(ev) - 0.05)
         tl.to(id, { scale: 1, ...M.FAST }, E(ev) + 0.13)
         tl.fromTo(id + ' > .ic', { scale: 0.6 }, { scale: 1, ...M.SOFT }, E(ev) + 0.05)
         tl.to('#fill', { scaleY: fill, duration: 0.6, ease: 'power2.inOut' }, E(ev))
         tl.fromTo(id + ' .chip', { opacity: 0, y: 14 }, { opacity: 1, y: 0, ...M.FAST }, E(chipEv))
-        if (i > 0) tl.to(['#st1', '#st2'].slice(0, i), { opacity: 0.6, duration: 0.4 }, E(ev))
+        if (i > 0) tl.to(['#st1', '#st2'].slice(0, i).map((s) => s + ' > *'), { opacity: 0.5, duration: 0.4 }, E(ev))
       })
       drift('#L5', 's5', 1.03)
       out('#L5', 's5', { y: -40 })
@@ -475,12 +484,11 @@
       const [v1, v2] = parts('s7')
       show('#L7', S.s7.start)
       tl.fromTo('#halo', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, S.s7.start)
-      words($('#v1'), v1, 'f7', E('e20')).forEach(({ node, t }) => enter(node, t - 0.12, { y: 34 }))
-      tl.to('#v1', { y: -40, duration: 0.8, ease: M.GENTLE.ease }, E('e37'))
-      $('#v2').innerHTML = v2.replace(/\*([^*]+)\*/, '<span class="acc">$1</span>')
-      tl.fromTo('#v2', { opacity: 0, y: 50, scale: 0.94 }, { opacity: 1, y: -20, scale: 1, ...M.GENTLE }, E('e21') - 0.35)
-      tl.fromTo('#heart', { opacity: 0, scale: 0.5, y: 0 }, { opacity: 1, scale: 1, y: -110, ...M.SOFT }, E('e37'))
-      tl.to('#heart', { opacity: 0, scale: 0.8, y: -150, duration: 0.3, ease: 'power2.in' }, E('e21') - 0.45)
+      phrase($('#v1'), v1, S.s7.start + 0.02, { y: 34 })
+      tl.fromTo('#heart', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, ...M.SOFT }, S.s7.start + 0.35)
+      tl.fromTo('#heart-ring', { opacity: 0.9, scale: 1 }, { opacity: 0, scale: 1.8, duration: 1.4, ease: 'power1.out', repeat: 2 }, S.s7.start + 0.6)
+      tl.to('#heart', { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' }, E('e37'))
+      phrase($('#v2'), v2, E('e21') - 0.6, { y: 40, scale: 0.94 }, 0.08)
       drift('#L7', 's7', 1.04)
       out('#L7', 's7', { scale: 0.96 })
 
@@ -491,30 +499,27 @@
       enter('#kick8', S.s8.start + 0.02, { y: 24 })
       tl.fromTo('#logo', { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.9, ease: 'power3.out' }, E('e22'))
       $('#tag').textContent = tag
-      enter('#tag', E('e23') - 0.3, { y: 24 })
+      enter('#tag', E('e23'), { y: 24 })
       ;['#p1', '#p2'].forEach((p, i) => {
         $(p + ' span:last-child').textContent = pills[i]
         tl.fromTo(p, { opacity: 0, y: 30, scale: 0.88 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, E(['e24', 'e25'][i]))
       })
+      tl.fromTo('#feat .ic', { opacity: 0, y: 30, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, stagger: 0.07 }, E('e40'))
+      tl.to('#p2', { scale: 1.06, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }, E('e41'))
+      tl.to('#feat .ic', { y: -8, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out', stagger: 0.06 }, E('e41') + 0.2)
       drift('#L8', 's8', 1.03)
       out('#L8', 's8', { scale: 0.96 })
 
       // ── s9 · convite ──────────────────────────────────
-      const [ttl, url, sub] = parts('s9')
-      $('#endtitle').textContent = ttl
-      $('#cta').innerHTML = `${url} {{i:chevron-right}}`
-      $('#endsub').textContent = sub
+      $('#endtitle').textContent = parts('s9')[0]
       show('#L9', S.s9.start)
       tl.fromTo('#endlogo', { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, E('e26'))
-      enter('#endtitle', E('e26') + 0.15, { y: 30 })
-      tl.fromTo('#cta', { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, E('e27'))
-      enter('#endsub', E('e27') + 0.25, { y: 18 })
-      tl.set('#cursor', { x: pCta.x + 280, y: pCta.y + 240 }, S.s9.start)
+      enter('#endtitle', E('e26') + 0.1, { y: 30 })
+      tl.set('#cursor', { x: pGoNav.x + 220, y: pGoNav.y + 320 }, S.s9.start)
       tl.to('#cursor', { opacity: 1, duration: 0.2 }, E('e28') - 0.8)
-      C.move(pCta, E('e28') - 0.8, 0.7)
-      C.click(pCta, E('e28'))
-      C.press('#cta', E('e28'))
-      drift('#L9', 's9', 1.03)
+      KitNavegador.play(tl, $('#nav'), { at: E('e27'), typeAt: E('e38'), clickAt: E('e28'), cursor: C, go: pGoNav })
+      tl.to('#cursor', { opacity: 0, duration: 0.25 }, E('e39') + 0.4)
+      tl.fromTo('#endlogo', { y: 0 }, { y: -10, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, E('e39'))
 
       tl.set({}, {}, T.duration)
       window.__timelines = window.__timelines || {}

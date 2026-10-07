@@ -1,6 +1,6 @@
 # kz · apresentação
 
-**Status:** v02 entregue para revisão (2026-10-07) · nível médio · 4:5 + 9:16 · 43 s
+**Status:** v03 entregue para revisão (2026-10-07) · nível médio · 4:5 + 9:16 · 43 s
 **Locução:** Carla (ElevenLabs v4), arquivo único gerado pelo Oliver → `split-vo.mjs` (7 falas, pausas apertadas: 40,3 s → 38,1 s de fala).
 Original em `_inbox/audio/kz-teste-carla/carla-v4.mp3` (fora do git).
 
@@ -33,8 +33,11 @@ Trilha: própria (sintetizada no kit), 84 BPM, Dm–Bb–F–C, estilo `light`, 
 4. No 9:16, o conteúdo fica no alto (a parte de baixo é coberta pela legenda/botões do Reels/TikTok).
 
 ## Entregue
-- v01 e v02: `exports/2026-10-07-apresentacao-kz-<4x5|9x16>-vNN.mp4` (fora do git).
+- v01, v02 e v03: `exports/2026-10-07-apresentacao-kz-<4x5|9x16>-vNN.mp4` (fora do git).
 
 ## Feedback
 - **v01 (Oliver):** abertura com tela vazia; "sobra menos tempo" vazio e textos atrasados; faltam headlines (ex.: cena dos cards), ícones e elementos que ilustrem o que é dito; mais dinâmica no geral; mais efeitos sonoros discretos (entrada e saída de cards).
 - **v02 (feito):** tudo acima + tempos por palavra corrigidos pelo áudio (o Whisper atrasava até 0,3 s; `snapWords`), cenas se cruzam (sem quadro vazio), 40 efeitos (eram 19).
+- **v02 (Oliver):** relógio da cena 3 bugado (único ajuste pedido).
+- **v03 (feito):** relógio corrigido (a rotação do anel pegava o ícone, que girava e esticava; agente Sonnet). Revisão completa por outro agente Sonnet → aplicado: frase final com headline ("Uma forma *mais simples*…") e assinatura antes; "Feita para terapeutas" em "feita" e logo respirando até lá; headlines palavra a palavra no tempo da fala (cenas 2 e 5); sem vazio em 2 s e 5 s; cards longe das bordas; toast legível; quebras equilibradas (`text-wrap: balance`); ícones e rótulos pequenos maiores; anel do clique do cursor não aparece mais no canto (correção no kit). Ficaram para decidir: zoom forte no painel na cena 5 e descer o conteúdo no 9:16.
+

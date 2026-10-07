@@ -1,5 +1,5 @@
 {
-  "status": "v02 para revisão do Oliver",
+  "status": "v03 para revisão do Oliver",
   "fps": 30,
   "formats": [
     "4x5",
@@ -709,7 +709,7 @@
       ],
       "lead": 0.15,
       "tail": 1.6,
-      "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas",
+      "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas|Uma forma *mais simples* de cuidar da sua rotina.",
       "note": "logo + convite + botão; cursor clica",
       "start": 36.643,
       "end": 43.044
@@ -849,10 +849,10 @@
     {
       "id": "e16",
       "type": "reveal",
-      "word": "f4:terapeutas",
+      "word": "f4:feita",
       "offset": -0.12,
       "target": "#tag",
-      "t": 19.652,
+      "t": 18.872,
       "scene": "s4"
     },
     {
