@@ -8,7 +8,7 @@
   - 6 agentes;
   - Kanban em arquivos;
   - heartbeat e tarefas recorrentes.
-- **Base de vídeo verificada:** `knowledge/video/`, 22 arquivos, Etapas 1–13 do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
+- **Base de vídeo verificada:** `knowledge/video/`, 23 arquivos, Etapas 1–14 do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
 - **Ferramentas (`tools/`):**
   - `board.mjs` (quadro);
   - `heartbeat.mjs` (agentes sozinhos);
@@ -16,6 +16,7 @@
   - `audio/catalog.mjs` (biblioteca de sons);
   - `audio/elevenlabs-sfx.mjs` (não testado);
   - `video/timeline.mjs` (trocar voz, duração, texto e trilha; núcleo do futuro MCP);
+  - `video/qc.mjs` (QC técnico do MP4 final + folha de contato);
   - render do carrossel (`.claude/skills/carousel/scripts/render.mjs`).
 - **Bibliotecas globais:** `library/audio/` e `library/visual/`. Os arquivos ficam locais; os catálogos e o registro de licenças ficam no git.
 - **kz:** contexto (6 arquivos), `brand/` (brand.css + BRAND.md, com seção Som em rascunho) e o quadro `companies/kz/board/` (13 tarefas).

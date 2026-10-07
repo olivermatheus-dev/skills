@@ -58,12 +58,14 @@ O **vídeo anterior da mesma empresa é o ponto de partida** (não o modelo): le
   - [ ] cor ou fundo fora do `BRAND.md`
   - [ ] palavra na tela fora do tempo da fala
   - [ ] proibições da marca (ex.: caixa alta)
+- Revisão completa em passadas: `qc-final.md`.
 - Consertar → conferir de novo. Só exportar com as folhas limpas.
 
 ### Etapa 5 — Exportar e entregar
 - Renderizar todos os formatos pedidos (ex.: 4:5 e 9:16).
 - **Motion blur:** renderizar acima do fps final e mesclar os quadros intermediários. Ver nota técnica abaixo.
 - Conferir no MP4 final um **quadro de movimento rápido** (borrão ok, sem "fantasma" duplo).
+- `node tools/video/qc.mjs <pasta> --sheet`: QC técnico do arquivo real (a entrega é o MP4, não a timeline).
 - Entregar os arquivos e **dizer o que não foi verificado**: o Claude não escuta o áudio, então voz e mixagem precisam do ouvido do usuário.
 - Registrar no `plano.md`: o que foi entregue, o que ficou em aberto e o feedback recebido (isso alimenta o próximo vídeo).
 

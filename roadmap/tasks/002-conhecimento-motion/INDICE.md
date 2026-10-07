@@ -20,6 +20,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (chat) Etapa 11 — infográficos, dados, diagramas | escolha da representação, integridade, design de gráfico, motion de dados, mapas, assets, dados em código, QC | knowledge/video/infograficos-e-dados.md + library/visual/ | destilado |
 | 2026-10-07 | material/2026-10-07-etapa12-compositing.md | compositing e integração com live action (121 itens) | knowledge/video/compositing.md (+ fmt-3d-produto, tecnico-hyperframes) | destilado |
 | 2026-10-07 | material/2026-10-07-etapa13-particulas.md | partículas, atmosfera e microdetalhes (128 itens) | knowledge/video/particulas-e-atmosfera.md (+ tecnico-hyperframes, library/visual/fx) | destilado |
+| 2026-10-07 | (chat; não salvo bruto) Etapa 14 — polimento final e QC premium (110 itens) | passadas de revisão, editorial, triagem, áudio, cor, entrega, pós-render | knowledge/video/qc-final.md + tools/video/qc.mjs | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -149,3 +150,8 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - densidade de efeitos ligada à escala 0–4 de `pacing-e-atencao.md`.
   - **Infraestrutura:** `library/visual/fx/` com catálogo `fx.json`; `*.webm` no `.gitignore`.
   - **Coerência:** default do hub = sem partículas (já era regra em `visual-e-cor.md`); kz restringe à confirmação.
+- **2026-10-07 · Etapa 14:** conteúdo correto. O que mudei:
+  - **Quem confere o quê:** o Claude não escuta nem vê no aparelho; cada passada diz como ele confere (timeline, folhas de contato, medições, metadados) e as de ouvido/celular viraram um checklist explícito para o Oliver em toda entrega.
+  - As 18 passadas viraram 16, e cada uma aponta para o checklist do arquivo do tema (sem repetir critérios).
+  - **Especificação social concreta:** H.264 yuv420p BT.709, 30 fps CFR, AAC 48 kHz, −14 LUFS/−1 dBTP (com a ressalva do material: broadcast −23), CRF 16–18, nome `<data>-<nome>-<formato>-vNN.mp4`, master local.
+  - **Ferramenta nova `tools/video/qc.mjs`** (testada com vídeos sintéticos): placeholders, propriedades reais do MP4, loudness/true peak EBU R128, quadro preto, flash branco, tela congelada, nome, folha de contato do arquivo final.

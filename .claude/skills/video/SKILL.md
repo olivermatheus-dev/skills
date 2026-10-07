@@ -63,12 +63,14 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 ### 4. Conferir (automático + olho)
 - Rodar o build e o check do kit: silêncio acima do limite, 1 quadro por gesto assentado, folhas de contato por formato.
 - **Olhar todas as folhas.** Procurar: texto cortado ou fora da área segura (`formatos-e-areas-seguras.md`), capa ilegível no recorte 3:4, sobreposição, cursor fora do quadro, cor/fundo fora do BRAND.md, palavra fora do tempo da fala, proibições, contraste (`node tools/contrast.mjs`).
+- **Revisão em passadas** (uma pergunta por vez, macro → micro): `knowledge/video/qc-final.md` §2. Classifique cada problema (crítico/maior/menor) e corrija a causa, não o sintoma (§4).
 - Consertar → conferir de novo. Só exporta com as folhas limpas.
 
 ### 5. Exportar e entregar
 - Render final de cada formato com motion blur (ver `esteira-de-producao.md` §5). Conferir no MP4 um quadro de movimento rápido.
-- Medir o áudio: −14 LUFS ±1, true peak ≤ −1 dBTP (`ffmpeg -af ebur128` ou `loudnorm=print_format=summary`).
-- Entregar: caminhos dos MP4 + 1 linha por cena + **o que não foi verificado** (o Claude não escuta: voz e mixagem são do usuário).
+- Nome `<AAAA-MM-DD>-<nome>-<formato>-vNN.mp4` em `exports/`; nunca sobrescrever versão aprovada.
+- **QC do arquivo final:** `node tools/video/qc.mjs <pasta> --sheet` (formato, BT.709, fps, loudness −14 LUFS ±1 e true peak ≤ −1, quadro preto/flash/congelado, placeholders) e **olhar a folha de contato do MP4**. Crítico = não entrega.
+- Entregar: caminhos dos MP4 + 1 linha por cena + saída do `qc.mjs` + **checklist do Oliver** (`qc-final.md` §6: ouvir com fone e no celular, ver pequeno e sem som, preview na plataforma).
 - Registrar no `plano.md`: entregue, em aberto e feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
 
 ## Edição rápida (quase zero token)

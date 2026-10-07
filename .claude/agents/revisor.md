@@ -21,7 +21,7 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 | vídeo com texto/legenda | `knowledge/video/tipografia-animada.md` §10 |
 | vídeo com número/gráfico/mapa | `knowledge/video/infograficos-e-dados.md` §3 (integridade = bloqueante) e §8 |
 | vídeo com mockup, partículas, glow ou grão | `knowledge/video/compositing.md` §10 · `particulas-e-atmosfera.md` §9 (teste de remoção; partícula sobre texto = bloqueante) |
-| vídeo renderizado | folhas de contato + checklist final de `curvas-e-polimento.md` §9 + `animacao-comportamento.md` §9 (diagnósticos) + `movimento.md`, `ritmo-e-leitura.md`, `pacing-e-atencao.md`, `cobertura-e-reacao.md`, `som.md` (medições de áudio) |
+| vídeo renderizado | **`knowledge/video/qc-final.md`** (passadas + triagem: crítico = bloqueante) · `node tools/video/qc.mjs <pasta> --sheet` · folhas de contato + checklist final de `curvas-e-polimento.md` §9 + `animacao-comportamento.md` §9 (diagnósticos) + `movimento.md`, `ritmo-e-leitura.md`, `pacing-e-atencao.md`, `cobertura-e-reacao.md`, `som.md` (medições de áudio) |
 
 ## Bloqueante (volta ao autor)
 - Afirmação sem fonte, número inventado.
