@@ -50,7 +50,8 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
 | `locucao` | voz v1.0 gratuita → voz final → encaixe do áudio final |
 | `elevenlabs` | voz final sempre no Eleven v4: emoção (audio tags), vozes, geração pela API e encaixe |
-| `radar` | descobrir e cadastrar concorrentes, referências e páginas (com perfis) |
+| `radar` | descobrir concorrentes, referências e páginas → candidatos (aceite do Oliver) |
+| `analise-concorrentes` | análise por módulos (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui): roda a fila marcada no app, script + subagentes Sonnet |
 | `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
 
 **Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).

@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:29:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://usecorpora.com.br/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, CNPJ e telefone +55 no rodapé, integra Receita Saúde, CFP e LGPD"
+  }
+}

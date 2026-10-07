@@ -1,0 +1,77 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:42:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "freemium",
+    "fromMonthly": 49,
+    "guarantee": "7 dias de reembolso total nos planos pagos",
+    "plans": [
+      {
+        "name": "Free",
+        "monthly": 0,
+        "users": "1 profissional",
+        "highlights": [
+          "10 sessões/mês",
+          "5 pacientes",
+          "60 min de vídeo",
+          "nota DAP"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Clínico",
+        "monthly": 49,
+        "yearlyMonthly": 32.5,
+        "yearlyTotal": 390,
+        "users": "1 profissional",
+        "highlights": [
+          "sessões e pacientes ilimitados",
+          "todos os formatos de nota",
+          "laudos",
+          "financeiro + IRPF",
+          "300 min de vídeo"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Pro",
+        "monthly": 119,
+        "yearlyMonthly": 79,
+        "yearlyTotal": 948,
+        "users": "1 profissional",
+        "highlights": [
+          "IA de apoio em tempo real",
+          "supervisão IA",
+          "Consultório Simulado",
+          "Companheiro do Paciente",
+          "800 min de vídeo"
+        ],
+        "recommended": true
+      },
+      {
+        "name": "Clínica",
+        "users": "equipe",
+        "highlights": [
+          "tudo do Pro por psicólogo",
+          "dashboard administrativo",
+          "2000 min de vídeo"
+        ],
+        "recommended": false
+      }
+    ],
+    "extras": [
+      "Pagamento por cartão ou boleto via Stripe",
+      "Anual cobra 8 mensalidades para 12 meses"
+    ],
+    "notes": "Estado padrão da página: Anual (R$ 32,50 e R$ 79 /mês, cobrado R$ 390 e R$ 948/ano; \"paga 8 meses\"). Mensal: Clínico R$ 49 e Pro R$ 119. Plano Clínica (equipe) sob consulta. Sem trial; o Free é permanente."
+  }
+}

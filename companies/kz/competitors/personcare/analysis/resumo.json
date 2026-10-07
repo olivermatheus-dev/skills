@@ -1,0 +1,17 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:30:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão para psicólogos e clínicas com apps, WhatsApp ilimitado, NFS-e e telepsicologia",
+    "text": "Sistema de gestão de consultório de psicologia com agenda, financeiro, prontuário e anamnese, escalas de avaliação, videochamada e apps para profissional e paciente. Inclui transcrição de áudio no prontuário, emissão de NFS-e/Receita Saúde e WhatsApp ilimitado sem recarga. Teste de 7 dias grátis.",
+    "audience": "psicólogos autônomos e clínicas de psicologia",
+    "positioning": "revolução das ferramentas de gestão para clínicas"
+  }
+}

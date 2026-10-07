@@ -13,7 +13,8 @@ O Oliver marca no app o que quer (aba **Análise** do concorrente) → vira `ana
 |---|---|---|
 | `site` | **script** (`npm run analise -- site`) | abre o site no Playwright, salva `site/*.md` + `site/extract.json`, sitemap e contatos brutos |
 | `redes` | **script** (`npm run collect`) | coleta de YouTube/Instagram/TikTok (já existia) |
-| `perfis`, `reputacao` | IA com busca na web | nome do concorrente + `site/extract.json` (redes linkadas no site) |
+| `reputacao` (Reclame Aqui) | **script** (`npm run analise -- ra`, também roda junto com `site`) | busca do RA num navegador real (a página da empresa tem Cloudflare; a busca não) → `site/reclameaqui.json` |
+| `perfis`, `reputacao` (lojas, menções, resumo) | IA com busca na web | nome do concorrente + `site/extract.json` + `site/reclameaqui.json` (não sobrescreva o bloco `reclameAqui` se ele veio do script) |
 | `atuacao`, `resumo`, `features`, `forcas`, `precos`, `landing`, `contato` | IA lendo **só** `site/*.md` e `site/extract.json` | abre páginas extras só se faltar algo (ex.: preço em outra URL) |
 
 Regras de custo:

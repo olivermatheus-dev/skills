@@ -26,9 +26,13 @@ companies/<slug>/
   notes/<id>.md            anotações (markdown)
   ideas/I-NNNN-*.md        banco de ideias (tarefa 012)
   competitors/<id>/competitor.md · marks.json · snapshots/<plataforma>-<perfil>/<data>.json · media/ (fora do git)
+                    analysis/<modulo>.json (último resultado de cada módulo) · pedido.json (fila da IA) · notas.json (anotações do Oliver)
+                    site/*.md + extract.json + reclameaqui.json (texto extraído pelo script; fora do git, refazível)
   context/*.md · brand/
   .env                     chaves de API do projeto (tela Configurações; fora do git; a tela só mostra os 4 últimos caracteres)
 ```
+**Análise de concorrentes** (aba Análise do concorrente; tabela em Concorrentes → Comparar): o Oliver marca módulos → script roda na hora (site, Reclame Aqui, redes) e o resto vira `pedido.json` → "roda a fila de concorrentes" (skill `analise-concorrentes`). Terminal: `npm run analise -- fila|site|ra|pedir|salvar|status kz`.
+
 Coletas são **imutáveis**: cada "Puxar" grava um arquivo novo; o histórico nunca é apagado.
 
 ## Checar

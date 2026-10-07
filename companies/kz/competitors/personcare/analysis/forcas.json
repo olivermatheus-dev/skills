@@ -1,0 +1,63 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:30:17Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Pacote completo por preço baixo",
+        "evidence": "Plano Profissional R$ 69,90 com agenda, financeiro, telepsicologia, NFS-e e WhatsApp ilimitado"
+      },
+      {
+        "point": "WhatsApp ilimitado sem recarga",
+        "evidence": "'não é necessário recargas para envio' nos três planos"
+      },
+      {
+        "point": "Apps iOS/Android para profissional e paciente",
+        "evidence": "selos App Store e Google Play na home"
+      },
+      {
+        "point": "NFS-e e escalas de avaliação",
+        "evidence": "seções dedicadas na home"
+      },
+      {
+        "point": "Transcrição de áudio no prontuário",
+        "evidence": "card 'Transcrição de áudio'"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Comunicação genérica e técnica, sem história de fundador",
+        "evidence": "'revolução das ferramentas de gestão', sem equipe nem depoimentos"
+      },
+      {
+        "point": "Sem prova social visível",
+        "evidence": "home sem depoimentos, números ou logos"
+      },
+      {
+        "point": "Foco só em psicologia",
+        "evidence": "título e textos falam só de psicólogos e clínicas de psicologia"
+      },
+      {
+        "point": "Trial curto",
+        "evidence": "7 dias grátis"
+      },
+      {
+        "point": "Módulo de comunidade ainda em desenvolvimento",
+        "evidence": "texto 'estamos desenvolvendo'"
+      }
+    ],
+    "opportunities": [
+      "Marca com voz e história de terapeuta fundador",
+      "Falar com psicanalistas, hipnoterapeutas e integrativos",
+      "Mostrar o portal com relato entre sessões como cuidado, não como feature",
+      "Prova social e conteúdo que a PersonCare não tem"
+    ]
+  }
+}

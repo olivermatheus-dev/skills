@@ -1,12 +1,16 @@
-// Concorrentes e referências: cards com avatar, seguidores por plataforma (Δ vs coleta anterior), filtros e "Puxar todos".
+// Concorrentes e referências: cards (resumo, onde atua, preço, seguidores por plataforma) ou tabela comparativa;
+// filtros (tipo, onde atua, plataforma, tag), candidatos achados pela IA (aceitar → análise completa) e "Puxar todos".
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../api';
+import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../api';
+import { MARKET, money } from '../components/competitors/Analysis';
+import { FULL_ANALYSIS } from '../../../schema/analysis';
+import { toast } from '../components/toast';
 import { Badge, Button, Empty, ErrorBox, Input, PageHeader, Select, cx, fmtNum } from '../components/ui';
 import AddLinksModal, { ResultLine } from '../components/competitors/AddLinksModal';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
-import { prefetchCompetitor, qk, useCompetitors, useCompetitorsSummary } from '../queries';
+import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../queries';
 import { Avatar, Chips, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../components/competitors/lib';
 
 type KindFilter = 'todos' | Competitor['kind'];
@@ -23,7 +27,12 @@ export default function Competitors() {
   const [platform, setPlatform] = useState('');
   const [tag, setTag] = useState('');
   const [favOnly, setFavOnly] = useState(false);
-  const [archived, setArchived] = useState(false);
+  const [stage, setStage] = useState<Competitor['status']>('ativo');
+  const [market, setMarket] = useState('');
+  const [mode, setMode] = useState<'cards' | 'tabela'>(() => { try { return (localStorage.getItem('hub:comp-mode') as 'cards' | 'tabela') ?? 'cards'; } catch { return 'cards'; } });
+  const setModeP = (m: 'cards' | 'tabela') => { setMode(m); try { localStorage.setItem('hub:comp-mode', m); } catch { /* sem storage */ } };
+  const overview = useAnalysisOverview(slug);
+  const ov = useMemo(() => new Map((overview.data ?? []).map((o) => [o.id, o])), [overview.data]);
   const [pulling, setPulling] = useState<{ i: number; n: number; name: string } | null>(null);
   const [pullLog, setPullLog] = useState<{ id: string; name: string; results: CollectResult[] }[] | null>(null);
   const [pullingOne, setPullingOne] = useState<string | null>(null);
@@ -32,11 +41,14 @@ export default function Competitors() {
   const all = list.data ?? [];
   const allTags = [...new Set(all.flatMap((c) => c.data.tags))].sort();
   const allPlatforms = [...new Set(all.flatMap((c) => c.data.profiles.map((p) => p.platform)))];
-  const counts = (k: KindFilter) => all.filter((c) => c.data.status === (archived ? 'arquivado' : 'ativo') && (k === 'todos' || c.data.kind === k)).length;
+  const counts = (k: KindFilter) => all.filter((c) => c.data.status === stage && (k === 'todos' || c.data.kind === k)).length;
+  const nStage = (st: Competitor['status']) => all.filter((c) => c.data.status === st).length;
+  const queued = (overview.data ?? []).filter((o) => o.request).length;
 
   const shown = all.filter((c) => {
     const d = c.data;
-    if ((d.status === 'arquivado') !== archived) return false;
+    if (d.status !== stage) return false;
+    if (market && marketOf(c, ov.get(d.id)) !== market) return false;
     if (kind !== 'todos' && d.kind !== kind) return false;
     if (platform && !d.profiles.some((p) => p.platform === platform)) return false;
     if (tag && !d.tags.includes(tag)) return false;
@@ -71,6 +83,14 @@ export default function Competitors() {
   }
 
   const active = all.filter((c) => c.data.status === 'ativo');
+  async function accept(c: Doc<Competitor>) {
+    try {
+      await actions.save(c.data.id, { ...c.data, status: 'ativo' }, c.body, { okMessage: false });
+      await api.requestAnalysis(slug, c.data.id, { modules: FULL_ANALYSIS });
+      toast.ok(`${c.data.name} aceito · análise completa na fila da IA`);
+    } catch (e) { toast.error(e, 'Não foi possível aceitar'); }
+    void qc.invalidateQueries({ queryKey: qk.analysisOverview(slug) });
+  }
   const pullTargets = shown.filter((c) => c.data.status === 'ativo' && c.data.profiles.length);
 
   return (
@@ -82,6 +102,7 @@ export default function Competitors() {
           <Button variant="ghost" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
             {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : `↻ Puxar todos${pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}`}
           </Button>
+          {queued > 0 && <span className="self-center text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">⏳ {queued} na fila da IA</span>}
           <Button onClick={() => setAdding(true)}>+ Adicionar</Button>
         </>}
       />
@@ -110,7 +131,18 @@ export default function Competitors() {
             </Select>
           )}
           <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted hover:text-text')}>★ Favoritos</button>
-          <button onClick={() => setArchived(!archived)} className={cx('px-2.5 py-1.5 rounded-md text-sm border ml-auto', archived ? 'border-accent text-accent bg-accent-soft' : 'border-border text-muted hover:text-text')}>Arquivados</button>
+          <Select value={market} onChange={(e) => setMarket(e.target.value)} aria-label="Onde atua">
+            <option value="">Brasil e exterior</option>
+            {Object.entries(MARKET).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+          </Select>
+          <div className="ml-auto flex flex-wrap items-center gap-2">
+            <Chips value={stage} onChange={setStage} options={[
+              { value: 'ativo', label: 'Ativos', count: nStage('ativo') },
+              { value: 'candidato', label: 'Candidatos', count: nStage('candidato') },
+              { value: 'arquivado', label: 'Arquivados', count: nStage('arquivado') },
+            ]} />
+            <Chips value={mode} onChange={setModeP} options={[{ value: 'cards', label: '▦ Cards' }, { value: 'tabela', label: '☰ Comparar' }]} />
+          </div>
         </div>
       )}
 
@@ -122,21 +154,27 @@ export default function Competitors() {
       )}
       {list.data && all.length > 0 && shown.length === 0 && <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque os filtros." />}
 
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+      {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
+      {mode === 'tabela' && shown.length > 0 && <CompareTable slug={slug} rows={shown} ov={ov} />}
+      {mode === 'cards' && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {shown.map((c) => (
-          <CompetitorCard key={c.data.id} slug={slug} c={c} s={sum.get(c.data.id)} loadingSummary={summary.isLoading}
+          <CompetitorCard key={c.data.id} slug={slug} c={c} s={sum.get(c.data.id)} o={ov.get(c.data.id)} loadingSummary={summary.isLoading}
+            onAccept={() => accept(c)} onReject={() => { void actions.save(c.data.id, { ...c.data, status: 'arquivado' }, c.body, { okMessage: 'Candidato recusado (arquivado)' }); }}
             onFav={() => actions.toggleFavorite(c)} onWarm={() => prefetchCompetitor(qc, slug, c.data.id)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name} />
         ))}
-      </div>
+      </div>}
 
       <AddLinksModal slug={slug} open={adding} onClose={() => setAdding(false)} competitors={all} />
     </div>
   );
 }
 
-function CompetitorCard({ slug, c, s, onFav, onWarm, onPull, pulling, loadingSummary }: {
-  slug: string; c: Doc<Competitor>; s?: CompetitorSummary; onFav: () => void; onWarm: () => void; onPull: () => void; pulling: boolean; loadingSummary: boolean;
+function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loadingSummary, onAccept, onReject }: {
+  slug: string; c: Doc<Competitor>; s?: CompetitorSummary; o?: AnalysisOverview; onFav: () => void; onWarm: () => void; onPull: () => void; pulling: boolean; loadingSummary: boolean;
+  onAccept: () => void; onReject: () => void;
 }) {
+  const mkId = marketOf(c, o);
+  const mk = MARKET[mkId];
   const d = c.data;
   const profs = s?.profiles ?? [];
   const withAvatar = profs.find((p) => p.latest?.profile.avatarLocal) ?? profs.find((p) => p.latest?.profile.avatar);
@@ -158,8 +196,19 @@ function CompetitorCard({ slug, c, s, onFav, onWarm, onPull, pulling, loadingSum
         </div>
         <div className="flex flex-wrap items-center gap-1.5 mt-2">
           <Badge color={KIND_COLOR[d.kind]}>{KINDS[d.kind]}</Badge>
+          {mkId !== 'desconhecido' && <Badge color={mk.color}>{mk.label}</Badge>}
+          {o?.fromMonthly != null && <Badge color="#0f766e">a partir de {money(o.fromMonthly, o.currency)}</Badge>}
+          {o?.publicPrice === false && <Badge>preço oculto</Badge>}
+          {o?.request && <Badge color="#7c3aed">⏳ fila</Badge>}
           {d.tags.map((t) => <span key={t} className="text-xs text-muted">#{t}</span>)}
         </div>
+        {o?.oneLiner && <p className="mt-2 text-[13px] leading-snug text-text/85 line-clamp-2">{o.oneLiner}</p>}
+        {d.status === 'candidato' && (
+          <div className="mt-3 flex gap-2">
+            <Button className="!py-1 text-xs flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAccept(); }}>✓ Aceitar</Button>
+            <Button variant="ghost" className="!py-1 text-xs" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onReject(); }}>Recusar</Button>
+          </div>
+        )}
 
         <div className="mt-3 space-y-1.5 flex-1">
           {d.profiles.length === 0 && <div className="text-sm text-muted">Sem perfis. Abra para adicionar links.</div>}
@@ -221,6 +270,63 @@ function PullLog({ log, onClose, slug }: { log: { id: string; name: string; resu
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+const marketOf = (c: Doc<Competitor>, o?: AnalysisOverview) => (c.data.market ?? o?.market ?? 'desconhecido') as keyof typeof MARKET;
+
+/** Tabela comparativa: o essencial de cada análise lado a lado. Clique no cabeçalho ordena; no nome, abre o concorrente. */
+function CompareTable({ slug, rows, ov }: { slug: string; rows: Doc<Competitor>[]; ov: Map<string, AnalysisOverview> }) {
+  type O = AnalysisOverview | undefined;
+  type Col = { k: string; label: string; num?: boolean; v: (o: O, c: Doc<Competitor>) => string | number | undefined; render?: (o: O, c: Doc<Competitor>) => React.ReactNode };
+  const cols: Col[] = [
+    { k: 'market', label: 'Onde atua', v: (o, c) => marketOf(c, o), render: (o, c) => { const m = MARKET[marketOf(c, o)]; return <span style={{ color: m.color }}>{m.label}</span>; } },
+    { k: 'price', label: 'A partir de', num: true, v: (o) => o?.fromMonthly ?? undefined, render: (o) => (o?.fromMonthly != null ? <b>{money(o.fromMonthly, o.currency)}</b> : o?.publicPrice === false ? <span className="text-muted">oculto</span> : '—') },
+    { k: 'model', label: 'Modelo', v: (o) => o?.priceModel },
+    { k: 'plans', label: 'Planos', num: true, v: (o) => o?.plans },
+    { k: 'trial', label: 'Teste grátis', v: (o) => o?.trial ?? undefined, render: (o) => <span className="block max-w-44 truncate" title={o?.trial ?? ''}>{o?.trial ?? '—'}</span> },
+    { k: 'features', label: 'Features', num: true, v: (o) => o?.features },
+    { k: 'fw', label: 'Fortes / fracos', v: (o) => (o?.strengths != null ? `${o.strengths} / ${o.weaknesses}` : undefined) },
+    { k: 'sections', label: 'Seções da LP', num: true, v: (o) => o?.sections },
+    { k: 'ra', label: 'Reclame Aqui', num: true, v: (o) => o?.raScore ?? undefined, render: (o) => (o?.raScore != null ? o.raScore.toLocaleString('pt-BR') : o?.raFound === false ? <span className="text-muted">não achado</span> : '—') },
+    { k: 'store', label: 'Nota app', num: true, v: (o) => o?.storeRating ?? undefined },
+    { k: 'done', label: 'Módulos', num: true, v: (o) => Object.keys(o?.updated ?? {}).length, render: (o) => <span className="text-muted">{Object.keys(o?.updated ?? {}).length}/{FULL_ANALYSIS.length - 1}{o?.request ? ' ⏳' : ''}{o?.hasNotes ? ' ✎' : ''}</span> },
+  ];
+  const [sort, setSort] = useState<{ k: string; dir: 1 | -1 }>({ k: 'price', dir: 1 });
+  const col = cols.find((c) => c.k === sort.k);
+  const sorted = [...rows].sort((a, b) => {
+    if (!col) return a.data.name.localeCompare(b.data.name, 'pt-BR') * sort.dir;
+    const va = col.v(ov.get(a.data.id), a), vb = col.v(ov.get(b.data.id), b);
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    return (typeof va === 'number' && typeof vb === 'number' ? va - vb : String(va).localeCompare(String(vb), 'pt-BR')) * sort.dir;
+  });
+  const th = (k: string, label: string) => (
+    <th key={k} className="px-3 py-2 text-left font-medium text-xs text-muted whitespace-nowrap cursor-pointer select-none hover:text-text" onClick={() => setSort((s) => ({ k, dir: s.k === k ? (s.dir === 1 ? -1 : 1) : 1 }))}>
+      {label}{sort.k === k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
+    </th>
+  );
+  return (
+    <div className="bg-surface border border-border rounded-xl overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead className="border-b border-border bg-surface-2/50"><tr>{th('name', 'Concorrente')}{cols.map((c) => th(c.k, c.label))}</tr></thead>
+        <tbody>
+          {sorted.map((c) => {
+            const o = ov.get(c.data.id);
+            return (
+              <tr key={c.data.id} className="border-b border-border last:border-0 hover:bg-surface-2/40 align-top">
+                <td className="px-3 py-2 min-w-56 max-w-80">
+                  <Link to={`/p/${slug}/concorrentes/${c.data.id}`} className="font-medium hover:text-accent">{c.data.name}</Link>
+                  {o?.oneLiner && <div className="text-xs text-muted line-clamp-2">{o.oneLiner}</div>}
+                </td>
+                {cols.map((cl) => <td key={cl.k} className={cx('px-3 py-2 whitespace-nowrap', cl.num && 'tabular-nums')}>{cl.render ? cl.render(o, c) : (cl.v(o, c) ?? '—')}</td>)}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

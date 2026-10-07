@@ -1,0 +1,97 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:30:02Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.maisterapias.com.br/",
+    "hero": {
+      "headline": "Mais do que organizar. Sustentar o cuidado.",
+      "subheadline": "Reúna pacientes, agenda, registros, documentos e financeiro em uma plataforma criada para terapeutas e clínicas.",
+      "cta": "Começar meu teste grátis",
+      "visual": "mockup de agenda, prontuário e financeiro"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Mais do que organizar. Sustentar o cuidado.",
+        "summary": "15 dias grátis, sem cartão; lista de especialidades"
+      },
+      {
+        "type": "solucao",
+        "title": "Do atendimento individual à clínica",
+        "summary": "abas Para terapeutas / Para clínicas"
+      },
+      {
+        "type": "features",
+        "title": "Rotina mais conectada",
+        "summary": "8 cards: agenda, prontuário, IA, pacotes, financeiro, confirmações, documentos, equipes"
+      },
+      {
+        "type": "solucao",
+        "title": "IA com responsabilidade",
+        "summary": "demo de rascunho SOAP, 'você revisa e decide'"
+      },
+      {
+        "type": "beneficios",
+        "title": "Continuidade do cuidado",
+        "summary": "4 níveis de compartilhamento de registro"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Confiança construída na rotina",
+        "summary": "3 depoimentos + números da plataforma"
+      },
+      {
+        "type": "seguranca",
+        "title": "Princípios de confiança",
+        "summary": "privacidade, acessos, IA responsável, suporte humano"
+      },
+      {
+        "type": "fundador",
+        "title": "Quem constrói",
+        "summary": "4 pessoas, cofundadora fonoaudióloga"
+      },
+      {
+        "type": "precos",
+        "title": "Uma estrutura para cada forma de cuidar",
+        "summary": "3 planos com preço normal riscado"
+      },
+      {
+        "type": "faq",
+        "title": "Antes de começar",
+        "summary": "perguntas sobre planos e uso"
+      },
+      {
+        "type": "cta",
+        "title": "Agora ficou mais simples decidir?",
+        "summary": "repete o teste grátis"
+      }
+    ],
+    "ctas": [
+      "Começar meu teste grátis",
+      "Ver como funciona",
+      "Comparar os planos",
+      "Começar com o Terapeuta Premium"
+    ],
+    "socialProof": [
+      "19 mil+ pacientes acompanhados",
+      "240 mil+ atendimentos registrados",
+      "140 mil+ registros clínicos",
+      "depoimentos de clínicas (Espaço Casulo, Clínica Elemento)"
+    ],
+    "interesting": [
+      "preço promocional com 'preço normal' riscado",
+      "selo MAIS ESCOLHIDO no Premium",
+      "IA com demo SOAP e mensagem de responsabilidade humana",
+      "tabela de níveis de compartilhamento de registro",
+      "tripé 'sem cartão · 15 dias · cancele quando quiser' repetido"
+    ],
+    "tone": "institucional, acolhedor e sóbrio; fala em 'cuidado', pouco coloquial"
+  }
+}

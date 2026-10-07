@@ -1,0 +1,24 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:39:49Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://terapee.com.br"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Terapee",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
+  }
+}

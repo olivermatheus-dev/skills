@@ -1,0 +1,68 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:29:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/planos-e-precos/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 39.9,
+    "trial": "15 dias grátis, sem cartão",
+    "guarantee": "sem fidelidade, cancele quando quiser",
+    "plans": [
+      {
+        "name": "Terapeuta Starter",
+        "monthly": 39.9,
+        "users": "1 profissional",
+        "highlights": [
+          "agenda",
+          "prontuário",
+          "financeiro",
+          "portal do paciente e da família",
+          "preço normal R$ 59,90"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Terapeuta Premium",
+        "monthly": 59.9,
+        "users": "1 profissional",
+        "highlights": [
+          "tudo do Starter",
+          "IA",
+          "assinatura ICP-Brasil",
+          "WhatsApp 25 msgs/mês",
+          "relatórios",
+          "preço normal R$ 79,90"
+        ],
+        "recommended": true
+      },
+      {
+        "name": "Clínicas",
+        "monthly": 159.9,
+        "users": "profissionais ilimitados",
+        "highlights": [
+          "perfis de acesso",
+          "secretária",
+          "dashboard",
+          "relatórios por profissional"
+        ],
+        "recommended": false
+      }
+    ],
+    "extras": [
+      "Créditos WhatsApp: 50 msgs R$ 5,90; 100 R$ 9,90; 250 R$ 24; 500 R$ 47",
+      "Assinatura digital exige certificado ICP-Brasil A1 próprio"
+    ],
+    "notes": "Só cobrança mensal (sem plano anual). Starter e Premium aparecem com 'preço normal' riscado (59,90 e 79,90); não há data da promoção. Plano gratuito legado só para quem entrou até jul/2025."
+  }
+}

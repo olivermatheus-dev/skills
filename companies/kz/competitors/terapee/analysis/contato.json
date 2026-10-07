@@ -1,0 +1,25 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:31:34Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "emails": [
+      "suporte@terapee.com.br"
+    ],
+    "phones": [
+      "(21) 2342-2477"
+    ],
+    "whatsapp": [
+      "+552123422477"
+    ],
+    "cnpj": "54.321.098/0001-00",
+    "socials": [],
+    "support": "WhatsApp e e-mail; horário não informado"
+  }
+}

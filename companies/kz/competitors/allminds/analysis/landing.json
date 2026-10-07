@@ -1,0 +1,96 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:29:20Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://allminds.app/",
+    "hero": {
+      "headline": "Mais que uma plataforma para psicólogos e psicanalistas",
+      "subheadline": "Direção e apoio humano para transformar o consultório em um negócio previsível",
+      "cta": "Experimente por 15 dias"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Mais que uma plataforma",
+        "summary": "promessa de negócio previsível e CTA de teste"
+      },
+      {
+        "type": "solucao",
+        "title": "Tecnologia que conecta",
+        "summary": "três pilares: Gestão, Marketing, Conhecimento"
+      },
+      {
+        "type": "features",
+        "title": "Ecossistema completo",
+        "summary": "comunidades, agenda, site, anamnese, prontuário, vídeo, finanças, formação"
+      },
+      {
+        "type": "problema",
+        "title": "Chega de confusão",
+        "summary": "objeção de quem já testou outros sistemas"
+      },
+      {
+        "type": "beneficios",
+        "title": "Diferenciais e bônus",
+        "summary": "pacotes, extras e benefícios"
+      },
+      {
+        "type": "outro",
+        "title": "Nosso grande diferencial",
+        "summary": "leads sem comissão por sessão"
+      },
+      {
+        "type": "como-funciona",
+        "title": "E se eu travar na implantação?",
+        "summary": "gerente de contas e treinamentos"
+      },
+      {
+        "type": "beneficios",
+        "title": "Por que assinar",
+        "summary": "tudo em um lugar, economia"
+      },
+      {
+        "type": "numeros",
+        "title": "Reduza até 50% do tempo administrativo",
+        "summary": "com ressalva de referência de mercado"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas frequentes",
+        "summary": "uso, pagamento, segurança, suporte"
+      },
+      {
+        "type": "blog",
+        "title": "Últimas publicações",
+        "summary": "artigos de gestão de consultório"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "CNPJ, links, redes"
+      }
+    ],
+    "ctas": [
+      "Experimente por 15 dias",
+      "Acesse grátis"
+    ],
+    "socialProof": [
+      "depoimento de quem já testou outras plataformas",
+      "até 50% menos tempo administrativo (referência de mercado)"
+    ],
+    "interesting": [
+      "Preço ancorado: menos de R$ 2 por dia",
+      "Sem comissão por sessão como contraste a marketplaces",
+      "Objeção de implantação respondida com gerente dedicado",
+      "Ressalva honesta nos números"
+    ],
+    "tone": "acolhedor mas empresarial; repete 'plataforma para psicólogos' por SEO"
+  }
+}

@@ -72,4 +72,4 @@ export interface AnalysisOverview {
   hasNotes: boolean;
 }
 /** resultado do módulo `site` (script) */
-export interface SiteRunResult { id: string; ok: boolean; url?: string; pages: number; sitemap: number; contacts: number; errors: string[]; ms: number }
+export interface SiteRunResult { id: string; ok: boolean; url?: string; pages: number; sitemap: number; contacts: number; ra?: string; errors: string[]; ms: number }

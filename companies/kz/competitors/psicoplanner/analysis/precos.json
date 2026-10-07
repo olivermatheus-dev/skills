@@ -1,0 +1,49 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:42:08Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 59,
+    "trial": "7 dias grátis, sem cartão",
+    "plans": [
+      {
+        "name": "Individual",
+        "monthly": 59,
+        "yearlyMonthly": 49.17,
+        "yearlyTotal": 590,
+        "users": "1 acesso",
+        "highlights": [
+          "WhatsApp",
+          "sala de vídeo",
+          "agendamento online",
+          "prontuário e anamnese"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Plus",
+        "monthly": 79,
+        "yearlyMonthly": 65.83,
+        "yearlyTotal": 790,
+        "highlights": [
+          "transcrição com IA",
+          "demais itens do Individual"
+        ],
+        "recommended": true
+      }
+    ],
+    "extras": [
+      "aba Clínicas existe, sem preço visível"
+    ],
+    "notes": "Estado padrão da home: Mensal (R$ 59 e R$ 79 \"mensais\"). Anual: R$ 590 e R$ 790 por ano, pagamento único (equivale a ~R$ 49,17 e ~R$ 65,83/mês; 2 meses grátis). Contexto antigo citava R$ 99, não confirmado."
+  }
+}

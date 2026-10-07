@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-07T19:29:05Z",
+  "platform": "site",
+  "profileUrl": "https://psicomanager.com.br",
+  "source": "html",
+  "profile": {
+    "name": "PsicoManager",
+    "handle": "psicomanager.com.br",
+    "bio": "Plataforma completa para psicólogos e clínicas: agenda, prontuário psicológico, financeiro, IA e segurança LGPD em um só sistema.",
+    "avatar": "https://psicomanager.com.br/favicon.ico",
+    "avatarLocal": "media/site-psicomanager-com-br/avatar-1c4bd10d.ico",
+    "banner": "https://storage.googleapis.com/gpt-engineer-file-uploads/Hw42PFiM4uN2yGza1deRqiNIs7o2/social-images/social-1784566271284-Simbolo_PsicoManager_04.webp",
+    "bannerLocal": "media/site-psicomanager-com-br/banner-9cb53b1f.webp",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

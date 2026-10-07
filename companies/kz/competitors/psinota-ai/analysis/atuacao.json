@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:31:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/sobre"
+    },
+    {
+      "url": "https://psinotaai.com/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, conformidade CFP 09/2024, CRP, CID-11, LGPD e IRPF; diz ser a primeira solução brasileira nativa"
+  }
+}

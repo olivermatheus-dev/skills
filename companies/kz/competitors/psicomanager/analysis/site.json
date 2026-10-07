@@ -1,0 +1,169 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:38:41Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/",
+      "title": "Sistema para psicólogos | PsicoManager"
+    },
+    {
+      "url": "https://psicomanager.com.br/planos",
+      "title": "Planos e preços | PsicoManager"
+    },
+    {
+      "url": "https://psicomanager.com.br/ecossistema",
+      "title": "Ecossistema de recursos para psicólogos | PsicoManager"
+    },
+    {
+      "url": "https://psicomanager.com.br/quem-somos",
+      "title": "Quem somos | PsicoManager"
+    },
+    {
+      "url": "https://psicomanager.com.br/suporte",
+      "title": "Suporte humano para psicólogos | PsicoManager"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://psicomanager.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://psicomanager.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema para psicólogos | PsicoManager",
+        "chars": 6227
+      },
+      {
+        "url": "https://psicomanager.com.br/planos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos e preços | PsicoManager",
+        "chars": 4525
+      },
+      {
+        "url": "https://psicomanager.com.br/ecossistema",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Ecossistema de recursos para psicólogos | PsicoManager",
+        "chars": 2781
+      },
+      {
+        "url": "https://psicomanager.com.br/quem-somos",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Quem somos | PsicoManager",
+        "chars": 3301
+      },
+      {
+        "url": "https://psicomanager.com.br/suporte",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Suporte humano para psicólogos | PsicoManager",
+        "chars": 2784
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 15,
+      "groups": [
+        {
+          "name": "/individual",
+          "count": 3,
+          "sample": [
+            "/individual",
+            "/individual/agenda-inteligente",
+            "/individual/prontuario"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/clinica",
+          "count": 1,
+          "sample": [
+            "/clinica"
+          ]
+        },
+        {
+          "name": "/psicologo-empreendedor",
+          "count": 1,
+          "sample": [
+            "/psicologo-empreendedor"
+          ]
+        },
+        {
+          "name": "/seguranca",
+          "count": 1,
+          "sample": [
+            "/seguranca"
+          ]
+        },
+        {
+          "name": "/ecossistema",
+          "count": 1,
+          "sample": [
+            "/ecossistema"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos"
+          ]
+        },
+        {
+          "name": "/lgpd",
+          "count": 1,
+          "sample": [
+            "/lgpd"
+          ]
+        },
+        {
+          "name": "/suporte",
+          "count": 1,
+          "sample": [
+            "/suporte"
+          ]
+        },
+        {
+          "name": "/quem-somos",
+          "count": 1,
+          "sample": [
+            "/quem-somos"
+          ]
+        },
+        {
+          "name": "/trabalhe-conosco",
+          "count": 1,
+          "sample": [
+            "/trabalhe-conosco"
+          ]
+        },
+        {
+          "name": "/afiliados",
+          "count": 1,
+          "sample": [
+            "/afiliados"
+          ]
+        },
+        {
+          "name": "/psi-pra-psi",
+          "count": 1,
+          "sample": [
+            "/psi-pra-psi"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

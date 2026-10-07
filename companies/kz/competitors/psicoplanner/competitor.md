@@ -3,6 +3,7 @@ id: psicoplanner
 name: Psicoplanner
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

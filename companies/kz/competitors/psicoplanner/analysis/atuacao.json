@@ -1,0 +1,24 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:30:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, CNPJ brasileiro e WhatsApp com DDD 21 (RJ); cidade não confirmada"
+  }
+}

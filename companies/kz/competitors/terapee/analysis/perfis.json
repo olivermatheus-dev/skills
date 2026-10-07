@@ -1,0 +1,53 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:16:36Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://terapee.com.br"
+    },
+    {
+      "url": "https://www.youtube.com/@terapee"
+    },
+    {
+      "url": "https://www.instagram.com/terapeeapp/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://terapee.com.br",
+        "note": "site oficial com preços e WhatsApp (21) 2342-2477"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@terapee",
+        "handle": "terapee",
+        "note": "bio cita terapee.com.br e @terapeeapp"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/terapeeapp/",
+        "handle": "terapeeapp",
+        "note": "citado na bio do YouTube oficial; nome 'Terapee • Sistema para Clínicas de Terapia'"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/terapeeapp",
+        "handle": "terapeeapp",
+        "note": "página 'Terapee', plataforma de gestão para terapias multidisciplinares"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/terapeeapp",
+        "handle": "terapeeapp",
+        "note": "página 'Terapee', gestão para clínicas de psicologia, fono e TO"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

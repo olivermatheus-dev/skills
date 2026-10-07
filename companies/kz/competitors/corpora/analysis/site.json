@@ -1,0 +1,296 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:36:05Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/",
+      "title": "Software para psicólogas com agenda, prontuário e cobrança"
+    },
+    {
+      "url": "https://usecorpora.com.br/plano-gratuito/",
+      "title": "Plano gratuito para psicólogas | Corpora"
+    },
+    {
+      "url": "https://usecorpora.com.br/funcionalidades-administrativas/",
+      "title": "Funcionalidades administrativas para psicólogos | Corpora"
+    },
+    {
+      "url": "https://usecorpora.com.br/sobre/",
+      "title": "Sobre a Corpora | Corpora"
+    },
+    {
+      "url": "https://usecorpora.com.br/faq/",
+      "title": "Perguntas frequentes (FAQ) | Corpora"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://usecorpora.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://usecorpora.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Software para psicólogas com agenda, prontuário e cobrança",
+        "chars": 8510
+      },
+      {
+        "url": "https://usecorpora.com.br/plano-gratuito/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Plano gratuito para psicólogas | Corpora",
+        "chars": 13849
+      },
+      {
+        "url": "https://usecorpora.com.br/funcionalidades-administrativas/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades administrativas para psicólogos | Corpora",
+        "chars": 6428
+      },
+      {
+        "url": "https://usecorpora.com.br/sobre/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre a Corpora | Corpora",
+        "chars": 8124
+      },
+      {
+        "url": "https://usecorpora.com.br/faq/",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Perguntas frequentes (FAQ) | Corpora",
+        "chars": 2979
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 44,
+      "groups": [
+        {
+          "name": "/faq",
+          "count": 14,
+          "sample": [
+            "/faq",
+            "/faq/comum",
+            "/faq/agenda",
+            "/faq/prontuario"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/anexo-de-tratamento-de-dados-pessoais-dpa",
+          "count": 1,
+          "sample": [
+            "/anexo-de-tratamento-de-dados-pessoais-dpa"
+          ]
+        },
+        {
+          "name": "/acordo-de-processamento-de-dados",
+          "count": 1,
+          "sample": [
+            "/acordo-de-processamento-de-dados"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos"
+          ]
+        },
+        {
+          "name": "/plano-gratuito",
+          "count": 1,
+          "sample": [
+            "/plano-gratuito"
+          ]
+        },
+        {
+          "name": "/plano-profissional",
+          "count": 1,
+          "sample": [
+            "/plano-profissional"
+          ]
+        },
+        {
+          "name": "/agenda-psicologos",
+          "count": 1,
+          "sample": [
+            "/agenda-psicologos"
+          ]
+        },
+        {
+          "name": "/acompanhamento-pacientes",
+          "count": 1,
+          "sample": [
+            "/acompanhamento-pacientes"
+          ]
+        },
+        {
+          "name": "/cobranca-automatica",
+          "count": 1,
+          "sample": [
+            "/cobranca-automatica"
+          ]
+        },
+        {
+          "name": "/cobranca-automatica-psicologos",
+          "count": 1,
+          "sample": [
+            "/cobranca-automatica-psicologos"
+          ]
+        },
+        {
+          "name": "/embaixadores",
+          "count": 1,
+          "sample": [
+            "/embaixadores"
+          ]
+        },
+        {
+          "name": "/funcionalidades-administrativas",
+          "count": 1,
+          "sample": [
+            "/funcionalidades-administrativas"
+          ]
+        },
+        {
+          "name": "/funcionalidades-clinicas",
+          "count": 1,
+          "sample": [
+            "/funcionalidades-clinicas"
+          ]
+        },
+        {
+          "name": "/funcionalidades-financeiras",
+          "count": 1,
+          "sample": [
+            "/funcionalidades-financeiras"
+          ]
+        },
+        {
+          "name": "/gestao-financeira-psicologos",
+          "count": 1,
+          "sample": [
+            "/gestao-financeira-psicologos"
+          ]
+        },
+        {
+          "name": "/ia-para-psicologos",
+          "count": 1,
+          "sample": [
+            "/ia-para-psicologos"
+          ]
+        },
+        {
+          "name": "/ia-abordagens-terapeuticas",
+          "count": 1,
+          "sample": [
+            "/ia-abordagens-terapeuticas"
+          ]
+        },
+        {
+          "name": "/instrumentos-clinicos-psicologos",
+          "count": 1,
+          "sample": [
+            "/instrumentos-clinicos-psicologos"
+          ]
+        },
+        {
+          "name": "/modelos-documentos-psicologos",
+          "count": 1,
+          "sample": [
+            "/modelos-documentos-psicologos"
+          ]
+        },
+        {
+          "name": "/notificacoes-whatsapp-psicologos",
+          "count": 1,
+          "sample": [
+            "/notificacoes-whatsapp-psicologos"
+          ]
+        },
+        {
+          "name": "/parceiros",
+          "count": 1,
+          "sample": [
+            "/parceiros"
+          ]
+        },
+        {
+          "name": "/prontuario-psicologico",
+          "count": 1,
+          "sample": [
+            "/prontuario-psicologico"
+          ]
+        },
+        {
+          "name": "/projetos",
+          "count": 1,
+          "sample": [
+            "/projetos"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade"
+          ]
+        },
+        {
+          "name": "/receita-saude-psicologos",
+          "count": 1,
+          "sample": [
+            "/receita-saude-psicologos"
+          ]
+        },
+        {
+          "name": "/sala-virtual-psicologos",
+          "count": 1,
+          "sample": [
+            "/sala-virtual-psicologos"
+          ]
+        },
+        {
+          "name": "/seguranca",
+          "count": 1,
+          "sample": [
+            "/seguranca"
+          ]
+        },
+        {
+          "name": "/site-agendamento-psicologos",
+          "count": 1,
+          "sample": [
+            "/site-agendamento-psicologos"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/termos-de-uso",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

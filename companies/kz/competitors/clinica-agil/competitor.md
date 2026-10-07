@@ -3,6 +3,7 @@ id: clinica-agil
 name: Clínica Ágil
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

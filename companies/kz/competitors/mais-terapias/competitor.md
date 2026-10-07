@@ -3,6 +3,7 @@ id: mais-terapias
 name: Mais Terapias
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

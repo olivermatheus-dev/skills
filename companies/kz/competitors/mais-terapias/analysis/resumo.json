@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:29:50Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/quem-somos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Gestão clínica multidisciplinar (reabilitação e psicologia) para terapeutas e clínicas",
+    "text": "Plataforma de prontuário, agenda, financeiro e documentos para terapeutas e clínicas multiprofissionais (fisio, fono, TO, psicologia, psicopedagogia). Destaca IA que transforma áudio em rascunho de evolução SOAP e compartilhamento de registros com equipe, paciente e família. Nasceu de uma fonoaudióloga cofundadora; era gratuita até jul/2025. Teste de 15 dias sem cartão.",
+    "audience": "terapeutas solo e clínicas multiprofissionais, com forte presença de reabilitação infantil (fono, TO, psicopedagogia)",
+    "positioning": "Mais que um registro eletrônico, somos uma rede de cuidado",
+    "size": "19 mil+ pacientes, 240 mil+ atendimentos (declarado, ago/2026)"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:34:32Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://allminds.app/",
+      "title": "Plataforma para psicólogos | Allminds"
+    },
+    {
+      "url": "https://allminds.app/planos/",
+      "title": "Planos Allminds | Gestão para psicólogos e clínicas"
+    },
+    {
+      "url": "https://allminds.app/funcionalidades/",
+      "title": "Funcionalidades | Allminds"
+    },
+    {
+      "url": "https://allminds.app/contato/",
+      "title": "Contato | Allminds"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://allminds.app/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://allminds.app/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Plataforma para psicólogos | Allminds",
+        "chars": 20325
+      },
+      {
+        "url": "https://allminds.app/planos/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos Allminds | Gestão para psicólogos e clínicas",
+        "chars": 4184
+      },
+      {
+        "url": "https://allminds.app/funcionalidades/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades | Allminds",
+        "chars": 1752
+      },
+      {
+        "url": "https://allminds.app/contato/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contato | Allminds",
+        "chars": 1580
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 48,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 30,
+          "sample": [
+            "/blog/como-fidelizar-pacientes-na-psicologia/",
+            "/blog/marketing-para-psicologos/",
+            "/blog/instagram-para-psicologos/",
+            "/blog/autocuidado-para-psicologos/"
+          ]
+        },
+        {
+          "name": "/funcionalidade",
+          "count": 9,
+          "sample": [
+            "/funcionalidade/sala-virtual-para-psicologos/",
+            "/funcionalidade/prontuario-psicologico/",
+            "/funcionalidade/portal-para-psicologos-atenderem-online/",
+            "/funcionalidade/gestao-financeira-para-psicologos/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos/"
+          ]
+        },
+        {
+          "name": "/tecnologia-que-se-adapta-a-sua-clinica",
+          "count": 1,
+          "sample": [
+            "/tecnologia-que-se-adapta-a-sua-clinica/"
+          ]
+        },
+        {
+          "name": "/politicas-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politicas-de-privacidade/"
+          ]
+        },
+        {
+          "name": "/mapa-do-site",
+          "count": 1,
+          "sample": [
+            "/mapa-do-site/"
+          ]
+        },
+        {
+          "name": "/faca-parte-do-clube-allminds",
+          "count": 1,
+          "sample": [
+            "/faca-parte-do-clube-allminds/"
+          ]
+        },
+        {
+          "name": "/contato",
+          "count": 1,
+          "sample": [
+            "/contato/"
+          ]
+        },
+        {
+          "name": "/automatize-sua-gestao-com-a-allminds",
+          "count": 1,
+          "sample": [
+            "/automatize-sua-gestao-com-a-allminds/"
+          ]
+        },
+        {
+          "name": "/funcionalidades",
+          "count": 1,
+          "sample": [
+            "/funcionalidades/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

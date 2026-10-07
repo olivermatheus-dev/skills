@@ -1,0 +1,180 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:30:16Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/planos"
+    },
+    {
+      "url": "https://psicomanager.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda inteligente e de salas",
+            "highlight": true
+          },
+          {
+            "name": "Confirmação de presença",
+            "highlight": false
+          },
+          {
+            "name": "Agendamento online pelo paciente",
+            "highlight": false
+          },
+          {
+            "name": "Integração Google e iCalendar",
+            "highlight": false
+          },
+          {
+            "name": "Fila de espera",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Prontuário eletrônico",
+            "highlight": true
+          },
+          {
+            "name": "Formulário por abordagem",
+            "highlight": false
+          },
+          {
+            "name": "Anamneses com modelos prontos",
+            "highlight": false
+          },
+          {
+            "name": "Documentos com assinatura digital",
+            "highlight": false
+          },
+          {
+            "name": "Human Track",
+            "detail": "acompanhamento comportamental",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobrança por Pix, boleto e cartão",
+            "highlight": false
+          },
+          {
+            "name": "NFS-e e Receita Saúde",
+            "highlight": true
+          },
+          {
+            "name": "Psicobank",
+            "detail": "extrato e saque",
+            "highlight": false
+          },
+          {
+            "name": "Repasses e comissões",
+            "highlight": false
+          },
+          {
+            "name": "Gestão de convênios",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "App do paciente",
+            "detail": "agendamento, pagamento, tarefas",
+            "highlight": true
+          },
+          {
+            "name": "Diário das emoções",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Transcrição e resumo de sessões",
+            "highlight": true
+          },
+          {
+            "name": "Insights por paciente",
+            "highlight": false
+          },
+          {
+            "name": "Digitalização de documentos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Notificações por WhatsApp, SMS, e-mail e push",
+            "detail": "créditos de WhatsApp limitados no plano básico",
+            "highlight": false
+          },
+          {
+            "name": "Mensagem de aniversário",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Sala virtual com recursos terapêuticos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Secretária, atendentes e colaboradores",
+            "highlight": false
+          },
+          {
+            "name": "Gestão de clínica multiprofissional",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Criptografia AES-256, AWS multi-zona, 99,98% uptime",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "maior base declarada (+40 mil)",
+      "Psicobank e Receita Saúde integrados",
+      "app do paciente com diário das emoções"
+    ],
+    "missing": [
+      "perfil público do terapeuta",
+      "foco em terapeutas não psicólogos"
+    ]
+  }
+}

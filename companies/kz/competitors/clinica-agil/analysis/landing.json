@@ -1,0 +1,100 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:29:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.clinicaagil.com.br/site/",
+    "hero": {
+      "headline": "Gestão inteligente para clínicas que querem crescer",
+      "subheadline": "Agenda, prontuário, financeiro, indicadores e IA em uma única plataforma para clínicas multidisciplinares",
+      "cta": "Quero conhecer o Clínica Ágil"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Gestão inteligente para clínicas",
+        "summary": "promessa de controle, automação e IA; chips Módulo ABA e IA nativa"
+      },
+      {
+        "type": "numeros",
+        "title": "Tecnologia na rotina de milhares de clínicas",
+        "summary": "+10 anos, +45 mil profissionais, +4 mil clínicas, 27 estados"
+      },
+      {
+        "type": "problema",
+        "title": "Principais desafios das clínicas",
+        "summary": "agenda ociosa, processos manuais, financeiro, falta de indicadores"
+      },
+      {
+        "type": "solucao",
+        "title": "Software de gestão para clínicas",
+        "summary": "cards: indicadores, lembretes, IA, ABA, TISS, experiência do paciente"
+      },
+      {
+        "type": "features",
+        "title": "Conheça o sistema por dentro",
+        "summary": "abas Agenda, Prontuário, Financeiro, Relatórios, Faturamento, Convênios"
+      },
+      {
+        "type": "beneficios",
+        "title": "Por que escolher",
+        "summary": "bloco com CTA de demonstração"
+      },
+      {
+        "type": "outro",
+        "title": "Especialidades da saúde",
+        "summary": "um sistema para várias áreas na mesma clínica"
+      },
+      {
+        "type": "cta",
+        "title": "Sua clínica merece gestão mais inteligente",
+        "summary": "CTA final"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Resultados percebidos",
+        "summary": "bloco de resultados (conteúdo não extraído)"
+      },
+      {
+        "type": "outro",
+        "title": "Conheça na prática",
+        "summary": "demonstração"
+      },
+      {
+        "type": "blog",
+        "title": "Conteúdo para impulsionar a gestão",
+        "summary": "blog"
+      },
+      {
+        "type": "rodape",
+        "title": "Informações",
+        "summary": "contato, soluções, suporte, login, app"
+      }
+    ],
+    "ctas": [
+      "Solicitar Demonstração",
+      "Quero conhecer o Clínica Ágil",
+      "Fazer login"
+    ],
+    "socialProof": [
+      "+10 anos",
+      "+45 mil profissionais",
+      "+4 mil clínicas",
+      "27 estados",
+      "-38% faltas em média (declarado)"
+    ],
+    "interesting": [
+      "CTA único de demonstração repetido em todo bloco",
+      "Desafios nomeados antes da solução",
+      "IA como secretária 24h",
+      "Número de redução de faltas"
+    ],
+    "tone": "corporativo e técnico, foco em operação e resultado da clínica"
+  }
+}

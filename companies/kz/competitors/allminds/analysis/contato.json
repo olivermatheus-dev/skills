@@ -1,0 +1,42 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:29:02Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/contato/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "emails": [
+      "sac@allminds.app"
+    ],
+    "phones": [
+      "+55 11 96376-3889"
+    ],
+    "whatsapp": [
+      "+5511963763889"
+    ],
+    "cnpj": "44.500.539/0001-85",
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/allminds.app.ofc"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/allminds.app/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/allmindsapp/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@allmindsapp"
+      }
+    ],
+    "support": "seg-sex 9h-17h; gerente de contas dedicado na implantação"
+  }
+}

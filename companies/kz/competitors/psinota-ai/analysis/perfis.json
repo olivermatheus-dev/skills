@@ -1,0 +1,46 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:16:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/"
+    },
+    {
+      "url": "https://www.youtube.com/@psinotaai"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://psinotaai.com",
+        "note": "site oficial (domínio próprio, blog e páginas de produto)"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/psinotaai/",
+        "handle": "psinotaai",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/psinotaai",
+        "handle": "psinotaai",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@psinotaai",
+        "handle": "psinotaai",
+        "note": "canal 'PsiNota AI', bio 'Sistema de IA para psicólogos' (não linkado no site; confirmado por nome e bio)"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "facebook",
+      "x"
+    ]
+  }
+}

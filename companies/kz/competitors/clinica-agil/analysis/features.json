@@ -1,0 +1,133 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:29:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda por profissional, sala ou especialidade",
+            "highlight": false
+          },
+          {
+            "name": "Agendamento online pelo paciente",
+            "highlight": false
+          },
+          {
+            "name": "Confirmação por WhatsApp, SMS e e-mail",
+            "detail": "declara reduzir faltas em 38% em média",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuário eletrônico online",
+            "detail": "evoluções, avaliações, declarações, prescrições",
+            "highlight": false
+          },
+          {
+            "name": "Transcrição do atendimento por IA",
+            "detail": "profissional revisa e aprova",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Contas a pagar/receber, fluxo de caixa, DRE gerencial",
+            "highlight": false
+          },
+          {
+            "name": "Repasses e comissões a partir da agenda",
+            "highlight": false
+          },
+          {
+            "name": "Emissão de NFS-e",
+            "highlight": false
+          },
+          {
+            "name": "Faturamento de convênios TISS com controle de glosas",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "WhatsApp integrado para a recepção",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Secretária Inteligente 24h",
+            "detail": "agenda, remarca e desmarca",
+            "highlight": true
+          },
+          {
+            "name": "Agentes de IA em áreas da clínica",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Indicadores e relatórios gerenciais",
+            "detail": "faltas, produção, origem das receitas",
+            "highlight": false
+          },
+          {
+            "name": "Módulo ABA para TEA",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "App para baixar",
+            "highlight": false
+          },
+          {
+            "name": "Estoque",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "IA nativa (secretária 24h e transcrição)",
+      "TISS e convênios",
+      "Módulo ABA",
+      "Vários perfis de especialidade na mesma clínica"
+    ],
+    "missing": [
+      "teleatendimento/vídeo nativo (não citado)",
+      "portal do paciente (não citado)",
+      "plano para profissional solo"
+    ]
+  }
+}

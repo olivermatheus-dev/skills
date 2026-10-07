@@ -81,6 +81,7 @@ on('PUT', '/api/projects/:slug/competitors/:id/analysis/notes/:key', (p, b) => S
 on('PUT', '/api/projects/:slug/competitors/:id/analysis/request', (p, b) => S.requestAnalysis(p.slug, p.id, b));
 on('DELETE', '/api/projects/:slug/competitors/:id/analysis/request', (p) => S.clearAnalysisRequest(p.slug, p.id));
 on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => (await import('../../tools/intel/site')).analyzeSite(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/analysis/ra', async (p) => (await import('../../tools/intel/reclameaqui')).runReclameAqui(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-overview', async (p) => (await import('../../tools/intel/summary')).analysisOverview(p.slug));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 

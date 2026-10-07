@@ -1,0 +1,55 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:29:55Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://gestorpsi.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 34.5,
+    "trial": "14 dias grátis, sem informar cobrança",
+    "plans": [
+      {
+        "name": "Individual",
+        "monthly": 34.5,
+        "users": "1 profissional",
+        "highlights": [
+          "agendas e clientes ilimitados",
+          "cadastro de secretárias",
+          "notificação por e-mail",
+          "controle de faturamento",
+          "suporte por e-mail"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Até 4 profissionais",
+        "monthly": 59.5,
+        "users": "até 4 profissionais",
+        "highlights": [
+          "mesmos recursos do Individual"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Até 50 profissionais",
+        "monthly": 124.5,
+        "users": "até 50 profissionais",
+        "highlights": [
+          "mesmos recursos do Individual"
+        ],
+        "recommended": false
+      }
+    ],
+    "extras": [
+      "Estabelecimentos de ensino: condições especiais sob consulta"
+    ],
+    "notes": "Preços da home, com 'condições exclusivas para contratação e pagamento eletrônico'; não há tabela anual."
+  }
+}

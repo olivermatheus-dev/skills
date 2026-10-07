@@ -1,0 +1,45 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:29:43Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/fale-conosco/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "fale@maisterapias.com.br"
+    ],
+    "phones": [
+      "(48) 99192-2158"
+    ],
+    "whatsapp": [
+      "https://wa.me/message/OQUWPDK7MXCPG1"
+    ],
+    "cnpj": "57.622.658/0001-52",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/mais.terapias/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/maisterapias/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@maisterapias"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/mais.terapias/"
+      }
+    ],
+    "support": "chat com assistente 24h; WhatsApp e e-mail com resposta de pessoa em até 24 h úteis (horário comercial)"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:35:35Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/",
+      "title": "Software para Clínicas Multidisciplinares | Clínica Ágil"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/",
+      "title": "Funcionalidades do Clínica Ágil: agenda, prontuário, financeiro e TISS"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/",
+      "title": "Sobre - Sistema Clínica Ágil"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/mensagens-reduzir-faltas-clinica/",
+      "title": "Mensagens para reduzir faltas na clínica e confirmar agendas - Sistema Clínica Ágil"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.clinicaagil.com.br/site/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.clinicaagil.com.br/site/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Software para Clínicas Multidisciplinares | Clínica Ágil",
+        "chars": 4002
+      },
+      {
+        "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades do Clínica Ágil: agenda, prontuário, financeiro e TISS",
+        "chars": 5232
+      },
+      {
+        "url": "https://www.clinicaagil.com.br/site/sobre/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre - Sistema Clínica Ágil",
+        "chars": 3544
+      },
+      {
+        "url": "https://www.clinicaagil.com.br/site/mensagens-reduzir-faltas-clinica/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Mensagens para reduzir faltas na clínica e confirmar agendas - Sistema Clínica Ágil",
+        "chars": 14567
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 612,
+      "groups": [
+        {
+          "name": "/site",
+          "count": 612,
+          "sample": [
+            "/site/blog/",
+            "/site/mensagens-reduzir-faltas-clinica/",
+            "/site/frases-dia-nacional-da-saude/",
+            "/site/digitalizacao-clinica-multiprofissional/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

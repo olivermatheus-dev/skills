@@ -1,0 +1,36 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:31:16Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/contato"
+    },
+    {
+      "url": "https://psinotaai.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "suporte@psinotaai.com",
+      "parcerias@psinotaai.com",
+      "imprensa@psinotaai.com"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+5519998655986"
+    ],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/psinotaai/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/psinotaai"
+      }
+    ],
+    "support": "WhatsApp com resposta em até 2h e e-mail em até 1 dia útil, seg-sex 9h-18h (Brasília); Central de Ajuda"
+  }
+}

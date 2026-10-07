@@ -1,6 +1,6 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:15:02Z",
+  "updatedAt": "2026-10-07T19:36:09Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
@@ -8,13 +8,23 @@
     },
     {
       "url": "https://www.falandodegestao.com.br/332078-corpora-disponibiliza-plataforma-de-gestao-para-psicologas/"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/corpora/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Corpora",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "baixa",
+  "confidence": "alta",
   "data": {
     "reclameAqui": {
       "url": "https://www.reclameaqui.com.br/empresa/corpora/",
-      "found": false,
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 0,
       "topComplaints": []
     },
     "stores": [],
@@ -30,6 +40,6 @@
         "summary": "Citada entre os 8 sistemas mais usados; elogiada em teleatendimento e relatórios."
       }
     ],
-    "summary": "Nenhuma página da Corpora achada no Reclame Aqui pela busca (a página direta retorna 403, então não dá para descartar). Sem app nas lojas: site diz que não precisa de aplicativo."
+    "summary": "Reclame Aqui: Sem índice, 0 reclamações."
   }
 }

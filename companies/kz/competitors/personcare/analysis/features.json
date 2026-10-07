@@ -1,0 +1,132 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:30:14Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda dia/semana/mês com lembretes",
+            "highlight": false
+          },
+          {
+            "name": "Link de agendamento para o paciente",
+            "highlight": false
+          },
+          {
+            "name": "Integração com Google Calendar",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuários digitais e anamnese",
+            "highlight": false
+          },
+          {
+            "name": "Escalas de avaliação psicológica (testes)",
+            "highlight": true
+          },
+          {
+            "name": "Processo clínico com metas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Transcrição de áudio da sessão para o prontuário",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Faturamento, receitas, despesas e relatórios",
+            "highlight": false
+          },
+          {
+            "name": "NFS-e e recibo Receita Saúde",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembretes por WhatsApp ilimitados",
+            "detail": "sem recarga",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Videochamada / telepsicologia",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "App do paciente com consultas, faturamento, humor e hábitos",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Gestão de projetos e tarefas para clínicas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Apps iOS e Android para profissional",
+            "highlight": false
+          },
+          {
+            "name": "Módulo de comunidade para psicólogos",
+            "detail": "em desenvolvimento",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "apps nativos para profissional e paciente",
+      "WhatsApp ilimitado incluso",
+      "NFS-e/Receita Saúde",
+      "escalas de avaliação"
+    ],
+    "missing": [
+      "notas estruturadas por abordagem (não mostrado)",
+      "perfil público do terapeuta (não mostrado)"
+    ]
+  }
+}

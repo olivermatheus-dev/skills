@@ -1,0 +1,22 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:30:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+5521998788160"
+    ],
+    "cnpj": "47.973.378/0001-35",
+    "companyName": "Psicoplanner Soluções em Desenvolvimento",
+    "socials": [],
+    "support": "suporte humano, sem robôs (declarado); canais não detalhados na home"
+  }
+}

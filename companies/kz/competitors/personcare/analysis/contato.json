@@ -1,0 +1,38 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:30:05Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "atendimento@personcare.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "cnpj": "54.195.616/0001-94",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/personcare.manager/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/personcare"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/personcaremanager"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/channel/UCiq4sYhkcd7KoIX3pD3h9EA"
+      }
+    ],
+    "support": "e-mail; FAQ cita suporte, mas canais e horário não aparecem no texto baixado"
+  }
+}

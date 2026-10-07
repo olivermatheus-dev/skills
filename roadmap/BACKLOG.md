@@ -42,6 +42,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 017 | [Geração com IA: Higgsfield, Suno, ElevenLabs](tasks/017-geracao-ia/TASK.md) | 016 | rascunho (futuro) |
 | 018 | [App local + banco tipado em arquivos (quadro, concorrentes, ideias, personas, anotações, contexto) + coletores](tasks/018-app-mvp/TASK.md) | 007 | feita (v1) |
 | 019 | [Interface rápida e otimista + visual shadcn/ui, Recharts, date-fns](tasks/019-ui-shadcn/TASK.md) | 018 | fazendo (pausada em ponto seguro) |
+| 023 | [Análise de concorrentes por módulos (site, preços, features, LP, Reclame Aqui) + fila da IA](tasks/023-analise-concorrentes/TASK.md) | 018 | feita (v1; faltam APIFY_TOKEN, coletor de anúncios) |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
 Adiado (sem pasta): ver `DEPOIS.md`. Depois do MVP: app em Vite (`APP.md`: projetos, kanban, concorrentes, agentes) e `INTEL.md` (monitoramento de concorrentes e tendências). Caixa de entrada: `IDEIAS.md`.

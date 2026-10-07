@@ -1,10 +1,11 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (sessão 020: ElevenLabs v4 + chaves por projeto). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-07 (sessão 023: análise de concorrentes por módulos). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
-- **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca).
+- **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca). Precisa do **Node 22** (no Node 20 o Vite não sobe).
+- **Concorrentes (023, feita):** 10 da kz com análise completa (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui). App: aba **Análise** + **Comparar**. Rodar de novo/pontual: marcar no app → "roda a fila de concorrentes" (skill `analise-concorrentes`).
 - **Vídeo (003, feita):** `tools/video-kit/` — HyperFrames 0.8.94 + GSAP (do kit do Ludus). Comandos em `tools/video-kit/README.md`, armadilhas em `GUIA-TECNICO.md`, molde em `library/templates/video/base/`, exemplo em `companies/kz/contents/2026-10-07-teste-kit/` (teste, não publicar; v02 com a Thalita).
   - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`; offline: `win-maria`) → aval → **Eleven v4 pela API** (`elevenlabs.mjs`, skill `elevenlabs`: emoção por audio tags em `vo[].el`, tempos exatos, encaixe automático). Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
 - **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).

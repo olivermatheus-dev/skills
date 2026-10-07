@@ -1,0 +1,58 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:29:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://usecorpora.com.br/precos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Plano grátis de verdade, sem cartão",
+        "evidence": "R$ 0 para sempre, pacientes ilimitados, 50 sessões/mês"
+      },
+      {
+        "point": "Escala e prova social",
+        "evidence": "+60 mil psicólogas, +R$18 mi em cobranças"
+      },
+      {
+        "point": "Produto completo com IA e financeiro",
+        "evidence": "transcrição, Corpora Pay, Receita Saúde, instrumentos clínicos"
+      },
+      {
+        "point": "Suporte humano e marca ligada à psicologia",
+        "evidence": "psicólogas no suporte; Academy, podcast, PsicoHumor"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "WhatsApp, IA e recorrência só no Pro de R$ 89",
+        "evidence": "tabela de planos: lembretes WhatsApp exclusivos do Profissional"
+      },
+      {
+        "point": "Free limitado",
+        "evidence": "50 sessões/mês, prontuário só texto, Pix a 4,99%"
+      },
+      {
+        "point": "Fala só com psicóloga",
+        "evidence": "copy e CRP nos depoimentos; sem outras terapias"
+      },
+      {
+        "point": "Tom institucional e home muito densa",
+        "evidence": "manifesto e 15 módulos na home"
+      }
+    ],
+    "opportunities": [
+      "Atrair terapeutas não psicólogos (hipnoterapia, holística, etc.)",
+      "Preço único e simples, sem funil de upgrade para ter WhatsApp",
+      "Voz de terapeuta para terapeuta, mais humana e menos científica",
+      "Portal do paciente com relato entre sessões como diferencial"
+    ]
+  }
+}

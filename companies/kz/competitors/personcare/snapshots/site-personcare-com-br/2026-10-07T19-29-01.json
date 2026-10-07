@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-07T19:29:01Z",
+  "platform": "site",
+  "profileUrl": "https://personcare.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Gestão para Clínicas e Profissionais de Psicologia",
+    "handle": "personcare.com.br",
+    "bio": "Bem-vindo à revolução na gestão de clínicas de psicologia. Nosso sistema de gestão foi projetado para otimizar e simplificar todos os aspectos do seu consultório.",
+    "avatar": "https://personcare.com.br/icons/apple-icon-57x57.png",
+    "avatarLocal": "media/site-personcare-com-br/avatar-57a08d07.png",
+    "banner": "https://personcare.com.br/imgs/logo.png",
+    "bannerLocal": "media/site-personcare-com-br/banner-19f37e0a.png",
+    "links": [
+      "https://www.instagram.com/personcare.manager",
+      "https://www.facebook.com/personcare",
+      "https://www.linkedin.com/company/personcaremanager",
+      "https://www.youtube.com/channel/UCiq4sYhkcd7KoIX3pD3h9EA"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

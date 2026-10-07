@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:29:47Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/planos-e-precos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, CNPJ brasileiro no rodapé, assinatura digital ICP-Brasil, 'Desenvolvido no Brasil'; DDD 48 no telefone"
+  }
+}

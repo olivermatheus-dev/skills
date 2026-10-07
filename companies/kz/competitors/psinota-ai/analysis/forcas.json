@@ -1,0 +1,70 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:31:26Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/"
+    },
+    {
+      "url": "https://psinotaai.com/planos"
+    },
+    {
+      "url": "https://psinotaai.com/sobre"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "IA clínica madura e bem explicada",
+        "evidence": "nota em 4 formatos, risco clínico, apoio em tempo real, supervisão IA"
+      },
+      {
+        "point": "Plano grátis permanente e garantia",
+        "evidence": "Free sem cartão e sem expirar; 7 dias de reembolso nos pagos"
+      },
+      {
+        "point": "Autoridade em conformidade",
+        "evidence": "Res. CFP 09/2024, LGPD e AES-256-GCM repetidos em todo o site"
+      },
+      {
+        "point": "Máquina de aquisição por conteúdo",
+        "evidence": "ferramentas grátis, modelos, glossário e blog por especialidade"
+      },
+      {
+        "point": "Preço de entrada baixo no anual",
+        "evidence": "Clínico a R$ 32,50/mês no anual"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Escala pequena",
+        "evidence": "850+ cadastrados declarados"
+      },
+      {
+        "point": "WhatsApp manual, sem automação",
+        "evidence": "nada sai sozinho; o psicólogo envia cada mensagem"
+      },
+      {
+        "point": "Plano Free muito limitado",
+        "evidence": "5 pacientes e 10 sessões/mês, só nota DAP"
+      },
+      {
+        "point": "Vocabulário técnico de IA e nota clínica",
+        "evidence": "foco em DAP/BIRP, CID-11, risco clínico"
+      },
+      {
+        "point": "Sem depoimentos nas seções lidas",
+        "evidence": "só contadores de uso"
+      }
+    ],
+    "opportunities": [
+      "Falar da rotina inteira (agenda, cobrança, lembrete automático) em vez de só nota",
+      "Tom humano e acolhedor contra o discurso AI-first",
+      "Posicionar para além da psicologia clínica (terapeutas em geral)",
+      "Lembrete automático no WhatsApp como contraste ao envio manual",
+      "Mostrar prova social real de terapeutas autônomos"
+    ]
+  }
+}

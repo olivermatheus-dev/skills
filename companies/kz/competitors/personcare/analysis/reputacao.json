@@ -1,16 +1,17 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:14:59Z",
+  "updatedAt": "2026-10-07T19:38:16Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
       "url": "https://apps.apple.com/br/app/personcare-para-profissionais/id6745275082"
     },
     {
-      "url": "https://www.reclameaqui.com.br/empresa/personcare/"
+      "url": "https://www.reclameaqui.com.br/busca/?q=PersonCare",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "baixa",
+  "confidence": "media",
   "data": {
     "reclameAqui": {
       "found": false,
@@ -28,6 +29,6 @@
       }
     ],
     "mentions": [],
-    "summary": "Reclame Aqui bloqueou (403) e buscas só mostraram Personare (outra empresa); sem página confirmada. App Store sem avaliações suficientes para exibir nota; nota do Google Play não lida (página não carregou)."
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
   }
 }

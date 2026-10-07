@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-07T19:29:07Z",
+  "platform": "youtube",
+  "profileUrl": "https://www.youtube.com/@psinotaai",
+  "source": "yt-dlp",
+  "profile": {
+    "name": "PsiNota AI",
+    "handle": "psinotaai",
+    "bio": "Sistema de IA para psicólogos",
+    "avatar": "https://yt3.googleusercontent.com/Y5vvGwYsXJgEvvcQG0h1PeNB9sYul7iwVLdZz3iDV_tLxeMNpqt77Dku6BPr2MSnvEVJnoplSFU=s0",
+    "avatarLocal": "media/youtube-psinotaai/avatar-2e16b597.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

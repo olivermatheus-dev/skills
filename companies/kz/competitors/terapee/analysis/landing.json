@@ -1,0 +1,130 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:32:03Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.terapee.com.br/",
+    "hero": {
+      "headline": "Sua clínica de terapia cheia, recebendo em dia e sem você correr atrás.",
+      "subheadline": "Cuida da agenda, dos lembretes e da cobrança automaticamente.",
+      "cta": "Criar conta gratuita"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Clínica cheia, recebendo em dia",
+        "summary": "promessa + sem cartão"
+      },
+      {
+        "type": "numeros",
+        "title": "+400 clínicas, 25% menos faltas",
+        "summary": "números de prova logo após o hero"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Como funciona na prática",
+        "summary": "abas: agenda, pacientes, pagamentos"
+      },
+      {
+        "type": "problema",
+        "title": "A rotina de uma clínica não é só atender",
+        "summary": "faltas, telefone, pacotes e cobrança em planilha"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Da sessão marcada à nota fiscal",
+        "summary": "fluxo com o que é automático e o que é do usuário"
+      },
+      {
+        "type": "beneficios",
+        "title": "O que muda quando roda na Terapee",
+        "summary": "3 resultados: faltas, horas, receber"
+      },
+      {
+        "type": "features",
+        "title": "Funcionalidades que mais transformam",
+        "summary": "7 destaques"
+      },
+      {
+        "type": "features",
+        "title": "Funcionalidades do sistema",
+        "summary": "grade completa"
+      },
+      {
+        "type": "outro",
+        "title": "Pra quem foi feito",
+        "summary": "links por especialidade"
+      },
+      {
+        "type": "seguranca",
+        "title": "Segurança e LGPD",
+        "summary": "criptografia e acesso por perfil"
+      },
+      {
+        "type": "comparativo",
+        "title": "Feita pra clínica de terapia",
+        "summary": "tabela genérico de clínica vs Terapee"
+      },
+      {
+        "type": "depoimentos",
+        "title": "O que profissionais dizem",
+        "summary": "nota 4.9/5 e depoimentos"
+      },
+      {
+        "type": "outro",
+        "title": "Migração",
+        "summary": "time importa tudo"
+      },
+      {
+        "type": "precos",
+        "title": "Nossos planos",
+        "summary": "3 planos, toggle mensal/anual -20%"
+      },
+      {
+        "type": "faq",
+        "title": "Dúvidas frequentes",
+        "summary": "cerca de 15 perguntas"
+      },
+      {
+        "type": "blog",
+        "title": "Blog",
+        "summary": "3 artigos"
+      },
+      {
+        "type": "cta",
+        "title": "Começa agora",
+        "summary": "14 dias grátis"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "comparativos com concorrentes, calculadora grátis"
+      }
+    ],
+    "ctas": [
+      "Criar conta gratuita",
+      "Ver funcionalidades",
+      "Falar com consultor"
+    ],
+    "socialProof": [
+      "+400 clínicas",
+      "25% menos faltas",
+      "+14 mil pacientes migrados",
+      "nota 4.9/5"
+    ],
+    "interesting": [
+      "Tabela contra sistema genérico de clínica",
+      "Seção de migração gratuita como remoção de risco",
+      "Páginas de alternativa a concorrentes nominais",
+      "Calculadora grátis de precificação",
+      "Fluxo que separa o que é automático do que o usuário faz"
+    ],
+    "tone": "prático, de gestão, orientado a resultado de clínica"
+  }
+}

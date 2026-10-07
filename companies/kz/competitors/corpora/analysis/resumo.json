@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:29:24Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://usecorpora.com.br/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Software completo para psicólogas, com plano grátis para sempre e Pro a R$ 89/mês.",
+    "text": "Sistema de gestão de consultório só para psicólogas: agenda, prontuário, financeiro com cobrança Pix/cartão, sala virtual, site de agendamento e IA (transcrição, reescrita, planejar sessão). Posiciona-se como científico e comprometido com a psicologia, com ecossistema de conteúdo (Academy, podcast, PsicoHumor). Porta de entrada é o plano gratuito sem cartão e teste de 7 dias do Pro.",
+    "audience": "psicólogas clínicas autônomas, de iniciantes a consultórios estabelecidos",
+    "positioning": "O software preferido das psicólogas para gerir o consultório",
+    "size": "+60 mil psicólogas (declarado no site)"
+  }
+}

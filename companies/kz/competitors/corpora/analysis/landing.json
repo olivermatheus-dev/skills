@@ -1,0 +1,95 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:29:36Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://usecorpora.com.br/",
+    "hero": {
+      "headline": "O software preferido das psicólogas para gerir o consultório",
+      "subheadline": "Agenda online, prontuário eletrônico, cobrança automática, site de agendamento, financeiro e IA em um só lugar.",
+      "cta": "Começar Grátis",
+      "visual": "selo +60 mil psicólogas aprovam"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "O software preferido das psicólogas",
+        "summary": "promessa all-in-one e CTA grátis"
+      },
+      {
+        "type": "features",
+        "title": "Menos burocracia, mais tempo para o cuidado clínico",
+        "summary": "15 módulos, com selo Grátis nos incluídos"
+      },
+      {
+        "type": "numeros",
+        "title": "+R$18 mi cobrados, +5 mi sessões, +60 mil psicólogas",
+        "summary": "números de escala"
+      },
+      {
+        "type": "seguranca",
+        "title": "Sua clínica mais segura",
+        "summary": "criptografia, LGPD, CFP, DPA, dados não treinam IA"
+      },
+      {
+        "type": "outro",
+        "title": "Corpora na mídia",
+        "summary": "selos de imprensa"
+      },
+      {
+        "type": "beneficios",
+        "title": "Compromisso com o avanço da psicologia",
+        "summary": "psicólogas no suporte, ciência, impacto social"
+      },
+      {
+        "type": "precos",
+        "title": "Teste o plano Pro por 7 dias grátis",
+        "summary": "Grátis vs R$ 89, sem cartão"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Depoimentos de quem usa",
+        "summary": "psicólogas com CRP"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas frequentes",
+        "summary": "objeções sobre gratuito e instalação"
+      },
+      {
+        "type": "cta",
+        "title": "Dúvidas para iniciar?",
+        "summary": "botão WhatsApp"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "CNPJ, projetos, políticas"
+      }
+    ],
+    "ctas": [
+      "Começar Grátis",
+      "Planos e Preços",
+      "Chamar no WhatsApp"
+    ],
+    "socialProof": [
+      "+60 mil psicólogas",
+      "+R$18 milhões em cobranças",
+      "+5 milhões de sessões por ano",
+      "depoimentos com CRP"
+    ],
+    "interesting": [
+      "Depoimentos com número de CRP dão credibilidade",
+      "Selo Grátis em cada módulo mostra o que cabe no free",
+      "Teste do Pro sem cartão e dados mantidos após o teste reduz o risco",
+      "Números de escala em bloco próprio"
+    ],
+    "tone": "profissional, científico, acolhedor e institucional"
+  }
+}

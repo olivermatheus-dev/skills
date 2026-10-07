@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-07T19:29:12Z",
+  "platform": "site",
+  "profileUrl": "https://terapee.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Terapee",
+    "handle": "terapee.com.br",
+    "bio": "Reduza faltas em 25%, receba mensalidades no automático e libere a agenda da sua equipe. O sistema feito para clínicas de psicologia, fono, TO, fisio e ABA.",
+    "avatar": "https://www.terapee.com.br/apple-touch-icon.png",
+    "avatarLocal": "media/site-terapee-com-br/avatar-d186c30f.png",
+    "banner": "https://www.terapee.com.br/og-image.png",
+    "bannerLocal": "media/site-terapee-com-br/banner-74eaba86.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

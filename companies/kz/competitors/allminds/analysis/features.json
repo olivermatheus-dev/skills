@@ -1,0 +1,145 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:29:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/"
+    },
+    {
+      "url": "https://allminds.app/planos/"
+    },
+    {
+      "url": "https://allminds.app/funcionalidades/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda online com Google Agenda/iCalendar",
+            "highlight": false
+          },
+          {
+            "name": "Agendamento pelo paciente",
+            "highlight": false
+          },
+          {
+            "name": "Pacotes e assinaturas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuário personalizável com anexos e LGPD",
+            "highlight": false
+          },
+          {
+            "name": "Anamnese personalizável por abordagem",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobranças automáticas, boletos e links de pagamento",
+            "highlight": false
+          },
+          {
+            "name": "Relatórios e dashboards financeiros",
+            "highlight": false
+          },
+          {
+            "name": "Emissão de NF",
+            "detail": "100/mês no plano Ecossistema",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembretes por e-mail, SMS e WhatsApp",
+            "detail": "WhatsApp só no Ecossistema",
+            "highlight": false
+          },
+          {
+            "name": "Assistente de conversas com IA e mensagens prontas para WhatsApp",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Sala de vídeo integrada",
+            "detail": "R$ 2 por sessão no Gestão; 30 inclusas no Ecossistema",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Leads de pacientes interessados, sem comissão",
+            "highlight": true
+          },
+          {
+            "name": "Site personalizado integrado",
+            "highlight": true
+          },
+          {
+            "name": "Perfil no Portal Allminds",
+            "highlight": false
+          },
+          {
+            "name": "Templates Canva e cursos de marketing",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Formação Empreendedora com mentorias ao vivo",
+            "highlight": true
+          },
+          {
+            "name": "+20 cursos gravados",
+            "highlight": true
+          },
+          {
+            "name": "Comunidades e Clube de descontos",
+            "highlight": false
+          },
+          {
+            "name": "Implantação com gerente de contas",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Leads de pacientes sem comissão por sessão",
+      "Formação empreendedora e comunidades inclusas",
+      "Implantação humana com gerente de contas"
+    ],
+    "missing": [
+      "portal do paciente",
+      "IA clínica no prontuário/transcrição",
+      "gestão de equipe/multiprofissional"
+    ]
+  }
+}

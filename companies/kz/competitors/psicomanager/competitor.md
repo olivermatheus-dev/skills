@@ -3,12 +3,16 @@ id: psicomanager
 name: PsicoManager
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta
 profiles:
   - platform: site
     url: https://psicomanager.com.br
+  - platform: instagram
+    url: https://www.instagram.com/psico_manager/
+    handle: psico_manager
 created: 2026-10-07
 ---
 

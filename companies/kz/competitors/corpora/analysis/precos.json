@@ -1,0 +1,55 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:29:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/precos/"
+    },
+    {
+      "url": "https://usecorpora.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "freemium",
+    "fromMonthly": 89,
+    "trial": "7 dias do plano Pro, sem cartão",
+    "guarantee": "sem fidelidade",
+    "plans": [
+      {
+        "name": "Grátis",
+        "monthly": 0,
+        "users": "1 profissional",
+        "highlights": [
+          "pacientes ilimitados",
+          "50 sessões por mês",
+          "prontuário só texto",
+          "sala virtual",
+          "site de agendamento",
+          "Pix a 4,99%"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Profissional",
+        "monthly": 89,
+        "users": "1 profissional",
+        "highlights": [
+          "sessões ilimitadas",
+          "IA",
+          "notificações WhatsApp",
+          "instrumentos e documentos",
+          "Pix a 1,99%, cartão a 4,59%"
+        ],
+        "recommended": true
+      }
+    ],
+    "extras": [
+      "Taxa de cobrança: Pix 4,99% (grátis) ou 1,99% (Pro); cartão 4,59% (Pro)"
+    ],
+    "notes": "Valores da página de planos; só mensal encontrado, sem preço anual."
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:29:53Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/planos-e-precos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda visual dia/semana/mês e recorrente",
+            "highlight": false
+          },
+          {
+            "name": "Integração com Google Calendar",
+            "detail": "Premium+",
+            "highlight": false
+          },
+          {
+            "name": "Agenda por profissional",
+            "detail": "só Clínicas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuário eletrônico e evolução clínica",
+            "highlight": true
+          },
+          {
+            "name": "Formulários dinâmicos e papel timbrado",
+            "detail": "Premium+",
+            "highlight": false
+          },
+          {
+            "name": "Níveis de privacidade por registro",
+            "detail": "privado, com paciente, com terapeutas, todos",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Assistente de evolução SOAP por áudio",
+            "detail": "rascunho para revisar",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Receitas, despesas e pagamentos",
+            "highlight": false
+          },
+          {
+            "name": "Serviços e pacotes de sessões",
+            "highlight": false
+          },
+          {
+            "name": "Relatórios de atendimentos e financeiros",
+            "detail": "Premium+",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Confirmações e lembretes por WhatsApp",
+            "detail": "25 msgs/mês incluídas; recarga paga",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "Portal do paciente e da família",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Assinatura digital ICP-Brasil",
+            "detail": "exige certificado A1 próprio",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Profissionais ilimitados, perfis de acesso, perfil de secretária e dashboard",
+            "detail": "plano Clínicas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Criptografia, controle de acesso, LGPD",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "compartilhamento de registros com equipe, paciente e família",
+      "IA SOAP por áudio",
+      "multidisciplinar (reabilitação)"
+    ],
+    "missing": [
+      "videochamada nativa (não mostrada)",
+      "emissão de NFS-e (não mostrada)",
+      "app mobile (não mostrado)"
+    ]
+  }
+}

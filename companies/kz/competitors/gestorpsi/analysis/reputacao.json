@@ -1,21 +1,24 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:15:04Z",
+  "updatedAt": "2026-10-07T19:37:17Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
       "url": "https://www.gestorpsi.com.br"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=GestorPsi",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "baixa",
+  "confidence": "media",
   "data": {
     "reclameAqui": {
-      "url": "https://www.reclameaqui.com.br/empresa/gestorpsi/",
       "found": false,
       "topComplaints": []
     },
     "stores": [],
     "mentions": [],
-    "summary": "Nenhuma página do GestorPsi achada no Reclame Aqui pela busca (a página direta retorna 403, então não dá para descartar). Sem app nas lojas; só web. Sem avaliações públicas encontradas."
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
   }
 }

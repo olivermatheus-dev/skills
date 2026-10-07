@@ -1,0 +1,99 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:31:31Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://psinotaai.com/",
+    "hero": {
+      "headline": "A sessão termina. A nota já está escrita.",
+      "subheadline": "Atenda por vídeo, grave o áudio, dite ou fotografe o caderno; o PsiNota escreve a nota e você revisa e assina.",
+      "cta": "Criar conta grátis",
+      "visual": "mock de sessão com transcrição e nota DAP em rascunho"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "A sessão termina. A nota já está escrita.",
+        "summary": "promessa + selos: sem cartão, grátis não expira, vídeo não gravado"
+      },
+      {
+        "type": "numeros",
+        "title": "850+ profissionais, 14.000+ notas",
+        "summary": "contadores logo abaixo do hero"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Da sala de vídeo à nota assinada",
+        "summary": "3 passos: abrir sala, conduzir, nota pronta"
+      },
+      {
+        "type": "problema",
+        "title": "O registro que fica para depois fica pior",
+        "summary": "dor da documentação atrasada"
+      },
+      {
+        "type": "solucao",
+        "title": "Lembrar, cobrar, cadastrar pelo WhatsApp",
+        "summary": "mensagem pronta no número do psicólogo"
+      },
+      {
+        "type": "features",
+        "title": "Antes, durante e depois da sessão",
+        "summary": "grade de funcionalidades por momento, com tags de plano"
+      },
+      {
+        "type": "beneficios",
+        "title": "E quando o consultório pedir mais",
+        "summary": "Consultório Simulado, Companheiro, materiais"
+      },
+      {
+        "type": "numeros",
+        "title": "Quanto você vai economizar?",
+        "summary": "calculadora de tempo e receita"
+      },
+      {
+        "type": "precos",
+        "title": "Comece grátis. Cresça quando precisar.",
+        "summary": "Free, Clínico, Pro, com toggle mensal/anual"
+      },
+      {
+        "type": "faq",
+        "title": "Dúvidas frequentes",
+        "summary": "instalação, gravação, CFP, limites do Free, cartão"
+      },
+      {
+        "type": "outro",
+        "title": "Para sua especialidade",
+        "summary": "links SEO por abordagem (TCC, EMDR, Gestalt)"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "produto, ferramentas grátis, modelos, blog, CFP/LGPD"
+      }
+    ],
+    "ctas": [
+      "Criar conta grátis",
+      "Ver como funciona",
+      "Começar grátis"
+    ],
+    "socialProof": [
+      "850+ psicólogas e psicólogos cadastrados",
+      "14.000+ notas geradas"
+    ],
+    "interesting": [
+      "Calculadora de economia na própria home",
+      "Selos que quebram objeções: sem cartão, vídeo não gravado, nada vira documento sem assinar",
+      "Tags de plano nas features",
+      "Hub de ferramentas e modelos grátis que alimenta SEO",
+      "Pergunta direta sobre o CFP aceitar nota com IA no FAQ"
+    ],
+    "tone": "técnico, seguro e orientado a conformidade, com foco em produtividade"
+  }
+}

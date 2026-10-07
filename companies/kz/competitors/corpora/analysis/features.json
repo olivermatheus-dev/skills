@@ -1,0 +1,164 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:29:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://usecorpora.com.br/precos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda online integrada ao prontuário",
+            "highlight": true
+          },
+          {
+            "name": "Sessões recorrentes e bloqueios com cancelamento automático",
+            "highlight": false
+          },
+          {
+            "name": "Confirmação de presença e lembretes",
+            "highlight": false
+          },
+          {
+            "name": "Site de agendamento (corpora.bio)",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuário eletrônico criptografado",
+            "highlight": true
+          },
+          {
+            "name": "Instrumentos clínicos e escalas com cálculo automático",
+            "highlight": false
+          },
+          {
+            "name": "Modelos de documentos",
+            "highlight": false
+          },
+          {
+            "name": "Anexos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Gestão de receitas e despesas por paciente",
+            "highlight": true
+          },
+          {
+            "name": "Cobrança automática por Pix e cartão (Corpora Pay)",
+            "highlight": true
+          },
+          {
+            "name": "Receita Saúde",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Notificações por WhatsApp",
+            "detail": "só no plano Pro",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Sala virtual via Jitsi Meet, Google Meet ou outra",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "Diário de Bordo e evoluções",
+            "detail": "acompanhamento entre sessões",
+            "highlight": false
+          },
+          {
+            "name": "Link de cadastro e atualização para pacientes",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Transcrição de sessão",
+            "highlight": true
+          },
+          {
+            "name": "Reescrita com IA",
+            "highlight": false
+          },
+          {
+            "name": "Planejar sessão com IA",
+            "highlight": false
+          },
+          {
+            "name": "Foto de manuscrito para texto",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Criptografia, backup, histórico e rastreabilidade",
+            "highlight": false
+          },
+          {
+            "name": "DPA e dados não treinam IA",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Acesso administrativo para secretária",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Plano grátis para sempre com pacientes ilimitados (50 sessões/mês)",
+      "IA clínica completa no Pro",
+      "Cobrança integrada Corpora Pay",
+      "Ecossistema de conteúdo e comunidade"
+    ],
+    "missing": [
+      "videochamada própria (usa Jitsi/Meet)",
+      "app mobile nativo não mencionado",
+      "multiusuário/clínica (1 profissional por plano)"
+    ]
+  }
+}

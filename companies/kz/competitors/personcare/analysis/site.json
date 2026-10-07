@@ -1,0 +1,89 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:38:12Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/",
+      "title": "PERSONCARE"
+    },
+    {
+      "url": "https://personcare.com.br/precos",
+      "title": "PERSONCARE"
+    },
+    {
+      "url": "https://personcare.com.br/funcionalidades",
+      "title": "PERSONCARE"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://personcare.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://personcare.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "PERSONCARE",
+        "chars": 6891
+      },
+      {
+        "url": "https://personcare.com.br/precos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "PERSONCARE",
+        "chars": 6891
+      },
+      {
+        "url": "https://personcare.com.br/funcionalidades",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "PERSONCARE",
+        "chars": 6891
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 5,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/app-pacientes.html",
+          "count": 1,
+          "sample": [
+            "/app-pacientes.html"
+          ]
+        },
+        {
+          "name": "/privacidade.html",
+          "count": 1,
+          "sample": [
+            "/privacidade.html"
+          ]
+        },
+        {
+          "name": "/termos.html",
+          "count": 1,
+          "sample": [
+            "/termos.html"
+          ]
+        },
+        {
+          "name": "/privacidade-google.html",
+          "count": 1,
+          "sample": [
+            "/privacidade-google.html"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

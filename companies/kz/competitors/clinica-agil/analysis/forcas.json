@@ -1,0 +1,57 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:29:36Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Sistema maduro e profundo",
+        "evidence": "+10 anos, +4 mil clínicas, TISS, repasses, DRE"
+      },
+      {
+        "point": "IA já em produção",
+        "evidence": "secretária inteligente 24h e transcrição"
+      },
+      {
+        "point": "Atende várias especialidades e ABA",
+        "evidence": "páginas por especialidade e módulo ABA"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Foco em clínica, não em solo",
+        "evidence": "linguagem de equipes, salas, convênios e repasses"
+      },
+      {
+        "point": "Preço opaco, só por demonstração",
+        "evidence": "sem página de preços; CTA único Solicitar Demonstração"
+      },
+      {
+        "point": "Tom técnico e corporativo",
+        "evidence": "copy de gestão, indicadores e operação"
+      },
+      {
+        "point": "Site com números inconsistentes",
+        "evidence": "26 vs 27 estados; 4 mil clínicas vs 27.827 clínicas ajudadas"
+      }
+    ],
+    "opportunities": [
+      "Preço público e simples para solo",
+      "Tom humano e próximo do terapeuta",
+      "Começar em minutos sem demonstração com vendedor",
+      "Menos módulos de convênio/TISS que o autônomo não usa"
+    ]
+  }
+}

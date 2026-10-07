@@ -1,0 +1,20 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:29:06Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/"
+    },
+    {
+      "url": "https://allminds.app/planos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Ecossistema para psicólogos: gestão, leads de pacientes, cursos e mentorias empreendedoras",
+    "text": "Vende sistema de gestão (agenda, prontuário, financeiro, vídeo, NF) somado a marketing (site, leads de pacientes sem comissão, Canva) e formação (cursos, mentorias, comunidades). Posiciona-se como apoio humano para tornar o consultório um negócio previsível, com gerente de contas e implantação guiada. Diferencial: envia leads de pacientes sem cobrar % da sessão.",
+    "audience": "psicólogos e psicanalistas autônomos e pequenas clínicas",
+    "positioning": "Mais que uma plataforma para psicólogos e psicanalistas"
+  }
+}

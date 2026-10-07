@@ -50,9 +50,10 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
   const adapters = opt.adapters ?? ADAPTERS;
   const maxItems = Math.max(1, Math.min(200, opt.maxItems ?? 30));
   const compDir = join(S.ROOT, P.competitor(slug, id));
-  const profiles = comp.profiles.filter((p) => !opt.platforms?.length || opt.platforms.includes(p.platform));
+  // perfis sem coletor (Facebook, LinkedIn, X, lojas) são só links de referência: não entram na coleta nem viram erro
+  const profiles = comp.profiles.filter((p) => (opt.platforms?.length ? opt.platforms.includes(p.platform) : !!adapters[p.platform]));
 
-  return Promise.all(profiles.map(async (p): Promise<CollectResult> => {
+  const results = await Promise.all(profiles.map(async (p): Promise<CollectResult> => {
     const key = keyFor(p);
     const res: CollectResult = { key, platform: p.platform, url: p.url, ok: false, items: 0, errors: [], warnings: [] };
     const adapter = adapters[p.platform];
@@ -82,6 +83,9 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
     }
     return res;
   }));
+  // coleta feita (algum perfil ok) = módulo "redes" da análise atendido: sai da fila
+  if (results.some((r) => r.ok) && !opt.runner) S.clearAnalysisRequest(slug, id, ['redes']);
+  return results;
 }
 
 /** todos os concorrentes ativos, um por vez */

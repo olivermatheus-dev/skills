@@ -1,0 +1,33 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:39:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.getapp.com/all-software/a/psinota-ai/"
+    },
+    {
+      "url": "https://www.capterra.in/software/1108783/PsiNota-AI"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=PsiNota%20AI",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [
+      {
+        "source": "GetApp/Capterra",
+        "url": "https://www.getapp.com/all-software/a/psinota-ai/",
+        "summary": "Listado, mas com 0 avaliações de usuários."
+      }
+    ],
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:30:07Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/"
+    },
+    {
+      "url": "https://medicinasa.com.br/?p=46549",
+      "title": "MedicinaSA"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@psicomanager.com.br",
+      "privacy@psicomanager.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+553498756162",
+      "+5534992686262"
+    ],
+    "companyName": "Psico Gestor Tecnologia",
+    "city": "Uberlândia/MG",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/psico_manager/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@PsicoManager"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/psicomanager"
+      }
+    ],
+    "support": "WhatsApp, e-mail e base de conhecimento; assistente IAgo e equipe humana (suporte, customer success, financeiro, comercial)"
+  }
+}

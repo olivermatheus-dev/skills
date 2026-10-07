@@ -3,6 +3,7 @@ id: personcare
 name: PersonCare
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

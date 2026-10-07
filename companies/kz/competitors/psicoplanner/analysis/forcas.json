@@ -1,0 +1,55 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:30:38Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço baixo e transparente",
+        "evidence": "R$ 59 e R$ 79 na home"
+      },
+      {
+        "point": "IA de transcrição acessível",
+        "evidence": "inclusa no plano Plus"
+      },
+      {
+        "point": "WhatsApp ilimitado",
+        "evidence": "mensalidade cobre tudo, sem taxas escondidas"
+      },
+      {
+        "point": "Suporte humano como promessa",
+        "evidence": "nada de robôs no atendimento"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Sem portal do paciente visível",
+        "evidence": "não aparece na lista de funções"
+      },
+      {
+        "point": "Marca e conteúdo genéricos",
+        "evidence": "home só de funções e depoimentos curtos"
+      },
+      {
+        "point": "Depoimentos fracos",
+        "evidence": "vários sem sobrenome ou profissão"
+      },
+      {
+        "point": "Base pequena",
+        "evidence": "3.200 psicólogas declaradas"
+      }
+    ],
+    "opportunities": [
+      "portal com relato entre sessões",
+      "narrativa de fundador terapeuta",
+      "públicos além do psicólogo",
+      "identidade de marca forte contra o tom só de funcionalidades"
+    ]
+  }
+}

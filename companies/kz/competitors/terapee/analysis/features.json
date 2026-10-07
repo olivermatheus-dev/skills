@@ -1,0 +1,147 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:31:45Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    },
+    {
+      "url": "https://www.terapee.com.br/funcionalidades/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda avulsa e recorrente, multi-agenda da equipe",
+            "highlight": true
+          },
+          {
+            "name": "Check-in de presença, falta e cancelamento",
+            "highlight": false
+          },
+          {
+            "name": "Agendamento online",
+            "detail": "plano Clínica Max",
+            "highlight": false
+          },
+          {
+            "name": "Pacotes de sessões com saldo",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembrete e confirmação automáticos no WhatsApp",
+            "detail": "declara 25% menos faltas",
+            "highlight": true
+          },
+          {
+            "name": "Cobrança por WhatsApp",
+            "highlight": false
+          },
+          {
+            "name": "WhatsApp próprio",
+            "detail": "cobrado à parte no Individual e Clínica; incluso no Max",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobrança automática e financeiro",
+            "highlight": true
+          },
+          {
+            "name": "NFS-e pelo Emissor Nacional, incluída",
+            "highlight": true
+          },
+          {
+            "name": "Recibos em PDF",
+            "highlight": false
+          },
+          {
+            "name": "Repasse de profissionais",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Prontuário eletrônico",
+            "highlight": false
+          },
+          {
+            "name": "Formulários e documentos personalizáveis",
+            "highlight": false
+          },
+          {
+            "name": "Assinatura digital de laudos",
+            "detail": "certificado A1 ou eletrônica, com QR de verificação",
+            "highlight": false
+          },
+          {
+            "name": "Migração feita pelo time",
+            "detail": "+14 mil pacientes migrados",
+            "highlight": false
+          },
+          {
+            "name": "Calculadora de precificação grátis",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Telemedicina no navegador",
+            "detail": "link pelo WhatsApp, integrada à agenda",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Secretária, acessos por perfil, até 15 usuários ou ilimitado",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "AES-256 em repouso e TLS 1.3",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "NFS-e incluída em todos os planos",
+      "Lembrete e cobrança no WhatsApp com foco em reduzir faltas",
+      "Migração assistida de outros sistemas",
+      "Páginas de alternativa ao PsicoPlanner, Clínica Ágil e Ninsaúde"
+    ],
+    "missing": [
+      "IA clínica",
+      "portal do paciente",
+      "plano gratuito permanente",
+      "pagamento por boleto ou Pix (só cartão)"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:29:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://gestorpsi.com.br/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [],
+    "address": "R. Major Júlio Salles, 594, São Carlos - SP",
+    "city": "São Carlos/SP",
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/gestorpsi/"
+      }
+    ],
+    "support": "por e-mail e formulário Fale Conosco no site; sem WhatsApp ou telefone encontrados"
+  }
+}

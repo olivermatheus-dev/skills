@@ -1,0 +1,66 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:42:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 55.9,
+    "trial": "14 dias grátis, sem cartão",
+    "plans": [
+      {
+        "name": "Individual",
+        "monthly": 55.9,
+        "yearlyMonthly": 44.72,
+        "yearlyTotal": 536.64,
+        "users": "1 usuário",
+        "highlights": [
+          "agenda ilimitada",
+          "lembretes WhatsApp",
+          "prontuário",
+          "telemedicina",
+          "NFS-e"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Clínica",
+        "monthly": 89.9,
+        "yearlyMonthly": 71.92,
+        "yearlyTotal": 863.04,
+        "users": "até 15 usuários",
+        "highlights": [
+          "multi-agenda",
+          "cadastro de secretária",
+          "tudo do Individual"
+        ],
+        "recommended": true
+      },
+      {
+        "name": "Clínica Max",
+        "monthly": 175,
+        "yearlyMonthly": 140,
+        "yearlyTotal": 1680,
+        "users": "ilimitados",
+        "highlights": [
+          "WhatsApp próprio incluso",
+          "logo na plataforma",
+          "página de agendamento online"
+        ],
+        "recommended": false
+      }
+    ],
+    "extras": [
+      "WhatsApp próprio é cobrado à parte nos planos Individual e Clínica",
+      "NFS-e incluída sem custo por nota"
+    ],
+    "notes": "Estado padrão da home: Mensal (R$ 55,90 / 89,90 / 175). Anual com 20% de desconto: R$ 44,72 / 71,92 / 140,00 por mês (totais calculados = 12x). Pagamento só por cartão de crédito. Os planos estão na home, não em precos.md."
+  }
+}

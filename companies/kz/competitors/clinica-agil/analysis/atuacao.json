@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:29:26Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site em pt-BR, sede em Joinville/SC, clientes em 26-27 estados, TISS e NFS-e (padrões brasileiros)"
+  }
+}

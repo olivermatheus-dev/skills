@@ -1,6 +1,6 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:15:01Z",
+  "updatedAt": "2026-10-07T19:35:39Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
@@ -10,12 +10,24 @@
     {
       "url": "https://www.capterra.com/p/10050168/Clinica-Agil/",
       "title": "Capterra"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/clinica-agil/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Cl%C3%ADnica%20%C3%81gil",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "media",
+  "confidence": "alta",
   "data": {
     "reclameAqui": {
-      "found": false,
+      "url": "https://www.reclameaqui.com.br/empresa/clinica-agil/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 0,
+      "period": "4 anos no RA",
       "topComplaints": []
     },
     "stores": [
@@ -33,6 +45,6 @@
         "summary": "2 avaliações, ambas 5 estrelas; elogiam suporte rápido e intuitividade; um aponta limitação nos lembretes automáticos"
       }
     ],
-    "summary": "Sem página do Clínica Ágil no Reclame Aqui na busca (a página direta deu 403, não confirmado). App iOS 3,5 com 33 avaliações, com queixa de login que não persiste; Capterra com só 2 avaliações. Google Play não foi lido (fetch truncado)."
+    "summary": "Reclame Aqui: Sem índice, 0 reclamações, 4 anos no RA."
   }
 }

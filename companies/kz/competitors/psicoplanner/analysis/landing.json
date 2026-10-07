@@ -1,0 +1,88 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:30:43Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://psicoplanner.com.br/",
+    "hero": {
+      "headline": "Pare de escrever prontuário depois de cada sessão",
+      "subheadline": "O Psicoplanner transcreve sua sessão, analisa as emoções e preenche o prontuário automaticamente.",
+      "cta": "Teste grátis agora!"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Pare de escrever prontuário",
+        "summary": "promessa de IA + WhatsApp ilimitado"
+      },
+      {
+        "type": "problema",
+        "title": "Você estudou 5 anos para cuidar",
+        "summary": "3 dores: prontuário à mão, WhatsApp pessoal, agendamento por mensagem"
+      },
+      {
+        "type": "beneficios",
+        "title": "Pensado para facilitar a rotina",
+        "summary": "IA, WhatsApp, crescer com leveza, suporte humano"
+      },
+      {
+        "type": "features",
+        "title": "Principais funções",
+        "summary": "8 funções numeradas"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Resultados reais",
+        "summary": "4 depoimentos"
+      },
+      {
+        "type": "beneficios",
+        "title": "O Psicoplanner é único",
+        "summary": "suporte humano, sem taxas, cancelamento fácil"
+      },
+      {
+        "type": "precos",
+        "title": "Planos do seu jeito",
+        "summary": "Individual R$ 59, Plus R$ 79"
+      },
+      {
+        "type": "cta",
+        "title": "Comece agora",
+        "summary": "7 dias grátis, +3.200 psicólogas"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas",
+        "summary": "cartão, público, WhatsApp, cancelamento"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "legal, links, CNPJ"
+      }
+    ],
+    "ctas": [
+      "Teste grátis agora!",
+      "Criar conta grátis",
+      "Ver demonstração"
+    ],
+    "socialProof": [
+      "mais de 3k profissionais",
+      "+3.200 psicólogas",
+      "4 depoimentos"
+    ],
+    "interesting": [
+      "abertura focada em uma dor (prontuário) em vez de sistema completo",
+      "bloco de problema com tempo (15–20 min por prontuário)",
+      "preço na própria home",
+      "argumento anti-robô no suporte"
+    ],
+    "tone": "direto, prático e acolhedor, focado em ganho de tempo"
+  }
+}

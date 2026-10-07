@@ -1,0 +1,65 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:39:00Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://psicoplanner.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://psicoplanner.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "chars": 6295
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 5,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog/"
+          ]
+        },
+        {
+          "name": "/termos-de-uso",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso/"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade/"
+          ]
+        },
+        {
+          "name": "/seguranca-dos-dados",
+          "count": 1,
+          "sample": [
+            "/seguranca-dos-dados/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

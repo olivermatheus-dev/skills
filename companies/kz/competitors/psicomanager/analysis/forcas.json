@@ -1,0 +1,58 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:30:19Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/"
+    },
+    {
+      "url": "https://psicomanager.com.br/planos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Escala e tempo de mercado",
+        "evidence": "+40 mil psicólogos, 11 anos"
+      },
+      {
+        "point": "Financeiro fiscal completo",
+        "evidence": "NFS-e, Receita Saúde, Psicobank"
+      },
+      {
+        "point": "IA de transcrição e app do paciente",
+        "evidence": "listados nos planos e na home"
+      },
+      {
+        "point": "Suporte humano estruturado",
+        "evidence": "mais de 50 profissionais; WhatsApp e e-mail"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Limites por plano",
+        "evidence": "IA, WhatsApp e NFe ilimitados só no Plus (R$ 119)"
+      },
+      {
+        "point": "Excesso de funções para quem atende sozinho",
+        "evidence": "75+ funcionalidades em 9 categorias"
+      },
+      {
+        "point": "Fala só com psicólogos",
+        "evidence": "copy e depoimentos com CRP"
+      },
+      {
+        "point": "Tom institucional, sem fundador terapeuta",
+        "evidence": "origem contada pelo sócio de negócio"
+      }
+    ],
+    "opportunities": [
+      "simplicidade radical contra 75+ funções",
+      "terapeutas não psicólogos (hipnoterapeutas, psicanalistas)",
+      "fundador terapeuta em exercício",
+      "preço único sem limites de WhatsApp"
+    ]
+  }
+}

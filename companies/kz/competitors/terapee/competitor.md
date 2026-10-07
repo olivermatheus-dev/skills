@@ -3,10 +3,25 @@ id: terapee
 name: Terapee
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://terapee.com.br
+  - platform: youtube
+    url: https://www.youtube.com/@terapee
+    handle: terapee
+  - platform: instagram
+    url: https://www.instagram.com/terapeeapp/
+    handle: terapeeapp
+  - platform: linkedin
+    url: https://www.linkedin.com/company/terapeeapp
+    handle: terapeeapp
+  - platform: facebook
+    url: https://www.facebook.com/terapeeapp
+    handle: terapeeapp
 created: 2026-10-07
 ---
 

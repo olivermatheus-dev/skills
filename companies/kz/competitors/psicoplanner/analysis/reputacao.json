@@ -1,19 +1,19 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:15:07Z",
+  "updatedAt": "2026-10-07T19:39:05Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
       "url": "https://play.google.com/store/apps/details?id=com.psicoplanner.id1735906750329"
     },
     {
-      "url": "https://www.reclameaqui.com.br/empresa/psicoplanner/"
+      "url": "https://www.reclameaqui.com.br/busca/?q=Psicoplanner",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "baixa",
+  "confidence": "media",
   "data": {
     "reclameAqui": {
-      "url": "https://www.reclameaqui.com.br/empresa/psicoplanner/",
       "found": false,
       "topComplaints": []
     },
@@ -25,6 +25,6 @@
       }
     ],
     "mentions": [],
-    "summary": "Reclame Aqui bloqueou o acesso (403) e a busca não retornou página da empresa; não foi possível confirmar. App no Google Play com nota 4,1 (número de avaliações não obtido)."
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
   }
 }

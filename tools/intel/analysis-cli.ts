@@ -1,6 +1,7 @@
 // Ferramentas da análise de concorrentes (o Claude e o Oliver usam pelo terminal).
 //   npm run analise -- fila <slug>                              lista os pedidos pendentes (o que rodar)
 //   npm run analise -- site <slug> <id|--fila|--all>           módulo site (script): baixa site, sitemap, contatos
+//   npm run analise -- ra <slug> <id|--all>                    só a busca no Reclame Aqui (script)
 //   npm run analise -- pedir <slug> <id|--all> <mod,mod|completa|triagem> [--force]
 //   npm run analise -- salvar <slug> <id> <arquivo.json>       valida e grava o resultado de 1 módulo (JSON do AnalysisResult, sem updatedAt)
 //   npm run analise -- feito <slug> <id> <mod,mod>             tira módulos do pedido
@@ -35,10 +36,22 @@ try {
     let fail = 0;
     await analyzeSites(slug, ids, (r) => {
       if (!r.ok) fail++;
-      console.log(`${r.ok ? '✅' : '❌'} ${r.id.padEnd(16)} ${r.ok ? `${r.pages} páginas · sitemap ${r.sitemap} URLs · ${r.contacts} contatos` : ''} (${(r.ms / 1000).toFixed(0)}s)`);
+      console.log(`${r.ok ? '✅' : '❌'} ${r.id.padEnd(16)} ${r.ok ? `${r.pages} páginas · sitemap ${r.sitemap} URLs · ${r.contacts} contatos${r.ra ? ` · RA: ${r.ra}` : ''}` : ''} (${(r.ms / 1000).toFixed(0)}s)`);
       for (const e of r.errors) console.log(`   ⚠ ${e}`);
     });
     process.exit(fail ? 2 : 0);
+  } else if (cmd === 'ra') {
+    const { chromium } = await import('playwright');
+    const { updateReclameAqui } = await import('./reclameaqui');
+    const ids = has('--all') ? active() : pos;
+    const { BROWSER_ARGS, UA } = await import('./reclameaqui');
+    const browser = await chromium.launch({ headless: true, args: BROWSER_ARGS });
+    const page = await (await browser.newContext({ locale: 'pt-BR', userAgent: UA })).newPage();
+    for (const id of ids) {
+      try { const h = await updateReclameAqui(slug, id, page); console.log(`${h.found ? '✅' : '·'} ${id.padEnd(16)} ${h.found ? `${h.name} (${h.domain}) · ${h.status}${h.score != null ? ` ${h.score}` : ''} · ${h.complaints} reclamações · ${h.solvedRate ?? '—'}% resolvidas · ${h.years ?? '—'} anos · por ${h.match}` : 'não achado'}`); }
+      catch (e) { console.log(`❌ ${id} ${(e as Error).message.split('\n')[0]}`); }
+    }
+    await browser.close();
   } else if (cmd === 'pedir') {
     const [target, mods] = pos;
     const modules = mods === 'completa' ? FULL_ANALYSIS : mods === 'triagem' ? TRIAGE : (mods ?? '').split(',');

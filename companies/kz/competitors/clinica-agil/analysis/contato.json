@@ -1,0 +1,47 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:29:24Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "emails": [
+      "contato@clinicaagil.com.br"
+    ],
+    "phones": [
+      "(47) 98824-2151"
+    ],
+    "whatsapp": [
+      "+554788160262",
+      "+5547988242151"
+    ],
+    "address": "R. Evaristo da Veiga, 134 - 5º andar - Glória, Joinville - SC, 89216-215",
+    "city": "Joinville/SC",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/clinicaagil/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/clinicaagil/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/clinicaagil/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/channel/UCRGJJiW-mD-Tt3zALebevhQ"
+      }
+    ],
+    "support": "página de Suporte no site; demonstração sob solicitação"
+  }
+}

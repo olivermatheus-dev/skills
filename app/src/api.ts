@@ -81,6 +81,7 @@ export const api = {
   requestAnalysis: (slug: string, id: string, r: { modules: ModuleId[]; force?: boolean; instructions?: string }) => req<AnalysisRequest>('PUT', `${pj(slug)}/competitors/${id}/analysis/request`, r),
   cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
+  runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
   analysisOverview: (slug: string) => req<AnalysisOverview[]>('GET', `${pj(slug)}/analysis-overview`),
   analysisQueue: (slug: string) => req<QueueEntry[]>('GET', `${pj(slug)}/analysis-queue`),
 

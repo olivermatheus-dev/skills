@@ -11,11 +11,11 @@ import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
 import { P } from '../../schema';
 import type { SiteRunResult } from './types';
+import { updateReclameAqui, UA, BROWSER_ARGS } from './reclameaqui';
 export type { SiteRunResult } from './types';
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36';
 const KEY_PAGES: [kind: string, re: RegExp][] = [
-  ['precos', /pre[cç]o|planos?\b|pricing|assinatura|assine|valores/i],
+  ['precos', /pre[cç]o|planos?\b|pricing|assine|valores/i], // "assinatura" pega "assinatura digital"
   ['recursos', /funcionalidade|recursos|features|o-que-faz|produto|solu[cç][aã]o|ferramentas/i],
   ['sobre', /sobre|quem-somos|about|nossa-hist|empresa/i],
   ['contato', /contato|fale-conosco|contact|suporte|ajuda|atendimento/i],
@@ -28,40 +28,69 @@ interface Extract {
   headings: { level: number; text: string }[];
   sections: { tag: string; heading: string; snippet: string }[];
   links: { href: string; text: string }[];
+  /** linhas que mudam ao clicar em "Anual" / "Mensal" (páginas de preço com alternador) */
+  alt?: { label: string; lines: string[] }[];
+}
+const RE_PRICE_HINT = /R\$|US\$|€|\/m[eê]s|anual/i;
+
+// rola até o fim para carregar seções preguiçosas (lazy load / animações on-scroll)
+const SCROLL_JS = `(async () => {
+  for (let y = 0; y < document.body.scrollHeight && y < 30000; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
+  window.scrollTo(0, 0);
+})()`;
+// título, descrição, idioma, títulos (h1–h4), blocos de topo em ordem (seções da LP), links e texto visível
+const EXTRACT_JS = `(() => {
+  const clean = (s) => (s || '').replace(/\\s+/g, ' ').trim();
+  const visible = (el) => { const r = el.getBoundingClientRect(); const st = getComputedStyle(el); return r.height > 0 && st.display !== 'none' && st.visibility !== 'hidden'; };
+  const headings = [...document.querySelectorAll('h1,h2,h3,h4')].filter(visible).map((h) => ({ level: Number(h.tagName[1]), text: clean(h.textContent) })).filter((h) => h.text).slice(0, 150);
+  let blocks = [...document.querySelectorAll('section, header, footer')].filter((el) => visible(el) && !(el.parentElement && el.parentElement.closest('section, header, footer')));
+  if (blocks.length < 3) {
+    const root = document.querySelector('main') || document.body;
+    blocks = [...root.querySelectorAll(':scope > *, :scope > * > *')].filter((el) => visible(el) && el.offsetHeight > 160 && clean(el.innerText).length > 40);
+    blocks = blocks.filter((el) => !blocks.some((o) => o !== el && o.contains(el)));
+  }
+  const sections = blocks.slice(0, 40).map((el) => { const h = el.querySelector('h1,h2,h3'); return { tag: el.tagName.toLowerCase(), heading: clean(h && h.textContent), snippet: clean(el.innerText).slice(0, 320) }; });
+  const links = [...document.querySelectorAll('a[href]')].map((a) => ({ href: a.href, text: clean(a.textContent).slice(0, 80) })).filter((l) => l.href.startsWith('http') || l.href.startsWith('mailto:') || l.href.startsWith('tel:'));
+  const meta = document.querySelector('meta[name="description"]');
+  return {
+    title: document.title, description: (meta && meta.getAttribute('content')) || '',
+    lang: document.documentElement.lang || '', text: (document.body.innerText || '').replace(/\\n{3,}/g, '\\n\\n').slice(0, 40000), headings, sections, links,
+  };
+})()`;
+
+// alternador "Mensal | Anual" das páginas de preço: clica na opção e devolve o texto visível
+const toggleJs = (re: string) => `(async () => {
+  const re = new RegExp(${JSON.stringify(re)}, 'i');
+  const els = [...document.querySelectorAll('button, label, [role=tab], [role=switch], [role=radio], span, div, p')]
+    .filter((el) => re.test((el.textContent || '').trim()) && (el.textContent || '').trim().length < 40 && el.getBoundingClientRect().height > 0);
+  const el = els[0];
+  if (!el) return null;
+  el.click();
+  await new Promise((r) => setTimeout(r, 700));
+  return document.body.innerText;
+})()`;
+async function toggles(page: Page, base: string) {
+  const out: { label: string; lines: string[] }[] = [];
+  const baseLines = new Set(base.split('\n').map((l) => l.trim()));
+  for (const [label, re] of [['Anual', '^(plano )?anual(mente)?\\b|^yearly|^annual'], ['Mensal', '^(plano )?mensal(mente)?\\b|^monthly']] as const) {
+    const t = (await page.evaluate(toggleJs(re)).catch(() => null)) as string | null;
+    if (!t) continue;
+    const lines = [...new Set(t.split('\n').map((l) => l.trim()).filter((l) => l && !baseLines.has(l)))].slice(0, 120);
+    if (lines.length) out.push({ label, lines });
+  }
+  return out;
 }
 
-async function extract(page: Page, url: string): Promise<Extract> {
+async function extract(page: Page, url: string, opt: { toggles?: boolean } = {}): Promise<Extract> {
   const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 35_000 });
   await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});
   // rola até o fim para carregar seções preguiçosas (lazy load / animações on-scroll)
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight && y < 30_000; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
-    window.scrollTo(0, 0);
-  }).catch(() => {});
+  // código do navegador vai como texto: o tsx injeta helpers (__name) em funções TS, que não existem na página
+  await page.evaluate(SCROLL_JS).catch(() => {});
   await page.waitForTimeout(400);
-  const data = await page.evaluate(() => {
-    const clean = (s: string | null | undefined) => (s ?? '').replace(/\s+/g, ' ').trim();
-    const visible = (el: Element) => { const r = (el as HTMLElement).getBoundingClientRect(); const st = getComputedStyle(el); return r.height > 0 && st.display !== 'none' && st.visibility !== 'hidden'; };
-    const headings = [...document.querySelectorAll('h1,h2,h3,h4')].filter(visible).map((h) => ({ level: Number(h.tagName[1]), text: clean(h.textContent) })).filter((h) => h.text).slice(0, 150);
-    // seções: blocos de topo (section/header/footer ou filhos diretos do main/body com altura)
-    let blocks = [...document.querySelectorAll('section, header, footer')].filter((el) => visible(el) && !el.parentElement?.closest('section, header, footer'));
-    if (blocks.length < 3) {
-      const root = document.querySelector('main') ?? document.body;
-      blocks = [...root.querySelectorAll(':scope > *, :scope > * > *')].filter((el) => visible(el) && (el as HTMLElement).offsetHeight > 160 && clean((el as HTMLElement).innerText).length > 40);
-      blocks = blocks.filter((el) => !blocks.some((o) => o !== el && o.contains(el)));
-    }
-    const sections = blocks.slice(0, 40).map((el) => ({
-      tag: el.tagName.toLowerCase(),
-      heading: clean(el.querySelector('h1,h2,h3')?.textContent),
-      snippet: clean((el as HTMLElement).innerText).slice(0, 320),
-    }));
-    const links = [...document.querySelectorAll('a[href]')].map((a) => ({ href: (a as HTMLAnchorElement).href, text: clean(a.textContent).slice(0, 80) })).filter((l) => l.href.startsWith('http'));
-    return {
-      title: document.title, description: document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
-      lang: document.documentElement.lang ?? '', text: (document.body.innerText ?? '').replace(/\n{3,}/g, '\n\n').slice(0, 40_000), headings, sections, links,
-    };
-  });
-  return { url: page.url(), status: resp?.status() ?? 0, ...data };
+  const data = (await page.evaluate(EXTRACT_JS)) as Omit<Extract, 'url' | 'status'>;
+  const alt = opt.toggles && RE_PRICE_HINT.test(data.text) ? await toggles(page, data.text) : [];
+  return { url: page.url(), status: resp?.status() ?? 0, ...data, alt };
 }
 
 function toMd(kind: string, e: Extract) {
@@ -71,6 +100,7 @@ function toMd(kind: string, e: Extract) {
     ...e.sections.map((s, i) => `${i + 1}. [${s.tag}] ${s.heading ? `**${s.heading}** — ` : ''}${s.snippet}`), '',
     '## Títulos', '', ...e.headings.map((h) => `${'  '.repeat(h.level - 1)}- h${h.level}: ${h.text}`), '',
     '## Texto da página', '', e.text,
+    ...(e.alt ?? []).flatMap((a) => ['', `## Linhas que mudam com "${a.label}" selecionado (alternador de preço)`, '', ...a.lines]),
   ].join('\n');
 }
 
@@ -150,13 +180,13 @@ export async function analyzeSite(slug: string, id: string, opt: { browser?: Bro
   if (!site) { res.errors.push('sem site cadastrado: rode o módulo "perfis" ou cole o link do site no concorrente'); res.ms = Date.now() - t0; return res; }
 
   const { chromium } = await import('playwright');
-  const browser = opt.browser ?? await chromium.launch({ headless: true });
+  const browser = opt.browser ?? await chromium.launch({ headless: true, args: BROWSER_ARGS });
   const ctx = await browser.newContext({ userAgent: UA, locale: 'pt-BR', viewport: { width: 1366, height: 900 } });
   const page = await ctx.newPage();
   const dir = join(S.ROOT, P.site(slug, id));
   const pages: { kind: string; e: Extract }[] = [];
   try {
-    const home = await extract(page, site.url);
+    const home = await extract(page, site.url, { toggles: true });
     if (home.status >= 400) res.errors.push(`home respondeu ${home.status}`);
     pages.push({ kind: 'home', e: home });
     const host = new URL(home.url).hostname.replace(/^www\./, '');
@@ -169,7 +199,7 @@ export async function analyzeSite(slug: string, id: string, opt: { browser?: Bro
       for (const url of candidates) {
         if (pages.some((p) => p.e.url.split('#')[0] === url)) break;
         try {
-          const e = await extract(page, url);
+          const e = await extract(page, url, { toggles: kind === 'precos' });
           if (e.status < 400 && e.text.length > 200) { pages.push({ kind, e }); break; }
         } catch (err) { if (hit) res.errors.push(`${kind}: ${(err as Error).message.split('\n')[0]}`); }
       }
@@ -214,6 +244,9 @@ export async function analyzeSite(slug: string, id: string, opt: { browser?: Bro
     res.ok = true; res.pages = pages.length; res.sitemap = total;
     res.contacts = ct.emails.length + ct.phones.length + ct.whatsapp.length;
     S.clearAnalysisRequest(slug, id, ['site']);
+    // Reclame Aqui (busca por script, ~5 s): alimenta o módulo reputacao sem gastar IA
+    try { const ra = await updateReclameAqui(slug, id, page); res.ra = ra.found ? `${ra.status}${ra.score != null ? ` ${ra.score}` : ''} · ${ra.complaints} recl.` : 'não achado'; }
+    catch (err) { res.errors.push(`Reclame Aqui: ${(err as Error).message.split('\n')[0]}`); }
   } catch (err) {
     res.errors.push((err as Error).message.split('\n')[0]);
   } finally {
@@ -227,7 +260,7 @@ export async function analyzeSite(slug: string, id: string, opt: { browser?: Bro
 /** Vários concorrentes reaproveitando 1 navegador. */
 export async function analyzeSites(slug: string, ids: string[], onDone?: (r: SiteRunResult) => void) {
   const { chromium } = await import('playwright');
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, args: BROWSER_ARGS });
   const out: SiteRunResult[] = [];
   try {
     for (const id of ids) { const r = await analyzeSite(slug, id, { browser }); out.push(r); onDone?.(r); }

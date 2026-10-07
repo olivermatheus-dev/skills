@@ -1,0 +1,106 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:37:12Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://gestorpsi.com.br/",
+      "title": "GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia | GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia"
+    },
+    {
+      "url": "https://gestorpsi.com.br/funcionalidades/",
+      "title": "Funcionalidades | GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://gestorpsi.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://gestorpsi.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia | GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia",
+        "chars": 2725
+      },
+      {
+        "url": "https://gestorpsi.com.br/funcionalidades/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades | GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia",
+        "chars": 4028
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 9,
+      "groups": [
+        {
+          "name": "/hello-world",
+          "count": 1,
+          "sample": [
+            "/hello-world/"
+          ]
+        },
+        {
+          "name": "/versao-beta-do-gestorpsi",
+          "count": 1,
+          "sample": [
+            "/versao-beta-do-gestorpsi/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/teste-gratuito",
+          "count": 1,
+          "sample": [
+            "/teste-gratuito/"
+          ]
+        },
+        {
+          "name": "/funcionalidades",
+          "count": 1,
+          "sample": [
+            "/funcionalidades/"
+          ]
+        },
+        {
+          "name": "/vantagens",
+          "count": 1,
+          "sample": [
+            "/vantagens/"
+          ]
+        },
+        {
+          "name": "/politica-de-cookies-e-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-cookies-e-privacidade/"
+          ]
+        },
+        {
+          "name": "/category",
+          "count": 1,
+          "sample": [
+            "/category/uncategorized/"
+          ]
+        },
+        {
+          "name": "/author",
+          "count": 1,
+          "sample": [
+            "/author/tprince/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

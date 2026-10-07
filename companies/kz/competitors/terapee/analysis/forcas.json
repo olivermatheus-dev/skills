@@ -1,0 +1,64 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:31:52Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Rotina financeira completa",
+        "evidence": "cobrança automática, recibo, NFS-e incluída e repasse"
+      },
+      {
+        "point": "Lembrete automático no WhatsApp com resultado declarado",
+        "evidence": "25% menos faltas"
+      },
+      {
+        "point": "Preço de entrada acessível",
+        "evidence": "Individual a R$ 55,90/mês e teste de 14 dias sem cartão"
+      },
+      {
+        "point": "Migração sem retrabalho",
+        "evidence": "+14 mil pacientes e +400 mil agendamentos importados"
+      },
+      {
+        "point": "Cobertura multidisciplinar",
+        "evidence": "psicologia, fono, TO, fisio e ABA"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Foco em clínica, não no terapeuta solo",
+        "evidence": "hero e funções (multi-agenda, repasse) voltados a equipes"
+      },
+      {
+        "point": "Sem IA nem diferenciais clínicos",
+        "evidence": "nenhuma menção a IA nas páginas lidas"
+      },
+      {
+        "point": "Só cartão de crédito",
+        "evidence": "FAQ: mensalidades pagas por cartão"
+      },
+      {
+        "point": "WhatsApp próprio é pago à parte",
+        "evidence": "contratado à parte no plano Individual"
+      },
+      {
+        "point": "Marca sem personalidade e sem rede social achada",
+        "evidence": "nenhum perfil social linkado no site"
+      }
+    ],
+    "opportunities": [
+      "Falar direto ao terapeuta autônomo, não à clínica",
+      "Tom humano e próximo contra o discurso de gestão",
+      "Oferecer WhatsApp e cobrança como parte do preço, sem extra",
+      "Pagamento por Pix ou boleto",
+      "Prova social com terapeutas reais"
+    ]
+  }
+}

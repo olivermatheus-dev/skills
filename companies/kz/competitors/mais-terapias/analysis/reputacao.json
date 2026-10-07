@@ -1,13 +1,14 @@
 {
   "module": "reputacao",
-  "updatedAt": "2026-10-07T19:14:53Z",
+  "updatedAt": "2026-10-07T19:37:54Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://www.reclameaqui.com.br/empresa/mais-terapias/"
+      "url": "https://www.reclameaqui.com.br/busca/?q=Mais%20Terapias",
+      "title": "Busca no Reclame Aqui"
     }
   ],
-  "confidence": "baixa",
+  "confidence": "media",
   "data": {
     "reclameAqui": {
       "found": false,
@@ -15,6 +16,6 @@
     },
     "stores": [],
     "mentions": [],
-    "summary": "Página direta do Reclame Aqui bloqueou (403) e buscas não retornaram empresa Mais Terapias; não confirmado se existe cadastro. Sem app nas lojas confirmado (sistema web em app.maisterapias.com.br)."
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
   }
 }

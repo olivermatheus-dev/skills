@@ -1,0 +1,53 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-07T19:29:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://usecorpora.com.br/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "emails": [
+      "suporte@usecorpora.com.br"
+    ],
+    "phones": [
+      "+55 11 3136-1826"
+    ],
+    "whatsapp": [
+      "+551131361826"
+    ],
+    "cnpj": "51.943.811/0001-67",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/usecorpora/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/psicohumor/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@CorporaTV"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://tiktok.com/@usecorpora"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/company/usecorpora"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/usecorpora"
+      }
+    ],
+    "support": "100% atendimento humano (com psicólogas na equipe); WhatsApp e e-mail"
+  }
+}

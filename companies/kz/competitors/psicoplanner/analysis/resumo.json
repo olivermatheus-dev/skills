@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:30:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "App barato para psicólogos com transcrição por IA, WhatsApp ilimitado e suporte humano.",
+    "text": "Gestão de consultório com agenda, prontuário, financeiro, vídeo e anamnese. O destaque é a IA PsiAssist que transcreve a sessão e preenche o prontuário, mais lembretes ilimitados no WhatsApp. Posiciona-se contra apps que automatizam até o cuidado: atendimento 100% humano e sem taxas escondidas.",
+    "audience": "psicólogos e terapeutas autônomos",
+    "positioning": "escolhe a escuta e o suporte humano",
+    "size": "mais de 3.200 psicólogas (declarado no site)"
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:37:49Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/",
+      "title": "Sistema de Gestão para Terapeutas e Clínicas | Mais Terapias"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/planos-e-precos/",
+      "title": "Planos e Preços do Sistema para Terapeutas | Mais Terapias"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/funcionalidades/prontuario/",
+      "title": "Prontuário Eletrônico para Terapeutas | Mais Terapias"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/quem-somos/",
+      "title": "Quem Somos: História e Equipe | Mais Terapias"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/fale-conosco/",
+      "title": "Fale Conosco: WhatsApp, E-mail e Suporte | Mais Terapias"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/faq/",
+      "title": "Perguntas Frequentes sobre a Mais Terapias"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.maisterapias.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.maisterapias.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema de Gestão para Terapeutas e Clínicas | Mais Terapias",
+        "chars": 14300
+      },
+      {
+        "url": "https://www.maisterapias.com.br/planos-e-precos/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos e Preços do Sistema para Terapeutas | Mais Terapias",
+        "chars": 7914
+      },
+      {
+        "url": "https://www.maisterapias.com.br/funcionalidades/prontuario/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Prontuário Eletrônico para Terapeutas | Mais Terapias",
+        "chars": 8576
+      },
+      {
+        "url": "https://www.maisterapias.com.br/quem-somos/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Quem Somos: História e Equipe | Mais Terapias",
+        "chars": 10550
+      },
+      {
+        "url": "https://www.maisterapias.com.br/fale-conosco/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Fale Conosco: WhatsApp, E-mail e Suporte | Mais Terapias",
+        "chars": 4913
+      },
+      {
+        "url": "https://www.maisterapias.com.br/faq/",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Perguntas Frequentes sobre a Mais Terapias",
+        "chars": 6445
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 103,
+      "groups": [
+        {
+          "name": "/pergunta",
+          "count": 35,
+          "sample": [
+            "/pergunta/o-sistema-e-seguro/",
+            "/pergunta/qual-a-maior-vantagem-do-mais-terapias/",
+            "/pergunta/gostaria-de-saber-qual-valor-a-ser-pago-mensal-ou-anual-pelo-software/",
+            "/pergunta/fiz-meu-cadastro-mas-nao-estou-conseguindo-acessar/"
+          ]
+        },
+        {
+          "name": "/funcionalidades",
+          "count": 15,
+          "sample": [
+            "/funcionalidades/preenchimento-pelo-paciente/",
+            "/funcionalidades/compartilhamento/",
+            "/funcionalidades/prontuario/",
+            "/funcionalidades/lembretes/"
+          ]
+        },
+        {
+          "name": "/category",
+          "count": 9,
+          "sample": [
+            "/category/financeiro/",
+            "/category/tecnologia-e-inovacao/",
+            "/category/relacao-com-paciente/",
+            "/category/crescimento-do-negocio/"
+          ]
+        },
+        {
+          "name": "/lp",
+          "count": 5,
+          "sample": [
+            "/lp/terapeutas/rotina-profissional/",
+            "/lp/terapeutas/registros-com-ia/",
+            "/lp/clinicas/gestao-da-equipe/",
+            "/lp/clinicas/prontuario-seguranca/"
+          ]
+        },
+        {
+          "name": "/equipe",
+          "count": 4,
+          "sample": [
+            "/equipe/luiz-felipe/",
+            "/equipe/andre-araujo/",
+            "/equipe/thaisa-leal/",
+            "/equipe/daniela-klafke/"
+          ]
+        },
+        {
+          "name": "/nao-se-desespere-estamos-aqui-para-ajudar-voce",
+          "count": 1,
+          "sample": [
+            "/nao-se-desespere-estamos-aqui-para-ajudar-voce/"
+          ]
+        },
+        {
+          "name": "/criatividade",
+          "count": 1,
+          "sample": [
+            "/criatividade/"
+          ]
+        },
+        {
+          "name": "/a-importancia-da-comunicacao-no-processo-terapeutico",
+          "count": 1,
+          "sample": [
+            "/a-importancia-da-comunicacao-no-processo-terapeutico/"
+          ]
+        },
+        {
+          "name": "/conheca-os-beneficios-do-prontuario-eletronico",
+          "count": 1,
+          "sample": [
+            "/conheca-os-beneficios-do-prontuario-eletronico/"
+          ]
+        },
+        {
+          "name": "/o-uso-do-whatsapp-no-processo-de-reabilitacao",
+          "count": 1,
+          "sample": [
+            "/o-uso-do-whatsapp-no-processo-de-reabilitacao/"
+          ]
+        },
+        {
+          "name": "/prontuario-do-paciente-evolucao-historica",
+          "count": 1,
+          "sample": [
+            "/prontuario-do-paciente-evolucao-historica/"
+          ]
+        },
+        {
+          "name": "/migrar-para-o-digital-e-mais-simples-do-que-voce-imagina",
+          "count": 1,
+          "sample": [
+            "/migrar-para-o-digital-e-mais-simples-do-que-voce-imagina/"
+          ]
+        },
+        {
+          "name": "/entrevista-usbrtv",
+          "count": 1,
+          "sample": [
+            "/entrevista-usbrtv/"
+          ]
+        },
+        {
+          "name": "/09-de-dezembro-dia-do-fonoaudiologo",
+          "count": 1,
+          "sample": [
+            "/09-de-dezembro-dia-do-fonoaudiologo/"
+          ]
+        },
+        {
+          "name": "/as-soft-skills-no-setor-da-saude",
+          "count": 1,
+          "sample": [
+            "/as-soft-skills-no-setor-da-saude/"
+          ]
+        },
+        {
+          "name": "/cuidado-centrado-no-paciente-e-familia-atitudes-praticas",
+          "count": 1,
+          "sample": [
+            "/cuidado-centrado-no-paciente-e-familia-atitudes-praticas/"
+          ]
+        },
+        {
+          "name": "/canvas-como-estruturar-o-planejamento-terapeutico",
+          "count": 1,
+          "sample": [
+            "/canvas-como-estruturar-o-planejamento-terapeutico/"
+          ]
+        },
+        {
+          "name": "/vamos-falar-sobre-marketing-em-saude-bate-papo-com-a-administradora-jennifer-tedesco",
+          "count": 1,
+          "sample": [
+            "/vamos-falar-sobre-marketing-em-saude-bate-papo-com-a-administradora-jennifer-tedesco/"
+          ]
+        },
+        {
+          "name": "/conheca-o-metodo-smart-de-definicao-de-metas",
+          "count": 1,
+          "sample": [
+            "/conheca-o-metodo-smart-de-definicao-de-metas/"
+          ]
+        },
+        {
+          "name": "/pensando-a-jornada-do-paciente-atraves-do-modelo-transteorico-de-mudanca-de-comportamento",
+          "count": 1,
+          "sample": [
+            "/pensando-a-jornada-do-paciente-atraves-do-modelo-transteorico-de-mudanca-de-comportamento/"
+          ]
+        },
+        {
+          "name": "/teleatendimento-em-fonoaudiologia-desafios-e-possibilidades",
+          "count": 1,
+          "sample": [
+            "/teleatendimento-em-fonoaudiologia-desafios-e-possibilidades/"
+          ]
+        },
+        {
+          "name": "/como-o-mais-terapias-pode-te-ajudar-no-seu-atendimento-por-teleconsulta",
+          "count": 1,
+          "sample": [
+            "/como-o-mais-terapias-pode-te-ajudar-no-seu-atendimento-por-teleconsulta/"
+          ]
+        },
+        {
+          "name": "/prontuario-eletronico-e-seguro",
+          "count": 1,
+          "sample": [
+            "/prontuario-eletronico-e-seguro/"
+          ]
+        },
+        {
+          "name": "/o-que-esta-por-tras-do-atendimento",
+          "count": 1,
+          "sample": [
+            "/o-que-esta-por-tras-do-atendimento/"
+          ]
+        },
+        {
+          "name": "/o-mais-terapias-esta-de-cara-nova",
+          "count": 1,
+          "sample": [
+            "/o-mais-terapias-esta-de-cara-nova/"
+          ]
+        },
+        {
+          "name": "/como-serao-os-novos-comportamentos-do-consumidor-em-2022-e-por-que-voce-deveria-pensar-sobre-isso",
+          "count": 1,
+          "sample": [
+            "/como-serao-os-novos-comportamentos-do-consumidor-em-2022-e-por-que-voce-deveria-pensar-sobre-isso/"
+          ]
+        },
+        {
+          "name": "/atendimento-multiprofissional-como-o-mais-terapias-pode-ajudar",
+          "count": 1,
+          "sample": [
+            "/atendimento-multiprofissional-como-o-mais-terapias-pode-ajudar/"
+          ]
+        },
+        {
+          "name": "/a-importancia-do-cadastro-do-paciente",
+          "count": 1,
+          "sample": [
+            "/a-importancia-do-cadastro-do-paciente/"
+          ]
+        },
+        {
+          "name": "/otimize-sua-rotina-com-uma-agenda-de-atendimentos-eficiente",
+          "count": 1,
+          "sample": [
+            "/otimize-sua-rotina-com-uma-agenda-de-atendimentos-eficiente/"
+          ]
+        },
+        {
+          "name": "/como-fazer-a-gestao-financeira-para-profissionais-da-saude",
+          "count": 1,
+          "sample": [
+            "/como-fazer-a-gestao-financeira-para-profissionais-da-saude/"
+          ]
+        },
+        {
+          "name": "/como-organizar-prontuario-do-paciente",
+          "count": 1,
+          "sample": [
+            "/como-organizar-prontuario-do-paciente/"
+          ]
+        },
+        {
+          "name": "/como-atrair-mais-pacientes",
+          "count": 1,
+          "sample": [
+            "/como-atrair-mais-pacientes/"
+          ]
+        },
+        {
+          "name": "/preco-x-valor-aumente-a-percepcao-de-valor-em-sua-consulta",
+          "count": 1,
+          "sample": [
+            "/preco-x-valor-aumente-a-percepcao-de-valor-em-sua-consulta/"
+          ]
+        },
+        {
+          "name": "/como-funciona-o-sistema-em-nuvem-beneficios-e-vantagens-do-sistema-em-nuvem",
+          "count": 1,
+          "sample": [
+            "/como-funciona-o-sistema-em-nuvem-beneficios-e-vantagens-do-sistema-em-nuvem/"
+          ]
+        },
+        {
+          "name": "/gestao-do-tempo-como-organizar-seu-tempo-e-aumentar-sua-produtividade",
+          "count": 1,
+          "sample": [
+            "/gestao-do-tempo-como-organizar-seu-tempo-e-aumentar-sua-produtividade/"
+          ]
+        },
+        {
+          "name": "/7-erros-que-voce-deve-evitar-na-organizacao-do-prontuario-do-paciente",
+          "count": 1,
+          "sample": [
+            "/7-erros-que-voce-deve-evitar-na-organizacao-do-prontuario-do-paciente/"
+          ]
+        },
+        {
+          "name": "/como-elaborar-prontuario-fonoaudiologico-com-sucesso-passo-a-passo-prontuario-do-paciente-fono",
+          "count": 1,
+          "sample": [
+            "/como-elaborar-prontuario-fonoaudiologico-com-sucesso-passo-a-passo-prontuario-do-paciente-fono/"
+          ]
+        },
+        {
+          "name": "/telessaude-quais-sao-os-modelos-de-servicos-que-o-terapeuta-pode-fazer-com-a-telessaude",
+          "count": 1,
+          "sample": [
+            "/telessaude-quais-sao-os-modelos-de-servicos-que-o-terapeuta-pode-fazer-com-a-telessaude/"
+          ]
+        },
+        {
+          "name": "/funcao-do-prontuario-do-paciente-e-sua-importancia-para-o-profissional-de-saude",
+          "count": 1,
+          "sample": [
+            "/funcao-do-prontuario-do-paciente-e-sua-importancia-para-o-profissional-de-saude/"
+          ]
+        },
+        {
+          "name": "/como-escolher-a-melhor-plataforma-online-para-profissionais-da-saude-fazerem-a-gestao-de-atendimento",
+          "count": 1,
+          "sample": [
+            "/como-escolher-a-melhor-plataforma-online-para-profissionais-da-saude-fazerem-a-gestao-de-atendimento/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

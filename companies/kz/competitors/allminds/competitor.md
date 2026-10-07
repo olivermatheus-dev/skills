@@ -3,6 +3,7 @@ id: allminds
 name: Allminds
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

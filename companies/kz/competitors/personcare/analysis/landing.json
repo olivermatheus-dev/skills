@@ -1,0 +1,79 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:30:23Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://personcare.com.br/",
+    "hero": {
+      "headline": "Gestão para Clínicas e Profissionais de Psicologia",
+      "subheadline": "Bem-vindo à revolução das ferramentas de gestão para clínicas.",
+      "cta": "Teste por 7 dias Gratuitamente",
+      "visual": "selos App Store e Google Play"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Gestão para Clínicas e Profissionais de Psicologia",
+        "summary": "teste 7 dias e apps nas lojas"
+      },
+      {
+        "type": "features",
+        "title": "Financeiro, Consultas, Projetos",
+        "summary": "módulos financeiro, consultas e gestão de projetos"
+      },
+      {
+        "type": "features",
+        "title": "Sistema Integrado para Psicólogos",
+        "summary": "agendamento, escalas de avaliação, processo clínico"
+      },
+      {
+        "type": "beneficios",
+        "title": "Sua rotina está sobrecarregada?",
+        "summary": "8 ferramentas: WhatsApp, link, escalas, Google Calendar, prontuário, transcrição, NFS-e, vídeo"
+      },
+      {
+        "type": "outro",
+        "title": "Módulo de comunidade",
+        "summary": "em desenvolvimento"
+      },
+      {
+        "type": "solucao",
+        "title": "Telepsicologia",
+        "summary": "sessões por videochamada"
+      },
+      {
+        "type": "solucao",
+        "title": "Aplicativos",
+        "summary": "app do profissional e do paciente (humor e hábitos)"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas Frequentes",
+        "summary": "6 perguntas"
+      },
+      {
+        "type": "precos",
+        "title": "Planos que se encaixam no seu bolso",
+        "summary": "3 planos, toggle mensal/anual"
+      }
+    ],
+    "ctas": [
+      "Teste por 7 dias Gratuitamente",
+      "Criar conta Grátis",
+      "Acessar sistema"
+    ],
+    "socialProof": [],
+    "interesting": [
+      "toggle mensal/anual com 'mais de 20% de desconto'",
+      "'WhatsApp ilimitado, sem recargas' como argumento",
+      "selos de App Store e Google Play já no hero"
+    ],
+    "tone": "corporativo e genérico, promete 'revolução'; sem rosto humano"
+  }
+}

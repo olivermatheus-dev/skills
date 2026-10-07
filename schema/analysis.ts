@@ -16,7 +16,7 @@ export const MODULES = [
   { id: 'forcas', label: 'Pontos fortes e fracos', engine: 'ia', needsSite: true, hint: 'fortes, fracos e brechas que a nossa empresa pode explorar' },
   { id: 'precos', label: 'Preços e planos', engine: 'misto', needsSite: true, hint: 'preço mensal, anual, planos, limites, teste grátis, garantia' },
   { id: 'landing', label: 'Landing page', engine: 'misto', needsSite: true, hint: 'seções em ordem, hero, CTAs, prova social e o que tem de interessante' },
-  { id: 'reputacao', label: 'Reputação', engine: 'ia', needsSite: false, hint: 'Reclame Aqui, notas nas lojas de app, reclamações recorrentes' },
+  { id: 'reputacao', label: 'Reputação', engine: 'misto', needsSite: false, hint: 'Reclame Aqui (script, na hora) + notas nas lojas de app e menções (IA)' },
   { id: 'redes', label: 'Coleta das redes', engine: 'script', needsSite: false, hint: 'puxa perfis e conteúdos (YouTube, Instagram, TikTok) — a coleta de sempre' },
 ] as const;
 export const ModuleId = z.enum(MODULES.map((m) => m.id) as [(typeof MODULES)[number]['id'], ...(typeof MODULES)[number]['id'][]]);

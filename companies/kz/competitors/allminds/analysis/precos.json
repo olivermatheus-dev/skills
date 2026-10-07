@@ -1,0 +1,62 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:41:58Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/planos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 74.9,
+    "trial": "15 dias grátis",
+    "guarantee": "reembolso integral em até 7 dias no anual",
+    "plans": [
+      {
+        "name": "Captação",
+        "highlights": [
+          "9 leads por trimestre",
+          "R$ 279 por trimestre, sem gestão"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Gestão",
+        "monthly": 74.9,
+        "yearlyMonthly": 67.41,
+        "yearlyTotal": 808.92,
+        "highlights": [
+          "agenda, prontuário, financeiro",
+          "vídeo R$ 2/sessão",
+          "lembrete por e-mail"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Ecossistema",
+        "monthly": 179.9,
+        "yearlyMonthly": 161.91,
+        "yearlyTotal": 1942.92,
+        "highlights": [
+          "12 leads/trimestre",
+          "30 sessões de vídeo",
+          "100 NF/mês",
+          "WhatsApp",
+          "cursos e mentorias"
+        ],
+        "recommended": true
+      }
+    ],
+    "extras": [
+      "Clube de descontos: R$ 19,90/mês",
+      "Consultoria de implementação: R$ 100 único",
+      "Vídeo adicional: R$ 2/sessão",
+      "NF adicional: R$ 0,20"
+    ],
+    "notes": "Estado padrão da página: Mensal (R$ 74,90 e R$ 179,90 /mês; Captação é trimestral, R$ 279). O anual aparece só como \"Cobrado como R$ 808,92/ano\" e \"R$ 1942,92/ano\" (= 10% off sobre 12x o mensal); o valor mensal equivalente do anual foi calculado (total/12). Anual inclui 1 mentoria de marketing ou vendas/ano e tem reembolso só em 7 dias. Home: menos de R$ 2 por dia."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:29:29Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Software de gestão para clínicas multidisciplinares, com IA nativa, TISS e módulo ABA",
+    "text": "Plataforma única com agenda, prontuário, financeiro, repasses, faturamento de convênios (TISS), indicadores e IA (secretária 24h e transcrição de atendimento). Foco em clínicas multidisciplinares (psicologia, fono, fisio, estética, ABA para TEA), não no profissional solo. Mais de 10 anos de mercado, vendido por demonstração.",
+    "audience": "clínicas multidisciplinares e de saúde; psicologia é uma das especialidades",
+    "positioning": "Gestão inteligente para clínicas que querem crescer",
+    "size": "+45 mil profissionais e +4 mil clínicas (declarado no site)"
+  }
+}

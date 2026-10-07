@@ -1,0 +1,86 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-07T19:30:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://psicomanager.com.br/",
+    "hero": {
+      "headline": "Psicólogos livres para cuidar.",
+      "subheadline": "O maior e mais utilizado sistema para psicólogos do Brasil. Agenda, prontuário, financeiro, pacientes e IA em uma única plataforma.",
+      "cta": "Criar conta grátis",
+      "visual": "depoimento de psicóloga com CRP"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Psicólogos livres para cuidar",
+        "summary": "promessa de liberdade + números (+40 mil, 11 anos, +20 mi sessões)"
+      },
+      {
+        "type": "outro",
+        "title": "Para quem é",
+        "summary": "escolha entre individual e clínica"
+      },
+      {
+        "type": "outro",
+        "title": "Demonstração",
+        "summary": "vídeo da plataforma"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Tudo flui",
+        "summary": "linha do dia: manhã, preparação, sessão, pós-sessão, fim do dia"
+      },
+      {
+        "type": "features",
+        "title": "Ecossistema clínico",
+        "summary": "agenda, IA, financeiro, pacientes, app, clínica"
+      },
+      {
+        "type": "seguranca",
+        "title": "Máxima segurança",
+        "summary": "AES-256, LGPD, 99,98% uptime, AWS"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Mais de 40 mil psicólogos aprovam",
+        "summary": "depoimentos em vídeo com CRP"
+      },
+      {
+        "type": "faq",
+        "title": "Algumas respostas importantes",
+        "summary": "o que é, preço, prontuário, segurança"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "políticas, afiliados, blog, suporte"
+      }
+    ],
+    "ctas": [
+      "Criar conta grátis",
+      "Assistir demonstração",
+      "Falar com um consultor"
+    ],
+    "socialProof": [
+      "+40 mil psicólogos ativos",
+      "11 anos de mercado",
+      "+20 mi sessões/ano",
+      "depoimentos com CRP"
+    ],
+    "interesting": [
+      "narrativa da jornada do dia (antes, durante, depois da sessão)",
+      "bloco de segurança com números",
+      "porta separada para individual e clínica",
+      "programa de afiliados no rodapé",
+      "preço fora da home (FAQ remete à página de planos)"
+    ],
+    "tone": "institucional, confiante, de líder de mercado"
+  }
+}

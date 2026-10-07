@@ -1,0 +1,22 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:29:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.clinicaagil.com.br/site/"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/sobre/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "publicPrice": false,
+    "currency": "BRL",
+    "model": "sob-consulta",
+    "plans": [],
+    "extras": [],
+    "notes": "Sem página de preços no site; CTA é Solicitar Demonstração. Procurei /planos e a home sem achar valores. Referência interna de abr/2026 em COMPETITORS.md: ~R$ 199/mês (3 usuários), sem fonte pública confirmada agora."
+  }
+}

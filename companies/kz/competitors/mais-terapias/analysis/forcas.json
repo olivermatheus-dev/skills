@@ -1,0 +1,66 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:29:56Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.maisterapias.com.br/"
+    },
+    {
+      "url": "https://www.maisterapias.com.br/planos-e-precos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço de entrada baixo e teste longo",
+        "evidence": "Starter R$ 39,90 (promo) e 15 dias sem cartão"
+      },
+      {
+        "point": "IA de evolução SOAP por áudio",
+        "evidence": "Assistente de IA no Premium, destaque na home"
+      },
+      {
+        "point": "Compartilhamento de registros com família e equipe",
+        "evidence": "4 níveis de visibilidade por registro"
+      },
+      {
+        "point": "Cobre várias especialidades e clínicas",
+        "evidence": "fisio, fono, TO, psicologia; plano Clínicas ilimitado"
+      },
+      {
+        "point": "Prova numérica e depoimentos de clínicas",
+        "evidence": "19 mil+ pacientes, 240 mil+ atendimentos"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "WhatsApp com franquia pequena e recarga paga",
+        "evidence": "25 msgs/mês; pacotes de R$ 5,90 a R$ 47"
+      },
+      {
+        "point": "Sem plano anual",
+        "evidence": "FAQ: contratação só mensal"
+      },
+      {
+        "point": "Sem videochamada nem app mobile visíveis",
+        "evidence": "não aparecem na home, planos nem comparativo"
+      },
+      {
+        "point": "Tom institucional e genérico, foco em reabilitação/clínicas",
+        "evidence": "'rede de cuidado', depoimentos de clínicas e crianças"
+      },
+      {
+        "point": "Preço de lista maior que o promocional",
+        "evidence": "Starter 'normal' R$ 59,90 e Premium R$ 79,90"
+      }
+    ],
+    "opportunities": [
+      "Videochamada com sala de espera nativa",
+      "Voz de terapeuta autônomo adulto (psicanalista, hipnoterapeuta, integrativo), não de clínica de reabilitação",
+      "WhatsApp incluído sem franquia/recarga",
+      "Portal com relato do paciente entre sessões como narrativa, não só 'compartilhamento'"
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:29:49Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://gestorpsi.com.br/"
+    },
+    {
+      "url": "https://gestorpsi.com.br/funcionalidades/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agendamento de atendimentos",
+            "highlight": true
+          },
+          {
+            "name": "Agendas e clientes ilimitados",
+            "highlight": false
+          },
+          {
+            "name": "Fila de espera e inscrições em serviços",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Prontuário técnico do cliente",
+            "highlight": true
+          },
+          {
+            "name": "Impressão de prontuário",
+            "highlight": false
+          },
+          {
+            "name": "Admissão e desligamento de serviços",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Honorários, faturas e controle de faturamento",
+            "highlight": true
+          },
+          {
+            "name": "Convênios vinculados a serviços",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembrete por e-mail no dia anterior",
+            "detail": "e agenda diária ao profissional",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Perfis: estudante, profissional, secretária e administrador",
+            "highlight": false
+          },
+          {
+            "name": "Cadastro de secretárias",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Relatórios estatísticos (admissão e inscrições)",
+            "detail": "exporta PDF ou HTML",
+            "highlight": false
+          },
+          {
+            "name": "Demonstração funcional",
+            "highlight": false
+          },
+          {
+            "name": "Manual em PDF e vídeos de ajuda",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Preço muito baixo a partir de R$ 34,50",
+      "Planos por equipe (até 50 profissionais)",
+      "Perfil de estudante e estabelecimentos de ensino"
+    ],
+    "missing": [
+      "videochamada nativa",
+      "WhatsApp",
+      "portal do paciente",
+      "IA",
+      "site de agendamento",
+      "cobrança online/Pix"
+    ]
+  }
+}

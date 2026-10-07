@@ -1,0 +1,24 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:31:37Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site .com.br só em pt-BR, preços em R$, NFS-e pelo Emissor Nacional gov.br, LGPD, CNPJ e telefone (21) no rodapé"
+  }
+}

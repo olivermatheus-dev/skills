@@ -1,0 +1,125 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-07T19:39:44Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.terapee.com.br/",
+      "title": "Terapee — Sistema de gestão para clínicas de terapia"
+    },
+    {
+      "url": "https://www.terapee.com.br/funcionalidades/",
+      "title": "Funcionalidades do Terapee | Gestão completa para clínicas de terapia"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.terapee.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.terapee.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Terapee — Sistema de gestão para clínicas de terapia",
+        "chars": 21183
+      },
+      {
+        "url": "https://www.terapee.com.br/funcionalidades/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades do Terapee | Gestão completa para clínicas de terapia",
+        "chars": 3080
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 30,
+      "groups": [
+        {
+          "name": "/funcionalidades",
+          "count": 18,
+          "sample": [
+            "/funcionalidades/",
+            "/funcionalidades/agenda",
+            "/funcionalidades/prontuario-eletronico",
+            "/funcionalidades/telemedicina"
+          ]
+        },
+        {
+          "name": "/alternativas",
+          "count": 3,
+          "sample": [
+            "/alternativas/psicoplanner",
+            "/alternativas/ninsaude",
+            "/alternativas/clinica-agil"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/para-psicologos",
+          "count": 1,
+          "sample": [
+            "/para-psicologos"
+          ]
+        },
+        {
+          "name": "/para-fonoaudiologos",
+          "count": 1,
+          "sample": [
+            "/para-fonoaudiologos"
+          ]
+        },
+        {
+          "name": "/para-terapeutas-ocupacionais",
+          "count": 1,
+          "sample": [
+            "/para-terapeutas-ocupacionais"
+          ]
+        },
+        {
+          "name": "/para-clinicas-multidisciplinares",
+          "count": 1,
+          "sample": [
+            "/para-clinicas-multidisciplinares"
+          ]
+        },
+        {
+          "name": "/para-terapia-infantil",
+          "count": 1,
+          "sample": [
+            "/para-terapia-infantil"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade"
+          ]
+        },
+        {
+          "name": "/termos-de-uso",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso"
+          ]
+        },
+        {
+          "name": "/ferramentas",
+          "count": 1,
+          "sample": [
+            "/ferramentas/calculadora-de-precificacao"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

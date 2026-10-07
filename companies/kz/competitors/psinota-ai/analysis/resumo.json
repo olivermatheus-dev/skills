@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:31:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/"
+    },
+    {
+      "url": "https://psinotaai.com/sobre"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Prontuário com IA que escreve a nota clínica da sessão para psicólogos brasileiros",
+    "text": "Prontuário eletrônico em que a IA gera o rascunho da nota (DAP, BIRP, Evolução Livre, Anamnese) a partir de áudio, ditado, vídeo ou foto do caderno. O psicólogo revisa e assina. Inclui teleconsulta nativa, WhatsApp manual, laudos, testes e financeiro. Posiciona-se pela conformidade com a Res. CFP 09/2024 e LGPD. Plano grátis permanente.",
+    "audience": "psicólogos autônomos e clínicas pequenas",
+    "positioning": "A sessão termina. A nota já está escrita.",
+    "size": "850+ profissionais cadastrados e 14.000+ notas geradas (declarado no site)"
+  }
+}

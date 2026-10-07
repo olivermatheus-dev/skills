@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-07T19:30:12Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/"
+    },
+    {
+      "url": "https://psicomanager.com.br/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Sistema completo para psicólogos solo e clínicas, com IA, financeiro e app do paciente.",
+    "text": "Plataforma veterana (11 anos) com agenda, prontuário por abordagem, financeiro com Psicobank/NFS-e, IA clínica e app do paciente. Atende individual e clínica multiprofissional. Posiciona-se como líder de mercado, com tom institucional e foco em escala e segurança.",
+    "audience": "psicólogos individuais e clínicas de psicologia",
+    "positioning": "Psicólogos livres para cuidar",
+    "size": "+40 mil psicólogos ativos, +20 mi sessões/ano (declarado no site)"
+  }
+}

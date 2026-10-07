@@ -1,14 +1,16 @@
-// Detalhe do concorrente: capa, bio e perfis; "Puxar agora"; seguidores por coleta; conteúdos ranqueados por outlier,
-// com marcação (★, status, tags, nota) e "Virar ideia".
+// Detalhe do concorrente: capa, bio e perfis. Duas abas:
+//   Análise — módulos (site, preços, features, LP, reputação…), pedido para a fila da IA e anotações por módulo;
+//   Redes e conteúdos — "Puxar agora", seguidores por coleta, conteúdos ranqueados por outlier, marcação e "Virar ideia".
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type CompetitorFull, type Doc, type Idea, type ItemMark } from '../api';
-import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useCompetitor, useTags } from '../queries';
+import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useAnalysis, useCompetitor, useTags } from '../queries';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/ui';
 import { ResultLine } from '../components/competitors/AddLinksModal';
 import EditCompetitor from '../components/competitors/EditCompetitor';
+import AnalysisPanel, { MARKET } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
 import { ItemCard, ItemDrawer, titleOf } from '../components/competitors/Items';
 import {
@@ -36,6 +38,8 @@ export default function CompetitorDetail() {
   const projectTags = useTags(slug);
   const actions = useCompetitorActions(slug);
 
+  const [view, setView] = useState<'analise' | 'redes'>('analise');
+  const analysis = useAnalysis(slug, id);
   const [tab, setTab] = useState<string>('all');
   const [sort, setSort] = useState<Sort>('outlier');
   const [type, setType] = useState('');
@@ -190,7 +194,8 @@ export default function CompetitorDetail() {
               <h1 className="text-2xl font-semibold tracking-tight truncate">{c.name}</h1>
               <Star on={c.favorite} onClick={toggleFav} />
               <Badge color={KIND_COLOR[c.kind]}>{KINDS[c.kind]}</Badge>
-              {c.status === 'arquivado' && <Badge>arquivado</Badge>}
+              {c.status !== 'ativo' && <Badge color={c.status === 'candidato' ? '#d97706' : undefined}>{c.status}</Badge>}
+              {c.market && <Badge color={MARKET[c.market].color}>{MARKET[c.market].label}</Badge>}
               {c.tags.map((t) => <span key={t} className="text-xs text-muted">#{t}</span>)}
             </div>
             <div className="text-xs text-muted mt-1">
@@ -205,7 +210,19 @@ export default function CompetitorDetail() {
           </div>
         </div>
 
-        {bio && <p className="mt-4 text-sm whitespace-pre-line max-w-3xl text-text/90 line-clamp-4">{bio}</p>}
+        {(() => { const one = (analysis.data?.results.resumo?.data as { oneLiner?: string } | undefined)?.oneLiner; return one ? <p className="mt-4 text-[15px] font-medium max-w-3xl">{one}</p> : null; })()}
+        {bio && <p className="mt-2 text-sm whitespace-pre-line max-w-3xl text-text/90 line-clamp-4">{bio}</p>}
+
+        <div className="mt-6 flex gap-1 border-b border-border">
+          {([['analise', 'Análise'], ['redes', 'Redes e conteúdos']] as const).map(([k, label]) => (
+            <button key={k} onClick={() => setView(k)} className={cx('px-4 py-2.5 text-sm border-b-2 -mb-px', view === k ? 'border-accent font-semibold' : 'border-transparent text-muted hover:text-text')}>
+              {label}{k === 'analise' && analysis.data?.request && <span className="ml-1.5 text-[10px] text-violet-600">● fila</span>}
+            </button>
+          ))}
+        </div>
+
+        {view === 'analise' && <AnalysisPanel slug={slug} c={c} onCollect={pull} collecting={pulling} />}
+        {view === 'redes' && <>
 
         {/* resultado da coleta */}
         {pulling && <div className="mt-4 text-sm text-muted bg-surface border border-border rounded-lg p-3"><Spinner /> Coletando {c.profiles.length} perfil(is). YouTube com detalhes de cada vídeo pode levar 1–2 minutos…</div>}
@@ -221,7 +238,7 @@ export default function CompetitorDetail() {
         )}
 
         {/* abas por perfil */}
-        <div className="mt-6 flex gap-1 border-b border-border overflow-x-auto">
+        <div className="mt-4 flex gap-1 border-b border-border overflow-x-auto">
           {[{ key: 'all' } as const, ...profiles].map((p) => {
             const active = tab === p.key;
             const isAll = p.key === 'all';
@@ -321,6 +338,7 @@ export default function CompetitorDetail() {
           </div>
           {filtered.length > 0 && <div className="text-xs text-muted mt-4">{filtered.length} de {scopeRows.length} conteúdos · outlier = views ÷ mediana de views do mesmo perfil na última coleta (sem views: curtidas ♥)</div>}
         </section>
+        </>}
       </div>
 
       <ItemDrawer r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={media(openRow?.item.thumbnailLocal)}

@@ -3,10 +3,22 @@ id: psinota-ai
 name: PsiNota AI
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://psinotaai.com
+  - platform: instagram
+    url: https://www.instagram.com/psinotaai/
+    handle: psinotaai
+  - platform: linkedin
+    url: https://www.linkedin.com/company/psinotaai
+    handle: psinotaai
+  - platform: youtube
+    url: https://www.youtube.com/@psinotaai
+    handle: psinotaai
 created: 2026-10-07
 ---
 

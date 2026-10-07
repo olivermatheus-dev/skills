@@ -1,0 +1,181 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:31:24Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psinotaai.com/"
+    },
+    {
+      "url": "https://psinotaai.com/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Nota clínica automática (DAP, BIRP, Evolução Livre, Anamnese)",
+            "detail": "nasce rascunho, vira documento só ao assinar",
+            "highlight": true
+          },
+          {
+            "name": "Ditado de notas por voz",
+            "highlight": true
+          },
+          {
+            "name": "Detecção de risco clínico",
+            "detail": "ideação suicida, automutilação, crise; todos os planos",
+            "highlight": false
+          },
+          {
+            "name": "IA de apoio em tempo real na sessão",
+            "detail": "plano Pro",
+            "highlight": false
+          },
+          {
+            "name": "Supervisão IA semanal e chat com o prontuário",
+            "detail": "plano Pro",
+            "highlight": false
+          },
+          {
+            "name": "Consultório Simulado",
+            "detail": "treino com paciente IA; Pro",
+            "highlight": false
+          },
+          {
+            "name": "Plano terapêutico e psicoeducação por IA",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Teleconsulta nativa, sem gravação",
+            "detail": "paciente entra por link no navegador, sem instalar",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Prontuário completo com CID-11 e histórico",
+            "highlight": false
+          },
+          {
+            "name": "Laudos e documentos estruturados",
+            "detail": "escolar, judicial, parecer, atestado, TCLE",
+            "highlight": false
+          },
+          {
+            "name": "Testes psicológicos com correção automática",
+            "detail": "7 no Free, 13 nos pagos",
+            "highlight": false
+          },
+          {
+            "name": "Mapa Relacional (genograma IA)",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembrete, cobrança e cadastro pelo WhatsApp",
+            "detail": "mensagem pronta, abre no número do psicólogo; nada sai sozinho",
+            "highlight": false
+          },
+          {
+            "name": "Companheiro do Paciente",
+            "detail": "chat entre sessões com alerta de risco; Pro",
+            "highlight": false
+          },
+          {
+            "name": "Check-ins entre sessões",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Controle financeiro e relatório IRPF",
+            "detail": "planos pagos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agendamento online e lista de espera",
+            "detail": "planos pagos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Perfil público para captar pacientes",
+            "highlight": false
+          },
+          {
+            "name": "Estúdio Visual",
+            "detail": "materiais para pacientes com logo; Pro",
+            "highlight": false
+          },
+          {
+            "name": "Ferramentas grátis sem cadastro",
+            "detail": "escalas PHQ-9, GAD-7, gerador de documentos, calculadora de honorário",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Dashboard da clínica e supervisão de notas",
+            "detail": "plano Clínica, sob consulta",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Criptografia AES-256-GCM, LGPD e Res. CFP 09/2024",
+            "highlight": true
+          },
+          {
+            "name": "QR code de consentimento",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "IA clínica no centro, com conformidade CFP 09/2024 comunicada",
+      "Nota a partir de áudio, ditado ou foto do caderno",
+      "Companheiro do paciente e Consultório Simulado"
+    ],
+    "missing": [
+      "WhatsApp automático (envio manual)",
+      "NFS-e",
+      "portal do paciente completo",
+      "repasse e multi-agenda de clínica (só no plano sob consulta)"
+    ]
+  }
+}

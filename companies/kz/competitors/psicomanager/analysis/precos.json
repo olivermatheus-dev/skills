@@ -1,0 +1,50 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:42:03Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 109,
+    "trial": "7 dias grátis, sem cartão",
+    "plans": [
+      {
+        "name": "Individual Pró",
+        "monthly": 109,
+        "yearlyMonthly": 89,
+        "yearlyTotal": 1068,
+        "users": "1 profissional + atendente",
+        "highlights": [
+          "pacientes ilimitados",
+          "créditos limitados de IA e WhatsApp",
+          "5 relatórios"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Individual Plus",
+        "monthly": 149,
+        "yearlyMonthly": 119,
+        "yearlyTotal": 1428,
+        "users": "1 profissional + atendente",
+        "highlights": [
+          "IA ilimitada",
+          "NFe e Receita Saúde ilimitados",
+          "30 cobranças Pix grátis"
+        ],
+        "recommended": true
+      }
+    ],
+    "extras": [
+      "Plano Clínica Multiprofissional: preço não exibido"
+    ],
+    "notes": "Estado padrão da página: Anual (R$ 89 e R$ 119 /mês). Clicando em Mensal: R$ 109 e R$ 149. yearlyTotal = 12x o equivalente mensal (a página não mostra o total; cálculo nosso)."
+  }
+}

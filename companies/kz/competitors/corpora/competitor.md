@@ -3,6 +3,7 @@ id: corpora
 name: Corpora
 kind: concorrente
 status: ativo
+market: brasil
 favorite: false
 tags:
   - sistema-terapeuta

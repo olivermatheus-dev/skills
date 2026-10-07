@@ -1,0 +1,58 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:29:53Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://gestorpsi.com.br/"
+    },
+    {
+      "url": "https://gestorpsi.com.br/funcionalidades/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço baixo e transparente",
+        "evidence": "R$ 34,50 individual, R$ 59,50 até 4, R$ 124,50 até 50"
+      },
+      {
+        "point": "Teste sem cartão",
+        "evidence": "14 dias sem informar cobrança"
+      },
+      {
+        "point": "Credibilidade acadêmica",
+        "evidence": "apoio FAPESP e responsável técnico com CRP"
+      },
+      {
+        "point": "Escala para equipes",
+        "evidence": "planos até 4 e até 50 profissionais"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Produto sem recursos modernos",
+        "evidence": "funcionalidades só citam e-mail; sem WhatsApp, vídeo, portal ou IA"
+      },
+      {
+        "point": "Site e marca datados",
+        "evidence": "home textual, relatórios 'futuramente', rodapé de agência"
+      },
+      {
+        "point": "Suporte só por e-mail",
+        "evidence": "todos os planos listam suporte via e-mail"
+      },
+      {
+        "point": "Sem prova social",
+        "evidence": "não mostra depoimentos nem número de clientes"
+      }
+    ],
+    "opportunities": [
+      "Captar quem quer trocar um sistema velho: migração fácil e interface moderna",
+      "Competir no preço de entrada com plano solo acessível",
+      "Vender o que falta: WhatsApp, vídeo e portal do paciente",
+      "Mostrar prova social e fundador terapeuta, que eles não têm"
+    ]
+  }
+}

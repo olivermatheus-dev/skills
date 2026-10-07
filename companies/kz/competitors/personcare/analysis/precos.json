@@ -1,0 +1,53 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-07T19:30:20Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 69.9,
+    "trial": "7 dias grátis",
+    "plans": [
+      {
+        "name": "Profissional",
+        "monthly": 69.9,
+        "users": "1 profissional + 1 secretário",
+        "highlights": [
+          "agenda",
+          "financeiro",
+          "telepsicologia",
+          "NFS-e",
+          "WhatsApp ilimitado"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Clínica - 5 acessos",
+        "monthly": 119.9,
+        "users": "5 acessos",
+        "highlights": [
+          "mesmos recursos do Profissional"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Clínica - 10 acessos",
+        "monthly": 349.9,
+        "users": "10 acessos",
+        "highlights": [
+          "mesmos recursos do Profissional"
+        ],
+        "recommended": false
+      }
+    ],
+    "extras": [],
+    "notes": "Valores lidos na aba Mensal. Há aba Anual com 'mais de 20% de desconto', mas os preços anuais não foram capturados. O salto de R$ 119,90 (5 acessos) para R$ 349,90 (10 acessos) é o que o site mostra."
+  }
+}

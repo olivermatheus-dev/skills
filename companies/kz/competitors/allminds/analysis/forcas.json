@@ -1,0 +1,58 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-07T19:29:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app/"
+    },
+    {
+      "url": "https://allminds.app/planos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Ecossistema completo: gestão, captação e formação",
+        "evidence": "três pilares Gestão, Marketing, Conhecimento na home"
+      },
+      {
+        "point": "Captação de pacientes sem comissão",
+        "evidence": "leads enviados direto, sem % por sessão"
+      },
+      {
+        "point": "Suporte e implantação humanos",
+        "evidence": "gerente de contas dedicado, treinamentos ao vivo"
+      },
+      {
+        "point": "Teste de 15 dias e plano de entrada acessível",
+        "evidence": "Gestão a R$ 74,90/mês"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Preço sobe com cobranças avulsas",
+        "evidence": "vídeo R$ 2/sessão, consultoria R$ 100, Clube R$ 19,90, WhatsApp só no plano de R$ 179,90"
+      },
+      {
+        "point": "Discurso empresarial e venda de formação pesam",
+        "evidence": "foco em negócio previsível, mentorias e cursos precificados no plano"
+      },
+      {
+        "point": "Captação limitada",
+        "evidence": "9 a 12 leads por trimestre"
+      },
+      {
+        "point": "Sem IA clínica nem portal do paciente visíveis",
+        "evidence": "IA só como assistente de conversas"
+      }
+    ],
+    "opportunities": [
+      "Preço único sem extras (vídeo, WhatsApp, NF inclusos)",
+      "Tom acolhedor de profissional de saúde, não de empreendedor",
+      "Lembrete por WhatsApp já no plano de entrada",
+      "Simplicidade para quem não quer mentoria nem marketplace"
+    ]
+  }
+}

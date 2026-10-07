@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-07T19:30:09Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicomanager.com.br/"
+    },
+    {
+      "url": "https://psicomanager.com.br/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, integração com Receita Saúde/NFS-e e LGPD; fundada em Uberlândia/MG"
+  }
+}

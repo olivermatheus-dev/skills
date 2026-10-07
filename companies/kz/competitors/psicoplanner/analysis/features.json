@@ -1,0 +1,92 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T19:30:36Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://psicoplanner.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda diária e semanal",
+            "highlight": false
+          },
+          {
+            "name": "Autoagendamento por link",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Prontuário eletrônico",
+            "highlight": false
+          },
+          {
+            "name": "Anamnese digital personalizável",
+            "highlight": false
+          },
+          {
+            "name": "Documentos personalizados",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Transcrição de sessão com IA (PsiAssist)",
+            "detail": "preenche prontuário e analisa emoções",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembretes e confirmações ilimitados no WhatsApp",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Sala de vídeo integrada",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Controle de pagamentos e recibos",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "IA de transcrição no plano de R$ 79",
+      "WhatsApp ilimitado incluso",
+      "suporte 100% humano"
+    ],
+    "missing": [
+      "portal do paciente",
+      "NFS-e",
+      "gestão de equipe detalhada (aba Clínicas sem detalhe)"
+    ]
+  }
+}
