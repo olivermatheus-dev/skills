@@ -55,7 +55,7 @@ export function fmtDelta(n?: number) {
 export function timeAgo(iso?: string) {
   if (!iso) return '—';
   const d = (Date.now() - new Date(iso.length === 10 ? `${iso}T12:00:00` : iso).getTime()) / 86400_000;
-  if (d < 1 / 24) return 'agora há pouco';
+  if (d < 1 / 24) return 'há pouco';
   if (d < 1) return `há ${Math.round(d * 24)} h`;
   if (d < 14) return `há ${Math.round(d)} d`;
   if (d < 60) return `há ${Math.round(d / 7)} sem`;
@@ -125,7 +125,7 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
       const mk = `${platform}:${item.id}`;
       rows.push({
         mk, profileKey: g.key, platform, item, outlier, outlierBasis: useViews ? 'views' : 'likes',
-        engagement: v ? inter / v : undefined,
+        engagement: v && (item.metrics.likes != null || item.metrics.comments != null) ? inter / v : undefined,
         viewsDelta: prev?.metrics.views != null && v != null ? v - prev.metrics.views : undefined,
         prevAt: prev ? g.prev!.data.collectedAt : undefined,
         history: g.all.map((s) => { const x = s.data.items.find((i) => i.id === item.id); return x ? { at: s.data.collectedAt, views: x.metrics.views, likes: x.metrics.likes } : null; }).filter(Boolean) as Row['history'],

@@ -65,7 +65,7 @@ export const ProfileInfo = z.object({
 });
 
 /**
- * companies/<slug>/competitors/<id>/snapshots/<platform>-<handle>/<AAAA-MM-DDTHH-mm>.json
+ * companies/<slug>/competitors/<id>/snapshots/<platform>-<handle>/<AAAA-MM-DDTHH-mm-ss>.json
  * Cada coleta é um arquivo novo e imutável: o histórico nunca é apagado.
  */
 export const Snapshot = z.object({

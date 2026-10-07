@@ -25,6 +25,7 @@ on('PUT', '/api/projects/:slug/tags', (p, b) => S.saveTags(p.slug, b));
 on('GET', '/api/projects/:slug/tasks', (p) => S.listTasks(p.slug));
 on('POST', '/api/projects/:slug/tasks', (p, b) => S.saveTask(p.slug, b.data, b.body));
 on('PUT', '/api/projects/:slug/tasks/:id', (p, b) => S.saveTask(p.slug, { ...b.data, id: p.id }, b.body));
+on('DELETE', '/api/projects/:slug/tasks/:id', (p) => S.archiveTask(p.slug, p.id));
 on('POST', '/api/projects/:slug/tasks/:id/move', (p, b) => S.moveTask(p.slug, p.id, b.status, b.who ?? 'oliver'));
 
 // Personas

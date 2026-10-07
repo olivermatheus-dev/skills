@@ -38,6 +38,8 @@
 
 - **Registrado (016, 017, `fmt-personagem`):** publicidade criativa com IA (método a discutir), integrações Higgsfield/Suno/ElevenLabs, formato de personagens caricatos/3D. **Tom por vídeo** já está em `direcao.md`, `REGRAS.md` e no molde do plano.
 
+- **App local pronto (018):** `npm run app` — quadro, concorrentes (colar links, puxar, histórico), ideias, personas, anotações, contexto e marca; dados tipados em `schema/` (`npm run validate`). Agente `pesquisador` + skills `radar`/`referencias`. Coleta real só no PC (yt-dlp; Apify para Instagram).
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".

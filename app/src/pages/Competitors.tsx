@@ -151,7 +151,7 @@ function CompetitorCard({ slug, c, s, onFav, onPull, pulling, loadingSummary }: 
         {withBanner && <Img local={api.mediaUrl(slug, d.id, withBanner.latest?.profile.bannerLocal)} remote={withBanner.latest?.profile.banner} className="absolute inset-0 w-full h-full object-cover" fallback={<span />} />}
         <div className="absolute top-2 right-2 bg-surface/90 backdrop-blur rounded-full w-7 h-7 grid place-items-center shadow-sm"><Star on={d.favorite} onClick={onFav} size="text-base" /></div>
       </div>
-      <div className="px-4 pb-4 -mt-6 flex-1 flex flex-col">
+      <div className="relative px-4 pb-4 -mt-6 flex-1 flex flex-col">
         <div className="flex items-end gap-3">
           <Avatar name={d.name} size={52} local={api.mediaUrl(slug, d.id, withAvatar?.latest?.profile.avatarLocal)} remote={withAvatar?.latest?.profile.avatar} />
           <div className="min-w-0 pb-0.5 flex-1">
@@ -177,8 +177,8 @@ function CompetitorCard({ slug, c, s, onFav, onPull, pulling, loadingSummary }: 
                 {f != null ? (
                   <span className="tabular-nums font-medium">{fmtNum(f)}</span>
                 ) : <span className="text-xs text-muted">{ps?.latest ? (p.platform === 'site' ? 'site' : '—') : loadingSummary ? '' : 'não puxado'}</span>}
-                {delta != null && delta !== 0 && <span className={cx('text-xs tabular-nums w-14 text-right', delta > 0 ? 'text-ok' : 'text-danger')}>{delta > 0 ? '▲' : '▼'} {fmtDelta(delta)!.slice(1)}</span>}
-                {(delta == null || delta === 0) && <span className="w-14" />}
+                {delta != null && delta !== 0 && <span className={cx('text-xs tabular-nums min-w-16 text-right whitespace-nowrap', delta > 0 ? 'text-ok' : 'text-danger')} title="vs coleta anterior">{delta > 0 ? '▲' : '▼'} {fmtDelta(delta)!.slice(1)}</span>}
+                {(delta == null || delta === 0) && <span className="min-w-16" />}
               </div>
             );
           })}

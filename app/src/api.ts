@@ -34,6 +34,7 @@ export const api = {
   tasks: (slug: string) => req<Doc<Task>[]>('GET', `${pj(slug)}/tasks`),
   createTask: (slug: string, data: Partial<Task> & { title: string }, body?: string) => req<Doc<Task>>('POST', `${pj(slug)}/tasks`, { data, body }),
   saveTask: (slug: string, id: string, data: Partial<Task> & { title: string }, body?: string) => req<Doc<Task>>('PUT', `${pj(slug)}/tasks/${id}`, { data, body }),
+  archiveTask: (slug: string, id: string) => req<{ file: string }>('DELETE', `${pj(slug)}/tasks/${id}`),
   moveTask: (slug: string, id: string, status: Task['status']) => req<Doc<Task>>('POST', `${pj(slug)}/tasks/${id}/move`, { status }),
 
   personas: (slug: string) => req<Doc<Persona>[]>('GET', `${pj(slug)}/personas`),

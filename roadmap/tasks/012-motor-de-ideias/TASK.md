@@ -56,9 +56,10 @@ Toda peça nasce com esta ficha (vira a seção 1 do `roteiro.md`/`plano.md`):
 companies/<slug>/intel/
   fontes.md                 ← concorrentes e páginas de referência (links, IDs, por que segue)
   ideias/I-NNNN-<slug>.md   ← 1 ideia por arquivo: origem, métricas, análise, status, observações e briefing do Oliver
-data/intel/ (fora do git)   ← bruto: SQLite, thumbnails, áudios, transcrições
+competitors/<id>/snapshots/  ← coletas imutáveis (JSON, no git); media/ (imagens, fora do git)
+data/intel/ (fora do git)   ← vídeos/áudios baixados e transcrições dos itens marcados
 ```
-Status da ideia: `nova → marcada → analisada → aprovada → virou-tarefa (T-NNNN) | descartada`. Ideia aprovada vira tarefa no Kanban com a ficha (§5) preenchida.
+Status do **item coletado** (`marks.json`): `nova → marcada → analisada | descartada`. Status da **ideia** (`ideas/`): `nova → analisada → aprovada → virou-tarefa (T-NNNN) | descartada`. Ideia aprovada vira tarefa no Kanban com a ficha (§5) preenchida.
 Painel: no início, `node tools/intel/painel.mjs <slug>` gera um HTML local (thumbnails, métricas, filtros, marcar ✓/✗); depois vira tela do app Vite (`APP.md`).
 
 ## 7. Fases (80/20)

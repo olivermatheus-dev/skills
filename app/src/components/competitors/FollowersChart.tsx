@@ -49,7 +49,7 @@ export function FollowerMini({ s }: { s: FollowerSeries }) {
       <div className="flex items-center gap-2 text-xs text-muted">
         <PlatformIcon platform={s.platform} size={14} />
         <span className="truncate">{s.label}</span>
-        <span className="ml-auto">{pts.length} coleta{pts.length > 1 ? 's' : ''}</span>
+        <span className="ml-auto whitespace-nowrap">{pts.length} coleta{pts.length > 1 ? 's' : ''}</span>
       </div>
       <div className="flex items-baseline gap-2 mt-1">
         <span className="text-xl font-semibold tabular-nums">{fmtNum(h?.v ?? last.v)}</span>

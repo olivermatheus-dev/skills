@@ -83,7 +83,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
     return () => clearTimeout(t);
   }, [text, known]);
 
-  const good = lines.filter((l) => l.det && !l.problem);
+  const good = lines.filter((l) => l.det && !l.problem && !l.dupOf); // já cadastrado em outro: ignora
   useEffect(() => { if (!nameTouched) setName(nameFromHandle(good[0]?.det)); }, [lines]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const tagList = tags.split(/[,\n]/).map((t) => slugify(t.trim())).filter((t) => t && t !== 'item');
@@ -181,7 +181,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
                     )}
                     <div className="text-xs text-right shrink-0 max-w-[40%]">
                       {l.problem && <span className="text-danger">{l.problem}</span>}
-                      {!l.problem && l.dupOf && <span className="text-warn">já cadastrado em {l.dupOf}</span>}
+                      {!l.problem && l.dupOf && <span className="text-warn">já está em {l.dupOf} (ignorado)</span>}
                       {!l.problem && !l.dupOf && l.warn && <span className="text-warn">{l.warn}</span>}
                       {!l.problem && !l.dupOf && !l.warn && <span className="text-ok">ok</span>}
                     </div>

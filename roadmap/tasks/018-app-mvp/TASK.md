@@ -1,6 +1,6 @@
 # 018 — App local (interface) + banco de dados tipado em arquivos
 
-Status: fazendo · Depende de: 007 · Liga com: 012 (motor de ideias), APP.md
+Status: feita (v1; uso real e ajustes na máquina local) · Depende de: 007 · Liga com: 012 (motor de ideias), APP.md
 Pedido do Oliver em 2026-10-07: usar o saldo da nuvem para deixar pronto o máximo antes de ir para a máquina local; interface para concorrentes (colar links, detectar plataforma, puxar tudo, histórico sem apagar), personas, backlog/tarefas e anotações (editor rich text em markdown), com **tipagem forte** porque os arquivos são o banco de dados.
 
 ## Feito nesta tarefa
@@ -27,3 +27,5 @@ Pedido do Oliver em 2026-10-07: usar o saldo da nuvem para deixar pronto o máxi
 
 ## Log
 - 2026-10-07: tipos, store, validação, casca do app e API (commit 2390652); telas e coletores em construção por 3 frentes paralelas.
+- 2026-10-07: telas prontas por 3 frentes paralelas e integradas: quadro (visões Oliver/IA, arrastar, gaveta de edição, arquivar), visão geral, concorrentes (colar vários links com detecção, puxar 1/todos, coletas imutáveis com histórico, seguidores por coleta, outlier score, marcar/favoritar/notas, virar ideia), ideias (ficha de pauta, virar tarefa → `todo` do estrategista), personas, anotações (rich text com salvamento automático), contexto e marca (docs, project.yml, tags, cores do brand.css). Coletores YouTube/TikTok (yt-dlp; API do YouTube opcional), Instagram (Apify ou yt-dlp), site (HTML); 13 testes offline com fixtures. Correções: coleta com segundos no nome (nunca sobrescreve), arquivar tarefa (`board/arquivo/`), aviso de alterações não salvas ao fechar. Testado com Playwright em cópia dos dados; typecheck, validate e test:intel passando.
+- Pendências conhecidas: detalhe do concorrente carrega todas as coletas (otimizar quando o histórico crescer); `Profile` não guarda o id do canal descoberto; editor visual reformata tabelas dos docs de contexto (usar modo Markdown para mudanças pontuais); coleta real só no PC (a nuvem não acessa as redes).

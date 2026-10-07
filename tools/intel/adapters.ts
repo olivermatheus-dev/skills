@@ -128,7 +128,7 @@ export const tiktok: Adapter = {
     const errors: string[] = [];
     const [list, html] = await Promise.all([
       ctx.runner.ytdlp(['-J', '--flat-playlist', '--playlist-end', String(ctx.maxItems), url]).then((t) => parseJson(t, 'yt-dlp')).catch((e) => { errors.push(`vídeos: ${msg(e)}`); return null; }),
-      ctx.runner.fetchText(url).then((r) => (r.status < 400 ? r.text : null)).catch((e) => { errors.push(`perfil: ${msg(e)}`); return null; }),
+      ctx.runner.fetchText(url).then((r) => { if (r.status < 400) return r.text; errors.push(`perfil: TikTok respondeu ${r.status}`); return null; }).catch((e) => { errors.push(`perfil: ${msg(e)}`); return null; }),
     ]);
     if (!list && !html) throw new Error(errors.join(' · '));
     // versões antigas do yt-dlp devolvem entradas "planas" sem métricas → completa com -j

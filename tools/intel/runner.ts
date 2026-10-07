@@ -8,8 +8,7 @@ import { env } from './env';
 export const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36';
 
 export const YTDLP_MISSING =
-  'yt-dlp não encontrado. Instale com `pip install -U yt-dlp` (ou `winget install yt-dlp`), reabra o terminal e rode `npm run app` de novo. ' +
-  'Se já estiver instalado em outro lugar, coloque o caminho em YTDLP_PATH no .env.';
+  'yt-dlp não encontrado: instale com `pip install -U yt-dlp` (ou `winget install yt-dlp`) e reinicie o app, ou aponte YTDLP_PATH no .env';
 
 class Missing extends Error {}
 

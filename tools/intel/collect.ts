@@ -26,7 +26,7 @@ export interface CollectOptions {
   noMedia?: boolean;
 }
 
-const stampOf = (iso: string) => iso.slice(0, 16).replace(':', '-'); // igual ao saveSnapshot do store
+const stampOf = (iso: string) => iso.slice(0, 19).replace(/:/g, '-'); // igual ao saveSnapshot do store
 
 /**
  * O store nomeia o arquivo pelo minuto da coleta: duas coletas no mesmo minuto sobrescreveriam a anterior.

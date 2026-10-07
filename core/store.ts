@@ -143,6 +143,16 @@ export function moveTask(slug: string, id: string, status: (typeof STATUS)[numbe
   return saveTask(slug, { ...t.data, status }, /\n## Log\n/.test(t.body) ? body : `${t.body.trimEnd()}\n\n## Log\n- ${today()} · ${who} · ${t.data.status} → ${status}\n`);
 }
 
+/** Arquivar = mover para board/arquivo/ (fora do quadro e do heartbeat, sem apagar). */
+export function archiveTask(slug: string, id: string, who = 'oliver') {
+  const t = listTasks(slug).find((x) => x.data.id === id);
+  if (!t) throw new ValidationError(id, ['tarefa não encontrada']);
+  const dest = join(P.board(slug), 'arquivo', basename(t.file));
+  write(dest, `${read(t.file).trimEnd()}\n- ${today()} · ${who} · arquivada\n`);
+  rmSync(abs(t.file));
+  return { file: dest };
+}
+
 // ---------- Concorrentes ----------
 export const listCompetitors = (slug: string) =>
   (exists(P.competitors(slug)) ? readdirSync(abs(P.competitors(slug))) : [])
@@ -160,7 +170,7 @@ export const deleteCompetitor = (slug: string, id: string) => rmSync(abs(P.compe
 export const profileKey = (platform: string, handleOrId: string) => `${platform}-${slugify(handleOrId)}`;
 export function saveSnapshot(slug: string, compId: string, key: string, snap: z.input<typeof Snapshot>) {
   const v = check(Snapshot, snap, `${compId}/${key}`);
-  const stamp = v.collectedAt.slice(0, 16).replace(':', '-');
+  const stamp = v.collectedAt.slice(0, 19).replace(/:/g, '-'); // AAAA-MM-DDTHH-mm-ss
   const file = join(P.snapshots(slug, compId), key, `${stamp}.json`);
   write(file, `${JSON.stringify(v, null, 2)}\n`);
   return { data: v, file };

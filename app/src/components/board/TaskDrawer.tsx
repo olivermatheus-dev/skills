@@ -1,5 +1,5 @@
 // Painel de edição da tarefa: campos do frontmatter + corpo em markdown (checklist e log).
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type Task } from '../../api';
 import { MarkdownEditor } from '../Markdown';
@@ -23,16 +23,17 @@ const splitList = (s: string, re: RegExp) => s.split(re).map((x) => x.trim()).fi
 export function TaskDrawer({ slug, task, allTasks, onClose, onMove }: {
   slug: string; task: TaskDoc | null; allTasks: TaskDoc[]; onClose: () => void; onMove: (id: string, s: Status) => void;
 }) {
+  const guard = useRef<() => boolean>(() => true);
   return (
-    <Drawer open={!!task} onClose={onClose} width="max-w-3xl"
+    <Drawer open={!!task} onClose={onClose} canClose={() => guard.current()} width="max-w-3xl"
       title={task ? <span className="flex items-center gap-2"><span className="font-mono text-muted text-sm">{task.data.id}</span><AssigneeBadge assignee={task.data.assignee} /></span> : ''}>
-      {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} />}
+      {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} guard={guard} />}
     </Drawer>
   );
 }
 
-function TaskEditor({ slug, task, allTasks, onMove, onClose }: {
-  slug: string; task: TaskDoc; allTasks: TaskDoc[]; onMove: (id: string, s: Status) => void; onClose: () => void;
+function TaskEditor({ slug, task, allTasks, onMove, onClose, guard }: {
+  slug: string; task: TaskDoc; allTasks: TaskDoc[]; onMove: (id: string, s: Status) => void; onClose: () => void; guard: React.MutableRefObject<() => boolean>;
 }) {
   const qc = useQueryClient();
   const [base, setBase] = useState(() => toForm(task.data));
@@ -74,7 +75,13 @@ function TaskEditor({ slug, task, allTasks, onMove, onClose }: {
   const deps = task.data.depends.map((id) => ({ id, t: byId.get(id) }));
   const children = allTasks.filter((t) => t.data.parent === task.data.id);
 
-  const close = () => { if (!dirty || confirm('Descartar as alterações não salvas?')) onClose(); };
+  const okToClose = () => !dirty || confirm('Descartar as alterações não salvas?');
+  guard.current = okToClose;
+  const close = () => { if (okToClose()) onClose(); };
+  const archive = useMutation({
+    mutationFn: () => api.archiveTask(slug, task.data.id),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['tasks', slug] }); onClose(); },
+  });
   useEffect(() => {
     const k = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); if (dirty && f.title.trim()) save.mutate(); } };
     window.addEventListener('keydown', k);
@@ -165,6 +172,7 @@ function TaskEditor({ slug, task, allTasks, onMove, onClose }: {
         <div className="flex items-center gap-3">
         <Button disabled={!dirty || !f.title.trim() || save.isPending} onClick={() => save.mutate()}>{save.isPending ? 'Salvando…' : 'Salvar'}</Button>
         <Button variant="ghost" onClick={close}>Fechar</Button>
+        <Button variant="danger" disabled={archive.isPending} onClick={() => confirm(`Arquivar ${task.data.id}? O arquivo vai para board/arquivo/ (não é apagado).`) && archive.mutate()}>Arquivar</Button>
         <span className="text-xs text-muted whitespace-nowrap">{dirty ? 'Alterações não salvas · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
         <span className="ml-auto text-xs text-muted font-mono truncate" title={task.file}>{task.file}</span>
         </div>
