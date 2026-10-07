@@ -7,7 +7,7 @@ import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
-  Capture, Mockup, MockupBrand, COMPANIES, P, STATUS,
+  Capture, Mockup, MockupBrand, Format, FormatExample, COMPANIES, FORMATS, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
@@ -415,7 +415,7 @@ export function savePieceMeta(slug: string, path: string, patch: Partial<PieceMe
   // campo vazio ("") apaga: na publicação (data/link validados) e no principal/título
   const pub = patch.publication === undefined ? cur.publication : Object.fromEntries(Object.entries({ ...cur.publication, ...patch.publication }).filter(([, v]) => v !== ''));
   const next = { ...cur, ...patch, notes: { ...cur.notes, ...patch.notes }, publication: pub && Object.keys(pub).length ? pub : undefined, updatedAt: nowIso() };
-  for (const k of ['title', 'principal'] as const) if (next[k] === '') delete next[k];
+  for (const k of ['title', 'principal', 'formato'] as const) if (next[k] === '') delete next[k];
   const f = join(dir, 'peca.json');
   const v = check(PieceMeta, JSON.parse(JSON.stringify(next)), f); // JSON: tira os undefined
   writeJson(f, v);
@@ -487,12 +487,14 @@ export function savePieceText(slug: string, path: string, file: string, text: st
 }
 
 /**
- * Novo conteúdo a partir de um roteiro pronto (colado ou enviado): cria contents/AAAA-MM-DD-<tema>/roteiro.md
- * e, se pedido, a tarefa no quadro para a IA produzir a peça a partir dele.
+ * Novo conteúdo: a partir de um roteiro pronto (colado ou enviado) → contents/AAAA-MM-DD-<tema>/roteiro.md,
+ * ou só com um formato da galeria + o pedido ("quero um X sobre Y") → briefing.md, para a IA escrever o roteiro.
+ * O formato escolhido fica na ficha (peca.json → formato) e, se pedido, vira a tarefa no quadro para a IA produzir.
  */
-export async function createPiece(slug: string, input: { title: string; text?: string; upload?: { name: string; base64: string }; format?: string; notes?: string; task?: boolean }) {
+export async function createPiece(slug: string, input: { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }) {
   const title = input.title?.trim();
   if (!title) throw new ValidationError('contents', ['dê um nome ao conteúdo']);
+  const fmt = input.formato ? getFormatRaw(input.formato) : undefined;
   let text = input.text ?? '';
   if (input.upload) {
     const buf = Buffer.from(input.upload.base64, 'base64');
@@ -505,25 +507,38 @@ export async function createPiece(slug: string, input: { title: string; text?: s
     else throw new ValidationError(input.upload.name, ['envie .md, .txt ou .docx']);
   }
   text = text.replace(/\r\n/g, '\n').trim();
-  if (!text) throw new ValidationError('roteiro.md', ['o roteiro está vazio']);
-  if (!/^#\s/m.test(text.split('\n').slice(0, 3).join('\n'))) text = `# ${title}\n\n${text}`;
+  if (!text && !fmt) throw new ValidationError('roteiro.md', ['o roteiro está vazio (ou escolha um formato para a IA escrever)']);
+  const hasScript = !!text;
   const base = `${today()}-${slugify(title).split('-').slice(0, 6).join('-')}`;
   let rel = base, n = 2;
   while (exists(join(contentsDir(slug), rel))) rel = `${base}-${n++}`;
-  write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
+  if (hasScript) {
+    if (!/^#\s/m.test(text.split('\n').slice(0, 3).join('\n'))) text = `# ${title}\n\n${text}`;
+    write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
+  } else {
+    write(join(contentsDir(slug), rel, 'briefing.md'), [`# ${title}`, '', `**Formato:** ${fmt!.nome} (\`${fmt!.skill ?? `library/formatos/${fmt!.id}`}\`)`, '', '## Pedido', input.notes?.trim() || '(o nome acima é o pedido)', ''].join('\n'));
+  }
   saveReview(slug, rel, { status: 'rascunho', comments: [] });
-  savePieceMeta(slug, rel, { title });
+  savePieceMeta(slug, rel, { title, ...(fmt && { formato: fmt.id }) });
   let task: z.infer<typeof Task> | undefined;
   if (input.task) {
-    const fmt = input.format?.trim();
+    const fmtLine = fmt
+      ? `Formato: **${fmt.nome}** → ${fmt.skill ? `carregar a skill \`${fmt.skill}\`` : `verbete rascunho (sem skill): seguir a essência e a estrutura`} e ler as observações do Oliver em \`library/formatos/${fmt.id}/formato.json\` (mandam sobre a skill).`
+      : input.format?.trim() ? `Formato pedido: **${input.format.trim()}**.` : 'Formato: escolher o `fmt-*` pela galeria (`library/formatos/`).';
     const body = [
-      '', `Produzir ${fmt ? `um(a) **${fmt}**` : 'a peça'} a partir do roteiro pronto do Oliver: \`contents/${rel}/roteiro.md\`.`,
-      `O roteiro é a fonte: não mudar o sentido. Antes de produzir, ler e resolver as anotações abertas: \`node tools/review.mjs companies/${slug}/contents/${rel}\`.`,
-      ...(input.notes?.trim() ? ['', `Observações do Oliver: ${input.notes.trim()}`] : []),
-      '', '## Checklist', '- [ ] resolver as anotações abertas do roteiro (se houver)', '- [ ] escolher o formato `fmt-*` e produzir na pasta da peça', '- [ ] revisor', '',
-      '## Log', `- ${today()} · criada pela interface (roteiro pronto)`, '',
+      '', hasScript
+        ? `Produzir a peça a partir do roteiro pronto do Oliver: \`contents/${rel}/roteiro.md\`. O roteiro é a fonte: não mudar o sentido.`
+        : `Escrever o roteiro (skill \`ig-post\`) e produzir a peça a partir do pedido em \`contents/${rel}/briefing.md\`; roteiro vai para aprovação antes da produção.`,
+      fmtLine,
+      `Antes de produzir, ler e resolver as anotações abertas: \`node tools/review.mjs companies/${slug}/contents/${rel}\`.`,
+      ...(input.notes?.trim() && hasScript ? ['', `Observações do Oliver: ${input.notes.trim()}`] : []),
+      '', '## Checklist',
+      ...(hasScript ? ['- [ ] resolver as anotações abertas do roteiro (se houver)'] : ['- [ ] roteiro em `roteiro.md` → aprovação do Oliver']),
+      `- [ ] produzir no formato ${fmt ? fmt.nome : '`fmt-*` escolhido'} na pasta da peça`, '- [ ] revisor', '',
+      '## Log', `- ${today()} · criada pela interface (${hasScript ? 'roteiro pronto' : `formato ${fmt!.nome}`})`, '',
     ].join('\n');
-    task = saveTask(slug, { title: `Produzir a partir do roteiro: ${title}`, board: 'conteudo', status: 'todo', assignee: 'ai', links: [`contents/${rel}/roteiro.md`] }, body).data;
+    const links = [`contents/${rel}/${hasScript ? 'roteiro.md' : 'briefing.md'}`, ...(fmt ? [`library/formatos/${fmt.id}/formato.json`] : [])];
+    task = saveTask(slug, { title: `${hasScript ? 'Produzir a partir do roteiro' : `${fmt!.nome}`}: ${title}`, board: 'conteudo', status: 'todo', assignee: 'ai', links }, body).data;
   }
   return { path: rel, task };
 }
@@ -543,6 +558,123 @@ export function saveReview(slug: string, path: string, data: unknown): Review {
 export const pieceFile = (slug: string, path: string, file: string) => {
   if (/(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(file)) return null;
   const f = join(ROOT, piecePath(slug, path), file);
+  return existsSync(f) ? f : null;
+};
+
+// ---------- Galeria de formatos (tarefa 027): library/formatos/<id>/formato.json, global ----------
+const formatDir = (id: string) => {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(id)) throw new ValidationError(id, ['formato inválido']);
+  return join(FORMATS, id);
+};
+const formatJson = (id: string) => join(formatDir(id), 'formato.json');
+/** peça feita com o formato (peca.json → formato), em qualquer empresa */
+export interface FormatUse { empresa: string; peca: string; title: string; cover?: PieceCover; status?: Review['status'] }
+export interface FormatExampleInfo extends FormatExample { title: string; cover?: PieceCover; missing?: boolean }
+export interface FormatInfo extends Omit<Format, 'exemplos'> { exemplos: FormatExampleInfo[]; skillOk: boolean; usos: FormatUse[] }
+const companySlugs = () => (exists(COMPANIES) ? readdirSync(abs(COMPANIES)).filter((d) => !d.startsWith('_') && statSync(abs(join(COMPANIES, d))).isDirectory()) : []);
+function formatUses(): Map<string, FormatUse[]> {
+  const out = new Map<string, FormatUse[]>();
+  for (const empresa of companySlugs()) for (const p of listPieces(empresa)) {
+    if (p.archived) continue;
+    let f: string | undefined;
+    try { f = getPieceMeta(empresa, p.path).formato; } catch { /* ficha inválida: aparece no validate */ }
+    if (f) out.set(f, [...(out.get(f) ?? []), { empresa, peca: p.path, title: p.title, cover: p.cover, status: p.status }]);
+  }
+  return out;
+}
+/** exemplo com capa e nome da peça (o arquivo escolhido ou o principal); peça apagada → missing */
+function exampleInfo(e: FormatExample): FormatExampleInfo {
+  let pc: Piece | null = null;
+  try { pc = pieceSummary(e.empresa, e.peca); } catch { /* caminho inválido */ }
+  if (!pc) return { ...e, title: e.peca, missing: true };
+  const file = e.arquivo && pieceFile(e.empresa, e.peca, e.arquivo) ? e.arquivo : undefined;
+  return { ...e, title: pc.title, cover: file ? { type: file.startsWith('exports/') ? 'video' : 'image', file } : pc.cover };
+}
+const withInfo = (f: Format, uses: Map<string, FormatUse[]>): FormatInfo => ({
+  ...f, exemplos: f.exemplos.map(exampleInfo),
+  skillOk: !!f.skill && exists(join('.claude', 'skills', f.skill, 'SKILL.md')), usos: uses.get(f.id) ?? [],
+});
+export const getFormatRaw = (id: string): Format => {
+  if (!exists(formatJson(id))) throw new ValidationError(formatJson(id), ['formato não encontrado']);
+  return readJson(Format, formatJson(id));
+};
+export function listFormats(): FormatInfo[] {
+  const uses = formatUses();
+  return list(FORMATS, /^[a-z0-9][a-z0-9-]*$/).filter((d) => exists(join(FORMATS, d, 'formato.json')))
+    .map((d) => withInfo(getFormatRaw(d), uses))
+    .sort((a, b) => Number(b.status === 'ativo') - Number(a.status === 'ativo') || a.nome.localeCompare(b.nome, 'pt-BR'));
+}
+export const getFormat = (id: string) => withInfo(getFormatRaw(id), formatUses());
+function writeFormat(f: Format) {
+  const v = check(Format, JSON.parse(JSON.stringify({ ...f, updatedAt: nowIso() })), formatJson(f.id));
+  writeJson(formatJson(f.id), v);
+  return v;
+}
+/** campos que o app edita (estrutura e skill mudam junto com a skill fmt-*) */
+const FORMAT_EDITABLE = ['nome', 'status', 'essencia', 'tipos', 'funil', 'canais', 'proporcoes', 'tamanho', 'quandoUsar', 'quandoNaoUsar', 'variacoes', 'observacoes', 'nota'] as const;
+export function saveFormat(id: string, patch: Partial<Format>) {
+  const cur = getFormatRaw(id);
+  const next: Record<string, unknown> = { ...cur };
+  for (const k of FORMAT_EDITABLE) if (k in patch) next[k] = (patch as Record<string, unknown>)[k];
+  if (next.nota === null) delete next.nota;
+  return writeFormat(next as Format);
+}
+/** print de referência: grava em refs/ (fora do git) e devolve o nome do arquivo */
+function saveRefImage(id: string, upload: { name: string; base64: string }) {
+  const ext = upload.name.match(/\.(png|jpe?g|webp|gif)$/i)?.[1]?.toLowerCase();
+  if (!ext) throw new ValidationError(upload.name, ['print em .png, .jpg, .webp ou .gif']);
+  const dir = join(formatDir(id), 'refs');
+  const base = `${today()}-${slugify(upload.name.replace(/\.[^.]+$/, '')).slice(0, 40) || 'print'}`;
+  let name = `${base}.${ext}`, n = 2;
+  while (exists(join(dir, name))) name = `${base}-${n++}.${ext}`;
+  ensureDir(dir);
+  writeFileSync(abs(join(dir, name)), Buffer.from(upload.base64, 'base64'));
+  return name;
+}
+export interface FormatRefInput { url?: string; observacao?: string; upload?: { name: string; base64: string } }
+export function addFormatRef(id: string, r: FormatRefInput) {
+  const cur = getFormatRaw(id);
+  const url = r.url?.trim() || undefined;
+  if (!url && !r.upload) throw new ValidationError(id, ['cole um link ou envie um print']);
+  const imagem = r.upload ? saveRefImage(id, r.upload) : undefined;
+  return writeFormat({ ...cur, referencias: [...cur.referencias, { url, imagem, observacao: r.observacao?.trim() ?? '', adicionadoEm: today() }] });
+}
+export function removeFormatRef(id: string, index: number) {
+  const cur = getFormatRaw(id);
+  const ref = cur.referencias[index];
+  if (!ref) throw new ValidationError(id, ['referência não encontrada']);
+  if (ref.imagem && exists(join(formatDir(id), 'refs', ref.imagem))) rmSync(abs(join(formatDir(id), 'refs', ref.imagem)));
+  return writeFormat({ ...cur, referencias: cur.referencias.filter((_, i) => i !== index) });
+}
+/** referência solta que ainda não é skill: novo verbete "rascunho" (vira fmt-* quando repetir 2–3 vezes) */
+export function createFormatDraft(input: { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] } & FormatRefInput) {
+  const nome = input.nome?.trim();
+  if (!nome) throw new ValidationError(FORMATS, ['dê um nome ao formato']);
+  const id = uniqueId(FORMATS, nome, '');
+  const draft = { id, nome, status: 'rascunho', midia: input.midia, essencia: input.essencia?.trim() || input.observacao?.trim() || nome, tipos: input.tipos ?? [] };
+  writeFormat(check(Format, draft, formatJson(id)));
+  if (input.url?.trim() || input.upload) addFormatRef(id, input);
+  return getFormat(id);
+}
+/** "Promover como exemplo": aponta para a peça (não copia mídia) e marca o formato na ficha dela */
+export function promoteExample(id: string, ex: { empresa: string; peca: string; arquivo?: string; legenda?: string }) {
+  const cur = getFormatRaw(id);
+  const piece = pieceSummary(ex.empresa, ex.peca);
+  if (!piece) throw new ValidationError(ex.peca, ['peça não encontrada']);
+  if (cur.exemplos.some((e) => e.empresa === ex.empresa && e.peca === piece.path)) throw new ValidationError(ex.peca, ['essa peça já é exemplo deste formato']);
+  if (!piece.cover) throw new ValidationError(ex.peca, ['a peça ainda não tem arquivo exportado (exports/ ou png/)']);
+  savePieceMeta(ex.empresa, piece.path, { formato: id });
+  return writeFormat({ ...cur, exemplos: [...cur.exemplos, { empresa: ex.empresa, peca: piece.path, arquivo: ex.arquivo || undefined, legenda: ex.legenda?.trim() || undefined, adicionadoEm: today() }] });
+}
+export function removeExample(id: string, index: number) {
+  const cur = getFormatRaw(id);
+  if (!cur.exemplos[index]) throw new ValidationError(id, ['exemplo não encontrado']);
+  return writeFormat({ ...cur, exemplos: cur.exemplos.filter((_, i) => i !== index) });
+}
+/** print de referência servido ao app; null se não existir */
+export const formatRefFile = (id: string, file: string) => {
+  if (!/^[\w.-]+$/.test(file) || file.startsWith('.')) return null;
+  const f = join(ROOT, formatDir(id), 'refs', file);
   return existsSync(f) ? f : null;
 };
 
@@ -582,5 +714,11 @@ export function validateAll():{ file: string; issues: string[] }[] {
       }
     }
   }
+  // galeria de formatos (027)
+  for (const d of list(FORMATS, /^[a-z0-9][a-z0-9-]*$/)) if (exists(join(FORMATS, d, 'formato.json'))) tryIt(() => {
+    const f = getFormatRaw(d);
+    if (f.id !== d) throw new ValidationError(formatJson(d), [`id "${f.id}" diferente da pasta`]);
+    if (f.skill && !exists(join('.claude', 'skills', f.skill, 'SKILL.md'))) throw new ValidationError(formatJson(d), [`skill ${f.skill} não existe`]);
+  });
   return errors;
 }

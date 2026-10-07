@@ -1,0 +1,80 @@
+{
+  "id": "apresentacao-locucao",
+  "nome": "Apresentação com locução",
+  "status": "rascunho",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "O produto apresentado por uma voz: cada fala vira uma headline grande com cards e ícones que ilustram a ideia.",
+  "tipos": [
+    "produto",
+    "identificacao"
+  ],
+  "funil": [
+    "topo",
+    "meio"
+  ],
+  "canais": [
+    "reels",
+    "anuncio",
+    "lp"
+  ],
+  "proporcoes": [
+    "4:5",
+    "9:16"
+  ],
+  "tamanho": "30–45 s",
+  "quandoUsar": [
+    "apresentar o produto a quem não conhece",
+    "já existe locução final aprovada"
+  ],
+  "quandoNaoUsar": [
+    "menos de 20 s (→ texto cinético)",
+    "sem voz final"
+  ],
+  "estrutura": [
+    {
+      "bloco": "gancho",
+      "oque": "pergunta à persona em headline grande + cards da dor"
+    },
+    {
+      "bloco": "caos",
+      "oque": "uma headline por frase, card de cada coisa espalhada"
+    },
+    {
+      "bloco": "virada",
+      "oque": "nome do produto + o que ele é"
+    },
+    {
+      "bloco": "benefícios",
+      "oque": "telas simplificadas do produto, uma ideia por fala"
+    },
+    {
+      "bloco": "fecho",
+      "oque": "menos × mais, marca e CTA"
+    }
+  ],
+  "observacoes": "Já fizemos 3 vezes (apresentação da kz e as 2 versões do teste A/B). Na próxima repetição, vira skill fmt-apresentacao-locucao.",
+  "exemplos": [
+    {
+      "empresa": "kz",
+      "peca": "2026-10-07-apresentacao-kz",
+      "legenda": "apresentação da kz, voz Carla (v03)",
+      "adicionadoEm": "2026-10-07"
+    },
+    {
+      "empresa": "kz",
+      "peca": "2026-10-07-ab-sessao/A-opus",
+      "legenda": "teste A/B: versão Opus",
+      "teste": true,
+      "adicionadoEm": "2026-10-07"
+    },
+    {
+      "empresa": "kz",
+      "peca": "2026-10-07-ab-sessao/B-sonnet",
+      "legenda": "teste A/B: versão Sonnet + subagentes",
+      "teste": true,
+      "adicionadoEm": "2026-10-07"
+    }
+  ],
+  "referencias": []
+}

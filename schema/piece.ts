@@ -16,6 +16,8 @@ export const PieceMeta = z.object({
   /** força o tipo quando a detecção pela pasta erra */
   kind: z.enum(PIECE_KINDS).optional(),
   tags: z.array(z.string().trim().min(1)).default([]),
+  /** formato da galeria (library/formatos/<id>, tarefa 027): a IA carrega a skill dele antes de produzir */
+  formato: z.string().regex(/^[a-z0-9][a-z0-9-]*$/).optional(),
   /** arquivo principal relativo à pasta (ex.: "exports/x-9x16-v03.mp4" ou "png/01.png"); vazio = o mais recente */
   principal: z.string().regex(/^(exports|png)\/[^\\:]+$/, 'arquivo em exports/ ou png/').optional(),
   favorite: z.boolean().optional(),

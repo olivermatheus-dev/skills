@@ -1,0 +1,71 @@
+{
+  "id": "carrossel-educativo",
+  "nome": "Carrossel educativo",
+  "status": "ativo",
+  "skill": "fmt-carrossel-educativo",
+  "midia": "imagem",
+  "motor": "carousel",
+  "essencia": "Ensina algo útil que a persona quer guardar e mandar para uma colega, 1 ideia por slide.",
+  "tipos": [
+    "educativo"
+  ],
+  "funil": [
+    "topo",
+    "meio"
+  ],
+  "canais": [
+    "feed"
+  ],
+  "proporcoes": [
+    "4:5",
+    "1:1"
+  ],
+  "tamanho": "7–9 slides (6–12)",
+  "quandoUsar": [
+    "como fazer",
+    "sinais e erros",
+    "checklist",
+    "regra nova do setor"
+  ],
+  "quandoNaoUsar": [
+    "ideia única (→ post frase)",
+    "humor (→ meme)",
+    "oferta (→ anúncio)"
+  ],
+  "estrutura": [
+    {
+      "bloco": "capa",
+      "quando": "slide 1",
+      "oque": "número + público + resultado, ≤ 10 palavras"
+    },
+    {
+      "bloco": "promessa",
+      "quando": "slide 2",
+      "oque": "o que ela leva no fim"
+    },
+    {
+      "bloco": "conteúdo",
+      "quando": "slides 3…N-2",
+      "oque": "1 ideia por slide: título ≤ 8 palavras + apoio ≤ 25, numerado"
+    },
+    {
+      "bloco": "síntese",
+      "quando": "slide N-1",
+      "oque": "todos os itens num slide (o print que circula)"
+    },
+    {
+      "bloco": "CTA",
+      "quando": "slide N",
+      "oque": "1 pedido só"
+    }
+  ],
+  "variacoes": [
+    "lista (padrão)",
+    "passo a passo",
+    "mito × verdade",
+    "checklist"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

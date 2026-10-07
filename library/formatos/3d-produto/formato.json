@@ -1,0 +1,74 @@
+{
+  "id": "3d-produto",
+  "nome": "3D do produto",
+  "status": "ativo",
+  "skill": "fmt-3d-produto",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "Celular ou notebook girando com o print real na tela: abertura premium do produto.",
+  "tipos": [
+    "produto",
+    "lancamento"
+  ],
+  "funil": [
+    "topo",
+    "meio"
+  ],
+  "canais": [
+    "reels",
+    "anuncio",
+    "lp"
+  ],
+  "proporcoes": [
+    "9:16",
+    "4:5",
+    "16:9",
+    "1:1"
+  ],
+  "tamanho": "8–20 s (padrão 12 s)",
+  "quandoUsar": [
+    "herói de LP ou abertura de trailer",
+    "mostrar que o produto é real e bonito"
+  ],
+  "quandoNaoUsar": [
+    "explicar um fluxo (→ recorte de funcionalidade)",
+    "sem print real",
+    "tela que precisa ser lida por mais de 3 s"
+  ],
+  "estrutura": [
+    {
+      "bloco": "entrada",
+      "quando": "0–2 s",
+      "oque": "aparelho inclinado sobe e gira"
+    },
+    {
+      "bloco": "órbita",
+      "quando": "2–5 s",
+      "oque": "3/4 com 2 cards de UI em paralaxe e 1 reflexo"
+    },
+    {
+      "bloco": "de frente",
+      "quando": "5–9 s",
+      "oque": "tela encarando a câmera com a mensagem e 1 gesto real"
+    },
+    {
+      "bloco": "saída",
+      "quando": "9–10 s",
+      "oque": "zoom-through na tela"
+    },
+    {
+      "bloco": "cartão final",
+      "quando": "10–12 s",
+      "oque": "CTA + marca"
+    }
+  ],
+  "variacoes": [
+    "celular (padrão)",
+    "notebook",
+    "os dois em paralaxe",
+    "bloco dentro do trailer"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

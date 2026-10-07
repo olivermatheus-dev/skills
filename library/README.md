@@ -17,6 +17,7 @@ Mapa de **onde fica cada asset** do hub. Regra de decisão:
 | componentes de motion em código (fundos, gráficos, contadores, transições) | `library/motion/<categoria>/<id>/` | sim (código) | `meta.json` por item |
 | looks de cor (cadeias ffmpeg, LUT `.cube`) | `library/looks/` | sim | `looks/looks.json` |
 | templates genéricos de peça | `library/templates/{carousel,post,video}/` | sim (HTML) | — |
+| formatos de conteúdo (galeria: verbete, exemplos, referências) | `library/formatos/<id>/` | sim (`formato.json`); prints de referência não | `formato.json` (aba Formatos do app) |
 | mockups: templates, aparelhos, fundos (estúdio de mockups) | `library/mockups/` | sim (HTML/CSS/JS) | `catalogo.json` + `meta.json` (`node tools/mockup/render.mjs --listar`) |
 | prints do produto para mockup (bruto) | `companies/<slug>/capturas/<data>-<tela>/` | sim (PNG + `captura.json`) | `captura.json` |
 | marca: logo, ícones, fontes, fotos, prints | `companies/<slug>/brand/` | sim | `BRAND.md` |

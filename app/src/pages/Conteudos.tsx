@@ -34,7 +34,10 @@ function PieceList() {
   const { data: pieces = [], isLoading, error } = usePieces(slug);
   const { byId } = useProjectTags(slug);
   const save = useSaveMeta(slug);
-  const [creating, setCreating] = useState(false);
+  // ?novo=<formato> (vindo da galeria de formatos) abre o 'Novo conteúdo' já com o formato
+  const newFormat = sp.get('novo') ?? '';
+  const [creating, setCreating] = useState(sp.has('novo'));
+  const closeNew = () => { setCreating(false); if (sp.has('novo')) setF('novo', ''); };
   const [view, setView] = useState(loadView);
   const f = { q: sp.get('q') ?? '', kind: sp.get('tipo') ?? '', status: sp.get('status') ?? '', tag: sp.get('tag') ?? '', fav: sp.has('fav'), arq: sp.has('arquivadas'), sort: (sp.get('ordem') ?? 'recentes') as Sort };
   const setF = (k: string, v: string | boolean) => {
@@ -153,7 +156,7 @@ function PieceList() {
           ))}
         </div>
       )}
-      <NewPiece slug={slug} open={creating} onClose={() => setCreating(false)} onCreated={(pth) => { setCreating(false); setSp({ peca: pth }); }} />
+      <NewPiece slug={slug} open={creating} initialFormat={newFormat} onClose={closeNew} onCreated={(pth) => { setCreating(false); setSp({ peca: pth }); }} />
     </div>
   );
 }

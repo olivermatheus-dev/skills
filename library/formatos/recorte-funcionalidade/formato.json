@@ -1,0 +1,82 @@
+{
+  "id": "recorte-funcionalidade",
+  "nome": "Recorte de funcionalidade",
+  "status": "ativo",
+  "skill": "fmt-recorte-funcionalidade",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "Uma funcionalidade resolvendo uma dor concreta, com a interface em uso conduzida pelo cursor.",
+  "tipos": [
+    "produto",
+    "educativo"
+  ],
+  "funil": [
+    "meio",
+    "fundo"
+  ],
+  "canais": [
+    "reels",
+    "tiktok",
+    "anuncio",
+    "lp"
+  ],
+  "proporcoes": [
+    "9:16",
+    "4:5",
+    "16:9"
+  ],
+  "tamanho": "15–30 s (padrão 20 s)",
+  "quandoUsar": [
+    "mostrar como funciona",
+    "demo de uma feature",
+    "tutorial curto"
+  ],
+  "quandoNaoUsar": [
+    "tour do produto inteiro (vira 3 recortes)",
+    "recurso sem print real",
+    "lançamento (→ trailer)"
+  ],
+  "estrutura": [
+    {
+      "bloco": "problema",
+      "quando": "0–3 s",
+      "oque": "a dor no momento exato (hora, objeto, frase da persona)"
+    },
+    {
+      "bloco": "entrada no app",
+      "quando": "3–4 s",
+      "oque": "match cut: o elemento da dor vira o elemento do app"
+    },
+    {
+      "bloco": "gestos",
+      "quando": "4–12 s",
+      "oque": "2–3 gestos com cursor e zoom 1,5×; o estado muda"
+    },
+    {
+      "bloco": "resultado",
+      "quando": "12–16 s",
+      "oque": "estado final + rótulo do ganho (3–6 palavras)"
+    },
+    {
+      "bloco": "CTA",
+      "quando": "16–20 s",
+      "oque": "1 CTA + marca"
+    }
+  ],
+  "variacoes": [
+    "abertura com pergunta direta",
+    "com locução em L-cut",
+    "30 s com até 4 gestos"
+  ],
+  "observacoes": "",
+  "exemplos": [
+    {
+      "empresa": "kz",
+      "peca": "2026-10-07-teste-kit",
+      "legenda": "lembrete automático no WhatsApp (teste do kit, nível simples)",
+      "teste": true,
+      "adicionadoEm": "2026-10-07"
+    }
+  ],
+  "referencias": []
+}

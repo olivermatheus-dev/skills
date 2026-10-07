@@ -56,7 +56,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `analise-concorrentes` | análise por módulos (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui): roda a fila marcada no app, script + subagentes Sonnet |
 | `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
 
-**Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).
+**Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion). Galeria global com ficha, exemplos e observações do Oliver (mandam sobre a skill): `library/formatos/` (app → Formatos; peça → `formato` no `peca.json`).
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
 - Vídeo: `fmt-trailer-lancamento`, `fmt-recorte-funcionalidade`, `fmt-texto-cinetico`, `fmt-dialogo`, `fmt-3d-produto`.
 

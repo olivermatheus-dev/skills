@@ -1,6 +1,6 @@
 # 027 — Galeria de tipos de conteúdo e formatos (framework global)
 
-Status: rascunho (prioridade alta: é o que padroniza a produção) · Depende de: 005 (9 `fmt-*` escritos) · Liga com: 012 §5 (ficha de pauta), 014 (galeria de componentes), 025 (ficha da peça), 026 (skills no app)
+Status: fase A feita (galeria + app + ligação com a IA); fase B = exemplos · Depende de: 005 (9 `fmt-*` escritos) · Liga com: 012 §5 (ficha de pauta), 014 (galeria de componentes), 025 (ficha da peça), 026 (skills no app)
 
 ## Objetivo
 Uma **galeria do repositório** (todas as empresas usam) com os tipos de conteúdo e os formatos que funcionam. Toda ideia boa e **replicável no conceito** vira um verbete. O Oliver navega por ela, marca "quero um conteúdo no estilo X" e o Claude segue a essência e as instruções daquele formato.
@@ -17,9 +17,23 @@ Uma **galeria do repositório** (todas as empresas usam) com os tipos de conteú
 - Ao aprovar uma peça boa: **"Promover como exemplo"** do formato (alimenta a galeria sozinho).
 
 ## Critérios de pronto
-- [ ] Os 9 `fmt-*` atuais com ficha visual e pelo menos 1 exemplo nosso
-- [ ] Cadastrar uma referência nova pelo app (link/print + observação) em menos de 1 min
-- [ ] Marcar um formato numa peça e a produção seguir a skill certa (teste com 1 vídeo e 1 carrossel)
+- [~] Os 9 `fmt-*` atuais com ficha visual e pelo menos 1 exemplo nosso — **fichas feitas (9 ativas + 1 rascunho)**; exemplo nosso só no recorte de funcionalidade (`teste-kit`, marcado "teste"). Faltam 8 exemplos → fase B.
+- [x] Cadastrar uma referência nova pelo app (link/print + observação) em menos de 1 min — "Nova referência": link + print colado (Ctrl+V) + observação, num formato existente ou como rascunho novo.
+- [~] Marcar um formato numa peça e a produção seguir a skill certa — ligação feita (ficha da peça, tarefa criada pelo app cita a skill e o `formato.json`, `protocolo.md`, `review.mjs` mostra o formato); falta o teste real com 1 vídeo e 1 carrossel (sai junto com os exemplos da fase B).
+
+## Fase A (feita, 2026-10-07)
+- `schema/format.ts` (verbete) + `formato` no `schema/piece.ts`; `library/formatos/<id>/formato.json` (README na pasta; `refs/` fora do git).
+- Tipos de conteúdo fixos: educativo, identificação, humor, bastidor, prova, produto, lançamento, oferta.
+- Store/API: listar, editar (essência, observações, nota, tipos…), referência (link/print), rascunho novo, promover exemplo (aponta para a peça, não copia mídia, e marca o formato nela), peças feitas com ele (todas as empresas). `npm run validate` confere id e se a skill existe.
+- App: aba **Formatos** (galeria com prévia, filtros por tipo/mídia/canal/proporção/status, busca; sem exemplo mostra o esqueleto da estrutura) + verbete (exemplos, estrutura, quando usar/não usar, variações, referências, peças; "Usar num conteúdo novo", "Marcar numa peça", "Promover como exemplo"; essência/observações com autosave, nota, tipos). **Novo conteúdo** escolhe o formato e aceita só o pedido (sem roteiro → `briefing.md`, a IA escreve o roteiro). **Ficha da peça**: campo Formato.
+- IA: `protocolo.md` (observações do Oliver mandam sobre a skill), `content-ideas` usa os ids da galeria, `review.mjs` imprime o formato.
+- Rascunho novo: **Apresentação com locução** (o que já fizemos 3 vezes: apresentação da kz + A/B). Na próxima vez vira `fmt-apresentacao-locucao`.
+
+## Fase B (próxima)
+1. Com o Oliver: escolher os formatos dos 12 posts (pergunta em aberto da 005) — a galeria já filtra por tipo/funil.
+2. Produzir 1 exemplo de cada formato sem exemplo (de preferência já sendo posts da meta 006) e promover; isso fecha o teste "marcar formato → skill certa" (1 vídeo + 1 carrossel).
+3. Opcional: miniatura animada dos formatos de vídeo sem exemplo; `fmt-apresentacao-locucao`.
 
 ## Log
 - 2026-10-07: registrada a pedido do Oliver ("framework com tipos de conteúdo, galeria de formatos, marcar estilo X para o Claude seguir").
+- 2026-10-07: fase A feita (ver acima). Testes do store numa cópia (HUB_ROOT): referência com print, rascunho, promover (e recusar duplicado), conteúdo novo só com formato → briefing + tarefa com a skill, apagar referência; app conferido no navegador sem erros no console.

@@ -1,8 +1,11 @@
 // Ficha da peça (peca.json): a peça como ela é (prévia, versões e principal) e os textos que NÃO são edição:
 // legenda, copy, CTA, hashtags, notas livres, tags e publicação. Salva sozinho (autosave).
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type PieceFull, type PieceMeta } from '../../api';
-import { Button, Card, Field, Input, Textarea, cx } from '../ui';
+import { qk, useFormats } from '../../queries';
+import { Button, Card, Field, Input, Select, Textarea, cx } from '../ui';
 import { SaveIndicator, useAutosave } from '../notes/useAutosave';
 import { TagsInput } from '../notes/TagsInput';
 import { desktop, useSaveMeta } from './library';
@@ -74,6 +77,27 @@ function Versions({ slug, piece }: { slug: string; piece: PieceFull }) {
   );
 }
 
+/** formato da galeria (027): a IA carrega a skill dele ao produzir ou refazer a peça */
+function FormatField({ slug, piece }: { slug: string; piece: PieceFull }) {
+  const save = useSaveMeta(slug);
+  const qc = useQueryClient();
+  const { data: formats = [] } = useFormats();
+  const cur = piece.meta.formato ?? '';
+  const fmt = formats.find((f) => f.id === cur);
+  const set = (formato: string) => save.mutate({ path: piece.path, patch: { formato } }, { onSuccess: () => void qc.invalidateQueries({ queryKey: qk.formats() }) });
+  return (
+    <Field label="Formato" hint={fmt ? fmt.essencia : 'A IA segue a skill do formato escolhido.'}>
+      <div className="flex gap-2 items-center">
+        <Select className="flex-1" value={cur} onChange={(e) => set(e.target.value)}>
+          <option value="">— sem formato —</option>
+          {formats.map((f) => <option key={f.id} value={f.id}>{f.nome}{f.status === 'rascunho' ? ' (rascunho)' : ''}</option>)}
+        </Select>
+        {fmt && <Link className="text-xs text-accent hover:underline shrink-0" to={`/p/${slug}/formatos?formato=${fmt.id}`}>ver na galeria</Link>}
+      </div>
+    </Field>
+  );
+}
+
 function SheetFields({ slug, piece }: { slug: string; piece: PieceFull }) {
   const save = useSaveMeta(slug);
   const [notes, setNotes] = useState<Notes>(piece.meta.notes);
@@ -90,6 +114,7 @@ function SheetFields({ slug, piece }: { slug: string; piece: PieceFull }) {
         <span className="text-sm font-medium">Textos da peça</span>
         <span className="ml-auto"><SaveIndicator state={auto.state} /></span>
       </div>
+      <FormatField slug={slug} piece={piece} />
       {NOTE_FIELDS.map((f) => (
         <Field key={f.key} label={f.label} hint={f.hint}>
           <Textarea rows={f.rows} value={notes[f.key] ?? ''} onChange={(e) => setNote(f.key, e.target.value)} />

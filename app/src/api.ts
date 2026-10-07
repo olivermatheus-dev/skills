@@ -18,7 +18,12 @@ import type { PieceMeta } from '../../schema/piece';
 import type { Piece as PieceInfo } from '../../core/store';
 export type { PieceMeta, PieceInfo };
 export type PieceKind = PieceInfo['kind'];
-export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; format?: string; notes?: string; task?: boolean }
+import type { Format } from '../../schema/format';
+import type { FormatInfo, FormatUse, FormatRefInput } from '../../core/store';
+export type { Format, FormatInfo, FormatUse, FormatRefInput };
+export type { PieceCover } from '../../core/store';
+export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
+export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
 export interface PieceTimeline {
   formats?: string[];
@@ -125,6 +130,16 @@ export const api = {
   /** abre no computador: reveal = Explorer com o arquivo selecionado; open = app padrão (player). file vazio = a pasta */
   pieceDesktop: (slug: string, path: string, how: 'reveal' | 'open', file = '') => req<{ ok: boolean }>('POST', `${pj(slug)}/piece/${how}?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`),
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
+
+  formats: () => req<FormatInfo[]>('GET', '/api/formats'),
+  format: (id: string) => req<FormatInfo>('GET', `/api/formats/${encodeURIComponent(id)}`),
+  createFormat: (input: NewFormatInput) => req<FormatInfo>('POST', '/api/formats', input),
+  saveFormat: (id: string, patch: Partial<Omit<Format, 'nota'>> & { nota?: number | null }) => req<Format>('PUT', `/api/formats/${encodeURIComponent(id)}`, patch),
+  addFormatRef: (id: string, r: FormatRefInput) => req<Format>('POST', `/api/formats/${encodeURIComponent(id)}/refs`, r),
+  removeFormatRef: (id: string, i: number) => req<Format>('DELETE', `/api/formats/${encodeURIComponent(id)}/refs/${i}`),
+  promoteExample: (id: string, ex: { empresa: string; peca: string; arquivo?: string; legenda?: string }) => req<Format>('POST', `/api/formats/${encodeURIComponent(id)}/examples`, ex),
+  removeExample: (id: string, i: number) => req<Format>('DELETE', `/api/formats/${encodeURIComponent(id)}/examples/${i}`),
+  formatRefUrl: (id: string, file: string) => `/format-ref/${id}/${encodeURIComponent(file)}`,
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),
 };

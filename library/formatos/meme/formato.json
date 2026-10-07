@@ -1,0 +1,58 @@
+{
+  "id": "meme",
+  "nome": "Meme do nicho",
+  "status": "ativo",
+  "skill": "fmt-meme",
+  "midia": "imagem",
+  "motor": "carousel",
+  "essencia": "Estrutura de meme conhecida, recriada só com tipografia na marca, sobre o caos administrativo da persona.",
+  "tipos": [
+    "humor",
+    "identificacao"
+  ],
+  "funil": [
+    "topo"
+  ],
+  "canais": [
+    "feed",
+    "stories"
+  ],
+  "proporcoes": [
+    "4:5",
+    "1:1"
+  ],
+  "tamanho": "1 slide (2–4 se a estrutura pedir)",
+  "quandoUsar": [
+    "dor concreta e reconhecível",
+    "sexta à noite, conteúdo leve para envio por DM"
+  ],
+  "quandoNaoUsar": [
+    "tema sensível (sofrimento, luto, crise)",
+    "qualquer coisa sobre paciente",
+    "piada que precisa de explicação"
+  ],
+  "estrutura": [
+    {
+      "bloco": "estrutura do meme",
+      "oque": "escolha difícil · expectativa × realidade · eu explicando × eles · print de conversa · tier list"
+    },
+    {
+      "bloco": "texto",
+      "oque": "≤ 30 palavras, entendido em 3 s, situação específica da persona"
+    },
+    {
+      "bloco": "rodapé",
+      "oque": "produto só no rodapé; a conversão fica na legenda, suave"
+    }
+  ],
+  "variacoes": [
+    "escolha difícil (padrão)",
+    "expectativa × realidade",
+    "eu explicando × eles",
+    "print de conversa",
+    "tier list"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

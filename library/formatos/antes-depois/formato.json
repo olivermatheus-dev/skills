@@ -1,0 +1,69 @@
+{
+  "id": "antes-depois",
+  "nome": "Antes × depois",
+  "status": "ativo",
+  "skill": "fmt-antes-depois",
+  "midia": "imagem",
+  "motor": "carousel",
+  "essencia": "O mesmo momento da rotina em dois estados: caos de hoje e calma com o sistema.",
+  "tipos": [
+    "identificacao",
+    "produto"
+  ],
+  "funil": [
+    "meio"
+  ],
+  "canais": [
+    "feed",
+    "reels",
+    "anuncio"
+  ],
+  "proporcoes": [
+    "4:5",
+    "1:1"
+  ],
+  "tamanho": "3–6 slides ou 1 dividido",
+  "quandoUsar": [
+    "dor operacional com virada visível (apps espalhados, lembrete manual, link perdido)"
+  ],
+  "quandoNaoUsar": [
+    "resultado terapêutico ou de paciente",
+    "número fora do contexto"
+  ],
+  "estrutura": [
+    {
+      "bloco": "capa",
+      "quando": "slide 1",
+      "oque": "hook ≤ 10 palavras (\"De 5 apps para 1.\")"
+    },
+    {
+      "bloco": "antes",
+      "quando": "slides 2–3",
+      "oque": "cena do caos + frase literal da persona; custo (só dado do contexto)"
+    },
+    {
+      "bloco": "depois",
+      "quando": "slide 4",
+      "oque": "a mesma cena organizada, mesmo horário"
+    },
+    {
+      "bloco": "comparação",
+      "quando": "slide 5",
+      "oque": "até 3 linhas"
+    },
+    {
+      "bloco": "CTA",
+      "quando": "slide 6",
+      "oque": "salvar, enviar ou link na bio"
+    }
+  ],
+  "variacoes": [
+    "carrossel (padrão)",
+    "split em 1 slide",
+    "versão animada (motor de vídeo)",
+    "eixo apps · tempo · tarefa"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

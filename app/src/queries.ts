@@ -26,6 +26,7 @@ export const qk = {
   pieces: (slug: string) => ['pieces', slug] as const,
   piece: (slug: string, path: string) => ['piece', slug, path] as const,
   pieceText: (slug: string, path: string, file: string) => ['piece-text', slug, path, file] as const,
+  formats: () => ['formats'] as const,
 };
 
 // ---------- consultas ----------
@@ -54,6 +55,7 @@ export const q = {
   piece: (slug: string, path: string) => queryOptions({ queryKey: qk.piece(slug, path), queryFn: () => api.piece(slug, path), enabled: !!slug && !!path }),
   // texto com salvar explícito: não recarrega por baixo da edição
   pieceText: (slug: string, path: string, file: string) => queryOptions({ queryKey: qk.pieceText(slug, path, file), queryFn: () => api.pieceText(slug, path, file), enabled: !!slug && !!path && !!file, staleTime: Infinity, refetchOnWindowFocus: false }),
+  formats: () => queryOptions({ queryKey: qk.formats(), queryFn: api.formats }),
 };
 
 export const useProjects = () => useQuery(q.projects());
@@ -76,6 +78,7 @@ export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
 export const usePieces = (slug: string) => useQuery(q.pieces(slug));
 export const usePiece = (slug: string, path: string) => useQuery(q.piece(slug, path));
 export const usePieceText = (slug: string, path: string, file: string) => useQuery(q.pieceText(slug, path, file));
+export const useFormats = () => useQuery(q.formats());
 
 // ---------- pré-carga ----------
 /** o que cada tela lê (para pré-carregar ao passar o mouse no menu) */
@@ -87,7 +90,8 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],
-  conteudos: (s) => [q.pieces(s)],
+  conteudos: (s) => [q.pieces(s), q.formats()],
+  formatos: (s) => [q.formats(), q.pieces(s)],
   configuracoes: (s) => [q.secrets(s)],
 };
 export function prefetchPage(qc: QueryClient, slug: string, path: string) {

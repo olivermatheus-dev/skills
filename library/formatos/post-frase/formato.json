@@ -1,0 +1,65 @@
+{
+  "id": "post-frase",
+  "nome": "Post frase",
+  "status": "ativo",
+  "skill": "fmt-post-frase",
+  "midia": "imagem",
+  "motor": "carousel",
+  "essencia": "Uma imagem, uma frase que a persona manda para a colega: \"é exatamente isso\".",
+  "tipos": [
+    "identificacao",
+    "educativo"
+  ],
+  "funil": [
+    "topo"
+  ],
+  "canais": [
+    "feed",
+    "stories"
+  ],
+  "proporcoes": [
+    "4:5",
+    "1:1"
+  ],
+  "tamanho": "1 slide, 6–15 palavras",
+  "quandoUsar": [
+    "espelho de dor",
+    "crença a quebrar",
+    "verdade do ofício",
+    "semana corrida (rápido de produzir)"
+  ],
+  "quandoNaoUsar": [
+    "ideia que precisa de passos (→ carrossel educativo)",
+    "oferta ou preço (→ anúncio)"
+  ],
+  "estrutura": [
+    {
+      "bloco": "topo",
+      "quando": "opcional",
+      "oque": "tag do tema em 1–3 palavras"
+    },
+    {
+      "bloco": "frase",
+      "oque": "6–15 palavras, 2–5 linhas, 1 palavra em destaque"
+    },
+    {
+      "bloco": "apoio",
+      "quando": "opcional",
+      "oque": "1 linha ≤ 15 palavras ou \"— autor\" real"
+    },
+    {
+      "bloco": "rodapé",
+      "oque": "@ da marca, sem \"arraste\""
+    }
+  ],
+  "variacoes": [
+    "esquerda (padrão)",
+    "centro",
+    "citação (só autor real)",
+    "fundo invertido",
+    "com foto da marca"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

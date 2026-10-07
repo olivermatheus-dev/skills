@@ -2,6 +2,8 @@
 import { join } from 'node:path';
 
 export const COMPANIES = 'companies';
+/** galeria de formatos (027), global: library/formatos/<id>/formato.json + refs/ */
+export const FORMATS = join('library', 'formatos');
 export const company = (slug: string) => join(COMPANIES, slug);
 export const P = {
   project: (s: string) => join(company(s), 'project.yml'),

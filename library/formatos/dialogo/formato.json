@@ -1,0 +1,73 @@
+{
+  "id": "dialogo",
+  "nome": "Diálogo",
+  "status": "ativo",
+  "skill": "fmt-dialogo",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "Conversa de chat que a persona reconhece e que vira no produto, com UI própria na marca.",
+  "tipos": [
+    "identificacao",
+    "humor",
+    "produto"
+  ],
+  "funil": [
+    "topo",
+    "meio"
+  ],
+  "canais": [
+    "reels",
+    "tiktok",
+    "stories"
+  ],
+  "proporcoes": [
+    "9:16",
+    "4:5"
+  ],
+  "tamanho": "15–30 s (padrão 20 s), 5–7 mensagens",
+  "quandoUsar": [
+    "situação que acontece por mensagem (remarcar, cobrar, confirmar)",
+    "humor de rotina com virada no produto"
+  ],
+  "quandoNaoUsar": [
+    "sem dois lados falando",
+    "mais de 8 mensagens",
+    "conteúdo clínico"
+  ],
+  "estrutura": [
+    {
+      "bloco": "gancho",
+      "quando": "0–2 s",
+      "oque": "cabeçalho com nome + hora e a 1ª bolha já visível"
+    },
+    {
+      "bloco": "troca",
+      "quando": "2–10 s",
+      "oque": "3–5 mensagens com indicador de digitação"
+    },
+    {
+      "bloco": "virada",
+      "quando": "10–13 s",
+      "oque": "a mensagem que muda o sentido, sozinha após pausa"
+    },
+    {
+      "bloco": "produto",
+      "quando": "13–17,5 s",
+      "oque": "a bolha vira o card do app (match cut)"
+    },
+    {
+      "bloco": "fecho",
+      "quando": "17,5–20 s",
+      "oque": "1 CTA + marca"
+    }
+  ],
+  "variacoes": [
+    "celular inteiro (padrão)",
+    "só a conversa em tela cheia",
+    "com locução no fecho",
+    "fecho em cartão de frase"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

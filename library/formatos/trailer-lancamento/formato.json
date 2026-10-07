@@ -1,0 +1,79 @@
+{
+  "id": "trailer-lancamento",
+  "nome": "Trailer de lançamento",
+  "status": "ativo",
+  "skill": "fmt-trailer-lancamento",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "Trailer de cinema do produto: o caos acelera, silêncio, drop no produto e revelação da marca.",
+  "tipos": [
+    "lancamento",
+    "produto"
+  ],
+  "funil": [
+    "topo",
+    "meio"
+  ],
+  "canais": [
+    "reels",
+    "tiktok",
+    "anuncio",
+    "lp"
+  ],
+  "proporcoes": [
+    "9:16",
+    "4:5",
+    "16:9"
+  ],
+  "tamanho": "15–30 s (padrão 20 s)",
+  "quandoUsar": [
+    "lançamento, pré-lançamento, \"tá chegando\"",
+    "abrir campanha ou LP com impacto"
+  ],
+  "quandoNaoUsar": [
+    "uma funcionalidade só (→ recorte de funcionalidade)",
+    "sem tela real (→ texto cinético)",
+    "oferta com preço"
+  ],
+  "estrutura": [
+    {
+      "bloco": "cold open",
+      "quando": "0–2 s",
+      "oque": "situação real da persona já no 1º quadro"
+    },
+    {
+      "bloco": "build",
+      "quando": "2–8 s",
+      "oque": "3–4 golpes da dor em hard cut na batida, acelerando"
+    },
+    {
+      "bloco": "silêncio",
+      "quando": "8–8,4 s",
+      "oque": "tela limpa, som corta"
+    },
+    {
+      "bloco": "drop + produto",
+      "quando": "8,4–15 s",
+      "oque": "entra no app; 2–3 gestos reais com cursor"
+    },
+    {
+      "bloco": "revelação",
+      "quando": "15–17,5 s",
+      "oque": "logo + slogan"
+    },
+    {
+      "bloco": "cartão final",
+      "quando": "17,5–20 s",
+      "oque": "CTA único + marca"
+    }
+  ],
+  "variacoes": [
+    "sem locução (padrão)",
+    "com locução",
+    "teaser curto 15 s",
+    "com bloco 3D do produto"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

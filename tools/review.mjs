@@ -112,6 +112,13 @@ function frame(c, t) {
 // ---- saída ----
 const all = flags.includes('--all');
 const list = review.comments.filter((c) => all || c.status === 'aberto');
+// formato da galeria (027) marcado na ficha: a IA segue a skill e as observações do Oliver (mandam sobre a skill)
+const formato = read('peca.json') && JSON.parse(read('peca.json')).formato;
+if (formato) {
+  const ff = rpath('library', 'formatos', formato, 'formato.json');
+  const fm = existsSync(ff) ? JSON.parse(readFileSync(ff, 'utf8')) : null;
+  console.log(fm ? `formato: ${fm.nome} → ${fm.skill ? `skill ${fm.skill}` : 'rascunho sem skill (seguir essência e estrutura do formato.json)'}${fm.observacoes ? `\n   observações do Oliver: ${fm.observacoes.replace(/\n/g, ' / ')}` : ''}\n` : `⚠ formato "${formato}" não existe em library/formatos/\n`);
+}
 if (!list.length) { console.log(`Nenhuma anotação ${all ? '' : 'aberta '}em ${dir}.`); process.exit(0); }
 console.log(`# Anotações ${all ? '' : 'abertas '}— ${dir}`);
 const appr = Object.entries(review.approvals ?? {}).filter(([, d]) => d).map(([k, d]) => `${k} aprovado em ${d}`);

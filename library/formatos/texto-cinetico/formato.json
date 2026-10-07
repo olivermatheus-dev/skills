@@ -1,0 +1,71 @@
+{
+  "id": "texto-cinetico",
+  "nome": "Texto cinético",
+  "status": "ativo",
+  "skill": "fmt-texto-cinetico",
+  "midia": "video",
+  "motor": "video",
+  "essencia": "Uma ideia só com palavras em movimento: frase inteira por tela, sem print nem gravação.",
+  "tipos": [
+    "identificacao",
+    "educativo"
+  ],
+  "funil": [
+    "topo"
+  ],
+  "canais": [
+    "reels",
+    "tiktok",
+    "stories"
+  ],
+  "proporcoes": [
+    "9:16",
+    "4:5"
+  ],
+  "tamanho": "10–20 s (padrão 15 s)",
+  "quandoUsar": [
+    "ainda não há tela do produto para mostrar",
+    "uma dor ou crença forte cabe em 5 frases",
+    "precisa funcionar no mudo"
+  ],
+  "quandoNaoUsar": [
+    "mostrar como funciona (→ recorte de funcionalidade)",
+    "mais de 5 frases (vira carrossel)"
+  ],
+  "estrutura": [
+    {
+      "bloco": "gancho",
+      "quando": "0–2 s",
+      "oque": "2–4 palavras, frase literal da persona, já no 1º quadro"
+    },
+    {
+      "bloco": "dor",
+      "quando": "2–6 s",
+      "oque": "2 telas, ≤ 6 palavras cada, troca por swap"
+    },
+    {
+      "bloco": "virada",
+      "quando": "6–8 s",
+      "oque": "0,3 s de silêncio e 1–3 palavras (\"E se não?\")"
+    },
+    {
+      "bloco": "solução",
+      "quando": "8–12,5 s",
+      "oque": "o ganho + nome do produto, palavra-chave em destaque"
+    },
+    {
+      "bloco": "CTA",
+      "quando": "12,5–15 s",
+      "oque": "1 CTA + marca, parado"
+    }
+  ],
+  "variacoes": [
+    "pilha à esquerda (padrão)",
+    "centro (≤ 4 palavras)",
+    "palavra gigante na virada",
+    "com locução"
+  ],
+  "observacoes": "",
+  "exemplos": [],
+  "referencias": []
+}

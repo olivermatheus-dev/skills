@@ -125,6 +125,16 @@ function openOnDesktop(file: string, how: 'reveal' | 'open') {
   return { ok: true };
 }
 
+// Galeria de formatos (tarefa 027): global, library/formatos/<id>/formato.json
+on('GET', '/api/formats', () => S.listFormats());
+on('POST', '/api/formats', (_, b) => S.createFormatDraft(b));
+on('GET', '/api/formats/:id', (p) => S.getFormat(p.id));
+on('PUT', '/api/formats/:id', (p, b) => S.saveFormat(p.id, b ?? {}));
+on('POST', '/api/formats/:id/refs', (p, b) => S.addFormatRef(p.id, b ?? {}));
+on('DELETE', '/api/formats/:id/refs/:i', (p) => S.removeFormatRef(p.id, Number(p.i)));
+on('POST', '/api/formats/:id/examples', (p, b) => S.promoteExample(p.id, b ?? {}));
+on('DELETE', '/api/formats/:id/examples/:i', (p) => S.removeExample(p.id, Number(p.i)));
+
 on('GET', '/api/validate', () => S.validateAll());
 
 // ---------- infraestrutura ----------
@@ -161,6 +171,14 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
   if (bf) {
     const file = join(S.ROOT, P.brand(bf[1]), bf[2], decodeURIComponent(bf[3]));
     if (/\.\./.test(bf[3]) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    return createReadStream(file).pipe(res);
+  }
+  // /format-ref/<formato>/<arquivo> → prints de referência da galeria de formatos
+  const fr = url.pathname.match(/^\/format-ref\/([a-z0-9][a-z0-9-]*)\/([^/]+)$/);
+  if (fr) {
+    const file = S.formatRefFile(fr[1], decodeURIComponent(fr[2]));
+    if (!file) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return createReadStream(file).pipe(res);
   }

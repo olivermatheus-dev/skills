@@ -17,6 +17,8 @@ Entregue **10 pautas** numa tabela:
 | # | pilar | funil | formato | hook da capa / 1º frame | sinal-alvo | origem no contexto |
 |---|---|---|---|---|---|---|
 
+**Formato** = um id da galeria `library/formatos/` (ex.: `post-frase`, `texto-cinetico`; filtre por `tipos` e `funil` do `formato.json` e leia as `observacoes` do Oliver). Ideia boa sem formato na galeria → diga "formato novo" e sugira cadastrar como rascunho.
+
 - **Ângulo > tema.** "Agenda de terapeuta" é tema; "Seu consultório mora no WhatsApp" é ângulo. A coluna de hook já é o ângulo escrito como o público vai ver.
 - **Origem real:** toda pauta nasce de uma dor, objeção, frase literal (`AUDIENCE.md`), crença errada do nicho ou gap de concorrente. Cite em 2–4 palavras. Sem origem → descarte.
 - **Sinal-alvo** (um): `envio` (DM, "manda pra colega"), `salvar`, `comentário` ou `clique`. Topo mira envio; lista/checklist mira salvar.
