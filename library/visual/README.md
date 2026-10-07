@@ -1,6 +1,6 @@
 # Biblioteca visual (global)
 
-Recursos visuais **compartilhados entre as empresas**: ícones, mapas, bandeiras, logos de terceiros e ilustrações. O que é **da marca** fica em `companies/<slug>/brand/`.
+Recursos visuais **compartilhados entre as empresas**: ícones, mapas, bandeiras, logos de terceiros e ilustrações. O que é **da marca** fica em `companies/<slug>/brand/`. Clipes de efeito de vídeo ficam em `library/fx/`. Mapa geral: `library/README.md`.
 **Ordem de busca:** asset oficial → marca → esta biblioteca → pack compatível → criar. Ver `knowledge/video/texto-e-dados.md`.
 
 ```
@@ -10,7 +10,6 @@ library/visual/
   flags/                 bandeiras (mesmo estilo e proporção)
   logos/                 logos oficiais de terceiros (concorrentes, parceiros, integrações)
   illustrations/         ilustrações com licença
-  fx/<tipo>/             efeitos de integração e atmosfera: grain, smoke, fog, dust, light-leaks, bokeh, lens-dirt, reflections (arquivos pesados ficam locais; metadados em `fx/fx.json`: tipo, densidade, velocidade, escala, caráter, direção, profundidade, loop, alpha/preto, licença)
   README.md              este arquivo + registro de licenças (abaixo)
 ```
 

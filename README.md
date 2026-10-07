@@ -7,7 +7,7 @@ Central de estratégia, conteúdo, vídeo, anúncios e vendas das empresas do Ol
 | o quê | para quê | como |
 |---|---|---|
 | Git | baixar e versionar | https://git-scm.com |
-| Node.js 22 LTS | interface e ferramentas | https://nodejs.org (ou `winget install OpenJS.NodeJS.LTS`) |
+| Node.js 22 (fixado em `.nvmrc`) | interface e ferramentas | `fnm` (`winget install Schniz.fnm`) troca sozinho para o Node 22 ao entrar na pasta, sem mexer nos outros projetos; nvm também lê o `.nvmrc` |
 | Claude Code | trabalhar com as skills e agentes | https://claude.com/claude-code |
 | Python 3 + yt-dlp | coletar YouTube/TikTok | `winget install Python.Python.3.12` → `pip install -U yt-dlp` |
 | ffmpeg | vídeo, áudio, QC | `winget install Gyan.FFmpeg` |
@@ -15,6 +15,7 @@ Central de estratégia, conteúdo, vídeo, anúncios e vendas das empresas do Ol
 ```bash
 git clone https://github.com/olivermatheus-dev/skills.git
 cd skills
+fnm use                         # usa o Node do .nvmrc (instala com fnm install se faltar)
 npm install                     # dependências da interface e das ferramentas
 npx playwright install chromium # só para exportar carrossel em PNG
 copy .env.example .env          # e preencha as chaves que for usar (ver abaixo)
@@ -75,7 +76,7 @@ Exemplos de pedido:
 | `schema/` | formato de cada arquivo de dados (o "banco") — validado por `npm run validate` |
 | `.claude/skills/` · `.claude/agents/` | skills e agentes do Claude Code |
 | `knowledge/video/` | regras de vídeo (`REGRAS.md` é o núcleo) |
-| `library/` | áudio e recursos visuais reutilizáveis (com licença) |
+| `library/` | assets reutilizáveis: sons, efeitos de vídeo, motion, looks, templates (mapa em `library/README.md`) |
 | `tools/` | ferramentas de terminal · `app/` interface local |
 | `roadmap/` | evolução do hub: **comece por `roadmap/ESTADO.md`** |
 

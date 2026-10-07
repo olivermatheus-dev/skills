@@ -1,6 +1,6 @@
 # Biblioteca de áudio
 
-Compartilhada por todas as empresas. **Os arquivos de áudio ficam só na máquina (fora do git); os catálogos JSON ficam no git.** Assim a busca funciona em qualquer lugar e o arquivo pesado não infla o repo. (Destino definitivo dos arquivos pesados: decidir depois.)
+Compartilhada por todas as empresas. **Os arquivos de áudio ficam só na máquina (fora do git); os catálogos JSON ficam no git.** Assim a busca funciona em qualquer lugar e o arquivo pesado não infla o repo. Mapa geral e como trazer sons que você já tem: `library/README.md` (entrada bruta em `_inbox/audio/`).
 
 ```
 library/audio/

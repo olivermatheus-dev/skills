@@ -30,6 +30,7 @@ Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do g
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
 Vídeo: ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição). QC do MP4 final antes de entregar → `node tools/video/qc.mjs <pasta> --sheet`.
+**Onde fica cada asset** (sons, efeitos, templates, marca, entrada bruta): `library/README.md`.
 Biblioteca visual global (ícones, mapas, bandeiras, logos de terceiros): `library/visual/` (sem licença registrada, não usa). Galeria de reuso (componentes de motion, fx, looks): consultar o índice antes de criar, promover o que ficou bom (tarefa 014).
 Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locais, catálogos `sfx.json`/`music.json`/`bases.json` no git, e **sem licença não usa**. Ferramenta: `node tools/audio/catalog.mjs`.
 
