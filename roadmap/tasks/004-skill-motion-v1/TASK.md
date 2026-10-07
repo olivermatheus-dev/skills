@@ -28,3 +28,9 @@ O processo está definido em `knowledge/video/esteira-de-producao.md`, generaliz
 
 ## Log
 - 2026-10-06 — criada.
+- 2026-10-07 — skill `.claude/skills/video/` escrita:
+  - 5 etapas com portão de aval;
+  - tabela de leitura sob demanda do `knowledge/video`;
+  - moldes `references/plano.md` e `references/timeline.md` (esquema JSON + regras de validação);
+  - contrato do kit em `tools/video-kit/`.
+  Falta: importar o kit do Ludus e testar o render (tarefa 003, local).

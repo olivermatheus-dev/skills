@@ -48,3 +48,8 @@ O usuário: "mini skills para cada tipo de conteúdo, estilo de conteúdo. Iremo
 
 ## Log
 - 2026-10-07 — criada a partir do pedido do usuário.
+- 2026-10-07 — 9 formatos escritos:
+  - imagem: post-frase, meme, antes-depois, carrossel-educativo (com `references/layout.html`);
+  - vídeo: trailer-lancamento, recorte-funcionalidade (cobre demo), texto-cinetico, dialogo, 3d-produto.
+  - Layouts de imagem renderizados com a marca da kz: ok.
+  - Pendentes do usuário: elenco fictício da kz, @ e link de cadastro, prints do produto em `brand/screenshots/`, horário real do lembrete automático.

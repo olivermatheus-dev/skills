@@ -1,0 +1,30 @@
+<!-- fmt-post-frase: colar dentro da tag style do template do carousel (depois dos tipos). Só tokens da marca. -->
+<style>
+.pf-frase { font-family: var(--font-heading); font-weight: var(--weight-heading);
+  line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); font-size: 104px; }
+.pf-frase.curta { font-size: 132px; }          /* até 8 palavras */
+.pf-centro { align-items: center; text-align: center; }
+.pf-centro .tag { align-self: center; }
+.pf-esquerda { justify-content: flex-end; padding-bottom: 240px; }  /* frase ancorada embaixo-esquerda */
+</style>
+
+<!-- layout esquerda -->
+<section class="slide pf-esquerda">
+  <span class="tag">rotina</span>
+  <p class="pf-frase">Você não está cansada de atender.<br>Está cansada de <span class="hl">gerenciar</span>.</p>
+  <div class="footer"><span>@handle</span><span></span></div>
+</section>
+
+<!-- layout centro -->
+<section class="slide pf-centro">
+  <p class="pf-frase curta">Depois eu <span class="hl">organizo</span>.</p>
+  <p class="sub">(nunca organiza)</p>
+  <div class="footer"><span>@handle</span><span></span></div>
+</section>
+
+<!-- layout citacao: usa .quote do template -->
+<section class="slide inverse">
+  <p class="quote">Frase com autor real e fonte verificável.</p>
+  <p class="sub">— Autor</p>
+  <div class="footer"><span>@handle</span><span></span></div>
+</section>

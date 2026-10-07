@@ -41,7 +41,11 @@ Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
 | `launch-plan` | plano de lançamento semana a semana |
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 
-Fluxo típico: `content-ideas` → `ig-post` → `carousel` (imagem) ou `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
+**Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).
+- Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
+- Vídeo: `fmt-trailer-lancamento`, `fmt-recorte-funcionalidade`, `fmt-texto-cinetico`, `fmt-dialogo`, `fmt-3d-produto`.
+
+Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` (imagem) ou `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
 
 ## Ao terminar uma tarefa
 - Salve a peça na pasta certa (acima).
