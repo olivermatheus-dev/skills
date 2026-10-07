@@ -55,11 +55,11 @@ export function prepVoice(src, dest, { pad = 0.04 } = {}) {
   return { offset: r3(begin - from), length: r3(duration(dest)) };
 }
 
-/** Voz escolhida para o vídeo: timeline.voice > brand/voices.json da empresa (rascunho) > Windows Daniel. */
+/** Voz escolhida para o vídeo: timeline.voice > brand/voices.json da empresa (rascunho) > Thalita (padrão do hub). */
 export function voiceFor(v, stage = 'draft') {
   if (v.tl.voice?.[stage]) return resolveVoice(v.tl.voice[stage]);
   const brand = v.companyDir ? json(join(v.companyDir, 'brand', 'voices.json'), null) : null;
-  return resolveVoice(brand?.[stage] || 'win-daniel');
+  return resolveVoice(brand?.[stage] || 'edge-thalita');
 }
 export function resolveVoice(id) {
   const all = json(join(HUB, 'library', 'voices', 'voices.json'), []);
@@ -120,4 +120,17 @@ export function layout(tl) {
 /** Palavras com fim: o fim de cada uma é o começo da próxima (o último vai até o fim da fala). */
 export function closeWords(words, end) {
   return words.map((w, i) => ({ w: w.w, s: r3(w.s), e: r3(Math.max(w.s, i + 1 < words.length ? words[i + 1].s : end)) }));
+}
+
+/** Caminho do Python real. No Windows, `python` direto cai no atalho da Microsoft Store; os shims do pyenv
+ *  são .bat e só resolvem via shell. Ordem: $PYTHON → o que o shell acha (sys.executable) → 'python'. */
+let pythonPath;
+export function python() {
+  if (pythonPath) return pythonPath;
+  if (process.env.PYTHON) return (pythonPath = process.env.PYTHON);
+  try {
+    const exe = execFileSync('python -c "import sys; print(sys.executable)"', { shell: true, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    if (exe && existsSync(exe)) return (pythonPath = exe);
+  } catch { /* cai no padrão */ }
+  return (pythonPath = 'python');
 }

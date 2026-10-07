@@ -11,7 +11,7 @@ Política de custo:
 - **Encaixe:** feito pela ferramenta `timeline.mjs`, quase sem gastar tokens.
 
 ## 1. v1.0: voz de rascunho (padrão de todo vídeo)
-- `node tools/video-kit/scripts/tts.mjs <pasta>`: gera todas as falas com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo `library/voices/`). Padrão: **Windows** (`win-daniel`/`win-maria`, offline); opção mais natural e grátis: `--voice edge-thalita` (online). Corta o silêncio, mede cada palavra e **encaixa a timeline** sozinho.
+- `node tools/video-kit/scripts/tts.mjs <pasta>`: gera todas as falas com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo `library/voices/`). Padrão do hub: **Thalita** (`edge-thalita`, neural da Microsoft, grátis, online). Sem internet: `--voice win-maria` (Windows, offline). Corta o silêncio, mede cada palavra e **encaixa a timeline** sozinho.
 - Número, hora e sigla: escreva em `vo[].say` como se fala ("onze da noite"); `text` fica como se lê.
 - Registre no `plano.md`: "voz de rascunho; trocar pela final após aval". **Nunca publicar com voz de rascunho.**
 

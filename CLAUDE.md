@@ -84,6 +84,11 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
   - trabalhar junto → `claude --agent <agente>` num terminal.
 - **Heartbeat:** `node tools/heartbeat.mjs --run [--watch 30]` acorda os agentes com tarefa pronta e cria as recorrentes (`board/recorrentes.json`). Detalhes na skill `orquestrar`.
 
+## Sessões e contexto
+- **Uma tarefa por sessão.** Quando a próxima tarefa não depende da atual, o Oliver dá `/clear`. Antes disso, deixe tudo registrado no repositório (nunca só na conversa): `roadmap/ESTADO.md` (construção do hub) ou o arquivo da tarefa no quadro (produção), com onde parou, o próximo passo e o que falta do Oliver. Ao terminar uma tarefa, **sugira o `/clear`** se a próxima for independente.
+- **Ao começar, leia só o necessário:** `ESTADO.md` → o `TASK.md` (ou `board/T-NNNN.md`) da vez → só os arquivos que ela cita. Não percorra o repositório "para entender".
+- Prefira índices a arquivos grandes (`library/audio/INDEX.md`, nunca o `sfx.json` inteiro). Evolução disto (contexto declarado por tarefa no quadro, agentes lendo só ele): tarefa 021.
+
 ## Construção do hub (roadmap)
 **Sessão nova? Comece por `roadmap/ESTADO.md`** (onde paramos, pendências, próximo passo).
 Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados), `INTEL.md` (inteligência de mercado), `APP.md` (visão do app: projetos, kanban, concorrentes, agentes) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).

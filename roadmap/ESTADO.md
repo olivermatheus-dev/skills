@@ -1,72 +1,39 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07. Branch de trabalho: `main`. Visão geral do repo: `CLAUDE.md`.
+> Atualizado em 2026-10-07. Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
-## O que já existe
-- **Hub enxuto:**
-  - 21 skills: núcleo (setup, content-ideas, ig-post, carousel, ads-meta, landing-page, launch-plan, video, audio, locucao, orquestrar) + 9 formatos `fmt-*`;
-  - 6 agentes;
-  - Kanban em arquivos;
-  - heartbeat e tarefas recorrentes.
-- **Base de vídeo verificada:** `knowledge/video/`: Etapas 1–15 consolidadas na tarefa 010 em `REGRAS.md` (núcleo, ~1,4 mil palavras) + 10 temas (~12,3 mil palavras no total, era ~24,7 mil) do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
-- **Ferramentas (`tools/`):**
-  - `board.mjs` (quadro);
-  - `heartbeat.mjs` (agentes sozinhos);
-  - `contrast.mjs`;
-  - `audio/catalog.mjs` (biblioteca de sons);
-  - `audio/elevenlabs-sfx.mjs` (não testado);
-  - `video/timeline.mjs` (trocar voz, duração, texto e trilha; núcleo do futuro MCP);
-  - `video/qc.mjs` (QC técnico do MP4 final + folha de contato);
-  - render do carrossel (`.claude/skills/carousel/scripts/render.mjs`).
-- **Bibliotecas globais:** `library/audio/` e `library/visual/`. Os arquivos ficam locais; os catálogos e o registro de licenças ficam no git.
-- **kz:** contexto (6 arquivos), `brand/` (brand.css + BRAND.md, com seção Som em rascunho) e o quadro `companies/kz/board/` (13 tarefas).
+## Pronto para usar
+- **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
+- **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca).
+- **Vídeo (003, feita):** `tools/video-kit/` — HyperFrames 0.8.94 + GSAP (do kit do Ludus). Comandos em `tools/video-kit/README.md`, armadilhas em `GUIA-TECNICO.md`, molde em `library/templates/video/base/`, exemplo em `companies/kz/contents/2026-10-07-teste-kit/` (teste, não publicar; v02 com a Thalita).
+  - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`, padrão do hub e da kz; offline: `win-maria`) → aval de copy e estrutura → ElevenLabs → `fit-vo.mjs` corta, trata e reencaixa. Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
+- **Áudio:** 560 SFX licenciados (EditorPro, comprado, uso comercial) em `library/audio/sfx/`; consultar `library/audio/INDEX.md`. Import de pacotes: `tools/audio/import.mjs`.
+- **Assets:** mapa em `library/README.md`; arquivos brutos entram por `_inbox/{audio,visual,video}/`.
+- **Conteúdo:** 21 skills + 9 formatos `fmt-*`, 7 agentes, Kanban em `companies/<slug>/board/` (`node tools/board.mjs kz --me`), heartbeat. Base de vídeo em `knowledge/video/REGRAS.md`.
 
-## Em andamento
-- **T-0009 (origin story da kz)** em `review`, aguardando o Oliver informar: **nome público do fundador, se há foto real e (opcional) uma cena real**. Ao responder:
-  1. T-0011 vai para `done`;
-  2. libera a T-0012 (designer, PNG) e a T-0013 (revisor).
+## Pendências do Oliver (bloqueiam a produção da kz)
+1. **Origin story (T-0009, em review):** nome público do fundador, se há foto real, (opcional) uma cena real. Texto em `companies/kz/contents/2026-10-07-origin-story/`.
+2. **Contexto da kz (T-0001 a T-0003):** preço final, trial/garantia, link de cadastro, @ do Instagram.
+3. **Regras CFP/CRP (T-0004):** até lá, anúncio e LP saem "não publicar".
+4. **Arquivos de marca:** logo SVG, ícones e **prints do produto** em `_inbox/visual/` (destravam o teste 3D e os vídeos de demo).
+5. **Ouvir o teste de vídeo** (v02) com fone: voz, trilha sintetizada e efeitos; validar a identidade sonora (`BRAND.md` > Som) e o elenco fictício.
+6. **ElevenLabs (020):** qual plano, gerar pela API ou no site, perfil de voz da kz e pronúncia de "kz".
+7. Decisões antigas: mínimo de 6 anúncios por teste no ads-meta? teto de 550–600 palavras por `fmt-*`?
 
-  O texto está em `companies/kz/contents/2026-10-07-origin-story/`.
-- **Skill `video` com 3 níveis:** simples · **médio (padrão)** · alto (tarefa 010, feita). Próximo teste: **011** (A/B de custo Opus solo × Opus orquestrando Sonnet), que precisa do kit de render (003).
-- **Tarefa 002 (encerrada na Etapa 15):** o Oliver segue mandando etapas do material de edição e motion. Processo: verificar → destilar em `knowledge/video/<tema>.md` → ligar à skill `video` e aos agentes → registrar no INDICE.
+## Próximas tarefas (escolha 1 por sessão)
+| tarefa | o quê | depende de |
+|---|---|---|
+| **006** | Meta do MVP: 12 posts da kz | pendências 1–4 |
+| **020** | Skill ElevenLabs + vozes finais | pendência 6 |
+| **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
+| **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
+| **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |
+| 011 · 013 · 014 · 009 · 012 | teste de custo · variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
 
-- **Registrado (012):** motor de ideias + framework de conteúdo (radar de concorrentes e páginas, painel ranqueado por outlier score, Oliver marca, análise barata só do marcado com Whisper local + modelo mais barato, banco de ideias, ficha de pauta com objetivo e gancho que nunca engana). Prioridade alta logo após o MVP de vídeo.
-
-- **Registrado (013):** cenas modulares (isoladas, elásticas, sem valor fixo) + `variantes.json` → variantes de anúncio (tema, voz, trilha, CTA, 15 s, formatos, troca de gancho) por script, quase sem token. O contrato de cena já está na skill `video`.
-
-- **Registrado (014 e 015):** galeria reutilizável (componentes de motion com parâmetros, clipes de fx, looks de cor, áudio) com índice barato, busca por descrição e import do PC; cortes e edits em escala para vídeos reais. A skill `video` já manda consultar a galeria antes de criar e promover o que ficou bom.
-
-- **Registrado (016, 017, `fmt-personagem`):** publicidade criativa com IA (método a discutir), integrações Higgsfield/Suno/ElevenLabs, formato de personagens caricatos/3D. **Tom por vídeo** já está em `direcao.md`, `REGRAS.md` e no molde do plano.
-
-- **App local pronto (018):** `npm run app` — quadro, concorrentes (colar links, puxar, histórico), ideias, personas, anotações, contexto e marca; dados tipados em `schema/` (`npm run validate`). Agente `pesquisador` + skills `radar`/`referencias`. Coleta real só no PC (yt-dlp; Apify para Instagram).
-
-- **Em andamento (019):** interface otimista + visual shadcn/ui. Backend otimizado e telas sob demanda já feitos; componentes shadcn prontos em `roadmap/tasks/019-ui-shadcn/staging/`. **Próxima sessão começa pelos passos do `TASK.md` da 019.**
-
-- **Máquina local pronta (2026-10-07):** Node 22 fixado em `.nvmrc` + `engines` (fnm troca sozinho), dependências instaladas, Chromium do Playwright, ffmpeg, yt-dlp e Python presentes. `npm run app` corrigido no Windows (caminho com espaço no `vite.config.ts`).
-- **Arquitetura de assets definida:** mapa em `library/README.md`. `library/fx` saiu de `visual/` (alinhado à 014); criados `motion/`, `looks/`, `templates/`. Entrada bruta em `_inbox/{audio,visual,video}/`.
-- **Biblioteca de SFX importada (2026-10-07):** 560 sons do pacote EditorPro (~210 min) em `library/audio/sfx/` (14 categorias, foley com 5 subpastas), catalogados com duração, pico e tom; índice em `library/audio/INDEX.md`. Ferramenta `tools/audio/import.mjs` + `catalog.mjs license|index|search --q`. Licença registrada: pacote comprado pelo Oliver, uso comercial liberado (`EditorPro-comprado (uso comercial)`). 3 duplicatas exatas ficaram em `_inbox/audio/SFX Risers PRO/` para ele apagar.
-
-- **Kit de vídeo pronto (003, 2026-10-07):** `tools/video-kit/` (HyperFrames 0.8.94 + GSAP, do kit do Ludus, adaptado). Voz de rascunho grátis do Windows com tempo por palavra → timeline montada do áudio → trilha (sintetizada ou catálogo) → SFX da biblioteca → mix −14 LUFS → render com motion blur → QC. Voz final: `fit-vo.mjs` trata e reencaixa. Teste da kz em `companies/kz/contents/2026-10-07-teste-kit/` (não publicar). Molde: `library/templates/video/base/`. Vozes: `library/voices/` + `brand/voices.json`. **Próximo:** 020 (skill ElevenLabs) quando houver plano/voz; produção real da kz (006) depende das pendências abaixo.
-
-## Pendências do Oliver (bloqueiam produção)
-1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
-2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".
-3. **Arquivos de marca:** logo SVG, ícones e **prints do produto** em `_inbox/`.
-4. **Validar** a identidade sonora da kz (`brand/BRAND.md` > Som) e definir o elenco fictício.
-5. **Duas decisões:**
-   - o mínimo de 6 anúncios por teste no ads-meta serve?
-   - o teto de 550–600 palavras por `fmt-*` fica?
-
-## Próximo passo técnico
-- **Feito:** tarefa 003 (kit de vídeo). Falta só o teste 3D (aguarda prints da kz).
-- **Depois:**
-  - tarefa 020 (skill ElevenLabs + vozes finais);
-  - tarefa 008 (trilhas e bases; SFX já importados);
-  - tarefa 009 (MCP de edição);
-  - tarefa 007 (`project.yml`, personas, comentários, concorrentes).
-- **Meta do MVP:** 12 posts da kz (tarefa 006).
+Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 
 ## Como retomar
-- **Construção do hub:** leia `roadmap/BACKLOG.md` → `TASK.md` da tarefa da vez.
-- **Produção para a kz:** use o orquestrador (skill `orquestrar`); veja o quadro com `node tools/board.mjs kz --me`.
-- **Material novo de vídeo:** siga a tarefa 002.
+- **Construção do hub:** `roadmap/BACKLOG.md` → `tasks/<id>/TASK.md` da vez.
+- **Produção para a kz:** skill `orquestrar`; quadro com `node tools/board.mjs kz --me`.
+- **Vídeo novo:** skill `video` (lê o kit). **Material novo de vídeo/motion:** tarefa 002.
+- **Fim de sessão:** atualizar este arquivo e o `TASK.md`, commit + push, sugerir `/clear`.

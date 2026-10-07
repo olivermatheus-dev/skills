@@ -1,5 +1,5 @@
 {
-  "draft": "win-daniel",
+  "draft": "edge-thalita",
   "final": null,
-  "note": "Rascunho com voz do Windows. Voz final da ElevenLabs a escolher (ver library/voices/README.md)."
+  "note": "Rascunho com a Thalita (neural da Microsoft, grátis, online; escolha do Oliver em 2026-10-07). Sem internet: --voice win-maria. Voz final da ElevenLabs a escolher (ver library/voices/README.md)."
 }

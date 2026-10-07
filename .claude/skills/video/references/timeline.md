@@ -49,7 +49,7 @@ A timeline é **montada a partir do áudio** pelo `tts.mjs` / `fit-vo.mjs` (`lay
 
 ```json
 {
-  "voice": { "draft": "win-daniel", "final": "el-<nome>" },
+  "voice": { "draft": "edge-thalita", "final": "el-<nome>" },
   "music": { "bpm": 84, "gain_db": -11, "duck": 0.7, "synth": { "chords": ["F","C","Dm","Bb"], "sections": [{ "from": 0, "to": 4, "style": "light" }] } },
   "vo": [ { "id": "f1", "text": "Onze da noite.", "say": "Onze da noite." } ],
   "scenes": [

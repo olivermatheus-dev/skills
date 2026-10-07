@@ -15,7 +15,7 @@ Pré-requisitos: Node 22 (`.nvmrc`, o fnm troca sozinho), `npm install`, ffmpeg 
 
 | etapa | comando | o que faz |
 |---|---|---|
-| 1. voz de rascunho | `node tools/video-kit/scripts/tts.mjs <pasta> [--voice win-maria]` | gera cada fala com voz grátis (Windows por padrão), corta silêncio, mede palavras e **encaixa a timeline** |
+| 1. voz de rascunho | `node tools/video-kit/scripts/tts.mjs <pasta> [--voice win-maria]` | gera cada fala com voz grátis (Thalita por padrão; `win-*` offline), corta silêncio, mede palavras e **encaixa a timeline** |
 | 2. trilha | `node tools/video-kit/scripts/music.mjs <pasta>` **ou** `node tools/video/timeline.mjs music <pasta> <id>` | sintetiza uma trilha própria (`music.synth`) ou usa uma do catálogo |
 | 3. efeitos | `node tools/video-kit/scripts/sfx.mjs <pasta>` | posiciona os SFX da biblioteca (e os sintetizados) nos eventos |
 | 4. mix | `node tools/video-kit/scripts/mix.mjs <pasta>` | voz + trilha com ducking + efeitos → −14 LUFS (duas passadas) |

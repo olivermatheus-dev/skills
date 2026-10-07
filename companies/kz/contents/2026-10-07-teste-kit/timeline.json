@@ -41,129 +41,129 @@
       "id": "f1",
       "text": "Onze da noite. Mais um paciente remarcando.",
       "file": "audio/vo/f1.wav",
-      "voice": "win-daniel",
+      "voice": "edge-thalita",
       "start": 0.3,
-      "length": 3.999,
+      "length": 3.174,
       "words": [
         {
           "w": "Onze",
           "s": 0.34,
-          "e": 0.65
+          "e": 0.753
         },
         {
           "w": "da",
-          "s": 0.65,
-          "e": 0.8
+          "s": 0.753,
+          "e": 0.89
         },
         {
           "w": "noite",
-          "s": 0.8,
-          "e": 2.297
+          "s": 0.89,
+          "e": 1.703
         },
         {
           "w": "Mais",
-          "s": 2.297,
-          "e": 2.652
+          "s": 1.703,
+          "e": 2.015
         },
         {
           "w": "um",
-          "s": 2.652,
-          "e": 2.822
+          "s": 2.015,
+          "e": 2.165
         },
         {
           "w": "paciente",
-          "s": 2.822,
-          "e": 3.492
+          "s": 2.165,
+          "e": 2.777
         },
         {
           "w": "remarcando",
-          "s": 3.492,
-          "e": 4.299
+          "s": 2.777,
+          "e": 3.474
         }
       ],
-      "end": 4.299
+      "end": 3.474
     },
     {
       "id": "f2",
       "text": "Agora, o lembrete sai sozinho pelo WhatsApp.",
       "file": "audio/vo/f2.wav",
-      "voice": "win-daniel",
-      "start": 5.149,
-      "length": 3.604,
+      "voice": "edge-thalita",
+      "start": 4.324,
+      "length": 3.088,
       "words": [
         {
           "w": "Agora",
-          "s": 5.189,
-          "e": 5.955
+          "s": 4.364,
+          "e": 5.114
         },
         {
           "w": "o",
-          "s": 5.955,
-          "e": 6.039
+          "s": 5.114,
+          "e": 5.152
         },
         {
           "w": "lembrete",
-          "s": 6.039,
-          "e": 6.699
+          "s": 5.152,
+          "e": 5.776
         },
         {
           "w": "sai",
-          "s": 6.699,
-          "e": 6.976
+          "s": 5.776,
+          "e": 6.026
         },
         {
           "w": "sozinho",
-          "s": 6.976,
-          "e": 7.623
+          "s": 6.026,
+          "e": 6.564
         },
         {
           "w": "pelo",
-          "s": 7.623,
-          "e": 7.909
+          "s": 6.564,
+          "e": 6.764
         },
         {
           "w": "WhatsApp",
-          "s": 7.909,
-          "e": 8.753
+          "s": 6.764,
+          "e": 7.412
         }
       ],
-      "end": 8.753
+      "end": 7.412
     },
     {
       "id": "f3",
       "text": "Feito por terapeuta, pra terapeuta.",
       "file": "audio/vo/f3.wav",
-      "voice": "win-daniel",
-      "start": 9.203,
-      "length": 3.076,
+      "voice": "edge-thalita",
+      "start": 7.862,
+      "length": 2.632,
       "words": [
         {
           "w": "Feito",
-          "s": 9.243,
-          "e": 9.732
+          "s": 7.902,
+          "e": 8.389
         },
         {
           "w": "por",
-          "s": 9.732,
-          "e": 9.961
+          "s": 8.389,
+          "e": 8.565
         },
         {
           "w": "terapeuta",
-          "s": 9.961,
-          "e": 11.051
+          "s": 8.565,
+          "e": 9.502
         },
         {
           "w": "pra",
-          "s": 11.051,
-          "e": 11.337
+          "s": 9.502,
+          "e": 9.715
         },
         {
           "w": "terapeuta",
-          "s": 11.337,
-          "e": 12.279
+          "s": 9.715,
+          "e": 10.494
         }
       ],
-      "end": 12.279
+      "end": 10.494
     }
   ],
   "scenes": [
@@ -177,7 +177,7 @@
       "on_screen": "23:04",
       "note": "chat com paciente (ilustrativo); bolha de remarcação chega na palavra 'paciente'",
       "start": 0,
-      "end": 4.649
+      "end": 3.824
     },
     {
       "id": "s2",
@@ -189,8 +189,8 @@
       "tail": 0.3,
       "on_screen": "Lembrete automático",
       "note": "o chat troca: lembrete sai sozinho; paciente confirma",
-      "start": 4.649,
-      "end": 9.053
+      "start": 3.824,
+      "end": 7.712
     },
     {
       "id": "s3",
@@ -201,8 +201,8 @@
       "tail": 0.3,
       "on_screen": "Feito por terapeuta, pra terapeuta.",
       "note": "slogan palavra a palavra, no tempo da fala",
-      "start": 9.053,
-      "end": 12.579
+      "start": 7.712,
+      "end": 10.794
     },
     {
       "id": "s4",
@@ -210,8 +210,8 @@
       "len": 2.6,
       "on_screen": "Peça seu acesso",
       "note": "marca + CTA; cursor clica",
-      "start": 12.579,
-      "end": 15.179
+      "start": 10.794,
+      "end": 13.394
     }
   ],
   "events": [
@@ -221,7 +221,7 @@
       "word": "f1:paciente",
       "offset": -0.12,
       "target": "#b1",
-      "t": 2.702,
+      "t": 2.045,
       "scene": "s1"
     },
     {
@@ -230,7 +230,7 @@
       "scene": "s2",
       "at": 0,
       "target": "#chat",
-      "t": 4.649
+      "t": 3.824
     },
     {
       "id": "e3",
@@ -238,7 +238,7 @@
       "word": "f2:lembrete",
       "offset": -0.1,
       "target": "#b2",
-      "t": 5.939,
+      "t": 5.052,
       "scene": "s2"
     },
     {
@@ -247,7 +247,7 @@
       "word": "f2:WhatsApp",
       "offset": 0.2,
       "target": "#b3",
-      "t": 8.109,
+      "t": 6.964,
       "scene": "s2"
     },
     {
@@ -256,7 +256,7 @@
       "scene": "s3",
       "at": 0.05,
       "target": "#title",
-      "t": 9.103
+      "t": 7.762
     },
     {
       "id": "e8",
@@ -264,7 +264,7 @@
       "word": "f3:4",
       "offset": -0.1,
       "target": "#title .accent",
-      "t": 11.237,
+      "t": 9.615,
       "scene": "s3"
     },
     {
@@ -273,7 +273,7 @@
       "scene": "s4",
       "at": 0.1,
       "target": "#end",
-      "t": 12.679
+      "t": 10.894
     },
     {
       "id": "e7",
@@ -281,7 +281,7 @@
       "scene": "s4",
       "at": 1.25,
       "target": "#cta",
-      "t": 13.829
+      "t": 12.044
     }
   ],
   "sfx": [
@@ -333,8 +333,8 @@
     }
   ],
   "voice": {
-    "current": "win-daniel",
+    "current": "edge-thalita",
     "stage": "draft"
   },
-  "duration": 15.179
+  "duration": 13.394
 }

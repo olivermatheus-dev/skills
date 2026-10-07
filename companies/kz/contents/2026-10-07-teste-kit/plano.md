@@ -3,7 +3,7 @@
 > Nível **simples**. Objetivo: provar o pipeline (voz de rascunho do Windows → timeline → trilha sintetizada → SFX da biblioteca → mix → render com motion blur → QC), não a peça.
 
 - **Recorte:** lembrete automático pelo WhatsApp (fonte: `context/BUSINESS.md` > Módulos e Diferenciais 3).
-- **Formatos:** 9:16 e 4:5 · ~13 s · voz `win-daniel` (rascunho) · trilha sintetizada 84 BPM (própria) · SFX EditorPro + sintetizados.
+- **Formatos:** 9:16 e 4:5 · ~13 s · voz `edge-thalita` (rascunho; v01 saiu com `win-daniel`) · trilha sintetizada 84 BPM (própria) · SFX EditorPro + sintetizados.
 - **Falas:**
   1. "Onze da noite. Mais um paciente remarcando." (gancho; cena genérica da persona)
   2. "Agora, o lembrete sai sozinho pelo WhatsApp." (BUSINESS: lembretes/confirmações automáticas via WhatsApp)

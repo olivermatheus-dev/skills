@@ -51,7 +51,7 @@ Mais calmo que o default: preferir molas `GENTLE`/`FAST`, evitar `SOFT` com pass
 
 ## Vídeo
 - Formatos padrão: 4:5 e 9:16.
-- Voz: rascunho `win-daniel` (Windows); final da ElevenLabs a escolher. Escolha em `brand/voices.json`, catálogo em `library/voices/`. Pronúncia de "kz" na locução: a definir (até lá, a voz não fala o nome).
+- Voz: rascunho `edge-thalita` (Thalita, grátis); final da ElevenLabs a escolher. Escolha em `brand/voices.json`, catálogo em `library/voices/`. Pronúncia de "kz" na locução: a definir (até lá, a voz não fala o nome).
 - Trilha: calma/acolhedora (70–95 BPM).
 - Elenco fictício para dados de demonstração: a definir (nomes de terapeutas e pacientes, sempre marcados como ilustrativos).
 

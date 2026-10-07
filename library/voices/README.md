@@ -3,7 +3,7 @@
 Todas as vozes que o hub usa, de qualquer empresa, com as características e os ajustes que funcionam. **Cada empresa escolhe as suas** em `companies/<slug>/brand/voices.json`.
 
 ## Política (padrão de todo vídeo)
-1. **Rascunho grátis primeiro:** voz do Windows (`win-*`, offline) ou neural da Microsoft (`edge-*`, online). Serve para aprovar copy, ritmo e estrutura. **Nunca publicar** com voz de rascunho.
+1. **Rascunho grátis primeiro:** padrão do hub = **Thalita** (`edge-thalita`, neural da Microsoft, online). Sem internet: Windows (`win-maria`/`win-daniel`, offline). Serve para aprovar copy, ritmo e estrutura. **Nunca publicar** com voz de rascunho.
 2. **Só depois do aval:** gerar as falas na **ElevenLabs** com a voz final da empresa → `tools/video-kit/scripts/fit-vo.mjs` trata, encaixa e avisa onde o ritmo mudou → ajustes pontuais → render.
 
 ## `voices.json` (este catálogo)
@@ -23,7 +23,7 @@ As vozes da ElevenLabs entram aqui ao serem escolhidas (skill de ElevenLabs, tar
 
 ## `companies/<slug>/brand/voices.json`
 ```json
-{ "draft": "win-daniel", "final": "el-<nome>", "roles": { "narrador": "el-<nome>", "paciente": "el-<outra>" }, "note": "…" }
+{ "draft": "edge-thalita", "final": "el-<nome>", "roles": { "narrador": "el-<nome>", "paciente": "el-<outra>" }, "note": "…" }
 ```
 Um vídeo pode sobrescrever em `timeline.json` > `voice.draft` / `voice.final`.
 

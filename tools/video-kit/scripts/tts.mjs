@@ -1,14 +1,14 @@
 // Voz de RASCUNHO (v1.0) de todas as falas do vídeo, com o tempo de cada palavra, e encaixe da timeline.
-// Grátis: Windows local (win-*) ou Microsoft neural online via edge-tts (edge-*). A voz final vem da
+// Grátis: Microsoft neural online via edge-tts (edge-*, padrão: Thalita) ou Windows local, offline (win-*). A voz final vem da
 // ElevenLabs depois do aval e entra com fit-vo.mjs.
 //
 // Uso: node tools/video-kit/scripts/tts.mjs <pasta-do-video> [--voice win-maria] [--only f2,f3]
 //   → audio/vo/<fala>.wav (cortado nas pontas) · vo[].length/start/end/words · cenas e eventos reencaixados
-// Voz: --voice > timeline.voice.draft > companies/<slug>/brand/voices.json (draft) > win-daniel.
+// Voz: --voice > timeline.voice.draft > companies/<slug>/brand/voices.json (draft) > edge-thalita.
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { KIT, video, voiceFor, resolveVoice, prepVoice, layout, closeWords, r3 } from './lib.mjs';
+import { KIT, video, voiceFor, resolveVoice, prepVoice, layout, closeWords, r3, python } from './lib.mjs';
 
 const args = process.argv.slice(2);
 const opt = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined; };
@@ -37,7 +37,7 @@ async def main():
             elif ch['type'] == 'WordBoundary': words.append({'w': ch['text'], 's': round(ch['offset'] / 1e7, 3)})
     print(json.dumps(words))
 asyncio.run(main())`;
-    const res = execFileSync(process.env.PYTHON ?? 'python', ['-c', py, text, voice.voice, voice.settings?.rate ?? '+0%', voice.settings?.pitch ?? '+0Hz', out], { encoding: 'utf8' });
+    const res = execFileSync(python(), ['-c', py, text, voice.voice, voice.settings?.rate ?? '+0%', voice.settings?.pitch ?? '+0Hz', out], { encoding: 'utf8' });
     return JSON.parse(res.trim().split('\n').at(-1));
   }
   throw new Error(`motor de voz "${voice.engine}" não é de rascunho (ElevenLabs entra com fit-vo.mjs)`);
