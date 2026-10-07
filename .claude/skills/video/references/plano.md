@@ -9,7 +9,8 @@ Uma frase: o que este vídeo vende e para quem.
 ## 2. Conceito
 Escolhido: … (alternativas consideradas: … / …)
 
-## 2b. Estilo
+## 2b. Estilo e tom
+Tom: … (sai do objetivo; tabela em `knowledge/video/direcao.md`) · Campanha: … (se houver abertura/tom de campanha).
 Primário + secundário e os 8 controles (0–3) — `knowledge/video/direcao.md` (nível alto; no médio, o default do `fmt-*`). Ex.: *Tech Product + Premium Minimal* · cortes 2 · b-roll 2 · motion 2 · tipo 1 · transições 1 · SFX 2 · música 2 · VFX 1.
 
 ## 3. O que muda em relação ao anterior

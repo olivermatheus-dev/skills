@@ -49,6 +49,19 @@ Ritmo e curva: `ritmo.md`.
 3. → calibrar os 8 controles (§7) antes de qualquer efeito.
 4. Precedência: `BRAND.md` > estilo > defaults. Estilo não é preset; o conteúdo manda.
 
+## 6b. Tom (decide junto com o estilo; vai no `plano.md`)
+O tom sai do **objetivo** da peça e muda música, ritmo, molas, luz e som. A marca limita a faixa (kz = mais calma); uma **campanha temática** pode definir tom e abertura próprios para todas as suas peças (`campaigns/<campanha>/plano.md`), sem quebrar proibições do `BRAND.md`.
+| tom | música | ritmo / intensidade | movimento | som e luz |
+|---|---|---|---|---|
+| dramático | 60–85 BPM, tensão | sobe devagar; holds longos | `GENTLE`, pouco overshoot | silêncio antes do impacto; contraste maior |
+| épico | 80–100, build percussivo | escalada até 4 na revelação | escala crescente, câmera empurrando | riser → impacto grande com cauda |
+| animado / divertido | 110–128 | trocas a cada 1–2 s | `FAST`/`SOFT`, overshoot até 8% | SFX lúdicos; cor de destaque mais presente |
+| inspirador | 90–110, build gradual | sobe em ondas | `GENTLE`/`SOFT` | luz clara; final aberto |
+| calmo / acolhedor | 70–90 | holds longos; intensidade ≤ 2 | `GENTLE` | poucos SFX, orgânicos |
+| urgente / direto | 115–128 | CTA cedo; cortes rápidos | `SNAP`/`FAST` | batidas secas |
+| curioso / misterioso | 80–100 | revelação parcial e tardia | lento, deslizes | silêncio e sons sutis |
+Um tom por peça (pode virar no clímax, com motivo). Tom incoerente com o objetivo = refazer o plano.
+
 ## 7. Os 8 controles (0 ausente · 1 baixo · 2 médio · 3 alto)
 | controle | 0–1 | 2 | 3 |
 |---|---|---|---|

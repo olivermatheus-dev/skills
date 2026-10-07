@@ -25,3 +25,7 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Áudio próprio: biblioteca de SFX e trilhas (baixar, gerar, compor), agente especializado em trilhas para objetivos e sensações diferentes → **implementado** (skill `audio`, agente `sound-designer`, `library/audio/`, `tools/audio/`); popular a biblioteca → tarefa 008
 - 2026-10-07 · Voz: v1.0 com TTS gratuito; voz final ElevenLabs gerada fora da API a partir de um roteiro já formatado; encaixe automático do áudio → **implementado** (skill `locucao`, `tools/video/timeline.mjs vo`)
 - 2026-10-07 · Trilha sempre presente (nunca fundo mudo), 2–3 candidatas gratuitas por vídeo, troca barata → skill `audio` + `timeline.mjs music`; MCP de edição → tarefa 009
+- 2026-10-07 · Tom por vídeo (dramático, épico, animado…) ligado ao objetivo; campanha temática com abertura própria → `knowledge/video/direcao.md` (feito)
+- 2026-10-07 · Publicidade criativa com IA: método para gerar e escolher boas ideias de campanha → 016
+- 2026-10-07 · Integrações Higgsfield (vídeo IA), Suno (trilhas), ElevenLabs (voz) → 017
+- 2026-10-07 · Vídeos com personagens caricatos (vetores com olhos e expressões) e modelos 3D → `fmt-personagem` no catálogo da 005

@@ -36,6 +36,7 @@ O usuário: "mini skills para cada tipo de conteúdo, estilo de conteúdo. Iremo
 | `fmt-antes-depois` | carrossel/motion | rotina caótica (5 apps) × rotina com a kz |
 | `fmt-carrossel-educativo` | carrossel | lista/passo a passo para salvar |
 | `fmt-trailer-lancamento` | motion | trailer cinematográfico do produto: gancho → build → virada → revelação → cartão final (ver `knowledge/video/direcao.md` §6) |
+| `fmt-personagem` (futuro) | motion (SVG) ou 3D | personagem caricato: formas simples com olhos e expressões (piscar, olhar, squash & stretch), mascote, cenas com humor; SVG + GSAP por padrão, 3D (Three.js) só com motivo; personagens reaproveitáveis vão para a galeria (014) |
 | `fmt-recorte-funcionalidade` | motion | 1 funcionalidade em uso, de 15 a 30 s, com cursor e micro-interações |
 
 ## Perguntas em aberto

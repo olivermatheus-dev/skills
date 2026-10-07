@@ -6,6 +6,7 @@
 - Você dirige: escolha conceito e história; régua = lançamento de software premium, nunca slide animado.
 - **Só o que é verdade:** afirmação sem fonte (`BUSINESS.md`, LP, print) não entra. Dados de demonstração = elenco fictício do BRAND.md, marcados como ilustrativos. Nunca número, métrica, depoimento ou preço inventado. Saúde: nada de promessa terapêutica nem depoimento de paciente.
 - **Estilo:** use o default do `fmt-*` (primário + secundário). Ele decide a dose de cortes, motion, transições, SFX e efeitos (`direcao.md`).
+- **Tom** (dramático, épico, animado, inspirador, calmo, urgente, curioso) sai do objetivo da peça e decide música, ritmo, molas e som (`direcao.md`). Campanha temática pode ter abertura e tom próprios; proibições da marca valem sempre.
 - **Arco:** gancho ≤ 2 s → conceito entendido até 8–10 s → produto em uso → virada a 60–70% → revelação → cartão final ≥ 2 s com 1 CTA (anúncio 2–3 s).
 - **Texto na tela:** ≤ 6 palavras por momento (máx. ~10), grande; botão = verbo. O vídeo conta a história sem som.
 

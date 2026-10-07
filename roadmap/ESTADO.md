@@ -36,6 +36,8 @@
 
 - **Registrado (014 e 015):** galeria reutilizável (componentes de motion com parâmetros, clipes de fx, looks de cor, áudio) com índice barato, busca por descrição e import do PC; cortes e edits em escala para vídeos reais. A skill `video` já manda consultar a galeria antes de criar e promover o que ficou bom.
 
+- **Registrado (016, 017, `fmt-personagem`):** publicidade criativa com IA (método a discutir), integrações Higgsfield/Suno/ElevenLabs, formato de personagens caricatos/3D. **Tom por vídeo** já está em `direcao.md`, `REGRAS.md` e no molde do plano.
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".
