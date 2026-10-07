@@ -5,53 +5,58 @@ description: "Escreve conteúdo pronto para Instagram: roteiro de carrossel (tex
 
 # Post de Instagram
 
+Escreve o **texto**. A peça visual é feita depois por outra skill (ver Handoff).
+
 ## Ler antes
-`companies/<slug>/context/` → `VOICE.md`, `AUDIENCE.md`, `CONTENT_STRATEGY.md`. Fundo de funil (oferta/objeção/CTA de venda) → também `COPY.md`.
-Hooks: `references/hooks.md`.
+`companies/<slug>/context/` → `VOICE.md`, `AUDIENCE.md`, `CONTENT_STRATEGY.md`. Fundo de funil → também `COPY.md`. Hooks: `references/hooks.md`.
+**Precedência:** duração, hashtags e CTA definidos no `CONTENT_STRATEGY.md` vencem os defaults daqui.
 
 ## Processo
-1. **Briefing em 1 linha** (confirmar só se ambíguo): formato · pauta · pilar · funil · objetivo (alcance, salvamento, comentário, clique, DM).
-2. **5 hooks** em ângulos diferentes → recomende 1 e siga com ele (o usuário pode trocar).
+1. **Briefing em 1 linha** (confirmar só se ambíguo): formato · pauta · pilar · funil · sinal-alvo (envio, salvar, comentário, clique).
+2. **5 hooks** de tipos diferentes → recomende 1 em uma linha e siga (o usuário pode trocar).
 3. **Escrever** no formato abaixo.
-4. **Checagem rápida:** o hook para o dedo em 1 s? Uma ideia só? Linguagem da persona (frases de `AUDIENCE.md`)? CTA único e claro? Nicho regulado → sem promessa de resultado nem depoimento proibido.
-5. **Salvar** em `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md`. Carrossel → oferecer a skill `carousel` para gerar as imagens.
+4. **Checar:** o 1º frame/capa se entende em 1 s, sem som? Uma ideia só? Palavras literais da persona? Um CTA, ligado ao sinal-alvo? Número só se estiver no contexto. Nicho regulado (saúde): sem promessa de resultado terapêutico, sem caso/fala de paciente; depoimento só de cliente real e autorizado.
+5. **Salvar** em `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md` e fazer o handoff.
 
 ## Formatos
 
-### Carrossel (5–10 slides)
+### Carrossel (6–10 slides, 1080×1350)
 ```
-Slide 1 (capa): hook — máx. 10 palavras + subtítulo opcional
-Slide 2: promessa/contexto — por que continuar arrastando
-Slides 3–N: 1 ideia por slide, máx. ~30 palavras, tipo sugerido (texto/lista/dado/comparação/citação/foto)
+Slide 1 (capa): hook, máx. 10 palavras. Sozinho já gera o clique.
+Slide 2: segura quem não arrastou. O Instagram reexibe o carrossel a partir dele: precisa funcionar como 2ª capa.
+Slides 3–N: 1 ideia por slide, máx. ~30 palavras, tipo sugerido (texto/lista/dado/comparação/citação/foto/print)
 Penúltimo: síntese ou virada
-Último: CTA único (salvar, comentar palavra, DM, link na bio)
+Último: CTA único
 ```
 
-### Reels (15–60 s)
+### Reels (padrão 15–30 s, 1080×1920)
 ```
-| tempo | cena/visual | fala (VO ou câmera) | texto na tela |
-0–3 s: hook visual + falado + escrito (os três juntos)
-3–10 s: tensão/problema
-10–X s: entrega (passos, virada, demonstração)
+| tempo | cena/visual | fala | texto na tela |
+0–2 s: hook dito E escrito no 1º frame (esse frame é a capa). Sem logo, sem "oi, gente".
+2–8 s: tensão/problema
+8–X s: entrega (passos, virada, demo)
 final: CTA falado + escrito
 ```
-+ sugestão de áudio (voz própria ou trending), duração-alvo e se é talking head, b-roll, tela do produto ou trend.
++ produção: `câmera` (talking head, b-roll) ou `motion` (sem rosto, tela do produto, tipografia) · áudio · duração. Legenda na tela sempre (maioria assiste sem som). Texto fora da zona segura (250 px de cima, 350 px de baixo).
 
-### Post único
-Imagem/frase central (máx. 15 palavras) + legenda.
+### Post único (1080×1350)
+Frase central (máx. 15 palavras) + apoio visual + legenda.
 
-### Legenda (todos os formatos)
-- 1ª linha = segundo hook (aparece antes do "mais").
-- Corpo curto, parágrafos de 1–2 linhas; complementa, não repete o post.
-- CTA único. Para conversa/venda: "comenta X" ou "manda X no direct".
-- 3–5 hashtags específicas do nicho (opcional).
+### Legenda (todos)
+- 1ª linha = segundo hook (~125 caracteres antes do "mais"), com a palavra-chave que a persona buscaria.
+- Corpo curto, parágrafos de 1–2 linhas; complementa, não repete.
+- CTA único conforme o sinal-alvo: envio → "manda pra uma colega que…"; salvar → "salva pra…"; comentário → pergunta ou "comenta X"; clique → "link na bio".
+- Hashtags: as do `CONTENT_STRATEGY.md`; sem regra, 3–5 de nicho.
 
-## Specs rápidas
-| formato | tamanho | nota |
-|---|---|---|
-| Carrossel/feed | 1080×1350 (4:5) | até 20 slides; 1º slide decide tudo |
-| Reels/Stories | 1080×1920 (9:16) | zona segura: evitar 250 px de cima e 350 px de baixo |
-| Legenda | até 2.200 caracteres | ~125 caracteres visíveis antes do "mais" |
+## Handoff
+| peça | próxima skill |
+|---|---|
+| carrossel | `carousel` (lê o `roteiro.md`) |
+| post único estático | `carousel` com 1 slide |
+| reels/vídeo em motion | `video` (usa o roteiro como briefing do `plano.md`) |
+| reels de câmera | o roteiro é a entrega final; o usuário grava |
 
-## Sinais que importam
-Envios por DM e salvamentos > curtidas. Reels: retenção nos 3 primeiros segundos. Carrossel: % que chega ao último slide. Quando o usuário trouxer resultados, registre os hooks vencedores em `CONTENT_STRATEGY.md` > "Hooks que funcionaram".
+Ofereça a próxima skill ao terminar. Se houver uma receita `fmt-*` que case com a peça (ex.: `fmt-post-frase`, `fmt-recorte-funcionalidade`), ofereça-a: ela usa essas mesmas skills como motor.
+
+## Resultados
+Envios por DM e salvamentos > curtidas. Reels: retenção nos 3 primeiros segundos. Carrossel: % que chega ao fim. Quando o usuário trouxer números, registre os hooks vencedores em `CONTENT_STRATEGY.md` > "Hooks que funcionaram".

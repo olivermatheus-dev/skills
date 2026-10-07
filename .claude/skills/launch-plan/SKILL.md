@@ -5,37 +5,43 @@ description: Monta plano de lançamento em pt-BR por fases e semanas, usando can
 
 # Launch Plan
 
-Gera um plano de lançamento em semanas e registra as tarefas da empresa.
+Plano de lançamento semana a semana + tarefas no `tasks.md` da empresa.
 
 ## Antes de começar
 
-1. **Empresa:** se o slug não foi dado, inferir pela lista no `CLAUDE.md`; se houver dúvida, perguntar.
-2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `COPY.md`, `CONTENT_STRATEGY.md`.
-3. **Confirmar:** o que está sendo lançado, data alvo, verba de anúncios, tamanho da audiência (seguidores, lista/WhatsApp), quem executa.
+1. **Empresa:** pelo `CLAUDE.md`; na dúvida, perguntar.
+2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `COPY.md`, `CONTENT_STRATEGY.md`, `COMPETITORS.md`; e `companies/<slug>/tasks.md` (pendências que travam o lançamento: preço, link, compliance).
+3. **Contexto velho?** Se o `BUSINESS.md` fala de uma data de lançamento que já passou ou tem "a validar" sobre o estágio, perguntar primeiro: já lançou? Tem clientes?
+4. **Confirmar:** o que se lança, data de abertura, verba de anúncios, audiência atual (seguidores, lista/WhatsApp), quem executa e quantas horas/semana.
+
+## Tipo de lançamento (decide a mecânica)
+
+| Tipo | Exemplo | Mecânica |
+|---|---|---|
+| **Perpétuo** | SaaS, assinatura, serviço contínuo | Lista de espera → acesso em ondas → abertura. **Não "fecha carrinho"**: a escassez real é a condição de fundador (preço/bônus) com prazo ou nº de vagas declarados. Depois, aquisição contínua. |
+| **Turma/carrinho** | curso, mentoria, evento | Aquecimento → conteúdo/aula de abertura → carrinho aberto 5–7 dias → fechamento com prazo real. |
 
 ## Canais (ORB)
 
-Todo canal deve levar a audiência para um canal **próprio**.
+Todo canal leva para um canal **próprio**. Escolher 1–2 de cada, conforme onde o público está (`AUDIENCE.md`).
 
-| Tipo | Exemplos BR | Uso |
+| Tipo | Exemplos | Papel |
 |---|---|---|
-| **Próprios** | Lista de WhatsApp/grupo/comunidade, e-mail, site/LP | Relacionamento e venda direta; é onde se converte |
-| **Alugados** | Instagram (Reels, Stories, Lives), TikTok, YouTube, Meta Ads | Alcance; sempre com CTA para lista/WhatsApp |
-| **Emprestados** | Parcerias, influenciadores do nicho, lives em conjunto, podcasts, grupos de terceiros, indicação/afiliados | Credibilidade e audiência nova; converter para lista própria |
+| **Próprios** | lista/grupo de WhatsApp, e-mail, LP | onde se converte |
+| **Alugados** | Instagram, TikTok, YouTube, Meta Ads | alcance, sempre com CTA para a lista |
+| **Emprestados** | parceiros e influenciadores do nicho, lives conjuntas, podcasts, grupos de terceiros, indicação | credibilidade e público novo |
 
-Escolher 1–2 de cada tipo, conforme onde o público está (`AUDIENCE.md`).
-
-## 5 fases
+## Fases
 
 | Fase | Objetivo | O que fazer |
 |---|---|---|
-| **1. Interno** | Validar o essencial | Testar com 3–10 pessoas próximas, de graça; colher feedback e primeiros depoimentos |
-| **2. Alfa** | Primeira validação externa | Página de captura / lista de espera; anunciar que existe; convidar pessoas uma a uma |
-| **3. Beta** | Gerar burburinho | Conteúdo sobre o problema (sem vender); convites da lista; parceiros testam e comentam; coletar provas |
-| **4. Early access** | Expandir com controle | Mostrar bastidores, prints, demos; oferta de fundador/primeiro lote para a lista; pesquisa com quem entrou |
-| **5. Lançamento** | Máxima visibilidade e venda | Abrir carrinho; mensagens na lista/WhatsApp; Stories/Lives; anúncios; parceiros divulgam; fechar carrinho com prazo real |
+| **1. Validação** | provar que usam | 3–10 pessoas próximas usam de graça; colher frases, ajustes e primeiros depoimentos autorizados |
+| **2. Lista** | juntar interessados | página de captura/lista de espera; conteúdo sobre o problema; convites um a um |
+| **3. Aquecimento** | gerar desejo e prova | bastidores, demos, parceiros testando, ondas de acesso para a lista, pesquisa com quem entrou |
+| **4. Abertura** | máxima visibilidade e venda | oferta para a lista primeiro, depois aberto; Stories/Lives, anúncios, parceiros; prazo real da condição |
+| **5. Pós** | reter e gerar prova | onboarding, conteúdo de resultado, casos, pedir indicação; próxima onda |
 
-Produto/serviço simples ou já validado: comprimir fases 1–3 em 1–2 semanas. Depois do lançamento: depoimentos, conteúdo de resultado, próximo "relançamento" (nova turma, novo recurso).
+**Quantas semanas por fase:** produto já usado por clientes reais → pular a 1. Sem lista e sem seguidores → fase 2 com pelo menos 2 semanas. A fase 5 sempre entra no plano (mín. 1 semana).
 
 ## Saída
 
@@ -45,34 +51,31 @@ Salvar em `companies/<slug>/campaigns/AAAA-MM-DD-lancamento/plano.md`:
 
 ```markdown
 # Plano de lançamento — <produto>
-**Data de abertura:** ... | **Meta:** ... (vendas/leads) | **Verba:** ...
+**Tipo:** perpétuo | turma · **Abertura:** ... · **Meta:** ... · **Verba:** ...
 **Canais:** próprios ... | alugados ... | emprestados ...
 
-| Semana | Fase | Objetivo | Ações | Conteúdo | Métrica |
+| Semana | Fase | Objetivo | Ações | Peças (skill) | Métrica |
 |---|---|---|---|---|---|
-| S1 (dd/mm) | Interno | ... | ... | ... | nº de testes, depoimentos |
-| S2 | Alfa | ... | LP de captura, convites | 3 Reels sobre o problema | inscritos na lista |
-| ... | | | | | |
-| S6 | Lançamento | ... | abrir carrinho, ads, parceiros | ... | vendas, CPA, conversão |
+| S1 (dd/mm) | ... | ... | ... | LP de captura (`landing-page`) | inscritos |
 
-## Riscos e pendências
+## Bloqueios antes da abertura
+- itens abertos do `tasks.md` que impedem anunciar/vender (preço, link, compliance)
+
+## Riscos
 - ...
 ```
 
-Métricas simples e contáveis (inscritos, taxa de abertura no WhatsApp, vendas, CPA). Peças de copy específicas (LP, anúncios) ficam para as skills `landing-page` e `ads-meta`; o plano só aponta quando cada uma é necessária.
+- **Peças:** cada uma aponta a skill que a produz: `content-ideas`/`ig-post` (conteúdo), `carousel`, `video`, `landing-page`, `ads-meta`. O plano não escreve a copy.
+- Volume de conteúdo cabe na frequência do `CONTENT_STRATEGY.md` e nas horas de quem executa.
+- **Métricas contáveis:** inscritos, % de ativação, respostas no WhatsApp, vendas/assinaturas, CPA.
 
 ### 2. Tarefas
 
-Adicionar linhas em `companies/<slug>/tasks.md` (criar com o cabeçalho se não existir; nunca apagar linhas existentes; continuar a numeração de `id`):
+Adicionar ao `companies/<slug>/tasks.md` (nunca apagar linhas; continuar o `id`). Usar os valores do cabeçalho do arquivo: `status` todo | doing | done · `tipo` conteudo | anuncio | lp | estrategia | vendas | setup.
 
 ```markdown
-| id | tarefa | tipo | status | prazo | arquivo |
-|---|---|---|---|---|---|
-| 12 | Criar página de captura | lp | a fazer | 2026-10-20 | campaigns/2026-10-06-lancamento/plano.md |
+| 12 | Criar página de captura | lp | todo | 2026-10-20 | campaigns/2026-10-06-lancamento/plano.md |
 ```
 
-`tipo`: lp, ads, conteudo, email-whatsapp, parceria, setup. `status`: a fazer, fazendo, feito.
-
 ## Nichos regulados
-
-Saúde e afins: conteúdos, depoimentos e promessas seguem o check de compliance em `../landing-page/references/qa-copy.md`.
+Conteúdo, depoimentos e promessas seguem o compliance de `../landing-page/references/qa-copy.md`.

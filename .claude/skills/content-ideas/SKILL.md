@@ -6,39 +6,45 @@ description: "Gera pautas de conteúdo e calendário editorial para Instagram (c
 # Ideias e calendário de conteúdo
 
 ## Ler antes
-`companies/<slug>/context/` → `CONTENT_STRATEGY.md`, `AUDIENCE.md`, `BUSINESS.md`. Se houver, `COMPETITORS.md` e as últimas peças em `contents/` (para não repetir).
+`companies/<slug>/context/` → `CONTENT_STRATEGY.md`, `AUDIENCE.md`, `BUSINESS.md`, `COMPETITORS.md`. Olhe os nomes das pastas em `contents/` para não repetir pauta.
+
+**Precedência:** pilares, mix de funil, frequência, regras de sequência e temas proibidos do `CONTENT_STRATEGY.md`/`BUSINESS.md` vencem os defaults desta skill.
 
 ## Modo 1 — Pautas (padrão)
 
-Entregue **10 ideias** numa tabela:
+Entregue **10 pautas** numa tabela:
 
-| # | pilar | funil | formato | ideia (título de trabalho) | ângulo | por que funciona p/ a persona |
+| # | pilar | funil | formato | hook da capa / 1º frame | sinal-alvo | origem no contexto |
 |---|---|---|---|---|---|---|
 
-Regras:
-- **Ângulo > tema.** "Agenda de terapeuta" é tema; "O WhatsApp está atendendo mais que você" é ângulo.
-- Toda ideia nasce de algo real do contexto: uma dor, objeção, frase literal, crença errada do nicho ou fraqueza de concorrente. Cite a origem em 2–4 palavras.
-- Mix padrão: ~50% topo (dor/identificação/educação), ~30% meio (método, comparação, bastidores, prova), ~20% fundo (oferta, objeção, depoimento, demo).
-- Formato: **reels** para alcance e dor rápida; **carrossel** para ensinar, listas, comparações e salvar; **stories** para bastidores, enquete e CTA direto.
-- Técnicas de ângulo quando travar: inverter crença comum · número/caso hiper-específico · erro que o público comete · antes/depois · "ninguém fala sobre" · bastidor do fundador · mito vs verdade · comparação com algo de outro universo.
+- **Ângulo > tema.** "Agenda de terapeuta" é tema; "Seu consultório mora no WhatsApp" é ângulo. A coluna de hook já é o ângulo escrito como o público vai ver.
+- **Origem real:** toda pauta nasce de uma dor, objeção, frase literal (`AUDIENCE.md`), crença errada do nicho ou gap de concorrente. Cite em 2–4 palavras. Sem origem → descarte.
+- **Sinal-alvo** (um): `envio` (DM, "manda pra colega"), `salvar`, `comentário` ou `clique`. Topo mira envio; lista/checklist mira salvar.
+- **Mix** (se a empresa não definir): ~55% topo, ~25% meio, ~20% fundo.
+- **Formato:**
+  - **carrossel:** ensinar, listas, checklists, comparações (salvar);
+  - **reels:** dor rápida, humor, demo de 15–30 s (alcance e envio). Marque quem produz: `câmera` (alguém grava) ou `motion` (sem rosto, skill `video`). Respeite o limite de vídeo com rosto do `CONTENT_STRATEGY.md`;
+  - **stories:** bastidor, enquete, CTA direto.
+- **Fora:** temas que o `COMPETITORS.md` marca como saturados; datas sensíveis com uso comercial; nicho regulado (saúde): nada de promessa de resultado terapêutico nem caso/fala de paciente.
+- **Travou?** Inverter crença · número/caso hiper-específico **real** · erro comum · antes/depois da rotina · "ninguém fala sobre" · bastidor do fundador · mito vs. verdade · comparação com outro universo.
 
-Termine perguntando quais ideias seguem para produção (skill `ig-post`).
+Termine perguntando quais seguem para produção (skill `ig-post`).
 
 ## Modo 2 — Calendário
 
-Pergunte só: período (semana/mês) e frequência (padrão: a de `CONTENT_STRATEGY.md`), datas especiais ou lançamento.
+Pergunte só o que faltar: período, frequência (padrão: a do `CONTENT_STRATEGY.md`), datas especiais, lançamento.
 
-Entregue tabela `data | dia | formato | pilar | funil | pauta | status` e salve em `companies/<slug>/contents/calendario-AAAA-MM.md`.
+Tabela `data | dia | formato | pilar | funil | pauta | status` → salvar em `companies/<slug>/contents/calendario-AAAA-MM.md`.
 
-Regras: nunca 2 posts de fundo seguidos; pelo menos 1 topo por semana; rotacionar pilares (máx. 2 seguidos do mesmo); datas comemorativas só se tiverem ligação real com a marca.
+Regras (se a empresa não tiver as suas): ≥ 1 topo por semana; máx. 2 seguidos do mesmo pilar; nunca 2 fundos seguidos; data comemorativa só com ligação real com a marca; 1 espaço/semana para reativo.
 
 ## Modo 3 — Engenharia reversa (criador/concorrente)
 
-Quando o usuário passar perfis ou posts de referência:
-1. Liste os 10 posts de maior desempenho (views/curtidas/comentários se disponíveis).
+Com perfis ou posts de referência:
+1. Os 10 posts de maior desempenho (views, comentários, envios se houver).
 2. Para cada: formato, hook (texto exato), estrutura, CTA, emoção dominante.
-3. Extraia 3–5 padrões que se repetem.
-4. Adapte em 5 pautas para a empresa (sem copiar — mesmo mecanismo, assunto nosso).
+3. 3–5 padrões que se repetem.
+4. 5 pautas para a empresa: mesmo mecanismo, assunto nosso, nunca cópia.
 
 ## Saída
-Tabela no chat. Se o usuário aprovar ideias, adicione linhas em `companies/<slug>/tasks.md` (tipo `conteudo`).
+Tabela no chat. Pautas aprovadas → linhas em `companies/<slug>/tasks.md` (tipo `conteudo`, status `todo`, continuar o `id`).

@@ -5,155 +5,119 @@ description: Cria e analisa anúncios de Meta Ads (Facebook e Instagram) em pt-B
 
 # Ads Meta
 
-Dois modos: **(A) Criar** anúncios ou **(B) Analisar** resultados. Se o pedido não deixar claro, perguntar.
+Dois modos: **(A) Criar** ou **(B) Analisar**. Se não estiver claro, perguntar.
 
 ## Antes de começar
 
-1. **Empresa:** se o slug não foi dado, inferir pela lista no `CLAUDE.md`; se houver dúvida, perguntar.
-2. **Ler contexto** em `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`; e `companies/<slug>/brand/BRAND.md` (regras visuais e proibições).
-3. **Ler** `companies/<slug>/campaigns/LOG_ANGULOS.md` (se existir) para não repetir ângulos aposentados.
-4. Confirmar: objetivo (venda, lead, mensagem no WhatsApp, agendamento), destino (LP, WhatsApp, formulário instantâneo), oferta e verba diária.
-5. **Nunca inventar** provas, números ou depoimentos.
+1. **Empresa:** pelo `CLAUDE.md`; na dúvida, perguntar.
+2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`; `companies/<slug>/brand/BRAND.md` (proibições); `companies/<slug>/campaigns/LOG_ANGULOS.md` se existir (não repetir aposentados).
+3. **Confirmar** objetivo (venda, lead, conversa no WhatsApp), destino, oferta e verba diária. O que faltar: assumir o mais provável pelo contexto, marcar `[a confirmar]` e seguir. Destino inexistente (sem LP/link) → avisar que não dá para subir e sugerir `landing-page`.
+4. **Nunca inventar** provas, números, depoimentos, prazos ou escassez.
 
 ---
 
 ## Modo A — Criar
 
-### 1. Escolher 3–5 ângulos
+### 1. Ângulos (3–5)
 
-Cada ângulo = um motivo diferente para clicar. Escolher pela persona e pelo nível de consciência.
+Cada ângulo = um motivo diferente para parar e clicar. Fonte sempre no contexto:
 
-| Ângulo | Ideia | Fonte |
-|---|---|---|
-| Dor | "Cansado de X?" | `AUDIENCE.md` |
-| Desejo | "Tenha Y em Z dias" | `AUDIENCE.md` / big idea |
-| Mecanismo | "O motivo de X não funcionar é..." | mecanismo da falha / único |
-| Prova | "Como a Ana saiu de X para Y" | provas |
-| Objeção | "Sem tempo? Leva 10 min por dia" | objeções |
-| Comparação / inimigo comum | "Diferente de X, aqui..." | `COMPETITORS.md` |
-| Identidade | "Para [perfil] que..." | persona |
-| Contrário | "Pare de fazer X" | big idea |
-| Urgência | "Última turma de 2026" | só se for real |
+| Ângulo | Fonte |
+|---|---|
+| Dor (cena reconhecível) | dores e linguagem literal de `AUDIENCE.md` |
+| Mecanismo / vilão ("não é você, é X") | mecanismo da falha em `COPY.md` |
+| Mecanismo único | `COPY.md` |
+| Objeção respondida | objeções em `COPY.md` |
+| Identidade ("para quem atende sozinha") | persona |
+| Comparação com o jeito atual | `COMPETITORS.md` (o vilão é a abordagem, não a marca) |
+| Prova (caso, número, fundador) | provas que **existem** em `COPY.md` |
+| Urgência | só se for real e datada |
 
-### 2. Para cada ângulo, entregar
+### 2. Criativo é a segmentação
 
-- **3 hooks** (primeira frase do texto / primeiros 3s do vídeo)
-- **Texto principal curto** (≤ 125 caracteres)
-- **Texto principal longo** (problema → virada → prova → CTA; quebras de linha, 1–2 emojis no máximo)
-- **Título** (≤ 40 caracteres)
-- **Descrição** (≤ 30 caracteres)
-- **CTA do botão** (Saiba mais, Comprar, Enviar mensagem, Cadastre-se...)
-- **Briefing visual**, um formato por ângulo ou mais:
-  - **Estático:** texto na arte (≤ 6 palavras), imagem, hierarquia, cores e regras de `brand/BRAND.md`, logo de `brand/logo/`
-  - **Carrossel:** 3–6 cards, um ponto por card, último card com CTA
-  - **Vídeo UGC 15–30s:** roteiro curto `0–3s hook | 3–20s desenvolvimento | final CTA`, com falas, texto na tela e cena
+Público aberto; quem o anúncio atrai é decidido pelo **1º frame / 1ª linha**. Por isso:
+- O 1º frame (vídeo) ou a arte (estático) **chama o público pelo nome do ofício ou pela cena** ("Terapeuta que confirma sessão às 23h").
+- **Diversidade real:** cada anúncio é um conceito diferente (ângulo × formato × pessoa/cena), não 5 versões da mesma arte trocando a cor.
+- Mínimo por teste: 3 ângulos × 2 formatos = 6 anúncios.
 
-### 3. Specs Meta
+### 3. Para cada ângulo, entregar
+
+- **3 hooks** (1ª linha do texto / 0–3 s do vídeo)
+- **Textos principais:** 1 curto (≤ 125 caracteres) + 1 longo (dor → virada → prova → CTA; frases curtas, máx. 2 emojis). O Meta aceita até 5 textos e 5 títulos por anúncio: os hooks extras viram variações.
+- **Título** (≤ 40) · **Descrição** (≤ 30) · **Botão** (Saiba mais, Cadastre-se, Enviar mensagem…)
+- **Briefing do criativo** (1–2 formatos):
+  - **Estático 4:5:** texto na arte ≤ 6 palavras, imagem, hierarquia, regras do `BRAND.md` → produzir com a skill `carousel` (1 slide)
+  - **Carrossel:** 3–6 cards, um ponto por card, último com CTA → skill `carousel`
+  - **Vídeo motion 9:16 (15–30 s):** tela do produto/tipografia → skill `video` (roteiro vira briefing do `plano.md`)
+  - **Vídeo câmera/UGC 15–30 s:** `0–3s hook | 3–20s desenvolvimento | final CTA`, com fala, texto na tela e cena; legenda na tela sempre
+
+### 4. Specs
 
 | Item | Spec |
 |---|---|
 | Feed | 4:5 — 1080×1350 |
-| Stories / Reels | 9:16 — 1080×1920 (deixar ~14% livre em cima e ~20% embaixo) |
-| Texto principal | ~125 caracteres visíveis antes do "ver mais" |
-| Título | ~40 caracteres |
-| Descrição | ~30 caracteres (pode não aparecer) |
-| Texto sobreposto em Stories/Reels | ≤ 72 caracteres |
+| Stories / Reels | 9:16 — 1080×1920 (livre ~14% em cima e ~20% embaixo) |
+| Texto principal | ~125 caracteres antes do "ver mais" |
+| Título / descrição | ~40 / ~30 caracteres |
 
-Conferir todos os limites antes de entregar; se passar, oferecer versão cortada.
+Conferir os limites antes de entregar.
 
-### 4. Estrutura de teste recomendada
+### 5. Estrutura de teste
 
-- **Simples:** 1 campanha por objetivo, otimizando para o evento que importa (compra, lead, conversa).
-- **Advantage+** (campanha e posicionamentos) e **público aberto/amplo**; o criativo faz a segmentação. Interesses/lookalike só como teste pontual.
-- **Poucos conjuntos** (1–2), com 3–6 anúncios cada, um ângulo por anúncio.
-- **Testar criativo antes de público.** Ordem de impacto: ângulo → hook → formato/visual → texto → CTA.
-- Verba que permita ~50 conversões/semana por conjunto; se não der, otimizar para um evento mais acima do funil.
-- Não mexer por 3–5 dias (fase de aprendizado), salvo erro gritante.
+- **1 campanha** por objetivo, otimizando para o evento que importa. **Advantage+** (público e posicionamentos), público **amplo**: só país/idade. Interesse/lookalike só como teste pontual.
+- **1 conjunto** com os 6+ anúncios. Ordem de impacto: ângulo → hook → formato → texto → CTA.
+- Evento de otimização com ~50 resultados/semana; se a verba não chega, otimizar um evento acima (ex.: lead em vez de compra).
+- Não mexer por 3–5 dias (aprendizado), salvo erro gritante. Vencedor novo → entra no mesmo conjunto; não duplicar campanha.
 
-### 5. UTMs
-
-Padrão (minúsculas, hífens):
+### 6. UTMs
 
 ```
-?utm_source=meta&utm_medium=paid-social&utm_campaign=<AAAA-MM>-<slug-da-campanha>&utm_content=<angulo>-<formato>-v<n>&utm_term={{adset.name}}
+?utm_source=meta&utm_medium=paid-social&utm_campaign=<AAAA-MM>-<campanha>&utm_content=<angulo>-<formato>-v<n>&utm_term={{adset.name}}
 ```
+Minúsculas, hífens. Nome do anúncio no Gerenciador = `utm_content` (ex.: `dor-estatico-v1`).
 
-Ex.: `utm_content=dor-ugc-v1`. Nome do anúncio no Gerenciador = `utm_content`.
+### 7. QA e salvar
 
-### 6. QA e salvar
-
-- Rodar `../landing-page/references/qa-copy.md` (Seven Sweeps + compliance). Conferir que a promessa do anúncio é a mesma da página de destino.
-- Salvar em `companies/<slug>/campaigns/AAAA-MM-DD-<slug-da-campanha>/ads.md`.
-- Registrar os ângulos novos em `LOG_ANGULOS.md` com status `em teste`.
-
-### Formato do `ads.md`
-
-```markdown
-# Ads — <campanha>
-**Objetivo:** ... | **Destino:** ... | **Oferta:** ... | **Verba/dia:** ...
-
-## Estrutura de teste
-...
-
-## Ângulo 1 — <nome> (<tipo>)
-**Hooks:** 1. ... 2. ... 3. ...
-**Texto curto:** ...
-**Texto longo:** ...
-**Título:** ... | **Descrição:** ... | **CTA:** ...
-**Visual:** formato + briefing / roteiro
-**UTM:** ...
-
-## Ângulo 2 — ...
-
-## QA
-...
-```
+- Rodar `../landing-page/references/qa-copy.md`. A promessa do anúncio = a headline da página de destino.
+- Salvar `companies/<slug>/campaigns/AAAA-MM-DD-<campanha>/ads.md`: cabeçalho (objetivo | destino | oferta | verba), estrutura de teste, um bloco por ângulo com os itens do passo 3 + UTM, QA e pendências.
+- Registrar os ângulos em `LOG_ANGULOS.md` com status `em teste`.
 
 ---
 
 ## Modo B — Analisar
 
-### 1. Receber os dados
+### 1. Dados
+Tabela colada ou CSV do Gerenciador: anúncio, gasto, impressões, frequência, CPM, CTR (link), CPC, resultados, custo por resultado, ROAS; vídeo: views de 3 s e ThruPlay. Meta de CPA/ROAS: `BUSINESS.md` ou perguntar. Gasto < 1× CPA alvo = dado insuficiente, não julgar.
 
-Usuário cola a tabela ou exporta CSV do Gerenciador. Colunas úteis: anúncio, conjunto, valor gasto, impressões, alcance, frequência, CPM, CTR (link), CPC, resultados, custo por resultado, ROAS. Perguntar a meta de CPA/ROAS se não estiver no `BUSINESS.md`. Ignorar anúncios com gasto < 1× CPA alvo (dados insuficientes).
+### 2. Diagnóstico
 
-### 2. Diagnóstico por métrica
-
-| Sinal | Provável causa | Ação |
+| Sinal | Causa provável | Ação |
 |---|---|---|
-| CPM alto | Público estreito demais, criativo de baixa qualidade, época cara (datas comerciais) | Abrir público, Advantage+ posicionamentos, criativo novo |
-| CTR baixo (< ~1% link) | Hook/ângulo não prende, visual parece anúncio genérico | Novo hook/ângulo; testar UGC |
-| CTR ok, CPC ok, conversão baixa | Problema **depois do clique**: LP lenta, promessa diferente do anúncio, oferta/preço, formulário | Revisar LP com `landing-page` + QA; checar pixel/eventos |
-| Frequência alta (> ~3 em 7 dias) + CTR caindo | Fadiga de criativo | Novas variações do vencedor |
-| Muitos cliques, poucos resultados no WhatsApp | Atendimento lento ou sem roteiro | Checar tempo de resposta e script |
-| Sem conversões registradas | Pixel/API de conversões | Checar rastreio antes de julgar o criativo |
+| Hook rate baixo (views 3 s ÷ impressões < ~25%) | 1º frame não para o dedo | Novo hook/1º frame, mesmo ângulo |
+| Hook ok, retenção (ThruPlay ÷ views 3 s) baixa | Meio do vídeo arrasta | Encurtar, entregar antes |
+| CTR link < ~1% | Ângulo não convence ou parece anúncio genérico | Novo ângulo; testar formato nativo/UGC |
+| CPM alto | Criativo de baixa qualidade, público restrito, data cara | Abrir público, criativo novo |
+| CTR ok, conversão baixa | Problema **depois do clique**: promessa diferente, página lenta, oferta, formulário | Revisar com `landing-page`; checar pixel/eventos |
+| Frequência > ~3 em 7 dias + CTR caindo | Fadiga | Variações do vencedor |
+| Cliques no WhatsApp sem resultado | Resposta lenta ou sem roteiro | Tempo de resposta + script |
+| Zero conversões registradas | Pixel/API de conversões | Checar rastreio antes de julgar criativo |
 
 ### 3. Decidir por anúncio
-
 - **Mantém:** custo por resultado ≤ meta, volume estável.
-- **Pausa:** gastou ≥ 2× CPA alvo sem resultado, ou CPA > 1,5× meta após aprendizado.
-- **Itera:** bom CTR mas CPA alto, ou vencedor com fadiga.
+- **Pausa:** gastou ≥ 2× CPA alvo sem resultado, ou CPA > 1,5× meta pós-aprendizado.
+- **Itera:** bom hook/CTR com CPA alto, ou vencedor com fadiga.
 
-### 4. Novas variações dos vencedores
-
-- Identificar o que ganhou: tema, estrutura (pergunta/afirmação/número), tamanho do texto, formato.
-- Gerar 3–5 variações: mesmo ângulo com hook novo, mesmo hook em outro formato, e 1–2 ângulos ainda não testados.
-- Evitar padrões dos perdedores.
+### 4. Novas variações
+O que ganhou (ângulo, estrutura do hook, formato, tamanho do texto) → 3–5 variações: mesmo ângulo com hook novo, mesmo hook em outro formato, 1–2 ângulos não testados. Evitar padrões dos perdedores.
 
 ### 5. Saída
-
-Salvar `analise-AAAA-MM-DD.md` na pasta da campanha: resumo (3 linhas), tabela mantém/pausa/itera com motivo, diagnóstico, novas variações (no formato do `ads.md`).
-
-Depois, **adicionar ao fim** de `companies/<slug>/campaigns/LOG_ANGULOS.md` (criar se não existir):
+`analise-AAAA-MM-DD.md` na pasta da campanha: resumo (3 linhas), tabela mantém/pausa/itera com motivo, diagnóstico, novas variações (formato do passo 3). Depois, **adicionar ao fim** de `LOG_ANGULOS.md` (criar se não existir; nunca apagar linhas):
 
 ```markdown
 | data | campanha | ângulo | hook/variação | métrica-chave | status |
 |---|---|---|---|---|---|
-| 2026-10-06 | black-friday | dor | "Cansado de..." | CPA R$ 18 | vencedor |
 ```
-
-Status: `em teste`, `vencedor`, `aposentado`. Nunca apagar linhas; só adicionar.
+Status: `em teste`, `vencedor`, `aposentado`.
 
 ## Nichos regulados
-
-Saúde, finanças, emagrecimento, renda: rodar o check de compliance do QA. A Meta também reprova atributos pessoais ("Você tem depressão?") e antes-e-depois. Na dúvida, sinalizar ao usuário antes de subir.
+Saúde, finanças, emagrecimento, renda: check de compliance do QA. O Meta reprova atributos pessoais ("Você tem ansiedade?") e antes-e-depois. Produto vendido **para** profissional de saúde: depoimento de profissional-cliente sobre o produto pode (real, autorizado); caso ou fala de paciente, nunca. Pendência de regra do conselho em aberto no `BUSINESS.md`/`tasks.md` → entregar os anúncios marcados "não subir até validar".
