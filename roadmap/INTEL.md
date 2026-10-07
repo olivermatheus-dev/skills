@@ -1,5 +1,7 @@
 # Inteligência de mercado — registro e análise
 
+> **Desenho atual e fases: `tasks/012-motor-de-ideias/TASK.md`** (2026-10-07: motor de ideias com painel ranqueado, marcação do Oliver e análise barata só do marcado). Este arquivo fica como registro das fontes e da análise dentro × fora.
+>
 > Status: **ideia em discussão** (não é prioridade agora; a prioridade é o vídeo). Registrado em 2026-10-06; ampliado em 2026-10-07 com o cadastro de concorrentes e as fontes gratuitas. Modelo de dados em `APP.md`.
 
 ## O que o usuário quer

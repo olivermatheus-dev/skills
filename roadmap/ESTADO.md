@@ -30,6 +30,8 @@
 - **Skill `video` com 3 níveis:** simples · **médio (padrão)** · alto (tarefa 010, feita). Próximo teste: **011** (A/B de custo Opus solo × Opus orquestrando Sonnet), que precisa do kit de render (003).
 - **Tarefa 002 (encerrada na Etapa 15):** o Oliver segue mandando etapas do material de edição e motion. Processo: verificar → destilar em `knowledge/video/<tema>.md` → ligar à skill `video` e aos agentes → registrar no INDICE.
 
+- **Registrado (012):** motor de ideias + framework de conteúdo (radar de concorrentes e páginas, painel ranqueado por outlier score, Oliver marca, análise barata só do marcado com Whisper local + modelo mais barato, banco de ideias, ficha de pauta com objetivo e gancho que nunca engana). Prioridade alta logo após o MVP de vídeo.
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".
