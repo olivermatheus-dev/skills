@@ -4,7 +4,7 @@ Copiado pela skill `setup` ao cadastrar uma empresa: `cp -r companies/_modelo co
 
 ```
 context/          6 arquivos de estratégia (criados pela skill setup)
-brand/            BRAND.md (regras) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
+brand/            BRAND.md (regras) · brand.json (tokens) → brand.css (gerado: `npm run brand -- <slug>`) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
 video-templates/  templates de vídeo da empresa
 contents/         AAAA-MM-DD-<tema>/  peças de conteúdo
 campaigns/        AAAA-MM-DD-<campanha>/  anúncios, LPs, cartas

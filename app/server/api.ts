@@ -60,6 +60,11 @@ on('GET', '/api/projects/:slug/brand-css', (p) => {
   return { file: join(P.brand(p.slug), 'brand.css'), text: existsSync(file) ? readFileSync(file, 'utf8') : null };
 });
 
+// Kit de marca (tarefa 024): brand.json → brand.css + bloco do BRAND.md; fontes enviadas vão para brand/fonts/
+on('GET', '/api/projects/:slug/brand', (p) => S.getBrand(p.slug));
+on('PUT', '/api/projects/:slug/brand', (p, b) => S.saveBrand(p.slug, b));
+on('POST', '/api/projects/:slug/brand/font', (p, b) => S.uploadBrandFont(p.slug, String(b.name ?? ''), String(b.base64 ?? '')));
+
 // Concorrentes
 on('POST', '/api/detect-link', (_, b) => detectLink(b.url));
 on('GET', '/api/projects/:slug/competitors', (p) => S.listCompetitors(p.slug));
@@ -130,6 +135,14 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
   if (m) {
     const file = normalize(join(S.ROOT, P.media(m[1], m[2]), decodeURIComponent(m[3])));
     if (!file.startsWith(join(S.ROOT, 'companies')) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    return createReadStream(file).pipe(res);
+  }
+  // /brand-file/<slug>/<fonts|logo|icons>/<arquivo> → fontes e logo da marca para a prévia do kit
+  const bf = url.pathname.match(/^\/brand-file\/([a-z0-9][a-z0-9-]*)\/(fonts|logo|icons)\/([^/]+)$/);
+  if (bf) {
+    const file = join(S.ROOT, P.brand(bf[1]), bf[2], decodeURIComponent(bf[3]));
+    if (/\.\./.test(bf[3]) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return createReadStream(file).pipe(res);
   }

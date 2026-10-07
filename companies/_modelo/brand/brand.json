@@ -1,0 +1,159 @@
+{
+  "header": "brand.css — tokens da marca. Fonte única para carrossel, vídeo e LP.\n   Regra: mantenha TODOS os nomes abaixo (as skills dependem deles). Troque só os valores.\n   Valores atuais = default neutro e elegante das skills.",
+  "style": {
+    "do": [],
+    "dont": []
+  },
+  "icons": {
+    "library": "lucide",
+    "stroke": 1.75,
+    "style": "linha",
+    "color": "primary"
+  },
+  "fonts": [
+    {
+      "family": "Inter",
+      "source": "google",
+      "files": [],
+      "google": "Inter:wght@400;500;600;700",
+      "display": "swap"
+    }
+  ],
+  "groups": [
+    {
+      "label": "Cores — papéis",
+      "tokens": [
+        {
+          "name": "bg",
+          "value": "#F6F5F2",
+          "note": "fundo das peças (liso)"
+        },
+        {
+          "name": "surface",
+          "value": "#FFFFFF",
+          "note": "cards, janelas"
+        },
+        {
+          "name": "surface-2",
+          "value": "#EFEDE8",
+          "note": "seção secundária"
+        },
+        {
+          "name": "text",
+          "value": "#141414",
+          "note": "tinta: títulos e frases (nunca cinza)"
+        },
+        {
+          "name": "muted",
+          "value": "#6B6B6B",
+          "note": "só rótulo pequeno dentro de interface"
+        },
+        {
+          "name": "border",
+          "value": "#E4E1DA"
+        },
+        {
+          "name": "primary",
+          "value": "#2F5BEA",
+          "note": "destaque da marca: logo, botão principal, ênfase única, CTA"
+        },
+        {
+          "name": "on-primary",
+          "value": "#FFFFFF",
+          "note": "texto sobre --primary"
+        },
+        {
+          "name": "accent",
+          "value": "#2F5BEA",
+          "note": "2ª cor de destaque (se não houver, = --primary)"
+        },
+        {
+          "name": "success",
+          "value": "#1F9D55",
+          "note": "status, só dentro de interface"
+        },
+        {
+          "name": "warning",
+          "value": "#D98E04"
+        },
+        {
+          "name": "danger",
+          "value": "#D64545"
+        },
+        {
+          "name": "inverse-bg",
+          "value": "#141414",
+          "note": "fundo de contraste (slide/cena \"inverse\")"
+        },
+        {
+          "name": "on-inverse",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "accent-soft",
+          "value": "#E6ECFD",
+          "note": "fundo de tag/realce"
+        }
+      ]
+    },
+    {
+      "label": "Tipografia",
+      "tokens": [
+        {
+          "name": "font-heading",
+          "value": "\"Inter\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "font-body",
+          "value": "\"Inter\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "weight-heading",
+          "value": "700"
+        },
+        {
+          "name": "tracking-heading",
+          "value": "-0.02em"
+        },
+        {
+          "name": "leading-heading",
+          "value": "1.08"
+        },
+        {
+          "name": "case-heading",
+          "value": "none",
+          "note": "none | uppercase — caixa alta só se a marca quiser"
+        }
+      ]
+    },
+    {
+      "label": "Forma",
+      "tokens": [
+        {
+          "name": "radius",
+          "value": "20px"
+        },
+        {
+          "name": "radius-sm",
+          "value": "12px"
+        },
+        {
+          "name": "border-width",
+          "value": "1px"
+        },
+        {
+          "name": "shadow-sm",
+          "value": "0 1px 2px rgba(20,20,20,.06), 0 1px 1px rgba(20,20,20,.04)"
+        },
+        {
+          "name": "shadow-md",
+          "value": "0 8px 24px rgba(20,20,20,.08)"
+        },
+        {
+          "name": "shadow-lg",
+          "value": "0 24px 60px rgba(20,20,20,.12)"
+        }
+      ]
+    }
+  ]
+}

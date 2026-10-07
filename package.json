@@ -13,7 +13,8 @@
     "collect": "tsx tools/intel/cli.ts",
     "analise": "tsx tools/intel/analysis-cli.ts",
     "test:intel": "tsx tools/intel/test.ts",
-    "app:dev": "vite --config app/vite.config.ts"
+    "app:dev": "vite --config app/vite.config.ts",
+    "brand": "tsx tools/brand.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

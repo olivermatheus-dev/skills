@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
-  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review,
+  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand,
   COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -316,6 +316,52 @@ export const listContext = (slug: string) => list(P.context(slug), /\.md$/).map(
 export const getContext = (slug: string, name: string) => read(join(P.context(slug), basename(name)));
 export const saveContext = (slug: string, name: string, txt: string) => write(join(P.context(slug), basename(name)), txt);
 
+// ---------- Kit de marca (tarefa 024): brand.json → brand.css + bloco no BRAND.md ----------
+const brandFile = (slug: string, f: string) => join(P.brand(slug), f);
+/** kit da marca; sem brand.json, importa do brand.css (imported: true = ainda não salvo como JSON) */
+export async function getBrand(slug: string) {
+  const { cssToBrand } = await import('./brand');
+  const { BRAND_PRESETS } = await import('./brand-presets');
+  const json = brandFile(slug, 'brand.json'), css = brandFile(slug, 'brand.css');
+  const fonts = list(brandFile(slug, 'fonts'), /\.(woff2|woff|ttf|otf|txt)$/i);
+  if (exists(json)) return { brand: check(Brand, JSON.parse(read(json)), json), imported: false, fonts, presets: BRAND_PRESETS };
+  if (exists(css)) {
+    try { return { brand: cssToBrand(read(css)), imported: true, fonts, presets: BRAND_PRESETS }; }
+    catch (e) { throw new ValidationError(css, [`não consegui importar o brand.css: ${e instanceof z.ZodError ? fmtIssues(e).join('; ') : String((e as Error).message)}`]); }
+  }
+  throw new ValidationError(css, ['sem brand.json e sem brand.css: rode a skill setup']);
+}
+/** grava brand.json, gera brand.css e atualiza o bloco do kit no BRAND.md */
+export async function saveBrand(slug: string, data: unknown) {
+  const { brandToCss, brandMdBlock, upsertBrandMd } = await import('./brand');
+  const json = brandFile(slug, 'brand.json');
+  const v = check(Brand, data, json);
+  write(json, `${JSON.stringify(v, null, 2)}\n`);
+  write(brandFile(slug, 'brand.css'), brandToCss(v));
+  const md = brandFile(slug, 'BRAND.md');
+  write(md, upsertBrandMd(exists(md) ? read(md) : `# Marca — ${slug}\n`, brandMdBlock(v)));
+  return getBrand(slug);
+}
+/** fonte enviada pelo app → brand/fonts/<nome> (não sobrescreve: devolve o nome final) */
+export function uploadBrandFont(slug: string, name: string, base64: string) {
+  const ext = name.match(/\.(woff2|woff|ttf|otf|txt)$/i)?.[1]?.toLowerCase();
+  if (!ext) throw new ValidationError(name, ['envie .woff2, .woff, .ttf, .otf (ou a licença .txt)']);
+  const base = slugify(name.replace(/\.[^.]+$/, '')) || 'fonte';
+  let f = `${base}.${ext}`, n = 2;
+  while (exists(brandFile(slug, `fonts/${f}`))) f = `${base}-${n++}.${ext}`;
+  ensureDir(brandFile(slug, 'fonts'));
+  writeFileSync(abs(brandFile(slug, `fonts/${f}`)), Buffer.from(base64, 'base64'));
+  return { file: `fonts/${f}` };
+}
+/** brand.css igual ao gerado pelo brand.json? (null = sem brand.json) */
+export async function brandInSync(slug: string) {
+  const json = brandFile(slug, 'brand.json');
+  if (!exists(json)) return null;
+  const { brandToCss } = await import('./brand');
+  const css = brandFile(slug, 'brand.css');
+  return exists(css) && read(css).replace(/\r\n/g, '\n') === brandToCss(check(Brand, JSON.parse(read(json)), json));
+}
+
 // ---------- Peças (vídeos, carrosséis, roteiros) e revisão por anotações (tarefa 022) ----------
 export type PieceKind = 'video' | 'carrossel' | 'roteiro';
 export interface Piece {
@@ -459,6 +505,7 @@ export function validateAll():{ file: string; issues: string[] }[] {
   for (const d of readdirSync(abs(COMPANIES)).filter((d) => !d.startsWith('_') && statSync(abs(join(COMPANIES, d))).isDirectory())) {
     tryIt(() => getProject(d));
     tryIt(() => getTags(d));
+    if (exists(join(P.brand(d), 'brand.json'))) tryIt(() => check(Brand, JSON.parse(read(join(P.brand(d), 'brand.json'))), join(P.brand(d), 'brand.json')));
     for (const f of list(P.personas(d), /\.md$/)) tryIt(() => readDoc(Persona, join(P.personas(d), f)));
     for (const f of list(P.notes(d), /\.md$/)) tryIt(() => readDoc(Note, join(P.notes(d), f)));
     for (const f of list(P.ideas(d), /\.md$/)) tryIt(() => readDoc(Idea, join(P.ideas(d), f)));

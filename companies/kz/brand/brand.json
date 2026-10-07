@@ -1,0 +1,328 @@
+{
+  "header": "brand.css — kz. Tokens medidos no app real (print do painel, 2026-10-07) + CSS de kz.app.br. Regras de uso em BRAND.md.",
+  "style": {
+    "do": [],
+    "dont": []
+  },
+  "icons": {
+    "library": "lucide",
+    "stroke": 1.5,
+    "style": "linha",
+    "color": "primary"
+  },
+  "fonts": [
+    {
+      "family": "Montserrat",
+      "source": "local",
+      "files": [
+        {
+          "src": "fonts/montserrat-latin-wght-normal.woff2",
+          "style": "normal",
+          "weight": "100 900",
+          "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+        },
+        {
+          "src": "fonts/montserrat-latin-ext-wght-normal.woff2",
+          "style": "normal",
+          "weight": "100 900",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
+        }
+      ],
+      "license": "fonts/OFL-Montserrat.txt",
+      "display": "block",
+      "note": "Montserrat local (variável 100–900, OFL: fonts/OFL-Montserrat.txt): render de vídeo e carrossel sem internet"
+    },
+    {
+      "family": "Fraunces",
+      "source": "local",
+      "files": [
+        {
+          "src": "fonts/fraunces-italic-latin.woff2",
+          "style": "italic",
+          "weight": "300 700",
+          "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+        },
+        {
+          "src": "fonts/fraunces-italic-latin-ext.woff2",
+          "style": "italic",
+          "weight": "300 700",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF"
+        }
+      ],
+      "license": "fonts/OFL-Fraunces.txt",
+      "display": "block",
+      "note": "Fraunces itálica (variável 300–700, OFL: fonts/OFL-Fraunces.txt): a serifa de destaque do app (\"Boa tarde, <nome>\")"
+    }
+  ],
+  "groups": [
+    {
+      "label": "Cores — papéis",
+      "tokens": [
+        {
+          "name": "bg",
+          "value": "#faf5f1",
+          "note": "creme do app (fundo do painel): fundo padrão de todas as peças"
+        },
+        {
+          "name": "surface",
+          "value": "#ffffff",
+          "note": "cards e barra lateral do app"
+        },
+        {
+          "name": "surface-2",
+          "value": "#f6f1ec",
+          "note": "creme escuro (seções secundárias)"
+        },
+        {
+          "name": "text",
+          "value": "#50505e",
+          "note": "tinta do app: títulos e nomes (cinza-grafite levemente azulado; 7,4:1 sobre o creme)"
+        },
+        {
+          "name": "ink",
+          "value": "#2b2b2b",
+          "note": "tinta máxima: texto sobre coral e quando precisar de mais contraste"
+        },
+        {
+          "name": "muted",
+          "value": "#5a5a5a",
+          "note": "texto 2 em peças — só rótulo; nunca título"
+        },
+        {
+          "name": "border",
+          "value": "#ece4dc",
+          "note": "borda dos cards do app"
+        },
+        {
+          "name": "primary",
+          "value": "#ef7960",
+          "note": "coral da marca (botões, ícones, \"Oliver\" do app): pontos de destaque, CTA"
+        },
+        {
+          "name": "primary-hover",
+          "value": "#e86440",
+          "note": "coral intenso (ponto de status \"próxima sessão\")"
+        },
+        {
+          "name": "logo",
+          "value": "#d8735e",
+          "note": "cor exata da logo (mais fechada que o coral dos botões)"
+        },
+        {
+          "name": "on-primary",
+          "value": "#2b2b2b",
+          "note": "tinta sobre coral nas PEÇAS (5,1:1)."
+        },
+        {
+          "name": "on-primary-app",
+          "value": "#ffffff",
+          "note": "o app usa branco sobre coral (2,8:1): só ao recriar a tela do produto, botão curto, peso 600+"
+        },
+        {
+          "name": "accent",
+          "value": "#d66954",
+          "note": "coral profundo: ênfase em texto sobre claro (#bc5a47 p/ AAA)"
+        },
+        {
+          "name": "success",
+          "value": "#5f9a6b"
+        },
+        {
+          "name": "warning",
+          "value": "#c99a2e"
+        },
+        {
+          "name": "danger",
+          "value": "#c4553f"
+        }
+      ]
+    },
+    {
+      "label": "Fundo de contraste (slide/cena \"inverse\"): coral suave, nunca coral em bloco grande",
+      "tokens": [
+        {
+          "name": "inverse-bg",
+          "value": "#fce0d7"
+        },
+        {
+          "name": "on-inverse",
+          "value": "#2b2b2b"
+        }
+      ]
+    },
+    {
+      "label": "Extras da marca",
+      "tokens": [
+        {
+          "name": "accent-soft",
+          "value": "#fce0d7",
+          "note": "fundo de tag/realce"
+        },
+        {
+          "name": "pastel-sage",
+          "value": "#cfe0d0"
+        },
+        {
+          "name": "pastel-lavender",
+          "value": "#d8d2e3"
+        },
+        {
+          "name": "pastel-sky",
+          "value": "#cdd8e0"
+        },
+        {
+          "name": "pastel-butter",
+          "value": "#f1e7c9"
+        },
+        {
+          "name": "pastel-rose",
+          "value": "#f1d6cc"
+        },
+        {
+          "name": "pastel-clay",
+          "value": "#ddcfc2"
+        }
+      ]
+    },
+    {
+      "label": "UI do app (para recriar telas do produto em vídeo e carrossel)",
+      "tokens": [
+        {
+          "name": "ui-muted",
+          "value": "#9094a3",
+          "note": "rótulos pequenos (ex.: \"PRÓXIMA SESSÃO\") — só dentro de UI, nunca texto de peça"
+        },
+        {
+          "name": "ui-subtle",
+          "value": "#acadb7",
+          "note": "subtítulo do app (\"Quarta-feira, 7 de outubro…\")"
+        },
+        {
+          "name": "ui-divider",
+          "value": "#dee2e6",
+          "note": "linhas e divisórias da barra lateral"
+        },
+        {
+          "name": "ui-input",
+          "value": "#f8f9fa",
+          "note": "fundo de busca/input"
+        },
+        {
+          "name": "ui-avatar",
+          "value": "#fddbd3",
+          "note": "fundo do avatar com iniciais (iniciais em --primary)"
+        },
+        {
+          "name": "ui-glow",
+          "value": "#fff1ed",
+          "note": "brilho coral suave no canto do card \"Próxima sessão\""
+        },
+        {
+          "name": "ui-btn-soft",
+          "value": "#fbddd7",
+          "note": "botão secundário coral claro"
+        }
+      ]
+    },
+    {
+      "label": "blocos de ícone dos Atalhos: fundo · traço",
+      "tokens": [
+        {
+          "name": "tile-coral",
+          "value": "#f9efeb"
+        },
+        {
+          "name": "tile-coral-ink",
+          "value": "#ab4d2b"
+        },
+        {
+          "name": "tile-teal",
+          "value": "#ebf2f2"
+        },
+        {
+          "name": "tile-teal-ink",
+          "value": "#347372"
+        },
+        {
+          "name": "tile-amber",
+          "value": "#f7f2ea"
+        },
+        {
+          "name": "tile-amber-ink",
+          "value": "#8c650a"
+        },
+        {
+          "name": "tile-lilac",
+          "value": "#f2eef4"
+        },
+        {
+          "name": "tile-lilac-ink",
+          "value": "#7c5a93"
+        }
+      ]
+    },
+    {
+      "label": "Tipografia",
+      "tokens": [
+        {
+          "name": "font-heading",
+          "value": "\"Montserrat\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "font-body",
+          "value": "\"Montserrat\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "font-accent",
+          "value": "\"Fraunces\",Georgia,serif",
+          "note": "sempre itálico, 1 palavra (nome, ênfase), como no app"
+        },
+        {
+          "name": "weight-heading",
+          "value": "700"
+        },
+        {
+          "name": "tracking-heading",
+          "value": "-0.01em"
+        },
+        {
+          "name": "leading-heading",
+          "value": "1.15"
+        },
+        {
+          "name": "case-heading",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "label": "Forma",
+      "tokens": [
+        {
+          "name": "radius",
+          "value": "16px"
+        },
+        {
+          "name": "radius-sm",
+          "value": "10px"
+        },
+        {
+          "name": "border-width",
+          "value": "1px"
+        },
+        {
+          "name": "shadow-sm",
+          "value": "0 1px 3px rgba(43,43,43,.06)"
+        },
+        {
+          "name": "shadow-md",
+          "value": "0 8px 24px rgba(43,43,43,.08)"
+        },
+        {
+          "name": "shadow-lg",
+          "value": "0 20px 48px rgba(43,43,43,.12)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+/* brand.css — GERADO de brand.json pelo kit de marca (app → Contexto e marca → Marca, ou `npm run brand -- <slug>`). Não edite à mão: edite o brand.json. */
 /* brand.css — tokens da marca. Fonte única para carrossel, vídeo e LP.
    Regra: mantenha TODOS os nomes abaixo (as skills dependem deles). Troque só os valores.
    Valores atuais = default neutro e elegante das skills. */
@@ -5,20 +6,19 @@
 
 :root{
   /* Cores — papéis */
-  --bg:#F6F5F2;          /* fundo das peças (liso) */
-  --surface:#FFFFFF;     /* cards, janelas */
-  --surface-2:#EFEDE8;   /* seção secundária */
-  --text:#141414;        /* tinta: títulos e frases (nunca cinza) */
-  --muted:#6B6B6B;       /* só rótulo pequeno dentro de interface */
+  --bg:#F6F5F2; /* fundo das peças (liso) */
+  --surface:#FFFFFF; /* cards, janelas */
+  --surface-2:#EFEDE8; /* seção secundária */
+  --text:#141414; /* tinta: títulos e frases (nunca cinza) */
+  --muted:#6B6B6B; /* só rótulo pequeno dentro de interface */
   --border:#E4E1DA;
-  --primary:#2F5BEA;     /* destaque da marca: logo, botão principal, ênfase única, CTA */
-  --on-primary:#FFFFFF;  /* texto sobre --primary */
-  --accent:#2F5BEA;      /* 2ª cor de destaque (se não houver, = --primary) */
-  --success:#1F9D55;     /* status, só dentro de interface */
+  --primary:#2F5BEA; /* destaque da marca: logo, botão principal, ênfase única, CTA */
+  --on-primary:#FFFFFF; /* texto sobre --primary */
+  --accent:#2F5BEA; /* 2ª cor de destaque (se não houver, = --primary) */
+  --success:#1F9D55; /* status, só dentro de interface */
   --warning:#D98E04;
   --danger:#D64545;
-
-  --inverse-bg:#141414;  /* fundo de contraste (slide/cena "inverse") */
+  --inverse-bg:#141414; /* fundo de contraste (slide/cena "inverse") */
   --on-inverse:#FFFFFF;
   --accent-soft:#E6ECFD; /* fundo de tag/realce */
 
@@ -28,7 +28,7 @@
   --weight-heading:700;
   --tracking-heading:-0.02em;
   --leading-heading:1.08;
-  --case-heading:none;   /* none | uppercase — caixa alta só se a marca quiser */
+  --case-heading:none; /* none | uppercase — caixa alta só se a marca quiser */
 
   /* Forma */
   --radius:20px;
@@ -37,4 +37,9 @@
   --shadow-sm:0 1px 2px rgba(20,20,20,.06), 0 1px 1px rgba(20,20,20,.04);
   --shadow-md:0 8px 24px rgba(20,20,20,.08);
   --shadow-lg:0 24px 60px rgba(20,20,20,.12);
+
+  /* Ícones (kit): lucide, traço 1.75, linha */
+  --icon-stroke:1.75;
+  --icon-color:var(--primary);
+  --icon-fill:none;
 }

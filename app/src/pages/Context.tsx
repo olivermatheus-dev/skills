@@ -5,9 +5,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type Project, type TagDef } from '../api';
 import { Button, Card, ErrorBox, Field, Input, Select, Textarea, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
+import BrandEditor from '../components/brand/BrandEditor';
 import { toTag } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
-import { qk, runOptimistic, useBrandCss, useContextDoc, useContextList, useProject, useTags } from '../queries';
+import { qk, runOptimistic, useContextDoc, useContextList, useProject, useTags } from '../queries';
 
 const DOCS: Record<string, { label: string; hint: string }> = {
   'BUSINESS.md': { label: 'Negócio', hint: 'Produto, oferta, preço, diferenciais, história.' },
@@ -69,14 +70,14 @@ export default function Context() {
         <div className="space-y-0.5">
           {item('projeto', 'Dados do projeto', 'project.yml')}
           {item('tags', 'Tags do projeto', 'tags.yml')}
-          {item('marca', 'Marca', 'brand/brand.css')}
+          {item('marca', 'Kit de marca', 'brand/brand.json')}
         </div>
       </aside>
       <section className="flex-1 min-w-0 overflow-y-auto">
         {section.kind === 'doc' && <DocEditor key={`${slug}/${section.name}`} slug={slug} name={section.name} onDirty={setDirty} />}
         {section.kind === 'projeto' && <ProjectForm key={slug} slug={slug} onDirty={setDirty} />}
         {section.kind === 'tags' && <TagsEditor key={slug} slug={slug} onDirty={setDirty} />}
-        {section.kind === 'marca' && <BrandPanel key={slug} slug={slug} />}
+        {section.kind === 'marca' && <BrandEditor key={slug} slug={slug} onDirty={setDirty} />}
       </section>
     </div>
   );
@@ -301,83 +302,6 @@ function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => 
           </div>
           {saveError ? <div className="px-4 pb-3"><ErrorBox error={saveError} /></div> : null}
         </Card>
-      )}
-    </div>
-  );
-}
-
-// ---------- brand.css (somente leitura) ----------
-interface Token { name: string; value: string; comment?: string }
-function parseTokens(css: string): Token[] {
-  const out: Token[] = [];
-  const re = /--([\w-]+)\s*:\s*([^;]+);[ \t]*(?:\/\*\s*([\s\S]*?)\s*\*\/)?/g;
-  for (let m; (m = re.exec(css));) out.push({ name: m[1], value: m[2].trim(), comment: m[3]?.trim() });
-  return out;
-}
-const isColor = (v: string) => /^(#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\(|oklab\()/i.test(v);
-
-function BrandPanel({ slug }: { slug: string }) {
-  const { data, isLoading, error } = useBrandCss(slug);
-  const tokens = useMemo(() => (data?.text ? parseTokens(data.text) : []), [data]);
-  const colors = tokens.filter((t) => isColor(t.value));
-  const others = tokens.filter((t) => !isColor(t.value));
-  const fonts = others.filter((t) => t.name.startsWith('font'));
-  const rest = others.filter((t) => !t.name.startsWith('font'));
-
-  return (
-    <div className="max-w-5xl mx-auto px-8 py-6">
-      <h2 className="text-2xl font-semibold tracking-tight">Marca</h2>
-      <div className="text-sm text-muted mt-0.5 mb-5">
-        Tokens de <span className="font-mono text-xs">{data?.file ?? 'brand/brand.css'}</span> — fonte única de cores e tipografia das peças. Somente leitura aqui; regras de uso em <span className="font-mono text-xs">brand/BRAND.md</span>.
-      </div>
-      {isLoading && <div className="h-60 rounded-xl bg-surface-2 animate-pulse" />}
-      <ErrorBox error={error} />
-      {data && data.text === null && <div className="text-sm text-muted border border-dashed border-border rounded-xl p-8 text-center">Sem brand.css. A skill <code>setup</code> extrai os tokens da marca.</div>}
-      {colors.length > 0 && (
-        <>
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-2">Cores</div>
-          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mb-8">
-            {colors.map((t) => (
-              <div key={t.name} className="rounded-xl border border-border bg-surface overflow-hidden">
-                <div className="h-16 border-b border-border" style={{ background: t.value }} />
-                <div className="px-3 py-2">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span className="text-sm font-medium font-mono truncate">--{t.name}</span>
-                    <span className="text-[11px] font-mono text-muted shrink-0">{t.value}</span>
-                  </div>
-                  {t.comment && <div className="text-[11px] text-muted mt-0.5 line-clamp-2" title={t.comment}>{t.comment}</div>}
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-      {fonts.length > 0 && (
-        <>
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-2">Tipografia</div>
-          <Card className="mb-8 p-0 overflow-hidden">
-            {fonts.map((t) => (
-              <div key={t.name} className="grid grid-cols-[200px_1fr] gap-3 px-4 py-2 border-b border-border last:border-0 text-sm">
-                <span className="font-mono text-muted">--{t.name}</span><span className="font-mono text-xs break-all">{t.value}</span>
-              </div>
-            ))}
-          </Card>
-        </>
-      )}
-      {rest.length > 0 && (
-        <>
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-2">Forma e outros</div>
-          <Card className="p-0 overflow-hidden">
-            {rest.map((t) => (
-              <div key={t.name} className="grid grid-cols-[200px_1fr_auto] gap-3 px-4 py-2 border-b border-border last:border-0 text-sm items-center">
-                <span className="font-mono text-muted">--{t.name}</span>
-                <span className="font-mono text-xs break-all">{t.value}</span>
-                {t.name.startsWith('radius') && <span className="h-6 w-10 border border-border bg-surface-2" style={{ borderRadius: t.value }} />}
-                {t.name.startsWith('shadow') && <span className="h-6 w-10 bg-surface" style={{ boxShadow: t.value }} />}
-              </div>
-            ))}
-          </Card>
-        </>
       )}
     </div>
   );

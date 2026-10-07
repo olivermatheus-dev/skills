@@ -18,7 +18,7 @@ Antes de produzir qualquer peça, leia os arquivos relevantes de `companies/<slu
 ```
 companies/<slug>/
   context/          BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
-  brand/            BRAND.md (regras de uso) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
+  brand/            BRAND.md (regras de uso) · brand.json (tokens, editável no app) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  templates de vídeo da empresa
   contents/         AAAA-MM-DD-<tema>/  (roteiro.md, carrossel.html, png/, plano.md, composition.html…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
@@ -27,7 +27,7 @@ companies/<slug>/
 ```
 **Interface local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto). Ver `app/README.md`. Todo arquivo de dados segue `schema/`; depois de editar à mão, rode `npm run validate`.
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
-Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
+Marca: **`brand.json` é a fonte única de tokens** (app → Contexto e marca → Kit de marca, ou editar o JSON e rodar `npm run brand -- <slug>`); ele gera o `brand.css`, que carrossel e vídeo linkam direto (nunca editar o `brand.css` à mão: o `validate` acusa). Ícones: só **Lucide** → `node tools/icon.mjs <nome> --brand <slug>` (busca: `--busca <termo>`); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
 Vídeo: motor em `tools/video-kit/` (README = comandos; voz de rascunho grátis → aval → Eleven v4 pela API → `elevenlabs.mjs` encaixa).
 **Chaves de API:** uma por projeto, salvas no app → Configurações (`companies/<slug>/.env`, fora do git); `.env` da raiz é reserva. Scripts leem por `tools/lib/env.mjs`. Vozes: `library/voices/` + `companies/<slug>/brand/voices.json`. Ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição). QC do MP4 final antes de entregar → `node tools/video/qc.mjs <pasta> --sheet`.

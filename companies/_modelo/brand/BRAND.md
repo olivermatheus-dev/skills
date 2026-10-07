@@ -4,6 +4,12 @@
 > Precedência: o que está aqui vence o default das skills. Seção vazia = vale o default (`knowledge/video/frame.md`).
 > Seção **Proibições** = regra dura (entra no QA de toda peça).
 
+<!-- kit-de-marca:inicio (gerado pelo app; edite em Contexto e marca → Marca) -->
+## Kit de marca (estilo, ícones e anotações)
+
+**Ícones:** só **Lucide** (lucide.dev, licença ISC), sem misturar bibliotecas. Traço `1.75` (`--icon-stroke`), estilo linha, cor `--primary` (`--icon-color`). SVG pronto: `node tools/icon.mjs <nome> --brand <slug>`.
+<!-- kit-de-marca:fim -->
+
 ## Essência visual
 1–2 frases: a sensação (ex.: "calma antes de impacto", "contido, premium, confiante").
 

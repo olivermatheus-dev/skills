@@ -1,6 +1,6 @@
 ---
 name: setup
-description: "Cadastra ou atualiza uma empresa: cria a pasta a partir do molde, organiza os arquivos de marca soltos em _inbox/ (logo, ícones, fotos, prints, manual), extrai os tokens visuais para brand.css e escreve o contexto (negócio, público, voz, concorrentes, estratégia de conteúdo, copy). Use quando o usuário disser 'nova empresa', 'vamos cadastrar', 'registrar empresa', 'setup', 'configurar empresa', 'contexto da marca', 'organiza esses arquivos', 'atualizar persona', 'mudou o preço', 'mudei as cores', 'revisar contexto', ou quando outra skill não encontrar os arquivos da empresa."
+description: "Cadastra ou atualiza uma empresa: cria a pasta a partir do molde, organiza os arquivos de marca soltos em _inbox/ (logo, ícones, fotos, prints, manual), extrai os tokens visuais para o kit de marca (brand.json → brand.css) e escreve o contexto (negócio, público, voz, concorrentes, estratégia de conteúdo, copy). Use quando o usuário disser 'nova empresa', 'vamos cadastrar', 'registrar empresa', 'setup', 'configurar empresa', 'contexto da marca', 'organiza esses arquivos', 'atualizar persona', 'mudou o preço', 'mudei as cores', 'revisar contexto', ou quando outra skill não encontrar os arquivos da empresa."
 ---
 
 # Setup de empresa
@@ -11,7 +11,7 @@ Objetivo: em uma conversa, sair com a empresa pronta para produzir, com **marca*
 ```
 companies/<slug>/
   context/   BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
-  brand/     BRAND.md (regras) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
+  brand/     BRAND.md (regras) · brand.json (tokens) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  contents/  campaigns/  board/ (Kanban)
 ```
 
@@ -28,7 +28,7 @@ companies/<slug>/
 Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. Nada de tags de confiança campo a campo.
 
 ## Marca (`brand/`)
-- `brand.css`: **mesmos nomes de token do molde**, porque as skills dependem deles. Troque só os valores.
+- `brand.json`: **mesmos nomes de token do molde** (o schema exige os que as skills usam). Troque só os valores, depois `npm run brand -- <slug>` gera o `brand.css` e o bloco do kit no `BRAND.md`. Nunca edite o `brand.css` à mão. O Oliver ajusta o resto visualmente em app → Contexto e marca → Kit de marca (preset de estilo, fazer / não fazer, ícones Lucide).
 - `BRAND.md`: seções do molde (cores com papel, texto, fundo, formas, logo, imagem, movimento, vídeo, **proibições**, aprendizados). Seção vazia = vale o default das skills.
 - Depois de preencher, rode `node tools/contrast.mjs companies/<slug>/brand/brand.css`. Par reprovado → ajuste `--on-primary` ou `--accent`, ou registre em BRAND.md "não usar X como texto".
 
@@ -47,7 +47,7 @@ Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. N
    | print/gravação do produto | `brand/screenshots/` | `tela-<funcionalidade>-NN.png` |
    | manual/PDF/briefing | ler e extrair para `BRAND.md`/`context/`; guardar em `brand/` só se for referência útil | — |
    Na dúvida, mostre a imagem e pergunte. No fim, liste o que foi movido e confirme que a `_inbox/` ficou vazia.
-4. **Extrair a marca:** cores e fontes de SVGs (atributos `fill`/`stroke`), do manual, do CSS do site (se houver acesso à web) ou de prints → `brand.css` + `BRAND.md`. Mostre a paleta extraída e confirme.
+4. **Extrair a marca:** cores e fontes de SVGs (atributos `fill`/`stroke`), do manual, do CSS do site (se houver acesso à web) ou de prints → `brand.json` (+ `npm run brand -- <slug>`) + `BRAND.md`. Mostre a paleta extraída e confirme.
    - Empresa **sem identidade**: proponha uma opção simples (1 cor de marca, 1 fonte do Google Fonts, fundo neutro), já com contraste checado. O usuário aprova.
 5. **Coletar o contexto de uma vez:** peça um "despejo" livre + site, @ do Instagram, LP, prints do produto, depoimentos, preços. Leia o site e a LP antes de perguntar (SaaS: mapeie **funcionalidade → benefício → dor**).
 6. **Perguntar só o que falta:** no máximo 8 perguntas, numa mensagem. Prioridade: oferta e preço, cliente ideal e dor nº 1, concorrentes, diferencial, provas, tom.

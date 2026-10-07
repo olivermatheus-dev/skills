@@ -21,6 +21,7 @@ export const qk = {
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
+  brand: (slug: string) => ['brand', slug] as const,
   secrets: (slug: string) => ['secrets', slug] as const,
   pieces: (slug: string) => ['pieces', slug] as const,
   piece: (slug: string, path: string) => ['piece', slug, path] as const,
@@ -46,6 +47,8 @@ export const q = {
   // documento importante com salvar explícito: não recarrega sozinho por baixo da edição
   context: (slug: string, name: string) => queryOptions({ queryKey: qk.context(slug, name), queryFn: () => api.context(slug, name), staleTime: Infinity, refetchOnWindowFocus: false }),
   brandCss: (slug: string) => queryOptions({ queryKey: qk.brandCss(slug), queryFn: () => api.brandCss(slug), enabled: !!slug }),
+  // kit com salvar explícito: não recarrega por baixo da edição
+  brand: (slug: string) => queryOptions({ queryKey: qk.brand(slug), queryFn: () => api.brand(slug), enabled: !!slug, staleTime: Infinity, refetchOnWindowFocus: false }),
   secrets: (slug: string) => queryOptions({ queryKey: qk.secrets(slug), queryFn: () => api.secrets(slug), enabled: !!slug }),
   pieces: (slug: string) => queryOptions({ queryKey: qk.pieces(slug), queryFn: () => api.pieces(slug), enabled: !!slug }),
   piece: (slug: string, path: string) => queryOptions({ queryKey: qk.piece(slug, path), queryFn: () => api.piece(slug, path), enabled: !!slug && !!path }),
@@ -68,6 +71,7 @@ export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));
 export const useContextDoc = (slug: string, name: string) => useQuery(q.context(slug, name));
 export const useBrandCss = (slug: string) => useQuery(q.brandCss(slug));
+export const useBrandKit = (slug: string) => useQuery(q.brand(slug));
 export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
 export const usePieces = (slug: string) => useQuery(q.pieces(slug));
 export const usePiece = (slug: string, path: string) => useQuery(q.piece(slug, path));

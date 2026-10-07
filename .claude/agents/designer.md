@@ -26,4 +26,4 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 5. Concluir com os caminhos dos PNG.
 
 ## Nunca
-Placeholder (`@handle`, `[TEXTO]`) na peça final · cor fora do brand.css · título em cinza · mais de 1 ênfase por título · imagem de banco ou de terceiros sem licença.
+Placeholder (`@handle`, `[TEXTO]`) na peça final · cor fora do brand.css · ícone fora do Lucide (`tools/icon.mjs`) · título em cinza · mais de 1 ênfase por título · imagem de banco ou de terceiros sem licença.

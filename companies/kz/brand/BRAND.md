@@ -1,6 +1,12 @@
 # Marca — kz
 
-> Tokens em `brand.css`. Aqui, como usar. Precedência: isto vence o default das skills.
+> Tokens em `brand.json` (gera o `brand.css`; editar no app → Contexto e marca → Marca, ou `npm run brand -- kz`). Aqui, como usar. Precedência: isto vence o default das skills.
+
+<!-- kit-de-marca:inicio (gerado pelo app; edite em Contexto e marca → Marca) -->
+## Kit de marca (estilo, ícones e anotações)
+
+**Ícones:** só **Lucide** (lucide.dev, licença ISC), sem misturar bibliotecas. Traço `1.5` (`--icon-stroke`), estilo linha, cor `--primary` (`--icon-color`). SVG pronto: `node tools/icon.mjs <nome> --brand <slug>`.
+<!-- kit-de-marca:fim -->
 
 ## Essência visual
 **Calma antes de impacto.** Fundo creme, coral só como destaque, pastéis suaves, cantos arredondados e muito respiro. Acolhedor, nunca corporativo. Peças sempre no modo claro (o modo escuro existe só dentro do app).
@@ -45,7 +51,7 @@ Raio 16 px (cards) e 10 px (chips e botões pequenos). Sombras suaves (`--shadow
 ## Imagem, ícones e ilustração
 - **Foto:** luz natural, tons quentes, terapeutas em consultório acolhedor (escutando, escrevendo, lendo), close médio em mãos e expressão.
 - **Ilustração:** orgânica e abstrata, traço leve, curvas, paleta coral + pastéis.
-- **Ícones:** Lucide ou Phosphor, linha 1,5 px, cantos arredondados.
+- **Ícones:** só Lucide, linha 1,5 (ver Kit de marca acima).
 
 ## Movimento
 Mais calmo que o default: preferir molas `GENTLE`/`FAST`, evitar `SOFT` com passagem grande e chicotes agressivos. Nada de partículas festivas, exceto confirmação de pagamento/agendamento.

@@ -1,6 +1,6 @@
 # 024 — Kit de marca visual e editável no app (tokens, fontes, ícones, estilo e anotações)
 
-**Status:** pronta (decisões tomadas em 2026-10-07) · **Depende de:** 018 (app) · **Liga com:** 001 (pasta de marca), 019 (visual do app), skills `carousel`, `video` e `fmt-*`, `tools/contrast.mjs`, DEPOIS.md ("tokens.json como fonte única")
+**Status:** feita (v1, 2026-10-07; faltam upload de logo pelo app e mais presets) · **Depende de:** 018 (app) · **Liga com:** 001 (pasta de marca), 019 (visual do app), skills `carousel`, `video` e `fmt-*`, `tools/contrast.mjs`, DEPOIS.md ("tokens.json como fonte única")
 
 ## Pedido do Oliver (2026-10-07)
 - O kit de marca precisa ser **visual e fácil**: adicionar e ajustar tokens, fontes e o kit completo **pelo app**, sem editar CSS à mão.
@@ -32,11 +32,12 @@
 - **Ícones: Lucide** como biblioteca padrão (ISC, uso comercial ok; já está no projeto como `lucide-react`). Token `icons: { library: "lucide", stroke, style: "linha" }`; carrossel e vídeo usam os SVG do Lucide com esses tokens.
 
 ## Critérios de pronto
-- [ ] `brand.json` + schema + gerador do `brand.css`; kz migrada com o CSS gerado equivalente ao atual (carrossel e vídeo renderizam igual)
-- [ ] Mudar cor principal, raio e fonte no app e ver a prévia mudar na hora; arquivos gravados e válidos.
-- [ ] Um carrossel gerado depois da mudança sai com os novos tokens sem nenhum ajuste à mão.
-- [ ] Anotações de estilo feitas no app aparecem no `BRAND.md` e são seguidas pela skill `carousel`.
+- [x] `brand.json` + schema + gerador do `brand.css`; kz migrada com o CSS gerado equivalente ao atual (carrossel e vídeo renderizam igual)
+- [x] Mudar cor principal, raio e fonte no app e ver a prévia mudar na hora; arquivos gravados e válidos.
+- [~] Um carrossel gerado depois da mudança sai com os novos tokens sem nenhum ajuste à mão.
+- [~] Anotações de estilo feitas no app aparecem no `BRAND.md` e são seguidas pela skill `carousel`.
 
 ## Log
 - 2026-10-07 — criada a partir do pedido do Oliver (registro; não iniciada).
 - 2026-10-07 — decisões do Oliver: `brand.json` gera o `brand.css`; preset inicial Minimalista (estilo Apple); ícones Lucide. Status → pronta.
+- 2026-10-07 — **v1 implementada.** `schema/brand.ts` (grupos de tokens com nota, fontes locais/Google, `icons` Lucide, `style` preset + fazer/não fazer/anotações; exige os 27 tokens do molde) · `core/brand.ts` (brand.json → brand.css; importa brand.css antigo; bloco `kit-de-marca` no BRAND.md) · `core/brand-presets.ts` (Minimalista estilo Apple: forma/tipografia/ícones + 7 regras) · `npm run brand -- <slug> [--check|--all]` · `npm run validate` acusa brand.css editado à mão · `tools/icon.mjs` (SVG do Lucide com traço/cor do kit; `--busca`, `--out`) · store/API (`/brand`, `/brand/font`, `/brand-file/…`) · app: Contexto e marca → **Kit de marca** (prévia ao vivo 4:5 + inverso; estilo; cores com contraste; tipografia e fontes; forma com sliders; ícones; outros tokens; salvar/descartar, aviso de não salvo). Migração: kz e _modelo viraram brand.json; CSS gerado com os **mesmos 53 tokens e @font-face** do original (+ `--icon-stroke/color/fill`); ícones da kz = Lucide 1,5 (o BRAND.md dizia Lucide ou Phosphor 1,5 → agora só Lucide). Testado no app: aplicar preset + trocar cor → prévia muda na hora; salvar grava JSON/CSS/BRAND.md e o validate passa; kz restaurada depois (o preset **não** foi aplicado na kz: decisão do Oliver no app). Docs: CLAUDE.md, skills setup/carousel/video, agente designer, molde. Não feito: render de um carrossel real depois de mudar o kit (o template linka o brand.css, então segue automático) e um teste de anotação → carrossel; upload de logo pelo app; outros presets.

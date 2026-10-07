@@ -9,6 +9,10 @@ export interface AnalysisFull { results: Partial<Record<ModuleId, AnalysisResult
 export interface QueueEntry { id: string; name: string; status: string; request: AnalysisRequest }
 
 import type { Review, ReviewComment } from '../../schema/review';
+import type { Brand, BrandFont, BrandToken } from '../../schema/brand';
+import type { BrandPreset } from '../../core/brand-presets';
+export type { Brand, BrandFont, BrandToken, BrandPreset };
+export interface BrandKit { brand: Brand; imported: boolean; fonts: string[]; presets: BrandPreset[] }
 export type { Review, ReviewComment };
 export type PieceKind = 'video' | 'carrossel' | 'roteiro';
 export interface PieceInfo { path: string; kind: PieceKind; hasTimeline: boolean; videos: string[]; texts: string[]; status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number }
@@ -77,6 +81,10 @@ export const api = {
   contextList: (slug: string) => req<{ name: string; file: string }[]>('GET', `${pj(slug)}/context`),
   context: (slug: string, name: string) => req<{ name: string; text: string }>('GET', `${pj(slug)}/context/${encodeURIComponent(name)}`),
   saveContext: (slug: string, name: string, text: string) => req<null>('PUT', `${pj(slug)}/context/${encodeURIComponent(name)}`, { text }),
+  brand: (slug: string) => req<BrandKit>('GET', `${pj(slug)}/brand`),
+  saveBrand: (slug: string, brand: Brand) => req<BrandKit>('PUT', `${pj(slug)}/brand`, brand),
+  uploadBrandFont: (slug: string, name: string, base64: string) => req<{ file: string }>('POST', `${pj(slug)}/brand/font`, { name, base64 }),
+  brandFileUrl: (slug: string, file: string) => `/brand-file/${slug}/${file.split('/').map(encodeURIComponent).join('/')}`,
   brandCss: (slug: string) => req<{ file: string; text: string | null }>('GET', `${pj(slug)}/brand-css`),
 
   detectLink: (url: string) => req<DetectedLink | null>('POST', '/api/detect-link', { url }),
