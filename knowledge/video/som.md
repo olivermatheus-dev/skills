@@ -1,50 +1,79 @@
 # Som
 
-> Base: prompts de vídeo e trailer (2026-10-07), verificados com os padrões de loudness (EBU R128 / ITU-R BS.1770; plataformas normalizam ~−14 LUFS) e de sincronia audiovisual (ITU-R BT.1359). Números = **pontos de partida**. O Claude **não escuta**: a validação de ouvido é do usuário, e o Claude mede o que dá para medir.
+> Fontes: Etapa 5 + guia do Ludus (consolidado em 2026-10-07). Valores = ponto de partida. Ferramentas, biblioteca, fichas e licenças: skill `audio` e `library/audio/README.md`. O Claude **não escuta**: confere sincronia, metadados e medição; ouvido final = Oliver.
 
-## 1. Andamento manda nos cortes
-- Escolha um **BPM** antes de animar. Lançamento/energia: 100–128 BPM; calmo/acolhedor: 70–95 BPM.
-- 1 batida = 60 / BPM s (120 BPM → 0,5 s = 15 quadros a 30 fps).
-- **Cortes e impactos na batida**, mas não em toda batida: troque de ideia nos tempos fortes, a cada 2 ou 4 batidas (frase musical).
-- **Sincronia:** som e imagem no **mesmo quadro**. Na dúvida, o visual pode vir 1 quadro antes, nunca o som antes; som adiantado é percebido muito mais cedo do que atrasado.
+## 1. Princípio e hierarquia
+- Todo efeito tem **função nomeável** (reforçar ação, tornar movimento perceptível, continuidade, antecipação, ênfase, mudança, espaço, materialidade, feedback, ritmo). Sem função → fora.
+- O asset não é o sound design; a decisão de como ele entra é.
+- Prioridade: fala → sons necessários para entender → sound design → música → ambiência. Sem fala, música ou SFX podem protagonizar.
 
-## 2. Desenho de som de trailer (camadas)
-| camada | o que é | quando |
-|---|---|---|
-| **sub boom** | grave curto e profundo | cortes fortes, entrada de bloco |
-| **riser** | ruído filtrado subindo (filtro abrindo + volume) | 1–4 s antes da virada/revelação |
-| **motivo melódico** | 3–5 notas reconhecíveis | identidade; repete na revelação |
-| **impacto grande** | hit + cauda longa (reverb 2–4 s) | revelação da marca |
-| **silêncio** | corte seco do som por 0,2–0,5 s | logo antes do impacto (o contraste aumenta o peso) |
-| **UI SFX** | clique, balão, digitação, aviso, *whoosh* | presos aos `events` do `timeline.json` |
+## 2. Andamento e sincronia
+- **BPM antes de animar:** calmo 70–95 · médio 96–115 · energia 116–128. 1 batida = 60/BPM s (120 BPM = 0,5 s = 15 quadros a 30 fps).
+- Troca de ideia em tempo forte, a cada **2 ou 4 batidas**; não corte em toda batida (critério de sincronia: `ritmo.md`).
+- Som e imagem no **mesmo quadro**. Na dúvida, visual 1 quadro antes; **nunca o som antes**.
+- **align `peak`:** o pico do arquivo cai no quadro do evento / de maior velocidade visual (whoosh, impact, riser). `start` só para click/pop.
 
-- **Whoosh** de transição começa **4–8 quadros antes** do movimento (J-cut sonoro).
-- UI SFX baixinhos e curtos: são tempero, não protagonistas. Não colocar SFX em todo corte.
+## 3. Música como narrativa
+- Não é papel de parede: varie energia, instrumentação e presença. **Tirar a música** num momento-chave pode pesar mais que somar.
+- Entrar/sair em pontos musicais (início de frase, mudança harmônica, build, drop, resolução); drop no quadro da virada.
+- Reduzir densidade antes de um evento costuma funcionar melhor que riser.
+- Com voz: trilha sem melodia no registro médio (mais grave/aguda ou simples).
+- Trilha 100% sintetizada serve para pulsos/impactos/risers; vídeo-chave → considerar faixa licenciada.
 
-## 2b. Música como narrativa
-- **Não é papel de parede:** varie energia, instrumentação, presença, e até a ausência. **Tirar a música** num momento importante pode pesar mais do que acrescentar.
-- **Entrar e sair em pontos musicais** (começo de frase, mudança harmônica, fim de seção, build, drop, resolução), com fade quando preciso. A estrutura da música e a da história trabalham juntas: editar música é editar narrativa.
-- **Silêncio:** reduzir a densidade antes de um evento costuma funcionar melhor que um riser.
-- Hierarquia completa e sound design: `sound-design.md`.
+## 4. Decisão por evento
+| evento visual | som |
+|---|---|
+| movimento grande / pequeno (UI, card) | whoosh / swish |
+| chegada, impacto, reveal | impact (+ sub para massa) |
+| expectativa | riser 1–4 s (longo) ou reverse (curto, termina no evento) |
+| resolução | impact, drop, downer ou **silêncio** |
+| microinteração | click, tick, pop |
+| transição narrativa | sound bridge (áudio atravessa o corte) |
+| passagem premium | transição tonal **no tom da trilha** |
+| contato físico | foley (só o que merece presença) |
+| nada disso | **nenhum efeito** |
 
-## 3. Voz + trilha
-- Com locução, a trilha **abaixa 8–12 dB** enquanto há fala (*ducking*), com ataque de ~100 ms e retorno de ~300–500 ms. Ducking automático é ponto de partida: **revise as transições** (subidas no meio de frase, buracos).
-- Evite a melodia da trilha na mesma faixa da voz: prefira trilha mais grave ou mais aguda, ou uma melodia simples.
+- **A maioria dos eventos não ganha som.** Hard cut não precisa de som.
+- Escolha: função → intensidade → caráter → duração → escala → só então buscar. **2–4 candidatos** testados com imagem, voz e música; nunca o primeiro resultado.
 
-## 4. Mixagem e entrega
-- **Loudness integrado: −14 LUFS** (±1). Alto, nunca estourado.
-- **True peak ≤ −1 dBTP**: nunca clipar.
-- Não esmagar: evite compressão/limitação pesada. A faixa dinâmica (LRA) entre ~4 e 10 LU é saudável para trailer.
-- **Medir sempre** (ex.: `ffmpeg -af loudnorm=print_format=summary` ou `ebur128`) e registrar o valor no `plano.md`.
+## 5. Regras por tipo
+- **Riser** sempre resolve (impact, corte, silêncio, drop, reveal).
+- **Silêncio** seco de 0,2–0,5 s logo antes do impacto da revelação.
+- **Impact forte** só onde há peso real; existe sutil/seco/digital/elegante. **Sub** dá peso, não volume; com moderação.
+- **Impacto da marca:** hit + cauda (reverb 2–4 s); motivo de 3–5 notas que volta na revelação.
+- **Downer** só quando a energia visual também desce.
+- **Transições:** whip → whoosh rápido · slide → swish direcional · zoom → whoosh/tonal · reveal → reverse + impact leve · cinematográfica → riser + impact. Whoosh começa 4–8 quadros antes do movimento.
+- **Motion:** sonorize **eventos perceptivos** (início, encaixe/snap, assentamento, reveal, sumiço), não keyframes. 1 animação = 1–2 sons (card: swish → click).
+- **Layering:** movimento + impacto + tonal (+ sub), cada camada resolvendo uma dimensão. Nunca empilhar "para parecer profissional".
+- **Escala/direção/espaço:** pequeno/rápido = curto e leve; pesado = grave. Pan ≤ ~30% L/R em movimento lateral claro. Motion flat: seco ou room curto consistente.
 
-## 5. Fontes de áudio
-Sempre **a biblioteca primeiro** (`library/audio/`, catálogo com licença de cada arquivo); depois gerar (IA, síntese em código) ou baixar de fonte com licença compatível, e **catalogar** antes de usar. Nunca áudio sem licença registrada. Processo completo: skill `audio`.
-- Limite honesto: trilha 100% sintetizada é ótima para pulsos, impactos e risers, mas costuma soar menos rica que uma trilha produzida. Para vídeos-chave (lançamento), considerar uma faixa licenciada.
+## 6. Família e anti-repetição
+- **Uma família por vídeo** (identidade em `BRAND.md` > Som; vazio = minimalista premium: clicks discretos, soft impacts, *air*, tonais sutis).
+- Evento repetido: 3–5 variantes alternadas, ou pitch ±1–2 semitons / ganho ±5%. Nunca o mesmo arquivo perceptível em série.
+- **Proibido por padrão:** whoosh em todo zoom · pop em toda legenda · impact em toda palavra · riser antes de toda transição · click em todo gráfico · bass drop em toda punchline.
 
-## 6. Checklist
-- [ ] BPM definido e cortes nos tempos fortes?
-- [ ] Silêncio antes do impacto da revelação?
-- [ ] SFX de UI ligados a eventos, sem SFX em todo corte?
-- [ ] Ducking sob a voz?
-- [ ] Medido: −14 LUFS ±1 e true peak ≤ −1 dBTP?
-- [ ] Avisado ao usuário que voz e mixagem precisam do ouvido dele?
+## 7. Densidade por intensidade (escala 0–4 de `ritmo.md`)
+| nível | som |
+|---|---|
+| 0 | ambiência, quase nenhum efeito |
+| 1 | sound design invisível |
+| 2 | microinterações e movimentos seletivos |
+| 3 | whooshes, impacts, transições, sincronia musical |
+| 4 | layering e contraste máximos, **curto** |
+
+## 8. Mix e entrega
+- **Ducking** da trilha sob voz: **−8 a −12 dB**, ataque ~100 ms, retorno 300–500 ms; revisar transições (subida no meio de frase, buracos).
+- UI SFX **12–20 dB abaixo da voz**.
+- Crossfade 5–20 ms contra estalos; 0,3–2 s em ambiência.
+- **−14 LUFS integrado (±1)** · **true peak ≤ −1 dBTP** · LRA ~4–10 LU; sem compressão esmagando.
+- Medir sempre e registrar no `plano.md`. Fonte sem licença registrada não entra.
+
+## 9. QC (6 passadas + medição)
+- [ ] **Função:** cada som tem motivo; sem resposta → removido.
+- [ ] **Sincronia:** pico no quadro do evento; som nunca antes da imagem; risers resolvem.
+- [ ] **Escala:** tamanho/peso do som = do que se vê.
+- [ ] **Repetição:** nenhum arquivo perceptível repetido; família única.
+- [ ] **Mix:** nada compete com a voz; ducking revisado.
+- [ ] **Remoção:** tirou e ficou igual → fora.
+- [ ] **Medido:** −14 LUFS ±1, TP ≤ −1 dBTP, registrado no plano.
+- [ ] Entrega diz "ouvido final: Oliver".
