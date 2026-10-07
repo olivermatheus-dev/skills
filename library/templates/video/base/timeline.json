@@ -1,0 +1,23 @@
+{
+  "fps": 30,
+  "formats": ["9x16", "4x5"],
+  "music": { "bpm": 84, "gain_db": -11, "synth": { "beatsPerBar": 4, "seed": 1, "chords": ["F", "C", "Dm", "Bb"], "sections": [{ "from": 0, "to": 6, "style": "light" }, { "from": 6, "to": 10, "style": "resolve" }] } },
+  "vo": [
+    { "id": "f1", "text": "Frase do gancho." },
+    { "id": "f2", "text": "Frase da virada, com a palavra certa." }
+  ],
+  "scenes": [
+    { "id": "s1", "block": "gancho", "vo": ["f1"], "on_screen": "Texto curto" },
+    { "id": "s2", "block": "virada", "vo": ["f2"], "pause": true, "on_screen": "Outro texto" },
+    { "id": "s3", "block": "cartão final", "len": 2.6, "on_screen": "CTA" }
+  ],
+  "events": [
+    { "id": "e1", "type": "reveal", "scene": "s1", "at": 0.1 },
+    { "id": "e2", "type": "notify", "word": "f2:palavra", "offset": -0.1 },
+    { "id": "e3", "type": "reveal", "scene": "s3", "at": 0.1 }
+  ],
+  "sfx": [
+    { "event": "e2", "asset": "whoosh-whoosh-fino-02", "align": "peak", "gain_db": -16 },
+    { "event": "e3", "synth": "chime", "gain_db": -8 }
+  ]
+}

@@ -1,6 +1,6 @@
 # 003 — Stack de render de motion + protótipo
 
-**Status:** rascunho · **Depende de:** 001
+**Status:** feita (falta só o teste 3D, que depende dos prints da kz) · **Depende de:** 001
 
 ## Objetivo
 Escolher **uma** forma de o Claude escrever animações (HTML/CSS/JS) e renderizar em MP4 localmente, com qualidade e de forma previsível. Provar com um protótipo de 10–15 s usando a marca da kz.
@@ -34,10 +34,11 @@ Critérios de escolha: (1) qualidade final, (2) o Claude escreve com facilidade,
 - [ ] 2–3 vídeos de referência de motion que o usuário acha excelentes
 
 ## Critérios de pronto
-- [ ] `DECISAO.md` nesta pasta (escolha, prós/contras, como instalar)
-- [ ] Protótipo 9:16 de 10–15 s com tipografia animada, logo e cores da kz, renderizado em MP4
-- [ ] Teste com 1 elemento 3D (ex.: celular girando com print do produto) renderizado sem perda de qualidade
+- [x] `DECISAO.md` nesta pasta (escolha, prós/contras, como instalar)
+- [x] Protótipo 9:16 (e 4:5) de 15 s com tipografia animada, marca em texto (logo final pendente) e cores da kz, renderizado em MP4 — `companies/kz/contents/2026-10-07-teste-kit/`
+- [ ] Teste com 1 elemento 3D (ex.: celular girando com print do produto) renderizado sem perda de qualidade — **aguarda prints da kz**
 
 ## Log
 - 2026-10-06 — criada.
 - 2026-10-07 — HyperFrames + GSAP vira o candidato nº 1 (já em produção no Ludus). Próximo passo: reaproveitar o kit.
+- 2026-10-07 — Kit trazido e adaptado em `tools/video-kit/` (ver `DECISAO.md`). Respostas do Oliver: pode copiar o kit; **sem voz definida** → rascunho sempre com voz grátis do Windows, final na ElevenLabs só após aprovar copy e estrutura, depois tratar e encaixar (`fit-vo.mjs`); catálogo geral de vozes (`library/voices/`) e vozes por projeto (`brand/voices.json`); skill própria de ElevenLabs → tarefa 020. Teste da kz renderizado e com QC limpo (BT.709, −14 LUFS, sem tela parada); o QC final pegou 2 sobreposições em transições que os quadros de conferência não pegam (registrado no `GUIA-TECNICO.md`). Fonte Montserrat local na kz (OFL). Encaixe da voz final testado: a timeline encolheu 15,2 → 13,5 s e os eventos acompanharam.

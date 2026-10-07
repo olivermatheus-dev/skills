@@ -1,0 +1,62 @@
+[
+  {
+    "id": "win-daniel",
+    "engine": "windows",
+    "voice": "Daniel",
+    "lang": "pt-BR",
+    "gender": "masculina",
+    "stage": "draft",
+    "characteristics": "Voz local do Windows (OneCore). Neutra, um pouco robótica; boa para conferir ritmo e duração. Offline e grátis.",
+    "settings": { "rate": 1.0 },
+    "license": "Windows (rascunho interno; não publicar)",
+    "words": "exato"
+  },
+  {
+    "id": "win-maria",
+    "engine": "windows",
+    "voice": "Maria",
+    "lang": "pt-BR",
+    "gender": "feminina",
+    "stage": "draft",
+    "characteristics": "Voz local do Windows (OneCore). Neutra, um pouco robótica; boa para conferir ritmo e duração. Offline e grátis.",
+    "settings": { "rate": 1.0 },
+    "license": "Windows (rascunho interno; não publicar)",
+    "words": "exato"
+  },
+  {
+    "id": "edge-thalita",
+    "engine": "edge",
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "lang": "pt-BR",
+    "gender": "feminina",
+    "stage": "draft",
+    "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Bem mais natural que as do Windows; usada nos vídeos do Ludus.",
+    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
+    "words": "exato"
+  },
+  {
+    "id": "edge-antonio",
+    "engine": "edge",
+    "voice": "pt-BR-AntonioNeural",
+    "lang": "pt-BR",
+    "gender": "masculina",
+    "stage": "draft",
+    "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Natural, tom firme.",
+    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
+    "words": "exato"
+  },
+  {
+    "id": "edge-francisca",
+    "engine": "edge",
+    "voice": "pt-BR-FranciscaNeural",
+    "lang": "pt-BR",
+    "gender": "feminina",
+    "stage": "draft",
+    "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Natural, tom acolhedor.",
+    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
+    "words": "exato"
+  }
+]

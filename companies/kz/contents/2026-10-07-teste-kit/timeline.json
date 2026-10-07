@@ -1,0 +1,340 @@
+{
+  "status": "teste técnico do kit de vídeo (tarefa 003) — NÃO PUBLICAR",
+  "fps": 30,
+  "formats": [
+    "9x16",
+    "4x5"
+  ],
+  "music": {
+    "bpm": 84,
+    "gain_db": -11,
+    "synth": {
+      "beatsPerBar": 4,
+      "seed": 7,
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C"
+      ],
+      "sections": [
+        {
+          "from": 0,
+          "to": 4,
+          "style": "light"
+        },
+        {
+          "from": 4,
+          "to": 8,
+          "style": "resolve"
+        }
+      ]
+    },
+    "file": "audio/music.wav",
+    "id": null,
+    "license": "própria (sintetizada no kit)"
+  },
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Onze da noite. Mais um paciente remarcando.",
+      "file": "audio/vo/f1.wav",
+      "voice": "win-daniel",
+      "start": 0.3,
+      "length": 3.999,
+      "words": [
+        {
+          "w": "Onze",
+          "s": 0.34,
+          "e": 0.65
+        },
+        {
+          "w": "da",
+          "s": 0.65,
+          "e": 0.8
+        },
+        {
+          "w": "noite",
+          "s": 0.8,
+          "e": 2.297
+        },
+        {
+          "w": "Mais",
+          "s": 2.297,
+          "e": 2.652
+        },
+        {
+          "w": "um",
+          "s": 2.652,
+          "e": 2.822
+        },
+        {
+          "w": "paciente",
+          "s": 2.822,
+          "e": 3.492
+        },
+        {
+          "w": "remarcando",
+          "s": 3.492,
+          "e": 4.299
+        }
+      ],
+      "end": 4.299
+    },
+    {
+      "id": "f2",
+      "text": "Agora, o lembrete sai sozinho pelo WhatsApp.",
+      "file": "audio/vo/f2.wav",
+      "voice": "win-daniel",
+      "start": 5.149,
+      "length": 3.604,
+      "words": [
+        {
+          "w": "Agora",
+          "s": 5.189,
+          "e": 5.955
+        },
+        {
+          "w": "o",
+          "s": 5.955,
+          "e": 6.039
+        },
+        {
+          "w": "lembrete",
+          "s": 6.039,
+          "e": 6.699
+        },
+        {
+          "w": "sai",
+          "s": 6.699,
+          "e": 6.976
+        },
+        {
+          "w": "sozinho",
+          "s": 6.976,
+          "e": 7.623
+        },
+        {
+          "w": "pelo",
+          "s": 7.623,
+          "e": 7.909
+        },
+        {
+          "w": "WhatsApp",
+          "s": 7.909,
+          "e": 8.753
+        }
+      ],
+      "end": 8.753
+    },
+    {
+      "id": "f3",
+      "text": "Feito por terapeuta, pra terapeuta.",
+      "file": "audio/vo/f3.wav",
+      "voice": "win-daniel",
+      "start": 9.203,
+      "length": 3.076,
+      "words": [
+        {
+          "w": "Feito",
+          "s": 9.243,
+          "e": 9.732
+        },
+        {
+          "w": "por",
+          "s": 9.732,
+          "e": 9.961
+        },
+        {
+          "w": "terapeuta",
+          "s": 9.961,
+          "e": 11.051
+        },
+        {
+          "w": "pra",
+          "s": 11.051,
+          "e": 11.337
+        },
+        {
+          "w": "terapeuta",
+          "s": 11.337,
+          "e": 12.279
+        }
+      ],
+      "end": 12.279
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "block": "gancho",
+      "vo": [
+        "f1"
+      ],
+      "tail": 0.35,
+      "on_screen": "23:04",
+      "note": "chat com paciente (ilustrativo); bolha de remarcação chega na palavra 'paciente'",
+      "start": 0,
+      "end": 4.649
+    },
+    {
+      "id": "s2",
+      "block": "virada",
+      "vo": [
+        "f2"
+      ],
+      "pause": true,
+      "tail": 0.3,
+      "on_screen": "Lembrete automático",
+      "note": "o chat troca: lembrete sai sozinho; paciente confirma",
+      "start": 4.649,
+      "end": 9.053
+    },
+    {
+      "id": "s3",
+      "block": "marca",
+      "vo": [
+        "f3"
+      ],
+      "tail": 0.3,
+      "on_screen": "Feito por terapeuta, pra terapeuta.",
+      "note": "slogan palavra a palavra, no tempo da fala",
+      "start": 9.053,
+      "end": 12.579
+    },
+    {
+      "id": "s4",
+      "block": "cartão final",
+      "len": 2.6,
+      "on_screen": "Peça seu acesso",
+      "note": "marca + CTA; cursor clica",
+      "start": 12.579,
+      "end": 15.179
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "notify",
+      "word": "f1:paciente",
+      "offset": -0.12,
+      "target": "#b1",
+      "t": 2.702,
+      "scene": "s1"
+    },
+    {
+      "id": "e2",
+      "type": "cut",
+      "scene": "s2",
+      "at": 0,
+      "target": "#chat",
+      "t": 4.649
+    },
+    {
+      "id": "e3",
+      "type": "notify",
+      "word": "f2:lembrete",
+      "offset": -0.1,
+      "target": "#b2",
+      "t": 5.939,
+      "scene": "s2"
+    },
+    {
+      "id": "e4",
+      "type": "notify",
+      "word": "f2:WhatsApp",
+      "offset": 0.2,
+      "target": "#b3",
+      "t": 8.109,
+      "scene": "s2"
+    },
+    {
+      "id": "e5",
+      "type": "reveal",
+      "scene": "s3",
+      "at": 0.05,
+      "target": "#title",
+      "t": 9.103
+    },
+    {
+      "id": "e8",
+      "type": "swap",
+      "word": "f3:4",
+      "offset": -0.1,
+      "target": "#title .accent",
+      "t": 11.237,
+      "scene": "s3"
+    },
+    {
+      "id": "e6",
+      "type": "reveal",
+      "scene": "s4",
+      "at": 0.1,
+      "target": "#end",
+      "t": 12.679
+    },
+    {
+      "id": "e7",
+      "type": "click",
+      "scene": "s4",
+      "at": 1.25,
+      "target": "#cta",
+      "t": 13.829
+    }
+  ],
+  "sfx": [
+    {
+      "event": "e1",
+      "synth": "pop",
+      "gain_db": -3
+    },
+    {
+      "event": "e2",
+      "asset": "whoosh-whoosh-fino-02",
+      "align": "peak",
+      "gain_db": -16
+    },
+    {
+      "event": "e3",
+      "asset": "ui-hud-pop-up-02",
+      "gain_db": -15,
+      "max": 0.6
+    },
+    {
+      "event": "e4",
+      "synth": "pop",
+      "gain_db": -5,
+      "pan": 0.2
+    },
+    {
+      "event": "e5",
+      "asset": "whoosh-whoosh-fino-05",
+      "align": "peak",
+      "gain_db": -20
+    },
+    {
+      "event": "e6",
+      "asset": "tonal-piano-f-maior-expansivo-01",
+      "gain_db": -16,
+      "max": 2.6
+    },
+    {
+      "event": "e7",
+      "asset": "ui-futurista-click-04",
+      "gain_db": -16,
+      "max": 0.5
+    },
+    {
+      "event": "e8",
+      "synth": "chime",
+      "gain_db": -9
+    }
+  ],
+  "voice": {
+    "current": "win-daniel",
+    "stage": "draft"
+  },
+  "duration": 15.179
+}

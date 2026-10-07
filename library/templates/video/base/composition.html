@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Molde de vídeo do hub. Tempos só da timeline (funções T.* e os marcadores de cena/evento do produce.mjs); cores só tokens do brand.css. Guia: tools/video-kit/GUIA-TECNICO.md -->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+      html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+      * { box-sizing: border-box; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-body); }
+      /* área segura por formato (knowledge/video/REGRAS.md §3) */
+      .f-9x16 { --top: 270px; --bottom: 480px; --title: 84px; }
+      .f-4x5 { --top: 90px; --bottom: 90px; --title: 80px; }
+      .f-16x9 { --top: 80px; --bottom: 80px; --title: 72px; }
+      .f-1x1 { --top: 80px; --bottom: 80px; --title: 72px; }
+      #stage { position: absolute; left: 80px; right: 80px; top: var(--top); bottom: var(--bottom); display: flex; align-items: center; justify-content: center; }
+      .title { position: absolute; text-align: center; font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--title); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+      <div id="stage">
+        <div class="title" id="t1"></div>
+        <div class="title" id="t2"></div>
+        <div class="title" id="t3"></div>
+      </div>
+    </div>
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      const $ = (s) => document.querySelector(s)
+      ;['s1', 's2', 's3'].forEach((id, k) => ($('#t' + (k + 1)).textContent = T.text(id)))
+      const s1 = T.scene('s1'), s2 = T.scene('s2'), s3 = T.scene('s3')
+
+      tl.fromTo('#stage', { scale: 1 }, { scale: 1.03, duration: T.duration, ease: 'sine.inOut' }, 0) // nada fica parado
+      tl.fromTo('#t1', { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e1'))
+      M.swap(tl, '#t1', '#t2', T.ev('e2'))
+      tl.to('#t2', { opacity: 0, duration: 0.25, ease: 'power2.in' }, T.ev('e3') - 0.3) // saída antes da entrada
+      tl.fromTo('#t3', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, ...M.GENTLE }, T.ev('e3'))
+
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<!--
+  Teste do kit (tarefa 003) — NÃO PUBLICAR. Plano em plano.md.
+  Tempos: só da timeline (T.scene, T.ev, T.word). Cores: só tokens do brand.css da kz.
+  Fundo liso creme; coral só no CTA e na ênfase; molas calmas (GENTLE/FAST), como pede o BRAND.md.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+      html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+      * { box-sizing: border-box; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+        color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+      /* área segura: 9:16 deixa o alto e o pé para a interface do Instagram */
+      .f-9x16 { --top: 270px; --bottom: 480px; --title: 84px; --card-w: 900px; --bubble: 44px; }
+      .f-4x5 { --top: 90px; --bottom: 90px; --title: 80px; --card-w: 880px; --bubble: 42px; }
+      #stage { position: absolute; left: 0; right: 0; top: var(--top); bottom: var(--bottom);
+        display: flex; align-items: center; justify-content: center; }
+
+      /* ── chat (UI própria, tokens da marca) ── */
+      #chat { width: var(--card-w); background: var(--surface); border-radius: 36px; box-shadow: var(--shadow-lg);
+        border: var(--border-width) solid var(--border); overflow: hidden; }
+      .bar { display: flex; align-items: center; gap: 22px; padding: 30px 36px; border-bottom: 1px solid var(--border); position: relative; height: 128px; }
+      .avatar { width: 68px; height: 68px; border-radius: 50%; background: var(--pastel-sky); flex: none; }
+      .who { position: absolute; left: 126px; top: 50%; transform: translateY(-50%); }
+      .who b { display: block; font-size: 36px; font-weight: 700; letter-spacing: -0.01em; }
+      .who small { display: block; font-size: 28px; color: var(--muted); margin-top: 4px; }
+      .tag { position: absolute; right: 36px; top: 50%; transform: translateY(-50%); font-size: 26px; color: var(--muted);
+        background: var(--surface-2); border-radius: 999px; padding: 8px 18px; }
+      .msgs { position: relative; height: 520px; padding: 36px; }
+      .bubble { position: absolute; max-width: 640px; font-size: var(--bubble); line-height: 1.3; padding: 24px 30px;
+        border-radius: 30px; font-weight: 500; }
+      .in { left: 36px; background: var(--surface-2); border-bottom-left-radius: 10px; transform-origin: 0% 100%; }
+      .out { right: 36px; background: var(--accent-soft); border-bottom-right-radius: 10px; transform-origin: 100% 100%; }
+      #b1 { top: 60px; }
+      /* digitando: 3 pontos, antes de toda bolha (fmt-dialogo) */
+      #typing { top: 60px; display: flex; gap: 12px; padding: 30px 32px; opacity: 0; }
+      #typing i { width: 16px; height: 16px; border-radius: 50%; background: var(--muted); opacity: 0.5; display: block; }
+      #b2 { top: 40px; opacity: 0; }
+      #b3 { top: 300px; opacity: 0; display: flex; align-items: center; gap: 14px; }
+      #b3 .icon { width: 40px; height: 40px; color: var(--success); }
+      .note { position: absolute; left: 0; right: 0; bottom: calc(var(--bottom) - 70px); text-align: center; font-size: 26px; color: var(--muted); }
+
+      /* ── slogan ── */
+      #title { position: absolute; left: 80px; right: 80px; top: 50%; transform: translateY(-50%); text-align: center;
+        font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--title);
+        line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+      #title .w { display: inline-block; opacity: 0; }
+      #title .accent { color: var(--accent); }
+
+      /* ── cartão final ── */
+      #end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; opacity: 0; }
+      #wordmark { font-family: var(--font-heading); font-weight: 800; font-size: 200px; letter-spacing: -0.05em; line-height: 1; }
+      #wordmark i { font-style: normal; color: var(--accent); }
+      #cta { background: var(--primary); color: var(--on-primary); font-weight: 700; font-size: 46px; padding: 30px 60px; border-radius: 999px; box-shadow: var(--shadow-md); }
+      #cursor { position: absolute; left: 0; top: 0; width: 56px; height: 56px; opacity: 0; z-index: 5; }
+      #ripple { position: absolute; left: -40px; top: -40px; width: 80px; height: 80px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 4; }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+      <div id="stage">
+        <div id="chat">
+          <div class="bar">
+            <div class="avatar"></div>
+            <div class="who" id="who1"><b>Paciente</b><small>visto às 23:04</small></div>
+            <div class="who" id="who2" style="opacity: 0"><b>Lembrete automático</b><small>enviado pelo WhatsApp</small></div>
+            <div class="tag">ilustrativo</div>
+          </div>
+          <div class="msgs">
+            <div class="bubble in" id="typing"><i></i><i></i><i></i></div>
+            <div class="bubble in" id="b1">não vou conseguir amanhã…<br />posso remarcar?</div>
+            <div class="bubble out" id="b2">Oi! Sua sessão é amanhã, às 10h. Confirma?</div>
+            <div class="bubble in" id="b3">Confirmo {{i:check}}</div>
+          </div>
+        </div>
+      </div>
+      <div id="title"></div>
+      <div id="end">
+        <div id="wordmark">kz<i>.</i></div>
+        <div id="cta">Peça seu acesso</div>
+      </div>
+      <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#2b2b2b" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round" /></svg>
+      <div id="ripple"></div>
+      <div class="note">teste do kit · não publicar</div>
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      const $ = (s) => document.querySelector(s)
+      const s1 = T.scene('s1'), s2 = T.scene('s2'), s3 = T.scene('s3'), s4 = T.scene('s4')
+
+      // slogan: uma palavra por span, a ênfase na última (o texto vem da timeline)
+      const words = T.text('s3').split(' ')
+      $('#title').innerHTML = words.map((w, i) => `<span class="w${i === words.length - 1 ? ' accent' : ''}">${w}</span>`).join(' ')
+
+      // medir antes de qualquer transform (coordenadas do cursor)
+      const root = $('#root').getBoundingClientRect()
+      const ctaR = $('#cta').getBoundingClientRect()
+      const cta = { x: ctaR.left - root.left + ctaR.width * 0.62, y: ctaR.top - root.top + ctaR.height * 0.55 }
+
+      // nada fica parado: a câmera respira o vídeo inteiro
+      tl.fromTo('#stage', { scale: 1 }, { scale: 1.035, duration: s3.start, ease: 'sine.inOut' }, 0)
+
+      // ── s1 · 23:04, a remarcação ─────────────────────────────
+      tl.fromTo('#chat', { y: 40, opacity: 0 }, { y: 0, opacity: 1, ...M.GENTLE, duration: 0.7 }, 0)
+      // digitando de ~0,8 s até a bolha chegar (pontos em loop de 0,9 s, determinístico)
+      const typeFrom = 0.8, typeTo = T.ev('e1') - 0.05
+      tl.fromTo('#typing', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, ...M.FAST, duration: 0.35 }, typeFrom)
+      for (let t = typeFrom; t < typeTo - 0.3; t += 0.9)
+        document.querySelectorAll('#typing i').forEach((dot, k) =>
+          tl.fromTo(dot, { y: 0, opacity: 0.5 }, { y: -10, opacity: 1, duration: 0.22, ease: 'sine.out', yoyo: true, repeat: 1 }, t + k * 0.15))
+      tl.to('#typing', { opacity: 0, scale: 0.9, duration: 0.12, ease: 'power2.in' }, typeTo)
+      tl.fromTo('#b1', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e1'))
+
+      // ── s2 · o lembrete sai sozinho ──────────────────────────
+      M.swap(tl, '#b1', null, T.ev('e2'))
+      M.swap(tl, '#who1', '#who2', T.ev('e2'))
+      tl.fromTo('#b2', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e3'))
+      tl.fromTo('#b3', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e4'))
+      tl.fromTo('#b3 .icon', { scale: 0 }, { scale: 1, ...M.SOFT, duration: 0.5 }, T.ev('e4') + 0.25)
+
+      // ── s3 · o slogan, palavra a palavra no tempo da fala ────
+      // saída termina antes da 1ª palavra entrar (nada sobrepõe na troca)
+      const firstWord = T.word('f3', 0).s - 0.13
+      tl.to('#chat', { y: -60, scale: 0.94, opacity: 0, filter: 'blur(8px)', duration: 0.3, ease: 'power2.in' }, firstWord - 0.32)
+      document.querySelectorAll('#title .w').forEach((el, i) => {
+        const at = T.word('f3', Math.min(i, T.vo('f3').words.length - 1)).s - 0.13 // até 4 quadros antes da palavra
+        tl.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.FAST }, at)
+      })
+      tl.fromTo('#title .accent', { scale: 1 }, { scale: 1.06, duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }, T.ev('e8'))
+      tl.to('#title', { opacity: 0, y: -40, duration: 0.3, ease: 'power2.in' }, T.ev('e6') - 0.4)
+
+      // ── s4 · marca e convite ─────────────────────────────────
+      tl.to('#end', { opacity: 1, duration: 0.3 }, T.ev('e6'))
+      tl.fromTo('#wordmark', { y: 40, scale: 0.96 }, { y: 0, scale: 1, ...M.GENTLE }, T.ev('e6'))
+      tl.fromTo('#cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e6') + 0.25)
+      const C = M.cursor(tl, '#cursor', '#ripple')
+      tl.set('#cursor', { x: cta.x + 260, y: cta.y + 220 }, 0)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e7') - 0.75)
+      C.move(cta, T.ev('e7') - 0.75, 0.65)
+      C.click(cta, T.ev('e7'))
+      C.press('#cta', T.ev('e7'))
+      tl.fromTo('#end', { scale: 1 }, { scale: 1.02, duration: s4.dur, ease: 'sine.inOut' }, s4.start)
+
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

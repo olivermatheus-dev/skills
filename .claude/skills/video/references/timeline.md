@@ -43,3 +43,29 @@ Regras de validação (`node tools/video/timeline.mjs check <pasta>` já acusa a
 - ★ Sem trilha (nunca fundo mudo).
 
 Tipos de evento sugeridos: `click`, `press`, `type`, `hover`, `drag`, `notify`, `swap`, `count`, `reveal`, `cut`, `impact`.
+
+## Campos do kit (tools/video-kit)
+A timeline é **montada a partir do áudio** pelo `tts.mjs` / `fit-vo.mjs` (`layout()` em `scripts/lib.mjs`). Você escreve a intenção; os tempos são calculados.
+
+```json
+{
+  "voice": { "draft": "win-daniel", "final": "el-<nome>" },
+  "music": { "bpm": 84, "gain_db": -11, "duck": 0.7, "synth": { "chords": ["F","C","Dm","Bb"], "sections": [{ "from": 0, "to": 4, "style": "light" }] } },
+  "vo": [ { "id": "f1", "text": "Onze da noite.", "say": "Onze da noite." } ],
+  "scenes": [
+    { "id": "s1", "vo": ["f1"], "lead": 0.3, "gap": 0.2, "tail": 0.3, "min": 0, "on_screen": "23:04" },
+    { "id": "s4", "len": 2.6, "on_screen": "Peça seu acesso" }
+  ],
+  "events": [
+    { "id": "e1", "word": "f1:noite", "offset": -0.1 },
+    { "id": "e2", "scene": "s4", "at": 0.1 },
+    { "id": "e3", "scene": "s4", "before_end": 0.8 }
+  ],
+  "sfx": [ { "event": "e1", "synth": "pop", "gain_db": -3 }, { "event": "e2", "asset": "tonal-piano-f-maior-expansivo-01", "max": 2.6 } ]
+}
+```
+- `vo[].say` = como se fala (números e siglas por extenso); `text` = como se lê. Gerados: `file`, `length`, `start`, `end`, `words` (`words_approx` quando estimado), `voice`.
+- Cena com fala: `lead` (respiro antes; 0,3 na 1ª, 0,15 nas outras, 0,5 com `pause`), `gap` entre falas (0,2), `tail` depois (0,3), `min` (duração mínima). Cena sem fala: `len` (2,5).
+- Evento: `word` (`"f2:WhatsApp"` ou `"f2:3"`, + `offset`), `at` (s após o início da cena) ou `before_end`; `t` é recalculado a cada encaixe.
+- SFX: `asset` (catálogo, com licença) ou `synth` (`pop`, `click`, `swish`, `whoosh`, `typing` + `until`, `chime`, `ding`); `max` corta com fade; `delay` desloca.
+- `music.synth` → `music.mjs` compõe a trilha (própria); ou `timeline.mjs music <id>` (catálogo). `gain_db` = nível da trilha antes do ducking (a trilha é levada a −16 LUFS antes); `duck` 0–1.

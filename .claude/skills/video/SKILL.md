@@ -49,12 +49,12 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 5. **Sem "pode seguir", não anime.**
 
 ### 2. Voz e tempos (o áudio manda no relógio)
-- Locução: **v1.0 com voz gratuita** (skill `locucao`); ElevenLabs só depois do aval. Sem locução: escolha o BPM e monte a grade.
-- `timeline.json` nasce do áudio: ≤ 0,5 s entre falas; pausa ≤ 1 s só na virada (`"pause": true`); a cena dura o que a fala dura; cortes nos tempos fortes.
+- Locução: **v1.0 com voz gratuita** (`tts.mjs`, voz de rascunho da empresa; skill `locucao`); ElevenLabs só depois do aval, encaixada com `fit-vo.mjs`. Sem locução: escolha o BPM e monte a grade (cenas com `len`).
+- `timeline.json` nasce do áudio: o `tts.mjs` mede cada fala e monta cenas e eventos (`lead`/`gap`/`tail`/`min`/`len`; eventos presos a palavra, `at` ou `before_end`). ≤ 0,5 s entre falas; pausa ≤ 1 s só na virada (`"pause": true`); a cena dura o que a fala dura.
 - Gestos em `events`; cada SFX aponta para um evento e um asset licenciado do catálogo. Trilha e efeitos: skill `audio` (agente `sound-designer` no médio/alto). Trilhas candidatas trocadas com `timeline.mjs music`.
 
 ### 3. Cenas (`composition.html`)
-- Linkar `../../brand/brand.css`; nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`knowledge/video/tecnico.md`); uma cena = um grupo com início/fim do `timeline.json`.
+- Linkar `brand/brand.css` (o `produce.mjs` copia a marca para o render); nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`tools/video-kit/GUIA-TECNICO.md`); **todo tempo vem de `T.scene/T.ev/T.word`** ou dos marcadores `__S:<cena>__ __D:<cena>__ __E:<evento>__`, nunca número escrito à mão (é o que deixa trocar a voz sem reescrever).
 - **Cena isolada e elástica** (para virar variante sem reescrever): sem cor ou texto fixo dentro (tokens do `brand.css` + `params`/`on_screen` do `timeline.json`), animação em tempo relativo (entrada · hold · saída), sem depender da cena vizinha. Contrato completo: `roadmap/tasks/013-cenas-modulares-variantes/TASK.md`.
 - Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
@@ -62,7 +62,7 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 
 ### 4. Conferir
 - Simples: `node tools/video/timeline.mjs check <pasta>`.
-- Médio: + build e check do kit → **olhar as folhas de contato dos formatos** (texto cortado/fora da área segura, sobreposição, cursor fora do quadro, cor fora da marca, palavra fora da fala, proibições, contraste com `node tools/contrast.mjs`).
+- Médio: + `produce --build-only` e `check.mjs` → **olhar as folhas de contato dos formatos** (texto cortado/fora da área segura, sobreposição, cursor fora do quadro, cor fora da marca, palavra fora da fala, proibições, contraste com `node tools/contrast.mjs`).
 - Alto: + passadas de `knowledge/video/qc-final.md` + delegar ao `revisor` → corrigir → **2ª rodada de polimento** (curvas, offsets, som).
 - Problema = corrija a causa, não o sintoma. Crítico e maior antes de exportar.
 
@@ -78,7 +78,8 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 `node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …` troca voz, duração, texto e trilha e reencaixa o resto. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
 ## Kit (motor de render)
-Esperado em `tools/video-kit/`: HyperFrames em versão fixa + GSAP + `motion.js` + scripts `tts`, `words`, `music`, `sfx`, `mix`, `produce` (`--build-only`), `check`. **Estado:** a importar do kit do Ludus na máquina local (tarefa 003). **Sem o kit:** entregue as etapas 1–3 e avise que o render está pendente; não improvise outro render.
+`tools/video-kit/` (HyperFrames 0.8.94 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
+Ordem: `tts` → `music` (ou trilha do catálogo) → `sfx` → `mix` → `produce --build-only` → `check` (olhar) → `produce` → `qc.mjs --sheet` (olhar).
 
 ## Nunca
 - Animar antes do plano aprovado (exceto nível simples com pedido claro).

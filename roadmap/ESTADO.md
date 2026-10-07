@@ -46,6 +46,8 @@
 - **Arquitetura de assets definida:** mapa em `library/README.md`. `library/fx` saiu de `visual/` (alinhado à 014); criados `motion/`, `looks/`, `templates/`. Entrada bruta em `_inbox/{audio,visual,video}/`.
 - **Biblioteca de SFX importada (2026-10-07):** 560 sons do pacote EditorPro (~210 min) em `library/audio/sfx/` (14 categorias, foley com 5 subpastas), catalogados com duração, pico e tom; índice em `library/audio/INDEX.md`. Ferramenta `tools/audio/import.mjs` + `catalog.mjs license|index|search --q`. Licença registrada: pacote comprado pelo Oliver, uso comercial liberado (`EditorPro-comprado (uso comercial)`). 3 duplicatas exatas ficaram em `_inbox/audio/SFX Risers PRO/` para ele apagar.
 
+- **Kit de vídeo pronto (003, 2026-10-07):** `tools/video-kit/` (HyperFrames 0.8.94 + GSAP, do kit do Ludus, adaptado). Voz de rascunho grátis do Windows com tempo por palavra → timeline montada do áudio → trilha (sintetizada ou catálogo) → SFX da biblioteca → mix −14 LUFS → render com motion blur → QC. Voz final: `fit-vo.mjs` trata e reencaixa. Teste da kz em `companies/kz/contents/2026-10-07-teste-kit/` (não publicar). Molde: `library/templates/video/base/`. Vozes: `library/voices/` + `brand/voices.json`. **Próximo:** 020 (skill ElevenLabs) quando houver plano/voz; produção real da kz (006) depende das pendências abaixo.
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".
@@ -55,13 +57,11 @@
    - o mínimo de 6 anúncios por teste no ads-meta serve?
    - o teto de 550–600 palavras por `fmt-*` fica?
 
-## Próximo passo técnico (na máquina local do Oliver)
-- **Tarefa 003:**
-  1. trazer o `_kit` do Ludus (HyperFrames + GSAP, `motion.js`, scripts tts/words/music/sfx/mix/produce/check) para `tools/video-kit/`, de forma genérica;
-  2. confirmar Windows, ffmpeg e Python;
-  3. renderizar o 1º vídeo de teste (sugestão: `fmt-dialogo` da kz).
+## Próximo passo técnico
+- **Feito:** tarefa 003 (kit de vídeo). Falta só o teste 3D (aguarda prints da kz).
 - **Depois:**
-  - tarefa 008 (biblioteca de áudio inicial);
+  - tarefa 020 (skill ElevenLabs + vozes finais);
+  - tarefa 008 (trilhas e bases; SFX já importados);
   - tarefa 009 (MCP de edição);
   - tarefa 007 (`project.yml`, personas, comentários, concorrentes).
 - **Meta do MVP:** 12 posts da kz (tarefa 006).

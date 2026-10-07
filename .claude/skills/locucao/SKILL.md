@@ -10,12 +10,14 @@ Política de custo:
 - **Depois do aval:** voz final na ElevenLabs. O Oliver gera fora da API, ou um agente no navegador gera, e devolve o arquivo.
 - **Encaixe:** feito pela ferramenta `timeline.mjs`, quase sem gastar tokens.
 
-## 1. v1.0: voz de modelo (rascunho)
-- Use um TTS gratuito disponível na máquina (definido na tarefa 003; ex.: Piper local ou o TTS do kit). Salve em `audio/vo/<fala>.wav`.
-- Encaixe cada fala: `node tools/video/timeline.mjs vo <pasta> <fala> <arquivo>`.
-- Registre no `plano.md`: "voz de rascunho; trocar pela final após aval".
+## 1. v1.0: voz de rascunho (padrão de todo vídeo)
+- `node tools/video-kit/scripts/tts.mjs <pasta>`: gera todas as falas com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo `library/voices/`). Padrão: **Windows** (`win-daniel`/`win-maria`, offline); opção mais natural e grátis: `--voice edge-thalita` (online). Corta o silêncio, mede cada palavra e **encaixa a timeline** sozinho.
+- Número, hora e sigla: escreva em `vo[].say` como se fala ("onze da noite"); `text` fica como se lê.
+- Registre no `plano.md`: "voz de rascunho; trocar pela final após aval". **Nunca publicar com voz de rascunho.**
 
 ## 2. Voz final: roteiro no formato ElevenLabs
+> A skill própria de ElevenLabs (vozes escolhidas, ajustes por voz, API com tempos por palavra) está na tarefa 020. Até lá, vale o formato abaixo.
+
 Entregue `<pasta>/locucao-elevenlabs.md` com **um bloco por fala**, pronto para copiar:
 
 ```
@@ -46,12 +48,13 @@ Regras do texto. Confira a documentação atual da ElevenLabs, porque os modelos
 - **Duração-alvo** por fala (da timeline atual), para quem gerar saber se precisa acelerar ou cortar.
 
 ## 3. Encaixe da voz final (quase zero token)
-O Oliver solta os arquivos em `<pasta>/audio/vo/` (ou na `_inbox/`). Para cada fala:
+Os arquivos da ElevenLabs (um por fala, nomeados pelo id: `f1.mp3`, `f2.mp3`…) chegam numa pasta qualquer (ex.: `_inbox/audio/<vídeo>/`):
 ```
-node tools/video/timeline.mjs vo <pasta> f1 <arquivo>
-node tools/video/timeline.mjs check <pasta>
+node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-com-os-arquivos>
+node tools/video-kit/scripts/fit-vo.mjs <pasta> f2 <arquivo> --words <tempos.json>   (uma fala, com tempos exatos da API)
 ```
-A ferramenta mede a duração nova, reencaixa tudo o que vem depois e acusa silêncios acima do limite e textos sem tempo de leitura. Os tempos por palavra ficam **aproximados** (`words_approx`); para precisão, rode o script `words` do kit. Depois, só re-render.
+O script guarda o original (`audio/vo/final/`), **corta o silêncio das pontas, padroniza** (mono 48 kHz, sem grave abaixo de 70 Hz), mede, **reencaixa cenas e eventos** (os presos a palavras andam junto) e avisa as falas que mudaram mais de 0,6 s. Sem `--words`, os tempos por palavra são estimados (`words_approx`): confira os gestos presos a palavras nos quadros do `check.mjs`.
+Depois: ajustes pontuais na timeline (`lead`/`gap`/`tail`/`min`, ou `timeline.mjs text|dur`) → `sfx` → `mix` → `produce --build-only` → `check` → `produce` → `qc.mjs --sheet`.
 
 ## Nunca
 - Gastar crédito de voz final antes do aval da v1.0.
