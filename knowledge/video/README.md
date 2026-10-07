@@ -11,10 +11,13 @@ Regras **executáveis** de edição e motion, já verificadas, para as skills de
 | `formatos-e-areas-seguras.md` | tamanhos, recorte 3:4 da grade, áreas seguras em 9:16, durações | todo vídeo e imagem |
 | `visual-e-cor.md` | defaults de fundo, cor, ênfase, efeitos e tipografia (anti-erros típicos de IA) | qualquer cena |
 | `tecnico-hyperframes.md` | armadilhas medidas de HyperFrames/GSAP e de render HTML | escrever o código das cenas |
+| `pacing-e-atencao.md` | escala de intensidade 0–4, curva de energia, densidade, pattern interrupt motivado, diagnóstico | desenhar a curva do vídeo e revisar o ritmo |
+| `cobertura-e-reacao.md` | função do próximo plano; cutaway, insert, reação, eyeline, shot/reverse, match, smash (com tradução para motion) | escolher cada troca de cena |
+| `b-roll.md` | tipos de B-roll por objetivo, sincronia semântica, fontes e integridade, clichês proibidos | escolher o visual que acompanha a fala |
 | `som.md` | BPM e cortes, desenho de som de trailer, ducking, −14 LUFS | trilha, SFX, mix |
 | `cortes-e-montagem.md` | motivação do corte, hard/jump/J/L-cut, cut on action, match cut em motion | toda edição e toda troca de cena em motion |
 
-Ordem de leitura sugerida: esteira → briefing → formatos → visual → ritmo → movimento → som → cortes → técnico.
+Ordem de leitura sugerida: esteira → briefing → formatos → visual → ritmo → pacing → movimento → som → cortes → cobertura → b-roll → técnico.
 
 Temas previstos (criar quando chegar material): tipografia cinética · composição e hierarquia · retenção e hooks · 3D. A estrutura por tipo de vídeo fica nas skills `fmt-*`.
 

@@ -21,7 +21,7 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 ## Ordem de trabalho
 1. **Plano:** `plano.md` a partir do roteiro, com folha de batidas técnica, cor/fundo por cena, transições (máx. 2), BPM e afirmações com fonte. → **Portão: `AGUARDANDO AVAL` do Oliver.** Não escreva código antes.
 2. **Áudio e tempos:** voz (TTS do kit; ElevenLabs via `tools/` lendo `ELEVENLABS_API_KEY` do `.env`) → tempo por palavra → `timeline.json`. Sem locução: grade de BPM.
-3. **Cenas:** `composition.html` com `brand.css` linkado e a biblioteca de movimento do kit. Ler sob demanda `knowledge/video/visual-e-cor.md`, `movimento.md`, `cortes-e-montagem.md`, `tecnico-hyperframes.md`.
+3. **Cenas:** `composition.html` com `brand.css` linkado e a biblioteca de movimento do kit. Ler sob demanda `knowledge/video/visual-e-cor.md`, `movimento.md`, `cortes-e-montagem.md`, `cobertura-e-reacao.md`, `b-roll.md`, `tecnico-hyperframes.md`. A curva de intensidade (0–4) do plano sai de `pacing-e-atencao.md`.
 4. **Conferir:** check do kit + folhas de contato. Corrigir até ficar limpo.
 5. **Exportar:** os formatos pedidos, motion blur e áudio medido (−14 LUFS, true peak ≤ −1 dBTP).
 6. **Concluir:** caminhos dos MP4, medições e "não verificado: áudio (o Claude não escuta)".

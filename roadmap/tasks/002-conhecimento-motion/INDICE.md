@@ -8,6 +8,9 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | material/2026-10-07-etapa1-cortes-montagem.md | fundamentos de corte, hard/jump/J/L-cut, cut on action | knowledge/video/cortes-e-montagem.md | destilado |
 | 2026-10-07 | material/2026-10-07-skill-ludus-video.md (skill do produto Ludus) | processo de produção, arquitetura de skill, QA, export | knowledge/video/esteira-de-producao.md + tarefas 001, 003, 004 | destilado |
 | 2026-10-07 | material/2026-10-07-prompts-video-e-trailer.md (prompt do Ludus + prompt de trailer de um editor) | briefing, direção, arco, movimento, ritmo, som | knowledge/video/briefing-e-direcao.md, movimento.md, ritmo-e-leitura.md, som.md | destilado |
+| 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 2 — cobertura, continuidade e reação | cutaway, insert, reação, eyeline, shot/reverse, match, smash, sistema de decisão | knowledge/video/cobertura-e-reacao.md | destilado |
+| 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 3 — B-roll e cobertura visual | 11 tipos de B-roll, sincronia semântica, fontes, integridade, QC | knowledge/video/b-roll.md | destilado |
+| 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 4 — ritmo, pacing e atenção | macro/micro, densidade, interrupt motivado, escala 0–4, diagnóstico, QC | knowledge/video/pacing-e-atencao.md (+ ajuste em ritmo-e-leitura) | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -57,3 +60,17 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - o overflow da máscara corta as descendentes.
   - **Específico do Ludus** (cores `#F5F5F7`, `#1D1D1F` e `#F2A61C`, Inter com −0,055 em, proibição de caixa alta, elenco fictício) → **exemplo preenchido de `BRAND.md`** na tarefa 001.
   - **Motion blur:** o guia confirma 2 amostras (60→30 fps) com obturador de 180°. A nota sobre o risco de "fantasma" continua válida.
+- **2026-10-07 · Etapas 2, 3 e 4:** o conteúdo está correto e alinhado à prática profissional. O bruto não foi salvo, para economizar contexto; a destilação preserva todas as regras. O que mudou:
+  - **Conflito resolvido:** a regra antiga "algo novo a cada 2–3 s" contradizia o "não use intervalos fixos". Agora os 2–3 s são um **teto**, não um metrônomo, e as mudanças precisam de motivo.
+  - **Tradução para motion** em cada técnica de cobertura:
+    - insert → zoom em elemento da interface;
+    - eyeline → cursor ou seta que conduz;
+    - shot/reverse → foco alternado no diálogo;
+    - smash → caos→calma.
+  - **B-roll:**
+    - ordem para SaaS em motion: tela do produto → evidência → conceito da história;
+    - clichês da marca somam-se aos clichês gerais no `BRAND.md`.
+  - **Pacing:**
+    - a escala de intensidade 0–4 virou **coluna obrigatória** na folha de batidas do `plano.md`, junto com a "função da cena";
+    - curva típica de um vídeo curto de produto: 3-2-1/2-3-4-1.
+  - **Ligações:** skill `video`, `plano.md`, `editor-de-video` e `revisor` agora apontam para os 3 arquivos novos.

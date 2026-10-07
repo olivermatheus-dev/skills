@@ -14,7 +14,7 @@
 - Cartão final com CTA: **≥ 2 s** (anúncio: 2–3 s).
 
 ## 3. Densidade
-- **Algo novo a cada 2–3 s** em short-form: nova linha, mudança de estado, corte, gesto. "Novo" não precisa ser efeito.
+- **Teto de 2–3 s sem novidade** em short-form (nova linha, mudança de estado, corte, gesto; "novo" não precisa ser efeito). É **teto, não metrônomo**: as mudanças variam de intervalo e precisam de motivo (ver `pacing-e-atencao.md`).
 - Nunca deixe a **tela parada esperando a voz**: a ação longa acontece debaixo da fala.
 - Ritmo não é uniforme: **acelere no build, segure na virada e na revelação**. Contraste de ritmo é o que dá impacto.
 

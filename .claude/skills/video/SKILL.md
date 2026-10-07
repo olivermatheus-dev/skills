@@ -14,8 +14,8 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | empresa | `companies/<slug>/brand/BRAND.md` (proibições = regra dura) · `context/AUDIENCE.md` · `context/BUSINESS.md` (o que é verdade) · `context/VOICE.md` |
 | formato pedido | `.claude/skills/fmt-<formato>/SKILL.md`, se existir (receita de cenas) |
 | vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
-| montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `som.md` |
-| escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `tecnico-hyperframes.md` |
+| montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
+| escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `tecnico-hyperframes.md` |
 
 Precedência: **BRAND.md > receita do fmt-* > knowledge/video (defaults)**.
 

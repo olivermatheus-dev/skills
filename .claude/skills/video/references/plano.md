@@ -19,11 +19,12 @@ Escolhido: … (alternativas consideradas: … / …)
 Total: N palavras ≈ N/2,7 s (cabe na duração?)
 
 ## 5. Folha de batidas
-| # | tempo ≈ | bloco | na tela | o que quem assiste precisa entender | som |
-|---|---|---|---|---|---|
-| 1 | 0,0–2,0 | gancho | | | |
-| … | | conceito / produto / virada / revelação | | | |
-| n | últimos ≥ 2 s | cartão final | CTA + marca | | impacto/cauda |
+| # | tempo ≈ | bloco | intensidade (0–4) | na tela | função da cena | o que quem assiste precisa entender | som |
+|---|---|---|---|---|---|---|---|
+| 1 | 0,0–2,0 | gancho | 3 | | | | |
+| … | | conceito / produto / virada / revelação | | | | | |
+| n | últimos ≥ 2 s | cartão final | 1 | CTA + marca | | | impacto/cauda |
+Curva de intensidade tem subida e descida (nunca 4 contínuo) · cada cena com função nomeável (`cobertura-e-reacao.md`, `b-roll.md`).
 BPM (se houver trilha): … · Transições escolhidas (máx. 2): …
 
 ## 6. Cor e fundo por cena

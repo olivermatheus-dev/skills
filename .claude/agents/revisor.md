@@ -17,8 +17,8 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 |---|---|
 | todo texto | `.claude/skills/landing-page/references/qa-copy.md` · `context/BUSINESS.md` (verdade + regras do nicho) · `context/VOICE.md` |
 | visual (PNG, cenas) | `brand/BRAND.md` (proibições = bloqueante) · `knowledge/video/visual-e-cor.md` · `formatos-e-areas-seguras.md` · `node tools/contrast.mjs` |
-| plano de vídeo | `knowledge/video/esteira-de-producao.md` §3 (plano) · `briefing-e-direcao.md` (arco) · `ritmo-e-leitura.md` (palavras por duração) |
-| vídeo renderizado | folhas de contato + checklists de `movimento.md`, `ritmo-e-leitura.md`, `som.md` (medições de áudio) |
+| plano de vídeo | `knowledge/video/esteira-de-producao.md` §3 (plano) · `briefing-e-direcao.md` (arco) · `ritmo-e-leitura.md` (palavras por duração) · `pacing-e-atencao.md` (curva de intensidade) · `b-roll.md` (função de cada cena) |
+| vídeo renderizado | folhas de contato + checklists de `movimento.md`, `ritmo-e-leitura.md`, `pacing-e-atencao.md`, `cobertura-e-reacao.md`, `som.md` (medições de áudio) |
 
 ## Bloqueante (volta ao autor)
 - Afirmação sem fonte, número inventado.
