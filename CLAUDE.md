@@ -39,8 +39,9 @@ Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
 | `ads-meta` | criar e analisar anúncios Meta/Instagram |
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
 | `launch-plan` | plano de lançamento semana a semana |
+| `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 
-Fluxo típico: `content-ideas` → `ig-post` → `carousel`. Venda: `COPY.md` → `landing-page` + `ads-meta`.
+Fluxo típico: `content-ideas` → `ig-post` → `carousel` (imagem) ou `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
 
 ## Ao terminar uma tarefa
 - Salve a peça na pasta certa (acima).
