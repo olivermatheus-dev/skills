@@ -1,0 +1,34 @@
+[
+  {
+    "id": "R-01",
+    "title": "Calendário de conteúdo do mês",
+    "every": "mensal:25",
+    "board": "conteudo",
+    "assignee": "agent:estrategista",
+    "priority": "media",
+    "description": "Montar o calendário do próximo mês com a skill content-ideas e levar ao Oliver para escolher as pautas.",
+    "checklist": [
+      "Ler resultados do mês",
+      "Gerar pautas e calendário",
+      "Portão: Oliver escolhe"
+    ],
+    "active": true,
+    "last": "2026-09-25"
+  },
+  {
+    "id": "R-02",
+    "title": "Revisão semanal do quadro",
+    "every": "semanal:seg",
+    "board": "produto",
+    "assignee": "agent:estrategista",
+    "priority": "media",
+    "description": "Ler o quadro da kz, apontar o que está parado ou bloqueado e sugerir as 3 prioridades da semana (log + portão para o Oliver).",
+    "checklist": [
+      "Rodar node tools/board.mjs kz",
+      "Listar bloqueios e tarefas paradas",
+      "Sugerir 3 prioridades"
+    ],
+    "active": true,
+    "last": ""
+  }
+]

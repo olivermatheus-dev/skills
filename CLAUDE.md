@@ -66,7 +66,11 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
   | `editor-de-video` | plano, voz, cenas e MP4 em motion |
   | `revisor` | QA de tudo antes de ir para o Oliver |
 
-  Todos seguem `.claude/skills/orquestrar/references/protocolo.md`.
+  Todos seguem `.claude/skills/orquestrar/references/protocolo.md` e leem suas instruções permanentes em `.claude/agent-notes/<agente>.md`.
+- **Falar com um agente:**
+  - instrução permanente → `.claude/agent-notes/`;
+  - trabalhar junto → `claude --agent <agente>` num terminal.
+- **Heartbeat:** `node tools/heartbeat.mjs --run [--watch 30]` acorda os agentes com tarefa pronta e cria as recorrentes (`board/recorrentes.json`). Detalhes na skill `orquestrar`.
 
 ## Construção do hub (roadmap)
 Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados), `INTEL.md` (inteligência de mercado), `APP.md` (visão do app: projetos, kanban, concorrentes, agentes) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).

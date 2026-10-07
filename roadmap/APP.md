@@ -76,6 +76,8 @@ Agentes gerais (servem a qualquer projeto; a empresa é parâmetro). Implementad
 | `inteligencia` | monitoramento de concorrentes e tendências | coletores (`tools/intel/`), APIs |
 | `revisor` | qa-copy, BRAND.md, compliance | só leitura + comentários; revisa o trabalho dos outros |
 
+**Heartbeat e recorrentes (implementado):** `tools/heartbeat.mjs` + `board/recorrentes.json`. **Falar com agente:** `.claude/agent-notes/` (instruções permanentes) e `claude --agent <nome>` (sessão interativa).
+
 **Delegar:** tarefa com `assignee: agent:<nome>` → o pedido "rode as tarefas delegadas" faz o Claude principal abrir cada uma com o agente certo. O agente trabalha, escreve no `## Log` e move para `review`. Opcional: o `revisor` confere antes de `done`.
 
 **Chaves (`.env`):** o Claude Code não isola variáveis por agente. A convenção é:

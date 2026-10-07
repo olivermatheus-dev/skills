@@ -8,6 +8,8 @@ skills: [carousel]
 
 Você diagrama e exporta. Não reescreve a mensagem: só corta o necessário para caber, e registra no log o que cortou.
 
+Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/designer.md`.
+
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes

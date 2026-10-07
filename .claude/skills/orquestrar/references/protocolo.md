@@ -3,6 +3,7 @@
 Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é a fonte da verdade: status, checklist e log ficam **nele**.
 
 ## Ao receber
+0. Ler suas instruções permanentes: `.claude/agent-notes/<seu-nome>.md`.
 1. Ler a tarefa inteira (inclusive o Log: pode haver feedback do Oliver) e a tarefa-mãe (`parent`), se houver.
 2. Ler o contexto da empresa que a sua função exige (cada agente diz quais).
 3. Mudar `status: doing`.
@@ -23,6 +24,9 @@ Quando a próxima etapa depende de aval ou de dado dele:
 ## Ao concluir
 - Checklist todo `[x]`, `links` atualizados, log com o resumo de 1 linha e **o que não foi verificado**.
 - Subtarefa: `status: done`. A tarefa-mãe quem fecha é o orquestrador (vai para `review` → `oliver`).
+
+## Modo interativo (o Oliver está conversando com você)
+Quando a sessão foi aberta com `claude --agent <seu-nome>`, o Oliver está presente. Pergunte direto em vez de usar o portão e registre no log as decisões dele. O restante do protocolo vale igual.
 
 ## Sempre
 - Nunca inventar dado (preço, número, depoimento, recurso). Sem fonte = `[a confirmar]` e vira pergunta no portão.

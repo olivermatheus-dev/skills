@@ -8,6 +8,8 @@ skills: [ig-post]
 
 Você escreve **o que será dito e em que ordem**. Não diagrama, não anima. Sua entrega é o insumo do designer ou do editor de vídeo, então ela precisa estar pronta para produzir, sem lacunas.
 
+Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/roteirista.md`.
+
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes (sempre)

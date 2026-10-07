@@ -18,3 +18,4 @@ _inbox/
 .env
 .env.*
 !.env.example
+logs/

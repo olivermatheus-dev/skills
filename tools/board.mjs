@@ -6,42 +6,17 @@
 //   node tools/board.mjs <slug> --board conteudo
 //   node tools/board.mjs <slug> --check    valida os campos
 //   node tools/board.mjs <slug> --next-id  próximo id livre
-import { readdirSync, readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
-
-const STATUS = ['backlog', 'todo', 'doing', 'review', 'done'];
-const BOARDS = ['conteudo', 'vendas', 'produto'];
-const PRIORITY = ['baixa', 'media', 'alta'];
+import { existsSync } from 'node:fs';
+import { STATUS, BOARDS, PRIORITY, boardDir, listTasks, nextId } from './lib/board.mjs';
 
 const [slug, ...args] = process.argv.slice(2);
 if (!slug) { console.log('Uso: node tools/board.mjs <slug> [--me|--ai|--board X|--check|--next-id]'); process.exit(1); }
-const dir = join('companies', slug, 'board');
+const dir = boardDir(slug);
 if (!existsSync(dir)) { console.log(`Sem quadro: ${dir}`); process.exit(1); }
-
-const parse = (file) => {
-  const txt = readFileSync(join(dir, file), 'utf8');
-  const m = txt.match(/^---\n([\s\S]*?)\n---/);
-  const t = { file };
-  if (!m) return t;
-  for (const line of m[1].split('\n')) {
-    const kv = line.match(/^([\w-]+):\s*(.*)$/);
-    if (!kv) continue;
-    let v = kv[2].trim();
-    if (v.startsWith('[') && v.endsWith(']')) v = v.slice(1, -1).split(',').map((x) => x.trim()).filter(Boolean);
-    t[kv[1]] = v;
-  }
-  const body = txt.slice(m[0].length);
-  const done = (body.match(/- \[x\]/gi) || []).length;
-  const all = done + (body.match(/- \[ \]/g) || []).length;
-  t.check = all ? `${done}/${all}` : '';
-  return t;
-};
-
-const tasks = readdirSync(dir).filter((f) => /^T-\d+.*\.md$/.test(f)).map(parse);
+const tasks = listTasks(slug);
 
 if (args.includes('--next-id')) {
-  const n = Math.max(0, ...tasks.map((t) => parseInt((t.id || 'T-0').slice(2), 10) || 0)) + 1;
-  console.log(`T-${String(n).padStart(4, '0')}`);
+  console.log(nextId(tasks));
   process.exit(0);
 }
 

@@ -38,5 +38,26 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 
 **Interativo fica na sessão principal:** cadastro de empresa (`setup`) e qualquer coisa que dependa de conversa com o Oliver. Agentes não conversam com ele, só usam o portão.
 
+## Falar com um agente
+| o Oliver quer | como |
+|---|---|
+| **instrução que vale sempre** ("roteirista, nunca use 'incrível'") | acrescentar em `.claude/agent-notes/<agente>.md` (`- AAAA-MM-DD · instrução`) e confirmar |
+| **instrução para uma tarefa** | escrever no log da tarefa (`- data · oliver · instrução`) e, se ela estiver parada, delegar de novo |
+| **pergunta rápida ao agente** | chamar o agente pelo Agent tool com a pergunta e repassar a resposta |
+| **trabalhar junto com o agente** | abrir outro terminal: `claude --agent <agente>` e dizer "vamos trabalhar na T-NNNN". A sessão vira o próprio agente, que conversa com o Oliver (modo interativo do protocolo) |
+
+## Heartbeat e recorrentes (trabalho sem o Oliver olhando)
+- **Caso comum = delegação direta:** o orquestrador chama o agente na hora. O heartbeat é só para o que roda sozinho.
+- `node tools/heartbeat.mjs` (simulação) · `--run` (executa) · `--run --watch 30` (a cada 30 min, num terminal aberto). Filtros: `--slug`, `--agent`, `--max`.
+  - Cada batida faz duas coisas:
+    1. cria as tarefas recorrentes vencidas;
+    2. acorda o agente da próxima tarefa pronta (`todo`, de agente, dependências `done`), via `claude -p --agent <nome>`.
+  - Log em `logs/heartbeat/`.
+- **Recorrentes:** `companies/<slug>/board/recorrentes.json`, com `every`: `diario` · `semanal:seg` · `mensal:25`. Desligar uma = `"active": false`.
+- **Agendar no sistema:**
+  - Windows: `schtasks /create /sc minute /mo 30 /tn hub-heartbeat /tr "cmd /c cd /d <repo> && node tools\heartbeat.mjs --run"`;
+  - Mac/Linux: `*/30 * * * * cd <repo> && node tools/heartbeat.mjs --run`.
+- **Permissões:** o heartbeat roda com `--permission-mode acceptEdits` e uma lista de ferramentas permitidas (variáveis `HEARTBEAT_PERMISSION_MODE` e `HEARTBEAT_ALLOWED_TOOLS`). Nunca usar o modo que pula permissões.
+
 ## Agentes
 `.claude/agents/`: `estrategista`, `roteirista`, `designer`, `editor-de-video`, `revisor`. Cada um sabe suas skills e a ordem delas.

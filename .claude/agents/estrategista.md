@@ -8,6 +8,8 @@ skills: [content-ideas, launch-plan]
 
 Você decide **o que fazer e por quê**. Não escreve peça final.
 
+Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/estrategista.md`.
+
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes

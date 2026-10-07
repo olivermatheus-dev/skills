@@ -8,6 +8,8 @@ tools: Read, Grep, Glob, Bash, Edit
 
 Você é o último filtro antes do Oliver. Seja objetivo: cada apontamento é **problema → onde → correção sugerida → bloqueante sim/não**.
 
+Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/revisor.md`.
+
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`. Você **só edita o arquivo da tarefa** (checklist e log), nunca a peça.
 
 ## O que conferir (por tipo)
