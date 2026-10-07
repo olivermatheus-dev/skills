@@ -1,28 +1,29 @@
 // Editar concorrente: nome, tipo, status, tags, favorito, perfis (adicionar/remover) e observações (markdown). Excluir com confirmação.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 import { api, type Competitor, type DetectedLink } from '../../api';
 import { MarkdownEditor } from '../Markdown';
 import { Button, Drawer, ErrorBox, Field, Input, Select } from '../ui';
-import { KINDS, PlatformIcon, Spinner, keyFor, platformLabel, slugify } from './lib';
+import { useCompetitorActions } from './useCompetitorActions';
+import { KINDS, PlatformIcon, keyFor, platformLabel, slugify } from './lib';
 
 type Prof = Competitor['profiles'][number];
 
-export default function EditCompetitor({ slug, open, onClose, data, body, snapshotsCount }: {
-  slug: string; open: boolean; onClose: () => void; data: Competitor; body: string; snapshotsCount: number;
+/** Salvar e excluir são otimistas: o painel fecha na hora; erro → `onFailed` reabre com o rascunho e o erro. */
+export default function EditCompetitor({ slug, open, onClose, onFailed, data, body, snapshotsCount, initialError }: {
+  slug: string; open: boolean; onClose: () => void; onFailed: (draft: { data: Competitor; body: string }, error: unknown) => void;
+  data: Competitor; body: string; snapshotsCount: number; initialError?: unknown;
 }) {
-  const qc = useQueryClient();
   const nav = useNavigate();
+  const actions = useCompetitorActions(slug);
   const [d, setD] = useState(data);
   const [md, setMd] = useState(body);
   const [tags, setTags] = useState(data.tags.join(', '));
   const [link, setLink] = useState('');
   const [det, setDet] = useState<DetectedLink | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<unknown>(initialError ?? null);
 
-  useEffect(() => { if (open) { setD(data); setMd(body); setTags(data.tags.join(', ')); setLink(''); setDet(null); setError(null); } }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (open) { setD(data); setMd(body); setTags(data.tags.join(', ')); setLink(''); setDet(null); setError(initialError ?? null); } }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!link.trim()) { setDet(null); return; }
     const t = setTimeout(() => api.detectLink(link).then(setDet).catch(() => setDet(null)), 200);
@@ -39,26 +40,16 @@ export default function EditCompetitor({ slug, open, onClose, data, body, snapsh
     setLink('');
   };
 
-  async function save() {
-    setBusy(true); setError(null);
-    try {
-      const tagList = [...new Set(tags.split(/[,\n]/).map((t) => slugify(t.trim().replace(/^#/, ''))).filter((t) => t && t !== 'item'))];
-      await api.saveCompetitor(slug, d.id, { ...d, tags: tagList }, md);
-      qc.invalidateQueries({ queryKey: ['competitor', slug, d.id] });
-      qc.invalidateQueries({ queryKey: ['competitors', slug] });
-      qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
-      onClose();
-    } catch (e) { setError(e); } finally { setBusy(false); }
+  function save() {
+    const tagList = [...new Set(tags.split(/[,\n]/).map((t) => slugify(t.trim().replace(/^#/, ''))).filter((t) => t && t !== 'item'))];
+    const next = { ...d, tags: tagList };
+    void actions.save(d.id, next, md, { onError: (e) => onFailed({ data: next, body: md }, e) });
+    onClose();
   }
-  async function remove() {
+  function remove() {
     if (!window.confirm(`Excluir "${d.name}"?\n\nApaga a pasta inteira: ${snapshotsCount} coleta(s), marcações e imagens. Não dá para desfazer.\n(Para só parar de acompanhar, use Status → Arquivado.)`)) return;
-    setBusy(true);
-    try {
-      await api.deleteCompetitor(slug, d.id);
-      qc.invalidateQueries({ queryKey: ['competitors', slug] });
-      qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
-      nav(`/p/${slug}/concorrentes`);
-    } catch (e) { setError(e); setBusy(false); }
+    void actions.remove(d.id, { onError: () => nav(`/p/${slug}/concorrentes/${d.id}`) });
+    nav(`/p/${slug}/concorrentes`);
   }
 
   return (
@@ -108,10 +99,10 @@ export default function EditCompetitor({ slug, open, onClose, data, body, snapsh
 
       <ErrorBox error={error} />
       <div className="flex items-center gap-2 mt-4 sticky bottom-0 bg-surface py-3 border-t border-border">
-        <Button variant="danger" onClick={remove} disabled={busy}>Excluir</Button>
+        <Button variant="danger" onClick={remove}>Excluir</Button>
         <div className="flex-1" />
-        <Button variant="ghost" onClick={onClose} disabled={busy}>Cancelar</Button>
-        <Button onClick={save} disabled={busy || !d.name.trim()}>{busy ? <Spinner /> : 'Salvar'}</Button>
+        <Button variant="ghost" onClick={onClose}>Cancelar</Button>
+        <Button onClick={save} disabled={!d.name.trim()}>Salvar</Button>
       </div>
     </Drawer>
   );

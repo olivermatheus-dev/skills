@@ -1,13 +1,16 @@
 // Personas: cartões por papel + editor lateral com todos os campos do schema e a história em markdown.
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Persona } from '../api';
 import { Button, Card, Drawer, Empty, ErrorBox, Field, Input, LinesInput, PageHeader, Select, Textarea, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { AWARENESS, AwarenessMeter } from '../components/personas/awareness';
 import { tidyMd } from '../components/notes/tidy';
+import { qk, realId, removeDoc, runOptimistic, trackCreate, upsertDoc, usePersonas } from '../queries';
+import { toast } from '../components/toast';
+import { slugify } from '../../../core/platform';
 
 type Role = Persona['role'];
 const ROLES: { id: Role; label: string; cls: string }[] = [
@@ -32,9 +35,10 @@ function RoleBadge({ role }: { role: Role }) {
 
 export default function Personas() {
   const { slug = '' } = useParams();
-  const { data, isLoading, error } = useQuery({ queryKey: ['personas', slug], queryFn: () => api.personas(slug), enabled: !!slug });
+  const { data, isLoading, error } = usePersonas(slug);
   const { byId: tagDefs } = useProjectTags(slug);
-  const [open, setOpen] = useState<Doc<Persona> | null>(null);
+  // painel aberto; `error` = a gravação falhou e o painel voltou com o rascunho do usuário
+  const [open, setOpen] = useState<(Doc<Persona> & { error?: unknown; draft?: boolean }) | null>(null);
 
   const sorted = useMemo(() => {
     const order = (r: Role) => ROLES.findIndex((x) => x.id === r);
@@ -81,17 +85,27 @@ export default function Personas() {
           </Card>
         ))}
       </div>
-      {open && <PersonaDrawer key={open.data.id || 'nova'} slug={slug} initial={open} onClose={() => setOpen(null)} />}
+      {open && <PersonaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} onClose={() => setOpen(null)} onFailed={setOpen} />}
     </div>
   );
 }
 
-function PersonaDrawer({ slug, initial, onClose }: { slug: string; initial: Doc<Persona>; onClose: () => void }) {
+/** id que o servidor vai dar (mesma regra do store: slug do nome, -2, -3… se já existir) */
+function predictId(name: string, taken: string[]) {
+  const base = slugify(name); let id = base, n = 2;
+  while (taken.includes(id)) id = `${base}-${n++}`;
+  return id;
+}
+
+function PersonaDrawer({ slug, initial, onClose, onFailed }: {
+  slug: string; initial: Doc<Persona> & { error?: unknown; draft?: boolean }; onClose: () => void;
+  onFailed: (d: Doc<Persona> & { error: unknown; draft: true }) => void;
+}) {
   const qc = useQueryClient();
   const isNew = !initial.data.id;
   const [d, setD] = useState<Persona>(initial.data);
   const [body, setBody] = useState(initial.body);
-  const [dirty, setDirty] = useState(false);
+  const [dirty, setDirty] = useState(!!initial.draft);
   const set = <K extends keyof Persona>(k: K, v: Persona[K]) => { setD((x) => ({ ...x, [k]: v })); setDirty(true); };
 
   const clean = (): Persona => {
@@ -99,17 +113,51 @@ function PersonaDrawer({ slug, initial, onClose }: { slug: string; initial: Doc<
     for (const k of LISTS) out[k] = d[k].map((x) => x.trim()).filter(Boolean);
     return out;
   };
-  const save = useMutation({
-    mutationFn: () => {
-      const v = clean();
-      return isNew ? api.createPersona(slug, { ...v, id: undefined }, tidyMd(body)) : api.savePersona(slug, v.id, v, tidyMd(body));
-    },
-    onSuccess: () => { void qc.invalidateQueries({ queryKey: ['personas', slug] }); onClose(); },
-  });
-  const del = useMutation({
-    mutationFn: () => api.deletePersona(slug, d.id),
-    onSuccess: () => { void qc.invalidateQueries({ queryKey: ['personas', slug] }); onClose(); },
-  });
+  const key = qk.personas(slug);
+  // Salvar/criar é otimista: o card muda (ou aparece) na hora e o painel fecha; erro → o painel volta com o rascunho e o erro.
+  const save = () => {
+    const v = clean();
+    const md = tidyMd(body);
+    const today = new Date().toISOString().slice(0, 10);
+    const tempId = isNew ? predictId(v.name, (qc.getQueryData<Doc<Persona>[]>(key) ?? []).map((p) => p.data.id)) : v.id;
+    const doc: Doc<Persona> = { data: { ...v, id: tempId, updated: today }, body: md, file: initial.file || `companies/${slug}/personas/${tempId}.md` };
+    void runOptimistic(qc, {
+      mutationFn: async () => {
+        if (!isNew) return api.savePersona(slug, await realId('persona', slug, v.id), v, md);
+        const p = api.createPersona(slug, { ...v, id: undefined }, md);
+        trackCreate('persona', slug, tempId, p.then((r) => r.data.id));
+        return p;
+      },
+      apply: () => [[key, (old: Doc<Persona>[] | undefined) => upsertDoc(old, doc)]],
+      onSuccess: (r) => qc.setQueryData<Doc<Persona>[]>(key, (old) => upsertDoc(old, r, tempId)),
+      onError: (e) => onFailed({ data: d, body, file: initial.file, error: e, draft: true }),
+      invalidate: () => [key],
+      okMessage: isNew ? 'Persona criada' : 'Salvo',
+    }, undefined).catch(() => {});
+    onClose();
+  };
+  // Apagar é otimista e sem pergunta: "Desfazer" no aviso grava de novo o mesmo arquivo.
+  const del = () => {
+    const snapshot: Doc<Persona> = { data: initial.data, body: initial.body, file: initial.file };
+    const done = runOptimistic(qc, {
+      mutationFn: async () => api.deletePersona(slug, await realId('persona', slug, d.id)),
+      apply: () => [[key, (old: Doc<Persona>[] | undefined) => removeDoc(old, d.id)]],
+      invalidate: () => [key],
+      okMessage: false,
+      errorMessage: 'Não foi possível apagar a persona',
+    }, undefined).then(() => true, () => false);
+    onClose();
+    toast.undo(`Persona "${d.name}" apagada`, async () => {
+      if (!(await done)) return;
+      void runOptimistic(qc, {
+        mutationFn: () => api.savePersona(slug, snapshot.data.id, snapshot.data, snapshot.body),
+        apply: () => [[key, (old: Doc<Persona>[] | undefined) => upsertDoc(old, snapshot)]],
+        onSuccess: (r) => qc.setQueryData<Doc<Persona>[]>(key, (old) => upsertDoc(old, r)),
+        invalidate: () => [key],
+        okMessage: 'Persona restaurada',
+      }, undefined).catch(() => {});
+    });
+  };
   const close = () => { if (!dirty || confirm('Descartar as alterações desta persona?')) onClose(); };
 
   const list = (k: ListKey, label: string, ph: string, hint?: string) => (
@@ -152,14 +200,13 @@ function PersonaDrawer({ slug, initial, onClose }: { slug: string; initial: Doc<
         <div className="text-xs font-medium text-muted mb-1 uppercase tracking-wide">História e observações</div>
         <MarkdownEditor value={body} onChange={(md) => { if (md !== body) { setBody(md); setDirty(true); } }} minHeight={180} />
       </div>
-      <ErrorBox error={save.error ?? del.error} />
+      <ErrorBox error={initial.error} />
       <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-surface border-t border-border flex items-center gap-2">
-        <Button onClick={() => save.mutate()} disabled={save.isPending || !d.name.trim()}>{save.isPending ? 'Salvando…' : isNew ? 'Criar persona' : 'Salvar'}</Button>
+        <Button onClick={save} disabled={!d.name.trim()}>{isNew ? 'Criar persona' : 'Salvar'}</Button>
         <Button variant="ghost" onClick={close}>Cancelar</Button>
         {!isNew && <span className="text-xs text-muted ml-2">{initial.file}{d.updated ? ` · atualizada ${new Date(`${d.updated}T12:00:00`).toLocaleDateString('pt-BR')}` : ''}</span>}
         {!isNew && (
-          <Button variant="danger" className="ml-auto" disabled={del.isPending}
-            onClick={() => confirm(`Apagar a persona "${d.name}"? Isso remove o arquivo.`) && del.mutate()}>Apagar</Button>
+          <Button variant="danger" className="ml-auto" onClick={del} title="Remove o arquivo. Dá para desfazer no aviso.">Apagar</Button>
         )}
       </div>
     </Drawer>

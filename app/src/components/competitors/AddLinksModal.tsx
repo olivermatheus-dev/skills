@@ -2,6 +2,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { qk } from '../../queries';
+import { useCompetitorActions } from './useCompetitorActions';
 import { api, type CollectResult, type Competitor, type DetectedLink, type Doc } from '../../api';
 import { Button, ErrorBox, Field, Input, Select, Textarea, cx } from '../ui';
 import { KINDS, Modal, PlatformIcon, Spinner, keyFor, platformLabel, slugify } from './lib';
@@ -30,6 +32,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
 }) {
   const qc = useQueryClient();
   const nav = useNavigate();
+  const actions = useCompetitorActions(slug);
   const [text, setText] = useState('');
   const [lines, setLines] = useState<Line[]>([]);
   const [detecting, setDetecting] = useState(false);
@@ -89,41 +92,41 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
   const tagList = tags.split(/[,\n]/).map((t) => slugify(t.trim())).filter((t) => t && t !== 'item');
   const canSubmit = good.length > 0 && !busy && (mode === 'existing' ? !!target : mode === 'one' ? !!name.trim() : true);
 
+  // Criar/juntar é otimista: os cards aparecem na lista na hora. Sem "puxar", o resumo já aparece; com "puxar",
+  // espera só a criação (para ter o id real) e segue para a coleta, que é lenta por natureza.
   async function submit() {
     setError(null);
+    let failed = false;
+    const fail = (e: unknown) => { failed = true; setDone(null); setError(e); setBusy(null); };
     try {
-      const created: { id: string; name: string }[] = [];
+      let created: { id: string; name: string }[] = [];
+      let ready: Promise<unknown>;
       const profiles = good.map((l) => toProfile(l.det!)!).filter(Boolean);
       if (mode === 'existing') {
         const c = competitors.find((x) => x.data.id === target)!;
         const have = new Set(c.data.profiles.map(keyFor));
         const add = profiles.filter((p) => !have.has(keyFor(p)));
-        setBusy('Salvando…');
-        await api.saveCompetitor(slug, c.data.id, { ...c.data, profiles: [...c.data.profiles, ...add] }, c.body);
-        created.push({ id: c.data.id, name: c.data.name });
-      } else if (mode === 'one') {
-        setBusy('Criando…');
-        const r = await api.createCompetitor(slug, { name: name.trim(), kind, tags: tagList, profiles }, '');
-        created.push({ id: r.data.id, name: r.data.name });
+        ready = actions.save(c.data.id, { ...c.data, profiles: [...c.data.profiles, ...add] }, c.body, { onError: fail, okMessage: `${add.length} link(s) adicionado(s)` });
+        created = [{ id: c.data.id, name: c.data.name }];
       } else {
-        for (const [i, l] of good.entries()) {
-          setBusy(`Criando ${i + 1}/${good.length}…`);
-          const nm = (names[i] ?? nameFromHandle(l.det)).trim() || l.raw;
-          const r = await api.createCompetitor(slug, { name: nm, kind, tags: tagList, profiles: [toProfile(l.det!)!] }, '');
-          created.push({ id: r.data.id, name: r.data.name });
-        }
+        const items = mode === 'one'
+          ? [{ name: name.trim(), kind, tags: tagList, profiles }]
+          : good.map((l, i) => ({ name: (names[i] ?? nameFromHandle(l.det)).trim() || l.raw, kind, tags: tagList, profiles: [toProfile(l.det!)!] }));
+        const r = actions.create(items, { onError: fail });
+        created = r.ids.map((id, i) => ({ id, name: items[i].name }));
+        ready = r.promise.then((docs) => { created = docs.map((x) => ({ id: x.data.id, name: x.data.name })); });
       }
-      qc.invalidateQueries({ queryKey: ['competitors', slug] });
-      qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
-      const results: { id: string; name: string; results?: CollectResult[] }[] = created;
-      if (pullNow) {
-        for (const [i, c] of created.entries()) {
-          setBusy(`Puxando ${c.name} (${i + 1}/${created.length})… pode levar 1–2 min`);
-          try { results[i] = { ...c, results: await api.collectResults(slug, c.id) }; } catch (e) { results[i] = { ...c, results: [{ key: '-', platform: '-', url: '', ok: false, items: 0, errors: [String((e as Error).message)], warnings: [] }] }; }
-        }
-        qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
-        for (const c of created) qc.invalidateQueries({ queryKey: ['competitor', slug, c.id] });
+      if (!pullNow) { setDone(created); return; }
+      setBusy('Salvando…');
+      await ready;
+      if (failed) return;
+      const results: { id: string; name: string; results?: CollectResult[] }[] = [...created];
+      for (const [i, c] of created.entries()) {
+        setBusy(`Puxando ${c.name} (${i + 1}/${created.length})… pode levar 1–2 min`);
+        try { results[i] = { ...c, results: await api.collectResults(slug, c.id) }; } catch (e) { results[i] = { ...c, results: [{ key: '-', platform: '-', url: '', ok: false, items: 0, errors: [String((e as Error).message)], warnings: [] }] }; }
       }
+      void qc.invalidateQueries({ queryKey: qk.competitorsSummary(slug) });
+      for (const c of created) void qc.invalidateQueries({ queryKey: qk.competitor(slug, c.id) });
       setDone(results);
     } catch (e) { setError(e); } finally { setBusy(null); }
   }

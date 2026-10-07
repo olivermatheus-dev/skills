@@ -31,7 +31,8 @@ export const q = {
   notes: (slug: string) => queryOptions({ queryKey: qk.notes(slug), queryFn: () => api.notes(slug), enabled: !!slug }),
   ideas: (slug: string) => queryOptions({ queryKey: qk.ideas(slug), queryFn: () => api.ideas(slug), enabled: !!slug }),
   competitors: (slug: string) => queryOptions({ queryKey: qk.competitors(slug), queryFn: () => api.competitors(slug), enabled: !!slug }),
-  competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: () => api.competitor(slug, id), enabled: !!slug && !!id }),
+  // recém-criado (otimista): espera a criação e usa o id real
+  competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: async () => api.competitor(slug, await realId('competitor', slug, id)), enabled: !!slug && !!id }),
   competitorsSummary: (slug: string) => queryOptions({ queryKey: qk.competitorsSummary(slug), queryFn: () => api.competitorsSummary(slug), enabled: !!slug }),
   contextList: (slug: string) => queryOptions({ queryKey: qk.contextList(slug), queryFn: () => api.contextList(slug), enabled: !!slug }),
   // documento importante com salvar explícito: não recarrega sozinho por baixo da edição
@@ -59,7 +60,7 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   '': (s) => [q.project(s), q.tasks(s), q.notes(s), q.ideas(s), q.competitors(s)],
   quadro: (s) => [q.tasks(s)],
   concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s)],
-  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s)],
+  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s)],
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],

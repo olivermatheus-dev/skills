@@ -1,12 +1,13 @@
 // Contexto e marca: documentos de context/*.md (salvar explícito), dados do projeto, tags e tokens da marca.
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type Project, type TagDef } from '../api';
 import { Button, Card, ErrorBox, Field, Input, Select, Textarea, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { toTag } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
+import { qk, runOptimistic, useBrandCss, useContextDoc, useContextList, useProject, useTags } from '../queries';
 
 const DOCS: Record<string, { label: string; hint: string }> = {
   'BUSINESS.md': { label: 'Negócio', hint: 'Produto, oferta, preço, diferenciais, história.' },
@@ -23,7 +24,7 @@ type Section = { kind: 'doc'; name: string } | { kind: 'projeto' | 'tags' | 'mar
 export default function Context() {
   const { slug = '' } = useParams();
   const [params, setParams] = useSearchParams();
-  const { data: docs, isLoading, error } = useQuery({ queryKey: ['context', slug], queryFn: () => api.contextList(slug), enabled: !!slug });
+  const { data: docs, isLoading, error } = useContextList(slug);
   const [dirty, setDirty] = useState(false);
 
   const sorted = useMemo(() => [...(docs ?? [])].sort((a, b) => {
@@ -84,7 +85,7 @@ export default function Context() {
 // ---------- Documento de contexto (salvar explícito) ----------
 function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirty: (v: boolean) => void }) {
   const qc = useQueryClient();
-  const { data, isLoading, error } = useQuery({ queryKey: ['context', slug, name], queryFn: () => api.context(slug, name), staleTime: Infinity, refetchOnWindowFocus: false });
+  const { data, isLoading, error } = useContextDoc(slug, name);
   const [text, setText] = useState<string | null>(null);
   const [saved, setSaved] = useState<string | null>(null);
   const [mode, setMode] = useState<'visual' | 'texto'>('visual');
@@ -95,11 +96,19 @@ function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirt
   useEffect(() => { onDirty(dirty); }, [dirty, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
 
-  const save = useMutation({
-    mutationFn: (t: string) => api.saveContext(slug, name, tidyMd(t)),
-    onSuccess: (_, t) => { setSaved(t); setSavedAt(new Date()); qc.setQueryData(['context', slug, name], { name, text: t }); },
-  });
-  const doSave = () => { if (dirty && text !== null && !save.isPending) save.mutate(text); };
+  // Salvar é otimista: "Salvo" na hora; erro → volta a "Não salvo" (o texto continua no editor) e mostra o erro.
+  const [saveError, setSaveError] = useState<unknown>(null);
+  const doSave = () => {
+    if (!dirty || text === null) return;
+    const t = text, prevSaved = saved, prevAt = savedAt;
+    setSaved(t); setSavedAt(new Date()); setSaveError(null);
+    void runOptimistic(qc, {
+      mutationFn: () => api.saveContext(slug, name, tidyMd(t)),
+      apply: () => [[qk.context(slug, name), () => ({ name, text: t })]],
+      onError: (e) => { setSaved(prevSaved); setSavedAt(prevAt); setSaveError(e); },
+      invalidate: () => [qk.contextList(slug)],
+    }, undefined).catch(() => {});
+  };
   useEffect(() => {
     const k = (e: KeyboardEvent) => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); doSave(); } };
     window.addEventListener('keydown', k);
@@ -125,10 +134,10 @@ function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirt
             ? <span className="text-xs text-warn flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-warn" />Não salvo</span>
             : savedAt ? <span className="text-xs text-ok">Salvo às {savedAt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span> : null}
           {dirty && <Button variant="ghost" onClick={() => { if (confirm('Descartar as alterações?')) { setText(saved); setRev((r) => r + 1); } }}>Descartar</Button>}
-          <Button onClick={doSave} disabled={!dirty || save.isPending} title="Ctrl/Cmd+S">{save.isPending ? 'Salvando…' : 'Salvar'}</Button>
+          <Button onClick={doSave} disabled={!dirty} title="Ctrl/Cmd+S">Salvar</Button>
         </div>
       </div>
-      <ErrorBox error={error ?? save.error} />
+      <ErrorBox error={error ?? saveError} />
       {isLoading && <div className="h-96 rounded-lg bg-surface-2 animate-pulse" />}
       {text !== null && (mode === 'visual'
         ? <MarkdownEditor key={rev} value={text} onChange={setText} minHeight={480} />
@@ -142,7 +151,7 @@ function DocEditor({ slug, name, onDirty }: { slug: string; name: string; onDirt
 type ProjectDraft = Omit<Project, 'website' | 'color'> & { website: string; color: string };
 function ProjectForm({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => void }) {
   const qc = useQueryClient();
-  const { data, isLoading, error } = useQuery({ queryKey: ['project', slug], queryFn: () => api.project(slug) });
+  const { data, isLoading, error } = useProject(slug);
   const [d, setD] = useState<ProjectDraft | null>(null);
   const [dirty, setDirty] = useState(false);
   useEffect(() => { if (data && !d) setD({ ...data, website: data.website ?? '', color: data.color ?? '' }); }, [data, d]);
@@ -150,17 +159,27 @@ function ProjectForm({ slug, onDirty }: { slug: string; onDirty: (v: boolean) =>
   useEffect(() => () => onDirty(false), [onDirty]);
   const set = <K extends keyof ProjectDraft>(k: K, v: ProjectDraft[K]) => { setD((x) => (x ? { ...x, [k]: v } : x)); setDirty(true); };
 
-  const save = useMutation({
-    mutationFn: (p: ProjectDraft) => api.saveProject(slug, {
+  // Salvar é otimista: nome/cor/menu mudam na hora; erro → volta a "Não salvo" com o erro.
+  const [saveError, setSaveError] = useState<unknown>(null);
+  const [justSaved, setJustSaved] = useState(false);
+  const save = (p: ProjectDraft) => {
+    const payload = {
       ...p, name: p.name.trim(), website: p.website.trim() || undefined, color: p.color.trim() || undefined,
       socials: p.socials.filter((x) => x.url.trim()).map((x) => ({ ...x, url: x.url.trim() })),
-    }),
-    onSuccess: (r) => {
-      setD({ ...r, website: r.website ?? '', color: r.color ?? '' }); setDirty(false);
-      qc.setQueryData(['project', slug], r);
-      void qc.invalidateQueries({ queryKey: ['projects'] });
-    },
-  });
+    } as Project;
+    setDirty(false); setJustSaved(true); setSaveError(null);
+    void runOptimistic(qc, {
+      mutationFn: () => api.saveProject(slug, payload),
+      apply: () => [
+        [qk.project(slug), () => payload],
+        [qk.projects(), (old: Project[] | undefined) => old?.map((x) => (x.slug === slug ? payload : x))],
+      ],
+      onSuccess: (r) => { qc.setQueryData(qk.project(slug), r); setD((cur) => (cur && !dirtyRef.current ? { ...r, website: r.website ?? '', color: r.color ?? '' } : cur)); },
+      onError: (e) => { setDirty(true); setJustSaved(false); setSaveError(e); },
+      invalidate: () => [qk.project(slug), qk.projects()],
+    }, undefined).catch(() => {});
+  };
+  const dirtyRef = useRef(dirty); dirtyRef.current = dirty;
 
   return (
     <div className="max-w-3xl mx-auto px-8 py-6">
@@ -205,10 +224,10 @@ function ProjectForm({ slug, onDirty }: { slug: string; onDirty: (v: boolean) =>
               <Button variant="ghost" onClick={() => set('socials', [...d.socials, { platform: 'instagram', url: '' }])}>+ Adicionar rede</Button>
             </div>
           </div>
-          <ErrorBox error={save.error} />
+          <ErrorBox error={saveError} />
           <div className="flex items-center gap-3 pt-4 mt-2 border-t border-border">
-            <Button onClick={() => save.mutate(d)} disabled={!dirty || save.isPending || !d.name.trim()}>{save.isPending ? 'Salvando…' : 'Salvar projeto'}</Button>
-            {dirty ? <span className="text-xs text-warn">Não salvo</span> : save.isSuccess ? <span className="text-xs text-ok">Salvo</span> : null}
+            <Button onClick={() => save(d)} disabled={!dirty || !d.name.trim()}>Salvar projeto</Button>
+            {dirty ? <span className="text-xs text-warn">Não salvo</span> : justSaved ? <span className="text-xs text-ok">Salvo</span> : null}
             <span className="ml-auto text-xs text-muted">criado em {new Date(`${d.created}T12:00:00`).toLocaleDateString('pt-BR')}</span>
           </div>
         </Card>
@@ -223,17 +242,28 @@ const TAG_GRID = 'grid grid-cols-[120px_1fr_1fr_150px_28px] gap-2 px-4';
 const TAG_COLORS = ['#4f46e5', '#0891b2', '#16a34a', '#d97706', '#db2777', '#7c3aed', '#dc2626', '#64748b'];
 function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => void }) {
   const qc = useQueryClient();
-  const { data, isLoading, error } = useQuery({ queryKey: ['tags', slug], queryFn: () => api.tags(slug) });
+  const { data, isLoading, error } = useTags(slug);
   const [rows, setRows] = useState<TagRow[] | null>(null);
   const [dirty, setDirty] = useState(false);
   useEffect(() => { if (data && !rows) setRows(data.tags); }, [data, rows]);
   useEffect(() => { onDirty(dirty); }, [dirty, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
   const upd = (i: number, patch: Partial<TagRow>) => { setRows((r) => r!.map((x, j) => (j === i ? { ...x, ...patch } : x))); setDirty(true); };
-  const save = useMutation({
-    mutationFn: (r: TagRow[]) => api.saveTags(slug, r.filter((x) => x.id || x.label).map(({ id, label, color }) => ({ id, label: label.trim(), color }))),
-    onSuccess: (r) => { setRows(r.tags); setDirty(false); qc.setQueryData(['tags', slug], r); },
-  });
+  // Salvar é otimista: as cores/rótulos novos valem na hora em todas as telas; erro → volta a "Não salvo" com o erro.
+  const [saveError, setSaveError] = useState<unknown>(null);
+  const [justSaved, setJustSaved] = useState(false);
+  const save = (r: TagRow[]) => {
+    const tags = r.filter((x) => x.id || x.label).map(({ id, label, color }) => ({ id, label: label.trim(), color }));
+    setDirty(false); setJustSaved(true); setSaveError(null);
+    void runOptimistic(qc, {
+      mutationFn: () => api.saveTags(slug, tags),
+      apply: () => [[qk.tags(slug), () => ({ tags })]],
+      onSuccess: (res) => { if (!dirtyRef.current) setRows(res.tags); },
+      onError: (e) => { setDirty(true); setJustSaved(false); setSaveError(e); },
+      invalidate: () => [qk.tags(slug)],
+    }, undefined).catch(() => {});
+  };
+  const dirtyRef = useRef(dirty); dirtyRef.current = dirty;
   const dupes = rows ? rows.map((r) => r.id).filter((id, i, a) => id && a.indexOf(id) !== i) : [];
 
   return (
@@ -265,11 +295,11 @@ function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => 
             <Button variant="ghost" onClick={() => { setRows([...rows, { id: '', label: '', color: TAG_COLORS[rows.length % TAG_COLORS.length], _auto: true }]); setDirty(true); }}>+ Nova tag</Button>
             {dupes.length > 0 && <span className="text-xs text-danger">Id repetido: {[...new Set(dupes)].join(', ')}</span>}
             <div className="ml-auto flex items-center gap-3">
-              {dirty ? <span className="text-xs text-warn">Não salvo</span> : save.isSuccess ? <span className="text-xs text-ok">Salvo</span> : null}
-              <Button onClick={() => save.mutate(rows)} disabled={!dirty || save.isPending || dupes.length > 0}>{save.isPending ? 'Salvando…' : 'Salvar tags'}</Button>
+              {dirty ? <span className="text-xs text-warn">Não salvo</span> : justSaved ? <span className="text-xs text-ok">Salvo</span> : null}
+              <Button onClick={() => save(rows)} disabled={!dirty || dupes.length > 0}>Salvar tags</Button>
             </div>
           </div>
-          {save.error ? <div className="px-4 pb-3"><ErrorBox error={save.error} /></div> : null}
+          {saveError ? <div className="px-4 pb-3"><ErrorBox error={saveError} /></div> : null}
         </Card>
       )}
     </div>
@@ -287,7 +317,7 @@ function parseTokens(css: string): Token[] {
 const isColor = (v: string) => /^(#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\(|oklab\()/i.test(v);
 
 function BrandPanel({ slug }: { slug: string }) {
-  const { data, isLoading, error } = useQuery({ queryKey: ['brand-css', slug], queryFn: () => api.brandCss(slug) });
+  const { data, isLoading, error } = useBrandCss(slug);
   const tokens = useMemo(() => (data?.text ? parseTokens(data.text) : []), [data]);
   const colors = tokens.filter((t) => isColor(t.value));
   const others = tokens.filter((t) => !isColor(t.value));

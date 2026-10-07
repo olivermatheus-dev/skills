@@ -120,7 +120,7 @@ export default function Notes() {
     const s = slug;
     void runOptimistic(qc, {
       mutationFn: () => {
-        const p = api.createNote(s, { ...data, updated: undefined } as unknown as Note, '');
+        const p = api.createNote(s, data, '');
         trackCreate('note', s, data.id, p.then((r) => r.data.id));
         return p;
       },
@@ -140,10 +140,44 @@ export default function Notes() {
     select(data.id);
   }, [auto, slug, tag, notes, select, qc]);
 
+  // Apagar é otimista e sem pergunta: some da lista na hora; "Desfazer" no aviso grava de novo o mesmo documento.
+  const remove = () => {
+    const cur = draftRef.current;
+    if (!cur) return;
+    setActionError(null);
+    auto.cancel();
+    const s = slug;
+    const doc: Doc<Note> = { ...((notes ?? []).find((n) => n.data.id === cur.data.id) ?? { file: '' }), data: cur.data, body: cur.body };
+    const rest = (notes ?? []).filter((n) => n.data.id !== cur.data.id);
+    const done = runOptimistic(qc, {
+      mutationFn: async () => { await realId('note', s, cur.data.id); return api.deleteNote(s, cur.data.id); },
+      apply: () => [[qk.notes(s), (old: Doc<Note>[] | undefined) => removeDoc(old, cur.data.id)]],
+      onError: (e) => { setActionError(e); select(cur.data.id); },
+      invalidate: () => [qk.notes(s)],
+      okMessage: false,
+      errorMessage: 'Não foi possível apagar a anotação',
+    }, undefined).then(() => true, () => false);
+    draftRef.current = null;
+    setDraft(null);
+    select(rest[0]?.data.id ?? null);
+    toast.undo(`Anotação "${cur.data.title || 'Sem título'}" apagada`, async () => {
+      if (!(await done)) return;
+      void runOptimistic(qc, {
+        mutationFn: () => api.createNote(s, toPayload({ slug: s, data: doc.data, body: doc.body }), tidyMd(doc.body)),
+        apply: () => [[qk.notes(s), (old: Doc<Note>[] | undefined) => upsertDoc(old, doc)]],
+        onSuccess: (r) => qc.setQueryData<Doc<Note>[]>(qk.notes(s), (old) => upsertDoc(old, r)),
+        invalidate: () => [qk.notes(s)],
+        okMessage: 'Anotação restaurada',
+        errorMessage: 'Não foi possível restaurar a anotação',
+      }, undefined).catch(() => {});
+      if (prevSlug.current === s) select(doc.data.id);
+    });
+  };
+
   // Ctrl/Cmd+N → nova anotação (Alt+N como alternativa, já que alguns navegadores reservam Ctrl+N).
   useEffect(() => {
     const k = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'n' && (e.ctrlKey || e.metaKey || e.altKey) && !e.shiftKey) { e.preventDefault(); void create(); }
+      if (e.key.toLowerCase() === 'n' && (e.ctrlKey || e.metaKey || e.altKey) && !e.shiftKey) { e.preventDefault(); create(); }
     };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);

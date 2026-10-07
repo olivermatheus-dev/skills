@@ -1,8 +1,8 @@
 // Tags em chips: Enter ou vírgula adiciona, Backspace no campo vazio remove a última.
 // As tags do arquivo são slugs (schema TagList); as cores e rótulos vêm de tags.yml do projeto.
 import { useId, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { api, type TagDef } from '../../api';
+import type { TagDef } from '../../api';
+import { useTags } from '../../queries';
 import { slugify } from '../../../../core/platform';
 import { cx } from '../ui';
 
@@ -10,7 +10,7 @@ export const toTag = (s: string) => (s.trim() ? slugify(s) : '');
 
 /** Tags do projeto (tags.yml) indexadas por id. */
 export function useProjectTags(slug?: string) {
-  const q = useQuery({ queryKey: ['tags', slug], queryFn: () => api.tags(slug!), enabled: !!slug });
+  const q = useTags(slug);
   const list = q.data?.tags ?? [];
   const byId = Object.fromEntries(list.map((t) => [t.id, t])) as Record<string, TagDef>;
   return { list, byId };

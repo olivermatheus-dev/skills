@@ -1,10 +1,12 @@
 // Concorrentes e referências: cards com avatar, seguidores por plataforma (Δ vs coleta anterior), filtros e "Puxar todos".
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../api';
 import { Badge, Button, Empty, ErrorBox, Input, PageHeader, Select, cx, fmtNum } from '../components/ui';
 import AddLinksModal, { ResultLine } from '../components/competitors/AddLinksModal';
+import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
+import { prefetchCompetitor, qk, useCompetitors, useCompetitorsSummary } from '../queries';
 import { Avatar, Chips, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../components/competitors/lib';
 
 type KindFilter = 'todos' | Competitor['kind'];
@@ -12,8 +14,9 @@ type KindFilter = 'todos' | Competitor['kind'];
 export default function Competitors() {
   const { slug = '' } = useParams();
   const qc = useQueryClient();
-  const list = useQuery({ queryKey: ['competitors', slug], queryFn: () => api.competitors(slug) });
-  const summary = useQuery({ queryKey: ['competitors-summary', slug], queryFn: () => api.competitorsSummary(slug) });
+  const list = useCompetitors(slug);
+  const summary = useCompetitorsSummary(slug);
+  const actions = useCompetitorActions(slug);
   const [adding, setAdding] = useState(false);
   const [q, setQ] = useState('');
   const [kind, setKind] = useState<KindFilter>('todos');
@@ -42,15 +45,10 @@ export default function Competitors() {
     return true;
   }).sort((a, b) => Number(b.data.favorite) - Number(a.data.favorite) || a.data.name.localeCompare(b.data.name, 'pt-BR'));
 
-  const fav = useMutation({
-    mutationFn: (c: Doc<Competitor>) => api.saveCompetitor(slug, c.data.id, { ...c.data, favorite: !c.data.favorite }, c.body),
-    onMutate: (c) => qc.setQueryData<Doc<Competitor>[]>(['competitors', slug], (old) => old?.map((x) => (x.data.id === c.data.id ? { ...x, data: { ...x.data, favorite: !x.data.favorite } } : x))),
-    onSettled: () => qc.invalidateQueries({ queryKey: ['competitors', slug] }),
-  });
 
   const refresh = (id?: string) => {
-    qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
-    if (id) qc.invalidateQueries({ queryKey: ['competitor', slug, id] });
+    void qc.invalidateQueries({ queryKey: qk.competitorsSummary(slug) });
+    if (id) void qc.invalidateQueries({ queryKey: qk.competitor(slug, id) });
   };
 
   async function pull(cs: Doc<Competitor>[]) {
@@ -127,7 +125,7 @@ export default function Competitors() {
       <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {shown.map((c) => (
           <CompetitorCard key={c.data.id} slug={slug} c={c} s={sum.get(c.data.id)} loadingSummary={summary.isLoading}
-            onFav={() => fav.mutate(c)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name} />
+            onFav={() => actions.toggleFavorite(c)} onWarm={() => prefetchCompetitor(qc, slug, c.data.id)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name} />
         ))}
       </div>
 
@@ -136,8 +134,8 @@ export default function Competitors() {
   );
 }
 
-function CompetitorCard({ slug, c, s, onFav, onPull, pulling, loadingSummary }: {
-  slug: string; c: Doc<Competitor>; s?: CompetitorSummary; onFav: () => void; onPull: () => void; pulling: boolean; loadingSummary: boolean;
+function CompetitorCard({ slug, c, s, onFav, onWarm, onPull, pulling, loadingSummary }: {
+  slug: string; c: Doc<Competitor>; s?: CompetitorSummary; onFav: () => void; onWarm: () => void; onPull: () => void; pulling: boolean; loadingSummary: boolean;
 }) {
   const d = c.data;
   const profs = s?.profiles ?? [];
@@ -146,7 +144,7 @@ function CompetitorCard({ slug, c, s, onFav, onPull, pulling, loadingSummary }: 
   const items = profs.reduce((n, p) => n + (p.latest?.items ?? 0), 0);
   const hadErrors = profs.some((p) => p.latest?.errors.length);
   return (
-    <Link to={`/p/${slug}/concorrentes/${d.id}`} className="group bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-zinc-300 transition flex flex-col">
+    <Link to={`/p/${slug}/concorrentes/${d.id}`} onMouseEnter={onWarm} onFocus={onWarm} onPointerDown={onWarm} className="group bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-zinc-300 transition flex flex-col">
       <div className="h-16 relative bg-gradient-to-r from-indigo-100 via-violet-50 to-sky-100">
         {withBanner && <Img local={api.mediaUrl(slug, d.id, withBanner.latest?.profile.bannerLocal)} remote={withBanner.latest?.profile.banner} className="absolute inset-0 w-full h-full object-cover" fallback={<span />} />}
         <div className="absolute top-2 right-2 bg-surface/90 backdrop-blur rounded-full w-7 h-7 grid place-items-center shadow-sm"><Star on={d.favorite} onClick={onFav} size="text-base" /></div>

@@ -2,8 +2,10 @@
 // com marcação (★, status, tags, nota) e "Virar ideia".
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api, type CollectResult, type CompetitorFull, type ItemMark } from '../api';
+import { useQueryClient } from '@tanstack/react-query';
+import { api, type CollectResult, type Competitor, type CompetitorFull, type Doc, type Idea, type ItemMark } from '../api';
+import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useCompetitor, useTags } from '../queries';
+import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/ui';
 import { ResultLine } from '../components/competitors/AddLinksModal';
 import EditCompetitor from '../components/competitors/EditCompetitor';
@@ -29,9 +31,10 @@ const handleOf = (p: { platform: string; handle?: string; externalId?: string; u
 export default function CompetitorDetail() {
   const { slug = '', id = '' } = useParams();
   const qc = useQueryClient();
-  const qk = ['competitor', slug, id];
-  const q = useQuery({ queryKey: qk, queryFn: () => api.competitor(slug, id) });
-  const projectTags = useQuery({ queryKey: ['tags', slug], queryFn: () => api.tags(slug) });
+  const key = qk.competitor(slug, id);
+  const q = useCompetitor(slug, id);
+  const projectTags = useTags(slug);
+  const actions = useCompetitorActions(slug);
 
   const [tab, setTab] = useState<string>('all');
   const [sort, setSort] = useState<Sort>('outlier');
@@ -41,7 +44,7 @@ export default function CompetitorDetail() {
   const [favOnly, setFavOnly] = useState(false);
   const [search, setSearch] = useState('');
   const [open, setOpen] = useState<string | null>(null);
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState<false | { draft?: { data: Competitor; body: string }; error?: unknown }>(false);
   const [pulling, setPulling] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [results, setResults] = useState<CollectResult[] | null>(null);
@@ -56,13 +59,8 @@ export default function CompetitorDetail() {
   const profiles = useMemo(() => (d?.data.profiles ?? []).map((p, i) => ({ ...p, key: keyFor(p), series: series.get(keyFor(p)), color: SERIES[i % SERIES.length] })), [d?.data.profiles, series]);
   const rows = useMemo(() => buildRows(profiles.map((p) => p.series).filter(Boolean) as NonNullable<(typeof profiles)[number]['series']>[], d?.marks ?? {}, (k) => k.split('-')[0]), [profiles, d?.marks]);
 
-  const mark = useMutation({
-    mutationFn: ({ mk, patch }: { mk: string; patch: Partial<ItemMark> }) => api.setMark(slug, id, mk, patch),
-    onMutate: ({ mk, patch }) => qc.setQueryData<CompetitorFull>(qk, (old) => old && ({
-      ...old, marks: { ...old.marks, [mk]: { ...({ status: 'nova', favorite: false, tags: [], note: '' } as Partial<ItemMark>), ...old.marks[mk], ...patch, updated: new Date().toISOString() } },
-    })),
-    onSettled: () => qc.invalidateQueries({ queryKey: qk }),
-  });
+  // marcar (★, status, tags, nota) é otimista: muda na hora; erro → volta e avisa
+  const mark = { mutate: ({ mk, patch }: { mk: string; patch: Partial<ItemMark> }) => { actions.mark(id, mk, patch).catch(() => {}); } };
 
   if (q.isLoading) return <div className="p-8"><div className="h-48 rounded-xl bg-surface border border-border animate-pulse" /><div className="mt-4 h-24 rounded-xl bg-surface border border-border animate-pulse" /></div>;
   if (q.error || !d) return <div className="p-8"><Link to={`/p/${slug}/concorrentes`} className="text-sm text-muted">← Concorrentes</Link><ErrorBox error={q.error ?? new Error('não encontrado')} /></div>;
@@ -113,19 +111,15 @@ export default function CompetitorDetail() {
     try { setResults(await api.collectResults(slug, id)); } catch (e) { setPullError(e); }
     finally {
       setPulling(false);
-      qc.invalidateQueries({ queryKey: qk });
-      qc.invalidateQueries({ queryKey: ['competitors-summary', slug] });
+      void qc.invalidateQueries({ queryKey: key });
+      void qc.invalidateQueries({ queryKey: qk.competitorsSummary(slug) });
     }
   }
-  async function toggleFav() {
-    await api.saveCompetitor(slug, id, { ...c, favorite: !c.favorite }, d!.body);
-    qc.invalidateQueries({ queryKey: qk }); qc.invalidateQueries({ queryKey: ['competitors', slug] });
-  }
+  const toggleFav = () => { void actions.toggleFavorite({ data: c, body: d!.body }); };
   async function addLink(url: string) {
-    const det = await api.detectLink(url);
+    const det = await api.detectLink(url); // leitura (rápida); a gravação abaixo é otimista
     if (!det || det.kind !== 'perfil') return;
-    await api.saveCompetitor(slug, id, { ...c, profiles: [...c.profiles, { platform: det.platform as never, url: det.url, handle: det.handle, externalId: det.externalId }] }, d!.body);
-    qc.invalidateQueries({ queryKey: qk }); qc.invalidateQueries({ queryKey: ['competitors', slug] });
+    void actions.save(id, { ...c, profiles: [...c.profiles, { platform: det.platform as never, url: det.url, handle: det.handle, externalId: det.externalId }] }, d!.body, { okMessage: 'Perfil adicionado' });
   }
   async function makeIdea(r: Row, title = titleOf(r).slice(0, 120), tags = r.mark?.tags ?? [], note = r.mark?.note ?? '') {
     setIdeaBusy(r.mk); setIdeaError(null);
@@ -145,9 +139,34 @@ export default function CompetitorDetail() {
         ...(r.item.caption ? ['## Legenda original', '', `> ${r.item.caption.slice(0, 600).replace(/\n/g, '\n> ')}`, ''] : []),
         '## Observações do Oliver', '', note, '',
       ].join('\n');
-      const idea = await api.createIdea(slug, { title, status: 'nova', source: { competitor: id, platform: r.platform as never, itemId: r.item.id, url: r.item.url }, tags }, body);
-      await mark.mutateAsync({ mk: r.mk, patch: { ideaId: idea.data.id, status: 'analisada', tags } });
-      qc.invalidateQueries({ queryKey: ['ideas', slug] });
+      // otimista: a ideia entra no banco e o item já aparece como "virou ideia" (id previsto);
+      // o servidor cria a ideia e só então grava a marcação com o id real (sem marcação órfã se falhar)
+      const ideasKey = qk.ideas(slug);
+      const tempId = nextSeqId('I', (qc.getQueryData<Doc<Idea>[]>(ideasKey) ?? []).map((i) => i.data.id)) as Idea['id'];
+      const data = { title, status: 'nova', source: { competitor: id, platform: r.platform as never, itemId: r.item.id, url: r.item.url }, tags } as Partial<Idea> & { title: string };
+      const opt: Doc<Idea> = { data: { ...data, id: tempId, created: new Date().toISOString().slice(0, 10) } as Idea, body, file: '' };
+      const markPatch = (ideaId: string) => ({ ideaId, status: 'analisada' as const, tags });
+      setIdeaBusy(null);
+      await runOptimistic(qc, {
+        mutationFn: async () => {
+          const p = api.createIdea(slug, data, body);
+          trackCreate('idea', slug, tempId, p.then((x) => x.data.id));
+          const idea = await p;
+          const m = await api.setMark(slug, id, r.mk, markPatch(idea.data.id));
+          return { idea, m };
+        },
+        apply: () => [
+          [ideasKey, (old: Doc<Idea>[] | undefined) => (old ? upsertDoc(old, opt) : old)],
+          [key, (old: CompetitorFull | undefined) => old && { ...old, marks: { ...old.marks, [r.mk]: { ...({ status: 'nova', favorite: false, tags: [], note: '' } as Partial<ItemMark>), ...old.marks[r.mk], ...markPatch(tempId), updated: new Date().toISOString() } } }],
+        ],
+        onSuccess: ({ idea, m }) => {
+          qc.setQueryData<Doc<Idea>[]>(ideasKey, (old) => (old ? upsertDoc(old, idea, tempId) : old));
+          qc.setQueryData<CompetitorFull>(key, (old) => old && { ...old, marks: { ...old.marks, [r.mk]: m } });
+        },
+        invalidate: () => [ideasKey, key],
+        okMessage: `Ideia ${tempId} criada`,
+        errorMessage: 'Não foi possível criar a ideia',
+      }, undefined);
     } catch (e) { setIdeaError(e); } finally { setIdeaBusy(null); }
   }
 
@@ -179,7 +198,7 @@ export default function CompetitorDetail() {
             </div>
           </div>
           <div className="flex gap-2 pb-1">
-            <Button variant="ghost" onClick={() => setEditing(true)}>Editar</Button>
+            <Button variant="ghost" onClick={() => setEditing({})}>Editar</Button>
             <Button onClick={pull} disabled={pulling || !c.profiles.length} title="Grava uma coleta nova de cada perfil (as antigas ficam)">
               {pulling ? <><Spinner /> Puxando… {elapsed}s</> : '↻ Puxar agora'}
             </Button>
@@ -284,7 +303,7 @@ export default function CompetitorDetail() {
           </div>
           <ErrorBox error={ideaError} />
 
-          {!c.profiles.length && <Empty title="Sem perfis" hint="Adicione links em Editar." action={<Button onClick={() => setEditing(true)}>Editar</Button>} />}
+          {!c.profiles.length && <Empty title="Sem perfis" hint="Adicione links em Editar." action={<Button onClick={() => setEditing({})}>Editar</Button>} />}
           {c.profiles.length > 0 && !rows.length && (
             <Empty title={series.size ? 'Nenhum conteúdo coletado' : 'Ainda não puxado'}
               hint={series.size ? 'Sites trazem só o perfil. Confira os avisos da última coleta.' : 'Clique em “Puxar agora” para trazer perfil, vídeos e métricas.'}
@@ -309,7 +328,8 @@ export default function CompetitorDetail() {
         tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk}
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}
         onIdea={(title, tags, note) => openRow && makeIdea(openRow, title, tags, note)} />
-      {editing && <EditCompetitor slug={slug} open={editing} onClose={() => setEditing(false)} data={c} body={d.body} snapshotsCount={d.snapshotsTotal} />}
+      {editing && <EditCompetitor key={editing.error ? 'erro' : 'ok'} slug={slug} open onClose={() => setEditing(false)} onFailed={(draft, error) => setEditing({ draft, error })}
+        data={editing.draft?.data ?? c} body={editing.draft?.body ?? d.body} initialError={editing.error} snapshotsCount={d.snapshotsTotal} />}
     </div>
   );
 }

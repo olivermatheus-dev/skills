@@ -2,12 +2,14 @@
 // "Virar tarefa" cria a tarefa no Kanban (agent:estrategista) e liga as duas pontas.
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Idea, type Task } from '../api';
 import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/ui';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
+import { nextSeqId, qk, realId, runOptimistic, trackCreate, upsertDoc, useCompetitors, useIdeas } from '../queries';
+import { slugify } from '../../../core/platform';
 import { FICHA_TEMPLATE, FORMATS, OBJECTIVES, STATUSES, TONES, label, type Objective, type Status, type Tone } from '../components/ideas/meta';
 
 type View = 'quadro' | 'lista';
@@ -26,8 +28,8 @@ function ObjectiveBadge({ id }: { id?: Objective }) {
 
 export default function Ideas() {
   const { slug = '' } = useParams();
-  const { data, isLoading, error } = useQuery({ queryKey: ['ideas', slug], queryFn: () => api.ideas(slug), enabled: !!slug });
-  const { data: competitors } = useQuery({ queryKey: ['competitors', slug], queryFn: () => api.competitors(slug), enabled: !!slug });
+  const { data, isLoading, error } = useIdeas(slug);
+  const { data: competitors } = useCompetitors(slug);
   const { byId: tagDefs } = useProjectTags(slug);
   const compName = (id?: string) => competitors?.find((c) => c.data.id === id)?.data.name ?? id;
 
@@ -35,7 +37,7 @@ export default function Ideas() {
   const changeView = (v: View) => { setView(v); try { localStorage.setItem(VIEW_KEY, v); } catch { /* sem storage */ } };
   const [f, setF] = useState({ q: '', objective: '', tone: '', tag: '', competitor: '' });
   const [hideDiscarded, setHideDiscarded] = useState(false);
-  const [open, setOpen] = useState<Doc<Idea> | null>(null);
+  const [open, setOpen] = useState<(Doc<Idea> & { error?: unknown; draft?: boolean }) | null>(null);
 
   const all = data ?? [];
   const tags = useMemo(() => [...new Set(all.flatMap((i) => i.data.tags))].sort(), [all]);
@@ -163,7 +165,7 @@ export default function Ideas() {
         </div>
       )}
 
-      {open && <IdeaDrawer key={open.data.id || 'nova'} slug={slug} initial={open} compName={compName} onClose={() => setOpen(null)} onSaved={setOpen} />}
+      {open && <IdeaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} compName={compName} onClose={() => setOpen(null)} onSaved={setOpen} />}
     </div>
   );
 }
@@ -190,38 +192,87 @@ function taskBody(idea: Doc<Idea>, rel: string) {
 }
 
 function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
-  slug: string; initial: Doc<Idea>; compName: (id?: string) => string | undefined; onClose: () => void; onSaved: (d: Doc<Idea>) => void;
+  slug: string; initial: Doc<Idea> & { error?: unknown; draft?: boolean }; compName: (id?: string) => string | undefined; onClose: () => void;
+  onSaved: (d: Doc<Idea> & { error?: unknown; draft?: boolean }) => void;
 }) {
   const qc = useQueryClient();
   const isNew = !initial.data.id;
   const [d, setD] = useState<Idea>(initial.data);
   const [body, setBody] = useState(initial.body);
-  const [dirty, setDirty] = useState(false);
+  const [dirty, setDirty] = useState(!!initial.draft);
   const [editorKey, setEditorKey] = useState(0);
+  const [error, setError] = useState<unknown>(initial.error ?? null);
   const set = <K extends keyof Idea>(k: K, v: Idea[K]) => { setD((x) => ({ ...x, [k]: v })); setDirty(true); };
 
-  const persist = async (patch: Partial<Idea> = {}) => {
-    const v: Idea = { ...d, ...patch, title: d.title.trim(), format: d.format?.trim() || undefined };
-    const r = isNew && !v.id ? await api.createIdea(slug, { ...v, id: undefined }, tidyMd(body)) : await api.saveIdea(slug, v.id, v, tidyMd(body));
-    setD(r.data); setDirty(false);
-    void qc.invalidateQueries({ queryKey: ['ideas', slug] });
-    return r;
+  const ideasKey = qk.ideas(slug), tasksKey = qk.tasks(slug);
+  const clean = (): Idea => ({ ...d, title: d.title.trim(), format: d.format?.trim() || undefined });
+  const idOf = (v: Idea) => v.id || nextSeqId('I', (qc.getQueryData<Doc<Idea>[]>(ideasKey) ?? []).map((i) => i.data.id));
+  /** grava a ideia (cria se nova) — usado por Salvar e por Virar tarefa */
+  const persist = async (v: Idea, tempId: string, md: string) => {
+    if (v.id) return api.saveIdea(slug, await realId('idea', slug, v.id), v, md);
+    const p = api.createIdea(slug, { ...v, id: undefined }, md);
+    trackCreate('idea', slug, tempId, p.then((r) => r.data.id));
+    return p;
   };
-  const save = useMutation({ mutationFn: () => persist(), onSuccess: () => onClose() });
-  const toTask = useMutation({
-    mutationFn: async () => {
-      const saved = await persist();
-      const rel = relToCompany(saved.file);
-      const t = await api.createTask(slug, { title: saved.data.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', links: [rel] } as Partial<Task> & { title: string }, taskBody(saved, rel));
-      const final = await api.saveIdea(slug, saved.data.id, { ...saved.data, status: 'virou-tarefa', task: t.data.id }, saved.body);
-      void qc.invalidateQueries({ queryKey: ['tasks', slug] });
-      void qc.invalidateQueries({ queryKey: ['ideas', slug] });
-      return final;
-    },
-    onSuccess: (final) => { setD(final.data); setDirty(false); onSaved(final); },
-  });
+
+  // Salvar/criar é otimista: o card muda (ou aparece) na hora e o painel fecha; erro → o painel volta com o rascunho e o erro.
+  const save = () => {
+    const v = clean(), md = tidyMd(body), tempId = idOf(v);
+    const doc: Doc<Idea> = { data: { ...v, id: tempId as Idea['id'] }, body: md, file: initial.file || `companies/${slug}/ideas/${tempId}-${slugify(v.title)}.md` };
+    void runOptimistic(qc, {
+      mutationFn: () => persist(v, tempId, md),
+      apply: () => [[ideasKey, (old: Doc<Idea>[] | undefined) => upsertDoc(old, doc)]],
+      onSuccess: (r) => qc.setQueryData<Doc<Idea>[]>(ideasKey, (old) => upsertDoc(old, r, tempId)),
+      onError: (e) => onSaved({ data: d, body, file: initial.file, error: e, draft: true }),
+      invalidate: () => [ideasKey],
+      okMessage: isNew && !d.id ? 'Ideia criada' : 'Salvo',
+    }, undefined).catch(() => {});
+    onClose();
+  };
+
+  // Virar tarefa: ideia e tarefa mudam na hora (a tarefa aparece no quadro com id previsto); o servidor faz as 3 gravações em seguida.
+  const [toTaskBusy, setToTaskBusy] = useState(false);
+  const toTask = () => {
+    const prev = { d, dirty };
+    const v = clean(), md = tidyMd(body), tempIdea = idOf(v);
+    const tempTask = nextSeqId('T', (qc.getQueryData<Doc<Task>[]>(tasksKey) ?? []).map((t) => t.data.id));
+    const file = initial.file || `companies/${slug}/ideas/${tempIdea}-${slugify(v.title)}.md`;
+    const optIdea: Doc<Idea> = { data: { ...v, id: tempIdea as Idea['id'], status: 'virou-tarefa', task: tempTask }, body: md, file };
+    const rel0 = relToCompany(file);
+    const optTask: Doc<Task> = {
+      data: { id: tempTask, title: v.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', priority: 'media', depends: [], links: [rel0] } as Task,
+      body: taskBody(optIdea, rel0), file: '',
+    };
+    setD(optIdea.data); setDirty(false); setError(null); setToTaskBusy(true);
+    onSaved(optIdea);
+    void runOptimistic(qc, {
+      mutationFn: async () => {
+        const saved = await persist(v, tempIdea, md);
+        const rel = relToCompany(saved.file);
+        const tp = api.createTask(slug, { title: saved.data.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', links: [rel] } as Partial<Task> & { title: string }, taskBody(saved, rel));
+        trackCreate('task', slug, tempTask, tp.then((t) => t.data.id));
+        const t = await tp;
+        const final = await api.saveIdea(slug, saved.data.id, { ...saved.data, status: 'virou-tarefa', task: t.data.id }, saved.body);
+        return { final, t };
+      },
+      apply: () => [
+        [ideasKey, (old: Doc<Idea>[] | undefined) => upsertDoc(old, optIdea)],
+        [tasksKey, (old: Doc<Task>[] | undefined) => (old ? upsertDoc(old, optTask) : old)],
+      ],
+      onSuccess: ({ final, t }) => {
+        qc.setQueryData<Doc<Idea>[]>(ideasKey, (old) => upsertDoc(old, final, tempIdea));
+        qc.setQueryData<Doc<Task>[]>(tasksKey, (old) => (old ? upsertDoc(old, t, tempTask) : old));
+        setToTaskBusy(false);
+        if (final.data.id !== tempIdea || final.data.task !== tempTask) { setD(final.data); onSaved(final); }
+      },
+      // o painel pode ter sido remontado (id novo): reabre com o rascunho anterior e o erro
+      onError: (e) => onSaved({ data: prev.d, body, file: initial.file, error: e, draft: prev.dirty || isNew }),
+      invalidate: () => [ideasKey, tasksKey],
+      okMessage: `Tarefa ${tempTask} criada no quadro`,
+      errorMessage: 'Não foi possível virar tarefa — nada foi alterado',
+    }, undefined).catch(() => {});
+  };
   const close = () => { if (!dirty || confirm('Descartar as alterações desta ideia?')) onClose(); };
-  const busy = save.isPending || toTask.isPending;
   const hasFicha = /^##\s+Objetivo/m.test(body);
 
   return (
@@ -293,15 +344,15 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
         <MarkdownEditor key={editorKey} value={body} onChange={(md) => { if (md !== body) { setBody(md); setDirty(true); } }} minHeight={300} />
       </div>
 
-      <ErrorBox error={save.error ?? toTask.error} />
+      <ErrorBox error={error} />
       <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-surface border-t border-border flex items-center gap-2">
-        <Button onClick={() => save.mutate()} disabled={busy || !d.title.trim()}>{save.isPending ? 'Salvando…' : isNew && !d.id ? 'Criar ideia' : 'Salvar'}</Button>
+        <Button onClick={save} disabled={!d.title.trim()}>{isNew && !d.id ? 'Criar ideia' : 'Salvar'}</Button>
         <Button variant="ghost" onClick={close}>{dirty ? 'Cancelar' : 'Fechar'}</Button>
         <span className="text-xs text-muted ml-1 truncate">{initial.file ? relToCompany(initial.file) : ''}</span>
         {!d.task && d.status !== 'descartada' && (
-          <Button variant="soft" className="ml-auto" disabled={busy || !d.title.trim()}
+          <Button variant="soft" className="ml-auto" disabled={toTaskBusy || !d.title.trim()}
             title="Cria a tarefa no quadro de conteúdo para o agent:estrategista, com a ficha de pauta"
-            onClick={() => toTask.mutate()}>{toTask.isPending ? 'Criando tarefa…' : 'Virar tarefa →'}</Button>
+            onClick={toTask}>Virar tarefa →</Button>
         )}
       </div>
     </Drawer>

@@ -40,6 +40,8 @@
 
 - **App local pronto (018):** `npm run app` — quadro, concorrentes (colar links, puxar, histórico), ideias, personas, anotações, contexto e marca; dados tipados em `schema/` (`npm run validate`). Agente `pesquisador` + skills `radar`/`referencias`. Coleta real só no PC (yt-dlp; Apify para Instagram).
 
+- **Em andamento (019):** interface otimista + visual shadcn/ui. Backend otimizado e telas sob demanda já feitos; componentes shadcn prontos em `roadmap/tasks/019-ui-shadcn/staging/`. **Próxima sessão começa pelos passos do `TASK.md` da 019.**
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".

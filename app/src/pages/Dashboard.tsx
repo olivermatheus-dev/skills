@@ -1,8 +1,8 @@
 // Visão geral do projeto: o que espera o Oliver, andamento do quadro, anotações, ideias e concorrentes.
 import type { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { api, type Idea } from '../api';
+import type { Idea } from '../api';
+import { useCompetitors, useIdeas, useNotes, useProject, useTasks } from '../queries';
 import { Card, ErrorBox, cx, fmtDate } from '../components/ui';
 import { TaskCard } from '../components/board/TaskCard';
 import { COLUMNS, isLate, type TaskDoc } from '../components/board/taskUtils';
@@ -19,11 +19,11 @@ const COL_COLOR: Record<string, string> = { backlog: '#a1a1aa', todo: '#60a5fa',
 export default function Dashboard() {
   const { slug = '' } = useParams();
   const to = (p: string) => `/p/${slug}/${p}`;
-  const project = useQuery({ queryKey: ['project', slug], queryFn: () => api.project(slug), enabled: !!slug });
-  const tasks = useQuery({ queryKey: ['tasks', slug], queryFn: () => api.tasks(slug), enabled: !!slug });
-  const notes = useQuery({ queryKey: ['notes', slug], queryFn: () => api.notes(slug), enabled: !!slug });
-  const ideas = useQuery({ queryKey: ['ideas', slug], queryFn: () => api.ideas(slug), enabled: !!slug });
-  const comps = useQuery({ queryKey: ['competitors', slug], queryFn: () => api.competitors(slug), enabled: !!slug });
+  const project = useProject(slug);
+  const tasks = useTasks(slug);
+  const notes = useNotes(slug);
+  const ideas = useIdeas(slug);
+  const comps = useCompetitors(slug);
 
   const all = tasks.data ?? [];
   const review = all.filter((t) => t.data.status === 'review');
