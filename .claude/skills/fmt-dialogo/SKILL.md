@@ -5,13 +5,13 @@ description: "Receita de conversa de chat animada (estilo mensageiro, com UI pr�
 
 # Diálogo
 
-Conversa de chat que a persona reconhece e que vira no produto. Topo/meio de funil: reels e stories, alto envio por DM ("isso sou eu").
+Estilo default: Comedy ou Emotional (conforme o roteiro) + Organic
+Motor: skill `video` (nível médio por padrão) · regras gerais: `knowledge/video/REGRAS.md`.
 
-## Quando usar / quando não usar
-- **Usar:** a dor acontece numa conversa (cliente que cancela, some, pede o link).
-- **Não usar:** não há dois lados falando; precisa de mais de 8 mensagens.
+Chat que a persona reconhece e que vira no produto; topo/meio de funil.
+**Não usar:** sem dois lados falando · mais de 8 mensagens.
 
-## Parâmetros (o usuário pode mudar)
+## Parâmetros
 | parâmetro | default | opções |
 |---|---|---|
 | duração | 20 s | 15 · 30 s |
@@ -30,33 +30,19 @@ Conversa de chat que a persona reconhece e que vira no produto. Topo/meio de fun
 | fecho | 17,5–20 s | 1 CTA + marca | `FAST`, depois parado | cauda |
 
 ## Regras do formato
-- **UI própria:** bolhas, cabeçalho e checks desenhados com `brand.css` (`--surface`, `--surface-2`, `--accent-soft`, raio da marca). Nunca copiar cores, ícones, fundo ou logo de mensageiros reais.
-- **Cadência de digitação:** indicador (3 pontos, `SNAP` em loop de 0,9 s) dura `0,6 s + 0,05 s × palavras` (máx. 1,6 s). Resposta impulsiva: 0,3 s.
-- **Tempo de leitura por bolha:** antes da próxima ação, `máx(1,0 s; 0,3 s × palavras)`. Bolha ≤ 12 palavras; mais que isso, quebre em duas (stagger 0,25 s).
-- **Entrada da bolha:** `SOFT` (passagem ~8%) com origem no canto da cauda; as anteriores sobem com `GENTLE` ao mesmo tempo. Se o `BRAND.md` pedir calma, use `FAST`.
-- **Confirmação de leitura:** check único → duplo → cor de destaque com `swap` 0,4 s depois da leitura; só quando a leitura é parte da história.
-- **A virada é 1 mensagem**, sozinha na tela por ≥ 1,2 s, precedida de pausa. Ela muda a hora, quem fala ou o que já estava resolvido.
-- O fecho mostra o produto cumprindo a virada, com cursor se for interface (ver `fmt-recorte-funcionalidade`).
-- Nomes = elenco fictício do `BRAND.md`, marcados como ilustrativos. Nicho de saúde: zero conteúdo clínico na conversa, nenhum depoimento de paciente, nenhuma promessa de resultado.
-
-## Erros comuns
-- Bolhas sem indicador ou todas no mesmo ritmo.
-- Conversa longa demais para ler no tempo.
-- Copiar a cara de um app real (verde, papel de parede, logo).
-- Virada misturada no meio da troca, sem pausa.
+- **UI própria** com `brand.css` (`--surface`, `--surface-2`, `--accent-soft`, raio da marca); nada de mensageiro real.
+- **Digitação:** 3 pontos (`SNAP`, loop 0,9 s) por `0,6 s + 0,05 s × palavras` (máx. 1,6 s); resposta impulsiva 0,3 s. Toda bolha tem indicador.
+- **Bolha ≤ 12 palavras**; acima, quebre em duas (stagger 0,25 s). Entra `SOFT` do canto da cauda, anteriores sobem `GENTLE` (marca calma → `FAST`).
+- **Leitura:** check único → duplo → destaque (`swap`, 0,4 s após), só se fizer parte da história.
+- **Virada = 1 mensagem**, sozinha ≥ 1,2 s após pausa; muda hora, remetente ou o resolvido.
+- Fecho: produto cumprindo a virada. Saúde: zero conteúdo clínico.
 
 ## Exemplo (kz) — 20 s, 80 BPM, sem locução
-- 0,0 s — cabeçalho "Paciente (ilustrativo) · 23:04"; bolha: "Oi, desculpa a hora… não vou conseguir amanhã 😕".
-- 2,5 s — terapeuta digitando 1,1 s: "Tudo bem! Me fala um horário 🙂" · 5 s — 2 respostas curtas de remarcação.
-- 9,5 s — pausa; texto na tela: "23h. Ainda no WhatsApp do consultório."
-- 10,5 s — virada: mesma conversa, remetente "kz · lembrete automático" (ilustrativo), em horário comercial; paciente responde "Confirmo ✓".
-- 14 s — a bolha "Confirmo" vira o chip "confirmada" na agenda da kz (recurso: lembretes e confirmações via WhatsApp, `BUSINESS.md`).
-- 17,5 s — "Peça seu acesso" + logo.
+- 0 s "Paciente (ilustrativo) · 23:04": "não vou conseguir amanhã 😕" · 2,5–9 s remarcação.
+- 10,5 s virada: "kz · lembrete automático" (ilustrativo), horário comercial; "Confirmo ✓".
+- 14 s "Confirmo" vira o chip "confirmada" na agenda (`BUSINESS.md`) · 17,5 s "Peça seu acesso".
 
 ## Checklist do formato
-- [ ] UI do chat 100% em tokens da marca, sem marca de terceiros?
-- [ ] Indicador proporcional ao tamanho da mensagem?
-- [ ] Cada bolha legível pelo tempo mínimo?
-- [ ] Virada sozinha, com pausa?
-- [ ] Fecho com recurso real e fonte?
-- [ ] Pipeline: siga a skill `video`.
+- [ ] Chat 100% em tokens, sem cara de app real?
+- [ ] Indicador proporcional (máx. 1,6 s)?
+- [ ] Virada sozinha ≥ 1,2 s, após pausa?

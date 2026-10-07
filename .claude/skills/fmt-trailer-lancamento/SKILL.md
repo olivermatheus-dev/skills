@@ -5,13 +5,12 @@ description: "Receita de trailer cinematográfico de lançamento de produto (15�
 
 # Trailer de lançamento
 
-Peça de topo/meio de funil para anunciar o produto (ou uma versão) com impacto de estúdio. Reels, feed, stories e pré-roll; 4:5 + 9:16.
+Estilo default: Trailer + Premium Minimal
+Motor: skill `video` (nível médio por padrão) · regras gerais: `knowledge/video/REGRAS.md`.
 
-## Quando usar / quando não usar
-- **Usar:** lançamento, pré-lançamento, versão nova grande, abertura de lista de espera.
-- **Não usar:** explicar 1 funcionalidade (→ `fmt-recorte-funcionalidade`), produto sem tela real para mostrar (→ `fmt-texto-cinetico`), anúncio de conversão com oferta (o trailer vende desejo, não preço).
+**Não usar:** 1 funcionalidade (→ `fmt-recorte-funcionalidade`) · sem tela real (→ `fmt-texto-cinetico`) · oferta com preço.
 
-## Parâmetros (o usuário pode mudar)
+## Parâmetros
 | parâmetro | default | opções |
 |---|---|---|
 | duração | 20 s | 15 · 30 s |
@@ -32,33 +31,18 @@ Peça de topo/meio de funil para anunciar o produto (ou uma versão) com impacto
 | cartão final | 17,5–20 s | CTA único + marca | só drift; nada some | cauda do impacto, sem SFX novo |
 
 ## Regras do formato
-- **A virada cai entre 60–70%** e é precedida de 0,2–0,5 s de silêncio declarado no plano.
-- Build **acelera** (golpes cada vez mais curtos, até 0,8 s); produto e revelação **seguram**. O contraste de ritmo é o trailer.
-- No máximo **2 transições**: uma para o build (hard cut) e uma assinatura para o drop.
-- **Com locução:** a voz cala no silêncio e volta *depois* do impacto; frase da revelação ≤ 6 palavras. **Sem locução:** o texto conta a história sozinho (autoplay mudo).
-- Todo recurso mostrado no bloco "produto" tem fonte (print, `BUSINESS.md`). Nicho de saúde: dor administrativa, nunca promessa de resultado terapêutico.
-- Cores, fonte e molas pelo `brand.css`/`BRAND.md` (a marca pode proibir whip ou `SOFT`).
+- **Drop em 60–70%**, após 0,2–0,5 s de silêncio declarado no plano.
+- Build **acelera** (golpes até 0,8 s); produto e revelação **seguram**.
+- Máx. **2 transições**: hard cut no build + 1 assinatura no drop.
+- **Com locução:** a voz cala no silêncio e volta *depois* do impacto; revelação ≤ 6 palavras.
 
-## Erros comuns
-- Abrir com logo ou fade do preto.
-- Drop sem silêncio antes (o impacto não pesa).
-- Produto como print parado; nada muda sem clique.
-- Cartão final com 2 CTAs ou < 2 s.
-- Build com texto demais (> 6 palavras por golpe).
-
-## Exemplo (kz) — folha de batidas, 20 s, 85 BPM, sem locução
-- 0,0 s — "23h. Ainda confirmando paciente." sobre o creme; pulso grave.
-- 2,0 / 3,4 / 4,8 / 6,0 s — golpes: "Agenda num app." · "Link em outro." · "Notas no caderno." · "Lembrete? Na memória." (`SNAP`, hard cut na batida).
-- 7,2 s — riser; 8,0 s — silêncio 0,4 s.
-- 8,4 s — máscara arredondada (raio 16) abre a agenda da kz; sub boom.
-- 10–14 s — cursor clica numa sessão; chip "lembrete enviado" entra com `FAST` (recurso: lembretes via WhatsApp, `BUSINESS.md`).
-- 15 s — logo kz + "Feito por terapeuta, pra terapeuta." · 17,5 s — CTA "Peça seu acesso".
+## Exemplo (kz) — 20 s, 85 BPM, sem locução
+- 0 s "23h. Ainda confirmando paciente." · 2–6 s golpes "Agenda num app." / "Link em outro." / "Lembrete? Na memória."
+- 8 s silêncio 0,4 s → máscara (raio 16) abre a agenda; cursor liga lembrete.
+- 15 s logo + "Feito por terapeuta, pra terapeuta." · 17,5 s "Peça seu acesso".
 
 ## Checklist do formato
-- [ ] 1º quadro com a situação da persona?
-- [ ] Silêncio antes do drop, drop em 60–70%?
+- [ ] Persona no 1º quadro?
+- [ ] Silêncio antes do drop; drop em 60–70%?
 - [ ] Build acelera, revelação segura?
 - [ ] ≤ 2 transições?
-- [ ] Todo gesto no produto conduzido pelo cursor e com fonte?
-- [ ] Cartão final ≥ 2 s com 1 CTA?
-- [ ] Pipeline: siga a skill `video`.

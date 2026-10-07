@@ -5,13 +5,12 @@ description: "Receita de herói 3D do produto: celular ou notebook girando com p
 
 # 3D produto
 
-O aparelho com a tela real do produto como protagonista, em movimento de câmera de estúdio. Meio de funil e marca: abertura/revelação de trailer, hero de LP, anúncio de reconhecimento. Feed, reels e 16:9.
+Estilo default: Tech Product + Premium Minimal
+Motor: skill `video` (nível médio por padrão) · regras gerais: `knowledge/video/REGRAS.md`.
 
-## Quando usar / quando não usar
-- **Usar:** revelar o produto, dar sensação premium, mostrar que existe app no celular e no computador.
-- **Não usar:** explicar um fluxo (→ `fmt-recorte-funcionalidade`); sem print real em `brand/screenshots/`; quando a tela precisa ser lida por mais de 3 s seguidos (use 2D).
+**Não usar:** explicar fluxo (→ `fmt-recorte-funcionalidade`) · sem print real · tela lida > 3 s (use 2D).
 
-## Parâmetros (o usuário pode mudar)
+## Parâmetros
 | parâmetro | default | opções |
 |---|---|---|
 | aparelho | celular | notebook · os dois (paralaxe) |
@@ -31,34 +30,19 @@ O aparelho com a tela real do produto como protagonista, em movimento de câmera
 | cartão final | 10–12 s | CTA + marca | parado + drift | cauda |
 
 ## Regras do formato
-- **Sem enjoo:** rotação ≤ 30°/s, nunca giro contínuo de 360°; amplitude total ≤ 35° por movimento; nunca girar câmera e aparelho ao mesmo tempo; sem tremor de câmera.
-- **Tela legível:** quando a tela carrega a mensagem, ela fica de frente (±3°) pelo tempo mínimo de leitura (`ritmo-e-leitura.md`). Em ângulo > 15°, a tela é só textura.
-- **Print real** do produto, em alta resolução (≥ 2× o tamanho na tela); dados do elenco fictício, marcados como ilustrativos. Nada de tela inventada.
-- **Luz:** 1 direção no vídeo todo; sombra suave do `brand.css`; reflexo uma vez, branco translúcido (opacidade ≤ 0,25) só no vidro. Fundo liso da marca.
-- **CSS 3D (default, determinístico):** `perspective` 1200–2000 px no palco, `transform-style: preserve-3d` no aparelho, camadas de corpo, borda e tela; animar só `transform`. `filter`, `opacity < 1` e `overflow: hidden` no pai achatam o 3D: aplique-os em filhos.
-- **Three.js/R3F (só se precisar):** modelo glTF de aparelho com licença registrada, órbita > 35° ou reflexo físico real. Animação dirigida pelo tempo da timeline, nunca pelo relógio do navegador. A captura de WebGL **precisa ser validada no kit** (tarefa 003) antes de prometer o render.
-- **Integração** (`knowledge/video/efeitos.md`): UI recortada pela tela (cantos, notch), filha do grupo 3D; pretos e brancos da UI nos tons do `brand.css`; reflexo **por cima** da UI; sombra de contato curta sob o aparelho que abre e desbota quando ele sobe; cards flutuantes com a mesma direção de luz.
-- Movimento e cores pela marca (`BRAND.md` pode pedir `GENTLE` em tudo).
-
-## Erros comuns
-- Celular girando sem parar.
-- Tela em ângulo forte justo quando a mensagem aparece.
-- Mockup genérico com tela falsa.
-- Sombras pesadas, glow ou gradiente no fundo.
-- Blur aplicado no pai do 3D (achata tudo).
+- **Sem enjoo:** ≤ 30°/s, ≤ 35° por movimento, nunca 360° contínuo; câmera e aparelho nunca giram juntos; sem tremor.
+- **Tela legível:** com a mensagem, de frente (±3°); em ângulo > 15° é só textura. Nunca mockup genérico.
+- **CSS 3D (default):** `perspective` 1200–2000 px no palco, `preserve-3d` no aparelho, camadas corpo/borda/tela. `filter`, `opacity < 1` e `overflow: hidden` no pai achatam o 3D: aplique nos filhos.
+- **Three.js/R3F só se precisar** (glTF licenciado, órbita > 35°, reflexo físico); captura WebGL **validada no kit** (tarefa 003) antes de prometer.
+- **Integração** (`knowledge/video/efeitos.md`): UI recortada pela tela (cantos, notch), com pretos e brancos nos tons do `brand.css` (nada de `#000` puro); sombra de contato que desbota quando o aparelho sobe.
 
 ## Exemplo (kz) — 12 s, 85 BPM, celular
-- 0,0 s — celular inclinado sobe com `GENTLE`; tela: agenda da semana (print real, pacientes ilustrativos).
-- 2,0 s — órbita −12° → +12°; card "lembrete enviado" flutua à frente (paralaxe 1,8×).
-- 4,0 s — reflexo cruza o vidro.
-- 5,0 s — de frente; toque numa sessão abre a sala de videochamada (recurso em `BUSINESS.md`).
-- 9,0 s — zoom-through na tela → "Feito por terapeuta, pra terapeuta."
-- 10 s — "Peça seu acesso" + logo.
+- 0 s celular sobe, agenda (print real, pacientes ilustrativos) · 2 s órbita; card "lembrete enviado" (paralaxe 1,8×).
+- 4 s reflexo · 5 s de frente, toque abre a videochamada.
+- 9 s zoom-through → "Feito por terapeuta, pra terapeuta." · 10 s "Peça seu acesso".
 
 ## Checklist do formato
-- [ ] Rotação ≤ 30°/s e ≤ 35° por movimento?
-- [ ] Tela de frente sempre que carrega a mensagem?
-- [ ] Print real, dados ilustrativos?
-- [ ] 1 direção de luz, reflexo único?
+- [ ] ≤ 30°/s e ≤ 35° por movimento?
+- [ ] Tela de frente quando carrega a mensagem?
+- [ ] Filtros e opacidade só nos filhos?
 - [ ] CSS 3D, ou WebGL validado no kit?
-- [ ] Pipeline: siga a skill `video`.

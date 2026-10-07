@@ -5,13 +5,13 @@ description: "Receita de vídeo de UMA funcionalidade em uso (15–30 s): moment
 
 # Recorte de funcionalidade
 
-Mostra uma funcionalidade resolvendo uma dor concreta, com a interface sendo usada. Meio/fundo de funil (níveis 3–4 de consciência): reels, anúncio de consideração, LP, onboarding.
+Estilo default: Tutorial/Software + Tech Product
+Motor: skill `video` (nível médio por padrão) · regras gerais: `knowledge/video/REGRAS.md`.
 
-## Quando usar / quando não usar
-- **Usar:** 1 recurso com antes/depois claro em ≤ 3 gestos; prova de "é simples".
-- **Não usar:** tour do produto inteiro (vira 3 recortes); recurso sem print ou gravação real; lançamento (→ `fmt-trailer-lancamento`).
+Uma funcionalidade resolvendo uma dor concreta, com a interface em uso. Meio/fundo de funil.
+**Não usar:** tour do produto (vira 3 recortes) · recurso sem print real · lançamento (→ `fmt-trailer-lancamento`).
 
-## Parâmetros (o usuário pode mudar)
+## Parâmetros
 | parâmetro | default | opções |
 |---|---|---|
 | duração | 20 s | 15 · 30 s |
@@ -31,33 +31,17 @@ Mostra uma funcionalidade resolvendo uma dor concreta, com a interface sendo usa
 | CTA | 16–20 s | 1 CTA + marca | entra `FAST`, depois parado | cauda, sem SFX novo |
 
 ## Regras do formato
-- **O cursor conduz:** cada mudança de estado tem um `click`, `press` ou digitação antes dela. Nada muda sozinho.
-- **Uma funcionalidade só.** O rótulo do resultado nomeia o ganho, não o recurso ("Ninguém esquece mais" > "Lembretes automáticos"), sem número inventado.
-- **Legível no celular:** se o rótulo de UI ficar < 28 px a 1080 de largura, aproxime a câmera. Cursor dentro do quadro durante todo o zoom.
-- Câmera: aproxima **antes** do gesto, não durante o clique. Máx. 2 níveis de zoom (1× e o escolhido).
-- UI reconstruída em HTML com tokens de `brand.css`, fiel ao print real em `brand/screenshots/`. Dados = elenco fictício do `BRAND.md`, marcados como ilustrativos.
-- Com locução: a palavra-chave coincide com o gesto (visual na palavra ou até 4 quadros antes).
-- Nicho de saúde: mostrar o fluxo administrativo; nada de nota clínica real ou promessa terapêutica.
-
-## Erros comuns
-- Tela inteira do app pequena demais para ler.
-- Cursor em linha reta, sem pausa antes do clique.
-- Zoom e clique ao mesmo tempo (dois protagonistas).
-- Demonstrar 4 recursos em 20 s.
-- Resultado que some antes do tempo de leitura.
+- **Uma funcionalidade só**, ≤ 3 gestos. O rótulo do resultado nomeia o ganho, não o recurso ("Ninguém esquece mais" > "Lembretes automáticos").
+- Cursor dentro do quadro durante todo o zoom; zoom e clique nunca juntos.
+- UI em HTML com tokens de `brand.css`, fiel ao print de `brand/screenshots/`. Saúde: só fluxo administrativo, nada de nota clínica.
 
 ## Exemplo (kz) — lembrete automático no WhatsApp, 20 s, 85 BPM
-- 0,0 s — "Sessão às 9h. Ela vai lembrar?" + celular com notificação; SFX de aviso.
-- 3,0 s — a notificação desce e vira o card da sessão na agenda da kz (match cut).
-- 4,5 s — cursor em curva até a sessão; câmera `GENTLE` 1,5×; clique.
-- 8,0 s — toggle "lembrete pelo WhatsApp" liga (`SNAP`); chip "agendado" entra `FAST`.
-- 12 s — mensagem de lembrete aparece no celular do paciente (ilustrativo; recurso em `BUSINESS.md`).
-- 16 s — "Peça seu acesso" + logo.
+- 0 s "Sessão às 9h. Ela vai lembrar?" + notificação no celular · 3 s a notificação vira o card da sessão na agenda (match cut).
+- 4,5 s cursor + câmera 1,5× · 8 s toggle "lembrete pelo WhatsApp" (`SNAP`), chip "agendado" (`BUSINESS.md`).
+- 12 s lembrete no celular do paciente (ilustrativo) · 16 s "Peça seu acesso".
 
 ## Checklist do formato
-- [ ] 1 funcionalidade, com fonte?
-- [ ] Todo estado novo precedido de gesto?
-- [ ] Rótulos ≥ 28 px no zoom?
-- [ ] Match cut ou zoom-through na entrada, máx. 2 transições?
-- [ ] Resultado legível pelo tempo mínimo; CTA ≥ 2 s?
-- [ ] Pipeline: siga a skill `video`.
+- [ ] 1 funcionalidade; rótulo = ganho?
+- [ ] Entrada por match cut ou zoom-through?
+- [ ] Rótulos ≥ 28 px no zoom; cursor sempre no quadro?
+- [ ] UI fiel ao print real?

@@ -3,17 +3,15 @@ name: fmt-texto-cinetico
 description: "Receita de vídeo só de tipografia animada (10–20 s): gancho → dor → virada → solução → CTA, com tempo por palavra e 1 ideia por tela. Use quando o usuário pedir texto cinético, tipografia animada, kinetic type, vídeo só com texto, reels de frase, 'vídeo sem gravar', 'lettering animado' ou quando não houver tela do produto para mostrar. Usa a skill `video` como motor (plano, render e QA)."
 ---
 
-> Base de conhecimento: `knowledge/video/texto-e-dados.md` (unidade de animação, ênfase, sincronia com a fala, hold).
-
 # Texto cinético
 
-Uma ideia contada só com palavras em movimento. Topo de funil (níveis 1–3): reels e stories que funcionam no mudo, produção rápida, sem depender de print.
+Estilo default: Editorial + Short Premium
+Motor: skill `video` (nível médio por padrão) · regras gerais: `knowledge/video/REGRAS.md`.
 
-## Quando usar / quando não usar
-- **Usar:** espelho de dor, quebra de crença, anúncio curto, produto ainda sem tela, frase da persona.
-- **Não usar:** mostrar como algo funciona (→ `fmt-recorte-funcionalidade`); argumento com mais de 5 frases (vira carrossel).
+Uma ideia só com palavras em movimento. Topo de funil; funciona no mudo, sem print. Aprofundar: `knowledge/video/texto-e-dados.md`.
+**Não usar:** mostrar como funciona (→ `fmt-recorte-funcionalidade`) · mais de 5 frases (vira carrossel).
 
-## Parâmetros (o usuário pode mudar)
+## Parâmetros
 | parâmetro | default | opções |
 |---|---|---|
 | duração | 15 s | 10 · 20 s |
@@ -31,33 +29,19 @@ Uma ideia contada só com palavras em movimento. Topo de funil (níveis 1–3): 
 | CTA | 12,5–15 s | 1 CTA + marca | entra `FAST`, depois parado | cauda |
 
 ## Regras do formato
-- **Tempo por palavra:** cada palavra entra em 0,25–0,35 s; a tela assentada fica `máx(1,0 s; 0,3 s × palavras)` (ver `ritmo-e-leitura.md`). Com locução, cada palavra aparece no seu tempo do `timeline.json` (até 4 quadros antes).
-- **1 ideia por tela, ≤ 6 palavras, máx. 3 linhas.** Quebre a linha por sentido ("perco paciente / por esquecer"), nunca no meio de um sintagma.
-- **Layouts seguros:** pilha à esquerda (default; a linha nova empurra a anterior para cima com `GENTLE`) · centro (frases ≤ 4 palavras) · palavra gigante (1 palavra ocupa ~70% da largura, só na virada). Mesmo tamanho de título em 4:5 e 9:16.
-- **Ênfase em 1 palavra por tela, uma técnica só:** cor `--accent` **ou** peso maior **ou** escala ≥ 1,3× com `SOFT`. Nunca as três; nunca cor aleatória. A palavra enfatizada chega por último, na batida.
-- **Transição entre telas:** `swap` (default) ou match cut — a palavra que fica vira âncora da próxima frase, na mesma posição. Sem crossfade.
-- Nada parado: drift 1,00→1,03 na tela assentada; o texto não treme nem gira.
-- Fonte, pesos e caixa alta pelo `BRAND.md`. Frase sem fonte de dado não leva número.
-
-## Erros comuns
-- Uma palavra por vez em ritmo de metralhadora (ilegível) ou frase inteira de uma vez (vira slide).
-- Ênfase em todas as telas.
-- Efeito diferente em cada palavra (girar, quicar, glitch).
-- Texto sumindo antes do tempo de leitura.
-- Fundo com gradiente para "dar vida".
+- **Palavra entra em 0,25–0,35 s**; com locução, no tempo dela no `timeline.json`.
+- **Máx. 3 linhas por tela**, quebradas por sentido ("perco paciente / por esquecer").
+- **Layouts:** pilha à esquerda (default; linha nova empurra a anterior com `GENTLE`) · centro (≤ 4 palavras) · palavra gigante (~70% da largura, só na virada).
+- **Ênfase: 1 palavra por tela, 1 técnica** (`--accent` **ou** peso **ou** escala ≥ 1,3× `SOFT`), chegando por último, na batida.
+- **Entre telas:** `swap` ou match cut (a palavra que fica vira âncora, mesma posição). Sem crossfade; texto não treme nem gira.
 
 ## Exemplo (kz) — 15 s, 90 BPM, sem locução
-- 0,0 s — "Queria só atender." (frase do `AUDIENCE.md`), "atender" em `--accent`.
-- 2,0 s — `swap`: "Mas confirmo, / cobro, / mando link…"
-- 4,3 s — "e anoto em 3 lugares."
-- 6,0 s — silêncio 0,3 s; "E se fosse um lugar só?" ("um" gigante com `SOFT`).
-- 8,5 s — "Agenda, sessão e notas. / Juntas." (módulos de `BUSINESS.md`).
-- 10,5 s — "kz" assenta `GENTLE` · 12,5 s — "Peça seu acesso" + logo.
+- 0 s "Queria só atender." ("atender" em `--accent`) · 2 s "Mas confirmo, / cobro, / mando link…" · 4,3 s "e anoto em 3 lugares."
+- 6 s silêncio 0,3 s; "E se fosse um lugar só?" ("um" gigante) · 8,5 s "Agenda, sessão e notas. / Juntas." (`BUSINESS.md`).
+- 10,5 s "kz" `GENTLE` · 12,5 s "Peça seu acesso".
 
 ## Checklist do formato
-- [ ] ≤ 6 palavras e 1 ideia por tela?
-- [ ] Tempo mínimo de leitura em toda tela?
-- [ ] 1 ênfase por tela, 1 técnica?
-- [ ] Virada com silêncio e contraste de ritmo?
-- [ ] Funciona no mudo?
-- [ ] Pipeline: siga a skill `video`.
+- [ ] Palavras em 0,25–0,35 s; ≤ 3 linhas, quebra por sentido?
+- [ ] 1 ênfase por tela, 1 técnica, por último?
+- [ ] Virada com 0,3 s de silêncio?
+- [ ] Trocas por `swap`/match cut, sem crossfade?

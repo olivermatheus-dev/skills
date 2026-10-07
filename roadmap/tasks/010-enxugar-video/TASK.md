@@ -1,6 +1,6 @@
 # 010 — Enxugar a base de vídeo e criar níveis de edição
 
-Status: fazendo · Depende de: 002 (material encerrado na Etapa 15)
+Status: feita · Depende de: 002 (material encerrado na Etapa 15)
 
 ## Objetivo
 Gastar o mínimo de tokens por vídeo sem perder qualidade: cada vídeo carrega **só o que o nível pede**.
@@ -39,3 +39,10 @@ Gastar o mínimo de tokens por vídeo sem perder qualidade: cada vídeo carrega 
 
 ## Log
 - 2026-10-07: análise e proposta registradas.
+- 2026-10-07: feita.
+  - `knowledge/video/`: 24 arquivos (~24,7 mil palavras) → `REGRAS.md` (núcleo, ~1,4 mil) + 10 temas; **~12,3 mil palavras no total (−50%)**. Fusões feitas por 6 subagentes em paralelo, cada um com teto de palavras e a lista das regras essenciais do tema; o `REGRAS.md` foi montado com essas listas.
+  - Skill `video` reescrita com 3 níveis (simples · médio = padrão · alto), absorvendo a `esteira-de-producao.md`.
+  - 5 `fmt-*` de vídeo: ~780 → ~545 palavras cada (estilo default + motor no topo; regras gerais removidas).
+  - Agentes, `audio`, `carousel`, `locucao`, molde de marca e roadmap apontam para os nomes novos; nenhuma referência quebrada (grep).
+  - Leitura do nível médio: skill `video` (~1 mil) + `REGRAS.md` (~1,4 mil) + `fmt-*` (~550) + `BRAND.md` (~600) ≈ **3,6 mil palavras** (antes, "ler o relevante" passava de 10 mil).
+  - Achado de quebra: o `.gitignore` (`**/audio/`) escondia a skill `audio`, `tools/audio/` e os catálogos de `library/audio/` do git. Corrigido para `companies/**/audio/` e os arquivos foram versionados.
