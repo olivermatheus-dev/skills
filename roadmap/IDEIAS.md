@@ -15,3 +15,8 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Interface visual (Vite) para gerenciar tudo → só depois do MVP (DEPOIS.md)
 - 2026-10-07 · Meta do MVP: 12 posts da kz (carrosséis, estáticos, motion sobre o produto) → 006
 - 2026-10-07 · Mini skills por tipo/estilo de conteúdo: animações e recursos 3D, diálogos, memes, conteúdos diversos → 005
+- 2026-10-07 · App: trocar entre projetos (empresas), personas, arquivos com **formato tipado** para a interface editar, anotar e comentar → APP.md, 007
+- 2026-10-07 · Concorrentes: cadastrar (links, redes, IDs), monitorar posts do IG, anúncios Meta/Google e canais do YouTube, ranking de engajamento, favoritar, atualizar sob comando; listar ferramentas gratuitas → INTEL.md, APP.md
+- 2026-10-07 · Kanban simples por projeto: backlog, vários quadros, tarefas com descrição e checklist, responsável = eu ou um agente (delegar) → APP.md, 007
+- 2026-10-07 · Agentes estilo Paperclip AI, mas no nosso repo: agentes gerais com skills, instruções e ferramentas próprias; um revisa o outro → APP.md (nativo do Claude Code: `.claude/agents/`)
+- 2026-10-07 · Chaves de API por `.env` (ex.: ElevenLabs para o agente de vídeo gerar áudio) → APP.md; `.env.example` criado

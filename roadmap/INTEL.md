@@ -1,6 +1,6 @@
 # Inteligência de mercado — registro e análise
 
-> Status: **ideia em discussão** (não é prioridade agora; a prioridade é o vídeo). Registrado em 2026-10-06.
+> Status: **ideia em discussão** (não é prioridade agora; a prioridade é o vídeo). Registrado em 2026-10-06; ampliado em 2026-10-07 com o cadastro de concorrentes e as fontes gratuitas. Modelo de dados em `APP.md`.
 
 ## O que o usuário quer
 - **Concorrentes**: toda semana, coletar os anúncios que eles estão veiculando e analisar ângulos, ofertas, formatos e criativos.
@@ -24,6 +24,28 @@ Para comparar: o repo é a **biblioteca** (o que se sabe sobre cada empresa); os
 | Manutenção de scrapers | igual | igual |
 
 Regra que resolve: **só o que é digerido vai para o git em markdown** (o que as skills leem). O bruto (JSON, imagens e vídeos dos anúncios) fica local, fora do git, num SQLite ou em pastas ignoradas. Se um dia o volume ou a agenda pedirem um servidor, só os coletores migram; os dados digeridos continuam onde estão.
+
+## Cadastro e monitoramento de concorrentes (pedido de 2026-10-07)
+- Cadastrar, editar e remover concorrentes por projeto: site, Instagram (@ e ID), YouTube (ID do canal), TikTok, página no Meta (ID), anunciante no Google, outras redes.
+- "Atualizar": o comando ou o botão roda os coletores e traz os dados novos (posts, métricas, anúncios ativos, vídeos).
+- Análise: o que mais engaja (curtidas, comentários, views, envios), temas, formatos, hooks e ângulos de anúncio. **Favoritar** itens e transformar em pautas e argumentos de venda.
+- Modelo de dados: `companies/<slug>/competitors/` (ver `APP.md`).
+
+## Ferramentas e fontes gratuitas (verificar condições atuais antes de implementar)
+| fonte | o que dá | custo / acesso | observação |
+|---|---|---|---|
+| **Instagram Graph API — Business Discovery** | perfil público de contas profissionais: seguidores, posts, legenda, curtidas, comentários, data, tipo de mídia | grátis; exige conta IG profissional própria + app Meta + token | **melhor caminho oficial** para posts de concorrentes. Não traz views de reels de terceiros |
+| **Biblioteca de Anúncios da Meta** (site) | anúncios ativos por página, criativos, data de início, variações | grátis, via web | a API oficial cobre só anúncios políticos/sociais e os da UE; anúncio comercial no Brasil = navegador ou scraper |
+| **YouTube Data API v3** | canais, vídeos, views, curtidas, comentários | grátis (cota de ~10 mil unidades/dia) | chave de API simples |
+| **RSS do YouTube** | últimos vídeos de um canal | grátis, sem chave | `youtube.com/feeds/videos.xml?channel_id=…` |
+| **Central de Transparência de Anúncios do Google** | anúncios do Google por anunciante | grátis, via web | sem API oficial |
+| **TikTok Creative Center** | top anúncios, hashtags e músicas em alta | grátis, via web | ótimo para tendências de criativo |
+| **Biblioteca de Anúncios do LinkedIn** | anúncios por empresa | grátis, via web | B2B |
+| **Google Trends** | interesse de busca e assuntos em alta | grátis, via web | API oficial restrita; bibliotecas não oficiais são instáveis |
+| **yt-dlp** (código aberto) | metadados e download de vídeos (YouTube, IG, TikTok) | grátis | respeitar os Termos de Uso; útil para analisar o vídeo de referência (engenharia reversa) |
+| **Apify** | scrapers prontos (Instagram, Biblioteca de Anúncios, TikTok) | plano grátis com crédito mensal pequeno | caminho pago-por-uso quando a escala crescer |
+| **Social Blade** | histórico de seguidores e visualizações | grátis, via web | crescimento ao longo do tempo |
+| **Claude no navegador** (extensão do Chrome) | ler a Biblioteca de Anúncios ou perfis logado, como uma pessoa | já disponível | v0 sem infraestrutura; bom para coletas semanais pequenas |
 
 ## Desenho proposto (quando for a hora)
 ```
