@@ -15,6 +15,7 @@ Tempos em **segundos** (float). `fps` de trabalho 30 (render final pode ser maio
   ],
   "scenes": [
     { "id": "s1", "block": "gancho", "start": 0.0, "end": 2.2, "vo": ["f1"], "pause": false,
+      "on_screen": "23h04. De novo.",
       "note": "celular vibra na mesa às 23h; balão 'posso remarcar?'" }
   ],
   "events": [
@@ -29,14 +30,16 @@ Tempos em **segundos** (float). `fps` de trabalho 30 (render final pode ser maio
 }
 ```
 
+`on_screen` = texto na tela da cena (a composição lê daqui, então trocar o texto é só `timeline.mjs text`). `music.id` = id em `library/audio/music.json`. `vo[].file` = arquivo da fala (`audio/vo/<id>.*`).
 `asset` = id em `library/audio/sfx.json`. `align: "peak"` → o arquivo começa em `t_evento − peak_s` (o pico cai no quadro do evento; use em whoosh/impact). `align: "start"` → começa no evento (clicks, pops). `pan` de −1 a 1 (discreto: até ±0,3).
 
-Regras de validação (o check do kit deve acusar):
-- Silêncio entre falas consecutivas > 0,5 s (exceto cena com `"pause": true`, até 1 s).
-- Cena sem nada novo por > 3 s (nenhum evento, fala ou corte).
-- Evento fora da cena a que pertence.
-- Último bloco (`cartão final`) com < 2 s.
-- Texto na tela (no `composition.html`) visível por menos que `máx(1 s; 0,3 s × palavras)`.
-- `sfx` com `asset` fora do catálogo ou sem licença; o mesmo `asset` repetido mais de 3× (usar variantes da família).
+Regras de validação (`node tools/video/timeline.mjs check <pasta>` já acusa as marcadas ★):
+- ★ Silêncio entre falas consecutivas > 0,5 s (exceto cena com `"pause": true`, até 1 s).
+- ★ Cena sem nada novo por > 3 s (nenhum evento, fala ou corte).
+- ★ Evento fora da cena a que pertence.
+- ★ Último bloco (`cartão final`) com < 2 s.
+- ★ Texto na tela (`on_screen`) visível por menos que `máx(1 s; 0,3 s × palavras)`.
+- ★ `sfx` com `asset` fora do catálogo ou sem licença; o mesmo `asset` repetido mais de 3× (usar variantes da família).
+- ★ Sem trilha (nunca fundo mudo).
 
 Tipos de evento sugeridos: `click`, `press`, `type`, `hover`, `drag`, `notify`, `swap`, `count`, `reveal`, `cut`, `impact`.

@@ -57,7 +57,7 @@ Padrões de movimento reutilizáveis:
 - **Escala** para hierarquia: o que importa avança (escala ↑), o resto recua (escala ↓ + leve desfoque + opacidade 60–80%).
 - **Paralaxe** em 2–3 camadas no máximo.
 
-## 6. Transições (escolha 1–2 por vídeo e repita como linguagem)
+## 6. Transições (escolha 1–2 por vídeo e repita como linguagem; sistema completo em `transicoes-e-efeitos.md`)
 | transição | quando |
 |---|---|
 | **hard cut na batida** | default; troca de ideia |

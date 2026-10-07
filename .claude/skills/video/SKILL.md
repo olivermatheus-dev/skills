@@ -16,12 +16,13 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
 | áudio (trilha e efeitos) | skill `audio` (o agente `sound-designer` faz) · `knowledge/video/sound-design.md` |
 | montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
-| escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `tecnico-hyperframes.md` |
+| escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `transicoes-e-efeitos.md` · `tecnico-hyperframes.md` |
+| voz | skill `locucao` (v1.0 gratuita → roteiro ElevenLabs → encaixe) |
 
 Precedência: **BRAND.md > receita do fmt-* > knowledge/video (defaults)**.
 
 ## Briefing (4 variáveis)
-Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · formatos (default 4:5 + 9:16) · áudio (default: trilha + efeitos, sem locução). Pergunte só o que faltar e não tiver default.
+Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · formatos (default 4:5 + 9:16) · áudio (default: trilha + efeitos, sem locução). **Nunca vídeo com fundo mudo:** sempre há trilha. Pergunte só o que faltar e não tiver default.
 
 ## Pasta do vídeo
 `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (ou `campaigns/…` se for anúncio):
@@ -40,7 +41,8 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 4. **Sem o "pode seguir" do usuário, não escreva código.**
 
 ### 2. Voz e tempos
-- Com locução: gerar a voz (`locucao.json` → TTS) e extrair o tempo de cada palavra. Sem locução: escolher **BPM** e montar a grade de batidas.
+- Com locução: **v1.0 com voz gratuita de modelo** (skill `locucao`); a voz final da ElevenLabs só entra depois do aval. Sem locução: escolher **BPM** e montar a grade de batidas.
+- **Trilha:** o sound-designer testa **2–3 candidatas gratuitas** do catálogo, trocadas com `timeline.mjs music` (sem reescrever nada); o Oliver escolhe ouvindo.
 - `timeline.json` nasce do áudio: falas ≤ 0,5 s de silêncio entre si; pausa ≤ 1 s só na virada (`"pause": true`); cena dura o que a fala dura; mudanças a cada 0,4–1,2 s de fala; cortes nos tempos fortes.
 - Gestos (clique, digitação, entrada) em `events`; cada SFX aponta para um evento e para um asset do catálogo (`library/audio/sfx.json`). Trilha e efeitos: skill `audio` (Modos A e B).
 
@@ -61,6 +63,9 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 - Medir o áudio: −14 LUFS ±1, true peak ≤ −1 dBTP (`ffmpeg -af ebur128` ou `loudnorm=print_format=summary`).
 - Entregar: caminhos dos MP4 + 1 linha por cena + **o que não foi verificado** (o Claude não escuta: voz e mixagem são do usuário).
 - Registrar no `plano.md`: entregue, em aberto e feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
+
+## Edição rápida (quase zero token)
+`node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …`: troca voz, duração de cena, texto na tela e trilha, e reencaixa tudo o que vem depois. **Ajuste pedido pelo Oliver → primeiro tente resolver com esta ferramenta**, sem reescrever `composition.html` (que lê os tempos e textos da timeline). É a base do futuro MCP de edição (tarefa 009).
 
 ## Kit (motor de render)
 Esperado em `tools/video-kit/`: HyperFrames fixado em versão local + GSAP + `motion.js` + scripts `tts`, `words`, `music`, `sfx`, `mix`, `produce` (`--build-only`), `check`.

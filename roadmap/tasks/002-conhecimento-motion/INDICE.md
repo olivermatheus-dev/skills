@@ -12,6 +12,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 3 — B-roll e cobertura visual | 11 tipos de B-roll, sincronia semântica, fontes, integridade, QC | knowledge/video/b-roll.md | destilado |
 | 2026-10-07 | (enviado no chat; não salvo bruto) Etapa 4 — ritmo, pacing e atenção | macro/micro, densidade, interrupt motivado, escala 0–4, diagnóstico, QC | knowledge/video/pacing-e-atencao.md (+ ajuste em ritmo-e-leitura) | destilado |
 | 2026-10-07 | (chat) Etapa 5 — sound design e biblioteca de SFX | funções, hierarquia, biblioteca e metadados, regras por tipo, motion, layering, identidade sonora, QC | knowledge/video/sound-design.md, som.md, library/audio/README.md, skill `audio`, agente `sound-designer` | destilado |
+| 2026-10-07 | (chat) Etapa 6 — transições visuais e efeitos | escada e sistema de decisão, regras por tipo, presets, sistema da marca, QC, teste de remoção | knowledge/video/transicoes-e-efeitos.md | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -92,3 +93,14 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - skill `audio` (trilha, sound design e curadoria);
     - agente `sound-designer`;
     - seção **Som** no `BRAND.md`.
+- **2026-10-07 · Etapa 6 (transições):** o conteúdo está correto. O que acrescentei:
+  - **Acessibilidade:** no máximo 3 flashes por segundo (WCAG 2.3.1).
+  - **Durações iniciais:** dissolve de 0,3–0,8 s; dip de 6–12 quadros; whip de 6–10 quadros; camera shake de 2–4 quadros com 4–12 px, decaindo.
+  - **Tradução para motion de cada tipo:**
+    - dip vai para a cor de fundo da marca;
+    - push tem direção coerente;
+    - zoom-through;
+    - morph de SVG;
+    - speed ramp vira curva de tempo;
+    - freeze vira hold + anotação.
+  - **Sistema da marca:** por vídeo, 1 família principal + 1 alternativa + 1 especial.

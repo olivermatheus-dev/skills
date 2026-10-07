@@ -27,6 +27,7 @@ companies/<slug>/
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
+Vídeo: ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição).
 Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locais, catálogos `sfx.json`/`music.json`/`bases.json` no git, e **sem licença não usa**. Ferramenta: `node tools/audio/catalog.mjs`.
 
 ## Skills (`.claude/skills/`)
@@ -42,6 +43,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `launch-plan` | plano de lançamento semana a semana |
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
+| `locucao` | voz v1.0 gratuita → roteiro no formato ElevenLabs → encaixe do áudio final |
 
 **Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
