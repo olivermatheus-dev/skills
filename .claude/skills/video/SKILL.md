@@ -10,7 +10,7 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 ## Fontes de verdade (ler sob demanda, não tudo de uma vez)
 | quando | ler |
 |---|---|
-| sempre, antes de planejar | `knowledge/video/esteira-de-producao.md` · `knowledge/video/briefing-e-direcao.md` |
+| sempre, antes de planejar | `knowledge/video/esteira-de-producao.md` · `briefing-e-direcao.md` · `formatos-e-areas-seguras.md` |
 | empresa | `companies/<slug>/brand/BRAND.md` (proibições = regra dura) · `context/AUDIENCE.md` · `context/BUSINESS.md` (o que é verdade) · `context/VOICE.md` |
 | formato pedido | `.claude/skills/fmt-<formato>/SKILL.md`, se existir (receita de cenas) |
 | vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
@@ -52,7 +52,7 @@ Moldes: `references/plano.md`, `references/timeline.md`.
 
 ### 4. Conferir (automático + olho)
 - Rodar o build e o check do kit: silêncio acima do limite, 1 quadro por gesto assentado, folhas de contato por formato.
-- **Olhar todas as folhas.** Procurar: texto cortado ou fora da área segura, sobreposição, cursor fora do quadro, cor/fundo fora do BRAND.md, palavra fora do tempo da fala, proibições, contraste (`node tools/contrast.mjs`).
+- **Olhar todas as folhas.** Procurar: texto cortado ou fora da área segura (`formatos-e-areas-seguras.md`), capa ilegível no recorte 3:4, sobreposição, cursor fora do quadro, cor/fundo fora do BRAND.md, palavra fora do tempo da fala, proibições, contraste (`node tools/contrast.mjs`).
 - Consertar → conferir de novo. Só exporta com as folhas limpas.
 
 ### 5. Exportar e entregar
