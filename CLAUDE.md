@@ -22,7 +22,7 @@ companies/<slug>/
   video-templates/  templates de vídeo da empresa
   contents/         AAAA-MM-DD-<tema>/  (roteiro.md, carrossel.html, png/, plano.md, composition.html…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
-  tasks.md          backlog de marketing e vendas
+  board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
 ```
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
@@ -49,8 +49,24 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
 
 ## Ao terminar uma tarefa
 - Salve a peça na pasta certa (acima).
-- Atualize `tasks.md` se a tarefa estava lá.
+- Se a tarefa estava no quadro, atualize o arquivo dela (status, checklist, log).
 - Aprendizado novo (hook vencedor, objeção nova, frase de cliente) → registre no arquivo de contexto correspondente.
+
+## Agentes e Kanban
+- **Kanban:** `companies/<slug>/board/` · colunas `backlog · todo · doing · review · done` · quadros `conteudo · vendas · produto` · `assignee: oliver | ai | agent:<nome>`.
+  - Ver: `node tools/board.mjs <slug>` (`--me` = minha visão, inclui o que está em revisão; `--ai`; `--check`; `--next-id`).
+- **Orquestrador = esta sessão principal** (skill `orquestrar`): tarefa para a IA → divide em subtarefas → delega ao agente → revisor → devolve ao Oliver em `review`.
+- **Agentes** (`.claude/agents/`), cada um com instruções, skills pré-carregadas e ordem de trabalho:
+
+  | agente | faz |
+  |---|---|
+  | `estrategista` | pautas, calendário, plano de lançamento, análise de resultados |
+  | `roteirista` | roteiros, legendas, LP, carta, VSL, textos de anúncio |
+  | `designer` | carrosséis, posts, criativos estáticos (PNG) |
+  | `editor-de-video` | plano, voz, cenas e MP4 em motion |
+  | `revisor` | QA de tudo antes de ir para o Oliver |
+
+  Todos seguem `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Construção do hub (roadmap)
 Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados), `INTEL.md` (inteligência de mercado), `APP.md` (visão do app: projetos, kanban, concorrentes, agentes) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).

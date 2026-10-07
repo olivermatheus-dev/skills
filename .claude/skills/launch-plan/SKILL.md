@@ -5,12 +5,12 @@ description: Monta plano de lançamento em pt-BR por fases e semanas, usando can
 
 # Launch Plan
 
-Plano de lançamento semana a semana + tarefas no `tasks.md` da empresa.
+Plano de lançamento semana a semana + tarefas no quadro `board/` da empresa.
 
 ## Antes de começar
 
 1. **Empresa:** pelo `CLAUDE.md`; na dúvida, perguntar.
-2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `COPY.md`, `CONTENT_STRATEGY.md`, `COMPETITORS.md`; e `companies/<slug>/tasks.md` (pendências que travam o lançamento: preço, link, compliance).
+2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `COPY.md`, `CONTENT_STRATEGY.md`, `COMPETITORS.md`; e o quadro `node tools/board.mjs <slug>` (pendências que travam o lançamento: preço, link, compliance).
 3. **Contexto velho?** Se o `BUSINESS.md` fala de uma data de lançamento que já passou ou tem "a validar" sobre o estágio, perguntar primeiro: já lançou? Tem clientes?
 4. **Confirmar:** o que se lança, data de abertura, verba de anúncios, audiência atual (seguidores, lista/WhatsApp), quem executa e quantas horas/semana.
 
@@ -59,7 +59,7 @@ Salvar em `companies/<slug>/campaigns/AAAA-MM-DD-lancamento/plano.md`:
 | S1 (dd/mm) | ... | ... | ... | LP de captura (`landing-page`) | inscritos |
 
 ## Bloqueios antes da abertura
-- itens abertos do `tasks.md` que impedem anunciar/vender (preço, link, compliance)
+- tarefas abertas do quadro (`node tools/board.mjs <slug>`) que impedem anunciar/vender (preço, link, compliance)
 
 ## Riscos
 - ...
@@ -71,7 +71,7 @@ Salvar em `companies/<slug>/campaigns/AAAA-MM-DD-lancamento/plano.md`:
 
 ### 2. Tarefas
 
-Adicionar ao `companies/<slug>/tasks.md` (nunca apagar linhas; continuar o `id`). Usar os valores do cabeçalho do arquivo: `status` todo | doing | done · `tipo` conteudo | anuncio | lp | estrategia | vendas | setup.
+Criar 1 arquivo de tarefa por ação em `companies/<slug>/board/` (formato em `.claude/skills/orquestrar/SKILL.md`; id via `node tools/board.mjs <slug> --next-id`; `parent` = tarefa do lançamento; produção → `assignee: ai`, decisão/dado do dono → `assignee: oliver`). Rodar `--check` no fim.
 
 ```markdown
 | 12 | Criar página de captura | lp | todo | 2026-10-20 | campaigns/2026-10-06-lancamento/plano.md |

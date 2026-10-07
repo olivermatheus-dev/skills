@@ -63,10 +63,10 @@ O `tasks.md` atual vira isso na tarefa 007 (migração simples).
 `[{ "id": "c1", "anchor": {"heading": "Dores", "quote": "trecho comentado"}, "text": "…", "author": "oliver", "created": "…", "resolved": false }]`
 A âncora é um trecho citado, não um número de linha: o comentário sobrevive a edições.
 
-## Agentes (estilo Paperclip, mas nosso)
+## Agentes (estilo Paperclip, mas nosso) — **implementado em 2026-10-07**
 O Claude Code já tem isso nativamente: `.claude/agents/<nome>.md`, com frontmatter `name`, `description`, `tools`/`disallowedTools`, `model`, **`skills`** (pré-carregadas), `mcpServers`, `memory`, `permissionMode`. Um agente pode chamar outro (revisão) e roda pela linha de comando (`claude --agent <nome>`).
 
-Agentes gerais propostos (servem a qualquer projeto; a empresa é parâmetro):
+Agentes gerais (servem a qualquer projeto; a empresa é parâmetro). Implementados: estrategista, roteirista, designer, editor-de-video, revisor. Orquestrador = sessão principal + skill `orquestrar`. `trafego` foi absorvido pelo roteirista (copy de anúncio) e pelo estrategista (análise); `inteligencia` só quando o `INTEL.md` sair do papel.
 | agente | skills | ferramentas extras |
 |---|---|---|
 | `estrategista` | setup, landing-page, launch-plan | web |

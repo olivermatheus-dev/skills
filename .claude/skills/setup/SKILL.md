@@ -12,7 +12,7 @@ Objetivo: em uma conversa, sair com a empresa pronta para produzir, com **marca*
 companies/<slug>/
   context/   BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
   brand/     BRAND.md (regras) · brand.css (tokens) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
-  video-templates/  contents/  campaigns/  tasks.md
+  video-templates/  contents/  campaigns/  board/ (Kanban)
 ```
 
 ## Contexto (`context/`, máximo de palavras)
@@ -53,7 +53,7 @@ Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. N
 6. **Perguntar só o que falta:** no máximo 8 perguntas, numa mensagem. Prioridade: oferta e preço, cliente ideal e dor nº 1, concorrentes, diferencial, provas, tom.
 7. **Rascunhar os 6 arquivos de contexto** de uma vez. Onde não souber, coloque a melhor hipótese em `## A validar`.
 8. **Revisão em 1 rodada:** resumo de 10 linhas (big idea, persona, oferta, ângulo vs concorrentes, paleta) → o usuário corrige.
-9. **Checklist do que falta** (logo branco, fotos, preço final…) → linhas no `tasks.md` da empresa.
+9. **Checklist do que falta** (logo branco, fotos, preço final…) → tarefas no quadro `board/` da empresa (formato em `.claude/skills/orquestrar/SKILL.md`; id com `node tools/board.mjs <slug> --next-id`; `assignee: oliver`).
 
 Funciona por partes: dá para fazer só a marca hoje e o contexto amanhã.
 

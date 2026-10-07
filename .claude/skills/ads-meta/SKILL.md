@@ -120,4 +120,4 @@ O que ganhou (ângulo, estrutura do hook, formato, tamanho do texto) → 3–5 v
 Status: `em teste`, `vencedor`, `aposentado`.
 
 ## Nichos regulados
-Saúde, finanças, emagrecimento, renda: check de compliance do QA. O Meta reprova atributos pessoais ("Você tem ansiedade?") e antes-e-depois. Produto vendido **para** profissional de saúde: depoimento de profissional-cliente sobre o produto pode (real, autorizado); caso ou fala de paciente, nunca. Pendência de regra do conselho em aberto no `BUSINESS.md`/`tasks.md` → entregar os anúncios marcados "não subir até validar".
+Saúde, finanças, emagrecimento, renda: check de compliance do QA. O Meta reprova atributos pessoais ("Você tem ansiedade?") e antes-e-depois. Produto vendido **para** profissional de saúde: depoimento de profissional-cliente sobre o produto pode (real, autorizado); caso ou fala de paciente, nunca. Pendência de regra do conselho em aberto no `BUSINESS.md`/quadro (`node tools/board.mjs <slug>`) → entregar os anúncios marcados "não subir até validar".

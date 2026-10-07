@@ -47,4 +47,4 @@ Com perfis ou posts de referência:
 4. 5 pautas para a empresa: mesmo mecanismo, assunto nosso, nunca cópia.
 
 ## Saída
-Tabela no chat. Pautas aprovadas → linhas em `companies/<slug>/tasks.md` (tipo `conteudo`, status `todo`, continuar o `id`).
+Tabela no chat. Pautas aprovadas → 1 tarefa por pauta no quadro `companies/<slug>/board/` (`board: conteudo`, `status: todo`, `assignee: ai`; id via `node tools/board.mjs <slug> --next-id`).
