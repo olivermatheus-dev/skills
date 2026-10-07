@@ -16,6 +16,8 @@ export const qk = {
   competitors: (slug: string) => ['competitors', slug] as const,
   competitor: (slug: string, id: string) => ['competitor', slug, id] as const,
   competitorsSummary: (slug: string) => ['competitors-summary', slug] as const,
+  analysis: (slug: string, id: string) => ['analysis', slug, id] as const,
+  analysisOverview: (slug: string) => ['analysis-overview', slug] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
@@ -35,6 +37,8 @@ export const q = {
   // recém-criado (otimista): espera a criação e usa o id real
   competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: async () => api.competitor(slug, await realId('competitor', slug, id)), enabled: !!slug && !!id }),
   competitorsSummary: (slug: string) => queryOptions({ queryKey: qk.competitorsSummary(slug), queryFn: () => api.competitorsSummary(slug), enabled: !!slug }),
+  analysis: (slug: string, id: string) => queryOptions({ queryKey: qk.analysis(slug, id), queryFn: () => api.analysis(slug, id), enabled: !!slug && !!id }),
+  analysisOverview: (slug: string) => queryOptions({ queryKey: qk.analysisOverview(slug), queryFn: () => api.analysisOverview(slug), enabled: !!slug }),
   contextList: (slug: string) => queryOptions({ queryKey: qk.contextList(slug), queryFn: () => api.contextList(slug), enabled: !!slug }),
   // documento importante com salvar explícito: não recarrega sozinho por baixo da edição
   context: (slug: string, name: string) => queryOptions({ queryKey: qk.context(slug, name), queryFn: () => api.context(slug, name), staleTime: Infinity, refetchOnWindowFocus: false }),
@@ -52,6 +56,8 @@ export const useIdeas = (slug: string) => useQuery(q.ideas(slug));
 export const useCompetitors = (slug: string) => useQuery(q.competitors(slug));
 export const useCompetitor = (slug: string, id: string) => useQuery(q.competitor(slug, id));
 export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSummary(slug));
+export const useAnalysis = (slug: string, id: string) => useQuery(q.analysis(slug, id));
+export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview(slug));
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));
 export const useContextDoc = (slug: string, name: string) => useQuery(q.context(slug, name));
 export const useBrandCss = (slug: string) => useQuery(q.brandCss(slug));
@@ -62,7 +68,7 @@ export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
 const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> = {
   '': (s) => [q.project(s), q.tasks(s), q.notes(s), q.ideas(s), q.competitors(s)],
   quadro: (s) => [q.tasks(s)],
-  concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s)],
+  concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s), q.analysisOverview(s)],
   ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s)],
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
@@ -76,7 +82,7 @@ export function prefetchPage(qc: QueryClient, slug: string, path: string) {
 export function prefetchProject(qc: QueryClient, slug: string) {
   for (const p of Object.keys(PAGE_QUERIES)) prefetchPage(qc, slug, p);
 }
-export const prefetchCompetitor = (qc: QueryClient, slug: string, id: string) => void qc.prefetchQuery(q.competitor(slug, id));
+export const prefetchCompetitor = (qc: QueryClient, slug: string, id: string) => { void qc.prefetchQuery(q.competitor(slug, id)); void qc.prefetchQuery(q.analysis(slug, id)); };
 
 /** roda quando o navegador está ocioso (depois da 1ª pintura) */
 export function whenIdle(fn: () => void, timeout = 1500) {

@@ -75,6 +75,15 @@ on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
   return collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems });
 });
 
+// Análise por módulos: resultados, anotações, pedido (fila da IA) e o módulo `site` (script, roda aqui mesmo)
+on('GET', '/api/projects/:slug/competitors/:id/analysis', (p) => S.getAnalysis(p.slug, p.id));
+on('PUT', '/api/projects/:slug/competitors/:id/analysis/notes/:key', (p, b) => S.setAnalysisNote(p.slug, p.id, p.key, String(b.text ?? '')));
+on('PUT', '/api/projects/:slug/competitors/:id/analysis/request', (p, b) => S.requestAnalysis(p.slug, p.id, b));
+on('DELETE', '/api/projects/:slug/competitors/:id/analysis/request', (p) => S.clearAnalysisRequest(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => (await import('../../tools/intel/site')).analyzeSite(p.slug, p.id));
+on('GET', '/api/projects/:slug/analysis-overview', async (p) => (await import('../../tools/intel/summary')).analysisOverview(p.slug));
+on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
+
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
 on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));
 

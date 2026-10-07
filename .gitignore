@@ -27,3 +27,4 @@ logs/
 *.aiff
 *.m4a
 app/dist/
+companies/**/competitors/*/site/

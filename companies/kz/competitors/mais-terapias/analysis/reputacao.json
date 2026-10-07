@@ -1,0 +1,20 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:14:53Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/mais-terapias/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Página direta do Reclame Aqui bloqueou (403) e buscas não retornaram empresa Mais Terapias; não confirmado se existe cadastro. Sem app nas lojas confirmado (sistema web em app.maisterapias.com.br)."
+  }
+}

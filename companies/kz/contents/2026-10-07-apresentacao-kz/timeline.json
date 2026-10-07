@@ -1,5 +1,5 @@
 {
-  "status": "v01 para revisão do Oliver",
+  "status": "v02 para revisão do Oliver",
   "fps": 30,
   "formats": [
     "4x5",
@@ -63,62 +63,62 @@
       "words": [
         {
           "w": "Você",
-          "s": 0.35,
-          "e": 0.756
+          "s": 0.39,
+          "e": 0.796
         },
         {
           "w": "é",
-          "s": 0.756,
-          "e": 0.976
+          "s": 0.796,
+          "e": 1.186
         },
         {
           "w": "terapeuta",
-          "s": 0.976,
-          "e": 1.636
+          "s": 1.186,
+          "e": 1.846
         },
         {
           "w": "e",
-          "s": 1.636,
-          "e": 1.836
+          "s": 1.846,
+          "e": 2.046
         },
         {
           "w": "ainda",
-          "s": 1.836,
-          "e": 2.016
+          "s": 2.046,
+          "e": 2.266
         },
         {
           "w": "organiza",
-          "s": 2.016,
-          "e": 2.556
+          "s": 2.266,
+          "e": 2.746
         },
         {
           "w": "sua",
-          "s": 2.556,
-          "e": 2.676
+          "s": 2.746,
+          "e": 2.886
         },
         {
           "w": "rotina",
-          "s": 2.676,
-          "e": 3.056
+          "s": 2.886,
+          "e": 3.266
         },
         {
           "w": "em",
-          "s": 3.056,
-          "e": 3.336
+          "s": 3.266,
+          "e": 3.566
         },
         {
           "w": "vários",
-          "s": 3.336,
-          "e": 3.656
+          "s": 3.566,
+          "e": 3.846
         },
         {
           "w": "lugares",
-          "s": 3.656,
-          "e": 4.076
+          "s": 3.846,
+          "e": 4.286
         },
         {
           "w": "diferentes?",
-          "s": 4.076,
+          "s": 4.286,
           "e": 4.892
         }
       ],
@@ -134,57 +134,57 @@
       "words": [
         {
           "w": "Agenda",
-          "s": 5.833,
-          "e": 6.553
+          "s": 6.062,
+          "e": 6.782
         },
         {
           "w": "de",
-          "s": 6.553,
-          "e": 6.713
+          "s": 6.782,
+          "e": 6.942
         },
         {
           "w": "um",
-          "s": 6.713,
-          "e": 6.953
+          "s": 6.942,
+          "e": 7.202
         },
         {
           "w": "lado,",
-          "s": 6.953,
-          "e": 7.773
+          "s": 7.202,
+          "e": 8.022
         },
         {
           "w": "informações",
-          "s": 7.773,
-          "e": 8.073
+          "s": 8.022,
+          "e": 8.302
         },
         {
           "w": "dos",
-          "s": 8.073,
-          "e": 8.333
+          "s": 8.302,
+          "e": 8.562
         },
         {
           "w": "pacientes",
-          "s": 8.333,
-          "e": 8.813
+          "s": 8.562,
+          "e": 9.042
         },
         {
           "w": "de",
-          "s": 8.813,
-          "e": 9.173
+          "s": 9.042,
+          "e": 9.402
         },
         {
           "w": "outro,",
-          "s": 9.173,
-          "e": 9.913
+          "s": 9.402,
+          "e": 9.826
         },
         {
           "w": "anotações",
-          "s": 9.913,
-          "e": 10.373
+          "s": 9.826,
+          "e": 10.286
         },
         {
-          "w": "espalhadas...",
-          "s": 10.373,
+          "w": "espalhadas…",
+          "s": 10.286,
           "e": 11.392
         }
       ],
@@ -199,68 +199,63 @@
       "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender.",
       "words": [
         {
-          "w": "E,",
-          "s": 11.792,
-          "e": 11.929
+          "w": "E",
+          "s": 11.832,
+          "e": 11.969
         },
         {
           "w": "no",
-          "s": 11.929,
-          "e": 12.169
+          "s": 11.969,
+          "e": 12.209
         },
         {
           "w": "fim,",
-          "s": 12.169,
-          "e": 12.829
+          "s": 12.209,
+          "e": 12.54
         },
         {
           "w": "sobra",
-          "s": 12.829,
-          "e": 12.989
+          "s": 12.54,
+          "e": 12.72
         },
         {
           "w": "menos",
-          "s": 12.989,
-          "e": 13.369
+          "s": 12.72,
+          "e": 13.1
         },
         {
           "w": "tempo",
-          "s": 13.369,
-          "e": 13.669
+          "s": 13.1,
+          "e": 13.4
         },
         {
           "w": "para",
-          "s": 13.669,
-          "e": 13.969
+          "s": 13.4,
+          "e": 13.7
         },
         {
           "w": "aquilo",
-          "s": 13.969,
-          "e": 14.109
+          "s": 13.7,
+          "e": 13.84
         },
         {
           "w": "que",
-          "s": 14.109,
-          "e": 14.429
+          "s": 13.84,
+          "e": 14.16
         },
         {
           "w": "realmente",
-          "s": 14.429,
-          "e": 14.969
+          "s": 14.16,
+          "e": 14.7
         },
         {
-          "w": "importa",
-          "s": 14.969,
-          "e": 15.529
-        },
-        {
-          "w": "–",
-          "s": 15.529,
-          "e": 16.069
+          "w": "importa:",
+          "s": 14.7,
+          "e": 15.922
         },
         {
           "w": "atender.",
-          "s": 16.069,
+          "s": 15.922,
           "e": 16.59
         }
       ],
@@ -276,102 +271,102 @@
       "words": [
         {
           "w": "A",
-          "s": 17.44,
-          "e": 17.771
+          "s": 17.48,
+          "e": 17.812
         },
         {
-          "w": "KZ",
-          "s": 17.771,
-          "e": 18.111
+          "w": "kz",
+          "s": 17.812,
+          "e": 18.192
         },
         {
           "w": "é",
-          "s": 18.111,
-          "e": 18.271
+          "s": 18.192,
+          "e": 18.352
         },
         {
           "w": "uma",
-          "s": 18.271,
-          "e": 18.471
+          "s": 18.352,
+          "e": 18.512
         },
         {
           "w": "plataforma",
-          "s": 18.471,
-          "e": 18.951
+          "s": 18.512,
+          "e": 18.992
         },
         {
           "w": "feita",
-          "s": 18.951,
-          "e": 19.511
+          "s": 18.992,
+          "e": 19.552
         },
         {
           "w": "para",
-          "s": 19.511,
-          "e": 19.731
+          "s": 19.552,
+          "e": 19.772
         },
         {
           "w": "terapeutas",
-          "s": 19.731,
-          "e": 20.411
+          "s": 19.772,
+          "e": 20.002
         },
         {
           "w": "que",
-          "s": 20.411,
-          "e": 20.571
+          "s": 20.002,
+          "e": 20.182
         },
         {
           "w": "querem",
-          "s": 20.571,
-          "e": 20.811
+          "s": 20.182,
+          "e": 20.422
         },
         {
           "w": "deixar",
-          "s": 20.811,
-          "e": 21.151
+          "s": 20.422,
+          "e": 20.762
         },
         {
           "w": "a",
-          "s": 21.151,
-          "e": 21.311
+          "s": 20.762,
+          "e": 20.922
         },
         {
           "w": "gestão",
-          "s": 21.311,
-          "e": 21.631
+          "s": 20.922,
+          "e": 21.242
         },
         {
           "w": "da",
-          "s": 21.631,
-          "e": 21.771
+          "s": 21.242,
+          "e": 21.382
         },
         {
           "w": "rotina",
-          "s": 21.771,
-          "e": 22.211
+          "s": 21.382,
+          "e": 21.822
         },
         {
           "w": "mais",
-          "s": 22.211,
-          "e": 22.571
+          "s": 21.822,
+          "e": 22.182
         },
         {
           "w": "simples,",
-          "s": 22.571,
-          "e": 23.591
+          "s": 22.182,
+          "e": 23.202
         },
         {
           "w": "organizada",
-          "s": 23.591,
-          "e": 23.991
+          "s": 23.202,
+          "e": 23.602
         },
         {
           "w": "e",
-          "s": 23.991,
-          "e": 24.371
+          "s": 23.602,
+          "e": 24.23
         },
         {
           "w": "profissional.",
-          "s": 24.371,
+          "s": 24.23,
           "e": 24.923
         }
       ],
@@ -387,87 +382,87 @@
       "words": [
         {
           "w": "Tudo",
-          "s": 25.373,
-          "e": 25.681
+          "s": 25.413,
+          "e": 25.722
         },
         {
           "w": "pensado",
-          "s": 25.681,
-          "e": 26.301
+          "s": 25.722,
+          "e": 26.342
         },
         {
           "w": "para",
-          "s": 26.301,
-          "e": 26.541
+          "s": 26.342,
+          "e": 26.582
         },
         {
           "w": "você",
-          "s": 26.541,
-          "e": 26.821
+          "s": 26.582,
+          "e": 26.862
         },
         {
           "w": "acompanhar",
-          "s": 26.821,
-          "e": 27.381
+          "s": 26.862,
+          "e": 27.422
         },
         {
           "w": "seus",
-          "s": 27.381,
-          "e": 27.561
+          "s": 27.422,
+          "e": 27.602
         },
         {
           "w": "atendimentos",
-          "s": 27.561,
-          "e": 28.261
+          "s": 27.602,
+          "e": 28.282
         },
         {
           "w": "e",
-          "s": 28.261,
-          "e": 28.521
+          "s": 28.282,
+          "e": 28.562
         },
         {
           "w": "organizar",
-          "s": 28.521,
-          "e": 29.101
+          "s": 28.562,
+          "e": 29.142
         },
         {
           "w": "seu",
-          "s": 29.101,
-          "e": 29.241
+          "s": 29.142,
+          "e": 29.262
         },
         {
           "w": "dia",
-          "s": 29.241,
-          "e": 29.561
+          "s": 29.262,
+          "e": 29.602
         },
         {
-          "w": "-a",
-          "s": 29.561,
-          "e": 29.621
+          "w": "a",
+          "s": 29.602,
+          "e": 29.662
         },
         {
-          "w": "-dia",
-          "s": 29.621,
-          "e": 29.761
+          "w": "dia",
+          "s": 29.662,
+          "e": 29.802
         },
         {
           "w": "com",
-          "s": 29.761,
-          "e": 30.121
+          "s": 29.802,
+          "e": 30.162
         },
         {
           "w": "muito",
-          "s": 30.121,
-          "e": 30.581
+          "s": 30.162,
+          "e": 30.622
         },
         {
           "w": "menos",
-          "s": 30.581,
-          "e": 30.821
+          "s": 30.622,
+          "e": 30.882
         },
         {
           "w": "complicação.",
-          "s": 30.821,
+          "s": 30.882,
           "e": 31.587
         }
       ],
@@ -483,47 +478,47 @@
       "words": [
         {
           "w": "Menos",
-          "s": 32.087,
-          "e": 32.659
+          "s": 32.127,
+          "e": 32.704
         },
         {
           "w": "tempo",
-          "s": 32.659,
-          "e": 32.859
+          "s": 32.704,
+          "e": 32.904
         },
         {
-          "w": "administrando,",
-          "s": 32.859,
-          "e": 34.059
+          "w": "administrando.",
+          "s": 32.904,
+          "e": 33.829
         },
         {
-          "w": "mais",
-          "s": 34.059,
-          "e": 34.259
+          "w": "Mais",
+          "s": 33.829,
+          "e": 34.049
         },
         {
           "w": "tempo",
-          "s": 34.259,
-          "e": 34.619
+          "s": 34.049,
+          "e": 34.409
         },
         {
           "w": "cuidando",
-          "s": 34.619,
-          "e": 35.159
+          "s": 34.409,
+          "e": 34.969
         },
         {
           "w": "dos",
-          "s": 35.159,
-          "e": 35.359
+          "s": 34.969,
+          "e": 35.149
         },
         {
           "w": "seus",
-          "s": 35.359,
-          "e": 35.539
+          "s": 35.149,
+          "e": 35.349
         },
         {
-          "w": "pacientes.",
-          "s": 35.539,
+          "w": "pacientes!",
+          "s": 35.349,
           "e": 36.343
         }
       ],
@@ -539,77 +534,77 @@
       "words": [
         {
           "w": "Conheça",
-          "s": 36.793,
-          "e": 37.33
+          "s": 36.833,
+          "e": 37.368
         },
         {
           "w": "a",
-          "s": 37.33,
-          "e": 37.47
+          "s": 37.368,
+          "e": 37.508
         },
         {
-          "w": "KZ",
-          "s": 37.47,
-          "e": 37.83
+          "w": "kz",
+          "s": 37.508,
+          "e": 37.868
         },
         {
           "w": "e",
-          "s": 37.83,
-          "e": 38.11
+          "s": 37.868,
+          "e": 38.128
         },
         {
           "w": "descubra",
-          "s": 38.11,
-          "e": 38.41
+          "s": 38.128,
+          "e": 38.448
         },
         {
           "w": "uma",
-          "s": 38.41,
-          "e": 38.57
+          "s": 38.448,
+          "e": 38.608
         },
         {
           "w": "forma",
-          "s": 38.57,
-          "e": 38.89
+          "s": 38.608,
+          "e": 38.948
         },
         {
           "w": "mais",
-          "s": 38.89,
-          "e": 39.21
+          "s": 38.948,
+          "e": 39.248
         },
         {
           "w": "simples",
-          "s": 39.21,
-          "e": 39.61
+          "s": 39.248,
+          "e": 39.648
         },
         {
           "w": "de",
-          "s": 39.61,
-          "e": 39.77
+          "s": 39.648,
+          "e": 39.828
         },
         {
           "w": "cuidar",
-          "s": 39.77,
-          "e": 40.19
+          "s": 39.828,
+          "e": 40.228
         },
         {
           "w": "da",
-          "s": 40.19,
-          "e": 40.27
+          "s": 40.228,
+          "e": 40.328
         },
         {
           "w": "sua",
-          "s": 40.27,
-          "e": 40.45
+          "s": 40.328,
+          "e": 40.468
         },
         {
           "w": "rotina",
-          "s": 40.45,
-          "e": 40.83
+          "s": 40.468,
+          "e": 40.868
         },
         {
           "w": "profissional.",
-          "s": 40.83,
+          "s": 40.868,
           "e": 41.444
         }
       ],
@@ -629,7 +624,7 @@
       ],
       "lead": 0.35,
       "tail": 0.25,
-      "on_screen": "Você é terapeuta?|Sua rotina em *vários lugares* diferentes?",
+      "on_screen": "Você é *terapeuta*?|Sua rotina em *vários lugares* diferentes?",
       "note": "pergunta grande; fragmentos (agenda, ficha, nota) se espalham em 'vários lugares'",
       "start": 0,
       "end": 5.142
@@ -642,10 +637,17 @@
       ],
       "lead": 0.1,
       "tail": 0.25,
-      "on_screen": "Agenda|Pacientes|Anotações",
+      "on_screen": "*Agenda* de um lado,|*Pacientes* de outro,|*Anotações* espalhadas…",
       "note": "3 cards aparecem nas palavras, tortos e espalhados, com leve deriva",
       "start": 5.142,
-      "end": 11.642
+      "end": 11.642,
+      "params": {
+        "cards": [
+          "Agenda",
+          "Pacientes",
+          "Anotações"
+        ]
+      }
     },
     {
       "id": "s3",
@@ -655,7 +657,7 @@
       ],
       "lead": 0.15,
       "tail": 0.35,
-      "on_screen": "Sobra menos tempo|para o que importa:|atender.",
+      "on_screen": "E no fim, sobra *menos* tempo|para aquilo que realmente importa:|atender.",
       "note": "barra de tempo encolhe em 'menos'; 'atender' em Fraunces itálico",
       "start": 11.642,
       "end": 16.94
@@ -668,7 +670,7 @@
       ],
       "pause": true,
       "tail": 0.3,
-      "on_screen": "Feita para terapeutas|simples|organizada|profissional",
+      "on_screen": "Feita para terapeutas|A gestão da sua rotina mais|simples|organizada|profissional",
       "note": "logo kz desenha na palavra KZ; 3 pílulas nas palavras",
       "start": 16.94,
       "end": 25.223
@@ -681,7 +683,7 @@
       ],
       "lead": 0.15,
       "tail": 0.3,
-      "on_screen": "Boa tarde,|Ana",
+      "on_screen": "Boa tarde,|Ana|Tudo pensado para *você*|Acompanhe seus *atendimentos*|Organize seu *dia a dia*",
       "note": "painel recriado nos tokens do app (dados ilustrativos); destaque nos atendimentos e no dia a dia",
       "start": 25.223,
       "end": 31.887
@@ -718,137 +720,179 @@
       "id": "e1",
       "type": "reveal",
       "scene": "s1",
-      "at": 0.05,
-      "target": "#q",
-      "t": 0.05
+      "at": 0.02,
+      "target": "#q1",
+      "t": 0.02
     },
     {
       "id": "e2",
       "type": "swap",
-      "word": "f1:vários",
-      "offset": -0.08,
-      "target": ".frag",
-      "t": 3.256,
+      "word": "f1:ainda",
+      "offset": -0.12,
+      "target": "#q1",
+      "t": 1.926,
       "scene": "s1"
     },
     {
       "id": "e3",
       "type": "notify",
-      "word": "f2:Agenda",
-      "offset": -0.1,
-      "target": "#c-agenda",
-      "t": 5.733,
-      "scene": "s2"
+      "word": "f1:vários",
+      "offset": -0.08,
+      "target": ".frag",
+      "t": 3.486,
+      "scene": "s1"
     },
     {
       "id": "e4",
       "type": "notify",
-      "word": "f2:informações",
-      "offset": -0.1,
-      "target": "#c-ficha",
-      "t": 7.673,
+      "word": "f2:Agenda",
+      "offset": -0.12,
+      "target": "#c1",
+      "t": 5.942,
       "scene": "s2"
     },
     {
       "id": "e5",
       "type": "notify",
-      "word": "f2:anotações",
-      "offset": -0.1,
-      "target": "#c-nota",
-      "t": 9.813,
+      "word": "f2:informações",
+      "offset": -0.12,
+      "target": "#c2",
+      "t": 7.902,
       "scene": "s2"
     },
     {
       "id": "e6",
-      "type": "cut",
-      "scene": "s3",
-      "at": 0,
-      "target": "#dor",
-      "t": 11.642
+      "type": "notify",
+      "word": "f2:anotações",
+      "offset": -0.12,
+      "target": "#c3",
+      "t": 9.706,
+      "scene": "s2"
     },
     {
       "id": "e7",
-      "type": "count",
-      "word": "f3:menos",
-      "offset": -0.05,
-      "target": "#bar",
-      "t": 12.939,
-      "scene": "s3"
-    },
-    {
-      "id": "e20",
-      "type": "reveal",
-      "word": "f3:importa",
-      "offset": -0.1,
-      "target": "#importa",
-      "t": 14.869,
-      "scene": "s3"
+      "type": "impact",
+      "word": "f2:espalhadas",
+      "offset": 0,
+      "target": ".warn",
+      "t": 10.286,
+      "scene": "s2"
     },
     {
       "id": "e8",
-      "type": "reveal",
-      "word": "f3:atender",
-      "offset": -0.1,
-      "target": "#atender",
-      "t": 15.969,
-      "scene": "s3"
+      "type": "cut",
+      "scene": "s2",
+      "before_end": 0.32,
+      "target": "#s2",
+      "t": 11.322
     },
     {
       "id": "e9",
       "type": "reveal",
-      "word": "f4:KZ",
-      "offset": -0.15,
-      "target": "#logo",
-      "t": 17.621,
-      "scene": "s4"
-    },
-    {
-      "id": "e21",
-      "type": "reveal",
-      "word": "f4:terapeutas",
-      "offset": -0.1,
-      "target": "#tag",
-      "t": 19.631,
-      "scene": "s4"
-    },
-    {
-      "id": "e22",
-      "type": "reveal",
-      "word": "f4:gestão",
-      "offset": -0.1,
-      "target": "#pills",
-      "t": 21.211,
-      "scene": "s4"
+      "scene": "s3",
+      "at": 0.02,
+      "target": "#t1",
+      "t": 11.662
     },
     {
       "id": "e10",
+      "type": "count",
+      "word": "f3:menos",
+      "offset": -0.08,
+      "target": "#ring",
+      "t": 12.64,
+      "scene": "s3"
+    },
+    {
+      "id": "e11",
+      "type": "reveal",
+      "word": "f3:para",
+      "offset": -0.12,
+      "target": "#t2",
+      "t": 13.28,
+      "scene": "s3"
+    },
+    {
+      "id": "e12",
+      "type": "reveal",
+      "word": "f3:atender",
+      "offset": -0.12,
+      "target": "#t3",
+      "t": 15.802,
+      "scene": "s3"
+    },
+    {
+      "id": "e13",
+      "type": "cut",
+      "scene": "s3",
+      "before_end": 0.3,
+      "target": "#s3",
+      "t": 16.64
+    },
+    {
+      "id": "e14",
+      "type": "reveal",
+      "scene": "s4",
+      "at": 0.02,
+      "target": "#logo",
+      "t": 16.96
+    },
+    {
+      "id": "e15",
+      "type": "impact",
+      "word": "f4:kz",
+      "offset": -0.1,
+      "target": "#logo",
+      "t": 17.712,
+      "scene": "s4"
+    },
+    {
+      "id": "e16",
+      "type": "reveal",
+      "word": "f4:terapeutas",
+      "offset": -0.12,
+      "target": "#tag",
+      "t": 19.652,
+      "scene": "s4"
+    },
+    {
+      "id": "e17",
+      "type": "swap",
+      "word": "f4:gestão",
+      "offset": -0.15,
+      "target": "#h4",
+      "t": 20.772,
+      "scene": "s4"
+    },
+    {
+      "id": "e18",
       "type": "notify",
       "word": "f4:simples",
       "offset": -0.1,
       "target": "#p1",
-      "t": 22.471,
+      "t": 22.082,
       "scene": "s4"
     },
     {
-      "id": "e11",
+      "id": "e19",
       "type": "notify",
       "word": "f4:organizada",
       "offset": -0.1,
       "target": "#p2",
-      "t": 23.491,
+      "t": 23.102,
       "scene": "s4"
     },
     {
-      "id": "e12",
+      "id": "e20",
       "type": "notify",
       "word": "f4:profissional",
       "offset": -0.1,
       "target": "#p3",
-      "t": 24.271,
+      "t": 24.13,
       "scene": "s4"
     },
     {
-      "id": "e13",
+      "id": "e21",
       "type": "cut",
       "scene": "s5",
       "at": 0,
@@ -856,77 +900,103 @@
       "t": 25.223
     },
     {
-      "id": "e14",
+      "id": "e22",
       "type": "hover",
       "word": "f5:acompanhar",
-      "offset": -0.1,
+      "offset": -0.12,
       "target": "#next",
-      "t": 26.721,
-      "scene": "s5"
-    },
-    {
-      "id": "e15",
-      "type": "hover",
-      "word": "f5:organizar",
-      "offset": -0.1,
-      "target": "#list",
-      "t": 28.421,
+      "t": 26.742,
       "scene": "s5"
     },
     {
       "id": "e23",
-      "type": "reveal",
-      "word": "f5:complicação",
-      "offset": -0.15,
-      "target": "#done",
-      "t": 30.671,
+      "type": "hover",
+      "word": "f5:organizar",
+      "offset": -0.12,
+      "target": "#list",
+      "t": 28.442,
       "scene": "s5"
     },
     {
-      "id": "e16",
-      "type": "reveal",
-      "scene": "s6",
-      "at": 0.05,
-      "target": "#l1",
-      "t": 31.937
+      "id": "e24",
+      "type": "notify",
+      "word": "f5:complicação",
+      "offset": -0.15,
+      "target": "#done",
+      "t": 30.732,
+      "scene": "s5"
     },
     {
-      "id": "e17",
+      "id": "e25",
+      "type": "cut",
+      "scene": "s5",
+      "before_end": 0.3,
+      "target": "#app",
+      "t": 31.587
+    },
+    {
+      "id": "e26",
+      "type": "reveal",
+      "scene": "s6",
+      "at": 0.02,
+      "target": "#l1",
+      "t": 31.907
+    },
+    {
+      "id": "e27",
       "type": "swap",
-      "word": "f6:mais",
-      "offset": -0.12,
-      "target": "#l2",
-      "t": 33.939,
+      "word": "f6:administrando",
+      "offset": 0.25,
+      "target": "#strike",
+      "t": 33.154,
       "scene": "s6"
     },
     {
-      "id": "e18",
+      "id": "e28",
       "type": "reveal",
-      "scene": "s7",
-      "at": 0.05,
-      "target": "#end",
-      "t": 36.693
+      "word": "f6:mais",
+      "offset": -0.12,
+      "target": "#l2",
+      "t": 33.709,
+      "scene": "s6"
     },
     {
-      "id": "e24",
+      "id": "e29",
+      "type": "notify",
+      "word": "f6:cuidando",
+      "offset": -0.05,
+      "target": "#heart",
+      "t": 34.359,
+      "scene": "s6"
+    },
+    {
+      "id": "e30",
+      "type": "reveal",
+      "scene": "s7",
+      "at": 0.02,
+      "target": "#end",
+      "t": 36.663
+    },
+    {
+      "id": "e31",
       "type": "reveal",
       "word": "f7:descubra",
       "offset": -0.1,
       "target": "#cta",
-      "t": 38.01,
+      "t": 38.028,
       "scene": "s7"
     },
     {
-      "id": "e25",
+      "id": "e32",
       "type": "reveal",
       "word": "f7:rotina",
       "offset": -0.1,
-      "target": "#url",
-      "t": 40.35,
+      "target": "#endsub",
+      "t": 40.368,
       "scene": "s7"
     },
     {
-      "id": "e19",
+      "id": "e33",
       "type": "click",
       "scene": "s7",
       "before_end": 1,
@@ -939,108 +1009,227 @@
       "event": "e1",
       "asset": "whoosh-whoosh-fino-05",
       "align": "peak",
-      "gain_db": -22
+      "gain_db": -20
+    },
+    {
+      "event": "e1",
+      "synth": "pop",
+      "gain_db": -10,
+      "delay": 0.18
     },
     {
       "event": "e2",
-      "asset": "whoosh-whoosh-fino-02",
+      "asset": "whoosh-whoosh-fino-curto-01",
       "align": "peak",
-      "gain_db": -20
+      "gain_db": -22
     },
     {
       "event": "e3",
       "synth": "pop",
-      "gain_db": -8,
-      "pan": -0.2
+      "gain_db": -12,
+      "pan": -0.25
+    },
+    {
+      "event": "e3",
+      "synth": "pop",
+      "gain_db": -13,
+      "pan": 0.25,
+      "delay": 0.09
+    },
+    {
+      "event": "e3",
+      "synth": "pop",
+      "gain_db": -13,
+      "pan": -0.2,
+      "delay": 0.18
+    },
+    {
+      "event": "e3",
+      "synth": "pop",
+      "gain_db": -14,
+      "pan": 0.2,
+      "delay": 0.27
     },
     {
       "event": "e4",
-      "synth": "pop",
-      "gain_db": -8,
-      "pan": 0.2
+      "asset": "ui-ui-interface-01",
+      "gain_db": -16
+    },
+    {
+      "event": "e4",
+      "asset": "whoosh-whoosh-fino-02",
+      "align": "peak",
+      "gain_db": -26
     },
     {
       "event": "e5",
-      "synth": "pop",
-      "gain_db": -8
+      "asset": "ui-ui-interface-03",
+      "gain_db": -16,
+      "pan": 0.2
     },
     {
       "event": "e6",
-      "asset": "whoosh-whoosh-fino-03",
+      "asset": "ui-ui-interface-06",
+      "gain_db": -16,
+      "pan": -0.2
+    },
+    {
+      "event": "e7",
+      "asset": "ui-hud-sound-04",
+      "gain_db": -22,
+      "max": 0.6
+    },
+    {
+      "event": "e8",
+      "asset": "whoosh-whoosh-fino-06",
       "align": "peak",
       "gain_db": -22
     },
     {
-      "event": "e8",
+      "event": "e9",
+      "synth": "swish",
+      "gain_db": -14
+    },
+    {
+      "event": "e10",
+      "asset": "hud-hud-rise-relogio-01",
+      "gain_db": -22,
+      "max": 1.4
+    },
+    {
+      "event": "e11",
+      "asset": "ui-ui-interface-04",
+      "gain_db": -20
+    },
+    {
+      "event": "e12",
       "synth": "chime",
       "gain_db": -12
     },
     {
-      "event": "e9",
+      "event": "e13",
+      "asset": "whoosh-whoosh-fino-07",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e14",
+      "asset": "whoosh-whoosh-fino-08",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e15",
       "asset": "tonal-piano-f-maior-expansivo-01",
       "gain_db": -15,
       "max": 3
     },
     {
-      "event": "e10",
+      "event": "e16",
+      "synth": "pop",
+      "gain_db": -14
+    },
+    {
+      "event": "e17",
+      "synth": "swish",
+      "gain_db": -16
+    },
+    {
+      "event": "e18",
       "asset": "ui-hud-pop-up-02",
       "gain_db": -20,
       "max": 0.5
     },
     {
-      "event": "e11",
+      "event": "e19",
       "asset": "ui-hud-pop-up-03",
       "gain_db": -20,
       "max": 0.5
     },
     {
-      "event": "e12",
+      "event": "e20",
       "asset": "ui-hud-pop-up-04",
       "gain_db": -20,
       "max": 0.5
     },
     {
-      "event": "e13",
+      "event": "e21",
       "asset": "whoosh-whoosh-fino-04",
       "align": "peak",
       "gain_db": -20
     },
     {
-      "event": "e14",
+      "event": "e22",
       "synth": "click",
       "gain_db": -12
     },
     {
-      "event": "e15",
+      "event": "e22",
+      "synth": "swish",
+      "gain_db": -20
+    },
+    {
+      "event": "e23",
       "synth": "click",
       "gain_db": -12
     },
     {
-      "event": "e17",
+      "event": "e23",
+      "synth": "swish",
+      "gain_db": -20
+    },
+    {
+      "event": "e24",
+      "synth": "ding",
+      "gain_db": -15
+    },
+    {
+      "event": "e25",
+      "asset": "whoosh-whoosh-fino-09",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e26",
+      "asset": "ui-ui-interface-02",
+      "gain_db": -18
+    },
+    {
+      "event": "e27",
+      "synth": "swish",
+      "gain_db": -15
+    },
+    {
+      "event": "e28",
       "synth": "chime",
       "gain_db": -13
     },
     {
-      "event": "e18",
+      "event": "e29",
+      "synth": "pop",
+      "gain_db": -11
+    },
+    {
+      "event": "e30",
       "asset": "whoosh-whoosh-fino-01",
       "align": "peak",
       "gain_db": -22
     },
     {
-      "event": "e19",
-      "asset": "ui-futurista-click-04",
-      "gain_db": -16,
+      "event": "e31",
+      "asset": "ui-hud-pop-up-05",
+      "gain_db": -20,
       "max": 0.5
     },
     {
-      "event": "e23",
-      "synth": "ding",
-      "gain_db": -16
+      "event": "e32",
+      "asset": "ui-ui-interface-05",
+      "gain_db": -22
     },
     {
-      "event": "e24",
-      "asset": "ui-hud-pop-up-05",
-      "gain_db": -21,
+      "event": "e33",
+      "asset": "ui-futurista-click-04",
+      "gain_db": -16,
       "max": 0.5
     }
   ],

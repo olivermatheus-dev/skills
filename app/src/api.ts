@@ -1,8 +1,12 @@
 // Cliente tipado da API local. Os tipos vêm dos mesmos schemas que validam os arquivos.
 import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef } from '../../schema';
 export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef };
-import type { CollectResult, CompetitorSummary, ProfileSummary } from '../../tools/intel/types';
-export type { CollectResult, CompetitorSummary, ProfileSummary };
+import type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult } from '../../tools/intel/types';
+export type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult };
+import type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId } from '../../schema/analysis';
+export type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId };
+export interface AnalysisFull { results: Partial<Record<ModuleId, AnalysisResult>>; notes: AnalysisNotes; request: AnalysisRequest | null }
+export interface QueueEntry { id: string; name: string; status: string; request: AnalysisRequest }
 
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 export interface Doc<T> { data: T; body: string; file: string }
@@ -71,6 +75,14 @@ export const api = {
 
   competitorsSummary: (slug: string) => req<CompetitorSummary[]>('GET', `${pj(slug)}/competitors-summary`),
   collectResults: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<CollectResult[]>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
+
+  analysis: (slug: string, id: string) => req<AnalysisFull>('GET', `${pj(slug)}/competitors/${id}/analysis`),
+  setAnalysisNote: (slug: string, id: string, key: string, text: string) => req<AnalysisNotes>('PUT', `${pj(slug)}/competitors/${id}/analysis/notes/${key}`, { text }),
+  requestAnalysis: (slug: string, id: string, r: { modules: ModuleId[]; force?: boolean; instructions?: string }) => req<AnalysisRequest>('PUT', `${pj(slug)}/competitors/${id}/analysis/request`, r),
+  cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
+  runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
+  analysisOverview: (slug: string) => req<AnalysisOverview[]>('GET', `${pj(slug)}/analysis-overview`),
+  analysisQueue: (slug: string) => req<QueueEntry[]>('GET', `${pj(slug)}/analysis-queue`),
 
   secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
   setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),

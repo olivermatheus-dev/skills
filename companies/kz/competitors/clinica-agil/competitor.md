@@ -6,7 +6,20 @@ status: ativo
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://clinicaagil.com.br
+  - platform: instagram
+    url: https://www.instagram.com/clinicaagil/
+    handle: clinicaagil
+  - platform: facebook
+    url: https://www.facebook.com/clinicaagil/
+    handle: clinicaagil
+  - platform: linkedin
+    url: https://www.linkedin.com/company/clinicaagil/
+    handle: clinicaagil
+  - platform: youtube
+    url: https://www.youtube.com/channel/UCRGJJiW-mD-Tt3zALebevhQ
 created: 2026-10-07
 ---
 

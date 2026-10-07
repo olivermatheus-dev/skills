@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Slug, IsoDate, IsoDateTime, Url, TagList, Platform, nullish } from './common';
+import { Market } from './analysis';
 
 export const Profile = z.object({
   platform: Platform,
@@ -14,7 +15,10 @@ export const Competitor = z.object({
   id: Slug,
   name: z.string().min(1),
   kind: z.enum(['concorrente', 'referencia', 'criador', 'pagina']).default('concorrente'),
-  status: z.enum(['ativo', 'arquivado']).default('ativo'),
+  /** candidato = achado pela IA, esperando o aceite do Oliver (aceitar → ativo + análise completa) */
+  status: z.enum(['candidato', 'ativo', 'arquivado']).default('ativo'),
+  /** onde atua (preenchido pelo módulo `atuacao` ou à mão) */
+  market: nullish(Market),
   favorite: z.boolean().default(false),
   tags: TagList,
   profiles: z.array(Profile).default([]),

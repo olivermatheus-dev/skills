@@ -1,0 +1,1 @@
+-i audio/vo/f1.wav -i audio/vo/f2.wav -i audio/vo/f3.wav -i audio/vo/f4.wav -i audio/vo/f5.wav -i audio/vo/f6.wav -i audio/vo/f7.wav -i audio/vo/f8.wav -i audio/vo/f9.wav

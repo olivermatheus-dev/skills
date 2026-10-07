@@ -1,0 +1,30 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:15:03Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.capterra.com/p/10008424/PsicoManager/"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/psicomanager/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/psicomanager/",
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [
+      {
+        "source": "Capterra",
+        "url": "https://www.capterra.com/p/10008424/PsicoManager/",
+        "summary": "Nota 5,0, mas baseada em uma única avaliação."
+      }
+    ],
+    "summary": "Reclame Aqui bloqueou o acesso (403) e a busca não retornou página da empresa; não foi possível confirmar. Capterra tem só 1 avaliação (5,0)."
+  }
+}

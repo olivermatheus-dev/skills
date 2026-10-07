@@ -1,0 +1,36 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:48Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.gestorpsi.com.br"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://gestorpsi.com.br",
+        "note": "site oficial; app em app.gestorpsi.com.br"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/gestorpsi/",
+        "handle": "gestorpsi",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/playlist?list=PLJCW24WotJerfoEQvjutaG-NQg_4IgY6j",
+        "note": "playlist linkada no site oficial; canal não identificado"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}

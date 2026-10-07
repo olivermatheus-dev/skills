@@ -1,0 +1,30 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:15:02Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.psicomanager.com.br"
+    },
+    {
+      "url": "https://medicinasa.com.br/psicomanager/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://psicomanager.com.br",
+        "note": "site responde 200 e descreve o produto PsicoManager; matéria da Medicina S/A cita a empresa"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

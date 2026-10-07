@@ -1,0 +1,56 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://www.em.com.br/mundo-corporativo/2026/02/7358417-corpora-cria-biblioteca-com-mais-de-30-instrumentos-de-psicologia-em-um-so-lugar.html"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://usecorpora.com.br",
+        "note": "site do produto; citado como domínio oficial em matéria de imprensa. Atenção: corpora.com.br é outra empresa (massagem)"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/usecorpora/",
+        "handle": "usecorpora",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@CorporaTV",
+        "handle": "CorporaTV",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@usecorpora",
+        "handle": "usecorpora",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/usecorpora",
+        "handle": "usecorpora",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/usecorpora",
+        "handle": "usecorpora",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "facebook"
+    ]
+  }
+}

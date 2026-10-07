@@ -1,0 +1,47 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:49Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://maisterapias.com.br"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://maisterapias.com.br",
+        "note": "site do produto, com links para app.maisterapias.com.br"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/mais.terapias/",
+        "handle": "mais.terapias",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@maisterapias",
+        "handle": "maisterapias",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/mais.terapias/",
+        "handle": "mais.terapias",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/maisterapias/",
+        "handle": "maisterapias",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

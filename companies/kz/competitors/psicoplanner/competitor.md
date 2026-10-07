@@ -6,7 +6,11 @@ status: ativo
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://psicoplanner.com.br
+  - platform: outro
+    url: https://play.google.com/store/apps/details?id=com.psicoplanner.id1735906750329
 created: 2026-10-07
 ---
 

@@ -48,7 +48,7 @@ const edges = [0, ...cuts, total];
 vo.forEach((x, i) => {
   const wav = join(out, `${x.id}.wav`);
   execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', src, '-ss', String(edges[i]), '-to', String(edges[i + 1]), '-ac', '1', '-ar', '48000', wav]);
-  let words = asr(wav, join(out, `${x.id}.words.json`)).map((w) => ({ w: w.w, s: w.s }));
+  let words = asr(wav, join(out, `${x.id}.words.json`)).filter((w) => fold(w.w)).map((w) => ({ w: w.w, s: w.s }));
   // mesma contagem de palavras do roteiro → usa a grafia do roteiro (o Whisper escreve "Cazê" para "kz")
   const script = (x.say ?? x.text).split(/\s+/).filter((w) => fold(w));
   if (script.length === words.length) words = words.map((w, k) => ({ w: script[k], s: w.s }));

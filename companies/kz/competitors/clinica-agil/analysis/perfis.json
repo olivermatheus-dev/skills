@@ -1,0 +1,47 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://clinicaagil.com.br",
+      "title": "Clínica Ágil - rodapé"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://clinicaagil.com.br",
+        "note": "site oficial; fabricante VEG Tecnologia nas lojas de app"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/clinicaagil/",
+        "handle": "clinicaagil",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/clinicaagil/",
+        "handle": "clinicaagil",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/clinicaagil/",
+        "handle": "clinicaagil",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/channel/UCRGJJiW-mD-Tt3zALebevhQ",
+        "note": "linkado no rodapé do site (URL por ID de canal, sem @handle)"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

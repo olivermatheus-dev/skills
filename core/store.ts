@@ -6,6 +6,7 @@ import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
+  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES,
   COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -239,6 +240,77 @@ export function setMark(slug: string, compId: string, key: string, mark: Partial
   return all[key];
 }
 
+// ---------- Análise por módulos (analysis/<modulo>.json, pedido.json, notas.json) ----------
+const MODULE_IDS = MODULES.map((m) => m.id) as string[];
+const aFile = (slug: string, id: string, name: string) => join(P.analysis(slug, id), `${name}.json`);
+const readJson = <T extends z.ZodTypeAny>(schema: T, file: string): z.infer<T> => cached(file, () => check(schema, JSON.parse(read(file)), file));
+const writeJson = (file: string, v: unknown) => write(file, `${JSON.stringify(v, null, 2)}\n`);
+
+export function getAnalysisResults(slug: string, id: string) {
+  const out: Partial<Record<ModuleId, AnalysisResult>> = {};
+  for (const m of MODULE_IDS) if (exists(aFile(slug, id, m))) out[m as ModuleId] = readJson(AnalysisResult, aFile(slug, id, m));
+  return out;
+}
+export const getAnalysisNotes = (slug: string, id: string): AnalysisNotes => (exists(aFile(slug, id, 'notas')) ? { ...readJson(AnalysisNotes, aFile(slug, id, 'notas')) } : {});
+export const getAnalysisRequest = (slug: string, id: string): AnalysisRequest | null => (exists(aFile(slug, id, 'pedido')) ? readJson(AnalysisRequest, aFile(slug, id, 'pedido')) : null);
+export const getAnalysis = (slug: string, id: string) => ({ results: getAnalysisResults(slug, id), notes: getAnalysisNotes(slug, id), request: getAnalysisRequest(slug, id) });
+
+const normUrl = (u: string) => u.toLowerCase().replace(/^https?:\/\/(www\.|m\.)?/, '').replace(/\/+$/, '');
+/** Grava o resultado de um módulo (validado). Efeitos: `atuacao` → market no competitor.md; `perfis` → soma os links novos aos perfis. */
+export function saveAnalysisResult(slug: string, id: string, input: Omit<z.input<typeof AnalysisResult>, 'updatedAt'> & { updatedAt?: string }) {
+  const file = aFile(slug, id, String(input.module));
+  const v = check(AnalysisResult, { ...input, updatedAt: nowIso() }, file);
+  writeJson(file, { ...v });
+  const c = getCompetitor(slug, id);
+  if (v.module === 'atuacao') {
+    const market = (v.data as { market: Competitor['market'] }).market;
+    if (market && market !== c.data.market) saveCompetitor(slug, { ...c.data, market }, c.body);
+  }
+  if (v.module === 'perfis') {
+    const found = (v.data as { found: Competitor['profiles'] }).found;
+    const have = new Set(c.data.profiles.map((p) => normUrl(p.url)));
+    const add = found.filter((p) => !have.has(normUrl(p.url))).map(({ platform, url, handle }) => ({ platform, url, handle }));
+    if (add.length) saveCompetitor(slug, { ...c.data, profiles: [...c.data.profiles, ...add] }, c.body);
+  }
+  return v;
+}
+export function setAnalysisNote(slug: string, id: string, key: string, text: string) {
+  const all = getAnalysisNotes(slug, id);
+  if (!text.trim()) delete all[key]; else all[key] = { text, updated: nowIso() };
+  const v = check(AnalysisNotes, all, aFile(slug, id, 'notas'));
+  writeJson(aFile(slug, id, 'notas'), v);
+  return v;
+}
+/** Pede módulos (soma ao pedido que já estiver na fila). */
+export function requestAnalysis(slug: string, id: string, r: { modules: string[]; force?: boolean; instructions?: string }) {
+  getCompetitor(slug, id); // 404 claro se não existir
+  const prev = getAnalysisRequest(slug, id);
+  const modules = [...new Set([...(prev?.modules ?? []), ...r.modules])].filter((m) => MODULE_IDS.includes(m));
+  const instructions = [prev?.instructions, r.instructions].filter((x) => x?.trim()).join('\n');
+  const v = check(AnalysisRequest, { modules, requestedAt: nowIso(), force: !!(prev?.force || r.force), instructions, status: 'pendente' }, aFile(slug, id, 'pedido'));
+  writeJson(aFile(slug, id, 'pedido'), v);
+  return v;
+}
+/** Tira módulos do pedido (feitos ou cancelados). Sem `modules` = cancela tudo. Pedido vazio some. */
+export function clearAnalysisRequest(slug: string, id: string, modules?: string[]) {
+  const prev = getAnalysisRequest(slug, id);
+  if (!prev) return null;
+  const left = modules ? prev.modules.filter((m) => !modules.includes(m)) : [];
+  if (!left.length) { rmSync(abs(aFile(slug, id, 'pedido'))); return null; }
+  const v = { ...prev, modules: left };
+  writeJson(aFile(slug, id, 'pedido'), v);
+  return v;
+}
+export function setAnalysisRequestStatus(slug: string, id: string, status: AnalysisRequest['status']) {
+  const prev = getAnalysisRequest(slug, id);
+  if (!prev) return null;
+  writeJson(aFile(slug, id, 'pedido'), { ...prev, status });
+  return { ...prev, status };
+}
+/** Fila do projeto: concorrentes com pedido pendente. */
+export const listAnalysisQueue = (slug: string) =>
+  listCompetitors(slug).flatMap((c) => { const r = getAnalysisRequest(slug, c.data.id); return r ? [{ id: c.data.id, name: c.data.name, status: c.data.status, request: r }] : []; });
+
 // ---------- Contexto (markdown livre) ----------
 export const listContext = (slug: string) => list(P.context(slug), /\.md$/).map((f) => ({ name: f, file: join(P.context(slug), f) }));
 export const getContext = (slug: string, name: string) => read(join(P.context(slug), basename(name)));
@@ -264,6 +336,11 @@ export function validateAll(): { file: string; issues: string[] }[] {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));
       tryIt(() => listSnapshots(d, id));
+      if (exists(P.competitorFile(d, id))) {
+        tryIt(() => getAnalysisResults(d, id));
+        tryIt(() => getAnalysisNotes(d, id));
+        tryIt(() => getAnalysisRequest(d, id));
+      }
     }
   }
   return errors;

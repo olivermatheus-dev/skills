@@ -6,7 +6,24 @@ status: ativo
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://personcare.com.br
+  - platform: instagram
+    url: https://www.instagram.com/personcare.manager/
+    handle: personcare.manager
+  - platform: youtube
+    url: https://www.youtube.com/channel/UCiq4sYhkcd7KoIX3pD3h9EA
+  - platform: facebook
+    url: https://www.facebook.com/personcare
+    handle: personcare
+  - platform: linkedin
+    url: https://www.linkedin.com/company/personcaremanager
+    handle: personcaremanager
+  - platform: outro
+    url: https://apps.apple.com/br/app/personcare-para-profissionais/id6745275082
+  - platform: outro
+    url: https://play.google.com/store/apps/details?id=com.profissionais.PERSONCARE
 created: 2026-10-07
 ---
 

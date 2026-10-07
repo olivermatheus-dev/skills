@@ -17,6 +17,10 @@ export const P = {
   competitorFile: (s: string, id: string) => join(company(s), 'competitors', id, 'competitor.md'),
   marks: (s: string, id: string) => join(company(s), 'competitors', id, 'marks.json'),
   snapshots: (s: string, id: string) => join(company(s), 'competitors', id, 'snapshots'),
+  /** análise por módulo (analysis/<modulo>.json, pedido.json, notas.json) */
+  analysis: (s: string, id: string) => join(company(s), 'competitors', id, 'analysis'),
+  /** texto extraído do site pelo script (local, fora do git; refazível) */
+  site: (s: string, id: string) => join(company(s), 'competitors', id, 'site'),
   /** imagens baixadas (avatar, capa, thumbnails): local, fora do git */
   media: (s: string, id: string) => join(company(s), 'competitors', id, 'media'),
 };

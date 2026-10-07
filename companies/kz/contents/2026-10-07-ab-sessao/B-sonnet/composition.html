@@ -1,0 +1,587 @@
+<!doctype html>
+<!--
+  kz · apresentação (B-sonnet, 9:16). Locução: voz-final.mp3 (Carla, Eleven v4) como está; tempos por palavra via split-vo.mjs.
+  Tempos: só da timeline (T.scene, T.ev, T.word). Textos de título: on_screen das cenas ("|" separa linhas, *x* = ênfase em Fraunces).
+  Cores e fontes: só tokens do brand.css da kz. Telas do produto: recriadas de forma simplificada nos tokens "UI do app";
+  dados de demonstração (Marina S. etc.) são fictícios e aparecem marcados como "dados ilustrativos".
+  Palco 1080×1920; conteúdo-chave em y 270–1440 (área segura orgânica do 9:16).
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+      html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+      * { box-sizing: border-box; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+        font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+      #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      .layer { position: absolute; inset: 0; opacity: 0; }
+      .icon { width: 1em; height: 1em; display: block; }
+      .abs { position: absolute; }
+      .acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+      .hd { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; font-size: 88px; line-height: 1.14; letter-spacing: -0.015em; color: var(--text); }
+      .hd .line { display: block; }
+      .hd .w { display: inline-block; opacity: 0; }
+      .hd .acc { font-size: 1.1em; }
+      .card { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow-md); }
+      .av { border-radius: 50%; background: var(--ui-avatar); color: var(--accent); display: grid; place-items: center; font-weight: 700; flex: none; }
+      .ib { display: grid; place-items: center; flex: none; border-radius: 18px; }
+      .t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+      .t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+      .t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+      .t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
+      .btn { display: flex; align-items: center; justify-content: center; gap: 14px; background: var(--primary); color: var(--on-primary-app); border-radius: 18px; font-weight: 700; }
+      #illus { position: absolute; left: 0; right: 0; top: 1408px; text-align: center; font-size: 26px; font-weight: 500; color: var(--muted); opacity: 0; }
+
+      /* ── s1 · gancho ── */
+      #kick { top: 292px; left: 0; right: 0; text-align: center; font-size: 48px; font-weight: 600; opacity: 0; }
+      #h1 { top: 372px; }
+      #p1card { left: 90px; top: 760px; width: 900px; height: 560px; opacity: 0; }
+      #p1card .head { position: absolute; left: 44px; top: 40px; right: 44px; display: flex; align-items: center; gap: 28px; }
+      #p1card .av { width: 112px; height: 112px; font-size: 40px; }
+      #p1card .lbl { font-size: 23px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+      #p1card .lbl i { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); display: block; }
+      #p1card .nm { font-size: 46px; font-weight: 700; margin-top: 6px; }
+      #p1card .sub { font-size: 28px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+      #p1tiles { position: absolute; left: 44px; right: 44px; top: 212px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .tile { position: relative; height: 140px; border-radius: 22px; display: flex; align-items: center; gap: 20px; padding: 0 26px; font-size: 32px; font-weight: 700; }
+      .tile .ib { width: 68px; height: 68px; font-size: 34px; background: rgba(255,255,255,0.72); border-radius: 16px; }
+      .tile .sk { position: absolute; inset: 0; border-radius: 22px; background: var(--surface-2); }
+
+      /* ── s2/s3 · ficha ── */
+      #hd2 { left: 90px; top: 290px; width: 900px; height: 150px; opacity: 0; display: flex; align-items: center; gap: 26px; padding: 0 36px; }
+      #hd2 .av { width: 92px; height: 92px; font-size: 34px; }
+      #hd2 b { font-size: 40px; font-weight: 700; display: block; }
+      #hd2 small { font-size: 27px; font-weight: 500; color: var(--muted); }
+      #rows { position: absolute; left: 90px; top: 470px; width: 900px; height: 860px; transform-origin: 50% 0; }
+      .row2 { position: absolute; left: 0; width: 900px; height: 200px; background: var(--surface); border: 1px solid var(--border); border-radius: 26px; box-shadow: var(--shadow-sm); opacity: 0; }
+      .row2 .gl { position: absolute; inset: -1px; border-radius: 26px; background: var(--ui-glow); border: 3px solid var(--ui-btn-soft); opacity: 0; }
+      .row2 .ib { position: absolute; left: 36px; top: 52px; width: 96px; height: 96px; font-size: 48px; }
+      .row2 h3 { position: absolute; left: 168px; top: 36px; margin: 0; font-size: 40px; font-weight: 700; }
+      .row2 .sub { position: absolute; left: 168px; top: 98px; font-size: 29px; font-weight: 500; color: var(--muted); }
+      .row2 .bars { position: absolute; left: 168px; top: 106px; right: 120px; }
+      .row2 .bars i { display: block; height: 16px; border-radius: 8px; background: var(--border); margin-bottom: 16px; }
+      .row2 .chips { position: absolute; left: 168px; top: 100px; display: flex; gap: 14px; }
+      .chip { padding: 8px 22px; border-radius: 999px; font-size: 27px; font-weight: 600; color: var(--ink); }
+      .rowcheck { position: absolute; right: 36px; top: 70px; font-size: 60px; color: var(--success); opacity: 0; }
+      #h3a { top: 330px; opacity: 1; }
+      #h3b { top: 300px; }
+      #btn3 { position: absolute; left: 240px; top: 1300px; width: 600px; height: 90px; font-size: 36px; opacity: 0; box-shadow: var(--shadow-md); }
+      #btn3 .icon { font-size: 40px; }
+
+      /* ── s4 · online ── */
+      #h4 { top: 290px; }
+      #app4 { position: absolute; left: 90px; top: 612px; width: 900px; height: 780px; opacity: 0; }
+      #bar4 { left: 0; top: 0; width: 900px; height: 92px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 30px; border-radius: 24px; }
+      #bar4 b { font-size: 30px; font-weight: 700; }
+      #toggle { position: relative; display: flex; background: var(--surface-2); border-radius: 16px; padding: 6px; font-size: 27px; font-weight: 600; }
+      #toggle span { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; padding: 12px 0; color: var(--muted); }
+      #toggle span.on { color: var(--ink); }
+      #tind { position: absolute; left: 6px; top: 6px; bottom: 6px; width: 200px; background: var(--surface); border-radius: 12px; box-shadow: var(--shadow-sm); z-index: 1; }
+      #tile4 { position: absolute; left: 0; top: 112px; width: 900px; height: 330px; border-radius: 24px; background: var(--ink); overflow: hidden; }
+      #tile4 .nmpill { position: absolute; left: 24px; top: 22px; padding: 8px 18px; border-radius: 999px; background: rgba(255,255,255,0.16); color: var(--surface); font-size: 25px; font-weight: 700; opacity: 0; }
+      #tile4 .live { position: absolute; right: 24px; top: 22px; display: flex; align-items: center; gap: 10px; color: var(--surface); font-size: 25px; font-weight: 600; opacity: 0; }
+      #tile4 .live i { width: 14px; height: 14px; border-radius: 50%; background: var(--success); display: block; }
+      #joinbtn { position: absolute; left: 50%; top: 50%; width: 400px; height: 88px; margin: -44px 0 0 -200px; font-size: 32px; }
+      #bigav { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; margin: -85px 0 0 -85px; font-size: 62px; opacity: 0; }
+      #notes4 { left: 0; top: 462px; width: 900px; height: 318px; }
+      #notes4 .tabs { position: absolute; left: 28px; right: 28px; top: 24px; height: 64px; background: var(--surface-2); border-radius: 16px; display: flex; font-size: 27px; font-weight: 600; color: var(--muted); }
+      #notes4 .tabs span { flex: 1; display: grid; place-items: center; }
+      #notes4 .tabs span.on { background: var(--surface); color: var(--ink); margin: 6px; border-radius: 12px; box-shadow: var(--shadow-sm); }
+      #notes4 .ln { position: absolute; left: 32px; right: 32px; height: 14px; border-radius: 7px; background: var(--border); transform-origin: 0 50%; }
+      #notes4 .cur { position: absolute; right: 36px; top: 112px; font-size: 40px; color: var(--success); opacity: 0; }
+      #ring4 { position: absolute; left: 76px; top: 598px; width: 928px; height: 808px; border-radius: 34px; border: 5px solid var(--primary); opacity: 0; }
+
+      /* ── s5 · antes · durante · depois ── */
+      .stt { position: absolute; left: 0; right: 0; top: 270px; text-align: center; font-size: 124px; font-weight: 700; letter-spacing: -0.02em; opacity: 0; }
+      #seg { position: absolute; left: 140px; top: 462px; width: 800px; height: 86px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow-sm); opacity: 0; }
+      #sind { position: absolute; left: 8px; top: 8px; width: 250px; height: 68px; border-radius: 16px; background: var(--accent-soft); }
+      #seg span { position: absolute; top: 0; width: 266px; height: 86px; display: grid; place-items: center; font-size: 31px; font-weight: 700; color: var(--ink); z-index: 2; }
+      .pan { position: absolute; left: 90px; top: 590px; width: 900px; opacity: 0; }
+      .pan.card { padding: 0; }
+      .ph { position: absolute; left: 36px; top: 30px; display: flex; align-items: center; gap: 20px; font-size: 38px; font-weight: 700; }
+      .ph .ib { width: 74px; height: 74px; font-size: 38px; }
+      .ck { position: absolute; left: 36px; right: 36px; height: 112px; border: 1px solid var(--border); border-radius: 22px; display: flex; align-items: center; gap: 24px; padding: 0 28px; font-size: 34px; font-weight: 600; opacity: 0; }
+      .ck .box { position: relative; width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--ui-divider); flex: none; display: grid; place-items: center; }
+      .ck .box .tick { position: absolute; inset: -3px; border-radius: 50%; background: var(--success); color: var(--surface); display: grid; place-items: center; font-size: 32px; opacity: 0; }
+      #p2tabs { position: absolute; left: 36px; right: 36px; top: 28px; height: 70px; background: var(--surface-2); border-radius: 18px; font-size: 29px; font-weight: 600; color: var(--muted); }
+      #p2tabs span { position: absolute; top: 0; height: 70px; width: 276px; display: grid; place-items: center; z-index: 2; }
+      #tind2 { position: absolute; left: 6px; top: 6px; width: 276px; height: 58px; background: var(--surface); border-radius: 14px; box-shadow: var(--shadow-sm); z-index: 1; }
+      #nv, #hv { position: absolute; left: 36px; right: 36px; top: 128px; height: 580px; }
+      #nv .tb { display: flex; gap: 12px; margin-bottom: 30px; }
+      #nv .tb i { width: 58px; height: 58px; border-radius: 14px; border: 1px solid var(--border); display: grid; place-items: center; font-size: 28px; font-weight: 700; font-style: normal; color: var(--muted); }
+      #nv .ln { display: block; height: 18px; border-radius: 9px; background: var(--border); margin-bottom: 34px; transform-origin: 0 50%; }
+      #hv { opacity: 0; }
+      .hi { position: relative; height: 128px; border: 1px solid var(--border); border-radius: 22px; margin-bottom: 20px; padding: 24px 30px; }
+      .hi b { font-size: 33px; font-weight: 700; display: block; }
+      .hi small { font-size: 27px; font-weight: 500; color: var(--muted); }
+      .hi .mark { position: absolute; inset: -1px; border-radius: 22px; background: var(--ui-glow); border: 3px solid var(--primary); opacity: 0; }
+      .hi > *:not(.mark) { position: relative; z-index: 2; }
+      .done5 { position: absolute; left: 36px; right: 36px; height: 100px; border-radius: 22px; background: var(--surface-2); display: flex; align-items: center; gap: 22px; padding: 0 28px; font-size: 34px; font-weight: 600; opacity: 0; }
+      .done5 .icon { color: var(--success); font-size: 46px; }
+      #nextsess { position: absolute; left: 36px; right: 36px; top: 360px; height: 220px; border-radius: 26px; border: 1px solid var(--border); background: var(--surface); opacity: 0; }
+      #nextsess .glow { position: absolute; inset: -1px; border-radius: 26px; background: var(--ui-glow); border: 3px solid var(--primary); opacity: 0; }
+      #nextsess .in { position: absolute; left: 36px; top: 34px; display: flex; gap: 28px; align-items: center; }
+      #nextsess .ib { width: 100px; height: 100px; font-size: 50px; }
+      #nextsess small { font-size: 28px; font-weight: 600; color: var(--muted); display: block; }
+      #nextsess b { font-size: 50px; font-weight: 700; display: block; margin-top: 4px; }
+
+      /* ── s6 · menos ── */
+      .blk { position: absolute; left: 90px; width: 900px; }
+      .mt { text-align: center; font-size: 66px; font-weight: 700; line-height: 1.14; letter-spacing: -0.015em; }
+      .mt .w { display: inline-block; opacity: 0; }
+      .mt .w.acc { font-size: 1.1em; }
+      #b1 { top: 296px; height: 260px; }
+      #b2 { top: 620px; height: 340px; }
+      #b3 { top: 1040px; height: 330px; }
+      #tabs { position: absolute; left: 0; top: 108px; width: 900px; height: 72px; }
+      .tab { position: absolute; top: 0; height: 72px; padding: 0 22px; border-radius: 16px 16px 6px 6px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; font-size: 27px; font-weight: 600; opacity: 0; white-space: nowrap; }
+      #onetab { position: absolute; left: 50%; top: 0; height: 72px; margin-left: -150px; width: 300px; padding: 0 22px; border-radius: 16px 16px 6px 6px; background: var(--surface); border: 2px solid var(--primary); display: flex; align-items: center; gap: 14px; font-size: 29px; font-weight: 700; opacity: 0; }
+      #onetab svg { width: 46px; height: auto; }
+      #onetab path { fill: var(--logo); }
+      #frags { position: absolute; left: 0; top: 150px; width: 900px; height: 180px; }
+      #fcard { position: absolute; left: 0; top: 30px; width: 900px; height: 130px; border-radius: 26px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); opacity: 0; }
+      .frag { position: absolute; width: 270px; height: 82px; border-radius: 18px; display: flex; align-items: center; gap: 12px; padding: 0 20px; font-size: 26px; font-weight: 600; color: var(--ink); opacity: 0; white-space: nowrap; box-shadow: var(--shadow-sm); }
+      .frag .icon { font-size: 30px; }
+      #search { position: absolute; left: 70px; top: 150px; width: 760px; height: 96px; border-radius: 24px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 22px; padding: 0 30px; font-size: 32px; font-weight: 500; color: var(--muted); opacity: 0; }
+      #search .icon { font-size: 38px; color: var(--ui-muted); }
+      #stxt { display: inline-block; white-space: nowrap; clip-path: inset(0 100% 0 0); }
+      #sstrike { position: absolute; left: 70px; top: 198px; height: 6px; width: 760px; border-radius: 3px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+
+      /* ── s7 · espaço ── */
+      #h7 { top: 470px; font-size: 82px; }
+      #h7b { top: 575px; font-size: 90px; }
+      #h7b .acc { font-size: 1.68em; line-height: 1; }
+      .ring { position: absolute; left: 50%; top: 1100px; border-radius: 50%; border: 4px solid var(--accent-soft); opacity: 0; }
+      #r7a { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
+      #r7b { width: 560px; height: 560px; margin: -280px 0 0 -280px; }
+      #r7c { width: 720px; height: 720px; margin: -360px 0 0 -360px; }
+      #av7 { position: absolute; left: 50%; top: 1100px; width: 270px; height: 270px; margin: -135px 0 0 -135px; font-size: 96px; opacity: 0; box-shadow: var(--shadow-lg); }
+
+      /* ── s8/s9 · kz ── */
+      #logo { position: absolute; left: 50%; top: 330px; width: 460px; margin-left: -230px; opacity: 0; }
+      #logo svg { width: 100%; height: auto; display: block; }
+      #logo path { fill: var(--logo); }
+      #tag8 { top: 740px; font-size: 80px; }
+      #tag8b { top: 1148px; font-size: 54px; font-weight: 600; }
+      #pills { position: absolute; left: 0; right: 0; top: 986px; display: flex; justify-content: center; gap: 20px; }
+      .pill { display: flex; align-items: center; gap: 14px; padding: 14px 30px 14px 16px; border-radius: 999px; font-size: 32px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); opacity: 0; }
+      .pill .ib { width: 52px; height: 52px; border-radius: 50%; font-size: 28px; }
+      #title9 { top: 780px; font-size: 96px; }
+      #cta { position: absolute; left: 50%; top: 960px; width: 540px; height: 124px; margin-left: -270px; border-radius: 999px; background: var(--primary); color: var(--on-primary); font-weight: 700; font-size: 46px; display: flex; align-items: center; justify-content: center; gap: 14px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
+      #cta .icon { font-size: 48px; }
+
+      #cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 20; }
+      #ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 19; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+      <div id="stage">
+        <!-- s1 -->
+        <div class="layer" id="s1" style="opacity: 1">
+          <div class="abs" id="kick"></div>
+          <div class="hd" id="h1"></div>
+          <div class="card" id="p1card">
+            <div class="head">
+              <div class="av" id="av1"></div>
+              <div><div class="lbl"><i></i>PRÓXIMA SESSÃO</div><div class="nm" id="nm1"></div><div class="sub" id="sub1"></div></div>
+            </div>
+            <div id="p1tiles">
+              <div class="tile t-teal"><span class="ib">{{i:clock}}</span>Histórico<div class="sk"></div></div>
+              <div class="tile t-lilac"><span class="ib">{{i:notebook-pen}}</span>Anotações<div class="sk"></div></div>
+              <div class="tile t-coral"><span class="ib">{{i:square-check}}</span>Planejamento<div class="sk"></div></div>
+              <div class="tile t-amber"><span class="ib">{{i:video}}</span>Chamada<div class="sk"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- s2 + s3 -->
+        <div class="layer" id="s23">
+          <div class="card" id="hd2"><div class="av" id="av2"></div><div><b id="nm2"></b><small id="sub2"></small></div></div>
+          <div class="hd" id="h3a"></div>
+          <div class="hd" id="h3b"></div>
+          <div id="rows">
+            <div class="row2" id="r1" style="top: 0"><i class="gl"></i><span class="ib t-teal">{{i:clock}}</span><h3></h3><div class="sub" id="r1sub"></div><span class="rowcheck">{{i:circle-check}}</span></div>
+            <div class="row2" id="r2" style="top: 220px"><i class="gl"></i><span class="ib t-lilac">{{i:notebook-pen}}</span><h3></h3><div class="bars"><i style="width: 100%"></i><i style="width: 68%"></i></div><span class="rowcheck">{{i:circle-check}}</span></div>
+            <div class="row2" id="r3" style="top: 440px"><i class="gl"></i><span class="ib t-amber">{{i:layers}}</span><h3></h3><div class="chips"><span class="chip" style="background: var(--pastel-sage)" id="c1"></span><span class="chip" style="background: var(--pastel-lavender)" id="c2"></span></div><span class="rowcheck">{{i:circle-check}}</span></div>
+            <div class="row2" id="r4" style="top: 660px"><i class="gl"></i><span class="ib t-coral">{{i:square-check}}</span><h3></h3><div class="sub" id="r4sub"></div><span class="rowcheck">{{i:circle-check}}</span></div>
+          </div>
+          <div class="btn" id="btn3">{{i:video}}Iniciar sessão</div>
+        </div>
+
+        <!-- s4 -->
+        <div class="layer" id="s4">
+          <div class="hd" id="h4"></div>
+          <div id="app4">
+            <div class="card" id="bar4">
+              <b id="nm4"></b>
+              <div id="toggle"><i id="tind"></i><span id="tgon">{{i:video}}Online</span><span id="tgoff" class="on">{{i:map-pin}}Presencial</span></div>
+            </div>
+            <div id="tile4">
+              <div class="nmpill" id="pill4"></div>
+              <div class="live"><i></i>Em chamada</div>
+              <div class="av" id="bigav"></div>
+              <div class="btn" id="joinbtn">{{i:mic}}Entrar na chamada</div>
+            </div>
+            <div class="card" id="notes4">
+              <div class="tabs"><span class="on">Anotações</span><span>Histórico</span><span>Cliente</span></div>
+              <i class="ln" style="top: 130px; width: 80%"></i>
+              <i class="ln" style="top: 176px; width: 62%"></i>
+              <i class="ln" style="top: 222px; width: 74%"></i>
+              <i class="ln" style="top: 268px; width: 40%"></i>
+              <span class="cur">{{i:circle-check}}</span>
+            </div>
+          </div>
+          <div id="ring4"></div>
+        </div>
+
+        <!-- s5 -->
+        <div class="layer" id="s5">
+          <div class="stt" id="st1"></div>
+          <div class="stt" id="st2"></div>
+          <div class="stt" id="st3"></div>
+          <div id="seg"><i id="sind"></i><span style="left: 0" id="sg1"></span><span style="left: 267px" id="sg2"></span><span style="left: 534px" id="sg3"></span></div>
+          <div class="pan card" id="pan1" style="height: 640px">
+            <div class="ph"><span class="ib t-coral">{{i:square-check}}</span>Planejamento da sessão</div>
+            <div class="ck" style="top: 140px"><span class="box"><i class="tick">{{i:check}}</i></span>Rever o histórico</div>
+            <div class="ck" style="top: 276px"><span class="box"><i class="tick">{{i:check}}</i></span>Ler as últimas anotações</div>
+            <div class="ck" style="top: 412px"><span class="box"><i class="tick">{{i:check}}</i></span>Definir o foco de hoje</div>
+          </div>
+          <div class="pan card" id="pan2" style="height: 760px">
+            <div id="p2tabs"><i id="tind2"></i><span style="left: 6px" class="on">Anotações</span><span style="left: 282px" id="tabhist">Histórico</span><span style="left: 558px">Cliente</span></div>
+            <div id="nv">
+              <div class="tb"><i>B</i><i style="font-style: italic">I</i><i>U</i><i>{{i:check}}</i></div>
+              <i class="ln" style="width: 94%"></i><i class="ln" style="width: 78%"></i><i class="ln" style="width: 88%"></i><i class="ln" style="width: 56%"></i><i class="ln" style="width: 70%"></i>
+            </div>
+            <div id="hv">
+              <div class="hi"><b id="hi1"></b><small>Sessão concluída</small></div>
+              <div class="hi" id="hi2"><i class="mark"></i><b id="hib2"></b><small id="his2"></small></div>
+              <div class="hi"><b id="hi3"></b><small>Sessão concluída</small></div>
+            </div>
+          </div>
+          <div class="pan card" id="pan3" style="height: 640px">
+            <div class="ph"><span class="ib t-teal">{{i:circle-check}}</span>Sessão concluída</div>
+            <div class="done5" id="dn1" style="top: 140px">{{i:circle-check}}Anotações salvas</div>
+            <div class="done5" id="dn2" style="top: 252px">{{i:circle-check}}Histórico atualizado</div>
+            <div id="nextsess"><i class="glow"></i><div class="in"><span class="ib t-coral">{{i:calendar}}</span><div><small>Próximo encontro</small><b id="nxt"></b></div></div></div>
+          </div>
+        </div>
+
+        <!-- s6 -->
+        <div class="layer" id="s6">
+          <div class="blk" id="b1">
+            <div class="mt" id="m1"></div>
+            <div id="tabs">
+              <span class="tab">Agenda</span><span class="tab">Mensagens</span><span class="tab">Planilha</span><span class="tab">Caderno</span><span class="tab">Vídeo</span>
+              <div id="onetab"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg>Sessão</div>
+            </div>
+          </div>
+          <div class="blk" id="b2">
+            <div class="mt" id="m2"></div>
+            <div id="frags">
+              <div id="fcard"></div>
+              <div class="frag" id="fg1" style="background: var(--pastel-butter)">{{i:file-text}}Ficha</div>
+              <div class="frag" id="fg2" style="background: var(--pastel-sky)">{{i:message-circle}}Contato</div>
+              <div class="frag" id="fg3" style="background: var(--pastel-rose)">{{i:notebook-pen}}Anotação</div>
+            </div>
+          </div>
+          <div class="blk" id="b3">
+            <div class="mt" id="m3"></div>
+            <div id="search">{{i:search}}<span id="stxt">Onde anotei aquilo?</span></div>
+            <div id="sstrike"></div>
+          </div>
+        </div>
+
+        <!-- s7 -->
+        <div class="layer" id="s7">
+          <div class="hd" id="h7"></div>
+          <div class="hd" id="h7b"></div>
+          <div class="ring" id="r7c"></div><div class="ring" id="r7b"></div><div class="ring" id="r7a"></div>
+          <div class="av" id="av7"></div>
+        </div>
+
+        <!-- s8 + s9 -->
+        <div class="layer" id="s89">
+          <div id="logo"><svg viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+          <div class="hd" id="tag8"></div>
+          <div id="pills">
+            <div class="pill" id="pl1"><span class="ib t-teal">{{i:users}}</span><span></span></div>
+            <div class="pill" id="pl2"><span class="ib t-amber">{{i:calendar-days}}</span><span></span></div>
+            <div class="pill" id="pl3"><span class="ib t-lilac">{{i:notebook-pen}}</span><span></span></div>
+          </div>
+          <div class="hd" id="tag8b"></div>
+          <div class="hd" id="title9"></div>
+          <div id="cta"></div>
+        </div>
+
+        <div id="illus">dados ilustrativos</div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5" stroke-linejoin="round" /></svg>
+        <div id="ripple"></div>
+      </div>
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      const $ = (s) => document.querySelector(s)
+      const $$ = (s) => [...document.querySelectorAll(s)]
+      const S = {}
+      ;['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'].forEach((id) => (S[id] = T.scene(id)))
+      const parts = (id) => T.text(id).split('|')
+      const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w]/g, '')
+
+      // Dados de demonstração: elenco FICTÍCIO (BRAND.md), exibidos com o aviso "dados ilustrativos".
+      const DEMO = {
+        ini: 'MS', name: 'Marina S.', when: 'Hoje · 15:00 · Online',
+        hist: '6 sessões · a última há uma semana', chips: ['Respiração', 'Rotina'], plan: 'Dois pontos para retomar',
+        dates: ['30 de setembro', '23 de setembro', '16 de setembro'], hiNote: 'Pontos para retomar hoje', next: 'Terça, 15:00',
+        pills: ['Pacientes', 'Agenda', 'Anotações'],
+      }
+
+      /** Escreve uma linha palavra a palavra e devolve {node, t} casando cada palavra com a fala (palavra sem par entra junto com a próxima que tem). */
+      function words(el, text, vo, from) {
+        const said = T.vo(vo).words || []
+        let j = 0
+        const toks = text.replace(/\*([^*]+)\*/g, (_, x) => x.split(' ').map((w) => `\u0001${w}`).join(' ')).split(' ')
+        const t = toks.map((tok) => {
+          const w = tok.replace('\u0001', '')
+          const k = said.findIndex((x, i) => i >= j && x.s >= from - 0.25 && fold(x.w) === fold(w))
+          if (k >= 0) { j = k + 1; return said[k].s }
+          return null
+        })
+        for (let i = t.length - 1, nxt = null; i >= 0; i--) { if (t[i] == null) t[i] = nxt ?? from; else nxt = t[i] }
+        el.innerHTML = toks.map((tok) => `<span class="w${tok.startsWith('\u0001') ? ' acc' : ''}">${tok.replace('\u0001', '')}</span>`).join(' ')
+        return [...el.querySelectorAll('.w')].map((node, i) => ({ node, t: t[i] }))
+      }
+      /** Várias linhas (cada uma um bloco) numa só caixa. */
+      function lines(el, arr, vo, from) {
+        el.innerHTML = arr.map(() => '<span class="line"></span>').join('')
+        return [...el.querySelectorAll('.line')].flatMap((ln, i) => words(ln, arr[i], vo, from))
+      }
+      const enter = (sel, at, from = { y: 30 }) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, rotation: 0, ...M.FAST }, at)
+      const leave = (sel, at, d = 0.28) => tl.to(sel, { opacity: 0, y: -26, duration: d, ease: 'power2.in' }, at)
+      const showWords = (list, dt = 0.12) => list.forEach(({ node, t }) => enter(node, t - dt, { y: 34 }))
+      const drift = (sel, s) => tl.fromTo(sel, { scale: 1 }, { scale: 1.03, duration: S[s].dur, ease: 'sine.inOut' }, S[s].start)
+
+      // medir antes de qualquer transform (alvos do cursor)
+      const stage = $('#stage').getBoundingClientRect()
+      const pt = (sel, fx = 0.5, fy = 0.5) => { const r = $(sel).getBoundingClientRect(); return { x: r.left - stage.left + r.width * fx - 10, y: r.top - stage.top + r.height * fy - 5 } }
+      const P = {
+        join: pt('#joinbtn', 0.62, 0.55),
+        hist: pt('#tabhist', 0.55, 0.55),
+        cta: pt('#cta', 0.72, 0.55),
+      }
+
+      // ── textos que vêm da cena ───────────────────────
+      const [kick, ...h1l] = parts('s1')
+      $('#kick').textContent = kick
+      $('#av1').textContent = $('#av2').textContent = $('#bigav').textContent = $('#av7').textContent = DEMO.ini
+      $('#nm1').textContent = DEMO.name; $('#sub1').textContent = DEMO.when
+      $('#nm2').textContent = 'Sessão com ' + DEMO.name; $('#sub2').textContent = DEMO.when
+      $('#nm4').textContent = 'Sessão com ' + DEMO.name; $('#pill4').textContent = DEMO.name
+
+      // ── s1 · gancho ──────────────────────────────────
+      tl.fromTo('#kick', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e1'))
+      showWords(lines($('#h1'), h1l, 'f1', T.ev('e35')))
+      tl.fromTo('#p1card', { opacity: 0, y: 70, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e2'))
+      $$('#p1tiles .tile').forEach((el, i) => {
+        tl.to(el.querySelector('.sk'), { opacity: 0, duration: 0.3, ease: 'power2.out' }, T.ev('e3') + i * 0.14)
+        tl.fromTo(el, { y: 14 }, { y: 0, ...M.FAST }, T.ev('e3') + i * 0.14)
+      })
+      tl.to('#illus', { opacity: 1, duration: 0.4 }, T.ev('e3'))
+      drift('#s1', 's1')
+      leave('#s1', S.s1.end - 0.3)
+
+      // ── s2 · cada coisa à frente ─────────────────────
+      const [t1, t2, t3, t4] = parts('s2')
+      $('#r1 h3').textContent = t1; $('#r2 h3').textContent = t2; $('#r3 h3').textContent = t3; $('#r4 h3').textContent = t4
+      $('#r1sub').textContent = DEMO.hist; $('#c1').textContent = DEMO.chips[0]; $('#c2').textContent = DEMO.chips[1]; $('#r4sub').textContent = DEMO.plan
+      tl.set('#s23', { opacity: 1 }, S.s2.start)
+      tl.fromTo('#hd2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, S.s2.start + 0.05)
+      const rowIds = ['#r1', '#r2', '#r3', '#r4']
+      rowIds.forEach((r, i) => {
+        const at = T.ev('e' + (4 + i))
+        tl.fromTo(r, { opacity: 0, y: 56 }, { opacity: 1, y: 0, ...M.FAST }, at)
+        tl.to(r + ' .gl', { opacity: 1, duration: 0.3 }, at + 0.1)
+        if (i < 3) tl.to(r + ' .gl', { opacity: 0, duration: 0.4 }, T.ev('e' + (5 + i)) + 0.05)
+      })
+      tl.fromTo('#s23', { scale: 1 }, { scale: 1.025, duration: S.s2.dur + S.s3.dur, ease: 'sine.inOut' }, S.s2.start)
+
+      // ── s3 · tudo organizado ─────────────────────────
+      const [ha, hb1, hb2] = parts('s3')
+      tl.to('#hd2', { opacity: 0, y: -30, duration: 0.3, ease: 'power2.in' }, T.ev('e8'))
+      tl.to('#rows', { y: 120, scale: 0.82, duration: 0.9, ease: M.GENTLE.ease }, T.ev('e8'))
+      tl.to(rowIds.map((r) => r + ' .gl'), { opacity: 0, duration: 0.4 }, T.ev('e8'))
+      showWords(words($('#h3a'), ha, 'f3', T.ev('e8')))
+      $$('.rowcheck').forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e9') + i * 0.17))
+      tl.to('#h3a', { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, T.ev('e36') - 0.15)
+      showWords(lines($('#h3b'), [hb1, hb2], 'f3', T.ev('e36')))
+      tl.fromTo('#btn3', { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e10'))
+      tl.to('#btn3', { y: -4, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, T.ev('e10') + 0.8)
+      tl.to('#illus', { opacity: 0.0, duration: 0.01 }, S.s3.end - 0.3)
+      tl.to('#s23', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s3.end - 0.3)
+
+      // ── s4 · online, sem trocar de ferramenta ────────
+      const h4 = parts('s4')
+      tl.set('#s4', { opacity: 1 }, S.s4.start)
+      showWords(lines($('#h4'), h4, 'f4', S.s4.start))
+      tl.fromTo('#app4', { opacity: 0, y: 70, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e11'))
+      tl.to('#illus', { opacity: 1, duration: 0.3 }, T.ev('e11'))
+      // Presencial → Online
+      tl.set('#tind', { x: 200 }, 0) // começa em Presencial (direita)
+      M.stretchTo(tl, '#tind', { x: 0 }, T.ev('e12') - 0.05, { duration: 0.5 })
+      tl.set('#tgon', { className: 'on' }, T.ev('e12') + 0.15)
+      tl.set('#tgoff', { className: '' }, T.ev('e12') + 0.15)
+      // entrar na chamada
+      const C = M.cursor(tl, '#cursor', '#ripple')
+      const fix = (p) => ({ x: p.x + 10, y: p.y + 5 }) // a ponta do cursor, não o canto
+      tl.set('#cursor', { x: P.join.x + 260, y: P.join.y + 300 }, 0)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e13') - 0.95)
+      C.move(P.join, T.ev('e13') - 0.95, 0.85)
+      C.click(fix(P.join), T.ev('e13'))
+      C.press('#joinbtn', T.ev('e13'))
+      tl.to('#joinbtn', { opacity: 0, scale: 0.92, duration: 0.2, ease: 'power2.in' }, T.ev('e13') + 0.2)
+      tl.to('#cursor', { opacity: 0, duration: 0.25 }, T.ev('e13') + 0.5)
+      tl.fromTo('#bigav', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 0.3)
+      tl.fromTo('#tile4 .nmpill, #tile4 .live', { opacity: 0, y: -10 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.1 }, T.ev('e13') + 0.5)
+      tl.fromTo('#bigav', { boxShadow: '0 0 0 0px rgba(239,121,96,0.35)' }, { boxShadow: '0 0 0 34px rgba(239,121,96,0)', duration: 1.1, ease: 'power2.out', repeat: 2 }, T.ev('e13') + 0.8)
+      // anotações escritas durante a chamada
+      $$('#notes4 .ln').forEach((el, i) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power2.out' }, T.ev('e13') + 0.7 + i * 0.4))
+      tl.fromTo('#notes4 .cur', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 2.2)
+      // "dentro da sua rotina": a moldura abraça tudo
+      tl.fromTo('#ring4', { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e14'))
+      tl.to('#ring4', { opacity: 0, duration: 0.5, ease: 'power2.in' }, T.ev('e14') + 1.3)
+      drift('#s4', 's4')
+      tl.to('#s4', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s4.end - 0.3)
+
+      // ── s5 · antes · durante · depois ────────────────
+      const [a1, a2, a3] = parts('s5')
+      ;[['#st1', a1, '#sg1'], ['#st2', a2, '#sg2'], ['#st3', a3, '#sg3']].forEach(([st, txt, sg]) => { $(st).textContent = txt; $(sg).textContent = txt })
+      $('#hi1').textContent = DEMO.dates[0]; $('#hib2').textContent = DEMO.dates[1]; $('#his2').textContent = DEMO.hiNote; $('#hi3').textContent = DEMO.dates[2]
+      $('#nxt').textContent = DEMO.next
+      tl.set('#s5', { opacity: 1 }, S.s5.start)
+      tl.fromTo('#seg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
+      // etapa 1 · Antes
+      tl.fromTo('#st1', { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
+      tl.fromTo('#pan1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...M.GENTLE }, T.ev('e15') + 0.1)
+      $$('#pan1 .ck').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, ...M.FAST }, T.ev('e15') + 0.45 + i * 0.12))
+      ;[T.ev('e42'), T.word('f5:com').s - 0.02, T.word('f5:calma').s - 0.05].forEach((t, i) => {
+        tl.fromTo($$('#pan1 .tick')[i], { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, ...M.SNAP }, t)
+      })
+      // etapa 2 · Durante
+      const sw = (outS, outP, inS, inP, at) => {
+        tl.to([outS, outP], { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, at - 0.12)
+        tl.fromTo(inS, { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, at)
+        tl.fromTo(inP, { opacity: 0, y: 50 }, { opacity: 1, y: 0, ...M.GENTLE }, at + 0.05)
+      }
+      M.stretchTo(tl, '#sind', { x: 267 }, T.ev('e16'), { duration: 0.5 })
+      sw('#st1', '#pan1', '#st2', '#pan2', T.ev('e16'))
+      $$('#nv .ln').forEach((el, i) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, T.ev('e16') + 0.5 + i * 0.28))
+      // "encontra rapidamente": o cursor vai ao Histórico
+      tl.set('#tind2', { x: 0 }, 0)
+      tl.set('#cursor', { x: P.hist.x + 200, y: P.hist.y + 260 }, T.ev('e17') - 1.2)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e17') - 0.8)
+      C.move(P.hist, T.ev('e17') - 0.75, 0.7)
+      C.click(fix(P.hist), T.ev('e17'))
+      M.stretchTo(tl, '#tind2', { x: 276 }, T.ev('e17') + 0.05, { duration: 0.45 })
+      tl.to('#nv', { opacity: 0, duration: 0.2 }, T.ev('e17') + 0.05)
+      tl.fromTo('#hv', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e17') + 0.2)
+      tl.to('#cursor', { opacity: 0, duration: 0.25 }, T.ev('e17') + 0.5)
+      tl.to('#hi2 .mark', { opacity: 1, duration: 0.35 }, T.ev('e38'))
+      tl.fromTo('#hi2', { scale: 1 }, { scale: 1.025, duration: 0.5, ease: M.SOFT.ease }, T.ev('e38'))
+      // etapa 3 · Depois
+      M.stretchTo(tl, '#sind', { x: 534 }, T.ev('e18'), { duration: 0.5 })
+      sw('#st2', '#pan2', '#st3', '#pan3', T.ev('e18'))
+      tl.fromTo('#dn1', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.word('f5:mantém').s - 0.05)
+      tl.fromTo('#dn2', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.word('f5:organizado').s - 0.05)
+      tl.fromTo('#nextsess', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.SOFT }, T.ev('e19'))
+      tl.to('#nextsess .glow', { opacity: 1, duration: 0.4 }, T.ev('e19') + 0.2)
+      drift('#s5', 's5')
+      tl.to('#illus', { opacity: 0, duration: 0.2 }, S.s5.end - 0.3)
+      tl.to('#s5', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s5.end - 0.3)
+
+      // ── s6 · menos, menos, menos ─────────────────────
+      const [m1, m2, m3] = parts('s6')
+      tl.set('#s6', { opacity: 1 }, S.s6.start)
+      showWords(words($('#m1'), m1, 'f6', T.ev('e20')))
+      const chips = $$('.tab')
+      let x = 0
+      const widths = [128, 188, 168, 158, 122]
+      const total = widths.reduce((a, b) => a + b, 0) + 12 * 4
+      x = (900 - total) / 2
+      chips.forEach((c, i) => { c.style.left = x + 'px'; c.style.width = widths[i] + 'px'; x += widths[i] + 12 })
+      chips.forEach((c, i) => tl.fromTo(c, { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e20') + 0.15 + i * 0.07))
+      chips.forEach((c, i) => tl.to(c, { opacity: 0, scale: 0.86, y: 10, duration: 0.28, ease: 'power2.in' }, T.ev('e21') + i * 0.07))
+      tl.fromTo('#onetab', { opacity: 0, y: 20, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e21') + 0.42)
+      // 2
+      showWords(words($('#m2'), m2, 'f6', T.ev('e22')))
+      const spots = [[0, 12, -7], [320, 78, 5], [620, 4, -4]]
+      ;['#fg1', '#fg2', '#fg3'].forEach((f, i) => {
+        tl.fromTo(f, { opacity: 0, x: spots[i][0] - 30, y: spots[i][1] + 30, rotation: 0 }, { opacity: 1, x: spots[i][0], y: spots[i][1], rotation: spots[i][2], ...M.SOFT }, T.word('f6:informações').s + i * 0.12)
+        tl.to(f, { y: spots[i][1] + (i % 2 ? 14 : -14), duration: 1.4, ease: 'sine.inOut' }, T.word('f6:espalhadas').s)
+      })
+      tl.fromTo('#fcard', { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e23') - 0.1)
+      const tidy = [[40, 50], [315, 50], [590, 50]]
+      ;['#fg1', '#fg2', '#fg3'].forEach((f, i) => tl.to(f, { x: tidy[i][0], y: tidy[i][1], rotation: 0, duration: 0.8, ease: M.GENTLE.ease }, T.ev('e23') + i * 0.06))
+      // 3
+      showWords(words($('#m3'), m3, 'f6', T.ev('e24')))
+      tl.fromTo('#search', { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e39') - 0.1)
+      tl.to('#stxt', { clipPath: 'inset(0 0% 0 0)', duration: 1.5, ease: 'steps(19)' }, T.ev('e39'))
+      tl.to('#sstrike', { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, T.ev('e25'))
+      tl.to('#search', { opacity: 0.4, duration: 0.4 }, T.ev('e25') + 0.2)
+      drift('#s6', 's6')
+      tl.to('#s6', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s6.end - 0.3)
+
+      // ── s7 · mais espaço ─────────────────────────────
+      const [sp1, sp2] = parts('s7')
+      tl.set('#s7', { opacity: 1 }, S.s7.start)
+      showWords(words($('#h7'), sp1, 'f7', S.s7.start))
+      showWords(words($('#h7b'), sp2, 'f7', T.word('f7:importa').s))
+      tl.fromTo('#r7c', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.6, ease: 'power3.out' }, T.ev('e26'))
+      tl.fromTo('#r7b', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 2.2, ease: 'power3.out' }, T.ev('e26') + 0.3)
+      tl.fromTo('#r7a', { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 1.4, ease: 'power3.inOut' }, T.ev('e40'))
+      tl.fromTo('#av7', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e27'))
+      tl.to('#r7a', { scale: 1.12, opacity: 0.0, duration: 1.0, ease: 'power2.out' }, T.ev('e27') + 0.05)
+      drift('#s7', 's7')
+      tl.to('#s7', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s7.end - 0.3)
+
+      // ── s8 · a kz ────────────────────────────────────
+      const [k1, k2] = parts('s8')
+      tl.set('#s89', { opacity: 1 }, S.s8.start)
+      tl.fromTo('#logo', { opacity: 1, clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.9, ease: 'power3.out' }, T.ev('e28'))
+      showWords(words($('#tag8'), k1, 'f8', T.ev('e29')))
+      ;['#pl1', '#pl2', '#pl3'].forEach((p, i) => {
+        $(p + ' span:last-child').textContent = DEMO.pills[i]
+        tl.fromTo(p, { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev(['e30', 'e31', 'e32'][i]))
+      })
+      showWords(words($('#tag8b'), k2, 'f8', T.word('f8:cuidar').s - 0.05))
+      tl.fromTo('#s89', { scale: 1 }, { scale: 1.03, duration: S.s8.dur + S.s9.dur, ease: 'sine.inOut' }, S.s8.start)
+
+      // ── s9 · cartão final ────────────────────────────
+      const [c1, c2] = parts('s9')
+      tl.to(['#tag8', '#pills', '#tag8b'], { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s8.end - 0.3)
+      tl.to('#logo', { y: -20, scale: 0.94, duration: 0.8, ease: M.GENTLE.ease }, S.s8.end - 0.3)
+      $('#title9').textContent = c1
+      $('#cta').innerHTML = `${c2} {{i:chevron-right}}`
+      enter('#title9', T.ev('e33') + 0.05, { y: 34 })
+      tl.fromTo('#cta', { opacity: 0, y: 30, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e33') + 0.45)
+      tl.set('#cursor', { x: P.cta.x + 240, y: P.cta.y + 280 }, S.s9.start)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e34') - 0.85)
+      C.move(P.cta, T.ev('e34') - 0.85, 0.75)
+      C.click(fix(P.cta), T.ev('e34'))
+      C.press('#cta', T.ev('e34'))
+
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

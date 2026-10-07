@@ -1,0 +1,21 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:14:57Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app",
+      "title": "Allminds"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Nenhuma página da Allminds (allminds.app) apareceu na busca do Reclame Aqui; a página direta retornou 403, então não dá para afirmar que não existe. Sem notas de loja ou avaliações encontradas."
+  }
+}

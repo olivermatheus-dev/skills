@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hub-app",
+      "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--config", "app/vite.config.ts", "--port", "5173"],
+      "port": 5173,
+      "env": { "HUB_NO_OPEN": "1" }
+    }
+  ]
+}

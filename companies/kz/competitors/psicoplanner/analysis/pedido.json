@@ -1,0 +1,17 @@
+{
+  "modules": [
+    "site",
+    "contato",
+    "atuacao",
+    "resumo",
+    "features",
+    "forcas",
+    "precos",
+    "landing",
+    "redes"
+  ],
+  "requestedAt": "2026-10-07T19:13:17Z",
+  "force": false,
+  "instructions": "",
+  "status": "pendente"
+}

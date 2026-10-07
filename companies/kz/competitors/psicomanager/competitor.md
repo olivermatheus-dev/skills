@@ -6,7 +6,9 @@ status: ativo
 favorite: false
 tags:
   - sistema-terapeuta
-profiles: []
+profiles:
+  - platform: site
+    url: https://psicomanager.com.br
 created: 2026-10-07
 ---
 

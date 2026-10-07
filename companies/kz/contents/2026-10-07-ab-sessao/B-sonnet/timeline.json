@@ -1,0 +1,1411 @@
+{
+  "fps": 30,
+  "formats": [
+    "9x16"
+  ],
+  "voice": {
+    "final": "el-carla",
+    "stage": "final"
+  },
+  "music": {
+    "bpm": 84,
+    "gain_db": -10,
+    "duck": 0.7,
+    "synth": {
+      "beatsPerBar": 4,
+      "seed": 7,
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Bb",
+        "C",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Bb",
+        "C",
+        "F",
+        "C",
+        "Dm",
+        "Bb"
+      ],
+      "sections": [
+        {
+          "from": 0,
+          "to": 21,
+          "style": "light"
+        },
+        {
+          "from": 21,
+          "to": 99,
+          "style": "resolve"
+        }
+      ],
+      "risers": [],
+      "impacts": []
+    },
+    "file": "audio/music.wav",
+    "id": null,
+    "license": "própria (sintetizada no kit)"
+  },
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Se você é terapeuta, imagine começar cada sessão com tudo o que precisa já à sua frente.",
+      "start": 0.2,
+      "words": [
+        {
+          "w": "Se",
+          "s": 0.24,
+          "e": 0.444
+        },
+        {
+          "w": "você",
+          "s": 0.444,
+          "e": 0.764
+        },
+        {
+          "w": "é",
+          "s": 0.764,
+          "e": 1.098
+        },
+        {
+          "w": "terapeuta,",
+          "s": 1.098,
+          "e": 1.708
+        },
+        {
+          "w": "imagine",
+          "s": 1.708,
+          "e": 1.908
+        },
+        {
+          "w": "começar",
+          "s": 1.908,
+          "e": 2.798
+        },
+        {
+          "w": "cada",
+          "s": 2.798,
+          "e": 3.178
+        },
+        {
+          "w": "sessão",
+          "s": 3.178,
+          "e": 3.718
+        },
+        {
+          "w": "com",
+          "s": 3.718,
+          "e": 4.03
+        },
+        {
+          "w": "tudo",
+          "s": 4.03,
+          "e": 4.31
+        },
+        {
+          "w": "que",
+          "s": 4.31,
+          "e": 4.69
+        },
+        {
+          "w": "precisa",
+          "s": 4.69,
+          "e": 5.05
+        },
+        {
+          "w": "já",
+          "s": 5.05,
+          "e": 5.55
+        },
+        {
+          "w": "à",
+          "s": 5.55,
+          "e": 5.65
+        },
+        {
+          "w": "sua",
+          "s": 5.65,
+          "e": 5.83
+        },
+        {
+          "w": "frente.",
+          "s": 5.83,
+          "e": 6.304
+        }
+      ],
+      "length": 6.104,
+      "file": "audio/vo/f1.wav",
+      "voice": "el-carla",
+      "end": 6.304
+    },
+    {
+      "id": "f2",
+      "text": "O histórico do paciente, suas anotações, o que foi trabalhado antes e o que você planejou para aquele encontro.",
+      "start": 6.604,
+      "words": [
+        {
+          "w": "O",
+          "s": 6.644,
+          "e": 6.874
+        },
+        {
+          "w": "histórico",
+          "s": 6.874,
+          "e": 7.214
+        },
+        {
+          "w": "do",
+          "s": 7.214,
+          "e": 7.434
+        },
+        {
+          "w": "paciente,",
+          "s": 7.434,
+          "e": 8.354
+        },
+        {
+          "w": "suas",
+          "s": 8.354,
+          "e": 8.494
+        },
+        {
+          "w": "anotações,",
+          "s": 8.494,
+          "e": 9.565
+        },
+        {
+          "w": "o",
+          "s": 9.565,
+          "e": 9.665
+        },
+        {
+          "w": "que",
+          "s": 9.665,
+          "e": 9.725
+        },
+        {
+          "w": "foi",
+          "s": 9.725,
+          "e": 10.005
+        },
+        {
+          "w": "trabalhado",
+          "s": 10.005,
+          "e": 10.525
+        },
+        {
+          "w": "antes",
+          "s": 10.525,
+          "e": 10.965
+        },
+        {
+          "w": "e",
+          "s": 10.965,
+          "e": 11.185
+        },
+        {
+          "w": "o",
+          "s": 11.185,
+          "e": 11.305
+        },
+        {
+          "w": "que",
+          "s": 11.305,
+          "e": 11.425
+        },
+        {
+          "w": "você",
+          "s": 11.425,
+          "e": 11.757
+        },
+        {
+          "w": "planejou",
+          "s": 11.757,
+          "e": 12.337
+        },
+        {
+          "w": "para",
+          "s": 12.337,
+          "e": 12.637
+        },
+        {
+          "w": "aquele",
+          "s": 12.637,
+          "e": 12.837
+        },
+        {
+          "w": "encontro.",
+          "s": 12.837,
+          "e": 13.378
+        }
+      ],
+      "length": 6.774,
+      "file": "audio/vo/f2.wav",
+      "voice": "el-carla",
+      "end": 13.378
+    },
+    {
+      "id": "f3",
+      "text": "Tudo organizado para você entrar na sessão sabendo exatamente de onde continuar.",
+      "start": 13.678,
+      "words": [
+        {
+          "w": "Tudo",
+          "s": 13.718,
+          "e": 14.019
+        },
+        {
+          "w": "organizado",
+          "s": 14.019,
+          "e": 14.819
+        },
+        {
+          "w": "para",
+          "s": 14.819,
+          "e": 15.039
+        },
+        {
+          "w": "você",
+          "s": 15.039,
+          "e": 15.379
+        },
+        {
+          "w": "entrar",
+          "s": 15.379,
+          "e": 15.599
+        },
+        {
+          "w": "na",
+          "s": 15.599,
+          "e": 15.839
+        },
+        {
+          "w": "sessão",
+          "s": 15.839,
+          "e": 16.299
+        },
+        {
+          "w": "sabendo",
+          "s": 16.299,
+          "e": 16.879
+        },
+        {
+          "w": "exatamente",
+          "s": 16.879,
+          "e": 17.268
+        },
+        {
+          "w": "de",
+          "s": 17.268,
+          "e": 17.548
+        },
+        {
+          "w": "onde",
+          "s": 17.548,
+          "e": 17.728
+        },
+        {
+          "w": "continuar.",
+          "s": 17.728,
+          "e": 18.84
+        }
+      ],
+      "length": 5.162,
+      "file": "audio/vo/f3.wav",
+      "voice": "el-carla",
+      "end": 18.84
+    },
+    {
+      "id": "f4",
+      "text": "E se o atendimento for online, você nem precisa mudar de ferramenta. A chamada acontece ali mesmo, dentro da sua rotina de trabalho.",
+      "start": 19.14,
+      "words": [
+        {
+          "w": "E",
+          "s": 19.18,
+          "e": 19.302
+        },
+        {
+          "w": "se",
+          "s": 19.302,
+          "e": 19.462
+        },
+        {
+          "w": "o",
+          "s": 19.462,
+          "e": 19.562
+        },
+        {
+          "w": "atendimento",
+          "s": 19.562,
+          "e": 20.042
+        },
+        {
+          "w": "for",
+          "s": 20.042,
+          "e": 20.222
+        },
+        {
+          "w": "online,",
+          "s": 20.222,
+          "e": 20.839
+        },
+        {
+          "w": "você",
+          "s": 20.839,
+          "e": 21.059
+        },
+        {
+          "w": "nem",
+          "s": 21.059,
+          "e": 21.379
+        },
+        {
+          "w": "precisa",
+          "s": 21.379,
+          "e": 21.759
+        },
+        {
+          "w": "mudar",
+          "s": 21.759,
+          "e": 22.079
+        },
+        {
+          "w": "de",
+          "s": 22.079,
+          "e": 22.359
+        },
+        {
+          "w": "ferramenta.",
+          "s": 22.359,
+          "e": 23.261
+        },
+        {
+          "w": "A",
+          "s": 23.261,
+          "e": 23.481
+        },
+        {
+          "w": "chamada",
+          "s": 23.481,
+          "e": 23.841
+        },
+        {
+          "w": "acontece",
+          "s": 23.841,
+          "e": 24.281
+        },
+        {
+          "w": "ali",
+          "s": 24.281,
+          "e": 24.561
+        },
+        {
+          "w": "mesmo,",
+          "s": 24.561,
+          "e": 25.052
+        },
+        {
+          "w": "dentro",
+          "s": 25.052,
+          "e": 25.212
+        },
+        {
+          "w": "da",
+          "s": 25.212,
+          "e": 25.432
+        },
+        {
+          "w": "sua",
+          "s": 25.432,
+          "e": 25.592
+        },
+        {
+          "w": "rotina",
+          "s": 25.592,
+          "e": 25.952
+        },
+        {
+          "w": "de",
+          "s": 25.952,
+          "e": 26.192
+        },
+        {
+          "w": "trabalho.",
+          "s": 26.192,
+          "e": 26.871
+        }
+      ],
+      "length": 7.731,
+      "file": "audio/vo/f4.wav",
+      "voice": "el-carla",
+      "end": 26.871
+    },
+    {
+      "id": "f5",
+      "text": "Antes da sessão, você pode se preparar com calma. Durante o atendimento, encontra rapidamente as informações importantes. E depois, mantém tudo organizado para o próximo encontro.",
+      "start": 27.171,
+      "words": [
+        {
+          "w": "Antes",
+          "s": 27.211,
+          "e": 27.569
+        },
+        {
+          "w": "da",
+          "s": 27.569,
+          "e": 27.789
+        },
+        {
+          "w": "sessão,",
+          "s": 27.789,
+          "e": 28.569
+        },
+        {
+          "w": "você",
+          "s": 28.569,
+          "e": 28.589
+        },
+        {
+          "w": "pode",
+          "s": 28.589,
+          "e": 28.829
+        },
+        {
+          "w": "se",
+          "s": 28.829,
+          "e": 29.129
+        },
+        {
+          "w": "preparar",
+          "s": 29.129,
+          "e": 29.7
+        },
+        {
+          "w": "com",
+          "s": 29.7,
+          "e": 29.98
+        },
+        {
+          "w": "calma.",
+          "s": 29.98,
+          "e": 30.419
+        },
+        {
+          "w": "Durante",
+          "s": 30.419,
+          "e": 30.739
+        },
+        {
+          "w": "o",
+          "s": 30.739,
+          "e": 30.879
+        },
+        {
+          "w": "atendimento,",
+          "s": 30.879,
+          "e": 31.769
+        },
+        {
+          "w": "encontra",
+          "s": 31.769,
+          "e": 31.889
+        },
+        {
+          "w": "rapidamente",
+          "s": 31.889,
+          "e": 32.609
+        },
+        {
+          "w": "as",
+          "s": 32.609,
+          "e": 32.849
+        },
+        {
+          "w": "informações",
+          "s": 32.849,
+          "e": 33.349
+        },
+        {
+          "w": "importantes.",
+          "s": 33.349,
+          "e": 34.826
+        },
+        {
+          "w": "E",
+          "s": 34.826,
+          "e": 35.026
+        },
+        {
+          "w": "depois,",
+          "s": 35.026,
+          "e": 35.623
+        },
+        {
+          "w": "mantém",
+          "s": 35.623,
+          "e": 36.134
+        },
+        {
+          "w": "tudo",
+          "s": 36.134,
+          "e": 36.414
+        },
+        {
+          "w": "organizado",
+          "s": 36.414,
+          "e": 37.114
+        },
+        {
+          "w": "para",
+          "s": 37.114,
+          "e": 37.374
+        },
+        {
+          "w": "o",
+          "s": 37.374,
+          "e": 37.434
+        },
+        {
+          "w": "próximo",
+          "s": 37.434,
+          "e": 37.814
+        },
+        {
+          "w": "encontro.",
+          "s": 37.814,
+          "e": 38.295
+        }
+      ],
+      "length": 11.124,
+      "file": "audio/vo/f5.wav",
+      "voice": "el-carla",
+      "end": 38.295
+    },
+    {
+      "id": "f6",
+      "text": "Menos abas abertas. Menos informações espalhadas. Menos tempo tentando lembrar onde você anotou alguma coisa.",
+      "start": 38.595,
+      "words": [
+        {
+          "w": "Menos",
+          "s": 38.635,
+          "e": 39.16
+        },
+        {
+          "w": "abas",
+          "s": 39.16,
+          "e": 39.48
+        },
+        {
+          "w": "abertas.",
+          "s": 39.48,
+          "e": 40.246
+        },
+        {
+          "w": "Menos",
+          "s": 40.246,
+          "e": 40.426
+        },
+        {
+          "w": "informações",
+          "s": 40.426,
+          "e": 41.046
+        },
+        {
+          "w": "espalhadas.",
+          "s": 41.046,
+          "e": 42.46
+        },
+        {
+          "w": "Menos",
+          "s": 42.46,
+          "e": 42.7
+        },
+        {
+          "w": "tempo",
+          "s": 42.7,
+          "e": 43.08
+        },
+        {
+          "w": "tentando",
+          "s": 43.08,
+          "e": 43.54
+        },
+        {
+          "w": "lembrar",
+          "s": 43.54,
+          "e": 44.405
+        },
+        {
+          "w": "onde",
+          "s": 44.405,
+          "e": 44.765
+        },
+        {
+          "w": "você",
+          "s": 44.765,
+          "e": 45.125
+        },
+        {
+          "w": "anotou",
+          "s": 45.125,
+          "e": 45.505
+        },
+        {
+          "w": "alguma",
+          "s": 45.505,
+          "e": 45.845
+        },
+        {
+          "w": "coisa.",
+          "s": 45.845,
+          "e": 46.214
+        }
+      ],
+      "length": 7.619,
+      "file": "audio/vo/f6.wav",
+      "voice": "el-carla",
+      "end": 46.214
+    },
+    {
+      "id": "f7",
+      "text": "E mais espaço para se concentrar no que realmente importa: o seu paciente!",
+      "start": 46.914,
+      "words": [
+        {
+          "w": "E",
+          "s": 46.954,
+          "e": 47.244
+        },
+        {
+          "w": "mais",
+          "s": 47.244,
+          "e": 47.584
+        },
+        {
+          "w": "espaço",
+          "s": 47.584,
+          "e": 48.124
+        },
+        {
+          "w": "para",
+          "s": 48.124,
+          "e": 48.364
+        },
+        {
+          "w": "se",
+          "s": 48.364,
+          "e": 48.624
+        },
+        {
+          "w": "concentrar",
+          "s": 48.624,
+          "e": 49.164
+        },
+        {
+          "w": "no",
+          "s": 49.164,
+          "e": 49.284
+        },
+        {
+          "w": "que",
+          "s": 49.284,
+          "e": 49.564
+        },
+        {
+          "w": "realmente",
+          "s": 49.564,
+          "e": 50.184
+        },
+        {
+          "w": "importa:",
+          "s": 50.184,
+          "e": 51.032
+        },
+        {
+          "w": "o",
+          "s": 51.032,
+          "e": 51.152
+        },
+        {
+          "w": "seu",
+          "s": 51.152,
+          "e": 51.392
+        },
+        {
+          "w": "paciente!",
+          "s": 51.392,
+          "e": 52.363
+        }
+      ],
+      "length": 5.449,
+      "file": "audio/vo/f7.wav",
+      "voice": "el-carla",
+      "end": 52.363
+    },
+    {
+      "id": "f8",
+      "text": "Essa é a kz. Uma forma mais simples de organizar seus atendimentos e cuidar da sua rotina profissional.",
+      "start": 52.663,
+      "words": [
+        {
+          "w": "Essa",
+          "s": 52.703,
+          "e": 53.161
+        },
+        {
+          "w": "é",
+          "s": 53.161,
+          "e": 53.457
+        },
+        {
+          "w": "a",
+          "s": 53.457,
+          "e": 53.697
+        },
+        {
+          "w": "kz.",
+          "s": 53.697,
+          "e": 54.183
+        },
+        {
+          "w": "Uma",
+          "s": 54.183,
+          "e": 54.363
+        },
+        {
+          "w": "forma",
+          "s": 54.363,
+          "e": 54.663
+        },
+        {
+          "w": "mais",
+          "s": 54.663,
+          "e": 55.003
+        },
+        {
+          "w": "simples",
+          "s": 55.003,
+          "e": 55.363
+        },
+        {
+          "w": "de",
+          "s": 55.363,
+          "e": 55.603
+        },
+        {
+          "w": "organizar",
+          "s": 55.603,
+          "e": 56.143
+        },
+        {
+          "w": "seus",
+          "s": 56.143,
+          "e": 56.323
+        },
+        {
+          "w": "atendimentos",
+          "s": 56.323,
+          "e": 57.043
+        },
+        {
+          "w": "e",
+          "s": 57.043,
+          "e": 57.323
+        },
+        {
+          "w": "cuidar",
+          "s": 57.323,
+          "e": 57.803
+        },
+        {
+          "w": "da",
+          "s": 57.803,
+          "e": 57.903
+        },
+        {
+          "w": "sua",
+          "s": 57.903,
+          "e": 58.083
+        },
+        {
+          "w": "rotina",
+          "s": 58.083,
+          "e": 58.463
+        },
+        {
+          "w": "profissional.",
+          "s": 58.463,
+          "e": 59.163
+        }
+      ],
+      "length": 6.5,
+      "file": "audio/vo/f8.wav",
+      "voice": "el-carla",
+      "end": 59.163
+    },
+    {
+      "id": "f9",
+      "text": "Conheça a kz.",
+      "start": 59.463,
+      "words": [
+        {
+          "w": "Conheça",
+          "s": 59.503,
+          "e": 60.164
+        },
+        {
+          "w": "a",
+          "s": 60.164,
+          "e": 60.324
+        },
+        {
+          "w": "kz.",
+          "s": 60.324,
+          "e": 60.694
+        }
+      ],
+      "length": 1.231,
+      "file": "audio/vo/f9.wav",
+      "voice": "el-carla",
+      "end": 60.694
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "block": "gancho",
+      "vo": [
+        "f1"
+      ],
+      "lead": 0.2,
+      "tail": 0.2,
+      "on_screen": "Se você é terapeuta,|Imagine começar|cada sessão|com *tudo* à frente",
+      "start": 0,
+      "end": 6.504
+    },
+    {
+      "id": "s2",
+      "block": "conceito",
+      "vo": [
+        "f2"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Histórico|Anotações|Trabalhado antes|Planejamento",
+      "start": 6.504,
+      "end": 13.578
+    },
+    {
+      "id": "s3",
+      "block": "conceito",
+      "vo": [
+        "f3"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Tudo *organizado*|Entrar sabendo|de onde *continuar*",
+      "start": 13.578,
+      "end": 19.04
+    },
+    {
+      "id": "s4",
+      "block": "produto",
+      "vo": [
+        "f4"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Atendimento *online*|sem mudar|de ferramenta",
+      "start": 19.04,
+      "end": 27.071
+    },
+    {
+      "id": "s5",
+      "block": "produto",
+      "vo": [
+        "f5"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Antes|Durante|Depois",
+      "start": 27.071,
+      "end": 38.495
+    },
+    {
+      "id": "s6",
+      "block": "build",
+      "vo": [
+        "f6"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Menos abas abertas.|Menos informações espalhadas.|Menos tempo tentando lembrar.",
+      "start": 38.495,
+      "end": 46.414
+    },
+    {
+      "id": "s7",
+      "block": "virada",
+      "vo": [
+        "f7"
+      ],
+      "pause": true,
+      "tail": 0.2,
+      "on_screen": "Mais espaço para|o seu *paciente*",
+      "start": 46.414,
+      "end": 52.563
+    },
+    {
+      "id": "s8",
+      "block": "revelação",
+      "vo": [
+        "f8"
+      ],
+      "lead": 0.1,
+      "tail": 0.2,
+      "on_screen": "Uma forma mais *simples*|de cuidar da rotina",
+      "start": 52.563,
+      "end": 59.363
+    },
+    {
+      "id": "s9",
+      "block": "cartão final",
+      "vo": [
+        "f9"
+      ],
+      "lead": 0.1,
+      "tail": 2,
+      "on_screen": "Conheça a kz|kz.app.br",
+      "start": 59.363,
+      "end": 62.694
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "reveal",
+      "scene": "s1",
+      "at": 0.1,
+      "target": "#kick",
+      "t": 0.1
+    },
+    {
+      "id": "e2",
+      "type": "reveal",
+      "scene": "s1",
+      "at": 0.5,
+      "target": "#p1card",
+      "t": 0.5
+    },
+    {
+      "id": "e35",
+      "type": "reveal",
+      "scene": "s1",
+      "word": "f1:imagine",
+      "offset": -0.1,
+      "target": "#h1",
+      "t": 1.608
+    },
+    {
+      "id": "e3",
+      "type": "reveal",
+      "scene": "s1",
+      "word": "f1:tudo",
+      "offset": -0.05,
+      "target": "#p1tiles",
+      "t": 3.98
+    },
+    {
+      "id": "e4",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:histórico",
+      "offset": -0.05,
+      "target": "#r1",
+      "t": 6.824
+    },
+    {
+      "id": "e5",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:anotações",
+      "offset": -0.05,
+      "target": "#r2",
+      "t": 8.444
+    },
+    {
+      "id": "e6",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:trabalhado",
+      "offset": -0.05,
+      "target": "#r3",
+      "t": 9.955
+    },
+    {
+      "id": "e7",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:planejou",
+      "offset": -0.05,
+      "target": "#r4",
+      "t": 11.707
+    },
+    {
+      "id": "e8",
+      "type": "swap",
+      "scene": "s3",
+      "at": 0.05,
+      "target": "#h3",
+      "t": 13.628
+    },
+    {
+      "id": "e9",
+      "type": "press",
+      "scene": "s3",
+      "word": "f3:organizado",
+      "offset": 0.1,
+      "target": ".rowcheck",
+      "t": 14.119
+    },
+    {
+      "id": "e36",
+      "type": "reveal",
+      "scene": "s3",
+      "word": "f3:entrar",
+      "offset": -0.1,
+      "target": "#h3a",
+      "t": 15.279
+    },
+    {
+      "id": "e10",
+      "type": "reveal",
+      "scene": "s3",
+      "word": "f3:continuar",
+      "offset": -0.1,
+      "target": "#btn3",
+      "t": 17.628
+    },
+    {
+      "id": "e11",
+      "type": "swap",
+      "scene": "s4",
+      "at": 0.05,
+      "target": "#s4",
+      "t": 19.09
+    },
+    {
+      "id": "e12",
+      "type": "press",
+      "scene": "s4",
+      "word": "f4:online",
+      "offset": 0,
+      "target": "#toggle",
+      "t": 20.222
+    },
+    {
+      "id": "e37",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:mudar",
+      "offset": -0.1,
+      "target": "#h4",
+      "t": 21.659
+    },
+    {
+      "id": "e13",
+      "type": "click",
+      "scene": "s4",
+      "word": "f4:chamada",
+      "offset": 0.05,
+      "target": "#joinbtn",
+      "t": 23.531
+    },
+    {
+      "id": "e14",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:dentro",
+      "offset": -0.05,
+      "target": "#ring4",
+      "t": 25.002
+    },
+    {
+      "id": "e15",
+      "type": "swap",
+      "scene": "s5",
+      "word": "f5:Antes",
+      "offset": -0.1,
+      "target": "#st1",
+      "t": 27.111
+    },
+    {
+      "id": "e42",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:preparar",
+      "offset": -0.05,
+      "target": ".chk",
+      "t": 29.079
+    },
+    {
+      "id": "e16",
+      "type": "swap",
+      "scene": "s5",
+      "word": "f5:Durante",
+      "offset": -0.1,
+      "target": "#st2",
+      "t": 30.319
+    },
+    {
+      "id": "e17",
+      "type": "click",
+      "scene": "s5",
+      "word": "f5:rapidamente",
+      "offset": 0,
+      "target": "#tabhist",
+      "t": 31.889
+    },
+    {
+      "id": "e38",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:informações",
+      "offset": -0.05,
+      "target": "#hl5",
+      "t": 32.799
+    },
+    {
+      "id": "e18",
+      "type": "swap",
+      "scene": "s5",
+      "word": "f5:depois",
+      "offset": -0.1,
+      "target": "#st3",
+      "t": 34.926
+    },
+    {
+      "id": "e19",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:próximo",
+      "offset": -0.05,
+      "target": "#nextsess",
+      "t": 37.384
+    },
+    {
+      "id": "e20",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:0",
+      "offset": -0.1,
+      "target": "#m1",
+      "t": 38.535
+    },
+    {
+      "id": "e21",
+      "type": "cut",
+      "scene": "s6",
+      "word": "f6:2",
+      "offset": 0.2,
+      "target": ".tab",
+      "t": 39.68
+    },
+    {
+      "id": "e22",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:3",
+      "offset": -0.1,
+      "target": "#m2",
+      "t": 40.146
+    },
+    {
+      "id": "e23",
+      "type": "swap",
+      "scene": "s6",
+      "word": "f6:5",
+      "offset": 0.5,
+      "target": ".frag",
+      "t": 41.546
+    },
+    {
+      "id": "e24",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:6",
+      "offset": -0.1,
+      "target": "#m3",
+      "t": 42.36
+    },
+    {
+      "id": "e39",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:lembrar",
+      "offset": -0.1,
+      "target": "#search",
+      "t": 43.44
+    },
+    {
+      "id": "e25",
+      "type": "cut",
+      "scene": "s6",
+      "word": "f6:14",
+      "offset": 0.1,
+      "target": "#search",
+      "t": 45.945
+    },
+    {
+      "id": "e26",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:espaço",
+      "offset": -0.1,
+      "target": "#halo",
+      "t": 47.484
+    },
+    {
+      "id": "e40",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:concentrar",
+      "offset": -0.1,
+      "target": "#h7",
+      "t": 48.524
+    },
+    {
+      "id": "e41",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:importa",
+      "offset": 0,
+      "target": "#h7b",
+      "t": 50.184
+    },
+    {
+      "id": "e27",
+      "type": "impact",
+      "scene": "s7",
+      "word": "f7:paciente",
+      "offset": -0.05,
+      "target": "#av7",
+      "t": 51.342
+    },
+    {
+      "id": "e28",
+      "type": "reveal",
+      "scene": "s8",
+      "word": "f8:kz",
+      "offset": -0.1,
+      "target": "#logo",
+      "t": 53.597
+    },
+    {
+      "id": "e29",
+      "type": "reveal",
+      "scene": "s8",
+      "word": "f8:Uma",
+      "offset": -0.1,
+      "target": "#tag8",
+      "t": 54.083
+    },
+    {
+      "id": "e30",
+      "type": "reveal",
+      "scene": "s8",
+      "word": "f8:organizar",
+      "offset": -0.05,
+      "target": "#pl1",
+      "t": 55.553
+    },
+    {
+      "id": "e31",
+      "type": "reveal",
+      "scene": "s8",
+      "word": "f8:atendimentos",
+      "offset": -0.05,
+      "target": "#pl2",
+      "t": 56.273
+    },
+    {
+      "id": "e32",
+      "type": "reveal",
+      "scene": "s8",
+      "word": "f8:rotina",
+      "offset": -0.05,
+      "target": "#pl3",
+      "t": 58.033
+    },
+    {
+      "id": "e33",
+      "type": "reveal",
+      "scene": "s9",
+      "at": 0,
+      "target": "#title9",
+      "t": 59.363
+    },
+    {
+      "id": "e34",
+      "type": "click",
+      "scene": "s9",
+      "at": 1.4,
+      "target": "#cta",
+      "t": 60.763
+    }
+  ],
+  "duration": 62.694,
+  "sfx": [
+    {
+      "event": "e9",
+      "asset": "ui-hud-pop-up-03",
+      "align": "peak",
+      "gain_db": -20,
+      "pan": 0.1
+    },
+    {
+      "event": "e12",
+      "asset": "ui-ui-interface-02",
+      "align": "peak",
+      "gain_db": -20,
+      "pan": -0.1
+    },
+    {
+      "event": "e13",
+      "asset": "ui-ui-interface-01",
+      "align": "peak",
+      "gain_db": -19
+    },
+    {
+      "event": "e17",
+      "asset": "ui-ui-interface-02",
+      "align": "peak",
+      "gain_db": -20,
+      "pan": 0.1
+    },
+    {
+      "event": "e28",
+      "asset": "tonal-piano-f-maior-expansivo-01",
+      "align": "start",
+      "gain_db": -21,
+      "max": 3.2
+    },
+    {
+      "event": "e34",
+      "asset": "ui-ui-interface-03",
+      "align": "peak",
+      "gain_db": -19
+    }
+  ]
+}

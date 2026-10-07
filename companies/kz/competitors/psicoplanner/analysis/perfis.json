@@ -1,0 +1,32 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:15:05Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.psicoplanner.com.br"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://psicoplanner.com.br",
+        "note": "site oficial do produto; linka o app no Google Play"
+      },
+      {
+        "platform": "outro",
+        "url": "https://play.google.com/store/apps/details?id=com.psicoplanner.id1735906750329",
+        "note": "app Android linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

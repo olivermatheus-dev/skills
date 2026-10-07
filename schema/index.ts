@@ -2,6 +2,7 @@ export * from './common';
 export * from './project';
 export * from './persona';
 export * from './competitor';
+export * from './analysis';
 export * from './note';
 export * from './idea';
 export * from './task';

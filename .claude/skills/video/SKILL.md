@@ -57,6 +57,7 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 - Linkar `brand/brand.css` (o `produce.mjs` copia a marca para o render); nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`tools/video-kit/GUIA-TECNICO.md`); **todo tempo vem de `T.scene/T.ev/T.word`** ou dos marcadores `__S:<cena>__ __D:<cena>__ __E:<evento>__`, nunca número escrito à mão (é o que deixa trocar a voz sem reescrever).
 - **Cena isolada e elástica** (para virar variante sem reescrever): sem cor ou texto fixo dentro (tokens do `brand.css` + `params`/`on_screen` do `timeline.json`), animação em tempo relativo (entrada · hold · saída), sem depender da cena vizinha. Contrato completo: `roadmap/tasks/013-cenas-modulares-variantes/TASK.md`.
 - Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
+- **Ritmo (feedback do Oliver, 2026-10-07):** nenhuma tela vazia esperando a fala. Toda cena começa com algo entrando no 1º quadro; toda frase falada tem **headline animada** no tempo da palavra (troca a cada frase); cada ideia ganha **ícone ou elemento gráfico** de apoio (relógio que esvazia, alerta, coração, pílula com ícone); entradas e saídas de card têm **efeito sonoro discreto**. Abertura: a 1ª frase grande, entrando animada, depois encolhe e sobe para dar lugar ao resto.
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.
 

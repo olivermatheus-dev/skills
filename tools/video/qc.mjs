@@ -90,8 +90,15 @@ for (const f of files) {
     const where = s < fr ? 'no início' : e > d - fr ? 'no fim' : `em ${s.toFixed(2)}–${e.toFixed(2)} s`;
     add(e - s <= 3 * fr ? 'crit' : 'maior', name, `quadro preto ${where} (${Math.round((e - s) / fr)} quadro(s))`);
   }
-  for (const m of ff(f, 'negate,blackdetect=d=0:pix_th=0.10').matchAll(/black_start:([\d.]+) black_end:([\d.]+)/g))
-    if (+m[2] - +m[1] <= 3 * fr) add('crit', name, `flash branco em ${(+m[1]).toFixed(2)} s`);
+  // flash = quadro claro curto que SALTA de brilho em relação aos vizinhos. Marca de fundo quase branco (ex.: creme da kz)
+  // deixa muito quadro "todo claro" sem ser flash; por isso compara o brilho médio com 0,15 s antes e depois.
+  const luma = (t) => +(spawnSync('ffmpeg', ['-hide_banner', '-ss', String(Math.max(0, t)), '-i', f, '-frames:v', '1', '-vf', 'signalstats,metadata=print:key=lavfi.signalstats.YAVG', '-f', 'null', '-'], { encoding: 'utf8' }).stderr.match(/YAVG=([\d.]+)/)?.[1] ?? NaN);
+  for (const m of ff(f, 'negate,blackdetect=d=0:pix_th=0.10').matchAll(/black_start:([\d.]+) black_end:([\d.]+)/g)) {
+    const [s0, e0] = [+m[1], +m[2]];
+    if (e0 - s0 > 3 * fr) continue;
+    const jump = luma((s0 + e0) / 2) - Math.min(luma(s0 - 0.15), luma(e0 + 0.15));
+    if (!(jump < 12)) add('crit', name, `flash branco em ${s0.toFixed(2)} s (+${Number.isFinite(jump) ? jump.toFixed(0) : '?'} de brilho)`);
+  }
   for (const m of ff(f, 'freezedetect=n=0.0005:d=1.5').matchAll(/freeze_start: ([\d.]+)[\s\S]*?freeze_duration: ([\d.]+)/g))
     add('maior', name, `tela congelada em ${(+m[1]).toFixed(2)} s por ${(+m[2]).toFixed(1)} s (nada fica parado; confira se é intencional)`);
 

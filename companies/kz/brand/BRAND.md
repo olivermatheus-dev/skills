@@ -70,6 +70,7 @@ Mais calmo que o default: preferir molas `GENTLE`/`FAST`, evitar `SOFT` com pass
 - Promessas de resultado terapêutico ou uso de depoimento de paciente (regras CFP/CRP — ver `context/BUSINESS.md`).
 
 ## Aprendizados
+- 2026-10-07 (1º vídeo, v01 → v02): o Oliver quer **mais dinâmica** — sem espaço vazio antes do texto, headline animada em toda frase, ícones e elementos que ilustram o que é dito, sons discretos em cada card que entra ou sai. Calma ≠ parado.
 - 2026-10-07 (teste do kit): o ponto/ênfase do logotipo em texto usa `--accent`, nunca `--primary` (coral como texto reprova contraste).
 
 ## A validar

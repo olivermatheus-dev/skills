@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p app",
     "app": "vite build --config app/vite.config.ts --logLevel warn && vite preview --config app/vite.config.ts",
     "collect": "tsx tools/intel/cli.ts",
+    "analise": "tsx tools/intel/analysis-cli.ts",
     "test:intel": "tsx tools/intel/test.ts",
     "app:dev": "vite --config app/vite.config.ts"
   },

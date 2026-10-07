@@ -13,7 +13,7 @@
 import { mkdirSync, copyFileSync, readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, extname, basename } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { KIT, video, prepVoice, speechBounds, layout, closeWords, r3 } from './lib.mjs';
+import { KIT, video, prepVoice, speechBounds, layout, closeWords, snapWords, r3 } from './lib.mjs';
 
 const args = process.argv.slice(2);
 const opt = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined; };
@@ -45,7 +45,9 @@ for (const { id, file, words } of jobs) {
   if (words) {
     const exact = JSON.parse(readFileSync(words, 'utf8'));
     const { begin } = speechBounds(keep);
-    x.words = closeWords(exact.map((w) => ({ w: w.w ?? w.word, s: r3(x.start + Math.max(0, (w.s ?? w.start) - begin + offset)) })), x.start + length);
+    // tempos no arquivo tratado, corrigidos pelo próprio som (pausas = âncoras), depois no relógio do vídeo
+    const rel = snapWords(out, exact.map((w) => ({ w: w.w ?? w.word, s: r3(Math.max(0, (w.s ?? w.start) - begin + offset)) })));
+    x.words = closeWords(rel.map((w) => ({ w: w.w, s: r3(x.start + w.s) })), x.start + length);
     delete x.words_approx;
   } else if (x.words?.length && before) {
     const k = length / before;

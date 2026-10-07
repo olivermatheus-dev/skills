@@ -58,3 +58,18 @@ export interface ProfileSummary {
   prevFollowers?: number;
 }
 export interface CompetitorSummary { id: string; profiles: ProfileSummary[]; lastCollected?: string }
+
+/** Linha da tabela comparativa / do card: o essencial de cada módulo, sem carregar os textos. */
+export interface AnalysisOverview {
+  id: string;
+  market?: string;
+  oneLiner?: string;
+  fromMonthly?: number; currency?: string; publicPrice?: boolean; priceModel?: string; trial?: string; plans?: number;
+  features?: number; sections?: number; raScore?: number; raFound?: boolean; storeRating?: number;
+  strengths?: number; weaknesses?: number;
+  request?: { modules: string[]; status: string; requestedAt: string };
+  updated: Record<string, string>;
+  hasNotes: boolean;
+}
+/** resultado do módulo `site` (script) */
+export interface SiteRunResult { id: string; ok: boolean; url?: string; pages: number; sitemap: number; contacts: number; errors: string[]; ms: number }

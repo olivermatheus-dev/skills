@@ -1,0 +1,56 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:57Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://personcare.com.br"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://personcare.com.br",
+        "note": "site do produto"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/personcare.manager/",
+        "handle": "personcare.manager",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/channel/UCiq4sYhkcd7KoIX3pD3h9EA",
+        "note": "canal linkado no rodapé do site (sem @handle)"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/personcare",
+        "handle": "personcare",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/personcaremanager",
+        "handle": "personcaremanager",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "outro",
+        "url": "https://apps.apple.com/br/app/personcare-para-profissionais/id6745275082",
+        "note": "app iOS Personcare para Profissionais, linkado no site"
+      },
+      {
+        "platform": "outro",
+        "url": "https://play.google.com/store/apps/details?id=com.profissionais.PERSONCARE",
+        "note": "app Android, linkado no site"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

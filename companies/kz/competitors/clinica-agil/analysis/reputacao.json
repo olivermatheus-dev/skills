@@ -1,0 +1,38 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:15:01Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://apps.apple.com/br/app/cl%C3%ADnica-%C3%A1gil/id1600308056",
+      "title": "App Store"
+    },
+    {
+      "url": "https://www.capterra.com/p/10050168/Clinica-Agil/",
+      "title": "Capterra"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [
+      {
+        "store": "app-store",
+        "rating": 3.5,
+        "reviews": 33,
+        "url": "https://apps.apple.com/br/app/cl%C3%ADnica-%C3%A1gil/id1600308056"
+      }
+    ],
+    "mentions": [
+      {
+        "source": "Capterra",
+        "url": "https://www.capterra.com/p/10050168/Clinica-Agil/",
+        "summary": "2 avaliações, ambas 5 estrelas; elogiam suporte rápido e intuitividade; um aponta limitação nos lembretes automáticos"
+      }
+    ],
+    "summary": "Sem página do Clínica Ágil no Reclame Aqui na busca (a página direta deu 403, não confirmado). App iOS 3,5 com 33 avaliações, com queixa de login que não persiste; Capterra com só 2 avaliações. Google Play não foi lido (fetch truncado)."
+  }
+}

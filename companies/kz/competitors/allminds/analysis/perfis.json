@@ -1,0 +1,48 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-07T19:14:54Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://allminds.app",
+      "title": "Allminds - rodapé"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://allminds.app",
+        "note": "plataforma de gestão para psicólogos; allminds.com.br é outra empresa (consultoria de neurodiversidade), descartado"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/allminds.app/",
+        "handle": "allminds.app",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@allmindsapp",
+        "handle": "allmindsapp",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/allminds.app.ofc",
+        "handle": "allminds.app.ofc",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/allmindsapp/",
+        "handle": "allmindsapp",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

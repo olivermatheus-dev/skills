@@ -117,6 +117,32 @@ export function layout(tl) {
   return tl;
 }
 
+/**
+ * Corrige os tempos por palavra de uma transcrição (o Whisper costuma marcar 0,1–0,3 s DEPOIS da fala real) usando o
+ * próprio áudio: a 1ª palavra vai para o início real do som e cada palavra que vem depois de uma pausa vai para o fim
+ * dessa pausa; as palavras entre duas âncoras andam junto com a âncora anterior. `rel` = [{w, s}] relativos ao arquivo.
+ */
+export function snapWords(file, rel, { pad = 0.04 } = {}) {
+  const words = rel.filter((w) => /[\p{L}\p{N}]/u.test(w.w)).map((w) => ({ ...w }));
+  if (!words.length) return words;
+  const log = spawnSync('ffmpeg', ['-hide_banner', '-i', file, '-af', 'silencedetect=n=-40dB:d=0.1', '-f', 'null', '-'], { encoding: 'utf8' }).stderr;
+  const sil = [...log.matchAll(/silence_start: (-?[\d.]+)[\s\S]*?silence_end: ([\d.]+)/g)].map((m) => ({ a: Math.max(0, +m[1]), b: +m[2] }));
+  // 1ª palavra no início do som, só se for perto (um suspiro antes da fala não pode puxar a palavra para trás)
+  const t0 = sil[0] && sil[0].a < 0.02 ? sil[0].b : pad;
+  const anchors = Math.abs(words[0].s - t0) < 0.35 ? [{ i: 0, t: t0 }] : [];
+  for (const { a, b } of sil) {
+    if (a < 0.05) continue;
+    const i = words.findIndex((w) => w.s > a - 0.1);
+    if (i >= 0 && Math.abs(words[i].s - b) < 0.5 && i > (anchors.at(-1)?.i ?? -1)) anchors.push({ i, t: b });
+  }
+  anchors.forEach((an, k) => {
+    const d = an.t - words[an.i].s, end = anchors[k + 1]?.i ?? words.length;
+    for (let j = an.i; j < end; j++) words[j].s = r3(Math.max(0, words[j].s + d));
+  });
+  for (let j = 1; j < words.length; j++) if (words[j].s <= words[j - 1].s) words[j].s = r3(words[j - 1].s + 0.05);
+  return words;
+}
+
 /** Palavras com fim: o fim de cada uma é o começo da próxima (o último vai até o fim da fala). */
 export function closeWords(words, end) {
   return words.map((w, i) => ({ w: w.w, s: r3(w.s), e: r3(Math.max(w.s, i + 1 < words.length ? words[i + 1].s : end)) }));

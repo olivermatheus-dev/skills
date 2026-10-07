@@ -10,6 +10,10 @@
 - Marca em `brand/brand.css` (copiada de `companies/<slug>/brand/`); fontes **locais** no `brand/fonts/` (render sem internet e determinístico).
 
 ## Armadilhas
+- **`fromTo` desenha o estado inicial já no quadro 0.** Se o "de" é visível (ex.: anel de explosão `{ opacity: 0.7 }` → `0`), ele aparece desde o começo do vídeo, em cima de outras cenas. Nesses, use `immediateRender: false`.
+- **Tempos do Whisper chegam 0,1–0,3 s atrasados.** O `split-vo.mjs`/`fit-vo.mjs` corrigem pelas pausas do próprio áudio (`snapWords` em `lib.mjs`); a palavra entra ~0,14 s antes de ser dita.
+- **Medir elemento depois de preencher o texto.** Botão vazio na hora do `getBoundingClientRect` = cursor no lugar errado.
+- **Linha centralizada que entra palavra a palavra** começa pela esquerda (as palavras invisíveis já ocupam espaço). Frase grande de abertura: quebre em 2 linhas curtas (`max-width`).
 - **O HyperFrames embute e reordena os scripts.** Nada de ler `window.__TL` no topo de um arquivo do kit: o `tl.js` lê na hora do uso. Erro típico: "T is not defined" e todos os quadros iguais. Diagnóstico: `node node_modules/hyperframes/bin/hyperframes.mjs validate .` dentro de `render/<formato>/`.
 - **Estado inicial escondido vai no CSS** (`opacity: 0`), não em `tl.set(..., 0)`: um `set` em 0 não aparece no quadro 0 (o lint avisa).
 - **Saída termina antes da entrada.** Na troca de cena, o que sai acaba antes do que entra aparecer. Os quadros do `check.mjs` (fim de cena e eventos) **não pegam transição**: a folha do `qc.mjs --sheet` (a cada 0,5 s) pega.

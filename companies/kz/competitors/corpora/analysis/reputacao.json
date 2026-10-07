@@ -1,0 +1,35 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-07T19:15:02Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://usecorpora.com.br/"
+    },
+    {
+      "url": "https://www.falandodegestao.com.br/332078-corpora-disponibiliza-plataforma-de-gestao-para-psicologas/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/corpora/",
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [
+      {
+        "source": "Imprensa",
+        "url": "https://www.falandodegestao.com.br/332078-corpora-disponibiliza-plataforma-de-gestao-para-psicologas/",
+        "summary": "Notícia de divulgação: mais de 60 mil psicólogas, 5 milhões de sessões/ano (declarado pela empresa)."
+      },
+      {
+        "source": "Agilize (comparativo)",
+        "url": "https://agilize.com.br/artigos/melhor-software-gestao-psicologos-2026",
+        "summary": "Citada entre os 8 sistemas mais usados; elogiada em teleatendimento e relatórios."
+      }
+    ],
+    "summary": "Nenhuma página da Corpora achada no Reclame Aqui pela busca (a página direta retorna 403, então não dá para descartar). Sem app nas lojas: site diz que não precisa de aplicativo."
+  }
+}
