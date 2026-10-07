@@ -7,6 +7,7 @@ _inbox/
 **/renders/
 **/exports/
 companies/**/audio/
+companies/**/media/
 *.mp4
 *.mov
 *.webm
