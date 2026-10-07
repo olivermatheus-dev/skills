@@ -5,6 +5,9 @@
 ## Objetivo
 Transformar a documentação, ideias e técnicas de editores profissionais que o usuário vai mandar em **conhecimento operacional curto** dentro das skills de vídeo, com regras objetivas que o Claude consegue executar em código (HTML/CSS/JS), e não teoria.
 
+## Papel do Claude
+Além de destilar, **pesquisar e melhorar** cada tema com referências profissionais (montagem, motion, som, tipografia), para que cada tipo de vídeo saia com o polimento de um editor com 10 anos de carreira. Cada regra deve ter um **valor inicial** e um **critério de checagem**.
+
 ## Como funciona
 1. O usuário manda o material (texto no chat, links, PDFs, vídeos de referência). Os arquivos vão para `material/` nesta pasta; os pesados ficam fora do git.
 2. O Claude registra cada material em `INDICE.md` (data · fonte · tema · status: novo/destilado).
@@ -22,4 +25,6 @@ Contínua. Cada lote de material termina com o índice atualizado e as referênc
 
 ## Log
 - 2026-10-06 — criada.
+- 2026-10-07 — 3º lote: prompts de vídeo (Ludus) e de trailer → briefing-e-direcao, movimento, ritmo-e-leitura, som.
+- 2026-10-07 — 2º lote: skill ludus-video → esteira-de-producao + especificação do BRAND.md.
 - 2026-10-07 — 1º lote: Etapa 1, cortes e montagem → `knowledge/video/cortes-e-montagem.md`. Criada a pasta `knowledge/video/`.

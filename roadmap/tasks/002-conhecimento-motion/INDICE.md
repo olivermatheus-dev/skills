@@ -7,6 +7,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-06 | material/ref-roteiros-video-antigo.md (plano antigo do repo) | roteiro, hooks, retenção | — | novo |
 | 2026-10-07 | material/2026-10-07-etapa1-cortes-montagem.md | fundamentos de corte, hard/jump/J/L-cut, cut on action | knowledge/video/cortes-e-montagem.md | destilado |
 | 2026-10-07 | material/2026-10-07-skill-ludus-video.md (skill do produto Ludus) | processo de produção, arquitetura de skill, QA, export | knowledge/video/esteira-de-producao.md + tarefas 001, 003, 004 | destilado |
+| 2026-10-07 | material/2026-10-07-prompts-video-e-trailer.md (prompt do Ludus + prompt de trailer de um editor) | briefing, direção, arco, movimento, ritmo, som | knowledge/video/briefing-e-direcao.md, movimento.md, ritmo-e-leitura.md, som.md | destilado |
 
 ## Notas de verificação
 - **2026-10-07 · Etapa 1:** conteúdo correto e alinhado à prática profissional. Ajustes feitos:
@@ -26,3 +27,14 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
   - O que ficou de fora, por ser específico do Ludus: as cores #F5F5F7 e #1D1D1F, a proibição de caixa alta, a persona Gaby e a voz Thalita. Isso vira exemplo do que vai no `BRAND.md` de cada marca.
   - Correção: o motion blur com 2 amostras (60→30 fps) pode gerar "fantasma" em movimento rápido. A recomendação passou a ser 4–8 amostras com obturador de 180°, ou desfoque direcional no elemento.
   - Impacto: HyperFrames + GSAP vira o candidato nº 1 na tarefa 003, com a sugestão de reaproveitar o `_kit` do Ludus.
+- **2026-10-07 · prompts de vídeo e trailer:** conteúdo correto, mas qualitativo ("eased", "loud but never clipping"). O ganho foi **quantificar e completar com referências profissionais**:
+  - **Briefing:** reduzido a 4 variáveis (recorte, duração, formatos, áudio). O resto sai da marca, do contexto e dos defaults, com proposta de 2–3 conceitos antes do plano.
+  - **Movimento:** tabela de easing por situação, durações por tamanho de elemento, overshoot ≤ 10%, stagger de 40–80 ms, cursor em curva com pausa antes do clique. Fontes: princípios Disney e motion de UI (Material/Apple).
+  - **Ritmo:** fórmula de tempo mínimo de leitura (máx(1 s; 0,3 s/palavra)), limite de palavras da locução por duração e 1º quadro com conteúdo.
+  - **Som:**
+    - BPM → quadros por batida, com cortes nos tempos fortes;
+    - sincronia em que o som nunca vem antes da imagem (ITU-R BT.1359);
+    - silêncio antes do impacto, ducking de 8–12 dB;
+    - −14 LUFS ±1 com true peak ≤ −1 dBTP (faltava no original), medido com ffmpeg.
+  - **Ressalva:** trilha 100% sintetizada soa menos rica. Para vídeos-chave, considerar faixa licenciada.
+  - **Novos formatos para o catálogo da 005:** `fmt-trailer-lancamento` e `fmt-recorte-funcionalidade`.
