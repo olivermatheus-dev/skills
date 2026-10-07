@@ -21,6 +21,7 @@ Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, 
 | números, gráficos, diagramas, mapas | `knowledge/video/infograficos-e-dados.md` (dados em `data/*.json`; assets em `library/visual/`) |
 | animar e polir | `knowledge/video/animacao-comportamento.md` · `curvas-e-polimento.md` (⚠️ terminologia AE × GSAP) |
 | escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `transicoes-e-efeitos.md` · `tecnico-hyperframes.md` |
+| mockup, UI no aparelho, partículas, glow, grão | `knowledge/video/compositing.md` · `particulas-e-atmosfera.md` (default: sem partículas; só com função) |
 | voz | skill `locucao` (v1.0 gratuita → roteiro ElevenLabs → encaixe) |
 
 Precedência: **BRAND.md > receita do fmt-* > knowledge/video (defaults)**.

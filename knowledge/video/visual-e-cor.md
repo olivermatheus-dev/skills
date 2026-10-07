@@ -25,7 +25,7 @@
 Regra de bolso: **toda cor na tela precisa responder "o que ela significa?"** Se não houver resposta, tire.
 
 ## 4. Efeitos
-- **Faísca, partícula, confete:** só como **resposta a um gesto** (o "pago" confirmado, o envio concluído), nunca como enfeite de fundo.
+- **Faísca, partícula, confete:** só como **resposta a um gesto** (o "pago" confirmado, o envio concluído), nunca como enfeite de fundo. Regras e valores: `particulas-e-atmosfera.md`.
 - Sombra: suave e consistente (1 direção de luz no vídeo todo). Níveis do `brand.css` (`--shadow-sm/md/lg`).
 
 ## 5. Tipografia

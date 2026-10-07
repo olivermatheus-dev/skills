@@ -10,6 +10,7 @@ library/visual/
   flags/                 bandeiras (mesmo estilo e proporção)
   logos/                 logos oficiais de terceiros (concorrentes, parceiros, integrações)
   illustrations/         ilustrações com licença
+  fx/<tipo>/             efeitos de integração e atmosfera: grain, smoke, fog, dust, light-leaks, bokeh, lens-dirt, reflections (arquivos pesados ficam locais; metadados em `fx/fx.json`: tipo, densidade, velocidade, escala, caráter, direção, profundidade, loop, alpha/preto, licença)
   README.md              este arquivo + registro de licenças (abaixo)
 ```
 

@@ -18,6 +18,8 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | (chat) Etapa 9 — Graph Editor e micro-polimento | leitura de curvas, assimetria, keyframes de passagem, caminho × tempo, percepção, famílias, inspeção, checklist | knowledge/video/curvas-e-polimento.md (traduzido para GSAP) | destilado |
 | 2026-10-07 | (chat) Etapa 10 — tipografia animada e kinetic type | unidade, ênfase, sincronia com fala, legendas, técnicas, sistema, QC | knowledge/video/tipografia-animada.md | destilado |
 | 2026-10-07 | (chat) Etapa 11 — infográficos, dados, diagramas | escolha da representação, integridade, design de gráfico, motion de dados, mapas, assets, dados em código, QC | knowledge/video/infograficos-e-dados.md + library/visual/ | destilado |
+| 2026-10-07 | material/2026-10-07-etapa12-compositing.md | compositing e integração com live action (121 itens) | knowledge/video/compositing.md (+ fmt-3d-produto, tecnico-hyperframes) | destilado |
+| 2026-10-07 | material/2026-10-07-etapa13-particulas.md | partículas, atmosfera e microdetalhes (128 itens) | knowledge/video/particulas-e-atmosfera.md (+ tecnico-hyperframes, library/visual/fx) | destilado |
 | 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
@@ -137,3 +139,13 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - **overshoot proibido em propriedade que codifica valor**, coerente com as molas do kit;
     - dados em `data/*.json` com fonte e a flag `illustrative`.
   - **Infraestrutura:** `library/visual/`, com fontes de licença livre e um registro de licenças.
+- **2026-10-07 · Etapas 12–13:** conteúdo correto (prática padrão de VFX). O que mudei:
+  - **Recorte para o nosso caso:** hoje não há filmagem, então o compositing virou "UI dentro de aparelho, mockup, callout, sombra de contato, matching"; o live action (tracking, roto, keying) ficou numa seção própria, com as ferramentas em `DEPOIS.md`.
+  - **Acrescentado:**
+    - **cor da marca no MP4:** o ffmpeg pode converter com BT.601 e mudar a cor; o export passa a marcar BT.709 e a comparar MP4 × PNG;
+    - corner pin em CSS = `matrix3d` dos 4 cantos;
+    - **partículas determinísticas:** PRNG com semente, estado em forma fechada como função de t (drag e gravidade), pre-roll e loop de população constante por fórmula, motion blur como traço de t−Δ a t, sprite pré-renderizado;
+    - tabela de valores iniciais (burst, confete, poeira, trail) e respiração 1,00 → 1,01–1,02;
+    - densidade de efeitos ligada à escala 0–4 de `pacing-e-atencao.md`.
+  - **Infraestrutura:** `library/visual/fx/` com catálogo `fx.json`; `*.webm` no `.gitignore`.
+  - **Coerência:** default do hub = sem partículas (já era regra em `visual-e-cor.md`); kz restringe à confirmação.

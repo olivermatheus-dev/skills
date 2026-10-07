@@ -20,13 +20,15 @@ Regras **executáveis** de edição e motion, já verificadas, para as skills de
 | `cobertura-e-reacao.md` | função do próximo plano; cutaway, insert, reação, eyeline, shot/reverse, match, smash (com tradução para motion) | escolher cada troca de cena |
 | `b-roll.md` | tipos de B-roll por objetivo, sincronia semântica, fontes e integridade, clichês proibidos | escolher o visual que acompanha a fala |
 | `transicoes-e-efeitos.md` | escada e sistema de decisão de transições, regras por tipo (dissolve, whip, zoom, máscara, morph, speed ramp, freeze…), sistema da marca, QC e teste de remoção | escolher e polir cada transição/efeito |
+| `compositing.md` | screen × world space, **UI dentro de aparelho**, sombra de contato, matching de cor/nitidez/grão, **cor da marca no MP4 (BT.709)**, live action (tracking, roto, keying), ordem de trabalho, QC | mockup, print em cena, callout em objeto, qualquer elemento sobre filmagem |
+| `particulas-e-atmosfera.md` | função de cada microefeito, asset × procedural, comportamento (emissor, forças, vida), valores iniciais, profundidade, glow/shine/trail, **partículas determinísticas no render**, curva de densidade, QC | qualquer partícula, glow, fumaça, poeira, grão ou micro-movimento |
 | `sound-design.md` | função de cada efeito, sistema de decisão, regras por tipo (whoosh, impact, riser…), motion, layering, anti-genérico, QC em 6 passadas | escolher e posicionar SFX |
 | `som.md` | BPM e cortes, desenho de som de trailer, ducking, −14 LUFS | trilha, SFX, mix |
 | `cortes-e-montagem.md` | motivação do corte, hard/jump/J/L-cut, cut on action, match cut em motion | toda edição e toda troca de cena em motion |
 
-Ordem de leitura sugerida: esteira → briefing → formatos → visual → **design** → ritmo → pacing → movimento → animação → curvas → som → cortes → cobertura → b-roll → transições → técnico.
+Ordem de leitura sugerida: esteira → briefing → formatos → visual → **design** → ritmo → pacing → movimento → animação → curvas → som → cortes → cobertura → b-roll → transições → compositing → partículas → técnico.
 
-Temas previstos (criar quando chegar material): tipografia cinética · composição e hierarquia · retenção e hooks · 3D. A estrutura por tipo de vídeo fica nas skills `fmt-*`.
+Temas previstos (criar quando chegar material): retenção e hooks · 3D. A estrutura por tipo de vídeo fica nas skills `fmt-*`.
 
 ## Regras desta pasta
 - **Regra, não teoria:** "faça X quando Y, valor inicial Z".

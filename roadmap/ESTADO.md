@@ -8,7 +8,7 @@
   - 6 agentes;
   - Kanban em arquivos;
   - heartbeat e tarefas recorrentes.
-- **Base de vídeo verificada:** `knowledge/video/`, 20 arquivos, Etapas 1–11 do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
+- **Base de vídeo verificada:** `knowledge/video/`, 22 arquivos, Etapas 1–13 do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
 - **Ferramentas (`tools/`):**
   - `board.mjs` (quadro);
   - `heartbeat.mjs` (agentes sozinhos);

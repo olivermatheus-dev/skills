@@ -22,5 +22,10 @@
 - Use **seletor de filho direto** (`#net > svg`) quando houver SVG aninhado; `#net svg` pega também os ícones dentro de chips.
 - **Cursor dentro do quadro** em todo zoom, inclusive **no meio** da transformação. Confira os quadros intermediários, não só o início e o fim.
 
+## Partículas, grão e ruído ★
+- **Nada de `Math.random()` nem relógio do navegador** no desenho: PRNG com semente fixa e estado = função do tempo da timeline. Pre-roll e loop por fórmula. Detalhes em `particulas-e-atmosfera.md` §6.
+- Canvas redesenhado num `onUpdate` da timeline principal (lê `tl.time()`); sprite desfocado pré-renderizado uma vez.
+
 ## Export
+- **Cor da marca no MP4 ★:** exportar com matriz BT.709 marcada (`-vf scale=out_color_matrix=bt709 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -pix_fmt yuv420p`) e comparar 1 quadro do MP4 com o PNG. Ver `compositing.md` §9.
 - Motion blur: ver `esteira-de-producao.md` §5 (o Ludus usa 2 amostras = 60 → 30 fps com obturador de 180°; em movimento rápido, considerar 4–8 amostras).
