@@ -14,8 +14,10 @@ import type { BrandPreset } from '../../core/brand-presets';
 export type { Brand, BrandFont, BrandToken, BrandPreset };
 export interface BrandKit { brand: Brand; imported: boolean; fonts: string[]; presets: BrandPreset[] }
 export type { Review, ReviewComment };
-export type PieceKind = 'video' | 'carrossel' | 'roteiro';
-export interface PieceInfo { path: string; kind: PieceKind; hasTimeline: boolean; videos: string[]; texts: string[]; status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number }
+import type { PieceMeta } from '../../schema/piece';
+import type { Piece as PieceInfo } from '../../core/store';
+export type { PieceMeta, PieceInfo };
+export type PieceKind = PieceInfo['kind'];
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
 export interface PieceTimeline {
@@ -27,7 +29,7 @@ export interface PieceTimeline {
   music?: { file?: string; bpm?: number; gain_db?: number; license?: string } | null;
   sfx?: { event: string; asset: string }[];
 }
-export interface PieceFull { path: string; kind: PieceKind; texts: string[]; timeline: PieceTimeline | null; videos: string[]; previews: string[]; review: Review }
+export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta }
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
@@ -119,6 +121,9 @@ export const api = {
   createPiece: (slug: string, input: NewPieceInput) => req<{ path: string; task?: Task }>('POST', `${pj(slug)}/pieces`, input),
   pieceText: (slug: string, path: string, file: string) => req<{ file: string; text: string }>('GET', `${pj(slug)}/piece/text?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`),
   savePieceText: (slug: string, path: string, file: string, text: string) => req<{ file: string; text: string }>('PUT', `${pj(slug)}/piece/text?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`, { text }),
+  savePieceMeta: (slug: string, path: string, patch: Partial<PieceMeta>) => req<PieceMeta>('PUT', `${pj(slug)}/piece/meta?path=${encodeURIComponent(path)}`, patch),
+  /** abre no computador: reveal = Explorer com o arquivo selecionado; open = app padrão (player). file vazio = a pasta */
+  pieceDesktop: (slug: string, path: string, how: 'reveal' | 'open', file = '') => req<{ ok: boolean }>('POST', `${pj(slug)}/piece/${how}?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`),
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),

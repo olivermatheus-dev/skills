@@ -8,4 +8,5 @@ export * from './idea';
 export * from './task';
 export * from './paths';
 export * from './review';
+export * from './piece';
 export * from './brand';

@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
-  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand,
+  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -362,11 +362,13 @@ export async function brandInSync(slug: string) {
   return exists(css) && read(css).replace(/\r\n/g, '\n') === brandToCss(check(Brand, JSON.parse(read(json)), json));
 }
 
-// ---------- Peças (vídeos, carrosséis, roteiros) e revisão por anotações (tarefa 022) ----------
-export type PieceKind = 'video' | 'carrossel' | 'roteiro';
+// ---------- Peças (vídeos, carrosséis, posts, roteiros): ficha (peca.json) e revisão por anotações (tarefa 022) ----------
+export type PieceKind = PieceMeta['kind'] & string;
+export interface PieceCover { type: 'video' | 'image'; file: string }
 export interface Piece {
-  path: string; kind: PieceKind; hasTimeline: boolean; videos: string[]; texts: string[];
-  status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number;
+  path: string; kind: PieceKind; title: string; date?: string; hasTimeline: boolean; videos: string[]; images: string[]; texts: string[];
+  cover?: PieceCover; tags: string[]; favorite: boolean; archived: boolean; publication?: PieceMeta['publication'];
+  status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number; mtime: number;
 }
 const contentsDir = (slug: string) => join(COMPANIES, slug, 'contents');
 /** caminho da peça relativo a contents/ (ex.: "2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
@@ -381,26 +383,66 @@ const textsOf = (dir: string) => list(dir, /^[\w.-]+\.(md|txt)$/i).sort((a, b) =
   const ia = TEXT_FIRST.indexOf(a), ib = TEXT_FIRST.indexOf(b);
   return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
 });
+const imagesOf = (dir: string) => list(join(dir, 'png'), /\.(png|jpe?g|webp)$/i).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
 const SKIP_DIRS = ['exports', 'render', 'audio', 'png', 'input', 'assets', 'node_modules'];
-function pieceKind(dir: string, videos: string[], hasTimeline: boolean): PieceKind | null {
+function pieceKind(dir: string, videos: string[], hasTimeline: boolean, images: string[]): PieceKind | null {
   if (videos.length || hasTimeline || exists(join(dir, 'composition.html'))) return 'video';
-  if (exists(join(dir, 'carrossel.html')) || exists(join(dir, 'png'))) return 'carrossel';
-  if (textsOf(dir).length || exists(join(dir, 'revisao.json'))) return 'roteiro';
+  if (exists(join(dir, 'post.html'))) return 'post';
+  if (exists(join(dir, 'carrossel.html')) || images.length > 1) return 'carrossel';
+  if (images.length === 1) return 'post';
+  if (textsOf(dir).length || exists(join(dir, 'revisao.json')) || exists(join(dir, 'peca.json'))) return 'roteiro';
   return null;
+}
+/** nome padrão de uma peça sem ficha: pastas sem a data, "ab sessao · A opus" */
+const defaultTitle = (path: string) => path.split('/').map((s) => s.replace(/^\d{4}-\d{2}-\d{2}-?/, '').replace(/-/g, ' ').trim()).filter(Boolean).join(' · ') || path;
+function coverOf(kind: PieceKind, videos: string[], images: string[], principal?: string): PieceCover | undefined {
+  if (principal && (videos.includes(principal.replace(/^exports\//, '')) || images.includes(principal.replace(/^png\//, ''))))
+    return { type: principal.startsWith('exports/') ? 'video' : 'image', file: principal };
+  if (kind === 'video' && videos.length) return { type: 'video', file: `exports/${videos[videos.length - 1]}` };
+  if (images.length) return { type: 'image', file: `png/${images[0]}` };
+  return undefined;
+}
+export function getPieceMeta(slug: string, path: string): PieceMeta {
+  const f = join(piecePath(slug, path), 'peca.json');
+  return exists(f) ? readJson(PieceMeta, f) : PieceMeta.parse({});
+}
+/** grava a ficha (merge raso; notes e publication são mesclados campo a campo) */
+export function savePieceMeta(slug: string, path: string, patch: Partial<PieceMeta>): PieceMeta {
+  const dir = piecePath(slug, path);
+  if (!exists(dir)) throw new ValidationError(dir, ['peça não encontrada']);
+  const cur = getPieceMeta(slug, path);
+  // campo vazio ("") apaga: na publicação (data/link validados) e no principal/título
+  const pub = patch.publication === undefined ? cur.publication : Object.fromEntries(Object.entries({ ...cur.publication, ...patch.publication }).filter(([, v]) => v !== ''));
+  const next = { ...cur, ...patch, notes: { ...cur.notes, ...patch.notes }, publication: pub && Object.keys(pub).length ? pub : undefined, updatedAt: nowIso() };
+  for (const k of ['title', 'principal'] as const) if (next[k] === '') delete next[k];
+  const f = join(dir, 'peca.json');
+  const v = check(PieceMeta, JSON.parse(JSON.stringify(next)), f); // JSON: tira os undefined
+  writeJson(f, v);
+  return v;
+}
+function pieceSummary(slug: string, rel: string): Piece | null {
+  const dir = join(contentsDir(slug), rel);
+  const videos = videosOf(dir), images = imagesOf(dir), hasTimeline = exists(join(dir, 'timeline.json'));
+  const path = rel.replace(/\\/g, '/'); // no Windows o join usa "\": o caminho da peça é sempre com "/"
+  let meta: PieceMeta = PieceMeta.parse({});
+  try { meta = getPieceMeta(slug, path); } catch { /* ficha inválida: aparece no npm run validate */ }
+  const kind = meta.kind ?? pieceKind(dir, videos, hasTimeline, images);
+  if (!kind) return null;
+  let r: Review = { comments: [] };
+  try { r = getReview(slug, path); } catch { /* arquivo inválido: aparece no npm run validate */ }
+  const mtime = Math.max(statSync(abs(dir)).mtimeMs, ...['exports', 'png', 'peca.json', 'revisao.json'].filter((f) => exists(join(dir, f))).map((f) => statSync(abs(join(dir, f))).mtimeMs));
+  return {
+    path, kind, title: meta.title ?? defaultTitle(path), date: path.match(/^(\d{4}-\d{2}-\d{2})/)?.[1], hasTimeline, videos, images, texts: textsOf(dir),
+    cover: coverOf(kind, videos, images, meta.principal), tags: meta.tags, favorite: !!meta.favorite, archived: !!meta.archived, publication: meta.publication,
+    status: r.status, approvals: r.approvals, openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length, mtime,
+  };
 }
 export function listPieces(slug: string): Piece[] {
   const out: Piece[] = [];
   const walk = (rel: string, depth: number) => {
     const dir = join(contentsDir(slug), rel);
-    const videos = videosOf(dir), hasTimeline = exists(join(dir, 'timeline.json'));
-    const kind = rel ? pieceKind(dir, videos, hasTimeline) : null;
-    if (kind) {
-      const path = rel.replace(/\\/g, '/'); // no Windows o join usa "\": o caminho da peça é sempre com "/"
-      let r: Review = { comments: [] };
-      try { r = getReview(slug, path); } catch { /* arquivo inválido: aparece no npm run validate */ }
-      out.push({ path, kind, hasTimeline, videos, texts: textsOf(dir), status: r.status, approvals: r.approvals,
-        openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length });
-    }
+    const pc = rel ? pieceSummary(slug, rel) : null;
+    if (pc) out.push(pc);
     if (depth < 3) for (const d of exists(dir) ? readdirSync(abs(dir)) : []) {
       if (SKIP_DIRS.includes(d) || d.startsWith('qc') || d.startsWith('.')) continue;
       if (statSync(abs(join(dir, d))).isDirectory()) walk(join(rel, d), depth + 1);
@@ -415,8 +457,17 @@ export function getPiece(slug: string, path: string) {
   const tl = join(dir, 'timeline.json');
   // previews = pastas render/<formato>/ com index.html (composição montada): a UI renderiza ao vivo para clicar no elemento
   const previews = exists(join(dir, 'render')) ? readdirSync(abs(join(dir, 'render'))).filter((d) => exists(join(dir, 'render', d, 'index.html'))) : [];
-  const videos = videosOf(dir), hasTimeline = exists(tl);
-  return { path, kind: pieceKind(dir, videos, hasTimeline) ?? 'roteiro', timeline: hasTimeline ? JSON.parse(read(tl)) : null, videos, texts: textsOf(dir), previews, review: getReview(slug, path) };
+  const summary = pieceSummary(slug, path) ?? emptyPiece(path);
+  return { ...summary, timeline: exists(tl) ? JSON.parse(read(tl)) : null, previews, review: getReview(slug, path), meta: getPieceMeta(slug, path) };
+}
+const emptyPiece = (path: string): Piece => ({ path, kind: 'roteiro', title: defaultTitle(path), hasTimeline: false, videos: [], images: [], texts: [], tags: [], favorite: false, archived: false, openComments: 0, totalComments: 0, mtime: 0 });
+/** caminho absoluto de um arquivo da peça (ou da própria pasta, file vazio), para abrir no Explorer/player */
+export function pieceAbsPath(slug: string, path: string, file = '') {
+  const dir = piecePath(slug, path);
+  if (file && /(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(file)) throw new ValidationError(file, ['arquivo inválido']);
+  const f = file ? join(dir, file) : dir;
+  if (!exists(f)) throw new ValidationError(f, ['arquivo não encontrado']);
+  return abs(f);
 }
 const textFile = (slug: string, path: string, file: string) => {
   if (!/^[\w.-]+\.(md|txt)$/i.test(file)) throw new ValidationError(file, ['só .md/.txt na raiz da peça']);
@@ -460,6 +511,7 @@ export async function createPiece(slug: string, input: { title: string; text?: s
   while (exists(join(contentsDir(slug), rel))) rel = `${base}-${n++}`;
   write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
   saveReview(slug, rel, { status: 'rascunho', comments: [] });
+  savePieceMeta(slug, rel, { title });
   let task: z.infer<typeof Task> | undefined;
   if (input.task) {
     const fmt = input.format?.trim();
@@ -510,7 +562,10 @@ export function validateAll():{ file: string; issues: string[] }[] {
     for (const f of list(P.notes(d), /\.md$/)) tryIt(() => readDoc(Note, join(P.notes(d), f)));
     for (const f of list(P.ideas(d), /\.md$/)) tryIt(() => readDoc(Idea, join(P.ideas(d), f)));
     for (const f of list(P.board(d), /^T-.*\.md$/)) tryIt(() => { const file = join(P.board(d), f); check(Task, parseSimple(read(file)).data, file); });
-    for (const pc of listPieces(d)) if (exists(join(contentsDir(d), pc.path, 'revisao.json'))) tryIt(() => getReview(d, pc.path));
+    for (const pc of listPieces(d)) {
+      if (exists(join(contentsDir(d), pc.path, 'revisao.json'))) tryIt(() => getReview(d, pc.path));
+      if (exists(join(contentsDir(d), pc.path, 'peca.json'))) tryIt(() => getPieceMeta(d, pc.path));
+    }
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

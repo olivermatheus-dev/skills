@@ -1,0 +1,31 @@
+import { z } from 'zod';
+import { IsoDate, IsoDateTime } from './common';
+
+/**
+ * <pasta da peça>/peca.json — ficha da peça (vídeo, carrossel, post ou roteiro): tudo o que NÃO é edição.
+ * Nome de exibição (renomear não move a pasta), versão principal, tags, favorito/arquivada, publicação
+ * e as notas de texto da peça (legenda, copy, CTA, hashtags, notas livres). Comentários de edição ficam em revisao.json.
+ * Opcional: peça sem ficha usa o nome da pasta e o último arquivo exportado.
+ */
+export const PIECE_KINDS = ['video', 'carrossel', 'post', 'roteiro'] as const;
+export const PIECE_NOTE_FIELDS = ['legenda', 'copy', 'cta', 'hashtags', 'notas'] as const;
+
+export const PieceMeta = z.object({
+  /** nome de exibição (a pasta continua a mesma: tarefas e revisão apontam para ela) */
+  title: z.string().trim().min(1).optional(),
+  /** força o tipo quando a detecção pela pasta erra */
+  kind: z.enum(PIECE_KINDS).optional(),
+  tags: z.array(z.string().trim().min(1)).default([]),
+  /** arquivo principal relativo à pasta (ex.: "exports/x-9x16-v03.mp4" ou "png/01.png"); vazio = o mais recente */
+  principal: z.string().regex(/^(exports|png)\/[^\\:]+$/, 'arquivo em exports/ ou png/').optional(),
+  favorite: z.boolean().optional(),
+  archived: z.boolean().optional(),
+  publication: z.object({
+    platform: z.string().optional(),
+    date: IsoDate.optional(),
+    url: z.string().optional(),
+  }).optional(),
+  notes: z.object(Object.fromEntries(PIECE_NOTE_FIELDS.map((k) => [k, z.string().optional()])) as Record<typeof PIECE_NOTE_FIELDS[number], z.ZodOptional<z.ZodString>>).default({}),
+  updatedAt: IsoDateTime.optional(),
+});
+export type PieceMeta = z.infer<typeof PieceMeta>;

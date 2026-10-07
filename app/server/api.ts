@@ -3,7 +3,8 @@
 import type { Plugin, Connect } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
-import { join, normalize, extname } from 'node:path';
+import { join, normalize, extname, dirname } from 'node:path';
+import { spawn } from 'node:child_process';
 import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
 import { P } from '../../schema';
@@ -106,6 +107,23 @@ on('PUT', '/api/projects/:slug/piece/review', (p, b, q) => S.saveReview(p.slug, 
 on('POST', '/api/projects/:slug/pieces', (p, b) => S.createPiece(p.slug, b));
 on('GET', '/api/projects/:slug/piece/text', (p, _, q) => S.getPieceText(p.slug, piece(q), q.get('file') ?? ''));
 on('PUT', '/api/projects/:slug/piece/text', (p, b, q) => S.savePieceText(p.slug, piece(q), q.get('file') ?? '', String(b.text ?? '')));
+// Ficha da peça (peca.json): nome, versão principal, tags, notas (legenda, copy…), favorito, arquivada
+on('PUT', '/api/projects/:slug/piece/meta', (p, b, q) => S.savePieceMeta(p.slug, piece(q), b ?? {}));
+// Abrir no computador: ?file= relativo à pasta da peça (vazio = a pasta). reveal = Explorer com o arquivo selecionado; open = app padrão
+on('POST', '/api/projects/:slug/piece/reveal', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'reveal'));
+on('POST', '/api/projects/:slug/piece/open', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'open'));
+
+function openOnDesktop(file: string, how: 'reveal' | 'open') {
+  const isDir = statSync(file).isDirectory();
+  const opts = { detached: true, stdio: 'ignore' as const };
+  if (process.platform === 'win32') {
+    // aspas por conta própria: o explorer não aceita o argumento "/select,..." inteiro entre aspas
+    const arg = how === 'reveal' && !isDir ? `/select,"${file}"` : `"${file}"`;
+    spawn('explorer.exe', [arg], { ...opts, windowsVerbatimArguments: true }).unref();
+  } else if (process.platform === 'darwin') spawn('open', how === 'reveal' && !isDir ? ['-R', file] : [file], opts).unref();
+  else spawn('xdg-open', [how === 'reveal' && !isDir ? dirname(file) : file], opts).unref();
+  return { ok: true };
+}
 
 on('GET', '/api/validate', () => S.validateAll());
 
@@ -146,8 +164,8 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return createReadStream(file).pipe(res);
   }
-  // /piece-file/<slug>/<pasta da peça>/<arquivo> → MP4 e quadros da peça, com Range (o player precisa para pular no tempo)
-  const pf = url.pathname.match(/^\/piece-file\/([^/]+)\/(.+)\/(exports|render)\/(.+)$/);
+  // /piece-file/<slug>/<pasta da peça>/<arquivo> → MP4, slides e quadros da peça, com Range (o player precisa para pular no tempo)
+  const pf = url.pathname.match(/^\/piece-file\/([^/]+)\/(.+?)\/(exports|render|png)\/(.+)$/);
   if (pf) {
     const file = /^[a-z0-9][a-z0-9-]*$/.test(pf[1]) ? S.pieceFile(pf[1], decodeURIComponent(pf[2]), `${pf[3]}/${decodeURIComponent(pf[4])}`) : null;
     if (!file) return send(res, 404, { error: 'não encontrado' });

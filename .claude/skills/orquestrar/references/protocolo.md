@@ -13,6 +13,7 @@ Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é 
 - Marcar `- [x]` a cada passo concluído.
 - Uma linha de log por marco: `- AAAA-MM-DD · agent:<nome> · o que fez → caminho/do/arquivo`.
 - Salvar entregas na pasta certa da empresa (`contents/…` ou `campaigns/…`) e listar o caminho em `links`.
+- **Peça padrão (central Conteúdos do app):** 1 pasta por peça em `contents/AAAA-MM-DD-<tema>/` (variações em subpastas). Vídeo final em `exports/*.mp4` (versões velhas em `exports/anteriores/`), imagens finais em `png/` (1 imagem = post, várias = carrossel; ou `post.html`/`carrossel.html`). Ficha `peca.json` (`schema/piece.ts`): ao criar a peça grave `title` legível; legenda, copy, CTA e hashtags vão em `notes` (não em arquivo solto). **Leia `notes` antes de escrever texto**: o Oliver pode ter escrito lá no app. Comentários de edição continuam em `revisao.json`.
 - **Só o orquestrador delega.** Se precisar de outro agente, registre no log `PRECISA: agent:<x> para <y>` e termine sua parte.
 
 ## Portão (precisa do Oliver)

@@ -20,7 +20,7 @@ companies/<slug>/
   context/          BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
   brand/            BRAND.md (regras de uso) · brand.json (tokens, editável no app) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  templates de vídeo da empresa
-  contents/         AAAA-MM-DD-<tema>/  (roteiro.md, carrossel.html, png/, plano.md, composition.html…)
+  contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
   board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
   project.yml · tags.yml · personas/ · notes/ · ideas/ · competitors/   (dados tipados: schema/, validar com npm run validate)

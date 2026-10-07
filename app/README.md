@@ -28,6 +28,7 @@ companies/<slug>/
   competitors/<id>/competitor.md · marks.json · snapshots/<plataforma>-<perfil>/<data>.json · media/ (fora do git)
                     analysis/<modulo>.json (último resultado de cada módulo) · pedido.json (fila da IA) · notas.json (anotações do Oliver)
                     site/*.md + extract.json + reclameaqui.json (texto extraído pelo script; fora do git, refazível)
+  contents/<peça>/peca.json     ficha da peça (schema/piece.ts): nome de exibição, versão principal, tags, favorito/arquivada, publicação e textos (legenda, copy, CTA, hashtags, notas). Tela Conteúdos = central em grade/lista + aba Ficha; botões abrem a pasta no Explorer e o vídeo no player do sistema
   contents/<peça>/revisao.json  status, aprovação do roteiro e anotações do Oliver no roteiro e no vídeo (schema/review.ts; tela Conteúdos; a IA lê com `node tools/review.mjs <pasta>`). "Novo conteúdo" cola/envia roteiro pronto (.md/.txt/.docx) → contents/AAAA-MM-DD-<tema>/roteiro.md + tarefa opcional para a IA
   context/*.md · brand/
   .env                     chaves de API do projeto (tela Configurações; fora do git; a tela só mostra os 4 últimos caracteres)

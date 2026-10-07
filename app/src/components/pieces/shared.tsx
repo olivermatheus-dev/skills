@@ -17,6 +17,7 @@ export const tipoOf = (id: Tipo) => TIPOS.find((t) => t.id === id)!;
 export const KIND_LABEL: Record<PieceKind, { label: string; color: string }> = {
   video: { label: 'Vídeo', color: '#7c3aed' },
   carrossel: { label: 'Carrossel', color: '#0891b2' },
+  post: { label: 'Post', color: '#db2777' },
   roteiro: { label: 'Roteiro', color: '#d97706' },
 };
 export const STATUS_LABEL: Record<NonNullable<Review['status']>, { label: string; color: string }> = {
