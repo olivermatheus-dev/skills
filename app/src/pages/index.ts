@@ -11,6 +11,7 @@ export const PAGES: PageDef[] = [
   { path: '', label: 'Visão geral', icon: '◎', ...page(() => import('./Dashboard')) },
   { path: 'quadro', label: 'Quadro', icon: '▦', ...page(() => import('./Board')) },
   { path: 'concorrentes', label: 'Concorrentes', icon: '◉', ...page(() => import('./Competitors')), children: [{ path: ':id', ...page(() => import('./CompetitorDetail')) }] },
+  { path: 'conteudos', label: 'Conteúdos', icon: '▶', ...page(() => import('./Conteudos')) },
   { path: 'ideias', label: 'Ideias', icon: '✦', ...page(() => import('./Ideas')) },
   { path: 'personas', label: 'Personas', icon: '☺', ...page(() => import('./Personas')) },
   { path: 'anotacoes', label: 'Anotações', icon: '✎', ...page(() => import('./Notes')) },

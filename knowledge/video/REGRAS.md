@@ -17,6 +17,7 @@
 - **Locução ≤ 2,7 palavras/s** (20 s ≈ 45–55 palavras). Silêncio entre falas ≤ 0,5 s; até 1 s só na virada, declarada no plano.
 - **Visual na palavra-chave** ou até 4 quadros antes, nunca depois. SFX/voz da próxima cena entra 4–12 quadros antes do visual (J-cut).
 - ⚠️ **Frase inteira de uma vez, nunca palavra a palavra presa à fala** (feedback do Oliver, 2026-10-07; erro repetido em todos os vídeos até então). O texto na tela é a ideia da fala, não legenda: entra **completo** em cascata curta (≤ 0,5 s no total) no início da fala ou da cena, mesmo que a locução ainda não tenha dito tudo. Proibido: metade da frase na tela esperando o resto, palavra solta ("tudo") e vazio enquanto a narração segue. A frase de impacto também entra inteira (pode diferir da transcrição). Sincronia com a palavra só para **gestos** (clique, pop de card, ícone), nunca para completar texto.
+- **Abertura e telas de UI** (Oliver): 1ª frase grande e animada no 1º quadro, depois encolhe e sobe; tela de cards/UI sempre com headline animada; cada ideia com ícone ou elemento gráfico de apoio; no máximo ~1,5 s sem algo novo ou vivo.
 - **Logo e elementos-chave sem atraso:** a revelação começa no 1º quadro da cena (a logo se desenha enquanto a voz diz "Essa é a…"), não espera a palavra "kz". Em geral: cena nunca começa vazia, e nada importante espera a fala para aparecer.
 - **Intensidade 0–4 por bloco**, nunca 4 contínuo. Curva típica: gancho 3 → conceito 2 → produto 1–2 → build 3 → revelação 4 → cartão 1.
 - **No máximo 2–3 s sem algo novo** (teto, não metrônomo). Novo pode ser a próxima linha de texto. Não saturar texto + visual + gráfico + som ao mesmo tempo.
@@ -40,6 +41,7 @@
 - **Entrada padrão:** fade + y 16–40 px ou escala 0,96 → 1. Secundário 2–4 quadros depois do principal. Stagger 40–80 ms (> 8 itens: total ≤ 0,6 s). Ordem container → título → dado. **1 protagonista por vez.**
 - `transform-origin` com causa (menu nasce do botão, barra cresce da base). Passagem A → B → C não para em B (`keyframes` + `easeEach` ou `motionPath`).
 - **Cursor conduz:** nada muda na UI sem clique, toque ou digitação antes. Anda em curva, pausa ~0,2 s antes do clique; botão afunda a 0,96; eco do clique ~0,4 s. Zoom 1,3–2×, **antes** do gesto, máx. 2 níveis.
+- **Camadas:** card com linha/conector atrás é sempre opaco; apagar/acender = animar o conteúdo, nunca a opacidade do card. z-order explícito.
 - **Nada parado:** drift de escala 1,00 → 1,03 ou 10–30 px/s; paralaxe com frente 1,5–2× o fundo, ≤ 3 camadas. Texto em leitura sem blur.
 - Animar só `transform`/`opacity` (e filtros); detalhes de código em `tecnico.md`.
 
@@ -64,6 +66,7 @@
 - **Nunca fundo mudo.** Trilha da biblioteca, com licença; médio: 2–3 candidatas trocadas com `timeline.mjs music`.
 - **Todo SFX tem função; a maioria dos eventos não tem som.** 1–2 sons por animação, nos eventos percebidos (início, encaixe, revelação). Hard cut não leva som.
 - SFX com `align: "peak"` (o pico cai no quadro do evento); `start` só para clique e pop. O som nunca chega antes da imagem.
+- **Cards e chips** (Oliver): SFX discreto em toda entrada e saída de card, chip e troca de cena (pop, whoosh fino, click), em variantes; continua valendo "nada de pop em toda legenda".
 - **1 família de SFX por vídeo** (`BRAND.md` > Som; vazio = premium minimal). Evento repetido: 3–5 variantes. Proibido: whoosh em todo zoom, pop em toda legenda, impacto em toda palavra.
 - Todo riser resolve; 0,2–0,5 s de silêncio seco antes do impacto da revelação.
 - **Mix:** música −8 a −12 dB sob a voz (ataque ~100 ms, release 300–500 ms); UI SFX 12–20 dB abaixo da voz. Entrega **−14 LUFS ±1, true peak ≤ −1 dBTP**, medido.

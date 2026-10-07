@@ -8,6 +8,19 @@ export type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId };
 export interface AnalysisFull { results: Partial<Record<ModuleId, AnalysisResult>>; notes: AnalysisNotes; request: AnalysisRequest | null }
 export interface QueueEntry { id: string; name: string; status: string; request: AnalysisRequest }
 
+import type { Review, ReviewComment } from '../../schema/review';
+export type { Review, ReviewComment };
+export interface PieceInfo { path: string; hasTimeline: boolean; videos: string[]; openComments: number; totalComments: number }
+/** timeline.json da peça (só os campos que a tela lê) */
+export interface PieceTimeline {
+  duration: number;
+  scenes: { id: string; block?: string; start: number; end: number; on_screen?: string; vo?: string[] }[];
+  vo: { id: string; text: string; start: number; end?: number; words?: { w: string; s: number; e: number }[] }[];
+  events: { id: string; type: string; scene?: string; t?: number; at?: number; target?: string; word?: string }[];
+  music?: { file?: string; bpm?: number; gain_db?: number; license?: string } | null;
+  sfx?: { event: string; asset: string }[];
+}
+export interface PieceFull { path: string; timeline: PieceTimeline | null; videos: string[]; previews: string[]; review: Review }
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
@@ -88,6 +101,11 @@ export const api = {
   secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
   setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),
   testSecret: (slug: string, key: string) => req<{ ok: boolean; message: string }>('POST', `${pj(slug)}/secrets/${encodeURIComponent(key)}/test`),
+
+  pieces: (slug: string) => req<PieceInfo[]>('GET', `${pj(slug)}/pieces`),
+  piece: (slug: string, path: string) => req<PieceFull>('GET', `${pj(slug)}/piece?path=${encodeURIComponent(path)}`),
+  saveReview: (slug: string, path: string, review: Review) => req<Review>('PUT', `${pj(slug)}/piece/review?path=${encodeURIComponent(path)}`, review),
+  pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),
 };

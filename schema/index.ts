@@ -7,3 +7,4 @@ export * from './note';
 export * from './idea';
 export * from './task';
 export * from './paths';
+export * from './review';

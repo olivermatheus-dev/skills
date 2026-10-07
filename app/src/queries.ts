@@ -22,6 +22,8 @@ export const qk = {
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
   secrets: (slug: string) => ['secrets', slug] as const,
+  pieces: (slug: string) => ['pieces', slug] as const,
+  piece: (slug: string, path: string) => ['piece', slug, path] as const,
 };
 
 // ---------- consultas ----------
@@ -44,6 +46,8 @@ export const q = {
   context: (slug: string, name: string) => queryOptions({ queryKey: qk.context(slug, name), queryFn: () => api.context(slug, name), staleTime: Infinity, refetchOnWindowFocus: false }),
   brandCss: (slug: string) => queryOptions({ queryKey: qk.brandCss(slug), queryFn: () => api.brandCss(slug), enabled: !!slug }),
   secrets: (slug: string) => queryOptions({ queryKey: qk.secrets(slug), queryFn: () => api.secrets(slug), enabled: !!slug }),
+  pieces: (slug: string) => queryOptions({ queryKey: qk.pieces(slug), queryFn: () => api.pieces(slug), enabled: !!slug }),
+  piece: (slug: string, path: string) => queryOptions({ queryKey: qk.piece(slug, path), queryFn: () => api.piece(slug, path), enabled: !!slug && !!path }),
 };
 
 export const useProjects = () => useQuery(q.projects());
@@ -62,6 +66,8 @@ export const useContextList = (slug: string) => useQuery(q.contextList(slug));
 export const useContextDoc = (slug: string, name: string) => useQuery(q.context(slug, name));
 export const useBrandCss = (slug: string) => useQuery(q.brandCss(slug));
 export const useSecrets = (slug: string) => useQuery(q.secrets(slug));
+export const usePieces = (slug: string) => useQuery(q.pieces(slug));
+export const usePiece = (slug: string, path: string) => useQuery(q.piece(slug, path));
 
 // ---------- pré-carga ----------
 /** o que cada tela lê (para pré-carregar ao passar o mouse no menu) */
@@ -73,6 +79,7 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],
+  conteudos: (s) => [q.pieces(s)],
   configuracoes: (s) => [q.secrets(s)],
 };
 export function prefetchPage(qc: QueryClient, slug: string, path: string) {

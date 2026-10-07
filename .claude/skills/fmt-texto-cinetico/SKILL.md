@@ -1,6 +1,6 @@
 ---
 name: fmt-texto-cinetico
-description: "Receita de vídeo só de tipografia animada (10–20 s): gancho → dor → virada → solução → CTA, com tempo por palavra e 1 ideia por tela. Use quando o usuário pedir texto cinético, tipografia animada, kinetic type, vídeo só com texto, reels de frase, 'vídeo sem gravar', 'lettering animado' ou quando não houver tela do produto para mostrar. Usa a skill `video` como motor (plano, render e QA)."
+description: "Receita de vídeo só de tipografia animada (10–20 s): gancho → dor → virada → solução → CTA, frase inteira por tela e 1 ideia por tela. Use quando o usuário pedir texto cinético, tipografia animada, kinetic type, vídeo só com texto, reels de frase, 'vídeo sem gravar', 'lettering animado' ou quando não houver tela do produto para mostrar. Usa a skill `video` como motor (plano, render e QA)."
 ---
 
 # Texto cinético
@@ -15,7 +15,7 @@ Uma ideia só com palavras em movimento. Topo de funil; funciona no mudo, sem pr
 | parâmetro | default | opções |
 |---|---|---|
 | duração | 15 s | 10 · 20 s |
-| áudio | trilha + 1 batida por palavra-chave | com locução (texto = fala, palavra a palavra) |
+| áudio | trilha + 1 batida por palavra-chave | com locução (a frase da tela entra inteira no início de cada fala) |
 | layout | pilha à esquerda | centro · palavra gigante · linha que cresce |
 | BPM | o do `BRAND.md` (senão 100) | 70–128 |
 
@@ -29,7 +29,7 @@ Uma ideia só com palavras em movimento. Topo de funil; funciona no mudo, sem pr
 | CTA | 12,5–15 s | 1 CTA + marca | entra `FAST`, depois parado | cauda |
 
 ## Regras do formato
-- **Palavra entra em 0,25–0,35 s**; com locução, no tempo dela no `timeline.json`.
+- **Frase inteira em ≤ 0,5 s** (cascata de 40–60 ms por palavra), nunca palavra a palavra esperando a locução (Padrões do Oliver, skill `video`). Com locução, a frase entra completa no início da fala.
 - **Máx. 3 linhas por tela**, quebradas por sentido ("perco paciente / por esquecer").
 - **Layouts:** pilha à esquerda (default; linha nova empurra a anterior com `GENTLE`) · centro (≤ 4 palavras) · palavra gigante (~70% da largura, só na virada).
 - **Ênfase: 1 palavra por tela, 1 técnica** (`--accent` **ou** peso **ou** escala ≥ 1,3× `SOFT`), chegando por último, na batida.

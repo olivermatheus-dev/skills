@@ -1,6 +1,6 @@
 # 022 — Revisão com comentários ancorados (roteiro, vídeo, carrossel) + entrada de roteiros prontos
 
-**Status:** rascunho (desenho aprovado em conversa; implementar por fases) · **Depende de:** 018 (app) · **Liga com:** 007 (comentários tipados), 009 (MCP de edição), `tools/video/timeline.mjs`, skill `elevenlabs`
+**Status:** v1 enxuta de vídeo **feita** (2026-10-07); fases A, C e D e a v1.1 (elemento clicando no frame) pendentes · **Depende de:** 018 (app) · **Liga com:** 007 (comentários tipados), 009 (MCP de edição), `tools/video/timeline.mjs`, skill `elevenlabs`
 
 ## Pedido do Oliver (2026-10-07)
 - Quase nunca editar à mão (as animações são código). Em vez de descrever no chat de forma imprecisa, **comentar no ponto exato**: um quadro, um bloco (cena), uma fala, um efeito, a trilha, um trecho do roteiro. O Claude Code relê os comentários e ajusta certeiro.
@@ -69,5 +69,16 @@ O botão **Aprovar v1.0** grava `approvals.v1`; o `elevenlabs.mjs` passa a aceit
 - B: um comentário feito pausando o vídeo chega ao Claude com cena, fala e tempo corretos, e o ajuste sai sem pergunta de volta.
 - C: mudar o volume da trilha no app e gerar a prévia sem abrir o chat.
 
+## Versão 1 enxuta, vídeo primeiro (pedido do Oliver, 2026-10-07, após o teste A/B)
+Motivo: no vídeo da kz (B-sonnet) os bugs eram pontuais (texto que demora, linha atrás do card, botão colado, aba do navegador) e a correção em chat é imprecisa. Hoje a peça já é 1 `composition.html` com cenas em seções + `timeline.json` (cenas, 45 eventos com id/tempo/alvo, falas, música, sfx): falta só a camada de anotação.
+- [x] **Faixas somente leitura** a partir da `timeline.json` (cenas, falas, eventos, trilha) + player do MP4 mais recente + cursor sincronizado.
+- [x] **Anotar** cena, fala, evento, tempo/intervalo e **elemento** (digitando o seletor; clicar no frame = v1.1) → `revisao.json`. Novo `anchor.kind: "elemento"` com `selector` (id estável) + `t`; novo `tipo` da anotação: `corrigir | ajustar | template | ok`. `template` = "transformar em componente reutilizável" (vai para a galeria da 014).
+- [x] **Ids estáveis de elemento** como regra da skill `video` (todo elemento relevante com `id`, e `data-bloco`), senão o alvo se perde quando a cena é reescrita.
+- [x] `tools/review.mjs <pasta>`: lista só as abertas com contexto resolvido + extrai os quadros dos tempos anotados (ffmpeg) para o agente olhar; `resolve` marca resolvida. Skill `video` e agente `revisor` começam por isso.
+- [ ] Fora da v1: clicar no frame para capturar o elemento (render ao vivo da composição no app) = v1.1; volume/duração diretos = fase C.
+- Critério de pronto: Oliver anota 3 coisas num vídeo (uma cena, um elemento, um "template"), manda revisar, e o agente corrige/cria o componente lendo só as anotações, sem perguntar de volta.
+
 ## Log
 - 2026-10-07 — criada a partir do pedido do Oliver na sessão da 020 (ElevenLabs v4 + chaves por projeto).
+- 2026-10-07 — adicionada a "Versão 1 enxuta, vídeo primeiro" (anotações por cena/evento/elemento, tipo `template`, ids estáveis) a pedido do Oliver.
+- 2026-10-07 — **v1 enxuta implementada.** `schema/review.ts` (âncoras cena/fala/evento/tempo/elemento; tipo corrigir|ajustar|template|ok; `comments[]` com `status`, `reply`, `video`), validado em `npm run validate`; `core/store.ts` (`listPieces/getPiece/getReview/saveReview/pieceFile`) + rotas `/api/projects/:slug/pieces|piece|piece/review?path=` e `/piece-file/<slug>/<peça>/exports/<mp4>` (com Range); tela **Conteúdos** (`app/src/pages/Conteudos.tsx`: player do MP4 mais recente, faixas cenas/falas/eventos/trilha somente leitura, cursor sincronizado, clicar bloco/evento/fala (palavra) ou "Anotar neste tempo", campo opcional de elemento, marcadores nas faixas, resolver/reabrir/excluir); `tools/review.mjs <pasta> [--all] [--no-frames]` + `resolve <id> "…"` (quadros via ffmpeg em `render/review/`); regras na skill `video` (seção Revisão por anotações + ids estáveis `id`/`data-bloco`) e no `agent-notes/revisor.md`. Teste real: `companies/kz/contents/2026-10-07-ab-sessao/B-sonnet/revisao.json` com 3 anotações (cena s2 corrigir; elemento #tabhist ajustar; elemento #nextsess template) criadas pela UI e lidas pelo `review.mjs` com contexto + quadro. Fora da v1 (como combinado): capturar elemento clicando no frame, volume/duração diretos. Próximo: v1.1 (render ao vivo da composição para clicar no elemento) e fase A (roteiro).

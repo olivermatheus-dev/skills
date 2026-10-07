@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "id": "c1",
+      "at": "2026-10-07T21:05:56",
+      "author": "oliver",
+      "tipo": "corrigir",
+      "status": "aberto",
+      "video": "B-sonnet-9x16-v06.mp4",
+      "anchor": {
+        "kind": "cena",
+        "scene": "s2"
+      },
+      "text": "Os 4 itens da lista entram devagar demais; a cena parece parada nos primeiros segundos."
+    },
+    {
+      "id": "c2",
+      "at": "2026-10-07T21:06:10",
+      "author": "oliver",
+      "tipo": "ajustar",
+      "status": "aberto",
+      "video": "B-sonnet-9x16-v06.mp4",
+      "anchor": {
+        "kind": "elemento",
+        "selector": "#tabhist",
+        "t": 31.889,
+        "scene": "s5",
+        "event": "e17"
+      },
+      "text": "O clique na aba Histórico acontece antes de o cursor chegar nela; sincronizar o clique com o cursor."
+    },
+    {
+      "id": "c3",
+      "at": "2026-10-07T21:06:16",
+      "author": "oliver",
+      "tipo": "template",
+      "status": "aberto",
+      "video": "B-sonnet-9x16-v06.mp4",
+      "anchor": {
+        "kind": "elemento",
+        "selector": "#nextsess",
+        "t": 37.384,
+        "scene": "s5",
+        "event": "e19"
+      },
+      "text": "O card \"Próxima sessão\" ficou ótimo: transformar em componente reutilizável da galeria."
+    }
+  ]
+}

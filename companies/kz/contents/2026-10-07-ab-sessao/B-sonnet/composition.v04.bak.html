@@ -22,7 +22,6 @@
         font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
       #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
       .layer { position: absolute; inset: 0; opacity: 0; }
-      #s6 { top: 64px; } /* centra o conteúdo (y 296–1290) na área segura 270–1440 */
       .icon { width: 1em; height: 1em; display: block; }
       .abs { position: absolute; }
       .acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
@@ -38,7 +37,7 @@
       .t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
       .t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
       .btn { display: flex; align-items: center; justify-content: center; gap: 14px; background: var(--primary); color: var(--on-primary-app); border-radius: 18px; font-weight: 700; }
-      #illus { position: absolute; left: 0; right: 0; top: 1724px; text-align: center; font-size: 28px; font-weight: 500; color: var(--muted); opacity: 0; }
+      #illus { position: absolute; left: 0; right: 0; top: 1836px; text-align: center; font-size: 24px; font-weight: 500; color: var(--muted); opacity: 0; }
 
       /* ── s1 · gancho ── */
       #kick { top: 292px; left: 0; right: 0; text-align: center; font-size: 48px; font-weight: 600; opacity: 0; }
@@ -177,12 +176,6 @@
       #title9 { top: 590px; font-size: 88px; }
       #nav { position: absolute; left: 90px; top: 770px; width: 900px; height: 620px; }
 
-      /* navegador (componente da galeria) ajustado só aqui: aba encaixada na barra de abas, bolinhas à esquerda, título sem estourar */
-      #nav .nav-top { align-items: flex-end; padding: 18px 26px 0; gap: 26px; background: var(--surface-2); }
-      #nav .nav-dots { align-self: center; padding-bottom: 8px; }
-      #nav .nav-tab { min-width: 0; width: 560px; padding: 15px 24px; font-size: 25px; border-radius: 18px 18px 0 0; background: var(--surface); box-shadow: 0 -1px 0 var(--border); }
-      #nav .nav-tt { overflow: hidden; }
-      #nav .nav-bar { background: var(--surface); }
       #cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 20; }
       #ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 19; }
     </style>
@@ -374,7 +367,7 @@
       // medir antes de qualquer transform (alvos do cursor); a ponta do cursor fica a (10,5) do canto
       const stage = $('#stage').getBoundingClientRect()
       const pt = (sel, fx = 0.5, fy = 0.5) => { const r = $(sel).getBoundingClientRect(); return { x: r.left - stage.left + r.width * fx - 10, y: r.top - stage.top + r.height * fy - 5 } }
-      const P = { join: pt('#joinbtn', 0.97, 0.9), hist: pt('#tabhist', 0.55, 0.55), go: pt('#nav .nav-go', 0.5, 0.88) }
+      const P = { join: pt('#joinbtn', 0.62, 0.55), hist: pt('#tabhist', 0.55, 0.55), go: pt('#nav .nav-go', 0.5, 0.88) }
       // cursor próprio: o eco do clique só existe no clique (sem fantasma em 0,0)
       const Cur = {
         move: (to, at, d = 0.7) => tl.to('#cursor', { x: to.x, y: to.y, duration: d, ease: 'power3.inOut' }, at),
@@ -405,14 +398,14 @@
       })
       tl.to('#illus', { opacity: 1, duration: 0.4 }, T.ev('e2'))
       drift('#s1', 's1')
-      leave('#s1', S.s1.end - 0.42, 0.26)
+      leave('#s1', S.s1.end - 0.3)
 
       // ── s2 · cada coisa à frente ─────────────────────
       const [t1, t2, t3, t4] = parts('s2')
       $('#r1 h3').textContent = t1; $('#r2 h3').textContent = t2; $('#r3 h3').textContent = t3; $('#r4 h3').textContent = t4
       $('#r1sub').textContent = DEMO.hist; $('#c1').textContent = DEMO.chips[0]; $('#c2').textContent = DEMO.chips[1]; $('#r4sub').textContent = DEMO.plan
-      tl.set('#s23', { opacity: 1 }, S.s2.start - 0.15)
-      tl.fromTo('#hd2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, S.s2.start - 0.1)
+      tl.set('#s23', { opacity: 1 }, S.s2.start)
+      tl.fromTo('#hd2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, S.s2.start + 0.05)
       const rowIds = ['#r1', '#r2', '#r3', '#r4']
       rowIds.forEach((r, i) => {
         const at = T.ev('e' + (4 + i))
@@ -424,10 +417,10 @@
 
       // ── s3 · tudo organizado ─────────────────────────
       const [ha, hb1, hb2] = parts('s3')
-      tl.to('#hd2', { opacity: 0, y: -30, duration: 0.2, ease: 'power2.in' }, T.ev('e8') - 0.25)
+      tl.to('#hd2', { opacity: 0, y: -30, duration: 0.2, ease: 'power2.in' }, T.ev('e8') - 0.15)
       tl.to('#rows', { y: 120, scale: 0.78, duration: 0.9, ease: M.GENTLE.ease }, T.ev('e8'))
       tl.to(rowIds.map((r) => r + ' .gl'), { opacity: 0, duration: 0.4 }, T.ev('e8'))
-      block('#h3a', [ha], T.ev('e8') + 0.0)
+      block('#h3a', [ha], T.ev('e8') + 0.12)
       $$('.rowcheck').forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e9') + i * 0.17))
       tl.to('#h3a', { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in' }, T.ev('e36') - 0.2)
       block('#h3b', [hb1, hb2], T.ev('e36') - 0.05)
@@ -453,7 +446,7 @@
       Cur.press('#joinbtn', T.ev('e13'))
       tl.to('#joinbtn', { opacity: 0, scale: 0.92, duration: 0.2, ease: 'power2.in' }, T.ev('e13') + 0.2)
       tl.to('#cursor', { opacity: 0, duration: 0.25 }, T.ev('e13') + 0.5)
-      tl.fromTo('#bigav', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 0.42)
+      tl.fromTo('#bigav', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, T.ev('e13') + 0.3)
       tl.fromTo('#tile4 .nmpill, #tile4 .live', { opacity: 0, y: -10 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.1 }, T.ev('e13') + 0.5)
       tl.fromTo('#bigav', { boxShadow: '0 0 0 0px rgba(239,121,96,0.35)' }, { boxShadow: '0 0 0 34px rgba(239,121,96,0)', duration: 1.1, ease: 'power2.out', repeat: 2 }, T.ev('e13') + 0.8)
       $$('#notes4 .ln').forEach((el, i) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power2.out' }, T.ev('e13') + 0.7 + i * 0.4))
@@ -461,17 +454,17 @@
       tl.fromTo('#ring4', { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e14'))
       tl.to('#ring4', { opacity: 0, duration: 0.5, ease: 'power2.in' }, T.ev('e14') + 1.3)
       drift('#s4', 's4')
-      tl.to('#s4', { opacity: 0, y: -26, duration: 0.26, ease: 'power2.in' }, S.s4.end - 0.42)
+      tl.to('#s4', { opacity: 0, y: -26, duration: 0.28, ease: 'power2.in' }, S.s4.end - 0.3)
 
       // ── s5 · antes · durante · depois ────────────────
       const [a1, a2, a3] = parts('s5')
       ;[['#st1', a1, '#sg1'], ['#st2', a2, '#sg2'], ['#st3', a3, '#sg3']].forEach(([st, txt, sg]) => { $(st).textContent = txt; $(sg).textContent = txt })
       $('#hi1').textContent = DEMO.dates[0]; $('#hib2').textContent = DEMO.dates[1]; $('#his2').textContent = DEMO.hiNote; $('#hi3').textContent = DEMO.dates[2]
       $('#nxt').textContent = DEMO.next
-      tl.set('#s5', { opacity: 1 }, S.s5.start - 0.2)
-      tl.fromTo('#seg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15') - 0.1)
-      tl.fromTo('#st1', { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15') - 0.1)
-      tl.fromTo('#pan1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...M.GENTLE }, T.ev('e15') - 0.05)
+      tl.set('#s5', { opacity: 1 }, S.s5.start)
+      tl.fromTo('#seg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
+      tl.fromTo('#st1', { opacity: 0, y: 36 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e15'))
+      tl.fromTo('#pan1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...M.GENTLE }, T.ev('e15') + 0.1)
       $$('#pan1 .ck').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, ...M.FAST }, T.ev('e15') + 0.45 + i * 0.12))
       ;[T.ev('e42'), T.word('f5:com').s - 0.02, T.word('f5:calma').s - 0.05].forEach((t, i) => {
         tl.fromTo($$('#pan1 .tick')[i], { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, ...M.SNAP }, t)
@@ -566,7 +559,6 @@
       tl.set('#cursor', { x: P.go.x + 240, y: P.go.y + 300 }, S.s9.start)
       tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e34') - 0.8)
       KitNavegador.play(tl, $('#nav'), { at: T.ev('e43'), typeAt: T.ev('e44'), clickAt: T.ev('e34'), cursor: Cur, go: P.go })
-      tl.to('#nav .nav-t0', { opacity: 0, duration: 0.1 }, T.ev('e34') + 0.12) // título antigo sai antes do novo entrar (sem texto sobreposto)
       tl.to('#cursor', { opacity: 0, duration: 0.3 }, T.ev('e34') + 0.9)
 
       tl.set({}, {}, T.duration)

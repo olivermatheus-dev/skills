@@ -2,7 +2,7 @@
 // Roda só na máquina do Oliver (npm run app). Não há banco: os arquivos do repo são o banco.
 import type { Plugin, Connect } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createReadStream, existsSync, readFileSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
 import { join, normalize, extname } from 'node:path';
 import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
@@ -93,6 +93,12 @@ on('GET', '/api/projects/:slug/secrets', (p) => K.listSecrets(p.slug));
 on('PUT', '/api/projects/:slug/secrets/:key', (p, b) => { const r = K.setSecret(b.scope === 'geral' ? null : p.slug, p.key, String(b.value ?? '')); resetEnvCache(); return r; });
 on('POST', '/api/projects/:slug/secrets/:key/test', (p) => K.testSecret(p.slug, p.key));
 
+// Peças (vídeos) e revisão por anotações (tarefa 022): ?path= é a pasta da peça relativa a contents/
+const piece = (q: URLSearchParams) => q.get('path') ?? '';
+on('GET', '/api/projects/:slug/pieces', (p) => S.listPieces(p.slug));
+on('GET', '/api/projects/:slug/piece', (p, _, q) => S.getPiece(p.slug, piece(q)));
+on('PUT', '/api/projects/:slug/piece/review', (p, b, q) => S.saveReview(p.slug, piece(q), b));
+
 on('GET', '/api/validate', () => S.validateAll());
 
 // ---------- infraestrutura ----------
@@ -112,7 +118,7 @@ const readBody = (req: IncomingMessage) => new Promise<any>((res, rej) => {
 const send = (res: ServerResponse, code: number, data: unknown) => {
   res.statusCode = code; res.setHeader('content-type', 'application/json; charset=utf-8'); res.end(JSON.stringify(data ?? null));
 };
-const MIME: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon' };
+const MIME: Record<string, string> = { '.mp4': 'video/mp4', '.json': 'application/json', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf', '.otf': 'font/otf', '.mp3': 'audio/mpeg', '.wav': 'audio/wav' };
 
 const handler: Connect.NextHandleFunction = async (req, res, next) => {
   const url = new URL(req.url ?? '/', 'http://x');
@@ -123,6 +129,19 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     if (!file.startsWith(join(S.ROOT, 'companies')) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return createReadStream(file).pipe(res);
+  }
+  // /piece-file/<slug>/<pasta da peça>/<arquivo> → MP4 e quadros da peça, com Range (o player precisa para pular no tempo)
+  const pf = url.pathname.match(/^\/piece-file\/([^/]+)\/(.+)\/(exports|render)\/(.+)$/);
+  if (pf) {
+    const file = /^[a-z0-9][a-z0-9-]*$/.test(pf[1]) ? S.pieceFile(pf[1], decodeURIComponent(pf[2]), `${pf[3]}/${decodeURIComponent(pf[4])}`) : null;
+    if (!file) return send(res, 404, { error: 'não encontrado' });
+    const size = statSync(file).size, range = req.headers.range?.match(/^bytes=(\d*)-(\d*)$/);
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    res.setHeader('accept-ranges', 'bytes');
+    if (!range) { res.setHeader('content-length', size); return createReadStream(file).pipe(res); }
+    const start = range[1] ? +range[1] : Math.max(0, size - +range[2]), end = range[1] && range[2] ? Math.min(+range[2], size - 1) : size - 1;
+    res.statusCode = 206; res.setHeader('content-range', `bytes ${start}-${end}/${size}`); res.setHeader('content-length', end - start + 1);
+    return createReadStream(file, { start, end }).pipe(res);
   }
   if (!url.pathname.startsWith('/api/')) return next();
   for (const [method, pattern, h] of routes) {

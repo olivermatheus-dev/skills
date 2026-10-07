@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
-  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES,
+  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review,
   COMPANIES, P, STATUS,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -317,6 +317,60 @@ export const getContext = (slug: string, name: string) => read(join(P.context(sl
 export const saveContext = (slug: string, name: string, txt: string) => write(join(P.context(slug), basename(name)), txt);
 
 // ---------- Validação geral ----------
+// ---------- Peças (vídeos) e revisão por anotações (tarefa 022) ----------
+export interface Piece { path: string; hasTimeline: boolean; videos: string[]; openComments: number; totalComments: number }
+const contentsDir = (slug: string) => join(COMPANIES, slug, 'contents');
+/** caminho da peça relativo a contents/ (ex.: "2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
+function piecePath(slug: string, path: string) {
+  if (!path || /(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(path)) throw new ValidationError(path, ['caminho da peça inválido']);
+  return join(contentsDir(slug), path);
+}
+const videosOf = (dir: string) => list(join(dir, 'exports'), /\.mp4$/i).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+export function listPieces(slug: string): Piece[] {
+  const out: Piece[] = [];
+  const walk = (rel: string, depth: number) => {
+    const dir = join(contentsDir(slug), rel);
+    const videos = videosOf(dir), hasTimeline = exists(join(dir, 'timeline.json'));
+    if (rel && (videos.length || hasTimeline || exists(join(dir, 'revisao.json')))) {
+      let cs: Review['comments'] = [];
+      try { cs = getReview(slug, rel).comments; } catch { /* arquivo inválido: aparece no npm run validate */ }
+      out.push({ path: rel.replace(/\\/g, '/'), hasTimeline, videos, openComments: cs.filter((c) => c.status === 'aberto').length, totalComments: cs.length });
+    }
+    if (depth < 3) for (const d of exists(dir) ? readdirSync(abs(dir)) : []) {
+      if (['exports', 'render', 'audio', 'png', 'input'].includes(d) || d.startsWith('qc')) continue;
+      if (statSync(abs(join(dir, d))).isDirectory()) walk(join(rel, d), depth + 1);
+    }
+  };
+  if (exists(contentsDir(slug))) walk('', 0);
+  return out.sort((a, b) => b.path.localeCompare(a.path));
+}
+export function getPiece(slug: string, path: string) {
+  const dir = piecePath(slug, path);
+  if (!exists(dir)) throw new ValidationError(dir, ['peça não encontrada']);
+  const tl = join(dir, 'timeline.json');
+  // previews = pastas render/<formato>/ com index.html (composição montada): a UI renderiza ao vivo para clicar no elemento
+  const previews = exists(join(dir, 'render')) ? readdirSync(abs(join(dir, 'render'))).filter((d) => exists(join(dir, 'render', d, 'index.html'))) : [];
+  return { path, timeline: exists(tl) ? JSON.parse(read(tl)) : null, videos: videosOf(dir), previews, review: getReview(slug, path) };
+}
+export function getReview(slug: string, path: string): Review {
+  const f = join(piecePath(slug, path), 'revisao.json');
+  if (!exists(f)) return { comments: [] };
+  return cached(f, () => check(Review, JSON.parse(read(f)), f));
+}
+export function saveReview(slug: string, path: string, data: unknown): Review {
+  const f = join(piecePath(slug, path), 'revisao.json');
+  const v = check(Review, data, f);
+  write(f, `${JSON.stringify(v, null, 2)}
+`);
+  return v;
+}
+/** arquivo servido ao player (somente dentro da peça); null se não existir */
+export const pieceFile = (slug: string, path: string, file: string) => {
+  if (/(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(file)) return null;
+  const f = join(ROOT, piecePath(slug, path), file);
+  return existsSync(f) ? f : null;
+};
+
 export function validateAll(): { file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
   const tryIt = (fn: () => unknown) => {
@@ -332,6 +386,7 @@ export function validateAll(): { file: string; issues: string[] }[] {
     for (const f of list(P.notes(d), /\.md$/)) tryIt(() => readDoc(Note, join(P.notes(d), f)));
     for (const f of list(P.ideas(d), /\.md$/)) tryIt(() => readDoc(Idea, join(P.ideas(d), f)));
     for (const f of list(P.board(d), /^T-.*\.md$/)) tryIt(() => { const file = join(P.board(d), f); check(Task, parseSimple(read(file)).data, file); });
+    for (const pc of listPieces(d)) if (exists(join(contentsDir(d), pc.path, 'revisao.json'))) tryIt(() => getReview(d, pc.path));
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

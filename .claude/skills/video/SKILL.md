@@ -18,7 +18,7 @@ Se o pedido não disser, é **médio**. "Rápido", "simples", "só um teste" →
 | conferência | `timeline.mjs check` + `qc.mjs` | + 1 rodada de folhas de contato | passadas de `qc-final.md` + agente `revisor` + **2ª iteração** de polimento |
 | entrega | 1 formato | formatos pedidos (default 4:5 + 9:16) | idem + motion blur com 4–8 amostras |
 
-**Não leia além do nível.** Dúvida pontual → abra só o arquivo do tema. Precedência: **BRAND.md > receita do fmt-* > REGRAS/knowledge (defaults)**.
+**Não leia além do nível.** Dúvida pontual → abra só o arquivo do tema. Precedência: **BRAND.md > Padrões do Oliver (abaixo) > receita do fmt-* > REGRAS/knowledge (defaults)**.
 
 ## Sempre ler
 - `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `context/BUSINESS.md` (o que é verdade). Persona e voz (`AUDIENCE.md`, `VOICE.md`) só se for escrever falas.
@@ -56,16 +56,15 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 ### 3. Cenas (`composition.html`)
 - Linkar `brand/brand.css` (o `produce.mjs` copia a marca para o render); nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`tools/video-kit/GUIA-TECNICO.md`); **todo tempo vem de `T.scene/T.ev/T.word`** ou dos marcadores `__S:<cena>__ __D:<cena>__ __E:<evento>__`, nunca número escrito à mão (é o que deixa trocar a voz sem reescrever).
 - **Cena isolada e elástica** (para virar variante sem reescrever): sem cor ou texto fixo dentro (tokens do `brand.css` + `params`/`on_screen` do `timeline.json`), animação em tempo relativo (entrada · hold · saída), sem depender da cena vizinha. Contrato completo: `roadmap/tasks/013-cenas-modulares-variantes/TASK.md`.
+- **Ids estáveis (anotações do Oliver):** todo elemento relevante com `id` único e semântico (`#card-proxima-sessao`, não `#div7`) e cada cena/bloco com `data-bloco="nome"`; mantenha o id quando reescrever a cena. É o que `revisao.json` guarda como alvo (`selector`); sem isso a anotação se perde. Os ids de cena/fala/evento vêm da `timeline.json`.
 - Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
-- **Ritmo (feedback do Oliver, 2026-10-07):** nenhuma tela vazia esperando a fala. Toda cena começa com algo entrando no 1º quadro; toda frase falada tem **headline animada** no tempo da palavra (troca a cada frase); cada ideia ganha **ícone ou elemento gráfico** de apoio (relógio que esvazia, alerta, coração, pílula com ícone); entradas e saídas de card têm **efeito sonoro discreto**. Abertura: a 1ª frase grande, entrando animada, depois encolhe e sobe para dar lugar ao resto.
+- **Siga os [Padrões do Oliver](#padrões-do-oliver-sempre-sem-ele-pedir)** em toda cena (texto inteiro, nada vazio, ícones, headline, SFX, camadas, cartão final).
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.
-- **Texto entra como frase inteira** (cascata ≤ 0,5 s) no início da fala/cena, **nunca palavra a palavra esperando a locução**; logo e elementos-chave sem atraso; cena nunca começa vazia. Palavra da fala só dispara gesto (clique, pop, ícone). Regra completa: `knowledge/video/REGRAS.md` §2.
-- Cartão final pode passar do áudio. Site/URL no CTA → `library/motion/cta/navegador/` (`lib/motion/...` no render).
 
 ### 4. Conferir
 - Simples: `node tools/video/timeline.mjs check <pasta>`.
-- Médio: + `produce --build-only` e `check.mjs` → **olhar as folhas de contato dos formatos** (texto cortado/fora da área segura, sobreposição, cursor fora do quadro, cor fora da marca, palavra fora da fala, proibições, contraste com `node tools/contrast.mjs`).
+- Médio: + `produce --build-only` e `check.mjs` → **olhar as folhas de contato dos formatos** com a lista de conferência dos Padrões do Oliver (texto cortado/fora da área segura, sobreposição, cursor fora do quadro, cor fora da marca, palavra fora da fala, proibições, contraste com `node tools/contrast.mjs`).
 - Alto: + passadas de `knowledge/video/qc-final.md` + delegar ao `revisor` → corrigir → **2ª rodada de polimento** (curvas, offsets, som).
 - Problema = corrija a causa, não o sintoma. Crítico e maior antes de exportar.
 
@@ -77,6 +76,13 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 - **Promover para a galeria:** algo reutilizável (fundo, gráfico, mapa, transição, bloco)? Extraia com parâmetros e tokens para `library/` (genérico) ou `video-templates/` (marca) e registre no catálogo.
 - Registrar no `plano.md`: entregue, em aberto, feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
 
+## Revisão por anotações (comece por aqui se houver anotações abertas)
+O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e a anotação vai para `<pasta>/revisao.json`. Quando o pedido for "revisa as anotações" ou a pasta tiver `revisao.json` com abertas:
+1. `node tools/review.mjs <pasta>` → só as abertas, com cena, fala, tempo, alvo (trecho do `composition.html`) e o **quadro** do momento em `render/review/` (abra com Read). **Não pergunte de volta**: o contexto está ali; se o seletor sumiu, ache pelo texto da cena.
+2. Aja por tipo: `corrigir` = bug, conserte a causa · `ajustar` = ajuste fino (tente `timeline.mjs` antes de reescrever HTML) · `ok` = não mexer · `template` = **promover para a galeria** (`library/motion/`, tarefa 014): extraia o elemento/cena com parâmetros e tokens, registre no catálogo e deixe a peça usando o componente.
+3. Depois de corrigir e **re-renderizar numa versão nova** (`vNN`, nunca sobrescrever): `node tools/review.mjs <pasta> resolve <id> "o que mudou"` (guarda a resposta; o Oliver vê no app e reabre se não ficou bom). Fim da rodada: `qc.mjs --sheet` como sempre.
+4. Âncoras: `cena`/`fala`/`evento` valem por id mesmo se o tempo mudar; `elemento` = `selector` + `t`; `tempo` = só o instante (use o quadro).
+
 ## Ajustes depois da entrega (quase zero token)
 `node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …` troca voz, duração, texto e trilha e reencaixa o resto. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
@@ -84,12 +90,29 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 `tools/video-kit/` (HyperFrames 0.8.94 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
 Ordem: `tts` → `music` (ou trilha do catálogo) → `sfx` → `mix` → `produce --build-only` → `check` (olhar) → `produce` → `qc.mjs --sheet` (olhar).
 
-## Regras de entrega visual (feedback do Oliver, 2026-10-07; teste A/B B-sonnet)
-- **Olhar os frames é obrigatório antes de entregar:** extrair `hyperframes snapshot` (contact sheet + quadros de início/meio/fim de cada cena e de cada entrada/saída de texto) e **inspecionar**: espaçamento, sobreposição (headline saindo por cima de card), camadas, texto cortado, vácuo > 0,5 s. Listar no relatório quais quadros foram vistos.
-- Texto na tela **não** é sincronizado palavra a palavra: frase de impacto entra completa e junta (pode diferir da fala); nunca meia frase, nunca vazio esperando a narração; logo e elementos-chave entram no início da cena.
-- O vídeo **não precisa durar o áudio**: o CTA final pode ter cauda de 2–4 s com microanimação (`library/motion/cta/navegador`: URL digitada + clique) e SFX.
-- Aviso **"dados ilustrativos" sempre no rodapé** (pequeno, embaixo), nunca no meio da tela.
-- **Cards e linhas:** não animar a opacidade de um card que tem linha/conector atrás (a linha aparece por trás ou por cima); use `transform`/`clip-path` no card, tracejado dentro do próprio card, e z-order explícito. Eco de clique e cursor: criar o eco só no instante do clique (`fromTo` com `immediateRender` deixa um fantasma em 0,0); mirar a ponta do cursor na borda do botão para não cobrir texto/ícone.
+## Padrões do Oliver (sempre, sem ele pedir)
+Correções que o Oliver fez nos vídeos de 2026-10-07 (vídeo 01, A/B A-opus e B-sonnet). Valem **acima das receitas `fmt-*`** e em todo nível. Detalhe: `knowledge/video/REGRAS.md` §2, §4 e §7. Exemplo em código: `companies/kz/contents/2026-10-07-ab-sessao/A-opus/composition.html`.
+
+**Texto e ritmo**
+- **Frase inteira de uma vez** (cascata ≤ 0,5 s) no início da fala ou da cena. Nunca palavra a palavra esperando a locução, nunca meia frase na tela, nunca vazio enquanto a narração segue. Frase de impacto entra completa (pode diferir da fala). A palavra da fala só dispara **gestos** (clique, pop de card, ícone). No código: função `phrase`, não sincronia por palavra.
+- **Nada começa vazio, nada atrasa:** toda cena tem algo entrando no 1º quadro; logo e elementos-chave sem atraso (a logo se desenha enquanto a voz diz "Essa é a…", não espera a palavra "kz").
+- **Abertura:** a 1ª frase grande e destacada, entrando animada no 1º quadro; depois encolhe e sobe para dar lugar ao resto.
+- **Tela de cards/UI sempre com headline animada** no topo, dizendo a ideia da cena.
+- **Cada ideia com ícone ou elemento gráfico** de apoio (ícone no bloco, selo ✓, chip com ícone, relógio, coração). Vídeo dinâmico: no máximo ~1,5 s sem algo novo ou vivo (o `qc.mjs` acusa tela parada).
+
+**Som**
+- **SFX discreto em toda entrada e saída de card, chip e troca de cena** (pop, whoosh fino, click; variantes da mesma família), 12–20 dB abaixo da voz.
+
+**Camadas e UI**
+- **Card com linha/conector atrás é sempre opaco:** para apagar/acender, anime o conteúdo (`card > *`), nunca a opacidade do card (senão a linha aparece por trás ou por cima). z-order explícito.
+- Eco de clique só no instante do clique (`immediateRender: false`, senão fica um fantasma em 0,0); a ponta do cursor mira a borda do botão, sem cobrir texto nem ícone.
+- "dados ilustrativos" sempre no rodapé, pequeno, nunca no meio da tela.
+
+**Final**
+- **O vídeo não precisa durar o áudio:** cartão final com cauda de 2–4 s, microanimação, SFX e trilha resolvendo. **CTA com site/URL → `library/motion/cta/navegador/`** (aba abre, URL digitada, cursor clica em Ir, página carrega), mesmo sem fala.
+
+**Conferência (antes de entregar, nas folhas do `check.mjs` e do `qc.mjs --sheet`)**
+- Procure: meia frase na tela, vácuo > 0,5 s com a voz falando, cena começando vazia, logo atrasada, linha aparecendo atrás de card, texto cortado ou saindo da área segura, headline por cima de card. Liste no relatório os quadros vistos.
 
 ## Nunca
 - Animar antes do plano aprovado (exceto nível simples com pedido claro).
