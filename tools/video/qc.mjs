@@ -62,7 +62,7 @@ for (const f of files) {
   if (v.sample_aspect_ratio && !['1:1', '0:1'].includes(v.sample_aspect_ratio)) add('crit', name, `pixel não quadrado (SAR ${v.sample_aspect_ratio})`);
   if (v.codec_name !== 'h264') add('maior', name, `codec ${v.codec_name}; entrega social = h264`);
   if (v.pix_fmt !== 'yuv420p') add('maior', name, `pix_fmt ${v.pix_fmt}; use yuv420p (compatibilidade)`);
-  if (v.color_space !== 'bt709' || v.color_primaries !== 'bt709') add('maior', name, 'cor sem BT.709 marcado: a cor da marca pode mudar (compositing.md §9)');
+  if (v.color_space !== 'bt709' || v.color_primaries !== 'bt709') add('maior', name, 'cor sem BT.709 marcado: a cor da marca pode mudar (knowledge/video/tecnico.md)');
   if (v.field_order && !['progressive', 'unknown'].includes(v.field_order)) add('crit', name, `entrelaçado (${v.field_order}); entregue progressivo`);
   if (Math.abs(fps - avg) > 0.05) add('maior', name, `fps variável (${fps.toFixed(2)} × média ${avg.toFixed(2)}); exporte CFR`);
   if (tl?.fps && Math.abs(fps - tl.fps) > 0.05) add('menor', name, `fps ${fps.toFixed(2)} ≠ timeline ${tl.fps} (ok só se for decisão)`);

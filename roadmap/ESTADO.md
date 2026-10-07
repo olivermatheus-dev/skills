@@ -8,7 +8,7 @@
   - 6 agentes;
   - Kanban em arquivos;
   - heartbeat e tarefas recorrentes.
-- **Base de vídeo verificada:** `knowledge/video/`, 24 arquivos, Etapas 1–15 (fase de material encerrada) do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
+- **Base de vídeo verificada:** `knowledge/video/`: Etapas 1–15 consolidadas na tarefa 010 em `REGRAS.md` (núcleo, ~1,4 mil palavras) + 10 temas (~12,3 mil palavras no total, era ~24,7 mil) do material do Oliver destiladas. O índice está em `knowledge/video/README.md` e o registro em `roadmap/tasks/002-conhecimento-motion/INDICE.md`.
 - **Ferramentas (`tools/`):**
   - `board.mjs` (quadro);
   - `heartbeat.mjs` (agentes sozinhos);
@@ -27,7 +27,7 @@
   2. libera a T-0012 (designer, PNG) e a T-0013 (revisor).
 
   O texto está em `companies/kz/contents/2026-10-07-origin-story/`.
-- **Próxima tarefa: 010** (enxugar a base de vídeo + níveis simples/médio/alto), aguardando o aval do Oliver na proposta do `TASK.md`. Depois, **011** (teste A/B de custo), que precisa do kit de render.
+- **Skill `video` com 3 níveis:** simples · **médio (padrão)** · alto (tarefa 010, feita). Próximo teste: **011** (A/B de custo Opus solo × Opus orquestrando Sonnet), que precisa do kit de render (003).
 - **Tarefa 002 (encerrada na Etapa 15):** o Oliver segue mandando etapas do material de edição e motion. Processo: verificar → destilar em `knowledge/video/<tema>.md` → ligar à skill `video` e aos agentes → registrar no INDICE.
 
 ## Pendências do Oliver (bloqueiam produção)

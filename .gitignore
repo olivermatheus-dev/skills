@@ -6,7 +6,7 @@ _inbox/
 **/render/
 **/renders/
 **/exports/
-**/audio/
+companies/**/audio/
 *.mp4
 *.mov
 *.webm
