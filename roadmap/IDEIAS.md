@@ -30,3 +30,7 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Integrações Higgsfield (vídeo IA), Suno (trilhas), ElevenLabs (voz) → 017
 - 2026-10-07 · Vídeos com personagens caricatos (vetores com olhos e expressões) e modelos 3D → `fmt-personagem` no catálogo da 005
 - 2026-10-07 · Kit de marca visual e fácil no app (tokens, fontes, raio, ícones, cores, presets de estilo, anotações) para padronizar carrossel/vídeo → 024
+- 2026-10-07 · Central de peças no app: ver/abrir vídeos, abrir no Explorer, renomear, legenda/copy/notas fora da edição → **implementado** (Conteúdos + peca.json)
+- 2026-10-07 · Arquivo por peça com tokens gastos, metadados, observações, status, headline, tema, objetivo → 025
+- 2026-10-07 · Abas de Skills e de Agentes no app (mini pastas, rich text, editar, estilo Notion) → 026
+- 2026-10-07 · Framework/galeria global de tipos de conteúdo e formatos; marcar "estilo X" para o Claude seguir → 027

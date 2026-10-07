@@ -40,6 +40,14 @@
 
 Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 
+## Caminho até a produção em série (combinado em 2026-10-07)
+1. **Fechar o A/B (011):** medir os tokens das sessões A e B (os MP4 estão em `contents/2026-10-07-ab-sessao/`), nota cega do Oliver → decide o modelo padrão por etapa. Ainda não feito.
+2. **025 Ficha de produção:** briefing + funil de status + custo por peça (`tools/usage.mjs` lendo os transcripts).
+3. **027 Galeria de formatos:** escolher com o Oliver os formatos dos 12 posts (pergunta em aberto da 005) e dar ficha visual + 1 exemplo a cada um.
+4. **008 Trilhas** (só há SFX; "nunca fundo mudo") e **014 Galeria de componentes** (promover o que ficou bom = qualidade constante).
+5. Pendências do Oliver acima (1–4 e 6) → então **006: os 12 posts**.
+- Em paralelo, sem bloquear: **026** (skills e agentes no app), 022 C/D, 019, 021, 013.
+
 ## Como retomar
 - **Construção do hub:** `roadmap/BACKLOG.md` → `tasks/<id>/TASK.md` da vez.
 - **Produção para a kz:** skill `orquestrar`; quadro com `node tools/board.mjs kz --me`.
