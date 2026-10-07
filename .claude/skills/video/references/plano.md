@@ -10,7 +10,7 @@ Uma frase: o que este vídeo vende e para quem.
 Escolhido: … (alternativas consideradas: … / …)
 
 ## 2b. Estilo
-Primário + secundário e os 8 controles (0–3) — `knowledge/video/estilos-editoriais.md`. Ex.: *Tech Product + Premium Minimal* · cortes 2 · b-roll 2 · motion 2 · tipo 1 · transições 1 · SFX 2 · música 2 · VFX 1.
+Primário + secundário e os 8 controles (0–3) — `knowledge/video/direcao.md` (nível alto; no médio, o default do `fmt-*`). Ex.: *Tech Product + Premium Minimal* · cortes 2 · b-roll 2 · motion 2 · tipo 1 · transições 1 · SFX 2 · música 2 · VFX 1.
 
 ## 3. O que muda em relação ao anterior
 - Pedido do usuário → como o plano atende. ("primeiro vídeo" se não houver)
@@ -27,7 +27,7 @@ Total: N palavras ≈ N/2,7 s (cabe na duração?)
 | 1 | 0,0–2,0 | gancho | 3 | | | | |
 | … | | conceito / produto / virada / revelação | | | | | |
 | n | últimos ≥ 2 s | cartão final | 1 | CTA + marca | | | impacto/cauda |
-Curva de intensidade tem subida e descida (nunca 4 contínuo) · cada cena com função nomeável (`cobertura-e-reacao.md`, `b-roll.md`).
+Curva de intensidade tem subida e descida (nunca 4 contínuo) · cada cena com função nomeável (`montagem.md`).
 BPM (se houver trilha): … · Transições escolhidas (máx. 2): …
 
 ## 6. Cor e fundo por cena
@@ -40,8 +40,8 @@ Conferido contra `brand/BRAND.md`: sim/não.
 |---|---|---|
 | `style/01.png` | gancho | |
 | `style/02.png` | quadro mais cheio | |
-Revisão do frame (`design-e-composicao.md` §7): ok / pendências.
-Personalidade de movimento (`animacao-comportamento.md` §8): premium / playful / técnico / cinematográfico.
+Revisão do frame (`frame.md`): ok / pendências.
+Personalidade de movimento (`movimento.md`): premium / playful / técnico / cinematográfico.
 
 ## 7. Afirmações sobre o produto
 | afirmação | fonte (LP, BUSINESS.md, print) | status |

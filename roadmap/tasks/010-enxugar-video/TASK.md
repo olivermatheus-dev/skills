@@ -1,6 +1,6 @@
 # 010 — Enxugar a base de vídeo e criar níveis de edição
 
-Status: pronta (aguardando aval do Oliver) · Depende de: 002 (material encerrado na Etapa 15)
+Status: fazendo · Depende de: 002 (material encerrado na Etapa 15)
 
 ## Objetivo
 Gastar o mínimo de tokens por vídeo sem perder qualidade: cada vídeo carrega **só o que o nível pede**.

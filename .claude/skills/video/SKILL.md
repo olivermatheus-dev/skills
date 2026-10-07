@@ -1,88 +1,83 @@
 ---
 name: video
-description: "Produz vídeos em motion graphics (lançamento, trailer, recorte de funcionalidade, anúncio, reels) para qualquer empresa do hub: briefing → plano aprovado → voz e tempos → cenas em HTML/CSS/GSAP → conferência por quadros → export MP4, usando a marca da empresa (brand.css + BRAND.md). Use quando o usuário pedir vídeo, reels animado, motion, trailer, teaser, vídeo de lançamento, vídeo do produto, animação, anúncio em vídeo, ou quiser refazer, polir ou revisar um vídeo. Os formatos específicos (fmt-*) usam esta skill como motor."
+description: "Produz vídeos em motion graphics (lançamento, trailer, recorte de funcionalidade, anúncio, reels) para qualquer empresa do hub: briefing → plano aprovado → voz e tempos → cenas em HTML/CSS/GSAP → conferência → export MP4, na marca da empresa (brand.css + BRAND.md), em 3 níveis de edição (simples, médio = padrão, alto). Use quando o usuário pedir vídeo, reels animado, motion, trailer, teaser, vídeo de lançamento, vídeo do produto, animação, anúncio em vídeo, ou quiser refazer, polir ou revisar um vídeo. Os formatos específicos (fmt-*) usam esta skill como motor."
 ---
 
 # Vídeo em motion graphics
 
-Você é o **diretor e o editor**. Tudo na tela é feito em código (HTML, CSS, SVG, canvas, GSAP; 3D quando o formato pedir). A régua: **parecer o lançamento de um software premium feito por estúdio**, nunca template, slides ou "PowerPoint animado".
+Você é o **diretor e o editor**. Tudo na tela é código (HTML, CSS, SVG, canvas, GSAP). Régua: **lançamento de software premium feito por estúdio**, nunca template ou slide animado.
 
-## Fontes de verdade (ler sob demanda, não tudo de uma vez)
-| quando | ler |
-|---|---|
-| sempre, antes de planejar | `knowledge/video/esteira-de-producao.md` · `briefing-e-direcao.md` · `formatos-e-areas-seguras.md` |
-| empresa | `companies/<slug>/brand/BRAND.md` (proibições = regra dura) · `context/AUDIENCE.md` · `context/BUSINESS.md` (o que é verdade) · `context/VOICE.md` |
-| formato pedido | `.claude/skills/fmt-<formato>/SKILL.md`, se existir (receita de cenas) |
-| vídeo anterior da empresa | `plano.md` dele + feedback registrado (ponto de partida, não modelo) |
-| áudio (trilha e efeitos) | skill `audio` (o agente `sound-designer` faz) · `knowledge/video/sound-design.md` |
-| montar a timeline | `knowledge/video/ritmo-e-leitura.md` · `pacing-e-atencao.md` (curva de intensidade 0–4) · `som.md` |
-| desenhar os frames-chave | `knowledge/video/design-e-composicao.md` · `visual-e-cor.md` |
-| texto animado e legendas | `knowledge/video/tipografia-animada.md` |
-| números, gráficos, diagramas, mapas | `knowledge/video/infograficos-e-dados.md` (dados em `data/*.json`; assets em `library/visual/`) |
-| animar e polir | `knowledge/video/animacao-comportamento.md` · `curvas-e-polimento.md` (⚠️ terminologia AE × GSAP) |
-| escrever as cenas | `knowledge/video/visual-e-cor.md` · `movimento.md` · `cortes-e-montagem.md` · `cobertura-e-reacao.md` · `b-roll.md` · `transicoes-e-efeitos.md` · `tecnico-hyperframes.md` |
-| mockup, UI no aparelho, partículas, glow, grão | `knowledge/video/compositing.md` · `particulas-e-atmosfera.md` (default: sem partículas; só com função) |
-| voz | skill `locucao` (v1.0 gratuita → roteiro ElevenLabs → encaixe) |
+## Nível de edição (decida primeiro)
+Se o pedido não disser, é **médio**. "Rápido", "simples", "só um teste" → simples. "Caprichado", "premium", "alto", lançamento principal → alto.
 
-Precedência: **BRAND.md > receita do fmt-* > knowledge/video (defaults)**.
+| | **simples** | **médio (padrão)** | **alto** |
+|---|---|---|---|
+| ler | `BRAND.md` + receita `fmt-*` | + `knowledge/video/REGRAS.md` | + o arquivo de `knowledge/video/` de cada tema que o vídeo usa (`README.md` diz qual) |
+| plano | falas + folha de batidas curta **no chat**; segue sem portão se o pedido já veio claro | `plano.md` enxuto + **1 style frame** → **aval** | `plano.md` completo (estilo e 8 controles) + 2–3 style frames → **aval** |
+| áudio | 1 trilha do catálogo, sem SFX extra | trilha (2–3 candidatas) + SFX nos gestos-chave | sound-designer completo (camadas, texturas, mix) |
+| conferência | `timeline.mjs check` + `qc.mjs` | + 1 rodada de folhas de contato | passadas de `qc-final.md` + agente `revisor` + **2ª iteração** de polimento |
+| entrega | 1 formato | formatos pedidos (default 4:5 + 9:16) | idem + motion blur com 4–8 amostras |
+
+**Não leia além do nível.** Dúvida pontual → abra só o arquivo do tema. Precedência: **BRAND.md > receita do fmt-* > REGRAS/knowledge (defaults)**.
+
+## Sempre ler
+- `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `context/BUSINESS.md` (o que é verdade). Persona e voz (`AUDIENCE.md`, `VOICE.md`) só se for escrever falas.
+- Receita do formato: `.claude/skills/fmt-<formato>/SKILL.md`.
+- Vídeo anterior da empresa: o `plano.md` dele e o feedback registrado (ponto de partida, não modelo).
 
 ## Briefing (4 variáveis)
-Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · formatos (default 4:5 + 9:16) · áudio (default: trilha + efeitos, sem locução). **Nunca vídeo com fundo mudo:** sempre há trilha. Pergunte só o que faltar e não tiver default.
+Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · formatos (default 4:5 + 9:16) · áudio (default: trilha + efeitos, sem locução). **Nunca fundo mudo.** Pergunte só o que faltar e não tiver default.
 
 ## Pasta do vídeo
-`companies/<slug>/contents/AAAA-MM-DD-<nome>/` (ou `campaigns/…` se for anúncio):
+`companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`):
 ```
-plano.md · locucao.json · timeline.json · composition.html
+plano.md · locucao.json · timeline.json · composition.html · data/*.json
 audio/ render/ exports/      ← gerados, fora do git
 ```
-Moldes: `references/plano.md`, `references/timeline.md`.
+Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/timeline.md`.
 
 ## Etapas
 
-### 1. Conceito e plano → PARE e peça o aval
-1. Proponha **2–3 conceitos** (1 linha cada) e recomende 1.
-2. Escreva o `plano.md` (molde em `references/plano.md`): recorte, o que muda vs anterior, falas exatas, **folha de batidas**, cor/fundo por cena, **afirmações com fonte**, perguntas.
-3. **Style frames:** renderize 2–3 frames-chave **estáticos** (o principal de cada bloco + o **quadro mais cheio**) com o `brand.css` real, e passe pela revisão do frame (`design-e-composicao.md` §7). Eles vão junto do plano: **um único aval cobre roteiro e visual.**
-4. Confira antes de mostrar: roteiro cabe na duração (≤ ~2,7 palavras/s de locução), arco completo (gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s), nada sem fonte.
-5. **Sem o "pode seguir" do usuário, não anime.** (Os style frames estáticos são a única exceção.)
+### 1. Plano → PARE e peça o aval (exceto simples)
+1. Médio/alto: 2–3 conceitos em 1 linha, recomende 1.
+2. Plano: recorte, falas exatas, **folha de batidas** (tempo · na tela · o que entender · som · intensidade 0–4), cor/fundo por cena, **afirmações com fonte** (sem fonte = não entra), perguntas com recomendação.
+3. **Style frames:** quadros-chave **estáticos** com o `brand.css` real (inclua o quadro mais cheio). Um aval cobre roteiro e visual.
+4. Confira: cabe na duração (≤ 2,7 palavras/s de locução); arco gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s.
+5. **Sem "pode seguir", não anime.**
 
-### 2. Voz e tempos
-- Com locução: **v1.0 com voz gratuita de modelo** (skill `locucao`); a voz final da ElevenLabs só entra depois do aval. Sem locução: escolher **BPM** e montar a grade de batidas.
-- **Trilha:** o sound-designer testa **2–3 candidatas gratuitas** do catálogo, trocadas com `timeline.mjs music` (sem reescrever nada); o Oliver escolhe ouvindo.
-- `timeline.json` nasce do áudio: falas ≤ 0,5 s de silêncio entre si; pausa ≤ 1 s só na virada (`"pause": true`); cena dura o que a fala dura; mudanças a cada 0,4–1,2 s de fala; cortes nos tempos fortes.
-- Gestos (clique, digitação, entrada) em `events`; cada SFX aponta para um evento e para um asset do catálogo (`library/audio/sfx.json`). Trilha e efeitos: skill `audio` (Modos A e B).
+### 2. Voz e tempos (o áudio manda no relógio)
+- Locução: **v1.0 com voz gratuita** (skill `locucao`); ElevenLabs só depois do aval. Sem locução: escolha o BPM e monte a grade.
+- `timeline.json` nasce do áudio: ≤ 0,5 s entre falas; pausa ≤ 1 s só na virada (`"pause": true`); a cena dura o que a fala dura; cortes nos tempos fortes.
+- Gestos em `events`; cada SFX aponta para um evento e um asset licenciado do catálogo. Trilha e efeitos: skill `audio` (agente `sound-designer` no médio/alto). Trilhas candidatas trocadas com `timeline.mjs music`.
 
 ### 3. Cenas (`composition.html`)
-- **Tokens:** linkar `../../brand/brand.css` (mesmo contrato do carrossel). Nunca hardcodar cor da marca.
-- **Uma timeline GSAP principal** registrada no formato exigido pelo kit (ver `tecnico-hyperframes.md`). Uma cena = um grupo com início/fim vindos do `timeline.json`.
-- **Biblioteca de movimento do kit** (molas `SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`): não reescreva easing à mão.
-- **Ordem de trabalho por cena:** blocking (estados e ordem dos eventos) → poses-chave → curvas → offsets → settle → efeitos → som. Movimento antes de efeito.
-- Regras que mais quebram: fundo liso · título nunca cinza · 1 ênfase por título · toda cor com significado · o cursor conduz (nada muda sozinho no app) · algo novo a cada 2–3 s · transição com motivo (no máximo 2 tipos) · nada some antes de ser lido · animar só transform/opacity.
+- Linkar `../../brand/brand.css`; nunca hardcodar cor da marca. Uma timeline GSAP principal no formato do kit (`knowledge/video/tecnico.md`); uma cena = um grupo com início/fim do `timeline.json`.
+- Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
+- Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.
 - Dados de demonstração: **elenco fictício** do BRAND.md, marcados como ilustrativos.
 
-### 4. Conferir (automático + olho)
-- Rodar o build e o check do kit: silêncio acima do limite, 1 quadro por gesto assentado, folhas de contato por formato.
-- **Olhar todas as folhas.** Procurar: texto cortado ou fora da área segura (`formatos-e-areas-seguras.md`), capa ilegível no recorte 3:4, sobreposição, cursor fora do quadro, cor/fundo fora do BRAND.md, palavra fora do tempo da fala, proibições, contraste (`node tools/contrast.mjs`).
-- **Revisão em passadas** (uma pergunta por vez, macro → micro): `knowledge/video/qc-final.md` §2. Classifique cada problema (crítico/maior/menor) e corrija a causa, não o sintoma (§4).
-- Consertar → conferir de novo. Só exporta com as folhas limpas.
+### 4. Conferir
+- Simples: `node tools/video/timeline.mjs check <pasta>`.
+- Médio: + build e check do kit → **olhar as folhas de contato dos formatos** (texto cortado/fora da área segura, sobreposição, cursor fora do quadro, cor fora da marca, palavra fora da fala, proibições, contraste com `node tools/contrast.mjs`).
+- Alto: + passadas de `knowledge/video/qc-final.md` + delegar ao `revisor` → corrigir → **2ª rodada de polimento** (curvas, offsets, som).
+- Problema = corrija a causa, não o sintoma. Crítico e maior antes de exportar.
 
 ### 5. Exportar e entregar
-- Render final de cada formato com motion blur (ver `esteira-de-producao.md` §5). Conferir no MP4 um quadro de movimento rápido.
+- Render de cada formato com motion blur (kit: 2 amostras; alto: 4–8 amostras se houver movimento rápido). Export com BT.709 marcado (`tecnico.md`).
 - Nome `<AAAA-MM-DD>-<nome>-<formato>-vNN.mp4` em `exports/`; nunca sobrescrever versão aprovada.
-- **QC do arquivo final:** `node tools/video/qc.mjs <pasta> --sheet` (formato, BT.709, fps, loudness −14 LUFS ±1 e true peak ≤ −1, quadro preto/flash/congelado, placeholders) e **olhar a folha de contato do MP4**. Crítico = não entrega.
-- Entregar: caminhos dos MP4 + 1 linha por cena + saída do `qc.mjs` + **checklist do Oliver** (`qc-final.md` §6: ouvir com fone e no celular, ver pequeno e sem som, preview na plataforma).
-- Registrar no `plano.md`: entregue, em aberto e feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
+- **Sempre:** `node tools/video/qc.mjs <pasta> --sheet` (sem crítico) e **olhar a folha de contato do MP4 final**.
+- Entregar: caminhos dos MP4 + saída do `qc.mjs` + **o que o Oliver precisa conferir** (o Claude não escuta: ouvir com fone e no celular; ver pequeno e sem som; prévia na plataforma).
+- Registrar no `plano.md`: entregue, em aberto, feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
 
-## Edição rápida (quase zero token)
-`node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …`: troca voz, duração de cena, texto na tela e trilha, e reencaixa tudo o que vem depois. **Ajuste pedido pelo Oliver → primeiro tente resolver com esta ferramenta**, sem reescrever `composition.html` (que lê os tempos e textos da timeline). É a base do futuro MCP de edição (tarefa 009).
+## Ajustes depois da entrega (quase zero token)
+`node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …` troca voz, duração, texto e trilha e reencaixa o resto. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
 ## Kit (motor de render)
-Esperado em `tools/video-kit/`: HyperFrames fixado em versão local + GSAP + `motion.js` + scripts `tts`, `words`, `music`, `sfx`, `mix`, `produce` (`--build-only`), `check`.
-**Estado:** a importar do kit do Ludus, de forma genérica, quando o usuário estiver na máquina local (tarefa 003). **Sem o kit:** faça as etapas 1–3 (plano, timeline e composition.html) e avise que o render fica pendente. Não improvise um render alternativo sem combinar.
+Esperado em `tools/video-kit/`: HyperFrames em versão fixa + GSAP + `motion.js` + scripts `tts`, `words`, `music`, `sfx`, `mix`, `produce` (`--build-only`), `check`. **Estado:** a importar do kit do Ludus na máquina local (tarefa 003). **Sem o kit:** entregue as etapas 1–3 e avise que o render está pendente; não improvise outro render.
 
 ## Nunca
-- Código antes do plano aprovado.
+- Animar antes do plano aprovado (exceto nível simples com pedido claro).
 - Recurso, número, métrica, depoimento ou preço sem fonte.
-- Quebrar proibição do BRAND.md (nicho de saúde: nada de promessa de resultado terapêutico nem depoimento de paciente).
-- Áudio de terceiros sem licença.
+- Quebrar proibição do BRAND.md (saúde: nada de promessa de resultado terapêutico nem depoimento de paciente).
+- Áudio ou asset sem licença registrada.
 - Commitar `audio/`, `render/` ou `exports/`.

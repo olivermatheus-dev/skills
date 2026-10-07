@@ -18,7 +18,7 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 ## Ordem de skills por pedido
 | pedido | ordem |
 |---|---|
-| vídeo / reels em motion | 1) receita do formato em `.claude/skills/fmt-<formato>/SKILL.md` (se o pedido não disser, escolha e justifique em 1 linha) → 2) `ig-post` (hooks + estrutura) → 3) `knowledge/video/briefing-e-direcao.md` e `ritmo-e-leitura.md` (arco, limite de palavras por duração) |
+| vídeo / reels em motion | 1) receita do formato em `.claude/skills/fmt-<formato>/SKILL.md` (se o pedido não disser, escolha e justifique em 1 linha) → 2) `ig-post` (hooks + estrutura) → 3) `knowledge/video/REGRAS.md` (arco, limite de palavras por duração) |
 | carrossel / post | 1) receita `fmt-*` de imagem → 2) `ig-post` |
 | LP / carta / VSL | skill `landing-page` (+ `references/qa-copy.md`) |
 | textos de anúncio | skill `ads-meta` (modo Criar) |

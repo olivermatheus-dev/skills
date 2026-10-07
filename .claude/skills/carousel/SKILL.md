@@ -70,7 +70,7 @@ companies/<slug>/contents/AAAA-MM-DD-<tema>/
 - **Contraste**: texto sobre fundo precisa ser legível no celular. `--accent` e `--primary` são para destaque, não para parágrafo.
 - **Margem segura de 80px** em todos os lados. A grade do perfil corta a miniatura em 3:4 (~34 px de cada lado), então nada importante deve encostar nas laterais da capa. Nada importante fica no rodapé além da marca e da numeração.
 - **Rodapé** em todo slide com `@handle`/marca à esquerda e `NN/TT →` à direita. A capa leva "arraste →" e o último slide não leva seta.
-- **Estilo vem do brand.css/BRAND.md**. Defaults: fundo liso, título nunca em cinza, no máximo 1 ênfase por título, toda cor com significado, sem gradiente, glow ou mesh se a marca não pedir. Ver `knowledge/video/visual-e-cor.md`, que também vale para imagem estática.
+- **Estilo vem do brand.css/BRAND.md**. Defaults: fundo liso, título nunca em cinza, no máximo 1 ênfase por título, toda cor com significado, sem gradiente, glow ou mesh se a marca não pedir. Ver `knowledge/video/frame.md`, que também vale para imagem estática.
 - Mesma fonte, mesmos tokens e mesma posição de rodapé em todos os slides.
 - Nada de placeholder (`[TEXTO]`, `@suamarca`) no arquivo final.
 

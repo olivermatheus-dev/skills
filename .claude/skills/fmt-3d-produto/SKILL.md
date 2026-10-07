@@ -37,7 +37,7 @@ O aparelho com a tela real do produto como protagonista, em movimento de câmera
 - **Luz:** 1 direção no vídeo todo; sombra suave do `brand.css`; reflexo uma vez, branco translúcido (opacidade ≤ 0,25) só no vidro. Fundo liso da marca.
 - **CSS 3D (default, determinístico):** `perspective` 1200–2000 px no palco, `transform-style: preserve-3d` no aparelho, camadas de corpo, borda e tela; animar só `transform`. `filter`, `opacity < 1` e `overflow: hidden` no pai achatam o 3D: aplique-os em filhos.
 - **Three.js/R3F (só se precisar):** modelo glTF de aparelho com licença registrada, órbita > 35° ou reflexo físico real. Animação dirigida pelo tempo da timeline, nunca pelo relógio do navegador. A captura de WebGL **precisa ser validada no kit** (tarefa 003) antes de prometer o render.
-- **Integração** (`knowledge/video/compositing.md` §3–4): UI recortada pela tela (cantos, notch), filha do grupo 3D; pretos e brancos da UI nos tons do `brand.css`; reflexo **por cima** da UI; sombra de contato curta sob o aparelho que abre e desbota quando ele sobe; cards flutuantes com a mesma direção de luz.
+- **Integração** (`knowledge/video/efeitos.md`): UI recortada pela tela (cantos, notch), filha do grupo 3D; pretos e brancos da UI nos tons do `brand.css`; reflexo **por cima** da UI; sombra de contato curta sob o aparelho que abre e desbota quando ele sobe; cards flutuantes com a mesma direção de luz.
 - Movimento e cores pela marca (`BRAND.md` pode pedir `GENTLE` em tudo).
 
 ## Erros comuns

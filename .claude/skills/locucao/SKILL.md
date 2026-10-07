@@ -56,4 +56,4 @@ A ferramenta mede a duração nova, reencaixa tudo o que vem depois e acusa sil�
 ## Nunca
 - Gastar crédito de voz final antes do aval da v1.0.
 - Número ou sigla sem estar por extenso no texto da voz.
-- Locução que não cabe na duração (≤ ~2,7 palavras/s; ver `knowledge/video/ritmo-e-leitura.md`).
+- Locução que não cabe na duração (≤ ~2,7 palavras/s; ver `knowledge/video/ritmo.md`).

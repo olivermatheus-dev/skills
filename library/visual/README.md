@@ -1,7 +1,7 @@
 # Biblioteca visual (global)
 
 Recursos visuais **compartilhados entre as empresas**: ícones, mapas, bandeiras, logos de terceiros e ilustrações. O que é **da marca** fica em `companies/<slug>/brand/`.
-**Ordem de busca:** asset oficial → marca → esta biblioteca → pack compatível → criar. Ver `knowledge/video/infograficos-e-dados.md` §6.
+**Ordem de busca:** asset oficial → marca → esta biblioteca → pack compatível → criar. Ver `knowledge/video/texto-e-dados.md`.
 
 ```
 library/visual/

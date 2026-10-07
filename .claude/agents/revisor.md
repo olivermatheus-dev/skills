@@ -16,12 +16,11 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 | entrega | checklists |
 |---|---|
 | todo texto | `.claude/skills/landing-page/references/qa-copy.md` · `context/BUSINESS.md` (verdade + regras do nicho) · `context/VOICE.md` |
-| visual (PNG, cenas) | `brand/BRAND.md` (proibições = bloqueante) · `knowledge/video/visual-e-cor.md` · `formatos-e-areas-seguras.md` · `node tools/contrast.mjs` |
-| plano de vídeo | style frames contra `knowledge/video/design-e-composicao.md` §7 · `esteira-de-producao.md` §3 (plano) · `briefing-e-direcao.md` (arco) · `ritmo-e-leitura.md` (palavras por duração) · `pacing-e-atencao.md` (curva de intensidade) · `b-roll.md` (função de cada cena) |
-| vídeo com texto/legenda | `knowledge/video/tipografia-animada.md` §10 |
-| vídeo com número/gráfico/mapa | `knowledge/video/infograficos-e-dados.md` §3 (integridade = bloqueante) e §8 |
-| vídeo com mockup, partículas, glow ou grão | `knowledge/video/compositing.md` §10 · `particulas-e-atmosfera.md` §9 (teste de remoção; partícula sobre texto = bloqueante) |
-| vídeo renderizado | **`knowledge/video/qc-final.md`** (passadas + triagem: crítico = bloqueante) · `node tools/video/qc.mjs <pasta> --sheet` · folhas de contato + checklist final de `curvas-e-polimento.md` §9 + `animacao-comportamento.md` §9 (diagnósticos) + `movimento.md`, `ritmo-e-leitura.md`, `pacing-e-atencao.md`, `cobertura-e-reacao.md`, `som.md` (medições de áudio) |
+| visual (PNG, cenas) | `brand/BRAND.md` (proibições = bloqueante) · `knowledge/video/frame.md` · `node tools/contrast.mjs` |
+| plano de vídeo | `knowledge/video/REGRAS.md` (arco, palavras por duração, curva de intensidade) · style frames contra `frame.md` · afirmações com fonte |
+| vídeo com texto, legenda, número ou gráfico | `knowledge/video/texto-e-dados.md` (integridade do dado = bloqueante) |
+| vídeo com mockup, transição marcada, partículas, glow | `knowledge/video/efeitos.md` (teste de remoção; partícula sobre texto = bloqueante) |
+| vídeo renderizado | `knowledge/video/qc-final.md` (passadas + triagem: crítico = bloqueante) · `node tools/video/qc.mjs <pasta> --sheet` · folhas de contato · `movimento.md` e `som.md` só se houver problema no tema |
 
 ## Bloqueante (volta ao autor)
 - Afirmação sem fonte, número inventado.

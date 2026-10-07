@@ -16,7 +16,7 @@ Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 - `roteiro.md` da peça;
 - `companies/<slug>/brand/BRAND.md` (proibições) + `brand.css`;
 - a receita `.claude/skills/fmt-<formato>/SKILL.md` e o `references/layout.html` dela, se houver;
-- `knowledge/video/visual-e-cor.md`, `formatos-e-areas-seguras.md` e `design-e-composicao.md` (valem para imagem); `infograficos-e-dados.md` quando a peça tiver número, gráfico ou mapa (dado sem fonte = não entra).
+- `knowledge/video/frame.md` (vale para imagem); `texto-e-dados.md` quando a peça tiver número, gráfico ou mapa (dado sem fonte = não entra).
 
 ## Ordem de trabalho
 1. Outline (slide | tipo | texto) no checklist da tarefa.

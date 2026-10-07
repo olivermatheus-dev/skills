@@ -1,7 +1,7 @@
 # Marca — <empresa>
 
 > Regras de uso da identidade. Os **tokens** (valores) ficam em `brand.css`; aqui fica **como usar**.
-> Precedência: o que está aqui vence o default das skills. Seção vazia = vale o default (`knowledge/video/visual-e-cor.md`).
+> Precedência: o que está aqui vence o default das skills. Seção vazia = vale o default (`knowledge/video/frame.md`).
 > Seção **Proibições** = regra dura (entra no QA de toda peça).
 
 ## Essência visual
