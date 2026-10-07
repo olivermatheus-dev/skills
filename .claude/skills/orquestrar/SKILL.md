@@ -1,6 +1,6 @@
 ---
 name: orquestrar
-description: "Orquestrador geral: recebe um pedido ou tarefa para a IA, cria a tarefa no Kanban da empresa, divide em subtarefas, delega cada uma ao agente especialista certo (estrategista, roteirista, designer, editor-de-video, revisor), acompanha, passa pela revisão e devolve ao Oliver o que precisa de aval. Use quando o usuário disser 'delega', 'coloca no quadro', 'rode as tarefas', 'roda o quadro', 'tarefas da IA', 'continua as tarefas', 'aprovado' (para retomar uma tarefa em revisão), ou pedir uma entrega que envolva mais de um especialista (ex.: 'faz um vídeo sobre X', 'cria a campanha de lançamento')."
+description: "Orquestrador geral: recebe um pedido ou tarefa para a IA, cria a tarefa no Kanban da empresa, divide em subtarefas, delega cada uma ao agente especialista certo (estrategista, roteirista, designer, editor-de-video, sound-designer, pesquisador, revisor), acompanha, passa pela revisão e devolve ao Oliver o que precisa de aval. Use quando o usuário disser 'delega', 'coloca no quadro', 'rode as tarefas', 'roda o quadro', 'tarefas da IA', 'continua as tarefas', 'aprovado' (para retomar uma tarefa em revisão), ou pedir uma entrega que envolva mais de um especialista (ex.: 'faz um vídeo sobre X', 'cria a campanha de lançamento')."
 ---
 
 # Orquestrar
@@ -29,6 +29,7 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 | pedido | cadeia |
 |---|---|
 | vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (plano.md) → revisor → **aval do Oliver** → editor-de-video (voz + timeline) → **sound-designer (trilha + efeitos) ∥ editor-de-video (cenas)** → editor-de-video (render) → revisor (QA) → Oliver |
+| concorrentes / referências / ideias | pesquisador (radar → **aval da lista** → coleta) → Oliver marca no painel → pesquisador (analisa só o marcado → ideias) → Oliver aprova ideia → estrategista (ficha de pauta) → roteirista → produção |
 | trilha sonora / sons | sound-designer (Modo A ou C da skill `audio`) → **Oliver ouve** |
 | carrossel / post | roteirista (roteiro + legenda) → designer (PNG) → revisor → Oliver |
 | LP / carta / VSL | roteirista (landing-page) → revisor → Oliver |
@@ -61,4 +62,4 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 - **Permissões:** o heartbeat roda com `--permission-mode acceptEdits` e uma lista de ferramentas permitidas (variáveis `HEARTBEAT_PERMISSION_MODE` e `HEARTBEAT_ALLOWED_TOOLS`). Nunca usar o modo que pula permissões.
 
 ## Agentes
-`.claude/agents/`: `estrategista`, `roteirista`, `designer`, `editor-de-video`, `sound-designer`, `revisor`. Cada um sabe suas skills e a ordem delas.
+`.claude/agents/`: `estrategista`, `roteirista`, `designer`, `editor-de-video`, `sound-designer`, `pesquisador`, `revisor`. Cada um sabe suas skills e a ordem delas.

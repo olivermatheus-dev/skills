@@ -37,6 +37,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 015 | [Cortes e edits em escala (vídeos reais: Whisper + modelo barato + presets de edit)](tasks/015-cortes-e-edits/TASK.md) | 014, 003 | rascunho |
 | 016 | [Publicidade criativa com IA (método de ideias de campanha)](tasks/016-publicidade-criativa/TASK.md) | 012, 013 | rascunho (em discussão) |
 | 017 | [Geração com IA: Higgsfield, Suno, ElevenLabs](tasks/017-geracao-ia/TASK.md) | 016 | rascunho (futuro) |
+| 018 | [App local + banco tipado em arquivos (quadro, concorrentes, ideias, personas, anotações, contexto) + coletores](tasks/018-app-mvp/TASK.md) | 007 | fazendo |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
 Adiado (sem pasta): ver `DEPOIS.md`. Depois do MVP: app em Vite (`APP.md`: projetos, kanban, concorrentes, agentes) e `INTEL.md` (monitoramento de concorrentes e tendências). Caixa de entrada: `IDEIAS.md`.

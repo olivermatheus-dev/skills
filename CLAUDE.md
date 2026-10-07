@@ -23,7 +23,9 @@ companies/<slug>/
   contents/         AAAA-MM-DD-<tema>/  (roteiro.md, carrossel.html, png/, plano.md, composition.html…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
   board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
+  project.yml · tags.yml · personas/ · notes/ · ideas/ · competitors/   (dados tipados: schema/, validar com npm run validate)
 ```
+**Interface local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto). Ver `app/README.md`. Todo arquivo de dados segue `schema/`; depois de editar à mão, rode `npm run validate`.
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: `brand.css` é a **fonte única de tokens** (carrossel e vídeo linkam direto); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
@@ -45,6 +47,8 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
 | `locucao` | voz v1.0 gratuita → roteiro no formato ElevenLabs → encaixe do áudio final |
+| `radar` | descobrir e cadastrar concorrentes, referências e páginas (com perfis) |
+| `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
 
 **Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion).
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
@@ -71,6 +75,7 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
   | `editor-de-video` | plano, voz, cenas e MP4 em motion |
   | `sound-designer` | trilhas sonoras, efeitos e mix; cuida da biblioteca de áudio |
   | `revisor` | QA de tudo antes de ir para o Oliver |
+  | `pesquisador` | radar de concorrentes e referências, coletas, análise só do que o Oliver marcou → ideias |
 
   Todos seguem `.claude/skills/orquestrar/references/protocolo.md` e leem suas instruções permanentes em `.claude/agent-notes/<agente>.md`.
 - **Falar com um agente:**

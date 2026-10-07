@@ -33,7 +33,7 @@ Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. N
 - Depois de preencher, rode `node tools/contrast.mjs companies/<slug>/brand/brand.css`. Par reprovado → ajuste `--on-primary` ou `--accent`, ou registre em BRAND.md "não usar X como texto".
 
 ## Processo — empresa nova
-1. **Criar a pasta:** `cp -r companies/_modelo companies/<slug>` (slug curto, minúsculo, sem acento). Registrar na tabela de empresas do `CLAUDE.md`.
+1. **Criar a pasta:** `cp -r companies/_modelo companies/<slug>` (slug curto, minúsculo, sem acento) — ou "Novo projeto" no app — e preencher `project.yml` (nome, descrição, segmento, site, redes). Registrar na tabela de empresas do `CLAUDE.md`.
 2. **Receber arquivos.** Peça para o usuário soltar tudo em `_inbox/` ou arrastar os arquivos para o terminal, o que cola o caminho e permite copiar.
    - Imagem colada direto no chat só pode ser vista, não salva. Peça o arquivo.
 3. **Triagem da `_inbox/`:** para cada arquivo, classificar → renomear → mover:
@@ -56,6 +56,11 @@ Cada arquivo termina com `## A validar`, só com hipóteses e dados faltantes. N
 9. **Checklist do que falta** (logo branco, fotos, preço final…) → tarefas no quadro `board/` da empresa (formato em `.claude/skills/orquestrar/SKILL.md`; id com `node tools/board.mjs <slug> --next-id`; `assignee: oliver`).
 
 Funciona por partes: dá para fazer só a marca hoje e o contexto amanhã.
+
+## Dados tipados (o app lê estes arquivos)
+- **Personas:** além do resumo no `AUDIENCE.md`, 1 arquivo por persona em `personas/<id>.md` (schema `Persona`: dores, desejos, objeções, gatilhos, canais, frases, consciência 1–5).
+- **Concorrentes:** os de `COMPETITORS.md` também em `competitors/<id>/competitor.md` com os links (skill `radar`).
+- Ao terminar: `npm run validate` sem erro.
 
 ## Atualizar
 - Mudança pontual ("mudou o preço", "mudei as cores") → edite só o arquivo afetado. Cor mudou → rode o contraste. Oferta mudou → confira `COPY.md`.
