@@ -1,6 +1,6 @@
 # 024 — Kit de marca visual e editável no app (tokens, fontes, ícones, estilo e anotações)
 
-**Status:** rascunho · **Depende de:** 018 (app) · **Liga com:** 001 (pasta de marca), 019 (visual do app), skills `carousel`, `video` e `fmt-*`, `tools/contrast.mjs`, DEPOIS.md ("tokens.json como fonte única")
+**Status:** pronta (decisões tomadas em 2026-10-07) · **Depende de:** 018 (app) · **Liga com:** 001 (pasta de marca), 019 (visual do app), skills `carousel`, `video` e `fmt-*`, `tools/contrast.mjs`, DEPOIS.md ("tokens.json como fonte única")
 
 ## Pedido do Oliver (2026-10-07)
 - O kit de marca precisa ser **visual e fácil**: adicionar e ajustar tokens, fontes e o kit completo **pelo app**, sem editar CSS à mão.
@@ -26,15 +26,17 @@
 3. **Prévia real:** um slide de carrossel e um quadro de vídeo de amostra renderizados com os tokens enquanto se edita.
 4. Molde em `companies/_modelo/brand/` com todos os tokens, para empresa nova já nascer completa.
 
-## Perguntas em aberto
-- Fonte de verdade: continuar no `brand.css` editado pelo app, ou criar `brand.json` (tokens) que gera o `brand.css` (ver DEPOIS.md)?
-- Quais presets de estilo e o que cada um muda?
-- Biblioteca de ícones padrão (e licença)?
+## Decisões (Oliver, 2026-10-07)
+- **Fonte de verdade = `brand/brand.json`** (tokens tipados, schema em `schema/`, validado no `npm run validate`) **gera o `brand.css`**. O app edita o JSON; um gerador escreve o CSS (cabeçalho "gerado, não editar"). Carrossel e vídeo seguem linkando o `brand.css`. Migrar o `brand.css` atual da kz para o JSON sem perder nada (fontes locais, papéis, comentários de uso viram `note` no token).
+- **Estilo inicial: 1 preset, "Minimalista (estilo Apple)"**: muito respiro, fundo claro e limpo, 1 cor de destaque usada com parcimônia, tipografia grande e hierarquia por tamanho/peso (não por cor), raio médio-suave, sombras quase nulas, sem gradiente/ornamento, ícones de linha finos. Outros presets só depois.
+- **Ícones: Lucide** como biblioteca padrão (ISC, uso comercial ok; já está no projeto como `lucide-react`). Token `icons: { library: "lucide", stroke, style: "linha" }`; carrossel e vídeo usam os SVG do Lucide com esses tokens.
 
 ## Critérios de pronto
+- [ ] `brand.json` + schema + gerador do `brand.css`; kz migrada com o CSS gerado equivalente ao atual (carrossel e vídeo renderizam igual)
 - [ ] Mudar cor principal, raio e fonte no app e ver a prévia mudar na hora; arquivos gravados e válidos.
 - [ ] Um carrossel gerado depois da mudança sai com os novos tokens sem nenhum ajuste à mão.
 - [ ] Anotações de estilo feitas no app aparecem no `BRAND.md` e são seguidas pela skill `carousel`.
 
 ## Log
 - 2026-10-07 — criada a partir do pedido do Oliver (registro; não iniciada).
+- 2026-10-07 — decisões do Oliver: `brand.json` gera o `brand.css`; preset inicial Minimalista (estilo Apple); ícones Lucide. Status → pronta.

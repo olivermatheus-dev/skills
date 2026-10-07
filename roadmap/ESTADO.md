@@ -33,7 +33,7 @@
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
 | **022 v1.1** | Reaplicar "clicar no elemento" em `VideoReview.tsx` (código na sessão "022 v1") | — |
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
-| **024** | Kit de marca visual no app: tokens, fontes, ícones, raio, presets de estilo, anotações, prévia ao vivo | — (perguntas em aberto no `TASK.md`) |
+| **024** | Kit de marca visual no app: tokens, fontes, ícones, raio, presets de estilo, anotações, prévia ao vivo | — (pronta: `brand.json` → `brand.css`, preset minimalista Apple, Lucide) |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |
