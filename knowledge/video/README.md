@@ -4,6 +4,7 @@ Regras **executáveis** de edição e motion, já verificadas, para as skills de
 
 | arquivo | tema | serve para |
 |---|---|---|
+| `esteira-de-producao.md` | processo: genérico × marca, pasta do vídeo, 5 etapas com portões, QA, export, motion blur | **ler primeiro** em qualquer vídeo |
 | `cortes-e-montagem.md` | motivação do corte, hard/jump/J/L-cut, cut on action, match cut em motion | toda edição e toda troca de cena em motion |
 
 Temas previstos (criar quando chegar material): ritmo e timing · easing e física do movimento · tipografia cinética · composição e hierarquia · transições · cor · retenção e hooks · som e sincronia · formatos e áreas seguras · estrutura de vídeo persuasivo · 3D.

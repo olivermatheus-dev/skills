@@ -7,6 +7,14 @@ Skill (ou conjunto pequeno de skills) que leva um pedido de vídeo a um MP4 com 
 
 É o **motor** compartilhado: os formatos/mini skills (005) só descrevem *o que* fazer e chamam este motor para *como* animar e renderizar.
 
+## Base
+O processo está definido em `knowledge/video/esteira-de-producao.md`, generalizado da skill `ludus-video`:
+- 5 etapas com portão de aval no plano.
+- Um vídeo por pasta: `plano.md`, `locucao.json`, `timeline.json`, `composition.html`.
+- Tempos derivados da voz.
+- QA por folhas de contato.
+- Motion blur no export.
+
 ## Escopo (refinar após 002 e 003)
 - **Briefing**: objetivo, plataforma, formato, duração, template e CTA; lê o contexto da empresa.
 - **Roteiro persuasivo** e **plano de cenas** (tabela: tempo | cena | texto na tela | movimento | áudio) para o usuário aprovar antes de animar.
