@@ -1,6 +1,6 @@
 # Movimento
 
-> Base: prompts de vídeo e trailer (2026-10-07), verificados e quantificados com os 12 princípios da animação da Disney (antecipação, *follow-through*, *slow in/slow out*) e as diretrizes de movimento de interface (Material Design / Apple HIG). Números = **pontos de partida**.
+> Base: prompts de vídeo e trailer + guia de movimento do Ludus (2026-10-07), verificados e quantificados com os 12 princípios da animação da Disney (antecipação, *follow-through*, *slow in/slow out*) e as diretrizes de movimento de interface (Material Design / Apple HIG). Números = **pontos de partida**.
 
 ## 1. Princípios
 1. **Nada linear.** Todo movimento tem easing. O linear só vale em loops contínuos (rotação de fundo, *marquee*).
@@ -20,6 +20,20 @@
 | **elemento físico** (card caindo, botão) | mola amortecida | mola do kit (sem quicar mais de 1×) |
 
 Overshoot de **5–10%** (escala 1,05–1,10 antes de assentar em 1). Mais que isso parece desenho infantil, salvo pedido da marca.
+
+## 2b. Molas nomeadas (preferir a curvas genéricas)
+Uma biblioteca de movimento compartilhada expõe **4 molas** com passagem previsível (forma fechada: passam do alvo o que prometem e assentam sem quicar). Valores do kit do Ludus, validados em vídeo:
+| mola | passagem | uso |
+|---|---|---|
+| `SNAP` | 0% | encaixe seco: chip, check, corte de estado |
+| `FAST` | ~4% | entrada de elemento de UI, botão |
+| `SOFT` | ~8% | pop com vida: card, selo, número |
+| `GENTLE` | ~2% | câmera, aproximação, grandes deslocamentos |
+
+Padrões de movimento reutilizáveis:
+- **`stretchTo`:** indicador que anda (aba ativa, sublinhado, seleção) **estica** no caminho e encolhe ao chegar.
+- **`swap`:** conteúdo que troca (número, texto, status) sai com um desfoque curto e o novo entra; saída e entrada separadas, nunca sobrepostas.
+- **Câmera que aproxima** com `GENTLE` para o estado importante ocupar o quadro.
 
 ## 3. Durações (vídeo 30 fps; em quadros ≈ s × 30)
 | movimento | duração |
@@ -55,6 +69,7 @@ Overshoot de **5–10%** (escala 1,05–1,10 antes de assentar em 1). Mais que i
 Regra de continuidade em motion: no *match cut*, mantenha **direção, velocidade e região da tela** (ver `cortes-e-montagem.md` §6).
 
 ## 7. Produto em uso (UI)
+- **O cursor conduz:** toda mudança no app acontece **porque** alguém clicou, arrastou ou digitou. Nada muda sozinho na interface. Gestos: `move`, `click` (aperta, solta com mola, eco) e `press`.
 - **Cursor real:** caminho em curva (nunca reta perfeita), acelera e desacelera, pausa curta (~0,2 s) antes do clique.
 - **Micro-interações:** hover, botão que afunda (escala 0,96) e volta, eco do clique (anel que expande e some em ~0,4 s), contador que sobe, selo ou status que troca, digitação com cadência humana.
 - **Zoom no que importa:** a câmera aproxima a área da ação (1,3–2×) e volta. Não mostrar a tela inteira pequena demais para ler no celular.

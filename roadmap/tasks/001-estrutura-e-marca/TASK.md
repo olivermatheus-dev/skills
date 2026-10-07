@@ -27,6 +27,16 @@ Ter a estrutura mínima para as skills de vídeo usarem os arquivos de marca (lo
   - `brand.css` — tokens: cores, fontes, raio, borda, sombras (sm/md/lg), espaçamentos. Lido por carrossel e vídeo.
   - Precedência: marca > default da skill. Ver `knowledge/video/esteira-de-producao.md` §1.
   - Hoje `context/VISUAL.md` faz parte desse papel; migrar para `brand/` e apontar.
+  - **Exemplo real de regras de marca** (Ludus, nascidas de feedback do dono), para usar como modelo do `BRAND.md`:
+    - fundo liso `#F5F5F7` ou branco;
+    - título em tinta `#1D1D1F`;
+    - ouro `#F2A61C` só no símbolo, no botão principal e no fecho, e brilho só nele;
+    - cor de status só dentro do app;
+    - Inter, com logotipo em 700 e −0,055 em;
+    - nunca caixa alta;
+    - elenco fictício (Gaby, Mariana, Lucas, Beatriz, Pedro).
+    Ver `../002-conhecimento-motion/material/2026-10-07-guia-de-movimento-ludus.md`.
+  - O molde `_modelo/brand/BRAND.md` vem com as seções vazias + os defaults de `knowledge/video/visual-e-cor.md`.
 - **Migrar a kz:** criar `companies/kz/brand/` e receber os arquivos de marca reais do usuário.
 
 ## Perguntas em aberto

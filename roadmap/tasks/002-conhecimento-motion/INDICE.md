@@ -8,6 +8,7 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
 | 2026-10-07 | material/2026-10-07-etapa1-cortes-montagem.md | fundamentos de corte, hard/jump/J/L-cut, cut on action | knowledge/video/cortes-e-montagem.md | destilado |
 | 2026-10-07 | material/2026-10-07-skill-ludus-video.md (skill do produto Ludus) | processo de produção, arquitetura de skill, QA, export | knowledge/video/esteira-de-producao.md + tarefas 001, 003, 004 | destilado |
 | 2026-10-07 | material/2026-10-07-prompts-video-e-trailer.md (prompt do Ludus + prompt de trailer de um editor) | briefing, direção, arco, movimento, ritmo, som | knowledge/video/briefing-e-direcao.md, movimento.md, ritmo-e-leitura.md, som.md | destilado |
+| 2026-10-07 | material/2026-10-07-guia-de-movimento-ludus.md | 6 ideias, cor/texto/fundo, ritmo medido, armadilhas técnicas | visual-e-cor.md (novo), tecnico-hyperframes.md (novo), movimento.md, ritmo-e-leitura.md, tarefa 001 | destilado |
 
 ## Notas de verificação
 - **2026-10-07 · Etapa 1:** conteúdo correto e alinhado à prática profissional. Ajustes feitos:
@@ -38,3 +39,21 @@ Destino da versão destilada: `knowledge/video/<tema>.md` (ver `knowledge/video/
     - −14 LUFS ±1 com true peak ≤ −1 dBTP (faltava no original), medido com ffmpeg.
   - **Ressalva:** trilha 100% sintetizada soa menos rica. Para vídeos-chave, considerar faixa licenciada.
   - **Novos formatos para o catálogo da 005:** `fmt-trailer-lancamento` e `fmt-recorte-funcionalidade`.
+- **2026-10-07 · guia de movimento do Ludus:** é o material mais valioso até aqui, porque as regras nasceram de feedback real e de medições.
+  - **Genérico → `visual-e-cor.md`:**
+    - fundo liso por padrão;
+    - nunca título em cinza;
+    - no máximo 1 ênfase por título;
+    - cada cor com significado;
+    - partícula só como resposta a um gesto;
+    - mesmo tamanho de título em 4:5 e 9:16.
+    São exatamente os erros típicos de vídeo gerado por IA, e agora viram defaults da skill.
+  - **Molas nomeadas (SNAP 0%, FAST 4%, SOFT 8%, GENTLE 2%), `stretchTo`, `swap` e "o cursor conduz" → `movimento.md`.**
+  - **Ritmo:** de 0,4 a 1,2 s entre mudanças. A evidência é um vídeo reprovado com silêncios de 1,1 a 2,7 s.
+  - **Armadilhas técnicas → `tecnico-hyperframes.md`.** Conferidas como corretas pelo funcionamento do navegador:
+    - transform não herda `background-clip:text`;
+    - animar `left`/`top` causa saltos de pixel;
+    - `will-change` rasteriza a camada na escala atual;
+    - o overflow da máscara corta as descendentes.
+  - **Específico do Ludus** (cores `#F5F5F7`, `#1D1D1F` e `#F2A61C`, Inter com −0,055 em, proibição de caixa alta, elenco fictício) → **exemplo preenchido de `BRAND.md`** na tarefa 001.
+  - **Motion blur:** o guia confirma 2 amostras (60→30 fps) com obturador de 180°. A nota sobre o risco de "fantasma" continua válida.

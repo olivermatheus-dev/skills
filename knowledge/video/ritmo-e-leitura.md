@@ -19,8 +19,8 @@
 - Ritmo não é uniforme: **acelere no build, segure na virada e na revelação**. Contraste de ritmo é o que dá impacto.
 
 ## 4. Com locução
-- **Cada mudança visual cai numa palavra da fala** (na palavra ou até ~4 quadros antes).
-- Silêncio entre falas **≤ 0,5 s**. Pausa de **até 1 s** só na virada, de propósito.
+- **Cada mudança visual cai numa palavra da fala** (na palavra ou até ~4 quadros antes). Uma mudança por batida falada: **0,4–1,2 s entre mudanças**.
+- Silêncio entre falas **≤ 0,5 s**. Pausa de **até 1 s** só na virada, de propósito e declarada no plano. *Evidência:* um vídeo do Ludus com silêncios de 1,1–2,7 s foi reprovado pelo dono como "pouco dinâmico"; o QA deve medir e acusar isso.
 - Fala para vídeo curto: ~150–170 palavras/min. Calcule o roteiro: 20 s ≈ 45–55 palavras **no máximo**.
 
 ## 5. Primeiros 2 segundos
