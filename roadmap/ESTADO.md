@@ -35,6 +35,7 @@
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
+| **028** | Estúdio de mockups (print/link → mockups prontos, editor no app, reuso no vídeo) | 5 perguntas no `TASK.md` |
 | **019** | Visual shadcn do app (pausada em ponto seguro; passos no `TASK.md`) | — |
 | 011 · 013 · 014 · 009 · 012 | teste de custo · variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
 
