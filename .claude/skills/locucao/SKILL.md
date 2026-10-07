@@ -21,6 +21,13 @@ Política de custo:
 - `node tools/video-kit/scripts/elevenlabs.mjs <pasta> --dry` (confere texto, voz e créditos) → com o aval do Oliver, `--aprovado` (gera pela API com a chave do projeto, tempos exatos por palavra, e encaixa sozinho).
 - Sem API: entregue `<pasta>/locucao-elevenlabs.md`, um bloco por fala (`### f1 · arquivo: f1.mp3 · alvo ≈ 1,8 s`, modelo Eleven v4, stability, similarity e o texto `el`); os arquivos voltam pelo passo 3.
 
+## 2b. Locução única (o Oliver gera tudo num arquivo só no site)
+Padrão atual: o roteiro vai por aqui, o Oliver gera **um arquivo** com todas as falas e manda. Com os `vo[].text` já no `timeline.json`:
+```
+node tools/video-kit/scripts/split-vo.mjs <pasta> <arquivo.mp3> --voice el-carla
+```
+Transcreve local (faster-whisper; instalar uma vez: `python -m pip install faster-whisper`), corta no meio da pausa entre as falas, mede cada palavra (com a grafia do roteiro) e chama o `fit-vo.mjs`. As pausas longas do áudio somem: o respiro passa a ser o da timeline (`lead`/`gap`/`tail`). Confira o texto de cada fala que ele imprime; se cortou errado, `--cuts 4.8,11.4,…` (segundos).
+
 ## 3. Encaixe da voz final (quase zero token)
 Os arquivos da ElevenLabs (um por fala, nomeados pelo id: `f1.mp3`, `f2.mp3`…) chegam numa pasta qualquer (ex.: `_inbox/audio/<vídeo>/`):
 ```

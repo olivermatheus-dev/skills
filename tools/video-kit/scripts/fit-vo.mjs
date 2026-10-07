@@ -39,6 +39,7 @@ for (const { id, file, words } of jobs) {
   const keep = join(finalDir, `${id}${extname(file)}`);
   if (file !== keep) copyFileSync(file, keep);
   const before = x.length;
+  x.start ??= 0; // fala que nunca teve rascunho: layout() posiciona depois
   const out = join(v.dir, 'audio', 'vo', `${id}.wav`);
   const { offset, length } = prepVoice(keep, out);
   if (words) {

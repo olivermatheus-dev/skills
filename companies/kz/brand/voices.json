@@ -1,5 +1,5 @@
 {
   "draft": "edge-thalita",
-  "final": null,
-  "note": "Rascunho com a Thalita (neural da Microsoft, grátis, online; escolha do Oliver em 2026-10-07). Sem internet: --voice win-maria. Voz final da ElevenLabs a escolher (ver library/voices/README.md)."
+  "final": "el-carla",
+  "note": "Rascunho: Thalita. Final: Carla (ElevenLabs v4), escolhida no 1º vídeo (2026-10-07); o Oliver gera no site e manda o áudio único → split-vo.mjs."
 }

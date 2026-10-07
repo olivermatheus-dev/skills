@@ -1,0 +1,1048 @@
+{
+  "status": "v01 para revisão do Oliver",
+  "fps": 30,
+  "formats": [
+    "4x5",
+    "9x16"
+  ],
+  "voice": {
+    "final": "el-carla",
+    "stage": "final"
+  },
+  "music": {
+    "bpm": 84,
+    "gain_db": -13,
+    "duck": 0.7,
+    "synth": {
+      "beatsPerBar": 4,
+      "seed": 11,
+      "chords": [
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Bb",
+        "F"
+      ],
+      "sections": [
+        {
+          "from": 0,
+          "to": 13,
+          "style": "light"
+        },
+        {
+          "from": 13,
+          "to": 17,
+          "style": "resolve"
+        }
+      ],
+      "risers": [
+        {
+          "from": 5,
+          "to": 6
+        }
+      ],
+      "impacts": []
+    },
+    "file": "audio/music.wav",
+    "id": null,
+    "license": "própria (sintetizada no kit)"
+  },
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
+      "words": [
+        {
+          "w": "Você",
+          "s": 0.35,
+          "e": 0.756
+        },
+        {
+          "w": "é",
+          "s": 0.756,
+          "e": 0.976
+        },
+        {
+          "w": "terapeuta",
+          "s": 0.976,
+          "e": 1.636
+        },
+        {
+          "w": "e",
+          "s": 1.636,
+          "e": 1.836
+        },
+        {
+          "w": "ainda",
+          "s": 1.836,
+          "e": 2.016
+        },
+        {
+          "w": "organiza",
+          "s": 2.016,
+          "e": 2.556
+        },
+        {
+          "w": "sua",
+          "s": 2.556,
+          "e": 2.676
+        },
+        {
+          "w": "rotina",
+          "s": 2.676,
+          "e": 3.056
+        },
+        {
+          "w": "em",
+          "s": 3.056,
+          "e": 3.336
+        },
+        {
+          "w": "vários",
+          "s": 3.336,
+          "e": 3.656
+        },
+        {
+          "w": "lugares",
+          "s": 3.656,
+          "e": 4.076
+        },
+        {
+          "w": "diferentes?",
+          "s": 4.076,
+          "e": 4.892
+        }
+      ],
+      "length": 4.542,
+      "file": "audio/vo/f1.wav",
+      "voice": "el-carla",
+      "start": 0.35,
+      "end": 4.892
+    },
+    {
+      "id": "f2",
+      "text": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
+      "words": [
+        {
+          "w": "Agenda",
+          "s": 5.833,
+          "e": 6.553
+        },
+        {
+          "w": "de",
+          "s": 6.553,
+          "e": 6.713
+        },
+        {
+          "w": "um",
+          "s": 6.713,
+          "e": 6.953
+        },
+        {
+          "w": "lado,",
+          "s": 6.953,
+          "e": 7.773
+        },
+        {
+          "w": "informações",
+          "s": 7.773,
+          "e": 8.073
+        },
+        {
+          "w": "dos",
+          "s": 8.073,
+          "e": 8.333
+        },
+        {
+          "w": "pacientes",
+          "s": 8.333,
+          "e": 8.813
+        },
+        {
+          "w": "de",
+          "s": 8.813,
+          "e": 9.173
+        },
+        {
+          "w": "outro,",
+          "s": 9.173,
+          "e": 9.913
+        },
+        {
+          "w": "anotações",
+          "s": 9.913,
+          "e": 10.373
+        },
+        {
+          "w": "espalhadas...",
+          "s": 10.373,
+          "e": 11.392
+        }
+      ],
+      "length": 6.15,
+      "file": "audio/vo/f2.wav",
+      "voice": "el-carla",
+      "start": 5.242,
+      "end": 11.392
+    },
+    {
+      "id": "f3",
+      "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender.",
+      "words": [
+        {
+          "w": "E,",
+          "s": 11.792,
+          "e": 11.929
+        },
+        {
+          "w": "no",
+          "s": 11.929,
+          "e": 12.169
+        },
+        {
+          "w": "fim,",
+          "s": 12.169,
+          "e": 12.829
+        },
+        {
+          "w": "sobra",
+          "s": 12.829,
+          "e": 12.989
+        },
+        {
+          "w": "menos",
+          "s": 12.989,
+          "e": 13.369
+        },
+        {
+          "w": "tempo",
+          "s": 13.369,
+          "e": 13.669
+        },
+        {
+          "w": "para",
+          "s": 13.669,
+          "e": 13.969
+        },
+        {
+          "w": "aquilo",
+          "s": 13.969,
+          "e": 14.109
+        },
+        {
+          "w": "que",
+          "s": 14.109,
+          "e": 14.429
+        },
+        {
+          "w": "realmente",
+          "s": 14.429,
+          "e": 14.969
+        },
+        {
+          "w": "importa",
+          "s": 14.969,
+          "e": 15.529
+        },
+        {
+          "w": "–",
+          "s": 15.529,
+          "e": 16.069
+        },
+        {
+          "w": "atender.",
+          "s": 16.069,
+          "e": 16.59
+        }
+      ],
+      "length": 4.798,
+      "file": "audio/vo/f3.wav",
+      "voice": "el-carla",
+      "start": 11.792,
+      "end": 16.59
+    },
+    {
+      "id": "f4",
+      "text": "A kz é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
+      "words": [
+        {
+          "w": "A",
+          "s": 17.44,
+          "e": 17.771
+        },
+        {
+          "w": "KZ",
+          "s": 17.771,
+          "e": 18.111
+        },
+        {
+          "w": "é",
+          "s": 18.111,
+          "e": 18.271
+        },
+        {
+          "w": "uma",
+          "s": 18.271,
+          "e": 18.471
+        },
+        {
+          "w": "plataforma",
+          "s": 18.471,
+          "e": 18.951
+        },
+        {
+          "w": "feita",
+          "s": 18.951,
+          "e": 19.511
+        },
+        {
+          "w": "para",
+          "s": 19.511,
+          "e": 19.731
+        },
+        {
+          "w": "terapeutas",
+          "s": 19.731,
+          "e": 20.411
+        },
+        {
+          "w": "que",
+          "s": 20.411,
+          "e": 20.571
+        },
+        {
+          "w": "querem",
+          "s": 20.571,
+          "e": 20.811
+        },
+        {
+          "w": "deixar",
+          "s": 20.811,
+          "e": 21.151
+        },
+        {
+          "w": "a",
+          "s": 21.151,
+          "e": 21.311
+        },
+        {
+          "w": "gestão",
+          "s": 21.311,
+          "e": 21.631
+        },
+        {
+          "w": "da",
+          "s": 21.631,
+          "e": 21.771
+        },
+        {
+          "w": "rotina",
+          "s": 21.771,
+          "e": 22.211
+        },
+        {
+          "w": "mais",
+          "s": 22.211,
+          "e": 22.571
+        },
+        {
+          "w": "simples,",
+          "s": 22.571,
+          "e": 23.591
+        },
+        {
+          "w": "organizada",
+          "s": 23.591,
+          "e": 23.991
+        },
+        {
+          "w": "e",
+          "s": 23.991,
+          "e": 24.371
+        },
+        {
+          "w": "profissional.",
+          "s": 24.371,
+          "e": 24.923
+        }
+      ],
+      "length": 7.483,
+      "file": "audio/vo/f4.wav",
+      "voice": "el-carla",
+      "start": 17.44,
+      "end": 24.923
+    },
+    {
+      "id": "f5",
+      "text": "Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação.",
+      "words": [
+        {
+          "w": "Tudo",
+          "s": 25.373,
+          "e": 25.681
+        },
+        {
+          "w": "pensado",
+          "s": 25.681,
+          "e": 26.301
+        },
+        {
+          "w": "para",
+          "s": 26.301,
+          "e": 26.541
+        },
+        {
+          "w": "você",
+          "s": 26.541,
+          "e": 26.821
+        },
+        {
+          "w": "acompanhar",
+          "s": 26.821,
+          "e": 27.381
+        },
+        {
+          "w": "seus",
+          "s": 27.381,
+          "e": 27.561
+        },
+        {
+          "w": "atendimentos",
+          "s": 27.561,
+          "e": 28.261
+        },
+        {
+          "w": "e",
+          "s": 28.261,
+          "e": 28.521
+        },
+        {
+          "w": "organizar",
+          "s": 28.521,
+          "e": 29.101
+        },
+        {
+          "w": "seu",
+          "s": 29.101,
+          "e": 29.241
+        },
+        {
+          "w": "dia",
+          "s": 29.241,
+          "e": 29.561
+        },
+        {
+          "w": "-a",
+          "s": 29.561,
+          "e": 29.621
+        },
+        {
+          "w": "-dia",
+          "s": 29.621,
+          "e": 29.761
+        },
+        {
+          "w": "com",
+          "s": 29.761,
+          "e": 30.121
+        },
+        {
+          "w": "muito",
+          "s": 30.121,
+          "e": 30.581
+        },
+        {
+          "w": "menos",
+          "s": 30.581,
+          "e": 30.821
+        },
+        {
+          "w": "complicação.",
+          "s": 30.821,
+          "e": 31.587
+        }
+      ],
+      "length": 6.214,
+      "file": "audio/vo/f5.wav",
+      "voice": "el-carla",
+      "start": 25.373,
+      "end": 31.587
+    },
+    {
+      "id": "f6",
+      "text": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
+      "words": [
+        {
+          "w": "Menos",
+          "s": 32.087,
+          "e": 32.659
+        },
+        {
+          "w": "tempo",
+          "s": 32.659,
+          "e": 32.859
+        },
+        {
+          "w": "administrando,",
+          "s": 32.859,
+          "e": 34.059
+        },
+        {
+          "w": "mais",
+          "s": 34.059,
+          "e": 34.259
+        },
+        {
+          "w": "tempo",
+          "s": 34.259,
+          "e": 34.619
+        },
+        {
+          "w": "cuidando",
+          "s": 34.619,
+          "e": 35.159
+        },
+        {
+          "w": "dos",
+          "s": 35.159,
+          "e": 35.359
+        },
+        {
+          "w": "seus",
+          "s": 35.359,
+          "e": 35.539
+        },
+        {
+          "w": "pacientes.",
+          "s": 35.539,
+          "e": 36.343
+        }
+      ],
+      "length": 4.256,
+      "file": "audio/vo/f6.wav",
+      "voice": "el-carla",
+      "start": 32.087,
+      "end": 36.343
+    },
+    {
+      "id": "f7",
+      "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "words": [
+        {
+          "w": "Conheça",
+          "s": 36.793,
+          "e": 37.33
+        },
+        {
+          "w": "a",
+          "s": 37.33,
+          "e": 37.47
+        },
+        {
+          "w": "KZ",
+          "s": 37.47,
+          "e": 37.83
+        },
+        {
+          "w": "e",
+          "s": 37.83,
+          "e": 38.11
+        },
+        {
+          "w": "descubra",
+          "s": 38.11,
+          "e": 38.41
+        },
+        {
+          "w": "uma",
+          "s": 38.41,
+          "e": 38.57
+        },
+        {
+          "w": "forma",
+          "s": 38.57,
+          "e": 38.89
+        },
+        {
+          "w": "mais",
+          "s": 38.89,
+          "e": 39.21
+        },
+        {
+          "w": "simples",
+          "s": 39.21,
+          "e": 39.61
+        },
+        {
+          "w": "de",
+          "s": 39.61,
+          "e": 39.77
+        },
+        {
+          "w": "cuidar",
+          "s": 39.77,
+          "e": 40.19
+        },
+        {
+          "w": "da",
+          "s": 40.19,
+          "e": 40.27
+        },
+        {
+          "w": "sua",
+          "s": 40.27,
+          "e": 40.45
+        },
+        {
+          "w": "rotina",
+          "s": 40.45,
+          "e": 40.83
+        },
+        {
+          "w": "profissional.",
+          "s": 40.83,
+          "e": 41.444
+        }
+      ],
+      "length": 4.651,
+      "file": "audio/vo/f7.wav",
+      "voice": "el-carla",
+      "start": 36.793,
+      "end": 41.444
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "block": "gancho",
+      "vo": [
+        "f1"
+      ],
+      "lead": 0.35,
+      "tail": 0.25,
+      "on_screen": "Você é terapeuta?|Sua rotina em *vários lugares* diferentes?",
+      "note": "pergunta grande; fragmentos (agenda, ficha, nota) se espalham em 'vários lugares'",
+      "start": 0,
+      "end": 5.142
+    },
+    {
+      "id": "s2",
+      "block": "caos",
+      "vo": [
+        "f2"
+      ],
+      "lead": 0.1,
+      "tail": 0.25,
+      "on_screen": "Agenda|Pacientes|Anotações",
+      "note": "3 cards aparecem nas palavras, tortos e espalhados, com leve deriva",
+      "start": 5.142,
+      "end": 11.642
+    },
+    {
+      "id": "s3",
+      "block": "dor",
+      "vo": [
+        "f3"
+      ],
+      "lead": 0.15,
+      "tail": 0.35,
+      "on_screen": "Sobra menos tempo|para o que importa:|atender.",
+      "note": "barra de tempo encolhe em 'menos'; 'atender' em Fraunces itálico",
+      "start": 11.642,
+      "end": 16.94
+    },
+    {
+      "id": "s4",
+      "block": "revelação",
+      "vo": [
+        "f4"
+      ],
+      "pause": true,
+      "tail": 0.3,
+      "on_screen": "Feita para terapeutas|simples|organizada|profissional",
+      "note": "logo kz desenha na palavra KZ; 3 pílulas nas palavras",
+      "start": 16.94,
+      "end": 25.223
+    },
+    {
+      "id": "s5",
+      "block": "produto",
+      "vo": [
+        "f5"
+      ],
+      "lead": 0.15,
+      "tail": 0.3,
+      "on_screen": "Boa tarde,|Ana",
+      "note": "painel recriado nos tokens do app (dados ilustrativos); destaque nos atendimentos e no dia a dia",
+      "start": 25.223,
+      "end": 31.887
+    },
+    {
+      "id": "s6",
+      "block": "virada",
+      "vo": [
+        "f6"
+      ],
+      "lead": 0.2,
+      "tail": 0.3,
+      "on_screen": "Menos tempo administrando.|Mais tempo *cuidando* dos seus pacientes.",
+      "note": "a 1ª linha encolhe e apaga; a 2ª entra com 'cuidando' em Fraunces",
+      "start": 31.887,
+      "end": 36.643
+    },
+    {
+      "id": "s7",
+      "block": "cartão final",
+      "vo": [
+        "f7"
+      ],
+      "lead": 0.15,
+      "tail": 1.6,
+      "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas",
+      "note": "logo + convite + botão; cursor clica",
+      "start": 36.643,
+      "end": 43.044
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "reveal",
+      "scene": "s1",
+      "at": 0.05,
+      "target": "#q",
+      "t": 0.05
+    },
+    {
+      "id": "e2",
+      "type": "swap",
+      "word": "f1:vários",
+      "offset": -0.08,
+      "target": ".frag",
+      "t": 3.256,
+      "scene": "s1"
+    },
+    {
+      "id": "e3",
+      "type": "notify",
+      "word": "f2:Agenda",
+      "offset": -0.1,
+      "target": "#c-agenda",
+      "t": 5.733,
+      "scene": "s2"
+    },
+    {
+      "id": "e4",
+      "type": "notify",
+      "word": "f2:informações",
+      "offset": -0.1,
+      "target": "#c-ficha",
+      "t": 7.673,
+      "scene": "s2"
+    },
+    {
+      "id": "e5",
+      "type": "notify",
+      "word": "f2:anotações",
+      "offset": -0.1,
+      "target": "#c-nota",
+      "t": 9.813,
+      "scene": "s2"
+    },
+    {
+      "id": "e6",
+      "type": "cut",
+      "scene": "s3",
+      "at": 0,
+      "target": "#dor",
+      "t": 11.642
+    },
+    {
+      "id": "e7",
+      "type": "count",
+      "word": "f3:menos",
+      "offset": -0.05,
+      "target": "#bar",
+      "t": 12.939,
+      "scene": "s3"
+    },
+    {
+      "id": "e20",
+      "type": "reveal",
+      "word": "f3:importa",
+      "offset": -0.1,
+      "target": "#importa",
+      "t": 14.869,
+      "scene": "s3"
+    },
+    {
+      "id": "e8",
+      "type": "reveal",
+      "word": "f3:atender",
+      "offset": -0.1,
+      "target": "#atender",
+      "t": 15.969,
+      "scene": "s3"
+    },
+    {
+      "id": "e9",
+      "type": "reveal",
+      "word": "f4:KZ",
+      "offset": -0.15,
+      "target": "#logo",
+      "t": 17.621,
+      "scene": "s4"
+    },
+    {
+      "id": "e21",
+      "type": "reveal",
+      "word": "f4:terapeutas",
+      "offset": -0.1,
+      "target": "#tag",
+      "t": 19.631,
+      "scene": "s4"
+    },
+    {
+      "id": "e22",
+      "type": "reveal",
+      "word": "f4:gestão",
+      "offset": -0.1,
+      "target": "#pills",
+      "t": 21.211,
+      "scene": "s4"
+    },
+    {
+      "id": "e10",
+      "type": "notify",
+      "word": "f4:simples",
+      "offset": -0.1,
+      "target": "#p1",
+      "t": 22.471,
+      "scene": "s4"
+    },
+    {
+      "id": "e11",
+      "type": "notify",
+      "word": "f4:organizada",
+      "offset": -0.1,
+      "target": "#p2",
+      "t": 23.491,
+      "scene": "s4"
+    },
+    {
+      "id": "e12",
+      "type": "notify",
+      "word": "f4:profissional",
+      "offset": -0.1,
+      "target": "#p3",
+      "t": 24.271,
+      "scene": "s4"
+    },
+    {
+      "id": "e13",
+      "type": "cut",
+      "scene": "s5",
+      "at": 0,
+      "target": "#app",
+      "t": 25.223
+    },
+    {
+      "id": "e14",
+      "type": "hover",
+      "word": "f5:acompanhar",
+      "offset": -0.1,
+      "target": "#next",
+      "t": 26.721,
+      "scene": "s5"
+    },
+    {
+      "id": "e15",
+      "type": "hover",
+      "word": "f5:organizar",
+      "offset": -0.1,
+      "target": "#list",
+      "t": 28.421,
+      "scene": "s5"
+    },
+    {
+      "id": "e23",
+      "type": "reveal",
+      "word": "f5:complicação",
+      "offset": -0.15,
+      "target": "#done",
+      "t": 30.671,
+      "scene": "s5"
+    },
+    {
+      "id": "e16",
+      "type": "reveal",
+      "scene": "s6",
+      "at": 0.05,
+      "target": "#l1",
+      "t": 31.937
+    },
+    {
+      "id": "e17",
+      "type": "swap",
+      "word": "f6:mais",
+      "offset": -0.12,
+      "target": "#l2",
+      "t": 33.939,
+      "scene": "s6"
+    },
+    {
+      "id": "e18",
+      "type": "reveal",
+      "scene": "s7",
+      "at": 0.05,
+      "target": "#end",
+      "t": 36.693
+    },
+    {
+      "id": "e24",
+      "type": "reveal",
+      "word": "f7:descubra",
+      "offset": -0.1,
+      "target": "#cta",
+      "t": 38.01,
+      "scene": "s7"
+    },
+    {
+      "id": "e25",
+      "type": "reveal",
+      "word": "f7:rotina",
+      "offset": -0.1,
+      "target": "#url",
+      "t": 40.35,
+      "scene": "s7"
+    },
+    {
+      "id": "e19",
+      "type": "click",
+      "scene": "s7",
+      "before_end": 1,
+      "target": "#cta",
+      "t": 42.044
+    }
+  ],
+  "sfx": [
+    {
+      "event": "e1",
+      "asset": "whoosh-whoosh-fino-05",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e2",
+      "asset": "whoosh-whoosh-fino-02",
+      "align": "peak",
+      "gain_db": -20
+    },
+    {
+      "event": "e3",
+      "synth": "pop",
+      "gain_db": -8,
+      "pan": -0.2
+    },
+    {
+      "event": "e4",
+      "synth": "pop",
+      "gain_db": -8,
+      "pan": 0.2
+    },
+    {
+      "event": "e5",
+      "synth": "pop",
+      "gain_db": -8
+    },
+    {
+      "event": "e6",
+      "asset": "whoosh-whoosh-fino-03",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e8",
+      "synth": "chime",
+      "gain_db": -12
+    },
+    {
+      "event": "e9",
+      "asset": "tonal-piano-f-maior-expansivo-01",
+      "gain_db": -15,
+      "max": 3
+    },
+    {
+      "event": "e10",
+      "asset": "ui-hud-pop-up-02",
+      "gain_db": -20,
+      "max": 0.5
+    },
+    {
+      "event": "e11",
+      "asset": "ui-hud-pop-up-03",
+      "gain_db": -20,
+      "max": 0.5
+    },
+    {
+      "event": "e12",
+      "asset": "ui-hud-pop-up-04",
+      "gain_db": -20,
+      "max": 0.5
+    },
+    {
+      "event": "e13",
+      "asset": "whoosh-whoosh-fino-04",
+      "align": "peak",
+      "gain_db": -20
+    },
+    {
+      "event": "e14",
+      "synth": "click",
+      "gain_db": -12
+    },
+    {
+      "event": "e15",
+      "synth": "click",
+      "gain_db": -12
+    },
+    {
+      "event": "e17",
+      "synth": "chime",
+      "gain_db": -13
+    },
+    {
+      "event": "e18",
+      "asset": "whoosh-whoosh-fino-01",
+      "align": "peak",
+      "gain_db": -22
+    },
+    {
+      "event": "e19",
+      "asset": "ui-futurista-click-04",
+      "gain_db": -16,
+      "max": 0.5
+    },
+    {
+      "event": "e23",
+      "synth": "ding",
+      "gain_db": -16
+    },
+    {
+      "event": "e24",
+      "asset": "ui-hud-pop-up-05",
+      "gain_db": -21,
+      "max": 0.5
+    }
+  ],
+  "duration": 43.044
+}

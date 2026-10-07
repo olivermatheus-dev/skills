@@ -7,6 +7,7 @@
 - **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca).
 - **Vídeo (003, feita):** `tools/video-kit/` — HyperFrames 0.8.94 + GSAP (do kit do Ludus). Comandos em `tools/video-kit/README.md`, armadilhas em `GUIA-TECNICO.md`, molde em `library/templates/video/base/`, exemplo em `companies/kz/contents/2026-10-07-teste-kit/` (teste, não publicar; v02 com a Thalita).
   - **Voz:** rascunho grátis = **Thalita** (`edge-thalita`; offline: `win-maria`) → aval → **Eleven v4 pela API** (`elevenlabs.mjs`, skill `elevenlabs`: emoção por audio tags em `vo[].el`, tempos exatos, encaixe automático). Catálogo `library/voices/`, escolha por empresa em `companies/<slug>/brand/voices.json`.
+- **Locução única do site:** o Oliver gera 1 arquivo com todas as falas → `split-vo.mjs` (Whisper local) corta, mede e encaixa. Voz final da kz: **Carla** (v4).
 - **Chaves de API por projeto:** app → **Configurações** (grava `companies/<slug>/.env`, fora do git; botão Testar). `.env` da raiz = reserva.
 - **Áudio:** 560 SFX licenciados (EditorPro, comprado, uso comercial) em `library/audio/sfx/`; consultar `library/audio/INDEX.md`. Import de pacotes: `tools/audio/import.mjs`.
 - **Assets:** mapa em `library/README.md`; arquivos brutos entram por `_inbox/{audio,visual,video}/`.
@@ -16,8 +17,8 @@
 1. **Origin story (T-0009, em review):** nome público do fundador, se há foto real, (opcional) uma cena real. Texto em `companies/kz/contents/2026-10-07-origin-story/`.
 2. **Contexto da kz (T-0001 a T-0003):** preço final, trial/garantia, link de cadastro, @ do Instagram.
 3. **Regras CFP/CRP (T-0004):** até lá, anúncio e LP saem "não publicar".
-4. **Arquivos de marca:** logo SVG, ícones e **prints do produto** em `_inbox/visual/` (destravam o teste 3D e os vídeos de demo).
-5. **Ouvir o teste de vídeo** (v02) com fone: voz, trilha sintetizada e efeitos; validar a identidade sonora (`BRAND.md` > Som) e o elenco fictício.
+4. **Arquivos de marca:** logo SVG **feito** (`brand/logo/`, redesenhado do PNG) e tokens do app medidos do print do painel. Faltam mais **prints do produto** (agenda, prontuário, financeiro) para demos e o 3D.
+5. **Revisar o 1º vídeo real** (`companies/kz/contents/2026-10-07-apresentacao-kz/`, v01, 4:5 + 9:16): pontos em `plano.md` > "Para o Oliver conferir" (inclui confirmar se a kz manda lembrete automático).
 6. **ElevenLabs (020):** salvar a chave da kz no app (Configurações → Testar) e mandar os nomes das vozes pré-selecionadas em pt-BR; pronúncia de "kz".
 7. Decisões antigas: mínimo de 6 anúncios por teste no ads-meta? teto de 550–600 palavras por `fmt-*`?
 

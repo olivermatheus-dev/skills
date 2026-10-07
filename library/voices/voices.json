@@ -7,7 +7,9 @@
     "gender": "masculina",
     "stage": "draft",
     "characteristics": "Voz local do Windows (OneCore). Neutra, um pouco robótica; boa para conferir ritmo e duração. Offline e grátis.",
-    "settings": { "rate": 1.0 },
+    "settings": {
+      "rate": 1
+    },
     "license": "Windows (rascunho interno; não publicar)",
     "words": "exato"
   },
@@ -19,7 +21,9 @@
     "gender": "feminina",
     "stage": "draft",
     "characteristics": "Voz local do Windows (OneCore). Neutra, um pouco robótica; boa para conferir ritmo e duração. Offline e grátis.",
-    "settings": { "rate": 1.0 },
+    "settings": {
+      "rate": 1
+    },
     "license": "Windows (rascunho interno; não publicar)",
     "words": "exato"
   },
@@ -31,7 +35,10 @@
     "gender": "feminina",
     "stage": "draft",
     "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Bem mais natural que as do Windows; usada nos vídeos do Ludus.",
-    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "settings": {
+      "rate": "+0%",
+      "pitch": "+0Hz"
+    },
     "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
     "words": "exato"
   },
@@ -43,7 +50,10 @@
     "gender": "masculina",
     "stage": "draft",
     "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Natural, tom firme.",
-    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "settings": {
+      "rate": "+0%",
+      "pitch": "+0Hz"
+    },
     "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
     "words": "exato"
   },
@@ -55,8 +65,39 @@
     "gender": "feminina",
     "stage": "draft",
     "characteristics": "Neural da Microsoft (online, grátis via edge-tts). Natural, tom acolhedor.",
-    "settings": { "rate": "+0%", "pitch": "+0Hz" },
+    "settings": {
+      "rate": "+0%",
+      "pitch": "+0Hz"
+    },
     "license": "Microsoft Edge TTS (rascunho interno; não publicar)",
     "words": "exato"
+  },
+  {
+    "id": "el-carla",
+    "engine": "elevenlabs",
+    "voice": "<voice_id: copiar na ElevenLabs>",
+    "lang": "pt-BR",
+    "gender": "feminina",
+    "stage": "final",
+    "characteristics": "Carla - Calm, Seductive and Enigmatic (Voice Library, PVC). Calma, próxima, adulta; boa para narração acolhedora de produto (1º vídeo da kz). A conferir: energia em CTA e ganchos rápidos.",
+    "settings": {
+      "model": "eleven_v4",
+      "stability": 0.38,
+      "similarity": 0.75,
+      "speaker_boost": true,
+      "language_code": "pt"
+    },
+    "tags_ok": [
+      "[confident]",
+      "[sighs]",
+      "[warm]",
+      "[slightly upbeat]",
+      "[inviting]",
+      "[short pause]"
+    ],
+    "tags_ruins": [],
+    "license": "ElevenLabs (plano do Oliver; confirmar uso comercial)",
+    "words": "exato",
+    "note": "Gerada pelo Oliver no site em 2026-10-07 (sp100 s38 sb75 v4). Diz \"KZ\" como \"cá-zê\"."
   }
 ]

@@ -1,0 +1,402 @@
+<!doctype html>
+<!--
+  kz · apresentação (v01). Locução: Carla (ElevenLabs v4), gerada pelo Oliver. Plano em plano.md.
+  Tempos: só da timeline (T.scene, T.ev, T.word). Textos: on_screen das cenas (| separa linhas, *x* = ênfase).
+  Cores e fontes: só tokens do brand.css da kz (UI do app recriada com os tokens "UI do app"). Dados do painel: ilustrativos.
+  Palco único 1080×1170 (mesma altura útil no 4:5 e no 9:16; o 9:16 só ganha margens de interface).
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+      html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+      * { box-sizing: border-box; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+        color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+      .f-9x16 { --top: 300px; }
+      .f-4x5 { --top: 90px; }
+      #stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+      .layer { position: absolute; inset: 0; }
+      .icon { width: 1em; height: 1em; display: block; }
+      .acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+
+      /* fundo vivo: brilhos suaves que derivam (nada parado) */
+      .blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+      #blob1 { width: 760px; height: 760px; left: -260px; top: -200px; background: var(--ui-glow); opacity: 0.9; }
+      #blob2 { width: 640px; height: 640px; right: -240px; bottom: -160px; background: var(--accent-soft); opacity: 0.55; }
+
+      /* ── s1 · pergunta ── */
+      #kicker { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 40px; font-weight: 600; color: var(--muted); opacity: 0; }
+      #q { position: absolute; left: 90px; right: 90px; top: 410px; text-align: center; font-size: 92px; font-weight: 700;
+        line-height: 1.12; letter-spacing: -0.015em; }
+      #q .w, .words .w { display: inline-block; opacity: 0; }
+      #q .acc { font-size: 1.1em; }
+      .frag { position: absolute; left: 540px; top: 585px; display: flex; align-items: center; gap: 14px; padding: 18px 26px;
+        background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-md);
+        font-size: 30px; font-weight: 600; opacity: 0; white-space: nowrap; }
+      .frag .ic { font-size: 34px; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; }
+
+      /* ── s2 · caos: cards espalhados ── */
+      .card { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow-lg); padding: 34px; opacity: 0; }
+      .card h3 { margin: 0 0 22px; display: flex; align-items: center; gap: 14px; font-size: 34px; font-weight: 700; }
+      .card h3 .ic { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; font-size: 30px; }
+      #c-agenda { left: 60px; top: 110px; width: 560px; }
+      #c-ficha { left: 470px; top: 430px; width: 540px; }
+      #c-nota { left: 110px; top: 720px; width: 470px; background: var(--pastel-butter); border-color: transparent; }
+      .week { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; font-size: 20px; color: var(--ui-muted); font-weight: 600; text-align: center; }
+      .week .col { display: flex; flex-direction: column; gap: 8px; }
+      .week i { display: block; height: 40px; border-radius: 10px; }
+      .row { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-top: 1px solid var(--border); font-size: 28px; font-weight: 600; }
+      .row:first-of-type { border-top: 0; }
+      .row small { display: block; font-size: 22px; font-weight: 500; color: var(--ui-muted); }
+      .av { width: 60px; height: 60px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 22px; font-weight: 700; flex: none; }
+      .lines i { display: block; height: 14px; border-radius: 7px; background: rgba(43, 43, 43, 0.12); margin: 18px 0; }
+      .hand { font-family: var(--font-accent); font-style: italic; font-size: 34px; color: var(--ink); margin-top: 6px; }
+
+      /* ── s3 · tempo ── */
+      #dor { opacity: 0; }
+      #d1 { position: absolute; left: 0; right: 0; top: 400px; text-align: center; font-size: 76px; font-weight: 700; letter-spacing: -0.015em; }
+      #track { opacity: 0; position: absolute; left: 160px; width: 760px; top: 430px; height: 30px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; margin-top: 100px; }
+      #bar { width: 100%; height: 100%; background: var(--primary); border-radius: 999px; transform-origin: 0% 50%; }
+      #tlabel { opacity: 0; position: absolute; left: 160px; top: 582px; display: flex; gap: 10px; align-items: center; font-size: 24px; color: var(--muted); font-weight: 600; }
+      #importa { position: absolute; left: 0; right: 0; top: 690px; text-align: center; font-size: 60px; font-weight: 600; color: var(--muted); opacity: 0; }
+      #atender { position: absolute; left: 0; right: 0; top: 780px; text-align: center; font-size: 190px; line-height: 1.1; opacity: 0; }
+
+      /* ── s4 · revelação ── */
+      #rev { opacity: 0; }
+      #logo { position: absolute; left: 50%; top: 330px; width: 520px; margin-left: -260px; clip-path: inset(0 100% 0 0); }
+      #logo svg { width: 100%; height: auto; display: block; }
+      #logo path { fill: var(--logo); }
+      #tag { position: absolute; left: 0; right: 0; top: 790px; text-align: center; font-size: 48px; font-weight: 600; opacity: 0; }
+      #pills { position: absolute; left: 0; right: 0; top: 900px; display: flex; justify-content: center; gap: 22px; }
+      .pill { display: flex; align-items: center; gap: 12px; padding: 18px 30px 18px 18px; border-radius: 999px; font-size: 34px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); opacity: 0; }
+      .pill .ic { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-size: 26px; }
+
+      /* ── s5 · painel (recriado nos tokens do app; dados ilustrativos) ── */
+      #app { position: absolute; left: 50px; top: 50px; width: 980px; height: 1070px; background: var(--bg); border-radius: 36px;
+        border: 1px solid var(--border); box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; padding: 48px; transform-origin: 50% 40%; }
+      .hello { font-size: 54px; font-weight: 500; letter-spacing: -0.01em; }
+      .hello .acc { color: var(--accent); font-size: 1.08em; }
+      .sub { font-size: 24px; color: var(--ui-muted); margin-top: 6px; font-weight: 500; }
+      .ui { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; position: absolute; overflow: hidden; }
+      #next { left: 48px; right: 48px; top: 190px; height: 300px; padding: 30px 34px; }
+      #next .glow { position: absolute; right: -120px; top: -140px; width: 420px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); }
+      .lbl { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: var(--ui-muted); }
+      .lbl .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); }
+      .lbl b { color: var(--primary-hover); }
+      .who { display: flex; gap: 24px; align-items: center; margin-top: 24px; }
+      .who .av { width: 96px; height: 96px; font-size: 34px; }
+      .who b { font-size: 38px; font-weight: 700; display: block; }
+      .who small { font-size: 23px; color: var(--ui-muted); font-weight: 500; }
+      .btns { display: flex; gap: 14px; margin-top: 26px; }
+      .btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-size: 23px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); }
+      .btn.pri { background: var(--primary); color: var(--on-primary-app); border-color: var(--primary); }
+      .btn .icon { font-size: 24px; }
+      #ring { position: absolute; left: 44px; right: 44px; top: 186px; height: 308px; border-radius: 30px; border: 4px solid var(--primary); opacity: 0; }
+      #list { left: 48px; top: 520px; width: 430px; height: 500px; padding: 28px; }
+      #short { left: 500px; top: 520px; width: 432px; height: 500px; padding: 28px; }
+      .ui h4 { margin: 0 0 18px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+      .ui h4 .icon { color: var(--primary); font-size: 30px; }
+      .sess { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; font-size: 22px; font-weight: 600; opacity: 0; }
+      .sess .t { font-size: 20px; color: var(--accent); font-weight: 700; width: 66px; }
+      .sess small { display: block; color: var(--ui-muted); font-size: 18px; font-weight: 500; }
+      .sess .av { width: 46px; height: 46px; font-size: 17px; }
+      .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .tile { border: 1px solid var(--border); border-radius: 18px; padding: 18px; height: 196px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; }
+      .tile .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+      .t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+      .t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+      .t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+      .t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
+      #done { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; bottom: 34px; display: flex; align-items: center; gap: 14px; padding: 18px 28px;
+        background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-lg); font-size: 26px; font-weight: 600; white-space: nowrap; opacity: 0; }
+      #done .icon { color: var(--success); font-size: 34px; }
+      .illus { position: absolute; right: 30px; bottom: 18px; font-size: 18px; color: var(--ui-muted); }
+
+      /* ── s6 · virada ── */
+      #l1 { position: absolute; left: 40px; right: 40px; top: 380px; text-align: center; font-size: 56px; white-space: nowrap; font-weight: 600; color: var(--muted); opacity: 0; }
+      #strike { position: absolute; left: 50%; top: 52%; height: 6px; width: 860px; margin-left: -430px; background: var(--accent); border-radius: 3px; transform-origin: 0 50%; transform: scaleX(0); }
+      #l2 { position: absolute; left: 80px; right: 80px; top: 540px; text-align: center; font-size: 96px; font-weight: 700; line-height: 1.12; letter-spacing: -0.015em; }
+      #l2 .acc { font-size: 1.12em; }
+
+      /* ── s7 · cartão final ── */
+      #end { opacity: 0; }
+      #endlogo { opacity: 0; position: absolute; left: 50%; top: 250px; width: 360px; margin-left: -180px; }
+      #endlogo svg { width: 100%; height: auto; display: block; }
+      #endlogo path { fill: var(--logo); }
+      #endtitle { opacity: 0; position: absolute; left: 0; right: 0; top: 590px; text-align: center; font-size: 78px; font-weight: 700; letter-spacing: -0.015em; }
+      #endsub { position: absolute; left: 0; right: 0; top: 690px; text-align: center; font-size: 34px; font-weight: 500; color: var(--muted); opacity: 0; }
+      #cta { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 800px; display: flex; align-items: center; gap: 14px; background: var(--primary); color: var(--on-primary);
+        font-weight: 700; font-size: 44px; padding: 28px 56px; border-radius: 999px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
+      #cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+      #ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+      <div class="blob" id="blob1"></div>
+      <div class="blob" id="blob2"></div>
+      <div id="stage">
+        <!-- s1 -->
+        <div class="layer" id="s1">
+          <div class="frag" id="fr1"><div class="ic t-teal">{{i:calendar}}</div>Agenda</div>
+          <div class="frag" id="fr2"><div class="ic t-lilac">{{i:message-circle}}</div>Mensagens</div>
+          <div class="frag" id="fr3"><div class="ic t-amber">{{i:file-text}}</div>Planilha</div>
+          <div class="frag" id="fr4"><div class="ic t-coral">{{i:notebook-pen}}</div>Caderno</div>
+          <div id="kicker"></div>
+          <div id="q"></div>
+        </div>
+        <!-- s2 -->
+        <div class="layer" id="s2">
+          <div class="card" id="c-agenda">
+            <h3><span class="ic t-teal">{{i:calendar-days}}</span><span id="n1"></span></h3>
+            <div class="week">
+              <div class="col">Seg<i style="background: var(--pastel-sage)"></i><i style="background: var(--pastel-sky)"></i></div>
+              <div class="col">Ter<i style="background: var(--pastel-rose)"></i></div>
+              <div class="col">Qua<i style="background: var(--pastel-lavender)"></i><i style="background: var(--pastel-sage)"></i><i style="background: var(--pastel-butter)"></i></div>
+              <div class="col">Qui<i style="background: var(--pastel-sky)"></i></div>
+              <div class="col">Sex<i style="background: var(--pastel-rose)"></i><i style="background: var(--pastel-clay)"></i></div>
+            </div>
+          </div>
+          <div class="card" id="c-ficha">
+            <h3><span class="ic t-amber">{{i:users}}</span><span id="n2"></span></h3>
+            <div class="row"><div class="av">MS</div><div>Marina S.<small>ficha em outra planilha</small></div></div>
+            <div class="row"><div class="av">LP</div><div>Lucas P.<small>contato no celular</small></div></div>
+            <div class="row"><div class="av">HR</div><div>Helena R.<small>histórico no e-mail</small></div></div>
+          </div>
+          <div class="card" id="c-nota">
+            <h3><span class="ic t-coral">{{i:notebook-pen}}</span><span id="n3"></span></h3>
+            <div class="lines"><i style="width: 92%"></i><i style="width: 70%"></i></div>
+            <div class="hand">ligar pro Lucas…?</div>
+            <div class="lines"><i style="width: 80%"></i></div>
+          </div>
+        </div>
+        <!-- s3 -->
+        <div class="layer" id="dor">
+          <div id="d1"></div>
+          <div id="track"><div id="bar"></div></div>
+          <div id="tlabel">{{i:clock}}<span>seu tempo</span></div>
+          <div id="importa"></div>
+          <div id="atender" class="acc"></div>
+        </div>
+        <!-- s4 -->
+        <div class="layer" id="rev">
+          <div id="logo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+          <div id="tag"></div>
+          <div id="pills">
+            <div class="pill" id="p1"><span class="ic t-teal">{{i:check}}</span><span></span></div>
+            <div class="pill" id="p2"><span class="ic t-amber">{{i:check}}</span><span></span></div>
+            <div class="pill" id="p3"><span class="ic t-lilac">{{i:check}}</span><span></span></div>
+          </div>
+        </div>
+        <!-- s5 -->
+        <div id="app">
+          <div class="hello" id="hello"></div>
+          <div class="sub">Quarta-feira · 3 sessões hoje</div>
+          <div class="ui" id="next">
+            <div class="glow"></div>
+            <div class="lbl"><span class="dot"></span>PRÓXIMA SESSÃO · <b>EM 15 MIN</b></div>
+            <div class="who"><div class="av">MS</div><div><b>Marina S.</b><small>15:00 — 15:50 · Online · 4ª sessão</small></div></div>
+            <div class="btns"><div class="btn pri">{{i:video}}Iniciar sessão</div><div class="btn">{{i:file-text}}Ver prontuário</div></div>
+          </div>
+          <div id="ring"></div>
+          <div class="ui" id="list">
+            <h4>Próximas sessões {{i:calendar}}</h4>
+            <div class="sess"><span class="t">15:00</span><div class="av">MS</div><div>Marina S.<small>Online</small></div></div>
+            <div class="sess"><span class="t">16:00</span><div class="av">LP</div><div>Lucas P.<small>Presencial</small></div></div>
+            <div class="sess"><span class="t">17:30</span><div class="av">HR</div><div>Helena R.<small>Online</small></div></div>
+            <div class="sess"><span class="t">Qui</span><div class="av">CA</div><div>Clara A.<small>Presencial</small></div></div>
+          </div>
+          <div class="ui" id="short">
+            <h4>Atalhos {{i:sparkles}}</h4>
+            <div class="tiles">
+              <div class="tile"><span class="ic t-coral">{{i:zap}}</span>Sessão rápida</div>
+              <div class="tile"><span class="ic t-teal">{{i:calendar}}</span>Agendar</div>
+              <div class="tile"><span class="ic t-amber">{{i:user-plus}}</span>Novo cliente</div>
+              <div class="tile"><span class="ic t-lilac">{{i:notebook-pen}}</span>Nova anotação</div>
+            </div>
+          </div>
+          <div id="done">{{i:circle-check}}Sessão agendada · lembrete enviado</div>
+          <div class="illus">dados ilustrativos</div>
+        </div>
+        <!-- s6 -->
+        <div class="layer" id="s6">
+          <div id="l1"><span id="l1t"></span><div id="strike"></div></div>
+          <div id="l2" class="words"></div>
+        </div>
+        <!-- s7 -->
+        <div class="layer" id="end">
+          <div id="endlogo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+          <div id="endtitle"></div>
+          <div id="endsub"></div>
+          <div id="cta"></div>
+        </div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5" stroke-linejoin="round" /></svg>
+        <div id="ripple"></div>
+      </div>
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      const $ = (s) => document.querySelector(s)
+      const $$ = (s) => [...document.querySelectorAll(s)]
+      const S = {}; ['s1', 's2', 's3', 's4', 's5', 's6', 's7'].forEach((id) => (S[id] = T.scene(id)))
+      const parts = (id) => T.text(id).split('|')
+      const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w]/g, '')
+      /** Escreve o texto palavra a palavra (*x* = ênfase em Fraunces) e devolve o tempo de cada palavra casado com a fala. */
+      function words(el, text, vo, from) {
+        const said = T.vo(vo).words || []
+        let j = 0, prev = from
+        const out = []
+        el.innerHTML = text.replace(/\*([^*]+)\*/g, (_, x) => x.split(' ').map((w) => `\u0001${w}`).join(' '))
+          .split(' ').map((w) => {
+            const acc = w.startsWith('\u0001'), clean = w.replace('\u0001', '')
+            const k = said.findIndex((x, i) => i >= j && fold(x.w) === fold(clean))
+            const t = k >= 0 ? said[k].s : prev + 0.1
+            if (k >= 0) j = k + 1
+            prev = t
+            out.push(t)
+            return `<span class="w${acc ? ' acc' : ''}">${clean}</span>`
+          }).join(' ')
+        return [...el.querySelectorAll('.w')].map((node, i) => ({ node, t: out[i] }))
+      }
+      const enter = (sel, at, from = { y: 30 }) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, y: 0, x: 0, scale: 1, rotation: from.rotationTo ?? 0, ...M.FAST }, at)
+      const leave = (sel, at, d = 0.3) => tl.to(sel, { opacity: 0, y: -30, filter: 'blur(8px)', duration: d, ease: 'power2.in' }, at)
+
+      // medir antes de qualquer transform
+      const stage = $('#stage').getBoundingClientRect()
+      const box = (s, fx = 0.5, fy = 0.5) => { const r = $(s).getBoundingClientRect(); return { x: r.left - stage.left + r.width * fx, y: r.top - stage.top + r.height * fy } }
+      // o painel anda (câmera): o cursor mira onde o alvo vai estar depois do movimento
+      const appR = $('#app').getBoundingClientRect()
+      const O = { x: appR.left - stage.left + appR.width * 0.5, y: appR.top - stage.top + appR.height * 0.4 }
+      const cam = (p, s, dx, dy) => ({ x: O.x + (p.x - O.x) * s + dx, y: O.y + (p.y - O.y) * s + dy })
+      const pIniciar = cam(box('#next .btn.pri', 0.55, 0.6), 1.05, 0, 40)
+      const pList = cam(box('#list .sess:nth-of-type(2)', 0.8, 0.6), 1.05, 0, -50)
+      const pCta = box('#cta', 0.9, 0.62)
+
+      // fundo vivo o vídeo inteiro
+      tl.fromTo('#blob1', { x: 0, y: 0 }, { x: 180, y: 140, duration: T.duration, ease: 'sine.inOut' }, 0)
+      tl.fromTo('#blob2', { x: 0, y: 0 }, { x: -160, y: -200, duration: T.duration, ease: 'sine.inOut' }, 0)
+
+      // ── s1 · a pergunta ───────────────────────────────
+      const [kick, ask] = parts('s1')
+      $('#kicker').textContent = kick
+      enter('#kicker', T.ev('e1'), { y: 20 })
+      words($('#q'), ask, 'f1', 1).forEach(({ node, t }) => enter(node, t - 0.12, { y: 36 }))
+      tl.fromTo('#s1', { scale: 1 }, { scale: 1.04, duration: S.s1.dur, ease: 'sine.inOut' }, 0)
+      // "vários lugares": os pedaços da rotina se espalham em volta da pergunta
+      const spots = [[-470, -420, -8], [150, -470, 6], [-430, 300, 5], [170, 330, -6]]
+      ;['#fr1', '#fr2', '#fr3', '#fr4'].forEach((f, i) => {
+        const [x, y, r] = spots[i]
+        tl.fromTo(f, { opacity: 0, x: -110, y: -40, scale: 0.4, rotation: 0 }, { opacity: 1, x, y, scale: 1, rotation: r, ...M.SOFT }, T.ev('e2') + i * 0.09)
+        tl.to(f, { y: y + (i % 2 ? 18 : -18), duration: 2.4, ease: 'sine.inOut' }, T.ev('e2') + 0.8)
+      })
+      tl.to('#s1', { opacity: 0, scale: 1.08, filter: 'blur(10px)', duration: 0.35, ease: 'power2.in' }, S.s1.end - 0.3)
+
+      // ── s2 · cada coisa num lugar ─────────────────────
+      const [n1, n2, n3] = parts('s2')
+      $('#n1').textContent = n1; $('#n2').textContent = n2; $('#n3').textContent = n3
+      tl.fromTo('#c-agenda', { opacity: 0, y: 80, rotation: 0, scale: 0.9 }, { opacity: 1, y: 0, rotation: -5, scale: 1, ...M.SOFT }, T.ev('e3'))
+      tl.fromTo('#c-ficha', { opacity: 0, y: 80, rotation: 0, scale: 0.9 }, { opacity: 1, y: 0, rotation: 4, scale: 1, ...M.SOFT }, T.ev('e4'))
+      tl.fromTo('#c-nota', { opacity: 0, y: 80, rotation: 0, scale: 0.9 }, { opacity: 1, y: 0, rotation: -3, scale: 1, ...M.SOFT }, T.ev('e5'))
+      // "espalhadas": tudo se afasta um pouco mais
+      const esp = T.word('f2:espalhadas').s
+      tl.to('#c-agenda', { x: -40, y: -30, rotation: -9, duration: 1.4, ease: 'sine.inOut' }, esp - 0.1)
+      tl.to('#c-ficha', { x: 50, y: 10, rotation: 8, duration: 1.4, ease: 'sine.inOut' }, esp - 0.1)
+      tl.to('#c-nota', { x: -30, y: 50, rotation: -7, duration: 1.4, ease: 'sine.inOut' }, esp - 0.1)
+      tl.fromTo('#s2', { scale: 1 }, { scale: 1.035, duration: S.s2.dur, ease: 'sine.inOut' }, S.s2.start)
+      tl.to('#s2', { opacity: 0, scale: 0.92, filter: 'blur(10px)', duration: 0.35, ease: 'power2.in' }, S.s2.end - 0.3)
+
+      // ── s3 · sobra menos tempo… atender ───────────────
+      const [d1, d2, d3] = parts('s3')
+      tl.set('#dor', { opacity: 1 }, T.ev('e6'))
+      words($('#d1'), d1, 'f3', T.ev('e6')).forEach(({ node, t }) => enter(node, t - 0.12, { y: 26 }))
+      enter('#track', T.ev('e6') + 0.1, { y: 16 })
+      enter('#tlabel', T.ev('e6') + 0.2, { y: 12 })
+      tl.fromTo('#bar', { scaleX: 1 }, { scaleX: 0.2, duration: 1.0, ease: 'power3.inOut' }, T.ev('e7'))
+      $('#importa').textContent = d2
+      enter('#importa', T.ev('e20'), { y: 20 })
+      $('#atender').textContent = d3
+      tl.fromTo('#atender', { opacity: 0, y: 40, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e8'))
+      tl.to('#dor', { opacity: 0, y: -40, filter: 'blur(10px)', duration: 0.35, ease: 'power2.in' }, S.s3.end - 0.3)
+
+      // ── s4 · a kz ─────────────────────────────────────
+      const [tag, ...pills] = parts('s4')
+      tl.set('#rev', { opacity: 1 }, S.s4.start)
+      tl.fromTo('#logo', { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.9, ease: 'power3.out' }, T.ev('e9'))
+      $('#tag').textContent = tag
+      enter('#tag', T.ev('e21'), { y: 24 })
+      tl.to(['#logo', '#tag'], { y: -150, duration: 0.8, ease: M.GENTLE.ease }, T.ev('e22'))
+      tl.to('#pills', { y: -150, duration: 0.01 }, T.ev('e22'))
+      ;['#p1', '#p2', '#p3'].forEach((p, i) => {
+        $(p + ' span:last-child').textContent = pills[i]
+        tl.fromTo(p, { opacity: 0, y: 30, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev(['e10', 'e11', 'e12'][i]))
+      })
+      tl.fromTo('#rev', { scale: 1 }, { scale: 1.03, duration: S.s4.dur, ease: 'sine.inOut' }, S.s4.start)
+      tl.to('#rev', { opacity: 0, scale: 0.96, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in' }, S.s4.end - 0.28)
+
+      // ── s5 · o painel ─────────────────────────────────
+      const [hi, nome] = parts('s5')
+      $('#hello').innerHTML = `${hi} <span class="acc">${nome}</span>`
+      tl.fromTo('#app', { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power1.out' }, T.ev('e13') - 0.15)
+      tl.fromTo('#app', { y: 120, scale: 0.94 }, { y: 0, scale: 1, ...M.GENTLE, duration: 0.9 }, T.ev('e13') - 0.04)
+      tl.fromTo('#next', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, T.ev('e13') + 0.2)
+      tl.fromTo(['#list', '#short'], { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.08 }, T.ev('e13') + 0.32)
+      $$('#list .sess').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -24 }, { opacity: 1, x: 0, ...M.FAST }, T.ev('e13') + 0.5 + i * 0.07))
+      // câmera passeia: atendimentos → dia a dia
+      tl.to('#app', { scale: 1.05, y: 40, duration: 1.2, ease: M.GENTLE.ease }, T.ev('e14') - 0.2)
+      tl.fromTo('#ring', { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, ...M.FAST }, T.ev('e14'))
+      const C = M.cursor(tl, '#cursor', '#ripple')
+      tl.set('#cursor', { x: pIniciar.x + 300, y: pIniciar.y + 260 }, 0)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e14') - 0.1)
+      C.move(pIniciar, T.ev('e14') - 0.1, 0.7)
+      tl.to('#ring', { opacity: 0, duration: 0.25 }, T.ev('e15') - 0.2)
+      tl.to('#app', { scale: 1.05, y: -50, x: 0, duration: 1.2, ease: M.GENTLE.ease }, T.ev('e15') - 0.2)
+      C.move(pList, T.ev('e15') - 0.15, 0.6)
+      tl.to('#list .sess:nth-of-type(2)', { backgroundColor: 'var(--ui-glow)', borderColor: 'var(--accent-soft)', duration: 0.25 }, T.ev('e15') + 0.4)
+      C.click(pList, T.ev('e15') + 0.45)
+      tl.fromTo('#done', { opacity: 0, y: 40, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e23'))
+      tl.to('#cursor', { opacity: 0, duration: 0.2 }, S.s5.end - 0.45)
+      tl.to('#app', { opacity: 0, scale: 0.9, filter: 'blur(10px)', duration: 0.32, ease: 'power2.in' }, S.s5.end - 0.3)
+
+      // ── s6 · menos / mais ─────────────────────────────
+      const [a, b] = parts('s6')
+      $('#l1t').textContent = a
+      enter('#l1', T.ev('e16'), { y: 24 })
+      tl.to('#strike', { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, T.word('f6:administrando').s + 0.2)
+      tl.to('#l1', { opacity: 0.4, y: -40, scale: 0.86, duration: 0.5, ease: M.GENTLE.ease }, T.ev('e17') - 0.1)
+      words($('#l2'), b, 'f6', T.ev('e17')).forEach(({ node, t }) => enter(node, t - 0.12, { y: 34 }))
+      tl.fromTo('#s6', { scale: 1 }, { scale: 1.04, duration: S.s6.dur, ease: 'sine.inOut' }, S.s6.start)
+      tl.to('#s6', { opacity: 0, y: -30, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in' }, S.s6.end - 0.28)
+
+      // ── s7 · convite ──────────────────────────────────
+      const [ttl, url, sub] = parts('s7')
+      $('#endtitle').innerHTML = ttl
+      $('#cta').innerHTML = `${url} {{i:chevron-right}}`
+      $('#endsub').textContent = sub
+      tl.set('#end', { opacity: 1 }, T.ev('e18'))
+      tl.fromTo('#endlogo', { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.GENTLE }, T.ev('e18'))
+      enter('#endtitle', T.ev('e18') + 0.15, { y: 30 })
+      tl.fromTo('#cta', { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, T.ev('e24'))
+      enter('#endsub', T.ev('e25'), { y: 18 })
+      tl.set('#cursor', { x: pCta.x + 280, y: pCta.y + 240 }, S.s7.start)
+      tl.to('#cursor', { opacity: 1, duration: 0.2 }, T.ev('e19') - 0.8)
+      C.move(pCta, T.ev('e19') - 0.8, 0.7)
+      C.click(pCta, T.ev('e19'))
+      C.press('#cta', T.ev('e19'))
+      tl.fromTo('#end', { scale: 1 }, { scale: 1.03, duration: S.s7.dur, ease: 'sine.inOut' }, S.s7.start)
+
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>
