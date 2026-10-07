@@ -34,6 +34,8 @@
 
 - **Registrado (013):** cenas modulares (isoladas, elásticas, sem valor fixo) + `variantes.json` → variantes de anúncio (tema, voz, trilha, CTA, 15 s, formatos, troca de gancho) por script, quase sem token. O contrato de cena já está na skill `video`.
 
+- **Registrado (014 e 015):** galeria reutilizável (componentes de motion com parâmetros, clipes de fx, looks de cor, áudio) com índice barato, busca por descrição e import do PC; cortes e edits em escala para vídeos reais. A skill `video` já manda consultar a galeria antes de criar e promover o que ficou bom.
+
 ## Pendências do Oliver (bloqueiam produção)
 1. **Contexto da kz desatualizado** (dizia lançamento em mai/2026): preço final, trial/garantia, link de cadastro, @ do Instagram. Tarefas T-0001 a T-0003.
 2. **Regras CFP/CRP de publicidade:** T-0004. Até lá, anúncio e LP saem marcados "não publicar".

@@ -38,6 +38,9 @@ Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/tim
 
 ## Etapas
 
+### 0. Galeria antes de criar
+Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte `library/INDEX.md` e `companies/<slug>/video-templates/` (quando existirem; tarefa 014). Reaproveite e ajuste parâmetros; crie do zero só se não houver nada adaptável.
+
 ### 1. Plano → PARE e peça o aval (exceto simples)
 1. Médio/alto: 2–3 conceitos em 1 linha, recomende 1.
 2. Plano: recorte, falas exatas, **folha de batidas** (tempo · na tela · o que entender · som · intensidade 0–4), cor/fundo por cena, **afirmações com fonte** (sem fonte = não entra), perguntas com recomendação.
@@ -68,6 +71,7 @@ Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/tim
 - Nome `<AAAA-MM-DD>-<nome>-<formato>-vNN.mp4` em `exports/`; nunca sobrescrever versão aprovada.
 - **Sempre:** `node tools/video/qc.mjs <pasta> --sheet` (sem crítico) e **olhar a folha de contato do MP4 final**.
 - Entregar: caminhos dos MP4 + saída do `qc.mjs` + **o que o Oliver precisa conferir** (o Claude não escuta: ouvir com fone e no celular; ver pequeno e sem som; prévia na plataforma).
+- **Promover para a galeria:** algo reutilizável (fundo, gráfico, mapa, transição, bloco)? Extraia com parâmetros e tokens para `library/` (genérico) ou `video-templates/` (marca) e registre no catálogo.
 - Registrar no `plano.md`: entregue, em aberto, feedback. Feedback visual que se repete → `BRAND.md` > Aprendizados.
 
 ## Ajustes depois da entrega (quase zero token)
