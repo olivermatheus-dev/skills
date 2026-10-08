@@ -19,3 +19,4 @@
 
 ## Log
 - 2026-10-08 — registrada pelo orquestrador a partir do áudio do Oliver; desenho disparado.
+- 2026-10-08 — `DESENHO.md` entregue (pesquisador): schema `curadoria.ts` (Source, SourceRef, ResearchRequest/Result) + campos novos em `idea.ts`, abas Ideias · Fontes · Pesquisas, diálogo Pesquisar ideias, fluxo script → Haiku/Sonnet por grupo → verificação por script → síntese Opus (~US$ 1,30–3,00/rodada, estimado), 43 fontes sugeridas para a kz (36 conferidas, 7 não conferidas), fases F0–F4 e 9 perguntas. Aguarda aval do Oliver (F0).
