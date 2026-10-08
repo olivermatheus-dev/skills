@@ -4,7 +4,8 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Idea, type Task } from '../api';
-import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/kit';
+import { MessageCircle, Plus, Search, Tag as TagIcon, Target, Users } from 'lucide-react';
+import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, SelectField, cx } from '../components/kit';
 import { FillBox } from '../components/fill';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
@@ -88,29 +89,24 @@ export default function Ideas() {
               <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1.5 capitalize', view === v ? 'bg-muted font-medium' : 'bg-card text-muted-foreground hover:text-foreground')}>{v}</button>
             ))}
           </div>
-          <Button onClick={() => setOpen(blank())}>+ Nova ideia</Button>
+          <Button onClick={() => setOpen(blank())}><Plus className="size-4 inline -mt-0.5 mr-1" aria-hidden />Nova ideia</Button>
         </>}
       />
       <IdeasTabs className="-mt-2 mb-5" />
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
-        <Input placeholder="Buscar…" value={f.q} onChange={(e) => setF({ ...f, q: e.target.value })} className="w-56" />
-        <Select value={f.objective} onChange={(e) => setF({ ...f, objective: e.target.value })}>
-          <option value="">Objetivo: todos</option>
-          {OBJECTIVES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-        </Select>
-        <Select value={f.tone} onChange={(e) => setF({ ...f, tone: e.target.value })}>
-          <option value="">Tom: todos</option>
-          {TONES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-        </Select>
-        <Select value={f.tag} onChange={(e) => setF({ ...f, tag: e.target.value })} disabled={!tags.length}>
-          <option value="">Tag: todas</option>
-          {tags.map((t) => <option key={t} value={t}>{tagDefs[t]?.label ?? t}</option>)}
-        </Select>
-        <Select value={f.competitor} onChange={(e) => setF({ ...f, competitor: e.target.value })} disabled={!sources.length}>
-          <option value="">Origem: todas</option>
-          {sources.map((c) => <option key={c} value={c}>{compName(c)}</option>)}
-        </Select>
+        <div className="relative w-56">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" aria-hidden />
+          <Input placeholder="Buscar…" aria-label="Buscar ideias" value={f.q} onChange={(e) => setF({ ...f, q: e.target.value })} className="w-full pl-8" />
+        </div>
+        <SelectField aria-label="Objetivo" icon={<Target />} value={f.objective} onChange={(x) => setF({ ...f, objective: x })}
+          options={[{ value: '', label: 'Objetivo: todos' }, ...OBJECTIVES.map((o) => ({ value: o.id, label: o.label }))]} />
+        <SelectField aria-label="Tom" icon={<MessageCircle />} value={f.tone} onChange={(x) => setF({ ...f, tone: x })}
+          options={[{ value: '', label: 'Tom: todos' }, ...TONES.map((o) => ({ value: o.id, label: o.label }))]} />
+        <SelectField aria-label="Tag" icon={<TagIcon />} value={f.tag} onChange={(x) => setF({ ...f, tag: x })} disabled={!tags.length}
+          options={[{ value: '', label: 'Tag: todas' }, ...tags.map((t) => ({ value: t, label: tagDefs[t]?.label ?? t }))]} />
+        <SelectField aria-label="Origem" icon={<Users />} value={f.competitor} onChange={(x) => setF({ ...f, competitor: x })} disabled={!sources.length}
+          options={[{ value: '', label: 'Origem: todas' }, ...sources.map((c) => ({ value: c, label: compName(c) }))]} />
         {anyFilter && <Button variant="ghost" onClick={() => setF({ q: '', objective: '', tone: '', tag: '', competitor: '' })}>Limpar</Button>}
         <label className="ml-auto flex items-center gap-1.5 text-sm text-muted-foreground">
           <input type="checkbox" checked={hideDiscarded} onChange={(e) => setHideDiscarded(e.target.checked)} /> Ocultar descartadas

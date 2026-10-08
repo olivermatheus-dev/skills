@@ -61,8 +61,17 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   })));
   const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'tempo', v.asc);
   const q = v.q.toLowerCase();
-  const shown = sortRows(rows.filter((r) => (compId || !v.conc || r.compId === v.conc) && (!v.formato || r.media.type === v.formato) && (!v.rede || r.platforms.includes(v.rede)) && (!v.novos || r.isNew)
-    && (!q || `${r.text ?? ''} ${r.title ?? ''} ${r.compName}`.toLowerCase().includes(q))), SORTS, sort);
+  // um filtro só para a lista e para as contagens dos selects (skip = o próprio select, contado como se estivesse vazio)
+  const passes = (r: Row, skip?: 'conc' | 'rede' | 'formato') => (compId || skip === 'conc' || !v.conc || r.compId === v.conc)
+    && (skip === 'formato' || !v.formato || r.media.type === v.formato) && (skip === 'rede' || !v.rede || r.platforms.includes(v.rede)) && (!v.novos || r.isNew)
+    && (!q || `${r.text ?? ''} ${r.title ?? ''} ${r.compName}`.toLowerCase().includes(q));
+  const shown = sortRows(rows.filter((r) => passes(r)), SORTS, sort);
+  const countBy = (skip: 'conc' | 'rede' | 'formato', keys: (r: Row) => string[]) => {
+    const m = new Map<string, number>();
+    for (const r of rows) if (passes(r, skip)) for (const k of keys(r)) m.set(k, (m.get(k) ?? 0) + 1);
+    return m;
+  };
+  const nConc = countBy('conc', (r) => [r.compId]), nRede = countBy('rede', (r) => r.platforms), nFormato = countBy('formato', (r) => [r.media.type]);
   const platforms = [...new Set(rows.flatMap((r) => r.platforms))];
   const mediaTypes = [...new Set(rows.map((r) => r.media.type))];
   const advertising = per.filter((p) => p.cur?.ads.some((x) => x.active));
@@ -95,13 +104,13 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   }
 
   // opções com ícone/logo/avatar e contagem
-  const concOpts: SelectOption[] = [{ value: '', label: 'Todos os concorrentes', icon: <Users />, count: rows.length }, ...per.flatMap((p) => {
+  const concOpts: SelectOption[] = [{ value: '', label: 'Todos os concorrentes', icon: <Users />, count: rows.filter((r) => passes(r, 'conc')).length }, ...per.flatMap((p) => {
     const mr = names.get(p.id);
     if (!mr || mr.c.data.kind !== 'concorrente') return [];
-    return [{ value: p.id, label: mr.c.data.name, icon: <Avatar name={mr.c.data.name} size={16} local={mr.avatar.local} remote={mr.avatar.remote} className="!ring-0" />, count: p.cur?.ads.filter((x) => x.active).length ?? 0 }];
+    return [{ value: p.id, label: mr.c.data.name, icon: <Avatar name={mr.c.data.name} size={16} local={mr.avatar.local} remote={mr.avatar.remote} className="!ring-0" />, count: nConc.get(p.id) ?? 0, disabled: p.id !== v.conc && !nConc.get(p.id) }];
   })];
-  const redeOpts: SelectOption[] = [{ value: '', label: 'Todas as redes', icon: <Share2 /> }, ...platforms.map((p) => ({ value: p, label: platformLabel(p), icon: <PlatformIcon platform={p} size={16} />, count: rows.filter((r) => r.platforms.includes(p)).length }))];
-  const formatoOpts: SelectOption[] = [{ value: '', label: 'Todos os formatos', icon: <Shapes /> }, ...mediaTypes.map((t) => ({ value: t, label: mediaLabel(t), icon: MEDIA_ICON[t], count: rows.filter((r) => r.media.type === t).length }))];
+  const redeOpts: SelectOption[] = [{ value: '', label: 'Todas as redes', icon: <Share2 /> }, ...platforms.map((p) => ({ value: p, label: platformLabel(p), icon: <PlatformIcon platform={p} size={16} />, count: nRede.get(p) ?? 0, disabled: p !== v.rede && !nRede.get(p) }))];
+  const formatoOpts: SelectOption[] = [{ value: '', label: 'Todos os formatos', icon: <Shapes /> }, ...mediaTypes.map((t) => ({ value: t, label: mediaLabel(t), icon: MEDIA_ICON[t], count: nFormato.get(t) ?? 0, disabled: t !== v.formato && !nFormato.get(t) }))];
   const sortOpts: SelectOption[] = Object.entries(SORTS).filter(([, d]) => d.bar).map(([value, d]) => ({ value, label: d.label }));
   const active = !!(v.q || v.conc || v.rede || v.formato || v.novos);
 
