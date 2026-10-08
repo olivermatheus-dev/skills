@@ -35,9 +35,13 @@ export interface PieceTimeline {
   scenes: { id: string; block?: string; start: number; end: number; on_screen?: string; vo?: string[] }[];
   vo: { id: string; text: string; start: number; end?: number; words?: { w: string; s: number; e: number }[] }[];
   events: { id: string; type: string; scene?: string; t?: number; at?: number; target?: string; word?: string }[];
-  music?: { file?: string; bpm?: number; gain_db?: number; license?: string } | null;
-  sfx?: { event: string; asset: string }[];
+  music?: { file?: string; id?: string; bpm?: number; gain_db?: number; license?: string; synth?: unknown } | null;
+  sfx?: { event: string; asset?: string; synth?: string; gain_db?: number }[];
+  mix?: { vo_db?: number; sfx_db?: number };
 }
+/** ajuste direto no vídeo (core/videoedit.ts) */
+export type VideoAdjust = { op: 'volume'; alvo: string; db: number } | { op: 'duracao'; cena: string; s: number } | { op: 'texto'; cena: string; texto: string };
+export interface PreviewJob { estado: 'rodando' | 'ok' | 'erro'; passo: string; passos: string[]; formato: string; log: string[]; inicio: string; fim?: string; arquivo?: string; erro?: string }
 export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta }
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 // Editor de mockups (tarefa 030)
@@ -175,6 +179,9 @@ export const api = {
   savePieceMeta: (slug: string, path: string, patch: Partial<PieceMeta>) => req<PieceMeta>('PUT', `${pj(slug)}/piece/meta?path=${encodeURIComponent(path)}`, patch),
   /** abre no computador: reveal = Explorer com o arquivo selecionado; open = app padrão (player). file vazio = a pasta */
   pieceDesktop: (slug: string, path: string, how: 'reveal' | 'open', file = '') => req<{ ok: boolean }>('POST', `${pj(slug)}/piece/${how}?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`),
+  adjustVideo: (slug: string, path: string, a: VideoAdjust) => req<{ saida: string; timeline: PieceTimeline }>('POST', `${pj(slug)}/piece/adjust?path=${encodeURIComponent(path)}`, a),
+  previewStatus: (slug: string, path: string) => req<PreviewJob | null>('GET', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`),
+  generatePreview: (slug: string, path: string, formato?: string) => req<PreviewJob>('POST', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`, { formato }),
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 
   formats: () => req<FormatInfo[]>('GET', '/api/formats'),

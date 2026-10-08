@@ -1,8 +1,9 @@
 // Vídeo da peça (tarefa 022, v1 enxuta): player do MP4 mais recente + faixas somente leitura desenhadas da timeline.json
 // (cenas, falas, eventos, trilha) + anotações ancoradas gravadas em <peça>/revisao.json. A IA lê com `node tools/review.mjs <pasta>`.
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { api, type PieceFull, type PieceTimeline, type ReviewComment } from '../../api';
 import { Badge, Button, Card, Empty, Select, Textarea, Input, cx } from '../kit';
+import VideoAdjust from './VideoAdjust';
 import { CommentCard, TipoPicker, nextCommentId, nowLocal, tipoOf, type Anchor, type Tipo } from './shared';
 
 type VideoAnchor = Exclude<Anchor, { kind: 'roteiro' }>;
@@ -177,6 +178,8 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
   const live = mode === 'elemento' && !!preview && !!video;
   const [unstable, setUnstable] = useState(false);
 
+  // prévia pronta (Ajustes → Gerar prévia): o player passa para o -rascunho.mp4
+  const onPreview = useCallback((file: string) => { setVersion(file); setMode('video'); }, []);
   const seek = (t: number, pause = true) => { const v = videoRef.current; if (!v) return; v.currentTime = Math.max(0, Math.min(t, duration)); if (pause) v.pause(); };
   const pick = (a: VideoAnchor, t: number, sel = '') => { setDraft(a); setSelector(sel); setUnstable(false); seek(t); };
   const nowT = () => Math.round((videoRef.current?.currentTime ?? 0) * 100) / 100;
@@ -241,6 +244,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
           </div>
         </div>
 
+        <div className="space-y-4">
         <Card>
           <div className="text-sm font-medium mb-2">Nova anotação</div>
           {!draft ? (
@@ -260,11 +264,13 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
             </div>
           )}
         </Card>
+        {tl && <VideoAdjust slug={slug} path={path} tl={tl} sel={draft?.kind === 'cena' || draft?.kind === 'evento' ? draft : null} onPreview={onPreview} />}
+        </div>
       </div>
 
       {tl && (
         <Card className="mt-6 overflow-hidden">
-          <div className="text-sm font-medium mb-2">Faixas <span className="text-xs text-muted-foreground font-normal">(somente leitura · vêm da timeline.json)</span></div>
+          <div className="text-sm font-medium mb-2">Faixas <span className="text-xs text-muted-foreground font-normal">(vêm da timeline.json · clique numa cena ou evento para anotar ou ajustar)</span></div>
           <div className="flex gap-2">
             <div className="w-20 shrink-0" />
             <div className="flex-1 relative h-4 text-[10px] text-muted-foreground">

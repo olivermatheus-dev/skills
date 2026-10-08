@@ -50,6 +50,22 @@
       }
     },
     {
+      "name": "hub-app-4",
+      "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
+      "runtimeArgs": [
+        "node_modules/vite/bin/vite.js",
+        "--config",
+        "app/vite.config.ts",
+        "--port",
+        "5176",
+        "--strictPort"
+      ],
+      "port": 5176,
+      "env": {
+        "HUB_NO_OPEN": "1"
+      }
+    },
+    {
       "name": "galeria-mockups",
       "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
       "runtimeArgs": [

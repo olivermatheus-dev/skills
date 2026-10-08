@@ -6,6 +6,8 @@
 // pular do começo da trilha), `music.gain_db` (nível da trilha antes do ducking; padrão −9 com voz, −3 sem),
 // `music.duck` (0–1, quanto abaixa sob a voz; padrão 0,7). A trilha é levada a −16 LUFS antes, então o ganho
 // vale igual para qualquer arquivo.
+// Volume por faixa (app → Conteúdos → Ajustes, ou `timeline.mjs vol`): `mix.vo_db` (voz) e `mix.sfx_db` (efeitos),
+// em dB sobre o nível padrão (0). O som de um evento: `sfx[].gain_db` (sfx.mjs).
 //
 // Uso: node tools/video-kit/scripts/mix.mjs <pasta-do-video>  →  audio/mix.wav
 import { existsSync, rmSync } from 'node:fs';
@@ -35,12 +37,12 @@ vo.forEach((x, k) => {
 let last = '[music]';
 if (vo.length) {
   const duck = Math.max(0, Math.min(1, m.duck ?? 0.7));
-  f.push(`${vo.map((_, k) => `[v${k}]`).join('')}amix=inputs=${vo.length}:normalize=0,highpass=f=80,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,loudnorm=I=-15:TP=-2:LRA=7,apad=whole_dur=${total},asplit=2[voice][key]`);
+  f.push(`${vo.map((_, k) => `[v${k}]`).join('')}amix=inputs=${vo.length}:normalize=0,highpass=f=80,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,loudnorm=I=-15:TP=-2:LRA=7,volume=${tl.mix?.vo_db ?? 0}dB,apad=whole_dur=${total},asplit=2[voice][key]`);
   f.push(`[music][key]sidechaincompress=threshold=0.02:ratio=${(2 + duck * 8).toFixed(1)}:attack=20:release=450:makeup=1[ducked]`);
   last = '[ducked][voice]';
 }
 let n = vo.length ? 2 : 1;
-if (hasSfx) { inputs.push('-i', sfx); f.push(`[${vo.length + 1}:a]aresample=48000,aformat=channel_layouts=stereo[fx]`); last += '[fx]'; n++; }
+if (hasSfx) { inputs.push('-i', sfx); f.push(`[${vo.length + 1}:a]aresample=48000,aformat=channel_layouts=stereo,volume=${tl.mix?.sfx_db ?? 0}dB[fx]`); last += '[fx]'; n++; }
 f.push(`${last}amix=inputs=${n}:normalize=0:dropout_transition=0,atrim=0:${total}[out]`);
 const pre = join(v.dir, 'audio', 'mix-pre.wav');
 ff([...inputs, '-filter_complex', f.join(';'), '-map', '[out]', '-ar', '48000', '-c:a', 'pcm_f32le', pre]);

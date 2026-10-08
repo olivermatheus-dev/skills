@@ -11,6 +11,7 @@ import { P } from '../../schema';
 import * as K from '../../core/secrets';
 import * as MK from '../../core/mockups';
 import * as R from '../../core/runner';
+import * as VE from '../../core/videoedit';
 import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
@@ -156,6 +157,10 @@ on('PUT', '/api/projects/:slug/piece/text', (p, b, q) => S.savePieceText(p.slug,
 // Ficha da peça (peca.json): nome, versão principal, tags, notas (legenda, copy…), favorito, arquivada
 on('PUT', '/api/projects/:slug/piece/meta', (p, b, q) => S.savePieceMeta(p.slug, piece(q), b ?? {}));
 // Abrir no computador: ?file= relativo à pasta da peça (vazio = a pasta). reveal = Explorer com o arquivo selecionado; open = app padrão
+// ajustes diretos no vídeo (022 C): volume, duração e texto → timeline.json; prévia = sfx → mix → produce --draft
+on('POST', '/api/projects/:slug/piece/adjust', (p, b, q) => VE.ajustar(p.slug, piece(q), b));
+on('GET', '/api/projects/:slug/piece/preview', (p, _, q) => VE.previaStatus(p.slug, piece(q)));
+on('POST', '/api/projects/:slug/piece/preview', (p, b, q) => VE.gerarPrevia(p.slug, piece(q), b ?? {}));
 on('POST', '/api/projects/:slug/piece/reveal', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'reveal'));
 on('POST', '/api/projects/:slug/piece/open', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'open'));
 

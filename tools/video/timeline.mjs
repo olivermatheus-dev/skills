@@ -7,12 +7,15 @@
 //   node tools/video/timeline.mjs dur   <pasta> <cena-id> <segundos>           muda a duração de uma cena e empurra o resto
 //   node tools/video/timeline.mjs text  <pasta> <cena-id> "<texto na tela>"    troca o texto e confere o tempo de leitura
 //   node tools/video/timeline.mjs music <pasta> <music-id> [--gain -18]        troca a trilha por uma do catálogo (com licença)
+//   node tools/video/timeline.mjs vol   <pasta> <voz|trilha|efeitos|evento-id> <dB>   volume da faixa ou do som de um evento
+// Depois de vol/dur: sfx.mjs + mix.mjs (o app faz isso no "Gerar prévia").
 import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { layout } from '../video-kit/scripts/lib.mjs';
 
 const [cmd, dir, a, b, ...rest] = process.argv.slice(2);
-const usage = () => { console.log('Uso: node tools/video/timeline.mjs <show|check|vo|dur|text|music> <pasta> [...]'); process.exit(1); };
+const usage = () => { console.log('Uso: node tools/video/timeline.mjs <show|check|vo|dur|text|music|vol> <pasta> [...]'); process.exit(1); };
 if (!cmd || !dir) usage();
 const file = join(dir, 'timeline.json');
 if (!existsSync(file)) { console.log(`Sem ${file}`); process.exit(1); }
@@ -93,10 +96,30 @@ else if (cmd === 'vo') {
   shiftAfter(oldEnd, delta, { vo: v, scene: sc });
   save(); console.log(`${a}: ${oldLen}s → ${newLen}s (${delta >= 0 ? '+' : ''}${delta}s); tudo depois foi reencaixado. Duração: ${tl.duration}s`); check();
 } else if (cmd === 'dur') {
-  const s = (tl.scenes || []).find((x) => x.id === a); if (!s || !b) usage();
-  const delta = r3(+b - (s.end - s.start)), oldEnd = s.end;
-  s.end = r3(s.start + +b); shiftAfter(oldEnd, delta, { scene: s });
-  save(); console.log(`${a}: agora ${b}s (${delta >= 0 ? '+' : ''}${delta}s). Duração: ${tl.duration}s`); check();
+  const s = (tl.scenes || []).find((x) => x.id === a); if (!s || !b || !(+b > 0)) usage();
+  const before = r3(s.end - s.start);
+  if (tl.scenes.some((x) => x.vo?.length) && tl.scenes.every((x) => !x.vo?.length || x.vo.every((id) => tl.vo?.find((v) => v.id === id)?.length != null))) {
+    // timeline que nasce do áudio (layout do kit): grava a regra na cena (min com fala, len sem fala) e recalcula,
+    // senão o próximo relayout/tts desfaz a mudança
+    if (s.vo?.length) s.min = r3(+b); else s.len = r3(+b);
+    layout(tl);
+  } else {
+    const delta = r3(+b - before), oldEnd = s.end;
+    s.end = r3(s.start + +b); shiftAfter(oldEnd, delta, { scene: s });
+  }
+  const now = r3(s.end - s.start), delta = r3(now - before);
+  save(); console.log(`${a}: agora ${now}s (${delta >= 0 ? '+' : ''}${delta}s)${now > +b + 0.01 ? ` — a fala ocupa ${now}s, não dá para encurtar mais sem mexer na voz` : ''}. Duração: ${tl.duration}s`); check();
+} else if (cmd === 'vol') {
+  const db = +b; if (!a || b === undefined || !Number.isFinite(db) || db < -40 || db > 12) { console.log('vol: dB entre -40 e +12'); process.exit(1); }
+  const r = Math.round(db * 10) / 10;
+  if (a === 'voz' || a === 'efeitos') { tl.mix = { ...(tl.mix || {}), [a === 'voz' ? 'vo_db' : 'sfx_db']: r }; }
+  else if (a === 'trilha') { if (!tl.music) { console.log('sem trilha na timeline'); process.exit(1); } tl.music.gain_db = r; }
+  else {
+    const cues = (tl.sfx || []).filter((x) => x.event === a);
+    if (!cues.length) { console.log(`evento ${a} sem som em timeline.sfx`); process.exit(1); }
+    for (const c of cues) c.gain_db = r;
+  }
+  save(); console.log(`volume ${a}: ${r} dB  → rode sfx.mjs (se for evento) e mix.mjs`);
 } else if (cmd === 'text') {
   const s = (tl.scenes || []).find((x) => x.id === a) || (tl.captions || []).find((x) => x.id === a); if (!s || b === undefined) usage();
   if ('on_screen' in s || !('text' in s)) s.on_screen = b; else s.text = b;
