@@ -11,7 +11,12 @@ import './index.css';
 // enquanto carrega seria errado (ex.: abrir uma anotação do projeto anterior).
 const qc = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: 30_000, gcTime: 30 * 60_000, retry: 1, refetchOnWindowFocus: true },
+    // erro de rede ("Failed to fetch": o servidor do app reiniciando) tenta de novo por ~30 s antes de mostrar erro
+    queries: {
+      staleTime: 30_000, gcTime: 30 * 60_000, refetchOnWindowFocus: true,
+      retry: (n, e) => (e instanceof TypeError ? n < 6 : n < 1),
+      retryDelay: (n) => Math.min(500 * 2 ** n, 8_000),
+    },
     mutations: { retry: 0 },
   },
 });
