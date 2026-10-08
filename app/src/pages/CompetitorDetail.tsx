@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type Doc, type ItemMark } from '../api';
 import type { ModuleDataOf } from '../../../schema/analysis';
 import { qk, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, useTags } from '../queries';
-import { ArrowDown, ArrowUp, Clapperboard, ChevronRight, ExternalLink, Eye, Globe2, Lightbulb, Link2, MapPin, Plus, RefreshCw, Star as StarIcon, TriangleAlert, User, Users, X, Zap } from 'lucide-react';
+import { ArrowDown, ArrowUp, ChevronRight, ExternalLink, Link2, MapPin, RefreshCw, Star as StarIcon, TriangleAlert, X } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, cx, fmtNum } from '../components/kit';
@@ -15,14 +15,14 @@ import EditCompetitor from '../components/competitors/EditCompetitor';
 import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import type { IdeaExtra } from '../components/competitors/ficha/paraIdeia';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
-import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
+import { type FollowerSeries } from '../components/competitors/FollowersChart';
+import FaixaRedes from '../components/competitors/FaixaRedes';
 import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
 import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
 import ContentsView from '../components/competitors/ContentsView';
-import RelatoriosSection from '../components/competitors/relatorios/Relatorios';
+import RelatoriosSection, { RelatorioDialog, useRelatorioPorItem } from '../components/competitors/relatorios/Relatorios';
 import { useMarketRows } from '../components/competitors/market';
-import { StatStrip } from '../components/competitors/area';
 import { AppContent } from '../components/AppContent';
 import {
   Avatar, KINDS, KIND_COLOR, PlatformIcon, SERIES, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
@@ -132,6 +132,8 @@ function Detalhe() {
   const actions = useCompetitorActions(slug);
   const idea = useMakeIdea(slug);
   const fichas = useFichasResumo(slug);
+  const relPorItem = useRelatorioPorItem(slug, id);
+  const [relAberto, setRelAberto] = useState<string | null>(null);
 
   const [search_, setSearch_] = useSearchParams();
   const view = (TABS.some((t) => t.id === search_.get('aba')) ? search_.get('aba') : 'diagnostico') as TabId;
@@ -344,46 +346,23 @@ function Detalhe() {
           </div>
         )}
 
-        {/* números */}
+        {/* números, seguidores e redes do site numa faixa só (042) */}
         {sel?.platform !== 'site' && (() => {
           const marked = scopeRows.filter((r) => r.mark && (r.mark.favorite || r.mark.status !== 'nova')).length;
           const ideas = scopeRows.filter((r) => r.mark?.ideaId).length;
           const eng = median(scopeRows.map((r) => r.engagement).filter((v): v is number => v != null));
           return (
-            <div className="mt-4">
-              <StatStrip items={[
-                { icon: Users, label: sel ? 'Seguidores' : 'Seguidores (soma)', value: fmtNum(fTotal), sub: fDelta ? <span className={fDelta > 0 ? 'text-success-ink' : 'text-destructive'}>{fmtDelta(fDelta)}</span> : undefined },
-                { icon: Clapperboard, label: 'Conteúdos', value: fmtNum(scopeRows.length), sub: types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ') },
-                { icon: Eye, label: 'Mediana de views', value: fmtNum(medViews != null ? Math.round(medViews) : undefined) },
-                ...(eng != null ? [{ icon: Zap, label: 'Engajamento (mediana)', value: fmtPct(eng) }] : []),
-                { icon: User, label: '≥3× o perfil', value: String(hot) },
-                { icon: Globe2, label: '≥3× o mercado', value: String(hotMkt) },
-                ...(marked > 0 || ideas > 0 ? [{ icon: Lightbulb, label: 'Marcados', value: String(marked), sub: ideas ? `${ideas} viraram ideia` : undefined }] : []),
-              ]} />
-            </div>
+            <FaixaRedes series={chart} linksSite={missingLinks} onAddLink={addLink} numeros={[
+              { label: sel ? 'Seguidores' : 'Seguidores (soma)', value: fmtNum(fTotal), delta: fDelta },
+              { label: 'Conteúdos', value: fmtNum(scopeRows.length), title: types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ') || undefined },
+              { label: 'Mediana de views', value: fmtNum(medViews != null ? Math.round(medViews) : undefined) },
+              ...(eng != null ? [{ label: 'Engajamento', value: fmtPct(eng), title: 'mediana de (curtidas + comentários + envios) ÷ views' }] : []),
+              { label: '≥3× perfil', value: String(hot), title: 'conteúdos com views ≥ 3× a mediana do próprio perfil' },
+              { label: '≥3× mercado', value: String(hotMkt), title: 'conteúdos com views ≥ 3× a mediana dos concorrentes na mesma rede e formato' },
+              ...(marked > 0 || ideas > 0 ? [{ label: 'Marcados', value: ideas ? `${marked} · ${ideas} ideia(s)` : String(marked), title: ideas ? `${ideas} viraram ideia` : undefined }] : []),
+            ]} />
           );
         })()}
-
-        {/* evolução só faz sentido com 3+ coletas; antes disso o número acima basta */}
-        {chart.some((s) => s.points.length >= 3) && (
-          <section className="mt-6">
-            <h2 className="text-sm font-semibold mb-2">Seguidores por coleta</h2>
-            <FollowersChart series={chart.filter((s) => s.points.length >= 3)} />
-          </section>
-        )}
-
-        {missingLinks.length > 0 && (
-          <div className="mt-5 bg-card border border-border rounded-lg p-3 text-sm">
-            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">Redes encontradas no site</div>
-            <div className="flex flex-wrap gap-2">
-              {missingLinks.map((l) => (
-                <button key={l} onClick={() => addLink(l)} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md border border-border hover:border-primary hover:text-primary-ink text-xs">
-                  <Plus className="size-3" />{l.replace(/^https?:\/\/(www\.)?/, '')}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* relatórios de análise (040 F): o mais recente em destaque; itens citados abrem o painel */}
         {sel?.platform !== 'site' && <RelatoriosSection slug={slug} comp={id} onOpenItem={(k) => setOpen(k)} />}
@@ -404,6 +383,7 @@ function Detalhe() {
             <ContentsView rows={scopeRows} slug={slug} showComp={false} compId={id} compLabel={c.name} fichaOf={(r) => fichas.of(id, r.mk)} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
               searchPlaceholder="Buscar título, legenda, nota…"
               mediaOf={(r) => media(r.item.thumbnailLocal)} ideaBusy={(r) => ideaBusy === r.mk}
+              relatorioOf={(r) => relPorItem.get(r.mk)} onRelatorio={(_r, rid) => setRelAberto(rid)}
               onMark={(r, patch) => mark.mutate({ mk: r.mk, patch })} onIdea={(r) => makeIdea(r)} onOpen={(r) => setOpen(r.mk)} />
           )}
         </section>
@@ -412,9 +392,10 @@ function Detalhe() {
 
       <ItemPanel compId={id} r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={media(openRow?.item.thumbnailLocal)}
         profileLabel={openRow ? handleOf(profiles.find((p) => p.key === openRow.profileKey) ?? { platform: openRow.platform, url: '' }) : ''}
-        tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk}
+        tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk} onOpenItem={(k) => setOpen(k)}
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}
         onIdea={(title, tags, note, extra) => openRow && makeIdea(openRow, title, tags, note, extra)} />
+      {relAberto && <RelatorioDialog slug={slug} comp={id} id={relAberto} onClose={() => setRelAberto(null)} onOpenItem={(k) => { setRelAberto(null); setOpen(k); }} />}
       <RunDialog slug={slug} c={c} open={runOpen} onOpenChange={setRunOpen} onCollect={pull} />
       {editing && <EditCompetitor key={editing.error ? 'erro' : 'ok'} slug={slug} open onClose={() => setEditing(false)} onFailed={(draft, error) => setEditing({ draft, error })}
         data={editing.draft?.data ?? c} body={editing.draft?.body ?? d.body} initialError={editing.error} snapshotsCount={d.snapshotsTotal} />}

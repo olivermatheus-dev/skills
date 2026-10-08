@@ -1,14 +1,13 @@
 // Cards de conteúdo (vídeo/post) com as medidas de fora da curva, métricas e crescimento + painel de detalhe com marcação e "Virar ideia".
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, Clock, ExternalLink, Loader2, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
+import { Activity, Clock, ExternalLink, FileText, Loader2, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
 import type { ItemMark } from '../../api';
-import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../kit';
+import { Select, cx, fmtDate, fmtNum } from '../kit';
 import {
-  Img, MERCADO_MIN_AMOSTRA, MERCADO_MIN_CONCORRENTES, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row,
+  Img, MERCADO_MIN_AMOSTRA, MERCADO_MIN_CONCORRENTES, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, timeAgo, type Row,
 } from './lib';
 import { Tip } from './toolbar';
-import type { IdeaExtra } from './ficha/paraIdeia';
 
 export const isVertical = (r: Row) => ['short', 'reel'].includes(r.item.type) || r.platform === 'tiktok' || (r.platform === 'instagram' && r.item.type !== 'post');
 export const titleOf = (r: Row) => r.item.title || r.item.caption?.split('\n')[0] || `${TYPE_LABEL[r.item.type] ?? 'Item'} ${r.item.id}`;
@@ -118,7 +117,9 @@ export const FavStar = ({ on, onClick, size = 'size-4' }: { on: boolean; onClick
   </button>
 );
 
-export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner, ficha, select }: {
+export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner, ficha, select, relatorio, onRelatorio }: {
+  /** 042: conteúdo citado num relatório (o mais recente): atalho no rodapé do card */
+  relatorio?: { id: string; gerado: string }; onRelatorio?: () => void;
   /** 040 D: selo "Analisado" (ou "Na fila") no canto da miniatura */
   ficha?: FichaSelo;
   /** 040 E: caixa de seleção para analisar (aparece ao passar o mouse ou quando já há seleção) */
@@ -196,7 +197,12 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
               {ideaBusy ? <Spinner /> : <Sparkles className="size-3" />} Virar ideia
             </button>
           )}
-          <a href={r.item.url} target="_blank" rel="noreferrer" className="ml-auto text-muted-foreground hover:text-foreground px-1" title={`Abrir no ${platformLabel(r.platform)}`}><ExternalLink className="size-3.5" /></a>
+          {relatorio && onRelatorio && (
+            <Tip content={`Relatório: citado em ${fmtDate(relatorio.gerado)}. Clique para abrir.`}>
+              <button type="button" onClick={onRelatorio} aria-label="Abrir o relatório que cita este conteúdo" className="ml-auto inline-flex items-center text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-500/10 p-1 rounded-md"><FileText className="size-3.5" /></button>
+            </Tip>
+          )}
+          <a href={r.item.url} target="_blank" rel="noreferrer" className={cx(!relatorio && 'ml-auto', 'text-muted-foreground hover:text-foreground px-1')} title={`Abrir no ${platformLabel(r.platform)}`}><ExternalLink className="size-3.5" /></a>
         </div>
       </div>
     </div>
@@ -204,7 +210,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
 }
 
 /** mini-série de views do item ao longo das coletas */
-function ViewsHistory({ r }: { r: Row }) {
+export function ViewsHistory({ r }: { r: Row }) {
   const pts = r.history.filter((h) => h.views != null) as { at: string; views: number }[];
   if (pts.length < 2) return <div className="text-xs text-muted-foreground">O crescimento aparece a partir da 2ª coleta que incluir este item.</div>;
   const W = 520, H = 70, lo = Math.min(...pts.map((p) => p.views)), hi = Math.max(...pts.map((p) => p.views));
@@ -229,121 +235,5 @@ function ViewsHistory({ r }: { r: Row }) {
         </tbody>
       </table>
     </div>
-  );
-}
-
-export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, slug, profileLabel, tagSuggestions, focusIdea, extra }: {
-  /** bloco logo abaixo do título (040 D: "Analisar este" quando o item ainda não tem análise) */
-  extra?: ReactNode;
-  /** abre já no "Virar ideia" (rola até o bloco e foca o título) */
-  focusIdea?: boolean;
-  r: Row | null; media?: string; open: boolean; onClose: () => void; slug: string; profileLabel?: string; tagSuggestions: string[];
-  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string, extra?: IdeaExtra) => void; ideaBusy: boolean;
-}) {
-  const [note, setNote] = useState('');
-  const [tags, setTags] = useState('');
-  const [ideaTitle, setIdeaTitle] = useState('');
-  const ideaRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!open || !focusIdea) return;
-    const t = setTimeout(() => { ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }); }, 250);
-    return () => clearTimeout(t);
-  }, [open, focusIdea, r?.mk]);
-  useEffect(() => {
-    if (!r) return;
-    setNote(r.mark?.note ?? '');
-    setTags((r.mark?.tags ?? []).join(', '));
-    setIdeaTitle(titleOf(r).slice(0, 120));
-  }, [r?.mk]); // eslint-disable-line react-hooks/exhaustive-deps
-  if (!r) return null;
-  const m = r.mark;
-  const parseTags = (s: string) => [...new Set(s.split(/[,\s]+/).map((t) => slugify(t.replace(/^#/, ''))).filter((t) => t && t !== 'item'))];
-  const saveTags = () => { const t = parseTags(tags); if (t.join() !== (m?.tags ?? []).join()) onMark({ tags: t }); setTags(t.join(', ')); };
-  const saveNote = () => { if (note !== (m?.note ?? '')) onMark({ note }); };
-
-  return (
-    <Drawer open={open} onClose={() => { saveNote(); saveTags(); onClose(); }} width="max-w-xl"
-      title={<span className="flex items-center gap-2"><PlatformIcon platform={r.platform} size={16} /> {TYPE_LABEL[r.item.type]} · {profileLabel}</span>}>
-      <div className="-mx-6 -mt-6 mb-4 relative">
-        <Thumb r={r} media={media} className={isVertical(r) ? 'aspect-[4/3]' : 'aspect-video'} />
-        <div className="absolute top-3 left-3"><OutlierBadges r={r} big /></div>
-      </div>
-      <h2 className="text-lg font-semibold leading-snug">{titleOf(r)}</h2>
-      <div className="text-sm text-muted-foreground mt-1">
-        {r.item.publishedAt ? `Publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : 'Data de publicação desconhecida'}
-        {fmtDur(r.item.durationS) && ` · ${fmtDur(r.item.durationS)}`}
-        {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink">abrir original ↗</a>
-      </div>
-      {extra}
-
-      <div className="grid grid-cols-4 gap-2 my-4">
-        {([['Views', r.item.metrics.views, r.viewsDelta], ['Curtidas', r.item.metrics.likes], ['Comentários', r.item.metrics.comments], ['Engajamento', undefined]] as [string, number | undefined, number?][]).map(([label, v, d]) => (
-          <div key={label} className="bg-muted rounded-lg p-2.5">
-            <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
-            <div className="font-semibold tabular-nums">{label === 'Engajamento' ? fmtPct(r.engagement) : fmtNum(v)}</div>
-            {d != null && d !== 0 && <div className="text-[11px] text-success-ink tabular-nums">{fmtDelta(d)}</div>}
-          </div>
-        ))}
-      </div>
-      <div className="mb-4 rounded-lg border border-border divide-y divide-border text-sm">
-        {([
-          ['× perfil', r.outlier, perfilTip(r)],
-          ['× mercado', r.outlierMercado, r.outlierMercado != null ? mercadoTip(r) : mercadoVazioTip(r)],
-          ['Por seguidor', r.porSeguidor != null ? fmtPct(r.porSeguidor) : undefined, porSeguidorTip(r)],
-        ] as [string, number | string | undefined, string | undefined][]).map(([label, v, tip]) => (
-          <div key={label} className="px-3 py-2 flex items-start gap-3">
-            <div className="w-24 shrink-0 font-medium tabular-nums">{typeof v === 'number' ? <RatioCell v={v} /> : (v ?? <span className="text-muted-foreground">—</span>)}<div className="text-[11px] font-normal text-muted-foreground">{label}</div></div>
-            <div className="text-xs text-muted-foreground whitespace-pre-line">{tip ?? 'Sem dados para calcular.'}</div>
-          </div>
-        ))}
-      </div>
-      {(r.item.metrics.shares != null || r.item.metrics.saves != null) && (
-        <div className="text-xs text-muted-foreground -mt-2 mb-4">Compartilhamentos {fmtNum(r.item.metrics.shares)} · Salvamentos {fmtNum(r.item.metrics.saves)}</div>
-      )}
-
-      {r.item.caption && r.item.caption !== r.item.title && (
-        <details className="mb-4" open={!r.item.title}>
-          <summary className="text-xs font-medium text-muted-foreground uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
-          <p className="text-sm whitespace-pre-line mt-2 max-h-48 overflow-y-auto bg-muted rounded-lg p-3">{r.item.caption}</p>
-        </details>
-      )}
-
-      <div className="mb-5">
-        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Views por coleta</div>
-        <ViewsHistory r={r} />
-      </div>
-
-      <div className="border-t border-border pt-4">
-        <div className="flex items-center gap-3 mb-4">
-          <FavStar on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="size-5" />
-          <Select value={m?.status ?? 'nova'} onChange={(e) => onMark({ status: e.target.value as ItemMark['status'] })}>
-            {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-          </Select>
-          {m?.updated && <span className="text-xs text-muted-foreground">marcado {timeAgo(m.updated)}</span>}
-        </div>
-        <Field label="Tags" hint="separadas por vírgula; salvam ao sair do campo">
-          <Input className="w-full" list="item-tags" value={tags} onChange={(e) => setTags(e.target.value)} onBlur={saveTags} placeholder="ex.: gancho-forte, humor" />
-          <datalist id="item-tags">{tagSuggestions.map((t) => <option key={t} value={t} />)}</datalist>
-        </Field>
-        <Field label="Nota" hint="o que chamou atenção: gancho, estrutura, formato…">
-          <Textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
-        </Field>
-
-        <div ref={ideaRef} data-virar-ideia className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
-          {m?.ideaId ? (
-            <div className="text-sm"><Sparkles className="inline size-3.5 -mt-0.5" /> Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
-          ) : (
-            <>
-              <div className="text-xs font-medium text-primary-ink uppercase tracking-wide mb-2">Virar ideia</div>
-              <div className="flex gap-2">
-                <Input className="flex-1" value={ideaTitle} onChange={(e) => setIdeaTitle(e.target.value)} placeholder="Título da ideia" />
-                <Button disabled={!ideaTitle.trim() || ideaBusy} onClick={() => { saveNote(); onIdea(ideaTitle.trim(), parseTags(tags), note); }}>{ideaBusy ? <Spinner /> : 'Criar ideia'}</Button>
-              </div>
-              <div className="text-xs text-muted-foreground mt-1.5">Leva o link, as métricas, o outlier e a sua nota; o item fica como “analisada”.</div>
-            </>
-          )}
-        </div>
-      </div>
-    </Drawer>
   );
 }

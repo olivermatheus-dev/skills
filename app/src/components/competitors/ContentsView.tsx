@@ -62,7 +62,9 @@ const DEFAULTS_ALL = { ...DEFAULTS, periodo: 'tudo' };
 
 const VIEWS_PANEL = [{ value: 'grade', label: 'Grade', icon: LayoutGrid }, { value: 'tabela', label: 'Tabela', icon: TableIcon }, { value: 'painel', label: 'Painel', icon: LayoutDashboard }];
 
-export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass, fichaOf, compId, compLabel }: {
+export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass, fichaOf, compId, compLabel, relatorioOf, onRelatorio }: {
+  /** 042: relatório que cita o conteúdo (selo no card) e como abri-lo */
+  relatorioOf?: (r: CRow) => { id: string; gerado: string } | undefined; onRelatorio?: (r: CRow, id: string) => void;
   /** ficha de um concorrente: as linhas não trazem compId (040 E usa para a fila) */
   compId?: string; compLabel?: string;
   /** 040 D: análise profunda do item (selo "Analisado" e filtro "Só analisados") */
@@ -183,7 +185,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const grid = (
     <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
       {shown.map((r) => (
-        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)} ficha={seloOf(r)}
+        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)} ficha={seloOf(r)} relatorio={relatorioOf?.(r)} onRelatorio={() => { const x = relatorioOf?.(r); if (x) onRelatorio?.(r, x.id); }}
           select={selOn ? { checked: s.has(r), disabled: !!s.motivo(r), title: s.motivo(r) ?? 'Selecionar para analisar', always: s.itens.length > 0 && !s.motivo(r), onChange: () => s.toggle(r) } : undefined}
           onMark={(patch) => onMark(r, patch)} onIdea={() => onIdea(r)} onOpen={() => onOpen(r)} />
       ))}

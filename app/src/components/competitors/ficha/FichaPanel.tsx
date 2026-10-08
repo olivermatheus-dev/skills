@@ -1,22 +1,23 @@
-// Painel do item (040 D): diálogo grande com a análise profunda de um conteúdo. Hierarquia pensada para "por que funcionou, em 10 s":
+// Painel do item (040 D, unificado na 042): diálogo grande, o mesmo com ou sem análise profunda. Hierarquia pensada para "por que funcionou, em 10 s":
 // à esquerda a mídia, os quadros-chave e o desempenho; à direita a hipótese (por quê), headline e gancho, os 5 s e a classificação;
 // abaixo, abas Resumo · Roteiro · Detalhes · Fonte. Tudo editável: cada edição vai para `override` (nunca apagado pela reanálise),
 // marcada como "você"; se a IA mudar de ideia numa reanálise posterior, o campo mostra "a IA agora diz: …".
-import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Captions, CircleDot, Clock, ExternalLink, Film, Flame, Lightbulb, Pencil, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
+  Captions, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
 } from 'lucide-react';
 import type { EdicaoInfo, FichaView, ItemMark, OpcaoVocab, VocabView } from '../../../api';
 import type { FichaCampos } from '../../../../../schema/ficha';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
-import { Button, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../../kit';
-import { PlatformIcon, Spinner, TYPE_LABEL, fmtPct, fmtRatio, platformLabel, timeAgo, type Row } from '../lib';
-import { Thumb, FavStar, ItemDrawer, isVertical, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from '../Items';
+import { Button, Field, Input, SelectField, Textarea, cx, fmtDate, fmtNum, type SelectOption } from '../../kit';
+import { PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row } from '../lib';
+import { Thumb, FavStar, ViewsHistory, isVertical, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from '../Items';
 import { Tip } from '../toolbar';
 import { useFicha, useFichasResumo, useFichasVocab, usePedido } from './useFichas';
 import { analiseParaIdeia, type IdeaExtra } from './paraIdeia';
+import { RelatorioDialog } from '../relatorios/Relatorios';
 
 /** "Virar ideia" dentro do painel: `foco` = a adaptação escolhida (sem foco = o item inteiro) */
 type OnIdea = (title: string, foco?: { ideia: string; formato?: string | null }) => void;
@@ -522,7 +523,7 @@ function Fonte() {
 /** "Por que funcionou" muda de título conforme o desempenho, para a leitura bater com o número */
 const tituloPorQue = (x?: number | null) => (x == null ? 'Por que performou assim' : x >= 1.5 ? 'Por que funcionou' : x < 0.9 ? 'Por que não decolou' : 'Por que ficou na média');
 
-function Corpo({ r, media, onIdea, ideaBusy }: { r: Row; media?: string; onIdea: OnIdea; ideaBusy: boolean }) {
+function Corpo({ r, media, onIdea, ideaBusy, nota, temNota }: { r: Row; media?: string; onIdea: OnIdea; ideaBusy: boolean; nota: ReactNode; temNota: boolean }) {
   const { v, edit } = useF();
   const c = v.campos;
   // o porQue é guardado como a IA escreve ("hipótese: …"); a tela tira o prefixo e o devolve ao salvar
@@ -579,6 +580,7 @@ function Corpo({ r, media, onIdea, ideaBusy }: { r: Row; media?: string; onIdea:
               <TabsTrigger value="resumo">Resumo</TabsTrigger>
               <TabsTrigger value="roteiro"><Captions />Roteiro</TabsTrigger>
               <TabsTrigger value="detalhes">Detalhes</TabsTrigger>
+              <TabsTrigger value="nota">Minha nota{temNota && <span className="size-1.5 rounded-full bg-primary" />}</TabsTrigger>
               <TabsTrigger value="fonte">Fonte</TabsTrigger>
             </TabsList>
           </div>
@@ -586,6 +588,7 @@ function Corpo({ r, media, onIdea, ideaBusy }: { r: Row; media?: string; onIdea:
             <TabsContent value="resumo"><Resumo c={c} onIdea={onIdea} ideaBusy={ideaBusy} /></TabsContent>
             <TabsContent value="roteiro"><Roteiro c={c} /></TabsContent>
             <TabsContent value="detalhes"><Detalhes c={c} /></TabsContent>
+            <TabsContent value="nota"><div className="max-w-xl">{nota}</div></TabsContent>
             <TabsContent value="fonte"><Fonte /></TabsContent>
           </div>
         </Tabs>
@@ -616,106 +619,264 @@ function Cinco({ c }: { c: Campos }) {
   );
 }
 
-export function FichaDialog({ open, onClose, r, slug, compId, media, profileLabel, onMark, onIdea, ideaBusy }: {
-  open: boolean; onClose: () => void; r: Row; slug: string; compId: string; media?: string; profileLabel?: string;
-  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string, extra?: IdeaExtra) => void; ideaBusy: boolean;
-}) {
-  const fq = useFicha(slug, compId, r.mk, open);
-  const vocab = useFichasVocab(slug);
-  const v = fq.data;
-  const ctx = useMemo<Ctx | null>(() => (v ? { v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [v, vocab.data, fq.saving, fq.edit, fq.revert]);
+// ───────────────────────── marcação do Oliver (status, tags, nota) ─────────────────────────
+/** tags e nota em edição; salvam ao sair do campo, ao trocar de item e ao fechar o painel (o cleanup grava o que sobrou) */
+function useMarcacao(r: Row, onMark: (patch: Partial<ItemMark>) => void) {
   const m = r.mark;
-  const a = v?.ficha.analise;
-  // a análise inteira vai para o corpo da ideia; a ficha e o relatório de origem ficam no `source` (040 I)
-  const idea: OnIdea = (title, foco) => onIdea(title, m?.tags ?? [], m?.note ?? '', v ? analiseParaIdeia(v, compId, foco) : undefined);
-  return (
-    <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent aria-describedby={undefined}
-        className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
-        <header className="flex items-center gap-3 px-6 py-3.5 pr-14 border-b border-border">
-          <PlatformIcon platform={r.platform} size={20} />
-          <div className="min-w-0 flex-1">
-            <DialogTitle className="text-base font-semibold leading-snug truncate" title={titleOf(r)}>{titleOf(r)}</DialogTitle>
-            <DialogDescription className="text-xs text-muted-foreground mt-0.5 truncate">
-              {platformLabel(r.platform)} · {TYPE_LABEL[r.item.type] ?? r.item.type}{profileLabel ? ` · ${profileLabel}` : ''}
-              {r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · publicado em ${fmtDate(r.item.publishedAt)}` : ''}
-              {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink inline-flex items-center gap-0.5">abrir original<ExternalLink className="size-3" /></a>
-            </DialogDescription>
-          </div>
-          {fq.saving && <span className="text-xs text-muted-foreground inline-flex items-center gap-1"><Spinner />salvando</span>}
-          {a && (
-            <Tip content={`Análise de ${a.modelo} em ${fmtDate(a.geradoEm)}.\nO que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
-              <span className="inline-flex items-center gap-1 rounded-full bg-violet-600 text-white text-[11px] font-medium px-2 py-0.5 shrink-0"><Sparkles className="size-3" />Análise da IA · {fmtDate(a.geradoEm)}</span>
-            </Tip>
-          )}
-        </header>
-
-        {!ctx ? (
-          <div className="flex-1 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>
-        ) : (
-          <FCtx.Provider value={ctx}>
-            <Corpo r={r} media={media} onIdea={idea} ideaBusy={ideaBusy} />
-          </FCtx.Provider>
-        )}
-
-        <footer className="flex items-center gap-3 px-6 py-3 border-t border-border bg-muted/30">
-          <FavStar on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="size-5" />
-          {m?.ideaId ? (
-            <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-sm font-medium text-success-ink"><Sparkles className="size-3.5" />Virou a ideia {m.ideaId}</Link>
-          ) : (
-            <Button variant="soft" disabled={ideaBusy || !v} className="inline-flex items-center gap-1.5"
-              onClick={() => idea((v?.campos.headline?.texto || titleOf(r)).slice(0, 120))}>
-              {ideaBusy ? <Spinner /> : <Lightbulb className="size-4" />}Virar ideia
-            </Button>
-          )}
-          <span className="text-xs text-muted-foreground hidden md:inline">Clique em qualquer valor para corrigir. O que você muda fica guardado à parte e vale sobre a IA.</span>
-          <Tip content="Reanalisar entra pela fila de fichas (fase E). Suas edições continuam.">
-            <span className="ml-auto"><Button variant="ghost" disabled className="inline-flex items-center gap-1.5"><RefreshCw className="size-3.5" />Reanalisar</Button></span>
-          </Tip>
-        </footer>
-      </DialogContent>
-    </Dialog>
-  );
+  const [note, setNote] = useState(m?.note ?? '');
+  const [tags, setTags] = useState((m?.tags ?? []).join(', '));
+  const parseTags = (s: string) => [...new Set(s.split(/[,\s]+/).map((t) => slugify(t.replace(/^#/, ''))).filter((t) => t && t !== 'item'))];
+  const latest = useRef({ note, tags, m, onMark });
+  latest.current = { note, tags, m, onMark };
+  const flush = useCallback(() => {
+    const { note: n, tags: t, m: mk, onMark: om } = latest.current;
+    const patch: Partial<ItemMark> = {};
+    if (n !== (mk?.note ?? '')) patch.note = n;
+    const pt = parseTags(t);
+    if (pt.join() !== (mk?.tags ?? []).join()) patch.tags = pt;
+    if (Object.keys(patch).length) om(patch);
+  }, []);
+  useEffect(() => () => flush(), [flush]);
+  const saveTags = () => { flush(); setTags(parseTags(tags).join(', ')); };
+  return { note, setNote, tags, setTags, parseTags, flush, saveTags };
 }
+type Marcacao = ReturnType<typeof useMarcacao>;
 
-// ───────────────────────── sem ficha: gaveta de sempre + "Analisar este" ─────────────────────────
-function AnalyzeBox({ slug, compId, mk, naFila }: { slug: string; compId: string; mk: string; naFila: boolean }) {
-  const { pedir, cancelar } = usePedido(slug, compId, mk);
-  const busy = pedir.isPending || cancelar.isPending;
-  const err = (pedir.error ?? cancelar.error) as { message?: string } | null;
+function CamposMarcacao({ mar, suggestions }: { mar: Marcacao; suggestions: string[] }) {
   return (
-    <div className="mt-4 rounded-lg border border-violet-200 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/25 p-3">
-      <div className="flex items-center gap-3">
-        <ScanSearch className="size-5 text-violet-600 shrink-0" />
-        <div className="flex-1 min-w-0">
-          <div className="text-sm font-medium">{naFila ? 'Na fila de análise' : 'Análise profunda da IA'}</div>
-          <div className="text-xs text-muted-foreground">{naFila
-            ? 'Roda quando você pedir “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por item).'
-            : 'Tema, tipo, gancho, gatilhos dos 5 s e por que funcionou. Grava o pedido; nada roda sozinho.'}</div>
-        </div>
-        {naFila
-          ? <Button variant="ghost" disabled={busy} onClick={() => cancelar.mutate()} className="shrink-0 !h-8 text-xs">{busy ? <Spinner /> : 'Tirar da fila'}</Button>
-          : <Button disabled={busy} onClick={() => pedir.mutate()} className="shrink-0 !h-8 inline-flex items-center gap-1.5">{busy ? <Spinner /> : <ScanSearch className="size-3.5" />}Analisar este</Button>}
-      </div>
-      {err?.message && <div className="text-xs text-destructive mt-2">{err.message}</div>}
+    <div className="space-y-3">
+      <Field label="Tags" hint="separadas por vírgula; salvam ao sair do campo">
+        <Input className="w-full" list="item-tags" value={mar.tags} onChange={(e) => mar.setTags(e.target.value)} onBlur={mar.saveTags} placeholder="ex.: gancho-forte, humor" />
+        <datalist id="item-tags">{suggestions.map((t) => <option key={t} value={t} />)}</datalist>
+      </Field>
+      <Field label="Nota" hint="o que chamou atenção: gancho, estrutura, formato…">
+        <Textarea rows={3} value={mar.note} onChange={(e) => mar.setNote(e.target.value)} onBlur={mar.flush} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
+      </Field>
     </div>
   );
 }
 
-/**
- * Abre o item: com análise → painel grande (FichaDialog); sem → a gaveta de sempre com "Analisar este".
- * Mesmas props do ItemDrawer + `compId` (dono do item).
- */
-export function ItemPanel(p: React.ComponentProps<typeof ItemDrawer> & { compId?: string }) {
-  const { compId, ...drawer } = p;
-  const res = useFichasResumo(p.slug);
-  const r = p.r;
-  const info = r ? res.of(compId, r.mk) : undefined;
-  if (p.open && r && res.loading) return null; // evita piscar a gaveta antes do painel
-  if (r && compId && info?.analisada) {
-    return <FichaDialog open={p.open} onClose={p.onClose} r={r} slug={p.slug} compId={compId} media={p.media} profileLabel={p.profileLabel}
-      onMark={p.onMark} onIdea={p.onIdea} ideaBusy={p.ideaBusy} />;
-  }
-  return <ItemDrawer {...drawer} extra={r && compId ? <AnalyzeBox slug={p.slug} compId={compId} mk={r.mk} naFila={!!info?.naFila} /> : undefined} />;
+// ───────────────────────── "Analisar / Reanalisar" ─────────────────────────
+function useAnalisar(slug: string, compId: string, mk: string) {
+  const { pedir, cancelar } = usePedido(slug, compId, mk);
+  const err = (pedir.error ?? cancelar.error) as { message?: string } | null;
+  return { pedir, cancelar, busy: pedir.isPending || cancelar.isPending, erro: err?.message };
 }
 
+/** estado vazio de um conteúdo ainda sem análise: o convite é a ação principal da tela */
+function SemAnaliseConvite({ naFila, a }: { naFila: boolean; a: ReturnType<typeof useAnalisar> }) {
+  return (
+    <div className="rounded-xl border border-dashed border-violet-300 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/30 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+      <ScanSearch className="size-8 text-violet-600 shrink-0" strokeWidth={1.5} />
+      <div className="flex-1 min-w-0">
+        <div className="font-semibold">{naFila ? 'Na fila de análise' : 'Ainda sem análise'}</div>
+        <p className="text-sm text-muted-foreground mt-0.5">{naFila
+          ? 'Roda quando você pedir “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por item).'
+          : 'A IA lê o vídeo e devolve tema, tipo, gancho, gatilhos dos 5 s e por que funcionou. Grava o pedido; nada roda sozinho.'}</p>
+        {a.erro && <p className="text-xs text-destructive mt-1">{a.erro}</p>}
+      </div>
+      {naFila
+        ? <Button variant="ghost" disabled={a.busy} onClick={() => a.cancelar.mutate()} className="shrink-0">{a.busy ? <Spinner /> : 'Tirar da fila'}</Button>
+        : <Button disabled={a.busy} onClick={() => a.pedir.mutate()} className="shrink-0 inline-flex items-center gap-1.5">{a.busy ? <Spinner /> : <ScanSearch className="size-4" />}Analisar este</Button>}
+    </div>
+  );
+}
+
+// ───────────────────────── sem análise: o miolo ─────────────────────────
+/** coluna da esquerda sem ficha: os mesmos números (× perfil, × mercado, por seguidor) lidos da última coleta */
+function ColunaSimples({ r, media }: { r: Row; media?: string }) {
+  const m = r.item.metrics;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-1.5">
+        <Ratio v={r.outlier} label="× perfil" tip={r.outlier != null ? perfilTip(r) : 'views ÷ mediana do próprio perfil'} />
+        <Ratio v={r.outlierMercado} label="× mercado" tip={r.outlierMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
+        <Ratio v={r.porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
+      </div>
+      <Thumb r={r} media={media} className={cx('rounded-xl mx-auto', isVertical(r) ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')} />
+      <div>
+        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Números</div>
+        <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
+          {([['Views', m.views], ['Curtidas', m.likes], ['Comentários', m.comments], ['Envios', m.shares], ...(m.saves != null ? [['Salvos', m.saves]] : [])] as [string, number | undefined][]).map(([k, n]) => (
+            <div key={k} className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1">
+              <dt className="text-xs text-muted-foreground">{k}</dt><dd className="font-semibold tabular-nums">{fmtNum(n)}</dd>
+            </div>
+          ))}
+          <div className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1 col-span-2">
+            <dt className="text-xs text-muted-foreground">Engajamento</dt><dd className="font-semibold tabular-nums">{fmtPct(r.engagement)}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  );
+}
+
+function CorpoSemAnalise({ r, media, mar, suggestions, a, naFila, slug, ideaTitle, setIdeaTitle, ideaBusy, onIdea, focusIdea, ideaRef }: {
+  r: Row; media?: string; mar: Marcacao; suggestions: string[]; a: ReturnType<typeof useAnalisar>; naFila: boolean; slug: string;
+  ideaTitle: string; setIdeaTitle: (s: string) => void; ideaBusy: boolean; onIdea: () => void; focusIdea?: boolean; ideaRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const m = r.mark;
+  useEffect(() => {
+    if (!focusIdea) return;
+    const t = setTimeout(() => { ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }); }, 250);
+    return () => clearTimeout(t);
+  }, [focusIdea, r.mk, ideaRef]);
+  return (
+    <div className="flex-1 min-h-0 grid lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)] overflow-y-auto lg:overflow-hidden">
+      <aside className="lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-border bg-muted/30 p-5"><ColunaSimples r={r} media={media} /></aside>
+      <div className="lg:overflow-y-auto p-6 space-y-6">
+        <SemAnaliseConvite naFila={naFila} a={a} />
+        {r.item.caption && r.item.caption !== r.item.title && (
+          <details open={!r.item.title}>
+            <summary className="text-xs font-medium text-muted-foreground uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
+            <p className="text-sm whitespace-pre-line mt-2 max-h-48 overflow-y-auto bg-muted rounded-lg p-3">{r.item.caption}</p>
+          </details>
+        )}
+        <div>
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Views por coleta</div>
+          <ViewsHistory r={r} />
+        </div>
+        <CamposMarcacao mar={mar} suggestions={suggestions} />
+        <div ref={ideaRef} data-virar-ideia className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
+          {m?.ideaId ? (
+            <div className="text-sm"><Sparkles className="inline size-3.5 -mt-0.5" /> Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
+          ) : (
+            <>
+              <div className="text-xs font-medium text-primary-ink uppercase tracking-wide mb-2">Virar ideia</div>
+              <div className="flex gap-2">
+                <Input className="flex-1" value={ideaTitle} onChange={(e) => setIdeaTitle(e.target.value)} placeholder="Título da ideia" />
+                <Button disabled={!ideaTitle.trim() || ideaBusy} onClick={onIdea}>{ideaBusy ? <Spinner /> : 'Criar ideia'}</Button>
+              </div>
+              <div className="text-xs text-muted-foreground mt-1.5">Leva o link, as métricas, o outlier e a sua nota; o item fica como “analisada”.</div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ───────────────────────── o diálogo único (042) ─────────────────────────
+const STATUS_OPTS: SelectOption[] = Object.entries(STATUS_LABEL).map(([k, label]) => ({ value: k, label, icon: <span className="size-2 rounded-full" style={{ background: STATUS_COLOR[k as ItemMark['status']] }} /> }));
+
+export interface ItemPanelProps {
+  r: Row | null; compId?: string; media?: string; open: boolean; onClose: () => void; slug: string; profileLabel?: string; tagSuggestions: string[];
+  /** abre já no "Virar ideia" (rola até o bloco e foca o título) */
+  focusIdea?: boolean;
+  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string, extra?: IdeaExtra) => void; ideaBusy: boolean;
+  /** um item citado no relatório de origem foi clicado (outro que não este): quem usa troca o painel */
+  onOpenItem?: (key: string) => void;
+}
+
+/**
+ * Um painel só para o conteúdo (042): mesma moldura com ou sem análise (cabeçalho, coluna da mídia e dos números, rodapé com favorito,
+ * status, Virar ideia e Analisar/Reanalisar). O miolo muda: com análise = abas da ficha; sem = convite "Analisar este" + nota, tags e ideia.
+ */
+export function ItemPanel(p: ItemPanelProps) {
+  const res = useFichasResumo(p.slug);
+  if (!p.r || !p.compId || !p.open) return null;
+  if (res.loading) return null; // evita piscar o estado vazio antes de saber se há análise
+  return <Painel key={`${p.compId}/${p.r.mk}`} {...p} r={p.r} compId={p.compId} analisada={!!res.of(p.compId, p.r.mk)?.analisada} naFila={!!res.of(p.compId, p.r.mk)?.naFila} />;
+}
+
+function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, profileLabel, tagSuggestions, focusIdea, onMark, onIdea, ideaBusy, onOpenItem }:
+  ItemPanelProps & { r: Row; compId: string; analisada: boolean; naFila: boolean }) {
+  const fq = useFicha(slug, compId, r.mk, open && analisada);
+  const vocab = useFichasVocab(slug);
+  const v = analisada ? fq.data : undefined;
+  const ctx = useMemo<Ctx | null>(() => (v ? { v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [v, vocab.data, fq.saving, fq.edit, fq.revert]);
+  const m = r.mark;
+  const a = v?.ficha.analise;
+  const mar = useMarcacao(r, onMark);
+  const an = useAnalisar(slug, compId, r.mk);
+  const [ideaTitle, setIdeaTitle] = useState(() => titleOf(r).slice(0, 120));
+  const [relAberto, setRelAberto] = useState(false);
+  const ideaRef = useRef<HTMLDivElement>(null);
+  // com análise: a análise inteira vai para o corpo da ideia; a ficha e o relatório de origem ficam no `source` (040 I)
+  const ideiaAnalisada: OnIdea = (title, foco) => { mar.flush(); onIdea(title, m?.tags ?? [], m?.note ?? '', v ? analiseParaIdeia(v, compId, foco) : undefined); };
+  const ideiaSimples = () => { mar.flush(); onIdea(ideaTitle.trim(), mar.parseTags(mar.tags), mar.note); };
+  const rel = v?.relatorio ?? null;
+  const fechar = () => { mar.flush(); onClose(); };
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
+        <DialogContent aria-describedby={undefined}
+          className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
+          <header className="flex items-center gap-3 px-6 py-3.5 pr-14 border-b border-border">
+            <PlatformIcon platform={r.platform} size={20} />
+            <div className="min-w-0 flex-1">
+              <DialogTitle className="text-base font-semibold leading-snug truncate" title={titleOf(r)}>{titleOf(r)}</DialogTitle>
+              <DialogDescription className="text-xs text-muted-foreground mt-0.5 truncate">
+                {platformLabel(r.platform)} · {TYPE_LABEL[r.item.type] ?? r.item.type}{profileLabel ? ` · ${profileLabel}` : ''}
+                {r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : ' · data desconhecida'}
+                {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink inline-flex items-center gap-0.5">abrir original<ExternalLink className="size-3" /></a>
+              </DialogDescription>
+            </div>
+            {fq.saving && <span className="text-xs text-muted-foreground inline-flex items-center gap-1"><Spinner />salvando</span>}
+            {rel && (
+              <Tip content={`Este conteúdo é citado no relatório de ${fmtDate(rel.gerado)}.\nAbre o relatório.`}>
+                <button type="button" onClick={() => setRelAberto(true)} className="inline-flex items-center gap-1 rounded-full border border-violet-300 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-500/10 text-[11px] font-medium px-2 py-0.5 shrink-0">
+                  <FileText className="size-3" />Relatório de origem
+                </button>
+              </Tip>
+            )}
+            {a ? (
+              <Tip content={`Análise de ${a.modelo} em ${fmtDate(a.geradoEm)}.\nO que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
+                <span className="inline-flex items-center gap-1 rounded-full bg-violet-600 text-white text-[11px] font-medium px-2 py-0.5 shrink-0"><Sparkles className="size-3" />Análise da IA · {fmtDate(a.geradoEm)}</span>
+              </Tip>
+            ) : !analisada && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground text-[11px] font-medium px-2 py-0.5 shrink-0">{naFila ? <><Clock className="size-3" />Na fila</> : 'Sem análise'}</span>
+            )}
+          </header>
+
+          {!analisada ? (
+            <CorpoSemAnalise r={r} media={media} mar={mar} suggestions={tagSuggestions} a={an} naFila={naFila} slug={slug} ideaTitle={ideaTitle} setIdeaTitle={setIdeaTitle}
+              ideaBusy={ideaBusy} onIdea={ideiaSimples} focusIdea={focusIdea} ideaRef={ideaRef} />
+          ) : !ctx ? (
+            <div className="flex-1 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>
+          ) : (
+            <FCtx.Provider value={ctx}>
+              <Corpo r={r} media={media} onIdea={ideiaAnalisada} ideaBusy={ideaBusy}
+                nota={<CamposMarcacao mar={mar} suggestions={tagSuggestions} />} temNota={!!(m?.note || m?.tags.length)} />
+            </FCtx.Provider>
+          )}
+
+          <footer className="flex flex-wrap items-center gap-x-3 gap-y-2 px-6 py-3 border-t border-border bg-muted/30">
+            <FavStar on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="size-5" />
+            <SelectField size="sm" aria-label="Status" value={m?.status ?? 'nova'} options={STATUS_OPTS} onChange={(x) => onMark({ status: x as ItemMark['status'] })} />
+            {m?.ideaId ? (
+              <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-sm font-medium text-success-ink"><Sparkles className="size-3.5" />Virou a ideia {m.ideaId}</Link>
+            ) : analisada ? (
+              <Button variant="soft" disabled={ideaBusy || !v} className="inline-flex items-center gap-1.5"
+                onClick={() => ideiaAnalisada((v?.campos.headline?.texto || titleOf(r)).slice(0, 120))}>
+                {ideaBusy ? <Spinner /> : <Lightbulb className="size-4" />}Virar ideia
+              </Button>
+            ) : (
+              <Button variant="soft" disabled={ideaBusy} className="inline-flex items-center gap-1.5"
+                onClick={() => { ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }); }}>
+                <Lightbulb className="size-4" />Virar ideia
+              </Button>
+            )}
+            {m?.updated && <span className="text-xs text-muted-foreground hidden lg:inline">marcado {timeAgo(m.updated)}</span>}
+            {analisada && <span className="text-xs text-muted-foreground hidden xl:inline">Clique em qualquer valor para corrigir. O que você muda fica guardado à parte e vale sobre a IA.</span>}
+            {analisada && (
+              <span className="ml-auto inline-flex items-center gap-2">
+                {an.erro && <span className="text-xs text-destructive">{an.erro}</span>}
+                {naFila
+                  ? <><span className="text-xs text-muted-foreground inline-flex items-center gap-1"><Clock className="size-3.5" />Reanálise na fila</span><Button variant="ghost" disabled={an.busy} onClick={() => an.cancelar.mutate()}>Tirar da fila</Button></>
+                  : <Tip content="Entra na fila de fichas; roda com “roda a fila de fichas” no Claude Code. Suas edições continuam."><span>
+                    <Button variant="ghost" disabled={an.busy} onClick={() => an.pedir.mutate()} className="inline-flex items-center gap-1.5">{an.busy ? <Spinner /> : <RefreshCw className="size-3.5" />}Reanalisar</Button>
+                  </span></Tip>}
+              </span>
+            )}
+          </footer>
+        </DialogContent>
+      </Dialog>
+      {relAberto && rel && (
+        <RelatorioDialog slug={slug} comp={compId} id={rel.id} onClose={() => setRelAberto(false)}
+          onOpenItem={(k) => { setRelAberto(false); if (k !== r.mk) onOpenItem?.(k); }} />
+      )}
+    </>
+  );
+}

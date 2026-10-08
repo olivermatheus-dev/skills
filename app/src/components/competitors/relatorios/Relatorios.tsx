@@ -2,7 +2,7 @@
 // compacta por data e rede, a leitura num diálogo (leitura em blocos à esquerda, números em tabela compacta à direita) e os
 // termos novos da rodada com "Aceitar todos" ou um a um. "Gerar relatório" abre o Claude Code num terminal (mesmo caminho do Rodar IA).
 import { useMemo, useState, type ReactNode } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Ban, Check, ChevronRight, Copy, ExternalLink, FileBarChart, Lightbulb, ScanSearch, ShieldAlert, Sparkles, TriangleAlert } from 'lucide-react';
 import { api, type RelatorioLinha, type RelatorioView } from '../../../api';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
@@ -34,6 +34,19 @@ interface ItemAg { key: string; url: string; titulo: string; duracaoS: number | 
 interface GrupoAg { valor: string; nome: string; n: number; fraca: boolean; itens: string[]; melhor: string | null; proposto?: boolean; lift: number | null; med: { xPerfil: number | null; xMercado: number | null; porSeguidor: number | null; engajamento: number | null } }
 interface Agregados { amostra?: { n: number; nivel: string; coletadosNaRede: number; avisos: string[] }; itens?: ItemAg[]; dimensoes?: Record<string, GrupoAg[]> }
 const DIMS: [string, string][] = [['tipo', 'Tipo'], ['formato', 'Formato'], ['tipoGancho', 'Gancho'], ['estrutura', 'Estrutura'], ['tema', 'Tema'], ['gatilho', 'Gatilhos'], ['elemento5s', '5 s'], ['produto', 'Produto']];
+
+
+/** itemKey → relatório mais recente que cita o item (um mapa por concorrente; a lista já vem do mais novo ao mais antigo) */
+export function useRelatorioPorItem(slug: string, comp: string) {
+  const lista = useQuery({ queryKey: rk.lista(slug, comp), queryFn: () => api.relatorios(slug, comp), enabled: !!slug && !!comp });
+  const ls = (lista.data ?? []).slice(0, 12);
+  const views = useQueries({ queries: ls.map((l) => ({ queryKey: rk.um(slug, comp, l.id), queryFn: () => api.relatorio(slug, comp, l.id), staleTime: 60_000 })) });
+  return useMemo(() => {
+    const m = new Map<string, { id: string; gerado: string }>();
+    ls.forEach((l, i) => { for (const k of views[i]?.data?.relatorio.itens ?? []) if (!m.has(k)) m.set(k, { id: l.id, gerado: l.gerado }); });
+    return m;
+  }, [lista.data, views.map((v) => v.dataUpdatedAt).join()]); // eslint-disable-line react-hooks/exhaustive-deps
+}
 
 // ───────────────────────── seção na aba ─────────────────────────
 export default function RelatoriosSection({ slug, comp, onOpenItem }: { slug: string; comp: string; onOpenItem: (key: string) => void }) {
@@ -95,7 +108,7 @@ function Destaque({ r, onOpen }: { r: RelatorioLinha; onOpen: () => void }) {
 }
 
 // ───────────────────────── leitura ─────────────────────────
-function RelatorioDialog({ slug, comp, id, onClose, onOpenItem }: { slug: string; comp: string; id: string; onClose: () => void; onOpenItem: (key: string) => void }) {
+export function RelatorioDialog({ slug, comp, id, onClose, onOpenItem }: { slug: string; comp: string; id: string; onClose: () => void; onOpenItem: (key: string) => void }) {
   const q = useQuery({ queryKey: rk.um(slug, comp, id), queryFn: () => api.relatorio(slug, comp, id) });
   const v = q.data;
   const r = v?.relatorio;
