@@ -10,6 +10,13 @@ Feito nesta sessão (commits `d4e68ac` … `f385891`):
 - **041 (fontes, F1–F2 feitas):** aba Ideias · **Fontes** (43 sugeridas), `npm run curadoria`, skill `curadoria`, 1ª rodada real: 8 ideias da série 3 com 13 referências verificadas. Falta F3 (botão no app).
 - Regra nova do app: **falar com a IA pelo app tem que ser fácil** (`roadmap/APP.md` > Princípio central).
 
+**Sessão orquestradora 2 (2026-10-08, tarde):** commits `10d5b3a` … `e045067`.
+- **038:** "Failed to fetch" resolvido na raiz (rotas em `app/server/handler.ts`, carregadas por `ssrLoadModule`: editar core/schema/tools não reinicia o app; servidor em 127.0.0.1; aviso "Reconectando…"). Contagens dos filtros de Anúncios e B12 feitos.
+- **040 I feita** (Virar ideia leva a ficha e o relatório de origem; content-ideas/ads-meta leem o relatório). **042 feita** (painel único do conteúdo, selo/link para o relatório, topo compacto) — aval do Oliver.
+- **041 F3 feita** (Pesquisar ideias no app, aba Pesquisas, chips de referência). Nenhuma rodada paga pelo botão ainda.
+- **037 B, C, D feitas** (classificador + gabarito de 45 a conferir pelo Oliver, chips/filtros/sinal/variações, painel do anúncio com override e Salvos). Funil pela temperatura do público (recomendação, sem resposta do Oliver).
+- **Próximo:** 040 G (gasta Opus em 10 anúncios da Corpora: pedir o sim do Oliver antes). Fila em `roadmap/PEDIDOS.md`.
+
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
 - **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca). Precisa do **Node 22** (no Node 20 o Vite não sobe).
