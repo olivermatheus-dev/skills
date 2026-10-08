@@ -16,7 +16,8 @@ Feito nesta sessão (commits `d4e68ac` … `f385891`):
 - **041 F3 feita** (Pesquisar ideias no app, aba Pesquisas, chips de referência). Nenhuma rodada paga pelo botão ainda.
 - **037 B, C, D feitas** (classificador + gabarito de 45 a conferir pelo Oliver, chips/filtros/sinal/variações, painel do anúncio com override e Salvos). Funil pela temperatura do público (recomendação, sem resposta do Oliver).
 - **040 G, código feito (2026-10-08):** fichas `meta-ads:<id>` (preparo pela miniatura, pacote com regras da 037 + motivo, histórico e landing), `correcaoRegra` com motivo, resolução você > IA > regra com chip de origem na aba Anúncios e no painel (funil/tipo/objetivo só no `marks.json`), "Analisar este"/"Analisar os N primeiros", prompt v2, relatório `--rede anuncios` (mínimo). 10 anúncios da Corpora **preparados, sem análise**.
-- **Próximo:** rodar o Opus nos 10 (precisa do sim do Oliver: app → Anúncios → Analisar os 10 → Rodar agora, ou "roda a fila de fichas da kz"). Depois 040 H. Fila em `roadmap/PEDIDOS.md`.
+- **040 G fechada (2026-10-08, com o sim do Oliver):** 10 anúncios da Corpora analisados pelo Opus (regra corrigida com motivo em 6) + relatório `corpora/relatorios/2026-10-08-anuncios-todos-analisados.md` com leitura. Para o Oliver: conferir as 6 correções, decidir 4 termos novos (`serie-identidade-psi`, `estatico-produto-oferta`, `lista-de-ferramentas-criador`, `risco:simbolo-politico`); a ideia 2 do relatório cita lembrete automático no WhatsApp (ainda não confirmado no `PRODUTO.md`).
+- **Próximo:** 040 H. Fila em `roadmap/PEDIDOS.md`.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
