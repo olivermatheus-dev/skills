@@ -7,13 +7,13 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
+| 1 | 040 | **Fase H (aceitar/recusar termos no painel):** G e I feitas (2026-10-08) | conferir antes se outra sessão já está nela |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
 | 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |
-| 040 | revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |
+| 040 | aceitar/recusar os 4 termos novos do relatório de anúncios da Corpora · revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |
 | 041 | avaliar as 8 ideias I-0001…I-0008 (app → Ideias) · aceitar as fontes (app → Ideias → Fontes, "Aceitar as 36 conferidas") · decidir as 7 "não conferido" · criar chave grátis do OpenAlex (`OPENALEX_API_KEY`) · podcasts/newsletters/criadores que ele segue |
 | 038/039 | usar as telas novas e apontar ajustes (Panorama, Conteúdos Grade/Tabela/Painel, Anúncios, Brechas, Lista, ficha com aba Anúncios) · Instagram da Kzloo como referência? · token do Instagram para > 6 posts? · preço final e teste grátis da Kzloo |
 | 037 | seção 13 do `TASK.md` (6 perguntas; a 1, funil por temperatura × pelo botão, trava a fase B) + "republicado" à parte do "reapareceu" + rotular o gabarito |
@@ -28,7 +28,6 @@
 | tarefa | pedido | próximo passo |
 |---|---|---|
 | 037 | anúncios: classificador funil/tipo/objetivo, chips, salvar/nota/tag, virar ideia, Gantt, Google | B → H (A feita; o visual da aba foi na 038 D) |
-| 040 | H completo (aceitar/recusar no painel; o lote no relatório já funciona) | depois da G |
 | 041 | F4 refino (páginas sem RSS: PePSIC, RBTC, OMS, CRPs; "Pedir à IA" ao colar link; peso pelo histórico) | após 5 rodadas reais |
 | 031 | pendências de coleta: 5 concorrentes sem página na Biblioteca, YouTube Allminds 404, YouTube Sintropia 0 itens | conferir links |
 | 022 | pinos no carrossel (fase D) | — |
