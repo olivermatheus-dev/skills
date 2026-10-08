@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Persona } from '../api';
 import { Button, Card, Drawer, Empty, ErrorBox, Field, Input, LinesInput, PageHeader, Select, Textarea, cx } from '../components/kit';
+import { FillBox } from '../components/fill';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { AWARENESS, AwarenessMeter } from '../components/personas/awareness';
@@ -59,7 +60,7 @@ export default function Personas() {
         <Empty title="Nenhuma persona cadastrada" hint="Comece pela persona primária: quem mais sente a dor que o produto resolve."
           action={<Button onClick={() => setOpen(blank())}>Criar persona</Button>} />
       )}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      {sorted.length > 0 && <FillBox><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {sorted.map((p) => (
           <Card key={p.data.id} onClick={() => setOpen(p)} className="cursor-pointer hover:border-primary/50 hover:shadow-sm transition flex flex-col gap-3">
             <div className="flex items-start justify-between gap-2">
@@ -85,7 +86,7 @@ export default function Personas() {
             {p.data.tags.length > 0 && <div className="flex flex-wrap gap-1 mt-auto">{p.data.tags.map((t) => <TagChip key={t} id={t} def={tagDefs[t]} small />)}</div>}
           </Card>
         ))}
-      </div>
+      </div></FillBox>}
       {open && <PersonaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} onClose={() => setOpen(null)} onFailed={setOpen} />}
     </AppContent>
   );

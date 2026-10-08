@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, type CapturaRuntime, type MockupCatalogo, type MockupExport } from '../api';
 import { Button, Empty, ErrorBox, Select, cx, fmtDate } from '../components/kit';
+import { FillBox } from '../components/fill';
 import { toast } from '../components/toast';
 import { ArrowDown, ArrowUp, Copy, Eye, EyeOff, Image as ImageIcon, ImagePlus, Lock, LockOpen, Shapes, Smartphone, Trash2, Type, type LucideIcon } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
@@ -63,6 +64,7 @@ function Lista() {
         <Button disabled={ocupado} onClick={() => criar()}>Mockup em branco</Button>
       </div>
       <ErrorBox error={mockups.error ?? capturas.error} />
+      <FillBox className="space-y-6">
       {(mockups.data?.length ?? 0) > 0 && (
         <section>
           <h2 className="text-sm font-semibold mb-2">Seus mockups</h2>
@@ -91,6 +93,7 @@ function Lista() {
           </div>
         )}
       </section>
+      </FillBox>
       {ocupado && <div className="fixed inset-0 bg-white/60 flex items-center justify-center text-sm">preparando…</div>}
     </AppContent>
   );
