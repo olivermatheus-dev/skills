@@ -1,0 +1,183 @@
+{
+  "finishedAt": "2026-10-08T18:53:09Z",
+  "perSource": [
+    {
+      "sourceId": "scielo",
+      "status": "ok",
+      "fetched": 286,
+      "kept": 2,
+      "verified": 1
+    },
+    {
+      "sourceId": "pepsic",
+      "status": "bloqueado",
+      "fetched": 0,
+      "kept": 0,
+      "verified": 0,
+      "error": "sem coletor por script (método web): só na rodada normal, pelo subagente que lê a página"
+    },
+    {
+      "sourceId": "pubmed",
+      "status": "ok",
+      "fetched": 139,
+      "kept": 8,
+      "verified": 6
+    },
+    {
+      "sourceId": "europepmc",
+      "status": "ok",
+      "fetched": 180,
+      "kept": 10,
+      "verified": 9
+    },
+    {
+      "sourceId": "openalex",
+      "status": "ok",
+      "fetched": 250,
+      "kept": 12,
+      "verified": 7
+    },
+    {
+      "sourceId": "doaj",
+      "status": "ok",
+      "fetched": 105,
+      "kept": 2,
+      "verified": 2
+    },
+    {
+      "sourceId": "pcp",
+      "status": "ok",
+      "fetched": 115,
+      "kept": 0,
+      "verified": 0
+    },
+    {
+      "sourceId": "ptp",
+      "status": "ok",
+      "fetched": 108,
+      "kept": 1,
+      "verified": 1
+    },
+    {
+      "sourceId": "prc",
+      "status": "ok",
+      "fetched": 83,
+      "kept": 0,
+      "verified": 0
+    },
+    {
+      "sourceId": "estpsi",
+      "status": "ok",
+      "fetched": 124,
+      "kept": 0,
+      "verified": 0
+    },
+    {
+      "sourceId": "pusf",
+      "status": "ok",
+      "fetched": 50,
+      "kept": 2,
+      "verified": 1
+    },
+    {
+      "sourceId": "rbtc",
+      "status": "bloqueado",
+      "fetched": 0,
+      "kept": 0,
+      "verified": 0,
+      "error": "sem coletor por script (método web): só na rodada normal, pelo subagente que lê a página"
+    },
+    {
+      "sourceId": "rbp",
+      "status": "vazio",
+      "fetched": 0,
+      "kept": 0,
+      "verified": 0
+    },
+    {
+      "sourceId": "jbpsiq",
+      "status": "ok",
+      "fetched": 31,
+      "kept": 0,
+      "verified": 0
+    },
+    {
+      "sourceId": "oms",
+      "status": "bloqueado",
+      "fetched": 0,
+      "kept": 0,
+      "verified": 0,
+      "error": "sem coletor por script (método pagina, html-diff): só na rodada normal, pelo subagente que lê a página"
+    }
+  ],
+  "ideas": [
+    "I-0001",
+    "I-0002",
+    "I-0003",
+    "I-0004",
+    "I-0005",
+    "I-0006",
+    "I-0007",
+    "I-0008"
+  ],
+  "refs": [
+    "R-0001",
+    "R-0002",
+    "R-0003",
+    "R-0004",
+    "R-0005",
+    "R-0006",
+    "R-0007",
+    "R-0008",
+    "R-0009",
+    "R-0010",
+    "R-0011",
+    "R-0012",
+    "R-0013"
+  ],
+  "dropped": [
+    {
+      "title": "Therapeutic alliance in videoconferencing psychotherapy compared to psychotherapy in person: A systematic review and meta-analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36974478/",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Commercial AI-Based Mental Health Chatbots as Low-Intensity Adjuncts to Psychotherapy: Effectiveness, Adherence, and Safety – A Systematic Review and Meta-Analysis",
+      "url": "https://doi.org/10.1159/000552072",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Effectiveness of AI-Based Chatbots for Mental Health Support: A Systematic Review and Meta-Analysis",
+      "url": "https://doi.org/10.26502/jppd.2572-519x0278",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Importância da relação terapêutica na psicoterapia: conexões humanas em contextos tecnológicos",
+      "url": "https://doi.org/10.5935/2318-0404.20250008",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Avaliação da associação entre a síndrome de burnout e as seis áreas da vida no trabalho em psicólogos",
+      "url": "https://doi.org/10.53660/prw-2978-5304",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Examining therapeutic alliance, adherence, and dropout in brief telepsychotherapy: A qualitative study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40455512/",
+      "reason": "link não abriu"
+    },
+    {
+      "title": "Psychologists’ Professional Perspectives on the Use of Social Media",
+      "url": "https://doi.org/10.1590/14138271202631e283797",
+      "reason": "link não abriu"
+    }
+  ],
+  "cost": {
+    "usd": 4.51,
+    "byModel": {
+      "claude-opus-5-5": 3.82,
+      "claude-haiku-5-5": 0.69
+    }
+  },
+  "notes": "Rodada F2 (terminal) da série 3. Nenhuma fonte aceita pelo Oliver ainda: usadas as sugeridas conferidas de confiança 3 que alimentam a série 3 (15). Fontes sem coletor por script (pepsic, rbtc, oms) ficaram de fora: a rodada rodou só com API (subagente Sonnet de leitura de página não foi usado). OpenAlex sem chave esgotou a cota grátis diária do IP no meio da rodada; os periódicos brasileiros e a SciELO caíram no Crossref (ISSN e prefixo 10.1590). rbp sem artigos com resumo no Crossref. Notícias: nenhuma fonte de notícia de confiança 3 na série 3 (Google Notícias é confiança 2), então a janela de 60 dias não foi usada. Triagem: Haiku em 2 passadas (80 candidatos da pré-triagem + 11 brasileiros escolhidos a dedo). Verificação: 20 de 27 achados passaram (link, DOI e trecho); os 7 que caíram estão em dropped. CUSTO: US$ 4,51 da rodada (desde o pedido, 18:33Z), ACIMA do aviso de US$ 3: inclui correções de código feitas no meio da rodada (fallback para o Crossref, verificação da página) e a síntese; a F2 inteira, com a construção das ferramentas, deu ~US$ 7,20. O Haiku aparece como claude-haiku-5-5, que o tools/usage.mjs ainda não precifica: calculado com o preço do Haiku 4.5 (1/5 por milhão). Medido somando os transcripts da sessão (pesquisador + 2 subagentes Haiku)."
+}

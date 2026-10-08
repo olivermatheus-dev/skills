@@ -1,0 +1,35 @@
+{
+  "id": "R-0008",
+  "sourceId": "pubmed",
+  "kind": "revisao",
+  "title": "Generative AI Mental Health Chatbots as Therapeutic Tools: Systematic Review and Meta-Analysis of Their Role in Reducing Mental Health Issues.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12707440/",
+  "doi": "10.2196/78238",
+  "authors": [
+    "Qiyang Zhang",
+    "Renwen Zhang",
+    "Yiying Xiong",
+    "Yuan Sui",
+    "Chang Tong",
+    "Fu-Hung Lin"
+  ],
+  "venue": "Journal of medical Internet research",
+  "publishedAt": "2025-12-16",
+  "language": "en",
+  "evidence": "meta-analise",
+  "quote": "The meta-analysis of 14 RCTs showed a statistically significant effect (effect size [ES]=0.30, P=.047, N=6314, 95% CI 0.004, 0.59",
+  "quoteFrom": "resumo",
+  "summary": "Metanálise de 14 ECRs com chatbots de IA generativa encontrou efeito estatisticamente significativo, pequeno e no limite da significância (ES=0,30; P=0,047).",
+  "verify": {
+    "checkedAt": "2026-10-08T18:48:33Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0005"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

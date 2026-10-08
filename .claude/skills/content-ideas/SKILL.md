@@ -1,6 +1,6 @@
 ---
 name: content-ideas
-description: "Gera pautas de conteúdo e calendário editorial para Instagram (carrossel, reels, stories) a partir do contexto da empresa. Use quando o usuário disser 'ideias de conteúdo', 'o que postar', 'pautas', 'sem ideia', 'calendário editorial', 'planejar o mês', 'grade de posts', 'analisar concorrente/criador', ou pedir temas para posts."
+description: "Gera pautas de conteúdo e calendário editorial para Instagram (carrossel, reels, stories) a partir do contexto da empresa. Use quando o usuário disser 'ideias de conteúdo', 'o que postar', 'pautas', 'sem ideia', 'calendário editorial', 'planejar o mês', 'grade de posts', 'analisar concorrente/criador', ou pedir temas para posts. Modo 4: 'pesquisar ideias nas fontes' (com referência verificada, via skill curadoria)."
 ---
 
 # Ideias e calendário de conteúdo
@@ -47,6 +47,15 @@ Com perfis ou posts de referência:
 2. Para cada: formato, hook (texto exato), estrutura, CTA, emoção dominante.
 3. 3–5 padrões que se repetem.
 4. 5 pautas para a empresa: mesmo mecanismo, assunto nosso, nunca cópia.
+
+## Modo 4 — Pesquisar ideias nas fontes
+
+Quando o pedido for "pesquisa ideias sobre X", "o que a ciência diz sobre", uma série que exige fonte (na kz: 3 "Mito, verdade ou… depende?" e 12 "kz recomenda") ou "ideias com referência":
+1. Siga a skill **`curadoria`** (pedido → busca por script → triagem Haiku → verificação por script → síntese → `gravar`). Padrões: 8 ideias, estudos de até 24 meses, notícias de até 60 dias, brasileiros primeiro.
+2. As ideias entram no banco (`companies/<slug>/ideas/`) com `origin: pesquisa`, `refs` e a seção `## Fontes`; nunca só no chat.
+3. Responda com uma tabela curta: `# · ideia · veredito · referência principal (veículo, ano) · nota`, e o que falhou na rodada.
+
+No **Modo 1**, ideias `origin: pesquisa` ainda com `status: nova` ou `analisada` e referências ★ (`curadoria/referencias/*.json` com `starred: true`) contam como **origem real** de pauta: cite o `R-NNNN` na coluna de origem.
 
 ## Saída
 Tabela no chat. Pautas aprovadas → 1 tarefa por pauta no quadro `companies/<slug>/board/` (`board: conteudo`, `status: todo`, `assignee: ai`; id via `node tools/board.mjs <slug> --next-id`).

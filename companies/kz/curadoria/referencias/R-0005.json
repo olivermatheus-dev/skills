@@ -1,0 +1,35 @@
+{
+  "id": "R-0005",
+  "sourceId": "europepmc",
+  "kind": "revisao",
+  "title": "Ketamine-Assisted Psychotherapy for Posttraumatic Stress Disorder: A Systematic Review and Individual Participant Data Meta-Analysis of Predictors of Treatment Effects.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13436927/",
+  "doi": "10.1159/000553144",
+  "authors": [
+    "Rohde J",
+    "Moore TM",
+    "Walker K",
+    "Ahmed SS",
+    "MacConnel HA",
+    "Krsak M"
+  ],
+  "venue": "Psychotherapy and psychosomatics",
+  "publishedAt": "2026-06-19",
+  "language": "en",
+  "evidence": "meta-analise",
+  "quote": "Greater improvement was associated with more psychotherapy (β = 1.03 per session) and more ketamine sessions (β = 1.15 per session)",
+  "quoteFrom": "resumo",
+  "summary": "Metanálise de participantes individuais (12 estudos, 533 pessoas) com cetamina e psicoterapia no TEPT: mais sessões de psicoterapia se associaram a mais melhora, mas nove estudos eram de baixa qualidade.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:28Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0003"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

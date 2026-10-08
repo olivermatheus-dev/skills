@@ -9,7 +9,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexFilter": "doi_starts_with:10.1590",
+        "crossrefPrefix": "10.1590"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -24,8 +27,9 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "A busca do site (https://search.scielo.org/) recusa robô (403): a rodada usa o OpenAlex filtrando periódicos SciELO; a busca do site fica com o subagente.",
+    "notes": "A busca do site (https://search.scielo.org/) recusa robô (403): a rodada usa o OpenAlex filtrando periódicos SciELO; a busca do site fica com o subagente. Filtro: DOI com prefixo 10.1590 (SciELO Brasil).",
     "verifiedAt": "2026-10-08",
+    "lastUsedAt": "2026-10-08T18:53:09Z",
     "addedBy": "ai",
     "created": "2026-10-08"
   },
@@ -84,6 +88,7 @@
     "status": "sugerida",
     "notes": "API E-utilities, grátis.",
     "verifiedAt": "2026-10-08",
+    "lastUsedAt": "2026-10-08T18:53:09Z",
     "addedBy": "ai",
     "created": "2026-10-08"
   },
@@ -114,6 +119,7 @@
     "status": "sugerida",
     "notes": "API grátis; site conferido no navegador.",
     "verifiedAt": "2026-10-08",
+    "lastUsedAt": "2026-10-08T18:53:09Z",
     "addedBy": "ai",
     "created": "2026-10-08"
   },
@@ -213,7 +219,8 @@
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
       "filters": {
-        "openalexSource": "S2739370219"
+        "openalexSource": "S2739370219",
+        "issn": "1982-3703"
       }
     },
     "keywords": [],
@@ -243,7 +250,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S100062655",
+        "issn": "1806-3446"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -256,8 +266,9 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Via OpenAlex; o ID da fonte no OpenAlex entra na fase 2.",
+    "notes": "Via OpenAlex; fonte S100062655 (conferida pelo ISSN 1806-3446 em 2026-10-08).",
     "verifiedAt": "2026-10-08",
+    "lastUsedAt": "2026-10-08T18:53:09Z",
     "addedBy": "ai",
     "created": "2026-10-08"
   },
@@ -271,7 +282,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S73564533",
+        "issn": "1678-7153"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -284,7 +298,7 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Redireciona para link.springer.com/journal/41155. Via OpenAlex; o ID da fonte entra na fase 2.",
+    "notes": "Redireciona para link.springer.com/journal/41155. Via OpenAlex; fonte S73564533 (conferida pelo ISSN 1678-7153 em 2026-10-08).",
     "verifiedAt": "2026-10-08",
     "addedBy": "ai",
     "created": "2026-10-08"
@@ -299,7 +313,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S54753935",
+        "issn": "1982-0275"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -313,7 +330,7 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "notes": "Via OpenAlex; fonte S54753935 (conferida pelo ISSN 1982-0275 em 2026-10-08).",
     "verifiedAt": "2026-10-08",
     "addedBy": "ai",
     "created": "2026-10-08"
@@ -328,7 +345,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S4210229469",
+        "issn": "2175-3563"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -341,7 +361,7 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "notes": "Via OpenAlex; fonte S4210229469 (conferida pelo ISSN 2175-3563 em 2026-10-08).",
     "verifiedAt": "2026-10-08",
     "addedBy": "ai",
     "created": "2026-10-08"
@@ -383,7 +403,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S71457257",
+        "issn": "1809-452X"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -396,7 +419,7 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Periódico brasileiro publicado em inglês. Via OpenAlex; o ID da fonte entra na fase 2.",
+    "notes": "Periódico brasileiro publicado em inglês. Via OpenAlex; fonte S71457257 (conferida pelo ISSN 1809-452X em 2026-10-08).",
     "verifiedAt": "2026-10-08",
     "addedBy": "ai",
     "created": "2026-10-08"
@@ -411,7 +434,10 @@
       "method": "api",
       "adapter": "openalex",
       "endpoint": "https://api.openalex.org/works",
-      "filters": {}
+      "filters": {
+        "openalexSource": "S177969571",
+        "issn": "1982-0208"
+      }
     },
     "keywords": [],
     "pillars": [
@@ -424,7 +450,7 @@
     "trust": 3,
     "weight": 3,
     "status": "sugerida",
-    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "notes": "Via OpenAlex; fonte S177969571 (conferida pelo ISSN 1982-0208 em 2026-10-08).",
     "verifiedAt": "2026-10-08",
     "addedBy": "ai",
     "created": "2026-10-08"

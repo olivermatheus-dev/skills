@@ -17,7 +17,8 @@
     "ads": "tsx tools/intel/ads-cli.ts",
     "fichas": "tsx tools/fichas/cli.ts",
     "app:dev": "vite --config app/vite.config.ts",
-    "brand": "tsx tools/brand.ts"
+    "brand": "tsx tools/brand.ts",
+    "curadoria": "tsx tools/curadoria/cli.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

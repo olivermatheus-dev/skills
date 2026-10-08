@@ -1,0 +1,35 @@
+{
+  "id": "R-0004",
+  "sourceId": "europepmc",
+  "kind": "revisao",
+  "title": "Is More Treatment Truly Better? A Meta-Analysis of the Dose-Response Effect of Individual Psychotherapy for Treatment of Generalized Anxiety Disorder in Adults.",
+  "url": "https://doi.org/10.1891/jcp-2025-0053",
+  "doi": "10.1891/jcp-2025-0053",
+  "authors": [
+    "Whittington DD",
+    "Billings R",
+    "Pagano LA",
+    "Aita SL",
+    "Vaughn J",
+    "Spencer SD"
+  ],
+  "venue": "Journal of cognitive psychotherapy",
+  "publishedAt": "2026-07-15",
+  "language": "en",
+  "evidence": "meta-analise",
+  "quote": "duration of therapy and number of sessions were unrelated to treatment effectiveness",
+  "quoteFrom": "resumo",
+  "summary": "Metanálise de 41 ECRs sobre psicoterapia individual para ansiedade generalizada: duração e número de sessões não se relacionaram com a efetividade; sessões de mais de 60 minutos tiveram efeito maior.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:47:52Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0003"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

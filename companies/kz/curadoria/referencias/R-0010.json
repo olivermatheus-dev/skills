@@ -1,0 +1,32 @@
+{
+  "id": "R-0010",
+  "sourceId": "pubmed",
+  "kind": "revisao",
+  "title": "The Application and Ethical Implication of Generative AI in Mental Health: Systematic Review.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12254713/",
+  "doi": "10.2196/70610",
+  "authors": [
+    "Xi Wang",
+    "Yujia Zhou",
+    "Guangyu Zhou"
+  ],
+  "venue": "JMIR mental health",
+  "publishedAt": "2025-06-27",
+  "language": "en",
+  "evidence": "revisao-sistematica",
+  "quote": "Studies on therapeutic applications (20/79, 25%) investigated GenAI-based chatbots and adaptive systems for emotional and behavioral support, reporting promising outcomes but revealing limited real-world deployment and safety assurance",
+  "quoteFrom": "resumo",
+  "summary": "Revisão sistemática de 79 estudos sobre IA generativa em saúde mental: as aplicações terapêuticas mostram resultados promissores, mas com pouca implantação real e segurança limitada.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:48:50Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0005"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

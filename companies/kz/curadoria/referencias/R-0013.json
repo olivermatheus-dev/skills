@@ -1,0 +1,33 @@
+{
+  "id": "R-0013",
+  "sourceId": "pubmed",
+  "kind": "artigo",
+  "title": "Exploratory study of protective factors against belief in neuromyths in in-service teachers at Brazilian vocational-technical high school.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13539801/",
+  "doi": "10.1186/s12909-026-09601-0",
+  "authors": [
+    "Drielly Duarte Teixeira",
+    "Marco Aurelio Oliveira",
+    "Jeann L Sabino-Carvalho",
+    "Alexandre Aparecido de Almeida"
+  ],
+  "venue": "BMC medical education",
+  "publishedAt": "2026-09-03",
+  "language": "en",
+  "evidence": "observacional",
+  "quote": "Among Brazilian vocational-technical in-service teachers, the most prevalent neuromyth was the belief that individuals learn best through their preferred learning style",
+  "quoteFrom": "resumo",
+  "summary": "Estudo com 130 professores técnicos brasileiros: 51,21% endossam neuromitos; o mais comum é o dos estilos de aprendizagem preferidos (87%).",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:05Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0008"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

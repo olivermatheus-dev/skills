@@ -1,0 +1,31 @@
+{
+  "id": "R-0012",
+  "sourceId": "scielo",
+  "kind": "revisao",
+  "title": "Online therapeutic groups: integrative literature review (2012-2022)",
+  "url": "https://doi.org/10.1590/1413-8271202530e281807",
+  "doi": "10.1590/1413-8271202530e281807",
+  "authors": [
+    "Sara Santos Dias Costa",
+    "Tales Vilela Santeiro"
+  ],
+  "venue": "Psico-USF",
+  "publishedAt": "2025-01-01",
+  "language": "en",
+  "evidence": "revisao-narrativa",
+  "quote": "The findings highlight the diversity of approaches in understanding, grounding, and developing online group therapies. These care strategies have shown promise, particularly when in-person sessions are unfeasible.",
+  "quoteFrom": "resumo",
+  "summary": "Revisão integrativa de 34 artigos (2012 a 2022) sobre grupos terapêuticos online, síncronos e híbridos: as estratégias mostraram potencial, sobretudo quando o presencial é inviável.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:49Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0007"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

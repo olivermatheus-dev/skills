@@ -1,0 +1,35 @@
+{
+  "id": "R-0011",
+  "sourceId": "europepmc",
+  "kind": "artigo",
+  "title": "Synchronous tele-interpersonal psychotherapy versus tele-cognitive behavioural therapy for adults: which works better? Results from a randomised clinical trial.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12574338/",
+  "doi": "10.1136/gpsych-2025-102067",
+  "authors": [
+    "Lucas LS",
+    "Borba BLI",
+    "de Azevedo BM",
+    "Cagliari A",
+    "Valim ARM",
+    "Garcia EL"
+  ],
+  "venue": "General psychiatry",
+  "publishedAt": "2025-10-28",
+  "language": "en",
+  "evidence": "ensaio-clinico",
+  "quote": "In community adults, t-IPT is as effective as t-CBT in treating symptoms of anxiety, depression or irritability.",
+  "quoteFrom": "resumo",
+  "summary": "Ensaio randomizado com 149 adultos da comunidade: a terapia interpessoal online (t-IPT) teve efeito semelhante ao da TCC online (t-CBT) em ansiedade, depressão e irritabilidade.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:41Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0006"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

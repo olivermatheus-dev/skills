@@ -1,0 +1,33 @@
+{
+  "id": "R-0002",
+  "sourceId": "pubmed",
+  "kind": "revisao",
+  "title": "Time to Form a Habit: A Systematic Review and Meta-Analysis of Health Behaviour Habit Formation and Its Determinants.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11641623/",
+  "doi": "10.3390/healthcare12232488",
+  "authors": [
+    "Ben Singh",
+    "Andrew Murphy",
+    "Carol Maher",
+    "Ashleigh E Smith"
+  ],
+  "venue": "Healthcare (Basel, Switzerland)",
+  "publishedAt": "2024-12-09",
+  "language": "en",
+  "evidence": "meta-analise",
+  "quote": "Emerging evidence on health-related habit formation indicates that while habits can start forming within about two months, the time required varies significantly across individuals",
+  "quoteFrom": "resumo",
+  "summary": "Revisão sistemática com metanálise (20 estudos, 2.601 participantes): hábitos de saúde começam a se formar em cerca de dois meses, com tempo muito variável entre pessoas; medianas relatadas de 59 a 66 dias.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:47:37Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0002"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

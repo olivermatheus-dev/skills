@@ -1,0 +1,35 @@
+{
+  "id": "R-0003",
+  "sourceId": "europepmc",
+  "kind": "revisao",
+  "title": "Not all cues are equal: A systematic review and three-level meta-analysis of context consistency, physical activity and habit strength.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13467471/",
+  "doi": "10.1111/aphw.70204",
+  "authors": [
+    "Zhu L",
+    "Tao Y",
+    "Zhou B",
+    "Ma H",
+    "Kaushal N",
+    "Ma X"
+  ],
+  "venue": "Applied psychology. Health and well-being",
+  "publishedAt": "2026-08-01",
+  "language": "en",
+  "evidence": "meta-analise",
+  "quote": "Context consistency was significantly correlated with both PA behaviour (r = 0.11) and PA habit strength (r = 0.20)",
+  "quoteFrom": "resumo",
+  "summary": "Revisão sistemática com metanálise de 14 estudos (6.069 participantes) sobre exercício: consistência de contexto (horário, rotina) se associou a mais hábito e mais atividade física, com efeitos pequenos.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:32Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0002"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

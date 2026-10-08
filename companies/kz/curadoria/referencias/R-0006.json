@@ -1,0 +1,34 @@
+{
+  "id": "R-0006",
+  "sourceId": "pubmed",
+  "kind": "revisao",
+  "title": "Therapeutic alliance across delivery modalities: a systematic narrative review of alliance strength and outcome prediction in face-to-face, online, and blended psychotherapy.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13621203/",
+  "doi": "10.1631/jzus.b2500701",
+  "authors": [
+    "Xiaoyi Zhou",
+    "Huimin Huang",
+    "Ruoxu Bi",
+    "Lena Verdeli",
+    "Hailong Lyu"
+  ],
+  "venue": "Journal of Zhejiang University. Science. B",
+  "publishedAt": "2026-08-28",
+  "language": "en",
+  "evidence": "revisao-sistematica",
+  "quote": "The results showed that TA was broadly equivalent across FTF, PO, and BLD formats, although asynchronous PO might show a transient week-2 lag",
+  "quoteFrom": "resumo",
+  "summary": "Revisão sistemática narrativa de 9 estudos (3 ECRs): a aliança foi amplamente equivalente entre presencial, online e misto, com possível atraso na semana 2 no formato assíncrono.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:48:18Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0004"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

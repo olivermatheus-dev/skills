@@ -1,0 +1,39 @@
+{
+  "id": "2026-10-08-1533-serie-3",
+  "series": 3,
+  "sources": [
+    "scielo",
+    "pepsic",
+    "pubmed",
+    "europepmc",
+    "openalex",
+    "doaj",
+    "pcp",
+    "ptp",
+    "prc",
+    "estpsi",
+    "pusf",
+    "rbtc",
+    "rbp",
+    "jbpsiq",
+    "oms"
+  ],
+  "period": {
+    "from": "2024-10-08",
+    "to": "2026-10-08"
+  },
+  "maxIdeas": 8,
+  "depth": "normal",
+  "languages": [
+    "pt",
+    "en"
+  ],
+  "instructions": "Nenhuma fonte aceita pelo Oliver ainda: rodada com as sugeridas conferidas de confiança 3. Série 3 (Mito, verdade ou… depende?): afirmação comum entre terapeutas ou pacientes → o que a evidência recente diz. Prioridade para estudos brasileiros.",
+  "estimate": {
+    "minutes": 12,
+    "usdLow": 1.3,
+    "usdHigh": 3
+  },
+  "requestedAt": "2026-10-08T18:33:19Z",
+  "status": "feito"
+}

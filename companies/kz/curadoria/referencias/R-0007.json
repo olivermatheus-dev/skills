@@ -1,0 +1,32 @@
+{
+  "id": "R-0007",
+  "sourceId": "ptp",
+  "kind": "artigo",
+  "title": "Corpo e Vínculo no Atendimento Online a Pessoas com Anorexia e Bulimia",
+  "url": "https://doi.org/10.1590/0102.3772e42406.pt",
+  "doi": "10.1590/0102.3772e42406.pt",
+  "authors": [
+    "Bruna Bortolozzi Maia",
+    "Érika Arantes de Oliveira-Cardoso",
+    "Manoel Antônio dos Santos"
+  ],
+  "venue": "Psicologia: Teoria e Pesquisa",
+  "publishedAt": "2026-01-01",
+  "language": "pt",
+  "evidence": "qualitativo",
+  "quote": "Concluímos que o corpo é percebido de maneira distinta no online, o que tem implicações para o vínculo terapêutico, demandando cautela, sensibilidade e ética no manejo clínico.",
+  "quoteFrom": "resumo",
+  "summary": "Entrevistas com 23 profissionais de uma equipe de anorexia e bulimia: relataram distanciamento no online, efeito das câmeras fechadas e percepção diferente do corpo, com implicações para o vínculo.",
+  "verify": {
+    "checkedAt": "2026-10-08T18:49:52Z",
+    "linkOk": true,
+    "doiOk": true,
+    "quoteFound": true
+  },
+  "round": "2026-10-08-1533-serie-3",
+  "ideas": [
+    "I-0004"
+  ],
+  "starred": false,
+  "created": "2026-10-08"
+}

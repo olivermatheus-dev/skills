@@ -10,7 +10,7 @@ import {
   AnalysisResult, AnalysisRequest, AdsSnapshot, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
-  CuratedSource, SourceList, SourceStatus,
+  CuratedSource, SourceList, SourceStatus, SourceRef, ResearchRequest, ResearchResult,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
@@ -816,6 +816,47 @@ function checkSourcesRefs(slug: string) {
   if (issues.length) throw new ValidationError(sourcesFile(slug), issues);
 }
 
+// ---------- Curadoria: referências e rodadas (041 F2) ----------
+const refsDir = (slug: string) => join(P.curadoria(slug), 'referencias');
+const roundsDir = (slug: string) => join(P.curadoria(slug), 'rodadas');
+export const listRefs = (slug: string): SourceRef[] => list(refsDir(slug), /^R-\d{4}\.json$/).map((f) => readJson(SourceRef, join(refsDir(slug), f)));
+export function nextRefId(slug: string, offset = 0) {
+  const n = Math.max(0, ...list(refsDir(slug), /^R-\d{4}\.json$/).map((f) => parseInt(f.slice(2, 6), 10)));
+  return `R-${String(n + 1 + offset).padStart(4, '0')}`;
+}
+export function saveRef(slug: string, data: z.input<typeof SourceRef>) {
+  const file = join(refsDir(slug), `${data.id}.json`);
+  const v = check(SourceRef, data, file);
+  writeJson(file, v);
+  return v;
+}
+export const listRounds = (slug: string) => list(roundsDir(slug), /^\d{4}-\d{2}-\d{2}-\d{4}-/);
+export const roundFile = (slug: string, round: string, f: 'pedido.json' | 'resultado.json') => join(roundsDir(slug), round, f);
+export const getRoundRequest = (slug: string, round: string) => readJson(ResearchRequest, roundFile(slug, round, 'pedido.json'));
+export const getRoundResult = (slug: string, round: string) => (exists(roundFile(slug, round, 'resultado.json')) ? readJson(ResearchResult, roundFile(slug, round, 'resultado.json')) : null);
+export function saveRoundRequest(slug: string, data: z.input<typeof ResearchRequest>) {
+  const file = roundFile(slug, data.id, 'pedido.json');
+  const v = check(ResearchRequest, data, file);
+  writeJson(file, v);
+  return v;
+}
+export function saveRoundResult(slug: string, round: string, data: z.input<typeof ResearchResult>) {
+  const file = roundFile(slug, round, 'resultado.json');
+  const v = check(ResearchResult, data, file);
+  writeJson(file, v);
+  return v;
+}
+/** ideia de pesquisa aponta para referências que existem; referência aponta para fonte cadastrada */
+function checkCuradoria(slug: string) {
+  const refs = new Set(listRefs(slug).map((r) => r.id));
+  const srcs = new Set(listSources(slug).map((s) => s.id));
+  for (const r of listRefs(slug)) if (!srcs.has(r.sourceId)) throw new ValidationError(join(refsDir(slug), `${r.id}.json`), [`sourceId: fonte ${r.sourceId} não existe em fontes.json`]);
+  for (const d of listIdeas(slug)) {
+    const miss = d.data.refs.filter((id) => !refs.has(id));
+    if (miss.length) throw new ValidationError(d.file, [`refs: ${miss.join(', ')} não existe(m) em curadoria/referencias/`]);
+  }
+}
+
 // ---------- Validação geral ----------
 export function validateAll():{ file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
@@ -844,6 +885,12 @@ export function validateAll():{ file: string; issues: string[] }[] {
     if (exists(matrixFile(d))) tryIt(() => getMatrix(d));
     if (exists(gapsFile(d))) tryIt(() => getGaps(d));
     if (exists(sourcesFile(d))) tryIt(() => checkSourcesRefs(d)); // curadoria (041): schema + pilares/séries existentes
+    for (const f of list(refsDir(d), /\.json$/)) tryIt(() => readJson(SourceRef, join(refsDir(d), f)));
+    for (const r of listRounds(d)) {
+      if (exists(roundFile(d, r, 'pedido.json'))) tryIt(() => getRoundRequest(d, r));
+      if (exists(roundFile(d, r, 'resultado.json'))) tryIt(() => getRoundResult(d, r));
+    }
+    if (exists(P.curadoria(d))) tryIt(() => checkCuradoria(d));
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

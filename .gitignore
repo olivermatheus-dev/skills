@@ -38,3 +38,6 @@ library/mockups/exemplos/*/analise.png
 
 # pesados do preparo de fichas (040): áudio, quadros, legendas brutas; refazíveis com npm run fichas -- preparar
 data/intel/
+
+# curadoria (041): brutos, candidatos, achados e páginas baixadas; refazíveis com npm run curadoria
+data/curadoria/
