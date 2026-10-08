@@ -7,7 +7,8 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
+| 1 | 043 | **Abas da área Concorrentes:** nomes, Preços e planos profundo (compacto × completo, faixas, o que cada plano tem), "Mensagem" → posicionamento com seções lado a lado, Brechas redesenhada | pedido de 2026-10-08, em andamento |
+| 2 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

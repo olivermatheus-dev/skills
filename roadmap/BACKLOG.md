@@ -60,6 +60,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 039 | [Panorama dos concorrentes como dashboard + Brechas em página própria](tasks/039-panorama-dashboard/TASK.md) | 038 (A, B2) | **feita (2026-10-08)**: A, A2, B, C |
 | 040 | [Análise profunda de conteúdos e anúncios dos concorrentes (sob comando, seleção/top N, transcrição barata, Opus analisa, relatório por concorrente, painel editável)](tasks/040-analise-de-conteudos-e-anuncios/TASK.md) | 038, 037 | **A–F feitas (2026-10-08)**; faltam G (anúncios), H (painel), I (ligações); aval das fichas |
 | 041 | [Fontes e referências (catálogo no app que a IA usa para pesquisar ideias; 1ª peça da 029)](tasks/041-fontes-e-referencias/TASK.md) | 029, 012 | **F1–F2 feitas (2026-10-08)**; falta F3 (botão no app) e F4 |
+| 043 | [Abas da área Concorrentes: nomes, Preços e planos profundo, Posicionamento, Brechas redesenhada](tasks/043-comparar-e-abas-concorrentes/TASK.md) | 034, 039 | em andamento (2026-10-08) |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
