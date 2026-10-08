@@ -1,11 +1,11 @@
 # Decisão — stack de render de motion (003)
 
-**Escolha:** HyperFrames **0.8.94 (fixo)** + GSAP 3.15, a partir do kit do Ludus (em produção), adaptado e genérico em `tools/video-kit/`.
+**Escolha:** HyperFrames **0.8.141 (fixo)** + GSAP 3.15 (era 0.8.94; upgrade medido em `roadmap/tasks/032-upgrade-hyperframes/TASK.md`: mesmo visual, mesmo tempo), a partir do kit do Ludus (em produção), adaptado e genérico em `tools/video-kit/`.
 
 ## Por quê
 - Já entregou vídeos reais no Ludus; o Claude escreve HTML/CSS/GSAP com facilidade.
 - Render determinístico quadro a quadro (Chrome headless), validação (`validate`/`lint`) e snapshots para conferência.
-- Motion blur real (2 passes a 60 → 30 quadros, obturador 180°), BT.709 marcado, −14 LUFS.
+- Motion blur real (2 passes a 60 → 30 quadros, obturador 180°), BT.709 marcado, −14 LUFS. O blur nativo do HyperFrames (sub-quadro, até 16 amostras) fica **opcional** (`--blur=nativo`): rastro mais liso, ~7–8× mais lento (032).
 - Teste da kz (2026-10-07): 15 s, 9:16 + 4:5, render final com blur em ~2 min nesta máquina (GPU AMD).
 
 ## Alternativas descartadas (por ora)
