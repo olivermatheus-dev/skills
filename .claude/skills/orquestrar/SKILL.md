@@ -14,16 +14,16 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 - Protocolo que todo agente segue: `references/protocolo.md`.
 
 ## Fluxo
-1. **Entrada.** Pedido no chat → criar a tarefa-mãe (`--next-id`, `assignee: ai`, quadro certo). "Rode as tarefas" → pegar `todo` com `assignee: ai` ou `agent:*` cujas dependências estão `done`.
+1. **Entrada.** Pedido no chat → criar a tarefa-mãe (`--next-id`, `assignee: ai`, quadro certo). "Rode as tarefas" (ou o botão **Rodar IA** do app) → pegar `todo` com `assignee: ai` ou `agent:*` cujas dependências estão `done`. `todo` = aprovado pelo Oliver; `backlog` nunca roda.
 2. **Planejar.** Dividir em subtarefas (1 por agente/entrega), com `parent`, `depends` e `assignee: agent:<nome>`. Use a receita abaixo. Mostrar o plano em 3–8 linhas e seguir (os portões estão nos agentes).
 3. **Delegar.** Chamar o agente com o Agent tool (`subagent_type: <nome>`), prompt: `Execute a tarefa <caminho do arquivo> seguindo o protocolo em .claude/skills/orquestrar/references/protocolo.md.` Independentes em paralelo; dependentes em ordem.
 4. **Acompanhar.** Depois de cada retorno, ler o arquivo da tarefa:
    - `done` → próxima;
-   - `AGUARDANDO AVAL` → mover a tarefa-mãe para `review`/`oliver`, avisar o Oliver com a pergunta e **parar a cadeia**;
+   - comentário `pergunta`/`revisar` (ou `AGUARDANDO AVAL` no log, formato antigo) → comentar na tarefa-mãe e movê-la para `review`/`oliver` (`node tools/board.mjs comment … --tipo pergunta --status review --para oliver`) e **parar a cadeia**;
    - `PRECISA: agent:x` → criar a subtarefa e delegar.
 5. **Revisar.** Antes de devolver ao Oliver, delegar ao `revisor` as entregas finais. Problema bloqueante → volta ao agente autor (máx. 2 voltas; depois, levar ao Oliver).
-6. **Entregar.** Tarefa-mãe `status: review`, `assignee: oliver`, log com resumo e caminhos. No chat: o que foi feito, onde está, o que precisa dele.
-7. **Retomar.** Quando o Oliver aprovar (no chat ou escrevendo "aprovado" no log e voltando o card para `todo`), continuar de onde parou.
+6. **Entregar.** Comentário na tarefa-mãe com resumo e caminhos, já movendo: `--tipo revisar --status review --para oliver`. No chat (se houver): o mesmo resumo.
+7. **Retomar.** O Oliver responde nos comentários do card e clica **Aprovar e devolver à IA** (card volta para `todo`, `assignee: ai`). Ler o último comentário dele e continuar de onde parou; repassar a instrução ao agente da subtarefa.
 
 ## Receitas de delegação
 | pedido | cadeia |
@@ -44,11 +44,12 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 | o Oliver quer | como |
 |---|---|
 | **instrução que vale sempre** ("roteirista, nunca use 'incrível'") | acrescentar em `.claude/agent-notes/<agente>.md` (`- AAAA-MM-DD · instrução`) e confirmar |
-| **instrução para uma tarefa** | escrever no log da tarefa (`- data · oliver · instrução`) e, se ela estiver parada, delegar de novo |
+| **instrução para uma tarefa** | comentário no card (app, ou `node tools/board.mjs comment <slug> <id> "…" --as oliver`) e, se ela estiver parada, delegar de novo |
 | **pergunta rápida ao agente** | chamar o agente pelo Agent tool com a pergunta e repassar a resposta |
 | **trabalhar junto com o agente** | abrir outro terminal: `claude --agent <agente>` e dizer "vamos trabalhar na T-NNNN". A sessão vira o próprio agente, que conversa com o Oliver (modo interativo do protocolo) |
 
-## Heartbeat e recorrentes (trabalho sem o Oliver olhando)
+## Rodar IA (app) · heartbeat e recorrentes (trabalho sem o Oliver olhando)
+- **App → Quadro → Rodar IA:** lista as prontas e roda em **segundo plano** (= `heartbeat.mjs --run --slug <slug> --max N`, faixa "IA trabalhando" com log e Parar) ou **abre no terminal** (sessão interativa com esta skill). No painel da tarefa: **Rodar agora** só aquela (`--task T-NNNN`).
 - **Caso comum = delegação direta:** o orquestrador chama o agente na hora. O heartbeat é só para o que roda sozinho.
 - `node tools/heartbeat.mjs` (simulação) · `--run` (executa) · `--run --watch 30` (a cada 30 min, num terminal aberto). Filtros: `--slug`, `--agent`, `--max`.
   - Cada batida faz duas coisas:

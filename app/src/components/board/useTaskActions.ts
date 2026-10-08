@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type Task } from '../../api';
 import { nextSeqId, patchDoc, qk, realId, removeDoc, runOptimistic, trackCreate, upsertDoc } from '../../queries';
 import { toast } from '../toast';
-import { todayIso, type Status, type TaskDoc } from './taskUtils';
+import { joinTaskBody, nowStamp, splitTaskBody, todayIso, type CommentKind, type Status, type TaskDoc } from './taskUtils';
 
 type Data = Partial<Task> & { title: string };
 interface Cb<R> { onSuccess?: (r: R) => void; onError?: (e: unknown) => void }
@@ -20,7 +20,7 @@ export function useTaskActions(slug: string) {
       const tempId = nextSeqId('T', list().map((t) => t.data.id));
       const temp: TaskDoc = {
         data: { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], ...data, id: tempId } as Task,
-        body: body ?? `\n${data.title}\n\n## Checklist\n\n## Log\n- ${todayIso()} · criada pela interface\n`,
+        body: body ?? `\n## Checklist\n\n## Log\n- ${todayIso()} · criada pela interface\n`,
         file: '',
       };
       const promise = runOptimistic(qc, {
@@ -94,6 +94,23 @@ export function useTaskActions(slug: string) {
       toast.undo(`${id} arquivada (board/arquivo/)`, async () => { if (await done) unarchive({ ...doc, data: { ...doc.data, id: await realId('task', slug, id) } }); });
     }
 
-    return { create, save, move, archive };
+    /** comentário do Oliver; opcionalmente muda status/responsável no mesmo gesto ("devolver à IA") */
+    function comment(id: string, c: { text: string; kind?: CommentKind; status?: Status; assignee?: string }, cb: Cb<TaskDoc> = {}) {
+      return runOptimistic(qc, {
+        mutationFn: async () => api.commentTask(slug, await realId('task', slug, id), c),
+        apply: () => [[key, (old: TaskDoc[] | undefined) => patchDoc(old, id, (t) => {
+          const parts = splitTaskBody(t.body);
+          parts.comments.push({ at: nowStamp(), who: 'oliver', kind: c.kind ?? 'nota', text: c.text });
+          return { ...t, body: joinTaskBody(parts), data: { ...t.data, ...(c.status ? { status: c.status } : {}), ...(c.assignee ? { assignee: c.assignee } : {}) } };
+        })]],
+        onSuccess: (r) => { qc.setQueryData<TaskDoc[]>(key, (old) => upsertDoc(old, r, id)); cb.onSuccess?.(r); },
+        onError: cb.onError,
+        invalidate: () => [key],
+        okMessage: false,
+        errorMessage: `Não foi possível comentar em ${id}`,
+      }, undefined).catch(() => undefined);
+    }
+
+    return { create, save, move, archive, comment };
   }, [qc, slug]);
 }

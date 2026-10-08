@@ -6,10 +6,29 @@
 //   node tools/board.mjs <slug> --board conteudo
 //   node tools/board.mjs <slug> --check    valida os campos
 //   node tools/board.mjs <slug> --next-id  próximo id livre
+//   node tools/board.mjs comment <slug> <T-NNNN> "texto" --as agent:<nome> [--tipo nota|revisar|pergunta] [--status review --para oliver]
+//        comentário no card (aparece no app, na aba da tarefa). revisar/pergunta = o Oliver precisa ver/responder.
 import { existsSync } from 'node:fs';
-import { STATUS, BOARDS, PRIORITY, boardDir, listTasks, nextId } from './lib/board.mjs';
+import { STATUS, BOARDS, PRIORITY, boardDir, listTasks, nextId, addComment, updateTask, today } from './lib/board.mjs';
 
-const [slug, ...args] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+if (argv[0] === 'comment') {
+  const [, cslug, id, text] = argv;
+  const o = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : undefined; };
+  const who = o('--as') || 'ai';
+  if (!cslug || !id || !text) { console.log('Uso: node tools/board.mjs comment <slug> <T-NNNN> "texto" --as agent:<nome> [--tipo revisar|pergunta] [--status review --para oliver]'); process.exit(1); }
+  const t = listTasks(cslug).find((x) => x.id === id);
+  if (!t) { console.log(`Tarefa ${id} não encontrada em ${boardDir(cslug)}`); process.exit(1); }
+  addComment(t.path, who, text, o('--tipo') || 'nota');
+  const fields = {};
+  if (o('--status')) fields.status = o('--status');
+  if (o('--para')) fields.assignee = o('--para');
+  if (Object.keys(fields).length) updateTask(t.path, fields, `${today()} · ${who} · ${Object.entries(fields).map(([k, v]) => `${k} → ${v}`).join(' · ')}`);
+  console.log(`✓ comentário em ${t.file}${Object.keys(fields).length ? ` (${JSON.stringify(fields)})` : ''}`);
+  process.exit(0);
+}
+
+const [slug, ...args] = argv;
 if (!slug) { console.log('Uso: node tools/board.mjs <slug> [--me|--ai|--board X|--check|--next-id]'); process.exit(1); }
 const dir = boardDir(slug);
 if (!existsSync(dir)) { console.log(`Sem quadro: ${dir}`); process.exit(1); }

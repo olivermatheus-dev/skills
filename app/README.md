@@ -21,7 +21,7 @@
 ```
 companies/<slug>/
   project.yml · tags.yml
-  board/T-NNNN-*.md        tarefas (formato simples, compatível com tools/lib/board.mjs e o heartbeat)
+  board/T-NNNN-*.md        tarefas (formato simples, compatível com tools/lib/board.mjs e o heartbeat): descrição + checklist · ## Comentários (Oliver ↔ IA, schema/task.ts) · ## Log. Quadro: criar na coluna, Rodar IA (core/runner.ts → heartbeat ou terminal; estado em logs/heartbeat/.lock)
   personas/<id>.md         persona tipada + corpo livre
   notes/<id>.md            anotações (markdown)
   ideas/I-NNNN-*.md        banco de ideias (tarefa 012)

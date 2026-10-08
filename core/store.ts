@@ -8,6 +8,7 @@ import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, FormatExample, COMPANIES, FORMATS, P, STATUS,
+  splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
@@ -144,7 +145,7 @@ export function saveTask(slug: string, data: Partial<z.input<typeof Task>> & { t
   const prev = existing ? parseSimple(read(file)) : null;
   const merged = { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], ...(prev?.data ?? {}), ...data, id };
   const v = check(Task, merged, file);
-  const b = body ?? prev?.body ?? `\n${v.title}\n\n## Checklist\n\n## Log\n- ${today()} · criada pela interface\n`;
+  const b = body ?? prev?.body ?? `\n## Checklist\n\n## Log\n- ${today()} · criada pela interface\n`;
   write(file, stringifySimple({ ...v, due: v.due ?? '', parent: v.parent ?? '' }, b, TASK_ORDER));
   return { data: v, body: b, file };
 }
@@ -153,6 +154,23 @@ export function moveTask(slug: string, id: string, status: (typeof STATUS)[numbe
   if (!t) throw new ValidationError(id, ['tarefa não encontrada']);
   const body = `${t.body.trimEnd()}\n- ${today()} · ${who} · ${t.data.status} → ${status}\n`;
   return saveTask(slug, { ...t.data, status }, /\n## Log\n/.test(t.body) ? body : `${t.body.trimEnd()}\n\n## Log\n- ${today()} · ${who} · ${t.data.status} → ${status}\n`);
+}
+
+/** Comentário no card (Oliver ou IA). Opcional: no mesmo gesto mudar status/responsável (ex.: "devolver à IA"). */
+export function commentTask(slug: string, id: string, input: { text: string; who?: string; kind?: CommentKind; status?: (typeof STATUS)[number]; assignee?: string }) {
+  const t = listTasks(slug).find((x) => x.data.id === id);
+  if (!t) throw new ValidationError(id, ['tarefa não encontrada']);
+  const text = String(input.text ?? '').trim();
+  const kind = input.kind ?? 'nota';
+  if (!text) throw new ValidationError(id, ['comentário vazio']);
+  if (!COMMENT_KINDS.includes(kind)) throw new ValidationError(id, [`tipo inválido: ${kind}`]);
+  const who = input.who ?? 'oliver';
+  const parts = splitTaskBody(t.body);
+  parts.comments.push({ at: nowStamp(), who, kind, text });
+  const data = { ...t.data, ...(input.status ? { status: input.status } : {}), ...(input.assignee ? { assignee: input.assignee } : {}) };
+  const moves = [input.status && input.status !== t.data.status && `${t.data.status} → ${input.status}`, input.assignee && input.assignee !== t.data.assignee && `para ${input.assignee}`].filter(Boolean);
+  if (moves.length) parts.log.push(`${today()} · ${who} · ${moves.join(' · ')}`);
+  return saveTask(slug, data, joinTaskBody(parts));
 }
 
 /** Arquivar = mover para board/arquivo/ (fora do quadro e do heartbeat, sem apagar). */

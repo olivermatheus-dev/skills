@@ -1,10 +1,16 @@
 # Protocolo de tarefa (vale para todo agente)
 
-Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é a fonte da verdade: status, checklist e log ficam **nele**.
+Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é a fonte da verdade: status, checklist, comentários e log ficam **nele**.
+
+**Log × comentário.** Log (`## Log`) = trilha curta de marcos, uma linha cada. **Comentário** (`## Comentários`) = o que o Oliver precisa ler no card do app: o que você entregou, onde está, o que revisar, perguntas. Sempre pela CLI (não edite a seção à mão):
+```
+node tools/board.mjs comment <slug> <T-NNNN> "texto" --as agent:<nome> [--tipo revisar|pergunta] [--status review --para oliver]
+```
+`--tipo revisar` = peça pronta para ele conferir · `--tipo pergunta` = precisa de resposta · sem tipo = só registro. O card fica marcado "Revisar/Pergunta" até ele responder.
 
 ## Ao receber
 0. Ler suas instruções permanentes: `.claude/agent-notes/<seu-nome>.md`.
-1. Ler a tarefa inteira (inclusive o Log: pode haver feedback do Oliver) e a tarefa-mãe (`parent`), se houver.
+1. Ler a tarefa inteira (inclusive **Comentários** e Log: a resposta/instrução mais recente do Oliver manda) e a tarefa-mãe (`parent`), se houver.
 2. Ler o contexto da empresa que a sua função exige (cada agente diz quais). Tarefa ligada a uma peça (`links: contents/<pasta>/…`) com `revisao.json`: rodar `node tools/review.mjs companies/<slug>/contents/<pasta>` e tratar as anotações abertas antes de produzir.
 3. Mudar `status: doing`.
 4. **Planejar antes de fazer:** escrever em `## Checklist` os passos da sua entrega (3–8 itens objetivos). Se faltar dado essencial que só o Oliver tem → ir direto para o **portão** (abaixo) com a pergunta.
@@ -19,12 +25,11 @@ Uma tarefa = um arquivo `companies/<slug>/board/T-NNNN-<slug>.md`. O arquivo é 
 
 ## Portão (precisa do Oliver)
 Quando a próxima etapa depende de aval ou de dado dele:
-- `status: review` e `assignee: oliver`
-- log: `AGUARDANDO AVAL: <o que decidir, em 1–3 linhas, com sua recomendação>`
-- pare. Não continue até o log ter "aprovado" (ou feedback) do Oliver.
+- um comentário só, já movendo o card: `node tools/board.mjs comment <slug> <id> "<o que decidir, 1–3 linhas, com sua recomendação e os caminhos>" --as agent:<nome> --tipo pergunta --status review --para oliver` (use `--tipo revisar` quando for "confere a entrega").
+- pare. O Oliver responde no card e clica **Aprovar e devolver à IA** (volta para `todo`, `assignee: ai`): quem retoma lê o último comentário dele.
 
 ## Ao concluir
-- Checklist todo `[x]`, `links` atualizados, log com o resumo de 1 linha e **o que não foi verificado**.
+- Checklist todo `[x]`, `links` atualizados, log com o resumo de 1 linha e um **comentário** com a entrega (o que fez, caminhos, **o que não foi verificado**).
 - Subtarefa: `status: done`. A tarefa-mãe quem fecha é o orquestrador (vai para `review` → `oliver`).
 
 ## Modo interativo (o Oliver está conversando com você)

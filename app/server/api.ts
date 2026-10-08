@@ -10,6 +10,7 @@ import { detectLink } from '../../core/platform';
 import { P } from '../../schema';
 import * as K from '../../core/secrets';
 import * as MK from '../../core/mockups';
+import * as R from '../../core/runner';
 import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
@@ -32,6 +33,11 @@ on('PUT', '/api/projects/:slug/tasks/:id', (p, b) => S.saveTask(p.slug, { ...b.d
 on('DELETE', '/api/projects/:slug/tasks/:id', (p) => S.archiveTask(p.slug, p.id));
 on('POST', '/api/projects/:slug/tasks/:id/unarchive', (p) => S.unarchiveTask(p.slug, p.id));
 on('POST', '/api/projects/:slug/tasks/:id/move', (p, b) => S.moveTask(p.slug, p.id, b.status, b.who ?? 'oliver'));
+on('POST', '/api/projects/:slug/tasks/:id/comments', (p, b) => S.commentTask(p.slug, p.id, b ?? {}));
+// Rodar IA: Claude Code nas tarefas prontas (segundo plano = heartbeat · terminal = janela interativa)
+on('GET', '/api/projects/:slug/runner', (p) => R.runnerStatus(p.slug));
+on('POST', '/api/projects/:slug/runner', (p, b) => R.runAi(p.slug, b ?? {}));
+on('DELETE', '/api/projects/:slug/runner', (p) => R.stopAi(p.slug));
 
 // Personas
 on('GET', '/api/projects/:slug/personas', (p) => S.listPersonas(p.slug));

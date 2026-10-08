@@ -12,7 +12,7 @@ export const companies = () =>
   readdirSync('companies').filter((d) => !d.startsWith('_') && existsSync(boardDir(d)));
 
 export function parseTask(path) {
-  const txt = readFileSync(path, 'utf8');
+  const txt = readFileSync(path, 'utf8').replace(/\r\n/g, '\n'); // arquivo editado no Windows (CRLF) também vale
   const m = txt.match(/^---\n([\s\S]*?)\n---/);
   const t = { path };
   if (!m) return t;
@@ -40,7 +40,7 @@ export const nextId = (tasks) =>
 
 // Troca um campo do frontmatter e acrescenta uma linha no ## Log.
 export function updateTask(path, fields = {}, logLine) {
-  let txt = readFileSync(path, 'utf8');
+  let txt = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
   for (const [k, v] of Object.entries(fields)) {
     const re = new RegExp(`^${k}:.*$`, 'm');
     txt = re.test(txt) ? txt.replace(re, `${k}: ${v}`) : txt.replace(/^---\n/, `---\n${k}: ${v}\n`);
@@ -51,3 +51,26 @@ export function updateTask(path, fields = {}, logLine) {
 }
 
 export const today = () => new Date().toISOString().slice(0, 10);
+
+// Comentário no card (mesmo formato de schema/task.ts): bloco "### AAAA-MM-DD HH:MM · <autor>[ · revisar|pergunta]"
+// dentro de "## Comentários", logo antes do "## Log" (que segue sendo a última seção).
+export const COMMENT_KINDS = ['nota', 'revisar', 'pergunta'];
+export const nowStamp = (d = new Date()) => `${today()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+export function addComment(path, who, text, kind = 'nota') {
+  if (!COMMENT_KINDS.includes(kind)) throw new Error(`tipo inválido: ${kind} (${COMMENT_KINDS.join(' | ')})`);
+  const block = `### ${nowStamp()} · ${who}${kind !== 'nota' ? ` · ${kind}` : ''}\n${String(text).trim().replace(/\r\n/g, '\n').replace(/^(#{2,3} )/gm, ' $1')}\n`;
+  let txt = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
+  const sec = txt.match(/\n## Coment[aá]rios\s*\n/);
+  if (sec) {
+    // fim da seção = próximo "## " depois dela (ou fim do arquivo)
+    const start = sec.index + sec[0].length;
+    const next = txt.slice(start).search(/\n## /);
+    const end = next < 0 ? txt.length : start + next;
+    txt = `${txt.slice(0, end).trimEnd()}\n\n${block}${txt.slice(end).replace(/^\n*/, '\n')}`;
+  } else if (/\n## Log\s*\n/.test(txt)) {
+    txt = txt.replace(/\n## Log\s*\n/, (m) => `\n## Comentários\n${block}\n${m.replace(/^\n/, '')}`);
+  } else {
+    txt = `${txt.trimEnd()}\n\n## Comentários\n${block}`;
+  }
+  writeFileSync(path, txt);
+}

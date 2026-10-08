@@ -1,5 +1,5 @@
 // Cliente tipado da API local. Os tipos vêm dos mesmos schemas que validam os arquivos.
-import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef } from '../../schema';
+import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef, CommentKind } from '../../schema';
 export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef };
 import type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult } from '../../tools/intel/types';
 export type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult };
@@ -23,6 +23,10 @@ import type { FormatInfo, FormatUse, FormatRefInput } from '../../core/store';
 export type { Format, FormatInfo, FormatUse, FormatRefInput };
 export type { PieceCover } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
+export interface RunnerStatus {
+  running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
+  otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
+}
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
 export interface PieceTimeline {
@@ -77,6 +81,10 @@ export const api = {
   archiveTask: (slug: string, id: string) => req<{ file: string }>('DELETE', `${pj(slug)}/tasks/${id}`),
   unarchiveTask: (slug: string, id: string) => req<Doc<Task>>('POST', `${pj(slug)}/tasks/${id}/unarchive`),
   moveTask: (slug: string, id: string, status: Task['status']) => req<Doc<Task>>('POST', `${pj(slug)}/tasks/${id}/move`, { status }),
+  commentTask: (slug: string, id: string, c: { text: string; kind?: CommentKind; status?: Task['status']; assignee?: string }) => req<Doc<Task>>('POST', `${pj(slug)}/tasks/${id}/comments`, c),
+  runner: (slug: string) => req<RunnerStatus>('GET', `${pj(slug)}/runner`),
+  runAi: (slug: string, o: { mode: 'background' | 'terminal'; max?: number; task?: string }) => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/runner`, o),
+  stopAi: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/runner`),
 
   personas: (slug: string) => req<Doc<Persona>[]>('GET', `${pj(slug)}/personas`),
   createPersona: (slug: string, data: Partial<Persona> & { name: string }, body?: string) => req<Doc<Persona>>('POST', `${pj(slug)}/personas`, { data, body }),

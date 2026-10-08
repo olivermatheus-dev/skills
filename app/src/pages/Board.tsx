@@ -1,16 +1,20 @@
 // Kanban do projeto: colunas backlog · todo · doing · review · done, visões Oliver / IA / todas, arrastar entre colunas.
-import { useMemo, useState } from 'react';
+// Criar = direto na coluna (estilo Trello: só o título; detalhes no painel). Rodar IA = Claude Code nas tarefas aprovadas.
+import { useMemo, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { DndContext, DragOverlay, PointerSensor, useDraggable, useDroppable, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from '@dnd-kit/core';
-import type { Task } from '../api';
-import { useTasks } from '../queries';
+import { useQuery } from '@tanstack/react-query';
+import { Circle, CircleCheck, CircleDashed, CircleDot, Eye, Plus, Search, Sparkles, User, X, type LucideIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { q as Q } from '../queries';
 import { useTaskActions } from '../components/board/useTaskActions';
-import { Button, Empty, ErrorBox, Input, PageHeader, cx } from '../components/kit';
+import { useRunner } from '../components/board/useRunner';
+import { Empty, ErrorBox, PageHeader, cx } from '../components/kit';
 import { TaskCard } from '../components/board/TaskCard';
 import { TaskDrawer } from '../components/board/TaskDrawer';
-import { NewTaskForm } from '../components/board/NewTaskForm';
+import { RunAiButton, RunningBar } from '../components/board/RunAi';
 import { Segmented } from '../components/board/Segmented';
-import { BOARD_OPTS, COLUMNS, VIEWS, inView, type BoardName, type Status, type TaskDoc, type View } from '../components/board/taskUtils';
+import { BOARD_OPTS, COLUMNS, VIEWS, inView, isReady, taskThread, type BoardName, type Status, type TaskDoc, type View } from '../components/board/taskUtils';
 
 const PRIO_RANK = { alta: 0, media: 1, baixa: 2 } as const;
 const sortTasks = (a: TaskDoc, b: TaskDoc) =>
@@ -18,8 +22,12 @@ const sortTasks = (a: TaskDoc, b: TaskDoc) =>
   || (a.data.due ?? '9999').localeCompare(b.data.due ?? '9999')
   || a.data.id.localeCompare(b.data.id);
 
-const COL_DOT: Record<Status, string> = {
-  backlog: '#a1a1aa', todo: '#60a5fa', doing: 'var(--color-primary)', review: 'var(--color-warning)', done: 'var(--color-success)',
+const COL_ICON: Record<Status, { icon: LucideIcon; color: string }> = {
+  backlog: { icon: CircleDashed, color: '#a1a1aa' },
+  todo: { icon: Circle, color: '#60a5fa' },
+  doing: { icon: CircleDot, color: 'var(--color-primary)' },
+  review: { icon: Eye, color: 'var(--color-warning)' },
+  done: { icon: CircleCheck, color: 'var(--color-success)' },
 };
 const VIEW_KEY = 'hub:board:view';
 const lsGet = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
@@ -27,7 +35,9 @@ const lsSet = (k: string, v: string) => { try { localStorage.setItem(k, v); } ca
 
 export default function Board() {
   const { slug = '' } = useParams();
-  const q = useTasks(slug);
+  const runner = useRunner(slug);
+  // enquanto a IA roda, o quadro se atualiza sozinho (os agentes editam os arquivos)
+  const q = useQuery({ ...Q.tasks(slug), refetchInterval: runner.running ? 4000 : 20000 });
   const actions = useTaskActions(slug);
   const tasks = q.data ?? [];
 
@@ -44,7 +54,7 @@ export default function Board() {
   };
   const setView = (v: View) => { lsSet(VIEW_KEY, v); setParam('visao', v); };
 
-  const [creating, setCreating] = useState<false | Partial<Task>>(false); // rascunho da nova tarefa (volta se a criação falhar)
+  const [composer, setComposer] = useState<Status | null>(null); // coluna com o "Adicionar tarefa" aberto
   const [dragId, setDragId] = useState<string | null>(null);
 
   const [moveError, setMoveError] = useState<unknown>(null);
@@ -68,58 +78,79 @@ export default function Board() {
   };
   const dragTask = dragId ? byId.get(dragId) : undefined;
   const openTask = openId ? byId.get(openId) ?? null : null;
+  const runningId = runner.status?.running ? runner.status.task : null;
 
-  const waiting = tasks.filter((t) => t.data.status === 'review').length;
+  /** cria o card na coluna; open = já abre o painel */
+  const createIn = (status: Status, title: string, assignee: string, open: boolean) => {
+    const { tempId } = actions.create({ title, status, assignee, board: board === 'todos' ? 'conteudo' : board }, undefined, {
+      onSuccess: (t) => { if (t.data.id !== tempId && new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', t.data.id); },
+      onError: () => { if (new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', null); },
+    });
+    if (open) { setComposer(null); setParam('t', tempId); }
+  };
+
+  const waiting = tasks.filter((t) => t.data.status === 'review' || taskThread(t.body).pending).length;
   return (
     <div className="p-8 flex flex-col min-h-full">
       <PageHeader
         title="Quadro"
-        subtitle={q.isSuccess ? `${tasks.length} tarefas · ${waiting} em revisão aguardando o Oliver` : 'Tarefas do projeto (companies/<slug>/board)'}
-        actions={<Button onClick={() => setCreating({})}>+ Nova tarefa</Button>}
+        subtitle={q.isSuccess ? `${tasks.length} tarefas · ${waiting} esperando você` : 'Tarefas do projeto (companies/<slug>/board)'}
+        actions={(
+          <div className="flex items-center gap-2">
+            <Button size="sm" variant="outline" onClick={() => setComposer('backlog')}><Plus /> Nova tarefa</Button>
+            <RunAiButton runner={runner} onOpenTask={(id) => setParam('t', id)} />
+          </div>
+        )}
       />
+
+      {runner.status?.running && !runner.status.otherProject && (
+        <RunningBar status={runner.status} onStop={() => runner.stop.mutate()} onOpenTask={(id) => setParam('t', id)} />
+      )}
 
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <Segmented label="Visão" value={view} onChange={setView} options={VIEWS.map((v) => ({ ...v, count: viewCounts[v.id] }))} />
         <Segmented label="Quadro" value={board} onChange={(v) => setParam('quadro', v === 'todos' ? null : v)}
           options={[{ id: 'todos' as const, label: 'Todos' }, ...BOARD_OPTS]} />
         <div className="relative ml-auto">
-          <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">⌕</span>
-          <Input type="search" aria-label="Buscar" placeholder="Buscar tarefa…" value={search} onChange={(e) => setParam('q', e.target.value || null)} className="pl-7 w-64" />
+          <Search aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
+          <input type="search" aria-label="Buscar" placeholder="Buscar tarefa…" value={search} onChange={(e) => setParam('q', e.target.value || null)}
+            className="h-8 pl-8 pr-3 w-64 rounded-md border border-border bg-card text-sm outline-none focus:border-primary" />
         </div>
       </div>
 
-      {creating && (
-        <NewTaskForm slug={slug} initial={creating} defaultBoard={board === 'todos' ? undefined : board} onCancel={() => setCreating(false)}
-          onCreate={(data) => {
-            // card provisório na hora + painel aberto; se o servidor der outro id, o painel acompanha
-            const { tempId } = actions.create(data, undefined, {
-              onSuccess: (t) => { if (t.data.id !== tempId && new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', t.data.id); },
-              onError: () => { if (new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', null); setCreating(data); },
-            });
-            setCreating(false); setParam('t', tempId);
-          }} />
-      )}
       {moveError ? <div className="mb-3"><ErrorBox error={moveError} /></div> : null}
 
       {q.isLoading ? (
         <div className="flex gap-3">{COLUMNS.map((c) => <div key={c.id} className="flex-1 min-w-56 h-64 rounded-xl bg-muted/70 animate-pulse" />)}</div>
       ) : q.isError ? (
         <ErrorBox error={q.error} />
-      ) : tasks.length === 0 ? (
-        <Empty title="Nenhuma tarefa ainda" hint="As tarefas ficam em companies/<slug>/board/T-NNNN-*.md." action={<Button onClick={() => setCreating({})}>+ Nova tarefa</Button>} />
+      ) : tasks.length === 0 && !composer ? (
+        <Empty title="Nenhuma tarefa ainda" hint="As tarefas ficam em companies/<slug>/board/T-NNNN-*.md." action={<Button onClick={() => setComposer('backlog')}><Plus /> Nova tarefa</Button>} />
       ) : (
         <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
-          <div className="flex gap-3 overflow-x-auto pb-4 -mx-1 px-1 flex-1 items-stretch">
+          <div className="flex gap-3 overflow-x-auto pb-4 -mx-1 px-1 flex-1 items-start">
             {COLUMNS.map((c) => {
               const items = visible.filter((t) => t.data.status === c.id).sort(sortTasks);
               return (
-                <Column key={c.id} id={c.id} label={c.label} count={items.length} highlight={c.id === 'review' && view === 'oliver'}>
+                <Column key={c.id} id={c.id} label={c.label} hint={c.hint} count={items.length}
+                  highlight={c.id === 'review' && items.length > 0}
+                  onAdd={() => setComposer(c.id)}
+                  footer={composer === c.id ? (
+                    <Composer defaultAssignee={view === 'ia' || c.id === 'todo' ? 'ai' : 'oliver'}
+                      onCreate={(title, assignee, open) => createIn(c.id, title, assignee, open)} onClose={() => setComposer(null)} />
+                  ) : (
+                    <button type="button" onClick={() => setComposer(c.id)}
+                      className="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-black/5 hover:text-foreground transition">
+                      <Plus className="size-4" /> Adicionar tarefa
+                    </button>
+                  )}>
                   {items.map((t) => (
                     <DraggableCard key={t.data.id} task={t} hidden={dragId === t.data.id}>
-                      <TaskCard task={t} blocked={isBlocked(t)} showBoard={board === 'todos'} onOpen={() => setParam('t', t.data.id)} />
+                      <TaskCard task={t} blocked={isBlocked(t)} showBoard={board === 'todos'} running={t.data.id === runningId}
+                        ready={!runningId && isReady(t.data, byId)} onOpen={() => setParam('t', t.data.id)} />
                     </DraggableCard>
                   ))}
-                  {items.length === 0 && <div className="text-xs text-muted-foreground text-center py-6 border border-dashed border-border rounded-lg">{needle ? 'Nada encontrado' : 'Vazio'}</div>}
+                  {items.length === 0 && composer !== c.id && needle && <div className="text-xs text-muted-foreground text-center py-4">Nada encontrado</div>}
                 </Column>
               );
             })}
@@ -130,24 +161,69 @@ export default function Board() {
         </DndContext>
       )}
 
-      <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} actions={actions} />
+      <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} actions={actions} runner={runner} />
     </div>
   );
 }
 
-function Column({ id, label, count, highlight, children }: { id: Status; label: string; count: number; highlight?: boolean; children: React.ReactNode }) {
+function Column({ id, label, hint, count, highlight, onAdd, footer, children }: {
+  id: Status; label: string; hint: string; count: number; highlight?: boolean; onAdd: () => void; footer: React.ReactNode; children: React.ReactNode;
+}) {
   const { setNodeRef, isOver } = useDroppable({ id });
+  const { icon: Icon, color } = COL_ICON[id];
   return (
     <section ref={setNodeRef} aria-label={label}
       className={cx('flex-1 min-w-56 max-w-80 rounded-xl p-2 flex flex-col transition-colors border',
         isOver ? 'bg-primary-soft border-primary/40' : highlight ? 'bg-amber-50/60 border-amber-200/70' : 'bg-muted/60 border-transparent')}>
-      <header className="flex items-center gap-2 px-1.5 pt-1 pb-2.5">
-        <span className="w-2 h-2 rounded-full" style={{ background: COL_DOT[id] }} />
+      <header className="group/col flex items-center gap-2 px-1.5 pt-1 pb-2.5" title={hint}>
+        <Icon className="size-4" style={{ color }} />
         <h2 className="text-sm font-medium">{label}</h2>
         <span className="text-xs text-muted-foreground tabular-nums">{count}</span>
+        <button type="button" onClick={onAdd} aria-label={`Adicionar tarefa em ${label}`}
+          className="ml-auto size-6 inline-flex items-center justify-center rounded-md text-muted-foreground hover:bg-black/5 hover:text-foreground opacity-0 group-hover/col:opacity-100 focus:opacity-100 transition">
+          <Plus className="size-4" />
+        </button>
       </header>
-      <div className="flex flex-col gap-2 flex-1 min-h-24">{children}</div>
+      <div className="flex flex-col gap-2 min-h-8">{children}</div>
+      <div className="mt-2">{footer}</div>
     </section>
+  );
+}
+
+/** Adicionar tarefa na coluna: só o título. Enter cria e mantém aberto para a próxima; Ctrl+Enter cria e abre o painel. */
+function Composer({ defaultAssignee, onCreate, onClose }: { defaultAssignee: string; onCreate: (title: string, assignee: string, open: boolean) => void; onClose: () => void }) {
+  const [title, setTitle] = useState('');
+  const [assignee, setAssignee] = useState(defaultAssignee);
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const submit = (open: boolean) => {
+    const t = title.trim();
+    if (!t) return;
+    onCreate(t, assignee, open);
+    setTitle('');
+    ref.current?.focus();
+  };
+  const isAiSel = assignee !== 'oliver';
+  return (
+    <div className="flex flex-col gap-2" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node) && !title.trim()) onClose(); }}>
+      <textarea ref={ref} autoFocus rows={2} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Título da tarefa…"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(e.ctrlKey || e.metaKey); }
+        }}
+        className="w-full resize-none rounded-lg border border-primary/40 bg-card px-3 py-2 text-sm shadow-sm outline-none focus:ring-2 focus:ring-primary/20" />
+      <div className="flex items-center gap-1.5">
+        <Button size="sm" disabled={!title.trim()} onClick={() => submit(false)}>Adicionar</Button>
+        <button type="button" onClick={() => setAssignee(isAiSel ? 'oliver' : 'ai')} title="Quem faz: clique para trocar"
+          className={cx('inline-flex items-center gap-1 h-8 px-2 rounded-md text-xs font-medium border transition',
+            isAiSel ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-card text-muted-foreground border-border hover:text-foreground')}>
+          {isAiSel ? <Sparkles className="size-3.5" /> : <User className="size-3.5" />}{isAiSel ? 'IA' : 'Oliver'}
+        </button>
+        <button type="button" onClick={onClose} aria-label="Fechar" className="ml-auto size-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover:bg-black/5">
+          <X className="size-4" />
+        </button>
+      </div>
+      <div className="text-[11px] text-muted-foreground px-0.5">Enter adiciona · Ctrl+Enter adiciona e abre</div>
+    </div>
   );
 }
 

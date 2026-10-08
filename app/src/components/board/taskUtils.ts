@@ -1,17 +1,20 @@
 // Regras do Kanban usadas pela interface (mesma semântica de tools/lib/board.mjs e da skill orquestrar).
 import type { Doc, Task } from '../../api';
+import { splitTaskBody, pendingAsk, type TaskComment } from '../../../../schema/task';
+export { splitTaskBody, joinTaskBody, pendingAsk, nowStamp, type TaskComment, type CommentKind } from '../../../../schema/task';
 
 export type TaskDoc = Doc<Task>;
 export type Status = Task['status'];
 export type BoardName = Task['board'];
 export type Priority = Task['priority'];
 
-export const COLUMNS: { id: Status; label: string }[] = [
-  { id: 'backlog', label: 'Backlog' },
-  { id: 'todo', label: 'A fazer' },
-  { id: 'doing', label: 'Fazendo' },
-  { id: 'review', label: 'Revisão' },
-  { id: 'done', label: 'Feito' },
+/** hint = o que a coluna significa no fluxo com a IA (A fazer = aprovado; a IA só pega daqui). */
+export const COLUMNS: { id: Status; label: string; hint: string }[] = [
+  { id: 'backlog', label: 'Backlog', hint: 'Ideias e rascunhos. A IA não mexe aqui.' },
+  { id: 'todo', label: 'A fazer', hint: 'Aprovado. As tarefas da IA saem daqui quando você clica em Rodar IA.' },
+  { id: 'doing', label: 'Fazendo', hint: 'Em execução (por você ou pela IA).' },
+  { id: 'review', label: 'Revisão', hint: 'Esperando você: conferir, responder ou aprovar.' },
+  { id: 'done', label: 'Feito', hint: 'Concluído.' },
 ];
 export const STATUS_LABEL = Object.fromEntries(COLUMNS.map((c) => [c.id, c.label])) as Record<Status, string>;
 
@@ -71,3 +74,20 @@ export const fmtShortDate = (s: string) =>
 
 /** O editor (MDXEditor) serializa listas com "*"; o quadro (board.mjs, heartbeat) conta "- [ ]". Volta para "-". */
 export const normalizeBody = (md: string) => md.replace(/^(\s*)\* (?=\S)/gm, '$1- ');
+
+/** Comentários e pendência do card (lidos do corpo da tarefa). */
+export function taskThread(body: string): { comments: TaskComment[]; pending: TaskComment | null } {
+  const { comments } = splitTaskBody(body);
+  return { comments, pending: pendingAsk(comments) };
+}
+
+/** Pronta para a IA = A fazer, responsável IA/agente, dependências feitas (mesma regra do heartbeat). */
+export const isReady = (t: Task, byId: Map<string, TaskDoc>) =>
+  t.status === 'todo' && isAi(t.assignee) && t.depends.every((d) => byId.get(d)?.data.status === 'done');
+
+/** "2026-10-08 14:32" → "hoje 14:32" / "8 out 14:32" */
+export function fmtStamp(at: string) {
+  const [d, h] = at.split(' ');
+  const day = d === todayIso() ? 'hoje' : fmtShortDate(d);
+  return h ? `${day} ${h}` : day;
+}

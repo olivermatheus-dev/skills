@@ -20,6 +20,7 @@
 - **Chaves de API por projeto:** app → **Configurações** (grava `companies/<slug>/.env`, fora do git; botão Testar). `.env` da raiz = reserva.
 - **Áudio:** 560 SFX licenciados (EditorPro, comprado, uso comercial) em `library/audio/sfx/`; consultar `library/audio/INDEX.md`. Import de pacotes: `tools/audio/import.mjs`.
 - **Assets:** mapa em `library/README.md`; arquivos brutos entram por `_inbox/{audio,visual,video}/`.
+- **Quadro v2 (032, 2026-10-08):** criar tarefa direto na coluna (Enter cria, Ctrl+Enter abre), comentários da IA dentro do card (`## Comentários` no próprio `T-NNNN.md`; agentes usam `node tools/board.mjs comment …`; selo Revisar/Pergunta), botão **Rodar IA** (segundo plano = heartbeat, ou janela de terminal) com faixa ao vivo, log e Parar. **Falta o Oliver fazer `/login` no `claude` do terminal** (está sem login) e testar com a T-0017. Ver `tasks/032-kanban-v2/TASK.md`.
 - **Conteúdo:** 21 skills + 9 formatos `fmt-*`, 7 agentes, Kanban em `companies/<slug>/board/` (`node tools/board.mjs kz --me`), heartbeat. Base de vídeo em `knowledge/video/REGRAS.md`.
 
 ## Pendências do Oliver (bloqueiam a produção da kz)

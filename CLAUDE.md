@@ -70,6 +70,8 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
 ## Agentes e Kanban
 - **Kanban:** `companies/<slug>/board/` · colunas `backlog · todo · doing · review · done` · quadros `conteudo · vendas · produto` · `assignee: oliver | ai | agent:<nome>`.
   - Ver: `node tools/board.mjs <slug>` (`--me` = minha visão, inclui o que está em revisão; `--ai`; `--check`; `--next-id`).
+  - **Comentários no card** (o que o Oliver lê no app): `node tools/board.mjs comment <slug> <T-NNNN> "texto" --as agent:<nome> [--tipo revisar|pergunta] [--status review --para oliver]`. Ficam no próprio arquivo (`## Comentários`, antes do `## Log`).
+  - **A fazer = aprovado.** App → Quadro → **Rodar IA** roda as prontas (A fazer · IA/agente · dependências feitas) pelo heartbeat ou abre o Claude Code num terminal.
 - **Orquestrador = esta sessão principal** (skill `orquestrar`): tarefa para a IA → divide em subtarefas → delega ao agente → revisor → devolve ao Oliver em `review`.
 - **Agentes** (`.claude/agents/`), cada um com instruções, skills pré-carregadas e ordem de trabalho:
 
