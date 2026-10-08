@@ -1,0 +1,46 @@
+{
+  "name": "Kzloo",
+  "updated": "2026-10-08",
+  "sources": ["context/BUSINESS.md (Modelo e preço)", "context/PRODUTO.md (só funcionalidades prontas)", "context/COPY.md (headline, diferenciais, CTA)", "context/VOICE.md (tom)"],
+  "price": {
+    "fromMonthly": 129,
+    "note": "faixa R$ 100–129/mês; a copy usa R$ 129; preço final a validar",
+    "currency": "BRL",
+    "model": "assinatura",
+    "plans": 1,
+    "trial": null,
+    "guarantee": null
+  },
+  "message": {
+    "headline": "Pare de gerenciar seu consultório em 5 apps.",
+    "subheadline": "Mais tempo com o paciente, menos burocracia, uma prática mais profissional.",
+    "cta": "Pedir meu acesso",
+    "tone": "colega terapeuta experiente e compreensiva: acolhedora, calma, direta com gentileza"
+  },
+  "followers": null,
+  "features": [
+    { "name": "Agenda", "items": [
+      { "name": "Agenda dia, semana, mês e ano" }, { "name": "Agendamento online ou presencial" }, { "name": "Sessões recorrentes" },
+      { "name": "Sessão rápida (atender sem agendar)", "highlight": true }, { "name": "Painel do dia" }
+    ] },
+    { "name": "Teleatendimento", "items": [
+      { "name": "Videochamada própria, sem Meet/Zoom", "highlight": true }, { "name": "Sala de espera em tempo real", "highlight": true },
+      { "name": "Tela de atendimento (vídeo + anotações + histórico)", "highlight": true }
+    ] },
+    { "name": "Prontuário", "items": [
+      { "name": "Registro de sessão (notas + planejamento)", "highlight": true }, { "name": "Linha do tempo com busca" }, { "name": "Anotações do cliente" },
+      { "name": "Ficha do cliente (anamnese)" }, { "name": "Formulário online preenchido pelo paciente", "highlight": true }, { "name": "Documentos" }, { "name": "Métricas do cliente" }
+    ] },
+    { "name": "Comunicação/WhatsApp", "items": [
+      { "name": "Agenda do dia no WhatsApp", "highlight": true }, { "name": "Confirmação de sessão no WhatsApp", "highlight": true },
+      { "name": "Botão WhatsApp do cliente" }, { "name": "Notificações no app e no navegador" }
+    ] },
+    { "name": "Financeiro", "items": [
+      { "name": "Cobrança por mensalidade ou pacote de sessões", "highlight": true }, { "name": "Painel de cobranças" }
+    ] },
+    { "name": "Portal do paciente", "items": [{ "name": "Área do Cliente" }] },
+    { "name": "Marketing/Site", "items": [{ "name": "Perfil público do terapeuta" }, { "name": "Indicações" }] },
+    { "name": "Segurança/LGPD", "items": [{ "name": "Exportar dados do cliente (LGPD)" }, { "name": "Arquivar cliente" }, { "name": "Aceite de termos" }] },
+    { "name": "Outros", "items": [{ "name": "Busca global (Ctrl+K)" }, { "name": "Preferências" }, { "name": "Assinatura do terapeuta" }, { "name": "Suporte por tickets" }] }
+  ]
+}

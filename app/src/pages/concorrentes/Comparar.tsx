@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
-import { AreaPage, SortTable, useMarket, type Col, type MarketRow } from '../../components/competitors/area';
+import { AreaPage, REF_ID, SortTable, useMarket, useRefRow, type Col, type MarketRow } from '../../components/competitors/area';
 import { money } from '../../components/competitors/Analysis';
 import { Avatar, Chips } from '../../components/competitors/lib';
 import { Badge, Empty, ErrorBox, cx } from '../../components/kit';
@@ -20,14 +20,17 @@ export default function Comparar() {
   const v = (raw in VIEWS ? raw : 'oferta') as View;
   const m = useMarket(slug);
   const rows = m.rows.filter((r) => r.c.data.kind === 'concorrente');
+  const ref = useRefRow(slug);
+  const pin = ref ? [ref] : [];
   return (
     <AreaPage>
       <div className="mb-4"><Chips value={v} onChange={(x) => setSp(x === 'oferta' ? {} : { v: x }, { replace: true })} options={Object.entries(VIEWS).map(([value, label]) => ({ value: value as View, label }))} /></div>
       <ErrorBox error={m.error} />
       {!m.isLoading && !rows.length && <Empty title="Sem concorrentes ativos" />}
-      {v === 'oferta' && <Oferta slug={slug} rows={rows} />}
-      {v === 'funcionalidades' && <Funcionalidades slug={slug} rows={rows} />}
-      {v === 'mensagem' && <Mensagem slug={slug} rows={rows} />}
+      {v === 'oferta' && <Oferta slug={slug} rows={rows} pin={pin} />}
+      {v === 'funcionalidades' && <Funcionalidades slug={slug} rows={rows} pin={pin} />}
+      {v === 'mensagem' && <Mensagem slug={slug} rows={rows} pin={pin} />}
+      {ref && v !== 'reputacao' && <p className="mt-2 text-[11px] text-muted-foreground">{ref.c.data.name} (você) vem de <Link to={`/p/${slug}/contexto`} className="hover:text-primary-ink">Contexto</Link> (BUSINESS, PRODUTO, COPY) via <code>intel/referencia.json</code>: preço de referência da copy, só funcionalidades prontas.</p>}
       {v === 'reputacao' && <Reputacao slug={slug} rows={rows} />}
     </AreaPage>
   );
@@ -35,7 +38,11 @@ export default function Comparar() {
 
 const nameCol = (slug: string): Col<MarketRow> => ({
   k: 'name', label: 'Concorrente', v: (r) => r.c.data.name, className: 'min-w-48',
-  render: (r) => (
+  render: (r) => r.c.data.id === REF_ID ? (
+    <Link to={`/p/${slug}/contexto`} className="flex items-center gap-2 font-semibold text-primary-ink">
+      <Avatar name={r.c.data.name} size={22} className="!ring-0" />{r.c.data.name}<span className="text-[10px] font-medium px-1.5 rounded-full bg-primary text-primary-foreground">você</span>
+    </Link>
+  ) : (
     <Link to={`/p/${slug}/concorrentes/${r.c.data.id}`} className="flex items-center gap-2 font-medium hover:text-primary-ink">
       <Avatar name={r.c.data.name} size={22} local={r.avatar.local} remote={r.avatar.remote} className="!ring-0" />{r.c.data.name}
     </Link>
@@ -43,10 +50,10 @@ const nameCol = (slug: string): Col<MarketRow> => ({
 });
 const dash = <span className="text-muted-foreground">—</span>;
 
-function Oferta({ slug, rows }: { slug: string; rows: MarketRow[] }) {
+function Oferta({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
   const cols: Col<MarketRow>[] = [
     nameCol(slug),
-    { k: 'price', label: 'A partir de', num: true, v: (r) => r.ov?.fromMonthly, render: (r) => (r.ov?.fromMonthly != null ? <b>{money(r.ov.fromMonthly, r.ov.currency)}</b> : r.ov?.publicPrice === false ? <span className="text-muted-foreground">oculto</span> : dash) },
+    { k: 'price', label: 'A partir de', num: true, v: (r) => r.ov?.fromMonthly, render: (r) => (r.ov?.fromMonthly != null ? <b title={mod<P>(r, 'precos')?.notes ?? undefined}>{money(r.ov.fromMonthly, r.ov.currency)}</b> : r.ov?.publicPrice === false ? <span className="text-muted-foreground">oculto</span> : dash) },
     { k: 'top', label: 'Plano mais caro', num: true, v: (r) => Math.max(...(mod<P>(r, 'precos')?.plans.map((p) => p.monthly ?? 0) ?? [0])) || undefined, render: (r) => { const ps = mod<P>(r, 'precos')?.plans.filter((p) => p.monthly != null) ?? []; const t = ps.sort((a, b) => b.monthly! - a.monthly!)[0]; return t ? <span title={t.name}>{money(t.monthly!, mod<P>(r, 'precos')?.currency)}</span> : dash; } },
     { k: 'yearly', label: 'No anual', num: true, title: 'menor preço mensal no plano anual', v: (r) => Math.min(...(mod<P>(r, 'precos')?.plans.map((p) => p.yearlyMonthly ?? Infinity) ?? [Infinity])), render: (r) => { const y = Math.min(...(mod<P>(r, 'precos')?.plans.map((p) => p.yearlyMonthly ?? Infinity) ?? [Infinity])); return Number.isFinite(y) ? money(y, mod<P>(r, 'precos')?.currency) : dash; } },
     { k: 'model', label: 'Modelo', v: (r) => r.ov?.priceModel, render: (r) => (r.ov?.priceModel ? <Badge color={r.ov.priceModel === 'freemium' ? '#16a34a' : undefined}>{r.ov.priceModel}</Badge> : dash) },
@@ -54,18 +61,19 @@ function Oferta({ slug, rows }: { slug: string; rows: MarketRow[] }) {
     { k: 'trial', label: 'Teste grátis', v: (r) => r.ov?.trial ?? undefined, render: (r) => <span className="block max-w-56 truncate" title={r.ov?.trial ?? ''}>{r.ov?.trial ?? '—'}</span> },
     { k: 'guar', label: 'Fidelidade / garantia', v: (r) => mod<P>(r, 'precos')?.guarantee ?? undefined, render: (r) => <span className="block max-w-48 truncate text-muted-foreground" title={mod<P>(r, 'precos')?.guarantee ?? ''}>{mod<P>(r, 'precos')?.guarantee ?? '—'}</span> },
   ];
-  return <SortTable rows={rows} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
+  return <SortTable rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
 }
 
 /** matriz: grupo de funcionalidade × concorrente; célula = nº de itens (★ = diferencial), detalhe no tooltip */
-function Funcionalidades({ slug, rows }: { slug: string; rows: MarketRow[] }) {
-  const withF = rows.filter((r) => mod<F>(r, 'features'));
+function Funcionalidades({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
+  const comps = rows.filter((r) => mod<F>(r, 'features'));
+  const withF = [...pin, ...comps];
   const groups = useMemo(() => {
     const n = new Map<string, number>();
-    for (const r of withF) for (const g of mod<F>(r, 'features')!.groups) n.set(g.name, (n.get(g.name) ?? 0) + 1);
+    for (const r of comps) for (const g of mod<F>(r, 'features')!.groups) n.set(g.name, (n.get(g.name) ?? 0) + 1);
     return [...n].sort((a, b) => b[1] - a[1]).map(([g]) => g);
-  }, [withF]);
-  if (!withF.length) return <Empty title="Nenhuma análise de funcionalidades ainda" />;
+  }, [comps]);
+  if (!comps.length) return <Empty title="Nenhuma análise de funcionalidades ainda" />;
   return (
     <div className="bg-card border border-border rounded-xl overflow-x-auto">
       <table className="text-sm w-full">
@@ -73,8 +81,8 @@ function Funcionalidades({ slug, rows }: { slug: string; rows: MarketRow[] }) {
           <tr>
             <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground sticky left-0 bg-muted/40 min-w-44">Grupo</th>
             {withF.map((r) => (
-              <th key={r.c.data.id} className="px-2 py-2 text-xs font-medium text-muted-foreground whitespace-nowrap">
-                <Link to={`/p/${slug}/concorrentes/${r.c.data.id}?aba=produto`} className="hover:text-foreground">{r.c.data.name}</Link>
+              <th key={r.c.data.id} className={cx('px-2 py-2 text-xs font-medium whitespace-nowrap', r.c.data.id === REF_ID ? 'text-primary-ink bg-primary/10' : 'text-muted-foreground')}>
+                <Link to={r.c.data.id === REF_ID ? `/p/${slug}/contexto` : `/p/${slug}/concorrentes/${r.c.data.id}?aba=produto`} className="hover:text-foreground">{r.c.data.name}{r.c.data.id === REF_ID && ' (você)'}</Link>
               </th>
             ))}
             <th className="px-3 py-2 text-xs font-medium text-muted-foreground text-right">Têm</th>
@@ -82,7 +90,8 @@ function Funcionalidades({ slug, rows }: { slug: string; rows: MarketRow[] }) {
         </thead>
         <tbody>
           {groups.map((g) => {
-            const has = withF.filter((r) => mod<F>(r, 'features')!.groups.some((x) => x.name === g)).length;
+            const has = comps.filter((r) => mod<F>(r, 'features')!.groups.some((x) => x.name === g)).length;
+            const mine = pin.some((r) => mod<F>(r, 'features')!.groups.some((x) => x.name === g));
             return (
               <tr key={g} className="border-b border-border last:border-0 hover:bg-muted/30">
                 <td className="px-3 py-1.5 sticky left-0 bg-card font-medium">{g}</td>
@@ -90,28 +99,28 @@ function Funcionalidades({ slug, rows }: { slug: string; rows: MarketRow[] }) {
                   const grp = mod<F>(r, 'features')!.groups.find((x) => x.name === g);
                   const stars = grp?.items.filter((i) => i.highlight).length ?? 0;
                   return (
-                    <td key={r.c.data.id} className="px-2 py-1.5 text-center" title={grp ? grp.items.map((i) => `${i.highlight ? '★ ' : '· '}${i.name}`).join('\n') : 'não mostram'}>
+                    <td key={r.c.data.id} className={cx('px-2 py-1.5 text-center', r.c.data.id === REF_ID && 'bg-primary/5')} title={grp ? grp.items.map((i) => `${i.highlight ? '★ ' : '· '}${i.name}`).join('\n') : 'não mostram'}>
                       {grp ? <span className={cx('inline-flex items-center justify-center min-w-7 h-6 rounded-md text-xs tabular-nums', stars ? 'bg-primary/15 text-primary-ink font-semibold' : 'bg-muted')}>{grp.items.length}{stars ? '★' : ''}</span> : <span className="text-muted-foreground/50">·</span>}
                     </td>
                   );
                 })}
-                <td className="px-3 py-1.5 text-right tabular-nums text-xs text-muted-foreground">{has}/{withF.length}</td>
+                <td className="px-3 py-1.5 text-right tabular-nums text-xs text-muted-foreground" title={pin.length && !mine ? 'você não tem: veja se é brecha ou lacuna' : undefined}>{has}/{comps.length}{pin.length > 0 && !mine && has >= comps.length / 2 ? <span className="text-destructive font-medium"> · falta</span> : null}</td>
               </tr>
             );
           })}
           <tr className="bg-muted/30">
             <td className="px-3 py-1.5 sticky left-0 bg-muted/30 text-xs text-muted-foreground">Total de itens</td>
-            {withF.map((r) => <td key={r.c.data.id} className="px-2 py-1.5 text-center text-xs tabular-nums font-medium">{mod<F>(r, 'features')!.groups.reduce((n, g) => n + g.items.length, 0)}</td>)}
+            {withF.map((r) => <td key={r.c.data.id} className={cx('px-2 py-1.5 text-center text-xs tabular-nums font-medium', r.c.data.id === REF_ID && 'bg-primary/10')}>{mod<F>(r, 'features')!.groups.reduce((n, g) => n + g.items.length, 0)}</td>)}
             <td />
           </tr>
         </tbody>
       </table>
-      <div className="px-3 py-2 text-[11px] text-muted-foreground border-t border-border">Número = itens no grupo · ★ = tem diferencial no grupo · passe o mouse para ver a lista. Grupos que poucos têm são brecha ou nicho.</div>
+      <div className="px-3 py-2 text-[11px] text-muted-foreground border-t border-border">Número = itens no grupo · ★ = tem diferencial no grupo · passe o mouse para ver a lista. “Têm” conta só os concorrentes; “falta” = metade ou mais deles têm e você não. Grupos que poucos têm são brecha ou nicho.</div>
     </div>
   );
 }
 
-function Mensagem({ slug, rows }: { slug: string; rows: MarketRow[] }) {
+function Mensagem({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
   const cols: Col<MarketRow>[] = [
     nameCol(slug),
     { k: 'hero', label: 'Promessa (hero)', v: (r) => mod<Lp>(r, 'landing')?.hero.headline, className: 'min-w-72', render: (r) => { const l = mod<Lp>(r, 'landing'); return l ? <div><div className="font-medium leading-snug">{l.hero.headline}</div>{l.hero.subheadline && <div className="text-xs text-muted-foreground line-clamp-2">{l.hero.subheadline}</div>}</div> : dash; } },
@@ -120,7 +129,7 @@ function Mensagem({ slug, rows }: { slug: string; rows: MarketRow[] }) {
     { k: 'tone', label: 'Tom', v: (r) => mod<Lp>(r, 'landing')?.tone ?? undefined, render: (r) => <span className="text-xs text-muted-foreground block max-w-48">{mod<Lp>(r, 'landing')?.tone ?? '—'}</span> },
     { k: 'sec', label: 'Seções', num: true, v: (r) => r.ov?.sections, render: (r) => r.ov?.sections ?? dash },
   ];
-  return <SortTable rows={rows} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />;
+  return <SortTable rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />;
 }
 
 function Reputacao({ slug, rows }: { slug: string; rows: MarketRow[] }) {

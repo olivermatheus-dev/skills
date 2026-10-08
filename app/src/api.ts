@@ -59,6 +59,8 @@ export interface WeeklyInfo {
   lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
   reports: { week: string; file: string }[];
 }
+import type { Referencia } from '../../schema/referencia';
+export type { Referencia };
 export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
 export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; snapshotsTotal: number; marks: Record<string, ItemMark> }
 export interface DetectedLink { platform: string; url: string; handle?: string; externalId?: string; kind: 'perfil' | 'conteudo' }
@@ -139,6 +141,7 @@ export const api = {
   cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
   runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
+  referencia: (slug: string) => req<Referencia | null>('GET', `${pj(slug)}/referencia`),
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),

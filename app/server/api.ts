@@ -111,6 +111,12 @@ on('POST', '/api/projects/:slug/weekly', async (p) => {
   return W.status(p.slug);
 });
 on('GET', '/api/projects/:slug/weekly/report', async (p, _, q) => ({ text: (await import('../../tools/intel/semanal')).readReport(p.slug, q.get('week') ?? '') }));
+// a própria empresa como referência no Comparar e no Panorama (companies/<slug>/intel/referencia.json; null se não houver)
+on('GET', '/api/projects/:slug/referencia', async (p) => {
+  const { Referencia, company } = await import('../../schema');
+  const f = join(S.ROOT, company(p.slug), 'intel', 'referencia.json');
+  return existsSync(f) ? Referencia.parse(JSON.parse(readFileSync(f, 'utf8'))) : null;
+});
 // coletor de anúncios (Playwright só carrega dentro do collectAds)
 const adsMod = () => import('../../tools/intel/ads');
 on('GET', '/api/projects/:slug/ads', async (p) => {

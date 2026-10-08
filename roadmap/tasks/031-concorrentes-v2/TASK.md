@@ -31,6 +31,13 @@ Rotas fixas em `pages/index.ts` (ganham da `:id` da ficha); casca comum `compone
 - **Primeira rodada real (2026-W41):** 28/29 perfis ok; 50 anúncios ativos em 6 de 11 concorrentes (Sintropia 15, Corpora 10, Allminds 9, PsicoManager 7, Mais Terapias 6, Psicoplanner 3); 40 dos 50 no ar há 30+ dias. Na 2ª busca seguida a Corpora deu HTTP 403 (limite da Meta): o relatório avisa e a aba usa a coleta anterior.
 - Prints: `prints/fase-d/`.
 
+## Kzloo como referência (2026-10-08)
+- `companies/kz/intel/referencia.json` (schema `schema/referencia.ts`, rota `GET /referencia`): a própria empresa tirada só do contexto. Preço de referência R$ 129, que é o da copy (faixa R$ 100–129, final a validar); plano único; sem trial nem garantia declarados; promessa e CTA do COPY; tom do VOICE; funcionalidades **só as prontas** do PRODUTO, nos mesmos grupos da análise dos concorrentes (31 itens). Seguidores: null, porque o Instagram ainda está "a definir".
+- **Comparar:** a Kzloo aparece fixa no topo (fora da ordenação) em Oferta e Mensagem, e como 1ª coluna da matriz. Na matriz, "falta" marca os grupos que metade ou mais dos concorrentes têm e a Kzloo não: hoje **IA (8/11)** e **Gestão de equipe (9/11)**.
+- **Panorama:** chip "Kzloo (você) R$ 129 · +100% vs mediana · 10/10 cobram menos" e linha tracejada no preço da Kzloo no gráfico ("ainda sem audiência própria"; vira ponto quando houver seguidores). Os rótulos do gráfico não se sobrepõem mais.
+- **Manter atualizado:** mudou preço, plano, trial, funcionalidade pronta ou rede própria no contexto → editar o `referencia.json` (as skills `setup` e `analise-concorrentes` não fazem isso sozinhas ainda).
+- Prints: `prints/referencia/`.
+
 ## Falta / próximos passos
 - **Oliver:** usar a ficha nova e dizer o que ainda ocupa espaço demais.
 - **Oliver:** usar as abas e apontar o que sobra ou falta (ex.: incluir a Kzloo como linha de referência no Comparar e no gráfico preço × audiência).
@@ -123,6 +130,7 @@ Pesquisa e implementação em paralelo (subagente, 2026-10-08): rotas públicas 
 
 ## Log
 - 2026-10-08 — diagnóstico com prints (`prints/antes/`), plano da estrutura. Pesquisa do Instagram sem token disparada em paralelo.
+- 2026-10-08 — Kzloo como linha de referência no Comparar e no gráfico do Panorama (dados do contexto).
 - 2026-10-08 — Oliver: coleta semanal só sob comando, sem agendamento → agendador removido (servidor, painel e estado).
 - 2026-10-08 — fase D: coletor de anúncios da Meta (subagente) + coleta semanal com relatório e agendador no app; 1ª rodada real W41.
 - 2026-10-08 — abas da área feitas (Panorama, Concorrentes, Comparar, Conteúdos, Redes, Anúncios, Coletas), conferidas com prints em `prints/area/`.

@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { api } from '../../api';
 import { useCompetitorsFeed } from '../../queries';
-import { AreaPage, Delta, StatStrip, useMarket, type MarketRow } from '../../components/competitors/area';
+import { AreaPage, Delta, StatStrip, useMarket, useRefRow, type MarketRow } from '../../components/competitors/area';
 import { money } from '../../components/competitors/Analysis';
 import { Avatar, Img, PlatformIcon, TYPE_LABEL, buildRows, fmtRatio, groupSnapshots, median } from '../../components/competitors/lib';
 import { titleOf } from '../../components/competitors/Items';
@@ -14,18 +14,24 @@ import { Empty, ErrorBox, fmtNum } from '../../components/kit';
 export default function Panorama() {
   const { slug = '' } = useParams();
   const m = useMarket(slug);
+  const ref = useRefRow(slug);
   const comp = m.rows.filter((r) => r.c.data.kind === 'concorrente');
   const prices = comp.map((r) => r.ov?.fromMonthly).filter((v): v is number => v != null);
   const free = comp.filter((r) => r.ov?.priceModel === 'freemium' || (r.res.precos?.data as ModuleDataOf<'precos'> | undefined)?.plans.some((p) => p.monthly === 0));
   const trial = comp.filter((r) => r.ov?.trial);
   const audience = comp.reduce((n, r) => n + (r.followers ?? 0), 0);
   const biggest = [...comp].sort((a, b) => (b.followers ?? 0) - (a.followers ?? 0))[0];
+  const refPrice = ref?.ov?.fromMonthly;
+  const medPrice = median(prices);
+  const cheaper = refPrice != null ? prices.filter((p) => p < refPrice).length : 0;
 
   if (m.error) return <AreaPage><ErrorBox error={m.error} /></AreaPage>;
   if (!m.isLoading && !m.rows.length) return <AreaPage><Empty title="Nenhum concorrente ainda" hint="Use + Adicionar para colar os links (site, Instagram, YouTube, TikTok)." /></AreaPage>;
   return (
     <AreaPage sub={`${comp.length} concorrente(s) monitorado(s)`}>
       <StatStrip items={[
+        ...(ref && refPrice != null ? [{ label: `${ref.c.data.name} (você)`, value: money(refPrice), title: (ref.res.precos?.data as { notes?: string } | undefined)?.notes ?? undefined,
+          sub: medPrice ? `${refPrice >= medPrice ? '+' : ''}${Math.round((refPrice / medPrice - 1) * 100)}% vs mediana · ${cheaper}/${prices.length} cobram menos` : undefined }] : []),
         { label: 'Preço de entrada (mediana)', value: prices.length ? money(median(prices)) : '—', sub: prices.length > 1 ? `${money(Math.min(...prices))} a ${money(Math.max(...prices))}` : undefined },
         { label: 'Com plano grátis', value: `${free.length}/${comp.length}`, title: free.map((r) => r.c.data.name).join(', ') },
         { label: 'Com teste grátis', value: `${trial.length}/${comp.length}`, title: trial.map((r) => `${r.c.data.name}: ${r.ov?.trial}`).join('\n') },
@@ -37,7 +43,7 @@ export default function Panorama() {
         <section className="bg-card border border-border rounded-xl p-4">
           <h2 className="text-sm font-semibold">Preço × audiência</h2>
           <p className="text-xs text-muted-foreground">Preço de entrada por mês × seguidores somados (escala log). Quem está no canto de baixo à esquerda é barato e pouco conhecido.</p>
-          <PriceAudience slug={slug} rows={comp} />
+          <PriceAudience slug={slug} rows={comp} ref_={ref} />
         </section>
         <section className="bg-card border border-border rounded-xl p-4">
           <h2 className="text-sm font-semibold mb-2">Audiência e crescimento</h2>
@@ -52,15 +58,16 @@ export default function Panorama() {
 }
 
 /** gráfico de dispersão: 1 série (os concorrentes), rótulo direto em cada ponto, tooltip no hover */
-function PriceAudience({ slug, rows }: { slug: string; rows: MarketRow[] }) {
+function PriceAudience({ slug, rows, ref_ }: { slug: string; rows: MarketRow[]; ref_: MarketRow | null }) {
   const [hover, setHover] = useState<string | null>(null);
   const nav = useNavigate();
   const pts = rows.filter((r) => r.ov?.fromMonthly != null && r.followers);
   const out = rows.filter((r) => !pts.includes(r));
   if (pts.length < 2) return <div className="text-sm text-muted-foreground py-10 text-center">Precisa de preço e seguidores de pelo menos 2 concorrentes.</div>;
   const W = 640, H = 300, L = 48, R = 16, T = 12, B = 32;
-  const maxP = Math.max(...pts.map((r) => r.ov!.fromMonthly!)) * 1.1;
-  const fs = pts.map((r) => r.followers!);
+  const rp = ref_?.ov?.fromMonthly;
+  const maxP = Math.max(...pts.map((r) => r.ov!.fromMonthly!), rp ?? 0) * 1.1;
+  const fs = [...pts.map((r) => r.followers!), ...(rp != null && ref_?.followers ? [ref_.followers] : [])];
   const lo = Math.floor(Math.log10(Math.min(...fs))), hi = Math.ceil(Math.log10(Math.max(...fs)));
   const x = (p: number) => L + (p / maxP) * (W - L - R);
   const y = (f: number) => T + (1 - (Math.log10(f) - lo) / Math.max(1, hi - lo)) * (H - T - B);
@@ -73,14 +80,25 @@ function PriceAudience({ slug, rows }: { slug: string; rows: MarketRow[] }) {
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label="Preço de entrada por seguidores">
         {yt.map((v) => <g key={v}><line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className="stroke-border" strokeWidth={1} /><text x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-muted-foreground text-[10px]">{fmtNum(v)}</text></g>)}
         {xt.map((v) => <text key={v} x={x(v)} y={H - B + 16} textAnchor="middle" className="fill-muted-foreground text-[10px]">{money(v)}</text>)}
-        {pts.map((r) => {
+        {/* você: linha no seu preço; ponto só quando houver audiência própria */}
+        {rp != null && (
+          <g>
+            <line x1={x(rp)} x2={x(rp)} y1={T} y2={H - B} className="stroke-primary" strokeWidth={1.5} strokeDasharray="4 4" />
+            <text x={x(rp) - 6} y={H - B - 20} textAnchor="end" className="fill-primary text-[11px] font-semibold">{ref_!.c.data.name} {money(rp)}</text>
+            {!ref_!.followers && <text x={x(rp) - 6} y={H - B - 7} textAnchor="end" className="fill-muted-foreground text-[10px]">ainda sem audiência própria</text>}
+            {ref_!.followers ? <circle cx={x(rp)} cy={y(ref_!.followers)} r={6} className="fill-background stroke-primary" strokeWidth={2.5} /> : null}
+          </g>
+        )}
+        {pts.map((r, i) => {
           const cx_ = x(r.ov!.fromMonthly!), cy = y(r.followers!);
           const on = hover === r.c.data.id;
+          // dois pontos colados: o da esquerda põe o nome à esquerda, o outro à direita (não sobrepõe)
+          const left = pts.some((o, j) => j !== i && x(o.ov!.fromMonthly!) > cx_ && x(o.ov!.fromMonthly!) - cx_ < 80 && Math.abs(y(o.followers!) - cy) < 14);
           return (
             <g key={r.c.data.id} onClick={() => nav(`/p/${slug}/concorrentes/${r.c.data.id}`)} onMouseEnter={() => setHover(r.c.data.id)} onMouseLeave={() => setHover(null)} className="cursor-pointer">
               <circle cx={cx_} cy={cy} r={14} fill="transparent" />
                 <circle cx={cx_} cy={cy} r={on ? 6 : 5} className="fill-primary stroke-card" strokeWidth={2} />
-                <text x={cx_ + 9} y={cy + 4} className={on ? 'fill-foreground text-[11px] font-medium' : 'fill-muted-foreground text-[11px]'}>{r.c.data.name}</text>
+                <text x={left ? cx_ - 9 : cx_ + 9} y={cy + 4} textAnchor={left ? 'end' : 'start'} className={on ? 'fill-foreground text-[11px] font-medium' : 'fill-muted-foreground text-[11px]'}>{r.c.data.name}</text>
             </g>
           );
         })}

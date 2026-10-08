@@ -2,8 +2,8 @@
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
 import { useMemo, useState, type ReactNode } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc } from '../../api';
-import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../../queries';
+import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
+import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
 import { Button, cx } from '../kit';
 import AddLinksModal from './AddLinksModal';
 
@@ -89,9 +89,30 @@ export function useMarket(slug: string, { all = false } = {}) {
   return { rows, isLoading: list.isLoading || summary.isLoading, error: list.error ?? summary.error ?? overview.error ?? analysis.error };
 }
 
+/** a própria empresa (intel/referencia.json) no formato de uma linha de concorrente, para as mesmas colunas */
+export const REF_ID = '__referencia';
+export function refRow(r: Referencia): MarketRow {
+  const p = r.price;
+  const c = { data: { id: REF_ID, name: r.name, kind: 'concorrente', status: 'ativo', favorite: false, tags: [], profiles: [], created: r.updated }, body: '', file: '' } as unknown as Doc<Competitor>;
+  return {
+    c, avatar: {}, followers: r.followers ?? undefined,
+    ov: { id: REF_ID, fromMonthly: p.fromMonthly ?? undefined, currency: p.currency, publicPrice: p.fromMonthly != null, priceModel: p.model, trial: p.trial ?? undefined, plans: p.plans, features: r.features.reduce((n, g) => n + g.items.length, 0), updated: {}, hasNotes: false } as AnalysisOverview,
+    res: {
+      precos: { data: { fromMonthly: p.fromMonthly, currency: p.currency, publicPrice: p.fromMonthly != null, model: p.model, trial: p.trial, guarantee: p.guarantee, notes: p.note, extras: [], plans: [{ name: 'Único', monthly: p.fromMonthly, highlights: [] }] } },
+      features: { data: { groups: r.features.map((g) => ({ name: g.name, items: g.items.map((i) => ({ name: i.name, highlight: i.highlight })) })), differentials: [], missing: [] } },
+      landing: { data: { hero: { headline: r.message.headline, subheadline: r.message.subheadline, cta: r.message.cta }, sections: [], ctas: r.message.cta ? [r.message.cta] : [], socialProof: [], interesting: [], tone: r.message.tone, url: '' } },
+    } as unknown as AnalysisFull['results'],
+  };
+}
+export function useRefRow(slug: string) {
+  const q = useReferencia(slug);
+  return useMemo(() => (q.data ? refRow(q.data) : null), [q.data]);
+}
+
 /** tabela densa com ordenação por coluna (clique no cabeçalho); `v` dá o valor de ordenação */
 export interface Col<T> { k: string; label: ReactNode; title?: string; num?: boolean; v?: (r: T) => string | number | undefined; render: (r: T) => ReactNode; className?: string }
-export function SortTable<T>({ rows, cols, rowKey, initial, empty }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode }) {
+/** `pin` = linhas fixas no topo, fora da ordenação (ex.: a própria empresa como referência) */
+export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [] }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode; pin?: T[] }) {
   const [sort, setSort] = useState(initial ?? { k: cols[0].k, dir: 1 as 1 | -1 });
   const col = cols.find((c) => c.k === sort.k);
   const sorted = !col?.v ? rows : [...rows].sort((a, b) => {
@@ -114,8 +135,8 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty }: { rows: T[]
           ))}</tr>
         </thead>
         <tbody>
-          {sorted.map((r) => (
-            <tr key={rowKey(r)} className="border-b border-border last:border-0 hover:bg-muted/30">
+          {[...pin, ...sorted].map((r, i) => (
+            <tr key={rowKey(r)} className={cx('border-b border-border last:border-0', i < pin.length ? 'bg-primary/5 border-b-primary/30' : 'hover:bg-muted/30')}>
               {cols.map((c) => <td key={c.k} className={cx('px-3 py-2 align-middle', c.num && 'text-right tabular-nums whitespace-nowrap', c.className)}>{c.render(r)}</td>)}
             </tr>
           ))}
