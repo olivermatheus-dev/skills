@@ -1,6 +1,6 @@
 // Área Concorrentes: cabeçalho com as abas (cada uma com rota própria) e os dados de mercado juntos por concorrente
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
-import { useMemo, useState, type ReactNode } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
@@ -111,9 +111,29 @@ export function useRefRow(slug: string) {
 
 /** tabela densa com ordenação por coluna (clique no cabeçalho); `v` dá o valor de ordenação */
 export interface Col<T> { k: string; label: ReactNode; title?: string; num?: boolean; v?: (r: T) => string | number | undefined; render: (r: T) => ReactNode; className?: string }
-/** `pin` = linhas fixas no topo, fora da ordenação (ex.: a própria empresa como referência) */
-export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [] }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode; pin?: T[] }) {
+/**
+ * Altura para uma caixa ocupar o resto da tela: mede onde ela começa e desconta `reserve` px embaixo
+ * (o que vem depois dela + o respiro do fim da AreaPage, 64 px). Recalcula a cada render e ao redimensionar.
+ */
+export function useFillHeight(reserve: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [h, setH] = useState<number>();
+  useLayoutEffect(() => {
+    const fit = () => { const el = ref.current; if (el) setH(Math.max(320, Math.floor(window.innerHeight - el.getBoundingClientRect().top - reserve))); };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  });
+  return [ref, h] as const;
+}
+
+/**
+ * `pin` = linhas fixas no topo, fora da ordenação (ex.: a própria empresa como referência).
+ * `fill` = ocupa o resto da tela (número = px reservados embaixo, ver useFillHeight), com o cabeçalho fixo e a rolagem dentro.
+ */
+export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fill }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode; pin?: T[]; fill?: number }) {
   const [sort, setSort] = useState(initial ?? { k: cols[0].k, dir: 1 as 1 | -1 });
+  const [boxRef, boxH] = useFillHeight(fill ?? 0);
   const col = cols.find((c) => c.k === sort.k);
   const sorted = !col?.v ? rows : [...rows].sort((a, b) => {
     const va = col.v!(a), vb = col.v!(b);
@@ -124,12 +144,13 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [] }: {
   });
   if (!rows.length && empty) return <>{empty}</>;
   return (
-    <div className="bg-card border border-border rounded-xl overflow-x-auto">
-      <table className="w-full text-sm">
+    <div ref={fill != null ? boxRef : undefined} style={fill != null ? { height: boxH } : undefined} className={cx('bg-card border border-border rounded-xl', fill != null ? 'overflow-auto' : 'overflow-x-auto')}>
+      <table className={cx('w-full text-sm', fill != null && 'h-full')}>
         <thead className="border-b border-border bg-muted/40">
           <tr>{cols.map((c) => (
             <th key={c.k} title={c.title} onClick={() => c.v && setSort((s) => ({ k: c.k, dir: s.k === c.k ? (s.dir === 1 ? -1 : 1) : c.num ? -1 : 1 }))}
-              className={cx('px-3 py-2 font-medium text-xs text-muted-foreground whitespace-nowrap select-none', c.num ? 'text-right' : 'text-left', c.v && 'cursor-pointer hover:text-foreground')}>
+              className={cx('px-3 py-2 font-medium text-xs text-muted-foreground whitespace-nowrap select-none', c.num ? 'text-right' : 'text-left', c.v && 'cursor-pointer hover:text-foreground',
+                fill != null && 'sticky top-0 z-10 bg-muted shadow-[inset_0_-1px_0_var(--border)]')}>
               {c.label}{sort.k === c.k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
             </th>
           ))}</tr>
@@ -140,6 +161,8 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [] }: {
               {cols.map((c) => <td key={c.k} className={cx('px-3 py-2 align-middle', c.num && 'text-right tabular-nums whitespace-nowrap', c.className)}>{c.render(r)}</td>)}
             </tr>
           ))}
+          {/* preenche a sobra de altura sem esticar as linhas de dados */}
+          {fill != null && <tr aria-hidden className="h-full"><td colSpan={cols.length} className="p-0" /></tr>}
         </tbody>
       </table>
     </div>

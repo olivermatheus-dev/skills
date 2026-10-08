@@ -61,7 +61,7 @@ function Oferta({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: Mar
     { k: 'trial', label: 'Teste grátis', v: (r) => r.ov?.trial ?? undefined, render: (r) => <span className="block max-w-56 truncate" title={r.ov?.trial ?? ''}>{r.ov?.trial ?? '—'}</span> },
     { k: 'guar', label: 'Fidelidade / garantia', v: (r) => mod<P>(r, 'precos')?.guarantee ?? undefined, render: (r) => <span className="block max-w-48 truncate text-muted-foreground" title={mod<P>(r, 'precos')?.guarantee ?? ''}>{mod<P>(r, 'precos')?.guarantee ?? '—'}</span> },
   ];
-  return <SortTable rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
+  return <SortTable fill={92} rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
 }
 
 function Mensagem({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
@@ -73,7 +73,7 @@ function Mensagem({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: M
     { k: 'tone', label: 'Tom', v: (r) => mod<Lp>(r, 'landing')?.tone ?? undefined, render: (r) => <span className="text-xs text-muted-foreground block max-w-48">{mod<Lp>(r, 'landing')?.tone ?? '—'}</span> },
     { k: 'sec', label: 'Seções', num: true, v: (r) => r.ov?.sections, render: (r) => r.ov?.sections ?? dash },
   ];
-  return <SortTable rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />;
+  return <SortTable fill={92} rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />;
 }
 
 function Reputacao({ slug, rows }: { slug: string; rows: MarketRow[] }) {
@@ -86,5 +86,5 @@ function Reputacao({ slug, rows }: { slug: string; rows: MarketRow[] }) {
     { k: 'top', label: 'Reclamação recorrente', render: (r) => <span className="text-xs block max-w-64 truncate" title={mod<Rp>(r, 'reputacao')?.reclameAqui?.topComplaints.join('\n')}>{mod<Rp>(r, 'reputacao')?.reclameAqui?.topComplaints[0] ?? '—'}</span> },
     { k: 'ment', label: 'Menções', num: true, v: (r) => mod<Rp>(r, 'reputacao')?.mentions.length, render: (r) => mod<Rp>(r, 'reputacao')?.mentions.length || dash },
   ];
-  return <SortTable rows={rows} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'store', dir: -1 }} />;
+  return <SortTable fill={68} rows={rows} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'store', dir: -1 }} />;
 }

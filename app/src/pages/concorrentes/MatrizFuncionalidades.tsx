@@ -1,13 +1,13 @@
 // Matriz de funcionalidades × concorrentes (Comparar → Funcionalidades). Dados: intel/matriz.json (schema/matrix.ts).
 // Linhas = funcionalidades (por grupo, recolhíveis) · colunas = concorrentes · a coluna da própria empresa fica fixa,
 // na cor do projeto, logo depois do nome. Clicar numa célula edita (vira by: 'oliver'; a IA nunca sobrescreve).
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown, ChevronRight, CircleDot, CircleHelp, Clock, Pencil, Plus, X } from 'lucide-react';
 import type { Matrix, MatrixCell, MatrixFeature } from '../../../../schema/matrix';
 import { NOS } from '../../../../schema/matrix';
 import { Avatar, Chips } from '../../components/competitors/lib';
-import type { MarketRow } from '../../components/competitors/area';
+import { useFillHeight, type MarketRow } from '../../components/competitors/area';
 import { useMatrixActions } from '../../components/competitors/useMatrixActions';
 import { Empty, cx } from '../../components/kit';
 import { Button } from '@/components/ui/button';
@@ -62,15 +62,8 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   const [closed, setClosed] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<Editing | null>(null);
   const [featDlg, setFeatDlg] = useState<{ f?: MatrixFeature } | null>(null);
-  // a caixa da tabela ocupa o resto da tela (mede onde começa; reserva a legenda e o respiro do fim da página)
-  const boxRef = useRef<HTMLDivElement>(null);
-  const [boxH, setBoxH] = useState<number>();
-  useLayoutEffect(() => {
-    const fit = () => { const el = boxRef.current; if (el) setBoxH(Math.max(320, window.innerHeight - el.getBoundingClientRect().top - 116)); };
-    fit();
-    window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
-  });
+  // a caixa da tabela ocupa o resto da tela (reserva a legenda e o respiro do fim da página)
+  const [boxRef, boxH] = useFillHeight(116);
   const m: Matrix | undefined = mq.data;
   const nosName = proj.data?.name ?? 'Nós';
 
