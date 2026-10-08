@@ -1,6 +1,24 @@
 # 030 — Editor de mockups no app (mini Canva) + refazer o visual com bom gosto
 
-Status: **a fazer — próxima sessão (contexto limpo)** · Depende de: 028 (motor, molduras calibradas), 018 (app), 024 (kit de marca) · Substitui a fase C da 028
+Status: **fase A feita (2026-10-07) — aguardando o Oliver testar e aprovar os fundos** · Depende de: 028 (motor, molduras calibradas), 018 (app), 024 (kit de marca) · Substitui a fase C da 028
+
+## Onde está (fase A, 2026-10-07)
+- **Usar:** `npm run app` → projeto → **Mockups**. Cole (Ctrl+V) ou arraste um print, ou clique num print registrado. Exemplo pronto: `companies/kz/contents/2026-10-07-mockup-painel-inicio` (MacBook + título, 4:5 e 9:16, ajuste fino no 9:16).
+- **Decisão de stack:** camadas como **DOM/CSS no mesmo runtime da 028** (`library/mockups/runtime/cena.html` = `mockup.js` + `cena.js`), num iframe do app; o export (`tools/mockup/cena.mjs`, Playwright) abre o mesmo arquivo. Konva/Fabric descartados: teriam de redesenhar molduras, máscaras, vidro (`backdrop-filter`) e gradientes, e o export divergiria do editor.
+- **Documento:** `mockup.json` versão 2 (`schema/mockup.ts → MockupScene`; contrato no cabeçalho do `cena.js`). Geometria relativa (centro em fração, largura em u = menor lado = 1080 em todos os formatos). Formato principal = base; outros formatos = ajuste fino gravado só neles ("voltar ao padrão" apaga).
+- **Editor:** camadas (aparelho, imagem, texto, forma; arrastar para reordenar, ocultar, travar, duplicar, apagar), mover/redimensionar com alças, encaixe no centro e nas bordas da área segura (Alt desliga), setas (Shift = 10 px), desfazer/refazer, salvar automático, duplo clique edita o texto no próprio quadro (`*ênfase*`, `_serifa_`), zoom Ajustar/50/100/200%, guia da área segura, aviso de texto fora dela (editor e export), formatos marcados exportados juntos, biblioteca de prints (clique troca o print da camada selecionada; arrastar solta no quadro).
+- **Painel:** aparelho (21 modelos reais + janela, vidro, tela sem moldura; cor, orientação, ângulo, cantos, tema, encaixe, reflexo, corte automático/sugerido/nenhum), sombra (preset + intensidade, distância, desfoque, cor, sombra de chão), texto (fonte título/corpo/serifa, tamanho, peso, alinhamento, cor e cor da ênfase, entrelinha, espaçamento), forma (retângulo/pílula/círculo, vidro fosco, cor, cantos, borda), fundo (8 presets, cor, gradiente linear/radial com paradas, malha com manchas editáveis, print desfocado, transparente; padrão grade/pontos/linhas/xadrez/círculos com escala, opacidade, cor e esmaecer; grão; vinheta).
+- **Defeitos da 028 resolvidos e conferidos em 100%:**
+  1. *Sombra com marca (a3)*: confirmada (retângulo cortado do `drop-shadow` dentro do 3D). Agora: perspectiva própria por camada, `drop-shadow` numa camada plana fora do 3D para molduras opacas, `box-shadow` para vidro/janela/tela (o `drop-shadow` aparecia através do vidro como faixa cinza e desligava o desfoque do vidro).
+  2. *Gradientes*: 8 fundos novos a partir de referências (mesh gradients, estúdio de produto). Achado em 100% com contraste 8×: o gradiente CSS sai em 8 bits e faz **anéis** em 3×; o grão em `overlay` não pontilha fundo claro. Solução: gradiente/malha pintados num canvas em ponto flutuante (oklab, mancha = disco desfocado por gaussiana) com pontilhado triangular por pixel → liso mesmo esticado 8×.
+  3. *Área segura*: guia no editor + aviso no editor e no export (6% do menor lado; 9:16 topo 10% e base 18%). Texto novo já nasce dentro dela.
+  4. *Controle*: o editor.
+- **Testado no navegador:** criar a partir do print, adicionar texto, mover, redimensionar, trocar para MacBook real, 9:16 com ajuste fino, editar texto no quadro, forma de vidro sobreposta, padrão grade, zoom 100%, colar print pela API (captura + análise de cortes), exportar 4:5 + 9:16 (~15 s, 3240×4050 e 3240×5760). `render.mjs` antigo continua funcionando.
+
+## Falta / próximos passos
+- **Oliver:** testar o editor sozinho (critério do "pronto quando") e aprovar ou reprovar os 8 fundos (`node tools/mockup/cena.mjs --teste-fundos` → `library/mockups/galeria/fundos/`, ou no painel Fundo do editor).
+- Fase B (depois do aval): alinhar/distribuir e encaixe entre camadas, seleção múltipla, girar pela alça, composições prontas como ponto de partida (herói, duo, perspectiva… refeitos em camadas), recorte do print desenhando no quadro, marcar áreas a ocultar no editor, apagar PNG de formato desmarcado, miniatura da peça na central.
+- Os fundos premium antigos do `render.mjs` (aurora, macos…) ficam só para as peças da 028; peça nova usa `fundos.json`.
 
 ## Avaliação do Oliver sobre a galeria premium (2026-10-07) — ponto de partida
 Veredito: **"a maioria do que foi produzido é lixo"**. Problemas concretos:
@@ -37,3 +55,4 @@ Entrada: app → projeto → **Mockups** (aba própria) ou "Abrir no editor" num
 
 ## Log
 - 2026-10-07: registrada após a avaliação do Oliver da galeria premium (028). Próximo passo: sessão nova, começar por referências visuais + decisão da stack do canvas.
+- 2026-10-07 (fase A): referências olhadas (editor do shots.so: estilo à esquerda, quadro no centro, presets; mesh gradients do meshgradient.in). Stack = DOM no runtime da 028. Feitos: `runtime/cena.{html,js,css}`, `fundos.json`, `tools/mockup/cena.mjs` + `cena-lib.mjs`, `core/mockups.ts` + rotas, `schema/mockup.ts` (versão 2), tela `app/src/pages/Mockups.tsx` + `components/mockups/`. Sombra, banda de gradiente e vidro corrigidos e conferidos em 100%. Skill `mockup` e README atualizados (editor = caminho padrão).

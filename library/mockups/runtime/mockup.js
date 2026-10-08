@@ -88,6 +88,7 @@
     return { nome, url, canvas: c, w: c.width, h: c.height, ox: r.x, oy: r.y, aparelho: t.aparelho, src: t.src, endereco: t.url, dpr: t.dpr || 1, baixo, direita };
   }
   /** recorte de uma região (px da imagem original) de uma tela já preparada → nova tela */
+  MK.prepararTela = prepararTela;
   MK.recorte = function (t, reg) {
     const x = clamp(reg.x - t.ox, 0, t.w - 1), y = clamp(reg.y - t.oy, 0, t.h - 1);
     const w = clamp(reg.w, 1, t.w - x), h = clamp(reg.h, 1, t.h - y);
@@ -170,6 +171,7 @@
   };
   MK.SOMBRAS = SOMBRAS;
   const corSombra = () => (getComputedStyle(document.documentElement).getPropertyValue('--mk-sombra-rgb').trim() || '22 26 38');
+  MK.corSombra = corSombra;
   /** filter: drop-shadow em camadas (segue o contorno do PNG: moldura real, recorte transparente) */
   MK.dropShadow = (nome, tam) => {
     const k = clamp(tam / 900, 0.35, 2.2), c = corSombra();
@@ -197,9 +199,16 @@
   const asp = (t) => t.w / t.h;
 
   // molduras realistas (Apple Product Bezels, Android Studio device art), calibradas pelo tools/mockup/aparelhos.mjs
-  const APS = (cfg && cfg.aparelhos) || {};
-  const APELIDO = {};
-  for (const a of Object.values(APS)) for (const k of a.apelidos || []) APELIDO[k] = a.id;
+  const APS = {}, APELIDO = {};
+  /** registra (ou troca) o catálogo de molduras: o editor (cena.js) recebe o catálogo depois do carregamento */
+  MK.registrarAparelhos = (aps) => {
+    for (const k of Object.keys(APS)) delete APS[k];
+    for (const k of Object.keys(APELIDO)) delete APELIDO[k];
+    Object.assign(APS, aps || {});
+    for (const a of Object.values(APS)) for (const k of a.apelidos || []) APELIDO[k] = a.id;
+    MK.APARELHOS = Object.keys(APS);
+  };
+  MK.registrarAparelhos(cfg && cfg.aparelhos);
   // nomes genéricos → aparelho real equivalente (o CSS genérico continua em "<nome>-generico")
   const REAL_DE = { celular: 'iphone', notebook: 'macbook', tablet: 'ipad', desktop: 'imac', monitor: 'monitor' };
   MK.aparelhoReal = (tipo) => {
@@ -208,7 +217,6 @@
     if (REAL_DE[tipo] && MK.p('realista', true) !== false && MK.p('realista', true) !== 'false') return APS[APELIDO[REAL_DE[tipo]]];
     return null;
   };
-  MK.APARELHOS = Object.keys(APS);
   function varianteReal(a, t, op) {
     const vs = a.variantes;
     if (op.orientacao && vs[op.orientacao]) return op.orientacao;

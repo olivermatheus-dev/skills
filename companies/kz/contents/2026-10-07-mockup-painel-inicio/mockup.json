@@ -1,0 +1,71 @@
+{
+  "versao": 2,
+  "empresa": "kz",
+  "escala": 3,
+  "formatos": [
+    "4:5",
+    "9:16"
+  ],
+  "fundo": {
+    "tipo": "malha",
+    "base": "#f3ebe3",
+    "pontos": [
+      {
+        "x": 0.45,
+        "y": 0.28,
+        "r": 0.48,
+        "cor": "#fffaf5"
+      },
+      {
+        "x": 0.05,
+        "y": 0.95,
+        "r": 0.4,
+        "cor": "#f2d9cb"
+      },
+      {
+        "x": 1,
+        "y": 0.75,
+        "r": 0.36,
+        "cor": "#ece0ec"
+      }
+    ],
+    "desfoque": 0.18,
+    "padrao": {
+      "tipo": "nenhum"
+    },
+    "grao": 0.05
+  },
+  "camadas": [
+    {
+      "x": 0.5296,
+      "y": 0.6511,
+      "w": 0.86,
+      "id": "c1",
+      "tipo": "aparelho",
+      "nome": "Aparelho",
+      "formatos": {
+        "9:16": {
+          "x": 0.5639,
+          "y": 0.6333,
+          "w": 1.0075
+        }
+      },
+      "captura": "capturas/2026-10-07-painel-inicio",
+      "sombra": {
+        "preset": "produto"
+      },
+      "modelo": "macbook-pro-14"
+    },
+    {
+      "x": 0.5,
+      "y": 0.16,
+      "w": 0.84,
+      "tamanho": 0.072,
+      "id": "c2",
+      "tipo": "texto",
+      "nome": "Texto 1",
+      "texto": "Sua rotina, *num lugar só*",
+      "fonte": "titulo"
+    }
+  ]
+}

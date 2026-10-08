@@ -1,0 +1,16 @@
+/* cena.css — editor de mockups em camadas (tarefa 030). Complementa o mockup.css (aparelhos, vidro, grão). */
+html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+#palco.cn-palco { position: relative; overflow: hidden; isolation: isolate; perspective: none;
+  font-family: var(--font-body, system-ui, sans-serif); color: var(--text, #222); -webkit-font-smoothing: antialiased; }
+.cn-fundo, .cn-fundo > div { position: absolute; inset: 0; pointer-events: none; }
+.cn-fundo { z-index: 0; overflow: hidden; }
+.cn-fundo > .cn-gradiente { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cn-fundo > .cn-fundo-img { background-size: cover; background-position: center; }
+.cn-camada { position: absolute; z-index: 1; transform-origin: 50% 50%; }
+.cn-sombra { position: relative; }
+.cn-sombra > .mk-3d, .cn-sombra > .mk-tela { position: absolute; left: 0; top: 0; }
+.cn-texto { text-wrap: balance; white-space: normal; overflow-wrap: break-word; outline: none; }
+.cn-texto .mk-enfase { color: var(--cn-enfase); }
+.cn-texto .mk-serifa { color: var(--cn-enfase); }
+.cn-texto[contenteditable="plaintext-only"] { caret-color: var(--primary, #ef7960); cursor: text; }
+.cn-forma { position: absolute; left: 0; top: 0; }

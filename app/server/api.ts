@@ -9,6 +9,7 @@ import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
 import { P } from '../../schema';
 import * as K from '../../core/secrets';
+import * as MK from '../../core/mockups';
 import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
@@ -125,6 +126,17 @@ function openOnDesktop(file: string, how: 'reveal' | 'open') {
   return { ok: true };
 }
 
+// Editor de mockups (tarefa 030): catálogo, capturas (colar/arrastar) e peças em camadas (mockup.json versão 2)
+on('GET', '/api/mockup/catalogo', () => MK.catalogo());
+on('GET', '/api/mockup/aparelhos', () => MK.aparelhosRuntime());
+on('GET', '/api/projects/:slug/capturas', (p) => MK.listarCapturas(p.slug));
+on('POST', '/api/projects/:slug/capturas', (p, b) => MK.novaCaptura(p.slug, b ?? {}));
+on('GET', '/api/projects/:slug/mockups', (p) => MK.listarMockups(p.slug));
+on('POST', '/api/projects/:slug/mockups', (p, b) => MK.criarMockup(p.slug, b ?? {}));
+on('GET', '/api/projects/:slug/mockup', (p, _, q) => MK.lerMockup(p.slug, piece(q)));
+on('PUT', '/api/projects/:slug/mockup', (p, b, q) => MK.salvarMockup(p.slug, piece(q), b));
+on('POST', '/api/projects/:slug/mockup/export', (p, b, q) => MK.exportarMockup(p.slug, piece(q), b ?? {}));
+
 // Galeria de formatos (tarefa 027): global, library/formatos/<id>/formato.json
 on('GET', '/api/formats', () => S.listFormats());
 on('POST', '/api/formats', (_, b) => S.createFormatDraft(b));
@@ -194,6 +206,16 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     const start = range[1] ? +range[1] : Math.max(0, size - +range[2]), end = range[1] && range[2] ? Math.min(+range[2], size - 1) : size - 1;
     res.statusCode = 206; res.setHeader('content-range', `bytes ${start}-${end}/${size}`); res.setHeader('content-length', end - start + 1);
     return createReadStream(file, { start, end }).pipe(res);
+  }
+  // /mk/lib/… (runtime, molduras, fundos) e /mk/emp/<slug>/(brand|capturas)/… → editor de mockups (o iframe do runtime)
+  const mk = url.pathname.match(/^\/mk\/(lib|emp)\/(.+)$/);
+  if (mk) {
+    const resto = decodeURIComponent(mk[2]);
+    const file = mk[1] === 'lib' ? MK.arquivoLib(resto) : MK.arquivoEmpresa(resto.split('/')[0], resto.split('/').slice(1).join('/'));
+    if (!file) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    res.setHeader('cache-control', mk[1] === 'lib' && !resto.startsWith('runtime/') ? 'max-age=3600' : 'no-cache');
+    return createReadStream(file).pipe(res);
   }
   if (!url.pathname.startsWith('/api/')) return next();
   for (const [method, pattern, h] of routes) {

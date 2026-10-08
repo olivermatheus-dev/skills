@@ -7,6 +7,16 @@ description: "Transforma um print (ou captura) do produto em mockups premium pro
 
 Motor: `tools/mockup/` + `library/mockups/` (README = comandos, catálogo e contrato; galeria visual em `library/mockups/galeria/index.html`). **O Claude escolhe, o script compõe**: nunca desenhe aparelho, fundo ou composição à mão; use os templates. Custo baixo = ler o catálogo (`render.mjs --listar`, texto), rodar 1 comando e, no máximo, olhar **1 folha de contato** e **1 analise.png**.
 
+## Caminho padrão: editor em camadas (tarefa 030)
+O Oliver quer **controle**, não lote de alternativas (avaliação de 2026-10-07: gradientes duros, sombra com marca, texto fora da área segura). Padrão agora:
+1. Registrar o print (passo 1 abaixo) e cuidar de cortes e dados sensíveis (passos 2–3).
+2. Criar a peça em camadas: `node tools/mockup/cena.mjs --novo --captura companies/<slug>/capturas/<pasta> --formatos 4:5,9:16 [--titulo "Texto com *ênfase*"]` → `contents/<data>-mockup-<tela>/mockup.json` (versão 2).
+3. Ajustar editando o `mockup.json` (contrato no cabeçalho de `library/mockups/runtime/cena.js`: camadas aparelho/imagem/texto/forma, x/y = centro em fração do formato, w em u = menor lado; `formatos` da camada = ajuste fino por proporção; fundo = preset de `library/mockups/fundos.json` copiado inteiro) e exportar: `node tools/mockup/cena.mjs <pasta>` (PNG 3× por formato; o terminal avisa texto fora da área segura).
+4. Entregar dizendo: "abra em app → Mockups para ajustar". O Oliver mexe no editor (mesmo runtime: o que ele vê é o que sai).
+- Fundos: só os presets de `fundos.json` (pintados em ponto flutuante com pontilhado: sem banda) ou cor/gradiente feitos no editor. **Não use os fundos premium antigos** (`aurora`, `macos` etc. do `render.mjs`) em peça nova.
+- Antes de mostrar: abra o PNG em 100% num recorte (texto, borda do aparelho, sombra). Defeito visível = não entrega.
+- O caminho antigo (templates + `--alternativas`, abaixo) continua valendo só quando o Oliver pedir opções.
+
 ## Entradas
 - O print: arquivo solto (no chat, `_inbox/visual/`, `brand/screenshots/`) ou captura já registrada em `companies/<slug>/capturas/`.
 - `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `brand/mockups.json` (fundos permitidos). Os tokens vêm sozinhos do `brand.css`.

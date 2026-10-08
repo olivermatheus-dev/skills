@@ -1,0 +1,279 @@
+{
+  "_nota": "Fundos-padrão do editor de mockups (tarefa 030). Poucos e bons, feitos a partir de referências (mesh gradients, estúdio de produto da Apple, shots.so): manchas grandes muito desfocadas, cores vizinhas, grão fino contra banda. Cada preset é um ponto de partida: o editor copia a especificação inteira para o mockup.json (a peça não depende deste arquivo). x/y = fração do formato; r = raio em fração do lado maior; desfoque = fração do lado maior.",
+  "presets": [
+    {
+      "id": "estudio",
+      "nome": "Estúdio claro",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#e4e6ea",
+        "desfoque": 0.16,
+        "grao": 0.05,
+        "pontos": [
+          {
+            "x": 0.5,
+            "y": 0.36,
+            "r": 0.6,
+            "cor": "#fbfbfc"
+          },
+          {
+            "x": 0.5,
+            "y": 1.25,
+            "r": 0.6,
+            "cor": "#d3d6dc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "creme",
+      "nome": "Creme",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#f3ebe3",
+        "desfoque": 0.18,
+        "grao": 0.05,
+        "pontos": [
+          {
+            "x": 0.45,
+            "y": 0.28,
+            "r": 0.48,
+            "cor": "#fffaf5"
+          },
+          {
+            "x": 0.05,
+            "y": 0.95,
+            "r": 0.4,
+            "cor": "#f2d9cb"
+          },
+          {
+            "x": 1,
+            "y": 0.75,
+            "r": 0.36,
+            "cor": "#ece0ec"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pessego",
+      "nome": "Pêssego",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#fbe2d3",
+        "desfoque": 0.2,
+        "grao": 0.06,
+        "pontos": [
+          {
+            "x": 0.12,
+            "y": 0.1,
+            "r": 0.42,
+            "cor": "#ffe9cf"
+          },
+          {
+            "x": 0.95,
+            "y": 0.22,
+            "r": 0.38,
+            "cor": "#fcd0d0"
+          },
+          {
+            "x": 0.75,
+            "y": 0.95,
+            "r": 0.45,
+            "cor": "#f9c3ad"
+          },
+          {
+            "x": 0.05,
+            "y": 0.85,
+            "r": 0.34,
+            "cor": "#f8d6e3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nevoa",
+      "nome": "Névoa azul",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#e3e9f2",
+        "desfoque": 0.18,
+        "grao": 0.05,
+        "pontos": [
+          {
+            "x": 0.7,
+            "y": 0.12,
+            "r": 0.45,
+            "cor": "#f8fbff"
+          },
+          {
+            "x": 0.08,
+            "y": 0.6,
+            "r": 0.4,
+            "cor": "#d3def0"
+          },
+          {
+            "x": 0.9,
+            "y": 0.95,
+            "r": 0.4,
+            "cor": "#dcdcf3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "salvia",
+      "nome": "Sálvia",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#e5ece2",
+        "desfoque": 0.18,
+        "grao": 0.05,
+        "pontos": [
+          {
+            "x": 0.3,
+            "y": 0.15,
+            "r": 0.45,
+            "cor": "#f7f9f2"
+          },
+          {
+            "x": 1,
+            "y": 0.6,
+            "r": 0.4,
+            "cor": "#d2e0cd"
+          },
+          {
+            "x": 0.15,
+            "y": 1,
+            "r": 0.38,
+            "cor": "#e3e8d3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "por-do-sol",
+      "nome": "Pôr do sol",
+      "escuro": false,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#f4b8a4",
+        "desfoque": 0.2,
+        "grao": 0.06,
+        "pontos": [
+          {
+            "x": 0.2,
+            "y": 0.05,
+            "r": 0.45,
+            "cor": "#fcdcbc"
+          },
+          {
+            "x": 0.95,
+            "y": 0.35,
+            "r": 0.4,
+            "cor": "#f3a3a6"
+          },
+          {
+            "x": 0.6,
+            "y": 1,
+            "r": 0.48,
+            "cor": "#f6c4d2"
+          },
+          {
+            "x": 0,
+            "y": 0.7,
+            "r": 0.3,
+            "cor": "#f7c7a6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grafite",
+      "nome": "Grafite",
+      "escuro": true,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#111318",
+        "desfoque": 0.2,
+        "grao": 0.08,
+        "pontos": [
+          {
+            "x": 0.5,
+            "y": 0.32,
+            "r": 0.62,
+            "cor": "#2a2f39"
+          },
+          {
+            "x": 0.5,
+            "y": 1.25,
+            "r": 0.6,
+            "cor": "#0c0d10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "noite",
+      "nome": "Noite",
+      "escuro": true,
+      "fundo": {
+        "tipo": "malha",
+        "base": "#0e1020",
+        "desfoque": 0.2,
+        "grao": 0.08,
+        "pontos": [
+          {
+            "x": 0.15,
+            "y": 0.12,
+            "r": 0.42,
+            "cor": "#3a336e"
+          },
+          {
+            "x": 0.95,
+            "y": 0.4,
+            "r": 0.38,
+            "cor": "#1d4363"
+          },
+          {
+            "x": 0.55,
+            "y": 1.05,
+            "r": 0.45,
+            "cor": "#4d2a4f"
+          }
+        ]
+      }
+    }
+  ],
+  "padroes": [
+    {
+      "id": "nenhum",
+      "nome": "Nenhum"
+    },
+    {
+      "id": "grade",
+      "nome": "Grade"
+    },
+    {
+      "id": "pontos",
+      "nome": "Pontos"
+    },
+    {
+      "id": "linhas",
+      "nome": "Linhas diagonais"
+    },
+    {
+      "id": "xadrez",
+      "nome": "Xadrez"
+    },
+    {
+      "id": "ondas",
+      "nome": "Círculos"
+    }
+  ]
+}

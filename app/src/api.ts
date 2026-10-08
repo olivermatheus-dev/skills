@@ -36,6 +36,13 @@ export interface PieceTimeline {
 }
 export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta }
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
+// Editor de mockups (tarefa 030)
+import type { MockupScene } from '../../schema/mockup';
+import type { CapturaRuntime } from '../../tools/mockup/cena-lib.mjs';
+export type { MockupScene, CapturaRuntime };
+export type MockupCatalogo = ReturnType<typeof import('../../core/mockups').catalogo>;
+export type MockupItem = ReturnType<typeof import('../../core/mockups').listarMockups>[number];
+export interface MockupExport { ok: boolean; arquivos: string[]; qa: string[]; erro?: string }
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
 /** `snapshots`: por perfil, as 2 últimas completas + até 10 anteriores leves (seguidores e views/curtidas). `snapshotsTotal`: todas no disco. */
@@ -140,6 +147,16 @@ export const api = {
   promoteExample: (id: string, ex: { empresa: string; peca: string; arquivo?: string; legenda?: string }) => req<Format>('POST', `/api/formats/${encodeURIComponent(id)}/examples`, ex),
   removeExample: (id: string, i: number) => req<Format>('DELETE', `/api/formats/${encodeURIComponent(id)}/examples/${i}`),
   formatRefUrl: (id: string, file: string) => `/format-ref/${id}/${encodeURIComponent(file)}`,
+
+  mockupCatalogo: () => req<MockupCatalogo>('GET', '/api/mockup/catalogo'),
+  mockupAparelhos: () => req<Record<string, unknown>>('GET', '/api/mockup/aparelhos'),
+  capturas: (slug: string) => req<CapturaRuntime[]>('GET', `${pj(slug)}/capturas`),
+  novaCaptura: (slug: string, b: { nome?: string; base64: string; ext?: string }) => req<CapturaRuntime>('POST', `${pj(slug)}/capturas`, b),
+  mockups: (slug: string) => req<MockupItem[]>('GET', `${pj(slug)}/mockups`),
+  criarMockup: (slug: string, b: { nome?: string; captura?: string; titulo?: string; formatos?: string[] }) => req<{ path: string }>('POST', `${pj(slug)}/mockups`, b),
+  mockup: (slug: string, path: string) => req<{ doc: MockupScene; capturas: Record<string, CapturaRuntime> }>('GET', `${pj(slug)}/mockup?path=${encodeURIComponent(path)}`),
+  salvarMockup: (slug: string, path: string, doc: MockupScene) => req<{ ok: boolean }>('PUT', `${pj(slug)}/mockup?path=${encodeURIComponent(path)}`, doc),
+  exportarMockup: (slug: string, path: string, b: { formatos?: string[]; escala?: number; webp?: boolean }) => req<MockupExport>('POST', `${pj(slug)}/mockup/export?path=${encodeURIComponent(path)}`, b),
 
   validate: () => req<{ file: string; issues: string[] }[]>('GET', '/api/validate'),
 };

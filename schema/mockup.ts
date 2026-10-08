@@ -64,7 +64,7 @@ export const MockupComposition = z.object({
 });
 export type MockupComposition = z.infer<typeof MockupComposition>;
 
-export const Mockup = z.object({
+const MockupV1 = z.object({
   empresa: Slug,
   objetivo: z.string().optional(),
   /** densidade do render (3 = padrão: 4:5 sai 3240×4050; 4 = impressão/LP retina grande) */
@@ -73,6 +73,56 @@ export const Mockup = z.object({
   /** ids que o Oliver (ou a IA) escolheu entre as alternativas */
   escolhidas: z.array(Slug).default([]),
 });
+
+/**
+ * Versão 2 (tarefa 030, editor de mockups): uma peça = 1 composição em CAMADAS, exportada em vários formatos.
+ * Geometria relativa: x, y = centro em fração do formato; w (e h, tamanho) em u = menor lado do formato.
+ * `formatos` da camada guarda o ajuste fino por proporção. Renderizada por library/mockups/runtime/cena.js
+ * (o mesmo no editor do app e no export: node tools/mockup/cena.mjs <pasta>). Contrato completo no cabeçalho do cena.js.
+ */
+export const SCENE_FORMATS = ['1:1', '4:5', '9:16', '16:9'] as const;
+const Cor = z.string().min(1);
+const Geo = z.object({ x: z.number(), y: z.number(), w: z.number().positive(), h: z.number().positive(), rot: z.number(), tamanho: z.number().positive() }).partial();
+const Sombra = z.object({ preset: z.string(), forca: z.number().min(0).max(3), distancia: z.number().min(0).max(4), desfoque: z.number().min(0).max(4), cor: Cor }).partial();
+export const SceneLayer = Geo.extend({
+  id: z.string().regex(/^[\w-]+$/),
+  tipo: z.enum(['aparelho', 'imagem', 'texto', 'forma']),
+  nome: z.string().optional(),
+  visivel: z.boolean().optional(),
+  travada: z.boolean().optional(),
+  opacidade: z.number().min(0).max(1).optional(),
+  formatos: z.partialRecord(z.enum(SCENE_FORMATS), Geo).optional(),
+  captura: z.string().regex(/^capturas\/[^/\\]+$/).optional(),
+  recorte: z.union([z.literal('nenhum'), MockupRegion]).optional(),
+  sombra: Sombra.optional(),
+  texto: z.string().optional(),
+}).passthrough();
+export const SceneBackground = z.object({
+  tipo: z.enum(['cor', 'linear', 'radial', 'malha', 'imagem', 'transparente']),
+  escuro: z.boolean().optional(),
+  cor: Cor.optional(), base: Cor.optional(), angulo: z.number().optional(),
+  centro: z.object({ x: z.number(), y: z.number() }).optional(),
+  paradas: z.array(z.object({ cor: Cor, pos: z.number().min(0).max(1) })).optional(),
+  pontos: z.array(z.object({ x: z.number(), y: z.number(), r: z.number().positive(), cor: Cor })).optional(),
+  desfoque: z.number().min(0).optional(),
+  captura: z.string().optional(),
+  padrao: z.object({ tipo: z.string(), escala: z.number().positive().optional(), opacidade: z.number().min(0).max(1).optional(), cor: Cor.optional(), esmaecer: z.boolean().optional() }).optional(),
+  grao: z.number().min(0).max(0.5).optional(),
+  vinheta: z.number().min(0).max(1).optional(),
+}).passthrough();
+export const MockupScene = z.object({
+  versao: z.literal(2),
+  empresa: Slug,
+  escala: z.number().min(0.25).max(4).default(3),
+  /** proporções exportadas juntas (o editor mostra uma de cada vez) */
+  formatos: z.array(z.enum(SCENE_FORMATS)).min(1),
+  fundo: SceneBackground,
+  /** de baixo para cima */
+  camadas: z.array(SceneLayer),
+});
+export type MockupScene = z.infer<typeof MockupScene>;
+
+export const Mockup = z.union([MockupScene, MockupV1]);
 export type Mockup = z.infer<typeof Mockup>;
 
 export const MockupBrand = z.object({
