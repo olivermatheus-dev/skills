@@ -39,4 +39,4 @@
 
 ## Log
 - 2026-10-07 — criada a partir do pedido do Oliver; regra de sessão já registrada no `CLAUDE.md` (Sessões e contexto).
-- 2026-10-08 — fase A: `context:` + `pacote` + `estado` + `compactar` + `contexto.mjs indice/ler` + `--check` + campo no app; regras no protocolo, orquestrar e agentes. Testado: comandos na T-0017 (cópia restaurada), round-trip pelo app (salvar mantém `context:` e `recurring:`), campo Contexto editado e salvo pela tela; typecheck, validate e `--check` limpos. Achado: servidor de prévia herdava um `HUB_ROOT` de outra cópia (lá havia uma T-0018); a config `hub-app-021` do `launch.json` fixa o `HUB_ROOT`.
+- 2026-10-08 — fase A: `context:` + `pacote` + `estado` + `compactar` + `contexto.mjs indice/ler` + `--check` + campo no app; regras no protocolo, orquestrar e agentes. Testado: comandos na T-0017 (cópia restaurada), round-trip pelo app (salvar mantém `context:` e `recurring:`), campo Contexto editado e salvo pela tela; typecheck, validate e `--check` limpos. Achado: servidor de prévia herdava um `HUB_ROOT` de outra cópia (lá havia uma T-0018); para testar, pôr `HUB_ROOT` no `env` da config de prévia do `launch.json`.
