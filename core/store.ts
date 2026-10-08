@@ -2,11 +2,12 @@
 // Todo acesso a companies/ (app, ferramentas, agentes via scripts) passa por aqui.
 import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, cpSync, statSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
+import { createHash } from 'node:crypto';
 import YAML from 'yaml';
 import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
-  AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
+  AnalysisResult, AnalysisRequest, AdsSnapshot, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
 } from '../schema';
@@ -804,4 +805,124 @@ export function validateAll():{ file: string; issues: string[] }[] {
     if (f.skill && !exists(join('.claude', 'skills', f.skill, 'SKILL.md'))) throw new ValidationError(formatJson(d), [`skill ${f.skill} não existe`]);
   });
   return errors;
+}
+
+// ───────────────────────── histórico de anúncios entre coletas (037 fase A) ─────────────────────────
+
+/** Limite do coletor nos snapshots antigos, que não gravam `max`/`truncada` (tools/intel/ads.ts). Só vale para eles. */
+export const ADS_LIMITE_COLETA = 30;
+
+/** Conceito = hash (sha1, 12 hex) de texto + título normalizados (sem acento, minúsculas, espaços únicos), dentro de um concorrente. Mesma regra de `contarIrmaos` em tools/intel/ads-classify.ts. */
+export const chaveConceito = (a: { text?: string | null; title?: string | null }) =>
+  createHash('sha1').update(`${a.text ?? ''}|${a.title ?? ''}`.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim()).digest('hex').slice(0, 12);
+
+/**
+ * Coleta completa = sem erro e lida inteira. Snapshot novo grava `truncada` (limite atingido ou havia próxima página).
+ * Snapshot antigo (sem `truncada`): abaixo de ADS_LIMITE_COLETA e, quando a Biblioteca informou `total`, com tudo lido.
+ * Só uma coleta completa prova que um anúncio saiu do ar.
+ */
+export const coletaCompleta = (s: { ads: unknown[]; total?: number | null; truncada?: boolean | null; errors: string[] }) => {
+  if (s.errors.length) return false;
+  if (s.truncada != null) return !s.truncada;
+  return s.ads.length < ADS_LIMITE_COLETA && (s.total == null || s.ads.length >= s.total);
+};
+
+export interface AnuncioHistorico {
+  id: string;
+  /** hash normalizado de texto+título (dentro do concorrente) */
+  conceito: string;
+  /** nº de anúncios ativos do mesmo conceito na última coleta */
+  irmaos: number;
+  /** collectedAt da primeira e da última coleta em que o id apareceu */
+  primeiraVez: string;
+  ultimaVez: string;
+  /** nº de coletas em que apareceu */
+  coletas: number;
+  /** hoje − startedAt da Biblioteca (null sem data) */
+  diasNoAr: number | null;
+  /** estava na coleta anterior e sumiu de uma coleta completa */
+  saiuDoAr: boolean;
+  /** collectedAt da coleta que provou a saída (precisão = intervalo entre coletas) */
+  saiuEm: string | null;
+  /** saiuEm − startedAt, em dias */
+  duracaoFinal: number | null;
+  /** mesmo conceito voltou com id novo depois de um anúncio sumir */
+  reapareceu: boolean;
+  /** id do anúncio anterior do mesmo conceito que tinha saído */
+  reapareceuDe: string | null;
+}
+export interface AdsHistorico {
+  slug: string;
+  competitorId: string;
+  /** coletas lidas (todas) e quantas contam como completas */
+  coletas: number;
+  coletasCompletas: number;
+  ultimaColeta: string | null;
+  saidas: number;
+  ads: AnuncioHistorico[];
+}
+
+const DIA_MS = 86_400_000;
+const diasEntre = (de: string, ate: Date | string) => {
+  const a = Date.parse(de.length === 10 ? `${de}T00:00:00Z` : de);
+  const b = typeof ate === 'string' ? Date.parse(ate) : ate.getTime();
+  return Number.isNaN(a) || Number.isNaN(b) ? null : Math.max(0, Math.floor((b - a) / DIA_MS));
+};
+
+/** Percorre todos os snapshots de anúncios do concorrente, em ordem, e devolve o histórico por anúncio (calculado ao ler, não é arquivo). */
+export function adsHistory(slug: string, compId: string, { hoje = new Date() }: { hoje?: Date } = {}): AdsHistorico {
+  const dir = join(P.competitor(slug, compId), 'ads');
+  const snaps = (exists(dir) ? list(dir, /^\d.*\.json$/) : []).flatMap((f) => {
+    const file = join(dir, f);
+    try { return [{ f, snap: cached(file, () => check(AdsSnapshot, JSON.parse(read(file)), file)) }]; } catch { return []; } // arquivo ilegível: ignora, como listAds
+  }).sort((a, b) => a.snap.collectedAt.localeCompare(b.snap.collectedAt) || a.f.localeCompare(b.f)).map((x) => x.snap);
+
+  const porId = new Map<string, AnuncioHistorico & { _ad: z.infer<typeof AdsSnapshot>['ads'][number] }>();
+  const saiuPorConceito = new Map<string, string>(); // conceito → id do último que saiu
+  let completas = 0;
+  let anterior = new Set<string>();
+  for (const snap of snaps) {
+    // coleta vazia logo depois de uma com anúncios só prova saídas se a Biblioteca disse total 0 e a leitura não foi truncada
+    const completa = coletaCompleta(snap) && (snap.ads.length > 0 || anterior.size === 0 || (snap.total === 0 && snap.truncada === false));
+    if (completa) completas++;
+    const agora = new Set(snap.ads.map((a) => a.id));
+    for (const ad of snap.ads) {
+      const h = porId.get(ad.id);
+      if (h) { // voltou com o mesmo id (ou segue no ar)
+        h.ultimaVez = snap.collectedAt; h.coletas++; h._ad = ad;
+        if (h.saiuDoAr) {
+          h.saiuDoAr = false; h.saiuEm = null; h.duracaoFinal = null;
+          if (saiuPorConceito.get(h.conceito) === ad.id) saiuPorConceito.delete(h.conceito); // o mesmo id voltou: não é "reapareceu"
+        }
+      } else {
+        const conceito = chaveConceito(ad);
+        const de = saiuPorConceito.get(conceito) ?? null;
+        porId.set(ad.id, { id: ad.id, conceito, irmaos: 1, primeiraVez: snap.collectedAt, ultimaVez: snap.collectedAt, coletas: 1, diasNoAr: null, saiuDoAr: false, saiuEm: null, duracaoFinal: null, reapareceu: de != null && de !== ad.id, reapareceuDe: de, _ad: ad });
+      }
+    }
+    if (completa) {
+      for (const id of anterior) {
+        const h = porId.get(id);
+        if (!h || agora.has(id) || h.saiuDoAr) continue;
+        h.saiuDoAr = true; h.saiuEm = snap.collectedAt;
+        h.duracaoFinal = h._ad.startedAt ? diasEntre(h._ad.startedAt, snap.collectedAt) : null;
+        saiuPorConceito.set(h.conceito, id);
+      }
+      anterior = agora;
+    } else {
+      for (const id of agora) anterior.add(id); // coleta parcial: o que ela viu segue como "estava no ar"; o que não viu fica como estava
+    }
+  }
+
+  const ultima = snaps.at(-1);
+  // irmãos: sobre a última coleta completa (ou, sem nenhuma, a última com anúncios), não sobre uma coleta quebrada
+  const base = [...snaps].reverse().find((s) => coletaCompleta(s) && s.ads.length) ?? [...snaps].reverse().find((s) => s.ads.length);
+  const ativos = new Map<string, number>();
+  for (const a of base?.ads ?? []) if (a.active !== false) ativos.set(chaveConceito(a), (ativos.get(chaveConceito(a)) ?? 0) + 1);
+  const ads = [...porId.values()].map(({ _ad, ...h }) => ({
+    ...h,
+    diasNoAr: h.saiuDoAr ? h.duracaoFinal : _ad.startedAt ? diasEntre(_ad.startedAt, hoje) : null,
+    irmaos: ativos.get(h.conceito) ?? 0,
+  }));
+  return { slug, competitorId: compId, coletas: snaps.length, coletasCompletas: completas, ultimaColeta: ultima?.collectedAt ?? null, saidas: ads.filter((a) => a.saiuDoAr).length, ads };
 }

@@ -282,7 +282,7 @@ export async function collectAds(slug: string, compId: string, opt: AdsOptions =
     const ads = lib?.ads ?? [];
     await downloadThumbs(ads, slug, compId);
     const now = new Date();
-    const snap = AdsSnapshot.parse({ schema: 1, collectedAt: stamp(now) + 'Z', source: 'meta-ads-library', country: 'BR', query, pageId, pageName, total: pageId ? lib?.total ?? ads.length : 0, ads, errors });
+    const snap = AdsSnapshot.parse({ schema: 1, collectedAt: stamp(now) + 'Z', source: 'meta-ads-library', country: 'BR', query, pageId, pageName, total: pageId ? lib?.total : 0, max, truncada: ads.length >= max || !!lib?.hasNext, ads, errors });
     const rel = join(adsDir(slug, compId), `${stamp(now).replace(/:/g, '-')}.json`);
     mkdirSync(dirname(join(root(), rel)), { recursive: true });
     writeFileSync(join(root(), rel), JSON.stringify(snap, null, 2) + '\n');

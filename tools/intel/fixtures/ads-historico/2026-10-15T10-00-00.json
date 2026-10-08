@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-15T10:00:00Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "pageId": "1",
+  "total": 3,
+  "ads": [
+    {
+      "id": "A",
+      "active": true,
+      "startedAt": "2026-09-01",
+      "text": "Teste grátis por 15 dias",
+      "title": null,
+      "url": "https://www.facebook.com/ads/library/?id=A"
+    }
+  ],
+  "errors": [
+    "a Meta pediu login/verificação"
+  ]
+}

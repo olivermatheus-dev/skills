@@ -13,7 +13,7 @@ process.env.INTEL_IG_PAUSE_MS = '1';
 mkdirSync(join(root, 'companies', 't'), { recursive: true });
 writeFileSync(join(root, 'companies', 't', 'project.yml'), 'slug: t\nname: Teste\ncreated: 2026-10-07\n');
 
-const { Snapshot } = await import('../../schema');
+const { Snapshot, AdsSnapshot } = await import('../../schema');
 const N = await import('./normalize');
 const S = await import('../../core/store');
 const { collectCompetitor } = await import('./collect');
@@ -185,7 +185,7 @@ await t('coleta completa (fixtures): grava snapshots válidos e imagens', async 
   assert.ok(by.tiktok.ok && by.tiktok.items === 10 && by.tiktok.followers === 184300);
   assert.ok(by.instagram.ok && by.instagram.items === 12 && by.instagram.source === 'apify');
   assert.ok(by.site.ok && by.site.items === 0);
-  assert.ok(!by.facebook.ok && /ainda não existe/.test(by.facebook.errors[0]));
+  assert.equal(by.facebook, undefined, 'facebook sem coletor não entra na coleta');
   const snaps = S.listSnapshots('t', comp.id);
   assert.equal(snaps.length, 4);
   const yt = snaps.find((s) => s.key === 'youtube-consultorioleve')!.data;
@@ -275,6 +275,105 @@ await t('anúncios Meta: normaliza JSON da biblioteca (imagem, vídeo, carrossel
   assert.equal(A.latestAds('t', 'x')!.file, 'companies/t/competitors/x/ads/2026-10-08T10-00-00.json');
   assert.equal(A.latestAds('t', 'nada'), undefined);
   rmSync(join(root, 'companies', 't', 'competitors', 'x'), { recursive: true, force: true });
+});
+
+await t('histórico de anúncios: saída, reaparecimento e coleta truncada (037 A)', () => {
+  const dir = join(root, 'companies', 't', 'competitors', 'h', 'ads');
+  mkdirSync(dir, { recursive: true });
+  const fdir = join(FIXTURES, 'ads-historico');
+  const arquivos = readdirSync(fdir).filter((f) => f.endsWith('.json')).sort();
+  const hoje = new Date('2026-10-25T00:00:00Z');
+  const get = (h: ReturnType<typeof S.adsHistory>, id: string) => h.ads.find((a) => a.id === id)!;
+  // 1 coleta só: nada saiu
+  writeFileSync(join(dir, arquivos[0]), fx(`ads-historico/${arquivos[0]}`));
+  let h = S.adsHistory('t', 'h', { hoje });
+  assert.equal(h.coletas, 1); assert.equal(h.saidas, 0);
+  assert.ok(h.ads.every((a) => !a.saiuDoAr && !a.reapareceu));
+  // coleta 2 (completa): B sumiu
+  writeFileSync(join(dir, arquivos[1]), fx(`ads-historico/${arquivos[1]}`));
+  h = S.adsHistory('t', 'h', { hoje });
+  assert.equal(h.saidas, 1);
+  assert.equal(get(h, 'B').saiuDoAr, true);
+  assert.equal(get(h, 'B').saiuEm, '2026-10-08T10:00:00Z');
+  assert.equal(get(h, 'B').duracaoFinal, 18); // 20/09 → 08/10
+  // coleta 3 truncada (erro): C ausente não prova saída
+  writeFileSync(join(dir, arquivos[2]), fx(`ads-historico/${arquivos[2]}`));
+  h = S.adsHistory('t', 'h', { hoje });
+  assert.equal(h.coletasCompletas, 2); assert.equal(h.saidas, 1);
+  assert.equal(get(h, 'C').saiuDoAr, false);
+  // coleta 4: B2 = mesmo texto de B com id novo (reapareceu); C2 = irmão de C (não reapareceu, C ainda no ar)
+  writeFileSync(join(dir, arquivos[3]), fx(`ads-historico/${arquivos[3]}`));
+  h = S.adsHistory('t', 'h', { hoje });
+  assert.equal(h.coletas, 4);
+  assert.equal(get(h, 'B2').reapareceu, true); assert.equal(get(h, 'B2').reapareceuDe, 'B');
+  assert.equal(get(h, 'C2').reapareceu, false);
+  assert.equal(get(h, 'A').coletas, 4); assert.equal(get(h, 'A').primeiraVez, '2026-10-01T10:00:00Z'); assert.equal(get(h, 'A').ultimaVez, '2026-10-22T10:00:00Z');
+  assert.equal(get(h, 'A').diasNoAr, 54);
+  assert.equal(get(h, 'C').irmaos, 2); assert.equal(get(h, 'C2').irmaos, 2); assert.equal(get(h, 'A').irmaos, 1);
+  assert.equal(get(h, 'C').conceito, get(h, 'C2').conceito);
+  assert.equal(h.saidas, 1);
+  // coleta no limite do coletor também é truncada
+  assert.equal(S.coletaCompleta({ ads: new Array(S.ADS_LIMITE_COLETA).fill(0), total: S.ADS_LIMITE_COLETA, errors: [] }), false);
+  assert.equal(S.coletaCompleta({ ads: [1], total: 5, errors: [] }), false);
+  assert.equal(S.coletaCompleta({ ads: [1], total: 1, errors: [] }), true);
+  rmSync(join(root, 'companies', 't', 'competitors', 'h'), { recursive: true, force: true });
+});
+
+await t('histórico de anúncios: completude, mesmo id e coleta vazia (037 A, revisão)', () => {
+  const dir = join(root, 'companies', 't', 'competitors', 'h2', 'ads');
+  const ad = (id: string, text: string, startedAt = '2026-09-01') => ({ id, active: true, startedAt, text, url: `https://www.facebook.com/ads/library/?id=${id}` });
+  const put = (n: number, extra: Record<string, unknown>, ads: ReturnType<typeof ad>[]) => {
+    mkdirSync(dir, { recursive: true });
+    const day = String(n).padStart(2, '0');
+    writeFileSync(join(dir, `2026-10-${day}T10-00-00.json`), JSON.stringify(AdsSnapshot.parse({ collectedAt: `2026-10-${day}T10:00:00Z`, pageId: '1', ads, errors: [], ...extra })));
+  };
+  const reset = () => rmSync(join(root, 'companies', 't', 'competitors', 'h2'), { recursive: true, force: true });
+  const hoje = new Date('2026-10-30T00:00:00Z');
+  const get = (h: ReturnType<typeof S.adsHistory>, id: string) => h.ads.find((a) => a.id === id)!;
+  // (a) ausente numa coleta parcial e também na completa seguinte: sai na data da completa
+  put(1, { total: 2, truncada: false }, [ad('A', 'um'), ad('B', 'dois')]);
+  put(2, { total: 3, truncada: true }, [ad('A', 'um')]);
+  let h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(get(h, 'B').saiuDoAr, false);
+  put(3, { total: 1, truncada: false }, [ad('A', 'um')]);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(get(h, 'B').saiuDoAr, true); assert.equal(get(h, 'B').saiuEm, '2026-10-03T10:00:00Z');
+  assert.equal(get(h, 'B').diasNoAr, get(h, 'B').duracaoFinal); // saiu: diasNoAr = duração final, não "hoje"
+  assert.equal(get(h, 'B').duracaoFinal, 32);
+  reset();
+  // (b) o mesmo id volta; depois um id novo com o mesmo conceito NÃO é reapareceu
+  put(1, { truncada: false }, [ad('A', 'um'), ad('B', 'dois')]);
+  put(2, { truncada: false }, [ad('A', 'um')]);
+  put(3, { truncada: false }, [ad('A', 'um'), ad('B', 'dois')]);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(get(h, 'B').saiuDoAr, false);
+  put(4, { truncada: false }, [ad('A', 'um'), ad('B', 'dois'), ad('B9', 'dois')]);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(get(h, 'B9').reapareceu, false); assert.equal(get(h, 'B9').reapareceuDe, null);
+  reset();
+  // (c) truncada: true sem erro não marca saída
+  put(1, { truncada: false }, [ad('A', 'um'), ad('B', 'dois')]);
+  put(2, { truncada: true, max: 1 }, [ad('A', 'um')]);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(h.coletasCompletas, 1); assert.equal(h.saidas, 0);
+  reset();
+  // (d) snapshot antigo (sem truncada) com 30 anúncios conta como incompleto
+  const trinta = Array.from({ length: S.ADS_LIMITE_COLETA }, (_, i) => ad(`X${i}`, `t${i}`));
+  put(1, { truncada: false }, [ad('B', 'dois')]);
+  put(2, { total: 30 }, trinta); // B ausente, mas a leitura bateu no limite: não prova saída
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(h.coletasCompletas, 1); assert.equal(h.saidas, 0); assert.equal(get(h, 'B').saiuDoAr, false);
+  assert.equal(S.coletaCompleta({ ads: trinta.slice(0, 29), total: 29, errors: [] }), true);
+  reset();
+  // (e) coleta vazia sem total explícito não derruba o histórico; com total 0 e truncada false, sim
+  put(1, { truncada: false }, [ad('A', 'um')]);
+  put(2, { truncada: false }, []);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(h.saidas, 0); assert.equal(h.coletasCompletas, 1);
+  put(3, { total: 0, truncada: false }, []);
+  h = S.adsHistory('t', 'h2', { hoje });
+  assert.equal(h.saidas, 1); assert.equal(get(h, 'A').saiuEm, '2026-10-03T10:00:00Z');
+  reset();
 });
 
 await t('validação geral do HUB_ROOT temporário', () => {

@@ -45,6 +45,10 @@ export const AdsSnapshot = z.object({
   pageName: nullish(z.string()),
   /** total que a biblioteca diz ter (pode ser maior que `ads`, que é o que foi lido) */
   total: nullish(z.number().int().nonnegative()),
+  /** limite de anúncios que o coletor aceitava ler nesta coleta */
+  max: nullish(z.number().int().positive()),
+  /** true se a coleta parou no `max` ou havia próxima página (então ausência de um anúncio não prova saída) */
+  truncada: z.boolean().nullish(),
   ads: z.array(Ad).default([]),
   errors: z.array(z.string()).default([]),
 });

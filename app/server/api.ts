@@ -17,6 +17,8 @@ type Params = Record<string, string>;
 type Handler = (p: Params, body: any, q: URLSearchParams) => unknown | Promise<unknown>;
 const routes: [string, string, Handler][] = [];
 const on = (method: string, path: string, h: Handler) => routes.push([method, path, h]);
+/** slug/id seguros para virar nome de pasta: minúsculas, dígitos e hífen; começa com letra/dígito */
+const isSlug = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(v);
 
 // Projetos e tags
 on('GET', '/api/projects', () => S.listProjects());
@@ -131,6 +133,7 @@ on('GET', '/api/projects/:slug/ads', async (p) => {
   const A = await adsMod().catch(() => null);
   return S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({ id: c.data.id, history: A ? A.listAds(p.slug, c.data.id).slice(-2) : [] }));
 });
+on('GET', '/api/projects/:slug/competitors/:id/ads/history', (p) => S.adsHistory(p.slug, p.id));
 on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
@@ -264,6 +267,8 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     if (method !== req.method) continue;
     const p = match(pattern, url.pathname);
     if (!p) continue;
+    // slug e id de concorrente viram caminho de arquivo: só [a-z0-9-] (sem ../ nem separadores)
+    if (pattern.includes('/competitors') && ((p.slug !== undefined && !isSlug(p.slug)) || (p.id !== undefined && !isSlug(p.id)))) return send(res, 400, { error: 'slug ou id inválido' });
     try {
       const body = ['POST', 'PUT'].includes(method) ? await readBody(req) : undefined;
       return send(res, 200, await h(p, body, url.searchParams));
