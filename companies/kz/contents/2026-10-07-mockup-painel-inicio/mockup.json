@@ -8,6 +8,7 @@
   ],
   "fundo": {
     "tipo": "malha",
+    "escuro": false,
     "base": "#f3ebe3",
     "pontos": [
       {
@@ -31,15 +32,18 @@
     ],
     "desfoque": 0.18,
     "padrao": {
-      "tipo": "nenhum"
+      "tipo": "nenhum",
+      "escala": 0.076,
+      "opacidade": 0.08
     },
-    "grao": 0.05
+    "grao": 0.005,
+    "vinheta": 0
   },
   "camadas": [
     {
-      "x": 0.5296,
-      "y": 0.6511,
-      "w": 0.86,
+      "x": 0.5,
+      "y": 0.5898,
+      "w": 0.8895,
       "id": "c1",
       "tipo": "aparelho",
       "nome": "Aparelho",
@@ -58,7 +62,7 @@
     },
     {
       "x": 0.5,
-      "y": 0.16,
+      "y": 0.2449,
       "w": 0.84,
       "tamanho": 0.072,
       "id": "c2",
