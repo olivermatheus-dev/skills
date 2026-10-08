@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { DndContext, DragOverlay, PointerSensor, useDraggable, useDroppable, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from '@dnd-kit/core';
 import { useQuery } from '@tanstack/react-query';
+import { LayoutGroup, MotionConfig, motion } from 'motion/react';
 import { Circle, CircleCheck, CircleDashed, CircleDot, Eye, Plus, Search, Sparkles, User, X, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { q as Q } from '../queries';
@@ -29,6 +30,9 @@ const COL_ICON: Record<Status, { icon: LucideIcon; color: string }> = {
   review: { icon: Eye, color: 'var(--color-warning)' },
   done: { icon: CircleCheck, color: 'var(--color-success)' },
 };
+// Piloto do Motion (ex-Framer Motion): cards com mola ao reordenar, trocar de coluna, nascer e soltar do arrasto.
+// layoutId = id da tarefa: o card "voa" de onde estava (coluna antiga ou ponto onde foi solto) para o lugar novo.
+const SPRING = { type: 'spring', bounce: 0.18, duration: 0.45 } as const;
 const VIEW_KEY = 'hub:board:view';
 const lsGet = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
 const lsSet = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* sem storage */ } };
@@ -56,6 +60,7 @@ export default function Board() {
 
   const [composer, setComposer] = useState<Status | null>(null); // coluna com o "Adicionar tarefa" aberto
   const [dragId, setDragId] = useState<string | null>(null);
+  const [fresh, setFresh] = useState<ReadonlySet<string>>(new Set()); // criadas agora: entram com mola
 
   const [moveError, setMoveError] = useState<unknown>(null);
   // Mover = otimista: o card troca de coluna no mesmo quadro; erro → volta e avisa.
@@ -86,6 +91,7 @@ export default function Board() {
       onSuccess: (t) => { if (t.data.id !== tempId && new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', t.data.id); },
       onError: () => { if (new URLSearchParams(window.location.search).get('t') === tempId) setParam('t', null); },
     });
+    setFresh((s) => new Set(s).add(tempId));
     if (open) { setComposer(null); setParam('t', tempId); }
   };
 
@@ -127,7 +133,9 @@ export default function Board() {
       ) : tasks.length === 0 && !composer ? (
         <Empty title="Nenhuma tarefa ainda" hint="As tarefas ficam em companies/<slug>/board/T-NNNN-*.md." action={<Button onClick={() => setComposer('backlog')}><Plus /> Nova tarefa</Button>} />
       ) : (
+        <MotionConfig reducedMotion="user" transition={SPRING}>
         <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
+          <LayoutGroup>
           <div className="flex gap-3 overflow-x-auto pb-4 -mx-1 px-1 flex-1 items-start">
             {COLUMNS.map((c) => {
               const items = visible.filter((t) => t.data.status === c.id).sort(sortTasks);
@@ -145,7 +153,7 @@ export default function Board() {
                     </button>
                   )}>
                   {items.map((t) => (
-                    <DraggableCard key={t.data.id} task={t} hidden={dragId === t.data.id}>
+                    <DraggableCard key={t.data.id} task={t} hidden={dragId === t.data.id} fresh={fresh.has(t.data.id)}>
                       <TaskCard task={t} blocked={isBlocked(t)} showBoard={board === 'todos'} running={t.data.id === runningId}
                         ready={!runningId && isReady(t.data, byId)} onOpen={() => setParam('t', t.data.id)} />
                     </DraggableCard>
@@ -156,9 +164,18 @@ export default function Board() {
             })}
           </div>
           <DragOverlay dropAnimation={null}>
-            {dragTask && <div><TaskCard task={dragTask} blocked={isBlocked(dragTask)} showBoard={board === 'todos'} dragging /></div>}
+            {/* mesmo layoutId do card: ao soltar, o card da coluna nasce a partir daqui e assenta com mola */}
+            {dragTask && (
+              <motion.div layoutId={dragTask.data.id} layout="position">
+                <motion.div initial={{ scale: 1, rotate: 0 }} animate={{ scale: 1.03, rotate: 1.2 }}>
+                  <TaskCard task={dragTask} blocked={isBlocked(dragTask)} showBoard={board === 'todos'} dragging />
+                </motion.div>
+              </motion.div>
+            )}
           </DragOverlay>
+          </LayoutGroup>
         </DndContext>
+        </MotionConfig>
       )}
 
       <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} actions={actions} runner={runner} />
@@ -227,14 +244,21 @@ function Composer({ defaultAssignee, onCreate, onClose }: { defaultAssignee: str
   );
 }
 
-function DraggableCard({ task, hidden, children }: { task: TaskDoc; hidden?: boolean; children: React.ReactNode }) {
+function DraggableCard({ task, hidden, fresh, children }: { task: TaskDoc; hidden?: boolean; fresh?: boolean; children: React.ReactNode }) {
   const { setNodeRef, listeners, attributes } = useDraggable({ id: task.data.id });
+  const props = {
+    ref: setNodeRef, ...listeners, ...attributes, role: 'button', tabIndex: 0,
+    'aria-label': `${task.data.id} ${task.data.title}`,
+    onKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => { if (e.key === 'Enter') (e.currentTarget.firstElementChild as HTMLElement | null)?.click(); },
+    className: cx('outline-none rounded-lg focus-visible:ring-2 focus-visible:ring-primary/50 touch-none', hidden && 'opacity-30'),
+  };
+  // Enquanto arrasta, a origem é um div comum (fantasma parado): o layoutId fica só com o card flutuante,
+  // e ao soltar o card remonta com o layoutId e sai de onde o flutuante estava.
+  if (hidden) return <div {...props}>{children}</div>;
   return (
-    <div ref={setNodeRef} {...listeners} {...attributes} role="button" tabIndex={0}
-      aria-label={`${task.data.id} ${task.data.title}`}
-      onKeyDown={(e) => { if (e.key === 'Enter') (e.currentTarget.firstElementChild as HTMLElement | null)?.click(); }}
-      className={cx('outline-none rounded-lg focus-visible:ring-2 focus-visible:ring-primary/50 touch-none', hidden && 'opacity-30')}>
+    <motion.div {...props} layout="position" layoutId={task.data.id}
+      initial={fresh ? { opacity: 0, y: -8, scale: 0.97 } : false} animate={{ opacity: 1, y: 0, scale: 1 }}>
       {children}
-    </div>
+    </motion.div>
   );
 }
