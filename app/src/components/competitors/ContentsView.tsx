@@ -1,12 +1,13 @@
 // Lista de conteúdos dos concorrentes (barra de filtros + grade de cards ou tabela), igual na aba Conteúdos e na ficha.
 // Filtros, ordenação e vista ficam na URL (?vista=tabela&ordem=mercado). Quem usa só entrega as linhas e as ações.
 import { useDeferredValue, useMemo, type ReactNode } from 'react';
-import { ArrowUpDown, CalendarDays, Clapperboard, Film, GalleryHorizontal, Image as ImageIcon, ListFilter, Radio, Shapes, Share2, Users, Video } from 'lucide-react';
+import { ArrowUpDown, CalendarDays, Clapperboard, Film, GalleryHorizontal, Image as ImageIcon, LayoutDashboard, LayoutGrid, ListFilter, Radio, Shapes, Share2, Table as TableIcon, Users, Video } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { Empty, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../kit';
 import { FillBox } from '../fill';
 import { Avatar, PlatformIcon, STATUS_COLOR, STATUS_LABEL, TYPE_LABEL, fmtPct, platformLabel, timeAgo, type Row } from './lib';
 import { FavStar, ItemCard, RatioCell, Thumb, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from './Items';
+import ContentsPanel from './ContentsPanel';
 import { DataTable, FavToggle, FilterBar, ViewToggle, parseSort, sortRows, useUrlState, type BarFilter, type Col, type SortDef } from './toolbar';
 
 export type CRow = Row & { compId?: string; compName?: string };
@@ -42,18 +43,23 @@ const SORTS: Record<string, SortDef<CRow> & { bar?: boolean }> = {
 const DEFAULTS = { q: '', periodo: '30', rede: '', formato: '', conc: '', status: 'ativas', fav: '', vista: 'grade', ordem: 'outlier', asc: '' };
 const DEFAULTS_ALL = { ...DEFAULTS, periodo: 'tudo' };
 
-export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass }: {
+const VIEWS_PANEL = [{ value: 'grade', label: 'Grade', icon: LayoutGrid }, { value: 'tabela', label: 'Tabela', icon: TableIcon }, { value: 'painel', label: 'Painel', icon: LayoutDashboard }];
+
+export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass }: {
   rows: CRow[]; slug: string; owners?: Map<string, Owner>; showComp: boolean; showPlatformFilter?: boolean;
   /** período padrão "Tudo" (ficha) em vez de 30 dias (feed) */
   defaultAll?: boolean; fill: boolean; stickyTop?: number; stickyClass?: string;
   mediaOf: (r: CRow) => string | undefined; ideaBusy: (r: CRow) => boolean;
-  onMark: (r: CRow, patch: Partial<ItemMark>) => void; onIdea: (r: CRow) => void; onOpen: (r: CRow) => void;
+  onMark: (r: CRow, patch: Partial<ItemMark>) => void; onIdea: (r: CRow) => void; onOpen: (r: CRow, ideia?: boolean) => void;
   /** faixa de números calculada sobre o que passou nos filtros */
   summary?: (shown: CRow[]) => ReactNode; searchPlaceholder?: string;
+  /** terceira vista "Painel" (?vista=painel): só na aba Conteúdos da área, conforme o DASHBOARD.md da 038 */
+  panel?: boolean;
 }) {
   const defaults = defaultAll ? DEFAULTS_ALL : DEFAULTS;
   const { values: v, set, reset } = useUrlState(defaults);
   const q = useDeferredValue(v.q);
+  const vista = v.vista === 'painel' && !panel ? 'grade' : v.vista;
   const sort = parseSort(v.ordem in SORTS ? v.ordem : 'outlier', v.asc);
 
   const shown = useMemo(() => {
@@ -105,10 +111,10 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
       primary={<>
         <SelectField size="sm" aria-label="Período" icon={<CalendarDays />} value={v.periodo} options={PERIODS} onChange={(x) => set({ periodo: x })} />
         {showPlatformFilter && platforms.length > 1 && sel(redeOpts, v.rede, 'rede', 'Rede')}
-        <SelectField size="sm" aria-label="Ordenar" icon={<ArrowUpDown />} value={sort.k} options={sortOpts} placeholder={SORTS[sort.k]?.label} onChange={(x) => set({ ordem: x, asc: '' })} />
+        <SelectField size="sm" aria-label="Ordenar" icon={<ArrowUpDown />} disabled={vista === 'painel'} title={vista === 'painel' ? 'O Painel não usa ordenação' : undefined} value={sort.k} options={sortOpts} placeholder={SORTS[sort.k]?.label} onChange={(x) => set({ ordem: x, asc: '' })} />
       </>}
       secondary={secondary}
-      trailing={<><FavToggle on={!!v.fav} onChange={(x) => set({ fav: x ? '1' : '' })} /><ViewToggle value={v.vista} onChange={(x) => set({ vista: x })} /></>}
+      trailing={<><FavToggle on={!!v.fav} onChange={(x) => set({ fav: x ? '1' : '' })} /><ViewToggle value={vista} options={panel ? VIEWS_PANEL : undefined} onChange={(x) => set({ vista: x })} /></>}
       active={active}
       onClear={() => reset(['q', 'periodo', 'rede', 'formato', 'conc', 'status', 'fav'])}
     />
@@ -145,7 +151,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
     </div>
   );
   const table = (
-    <DataTable rows={shown} cols={cols} rowKey={rowId} sort={sort} fill={fill} onRowClick={onOpen}
+    <DataTable rows={shown} cols={cols} rowKey={rowId} sort={sort} fill={fill} onRowClick={(r) => onOpen(r)}
       rowClass={(r) => (r.mark?.status === 'descartada' ? 'opacity-55' : undefined)}
       onSort={(k, dir) => set({ ordem: k, asc: dir === 1 ? '1' : '' })} />
   );
@@ -155,9 +161,12 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
       {stickyTop != null
         ? <div style={{ top: stickyTop }} className={cx('sticky z-10 -mx-8 px-8 py-2 mb-2 bg-background/95 backdrop-blur border-b border-border', stickyClass)}>{bar}</div>
         : <div className="mb-3">{bar}</div>}
-      {shown.length > 0 && summary && <div className="mb-4">{summary(shown)}</div>}
+      {shown.length > 0 && summary && vista !== 'painel' && <div className="mb-4">{summary(shown)}</div>}
       {rows.length > 0 && !shown.length && <Empty title="Nada com esses filtros" hint={v.periodo !== 'tudo' ? 'Tente um período maior ou limpe os filtros.' : 'Limpe os filtros para ver tudo.'} />}
-      {shown.length > 0 && (v.vista === 'tabela' ? table : fill ? <FillBox>{grid}</FillBox> : grid)}
+      {shown.length > 0 && (vista === 'painel'
+        ? <ContentsPanel rows={shown} all={rows} periodo={v.periodo} owners={owners} mediaOf={mediaOf} ideaBusy={ideaBusy} onMark={onMark} onOpen={onOpen}
+            onGoTable={() => set({ vista: 'tabela', ordem: 'outlier', asc: '' })} />
+        : vista === 'tabela' ? table : fill ? <FillBox>{grid}</FillBox> : grid)}
     </>
   );
 }

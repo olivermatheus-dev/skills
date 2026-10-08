@@ -1,5 +1,5 @@
 // Cards de conteúdo (vídeo/post) com as medidas de fora da curva, métricas e crescimento + painel de detalhe com marcação e "Virar ideia".
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Activity, ExternalLink, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
 import type { ItemMark } from '../../api';
@@ -37,7 +37,7 @@ export function mercadoTip(r: Row) {
     + '\nPerfil grande tende a ficar alto aqui; veja também “por seguidor”.';
 }
 /** quando o × mercado não vale: poucos concorrentes na rede */
-export const mercadoVazioTip = (r: Row) => r.mercadoConcorrentes != null ? `Sem mercado: só ${r.mercadoConcorrentes} concorrente(s) com dados no ${platformLabel(r.platform)} (mínimo 3). Com tão poucos, seria só "× o outro perfil".` : undefined;
+export const mercadoVazioTip = (r: Row) => r.mercadoConcorrentes != null ? `Menos de 3 concorrentes nesta comparação (n=${r.mercadoConcorrentes}, ${platformLabel(r.platform)}).\nCom tão poucos, seria só "× o outro perfil".` : undefined;
 /** explicação do por seguidor */
 export const porSeguidorTip = (r: Row) => r.porSeguidor == null ? undefined
   : `Alcance relativo: ${baseLabel(r.porSeguidorBasis)} = ${fmtPct(r.porSeguidor)} dos seguidores do perfil.`
@@ -58,18 +58,24 @@ function RatioPill({ v, label, tip, big, basisLikes }: { v: number; label: strin
 
 /** os selos lado a lado: × perfil e × mercado (o "por seguidor" fica no tooltip do mercado e na gaveta) */
 export function OutlierBadges({ r, big }: { r: Row; big?: boolean }) {
-  if (r.outlier == null && r.outlierMercado == null) return null;
+  if (r.outlier == null && r.outlierMercado == null && r.mercadoConcorrentes == null) return null;
   return (
     <span className="inline-flex items-center gap-1">
       {r.outlier != null && <RatioPill v={r.outlier} label="perfil" tip={perfilTip(r)} big={big} basisLikes={r.outlierBasis === 'likes'} />}
-      {r.outlierMercado != null && <RatioPill v={r.outlierMercado} label="mercado" tip={<>{mercadoTip(r)}{porSeguidorTip(r) ? `\n${porSeguidorTip(r)}` : ''}</>} big={big} basisLikes={r.outlierMercadoBasis === 'likes'} />}
+      {r.outlierMercado != null
+        ? <RatioPill v={r.outlierMercado} label="mercado" tip={<>{mercadoTip(r)}{porSeguidorTip(r) ? `\n${porSeguidorTip(r)}` : ''}</>} big={big} basisLikes={r.outlierMercadoBasis === 'likes'} />
+        : r.mercadoConcorrentes != null && (
+          <Tip content={mercadoVazioTip(r)}>
+            <span className={cx('inline-flex items-center gap-0.5 rounded-md tabular-nums shadow-sm whitespace-nowrap bg-black/45 text-white/90', big ? 'px-2 py-1 text-sm' : 'px-1.5 py-0.5 text-[11px]')}>—<span className="opacity-75 ml-0.5">mercado</span></span>
+          </Tip>
+        )}
     </span>
   );
 }
 
 /** célula de tabela: razão colorida (≥3× âmbar em negrito) */
 export function RatioCell({ v, tip }: { v?: number; tip?: ReactNode }) {
-  if (v == null) return <span className="text-muted-foreground">—</span>;
+  if (v == null) return tip ? <Tip content={tip}><span className="text-muted-foreground cursor-help">—</span></Tip> : <span className="text-muted-foreground">—</span>;
   return <Tip content={tip}><span className={cx('tabular-nums', v >= 3 ? 'font-semibold text-amber-700' : v >= 1.5 ? 'font-medium' : 'text-muted-foreground')}>{v >= 3 && <Flame className="inline size-3 -mt-0.5 mr-0.5" />}{fmtRatio(v)}</span></Tip>;
 }
 
@@ -185,13 +191,21 @@ function ViewsHistory({ r }: { r: Row }) {
   );
 }
 
-export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, slug, profileLabel, tagSuggestions }: {
+export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, slug, profileLabel, tagSuggestions, focusIdea }: {
+  /** abre já no "Virar ideia" (rola até o bloco e foca o título) */
+  focusIdea?: boolean;
   r: Row | null; media?: string; open: boolean; onClose: () => void; slug: string; profileLabel?: string; tagSuggestions: string[];
   onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string) => void; ideaBusy: boolean;
 }) {
   const [note, setNote] = useState('');
   const [tags, setTags] = useState('');
   const [ideaTitle, setIdeaTitle] = useState('');
+  const ideaRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open || !focusIdea) return;
+    const t = setTimeout(() => { ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }); }, 250);
+    return () => clearTimeout(t);
+  }, [open, focusIdea, r?.mk]);
   useEffect(() => {
     if (!r) return;
     setNote(r.mark?.note ?? '');
@@ -271,7 +285,7 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
           <Textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
         </Field>
 
-        <div className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
+        <div ref={ideaRef} data-virar-ideia className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
           {m?.ideaId ? (
             <div className="text-sm"><Sparkles className="inline size-3.5 -mt-0.5" /> Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
           ) : (

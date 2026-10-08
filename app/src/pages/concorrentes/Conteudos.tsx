@@ -1,13 +1,13 @@
 // Conteúdos: feed único com o que todos os concorrentes publicaram (última coleta de cada perfil), ranqueado por
 // fora da curva (× perfil e × mercado), views, engajamento ou data. Marcar, favoritar e "Virar ideia" aqui mesmo.
-import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type ItemMark } from '../../api';
 import { qk, useTags } from '../../queries';
 import { AreaPage, StatStrip, useMarket } from '../../components/competitors/area';
 import { ItemDrawer } from '../../components/competitors/Items';
-import ContentsView, { rowId, type CRow, type Owner } from '../../components/competitors/ContentsView';
+import ContentsView, { type CRow, type Owner } from '../../components/competitors/ContentsView';
 import { TYPE_LABEL, fmtPct, median } from '../../components/competitors/lib';
 import { useMarketRows } from '../../components/competitors/market';
 import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
@@ -24,13 +24,22 @@ export default function Conteudos() {
   const tags = useTags(slug);
   const actions = useCompetitorActions(slug);
   const idea = useMakeIdea(slug);
-  const [open, setOpen] = useState<string | null>(null);
+  // gaveta aberta = ?item=<compId>/<mk> (o Panorama linka direto para um item)
+  const [sp, setSp] = useSearchParams();
+  const open = sp.get('item');
+  const setOpen = (k: string | null, ideia?: boolean) => setSp((prev) => {
+    const n = new URLSearchParams(prev);
+    if (k) n.set('item', k); else n.delete('item');
+    if (k && ideia) n.set('ideia', '1'); else n.delete('ideia');
+    return n;
+  }, { replace: true });
+  const itemKey = (r: CRow) => `${r.compId}/${r.mk}`;
 
   const owners = useMemo(() => new Map<string, Owner>(m.rows.map((r) => [r.c.data.id, { name: r.c.data.name, local: r.avatar.local, remote: r.avatar.remote }])), [m.rows]);
   const rows = useMemo<CRow[]>(() => market.rows.map((r) => ({ ...r, compName: owners.get(r.compId)?.name ?? r.compId })), [market.rows, owners]);
 
   const mark = (r: CRow, patch: Partial<ItemMark>) => { actions.mark(r.compId!, r.mk, patch).catch(() => {}).finally(() => qc.invalidateQueries({ queryKey: qk.competitorsFeed(slug) })); };
-  const openRow = rows.find((r) => rowId(r) === open) ?? null;
+  const openRow = (open && rows.find((r) => itemKey(r) === open)) || null;
   const tagSuggestions = (tags.data?.tags ?? []).map((t) => t.id);
 
   const summary = (shown: CRow[]) => {
@@ -57,12 +66,12 @@ export default function Conteudos() {
       {market.loading && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">{[0, 1, 2, 3].map((i) => <div key={i} className="h-80 rounded-xl bg-card border border-border animate-pulse" />)}</div>}
       {!market.loading && !rows.length && <Empty title="Nenhum conteúdo coletado" hint="Puxe as redes dos concorrentes (aba Coletas ou a ficha de cada um)." />}
       {rows.length > 0 && (
-        <ContentsView rows={rows} slug={slug} owners={owners} showComp fill summary={summary}
+        <ContentsView rows={rows} slug={slug} owners={owners} showComp fill panel summary={summary}
           mediaOf={(r) => api.mediaUrl(slug, r.compId!, r.item.thumbnailLocal)} ideaBusy={(r) => idea.busy === r.mk}
-          onMark={mark} onOpen={(r) => setOpen(rowId(r))} onIdea={(r) => idea.make({ id: r.compId!, name: r.compName! }, '', r)} />
+          onMark={mark} onOpen={(r, ideia) => setOpen(itemKey(r), ideia)} onIdea={(r) => idea.make({ id: r.compId!, name: r.compName! }, '', r)} />
       )}
 
-      <ItemDrawer r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
+      <ItemDrawer r={openRow} open={!!openRow} focusIdea={sp.get('ideia') === '1'} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
         profileLabel={openRow?.compName ?? ''} tagSuggestions={tagSuggestions} ideaBusy={!!openRow && idea.busy === openRow.mk}
         onMark={(patch) => openRow && mark(openRow, patch)}
         onIdea={(title, tg, note) => openRow && idea.make({ id: openRow.compId!, name: openRow.compName! }, '', openRow, title, tg, note)} />
