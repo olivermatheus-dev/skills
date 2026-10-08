@@ -1,9 +1,12 @@
 // Matriz de funcionalidades × concorrentes (Comparar → Funcionalidades). Dados: intel/matriz.json (schema/matrix.ts).
 // Linhas = funcionalidades (por grupo, recolhíveis) · colunas = concorrentes · a coluna da própria empresa fica fixa,
 // na cor do projeto, logo depois do nome. Clicar numa célula edita (vira by: 'oliver'; a IA nunca sobrescreve).
-import { useMemo, useState } from 'react';
+// Colunas dos concorrentes: compactar (só ícone na célula e logo no topo), escolher quais aparecem e arrastar o topo
+// para reordenar (vira a ordem "Manual"). Essas escolhas ficam no navegador (localStorage), por projeto.
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Check, ChevronDown, ChevronRight, CircleDot, CircleHelp, Clock, Pencil, Plus, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, CircleDot, CircleHelp, Clock, Columns3, Maximize2, Minimize2, Pencil, Plus, X } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 import type { Matrix, MatrixCell, MatrixFeature } from '../../../../schema/matrix';
 import { NOS } from '../../../../schema/matrix';
 import { Avatar, Chips } from '../../components/competitors/lib';
@@ -13,7 +16,7 @@ import { Empty, cx } from '../../components/kit';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Popover, PopoverAnchor, PopoverContent } from '@/components/ui/popover';
+import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useMatrix, useProject } from '../../queries';
@@ -22,6 +25,13 @@ type Status = MatrixCell['status'];
 const LABEL: Record<Status, string> = { sim: 'Tem', parcial: 'Parcial', nao: 'Não tem', desconhecido: 'Não sei', planejado: 'Planejado' };
 const POSITIVE = (s?: Status) => s === 'sim' || s === 'parcial';
 const COL_W = 'w-[150px] min-w-[150px] max-w-[150px]';
+const COL_W_MINI = 'w-[52px] min-w-[52px] max-w-[52px]';
+
+type ColOrder = 'cobertura' | 'alfabetica' | 'manual';
+interface Prefs { compact: boolean; hidden: string[]; order: ColOrder; manual: string[] }
+const PREFS0: Prefs = { compact: false, hidden: [], order: 'cobertura', manual: [] };
+const lerPrefs = (slug: string): Prefs => { try { return { ...PREFS0, ...(JSON.parse(localStorage.getItem(`hub:matriz:${slug}`) ?? 'null') ?? {}) }; } catch { return PREFS0; } };
+const gravarPrefs = (slug: string, p: Prefs) => { try { localStorage.setItem(`hub:matriz:${slug}`, JSON.stringify(p)); } catch { /* só conveniência */ } };
 const NAME_W = 'w-[290px] min-w-[290px] max-w-[290px]';
 const NOS_W = 'w-[200px] min-w-[200px] max-w-[200px]';
 
@@ -58,7 +68,11 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   // ?f= abre já filtrado (links do Panorama)
   const [mode, setMode] = useState<Mode>(() => (['diferenca', 'brecha', 'diferencial'].includes(sp.get('f') ?? '') ? sp.get('f') as Mode : 'todas'));
   const [group, setGroup] = useState('todos');
-  const [order, setOrder] = useState<'cobertura' | 'alfabetica'>('cobertura');
+  const [prefs, setPrefs] = useState<Prefs>(() => lerPrefs(slug));
+  useEffect(() => gravarPrefs(slug, prefs), [slug, prefs]);
+  const { compact, order } = prefs;
+  const hidden = useMemo(() => new Set(prefs.hidden), [prefs.hidden]);
+  const [drag, setDrag] = useState<{ id: string; over?: string; after?: boolean } | null>(null);
   const [closed, setClosed] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<Editing | null>(null);
   const [featDlg, setFeatDlg] = useState<{ f?: MatrixFeature } | null>(null);
@@ -72,11 +86,30 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   /** cobertura: tem = 1, parcial = ½ */
   const coverage = (col: string) => (total && m ? m.features.reduce((n, f) => n + (cell(col, f.id)?.status === 'sim' ? 1 : cell(col, f.id)?.status === 'parcial' ? 0.5 : 0), 0) / total : 0);
 
-  const cols = useMemo<Col[]>(() => {
+  /** todos os concorrentes na ordem escolhida (inclusive os escondidos: o arrastar e o filtro partem daqui) */
+  const allCols = useMemo<Col[]>(() => {
     const base = rows.map((r) => ({ id: r.c.data.id, name: r.c.data.name, row: r }));
-    return base.sort((a, b) => (order === 'alfabetica' ? a.name.localeCompare(b.name, 'pt-BR') : coverage(b.id) - coverage(a.id) || a.name.localeCompare(b.name, 'pt-BR')));
+    const byCov = (a: Col, b: Col) => coverage(b.id) - coverage(a.id) || a.name.localeCompare(b.name, 'pt-BR');
+    if (order === 'manual') {
+      // quem não está na ordem salva (concorrente novo) vai para o fim, pelos mais completos
+      const pos = (id: string) => { const i = prefs.manual.indexOf(id); return i < 0 ? Infinity : i; };
+      return base.sort((a, b) => pos(a.id) - pos(b.id) || byCov(a, b));
+    }
+    return base.sort(order === 'alfabetica' ? (a, b) => a.name.localeCompare(b.name, 'pt-BR') : byCov);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rows, m, order]);
+  }, [rows, m, order, prefs.manual]);
+  const cols = useMemo(() => allCols.filter((c) => !hidden.has(c.id)), [allCols, hidden]);
+  const colW = compact ? COL_W_MINI : COL_W;
+
+  const toggleHidden = (id: string) => setPrefs((p) => ({ ...p, hidden: p.hidden.includes(id) ? p.hidden.filter((x) => x !== id) : [...p.hidden, id] }));
+  /** solta a coluna arrastada antes/depois da coluna alvo e passa a ordem para "Manual" */
+  const dropCol = (target: string, after: boolean) => {
+    if (!drag || drag.id === target) return setDrag(null);
+    const ids = allCols.map((c) => c.id).filter((id) => id !== drag.id);
+    ids.splice(ids.indexOf(target) + (after ? 1 : 0), 0, drag.id);
+    setPrefs((p) => ({ ...p, order: 'manual', manual: ids }));
+    setDrag(null);
+  };
 
   const info = (f: MatrixFeature) => {
     const ids = cols.map((c) => c.id);
@@ -129,10 +162,40 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
           <SelectTrigger size="sm" className="w-52"><SelectValue /></SelectTrigger>
           <SelectContent><SelectItem value="todos">Todos os grupos</SelectItem>{m.groups.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}</SelectContent>
         </Select>
-        <Select value={order} onValueChange={(v) => setOrder(v as typeof order)}>
+        <Select value={order} onValueChange={(v) => setPrefs((p) => ({ ...p, order: v as ColOrder, manual: v === 'manual' && !p.manual.length ? allCols.map((c) => c.id) : p.manual }))}>
           <SelectTrigger size="sm" className="w-52"><SelectValue /></SelectTrigger>
-          <SelectContent><SelectItem value="cobertura">Colunas: mais completos</SelectItem><SelectItem value="alfabetica">Colunas: A–Z</SelectItem></SelectContent>
+          <SelectContent>
+            <SelectItem value="cobertura">Colunas: mais completos</SelectItem>
+            <SelectItem value="alfabetica">Colunas: A–Z</SelectItem>
+            <SelectItem value="manual">Colunas: minha ordem</SelectItem>
+          </SelectContent>
         </Select>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button size="sm" variant="outline"><Columns3 /> Concorrentes <span className="tabular-nums text-muted-foreground">{cols.length}/{allCols.length}</span></Button>
+          </PopoverTrigger>
+          <PopoverContent align="start" className="w-64 p-0">
+            <div className="flex items-center gap-2 border-b border-border px-3 py-2 text-xs">
+              <span className="font-medium">Mostrar na tabela</span>
+              <button type="button" className="ml-auto text-muted-foreground hover:text-foreground" onClick={() => setPrefs((p) => ({ ...p, hidden: [] }))}>Todos</button>
+              <button type="button" className="text-muted-foreground hover:text-foreground" onClick={() => setPrefs((p) => ({ ...p, hidden: allCols.map((c) => c.id) }))}>Nenhum</button>
+            </div>
+            <div className="max-h-80 overflow-auto p-1">
+              {allCols.map((c) => (
+                <label key={c.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted">
+                  <Checkbox checked={!hidden.has(c.id)} onCheckedChange={() => toggleHidden(c.id)} />
+                  <Avatar name={c.name} size={18} local={c.row?.avatar.local} remote={c.row?.avatar.remote} className="!ring-0" />
+                  <span className="truncate">{c.name}</span>
+                  <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">{Math.round(coverage(c.id) * 100)}%</span>
+                </label>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+        <Button size="sm" variant={compact ? 'secondary' : 'outline'} onClick={() => setPrefs((p) => ({ ...p, compact: !p.compact }))}
+          title={compact ? 'Mostrar nome e nota em cada coluna' : 'Só o ícone em cada célula e o logo no topo'}>
+          {compact ? <Maximize2 /> : <Minimize2 />}{compact ? 'Expandir' : 'Compactar'}
+        </Button>
         <div className="ml-auto flex items-center gap-2">
           <Button size="sm" variant="outline" onClick={() => setClosed(closed.size ? new Set() : new Set(m.groups))}>{closed.size ? 'Abrir grupos' : 'Recolher grupos'}</Button>
           <Button size="sm" onClick={() => setFeatDlg({})}><Plus /> Funcionalidade</Button>
@@ -148,14 +211,25 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
                 <div className="text-sm font-semibold truncate">{nosName}</div>
                 <div className="text-[10px] uppercase tracking-wide opacity-80">nosso produto</div>
               </th>
-              {cols.map((c) => (
-                <th key={c.id} className={cx('sticky top-0 z-20 bg-card border-b border-border px-2 py-2 text-left font-medium', COL_W)}>
-                  <Link to={`/p/${slug}/concorrentes/${c.id}?aba=produto`} className="flex items-center gap-1.5 hover:text-primary-ink" title={`Ver o produto de ${c.name}`}>
-                    <Avatar name={c.name} size={20} local={c.row?.avatar.local} remote={c.row?.avatar.remote} className="!ring-0 shrink-0" />
-                    <span className="truncate text-xs">{c.name}</span>
-                  </Link>
-                </th>
-              ))}
+              {cols.map((c) => {
+                const alvo = drag && drag.over === c.id && drag.id !== c.id;
+                return (
+                  <th key={c.id} draggable title={`${c.name} · arraste para reordenar`}
+                    onDragStart={(e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', c.id); setDrag({ id: c.id }); }}
+                    onDragOver={(e) => { e.preventDefault(); const r = e.currentTarget.getBoundingClientRect(); const after = e.clientX > r.left + r.width / 2; if (drag && (drag.over !== c.id || drag.after !== after)) setDrag({ ...drag, over: c.id, after }); }}
+                    onDrop={(e) => { e.preventDefault(); dropCol(c.id, !!drag?.after); }}
+                    onDragEnd={() => setDrag(null)}
+                    className={cx('sticky top-0 z-20 bg-card border-b border-border py-2 text-left font-medium cursor-grab active:cursor-grabbing', compact ? 'px-1' : 'px-2', colW,
+                      drag?.id === c.id && 'opacity-40',
+                      alvo && (drag.after ? 'shadow-[inset_-3px_0_0_var(--primary)]' : 'shadow-[inset_3px_0_0_var(--primary)]'))}>
+                    <Link to={`/p/${slug}/concorrentes/${c.id}?aba=produto`} draggable={false}
+                      className={cx('flex items-center gap-1.5 hover:text-primary-ink', compact && 'justify-center')} title={`Ver o produto de ${c.name}`}>
+                      <Avatar name={c.name} size={compact ? 26 : 20} local={c.row?.avatar.local} remote={c.row?.avatar.remote} className="!ring-0 shrink-0" />
+                      {!compact && <span className="truncate text-xs">{c.name}</span>}
+                    </Link>
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
@@ -196,8 +270,8 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
                       <CellBox key="nos" feature={f.id} col={NOS} c={nosCell} editing={editing} setEditing={setEditing} onSave={act.setCell} nos
                         className={cx('sticky left-[290px] z-10 border-x-2 border-b border-x-primary border-b-border', NOS_BG[nosCell?.status ?? 'desconhecido'], NOS_W)} />
                       {cols.map((c) => (
-                        <CellBox key={c.id} feature={f.id} col={c.id} c={cell(c.id, f.id)} editing={editing} setEditing={setEditing} onSave={act.setCell}
-                          className={cx('border-b border-border group-hover/row:bg-muted/50', COL_W)} />
+                        <CellBox key={c.id} feature={f.id} col={c.id} c={cell(c.id, f.id)} editing={editing} setEditing={setEditing} onSave={act.setCell} compact={compact} colName={c.name}
+                          className={cx('border-b border-border group-hover/row:bg-muted/50', colW)} />
                       ))}
                     </tr>
                   );
@@ -216,7 +290,7 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
             <tr>
               <td className={cx('sticky left-0 bottom-0 z-30 bg-card border-t border-r border-border px-3 py-2 text-xs font-medium text-muted-foreground', NAME_W)} title="tem = 1, parcial = ½, sobre todas as funcionalidades do catálogo">Cobertura do catálogo</td>
               <td className={cx('sticky left-[290px] bottom-0 z-30 border-x-2 border-t border-x-primary border-t-border bg-[color-mix(in_oklab,var(--primary)_15%,var(--card))] px-3 py-2 text-sm font-semibold tabular-nums', NOS_W)}>{Math.round(coverage(NOS) * 100)}%</td>
-              {cols.map((c) => <td key={c.id} className={cx('sticky bottom-0 z-20 bg-card border-t border-border px-2 py-2 text-xs font-medium tabular-nums', COL_W)}>{Math.round(coverage(c.id) * 100)}%</td>)}
+              {cols.map((c) => <td key={c.id} className={cx('sticky bottom-0 z-20 bg-card border-t border-border py-2 text-xs font-medium tabular-nums', compact ? 'px-1 text-center' : 'px-2', colW)}>{Math.round(coverage(c.id) * 100)}%</td>)}
             </tr>
           </tfoot>
         </table>
@@ -234,24 +308,27 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
 }
 
 /** uma célula: ícone + nota curta (tooltip com nota inteira e fonte); clique abre o editor */
-function CellBox({ feature, col, c, editing, setEditing, onSave, className, nos }: {
+function CellBox({ feature, col, c, editing, setEditing, onSave, className, nos, compact, colName }: {
   feature: string; col: string; c?: MatrixCell; editing: Editing | null; setEditing: (e: Editing | null) => void;
   onSave: (col: string, feat: string, v: { status: Status | null; note?: string; source?: string }) => unknown; className?: string; nos?: boolean;
+  /** compacta: só o ícone; nome do concorrente e nota vão para o tooltip */
+  compact?: boolean; colName?: string;
 }) {
   const s: Status = c?.status ?? 'desconhecido';
   const open = editing?.col === col && editing.feat === feature;
   const body = (
     <button type="button" onClick={() => setEditing({ col, feat: feature })}
-      className={cx('flex w-full items-center gap-1.5 text-left px-2 py-1.5 min-h-9 cursor-pointer', nos ? 'hover:brightness-95' : 'hover:bg-accent/60')}>
+      className={cx('flex w-full items-center gap-1.5 text-left py-1.5 min-h-9 cursor-pointer', compact ? 'justify-center px-1' : 'px-2', nos ? 'hover:brightness-95' : 'hover:bg-accent/60')}>
       <Icon s={s} />
-      {c?.note && s !== 'nao' && <span className={cx('text-xs leading-tight', nos ? 'line-clamp-2 text-foreground' : 'truncate text-muted-foreground')}>{c.note}</span>}
+      {!compact && c?.note && s !== 'nao' && <span className={cx('text-xs leading-tight', nos ? 'line-clamp-2 text-foreground' : 'truncate text-muted-foreground')}>{c.note}</span>}
       {nos && !c?.note && <span className="text-xs text-foreground/70">{LABEL[s]}</span>}
     </button>
   );
-  const tip = c && (c.note || c.source) ? (
+  const tip = c && (c.note || c.source || compact) ? (
     <Tooltip>
       <TooltipTrigger asChild>{body}</TooltipTrigger>
       <TooltipContent className="max-w-xs">
+        {compact && colName && <div className="opacity-80">{colName}</div>}
         <div className="font-medium">{LABEL[s]}{c.note ? ` · ${c.note}` : ''}</div>
         {c.source && <div className="opacity-80 break-all">{c.source}</div>}
         <div className="opacity-70">{byLabel(c)}</div>

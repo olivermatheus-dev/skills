@@ -36,3 +36,4 @@ Base: Crayon e Klue (battlecards vivos, monitoramento de páginas com alertas, w
 
 ## Log
 - 2026-10-08 — schema, store, API, tela e dados (43 funcionalidades × 11 concorrentes + Kzloo). Testado em cópia dos dados (HUB_ROOT) com Playwright: edição grava `by: oliver`, filtros e colunas fixas ok. `npm run typecheck` e `npm run validate` limpos.
+- 2026-10-08 — pedido do Oliver: colunas dos concorrentes **compactáveis** (só ícone na célula, logo no topo; nome e nota no tooltip), **filtro** de quais concorrentes aparecem (botão "Concorrentes n/total", com Todos/Nenhum) e **arrastar o topo da coluna** para reordenar (vira "Colunas: minha ordem"). Preferências no localStorage por projeto (`hub:matriz:<slug>`). Testado no app (compactar, filtrar, arrastar). Typecheck limpo.
