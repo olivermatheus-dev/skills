@@ -29,9 +29,10 @@ O fundador é hipnoterapeuta e terapeuta em exercício. Sofreu com ferramentas f
 - **Garantia:** a definir. A copy já sugere: "se em 7 dias o sistema não tiver lugar natural no seu consultório, a gente não quer que você continue pagando".
 
 ## Diferenciais
+Detalhe, prova e cuidados de cada um: `COPY.md` → Diferenciais.
 1. **Simplicidade radical:** um sistema no lugar de 5 apps, com a tela de atendimento no centro (a Sessão Inteira)
-2. **Fluxo terapêutico específico:** anamnese, notas estruturadas, processos por paciente e portal com relato entre sessões
-3. **WhatsApp nativo:** confirmações, lembretes e mudanças de agenda chegam no WhatsApp do paciente
+2. **Fluxo terapêutico específico:** ficha que o paciente preenche pelo formulário online, registro por sessão com histórico e busca, controle por mensalidade ou pacote
+3. **WhatsApp nativo:** a agenda do dia chega no WhatsApp do terapeuta e a confirmação de cada sessão vai sozinha para o paciente
 4. **Founder-market fit:** o fundador atende pacientes, e as decisões de produto passam pela prática real
 5. **Público ampliado:** psicólogas, psicanalistas, hipnoterapeutas e terapeutas integrativos (a concorrência fala quase só com psicólogo clínico)
 
