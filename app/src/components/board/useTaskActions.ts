@@ -19,7 +19,7 @@ export function useTaskActions(slug: string) {
     function create(data: Data, body?: string, cb: Cb<TaskDoc> & { okMessage?: string | false } = {}) {
       const tempId = nextSeqId('T', list().map((t) => t.data.id));
       const temp: TaskDoc = {
-        data: { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], ...data, id: tempId } as Task,
+        data: { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], context: [], ...data, id: tempId } as Task,
         body: body ?? `\n## Checklist\n\n## Log\n- ${todayIso()} · criada pela interface\n`,
         file: '',
       };

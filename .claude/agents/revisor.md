@@ -14,6 +14,8 @@ Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/revisor.
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`. Você **só edita o arquivo da tarefa** (checklist e log), nunca a peça.
 
 ## O que conferir (por tipo)
+Comece por `node tools/board.mjs pacote <slug> <T-NNNN>`. Os checklists abaixo valem sempre; o contexto da empresa vem do `context:` da tarefa revisada, mais `context/BUSINESS.md#Restrições e compliance` e `brand/BRAND.md#Proibições` (sempre).
+
 | entrega | checklists |
 |---|---|
 | todo texto | `.claude/skills/landing-page/references/qa-copy.md` · `context/BUSINESS.md` (verdade + regras do nicho) · `context/VOICE.md` |

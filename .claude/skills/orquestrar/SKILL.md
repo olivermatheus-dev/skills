@@ -16,9 +16,9 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 
 ## Fluxo
 1. **Entrada.** Pedido no chat → criar a tarefa-mãe (`--next-id`, `assignee: ai`, quadro certo). "Rode as tarefas" (ou o botão **Rodar IA** do app) → pegar `todo` com `assignee: ai` ou `agent:*` cujas dependências estão `done`. `todo` = aprovado pelo Oliver; `backlog` nunca roda.
-2. **Planejar.** Dividir em subtarefas (1 por agente/entrega), com `parent`, `depends` e `assignee: agent:<nome>`. Use a receita abaixo. Mostrar o plano em 3–8 linhas e seguir (os portões estão nos agentes).
-3. **Delegar.** Chamar o agente com o Agent tool (`subagent_type: <nome>`), prompt: `Execute a tarefa <caminho do arquivo> seguindo o protocolo em .claude/skills/orquestrar/references/protocolo.md.` Independentes em paralelo; dependentes em ordem.
-4. **Acompanhar.** Depois de cada retorno, ler o arquivo da tarefa:
+2. **Planejar.** Dividir em subtarefas (1 por agente/entrega), com `parent`, `depends`, `assignee: agent:<nome>` e **`context:`** (só as seções que aquela entrega precisa; ver "Contexto por tarefa"). Use a receita abaixo. Mostrar o plano em 3–8 linhas e seguir (os portões estão nos agentes).
+3. **Delegar.** Chamar o agente com o Agent tool (`subagent_type: <nome>`), prompt: `Comece por node tools/board.mjs pacote <slug> <T-NNNN>. Execute a tarefa <caminho do arquivo> seguindo o protocolo em .claude/skills/orquestrar/references/protocolo.md.` Independentes em paralelo; dependentes em ordem.
+4. **Acompanhar.** Depois de cada retorno, ler o `## Estado` e os comentários da tarefa (`pacote`):
    - `done` → próxima;
    - comentário `pergunta`/`revisar` (ou `AGUARDANDO AVAL` no log, formato antigo) → comentar na tarefa-mãe e movê-la para `review`/`oliver` (`node tools/board.mjs comment … --tipo pergunta --status review --para oliver`) e **parar a cadeia**;
    - `PRECISA: agent:x` → criar a subtarefa e delegar.
@@ -38,6 +38,21 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 | pautas / calendário | estrategista (content-ideas) → Oliver escolhe → (vira tarefas de conteúdo) |
 | lançamento | estrategista (launch-plan + tarefas filhas) → Oliver aprova o plano |
 | resultado de anúncio/post | estrategista (análise) → aprendizados no contexto |
+
+## Contexto por tarefa (021)
+Cada agente lê só a tarefa + o `context:` dela (`node tools/board.mjs pacote <slug> <id>`). Ao criar a subtarefa, escolha as seções com `node tools/contexto.mjs indice <slug>` e comece pelos defaults abaixo, cortando o que a entrega não usa e somando o que o pedido cita (peça, formato, LP). Ref = `arquivo#Seção` (sem vírgula; prefixo do título basta). `--check` acusa ref quebrada.
+
+| agente | `context:` padrão |
+|---|---|
+| roteirista | `context/COPY.md#Big Idea`, `#Objeções` (e o que o tema pedir: `#Mecanismo único`, `#Provas`, `#CTAs`) · `context/AUDIENCE.md#Dores`, `#Linguagem literal` · `context/VOICE.md` · `context/BUSINESS.md#Restrições e compliance` · `brand/BRAND.md#Proibições` |
+| designer | `brand/BRAND.md` (inteiro, é curto) · roteiro da peça (`contents/<pasta>/roteiro.md`) |
+| editor-de-video | `brand/BRAND.md#Vídeo`, `#Movimento`, `#Som`, `#Proibições` · `knowledge/video/REGRAS.md` · roteiro/plano da peça |
+| sound-designer | `brand/BRAND.md#Som` · plano da peça |
+| estrategista | `context/CONTENT_STRATEGY.md` · `context/AUDIENCE.md#Nível de consciência` · `context/BUSINESS.md#Estágio` (+ `context/COMPETITORS.md#Nosso ângulo` em pauta/lançamento) |
+| pesquisador | `context/COMPETITORS.md` |
+| revisor | o mesmo `context:` da tarefa revisada (o revisor soma `#Restrições e compliance` e `#Proibições` sozinho) |
+
+Fatos de produto (o que a kz faz) → `context/PRODUTO.md#1. Funcionalidades` só quando a peça fala de funcionalidade. Ao retomar uma tarefa, leia o `## Estado` dela antes do log.
 
 **Interativo fica na sessão principal:** cadastro de empresa (`setup`) e qualquer coisa que dependa de conversa com o Oliver. Agentes não conversam com ele, só usam o portão.
 

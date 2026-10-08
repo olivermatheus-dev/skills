@@ -9,7 +9,9 @@ due:
 depends: [T-0011]
 parent: T-0009
 links: []
+context: [brand/BRAND.md, contents/2026-10-07-origin-story/roteiro.md]
 ---
+
 Diagramar e exportar o carrossel a partir de companies/kz/contents/2026-10-07-origin-story/roteiro.md.
 
 ## Checklist

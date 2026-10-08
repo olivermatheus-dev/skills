@@ -14,6 +14,7 @@ Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/editor-d
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes
+**Primeiro:** `node tools/board.mjs pacote <slug> <T-NNNN>` (Estado, tarefa, comentários e o `context:` declarado). Com `context:`, leia **só** ele; a lista abaixo vale quando a tarefa não declara nada (e aí registre no `context:` o que usou).
 - O `roteiro.md` do roteirista (se existir).
 - `companies/<slug>/brand/BRAND.md` + `brand.css`.
 - A receita `.claude/skills/fmt-<formato>/SKILL.md`.

@@ -14,6 +14,7 @@ Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/sound-de
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes
+**Primeiro:** `node tools/board.mjs pacote <slug> <T-NNNN>` (Estado, tarefa, comentários e o `context:` declarado). Com `context:`, leia **só** ele; a lista abaixo vale quando a tarefa não declara nada (e aí registre no `context:` o que usou).
 - `knowledge/video/som.md`;
 - `companies/<slug>/brand/BRAND.md` > **Som** (identidade sonora; se estiver vazia, proponha uma no portão);
 - no vídeo: `plano.md` (blocos e intensidade 0–4) e `timeline.json` (eventos).

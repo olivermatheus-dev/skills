@@ -74,9 +74,10 @@ function readyTasks(slug) {
 
 function wake(t) {
   const agent = t.assignee.startsWith('agent:') ? t.assignee.slice(6) : null;
-  const prompt = agent
+  const first = `Comece por \`node tools/board.mjs pacote ${t.slug} ${t.id}\` (tarefa, Estado, comentários e só o contexto declarado). `;
+  const prompt = first + (agent
     ? `Execute a tarefa ${t.path} seguindo o protocolo em .claude/skills/orquestrar/references/protocolo.md. Você foi acordado pelo heartbeat: o Oliver não está na conversa; leia os comentários do card e, se precisar dele, use o portão (comentário revisar/pergunta).`
-    : `Use a skill orquestrar para executar a tarefa ${t.path}. Você foi acordado pelo heartbeat: o Oliver não está na conversa; leia os comentários do card e, se precisar dele, use o portão (comentário revisar/pergunta).`;
+    : `Use a skill orquestrar para executar a tarefa ${t.path}. Você foi acordado pelo heartbeat: o Oliver não está na conversa; leia os comentários do card e, se precisar dele, use o portão (comentário revisar/pergunta).`);
   const cli = ['-p', ...(agent ? ['--agent', agent] : []), '--permission-mode', PERMISSION, '--allowedTools', ...ALLOWED, '--', prompt];
   if (!RUN) { log(`[simulação] acordaria ${agent ? `agent:${agent}` : 'orquestrador'} → ${t.slug}/${t.id} ${t.title}`); return; }
   updateTask(t.path, { status: 'doing' }, `${today()} · heartbeat · acordou ${agent ? `agent:${agent}` : 'orquestrador'}`);

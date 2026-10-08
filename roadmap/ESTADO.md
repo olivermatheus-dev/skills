@@ -24,6 +24,7 @@
 - **Conteúdo:** 21 skills + 9 formatos `fmt-*`, 7 agentes, Kanban em `companies/<slug>/board/` (`node tools/board.mjs kz --me`), heartbeat. Base de vídeo em `knowledge/video/REGRAS.md`.
 
 - **Inteligência e campanhas (034–037, 2026-10-08):** matriz de funcionalidades × concorrentes feita (Comparar → Funcionalidades, `intel/matriz.json`; 11 itens "?" na coluna da Kzloo para o Oliver confirmar). Desenhados, aguardando aval: **035** fontes (pixels, Wayback, CNPJ, Google Ads Transparency, DataForSEO), **037** anúncios dos concorrentes (salvos, notas, tags, classificador `tools/intel/ads-classify.ts`), **036** planejamento de campanhas (Google Ads por palavra-chave + quadro de funil em React Flow). **037 fase A feita** (histórico entre coletas: `adsHistory` + rota `/ads/history`). Próximo: 037 fase B (classificador + gabarito rotulado pelo Oliver; precisa da pergunta 1 do funil). Perguntas do Oliver nos `TASK.md`.
+- **Contexto por tarefa (021 A, 2026-10-08):** tarefa declara `context:` (arquivo#Seção) e um `## Estado` (≤ 5 linhas); agente começa por `node tools/board.mjs pacote <slug> <id>` e lê só isso. `estado`/`compactar` no `board.mjs`, `node tools/contexto.mjs indice <slug>`, campo Contexto no painel da tarefa. Falta rodar a T-0012 assim e medir tokens.
 - **Motion no Quadro (019, piloto, 2026-10-08):** cards com mola ao mover/soltar/criar (`motion@14.0.0`, só `Board.tsx`). Se o Oliver aprovar a sensação, estender a Sheet, listas e abas com a mesma mola `SPRING`.
 ## Pendências do Oliver (bloqueiam a produção da kz)
 0. **Revisar a base antes de qualquer post (T-0014, decisão de 2026-10-07):** confirmar o inventário `companies/kz/context/PRODUTO.md` (17 linhas; dúvidas: Sessão rápida, Financeiro, lembrete automático, segurança) e escolher as 6 da vitrine → prints → persona → carta de vendas. Depois: os 3 posts fixados (T-0015).
@@ -46,7 +47,7 @@
 | **029** | Motor de curadoria + fichas das 5 séries + inventário do produto (análise feita; 4 perguntas no `TASK.md`) | aval do Oliver |
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
-| **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
+| **021** | Fechar a gestão de contexto: rodar a T-0012 com o `context:` declarado e medir tokens (fase A feita em 2026-10-08) | aval da T-0011 |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **030 B** | Editor de mockups: alinhar/distribuir, seleção múltipla, girar pela alça, composições prontas em camadas, ocultar dados e recortar no quadro | aval (pendência 8) |
 | **028 (B, D, E)** | Mockups: B captura por link (login persistente), D animações/3D de verdade (Blender MCP / Three.js com as molduras calibradas), E template a partir de referência | aval (pendência 8) |

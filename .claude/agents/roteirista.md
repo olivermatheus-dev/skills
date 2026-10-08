@@ -14,6 +14,7 @@ Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/roteiris
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes (sempre)
+**Primeiro:** `node tools/board.mjs pacote <slug> <T-NNNN>` (Estado, tarefa, comentários e o `context:` declarado). Com `context:`, leia **só** ele; a lista abaixo vale quando a tarefa não declara nada (e aí registre no `context:` o que usou).
 `companies/<slug>/context/`: `COPY.md` (big idea, mecanismos, objeções, provas, CTAs) · `AUDIENCE.md` (dores e **frases literais**) · `VOICE.md` · `BUSINESS.md` (o que é verdade + regras do nicho) · `CONTENT_STRATEGY.md` (pilares, hooks que funcionaram). E `brand/BRAND.md` > Proibições.
 
 ## Ordem de skills por pedido

@@ -21,6 +21,10 @@ export const Task = z.object({
   depends: list,
   parent: nullish(z.string().regex(/^T-\d{4}$/)),
   links: list,
+  // 021: o que o agente lê para esta tarefa (e só isso). "arquivo#Seção", relativo a companies/<slug>/ ou à raiz.
+  // Ver tools/lib/contexto.mjs; `node tools/board.mjs pacote <slug> <id>` monta a leitura; --check confere se existe.
+  context: list,
+  recurring: nullish(z.string()), // id da recorrência que criou a tarefa (heartbeat)
 });
 export type Task = z.infer<typeof Task>;
 

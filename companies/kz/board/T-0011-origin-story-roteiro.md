@@ -10,7 +10,12 @@ depends: []
 parent: T-0009
 links: [contents/2026-10-07-origin-story/roteiro.md, contents/2026-10-07-origin-story/lp-secao-origem.md]
 ---
+
 Escrever a origin story do founder da kz para (1) um carrossel de Instagram (fmt-carrossel-educativo não se aplica: é narrativa; escolha a estrutura de carrossel narrativo com ig-post) com legenda e (2) uma seção curta "Por que criamos a kz" para a LP. Fontes: context/BUSINESS.md (história do fundador), COPY.md, AUDIENCE.md, VOICE.md. Nome público e foto do fundador estão a confirmar. Salvar em companies/kz/contents/2026-10-07-origin-story/roteiro.md e lp-secao-origem.md.
+
+## Estado
+- Entregue: carrossel narrativo de 10 slides + legenda + seção da LP (contents/2026-10-07-origin-story/)
+- Falta do Oliver: nome público, foto real e (opcional) cena real; depois vira done e libera a T-0012
 
 ## Checklist
 - [x] Levantar o que é verdade sobre a origem (BUSINESS, COPY) e o que está a confirmar

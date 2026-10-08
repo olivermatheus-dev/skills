@@ -20,11 +20,11 @@ type Runner = ReturnType<typeof useRunner>;
 
 interface Form {
   title: string; board: BoardName; assignee: string; priority: Priority; due: string;
-  depends: string; parent: string; links: string;
+  depends: string; parent: string; links: string; context: string;
 }
 const toForm = (t: Task): Form => ({
   title: t.title, board: t.board, assignee: t.assignee, priority: t.priority, due: t.due ?? '',
-  depends: t.depends.join(', '), parent: t.parent ?? '', links: t.links.join('\n'),
+  depends: t.depends.join(', '), parent: t.parent ?? '', links: t.links.join('\n'), context: t.context.join('\n'),
 });
 const splitList = (s: string, re: RegExp) => s.split(re).map((x) => x.trim()).filter(Boolean);
 const mainOf = (body: string) => splitTaskBody(body).main;
@@ -85,6 +85,7 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
       parent: (f.parent.trim() || null) as unknown as string | undefined,
       depends: splitList(f.depends, /[,\s]+/),
       links: splitList(f.links, /\n/),
+      context: splitList(f.context, /\n/),
     }, nb, {
       onError: (e) => { setSaveError(e); setSaved(false); setBase(prev.base); setBaseMain(prev.baseMain); },
     });
@@ -158,7 +159,7 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
         </Prop>
       </div>
 
-      <MoreFields open={!!(t.depends.length || t.links.length)}>
+      <MoreFields open={!!(t.depends.length || t.links.length || t.context.length)}>
         <Prop label="Depende de">
           <input className={cx(ctl, 'font-mono')} placeholder="T-0000, T-0000" value={f.depends} onChange={(e) => set('depends', e.target.value)} />
         </Prop>
@@ -177,6 +178,10 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
         )}
         <Prop label="Links" top>
           <textarea rows={2} className={cx(ctl, 'h-auto py-1 font-mono text-xs resize-y')} placeholder="um por linha (caminho no repo ou URL)" value={f.links} onChange={(e) => set('links', e.target.value)} />
+        </Prop>
+        <Prop label="Contexto" top>
+          <textarea rows={2} className={cx(ctl, 'h-auto py-1 font-mono text-xs resize-y')} placeholder="o que a IA lê, um por linha: context/BUSINESS.md#Modelo e preço (sem vírgula)"
+            title="A IA lê só isto (e a tarefa). Seções disponíveis: node tools/contexto.mjs indice <slug>" value={f.context} onChange={(e) => set('context', e.target.value)} />
         </Prop>
       </MoreFields>
       <datalist id="hub-task-ids">{allTasks.map((x) => <option key={x.data.id} value={x.data.id}>{x.data.title}</option>)}</datalist>
@@ -268,7 +273,7 @@ function MoreFields({ open: initial, children }: { open: boolean; children: Reac
   const [open, setOpen] = useState(initial);
   return open ? <>{children}</> : (
     <button type="button" onClick={() => setOpen(true)} className="mt-0.5 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
-      <ChevronRight className="size-3.5" /> Dependências e links
+      <ChevronRight className="size-3.5" /> Dependências, links e contexto
     </button>
   );
 }

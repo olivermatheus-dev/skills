@@ -10,7 +10,13 @@ depends: []
 parent:
 links: [contents/2026-10-07-origin-story/roteiro.md, contents/2026-10-07-origin-story/lp-secao-origem.md]
 ---
+
 Escrever a origin story do founder (post + seção da LP), confirmando nome público e foto.
+
+## Estado
+- Parou em: roteiro e seção da LP prontos (T-0011), parados no portão
+- Próximo: T-0012 designer (PNG) → T-0013 revisor
+- Falta do Oliver: nome público do fundador, se há foto real, (opcional) uma cena real
 
 ## Checklist
 - [x] T-0011 roteirista: roteiro do carrossel + legenda + seção da LP

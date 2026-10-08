@@ -128,7 +128,7 @@ export function saveIdea(slug: string, data: Partial<z.input<typeof Idea>> & { t
 }
 
 // ---------- Tarefas (formato simples, compatível com tools/lib/board.mjs) ----------
-const TASK_ORDER = ['id', 'title', 'board', 'status', 'assignee', 'priority', 'due', 'depends', 'parent', 'links'];
+const TASK_ORDER = ['id', 'title', 'board', 'status', 'assignee', 'priority', 'due', 'depends', 'parent', 'recurring', 'links', 'context'];
 export function listTasks(slug: string) {
   return list(P.board(slug), /^T-\d{4}.*\.md$/).map((f) => {
     const file = join(P.board(slug), f);
@@ -144,10 +144,11 @@ export function saveTask(slug: string, data: Partial<z.input<typeof Task>> & { t
   const existing = list(P.board(slug), new RegExp(`^${id}(-|\\.md)`))[0];
   const file = join(P.board(slug), existing ?? `${id}-${slugify(data.title).split('-').slice(0, 5).join('-')}.md`);
   const prev = existing ? parseSimple(read(file)) : null;
-  const merged = { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], ...(prev?.data ?? {}), ...data, id };
+  const merged = { board: 'conteudo', status: 'backlog', assignee: 'oliver', priority: 'media', depends: [], links: [], context: [], ...(prev?.data ?? {}), ...data, id };
   const v = check(Task, merged, file);
   const b = body ?? prev?.body ?? `\n## Checklist\n\n## Log\n- ${today()} · criada pela interface\n`;
-  write(file, stringifySimple({ ...v, due: v.due ?? '', parent: v.parent ?? '' }, b, TASK_ORDER));
+  const { recurring, ...rest } = v;
+  write(file, stringifySimple({ ...rest, due: v.due ?? '', parent: v.parent ?? '', ...(recurring ? { recurring } : {}) }, b, TASK_ORDER));
   return { data: v, body: b, file };
 }
 export function moveTask(slug: string, id: string, status: (typeof STATUS)[number], who = 'oliver') {

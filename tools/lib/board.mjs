@@ -74,3 +74,43 @@ export function addComment(path, who, text, kind = 'nota') {
   }
   writeFileSync(path, txt);
 }
+
+// ---------- Estado e log compacto (021) ----------
+// "## Estado" = primeira seção do corpo, ≤ 5 linhas: onde parou, próximo passo, o que falta do Oliver.
+// Quem retoma lê o Estado (via `board.mjs pacote`), não o log inteiro.
+export const ESTADO_MAX = 5;
+export const LOG_MAX = 15;
+const splitFm = (txt) => { const m = txt.match(/^---\n[\s\S]*?\n---\n?/); return m ? [m[0], txt.slice(m[0].length)] : ['', txt]; };
+
+/** Texto de uma seção "## <nome>" do corpo (sem o título), ou null. */
+export function getSection(body, name) {
+  const re = new RegExp(String.raw`(^|\n)## ${name}\s*\n([\s\S]*?)(?=\n## |$)`, 'i');
+  const m = body.replace(/\r\n/g, '\n').match(re);
+  return m ? m[2].trim() : null;
+}
+
+export function setEstado(path, text) {
+  const [fm, rawBody] = splitFm(readFileSync(path, 'utf8').replace(/\r\n/g, '\n'));
+  const lines = String(text).trim().replace(/\r\n/g, '\n').split('\n').map((l) => l.replace(/^(#{2,3} )/, ' $1'));
+  const block = `## Estado\n${lines.map((l) => (/^\s*[-*] /.test(l) ? l : `- ${l}`)).join('\n')}\n`;
+  // Vai logo depois da descrição (texto sem título no começo) e antes da 1ª seção: o Oliver vê no app sem rolar.
+  const body = `\n${rawBody.replace(/(^|\n)## Estado\s*\n[\s\S]*?(?=\n## |$)/, '$1').replace(/^\n+/, '')}`;
+  const at = body.search(/\n## /);
+  const out = at < 0 ? `${body.trimEnd()}\n\n${block}` : `${body.slice(0, at).trimEnd()}\n\n${block}${body.slice(at)}`;
+  writeFileSync(path, `${fm}${out.replace(/^\n*/, '\n').replace(/\n*$/, '\n')}`);
+  return lines.length;
+}
+
+/** Junta as linhas antigas do log numa só ("resumo de N linhas: …"), mantendo as `keep` mais recentes. */
+export function compactLog(path, who, resumo, keep = 5) {
+  const txt = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
+  const at = txt.search(/\n## Log\s*\n/);
+  if (at < 0) return 0;
+  const head = txt.slice(0, at);
+  const items = txt.slice(at).split('\n').filter((l) => /^\s*- /.test(l));
+  if (items.length <= keep + 1) return 0;
+  const old = items.slice(0, items.length - keep);
+  const line = `- ${today()} · ${who} · resumo de ${old.length} linhas antigas: ${String(resumo).trim().replace(/\s*\n\s*/g, ' ')}`;
+  writeFileSync(path, `${head}\n\n## Log\n${[line, ...items.slice(-keep)].join('\n')}\n`);
+  return old.length;
+}

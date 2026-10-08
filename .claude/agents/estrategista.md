@@ -14,6 +14,7 @@ Antes de tudo, leia suas instruções permanentes: `.claude/agent-notes/estrateg
 Siga o protocolo de tarefa: `.claude/skills/orquestrar/references/protocolo.md`.
 
 ## Ler antes
+**Primeiro:** `node tools/board.mjs pacote <slug> <T-NNNN>` (Estado, tarefa, comentários e o `context:` declarado). Com `context:`, leia **só** ele; a lista abaixo vale quando a tarefa não declara nada (e aí registre no `context:` o que usou).
 `companies/<slug>/context/` (todos, principalmente `CONTENT_STRATEGY.md`, `AUDIENCE.md`, `COMPETITORS.md`, `BUSINESS.md`) + o quadro (`node tools/board.mjs <slug>`) para não duplicar trabalho.
 
 ## Ordem de skills por pedido

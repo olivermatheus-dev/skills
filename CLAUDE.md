@@ -95,7 +95,7 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
 ## Sessões e contexto
 - **Uma tarefa por sessão.** Quando a próxima tarefa não depende da atual, o Oliver dá `/clear`. Antes disso, deixe tudo registrado no repositório (nunca só na conversa): `roadmap/ESTADO.md` (construção do hub) ou o arquivo da tarefa no quadro (produção), com onde parou, o próximo passo e o que falta do Oliver. Ao terminar uma tarefa, **sugira o `/clear`** se a próxima for independente.
 - **Ao começar, leia só o necessário:** `ESTADO.md` → o `TASK.md` (ou `board/T-NNNN.md`) da vez → só os arquivos que ela cita. Não percorra o repositório "para entender".
-- Prefira índices a arquivos grandes (`library/audio/INDEX.md`, nunca o `sfx.json` inteiro). Evolução disto (contexto declarado por tarefa no quadro, agentes lendo só ele): tarefa 021.
+- Prefira índices a arquivos grandes (`library/audio/INDEX.md`, nunca o `sfx.json` inteiro). **Tarefas do quadro:** cada uma declara `context:` (arquivo#Seção) e um `## Estado` de até 5 linhas; quem executa ou retoma começa por `node tools/board.mjs pacote <slug> <T-NNNN>` e lê só isso (seções: `node tools/contexto.mjs indice <slug>`; regras no protocolo da skill `orquestrar`; tarefa 021).
 
 ## Construção do hub (roadmap)
 **Sessão nova? Comece por `roadmap/ESTADO.md`** (onde paramos, pendências, próximo passo).

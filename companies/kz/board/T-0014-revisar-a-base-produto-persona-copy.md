@@ -10,7 +10,13 @@ depends: []
 parent:
 links: [context/PRODUTO.md, context/AUDIENCE.md, personas/mariana.md, context/COPY.md, context/BUSINESS.md, campaigns/2026-10-07-carta-base/carta.md]
 ---
+
 Decisão do Oliver (2026-10-07): nenhum conteúdo nem post sai antes de revisar o inventário de funcionalidades, a persona e a carta de vendas, com tudo registrado nos arquivos de contexto. Nesta ordem, porque a persona e a carta dependem do que o produto faz de verdade.
+
+## Estado
+- Parou em: PRODUTO, BUSINESS e COPY revisados; carta base com [PENDENTE] (itens 1a, 1b, 3, 5)
+- Próximo: item 4 (persona contra o produto real, usando as divergências do fim da carta)
+- Falta do Oliver: revisar o PRODUTO.md (1c) e responder as 12 perguntas do fim da carta; prints das 6 funcionalidades (2)
 
 ## Checklist
 - [x] 1a. Levantamento no app logado (subagente, só leitura): 18 funcionalidades prontas, 3 ocultas
