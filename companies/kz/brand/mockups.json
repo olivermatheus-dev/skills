@@ -5,6 +5,9 @@
     "brilho",
     "desfoque",
     "spot",
+    "malha",
+    "grade",
+    "pontos",
     "estudio",
     "neutro",
     "papel",
@@ -23,5 +26,5 @@
   "padrao": {
     "formato": "4:5"
   },
-  "notas": "2026-10-07: o Oliver liberou todos os fundos premium. Ordem = preferência nas alternativas: os da marca (tom sobre tom, creme) primeiro, depois os premium claros e por fim os escuros/vivos. Liso creme continua o padrão. Malha, grade e pontos (da marca) seguem fora até ele pedir."
+  "notas": "2026-10-07: o Oliver liberou todos os fundos (marca e premium). Ordem = preferência nas alternativas: os da marca (tom sobre tom, creme) primeiro, depois os premium claros e por fim os escuros/vivos. Liso creme continua o padrão."
 }
