@@ -15,7 +15,8 @@ Feito nesta sessão (commits `d4e68ac` … `f385891`):
 - **040 I feita** (Virar ideia leva a ficha e o relatório de origem; content-ideas/ads-meta leem o relatório). **042 feita** (painel único do conteúdo, selo/link para o relatório, topo compacto) — aval do Oliver.
 - **041 F3 feita** (Pesquisar ideias no app, aba Pesquisas, chips de referência). Nenhuma rodada paga pelo botão ainda.
 - **037 B, C, D feitas** (classificador + gabarito de 45 a conferir pelo Oliver, chips/filtros/sinal/variações, painel do anúncio com override e Salvos). Funil pela temperatura do público (recomendação, sem resposta do Oliver).
-- **Próximo:** 040 G (gasta Opus em 10 anúncios da Corpora: pedir o sim do Oliver antes). Fila em `roadmap/PEDIDOS.md`.
+- **040 G, código feito (2026-10-08):** fichas `meta-ads:<id>` (preparo pela miniatura, pacote com regras da 037 + motivo, histórico e landing), `correcaoRegra` com motivo, resolução você > IA > regra com chip de origem na aba Anúncios e no painel (funil/tipo/objetivo só no `marks.json`), "Analisar este"/"Analisar os N primeiros", prompt v2, relatório `--rede anuncios` (mínimo). 10 anúncios da Corpora **preparados, sem análise**.
+- **Próximo:** rodar o Opus nos 10 (precisa do sim do Oliver: app → Anúncios → Analisar os 10 → Rodar agora, ou "roda a fila de fichas da kz"). Depois 040 H. Fila em `roadmap/PEDIDOS.md`.
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).

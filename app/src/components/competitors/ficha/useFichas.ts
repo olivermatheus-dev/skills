@@ -1,7 +1,7 @@
 // Dados das fichas de análise (040 D): resumo para o selo e o filtro, vocabulário dos selects, a ficha aberta e a edição (override).
 import { useCallback, useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api, type FichaView } from '../../../api';
+import { api, type FichaResumo, type FichaView } from '../../../api';
 import { toast } from '../../toast';
 import type { FichaSelo } from '../Items';
 
@@ -14,7 +14,7 @@ export const fk = {
 /** resumo de todas as fichas do projeto → `of(compId, mk)` */
 export function useFichasResumo(slug: string) {
   const q = useQuery({ queryKey: fk.resumo(slug), queryFn: () => api.fichasResumo(slug), enabled: !!slug });
-  const of = useCallback((comp: string | undefined, mk: string): FichaSelo | undefined => (comp ? q.data?.[comp]?.[mk] : undefined), [q.data]);
+  const of = useCallback((comp: string | undefined, mk: string): (FichaSelo & Pick<FichaResumo, 'anuncio'>) | undefined => (comp ? q.data?.[comp]?.[mk] : undefined), [q.data]);
   return { of, loading: q.isLoading, data: q.data };
 }
 

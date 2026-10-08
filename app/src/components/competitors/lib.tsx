@@ -12,6 +12,7 @@ export const PLATFORMS: Record<string, { label: string; color: string }> = {
   instagram: { label: 'Instagram', color: '#d62976' },
   tiktok: { label: 'TikTok', color: '#111111' },
   site: { label: 'Site', color: '#64748b' },
+  anuncios: { label: 'Anúncios', color: '#7c3aed' },
   facebook: { label: 'Facebook', color: '#1877f2' },
   linkedin: { label: 'LinkedIn', color: '#0a66c2' },
   x: { label: 'X', color: '#111111' },
@@ -32,7 +33,7 @@ export function PlatformIcon({ platform, size = 16, className, mono }: { platfor
     case 'site':
       return <svg {...common} fill="none" stroke={c} strokeWidth="1.9"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9s-1.3 6.5-3.9 9c-2.6-2.5-3.9-5.5-3.9-9S9.4 5.5 12 3z" /></svg>;
     default: {
-      const t = { facebook: 'f', linkedin: 'in', x: '𝕏' }[platform] ?? '•';
+      const t = { facebook: 'f', linkedin: 'in', x: '𝕏', anuncios: 'Ad' }[platform] ?? '•';
       return <svg {...common}><rect x="2" y="2" width="20" height="20" rx="5" fill={c} /><text x="12" y="16.5" textAnchor="middle" fontSize={t.length > 1 ? 11 : 13} fontWeight="700" fill="#fff" fontFamily="system-ui">{t}</text></svg>;
     }
   }

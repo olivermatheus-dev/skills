@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:1319974763108137",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1319974763108137",
+  "item": {
+    "id": "1319974763108137",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-06-19",
+    "platforms": [
+      "facebook",
+      "instagram",
+      "audience_network"
+    ],
+    "text": "Você já usa a Corpora para organizar sua clínica de psicologia.\n\nAgora deixa ela automatizar o que ainda cai no seu colo: confirmações, lembretes, registros, documentos e recursos clínicos.\n\nTeste o Plano PRO por sete dias, sem cartão.",
+    "title": "Ative o modo profissional da sua Corpora",
+    "description": "Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes",
+    "cta": "Assinar",
+    "linkUrl": "https://app.usecorpora.com.br/planos",
+    "media": {
+      "type": "imagem",
+      "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/726358382_2279981315904772_1523121728657724519_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ppjZAqyz0HQQ7kNvwHTixZO&_nc_oc=AdqMhKgdBUejqzFnxRMu1HRCQ2TNFaNP7gQVVd6hQq57FZfTIj6hfG1IfkCshe0Oz9iqY7FK_O3A71A7HyjV0qYe&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQOFC2ETy8Bv4EWzy7AAqqE_iQp_1NCRD97O3GyYBSvaAA&oe=6ACDA01A",
+      "thumbnailLocal": "media/ads/1319974763108137.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1319974763108137"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 111,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "1e3cd1be153b3f45034c75b72144302a8a586b0e",
+    "hashEntrada": "a6eacfc7df464c5e3a3f1ad8b1e7d92413488da8",
+    "preparadoEm": "2026-10-08T21:31:58Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: Ative o modo profissional da sua Corpora\nVocê já usa a Corpora para organizar sua clínica de psicologia.\n\nAgora deixa ela automatizar o que ainda cai no seu colo: confirmações, lembretes, registros, documentos e recursos clínicos.\n\nTeste o Plano PRO por sete dias, sem cartão.\nDescrição: Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes\nBotão: Assinar",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "003f003f303f2e733e471c017f8100777f67007f03ff1fff00033fff0003003f"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

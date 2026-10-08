@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:2197411200835011",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=2197411200835011",
+  "item": {
+    "id": "2197411200835011",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-27",
+    "platforms": [
+      "facebook",
+      "instagram"
+    ],
+    "text": "PSIS FODAS USAM CORPORA (link na bio💜)\n\nIb: flamxdesign",
+    "title": "Corpora Technology",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://instagram.com/usecorpora",
+    "media": {
+      "type": "carrossel",
+      "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/788261453_1045685828298394_6486971159524178346_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=RAMYTbHJA6MQ7kNvwHrnJJk&_nc_oc=AdqqvZJyN_xzNu9cYxSoXDa7ImtqpO5t5cRHBN0HNDN4RPZYCU14vH2Bytw222tqgRg_UDXMIpb4vgRDdErMazHE&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQNdsSpMjDVXDdvWQa1feL3cC-T-McZam88391lLHs0vHA&oe=6ACD8AA2",
+      "thumbnailLocal": "media/ads/2197411200835011.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2197411200835011"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 42,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "d21cdf553bdf5d07d0099f2ae03c4e3aee8ff76c",
+    "hashEntrada": "a1c8e4894f0948ca45b6dc7226e9c762946e36fa",
+    "preparadoEm": "2026-10-08T21:31:58Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: Corpora Technology\nPSIS FODAS USAM CORPORA (link na bio💜)\n\nIb: flamxdesign\nBotão: Acessar o perfil do Instagram",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "fffffa3fe24f83832cf8bcfbf00ff00ff87ffcffffffa005e40fdfffc003ffff"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

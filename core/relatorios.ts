@@ -74,7 +74,7 @@ export function fichasParaRelatorio(slug: string, comp: string): FichaOpcao[] {
       if (!fi.analise) continue;
       const it = fi.item as { title?: string | null; caption?: string | null };
       out.push({
-        key: fi.key, rede: fi.key.split(':')[0], titulo: (it.title || fi.analise.campos.headline?.texto || it.caption || fi.key).replace(/\s+/g, ' ').slice(0, 80),
+        key: fi.key, rede: fi.key.startsWith('meta-ads:') ? 'anuncios' : fi.key.split(':')[0], titulo: (it.title || fi.analise.campos.headline?.texto || it.caption || (it as { text?: string | null }).text || fi.key).replace(/\s+/g, ' ').slice(0, 80),
         xPerfil: fi.medidas?.xPerfil ?? null, views: fi.medidas?.views ?? null, analisadaEm: fi.analise.geradoEm,
       });
     } catch { /* ficha quebrada: o validate acusa */ }
@@ -94,7 +94,7 @@ export function comandoRelatorio(slug: string, comp: string, rede: string, itens
 export function gerarRelatorioView(slug: string, comp: string, body: { rede?: string; itens?: string[]; abrir?: boolean }) {
   guard(slug, comp);
   const rede = String(body?.rede ?? '');
-  if (!['tiktok', 'youtube', 'instagram'].includes(rede)) throw new ValidationError('relatorio', ['escolha a rede (TikTok, YouTube ou Instagram)']);
+  if (!['tiktok', 'youtube', 'instagram', 'anuncios'].includes(rede)) throw new ValidationError('relatorio', ['escolha a rede (TikTok, YouTube, Instagram ou Anúncios)']);
   const ops = fichasParaRelatorio(slug, comp).filter((f) => f.rede === rede);
   if (!ops.length) throw new ValidationError('relatorio', [`nenhuma ficha analisada de ${comp} em ${rede}: analise os conteúdos antes`]);
   const itens = Array.isArray(body?.itens) ? body.itens.filter((k) => ops.some((o) => o.key === k)) : [];

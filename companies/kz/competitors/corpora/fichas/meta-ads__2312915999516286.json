@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:2312915999516286",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=2312915999516286",
+  "item": {
+    "id": "2312915999516286",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-17",
+    "platforms": [
+      "instagram"
+    ],
+    "text": "(@kellyciberpsi ) - Todas as ferramentas que eu uso para VIVER sendo psicóloga! (ou boa parte delas)💜\n\n👉 As duas primeiras são gratuitas e as duas últimas são pagas, mas todas estão em um só lugar: @usecorpora \n\n🆓 Plano gratuito: sem prazo de uso, sem cartão de crédito.\n💻 Plano profissional: R$89,00 / mês\n🎁 Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro\n\n💜 Comenta Corpora ou clique no link abaixo ou da bio para começar gratuitamente 💜",
+    "title": "Software para psicólogas com agenda, prontuário e cobrança | Corpora",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+      "type": "carrossel",
+      "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/776165910_1096178443078163_580912980015835604_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=wGOa3IJw8rMQ7kNvwHhE2wb&_nc_oc=Adr9QNsTcaZ2cRYXQ49iHjou0WDs8twiijP6qE9IVqntxGMjZViGlP_q_eog1bOA_wjwxLvFlHDyFqmd27qUj3BV&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQP1N2abnY5010l1FL8PU-1GLqkEjxC_rSpyc1Abf65RyQ&oe=6ACD6E51",
+      "thumbnailLocal": "media/ads/2312915999516286.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2312915999516286"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 52,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "bcdce692ea6f2c8eb63fcd8689d785a4743f5551",
+    "hashEntrada": "599acc39f7705fad60f97ee6903ef356aed256a8",
+    "preparadoEm": "2026-10-08T21:31:57Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: Software para psicólogas com agenda, prontuário e cobrança | Corpora\n(@kellyciberpsi ) - Todas as ferramentas que eu uso para VIVER sendo psicóloga! (ou boa parte delas)💜\n\n👉 As duas primeiras são gratuitas e as duas últimas são pagas, mas todas estão em um só lugar: @usecorpora\n\n🆓 Plano gratuito: sem prazo de uso, sem cartão de crédito.\n💻 Plano profissional: R$89,00 / mês\n🎁 Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro\n\n💜 Comenta Corpora ou clique no link abaixo ou da bio para começar gratuitamente 💜\nBotão: Cadastre-se",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "ff1ffc1ff89ff1dff00ff38fe18fe18fe007e003d801c03ec03ec000e180e180"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

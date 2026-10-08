@@ -109,7 +109,7 @@ const pct = (n: unknown) => (typeof n === 'number' ? `${(n * 100).toLocaleString
 
 export interface GrupoAg {
   valor: string; nome: string; n: number; fraca: boolean; itens: string[]; melhor: string | null; proposto?: boolean; lift: number | null;
-  med: { views: number | null; xPerfil: number | null; xMercado: number | null; porSeguidor: number | null; porSeguidorMercado: number | null; engajamento: number | null };
+  med: { views: number | null; xPerfil: number | null; xMercado: number | null; porSeguidor: number | null; porSeguidorMercado: number | null; engajamento: number | null; /** anúncio: a medida é o tempo no ar e as versões */ diasNoAr?: number | null; variacoes?: number | null };
 }
 export const DIMENSOES: { id: string; nome: string }[] = [
   { id: 'tipo', nome: 'Tipo de conteúdo' }, { id: 'formato', nome: 'Formato' }, { id: 'tipoGancho', nome: 'Tipo de gancho' },
@@ -117,8 +117,15 @@ export const DIMENSOES: { id: string; nome: string }[] = [
   { id: 'elemento5s', nome: 'Elementos dos 5 s' }, { id: 'produto', nome: 'Produto no conteúdo' },
 ];
 
+/** anúncio (040 G): dimensões do relatório; sem views, a medida é o tempo no ar */
+export const DIMENSOES_ANUNCIO: { id: string; nome: string }[] = [
+  { id: 'funil', nome: 'Funil' }, { id: 'tipoAnuncio', nome: 'Tipo de anúncio' }, { id: 'objetivo', nome: 'Objetivo' }, { id: 'angulo', nome: 'Ângulo' },
+  { id: 'tipoGancho', nome: 'Tipo de gancho' }, { id: 'provaTipo', nome: 'Prova' }, { id: 'gatilho', nome: 'Gatilho' }, { id: 'formatoMidia', nome: 'Formato do criativo' },
+];
+
 export function corpoRelatorio(r: Relatorio): string {
   const ag = r.agregados as Ag;
+  const anuncios = r.rede === 'anuncios';
   const am = (ag.amostra ?? {}) as Ag;
   const L: string[] = [`# Relatório · ${r.competitor} · ${r.rede} · ${r.escopo}`, ''];
   L.push(`Gerado em ${r.gerado.slice(0, 10)} · ${r.itens.length} item(ns) · leitura: ${r.leitura ? r.modelo : 'pendente (só os números do script)'}`, '');
@@ -127,16 +134,24 @@ export function corpoRelatorio(r: Relatorio): string {
   if (r.leitura) {
     L.push('## Em 5 linhas', ...r.leitura.resumo.map((x) => `- ${x}`), '');
   }
-  L.push('## Itens', '', '| item | views | × perfil | × mercado | por seguidor | engaj. | tipo | formato | gancho | estrutura |', '|---|---|---|---|---|---|---|---|---|---|');
+  if (anuncios) L.push('## Itens', '', '| anúncio | dias no ar | variações | funil | tipo | objetivo | ângulo | gancho | prova |', '|---|---|---|---|---|---|---|---|---|');
+  else L.push('## Itens', '', '| item | views | × perfil | × mercado | por seguidor | engaj. | tipo | formato | gancho | estrutura |', '|---|---|---|---|---|---|---|---|---|---|');
   for (const it of (ag.itens as Ag[] | undefined) ?? []) {
+    if (anuncios) { L.push(`| [${String(it.titulo ?? it.key).slice(0, 50).replace(/\|/g, '/')}](${it.url}) | ${fx(it.diasNoAr, 0)} | ${fx(it.variacoes, 0)} | ${it.funil ?? '—'} | ${it.tipoAnuncio ?? '—'} | ${it.objetivo ?? '—'} | ${((it.angulo as string[] | undefined) ?? []).join(', ') || '—'} | ${it.tipoGancho ?? '—'} | ${it.provaTipo ?? '—'} |`); continue; }
     L.push(`| [${String(it.titulo ?? it.key).slice(0, 50).replace(/\|/g, '/')}](${it.url}) | ${fx(it.views, 0)} | ${fx(it.xPerfil, 2)} | ${fx(it.xMercado, 2)} | ${fx(it.porSeguidor, 2)} | ${pct(it.engajamento)} | ${it.tipo ?? '—'} | ${it.formato ?? '—'} | ${it.tipoGancho ?? '—'} | ${it.estrutura ?? '—'} |`);
   }
   L.push('');
   const dims = (ag.dimensoes ?? {}) as Record<string, GrupoAg[]>;
-  L.push('## Mix × desempenho (medianas)', '');
-  for (const d of DIMENSOES) {
+  L.push(anuncios ? '## Mix × tempo no ar (medianas)' : '## Mix × desempenho (medianas)', '');
+  for (const d of anuncios ? DIMENSOES_ANUNCIO : DIMENSOES) {
     const gs = dims[d.id];
     if (!gs?.length) continue;
+    if (anuncios) {
+      L.push(`### ${d.nome}`, '', '| valor | n | dias no ar | variações | melhor |', '|---|---|---|---|---|');
+      for (const g of gs) L.push(`| ${g.nome}${g.proposto ? ' (proposto)' : ''}${g.fraca ? ' ⚠' : ''} | ${g.n} | ${fx(g.med.diasNoAr, 0)} | ${fx(g.med.variacoes, 1)} | ${g.melhor ?? '—'} |`);
+      L.push('');
+      continue;
+    }
     L.push(`### ${d.nome}`, '', '| valor | n | × perfil | × mercado | por seguidor | engaj. | melhor |', '|---|---|---|---|---|---|---|');
     for (const g of gs) L.push(`| ${g.nome}${g.proposto ? ' (proposto)' : ''}${g.fraca ? ' ⚠' : ''} | ${g.n} | ${fx(g.med.xPerfil, 2)} | ${fx(g.med.xMercado, 2)} | ${fx(g.med.porSeguidor, 2)} | ${pct(g.med.engajamento)} | ${g.melhor ?? '—'} |`);
     L.push('');

@@ -2,6 +2,7 @@
 //   legenda automática do YouTube (se houver) → senão áudio (ffmpeg mono 16 kHz) → faster-whisper local (small, pt)
 //   quadros-chave (0 · 0,5 · 1,5 · 3 · 5 s + meio + último + cortes de cena dos 5 s iniciais) a 540 px
 //   hash de idempotência; o vídeo é apagado depois de extrair áudio e quadros (decisão do Oliver).
+// Anúncio (`meta-ads:<id>`, 040 G): mesmo fluxo; imagem/carrossel = a miniatura é o quadro 0; vídeo só se a coleta trouxe o endereço (senão, miniatura).
 // Pesados em data/intel/<empresa>/<concorrente>/<plataforma>__<id>/ (fora do git); a transcrição vai para dentro da ficha.
 import { execFileSync, spawn } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
@@ -10,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import type { Ficha, FichaInsumos } from '../../schema/ficha';
 import { realRunner } from '../intel/runner';
 import { compDir, dadosDir, findItem, hashEntrada, limparLegenda, nowIso, readFicha, sha1, writeFicha } from './lib';
+import { baixarArquivo, itemParaPreparo, medidasAnuncio } from './anuncios';
 import { medidasDe, novaFicha } from './medidas';
 import { baixarTiktokDireto } from './tiktok';
 
@@ -132,9 +134,10 @@ export interface PrepResultado {
 export async function preparar(slug: string, comp: string, key: string, opt: { reanalisar?: boolean } = {}): Promise<PrepResultado> {
   const t0 = Date.now();
   const avisos: string[] = [];
-  const { snap, item, plataforma } = findItem(slug, comp, key);
+  const anuncio = key.startsWith('meta-ads:') ? itemParaPreparo(slug, comp, key) : null;
+  const { snap, item, plataforma } = anuncio ?? findItem(slug, comp, key);
   const antiga = readFicha(slug, comp, key);
-  const he = hashEntrada(item);
+  const he = anuncio?.hashEntrada ?? hashEntrada(item);
   const ins0 = antiga?.insumos;
   if (!opt.reanalisar && ins0 && ins0.hashEntrada === he && ins0.quadros.length > 0 && !ins0.faltou.includes('midia-indisponivel')) {
     return { key, estado: 'pulado', motivo: 'insumos já preparados (mesmo hash); use --reanalisar para refazer', segundos: secs(t0), fonteTexto: ins0.transcricao?.fonte, avisos };
@@ -155,7 +158,7 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
   let cenas: number[] | undefined;
   let dur: number | undefined = item.durationS ?? undefined;
   let bytesVideo: number | undefined;
-  const ehVideo = item.type !== 'post' && item.type !== 'carrossel';
+  const ehVideo = anuncio ? !!anuncio.item.videoUrl : item.type !== 'post' && item.type !== 'carrossel';
 
   // 1. legenda automática do YouTube
   if (plataforma === 'youtube') {
@@ -173,7 +176,10 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
     rmSync(join(dir, 'audio.wav'), { force: true });
     for (const f of existsSync(dir) ? readdirSync(dir) : []) if (/^video\./.test(f)) rmSync(join(dir, f), { force: true });
     try {
-      await realRunner.ytdlp([...argsDe(plataforma), '-f', 'bv*[height<=720]+ba/b[height<=720]/b', '--merge-output-format', 'mp4', '--no-playlist', '-o', join(dir, 'video.%(ext)s'), item.url], { timeoutMs: 300_000 });
+      if (anuncio) { // vídeo de anúncio: o endereço direto da coleta (yt-dlp não lê a Biblioteca)
+        bytesVideo = await baixarArquivo(anuncio.item.videoUrl!, join(dir, 'video.mp4'));
+        video = join(dir, 'video.mp4');
+      } else await realRunner.ytdlp([...argsDe(plataforma), '-f', 'bv*[height<=720]+ba/b[height<=720]/b', '--merge-output-format', 'mp4', '--no-playlist', '-o', join(dir, 'video.%(ext)s'), item.url], { timeoutMs: 300_000 });
       const f = readdirSync(dir).find((x) => /^video\./.test(x));
       if (f) { video = join(dir, f); bytesVideo = statSync(video).size; }
     } catch (e) {
@@ -226,6 +232,7 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
     const f = await reduzir540(src, join(qDir, '00000ms'));
     quadros = [{ tMs: 0, arquivo: `quadros/${basename(f)}` }];
     if (ehVideo) avisos.push('só a miniatura (o vídeo não baixou)');
+    else if (anuncio?.semVideoUrl) avisos.push('anúncio em vídeo sem endereço do arquivo na coleta: só a miniatura');
   } else faltou.add('sem-quadros');
 
   // assinatura de cada quadro; o que não mudou herda a descrição/OCR do Haiku (só quadro novo ou diferente volta para o Haiku)
@@ -238,7 +245,7 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
   if (antigos.length) avisos.push(`${herdados} de ${antigos.length} quadro(s) descrito(s) pelo Haiku mantiveram a descrição${herdados < antigos.length ? '; os que mudaram precisam do passo quadros de novo' : ''}`);
 
   if (!transcricao && ehVideo && !faltou.has('audio-sem-fala')) faltou.add('sem-transcricao');
-  if (!transcricao && !ehVideo) faltou.add('sem-transcricao');
+  if (!transcricao && !ehVideo && !anuncio) faltou.add('sem-transcricao'); // anúncio de imagem não tem fala: não é falta
   const legenda = limparLegenda(item.caption ?? item.title);
   if (!legenda) faltou.add('legenda-vazia');
 
@@ -255,7 +262,7 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
   };
   const seguidores = snap.data.profile.followers;
   const ficha: Ficha = antiga ?? novaFicha(slug, comp, key);
-  if (antiga && !antiga.analise) ficha.medidas = medidasDe(slug, comp, key, seguidores); // medidas só congelam quando há análise
+  if (antiga && !antiga.analise) ficha.medidas = anuncio ? medidasAnuncio(slug, comp, key) : medidasDe(slug, comp, key, seguidores); // medidas só congelam quando há análise
   ficha.insumos = ins;
   writeFicha(slug, comp, ficha);
 

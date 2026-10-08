@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:1812478363248226",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1812478363248226",
+  "item": {
+    "id": "1812478363248226",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-02",
+    "platforms": [
+      "instagram"
+    ],
+    "text": "SISTEMA DE GESTÃO GRATUITO PRA PSICÓLOGA LOW PROFILE  - \nSim, aquela. Que só quer atender de boa sem preocupar com burocracia.",
+    "title": "SISTEMA GRATUITO PRA PSI LOW PROFILE",
+    "description": "Sim, aquela. Que só quer atender de boa sem preocupar com burocracia.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+      "type": "carrossel",
+      "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/724811730_2701327266934850_5226922645657782914_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ewiqEN3USxEQ7kNvwEWgaRb&_nc_oc=AdqEkq2ooy9xwtuu2UVjW9HwT-S3M_45X-Pyxn-nSKuI4A7dpXm5k3BxUR8FG-tBoAe6MQsUterh7hDbYC63Qjnf&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQNhjtUdssl_cxs3ZkyTB3eXt7T2KraGqJwJGoKBb2GBhA&oe=6ACD707F",
+      "thumbnailLocal": "media/ads/1812478363248226.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1812478363248226"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 67,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "f9558902cdb2fb77238054187ebd6e907f145caf",
+    "hashEntrada": "a46c80d5c0e7435a8dd71be7c4d8aa17fb7face9",
+    "preparadoEm": "2026-10-08T21:31:58Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: SISTEMA GRATUITO PRA PSI LOW PROFILE\nSISTEMA DE GESTÃO GRATUITO PRA PSICÓLOGA LOW PROFILE -\nSim, aquela. Que só quer atender de boa sem preocupar com burocracia.\nDescrição: Sim, aquela. Que só quer atender de boa sem preocupar com burocracia.\nBotão: Ver detalhes",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "000000fe7ffe7ffe7ffe7ffe000000002000000000000000001e07fe60002000"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

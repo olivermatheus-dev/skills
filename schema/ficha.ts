@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { IsoDateTime, Slug } from './common';
 import { ContentItem } from './competitor';
 import { Ad } from './ads';
+import { AD_CAMPOS, AD_OBJETIVOS, AD_TIPOS } from './ads-marks';
 import { FormatBlock } from './format';
 import type { Vocabulario } from './vocabulario';
 
@@ -83,6 +84,8 @@ export const FichaCampos = z.object({
   destino: z.object({ kind: Txt.nullish(), dominio: Txt.nullish(), caminho: Txt.nullish() }).nullish(),
   provaTipo: Voc.nullish(),
   coerenciaLP: Txt.nullish(),
+  /** anúncio: onde a IA discorda da regra da 037 (funil/tipo/objetivo), com o motivo; `ia` é o valor que ficou em funil / tipoAnuncio / objetivo */
+  correcaoRegra: z.array(z.object({ campo: z.enum(AD_CAMPOS), regra: Txt.min(1), ia: Txt.min(1), motivo: Txt.min(1, 'diga por que a regra errou') })).nullish(),
 });
 export type FichaCampos = z.infer<typeof FichaCampos>;
 
@@ -137,15 +140,13 @@ export type FichaInsumos = z.infer<typeof FichaInsumos>;
 
 export const FICHA_KEY_RE = /^(instagram|tiktok|youtube|meta-ads):.+$/;
 
-export const Ficha = z.object({
+/** campos comuns a conteúdo e anúncio; só `kind` e `item` mudam (por isso a união é discriminada: ContentItem tem defaults e engoliria um Ad) */
+const FichaComum = {
   schema: z.literal(1).default(1),
-  kind: z.enum(['conteudo', 'anuncio']),
   /** `<plataforma>:<itemId>`, igual ao marks.json */
   key: z.string().regex(FICHA_KEY_RE, 'use <plataforma>:<itemId> (instagram, tiktok, youtube ou meta-ads)'),
   competitorId: Slug,
   url: Txt.min(1),
-  /** cópia congelada do item (o snapshot de origem fica em `origem`) */
-  item: z.union([ContentItem, Ad]),
   origem: z.object({ arquivo: Txt.min(1), collectedAt: IsoDateTime }),
   medidas: FichaMedidas.default({}),
   insumos: FichaInsumos.optional(),
@@ -162,7 +163,13 @@ export const Ficha = z.object({
   override: FichaCampos.partial().extend({ editadoEm: IsoDateTime.optional(), editados: z.record(z.string(), IsoDateTime).optional() }).default({}),
   /** ids dos relatórios (schema/relatorio.ts) que usaram esta ficha */
   relatorios: z.array(Txt).default([]),
-});
+};
+
+export const Ficha = z.discriminatedUnion('kind', [
+  /** `item` = cópia congelada do item (o snapshot de origem fica em `origem`) */
+  z.object({ kind: z.literal('conteudo'), item: ContentItem, ...FichaComum }),
+  z.object({ kind: z.literal('anuncio'), item: Ad, ...FichaComum }),
+]);
 export type Ficha = z.infer<typeof Ficha>;
 
 /** nome do arquivo da ficha (`:` não vale no Windows) */
@@ -233,6 +240,14 @@ export function issuesVocabulario(campos: Partial<FichaCampos>, ctx: VocabCtx, b
   chk('autoria', 'autoria', c.autoria);
   chk('provaTipo', 'provaTipo', c.provaTipo);
   chk('funil', 'funil', c.funil);
+  // anúncio: tipo e objetivo seguem a lista da 037 (schema/ads-marks.ts), não o vocabulário
+  if (c.tipoAnuncio != null && !(AD_TIPOS as readonly string[]).includes(c.tipoAnuncio)) out.push(`${base}.tipoAnuncio = "${c.tipoAnuncio}" não é um tipo de anúncio. Aceitos: ${AD_TIPOS.join(', ')}.`);
+  if (c.objetivo != null && !(AD_OBJETIVOS as readonly string[]).includes(c.objetivo)) out.push(`${base}.objetivo = "${c.objetivo}" não é um objetivo de anúncio. Aceitos: ${AD_OBJETIVOS.join(', ')}.`);
+  c.correcaoRegra?.forEach((x, i) => {
+    const atual = { funil: c.funil, tipo: c.tipoAnuncio, objetivo: c.objetivo }[x.campo];
+    if (atual !== x.ia) out.push(`${base}.correcaoRegra[${i}]: ia = "${x.ia}" mas ${x.campo === 'tipo' ? 'tipoAnuncio' : x.campo} = "${atual ?? 'vazio'}"; devem ser iguais`);
+    if (x.regra === x.ia) out.push(`${base}.correcaoRegra[${i}]: a IA concorda com a regra (${x.ia}); tire a correção`);
+  });
   c.angulo?.forEach((v, i) => chk(`angulo[${i}]`, 'angulo', v));
   return out;
 }
@@ -246,6 +261,7 @@ export function issuesFicha(f: Ficha, ctx: Omit<VocabCtx, 'termosNovos'>): strin
   if (f.analise && f.analise.versaoVocab > ctx.vocab.versao) out.push(`analise.versaoVocab ${f.analise.versaoVocab} é maior que a versão do vocabulário (${ctx.vocab.versao})`);
   out.push(...issuesVocabulario(f.override, { ...ctx, termosNovos: novos }, 'override'));
   const [plat] = f.key.split(':');
+  if ((plat === 'meta-ads') !== (f.kind === 'anuncio')) out.push(`kind "${f.kind}" não combina com a chave (${f.key}): anúncio é meta-ads:<id>, conteúdo é instagram, tiktok ou youtube`);
   if (f.analise && f.analise.campos.plataforma !== plat) out.push(`analise.campos.plataforma = "${f.analise.campos.plataforma}" diferente da chave (${plat})`);
   return out;
 }

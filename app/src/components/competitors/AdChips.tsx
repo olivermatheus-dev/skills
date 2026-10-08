@@ -2,7 +2,7 @@
 // Cada chip mostra o motivo no tooltip (as linhas de `motivos[]` que decidiram o valor) e a confiança; confiança baixa leva a marca "incerto".
 // O sinal de resultado (0–100) é indireto: sem gasto nem alcance, só tempo no ar, versões e persistência (fórmula em `sinalResultado`).
 import type { ReactNode } from 'react';
-import { CircleHelp, FileText, Globe, Link2Off, MessageCircle, Smartphone, Tag, Trophy, UserRound } from 'lucide-react';
+import { CircleHelp, FileText, Globe, Link2Off, MessageCircle, Smartphone, Sparkles, Tag, Trophy, UserRound } from 'lucide-react';
 import type { Classificacao } from '../../api';
 import { Tip } from './toolbar';
 import { cx } from '../kit';
@@ -46,24 +46,33 @@ function Incerto({ on }: { on: boolean }) {
   return on ? <CircleHelp className="size-3 opacity-70" aria-label="incerto" /> : null;
 }
 
-/** correção do Oliver (037 D): `auto` = o que as regras diziam. O chip troca a confiança pelo selo "você" e o valor dele vence. */
-export type Voce = { auto: string } | undefined;
+/**
+ * De quem é o valor do chip quando não é a regra (ordem fixa: você > IA > regra). `auto` = o que as regras diziam;
+ * `origem` 'voce' = correção do Oliver (037 D), 'ia' = análise da ficha (040 G); `motivo` = por que a IA corrigiu a regra.
+ */
+export type Voce = { auto: string; origem?: 'voce' | 'ia'; motivo?: string } | undefined;
 const VOCE_RING = 'ring-1 ring-primary/50';
+const IA_RING = 'ring-1 ring-violet-400/60';
+const ringDe = (voce: Voce) => (voce ? (voce.origem === 'ia' ? IA_RING : VOCE_RING) : undefined);
 function Selo({ voce }: { voce: Voce }) {
-  return voce ? <span className="inline-flex items-center gap-0.5 rounded-sm bg-primary/15 px-1 py-px text-[10px] font-semibold text-primary-ink [&_svg]:size-2.5"><UserRound />você</span> : null;
+  if (!voce) return null;
+  return voce.origem === 'ia'
+    ? <span className="inline-flex items-center gap-0.5 rounded-sm bg-violet-100 px-1 py-px text-[10px] font-semibold text-violet-800 dark:bg-violet-500/20 dark:text-violet-300 [&_svg]:size-2.5"><Sparkles />IA</span>
+    : <span className="inline-flex items-center gap-0.5 rounded-sm bg-primary/15 px-1 py-px text-[10px] font-semibold text-primary-ink [&_svg]:size-2.5"><UserRound />você</span>;
 }
-function vozTip(titulo: string, voce: NonNullable<Voce>): ReactNode {
+function vozTip(titulo: string, voce: NonNullable<Voce>, valor: string): ReactNode {
+  if (voce.origem === 'ia') return <><b>{titulo}</b> · análise da IA{'\n'}{voce.auto === valor ? `Confirmou a regra: ${valor}.` : `As regras diziam: ${voce.auto}.`}{voce.motivo ? `\nMotivo: ${voce.motivo}` : ''}{'\n'}Vale sobre a regra; a sua correção vale sobre a da IA. Abra o anúncio para corrigir.</>;
   return <><b>{titulo}</b> · corrigido por você{'\n'}As regras diziam: {voce.auto}{'\n'}Vale sobre regra e IA; coleta nova não apaga. Abra o anúncio para voltar ao automático.</>;
 }
 
 export function ChipFunil({ c, voce }: { c: Classificacao; voce?: Voce }) {
-  return <Tip content={voce ? vozTip('Funil', voce) : motivoTip('Funil', c, 'funil')}><span tabIndex={0} className={cx(BASE, FUNIL_COR[c.funil], voce && VOCE_RING)}>{FUNIL[c.funil]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.funil < INCERTO} /></span></Tip>;
+  return <Tip content={voce ? vozTip('Funil', voce, FUNIL[c.funil]) : motivoTip('Funil', c, 'funil')}><span tabIndex={0} className={cx(BASE, FUNIL_COR[c.funil], ringDe(voce))}>{FUNIL[c.funil]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.funil < INCERTO} /></span></Tip>;
 }
 export function ChipTipo({ c, voce }: { c: Classificacao; voce?: Voce }) {
-  return <Tip content={voce ? vozTip('Tipo', voce) : motivoTip('Tipo', c, 'tipo')}><span tabIndex={0} className={cx(BASE, NEUTRO, voce && VOCE_RING)}>{TIPO[c.tipo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.tipo < INCERTO} /></span></Tip>;
+  return <Tip content={voce ? vozTip('Tipo', voce, TIPO[c.tipo]) : motivoTip('Tipo', c, 'tipo')}><span tabIndex={0} className={cx(BASE, NEUTRO, ringDe(voce))}>{TIPO[c.tipo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.tipo < INCERTO} /></span></Tip>;
 }
 export function ChipObjetivo({ c, voce }: { c: Classificacao; voce?: Voce }) {
-  return <Tip content={voce ? vozTip('Objetivo', voce) : motivoTip('Objetivo provável', c, 'objetivo')}><span tabIndex={0} className={cx(BASE, NEUTRO, voce && VOCE_RING)}>{OBJETIVO[c.objetivo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.objetivo < INCERTO} /></span></Tip>;
+  return <Tip content={voce ? vozTip('Objetivo', voce, OBJETIVO[c.objetivo]) : motivoTip('Objetivo provável', c, 'objetivo')}><span tabIndex={0} className={cx(BASE, NEUTRO, ringDe(voce))}>{OBJETIVO[c.objetivo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.objetivo < INCERTO} /></span></Tip>;
 }
 
 const brl = (n: number) => `R$ ${n.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}`;

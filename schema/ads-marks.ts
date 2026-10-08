@@ -76,8 +76,29 @@ export function aplicarMarca(old: AdMark | undefined, patch: AdMarkPatch, agora:
 /** marca sem nada do Oliver: pode sair do arquivo */
 export const marcaVazia = (m: AdMark) => !m.saved && !m.note && !m.tags.length && !m.override && !m.colecoes.length && !m.ideaId;
 
-/** valor de um campo: override do Oliver vence a regra (a IA entra entre os dois na fase F) */
-export function resolverCampo<T extends string>(campo: AdCampo, regra: T, mark?: Pick<AdMark, 'override'>): { valor: T; origem: 'voce' | 'regra' } {
+/**
+ * Chave da FICHA de análise de um anúncio (040 G): `meta-ads:<id>` (arquivo `meta-ads__<id>.json`). A marca do Oliver acima usa `meta:<id>` (adKey).
+ * Todo código que liga um lado ao outro passa por estes conversores; nunca monte as duas chaves à mão.
+ */
+export const FICHA_FONTE_AD = 'meta-ads';
+export const fichaKeyDeAd = (adId: string) => `${FICHA_FONTE_AD}:${adId}`;
+/** id do anúncio numa chave de ficha (`meta-ads:123` → `123`); null se a chave não for de anúncio */
+export const adIdDeFichaKey = (key: string): string | null => (key.startsWith(`${FICHA_FONTE_AD}:`) ? key.slice(FICHA_FONTE_AD.length + 1) || null : null);
+/** chave da marca (`meta:123`) a partir da chave da ficha (`meta-ads:123`) */
+export const markKeyDeFichaKey = (key: string): string | null => { const id = adIdDeFichaKey(key); return id ? adKey(id) : null; };
+
+/** campos da ficha que correspondem a funil/tipo/objetivo da 037 (na ficha o tipo se chama `tipoAnuncio`) */
+export const AD_CAMPO_FICHA = { funil: 'funil', tipo: 'tipoAnuncio', objetivo: 'objetivo' } as const;
+const VALORES_CAMPO: Record<AdCampo, readonly string[]> = { funil: AD_FUNIS, tipo: AD_TIPOS, objetivo: AD_OBJETIVOS };
+export type OrigemCampo = 'voce' | 'ia' | 'regra';
+
+/**
+ * Valor de um campo, na ordem fixa: override do Oliver (marks.json) > IA (ficha de análise) > regra (ads-classify).
+ * `ia` só vale se for um valor do vocabulário da 037; qualquer outra coisa é ignorada e a regra segue valendo.
+ */
+export function resolverCampo<T extends string>(campo: AdCampo, regra: T, mark?: Pick<AdMark, 'override'>, ia?: string | null): { valor: T; origem: OrigemCampo } {
   const o = mark?.override?.[campo];
-  return o ? { valor: o as T, origem: 'voce' } : { valor: regra, origem: 'regra' };
+  if (o) return { valor: o as T, origem: 'voce' };
+  if (ia && VALORES_CAMPO[campo].includes(ia)) return { valor: ia as T, origem: 'ia' };
+  return { valor: regra, origem: 'regra' };
 }

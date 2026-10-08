@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:1702917500789941",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1702917500789941",
+  "item": {
+    "id": "1702917500789941",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-28",
+    "platforms": [
+      "facebook",
+      "instagram"
+    ],
+    "text": "PSIS FODAS ESTUDAM e se capacitam para serem antes de tudo HUMANOS! \n\nParte 2 com os pedidos dos comentários da parte 1 💜 Quem está faltando?\n\nNa lista: Lacan, social comunitária, contextuais, Ailton Krenak\n\nIb: flamxdesign",
+    "title": "Corpora Technology",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://instagram.com/usecorpora",
+    "media": {
+      "type": "carrossel",
+      "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/789081582_2203306253858387_3817210314595054138_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=VlHjbdE6xpoQ7kNvwHn8eQP&_nc_oc=Ado0Wpg7QwLlCDeG6-j7r3nAbys8kmosnJFnjxfvLWtHgp0n5s_2QxafOS-IF8hxlfLLh4S5iFoILUbHxs74Bwtr&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQMUdXRypkPWov1JqeRJGNOdP8on0HqQFmWhi8AjY3cVfg&oe=6ACD8EEF",
+      "thumbnailLocal": "media/ads/1702917500789941.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1702917500789941"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 41,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "acde6c7dc4d43bfb714b2db0b4510f9274636ba8",
+    "hashEntrada": "587dcf7695794e55b0d42051c98d6b676d5d18d5",
+    "preparadoEm": "2026-10-08T21:31:59Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: Corpora Technology\nPSIS FODAS ESTUDAM e se capacitam para serem antes de tudo HUMANOS!\n\nParte 2 com os pedidos dos comentários da parte 1 💜 Quem está faltando?\n\nNa lista: Lacan, social comunitária, contextuais, Ailton Krenak\n\nIb: flamxdesign\nBotão: Acessar o perfil do Instagram",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "fffffa1fc20782832f78b87bf03ff03ff87ff83ffc3fa005e40fef1fe007ffff"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

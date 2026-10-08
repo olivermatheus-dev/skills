@@ -3,15 +3,17 @@
 // e da miniatura: o salvo continua abrindo inteiro mesmo se a Biblioteca tirar o anúncio do ar).
 import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Bookmark, BookmarkCheck, ExternalLink, Info, LogOut, Megaphone, Undo2, UserRound } from 'lucide-react';
+import { Bookmark, BookmarkCheck, ExternalLink, Info, LogOut, Megaphone, Sparkles, Undo2, UserRound } from 'lucide-react';
 import type { Ad, AdMark, AdMarkPatch, AnuncioHistorico, Classificacao } from '../../api';
-import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
+import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, fichaKeyDeAd, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
 import { Button, SelectField, Textarea, cx, fmtDate, type SelectOption } from '../kit';
 import { Img, PlatformIcon, platformLabel, timeAgo } from './lib';
 import { Tip } from './toolbar';
 import { TagsInput, TagChip, useProjectTags } from '../notes/TagsInput';
 import { ChipDestino, ChipOferta, FUNIL, OBJETIVO, StatusBadge, TIPO, motivosDe, type StatusAd } from './AdChips';
+import { AnaliseAnuncio } from './ficha/AdFicha';
+import { useFichasResumo } from './ficha/useFichas';
 
 /** o que o painel precisa saber de um anúncio (a linha da aba Anúncios, já com a classificação resolvida) */
 export interface AdPanelData {
@@ -46,6 +48,10 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
   const [note, setNote] = useState(mark?.note ?? '');
   const lastNote = useRef(mark?.note ?? '');
   const { list: tagDefs } = useProjectTags(slug);
+  // análise da IA (040 G): vale entre a regra e a sua correção
+  const fichaKey = fichaKeyDeAd(ad.id);
+  const selo = useFichasResumo(slug).of(r.compId, fichaKey);
+  const ia = selo?.analisada ? selo.anuncio : undefined;
   const saveNote = () => { if (note !== lastNote.current) { lastNote.current = note; onMark({ note: note.trim() ? note : null }); } };
   const fechar = () => { saveNote(); onClose(); };
 
@@ -117,26 +123,35 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
                 <div className="grid gap-3">
                   {CAMPOS.map((f) => {
                     const regra = auto[f.k];
-                    const { valor, origem } = resolverCampo(f.k, regra as string, mark);
+                    // ordem fixa: a sua correção (marks.json) > a análise da IA (ficha) > a regra. Editar aqui escreve SÓ no marks.json
+                    const { valor, origem } = resolverCampo(f.k, regra as string, mark, ia?.[f.k]);
+                    // o que valeria sem a sua correção: escolher esse valor desfaz a correção
+                    const { valor: semVoce, origem: origemSemVoce } = resolverCampo(f.k, regra as string, undefined, ia?.[f.k]);
                     const linhas = origem === 'regra' ? motivosDe(auto, f.k) : [];
+                    const motivoIa = ia?.motivo?.[f.k];
+                    const iaTxt = ia?.[f.k] ? (ia[f.k] === regra ? `A IA confirmou a regra (${f.labels[regra as string]}).` : `A IA ${motivoIa ? 'corrigiu a regra' : 'disse'}: ${f.labels[ia[f.k]!]}.`) : '';
                     return (
                       <div key={f.k} className="grid grid-cols-[88px_1fr] gap-x-3 items-start">
                         <Tip content={f.hint}><span className="text-xs font-medium text-muted-foreground pt-2 cursor-default">{f.label}</span></Tip>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-2">
                             <SelectField aria-label={f.label} value={valor} options={optionsOf(f)}
-                              onChange={(x) => x && onMark({ override: { [f.k]: x === regra ? null : x } })} />
+                              onChange={(x) => x && onMark({ override: { [f.k]: x === semVoce ? null : x } })} />
                             {origem === 'voce'
                               ? <>
                                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 text-primary-ink text-[11px] font-semibold px-2 py-0.5"><UserRound className="size-3" />você</span>
-                                <Tip content={`Voltar ao automático (regras: ${f.labels[regra as string]})`}>
+                                <Tip content={`Voltar ao automático (${origemSemVoce === 'ia' ? 'IA' : 'regras'}: ${f.labels[semVoce as string]})`}>
                                   <button type="button" onClick={() => onMark({ override: { [f.k]: null } })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><Undo2 className="size-3.5" />voltar ao automático</button>
                                 </Tip>
                               </>
-                              : <span className={cx('text-[11px]', auto.confiancaCampos[f.k] < 0.5 ? 'text-warning-ink' : 'text-muted-foreground')}>regra · {Math.round(auto.confiancaCampos[f.k] * 100)}%{auto.confiancaCampos[f.k] < 0.5 ? ' (incerto)' : ''}</span>}
+                              : origem === 'ia'
+                                ? <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 text-violet-800 dark:bg-violet-500/20 dark:text-violet-300 text-[11px] font-semibold px-2 py-0.5"><Sparkles className="size-3" />IA</span>
+                                : <span className={cx('text-[11px]', auto.confiancaCampos[f.k] < 0.5 ? 'text-warning-ink' : 'text-muted-foreground')}>regra · {Math.round(auto.confiancaCampos[f.k] * 100)}%{auto.confiancaCampos[f.k] < 0.5 ? ' (incerto)' : ''}</span>}
                           </div>
                           <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                            {origem === 'voce' ? `As regras diziam: ${f.labels[regra as string]}.` : linhas.length ? linhas.join(' · ').replace(/• /g, '') : 'Nenhum sinal forte: valor padrão das regras.'}
+                            {origem === 'voce' ? `As regras diziam: ${f.labels[regra as string]}.${iaTxt ? ` ${iaTxt}` : ''}`
+                              : origem === 'ia' ? `${iaTxt}${motivoIa ? ` Motivo: ${motivoIa}` : ''}`
+                              : linhas.length ? linhas.join(' · ').replace(/• /g, '') : 'Nenhum sinal forte: valor padrão das regras.'}
                           </p>
                         </div>
                       </div>
@@ -145,6 +160,10 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
                 </div>
               </Secao>
             )}
+
+            <Secao titulo="Análise da IA" dica="Ficha do anúncio (040). Funil, tipo e objetivo ficam em Classificação, acima.">
+              <AnaliseAnuncio slug={slug} compId={r.compId} fichaKey={fichaKey} resumo={selo} />
+            </Secao>
 
             <Secao titulo="Nota" dica="Por que este anúncio importa, o que copiar (o mecanismo, não a frase).">
               <Textarea rows={4} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com a dor do prontuário; oferta de 15 dias sem cartão." />

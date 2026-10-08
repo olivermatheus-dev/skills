@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import type { Ficha, FichaMedidas } from '../../schema/ficha';
 import { buildRows, groupSnapshots, withMarketOutlier, type Row } from '../../app/src/components/competitors/lib';
 import { ROOT, findItem, readSnapshots } from './lib';
+import { novaFichaAnuncio } from './anuncios';
 
 let rowsCache: (Row & { comp: string })[] | null = null;
 export function marketRows(slug: string) {
@@ -30,8 +31,9 @@ export function medidasDe(slug: string, comp: string, key: string, seguidores?: 
   };
 }
 
-/** ficha nova a partir da última coleta que traz o item (conteúdo orgânico) */
+/** ficha nova a partir da última coleta que traz o item (conteúdo orgânico; anúncio vai para anuncios.ts) */
 export function novaFicha(slug: string, comp: string, key: string): Ficha {
+  if (key.startsWith('meta-ads:')) return novaFichaAnuncio(slug, comp, key); // anúncio: tools/fichas/anuncios.ts (040 G)
   const { snap, item } = findItem(slug, comp, key);
   return {
     schema: 1, kind: 'conteudo', key, competitorId: comp, url: item.url, item,

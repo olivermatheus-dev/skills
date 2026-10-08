@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:3941392002662525",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=3941392002662525",
+  "item": {
+    "id": "3941392002662525",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-06-18",
+    "platforms": [
+      "facebook",
+      "instagram",
+      "audience_network"
+    ],
+    "text": "MENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA! Assine o plano PROFISSIONAL da Corpora e eleve o nível da sua prática clínica!",
+    "title": "MENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA!",
+    "description": "Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes",
+    "cta": "Assinar",
+    "linkUrl": "https://app.usecorpora.com.br/planos",
+    "media": {
+      "type": "imagem",
+      "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/727286381_1332856861532894_5723189206538001827_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=cyhguid6spcQ7kNvwFIMZCh&_nc_oc=Adr_ic_pMjUw-VrJxkf3rGBUPkwQEIVBQiIWbM-BovOMqFcvi3cpr_su1QiPbyFJhKgqTPONxY-xL3ZMK40TS4RC&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQO4ZbSwEDgsIz5Z_72MunHdZg2NyS6z_Z4Hq2wC9LztpQ&oe=6ACD77C2",
+      "thumbnailLocal": "media/ads/3941392002662525.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=3941392002662525"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 112,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "9ed9527f610cb364553be3cb56e18c9506229194",
+    "hashEntrada": "413da68378b9520fa75e7a0cec000cf76e3b1270",
+    "preparadoEm": "2026-10-08T21:31:58Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Título: MENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA!\nMENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA! Assine o plano PROFISSIONAL da Corpora e eleve o nível da sua prática clínica!\nDescrição: Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes\nBotão: Assinar",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "ffff800ff3ff80ff8847eaff807fffffc3ff830381ff816b8335832fffffffff"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

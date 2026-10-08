@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "kind": "anuncio",
+  "key": "meta-ads:935502436232380",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=935502436232380",
+  "item": {
+    "id": "935502436232380",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-02",
+    "platforms": [
+      "instagram"
+    ],
+    "text": "SISTEMA de GESTÃO GRATUITO para psicólogas!",
+    "cta": "Saiba mais",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+      "type": "imagem",
+      "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/754224544_1521959005875751_3602101562849142482_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=swv7wmyzcNsQ7kNvwEpHfe1&_nc_oc=AdoTVvu1O_nH5VDykYXzrbdz-psLceTsYj3ezKwYy6Zr8oYL7tCRvQoNFzMdGdsidXaY5w3ee_s-dsBEMSBXQOLM&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQMdFkeL9QDsB0EGVB2-m30DEJzBhDsIZ02n8rDzp0SkzQ&oe=6ACD7B8A",
+      "thumbnailLocal": "media/ads/935502436232380.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=935502436232380"
+  },
+  "origem": {
+    "arquivo": "ads/2026-10-08T15-06-35.json",
+    "collectedAt": "2026-10-08T15:06:35Z"
+  },
+  "medidas": {
+    "historico": {
+      "diasNoAr": 67,
+      "variations": 1,
+      "irmaos": 1,
+      "saiuDoAr": false,
+      "reapareceu": false
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "303ebf75a4010acd5f29bfd5fc044c31fc3fac23",
+    "hashEntrada": "4e9d0e1ceea5a0632ed0dea12378fa92392da33a",
+    "preparadoEm": "2026-10-08T21:31:57Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "SISTEMA de GESTÃO GRATUITO para psicólogas!\nBotão: Saiba mais",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "assinatura": "00003fbc3ffc3f9803e01ff838181000010000000100000837f83ff83ff80000"
+      }
+    ],
+    "faltou": [],
+    "tempos": {
+      "total": 0.2
+    }
+  }
+}

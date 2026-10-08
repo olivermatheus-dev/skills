@@ -3,11 +3,11 @@
 //   pacote   <empresa> <concorrente> <chave>                   imprime o pacote enxuto que o Opus recebe
 //   quadros  <empresa> <concorrente> <arquivo.json>             grava descrição/OCR dos quadros (Haiku) nos insumos: { "<chave>": [{ tMs, descricao, ocr }] }
 //   salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]   valida (schema + vocabulário) e grava a análise
-//   relatorio <empresa> <concorrente> [--rede x] [--itens a,b | --top N] [--rodada id] [--pacote]   agregados → relatorios/<id>.md
+//   relatorio <empresa> <concorrente> [--rede x] [--itens a,b | --top N] [--rodada id] [--pacote]   agregados → relatorios/<id>.md  (--rede anuncios = fichas de anúncio)
 //   relatorio <empresa> <concorrente> --rodada id --leitura arquivo.json                           grava a leitura do Opus
 //   termo    <empresa> aceitar|recusar <grupo>:<valor> [--rodada id --de <concorrente>]              termo novo em lote
 //   validar                                                    confere todas as fichas (o mesmo do npm run validate)
-// chave = <plataforma>:<idDoItem> (ex.: tiktok:7691064446289988884)
+// chave = <plataforma>:<idDoItem> (ex.: tiktok:7691064446289988884; anúncio da Meta: meta-ads:<id da Biblioteca>)
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { FichaAnalise } from '../../schema/ficha';
@@ -64,8 +64,8 @@ async function main() {
       console.log(`✅ leitura gravada em companies/${slug}/competitors/${comp}/relatorios/${r.id}.md (${r.modelo}); nenhum número fora dos agregados`);
       return;
     }
-    const rede = opt.rede ?? (opt.itens ? opt.itens.split(':')[0] : '');
-    if (!rede) falha('informe --rede (tiktok, youtube, instagram) ou --itens');
+    const rede = opt.rede ?? (opt.itens ? R.redeDeChave(opt.itens.split(',')[0]) : '');
+    if (!rede) falha('informe --rede (tiktok, youtube, instagram, anuncios) ou --itens');
     const r = R.gerarRelatorio(slug, comp, { rede, itens: opt.itens?.split(',').map((x) => x.trim()).filter(Boolean), top: opt.top ? Number(opt.top) : undefined, rodada: opt.rodada });
     const am = (r.agregados as { amostra: { n: number; nivel: string; avisos: string[] } }).amostra;
     console.log(`✅ ${r.id}: ${am.n} item(ns), ${am.nivel === 'padroes' ? 'padrões' : 'observações (amostra pequena)'} · ${r.termosNovos.filter((t) => !t.decisao).length} termo(s) novo(s) pendente(s)${r.leitura ? ' · leitura mantida' : ' · leitura pendente'}`);
@@ -108,9 +108,12 @@ async function main() {
     // as 2 imagens que o Opus vê: abertura (0 s) e ~1,5 s; as demais só como tempo
     const alvo = [0, 1500].map((t) => ins.quadros.reduce<(typeof ins.quadros)[number] | undefined>((b, q) => (!b || Math.abs(q.tMs - t) < Math.abs(b.tMs - t) ? q : b), undefined)).filter(Boolean);
     const snaps = new Set(alvo.map((q) => q!.tMs));
+    // anúncio (040 G): sem views; entram as regras da 037 com o motivo, o que o Oliver já corrigiu, o histórico e a landing
+    const ad = f.kind === 'anuncio' ? (await import('./anuncios')).pacoteAnuncio(slug, comp, f) : null;
     console.log(JSON.stringify({
       kind: f.kind, key: f.key, url: f.url, plataforma: f.key.split(':')[0], formatoMidia: it.type, duracaoS: ins.midia?.duracaoS ?? it.durationS ?? null, publicadoEm: it.publishedAt?.slice(0, 10) ?? null,
       titulo: it.title ?? null, medidas: f.medidas, legenda: ins.legendaLimpa ?? '',
+      ...ad,
       transcricao: ins.transcricao ? { fonte: ins.transcricao.fonte, idioma: ins.transcricao.idioma, segmentos: ins.transcricao.segmentos } : null,
       quadros: ins.quadros.map((q) => ({ tMs: q.tMs, descricao: q.descricao ?? null, ocr: q.ocr ?? null, imagem: snaps.has(q.tMs) ? join(dir, q.arquivo) : undefined })),
       cortesDeCenaS: ins.cenas ?? null, faltou: ins.faltou, insumosHash: ins.hash,
@@ -145,17 +148,23 @@ async function main() {
     const key = String(p.key ?? '');
     parseKey(key);
     const vocab = loadVocab();
+    const anuncio = key.startsWith('meta-ads:');
     const ficha = readFicha(slug, comp, key) ?? (await import('./medidas')).novaFicha(slug, comp, key);
-    const bruta = (p.analise ?? { versaoPrompt: 1, ...p, key: undefined }) as Record<string, unknown>;
+    const bruta = (p.analise ?? { versaoPrompt: 2, ...p, key: undefined }) as Record<string, unknown>;
     const r = FichaAnalise.safeParse({ versaoVocab: vocab.versao, geradoEm: nowIso(), insumosHash: ficha.insumos?.hash, modelo: 'claude-opus-5-5', ...bruta });
     if (!r.success) falha(`análise fora do schema:\n  ${r.error.issues.map((i) => `${i.path.join('.') || '(raiz)'}: ${i.message}`).join('\n  ')}`);
+    if (anuncio) { // a IA confirma ou corrige funil/tipo/objetivo da 037; onde discorda, correcaoRegra leva o motivo
+      const erros = (await import('./anuncios')).conferirAnalise(slug, comp, ficha, r.data.campos);
+      if (erros.length) falha(`análise de anúncio incompleta:\n  ${erros.join('\n  ')}`);
+    }
     if (ficha.analise && !flags.has('--reanalisar')) falha(`${key} já tem análise (${ficha.analise.geradoEm}, ${ficha.analise.modelo}). Para refazer, use --reanalisar: a análise antiga vai para "anteriores" e suas edições (override) continuam.`);
     if (ficha.analise) ficha.anteriores = [ficha.analise, ...ficha.anteriores].slice(0, 3);
     ficha.analise = r.data;
-    const { medidasDe } = await import('./medidas');
-    ficha.medidas = medidasDe(slug, comp, key, ficha.medidas.seguidores) ?? ficha.medidas;
+    if (anuncio) ficha.medidas = (await import('./anuncios')).medidasAnuncio(slug, comp, key); // histórico da 037 congelado agora
+    else { const { medidasDe } = await import('./medidas'); ficha.medidas = medidasDe(slug, comp, key, ficha.medidas.seguidores) ?? ficha.medidas; }
     writeFicha(slug, comp, ficha); // valida o vocabulário; lança com a lista dos valores aceitos
-    setMark(slug, comp, key, { status: 'analisada' });
+    // conteúdo: status "analisada" no marks.json. Anúncio não tem status lá (ads/marks.json guarda só o que o Oliver marcou): "analisada" = ficha com análise
+    if (!anuncio) setMark(slug, comp, key, { status: 'analisada' });
     console.log(`✅ ${key}: análise salva (${r.data.modelo}${ficha.anteriores.length ? `, ${ficha.anteriores.length} anterior(es) guardada(s)` : ''}) e marcada como analisada${r.data.termosNovos.length ? `\n   ${r.data.termosNovos.length} termo(s) novo(s) proposto(s): ${r.data.termosNovos.map((t) => `${t.grupo}:${t.valor}`).join(', ')}` : ''}`);
     return;
   }

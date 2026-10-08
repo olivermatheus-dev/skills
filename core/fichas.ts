@@ -5,12 +5,14 @@ import { existsSync, readFileSync, readdirSync, unlinkSync, writeFileSync, mkdir
 import { join } from 'node:path';
 import YAML from 'yaml';
 import { FICHA_KEY_RE, fichaFileName, type Ficha, type FichaCampos } from '../schema/ficha';
+import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, type AdCampo } from '../schema/ads-marks';
 import { FichasPedido } from '../schema/relatorio';
 import type { Vocabulario } from '../schema/vocabulario';
 import { ROOT, ValidationError, listCompetitors } from './store';
 import { fichasDir, loadVocab, readFicha, writeFicha } from '../tools/fichas/lib';
 import { listarRelatorios } from '../tools/fichas/relatorio-lib';
 
+const AD_VALORES = { funil: AD_FUNIS, tipo: AD_TIPOS, objetivo: AD_OBJETIVOS } as const;
 const json = (f: string) => JSON.parse(readFileSync(f, 'utf8').replace(/^﻿/, ''));
 const nowIso = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const okKey = (key: string) => { if (!FICHA_KEY_RE.test(key) || /[\\/]/.test(key)) throw new ValidationError('ficha', [`chave inválida "${key}"`]); };
@@ -22,6 +24,8 @@ export const CAMINHOS_EDITAVEIS = [
   'headline.texto', 'gancho.texto', 'gancho.tipo', 'gancho.canal', 'retencao5s', 'gatilhos', 'estrutura.macro',
   'cta.tipo', 'cta.texto', 'produto.presenca', 'publico.quem', 'publico.consciencia', 'tom', 'som', 'porQue', 'adaptar',
   'riscos', 'replicavel', 'autoria', 'serie',
+  // anúncio (040 G). Funil, tipo e objetivo NÃO entram aqui: o Oliver os corrige no painel do anúncio e isso vai só para ads/marks.json
+  'angulo', 'provaTipo',
 ] as const;
 
 type Obj = Record<string, unknown>;
@@ -132,7 +136,16 @@ export function editarFicha(slug: string, comp: string, key: string, body: { pat
 }
 
 // ───────────────────────── resumo (selo e filtro) ─────────────────────────
-export interface FichaResumo { analisada: boolean; geradoEm?: string; editados: number; naFila: boolean }
+/** funil/tipo/objetivo da IA para a aba Anúncios: só valor que existe na lista da 037 (resolverCampo confere de novo) */
+function anuncioIa(c: Partial<FichaCampos>): FichaAnuncioIa {
+  const ok = (campo: AdCampo, v?: string | null) => (v && (AD_VALORES[campo] as readonly string[]).includes(v) ? v : undefined);
+  const motivo: FichaAnuncioIa['motivo'] = {};
+  for (const x of c.correcaoRegra ?? []) motivo[x.campo] = x.motivo;
+  return { funil: ok('funil', c.funil), tipo: ok('tipo', c.tipoAnuncio), objetivo: ok('objetivo', c.objetivo), ...(Object.keys(motivo).length ? { motivo } : {}) };
+}
+/** o que a IA disse de funil/tipo/objetivo de um anúncio (valores já conferidos contra a lista da 037) e, onde corrigiu a regra, o motivo */
+export interface FichaAnuncioIa { funil?: string; tipo?: string; objetivo?: string; motivo?: Partial<Record<AdCampo, string>> }
+export interface FichaResumo { analisada: boolean; geradoEm?: string; editados: number; naFila: boolean; /** só fichas de anúncio analisadas */ anuncio?: FichaAnuncioIa }
 
 /** { concorrente: { chave: resumo } } — leitura leve (sem validar), para o selo nos cards e o filtro "Só analisados" */
 export function resumoFichas(slug: string): Record<string, Record<string, FichaResumo>> {
@@ -145,7 +158,7 @@ export function resumoFichas(slug: string): Record<string, Record<string, FichaR
       try {
         const f = json(join(dir, file)) as Ficha;
         if (!f?.key) continue;
-        m[f.key] = { analisada: !!f.analise, geradoEm: f.analise?.geradoEm, editados: Object.keys(f.override?.editados ?? {}).length, naFila: fila.has(f.key) };
+        m[f.key] = { analisada: !!f.analise, geradoEm: f.analise?.geradoEm, editados: Object.keys(f.override?.editados ?? {}).length, naFila: fila.has(f.key), ...(f.kind === 'anuncio' && f.analise ? { anuncio: anuncioIa(f.analise.campos) } : {}) };
       } catch { /* ficha quebrada: o validate acusa */ }
     }
     for (const k of fila) m[k] ??= { analisada: false, editados: 0, naFila: true };

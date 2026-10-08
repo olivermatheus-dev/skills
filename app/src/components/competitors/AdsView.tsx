@@ -4,9 +4,10 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { ArrowUpDown, BadgePercent, Bookmark, BookmarkCheck, ChevronDown, ChevronUp, Clapperboard, Funnel, Target, Tag, LogOut, GalleryHorizontal, Image as ImageIcon, Layers, List, LayoutGrid, CalendarClock, Info, Link2, Megaphone, RefreshCw, Share2, Shapes, Sparkles, Timer, TriangleAlert, Users } from 'lucide-react';
-import { api, type Ad, type AdMark, type AdMarkPatch, type AnuncioHistorico, type Classificacao } from '../../api';
-import { adKey, type AdCampo } from '../../../../schema/ads-marks';
+import { ArrowUpDown, BadgePercent, Bookmark, BookmarkCheck, ChevronDown, ChevronUp, Clapperboard, Funnel, Target, Tag, LogOut, GalleryHorizontal, Image as ImageIcon, Layers, List, LayoutGrid, CalendarClock, Info, Link2, Megaphone, RefreshCw, ScanSearch, Share2, Shapes, Sparkles, Timer, TriangleAlert, Users } from 'lucide-react';
+import { api, type Ad, type AdMark, type AdMarkPatch, type AnuncioHistorico, type Classificacao, type FichaResumo } from '../../api';
+import { adKey, fichaKeyDeAd, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
+import type { FichaAnuncioIa } from '../../../../core/fichas';
 import { qk, useAds, useAdsClassified, useAdsHistories, useAdsMarks, useSetAdMark } from '../../queries';
 import { FillBox, StatStrip, useMarket } from './area';
 import { Avatar, Img, PlatformIcon, Spinner, platformLabel } from '../../components/competitors/lib';
@@ -14,6 +15,10 @@ import { DataTable, FilterBar, FlagToggle, Tip, ViewToggle, parseSort, sortRows,
 import { toast } from '../../components/toast';
 import { ChipDestino, ChipFunil, ChipObjetivo, ChipOferta, ChipTipo, DESTINO, FUNIL, OBJETIVO, OFERTA_TIPO, PROVADO_DIAS, STATUS, StatusBadge, TIPO, sinalResultado, statusDe, type StatusAd, type Voce } from './AdChips';
 import { AdPanel } from './AdPanel';
+import { AnalyzedBadge } from './Items';
+import { useFichasResumo } from './ficha/useFichas';
+import { useFichasFila } from './ficha/useFila';
+import { FilaFaixa } from './ficha/Selecao';
 import { Button, Empty, ErrorBox, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../../components/kit';
 
 type Row = Ad & {
@@ -24,6 +29,8 @@ type Row = Ad & {
   gk: string; status: StatusAd; sinal: number; gone?: boolean;
   /** o que as regras dizem (sem a correção do Oliver) e a marca dele (nota, tags, salvo, override) */
   auto?: Classificacao; mark?: AdMark;
+  /** ficha de análise (040 G): o selo e o que a IA disse de funil/tipo/objetivo (vale entre a regra e a correção do Oliver) */
+  ficha?: FichaResumo; ia?: FichaAnuncioIa;
   /** não está na coleta: veio da cópia guardada ao salvar */
   fromCopy?: boolean;
 };
@@ -59,15 +66,23 @@ const SORTS: Record<string, SortDef<Row> & { bar?: boolean }> = {
   oferta: { label: 'Oferta', get: (r) => (r.c?.oferta.tem ? r.c.oferta.precoBRL ?? 0 : undefined) },
   destino: { label: 'Destino', get: (r) => (r.c ? DESTINO[r.c.destino.kind] : undefined), text: true },
 };
-/** o valor do Oliver vence o das regras (e a confiança dele é total); sem override devolve a classificação como veio */
-function resolver(rule: Classificacao, mark?: AdMark): Classificacao {
-  const o = mark?.override;
-  if (!o) return rule;
-  return { ...rule, ...(o.funil && { funil: o.funil }), ...(o.tipo && { tipo: o.tipo }), ...(o.objetivo && { objetivo: o.objetivo }),
-    confiancaCampos: { ...rule.confiancaCampos, ...(o.funil && { funil: 1 }), ...(o.tipo && { tipo: 1 }), ...(o.objetivo && { objetivo: 1 }) } };
+/** valor final de cada campo, na ordem fixa: correção do Oliver > análise da IA (ficha) > regra. Sem nenhum dos dois devolve a classificação como veio */
+function resolver(rule: Classificacao, mark?: AdMark, ia?: FichaAnuncioIa): Classificacao {
+  if (!mark?.override && !ia) return rule;
+  const r = (k: AdCampo) => resolverCampo(k, rule[k] as string, mark, ia?.[k]);
+  const f = r('funil'), t = r('tipo'), o = r('objetivo');
+  const conf = (x: { origem: string }, k: AdCampo) => (x.origem === 'regra' ? rule.confiancaCampos[k] : 1);
+  return { ...rule, funil: f.valor as Classificacao['funil'], tipo: t.valor as Classificacao['tipo'], objetivo: o.valor as Classificacao['objetivo'],
+    confiancaCampos: { funil: conf(f, 'funil'), tipo: conf(t, 'tipo'), objetivo: conf(o, 'objetivo') } };
 }
 const ROTULO: Record<AdCampo, Record<string, string>> = { funil: FUNIL, tipo: TIPO, objetivo: OBJETIVO };
-const voceDe = (r: Row, k: AdCampo): Voce => (r.mark?.override?.[k] && r.auto ? { auto: ROTULO[k][r.auto[k]] } : undefined);
+/** chip de origem do campo: "você" (correção), "IA" (análise da ficha) ou nada (regra) */
+const voceDe = (r: Row, k: AdCampo): Voce => {
+  if (!r.auto) return undefined;
+  const { origem } = resolverCampo(k, r.auto[k] as string, r.mark, r.ia?.[k]);
+  if (origem === 'regra') return undefined;
+  return { auto: ROTULO[k][r.auto[k]], origem, ...(origem === 'ia' && r.ia?.motivo?.[k] ? { motivo: r.ia.motivo[k] } : {}) };
+};
 const diasEntre = (de?: string | null, ate?: string | null) => (de && ate ? Math.max(0, Math.floor((Date.parse(ate) - Date.parse(de)) / 86_400_000)) : undefined);
 const DEFAULTS = { q: '', conc: '', rede: '', formato: '', funil: '', tipo: '', obj: '', oferta: '', novos: '', saiu: '', salvos: '', vista: 'grade', ordem: 'tempo', asc: '' };
 
@@ -92,6 +107,8 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   const cls = useAdsClassified(slug);
   const clsOf = new Map((cls.data ?? []).flatMap((k) => k.ads.map((a) => [`${k.id}/${a.adId}`, a] as const)));
   const marksQ = useAdsMarks(slug);
+  const fichasQ = useFichasResumo(slug);
+  const fila = useFichasFila(slug);
   const setMark = useSetAdMark(slug);
   const onMark = (cid: string, adId: string, patch: AdMarkPatch) => void setMark(cid, adId, patch).catch(() => { /* o toast já avisou e o cache voltou */ });
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -100,10 +117,11 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   const mk = (x: Ad, p: (typeof per)[number], extra: Partial<Row> = {}): Row => {
     const auto = clsOf.get(`${p.id}/${x.id}`), hist = histOf.get(p.id)?.get(x.id);
     const mark = marksQ.data?.[p.id]?.[adKey(x.id)];
-    const c = auto && resolver(auto, mark);
+    const ficha = fichasQ.of(p.id, fichaKeyDeAd(x.id)), ia = ficha?.analisada ? ficha.anuncio : undefined;
+    const c = auto && resolver(auto, mark, ia);
     const days = daysSince(x.startedAt);
     const base = normKey(x);
-    return { ...x, compId: p.id, compName: names.get(p.id)?.c.data.name ?? p.id, isNew: !!p.prev && !p.prevIds.has(x.id), days, c, auto, mark, hist, gk: base.replace('|', '') ? `${p.id}|${base}` : '',
+    return { ...x, compId: p.id, compName: names.get(p.id)?.c.data.name ?? p.id, isNew: !!p.prev && !p.prevIds.has(x.id), days, c, auto, mark, ficha, ia, hist, gk: base.replace('|', '') ? `${p.id}|${base}` : '',
       status: statusDe(days, false), sinal: sinalResultado({ dias: days, irmaos: c?.sinais.irmaos ?? 1, variacoes: x.variations, coletas: hist?.coletas, reapareceu: hist?.reapareceu }), ...extra };
   };
   const rows: Row[] = per.flatMap((p) => (p.cur?.ads ?? []).filter((x) => x.active).map((x) => mk(x, p)));
@@ -151,6 +169,8 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
     if (p) kidsOf.get(r.gk)!.push(r); else { if (r.gk) { parents.set(r.gk, r); kidsOf.set(r.gk, []); } items.push({ ...r, kids: 0, child: false }); }
   }
   for (const it of items) if (it.gk) it.kids = kidsOf.get(it.gk)?.length ?? 0;
+  // "Analisar": os 10 primeiros da lista (ordem e filtros de agora, um por conceito) que ainda não têm análise nem estão na fila; só grava o pedido
+  const paraAnalisar = items.filter((r) => !r.child && !r.gone && !r.ficha?.analisada && !r.ficha?.naFila).slice(0, 10);
   const list: Item[] = items.flatMap((it) => (it.kids && open.has(it.gk) ? [it, ...kidsOf.get(it.gk)!.map((k) => ({ ...k, kids: 0, child: true }))] : [it]));
   const platforms = [...new Set(rows.flatMap((r) => r.platforms))];
   const mediaTypes = [...new Set(rows.map((r) => r.media.type))];
@@ -248,6 +268,11 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
 
   return shell(<>
       {!compId && v.conc && pullChip(v.conc)}
+      <Button variant="ghost" className="inline-flex items-center gap-1.5 whitespace-nowrap" disabled={!paraAnalisar.length || fila.pedir.isPending}
+        title="Põe na fila de análise da IA os 10 primeiros da lista (pela ordem e pelos filtros de agora) que ainda não têm análise. Só grava o pedido: rode pela faixa “Rodar agora” ou com “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por anúncio)."
+        onClick={() => fila.pedir.mutate({ itens: paraAnalisar.map((r) => ({ comp: r.compId, key: fichaKeyDeAd(r.id) })), origem: 'top', n: paraAnalisar.length, rodar: false })}>
+        {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}Analisar {paraAnalisar.length ? `os ${paraAnalisar.length} primeiros` : 'anúncios'}
+      </Button>
       <Button variant="ghost" className="inline-flex items-center gap-1.5 whitespace-nowrap" onClick={compId ? () => pullOne(compId) : pullAll} disabled={!!pulling || (!!compId && one === compId)} title={compId ? 'Busca os anúncios deste concorrente na Biblioteca de Anúncios da Meta' : 'Busca na Biblioteca de Anúncios da Meta, um concorrente por vez'}>{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : <><RefreshCw className="size-3.5" />Puxar anúncios</>}</Button>
     </>, <>
       <ErrorBox error={ads.error} />
@@ -257,6 +282,7 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
           action={<Button onClick={compId ? () => pullOne(compId) : pullAll} disabled={!!pulling}>{pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : <><RefreshCw className="size-3.5" />Puxar anúncios de todos</>}</Button>} />
       )}
       {collected.length > 0 && <>
+        <FilaFaixa fila={fila} />
         {compId ? <>
           <StatStrip items={[
             { icon: Megaphone, label: 'Anúncios ativos', value: fmtNum(rows.length), sub: rows.filter((r) => r.isNew).length ? `${rows.filter((r) => r.isNew).length} novo(s) desde a coleta anterior` : undefined },
@@ -374,6 +400,7 @@ function AdCard({ slug, r, thumb, open, onToggle, onOpen, onSave }: { slug: stri
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link to={`/p/${slug}/concorrentes/${r.compId}`} onClick={(e) => e.stopPropagation()} className="font-medium text-foreground hover:text-primary-ink truncate">{r.compName}</Link>
           <span className="ml-auto flex gap-1">{r.platforms.map((p) => <PlatformIcon key={p} platform={p} size={12} />)}</span>
+          {r.ficha && <AnalyzedBadge ficha={r.ficha} compact />}
           <span className="-my-1 -mr-1"><SaveBtn on={!!r.mark?.saved} onClick={onSave} /></span>
         </div>
         {r.c && (

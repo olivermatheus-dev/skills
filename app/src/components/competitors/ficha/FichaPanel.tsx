@@ -29,13 +29,13 @@ type Campos = Partial<FichaCampos>;
 const GRUPO: Record<string, string> = {
   'tema.tag': 'tema', 'tipoConteudo.principal': 'tipoConteudo', 'tipoConteudo.secundarios': 'tipoConteudo', formato: 'formato', estiloProducao: 'estiloProducao',
   'gancho.tipo': 'tipoGancho', 'gancho.canal': 'canalGancho', 'estrutura.macro': 'estruturaMacro', 'cta.tipo': 'ctaTipo', 'produto.presenca': 'produtoPresenca',
-  'publico.quem': 'publico', 'publico.consciencia': 'consciencia', tom: 'tom', som: 'som', autoria: 'autoria',
+  'publico.quem': 'publico', 'publico.consciencia': 'consciencia', tom: 'tom', som: 'som', autoria: 'autoria', angulo: 'angulo', provaTipo: 'provaTipo',
 };
 const ROTULO: Record<string, string> = {
   'tema.texto': 'tema', 'tema.tag': 'tag do tema', mensagem: 'mensagem', 'tipoConteudo.principal': 'tipo', 'tipoConteudo.secundarios': 'tipos secundários', formato: 'formato',
   estiloProducao: 'estilo', 'headline.texto': 'headline', 'gancho.texto': 'gancho', 'gancho.tipo': 'tipo de gancho', 'gancho.canal': 'canal do gancho', retencao5s: 'primeiros 5 s',
   gatilhos: 'gatilhos', 'estrutura.macro': 'estrutura', 'cta.tipo': 'CTA', 'cta.texto': 'texto do CTA', 'produto.presenca': 'presença do produto', 'publico.quem': 'público',
-  'publico.consciencia': 'consciência', tom: 'tom', som: 'som', porQue: 'por quê', adaptar: 'adaptar', riscos: 'riscos', replicavel: 'replicável', autoria: 'autoria', serie: 'série',
+  'publico.consciencia': 'consciência', tom: 'tom', som: 'som', porQue: 'por quê', adaptar: 'adaptar', riscos: 'riscos', replicavel: 'replicável', autoria: 'autoria', serie: 'série', angulo: 'ângulo', provaTipo: 'prova',
 };
 const GRUPO_NOME: Record<string, string> = {
   tipoConteudo: 'tipo de conteúdo', gatilho: 'gatilho', tipoGancho: 'tipo de gancho', canalGancho: 'canal do gancho', elemento5s: 'elemento dos 5 s', estruturaMacro: 'estrutura',
@@ -43,11 +43,11 @@ const GRUPO_NOME: Record<string, string> = {
   formato: 'formato', tema: 'tema', angulo: 'ângulo', publico: 'público', provaTipo: 'prova', funil: 'funil',
 };
 
-interface Ctx {
+export interface Ctx {
   v: FichaView; vocab?: VocabView; saving: boolean;
   edit: (path: string, value: unknown) => void; revert: (path: string) => void;
 }
-const FCtx = createContext<Ctx | null>(null);
+export const FCtx = createContext<Ctx | null>(null);
 const useF = () => useContext(FCtx)!;
 
 function useVoc() {
@@ -89,7 +89,7 @@ function useFmtIa() {
 
 // ───────────────────────── peças de edição ─────────────────────────
 /** select de vocabulário com cara de chip (o valor É o controle) */
-function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', className, label }: {
+export function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', className, label }: {
   path?: string; grupo: string; value?: string | null; onChange?: (v: string) => void; vazio?: string; size?: 'sm' | 'md'; className?: string; label?: string;
 }) {
   const { edit } = useF();
@@ -109,7 +109,7 @@ function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', className, 
 }
 
 /** lista de chips de vocabulário (secundários, tom, público) */
-function MultiSelect({ path, grupo, values, max }: { path: string; grupo: string; values: string[]; max?: number }) {
+export function MultiSelect({ path, grupo, values, max }: { path: string; grupo: string; values: string[]; max?: number }) {
   const { edit } = useF();
   const { termo, options } = useVoc();
   const livres = options(grupo).filter((o) => !values.includes(o.value));
@@ -135,7 +135,7 @@ function MultiSelect({ path, grupo, values, max }: { path: string; grupo: string
 }
 
 /** texto livre editável no lugar: clique para editar; Enter (ou Ctrl+Enter no multilinha) salva, Esc cancela, sair do campo salva */
-function EditText({ path, value, multiline, className, placeholder = 'clique para escrever', onSave }: {
+export function EditText({ path, value, multiline, className, placeholder = 'clique para escrever', onSave }: {
   path?: string; value?: string | null; multiline?: boolean; className?: string; placeholder?: string; onSave?: (v: string) => void;
 }) {
   const { edit } = useF();
@@ -163,7 +163,7 @@ function EditText({ path, value, multiline, className, placeholder = 'clique par
 }
 
 /** bloco com rótulo; marca "você" quando algum dos caminhos foi editado e mostra "a IA agora diz" quando divergiu */
-function Campo({ label, icon, paths = [], children, className, aside }: { label: ReactNode; icon?: ReactNode; paths?: string[]; children: ReactNode; className?: string; aside?: ReactNode }) {
+export function Campo({ label, icon, paths = [], children, className, aside }: { label: ReactNode; icon?: ReactNode; paths?: string[]; children: ReactNode; className?: string; aside?: ReactNode }) {
   const { v, revert } = useF();
   const fmt = useFmtIa();
   const eds = paths.map((p) => [p, v.edicoes[p]] as [string, EdicaoInfo | undefined]).filter((x): x is [string, EdicaoInfo] => !!x[1]);
@@ -272,7 +272,7 @@ function MediaCol({ r, media }: { r: Row; media?: string }) {
 }
 
 // ───────────────────────── abas ─────────────────────────
-function Gatilhos({ c }: { c: Campos }) {
+export function Gatilhos({ c }: { c: Campos }) {
   const { edit } = useF();
   const { nome } = useVoc();
   const lista = c.gatilhos ?? [];
