@@ -10,27 +10,20 @@ import { qk, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, 
 import { ChevronRight, MapPin, RefreshCw, Star as StarIcon, X } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
-import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/kit';
+import { Badge, Button, Empty, ErrorBox, cx, fmtNum } from '../components/kit';
 import EditCompetitor from '../components/competitors/EditCompetitor';
 import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
-import { ItemCard, ItemDrawer } from '../components/competitors/Items';
+import { ItemDrawer } from '../components/competitors/Items';
+import ContentsView from '../components/competitors/ContentsView';
+import { useMarketRows } from '../components/competitors/market';
 import { AppContent } from '../components/AppContent';
 import {
-  Avatar, Chips, KINDS, KIND_COLOR, PlatformIcon, SERIES, STATUS_LABEL, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
-  fmtPct, fmtRatio, groupSnapshots, keyFor, median, platformLabel, timeAgo, type Row,
+  Avatar, KINDS, KIND_COLOR, PlatformIcon, SERIES, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
+  fmtPct, groupSnapshots, keyFor, median, platformLabel, timeAgo, type Row,
 } from '../components/competitors/lib';
 
-type Sort = 'outlier' | 'views' | 'recent' | 'engagement' | 'growth';
-const SORTS: Record<Sort, string> = { outlier: 'Outlier (fora da curva)', views: 'Mais views', recent: 'Mais recentes', engagement: 'Engajamento', growth: 'Cresceu desde a última coleta' };
-const sortFn: Record<Sort, (a: Row, b: Row) => number> = {
-  outlier: (a, b) => (b.outlier ?? -1) - (a.outlier ?? -1),
-  views: (a, b) => (b.item.metrics.views ?? -1) - (a.item.metrics.views ?? -1),
-  recent: (a, b) => (b.item.publishedAt ?? '').localeCompare(a.item.publishedAt ?? ''),
-  engagement: (a, b) => (b.engagement ?? -1) - (a.engagement ?? -1),
-  growth: (a, b) => (b.viewsDelta ?? -1) - (a.viewsDelta ?? -1),
-};
 const handleOf = (p: { platform: string; handle?: string; externalId?: string; url: string }) =>
   p.handle ? (p.platform === 'site' ? p.handle : `@${p.handle}`) : p.externalId ?? p.url.replace(/^https?:\/\/(www\.)?/, '');
 
@@ -140,12 +133,6 @@ function Detalhe() {
   const [runOpen, setRunOpen] = useState(false);
   const analysis = useAnalysis(slug, id);
   const [tab, setTab] = useState<string>('all');
-  const [sort, setSort] = useState<Sort>('outlier');
-  const [type, setType] = useState('');
-  const [status, setStatus] = useState<'ativas' | 'todas' | ItemMark['status']>('ativas');
-  const [platform, setPlatform] = useState('');
-  const [favOnly, setFavOnly] = useState(false);
-  const [search, setSearch] = useState('');
   const [open, setOpen] = useState<string | null>(null);
   const [editing, setEditing] = useState<false | { draft?: { data: Competitor; body: string }; error?: unknown }>(false);
   const [pulling, setPulling] = useState(false);
@@ -171,7 +158,11 @@ function Detalhe() {
   const d = q.data;
   const series = useMemo(() => groupSnapshots(d?.snapshots ?? []), [d?.snapshots]);
   const profiles = useMemo(() => (d?.data.profiles ?? []).map((p, i) => ({ ...p, key: keyFor(p), series: series.get(keyFor(p)), color: SERIES[i % SERIES.length] })), [d?.data.profiles, series]);
-  const rows = useMemo(() => buildRows(profiles.map((p) => p.series).filter(Boolean) as NonNullable<(typeof profiles)[number]['series']>[], d?.marks ?? {}, (k) => k.split('-')[0]), [profiles, d?.marks]);
+  const market = useMarketRows(slug);
+  const rows = useMemo(() => buildRows(profiles.map((p) => p.series).filter(Boolean) as NonNullable<(typeof profiles)[number]['series']>[], d?.marks ?? {}, (k) => k.split('-')[0]).map((r) => {
+    const mr = market.byKey.get(`${id}|${r.profileKey}|${r.mk}`);
+    return mr ? { ...r, outlierMercado: mr.outlierMercado, outlierMercadoBasis: mr.outlierMercadoBasis, mercadoAmostra: mr.mercadoAmostra, mercadoEscopo: mr.mercadoEscopo, mercadoConcorrentes: mr.mercadoConcorrentes, porSeguidorMercado: mr.porSeguidorMercado } : r;
+  }), [profiles, d?.marks, market.byKey, id]);
 
   // marcar (★, status, tags, nota) é otimista: muda na hora; erro → volta e avisa
   const mark = { mutate: ({ mk, patch }: { mk: string; patch: Partial<ItemMark> }) => { actions.mark(id, mk, patch).catch(() => {}); } };
@@ -206,19 +197,11 @@ function Detalhe() {
   const fDelta = fTotal != null && prevF.every((x) => x != null) ? fTotal - (prevF as number[]).reduce((a, b) => a + b, 0) : undefined;
   const medViews = median(scopeRows.map((r) => r.item.metrics.views).filter((v): v is number => !!v));
   const hot = scopeRows.filter((r) => (r.outlier ?? 0) >= 3).length;
+  const hotMkt = scopeRows.filter((r) => (r.outlierMercado ?? 0) >= 3).length;
   const lastAt = scope.map((p) => p.series?.latest?.data.collectedAt).filter(Boolean).sort().at(-1);
   const nSnaps = scope.reduce((n, p) => n + (p.series?.all.length ?? 0), 0);
 
   const types = [...new Set(scopeRows.map((r) => r.item.type))];
-  const filtered = scopeRows.filter((r) => {
-    const st = r.mark?.status ?? 'nova';
-    if (status === 'ativas' ? st === 'descartada' : status !== 'todas' && st !== status) return false;
-    if (type && r.item.type !== type) return false;
-    if (platform && r.platform !== platform) return false;
-    if (favOnly && !r.mark?.favorite) return false;
-    if (search && !`${r.item.title ?? ''} ${r.item.caption ?? ''} ${r.mark?.note ?? ''} ${(r.mark?.tags ?? []).join(' ')}`.toLowerCase().includes(search.toLowerCase())) return false;
-    return true;
-  }).sort(sortFn[sort]);
 
   const chart: FollowerSeries[] = scope.flatMap((p) => {
     const pts = (p.series?.all ?? []).filter((s) => s.data.profile.followers != null).map((s) => ({ at: s.data.collectedAt, v: s.data.profile.followers! }));
@@ -362,7 +345,8 @@ function Detalhe() {
               <Stat label="Conteúdos" value={fmtNum(scopeRows.length)} sub={types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ')} />
               <Stat label="Mediana de views" value={fmtNum(medViews != null ? Math.round(medViews) : undefined)} />
               {eng != null && <Stat label="Engajamento (mediana)" value={fmtPct(eng)} />}
-              <Stat label="Fora da curva ≥3×" value={String(hot)} accent={hot > 0} />
+              <Stat label="≥3× o perfil" value={String(hot)} accent={hot > 0} />
+              <Stat label="≥3× o mercado" value={String(hotMkt)} accent={hotMkt > 0} />
               {(marked > 0 || ideas > 0) && <Stat label="Marcados" value={String(marked)} sub={ideas ? `${ideas} viraram ideia` : undefined} />}
             </div>
           );
@@ -391,45 +375,22 @@ function Detalhe() {
 
         {/* conteúdos */}
         <section className="mt-8">
-          <div style={{ top: headH }} className="sticky z-10 -mx-8 px-8 py-2 mb-2 bg-background/95 backdrop-blur border-b border-border flex flex-wrap items-center gap-2">
-            <h2 className="text-base font-semibold mr-2">Conteúdos</h2>
-            <Select value={sort} onChange={(e) => setSort(e.target.value as Sort)} aria-label="Ordenar">
-              {Object.entries(SORTS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-            </Select>
-            {types.length > 1 && <Chips value={type} onChange={setType} options={[{ value: '', label: 'Todos' }, ...types.map((t) => ({ value: t, label: TYPE_LABEL[t] ?? t, count: scopeRows.filter((r) => r.item.type === t).length }))]} />}
-            {!sel && new Set(rows.map((r) => r.platform)).size > 1 && (
-              <Select value={platform} onChange={(e) => setPlatform(e.target.value)} aria-label="Plataforma">
-                <option value="">Todas as plataformas</option>
-                {[...new Set(rows.map((r) => r.platform))].map((p) => <option key={p} value={p}>{platformLabel(p)}</option>)}
-              </Select>
-            )}
-            <Select value={status} onChange={(e) => setStatus(e.target.value as typeof status)} aria-label="Status">
-              <option value="ativas">Sem descartadas</option>
-              <option value="todas">Todos os status</option>
-              {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-            </Select>
-            <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted-foreground hover:text-foreground')}>★ Favoritos</button>
-            <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar no título, legenda, nota…" className="ml-auto w-64" />
-          </div>
+          <h2 className="text-base font-semibold mb-2">Conteúdos</h2>
           <ErrorBox error={ideaError} />
 
           {!c.profiles.length && <Empty title="Sem perfis" hint="Adicione links em Editar." action={<Button onClick={() => setEditing({})}>Editar</Button>} />}
           {c.profiles.length > 0 && !rows.length && (
-            <Empty title={series.size ? 'Nenhum conteúdo coletado' : 'Ainda não puxado'}
-              hint={series.size ? 'Sites trazem só o perfil. Confira os avisos da última coleta.' : 'Clique em “Puxar agora” para trazer perfil, vídeos e métricas.'}
+            <Empty title={series.size ? "Nenhum conteúdo coletado" : "Ainda não puxado"}
+              hint={series.size ? "Sites trazem só o perfil. Confira os avisos da última coleta." : "Clique em “Puxar agora” para trazer perfil, vídeos e métricas."}
               action={!series.size ? <Button onClick={pull} disabled={pulling}>↻ Puxar agora</Button> : undefined} />
           )}
-          {rows.length > 0 && !filtered.length && scopeRows.length > 0 && <Empty title="Nada com esses filtros" />}
-          {sel && rows.length > 0 && !scopeRows.length && sel.platform === 'site' && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
-
-          <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
-            {filtered.map((r) => (
-              <ItemCard key={`${r.profileKey}/${r.item.id}`} r={r} slug={slug} media={media(r.item.thumbnailLocal)} showPlatform={!sel}
-                ideaBusy={ideaBusy === r.mk}
-                onMark={(patch) => mark.mutate({ mk: r.mk, patch })} onIdea={() => makeIdea(r)} onOpen={() => setOpen(r.mk)} />
-            ))}
-          </div>
-          {filtered.length > 0 && <div className="text-xs text-muted-foreground mt-4">{filtered.length} de {scopeRows.length} conteúdos · outlier = views ÷ mediana de views do mesmo perfil na última coleta (sem views: curtidas ♥)</div>}
+          {sel && rows.length > 0 && !scopeRows.length && sel.platform === "site" && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
+          {scopeRows.length > 0 && (
+            <ContentsView rows={scopeRows} slug={slug} showComp={false} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
+              searchPlaceholder="Buscar título, legenda, nota…"
+              mediaOf={(r) => media(r.item.thumbnailLocal)} ideaBusy={(r) => ideaBusy === r.mk}
+              onMark={(r, patch) => mark.mutate({ mk: r.mk, patch })} onIdea={(r) => makeIdea(r)} onOpen={(r) => setOpen(r.mk)} />
+          )}
         </section>
         </>}
       </div>
