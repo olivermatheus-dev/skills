@@ -60,7 +60,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const { values: v, set, reset } = useUrlState(defaults);
   const q = useDeferredValue(v.q);
   const vista = v.vista === 'painel' && !panel ? 'grade' : v.vista;
-  const sort = parseSort(v.ordem in SORTS ? v.ordem : 'outlier', v.asc);
+  const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'outlier', v.asc);
 
   const shown = useMemo(() => {
     const since = v.periodo === 'tudo' ? 0 : Date.now() - Number(v.periodo) * dayMs;

@@ -69,7 +69,7 @@ export default function Panorama() {
           title: `${cov.title}\nCélulas vazias contam como "não tem", então a cobertura de todos está subestimada.` }] : []),
         { icon: Timer, label: 'Teste grátis', value: <>{trial.length}/{comp.length}<Small>oferecem</Small></>, sub: `${free.length} c/ plano grátis · você: ${ref?.ov?.trial ?? '?'}`, to: `/p/${slug}/contexto?s=BUSINESS`,
           title: `${ref?.c.data.name ?? 'Você'}: teste grátis ${ref?.ov?.trial ?? 'a definir (BUSINESS › A validar)'}\nCom teste grátis: ${trial.map((r) => `${r.c.data.name} (${r.ov?.trial})`).join(', ') || 'nenhum'}\nCom plano grátis: ${free.map((r) => r.c.data.name).join(', ') || 'nenhum'}` },
-        { icon: Megaphone, label: 'Anúncios ativos', value: <>{ads.total}<Small>{ads.list.length} anunciantes</Small></>, sub: `${ads.proven} há ${PROVEN_DAYS}+ dias no ar`, to: `${base}/anuncios?vista=tabela`,
+        { icon: Megaphone, label: 'Anúncios ativos', value: <>{ads.total}<Small>{ads.list.length} anunciantes</Small></>, sub: `${ads.proven} há ${PROVEN_DAYS}+ dias no ar`, to: `${base}/anuncios?vista=lista`,
           title: 'Biblioteca de Anúncios da Meta, última coleta de cada concorrente. Anúncio há 30+ dias no ar costuma ser o que dá resultado.' },
         { icon: Flame, label: `Fora da curva · ${PERIOD_DAYS} d`, value: <>{strongP}<Small>× perfil</Small><span className="text-muted-foreground font-normal mx-1">·</span>{strongM}<Small>× mercado</Small></>, sub: `conteúdos ≥${STRONG}× a mediana`, to: `${base}/conteudos?vista=painel`,
           title: `× perfil: views ÷ mediana do próprio perfil.\n× mercado: views ÷ mediana dos concorrentes na mesma rede e formato (só com 3+ concorrentes na comparação).` },
@@ -243,7 +243,7 @@ function Advertisers({ slug, stats }: { slug: string; stats: ReturnType<typeof u
   const anuncios = `/p/${slug}/concorrentes/anuncios`;
   return (
     <Block icon={Megaphone} title="Quem anuncia e há quanto tempo" hint={`anúncio há ${PROVEN_DAYS}+ dias no ar = ângulo que paga a conta`}
-      link={{ to: `${anuncios}?vista=tabela`, label: 'Anúncios' }}
+      link={{ to: `${anuncios}?vista=lista`, label: 'Anúncios' }}
       footer={
         <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
           <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-primary" />há {PROVEN_DAYS}+ dias</span>

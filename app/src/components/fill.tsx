@@ -37,7 +37,9 @@ export function useFillHeight() {
     // o que carrega depois (painéis acima ou avisos abaixo) muda a página sem renderizar a tabela de novo;
     // na 1ª montagem (rota carregando no Suspense) a caixa ainda pode estar fora do <main>: tenta no quadro seguinte
     const watch = () => {
-      const scroller = ref.current?.closest('main');
+      // sem caixa ligada (ex.: DataTable/SortTable com fill=false) não há o que medir: sem isso o rAF girava para sempre
+      if (!ref.current) return;
+      const scroller = ref.current.closest('main');
       if (!scroller) { raf = requestAnimationFrame(watch); return; }
       ro = new ResizeObserver(fit);
       ro.observe(scroller);

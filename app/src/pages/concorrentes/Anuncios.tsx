@@ -56,7 +56,7 @@ export default function Anuncios() {
   const rows: Row[] = per.flatMap((p) => (p.cur?.ads ?? []).filter((x) => x.active).map((x) => ({
     ...x, compId: p.id, compName: names.get(p.id)?.c.data.name ?? p.id, isNew: !!p.prev && !p.prevIds.has(x.id), days: daysSince(x.startedAt),
   })));
-  const sort = parseSort(v.ordem in SORTS ? v.ordem : 'tempo', v.asc);
+  const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'tempo', v.asc);
   const q = v.q.toLowerCase();
   const shown = sortRows(rows.filter((r) => (!v.conc || r.compId === v.conc) && (!v.formato || r.media.type === v.formato) && (!v.rede || r.platforms.includes(v.rede)) && (!v.novos || r.isNew)
     && (!q || `${r.text ?? ''} ${r.title ?? ''} ${r.compName}`.toLowerCase().includes(q))), SORTS, sort);
