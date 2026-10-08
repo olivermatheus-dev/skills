@@ -98,7 +98,7 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
 - Prefira índices a arquivos grandes (`library/audio/INDEX.md`, nunca o `sfx.json` inteiro). **Tarefas do quadro:** cada uma declara `context:` (arquivo#Seção) e um `## Estado` de até 5 linhas; quem executa ou retoma começa por `node tools/board.mjs pacote <slug> <T-NNNN>` e lê só isso (seções: `node tools/contexto.mjs indice <slug>`; regras no protocolo da skill `orquestrar`; tarefa 021).
 
 ## Construção do hub (roadmap)
-**Sessão nova? Comece por `roadmap/ESTADO.md`** (onde paramos, pendências, próximo passo).
+**Sessão nova? Comece por `roadmap/ESTADO.md`** (onde paramos, pendências, próximo passo) **e siga `roadmap/PEDIDOS.md` > "Próximo da fila"** (o que o Oliver pediu e ainda não saiu; "continua" = isso).
 Evolução do próprio repositório fica em `roadmap/`: `BACKLOG.md` (prioridade e ordem), `VIDEO.md` (visão do vídeo), `IDEIAS.md` (caixa de entrada), `DEPOIS.md` (adiados), `INTEL.md` (inteligência de mercado), `APP.md` (visão do app: projetos, kanban, concorrentes, agentes) e `tasks/<id>-<slug>/TASK.md` (1 pasta por tarefa ativa, com log).
 Ao iniciar uma sessão de construção: leia `roadmap/BACKLOG.md` e o `TASK.md` da tarefa da vez. Ao terminar: atualize status e log, faça commit + push.
 Material novo do usuário sobre vídeo/motion → registrar e destilar conforme `roadmap/tasks/002-conhecimento-motion/TASK.md`. Base de conhecimento verificada de vídeo: `knowledge/video/` — núcleo em `REGRAS.md` (nível médio); temas só no nível alto ou em dúvida pontual.
