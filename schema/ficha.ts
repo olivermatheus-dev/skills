@@ -15,7 +15,7 @@ import type { Vocabulario } from './vocabulario';
 
 export const FICHA_PLATAFORMAS = ['instagram', 'tiktok', 'youtube', 'meta-ads'] as const;
 export const FICHA_FORMATOS_MIDIA = ['reel', 'short', 'video', 'carrossel', 'imagem', 'post'] as const;
-export const FICHA_FALTOU = ['sem-transcricao', 'sem-quadros', 'legenda-vazia', 'audio-sem-fala', 'midia-indisponivel'] as const;
+export const FICHA_FALTOU = ['sem-transcricao', 'sem-quadros', 'legenda-vazia', 'audio-sem-fala', 'midia-indisponivel', 'so-capa'] as const;
 export const FICHA_CONFIANCA = ['alta', 'media', 'baixa', 'nula'] as const;
 
 const Txt = z.string();
@@ -216,7 +216,7 @@ export function issuesVocabulario(campos: Partial<FichaCampos>, ctx: VocabCtx, b
     const perto = ok.map((o) => [o, o.startsWith(v) || v.startsWith(o) ? 0 : lev(o, v)] as const).sort((a, b) => a[1] - b[1])[0];
     const dica = perto && perto[1] <= Math.max(3, Math.floor(v.length / 3)) ? ` Você quis dizer "${perto[0]}"?` : '';
     const rec = ctx.vocab.recusados.find((r) => r.grupo === g && r.valor === v);
-    out.push(`${base}.${path} = "${v}" não está em ${onde(g)}.${dica} Aceitos: ${ok.join(', ') || '(nenhum)'}.${rec ? ` O Oliver já recusou este termo${rec.motivo ? ` (${rec.motivo})` : ''}.` : ` Se for um termo novo, proponha em analise.termosNovos: { grupo: "${g}", valor: "${v}", definicao, exemplo }.`}`);
+    out.push(`${base}.${path} = "${v}" não está em ${onde(g)}.${dica} Aceitos: ${ok.join(', ') || '(nenhum)'}.${rec ? ` O Oliver já recusou este termo${rec.motivo ? ` (${rec.motivo})` : ''}.${rec.substituto ? ` Use "${rec.substituto}".` : ''}` : ` Se for um termo novo, proponha em analise.termosNovos: { grupo: "${g}", valor: "${v}", definicao, exemplo }.`}`);
   };
   const c = campos;
   chk('tipoConteudo.principal', 'tipoConteudo', c.tipoConteudo?.principal);

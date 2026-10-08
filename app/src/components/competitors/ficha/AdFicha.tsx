@@ -52,7 +52,7 @@ export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: strin
   const vocab = useFichasVocab(slug);
   const { pedir, cancelar } = usePedido(slug, compId, fichaKey);
   const v = analisada ? fq.data : undefined;
-  const ctx = useMemo<Ctx | null>(() => (v ? { v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [v, vocab.data, fq.saving, fq.edit, fq.revert]);
+  const ctx = useMemo<Ctx | null>(() => (v ? { slug, v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [slug, v, vocab.data, fq.saving, fq.edit, fq.revert]);
 
   if (!analisada) return <Convite slug={slug} compId={compId} fichaKey={fichaKey} naFila={!!resumo?.naFila} />;
   if (!v || !ctx) return <div className="py-6 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>;

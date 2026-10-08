@@ -5,7 +5,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Captions, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
+  Ban, Captions, Check, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
 } from 'lucide-react';
 import type { EdicaoInfo, FichaView, ItemMark, OpcaoVocab, VocabView } from '../../../api';
 import type { FichaCampos } from '../../../../../schema/ficha';
@@ -18,6 +18,7 @@ import { Tip } from '../toolbar';
 import { useFicha, useFichasResumo, useFichasVocab, usePedido } from './useFichas';
 import { analiseParaIdeia, type IdeaExtra } from './paraIdeia';
 import { RelatorioDialog } from '../relatorios/Relatorios';
+import { GRUPO_TERMO, TermoDialog, estadoNoVocab, rotuloAceitar, destinoDoTermo, useDecidirTermo } from './TermoDialog';
 
 /** "Virar ideia" dentro do painel: `foco` = a adaptação escolhida (sem foco = o item inteiro) */
 type OnIdea = (title: string, foco?: { ideia: string; formato?: string | null }) => void;
@@ -37,6 +38,10 @@ const ROTULO: Record<string, string> = {
   gatilhos: 'gatilhos', 'estrutura.macro': 'estrutura', 'cta.tipo': 'CTA', 'cta.texto': 'texto do CTA', 'produto.presenca': 'presença do produto', 'publico.quem': 'público',
   'publico.consciencia': 'consciência', tom: 'tom', som: 'som', porQue: 'por quê', adaptar: 'adaptar', riscos: 'riscos', replicavel: 'replicável', autoria: 'autoria', serie: 'série', angulo: 'ângulo', provaTipo: 'prova',
 };
+/** o que `faltou` quer dizer, em palavras */
+const FALTOU_ROTULO: Record<string, string> = {
+  'sem-transcricao': 'sem transcrição', 'sem-quadros': 'sem quadros', 'legenda-vazia': 'legenda vazia', 'audio-sem-fala': 'áudio sem fala', 'midia-indisponivel': 'mídia indisponível', 'so-capa': 'só a capa (carrossel)',
+};
 const GRUPO_NOME: Record<string, string> = {
   tipoConteudo: 'tipo de conteúdo', gatilho: 'gatilho', tipoGancho: 'tipo de gancho', canalGancho: 'canal do gancho', elemento5s: 'elemento dos 5 s', estruturaMacro: 'estrutura',
   estiloProducao: 'estilo de produção', ctaTipo: 'CTA', produtoPresenca: 'presença do produto', consciencia: 'consciência', tom: 'tom', som: 'som', risco: 'risco', autoria: 'autoria',
@@ -44,7 +49,7 @@ const GRUPO_NOME: Record<string, string> = {
 };
 
 export interface Ctx {
-  v: FichaView; vocab?: VocabView; saving: boolean;
+  slug: string; v: FichaView; vocab?: VocabView; saving: boolean;
   edit: (path: string, value: unknown) => void; revert: (path: string) => void;
 }
 export const FCtx = createContext<Ctx | null>(null);
@@ -53,12 +58,14 @@ const useF = () => useContext(FCtx)!;
 function useVoc() {
   const { v, vocab } = useF();
   const novos = v.ficha.analise?.termosNovos ?? [];
-  const termo = (g: string, id: string | null | undefined): (OpcaoVocab & { proposto?: boolean }) | undefined => {
+  const termo = (g: string, id: string | null | undefined): (OpcaoVocab & { proposto?: boolean; recusado?: boolean }) | undefined => {
     if (!id) return undefined;
     const t = vocab?.grupos[g]?.find((x) => x.id === id);
     if (t) return t;
     const n = novos.find((x) => x.grupo === g && x.valor === id);
-    return n ? { id, nome: id.replace(/-/g, ' '), definicao: n.definicao, proposto: true } : { id, nome: id.replace(/-/g, ' ') };
+    // proposto = termo novo que ainda espera o Oliver; recusado = ele recusou e a ficha ainda o usa (reetiquetar pelo selo)
+    const recusado = estadoNoVocab(vocab, g, id) === 'recusado';
+    return n ? { id, nome: id.replace(/-/g, ' '), definicao: n.definicao, proposto: !recusado, recusado } : { id, nome: id.replace(/-/g, ' ') };
   };
   const nome = (g: string, id: string | null | undefined) => termo(g, id)?.nome ?? '—';
   const options = (g: string, atual?: string | null, vazio?: string): SelectOption[] => {
@@ -97,7 +104,8 @@ export function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', clas
   const t = termo(grupo, value);
   const set = onChange ?? ((x: string) => path && edit(path, x || null));
   return (
-    <Tip content={t?.definicao ? `${t.proposto ? 'Termo novo proposto pela IA (aceite na fase H).\n' : ''}${t.definicao}` : undefined}>
+    <span className="inline-flex max-w-full flex-wrap items-center gap-1.5">
+    <Tip content={t?.definicao ? `${t.proposto ? 'Termo novo proposto pela IA: use o selo ao lado para aceitar ou recusar.\n' : ''}${t.definicao}` : undefined}>
       <span className="inline-flex max-w-full">
         <SelectField size="sm" aria-label={label ?? GRUPO_NOME[grupo] ?? grupo} value={value ?? ''} options={options(grupo, value, vazio)} placeholder={<span className="text-muted-foreground">escolher…</span>}
           icon={t?.proposto ? <Sparkles className="text-violet-600" /> : undefined} onChange={set}
@@ -105,6 +113,24 @@ export function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', clas
             t?.proposto ? 'border-dashed border-violet-400 bg-violet-50 text-violet-800 hover:bg-violet-100 dark:bg-violet-500/10 dark:text-violet-200' : 'bg-muted/70 border-transparent hover:bg-muted', className)} />
       </span>
     </Tip>
+    {(t?.proposto || t?.recusado) && value && <TermoSelo grupo={grupo} valor={value} recusado={t.recusado} />}
+    </span>
+  );
+}
+
+/** selo "termo novo" (ou "recusado", se a ficha ainda o usa): 1 clique abre o diálogo de aceitar/recusar com o substituto já escolhido */
+export function TermoSelo({ grupo, valor, recusado, mini }: { grupo: string; valor: string; recusado?: boolean; mini?: boolean }) {
+  const { slug } = useF();
+  const [aberto, setAberto] = useState(false);
+  return (
+    <>
+      <button type="button" onClick={() => setAberto(true)} title={recusado ? 'Termo recusado que esta ficha ainda usa: reetiquetar' : 'Termo novo proposto pela IA: aceitar ou recusar'}
+        className={cx('inline-flex items-center gap-1 rounded-full border font-semibold shrink-0', mini ? 'h-5 px-1.5 text-[10px]' : 'h-6 px-2 text-[11px]',
+          recusado ? 'border-border bg-muted text-muted-foreground hover:text-foreground' : 'border-violet-300 bg-violet-600 text-white hover:bg-violet-700 dark:border-violet-500/40')}>
+        {recusado ? <Ban className="size-3" /> : <Sparkles className="size-3" />}{recusado ? 'recusado' : 'termo novo'}
+      </button>
+      {aberto && <TermoDialog slug={slug} grupo={grupo} valor={valor} modo={recusado ? 'recusar' : undefined} onClose={() => setAberto(false)} />}
+    </>
   );
 }
 
@@ -120,7 +146,7 @@ export function MultiSelect({ path, grupo, values, max }: { path: string; grupo:
         return (
           <Tip key={id} content={t?.definicao}>
             <span className={cx('inline-flex items-center gap-1 rounded-full pl-2.5 pr-1 h-7 text-xs font-medium', t?.proposto ? 'border border-dashed border-violet-400 bg-violet-50 text-violet-800 dark:bg-violet-500/10 dark:text-violet-200' : 'bg-muted/70')}>
-              {t?.proposto && <Sparkles className="size-3" />}{t?.nome ?? id}
+              {t?.proposto && <Sparkles className="size-3" />}{t?.nome ?? id}{(t?.proposto || t?.recusado) && <TermoSelo grupo={grupo} valor={id} recusado={t.recusado} mini />}
               <button type="button" aria-label={`Tirar ${t?.nome ?? id}`} className="rounded-full p-0.5 text-muted-foreground hover:text-foreground hover:bg-background" onClick={() => edit(path, values.filter((x) => x !== id))}><X className="size-3" /></button>
             </span>
           </Tip>
@@ -312,8 +338,7 @@ export function Gatilhos({ c }: { c: Campos }) {
 }
 
 function Resumo({ c, onIdea, ideaBusy }: { c: Campos; onIdea: OnIdea; ideaBusy: boolean }) {
-  const { v, edit } = useF();
-  const termos = v.ficha.analise?.termosNovos ?? [];
+  const { edit } = useF();
   return (
     <div className="space-y-6">
       <Gatilhos c={c} />
@@ -354,26 +379,48 @@ function Resumo({ c, onIdea, ideaBusy }: { c: Campos; onIdea: OnIdea; ideaBusy: 
           <ul className="space-y-1">{(c.riscos ?? []).map((x, i) => <li key={i} className="text-sm"><RiscoChip id={x.tipo} />{x.trecho && <span className="text-muted-foreground ml-1.5">“{x.trecho}”</span>}</li>)}</ul>
         ) : <div className="text-sm text-muted-foreground">Nenhum risco apontado.</div>}
       </Campo>
-      {termos.length > 0 && (
-        <Campo label={<>Termos novos propostos <span className="font-normal normal-case tracking-normal">· {termos.length}</span></>} icon={<Sparkles />}>
-          <ul className="grid gap-2 sm:grid-cols-2">
-            {termos.map((t) => (
-              <li key={`${t.grupo}:${t.valor}`} className="rounded-lg border border-dashed border-violet-300 bg-violet-50/50 dark:bg-violet-500/5 dark:border-violet-500/30 p-3">
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="text-[10px] uppercase tracking-wider text-violet-700 dark:text-violet-300 font-semibold">{GRUPO_NOME[t.grupo] ?? t.grupo}</span>
-                  <b className="truncate">{t.valor}</b>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">{t.definicao}</p>
-                <div className="flex gap-1.5 mt-2">
-                  <Tip content="O aceite é em lote, no relatório (fase H)."><span><Button variant="soft" disabled className="!h-7 !px-2 text-xs">Aceitar</Button></span></Tip>
-                  <Tip content="O aceite é em lote, no relatório (fase H)."><span><Button variant="ghost" disabled className="!h-7 !px-2 text-xs">Recusar</Button></span></Tip>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Campo>
-      )}
+      <TermosNovos />
     </div>
+  );
+}
+
+/** termos novos que ESTA ficha propôs: aceitar (1 clique) ou recusar (diálogo com o substituto já escolhido) */
+function TermosNovos() {
+  const { slug, v, vocab } = useF();
+  const termos = v.ficha.analise?.termosNovos ?? [];
+  const [recusar, setRecusar] = useState<{ grupo: string; valor: string } | null>(null);
+  const m = useDecidirTermo(slug);
+  if (!termos.length) return null;
+  return (
+    <Campo label={<>Termos novos propostos <span className="font-normal normal-case tracking-normal">· {termos.length}</span></>} icon={<Sparkles />}>
+      <ul className="grid gap-2 sm:grid-cols-2">
+        {termos.map((t) => {
+          const estado = estadoNoVocab(vocab, t.grupo, t.valor);
+          return (
+            <li key={`${t.grupo}:${t.valor}`} className={cx('rounded-lg border p-3', estado === 'pendente' ? 'border-dashed border-violet-300 bg-violet-50/50 dark:bg-violet-500/5 dark:border-violet-500/30' : 'border-border bg-muted/30')}>
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-[10px] uppercase tracking-wider text-violet-700 dark:text-violet-300 font-semibold">{GRUPO_NOME[t.grupo] ?? t.grupo}</span>
+                <b className="truncate">{t.valor}</b>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">{t.definicao}</p>
+              {estado === 'pendente' ? (
+                <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                  <Button variant="soft" disabled={m.isPending} onClick={() => m.mutate({ grupo: t.grupo, valor: t.valor, decisao: 'aceito' })} className="!h-7 !px-2 text-xs inline-flex items-center gap-1" title={`Ao aceitar, ${destinoDoTermo(t.grupo)}`}><Check className="size-3" />{rotuloAceitar(t.grupo)}</Button>
+                  <Button variant="ghost" disabled={m.isPending} onClick={() => setRecusar({ grupo: t.grupo, valor: t.valor })} className="!h-7 !px-2 text-xs inline-flex items-center gap-1" title="Recusar: pede o termo existente que fica no lugar"><Ban className="size-3" />Recusar</Button>
+                </div>
+              ) : estado === 'aceito' ? (
+                <div className="mt-2 text-xs font-medium text-success-ink inline-flex items-center gap-1"><Check className="size-3" />{t.grupo === 'formato' ? 'formato rascunho criado' : 'aceito'}
+                  {t.grupo === 'formato' && <Link to={`/p/${slug}/formatos?formato=${t.valor}`} className="underline font-normal ml-1">ver na galeria</Link>}</div>
+              ) : (
+                <div className="mt-2 text-xs text-muted-foreground inline-flex items-center gap-1"><Ban className="size-3" />recusado
+                  {(v.campos && JSON.stringify(v.campos).includes(`"${t.valor}"`)) && <button type="button" className="underline ml-1" onClick={() => setRecusar({ grupo: t.grupo, valor: t.valor })}>reetiquetar</button>}</div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      {recusar && <TermoDialog slug={slug} grupo={recusar.grupo} valor={recusar.valor} modo="recusar" onClose={() => setRecusar(null)} />}
+    </Campo>
   );
 }
 
@@ -427,7 +474,7 @@ function Roteiro({ c }: { c: Campos }) {
       </Campo>
       <Campo label={<>Transcrição {ins?.transcricao && <span className="font-normal normal-case tracking-normal">· {ins.transcricao.fonte === 'yt-auto-subs' ? 'legenda automática do YouTube' : ins.transcricao.fonte}</span>}</>} icon={<Captions />}>
         {!ins?.transcricao ? (
-          <div className="text-sm text-muted-foreground">Sem transcrição{ins?.faltou.length ? ` (${ins.faltou.join(', ')})` : ''}.</div>
+          <div className="text-sm text-muted-foreground">Sem transcrição{ins?.faltou.length ? ` (${ins.faltou.map((x) => FALTOU_ROTULO[x] ?? x).join(', ')})` : ''}.</div>
         ) : segs.length ? (
           <ul className="space-y-1.5">{segs.map((s, i) => <li key={i} className="grid grid-cols-[72px_1fr] gap-2 text-sm"><span className="text-xs tabular-nums text-muted-foreground pt-0.5">{fmtClock(s.ini)}–{fmtClock(s.fim)}</span><span>{s.texto}</span></li>)}</ul>
         ) : <p className="text-sm whitespace-pre-line">{ins.transcricao.texto}</p>}
@@ -501,7 +548,7 @@ function Fonte() {
         {linha('Versões', a ? `prompt v${a.versaoPrompt} · vocabulário v${a.versaoVocab}` : '—')}
         {linha('Custo', a?.custo ? `${fmtNum(a.custo.entrada)} tokens de entrada · ${fmtNum(a.custo.saida)} de saída${a.custo.usd != null ? ` · US$ ${a.custo.usd.toFixed(2)}` : ''} · via ${a.custo.via}` : '—')}
         {linha('Insumos', ins ? `${ins.transcricao ? `transcrição (${ins.transcricao.fonte})` : 'sem transcrição'} · ${ins.quadros.length} quadro(s)${ins.cenas?.length ? ` · ${ins.cenas.length} cortes` : ''} · preparado em ${fmtDate(ins.preparadoEm)}${ins.tempos ? ` (${ins.tempos.total.toLocaleString('pt-BR')} s)` : ''}` : '—')}
-        {linha('Faltou', ins?.faltou.length || a?.campos.faltou?.length ? [...new Set([...(ins?.faltou ?? []), ...(a?.campos.faltou ?? [])])].join(', ') : 'nada')}
+        {linha('Faltou', ins?.faltou.length || a?.campos.faltou?.length ? [...new Set([...(ins?.faltou ?? []), ...(a?.campos.faltou ?? [])])].map((x) => FALTOU_ROTULO[x] ?? x).join(', ') : 'nada')}
         {linha('Coleta de origem', `${f.origem.arquivo} · ${fmtDate(f.origem.collectedAt)}`)}
         {linha('Arquivo', <code className="text-xs">competitors/{f.competitorId}/fichas/{f.key.replace(':', '__')}.json</code>)}
       </dl>
@@ -784,7 +831,7 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
   const fq = useFicha(slug, compId, r.mk, open && analisada);
   const vocab = useFichasVocab(slug);
   const v = analisada ? fq.data : undefined;
-  const ctx = useMemo<Ctx | null>(() => (v ? { v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [v, vocab.data, fq.saving, fq.edit, fq.revert]);
+  const ctx = useMemo<Ctx | null>(() => (v ? { slug, v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [slug, v, vocab.data, fq.saving, fq.edit, fq.revert]);
   const m = r.mark;
   const a = v?.ficha.analise;
   const mar = useMarcacao(r, onMark);

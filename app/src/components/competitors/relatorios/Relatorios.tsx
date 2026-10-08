@@ -11,6 +11,7 @@ import { Button, cx, fmtDate, fmtNum } from '../../kit';
 import { toast } from '../../toast';
 import { PlatformIcon, Spinner, fmtPct, fmtRatio, platformLabel } from '../lib';
 import { fk } from '../ficha/useFichas';
+import { TermoDialog, rotuloAceitar } from '../ficha/TermoDialog';
 
 const rk = {
   lista: (slug: string, comp: string) => ['relatorios', slug, comp] as const,
@@ -268,6 +269,7 @@ function Termos({ slug, comp, id, v }: { slug: string; comp: string; id: string;
     },
     onError: (e) => toast.error(e, 'Não foi possível gravar a decisão'),
   });
+  const [recusar, setRecusar] = useState<{ grupo: string; valor: string } | null>(null);
   if (!v.termos.length) return null;
   const pend = v.termos.filter((t) => t.estado === 'pendente');
   const decide = (ts: typeof v.termos, decisao: 'aceito' | 'recusado') => m.mutate(ts.map((t) => ({ grupo: t.grupo, valor: t.valor, decisao })));
@@ -282,8 +284,8 @@ function Termos({ slug, comp, id, v }: { slug: string; comp: string; id: string;
               <span className="text-muted-foreground">{GRUPO_NOME[t.grupo] ?? t.grupo} · {t.itens.length} item(ns)</span>
               <span className="ml-auto flex items-center gap-1">
                 {t.estado === 'pendente' ? <>
-                  <button disabled={m.isPending} onClick={() => decide([t], 'aceito')} title={`Aceitar: ${DESTINO(t.grupo)}`} className="inline-flex items-center gap-1 rounded border border-border px-1.5 py-0.5 hover:border-success hover:text-success-ink disabled:opacity-40"><Check className="size-3" />Aceitar</button>
-                  <button disabled={m.isPending} onClick={() => decide([t], 'recusado')} title="Recusar: a IA não propõe de novo" className="inline-flex items-center gap-1 rounded border border-border px-1.5 py-0.5 hover:border-destructive hover:text-destructive disabled:opacity-40"><Ban className="size-3" />Recusar</button>
+                  <button disabled={m.isPending} onClick={() => decide([t], 'aceito')} title={`Aceitar: ${DESTINO(t.grupo)}`} className="inline-flex items-center gap-1 rounded border border-border px-1.5 py-0.5 hover:border-success hover:text-success-ink disabled:opacity-40"><Check className="size-3" />{rotuloAceitar(t.grupo)}</button>
+                  <button disabled={m.isPending} onClick={() => setRecusar({ grupo: t.grupo, valor: t.valor })} title="Recusar: escolha o termo que fica no lugar; a IA não propõe de novo" className="inline-flex items-center gap-1 rounded border border-border px-1.5 py-0.5 hover:border-destructive hover:text-destructive disabled:opacity-40"><Ban className="size-3" />Recusar</button>
                 </> : <span className={cx('inline-flex items-center gap-1 font-medium', t.estado === 'aceito' ? 'text-success-ink' : 'text-muted-foreground')}>{t.estado === 'aceito' ? <><Check className="size-3" />aceito</> : <><Ban className="size-3" />recusado</>}</span>}
               </span>
             </div>
@@ -292,6 +294,7 @@ function Termos({ slug, comp, id, v }: { slug: string; comp: string; id: string;
           </div>
         ))}
       </div>
+      {recusar && <TermoDialog slug={slug} grupo={recusar.grupo} valor={recusar.valor} modo="recusar" onClose={() => setRecusar(null)} />}
     </Bloco>
   );
 }

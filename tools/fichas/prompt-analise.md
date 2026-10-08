@@ -29,7 +29,7 @@ Vale tudo acima, com estas trocas:
 13. **Sem views.** O sinal de resultado é `historico` (diasNoAr, variacoes, irmaos, coletas, saiuDoAr, reapareceu), que é indireto: não há gasto, alcance nem conversão, e **nunca** se inventa. `porQue` = "hipótese: …" ligada a um número do histórico (ex.: "67 dias no ar"). Anúncio longevo pode ser barato ou institucional; com 1 coleta ou menos de 14 dias, diga que o sinal ainda é fraco.
 14. **Confirme ou corrija as regras.** O pacote traz `regras` (funil, tipo, objetivo, oferta e destino por regras, **com o motivo e a confiança**) e `override037` (o que o Oliver já corrigiu). Preencha **sempre** `funil`, `tipoAnuncio` e `objetivo`. Onde você discordar da regra, acrescente em `correcaoRegra` `{ "campo": "funil|tipo|objetivo", "regra": "<valor da regra>", "ia": "<seu valor>", "motivo": "<o que a regra não viu: trecho do texto ou o que está na imagem>" }`; onde concordar, nada a escrever. O `salvar` recusa divergência sem motivo. Registre o que **você** vê, mesmo se o Oliver já corrigiu: no app o valor dele vale sobre o seu, e o seu sobre a regra.
    - `funil`: topo · meio · fundo (temperatura do público). `tipoAnuncio`: oferta · conteudo · prova-social · demonstracao · institucional · isca · remarketing · indefinido. `objetivo`: trafego · cadastro · mensagem-whatsapp · lead · instalacao-app · engajamento · indefinido (palpite pelo botão e pelo destino; o objetivo real da campanha não é público).
-15. **Criativo.** `headline` = o texto **da arte** (leia a imagem; `fonte: "arte"`; se a arte não tem texto, use o título do anúncio com `fonte: "titulo"`). `gancho` = a primeira linha que a pessoa lê (da arte ou do texto); `canal`: `texto-na-tela` (arte) ou `legenda` (texto do anúncio). Carrossel: só a capa foi vista; diga em `mensagem` e baixe `confianca.visual`.
+15. **Criativo.** `headline` = o texto **da arte** (leia a imagem; `fonte: "arte"`; se a arte não tem texto, use o título do anúncio com `fonte: "titulo"`). `gancho` = a primeira linha que a pessoa lê (da arte ou do texto); `canal`: `texto-na-tela` (arte) ou `legenda` (texto do anúncio). Carrossel (post ou anúncio): só a capa foi vista; ponha `so-capa` em `faltou` (não escreva isso em `mensagem`) e baixe `confianca.visual`; não descreva slides que você não viu.
 16. **`provaTipo`** (criador · depoimento · numero · especialista · nenhuma): o que sustenta a promessa, com o `trecho` em `gatilhos` quando for prova-social/autoridade. **`angulo`**: até 2 ids do grupo `angulo` do `tags.yml` (ou termo novo).
 17. **`destino`** copie de `destino` do pacote (`kind`, `dominio`, `caminho`). **`oferta`** parta de `regras.oferta` (confira o `trecho`). **`coerenciaLP`** só se o pacote trouxer `landing`: 1–2 frases dizendo se promessa e oferta do anúncio batem com a headline e a oferta da página; sem landing, `null`.
 18. Fora de anúncio: `retencao5s` (a menos que haja vídeo), `autoria`, `serie`, `hashtags`, `ritmo`.
@@ -57,7 +57,7 @@ SaaS de gestão de consultório para terapeutas autônomos no Brasil: agenda, vi
 - `formato` (`library/formatos/`): post-frase · meme · antes-depois · carrossel-educativo · trailer-lancamento · recorte-funcionalidade · texto-cinetico · dialogo · 3d-produto · apresentacao-locucao
 - `tema` / `angulo` / `publico`: ids do `tags.yml` da empresa (grupo de mesmo nome)
 
-Termos já recusados pelo Oliver (`recusados` no vocabulário) não podem ser propostos de novo.
+Termos já recusados pelo Oliver (`recusados` no vocabulário) não podem ser propostos de novo; cada um traz, quando houver, o `substituto` que ele escolheu: use esse id no lugar.
 
 ---
 
@@ -104,7 +104,7 @@ Um único JSON, gravado em arquivo e salvo com `npm run fichas -- salvar <empres
       "riscos": [ { "tipo": "…", "trecho": "…" } ],
       "replicavel": 2,
       "confianca": { "texto": "alta", "visual": "media", "retencao": "media" },
-      "faltou": [],
+      "faltou": [],                              // sem-transcricao · sem-quadros · legenda-vazia · audio-sem-fala · midia-indisponivel · so-capa
       "autoria": "proprio", "serie": null
     }
   }

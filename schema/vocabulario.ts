@@ -28,6 +28,8 @@ export const VocabRecusado = z.object({
   grupo: z.string().min(1),
   valor: z.string().min(1),
   motivo: z.string().optional(),
+  /** termo que ficou no lugar nas fichas que usavam o recusado (reetiquetar, fase H) */
+  substituto: z.string().min(1).optional(),
   em: IsoDate,
 });
 

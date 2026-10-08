@@ -231,6 +231,7 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
     const src = join(compDir(slug, comp), item.thumbnailLocal);
     const f = await reduzir540(src, join(qDir, '00000ms'));
     quadros = [{ tMs: 0, arquivo: `quadros/${basename(f)}` }];
+    if (item.type === 'carrossel') faltou.add('so-capa'); // carrossel (post ou anúncio): os outros slides não vêm da coleta
     if (ehVideo) avisos.push('só a miniatura (o vídeo não baixou)');
     else if (anuncio?.semVideoUrl) avisos.push('anúncio em vídeo sem endereço do arquivo na coleta: só a miniatura');
   } else faltou.add('sem-quadros');

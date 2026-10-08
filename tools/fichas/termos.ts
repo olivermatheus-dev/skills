@@ -97,11 +97,15 @@ export function aceitarTermo(slug: string, t: TermoIn, origens: TermoOrigem[] = 
   return { onde, jaExistia: false };
 }
 
-/** recusa: o termo some das próximas propostas (relatório e prompt) */
-export function recusarTermo(t: { grupo: string; valor: string }, motivo?: string) {
+/** recusa: o termo some das próximas propostas (relatório e prompt). `substituto` = o termo existente que ficou no lugar (o prompt manda a IA usá-lo) */
+export function recusarTermo(t: { grupo: string; valor: string }, motivo?: string, substituto?: string) {
   const v = loadVocab();
-  if (v.recusados.some((r) => r.grupo === t.grupo && r.valor === t.valor)) return { jaRecusado: true };
-  v.recusados.push({ grupo: t.grupo, valor: t.valor, ...(motivo?.trim() ? { motivo: motivo.trim() } : {}), em: hoje() });
+  const ja = v.recusados.find((r) => r.grupo === t.grupo && r.valor === t.valor);
+  if (ja) {
+    if (substituto && ja.substituto !== substituto) { ja.substituto = substituto; gravarVocab(v); }
+    return { jaRecusado: true };
+  }
+  v.recusados.push({ grupo: t.grupo, valor: t.valor, ...(motivo?.trim() ? { motivo: motivo.trim() } : {}), ...(substituto ? { substituto } : {}), em: hoje() });
   gravarVocab(v);
   return { jaRecusado: false };
 }

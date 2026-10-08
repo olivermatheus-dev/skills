@@ -6,10 +6,10 @@ import type { Relatorio, RelatorioTermo } from '../schema/relatorio';
 import type { Ficha } from '../schema/ficha';
 import { ValidationError } from './store';
 import { openTerminal } from './runner';
-import { fichasDir, loadVocab } from '../tools/fichas/lib';
+import { fichasDir } from '../tools/fichas/lib';
 import { lerRelatorio, listarRelatorios } from '../tools/fichas/relatorio-lib';
 import { decidirTermos, type Decisao } from '../tools/fichas/decidir';
-import { termoExiste } from '../tools/fichas/termos';
+import { estadoDoTermo } from './termos';
 
 const okSlug = (v: string) => /^[a-z0-9][a-z0-9-]*$/.test(v);
 function guard(slug: string, comp: string, id?: string) {
@@ -22,21 +22,19 @@ export interface RelatorioLinha {
   leitura: boolean; nivel: string | null; resumo: string | null; termosPendentes: number; custoUsd: number | null;
 }
 
-/** o termo ainda está pendente? (decidido no relatório, ou aceito/recusado por outro caminho desde então) */
-function estadoTermo(slug: string, t: RelatorioTermo, recusados: { grupo: string; valor: string }[]): 'aceito' | 'recusado' | 'pendente' {
-  if (t.decisao) return t.decisao;
-  if (recusados.some((r) => r.grupo === t.grupo && r.valor === t.valor)) return 'recusado';
-  try { if (termoExiste(slug, t.grupo, t.valor)) return 'aceito'; } catch { /* grupo desconhecido: fica pendente */ }
-  return 'pendente';
+/** o termo ainda está pendente? (decidido no relatório, ou aceito/recusado por outro caminho desde então: painel da ficha, CLI) */
+function estadoTermo(slug: string, t: RelatorioTermo): 'aceito' | 'recusado' | 'pendente' {
+  // o estado do vocabulário manda: recusado no relatório e aceito depois no painel aparece como aceito (e vice-versa)
+  const atual = estadoDoTermo(slug, t.grupo, t.valor);
+  return atual !== 'pendente' ? atual : (t.decisao ?? 'pendente');
 }
 
 export function listarRelatoriosView(slug: string, comp: string): RelatorioLinha[] {
   guard(slug, comp);
-  const rec = loadVocab().recusados;
   return listarRelatorios(slug, comp).map(({ data: r }) => ({
     id: r.id, rede: r.rede, escopo: r.escopo, itens: r.itens.length, gerado: r.gerado, emDestaque: r.emDestaque, modelo: r.modelo,
     leitura: !!r.leitura, nivel: ((r.agregados as { amostra?: { nivel?: string } }).amostra?.nivel) ?? null, resumo: r.leitura?.resumo[0] ?? null,
-    termosPendentes: r.termosNovos.filter((t) => estadoTermo(slug, t, rec) === 'pendente').length, custoUsd: r.custo?.usd ?? null,
+    termosPendentes: r.termosNovos.filter((t) => estadoTermo(slug, t) === 'pendente').length, custoUsd: r.custo?.usd ?? null,
   }));
 }
 
@@ -46,11 +44,10 @@ export function relatorioView(slug: string, comp: string, id: string): Relatorio
   guard(slug, comp, id);
   const d = lerRelatorio(slug, comp, id);
   if (!d) return null;
-  const rec = loadVocab().recusados;
-  return { relatorio: d.data, termos: d.data.termosNovos.map((t) => ({ ...t, estado: estadoTermo(slug, t, rec) })) };
+  return { relatorio: d.data, termos: d.data.termosNovos.map((t) => ({ ...t, estado: estadoTermo(slug, t) })) };
 }
 
-/** aceitar/recusar em lote: body = { decisoes: [{ grupo, valor, decisao: 'aceito' | 'recusado', motivo? }] } */
+/** aceitar/recusar em lote: body = { decisoes: [{ grupo, valor, decisao: 'aceito' | 'recusado', motivo?, substituto? }] } (recusar com substituto reetiqueta as fichas) */
 export function decidirTermosView(slug: string, comp: string, id: string, body: { decisoes?: Decisao[] }) {
   guard(slug, comp, id);
   const ds = (Array.isArray(body?.decisoes) ? body.decisoes : []).filter((d) => d && (d.decisao === 'aceito' || d.decisao === 'recusado') && typeof d.grupo === 'string' && typeof d.valor === 'string');
@@ -103,4 +100,15 @@ export function gerarRelatorioView(slug: string, comp: string, body: { rede?: st
   const prompt = `Use a skill referencias, passo 5 (relatório da rodada): gere o relatório de ${comp} (empresa ${slug}) no ${rede} com ${todos ? `todas as ${ops.length} fichas analisadas` : `as fichas ${itens.join(', ')}`}. Rode ${comando}, leia o pacote, escreva a leitura como especialista sênior em social media (só números dos agregados; amostra pequena = observações) e grave com --rodada <id> --leitura. Termine com npm run validate e me diga o id do relatório.`;
   if (body?.abrir !== false) openTerminal(prompt);
   return { aberto: body?.abrir !== false, comando, itens: todos ? ops.length : itens.length };
+}
+
+/** aceitar/recusar FORA de um relatório (painel da ficha): mesma função, a definição vem da ficha que propôs */
+export function decidirTermosAvulsosView(slug: string, body: { decisoes?: Decisao[] }) {
+  if (!okSlug(slug)) throw new ValidationError('termos', ['empresa inválida']);
+  const ds = (Array.isArray(body?.decisoes) ? body.decisoes : []).filter((d) => d && (d.decisao === 'aceito' || d.decisao === 'recusado') && typeof d.grupo === 'string' && typeof d.valor === 'string');
+  if (!ds.length) throw new ValidationError('termos', ['nenhuma decisão enviada']);
+  const resultado = decidirTermos(slug, '', '', ds);
+  const ruins = resultado.filter((r) => !r.ok);
+  if (ruins.length === resultado.length) throw new ValidationError('termos', ruins.map((r) => `${r.grupo}:${r.valor}: ${r.msg}`));
+  return { resultado };
 }

@@ -5,7 +5,7 @@
 //   salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]   valida (schema + vocabulário) e grava a análise
 //   relatorio <empresa> <concorrente> [--rede x] [--itens a,b | --top N] [--rodada id] [--pacote]   agregados → relatorios/<id>.md  (--rede anuncios = fichas de anúncio)
 //   relatorio <empresa> <concorrente> --rodada id --leitura arquivo.json                           grava a leitura do Opus
-//   termo    <empresa> aceitar|recusar <grupo>:<valor> [--rodada id --de <concorrente>]              termo novo em lote
+//   termo    <empresa> aceitar|recusar <grupo>:<valor> [--rodada id --de <concorrente>] [--substituto <termo>]   termo novo (recusar + substituto reetiqueta as fichas)
 //   validar                                                    confere todas as fichas (o mesmo do npm run validate)
 // chave = <plataforma>:<idDoItem> (ex.: tiktok:7691064446289988884; anúncio da Meta: meta-ads:<id da Biblioteca>)
 import { readFileSync } from 'node:fs';
@@ -17,7 +17,7 @@ import { dadosDir, loadVocab, nowIso, parseKey, readFicha, writeFicha } from './
 const argv = process.argv.slice(2);
 const flags = new Set(argv.filter((a) => a.startsWith('--')));
 /** opções com valor: --rede tiktok, --itens a,b, --top 10, --rodada id, --leitura arq.json, --de concorrente */
-const COM_VALOR = new Set(['--rede', '--itens', '--top', '--rodada', '--leitura', '--de', '--motivo']);
+const COM_VALOR = new Set(['--rede', '--itens', '--top', '--rodada', '--leitura', '--de', '--motivo', '--substituto']);
 const opt: Record<string, string> = {};
 const pos: string[] = [];
 for (let i = 0; i < argv.length; i++) {
@@ -32,7 +32,7 @@ const USO = `uso:
   npm run fichas -- salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]
   npm run fichas -- relatorio <empresa> <concorrente> [--rede tiktok] [--itens a,b | --top 10] [--rodada id] [--pacote]
   npm run fichas -- relatorio <empresa> <concorrente> --rodada <id> --leitura <arquivo.json>
-  npm run fichas -- termo    <empresa> aceitar|recusar <grupo>:<valor> [--de <concorrente> --rodada <id>] [--motivo "…"]
+  npm run fichas -- termo    <empresa> aceitar|recusar <grupo>:<valor> [--de <concorrente> --rodada <id>] [--motivo "…"] [--substituto <termo>]
   npm run fichas -- validar`;
 const falha: (m: string) => never = (m) => { console.error(`❌ ${m}`); process.exit(1); };
 
@@ -50,7 +50,7 @@ async function main() {
     const [grupo, valor] = alvo.split(':');
     if (!slug || !['aceitar', 'recusar'].includes(acao ?? '') || !grupo || !valor) falha(USO);
     const { decidirTermos } = await import('./decidir');
-    const r = decidirTermos(slug, opt.de ?? '', opt.rodada ?? '', [{ grupo, valor, decisao: acao === 'aceitar' ? 'aceito' : 'recusado', motivo: opt.motivo }]);
+    const r = decidirTermos(slug, opt.de ?? '', opt.rodada ?? '', [{ grupo, valor, decisao: acao === 'aceitar' ? 'aceito' : 'recusado', motivo: opt.motivo, substituto: opt.substituto || undefined }]);
     for (const x of r) console.log(`${x.ok ? '✅' : '❌'} ${x.grupo}:${x.valor} ${x.msg}`);
     process.exit(r.every((x) => x.ok) ? 0 : 1);
   }

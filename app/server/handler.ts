@@ -192,6 +192,10 @@ on('GET', '/api/projects/:slug/competitors/:id/relatorios-fichas', async (p) => 
 on('POST', '/api/projects/:slug/competitors/:id/relatorios', async (p, b) => (await RL()).gerarRelatorioView(p.slug, p.id, b ?? {}));
 on('GET', '/api/projects/:slug/competitors/:id/relatorios/:rid', async (p) => (await RL()).relatorioView(p.slug, p.id, p.rid));
 on('POST', '/api/projects/:slug/competitors/:id/relatorios/:rid/termos', async (p, b) => (await RL()).decidirTermosView(p.slug, p.id, p.rid, b ?? {}));
+// Vocabulário vivo (040 H): termos novos de uma ficha, o que o diálogo precisa para decidir e a decisão fora do relatório (mesma função do CLI e do relatório)
+const TM = () => import('../../core/termos');
+on('GET', '/api/projects/:slug/termos/:grupo/:valor', async (p) => { slugOk(p); return (await TM()).termoInfo(p.slug, p.grupo, p.valor); });
+on('POST', '/api/projects/:slug/termos/decidir', async (p, b) => (await RL()).decidirTermosAvulsosView(p.slug, b ?? {}));
 
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
 on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));

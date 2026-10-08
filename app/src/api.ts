@@ -15,6 +15,9 @@ import type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo } from '
 export type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo };
 import type { FilaStatus, PedirLote } from '../../core/fichas-fila';
 import type { RelatorioLinha, RelatorioView, FichaOpcao } from '../../core/relatorios';
+import type { TermoInfo } from '../../core/termos';
+export type { TermoInfo };
+export interface DecisaoTermo { grupo: string; valor: string; ok: boolean; msg: string; reetiquetadas?: number }
 export type { RelatorioLinha, RelatorioView, FichaOpcao };
 export type { FilaStatus, PedirLote };
 import type { Review, ReviewComment } from '../../schema/review';
@@ -233,7 +236,10 @@ export const api = {
   relatorio: (slug: string, comp: string, id: string) => req<RelatorioView | null>('GET', `${pj(slug)}/competitors/${comp}/relatorios/${id}`),
   relatorioFichas: (slug: string, comp: string) => req<FichaOpcao[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios-fichas`),
   gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean }) => req<{ aberto: boolean; comando: string; itens: number }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
-  decidirTermos: (slug: string, comp: string, id: string, decisoes: { grupo: string; valor: string; decisao: 'aceito' | 'recusado' }[]) => req<{ resultado: { grupo: string; valor: string; ok: boolean; msg: string }[]; view: RelatorioView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios/${id}/termos`, { decisoes }),
+  decidirTermos: (slug: string, comp: string, id: string, decisoes: { grupo: string; valor: string; decisao: 'aceito' | 'recusado'; substituto?: string }[]) => req<{ resultado: DecisaoTermo[]; view: RelatorioView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios/${id}/termos`, { decisoes }),
+  // vocabulário vivo (040 H): termos novos da ficha, info para o diálogo, decisão fora do relatório
+  termoInfo: (slug: string, grupo: string, valor: string) => req<TermoInfo | null>('GET', `${pj(slug)}/termos/${encodeURIComponent(grupo)}/${encodeURIComponent(valor)}`),
+  decidirTermo: (slug: string, d: { grupo: string; valor: string; decisao: 'aceito' | 'recusado'; substituto?: string; motivo?: string }) => req<{ resultado: DecisaoTermo[] }>('POST', `${pj(slug)}/termos/decidir`, { decisoes: [d] }),
 
   secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
   setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),
