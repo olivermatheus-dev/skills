@@ -1,7 +1,7 @@
 // Matriz de funcionalidades × concorrentes (Comparar → Funcionalidades). Dados: intel/matriz.json (schema/matrix.ts).
 // Linhas = funcionalidades (por grupo, recolhíveis) · colunas = concorrentes · a coluna da própria empresa fica fixa,
 // na cor do projeto, logo depois do nome. Clicar numa célula edita (vira by: 'oliver'; a IA nunca sobrescreve).
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown, ChevronRight, CircleDot, CircleHelp, Clock, Pencil, Plus, X } from 'lucide-react';
 import type { Matrix, MatrixCell, MatrixFeature } from '../../../../schema/matrix';
@@ -62,6 +62,15 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   const [closed, setClosed] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<Editing | null>(null);
   const [featDlg, setFeatDlg] = useState<{ f?: MatrixFeature } | null>(null);
+  // a caixa da tabela ocupa o resto da tela (mede onde começa; reserva a legenda e o respiro do fim da página)
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [boxH, setBoxH] = useState<number>();
+  useLayoutEffect(() => {
+    const fit = () => { const el = boxRef.current; if (el) setBoxH(Math.max(320, window.innerHeight - el.getBoundingClientRect().top - 116)); };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  });
   const m: Matrix | undefined = mq.data;
   const nosName = proj.data?.name ?? 'Nós';
 
@@ -137,8 +146,8 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl overflow-auto max-h-[calc(100vh-15rem)]">
-        <table className="text-sm border-separate border-spacing-0">
+      <div ref={boxRef} style={{ height: boxH }} className="bg-card border border-border rounded-xl overflow-auto">
+        <table className="text-sm border-separate border-spacing-0 min-w-full h-full">
           <thead>
             <tr>
               <th className={cx('sticky left-0 top-0 z-30 bg-card border-b border-r border-border px-3 py-2 text-left text-xs font-medium text-muted-foreground', NAME_W)}>Funcionalidade <span className="font-normal">({visible.length})</span></th>
@@ -203,6 +212,12 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
               ];
             })}
             {!visible.length && <tr><td colSpan={nCols} className="px-4 py-8 text-center text-sm text-muted-foreground">Nenhuma funcionalidade neste filtro.</td></tr>}
+            {/* preenche a sobra de altura: a cobertura fica sempre no rodapé, com as colunas fixas continuando até ele */}
+            <tr aria-hidden className="h-full">
+              <td className={cx('sticky left-0 z-10 bg-card border-r border-border p-0', NAME_W)} />
+              <td className={cx('sticky left-[290px] z-10 border-x-2 border-x-primary bg-card p-0', NOS_W)} />
+              {cols.map((c) => <td key={c.id} className="p-0" />)}
+            </tr>
           </tbody>
           <tfoot>
             <tr>
