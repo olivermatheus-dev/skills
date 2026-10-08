@@ -4,6 +4,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as AT from './atividade.mjs';
 
 const ROOT = () => process.env.HUB_ROOT ?? resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const json = (f) => JSON.parse(readFileSync(f, 'utf8').replace(/^﻿/, ''));
@@ -67,7 +68,11 @@ const progFile = (slug) => join(ROOT(), 'logs', 'fichas', `${slug}.json`);
 const ultimoFile = (slug) => join(ROOT(), 'logs', 'fichas', `${slug}-ultimo.json`);
 export function lerProgresso(slug) { try { return existsSync(progFile(slug)) ? json(progFile(slug)) : null; } catch { return null; } }
 /** passo atual ("Preparando", "Quadros (Haiku)", "Analisando (Opus)"…) e as chaves em análise agora */
-export function escreverProgresso(slug, passo, itens = []) { gravar(progFile(slug), { passo, itens, em: agora() }); }
+export function escreverProgresso(slug, passo, itens = []) {
+  gravar(progFile(slug), { passo, itens, em: agora() });
+  // o mesmo passo no registro de atividade (046): o dock do app mostra
+  try { const l = json(join(ROOT(), 'logs', 'heartbeat', '.lock')); if (l.kind === 'fichas' && l.atividade) AT.passo(l.atividade, itens.length ? `${passo} · ${itens.length} item(ns)` : passo); } catch { /* sem lock: rodando à mão */ }
+}
 export function lerUltimo(slug) { try { return existsSync(ultimoFile(slug)) ? json(ultimoFile(slug)) : null; } catch { return null; } }
 
 /**

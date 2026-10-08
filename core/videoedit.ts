@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { execFile, execFileSync, spawn } from 'node:child_process';
 import { ROOT, ValidationError } from './store';
 import { Slug } from '../schema';
+import * as AT from '../tools/lib/atividade.mjs';
 
 function pasta(slug: string, path: string) {
   if (!Slug.safeParse(slug).success) throw new ValidationError(slug, ['slug inválido']);
@@ -72,22 +73,27 @@ export function gerarPrevia(slug: string, path: string, b: { formato?: string })
 
   const job: Job = { estado: 'rodando', passo: passos[0][0], passos: passos.map((p) => p[0]), formato, log: [], inicio: new Date().toISOString() };
   jobs.set(k, job);
+  // dock do app (046): a prévia aparece em qualquer tela até terminar
+  const at = AT.iniciar({ slug, tipo: 'render', fonte: 'previa', titulo: `Prévia do vídeo ${dir.split(/[\\/]/).pop()} (${formato})`, passo: job.passo, link: `/p/${slug}/conteudos?peca=${encodeURIComponent(path)}`, ref: path });
+  const fim = (status: 'feito' | 'erro') => AT.terminar(at.id, status, status === 'feito' ? { resumo: 'Rascunho pronto no player' } : { erro: job.erro ?? 'falhou' });
   const push = (s: string) => { for (const l of s.split(/\r?\n|\r/)) if (l.trim()) job.log.push(l.trimEnd()); if (job.log.length > 200) job.log.splice(0, job.log.length - 200); };
   const next = (i: number) => {
     if (i >= passos.length) {
       job.estado = 'ok'; job.fim = new Date().toISOString();
       job.arquivo = `${dir.split(/[\\/]/).pop()}-${formato}-rascunho.mp4`;
+      fim('feito');
       return;
     }
     job.passo = passos[i][0];
+    AT.passo(at.id, `${job.passo} (${i + 1}/${passos.length})`);
     push(`── ${job.passo}`);
     const p = spawn(process.execPath, passos[i][1], { cwd: ROOT, env: { ...process.env, HUB_ROOT: ROOT, FORCE_COLOR: '0' } });
     p.stdout.on('data', (d) => push(String(d)));
     p.stderr.on('data', (d) => push(String(d)));
-    p.on('error', (e) => { job.estado = 'erro'; job.erro = e.message; job.fim = new Date().toISOString(); });
+    p.on('error', (e) => { job.estado = 'erro'; job.erro = e.message; job.fim = new Date().toISOString(); fim('erro'); });
     p.on('close', (code) => {
       if (job.estado !== 'rodando') return;
-      if (code) { job.estado = 'erro'; job.erro = `${job.passo}: ${job.log.filter((l) => !l.startsWith('──')).at(-1) ?? `código ${code}`}`; job.fim = new Date().toISOString(); return; }
+      if (code) { job.estado = 'erro'; job.erro = `${job.passo}: ${job.log.filter((l) => !l.startsWith('──')).at(-1) ?? `código ${code}`}`; job.fim = new Date().toISOString(); fim('erro'); return; }
       next(i + 1);
     });
   };

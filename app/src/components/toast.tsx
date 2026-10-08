@@ -39,11 +39,16 @@ export const toast = {
   action: (message: string, label: string, run: () => void, kind: Kind = 'info') => show({ kind, message, action: { label, run } }),
 };
 
+/** altura do dock de atividade (046) no mesmo canto: os avisos sobem para não ficar por cima dele */
+let offset = 0;
+export function setToastOffset(px: number) { if (px !== offset) { offset = px; emit(); } }
+
 export function Toaster() {
   const list = useSyncExternalStore((cb) => { subs.add(cb); return () => subs.delete(cb); }, () => items, () => items);
+  const off = useSyncExternalStore((cb) => { subs.add(cb); return () => subs.delete(cb); }, () => offset, () => offset);
   if (!list.length) return null;
   return (
-    <div className="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 items-end pointer-events-none" aria-live="polite">
+    <div className="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 items-end pointer-events-none" style={off ? { bottom: 16 + off } : undefined} aria-live="polite">
       {list.map((t) => {
         const e = t.error as ApiError | undefined;
         return (

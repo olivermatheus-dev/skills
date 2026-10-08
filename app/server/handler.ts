@@ -13,6 +13,7 @@ import * as K from '../../core/secrets';
 import * as MK from '../../core/mockups';
 import * as R from '../../core/runner';
 import * as VE from '../../core/videoedit';
+import * as AV from '../../core/atividade';
 import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
@@ -41,6 +42,10 @@ on('GET', '/api/agents', () => S.listAgents());
 on('POST', '/api/projects/:slug/tasks/:id/comments', (p, b) => S.commentTask(p.slug, p.id, b ?? {}));
 // Rodar IA: Claude Code nas tarefas prontas (segundo plano = heartbeat · terminal = janela interativa)
 on('GET', '/api/projects/:slug/runner', (p) => R.runnerStatus(p.slug));
+// Atividade (046 A): o que está rodando (IA, coletas, renders) para o dock e a página Agentes
+on('GET', '/api/projects/:slug/atividade', (p) => AV.atividadeView(p.slug));
+on('POST', '/api/projects/:slug/atividade/visto', (p, b) => AV.marcarVisto(p.slug, b?.ids));
+on('POST', '/api/projects/:slug/atividade/:id/parar', (p) => AV.pararAtividade(p.slug, p.id));
 on('POST', '/api/projects/:slug/runner', (p, b) => R.runAi(p.slug, b ?? {}));
 on('DELETE', '/api/projects/:slug/runner', (p) => R.stopAi(p.slug));
 
@@ -104,9 +109,14 @@ on('GET', '/api/projects/:slug/competitors/:id', (p) => ({
 on('PUT', '/api/projects/:slug/competitors/:id', (p, b) => S.saveCompetitor(p.slug, { ...b.data, id: p.id }, b.body ?? ''));
 on('DELETE', '/api/projects/:slug/competitors/:id', (p) => S.deleteCompetitor(p.slug, p.id));
 on('PUT', '/api/projects/:slug/competitors/:id/marks', (p, b) => S.setMark(p.slug, p.id, b.key, b.mark));
+/** nome do concorrente para o título no dock */
+const nomeComp = (slug: string, id: string) => { try { return S.getCompetitor(slug, id).data.name; } catch { return id; } };
+const linkComp = (slug: string, id: string) => `/p/${slug}/concorrentes/${id}`;
 on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
   const { collectCompetitor } = await import('../../tools/intel/collect');
-  return collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems });
+  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'coleta', titulo: `Puxando ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo os perfis', link: linkComp(p.slug, p.id), ref: p.id },
+    (passo) => collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems, onPasso: passo }),
+    (r) => { const ok = r.filter((x) => x.ok).length; return { resumo: `${ok}/${r.length} perfis · ${r.reduce((n, x) => n + x.items, 0)} posts`, erro: r.length && !ok ? 'nenhum perfil coletado' : null }; });
 });
 
 // Análise por módulos: resultados, anotações, pedido (fila da IA) e o módulo `site` (script, roda aqui mesmo)
@@ -114,8 +124,16 @@ on('GET', '/api/projects/:slug/competitors/:id/analysis', (p) => S.getAnalysis(p
 on('PUT', '/api/projects/:slug/competitors/:id/analysis/notes/:key', (p, b) => S.setAnalysisNote(p.slug, p.id, p.key, String(b.text ?? '')));
 on('PUT', '/api/projects/:slug/competitors/:id/analysis/request', (p, b) => S.requestAnalysis(p.slug, p.id, b));
 on('DELETE', '/api/projects/:slug/competitors/:id/analysis/request', (p) => S.clearAnalysisRequest(p.slug, p.id));
-on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => (await import('../../tools/intel/site')).analyzeSite(p.slug, p.id));
-on('POST', '/api/projects/:slug/competitors/:id/analysis/ra', async (p) => (await import('../../tools/intel/reclameaqui')).runReclameAqui(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => {
+  const { analyzeSite } = await import('../../tools/intel/site');
+  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'site', titulo: `Lendo o site de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo o site e o sitemap', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
+    () => analyzeSite(p.slug, p.id));
+});
+on('POST', '/api/projects/:slug/competitors/:id/analysis/ra', async (p) => {
+  const { runReclameAqui } = await import('../../tools/intel/reclameaqui');
+  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'reclameaqui', titulo: `Reclame Aqui de ${nomeComp(p.slug, p.id)}`, passo: 'Buscando a página da empresa', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
+    () => runReclameAqui(p.slug, p.id));
+});
 on('GET', '/api/projects/:slug/analysis-overview', async (p) => (await import('../../tools/intel/summary')).analysisOverview(p.slug));
 // Visões da área (Panorama, Comparar, Conteúdos): análises de todos e a última coleta de cada perfil com as marcações
 on('GET', '/api/projects/:slug/analysis-all', (p) => S.listCompetitors(p.slug).map((c) => ({ id: c.data.id, results: S.getAnalysisResults(p.slug, c.data.id) })));
@@ -126,7 +144,10 @@ on('GET', '/api/projects/:slug/competitors-feed', (p) => S.listCompetitors(p.slu
 on('GET', '/api/projects/:slug/weekly', async (p) => (await import('../../tools/intel/semanal')).status(p.slug));
 on('POST', '/api/projects/:slug/weekly', async (p) => {
   const W = await import('../../tools/intel/semanal');
-  void W.runWeekly(p.slug).catch((e) => console.error(`[coleta semanal] ${p.slug}: ${e.message}`));
+  void AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'semanal', titulo: 'Coleta semanal (redes + anúncios)', link: `/p/${p.slug}/concorrentes/coletas` },
+    (passo) => W.runWeekly(p.slug, { onPasso: passo }),
+    (r) => ({ resumo: r?.lastSummary ? `${r.lastSummary.ok}/${r.lastSummary.profiles} perfis${r.lastSummary.ads != null ? ` · ${r.lastSummary.ads} anúncios` : ''}` : undefined }))
+    .catch((e) => console.error(`[coleta semanal] ${p.slug}: ${e.message}`));
   await new Promise((r) => setTimeout(r, 300));
   return W.status(p.slug);
 });
@@ -168,7 +189,11 @@ on('GET', '/api/projects/:slug/ads/classified', async (p) => {
 // marcas do Oliver (037 D): nota, tags, salvo (cópia do anúncio) e override de funil/tipo/objetivo
 on('GET', '/api/projects/:slug/ads/marks', (p) => { slugOk(p); return S.listAdsMarks(p.slug); });
 on('PUT', '/api/projects/:slug/competitors/:id/ads/marks/:adId', (p, b) => { slugOk(p); return S.setAdMark(p.slug, p.id, p.adId, b ?? {}); });
-on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => {
+  const { collectAds } = await adsMod();
+  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'anuncios', titulo: `Anúncios de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo a Biblioteca de Anúncios da Meta', link: `${linkComp(p.slug, p.id)}?aba=anuncios`, ref: p.id },
+    () => collectAds(p.slug, p.id), (r) => ({ resumo: `${r.ads} anúncio(s) ativo(s)`, erro: r.ok ? null : r.errors.join(' · ') || 'falhou' }));
+});
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
 // Fichas de análise (040 D): resumo para o selo, vocabulário dos selects, a ficha do item, edição como override e pedido de fila
@@ -244,7 +269,9 @@ on('GET', '/api/projects/:slug/mockups', (p) => MK.listarMockups(p.slug));
 on('POST', '/api/projects/:slug/mockups', (p, b) => MK.criarMockup(p.slug, b ?? {}));
 on('GET', '/api/projects/:slug/mockup', (p, _, q) => MK.lerMockup(p.slug, piece(q)));
 on('PUT', '/api/projects/:slug/mockup', (p, b, q) => MK.salvarMockup(p.slug, piece(q), b));
-on('POST', '/api/projects/:slug/mockup/export', (p, b, q) => MK.exportarMockup(p.slug, piece(q), b ?? {}));
+on('POST', '/api/projects/:slug/mockup/export', (p, b, q) => AV.comAtividade(
+  { slug: p.slug, tipo: 'render', fonte: 'mockup', titulo: `Exportando mockup ${piece(q).split('/').pop()}`, passo: 'Renderizando em alta', link: `/p/${p.slug}/mockups?peca=${encodeURIComponent(piece(q))}`, ref: piece(q) },
+  () => MK.exportarMockup(p.slug, piece(q), b ?? {}), (r) => ({ resumo: r.ok ? `${r.arquivos.length} arquivo(s)` : undefined, erro: r.ok ? null : r.erro ?? 'export falhou' })));
 
 // Galeria de formatos (tarefa 027): global, library/formatos/<id>/formato.json
 on('GET', '/api/formats', () => S.listFormats());

@@ -24,6 +24,9 @@ Lista, tabela ou grade longa **ocupa o resto da tela e rola por dentro**: títul
 - A altura se mede sozinha (onde a caixa começa + o que vem depois dela até o fim da página) e se ajusta quando algo carrega depois.
 - Exceção: muita coisa acima da lista (ex.: ficha do concorrente → Redes e conteúdos) → a lista rola com a página e só a barra de filtros gruda no topo (`sticky`), senão a caixa fica pequena demais.
 
+### Atividade (046): tudo que roda por trás de um clique aparece no dock
+IA, coleta ou render novo **registra o trabalho** em `logs/atividade/` (`tools/lib/atividade.mjs`): no servidor, embrulhe a rota com `comAtividade({ slug, tipo, fonte, titulo, passo, link }, (passo) => …, resumir)` (`core/atividade.ts`); em script/heartbeat, `iniciar` → `passo` → `terminar`. O dock (`components/atividade/AtividadeDock.tsx`) mostra sozinho, em qualquer tela, e recarrega os dados quando termina.
+
 ## Arquivos por projeto
 ```
 companies/<slug>/

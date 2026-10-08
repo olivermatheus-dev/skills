@@ -37,6 +37,10 @@ export type { PieceCover } from '../../core/store';
 import type { AdsHistorico } from '../../core/store';
 export type { AdsHistorico, AnuncioHistorico } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
+import type { Atividade } from '../../tools/lib/atividade.mjs';
+export type { Atividade };
+/** atividade (046 A): dock = o que mostrar agora; historico = últimos trabalhos (página Agentes) */
+export interface AtividadeView { dock: (Atividade & { podeParar: boolean })[]; historico: Atividade[] }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
   kind: 'fichas' | 'pesquisa' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
@@ -112,11 +116,15 @@ export const net = {
 
 async function req<T>(method: string, path: string, body?: unknown): Promise<T> {
   let r: Response;
+  // um POST pode ter começado um trabalho (IA, coleta, render): o dock de atividade (046) confere logo, sem esperar o ciclo
+  const acao = method === 'POST' && !path.includes('/atividade');
+  if (acao) setTimeout(() => window.dispatchEvent(new Event('hub:acao')), 600);
   try {
     r = await fetch(path, { method, headers: body ? { 'content-type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
   } catch (e) { setOffline(true); throw e; }
   setOffline(false);
   const data = await r.json().catch(() => ({ error: r.statusText }));
+  if (acao) window.dispatchEvent(new Event('hub:acao'));
   if (!r.ok) throw new ApiError(r.status, data);
   return data as T;
 }
@@ -139,6 +147,9 @@ export const api = {
   commentTask: (slug: string, id: string, c: { text: string; kind?: CommentKind; status?: Task['status']; assignee?: string }) => req<Doc<Task>>('POST', `${pj(slug)}/tasks/${id}/comments`, c),
   agents: () => req<{ name: string; color: string | null; description: string }[]>('GET', '/api/agents'),
   runner: (slug: string) => req<RunnerStatus>('GET', `${pj(slug)}/runner`),
+  atividade: (slug: string) => req<AtividadeView>('GET', `${pj(slug)}/atividade`),
+  atividadeVisto: (slug: string, ids: string[]) => req<AtividadeView>('POST', `${pj(slug)}/atividade/visto`, { ids }),
+  atividadeParar: (slug: string, id: string) => req<AtividadeView>('POST', `${pj(slug)}/atividade/${encodeURIComponent(id)}/parar`),
   runAi: (slug: string, o: { mode: 'background' | 'terminal'; max?: number; task?: string }) => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/runner`, o),
   stopAi: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/runner`),
 

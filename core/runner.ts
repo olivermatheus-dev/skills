@@ -7,12 +7,13 @@ import { spawn, spawnSync } from 'node:child_process';
 import { listTasks, commentTask, ValidationError, ROOT } from './store';
 import { fechar } from '../tools/lib/fichas-fila.mjs';
 import * as PQ from '../tools/lib/pesquisa.mjs';
+import * as AT from '../tools/lib/atividade.mjs';
 
 const LOCK = join(ROOT, 'logs/heartbeat/.lock');
 const isAi = (a: string) => a === 'ai' || a.startsWith('agent:');
 
 /** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); `'pesquisa'` = rodada de pesquisa de ideias da 041 (`round`); sem kind = tarefa do quadro */
-export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' | 'pesquisa'; round?: string }
+export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' | 'pesquisa'; round?: string; atividade?: string }
 
 // App aberto de dentro de outra sessão do Claude (desktop, preview): as variáveis dela confundem o claude filho.
 const cleanEnv = () => (process.env.CLAUDE_CODE_ENTRYPOINT || process.env.CLAUDECODE
@@ -91,6 +92,7 @@ export function stopAi(slug: string) {
   if (process.platform === 'win32') spawnSync('taskkill', ['/pid', String(l.pid), '/t', '/f'], { windowsHide: true });
   else { try { process.kill(-l.pid, 'SIGTERM'); } catch { try { process.kill(l.pid, 'SIGTERM'); } catch { /* já saiu */ } } }
   rmSync(LOCK, { force: true });
+  if (l.atividade) AT.terminar(l.atividade, 'parado', { resumo: 'Parado por você' });
   if (l.kind === 'fichas' && l.slug) fechar(l.slug, { parado: true, inicio: l.started }); // o que já foi salvo sai da fila; o resto volta a pendente
   if (l.kind === 'pesquisa' && l.slug && l.round) PQ.fechar(l.slug, l.round, { parado: true, inicio: l.started }); // a rodada volta a pendente (dá para rodar de novo)
   if (l.task && l.slug === slug) {

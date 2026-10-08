@@ -62,7 +62,7 @@ async function adsModule(): Promise<AdsMod | null> {
 }
 
 /** roda a semana (não roda duas ao mesmo tempo); devolve o resumo */
-export async function runWeekly(slug: string, { ads = true } = {}) {
+export async function runWeekly(slug: string, { ads = true, onPasso }: { ads?: boolean; onPasso?: (t: string) => void } = {}) {
   const st = readState(slug);
   if (isRunning(st)) throw new Error('a coleta semanal já está rodando');
   const comps = S.listCompetitors(slug).filter((c) => c.data.status === 'ativo');
@@ -70,7 +70,7 @@ export async function runWeekly(slug: string, { ads = true } = {}) {
   const total = comps.length * (A ? 2 : 1);
   let done = 0;
   const started = new Date();
-  const tick = (current?: string) => writeState(slug, { ...readState(slug), running: { startedAt: started.toISOString(), done, total, current } });
+  const tick = (current?: string) => { writeState(slug, { ...readState(slug), running: { startedAt: started.toISOString(), done, total, current } }); if (current) onPasso?.(`${current} (${done + 1}/${total})`); };
   tick();
   const results: Record<string, CollectResult[]> = {};
   const adRes: Record<string, { ok: boolean; ads: number; errors: string[] }> = {};

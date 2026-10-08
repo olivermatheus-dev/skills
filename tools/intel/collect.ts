@@ -24,6 +24,8 @@ export interface CollectOptions {
   source?: Snapshot['source'];
   /** não baixar imagens */
   noMedia?: boolean;
+  /** andamento para o dock do app (046): qual rede está sendo puxada */
+  onPasso?: (t: string) => void;
 }
 
 const stampOf = (iso: string) => iso.slice(0, 19).replace(/:/g, '-'); // igual ao saveSnapshot do store
@@ -53,7 +55,11 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
   // perfis sem coletor (Facebook, LinkedIn, X, lojas) são só links de referência: não entram na coleta nem viram erro
   const profiles = comp.profiles.filter((p) => (opt.platforms?.length ? opt.platforms.includes(p.platform) : !!adapters[p.platform]));
 
-  const results = await Promise.all(profiles.map(async (p): Promise<CollectResult> => {
+  const redes = profiles.map((p) => p.platform).join(', ');
+  let prontos = 0;
+  const avisar = () => opt.onPasso?.(`Puxando ${redes} · ${prontos}/${profiles.length} perfis prontos`);
+  avisar();
+  const results = await Promise.all(profiles.map((p) => (async (): Promise<CollectResult> => {
     const key = keyFor(p);
     const res: CollectResult = { key, platform: p.platform, url: p.url, ok: false, items: 0, errors: [], warnings: [] };
     const adapter = adapters[p.platform];
@@ -82,7 +88,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
       res.errors.push(e instanceof S.ValidationError ? `dados inválidos: ${e.issues.slice(0, 3).join('; ')}` : String(e));
     }
     return res;
-  }));
+  })().finally(() => { prontos++; avisar(); })));
   // coleta feita (algum perfil ok) = módulo "redes" da análise atendido: sai da fila
   if (results.some((r) => r.ok) && !opt.runner) S.clearAnalysisRequest(slug, id, ['redes']);
   return results;

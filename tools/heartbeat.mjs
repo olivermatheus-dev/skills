@@ -17,6 +17,7 @@ import { spawnSync } from 'node:child_process';
 import { companies, boardDir, listTasks, nextId, updateTask, addComment, today } from './lib/board.mjs';
 import { listarPedidos, marcarRodando, escreverProgresso, fechar, promptFila } from './lib/fichas-fila.mjs';
 import * as PQ from './lib/pesquisa.mjs';
+import * as AT from './lib/atividade.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -90,7 +91,8 @@ function wake(t) {
   if (!RUN) { log(`[simulação] acordaria ${agent ? `agent:${agent}` : 'orquestrador'} → ${t.slug}/${t.id} ${t.title}`); return; }
   updateTask(t.path, { status: 'doing' }, `${today()} · heartbeat · acordou ${agent ? `agent:${agent}` : 'orquestrador'}`);
   log(`acordando ${agent ? `agent:${agent}` : 'orquestrador'} → ${t.slug}/${t.id} ${t.title}`);
-  writeLock({ slug: t.slug, task: t.id, title: t.title, who: agent ? `agent:${agent}` : 'ai' });
+  const at = AT.iniciar({ slug: t.slug, tipo: 'ia', fonte: 'quadro', titulo: `${t.id} · ${t.title}`, agente: agent ? `agent:${agent}` : 'orquestrador', passo: 'Abrindo o Claude Code', link: `/p/${t.slug}/quadro?t=${t.id}`, ref: t.id });
+  writeLock({ slug: t.slug, task: t.id, title: t.title, who: agent ? `agent:${agent}` : 'ai', atividade: at.id });
   // a saída vai direto para o log (dá para acompanhar enquanto roda)
   appendFileSync(LOG, `--- saída ${t.id} ---\n`);
   const from = statSync(LOG).size;
@@ -105,12 +107,18 @@ function wake(t) {
   const after = listTasks(t.slug).find((x) => x.id === t.id);
   if (r.status !== 0) log(`⚠ ${t.id}: claude saiu com código ${r.status}`);
   log(`${t.id} agora está em: ${after?.status} (${after?.assignee})`);
-  if (after?.status !== 'doing') return;
+  const COL = { todo: 'A fazer', doing: 'Fazendo', review: 'Revisão', done: 'Feito', backlog: 'Backlog' };
+  if (after?.status !== 'doing') {
+    if (r.status !== 0) AT.terminar(at.id, 'erro', { erro: `O Claude saiu com código ${r.status}.` });
+    else AT.terminar(at.id, 'feito', { resumo: `${t.id} foi para ${COL[after?.status] ?? after?.status}${after?.status === 'review' ? ': sua vez de revisar' : ''}` });
+    return;
+  }
   // falhou ou parou no meio: avisa no card e devolve para "A fazer" (entra de novo no próximo Rodar IA)
   const why = /not logged in|\/login/i.test(out)
     ? 'Falhou: Claude Code do terminal sem login (`claude` → `/login`).'
     : `Terminou sem mudar o status (código ${r.status}). ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}`;
   addComment(t.path, 'heartbeat', why, 'revisar');
+  AT.terminar(at.id, 'erro', { erro: why });
   if (r.status !== 0) updateTask(t.path, { status: 'todo' }, `${today()} · heartbeat · falhou (código ${r.status}); voltou para todo`);
 }
 
@@ -129,7 +137,8 @@ function runFichas(slug) {
   const fichasAllowed = [...ALLOWED, 'Bash(npm run fichas *)', 'Bash(npm run validate)', 'Bash(node tools/fichas-fila.mjs *)'];
   const cli = ['-p', '--permission-mode', PERMISSION, '--allowedTools', ...fichasAllowed, '--', promptFila(slug, rodada)];
   if (!RUN) { log(`[simulação] rodaria a fila de fichas da ${slug} (${n} item(ns))`); return; }
-  writeLock({ slug, kind: 'fichas', title: `Fila de fichas · ${n} conteúdo(s)`, who: 'ai' });
+  const at = AT.iniciar({ slug, tipo: 'ia', fonte: 'fichas', titulo: `Análise de ${n} conteúdo(s) de concorrentes`, agente: 'orquestrador', passo: 'Abrindo o Claude Code', link: `/p/${slug}/concorrentes/conteudos` });
+  writeLock({ slug, kind: 'fichas', title: `Fila de fichas · ${n} conteúdo(s)`, who: 'ai', atividade: at.id });
   escreverProgresso(slug, 'Abrindo o Claude Code');
   log(`fila de fichas → ${slug}: ${rodada.map((r) => `${r.comp} (${r.itens.join(', ')})`).join(' · ')}`);
   appendFileSync(LOG, '--- saída fichas ---\n');
@@ -145,6 +154,8 @@ function runFichas(slug) {
     : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
   const res = fechar(slug, { erro, inicio, rodada });
   log(`fila de fichas: ${res.feitos.length} analisado(s), ${res.restantes.length} continuam na fila${erro ? ` · ${erro}` : ''}`);
+  const resumo = `${res.feitos.length} analisado(s)${res.restantes.length ? `, ${res.restantes.length} continuam na fila` : ''}`;
+  AT.terminar(at.id, erro ? 'erro' : 'feito', { resumo, erro });
 }
 
 // ---------- pesquisa de ideias (041 F3) ----------
@@ -156,7 +167,8 @@ function runPesquisa(slug, round) {
   const cli = ['-p', '--permission-mode', PERMISSION, '--allowedTools', ...allowed, '--', PQ.promptPesquisa(slug, round)];
   if (!RUN) { log(`[simulação] rodaria a pesquisa ${round} da ${slug}`); return; }
   const inicio = new Date().toISOString();
-  writeLock({ slug, kind: 'pesquisa', round, title: `Pesquisa de ideias · ${round}`, who: 'ai' });
+  const at = AT.iniciar({ slug, tipo: 'ia', fonte: 'pesquisa', titulo: `Pesquisa de ideias · ${round}`, agente: 'pesquisador', passo: 'Abrindo o Claude Code', link: `/p/${slug}/ideias/pesquisas/${round}`, ref: round });
+  writeLock({ slug, kind: 'pesquisa', round, title: `Pesquisa de ideias · ${round}`, who: 'ai', atividade: at.id });
   PQ.marcarPedido(slug, round, 'rodando');
   log(`pesquisa de ideias → ${slug}/${round}`);
   appendFileSync(LOG, '--- saída pesquisa ---\n');
@@ -172,6 +184,7 @@ function runPesquisa(slug, round) {
     : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
   const res = PQ.fechar(slug, round, { erro, inicio });
   log(`pesquisa ${round}: ${res.feita ? 'feita' : `não terminou${res.erro ? ` · ${res.erro}` : ''}`}`);
+  AT.terminar(at.id, res.feita ? 'feito' : 'erro', res.feita ? { resumo: 'Pesquisa pronta' } : { erro: res.erro ?? erro ?? 'A pesquisa não terminou.' });
 }
 
 // ---------- batida ----------

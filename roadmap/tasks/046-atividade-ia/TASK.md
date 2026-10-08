@@ -1,7 +1,7 @@
 # 046 · Atividade da IA e das coletas no app (dock + página Agentes)
 
 > Pedido do Oliver em 2026-10-08: usar o app para quase tudo. Todo clique que aciona IA ou coleta (web scraping) precisa mostrar, no lugar do clique e no app inteiro, **o que está rodando, qual agente e em que passo**, e avisar quando termina. Toast minimizado com as ações em andamento (opacidade baixa navegando, volta ao passar o mouse) + página dedicada aos agentes (acordado, trabalhando, sessões, histórico).
-> Status: **análise feita, aguardando aval** (2026-10-08).
+> Status: **fase A feita** (2026-10-08). Próxima: B (passos de verdade pelo stream-json + Claude que não morre com o terminal).
 
 ## Diagnóstico (como funciona hoje)
 
@@ -62,3 +62,4 @@
 
 ## Log
 - 2026-10-08 · análise do fluxo app → orquestrador, inventário dos 12 pontos de disparo, plano A–F.
+- 2026-10-08 · **fase A feita** (aval do Oliver): registro `tools/lib/atividade.mjs` (+ `.d.mts`) em `logs/atividade/<id>.json` (fora do git, 30 dias); `core/atividade.ts` (vista do dock, visto, parar, `comAtividade`); rotas `/api/projects/:slug/atividade` (+ `/visto`, `/:id/parar`). Ligados: heartbeat (tarefa do quadro, fila de fichas com o passo do `fichas-fila.mjs progresso`, pesquisa), Puxar (passo por rede), anúncios, site, Reclame Aqui, coleta semanal (passo por concorrente), prévia de vídeo (passo por etapa), export de mockup. Dock `components/atividade/AtividadeDock.tsx` no Layout: pílula no canto (agente · passo · tempo, opacidade 55% → 100% no mouse, realce de 5 s quando algo começa/termina), lista com Abrir/Ver resultado, Parar (só o que está no lock) e dispensar; ao terminar recarrega os dados das telas; avisos sobem acima do dock; todo POST faz o dock conferir na hora. Processo morto = erro "parou no meio". Testado no app: coleta real (Corpora 4/4, 96 posts; Psicoplanner) vista em outras telas, Parar de um trabalho simulado, erro de processo morto. Não testado com `claude` de verdade (custo): o caminho do heartbeat é o mesmo que já rodou hoje, só ganhou o registro.
