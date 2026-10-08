@@ -69,6 +69,9 @@ import type { Gaps, GapTheme } from '../../schema/gaps';
 export type { Gaps, GapTheme };
 import type { Referencia } from '../../schema/referencia';
 export type { Referencia };
+import type { CuratedSource as Source, SourceSuggestion } from '../../schema/curadoria';
+export type { Source, SourceSuggestion };
+export interface StrategyRefs { pillars: { n: number; name: string }[]; series: { n: number; name: string; pillars: number[] }[] }
 export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
 export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; snapshotsTotal: number; marks: Record<string, ItemMark> }
 export interface DetectedLink { platform: string; url: string; handle?: string; externalId?: string; kind: 'perfil' | 'conteudo' }
@@ -120,6 +123,13 @@ export const api = {
   ideas: (slug: string) => req<Doc<Idea>[]>('GET', `${pj(slug)}/ideas`),
   createIdea: (slug: string, data: Partial<Idea> & { title: string }, body?: string) => req<Doc<Idea>>('POST', `${pj(slug)}/ideas`, { data, body }),
   saveIdea: (slug: string, id: string, data: Partial<Idea> & { title: string }, body?: string) => req<Doc<Idea>>('PUT', `${pj(slug)}/ideas/${id}`, { data, body }),
+  // curadoria (041 F1): fontes onde a IA procura ideias
+  sources: (slug: string) => req<Source[]>('GET', `${pj(slug)}/sources`),
+  createSource: (slug: string, s: Partial<Source> & { name: string; url: string }) => req<Source>('POST', `${pj(slug)}/sources`, s),
+  saveSource: (slug: string, id: string, s: Partial<Source> & { name: string; url: string }) => req<Source>('PUT', `${pj(slug)}/sources/${encodeURIComponent(id)}`, s),
+  setSourcesStatus: (slug: string, ids: string[], status: Source['status']) => req<Source[]>('POST', `${pj(slug)}/sources-status`, { ids, status }),
+  suggestSource: (slug: string, url: string) => req<SourceSuggestion>('POST', `${pj(slug)}/sources-suggest`, { url }),
+  strategyRefs: (slug: string) => req<StrategyRefs>('GET', `${pj(slug)}/strategy-refs`),
 
   contextList: (slug: string) => req<{ name: string; file: string }[]>('GET', `${pj(slug)}/context`),
   context: (slug: string, name: string) => req<{ name: string; text: string }>('GET', `${pj(slug)}/context/${encodeURIComponent(name)}`),

@@ -15,6 +15,7 @@
     "test:intel": "tsx tools/intel/test.ts",
     "intel:semanal": "tsx tools/intel/semanal.ts",
     "ads": "tsx tools/intel/ads-cli.ts",
+    "fichas": "tsx tools/fichas/cli.ts",
     "app:dev": "vite --config app/vite.config.ts",
     "brand": "tsx tools/brand.ts"
   },

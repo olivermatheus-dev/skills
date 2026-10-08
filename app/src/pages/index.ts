@@ -26,7 +26,10 @@ export const PAGES: PageDef[] = [
   { path: 'conteudos', label: 'Conteúdos', icon: Clapperboard, ...page(() => import('./Conteudos')) },
   { path: 'mockups', label: 'Mockups', icon: Smartphone, sidebar: 'recolhida', ...page(() => import('./Mockups')) },
   { path: 'formatos', label: 'Formatos', icon: LayoutTemplate, ...page(() => import('./Formatos')) },
-  { path: 'ideias', label: 'Ideias', icon: Lightbulb, ...page(() => import('./Ideas')) },
+  // área Ideias (041): banco na raiz; Fontes é aba com rota própria (Pesquisas chega na F3)
+  { path: 'ideias', label: 'Ideias', icon: Lightbulb, ...page(() => import('./Ideas')), children: [
+    { path: 'fontes', ...page(() => import('./Fontes')) },
+  ] },
   { path: 'personas', label: 'Personas', icon: UsersRound, ...page(() => import('./Personas')) },
   { path: 'anotacoes', label: 'Anotações', icon: NotebookPen, ...page(() => import('./Notes')) },
   { path: 'contexto', label: 'Contexto e marca', icon: Palette, ...page(() => import('./Context')) },

@@ -59,6 +59,14 @@ on('DELETE', '/api/projects/:slug/notes/:id', (p) => S.deleteNote(p.slug, p.id))
 on('GET', '/api/projects/:slug/ideas', (p) => S.listIdeas(p.slug));
 on('POST', '/api/projects/:slug/ideas', (p, b) => S.saveIdea(p.slug, b.data, b.body ?? ''));
 on('PUT', '/api/projects/:slug/ideas/:id', (p, b) => S.saveIdea(p.slug, { ...b.data, id: p.id }, b.body ?? ''));
+// Curadoria (041 F1): fontes onde a IA procura ideias (curadoria/fontes.json). status em lote = aceitar (ativa), recusar (arquivada), pausar
+const slugOk = (p: Params) => { if (!isSlug(p.slug) || (p.id !== undefined && !isSlug(p.id))) throw new S.ValidationError('curadoria', ['slug ou id inválido']); };
+on('GET', '/api/projects/:slug/sources', (p) => { slugOk(p); return S.listSources(p.slug); });
+on('POST', '/api/projects/:slug/sources', (p, b) => { slugOk(p); return S.saveSource(p.slug, b ?? {}); });
+on('PUT', '/api/projects/:slug/sources/:id', (p, b) => { slugOk(p); return S.saveSource(p.slug, { ...b, id: p.id }); });
+on('POST', '/api/projects/:slug/sources-status', (p, b) => { slugOk(p); return S.setSourcesStatus(p.slug, Array.isArray(b?.ids) ? b.ids.map(String) : [], b?.status); });
+on('POST', '/api/projects/:slug/sources-suggest', async (p, b) => { slugOk(p); return (await import('../../core/curadoria')).suggestSource(p.slug, String(b?.url ?? '')); });
+on('GET', '/api/projects/:slug/strategy-refs', (p) => { slugOk(p); return S.strategyRefs(p.slug); });
 
 // Contexto (markdown livre)
 on('GET', '/api/projects/:slug/context', (p) => S.listContext(p.slug));

@@ -13,12 +13,13 @@ import { nextSeqId, qk, realId, runOptimistic, trackCreate, upsertDoc, useCompet
 import { slugify } from '../../../core/platform';
 import { FICHA_TEMPLATE, FORMATS, OBJECTIVES, STATUSES, TONES, label, type Objective, type Status, type Tone } from '../components/ideas/meta';
 import { AppContent } from '../components/AppContent';
+import { IdeasTabs } from '../components/ideas/IdeasTabs';
 
 type View = 'quadro' | 'lista';
 const VIEW_KEY = 'hub:ideas:view';
 const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const today = () => new Date().toISOString().slice(0, 10);
-const blank = (): Doc<Idea> => ({ data: { id: '' as Idea['id'], title: '', status: 'nova', tags: [], created: today() }, body: FICHA_TEMPLATE, file: '' });
+const blank = (): Doc<Idea> => ({ data: { id: '' as Idea['id'], title: '', status: 'nova', tags: [], created: today(), origin: 'manual', refs: [] }, body: FICHA_TEMPLATE, file: '' });
 /** caminho relativo à pasta da empresa (como os links das tarefas) */
 const relToCompany = (file: string) => file.replace(/^companies\/[^/]+\//, '');
 
@@ -90,6 +91,7 @@ export default function Ideas() {
           <Button onClick={() => setOpen(blank())}>+ Nova ideia</Button>
         </>}
       />
+      <IdeasTabs className="-mt-2 mb-5" />
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
         <Input placeholder="Buscar…" value={f.q} onChange={(e) => setF({ ...f, q: e.target.value })} className="w-56" />

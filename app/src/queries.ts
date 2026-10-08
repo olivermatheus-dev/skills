@@ -13,6 +13,8 @@ export const qk = {
   personas: (slug: string) => ['personas', slug] as const,
   notes: (slug: string) => ['notes', slug] as const,
   ideas: (slug: string) => ['ideas', slug] as const,
+  sources: (slug: string) => ['sources', slug] as const,
+  strategyRefs: (slug: string) => ['strategy-refs', slug] as const,
   competitors: (slug: string) => ['competitors', slug] as const,
   competitor: (slug: string, id: string) => ['competitor', slug, id] as const,
   competitorsSummary: (slug: string) => ['competitors-summary', slug] as const,
@@ -45,6 +47,8 @@ export const q = {
   personas: (slug: string) => queryOptions({ queryKey: qk.personas(slug), queryFn: () => api.personas(slug), enabled: !!slug }),
   notes: (slug: string) => queryOptions({ queryKey: qk.notes(slug), queryFn: () => api.notes(slug), enabled: !!slug }),
   ideas: (slug: string) => queryOptions({ queryKey: qk.ideas(slug), queryFn: () => api.ideas(slug), enabled: !!slug }),
+  sources: (slug: string) => queryOptions({ queryKey: qk.sources(slug), queryFn: () => api.sources(slug), enabled: !!slug }),
+  strategyRefs: (slug: string) => queryOptions({ queryKey: qk.strategyRefs(slug), queryFn: () => api.strategyRefs(slug), enabled: !!slug, staleTime: 5 * 60_000 }),
   competitors: (slug: string) => queryOptions({ queryKey: qk.competitors(slug), queryFn: () => api.competitors(slug), enabled: !!slug }),
   // recém-criado (otimista): espera a criação e usa o id real
   competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: async () => api.competitor(slug, await realId('competitor', slug, id)), enabled: !!slug && !!id }),
@@ -80,6 +84,8 @@ export const useTasks = (slug: string) => useQuery(q.tasks(slug));
 export const usePersonas = (slug: string) => useQuery(q.personas(slug));
 export const useNotes = (slug: string) => useQuery(q.notes(slug));
 export const useIdeas = (slug: string) => useQuery(q.ideas(slug));
+export const useSources = (slug: string) => useQuery(q.sources(slug));
+export const useStrategyRefs = (slug: string) => useQuery(q.strategyRefs(slug));
 export const useCompetitors = (slug: string) => useQuery(q.competitors(slug));
 export const useCompetitor = (slug: string, id: string) => useQuery(q.competitor(slug, id));
 export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSummary(slug));
@@ -108,7 +114,7 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   '': (s) => [q.project(s), q.tasks(s), q.notes(s), q.ideas(s), q.competitors(s)],
   quadro: (s) => [q.tasks(s)],
   concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s), q.analysisOverview(s), q.analysisAll(s)],
-  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s)],
+  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s), q.sources(s)],
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],

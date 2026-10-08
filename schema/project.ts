@@ -16,6 +16,7 @@ export const Project = z.object({
 export type Project = z.infer<typeof Project>;
 
 /** companies/<slug>/tags.yml — vocabulário de tags do projeto (cor para a interface). */
-export const TagDef = z.object({ id: Slug, label: z.string().min(1), color: z.string().default('#888888') });
+/** `grupo` (opcional) = vocabulário do nicho usado pela ficha de análise (040): tema · angulo · publico. Tag sem grupo é tag comum. */
+export const TagDef = z.object({ id: Slug, label: z.string().min(1), color: z.string().default('#888888'), grupo: z.string().optional(), definicao: z.string().optional() });
 export const TagsFile = z.object({ tags: z.array(TagDef).default([]) });
 export type TagDef = z.infer<typeof TagDef>;

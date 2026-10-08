@@ -10,6 +10,7 @@ import {
   AnalysisResult, AnalysisRequest, AdsSnapshot, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
+  CuratedSource, SourceList, SourceStatus,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
@@ -761,6 +762,60 @@ export function renameMatrixGroup(slug: string, from: string, to: string) {
 const gapsFile = (slug: string) => join(company(slug), 'intel', 'brechas.json');
 export const getGaps = (slug: string): Gaps | null => (exists(gapsFile(slug)) ? readJson(Gaps, gapsFile(slug)) : null);
 
+// ---------- Curadoria: fontes (041) ----------
+const sourcesFile = (slug: string) => join(P.curadoria(slug), 'fontes.json');
+export const listSources = (slug: string): CuratedSource[] => (exists(sourcesFile(slug)) ? readJson(SourceList, sourcesFile(slug)) : []);
+function writeSources(slug: string, l: unknown[]) {
+  const v = check(SourceList, l, sourcesFile(slug));
+  writeJson(sourcesFile(slug), v);
+  return v;
+}
+/** Cria (sem `id` ou com `id` novo) ou atualiza uma fonte (merge com a gravada; `id` e `created` não mudam). */
+export function saveSource(slug: string, input: Partial<z.input<typeof CuratedSource>> & { name: string; url: string }) {
+  const all = structuredClone(listSources(slug));
+  const i = input.id ? all.findIndex((x) => x.id === input.id) : -1;
+  if (i >= 0) {
+    all[i] = { ...all[i], ...input, id: all[i].id, created: all[i].created } as CuratedSource;
+    return writeSources(slug, all)[i];
+  }
+  const base = slugify(input.id || input.name).slice(0, 40) || 'fonte';
+  let id = base, n = 2;
+  while (all.some((x) => x.id === id)) id = `${base}-${n++}`;
+  const v = writeSources(slug, [...all, { addedBy: 'oliver', status: 'ativa', trust: 2, access: { method: 'web' }, created: today(), ...input, id }]);
+  return v[v.length - 1];
+}
+/** aceitar (ativa), recusar (arquivada), pausar ou reativar várias de uma vez */
+export function setSourcesStatus(slug: string, ids: string[], status: SourceStatus) {
+  const st = SourceStatus.parse(status);
+  const set = new Set(ids);
+  return writeSources(slug, listSources(slug).map((s) => (set.has(s.id) ? { ...s, status: st } : s)));
+}
+/** pilares e séries numerados do CONTENT_STRATEGY.md (rótulos na tela e conferência no validate) */
+export function strategyRefs(slug: string) {
+  const f = join(P.context(slug), 'CONTENT_STRATEGY.md');
+  const out = { pillars: [] as { n: number; name: string }[], series: [] as { n: number; name: string; pillars: number[] }[] };
+  if (!exists(f)) return out;
+  let sec: 'pillars' | 'series' | null = null;
+  for (const line of read(f).split(/\r?\n/)) {
+    if (line.startsWith('## ')) { sec = /^## Pilares/i.test(line) ? 'pillars' : /^## S[ée]ries/i.test(line) ? 'series' : null; continue; }
+    const m = sec && line.match(/^\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|/);
+    if (!m) continue;
+    if (sec === 'pillars') out.pillars.push({ n: +m[1], name: m[2] });
+    else out.series.push({ n: +m[1], name: m[2], pillars: (m[3].match(/\d+/g) ?? []).map(Number) });
+  }
+  return out;
+}
+function checkSourcesRefs(slug: string) {
+  const list = listSources(slug), refs = strategyRefs(slug);
+  if (!refs.pillars.length && !refs.series.length) return;
+  const P_ = new Set(refs.pillars.map((p) => p.n)), S_ = new Set(refs.series.map((s) => s.n)), issues: string[] = [];
+  list.forEach((s, i) => {
+    for (const n of s.pillars) if (!P_.has(n)) issues.push(`${i}.pillars: pilar ${n} não existe no CONTENT_STRATEGY.md (${s.id})`);
+    for (const n of s.series) if (!S_.has(n)) issues.push(`${i}.series: série ${n} não existe no CONTENT_STRATEGY.md (${s.id})`);
+  });
+  if (issues.length) throw new ValidationError(sourcesFile(slug), issues);
+}
+
 // ---------- Validação geral ----------
 export function validateAll():{ file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
@@ -788,6 +843,7 @@ export function validateAll():{ file: string; issues: string[] }[] {
     if (exists(join(P.brand(d), 'mockups.json'))) tryIt(() => readJson(MockupBrand, join(P.brand(d), 'mockups.json')));
     if (exists(matrixFile(d))) tryIt(() => getMatrix(d));
     if (exists(gapsFile(d))) tryIt(() => getGaps(d));
+    if (exists(sourcesFile(d))) tryIt(() => checkSourcesRefs(d)); // curadoria (041): schema + pilares/séries existentes
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

@@ -1,0 +1,1200 @@
+[
+  {
+    "id": "scielo",
+    "name": "SciELO Brasil",
+    "url": "https://www.scielo.br/",
+    "type": "base-artigos",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      3,
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "A busca do site (https://search.scielo.org/) recusa robô (403): a rodada usa o OpenAlex filtrando periódicos SciELO; a busca do site fica com o subagente.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "pepsic",
+    "name": "PePSIC (Periódicos Eletrônicos em Psicologia)",
+    "url": "https://pepsic.bvsalud.org/",
+    "type": "base-artigos",
+    "language": "pt",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Redireciona para pepsic.scielo.org. Recusa robô (403): conferido no navegador; o subagente lê a página.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "pubmed",
+    "name": "PubMed",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/",
+    "type": "base-artigos",
+    "language": "en",
+    "access": {
+      "method": "api",
+      "adapter": "pubmed",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "API E-utilities, grátis.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "europepmc",
+    "name": "Europe PMC",
+    "url": "https://europepmc.org/",
+    "type": "base-artigos",
+    "language": "en",
+    "access": {
+      "method": "api",
+      "adapter": "europepmc",
+      "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "API grátis; site conferido no navegador.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "openalex",
+    "name": "OpenAlex",
+    "url": "https://api.openalex.org/works",
+    "type": "base-artigos",
+    "language": "multi",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      3,
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "API grátis. Também serve os periódicos brasileiros (filtro por fonte).",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "doaj",
+    "name": "DOAJ (acesso aberto)",
+    "url": "https://doaj.org/",
+    "type": "base-artigos",
+    "language": "multi",
+    "access": {
+      "method": "api",
+      "adapter": "doaj",
+      "endpoint": "https://doaj.org/api/search/articles/{q}",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crossref",
+    "name": "Crossref",
+    "url": "https://api.crossref.org/works",
+    "type": "base-artigos",
+    "language": "multi",
+    "access": {
+      "method": "api",
+      "adapter": "crossref",
+      "endpoint": "https://api.crossref.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [],
+    "series": [],
+    "tags": [
+      "verificacao"
+    ],
+    "trust": 3,
+    "weight": 1,
+    "status": "sugerida",
+    "notes": "Uso: verificar DOI e metadados das referências, não gerar ideia.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "pcp",
+    "name": "Psicologia: Ciência e Profissão (revista do CFP)",
+    "url": "https://www.scielo.br/j/pcp/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {
+        "openalexSource": "S2739370219"
+      }
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Via OpenAlex (fonte S2739370219, conferida).",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "ptp",
+    "name": "Psicologia: Teoria e Pesquisa",
+    "url": "https://www.scielo.br/j/ptp/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Via OpenAlex; o ID da fonte no OpenAlex entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "prc",
+    "name": "Psicologia: Reflexão e Crítica",
+    "url": "https://prc.springeropen.com/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Redireciona para link.springer.com/journal/41155. Via OpenAlex; o ID da fonte entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "estpsi",
+    "name": "Estudos de Psicologia (Campinas)",
+    "url": "https://www.scielo.br/j/estpsi/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "pusf",
+    "name": "Psico-USF",
+    "url": "https://www.scielo.br/j/pusf/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "rbtc",
+    "name": "Revista Brasileira de Terapias Cognitivas",
+    "url": "https://www.rbtc.org.br/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Subagente lê o site; alternativa: OpenAlex.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "rbp",
+    "name": "Brazilian Journal of Psychiatry",
+    "url": "https://www.scielo.br/j/rbp/",
+    "type": "periodico",
+    "language": "en",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Periódico brasileiro publicado em inglês. Via OpenAlex; o ID da fonte entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "jbpsiq",
+    "name": "Jornal Brasileiro de Psiquiatria",
+    "url": "https://www.scielo.br/j/jbpsiq/",
+    "type": "periodico",
+    "language": "pt",
+    "access": {
+      "method": "api",
+      "adapter": "openalex",
+      "endpoint": "https://api.openalex.org/works",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Via OpenAlex; o ID da fonte entra na fase 2.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "cochrane",
+    "name": "Cochrane Library",
+    "url": "https://www.cochranelibrary.com/",
+    "type": "base-artigos",
+    "language": "en",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Não conferido: o site mostrou verificação anti-robô (não contornada). Abra no navegador e decida se fica.",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "bvs-psi",
+    "name": "BVS-Psi",
+    "url": "https://www.bvs-psi.org.br/",
+    "type": "base-artigos",
+    "language": "pt",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Não conferido: o site não abriu. Abra no navegador e decida se fica.",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "semantic-scholar",
+    "name": "Semantic Scholar",
+    "url": "https://api.semanticscholar.org/",
+    "type": "base-artigos",
+    "language": "en",
+    "access": {
+      "method": "api",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Não conferido: respondeu 429 sem chave. A API pede chave para uso contínuo.",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "lancet-psy",
+    "name": "The Lancet Psychiatry",
+    "url": "https://www.thelancet.com/journals/lanpsy/home",
+    "type": "periodico",
+    "language": "en",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Não conferido: o site mostrou verificação anti-robô (não contornada).",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "apa-monitor",
+    "name": "APA Monitor on Psychology",
+    "url": "https://www.apa.org/monitor",
+    "type": "periodico",
+    "language": "en",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      4
+    ],
+    "series": [],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Não conferido: página vazia para robô (anti-robô).",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "cfp-noticias",
+    "name": "CFP: notícias",
+    "url": "https://site.cfp.org.br/noticias/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "rss",
+      "adapter": "rss",
+      "endpoint": "https://site.cfp.org.br/feed/",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6,
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "O feed traz os itens recentes.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "cfp-legislacao",
+    "name": "CFP: legislação",
+    "url": "https://site.cfp.org.br/legislacao/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Também: https://transparencia.cfp.org.br/legislacao/ (página a vigiar).",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "cfp-atos",
+    "name": "Atos oficiais do CFP",
+    "url": "https://atosoficiais.com.br/cfp",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "web",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [],
+    "series": [
+      6
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Não conferido: o site mostrou verificação anti-robô (não contornada).",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crepop",
+    "name": "CREPOP (referências técnicas do Sistema Conselhos)",
+    "url": "https://crepop.cfp.org.br/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4
+    ],
+    "series": [
+      6,
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crp-sp",
+    "name": "CRP-SP",
+    "url": "https://www.crpsp.org/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [
+      "crp"
+    ],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Home conferida; a página de notícias entra na fase 4 (crpsp.org/noticias deu 404).",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crp-rj",
+    "name": "CRP-RJ",
+    "url": "https://www.crprj.org.br/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [
+      "crp"
+    ],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Home conferida; a página de notícias entra na fase 4.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crp-mg",
+    "name": "CRP-MG",
+    "url": "https://crp04.org.br/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [
+      "crp"
+    ],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Home conferida; a página de notícias entra na fase 4.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crp-pr",
+    "name": "CRP-PR",
+    "url": "https://crppr.org.br/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [
+      "crp"
+    ],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Home conferida; a página de notícias entra na fase 4.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "crp-rs",
+    "name": "CRP-RS",
+    "url": "https://www.crprs.org.br/",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      6
+    ],
+    "tags": [
+      "crp"
+    ],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Home conferida; a página de notícias entra na fase 4.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "ms-noticias",
+    "name": "Ministério da Saúde: notícias",
+    "url": "https://www.gov.br/saude/pt-br/assuntos/noticias",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "Redireciona para /noticias-ms.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "ms-desmad",
+    "name": "Ministério da Saúde: Saúde Mental, Álcool e outras Drogas",
+    "url": "https://www.gov.br/saude/pt-br/composicao/saes/desmad",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 3,
+    "status": "sugerida",
+    "notes": "",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "opas",
+    "name": "OPAS/OMS: saúde mental",
+    "url": "https://www.paho.org/pt/topicos/saude-mental",
+    "type": "orgao-oficial",
+    "language": "pt",
+    "access": {
+      "method": "rss",
+      "adapter": "rss",
+      "endpoint": "https://www.paho.org/pt/rss.xml",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Feed geral da OPAS + página do tópico.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "oms",
+    "name": "OMS: mental health",
+    "url": "https://www.who.int/health-topics/mental-health",
+    "type": "orgao-oficial",
+    "language": "en",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      3,
+      12
+    ],
+    "tags": [],
+    "trust": 3,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "gnews",
+    "name": "Google Notícias (busca por consulta)",
+    "url": "https://news.google.com/",
+    "type": "noticia",
+    "language": "pt",
+    "access": {
+      "method": "rss",
+      "adapter": "google-news",
+      "endpoint": "https://news.google.com/rss/search?q={q}&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+      "filters": {}
+    },
+    "keywords": [
+      "\"Conselho Federal de Psicologia\"",
+      "\"saúde mental\" trabalho",
+      "terapia online",
+      "psicólogo autônomo"
+    ],
+    "pillars": [
+      2,
+      3,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Notícia é gatilho de pauta, não prova: a afirmação usa a fonte primária.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "agencia-brasil",
+    "name": "Agência Brasil: saúde",
+    "url": "https://agenciabrasil.ebc.com.br/saude",
+    "type": "noticia",
+    "language": "pt",
+    "access": {
+      "method": "rss",
+      "adapter": "rss",
+      "endpoint": "https://agenciabrasil.ebc.com.br/rss/saude/feed.xml",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Gatilho de pauta, não prova.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "veja-saude",
+    "name": "Veja Saúde",
+    "url": "https://saude.abril.com.br/",
+    "type": "noticia",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      6
+    ],
+    "series": [
+      3
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Página ou Google Notícias com site:saude.abril.com.br. Gatilho de pauta, não prova.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "folha-equilibrio",
+    "name": "Folha: Equilíbrio e Saúde",
+    "url": "https://www1.folha.uol.com.br/equilibrioesaude/",
+    "type": "noticia",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      6
+    ],
+    "series": [],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Paywall parcial; página ou Google Notícias. Gatilho de pauta, não prova.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "openlibrary",
+    "name": "Open Library",
+    "url": "https://openlibrary.org/",
+    "type": "livro-editora",
+    "language": "multi",
+    "access": {
+      "method": "api",
+      "adapter": "openlibrary",
+      "endpoint": "https://openlibrary.org/search.json?q={q}",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Série 12 só com aval de quem leu o livro.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "google-books",
+    "name": "Google Books",
+    "url": "https://www.googleapis.com/books/v1/volumes",
+    "type": "livro-editora",
+    "language": "multi",
+    "access": {
+      "method": "api",
+      "endpoint": "https://www.googleapis.com/books/v1/volumes?q={q}",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Não conferido: respondeu 429 sem chave. A API pede chave para uso contínuo.",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "grupo-a",
+    "name": "Grupo A (Artmed)",
+    "url": "https://loja.grupoa.com.br/",
+    "type": "livro-editora",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Série 12 só com aval de quem leu o livro.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "sinopsys",
+    "name": "Sinopsys Editora",
+    "url": "https://www.sinopsyseditora.com.br/",
+    "type": "livro-editora",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      4,
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Série 12 só com aval de quem leu o livro.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "summus",
+    "name": "Grupo Editorial Summus",
+    "url": "https://www.gruposummus.com.br/",
+    "type": "livro-editora",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Série 12 só com aval de quem leu o livro.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  },
+  {
+    "id": "vozes",
+    "name": "Editora Vozes",
+    "url": "https://www.vozes.com.br/",
+    "type": "livro-editora",
+    "language": "pt",
+    "access": {
+      "method": "pagina",
+      "adapter": "html-diff",
+      "filters": {}
+    },
+    "keywords": [],
+    "pillars": [
+      3,
+      6
+    ],
+    "series": [
+      12
+    ],
+    "tags": [],
+    "trust": 2,
+    "weight": 2,
+    "status": "sugerida",
+    "notes": "Série 12 só com aval de quem leu o livro.",
+    "verifiedAt": "2026-10-08",
+    "addedBy": "ai",
+    "created": "2026-10-08"
+  }
+]

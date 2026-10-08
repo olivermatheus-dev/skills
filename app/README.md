@@ -25,6 +25,7 @@ companies/<slug>/
   personas/<id>.md         persona tipada + corpo livre
   notes/<id>.md            anotações (markdown)
   ideas/I-NNNN-*.md        banco de ideias (tarefa 012)
+  curadoria/fontes.json    fontes onde a IA procura ideias (041; schema/curadoria.ts, tela Ideias → Fontes; sugestão ao colar link em core/curadoria.ts, sem IA)
   competitors/<id>/competitor.md · marks.json · snapshots/<plataforma>-<perfil>/<data>.json · media/ (fora do git)
                     analysis/<modulo>.json (último resultado de cada módulo) · pedido.json (fila da IA) · notas.json (anotações do Oliver)
                     site/*.md + extract.json + reclameaqui.json (texto extraído pelo script; fora do git, refazível)

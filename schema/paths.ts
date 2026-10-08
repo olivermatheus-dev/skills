@@ -16,6 +16,8 @@ export const P = {
   personas: (s: string) => join(company(s), 'personas'),
   notes: (s: string) => join(company(s), 'notes'),
   ideas: (s: string) => join(company(s), 'ideas'),
+  /** curadoria (041): fontes.json · referencias/R-NNNN.json · rodadas/<id>/ */
+  curadoria: (s: string) => join(company(s), 'curadoria'),
   competitors: (s: string) => join(company(s), 'competitors'),
   competitor: (s: string, id: string) => join(company(s), 'competitors', id),
   competitorFile: (s: string, id: string) => join(company(s), 'competitors', id, 'competitor.md'),

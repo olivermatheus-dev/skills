@@ -35,3 +35,6 @@ companies/*/contents/*mockup*/folha.png
 library/mockups/galeria/
 companies/*/capturas/*/analise.png
 library/mockups/exemplos/*/analise.png
+
+# pesados do preparo de fichas (040): áudio, quadros, legendas brutas; refazíveis com npm run fichas -- preparar
+data/intel/

@@ -16,3 +16,7 @@ export * from './ads';
 export * from './referencia';
 export * from './matrix';
 export * from './gaps';
+export * from './curadoria';
+export * from './vocabulario';
+export * from './ficha';
+export * from './relatorio';

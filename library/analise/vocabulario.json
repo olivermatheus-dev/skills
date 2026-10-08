@@ -1,0 +1,170 @@
+{
+  "versao": 1,
+  "atualizadoEm": "2026-10-08",
+  "grupos": {
+    "tipoConteudo": [
+      { "id": "educativo", "nome": "Educativo", "definicao": "Ensina algo aplicável (dica, passo a passo, explicação).", "sinais": ["3 erros", "como fazer", "passo a passo"] },
+      { "id": "identificacao", "nome": "Identificação", "definicao": "Cena reconhecível da rotina da psi; a pessoa pensa 'isso sou eu'.", "sinais": ["quando o paciente", "POV"] },
+      { "id": "humor", "nome": "Humor", "definicao": "Piada, meme ou esquete cujo fim é fazer rir.", "sinais": ["meme", "esquete", "trend"] },
+      { "id": "bastidor", "nome": "Bastidor", "definicao": "Mostra a equipe, o dia a dia da marca ou como o produto é feito." },
+      { "id": "prova", "nome": "Prova", "definicao": "Depoimento, resultado, número ou caso real de cliente.", "sinais": ["+X psicólogas", "depoimento"] },
+      { "id": "produto", "nome": "Produto", "definicao": "Mostra o produto ou uma funcionalidade em uso.", "sinais": ["tela do app", "demo"] },
+      { "id": "lancamento", "nome": "Lançamento", "definicao": "Anuncia produto, recurso ou evento novo." },
+      { "id": "oferta", "nome": "Oferta", "definicao": "Pede ação comercial: preço, teste, desconto, cupom.", "sinais": ["grátis", "cupom", "R$"] },
+      { "id": "posicionamento", "nome": "Posicionamento", "definicao": "Opinião sobre a profissão, ética ou política.", "exemplo": "Corpora: 'A psicologia está diretamente ligada à política'" },
+      { "id": "comunidade", "nome": "Comunidade", "definicao": "Pertencimento e mimo para a classe.", "exemplo": "Pack de Figurinhas para as PSICODIVAS" },
+      { "id": "noticia", "nome": "Notícia", "definicao": "CFP, lei, tendência ou 'URGENTE' sobre a profissão." },
+      { "id": "parceria-evento", "nome": "Parceria e evento", "definicao": "Evento, curso ou retiro em que a marca é parceira.", "exemplo": "Sintropia no Retiro Experiencial em ACT" },
+      { "id": "isca", "nome": "Isca", "definicao": "Ebook, modelo ou material para baixar em troca de contato.", "exemplo": "Mais Terapias: Canvas de Planejamento Terapêutico" }
+    ],
+    "gatilho": [
+      { "id": "identificacao", "nome": "Identificação", "definicao": "Cena reconhecível do dia a dia da psi.", "sinais": ["quando o paciente…", "POV do consultório"] },
+      { "id": "pertencimento", "nome": "Pertencimento", "definicao": "'Somos psis': tribo e linguagem interna.", "sinais": ["psis", "PSICODIVAS", "low profile"] },
+      { "id": "autoridade", "nome": "Autoridade", "definicao": "Especialista, CRP, CFP, advogada, docente.", "sinais": ["crachá", "título", "segundo a resolução…"] },
+      { "id": "prova-social", "nome": "Prova social", "definicao": "Colegas usam ou recomendam.", "sinais": ["+X psicólogas", "criador parceiro", "@ de psi"] },
+      { "id": "escassez", "nome": "Escassez", "definicao": "Quantidade limitada.", "sinais": ["últimas vagas"] },
+      { "id": "urgencia", "nome": "Urgência", "definicao": "Prazo.", "sinais": ["faltam poucas semanas", "só até…"] },
+      { "id": "exclusividade", "nome": "Exclusividade", "definicao": "Único, ou só para um grupo.", "sinais": ["único do Brasil", "exclusivo para psicólogas"] },
+      { "id": "curiosidade", "nome": "Curiosidade", "definicao": "Loop aberto, surpresa.", "sinais": ["o que será que…", "no fim…"] },
+      { "id": "reciprocidade", "nome": "Reciprocidade", "definicao": "Dá algo antes de pedir.", "sinais": ["pack", "ebook", "modelo grátis"] },
+      { "id": "gratuidade-sem-risco", "nome": "Gratuidade sem risco", "definicao": "Grátis, sem cartão, teste.", "sinais": ["plano gratuito sem prazo"] },
+      { "id": "ancoragem-preco", "nome": "Ancoragem de preço", "definicao": "Preço posto contra outra coisa.", "sinais": ["R$ 89 por tudo isso", "50% OFF"] },
+      { "id": "medo-de-perda", "nome": "Medo de perda", "definicao": "Multa, CFP, LGPD, prontuário errado, perder paciente.", "sinais": ["você pode ser processada"] },
+      { "id": "alivio-tempo", "nome": "Alívio de tempo", "definicao": "Menos burocracia, mais tempo para a clínica.", "sinais": ["menos trabalho repetitivo"] },
+      { "id": "contraste", "nome": "Contraste", "definicao": "Antes × depois, planilha × sistema.", "sinais": ["split", "eu antes / eu agora"] },
+      { "id": "humor-alivio", "nome": "Humor como alívio", "definicao": "Piada que alivia a tensão da profissão.", "sinais": ["meme", "esquete"] },
+      { "id": "indignacao-valores", "nome": "Indignação por valores", "definicao": "Posição moral que gera debate.", "sinais": ["quer você queira ou não"] },
+      { "id": "aspiracao", "nome": "Aspiração", "definicao": "Consultório e vida que a psi quer ter.", "sinais": ["estética", "rotina calma"] },
+      { "id": "compromisso", "nome": "Compromisso", "definicao": "Pede microação pública.", "sinais": ["comenta X", "salva para depois"] }
+    ],
+    "tipoGancho": [
+      { "id": "pergunta-direta", "nome": "Pergunta direta", "definicao": "Abre com uma pergunta ao espectador." },
+      { "id": "cena-da-dor", "nome": "Cena da dor", "definicao": "Abre mostrando o problema em ação." },
+      { "id": "pov-esquete", "nome": "POV / esquete", "definicao": "'POV: o paciente…' ou cena encenada.", "sinais": ["POV:"] },
+      { "id": "afirmacao-ousada", "nome": "Afirmação ousada", "definicao": "Frase contraintuitiva ou forte." },
+      { "id": "polemica", "nome": "Polêmica", "definicao": "Toma lado numa disputa da profissão." },
+      { "id": "numero-lista", "nome": "Número / lista", "definicao": "Promete uma lista numerada.", "sinais": ["3 erros…"] },
+      { "id": "chamado-de-identidade", "nome": "Chamado de identidade", "definicao": "Chama o público pelo rótulo.", "sinais": ["psicóloga que…"] },
+      { "id": "noticia-urgente", "nome": "Notícia urgente", "definicao": "Abre como notícia, prazo ou contagem regressiva." },
+      { "id": "curiosidade-loop", "nome": "Curiosidade em loop", "definicao": "Abre uma pergunta que só fecha no fim." },
+      { "id": "demonstracao-imediata", "nome": "Demonstração imediata", "definicao": "Tela do produto já nos 0 s." },
+      { "id": "humor-absurdo", "nome": "Humor absurdo", "definicao": "Abre com cena ou frase absurda para rir." },
+      { "id": "fala-de-terceiro", "nome": "Fala de terceiro", "definicao": "Depoimento ou criador falando." },
+      { "id": "promessa", "nome": "Promessa", "definicao": "Promete resultado. Sinaliza risco em saúde." },
+      { "id": "quebra-visual", "nome": "Quebra visual", "definicao": "Movimento ou imagem estranha, sem fala." },
+      { "id": "texto-mudo", "nome": "Texto mudo", "definicao": "Só texto na tela, com áudio de trend." }
+    ],
+    "canalGancho": [
+      { "id": "fala", "nome": "Fala", "definicao": "O gancho é dito." },
+      { "id": "texto-na-tela", "nome": "Texto na tela", "definicao": "O gancho é escrito sobre o vídeo/arte." },
+      { "id": "visual", "nome": "Visual", "definicao": "O gancho é a imagem." },
+      { "id": "audio-trend", "nome": "Áudio de trend", "definicao": "O gancho é o áudio reconhecível." },
+      { "id": "legenda", "nome": "Legenda", "definicao": "O gancho só existe na legenda (vídeo não analisado)." }
+    ],
+    "elemento5s": [
+      { "id": "texto-na-tela-0s", "nome": "Texto na tela em 0 s", "definicao": "Há texto legível no primeiro quadro." },
+      { "id": "rosto-close", "nome": "Rosto em close", "definicao": "Rosto enquadrado de perto nos primeiros segundos." },
+      { "id": "fala-em-menos-de-0-5s", "nome": "Fala em menos de 0,5 s", "definicao": "A voz entra sem respiro." },
+      { "id": "corte-rapido", "nome": "Corte rápido", "definicao": "Corte com menos de 1,5 s." },
+      { "id": "movimento-de-camera", "nome": "Movimento de câmera", "definicao": "Câmera ou zoom em movimento." },
+      { "id": "audio-trend-reconhecivel", "nome": "Áudio de trend reconhecível", "definicao": "Som que o público já conhece." },
+      { "id": "legenda-dinamica", "nome": "Legenda dinâmica", "definicao": "Legenda palavra a palavra." },
+      { "id": "promessa-do-que-vem", "nome": "Promessa do que vem", "definicao": "Diz o que será entregue." },
+      { "id": "pergunta-sem-resposta", "nome": "Pergunta sem resposta", "definicao": "Pergunta que segura até a resposta." },
+      { "id": "payoff-visual-imediato", "nome": "Payoff visual imediato", "definicao": "A imagem forte vem logo." },
+      { "id": "contraste-visual", "nome": "Contraste visual", "definicao": "Dois estados lado a lado." },
+      { "id": "rotulo-de-identidade", "nome": "Rótulo de identidade", "definicao": "Chama o público: 'psis, isso é para vocês'." },
+      { "id": "produto-na-tela", "nome": "Produto na tela", "definicao": "Interface do produto visível." }
+    ],
+    "estruturaMacro": [
+      { "id": "gancho-entrega-cta", "nome": "Gancho, entrega, CTA", "definicao": "Estrutura padrão de 3 partes." },
+      { "id": "problema-solucao", "nome": "Problema e solução", "definicao": "Mostra a dor e resolve." },
+      { "id": "lista", "nome": "Lista", "definicao": "Itens em sequência." },
+      { "id": "antes-depois", "nome": "Antes × depois", "definicao": "Dois estados em contraste." },
+      { "id": "historia-virada", "nome": "História com virada", "definicao": "Conta uma história e vira no fim." },
+      { "id": "esquete-punchline", "nome": "Esquete com punchline", "definicao": "Cena curta que termina na piada." },
+      { "id": "pergunta-resposta", "nome": "Pergunta e resposta", "definicao": "Pergunta feita, resposta dada." },
+      { "id": "demo-passo-a-passo", "nome": "Demo passo a passo", "definicao": "Mostra o produto em uso, em ordem." },
+      { "id": "loop-curto", "nome": "Loop curto", "definicao": "Vídeo de 5–10 s feito para rever." },
+      { "id": "comparacao", "nome": "Comparação", "definicao": "Duas opções lado a lado." },
+      { "id": "anuncio-evento", "nome": "Anúncio de evento", "definicao": "Data, local, vagas e chamada." }
+    ],
+    "estiloProducao": [
+      { "id": "ugc-celular", "nome": "UGC no celular", "definicao": "Gravado no celular, jeito de pessoa comum." },
+      { "id": "talking-head", "nome": "Pessoa falando", "definicao": "Uma pessoa fala para a câmera." },
+      { "id": "esquete", "nome": "Esquete", "definicao": "Cena encenada com personagens." },
+      { "id": "motion", "nome": "Motion", "definicao": "Animação gráfica." },
+      { "id": "gravacao-de-tela", "nome": "Gravação de tela", "definicao": "Captura da interface." },
+      { "id": "texto-sobre-fundo", "nome": "Texto sobre fundo", "definicao": "Texto sobre vídeo/imagem de fundo." },
+      { "id": "trend-audio", "nome": "Trend com áudio", "definicao": "Vídeo montado sobre áudio em alta." },
+      { "id": "foto", "nome": "Foto", "definicao": "Imagem estática fotográfica." },
+      { "id": "carrossel-design", "nome": "Carrossel de design", "definicao": "Slides desenhados." },
+      { "id": "corte-de-video-longo", "nome": "Corte de vídeo longo", "definicao": "Trecho de um vídeo/podcast maior." }
+    ],
+    "ctaTipo": [
+      { "id": "comentar-palavra", "nome": "Comentar palavra", "definicao": "Pede um comentário com palavra-chave." },
+      { "id": "link-bio", "nome": "Link na bio", "definicao": "Manda para o link do perfil." },
+      { "id": "salvar", "nome": "Salvar", "definicao": "Pede para salvar." },
+      { "id": "enviar", "nome": "Enviar", "definicao": "Pede para mandar a alguém." },
+      { "id": "seguir", "nome": "Seguir", "definicao": "Pede para seguir o perfil." },
+      { "id": "cadastro-teste", "nome": "Cadastro / teste", "definicao": "Pede cadastro ou teste do produto." },
+      { "id": "cupom", "nome": "Cupom", "definicao": "Oferece código de desconto." },
+      { "id": "whatsapp", "nome": "WhatsApp", "definicao": "Chama para conversar no WhatsApp." },
+      { "id": "nenhum", "nome": "Nenhum", "definicao": "Sem chamada para ação." }
+    ],
+    "produtoPresenca": [
+      { "id": "nenhuma", "nome": "Nenhuma", "definicao": "O produto não aparece." },
+      { "id": "rodape", "nome": "Rodapé", "definicao": "Só marca ou @ no fim." },
+      { "id": "sutil", "nome": "Sutil", "definicao": "Aparece no meio, sem ser o assunto." },
+      { "id": "central", "nome": "Central", "definicao": "O conteúdo é o produto." }
+    ],
+    "consciencia": [
+      { "id": "inconsciente", "nome": "Inconsciente", "definicao": "Não sabe que tem o problema." },
+      { "id": "problema", "nome": "Problema", "definicao": "Sabe do problema, não da solução." },
+      { "id": "solucao", "nome": "Solução", "definicao": "Sabe que existe solução, não do produto." },
+      { "id": "produto", "nome": "Produto", "definicao": "Conhece o produto, compara." },
+      { "id": "pronto", "nome": "Pronto", "definicao": "Pronto para comprar." }
+    ],
+    "tom": [
+      { "id": "leve-humor", "nome": "Leve e bem-humorado", "definicao": "Descontraído, piadista." },
+      { "id": "ironico", "nome": "Irônico", "definicao": "Sarcasmo." },
+      { "id": "acolhedor", "nome": "Acolhedor", "definicao": "Cuidadoso, empático." },
+      { "id": "tecnico", "nome": "Técnico", "definicao": "Preciso, com termos da área." },
+      { "id": "indignado-posicionamento", "nome": "Indignado / posicionado", "definicao": "Toma posição com força." },
+      { "id": "aspiracional", "nome": "Aspiracional", "definicao": "Mostra a vida desejada." },
+      { "id": "urgente", "nome": "Urgente", "definicao": "Apressa a decisão." }
+    ],
+    "som": [
+      { "id": "fala", "nome": "Fala", "definicao": "Há voz humana." },
+      { "id": "audio-trend", "nome": "Áudio de trend", "definicao": "Som em alta na plataforma." },
+      { "id": "trilha", "nome": "Trilha", "definicao": "Música de fundo." },
+      { "id": "sem-som", "nome": "Sem som", "definicao": "Mudo ou só ambiente." }
+    ],
+    "risco": [
+      { "id": "promessa-de-resultado", "nome": "Promessa de resultado", "definicao": "Promete efeito clínico." },
+      { "id": "exposicao-de-paciente", "nome": "Exposição de paciente", "definicao": "Mostra ou cita paciente identificável." },
+      { "id": "fala-sobre-conselho-sem-fonte", "nome": "Fala do conselho sem fonte", "definicao": "Cita CFP/CRP sem fonte." },
+      { "id": "humor-com-sofrimento", "nome": "Humor com sofrimento", "definicao": "Brinca com dor de paciente." },
+      { "id": "claim-sem-prova", "nome": "Claim sem prova", "definicao": "Afirma número ou resultado sem prova." }
+    ],
+    "autoria": [
+      { "id": "proprio", "nome": "Próprio", "definicao": "Feito pela própria marca." },
+      { "id": "colab", "nome": "Colaboração", "definicao": "Post colaborativo." },
+      { "id": "criador-parceiro", "nome": "Criador parceiro", "definicao": "Feito por criador contratado/parceiro." },
+      { "id": "repost", "nome": "Repost", "definicao": "Conteúdo de outra conta." }
+    ],
+    "provaTipo": [
+      { "id": "criador", "nome": "Criador", "definicao": "Criador apresenta." },
+      { "id": "depoimento", "nome": "Depoimento", "definicao": "Cliente fala." },
+      { "id": "numero", "nome": "Número", "definicao": "Estatística ou volume." },
+      { "id": "especialista", "nome": "Especialista", "definicao": "Profissional com título." },
+      { "id": "nenhuma", "nome": "Nenhuma", "definicao": "Sem prova." }
+    ],
+    "funil": [
+      { "id": "topo", "nome": "Topo", "definicao": "Atrai quem ainda não conhece." },
+      { "id": "meio", "nome": "Meio", "definicao": "Educa e compara." },
+      { "id": "fundo", "nome": "Fundo", "definicao": "Converte." }
+    ]
+  },
+  "recusados": []
+}

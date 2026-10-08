@@ -1,0 +1,36 @@
+tags:
+  # Grupo "tema": assunto do conteúdo do concorrente (ficha de análise, tarefa 040). Termo novo é proposto pela IA e aceito pelo Oliver.
+  - { id: rotina-do-consultorio, label: "Rotina do consultório", color: '#6366f1', grupo: tema, definicao: "Dia a dia de atender, organizar e fechar o mês na clínica." }
+  - { id: prontuario-e-registro, label: "Prontuário e registro", color: '#6366f1', grupo: tema, definicao: "Prontuário, evolução, documentos e registro das sessões." }
+  - { id: normas-cfp-lgpd, label: "Normas, CFP e LGPD", color: '#6366f1', grupo: tema, definicao: "Resoluções do conselho, sigilo e proteção de dados." }
+  - { id: financeiro-cobranca, label: "Financeiro e cobrança", color: '#6366f1', grupo: tema, definicao: "Preço da sessão, cobrança, recibo, imposto, fluxo de caixa." }
+  - { id: agenda-e-faltas, label: "Agenda e faltas", color: '#6366f1', grupo: tema, definicao: "Agendamento, lembretes, remarcação e falta do paciente." }
+  - { id: teorias-e-autores, label: "Teorias e autores", color: '#6366f1', grupo: tema, definicao: "Freud, Lacan, TCC, ACT e outras abordagens como assunto." }
+  - { id: saude-mental-da-psi, label: "Saúde mental da psi", color: '#6366f1', grupo: tema, definicao: "Cansaço, terapia da terapeuta, limites e autocuidado." }
+  - { id: posicionamento-politico, label: "Posicionamento político", color: '#6366f1', grupo: tema, definicao: "Opinião sobre a profissão, ética e política." }
+  - { id: evento-formacao, label: "Evento e formação", color: '#6366f1', grupo: tema, definicao: "Curso, retiro, congresso ou supervisão (a marca costuma ser parceira)." }
+  - { id: ferramentas-e-ia, label: "Ferramentas e IA", color: '#6366f1', grupo: tema, definicao: "Software, automação e inteligência artificial para a clínica." }
+  - { id: carreira-e-captacao, label: "Carreira e captação", color: '#6366f1', grupo: tema, definicao: "Conseguir pacientes, posicionar-se, crescer na profissão." }
+  - { id: memes-da-psi, label: "Memes da psi", color: '#6366f1', grupo: tema, definicao: "Humor interno da profissão sem outro assunto de fundo." }
+  - { id: comunidade-e-mimos, label: "Comunidade e mimos", color: '#6366f1', grupo: tema, definicao: "Pertencimento, figurinhas, packs e brindes para a classe." }
+  # Grupo "angulo": a promessa/motivo de compra de um anúncio (vocabulário da 037 §5.5).
+  - { id: dor-burocracia, label: "Dor da burocracia", color: '#f59e0b', grupo: angulo, definicao: "Papelada, planilha e retrabalho como dor." }
+  - { id: ganho-de-tempo, label: "Ganho de tempo", color: '#f59e0b', grupo: angulo, definicao: "Mais tempo livre ou para o paciente." }
+  - { id: carga-mental, label: "Carga mental", color: '#f59e0b', grupo: angulo, definicao: "Lembrar de tudo ao mesmo tempo; tirar peso da cabeça." }
+  - { id: preco-economia, label: "Preço e economia", color: '#f59e0b', grupo: angulo, definicao: "Preço baixo, desconto, economia frente a outro sistema." }
+  - { id: gratuito-sem-risco, label: "Grátis e sem risco", color: '#f59e0b', grupo: angulo, definicao: "Plano grátis, teste, sem cartão." }
+  - { id: ia-prontuario, label: "IA no prontuário", color: '#f59e0b', grupo: angulo, definicao: "IA que escreve ou resume o prontuário." }
+  - { id: sigilo-seguranca, label: "Sigilo e segurança", color: '#f59e0b', grupo: angulo, definicao: "LGPD, dado do paciente protegido." }
+  - { id: norma-cfp, label: "Norma do CFP", color: '#f59e0b', grupo: angulo, definicao: "Medo de descumprir resolução do conselho; prontuário obrigatório." }
+  - { id: autoridade, label: "Autoridade", color: '#f59e0b', grupo: angulo, definicao: "Especialista, advogada ou fundador dá o aval." }
+  - { id: identidade-psi, label: "Identidade psi", color: '#f59e0b', grupo: angulo, definicao: "Comunidade, 'somos psis'." }
+  - { id: comparacao, label: "Comparação", color: '#f59e0b', grupo: angulo, definicao: "Marketplace × autonomia, planilha × sistema." }
+  - { id: captacao-de-pacientes, label: "Captação de pacientes", color: '#f59e0b', grupo: angulo, definicao: "Promete trazer ou organizar novos pacientes." }
+  - { id: humor, label: "Humor", color: '#f59e0b', grupo: angulo, definicao: "O anúncio vende pelo riso." }
+  # Grupo "publico": para quem o conteúdo fala.
+  - { id: psicologo-autonomo, label: "Psicólogo(a) autônomo(a)", color: '#10b981', grupo: publico, definicao: "Atende em consultório próprio ou online; o público principal da Kzloo." }
+  - { id: estudante, label: "Estudante de psicologia", color: '#10b981', grupo: publico, definicao: "Graduação e estágio." }
+  - { id: recem-formado, label: "Recém-formado(a)", color: '#10b981', grupo: publico, definicao: "Começando a clinicar e a captar pacientes." }
+  - { id: clinica, label: "Clínica", color: '#10b981', grupo: publico, definicao: "Clínica com mais de um profissional." }
+  - { id: paciente, label: "Paciente", color: '#10b981', grupo: publico, definicao: "Quem faz terapia." }
+  - { id: outra-especialidade, label: "Outra especialidade", color: '#10b981', grupo: publico, definicao: "Nutri, fono, terapeuta ocupacional e afins." }
