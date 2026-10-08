@@ -1,7 +1,7 @@
 {
   "id": "duo",
   "nome": "Notebook + celular",
-  "descricao": "Notebook atrás e celular na frente: mostra que funciona nos dois. Precisa de print do celular em tela2.",
+  "descricao": "MacBook atrás e iPhone na frente (reais): mostra que funciona nos dois. Precisa de print do celular em tela2.",
   "telas": [
     "tela",
     "tela2"
@@ -9,20 +9,70 @@
   "precisa": [
     "tela2"
   ],
-  "transparente": true,
-  "animavel": true,
   "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "notebook"
+    },
+    "aparelho2": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "celular"
+    },
     "reflexo": {
       "tipo": "bool",
       "padrao": true
     },
-    "tema": {
+    "sombra": {
       "tipo": "opcao",
       "opcoes": [
-        "",
-        "claro"
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
       ],
-      "padrao": ""
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
     }
   },
   "formatos": [
@@ -31,5 +81,7 @@
     "9:16",
     "16:9"
   ],
+  "transparente": true,
+  "animavel": true,
   "preview": "preview.png"
 }

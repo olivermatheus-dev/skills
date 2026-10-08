@@ -1,0 +1,12 @@
+/* neutro.css — marca neutra (estilo Apple) para a galeria e os exemplos da biblioteca de mockups. Peças de empresa usam companies/<slug>/brand/brand.css. */
+:root{
+  --bg:#f5f5f7; --surface:#ffffff; --surface-2:#e8e8ed; --text:#1d1d1f; --ink:#000; --muted:#6e6e73; --border:#d2d2d7;
+  --primary:#0071e3; --accent:#0066cc; --accent-soft:#dbe9fb; --on-primary:#fff;
+  --pastel-lavender:#e4e0f5; --pastel-sage:#dcefe2; --pastel-sky:#d9e8f7; --ui-glow:#ffffff; --ui-subtle:#86868b; --ui-divider:#d2d2d7;
+  --font-heading:-apple-system,"SF Pro Display","Inter","Segoe UI Variable Display","Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:-apple-system,"SF Pro Text","Inter","Segoe UI Variable Text","Segoe UI",Roboto,Arial,sans-serif;
+  --font-accent:"New York","Iowan Old Style",Georgia,serif;
+  --weight-heading:700; --tracking-heading:-0.022em; --leading-heading:1.08;
+  --radius:18px; --radius-sm:12px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06); --shadow-md:0 8px 24px rgba(0,0,0,.08); --shadow-lg:0 20px 48px rgba(0,0,0,.12);
+}

@@ -1,0 +1,188 @@
+{
+  "empresa": "kz",
+  "escala": 3,
+  "composicoes": [
+    {
+      "id": "a1",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "liso",
+      "transparente": false,
+      "params": {
+        "aparelho": "notebook"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [],
+      "arquivo": "png/a1.png"
+    },
+    {
+      "id": "a2",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "gradiente",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador",
+        "angulo": "esquerda"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [],
+      "arquivo": "png/a2.png"
+    },
+    {
+      "id": "a3",
+      "template": "perspectiva",
+      "formato": "4:5",
+      "fundo": "brilho",
+      "transparente": false,
+      "params": {
+        "aparelho": "vidro"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [],
+      "arquivo": "png/a3.png"
+    },
+    {
+      "id": "a4",
+      "template": "zoom",
+      "formato": "4:5",
+      "fundo": "desfoque",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "zoom": "proxima-sessao",
+      "destaques": [],
+      "arquivo": "png/a4.png"
+    },
+    {
+      "id": "a5",
+      "template": "cards",
+      "formato": "4:5",
+      "fundo": "liso",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [
+        {
+          "regiao": "proxima-sessao"
+        },
+        {
+          "regiao": "atalhos"
+        }
+      ],
+      "arquivo": "png/a5.png"
+    },
+    {
+      "id": "a6",
+      "template": "anotacoes",
+      "formato": "4:5",
+      "fundo": "gradiente",
+      "transparente": false,
+      "params": {
+        "aparelho": "navegador"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [
+        {
+          "regiao": "proxima-sessao"
+        },
+        {
+          "regiao": "atalhos"
+        },
+        {
+          "regiao": "proximas-sessoes"
+        }
+      ],
+      "arquivo": "png/a6.png"
+    },
+    {
+      "id": "a7",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "brilho",
+      "transparente": false,
+      "params": {
+        "aparelho": "imac"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [],
+      "arquivo": "png/a7.png"
+    },
+    {
+      "id": "a8",
+      "template": "heroi",
+      "formato": "4:5",
+      "fundo": "desfoque",
+      "transparente": false,
+      "params": {
+        "aparelho": "sem-moldura",
+        "cantos": "grande",
+        "sombra": "flutuante"
+      },
+      "telas": {
+        "tela": {
+          "captura": "capturas/2026-10-07-painel-inicio"
+        }
+      },
+      "textos": {
+        "titulo": "Sua rotina, *num lugar só*"
+      },
+      "destaques": [],
+      "arquivo": "png/a8.png"
+    }
+  ],
+  "escolhidas": []
+}

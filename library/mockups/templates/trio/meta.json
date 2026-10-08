@@ -1,0 +1,100 @@
+{
+  "id": "trio",
+  "nome": "Ecossistema (notebook + tablet + celular)",
+  "descricao": "MacBook ao centro, iPad à esquerda e iPhone à direita, na mesma linha de chão. tela2 = celular, tela3 = tablet (opcional).",
+  "telas": [
+    "tela",
+    "tela2",
+    "tela3"
+  ],
+  "precisa": [
+    "tela2"
+  ],
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "notebook"
+    },
+    "aparelho2": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "celular"
+    },
+    "aparelho3": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "tablet"
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "preview": "preview.png"
+}

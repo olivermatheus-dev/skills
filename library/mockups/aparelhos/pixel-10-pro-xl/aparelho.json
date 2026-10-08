@@ -1,0 +1,39 @@
+{
+  "id": "pixel-10-pro-xl",
+  "nome": "Pixel 10 Pro XL",
+  "marca": "google",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "padrao",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "padrao",
+      "nome": "Obsidiana"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1472,
+      "altura": 3111,
+      "tela": {
+        "x": 57,
+        "y": 52,
+        "w": 1350,
+        "h": 2998
+      },
+      "raio": 148,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "padrao": "vertical-padrao.png"
+      },
+      "nativo": {
+        "w": 1344,
+        "h": 2992
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "AOSP / Android Studio, Apache 2.0. Pixel é marca do Google: não sugerir parceria."
+}

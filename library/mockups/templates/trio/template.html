@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · ecossistema</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Trio: notebook ao centro (tela), tablet à esquerda (tela3, ou a própria tela) e celular à direita (tela2). "Funciona em tudo."
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, t2 = MK.telas.tela2, t3 = MK.telas.tela3 || MK.telas.tela;
+  if (!t2) throw new Error('o template trio precisa de tela2 (print do celular); tela3 (tablet) é opcional');
+  const area = MK.cabecalho();
+  const reflexo = MK.p('reflexo', true);
+  const nb = MK.moldura(MK.p('aparelho', 'notebook'), t, { w: area.w * (MK.paisagem ? 0.66 : 0.8), h: area.h * 0.74 }, { reflexo });
+  const tab = MK.moldura(MK.p('aparelho3', 'tablet'), t3, { w: area.w * 0.42, h: nb.h * 0.82 }, { reflexo, orientacao: MK.p('orientacao3', 'vertical') });
+  const cel = MK.moldura(MK.p('aparelho2', 'celular'), t2, { w: area.w * 0.2, h: nb.h * 0.7 }, { reflexo });
+  const base = area.y + (area.h + nb.h) / 2 + nb.h * 0.02; // linha do chão
+  const nx = (MK.W - nb.w) / 2, ny = base - nb.h;
+  MK.chao(nb, nx, ny);
+  MK.colocar(nb, nx, ny, 5);
+  const tx = Math.max(area.x - tab.w * 0.04, nx - tab.w * 0.42), ty = base - tab.h + nb.h * 0.06;
+  MK.sombraChao(tx + tab.w * 0.06, ty + tab.h * 0.995, tab.w * 0.88, tab.w * 0.05, 0.9);
+  MK.colocar(tab, tx, ty, 7);
+  const cx = Math.min(area.x + area.w - cel.w * 0.96, nx + nb.w - cel.w * 0.55), cy = base - cel.h + nb.h * 0.09;
+  MK.sombraChao(cx + cel.w * 0.08, cy + cel.h * 0.995, cel.w * 0.84, cel.w * 0.08, 0.9);
+  MK.colocar(cel, cx, cy, 9);
+});
+</script>
+</body>
+</html>

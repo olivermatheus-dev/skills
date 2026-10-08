@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · perspectiva</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Perspectiva: 1 aparelho grande em ângulo 3D de apresentação (estilo keynote), sangrando pela borda; título alinhado à esquerda.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela;
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'vidro');
+  const classe = MK.classe(tipo);
+  const lado = MK.p('lado', 'direita'); // para onde o aparelho "olha"
+  const m = MK.margem;
+  const alto = MK.H / MK.W > 1.7;
+  const topo = alto ? Math.round(MK.H * 0.11) : m;
+  const ht = MK.titulo({ x: m, y: topo, w: (MK.W - 2 * m) * (MK.paisagem ? 0.42 : 1), alinhar: 'left' });
+  const yLivre = MK.paisagem ? m : ht ? topo + ht + m * 0.6 : m;
+  const livre = { x: m, y: yLivre, w: MK.W - m, h: MK.H - yLivre - (MK.paisagem ? m : 0) };
+  const escala = Number(MK.p('escala', classe === 'celular' ? 1 : MK.paisagem ? 1.02 : 1.3));
+  const ap = MK.moldura(tipo, t, { w: (MK.paisagem ? MK.W * 0.66 : livre.w) * escala, h: livre.h * escala * (classe === 'celular' ? 0.98 : 0.9) }, { angulo: lado === 'direita' ? 'heroi' : 'heroi-esq', reflexo: MK.p('reflexo', true), sombra: MK.p('sombra', 'dramatica') });
+  let x, y;
+  if (MK.paisagem) { x = MK.W * 0.42; y = (MK.H - ap.h) / 2 + MK.H * 0.05; }
+  else if (classe === 'celular') { x = (MK.W - ap.w) / 2 + MK.W * 0.06; y = livre.y + (livre.h - ap.h) / 2; }
+  else { x = livre.x + MK.W * 0.05; y = livre.y + MK.H * 0.02; }
+  MK.colocar(ap, lado === 'direita' ? x : MK.W - x - ap.w, y);
+});
+</script>
+</body>
+</html>

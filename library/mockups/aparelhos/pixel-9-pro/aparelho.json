@@ -1,0 +1,39 @@
+{
+  "id": "pixel-9-pro",
+  "nome": "Pixel 9 Pro",
+  "marca": "google",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "padrao",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "padrao",
+      "nome": "Obsidiana"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1408,
+      "altura": 2974,
+      "tela": {
+        "x": 57,
+        "y": 58,
+        "w": 1286,
+        "h": 2862
+      },
+      "raio": 174,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "padrao": "vertical-padrao.png"
+      },
+      "nativo": {
+        "w": 1280,
+        "h": 2856
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "AOSP / Android Studio, Apache 2.0. Pixel é marca do Google: não sugerir parceria."
+}

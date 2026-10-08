@@ -4,22 +4,26 @@
 <body>
 <script src="../../runtime/mockup.js"></script>
 <script>
-// Herói: 1 aparelho em destaque, título opcional em cima.
+// Herói: 1 aparelho em destaque (real, janela, tela ou vidro), título opcional em cima.
 MK.montar(async (MK) => {
   const t = MK.telas.tela;
-  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'navegador');
+  const tipo = MK.p('aparelho', MK.aparelhoPadrao(t));
+  const classe = MK.classe(tipo);
   const angulo = MK.p('angulo', 'frente');
   const area = MK.cabecalho();
-  const larga = t.w / t.h > 1.2 && tipo !== 'celular';
-  // retrato + tela larga: o aparelho cresce e sangra pela borda (padrão de mockup profissional); notebook só cresce
-  const sangria = Number(MK.p('sangria', MK.retrato && larga ? (tipo === 'notebook' ? 1.08 : angulo === 'frente' ? 1.22 : 1.32) : 1));
+  // retrato + tela larga numa janela/tela: cresce e sangra pela borda (padrão de mockup profissional); aparelho físico nunca sangra
+  const sangra = MK.retrato && t.w / t.h > 1.2 && (classe === 'janela' || classe === 'tela');
+  const sangria = Number(MK.p('sangria', sangra ? (angulo === 'frente' ? 1.22 : 1.32) : 1));
   const giro = angulo === 'frente' ? 1 : angulo === 'isometrico' ? 0.95 : 0.9;
-  const ap = MK.moldura(tipo, t, { w: area.w * giro * sangria, h: area.h * 0.94 * giro * Math.max(1, sangria * 0.9) }, { angulo, reflexo: MK.p('reflexo', true), tema: MK.p('tema', '') });
-  const centro = (MK.W - ap.w) / 2;
-  // ângulo "esquerda" afasta o lado direito: é ele que sangra; "direita", o esquerdo
-  const x = sangria > 1 && tipo !== 'notebook' && angulo !== 'isometrico' ? (angulo === 'direita' ? MK.W - area.x - ap.w : area.x) : centro;
+  const alto = classe === 'celular' ? 0.98 : 0.94;
+  // aparelho apoiado (notebook, iMac, monitor) no retrato: ocupa quase a largura toda (a margem lateral sobra de qualquer jeito)
+  const largura = ['notebook', 'desktop', 'monitor'].includes(classe) && MK.retrato ? MK.W * 0.94 : area.w;
+  const ap = MK.moldura(tipo, t, { w: largura * giro * sangria, h: area.h * alto * giro * Math.max(1, sangria * 0.9) }, { angulo, reflexo: MK.p('reflexo', classe !== 'tela'), tema: MK.p('tema', '') });
+  // "esquerda" afasta o lado direito: é ele que sangra; "direita", o esquerdo
+  const x = sangria > 1 && angulo !== 'isometrico' ? (angulo === 'direita' ? MK.W - area.x - ap.w : area.x) : (MK.W - ap.w) / 2;
   const y = area.y + (area.h - ap.h) / 2;
-  if (angulo !== 'isometrico') MK.sombraChao(x + ap.w * 0.06, y + ap.h + Math.min(ap.h * 0.04, 28), ap.w * 0.88);
+  if (ap.apoiado) MK.chao(ap, x, y);
+  else if (angulo === 'frente' && ap.sombra !== 'nenhuma') MK.sombraChao(x + ap.w * 0.12, y + ap.h * 1.03, ap.w * 0.76, ap.w * 0.07, 0.5);
   MK.colocar(ap, x, y);
 });
 </script>

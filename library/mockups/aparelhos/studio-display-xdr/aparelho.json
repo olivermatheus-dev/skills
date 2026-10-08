@@ -1,0 +1,40 @@
+{
+  "id": "studio-display-xdr",
+  "nome": "Studio Display XDR",
+  "marca": "apple",
+  "tipo": "monitor",
+  "padrao": {
+    "cor": "on-light-background",
+    "orientacao": "horizontal"
+  },
+  "cores": [
+    {
+      "id": "on-light-background",
+      "nome": "On Light Background"
+    },
+    {
+      "id": "on-dark-background",
+      "nome": "On Dark Background"
+    }
+  ],
+  "variantes": {
+    "horizontal": {
+      "largura": 5400,
+      "altura": 4160,
+      "tela": {
+        "x": 137,
+        "y": 137,
+        "w": 5126,
+        "h": 2886
+      },
+      "raio": 0,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "on-light-background": "horizontal-on-light-background.png",
+        "on-dark-background": "horizontal-on-dark-background.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

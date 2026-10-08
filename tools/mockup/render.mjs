@@ -24,7 +24,8 @@ const FORMATOS = { '1:1': [1080, 1080], '4:5': [1080, 1350], '9:16': [1080, 1920
 const t0 = Date.now();
 
 // ---------- argumentos ----------
-const BOOL = ['transparente', 'webp', 'listar', 'previews', 'substituir', 'sem-folha', 'reflexo', 'sem-reflexo'];
+const BOOL = ['sem-corte', 'transparente', 'webp', 'listar', 'previews', 'substituir', 'sem-folha', 'reflexo', 'sem-reflexo', 'galeria', 'sem-grao', 'generico'];
+const PARAMS_GLOBAIS = ['aparelho', 'angulo', 'tema', 'ampliacao', 'sombra', 'cantos', 'cor', 'orientacao', 'ajuste', 'chips', 'bolinhas', 'aparelho2', 'aparelho3'];
 const argv = process.argv.slice(2), opt = {}, pos = [];
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i];
@@ -44,11 +45,17 @@ if (opt.listar) {
   const cat = readJson(join(LIB, 'catalogo.json'));
   console.log('TEMPLATES (--template)');
   for (const t of templates()) console.log(`  ${t.id.padEnd(10)} ${t.descricao}${t.precisa.length ? `  [precisa: ${t.precisa.join(', ')}]` : ''}`);
-  console.log('APARELHOS (--aparelho)');
-  for (const a of cat.aparelhos) console.log(`  ${a.id.padEnd(12)} ${a.descricao} · ângulos: ${a.angulos.join(', ')}`);
-  console.log('FUNDOS (--fundo)');
-  for (const f of cat.fundos) console.log(`  ${f.id.padEnd(12)} ${f.descricao}`);
-  console.log('FORMATOS (--formato)  ' + Object.keys(cat.formatos).join(' · '));
+  console.log('APARELHOS (--aparelho): apelidos e desenhos');
+  for (const a of cat.aparelhos) console.log(`  ${a.id.padEnd(14)} ${a.descricao} · ângulos: ${a.angulos.join(', ')}`);
+  console.log('APARELHOS REAIS (--aparelho <id> --cor <cor> --orientacao <o>)');
+  for (const a of Object.values(aparelhosCfg())) console.log(`  ${a.id.padEnd(20)} ${a.tipo.padEnd(9)} ${Object.keys(a.variantes).join('/')} · cores: ${a.cores.map((c) => c.id).join(', ')}`);
+  console.log('FUNDOS (--fundo)  marca = tokens do brand.css · premium = paleta própria (a marca libera em brand/mockups.json)');
+  for (const f of cat.fundos) console.log(`  ${f.id.padEnd(14)} ${f.marca ? 'marca  ' : 'premium'} ${f.descricao}`);
+  console.log('SOMBRAS (--sombra)  ' + Object.keys(cat.sombras).join(' · '));
+  console.log('CANTOS (--cantos)   ' + Object.keys(cat.cantos).join(' · '));
+  console.log('ÂNGULOS (--angulo)  ' + Object.keys(cat.angulos).join(' · '));
+  console.log('AJUSTE (--ajuste)   ' + Object.keys(cat.ajustes).join(' · ') + '   · RECORTE: --recorte auto (sugestão do analisar.mjs) | <regiao> | x,y,w,h · --sem-corte');
+  console.log('FORMATOS (--formato)  ' + Object.keys(cat.formatos).join(' · ') + ' · escala padrão 3');
   process.exit(0);
 }
 
@@ -59,7 +66,9 @@ function loadCaptura(p, slug) {
   if (!existsSync(join(dir, 'captura.json')) && slug) dir = resolve(ROOT, 'companies', slug, p);
   if (!existsSync(join(dir, 'captura.json'))) fail(`captura não encontrada: ${p} (registre com tools/mockup/captura.mjs)`);
   const parts = rel(dir).split('/');
-  if (parts[0] !== 'companies') fail('a captura precisa estar em companies/<slug>/capturas/');
+  // telas de exemplo da biblioteca (galeria): caminho a partir da raiz, marca neutra (ou --empresa)
+  if (parts[0] === 'library') return { slug: slug ?? opt.empresa ?? null, rel: rel(dir), dir, nome: basename(dir), cap: readJson(join(dir, 'captura.json')) };
+  if (parts[0] !== 'companies') fail('a captura precisa estar em companies/<slug>/capturas/ (ou library/mockups/exemplos/)');
   return { slug: parts[1], rel: parts.slice(2).join('/'), dir, nome: basename(dir), cap: readJson(join(dir, 'captura.json')) };
 }
 const parseRef = (s) => (s && /^[\d.]+(,[\d.]+){3}$/.test(s) ? Object.fromEntries(s.split(',').map((v, i) => ['xywh'[i], Number(v)])) : s);
@@ -67,7 +76,10 @@ const parseRef = (s) => (s && /^[\d.]+(,[\d.]+){3}$/.test(s) ? Object.fromEntrie
 function regiao(ref, c) {
   if (ref == null) return undefined;
   let r = ref;
-  if (typeof ref === 'string') {
+  if (ref === 'auto') { // recorte sugerido pelo tools/mockup/analisar.mjs (bordas, barra do navegador/sistema, elemento cortado)
+    r = c.cap.sugestoes?.recorte;
+    if (!r) fail(`${c.rel}: sem recorte sugerido — rode node tools/mockup/analisar.mjs ${c.rel.startsWith('library') ? c.rel : 'companies/' + c.slug + '/' + c.rel}`);
+  } else if (typeof ref === 'string') {
     r = c.cap.regioes?.[ref];
     if (!r) fail(`região "${ref}" não existe em ${c.rel}/captura.json (tem: ${Object.keys(c.cap.regioes || {}).join(', ') || 'nenhuma'})`);
   }
@@ -76,6 +88,32 @@ function regiao(ref, c) {
   const out = frac ? { x: r.x * W, y: r.y * H, w: r.w * W, h: r.h * H } : { x: r.x, y: r.y, w: r.w, h: r.h };
   if (r.rotulo) out.rotulo = r.rotulo;
   return out;
+}
+
+// ---------- molduras realistas (calibradas por tools/mockup/aparelhos.mjs) ----------
+var _aps; // var: --listar usa antes da linha
+/** aparelho.json de cada moldura com imagens presentes + base file:// + máscara inline (data URL: mask-image não carrega file:// cruzado) */
+function aparelhosCfg() {
+  if (_aps) return _aps;
+  _aps = {};
+  const dir = join(LIB, 'aparelhos');
+  if (!existsSync(dir)) return _aps;
+  let faltando = 0;
+  for (const d of readdirSync(dir)) {
+    const f = join(dir, d, 'aparelho.json');
+    if (!existsSync(f)) continue;
+    const a = readJson(f);
+    const vs = Object.values(a.variantes);
+    if (!vs.every((v) => existsSync(join(dir, d, v.mascara)) && Object.values(v.arquivos).some((x) => existsSync(join(dir, d, x))))) { faltando++; continue; }
+    for (const v of vs) {
+      v.mascaraUrl = 'data:image/png;base64,' + readFileSync(join(dir, d, v.mascara)).toString('base64');
+      for (const [c, x] of Object.entries(v.arquivos)) if (!existsSync(join(dir, d, x))) delete v.arquivos[c];
+    }
+    a.base = pathToFileURL(join(dir, d)).href + '/';
+    _aps[a.id] = a;
+  }
+  if (faltando) console.log(`  ⚠ ${faltando} moldura(s) realista(s) sem imagem: node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar (até lá, celular/notebook saem genéricos)`);
+  return _aps;
 }
 
 // ---------- composição → configuração do runtime ----------
@@ -87,7 +125,7 @@ function montarCfg(comp, slug) {
     try { endereco = c.cap.url ? new URL(c.cap.url).host : undefined; } catch { /* url inválida: sem endereço */ }
     telas[slot] = {
       src: pathToFileURL(join(c.dir, c.cap.arquivo || 'original.png')).href,
-      recorte: regiao(s.recorte, c), ocultar: (c.cap.ocultar || []).map((o) => regiao(o, c)),
+      recorte: regiao(s.recorte ?? (comp.params?.semCorte || opt['sem-corte'] ? undefined : c.cap.sugestoes?.recorteSeguro), c), ocultar: (c.cap.ocultar || []).map((o) => regiao(o, c)),
       aparelho: c.cap.aparelho, dpr: c.cap.dpr || 1, url: endereco,
     };
   }
@@ -103,7 +141,8 @@ function montarCfg(comp, slug) {
   if (!W) fail(`formato inválido: ${comp.formato}`);
   return {
     cfg: {
-      brandCss: pathToFileURL(join(ROOT, 'companies', slug, 'brand', 'brand.css')).href,
+      brandCss: pathToFileURL(slug ? join(ROOT, 'companies', slug, 'brand', 'brand.css') : join(LIB, 'runtime', 'neutro.css')).href,
+      aparelhos: aparelhosCfg(),
       largura: W, altura: H, formato: comp.formato, fundo: comp.fundo, transparente: !!comp.transparente,
       params: comp.params || {}, textos: comp.textos || {}, telas, destaques, zoom: zoom ?? null,
     },
@@ -118,17 +157,26 @@ function alternativas(c, n, base) {
   const comRotulo = Object.entries(c.cap.regioes || {}).filter(([, r]) => r.rotulo).map(([k]) => k);
   const tela = { tela: { captura: c.rel } };
   const desk = c.cap.aparelho !== 'celular';
-  const ap = desk ? 'navegador' : 'celular';
-  const cand = [
-    desk ? { template: 'heroi', params: { aparelho: 'notebook', angulo: 'frente' } } : { template: 'heroi', params: { aparelho: 'celular', angulo: 'frente' } },
-    { template: 'heroi', params: { aparelho: ap, angulo: 'esquerda' } },
-    comRotulo.length && { template: 'zoom', params: { aparelho: ap }, zoom: comRotulo[0] },
-    comRotulo.length >= 2 && { template: 'cards', params: { aparelho: ap }, destaques: comRotulo.slice(0, base.formato === '16:9' ? 3 : 2).map((r) => ({ regiao: r })) },
-    comRotulo.length && { template: 'anotacoes', params: { aparelho: ap }, destaques: comRotulo.slice(0, 3).map((r) => ({ regiao: r })) },
-    desk ? { template: 'heroi', params: { aparelho: 'sem-moldura', angulo: 'isometrico' } } : { template: 'heroi', params: { aparelho: 'celular', angulo: 'direita', tema: 'claro' } },
-    { template: 'heroi', params: { aparelho: desk ? 'navegador' : 'celular', angulo: 'inclinado' } },
-    { template: 'recorte', transparente: true, formato: 'livre' },
-    desk && { template: 'heroi', params: { aparelho: 'notebook', angulo: 'direita' } },
+  const cand = desk ? [
+    { template: 'heroi', params: { aparelho: 'notebook' } },
+    { template: 'heroi', params: { aparelho: 'navegador', angulo: 'esquerda' } },
+    { template: 'perspectiva', params: { aparelho: 'vidro' } },
+    comRotulo.length && { template: 'zoom', params: { aparelho: 'navegador' }, zoom: comRotulo[0] },
+    comRotulo.length >= 2 && { template: 'cards', params: { aparelho: 'navegador' }, destaques: comRotulo.slice(0, base.formato === '16:9' ? 3 : 2).map((r) => ({ regiao: r })) },
+    comRotulo.length && { template: 'anotacoes', params: { aparelho: 'navegador' }, destaques: comRotulo.slice(0, 3).map((r) => ({ regiao: r })) },
+    { template: 'heroi', params: { aparelho: 'imac' } },
+    { template: 'heroi', params: { aparelho: 'sem-moldura', cantos: 'grande', sombra: 'flutuante' } },
+    { template: 'heroi', params: { aparelho: 'sem-moldura', angulo: 'isometrico' } },
+    { template: 'recorte', transparente: true, formato: 'livre', params: { cantos: 'grande' } },
+  ] : [
+    { template: 'heroi', params: { aparelho: 'celular' } },
+    { template: 'perspectiva', params: { aparelho: 'celular' } },
+    { template: 'heroi', params: { aparelho: 'celular', angulo: 'esquerda', cor: 'black' } },
+    comRotulo.length && { template: 'zoom', params: { aparelho: 'celular' }, zoom: comRotulo[0] },
+    comRotulo.length >= 2 && { template: 'cards', params: { aparelho: 'celular' }, destaques: comRotulo.slice(0, 2).map((r) => ({ regiao: r })) },
+    comRotulo.length && { template: 'anotacoes', params: { aparelho: 'celular' }, destaques: comRotulo.slice(0, 3).map((r) => ({ regiao: r })) },
+    { template: 'heroi', params: { aparelho: 'android' } },
+    { template: 'recorte', transparente: true, formato: 'livre', params: { cantos: 'ios' } },
   ].filter(Boolean);
   let fi = 0;
   return cand.slice(0, n).map((k, i) => {
@@ -146,10 +194,13 @@ function composicaoDasFlags(c) {
   const template = opt.template ?? 'heroi';
   if (!existsSync(join(LIB, 'templates', template, 'template.html'))) fail(`template "${template}" não existe (node tools/mockup/render.mjs --listar)`);
   const params = {};
-  for (const k of ['aparelho', 'angulo', 'tema', 'ampliacao']) if (opt[k] != null) params[k] = k === 'ampliacao' ? Number(opt[k]) : opt[k];
+  for (const k of PARAMS_GLOBAIS) if (opt[k] != null) params[k] = k === 'ampliacao' ? Number(opt[k]) : opt[k];
   if (opt['sem-reflexo']) params.reflexo = false;
+  if (opt['sem-grao']) params.grao = false;
+  if (opt.generico) params.realista = false;
   const telas = { tela: { captura: c.rel, ...(opt.recorte ? { recorte: parseRef(opt.recorte) } : {}) } };
   if (opt.tela2) telas.tela2 = { captura: loadCaptura(opt.tela2, c.slug).rel };
+  if (opt.tela3) telas.tela3 = { captura: loadCaptura(opt.tela3, c.slug).rel };
   return {
     id: opt.id ?? [template, params.aparelho, params.angulo, (opt.formato ?? '4:5').replace(':', 'x')].filter(Boolean).join('-'),
     template, formato: opt.formato ?? '4:5', fundo: opt.fundo ?? 'liso', transparente: !!opt.transparente, params, telas,
@@ -258,11 +309,11 @@ if (pecaDir) {
   if (existsSync(join(pasta, 'mockup.json')) && !opt.substituir) fail(`${rel(pasta)} já tem mockup.json: re-renderize com "node tools/mockup/render.mjs ${rel(pasta)}", ou use --substituir / outra --saida`);
   const base = { formato: opt.formato ?? '4:5', transparente: !!opt.transparente, textos: textosDasFlags() };
   const composicoes = opt.alternativas ? alternativas(c, Math.max(1, Math.min(9, Number(opt.alternativas))), base) : [composicaoDasFlags(c)];
-  mockup = { empresa: slug, ...(opt.objetivo ? { objetivo: opt.objetivo } : {}), escala: Number(opt.escala ?? 2), composicoes, escolhidas: [] };
+  mockup = { empresa: slug, ...(opt.objetivo ? { objetivo: opt.objetivo } : {}), escala: Number(opt.escala ?? 3), composicoes, escolhidas: [] };
 }
 
 // ---------- renderizar ----------
-const escala = mockup.escala ?? 2;
+const escala = mockup.escala ?? 3;
 const browser = await abrirNavegador();
 const itens = [];
 const capsUsadas = new Map();

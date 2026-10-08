@@ -1,0 +1,39 @@
+{
+  "id": "pixel-10",
+  "nome": "Pixel 10",
+  "marca": "google",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "padrao",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "padrao",
+      "nome": "Obsidiana"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1205,
+      "altura": 2535,
+      "tela": {
+        "x": 56,
+        "y": 52,
+        "w": 1086,
+        "h": 2430
+      },
+      "raio": 137,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "padrao": "vertical-padrao.png"
+      },
+      "nativo": {
+        "w": 1080,
+        "h": 2424
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "AOSP / Android Studio, Apache 2.0. Pixel é marca do Google: não sugerir parceria."
+}

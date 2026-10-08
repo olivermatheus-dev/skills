@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · leque de celulares</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Leque: 3 celulares — o do meio na frente (tela), os de trás inclinados (tela2, tela3). Clássico de app.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, t2 = MK.telas.tela2 || t, t3 = MK.telas.tela3 || t2;
+  if (!MK.telas.tela2) MK.aviso('leque com 1 print só: passe --tela2 e --tela3 (telas diferentes do app)');
+  const tipo = MK.p('aparelho', 'celular');
+  const area = MK.cabecalho();
+  const meio = MK.moldura(tipo, t, { w: area.w * (MK.paisagem ? 0.3 : 0.44), h: area.h * 0.92 }, { reflexo: true });
+  const lado = (tt) => MK.moldura(MK.p('aparelho2', tipo), tt, { w: meio.w * 0.9, h: meio.h * 0.9 }, { reflexo: true, sombra: 'flutuante' });
+  const e = lado(t2), d = lado(t3);
+  const cx = MK.W / 2, cy = area.y + area.h / 2;
+  const abre = Math.min(meio.w * 0.82, area.w / 2 - e.w * 0.42);
+  const giro = Number(MK.p('giro', 8));
+  MK.colocar(e, cx - abre - e.w / 2, cy - e.h / 2 + meio.h * 0.045, 4).el.style.transform = `rotateZ(${-giro}deg)`;
+  MK.colocar(d, cx + abre - d.w / 2, cy - d.h / 2 + meio.h * 0.045, 4).el.style.transform = `rotateZ(${giro}deg)`;
+  MK.sombraChao(cx - meio.w * 0.4, cy + meio.h * 0.52, meio.w * 0.8, meio.w * 0.07, 0.6);
+  MK.colocar(meio, cx - meio.w / 2, cy - meio.h / 2, 8);
+});
+</script>
+</body>
+</html>

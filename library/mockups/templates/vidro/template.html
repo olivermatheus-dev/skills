@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · vidro</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Vidro: a tela numa borda de vidro (o fundo atravessa, desfocado) + 1–2 destaques em cards de vidro flutuando. Pede fundo colorido.
+MK.montar(async (MK) => {
+  const t = MK.telas.tela, ds = (MK.cfg.destaques || []).slice(0, 2);
+  const cel = t.aparelho === 'celular';
+  const escuro = MK.fundoEscuro();
+  MK.params.chips = MK.p('chips', 'vidro');
+  const area = MK.cabecalho();
+  const tipo = MK.p('aparelho', cel ? 'celular' : 'vidro');
+  const empilha = ds.length && !MK.paisagem && !cel; // retrato: tela em cima, cards embaixo
+  const ap = MK.moldura(tipo, t, { w: cel ? area.w * 0.5 : area.w * (MK.paisagem && ds.length ? 0.7 : 1), h: area.h * (empilha ? 0.6 : 0.92) },
+    { tema: escuro ? 'escuro' : '', cantos: MK.p('cantos', 'grande'), sombra: MK.p('sombra', 'flutuante'), reflexo: false });
+  const ax = cel ? area.x + area.w * 0.04 : MK.paisagem && ds.length ? area.x : (MK.W - ap.w) / 2;
+  const ay = empilha ? area.y : area.y + (area.h - ap.h) / 2;
+  MK.colocar(ap, ax, ay, 5);
+  // cards de vidro: recorte da região com borda de vidro, sobrepondo a borda do aparelho
+  const tam = MK.tamChip();
+  const amp = Number(MK.p('ampliacao', MK.dpr >= 2 ? 1.6 : 1.25));
+  const zona = cel ? { x: ax + ap.w * 0.62, y: area.y, w: area.x + area.w - (ax + ap.w * 0.62), h: area.h }
+    : empilha ? { x: area.x, y: ay + ap.h * 0.7, w: area.w, h: area.y + area.h - (ay + ap.h * 0.7) }
+    : { x: ax + ap.w * 0.62, y: area.y, w: area.x + area.w - (ax + ap.w * 0.62), h: area.h };
+  const vertical = cel || !empilha;
+  ds.forEach((d, i) => {
+    const tc = MK.recorte(t, d);
+    const maxW = vertical ? zona.w : zona.w * (ds.length > 1 ? 0.62 : 0.8), maxH = vertical ? zona.h / ds.length * 0.72 : zona.h * 0.8;
+    let w = Math.min(maxW, tc.w * amp), h = w * tc.h / tc.w;
+    if (h > maxH) { h = maxH; w = h * tc.w / tc.h; }
+    const p = Math.max(8, w * 0.026), r = Math.round(Math.min(w, h) * 0.06);
+    const card = MK.el('div', 'mk-card-vidro' + (escuro ? ' mk-escuro' : ''), { width: w + 2 * p, height: h + 2 * p, padding: p, borderRadius: r + p });
+    const img = MK.imagem(tc, w, h); img.style.borderRadius = r + 'px'; card.appendChild(img);
+    card.style.boxShadow = 'inset 0 1px 0 rgb(255 255 255 / .8), ' + MK.boxShadow('dramatica', w);
+    const cw = w + 2 * p, ch = h + 2 * p;
+    const x = vertical ? zona.x + zona.w - cw : i % 2 ? zona.x + zona.w - cw : zona.x;
+    const y = vertical ? zona.y + zona.h * (ds.length > 1 ? (i ? 0.7 : 0.28) : 0.5) - ch / 2 : zona.y + (zona.h - ch) / 2 + (i ? zona.h * 0.12 : 0);
+    MK.colocar(card, x, y, 20 + i);
+    if (d.rotulo) {
+      const c = MK.chip(d.rotulo, tam, area.w * 0.8);
+      const b = MK.medir(c);
+      c.style.left = MK.clamp(x + cw - b.width - tam * 0.5, area.x, area.x + area.w - b.width) + 'px';
+      c.style.top = y - b.height * 0.55 + 'px'; c.style.zIndex = 30 + i;
+    }
+  });
+});
+</script>
+</body>
+</html>

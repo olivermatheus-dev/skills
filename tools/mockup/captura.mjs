@@ -6,6 +6,8 @@
 import { existsSync, mkdirSync, copyFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, extname, basename, resolve, relative } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { analisar, resumo } from './analisar.mjs';
+const BR = String.fromCharCode(10);
 
 const args = process.argv.slice(2);
 const flag = (n, d) => { const i = args.indexOf('--' + n); return i < 0 ? d : args[i + 1]; };
@@ -69,4 +71,9 @@ writeFileSync(join(dir, 'captura.json'), JSON.stringify(captura, null, 2) + '\n'
 console.log(`✓ ${relative(process.cwd(), resolve(dir))}  ${w}×${h} · ${aparelho} · dpr ${dpr}${flag('dpr') ? '' : ' (palpite)'} · cor ${captura.corDominante ?? '?'}`);
 if (dpr < 2) console.log('  ⚠ print em 1×: herói fica bom; zoom e cards ficam macios. Se puder, capture em 2–3× (zoom do navegador 200% ou DevTools).');
 if (!captura.dadosFicticios) console.log('  ⚠ dados reais na tela? Marque áreas em "ocultar" (borradas no render) ou rode com --ficticios se for conta demo. Sem isso a peça sai "nao-publicar".');
+// onde cortar (barra do navegador/sistema, rolagem, fio, elemento cortado): sugestão gravada no captura.json
+try {
+  const s = await analisar(resolve(dir));
+  console.log(resumo(s, dir).split(BR).map((l) => '  ' + l).join(BR));
+} catch (e) { console.log('  ⚠ análise de corte falhou: ' + e.message); }
 console.log(`  Próximo: node tools/mockup/render.mjs --captura ${dir.replace(/\\/g, '/')} --alternativas 6 --formato 4:5`);

@@ -1,0 +1,68 @@
+{
+  "id": "imac-24",
+  "nome": "iMac 24\"",
+  "marca": "apple",
+  "tipo": "desktop",
+  "padrao": {
+    "cor": "silver",
+    "orientacao": "horizontal"
+  },
+  "cores": [
+    {
+      "id": "silver",
+      "nome": "Silver"
+    },
+    {
+      "id": "blue",
+      "nome": "Blue"
+    },
+    {
+      "id": "green",
+      "nome": "Green"
+    },
+    {
+      "id": "pink",
+      "nome": "Pink"
+    },
+    {
+      "id": "purple",
+      "nome": "Purple"
+    },
+    {
+      "id": "orange",
+      "nome": "Orange"
+    },
+    {
+      "id": "yellow",
+      "nome": "Yellow"
+    }
+  ],
+  "variantes": {
+    "horizontal": {
+      "largura": 4760,
+      "altura": 4050,
+      "tela": {
+        "x": 137,
+        "y": 147,
+        "w": 4486,
+        "h": 2526
+      },
+      "raio": 0,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "silver": "horizontal-silver.png",
+        "blue": "horizontal-blue.png",
+        "green": "horizontal-green.png",
+        "pink": "horizontal-pink.png",
+        "purple": "horizontal-purple.png",
+        "orange": "horizontal-orange.png",
+        "yellow": "horizontal-yellow.png"
+      }
+    }
+  },
+  "apelidos": [
+    "imac",
+    "desktop-real"
+  ],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

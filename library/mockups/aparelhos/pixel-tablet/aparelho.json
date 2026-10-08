@@ -1,0 +1,39 @@
+{
+  "id": "pixel-tablet",
+  "nome": "Pixel Tablet",
+  "marca": "google",
+  "tipo": "tablet",
+  "padrao": {
+    "cor": "padrao",
+    "orientacao": "horizontal"
+  },
+  "cores": [
+    {
+      "id": "padrao",
+      "nome": "Obsidiana"
+    }
+  ],
+  "variantes": {
+    "horizontal": {
+      "largura": 2798,
+      "altura": 1837,
+      "tela": {
+        "x": 116,
+        "y": 114,
+        "w": 2566,
+        "h": 1606
+      },
+      "raio": 27,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "padrao": "horizontal-padrao.png"
+      },
+      "nativo": {
+        "w": 2560,
+        "h": 1600
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "AOSP / Android Studio, Apache 2.0. Pixel é marca do Google: não sugerir parceria."
+}

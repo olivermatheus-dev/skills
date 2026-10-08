@@ -1,31 +1,39 @@
 ---
 name: mockup
-description: "Transforma um print (ou captura) do produto em mockups profissionais prontos: aparelhos (navegador, notebook, celular, sem moldura), ângulos 3D, fundos da marca, zoom no detalhe, cards flutuando, anotações com seta, recorte com fundo transparente, em 1:1, 4:5, 9:16, 16:9 ou livre. Gera alternativas já aplicadas com folha de contato. Use quando o usuário pedir mockup, 'coloca esse print num celular/notebook', 'deixa esse print bonito', 'mockup 3D', 'print com fundo transparente', 'zoom nessa parte da tela', 'mostra que a agenda é simples', 'imagem do produto para LP/anúncio/post', ou arrastar/colar um print do produto."
+description: "Transforma um print (ou captura) do produto em mockups premium prontos: iPhone, iPad, MacBook, iMac, Studio Display e Pixel reais (molduras oficiais calibradas, todas as cores), janela macOS, vidro (glassmorphism), ângulos 3D, fundos da marca e premium, sombras em camadas, cantos, zoom no detalhe, cards, anotações, duo/trio/leque/pilha/perspectiva, recorte com fundo transparente, em alta (3×). Detecta onde cortar o print (barra do navegador/sistema, rolagem, elemento cortado). Gera alternativas com folha de contato. Use quando o usuário pedir mockup, 'coloca esse print num iPhone/MacBook/celular/notebook', 'deixa esse print bonito', 'mockup 3D', 'print com fundo transparente', 'zoom nessa parte da tela', 'mostra que a agenda é simples', 'imagem do produto para LP/anúncio/post', ou arrastar/colar um print do produto."
 ---
 
 # Mockup
 
-Motor: `tools/mockup/` + `library/mockups/` (README = comandos e contrato). **O Claude escolhe, o script compõe**: nunca desenhe aparelho, fundo ou composição à mão; use os templates. Custo baixo = ler o catálogo (texto), rodar 1 comando e, no máximo, olhar **1 folha de contato**.
+Motor: `tools/mockup/` + `library/mockups/` (README = comandos, catálogo e contrato; galeria visual em `library/mockups/galeria/index.html`). **O Claude escolhe, o script compõe**: nunca desenhe aparelho, fundo ou composição à mão; use os templates. Custo baixo = ler o catálogo (`render.mjs --listar`, texto), rodar 1 comando e, no máximo, olhar **1 folha de contato** e **1 analise.png**.
 
 ## Entradas
 - O print: arquivo solto (no chat, `_inbox/visual/`, `brand/screenshots/`) ou captura já registrada em `companies/<slug>/capturas/`.
 - `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `brand/mockups.json` (fundos permitidos). Os tokens vêm sozinhos do `brand.css`.
 - Texto de título/rótulo: do pedido, do `peca.json` (`notes`) ou do `context/COPY.md`. **Nunca invente número, preço ou promessa.**
+- Molduras reais ausentes (máquina nova)? `node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar`.
 
 ## Processo
-1. **Registrar o print** (se ainda não é captura): `node tools/mockup/captura.mjs <arquivo> --empresa <slug> --nome <tela> [--dpr N] [--ficticios]`. O script mede tamanho, aparelho e cor; você não abre a imagem.
-2. **Dados sensíveis (obrigatório):** tela com nome, e-mail ou telefone de pessoa real → marque `ocultar` no `captura.json` (px da imagem; borrado no render) ou peça um print de conta demo. Só com dados fictícios confirmados pelo Oliver ponha `dadosFicticios: true`; até lá a peça sai `nao-publicar`. Na kz: só conta demo com pacientes fictícios.
-3. **Regiões** (só se o pedido precisa de zoom, cards ou anotações e o `captura.json` não tem): olhe a imagem **uma vez** (ou recortes com grade do ffmpeg) e grave `regioes` com `rotulo` curto e factual (o que a tela mostra, sem promessa).
-4. **Escolher o caminho:**
-   - **Pedido explícito** ("iPhone, fundo transparente, 4:5") → 1 comando com `--template … --aparelho … --fundo … --formato …`, zero imagem lida. Confira só o terminal (QA).
-   - **Só objetivo** ("mostrar que a agenda é simples") → `--alternativas 6 --formato <f> [--titulo "…"] --objetivo "…"` → leia **só** `folha.png` → escolha 2–3 que servem ao objetivo, grave em `escolhidas` no `mockup.json` e explique em 1 linha cada.
+1. **Registrar o print** (se ainda não é captura): `node tools/mockup/captura.mjs <arquivo> --empresa <slug> --nome <tela> [--dpr N] [--ficticios]`. O script mede tamanho, aparelho e cor **e analisa onde cortar**; você não abre o print.
+2. **Cortes:** leia o resumo do terminal. Cortes de confiança alta (fio, rolagem) já entram sozinhos. Se houver corte de confiança **média** (barra do navegador/sistema, sobra vazia), olhe **só** a `analise.png` (vermelho sai, verde fica) e decida: usar `--recorte auto`, ajustar `sugestoes.recorte` no `captura.json` ou ignorar. Aviso de "elemento cortado sem vão perto": dentro de aparelho é natural; em `recorte`/`sem-moldura` peça outro print ou corte manual.
+3. **Dados sensíveis (obrigatório):** tela com nome, e-mail ou telefone de pessoa real → marque `ocultar` no `captura.json` (px da imagem; borrado no render) ou peça um print de conta demo. Só com dados fictícios confirmados pelo Oliver ponha `dadosFicticios: true`; até lá a peça sai `nao-publicar`. Na kz: só conta demo com pacientes fictícios.
+4. **Regiões** (só se o pedido precisa de zoom, cards, vidro, anotações ou pilha e o `captura.json` não tem): olhe a imagem **uma vez** e grave `regioes` com `rotulo` curto e factual (o que a tela mostra, sem promessa).
+5. **Escolher o caminho:**
+   - **Pedido explícito** ("iPhone preto, fundo transparente, 4:5") → 1 comando com `--template … --aparelho … --cor … --fundo … --formato …`, zero imagem lida. Confira só o terminal (QA).
+   - **Só objetivo** ("mostrar que a agenda é simples") → `--alternativas 8 --formato <f> [--titulo "…"] --objetivo "…"` → leia **só** `folha.png` → escolha 2–3 que servem ao objetivo, grave em `escolhidas` no `mockup.json` e explique em 1 linha cada.
    - **Ajuste** → edite o `mockup.json` (params, fundo, textos, regiões) e rode `node tools/mockup/render.mjs <pasta> --so <ids>`.
-5. **QA** (o script avisa; você decide): print esticado → reduza `--ampliacao` ou peça captura em 2–3×; texto fora da área segura → encurte o rótulo/título; título no 9:16 respeita topo 10% e base 18%. Ênfase do título: `*palavra*` (cor de destaque) ou `_palavra_` (serifa itálica), 1 por título.
-6. **Entregar**: a peça fica em `companies/<slug>/contents/<data>-mockup-<tela>/` (`mockup.json`, `peca.json` tipo `mockup`, `png/`). Grave `principal` no `peca.json` com a escolhida. Para LP/anúncio peça `--transparente` (+ `--formato livre` no `recorte`) e `--webp` se for web.
+6. **QA** (o script avisa; você decide): print esticado → reduza `--ampliacao` ou peça captura em 2–3×; texto fora da área segura → encurte; título no 9:16 respeita topo 10% e base 18%; desktop dentro do celular → outro template. Ênfase do título: `*palavra*` (cor de destaque) ou `_palavra_` (serifa itálica), 1 por título.
+7. **Entregar**: a peça fica em `companies/<slug>/contents/<data>-mockup-<tela>/` (`mockup.json`, `peca.json` tipo `mockup`, `png/` em 3×). Grave `principal` no `peca.json` com a escolhida. Para LP/anúncio peça `--transparente` (+ `--formato livre` no `recorte`) e `--webp` se for web.
+
+## Escolhas que dão resultado premium
+- **Aparelho real por padrão** (`celular`, `notebook`, `tablet` já viram iPhone/MacBook/iPad). Marca que não quer Apple/Google → `--generico`. Cor do aparelho combinando com a peça: `--cor` (iPhone 18 Pro: silver, black, glacier, burgundy…).
+- **Desktop**: `notebook` (apoiado, sombra de chão) ou `navegador` (janela macOS sangrando no 4:5). Web app largo: o ajuste automático estende a base sem cortar a direita.
+- **Impacto/capa**: `perspectiva` (ângulo keynote, sombra dramática). **Funciona em tudo**: `duo`/`trio`. **Vários fluxos do app**: `leque` (celular) ou `pilha`.
+- **Vidro** só sobre fundo colorido (aurora, macos, gelo, malha); em fundo liso não aparece.
+- Fundos premium (paleta própria) só se a marca liberar; na kz o padrão é liso creme (`brand/mockups.json`).
 
 ## Regras
-- Formatos: post 4:5 (padrão), story/reels 9:16, LP 16:9 ou livre transparente, quadrado 1:1. Escala 2 padrão; 3 só para impressão/LP grande.
-- Desktop no celular não: o template `duo` e o aparelho `celular` pedem print de celular (o script avisa).
-- Fundo da peça: o primeiro de `brand/mockups.json` é o padrão da marca (kz: liso creme).
+- Formatos: post 4:5 (padrão), story/reels 9:16, LP 16:9 ou livre transparente, quadrado 1:1. Escala 3 padrão; 4 só para impressão/LP retina grande.
+- Molduras Apple/Google: só para mostrar o produto (sem alterar o aparelho, sem sugerir parceria).
 - Ficou bom e serve de novo → anote no `TASK.md` da 028 para virar template/parâmetro (fase E), não copie HTML para a peça.
-- Templates novos, aparelhos novos e animações são fases C–E da tarefa 028: não improvise fora do contrato do `library/mockups/README.md`.
+- Templates novos, animações e 3D de verdade são fases C–E da tarefa 028: não improvise fora do contrato do `library/mockups/README.md`.

@@ -1,0 +1,74 @@
+{
+  "id": "pilha",
+  "nome": "Pilha de telas",
+  "descricao": "Até 3 telas em cascata 3D. Atrás: tela2/tela3 ou os destaques recortados. Para 'tudo num lugar só'.",
+  "telas": [
+    "tela",
+    "tela2",
+    "tela3"
+  ],
+  "precisa": [
+    "tela2 ou destaques"
+  ],
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "sem-moldura",
+        "celular",
+        "vidro"
+      ],
+      "padrao": "sem-moldura · celular"
+    },
+    "angulo": {
+      "tipo": "opcao",
+      "opcoes": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado",
+        "isometrico",
+        "heroi",
+        "heroi-esq"
+      ],
+      "padrao": "heroi"
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "preview": "preview.png"
+}

@@ -1,23 +1,27 @@
 {
   "id": "heroi",
   "nome": "Herói com 1 aparelho",
-  "descricao": "1 aparelho em destaque (frente ou em ângulo 3D), título opcional em cima. O curinga.",
+  "descricao": "1 aparelho em destaque (real, janela, vidro ou tela), frente ou ângulo 3D, título opcional. O curinga.",
   "telas": [
     "tela"
   ],
   "precisa": [],
-  "transparente": true,
-  "animavel": true,
   "params": {
     "aparelho": {
       "tipo": "opcao",
       "opcoes": [
         "navegador",
-        "notebook",
+        "vidro",
+        "sem-moldura",
         "celular",
-        "sem-moldura"
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
       ],
-      "padrao": "navegador (celular se o print for de celular)"
+      "padrao": "celular (print de celular) · tablet · navegador (desktop)"
     },
     "angulo": {
       "tipo": "opcao",
@@ -26,7 +30,9 @@
         "esquerda",
         "direita",
         "inclinado",
-        "isometrico"
+        "isometrico",
+        "heroi",
+        "heroi-esq"
       ],
       "padrao": "frente"
     },
@@ -41,8 +47,43 @@
         "claro",
         "escuro"
       ],
-      "padrao": "",
-      "nota": "celular claro / navegador escuro"
+      "padrao": ""
+    },
+    "orientacao": {
+      "tipo": "opcao",
+      "opcoes": [
+        "vertical",
+        "horizontal"
+      ],
+      "padrao": "pelo print"
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
     }
   },
   "formatos": [
@@ -51,5 +92,7 @@
     "9:16",
     "16:9"
   ],
+  "transparente": true,
+  "animavel": true,
   "preview": "preview.png"
 }

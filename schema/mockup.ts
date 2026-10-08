@@ -33,6 +33,15 @@ export const Capture = z.object({
   regioes: z.record(Slug, NamedRegion).default({}),
   data: IsoDate,
   notas: z.string().optional(),
+  /** gerado por tools/mockup/analisar.mjs: onde cortar (barra do navegador/sistema, rolagem, fio, elemento cortado). Usar com --recorte auto */
+  sugestoes: z.object({
+    recorte: MockupRegion,
+    /** só os cortes de confiança alta: o render aplica sozinho quando a composição não pede outro recorte (--sem-corte desliga) */
+    recorteSeguro: MockupRegion.optional(),
+    cortes: z.array(z.object({ lado: z.enum(['topo', 'base', 'esquerda', 'direita']), px: z.number(), motivo: z.string(), confianca: z.enum(['alta', 'media']) })).default([]),
+    avisos: z.array(z.string()).default([]),
+    analisadoEm: z.string().optional(),
+  }).optional(),
 });
 export type Capture = z.infer<typeof Capture>;
 
@@ -58,8 +67,8 @@ export type MockupComposition = z.infer<typeof MockupComposition>;
 export const Mockup = z.object({
   empresa: Slug,
   objetivo: z.string().optional(),
-  /** densidade do render (2 = padrão, 3 = máxima) */
-  escala: z.number().min(1).max(4).default(2),
+  /** densidade do render (3 = padrão: 4:5 sai 3240×4050; 4 = impressão/LP retina grande) */
+  escala: z.number().min(0.25).max(4).default(3),
   composicoes: z.array(MockupComposition).min(1),
   /** ids que o Oliver (ou a IA) escolheu entre as alternativas */
   escolhidas: z.array(Slug).default([]),

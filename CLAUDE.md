@@ -44,7 +44,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `content-ideas` | pautas, calendário, engenharia reversa de criadores |
 | `ig-post` | roteiro de carrossel, reels, post e legenda |
 | `carousel` | gerar o carrossel em HTML e exportar PNG |
-| `mockup` | print → mockups prontos (aparelho, ângulo 3D, fundo, zoom, cards, anotações, transparente), alternativas + folha de contato |
+| `mockup` | print → mockups premium em 3× (iPhone/iPad/MacBook/iMac/Pixel reais, vidro, perspectiva, duo/trio/leque/pilha, zoom, cards, anotações, transparente), sugere cortes no print, alternativas + folha de contato · galeria: `node tools/mockup/galeria.mjs` |
 | `ads-meta` | criar e analisar anúncios Meta/Instagram |
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
 | `launch-plan` | plano de lançamento semana a semana |

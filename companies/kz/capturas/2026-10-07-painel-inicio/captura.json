@@ -61,5 +61,31 @@
     }
   },
   "data": "2026-10-07",
-  "notas": "Print do painel (Início) da conta do Oliver, 1×. Nomes e e-mails reais borrados em \"ocultar\"; \"Paciente Teste QA\" é fictício. Rótulos das regiões = rascunho, o Oliver ajusta."
+  "notas": "Print do painel (Início) da conta do Oliver, 1×. Nomes e e-mails reais borrados em \"ocultar\"; \"Paciente Teste QA\" é fictício. Rótulos das regiões = rascunho, o Oliver ajusta.",
+  "sugestoes": {
+    "recorte": {
+      "x": 0,
+      "y": 2,
+      "w": 1855,
+      "h": 965
+    },
+    "recorteSeguro": {
+      "x": 0,
+      "y": 2,
+      "w": 1855,
+      "h": 965
+    },
+    "cortes": [
+      {
+        "lado": "topo",
+        "px": 2,
+        "motivo": "fio de 2 px na beirada (borda de janela/print)",
+        "confianca": "alta"
+      }
+    ],
+    "avisos": [
+      "print em 1× (1855×967): fica macio em zoom/cards e acima de ~2504 px na peça — capture com zoom 200% (ou dpr 2–3)"
+    ],
+    "analisadoEm": "2026-10-07T23:50:45Z"
+  }
 }

@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><title>Mockup · celular + notebook</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<head><meta charset="utf-8"><title>Mockup · notebook + celular</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
 <body>
 <script src="../../runtime/mockup.js"></script>
 <script>
-// Duo: notebook atrás (tela) + celular na frente à direita (tela2 = print do celular).
+// Duo: notebook atrás (tela) + celular na frente à direita (tela2 = print do celular). Aparelhos reais por padrão.
 MK.montar(async (MK) => {
   const t = MK.telas.tela, t2 = MK.telas.tela2;
   if (!t2) throw new Error('o template duo precisa de tela2 (print do celular)');
   const area = MK.cabecalho();
   const reflexo = MK.p('reflexo', true);
-  const nb = MK.moldura('notebook', t, { w: area.w * 0.84, h: area.h * 0.82 }, { reflexo });
-  const cel = MK.moldura('celular', t2, { w: area.w * 0.3, h: nb.h * 0.92 }, { reflexo, tema: MK.p('tema', '') });
-  const total = nb.w + cel.w * 0.42;
+  const nb = MK.moldura(MK.p('aparelho', 'notebook'), t, { w: area.w * (MK.paisagem ? 0.8 : 0.9), h: area.h * 0.8 }, { reflexo });
+  const cel = MK.moldura(MK.p('aparelho2', 'celular'), t2, { w: area.w * 0.3, h: nb.h * 0.86 }, { reflexo, tema: MK.p('tema', '') });
+  const total = nb.w + cel.w * 0.38;
   const x0 = (MK.W - total) / 2;
-  const y0 = area.y + (area.h - nb.h) / 2 + nb.h * 0.04;
-  MK.sombraChao(x0 + nb.w * 0.05, y0 + nb.h + 18, nb.w * 0.9);
+  const y0 = area.y + (area.h - nb.h) / 2 - nb.h * 0.02;
+  MK.chao(nb, x0, y0);
   MK.colocar(nb, x0, y0, 5);
-  const cy = Math.max(area.y, y0 + nb.h - cel.h + cel.h * 0.05);
-  MK.sombraChao(x0 + nb.w - cel.w * 0.5, cy + cel.h + 10, cel.w * 0.9);
-  MK.colocar(cel, x0 + nb.w - cel.w * 0.58, cy, 8);
+  const cx = x0 + nb.w - cel.w * 0.62, cy = y0 + nb.h - cel.h + nb.h * 0.05;
+  MK.sombraChao(cx + cel.w * 0.08, cy + cel.h * 0.995, cel.w * 0.84, cel.w * 0.08, 0.9);
+  MK.colocar(cel, cx, cy, 8);
 });
 </script>
 </body>

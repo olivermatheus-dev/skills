@@ -1,0 +1,69 @@
+{
+  "origem": "print",
+  "arquivo": "original.png",
+  "largura": 1206,
+  "altura": 2622,
+  "dpr": 3,
+  "aparelho": "celular",
+  "tags": [
+    "exemplo"
+  ],
+  "dadosFicticios": true,
+  "ocultar": [],
+  "regioes": {
+    "resumo": {
+      "x": 54,
+      "y": 0,
+      "w": 1098,
+      "h": 181,
+      "rotulo": "Resumo do dia num olhar"
+    },
+    "agenda": {
+      "x": 54,
+      "y": 570,
+      "w": 1098,
+      "h": 1156,
+      "rotulo": "Agenda de hoje com confirmação"
+    },
+    "semana": {
+      "x": 54,
+      "y": 229,
+      "w": 1098,
+      "h": 292,
+      "rotulo": "Semana inteira em 1 linha"
+    },
+    "grafico": {
+      "x": 54,
+      "y": 1726,
+      "w": 1098,
+      "h": 567,
+      "rotulo": "Atendimentos do mês"
+    }
+  },
+  "data": "2026-10-07",
+  "notas": "Tela de exemplo da galeria (app fictício \"Rotina\", dados inventados). Refazer: node tools/mockup/exemplos.mjs",
+  "sugestoes": {
+    "recorte": {
+      "x": 0,
+      "y": 132,
+      "w": 1206,
+      "h": 2490
+    },
+    "cortes": [
+      {
+        "lado": "topo",
+        "px": 9,
+        "motivo": "fio de 9 px na beirada (borda de janela/print)",
+        "confianca": "alta"
+      },
+      {
+        "lado": "topo",
+        "px": 123,
+        "motivo": "texto cortado pela beirada (topo): recuei até o vão vazio mais próximo",
+        "confianca": "alta"
+      }
+    ],
+    "avisos": [],
+    "analisadoEm": "2026-10-07T23:48:38Z"
+  }
+}

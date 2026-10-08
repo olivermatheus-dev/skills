@@ -1,0 +1,40 @@
+{
+  "_nota": "Fontes das molduras realistas (tarefa 028). As imagens NÃO vão para o git (licença: uso em marketing, sem redistribuir): node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar. Só os aparelho.json (geometria calibrada) ficam versionados.",
+  "pacotes": {
+    "apple": {
+      "base": "https://devimages-cdn.apple.com/design/resources/download/",
+      "arquivos": ["Bezel-iPhone-18", "Bezel-iPhone-17", "Bezel-iPhone-Duo", "Bezel-iPad-Pro-(M5)", "Bezel-MacBook-Pro-M5", "Bezel-MacBook-Air-M5", "Bezel-iMac-M4", "Bezel-Studio-Displays"],
+      "formato": "dmg (7-Zip extrai os PNG)",
+      "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+    },
+    "android": {
+      "base": "https://android.googlesource.com/platform/tools/adt/idea/+/refs/heads/mirror-goog-studio-main/artwork/resources/device-art-resources/",
+      "pastas": ["pixel_10_pro", "pixel_10_pro_xl", "pixel_10", "pixel_9_pro", "pixel_tablet"],
+      "formato": "back.webp + mask.webp + layout (Android Studio device art)",
+      "licenca": "AOSP / Android Studio, Apache 2.0. Pixel é marca do Google: não sugerir parceria."
+    }
+  },
+  "modelos": [
+    { "id": "iphone-18-pro", "nome": "iPhone 18 Pro", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-18/PNG/iPhone 18 Pro", "padrao": "Silver", "cores": ["Silver", "Black", "Glacier", "Burgundy"], "orientacoes": ["Portrait", "Landscape"], "padrao_de": ["iphone", "celular-real"] },
+    { "id": "iphone-18-pro-max", "nome": "iPhone 18 Pro Max", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-18/PNG/iPhone 18 Pro Max", "padrao": "Silver", "cores": ["Silver", "Black", "Glacier", "Burgundy"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "iphone-17-pro", "nome": "iPhone 17 Pro", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-17/PNG/iPhone 17 Pro", "padrao": "Silver", "cores": ["Silver", "Deep Blue", "Cosmic Orange"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "iphone-17-pro-max", "nome": "iPhone 17 Pro Max", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-17/PNG/iPhone 17 Pro Max", "padrao": "Silver", "cores": ["Silver", "Deep Blue", "Cosmic Orange"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "iphone-17", "nome": "iPhone 17", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-17/PNG/iPhone 17", "padrao": "White", "cores": ["White", "Black", "Lavender", "Mist Blue", "Sage"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "iphone-air", "nome": "iPhone Air", "marca": "apple", "tipo": "celular", "pasta": "Bezel-iPhone-17/PNG/iPhone Air", "padrao": "Cloud White", "cores": ["Cloud White", "Space Black", "Sky Blue", "Light Gold"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "iphone-duo", "nome": "iPhone Duo (aberto)", "marca": "apple", "tipo": "dobravel", "pasta": "Bezel-iPhone-Duo/PNG", "prefixo": "iPhone Duo", "padrao": "Star White", "cores": ["Star White", "Night Sky"], "orientacoes": ["Inner Open Portrait", "Inner Open Landscape", "Outer Closed Portrait"] },
+    { "id": "ipad-pro-13", "nome": "iPad Pro 13\"", "marca": "apple", "tipo": "tablet", "pasta": "Bezel-iPad-Pro-(M5)/PNG", "prefixo": "iPad Pro (M5) 13_", "padrao": "Silver", "cores": ["Silver", "Space Black"], "orientacoes": ["Portrait", "Landscape"], "padrao_de": ["ipad", "tablet-real"] },
+    { "id": "ipad-pro-11", "nome": "iPad Pro 11\"", "marca": "apple", "tipo": "tablet", "pasta": "Bezel-iPad-Pro-(M5)/PNG", "prefixo": "iPad Pro (M5) 11_", "padrao": "Silver", "cores": ["Silver", "Space Black"], "orientacoes": ["Portrait", "Landscape"] },
+    { "id": "macbook-pro-14", "nome": "MacBook Pro 14\"", "marca": "apple", "tipo": "notebook", "pasta": "Bezel-MacBook-Pro-M5/PNG", "prefixo": "MacBook Pro M5 14-inch", "padrao": "Silver", "cores": ["Silver", "Space Black"], "padrao_de": ["macbook", "notebook-real"] },
+    { "id": "macbook-pro-16", "nome": "MacBook Pro 16\"", "marca": "apple", "tipo": "notebook", "pasta": "Bezel-MacBook-Pro-M5/PNG", "prefixo": "MacBook Pro M5 16-inch", "padrao": "Silver", "cores": ["Silver", "Space Black"] },
+    { "id": "macbook-air-13", "nome": "MacBook Air 13\"", "marca": "apple", "tipo": "notebook", "pasta": "Bezel-MacBook-Air-M5/PNG", "prefixo": "MacBook Air M5 13-inch", "padrao": "Midnight", "cores": ["Midnight", "Silver", "Starlight", "Sky Blue"] },
+    { "id": "macbook-air-15", "nome": "MacBook Air 15\"", "marca": "apple", "tipo": "notebook", "pasta": "Bezel-MacBook-Air-M5/PNG", "prefixo": "MacBook Air M5 15-inch", "padrao": "Midnight", "cores": ["Midnight", "Silver", "Starlight", "Sky Blue"] },
+    { "id": "imac-24", "nome": "iMac 24\"", "marca": "apple", "tipo": "desktop", "pasta": "Bezel-iMac/PNG", "prefixo": "iMac M4 24-inch", "padrao": "Silver", "cores": ["Silver", "Blue", "Green", "Pink", "Purple", "Orange", "Yellow"], "padrao_de": ["imac", "desktop-real"] },
+    { "id": "studio-display", "nome": "Studio Display", "marca": "apple", "tipo": "monitor", "pasta": "Bezel-Studio-Display/PNG", "prefixo": "Studio Display 2026", "padrao": "On Light Background", "cores": ["On Light Background", "On Dark Background"], "padrao_de": ["monitor", "monitor-real"] },
+    { "id": "studio-display-xdr", "nome": "Studio Display XDR", "marca": "apple", "tipo": "monitor", "pasta": "Bezel-Studio-Display/PNG", "prefixo": "Studio Display XDR 2026", "padrao": "On Light Background", "cores": ["On Light Background", "On Dark Background"] },
+    { "id": "pixel-10-pro", "nome": "Pixel 10 Pro", "marca": "google", "tipo": "celular", "android": "pixel_10_pro", "padrao_de": ["android", "pixel"] },
+    { "id": "pixel-10-pro-xl", "nome": "Pixel 10 Pro XL", "marca": "google", "tipo": "celular", "android": "pixel_10_pro_xl" },
+    { "id": "pixel-10", "nome": "Pixel 10", "marca": "google", "tipo": "celular", "android": "pixel_10" },
+    { "id": "pixel-9-pro", "nome": "Pixel 9 Pro", "marca": "google", "tipo": "celular", "android": "pixel_9_pro" },
+    { "id": "pixel-tablet", "nome": "Pixel Tablet", "marca": "google", "tipo": "tablet", "android": "pixel_tablet", "orientacao": "horizontal" }
+  ]
+}

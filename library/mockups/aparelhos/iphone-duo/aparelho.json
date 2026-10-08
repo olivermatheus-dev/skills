@@ -1,0 +1,72 @@
+{
+  "id": "iphone-duo",
+  "nome": "iPhone Duo (aberto)",
+  "marca": "apple",
+  "tipo": "dobravel",
+  "padrao": {
+    "cor": "star-white",
+    "orientacao": "aberto-vertical"
+  },
+  "cores": [
+    {
+      "id": "star-white",
+      "nome": "Star White"
+    },
+    {
+      "id": "night-sky",
+      "nome": "Night Sky"
+    }
+  ],
+  "variantes": {
+    "aberto-vertical": {
+      "largura": 2247,
+      "altura": 3093,
+      "tela": {
+        "x": 117,
+        "y": 117,
+        "w": 2013,
+        "h": 2859
+      },
+      "raio": 171,
+      "mascara": "aberto-vertical-mascara.png",
+      "arquivos": {
+        "star-white": "aberto-vertical-star-white.png",
+        "night-sky": "aberto-vertical-night-sky.png"
+      }
+    },
+    "aberto-horizontal": {
+      "largura": 3093,
+      "altura": 2247,
+      "tela": {
+        "x": 117,
+        "y": 117,
+        "w": 2859,
+        "h": 2013
+      },
+      "raio": 174,
+      "mascara": "aberto-horizontal-mascara.png",
+      "arquivos": {
+        "star-white": "aberto-horizontal-star-white.png",
+        "night-sky": "aberto-horizontal-night-sky.png"
+      }
+    },
+    "fechado-vertical": {
+      "largura": 1574,
+      "altura": 2194,
+      "tela": {
+        "x": 85,
+        "y": 77,
+        "w": 1404,
+        "h": 2040
+      },
+      "raio": 21,
+      "mascara": "fechado-vertical-mascara.png",
+      "arquivos": {
+        "star-white": "fechado-vertical-star-white.png",
+        "night-sky": "fechado-vertical-night-sky.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

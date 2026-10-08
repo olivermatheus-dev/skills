@@ -1,0 +1,62 @@
+{
+  "origem": "print",
+  "arquivo": "original.png",
+  "largura": 3024,
+  "altura": 1964,
+  "dpr": 2,
+  "aparelho": "desktop",
+  "tags": [
+    "exemplo"
+  ],
+  "dadosFicticios": true,
+  "ocultar": [],
+  "regioes": {
+    "resumo": {
+      "x": 576,
+      "y": 244,
+      "w": 2368,
+      "h": 238,
+      "rotulo": "Resumo do dia num olhar"
+    },
+    "agenda": {
+      "x": 576,
+      "y": 765,
+      "w": 1335,
+      "h": 771,
+      "rotulo": "Agenda de hoje com confirmação"
+    },
+    "semana": {
+      "x": 576,
+      "y": 526,
+      "w": 2368,
+      "h": 195,
+      "rotulo": "Semana inteira em 1 linha"
+    },
+    "grafico": {
+      "x": 1955,
+      "y": 765,
+      "w": 989,
+      "h": 378,
+      "rotulo": "Atendimentos do mês"
+    },
+    "saudacao": {
+      "x": 576,
+      "y": 72,
+      "w": 2368,
+      "h": 128
+    }
+  },
+  "data": "2026-10-07",
+  "notas": "Tela de exemplo da galeria (app fictício \"Rotina\", dados inventados). Refazer: node tools/mockup/exemplos.mjs",
+  "sugestoes": {
+    "recorte": {
+      "x": 0,
+      "y": 0,
+      "w": 3024,
+      "h": 1964
+    },
+    "cortes": [],
+    "avisos": [],
+    "analisadoEm": "2026-10-07T23:49:07Z"
+  }
+}

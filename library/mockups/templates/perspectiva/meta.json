@@ -1,0 +1,78 @@
+{
+  "id": "perspectiva",
+  "nome": "Perspectiva (keynote)",
+  "descricao": "1 aparelho grande em ângulo de apresentação, sangrando pela borda, título à esquerda. Impacto para capa/LP.",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [],
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "navegador",
+        "vidro",
+        "sem-moldura",
+        "celular",
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
+      ],
+      "padrao": "vidro (desktop) · celular"
+    },
+    "lado": {
+      "tipo": "opcao",
+      "opcoes": [
+        "direita",
+        "esquerda"
+      ],
+      "padrao": "direita"
+    },
+    "escala": {
+      "tipo": "numero",
+      "padrao": "1.3 (tela) · 1 (celular)",
+      "min": 0.8,
+      "max": 1.8
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "preview": "preview.png"
+}

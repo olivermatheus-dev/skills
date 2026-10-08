@@ -1,0 +1,65 @@
+{
+  "id": "vidro",
+  "nome": "Vidro (glassmorphism)",
+  "descricao": "Tela em borda de vidro + 1–2 destaques em cards de vidro com rótulo. Pede fundo colorido (aurora, macos, gelo, malha).",
+  "telas": [
+    "tela"
+  ],
+  "precisa": [
+    "destaques (opcional)"
+  ],
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "vidro",
+        "celular",
+        "sem-moldura"
+      ],
+      "padrao": "vidro · celular"
+    },
+    "ampliacao": {
+      "tipo": "numero",
+      "padrao": "1.6 (2–3×) / 1.25 (1×)",
+      "min": 1,
+      "max": 3
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "preview": "preview.png"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "ipad-pro-13",
+  "nome": "iPad Pro 13\"",
+  "marca": "apple",
+  "tipo": "tablet",
+  "padrao": {
+    "cor": "silver",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "silver",
+      "nome": "Silver"
+    },
+    {
+      "id": "space-black",
+      "nome": "Space Black"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 2300,
+      "altura": 3000,
+      "tela": {
+        "x": 115,
+        "y": 121,
+        "w": 2070,
+        "h": 2758
+      },
+      "raio": 53,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "silver": "vertical-silver.png",
+        "space-black": "vertical-space-black.png"
+      }
+    },
+    "horizontal": {
+      "largura": 3000,
+      "altura": 2300,
+      "tela": {
+        "x": 121,
+        "y": 115,
+        "w": 2758,
+        "h": 2070
+      },
+      "raio": 55,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "silver": "horizontal-silver.png",
+        "space-black": "horizontal-space-black.png"
+      }
+    }
+  },
+  "apelidos": [
+    "ipad",
+    "tablet-real"
+  ],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

@@ -1,0 +1,68 @@
+{
+  "id": "leque",
+  "nome": "Leque de celulares",
+  "descricao": "3 iPhones: o do meio na frente, os de trás inclinados. tela2/tela3 = outras telas do app.",
+  "telas": [
+    "tela",
+    "tela2",
+    "tela3"
+  ],
+  "precisa": [
+    "tela2",
+    "tela3"
+  ],
+  "params": {
+    "aparelho": {
+      "tipo": "opcao",
+      "opcoes": [
+        "celular",
+        "android",
+        "<id real>"
+      ],
+      "padrao": "celular"
+    },
+    "giro": {
+      "tipo": "numero",
+      "padrao": 8,
+      "min": 0,
+      "max": 20
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
+    }
+  },
+  "formatos": [
+    "1:1",
+    "4:5",
+    "9:16",
+    "16:9"
+  ],
+  "transparente": true,
+  "animavel": true,
+  "preview": "preview.png"
+}

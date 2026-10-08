@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Tela de exemplo (galeria de mockups)</title>
+<!-- App fictício "Rotina" só para ilustrar a galeria de mockups: dados inventados, sem marca real. Renderizado por tools/mockup/exemplos.mjs. -->
+<style>
+  :root { --bg:#f5f5f7; --card:#fff; --tx:#1d1d1f; --mu:#86868b; --ln:#e5e5ea; --az:#0a84ff; --vd:#30d158; --la:#ff9f0a; --rx:#bf5af2; --rs:#ff375f; }
+  .escuro { --bg:#000; --card:#1c1c1e; --tx:#f5f5f7; --mu:#98989d; --ln:#2c2c2e; }
+  .escuro .tab { background: rgba(22,22,24,.82); } .escuro .side { background: rgba(28,28,30,.8); } .escuro .nav { color: #d1d1d6; } .escuro .nav.on { background: #0a84ff22; }
+  .escuro .barra, .escuro .graf i { background: #2c2c2e; } .escuro .graf i.on { background: var(--az); } .escuro .k, .escuro .card { box-shadow: none; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: var(--bg); color: var(--tx); font: 500 15px/1.35 -apple-system, "SF Pro Text", "Inter", "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; display: flex; }
+  .side { width: 248px; background: rgba(255,255,255,.7); border-right: 1px solid var(--ln); padding: 22px 14px; display: none; flex-direction: column; gap: 4px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; padding: 4px 10px 18px; letter-spacing: -.01em; }
+  .logo i { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #5e5ce6, #0a84ff); display: block; }
+  .nav { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px; color: #3a3a3c; }
+  .nav b { width: 18px; height: 18px; border-radius: 5px; background: #d1d1d6; display: block; }
+  .nav.on { background: #e8f0fe; color: var(--az); } .nav.on b { background: var(--az); }
+  main { flex: 1; padding: 20px 18px 110px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 44px; }
+  .top small { color: var(--mu); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+  h1 { font-size: 32px; letter-spacing: -.025em; font-weight: 700; line-height: 1.1; margin-top: 4px; }
+  .av { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ffd60a, #ff9f0a); flex: none; }
+  .resumo { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .k { background: var(--card); border-radius: 18px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .k span { color: var(--mu); font-size: 13px; font-weight: 600; }
+  .k strong { display: block; font-size: 30px; letter-spacing: -.02em; margin-top: 6px; }
+  .k em { font-style: normal; font-size: 12.5px; color: var(--vd); font-weight: 600; }
+  .barra { height: 6px; border-radius: 3px; background: #ececf0; margin-top: 12px; overflow: hidden; } .barra i { display: block; height: 100%; width: 72%; background: var(--az); border-radius: 3px; }
+  .card { background: var(--card); border-radius: 20px; padding: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .card h2 { font-size: 17px; letter-spacing: -.01em; display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .card h2 a { font-size: 14px; color: var(--az); font-weight: 600; }
+  .item { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--ln); }
+  .item:first-of-type { border-top: 0; }
+  .hora { width: 54px; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 15px; }
+  .tag { width: 4px; align-self: stretch; border-radius: 2px; }
+  .item div p { font-weight: 600; } .item div small { color: var(--mu); font-size: 13px; }
+  .chk { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #c7c7cc; flex: none; }
+  .chk.ok { background: var(--vd); border-color: var(--vd); }
+  .sem { display: flex; justify-content: space-between; gap: 6px; }
+  .dia { flex: 1; text-align: center; padding: 8px 0 10px; border-radius: 14px; color: var(--mu); font-size: 12px; font-weight: 600; }
+  .dia b { display: block; color: var(--tx); font-size: 18px; margin-top: 3px; }
+  .dia.on { background: var(--az); color: rgba(255,255,255,.8); } .dia.on b { color: #fff; }
+  .graf { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding-top: 8px; }
+  .graf i { flex: 1; border-radius: 8px 8px 4px 4px; background: #dfe9fb; } .graf i.on { background: var(--az); }
+  .tab { position: fixed; left: 0; right: 0; bottom: 0; height: 84px; background: rgba(249,249,251,.82); backdrop-filter: blur(20px) saturate(180%); border-top: 1px solid var(--ln); display: flex; justify-content: space-around; padding-top: 10px; }
+  .tab span { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10.5px; color: var(--mu); font-weight: 600; }
+  .tab span b { width: 26px; height: 26px; border-radius: 8px; background: #d1d1d6; display: block; } .tab span.on { color: var(--az); } .tab span.on b { background: var(--az); }
+  .so-largo { display: none; }
+  /* tablet e desktop */
+  @media (min-width: 900px) {
+    .side { display: flex; } .tab { display: none; } main { padding: 36px 40px; gap: 22px; } .top { padding-top: 0; }
+    h1 { font-size: 36px; } .resumo { grid-template-columns: repeat(4, 1fr); } .so-largo { display: block; }
+    .grade { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: start; }
+  }
+  @media (min-width: 900px) and (max-width: 1200px) { .side { width: 210px; } .resumo { grid-template-columns: repeat(2, 1fr); } .grade { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="logo"><i></i>Rotina</div>
+  <div class="nav on"><b></b>Hoje</div><div class="nav"><b></b>Agenda</div><div class="nav"><b></b>Clientes</div><div class="nav"><b></b>Financeiro</div><div class="nav"><b></b>Relatórios</div><div class="nav"><b></b>Ajustes</div>
+</aside>
+<main>
+  <div class="top" id="saudacao"><div><small>Quarta, 14 de outubro</small><h1>Bom dia, Marina</h1></div><span class="av"></span></div>
+  <div class="resumo" id="resumo">
+    <div class="k"><span>Hoje</span><strong>6</strong><em>2 confirmados agora</em></div>
+    <div class="k"><span>Semana</span><strong>28</strong><div class="barra"><i></i></div></div>
+    <div class="k so-largo"><span>Recebido</span><strong>R$ 4.320</strong><em>+12% no mês</em></div>
+    <div class="k so-largo"><span>Pendências</span><strong>3</strong><em style="color:var(--la)">2 vencem amanhã</em></div>
+  </div>
+  <div class="card" id="semana"><div class="sem">
+    <div class="dia">SEG<b>12</b></div><div class="dia">TER<b>13</b></div><div class="dia on">QUA<b>14</b></div><div class="dia">QUI<b>15</b></div><div class="dia">SEX<b>16</b></div><div class="dia">SÁB<b>17</b></div><div class="dia">DOM<b>18</b></div>
+  </div></div>
+  <div class="grade">
+    <div class="card" id="agenda">
+      <h2>Agenda de hoje <a>Ver tudo</a></h2>
+      <div class="item"><span class="hora">08:00</span><span class="tag" style="background:var(--az)"></span><div><p>Lucas Andrade</p><small>Sessão · 50 min</small></div><span class="chk ok"></span></div>
+      <div class="item"><span class="hora">09:30</span><span class="tag" style="background:var(--rx)"></span><div><p>Beatriz Lima</p><small>Primeira consulta · on-line</small></div><span class="chk ok"></span></div>
+      <div class="item"><span class="hora">11:00</span><span class="tag" style="background:var(--vd)"></span><div><p>Rafael Souza</p><small>Retorno · 50 min</small></div><span class="chk"></span></div>
+      <div class="item"><span class="hora">14:00</span><span class="tag" style="background:var(--la)"></span><div><p>Carla Mendes</p><small>Sessão · 50 min</small></div><span class="chk"></span></div>
+      <div class="item"><span class="hora">16:30</span><span class="tag" style="background:var(--rs)"></span><div><p>Pedro Nunes</p><small>Avaliação · 80 min</small></div><span class="chk"></span></div>
+    </div>
+    <div class="card" id="grafico">
+      <h2>Atendimentos <a>Mês</a></h2>
+      <div class="graf"><i style="height:45%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:70%"></i><i class="on" style="height:92%"></i><i style="height:40%"></i></div>
+    </div>
+  </div>
+</main>
+<nav class="tab"><span class="on"><b></b>Hoje</span><span><b></b>Agenda</span><span><b></b>Clientes</span><span><b></b>Ajustes</span></nav>
+<script>if (location.hash.includes('escuro')) document.documentElement.classList.add('escuro');</script>
+</body>
+</html>

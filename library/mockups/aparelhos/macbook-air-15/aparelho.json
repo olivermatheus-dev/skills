@@ -1,0 +1,50 @@
+{
+  "id": "macbook-air-15",
+  "nome": "MacBook Air 15\"",
+  "marca": "apple",
+  "tipo": "notebook",
+  "padrao": {
+    "cor": "midnight",
+    "orientacao": "horizontal"
+  },
+  "cores": [
+    {
+      "id": "midnight",
+      "nome": "Midnight"
+    },
+    {
+      "id": "silver",
+      "nome": "Silver"
+    },
+    {
+      "id": "starlight",
+      "nome": "Starlight"
+    },
+    {
+      "id": "sky-blue",
+      "nome": "Sky Blue"
+    }
+  ],
+  "variantes": {
+    "horizontal": {
+      "largura": 3540,
+      "altura": 2300,
+      "tela": {
+        "x": 326,
+        "y": 215,
+        "w": 2886,
+        "h": 1870
+      },
+      "raio": 35,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "midnight": "horizontal-midnight.png",
+        "silver": "horizontal-silver.png",
+        "starlight": "horizontal-starlight.png",
+        "sky-blue": "horizontal-sky-blue.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

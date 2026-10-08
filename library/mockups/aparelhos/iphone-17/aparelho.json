@@ -1,0 +1,74 @@
+{
+  "id": "iphone-17",
+  "nome": "iPhone 17",
+  "marca": "apple",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "white",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "white",
+      "nome": "White"
+    },
+    {
+      "id": "black",
+      "nome": "Black"
+    },
+    {
+      "id": "lavender",
+      "nome": "Lavender"
+    },
+    {
+      "id": "mist-blue",
+      "nome": "Mist Blue"
+    },
+    {
+      "id": "sage",
+      "nome": "Sage"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1350,
+      "altura": 2760,
+      "tela": {
+        "x": 69,
+        "y": 66,
+        "w": 1212,
+        "h": 2628
+      },
+      "raio": 210,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "white": "vertical-white.png",
+        "black": "vertical-black.png",
+        "lavender": "vertical-lavender.png",
+        "mist-blue": "vertical-mist-blue.png",
+        "sage": "vertical-sage.png"
+      }
+    },
+    "horizontal": {
+      "largura": 2760,
+      "altura": 1350,
+      "tela": {
+        "x": 66,
+        "y": 69,
+        "w": 2628,
+        "h": 1212
+      },
+      "raio": 211,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "white": "horizontal-white.png",
+        "black": "horizontal-black.png",
+        "lavender": "horizontal-lavender.png",
+        "mist-blue": "horizontal-mist-blue.png",
+        "sage": "horizontal-sage.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

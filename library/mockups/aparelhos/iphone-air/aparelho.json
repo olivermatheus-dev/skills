@@ -1,0 +1,68 @@
+{
+  "id": "iphone-air",
+  "nome": "iPhone Air",
+  "marca": "apple",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "cloud-white",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "cloud-white",
+      "nome": "Cloud White"
+    },
+    {
+      "id": "space-black",
+      "nome": "Space Black"
+    },
+    {
+      "id": "sky-blue",
+      "nome": "Sky Blue"
+    },
+    {
+      "id": "light-gold",
+      "nome": "Light Gold"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1380,
+      "altura": 2880,
+      "tela": {
+        "x": 57,
+        "y": 69,
+        "w": 1266,
+        "h": 2742
+      },
+      "raio": 209,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "cloud-white": "vertical-cloud-white.png",
+        "space-black": "vertical-space-black.png",
+        "sky-blue": "vertical-sky-blue.png",
+        "light-gold": "vertical-light-gold.png"
+      }
+    },
+    "horizontal": {
+      "largura": 2880,
+      "altura": 1380,
+      "tela": {
+        "x": 69,
+        "y": 57,
+        "w": 2742,
+        "h": 1266
+      },
+      "raio": 207,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "cloud-white": "horizontal-cloud-white.png",
+        "space-black": "horizontal-space-black.png",
+        "sky-blue": "horizontal-sky-blue.png",
+        "light-gold": "horizontal-light-gold.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

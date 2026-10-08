@@ -1,0 +1,56 @@
+{
+  "id": "ipad-pro-11",
+  "nome": "iPad Pro 11\"",
+  "marca": "apple",
+  "tipo": "tablet",
+  "padrao": {
+    "cor": "silver",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "silver",
+      "nome": "Silver"
+    },
+    {
+      "id": "space-black",
+      "nome": "Space Black"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1880,
+      "altura": 2640,
+      "tela": {
+        "x": 103,
+        "y": 107,
+        "w": 1674,
+        "h": 2426
+      },
+      "raio": 54,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "silver": "vertical-silver.png",
+        "space-black": "vertical-space-black.png"
+      }
+    },
+    "horizontal": {
+      "largura": 2640,
+      "altura": 1880,
+      "tela": {
+        "x": 107,
+        "y": 103,
+        "w": 2426,
+        "h": 1674
+      },
+      "raio": 56,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "silver": "horizontal-silver.png",
+        "space-black": "horizontal-space-black.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

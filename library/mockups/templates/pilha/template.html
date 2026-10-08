@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Mockup · pilha de telas</title><link rel="stylesheet" href="../../runtime/mockup.css"></head>
+<body>
+<script src="../../runtime/mockup.js"></script>
+<script>
+// Pilha: até 3 telas em cascata 3D (frente = tela; atrás = tela2/tela3 ou os "destaques" recortados). Para "tudo num lugar só".
+MK.montar(async (MK) => {
+  const t = MK.telas.tela;
+  let atras = [MK.telas.tela2, MK.telas.tela3].filter(Boolean);
+  if (atras.length < 2) atras = atras.concat((MK.cfg.destaques || []).map((d) => MK.recorte(t, d))).slice(0, 2);
+  if (!atras.length) throw new Error('o template pilha precisa de tela2/tela3 ou de 1–2 destaques para as camadas de trás');
+  const tipo = MK.p('aparelho', t.aparelho === 'celular' ? 'celular' : 'sem-moldura');
+  const celular = MK.classe(tipo) === 'celular';
+  const area = MK.cabecalho();
+  const n = atras.length;
+  const passo = celular ? { x: area.w * 0.17, y: area.h * 0.035 } : { x: area.w * 0.08, y: area.h * 0.055 };
+  const caixa = celular ? { w: area.w * 0.5, h: area.h * 0.86 } : { w: area.w - passo.x * n * 1.4, h: area.h - passo.y * n * 1.2 };
+  const angulo = MK.p('angulo', 'heroi');
+  const camadas = [...atras.reverse(), t]; // de trás para a frente
+  // atrás: mesma proporção da tela da frente (cobrir, foco no topo), para a cascata ficar alinhada
+  const aspecto = celular ? undefined : Math.max(0.5, Math.min(2.2, t.w / t.h));
+  const aps = camadas.map((tt, i) => MK.moldura(celular ? tipo : MK.p('aparelho', 'sem-moldura'), tt, caixa,
+    { angulo, aspecto, sombra: i === camadas.length - 1 ? 'dramatica' : 'flutuante', ajuste: 'cobrir', foco: [0, 0] }));
+  const W0 = Math.max(...aps.map((a) => a.w)), H0 = Math.max(...aps.map((a) => a.h));
+  const x0 = (MK.W - (W0 + passo.x * n)) / 2, y0 = area.y + (area.h - (H0 + passo.y * n)) / 2;
+  aps.forEach((ap, i) => {
+    const k = n - i; // 0 = frente; as de trás sobem e vão para a esquerda
+    MK.colocar(ap, x0 + passo.x * i, y0 + passo.y * i, 5 + i);
+    if (k) ap.el.style.filter = `brightness(${1 - k * 0.05}) saturate(${1 - k * 0.1})`;
+  });
+});
+</script>
+</body>
+</html>

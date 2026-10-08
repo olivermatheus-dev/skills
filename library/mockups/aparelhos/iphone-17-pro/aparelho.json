@@ -1,0 +1,62 @@
+{
+  "id": "iphone-17-pro",
+  "nome": "iPhone 17 Pro",
+  "marca": "apple",
+  "tipo": "celular",
+  "padrao": {
+    "cor": "silver",
+    "orientacao": "vertical"
+  },
+  "cores": [
+    {
+      "id": "silver",
+      "nome": "Silver"
+    },
+    {
+      "id": "deep-blue",
+      "nome": "Deep Blue"
+    },
+    {
+      "id": "cosmic-orange",
+      "nome": "Cosmic Orange"
+    }
+  ],
+  "variantes": {
+    "vertical": {
+      "largura": 1350,
+      "altura": 2760,
+      "tela": {
+        "x": 69,
+        "y": 66,
+        "w": 1212,
+        "h": 2628
+      },
+      "raio": 207,
+      "mascara": "vertical-mascara.png",
+      "arquivos": {
+        "silver": "vertical-silver.png",
+        "deep-blue": "vertical-deep-blue.png",
+        "cosmic-orange": "vertical-cosmic-orange.png"
+      }
+    },
+    "horizontal": {
+      "largura": 2760,
+      "altura": 1350,
+      "tela": {
+        "x": 66,
+        "y": 69,
+        "w": 2628,
+        "h": 1212
+      },
+      "raio": 207,
+      "mascara": "horizontal-mascara.png",
+      "arquivos": {
+        "silver": "horizontal-silver.png",
+        "deep-blue": "horizontal-deep-blue.png",
+        "cosmic-orange": "horizontal-cosmic-orange.png"
+      }
+    }
+  },
+  "apelidos": [],
+  "licenca": "Apple Design Resources — Product Bezels. Uso permitido para mostrar o seu app/produto em materiais de marketing, sem alterar o aparelho e sem sugerir parceria com a Apple. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products"
+}

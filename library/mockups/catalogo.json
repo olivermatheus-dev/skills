@@ -1,81 +1,248 @@
 {
+  "_nota": "Catálogo do estúdio de mockups (028). Aparelhos realistas: library/mockups/aparelhos/<id>/aparelho.json (node tools/mockup/aparelhos.mjs listar). Templates: templates/<id>/meta.json. Galeria visual: node tools/mockup/galeria.mjs → library/mockups/galeria/index.html",
   "aparelhos": [
     {
-      "id": "navegador",
-      "descricao": "janela de navegador própria (bolinhas neutras, endereço opcional), tema claro ou escuro",
+      "id": "celular",
+      "descricao": "apelido: vira o iPhone real (iphone-18-pro); --generico usa o desenho próprio",
       "angulos": [
         "frente",
         "esquerda",
         "direita",
         "inclinado",
-        "isometrico"
+        "heroi",
+        "heroi-esq"
       ]
     },
     {
       "id": "notebook",
-      "descricao": "notebook genérico (tampa escura, base prata), tela 16:10–16:9",
-      "angulos": [
-        "frente",
-        "esquerda",
-        "direita"
-      ]
-    },
-    {
-      "id": "celular",
-      "descricao": "celular genérico com ilha, grafite ou claro; precisa de print vertical",
+      "descricao": "apelido: vira o MacBook Pro 14\" real",
       "angulos": [
         "frente",
         "esquerda",
         "direita",
-        "inclinado"
+        "heroi"
       ]
     },
     {
-      "id": "sem-moldura",
-      "descricao": "só a tela com cantos, borda e sombra",
+      "id": "tablet",
+      "descricao": "apelido: vira o iPad Pro 13\" real (vertical ou horizontal pelo print)",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "heroi"
+      ]
+    },
+    {
+      "id": "android",
+      "descricao": "apelido: Pixel 10 Pro real",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "heroi"
+      ]
+    },
+    {
+      "id": "imac / monitor",
+      "descricao": "apelidos: iMac 24\" / Studio Display reais",
+      "angulos": [
+        "frente"
+      ]
+    },
+    {
+      "id": "navegador",
+      "descricao": "janela estilo macOS/Safari (claro/escuro, --bolinhas cores|neutras), endereço da captura",
       "angulos": [
         "frente",
         "esquerda",
         "direita",
         "inclinado",
-        "isometrico"
+        "isometrico",
+        "heroi",
+        "heroi-esq"
+      ]
+    },
+    {
+      "id": "vidro",
+      "descricao": "a tela numa borda de vidro (o fundo atravessa desfocado), tema claro/escuro",
+      "angulos": [
+        "frente",
+        "heroi",
+        "heroi-esq"
+      ]
+    },
+    {
+      "id": "sem-moldura",
+      "descricao": "só a tela com cantos (--cantos) e sombra (--sombra)",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita",
+        "inclinado",
+        "isometrico",
+        "heroi",
+        "heroi-esq"
+      ]
+    },
+    {
+      "id": "celular-generico / notebook-generico",
+      "descricao": "desenho próprio sem marca (quando a marca não quer Apple/Google)",
+      "angulos": [
+        "frente",
+        "esquerda",
+        "direita"
       ]
     }
   ],
   "fundos": [
     {
       "id": "liso",
-      "descricao": "cor de fundo da marca (--bg)"
+      "descricao": "cor de fundo da marca (--bg)",
+      "marca": true
     },
     {
       "id": "gradiente",
-      "descricao": "degradê tom sobre tom (--bg → --surface-2)"
+      "descricao": "degradê tom sobre tom (--bg → --surface-2)",
+      "marca": true
+    },
+    {
+      "id": "spot",
+      "descricao": "luz de estúdio na cor da marca (centro claro, bordas um tom abaixo)",
+      "marca": true
     },
     {
       "id": "malha",
-      "descricao": "malha de gradiente com os tons suaves da marca (accent-soft, pastéis)"
-    },
-    {
-      "id": "grade",
-      "descricao": "grade fina sobre --bg, some nas bordas"
-    },
-    {
-      "id": "pontos",
-      "descricao": "pontilhado fino sobre --bg, some nas bordas"
+      "descricao": "malha de gradiente com os tons suaves da marca",
+      "marca": true
     },
     {
       "id": "brilho",
-      "descricao": "brilho suave na cor de destaque atrás do aparelho"
+      "descricao": "brilho suave na cor de destaque atrás do aparelho",
+      "marca": true
     },
     {
       "id": "desfoque",
-      "descricao": "a própria tela, bem desfocada, ao fundo"
+      "descricao": "a própria tela, bem desfocada, ao fundo",
+      "marca": true
+    },
+    {
+      "id": "grade",
+      "descricao": "grade fina sobre --bg, some nas bordas",
+      "marca": true
+    },
+    {
+      "id": "pontos",
+      "descricao": "pontilhado fino sobre --bg, some nas bordas",
+      "marca": true
+    },
+    {
+      "id": "estudio",
+      "descricao": "luz de estúdio branca/cinza (fundo de produto Apple)",
+      "marca": false
+    },
+    {
+      "id": "estudio-escuro",
+      "descricao": "estúdio escuro, luz central",
+      "marca": false
+    },
+    {
+      "id": "neutro",
+      "descricao": "#F5F5F7 liso (cinza Apple)",
+      "marca": false
+    },
+    {
+      "id": "grafite",
+      "descricao": "escuro premium com brilho no topo",
+      "marca": false
+    },
+    {
+      "id": "gelo",
+      "descricao": "azul gelo claro",
+      "marca": false
+    },
+    {
+      "id": "pessego",
+      "descricao": "malha pêssego/rosa clara",
+      "marca": false
+    },
+    {
+      "id": "menta",
+      "descricao": "verde-menta claro",
+      "marca": false
+    },
+    {
+      "id": "papel",
+      "descricao": "papel quente com grão",
+      "marca": false
+    },
+    {
+      "id": "vidro-fosco",
+      "descricao": "a própria tela muito desfocada sob véu claro",
+      "marca": false
+    },
+    {
+      "id": "aurora",
+      "descricao": "aurora escura (violeta, ciano, rosa)",
+      "marca": false
+    },
+    {
+      "id": "ametista",
+      "descricao": "índigo-violeta vivo",
+      "marca": false
+    },
+    {
+      "id": "por-do-sol",
+      "descricao": "coral-rosa quente",
+      "marca": false
+    },
+    {
+      "id": "macos",
+      "descricao": "wallpaper estilo macOS (azul → violeta → laranja)",
+      "marca": false
+    },
+    {
+      "id": "vinho",
+      "descricao": "vinho escuro",
+      "marca": false
     },
     {
       "id": "transparente",
-      "descricao": "sem fundo (PNG com alfa): para sobrepor"
+      "descricao": "sem fundo (PNG com alfa): para sobrepor",
+      "marca": true
     }
   ],
+  "sombras": {
+    "nenhuma": "sem sombra",
+    "contato": "curta e marcada (objeto encostado)",
+    "suave": "discreta, 4 camadas",
+    "flutuante": "objeto flutuando",
+    "produto": "padrão dos aparelhos reais (estilo Apple)",
+    "dramatica": "longa e profunda (perspectiva, cards)"
+  },
+  "cantos": {
+    "nenhum": "0",
+    "sutil": "0,8% da largura",
+    "medio": "1,6% (padrão)",
+    "grande": "3%",
+    "ios": "5,5% superelipse",
+    "macos": "janela do macOS (~16 px em 1512)"
+  },
+  "angulos": {
+    "frente": "",
+    "esquerda": "giro 17° p/ esquerda",
+    "direita": "giro 17° p/ direita",
+    "inclinado": "deitado para trás 24°",
+    "isometrico": "vista de cima 50°/−32°",
+    "heroi": "apresentação (X12 Y−20 Z3)",
+    "heroi-esq": "apresentação espelhada"
+  },
+  "ajustes": {
+    "auto": "escolhe sozinho: cobrir se a proporção bate; estender se o print é mais largo e a base é lisa",
+    "cobrir": "preenche a tela e corta o que sobra (--foco)",
+    "conter": "inteira, centralizada",
+    "estender": "inteira, colada no topo; a sobra vira a cor da borda do print"
+  },
   "formatos": {
     "1:1": [
       1080,
@@ -94,5 +261,6 @@
       1080
     ],
     "livre": "tamanho do recorte + margem para a sombra"
-  }
+  },
+  "escala": "3 por padrão (4:5 sai 3240×4050). --escala 4 para impressão/LP retina grande."
 }

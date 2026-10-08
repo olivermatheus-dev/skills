@@ -1,6 +1,6 @@
 # 028 — Estúdio de mockups: print ou link → peça vendável (skill + editor no app)
 
-Status: **fase A feita** (2026-10-07; falta o aval do Oliver no critério e as 5 perguntas) · próxima: B ou C · Depende de: 024 (kit de marca), 018 (app) · Liga com: 014 (galeria: frames e animações viram componentes), `fmt-3d-produto`, `fmt-recorte-funcionalidade`, 027 (formatos), 013 (variantes), central de peças
+Status: **fase A + galeria premium feitas** (2026-10-07; falta o aval do Oliver) · próxima: B, C ou D (3D) · Depende de: 024 (kit de marca), 018 (app) · Liga com: 014 (galeria: frames e animações viram componentes), `fmt-3d-produto`, `fmt-recorte-funcionalidade`, 027 (formatos), 013 (variantes), central de peças
 
 Pedido do Oliver em 2026-10-07: passar um **print** (ou um **link**, com ele fazendo o login) e receber de volta mockups **extremamente profissionais**: fundos, aparelhos, mockups 3D, animações prontas. Pelo Claude Code **e** pelo app (arrastar o print dentro do projeto, biblioteca de materiais brutos, editor próprio). Pode pedir o resultado ("estático, fundo transparente, 4:5") ou só o objetivo ("mostrar que a agenda é simples") e receber **alternativas já aplicadas**, salvas para abrir, ajustar e exportar. Frames, mockups e efeitos são **reaproveitados nos vídeos**.
 
@@ -66,6 +66,17 @@ Skill `mockup` com modo **"criar template"**: a partir de uma referência (print
 - **Defaults assumidos para as perguntas abaixo** (o Oliver pode trocar): 1 estilo = minimalista da 024; 2 todos os formatos, 4:5 padrão; 3 CSS 3D; 4 sem conta demo → print colado + `ocultar`; 5 molduras próprias genéricas.
 - **Limite conhecido:** print em 1× (o do painel) fica macio no zoom/cards; o QA avisa e a ampliação padrão cai para 1,4×/1,3×. Resolve com print em 2–3× (zoom 200% do navegador) ou a captura da fase B.
 
+## Galeria premium (2026-10-07, pedido do Oliver: molduras reais, fundos, sombras, vidro, cantos, cortes, alta resolução)
+- **Molduras reais** baixadas das fontes oficiais e **calibradas ao pixel** (`tools/mockup/aparelhos.mjs`: acha a tela transparente de cada PNG e gera a máscara exata dos cantos): iPhone 18 Pro / Pro Max, 17 / 17 Pro / Pro Max, Air, Duo · iPad Pro 11/13 · MacBook Pro 14/16, Air 13/15 · iMac 24 · Studio Display / XDR (Apple Product Bezels) · Pixel 9 Pro, 10, 10 Pro, 10 Pro XL, Tablet (Android Studio, Apache 2.0). Todas as cores. Imagens fora do git (licença); `aparelho.json` no git. Samsung: não há fonte oficial com licença — fica o Pixel.
+- `celular`/`notebook`/`tablet` agora viram o aparelho real (`--generico` volta ao desenho próprio). Encaixe automático do print (`--ajuste auto`: estende a base esticando a última linha coluna a coluna, sem cortar a direita do web app).
+- **Sombras em camadas** (6 presets, tingidas; contorno do aparelho via drop-shadow; sombra de chão em 2 camadas para aparelho apoiado) · **cantos** (6 presets, superelipse no iOS) · **14 fundos premium** + 8 da marca, grão feTurbulence · **vidro** (borda de vidro, cards e chips de vidro) · janela estilo macOS/Safari.
+- **Templates novos:** `trio`, `perspectiva`, `pilha`, `leque`, `vidro` (total 11). Herói/duo refeitos para os aparelhos reais.
+- **Onde cortar** (`tools/mockup/analisar.mjs`, roda no `captura.mjs`): fio na beirada, barra do sistema, barra do navegador/abas, rolagem, elemento cortado (recua até o vão), sobra vazia, resolução baixa → `captura.json → sugestoes` + `analise.png`. Alta confiança aplica sozinho (`recorteSeguro`); média só com `--recorte auto`.
+- **Alta resolução:** escala padrão 3 (4:5 = 3240×4050).
+- **Galeria:** `node tools/mockup/galeria.mjs` → `library/mockups/galeria/index.html` (111 peças com a flag de cada uma; telas de exemplo fictícias em `library/mockups/exemplos/`, app "Rotina"). Os `preview.png` dos templates saem dela.
+- Teste real: `contents/2026-10-07-mockup-painel-premium/` (8 alternativas 4:5 em 3×, ~45 s).
+- Respondidas pelo pedido: pergunta 5 → molduras **realistas** (com licença); pergunta 3 → CSS 3D por ora, 3D de verdade (Blender MCP disponível / Three.js) na fase D.
+
 ## Para o Oliver conferir (critério da fase A)
 - Abrir app → Conteúdos → filtro **Mockup** → "Mockup · painel (teste 028)" (ou `folha.png` na pasta). **2 delas você usaria sem retocar?** Se não, diga qual e o que muda.
 - Fundos da kz além do liso (gradiente/brilho/desfoque tom sobre tom) — liberar ou cortar em `brand/mockups.json`.
@@ -79,5 +90,6 @@ Skill `mockup` com modo **"criar template"**: a partir de uma referência (print
 5. **Aparelhos:** molduras genéricas próprias (seguro para uso comercial) ou quer molduras realistas de iPhone/MacBook (precisa de fonte com licença)?
 
 ## Log
+- 2026-10-07: **galeria premium** — 21 aparelhos reais calibrados (Apple + Pixel), sombras/cantos/fundos premium/vidro, 5 templates novos, analisador de cortes, escala 3, galeria HTML com 111 peças. Teste: `mockup-painel-premium` (8 alternativas).
 - 2026-10-07: **fase A** — motor, 6 templates, 4 aparelhos, 8 fundos, alternativas + folha de contato, QA, schema/validate, tipo `mockup` na central, skill `mockup`. 6 alternativas do painel da kz em ~5 s. Aguardando aval do Oliver.
 - 2026-10-07: registrada a pedido do Oliver (print/link → mockups profissionais, editor no app, alternativas pela IA, reuso no vídeo). Desenho: templates parametrizados + Playwright; Claude decide, script compõe.

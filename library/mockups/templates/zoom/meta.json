@@ -15,9 +15,15 @@
       "tipo": "opcao",
       "opcoes": [
         "navegador",
-        "notebook",
+        "vidro",
+        "sem-moldura",
         "celular",
-        "sem-moldura"
+        "notebook",
+        "tablet",
+        "android",
+        "imac",
+        "monitor",
+        "<id real: node tools/mockup/aparelhos.mjs listar>"
       ],
       "padrao": "navegador"
     },
@@ -27,6 +33,34 @@
       "min": 1,
       "max": 4,
       "nota": "teto da lupa em × o tamanho do print"
+    },
+    "sombra": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhuma",
+        "contato",
+        "suave",
+        "flutuante",
+        "produto",
+        "dramatica"
+      ],
+      "padrao": "produto (real) / flutuante (tela)"
+    },
+    "cantos": {
+      "tipo": "opcao",
+      "opcoes": [
+        "nenhum",
+        "sutil",
+        "medio",
+        "grande",
+        "ios",
+        "macos"
+      ],
+      "padrao": "medio"
+    },
+    "cor": {
+      "tipo": "texto",
+      "nota": "cor do aparelho real (aparelho.json → cores)"
     }
   },
   "formatos": [
