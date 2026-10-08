@@ -3,6 +3,7 @@ id: mariana
 name: Mariana — a terapeuta que não quer ser secretária de si mesma
 role: primaria
 summary: Terapeuta autônoma, 28–45 anos, atende sozinha (online e/ou presencial), R$ 4k–12k/mês, cobra R$ 120–250/sessão. Opera em Google Agenda + WhatsApp + Meet + caderno.
+color: teal
 age: 28–45
 occupation: Terapeuta autônoma (psicologia, psicanálise, TCC, hipno, integrativa)
 awareness: 2
@@ -41,7 +42,7 @@ quotes:
   - queria só atender
 tags:
   - kz
-updated: 2026-10-07
+updated: 2026-10-08
 ---
 
 Fonte: `context/AUDIENCE.md` (hipótese, ~25% validado). Afastam: "solução inovadora", "plataforma disruptiva", "venda mais", jargão corporativo.

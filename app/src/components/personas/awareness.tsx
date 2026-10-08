@@ -9,15 +9,17 @@ export const AWARENESS: Record<number, string> = {
   5: 'pronto para comprar',
 };
 
-export function AwarenessMeter({ value, showLabel = true }: { value?: number; showLabel?: boolean }) {
+/** `color` = cor dos segmentos preenchidos (ex.: var(--pc) da persona); padrão = cor do projeto */
+export function AwarenessMeter({ value, showLabel = true, color, className }: { value?: number; showLabel?: boolean; color?: string; className?: string }) {
   return (
-    <div className="flex items-center gap-2" title={value ? `${value} · ${AWARENESS[value]}` : 'consciência não definida'}>
-      <div className="flex gap-0.5" aria-label={`consciência ${value ?? '—'} de 5`}>
-        {[1, 2, 3, 4, 5].map((i) => (
-          <span key={i} className={cx('h-1.5 w-4 rounded-full', value && i <= value ? 'bg-primary' : 'bg-muted border border-border')} />
-        ))}
+    <div className={cx('flex items-center gap-2 min-w-0', className)} title={value ? `Consciência ${value} de 5 · ${AWARENESS[value]}` : 'consciência não definida'}>
+      <div className="flex gap-0.5 shrink-0" aria-label={`consciência ${value ?? '—'} de 5`}>
+        {[1, 2, 3, 4, 5].map((i) => {
+          const on = !!value && i <= value;
+          return <span key={i} className={cx('h-1.5 w-4 rounded-full', on ? (color ? '' : 'bg-primary') : 'bg-muted border border-border')} style={on && color ? { background: color } : undefined} />;
+        })}
       </div>
-      {showLabel && <span className="text-xs text-muted-foreground">{value ? AWARENESS[value] : 'consciência —'}</span>}
+      {showLabel && <span className="text-xs text-muted-foreground truncate">{value ? AWARENESS[value] : 'consciência —'}</span>}
     </div>
   );
 }
