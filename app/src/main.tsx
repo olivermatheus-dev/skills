@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Toaster } from './components/toast';
+import { Reconnecting } from './components/Reconnecting';
 import './index.css';
 
 // A API local responde em ~1 ms: o cache serve a tela na hora e revalida por trás.
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={qc}>
       <BrowserRouter><App /></BrowserRouter>
       <Toaster />
+      <Reconnecting />
     </QueryClientProvider>
   </StrictMode>,
 );

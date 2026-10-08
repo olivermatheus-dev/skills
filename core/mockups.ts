@@ -1,4 +1,4 @@
-// Editor de mockups (tarefa 030): capturas, peças em camadas (mockup.json versão 2) e export. As rotas ficam em app/server/api.ts.
+// Editor de mockups (tarefa 030): capturas, peças em camadas (mockup.json versão 2) e export. As rotas ficam em app/server/handler.ts.
 // O desenho é do runtime library/mockups/runtime/cena.js (o mesmo no editor e no export pelo Playwright).
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';

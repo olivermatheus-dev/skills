@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes, ChangeEvent, InputHTMLAttributes, ReactEleme
 import { cn } from '../lib/utils';
 import { Children, Fragment, isValidElement, useEffect } from 'react';
 import { Select as SelectRoot, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
-import { ApiError } from '../api';
+import { ApiError, net } from '../api';
 
 const cx = (...c: (string | false | undefined | null)[]) => c.filter(Boolean).join(' ');
 export { cx };
@@ -106,6 +106,8 @@ export function PageHeader({ title, subtitle, actions }: { title: string; subtit
 
 export function ErrorBox({ error }: { error: unknown }) {
   if (!error) return null;
+  // servidor do app fora do ar (reiniciando): o aviso global "Reconectando…" já cobre; aqui só uma linha discreta
+  if (net.isNetworkError(error)) return <div className="mt-3 text-sm text-muted-foreground">Sem conexão com o app. Tentando de novo…</div>;
   const e = error as ApiError;
   return (
     <div className="mt-3 text-sm text-destructive bg-red-50 border border-red-200 rounded-md p-3">

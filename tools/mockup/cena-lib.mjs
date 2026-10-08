@@ -1,5 +1,5 @@
 // Peças comuns do editor de mockups (tarefa 030): catálogo de molduras e capturas no formato que o runtime (cena.js) recebe.
-// Usado pelo export (tools/mockup/cena.mjs, file://) e pela API do app (app/server/api.ts, http).
+// Usado pelo export (tools/mockup/cena.mjs, file://) e pela API do app (app/server/handler.ts, http).
 import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

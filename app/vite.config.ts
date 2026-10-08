@@ -12,7 +12,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), hubApi()],
   // @ = app/src (padrão do shadcn: @/components/ui/…, @/lib/utils)
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
-  server: { port: 5173, open: !process.env.HUB_NO_OPEN },
-  preview: { port: 5173, open: !process.env.HUB_NO_OPEN },
+  // 127.0.0.1 explícito: o padrão "localhost" no Windows escuta só em [::1], e scripts que chamam 127.0.0.1 não achavam o app
+  server: { host: '127.0.0.1', port: 5173, open: !process.env.HUB_NO_OPEN },
+  preview: { host: '127.0.0.1', port: 5173, open: !process.env.HUB_NO_OPEN },
   build: { chunkSizeWarningLimit: 1500 },
 });

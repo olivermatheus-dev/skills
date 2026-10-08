@@ -7,11 +7,10 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 038 | **"Failed to fetch" / carregamento longo** — diagnóstico (2026-10-08): as rotas respondem em < 200 ms; o que falhava era o dev da 5173 (no ar desde 11:10) reiniciando a cada edição de `app/server/`, `core/`, `schema/`, `tools/` (o `vite.config` importa a API e o Vite reotimiza dependências), dezenas de vezes enquanto os agentes trabalhavam. Feito: retry de erro de rede por ~30 s no react-query (`app/src/main.tsx`). Falta: (a) carregar a API por `ssrLoadModule` a cada requisição (troca a API sem reiniciar o Vite); (b) `server.host` para responder também em 127.0.0.1 (hoje só `[::1]`); (c) aviso discreto "reconectando…" global no lugar da caixa vermelha; (d) há um 2º dev na 5174 (desde 11:50) — confirmar com o Oliver se é dele | robustez para uso diário |
-| 2 | 038 | Resto da revisão: contagens dos selects de **Anúncios** respeitarem os outros filtros (M7 só foi feito em Conteúdos) · símbolo de texto em `Ideas.tsx:90` → Lucide · B12 do `REVISAO.md` | pequeno, já mapeado |
-| 3 | 040 | **Fase I (ligações):** "Virar ideia" a partir da ficha leva a análise; `content-ideas` e `ads-meta` leem o relatório mais recente do concorrente | não depende do Oliver |
-| 4 | 041 | **F3:** botão "Pesquisar ideias" no app (diálogo com padrões + estimativa, Rodar pelo mesmo caminho da fila de fichas/heartbeat, aba Pesquisas, chips de referência no cartão da ideia). Medir uma rodada limpa (a 1ª custou US$ 4,51, acima do aviso de US$ 3) | não depende do Oliver |
-| 5 | 040 | **Fase G (anúncios no painel):** depende da 037 B (classificador) → depende da pergunta 1 da 037 (abaixo). Sem resposta, seguir a recomendação (funil pela temperatura do público) e avisar | aguarda resposta curta |
+| 1 | 038 | Resto da revisão: contagens dos selects de **Anúncios** respeitarem os outros filtros (M7 só foi feito em Conteúdos) · símbolo de texto em `Ideas.tsx:90` → Lucide · B12 do `REVISAO.md` | pequeno, já mapeado |
+| 2 | 040 | **Fase I (ligações):** "Virar ideia" a partir da ficha leva a análise; `content-ideas` e `ads-meta` leem o relatório mais recente do concorrente | não depende do Oliver |
+| 3 | 041 | **F3:** botão "Pesquisar ideias" no app (diálogo com padrões + estimativa, Rodar pelo mesmo caminho da fila de fichas/heartbeat, aba Pesquisas, chips de referência no cartão da ideia). Medir uma rodada limpa (a 1ª custou US$ 4,51, acima do aviso de US$ 3) | não depende do Oliver |
+| 4 | 040 | **Fase G (anúncios no painel):** depende da 037 B (classificador) → depende da pergunta 1 da 037 (abaixo). Sem resposta, seguir a recomendação (funil pela temperatura do público) e avisar | aguarda resposta curta |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

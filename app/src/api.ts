@@ -88,8 +88,24 @@ export class ApiError extends Error {
   }
 }
 
+/** Conexão com o servidor do app: cai quando um fetch falha por rede (servidor reiniciando) e volta na 1ª resposta.
+ *  O aviso global "Reconectando…" (components/Reconnecting.tsx) lê daqui. */
+let offline = false;
+const netSubs = new Set<() => void>();
+const setOffline = (v: boolean) => { if (offline !== v) { offline = v; for (const f of netSubs) f(); } };
+export const net = {
+  get: () => offline,
+  subscribe: (f: () => void) => { netSubs.add(f); return () => { netSubs.delete(f); }; },
+  /** o fetch falhou por rede (não é uma resposta de erro da API) */
+  isNetworkError: (e: unknown) => e instanceof TypeError,
+};
+
 async function req<T>(method: string, path: string, body?: unknown): Promise<T> {
-  const r = await fetch(path, { method, headers: body ? { 'content-type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
+  let r: Response;
+  try {
+    r = await fetch(path, { method, headers: body ? { 'content-type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
+  } catch (e) { setOffline(true); throw e; }
+  setOffline(false);
   const data = await r.json().catch(() => ({ error: r.statusText }));
   if (!r.ok) throw new ApiError(r.status, data);
   return data as T;

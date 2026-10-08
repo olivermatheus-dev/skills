@@ -1,6 +1,6 @@
 // Ajustes diretos no vídeo pelo app (tarefa 022 fase C): volume por faixa e por evento, duração e texto de cena,
 // e "Gerar prévia" (sfx → mix → produce --draft). Tudo passa pelo mesmo núcleo da linha de comando
-// (tools/video/timeline.mjs e os scripts do kit), que é o do futuro MCP de edição (009). Rotas em app/server/api.ts.
+// (tools/video/timeline.mjs e os scripts do kit), que é o do futuro MCP de edição (009). Rotas em app/server/handler.ts.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFile, execFileSync, spawn } from 'node:child_process';

@@ -13,7 +13,7 @@
 |---|---|---|
 | tipos | `schema/*.ts` (Zod) | **fonte única** do formato de cada arquivo. Mudou um campo? Mude aqui primeiro. |
 | dados | `core/store.ts` | todo ler/gravar passa por aqui e é validado; erro vira `ValidationError` (arquivo + campos). |
-| API | `app/server/api.ts` | plugin do Vite; rotas finas sobre o `store`. Sem lógica de negócio aqui. |
+| API | `app/server/handler.ts` (rotas) · `app/server/api.ts` (plugin) | rotas finas sobre o `store`, sem lógica de negócio. O plugin carrega o handler à parte (`ssrLoadModule`): editar `core/`, `schema/`, `tools/` troca a API sem reiniciar o app. Servidor em `127.0.0.1`. |
 | cliente | `app/src/api.ts` | `fetch` tipado com os tipos do `schema`. |
 | telas | `app/src/pages/*.tsx` (registro em `pages/index.ts`: rota, nome, ícone Lucide, sidebar recolhida) | componentes **shadcn** em `components/ui/` (`@/components/ui/…`, preferir estes); antigos em `components/kit.tsx` (migrar aos poucos); barra contextual padrão `components/ContextSidebar.tsx`; tokens em `src/index.css`; cor do projeto em `lib/theme.ts`; editor markdown em `components/Markdown.tsx`. |
 
