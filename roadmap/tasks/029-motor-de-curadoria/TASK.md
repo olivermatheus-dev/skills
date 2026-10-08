@@ -58,7 +58,8 @@ Lista viva por empresa em `companies/<slug>/curadoria/fontes.json` (fonte, tipo,
 
 ## 7. Os 12 primeiros posts (vitrine)
 Proposta de mix (ajustar com o Oliver na 006):
-- **6 kz na prática**: as melhores partes do produto (agenda com recorrência, videochamada com sala de espera, notas de sessão, portal do paciente, lembrete no WhatsApp, perfil público). Mockup premium + copy de dor → solução.
+- **6 kz na prática** (revisado após o levantamento no app, `companies/kz/context/PRODUTO.md`): tela de atendimento (Sessão Inteira) · WhatsApp automático · agenda com recorrência · registro de sessão · ficha + formulário online · financeiro por cliente. Reserva: sala de espera, perfil público, painel do dia, métricas do cliente. Mockup premium + copy de dor → solução.
+  - **Prints:** conta de demonstração com pacientes fictícios; resolver antes as sessões presas do "Paciente Teste QA"; zoom 200%; sem a área Admin. Melhores telas: painel do dia, linha do tempo com Notas/Planejamento, calendário em Semana, modal Agendar com recorrência, Preferências → WhatsApp, tela de atendimento com vídeo, métricas do cliente.
 - **2 Salva isso para depois** (ex.: checklist antes da sessão online; fechamento do dia).
 - **2 Mito, verdade ou… depende?** (ex.: "terapia online funciona menos?", com fonte).
 - **1 kz recomenda** e **1 Só quem atende entende**.

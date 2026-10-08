@@ -3,7 +3,7 @@
 ## O que é
 A kz é uma plataforma all-in-one de gestão de consultório para terapeutas autônomos no Brasil. Substitui os 5 apps (Google Agenda + WhatsApp + Meet/Zoom + caderno/Notion + site). Não é CRM médico adaptado.
 
-Módulos: pacientes · agenda (sessões recorrentes, exceções) · videochamada com sala de espera · notas de sessão (planejamento + anotação) · processos terapêuticos por paciente · portal do paciente (vê sessões, relata como tem se sentido entre sessões) · lembretes/confirmações automáticas via WhatsApp + push · perfil público (especialidades, abordagem, valor).
+Módulos (levantados no app em 2026-10-07; detalhe e estado de cada um em `PRODUTO.md`): agenda com recorrência e sessão rápida · videochamada própria com sala de espera · tela de atendimento (vídeo + anotações + histórico) · registro de sessão (notas + planejamento) · ficha do paciente com formulário online · documentos · WhatsApp automático (agenda do dia e confirmação de sessão) · financeiro por mensalidade ou pacote · área do cliente · perfil público.
 
 **Slogan:** "Feito por terapeuta, pra terapeuta."
 **Missão:** simplificar a rotina do terapeuta independente para ele focar na relação com o paciente. Além do software, construir um ecossistema de conteúdos, recomendações e ferramentas para uma prática mais organizada.

@@ -1,0 +1,217 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-07T23:00:00Z",
+  "by": "claude-opus-5-5 (levantamento no app logado)",
+  "sources": [
+    {
+      "url": "https://kz.app.br/app"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda dia/semana/mês/ano",
+            "highlight": false
+          },
+          {
+            "name": "Sessões recorrentes",
+            "detail": "semanal, quinzenal ou mensal, com data de término",
+            "highlight": false
+          },
+          {
+            "name": "Sessão rápida",
+            "detail": "atender sem agendar",
+            "highlight": true
+          },
+          {
+            "name": "Painel do dia",
+            "detail": "próxima sessão, atalhos, aniversários",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Videochamada própria",
+            "detail": "link kz.app.br/call, sem Meet/Zoom",
+            "highlight": true
+          },
+          {
+            "name": "Sala de espera em tempo real",
+            "highlight": true
+          },
+          {
+            "name": "Tela de atendimento (Sessão Inteira)",
+            "detail": "vídeo + anotação ao vivo + histórico + dados do cliente",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Registro de sessão",
+            "detail": "Notas + Planejamento, salvamento automático",
+            "highlight": false
+          },
+          {
+            "name": "Linha do tempo e busca nas sessões",
+            "highlight": false
+          },
+          {
+            "name": "Anotações avulsas por cliente",
+            "highlight": false
+          },
+          {
+            "name": "Ficha/anamnese completa",
+            "detail": "saúde, hábitos, histórico",
+            "highlight": false
+          },
+          {
+            "name": "Formulário online preenchido pelo paciente",
+            "highlight": true
+          },
+          {
+            "name": "Documentos",
+            "detail": "troca com o paciente",
+            "highlight": false
+          },
+          {
+            "name": "Métricas do cliente",
+            "detail": "presença, duração média",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Agenda do dia ao terapeuta no WhatsApp",
+            "detail": "API oficial da Meta",
+            "highlight": true
+          },
+          {
+            "name": "Confirmação de sessão automática",
+            "detail": "terapeuta e paciente",
+            "highlight": false
+          },
+          {
+            "name": "Notificações no app e no navegador",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobrança por mensalidade",
+            "detail": "registro manual, alerta de atraso",
+            "highlight": false
+          },
+          {
+            "name": "Cobrança por pacote de sessões",
+            "detail": "créditos por sessão",
+            "highlight": false
+          },
+          {
+            "name": "Painel de pendentes",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "Área do Cliente",
+            "detail": "acesso por e-mail e senha; documentos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Perfil público",
+            "detail": "slug, CRP, bio, abordagem, valor, contatos",
+            "highlight": false
+          },
+          {
+            "name": "Indicações",
+            "detail": "crédito por indicado pagante",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Exportar dados do cliente (LGPD)",
+            "highlight": false
+          },
+          {
+            "name": "Arquivar cliente",
+            "highlight": false
+          },
+          {
+            "name": "Aceite de termos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Busca global Ctrl+K",
+            "highlight": false
+          },
+          {
+            "name": "Preferências",
+            "detail": "editor com linhas de caderno, tema, duração padrão",
+            "highlight": false
+          },
+          {
+            "name": "Suporte por tickets",
+            "highlight": false
+          },
+          {
+            "name": "Assinatura via Stripe",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Sala de espera com chegada em tempo real",
+      "Tela de atendimento com vídeo, anotação ao vivo e histórico juntos",
+      "Formulário para o paciente preencher a própria ficha",
+      "Agenda do dia enviada ao terapeuta no WhatsApp"
+    ],
+    "missing": [
+      "Agendamento online pelo paciente",
+      "Integração com Google Agenda",
+      "Cobrança online (Pix, cartão, boleto)",
+      "NFS-e e recibo Receita Saúde",
+      "Relatórios financeiros",
+      "IA (transcrição, nota automática)",
+      "Secretária / multiprofissional",
+      "Modelos de anamnese e documentos",
+      "Escalas e testes",
+      "Assinatura digital",
+      "Lembrete por e-mail ou SMS",
+      "App mobile"
+    ]
+  }
+}
