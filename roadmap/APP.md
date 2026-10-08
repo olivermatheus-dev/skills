@@ -5,6 +5,8 @@
 ## Princípio central
 **Os arquivos do repo são a fonte da verdade.** A interface lê e escreve os mesmos arquivos que o Claude edita, via um servidor local leve. Nada de banco de dados por enquanto: markdown com cabeçalho YAML (*frontmatter*) para o que é texto, e YAML/JSON para dado estruturado ou coletado. Assim o git versiona tudo, o Claude entende tudo e a interface só dá forma.
 
+**Falar com a IA pelo app tem que ser fácil (regra do Oliver, 2026-10-08).** Todo ponto em que o Oliver aciona a IA dentro do sistema (puxar dados, pedir análise, reanalisar, virar ideia ou tarefa, rodar a fila) é **um clique até um diálogo simples**: opções já preenchidas com o padrão mais provável, poucas escolhas visíveis (o resto em "avançado"), estimativa de tempo/custo quando houver IA paga, um botão claro para rodar, e progresso e resultado no próprio lugar, sem precisar abrir terminal. Toda tarefa de UI que tocar nesses fluxos é revisada contra esta regra.
+
 ## Módulos (o que o usuário pediu)
 | módulo | o que faz |
 |---|---|

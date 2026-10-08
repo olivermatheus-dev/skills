@@ -38,5 +38,6 @@
 | 038 | **Concorrentes → Anúncios** no mesmo padrão: barra com selects, visual limpo, vista Lista = tabela com miniatura pequena e colunas ordenáveis (mais novos, dias no ar) | fase D |
 | 039 | **Panorama vira dashboard** (o mais relevante de cara) · **Brechas** em página própria + card resumido sempre visível no Panorama | desenho (estrategista) → B → C |
 | 039 | **Faixa de números (StatStrip)** sem card quebrando para a linha de baixo, mais compacta, com ícones · **ícones nas abas do header** da área Concorrentes | fase A2 (não depende do desenho) |
+| 040 | **Análise profunda de conteúdos e anúncios:** por concorrente/rede (top 20) ou seleção na aba (top 10, só os não analisados; reanalisar é opção à parte), transcrição barata, Opus analisa (tipo, tema, gancho, gatilhos dos 5 s…), tudo salvo por item, relatório dentro do concorrente, painel do item editável | desenho (Opus) → aval |
 | — | **Polimento visual geral do app** ("o app como um todo precisa de ajustes"): ir juntando aqui os pontos que o Oliver apontar, tela a tela | acumular; vira tarefa quando houver lista |
 | 038 | **Concorrentes → Conteúdos:** dashboard estratégico, projetado antes por um agente de marketing | C1 (estrategista) → aval → C2 |

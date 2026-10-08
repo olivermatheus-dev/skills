@@ -58,6 +58,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 037 | [Inteligência de anúncios dos concorrentes (salvos, notas, tags, funil, classificador)](tasks/037-inteligencia-de-anuncios/TASK.md) | 031 | **desenho + protótipo do classificador de regras feitos (2026-10-08)**, nada ligado ao app; aguarda respostas do Oliver (seção 13) e aval da fase A |
 | 038 | [Conteúdos e Anúncios dos concorrentes v2 (barra numa linha, card, tabela, fora da curva × perfil e × mercado, dashboard) + AppContent centralizado + Select com ícones](tasks/038-conteudos-concorrentes-v2/TASK.md) | 031, 019 | pronta (registrada 2026-10-08); C1 = desenho do dashboard pelo estrategista |
 | 039 | [Panorama dos concorrentes como dashboard + Brechas em página própria](tasks/039-panorama-dashboard/TASK.md) | 038 (A, B2) | pronta (registrada 2026-10-08); desenho pelo estrategista junto com a 038 C1 |
+| 040 | [Análise profunda de conteúdos e anúncios dos concorrentes (sob comando, seleção/top N, transcrição barata, Opus analisa, relatório por concorrente, painel editável)](tasks/040-analise-de-conteudos-e-anuncios/TASK.md) | 038, 037 | desenho com Opus especialista (2026-10-08) |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
