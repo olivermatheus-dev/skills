@@ -1,0 +1,201 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-08T14:06:38Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sintropia.app/",
+      "title": "Sintropia | A rotina inteira em um só lugar"
+    },
+    {
+      "url": "https://sintropia.app/software-para-psicologos/",
+      "title": "Software para psicólogos | Sintropia 2.0"
+    },
+    {
+      "url": "https://sintropia.app/sobre/",
+      "title": "Sobre a Sintropia | Produto e evolução"
+    },
+    {
+      "url": "https://sintropia.app/suporte-humano/",
+      "title": "Suporte humano da Sintropia | Pessoas e contexto"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sintropia.app/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://sintropia.app/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sintropia | A rotina inteira em um só lugar",
+        "chars": 9203
+      },
+      {
+        "url": "https://sintropia.app/software-para-psicologos/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Software para psicólogos | Sintropia 2.0",
+        "chars": 13241
+      },
+      {
+        "url": "https://sintropia.app/sobre/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre a Sintropia | Produto e evolução",
+        "chars": 7813
+      },
+      {
+        "url": "https://sintropia.app/suporte-humano/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Suporte humano da Sintropia | Pessoas e contexto",
+        "chars": 6676
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 29,
+      "groups": [
+        {
+          "name": "/conteudos",
+          "count": 11,
+          "sample": [
+            "/conteudos/",
+            "/conteudos/agenda-para-psicologos-google-calendar/",
+            "/conteudos/como-escolher-software-para-psicologos/",
+            "/conteudos/como-organizar-rotina-consultorio-psicologia/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/clientes-e-historias",
+          "count": 1,
+          "sample": [
+            "/clientes-e-historias/"
+          ]
+        },
+        {
+          "name": "/excluir-conta-paciente",
+          "count": 1,
+          "sample": [
+            "/excluir-conta-paciente/"
+          ]
+        },
+        {
+          "name": "/fatos",
+          "count": 1,
+          "sample": [
+            "/fatos/"
+          ]
+        },
+        {
+          "name": "/imprensa",
+          "count": 1,
+          "sample": [
+            "/imprensa/"
+          ]
+        },
+        {
+          "name": "/legal",
+          "count": 1,
+          "sample": [
+            "/legal/"
+          ]
+        },
+        {
+          "name": "/luma",
+          "count": 1,
+          "sample": [
+            "/luma/"
+          ]
+        },
+        {
+          "name": "/metodologia-editorial",
+          "count": 1,
+          "sample": [
+            "/metodologia-editorial/"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade/"
+          ]
+        },
+        {
+          "name": "/politica-de-uso",
+          "count": 1,
+          "sample": [
+            "/politica-de-uso/"
+          ]
+        },
+        {
+          "name": "/por-que-sintropia",
+          "count": 1,
+          "sample": [
+            "/por-que-sintropia/"
+          ]
+        },
+        {
+          "name": "/posicionamento-oficial",
+          "count": 1,
+          "sample": [
+            "/posicionamento-oficial/"
+          ]
+        },
+        {
+          "name": "/seguranca-e-privacidade",
+          "count": 1,
+          "sample": [
+            "/seguranca-e-privacidade/"
+          ]
+        },
+        {
+          "name": "/sintropia-paciente",
+          "count": 1,
+          "sample": [
+            "/sintropia-paciente/"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre/"
+          ]
+        },
+        {
+          "name": "/software-para-psicologos",
+          "count": 1,
+          "sample": [
+            "/software-para-psicologos/"
+          ]
+        },
+        {
+          "name": "/suporte-humano",
+          "count": 1,
+          "sample": [
+            "/suporte-humano/"
+          ]
+        },
+        {
+          "name": "/termos-de-servico",
+          "count": 1,
+          "sample": [
+            "/termos-de-servico/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

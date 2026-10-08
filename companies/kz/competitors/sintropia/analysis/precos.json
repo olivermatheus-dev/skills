@@ -1,0 +1,45 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-08T14:09:28Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    },
+    {
+      "url": "https://sintropia.app/software-para-psicologos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 99,
+    "trial": "15 dias grátis, sem cartão",
+    "plans": [
+      {
+        "name": "Mensal",
+        "monthly": 99,
+        "highlights": [
+          "cobrança mês a mês"
+        ],
+        "recommended": false
+      },
+      {
+        "name": "Anual",
+        "yearlyMonthly": 66.58,
+        "yearlyTotal": 790,
+        "highlights": [
+          "R$ 790 à vista ou 12x de R$ 79,90 (total R$ 958,80)"
+        ],
+        "recommended": true
+      }
+    ],
+    "extras": [
+      "Promoção de aniversário até 14/10/2026: 24 meses de acesso por R$ 790 à vista ou 12x R$ 79,90 (com cupom de R$ 100; sem cupom R$ 890)",
+      "Depois dos 24 meses renova no anual"
+    ],
+    "notes": "Site não lista planos por recursos; diz que recursos e integrações (ex.: Google Calendar) variam por plano. yearlyMonthly 66,58 = R$ 790 / 12; no parcelado sai R$ 79,90 por mês."
+  }
+}

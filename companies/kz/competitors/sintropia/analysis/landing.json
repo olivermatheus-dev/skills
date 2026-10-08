@@ -1,0 +1,107 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-08T14:09:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sintropia.app/",
+    "hero": {
+      "headline": "A mesma força. Um sistema inteiro.",
+      "subheadline": "Agenda, prontuários e financeiro em um software feito para psicólogas e psicólogos.",
+      "cta": "Testar grátis por 15 dias",
+      "visual": "interface real do sistema no computador (dados fictícios), selo Sintropia 2.0"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "A mesma força. Um sistema inteiro.",
+        "summary": "Promessa de sistema único e trial de 15 dias sem cartão"
+      },
+      {
+        "type": "solucao",
+        "title": "Entre uma sessão e outra, conte com a Sintropia",
+        "summary": "Demo do produto com 4 selos: acesso controlado, consentimento, revisão, suporte"
+      },
+      {
+        "type": "fundador",
+        "title": "Tenha tempo. Tenha Sintropia",
+        "summary": "Feita com quem vive a psicologia"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Quem já está com a gente conta",
+        "summary": "3 posts de psicólogas parceiras com link para a publicação original"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Antes, durante e depois de cada sessão",
+        "summary": "5 passos: agenda, Smart Notes, prontuário, lembrete WhatsApp, financeiro"
+      },
+      {
+        "type": "features",
+        "title": "A escrita ganha apoio. O olhar continua seu",
+        "summary": "Fluxo da LUMA: áudio, notas, contexto, rascunho revisável"
+      },
+      {
+        "type": "outro",
+        "title": "Pode chamar. Tem gente aqui",
+        "summary": "Suporte humano por WhatsApp e e-mail"
+      },
+      {
+        "type": "features",
+        "title": "Sintropia Paciente",
+        "summary": "App nativo iOS do paciente, por convite"
+      },
+      {
+        "type": "seguranca",
+        "title": "Como a Sintropia protege dados clínicos",
+        "summary": "4 camadas e compromissos públicos sobre dados"
+      },
+      {
+        "type": "precos",
+        "title": "15 dias grátis",
+        "summary": "Oferta de aniversário de 2 anos (24 meses por R$ 790 até 14/10), anual e mensal"
+      },
+      {
+        "type": "faq",
+        "title": "Antes de começar, vamos tirar suas dúvidas",
+        "summary": "10 perguntas"
+      },
+      {
+        "type": "cta",
+        "title": "Vem conhecer a Sintropia por dentro",
+        "summary": "CTA final"
+      },
+      {
+        "type": "rodape",
+        "title": "Suporte e links legais",
+        "summary": "contato, CNPJ, políticas"
+      }
+    ],
+    "ctas": [
+      "Testar grátis por 15 dias",
+      "Ver em ação",
+      "Ver demonstração",
+      "Garantir meus 24 meses",
+      "Falar com o suporte"
+    ],
+    "socialProof": [
+      "depoimentos de 3 psicólogas parceiras",
+      "'software favorito' e 'o que mais cresce' (sem número)"
+    ],
+    "interesting": [
+      "Barra de promoção com prazo (aniversário, até 14/10)",
+      "Preço comparado por mês (≈ R$ 33/mês em 24 meses) com letra miúda explicando",
+      "Selos de confiança logo após a demo",
+      "IA vendida com limite explícito: o olhar continua seu",
+      "Depoimentos com data e link para a publicação original",
+      "Páginas de conteúdo para SEO (software para psicólogos, por que escolher, fatos)"
+    ],
+    "tone": "acolhedor, calmo e cuidadoso; fala 'vem conhecer', tom humano com linguagem de compliance"
+  }
+}

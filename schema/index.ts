@@ -14,3 +14,4 @@ export * from './mockup';
 export * from './format';
 export * from './ads';
 export * from './referencia';
+export * from './matrix';

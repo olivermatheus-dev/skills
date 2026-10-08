@@ -1,0 +1,83 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-08T14:09:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    },
+    {
+      "url": "https://sintropia.app/software-para-psicologos/"
+    },
+    {
+      "url": "https://www.instagram.com/sintropia.psi/"
+    },
+    {
+      "url": "https://apps.apple.com/br/app/sintropia-paciente/id6779793256"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "IA clínica com revisão e consentimento",
+        "evidence": "Smart Notes e LUMA geram rascunho de evolução; nada vai ao prontuário sem confirmação"
+      },
+      {
+        "point": "App nativo do paciente",
+        "evidence": "Sintropia Paciente na App Store (iOS), com Cartão Diário e tarefas"
+      },
+      {
+        "point": "Audiência e prova social",
+        "evidence": "~53 mil seguidores no Instagram, YouTube ativo, depoimentos de parceiras e cupons de afiliadas"
+      },
+      {
+        "point": "Segurança e confiança explicadas",
+        "evidence": "criptografia em campos sensíveis, vínculo profissional-paciente, não vende dados"
+      },
+      {
+        "point": "Trial longo e preço claro",
+        "evidence": "15 dias sem cartão; anual R$ 790 ou 12x R$ 79,90; mensal R$ 99"
+      },
+      {
+        "point": "Suporte humano",
+        "evidence": "WhatsApp e e-mail como parte do produto"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Só psicólogos",
+        "evidence": "todo o discurso é 'psicólogas e psicólogos'; sem terapeutas integrativos, hipnoterapeutas ou psicanalistas"
+      },
+      {
+        "point": "Sem videochamada nativa à vista",
+        "evidence": "não aparece no site nem na lista de recursos"
+      },
+      {
+        "point": "Recursos dependem do plano e não são detalhados",
+        "evidence": "site repete 'conforme plano e configuração' e não lista planos"
+      },
+      {
+        "point": "Claims sem prova",
+        "evidence": "'software favorito' e 'o que mais cresce' sem números"
+      },
+      {
+        "point": "Automação e financeiro simples segundo terceiros",
+        "evidence": "avaliação da Academia do Psicólogo vista em resultado de busca (página não aberta)"
+      },
+      {
+        "point": "App do paciente só iOS",
+        "evidence": "descrito como nativo para iPhone e iPad"
+      }
+    ],
+    "opportunities": [
+      "Atender terapeutas não psicólogos (hipnoterapia, psicanálise, integrativos) que a Sintropia não nomeia",
+      "Vender videochamada com sala de espera e tela de atendimento única",
+      "Simplicidade radical contra um produto cheio de IA e planos nebulosos",
+      "Fundador terapeuta em exercício como contraponto a um discurso corporativo",
+      "Oferecer trial ou garantia clara, já que a Sintropia dá 15 dias sem cartão",
+      "WhatsApp automático de agenda do dia e confirmação como diferencial concreto",
+      "Preço de R$ 99 mensal com IA e trial é referência direta: a Kzloo (R$ 100 a 129) precisa justificar o valor"
+    ]
+  }
+}

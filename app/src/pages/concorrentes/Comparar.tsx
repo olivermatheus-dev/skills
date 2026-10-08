@@ -1,16 +1,16 @@
-// Comparar: os concorrentes lado a lado por área de marketing (?v=): Oferta e preço · Funcionalidades (matriz) ·
+// Comparar: os concorrentes lado a lado por área de marketing (?v=): Oferta e preço · Funcionalidades (matriz features × concorrentes, intel/matriz.json) ·
 // Mensagem (hero, CTA, prova social, tom) · Reputação. Clique no cabeçalho ordena; no nome, abre a ficha.
-import { useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { AreaPage, REF_ID, SortTable, useMarket, useRefRow, type Col, type MarketRow } from '../../components/competitors/area';
 import { money } from '../../components/competitors/Analysis';
 import { Avatar, Chips } from '../../components/competitors/lib';
+import MatrizFuncionalidades from './MatrizFuncionalidades';
 import { Badge, Empty, ErrorBox, cx } from '../../components/kit';
 
 const VIEWS = { oferta: 'Oferta e preço', funcionalidades: 'Funcionalidades', mensagem: 'Mensagem', reputacao: 'Reputação' } as const;
 type View = keyof typeof VIEWS;
-type P = ModuleDataOf<'precos'>; type F = ModuleDataOf<'features'>; type Lp = ModuleDataOf<'landing'>; type Rp = ModuleDataOf<'reputacao'>;
+type P = ModuleDataOf<'precos'>; type Lp = ModuleDataOf<'landing'>; type Rp = ModuleDataOf<'reputacao'>;
 const mod = <T,>(r: MarketRow, k: 'precos' | 'features' | 'landing' | 'reputacao') => r.res[k]?.data as T | undefined;
 
 export default function Comparar() {
@@ -28,7 +28,7 @@ export default function Comparar() {
       <ErrorBox error={m.error} />
       {!m.isLoading && !rows.length && <Empty title="Sem concorrentes ativos" />}
       {v === 'oferta' && <Oferta slug={slug} rows={rows} pin={pin} />}
-      {v === 'funcionalidades' && <Funcionalidades slug={slug} rows={rows} pin={pin} />}
+      {v === 'funcionalidades' && <MatrizFuncionalidades slug={slug} rows={rows} />}
       {v === 'mensagem' && <Mensagem slug={slug} rows={rows} pin={pin} />}
       {ref && v !== 'reputacao' && <p className="mt-2 text-[11px] text-muted-foreground">{ref.c.data.name} (você) vem de <Link to={`/p/${slug}/contexto`} className="hover:text-primary-ink">Contexto</Link> (BUSINESS, PRODUTO, COPY) via <code>intel/referencia.json</code>: preço de referência da copy, só funcionalidades prontas.</p>}
       {v === 'reputacao' && <Reputacao slug={slug} rows={rows} />}
@@ -62,62 +62,6 @@ function Oferta({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: Mar
     { k: 'guar', label: 'Fidelidade / garantia', v: (r) => mod<P>(r, 'precos')?.guarantee ?? undefined, render: (r) => <span className="block max-w-48 truncate text-muted-foreground" title={mod<P>(r, 'precos')?.guarantee ?? ''}>{mod<P>(r, 'precos')?.guarantee ?? '—'}</span> },
   ];
   return <SortTable rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
-}
-
-/** matriz: grupo de funcionalidade × concorrente; célula = nº de itens (★ = diferencial), detalhe no tooltip */
-function Funcionalidades({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
-  const comps = rows.filter((r) => mod<F>(r, 'features'));
-  const withF = [...pin, ...comps];
-  const groups = useMemo(() => {
-    const n = new Map<string, number>();
-    for (const r of comps) for (const g of mod<F>(r, 'features')!.groups) n.set(g.name, (n.get(g.name) ?? 0) + 1);
-    return [...n].sort((a, b) => b[1] - a[1]).map(([g]) => g);
-  }, [comps]);
-  if (!comps.length) return <Empty title="Nenhuma análise de funcionalidades ainda" />;
-  return (
-    <div className="bg-card border border-border rounded-xl overflow-x-auto">
-      <table className="text-sm w-full">
-        <thead className="border-b border-border bg-muted/40">
-          <tr>
-            <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground sticky left-0 bg-muted/40 min-w-44">Grupo</th>
-            {withF.map((r) => (
-              <th key={r.c.data.id} className={cx('px-2 py-2 text-xs font-medium whitespace-nowrap', r.c.data.id === REF_ID ? 'text-primary-ink bg-primary/10' : 'text-muted-foreground')}>
-                <Link to={r.c.data.id === REF_ID ? `/p/${slug}/contexto` : `/p/${slug}/concorrentes/${r.c.data.id}?aba=produto`} className="hover:text-foreground">{r.c.data.name}{r.c.data.id === REF_ID && ' (você)'}</Link>
-              </th>
-            ))}
-            <th className="px-3 py-2 text-xs font-medium text-muted-foreground text-right">Têm</th>
-          </tr>
-        </thead>
-        <tbody>
-          {groups.map((g) => {
-            const has = comps.filter((r) => mod<F>(r, 'features')!.groups.some((x) => x.name === g)).length;
-            const mine = pin.some((r) => mod<F>(r, 'features')!.groups.some((x) => x.name === g));
-            return (
-              <tr key={g} className="border-b border-border last:border-0 hover:bg-muted/30">
-                <td className="px-3 py-1.5 sticky left-0 bg-card font-medium">{g}</td>
-                {withF.map((r) => {
-                  const grp = mod<F>(r, 'features')!.groups.find((x) => x.name === g);
-                  const stars = grp?.items.filter((i) => i.highlight).length ?? 0;
-                  return (
-                    <td key={r.c.data.id} className={cx('px-2 py-1.5 text-center', r.c.data.id === REF_ID && 'bg-primary/5')} title={grp ? grp.items.map((i) => `${i.highlight ? '★ ' : '· '}${i.name}`).join('\n') : 'não mostram'}>
-                      {grp ? <span className={cx('inline-flex items-center justify-center min-w-7 h-6 rounded-md text-xs tabular-nums', stars ? 'bg-primary/15 text-primary-ink font-semibold' : 'bg-muted')}>{grp.items.length}{stars ? '★' : ''}</span> : <span className="text-muted-foreground/50">·</span>}
-                    </td>
-                  );
-                })}
-                <td className="px-3 py-1.5 text-right tabular-nums text-xs text-muted-foreground" title={pin.length && !mine ? 'você não tem: veja se é brecha ou lacuna' : undefined}>{has}/{comps.length}{pin.length > 0 && !mine && has >= comps.length / 2 ? <span className="text-destructive font-medium"> · falta</span> : null}</td>
-              </tr>
-            );
-          })}
-          <tr className="bg-muted/30">
-            <td className="px-3 py-1.5 sticky left-0 bg-muted/30 text-xs text-muted-foreground">Total de itens</td>
-            {withF.map((r) => <td key={r.c.data.id} className={cx('px-2 py-1.5 text-center text-xs tabular-nums font-medium', r.c.data.id === REF_ID && 'bg-primary/10')}>{mod<F>(r, 'features')!.groups.reduce((n, g) => n + g.items.length, 0)}</td>)}
-            <td />
-          </tr>
-        </tbody>
-      </table>
-      <div className="px-3 py-2 text-[11px] text-muted-foreground border-t border-border">Número = itens no grupo · ★ = tem diferencial no grupo · passe o mouse para ver a lista. “Têm” conta só os concorrentes; “falta” = metade ou mais deles têm e você não. Grupos que poucos têm são brecha ou nicho.</div>
-    </div>
-  );
 }
 
 function Mensagem({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {

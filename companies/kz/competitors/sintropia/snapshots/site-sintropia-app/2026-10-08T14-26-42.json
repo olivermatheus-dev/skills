@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T14:26:42Z",
+  "platform": "site",
+  "profileUrl": "https://sintropia.app/",
+  "source": "html",
+  "profile": {
+    "name": "Sintropia",
+    "handle": "sintropia.app",
+    "bio": "Teste a Sintropia grátis por 15 dias. Agenda, prontuário, Smart Notes, LUMA, financeiro e suporte humano para a rotina de psicólogos.",
+    "avatar": "https://sintropia.app/assets/icons/apple-touch-icon.png",
+    "avatarLocal": "media/site-sintropia-app/avatar-e205fc25.png",
+    "banner": "https://sintropia.app/assets/imgs/og-home-1200x630.png",
+    "bannerLocal": "media/site-sintropia-app/banner-80fd04cd.png",
+    "links": [
+      "https://www.instagram.com/reel/DGd2xx2SHPU",
+      "https://www.instagram.com/reel/DaQtwJ7JK2r",
+      "https://www.instagram.com/reel/DTvHc4_jbJi",
+      "https://www.youtube.com/watch?v=uY1gMkecFAM"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

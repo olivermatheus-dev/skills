@@ -15,7 +15,7 @@ Status: **fases A–D feitas (2026-10-08): ficha por área, Instagram sem token,
 Rotas fixas em `pages/index.ts` (ganham da `:id` da ficha); casca comum `components/competitors/area.tsx` (`AreaPage`, `useMarket`, `SortTable`, `StatStrip`). Dois endpoints novos em `app/server/api.ts`: `analysis-all` (resultados de todos) e `competitors-feed` (2 últimas coletas de cada perfil + marcações).
 - **Panorama** (`/concorrentes`): faixa com preço de entrada (mediana e faixa), plano grátis, teste grátis, audiência somada e a maior; gráfico preço × audiência (log, tooltip, clique abre a ficha); audiência e crescimento; 6 conteúdos mais fora da curva; brechas para nós de todas as análises.
 - **Concorrentes** (`/lista`): tabela densa por padrão (logo, frase, preço, modelo, seguidores com Δ, redes com ponto de erro, atualizado, ★, puxar); cards continuam como opção; candidatos com aceitar/recusar na linha.
-- **Comparar** (`/comparar?v=`): Oferta e preço (entrada, plano mais caro, anual, modelo, planos, teste, fidelidade) · Funcionalidades (matriz grupo × concorrente, ★ = diferencial, lista no tooltip, "têm n/11") · Mensagem (promessa do hero, CTA, prova social, tom, seções) · Reputação.
+- **Comparar** (`/comparar?v=`): Oferta e preço (entrada, plano mais caro, anual, modelo, planos, teste, fidelidade) · Funcionalidades (matriz **funcionalidade × concorrente** em `intel/matriz.json`, `schema/matrix.ts`: 43 funcionalidades em 11 grupos, Kzloo fixa na 1ª coluna, status tem/parcial/não/não sei/planejado, filtros "onde há diferença", "eles têm, nós não", "só nós temos"; clicar na célula edita e vira `by: oliver`, a IA nunca sobrescreve) · Mensagem (promessa do hero, CTA, prova social, tom, seções) · Reputação.
 - **Conteúdos** (`/conteudos`): feed de todos com período (7/30/90/tudo), rede, formato, concorrente, ordenação, status, ★, busca; faixa com mediana de views, engajamento, fora da curva e formato que mais rende; marcar e "Virar ideia" ali mesmo (`useMakeIdea`, compartilhado com a ficha).
 - **Redes** (`/redes`): um perfil por linha e rede (Instagram por padrão): seguidores, Δ, posts/semana, mediana de views e ♥, engajamento por seguidor, formato que rende, último post; quem não tem coleta naquela rede aparece embaixo (`metrics.ts`).
 - **Anúncios** (`/anuncios`): reservado para a fase D; atalhos para a Biblioteca de Anúncios de cada concorrente.
@@ -129,6 +129,7 @@ Pesquisa e implementação em paralelo (subagente, 2026-10-08): rotas públicas 
 - **D — Anúncios** (Biblioteca da Meta) e coleta semanal automática.
 
 ## Log
+- 2026-10-08 — fase C (parte): matriz de funcionalidades editável no Comparar (API `/matrix`, store, schema), preenchida para os 11 concorrentes (Sintropia entrou) e a Kzloo; conferida no app.
 - 2026-10-08 — diagnóstico com prints (`prints/antes/`), plano da estrutura. Pesquisa do Instagram sem token disparada em paralelo.
 - 2026-10-08 — Kzloo como linha de referência no Comparar e no gráfico do Panorama (dados do contexto).
 - 2026-10-08 — Oliver: coleta semanal só sob comando, sem agendamento → agendador removido (servidor, painel e estado).

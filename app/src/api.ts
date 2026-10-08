@@ -59,6 +59,8 @@ export interface WeeklyInfo {
   lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
   reports: { week: string; file: string }[];
 }
+import type { Matrix, CellStatus } from '../../schema/matrix';
+export type { Matrix, CellStatus };
 import type { Referencia } from '../../schema/referencia';
 export type { Referencia };
 export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
@@ -141,6 +143,11 @@ export const api = {
   cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
   runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
+  matrix: (slug: string) => req<Matrix>('GET', `${pj(slug)}/matrix`),
+  setMatrixCell: (slug: string, col: string, feat: string, c: { status: CellStatus | null; note?: string; source?: string }) => req<Matrix>('PUT', `${pj(slug)}/matrix/cells/${encodeURIComponent(col)}/${encodeURIComponent(feat)}`, c),
+  saveMatrixFeature: (slug: string, f: { id?: string; name: string; group: string; description?: string }) => req<Matrix>(f.id ? 'PUT' : 'POST', `${pj(slug)}/matrix/features${f.id ? `/${encodeURIComponent(f.id)}` : ''}`, f),
+  deleteMatrixFeature: (slug: string, id: string) => req<Matrix>('DELETE', `${pj(slug)}/matrix/features/${encodeURIComponent(id)}`),
+  renameMatrixGroup: (slug: string, from: string, to: string) => req<Matrix>('POST', `${pj(slug)}/matrix/rename-group`, { from, to }),
   referencia: (slug: string) => req<Referencia | null>('GET', `${pj(slug)}/referencia`),
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),

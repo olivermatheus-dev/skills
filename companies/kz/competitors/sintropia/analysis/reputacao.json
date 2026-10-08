@@ -1,0 +1,43 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-08T14:09:32Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/sintropia/"
+    },
+    {
+      "url": "https://apps.apple.com/br/app/sintropia-paciente/id6779793256"
+    },
+    {
+      "url": "https://www.instagram.com/sintropia.psi/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/sintropia/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 4,
+      "period": "1 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [
+      {
+        "store": "app-store",
+        "rating": 4.4,
+        "reviews": 7,
+        "url": "https://apps.apple.com/br/app/sintropia-paciente/id6779793256"
+      }
+    ],
+    "mentions": [
+      {
+        "source": "TikTok",
+        "url": "https://www.tiktok.com/discover/cupom-de-desconto-sintropia-psi",
+        "summary": "vídeos de psicólogas com cupom, provavelmente afiliação e não avaliação independente"
+      }
+    ],
+    "summary": "Reclame Aqui sem índice (poucas reclamações; a busca citou 1, o script achou 4: conferir). App do paciente 4,4 com 7 notas. Quase nenhuma avaliação independente do software encontrada."
+  }
+}

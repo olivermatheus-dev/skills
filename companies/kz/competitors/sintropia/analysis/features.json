@@ -1,0 +1,144 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-08T14:09:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    },
+    {
+      "url": "https://sintropia.app/software-para-psicologos/"
+    },
+    {
+      "url": "https://sintropia.app/fatos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda com sessões e bloqueios",
+            "highlight": true
+          },
+          {
+            "name": "Sincronização com Google Calendar",
+            "detail": "depende do plano",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Prontuário",
+        "items": [
+          {
+            "name": "Pacientes, sessões e prontuário digital",
+            "highlight": true
+          },
+          {
+            "name": "Rascunho de evolução a partir das notas",
+            "detail": "revisado antes de salvar",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Smart Notes",
+            "detail": "gravação com consentimento, transcrição e resumo",
+            "highlight": true
+          },
+          {
+            "name": "LUMA",
+            "detail": "junta áudio autorizado, notas e histórico num rascunho editável",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembretes por WhatsApp",
+            "detail": "conforme plano e configuração",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Sessões, pacotes e recebimentos",
+            "detail": "o que entrou e o que falta receber",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "App Sintropia Paciente (iPhone/iPad)",
+            "detail": "Cartão Diário, tarefas, escalas, modo escuro; acesso por convite",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Perfis de acesso (clínica, equipe, secretaria)",
+            "detail": "citado sem detalhes de permissão",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Criptografia em campos sensíveis e controle de vínculo profissional-paciente",
+            "highlight": true
+          },
+          {
+            "name": "Não vende dados nem treina modelos próprios com dados clínicos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Suporte humano por WhatsApp e e-mail",
+            "highlight": true
+          },
+          {
+            "name": "Acesso por navegador (PC, celular, tablet)",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "IA integrada (Smart Notes + LUMA) com revisão obrigatória",
+      "App nativo do paciente",
+      "Suporte humano como argumento central",
+      "Transparência de segurança e compromissos de dados"
+    ],
+    "missing": [
+      "videochamada nativa (não mostrada)",
+      "formulário online / ficha preenchida pelo paciente",
+      "perfil público / site do profissional",
+      "NFS-e",
+      "app nativo Android do paciente",
+      "plano grátis permanente"
+    ]
+  }
+}

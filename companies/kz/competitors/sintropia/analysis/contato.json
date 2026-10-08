@@ -1,0 +1,24 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-08T14:06:38Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "suporte@sintropia.me"
+    ],
+    "phones": [
+      "+55 21 4040-2552"
+    ],
+    "whatsapp": [
+      "+552140402552"
+    ],
+    "cnpj": "55.387.580/0001-03",
+    "socials": []
+  }
+}

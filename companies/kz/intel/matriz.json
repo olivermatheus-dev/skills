@@ -1,0 +1,2166 @@
+{
+  "updatedAt": "2026-10-08T12:00:00Z",
+  "groups": [
+    "Agenda",
+    "Prontuário",
+    "IA",
+    "Financeiro",
+    "Comunicação com paciente",
+    "Teleatendimento",
+    "Portal/app do paciente",
+    "Captação e perfil público",
+    "Segurança e conformidade",
+    "Equipe e clínica",
+    "Plataforma"
+  ],
+  "features": [
+    {
+      "id": "agenda-visual",
+      "name": "Agenda visual (dia/semana/mês)",
+      "group": "Agenda",
+      "description": "Agenda online com visões de dia, semana e mês",
+      "order": 1
+    },
+    {
+      "id": "recorrencia",
+      "name": "Sessões recorrentes",
+      "group": "Agenda",
+      "description": "Repete sessões (semanal, quinzenal, mensal) e bloqueia horários",
+      "order": 2
+    },
+    {
+      "id": "agendamento-paciente",
+      "name": "Agendamento online pelo paciente",
+      "group": "Agenda",
+      "description": "O paciente marca sozinho por link ou site de agendamento",
+      "order": 3
+    },
+    {
+      "id": "google-agenda",
+      "name": "Sincroniza com Google Agenda/iCal",
+      "group": "Agenda",
+      "description": "Integração da agenda com Google Calendar ou iCalendar",
+      "order": 4
+    },
+    {
+      "id": "fila-espera",
+      "name": "Fila de espera",
+      "group": "Agenda",
+      "description": "Lista de pacientes esperando horário",
+      "order": 5
+    },
+    {
+      "id": "pacotes-sessoes",
+      "name": "Pacotes de sessões",
+      "group": "Agenda",
+      "description": "Venda e controle de pacotes de sessões com saldo",
+      "order": 6
+    },
+    {
+      "id": "sessao-rapida",
+      "name": "Sessão rápida sem agendar",
+      "group": "Agenda",
+      "description": "Atender e registrar sem ter agendado antes",
+      "order": 7
+    },
+    {
+      "id": "prontuario",
+      "name": "Prontuário eletrônico",
+      "group": "Prontuário",
+      "description": "Registro de sessões e evolução clínica do paciente",
+      "order": 8
+    },
+    {
+      "id": "anamnese-modelos",
+      "name": "Anamnese e modelos personalizáveis",
+      "group": "Prontuário",
+      "description": "Fichas e formulários que o terapeuta adapta à sua abordagem",
+      "order": 9
+    },
+    {
+      "id": "formulario-paciente",
+      "name": "Ficha preenchida pelo paciente",
+      "group": "Prontuário",
+      "description": "O terapeuta envia link e o paciente preenche o próprio cadastro/anamnese",
+      "order": 10
+    },
+    {
+      "id": "escalas-testes",
+      "name": "Escalas e testes psicológicos",
+      "group": "Prontuário",
+      "description": "Instrumentos de avaliação com cálculo automático",
+      "order": 11
+    },
+    {
+      "id": "documentos-laudos",
+      "name": "Documentos, laudos e anexos",
+      "group": "Prontuário",
+      "description": "Modelos de documento, laudos, atestados e anexos do paciente",
+      "order": 12
+    },
+    {
+      "id": "assinatura-digital",
+      "name": "Assinatura digital de documentos",
+      "group": "Prontuário",
+      "description": "Assinatura eletrônica ou com certificado (ICP-Brasil)",
+      "order": 13
+    },
+    {
+      "id": "ia-transcricao-nota",
+      "name": "Transcrição e nota de sessão por IA",
+      "group": "IA",
+      "description": "Transforma áudio ou anotações em rascunho de nota/evolução para revisar",
+      "order": 14
+    },
+    {
+      "id": "ia-apoio-clinico",
+      "name": "IA de apoio clínico",
+      "group": "IA",
+      "description": "Plano terapêutico, detecção de risco, supervisão ou apoio durante a sessão",
+      "order": 15
+    },
+    {
+      "id": "ia-assistente",
+      "name": "Assistente de IA (agenda e mensagens)",
+      "group": "IA",
+      "description": "Secretária ou assistente de IA que agenda, remarca e responde",
+      "order": 16
+    },
+    {
+      "id": "controle-cobrancas",
+      "name": "Controle de cobranças e recebimentos",
+      "group": "Financeiro",
+      "description": "Cobrança por paciente, mensalidade, recebido e a receber",
+      "order": 17
+    },
+    {
+      "id": "cobranca-online",
+      "name": "Cobrança online (Pix, cartão, boleto)",
+      "group": "Financeiro",
+      "description": "O paciente paga por link/Pix/cartão/boleto dentro do sistema",
+      "order": 18
+    },
+    {
+      "id": "relatorios-fin",
+      "name": "Relatórios e fluxo de caixa",
+      "group": "Financeiro",
+      "description": "Relatórios financeiros, fluxo de caixa, DRE",
+      "order": 19
+    },
+    {
+      "id": "nfse",
+      "name": "Emissão de NFS-e",
+      "group": "Financeiro",
+      "description": "Nota fiscal de serviço emitida pelo sistema",
+      "order": 20
+    },
+    {
+      "id": "recibo-receita-saude",
+      "name": "Recibos e Receita Saúde",
+      "group": "Financeiro",
+      "description": "Recibo ao paciente e integração com a Receita Saúde",
+      "order": 21
+    },
+    {
+      "id": "repasses",
+      "name": "Repasses e comissões",
+      "group": "Financeiro",
+      "description": "Divide o recebido entre profissionais da clínica",
+      "order": 22
+    },
+    {
+      "id": "convenios-tiss",
+      "name": "Convênios e TISS",
+      "group": "Financeiro",
+      "description": "Faturamento de convênios e guias TISS",
+      "order": 23
+    },
+    {
+      "id": "wpp-lembrete",
+      "name": "Lembrete/confirmação por WhatsApp",
+      "group": "Comunicação com paciente",
+      "description": "Envio automático ao paciente antes da sessão",
+      "order": 24
+    },
+    {
+      "id": "email-sms",
+      "name": "Lembrete por e-mail ou SMS",
+      "group": "Comunicação com paciente",
+      "description": "Lembretes por e-mail e/ou SMS",
+      "order": 25
+    },
+    {
+      "id": "video-nativa",
+      "name": "Videochamada nativa",
+      "group": "Teleatendimento",
+      "description": "Sala de vídeo dentro do sistema, sem Meet/Zoom",
+      "order": 26
+    },
+    {
+      "id": "sala-espera",
+      "name": "Sala de espera virtual",
+      "group": "Teleatendimento",
+      "description": "O terapeuta vê em tempo real quem chegou ao link",
+      "order": 27
+    },
+    {
+      "id": "atendimento-integrado",
+      "name": "Vídeo + notas ao vivo na mesma tela",
+      "group": "Teleatendimento",
+      "description": "Tela de atendimento com vídeo, anotação e histórico juntos",
+      "order": 28
+    },
+    {
+      "id": "portal-paciente",
+      "name": "Portal/área do paciente",
+      "group": "Portal/app do paciente",
+      "description": "Área onde o paciente acessa documentos e informações",
+      "order": 29
+    },
+    {
+      "id": "app-paciente",
+      "name": "App nativo do paciente",
+      "group": "Portal/app do paciente",
+      "description": "Aplicativo do paciente na App Store/Google Play",
+      "order": 30
+    },
+    {
+      "id": "diario-tarefas",
+      "name": "Diário, humor e tarefas entre sessões",
+      "group": "Portal/app do paciente",
+      "description": "O paciente registra humor/hábitos e recebe tarefas entre sessões",
+      "order": 31
+    },
+    {
+      "id": "perfil-publico",
+      "name": "Perfil público do terapeuta",
+      "group": "Captação e perfil público",
+      "description": "Página pública para o paciente encontrar e contatar o terapeuta",
+      "order": 32
+    },
+    {
+      "id": "leads-pacientes",
+      "name": "Leads de pacientes (diretório)",
+      "group": "Captação e perfil público",
+      "description": "O sistema envia pacientes interessados",
+      "order": 33
+    },
+    {
+      "id": "materiais-marketing",
+      "name": "Materiais e ferramentas de marketing",
+      "group": "Captação e perfil público",
+      "description": "Templates, estúdio visual ou ferramentas grátis para divulgação",
+      "order": 34
+    },
+    {
+      "id": "lgpd-criptografia",
+      "name": "Criptografia e LGPD declaradas",
+      "group": "Segurança e conformidade",
+      "description": "Criptografia, backup e conformidade LGPD comunicados",
+      "order": 35
+    },
+    {
+      "id": "res-cfp",
+      "name": "Conformidade Res. CFP 09/2024",
+      "group": "Segurança e conformidade",
+      "description": "Comunica aderência à resolução do CFP sobre serviços psicológicos mediados por tecnologia",
+      "order": 36
+    },
+    {
+      "id": "multiprofissional",
+      "name": "Multiprofissional (agenda por equipe)",
+      "group": "Equipe e clínica",
+      "description": "Vários profissionais e agendas na mesma conta",
+      "order": 37
+    },
+    {
+      "id": "secretaria",
+      "name": "Perfil de secretária e acessos",
+      "group": "Equipe e clínica",
+      "description": "Acesso para secretária/equipe com permissões",
+      "order": 38
+    },
+    {
+      "id": "indicadores-gestao",
+      "name": "Indicadores e relatórios gerenciais",
+      "group": "Equipe e clínica",
+      "description": "Faltas, produção e métricas da clínica ou do paciente",
+      "order": 39
+    },
+    {
+      "id": "app-profissional",
+      "name": "App nativo do profissional",
+      "group": "Plataforma",
+      "description": "Aplicativo iOS/Android para o terapeuta",
+      "order": 40
+    },
+    {
+      "id": "migracao-assistida",
+      "name": "Migração/implantação assistida",
+      "group": "Plataforma",
+      "description": "O time migra os dados ou acompanha a implantação",
+      "order": 41
+    },
+    {
+      "id": "suporte-humano",
+      "name": "Suporte humano",
+      "group": "Plataforma",
+      "description": "Atendimento por pessoas (WhatsApp, e-mail ou ticket)",
+      "order": 42
+    },
+    {
+      "id": "cursos-comunidade",
+      "name": "Cursos, mentorias e comunidade",
+      "group": "Plataforma",
+      "description": "Conteúdo educacional e comunidade para o terapeuta",
+      "order": 43
+    }
+  ],
+  "cells": {
+    "allminds": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Google Agenda/iCal",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "pacotes-sessoes": {
+        "status": "sim",
+        "note": "Pacotes e assinaturas",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Personalizável, anexos, LGPD",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "sim",
+        "note": "Por abordagem",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Anexos no prontuário",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Cobranças automáticas",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "sim",
+        "note": "Boletos e links de pagamento",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "note": "Relatórios e dashboards",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "parcial",
+        "note": "100/mês, só no Ecossistema",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "Só no plano Ecossistema",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "email-sms": {
+        "status": "sim",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-assistente": {
+        "status": "sim",
+        "note": "Assistente de conversas",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "parcial",
+        "note": "R$ 2 por sessão no Gestão",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "sim",
+        "note": "Perfil no Portal Allminds",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "leads-pacientes": {
+        "status": "sim",
+        "note": "Sem comissão por sessão",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "materiais-marketing": {
+        "status": "sim",
+        "note": "Templates Canva e cursos",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cursos-comunidade": {
+        "status": "sim",
+        "note": "+20 cursos, mentorias, clube",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "migracao-assistida": {
+        "status": "sim",
+        "note": "Implantação com gerente de contas",
+        "source": "https://allminds.app/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "clinica-agil": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Por profissional, sala ou especialidade",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "sim",
+        "note": "Agenda por profissional/sala",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "sim",
+        "note": "Também SMS e e-mail; -38% faltas",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "email-sms": {
+        "status": "sim",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Evoluções, prescrições",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Declarações, prescrições",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Profissional revisa e aprova",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-assistente": {
+        "status": "sim",
+        "note": "Secretária IA 24h",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Contas a pagar/receber",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "note": "Fluxo de caixa e DRE",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "sim",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "repasses": {
+        "status": "sim",
+        "note": "Comissões a partir da agenda",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "convenios-tiss": {
+        "status": "sim",
+        "note": "TISS com controle de glosas",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "indicadores-gestao": {
+        "status": "sim",
+        "note": "Faltas, produção, origem",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-profissional": {
+        "status": "sim",
+        "note": "App para baixar",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.clinicaagil.com.br/site/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "corpora": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Integrada ao prontuário",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "note": "Recorrentes e bloqueios",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "note": "Site corpora.bio",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Criptografado",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "escalas-testes": {
+        "status": "sim",
+        "note": "Cálculo automático",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Modelos de documentos e anexos",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Receitas e despesas por paciente",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "sim",
+        "note": "Pix e cartão (Corpora Pay)",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "sim",
+        "note": "Receita Saúde",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "Só no plano Pro",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "parcial",
+        "note": "Usa Jitsi ou Meet",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "parcial",
+        "note": "Diário de Bordo e link de cadastro",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "sim",
+        "note": "Diário de Bordo",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "formulario-paciente": {
+        "status": "sim",
+        "note": "Link de cadastro e atualização",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Transcrição, reescrita, foto de manuscrito",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "sim",
+        "note": "Planejar sessão com IA",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "Criptografia, backup, DPA",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "sim",
+        "note": "Acesso administrativo",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "nao",
+        "note": "1 profissional por plano",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-profissional": {
+        "status": "nao",
+        "note": "Não mencionado no site",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cursos-comunidade": {
+        "status": "sim",
+        "note": "Conteúdo e comunidade",
+        "source": "https://usecorpora.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "gestorpsi": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Agendamento de atendimentos",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "fila-espera": {
+        "status": "sim",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Técnico, com impressão",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Honorários e faturas",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "convenios-tiss": {
+        "status": "parcial",
+        "note": "Convênios por serviço",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "email-sms": {
+        "status": "parcial",
+        "note": "Só e-mail",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "indicadores-gestao": {
+        "status": "sim",
+        "note": "Relatórios estatísticos",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "sim",
+        "note": "Secretária, estudante, admin",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "sim",
+        "note": "Até 50 profissionais",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-assistente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://gestorpsi.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "mais-terapias": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Dia/semana/mês e recorrente",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "parcial",
+        "note": "Só Premium+",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "parcial",
+        "note": "Só no plano Clínicas",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Privacidade por registro",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "parcial",
+        "note": "Formulários dinâmicos: Premium+",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "parcial",
+        "note": "Papel timbrado: Premium+",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "assinatura-digital": {
+        "status": "sim",
+        "note": "ICP-Brasil, certificado A1 próprio",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "SOAP por áudio",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Receitas, despesas e pagamentos",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "pacotes-sessoes": {
+        "status": "sim",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "parcial",
+        "note": "Só Premium+",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "25 msgs/mês; recarga paga",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "sim",
+        "note": "Paciente e família",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "Criptografia e controle de acesso",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "parcial",
+        "note": "Só no plano Clínicas",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "indicadores-gestao": {
+        "status": "parcial",
+        "note": "Dashboard no plano Clínicas",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-profissional": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.maisterapias.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "personcare": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Dia/semana/mês com lembretes",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "note": "Link de agendamento",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Digital, com metas",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "sim",
+        "note": "Anamnese",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "escalas-testes": {
+        "status": "sim",
+        "note": "Avaliação psicológica",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Áudio da sessão para o prontuário",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Faturamento, receitas, despesas",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "sim",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "sim",
+        "note": "Receita Saúde",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "sim",
+        "note": "Ilimitados, sem recarga",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "note": "Telepsicologia",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "sim",
+        "note": "App do paciente",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-paciente": {
+        "status": "sim",
+        "note": "Consultas, faturamento, humor",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "sim",
+        "note": "Humor e hábitos",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-profissional": {
+        "status": "sim",
+        "note": "iOS e Android",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cursos-comunidade": {
+        "status": "nao",
+        "note": "Em desenvolvimento",
+        "source": "https://personcare.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "psicomanager": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Inteligente e de salas",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "note": "Google e iCalendar",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "fila-espera": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "sim",
+        "note": "Clínica multiprofissional",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "sim",
+        "note": "Modelos prontos e por abordagem",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "assinatura-digital": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Transcrição e resumo",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "sim",
+        "note": "Insights por paciente",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "sim",
+        "note": "Pix, boleto e cartão",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "sim",
+        "note": "Receita Saúde",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "repasses": {
+        "status": "sim",
+        "note": "Repasses e comissões",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "convenios-tiss": {
+        "status": "sim",
+        "note": "Gestão de convênios",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "Créditos limitados no básico",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "email-sms": {
+        "status": "sim",
+        "note": "SMS, e-mail e push",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "note": "Com recursos terapêuticos",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "sim",
+        "note": "App: agendamento e pagamento",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-paciente": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "sim",
+        "note": "Diário das emoções e tarefas",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "sim",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "AES-256, AWS multi-zona",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://psicomanager.com.br/planos",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "psicoplanner": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Diária e semanal",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "sim",
+        "note": "Autoagendamento por link",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "sim",
+        "note": "Anamnese personalizável",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Documentos personalizados",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "PsiAssist preenche o prontuário",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "sim",
+        "note": "Ilimitados, incluso",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Pagamentos e recibos",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "parcial",
+        "note": "Recibos, sem Receita Saúde",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "suporte-humano": {
+        "status": "sim",
+        "note": "100% humano",
+        "source": "https://psicoplanner.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "psinota-ai": {
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Nota por áudio, ditado ou foto",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "sim",
+        "note": "Risco, supervisão, plano",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "CID-11 e histórico",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Laudos, parecer, TCLE",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "escalas-testes": {
+        "status": "sim",
+        "note": "Correção automática",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "formulario-paciente": {
+        "status": "parcial",
+        "note": "Cadastro pelo WhatsApp",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "parcial",
+        "note": "Só planos pagos",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "fila-espera": {
+        "status": "parcial",
+        "note": "Só planos pagos",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Só planos pagos",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "parcial",
+        "note": "Só relatório IRPF",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "Mensagem pronta, envio manual",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "note": "Sem gravação, sem instalar",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "parcial",
+        "note": "Companheiro do paciente (Pro)",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "sim",
+        "note": "Check-ins entre sessões",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "sim",
+        "note": "Para captar pacientes",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "materiais-marketing": {
+        "status": "sim",
+        "note": "Estúdio Visual e ferramentas grátis",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "AES-256-GCM e LGPD",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "res-cfp": {
+        "status": "sim",
+        "note": "Comunica adequação à CFP 09/2024",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "nao",
+        "note": "Só no plano sob consulta",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "repasses": {
+        "status": "nao",
+        "note": "Só no plano sob consulta",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "indicadores-gestao": {
+        "status": "parcial",
+        "note": "Dashboard no plano Clínica",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://psinotaai.com/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "sintropia": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Sessões e bloqueios",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "parcial",
+        "note": "Depende do plano",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "sim",
+        "note": "Smart Notes e LUMA",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "parcial",
+        "note": "Conforme plano e configuração",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Recebido e a receber",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "pacotes-sessoes": {
+        "status": "sim",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "sim",
+        "note": "App por convite",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-paciente": {
+        "status": "parcial",
+        "note": "iPhone/iPad, sem Android",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "sim",
+        "note": "Cartão Diário, tarefas, escalas",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "escalas-testes": {
+        "status": "parcial",
+        "note": "Escalas no app do paciente",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "sim",
+        "note": "Clínica, equipe e secretaria",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "Campos sensíveis; sem treino de IA",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "suporte-humano": {
+        "status": "sim",
+        "note": "WhatsApp e e-mail",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "formulario-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://sintropia.app/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "terapee": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Avulsa, recorrente, multi-agenda",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "sim",
+        "note": "Multi-agenda da equipe",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "parcial",
+        "note": "Só plano Clínica Max",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "pacotes-sessoes": {
+        "status": "sim",
+        "note": "Com saldo",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "sim",
+        "note": "Formulários personalizáveis",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "sim",
+        "note": "Documentos personalizáveis",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "assinatura-digital": {
+        "status": "sim",
+        "note": "Certificado A1 ou eletrônica",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-assistente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Cobrança automática",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "parcial",
+        "note": "Só cartão",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "sim",
+        "note": "Incluída em todos os planos",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "sim",
+        "note": "Recibos em PDF",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "repasses": {
+        "status": "sim",
+        "note": "Repasse de profissionais",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "sim",
+        "note": "-25% faltas; número próprio à parte",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "note": "No navegador, link pelo WhatsApp",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "nao",
+        "note": "Não mostra no site",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "sim",
+        "note": "Até 15 usuários ou ilimitado",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "sim",
+        "note": "AES-256 e TLS 1.3",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "materiais-marketing": {
+        "status": "sim",
+        "note": "Calculadora de precificação",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "migracao-assistida": {
+        "status": "sim",
+        "note": "+14 mil pacientes migrados",
+        "source": "https://www.terapee.com.br/funcionalidades/",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    },
+    "_nos": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Dia, semana, mês e ano",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "note": "Semanal, quinzenal, mensal",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "agendamento-paciente": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "google-agenda": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "fila-espera": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "pacotes-sessoes": {
+        "status": "sim",
+        "note": "Créditos descontados por sessão",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "sessao-rapida": {
+        "status": "sim",
+        "note": "Atende sem agendar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "prontuario": {
+        "status": "sim",
+        "note": "Notas e planejamento por sessão",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "anamnese-modelos": {
+        "status": "parcial",
+        "note": "Ficha completa, sem modelos",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "formulario-paciente": {
+        "status": "sim",
+        "note": "Paciente preenche por link",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "escalas-testes": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "documentos-laudos": {
+        "status": "parcial",
+        "note": "Troca de arquivos; sem modelos",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "assinatura-digital": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-transcricao-nota": {
+        "status": "desconhecido",
+        "note": "Oculta no código; confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-apoio-clinico": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "ia-assistente": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "controle-cobrancas": {
+        "status": "sim",
+        "note": "Mensalidade ou pacote, baixa manual",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cobranca-online": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "nfse": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "recibo-receita-saude": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "repasses": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "convenios-tiss": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "wpp-lembrete": {
+        "status": "sim",
+        "note": "Confirmação automática; desligada na conta",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "email-sms": {
+        "status": "nao",
+        "note": "Não existe",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "video-nativa": {
+        "status": "sim",
+        "note": "Link kz.app.br/call; vídeo não testado",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "sala-espera": {
+        "status": "sim",
+        "note": "Chegada em tempo real",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "atendimento-integrado": {
+        "status": "sim",
+        "note": "Sessão Inteira",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "portal-paciente": {
+        "status": "sim",
+        "note": "Área do Cliente; visão não vista",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-paciente": {
+        "status": "nao",
+        "note": "Só web",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "diario-tarefas": {
+        "status": "desconhecido",
+        "note": "Não visto; confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "sim",
+        "note": "Pronta; desativada na conta",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "leads-pacientes": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "materiais-marketing": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "lgpd-criptografia": {
+        "status": "desconhecido",
+        "note": "Afirmada na copy; confirmar (T-0010)",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "res-cfp": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "multiprofissional": {
+        "status": "nao",
+        "note": "Uso solo",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "secretaria": {
+        "status": "nao",
+        "note": "Uso solo",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "indicadores-gestao": {
+        "status": "parcial",
+        "note": "Métricas por cliente",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "app-profissional": {
+        "status": "nao",
+        "note": "Só web",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "migracao-assistida": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "suporte-humano": {
+        "status": "parcial",
+        "note": "Tickets no app; canal humano a confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      },
+      "cursos-comunidade": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/kz/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-08T12:00:00Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-08T14:09:23Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    },
+    {
+      "url": "https://sintropia.app/software-para-psicologos/"
+    },
+    {
+      "url": "https://sintropia.app/sobre/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Software web para psicólogos: agenda, prontuário, financeiro e IA (LUMA) com suporte humano.",
+    "text": "Plataforma brasileira com agenda, pacientes, prontuário, Smart Notes (gravação, transcrição e resumo com consentimento), LUMA (rascunho de evolução revisável), financeiro de sessões e pacotes e lembretes por WhatsApp. Tem app nativo do paciente (iPhone/iPad). Posiciona-se como o software favorito e que mais cresce entre psicólogos (sem número que comprove). Forte em segurança, consentimento e suporte humano; opera desde 2024, versão 2.0 lançada.",
+    "audience": "psicólogas e psicólogos, incluindo clínicas e equipes",
+    "positioning": "Tenha tempo. Tenha Sintropia.",
+    "size": "~53 mil seguidores no Instagram; nº de clientes não declarado"
+  }
+}

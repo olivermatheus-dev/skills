@@ -117,6 +117,13 @@ on('GET', '/api/projects/:slug/referencia', async (p) => {
   const f = join(S.ROOT, company(p.slug), 'intel', 'referencia.json');
   return existsSync(f) ? Referencia.parse(JSON.parse(readFileSync(f, 'utf8'))) : null;
 });
+// matriz de funcionalidades × concorrentes (intel/matriz.json); célula editada aqui vira by: 'oliver'
+on('GET', '/api/projects/:slug/matrix', (p) => S.getMatrix(p.slug));
+on('PUT', '/api/projects/:slug/matrix/cells/:col/:feat', (p, b) => S.setMatrixCell(p.slug, p.col, p.feat, { status: b.status ?? null, note: b.note, source: b.source }, 'oliver'));
+on('POST', '/api/projects/:slug/matrix/features', (p, b) => S.saveMatrixFeature(p.slug, b));
+on('PUT', '/api/projects/:slug/matrix/features/:id', (p, b) => S.saveMatrixFeature(p.slug, { ...b, id: p.id }));
+on('DELETE', '/api/projects/:slug/matrix/features/:id', (p) => S.deleteMatrixFeature(p.slug, p.id));
+on('POST', '/api/projects/:slug/matrix/rename-group', (p, b) => S.renameMatrixGroup(p.slug, String(b.from ?? ''), String(b.to ?? '')));
 // coletor de anúncios (Playwright só carrega dentro do collectAds)
 const adsMod = () => import('../../tools/intel/ads');
 on('GET', '/api/projects/:slug/ads', async (p) => {

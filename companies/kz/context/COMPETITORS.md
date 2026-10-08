@@ -11,6 +11,7 @@ O mercado é maduro e lotado: mais de 15 sistemas verticais ativos. Todos têm a
 | PersonCare | R$ 69,90 (clínica R$ 119,90 / 349,90) | "AI-first", transcrição, portal com humor/metas | marca fria e tecnológica, sem história de fundador |
 | Allminds | R$ 74,90 / 179,90, trial 15 dias | "psicólogo empreendedor", mentoria e comunidade | discurso empresarial afasta quem se vê como profissional; parece marketplace |
 | PsiNota AI | R$ 0 / 49 / 119 (anual R$ 32,50 / 79 por mês) | IA clínica em tempo real, único a comunicar conformidade com CFP 09/2024 | tom "AI-first", sem portal, vídeo e WhatsApp fora do centro |
+| Sintropia (~53k no IG) | R$ 99 mensal; anual R$ 790 (12x R$ 79,90), trial 15 dias sem cartão | "software favorito dos psicólogos", Sintropia 2.0 com IA (Smart Notes + LUMA com revisão), app do paciente iOS, WhatsApp | só psicólogos, sem videochamada nativa à vista, claims sem prova, app do paciente só iOS |
 | Mais Terapias (5k+) | R$ 39,90 / 59,90 (promo; cheio 59,90 / 79,90) | "rede de cuidado" multidisciplinar (fisio, fono, TO), áudio vira nota | foco em reabilitação e equipe, não no terapeuta solo |
 | Terapee | R$ 55,90 | preço baixo, LGPD | foco em clínica e equipe, sem IA, sem plano grátis (tem telemedicina no navegador) |
 | GestorPsi | R$ 34,50 | o mais antigo, apoio FAPESP | interface velha, sem vídeo, WhatsApp ou portal: pronto para ser trocado |

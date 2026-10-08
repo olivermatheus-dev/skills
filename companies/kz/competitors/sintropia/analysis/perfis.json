@@ -1,0 +1,46 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-08T14:09:20Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sintropia.app/"
+    },
+    {
+      "url": "https://www.instagram.com/sintropia.psi/"
+    },
+    {
+      "url": "https://www.youtube.com/@sintropiapsi"
+    },
+    {
+      "url": "https://apps.apple.com/br/app/sintropia-paciente/id6779793256"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://sintropia.app",
+        "note": "domínio institucional; o sistema roda em sintropia.me"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/sintropia.psi/",
+        "handle": "sintropia.psi",
+        "note": "verificado, bio 'Tenha tempo, tenha Sintropia' e link para sintropia.app; ~53,4 mil seguidores"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@sintropiapsi",
+        "handle": "sintropiapsi",
+        "note": "descrição do canal bate com o produto (sessão ao prontuário, agenda, pagamentos)"
+      }
+    ],
+    "notFound": [
+      "tiktok oficial (só vídeos de psicólogas parceiras com cupom)",
+      "linkedin (o achado é outra empresa, no Chile)",
+      "facebook"
+    ]
+  }
+}

@@ -7,7 +7,7 @@ import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
-  Capture, Mockup, MockupBrand, Format, FormatExample, COMPANIES, FORMATS, P, STATUS,
+  Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -704,6 +704,57 @@ export const formatRefFile = (id: string, file: string) => {
   return existsSync(f) ? f : null;
 };
 
+// ---------- Matriz de funcionalidades × concorrentes (intel/matriz.json) ----------
+const matrixFile = (slug: string) => join(company(slug), 'intel', 'matriz.json');
+export function getMatrix(slug: string): Matrix {
+  return exists(matrixFile(slug)) ? readJson(Matrix, matrixFile(slug)) : { ...EMPTY_MATRIX, updatedAt: nowIso() };
+}
+function saveMatrix(slug: string, m: Matrix) {
+  const v = check(Matrix, { ...m, updatedAt: nowIso() }, matrixFile(slug));
+  writeJson(matrixFile(slug), v);
+  return v;
+}
+/** Grava (ou limpa, com `status: null`) uma célula. A IA (`by: 'ia'`) nunca sobrescreve célula do Oliver: devolve a matriz como está. */
+export function setMatrixCell(slug: string, col: string, featureId: string, c: { status: CellStatus | null; note?: string; source?: string }, by: 'ia' | 'oliver' = 'oliver') {
+  const m = structuredClone(getMatrix(slug));
+  const cur = m.cells[col]?.[featureId];
+  if (by === 'ia' && cur?.by === 'oliver') return m;
+  m.cells[col] ??= {};
+  if (c.status === null) delete m.cells[col][featureId];
+  else m.cells[col][featureId] = { status: c.status, ...(c.note?.trim() ? { note: c.note.trim() } : {}), ...(c.source?.trim() ? { source: c.source.trim() } : {}), by, updatedAt: nowIso() };
+  return saveMatrix(slug, m);
+}
+/** Cria (sem `id`) ou atualiza uma funcionalidade; grupo novo entra no fim da lista de grupos. */
+export function saveMatrixFeature(slug: string, f: { id?: string; name: string; group: string; description?: string }) {
+  const m = structuredClone(getMatrix(slug));
+  const group = f.group.trim();
+  if (!m.groups.includes(group)) m.groups.push(group);
+  const cur = f.id ? m.features.find((x) => x.id === f.id) : undefined;
+  if (cur) Object.assign(cur, { name: f.name.trim(), group, description: f.description?.trim() || undefined });
+  else {
+    let id = slugify(f.name).slice(0, 40) || 'feature', n = 2;
+    while (m.features.some((x) => x.id === id)) id = `${slugify(f.name).slice(0, 36)}-${n++}`;
+    m.features.push({ id, name: f.name.trim(), group, description: f.description?.trim() || undefined, order: Math.max(0, ...m.features.map((x) => x.order)) + 1 });
+  }
+  m.groups = m.groups.filter((g) => m.features.some((x) => x.group === g));
+  return saveMatrix(slug, m);
+}
+export function deleteMatrixFeature(slug: string, id: string) {
+  const m = structuredClone(getMatrix(slug));
+  m.features = m.features.filter((x) => x.id !== id);
+  for (const col of Object.keys(m.cells)) delete m.cells[col][id];
+  m.groups = m.groups.filter((g) => m.features.some((x) => x.group === g));
+  return saveMatrix(slug, m);
+}
+export function renameMatrixGroup(slug: string, from: string, to: string) {
+  const m = structuredClone(getMatrix(slug));
+  const t = to.trim();
+  if (!t || !m.groups.includes(from)) return m;
+  m.groups = [...new Set(m.groups.map((g) => (g === from ? t : g)))];
+  for (const f of m.features) if (f.group === from) f.group = t;
+  return saveMatrix(slug, m);
+}
+
 // ---------- Validação geral ----------
 export function validateAll():{ file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
@@ -729,6 +780,7 @@ export function validateAll():{ file: string; issues: string[] }[] {
     // estúdio de mockups (028): capturas e preferências da marca
     for (const c of list(P.capturas(d), /^\d{4}-\d{2}-\d{2}-/)) if (exists(join(P.capturas(d), c, 'captura.json'))) tryIt(() => readJson(Capture, join(P.capturas(d), c, 'captura.json')));
     if (exists(join(P.brand(d), 'mockups.json'))) tryIt(() => readJson(MockupBrand, join(P.brand(d), 'mockups.json')));
+    if (exists(matrixFile(d))) tryIt(() => getMatrix(d));
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));
