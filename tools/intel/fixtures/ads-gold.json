@@ -1,0 +1,1521 @@
+{
+ "hoje": "2026-10-08T12:00:00-03:00",
+ "itens": [
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1072765912388161",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-08-06",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Depois de tentativas frustradas, indicações que não encaixavam e buscas sem fim… chegou o match que realmente importa: a compatibilidade entre o que você precisa e quem pode te ajudar.\n\nEnvie-nos uma mensagem e encaminharemos seu contato para até 3 profissionais de acordo com as suas necessidades.\n\n➡️ Encontre seu terapeuta ideal agora",
+    "title": "Encontre seu terapeuta",
+    "description": "Responda algumas perguntas rápidas e receba até 3 psicólogos compatíveis com você direto no seu WhatsApp. Psicólogos verificados, valores transparentes, online ou presencial.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://lp.captamaispsi.com.br/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/765188023_2372953403513338_2944149566487006612_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=GC22biWqK_8Q7kNvwEu08sp&_nc_oc=AdpZnq7B9gyJT4mBTtLiHOsi6uqQHdVLZ3nYfy32DBJV9E9zoXzr5564bcQQlya-goRJ572Nsz6sUXTkO4w1p96j&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQP4Lss373p-xgXk_1ZGdGl_2fgYb_38kLvbr8jS1CZirg&oe=6ACDA047",
+     "thumbnailLocal": "media/ads/1072765912388161.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1072765912388161"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": null,
+    "objetivo": "trafego"
+   },
+   "por": "claude",
+   "nota": "Allminds \"encontre seu terapeuta\": anúncio para paciente, fora da taxonomia de tipo"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1100512279508931",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-09-15",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "whatsapp"
+    ],
+    "text": "Quanto da sua sessão fica com você, de verdade?\n\nNos marketplaces, você atende, acolhe, se dedica. E ainda divide o valor com quem só te apresentou o paciente.\n\nNa Allminds não. Você recebe 9 pessoas interessadas em psicoterapia em 3 meses, por R$223,20 (R$74,40/mês). Sem comissão. Sem repasse por sessão.\n\nVocê entra em contato, conduz a conversa e fecha a sessão. O valor é 100% seu, sempre.\n\nPlanos com até 30%OFF. Chama a gente no WhatsApp e fala com uma especialista Allminds.",
+    "title": "Converse conosco",
+    "cta": "Enviar mensagem pelo WhatsApp",
+    "linkUrl": "https://api.whatsapp.com/send",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/770884641_4234963046753713_4686648702945179991_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=z5yR6vlPA0QQ7kNvwEMiTpB&_nc_oc=AdqlMq8cn8kSkLzW0sE0acAFcYOZyhw14AeqJCm87atgwxkt_LCXB7S1_mNuH401wCfqIDr61j5jIELyVfQV-EK5&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNrjmCp1P66Rcccn16EboJRnXwMOnujayTiMnhEs3bV9A&oe=6ACD92CA",
+     "thumbnailLocal": "media/ads/1100512279508931.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1100512279508931"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "mensagem-whatsapp"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "2513495322460918",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-08-06",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger",
+     "threads"
+    ],
+    "text": "Você estudou para cuidar de pessoas. Mas ninguém te ensinou a cuidar de um negócio.\n\nE aí começa o caos:\n\n❌ dificuldade para atrair pacientes\n❌ agenda desorganizada\n❌ horas gastas com tarefas administrativas\n❌ financeiro que você não consegue acompanhar\n❌ várias ferramentas diferentes para dar conta de tudo\n\nE se você pudesse colocar tudo isso em um só lugar?\n\nNa Allminds, você tem:\n🔹 Captação: pacientes interessados em psicoterapia chegando até você\n🔹 Gestão: agenda, prontuário, financeiro, pagamentos e muito mais\n🔹 Conhecimento: cursos e comunidade para você desenvolver seu negócio\n\nE o melhor: sem comissão sobre suas sessões.\nVocê atrai. Você conversa. Você agenda.\n\nO valor da sua sessão continua sendo 100% seu.\n\nMenos improviso. Mais estrutura.\nMais autonomia para crescer.",
+    "title": "Teste grátis",
+    "description": "Organize sua clínica, receba pacientes interessados sem comissão por sessão e cresça com previsibilidade. A partir de R$2,00 por dia.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://lp-menoscaosmaispacientes.lovable.app/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/764925259_1523421545630621_7747153440054620802_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3BBoYsSszKMQ7kNvwGcjNvM&_nc_oc=Adq7M6SxQWXSLXXRT0K7SJ6SwCSEezFkVpMARePJGmg4R_fiZuTYiT9ESo6umTpzmU-CVAVYT3zGhlfQzRvPTmMj&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQP_50rcNu9DM7zNbORnJHYN5VLIenoxnCGNRXQaIqm1nQ&oe=6ACD8D99",
+     "thumbnailLocal": "media/ads/2513495322460918.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2513495322460918"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude",
+   "nota": "Allminds teste grátis para LP: o \"Saiba mais\" esconde um cadastro"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "4294286304235456",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-07-20",
+    "platforms": [
+     "instagram",
+     "whatsapp"
+    ],
+    "text": "Você estudou para atender pessoas, não para passar horas tentando conseguir novos pacientes.\n\nCom a Allminds, você recebe contatos de pessoas que já passaram por uma triagem e procuram atendimento na sua faixa de valor (R$ 80 a R$ 100 por sessão), sem pagar comissão sobre as sessões realizadas.\n\nE agora ficou ainda melhor:\n\n🔹 Plano Trimestral\n✔️ 9 contatos em 3 meses\n💙 De R$ 279 por R$ 223,20\nCupom: ALL20TRIMESTRAL\n\n🔸 Plano Semestral (melhor custo-benefício)\n✔️ 18 contatos em 6 meses\n💙 De R$ 499 por R$ 349,30\nCupom: ALL30\n\nPor apenas R$ 126,10 a mais, você dobra o período de captação e também a quantidade de contatos.\n\nAlém disso, você recebe:\n✔️ Contatos com triagem prévia\n✔️ Perfil no Portal Allminds\n✔️ 100% do valor das suas sessões fica com você\n\n💡 Um único paciente já pode pagar o investimento.\n\nClique para garantir seu desconto agora mesmo e começar a crescer com autonomia!",
+    "title": "Garanta seu desconto",
+    "cta": "Enviar mensagem pelo WhatsApp",
+    "linkUrl": "https://api.whatsapp.com/send",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/749286170_2095167367703780_8466817778788098099_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=B-k7picIEQMQ7kNvwEKhxlh&_nc_oc=Adp5fza2l0p31dsETZCLbtN3umTaWvd4A96MTIVbwVFNhWP3X4hKrY6RPfc2w0wDRuHz2O3Gyg1geROhQbH1sBcj&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQN6CZf3ecj8GCeknD2EeSQt1OcBxNOwmTtcbQrtDwVOZw&oe=6ACD84F3",
+     "thumbnailLocal": "media/ads/4294286304235456.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNuTEwt1TVGtS-QEHdudLWW9I0_FHfVTZgvkUbRV0t_eWYgiskn3sr0fTNwvVrioP8g7iHs_T8FUGepo_ZVbvkHGkwtxpAzbNi0j_AjrKyD6g.mp4?_nc_cat=104&_nc_oc=Adpc3wbJaigj4fE8U_ARMeT9gcYJCtJWbqOrROySe8Wt6qSC50snVDKjPNwErvmOBRsmenYjr0vUJjrQi824s5eO&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=E0JWawhu39oQ7kNvwG-Kaeb&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEwMjcyNTYwMTAwMzM5NjksImFzc2V0X2FnZV9kYXlzIjo3OSwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjE2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=1a2d2f914a84b2e2&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84NTQwNjFFRTk4NUU0NERBQUFEMTc2NDRBNkM0Qzk4NV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIwNEQwQkM2MTQwNjczQ0VBRjIwMTVBOUQ3Q0YyNEJDX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbirJLZlZLTAxUCKAJDMywXQDCzMzMzMzMYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQOEmOcHEtBXs19givFuXa0ozj_1QdNLE6xEWp0ySAJ-RQ&oe=6ACDA010"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=4294286304235456"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "mensagem-whatsapp"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1516968696853420",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-09-09",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Ser um “bom psicólogo” hoje mudou. E você precisa estar atento a isso! 🧠✨\n\nAntigamente, entregar bons resultados na sessão parecia ser o único requisito. Hoje, o conceito de resultado se ampliou: o paciente busca uma experiência completa, desde o primeiro contato até a gestão do consultório e a presença nas redes sociais. \n\nAlém disso, os próprios pacientes perguntam: \"Qual é o seu Instagram? Quero te acompanhar!\".\n\nO profissional que se destaca atualmente não é só aquele que entrega ótimos resultados na terapia, mas também aquele que cuida da experiência do cliente, da tecnologia e da gestão do seu negócio. \n\nA tal \"solidão clínica\" ficou no passado. O mercado exige que o psicólogo do presente também saiba gerir e se posicionar.\n\n💡 Quer ver a conversa completa com a Cris Linhares sobre o futuro da psicologia e gestão?\n\nAssista ao 1º episódio completo da nossa série!\n\n👉 Clique no link da bio e assista agora ao Capítulo 1!\n\n#Allminds #Allmindsapp",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://instagram.com/allminds.app",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/800073608_1720718965897798_7646439627586094503_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=gHA7WLwFCS4Q7kNvwFBXof1&_nc_oc=AdqW0Owxf_cqEbBBysfyr-JFeEl3h2kiYLQLNpZ1LnlK5SlYl6AtcxVTBCMJhRThDAU8lvVkfTntxMsvchg8TfNK&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNtedCrmAeMGzxwoli6U88SJlTbqsT9nrHLxhYZmcQYzA&oe=6ACD837E",
+     "thumbnailLocal": "media/ads/1516968696853420.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m367/AQMajG_DnVM9OXZLnM66wi-PTSzP09X8cQyArO-TRmyoy17naowWrV_lAgZmCVfd29D8MqcHVNfMVnjEQ9NlQNx620nCOaIOu_MRqoZtOg.mp4?_nc_cat=108&_nc_oc=AdrsqLAZVIacgzBfNWjmlTsBkFBdKmnhc1mmo9YpPKWLfesNKI3Xn5uaTWxR8Y7g3jvYt4gozy3xAGvO1KfRfmNs&_nc_sid=ef5aa3&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=h83kgg5jpmgQ7kNvwGMRZFJ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLnByb2dyZXNzaXZlX2gyNjQtYmFzaWMtZ2VuMl83MjBwIiwieHB2X2Fzc2V0X2lkIjoxNzg2NzgyNDk5MjI2OTE3LCJhc3NldF9hZ2VfZGF5cyI6MzMsInZpX3VzZWNhc2VfaWQiOjEyMzc0LCJkdXJhdGlvbl9zIjo2NSwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO09M-2XFprsF8bOAhdoQwKRHIUQkuzAYgvQWbQEjw9cg&oe=6ACD8DDA"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1516968696853420"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1713025166432440",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-10-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "whatsapp",
+     "threads"
+    ],
+    "text": "Você passou anos aprendendo a ser psicóloga.\nAgora começa uma parte que quase ninguém ensina na faculdade: como construir sua própria prática.\n\n✅ Como se posicionar?\n✅ Como atrair pacientes?\n✅ Como organizar seu financeiro?\n✅ Como organizar sua rotina?\n✅ Como divulgar seu trabalho?\n\nNa Allminds, você encontra tudo em um único lugar: sistema de gestão do consultório, captação de pacientes interessados, formação empreendedora e suporte humano de verdade. Porque crescer com autonomia não significa precisar descobrir tudo sozinha.\n\nCresça com autonomia. Construa sua jornada com a Allminds. 👉 Conheça a Allminds.",
+    "title": "Allminds | Cresça com autonomia na psicologia",
+    "description": "Presença, pacientes, conhecimento e gestão em um só lugar: a Allminds oferece estrutura, conteúdos e suporte para você construir sua carreira na psicologia.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/831313351_1268165822112580_7982358303096044609_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=uM6mFjAMWh8Q7kNvwH4TRoH&_nc_oc=AdrChivIoC0cjWf3kh0Z0XRXY8a49P15I0KGjD6fy0JQnYBwh8fTSilmXBP6vDecdO8UX4treBBPkW6rkm2uwiDn&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQPRE2UyLYVrXQE_7EaGU7Y-9yLCHBPmh9Qh6R02fP2PWQ&oe=6ACD7DB0",
+     "thumbnailLocal": "media/ads/1713025166432440.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1713025166432440"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1301904321986345",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-10-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "whatsapp",
+     "threads"
+    ],
+    "text": "Você passou anos aprendendo a ser psicóloga.\nAgora começa uma parte que quase ninguém ensina na faculdade: como construir sua própria prática.\n\n✅ Como se posicionar?\n✅ Como atrair pacientes?\n✅ Como organizar seu financeiro?\n✅ Como organizar sua rotina?\n✅ Como divulgar seu trabalho?\n\nNa Allminds, você encontra tudo em um único lugar: sistema de gestão do consultório, captação de pacientes interessados, formação empreendedora e suporte humano de verdade. Porque crescer com autonomia não significa precisar descobrir tudo sozinha.\n\nCresça com autonomia. Construa sua jornada com a Allminds. 👉 Conheça a Allminds.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/831224144_1740090140587622_5399464469850567647_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=9ljJIuixAl0Q7kNvwFjwivw&_nc_oc=AdrE-L41w5NfhlZE8uQeb0dCC5WMTprGtNwUdx1PfpLimYOT9J6Z2dZjp0x8glGRo9MGFO4MoSeRsbVwfNcCxZ_Y&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNGbAloSEekeVcVkZ4L9X5b3wYfpwXsZWAFw7K12kpdvw&oe=6ACD74B8",
+     "thumbnailLocal": "media/ads/1301904321986345.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQO6SZ2OHTu6PLQoRah2OZQZSPMvsTz4XOWmtRIM96f3SYwPHxAghJkOvzIneo-qxmWcKSzDq3NpKcCEEEoB65wbKsFtRnVVhYttVjE34SRDvA.mp4?_nc_cat=108&_nc_oc=AdqEwKCy4NVIjGjnua1lYBPuWuuId3-qDPbMytHEGK0NIF9x-St7xKYjJcHHeP0x5rnVkIriNTLcRRDWcwboTHce&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=CAIBEOWYQG8Q7kNvwEnXoeN&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE4NjU4NDI3NTc3MzI5NzgsImFzc2V0X2FnZV9kYXlzIjo1LCJ2aV91c2VjYXNlX2lkIjoxMDc5OSwiZHVyYXRpb25fcyI6NjEsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=f25d8739a0161a1&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yNTU5QjM1RDJFMTE0OTAxQkZFNzdDMjA5MTY2NzVFM19tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIxQTE3NjhDQkJFNzRDNzQ5NDcyRjI0NzZBQUJGREZFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbkqcDsq77QBhUCKAJDMywXQE6zMzMzMzMYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQOevgSEj-P1WrOEwYjL-LCkq2vHs0LtpbLJxFoDX927EA&oe=6ACD8230"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1301904321986345"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "allminds",
+   "irmaos": 1,
+   "ad": {
+    "id": "1302995391951963",
+    "pageName": "Allminds",
+    "pageId": "513678438485643",
+    "active": true,
+    "startedAt": "2026-10-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "whatsapp",
+     "threads"
+    ],
+    "text": "Se você acabou de se formar, provavelmente já percebeu:\nsaber atender é só uma parte de construir uma carreira na psicologia.\n\nExiste também a parte de se posicionar, encontrar pacientes, organizar a rotina, entender de marketing, cuidar do financeiro e descobrir como transformar o consultório em uma prática sustentável.\n\nVocê não precisa dominar tudo isso antes de começar.\nA Allminds reúne ferramentas, oportunidades e conhecimento para acompanhar você nessa construção.\n\n🌱 Cresça com autonomia. Construa sua jornada com a Allminds. 👉 Fale conosco e conheça a Allminds.",
+    "title": "Allminds",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/830686863_1676970640664093_627645689127512602_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=5-Oxf0LFRHIQ7kNvwG4WYqH&_nc_oc=AdpqxbPSd8aFK8UPTKoe8mzXV0Nz4d6FP_gz-FWDbWncOVswNxZvhI9z4H_2hArMkDaYw23L8tXg6qON8emwc3U2&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNfcVIjYWAPApLbVDqsIgs-oMihVoq6mHUUGotn_UGNDw&oe=6ACD9915",
+     "thumbnailLocal": "media/ads/1302995391951963.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1302995391951963"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "trafego"
+   },
+   "por": "claude",
+   "nota": "Allminds \"acabou de se formar\": conteúdo de topo, não demonstração"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "2312915999516286",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-17",
+    "platforms": [
+     "instagram"
+    ],
+    "text": "(@kellyciberpsi ) - Todas as ferramentas que eu uso para VIVER sendo psicóloga! (ou boa parte delas)💜\n\n👉 As duas primeiras são gratuitas e as duas últimas são pagas, mas todas estão em um só lugar: @usecorpora \n\n🆓 Plano gratuito: sem prazo de uso, sem cartão de crédito.\n💻 Plano profissional: R$89,00 / mês\n🎁 Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro\n\n💜 Comenta Corpora ou clique no link abaixo ou da bio para começar gratuitamente 💜",
+    "title": "Software para psicólogas com agenda, prontuário e cobrança | Corpora",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/776165910_1096178443078163_580912980015835604_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=wGOa3IJw8rMQ7kNvwHhE2wb&_nc_oc=Adr9QNsTcaZ2cRYXQ49iHjou0WDs8twiijP6qE9IVqntxGMjZViGlP_q_eog1bOA_wjwxLvFlHDyFqmd27qUj3BV&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQP1N2abnY5010l1FL8PU-1GLqkEjxC_rSpyc1Abf65RyQ&oe=6ACD6E51",
+     "thumbnailLocal": "media/ads/2312915999516286.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2312915999516286"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "935502436232380",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-02",
+    "platforms": [
+     "instagram"
+    ],
+    "text": "SISTEMA de GESTÃO GRATUITO para psicólogas!",
+    "cta": "Saiba mais",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/754224544_1521959005875751_3602101562849142482_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=swv7wmyzcNsQ7kNvwEpHfe1&_nc_oc=AdoTVvu1O_nH5VDykYXzrbdz-psLceTsYj3ezKwYy6Zr8oYL7tCRvQoNFzMdGdsidXaY5w3ee_s-dsBEMSBXQOLM&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQMdFkeL9QDsB0EGVB2-m30DEJzBhDsIZ02n8rDzp0SkzQ&oe=6ACD7B8A",
+     "thumbnailLocal": "media/ads/935502436232380.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=935502436232380"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "1812478363248226",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-02",
+    "platforms": [
+     "instagram"
+    ],
+    "text": "SISTEMA DE GESTÃO GRATUITO PRA PSICÓLOGA LOW PROFILE  - \nSim, aquela. Que só quer atender de boa sem preocupar com burocracia.",
+    "title": "SISTEMA GRATUITO PRA PSI LOW PROFILE",
+    "description": "Sim, aquela. Que só quer atender de boa sem preocupar com burocracia.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/724811730_2701327266934850_5226922645657782914_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ewiqEN3USxEQ7kNvwEWgaRb&_nc_oc=AdqEkq2ooy9xwtuu2UVjW9HwT-S3M_45X-Pyxn-nSKuI4A7dpXm5k3BxUR8FG-tBoAe6MQsUterh7hDbYC63Qjnf&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQNhjtUdssl_cxs3ZkyTB3eXt7T2KraGqJwJGoKBb2GBhA&oe=6ACD707F",
+     "thumbnailLocal": "media/ads/1812478363248226.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1812478363248226"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "1702516184329067",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network"
+    ],
+    "text": "Tudo que a CORPORA entrega pras PSIS no plano PROFISSIONAL (por R$89,00)\n\nNotificações por Whatsapp Oficial\nAgenda Inteligente Ilimitada\nGestão financeira\nInstrumentos clínicos validados\nDocumentos personalizáveis\nIA clínica \n\nMenos trabalho repetitivo e mais tempo para a PSICOLOGIA de verdade 💜\n\nTeste grátis por 7 dias e só então decida se vai pro PRO ou fica no gratuito 🎁\n\nComenta CORPORA ou entre no link da bio 💜",
+    "title": "Corpora Technology",
+    "cta": "Assinar",
+    "linkUrl": "https://usecorpora.com.br/",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/768205717_2021198628602658_8338970450652590818_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=AOLa8TbF06MQ7kNvwEpgwVL&_nc_oc=AdrCbA6ZUPTAD3Z8qByWmTkMfq1NX44K5OzmQxsC2a0dr90bLDu3315dpmUCWAci8MnLCksC3339nLwdryqcpMtq&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQOHL0ueN69Ytr84K_JnqqUT_3NaOGadH5cOVhgB2WY3Fw&oe=6ACD683D",
+     "thumbnailLocal": "media/ads/1702516184329067.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1702516184329067"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "3941392002662525",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-06-18",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network"
+    ],
+    "text": "MENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA! Assine o plano PROFISSIONAL da Corpora e eleve o nível da sua prática clínica!",
+    "title": "MENOS TRABALHO REPETITIVO. MAIS TEMPO PARA A PSICOLOGIA!",
+    "description": "Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes",
+    "cta": "Assinar",
+    "linkUrl": "https://app.usecorpora.com.br/planos",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/727286381_1332856861532894_5723189206538001827_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=cyhguid6spcQ7kNvwFIMZCh&_nc_oc=Adr_ic_pMjUw-VrJxkf3rGBUPkwQEIVBQiIWbM-BovOMqFcvi3cpr_su1QiPbyFJhKgqTPONxY-xL3ZMK40TS4RC&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQO4ZbSwEDgsIz5Z_72MunHdZg2NyS6z_Z4Hq2wC9LztpQ&oe=6ACD77C2",
+     "thumbnailLocal": "media/ads/3941392002662525.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=3941392002662525"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "972647635852457",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-09-14",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network"
+    ],
+    "text": "(@kellyciberpsi ) - Todas as ferramentas que eu uso para VIVER sendo psicóloga! (ou boa parte delas)💜\n\n👉 As duas primeiras são gratuitas e as duas últimas são pagas, mas todas estão em um só lugar: @usecorpora \n\n🆓 Plano gratuito: sem prazo de uso, sem cartão de crédito.\n💻 Plano profissional: R$89,00 / mês\n🎁 Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro\n\n💜 Comenta Corpora ou clique no link abaixo ou da bio para começar gratuitamente 💜",
+    "title": "Corpora Technology",
+    "cta": "Obter oferta",
+    "linkUrl": "https://app.usecorpora.com.br/planos",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/810282132_1415433097202512_1349326574297447189_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=6Na36dEsOcYQ7kNvwFWcetA&_nc_oc=Adq5H6OKEdfomEFEH8OoXnY61emu9WemsDgQKCNWTCz_bE9BoYynUlGuxlbN2vwn9gAdPGG5KsYWw0NQMcHdsraM&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQOVUAGgiCBgm3NkbcMhf9LyEmQ9IU74peoIYLHoa-x5VQ&oe=6ACD6E79",
+     "thumbnailLocal": "media/ads/972647635852457.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=972647635852457"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "1319974763108137",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-06-19",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network"
+    ],
+    "text": "Você já usa a Corpora para organizar sua clínica de psicologia.\n\nAgora deixa ela automatizar o que ainda cai no seu colo: confirmações, lembretes, registros, documentos e recursos clínicos.\n\nTeste o Plano PRO por sete dias, sem cartão.",
+    "title": "Ative o modo profissional da sua Corpora",
+    "description": "Plataforma completa para psicólogos. Automatize sua gestão de pacientes, agendas e cobranças com a Corpora. Foque no que realmente importa: seus pacientes",
+    "cta": "Assinar",
+    "linkUrl": "https://app.usecorpora.com.br/planos",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/726358382_2279981315904772_1523121728657724519_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ppjZAqyz0HQQ7kNvwHTixZO&_nc_oc=AdqMhKgdBUejqzFnxRMu1HRCQ2TNFaNP7gQVVd6hQq57FZfTIj6hfG1IfkCshe0Oz9iqY7FK_O3A71A7HyjV0qYe&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQOFC2ETy8Bv4EWzy7AAqqE_iQp_1NCRD97O3GyYBSvaAA&oe=6ACDA01A",
+     "thumbnailLocal": "media/ads/1319974763108137.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1319974763108137"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "remarketing",
+    "objetivo": "cadastro"
+   },
+   "por": "claude",
+   "nota": "Corpora \"você já usa a Corpora\": upsell para quem já usa"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "2197411200835011",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-27",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "PSIS FODAS USAM CORPORA (link na bio💜)\n\nIb: flamxdesign",
+    "title": "Corpora Technology",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://instagram.com/usecorpora",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/788261453_1045685828298394_6486971159524178346_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=RAMYTbHJA6MQ7kNvwHrnJJk&_nc_oc=AdqqvZJyN_xzNu9cYxSoXDa7ImtqpO5t5cRHBN0HNDN4RPZYCU14vH2Bytw222tqgRg_UDXMIpb4vgRDdErMazHE&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQNdsSpMjDVXDdvWQa1feL3cC-T-McZam88391lLHs0vHA&oe=6ACD8AA2",
+     "thumbnailLocal": "media/ads/2197411200835011.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2197411200835011"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "prova-social",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "1357937359808015",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-07",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Nunca é tarde para lembrar de não lembrar seu paciente da sessão!",
+    "title": "Corpora Technology",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://www.instagram.com/usecorpora",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/768962981_1611017313920766_3971871677784554911_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=aQdtzG-BaY4Q7kNvwE8X3-s&_nc_oc=AdovBrIwfli0_tESn7RlRFDkOhW2HxnrKOOpSNmwFEIW3CsMLfpOsxrPrbJReCdZSvwCjqrBehQHZqtLXf0WThLk&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQMUzzCWR6T9KeFli051Qtaz5xPqbj_wTyS3-k_7t902hw&oe=6ACD9325",
+     "thumbnailLocal": "media/ads/1357937359808015.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1357937359808015"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "corpora",
+   "irmaos": 1,
+   "ad": {
+    "id": "1702917500789941",
+    "pageName": "Corpora Technology",
+    "pageId": "111629015367609",
+    "active": true,
+    "startedAt": "2026-08-28",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "PSIS FODAS ESTUDAM e se capacitam para serem antes de tudo HUMANOS! \n\nParte 2 com os pedidos dos comentários da parte 1 💜 Quem está faltando?\n\nNa lista: Lacan, social comunitária, contextuais, Ailton Krenak\n\nIb: flamxdesign",
+    "title": "Corpora Technology",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "https://instagram.com/usecorpora",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/789081582_2203306253858387_3817210314595054138_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=VlHjbdE6xpoQ7kNvwHn8eQP&_nc_oc=Ado0Wpg7QwLlCDeG6-j7r3nAbys8kmosnJFnjxfvLWtHgp0n5s_2QxafOS-IF8hxlfLLh4S5iFoILUbHxs74Bwtr&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=nd8MeFWIv6NwAsW3KPYsuw&_nc_ss=7b289&oh=00_AQMUdXRypkPWov1JqeRJGNOdP8on0HqQFmWhi8AjY3cVfg&oe=6ACD8EEF",
+     "thumbnailLocal": "media/ads/1702917500789941.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1702917500789941"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "mais-terapias",
+   "irmaos": 1,
+   "ad": {
+    "id": "1564439295123692",
+    "pageName": "ABA Mais",
+    "pageId": "239025723415798",
+    "active": true,
+    "startedAt": "2026-08-07",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Psicologia, Fonoaudiologia, Terapia Ocupacional, Psicopedagogia, Neuropsicologia… quando vários profissionais acompanham o mesmo paciente, organização faz toda a diferença.\nCentralize informações e facilite o acompanhamento da evolução clínica em um só lugar.\n👉 Conheça o ABA+.",
+    "title": "Sua clínica ainda depende de planilhas, anotações e informações espalhadas para acompanhar os pacientes? Existe uma forma mais simples de organizar a rotina clínica, acompanhar dados e dar mais visibilidade ao trabalho da equipe.",
+    "description": "Você estudou para atender, avaliar, supervisionar e desenvolver seus pacientes, não para passar horas organizando registros.\nO ABA+ ajuda clínicas e profissionais a estruturarem melhor informações, acompanhamentos e processos da rotina clínica.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://abamais.com/",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/767103099_1875272380115860_4387321281961011313_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=A6WRM5zn_NMQ7kNvwEUDAST&_nc_oc=AdpR2xrdHkie_QOhQTQCqD5_3Gniw4oDwqsiJ44i0cv5GXcsI6wtMXGHI0gjDqEjtsFHtDvN0WnMwdXc6NQYdCyf&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&oh=00_AQOgbosVYQBLnPtHjq-Dd8f9PepJ_zic3xBxooARcPnXzg&oe=6ACD980E",
+     "thumbnailLocal": "media/ads/1564439295123692.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNy9m4JqkxNcY7AapZqaFRdtrT5lVakkqaayI9v8T4PbHAKKzKL6oSNOxvJwFhthZF6PvqbctRC56XKx_IoLoW-CxcTq341HPXMqoNTJfPVtA.mp4?_nc_cat=108&_nc_oc=AdoxVtgN2uYEbKnFLAiGLh4clpG76BAyJ0_b5otwlH7WP0QUnTiL-TzP8nVY-871sPiLs75xmEL-53psto-IT_5y&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=pHE7DcvAVyEQ7kNvwGV5CDY&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjI0ODI4MzQ0Mjg4NjIxNDYsImFzc2V0X2FnZV9kYXlzIjo2MiwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjExMCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=6eb5430d69f5225c&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC83ODRFQjdGQzBBM0Q1RkIxNzg1ODRDNzkzRjhCQUU4NV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzBGNDI0MEQ2OTQ4NjZFQUI2MzI0RTAwREJGRUQzN0IwX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaE-9iC_ofpCBUCKAJDMywXQFu8an752yMYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&_nc_zt=28&oh=00_AQM7ruZJIM-ts919I8nDxeRe3kFLKm_zKWy0JX-fryEOSw&oe=6ACD9FD0"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1564439295123692"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "mais-terapias",
+   "irmaos": 1,
+   "ad": {
+    "id": "2241042320065072",
+    "pageName": "ABA Mais",
+    "pageId": "239025723415798",
+    "active": true,
+    "startedAt": "2026-05-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "O ABA+ é um software facilitador da integração e constante supervisão das terapias utilizadas cotidianamente por pessoas com o Transtorno do Espectro Autista (TEA). Com um visual intuitivo e fácil de utilizar, focado em uma usabilidade limpa e que otimize as rotinas de terapia e melhore o registro dos resultados. Nosso software utiliza da ciência ABA para guiar a forma de acompanhamento dos pacientes.\n\nA nova versão apresenta um design atualizado e uma interface mais clean. Além disso, as novas funcionalidades incluem atividades alinhadas aos programas, para o melhor desenvolvimento de habilidades sociais, emocionais e cognitivas.\n\nQuer conhecer dentro do app? Agende agora a sua demonstração gratuita no site www.abamais.com 💙\n\nABA+ Inteligência Afetiva\n\n🏷️ #SomosABAmais #TEA #Autismo #ABA #autismo #autismobr #autismobrasil #orgulhoautista #softwareABAmais #cienciaABA #ABAmaiseficiente #ABAmaisfamilia #thebestsoftwareABA #ABAmaiscompleto #abamaistratamento",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://abamais.com/sobre-o-software-aba/",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/706527285_1309192584687773_7032784042359790480_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=M5j8PZOnd6UQ7kNvwH1CmCX&_nc_oc=AdrL1f2AcV0xERVs6aiKnnleovozVUPNDAGLgwSHb8EIzDaOFcv_Mvchh3DRmc5DxNXitwHU9PKevv4e107mWvIb&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&oh=00_AQP1YmmLaIEFrhXyhPWAAL9U6x8SbSSTsFjSrUhjE061Qg&oe=6ACD933D",
+     "thumbnailLocal": "media/ads/2241042320065072.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM-nrFMnlY3MQ7_2W5XXkdvSPDpOqqwx-TNR-8L-L7ovHOTRz6cPNx19l0EdSq-BnjfKdqM5mStlld56CVb2I0PhCqPSMwzTjS6lZAlrwSsSA.mp4?_nc_cat=110&_nc_oc=Ado_fru7at8v5uT6T6RXIbSCItZkNQgDq29bA4Iav_jhxlyjUSAqReBkUcm0aAdYGh38BDOviOEeh3rnYLJGxmug&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=uTOA0zTzQZYQ7kNvwGI63iB&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMTA3Ni5kYXNoX2gyNjQtYmFzaWMtZ2VuMl83MjBwIiwieHB2X2Fzc2V0X2lkIjoxMjQyODc1MTgzMDI0MTEyLCJhc3NldF9hZ2VfZGF5cyI6MTIyNiwidmlfdXNlY2FzZV9pZCI6MTAxMDEsImR1cmF0aW9uX3MiOjEzMCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=b3d08d8dc5407f8f&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84QTQ4RkU3MDg4NTE0QUI3QUQwRTgwRjk4MjE1NTQ4Ml9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dOb0cweFR2dEV1SDNfRUNBQ2NYVFBoRTNMTUNidjRHQUFBRhUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbgn8bc7Zi1BBUCKAJDMywXQGBLtkWhysEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZeqdAQA&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&_nc_zt=28&oh=00_AQMVVfS2MJpTJkJOYcqtc0bPCjALzCmc4b3Mf4HlFKwWWQ&oe=6ACD82A2"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2241042320065072"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "trafego"
+   },
+   "por": "claude",
+   "nota": "Mais Terapias \"demonstração gratuita\": meio, demonstração"
+  },
+  {
+   "comp": "mais-terapias",
+   "irmaos": 1,
+   "ad": {
+    "id": "946135721878567",
+    "pageName": "ABA Mais",
+    "pageId": "239025723415798",
+    "active": true,
+    "startedAt": "2026-09-04",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "whatsapp",
+     "threads"
+    ],
+    "text": "Veja a evolução de critério do seu paciente ABA gerada automaticamente usando o aplicativo ABA+",
+    "title": "Descubra como o ABA+ ajuda a acompanhar a evolução do seu paciente em terapia ABA com relatórios automáticos.",
+    "description": "O ABA+ é o melhor aplicativo de gestão de clínicas especializadas em transtorno do neurodesenvolvimento. Tenha acesso a criação de programas e coleta de dados, gráficos automatizados das sessões dos pacientes, criação de critérios, pastas curriculares, gestão de agenda de equipe e pacientes, criação de plano terapêutico e muito mais.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://abamais.com/sobre-o-software-aba/",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/713783939_974829925362208_1071175042343076718_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ckzT3vwe7-0Q7kNvwFvyaEX&_nc_oc=Adq8LDlr3JlDI-mlngQmyEHWgCdHwhM679y-HToZRZlCd0lQapnIFlXEfskOMaWYCYSBLRBzobKKsXSvf5SFo8ff&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&oh=00_AQNjJnC3y4-u3TGfAdd4CQhBMWhTIshU0pqcFGqn98CH_Q&oe=6ACD980C",
+     "thumbnailLocal": "media/ads/946135721878567.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMF6riCCXbp-W-Ab4OMj2AaPL0ehbrod39_OjjAmhI_ajZ9LvhBHUt2QhyZ9sQtOGOHxslzXrkrpAgIGKM7Z18iMWVEimcgROSR0vUb6vwZlg.mp4?_nc_cat=102&_nc_oc=AdqMgBDiIv74_sFJFDjIBzAqyeM-xSwSE4PZJ-cpVwfghpqsz5gXR_o78Q3KF73hUQoZ8q9mJUgyxtX_WKvbrD0U&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=wHTt0xT9ItUQ7kNvwGCMeKB&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjcxMDMxMjAxMTg5NzEwOSwiYXNzZXRfYWdlX2RheXMiOjQzNSwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjQ2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=b102bb2112e62ca8&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC9GNzQwMDVCNTNEQjgyOThDOTIzMzYxRjVFNDVGOTBCNV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0Q0NDYwMDIxNzY4NzBDMUM2OUVEODQ1QTFBNTdGRDkzX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaq5LDyzIHDAhUCKAJDMywXQEdwo9cKPXEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&_nc_zt=28&oh=00_AQMbohKttBZDiy1l6vKZwbtlMkv9SnX1nYVbx5jiPwcRIA&oe=6ACD7672"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=946135721878567"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "mais-terapias",
+   "irmaos": 1,
+   "ad": {
+    "id": "26043844438645943",
+    "pageName": "ABA Mais",
+    "pageId": "239025723415798",
+    "active": true,
+    "startedAt": "2026-09-04",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "whatsapp",
+     "threads"
+    ],
+    "text": "O melhor app de gestão de clínicas que atuam com análise do comportamento | Conheça o ABA+",
+    "title": "O melhor app de gestão de clínicas que atuam com análise do comportamento | Conheça o ABA+",
+    "description": "O ABA+ é o melhor aplicativo de gestão de clínicas especializadas em transtorno do neurodesenvolvimento. Tenha acesso a criação de programas e coleta de dados, gráficos automatizados das sessões dos pacientes, criação de critérios, pastas curriculares, gestão de agenda de equipe e pacientes, criação de plano terapêutico e muito mais.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://abamais.com/sobre-o-software-aba/",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/710059240_2441367213042802_1352134154529057861_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3QH2O7uoSl8Q7kNvwF_0qZI&_nc_oc=AdqxF_IMyHTQekKCkyjp-9IfPf6gzQHgmn_pUju2JqIslmYbn_pgqfe76n74EJF6mg6t-nIdWCGQQY5CmYKyNsIP&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&oh=00_AQNwY3w9XjYggYk0el6MsIh0kOS2E0lDFIYKMYRdyu_lbQ&oe=6ACD80C4",
+     "thumbnailLocal": "media/ads/26043844438645943.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQOZaDM04h1N1QXlVK2xDY9HhJCFa2GZXwygZNpZCYSPkcsCWa6ebYMZpgJ_n11eoeQEZLtp2n-fUbzqr_vs4UpUUWZfIAYyLBSZNJwi-UmFGg.mp4?_nc_cat=104&_nc_oc=AdqAFW5pqfSwDMS78Naxk1hGkvZWgAHPu_zvacw0hevmR5rJPEylyQtuUVQ6AupfY-bA1MztpqBUB-ayVGmNvhWy&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=TFLGjI0fuBAQ7kNvwHoYCbf&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEyNTkxNTA1ODI2MTU5MjMsImFzc2V0X2FnZV9kYXlzIjo0MzUsInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjozNiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=798e6d09e9cf4ea&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC9GQjRFREQ4QTNFRDc0MEIyNjZCNDAyRkI3QzczMjg5RV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0U1NEQwMzU1Rjc0Q0UzNkQzRTcxNDUyQkZDMTYyOUIzX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbmvZDzmsy8BBUCKAJDMywXQEJvXCj1wo8YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=t8OEzdV1WFtJLbcpGpKhhQ&_nc_ss=7b289&_nc_zt=28&oh=00_AQOo52l3zWskLgVVD1bLK9VW3nmyqLwQ_NG7sxmdU_mDJg&oe=6ACD6A5C"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=26043844438645943"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 1,
+   "ad": {
+    "id": "1545949069916923",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2025-10-26",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Você pode ter conhecimento técnico, atender com excelência e ainda assim se sentir sobrecarregado com as demandas do consultório. \n ⠀ \n O psicólogo que empreende precisa de estratégia, ferramentas certas e organização para crescer com segurança. \n ⠀ \nPreparamos um checklist com tudo o que não pode faltar na rotina de quem quer ir além. E o melhor, o PsicoManager já tem tudo isso para facilitar o seu dia a dia.📈 \n ⠀ \nClique no link da bio e conheça a plataforma que cuida do seu consultório com a mesma dedicação que você cuida dos seus pacientes. 💙 \n ⠀ \n #PsicoManager #Empreendedor #PsicologoLivre #Psicologia",
+    "title": "PsicoManager",
+    "cta": "Acessar o perfil do Instagram",
+    "linkUrl": "http://instagram.com/psico_manager",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/570600380_1824903732234792_8594692286800066958_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=GYHkHmyrHSQQ7kNvwEEmQJL&_nc_oc=AdoF5C6gcnjpVS1IFI-9PIY8BJBdLRPptG6H_IIbr47AHqdROFsauE5ZehznGV7ajt5t1p03P-egNsSZYNRJtGP0&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQMiwRqL0D5M1JImaWcYat0JCQ4iqfpHmR2AFxFFYllkow&oe=6ACD6D70",
+     "thumbnailLocal": "media/ads/1545949069916923.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1545949069916923"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "conteudo",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 1,
+   "ad": {
+    "id": "2610210532741952",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2026-08-17",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Com o PsicoManager, você integra com o Google Agenda, personaliza seus horários e tem a flexibilidade que precisa para cuidar dos seus pacientes, da sua carreira e do seu bem-estar. \n\nOrganize sua rotina do seu jeito e conquiste mais tranquilidade. \n\nComece a vivenciar agora mesmo essa transformação, iniciando agora seu teste grátis.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://app2.psicomanager.com/cadastro-novo",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/778328926_1831644751186795_7522081167857751429_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=V6B5cBXPrUEQ7kNvwH5kvJQ&_nc_oc=Adp70pBERJqlqUJorfpXJ3YijR7MyAjkz1BZcR1sgOwmcNf5C6QV7onDuBbu9ayloRvdo5dlMnDEheHkSk6eqZja&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQNE2-fwoyvO5YFOOwaAugP8UjicUtQO_fHtwXl1t7XH3A&oe=6ACD6F60",
+     "thumbnailLocal": "media/ads/2610210532741952.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNZEFHB0gtfNmS-s49rIiYHcr2A1LZGF70bwxRF7Ypgbh5NQi4V7BOyg7ccgEG4A7TZOFxHu93IMjaWs-facIjlrZTPe3op0UgRPBb31DNTYw.mp4?_nc_cat=104&_nc_oc=Adr_z4D31hlSS48reI9YaovbFks5km5u-SmuiINfHRuKOySLbpYMnjGuHi9zLKCUQRPRtCoLpA8Wmj6UmS0MRoWK&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=XIKY91l4KKAQ7kNvwFkbqLe&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE1NDg4MzM4ODcyNDg2MzMsImFzc2V0X2FnZV9kYXlzIjoxNzYsInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjo3NCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=a03da39b5a912d4a&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC9CQzRFRTY3Njc1MzMyMDAzQkFBMTgyNzk2MUIyOTE5QV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0I2NDZENTJDNUY3QzBDREQzNTQ5RTFBQUM1QzNCNjg1X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbyg9Pa_6nABRUCKAJDMywXQFKnbItDlYEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&_nc_zt=28&oh=00_AQOMHPq-f5W2NdJszN_NCz5eefmHm3riZcryMLLNHeAJtA&oe=6ACD89BC"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2610210532741952"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 4,
+   "ad": {
+    "id": "1645743027061824",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2026-10-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Cuidar dos seus pacientes é sua prioridade. Mas quem cuida da rotina do seu consultório?\n\nCom o PsicoManager, você reduz tarefas administrativas e ganha mais tempo para seus atendimentos — e para você.\n\n✅ Agenda com lembretes e confirmação de presença.\n✅ Controle financeiro e cobranças automáticas.\n✅ Emissão de nota fiscal ou Receita Saúde em poucos cliques.\n✅ IA para apoiar os resumos das sessões e as evoluções no prontuário.\n✅ Aplicativo para pacientes e mensagens automáticas por WhatsApp.\n\nMais organização, menos sobrecarga e tecnologia para apoiar sua prática clínica.\n\nComece seu teste grátis e descubra uma rotina mais leve com o PsicoManager.\nCom poucos cliques, vira ficha de evolução integrada ao prontuário. Prefere ditar, digitar ou mandar uma foto? \nA IA organiza do mesmo jeito.",
+    "title": "Menos burocracia. Mais tempo para você.",
+    "description": "Simplifique a gestão do seu consultório. Teste grátis.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://app2.psicomanager.com/cadastro-novo",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/838715911_1482618047049008_8638957738037416651_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=rVAIOq92RskQ7kNvwFHK0Xe&_nc_oc=AdqFIjsc8RFLPwCNu_jsV4vnvuFN4k_mcXIiYTHtV5qDkDvZGANa7OSEvQBj3aEEKXb3dubcAAvt3zuRf_R75O-k&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQNULTc-SbazJpCQlOdrAUyuuv1BWyqt9XaxTMxozFw-cA&oe=6ACD7477",
+     "thumbnailLocal": "media/ads/1645743027061824.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM02bjyqn_qfjg42xTBnZijV76uZ652sIgzRXg6jBIeZwTtWYYmVrTrzYyy80Gh30KZr2HiwpZijcapNjK2_oRdnDPNIjA_LyxAIKcxEeqJmQ.mp4?_nc_cat=108&_nc_oc=AdqMDGbGqvmBFapnKBDDk49DxZc7TEi4AL653kyvlNGNih-GHMK976CmmUgDLanYYXz_M4LrZh0rfwgPd0_5p5TP&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=-Li1Kyz6NXwQ7kNvwGtDNAF&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE3MjIwMTEyNzg4MTYxODYsImFzc2V0X2FnZV9kYXlzIjoxMzksInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjo1MiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=7d953f5aceebf067&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yMzQ4RTkxMTdBN0QyRkI4RkM0MjEzQjhENDIyQ0VCOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0VBNDVFM0ZEQTBFRUUzRDcxQkJBQ0VGODMzQTQ3OThEX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACb0zpXpn4qPBhUCKAJDMywXQEoRR64UeuEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO8IcnenHbi-IFtSoL7ylxvU1KaUGOS_ixRjNpH1BKM1g&oe=6ACD7464"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1645743027061824"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 4,
+   "ad": {
+    "id": "1076664651943451",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2026-10-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Cuidar dos seus pacientes é sua prioridade. Mas quem cuida da rotina do seu consultório?\n\nCom o PsicoManager, você reduz tarefas administrativas e ganha mais tempo para seus atendimentos — e para você.\n\n✅ Agenda com lembretes e confirmação de presença.\n✅ Controle financeiro e cobranças automáticas.\n✅ Emissão de nota fiscal ou Receita Saúde em poucos cliques.\n✅ IA para apoiar os resumos das sessões e as evoluções no prontuário.\n✅ Aplicativo para pacientes e mensagens automáticas por WhatsApp.\n\nMais organização, menos sobrecarga e tecnologia para apoiar sua prática clínica.\n\nComece seu teste grátis e descubra uma rotina mais leve com o PsicoManager.\nCom poucos cliques, vira ficha de evolução integrada ao prontuário. Prefere ditar, digitar ou mandar uma foto? \nA IA organiza do mesmo jeito.",
+    "title": "Menos burocracia. Mais tempo para você.",
+    "description": "Simplifique a gestão do seu consultório. Teste grátis.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://app2.psicomanager.com/cadastro-novo",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/839823219_1393901712465541_1194731287644165072_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=nN1DS6PJ7F0Q7kNvwGL39wl&_nc_oc=AdpgdpoU2jy7qf4Qck9ITnxR23vgTLyhgpw9yMk_OAXU-ghiEbygI6wgAWXb90EPcQfy5FCHOCXQhpFAw-UEwx_L&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQN2crvBiC3dfRgBzDT2f-WZ5INxV_z6wHTtMB3oj1WlAA&oe=6ACD6F0D",
+     "thumbnailLocal": "media/ads/1076664651943451.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM02bjyqn_qfjg42xTBnZijV76uZ652sIgzRXg6jBIeZwTtWYYmVrTrzYyy80Gh30KZr2HiwpZijcapNjK2_oRdnDPNIjA_LyxAIKcxEeqJmQ.mp4?_nc_cat=108&_nc_oc=AdqMDGbGqvmBFapnKBDDk49DxZc7TEi4AL653kyvlNGNih-GHMK976CmmUgDLanYYXz_M4LrZh0rfwgPd0_5p5TP&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=-Li1Kyz6NXwQ7kNvwGtDNAF&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE3MjIwMTEyNzg4MTYxODYsImFzc2V0X2FnZV9kYXlzIjoxMzksInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjo1MiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=7d953f5aceebf067&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yMzQ4RTkxMTdBN0QyRkI4RkM0MjEzQjhENDIyQ0VCOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0VBNDVFM0ZEQTBFRUUzRDcxQkJBQ0VGODMzQTQ3OThEX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACb0zpXpn4qPBhUCKAJDMywXQEoRR64UeuEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO8IcnenHbi-IFtSoL7ylxvU1KaUGOS_ixRjNpH1BKM1g&oe=6ACD7464"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1076664651943451"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 4,
+   "ad": {
+    "id": "875033988932718",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2026-10-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Cuidar dos seus pacientes é sua prioridade. Mas quem cuida da rotina do seu consultório?\n\nCom o PsicoManager, você reduz tarefas administrativas e ganha mais tempo para seus atendimentos — e para você.\n\n✅ Agenda com lembretes e confirmação de presença.\n✅ Controle financeiro e cobranças automáticas.\n✅ Emissão de nota fiscal ou Receita Saúde em poucos cliques.\n✅ IA para apoiar os resumos das sessões e as evoluções no prontuário.\n✅ Aplicativo para pacientes e mensagens automáticas por WhatsApp.\n\nMais organização, menos sobrecarga e tecnologia para apoiar sua prática clínica.\n\nComece seu teste grátis e descubra uma rotina mais leve com o PsicoManager.\nCom poucos cliques, vira ficha de evolução integrada ao prontuário. Prefere ditar, digitar ou mandar uma foto? \nA IA organiza do mesmo jeito.",
+    "title": "Menos burocracia. Mais tempo para você.",
+    "description": "Simplifique a gestão do seu consultório. Teste grátis.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://app2.psicomanager.com/cadastro-novo",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/840135843_960846647080068_8214111608800752320_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=SqEmcRlEFNMQ7kNvwHnCij9&_nc_oc=Ado-vbrkyv5b5Zb-M89pVaCcRq3oEbzsJcLsbC5pOQvTgaoTSOnQQdXj2YuanJ-nDbpSkBAQcuuMdmU-UeiX7Hg2&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQM475jwAiE5wUPZCb1SitkaBJx7Ud9jPX9mSvwi2f576A&oe=6ACD8BC4",
+     "thumbnailLocal": "media/ads/875033988932718.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM02bjyqn_qfjg42xTBnZijV76uZ652sIgzRXg6jBIeZwTtWYYmVrTrzYyy80Gh30KZr2HiwpZijcapNjK2_oRdnDPNIjA_LyxAIKcxEeqJmQ.mp4?_nc_cat=108&_nc_oc=AdqMDGbGqvmBFapnKBDDk49DxZc7TEi4AL653kyvlNGNih-GHMK976CmmUgDLanYYXz_M4LrZh0rfwgPd0_5p5TP&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=-Li1Kyz6NXwQ7kNvwGtDNAF&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE3MjIwMTEyNzg4MTYxODYsImFzc2V0X2FnZV9kYXlzIjoxMzksInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjo1MiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=7d953f5aceebf067&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yMzQ4RTkxMTdBN0QyRkI4RkM0MjEzQjhENDIyQ0VCOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0VBNDVFM0ZEQTBFRUUzRDcxQkJBQ0VGODMzQTQ3OThEX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACb0zpXpn4qPBhUCKAJDMywXQEoRR64UeuEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO8IcnenHbi-IFtSoL7ylxvU1KaUGOS_ixRjNpH1BKM1g&oe=6ACD7464"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=875033988932718"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicomanager",
+   "irmaos": 4,
+   "ad": {
+    "id": "1844234700356106",
+    "pageName": "PsicoManager",
+    "pageId": "705960706094132",
+    "active": true,
+    "startedAt": "2026-10-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Cuidar dos seus pacientes é sua prioridade. Mas quem cuida da rotina do seu consultório?\n\nCom o PsicoManager, você reduz tarefas administrativas e ganha mais tempo para seus atendimentos — e para você.\n\n✅ Agenda com lembretes e confirmação de presença.\n✅ Controle financeiro e cobranças automáticas.\n✅ Emissão de nota fiscal ou Receita Saúde em poucos cliques.\n✅ IA para apoiar os resumos das sessões e as evoluções no prontuário.\n✅ Aplicativo para pacientes e mensagens automáticas por WhatsApp.\n\nMais organização, menos sobrecarga e tecnologia para apoiar sua prática clínica.\n\nComece seu teste grátis e descubra uma rotina mais leve com o PsicoManager.\nCom poucos cliques, vira ficha de evolução integrada ao prontuário. Prefere ditar, digitar ou mandar uma foto? \nA IA organiza do mesmo jeito.",
+    "title": "Menos burocracia. Mais tempo para você.",
+    "description": "Simplifique a gestão do seu consultório. Teste grátis.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://app2.psicomanager.com/cadastro-novo",
+    "media": {
+     "type": "carrossel",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/825351549_1356468366332908_3836458893483070068_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=x1sv0MnjWmoQ7kNvwHyIxz0&_nc_oc=Adp9KQEdJ_MlddyBEreJ6AfIveIqdMWGUi2Qd-Rt0WvyCoK09gnMKFjdTEm5j60DmJWFbFUv58eGZi5foC9wMiVC&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&oh=00_AQMsLq_m2GehsIUUOXxNpJ-K_1dD4Zewivn4ZjNnQs9LmQ&oe=6ACD6DE2",
+     "thumbnailLocal": "media/ads/1844234700356106.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM02bjyqn_qfjg42xTBnZijV76uZ652sIgzRXg6jBIeZwTtWYYmVrTrzYyy80Gh30KZr2HiwpZijcapNjK2_oRdnDPNIjA_LyxAIKcxEeqJmQ.mp4?_nc_cat=108&_nc_oc=AdqMDGbGqvmBFapnKBDDk49DxZc7TEi4AL653kyvlNGNih-GHMK976CmmUgDLanYYXz_M4LrZh0rfwgPd0_5p5TP&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=-Li1Kyz6NXwQ7kNvwGtDNAF&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE3MjIwMTEyNzg4MTYxODYsImFzc2V0X2FnZV9kYXlzIjoxMzksInZpX3VzZWNhc2VfaWQiOjEwNzk5LCJkdXJhdGlvbl9zIjo1MiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=7d953f5aceebf067&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yMzQ4RTkxMTdBN0QyRkI4RkM0MjEzQjhENDIyQ0VCOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0VBNDVFM0ZEQTBFRUUzRDcxQkJBQ0VGODMzQTQ3OThEX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACb0zpXpn4qPBhUCKAJDMywXQEoRR64UeuEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=HPDc8EsIruKRDE2JCX-4yg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO8IcnenHbi-IFtSoL7ylxvU1KaUGOS_ixRjNpH1BKM1g&oe=6ACD7464"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1844234700356106"
+   },
+   "esperado": {
+    "funil": "meio",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicoplanner",
+   "irmaos": 2,
+   "ad": {
+    "id": "3296505650521271",
+    "pageName": "Psicoplanner",
+    "pageId": "103084358197167",
+    "active": true,
+    "startedAt": "2026-07-07",
+    "platforms": [
+     "instagram"
+    ],
+    "text": "O Psicoplanner é um aplicativo completo para psicólogas! Oferecemos todas as ferramentas para tornar a rotina do dia a dia ainda mais fácil. Estes são apenas alguns dos nossos benefícios. Faça um teste grátis por 7 dias e conheça todas as possibilidades.",
+    "cta": "Ver detalhes",
+    "linkUrl": "https://psicoplanner.com.br/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/740741045_991156960580954_9161275682860898254_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=hrXFZbxcRj4Q7kNvwGQ0T5m&_nc_oc=AdqtmIs99HmJlrsYOOpdJXGLGZ8sLfkpKYpj1WOFEzp8uOz6nun795DfA2ierOkKCNJ4sri_8bfsPoq3D77iHjUE&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=OhReSmAWzdzjS9mi-09SkA&_nc_ss=7b289&oh=00_AQNRrChVD3Cu-oeg5WcsVMj6dH0x0d5qH3lE3zLdGJgyIg&oe=6ACD9607",
+     "thumbnailLocal": "media/ads/3296505650521271.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=3296505650521271"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "psicoplanner",
+   "irmaos": 2,
+   "ad": {
+    "id": "1171647048182622",
+    "pageName": "Psicoplanner",
+    "pageId": "103084358197167",
+    "active": true,
+    "startedAt": "2025-10-24",
+    "platforms": [
+     "instagram"
+    ],
+    "text": "O Psicoplanner é um aplicativo completo para psicólogas! Oferecemos todas as ferramentas para tornar a rotina do dia a dia ainda mais fácil. \n\nEstes são apenas alguns dos nossos benefícios. Faça um teste grátis por 7 dias e conheça todas as possibilidades.",
+    "cta": "Saiba mais",
+    "linkUrl": "https://psicoplanner.com.br/",
+    "media": {
+     "type": "imagem",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/571343330_1314368297136771_1140869542861304212_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=xNtGn8BZZ6kQ7kNvwFmxV_D&_nc_oc=Adq97Vdq4GU4NgMKnDvEfuk7GOpf6v-1pEegceWN49Jsfv95cOxK6c0URZe6t2m1Db0MNjn2Tk7kmw5u6PhnFbXQ&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=OhReSmAWzdzjS9mi-09SkA&_nc_ss=7b289&oh=00_AQNCEqnYps-PfbqxZvoxcnmIVRKh-lAmStMRzD7o9cqs5g&oe=6ACD7C15",
+     "thumbnailLocal": "media/ads/1171647048182622.jpg"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1171647048182622"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "oferta",
+    "objetivo": "trafego"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1021400543608179",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Às vezes a cabeça está na quadra\n\nÀs vezes ela ainda está no prontuário, no lembrete, no pagamento pendente 😅\n\nA rotina clínica tem dessas: aparece até quando a gente tenta pausar!\n\nA Sintropia entra justamente aí, como um apoio pra organizar o que não precisa ficar rodando na sua cabeça o tempo todo! 😊\n\nPorque a vida fora do consultório também merece presença! 💜",
+    "title": "Pra cuidar de quem cuida",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/742859096_949862531402259_1290760960207510745_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=w_5v14Z8OMgQ7kNvwGp1WmH&_nc_oc=AdrLgqe6LlhwS91Ad30iJzQkiOMYMtfbqmgf0rnPxyAg_qERIdg7Z3hIR3ISkysseMSco_yemzi8Pub5GOF2fMKI&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQP4DCfMjXarHZfphRn69ddoYfzjHXoueWLXsac1kmIC9Q&oe=6ACD992C",
+     "thumbnailLocal": "media/ads/1021400543608179.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMa3kBqerp0yDhl5fdSqm_Gt5wko3ZnMTMICqwrJ-lvceVOksQzbLI6VoqyyAyQC4JzsZ2QzayPMyQ8TB0lnHI2XMqK6YGtAaTKKS4GjWYHCQ.mp4?_nc_cat=104&_nc_oc=AdqzVugpxlTup1P_jRsi4LjADdb5UhbN3b6mnaO6Mu1o7GjPjy2qz9Z6bs6q0YD5o-Dqu0hylOk_knKpAPaiiGxH&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=DzWuumSGr5IQ7kNvwEySBBk&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEyODExMTQ3MTA3NjQ0NjEsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjgzLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=84a86cfba4cf5ab7&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84MzRERDZGMkYzNkM3MjA3MURFMDU2QkRCNkRERjc4QV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVFNDNCMDkxQjM3MjQ3RkEyMTM5NDg0QUJFNDY4MUI4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbaroO02MrGBBUCKAJDMywXQFT4gxJul40YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQMiUL9JqlVj7SZUWWiNoH4rOYKR9qXh77H0_jaS840ecw&oe=6ACD8348"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1021400543608179"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "institucional",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1373215364670990",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Se a sua versão do futuro pudesse aparecer no meio da burocracia, talvez o recado fosse simples: não precisa fazer tudo do jeito mais difícil! 💜\n\nA Sintropia reúne agenda, prontuário e financeiro em um só lugar, com IA para apoiar suas anotações, sempre com a sua revisão e aprovação! 😊\n\nMenos coisa espalhada. Mais clareza pra cuidar da clínica com presença!\n\nComece pela Sintropia: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Menos burocracia, mais presença",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-versao-do-futuro-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/742586637_1025348413745937_8153723547681217288_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=CHzlpqA812YQ7kNvwFRcBVT&_nc_oc=AdpK1ye8rXaXNfGRuchenTSMuW1TXSar4uCGbAaItoEisvxl5vx4-BwOKiQ86ln6LyL2cP1YvGcMfMY8e7NotaCj&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQOycFRdQrcqfvMh9PoScTHhDk4KhRa16K2qxQMuhTAyMw&oe=6ACD8740",
+     "thumbnailLocal": "media/ads/1373215364670990.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM_Yz59VwfhUCZXLPdXoXPVSP-JWeIUzxybDJixsSVS5iFRb6RBNm8PZIahsaznolqcQJkxtTGAz_KxwsYW70S7Xk1AbWf4THmWG4RXvvryeg.mp4?_nc_cat=102&_nc_oc=Adrhdn2wZjvaAf4b_kCx-popfxFSANFU4i_tv8YgRcPnkpPEUfm-5RERABETsCGtnRfMyc-hjN_6907_yRseXoX0&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=y9KhN0uIA8EQ7kNvwED8lBV&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjQwMjYyMjk1OTQxODE0MTYsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjU5LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=b0dcd8e57e9d951b&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yQzQ1NkRGRThEQjg4RUM1NzAxNzJBQUUzODE5RDM4Ml9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzY5NDdGQ0M0NEI1OEU3QzM1NzI5NjQ0NkJFQkIxRkI3X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbQvPaLtPWmDhUCKAJDMywXQE33bItDlYEYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQPEZOWcO8Lovy4D8-qfdlXScfZJ5thHajEzvZrTLQnKmA&oe=6ACD967E"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1373215364670990"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1761170808209433",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Tem anotação que, no calor do atendimento, até parece fazer sentido.\n\nMas depois de um dia cheio, vira quase uma investigação! 🤭\n\nA Sintropia ajuda a trocar o garrancho por uma rotina mais clara: resumo de sessão, prontuário alinhado à sua abordagem e agenda organizada no mesmo lugar! ✨\n\nA IA organiza um rascunho, você revisa e aprova. O cuidado segue com a sua assinatura clínica!\n\nPra sentir na prática, teste a Sintropia: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Por uma clínica mais leve",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-garrancho-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/742096620_2513213169104534_2595579730397329905_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=_FdwrthVJdIQ7kNvwHjfgR9&_nc_oc=AdrDqrfbIHk-59I6Y8XvKPq0PgdQhiwbypEPDzDVKCbLOx0NkQVuMAbUInlelbB3KBtWeFjqdPU_BJO-HWncP55X&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQNAI1PCkgOnz_EVCuQMO7RnGEKxyx3mq0JBNxuncPtrSg&oe=6ACD7D8F",
+     "thumbnailLocal": "media/ads/1761170808209433.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM5gs6POmOIs0h4USSCvyXsDpMrNKJole7rBxBoKr4UVXA4YToVlIjz_xyp0ZmDFVRDXwQOXT6PevM0EnaGz6UJ-4nMEyJ_jVAMUpGQSvBP9A.mp4?_nc_cat=102&_nc_oc=Adq4WasXNbI7jhMf9xbrZZ_tMnS5vEZhFD9Id2zDXNK4usKYM_sCqKPY1P_a8I0Zu8x7gewXiCVI-PfgYzz9ViAG&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=L9MbBTjeuMcQ7kNvwGeHSH3&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjI4MjczNzEyNTQyNzk3MjksImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjExNCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=1a18aead317434e6&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84RjRBOUFEQ0UxMDUyNjBGNDQ0RDI4NkQ0RjJFQTg4QV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIyNDc2RjhCMzE0MjY0RTI1NUVCM0I3QjE0QUJDNzlCX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbiuJO01d6FChUCKAJDMywXQFy5mZmZmZoYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQOOgHCRAZWRAvXb2fJ3z5KSyv71q0xWLsE3rUCdhZLp2w&oe=6ACD7E02"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1761170808209433"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude",
+   "nota": "Sintropia \"garrancho\": mostra o produto resolvendo, não oferta"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "999358476397361",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Depois da sessão, ainda existe uma parte invisível do trabalho: organizar o que foi dito, transformar notas em evolução, deixar o prontuário com sentido clínico! 💜\n\nNa Sintropia, o Smart Notes ajuda a tornar esse caminho mais leve:\n\n🎙️ grave a sessão, com consentimento, ou dite suas anotações\n✨ receba um resumo inteligente\n✅ revise, ajuste e aprove antes de salvar no prontuário\n\nA IA da Sintropia apoia a escrita, mas a decisão continua sua. O cuidado, a escuta e a responsabilidade clínica seguem com você! 😊\n\nTeste a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Da sessão ao prontuário sem usar o teclado",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-smart-notes-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/741569461_1713589393289319_3388494710404880308_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=bj3s4GfDV00Q7kNvwGauIVc&_nc_oc=AdoxAB6JzbldQKidkwY-2g6kwSrxndXQO1N5EHAGOt-g9EsJ80DCuWYTM_Y2kYuYEfVhlhaIbYJepPhEqqLDD1d0&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQOOS5JRfpA_W7kl7RngoQ5x81sJAt_8WwPOwxRP9Ik4Qw&oe=6ACD9EC6",
+     "thumbnailLocal": "media/ads/999358476397361.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMp_OMQHBvHPg7s9D4_y8t0q8J38CV6Yz53txyGv7U28xIXZwHobrg9gSkKhqs87sj-fCO96k8TqC5Lj6UqxTyXE1fFhIXCWw9Zl6VqT1MbJg.mp4?_nc_cat=111&_nc_oc=Adqzmib7hZy_ji-0r_dPAQrA6HE45VnRpxnYNyfs0criNFcXyITchDTxdWw8SzDYC1GvPRv1PRBl6wtRySxqL3q6&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=oVosFlWrNKcQ7kNvwGiX9W0&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjQ0OTA2NDg1NzExOTI5OTEsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjQyLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=17ead8f9d2cc9d9e&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC85OTRCMzAyQzg1OTlDNjdEMDg5QjNBN0E4QTc3MEQ4MV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVBNEQxQkM5ODYyQUEzMzcyNDM5N0I0RkQ4RDEzRjk3X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa-mq2Ok476DxUCKAJDMywXQEUQAAAAAAAYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQOAjqjLX-SwDZsezwYpk-1bmQAXWlTQjFTkVb2xamrj_w&oe=6ACD99A1"
+    },
+    "variations": 2,
+    "url": "https://www.facebook.com/ads/library/?id=999358476397361"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "1646895656405624",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-07",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Depois da sessão, ainda existe uma parte invisível do trabalho: organizar o que foi dito, transformar notas em evolução, deixar o prontuário com sentido clínico! 💜\n\nNa Sintropia, o Smart Notes ajuda a tornar esse caminho mais leve:\n\n🎙️ grave a sessão, com consentimento, ou dite suas anotações\n✨ receba um resumo inteligente\n✅ revise, ajuste e aprove antes de salvar no prontuário\n\nA IA da Sintropia apoia a escrita, mas a decisão continua sua. O cuidado, a escuta e a responsabilidade clínica seguem com você! 😊\n\nTeste a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Da sessão ao prontuário sem usar o teclado",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-smart-notes-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/741569461_1713589393289319_3388494710404880308_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=bj3s4GfDV00Q7kNvwGauIVc&_nc_oc=AdoxAB6JzbldQKidkwY-2g6kwSrxndXQO1N5EHAGOt-g9EsJ80DCuWYTM_Y2kYuYEfVhlhaIbYJepPhEqqLDD1d0&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQOOS5JRfpA_W7kl7RngoQ5x81sJAt_8WwPOwxRP9Ik4Qw&oe=6ACD9EC6",
+     "thumbnailLocal": "media/ads/1646895656405624.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMp_OMQHBvHPg7s9D4_y8t0q8J38CV6Yz53txyGv7U28xIXZwHobrg9gSkKhqs87sj-fCO96k8TqC5Lj6UqxTyXE1fFhIXCWw9Zl6VqT1MbJg.mp4?_nc_cat=111&_nc_oc=Adqzmib7hZy_ji-0r_dPAQrA6HE45VnRpxnYNyfs0criNFcXyITchDTxdWw8SzDYC1GvPRv1PRBl6wtRySxqL3q6&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=oVosFlWrNKcQ7kNvwGiX9W0&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjQ0OTA2NDg1NzExOTI5OTEsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjQyLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=17ead8f9d2cc9d9e&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC85OTRCMzAyQzg1OTlDNjdEMDg5QjNBN0E4QTc3MEQ4MV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVBNEQxQkM5ODYyQUEzMzcyNDM5N0I0RkQ4RDEzRjk3X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa-mq2Ok476DxUCKAJDMywXQEUQAAAAAAAYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQOAjqjLX-SwDZsezwYpk-1bmQAXWlTQjFTkVb2xamrj_w&oe=6ACD99A1"
+    },
+    "url": "https://www.facebook.com/ads/library/?id=1646895656405624"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "921830527629390",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Existe uma diferença enorme entre uma plataforma que guarda informação e uma plataforma que respeita o jeito como você pensa a clínica! 😊\n\nNa Sintropia, o Seletor de Abordagem nasceu dessa escuta: adaptar a escrita terapêutica à sua vertente, da psicanálise à TCC, para que o prontuário não pareça genérico! 💜\n\nVocê escolhe, a Sintropia apoia, você revisa e aprova! ✨\n\nA Sintropia entra como suporte, não como substituta da sua clínica!\n\nVeja por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Feito para a sua abordagem",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-retargeting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-seletor-abordagem-advantage-a&utm_term=retarget-engajamento-ig-365d",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/759011223_3158373451039167_4591690371749364145_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=6P_wIy_o7eAQ7kNvwED4Jn-&_nc_oc=Adq3xMzuOHt9SEZ4Q1EvrE47k5JEn4VnS6OymGvJDuSFx3GITDZwAVqs2Jf2S6M43CHGLPtVIwibXNT21uuBQ3YA&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQNTXIU0xqSOGxeRby6aO4HtZUEvZYSBFDyjXllkhcOqVA&oe=6ACD708A",
+     "thumbnailLocal": "media/ads/921830527629390.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNH7p1Knxu1zdUjicgcxdrNmI5KsecYG3jARNxbfJykjYdxLs2s8yCjI5gFHMgn0p9U_asZLbJOf-ztqYo_0SFCvspUYmegPTvju1FvRZLfmg.mp4?_nc_cat=110&_nc_oc=AdrGmsY83nRp0VCDSLWKSEsOFY-IhptdIC_yni24MltN-7MWAXyvpi7-jokjEwt3jn03NekXFu9e2RJ0xw2GkkC2&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=09JHzN26ZLsQ7kNvwGCLt_A&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEwOTQzMzQyMDMwMDE1OTQsImFzc2V0X2FnZV9kYXlzIjo3MSwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjc2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=b902b3f9150a1192&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC81ODRCQzVBNzZGMDQ0NzVGMUYzOEExRkNERkIxNTg4Rl9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIwNDkxRDBFMEQxRUFBRjM2MzJFRDFGNjY0MkFCMDhCX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACb06_uW0dLxAxUCKAJDMywXQFMV87ZFocsYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQO7Q9_2SwtjmlrA47mXuBRSj0KY_a69bSw-jfnkqVY8jg&oe=6ACD9A12"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=921830527629390"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "remarketing",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "1081410210878263",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Agenda confirmada, lembretes no horário, informações importantes no mesmo lugar! 💜\n\nParece detalhe, mas é esse detalhe que muda o peso da rotina clínica!\n\nA Sintropia reúne agenda, prontuário e financeiro em uma experiência pensada para psicólogas: mais clareza antes da sessão, durante o dia e depois do atendimento!\n\nMenos coisa espalhada. Mais rotina cuidada.\n\nConheça a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Tudo em um só lugar",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-agenda-rotina-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/742462039_1239072478242721_4346710427311977784_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=1DUQqPuLIcsQ7kNvwF6kSfo&_nc_oc=Ado0wqqn_PjCGxAr1TV1EWwqAYA8eZCdNutrMYYvs68ePqX9jcEMZbwKWCRANLJa3AEXmWM8waSe5yGHD9S7Kvmj&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQM3rh729Vx0Q9Kjq3koXqRnxJSwMiJ-jgljsiFlsX_C7A&oe=6ACD6A10",
+     "thumbnailLocal": "media/ads/1081410210878263.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNNPH35PnODMfkyYjqaJPms_hYDxpO4RQuUr2MWfUUiP8Jtj0af6XYg9l0LmkwCbwX2XEsgTFyMv4XEQ_OD-_9RBt3T-a5lfYMkzj6_QCnriA.mp4?_nc_cat=103&_nc_oc=Adq6jgKBbZeAbWq52RQkFzG4DXoePovO_fPCfdpMZpHQU1pz-SuhsPz0cvkTB2ECB0T2e0jak8Dr_UoTD1o7k8Uq&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=EeRh0K1ZREwQ7kNvwEuF2KP&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjg5NDI3MzEwMDI2MTQ3MCwiYXNzZXRfYWdlX2RheXMiOjIxNywidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjczLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=a6d9ecf67ed1f74d&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yQTQ5MjY4QjZENjc0QTgwMURDOTI1M0VFQjA1MDZCQl9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzRBNEZCQTQ0MkMzNTNBMUE5NTE3ODhCRTg1NDMxMDhGX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa8ocnnxdWWAxUCKAJDMywXQFJPS8an754YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQPfhW77eFERTMGa2Y8JU-w7Hg5U_4vzmAll3YYosFAocA&oe=6ACD6F7D"
+    },
+    "variations": 2,
+    "url": "https://www.facebook.com/ads/library/?id=1081410210878263"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "2249106659257506",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Agenda confirmada, lembretes no horário, informações importantes no mesmo lugar! 💜\n\nParece detalhe, mas é esse detalhe que muda o peso da rotina clínica!\n\nA Sintropia reúne agenda, prontuário e financeiro em uma experiência pensada para psicólogas: mais clareza antes da sessão, durante o dia e depois do atendimento!\n\nMenos coisa espalhada. Mais rotina cuidada.\n\nConheça a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Tudo em um só lugar",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-agenda-rotina-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/742462039_1239072478242721_4346710427311977784_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=1DUQqPuLIcsQ7kNvwF6kSfo&_nc_oc=Ado0wqqn_PjCGxAr1TV1EWwqAYA8eZCdNutrMYYvs68ePqX9jcEMZbwKWCRANLJa3AEXmWM8waSe5yGHD9S7Kvmj&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQM3rh729Vx0Q9Kjq3koXqRnxJSwMiJ-jgljsiFlsX_C7A&oe=6ACD6A10",
+     "thumbnailLocal": "media/ads/2249106659257506.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNNPH35PnODMfkyYjqaJPms_hYDxpO4RQuUr2MWfUUiP8Jtj0af6XYg9l0LmkwCbwX2XEsgTFyMv4XEQ_OD-_9RBt3T-a5lfYMkzj6_QCnriA.mp4?_nc_cat=103&_nc_oc=Adq6jgKBbZeAbWq52RQkFzG4DXoePovO_fPCfdpMZpHQU1pz-SuhsPz0cvkTB2ECB0T2e0jak8Dr_UoTD1o7k8Uq&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=EeRh0K1ZREwQ7kNvwEuF2KP&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjg5NDI3MzEwMDI2MTQ3MCwiYXNzZXRfYWdlX2RheXMiOjIxNywidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjczLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=a6d9ecf67ed1f74d&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yQTQ5MjY4QjZENjc0QTgwMURDOTI1M0VFQjA1MDZCQl9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzRBNEZCQTQ0MkMzNTNBMUE5NTE3ODhCRTg1NDMxMDhGX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa8ocnnxdWWAxUCKAJDMywXQFJPS8an754YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQPfhW77eFERTMGa2Y8JU-w7Hg5U_4vzmAll3YYosFAocA&oe=6ACD6F7D"
+    },
+    "url": "https://www.facebook.com/ads/library/?id=2249106659257506"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "27428635276787794",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Tem coisa que a gente chama de date, mas no fundo é só aquela sensação rara de encontrar algo que entende a nossa rotina! 🤭\n\nFoi assim aqui: uma psicóloga, uma descoberta e a vontade imediata de contar pra todas as amigas psi! ✨\n\nPorque na Sintropia é assim: aqui você descobre como uma plataforma pode deixar a rotina clínica mais leve, organizada e cheia de cuidado!\n\nDá o play. Talvez esse encontro também faça sentido por aí 💜",
+    "title": "Pra cuidar de quem cuida",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/741447220_1313404190863194_2829360625821087121_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=hR3f8efncjYQ7kNvwGGs55z&_nc_oc=AdqJs6vxOlXtIedt7TdrOVdFpYnEf5byRX5oxOhAWSFWSJnvCBgKO6emRVFm9bYhjC-sh9RTctxKAkxeYFrz4O8L&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQNZmYrdUTly8By1XL3ycsEsyrw_0lcaKPihPP0R6CdZ7g&oe=6ACD8BCA",
+     "thumbnailLocal": "media/ads/27428635276787794.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMEy9TD9Wxin3ZV5aRPpo-smXeq3I98Vb8_NfnhvrU4_qKi6n0RWazo1To0c_hDZd67ZuuQq43Bfqdg9Ans5pO_uMY-GnXgKkSFEYKZUMEJdw.mp4?_nc_cat=103&_nc_oc=AdoN2WP-jl3mlYTXMYQVtzehKtEJ43WrJF-4pJS8yNbhXg9eLkj0N0aBVAfUutHgwRiYHvXUBUJPkteBEzCjOj0G&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=yltLvPzpsBcQ7kNvwGeG0KX&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE0NDAwNjA4MDEyNjY2MzcsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjc1LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=6125cf2a87dc9af7&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC80MjQ2NTAxNjc0OTM5OTJCQzYxOUI3NUZFMjlDNkNCQ19tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVCNEQxQjA2MTYxMUNCODNFMUFEOTk1RDRCQjlERUE3X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaaz52Iye6OBRUCKAJDMywXQFLiHKwIMScYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQO9jlDlg3aIeEz3HLOr84Ivu3nPXMJqV4WcJw0w61sw7g&oe=6ACD7421"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=27428635276787794"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "prova-social",
+    "objetivo": "engajamento"
+   },
+   "por": "claude",
+   "nota": "Sintropia \"date\": depoimento/UGC"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1519646936313581",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Tempo de qualidade também começa quando a clínica para de morar inteira na cabeça! 💜\n\nCom a Sintropia, agenda, prontuário e financeiro ficam no mesmo lugar, pra rotina ganhar mais clareza e o dia terminar com mais respiro! 😊\n\nOrganização, nesse caso, não é sobre fazer mais.\n\nÉ sobre poder estar mais presente no trabalho e também fora dele. 💜",
+    "title": "Pra cuidar de quem cuida",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/740063807_1747123482967961_4664598043014959614_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=_Mafl3IAYMkQ7kNvwFz0SHR&_nc_oc=Adqxz19aZh7nFhbgJI5qfSC6Hxxqfb6dOPgcV94t7vsTzsj0Ys1wfXiOVX09M9qQryh8PD4ERz4iImcaHhY_V4dH&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQO0TLYq2TpUg3_rUrp8tbAOcBPWS7DDfJ9XAWaleKHtRg&oe=6ACD7590",
+     "thumbnailLocal": "media/ads/1519646936313581.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQOdduHFYSenKlJdJZhgWOHgSM4YudBp-wrPd7IG-WB9wFQRxtSY3ap0pk31Qimbn_ktsIhzrePdfiXHQk5uOVuJRM1QEUfCcx2ndLRJevXGKg.mp4?_nc_cat=103&_nc_oc=AdppM85sVbVwvnl3r-LwQ5nqCi4AMjHBHfJDmkgJmXj4SqWq3t_Ij7nLCiY4BPLbkUBqlkoTtmX8gtdOuFYKvhYB&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=Ir2ulBTD0_sQ7kNvwGZLF52&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE1NzA2NzI1MjExMTkwMjIsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjI2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=454c943f01319b89&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC85RjQ0RTY3NTBCRDY3NjBFM0Q2QTgwQ0FFQTUxNTI5RF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0Q0NERFOEM3QTJFMDU2MzI5QTRENDUxQjM2NjFBQ0EzX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbclPCalqHKBRUCKAJDMywXQDpu2RaHKwIYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQMI6_RbiVBo_fGfYdz8tCUzIX-kDoX6b79kG8jmVMmL9Q&oe=6ACD9A6D"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1519646936313581"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "institucional",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "1770343010788708",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Quando a rotina clínica fica toda na cabeça, ela aparece nos lugares mais improváveis: no treino, no descanso, no meio de uma conversa!\n\nA Sintropia ajuda a separar melhor esses espaços: agenda, lembretes automáticos, financeiro e prontuário com IA que você revisa e aprova, tudo em um só lugar! ✨\n\nPra terminar o atendimento sem carregar o consultório junto! 😊\n\nTeste a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Por uma rotina mais leve",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-carga-mental-treino-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/740052736_1039196678806739_5427067526653579685_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=q9xIGJ3VICIQ7kNvwFq9sD2&_nc_oc=AdqMVV1rr36fy13VJ-7agn42JavBTmWQ6fDHWxevvocTzry0ACoKboj3Rz5KaDrOWG-g-gGMlDkp7jVohpU14Ils&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQMNDSnEEFB2LO-4loBa_LjIM090rEYbZbNBDcIPurjpSQ&oe=6ACD9F87",
+     "thumbnailLocal": "media/ads/1770343010788708.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMa3kBqerp0yDhl5fdSqm_Gt5wko3ZnMTMICqwrJ-lvceVOksQzbLI6VoqyyAyQC4JzsZ2QzayPMyQ8TB0lnHI2XMqK6YGtAaTKKS4GjWYHCQ.mp4?_nc_cat=104&_nc_oc=AdqzVugpxlTup1P_jRsi4LjADdb5UhbN3b6mnaO6Mu1o7GjPjy2qz9Z6bs6q0YD5o-Dqu0hylOk_knKpAPaiiGxH&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=DzWuumSGr5IQ7kNvwEySBBk&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEyODExMTQ3MTA3NjQ0NjEsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjgzLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=84a86cfba4cf5ab7&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84MzRERDZGMkYzNkM3MjA3MURFMDU2QkRCNkRERjc4QV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVFNDNCMDkxQjM3MjQ3RkEyMTM5NDg0QUJFNDY4MUI4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbaroO02MrGBBUCKAJDMywXQFT4gxJul40YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQMiUL9JqlVj7SZUWWiNoH4rOYKR9qXh77H0_jaS840ecw&oe=6ACD8348"
+    },
+    "variations": 2,
+    "url": "https://www.facebook.com/ads/library/?id=1770343010788708"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 2,
+   "ad": {
+    "id": "1721130212541123",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "text": "Quando a rotina clínica fica toda na cabeça, ela aparece nos lugares mais improváveis: no treino, no descanso, no meio de uma conversa!\n\nA Sintropia ajuda a separar melhor esses espaços: agenda, lembretes automáticos, financeiro e prontuário com IA que você revisa e aprova, tudo em um só lugar! ✨\n\nPra terminar o atendimento sem carregar o consultório junto! 😊\n\nTeste a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Por uma rotina mais leve",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-prospecting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-carga-mental-treino-advantage-a&utm_term=broad",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/740052736_1039196678806739_5427067526653579685_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=q9xIGJ3VICIQ7kNvwFq9sD2&_nc_oc=AdqMVV1rr36fy13VJ-7agn42JavBTmWQ6fDHWxevvocTzry0ACoKboj3Rz5KaDrOWG-g-gGMlDkp7jVohpU14Ils&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQMNDSnEEFB2LO-4loBa_LjIM090rEYbZbNBDcIPurjpSQ&oe=6ACD9F87",
+     "thumbnailLocal": "media/ads/1721130212541123.jpg",
+     "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQMa3kBqerp0yDhl5fdSqm_Gt5wko3ZnMTMICqwrJ-lvceVOksQzbLI6VoqyyAyQC4JzsZ2QzayPMyQ8TB0lnHI2XMqK6YGtAaTKKS4GjWYHCQ.mp4?_nc_cat=104&_nc_oc=AdqzVugpxlTup1P_jRsi4LjADdb5UhbN3b6mnaO6Mu1o7GjPjy2qz9Z6bs6q0YD5o-Dqu0hylOk_knKpAPaiiGxH&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=DzWuumSGr5IQ7kNvwEySBBk&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEyODExMTQ3MTA3NjQ0NjEsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjgzLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=84a86cfba4cf5ab7&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84MzRERDZGMkYzNkM3MjA3MURFMDU2QkRCNkRERjc4QV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzVFNDNCMDkxQjM3MjQ3RkEyMTM5NDg0QUJFNDY4MUI4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbaroO02MrGBBUCKAJDMywXQFT4gxJul40YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQMiUL9JqlVj7SZUWWiNoH4rOYKR9qXh77H0_jaS840ecw&oe=6ACD8348"
+    },
+    "url": "https://www.facebook.com/ads/library/?id=1721130212541123"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "demonstracao",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1604270281407663",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Entre uma sessão e outra, muita coisa continua acontecendo por dentro de quem atende 💜\n\nA Sintropia nasceu desse lugar: da escuta sobre a rotina real de psicólogas, da sobrecarga que aparece nos detalhes e da vontade de cuidar de quem passa o dia cuidando! 😊\n\nA Bruna é uma das formas desse cuidado aparecer no fim dos atendimentos, com o tom que combina com você e com a sua forma de acolher! ✨\n\nNão pra resolver todos os desafios da clínica. Mas pra lembrar, com delicadeza, que quem sustenta tanto cuidado também precisa ser lembrada!\n\nPorque uma rotina saudável não é feita de dar conta de tudo. É feita de não se abandonar enquanto cuida! 😊\n\nA Sintropia existe pra cuidar de quem cuida. 💜",
+    "title": "Pra cuidar de quem cuida",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/742031183_1642391346854317_8051302241620487601_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=JNSRvv0pd3AQ7kNvwFI26SE&_nc_oc=AdoXg6XHvk7lcHqX6zUr2loKc3cCOReFPYYd-B1bII85-hmNiaBLB8sg5Uf8Tdfbl9bPm_tFmb4Kh2Htwph0wUBM&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQMrb8ZicKpYSSMxSBKCBlful-lBS10rY7rSh75ixajyZg&oe=6ACD7F0C",
+     "thumbnailLocal": "media/ads/1604270281407663.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNcQ0koLrP96ZZz6ix6brWQ-2Sq8OvsYDFv6wU149p19cO_GP2yMKG_irq2P7UPllltsPUIay5dHQ3-Tn0qv85NABcQqpVcmTLijEO00A572w.mp4?_nc_cat=107&_nc_oc=AdqNOZ7XoaW25FqZf8SwiLIjvLoc9rEUv6_BXra9PyOckD7w8zwr8kgADzjZt8CEEunfr_G_Sq6KS_ahYGMhdDBl&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=JfW6DH5Fsg4Q7kNvwEv4i_R&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEzMzMxODUzNzIzMjcyNDgsImFzc2V0X2FnZV9kYXlzIjo5MiwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjk2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=498d464a8112ef&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC81RDQwNUQwQjUwQTY0RThFRUI2NTZGRDRERjEyRDNCQl9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50Lzc5NERGM0I3NzQwM0EwQzc1MkYxOERBRDZGMkU2MzhFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACagtcyIzaHeBBUCKAJDMywXQFgDdLxqfvoYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQO1z-KwLvkoW066eoRMVoqE65PiNXq_CDUDYGWVRsTJOA&oe=6ACD8A49"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1604270281407663"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "institucional",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "2862319267449838",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-08",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Quando a clínica fica espalhada em papéis, abas e lembretes soltos, o dia se torna um pesadelo!\n\nA Sintropia ajuda a trazer tudo de volta para um lugar só: agenda, rotina, próximos passos e aquela sensação boa de começar o dia com mais clareza!\n\nNão é só sobre organizar tarefas. É sobre abrir espaço mental pra você cuidar sem carregar tudo sozinha! 😊\n\nSintropia: tudo em um só lugar, pra o cuidado caber no dia sem ocupar a vida inteira! 💜",
+    "title": "Pra cuidar de quem cuida",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/739578680_1574380170871173_4254619873945337643_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=myUpEj3vw_UQ7kNvwERqXBi&_nc_oc=Ado3H_vPIc6M2fzXTLPbjUM2pRScx_0KSKjjtktcL-5-FeNK7Ytu-vHh2TILD8ZJG6eou3yFWkOXlnTFzNzfBLca&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQN8bSiDkEpQp28H7M0MGYKMo8xcGk8l2Cim3TmxXpjKNQ&oe=6ACD71EC",
+     "thumbnailLocal": "media/ads/2862319267449838.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNNPH35PnODMfkyYjqaJPms_hYDxpO4RQuUr2MWfUUiP8Jtj0af6XYg9l0LmkwCbwX2XEsgTFyMv4XEQ_OD-_9RBt3T-a5lfYMkzj6_QCnriA.mp4?_nc_cat=103&_nc_oc=Adq6jgKBbZeAbWq52RQkFzG4DXoePovO_fPCfdpMZpHQU1pz-SuhsPz0cvkTB2ECB0T2e0jak8Dr_UoTD1o7k8Uq&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=EeRh0K1ZREwQ7kNvwEuF2KP&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjg5NDI3MzEwMDI2MTQ3MCwiYXNzZXRfYWdlX2RheXMiOjIxNywidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjczLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=a6d9ecf67ed1f74d&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yQTQ5MjY4QjZENjc0QTgwMURDOTI1M0VFQjA1MDZCQl9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzRBNEZCQTQ0MkMzNTNBMUE5NTE3ODhCRTg1NDMxMDhGX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa8ocnnxdWWAxUCKAJDMywXQFJPS8an754YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQPfhW77eFERTMGa2Y8JU-w7Hg5U_4vzmAll3YYosFAocA&oe=6ACD6F7D"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=2862319267449838"
+   },
+   "esperado": {
+    "funil": "topo",
+    "tipo": "institucional",
+    "objetivo": "engajamento"
+   },
+   "por": "claude"
+  },
+  {
+   "comp": "sintropia",
+   "irmaos": 1,
+   "ad": {
+    "id": "1596479312048389",
+    "pageName": "Sintropia.psi",
+    "pageId": "543417018854008",
+    "active": true,
+    "startedAt": "2026-07-29",
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "text": "Digital não é o oposto de sigilo!\n\nO cuidado está em como os dados são tratados, protegidos e acessados no dia a dia! 💜\n\nNeste vídeo, a advogada da Sintropia, Alexandra Wainer, explica, sem juridiquês, como segurança e confidencialidade entram na rotina da plataforma, e onde o sigilo costuma quebrar na prática! 😊\n\nPorque na Sintropia, tecnologia também precisa caminhar com responsabilidade! ✨\n\nConheça a Sintropia por dentro: 15 dias grátis · sem cartão · sem compromisso. 💜",
+    "title": "Segurança como prioridade",
+    "cta": "Cadastre-se",
+    "linkUrl": "https://sintropia.me/?utm_source=meta&utm_medium=paid-social-retargeting&utm_campaign=br-trial-funil-completo-202607-v1&utm_content=video-sigilo-advantage-a&utm_term=retarget-engajamento-ig-365d",
+    "media": {
+     "type": "video",
+     "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/756436711_1843232403315964_4826931150596508371_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Ra8t6wNSRQsQ7kNvwGEolG4&_nc_oc=AdoCz548auETwhejtawVJzlYgidCBHYaMIhK33t__ntOhfj-j9kzF5wH-PO3NTLGxkzFamnCUBhi14wigVnk1o77&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&oh=00_AQNX7QdPhHqonSq9OkV9yGoEtIu7jx_LIYuqap6iqkCw0Q&oe=6ACD6D6F",
+     "thumbnailLocal": "media/ads/1596479312048389.jpg",
+     "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQOG6T1kQkUnqjJeYLHAmtWmBNDWvOUbk317wHGQmshfdED3dhMJBnIR_GjmC-sgDC3ARu5-LdZ3Sx4Aa_0CgKGD5IoK5W-fe2ZK3l6HFB9nkw.mp4?_nc_cat=110&_nc_oc=AdrXRLVckuy0sQyxflpMJI-klBYymF7Dwf-qRi25QaNuHXSEcXmG6E1XRwtaJb6oe-L_xGoWMetlE2VwRUP40g7M&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=UTlA2YAQMIEQ7kNvwGYyEMa&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjIwMTY1OTgxNTU4ODUzNzcsImFzc2V0X2FnZV9kYXlzIjo3MSwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjE1MiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=429d1591b98f9872&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8xMDRCQjVGQUUxRUQ0MTJBRUQxNDI2RjBCQTVBODBBMF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50L0UwNEI3RUM5NTE4RjY0RjNEQUM0NUI5ODI3QTIzMDhFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaC7eOLu4WVBxUCKAJDMywXQGMY3S8an74YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZbaeAQA&_nc_gid=ev_F8NjeFCoCwvBiBO4pVw&_nc_ss=7b289&_nc_zt=28&oh=00_AQMlTuLFh3aPc5iDpKSAuLwXmw1ebQGJiWNksdKOG8UzWQ&oe=6ACD9736"
+    },
+    "variations": 1,
+    "url": "https://www.facebook.com/ads/library/?id=1596479312048389"
+   },
+   "esperado": {
+    "funil": "fundo",
+    "tipo": "remarketing",
+    "objetivo": "cadastro"
+   },
+   "por": "claude"
+  }
+ ]
+}

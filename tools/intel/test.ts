@@ -376,6 +376,18 @@ await t('histórico de anúncios: completude, mesmo id e coleta vazia (037 A, re
   reset();
 });
 
+await t('classificador de anúncios: acerto no gabarito ≥ 85% em funil e tipo (037 B)', async () => {
+  const { lerGold, medir } = await import('./ads-gold');
+  const ms = medir(lerGold());
+  const linha = ms.map((m) => `${m.campo} ${m.certos}/${m.total} = ${(m.acerto * 100).toFixed(0)}%`).join(' · ');
+  console.log(`   ${linha}`);
+  for (const campo of ['funil', 'tipo'] as const) {
+    const m = ms.find((x) => x.campo === campo)!;
+    assert.ok(m.total >= 30, `gabarito pequeno demais em ${campo}: ${m.total}`);
+    assert.ok(m.acerto >= 0.85, `${campo} caiu para ${(m.acerto * 100).toFixed(0)}% (mínimo 85%): ${m.erros.map((e) => `${e.comp} ${e.id} esperado ${e.esperado} veio ${e.veio}`).join('; ')}`);
+  }
+});
+
 await t('validação geral do HUB_ROOT temporário', () => {
   assert.deepEqual(S.validateAll(), []);
 });
