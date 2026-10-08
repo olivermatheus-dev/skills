@@ -55,5 +55,6 @@ Status: fazendo — passos 1–5 da "Ordem sugerida" feitos em 2026-10-07; segue
 
 ## Log
 - 2026-10-07: backend otimizado; passe otimista iniciado; componentes shadcn preparados em `staging/`; sessão encerrada em ponto seguro (tudo verde).
+- 2026-10-07: correções após teste do Oliver: ícones da sidebar recolhida desalinhados (NavLink com className em função dentro do TooltipTrigger asChild: o Slot do Radix vira a função em texto → Link com classe calculada; regra: nunca className em função dentro de asChild), rolagem horizontal de 1 px na nav, e barra contextual recolhida que "sumia" (agora o trilho inteiro é botão, com ícone e nome na vertical).
 - 2026-10-07: passos 1–5 feitos (shadcn ligado, tokens, cor do projeto, Lucide, sidebar recolhível, ContextSidebar em Concorrentes e Mockups).
 - 2026-10-07: pedidos novos do Oliver registrados (cor do projeto no tema, Lucide, sidebar principal recolhível, sidebar contextual padronizada, migração gradual com Sonnet 5.5 baixo). Retomar pela "Ordem sugerida".

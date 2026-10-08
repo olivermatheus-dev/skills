@@ -1,11 +1,12 @@
 import { Suspense, useEffect, useState, type ReactNode } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { FolderOpen, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { PAGES, preloadAllPages } from '../pages';
 import { prefetchPage, prefetchProject, useProjects, whenIdle } from '../queries';
 import { preloadMarkdownEditor } from './Markdown';
-import { cx, Select } from './kit';
+import { Select } from './kit';
+import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useCorDoProjeto } from '@/lib/theme';
 
@@ -46,9 +47,9 @@ export default function Layout({ children }: { children?: ReactNode }) {
   return (
     <TooltipProvider delayDuration={150}>
       <div className="flex h-full">
-        <aside className={cx('shrink-0 border-r border-border bg-sidebar flex flex-col transition-[width] duration-150', recolhida ? 'w-14' : 'w-60')}>
+        <aside className={cn('shrink-0 border-r border-border bg-sidebar flex flex-col transition-[width] duration-150', recolhida ? 'w-14' : 'w-60')}>
           {/* projeto: a cor dele é a cor principal da interface */}
-          <div className={cx('border-b border-border', recolhida ? 'p-2 flex justify-center' : 'px-4 py-4')}>
+          <div className={cn('border-b border-border', recolhida ? 'p-2 flex justify-center' : 'px-4 py-4')}>
             {recolhida ? (
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -71,15 +72,17 @@ export default function Layout({ children }: { children?: ReactNode }) {
             )}
           </div>
           {slug && (
-            <nav className={cx('flex-1 space-y-0.5 overflow-y-auto', recolhida ? 'p-2' : 'p-2')}>
+            <nav className={cn('flex-1 space-y-0.5 overflow-y-auto overflow-x-hidden p-2')}>
               {PAGES.map((p) => {
                 const Icone = p.icon;
+                // ativo calculado aqui: className em função (NavLink) quebra dentro do TooltipTrigger asChild (o Slot vira a função em texto)
+                const ativo = p === tela;
                 const link = (
-                  <NavLink key={p.path} end={p.path === ''} to={`/p/${slug}${p.path ? `/${p.path}` : ''}`}
+                  <Link key={p.path} to={`/p/${slug}${p.path ? `/${p.path}` : ''}`} aria-current={ativo ? 'page' : undefined}
                     onMouseEnter={() => warm(p.path, p.load)} onFocus={() => warm(p.path, p.load)} onPointerDown={() => warm(p.path, p.load)}
-                    className={({ isActive }) => cx('flex items-center rounded-md text-sm', recolhida ? 'justify-center size-10 mx-auto' : 'gap-2.5 px-3 py-2', isActive ? 'bg-primary-soft text-primary-ink font-medium' : 'text-foreground hover:bg-muted')}>
-                    <Icone className={cx('size-4 shrink-0', recolhida && 'size-[18px]')} strokeWidth={1.8} />{!recolhida && p.label}
-                  </NavLink>
+                    className={cn('flex items-center rounded-md text-sm', recolhida ? 'justify-center size-10 mx-auto' : 'gap-2.5 px-3 py-2', ativo ? 'bg-primary-soft text-primary-ink font-medium' : 'text-foreground hover:bg-muted')}>
+                    <Icone className={cn('size-4 shrink-0', recolhida && 'size-[18px]')} strokeWidth={1.8} />{!recolhida && p.label}
+                  </Link>
                 );
                 return recolhida ? (
                   <Tooltip key={p.path}><TooltipTrigger asChild>{link}</TooltipTrigger><TooltipContent side="right">{p.label}</TooltipContent></Tooltip>
@@ -88,7 +91,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
             </nav>
           )}
           {recolhida ? (
-            <button onClick={alternar} className="m-2 size-10 mx-auto grid place-items-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground" title="Abrir a barra"><PanelLeftOpen className="size-4" /></button>
+            <button onClick={alternar} className="my-2 size-10 mx-auto grid place-items-center rounded-md border border-border text-muted-foreground hover:bg-muted hover:text-foreground" title="Abrir a barra"><PanelLeftOpen className="size-4" /></button>
           ) : (
             <div className="p-4 text-xs text-muted-foreground border-t border-border flex items-center gap-1.5"><FolderOpen className="size-3.5" />companies/{slug ?? ''}</div>
           )}

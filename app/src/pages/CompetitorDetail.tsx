@@ -59,7 +59,7 @@ function ListaConcorrentes({ slug, id }: { slug: string; id: string }) {
     ['Candidatos (aceitar)', lista.filter((d) => d.data.status === 'candidato')],
   ];
   return (
-    <ContextSidebar storageKey="concorrentes" title={<Link to={`/p/${slug}/concorrentes`} className="hover:underline">Concorrentes</Link>} search={{ value: busca, onChange: setBusca, placeholder: 'Buscar concorrente…' }}>
+    <ContextSidebar storageKey="concorrentes" label="Concorrentes" title={<Link to={`/p/${slug}/concorrentes`} className="hover:underline">Concorrentes</Link>} search={{ value: busca, onChange: setBusca, placeholder: 'Buscar concorrente…' }}>
       {grupos.filter(([, l]) => l.length).map(([t, l]) => <ContextSidebar.Section key={t} title={<>{t} <span className="font-normal">{l.length}</span></>}>{l.map(item)}</ContextSidebar.Section>)}
       {!lista.length && <ContextSidebar.Empty>Nenhum concorrente{b ? ' com esse nome' : ''}.</ContextSidebar.Empty>}
     </ContextSidebar>

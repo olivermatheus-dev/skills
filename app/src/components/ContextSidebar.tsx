@@ -18,9 +18,11 @@ const MIN = 200, MAX = 440, PADRAO = 256;
 const ler = (k: string) => { try { return JSON.parse(localStorage.getItem(`hub:ctx:${k}`) ?? 'null') as { w?: number; fechada?: boolean } | null; } catch { return null; } };
 const gravar = (k: string, v: { w: number; fechada: boolean }) => { try { localStorage.setItem(`hub:ctx:${k}`, JSON.stringify(v)); } catch { /* só conveniência */ } };
 
-export function ContextSidebar({ storageKey, title, action, search, footer, children, className, width = PADRAO }: {
+export function ContextSidebar({ storageKey, title, label, action, search, footer, children, className, width = PADRAO }: {
   storageKey: string;
   title: ReactNode;
+  /** nome em texto (trilho recolhido e dicas) quando o título não é texto */
+  label?: string;
   /** botão no cabeçalho (ex.: + novo) */
   action?: ReactNode;
   search?: { value: string; onChange: (v: string) => void; placeholder?: string };
@@ -33,15 +35,17 @@ export function ContextSidebar({ storageKey, title, action, search, footer, chil
   const [w, setW] = useState(salvo?.w ?? width);
   const [fechada, setFechada] = useState(!!salvo?.fechada);
   useEffect(() => { gravar(storageKey, { w, fechada }); }, [storageKey, w, fechada]);
+  const rotulo = label ?? (typeof title === 'string' ? title : '');
   const arraste = useRef<{ x: number; w: number } | null>(null);
 
   if (fechada) {
+    // recolhida: o trilho inteiro é o botão de abrir (ícone em destaque + nome da área na vertical), para nunca "sumir"
     return (
-      <aside className="w-10 shrink-0 border-r border-border bg-sidebar flex flex-col items-center py-2">
-        <button onClick={() => setFechada(false)} className="size-8 grid place-items-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground" title={`Abrir ${typeof title === 'string' ? title : 'a barra'}`}>
-          <PanelLeftOpen className="size-4" />
-        </button>
-      </aside>
+      <button type="button" onClick={() => setFechada(false)} title={`Abrir ${rotulo || 'a barra'}`}
+        className="group w-11 shrink-0 border-r border-border bg-sidebar flex flex-col items-center gap-3 py-2 hover:bg-muted">
+        <span className="size-8 grid place-items-center rounded-md border border-border bg-card text-muted-foreground group-hover:text-foreground"><PanelLeftOpen className="size-4" /></span>
+        {rotulo && <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground [writing-mode:vertical-rl]">{rotulo}</span>}
+      </button>
     );
   }
   return (
