@@ -9,6 +9,9 @@
 - Revalidar o contexto da kz: ela já lançou? Oferta, preço e links atuais (tarefas 1–3 de `companies/kz/tasks.md`).
 - Checar as regras de publicidade do CFP/CRP, principalmente se algum post for virar anúncio.
 
+## Direção (2026-10-07)
+Instagram como **vitrine** de empresa de tecnologia: feed bonito e coeso, copy forte, foco nas melhores partes do produto. Séries aprovadas: 3, 4, 6, 8, 12 (`companies/kz/context/CONTENT_STRATEGY.md`). Mix proposto (6 produto + 6 valor) e grade em linhas de 3: `roadmap/tasks/029-motor-de-curadoria/TASK.md` §7.
+
 ## Plano (ajustar com o usuário)
 1. `content-ideas` → 12 pautas com mix de funil e de formatos (ex.: 4 carrosséis, 3 estáticos/memes, 5 vídeos em motion, sendo pelo menos 2 de produto e 1 em 3D).
 2. Para cada pauta: `ig-post` (roteiro + legenda) → formato (`fmt-*`) → peça exportada.
@@ -22,3 +25,4 @@
 ## Log
 - 2026-10-06 — criada como "vídeos de lançamento da kz".
 - 2026-10-07 — virou a meta dos 12 posts (carrosséis, estáticos e motion).
+- 2026-10-07 — direção de vitrine + séries aprovadas; mix proposto na 029.

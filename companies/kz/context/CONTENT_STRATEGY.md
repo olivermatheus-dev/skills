@@ -12,26 +12,21 @@
 
 **Regras:** no máximo 2 posts seguidos do mesmo pilar. Nunca 3 BOFU seguidos. Pilar 3 nunca logo depois do pilar 5. Reservar 1 espaço por semana para conteúdo reativo. Setembro Amarelo sem uso comercial.
 
-## Séries recorrentes (sugestões em teste)
-Molduras repetíveis dentro dos pilares: o público reconhece o quadro e a produção fica mais rápida. Nenhuma foi aprovada ainda; série que não servir sai da tabela.
+## Séries recorrentes (aprovadas em 2026-10-07)
+Molduras repetíveis dentro dos pilares: o público reconhece o quadro e a produção fica mais rápida. Cortadas: Radar da Psicologia, O estudo da semana, POV, Rotina em 30 s, Novidade na kz, Você pediu, Por trás da kz. Motor de pesquisa e fichas por série: `roadmap/tasks/029-motor-de-curadoria/`.
 
 | # | Série | Pilar | Funil | Formato | Mecânica | Exemplos |
 |---|---|---|---|---|---|---|
-| 1 | Radar da Psicologia | 6 | TOFU | carrossel · reels narrado | o que aconteceu → por que importa → o que muda para o terapeuta | resolução nova do CFP · regras de atendimento online · IA na psicologia · documentos |
-| 2 | O estudo da semana | 6 | TOFU | carrossel | perguntaram X → fizeram Y → encontraram Z → o limite do estudo | terapia online × presencial · aliança terapêutica · burnout · TCC · sono |
 | 3 | Mito, verdade ou… depende? | 4 · 6 | TOFU | reels curto · carrossel | afirmação comum → nuance | "terapia online funciona menos?" · "hábito leva 21 dias?" · "dopamina é o hormônio do prazer?" |
 | 4 | Só quem atende entende | 2 · 3 | TOFU | meme (imagem ou vídeo curtíssimo) | situação recorrente da rotina | fechar todas as abas depois do último paciente · cinco ferramentas abertas |
-| 5 | POV: rotina de terapeuta | 2 | TOFU | reels encenado | cena reconhecível com exagero leve | "faltam 2 min para a sessão e você procura aquela anotação" |
 | 6 | Salva isso para depois | 2 · 4 | TOFU · MOFU | carrossel | checklist ou mini-framework | checklist da sessão online · fechamento do dia · organização semanal |
-| 7 | Uma rotina melhor em 30 segundos | 2 | TOFU · MOFU | reels · carrossel | problema operacional → pequena mudança → resultado | rotina pré-atendimento · reduzir troca de contexto · preparar sessões antes |
 | 8 | kz na prática | 5 | MOFU · BOFU | reels com interface | começa pelo problema, nunca pela funcionalidade | "imagine abrir a sessão e já encontrar tudo aqui" · videochamada · histórico |
-| 9 | Novidade na kz | 5 | BOFU · retenção | vídeo curto · carrossel | chegou → como funciona → por que criamos → onde encontrar | tela nova · melhoria na agenda · videoconferência |
-| 10 | Você pediu, a gente fez | 1 · 5 | MOFU | post · reels | feedback real → problema → solução entregue | "alguns terapeutas disseram que X demorava; mudamos…" |
-| 11 | Por trás da kz | 1 | MOFU | reels · foto + texto | uma decisão de produto e o raciocínio | "por que essas informações na tela da sessão?" · "por que evitamos 15 botões aqui?" |
 | 12 | kz recomenda | 6 | TOFU | carrossel · post estático | 1 recurso + contexto + por que vale | livro · estudo · podcast · guia do CFP · relatório |
 
-**Formatos do hub que servem:** 4 → `fmt-meme` · 3 e 6 → `fmt-carrossel-educativo` · 7 → `fmt-antes-depois` ou `fmt-texto-cinetico` · 8 → `fmt-recorte-funcionalidade` · 9 → `fmt-trailer-lancamento` (grande) ou `fmt-recorte-funcionalidade` (pequena).
-**Cuidados:** 1, 2 e 12 só com fonte real e link (nunca resumir estudo sem ler). 10 só com feedback real registrado (nunca inventar). 5 precisa de gente encenando: conta no limite de 1 vídeo de founder por mês, ou vira texto cinético/diálogo (`fmt-dialogo`). 1 e 2 tocam regras do CFP: conferir antes de afirmar.
+**Formatos do hub que servem:** 4 → `fmt-meme` · 3 e 6 → `fmt-carrossel-educativo` · 8 → `fmt-recorte-funcionalidade` + mockups · 12 → carrossel de template fixo.
+**Cuidados:** 3 e 12 só com fonte real e link (nunca resumir estudo sem ler). 8 só mostra funcionalidade confirmada. 6 cita regra do CFP só conferida no documento oficial. 4 nunca expõe paciente.
+
+**Instagram = vitrine (decisão de 2026-10-07):** o perfil é a fachada de uma empresa de tecnologia de ponta. Engajamento importa, mas os 12 primeiros posts priorizam feed bonito, útil e coeso, com copy forte e as melhores partes do produto.
 
 ## Mix de funil
 **55% TOFU · 25% MOFU · 20% BOFU.** A maioria da audiência está nos níveis 2–3 de consciência. BOFU é para os early adopters.
@@ -62,4 +57,4 @@ Ainda sem dados.
 - Canal que dá mais retorno: Instagram, newsletter, LinkedIn ou blog
 - Mix de funil real depois de 30 dias de tráfego
 - Melhor horário de publicação
-- Quais séries recorrentes ficam (aprovar, cortar, medir retorno de cada uma)
+- Retorno de cada série (campo `serie` no `peca.json`)

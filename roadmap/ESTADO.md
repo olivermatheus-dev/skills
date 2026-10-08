@@ -34,6 +34,7 @@
 | tarefa | o quê | depende de |
 |---|---|---|
 | **006** | Meta do MVP: 12 posts da kz | pendências 1–4 |
+| **029** | Motor de curadoria + fichas das 5 séries + inventário do produto (análise feita; 4 perguntas no `TASK.md`) | aval do Oliver |
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
 | **022 (C/D)** | Volume/duração diretos no app · pinos no carrossel | — |
 | **021** | Gestão de contexto pela IA (contexto declarado por tarefa, estado para retomar, log compacto) | — (pode começar já) |
