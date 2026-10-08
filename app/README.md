@@ -17,6 +17,13 @@
 | cliente | `app/src/api.ts` | `fetch` tipado com os tipos do `schema`. |
 | telas | `app/src/pages/*.tsx` (registro em `pages/index.ts`: rota, nome, ícone Lucide, sidebar recolhida) | componentes **shadcn** em `components/ui/` (`@/components/ui/…`, preferir estes); antigos em `components/kit.tsx` (migrar aos poucos); barra contextual padrão `components/ContextSidebar.tsx`; tokens em `src/index.css`; cor do projeto em `lib/theme.ts`; editor markdown em `components/Markdown.tsx`. |
 
+### Padrão de altura (aprovado pelo Oliver em 2026-10-08)
+Lista, tabela ou grade longa **ocupa o resto da tela e rola por dentro**: título, filtros e números do topo ficam sempre à vista e a página não rola.
+- Tabela da área de Concorrentes: `<SortTable fill …>` (cabeçalho das colunas fixo).
+- Grade ou lista em qualquer página: `<FillBox>…</FillBox>` (`components/fill.tsx`); tabela própria: `useFillHeight()` na caixa com `overflow-auto`, como a matriz de funcionalidades.
+- A altura se mede sozinha (onde a caixa começa + o que vem depois dela até o fim da página) e se ajusta quando algo carrega depois.
+- Exceção: muita coisa acima da lista (ex.: ficha do concorrente → Redes e conteúdos) → a lista rola com a página e só a barra de filtros gruda no topo (`sticky`), senão a caixa fica pequena demais.
+
 ## Arquivos por projeto
 ```
 companies/<slug>/
