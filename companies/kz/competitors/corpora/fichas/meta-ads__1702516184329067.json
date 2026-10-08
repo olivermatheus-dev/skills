@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:1702516184329067",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=1702516184329067",
   "item": {
     "id": "1702516184329067",
     "pageName": "Corpora Technology",
@@ -27,6 +23,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=1702516184329067"
   },
+  "schema": 1,
+  "key": "meta-ads:1702516184329067",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1702516184329067",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -40,9 +40,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "41ca7e4050c36a0f8e80754f43813f2771b80594",
     "hashEntrada": "69cc704c774c1de82b8a0905c4412b95db81bfc3",
@@ -53,6 +50,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Silhueta escura de pessoa dançando com copo na mão atrás de cortina dourada; texto branco sobreposto com a logo da Corpora.",
+        "ocr": "Tudo que a | corpora | SAÚDE INTELIGENTE | entrega no | plano profissional | por R$89,00",
         "assinatura": "ff9eff9efddef3dceddce8dce0fce1fce07ee03ef00ef0c6fafc701c001c001c"
       }
     ],
@@ -60,5 +59,170 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "41ca7e4050c36a0f8e80754f43813f2771b80594",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:53:40Z",
+    "custo": {
+      "entrada": 5000,
+      "saida": 1200,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "carrossel",
+      "duracaoS": null,
+      "publicadoEm": "2026-08-08",
+      "tema": {
+        "texto": "O que o plano Pro entrega por R$89",
+        "tag": "ferramentas-e-ia"
+      },
+      "mensagem": "O Pro de R$89 junta WhatsApp, agenda, financeiro, instrumentos, documentos e IA; dá para testar 7 dias grátis. Só a capa foi vista.",
+      "tipoConteudo": {
+        "principal": "oferta",
+        "secundarios": [
+          "produto"
+        ]
+      },
+      "formato": "carrossel-educativo",
+      "estiloProducao": "foto",
+      "headline": {
+        "texto": "Tudo que a corpora entrega no plano profissional por R$89,00",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "Tudo que a corpora entrega no plano profissional por R$89,00",
+        "tipo": "promessa",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "ancoragem-preco",
+          "onde": "tela 0 s",
+          "trecho": "plano profissional | por R$89,00"
+        },
+        {
+          "id": "aspiracao",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: silhueta de mulher dançando com taça atrás de cortina dourada]"
+        },
+        {
+          "id": "alivio-tempo",
+          "onde": "legenda",
+          "trecho": "Menos trabalho repetitivo e mais tempo para a PSICOLOGIA de verdade 💜"
+        },
+        {
+          "id": "gratuidade-sem-risco",
+          "onde": "legenda",
+          "trecho": "Teste grátis por 7 dias e só então decida se vai pro PRO ou fica no gratuito 🎁"
+        }
+      ],
+      "estrutura": {
+        "macro": "lista",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "'tudo que entrega' + preço na capa, foto de celebração"
+          },
+          {
+            "bloco": "lista",
+            "quando": "legenda (slides não vistos)",
+            "oque": "6 itens do Pro: WhatsApp Oficial, agenda, financeiro, instrumentos, documentos, IA clínica"
+          },
+          {
+            "bloco": "oferta",
+            "quando": "legenda",
+            "oque": "teste grátis de 7 dias, depois Pro ou gratuito"
+          },
+          {
+            "bloco": "cta",
+            "quando": "legenda",
+            "oque": "comentar 'CORPORA' ou link da bio; botão Assinar"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "comentar-palavra",
+        "texto": "Comenta CORPORA ou entre no link da bio 💜",
+        "momento": "legenda"
+      },
+      "produto": {
+        "presenca": "central",
+        "primeiraMencaoS": null,
+        "funcionalidades": [
+          "whatsapp",
+          "agenda",
+          "financeiro",
+          "instrumentos",
+          "documentos",
+          "ia"
+        ]
+      },
+      "oferta": {
+        "tem": true,
+        "tipos": [
+          "preco",
+          "teste-gratis"
+        ],
+        "precoBRL": 89,
+        "trecho": "plano PROFISSIONAL (por R$89,00)"
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "produto"
+      },
+      "tom": [
+        "aspiracional"
+      ],
+      "som": "sem-som",
+      "legendaTela": false,
+      "porQue": "hipótese: 61 dias no ar em Facebook, Instagram e Audience Network; preço na capa filtra quem já compara planos. Sinal fraco: 1 coleta.",
+      "adaptar": [
+        {
+          "ideia": "Carrossel 'tudo que cabe numa terça de atendimento' com cada função num slide e foto de respiro, sem preço na capa.",
+          "formato": "carrossel-educativo"
+        },
+        {
+          "ideia": "Capa com cena de alívio no fim do dia (chá, sofá) e frase calma sobre fechar o mês sem planilha; CTA em pergunta.",
+          "formato": "post-frase"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "fundo",
+      "objetivo": "cadastro",
+      "tipoAnuncio": "oferta",
+      "angulo": [
+        "preco-economia",
+        "ganho-de-tempo"
+      ],
+      "destino": {
+        "kind": "site",
+        "dominio": "usecorpora.com.br",
+        "caminho": "/"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": "Bate: LP traz Grátis vs R$89 e teste do Pro 7 dias sem cartão. Mas o botão 'Assinar' cai na home, não em planos.",
+      "correcaoRegra": null
+    },
+    "termosNovos": []
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

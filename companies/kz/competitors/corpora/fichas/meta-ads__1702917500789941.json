@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:1702917500789941",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=1702917500789941",
   "item": {
     "id": "1702917500789941",
     "pageName": "Corpora Technology",
@@ -26,6 +22,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=1702917500789941"
   },
+  "schema": 1,
+  "key": "meta-ads:1702917500789941",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1702917500789941",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -39,9 +39,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "acde6c7dc4d43bfb714b2db0b4510f9274636ba8",
     "hashEntrada": "587dcf7695794e55b0d42051c98d6b676d5d18d5",
@@ -52,6 +49,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Fundo lilás com texto vermelho em arco, retrato em meio-tom preto e branco de homem idoso de óculos e estrelas desenhadas.",
+        "ocr": "PSIS FODAS | ESTUDAM | ANALÍTICA",
         "assinatura": "fffffa1fc20782832f78b87bf03ff03ff87ff83ffc3fa005e40fef1fe007ffff"
       }
     ],
@@ -59,5 +58,160 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "acde6c7dc4d43bfb714b2db0b4510f9274636ba8",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:53:43Z",
+    "custo": {
+      "entrada": 8000,
+      "saida": 1600,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "carrossel",
+      "duracaoS": null,
+      "publicadoEm": "2026-08-28",
+      "tema": {
+        "texto": "abordagens que psis estudam, parte 2",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "Psi que se respeita estuda várias abordagens; parte 2 feita com pedidos dos comentários (só a capa vista).",
+      "tipoConteudo": {
+        "principal": "identificacao",
+        "secundarios": [
+          "comunidade"
+        ]
+      },
+      "formato": "serie-identidade-psi",
+      "estiloProducao": "carrossel-design",
+      "headline": {
+        "texto": "PSIS FODAS ESTUDAM ANALÍTICA",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "PSIS FODAS ESTUDAM ANALÍTICA",
+        "tipo": "chamado-de-identidade",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "PSIS FODAS | ESTUDAM | ANALÍTICA"
+        },
+        {
+          "id": "compromisso",
+          "onde": "legenda",
+          "trecho": "Parte 2 com os pedidos dos comentários da parte 1 💜 Quem está faltando?"
+        },
+        {
+          "id": "indignacao-valores",
+          "onde": "legenda",
+          "trecho": "PSIS FODAS ESTUDAM e se capacitam para serem antes de tudo HUMANOS!"
+        }
+      ],
+      "estrutura": {
+        "macro": "lista",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "Bordão de classe + retrato de autor em colagem"
+          },
+          {
+            "bloco": "lista",
+            "quando": "slides seguintes",
+            "oque": "Legenda cita: Lacan, social comunitária, contextuais, Ailton Krenak (slides não vistos)"
+          },
+          {
+            "bloco": "cta",
+            "quando": "legenda",
+            "oque": "Pergunta 'Quem está faltando?' e botão para o perfil"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "seguir",
+        "texto": "Quem está faltando?",
+        "momento": "legenda"
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo",
+          "estudante"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "aspiracional",
+        "indignado-posicionamento"
+      ],
+      "som": "sem-som",
+      "legendaTela": true,
+      "porQue": "hipótese: 41 dias no ar; é a parte 2 do 2197411200835011, prova de que a parte 1 rendeu comentário e virou série paga.",
+      "adaptar": [
+        {
+          "ideia": "Série com pedidos dos comentários: 'parte 2 do que vocês pediram', CTA 'quem ficou de fora?'.",
+          "formato": "carrossel-educativo"
+        },
+        {
+          "ideia": "Capas com retrato de autor e frase do ofício, na paleta da Kzloo, sem palavrão.",
+          "formato": "post-frase"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "PSIS FODAS ESTUDAM e se capacitam para serem antes de tudo HUMANOS!"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "topo",
+      "objetivo": "engajamento",
+      "tipoAnuncio": "conteudo",
+      "angulo": [
+        "identidade-psi"
+      ],
+      "destino": {
+        "kind": "instagram",
+        "dominio": "instagram.com",
+        "caminho": "/usecorpora"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": null,
+      "correcaoRegra": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "serie-identidade-psi",
+        "definicao": "Série de capas com bordão de classe + rosto de autor/abordagem; a marca só assina no texto.",
+        "exemplo": "'PSIS FODAS ESTUDAM ANALÍTICA' com retrato em meio-tom."
+      }
+    ]
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

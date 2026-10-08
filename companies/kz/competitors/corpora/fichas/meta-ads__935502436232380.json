@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:935502436232380",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=935502436232380",
   "item": {
     "id": "935502436232380",
     "pageName": "Corpora Technology",
@@ -24,6 +20,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=935502436232380"
   },
+  "schema": 1,
+  "key": "meta-ads:935502436232380",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=935502436232380",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -37,9 +37,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "303ebf75a4010acd5f29bfd5fc044c31fc3fac23",
     "hashEntrada": "4e9d0e1ceea5a0632ed0dea12378fa92392da33a",
@@ -50,6 +47,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Fundo rosa vivo com gato laranja de capelo sobre uma silhueta preta de foice e martelo; título branco em caixa alta e 'PSICÓLOGAS' em arco.",
+        "ocr": "SISTEMA PARA | PSICÓLOGAS | GRATUITO",
         "assinatura": "00003fbc3ffc3f9803e01ff838181000010000000100000837f83ff83ff80000"
       }
     ],
@@ -57,5 +56,167 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "303ebf75a4010acd5f29bfd5fc044c31fc3fac23",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:52:46Z",
+    "custo": {
+      "entrada": 5000,
+      "saida": 1200,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "imagem",
+      "duracaoS": null,
+      "publicadoEm": "2026-08-02",
+      "tema": {
+        "texto": "Sistema de gestão gratuito para psicólogas",
+        "tag": "ferramentas-e-ia"
+      },
+      "mensagem": "Existe sistema de gestão grátis para psicólogas; o meme do gato comunista liga 'gratuito' a 'de graça para todas'.",
+      "tipoConteudo": {
+        "principal": "oferta",
+        "secundarios": [
+          "humor"
+        ]
+      },
+      "formato": "meme",
+      "estiloProducao": "texto-sobre-fundo",
+      "headline": {
+        "texto": "SISTEMA PARA PSICÓLOGAS GRATUITO",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "SISTEMA PARA PSICÓLOGAS GRATUITO",
+        "tipo": "humor-absurdo",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "gratuidade-sem-risco",
+          "onde": "tela 0 s",
+          "trecho": "SISTEMA PARA | PSICÓLOGAS | GRATUITO"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: gato laranja sobre foice e martelo pretos, fundo rosa]"
+        },
+        {
+          "id": "identificacao",
+          "onde": "legenda",
+          "trecho": "SISTEMA de GESTÃO GRATUITO para psicólogas!"
+        }
+      ],
+      "estrutura": {
+        "macro": "gancho-entrega-cta",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "arte",
+            "oque": "meme do gato comunista + 'gratuito' em letra gigante"
+          },
+          {
+            "bloco": "cta",
+            "quando": "botão",
+            "oque": "Saiba mais para a home"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": "Saiba mais",
+        "momento": "botão"
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": true,
+        "tipos": [
+          "plano-gratuito"
+        ],
+        "precoBRL": null,
+        "trecho": "SISTEMA de GESTÃO GRATUITO para psicólogas!"
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "problema"
+      },
+      "tom": [
+        "leve-humor",
+        "ironico"
+      ],
+      "som": "sem-som",
+      "legendaTela": false,
+      "porQue": "hipótese: 67 dias no ar, 1 variação; meme barato de produzir que para o scroll e filtra quem quer grátis. Sinal fraco: 1 coleta.",
+      "adaptar": [
+        {
+          "ideia": "Meme do nicho sobre o caos de 5 abas abertas no fim do expediente, com a Kzloo só no rodapé. CTA em pergunta.",
+          "formato": "meme"
+        },
+        {
+          "ideia": "Arte de uma frase curta, letra grande e cor da marca, sobre o administrativo que ninguém vê; sem caixa alta.",
+          "formato": "post-frase"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "simbolo-politico",
+          "trecho": "[quadro 0 s: foice e martelo atrás do gato]"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "alta",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "topo",
+      "objetivo": "trafego",
+      "tipoAnuncio": "oferta",
+      "angulo": [
+        "gratuito-sem-risco",
+        "humor"
+      ],
+      "destino": {
+        "kind": "site",
+        "dominio": "usecorpora.com.br",
+        "caminho": "/"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": "Bate na oferta: a LP tem 'Começar Grátis' e selo Grátis por módulo; o tom de meme some e a página é institucional.",
+      "correcaoRegra": [
+        {
+          "campo": "funil",
+          "regra": "fundo",
+          "ia": "topo",
+          "motivo": "meme sem preço, sem produto na arte e CTA 'Saiba mais' para a home: puxa público frio pelo riso e pelo 'gratuito', não converte quem já conhece."
+        }
+      ]
+    },
+    "termosNovos": [
+      {
+        "grupo": "risco",
+        "valor": "simbolo-politico",
+        "definicao": "Criativo usa símbolo ou referência político-partidária (mesmo em tom de meme) para vender.",
+        "exemplo": "Gato sobre foice e martelo com 'Sistema para psicólogas gratuito' (Corpora, Meta Ads)."
+      }
+    ]
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

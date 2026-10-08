@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:3941392002662525",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=3941392002662525",
   "item": {
     "id": "3941392002662525",
     "pageName": "Corpora Technology",
@@ -28,6 +24,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=3941392002662525"
   },
+  "schema": 1,
+  "key": "meta-ads:3941392002662525",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=3941392002662525",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -41,9 +41,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "9ed9527f610cb364553be3cb56e18c9506229194",
     "hashEntrada": "413da68378b9520fa75e7a0cec000cf76e3b1270",
@@ -54,6 +51,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Fundo bege com título em roxo e mockup de tela de agenda roxa com cards de notificação flutuantes; dois parágrafos de texto à direita.",
+        "ocr": "Menos trabalho repetitivo. | Mais tempo para a psicologia. | Sua agenda de hoje | R$ 1.820 | [ilegível] | O PRO acelera sua rotina com a clínica, notificações por WhatsApp, instrumentos, documentos e automações de cobrança. | Pensado para quem já passou da fase de começar e quer sustentar o crescimento sem virar a noite preenchendo planilha.",
         "assinatura": "ffff800ff3ff80ff8847eaff807fffffc3ff830381ff816b8335832fffffffff"
       }
     ],
@@ -61,5 +60,332 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "9ed9527f610cb364553be3cb56e18c9506229194",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:53:55Z",
+    "custo": {
+      "entrada": 5000,
+      "saida": 1200,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "imagem",
+      "duracaoS": null,
+      "publicadoEm": "2026-06-18",
+      "tema": {
+        "texto": "Pro para quem já passou da fase inicial",
+        "tag": "ferramentas-e-ia"
+      },
+      "mensagem": "O Pro tira o trabalho repetitivo de quem já tem consultório andando e não quer virar a noite na planilha.",
+      "tipoConteudo": {
+        "principal": "produto",
+        "secundarios": [
+          "oferta"
+        ]
+      },
+      "formato": "recorte-funcionalidade",
+      "estiloProducao": "texto-sobre-fundo",
+      "headline": {
+        "texto": "Menos trabalho repetitivo. Mais tempo para a psicologia.",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "Menos trabalho repetitivo. Mais tempo para a psicologia.",
+        "tipo": "promessa",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "alivio-tempo",
+          "onde": "tela 0 s",
+          "trecho": "Menos trabalho repetitivo. | Mais tempo para a psicologia."
+        },
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "Pensado para quem já passou da fase de começar e quer sustentar o crescimento sem virar a noite preenchendo planilha."
+        },
+        {
+          "id": "aspiracao",
+          "onde": "legenda",
+          "trecho": "eleve o nível da sua prática clínica!"
+        }
+      ],
+      "estrutura": {
+        "macro": "problema-solucao",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "arte",
+            "oque": "promessa de tempo em título roxo grande"
+          },
+          {
+            "bloco": "demo",
+            "quando": "arte",
+            "oque": "mockup da agenda do dia com cards de notificação e R$ 1.820"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "arte",
+            "oque": "lista do Pro: WhatsApp, instrumentos, documentos, cobrança automática"
+          },
+          {
+            "bloco": "cta",
+            "quando": "botão",
+            "oque": "Assinar, direto para /planos"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "cadastro-teste",
+        "texto": "Assinar",
+        "momento": "botão"
+      },
+      "produto": {
+        "presenca": "central",
+        "primeiraMencaoS": null,
+        "funcionalidades": [
+          "agenda",
+          "whatsapp",
+          "instrumentos",
+          "documentos",
+          "cobranca"
+        ]
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "produto"
+      },
+      "tom": [
+        "aspiracional",
+        "acolhedor"
+      ],
+      "som": "sem-som",
+      "legendaTela": false,
+      "porQue": "hipótese: 112 dias no ar, o mais antigo do lote; arte de produto sóbria que manda direto a /planos parece converter. 1 coleta só.",
+      "adaptar": [
+        {
+          "ideia": "Arte com a agenda real da Kzloo e uma frase calma sobre o fim do dia sem planilha; legenda fecha em pergunta.",
+          "formato": "recorte-funcionalidade"
+        },
+        {
+          "ideia": "Segmentar por fase: 'pra quem já tem a agenda cheia' com o lembrete no WhatsApp em destaque.",
+          "formato": "post-frase"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "eleve o nível da sua prática clínica!"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "alta",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "fundo",
+      "objetivo": "cadastro",
+      "tipoAnuncio": "demonstracao",
+      "angulo": [
+        "ganho-de-tempo",
+        "dor-burocracia"
+      ],
+      "destino": {
+        "kind": "planos",
+        "dominio": "app.usecorpora.com.br",
+        "caminho": "/planos"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": "Indefinido: o anúncio leva a app.usecorpora.com.br/planos e a landing do pacote é a home. Pela home, \"Pro\" e cobrança automática batem; o preço R$89 só aparece lá.",
+      "correcaoRegra": [
+        {
+          "campo": "tipo",
+          "regra": "oferta",
+          "ia": "demonstracao",
+          "motivo": "não há preço, desconto nem teste no texto ou na arte; metade da arte é o mockup da agenda com notificações e a lista de funções do PRO."
+        }
+      ]
+    },
+    "termosNovos": []
+  },
+  "anteriores": [
+    {
+      "versaoPrompt": 2,
+      "versaoVocab": 3,
+      "insumosHash": "9ed9527f610cb364553be3cb56e18c9506229194",
+      "modelo": "claude-opus-5-5",
+      "esforco": "medium",
+      "geradoEm": "2026-10-08T21:53:42Z",
+      "custo": {
+        "entrada": 5000,
+        "saida": 1200,
+        "via": "claude-code"
+      },
+      "campos": {
+        "plataforma": "meta-ads",
+        "formatoMidia": "imagem",
+        "duracaoS": null,
+        "publicadoEm": "2026-06-18",
+        "tema": {
+          "texto": "Pro para quem já passou da fase inicial",
+          "tag": "ferramentas-e-ia"
+        },
+        "mensagem": "O Pro tira o trabalho repetitivo de quem já tem consultório andando e não quer virar a noite na planilha.",
+        "tipoConteudo": {
+          "principal": "produto",
+          "secundarios": [
+            "oferta"
+          ]
+        },
+        "formato": "recorte-funcionalidade",
+        "estiloProducao": "texto-sobre-fundo",
+        "headline": {
+          "texto": "Menos trabalho repetitivo. Mais tempo para a psicologia.",
+          "fonte": "arte"
+        },
+        "gancho": {
+          "texto": "Menos trabalho repetitivo. Mais tempo para a psicologia.",
+          "tipo": "promessa",
+          "canal": "texto-na-tela"
+        },
+        "gatilhos": [
+          {
+            "id": "alivio-tempo",
+            "onde": "tela 0 s",
+            "trecho": "Menos trabalho repetitivo. | Mais tempo para a psicologia."
+          },
+          {
+            "id": "identificacao",
+            "onde": "tela 0 s",
+            "trecho": "Pensado para quem já passou da fase de começar e quer sustentar o crescimento sem virar a noite preenchendo planilha."
+          },
+          {
+            "id": "aspiracao",
+            "onde": "legenda",
+            "trecho": "eleve o nível da sua prática clínica!"
+          }
+        ],
+        "estrutura": {
+          "macro": "problema-solucao",
+          "blocos": [
+            {
+              "bloco": "gancho",
+              "quando": "arte",
+              "oque": "promessa de tempo em título roxo grande"
+            },
+            {
+              "bloco": "demo",
+              "quando": "arte",
+              "oque": "mockup da agenda do dia com cards de notificação e R$ 1.820"
+            },
+            {
+              "bloco": "entrega",
+              "quando": "arte",
+              "oque": "lista do Pro: WhatsApp, instrumentos, documentos, cobrança automática"
+            },
+            {
+              "bloco": "cta",
+              "quando": "botão",
+              "oque": "Assinar, direto para /planos"
+            }
+          ]
+        },
+        "cta": {
+          "tipo": "cadastro-teste",
+          "texto": "Assinar",
+          "momento": "botão"
+        },
+        "produto": {
+          "presenca": "central",
+          "primeiraMencaoS": null,
+          "funcionalidades": [
+            "agenda",
+            "whatsapp",
+            "instrumentos",
+            "documentos",
+            "cobranca"
+          ]
+        },
+        "oferta": {
+          "tem": false
+        },
+        "publico": {
+          "quem": [
+            "psicologo-autonomo"
+          ],
+          "consciencia": "produto"
+        },
+        "tom": [
+          "aspiracional",
+          "acolhedor"
+        ],
+        "som": "sem-som",
+        "legendaTela": false,
+        "porQue": "hipótese: 112 dias no ar, o mais antigo do lote; arte de produto sóbria que manda direto a /planos parece converter. 1 coleta só.",
+        "adaptar": [
+          {
+            "ideia": "Arte com a agenda real da Kzloo e uma frase calma sobre o fim do dia sem planilha; legenda fecha em pergunta.",
+            "formato": "recorte-funcionalidade"
+          },
+          {
+            "ideia": "Segmentar por fase: 'pra quem já tem a agenda cheia' com o lembrete no WhatsApp em destaque.",
+            "formato": "post-frase"
+          }
+        ],
+        "riscos": [
+          {
+            "tipo": "claim-sem-prova",
+            "trecho": "eleve o nível da sua prática clínica!"
+          }
+        ],
+        "replicavel": 3,
+        "confianca": {
+          "texto": "alta",
+          "visual": "alta",
+          "retencao": "baixa"
+        },
+        "faltou": [],
+        "funil": "fundo",
+        "objetivo": "cadastro",
+        "tipoAnuncio": "demonstracao",
+        "angulo": [
+          "ganho-de-tempo",
+          "dor-burocracia"
+        ],
+        "destino": {
+          "kind": "planos",
+          "dominio": "app.usecorpora.com.br",
+          "caminho": "/planos"
+        },
+        "provaTipo": "nenhuma",
+        "correcaoRegra": [
+          {
+            "campo": "tipo",
+            "regra": "oferta",
+            "ia": "demonstracao",
+            "motivo": "não há preço, desconto nem teste no texto ou na arte; metade da arte é o mockup da agenda com notificações e a lista de funções do PRO."
+          }
+        ]
+      },
+      "termosNovos": []
+    }
+  ],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

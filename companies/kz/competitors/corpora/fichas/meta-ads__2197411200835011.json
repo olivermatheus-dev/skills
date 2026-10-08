@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:2197411200835011",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=2197411200835011",
   "item": {
     "id": "2197411200835011",
     "pageName": "Corpora Technology",
@@ -26,6 +22,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=2197411200835011"
   },
+  "schema": 1,
+  "key": "meta-ads:2197411200835011",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=2197411200835011",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -39,9 +39,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "d21cdf553bdf5d07d0099f2ae03c4e3aee8ff76c",
     "hashEntrada": "a1c8e4894f0948ca45b6dc7226e9c762946e36fa",
@@ -52,6 +49,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Fundo lilás com texto laranja em arco, caricatura de homem de chapéu em meio-tom preto e branco e estrelas desenhadas.",
+        "ocr": "PSIS FODAS | ESTUDAM | PSICANÁLISE",
         "assinatura": "fffffa3fe24f83832cf8bcfbf00ff00ff87ffcffffffa005e40fdfffc003ffff"
       }
     ],
@@ -59,5 +58,167 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "d21cdf553bdf5d07d0099f2ae03c4e3aee8ff76c",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:53:39Z",
+    "custo": {
+      "entrada": 8000,
+      "saida": 1600,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "carrossel",
+      "duracaoS": null,
+      "publicadoEm": "2026-08-27",
+      "tema": {
+        "texto": "abordagens que psis estudam",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "Ser psi 'foda' é estudar as abordagens, e esse tipo de psi usa Corpora (carrossel: só a capa vista).",
+      "tipoConteudo": {
+        "principal": "identificacao",
+        "secundarios": [
+          "posicionamento"
+        ]
+      },
+      "formato": "serie-identidade-psi",
+      "estiloProducao": "carrossel-design",
+      "headline": {
+        "texto": "PSIS FODAS ESTUDAM PSICANÁLISE",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "PSIS FODAS ESTUDAM PSICANÁLISE",
+        "tipo": "chamado-de-identidade",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "PSIS FODAS | ESTUDAM | PSICANÁLISE"
+        },
+        {
+          "id": "aspiracao",
+          "onde": "legenda",
+          "trecho": "PSIS FODAS USAM CORPORA (link na bio💜)"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: retrato em meio-tom de homem de chapéu e óculos redondos]"
+        }
+      ],
+      "estrutura": {
+        "macro": "lista",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "Bordão de classe + retrato de autor em colagem"
+          },
+          {
+            "bloco": "lista",
+            "quando": "slides seguintes",
+            "oque": "indefinido: só a capa foi vista"
+          },
+          {
+            "bloco": "cta",
+            "quando": "legenda",
+            "oque": "'link na bio' e botão para o perfil"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "link-bio",
+        "texto": "PSIS FODAS USAM CORPORA (link na bio💜)",
+        "momento": "legenda"
+      },
+      "produto": {
+        "presenca": "rodape",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo",
+          "estudante"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "leve-humor",
+        "aspiracional"
+      ],
+      "som": "sem-som",
+      "legendaTela": true,
+      "porQue": "hipótese: 42 dias no ar e a parte 2 (1702917500789941) saiu um dia depois; a série gerou comentário e virou anúncio de perfil.",
+      "adaptar": [
+        {
+          "ideia": "Série 'terapeutas que…' com hábitos do ofício (supervisão, terapia própria), sem palavrão, CTA em pergunta.",
+          "formato": "post-frase"
+        },
+        {
+          "ideia": "Carrossel 'abordagens e seus livros de cabeceira' pedindo nos comentários a próxima.",
+          "formato": "carrossel-educativo"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "PSIS FODAS USAM CORPORA"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "topo",
+      "objetivo": "engajamento",
+      "tipoAnuncio": "conteudo",
+      "angulo": [
+        "identidade-psi"
+      ],
+      "destino": {
+        "kind": "instagram",
+        "dominio": "instagram.com",
+        "caminho": "/usecorpora"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": null,
+      "correcaoRegra": [
+        {
+          "campo": "tipo",
+          "regra": "prova-social",
+          "ia": "conteudo",
+          "motivo": "Arte é peça de identidade ('PSIS FODAS ESTUDAM PSICANÁLISE'), sem depoimento nem número; 'USAM CORPORA' é bordão, não prova."
+        }
+      ]
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "serie-identidade-psi",
+        "definicao": "Série de capas com bordão de classe + rosto de autor/abordagem; a marca só assina no texto.",
+        "exemplo": "'PSIS FODAS ESTUDAM PSICANÁLISE' com retrato em meio-tom."
+      }
+    ]
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

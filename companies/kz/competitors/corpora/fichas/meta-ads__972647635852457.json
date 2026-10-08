@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:972647635852457",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=972647635852457",
   "item": {
     "id": "972647635852457",
     "pageName": "Corpora Technology",
@@ -27,6 +23,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=972647635852457"
   },
+  "schema": 1,
+  "key": "meta-ads:972647635852457",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=972647635852457",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -40,9 +40,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "f05328c73aaed89d2a73b3721889ecaa0031ea4d",
     "hashEntrada": "8af1c1013d370c73d7c350074dfda37acb17abad",
@@ -53,6 +50,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Foto de mulher de óculos e cabelo castanho longo sorrindo, em ambiente claro com estante ao fundo; texto branco sobreposto, com 'viver' em destaque grande e negrito.",
+        "ocr": "Todas as ferramentas | que eu uso para | viver | sendo psicóloga",
         "assinatura": "ff1ffc1ff89ff1dff00ff38fe18fe18fe007e003d801c03ec03ec000e180e180"
       }
     ],
@@ -60,5 +59,185 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "f05328c73aaed89d2a73b3721889ecaa0031ea4d",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:52:36Z",
+    "custo": {
+      "entrada": 9000,
+      "saida": 1800,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "carrossel",
+      "duracaoS": null,
+      "publicadoEm": "2026-09-14",
+      "tema": {
+        "texto": "ferramentas que a psicóloga usa no dia a dia",
+        "tag": "ferramentas-e-ia"
+      },
+      "mensagem": "Uma psicóloga real usa a Corpora; começa grátis e o Pro sai com 50% no 1º mês (carrossel: só a capa vista).",
+      "tipoConteudo": {
+        "principal": "oferta",
+        "secundarios": [
+          "prova",
+          "identificacao"
+        ]
+      },
+      "formato": "lista-de-ferramentas-criador",
+      "estiloProducao": "carrossel-design",
+      "headline": {
+        "texto": "Todas as ferramentas que eu uso para viver sendo psicóloga",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "Todas as ferramentas que eu uso para viver sendo psicóloga",
+        "tipo": "chamado-de-identidade",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "prova-social",
+          "onde": "legenda",
+          "trecho": "(@kellyciberpsi ) - Todas as ferramentas que eu uso para VIVER sendo psicóloga!"
+        },
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "Todas as ferramentas | que eu uso para | viver | sendo psicóloga"
+        },
+        {
+          "id": "gratuidade-sem-risco",
+          "onde": "legenda",
+          "trecho": "Plano gratuito: sem prazo de uso, sem cartão de crédito."
+        },
+        {
+          "id": "ancoragem-preco",
+          "onde": "legenda",
+          "trecho": "Plano profissional: R$89,00 / mês"
+        },
+        {
+          "id": "exclusividade",
+          "onde": "legenda",
+          "trecho": "Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro"
+        }
+      ],
+      "estrutura": {
+        "macro": "gancho-entrega-cta",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "Criadora sorrindo + promessa de lista de ferramentas"
+          },
+          {
+            "bloco": "lista",
+            "quando": "slides seguintes",
+            "oque": "indefinido: só a capa foi vista; o texto cita 4 ferramentas"
+          },
+          {
+            "bloco": "oferta",
+            "quando": "legenda",
+            "oque": "Grátis sem cartão, Pro R$ 89/mês, cupom 50% no 1º mês"
+          },
+          {
+            "bloco": "cta",
+            "quando": "legenda",
+            "oque": "Comentar 'Corpora' ou clicar no link"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "cadastro-teste",
+        "texto": "Comenta Corpora ou clique no link abaixo ou da bio para começar gratuitamente",
+        "momento": "legenda"
+      },
+      "produto": {
+        "presenca": "sutil",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": true,
+        "tipos": [
+          "preco",
+          "desconto",
+          "plano-gratuito",
+          "sem-cartao",
+          "cupom"
+        ],
+        "precoBRL": 89,
+        "trecho": "Plano profissional: R$89,00 / mês 🎁 Cupom CIBERPSI: 50% OFF no primeiro mês do plano pro"
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "solucao"
+      },
+      "tom": [
+        "acolhedor",
+        "aspiracional"
+      ],
+      "som": "sem-som",
+      "legendaTela": true,
+      "porQue": "hipótese: 24 dias no ar e 1 coleta, sinal ainda fraco. Mesma arte e texto do 2312915999516286 (muda só título e botão): teste A/B de botão/título.",
+      "adaptar": [
+        {
+          "ideia": "Terapeuta parceira mostra 'o que abro antes da primeira sessão do dia', com a Kzloo entre as telas.",
+          "formato": "lista-de-ferramentas-criador"
+        },
+        {
+          "ideia": "Fundador terapeuta na capa: 'os apps que eu largava abertos e virou um só'.",
+          "formato": "antes-depois"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "Todas as ferramentas que eu uso para VIVER sendo psicóloga!"
+        }
+      ],
+      "replicavel": 1,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "fundo",
+      "objetivo": "cadastro",
+      "tipoAnuncio": "oferta",
+      "angulo": [
+        "gratuito-sem-risco",
+        "preco-economia"
+      ],
+      "destino": {
+        "kind": "planos",
+        "dominio": "app.usecorpora.com.br",
+        "caminho": "/planos"
+      },
+      "provaTipo": "criador",
+      "coerenciaLP": "Bate em preço: grátis e Pro R$ 89 como na LP. O cupom de 50% não aparece na landing resumida; destino é /planos, não a home.",
+      "correcaoRegra": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "lista-de-ferramentas-criador",
+        "definicao": "Criadora mostra as ferramentas que usa no ofício; a marca aparece como uma delas, com cupom próprio.",
+        "exemplo": "Capa 'Todas as ferramentas que eu uso para viver sendo psicóloga' com foto da criadora."
+      }
+    ]
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }

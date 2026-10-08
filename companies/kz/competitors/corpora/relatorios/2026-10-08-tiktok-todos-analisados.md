@@ -464,7 +464,7 @@ modelo: claude-opus-5-5
 custo:
   via: claude-code
 gerado: 2026-10-08T19:05:41Z
-emDestaque: true
+emDestaque: false
 termosNovos:
   - grupo: formato
     valor: meme-trend-video

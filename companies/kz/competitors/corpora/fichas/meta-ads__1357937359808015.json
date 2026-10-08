@@ -1,9 +1,5 @@
 {
-  "schema": 1,
   "kind": "anuncio",
-  "key": "meta-ads:1357937359808015",
-  "competitorId": "corpora",
-  "url": "https://www.facebook.com/ads/library/?id=1357937359808015",
   "item": {
     "id": "1357937359808015",
     "pageName": "Corpora Technology",
@@ -26,6 +22,10 @@
     "variations": 1,
     "url": "https://www.facebook.com/ads/library/?id=1357937359808015"
   },
+  "schema": 1,
+  "key": "meta-ads:1357937359808015",
+  "competitorId": "corpora",
+  "url": "https://www.facebook.com/ads/library/?id=1357937359808015",
   "origem": {
     "arquivo": "ads/2026-10-08T15-06-35.json",
     "collectedAt": "2026-10-08T15:06:35Z"
@@ -39,9 +39,6 @@
       "reapareceu": false
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "8e480a479baabd208110633973b2e3fab9714b18",
     "hashEntrada": "8e7c337775b0a48fbac3e12b7db994209c304db7",
@@ -52,6 +49,8 @@
       {
         "tMs": 0,
         "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Fundo bege com título rosa e verde, ilustração de caveira com boné amarelo segurando um megafone amarelo que diz 'não esquece da sessão'.",
+        "ocr": "NÃO LEMBRE | SEU PACIENTE DA SESSÃO | não esquece da sessão quinta às 20h",
         "assinatura": "ffffffff840184018001ffffd7ff87ffd3f741036207003f21ff27ffc7fde7ff"
       }
     ],
@@ -59,5 +58,145 @@
     "tempos": {
       "total": 0.2
     }
-  }
+  },
+  "analise": {
+    "versaoPrompt": 2,
+    "versaoVocab": 3,
+    "insumosHash": "8e480a479baabd208110633973b2e3fab9714b18",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T21:53:41Z",
+    "custo": {
+      "entrada": 8000,
+      "saida": 1600,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "meta-ads",
+      "formatoMidia": "carrossel",
+      "duracaoS": null,
+      "publicadoEm": "2026-08-07",
+      "tema": {
+        "texto": "parar de lembrar o paciente da sessão",
+        "tag": "agenda-e-faltas"
+      },
+      "mensagem": "Lembrar o paciente da sessão na mão é tarefa a largar (indefinido: o produto não aparece na capa).",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "identificacao"
+        ]
+      },
+      "formato": "meme",
+      "estiloProducao": "carrossel-design",
+      "headline": {
+        "texto": "NÃO LEMBRE SEU PACIENTE DA SESSÃO",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "NÃO LEMBRE SEU PACIENTE DA SESSÃO",
+        "tipo": "afirmacao-ousada",
+        "canal": "texto-na-tela"
+      },
+      "gatilhos": [
+        {
+          "id": "humor-alivio",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: caveira de boné gritando no megafone 'não esquece da sessão quinta às 20h']"
+        },
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "não esquece da sessão quinta às 20h"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "legenda",
+          "trecho": "Nunca é tarde para lembrar de não lembrar seu paciente da sessão!"
+        }
+      ],
+      "estrutura": {
+        "macro": "problema-solucao",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "Ordem contraintuitiva + caveira com megafone repetindo o lembrete"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "slides seguintes",
+            "oque": "indefinido: só a capa foi vista (há seta de 'passe')"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "seguir",
+        "texto": "Acessar o perfil do Instagram",
+        "momento": "botão"
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": [
+          "lembretes"
+        ]
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "problema"
+      },
+      "tom": [
+        "leve-humor",
+        "ironico"
+      ],
+      "som": "sem-som",
+      "legendaTela": true,
+      "porQue": "hipótese: 62 dias no ar, o mais longevo dos de perfil; dor de lembrete é universal e o humor roda barato no topo.",
+      "adaptar": [
+        {
+          "ideia": "Meme 'você às 22h mandando confirmação um por um' × WhatsApp automático da Kzloo, CTA 'quantas você mandou hoje?'.",
+          "formato": "meme"
+        },
+        {
+          "ideia": "Post-frase irônico sobre virar secretária de si mesma, sem citar paciente.",
+          "formato": "post-frase"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "baixa"
+      },
+      "faltou": [],
+      "funil": "topo",
+      "objetivo": "engajamento",
+      "tipoAnuncio": "conteudo",
+      "angulo": [
+        "humor",
+        "carga-mental"
+      ],
+      "destino": {
+        "kind": "instagram",
+        "dominio": "instagram.com",
+        "caminho": "/usecorpora"
+      },
+      "provaTipo": "nenhuma",
+      "coerenciaLP": null,
+      "correcaoRegra": null
+    },
+    "termosNovos": []
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-anuncios-todos-analisados"
+  ]
 }
