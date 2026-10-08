@@ -8,7 +8,8 @@
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
 | 1 | 045 | **Fase A (blocos):** quebrar a apresentação da kz em blocos + `compor.mjs`; sair igual ao v03 | pedido do Oliver de 2026-10-08, respostas dadas |
-| 2 | 040 | **Fase H (aceitar/recusar termos no painel):** G e I feitas (2026-10-08) | conferir antes se outra sessão já está nela |
+| 2 | 046 | **Atividade da IA e das coletas:** análise feita (`tasks/046-atividade-ia/TASK.md`); fase A (registro + dock) assim que o Oliver der o aval | pedido do Oliver de 2026-10-08 |
+| 3 | 040 | **Fase H (aceitar/recusar termos no painel):** G e I feitas (2026-10-08) | conferir antes se outra sessão já está nela |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
