@@ -1,5 +1,5 @@
 {
-  "_nota": "Fontes das molduras realistas (tarefa 028). As imagens NÃO vão para o git (licença: uso em marketing, sem redistribuir): node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar. Só os aparelho.json (geometria calibrada) ficam versionados.",
+  "_nota": "Fontes das molduras realistas (tarefa 028). As imagens calibradas ficam no git (repositório privado, uso próprio do Oliver em vários dispositivos; não redistribuir). Para atualizar ou adicionar modelos: node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar.",
   "pacotes": {
     "apple": {
       "base": "https://devimages-cdn.apple.com/design/resources/download/",

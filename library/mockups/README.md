@@ -8,14 +8,12 @@ print → captura.mjs (mede + analisar.mjs: onde cortar) → render.mjs (mockup.
 
 **Galeria visual de tudo** (aparelhos, cores, fundos, sombras, cantos, ângulos, templates, cada card com a flag que reproduz): `node tools/mockup/galeria.mjs` → abrir `library/mockups/galeria/index.html`.
 
-## Primeira vez numa máquina
-As molduras realistas não vão para o git (licença: usar, não redistribuir). Baixe e calibre (~1 GB, precisa do 7-Zip: `winget install 7zip.7zip`):
+## Molduras e exemplos
+As molduras calibradas (78 MB) e as telas de exemplo estão no git (repositório privado, uso próprio): basta `git pull` em qualquer máquina. Para **atualizar ou adicionar modelos** (iPhone novo etc.), acrescente em `aparelhos/fontes.json` e rode (~1 GB de download, precisa do 7-Zip: `winget install 7zip.7zip`):
 ```bash
 node tools/mockup/aparelhos.mjs baixar
 node tools/mockup/aparelhos.mjs preparar
-node tools/mockup/exemplos.mjs
 ```
-Sem isso, `celular`/`notebook` saem com o desenho genérico (o render avisa).
 
 ## Comandos
 ```bash
@@ -34,7 +32,7 @@ Flags de composição: `--aparelho` · `--cor` · `--orientacao vertical|horizon
 | tipo | onde | itens |
 |---|---|---|
 | templates | `templates/<id>/` (`template.html` + `meta.json` + `preview.png`) | `heroi` · `duo` (MacBook + iPhone) · `trio` (MacBook + iPad + iPhone) · `perspectiva` (keynote, sangrando) · `pilha` (cascata 3D) · `leque` (3 iPhones) · `vidro` (glassmorphism + cards) · `zoom` · `cards` · `anotacoes` · `recorte` |
-| aparelhos reais | `aparelhos/<id>/aparelho.json` (geometria calibrada, no git) + PNGs (fora do git) | iPhone 18 Pro / Pro Max, 17 / 17 Pro / Pro Max, Air, Duo (dobrável) · iPad Pro 11/13 · MacBook Pro 14/16, Air 13/15 · iMac 24 · Studio Display / XDR · Pixel 9 Pro, 10, 10 Pro, 10 Pro XL, Pixel Tablet — com todas as cores oficiais |
+| aparelhos reais | `aparelhos/<id>/` (`aparelho.json` com a geometria calibrada + PNGs das cores + máscara, tudo no git) | iPhone 18 Pro / Pro Max, 17 / 17 Pro / Pro Max, Air, Duo (dobrável) · iPad Pro 11/13 · MacBook Pro 14/16, Air 13/15 · iMac 24 · Studio Display / XDR · Pixel 9 Pro, 10, 10 Pro, 10 Pro XL, Pixel Tablet — com todas as cores oficiais |
 | apelidos | `aparelho.json → apelidos` | `celular`/`iphone` → iPhone 18 Pro · `notebook`/`macbook` → MacBook Pro 14 · `tablet`/`ipad` → iPad Pro 13 · `android`/`pixel` → Pixel 10 Pro · `imac` · `monitor` |
 | desenhos próprios | `runtime/mockup.js` + `.css` | `navegador` (janela macOS/Safari) · `vidro` (borda de vidro) · `sem-moldura` · `celular-generico` · `notebook-generico` |
 | fundos | `runtime/mockup.css` | **da marca** (tokens): liso, gradiente, spot, malha, brilho, desfoque, grade, pontos · **premium** (paleta própria): estudio, estudio-escuro, neutro, grafite, gelo, pessego, menta, papel, vidro-fosco, aurora, ametista, por-do-sol, macos, vinho · transparente. Grão (feTurbulence) automático nos gradientes |
@@ -65,10 +63,10 @@ Roda sozinho no `captura.mjs`. Acha **fio na beirada** (borda de outra janela), 
 - **Captura** (`companies/<slug>/capturas/<data>-<tela>/captura.json`): `regioes` nomeadas (com `rotulo`), `ocultar` (borradas antes de compor), `sugestoes` (cortes). `dadosFicticios: false` → a peça sai com tag `nao-publicar`.
 - **Marca** (`companies/<slug>/brand/mockups.json`): fundos permitidos em ordem de preferência; o gerador de alternativas só usa estes.
 - Print em 1× aguenta herói e anotações; zoom, cards e vidro pedem 2–3× (zoom 200% do navegador).
-- Renders (`png/`, `folha.png`, `analise.png`, galeria) ficam fora do git: refaça com os comandos acima.
+- Renders (`png/`, `folha.png`, `analise.png`, galeria) ficam fora do git: refaça com os comandos acima. Molduras e telas de exemplo ficam no git.
 
 ## Licenças
-- **Apple Product Bezels** (developer.apple.com/design/resources): para mostrar o seu app em marketing; não alterar o aparelho, não sugerir parceria. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products
+- **Apple Product Bezels** (developer.apple.com/design/resources): para mostrar o seu app em marketing; não alterar o aparelho, não sugerir parceria. Versionadas aqui só porque o repositório é privado e de uso próprio: não tornar público. Regras: developer.apple.com/app-store/marketing/guidelines/#section-products
 - **Android Studio device art** (AOSP): Apache 2.0. Pixel é marca do Google.
 - Referências de acabamento: shots.so (fundos, vidro), Josh Comeau e Tobias Ahlin (sombras em camadas).
 

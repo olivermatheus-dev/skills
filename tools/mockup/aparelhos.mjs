@@ -4,7 +4,7 @@
 //   node tools/mockup/aparelhos.mjs baixar            # ~1 GB em _inbox/visual/aparelhos/ (fora do git); precisa do 7-Zip para os .dmg
 //   node tools/mockup/aparelhos.mjs preparar [--so id1,id2]   # → library/mockups/aparelhos/<id>/{aparelho.json, <orientação>-<cor>.png, <orientação>-mascara.png}
 //   node tools/mockup/aparelhos.mjs listar
-// Só os aparelho.json (geometria) vão para o git; as imagens são refeitas por estes 2 comandos.
+// Molduras e máscaras vão para o git (repositório privado, uso próprio); estes 2 comandos só servem para atualizar/adicionar modelos.
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, copyFileSync, statSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -32,9 +32,6 @@ companies/**/competitors/*/site/
 companies/*/contents/*mockup*/png/
 companies/*/contents/*mockup*/folha.png
 
-# molduras realistas (028): licença Apple/Google = usar, não redistribuir. Refazer: node tools/mockup/aparelhos.mjs baixar && … preparar
-library/mockups/aparelhos/*/*.png
 library/mockups/galeria/
 companies/*/capturas/*/analise.png
 library/mockups/exemplos/*/analise.png
-library/mockups/exemplos/*/original.png

@@ -11,7 +11,7 @@ Motor: `tools/mockup/` + `library/mockups/` (README = comandos, catálogo e cont
 - O print: arquivo solto (no chat, `_inbox/visual/`, `brand/screenshots/`) ou captura já registrada em `companies/<slug>/capturas/`.
 - `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `brand/mockups.json` (fundos permitidos). Os tokens vêm sozinhos do `brand.css`.
 - Texto de título/rótulo: do pedido, do `peca.json` (`notes`) ou do `context/COPY.md`. **Nunca invente número, preço ou promessa.**
-- Molduras reais ausentes (máquina nova)? `node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar`.
+- Molduras reais vêm com o repositório. Modelo novo: acrescente em `library/mockups/aparelhos/fontes.json` e rode `node tools/mockup/aparelhos.mjs baixar && node tools/mockup/aparelhos.mjs preparar`.
 
 ## Processo
 1. **Registrar o print** (se ainda não é captura): `node tools/mockup/captura.mjs <arquivo> --empresa <slug> --nome <tela> [--dpr N] [--ficticios]`. O script mede tamanho, aparelho e cor **e analisa onde cortar**; você não abre o print.
@@ -30,7 +30,7 @@ Motor: `tools/mockup/` + `library/mockups/` (README = comandos, catálogo e cont
 - **Desktop**: `notebook` (apoiado, sombra de chão) ou `navegador` (janela macOS sangrando no 4:5). Web app largo: o ajuste automático estende a base sem cortar a direita.
 - **Impacto/capa**: `perspectiva` (ângulo keynote, sombra dramática). **Funciona em tudo**: `duo`/`trio`. **Vários fluxos do app**: `leque` (celular) ou `pilha`.
 - **Vidro** só sobre fundo colorido (aurora, macos, gelo, malha); em fundo liso não aparece.
-- Fundos premium (paleta própria) só se a marca liberar; na kz o padrão é liso creme (`brand/mockups.json`).
+- Fundos premium (paleta própria) só se a marca liberar em `brand/mockups.json`; a kz liberou todos (padrão continua liso creme).
 
 ## Regras
 - Formatos: post 4:5 (padrão), story/reels 9:16, LP 16:9 ou livre transparente, quadrado 1:1. Escala 3 padrão; 4 só para impressão/LP retina grande.
