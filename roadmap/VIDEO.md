@@ -7,6 +7,9 @@
 
 Arquitetura: **motores** (`carousel`, `motion`) concentram o técnico; **formatos** (`fmt-*`, mini skills curtas) descrevem cada tipo/estilo de conteúdo e chamam o motor. Ver tarefa 005.
 
+## Direção atual (2026-10-08)
+Tudo em **blocos** reaproveitáveis + **projeto de vídeo** com eixos de variação (vozes, aberturas, headlines, CTA, copy) → variantes por script com sincronia automática e fluxograma no app; depois o mesmo motor para cortes e edits. Plano: `tasks/045-fabrica-de-variantes/TASK.md` (substitui o desenho de 009, 013, 014 e 015).
+
 ## O que o usuário quer (resumo das palavras dele)
 - Um **conjunto de skills de vídeo**, não uma só, muito bem pensadas e com qualidade de editor profissional.
 - O usuário vai mandar **muita documentação, ideias e técnicas de editores profissionais**. O Claude decide a melhor forma de transformar isso em skills funcionais (tarefa 002, contínua).
