@@ -149,6 +149,13 @@ export function useFillHeight() {
   return [ref, h] as const;
 }
 
+/** caixa que ocupa o resto da tela e rola por dentro (grades de cards: filtros e números ficam à vista) */
+export function FillBox({ children, className }: { children: ReactNode; className?: string }) {
+  const [ref, h] = useFillHeight();
+  // o respiro lateral evita cortar a borda e a sombra dos cards
+  return <div ref={ref} style={{ height: h }} className={cx('overflow-y-auto -mx-1 px-1 pb-1', className)}>{children}</div>;
+}
+
 /**
  * `pin` = linhas fixas no topo, fora da ordenação (ex.: a própria empresa como referência).
  * `fill` = ocupa o resto da tela (useFillHeight), com o cabeçalho fixo e a rolagem dentro.

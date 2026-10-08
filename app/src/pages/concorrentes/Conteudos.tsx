@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type ItemMark } from '../../api';
 import { qk, useCompetitorsFeed, useTags } from '../../queries';
-import { AreaPage, StatStrip, useMarket } from '../../components/competitors/area';
+import { AreaPage, FillBox, StatStrip, useMarket } from '../../components/competitors/area';
 import { ItemCard, ItemDrawer } from '../../components/competitors/Items';
 import { Chips, PlatformIcon, STATUS_LABEL, TYPE_LABEL, buildRows, fmtPct, groupSnapshots, median, platformLabel, type Row } from '../../components/competitors/lib';
 import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
@@ -97,7 +97,7 @@ export default function Conteudos() {
       {feed.isLoading && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">{[0, 1, 2, 3].map((i) => <div key={i} className="h-80 rounded-xl bg-card border border-border animate-pulse" />)}</div>}
       {feed.data && !rows.length && <Empty title="Nenhum conteúdo coletado" hint="Puxe as redes dos concorrentes (aba Coletas ou a ficha de cada um)." />}
       {rows.length > 0 && !shown.length && <Empty title="Nada com esses filtros" hint={period ? 'Tente um período maior.' : undefined} />}
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
+      {shown.length > 0 && <FillBox><div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
         {shown.map((r) => (
           <div key={`${r.compId}/${r.mk}`} className="flex flex-col">
             <div className="text-[11px] text-muted-foreground mb-1 truncate">{r.compName}</div>
@@ -105,8 +105,8 @@ export default function Conteudos() {
               onMark={(patch) => mark(r, patch)} onIdea={() => idea.make({ id: r.compId, name: r.compName }, '', r)} onOpen={() => setOpen(`${r.compId}/${r.mk}`)} />
           </div>
         ))}
-      </div>
-      {shown.length > 0 && <div className="text-xs text-muted-foreground mt-4">fora da curva = views ÷ mediana do próprio perfil na última coleta (sem views: curtidas)</div>}
+      </div></FillBox>}
+      {shown.length > 0 && <div className="text-xs text-muted-foreground mt-3">fora da curva = views ÷ mediana do próprio perfil na última coleta (sem views: curtidas)</div>}
 
       <ItemDrawer r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
         profileLabel={openRow?.compName ?? ''} tagSuggestions={tagSuggestions} ideaBusy={!!openRow && idea.busy === openRow.mk}

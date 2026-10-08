@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Ad } from '../../api';
 import { qk, useAds } from '../../queries';
-import { AreaPage, StatStrip, useMarket } from '../../components/competitors/area';
+import { AreaPage, FillBox, StatStrip, useMarket } from '../../components/competitors/area';
 import { Avatar, Chips, Img, PlatformIcon, Spinner, timeAgo } from '../../components/competitors/lib';
 import { toast } from '../../components/toast';
 import { Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../../components/kit';
@@ -118,10 +118,10 @@ export default function Anuncios() {
         </div>
 
         {!shown.length && <div className="mt-6"><Empty title={rows.length ? 'Nada com esses filtros' : 'Nenhum anúncio ativo nos concorrentes coletados'} /></div>}
-        <div className="mt-4 grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
+        {shown.length > 0 && <FillBox className="mt-4"><div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
           {shown.map((r) => <AdCard key={`${r.compId}/${r.id}`} slug={slug} r={r} />)}
-        </div>
-        <p className="mt-4 text-[11px] text-muted-foreground">Fonte: Biblioteca de Anúncios da Meta (Brasil, ativos). Tempo no ar = desde a data de início informada pela biblioteca. A coleta semanal atualiza esta aba.</p>
+        </div></FillBox>}
+        <p className="mt-3 text-[11px] text-muted-foreground">Fonte: Biblioteca de Anúncios da Meta (Brasil, ativos). Tempo no ar = desde a data de início informada pela biblioteca. A coleta semanal atualiza esta aba.</p>
       </>}
     </AreaPage>
   );
