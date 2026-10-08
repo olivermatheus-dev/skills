@@ -6,7 +6,7 @@ import { Badge, Button, Card, Empty, Select, Textarea, Input, cx } from '../kit'
 import VideoAdjust from './VideoAdjust';
 import { CommentCard, TipoPicker, nextCommentId, nowLocal, tipoOf, type Anchor, type Tipo } from './shared';
 
-type VideoAnchor = Exclude<Anchor, { kind: 'roteiro' }>;
+type VideoAnchor = Exclude<Anchor, { kind: 'roteiro' | 'slide' }>;
 const EVENT_COLOR: Record<string, string> = { reveal: '#4f46e5', swap: '#0891b2', press: '#d97706', click: '#d97706', cut: '#71717a', impact: '#dc2626', type: '#16a34a' };
 
 const fmtT = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, '0')}`;
@@ -29,7 +29,7 @@ function describe(a: VideoAnchor, tl: PieceTimeline | null): string {
     case 'elemento': return `elemento ${a.selector} · ${fmtT(a.t)}`;
   }
 }
-const isVideo = (c: ReviewComment): c is ReviewComment & { anchor: VideoAnchor } => c.anchor.kind !== 'roteiro';
+const isVideo = (c: ReviewComment): c is ReviewComment & { anchor: VideoAnchor } => c.anchor.kind !== 'roteiro' && c.anchor.kind !== 'slide';
 
 /** linha vertical do cursor: segue o <video> direto no DOM (sem re-render a 60 fps) */
 function Cursor({ video, duration }: { video: React.RefObject<HTMLVideoElement | null>; duration: number }) {

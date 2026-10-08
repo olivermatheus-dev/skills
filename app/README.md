@@ -30,7 +30,7 @@ companies/<slug>/
                     site/*.md + extract.json + reclameaqui.json (texto extraído pelo script; fora do git, refazível)
   contents/<peça>/peca.json     ficha da peça (schema/piece.ts): nome de exibição, versão principal, tags, favorito/arquivada, publicação e textos (legenda, copy, CTA, hashtags, notas). Tela Conteúdos = central em grade/lista + aba Ficha; botões abrem a pasta no Explorer e o vídeo no player do sistema
   contents/<peça>/mockup.json   versão 2 = mockup em camadas (tela Mockups, tarefa 030: editor estilo Canva; runtime library/mockups/runtime/cena.html num iframe, export pelo tools/mockup/cena.mjs; lógica em core/mockups.ts). capturas/<data>-<tela>/ = prints colados/arrastados (captura.mjs mede e sugere cortes)
-  contents/<peça>/revisao.json  status, aprovação do roteiro e anotações do Oliver no roteiro e no vídeo (schema/review.ts; tela Conteúdos; a IA lê com `node tools/review.mjs <pasta>`). "Novo conteúdo" cola/envia roteiro pronto (.md/.txt/.docx) → contents/AAAA-MM-DD-<tema>/roteiro.md + tarefa opcional para a IA
+  contents/<peça>/revisao.json  status, aprovação do roteiro e anotações do Oliver no roteiro, no vídeo e nos slides (pino x/y) (schema/review.ts; ajustes diretos de volume/duração/texto + prévia: core/videoedit.ts; tela Conteúdos; a IA lê com `node tools/review.mjs <pasta>`). "Novo conteúdo" cola/envia roteiro pronto (.md/.txt/.docx) → contents/AAAA-MM-DD-<tema>/roteiro.md + tarefa opcional para a IA
   context/*.md · brand/
   .env                     chaves de API do projeto (tela Configurações; fora do git; a tela só mostra os 4 últimos caracteres)
 ```

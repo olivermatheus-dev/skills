@@ -13,6 +13,7 @@ import { qk, usePiece, usePieces } from '../queries';
 import NewPiece from '../components/pieces/NewPiece';
 import TextReview from '../components/pieces/TextReview';
 import VideoReview from '../components/pieces/VideoReview';
+import SlideReview from '../components/pieces/SlideReview';
 import PieceSheet from '../components/pieces/PieceSheet';
 import { KIND_LABEL, STATUS_LABEL } from '../components/pieces/shared';
 import { Star, Thumb, desktop, useSaveMeta } from '../components/pieces/library';
@@ -182,7 +183,7 @@ function PieceDetail({ path }: { path: string }) {
     onSettled: () => { void qc.invalidateQueries({ queryKey: qk.pieces(slug) }); },
   });
 
-  const tabs = piece ? ['ficha', ...(piece.texts.length ? ['roteiro'] : []), ...(piece.kind === 'video' ? ['video'] : [])] : [];
+  const tabs = piece ? ['ficha', ...(piece.texts.length ? ['roteiro'] : []), ...(piece.kind === 'video' ? ['video'] : []), ...(piece.kind !== 'video' && piece.images.length ? ['slides'] : [])] : [];
   const tab = tabs.includes(sp.get('aba') ?? '') ? sp.get('aba')! : 'ficha';
   const go = (aba: string) => setSp({ peca: path, aba });
   const review = piece?.review ?? { comments: [] };
@@ -192,7 +193,7 @@ function PieceDetail({ path }: { path: string }) {
     if (piece && t && t !== piece.title) saveMeta.mutate({ path, patch: { title: t } });
     setRenaming(null);
   };
-  const TAB_LABEL: Record<string, string> = { ficha: 'Ficha', roteiro: 'Roteiro', video: 'Edição do vídeo' };
+  const TAB_LABEL: Record<string, string> = { ficha: 'Ficha', roteiro: 'Roteiro', video: 'Edição do vídeo', slides: piece?.kind === 'carrossel' ? 'Slides' : 'Imagens' };
 
   return (
     <div className="p-8 max-w-[1500px]">
@@ -230,7 +231,7 @@ function PieceDetail({ path }: { path: string }) {
           {piece.archived && <Card className="mb-4 text-sm bg-muted">Peça arquivada: não aparece na lista principal.</Card>}
           <div className="flex gap-1 border-b border-border mb-5">
             {tabs.map((t) => {
-              const n = t === 'ficha' ? 0 : open((c) => (t === 'roteiro') === (c.anchor.kind === 'roteiro'));
+              const n = t === 'ficha' ? 0 : open((c) => (c.anchor.kind === 'roteiro' ? 'roteiro' : c.anchor.kind === 'slide' ? 'slides' : 'video') === t);
               return (
                 <button key={t} onClick={() => go(t)} className={cx('px-4 py-2 text-sm -mb-px border-b-2', tab === t ? 'border-primary text-primary-ink font-medium' : 'border-transparent text-muted-foreground hover:text-foreground')}>
                   {TAB_LABEL[t]}{n ? <span className="ml-1.5 text-xs text-destructive">{n}</span> : null}
@@ -243,6 +244,7 @@ function PieceDetail({ path }: { path: string }) {
           {tab === 'video' && (piece.videos.length || piece.timeline
             ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />
             : <Card className="text-sm text-muted-foreground">Sem vídeo exportado ainda.</Card>)}
+          {tab === 'slides' && <SlideReview slug={slug} path={path} images={piece.images} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />}
         </>
       )}
     </div>

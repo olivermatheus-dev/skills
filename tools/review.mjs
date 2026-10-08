@@ -87,6 +87,14 @@ function resolveCtx(c) {
         for (let i = from; i <= to; i++) if (lines[i - 1].trim()) x.lines.push(`  ${i === at ? '>' : ' '} ${i}| ${lines[i - 1].slice(0, 200)}`);
       } else x.lines.push(`⚠ o trecho não está mais em ${f} (texto mudou): confira se a anotação ainda vale`);
     }
+  } else if (a.kind === 'slide') {
+    const imgs = existsSync(join(dir, 'png')) ? readdirSync(join(dir, 'png')).filter((f) => /\.(png|jpe?g|webp)$/i.test(f)).sort((p, q) => p.localeCompare(q, 'en', { numeric: true })) : [];
+    const at = imgs.indexOf(a.file) + 1;
+    const pin = a.x != null && a.y != null ? ` · pino em x ${Math.round(a.x * 100)}% · y ${Math.round(a.y * 100)}% (${a.y < 0.33 ? 'topo' : a.y < 0.66 ? 'meio' : 'base'}, ${a.x < 0.33 ? 'esquerda' : a.x < 0.66 ? 'centro' : 'direita'})` : ' · o slide todo';
+    if (!at) x.lines.push(`⚠ png/${a.file} não existe mais (slide ${a.slide} quando anotado): reexportado com outro nome?`);
+    else x.lines.push(`slide ${at}${at !== a.slide ? ` (era o ${a.slide})` : ''} · png/${a.file}${pin}`);
+    for (const src of ['carrossel.html', 'carousel.html', 'mockup.json']) if (read(src)) { x.lines.push(`fonte: ${src} (corrija lá e reexporte o PNG)`); break; }
+    if (at) x.img = join(dir, 'png', a.file);
   } else if (a.kind === 'tempo') {
     const s = sceneAt(a.t);
     if (s) { x.lines.push(`cena ${s.id} (${s.block}) ${fmt(s.start)}–${fmt(s.end)} · na tela: ${clean(s.on_screen)}`); const v = tl.vo.find((f) => a.t >= f.start && a.t <= (f.end ?? f.start + 9)); if (v) x.lines.push(`fala ${v.id}: "${v.text}"`); }
@@ -108,6 +116,17 @@ function frame(c, t) {
   const r = spawnSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(t), '-i', join(exportsDir, mp4), '-frames:v', '1', '-q:v', '3', f], { encoding: 'utf8' });
   return r.status === 0 && existsSync(f) ? f : null;
 }
+/** slide com o pino marcado (anel vermelho) → render/review/<id>-slide.png; sem pino, a própria imagem */
+function pinned(c, img) {
+  const { x, y } = c.anchor;
+  if (!wantFrames || x == null || y == null) return img;
+  const out = join(dir, 'render', 'review');
+  mkdirSync(out, { recursive: true });
+  const f = join(out, `${c.id}-slide.png`);
+  const ring = `if(lt(abs(hypot(X-${x}*W,Y-${y}*H)-0.035*W),0.006*W),1,0)`;
+  const r = spawnSync('ffmpeg', ['-y', '-v', 'error', '-i', img, '-vf', `format=rgba,geq=r='if(${ring},230,r(X,Y))':g='if(${ring},30,g(X,Y))':b='if(${ring},30,b(X,Y))':a='alpha(X,Y)'`, '-frames:v', '1', f], { encoding: 'utf8' });
+  return r.status === 0 && existsSync(f) ? f : img;
+}
 
 // ---- saída ----
 const all = flags.includes('--all');
@@ -123,7 +142,7 @@ if (!list.length) { console.log(`Nenhuma anotação ${all ? '' : 'aberta '}em ${
 console.log(`# Anotações ${all ? '' : 'abertas '}— ${dir}`);
 const appr = Object.entries(review.approvals ?? {}).filter(([, d]) => d).map(([k, d]) => `${k} aprovado em ${d}`);
 console.log(`status: ${review.status ?? '—'}${appr.length ? ` · ${appr.join(' · ')}` : ' · roteiro ainda NÃO aprovado'}`);
-if (list.some((c) => c.anchor.kind !== 'roteiro')) console.log(`vídeo mais recente: ${latest ?? '(sem MP4 em exports/)'}`);
+if (list.some((c) => !['roteiro', 'slide'].includes(c.anchor.kind))) console.log(`vídeo mais recente: ${latest ?? '(sem MP4 em exports/)'}`);
 console.log(`${list.length} anotação(ões)\n`);
 const ORDER = { corrigir: 0, ajustar: 1, template: 2, ok: 3 };
 for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?? 9) || a.id.localeCompare(b.id, 'en', { numeric: true }))) {
@@ -131,8 +150,8 @@ for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?
   console.log(`## ${c.id} · ${c.tipo.toUpperCase()}${c.status === 'resolvido' ? ' (resolvida)' : ''} · âncora: ${c.anchor.kind}${x.t != null ? ` · ${fmt(x.t)}` : ''}${c.video && latest && c.video !== latest ? ` · ⚠ anotada em ${c.video} (o mais recente é ${latest})` : ''}`);
   console.log(`   "${c.text.replace(/\n/g, '\n   ')}"`);
   for (const l of x.lines) console.log(`   · ${l}`);
-  const f = frame(c, x.t);
-  if (f) console.log(`   · quadro: ${f}`);
+  const f = x.img ? pinned(c, x.img) : frame(c, x.t);
+  if (f) console.log(`   · ${x.img ? 'imagem' : 'quadro'}: ${f}`);
   if (c.reply) console.log(`   · resposta anterior: ${c.reply}`);
   if (c.tipo === 'template') console.log('   → TEMPLATE: promover para a galeria (library/motion/, tarefa 014), não só corrigir nesta peça.');
   if (c.tipo === 'ok') console.log('   → OK: está aprovado; não mexer. Resolva só para registrar.');

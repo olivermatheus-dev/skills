@@ -16,6 +16,8 @@ export const ReviewAnchor = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('elemento'), selector: z.string().min(1), t: T, scene: z.string().optional(), event: z.string().optional() }),
   /** trecho de um texto da peça (roteiro.md, plano.md…): `quote` reencontra o trecho se as linhas mudarem; `line` = 1ª linha quando anotado */
   z.object({ kind: z.literal('roteiro'), file: z.string().regex(/^[\w.-]+\.(md|txt)$/, 'arquivo .md/.txt da pasta da peça').default('roteiro.md'), quote: z.string().min(1), line: z.number().int().min(1) }),
+  /** pino num slide/imagem de png/ (fase D): `file` é o id estável (o número muda se a ordem mudar); `x`/`y` 0–1 a partir do canto superior esquerdo */
+  z.object({ kind: z.literal('slide'), file: z.string().regex(/^[\w.-]+\.(png|jpe?g|webp)$/i, 'imagem de png/'), slide: z.number().int().min(1), x: z.number().min(0).max(1).optional(), y: z.number().min(0).max(1).optional() }),
 ]);
 export type ReviewAnchor = z.infer<typeof ReviewAnchor>;
 

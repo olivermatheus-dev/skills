@@ -84,7 +84,7 @@ O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e
 4. Âncoras: `cena`/`fala`/`evento` valem por id mesmo se o tempo mudar; `elemento` = `selector` + `t`; `tempo` = só o instante (use o quadro).
 
 ## Ajustes depois da entrega (quase zero token)
-`node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …` troca voz, duração, texto e trilha e reencaixa o resto. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
+`node tools/video/timeline.mjs show|check|vo|dur|text|music|vol <pasta> …` troca voz, duração, texto, trilha e volume (`vol <voz|trilha|efeitos|evento> <dB>` → `mix.vo_db`/`music.gain_db`/`mix.sfx_db`/`sfx[].gain_db`) e reencaixa o resto; `dur` grava `min`/`len` na cena e refaz o layout. O Oliver faz o mesmo no app (Edição do vídeo → **Ajustes diretos** + **Gerar prévia** = sfx → mix → `produce --draft`): ajuste que já está na `timeline.json` não se desfaz. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
 ## Kit (motor de render)
 `tools/video-kit/` (HyperFrames 0.8.141 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
