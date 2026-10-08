@@ -341,6 +341,9 @@ ficha.tags = [...new Set([...(ficha.tags || []), 'mockup', ...(reais.length ? ['
 ficha.updatedAt = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 writeJson(fichaF, ficha);
 
+// --so: a folha continua mostrando TODAS as alternativas (as não refeitas entram com a imagem que já existe)
+if (so) for (const comp of mockup.composicoes) if (!so.includes(comp.id) && comp.arquivo && existsSync(join(pasta, comp.arquivo))) itens.push({ comp, arquivo: join(pasta, comp.arquivo), qa: [] });
+itens.sort((a, b) => mockup.composicoes.indexOf(a.comp) - mockup.composicoes.indexOf(b.comp));
 if (itens.length > 1 && !opt['sem-folha']) {
   const folha = join(pasta, 'folha.png');
   await folhaDeContato(browser, itens, `${rel(pasta)} · ${itens.length} alternativas${reais.length ? ' · NÃO PUBLICAR (dados reais na captura)' : ''}`, folha);

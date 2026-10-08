@@ -114,6 +114,17 @@ if (tpl) for (const d of readdirSync(join(LIB, 'templates'))) {
   await sharp(join(OUT, 'templates', 'png', it.id + '.png')).resize(540).png({ compressionLevel: 9, palette: false }).toFile(join(LIB, 'templates', d, 'preview.png'));
 }
 
+// ---------- "o que já existe": peças reais de mockup e análises de corte das empresas ----------
+const reais = [];
+for (const emp of readdirSync(join(ROOT, 'companies')).filter((d) => !d.startsWith('_'))) {
+  const cont = join(ROOT, 'companies', emp, 'contents');
+  if (existsSync(cont)) for (const d of readdirSync(cont).filter((x) => x.includes('mockup')).sort().reverse()) {
+    if (existsSync(join(cont, d, 'folha.png'))) reais.push({ src: `/companies/${emp}/contents/${d}/folha.png`, legenda: `${emp} · ${d}`, sub: 'folha de contato (alternativas)' });
+  }
+  const caps = join(ROOT, 'companies', emp, 'capturas');
+  if (existsSync(caps)) for (const d of readdirSync(caps)) if (existsSync(join(caps, d, 'analise.png'))) reais.push({ src: `/companies/${emp}/capturas/${d}/analise.png`, legenda: `${emp} · ${d}`, sub: 'onde cortar (vermelho sai, verde fica)' });
+}
+
 // ---------- index.html ----------
 const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -131,10 +142,12 @@ figure .img{aspect-ratio:1;display:flex;align-items:center;justify-content:cente
 figure img{width:100%;height:100%;object-fit:contain;display:block}figure a{display:contents}
 figcaption{padding:10px 14px 14px}figcaption b{display:block;font-size:14px}figcaption small{display:block;color:var(--mu);font-size:12px}
 code{display:block;margin-top:6px;font:11.5px/1.35 ui-monospace,Consolas,monospace;color:var(--mu);word-break:break-word}
-.falha{color:#d70015;padding:20px;font-size:13px}
+.falha{color:#d70015;padding:20px;font-size:13px}.g2{grid-template-columns:repeat(auto-fill,minmax(420px,1fr))}.img2{aspect-ratio:auto;background:#fff}
 </style></head><body>
 <header><h1>Galeria de mockups</h1><p>Tudo o que o estúdio monta, com a tela de exemplo (app fictício). Cada card mostra a flag que reproduz o resultado: <code style="display:inline">node tools/mockup/render.mjs --captura &lt;sua captura&gt; …</code>. Refazer esta página: <code style="display:inline">node tools/mockup/galeria.mjs</code></p></header>
-<nav><div>${secoes.map((s) => `<a href="#${s.id}">${esc(s.titulo)} · ${s.itens.length}</a>`).join('')}</div></nav>
+<section id="progresso"><h2>O que já existe</h2><p>Fluxo: <b>print</b> → <code style="display:inline">captura.mjs</code> (mede e sugere cortes) → <code style="display:inline">render.mjs --alternativas 8</code> (folha de contato) → peça na central (app → Conteúdos → filtro Mockup), em 3× (3240×4050). Abaixo: as peças reais já geradas e a análise de cortes; depois, o catálogo inteiro com uma tela de exemplo.</p>
+<div class="g g2">${reais.map((r) => `<figure><div class="img img2"><a href="${r.src}"><img loading="lazy" src="${r.src}" alt=""></a></div><figcaption><b>${esc(r.legenda)}</b><small>${esc(r.sub)}</small></figcaption></figure>`).join('') || '<p>nenhuma peça de mockup ainda</p>'}</div></section>
+<nav><div><a href="#progresso">O que já existe</a>${secoes.map((s) => `<a href="#${s.id}">${esc(s.titulo)} · ${s.itens.length}</a>`).join('')}</div></nav>
 ${secoes.map((s) => `<section id="${s.id}"><h2>${esc(s.titulo)}</h2><p>${esc(s.nota)}</p><div class="g">${s.itens.map((it) => `<figure><div class="img">${s.ok?.has(it.id) ? `<a href="${s.id}/png/${it.id}.png"><img loading="lazy" src="${s.id}/png/${it.id}.png" alt="${esc(it.legenda)}"></a>` : '<p class="falha">não renderizou</p>'}</div><figcaption><b>${esc(it.legenda)}</b>${it.sub ? `<small>${esc(it.sub)}</small>` : ''}<code>${esc(it.cmd)}</code></figcaption></figure>`).join('')}</div></section>`).join('\n')}
 <section><p>Molduras: Apple Product Bezels (uso em marketing do seu produto, sem alterar o aparelho) e Android Studio device art (Apache 2.0). Fundos premium inspirados em shots.so/apple.com; sombras em camadas (Josh Comeau, Tobias Ahlin).</p></section>
 </body></html>`;

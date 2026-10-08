@@ -6,7 +6,7 @@ Print ou link → mockup pronto, em alta. **O Claude escolhe, o script compõe:*
 print → captura.mjs (mede + analisar.mjs: onde cortar) → render.mjs (mockup.json: template + slots + params) → png/ 3× (transparente opcional) → peça na central
 ```
 
-**Galeria visual de tudo** (aparelhos, cores, fundos, sombras, cantos, ângulos, templates, cada card com a flag que reproduz): `node tools/mockup/galeria.mjs` → abrir `library/mockups/galeria/index.html`.
+**Galeria visual de tudo** (peças reais já geradas, análise de cortes, aparelhos, cores, fundos, sombras, cantos, ângulos, templates, cada card com a flag que reproduz): `node tools/mockup/galeria.mjs` (gera) → `node tools/mockup/servir.mjs` → http://localhost:5181/ (ou, no Claude Code, o preview `galeria-mockups` do `.claude/launch.json`).
 
 ## Molduras e exemplos
 As molduras calibradas (78 MB) e as telas de exemplo estão no git (repositório privado, uso próprio): basta `git pull` em qualquer máquina. Para **atualizar ou adicionar modelos** (iPhone novo etc.), acrescente em `aparelhos/fontes.json` e rode (~1 GB de download, precisa do 7-Zip: `winget install 7zip.7zip`):
