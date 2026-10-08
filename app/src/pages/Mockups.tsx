@@ -7,6 +7,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, type CapturaRuntime, type MockupCatalogo, type MockupExport } from '../api';
 import { Button, Empty, ErrorBox, cx, fmtDate } from '../components/kit';
 import { toast } from '../components/toast';
+import { ArrowDown, ArrowUp, Copy, Eye, EyeOff, Image as ImageIcon, ImagePlus, Lock, LockOpen, Shapes, Smartphone, Trash2, Type, type LucideIcon } from 'lucide-react';
+import ContextSidebar from '../components/ContextSidebar';
 import Palco, { type Init } from '../components/mockups/Palco';
 import { PainelCamada, PainelFundo, Secao } from '../components/mockups/Propriedades';
 import { FMT_NOME, FORMATOS, comGeo, geo, novaCamada, props, semAjuste, type Camada, type Doc, type Fmt, type Geo } from '../components/mockups/doc';
@@ -94,7 +96,7 @@ function Lista() {
 }
 
 // ---------- editor ----------
-const ICONE: Record<Camada['tipo'], string> = { aparelho: '▭', imagem: '▨', texto: 'T', forma: '◇' };
+const ICONE: Record<Camada['tipo'], LucideIcon> = { aparelho: Smartphone, imagem: ImageIcon, texto: Type, forma: Shapes };
 
 function Editor({ path }: { path: string }) {
   const { slug = '' } = useParams();
@@ -271,61 +273,65 @@ function Editor({ path }: { path: string }) {
       </header>
 
       <div className="flex-1 min-h-0 flex">
-        {/* esquerda: adicionar, camadas, prints */}
-        <aside className="w-60 shrink-0 border-r border-border bg-card flex flex-col min-h-0">
-          <div className="grid grid-cols-4 gap-1 p-2 border-b border-border">
-            {(['aparelho', 'texto', 'forma', 'imagem'] as const).map((t) => (
-              <button key={t} onClick={() => adicionar(novaCamada(doc, t, t === 'aparelho' || t === 'imagem' ? { captura: caps.data?.[0]?.ref, ...(t === 'aparelho' ? { modelo: '' } : {}) } : {}))}
-                className="flex flex-col items-center gap-0.5 py-1.5 rounded-md hover:bg-muted text-[11px]" title={`adicionar ${t}`}>
-                <span className="text-base leading-none">{ICONE[t]}</span>{t}
-              </button>
-            ))}
-          </div>
-          <div className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Camadas</div>
-          <ul className="px-1.5 space-y-0.5 overflow-y-auto max-h-[45%]">
-            {[...camadas].reverse().map((c) => (
-              <li key={c.id} draggable onDragStart={(e) => e.dataTransfer.setData('text/x-camada', c.id)} onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  const de = e.dataTransfer.getData('text/x-camada');
-                  if (!de || de === c.id) return;
-                  setDoc((d) => { const l = d.camadas.filter((k) => k.id !== de); const alvo = l.findIndex((k) => k.id === c.id); l.splice(alvo + 1, 0, d.camadas.find((k) => k.id === de)!); return { ...d, camadas: l }; });
-                }}
-                onClick={() => setSel(c.id)}
-                className={cx('group flex items-center gap-1.5 px-2 py-1.5 rounded-md text-xs cursor-pointer', sel === c.id ? 'bg-primary-soft text-primary-ink' : 'hover:bg-muted', c.visivel === false && 'opacity-50')}>
-                <span className="w-4 text-center text-muted-foreground">{ICONE[c.tipo]}</span>
-                <span className="flex-1 truncate">{c.nome || c.tipo}{c.tipo === 'texto' && c.texto ? <span className="text-muted-foreground"> · {c.texto.replace(/[*_]/g, '').slice(0, 18)}</span> : null}</span>
-                <button title={c.visivel === false ? 'mostrar' : 'ocultar'} onClick={(e) => { e.stopPropagation(); setDoc((d) => props(d, c.id, { visivel: c.visivel === false ? undefined : false })); }} className="opacity-60 hover:opacity-100">{c.visivel === false ? '◌' : '◉'}</button>
-                <button title={c.travada ? 'destravar' : 'travar'} onClick={(e) => { e.stopPropagation(); setDoc((d) => props(d, c.id, { travada: c.travada ? undefined : true })); }} className={cx('hover:opacity-100', c.travada ? 'opacity-100' : 'opacity-0 group-hover:opacity-60')}>{c.travada ? '🔒' : '🔓'}</button>
-              </li>
-            ))}
-            <li onClick={() => setSel(null)} className={cx('flex items-center gap-1.5 px-2 py-1.5 rounded-md text-xs cursor-pointer', !sel ? 'bg-primary-soft text-primary-ink' : 'hover:bg-muted')}>
-              <span className="w-4 h-4 rounded border border-border" style={{ background: 'linear-gradient(135deg,#fffaf5,#f2d9cb)' }} /> Fundo
-            </li>
-          </ul>
-          {selC && (
-            <div className="flex gap-1 px-2 py-2 border-t border-border mt-1 text-[11px]">
-              <button className="flex-1 py-1 rounded hover:bg-muted" onClick={() => mover(selC.id, 1)} title="trazer para frente">↑ frente</button>
-              <button className="flex-1 py-1 rounded hover:bg-muted" onClick={() => mover(selC.id, -1)} title="mandar para trás">↓ trás</button>
-              <button className="flex-1 py-1 rounded hover:bg-muted" onClick={() => duplicar(selC.id)} title="duplicar (Ctrl+D)">duplicar</button>
-              <button className="flex-1 py-1 rounded hover:bg-red-50 text-destructive" onClick={() => remover(selC.id)} title="apagar (Delete)">apagar</button>
+        {/* esquerda: adicionar, camadas, prints (barra contextual padrão do app) */}
+        <ContextSidebar storageKey="mockups-editor" title="Camadas" width={248}
+          footer={selC && (
+            <div className="grid grid-cols-4 gap-1 text-[11px]">
+              <button className="flex flex-col items-center gap-0.5 py-1 rounded hover:bg-muted" onClick={() => mover(selC.id, 1)} title="trazer para frente"><ArrowUp className="size-3.5" />frente</button>
+              <button className="flex flex-col items-center gap-0.5 py-1 rounded hover:bg-muted" onClick={() => mover(selC.id, -1)} title="mandar para trás"><ArrowDown className="size-3.5" />trás</button>
+              <button className="flex flex-col items-center gap-0.5 py-1 rounded hover:bg-muted" onClick={() => duplicar(selC.id)} title="duplicar (Ctrl+D)"><Copy className="size-3.5" />duplicar</button>
+              <button className="flex flex-col items-center gap-0.5 py-1 rounded hover:bg-destructive/10 text-destructive" onClick={() => remover(selC.id)} title="apagar (Delete)"><Trash2 className="size-3.5" />apagar</button>
             </div>
-          )}
-          <div className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground border-t border-border">Prints · arraste para o quadro</div>
-          <div className="flex-1 overflow-y-auto px-2 pb-2 grid grid-cols-2 gap-1.5 content-start">
-            {caps.data?.map((c) => (
-              <button key={c.ref} draggable onDragStart={(e) => e.dataTransfer.setData('text/x-captura', c.ref)}
-                onClick={() => (selC && (selC.tipo === 'aparelho' || selC.tipo === 'imagem') ? setDoc((d) => props(d, selC.id, { captura: c.ref, recorte: undefined })) : adicionarCaptura(c.ref))}
-                title={`${nomeCap(c)} · ${c.largura}×${c.altura}${selC && (selC.tipo === 'aparelho' || selC.tipo === 'imagem') ? ' · clique troca o print da camada' : ' · clique adiciona num aparelho'}`}
-                className="rounded-md overflow-hidden border border-border hover:ring-2 hover:ring-primary/40 bg-muted">
-                <img src={c.src} alt="" className="w-full aspect-video object-cover object-top" loading="lazy" />
-              </button>
-            ))}
-            <label className="col-span-2 text-center text-[11px] text-muted-foreground border border-dashed border-border rounded-md py-3 cursor-pointer hover:bg-muted">
-              Ctrl+V cola um print · ou clique para enviar
-              <input type="file" accept="image/*" multiple className="hidden" onChange={(e) => { void novosArquivos([...(e.target.files ?? [])]); e.target.value = ''; }} />
-            </label>
+          )}>
+          <div className="grid grid-cols-4 gap-1">
+            {(['aparelho', 'texto', 'forma', 'imagem'] as const).map((t) => {
+              const I = ICONE[t];
+              return (
+                <button key={t} onClick={() => adicionar(novaCamada(doc, t, t === 'aparelho' || t === 'imagem' ? { captura: caps.data?.[0]?.ref, ...(t === 'aparelho' ? { modelo: '' } : {}) } : {}))}
+                  className="flex flex-col items-center gap-1 py-2 rounded-md border border-border hover:bg-muted text-[11px]" title={`adicionar ${t}`}>
+                  <I className="size-4" strokeWidth={1.8} />{t}
+                </button>
+              );
+            })}
           </div>
-        </aside>
+          <ContextSidebar.Section title="Camadas">
+            {[...camadas].reverse().map((c) => {
+              const I = ICONE[c.tipo];
+              return (
+                <div key={c.id} draggable onDragStart={(e) => e.dataTransfer.setData('text/x-camada', c.id)} onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    const de = e.dataTransfer.getData('text/x-camada');
+                    if (!de || de === c.id) return;
+                    setDoc((d) => { const l = d.camadas.filter((k) => k.id !== de); const alvo = l.findIndex((k) => k.id === c.id); l.splice(alvo + 1, 0, d.camadas.find((k) => k.id === de)!); return { ...d, camadas: l }; });
+                  }}
+                  onClick={() => setSel(c.id)}
+                  className={cx('group flex items-center gap-2 h-8 px-2 rounded-md text-sm cursor-pointer', sel === c.id ? 'bg-primary-soft text-primary-ink font-medium' : 'hover:bg-muted', c.visivel === false && 'opacity-50')}>
+                  <I className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.8} />
+                  <span className="flex-1 truncate">{c.nome || c.tipo}{c.tipo === 'texto' && c.texto ? <span className="text-muted-foreground font-normal"> · {c.texto.replace(/[*_]/g, '').slice(0, 18)}</span> : null}</span>
+                  <button title={c.visivel === false ? 'mostrar' : 'ocultar'} onClick={(e) => { e.stopPropagation(); setDoc((d) => props(d, c.id, { visivel: c.visivel === false ? undefined : false })); }} className={cx('text-muted-foreground hover:text-foreground', c.visivel === false ? 'opacity-100' : 'opacity-0 group-hover:opacity-100')}>{c.visivel === false ? <EyeOff className="size-3.5" /> : <Eye className="size-3.5" />}</button>
+                  <button title={c.travada ? 'destravar' : 'travar'} onClick={(e) => { e.stopPropagation(); setDoc((d) => props(d, c.id, { travada: c.travada ? undefined : true })); }} className={cx('text-muted-foreground hover:text-foreground', c.travada ? 'opacity-100' : 'opacity-0 group-hover:opacity-100')}>{c.travada ? <Lock className="size-3.5" /> : <LockOpen className="size-3.5" />}</button>
+                </div>
+              );
+            })}
+            <ContextSidebar.Item onClick={() => setSel(null)} active={!sel} icon={<span className="size-4 rounded border border-border" style={{ background: 'linear-gradient(135deg,#fffaf5,#f2d9cb)' }} />}>Fundo</ContextSidebar.Item>
+          </ContextSidebar.Section>
+          <ContextSidebar.Section title="Prints · arraste para o quadro">
+            <div className="grid grid-cols-2 gap-1.5">
+              {caps.data?.map((c) => (
+                <button key={c.ref} draggable onDragStart={(e) => e.dataTransfer.setData('text/x-captura', c.ref)}
+                  onClick={() => (selC && (selC.tipo === 'aparelho' || selC.tipo === 'imagem') ? setDoc((d) => props(d, selC.id, { captura: c.ref, recorte: undefined })) : adicionarCaptura(c.ref))}
+                  title={`${nomeCap(c)} · ${c.largura}×${c.altura}${selC && (selC.tipo === 'aparelho' || selC.tipo === 'imagem') ? ' · clique troca o print da camada' : ' · clique adiciona num aparelho'}`}
+                  className="rounded-md overflow-hidden border border-border hover:ring-2 hover:ring-primary/40 bg-muted">
+                  <img src={c.src} alt="" className="w-full aspect-video object-cover object-top" loading="lazy" />
+                </button>
+              ))}
+              <label className="col-span-2 flex flex-col items-center gap-1 text-[11px] text-muted-foreground border border-dashed border-border rounded-md py-3 cursor-pointer hover:bg-muted">
+                <ImagePlus className="size-4" />Ctrl+V cola um print · ou clique para enviar
+                <input type="file" accept="image/*" multiple className="hidden" onChange={(e) => { void novosArquivos([...(e.target.files ?? [])]); e.target.value = ''; }} />
+              </label>
+            </div>
+          </ContextSidebar.Section>
+        </ContextSidebar>
 
         {/* centro */}
         <div className="flex-1 min-w-0 flex flex-col">

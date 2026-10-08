@@ -5,7 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type CompetitorFull, type Doc, type Idea, type ItemMark } from '../api';
-import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useAnalysis, useCompetitor, useTags } from '../queries';
+import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useAnalysis, useCompetitor, useCompetitors, useTags } from '../queries';
+import { Star as StarIcon } from 'lucide-react';
+import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/kit';
 import { ResultLine } from '../components/competitors/AddLinksModal';
@@ -30,7 +32,41 @@ const sortFn: Record<Sort, (a: Row, b: Row) => number> = {
 const handleOf = (p: { platform: string; handle?: string; externalId?: string; url: string }) =>
   p.handle ? (p.platform === 'site' ? p.handle : `@${p.handle}`) : p.externalId ?? p.url.replace(/^https?:\/\/(www\.)?/, '');
 
+/** página: barra contextual com todos os concorrentes (clicar troca o detalhe sem voltar à lista) + o detalhe */
 export default function CompetitorDetail() {
+  const { slug = '', id = '' } = useParams();
+  return (
+    <div className="flex h-full">
+      <ListaConcorrentes slug={slug} id={id} />
+      <div className="flex-1 min-w-0 overflow-y-auto"><Detalhe key={id} /></div>
+    </div>
+  );
+}
+
+function ListaConcorrentes({ slug, id }: { slug: string; id: string }) {
+  const { data = [] } = useCompetitors(slug);
+  const [busca, setBusca] = useState('');
+  const b = busca.trim().toLowerCase();
+  const lista = data.filter((d) => d.data.status !== 'arquivado' && (!b || d.data.name.toLowerCase().includes(b)));
+  const item = (d: Doc<Competitor>) => (
+    <ContextSidebar.Item key={d.data.id} to={`/p/${slug}/concorrentes/${d.data.id}`} active={d.data.id === id}
+      icon={<span className="size-4 rounded-full bg-muted text-[9px] font-semibold grid place-items-center text-muted-foreground">{d.data.name.slice(0, 1).toUpperCase()}</span>}
+      trailing={d.data.favorite ? <StarIcon className="size-3 fill-current text-warning" /> : undefined}>{d.data.name}</ContextSidebar.Item>
+  );
+  const grupos: [string, Doc<Competitor>[]][] = [
+    ['Concorrentes', lista.filter((d) => d.data.status === 'ativo' && d.data.kind === 'concorrente')],
+    ['Referências e criadores', lista.filter((d) => d.data.status === 'ativo' && d.data.kind !== 'concorrente')],
+    ['Candidatos (aceitar)', lista.filter((d) => d.data.status === 'candidato')],
+  ];
+  return (
+    <ContextSidebar storageKey="concorrentes" title={<Link to={`/p/${slug}/concorrentes`} className="hover:underline">Concorrentes</Link>} search={{ value: busca, onChange: setBusca, placeholder: 'Buscar concorrente…' }}>
+      {grupos.filter(([, l]) => l.length).map(([t, l]) => <ContextSidebar.Section key={t} title={<>{t} <span className="font-normal">{l.length}</span></>}>{l.map(item)}</ContextSidebar.Section>)}
+      {!lista.length && <ContextSidebar.Empty>Nenhum concorrente{b ? ' com esse nome' : ''}.</ContextSidebar.Empty>}
+    </ContextSidebar>
+  );
+}
+
+function Detalhe() {
   const { slug = '', id = '' } = useParams();
   const qc = useQueryClient();
   const key = qk.competitor(slug, id);

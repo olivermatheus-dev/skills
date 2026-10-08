@@ -15,7 +15,7 @@
 | dados | `core/store.ts` | todo ler/gravar passa por aqui e é validado; erro vira `ValidationError` (arquivo + campos). |
 | API | `app/server/api.ts` | plugin do Vite; rotas finas sobre o `store`. Sem lógica de negócio aqui. |
 | cliente | `app/src/api.ts` | `fetch` tipado com os tipos do `schema`. |
-| telas | `app/src/pages/*.tsx` (registro em `pages/index.ts`) | componentes base em `components/ui.tsx`, editor markdown em `components/Markdown.tsx`. |
+| telas | `app/src/pages/*.tsx` (registro em `pages/index.ts`: rota, nome, ícone Lucide, sidebar recolhida) | componentes **shadcn** em `components/ui/` (`@/components/ui/…`, preferir estes); antigos em `components/kit.tsx` (migrar aos poucos); barra contextual padrão `components/ContextSidebar.tsx`; tokens em `src/index.css`; cor do projeto em `lib/theme.ts`; editor markdown em `components/Markdown.tsx`. |
 
 ## Arquivos por projeto
 ```

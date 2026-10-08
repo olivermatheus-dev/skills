@@ -46,7 +46,7 @@
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **030 B** | Editor de mockups: alinhar/distribuir, seleção múltipla, girar pela alça, composições prontas em camadas, ocultar dados e recortar no quadro | aval (pendência 8) |
 | **028 (B, D, E)** | Mockups: B captura por link (login persistente), D animações/3D de verdade (Blender MCP / Three.js com as molduras calibradas), E template a partir de referência | aval (pendência 8) |
-| **019** | Front-end: shadcn gradual, cor do projeto no tema, Lucide, sidebar recolhível + sidebar contextual padronizada ("Ordem sugerida" no `TASK.md`; Sonnet 5.5 baixo) | — |
+| **019** | Front-end, passo 6 (gradual): ContextSidebar estilo Notion em Conteúdos/Anotações/Ideias, `kit.tsx` → shadcn tela a tela, símbolos → Lucide (passos 1–5 feitos: shadcn ligado, cor do projeto, Lucide, sidebars; ver `TASK.md`; Sonnet 5.5 baixo) | — |
 | 013 · 014 · 009 · 012 | variantes · galeria · MCP de edição · motor de ideias | kit (feito) |
 
 Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
