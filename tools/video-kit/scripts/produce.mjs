@@ -9,8 +9,10 @@
 // **Motion blur** (padrão): renderiza a 60 quadros duas vezes — a segunda com o relógio meio quadro atrás
 // (`__TIME_OFFSET__`, lido por `M.offset`) —, intercala em 120 amostras/s e cada quadro de 30 soma três:
 // 1/60 s de exposição, obturador a 180°. `--no-blur` renderiza direto a 30; `--fps=60` exporta a 60 sem rastro.
+// `--blur=nativo[:N]` usa o motion blur nativo do HyperFrames (native-blur.mjs: até 16 amostras por quadro, rastro
+// liso em vez de 3 cópias), ~7–8× mais lento: para a versão final de vídeo com movimento rápido (tarefa 033).
 //
-// Uso: node tools/video-kit/scripts/produce.mjs <pasta> [--only=9x16] [--draft] [--build-only] [--no-blur] [--fps=60] [--v=3] [--mute]
+// Uso: node tools/video-kit/scripts/produce.mjs <pasta> [--only=9x16] [--draft] [--build-only] [--no-blur] [--blur=nativo[:N]] [--fps=60] [--v=3] [--mute]
 //   → exports/<AAAA-MM-DD-nome>-<formato>-vNN.mp4  (rascunho: -rascunho.mp4, sobrescreve)
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
@@ -27,7 +29,10 @@ const draft = flags.includes('--draft');
 const buildOnly = flags.includes('--build-only');
 const fps60 = flags.includes('--fps=60');
 const mute = flags.includes('--mute');
-const blur = !draft && !fps60 && !flags.includes('--no-blur');
+const nativeArg = flag('blur')?.match(/^nativo(?::(\d+))?$/);
+if (flag('blur') && !nativeArg) throw new Error(`--blur=${flag('blur')}: use --blur=nativo ou --blur=nativo:N (N amostras por quadro)`);
+const native = !draft && !fps60 && !flags.includes('--no-blur') && !!nativeArg;
+const blur = !draft && !fps60 && !flags.includes('--no-blur') && !native;
 
 const tl = v.tl;
 const duration = tl.duration ?? tl.scenes.at(-1).end;
@@ -82,6 +87,12 @@ for (const format of targets) {
   for (const offset of passes) {
     const dir = build(format, offset);
     if (buildOnly) break;
+    if (native) {
+      // um passe só, a 30: o próprio HyperFrames tira as amostras dentro do obturador
+      execFileSync(process.execPath, [join(KIT, 'scripts', 'native-blur.mjs'), dir, join(dir, `${format}-silent.mp4`), '--fps=30', `--amostras=${nativeArg[1] ?? 'auto'}`], { stdio: 'inherit' });
+      silents.push(join(dir, `${format}-silent.mp4`));
+      continue;
+    }
     // o HyperFrames do projeto (versão fixa), nunca o do npx: fora daqui o npx baixa a mais nova e o render muda sem aviso
     execFileSync(process.execPath, [hf, 'render', '-o', `${format}-silent.mp4`, '-f', blur || fps60 ? '60' : '30', '-q', draft ? 'draft' : 'high'], { cwd: dir, stdio: 'inherit' });
     silents.push(join(dir, `${format}-silent.mp4`));

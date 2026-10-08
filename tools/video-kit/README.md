@@ -1,6 +1,6 @@
 # Kit de vídeo (motor de render)
 
-HTML/CSS/GSAP → MP4 com o [HyperFrames](https://hyperframes.heygen.com) **0.8.94 (versão fixa no `package.json`)**. Veio do kit do Ludus (`../ludus/videos/_kit`, em produção) e foi adaptado ao contrato deste hub: timeline em `vo[]`/`scenes[]`/`events[]`, SFX da biblioteca licenciada, marca de cada empresa, formatos 4:5 · 9:16 · 16:9 · 1:1. Decisão e alternativas: `roadmap/tasks/003-stack-motion/DECISAO.md`.
+HTML/CSS/GSAP → MP4 com o [HyperFrames](https://hyperframes.heygen.com) **0.8.141 (versão fixa no `package.json`; upgrade medido em `roadmap/tasks/033-upgrade-hyperframes/TASK.md`)**. Veio do kit do Ludus (`../ludus/videos/_kit`, em produção) e foi adaptado ao contrato deste hub: timeline em `vo[]`/`scenes[]`/`events[]`, SFX da biblioteca licenciada, marca de cada empresa, formatos 4:5 · 9:16 · 16:9 · 1:1. Decisão e alternativas: `roadmap/tasks/003-stack-motion/DECISAO.md`.
 
 ```
 tools/video-kit/
@@ -26,6 +26,8 @@ Pré-requisitos: Node 22 (`.nvmrc`, o fnm troca sozinho), `npm install`, ffmpeg 
 | 8. QC final | `node tools/video/qc.mjs <pasta> --sheet` | formato, cor, loudness, tela parada + folha do MP4 (pega o que os quadros do passo 6 não pegam: transições) |
 
 Rascunho rápido: `produce.mjs <pasta> --draft` (sem rastro, sobrescreve `-rascunho.mp4`). Um formato: `--only=9x16`. Sem som: `--mute`.
+
+**Motion blur nativo (opcional, versão final):** `produce.mjs <pasta> --blur=nativo` usa o blur do próprio HyperFrames (`scripts/native-blur.mjs`: até 16 amostras por quadro, rastro liso em vez das 3 cópias do padrão). ~7–8× mais lento (4:5 de 13 s: 365 s × 53 s). `--blur=nativo:4` = 4 amostras fixas (~1,5× o padrão). Não funciona com transição de shader (rota em camadas). Use quando a cena tem deslize rápido de texto/cartão e o padrão mostra cópias.
 
 ## Voz: rascunho grátis → final na ElevenLabs
 1. **Rascunho (sempre o padrão):** `tts.mjs` com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo em `library/voices/`). Serve para aprovar copy, ritmo e cenas.

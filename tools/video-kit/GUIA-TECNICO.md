@@ -10,7 +10,7 @@
 - Marca em `brand/brand.css` (copiada de `companies/<slug>/brand/`); fontes **locais** no `brand/fonts/` (render sem internet e determinístico).
 
 ## Armadilhas
-- **`fromTo` desenha o estado inicial já no quadro 0.** Se o "de" é visível (ex.: anel de explosão `{ opacity: 0.7 }` → `0`), ele aparece desde o começo do vídeo, em cima de outras cenas. Nesses, use `immediateRender: false` (o `M.cursor().click` do kit já faz isso com o anel do clique).
+- **`fromTo` desenha o estado inicial já no quadro 0** (medido de novo na 0.8.141: continua). Se o "de" é visível (ex.: anel de explosão `{ opacity: 0.7 }` → `0`), ele aparece desde o começo do vídeo, em cima de outras cenas. Nesses, use `immediateRender: false` (o `M.cursor().click` do kit já faz isso com o anel do clique).
 - **Tempos do Whisper chegam 0,1–0,3 s atrasados.** O `split-vo.mjs`/`fit-vo.mjs` corrigem pelas pausas do próprio áudio (`snapWords` em `lib.mjs`); a palavra entra ~0,14 s antes de ser dita.
 - **Regra CSS por descendente pega ícones.** `#x svg { … }` também atinge o `<svg class="icon">` dos `{{i:…}}` dentro de `#x`. Use filho direto (`#x > svg`).
 - **Medir elemento depois de preencher o texto.** Botão vazio na hora do `getBoundingClientRect` = cursor no lugar errado.
@@ -18,7 +18,7 @@
 - **O HyperFrames embute e reordena os scripts.** Nada de ler `window.__TL` no topo de um arquivo do kit: o `tl.js` lê na hora do uso. Erro típico: "T is not defined" e todos os quadros iguais. Diagnóstico: `node node_modules/hyperframes/bin/hyperframes.mjs validate .` dentro de `render/<formato>/`.
 - **Nenhum JS (kit, `lib/motion`, composição) pode conter a tag de fechar script**, nem em comentário: o HyperFrames embute os arquivos na página, a tag fecha o script cedo e sai "Invalid or unexpected token" + "gsap is not defined" (todos os quadros vazios).
 - **Componentes da galeria:** `library/motion/` é copiada para `render/<formato>/lib/motion/` pelo `produce.mjs`.
-- **Estado inicial escondido vai no CSS** (`opacity: 0`), não em `tl.set(..., 0)`: um `set` em 0 não aparece no quadro 0 (o lint avisa).
+- **Estado inicial escondido vai no CSS** (`opacity: 0`), não em `tl.set(..., 0)`: um `set` em 0 não aparece no quadro 0 (o lint avisa). Num teste simples (033, 0.8.94 e 0.8.141) o `set` em 0 apareceu; a regra fica por segurança.
 - **Saída termina antes da entrada.** Na troca de cena, o que sai acaba antes do que entra aparecer. Os quadros do `check.mjs` (fim de cena e eventos) **não pegam transição**: a folha do `qc.mjs --sheet` (a cada 0,5 s) pega.
 - **Nada parado > 1,5 s** (o `qc.mjs` acusa tela congelada): na espera, algo vivo (indicador de digitação, câmera respirando com escala ≥ 1,03, cursor andando).
 - **Meça antes de qualquer transform** (`getBoundingClientRect` no início do script), para cursor e alvos.
@@ -31,4 +31,5 @@
 - **Sempre o HyperFrames do projeto** (`node_modules/hyperframes`, versão fixa). Pelo `npx` ele baixa a mais nova e o render muda sem aviso.
 - **Determinismo:** nada de `Math.random()`, `Date.now()` ou timers; tudo função do tempo da timeline.
 - **Cor da marca como texto:** o validador acusa contraste (ex.: coral `--primary` como texto na kz = 2,6:1, proibido no BRAND.md). Use o token de ênfase da marca.
+- **Motion blur nativo** (`produce.mjs --blur=nativo`) captura por screenshot em PNG: ~7–8× mais lento que o padrão e **recusado** em composição com transição de shader (rota em camadas). O CLI não tem a opção; o `native-blur.mjs` chama o producer embutido no pacote (se o pacote mudar de estrutura, ele avisa e o padrão continua valendo).
 - **Exportar com BT.709 completo** (matriz, primárias e transferência): o `produce.mjs` marca no stream e no contêiner; o `qc.mjs` confere (`cor bt709/bt709/bt709`).

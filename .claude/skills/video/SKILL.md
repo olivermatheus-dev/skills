@@ -87,7 +87,7 @@ O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e
 `node tools/video/timeline.mjs show|check|vo|dur|text|music <pasta> …` troca voz, duração, texto e trilha e reencaixa o resto. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
 ## Kit (motor de render)
-`tools/video-kit/` (HyperFrames 0.8.94 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
+`tools/video-kit/` (HyperFrames 0.8.141 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
 Ordem: `tts` → `music` (ou trilha do catálogo) → `sfx` → `mix` → `produce --build-only` → `check` (olhar) → `produce` → `qc.mjs --sheet` (olhar).
 
 ## Padrões do Oliver (sempre, sem ele pedir)

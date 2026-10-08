@@ -51,6 +51,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 030 | [Editor de mockups no app (mini Canva: camadas, texto, fundo/gradiente/pattern, multi-formato, colar/arrastar) + refazer o visual com bom gosto](tasks/030-editor-de-mockups/TASK.md) | 028, 018 | **fase A feita (2026-10-07)**; aguarda aval do Oliver (fundos + teste) → fase B |
 | 031 | [Concorrentes v2: estrutura de gestor de marketing (Panorama, Lista, Comparar, Conteúdos, Redes, Anúncios, Coletas), ficha por área, métricas das redes, Instagram sem token](tasks/031-concorrentes-v2/TASK.md) | 023, 019, 012 | **fases A–D feitas (2026-10-08)**: ficha, Instagram sem token, abas, anúncios da Meta, coleta semanal sob comando; aguarda uso/aval |
 | 032 | [Kanban v2: criar na coluna (Trello), comentários da IA no card, botão Rodar IA (heartbeat/terminal), visual](tasks/032-kanban-v2/TASK.md) | 018, 019 | **fase A feita (2026-10-08)**; falta o `/login` do Claude no terminal para o 1º teste real |
+| 033 | [Upgrade do HyperFrames 0.8.94 → 0.8.141 + motion blur nativo opcional](tasks/033-upgrade-hyperframes/TASK.md) | 003 | **feita (2026-10-08)**: 0.8.141 na main, blur nativo opcional (`--blur=nativo`) |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 
