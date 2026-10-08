@@ -4,11 +4,11 @@ import { Grid3x3, PanelsTopLeft, Star, Tag } from 'lucide-react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { AreaPage, REF_ID, SortTable, useMarket, useRefRow, type Col, type MarketRow } from '../../components/competitors/area';
-import { money } from '../../components/competitors/Analysis';
 import { Avatar, Chips } from '../../components/competitors/lib';
 import MatrizFuncionalidades from './MatrizFuncionalidades';
 import Posicionamento from './comparar/Posicionamento';
-import { Badge, Empty, ErrorBox, cx } from '../../components/kit';
+import Precos from './comparar/Precos';
+import { Empty, ErrorBox } from '../../components/kit';
 
 const VIEWS = {
   oferta: { label: 'Preços', icon: Tag }, funcionalidades: { label: 'Funcionalidades', icon: Grid3x3 },
@@ -17,7 +17,7 @@ const VIEWS = {
 /** links antigos: ?v=mensagem abre Posicionamento */
 const ALIAS: Record<string, string> = { mensagem: 'posicionamento' };
 type View = keyof typeof VIEWS;
-type P = ModuleDataOf<'precos'>; type Lp = ModuleDataOf<'landing'>; type Rp = ModuleDataOf<'reputacao'>;
+type Lp = ModuleDataOf<'landing'>; type Rp = ModuleDataOf<'reputacao'>;
 const mod = <T,>(r: MarketRow, k: 'precos' | 'features' | 'landing' | 'reputacao') => r.res[k]?.data as T | undefined;
 
 export default function Comparar() {
@@ -29,13 +29,12 @@ export default function Comparar() {
   const m = useMarket(slug);
   const rows = m.rows.filter((r) => r.c.data.kind === 'concorrente');
   const ref = useRefRow(slug);
-  const pin = ref ? [ref] : [];
   return (
     <AreaPage>
       <div className="mb-4"><Chips value={v} onChange={(x) => setSp(x === 'oferta' ? {} : { v: x }, { replace: true })} options={Object.entries(VIEWS).map(([value, x]) => ({ value: value as View, label: <span className="inline-flex items-center gap-1.5"><x.icon className="size-3.5" strokeWidth={1.8} />{x.label}</span> }))} /></div>
       <ErrorBox error={m.error} />
       {!m.isLoading && !rows.length && <Empty title="Sem concorrentes ativos" />}
-      {v === 'oferta' && <Oferta slug={slug} rows={rows} pin={pin} />}
+      {v === 'oferta' && <Precos slug={slug} rows={rows} refRow={ref} />}
       {v === 'funcionalidades' && <MatrizFuncionalidades slug={slug} rows={rows} />}
       {v === 'posicionamento' && <Posicionamento slug={slug} rows={rows} refRow={ref} />}
       {ref && v !== 'reputacao' && <p className="mt-2 text-[11px] text-muted-foreground">{ref.c.data.name} (você) vem de <Link to={`/p/${slug}/contexto`} className="hover:text-primary-ink">Contexto</Link> (BUSINESS, PRODUTO, COPY) via <code>intel/referencia.json</code>: preço de referência da copy, só funcionalidades prontas.</p>}
@@ -57,20 +56,6 @@ const nameCol = (slug: string): Col<MarketRow> => ({
   ),
 });
 const dash = <span className="text-muted-foreground">—</span>;
-
-function Oferta({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
-  const cols: Col<MarketRow>[] = [
-    nameCol(slug),
-    { k: 'price', label: 'A partir de', num: true, v: (r) => r.ov?.fromMonthly, render: (r) => (r.ov?.fromMonthly != null ? <b title={mod<P>(r, 'precos')?.notes ?? undefined}>{money(r.ov.fromMonthly, r.ov.currency)}</b> : r.ov?.publicPrice === false ? <span className="text-muted-foreground">oculto</span> : dash) },
-    { k: 'top', label: 'Plano mais caro', num: true, v: (r) => Math.max(...(mod<P>(r, 'precos')?.plans.map((p) => p.monthly ?? 0) ?? [0])) || undefined, render: (r) => { const ps = mod<P>(r, 'precos')?.plans.filter((p) => p.monthly != null) ?? []; const t = ps.sort((a, b) => b.monthly! - a.monthly!)[0]; return t ? <span title={t.name}>{money(t.monthly!, mod<P>(r, 'precos')?.currency)}</span> : dash; } },
-    { k: 'yearly', label: 'No anual', num: true, title: 'menor preço mensal no plano anual', v: (r) => Math.min(...(mod<P>(r, 'precos')?.plans.map((p) => p.yearlyMonthly ?? Infinity) ?? [Infinity])), render: (r) => { const y = Math.min(...(mod<P>(r, 'precos')?.plans.map((p) => p.yearlyMonthly ?? Infinity) ?? [Infinity])); return Number.isFinite(y) ? money(y, mod<P>(r, 'precos')?.currency) : dash; } },
-    { k: 'model', label: 'Modelo', v: (r) => r.ov?.priceModel, render: (r) => (r.ov?.priceModel ? <Badge color={r.ov.priceModel === 'freemium' ? '#16a34a' : undefined}>{r.ov.priceModel}</Badge> : dash) },
-    { k: 'plans', label: 'Planos', num: true, v: (r) => r.ov?.plans, render: (r) => r.ov?.plans ?? dash },
-    { k: 'trial', label: 'Teste grátis', v: (r) => r.ov?.trial ?? undefined, render: (r) => <span className="block max-w-56 truncate" title={r.ov?.trial ?? ''}>{r.ov?.trial ?? '—'}</span> },
-    { k: 'guar', label: 'Fidelidade / garantia', v: (r) => mod<P>(r, 'precos')?.guarantee ?? undefined, render: (r) => <span className="block max-w-48 truncate text-muted-foreground" title={mod<P>(r, 'precos')?.guarantee ?? ''}>{mod<P>(r, 'precos')?.guarantee ?? '—'}</span> },
-  ];
-  return <SortTable fill rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
-}
 
 function Reputacao({ slug, rows }: { slug: string; rows: MarketRow[] }) {
   const cols: Col<MarketRow>[] = [
