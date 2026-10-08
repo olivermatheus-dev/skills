@@ -1,6 +1,6 @@
 # 032 — Kanban v2: criar na coluna, comentários da IA no card e botão Rodar IA
 
-Status: **fase A feita (2026-10-08)** · próximo: o Oliver fazer `/login` no Claude Code do terminal e testar o Rodar IA de verdade (T-0017) · Depende de: 018 (app), 019 (shadcn, Lucide) · Referência: Paperclip AI (issues + comentários dos agentes + heartbeat), mas **só arquivos de texto**, sem banco.
+Status: **fase A feita e testada de ponta a ponta (2026-10-08)** · próximo: fase B (ideias abaixo), quando o Oliver pedir · Depende de: 018 (app), 019 (shadcn, Lucide) · Referência: Paperclip AI (issues + comentários dos agentes + heartbeat), mas **só arquivos de texto**, sem banco.
 
 ## Pedido do Oliver (2026-10-08)
 Revisão visual do quadro; criar tarefa direto numa coluna, estilo Trello (só o título, detalhes no painel lateral); espaço para a IA comentar dentro da tarefa (o que fez, o que revisar) num fluxo simples; botão para rodar o Claude Code nas tarefas aprovadas com os agentes.
@@ -29,6 +29,12 @@ Revisão visual do quadro; criar tarefa direto numa coluna, estilo Trello (só o
 Criar na coluna (T-0017), comentário de agente pela CLI → selo e faixa no painel, Comentar e devolver à IA (arquivo: comentário + `todo`/`ai` + log), Rodar agora (heartbeat de verdade: falhou por falta de login → comentário certo e volta para A fazer), faixa IA trabalhando + log + Parar (lock simulado), popover do Rodar IA, `npm run typecheck`, `node tools/board.mjs kz --check`.
 **Não verificado:** a janela do "No terminal" (o sandbox desta sessão não abre janelas; o `.cmd` foi gerado certo) e uma execução completa de agente (o `claude` do terminal desta máquina está **sem login**).
 
+## Rodada 2 (2026-10-08, pedido do Oliver)
+- **Teste real ok** depois do `/login`: modo terminal (janela executou e comentou às 12:01) e segundo plano (heartbeat → orquestrador → comentário + Revisão em 47 s). T-0017 pode ser arquivada.
+- **Cor por agente:** campo `color` em `.claude/agents/*.md` (mesmo do Claude Code no terminal): estrategista roxo, roteirista azul, designer rosa, editor-de-vídeo vermelho, sound-designer ciano, pesquisador verde, revisor laranja; IA âmbar, Oliver na cor do projeto. App lê por `GET /api/agents` (`Who.tsx`).
+- **Painel compacto:** cabeçalho baixo (`Drawer dense`), propriedades em linhas sem caixa-alta (controles sem borda até passar o mouse), botões `xs`, caixa de comentário que cresce, atividade recolhida.
+- **Heartbeat discreto:** mensagens curtas, uma linha cinza no painel, não marcam o card (`isSystem`).
+- Orquestrador assina comentários como `ai` (no teste assinou como roteirista).
+
 ## Falta
-- **Oliver:** abrir um terminal na pasta do hub, rodar `claude` e fazer `/login` uma vez (o app desktop tem login próprio). Depois: Quadro → T-0017 → Rodar agora; deve aparecer o comentário "Oi, Oliver!" e o card ir para Revisão. Pode arquivar a T-0017 depois.
 - Fase B (ideias): Rodar IA em fila contínua (`--watch`) ligável no app; menção `@agente` no comentário virar delegação; filtro "esperando você"; print colado no comentário; custo da execução no card (`tools/usage.mjs`).
