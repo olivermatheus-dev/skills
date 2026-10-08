@@ -46,8 +46,9 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 024 | [Kit de marca visual e editável no app (tokens, fontes, ícones, estilo, anotações) + prévia ao vivo](tasks/024-kit-de-marca-visual/TASK.md) | 018 | feita (v1: brand.json → brand.css, editor + prévia no app, preset minimalista Apple, Lucide) |
 | 025 | [Ficha de produção da peça: briefing (headline, tema, objetivo, formato), funil de status, custo em tokens, observações](tasks/025-ficha-de-producao/TASK.md) | central de peças (feita) | rascunho (prioridade alta) |
 | 027 | [Galeria de tipos de conteúdo e formatos (framework global, "usar este estilo")](tasks/027-galeria-de-formatos/TASK.md) | 005 | fase A feita; B = 1 exemplo por formato |
-| 028 | [Estúdio de mockups: print ou link → peça vendável (templates, fundos, aparelhos, 3D, animações; skill + editor no app)](tasks/028-estudio-de-mockups/TASK.md) | 024, 018 | fase A feita (motor + skill); aval do Oliver; próxima B/C |
+| 028 | [Estúdio de mockups: print ou link → peça vendável (templates, fundos, aparelhos, 3D, animações; skill + editor no app)](tasks/028-estudio-de-mockups/TASK.md) | 024, 018 | fase A + galeria feitas; **visual reprovado pelo Oliver** → refazer no editor (030) |
 | 029 | [Motor de curadoria e séries automáticas (pesquisas, notícias, recomendações → séries fixas da kz; inventário do produto)](tasks/029-motor-de-curadoria/TASK.md) | 027, 028 | rascunho (análise feita, aval do Oliver) |
+| 030 | [Editor de mockups no app (mini Canva: camadas, texto, fundo/gradiente/pattern, multi-formato, colar/arrastar) + refazer o visual com bom gosto](tasks/030-editor-de-mockups/TASK.md) | 028, 018 | **próxima** (substitui a fase C da 028) |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 

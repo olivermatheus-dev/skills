@@ -90,6 +90,7 @@ Skill `mockup` com modo **"criar template"**: a partir de uma referência (print
 5. **Aparelhos:** molduras genéricas próprias (seguro para uso comercial) ou quer molduras realistas de iPhone/MacBook (precisa de fonte com licença)?
 
 ## Log
+- 2026-10-07: **visual da galeria premium reprovado pelo Oliver** (fundos/gradientes feios, sombra com marca no a3, textos fora da área segura). Fase C vira a tarefa **030** (editor no app com camadas). Motor, molduras calibradas, encaixe e analisador de cortes ficam.
 - 2026-10-07: Oliver liberou todos os fundos premium para a kz (`brand/mockups.json`) e pediu molduras + exemplos no git (uso próprio, vários dispositivos).
 - 2026-10-07: **galeria premium** — 21 aparelhos reais calibrados (Apple + Pixel), sombras/cantos/fundos premium/vidro, 5 templates novos, analisador de cortes, escala 3, galeria HTML com 111 peças. Teste: `mockup-painel-premium` (8 alternativas).
 - 2026-10-07: **fase A** — motor, 6 templates, 4 aparelhos, 8 fundos, alternativas + folha de contato, QA, schema/validate, tipo `mockup` na central, skill `mockup`. 6 alternativas do painel da kz em ~5 s. Aguardando aval do Oliver.

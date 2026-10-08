@@ -31,6 +31,9 @@
 7. Decisões antigas: mínimo de 6 anúncios por teste no ads-meta? teto de 550–600 palavras por `fmt-*`?
 8. **Mockups (028):** abrir a galeria (`library/mockups/galeria/index.html`) e `contents/2026-10-07-mockup-painel-premium` (8 alternativas novas): fundos premium **liberados** (2026-10-07); falta escolher as favoritas. Antigo: `contents/2026-10-07-mockup-painel` (app → Conteúdos → Mockup): 2 das 6 servem sem retocar? Liberar fundos além do liso? Respostas às 5 perguntas do `TASK.md` (defaults aplicados). Prints do produto em 2–3× ajudam muito.
 
+## Próxima sessão (combinado com o Oliver em 2026-10-07)
+**030 — Editor de mockups no app** (`roadmap/tasks/030-editor-de-mockups/TASK.md`): o Oliver achou a galeria da 028 feia (gradientes duros, sombra com marca no a3, textos fora da área segura) e quer um mini Canva: camadas, texto, fundo com gradiente/pattern, vários formatos de uma vez, colar/arrastar, exportar. Reaproveita molduras calibradas, encaixe, analisador de cortes e render 3×. Começar por referências visuais (olhar as imagens) + decisão da stack do canvas.
+
 ## Próximas tarefas (escolha 1 por sessão)
 | tarefa | o quê | depende de |
 |---|---|---|
