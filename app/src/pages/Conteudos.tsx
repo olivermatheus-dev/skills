@@ -7,6 +7,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type PieceFull, type PieceInfo, type Review, type ReviewComment } from '../api';
 import { Badge, Button, Card, Empty, ErrorBox, Input, Select, cx, fmtDate } from '../components/kit';
+import { FillBox } from '../components/fill';
 import { toast } from '../components/toast';
 import { qk, usePiece, usePieces } from '../queries';
 import NewPiece from '../components/pieces/NewPiece';
@@ -105,7 +106,7 @@ function PieceList() {
         pieces.length ? <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque o tipo." />
           : <Empty title="Nenhum conteúdo ainda" hint="Cole um roteiro pronto para começar, ou peça à IA uma pauta." action={<Button onClick={() => setCreating(true)}>Novo conteúdo</Button>} />
       ) : view === 'grade' ? (
-        <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
+        <FillBox><div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
           {shown.map((p) => (
             <div key={p.path} role="button" tabIndex={0} data-piece={p.path} onClick={() => openPiece(p)} onKeyDown={(e) => e.key === 'Enter' && openPiece(p)}
               className="group text-left bg-card border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-primary/40 transition cursor-pointer">
@@ -132,9 +133,9 @@ function PieceList() {
               </div>
             </div>
           ))}
-        </div>
+        </div></FillBox>
       ) : (
-        <div className="divide-y divide-border border border-border rounded-xl bg-card">
+        <FillBox><div className="divide-y divide-border border border-border rounded-xl bg-card">
           {shown.map((p) => (
             <div key={p.path} role="button" tabIndex={0} data-piece={p.path} onClick={() => openPiece(p)} onKeyDown={(e) => e.key === 'Enter' && openPiece(p)}
               className="group w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-muted/60 cursor-pointer first:rounded-t-xl last:rounded-b-xl">
@@ -154,7 +155,7 @@ function PieceList() {
               <button title="Abrir a pasta no Explorer" onClick={(e) => { e.stopPropagation(); desktop(slug, p.path, 'reveal'); }} className="text-xs text-muted-foreground hover:text-foreground">pasta ↗</button>
             </div>
           ))}
-        </div>
+        </div></FillBox>
       )}
       <NewPiece slug={slug} open={creating} initialFormat={newFormat} onClose={closeNew} onCreated={(pth) => { setCreating(false); setSp({ peca: pth }); }} />
     </div>

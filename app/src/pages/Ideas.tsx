@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Idea, type Task } from '../api';
 import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/kit';
+import { FillBox } from '../components/fill';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
@@ -122,7 +123,7 @@ export default function Ideas() {
       {data && data.length > 0 && !filtered.length && <Empty title="Nenhuma ideia com esses filtros" />}
 
       {data && filtered.length > 0 && view === 'quadro' && (
-        <div className="overflow-x-auto pb-2">
+        <FillBox className="overflow-x-auto">
           <div className="grid gap-3 min-w-[1050px]" style={{ gridTemplateColumns: `repeat(${cols.length}, minmax(0, 1fr))` }}>
             {cols.map((s) => {
               const items = filtered.filter((i) => i.data.status === s.id);
@@ -136,11 +137,11 @@ export default function Ideas() {
               );
             })}
           </div>
-        </div>
+        </FillBox>
       )}
 
       {data && filtered.length > 0 && view === 'lista' && (
-        <div className="bg-card border border-border rounded-xl overflow-hidden">
+        <FillBox><div className="bg-card border border-border rounded-xl overflow-hidden">
           {cols.map((s) => {
             const items = filtered.filter((i) => i.data.status === s.id);
             if (!items.length) return null;
@@ -162,7 +163,7 @@ export default function Ideas() {
               </div>
             );
           })}
-        </div>
+        </div></FillBox>
       )}
 
       {open && <IdeaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} compName={compName} onClose={() => setOpen(null)} onSaved={setOpen} />}

@@ -8,6 +8,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type Format, type FormatInfo, type NewFormatInput, type PieceCover } from '../api';
 import { Badge, Button, Card, Drawer, Empty, ErrorBox, Field, Input, Select, Textarea, cx, fmtDate } from '../components/kit';
+import { FillBox } from '../components/fill';
 import { toast } from '../components/toast';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
 import { qk, useFormats, usePieces } from '../queries';
@@ -112,7 +113,7 @@ function Gallery() {
 
       <ErrorBox error={error} />
       {isLoading ? <div className="text-muted-foreground">Carregando…</div> : !shown.length ? <Empty title="Nenhum formato com esses filtros" hint="Limpe a busca ou troque o tipo." /> : (
-        <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(230px,1fr))]">
+        <FillBox><div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(230px,1fr))]">
           {shown.map((x) => {
             const ex = x.exemplos.find((e) => e.cover && !e.teste) ?? x.exemplos.find((e) => e.cover);
             const open = () => setSp({ formato: x.id });
@@ -133,7 +134,7 @@ function Gallery() {
               </div>
             );
           })}
-        </div>
+        </div></FillBox>
       )}
       <NewRef open={adding} onClose={() => setAdding(false)} formats={formats} onDone={(id) => { setAdding(false); setSp({ formato: id }); }} slug={slug} />
     </div>
