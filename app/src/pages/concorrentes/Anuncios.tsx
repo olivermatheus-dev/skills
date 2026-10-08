@@ -10,6 +10,7 @@ import { AreaPage, FillBox, StatStrip, useMarket } from '../../components/compet
 import { Avatar, Chips, Img, PlatformIcon, Spinner, timeAgo } from '../../components/competitors/lib';
 import { toast } from '../../components/toast';
 import { Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../../components/kit';
+import { Layers, Megaphone, Sparkles, Timer, Users } from 'lucide-react';
 
 type Row = Ad & { compId: string; compName: string; isNew: boolean; days?: number };
 type Sort = 'tempo' | 'recentes' | 'variacoes';
@@ -79,11 +80,11 @@ export default function Anuncios() {
       )}
       {collected.length > 0 && <>
         <StatStrip items={[
-          { label: 'Anúncios ativos', value: fmtNum(rows.length) },
-          { label: 'Concorrentes anunciando', value: `${advertising.length}/${collected.length}`, title: advertising.map((p) => names.get(p.id)?.c.data.name).join(', ') },
-          { label: 'Novos desde a coleta anterior', value: String(rows.filter((r) => r.isNew).length) },
-          { label: `No ar há ${PROVEN_DAYS}+ dias`, value: String(proven), sub: 'sinal de que dá resultado' },
-          ...(fmtCount ? [{ label: 'Formato mais usado', value: MEDIA[fmtCount[0] as keyof typeof MEDIA] ?? fmtCount[0], sub: `${fmtCount[1]} anúncio(s)` }] : []),
+          { icon: Megaphone, label: 'Anúncios ativos', value: fmtNum(rows.length) },
+          { icon: Users, label: 'Concorrentes anunciando', value: `${advertising.length}/${collected.length}`, title: advertising.map((p) => names.get(p.id)?.c.data.name).join(', ') },
+          { icon: Sparkles, label: 'Novos desde a coleta anterior', value: String(rows.filter((r) => r.isNew).length) },
+          { icon: Timer, label: `No ar há ${PROVEN_DAYS}+ dias`, value: String(proven), sub: 'sinal de que dá resultado' },
+          ...(fmtCount ? [{ icon: Layers, label: 'Formato mais usado', value: MEDIA[fmtCount[0] as keyof typeof MEDIA] ?? fmtCount[0], sub: `${fmtCount[1]} anúncio(s)` }] : []),
         ]} />
 
         {/* por concorrente: contagem e puxar só ele */}

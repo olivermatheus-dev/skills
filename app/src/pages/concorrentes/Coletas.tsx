@@ -10,6 +10,7 @@ import { Avatar, Chips, PlatformIcon, Spinner, fmtDateTime, platformLabel, timeA
 import { toast } from '../../components/toast';
 import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
 import WeeklyPanel from '../../components/competitors/WeeklyPanel';
+import { CircleCheck, CircleDashed, ListTodo, TriangleAlert, Users } from 'lucide-react';
 
 type R = ProfileSummary & { m: MarketRow };
 const STALE_DAYS = 7;
@@ -79,11 +80,11 @@ export default function Coletas() {
       <ErrorBox error={m.error} />
       <WeeklyPanel slug={slug} />
       <div className="mb-4"><StatStrip items={[
-        { label: 'Perfis', value: String(all.length) },
-        { label: 'Em dia', value: `${nOk}/${all.length}`, sub: `coleta com menos de ${STALE_DAYS} dias` },
-        { label: 'Com erro', value: String(all.filter((p) => stateOf(p) === 'erro').length) },
-        { label: 'Nunca puxados', value: String(all.filter((p) => stateOf(p) === 'nunca').length) },
-        { label: 'Fila da IA', value: String(queue.length), title: queue.map((r) => `${r.c.data.name}: ${r.ov!.request!.modules.join(', ')}`).join('\n') || undefined, sub: queue.length ? 'diga ao Claude: roda a fila de concorrentes' : undefined },
+        { icon: Users, label: 'Perfis', value: String(all.length) },
+        { icon: CircleCheck, label: 'Em dia', value: `${nOk}/${all.length}`, sub: `coleta com menos de ${STALE_DAYS} dias` },
+        { icon: TriangleAlert, label: 'Com erro', value: String(all.filter((p) => stateOf(p) === 'erro').length) },
+        { icon: CircleDashed, label: 'Nunca puxados', value: String(all.filter((p) => stateOf(p) === 'nunca').length) },
+        { icon: ListTodo, label: 'Fila da IA', value: String(queue.length), title: queue.map((r) => `${r.c.data.name}: ${r.ov!.request!.modules.join(', ')}`).join('\n') || undefined, sub: queue.length ? 'diga ao Claude: roda a fila de concorrentes' : undefined },
       ]} /></div>
       {pulling && <div className="mb-3 h-1 bg-muted rounded-full overflow-hidden"><div className="h-full bg-primary transition-all" style={{ width: `${((pulling.i - 0.5) / pulling.n) * 100}%` }} /></div>}
       <div className="mb-3 flex items-center"><Chips value={filter} onChange={setFilter} options={[

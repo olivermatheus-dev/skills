@@ -18,6 +18,7 @@ import PieceSheet from '../components/pieces/PieceSheet';
 import { KIND_LABEL, STATUS_LABEL } from '../components/pieces/shared';
 import { Star, Thumb, desktop, useSaveMeta } from '../components/pieces/library';
 import { TagChip, useProjectTags } from '../components/notes/TagsInput';
+import { AppContent } from '../components/AppContent';
 
 export default function Conteudos() {
   const [sp] = useSearchParams();
@@ -67,7 +68,7 @@ function PieceList() {
   const openPiece = (p: PieceInfo) => setSp({ peca: p.path });
 
   return (
-    <div className="p-8 max-w-[1500px]">
+    <AppContent>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Conteúdos</h1>
@@ -159,7 +160,7 @@ function PieceList() {
         </div></FillBox>
       )}
       <NewPiece slug={slug} open={creating} initialFormat={newFormat} onClose={closeNew} onCreated={(pth) => { setCreating(false); setSp({ peca: pth }); }} />
-    </div>
+    </AppContent>
   );
 }
 
@@ -196,7 +197,7 @@ function PieceDetail({ path }: { path: string }) {
   const TAB_LABEL: Record<string, string> = { ficha: 'Ficha', roteiro: 'Roteiro', video: 'Edição do vídeo', slides: piece?.kind === 'carrossel' ? 'Slides' : 'Imagens' };
 
   return (
-    <div className="p-8 max-w-[1500px]">
+    <AppContent>
       <div className="mb-1 text-sm"><Link to="?" className="text-muted-foreground hover:text-foreground">← Conteúdos</Link></div>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div className="min-w-0 flex-1">
@@ -247,6 +248,6 @@ function PieceDetail({ path }: { path: string }) {
           {tab === 'slides' && <SlideReview slug={slug} path={path} images={piece.images} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />}
         </>
       )}
-    </div>
+    </AppContent>
   );
 }

@@ -11,6 +11,7 @@ import { Avatar, Img, PlatformIcon, TYPE_LABEL, buildRows, fmtRatio, groupSnapsh
 import { titleOf } from '../../components/competitors/Items';
 import { Empty, ErrorBox, fmtNum } from '../../components/kit';
 import { GapThemes, ProductVsMarket, coverageKpi, useMatrixStats } from './PanoramaBrechas';
+import { Gift, Grid3x3, Tag, Timer, Trophy, Users, Wallet } from 'lucide-react';
 
 export default function Panorama() {
   const { slug = '' } = useParams();
@@ -33,14 +34,14 @@ export default function Panorama() {
   return (
     <AreaPage sub={`${comp.length} concorrente(s) monitorado(s)`}>
       <StatStrip items={[
-        ...(ref && refPrice != null ? [{ label: `${ref.c.data.name} (você)`, value: money(refPrice), title: (ref.res.precos?.data as { notes?: string } | undefined)?.notes ?? undefined,
+        ...(ref && refPrice != null ? [{ icon: Tag, label: `${ref.c.data.name} (você)`, value: money(refPrice), title: (ref.res.precos?.data as { notes?: string } | undefined)?.notes ?? undefined,
           sub: medPrice ? `${refPrice >= medPrice ? '+' : ''}${Math.round((refPrice / medPrice - 1) * 100)}% vs mediana · ${cheaper}/${prices.length} cobram menos` : undefined }] : []),
-        { label: 'Preço de entrada (mediana)', value: prices.length ? money(median(prices)) : '—', sub: prices.length > 1 ? `${money(Math.min(...prices))} a ${money(Math.max(...prices))}` : undefined },
-        ...(cov ? [cov] : []),
-        { label: 'Com plano grátis', value: `${free.length}/${comp.length}`, title: free.map((r) => r.c.data.name).join(', ') },
-        { label: 'Com teste grátis', value: `${trial.length}/${comp.length}`, title: trial.map((r) => `${r.c.data.name}: ${r.ov?.trial}`).join('\n') },
-        { label: 'Audiência somada', value: fmtNum(audience || undefined), sub: 'seguidores nas redes puxadas' },
-        { label: 'Maior audiência', value: biggest?.followers ? biggest.c.data.name : '—', sub: biggest?.followers ? fmtNum(biggest.followers) : undefined },
+        { icon: Wallet, label: 'Preço de entrada (mediana)', value: prices.length ? money(median(prices)) : '—', sub: prices.length > 1 ? `${money(Math.min(...prices))} a ${money(Math.max(...prices))}` : undefined },
+        ...(cov ? [{ ...cov, icon: Grid3x3 }] : []),
+        { icon: Gift, label: 'Com plano grátis', value: `${free.length}/${comp.length}`, title: free.map((r) => r.c.data.name).join(', ') },
+        { icon: Timer, label: 'Com teste grátis', value: `${trial.length}/${comp.length}`, title: trial.map((r) => `${r.c.data.name}: ${r.ov?.trial}`).join('\n') },
+        { icon: Users, label: 'Audiência somada', value: fmtNum(audience || undefined), sub: 'seguidores nas redes puxadas' },
+        { icon: Trophy, label: 'Maior audiência', value: biggest?.followers ? biggest.c.data.name : '—', sub: biggest?.followers ? fmtNum(biggest.followers) : undefined },
       ]} />
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] items-start">

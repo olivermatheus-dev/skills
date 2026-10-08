@@ -7,6 +7,7 @@ import { AreaPage, Delta, SortTable, StatStrip, useMarket, type Col } from '../.
 import { metricsOf, type ProfileMetrics } from '../../components/competitors/metrics';
 import { Avatar, Chips, PlatformIcon, TYPE_LABEL, fmtPct, keyFor, median, platformLabel, timeAgo } from '../../components/competitors/lib';
 import { Empty, ErrorBox, fmtNum } from '../../components/kit';
+import { Heart, TrendingUp, Trophy, UserPlus, Users } from 'lucide-react';
 
 type R = ProfileMetrics & { compId: string; compName: string; avatar: { local?: string; remote?: string | null } };
 const dash = <span className="text-muted-foreground">—</span>;
@@ -57,11 +58,11 @@ export default function Redes() {
         <Chips value={plat} onChange={setPlatform} options={[...platforms.map((p) => ({ value: p, label: <span className="inline-flex items-center gap-1"><PlatformIcon platform={p} size={12} />{platformLabel(p)}</span>, count: all.filter((r) => r.platform === p).length })), { value: '', label: 'Todas' }]} />
       </div>
       {rows.length > 0 && <div className="mb-4"><StatStrip items={[
-        { label: 'Perfis', value: String(rows.length) },
-        { label: 'Seguidores (mediana)', value: fmtNum(median(fs)) },
-        { label: 'Maior', value: top?.followers ? top.compName : '—', sub: top?.followers ? fmtNum(top.followers) : undefined },
-        { label: 'Mais cresceu', value: grower ? grower.compName : '—', sub: grower ? `+${fmtNum(grower.delta)}` : 'precisa de 2 coletas' },
-        { label: 'Eng./seguidor (mediana)', value: fmtPct(median(rows.map((r) => r.engFollowers).filter((v): v is number => v != null))) },
+        { icon: Users, label: 'Perfis', value: String(rows.length) },
+        { icon: UserPlus, label: 'Seguidores (mediana)', value: fmtNum(median(fs)) },
+        { icon: Trophy, label: 'Maior', value: top?.followers ? top.compName : '—', sub: top?.followers ? fmtNum(top.followers) : undefined },
+        { icon: TrendingUp, label: 'Mais cresceu', value: grower ? grower.compName : '—', sub: grower ? `+${fmtNum(grower.delta)}` : 'precisa de 2 coletas' },
+        { icon: Heart, label: 'Eng./seguidor (mediana)', value: fmtPct(median(rows.map((r) => r.engFollowers).filter((v): v is number => v != null))) },
       ]} /></div>}
       <ErrorBox error={feed.error ?? m.error} />
       {feed.isLoading && <div className="h-64 rounded-xl bg-card border border-border animate-pulse" />}

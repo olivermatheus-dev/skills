@@ -11,6 +11,7 @@ import { Chips, PlatformIcon, STATUS_LABEL, TYPE_LABEL, buildRows, fmtPct, group
 import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
 import { useMakeIdea } from '../../components/competitors/useMakeIdea';
 import { Empty, ErrorBox, Input, Select, cx, fmtNum } from '../../components/kit';
+import { Clapperboard, Eye, Flame, Heart, Trophy } from 'lucide-react';
 
 type FeedRow = Row & { compId: string; compName: string };
 type Sort = 'outlier' | 'views' | 'engagement' | 'recent';
@@ -86,11 +87,11 @@ export default function Conteudos() {
       </div>
 
       {shown.length > 0 && <div className="mb-4"><StatStrip items={[
-        { label: 'Conteúdos', value: fmtNum(shown.length), sub: `de ${[...new Set(shown.map((r) => r.compId))].length} concorrente(s)` },
-        { label: 'Mediana de views', value: fmtNum(median(shown.map((r) => r.item.metrics.views).filter((v): v is number => !!v)) && Math.round(median(shown.map((r) => r.item.metrics.views).filter((v): v is number => !!v))!)) },
-        { label: 'Engajamento (mediana)', value: fmtPct(median(shown.map((r) => r.engagement).filter((v): v is number => v != null))), title: '(curtidas + comentários + envios) ÷ views' },
-        { label: 'Fora da curva ≥3×', value: String(shown.filter((r) => (r.outlier ?? 0) >= 3).length) },
-        ...(bestType && byType.length > 1 ? [{ label: 'Formato que mais rende', value: TYPE_LABEL[bestType.t] ?? bestType.t, sub: `mediana ${fmtNum(bestType.med)} views` }] : []),
+        { icon: Clapperboard, label: 'Conteúdos', value: fmtNum(shown.length), sub: `de ${[...new Set(shown.map((r) => r.compId))].length} concorrente(s)` },
+        { icon: Eye, label: 'Mediana de views', value: fmtNum(median(shown.map((r) => r.item.metrics.views).filter((v): v is number => !!v)) && Math.round(median(shown.map((r) => r.item.metrics.views).filter((v): v is number => !!v))!)) },
+        { icon: Heart, label: 'Engajamento (mediana)', value: fmtPct(median(shown.map((r) => r.engagement).filter((v): v is number => v != null))), title: '(curtidas + comentários + envios) ÷ views' },
+        { icon: Flame, label: 'Fora da curva ≥3×', value: String(shown.filter((r) => (r.outlier ?? 0) >= 3).length), title: 'fora da curva = views ÷ mediana do próprio perfil na última coleta (sem views: curtidas)' },
+        ...(bestType && byType.length > 1 ? [{ icon: Trophy, label: 'Formato que mais rende', value: TYPE_LABEL[bestType.t] ?? bestType.t, sub: `mediana ${fmtNum(bestType.med)} views` }] : []),
       ]} /></div>}
 
       <ErrorBox error={feed.error ?? idea.error} />
@@ -106,7 +107,6 @@ export default function Conteudos() {
           </div>
         ))}
       </div></FillBox>}
-      {shown.length > 0 && <div className="text-xs text-muted-foreground mt-3">fora da curva = views ÷ mediana do próprio perfil na última coleta (sem views: curtidas)</div>}
 
       <ItemDrawer r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
         profileLabel={openRow?.compName ?? ''} tagSuggestions={tagSuggestions} ideaBusy={!!openRow && idea.busy === openRow.mk}

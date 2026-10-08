@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type Project } from '../api';
 import { qk, runOptimistic, useProjects } from '../queries';
 import { Button, Card, ErrorBox, Input, PageHeader } from '../components/kit';
+import { AppContent } from '../components/AppContent';
 
 export default function Projects() {
   const qc = useQueryClient();
@@ -26,7 +27,7 @@ export default function Projects() {
     }, undefined).catch(() => {});
   };
   return (
-    <div className="p-8 max-w-4xl">
+    <AppContent narrow>
       <PageHeader title="Projetos" subtitle="Cada empresa ou projeto tem marca, contexto, personas, concorrentes, quadro e anotações." />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {data.map((p) => (
@@ -47,6 +48,6 @@ export default function Projects() {
         </div>
         <ErrorBox error={error} />
       </Card>
-    </div>
+    </AppContent>
   );
 }

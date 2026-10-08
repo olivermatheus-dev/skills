@@ -16,6 +16,7 @@ import { TaskDrawer } from '../components/board/TaskDrawer';
 import { RunAiButton, RunningBar } from '../components/board/RunAi';
 import { Segmented } from '../components/board/Segmented';
 import { BOARD_OPTS, COLUMNS, VIEWS, inView, isReady, taskThread, type BoardName, type Status, type TaskDoc, type View } from '../components/board/taskUtils';
+import { AppContent } from '../components/AppContent';
 
 const PRIO_RANK = { alta: 0, media: 1, baixa: 2 } as const;
 const sortTasks = (a: TaskDoc, b: TaskDoc) =>
@@ -97,7 +98,7 @@ export default function Board() {
 
   const waiting = tasks.filter((t) => t.data.status === 'review' || taskThread(t.body).pending).length;
   return (
-    <div className="p-8 flex flex-col min-h-full">
+    <AppContent wide className="flex flex-col min-h-full">
       <PageHeader
         title="Quadro"
         subtitle={q.isSuccess ? `${tasks.length} tarefas · ${waiting} esperando você` : 'Tarefas do projeto (companies/<slug>/board)'}
@@ -179,7 +180,7 @@ export default function Board() {
       )}
 
       <TaskDrawer slug={slug} task={openTask} allTasks={tasks} onClose={() => setParam('t', null)} onMove={moveTo} actions={actions} runner={runner} />
-    </div>
+    </AppContent>
   );
 }
 

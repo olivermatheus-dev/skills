@@ -31,3 +31,4 @@ O problema: as brechas ocupam a parte mais nobre da tela com a lista inteira; o 
 
 ## Log
 - 2026-10-08 — registrada pelo orquestrador a partir do áudio do Oliver (nada alterado no código).
+- 2026-10-08 — fase A2 (agente de UI): `StatStrip` novo (grade de colunas iguais, ícone Lucide por KPI nas 5 telas que o usam, reparte 4+3 em vez de 6+1) e `AreaHeader` com ícones nas abas, "Adicionar" com `Plus` e subtítulo em chip. Aba Brechas fica para a fase B.

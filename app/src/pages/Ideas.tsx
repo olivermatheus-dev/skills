@@ -12,6 +12,7 @@ import { tidyMd } from '../components/notes/tidy';
 import { nextSeqId, qk, realId, runOptimistic, trackCreate, upsertDoc, useCompetitors, useIdeas } from '../queries';
 import { slugify } from '../../../core/platform';
 import { FICHA_TEMPLATE, FORMATS, OBJECTIVES, STATUSES, TONES, label, type Objective, type Status, type Tone } from '../components/ideas/meta';
+import { AppContent } from '../components/AppContent';
 
 type View = 'quadro' | 'lista';
 const VIEW_KEY = 'hub:ideas:view';
@@ -76,7 +77,7 @@ export default function Ideas() {
   );
 
   return (
-    <div className="p-8">
+    <AppContent>
       <PageHeader
         title="Ideias"
         subtitle="Banco de pautas: toda ideia vira ficha de pauta antes de virar tarefa."
@@ -167,7 +168,7 @@ export default function Ideas() {
       )}
 
       {open && <IdeaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} compName={compName} onClose={() => setOpen(null)} onSaved={setOpen} />}
-    </div>
+    </AppContent>
   );
 }
 

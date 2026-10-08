@@ -5,11 +5,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, type CapturaRuntime, type MockupCatalogo, type MockupExport } from '../api';
-import { Button, Empty, ErrorBox, cx, fmtDate } from '../components/kit';
+import { Button, Empty, ErrorBox, Select, cx, fmtDate } from '../components/kit';
 import { toast } from '../components/toast';
 import { ArrowDown, ArrowUp, Copy, Eye, EyeOff, Image as ImageIcon, ImagePlus, Lock, LockOpen, Shapes, Smartphone, Trash2, Type, type LucideIcon } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import Palco, { type Init } from '../components/mockups/Palco';
+import { AppContent } from '../components/AppContent';
 import { PainelCamada, PainelFundo, Secao } from '../components/mockups/Propriedades';
 import { FMT_NOME, FORMATOS, comGeo, geo, novaCamada, props, semAjuste, type Camada, type Doc, type Fmt, type Geo } from '../components/mockups/doc';
 
@@ -52,7 +53,7 @@ function Lista() {
     return () => removeEventListener('paste', colar);
   });
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-6"
+    <AppContent wide className="space-y-6"
       onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); const f = [...e.dataTransfer.files].find((x) => x.type.startsWith('image/')); if (f) void novoPrint(f); }}>
       <div className="flex items-end justify-between gap-4">
         <div>
@@ -91,7 +92,7 @@ function Lista() {
         )}
       </section>
       {ocupado && <div className="fixed inset-0 bg-white/60 flex items-center justify-center text-sm">preparando…</div>}
-    </div>
+    </AppContent>
   );
 }
 
@@ -264,9 +265,9 @@ function Editor({ path }: { path: string }) {
         <div className="flex-1" />
         <button className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30" disabled={!hist.current.antes.length} onClick={desfazer} title="Desfazer (Ctrl+Z)">↶</button>
         <button className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-30" disabled={!hist.current.depois.length} onClick={refazer} title="Refazer (Ctrl+Y)">↷</button>
-        <select value={zoom ?? ''} onChange={(e) => setZoom(e.target.value ? Number(e.target.value) : null)} className="text-xs border border-border rounded px-1 py-0.5 bg-card" title="zoom (confira detalhes em 100%)">
+        <Select value={zoom ?? ''} onChange={(e) => setZoom(e.target.value ? Number(e.target.value) : null)} className="h-7 text-xs px-2" title="zoom (confira detalhes em 100%)">
           <option value="">Ajustar</option><option value="0.5">50%</option><option value="1">100%</option><option value="2">200%</option>
-        </select>
+        </Select>
         <label className="text-xs text-muted-foreground flex items-center gap-1 cursor-pointer"><input type="checkbox" checked={guias} onChange={(e) => setGuias(e.target.checked)} className="accent-primary" />área segura</label>
         <span className={cx('text-xs w-16 text-right', salvo === 'erro' ? 'text-destructive' : 'text-muted-foreground')}>{{ salvo: 'salvo', salvando: 'salvando…', pendente: '…', erro: 'erro ao salvar' }[salvo]}</span>
         <Button disabled={exportando} onClick={exportar}>{exportando ? 'Exportando…' : `Exportar ${doc.formatos.length > 1 ? `${doc.formatos.length} formatos` : doc.formatos[0]} (3×)`}</Button>

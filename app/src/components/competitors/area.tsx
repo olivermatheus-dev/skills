@@ -1,56 +1,60 @@
 // Área Concorrentes: cabeçalho com as abas (cada uma com rota própria) e os dados de mercado juntos por concorrente
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
-import { useMemo, useState, type ReactNode } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, type LucideIcon } from 'lucide-react';
 import { NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
 import { Button, cx } from '../kit';
 import AddLinksModal from './AddLinksModal';
 import { useFillHeight } from '../fill';
+import { CONTENT_MAX } from '../AppContent';
 
 export { FillBox, useFillHeight } from '../fill';
 
 export const AREA_TABS = [
-  { path: '', label: 'Panorama' },
-  { path: 'lista', label: 'Concorrentes' },
-  { path: 'comparar', label: 'Comparar' },
-  { path: 'conteudos', label: 'Conteúdos' },
-  { path: 'redes', label: 'Redes' },
-  { path: 'anuncios', label: 'Anúncios' },
-  { path: 'coletas', label: 'Coletas' },
+  { path: '', label: 'Panorama', icon: LayoutDashboard },
+  { path: 'lista', label: 'Concorrentes', icon: List },
+  { path: 'comparar', label: 'Comparar', icon: Columns3 },
+  { path: 'conteudos', label: 'Conteúdos', icon: Clapperboard },
+  { path: 'redes', label: 'Redes', icon: Share2 },
+  { path: 'anuncios', label: 'Anúncios', icon: Megaphone },
+  { path: 'coletas', label: 'Coletas', icon: RefreshCw },
 ] as const;
 
-/** cabeçalho comum das abas da área; `actions` entra à direita ao lado de "+ Adicionar" */
+/** cabeçalho comum das abas da área; `actions` entra à direita ao lado de "+ Adicionar". A faixa vai de ponta a ponta, o conteúdo fica centralizado */
 export function AreaHeader({ actions, sub }: { actions?: ReactNode; sub?: ReactNode }) {
   const { slug = '' } = useParams();
   const list = useCompetitors(slug);
   const [adding, setAdding] = useState(false);
   return (
-    <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border px-8 pt-5">
-      <div className="flex items-center gap-3">
-        <h1 className="text-xl font-semibold tracking-tight">Concorrentes</h1>
-        {sub && <span className="text-sm text-muted-foreground">{sub}</span>}
-        <div className="ml-auto flex items-center gap-2">
-          {actions}
-          <Button onClick={() => setAdding(true)}>+ Adicionar</Button>
+    <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <div className={cx('mx-auto w-full px-8 pt-5', CONTENT_MAX)}>
+        <div className="flex items-center gap-3">
+          <h1 className="text-xl font-semibold tracking-tight">Concorrentes</h1>
+          {sub && <span className="text-xs text-muted-foreground bg-muted rounded-full px-2.5 py-0.5">{sub}</span>}
+          <div className="ml-auto flex items-center gap-2">
+            {actions}
+            <Button onClick={() => setAdding(true)} className="inline-flex items-center gap-1.5"><Plus className="size-4" />Adicionar</Button>
+          </div>
         </div>
+        <nav className="mt-3 flex gap-0.5 -mb-px overflow-x-auto">
+          {AREA_TABS.map((t) => (
+            <NavLink key={t.path} end to={`/p/${slug}/concorrentes${t.path ? `/${t.path}` : ''}`}
+              className={({ isActive }) => cx('inline-flex items-center gap-1.5 px-3 py-2 text-sm border-b-2 whitespace-nowrap', isActive ? 'border-primary font-medium text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground')}>
+              <t.icon className="size-4" strokeWidth={1.8} />{t.label}
+            </NavLink>
+          ))}
+        </nav>
       </div>
-      <nav className="mt-3 flex gap-0.5 -mb-px overflow-x-auto">
-        {AREA_TABS.map((t) => (
-          <NavLink key={t.path} end to={`/p/${slug}/concorrentes${t.path ? `/${t.path}` : ''}`}
-            className={({ isActive }) => cx('px-3 py-2 text-sm border-b-2 whitespace-nowrap', isActive ? 'border-primary font-medium text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground')}>
-            {t.label}
-          </NavLink>
-        ))}
-      </nav>
       <AddLinksModal slug={slug} open={adding} onClose={() => setAdding(false)} competitors={list.data ?? []} />
     </header>
   );
 }
 
-/** casca de uma aba: cabeçalho + conteúdo com o mesmo respiro */
+/** casca de uma aba: cabeçalho + conteúdo centralizado com o mesmo respiro (o fim da página é descontado pelo useFillHeight) */
 export function AreaPage({ children, actions, sub }: { children: ReactNode; actions?: ReactNode; sub?: ReactNode }) {
-  return <div className="max-w-[1400px] pb-16"><AreaHeader actions={actions} sub={sub} /><div className="px-8 pt-5">{children}</div></div>;
+  return <div><AreaHeader actions={actions} sub={sub} /><div className={cx('mx-auto w-full px-8 pt-5 pb-8', CONTENT_MAX)}>{children}</div></div>;
 }
 
 export interface MarketRow {
@@ -156,14 +160,36 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fil
   );
 }
 
-/** faixa de números no topo das abas (substitui os cards grandes) */
-export function StatStrip({ items }: { items: { label: string; value: ReactNode; sub?: ReactNode; title?: string }[] }) {
+/**
+ * faixa de KPIs: grade de colunas iguais (mín. 160 px) com ícone, rótulo, valor e comparação.
+ * Quando não cabe numa linha, reparte por igual (7 itens viram 4+3, nunca 6+1): nenhum card fica sozinho embaixo.
+ */
+export interface Stat { label: string; value: ReactNode; sub?: ReactNode; title?: string; icon?: LucideIcon }
+export function StatStrip({ items }: { items: Stat[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [cols, setCols] = useState(items.length);
+  const n = items.length;
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fit = () => {
+      const fits = Math.max(1, Math.floor((el.clientWidth + 8) / (160 + 8)));
+      setCols(n <= fits ? n : Math.ceil(n / Math.ceil(n / fits)));
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [n]);
   return (
-    <div className="flex flex-wrap items-stretch bg-card border border-border rounded-lg divide-x divide-border">
+    <div ref={ref} className="grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.max(1, cols)}, minmax(0, 1fr))` }}>
       {items.map((s) => (
-        <div key={s.label} className="px-4 py-2 min-w-0" title={s.title}>
-          <div className="text-[11px] text-muted-foreground">{s.label}</div>
-          <div className="flex items-baseline gap-1.5"><span className="text-lg font-semibold tabular-nums">{s.value}</span>{s.sub && <span className="text-xs text-muted-foreground truncate">{s.sub}</span>}</div>
+        <div key={s.label} className="bg-card border border-border rounded-lg px-3.5 py-2.5 min-w-0" title={s.title}>
+          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground min-w-0">
+            {s.icon && <s.icon className="size-3.5 shrink-0" strokeWidth={1.8} />}<span className="truncate">{s.label}</span>
+          </div>
+          <div className="mt-1 text-lg font-semibold tabular-nums leading-tight truncate">{s.value}</div>
+          <div className="text-xs text-muted-foreground truncate min-h-4">{s.sub}</div>
         </div>
       ))}
     </div>

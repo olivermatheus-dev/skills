@@ -16,6 +16,7 @@ import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
 import { ItemCard, ItemDrawer } from '../components/competitors/Items';
+import { AppContent } from '../components/AppContent';
 import {
   Avatar, Chips, KINDS, KIND_COLOR, PlatformIcon, SERIES, STATUS_LABEL, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
   fmtPct, fmtRatio, groupSnapshots, keyFor, median, platformLabel, timeAgo, type Row,
@@ -175,8 +176,8 @@ function Detalhe() {
   // marcar (★, status, tags, nota) é otimista: muda na hora; erro → volta e avisa
   const mark = { mutate: ({ mk, patch }: { mk: string; patch: Partial<ItemMark> }) => { actions.mark(id, mk, patch).catch(() => {}); } };
 
-  if (q.isLoading) return <div className="p-8"><div className="h-48 rounded-xl bg-card border border-border animate-pulse" /><div className="mt-4 h-24 rounded-xl bg-card border border-border animate-pulse" /></div>;
-  if (q.error || !d) return <div className="p-8"><Link to={`/p/${slug}/concorrentes`} className="text-sm text-muted-foreground">← Concorrentes</Link><ErrorBox error={q.error ?? new Error('não encontrado')} /></div>;
+  if (q.isLoading) return <AppContent><div className="h-48 rounded-xl bg-card border border-border animate-pulse" /><div className="mt-4 h-24 rounded-xl bg-card border border-border animate-pulse" /></AppContent>;
+  if (q.error || !d) return <AppContent><Link to={`/p/${slug}/concorrentes`} className="text-sm text-muted-foreground">← Concorrentes</Link><ErrorBox error={q.error ?? new Error('não encontrado')} /></AppContent>;
 
   const c = d.data;
   const sel = profiles.find((p) => p.key === tab);
@@ -252,9 +253,9 @@ function Detalhe() {
   const allTagSuggestions = [...new Set([...(projectTags.data?.tags ?? []).map((t) => t.id), ...Object.values(d.marks).flatMap((m) => m.tags)])];
 
   return (
-    <div className="max-w-[1400px] pb-16">
+    <div className="pb-8">
       {/* cabeçalho compacto, fixo ao rolar */}
-      <header ref={headRef} className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border px-8 pt-4">
+      <header ref={headRef} className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border"><div className="mx-auto w-full max-w-[1440px] px-8 pt-4">
         <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
           <Link to={`/p/${slug}/concorrentes`} className="hover:text-foreground">Concorrentes</Link><ChevronRight className="size-3" /><span className="text-foreground">{c.name}</span>
         </nav>
@@ -309,9 +310,9 @@ function Detalhe() {
             </button>
           ))}
         </div>
-      </header>
+      </div></header>
 
-      <div className="px-8">
+      <div className="mx-auto w-full max-w-[1440px] px-8">
         {view !== 'redes' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => setRunOpen(true)} />}
         {view === 'redes' && <>
 

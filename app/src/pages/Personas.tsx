@@ -11,6 +11,7 @@ import { tidyMd } from '../components/notes/tidy';
 import { qk, realId, removeDoc, runOptimistic, trackCreate, upsertDoc, usePersonas } from '../queries';
 import { toast } from '../components/toast';
 import { slugify } from '../../../core/platform';
+import { AppContent } from '../components/AppContent';
 
 type Role = Persona['role'];
 const ROLES: { id: Role; label: string; cls: string }[] = [
@@ -46,7 +47,7 @@ export default function Personas() {
   }, [data]);
 
   return (
-    <div className="p-8 max-w-6xl">
+    <AppContent>
       <PageHeader
         title="Personas"
         subtitle="Para quem a gente fala (e para quem não). Base de roteiros, anúncios e páginas."
@@ -86,7 +87,7 @@ export default function Personas() {
         ))}
       </div>
       {open && <PersonaDrawer key={`${open.data.id || 'nova'}${open.error ? ':erro' : ''}`} slug={slug} initial={open} onClose={() => setOpen(null)} onFailed={setOpen} />}
-    </div>
+    </AppContent>
   );
 }
 

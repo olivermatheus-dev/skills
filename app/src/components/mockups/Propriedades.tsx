@@ -2,7 +2,7 @@
 // (aparelho, imagem, texto, forma) ou, sem seleção, o fundo da peça.
 import type { ReactNode } from 'react';
 import type { CapturaRuntime, MockupCatalogo } from '../../api';
-import { cx } from '../kit';
+import { Select, cx } from '../kit';
 import { fundoCss, geo, temAjuste, type Camada, type Doc, type Fmt, type Fundo, type Geo } from './doc';
 
 // ---------- controles ----------
@@ -23,13 +23,13 @@ function Deslizar({ rotulo, valor, min, max, passo = 0.01, onChange, fmt = (v: n
     </Linha>
   );
 }
-const sel = 'flex-1 min-w-0 px-1.5 py-1 rounded border border-border bg-card text-xs outline-none focus:border-primary';
+const sel = 'flex-1 min-w-0 h-7 px-1.5 text-xs';
 function Escolha<T extends string>({ rotulo, valor, opcoes, onChange }: { rotulo: string; valor: T; opcoes: (T | [T, string])[]; onChange: (v: T) => void }) {
   return (
     <Linha rotulo={rotulo}>
-      <select className={sel} value={valor} onChange={(e) => onChange(e.target.value as T)}>
+      <Select className={sel} value={valor} onChange={(e) => onChange(e.target.value as T)}>
         {opcoes.map((o) => { const [v, n] = Array.isArray(o) ? o : [o, o]; return <option key={v} value={v}>{n}</option>; })}
-      </select>
+      </Select>
     </Linha>
   );
 }
@@ -47,10 +47,10 @@ function Cor({ rotulo, valor, onChange, tokens = [] }: { rotulo: string; valor?:
       <input type="color" value={hex(valor)} onChange={(e) => onChange(e.target.value)} className="w-7 h-7 rounded border border-border bg-transparent p-0.5 cursor-pointer" />
       <input value={valor ?? ''} onChange={(e) => onChange(e.target.value)} className={sel} />
       {tokens.length > 0 && (
-        <select className="w-6 px-0 py-1 rounded border border-border bg-card text-xs" value="" onChange={(e) => e.target.value && onChange(e.target.value)} title="cor da marca">
+        <Select className="w-8 h-7 px-0 justify-center text-xs [&>svg:last-child]:hidden" value="" onChange={(e) => e.target.value && onChange(e.target.value)} title="cor da marca">
           <option value="">◐</option>
           {tokens.map(([v, n]) => <option key={v} value={v}>{n}</option>)}
-        </select>
+        </Select>
       )}
     </Linha>
   );
@@ -87,14 +87,14 @@ export function PainelCamada({ c, doc, fmt, cat, capturas, onProps, onGeo, onSem
           {c.tipo === 'aparelho' && (
             <>
               <Linha rotulo="Modelo">
-                <select className={sel} value={c.modelo ?? ''} onChange={(e) => onProps({ modelo: e.target.value, cor: undefined, orientacao: undefined })}>
+                <Select className={sel} value={c.modelo ?? ''} onChange={(e) => onProps({ modelo: e.target.value, cor: undefined, orientacao: undefined })}>
                   <option value="">Automático (pelo print)</option>
                   <optgroup label="Desenhos">{cat.desenhos.map((d) => <option key={d.id} value={d.id}>{d.nome}</option>)}</optgroup>
                   {(['celular', 'dobravel', 'tablet', 'notebook', 'desktop', 'monitor'] as const).map((t) => {
                     const l = cat.aparelhos.filter((a) => a.tipo === t);
                     return l.length ? <optgroup key={t} label={t}>{l.map((a) => <option key={a.id} value={a.id}>{a.nome}</option>)}</optgroup> : null;
                   })}
-                </select>
+                </Select>
               </Linha>
               {ap && ap.cores.length > 1 && <Escolha rotulo="Cor" valor={c.cor ?? ap.padrao.cor} opcoes={ap.cores.map((k) => [k.id, k.nome] as [string, string])} onChange={(v) => onProps({ cor: v })} />}
               {ap && ap.orientacoes.length > 1 && <Escolha rotulo="Orientação" valor={c.orientacao ?? ''} opcoes={[['', 'pelo print'], ...ap.orientacoes.map((o) => [o, o] as [string, string])]} onChange={(v) => onProps({ orientacao: v || undefined })} />}

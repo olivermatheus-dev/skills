@@ -82,10 +82,10 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
 
         <div className="mt-auto pt-2 border-t border-border flex items-center gap-1.5">
           <Star on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="text-base" />
-          <select value={status} onChange={(e) => onMark({ status: e.target.value as ItemMark['status'] })} aria-label="Status"
-            className="text-xs rounded-md border border-border bg-card px-1.5 py-1 outline-none focus:border-primary" style={{ color: STATUS_COLOR[status] }}>
+          <Select value={status} onChange={(e) => onMark({ status: e.target.value as ItemMark['status'] })} aria-label="Status"
+            className="h-7 text-xs px-1.5" style={{ color: STATUS_COLOR[status] }}>
             {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-          </select>
+          </Select>
           {m?.ideaId ? (
             <Link to={`/p/${slug}/ideias`} className="text-xs font-medium text-success bg-green-50 px-1.5 py-1 rounded-md" title="Já virou ideia">✦ {m.ideaId}</Link>
           ) : (

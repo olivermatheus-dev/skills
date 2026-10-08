@@ -5,7 +5,7 @@ import { cx } from './kit';
 
 /**
  * Altura para uma caixa ocupar o resto da área que rola (o <main>): mede onde ela começa e quanto conteúdo vem
- * depois dela até o fim da página (avisos, legendas, o respiro do fim da página), então nada embaixo fica escondido
+ * depois dela até o fim da página (avisos, legendas, o respiro do fim da página é descontado e sobra ~12 px), então nada embaixo fica escondido
  * e a página não rola. Recalcula a cada render e quando a página muda de tamanho.
  */
 export function useFillHeight() {
@@ -17,12 +17,22 @@ export function useFillHeight() {
       const el = ref.current;
       const scroller = el?.closest('main');
       if (!el || !scroller) return;
+      el.style.marginBottom = '0px'; // mede sem a compensação do respiro (abaixo)
       let page: HTMLElement = el;
       while (page.parentElement && page.parentElement !== scroller) page = page.parentElement;
       const box = el.getBoundingClientRect(), sc = scroller.getBoundingClientRect();
       const top = box.top - sc.top + scroller.scrollTop;
-      const below = page.getBoundingClientRect().bottom - box.bottom;
-      setH(Math.max(320, Math.floor(scroller.clientHeight - top - below)));
+      // o respiro do fim da página (padding de baixo de quem envolve a caixa) não conta: a caixa vai até ~12 px do fim
+      let pad = 0;
+      for (let p: HTMLElement | null = el.parentElement; p && p !== scroller; p = p.parentElement) {
+        const cs = getComputedStyle(p);
+        pad += parseFloat(cs.paddingBottom) + parseFloat(cs.borderBottomWidth);
+        if (p === page) break;
+      }
+      const below = Math.max(0, page.getBoundingClientRect().bottom - box.bottom - pad);
+      // a caixa invade o respiro do fim da página (margem negativa): termina a ~12 px do fim e a página não rola
+      el.style.marginBottom = `${-Math.max(0, pad - 12)}px`;
+      setH(Math.max(320, Math.floor(scroller.clientHeight - top - below - 12)));
     };
     // o que carrega depois (painéis acima ou avisos abaixo) muda a página sem renderizar a tabela de novo;
     // na 1ª montagem (rota carregando no Suspense) a caixa ainda pode estar fora do <main>: tenta no quadro seguinte

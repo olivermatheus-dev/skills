@@ -6,6 +6,7 @@ import { useCompetitors, useIdeas, useNotes, useProject, useTasks } from '../que
 import { Card, ErrorBox, cx, fmtDate } from '../components/kit';
 import { TaskCard } from '../components/board/TaskCard';
 import { COLUMNS, isLate, type TaskDoc } from '../components/board/taskUtils';
+import { AppContent } from '../components/AppContent';
 
 const IDEA_STATUS: { id: Idea['status']; label: string; color: string }[] = [
   { id: 'nova', label: 'Novas', color: '#60a5fa' },
@@ -34,7 +35,7 @@ export default function Dashboard() {
   const p = project.data;
 
   return (
-    <div className="p-8 max-w-6xl">
+    <AppContent>
       <div className="mb-6">
         <div className="flex items-center gap-2">
           {p?.color && <span className="w-3 h-3 rounded-full" style={{ background: p.color }} />}
@@ -115,7 +116,7 @@ export default function Dashboard() {
           <Link key={path} to={to(path)} className="px-3 py-1.5 rounded-md border border-border bg-card hover:border-primary hover:text-primary-ink transition">{label} →</Link>
         ))}
       </div>
-    </div>
+    </AppContent>
   );
 }
 

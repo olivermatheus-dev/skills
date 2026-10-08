@@ -99,6 +99,18 @@ export interface Row {
   item: Item;
   outlier?: number;
   outlierBasis: 'views' | 'likes';
+  /** fora da curva contra o mercado (preenchido por `withMarketOutlier`): métrica ÷ mediana de todos os concorrentes na mesma rede e formato */
+  outlierMercado?: number;
+  outlierMercadoBasis?: 'views' | 'likes';
+  /** tamanho da amostra (itens com a métrica) usada na mediana do mercado */
+  mercadoAmostra?: number;
+  /** 'formato' = rede + formato; 'rede' = amostra do formato < MERCADO_MIN_AMOSTRA, caiu para a rede inteira */
+  mercadoEscopo?: 'formato' | 'rede';
+  /** alcance relativo: views ÷ seguidores do perfil na mesma coleta (sem views: curtidas ÷ seguidores, mesma base do `outlier`); sem seguidores fica undefined */
+  porSeguidor?: number;
+  porSeguidorBasis?: 'views' | 'likes';
+  /** `porSeguidor` ÷ mediana de `porSeguidor` do mercado (mesmo escopo/amostra de `outlierMercado`) */
+  porSeguidorMercado?: number;
   engagement?: number;
   viewsDelta?: number;
   prevAt?: string;
@@ -121,10 +133,13 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
       const useViews = v != null && !!mv;
       const outlier = useViews ? v! / mv! : l != null && ml ? l / ml : undefined;
       const inter = (item.metrics.likes ?? 0) + (item.metrics.comments ?? 0) + (item.metrics.shares ?? 0);
+      const fol = g.latest.data.profile.followers;
+      const base = useViews ? v : l;
+      const porSeguidor = fol && base != null ? base / fol : undefined;
       const prev = prevById.get(item.id);
       const mk = `${platform}:${item.id}`;
       rows.push({
-        mk, profileKey: g.key, platform, item, outlier, outlierBasis: useViews ? 'views' : 'likes',
+        mk, profileKey: g.key, platform, item, outlier, outlierBasis: useViews ? 'views' : 'likes', porSeguidor, porSeguidorBasis: useViews ? 'views' : 'likes',
         engagement: v && (item.metrics.likes != null || item.metrics.comments != null) ? inter / v : undefined,
         viewsDelta: prev?.metrics.views != null && v != null ? v - prev.metrics.views : undefined,
         prevAt: prev ? g.prev!.data.collectedAt : undefined,
@@ -134,6 +149,39 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
     }
   }
   return rows;
+}
+
+/** amostra mínima do formato (rede + type) para valer como mercado; abaixo disso usa a rede inteira */
+export const MERCADO_MIN_AMOSTRA = 10;
+
+/**
+ * Segunda medida de fora da curva: contra o mercado. Recebe as linhas de TODOS os concorrentes (já só da última coleta de cada
+ * perfil, como `buildRows`). Mediana por rede + formato (`item.type`); se o formato tiver < 10 itens, usa a rede inteira.
+ * A base (views ou curtidas) de cada linha é a mesma do `outlier`; a mediana só conta itens com a métrica > 0.
+ */
+export function withMarketOutlier<T extends Row>(rows: T[]): T[] {
+  type Pool = { views: number[]; likes: number[]; pfViews: number[]; pfLikes: number[] };
+  const byNet = new Map<string, Pool>(), byFmt = new Map<string, Pool>();
+  const pool = (m: Map<string, Pool>, k: string) => { let p = m.get(k); if (!p) m.set(k, p = { views: [], likes: [], pfViews: [], pfLikes: [] }); return p; };
+  for (const r of rows) {
+    const { views, likes } = r.item.metrics;
+    for (const p of [pool(byNet, r.platform), pool(byFmt, `${r.platform}|${r.item.type}`)]) {
+      if (views) p.views.push(views);
+      if (likes) p.likes.push(likes);
+      if (r.porSeguidor) (r.porSeguidorBasis === 'views' ? p.pfViews : p.pfLikes).push(r.porSeguidor);
+    }
+  }
+  const med = new Map<Pool, { views?: number; likes?: number; pfViews?: number; pfLikes?: number }>();
+  const medOf = (p: Pool, b: 'views' | 'likes' | 'pfViews' | 'pfLikes') => { let c = med.get(p); if (!c) med.set(p, c = {}); return (c[b] ??= median(p[b])); };
+  return rows.map((r) => {
+    const basis = r.outlierBasis, v = r.item.metrics[basis];
+    const f = byFmt.get(`${r.platform}|${r.item.type}`)!;
+    const escopo: 'formato' | 'rede' = f[basis].length >= MERCADO_MIN_AMOSTRA ? 'formato' : 'rede';
+    const p = escopo === 'formato' ? f : byNet.get(r.platform)!;
+    const m = medOf(p, basis);
+    const pb = r.porSeguidorBasis === 'views' ? 'pfViews' : 'pfLikes', pm = medOf(p, pb);
+    return { ...r, porSeguidorMercado: r.porSeguidor != null && pm ? r.porSeguidor / pm : undefined, outlierMercado: v != null && m ? v / m : undefined, outlierMercadoBasis: basis, mercadoAmostra: p[basis].length, mercadoEscopo: escopo };
+  });
 }
 
 // ---------- imagens ----------

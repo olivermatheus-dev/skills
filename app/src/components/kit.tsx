@@ -1,6 +1,8 @@
 // Componentes base compartilhados por todas as telas. Mantenha simples e consistente.
-import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from 'react';
-import { useEffect } from 'react';
+import type { ButtonHTMLAttributes, ChangeEvent, InputHTMLAttributes, ReactElement, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { cn } from '../lib/utils';
+import { Children, Fragment, isValidElement, useEffect } from 'react';
+import { Select as SelectRoot, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
 import { ApiError } from '../api';
 
 const cx = (...c: (string | false | undefined | null)[]) => c.filter(Boolean).join(' ');
@@ -19,8 +21,70 @@ export const Input = ({ className, ...p }: InputHTMLAttributes<HTMLInputElement>
   <input {...p} className={cx('px-3 py-1.5 rounded-md border border-border bg-card text-sm outline-none focus:border-primary', className)} />;
 export const Textarea = ({ className, ...p }: TextareaHTMLAttributes<HTMLTextAreaElement>) =>
   <textarea {...p} className={cx('px-3 py-2 rounded-md border border-border bg-card text-sm outline-none focus:border-primary w-full', className)} />;
-export const Select = ({ className, ...p }: SelectHTMLAttributes<HTMLSelectElement>) =>
-  <select {...p} className={cx('px-2 py-1.5 rounded-md border border-border bg-card text-sm outline-none focus:border-primary', className)} />;
+// Select do app (radix por baixo). `SelectField` recebe `options` com ícone e contador; `Select` é a forma curta com
+// <option> filhos (mesma API do <select> nativo: value, onChange com e.target.value), para quem só precisa de uma lista.
+export interface SelectOption { value: string; label: ReactNode; icon?: ReactNode; count?: number; disabled?: boolean; group?: string }
+const VAZIO = '__vazio'; // radix não aceita item com valor ''
+export function SelectField({ value, onChange, options, size = 'default', placeholder, icon, className, disabled, 'aria-label': ariaLabel, title, style }: {
+  value: string; onChange?: (v: string) => void; options: SelectOption[]; size?: 'sm' | 'default'; placeholder?: ReactNode;
+  /** ícone fixo do gatilho quando nenhuma opção tem o seu (ex.: CalendarDays no Período) */
+  icon?: ReactNode; className?: string; disabled?: boolean; 'aria-label'?: string; title?: string; style?: React.CSSProperties;
+}) {
+  const cur = options.find((o) => o.value === value);
+  const item = (o: SelectOption) => (
+    <SelectItem key={o.value} value={o.value || VAZIO} disabled={o.disabled}>
+      {o.icon && <span className="grid place-items-center shrink-0 [&_svg]:size-4">{o.icon}</span>}
+      <span className="truncate">{o.label}</span>
+      {o.count != null && <span className="ml-auto pl-3 text-xs tabular-nums text-muted-foreground">{o.count}</span>}
+    </SelectItem>
+  );
+  const groups: { name?: string; items: SelectOption[] }[] = [];
+  for (const o of options) {
+    const g = groups[groups.length - 1];
+    if (g && g.name === o.group) g.items.push(o); else groups.push({ name: o.group, items: [o] });
+  }
+  return (
+    <SelectRoot value={value || VAZIO} onValueChange={(v) => onChange?.(v === VAZIO ? '' : v)} disabled={disabled}>
+      <SelectTrigger size={size} aria-label={ariaLabel} title={title} style={style}
+        className={cn('bg-card hover:bg-muted/50 border-border shadow-none font-normal focus-visible:ring-0 focus-visible:border-primary', size === 'sm' ? 'h-7 px-2 py-0 text-xs gap-1.5' : 'h-[34px] px-3 py-0', className)}>
+        <SelectValue placeholder={placeholder}>
+          {cur ? (
+            <>
+              {(cur.icon ?? icon) && <span className="grid place-items-center shrink-0 [&_svg]:size-4">{cur.icon ?? icon}</span>}
+              <span className="truncate">{cur.label}</span>
+            </>
+          ) : placeholder}
+        </SelectValue>
+      </SelectTrigger>
+      <SelectContent className="z-[200]">
+        {groups.map((g, i) => g.name
+          ? <SelectGroup key={i}><SelectLabel>{g.name}</SelectLabel>{g.items.map(item)}</SelectGroup>
+          : <Fragment key={i}>{g.items.map(item)}</Fragment>)}
+      </SelectContent>
+    </SelectRoot>
+  );
+}
+
+function optionsOf(children: ReactNode, group?: string): SelectOption[] {
+  const out: SelectOption[] = [];
+  Children.forEach(children, (ch) => {
+    if (!isValidElement(ch)) return;
+    const el = ch as ReactElement<{ value?: string | number; children?: ReactNode; label?: string; disabled?: boolean }>;
+    if (el.type === Fragment) out.push(...optionsOf(el.props.children, group));
+    else if (el.type === 'optgroup') out.push(...optionsOf(el.props.children, el.props.label));
+    else if (el.type === 'option') {
+      const text = Children.toArray(el.props.children).join('');
+      out.push({ value: String(el.props.value ?? text), label: text, disabled: el.props.disabled, group });
+    }
+  });
+  return out;
+}
+
+/** forma curta: <option> filhos, mesma API do <select> nativo (onChange recebe e.target.value) */
+export function Select({ value, onChange, children, className, disabled, title, style, 'aria-label': ariaLabel }: Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> & { 'aria-label'?: string }) {
+  const emit = (v: string) => onChange?.({ target: { value: v }, currentTarget: { value: v } } as unknown as ChangeEvent<HTMLSelectElement>);
+  return <SelectField value={String(value ?? '')} onChange={emit} options={optionsOf(children)} className={className} disabled={disabled} title={title} style={style} aria-label={ariaLabel} />;
+}
 
 export const Card = ({ className, children, ...p }: { className?: string; children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) =>
   <div {...p} className={cx('bg-card border border-border rounded-xl p-4', className)}>{children}</div>;

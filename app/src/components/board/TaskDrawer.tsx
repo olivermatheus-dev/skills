@@ -5,7 +5,7 @@ import { Activity as ActivityIcon, ArrowRight, Check, ChevronDown, ChevronRight,
 import { Button as UiButton } from '@/components/ui/button';
 import type { Task } from '../../api';
 import { MarkdownEditor } from '../Markdown';
-import { Drawer, ErrorBox, cx } from '../kit';
+import { Drawer, ErrorBox, Select, cx } from '../kit';
 import {
   ASSIGNEES, BOARD_OPTS, COLUMNS, PRIORITY_OPTS, STATUS_LABEL, assigneeLabel, checklist, fmtStamp, isAi, isLate, isReady, joinTaskBody,
   normalizeBody, splitTaskBody, taskThread, type BoardName, type Priority, type Status, type TaskComment, type TaskDoc,
@@ -125,31 +125,31 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
 
       <div className="grid grid-cols-2 gap-x-4 mt-2">
         <Prop label="Status">
-          <select aria-label="Status" className={ctl} value={t.status} onChange={(e) => onMove(t.id, e.target.value as Status)}>
+          <Select aria-label="Status" className={ctl} value={t.status} onChange={(e) => onMove(t.id, e.target.value as Status)}>
             {COLUMNS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
-          </select>
+          </Select>
         </Prop>
         <Prop label="Responsável">
           {custom ? (
             <input className={cx(ctl, 'font-mono')} value={f.assignee} onChange={(e) => set('assignee', e.target.value)} placeholder="agent:nome"
               onBlur={() => { if (ASSIGNEES.includes(f.assignee)) setCustom(false); }} />
           ) : (
-            <select className={ctl} value={f.assignee} onChange={(e) => (e.target.value === '__custom' ? (setCustom(true), set('assignee', 'agent:')) : set('assignee', e.target.value))}>
+            <Select className={ctl} value={f.assignee} onChange={(e) => (e.target.value === '__custom' ? (setCustom(true), set('assignee', 'agent:')) : set('assignee', e.target.value))}>
               <option value="oliver">Oliver</option>
               {ASSIGNEES.filter((a) => a !== 'oliver').map((a) => <option key={a} value={a}>{a === 'ai' ? 'IA (orquestrador)' : assigneeLabel(a)}</option>)}
               <option value="__custom">Outro…</option>
-            </select>
+            </Select>
           )}
         </Prop>
         <Prop label="Prioridade">
-          <select className={ctl} value={f.priority} onChange={(e) => set('priority', e.target.value as Priority)}>
+          <Select className={ctl} value={f.priority} onChange={(e) => set('priority', e.target.value as Priority)}>
             {PRIORITY_OPTS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
-          </select>
+          </Select>
         </Prop>
         <Prop label="Quadro">
-          <select className={ctl} value={f.board} onChange={(e) => set('board', e.target.value as BoardName)}>
+          <Select className={ctl} value={f.board} onChange={(e) => set('board', e.target.value as BoardName)}>
             {BOARD_OPTS.map((b) => <option key={b.id} value={b.id}>{b.label}</option>)}
-          </select>
+          </Select>
         </Prop>
         <Prop label="Prazo">
           <input type="date" className={cx(ctl, late && 'text-destructive')} value={f.due} onChange={(e) => set('due', e.target.value)} title={late ? 'Atrasada' : undefined} />

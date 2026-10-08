@@ -13,6 +13,7 @@ import { toast } from '../components/toast';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
 import { qk, useFormats, usePieces } from '../queries';
 import { CONTENT_TYPES, CONTENT_TYPE_LABEL, FORMAT_CHANNELS, FORMAT_RATIOS } from '../../../schema/format';
+import { AppContent } from '../components/AppContent';
 
 const MEDIA_LABEL = { imagem: 'Imagem', video: 'Vídeo' } as const;
 const CHANNEL_LABEL: Record<string, string> = { feed: 'Feed', reels: 'Reels', stories: 'Stories', tiktok: 'TikTok', 'youtube-shorts': 'Shorts', anuncio: 'Anúncio', lp: 'Landing page' };
@@ -79,7 +80,7 @@ function Gallery() {
   const count = (t: string) => formats.filter((x) => x.tipos.includes(t as Format['tipos'][number])).length;
 
   return (
-    <div className="p-8 max-w-[1500px]">
+    <AppContent>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Formatos</h1>
@@ -137,7 +138,7 @@ function Gallery() {
         </div></FillBox>
       )}
       <NewRef open={adding} onClose={() => setAdding(false)} formats={formats} onDone={(id) => { setAdding(false); setSp({ formato: id }); }} slug={slug} />
-    </div>
+    </AppContent>
   );
 }
 
@@ -218,11 +219,11 @@ function FormatDetail({ id }: { id: string }) {
   const mut = useFormatMutation();
   const [addingRef, setAddingRef] = useState(false);
   const [picking, setPicking] = useState<'' | 'marcar' | 'exemplo'>('');
-  if (isLoading) return <div className="p-8 text-muted-foreground">Carregando…</div>;
-  if (!f) return <div className="p-8"><ErrorBox error={error} /><Empty title="Formato não encontrado" action={<Button onClick={() => setSp({})}>Voltar à galeria</Button>} /></div>;
+  if (isLoading) return <AppContent className="text-muted-foreground">Carregando…</AppContent>;
+  if (!f) return <AppContent><ErrorBox error={error} /><Empty title="Formato não encontrado" action={<Button onClick={() => setSp({})}>Voltar à galeria</Button>} /></AppContent>;
 
   return (
-    <div className="p-8 max-w-[1400px]">
+    <AppContent>
       <button className="text-sm text-muted-foreground hover:text-foreground mb-3" onClick={() => setSp({})}>← Formatos</button>
       <div className="flex items-start gap-4 mb-6 flex-wrap">
         <div className="flex-1 min-w-[280px]">
@@ -331,7 +332,7 @@ function FormatDetail({ id }: { id: string }) {
 
       <NewRef open={addingRef} onClose={() => setAddingRef(false)} formats={formats} presetId={f.id} onDone={() => setAddingRef(false)} />
       <PickPiece open={!!picking} mode={picking || 'marcar'} f={f} slug={slug} onClose={() => setPicking('')} />
-    </div>
+    </AppContent>
   );
 }
 

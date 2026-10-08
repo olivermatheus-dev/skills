@@ -7,17 +7,18 @@ import { prefetchPage, prefetchProject, useProjects, whenIdle } from '../queries
 import { preloadMarkdownEditor } from './Markdown';
 import { Select } from './kit';
 import { cn } from '@/lib/utils';
+import { AppContent } from './AppContent';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useCorDoProjeto } from '@/lib/theme';
 
 /** esqueleto leve enquanto o código de uma tela chega (nunca tela em branco) */
 export function PageSkeleton() {
   return (
-    <div className="p-8" aria-busy="true" aria-label="Carregando">
+    <AppContent aria-busy="true" aria-label="Carregando">
       <div className="h-7 w-56 rounded-md bg-muted animate-pulse" />
       <div className="h-4 w-80 rounded-md bg-muted/70 animate-pulse mt-3" />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-8">{[0, 1, 2].map((i) => <div key={i} className="h-40 rounded-xl bg-muted/70 animate-pulse" />)}</div>
-    </div>
+    </AppContent>
   );
 }
 

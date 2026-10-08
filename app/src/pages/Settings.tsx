@@ -12,13 +12,14 @@ import { api, type SecretState } from '../api';
 import { Badge, Button, Card, ErrorBox, Input, PageHeader } from '../components/kit';
 import { toast } from '../components/toast';
 import { qk, useBrandCss, useProject, useSecrets } from '../queries';
+import { AppContent } from '../components/AppContent';
 
 export default function Settings() {
   const { slug = '' } = useParams();
   const { data, isLoading, error } = useSecrets(slug);
   const [showGeneral, setShowGeneral] = useState(false);
   return (
-    <div className="p-8 max-w-4xl">
+    <AppContent narrow>
       <PageHeader title="Configurações" subtitle="Cor do projeto e chaves de API." />
       <CorDoProjeto slug={slug} />
       <h2 className="text-sm font-semibold mb-1">Chaves de API</h2>
@@ -32,7 +33,7 @@ export default function Settings() {
         </button>
         {showGeneral && <div className="space-y-3 mt-3">{data?.map((s) => <SecretRow key={s.key} slug={slug} s={s} scope="geral" />)}</div>}
       </div>
-    </div>
+    </AppContent>
   );
 }
 
