@@ -7,7 +7,9 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 040 | **Fase G (anúncios no painel):** depende da 037 B (classificador) → depende da pergunta 1 da 037 (abaixo). Sem resposta, seguir a recomendação (funil pela temperatura do público) e avisar | aguarda resposta curta |
+| 1 | 037 | **Fase C:** chips de funil/tipo/objetivo/oferta/destino nos anúncios (rota `/ads/classified` pronta), filtros novos, ordenação por tempo no ar e sinal de resultado, status provado/veterano/perdeu, colapsar irmãos | sem custo; em andamento (agente) |
+| 2 | 037 | **Fase D:** marcas do Oliver nos anúncios (`schema/ads-marks.ts`, nota, tags, salvar, override da classificação, coleção Salvos) | destrava a 040 G |
+| 3 | 040 | **Fase G (anúncios no painel):** depende da 037 D; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
