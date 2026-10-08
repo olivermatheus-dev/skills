@@ -5,7 +5,7 @@ import { DndContext, DragOverlay, PointerSensor, useDraggable, useDroppable, use
 import type { Task } from '../api';
 import { useTasks } from '../queries';
 import { useTaskActions } from '../components/board/useTaskActions';
-import { Button, Empty, ErrorBox, Input, PageHeader, cx } from '../components/ui';
+import { Button, Empty, ErrorBox, Input, PageHeader, cx } from '../components/kit';
 import { TaskCard } from '../components/board/TaskCard';
 import { TaskDrawer } from '../components/board/TaskDrawer';
 import { NewTaskForm } from '../components/board/NewTaskForm';
@@ -19,7 +19,7 @@ const sortTasks = (a: TaskDoc, b: TaskDoc) =>
   || a.data.id.localeCompare(b.data.id);
 
 const COL_DOT: Record<Status, string> = {
-  backlog: '#a1a1aa', todo: '#60a5fa', doing: 'var(--color-accent)', review: 'var(--color-warn)', done: 'var(--color-ok)',
+  backlog: '#a1a1aa', todo: '#60a5fa', doing: 'var(--color-primary)', review: 'var(--color-warning)', done: 'var(--color-success)',
 };
 const VIEW_KEY = 'hub:board:view';
 const lsGet = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
@@ -83,7 +83,7 @@ export default function Board() {
         <Segmented label="Quadro" value={board} onChange={(v) => setParam('quadro', v === 'todos' ? null : v)}
           options={[{ id: 'todos' as const, label: 'Todos' }, ...BOARD_OPTS]} />
         <div className="relative ml-auto">
-          <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted text-sm">⌕</span>
+          <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">⌕</span>
           <Input type="search" aria-label="Buscar" placeholder="Buscar tarefa…" value={search} onChange={(e) => setParam('q', e.target.value || null)} className="pl-7 w-64" />
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function Board() {
       {moveError ? <div className="mb-3"><ErrorBox error={moveError} /></div> : null}
 
       {q.isLoading ? (
-        <div className="flex gap-3">{COLUMNS.map((c) => <div key={c.id} className="flex-1 min-w-56 h-64 rounded-xl bg-surface-2/70 animate-pulse" />)}</div>
+        <div className="flex gap-3">{COLUMNS.map((c) => <div key={c.id} className="flex-1 min-w-56 h-64 rounded-xl bg-muted/70 animate-pulse" />)}</div>
       ) : q.isError ? (
         <ErrorBox error={q.error} />
       ) : tasks.length === 0 ? (
@@ -119,7 +119,7 @@ export default function Board() {
                       <TaskCard task={t} blocked={isBlocked(t)} showBoard={board === 'todos'} onOpen={() => setParam('t', t.data.id)} />
                     </DraggableCard>
                   ))}
-                  {items.length === 0 && <div className="text-xs text-muted text-center py-6 border border-dashed border-border rounded-lg">{needle ? 'Nada encontrado' : 'Vazio'}</div>}
+                  {items.length === 0 && <div className="text-xs text-muted-foreground text-center py-6 border border-dashed border-border rounded-lg">{needle ? 'Nada encontrado' : 'Vazio'}</div>}
                 </Column>
               );
             })}
@@ -140,11 +140,11 @@ function Column({ id, label, count, highlight, children }: { id: Status; label: 
   return (
     <section ref={setNodeRef} aria-label={label}
       className={cx('flex-1 min-w-56 max-w-80 rounded-xl p-2 flex flex-col transition-colors border',
-        isOver ? 'bg-accent-soft border-accent/40' : highlight ? 'bg-amber-50/60 border-amber-200/70' : 'bg-surface-2/60 border-transparent')}>
+        isOver ? 'bg-primary-soft border-primary/40' : highlight ? 'bg-amber-50/60 border-amber-200/70' : 'bg-muted/60 border-transparent')}>
       <header className="flex items-center gap-2 px-1.5 pt-1 pb-2.5">
         <span className="w-2 h-2 rounded-full" style={{ background: COL_DOT[id] }} />
         <h2 className="text-sm font-medium">{label}</h2>
-        <span className="text-xs text-muted tabular-nums">{count}</span>
+        <span className="text-xs text-muted-foreground tabular-nums">{count}</span>
       </header>
       <div className="flex flex-col gap-2 flex-1 min-h-24">{children}</div>
     </section>
@@ -157,7 +157,7 @@ function DraggableCard({ task, hidden, children }: { task: TaskDoc; hidden?: boo
     <div ref={setNodeRef} {...listeners} {...attributes} role="button" tabIndex={0}
       aria-label={`${task.data.id} ${task.data.title}`}
       onKeyDown={(e) => { if (e.key === 'Enter') (e.currentTarget.firstElementChild as HTMLElement | null)?.click(); }}
-      className={cx('outline-none rounded-lg focus-visible:ring-2 focus-visible:ring-accent/50 touch-none', hidden && 'opacity-30')}>
+      className={cx('outline-none rounded-lg focus-visible:ring-2 focus-visible:ring-primary/50 touch-none', hidden && 'opacity-30')}>
       {children}
     </div>
   );

@@ -9,7 +9,7 @@ export const STATUSES: { id: Status; label: string; dot: string }[] = [
   { id: 'nova', label: 'Nova', dot: 'bg-sky-500' },
   { id: 'analisada', label: 'Analisada', dot: 'bg-amber-500' },
   { id: 'aprovada', label: 'Aprovada', dot: 'bg-emerald-500' },
-  { id: 'virou-tarefa', label: 'Virou tarefa', dot: 'bg-indigo-500' },
+  { id: 'virou-tarefa', label: 'Virou tarefa', dot: 'bg-primary' },
   { id: 'descartada', label: 'Descartada', dot: 'bg-zinc-400' },
 ];
 

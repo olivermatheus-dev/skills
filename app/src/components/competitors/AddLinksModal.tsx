@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { qk } from '../../queries';
 import { useCompetitorActions } from './useCompetitorActions';
 import { api, type CollectResult, type Competitor, type DetectedLink, type Doc } from '../../api';
-import { Button, ErrorBox, Field, Input, Select, Textarea, cx } from '../ui';
+import { Button, ErrorBox, Field, Input, Select, Textarea, cx } from '../kit';
 import { KINDS, Modal, PlatformIcon, Spinner, keyFor, platformLabel, slugify } from './lib';
 
 type Mode = 'one' | 'each' | 'existing';
@@ -138,7 +138,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
     </>
   ) : (
     <>
-      <label className="mr-auto flex items-center gap-2 text-sm text-muted select-none">
+      <label className="mr-auto flex items-center gap-2 text-sm text-muted-foreground select-none">
         <input type="checkbox" checked={pullNow} onChange={(e) => setPullNow(e.target.checked)} /> Puxar os dados logo em seguida
       </label>
       <Button variant="ghost" onClick={onClose} disabled={!!busy}>Cancelar</Button>
@@ -153,7 +153,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
           {done.map((c) => (
             <div key={c.id} className="border border-border rounded-lg p-3">
               <div className="font-medium">✓ {c.name}</div>
-              {!c.results && <div className="text-sm text-muted">Salvo. Use “Puxar” quando quiser coletar.</div>}
+              {!c.results && <div className="text-sm text-muted-foreground">Salvo. Use “Puxar” quando quiser coletar.</div>}
               {c.results?.map((r) => <ResultLine key={r.key} r={r} />)}
             </div>
           ))}
@@ -171,35 +171,35 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
                 const gi = good.indexOf(l);
                 return (
                   <div key={`${l.raw}-${i}`} className={cx('flex items-center gap-3 px-3 py-2 text-sm', l.problem && 'bg-red-50/60')}>
-                    {l.det ? <PlatformIcon platform={l.det.platform} size={18} /> : <span className="w-[18px] text-center text-danger">!</span>}
+                    {l.det ? <PlatformIcon platform={l.det.platform} size={18} /> : <span className="w-[18px] text-center text-destructive">!</span>}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="font-medium">{l.det ? platformLabel(l.det.platform) : 'Inválido'}</span>
-                        {l.det && <span className="text-muted truncate">{l.det.handle ? (l.det.platform === 'site' ? l.det.handle : `@${l.det.handle}`) : l.det.externalId ?? l.det.url}</span>}
+                        {l.det && <span className="text-muted-foreground truncate">{l.det.handle ? (l.det.platform === 'site' ? l.det.handle : `@${l.det.handle}`) : l.det.externalId ?? l.det.url}</span>}
                       </div>
-                      <div className="text-xs text-muted truncate">{l.det?.url ?? l.raw}</div>
+                      <div className="text-xs text-muted-foreground truncate">{l.det?.url ?? l.raw}</div>
                     </div>
                     {mode === 'each' && gi >= 0 && (
                       <Input className="w-44 !py-1 text-xs" value={names[gi] ?? nameFromHandle(l.det)} onChange={(e) => setNames({ ...names, [gi]: e.target.value })} placeholder="Nome" />
                     )}
                     <div className="text-xs text-right shrink-0 max-w-[40%]">
-                      {l.problem && <span className="text-danger">{l.problem}</span>}
-                      {!l.problem && l.dupOf && <span className="text-warn">já está em {l.dupOf} (ignorado)</span>}
-                      {!l.problem && !l.dupOf && l.warn && <span className="text-warn">{l.warn}</span>}
-                      {!l.problem && !l.dupOf && !l.warn && <span className="text-ok">ok</span>}
+                      {l.problem && <span className="text-destructive">{l.problem}</span>}
+                      {!l.problem && l.dupOf && <span className="text-warning">já está em {l.dupOf} (ignorado)</span>}
+                      {!l.problem && !l.dupOf && l.warn && <span className="text-warning">{l.warn}</span>}
+                      {!l.problem && !l.dupOf && !l.warn && <span className="text-success">ok</span>}
                     </div>
                   </div>
                 );
               })}
-              {detecting && <div className="px-3 py-1.5 text-xs text-muted"><Spinner /> detectando…</div>}
+              {detecting && <div className="px-3 py-1.5 text-xs text-muted-foreground"><Spinner /> detectando…</div>}
             </div>
           )}
 
-          <div className="flex gap-1 p-0.5 bg-surface-2 rounded-lg mb-4 w-fit">
+          <div className="flex gap-1 p-0.5 bg-muted rounded-lg mb-4 w-fit">
             {([['one', 'Um concorrente com todos os links'], ['each', 'Um concorrente por link'], ['existing', 'Juntar a um existente']] as [Mode, string][])
               .filter(([m]) => m !== 'existing' || competitors.length)
               .map(([m, label]) => (
-                <button key={m} type="button" onClick={() => setMode(m)} className={cx('px-3 py-1.5 rounded-md text-xs font-medium', mode === m ? 'bg-surface shadow-sm' : 'text-muted hover:text-text')}>{label}</button>
+                <button key={m} type="button" onClick={() => setMode(m)} className={cx('px-3 py-1.5 rounded-md text-xs font-medium', mode === m ? 'bg-card shadow-sm' : 'text-muted-foreground hover:text-foreground')}>{label}</button>
               ))}
           </div>
 
@@ -214,7 +214,7 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
             <div className="grid grid-cols-[1fr_180px] gap-3">
               {mode === 'one' ? (
                 <Field label="Nome"><Input className="w-full" value={name} onChange={(e) => { setName(e.target.value); setNameTouched(true); }} placeholder="Nome do concorrente ou criador" /></Field>
-              ) : <div className="text-xs text-muted self-center">O nome de cada um vem do @ (edite na lista acima).</div>}
+              ) : <div className="text-xs text-muted-foreground self-center">O nome de cada um vem do @ (edite na lista acima).</div>}
               <Field label="Tipo">
                 <Select className="w-full" value={kind} onChange={(e) => setKind(e.target.value as Competitor['kind'])}>
                   {Object.entries(KINDS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
@@ -235,15 +235,15 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
 export function ResultLine({ r }: { r: CollectResult }) {
   return (
     <div className="flex items-start gap-2 text-sm py-1">
-      <span className={r.ok ? 'text-ok' : 'text-danger'}>{r.ok ? '✓' : '✗'}</span>
+      <span className={r.ok ? 'text-success' : 'text-destructive'}>{r.ok ? '✓' : '✗'}</span>
       {r.platform !== '-' && <PlatformIcon platform={r.platform} size={16} className="mt-0.5" />}
       <div className="min-w-0">
         <div>
           <span className="font-medium">{r.key !== '-' ? r.key.replace(/^[a-z]+-/, '') : 'coleta'}</span>
-          {r.ok && <span className="text-muted"> · {r.items} itens{r.followers != null ? ` · ${r.followers.toLocaleString('pt-BR')} seguidores` : ''} · via {r.source}</span>}
+          {r.ok && <span className="text-muted-foreground"> · {r.items} itens{r.followers != null ? ` · ${r.followers.toLocaleString('pt-BR')} seguidores` : ''} · via {r.source}</span>}
         </div>
-        {r.errors.map((e) => <div key={e} className={cx('text-xs', r.ok ? 'text-warn' : 'text-danger')}>{e}</div>)}
-        {r.warnings.map((w) => <div key={w} className="text-xs text-muted">{w}</div>)}
+        {r.errors.map((e) => <div key={e} className={cx('text-xs', r.ok ? 'text-warning' : 'text-destructive')}>{e}</div>)}
+        {r.warnings.map((w) => <div key={w} className="text-xs text-muted-foreground">{w}</div>)}
       </div>
     </div>
   );

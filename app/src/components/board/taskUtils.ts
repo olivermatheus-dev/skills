@@ -23,8 +23,8 @@ export const BOARD_OPTS: { id: BoardName; label: string }[] = [
 export const BOARD_LABEL = Object.fromEntries(BOARD_OPTS.map((b) => [b.id, b.label])) as Record<BoardName, string>;
 
 export const PRIORITY_OPTS: { id: Priority; label: string; color: string }[] = [
-  { id: 'alta', label: 'Alta', color: 'var(--color-danger)' },
-  { id: 'media', label: 'Média', color: 'var(--color-warn)' },
+  { id: 'alta', label: 'Alta', color: 'var(--color-destructive)' },
+  { id: 'media', label: 'Média', color: 'var(--color-warning)' },
   { id: 'baixa', label: 'Baixa', color: '#a1a1aa' },
 ];
 export const PRIORITY_META = Object.fromEntries(PRIORITY_OPTS.map((p) => [p.id, p])) as Record<Priority, (typeof PRIORITY_OPTS)[number]>;

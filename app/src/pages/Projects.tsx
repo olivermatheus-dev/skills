@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Project } from '../api';
 import { qk, runOptimistic, useProjects } from '../queries';
-import { Button, Card, ErrorBox, Input, PageHeader } from '../components/ui';
+import { Button, Card, ErrorBox, Input, PageHeader } from '../components/kit';
 
 export default function Projects() {
   const qc = useQueryClient();
@@ -31,9 +31,9 @@ export default function Projects() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {data.map((p) => (
           <Link key={p.slug} to={`/p/${p.slug}`}>
-            <Card className="hover:border-accent transition">
+            <Card className="hover:border-primary transition">
               <div className="font-semibold">{p.name}</div>
-              <div className="text-sm text-muted">{p.segment || p.description || p.slug}</div>
+              <div className="text-sm text-muted-foreground">{p.segment || p.description || p.slug}</div>
             </Card>
           </Link>
         ))}

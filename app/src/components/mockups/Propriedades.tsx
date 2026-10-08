@@ -2,28 +2,28 @@
 // (aparelho, imagem, texto, forma) ou, sem seleção, o fundo da peça.
 import type { ReactNode } from 'react';
 import type { CapturaRuntime, MockupCatalogo } from '../../api';
-import { cx } from '../ui';
+import { cx } from '../kit';
 import { fundoCss, geo, temAjuste, type Camada, type Doc, type Fmt, type Fundo, type Geo } from './doc';
 
 // ---------- controles ----------
 export const Secao = ({ titulo, children, acao }: { titulo: string; children: ReactNode; acao?: ReactNode }) => (
   <section className="border-b border-border px-4 py-3 space-y-2.5">
-    <div className="flex items-center justify-between"><h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted">{titulo}</h3>{acao}</div>
+    <div className="flex items-center justify-between"><h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{titulo}</h3>{acao}</div>
     {children}
   </section>
 );
 const Linha = ({ rotulo, children }: { rotulo: string; children: ReactNode }) => (
-  <label className="flex items-center gap-2 text-xs"><span className="w-20 shrink-0 text-muted">{rotulo}</span><div className="flex-1 min-w-0 flex items-center gap-1.5">{children}</div></label>
+  <label className="flex items-center gap-2 text-xs"><span className="w-20 shrink-0 text-muted-foreground">{rotulo}</span><div className="flex-1 min-w-0 flex items-center gap-1.5">{children}</div></label>
 );
 function Deslizar({ rotulo, valor, min, max, passo = 0.01, onChange, fmt = (v: number) => String(+v.toFixed(2)) }: { rotulo: string; valor: number; min: number; max: number; passo?: number; onChange: (v: number) => void; fmt?: (v: number) => string }) {
   return (
     <Linha rotulo={rotulo}>
-      <input type="range" min={min} max={max} step={passo} value={valor} onChange={(e) => onChange(Number(e.target.value))} className="flex-1 min-w-0 accent-accent" />
-      <span className="w-10 text-right tabular-nums text-muted">{fmt(valor)}</span>
+      <input type="range" min={min} max={max} step={passo} value={valor} onChange={(e) => onChange(Number(e.target.value))} className="flex-1 min-w-0 accent-primary" />
+      <span className="w-10 text-right tabular-nums text-muted-foreground">{fmt(valor)}</span>
     </Linha>
   );
 }
-const sel = 'flex-1 min-w-0 px-1.5 py-1 rounded border border-border bg-surface text-xs outline-none focus:border-accent';
+const sel = 'flex-1 min-w-0 px-1.5 py-1 rounded border border-border bg-card text-xs outline-none focus:border-primary';
 function Escolha<T extends string>({ rotulo, valor, opcoes, onChange }: { rotulo: string; valor: T; opcoes: (T | [T, string])[]; onChange: (v: T) => void }) {
   return (
     <Linha rotulo={rotulo}>
@@ -36,7 +36,7 @@ function Escolha<T extends string>({ rotulo, valor, opcoes, onChange }: { rotulo
 function Segmentos<T extends string>({ valor, opcoes, onChange }: { valor: T; opcoes: [T, string][]; onChange: (v: T) => void }) {
   return (
     <div className={cx('rounded-md border border-border overflow-hidden text-xs', opcoes.length > 4 ? 'grid grid-cols-3' : 'flex')}>
-      {opcoes.map(([v, n]) => <button key={v} type="button" onClick={() => onChange(v)} className={cx('flex-1 py-1', valor === v ? 'bg-accent-soft text-accent font-medium' : 'hover:bg-surface-2')}>{n}</button>)}
+      {opcoes.map(([v, n]) => <button key={v} type="button" onClick={() => onChange(v)} className={cx('flex-1 py-1', valor === v ? 'bg-primary-soft text-primary-ink font-medium' : 'hover:bg-muted')}>{n}</button>)}
     </div>
   );
 }
@@ -47,7 +47,7 @@ function Cor({ rotulo, valor, onChange, tokens = [] }: { rotulo: string; valor?:
       <input type="color" value={hex(valor)} onChange={(e) => onChange(e.target.value)} className="w-7 h-7 rounded border border-border bg-transparent p-0.5 cursor-pointer" />
       <input value={valor ?? ''} onChange={(e) => onChange(e.target.value)} className={sel} />
       {tokens.length > 0 && (
-        <select className="w-6 px-0 py-1 rounded border border-border bg-surface text-xs" value="" onChange={(e) => e.target.value && onChange(e.target.value)} title="cor da marca">
+        <select className="w-6 px-0 py-1 rounded border border-border bg-card text-xs" value="" onChange={(e) => e.target.value && onChange(e.target.value)} title="cor da marca">
           <option value="">◐</option>
           {tokens.map(([v, n]) => <option key={v} value={v}>{n}</option>)}
         </select>
@@ -56,7 +56,7 @@ function Cor({ rotulo, valor, onChange, tokens = [] }: { rotulo: string; valor?:
   );
 }
 const Chave = ({ rotulo, valor, onChange }: { rotulo: string; valor: boolean; onChange: (v: boolean) => void }) => (
-  <label className="flex items-center gap-2 text-xs cursor-pointer"><input type="checkbox" checked={valor} onChange={(e) => onChange(e.target.checked)} className="accent-accent" />{rotulo}</label>
+  <label className="flex items-center gap-2 text-xs cursor-pointer"><input type="checkbox" checked={valor} onChange={(e) => onChange(e.target.checked)} className="accent-primary" />{rotulo}</label>
 );
 const TOKENS: [string, string][] = [['--bg', 'fundo da marca'], ['--surface', 'superfície'], ['--surface-2', 'superfície 2'], ['--primary', 'cor principal'], ['--accent', 'destaque'], ['--text', 'texto'], ['--ink', 'tinta']];
 
@@ -73,12 +73,12 @@ export function PainelCamada({ c, doc, fmt, cat, capturas, onProps, onGeo, onSem
   const capOpcoes: [string, string][] = capturas.map((k) => [k.ref, k.nome.replace(/^\d{4}-\d{2}-\d{2}-/, '')]);
   return (
     <>
-      <Secao titulo="Camada" acao={ajustado ? <button className="text-[11px] text-accent hover:underline" onClick={onSemAjuste} title="apaga o ajuste fino deste formato">voltar ao padrão</button> : undefined}>
+      <Secao titulo="Camada" acao={ajustado ? <button className="text-[11px] text-primary-ink hover:underline" onClick={onSemAjuste} title="apaga o ajuste fino deste formato">voltar ao padrão</button> : undefined}>
         <Linha rotulo="Nome"><input className={sel} value={c.nome ?? ''} onChange={(e) => onProps({ nome: e.target.value })} /></Linha>
         <Deslizar rotulo="Opacidade" valor={c.opacidade ?? 1} min={0} max={1} onChange={(v) => onProps({ opacidade: v })} fmt={(v) => `${Math.round(v * 100)}%`} />
         <Deslizar rotulo="Giro" valor={g.rot} min={-45} max={45} passo={0.5} onChange={(v) => onGeo({ rot: v })} fmt={(v) => `${v}°`} />
         <Deslizar rotulo="Largura" valor={g.w} min={0.05} max={2} onChange={(v) => onGeo({ w: v })} />
-        {fmt !== doc.formatos[0] && <p className="text-[11px] text-muted">{ajustado ? 'Posição/tamanho ajustados só neste formato.' : `Mexer aqui grava um ajuste só para ${fmt}.`}</p>}
+        {fmt !== doc.formatos[0] && <p className="text-[11px] text-muted-foreground">{ajustado ? 'Posição/tamanho ajustados só neste formato.' : `Mexer aqui grava um ajuste só para ${fmt}.`}</p>}
       </Secao>
 
       {(c.tipo === 'aparelho' || c.tipo === 'imagem') && (
@@ -129,8 +129,8 @@ export function PainelCamada({ c, doc, fmt, cat, capturas, onProps, onGeo, onSem
 
       {c.tipo === 'texto' && (
         <Secao titulo="Texto">
-          <textarea className="w-full min-h-[70px] px-2 py-1.5 rounded border border-border text-sm outline-none focus:border-accent" value={c.texto ?? ''} onChange={(e) => onProps({ texto: e.target.value })} />
-          <p className="text-[11px] text-muted -mt-1">*palavra* = destaque · _palavra_ = serifa itálica · duplo clique no quadro edita ali</p>
+          <textarea className="w-full min-h-[70px] px-2 py-1.5 rounded border border-border text-sm outline-none focus:border-primary" value={c.texto ?? ''} onChange={(e) => onProps({ texto: e.target.value })} />
+          <p className="text-[11px] text-muted-foreground -mt-1">*palavra* = destaque · _palavra_ = serifa itálica · duplo clique no quadro edita ali</p>
           <Segmentos valor={c.fonte ?? 'titulo'} opcoes={[['titulo', 'Título'], ['corpo', 'Corpo'], ['serifa', 'Serifa']]} onChange={(v) => onProps({ fonte: v })} />
           <Deslizar rotulo="Tamanho" valor={g.tamanho ?? c.tamanho ?? 0.07} min={0.02} max={0.2} passo={0.001} onChange={(v) => onGeo({ tamanho: v })} fmt={(v) => `${Math.round(v * 1080)}px`} />
           <Escolha rotulo="Peso" valor={String(c.peso ?? '')} opcoes={[['', 'da marca'], ['400', 'regular'], ['500', 'médio'], ['600', 'semi'], ['700', 'negrito'], ['800', 'extra']]} onChange={(v) => onProps({ peso: v ? Number(v) : undefined })} />
@@ -171,9 +171,9 @@ export function PainelFundo({ f, cat, capturas, onChange }: { f: Fundo; cat: Moc
         <div className="grid grid-cols-4 gap-1.5">
           {cat.fundos.map((p: any) => (
             <button key={p.id} title={p.nome} onClick={() => onChange({ ...p.fundo, escuro: p.escuro, padrao: f.padrao })}
-              className="aspect-[4/5] rounded-md border border-border hover:ring-2 hover:ring-accent/40" style={{ background: fundoCss(p.fundo) }} />
+              className="aspect-[4/5] rounded-md border border-border hover:ring-2 hover:ring-primary/40" style={{ background: fundoCss(p.fundo) }} />
           ))}
-          <button title="Cor da marca" onClick={() => onChange({ tipo: 'cor', cor: '--bg', padrao: f.padrao } as Fundo)} className="aspect-[4/5] rounded-md border border-border text-[10px] text-muted" style={{ background: 'var(--surface-2)' }}>marca</button>
+          <button title="Cor da marca" onClick={() => onChange({ tipo: 'cor', cor: '--bg', padrao: f.padrao } as Fundo)} className="aspect-[4/5] rounded-md border border-border text-[10px] text-muted-foreground" style={{ background: '#f3ebe3' }}>marca</button>
           <button title="Transparente" onClick={() => onChange({ tipo: 'transparente' } as Fundo)} className="aspect-[4/5] rounded-md border border-border" style={{ background: fundoCss({ tipo: 'transparente' } as Fundo) }} />
         </div>
       </Secao>
@@ -190,13 +190,13 @@ export function PainelFundo({ f, cat, capturas, onChange }: { f: Fundo; cat: Moc
                 <Deslizar rotulo="Centro Y" valor={f.centro?.y ?? 0.4} min={0} max={1} onChange={(v) => set({ centro: { x: f.centro?.x ?? 0.5, y: v } })} />
               </>}
             {paradas.map((p, i) => (
-              <div key={i} className="rounded-md bg-surface-2/60 p-2 space-y-1.5">
+              <div key={i} className="rounded-md bg-muted/60 p-2 space-y-1.5">
                 <Cor rotulo={`Cor ${i + 1}`} valor={p.cor} tokens={TOKENS} onChange={(v) => set({ paradas: paradas.map((q, j) => (j === i ? { ...q, cor: v } : q)) })} />
                 <Deslizar rotulo="Posição" valor={p.pos} min={0} max={1} onChange={(v) => set({ paradas: paradas.map((q, j) => (j === i ? { ...q, pos: v } : q)) })} fmt={(v) => `${Math.round(v * 100)}%`} />
-                {paradas.length > 2 && <button className="text-[11px] text-danger" onClick={() => set({ paradas: paradas.filter((_, j) => j !== i) })}>remover</button>}
+                {paradas.length > 2 && <button className="text-[11px] text-destructive" onClick={() => set({ paradas: paradas.filter((_, j) => j !== i) })}>remover</button>}
               </div>
             ))}
-            {paradas.length < 6 && <button className="text-xs text-accent" onClick={() => set({ paradas: [...paradas, { cor: paradas[paradas.length - 1].cor, pos: 1 }] })}>+ cor</button>}
+            {paradas.length < 6 && <button className="text-xs text-primary-ink" onClick={() => set({ paradas: [...paradas, { cor: paradas[paradas.length - 1].cor, pos: 1 }] })}>+ cor</button>}
           </>
         )}
         {f.tipo === 'malha' && (
@@ -204,15 +204,15 @@ export function PainelFundo({ f, cat, capturas, onChange }: { f: Fundo; cat: Moc
             <Cor rotulo="Base" valor={f.base ?? '#eeeeee'} tokens={TOKENS} onChange={(v) => set({ base: v })} />
             <Deslizar rotulo="Suavidade" valor={f.desfoque ?? 0.18} min={0.02} max={0.4} onChange={(v) => set({ desfoque: v })} />
             {pontos.map((p, i) => (
-              <div key={i} className="rounded-md bg-surface-2/60 p-2 space-y-1.5">
+              <div key={i} className="rounded-md bg-muted/60 p-2 space-y-1.5">
                 <Cor rotulo={`Mancha ${i + 1}`} valor={p.cor} tokens={TOKENS} onChange={(v) => set({ pontos: pontos.map((q, j) => (j === i ? { ...q, cor: v } : q)) })} />
                 <Deslizar rotulo="X" valor={p.x} min={-0.2} max={1.2} onChange={(v) => set({ pontos: pontos.map((q, j) => (j === i ? { ...q, x: v } : q)) })} />
                 <Deslizar rotulo="Y" valor={p.y} min={-0.2} max={1.3} onChange={(v) => set({ pontos: pontos.map((q, j) => (j === i ? { ...q, y: v } : q)) })} />
                 <Deslizar rotulo="Tamanho" valor={p.r} min={0.05} max={1} onChange={(v) => set({ pontos: pontos.map((q, j) => (j === i ? { ...q, r: v } : q)) })} />
-                <button className="text-[11px] text-danger" onClick={() => set({ pontos: pontos.filter((_, j) => j !== i) })}>remover</button>
+                <button className="text-[11px] text-destructive" onClick={() => set({ pontos: pontos.filter((_, j) => j !== i) })}>remover</button>
               </div>
             ))}
-            {pontos.length < 6 && <button className="text-xs text-accent" onClick={() => set({ pontos: [...pontos, { x: 0.5, y: 0.5, r: 0.4, cor: '#ffffff' }] })}>+ mancha</button>}
+            {pontos.length < 6 && <button className="text-xs text-primary-ink" onClick={() => set({ pontos: [...pontos, { x: 0.5, y: 0.5, r: 0.4, cor: '#ffffff' }] })}>+ mancha</button>}
           </>
         )}
         {f.tipo === 'imagem' && (

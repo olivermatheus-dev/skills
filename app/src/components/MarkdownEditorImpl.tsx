@@ -34,7 +34,7 @@ const translate = (key: string, def: string, vars?: Record<string, unknown>) =>
 
 // Tipografia do conteúdo (o preflight do Tailwind zera h1/ul/…; sem plugin typography).
 const CONTENT_CSS = `
-.hub-md { line-height: 1.6; color: var(--color-text); min-height: var(--md-min-h, 240px); }
+.hub-md { line-height: 1.6; color: var(--color-foreground); min-height: var(--md-min-h, 240px); }
 .hub-md > * + * { margin-top: .6em; }
 .hub-md h1 { font-size: 1.5em; font-weight: 700; letter-spacing: -.01em; margin-top: 1.1em; }
 .hub-md h2 { font-size: 1.25em; font-weight: 650; margin-top: 1em; }
@@ -45,9 +45,9 @@ const CONTENT_CSS = `
 .hub-md ol { list-style: decimal; padding-left: 1.4em; }
 .hub-md li { margin: .15em 0; }
 .hub-md li > ul, .hub-md li > ol { margin-top: .15em; }
-.hub-md blockquote { border-left: 3px solid var(--color-border); padding-left: .9em; color: var(--color-muted); }
-.hub-md a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
-.hub-md code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; background: var(--color-surface-2); padding: .1em .35em; border-radius: 4px; }
+.hub-md blockquote { border-left: 3px solid var(--color-border); padding-left: .9em; color: var(--color-muted-foreground); }
+.hub-md a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.hub-md code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; background: var(--color-muted); padding: .1em .35em; border-radius: 4px; }
 .hub-md hr { border: 0; border-top: 1px solid var(--color-border); margin: 1.2em 0; }
 .hub-md table { border-collapse: collapse; }
 .hub-md th, .hub-md td { border: 1px solid var(--color-border); padding: .3em .6em; }
@@ -67,7 +67,7 @@ const PlainCodeBlock: CodeBlockEditorDescriptor = {
       <div className="my-2" onKeyDown={(e) => e.nativeEvent.stopImmediatePropagation()}>
         <textarea defaultValue={code} onChange={(e) => cb.setCode(e.target.value)} spellCheck={false}
           rows={Math.max(2, code.split('\n').length)}
-          className="w-full font-mono text-[12.5px] leading-relaxed bg-surface-2 border border-border rounded-md px-3 py-2 outline-none focus:border-accent resize-y" />
+          className="w-full font-mono text-[12.5px] leading-relaxed bg-muted border border-border rounded-md px-3 py-2 outline-none focus:border-primary resize-y" />
       </div>
     );
   },
@@ -85,7 +85,7 @@ export default function MarkdownEditor({ value, onChange, placeholder, minHeight
   // Troca de documento por fora (ex.: outra anotação selecionada) → atualiza o editor.
   useEffect(() => { if (value !== last.current) { ref.current?.setMarkdown(value); last.current = value; } }, [value]);
   return (
-    <div className="border border-border rounded-lg bg-surface overflow-hidden [&_.mdxeditor-toolbar]:bg-surface-2"
+    <div className="border border-border rounded-lg bg-card overflow-hidden [&_.mdxeditor-toolbar]:bg-muted"
       style={{ '--md-min-h': `${minHeight}px` } as CSSProperties}
       onKeyDownCapture={touch} onPasteCapture={touch} onCutCapture={touch} onDropCapture={touch} onPointerDownCapture={touch}>
       <MDXEditor

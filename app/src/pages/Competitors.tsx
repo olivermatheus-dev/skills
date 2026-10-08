@@ -7,7 +7,7 @@ import { api, type AnalysisOverview, type CollectResult, type Competitor, type C
 import { MARKET, money } from '../components/competitors/Analysis';
 import { FULL_ANALYSIS } from '../../../schema/analysis';
 import { toast } from '../components/toast';
-import { Badge, Button, Empty, ErrorBox, Input, PageHeader, Select, cx, fmtNum } from '../components/ui';
+import { Badge, Button, Empty, ErrorBox, Input, PageHeader, Select, cx, fmtNum } from '../components/kit';
 import AddLinksModal, { ResultLine } from '../components/competitors/AddLinksModal';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../queries';
@@ -108,9 +108,9 @@ export default function Competitors() {
       />
 
       {pulling && (
-        <div className="mb-5 bg-surface border border-border rounded-xl p-3">
-          <div className="flex justify-between text-sm mb-2"><span>Puxando <b>{pulling.name}</b>…</span><span className="text-muted tabular-nums">{pulling.i} de {pulling.n}</span></div>
-          <div className="h-1.5 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-accent transition-all" style={{ width: `${((pulling.i - 0.5) / pulling.n) * 100}%` }} /></div>
+        <div className="mb-5 bg-card border border-border rounded-xl p-3">
+          <div className="flex justify-between text-sm mb-2"><span>Puxando <b>{pulling.name}</b>…</span><span className="text-muted-foreground tabular-nums">{pulling.i} de {pulling.n}</span></div>
+          <div className="h-1.5 bg-muted rounded-full overflow-hidden"><div className="h-full bg-primary transition-all" style={{ width: `${((pulling.i - 0.5) / pulling.n) * 100}%` }} /></div>
         </div>
       )}
       {pullLog && <PullLog log={pullLog} onClose={() => setPullLog(null)} slug={slug} />}
@@ -130,7 +130,7 @@ export default function Competitors() {
               {allTags.map((t) => <option key={t} value={t}>#{t}</option>)}
             </Select>
           )}
-          <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted hover:text-text')}>★ Favoritos</button>
+          <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted-foreground hover:text-foreground')}>★ Favoritos</button>
           <Select value={market} onChange={(e) => setMarket(e.target.value)} aria-label="Onde atua">
             <option value="">Brasil e exterior</option>
             {Object.entries(MARKET).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
@@ -154,7 +154,7 @@ export default function Competitors() {
       )}
       {list.data && all.length > 0 && shown.length === 0 && <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque os filtros." />}
 
-      {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
+      {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted-foreground">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
       {mode === 'tabela' && shown.length > 0 && <CompareTable slug={slug} rows={shown} ov={ov} />}
       {mode === 'cards' && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {shown.map((c) => (
@@ -182,16 +182,16 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
   const items = profs.reduce((n, p) => n + (p.latest?.items ?? 0), 0);
   const hadErrors = profs.some((p) => p.latest?.errors.length);
   return (
-    <Link to={`/p/${slug}/concorrentes/${d.id}`} onMouseEnter={onWarm} onFocus={onWarm} onPointerDown={onWarm} className="group bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-zinc-300 transition flex flex-col">
-      <div className="h-16 relative bg-gradient-to-r from-indigo-100 via-violet-50 to-sky-100">
+    <Link to={`/p/${slug}/concorrentes/${d.id}`} onMouseEnter={onWarm} onFocus={onWarm} onPointerDown={onWarm} className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-zinc-300 transition flex flex-col">
+      <div className="h-16 relative bg-gradient-to-r from-primary/15 via-primary-soft to-muted">
         {withBanner && <Img local={api.mediaUrl(slug, d.id, withBanner.latest?.profile.bannerLocal)} remote={withBanner.latest?.profile.banner} className="absolute inset-0 w-full h-full object-cover" fallback={<span />} />}
-        <div className="absolute top-2 right-2 bg-surface/90 backdrop-blur rounded-full w-7 h-7 grid place-items-center shadow-sm"><Star on={d.favorite} onClick={onFav} size="text-base" /></div>
+        <div className="absolute top-2 right-2 bg-card/90 backdrop-blur rounded-full w-7 h-7 grid place-items-center shadow-sm"><Star on={d.favorite} onClick={onFav} size="text-base" /></div>
       </div>
       <div className="relative px-4 pb-4 -mt-6 flex-1 flex flex-col">
         <div className="flex items-end gap-3">
           <Avatar name={d.name} size={52} local={api.mediaUrl(slug, d.id, withAvatar?.latest?.profile.avatarLocal)} remote={withAvatar?.latest?.profile.avatar} />
           <div className="min-w-0 pb-0.5 flex-1">
-            <div className="font-semibold truncate group-hover:text-accent">{d.name}</div>
+            <div className="font-semibold truncate group-hover:text-primary-ink">{d.name}</div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-1.5 mt-2">
@@ -200,9 +200,9 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
           {o?.fromMonthly != null && <Badge color="#0f766e">a partir de {money(o.fromMonthly, o.currency)}</Badge>}
           {o?.publicPrice === false && <Badge>preço oculto</Badge>}
           {o?.request && <Badge color="#7c3aed">⏳ fila</Badge>}
-          {d.tags.map((t) => <span key={t} className="text-xs text-muted">#{t}</span>)}
+          {d.tags.map((t) => <span key={t} className="text-xs text-muted-foreground">#{t}</span>)}
         </div>
-        {o?.oneLiner && <p className="mt-2 text-[13px] leading-snug text-text/85 line-clamp-2">{o.oneLiner}</p>}
+        {o?.oneLiner && <p className="mt-2 text-[13px] leading-snug text-foreground/85 line-clamp-2">{o.oneLiner}</p>}
         {d.status === 'candidato' && (
           <div className="mt-3 flex gap-2">
             <Button className="!py-1 text-xs flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAccept(); }}>✓ Aceitar</Button>
@@ -211,7 +211,7 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
         )}
 
         <div className="mt-3 space-y-1.5 flex-1">
-          {d.profiles.length === 0 && <div className="text-sm text-muted">Sem perfis. Abra para adicionar links.</div>}
+          {d.profiles.length === 0 && <div className="text-sm text-muted-foreground">Sem perfis. Abra para adicionar links.</div>}
           {d.profiles.map((p) => {
             const ps = profs.find((x) => x.key === keyFor(p));
             const f = ps?.latest?.profile.followers;
@@ -220,24 +220,24 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
             return (
               <div key={`${p.platform}-${p.url}`} className="flex items-center gap-2 text-sm">
                 <PlatformIcon platform={p.platform} size={15} />
-                <span className="truncate text-muted flex-1 min-w-0">{handle}</span>
+                <span className="truncate text-muted-foreground flex-1 min-w-0">{handle}</span>
                 {f != null ? (
                   <span className="tabular-nums font-medium">{fmtNum(f)}</span>
-                ) : <span className="text-xs text-muted">{ps?.latest ? (p.platform === 'site' ? 'site' : '—') : loadingSummary ? '' : 'não puxado'}</span>}
-                {delta != null && delta !== 0 && <span className={cx('text-xs tabular-nums min-w-16 text-right whitespace-nowrap', delta > 0 ? 'text-ok' : 'text-danger')} title="vs coleta anterior">{delta > 0 ? '▲' : '▼'} {fmtDelta(delta)!.slice(1)}</span>}
+                ) : <span className="text-xs text-muted-foreground">{ps?.latest ? (p.platform === 'site' ? 'site' : '—') : loadingSummary ? '' : 'não puxado'}</span>}
+                {delta != null && delta !== 0 && <span className={cx('text-xs tabular-nums min-w-16 text-right whitespace-nowrap', delta > 0 ? 'text-success' : 'text-destructive')} title="vs coleta anterior">{delta > 0 ? '▲' : '▼'} {fmtDelta(delta)!.slice(1)}</span>}
                 {(delta == null || delta === 0) && <span className="min-w-16" />}
               </div>
             );
           })}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-muted">
+        <div className="mt-4 pt-3 border-t border-border flex items-center gap-2 text-xs text-muted-foreground">
           <span title={s?.lastCollected ? new Date(s.lastCollected).toLocaleString('pt-BR') : undefined}>
             {s?.lastCollected ? `Puxado ${timeAgo(s.lastCollected)}` : 'Nunca puxado'}
           </span>
           {items > 0 && <span>· {fmtNum(items)} itens</span>}
-          {hadErrors && <span className="text-warn" title="A última coleta teve avisos">· ⚠</span>}
-          <button className="ml-auto px-2 py-1 rounded-md border border-border hover:bg-surface-2 text-text disabled:opacity-50" disabled={pulling || !d.profiles.length}
+          {hadErrors && <span className="text-warning" title="A última coleta teve avisos">· ⚠</span>}
+          <button className="ml-auto px-2 py-1 rounded-md border border-border hover:bg-muted text-foreground disabled:opacity-50" disabled={pulling || !d.profiles.length}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPull(); }}>
             {pulling ? <Spinner /> : '↻'} Puxar
           </button>
@@ -252,19 +252,19 @@ function PullLog({ log, onClose, slug }: { log: { id: string; name: string; resu
   const total = log.reduce((n, c) => n + c.results.length, 0);
   const [open, setOpen] = useState(okN < total);
   return (
-    <div className={cx('mb-5 border rounded-xl p-3 bg-surface', okN === total ? 'border-green-200' : 'border-amber-200')}>
+    <div className={cx('mb-5 border rounded-xl p-3 bg-card', okN === total ? 'border-green-200' : 'border-amber-200')}>
       <div className="flex items-center gap-3 text-sm">
-        <span className={okN === total ? 'text-ok' : 'text-warn'}>{okN === total ? '✓' : '⚠'}</span>
+        <span className={okN === total ? 'text-success' : 'text-warning'}>{okN === total ? '✓' : '⚠'}</span>
         <span><b>{okN}</b> de {total} perfil(is) coletado(s){okN < total ? ' — veja os erros' : ''}</span>
-        <button className="text-accent text-xs" onClick={() => setOpen(!open)}>{open ? 'ocultar' : 'detalhes'}</button>
-        <button className="ml-auto text-muted hover:text-text" onClick={onClose} aria-label="Fechar">×</button>
+        <button className="text-primary-ink text-xs" onClick={() => setOpen(!open)}>{open ? 'ocultar' : 'detalhes'}</button>
+        <button className="ml-auto text-muted-foreground hover:text-foreground" onClick={onClose} aria-label="Fechar">×</button>
       </div>
       {open && (
         <div className="mt-2 grid gap-2 md:grid-cols-2">
           {log.map((c) => (
             <div key={c.id} className="border border-border rounded-lg p-2.5">
-              <Link to={`/p/${slug}/concorrentes/${c.id}`} className="font-medium text-sm hover:text-accent">{c.name}</Link>
-              {c.results.length === 0 && <div className="text-xs text-muted">sem perfis</div>}
+              <Link to={`/p/${slug}/concorrentes/${c.id}`} className="font-medium text-sm hover:text-primary-ink">{c.name}</Link>
+              {c.results.length === 0 && <div className="text-xs text-muted-foreground">sem perfis</div>}
               {c.results.map((r) => <ResultLine key={r.key} r={r} />)}
             </div>
           ))}
@@ -282,16 +282,16 @@ function CompareTable({ slug, rows, ov }: { slug: string; rows: Doc<Competitor>[
   type Col = { k: string; label: string; num?: boolean; v: (o: O, c: Doc<Competitor>) => string | number | undefined; render?: (o: O, c: Doc<Competitor>) => React.ReactNode };
   const cols: Col[] = [
     { k: 'market', label: 'Onde atua', v: (o, c) => marketOf(c, o), render: (o, c) => { const m = MARKET[marketOf(c, o)]; return <span style={{ color: m.color }}>{m.label}</span>; } },
-    { k: 'price', label: 'A partir de', num: true, v: (o) => o?.fromMonthly ?? undefined, render: (o) => (o?.fromMonthly != null ? <b>{money(o.fromMonthly, o.currency)}</b> : o?.publicPrice === false ? <span className="text-muted">oculto</span> : '—') },
+    { k: 'price', label: 'A partir de', num: true, v: (o) => o?.fromMonthly ?? undefined, render: (o) => (o?.fromMonthly != null ? <b>{money(o.fromMonthly, o.currency)}</b> : o?.publicPrice === false ? <span className="text-muted-foreground">oculto</span> : '—') },
     { k: 'model', label: 'Modelo', v: (o) => o?.priceModel },
     { k: 'plans', label: 'Planos', num: true, v: (o) => o?.plans },
     { k: 'trial', label: 'Teste grátis', v: (o) => o?.trial ?? undefined, render: (o) => <span className="block max-w-44 truncate" title={o?.trial ?? ''}>{o?.trial ?? '—'}</span> },
     { k: 'features', label: 'Features', num: true, v: (o) => o?.features },
     { k: 'fw', label: 'Fortes / fracos', v: (o) => (o?.strengths != null ? `${o.strengths} / ${o.weaknesses}` : undefined) },
     { k: 'sections', label: 'Seções da LP', num: true, v: (o) => o?.sections },
-    { k: 'ra', label: 'Reclame Aqui', num: true, v: (o) => o?.raScore ?? undefined, render: (o) => (o?.raScore != null ? o.raScore.toLocaleString('pt-BR') : o?.raFound === false ? <span className="text-muted">não achado</span> : '—') },
+    { k: 'ra', label: 'Reclame Aqui', num: true, v: (o) => o?.raScore ?? undefined, render: (o) => (o?.raScore != null ? o.raScore.toLocaleString('pt-BR') : o?.raFound === false ? <span className="text-muted-foreground">não achado</span> : '—') },
     { k: 'store', label: 'Nota app', num: true, v: (o) => o?.storeRating ?? undefined },
-    { k: 'done', label: 'Módulos', num: true, v: (o) => Object.keys(o?.updated ?? {}).length, render: (o) => <span className="text-muted">{Object.keys(o?.updated ?? {}).length}/{FULL_ANALYSIS.length - 1}{o?.request ? ' ⏳' : ''}{o?.hasNotes ? ' ✎' : ''}</span> },
+    { k: 'done', label: 'Módulos', num: true, v: (o) => Object.keys(o?.updated ?? {}).length, render: (o) => <span className="text-muted-foreground">{Object.keys(o?.updated ?? {}).length}/{FULL_ANALYSIS.length - 1}{o?.request ? ' ⏳' : ''}{o?.hasNotes ? ' ✎' : ''}</span> },
   ];
   const [sort, setSort] = useState<{ k: string; dir: 1 | -1 }>({ k: 'price', dir: 1 });
   const col = cols.find((c) => c.k === sort.k);
@@ -304,22 +304,22 @@ function CompareTable({ slug, rows, ov }: { slug: string; rows: Doc<Competitor>[
     return (typeof va === 'number' && typeof vb === 'number' ? va - vb : String(va).localeCompare(String(vb), 'pt-BR')) * sort.dir;
   });
   const th = (k: string, label: string) => (
-    <th key={k} className="px-3 py-2 text-left font-medium text-xs text-muted whitespace-nowrap cursor-pointer select-none hover:text-text" onClick={() => setSort((s) => ({ k, dir: s.k === k ? (s.dir === 1 ? -1 : 1) : 1 }))}>
+    <th key={k} className="px-3 py-2 text-left font-medium text-xs text-muted-foreground whitespace-nowrap cursor-pointer select-none hover:text-foreground" onClick={() => setSort((s) => ({ k, dir: s.k === k ? (s.dir === 1 ? -1 : 1) : 1 }))}>
       {label}{sort.k === k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
     </th>
   );
   return (
-    <div className="bg-surface border border-border rounded-xl overflow-x-auto">
+    <div className="bg-card border border-border rounded-xl overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="border-b border-border bg-surface-2/50"><tr>{th('name', 'Concorrente')}{cols.map((c) => th(c.k, c.label))}</tr></thead>
+        <thead className="border-b border-border bg-muted/50"><tr>{th('name', 'Concorrente')}{cols.map((c) => th(c.k, c.label))}</tr></thead>
         <tbody>
           {sorted.map((c) => {
             const o = ov.get(c.data.id);
             return (
-              <tr key={c.data.id} className="border-b border-border last:border-0 hover:bg-surface-2/40 align-top">
+              <tr key={c.data.id} className="border-b border-border last:border-0 hover:bg-muted/40 align-top">
                 <td className="px-3 py-2 min-w-56 max-w-80">
-                  <Link to={`/p/${slug}/concorrentes/${c.data.id}`} className="font-medium hover:text-accent">{c.data.name}</Link>
-                  {o?.oneLiner && <div className="text-xs text-muted line-clamp-2">{o.oneLiner}</div>}
+                  <Link to={`/p/${slug}/concorrentes/${c.data.id}`} className="font-medium hover:text-primary-ink">{c.data.name}</Link>
+                  {o?.oneLiner && <div className="text-xs text-muted-foreground line-clamp-2">{o.oneLiner}</div>}
                 </td>
                 {cols.map((cl) => <td key={cl.k} className={cx('px-3 py-2 whitespace-nowrap', cl.num && 'tabular-nums')}>{cl.render ? cl.render(o, c) : (cl.v(o, c) ?? '—')}</td>)}
               </tr>
@@ -333,6 +333,6 @@ function CompareTable({ slug, rows, ov }: { slug: string; rows: Doc<Competitor>[
 
 const SkeletonGrid = () => (
   <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
-    {[0, 1, 2].map((i) => <div key={i} className="h-56 rounded-xl bg-surface border border-border animate-pulse" />)}
+    {[0, 1, 2].map((i) => <div key={i} className="h-56 rounded-xl bg-card border border-border animate-pulse" />)}
   </div>
 );

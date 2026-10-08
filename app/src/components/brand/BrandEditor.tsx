@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from
 import { useQueryClient } from '@tanstack/react-query';
 import { Bell, CalendarCheck, Check, Clock, FileText, Heart, MessageCircle, Users, Wallet, type LucideIcon } from 'lucide-react';
 import { api, type Brand, type BrandFont, type BrandPreset } from '../../api';
-import { Badge, Button, Card, ErrorBox, Input, LinesInput, Select, Textarea, cx } from '../ui';
+import { Badge, Button, Card, ErrorBox, Input, LinesInput, Select, Textarea, cx } from '../kit';
 import { toast } from '../toast';
 import { qk, useBrandKit } from '../../queries';
 
@@ -30,8 +30,8 @@ function Section({ title, hint, children, right }: { title: string; hint?: strin
   return (
     <section className="mb-8">
       <div className="flex items-baseline gap-x-3 gap-y-0.5 mb-2 flex-wrap">
-        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">{title}</div>
-        {hint && <div className="text-xs text-muted">{hint}</div>}
+        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</div>
+        {hint && <div className="text-xs text-muted-foreground">{hint}</div>}
         <div className="ml-auto">{right}</div>
       </div>
       {children}
@@ -82,7 +82,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
     ? `@import url('https://fonts.googleapis.com/css2?family=${(f.google ?? '').replace(/ /g, '+')}&display=swap');`
     : f.files.map((x) => `@font-face{font-family:"${f.family}";font-style:${x.style};font-weight:${x.weight};src:url("${api.brandFileUrl(slug, x.src)}");${x.unicodeRange ? `unicode-range:${x.unicodeRange};` : ''}}`).join('\n')).join('\n'), [draft?.fonts, slug]);
 
-  if (isLoading || !draft) return <div className="max-w-6xl mx-auto px-8 py-6"><ErrorBox error={error} />{!error && <div className="h-60 rounded-xl bg-surface-2 animate-pulse" />}</div>;
+  if (isLoading || !draft) return <div className="max-w-6xl mx-auto px-8 py-6"><ErrorBox error={error} />{!error && <div className="h-60 rounded-xl bg-muted animate-pulse" />}</div>;
 
   const colorTokens = draft.groups.map((g) => ({ label: g.label, tokens: g.tokens.filter((t) => isColor(t.value)) })).filter((g) => g.tokens.length);
   const otherTokens = draft.groups.flatMap((g) => g.tokens).filter((t) => !isColor(t.value) && !FONT_TOKENS.includes(t.name) && !SHAPE_TOKENS.includes(t.name) && !TYPE_TOKENS.includes(t.name));
@@ -98,7 +98,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
       <div className="flex items-start gap-4 mb-5">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Kit de marca</h2>
-          <div className="text-sm text-muted mt-0.5">Edite aqui; salvar grava <span className="font-mono text-xs">brand/brand.json</span>, gera o <span className="font-mono text-xs">brand.css</span> (carrossel, vídeo e LP) e o bloco do kit no <span className="font-mono text-xs">BRAND.md</span>.</div>
+          <div className="text-sm text-muted-foreground mt-0.5">Edite aqui; salvar grava <span className="font-mono text-xs">brand/brand.json</span>, gera o <span className="font-mono text-xs">brand.css</span> (carrossel, vídeo e LP) e o bloco do kit no <span className="font-mono text-xs">BRAND.md</span>.</div>
         </div>
         <div className="ml-auto flex gap-2 shrink-0">
           {dirty && <Button variant="ghost" onClick={() => data && setDraft(structuredClone(data.brand))}>Descartar</Button>}
@@ -113,23 +113,23 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
           <Section title="Estilo" hint="O preset ajusta forma, tipografia e ícones de uma vez (cores e fontes ficam).">
             <div className="grid gap-3 sm:grid-cols-2 mb-3">
               {data?.presets.map((p) => (
-                <Card key={p.id} className={cx('cursor-default', draft.style.preset === p.id && 'ring-2 ring-accent')}>
+                <Card key={p.id} className={cx('cursor-default', draft.style.preset === p.id && 'ring-2 ring-primary')}>
                   <div className="flex items-center gap-2"><div className="font-medium text-sm">{p.label}</div>{draft.style.preset === p.id && <Badge color="#4f46e5">aplicado</Badge>}</div>
-                  <div className="text-xs text-muted mt-1">{p.summary}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{p.summary}</div>
                   <div className="mt-3"><Button variant="soft" onClick={() => applyPreset(p)}>{draft.style.preset === p.id ? 'Reaplicar valores' : 'Aplicar'}</Button></div>
                 </Card>
               ))}
-              <Card className={cx(!draft.style.preset && 'ring-2 ring-accent')}>
+              <Card className={cx(!draft.style.preset && 'ring-2 ring-primary')}>
                 <div className="font-medium text-sm">Estilo livre</div>
-                <div className="text-xs text-muted mt-1">Sem preset: valem só os tokens e as suas anotações.</div>
+                <div className="text-xs text-muted-foreground mt-1">Sem preset: valem só os tokens e as suas anotações.</div>
                 <div className="mt-3"><Button variant="ghost" disabled={!draft.style.preset} onClick={() => update((b) => { b.style.preset = undefined; })}>Usar estilo livre</Button></div>
               </Card>
             </div>
-            {preset && <ul className="text-xs text-muted list-disc pl-5 mb-3 space-y-0.5">{preset.rules.map((r) => <li key={r}>{r}</li>)}</ul>}
+            {preset && <ul className="text-xs text-muted-foreground list-disc pl-5 mb-3 space-y-0.5">{preset.rules.map((r) => <li key={r}>{r}</li>)}</ul>}
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="block"><div className="text-xs font-medium mb-1">Fazer <span className="text-muted font-normal">(1 por linha)</span></div>
+              <label className="block"><div className="text-xs font-medium mb-1">Fazer <span className="text-muted-foreground font-normal">(1 por linha)</span></div>
                 <LinesInput rows={4} value={draft.style.do} onChange={(v) => update((b) => { b.style.do = v; })} placeholder="ex.: foto real de terapeuta, luz natural" /></label>
-              <label className="block"><div className="text-xs font-medium mb-1">Não fazer <span className="text-muted font-normal">(regra dura)</span></div>
+              <label className="block"><div className="text-xs font-medium mb-1">Não fazer <span className="text-muted-foreground font-normal">(regra dura)</span></div>
                 <LinesInput rows={4} value={draft.style.dont} onChange={(v) => update((b) => { b.style.dont = v; })} placeholder="ex.: coral em bloco grande" /></label>
             </div>
             <label className="block mt-3"><div className="text-xs font-medium mb-1">Anotações de estilo</div>
@@ -139,21 +139,21 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
           <Section title="Cores" hint={`contraste medido sobre o fundo (--bg ${bg})`}>
             {colorTokens.map((g) => (
               <div key={g.label} className="mb-4">
-                <div className="text-xs text-muted mb-1.5">{g.label}</div>
+                <div className="text-xs text-muted-foreground mb-1.5">{g.label}</div>
                 <div className="grid gap-2 grid-cols-1 2xl:grid-cols-2">
                   {g.tokens.map((t) => {
                     const c = isHex6(t.value) && isHex6(bg) && t.name !== 'bg' ? contrast(t.value, bg) : null;
                     return (
-                      <div key={t.name} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-2 py-1.5" title={t.note}>
+                      <div key={t.name} className="flex items-center gap-2 rounded-lg border border-border bg-card px-2 py-1.5" title={t.note}>
                         <label className="relative w-8 h-8 rounded-md border border-border shrink-0 overflow-hidden cursor-pointer" style={{ background: t.value }}>
                           {isHex6(t.value) && <input type="color" className="absolute inset-0 opacity-0 cursor-pointer" value={t.value} onChange={(e) => setToken(t.name, e.target.value)} aria-label={`cor ${t.name}`} />}
                         </label>
                         <div className="min-w-0 flex-1">
                           <div className="text-xs font-mono font-medium truncate">--{t.name}</div>
-                          {t.note && <div className="text-[10px] text-muted truncate">{t.note}</div>}
+                          {t.note && <div className="text-[10px] text-muted-foreground truncate">{t.note}</div>}
                         </div>
                         <Input className="w-24 font-mono text-xs px-2 py-1" value={t.value} onChange={(e) => setToken(t.name, e.target.value)} />
-                        {c != null && <span className={cx('text-[10px] font-mono w-10 text-right', c >= 4.5 ? 'text-ok' : c >= 3 ? 'text-amber-600' : 'text-muted')} title="contraste sobre o fundo (≥ 4,5 = texto ok)">{c.toFixed(1)}</span>}
+                        {c != null && <span className={cx('text-[10px] font-mono w-10 text-right', c >= 4.5 ? 'text-success' : c >= 3 ? 'text-amber-600' : 'text-muted-foreground')} title="contraste sobre o fundo (≥ 4,5 = texto ok)">{c.toFixed(1)}</span>}
                       </div>
                     );
                   })}
@@ -189,7 +189,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
                   <span className="text-xs font-mono">--{n}</span>
                   <input type="range" min={0} max={40} value={parseInt(tk(n)) || 0} onChange={(e) => setToken(n, `${e.target.value}px`)} />
                   <span className="text-xs font-mono text-right">{tk(n)}</span>
-                  <span className="h-7 w-10 border border-border bg-surface-2" style={{ borderRadius: tk(n) }} />
+                  <span className="h-7 w-10 border border-border bg-muted" style={{ borderRadius: tk(n) }} />
                 </div>
               ))}
               <div className="grid grid-cols-[140px_1fr] items-center gap-3"><span className="text-xs font-mono">--border-width</span><Input className="w-24 font-mono text-xs" value={tk('border-width')} onChange={(e) => setToken('border-width', e.target.value)} /></div>
@@ -197,7 +197,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
                 <div key={n} className="grid grid-cols-[140px_1fr_40px] items-center gap-3">
                   <span className="text-xs font-mono">--{n}</span>
                   <Input className="font-mono text-xs" value={tk(n)} onChange={(e) => setToken(n, e.target.value)} />
-                  <span className="h-7 w-10 bg-surface rounded" style={{ boxShadow: tk(n) }} />
+                  <span className="h-7 w-10 bg-card rounded" style={{ boxShadow: tk(n) }} />
                 </div>
               ))}
             </Card>
@@ -212,7 +212,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
               </div>
               <div className="grid grid-cols-[140px_1fr] items-center gap-3 mb-3">
                 <span className="text-xs">Estilo</span>
-                <div className="flex gap-1.5">{(['linha', 'preenchido'] as const).map((s) => <button key={s} onClick={() => update((b) => { b.icons.style = s; })} className={cx('px-2.5 py-1 rounded-full text-xs border', draft.icons.style === s ? 'bg-accent text-white border-accent' : 'border-border')}>{s}</button>)}</div>
+                <div className="flex gap-1.5">{(['linha', 'preenchido'] as const).map((s) => <button key={s} onClick={() => update((b) => { b.icons.style = s; })} className={cx('px-2.5 py-1 rounded-full text-xs border', draft.icons.style === s ? 'bg-primary text-primary-foreground border-primary' : 'border-border')}>{s}</button>)}</div>
               </div>
               <div className="grid grid-cols-[140px_1fr] items-center gap-3 mb-4">
                 <span className="text-xs">Cor</span>
@@ -229,7 +229,7 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
               <Card className="p-0 overflow-hidden">
                 {otherTokens.map((t) => (
                   <div key={t.name} className="grid grid-cols-[180px_1fr] gap-3 px-4 py-1.5 border-b border-border last:border-0 items-center" title={t.note}>
-                    <span className="text-xs font-mono text-muted truncate">--{t.name}</span>
+                    <span className="text-xs font-mono text-muted-foreground truncate">--{t.name}</span>
                     <Input className="font-mono text-xs py-1" value={t.value} onChange={(e) => setToken(t.name, e.target.value)} />
                   </div>
                 ))}
@@ -239,9 +239,9 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
         </div>
 
         <div className="xl:sticky xl:top-4 xl:order-none order-first max-w-sm">
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-2">Prévia ao vivo</div>
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-2">Prévia ao vivo</div>
           <Preview vars={vars} iconProps={iconProps} />
-          <p className="text-xs text-muted mt-2">Amostra com os tokens do rascunho (ainda não salvos). Peças reais usam o <code>brand.css</code> gerado ao salvar.</p>
+          <p className="text-xs text-muted-foreground mt-2">Amostra com os tokens do rascunho (ainda não salvos). Peças reais usam o <code>brand.css</code> gerado ao salvar.</p>
         </div>
       </div>
     </div>
@@ -301,18 +301,18 @@ function FontList({ slug, fonts, files, onChange }: { slug: string; fonts: Brand
         <div key={`${f.family}-${i}`} className="flex items-center gap-3 px-4 py-2 border-b border-border text-sm">
           <span className="font-medium w-36 truncate" style={{ fontFamily: `"${f.family}"`, fontStyle: f.files[0]?.style }}>{f.family}</span>
           <Badge>{f.source === 'local' ? `local · ${f.files.length} arquivo(s)` : 'Google Fonts'}</Badge>
-          {f.license ? <span className="text-[11px] text-muted font-mono truncate">{f.license}</span> : f.source === 'local' && <span className="text-[11px] text-amber-600">sem licença registrada</span>}
-          <button className="ml-auto text-xs text-danger" onClick={() => onChange(fonts.filter((_, j) => j !== i))}>remover</button>
+          {f.license ? <span className="text-[11px] text-muted-foreground font-mono truncate">{f.license}</span> : f.source === 'local' && <span className="text-[11px] text-amber-600">sem licença registrada</span>}
+          <button className="ml-auto text-xs text-destructive" onClick={() => onChange(fonts.filter((_, j) => j !== i))}>remover</button>
         </div>
       ))}
       <div className="flex items-center gap-2 px-4 py-2.5 flex-wrap text-sm">
-        <label className={cx('text-xs text-accent cursor-pointer hover:underline', busy && 'opacity-50')}>
+        <label className={cx('text-xs text-primary-ink cursor-pointer hover:underline', busy && 'opacity-50')}>
           + enviar fonte (.woff2 / .ttf + licença .txt)<input type="file" multiple accept=".woff2,.woff,.ttf,.otf,.txt" className="hidden" onChange={(e) => { void upload(e.target.files); e.target.value = ''; }} />
         </label>
-        <span className="text-muted text-xs">ou Google Fonts:</span>
+        <span className="text-muted-foreground text-xs">ou Google Fonts:</span>
         <Input className="w-40 text-xs py-1" value={google} onChange={(e) => setGoogle(e.target.value)} placeholder="ex.: Inter" />
         <Button variant="ghost" disabled={!google.trim()} onClick={() => { const fam = google.trim(); onChange([...fonts, { family: fam, source: 'google', google: `${fam}:wght@400;500;600;700`, files: [], display: 'swap' }]); setGoogle(''); }}>Adicionar</Button>
-        {files.length > 0 && <span className="text-[11px] text-muted ml-auto">{files.length} arquivo(s) em brand/fonts/</span>}
+        {files.length > 0 && <span className="text-[11px] text-muted-foreground ml-auto">{files.length} arquivo(s) em brand/fonts/</span>}
       </div>
     </Card>
   );

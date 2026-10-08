@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Note } from '../api';
-import { Button, ErrorBox, Input, Select, cx } from '../components/ui';
+import { Button, ErrorBox, Input, Select, cx } from '../components/kit';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
@@ -208,7 +208,7 @@ export default function Notes() {
   return (
     <div className="flex h-full min-h-0">
       {/* Lista */}
-      <section className="w-80 shrink-0 border-r border-border bg-surface flex flex-col min-h-0">
+      <section className="w-80 shrink-0 border-r border-border bg-card flex flex-col min-h-0">
         <div className="p-3 border-b border-border space-y-2">
           <div className="flex items-center justify-between">
             <h1 className="text-base font-semibold tracking-tight">Anotações</h1>
@@ -223,20 +223,20 @@ export default function Notes() {
           )}
         </div>
         <div className="flex-1 overflow-y-auto">
-          {isLoading && <div className="p-4 space-y-3">{[0, 1, 2].map((i) => <div key={i} className="h-12 rounded-md bg-surface-2 animate-pulse" />)}</div>}
+          {isLoading && <div className="p-4 space-y-3">{[0, 1, 2].map((i) => <div key={i} className="h-12 rounded-md bg-muted animate-pulse" />)}</div>}
           {loadError && <div className="p-3"><ErrorBox error={loadError} /></div>}
           {notes && !all.length && (
-            <div className="p-6 text-center text-sm text-muted">
+            <div className="p-6 text-center text-sm text-muted-foreground">
               Nenhuma anotação ainda.
               <div className="mt-3"><Button variant="soft" onClick={create}>Criar a primeira</Button></div>
             </div>
           )}
-          {notes && all.length > 0 && !filtered.length && <div className="p-6 text-center text-sm text-muted">Nada encontrado para essa busca.</div>}
+          {notes && all.length > 0 && !filtered.length && <div className="p-6 text-center text-sm text-muted-foreground">Nada encontrado para essa busca.</div>}
           {groups.map((g) => (
             <div key={g.key} className="py-1">
               <button
                 onClick={() => setCollapsed((c) => ({ ...c, [g.key]: !c[g.key] }))}
-                className="w-full flex items-center gap-1 px-3 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted hover:text-text"
+                className="w-full flex items-center gap-1 px-3 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground hover:text-foreground"
               >
                 <span className={cx('inline-block transition-transform text-[9px]', collapsed[g.key] ? '-rotate-90' : '')}>▼</span>
                 {g.key === '__fixadas' ? '📌 ' : ''}{g.label}
@@ -248,13 +248,13 @@ export default function Notes() {
                   <button
                     key={n.data.id}
                     onClick={() => void select(n.data.id)}
-                    className={cx('w-full text-left px-3 py-2 mx-0 border-l-2 transition', active ? 'bg-accent-soft border-accent' : 'border-transparent hover:bg-surface-2')}
+                    className={cx('w-full text-left px-3 py-2 mx-0 border-l-2 transition', active ? 'bg-primary-soft border-primary' : 'border-transparent hover:bg-muted')}
                   >
                     <div className="flex items-baseline gap-2">
-                      <span className={cx('flex-1 truncate text-sm', active ? 'font-semibold text-accent' : 'font-medium')}>{n.data.title || 'Sem título'}</span>
-                      <span className="text-[11px] text-muted shrink-0">{fmtWhen(n.data.updated)}</span>
+                      <span className={cx('flex-1 truncate text-sm', active ? 'font-semibold text-primary-ink' : 'font-medium')}>{n.data.title || 'Sem título'}</span>
+                      <span className="text-[11px] text-muted-foreground shrink-0">{fmtWhen(n.data.updated)}</span>
                     </div>
-                    <div className="text-xs text-muted truncate mt-0.5">{snippet(n.body) || 'Sem texto'}</div>
+                    <div className="text-xs text-muted-foreground truncate mt-0.5">{snippet(n.body) || 'Sem texto'}</div>
                     {n.data.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1">{n.data.tags.slice(0, 4).map((t) => <TagChip key={t} id={t} def={tagDefs[t]} small />)}</div>
                     )}
@@ -267,33 +267,33 @@ export default function Notes() {
       </section>
 
       {/* Editor */}
-      <section className="flex-1 min-w-0 overflow-y-auto bg-surface">
+      <section className="flex-1 min-w-0 overflow-y-auto bg-card">
         {!draft ? (
-          <div className="h-full flex items-center justify-center text-center text-muted text-sm p-8">
+          <div className="h-full flex items-center justify-center text-center text-muted-foreground text-sm p-8">
             <div>
               {notes && !all.length ? 'Crie uma anotação para começar.' : selectedId && notes ? 'Anotação não encontrada.' : 'Selecione uma anotação.'}
-              <div className="mt-3"><Button variant="ghost" onClick={create}>Nova anotação <kbd className="ml-1 text-[10px] text-muted">{isMac ? '⌘' : 'Ctrl'}+N</kbd></Button></div>
+              <div className="mt-3"><Button variant="ghost" onClick={create}>Nova anotação <kbd className="ml-1 text-[10px] text-muted-foreground">{isMac ? '⌘' : 'Ctrl'}+N</kbd></Button></div>
               <ErrorBox error={actionError} />
             </div>
           </div>
         ) : (
           <div className="max-w-3xl mx-auto px-8 py-6">
             <div className="flex items-center gap-2 mb-4 text-sm">
-              <span className="text-muted text-xs">📁</span>
+              <span className="text-muted-foreground text-xs">📁</span>
               <input
                 list="note-folders"
                 value={draft.data.folder ?? ''}
                 onChange={(e) => edit({ folder: e.target.value })}
                 placeholder="Sem pasta"
                 aria-label="Pasta"
-                className="bg-transparent outline-none text-sm text-muted hover:text-text focus:text-text w-48 border-b border-transparent focus:border-border"
+                className="bg-transparent outline-none text-sm text-muted-foreground hover:text-foreground focus:text-foreground w-48 border-b border-transparent focus:border-border"
               />
               <datalist id="note-folders">{folders.map((f) => <option key={f} value={f} />)}</datalist>
               <div className="ml-auto flex items-center gap-3">
                 <SaveIndicator state={auto.state} />
                 <button
                   onClick={() => edit({ pinned: !draft.data.pinned })}
-                  className={cx('px-2 py-1 rounded-md text-xs border transition', draft.data.pinned ? 'border-accent text-accent bg-accent-soft' : 'border-border text-muted hover:text-text')}
+                  className={cx('px-2 py-1 rounded-md text-xs border transition', draft.data.pinned ? 'border-primary text-primary-ink bg-primary-soft' : 'border-border text-muted-foreground hover:text-foreground')}
                   aria-pressed={draft.data.pinned}
                   title={draft.data.pinned ? 'Desafixar' : 'Fixar no topo'}
                 >📌 {draft.data.pinned ? 'Fixada' : 'Fixar'}</button>
@@ -307,9 +307,9 @@ export default function Notes() {
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); (document.querySelector('.note-editor [contenteditable]') as HTMLElement | null)?.focus(); } }}
               placeholder="Título"
               aria-label="Título"
-              className="w-full text-3xl font-bold tracking-tight bg-transparent outline-none placeholder:text-muted/50"
+              className="w-full text-3xl font-bold tracking-tight bg-transparent outline-none placeholder:text-muted-foreground/50"
             />
-            <div className="mt-2 mb-1 text-xs text-muted">
+            <div className="mt-2 mb-1 text-xs text-muted-foreground">
               Editada {new Date(draft.data.updated).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })} · criada {new Date(draft.data.created).toLocaleDateString('pt-BR')}
             </div>
             <TagsInput slug={slug} value={draft.data.tags} onChange={(tags) => edit({ tags })} className="mt-3 border-dashed" />

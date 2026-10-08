@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Persona } from '../api';
-import { Button, Card, Drawer, Empty, ErrorBox, Field, Input, LinesInput, PageHeader, Select, Textarea, cx } from '../components/ui';
+import { Button, Card, Drawer, Empty, ErrorBox, Field, Input, LinesInput, PageHeader, Select, Textarea, cx } from '../components/kit';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { AWARENESS, AwarenessMeter } from '../components/personas/awareness';
@@ -14,9 +14,9 @@ import { slugify } from '../../../core/platform';
 
 type Role = Persona['role'];
 const ROLES: { id: Role; label: string; cls: string }[] = [
-  { id: 'primaria', label: 'Primária', cls: 'bg-accent-soft text-accent' },
+  { id: 'primaria', label: 'Primária', cls: 'bg-primary-soft text-primary-ink' },
   { id: 'secundaria', label: 'Secundária', cls: 'bg-sky-50 text-sky-700' },
-  { id: 'anti-persona', label: 'Anti-persona', cls: 'bg-red-50 text-danger' },
+  { id: 'anti-persona', label: 'Anti-persona', cls: 'bg-red-50 text-destructive' },
 ];
 const roleOf = (r: Role) => ROLES.find((x) => x.id === r) ?? ROLES[0];
 const LISTS = ['pains', 'desires', 'objections', 'triggers', 'channels', 'quotes'] as const;
@@ -52,7 +52,7 @@ export default function Personas() {
         subtitle="Para quem a gente fala (e para quem não). Base de roteiros, anúncios e páginas."
         actions={<Button onClick={() => setOpen(blank())}>+ Nova persona</Button>}
       />
-      {isLoading && <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{[0, 1, 2].map((i) => <div key={i} className="h-56 rounded-xl bg-surface-2 animate-pulse" />)}</div>}
+      {isLoading && <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{[0, 1, 2].map((i) => <div key={i} className="h-56 rounded-xl bg-muted animate-pulse" />)}</div>}
       <ErrorBox error={error} />
       {data && !data.length && (
         <Empty title="Nenhuma persona cadastrada" hint="Comece pela persona primária: quem mais sente a dor que o produto resolve."
@@ -60,24 +60,24 @@ export default function Personas() {
       )}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {sorted.map((p) => (
-          <Card key={p.data.id} onClick={() => setOpen(p)} className="cursor-pointer hover:border-accent/50 hover:shadow-sm transition flex flex-col gap-3">
+          <Card key={p.data.id} onClick={() => setOpen(p)} className="cursor-pointer hover:border-primary/50 hover:shadow-sm transition flex flex-col gap-3">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <div className="font-semibold truncate">{p.data.name}</div>
                 {(p.data.occupation || p.data.age) && (
-                  <div className="text-xs text-muted truncate">{[p.data.occupation, p.data.age].filter(Boolean).join(' · ')}</div>
+                  <div className="text-xs text-muted-foreground truncate">{[p.data.occupation, p.data.age].filter(Boolean).join(' · ')}</div>
                 )}
               </div>
               <RoleBadge role={p.data.role} />
             </div>
-            {p.data.summary && <p className="text-sm text-text/80 line-clamp-3">{p.data.summary}</p>}
+            {p.data.summary && <p className="text-sm text-foreground/80 line-clamp-3">{p.data.summary}</p>}
             <AwarenessMeter value={p.data.awareness} />
             {p.data.pains.length > 0 && (
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-1">Dores</div>
+                <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-1">Dores</div>
                 <ul className="text-sm space-y-0.5">
-                  {p.data.pains.slice(0, 3).map((x) => <li key={x} className="flex gap-1.5"><span className="text-muted">–</span><span className="line-clamp-1">{x}</span></li>)}
-                  {p.data.pains.length > 3 && <li className="text-xs text-muted">+{p.data.pains.length - 3}</li>}
+                  {p.data.pains.slice(0, 3).map((x) => <li key={x} className="flex gap-1.5"><span className="text-muted-foreground">–</span><span className="line-clamp-1">{x}</span></li>)}
+                  {p.data.pains.length > 3 && <li className="text-xs text-muted-foreground">+{p.data.pains.length - 3}</li>}
                 </ul>
               </div>
             )}
@@ -197,14 +197,14 @@ function PersonaDrawer({ slug, initial, onClose, onFailed }: {
       </div>
       <Field label="Tags"><TagsInput slug={slug} value={d.tags} onChange={(v) => set('tags', v)} /></Field>
       <div className="mb-4">
-        <div className="text-xs font-medium text-muted mb-1 uppercase tracking-wide">História e observações</div>
+        <div className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">História e observações</div>
         <MarkdownEditor value={body} onChange={(md) => { if (md !== body) { setBody(md); setDirty(true); } }} minHeight={180} />
       </div>
       <ErrorBox error={initial.error} />
-      <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-surface border-t border-border flex items-center gap-2">
+      <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-card border-t border-border flex items-center gap-2">
         <Button onClick={save} disabled={!d.name.trim()}>{isNew ? 'Criar persona' : 'Salvar'}</Button>
         <Button variant="ghost" onClick={close}>Cancelar</Button>
-        {!isNew && <span className="text-xs text-muted ml-2">{initial.file}{d.updated ? ` · atualizada ${new Date(`${d.updated}T12:00:00`).toLocaleDateString('pt-BR')}` : ''}</span>}
+        {!isNew && <span className="text-xs text-muted-foreground ml-2">{initial.file}{d.updated ? ` · atualizada ${new Date(`${d.updated}T12:00:00`).toLocaleDateString('pt-BR')}` : ''}</span>}
         {!isNew && (
           <Button variant="danger" className="ml-auto" onClick={del} title="Remove o arquivo. Dá para desfazer no aviso.">Apagar</Button>
         )}

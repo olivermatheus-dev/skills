@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type CompetitorFull, type Doc, type Idea, type ItemMark } from '../api';
 import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useAnalysis, useCompetitor, useTags } from '../queries';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
-import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/ui';
+import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/kit';
 import { ResultLine } from '../components/competitors/AddLinksModal';
 import EditCompetitor from '../components/competitors/EditCompetitor';
 import AnalysisPanel, { MARKET } from '../components/competitors/Analysis';
@@ -66,8 +66,8 @@ export default function CompetitorDetail() {
   // marcar (★, status, tags, nota) é otimista: muda na hora; erro → volta e avisa
   const mark = { mutate: ({ mk, patch }: { mk: string; patch: Partial<ItemMark> }) => { actions.mark(id, mk, patch).catch(() => {}); } };
 
-  if (q.isLoading) return <div className="p-8"><div className="h-48 rounded-xl bg-surface border border-border animate-pulse" /><div className="mt-4 h-24 rounded-xl bg-surface border border-border animate-pulse" /></div>;
-  if (q.error || !d) return <div className="p-8"><Link to={`/p/${slug}/concorrentes`} className="text-sm text-muted">← Concorrentes</Link><ErrorBox error={q.error ?? new Error('não encontrado')} /></div>;
+  if (q.isLoading) return <div className="p-8"><div className="h-48 rounded-xl bg-card border border-border animate-pulse" /><div className="mt-4 h-24 rounded-xl bg-card border border-border animate-pulse" /></div>;
+  if (q.error || !d) return <div className="p-8"><Link to={`/p/${slug}/concorrentes`} className="text-sm text-muted-foreground">← Concorrentes</Link><ErrorBox error={q.error ?? new Error('não encontrado')} /></div>;
 
   const c = d.data;
   const sel = profiles.find((p) => p.key === tab);
@@ -180,10 +180,10 @@ export default function CompetitorDetail() {
   return (
     <div className="max-w-[1400px] pb-16">
       {/* capa */}
-      <div className="relative h-44 bg-gradient-to-r from-indigo-200 via-violet-100 to-sky-200 overflow-hidden">
+      <div className="relative h-44 bg-gradient-to-r from-primary/25 via-primary-soft to-muted overflow-hidden">
         {lp && <Img local={media(lp.bannerLocal)} remote={lp.banner} className="absolute inset-0 w-full h-full object-cover" fallback={<span />} />}
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-        <Link to={`/p/${slug}/concorrentes`} className="absolute top-4 left-6 text-xs font-medium bg-surface/90 backdrop-blur px-2.5 py-1 rounded-md hover:bg-surface">← Concorrentes</Link>
+        <Link to={`/p/${slug}/concorrentes`} className="absolute top-4 left-6 text-xs font-medium bg-card/90 backdrop-blur px-2.5 py-1 rounded-md hover:bg-card">← Concorrentes</Link>
       </div>
 
       <div className="px-8">
@@ -196,9 +196,9 @@ export default function CompetitorDetail() {
               <Badge color={KIND_COLOR[c.kind]}>{KINDS[c.kind]}</Badge>
               {c.status !== 'ativo' && <Badge color={c.status === 'candidato' ? '#d97706' : undefined}>{c.status}</Badge>}
               {c.market && <Badge color={MARKET[c.market].color}>{MARKET[c.market].label}</Badge>}
-              {c.tags.map((t) => <span key={t} className="text-xs text-muted">#{t}</span>)}
+              {c.tags.map((t) => <span key={t} className="text-xs text-muted-foreground">#{t}</span>)}
             </div>
-            <div className="text-xs text-muted mt-1">
+            <div className="text-xs text-muted-foreground mt-1">
               {lastAt ? <>Última coleta {timeAgo(lastAt)} ({fmtDateTime(lastAt)}) · {nSnaps} coleta(s) no histórico</> : 'Ainda não puxado'}
             </div>
           </div>
@@ -211,11 +211,11 @@ export default function CompetitorDetail() {
         </div>
 
         {(() => { const one = (analysis.data?.results.resumo?.data as { oneLiner?: string } | undefined)?.oneLiner; return one ? <p className="mt-4 text-[15px] font-medium max-w-3xl">{one}</p> : null; })()}
-        {bio && <p className="mt-2 text-sm whitespace-pre-line max-w-3xl text-text/90 line-clamp-4">{bio}</p>}
+        {bio && <p className="mt-2 text-sm whitespace-pre-line max-w-3xl text-foreground/90 line-clamp-4">{bio}</p>}
 
         <div className="mt-6 flex gap-1 border-b border-border">
           {([['analise', 'Análise'], ['redes', 'Redes e conteúdos']] as const).map(([k, label]) => (
-            <button key={k} onClick={() => setView(k)} className={cx('px-4 py-2.5 text-sm border-b-2 -mb-px', view === k ? 'border-accent font-semibold' : 'border-transparent text-muted hover:text-text')}>
+            <button key={k} onClick={() => setView(k)} className={cx('px-4 py-2.5 text-sm border-b-2 -mb-px', view === k ? 'border-primary font-semibold' : 'border-transparent text-muted-foreground hover:text-foreground')}>
               {label}{k === 'analise' && analysis.data?.request && <span className="ml-1.5 text-[10px] text-violet-600">● fila</span>}
             </button>
           ))}
@@ -225,13 +225,13 @@ export default function CompetitorDetail() {
         {view === 'redes' && <>
 
         {/* resultado da coleta */}
-        {pulling && <div className="mt-4 text-sm text-muted bg-surface border border-border rounded-lg p-3"><Spinner /> Coletando {c.profiles.length} perfil(is). YouTube com detalhes de cada vídeo pode levar 1–2 minutos…</div>}
+        {pulling && <div className="mt-4 text-sm text-muted-foreground bg-card border border-border rounded-lg p-3"><Spinner /> Coletando {c.profiles.length} perfil(is). YouTube com detalhes de cada vídeo pode levar 1–2 minutos…</div>}
         {pullError ? <ErrorBox error={pullError} /> : null}
         {results && (
-          <div className={cx('mt-4 border rounded-lg p-3 bg-surface', results.every((r) => r.ok) ? 'border-green-200' : 'border-amber-200')}>
+          <div className={cx('mt-4 border rounded-lg p-3 bg-card', results.every((r) => r.ok) ? 'border-green-200' : 'border-amber-200')}>
             <div className="flex items-center justify-between text-sm font-medium mb-1">
               <span>{results.filter((r) => r.ok).length} de {results.length} perfil(is) coletado(s)</span>
-              <button className="text-muted hover:text-text" onClick={() => setResults(null)} aria-label="Fechar">×</button>
+              <button className="text-muted-foreground hover:text-foreground" onClick={() => setResults(null)} aria-label="Fechar">×</button>
             </div>
             {results.map((r) => <ResultLine key={r.key} r={r} />)}
           </div>
@@ -246,12 +246,12 @@ export default function CompetitorDetail() {
             const f = pf?.series?.latest?.data.profile.followers;
             return (
               <button key={p.key} onClick={() => setTab(p.key)}
-                className={cx('px-3 py-2.5 text-sm whitespace-nowrap border-b-2 -mb-px flex items-center gap-2', active ? 'border-accent text-text font-medium' : 'border-transparent text-muted hover:text-text')}>
-                {isAll ? <>Todos <span className="text-xs text-muted">{rows.length}</span></> : <>
+                className={cx('px-3 py-2.5 text-sm whitespace-nowrap border-b-2 -mb-px flex items-center gap-2', active ? 'border-primary text-foreground font-medium' : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                {isAll ? <>Todos <span className="text-xs text-muted-foreground">{rows.length}</span></> : <>
                   <PlatformIcon platform={pf!.platform} size={15} />
                   {handleOf(pf!)}
-                  {f != null && <span className="text-xs text-muted tabular-nums">{fmtNum(f)}</span>}
-                  {!pf!.series && <span className="text-[10px] text-warn">não puxado</span>}
+                  {f != null && <span className="text-xs text-muted-foreground tabular-nums">{fmtNum(f)}</span>}
+                  {!pf!.series && <span className="text-[10px] text-warning">não puxado</span>}
                 </>}
               </button>
             );
@@ -259,17 +259,17 @@ export default function CompetitorDetail() {
         </div>
 
         {sel && (
-          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted">
-            <a href={sel.url} target="_blank" rel="noreferrer" className="text-accent">{sel.url} ↗</a>
+          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+            <a href={sel.url} target="_blank" rel="noreferrer" className="text-primary-ink">{sel.url} ↗</a>
             {sel.series?.latest && <span>via {sel.series.latest.data.source}</span>}
-            {sel.series?.latest?.data.profile.links.filter((l) => !siteLinks.includes(l)).map((l) => <a key={l} href={l} target="_blank" rel="noreferrer" className="hover:text-accent">🔗 {l.replace(/^https?:\/\//, '')}</a>)}
-            {sel.series?.latest?.data.errors.map((e) => <span key={e} className="text-warn">⚠ {e}</span>)}
+            {sel.series?.latest?.data.profile.links.filter((l) => !siteLinks.includes(l)).map((l) => <a key={l} href={l} target="_blank" rel="noreferrer" className="hover:text-primary-ink">🔗 {l.replace(/^https?:\/\//, '')}</a>)}
+            {sel.series?.latest?.data.errors.map((e) => <span key={e} className="text-warning">⚠ {e}</span>)}
           </div>
         )}
 
         {/* números */}
         {sel?.platform !== 'site' && <div className="mt-5 grid gap-3 grid-cols-2 md:grid-cols-5">
-          <Stat label={sel ? 'Seguidores' : 'Seguidores (soma)'} value={fmtNum(fTotal)} sub={fDelta ? <span className={fDelta > 0 ? 'text-ok' : 'text-danger'}>{fmtDelta(fDelta)} vs coleta anterior</span> : undefined} />
+          <Stat label={sel ? 'Seguidores' : 'Seguidores (soma)'} value={fmtNum(fTotal)} sub={fDelta ? <span className={fDelta > 0 ? 'text-success' : 'text-destructive'}>{fmtDelta(fDelta)} vs coleta anterior</span> : undefined} />
           <Stat label="Conteúdos na última coleta" value={fmtNum(scopeRows.length)} sub={types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ')} />
           <Stat label="Mediana de views" value={fmtNum(medViews)} sub="base do outlier" />
           <Stat label="Fora da curva (≥ 3×)" value={String(hot)} sub={hot ? 'destacados em amarelo' : 'nenhum por enquanto'} accent={hot > 0} />
@@ -284,11 +284,11 @@ export default function CompetitorDetail() {
         )}
 
         {missingLinks.length > 0 && (
-          <div className="mt-5 bg-surface border border-border rounded-lg p-3 text-sm">
-            <div className="text-xs font-medium text-muted uppercase tracking-wide mb-2">Redes encontradas no site</div>
+          <div className="mt-5 bg-card border border-border rounded-lg p-3 text-sm">
+            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">Redes encontradas no site</div>
             <div className="flex flex-wrap gap-2">
               {missingLinks.map((l) => (
-                <button key={l} onClick={() => addLink(l)} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md border border-border hover:border-accent hover:text-accent text-xs">
+                <button key={l} onClick={() => addLink(l)} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md border border-border hover:border-primary hover:text-primary-ink text-xs">
                   + {l.replace(/^https?:\/\/(www\.)?/, '')}
                 </button>
               ))}
@@ -315,7 +315,7 @@ export default function CompetitorDetail() {
               <option value="todas">Todos os status</option>
               {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </Select>
-            <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted hover:text-text')}>★ Favoritos</button>
+            <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted-foreground hover:text-foreground')}>★ Favoritos</button>
             <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar no título, legenda, nota…" className="ml-auto w-64" />
           </div>
           <ErrorBox error={ideaError} />
@@ -336,7 +336,7 @@ export default function CompetitorDetail() {
                 onMark={(patch) => mark.mutate({ mk: r.mk, patch })} onIdea={() => makeIdea(r)} onOpen={() => setOpen(r.mk)} />
             ))}
           </div>
-          {filtered.length > 0 && <div className="text-xs text-muted mt-4">{filtered.length} de {scopeRows.length} conteúdos · outlier = views ÷ mediana de views do mesmo perfil na última coleta (sem views: curtidas ♥)</div>}
+          {filtered.length > 0 && <div className="text-xs text-muted-foreground mt-4">{filtered.length} de {scopeRows.length} conteúdos · outlier = views ÷ mediana de views do mesmo perfil na última coleta (sem views: curtidas ♥)</div>}
         </section>
         </>}
       </div>
@@ -354,10 +354,10 @@ export default function CompetitorDetail() {
 
 function Stat({ label, value, sub, accent }: { label: string; value: string; sub?: React.ReactNode; accent?: boolean }) {
   return (
-    <div className={cx('bg-surface border rounded-xl px-4 py-3', accent ? 'border-amber-300' : 'border-border')}>
-      <div className="text-[11px] text-muted uppercase tracking-wide">{label}</div>
+    <div className={cx('bg-card border rounded-xl px-4 py-3', accent ? 'border-amber-300' : 'border-border')}>
+      <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
       <div className="text-xl font-semibold tabular-nums mt-0.5">{value}</div>
-      {sub && <div className="text-xs text-muted mt-0.5 truncate">{sub}</div>}
+      {sub && <div className="text-xs text-muted-foreground mt-0.5 truncate">{sub}</div>}
     </div>
   );
 }

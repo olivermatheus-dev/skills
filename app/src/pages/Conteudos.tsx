@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type PieceFull, type PieceInfo, type Review, type ReviewComment } from '../api';
-import { Badge, Button, Card, Empty, ErrorBox, Input, Select, cx, fmtDate } from '../components/ui';
+import { Badge, Button, Card, Empty, ErrorBox, Input, Select, cx, fmtDate } from '../components/kit';
 import { toast } from '../components/toast';
 import { qk, usePiece, usePieces } from '../queries';
 import NewPiece from '../components/pieces/NewPiece';
@@ -69,7 +69,7 @@ function PieceList() {
       <div className="flex items-start justify-between gap-4 mb-5">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Conteúdos</h1>
-          <p className="text-sm text-muted mt-1">Todas as peças da empresa: abra, veja, anote a legenda/copy e revise a edição.</p>
+          <p className="text-sm text-muted-foreground mt-1">Todas as peças da empresa: abra, veja, anote a legenda/copy e revise a edição.</p>
         </div>
         <Button onClick={() => setCreating(true)}>Novo conteúdo</Button>
       </div>
@@ -77,7 +77,7 @@ function PieceList() {
       {/* tipos como abas rápidas */}
       <div className="flex gap-1 flex-wrap mb-3">
         {[['', 'Todos', pieces.filter((p) => !p.archived).length] as const, ...Object.entries(KIND_LABEL).map(([k, v]) => [k, v.label, counts[k]] as const)].map(([k, label, n]) => (
-          <button key={k} onClick={() => setF('tipo', k)} className={cx('px-3 py-1 rounded-full text-sm border', f.kind === k ? 'bg-accent text-white border-accent' : 'bg-surface border-border text-muted hover:text-text')}>
+          <button key={k} onClick={() => setF('tipo', k)} className={cx('px-3 py-1 rounded-full text-sm border', f.kind === k ? 'bg-primary text-primary-foreground border-primary' : 'bg-card border-border text-muted-foreground hover:text-foreground')}>
             {label} <span className="opacity-70">{n}</span>
           </button>
         ))}
@@ -96,19 +96,19 @@ function PieceList() {
         <label className="text-sm flex items-center gap-1.5"><input type="checkbox" checked={f.fav} onChange={(e) => setF('fav', e.target.checked)} /> só favoritos</label>
         <label className="text-sm flex items-center gap-1.5"><input type="checkbox" checked={f.arq} onChange={(e) => setF('arquivadas', e.target.checked)} /> arquivadas ({archivedCount})</label>
         <div className="ml-auto flex border border-border rounded-md overflow-hidden text-sm">
-          {(['grade', 'lista'] as const).map((v) => <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1', view === v ? 'bg-surface-2 font-medium' : 'text-muted')}>{v === 'grade' ? 'Grade' : 'Lista'}</button>)}
+          {(['grade', 'lista'] as const).map((v) => <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1', view === v ? 'bg-muted font-medium' : 'text-muted-foreground')}>{v === 'grade' ? 'Grade' : 'Lista'}</button>)}
         </div>
       </div>
 
       <ErrorBox error={error} />
-      {isLoading ? <div className="text-muted">Carregando…</div> : !shown.length ? (
+      {isLoading ? <div className="text-muted-foreground">Carregando…</div> : !shown.length ? (
         pieces.length ? <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque o tipo." />
           : <Empty title="Nenhum conteúdo ainda" hint="Cole um roteiro pronto para começar, ou peça à IA uma pauta." action={<Button onClick={() => setCreating(true)}>Novo conteúdo</Button>} />
       ) : view === 'grade' ? (
         <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
           {shown.map((p) => (
             <div key={p.path} role="button" tabIndex={0} data-piece={p.path} onClick={() => openPiece(p)} onKeyDown={(e) => e.key === 'Enter' && openPiece(p)}
-              className="group text-left bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-accent/40 transition cursor-pointer">
+              className="group text-left bg-card border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-primary/40 transition cursor-pointer">
               <div className="relative">
                 <Thumb slug={slug} piece={p} className="aspect-[4/5]" />
                 <Badge color={KIND_LABEL[p.kind].color} className="absolute top-2 left-2 !bg-white/90">{KIND_LABEL[p.kind].label}</Badge>
@@ -117,7 +117,7 @@ function PieceList() {
               </div>
               <div className="p-3">
                 <div className="font-medium text-sm leading-snug line-clamp-2 first-letter:uppercase">{p.title}</div>
-                <div className="text-xs text-muted mt-1 flex items-center gap-1.5 flex-wrap">
+                <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1.5 flex-wrap">
                   {p.date && <span>{fmtDate(p.date)}</span>}
                   {p.videos.length > 1 && <span>· {p.videos.length} versões</span>}
                   {p.images.length > 1 && <span>· {p.images.length} slides</span>}
@@ -127,31 +127,31 @@ function PieceList() {
                   {p.publication?.url && <Badge color="#16a34a">publicado</Badge>}
                   {p.tags.slice(0, 3).map((t) => <TagChip key={t} id={t} def={byId[t]} small />)}
                   <button title="Abrir a pasta no Explorer" onClick={(e) => { e.stopPropagation(); desktop(slug, p.path, 'reveal'); }}
-                    className="ml-auto text-xs text-muted hover:text-text opacity-0 group-hover:opacity-100">pasta ↗</button>
+                    className="ml-auto text-xs text-muted-foreground hover:text-foreground opacity-0 group-hover:opacity-100">pasta ↗</button>
                 </div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="divide-y divide-border border border-border rounded-xl bg-surface">
+        <div className="divide-y divide-border border border-border rounded-xl bg-card">
           {shown.map((p) => (
             <div key={p.path} role="button" tabIndex={0} data-piece={p.path} onClick={() => openPiece(p)} onKeyDown={(e) => e.key === 'Enter' && openPiece(p)}
-              className="group w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-surface-2/60 cursor-pointer first:rounded-t-xl last:rounded-b-xl">
+              className="group w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-muted/60 cursor-pointer first:rounded-t-xl last:rounded-b-xl">
               <Star on={p.favorite} onClick={() => save.mutate({ path: p.path, patch: { favorite: !p.favorite } })} />
               <Thumb slug={slug} piece={p} className="w-12 h-14 rounded" />
               <Badge color={KIND_LABEL[p.kind].color} className="w-20 justify-center">{KIND_LABEL[p.kind].label}</Badge>
               <div className="min-w-0 flex-1">
                 <div className="font-medium truncate first-letter:uppercase">{p.title}</div>
-                <div className="text-xs text-muted truncate">{p.date ? fmtDate(p.date) : ''} · <span className="font-mono">{p.path}</span>{p.videos.length ? ` · ${p.videos.length} vídeo(s)` : ''}{p.images.length ? ` · ${p.images.length} imagem(ns)` : ''}</div>
+                <div className="text-xs text-muted-foreground truncate">{p.date ? fmtDate(p.date) : ''} · <span className="font-mono">{p.path}</span>{p.videos.length ? ` · ${p.videos.length} vídeo(s)` : ''}{p.images.length ? ` · ${p.images.length} imagem(ns)` : ''}</div>
               </div>
               {p.tags.slice(0, 3).map((t) => <TagChip key={t} id={t} def={byId[t]} small />)}
               {p.approvals?.roteiro && <Badge color="#16a34a">roteiro aprovado</Badge>}
               {p.status && <Badge color={STATUS_LABEL[p.status].color}>{STATUS_LABEL[p.status].label}</Badge>}
-              <span className={cx('text-xs w-24 text-right', p.openComments ? 'text-danger font-medium' : 'text-muted')}>
+              <span className={cx('text-xs w-24 text-right', p.openComments ? 'text-destructive font-medium' : 'text-muted-foreground')}>
                 {p.openComments ? `${p.openComments} aberta(s)` : p.totalComments ? 'tudo resolvido' : '—'}
               </span>
-              <button title="Abrir a pasta no Explorer" onClick={(e) => { e.stopPropagation(); desktop(slug, p.path, 'reveal'); }} className="text-xs text-muted hover:text-text">pasta ↗</button>
+              <button title="Abrir a pasta no Explorer" onClick={(e) => { e.stopPropagation(); desktop(slug, p.path, 'reveal'); }} className="text-xs text-muted-foreground hover:text-foreground">pasta ↗</button>
             </div>
           ))}
         </div>
@@ -195,7 +195,7 @@ function PieceDetail({ path }: { path: string }) {
 
   return (
     <div className="p-8 max-w-[1500px]">
-      <div className="mb-1 text-sm"><Link to="?" className="text-muted hover:text-text">← Conteúdos</Link></div>
+      <div className="mb-1 text-sm"><Link to="?" className="text-muted-foreground hover:text-foreground">← Conteúdos</Link></div>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div className="min-w-0 flex-1">
           {renaming !== null ? (
@@ -205,10 +205,10 @@ function PieceDetail({ path }: { path: string }) {
             <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2 first-letter:uppercase">
               {piece && <Star on={piece.favorite} onClick={() => saveMeta.mutate({ path, patch: { favorite: !piece.favorite } })} />}
               <span className="truncate">{piece?.title ?? path}</span>
-              {piece && <button className="text-xs font-normal text-muted hover:text-text" onClick={() => setRenaming(piece.title)}>renomear</button>}
+              {piece && <button className="text-xs font-normal text-muted-foreground hover:text-foreground" onClick={() => setRenaming(piece.title)}>renomear</button>}
             </h1>
           )}
-          <p className="text-xs text-muted mt-1 font-mono truncate">contents/{path}</p>
+          <p className="text-xs text-muted-foreground mt-1 font-mono truncate">contents/{path}</p>
         </div>
         {piece && (
           <div className="flex gap-2 shrink-0 items-center flex-wrap justify-end">
@@ -223,16 +223,16 @@ function PieceDetail({ path }: { path: string }) {
         )}
       </div>
       <ErrorBox error={error} />
-      {isLoading && <div className="text-muted">Carregando…</div>}
+      {isLoading && <div className="text-muted-foreground">Carregando…</div>}
       {piece && (
         <>
-          {piece.archived && <Card className="mb-4 text-sm bg-surface-2">Peça arquivada: não aparece na lista principal.</Card>}
+          {piece.archived && <Card className="mb-4 text-sm bg-muted">Peça arquivada: não aparece na lista principal.</Card>}
           <div className="flex gap-1 border-b border-border mb-5">
             {tabs.map((t) => {
               const n = t === 'ficha' ? 0 : open((c) => (t === 'roteiro') === (c.anchor.kind === 'roteiro'));
               return (
-                <button key={t} onClick={() => go(t)} className={cx('px-4 py-2 text-sm -mb-px border-b-2', tab === t ? 'border-accent text-accent font-medium' : 'border-transparent text-muted hover:text-text')}>
-                  {TAB_LABEL[t]}{n ? <span className="ml-1.5 text-xs text-danger">{n}</span> : null}
+                <button key={t} onClick={() => go(t)} className={cx('px-4 py-2 text-sm -mb-px border-b-2', tab === t ? 'border-primary text-primary-ink font-medium' : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                  {TAB_LABEL[t]}{n ? <span className="ml-1.5 text-xs text-destructive">{n}</span> : null}
                 </button>
               );
             })}
@@ -241,7 +241,7 @@ function PieceDetail({ path }: { path: string }) {
           {tab === 'roteiro' && <TextReview slug={slug} path={path} texts={piece.texts} review={review} saveReview={(r) => save.mutate(r)} saving={save.isPending} />}
           {tab === 'video' && (piece.videos.length || piece.timeline
             ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />
-            : <Card className="text-sm text-muted">Sem vídeo exportado ainda.</Card>)}
+            : <Card className="text-sm text-muted-foreground">Sem vídeo exportado ainda.</Card>)}
         </>
       )}
     </div>

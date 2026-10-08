@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Review, type ReviewComment } from '../../api';
-import { Badge, Button, Card, ErrorBox, Select, Textarea, cx, fmtDate } from '../ui';
+import { Badge, Button, Card, ErrorBox, Select, Textarea, cx, fmtDate } from '../kit';
 import { toast } from '../toast';
 import { qk, usePieceText } from '../../queries';
 import { CommentCard, TipoPicker, nextCommentId, nowLocal, tipoOf, type Tipo } from './shared';
@@ -29,7 +29,7 @@ function Line({ n, text, mark }: { n: number; text: string; mark?: { h: string; 
   if (mark && i >= 0) content = <>{text.slice(0, i)}<mark className="rounded-sm px-0.5" style={{ background: `${mark.color}33`, color: 'inherit', boxShadow: `inset 0 -2px 0 ${mark.color}` }}>{text.slice(i, i + mark.h.length)}</mark>{text.slice(i + mark.h.length)}</>;
   return (
     <div data-line={n} className={cx('grid grid-cols-[2.75rem_1fr] gap-3 px-2 rounded', mark && 'bg-amber-50/60')}>
-      <span className="select-none text-right text-[11px] text-muted font-mono pt-[3px] tabular-nums relative">
+      <span className="select-none text-right text-[11px] text-muted-foreground font-mono pt-[3px] tabular-nums relative">
         {mark && <span className="absolute -left-1 top-[7px] w-2 h-2 rounded-full" style={{ background: mark.color }} title={mark.id} />}{n}
       </span>
       <span className={cx('whitespace-pre-wrap break-words leading-6 text-[14px]', hd && 'font-semibold', hd?.[1] === '#' && 'text-lg', hd?.[1] === '##' && 'text-base')}>{content}</span>
@@ -106,7 +106,7 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
   const approve = (on: boolean) => saveReview({ ...review, approvals: { ...review.approvals, roteiro: on ? new Date().toISOString().slice(0, 10) : undefined } });
   const shown = located.filter(({ c }) => filter === 'todas' || c.status === 'aberto');
 
-  if (!texts.length) return <Card className="text-sm text-muted">Esta peça não tem textos (.md/.txt) na pasta.</Card>;
+  if (!texts.length) return <Card className="text-sm text-muted-foreground">Esta peça não tem textos (.md/.txt) na pasta.</Card>;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] items-start">
@@ -117,7 +117,7 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
           ) : <span className="font-mono text-sm">{file}</span>}
           <div className="flex rounded-md border border-border overflow-hidden text-sm">
             {(['revisar', 'editar'] as const).map((m) => (
-              <button key={m} className={cx('px-3 py-1', mode === m ? 'bg-accent text-white' : 'bg-surface hover:bg-surface-2')}
+              <button key={m} className={cx('px-3 py-1', mode === m ? 'bg-primary text-primary-foreground' : 'bg-card hover:bg-muted')}
                 onClick={() => { if (m === mode) return; if (m === 'editar') setEdit(text); else if (dirty && !confirm('Descartar alterações?')) return; setMode(m); }}>
                 {m === 'revisar' ? 'Revisar' : 'Editar'}
               </button>
@@ -125,12 +125,12 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
           </div>
           <span className="ml-auto flex items-center gap-2">
             {approved ? (
-              <><Badge color="#16a34a">Roteiro aprovado · {fmtDate(approved)}</Badge><button className="text-xs text-muted hover:text-text" onClick={() => approve(false)}>desfazer</button></>
+              <><Badge color="#16a34a">Roteiro aprovado · {fmtDate(approved)}</Badge><button className="text-xs text-muted-foreground hover:text-foreground" onClick={() => approve(false)}>desfazer</button></>
             ) : <Button variant="ghost" disabled={saving} onClick={() => approve(true)} title="Libera a produção: a IA só anima/diagrama depois disso">Aprovar roteiro</Button>}
           </span>
         </div>
         <ErrorBox error={error} />
-        {isLoading ? <div className="text-muted text-sm">Carregando…</div> : mode === 'revisar' ? (
+        {isLoading ? <div className="text-muted-foreground text-sm">Carregando…</div> : mode === 'revisar' ? (
           <Card className="py-3 px-1">
             <div ref={box} onMouseUp={onMouseUp} data-testid="roteiro">
               {lines.map((l, i) => <Line key={i} n={i + 1} text={l} mark={markByLine.get(i + 1)} />)}
@@ -143,7 +143,7 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
               <Button variant="ghost" onClick={() => setMode('revisar')}>Cancelar</Button>
               <Button disabled={!dirty || savingText} onClick={saveText}>{savingText ? 'Salvando…' : 'Salvar texto'}</Button>
             </div>
-            <p className="text-xs text-muted">As anotações seguem o trecho citado: se a linha mudar de lugar, ela é reencontrada pelo texto.</p>
+            <p className="text-xs text-muted-foreground">As anotações seguem o trecho citado: se a linha mudar de lugar, ela é reencontrada pelo texto.</p>
           </div>
         )}
       </div>
@@ -152,13 +152,13 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
         <Card>
           <div className="text-sm font-medium mb-2">Nova anotação</div>
           {!draft ? (
-            <p className="text-sm text-muted">No modo <b>Revisar</b>, selecione um trecho do texto para anotar.</p>
+            <p className="text-sm text-muted-foreground">No modo <b>Revisar</b>, selecione um trecho do texto para anotar.</p>
           ) : (
             <div className="space-y-2">
               <div className="flex items-start gap-2 text-sm">
-                <button className="text-xs text-accent shrink-0 pt-0.5" onClick={() => jump(draft.line)}>linha {draft.line}</button>
-                <blockquote className="text-xs text-muted border-l-2 border-border pl-2 line-clamp-4 whitespace-pre-wrap">{draft.quote}</blockquote>
-                <button className="ml-auto text-xs text-muted shrink-0" onClick={() => setDraft(null)}>limpar</button>
+                <button className="text-xs text-primary-ink shrink-0 pt-0.5" onClick={() => jump(draft.line)}>linha {draft.line}</button>
+                <blockquote className="text-xs text-muted-foreground border-l-2 border-border pl-2 line-clamp-4 whitespace-pre-wrap">{draft.quote}</blockquote>
+                <button className="ml-auto text-xs text-muted-foreground shrink-0" onClick={() => setDraft(null)}>limpar</button>
               </div>
               <TipoPicker value={tipo} onChange={setTipo} />
               <Textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} autoFocus
@@ -174,7 +174,7 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
             <Badge>{mine.filter((c) => c.status === 'aberto').length} abertas</Badge>
             <Select className="ml-auto" value={filter} onChange={(e) => setFilter(e.target.value as 'abertas' | 'todas')}><option value="abertas">só abertas</option><option value="todas">todas</option></Select>
           </div>
-          {!shown.length && <p className="text-sm text-muted">Nada por aqui. Depois de anotar, peça: <code>revisa as anotações de {path}</code>.</p>}
+          {!shown.length && <p className="text-sm text-muted-foreground">Nada por aqui. Depois de anotar, peça: <code>revisa as anotações de {path}</code>.</p>}
           <div className="space-y-2">
             {shown.map(({ c, at }) => (
               <CommentCard key={c.id} c={c}

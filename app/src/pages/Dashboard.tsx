@@ -3,18 +3,18 @@ import type { ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { Idea } from '../api';
 import { useCompetitors, useIdeas, useNotes, useProject, useTasks } from '../queries';
-import { Card, ErrorBox, cx, fmtDate } from '../components/ui';
+import { Card, ErrorBox, cx, fmtDate } from '../components/kit';
 import { TaskCard } from '../components/board/TaskCard';
 import { COLUMNS, isLate, type TaskDoc } from '../components/board/taskUtils';
 
 const IDEA_STATUS: { id: Idea['status']; label: string; color: string }[] = [
   { id: 'nova', label: 'Novas', color: '#60a5fa' },
-  { id: 'analisada', label: 'Analisadas', color: 'var(--color-accent)' },
-  { id: 'aprovada', label: 'Aprovadas', color: 'var(--color-ok)' },
-  { id: 'virou-tarefa', label: 'Viraram tarefa', color: 'var(--color-warn)' },
+  { id: 'analisada', label: 'Analisadas', color: 'var(--color-primary)' },
+  { id: 'aprovada', label: 'Aprovadas', color: 'var(--color-success)' },
+  { id: 'virou-tarefa', label: 'Viraram tarefa', color: 'var(--color-warning)' },
   { id: 'descartada', label: 'Descartadas', color: '#a1a1aa' },
 ];
-const COL_COLOR: Record<string, string> = { backlog: '#a1a1aa', todo: '#60a5fa', doing: 'var(--color-accent)', review: 'var(--color-warn)', done: 'var(--color-ok)' };
+const COL_COLOR: Record<string, string> = { backlog: '#a1a1aa', todo: '#60a5fa', doing: 'var(--color-primary)', review: 'var(--color-warning)', done: 'var(--color-success)' };
 
 export default function Dashboard() {
   const { slug = '' } = useParams();
@@ -39,9 +39,9 @@ export default function Dashboard() {
         <div className="flex items-center gap-2">
           {p?.color && <span className="w-3 h-3 rounded-full" style={{ background: p.color }} />}
           <h1 className="text-2xl font-semibold tracking-tight">{p?.name ?? (project.isLoading ? '…' : slug)}</h1>
-          {p && p.status !== 'ativo' && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-2 text-muted">{p.status}</span>}
+          {p && p.status !== 'ativo' && <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">{p.status}</span>}
         </div>
-        <p className="text-sm text-muted mt-1">{[p?.segment, p?.description].filter(Boolean).join(' · ') || 'Visão geral do projeto'}</p>
+        <p className="text-sm text-muted-foreground mt-1">{[p?.segment, p?.description].filter(Boolean).join(' · ') || 'Visão geral do projeto'}</p>
         <ErrorBox error={project.error} />
       </div>
 
@@ -63,7 +63,7 @@ export default function Dashboard() {
                   <TaskCard task={t} showBoard />
                 </Link>
               ))}
-              {waiting.length > 8 && <Link to={`${to('quadro')}?visao=oliver`} className="text-sm text-accent self-center">+ {waiting.length - 8} {waiting.length - 8 === 1 ? "tarefa" : "tarefas"}</Link>}
+              {waiting.length > 8 && <Link to={`${to('quadro')}?visao=oliver`} className="text-sm text-primary-ink self-center">+ {waiting.length - 8} {waiting.length - 8 === 1 ? "tarefa" : "tarefas"}</Link>}
             </div>
           )}
         </Section>
@@ -74,16 +74,16 @@ export default function Dashboard() {
 
         <Section className="lg:col-span-2" title="Últimas anotações" link={{ to: to('anotacoes'), label: 'Ver todas' }}>
           {notes.isLoading ? <Skeleton rows={3} /> : notes.isError ? <ErrorBox error={notes.error} /> : !notes.data?.length ? (
-            <EmptyLine>Nenhuma anotação ainda. <Link to={to('anotacoes')} className="text-accent">Escrever a primeira</Link></EmptyLine>
+            <EmptyLine>Nenhuma anotação ainda. <Link to={to('anotacoes')} className="text-primary-ink">Escrever a primeira</Link></EmptyLine>
           ) : (
             <ul className="divide-y divide-border -my-1">
               {[...notes.data].sort((a, b) => b.data.updated.localeCompare(a.data.updated)).slice(0, 5).map((n) => (
                 <li key={n.data.id}>
                   <Link to={`${to('anotacoes')}?n=${n.data.id}`} className="flex items-center gap-3 py-2 group">
-                    {n.data.pinned && <span className="text-[10px] uppercase tracking-wide text-accent font-medium" title="Fixada">fixada</span>}
-                    <span className="text-sm font-medium group-hover:text-accent truncate">{n.data.title}</span>
-                    {n.data.folder && <span className="text-xs text-muted truncate">{n.data.folder}</span>}
-                    <span className="ml-auto text-xs text-muted shrink-0">{fmtDate(n.data.updated)}</span>
+                    {n.data.pinned && <span className="text-[10px] uppercase tracking-wide text-primary-ink font-medium" title="Fixada">fixada</span>}
+                    <span className="text-sm font-medium group-hover:text-primary-ink truncate">{n.data.title}</span>
+                    {n.data.folder && <span className="text-xs text-muted-foreground truncate">{n.data.folder}</span>}
+                    <span className="ml-auto text-xs text-muted-foreground shrink-0">{fmtDate(n.data.updated)}</span>
                   </Link>
                 </li>
               ))}
@@ -93,13 +93,13 @@ export default function Dashboard() {
 
         <Section title="Ideias" link={{ to: to('ideias'), label: 'Banco de ideias' }}>
           {ideas.isLoading ? <Skeleton rows={4} /> : ideas.isError ? <ErrorBox error={ideas.error} /> : !ideas.data?.length ? (
-            <EmptyLine>Nenhuma ideia ainda. <Link to={to('ideias')} className="text-accent">Adicionar</Link></EmptyLine>
+            <EmptyLine>Nenhuma ideia ainda. <Link to={to('ideias')} className="text-primary-ink">Adicionar</Link></EmptyLine>
           ) : (
             <ul className="space-y-1.5">
               {IDEA_STATUS.map((s) => {
                 const n = ideas.data.filter((i) => i.data.status === s.id).length;
                 return (
-                  <li key={s.id} className={cx('flex items-center gap-2 text-sm', !n && 'text-muted')}>
+                  <li key={s.id} className={cx('flex items-center gap-2 text-sm', !n && 'text-muted-foreground')}>
                     <span className="w-2 h-2 rounded-full" style={{ background: s.color }} />{s.label}
                     <span className="ml-auto tabular-nums font-medium">{n}</span>
                   </li>
@@ -112,7 +112,7 @@ export default function Dashboard() {
 
       <div className="mt-6 flex flex-wrap gap-2 text-sm">
         {[['quadro', 'Quadro'], ['concorrentes', 'Concorrentes'], ['ideias', 'Ideias'], ['personas', 'Personas'], ['anotacoes', 'Anotações'], ['contexto', 'Contexto e marca']].map(([path, label]) => (
-          <Link key={path} to={to(path)} className="px-3 py-1.5 rounded-md border border-border bg-surface hover:border-accent hover:text-accent transition">{label} →</Link>
+          <Link key={path} to={to(path)} className="px-3 py-1.5 rounded-md border border-border bg-card hover:border-primary hover:text-primary-ink transition">{label} →</Link>
         ))}
       </div>
     </div>
@@ -123,9 +123,9 @@ function Stat({ label, value, hint, to, tone }: { label: string; value?: number;
   return (
     <Link to={to}>
       <Card className="hover:border-zinc-300 transition h-full">
-        <div className="text-xs font-medium text-muted uppercase tracking-wide">{label}</div>
-        <div className={cx('text-3xl font-semibold tabular-nums mt-1', tone === 'warn' && 'text-warn', tone === 'danger' && 'text-danger')}>{value ?? '—'}</div>
-        {hint && <div className="text-xs text-muted mt-1 truncate" title={hint}>{hint}</div>}
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{label}</div>
+        <div className={cx('text-3xl font-semibold tabular-nums mt-1', tone === 'warn' && 'text-warning', tone === 'danger' && 'text-destructive')}>{value ?? '—'}</div>
+        {hint && <div className="text-xs text-muted-foreground mt-1 truncate" title={hint}>{hint}</div>}
       </Card>
     </Link>
   );
@@ -136,8 +136,8 @@ function Section({ title, subtitle, link, className, children }: { title: string
     <Card className={className}>
       <div className="flex items-baseline gap-2 mb-3">
         <h2 className="font-semibold">{title}</h2>
-        {subtitle && <span className="text-xs text-muted">{subtitle}</span>}
-        {link && <Link to={link.to} className="ml-auto text-xs text-accent hover:underline">{link.label} →</Link>}
+        {subtitle && <span className="text-xs text-muted-foreground">{subtitle}</span>}
+        {link && <Link to={link.to} className="ml-auto text-xs text-primary-ink hover:underline">{link.label} →</Link>}
       </div>
       {children}
     </Card>
@@ -153,7 +153,7 @@ function ColumnBars({ tasks }: { tasks: TaskDoc[] }) {
         return (
           <li key={c.id}>
             <div className="flex items-center text-sm mb-1"><span>{c.label}</span><span className="ml-auto tabular-nums font-medium">{n}</span></div>
-            <div className="h-1.5 rounded-full bg-surface-2 overflow-hidden">
+            <div className="h-1.5 rounded-full bg-muted overflow-hidden">
               <div className="h-full rounded-full" style={{ width: `${(n / max) * 100}%`, background: COL_COLOR[c.id] }} />
             </div>
           </li>
@@ -163,7 +163,7 @@ function ColumnBars({ tasks }: { tasks: TaskDoc[] }) {
   );
 }
 
-const EmptyLine = ({ children }: { children: ReactNode }) => <div className="text-sm text-muted py-4">{children}</div>;
+const EmptyLine = ({ children }: { children: ReactNode }) => <div className="text-sm text-muted-foreground py-4">{children}</div>;
 const Skeleton = ({ rows }: { rows: number }) => (
-  <div className="space-y-2">{Array.from({ length: rows }, (_, i) => <div key={i} className="h-8 rounded-md bg-surface-2 animate-pulse" />)}</div>
+  <div className="space-y-2">{Array.from({ length: rows }, (_, i) => <div key={i} className="h-8 rounded-md bg-muted animate-pulse" />)}</div>
 );

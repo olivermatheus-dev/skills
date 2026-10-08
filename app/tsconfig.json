@@ -1,5 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "compilerOptions": { "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": ["node", "vite/client"] },
+  "compilerOptions": { "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": ["node", "vite/client"], "paths": { "@/*": ["./src/*"] } },
   "include": ["src", "server", "vite.config.ts", "../schema", "../core", "../tools/intel"]
 }

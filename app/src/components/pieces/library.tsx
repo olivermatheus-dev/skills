@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type PieceFull, type PieceInfo, type PieceMeta } from '../../api';
 import { qk } from '../../queries';
 import { toast } from '../toast';
-import { cx } from '../ui';
+import { cx } from '../kit';
 import { KIND_LABEL } from './shared';
 
 /** grava um pedaço da ficha com atualização otimista na lista e no detalhe */
@@ -53,6 +53,6 @@ export function Star({ on, onClick, className }: { on: boolean; onClick: () => v
   return (
     <button type="button" title={on ? 'tirar dos favoritos' : 'favoritar'} aria-pressed={on}
       onClick={(e) => { e.stopPropagation(); onClick(); }}
-      className={cx('leading-none text-lg', on ? 'text-amber-400' : 'text-muted hover:text-amber-400', className)}>{on ? '★' : '☆'}</button>
+      className={cx('leading-none text-lg', on ? 'text-amber-400' : 'text-muted-foreground hover:text-amber-400', className)}>{on ? '★' : '☆'}</button>
   );
 }

@@ -66,10 +66,10 @@ export function useAutosave<T>({ save, beacon, delay = 800 }: {
 export function SaveIndicator({ state }: { state: SaveState }) {
   const map: Record<SaveState, [string, string]> = {
     idle: ['', ''],
-    dirty: ['Editando…', 'text-muted'],
-    saving: ['Salvando…', 'text-muted'],
-    saved: ['Salvo', 'text-ok'],
-    error: ['Erro ao salvar', 'text-danger'],
+    dirty: ['Editando…', 'text-muted-foreground'],
+    saving: ['Salvando…', 'text-muted-foreground'],
+    saved: ['Salvo', 'text-success'],
+    error: ['Erro ao salvar', 'text-destructive'],
   };
   const [label, cls] = map[state];
   return <span className={`text-xs ${cls}`} aria-live="polite">{label}</span>;

@@ -1,7 +1,7 @@
 // Formulário rápido de nova tarefa (título, quadro, responsável, prioridade).
 import { useState } from 'react';
 import type { Task } from '../../api';
-import { Button, Input, Select } from '../ui';
+import { Button, Input, Select } from '../kit';
 import { ASSIGNEES, BOARD_OPTS, PRIORITY_OPTS, assigneeLabel, type BoardName, type Priority } from './taskUtils';
 
 /** Criar é otimista: o card aparece na hora (onCreate) e o formulário fecha; erro → aviso e o formulário volta. */
@@ -14,7 +14,7 @@ export function NewTaskForm({ defaultBoard, initial = {}, onCreate, onCancel }: 
   const [priority, setPriority] = useState<Priority>(initial.priority ?? 'media');
   return (
     <form
-      className="bg-surface border border-border rounded-xl p-3 mb-4 shadow-sm"
+      className="bg-card border border-border rounded-xl p-3 mb-4 shadow-sm"
       onSubmit={(e) => { e.preventDefault(); if (title.trim()) onCreate({ title: title.trim(), board, assignee, priority, status: 'backlog' }); }}
     >
       <div className="flex flex-wrap items-center gap-2">
@@ -32,7 +32,7 @@ export function NewTaskForm({ defaultBoard, initial = {}, onCreate, onCancel }: 
         <Button type="submit" disabled={!title.trim()}>Criar</Button>
         <Button type="button" variant="ghost" onClick={onCancel}>Cancelar</Button>
       </div>
-      <div className="text-xs text-muted mt-2">Entra no backlog. Detalhes (prazo, checklist, dependências) no painel da tarefa.</div>
+      <div className="text-xs text-muted-foreground mt-2">Entra no backlog. Detalhes (prazo, checklist, dependências) no painel da tarefa.</div>
     </form>
   );
 }

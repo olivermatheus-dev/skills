@@ -2,7 +2,7 @@
 // (cenas, falas, eventos, trilha) + anotações ancoradas gravadas em <peça>/revisao.json. A IA lê com `node tools/review.mjs <pasta>`.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { api, type PieceFull, type PieceTimeline, type ReviewComment } from '../../api';
-import { Badge, Button, Card, Empty, Select, Textarea, Input, cx } from '../ui';
+import { Badge, Button, Card, Empty, Select, Textarea, Input, cx } from '../kit';
 import { CommentCard, TipoPicker, nextCommentId, nowLocal, tipoOf, type Anchor, type Tipo } from './shared';
 
 type VideoAnchor = Exclude<Anchor, { kind: 'roteiro' }>;
@@ -39,7 +39,7 @@ function Cursor({ video, duration }: { video: React.RefObject<HTMLVideoElement |
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [video, duration]);
-  return <div ref={ref} className="absolute top-0 bottom-0 w-px bg-danger pointer-events-none z-20" style={{ left: 0 }}><div className="absolute -top-1 -left-1 w-2 h-2 rounded-full bg-danger" /></div>;
+  return <div ref={ref} className="absolute top-0 bottom-0 w-px bg-destructive pointer-events-none z-20" style={{ left: 0 }}><div className="absolute -top-1 -left-1 w-2 h-2 rounded-full bg-destructive" /></div>;
 }
 function Clock({ video }: { video: React.RefObject<HTMLVideoElement | null> }) {
   const [t, setT] = useState(0);
@@ -128,15 +128,15 @@ function LivePreview({ src, video, onPick }: { src: string; video: React.RefObje
     }, true);
   };
 
-  if (error) return <Card className="text-sm text-danger">{error}</Card>;
+  if (error) return <Card className="text-sm text-destructive">{error}</Card>;
   return (
     <div className="relative rounded-lg overflow-hidden bg-black" style={{ width: size.w * scale, height: boxH }} data-testid="live-preview">
       <iframe ref={frame} key={src} src={src} onLoad={onLoad} title="Composição ao vivo" className="absolute top-0 left-0 border-0 origin-top-left"
         style={{ width: size.w, height: size.h, transform: `scale(${scale})` }} />
       {hover && (
-        <div className="absolute pointer-events-none border-2 border-accent bg-accent/10 z-10"
+        <div className="absolute pointer-events-none border-2 border-primary bg-primary/10 z-10"
           style={{ left: hover.box.x * scale, top: hover.box.y * scale, width: hover.box.w * scale, height: hover.box.h * scale }}>
-          <span className={cx('absolute -top-5 left-0 text-[10px] font-mono px-1 rounded whitespace-nowrap text-white', hover.stable ? 'bg-accent' : 'bg-warn')}>{hover.sel}</span>
+          <span className={cx('absolute -top-5 left-0 text-[10px] font-mono px-1 rounded whitespace-nowrap', hover.stable ? 'bg-primary text-primary-foreground' : 'bg-warning text-white')}>{hover.sel}</span>
         </div>
       )}
     </div>
@@ -146,8 +146,8 @@ function LivePreview({ src, video, onPick }: { src: string; video: React.RefObje
 function Track({ label, children, h = 'h-9' }: { label: string; children: ReactNode; h?: string }) {
   return (
     <div className="flex items-stretch gap-2 mb-1">
-      <div className="w-20 shrink-0 text-[11px] text-muted flex items-center">{label}</div>
-      <div className={cx('relative flex-1 rounded bg-surface-2/60', h)} data-track>{children}</div>
+      <div className="w-20 shrink-0 text-[11px] text-muted-foreground flex items-center">{label}</div>
+      <div className={cx('relative flex-1 rounded bg-muted/60', h)} data-track>{children}</div>
     </div>
   );
 }
@@ -216,7 +216,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
 
   return (
     <div>
-      {!tl && <Card className="mb-4 text-sm text-muted">Esta peça não tem <code>timeline.json</code>: só dá para anotar por tempo.</Card>}
+      {!tl && <Card className="mb-4 text-sm text-muted-foreground">Esta peça não tem <code>timeline.json</code>: só dá para anotar por tempo.</Card>}
 
       <div className="grid gap-6 lg:grid-cols-[auto_1fr] items-start">
         <div className="space-y-2">
@@ -230,7 +230,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
           <div className="flex items-center gap-2 flex-wrap">
             {live && <Button variant="soft" aria-label="Tocar/pausar" onClick={() => { const v = videoRef.current; if (v) void (v.paused ? v.play() : v.pause()); }}>⏯</Button>}
             <Clock video={videoRef} />
-            <span className="text-xs text-muted">/ {fmtT(duration)}</span>
+            <span className="text-xs text-muted-foreground">/ {fmtT(duration)}</span>
             <Button variant="soft" onClick={() => { videoRef.current?.pause(); setDraft({ kind: 'tempo', t: nowT() }); setSelector(''); }}>Anotar neste tempo</Button>
             {previews.length > 0 && video && (
               <Button variant={live ? 'primary' : 'soft'} data-testid="modo-elemento" title="Renderiza a composição ao vivo: passe o mouse e clique no elemento para anotar"
@@ -244,18 +244,18 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
         <Card>
           <div className="text-sm font-medium mb-2">Nova anotação</div>
           {!draft ? (
-            <p className="text-sm text-muted">Clique numa cena, fala ou evento nas faixas abaixo — ou pause o vídeo e use “Anotar neste tempo”{previews.length > 0 ? ', ou “Clicar no elemento” e clique no quadro' : ''}.</p>
+            <p className="text-sm text-muted-foreground">Clique numa cena, fala ou evento nas faixas abaixo — ou pause o vídeo e use “Anotar neste tempo”{previews.length > 0 ? ', ou “Clicar no elemento” e clique no quadro' : ''}.</p>
           ) : (
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
                 <Badge>{describe(draft, tl)}</Badge>
-                {draftT != null && <button className="text-xs text-accent" onClick={() => seek(draftT)}>ir para {fmtT(draftT)}</button>}
-                <button className="ml-auto text-xs text-muted" onClick={() => setDraft(null)}>limpar</button>
+                {draftT != null && <button className="text-xs text-primary-ink" onClick={() => seek(draftT)}>ir para {fmtT(draftT)}</button>}
+                <button className="ml-auto text-xs text-muted-foreground" onClick={() => setDraft(null)}>limpar</button>
               </div>
               <TipoPicker value={tipo} onChange={setTipo} />
               <Textarea rows={3} value={text} onChange={(e) => setText(e.target.value)} placeholder={tipo === 'template' ? 'O que virar componente? (ex.: este card de agenda)' : 'O que está errado / o que mudar?'} />
               <Input className="w-full font-mono text-xs" value={selector} onChange={(e) => setSelector(e.target.value)} placeholder="Elemento (opcional): #id ou [data-bloco=nome]" />
-              {unstable && selector && <p className="text-xs text-warn">Sem id estável: gravei o caminho CSS. Peça à IA para dar um <code>id</code> a esse elemento.</p>}
+              {unstable && selector && <p className="text-xs text-warning">Sem id estável: gravei o caminho CSS. Peça à IA para dar um <code>id</code> a esse elemento.</p>}
               <div className="flex justify-end"><Button disabled={!text.trim() || saving} onClick={submit}>Salvar anotação</Button></div>
             </div>
           )}
@@ -264,10 +264,10 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
 
       {tl && (
         <Card className="mt-6 overflow-hidden">
-          <div className="text-sm font-medium mb-2">Faixas <span className="text-xs text-muted font-normal">(somente leitura · vêm da timeline.json)</span></div>
+          <div className="text-sm font-medium mb-2">Faixas <span className="text-xs text-muted-foreground font-normal">(somente leitura · vêm da timeline.json)</span></div>
           <div className="flex gap-2">
             <div className="w-20 shrink-0" />
-            <div className="flex-1 relative h-4 text-[10px] text-muted">
+            <div className="flex-1 relative h-4 text-[10px] text-muted-foreground">
               {Array.from({ length: Math.floor(duration / 5) + 1 }, (_, i) => i * 5).map((s) => <span key={s} className="absolute -translate-x-1/2" style={{ left: pct(s) }}>{s}s</span>)}
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
                 const sel = draft?.kind === 'cena' && draft.scene === s.id;
                 return (
                   <button key={s.id} data-scene={s.id} title={s.on_screen?.replace(/\|/g, ' / ').replace(/\*/g, '')} onClick={() => pick({ kind: 'cena', scene: s.id }, s.start)}
-                    className={cx('absolute top-0 bottom-0 border-r border-white text-left px-1.5 overflow-hidden whitespace-nowrap text-[11px] bg-accent-soft hover:bg-indigo-200 text-accent font-medium', sel && 'ring-2 ring-accent z-10', hit && 'underline decoration-danger')}
+                    className={cx('absolute top-0 bottom-0 border-r border-white text-left px-1.5 overflow-hidden whitespace-nowrap text-[11px] bg-primary-soft hover:bg-primary/25 text-primary-ink font-medium', sel && 'ring-2 ring-primary z-10', hit && 'underline decoration-destructive')}
                     style={{ left: pct(s.start), width: `${((s.end - s.start) / duration) * 100}%` }}>
                     {s.id} · {s.block}
                   </button>
@@ -309,7 +309,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
                       const w = v.words?.find((x) => t >= x.s && t < x.e) ?? undefined;
                       pick({ kind: 'fala', vo: v.id, ...(w ? { word: w.w.replace(/[.,!?;:]/g, '') } : {}), t: Math.round((w?.s ?? v.start) * 100) / 100 }, w?.s ?? v.start);
                     }}
-                    className={cx('absolute top-1 bottom-1 rounded px-1.5 overflow-hidden whitespace-nowrap text-[11px] text-left bg-emerald-100 text-emerald-800 hover:bg-emerald-200', sel && 'ring-2 ring-ok z-10')}
+                    className={cx('absolute top-1 bottom-1 rounded px-1.5 overflow-hidden whitespace-nowrap text-[11px] text-left bg-emerald-100 text-emerald-800 hover:bg-emerald-200', sel && 'ring-2 ring-success z-10')}
                     style={{ left: pct(v.start), width: `${((end - v.start) / duration) * 100}%` }}>{v.id} · {v.text}</button>
                 );
               })}
@@ -321,7 +321,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
                 return (
                   <button key={e.id} data-event={e.id} title={`${e.id} · ${e.type} ${e.target ?? ''} · ${fmtT(evT(e))}`}
                     onClick={() => pick({ kind: 'evento', event: e.id }, evT(e), e.target ?? '')}
-                    className={cx('absolute top-1 bottom-1 w-[5px] -ml-[2px] rounded-sm hover:scale-x-150', sel && 'ring-2 ring-text z-10')}
+                    className={cx('absolute top-1 bottom-1 w-[5px] -ml-[2px] rounded-sm hover:scale-x-150', sel && 'ring-2 ring-foreground z-10')}
                     style={{ left: pct(evT(e)), background: EVENT_COLOR[e.type] ?? '#71717a' }} />
                 );
               })}
@@ -332,7 +332,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
               </div>
             </Track>
           </div>
-          <div className="flex gap-3 mt-2 text-[11px] text-muted flex-wrap">
+          <div className="flex gap-3 mt-2 text-[11px] text-muted-foreground flex-wrap">
             {Object.entries(EVENT_COLOR).map(([k, c]) => <span key={k}><span className="inline-block w-2 h-2 rounded-sm mr-1" style={{ background: c }} />{k}</span>)}
           </div>
         </Card>
@@ -344,11 +344,11 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
           <Badge>{mine.filter((c) => c.status === 'aberto').length} abertas</Badge>
           <Select className="ml-auto" value={filter} onChange={(e) => setFilter(e.target.value as 'abertas' | 'todas')}><option value="abertas">só abertas</option><option value="todas">todas</option></Select>
         </div>
-        {!shown.length && <p className="text-sm text-muted">Nada por aqui. Depois de anotar, peça: <code>revisa as anotações de {path}</code> (a IA roda <code>node tools/review.mjs</code>).</p>}
+        {!shown.length && <p className="text-sm text-muted-foreground">Nada por aqui. Depois de anotar, peça: <code>revisa as anotações de {path}</code> (a IA roda <code>node tools/review.mjs</code>).</p>}
         <div className="space-y-2">
           {shown.map((c) => (
             <CommentCard key={c.id} c={c} anchor={describe(c.anchor, tl)} onJump={() => seek(anchorTime(c.anchor, tl))}
-              extra={c.video ? <span className="text-muted">{c.video}</span> : undefined}
+              extra={c.video ? <span className="text-muted-foreground">{c.video}</span> : undefined}
               onToggle={() => setComments(comments.map((x) => (x.id === c.id ? { ...x, status: x.status === 'aberto' ? 'resolvido' : 'aberto' } : x)))}
               onDelete={() => setComments(comments.filter((x) => x.id !== c.id))} />
           ))}

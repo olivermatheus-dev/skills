@@ -1,7 +1,7 @@
 // Avisos rápidos no canto da tela ("Salvo", erros, "Desfazer"). Sem dependência: um store simples + useSyncExternalStore.
 import { useSyncExternalStore } from 'react';
 import type { ApiError } from '../api';
-import { cx } from './ui';
+import { cx } from './kit';
 
 type Kind = 'ok' | 'error' | 'info';
 export interface ToastItem {
@@ -48,14 +48,14 @@ export function Toaster() {
         const e = t.error as ApiError | undefined;
         return (
           <div key={t.id} role={t.kind === 'error' ? 'alert' : 'status'} data-toast={t.kind}
-            className={cx('pointer-events-auto max-w-sm rounded-lg shadow-lg border px-3 py-2 text-sm bg-surface animate-[hubToast_.12s_ease-out]',
+            className={cx('pointer-events-auto max-w-sm rounded-lg shadow-lg border px-3 py-2 text-sm bg-card animate-[hubToast_.12s_ease-out]',
               t.kind === 'error' ? 'border-red-200' : 'border-border')}>
             <div className="flex items-start gap-3">
-              <span className={cx('mt-px', t.kind === 'ok' ? 'text-ok' : t.kind === 'error' ? 'text-danger' : 'text-muted')}>{t.kind === 'ok' ? '✓' : t.kind === 'error' ? '!' : '•'}</span>
+              <span className={cx('mt-px', t.kind === 'ok' ? 'text-success' : t.kind === 'error' ? 'text-destructive' : 'text-muted-foreground')}>{t.kind === 'ok' ? '✓' : t.kind === 'error' ? '!' : '•'}</span>
               <div className="min-w-0 flex-1">
-                <div className={t.kind === 'error' ? 'text-danger font-medium' : ''}>{t.message}</div>
+                <div className={t.kind === 'error' ? 'text-destructive font-medium' : ''}>{t.message}</div>
                 {e && (
-                  <div className="text-xs text-danger/90 mt-0.5">
+                  <div className="text-xs text-destructive/90 mt-0.5">
                     <div>{e.payload?.error ?? String((e as Error).message ?? e)}</div>
                     {e.payload?.file && <div className="opacity-80 font-mono break-all">{e.payload.file}</div>}
                     {e.payload?.issues?.map((i) => <div key={i}>• {i}</div>)}
@@ -63,9 +63,9 @@ export function Toaster() {
                 )}
               </div>
               {t.action && (
-                <button className="text-accent font-medium hover:underline shrink-0" onClick={() => { dismiss(t.id); t.action!.run(); }}>{t.action.label}</button>
+                <button className="text-primary-ink font-medium hover:underline shrink-0" onClick={() => { dismiss(t.id); t.action!.run(); }}>{t.action.label}</button>
               )}
-              <button className="text-muted hover:text-text leading-none shrink-0" aria-label="Fechar aviso" onClick={() => dismiss(t.id)}>×</button>
+              <button className="text-muted-foreground hover:text-foreground leading-none shrink-0" aria-label="Fechar aviso" onClick={() => dismiss(t.id)}>×</button>
             </div>
           </div>
         );

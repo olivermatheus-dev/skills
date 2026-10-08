@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type PieceFull, type PieceMeta } from '../../api';
 import { qk, useFormats } from '../../queries';
-import { Button, Card, Field, Input, Select, Textarea, cx } from '../ui';
+import { Button, Card, Field, Input, Select, Textarea, cx } from '../kit';
 import { SaveIndicator, useAutosave } from '../notes/useAutosave';
 import { TagsInput } from '../notes/TagsInput';
 import { desktop, useSaveMeta } from './library';
@@ -41,12 +41,12 @@ function Preview({ slug, piece }: { slug: string; piece: PieceFull }) {
         {piece.images.map((f) => (
           <button key={f} type="button" title="abrir a imagem" onClick={() => desktop(slug, piece.path, 'open', `png/${f}`)} className="shrink-0">
             <img src={api.pieceFileUrl(slug, piece.path, `png/${f}`)} alt={f} loading="lazy" className="h-[420px] rounded-lg border border-border bg-neutral-900" />
-            <div className="text-xs text-muted mt-1 text-left font-mono">{f}</div>
+            <div className="text-xs text-muted-foreground mt-1 text-left font-mono">{f}</div>
           </button>
         ))}
       </div>
     );
-  return <Card className="text-sm text-muted">Ainda sem arquivo exportado (exports/ ou png/). Os textos estão na aba Roteiro.</Card>;
+  return <Card className="text-sm text-muted-foreground">Ainda sem arquivo exportado (exports/ ou png/). Os textos estão na aba Roteiro.</Card>;
 }
 
 /** todas as versões exportadas: escolher a principal (capa e player), abrir no player do computador ou no Explorer */
@@ -67,9 +67,9 @@ function Versions({ slug, piece }: { slug: string; piece: PieceFull }) {
             <input type="radio" name="principal" checked={principal === f} title="usar como principal" aria-label={`principal: ${f}`}
               onChange={() => save.mutate({ path: piece.path, patch: { principal: f } })} />
             <span className={cx('font-mono text-xs truncate flex-1', principal === f && 'font-semibold')}>{f.replace(/^(exports|png)\//, '')}</span>
-            {principal === f && <span className="text-xs text-accent">principal</span>}
-            <button className="text-xs text-accent hover:underline" onClick={() => desktop(slug, piece.path, 'open', f)}>abrir</button>
-            <button className="text-xs text-muted hover:text-text" onClick={() => desktop(slug, piece.path, 'reveal', f)}>no Explorer</button>
+            {principal === f && <span className="text-xs text-primary-ink">principal</span>}
+            <button className="text-xs text-primary-ink hover:underline" onClick={() => desktop(slug, piece.path, 'open', f)}>abrir</button>
+            <button className="text-xs text-muted-foreground hover:text-foreground" onClick={() => desktop(slug, piece.path, 'reveal', f)}>no Explorer</button>
           </div>
         ))}
       </div>
@@ -92,7 +92,7 @@ function FormatField({ slug, piece }: { slug: string; piece: PieceFull }) {
           <option value="">— sem formato —</option>
           {formats.map((f) => <option key={f.id} value={f.id}>{f.nome}{f.status === 'rascunho' ? ' (rascunho)' : ''}</option>)}
         </Select>
-        {fmt && <Link className="text-xs text-accent hover:underline shrink-0" to={`/p/${slug}/formatos?formato=${fmt.id}`}>ver na galeria</Link>}
+        {fmt && <Link className="text-xs text-primary-ink hover:underline shrink-0" to={`/p/${slug}/formatos?formato=${fmt.id}`}>ver na galeria</Link>}
       </div>
     </Field>
   );
@@ -123,7 +123,7 @@ function SheetFields({ slug, piece }: { slug: string; piece: PieceFull }) {
       <Field label="Tags">
         <TagsInput slug={slug} value={piece.tags} onChange={(tags) => save.mutate({ path: piece.path, patch: { tags } })} />
       </Field>
-      <div className="text-xs font-medium text-muted mb-1 uppercase tracking-wide">Publicação</div>
+      <div className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">Publicação</div>
       <div className="grid grid-cols-2 gap-2 mb-2">
         <Input placeholder="plataforma" value={pub.platform ?? ''} onChange={(e) => setPubField('platform', e.target.value)} />
         <Input type="date" value={pub.date ?? ''} onChange={(e) => setPubField('date', e.target.value)} />

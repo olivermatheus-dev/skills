@@ -4,7 +4,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { FORMATOS, geo, type Caixa, type Camada, type Doc, type Fmt, type Geo } from './doc';
 import type { CapturaRuntime } from '../../api';
-import { cx } from '../ui';
+import { cx } from '../kit';
 
 export interface Init { brandCss: string; aparelhos: Record<string, unknown>; capturas: Record<string, CapturaRuntime>; qualidade: number }
 type Alca = 'nw' | 'ne' | 'sw' | 'se' | 'e' | 'w' | 'n' | 's';
@@ -186,21 +186,21 @@ export default function Palco({ doc, fmt, init, sel, guias, zoom, onSel, onGeo, 
           {guias && seguro && <div className="absolute border border-dashed border-sky-500/60 pointer-events-none" style={{ left: seguro.x * s, top: seguro.y * s, width: seguro.w * s, height: seguro.h * s }} title="área segura" />}
           {encaixe.v != null && <div className="absolute top-0 bottom-0 w-px bg-pink-500 pointer-events-none" style={{ left: encaixe.v * s }} />}
           {encaixe.h != null && <div className="absolute left-0 right-0 h-px bg-pink-500 pointer-events-none" style={{ top: encaixe.h * s }} />}
-          {hovB && <div className="absolute border border-accent/50 pointer-events-none" style={quadro(hovB)} />}
+          {hovB && <div className="absolute border border-primary/50 pointer-events-none" style={quadro(hovB)} />}
           {selB && selC && (
             <div className="absolute pointer-events-none" style={{ ...quadro(selB), outline: `1.5px solid ${selC.travada ? '#a1a1aa' : '#4f46e5'}` }}>
               {!selC.travada && !editando && alcas.map((a) => (
                 <span key={a} onPointerDown={(e) => iniciar(e, selC.id, 'redim', a)}
-                  className="absolute w-2.5 h-2.5 bg-white border-[1.5px] border-accent rounded-[2px] pointer-events-auto"
+                  className="absolute w-2.5 h-2.5 bg-white border-[1.5px] border-primary rounded-[2px] pointer-events-auto"
                   style={{ left: a.includes('w') ? -5 : a.includes('e') ? 'calc(100% - 5px)' : 'calc(50% - 5px)', top: a.includes('n') ? -5 : a.includes('s') ? 'calc(100% - 5px)' : 'calc(50% - 5px)', cursor: `${a}-resize` }} />
               ))}
             </div>
           )}
         </div>
-        {!pronto && <div className="absolute inset-0 flex items-center justify-center text-sm text-muted bg-white/70">carregando o estúdio…</div>}
+        {!pronto && <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground bg-white/70">carregando o estúdio…</div>}
       </div>
-      {erro && <div className="absolute bottom-3 left-3 right-3 text-xs text-danger bg-white border border-border rounded-md px-3 py-2">{erro}</div>}
-      {editando && <div className="absolute top-3 left-1/2 -translate-x-1/2 text-xs bg-text text-white rounded-full px-3 py-1">editando o texto · Esc ou clique fora para sair · *ênfase* _serifa_</div>}
+      {erro && <div className="absolute bottom-3 left-3 right-3 text-xs text-destructive bg-white border border-border rounded-md px-3 py-2">{erro}</div>}
+      {editando && <div className="absolute top-3 left-1/2 -translate-x-1/2 text-xs bg-foreground text-white rounded-full px-3 py-1">editando o texto · Esc ou clique fora para sair · *ênfase* _serifa_</div>}
     </div>
   );
 }

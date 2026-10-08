@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Idea, type Task } from '../api';
-import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/ui';
+import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, cx } from '../components/kit';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
@@ -54,20 +54,20 @@ export default function Ideas() {
 
   const card = (i: Doc<Idea>) => (
     <button key={i.data.id} onClick={() => setOpen(i)}
-      className="w-full text-left bg-surface border border-border rounded-lg p-3 hover:border-accent/50 hover:shadow-sm transition">
-      <div className="flex items-center gap-2 text-[11px] text-muted mb-1">
+      className="w-full text-left bg-card border border-border rounded-lg p-3 hover:border-primary/50 hover:shadow-sm transition">
+      <div className="flex items-center gap-2 text-[11px] text-muted-foreground mb-1">
         <span className="font-mono">{i.data.id}</span>
-        {i.data.task && <span className="ml-auto font-mono text-accent">→ {i.data.task}</span>}
+        {i.data.task && <span className="ml-auto font-mono text-primary-ink">→ {i.data.task}</span>}
       </div>
       <div className="text-sm font-medium leading-snug">{i.data.title}</div>
       <div className="flex flex-wrap items-center gap-1 mt-2">
         <ObjectiveBadge id={i.data.objective} />
-        {i.data.tone && <span className="text-[11px] text-muted">· {label(TONES, i.data.tone).split(' /')[0]}</span>}
-        {i.data.format && <span className="text-[11px] text-muted font-mono">· {i.data.format.replace(/^fmt-/, '')}</span>}
+        {i.data.tone && <span className="text-[11px] text-muted-foreground">· {label(TONES, i.data.tone).split(' /')[0]}</span>}
+        {i.data.format && <span className="text-[11px] text-muted-foreground font-mono">· {i.data.format.replace(/^fmt-/, '')}</span>}
       </div>
       {(i.data.tags.length > 0 || i.data.source?.competitor) && (
         <div className="flex flex-wrap gap-1 mt-2">
-          {i.data.source?.competitor && <span className="text-[11px] text-muted">◉ {compName(i.data.source.competitor)}</span>}
+          {i.data.source?.competitor && <span className="text-[11px] text-muted-foreground">◉ {compName(i.data.source.competitor)}</span>}
           {i.data.tags.map((t) => <TagChip key={t} id={t} def={tagDefs[t]} small />)}
         </div>
       )}
@@ -82,7 +82,7 @@ export default function Ideas() {
         actions={<>
           <div className="flex rounded-md border border-border overflow-hidden text-sm">
             {(['quadro', 'lista'] as View[]).map((v) => (
-              <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1.5 capitalize', view === v ? 'bg-surface-2 font-medium' : 'bg-surface text-muted hover:text-text')}>{v}</button>
+              <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1.5 capitalize', view === v ? 'bg-muted font-medium' : 'bg-card text-muted-foreground hover:text-foreground')}>{v}</button>
             ))}
           </div>
           <Button onClick={() => setOpen(blank())}>+ Nova ideia</Button>
@@ -108,13 +108,13 @@ export default function Ideas() {
           {sources.map((c) => <option key={c} value={c}>{compName(c)}</option>)}
         </Select>
         {anyFilter && <Button variant="ghost" onClick={() => setF({ q: '', objective: '', tone: '', tag: '', competitor: '' })}>Limpar</Button>}
-        <label className="ml-auto flex items-center gap-1.5 text-sm text-muted">
+        <label className="ml-auto flex items-center gap-1.5 text-sm text-muted-foreground">
           <input type="checkbox" checked={hideDiscarded} onChange={(e) => setHideDiscarded(e.target.checked)} /> Ocultar descartadas
         </label>
       </div>
 
       <ErrorBox error={error} />
-      {isLoading && <div className="grid grid-cols-5 gap-3">{cols.map((c) => <div key={c.id} className="h-64 rounded-xl bg-surface-2 animate-pulse" />)}</div>}
+      {isLoading && <div className="grid grid-cols-5 gap-3">{cols.map((c) => <div key={c.id} className="h-64 rounded-xl bg-muted animate-pulse" />)}</div>}
       {data && !data.length && (
         <Empty title="Nenhuma ideia ainda" hint="Anote uma pauta ou transforme uma referência marcada em Concorrentes."
           action={<Button onClick={() => setOpen(blank())}>Criar a primeira ideia</Button>} />
@@ -127,8 +127,8 @@ export default function Ideas() {
             {cols.map((s) => {
               const items = filtered.filter((i) => i.data.status === s.id);
               return (
-                <div key={s.id} className="bg-surface-2/60 rounded-xl p-2 min-h-40">
-                  <div className="flex items-center gap-2 px-1.5 py-1 mb-1 text-xs font-semibold text-muted uppercase tracking-wide">
+                <div key={s.id} className="bg-muted/60 rounded-xl p-2 min-h-40">
+                  <div className="flex items-center gap-2 px-1.5 py-1 mb-1 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                     <span className={cx('h-2 w-2 rounded-full', s.dot)} />{s.label}<span className="ml-auto font-normal">{items.length}</span>
                   </div>
                   <div className="space-y-2">{items.map(card)}</div>
@@ -140,23 +140,23 @@ export default function Ideas() {
       )}
 
       {data && filtered.length > 0 && view === 'lista' && (
-        <div className="bg-surface border border-border rounded-xl overflow-hidden">
+        <div className="bg-card border border-border rounded-xl overflow-hidden">
           {cols.map((s) => {
             const items = filtered.filter((i) => i.data.status === s.id);
             if (!items.length) return null;
             return (
               <div key={s.id}>
-                <div className="flex items-center gap-2 px-4 py-2 bg-surface-2/60 text-xs font-semibold text-muted uppercase tracking-wide border-b border-border">
+                <div className="flex items-center gap-2 px-4 py-2 bg-muted/60 text-xs font-semibold text-muted-foreground uppercase tracking-wide border-b border-border">
                   <span className={cx('h-2 w-2 rounded-full', s.dot)} />{s.label} <span className="font-normal">{items.length}</span>
                 </div>
                 {items.map((i) => (
-                  <button key={i.data.id} onClick={() => setOpen(i)} className="w-full grid grid-cols-[70px_1fr_110px_130px_170px_80px] gap-3 items-center px-4 py-2.5 text-left text-sm border-b border-border last:border-0 hover:bg-surface-2/50">
-                    <span className="font-mono text-xs text-muted">{i.data.id}</span>
+                  <button key={i.data.id} onClick={() => setOpen(i)} className="w-full grid grid-cols-[70px_1fr_110px_130px_170px_80px] gap-3 items-center px-4 py-2.5 text-left text-sm border-b border-border last:border-0 hover:bg-muted/50">
+                    <span className="font-mono text-xs text-muted-foreground">{i.data.id}</span>
                     <span className="truncate font-medium">{i.data.title}</span>
                     <span><ObjectiveBadge id={i.data.objective} /></span>
-                    <span className="text-xs text-muted truncate">{label(TONES, i.data.tone)}</span>
-                    <span className="text-xs text-muted font-mono truncate">{i.data.format ?? ''}</span>
-                    <span className="text-xs font-mono text-accent">{i.data.task ?? ''}</span>
+                    <span className="text-xs text-muted-foreground truncate">{label(TONES, i.data.tone)}</span>
+                    <span className="text-xs text-muted-foreground font-mono truncate">{i.data.format ?? ''}</span>
+                    <span className="text-xs font-mono text-primary-ink">{i.data.task ?? ''}</span>
                   </button>
                 ))}
               </div>
@@ -276,7 +276,7 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
   const hasFicha = /^##\s+Objetivo/m.test(body);
 
   return (
-    <Drawer open onClose={close} width="max-w-3xl" title={isNew && !d.id ? 'Nova ideia' : <span className="flex items-center gap-2"><span className="font-mono text-muted text-sm">{d.id}</span>{d.title}</span>}>
+    <Drawer open onClose={close} width="max-w-3xl" title={isNew && !d.id ? 'Nova ideia' : <span className="flex items-center gap-2"><span className="font-mono text-muted-foreground text-sm">{d.id}</span>{d.title}</span>}>
       <Field label="Título">
         <Input autoFocus={isNew} className="w-full text-base" value={d.title} onChange={(e) => set('title', e.target.value)} placeholder="Ex.: 5 apps abertos para atender 1 paciente" />
       </Field>
@@ -291,7 +291,7 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
             <option value="">— definir</option>
             {OBJECTIVES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
           </Select>
-          {d.objective === 'polemica' && <div className="text-xs text-warn mt-1">⚠ Usar raramente, com aval. Nunca contra pessoas ou contra as regras do nicho.</div>}
+          {d.objective === 'polemica' && <div className="text-xs text-warning mt-1">⚠ Usar raramente, com aval. Nunca contra pessoas ou contra as regras do nicho.</div>}
         </Field>
         <Field label="Tom">
           <Select className="w-full" value={d.tone ?? ''} onChange={(e) => set('tone', (e.target.value || undefined) as Tone | undefined)}>
@@ -311,22 +311,22 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
       {(d.source || d.task) && (
         <div className="mb-4 grid gap-2 sm:grid-cols-2">
           {d.source && (
-            <div className="rounded-lg border border-border bg-surface-2/50 px-3 py-2 text-sm">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-0.5">Origem</div>
+            <div className="rounded-lg border border-border bg-muted/50 px-3 py-2 text-sm">
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-0.5">Origem</div>
               <div>
                 {d.source.competitor
-                  ? <Link className="text-accent hover:underline" to={`/p/${slug}/concorrentes/${d.source.competitor}`}>{compName(d.source.competitor)}</Link>
+                  ? <Link className="text-primary-ink hover:underline" to={`/p/${slug}/concorrentes/${d.source.competitor}`}>{compName(d.source.competitor)}</Link>
                   : 'Referência'}
-                {d.source.platform && <span className="text-muted"> · {d.source.platform}</span>}
+                {d.source.platform && <span className="text-muted-foreground"> · {d.source.platform}</span>}
               </div>
-              {d.source.url && <a href={d.source.url} target="_blank" rel="noreferrer" className="text-xs text-accent hover:underline break-all">{d.source.url}</a>}
+              {d.source.url && <a href={d.source.url} target="_blank" rel="noreferrer" className="text-xs text-primary-ink hover:underline break-all">{d.source.url}</a>}
             </div>
           )}
           {d.task && (
-            <div className="rounded-lg border border-accent/30 bg-accent-soft px-3 py-2 text-sm">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-0.5">Tarefa</div>
-              <Link className="text-accent font-mono hover:underline" to={`/p/${slug}/quadro`}>{d.task}</Link>
-              <span className="text-muted"> no quadro de conteúdo</span>
+            <div className="rounded-lg border border-primary/30 bg-primary-soft px-3 py-2 text-sm">
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-0.5">Tarefa</div>
+              <Link className="text-primary-ink font-mono hover:underline" to={`/p/${slug}/quadro`}>{d.task}</Link>
+              <span className="text-muted-foreground"> no quadro de conteúdo</span>
             </div>
           )}
         </div>
@@ -334,9 +334,9 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
 
       <div className="mb-4">
         <div className="flex items-center mb-1">
-          <div className="text-xs font-medium text-muted uppercase tracking-wide">Ficha de pauta e briefing</div>
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Ficha de pauta e briefing</div>
           {!hasFicha && (
-            <button className="ml-auto text-xs text-accent hover:underline" onClick={() => { setBody(`${body.trim() ? `${body.trimEnd()}\n\n` : ''}${FICHA_TEMPLATE}`); setEditorKey((k) => k + 1); setDirty(true); }}>
+            <button className="ml-auto text-xs text-primary-ink hover:underline" onClick={() => { setBody(`${body.trim() ? `${body.trimEnd()}\n\n` : ''}${FICHA_TEMPLATE}`); setEditorKey((k) => k + 1); setDirty(true); }}>
               + Inserir ficha de pauta
             </button>
           )}
@@ -345,10 +345,10 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
       </div>
 
       <ErrorBox error={error} />
-      <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-surface border-t border-border flex items-center gap-2">
+      <div className="sticky bottom-0 -mx-6 -mb-6 mt-4 px-6 py-3 bg-card border-t border-border flex items-center gap-2">
         <Button onClick={save} disabled={!d.title.trim()}>{isNew && !d.id ? 'Criar ideia' : 'Salvar'}</Button>
         <Button variant="ghost" onClick={close}>{dirty ? 'Cancelar' : 'Fechar'}</Button>
-        <span className="text-xs text-muted ml-1 truncate">{initial.file ? relToCompany(initial.file) : ''}</span>
+        <span className="text-xs text-muted-foreground ml-1 truncate">{initial.file ? relToCompany(initial.file) : ''}</span>
         {!d.task && d.status !== 'descartada' && (
           <Button variant="soft" className="ml-auto" disabled={toTaskBusy || !d.title.trim()}
             title="Cria a tarefa no quadro de conteúdo para o agent:estrategista, com a ficha de pauta"

@@ -1,7 +1,7 @@
 // Peças compartilhadas da frente Concorrentes: ícones de plataforma, imagens com fallback, cálculos de ranking.
 import { useEffect, useState, type ReactNode } from 'react';
 import type { ItemMark, Snapshot, SnapshotEntry } from "../../api";
-import { cx, fmtNum } from '../ui';
+import { cx, fmtNum } from '../kit';
 export { keyFor, itemKey } from '../../../../tools/intel/keys';
 
 type Item = Snapshot['items'][number];
@@ -142,7 +142,7 @@ export function Img({ local, remote, alt = '', className, fallback }: { local?: 
   const srcs = [local, remote ?? undefined].filter(Boolean) as string[];
   const [i, setI] = useState(0);
   useEffect(() => setI(0), [local, remote]);
-  if (i >= srcs.length) return <>{fallback ?? <div className={cx('bg-surface-2', className)} />}</>;
+  if (i >= srcs.length) return <>{fallback ?? <div className={cx('bg-muted', className)} />}</>;
   return <img src={srcs[i]} alt={alt} loading="lazy" decoding="async" referrerPolicy="no-referrer" className={className} onError={() => setI((x) => x + 1)} />;
 }
 
@@ -151,7 +151,7 @@ export function Avatar({ local, remote, name, size = 48, className }: { local?: 
   const hue = [...name].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
   const style = { width: size, height: size };
   return (
-    <div className={cx('rounded-full overflow-hidden shrink-0 ring-2 ring-surface bg-surface-2', className)} style={style}>
+    <div className={cx('rounded-full overflow-hidden shrink-0 ring-2 ring-card bg-muted', className)} style={style}>
       <Img local={local} remote={remote} alt={name} className="w-full h-full object-cover"
         fallback={<div className="w-full h-full grid place-items-center text-white font-semibold" style={{ background: `hsl(${hue} 45% 52%)`, fontSize: size * 0.36 }}>{initials || '?'}</div>} />
     </div>
@@ -178,13 +178,13 @@ export function Modal({ open, onClose, title, children, footer, width = 'max-w-2
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 bg-black/30 flex items-start justify-center p-6 overflow-y-auto" onMouseDown={onClose}>
-      <div className={cx('w-full bg-surface rounded-xl shadow-2xl mt-10 flex flex-col max-h-[85vh]', width)} onMouseDown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+      <div className={cx('w-full bg-card rounded-xl shadow-2xl mt-10 flex flex-col max-h-[85vh]', width)} onMouseDown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className="px-5 py-3.5 border-b border-border flex items-center justify-between">
           <div className="font-semibold">{title}</div>
-          <button onClick={onClose} className="text-muted hover:text-text text-xl leading-none" aria-label="Fechar">×</button>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground text-xl leading-none" aria-label="Fechar">×</button>
         </div>
         <div className="p-5 overflow-y-auto">{children}</div>
-        {footer && <div className="px-5 py-3 border-t border-border flex justify-end gap-2 bg-surface-2/50 rounded-b-xl">{footer}</div>}
+        {footer && <div className="px-5 py-3 border-t border-border flex justify-end gap-2 bg-muted/50 rounded-b-xl">{footer}</div>}
       </div>
     </div>
   );
@@ -196,11 +196,11 @@ export const Spinner = ({ className }: { className?: string }) =>
 /** chips de filtro (segmented) */
 export function Chips<T extends string>({ value, onChange, options }: { value: T; onChange: (v: T) => void; options: { value: T; label: ReactNode; count?: number }[] }) {
   return (
-    <div className="inline-flex flex-wrap gap-1 p-0.5 bg-surface-2 rounded-lg">
+    <div className="inline-flex flex-wrap gap-1 p-0.5 bg-muted rounded-lg">
       {options.map((o) => (
         <button key={o.value} type="button" onClick={() => onChange(o.value)}
-          className={cx('px-2.5 py-1 rounded-md text-xs font-medium transition flex items-center gap-1.5', value === o.value ? 'bg-surface shadow-sm text-text' : 'text-muted hover:text-text')}>
-          {o.label}{o.count != null && <span className="text-[10px] text-muted tabular-nums">{o.count}</span>}
+          className={cx('px-2.5 py-1 rounded-md text-xs font-medium transition flex items-center gap-1.5', value === o.value ? 'bg-card shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground')}>
+          {o.label}{o.count != null && <span className="text-[10px] text-muted-foreground tabular-nums">{o.count}</span>}
         </button>
       ))}
     </div>

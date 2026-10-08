@@ -7,7 +7,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, type Format, type FormatInfo, type NewFormatInput, type PieceCover } from '../api';
-import { Badge, Button, Card, Drawer, Empty, ErrorBox, Field, Input, Select, Textarea, cx, fmtDate } from '../components/ui';
+import { Badge, Button, Card, Drawer, Empty, ErrorBox, Field, Input, Select, Textarea, cx, fmtDate } from '../components/kit';
 import { toast } from '../components/toast';
 import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
 import { qk, useFormats, usePieces } from '../queries';
@@ -48,14 +48,14 @@ function Media({ empresa, peca, cover, className, controls }: { empresa: string;
 /** sem exemplo ainda: a estrutura do formato em blocos (o "esqueleto" visual) */
 function Skeleton({ f, className }: { f: FormatInfo; className?: string }) {
   return (
-    <div className={cx('bg-surface-2 flex flex-col justify-center gap-1.5 p-4', className)}>
+    <div className={cx('bg-muted flex flex-col justify-center gap-1.5 p-4', className)}>
       {f.estrutura.slice(0, 6).map((b, i) => (
         <div key={i} className="flex items-center gap-2 text-[11px]">
-          <span className="h-2 rounded-full bg-accent/50 shrink-0" style={{ width: `${18 + ((i * 37) % 40)}px` }} />
-          <span className="text-muted truncate">{b.bloco}</span>
+          <span className="h-2 rounded-full bg-primary/50 shrink-0" style={{ width: `${18 + ((i * 37) % 40)}px` }} />
+          <span className="text-muted-foreground truncate">{b.bloco}</span>
         </div>
       ))}
-      <div className="text-[11px] text-muted/70 mt-2">sem exemplo nosso ainda</div>
+      <div className="text-[11px] text-muted-foreground/70 mt-2">sem exemplo nosso ainda</div>
     </div>
   );
 }
@@ -82,14 +82,14 @@ function Gallery() {
       <div className="flex items-start justify-between gap-4 mb-5">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Formatos</h1>
-          <p className="text-sm text-muted mt-1">Galeria de todas as empresas: escolha "quero um conteúdo no estilo X" e a IA segue a skill e as suas observações daquele formato.</p>
+          <p className="text-sm text-muted-foreground mt-1">Galeria de todas as empresas: escolha "quero um conteúdo no estilo X" e a IA segue a skill e as suas observações daquele formato.</p>
         </div>
         <Button onClick={() => setAdding(true)}>Nova referência</Button>
       </div>
 
       <div className="flex gap-1 flex-wrap mb-3">
         {[['', 'Todos os tipos', formats.length] as const, ...CONTENT_TYPES.map((t) => [t, CONTENT_TYPE_LABEL[t], count(t)] as const)].map(([k, label, n]) => (
-          <button key={k} onClick={() => setF('tipo', k)} className={cx('px-3 py-1 rounded-full text-sm border', f.tipo === k ? 'bg-accent text-white border-accent' : 'bg-surface border-border text-muted hover:text-text')}>
+          <button key={k} onClick={() => setF('tipo', k)} className={cx('px-3 py-1 rounded-full text-sm border', f.tipo === k ? 'bg-primary text-primary-foreground border-primary' : 'bg-card border-border text-muted-foreground hover:text-foreground')}>
             {label} <span className="opacity-70">{n}</span>
           </button>
         ))}
@@ -111,14 +111,14 @@ function Gallery() {
       </div>
 
       <ErrorBox error={error} />
-      {isLoading ? <div className="text-muted">Carregando…</div> : !shown.length ? <Empty title="Nenhum formato com esses filtros" hint="Limpe a busca ou troque o tipo." /> : (
+      {isLoading ? <div className="text-muted-foreground">Carregando…</div> : !shown.length ? <Empty title="Nenhum formato com esses filtros" hint="Limpe a busca ou troque o tipo." /> : (
         <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(230px,1fr))]">
           {shown.map((x) => {
             const ex = x.exemplos.find((e) => e.cover && !e.teste) ?? x.exemplos.find((e) => e.cover);
             const open = () => setSp({ formato: x.id });
             return (
               <div key={x.id} role="button" tabIndex={0} onClick={open} onKeyDown={(e) => e.key === 'Enter' && open()} data-format={x.id}
-                className="group bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-accent/40 transition cursor-pointer flex flex-col">
+                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-md hover:border-primary/40 transition cursor-pointer flex flex-col">
                 <div className="relative">
                   {ex ? <Media empresa={ex.empresa} peca={ex.peca} cover={ex.cover} className="aspect-[4/5]" /> : <Skeleton f={x} className="aspect-[4/5]" />}
                   <Badge className="absolute top-2 left-2 !bg-white/90">{MEDIA_LABEL[x.midia]}</Badge>
@@ -126,9 +126,9 @@ function Gallery() {
                 </div>
                 <div className="p-3 flex-1 flex flex-col">
                   <div className="font-medium text-sm flex items-center gap-2">{x.nome}{x.nota ? <span className="text-amber-500 text-xs">{'★'.repeat(x.nota)}</span> : null}</div>
-                  <p className="text-xs text-muted mt-1 line-clamp-3">{x.essencia}</p>
+                  <p className="text-xs text-muted-foreground mt-1 line-clamp-3">{x.essencia}</p>
                   <div className="flex gap-1 flex-wrap mt-2">{x.tipos.map((t) => <Badge key={t}>{CONTENT_TYPE_LABEL[t]}</Badge>)}</div>
-                  <div className="text-[11px] text-muted mt-auto pt-2">{x.tamanho}{x.tamanho ? ' · ' : ''}{x.exemplos.length} exemplo(s) · {x.usos.length} peça(s)</div>
+                  <div className="text-[11px] text-muted-foreground mt-auto pt-2">{x.tamanho}{x.tamanho ? ' · ' : ''}{x.exemplos.length} exemplo(s) · {x.usos.length} peça(s)</div>
                 </div>
               </div>
             );
@@ -180,9 +180,9 @@ function NewRef({ open, onClose, formats, onDone, presetId = '' }: { open: boole
         <Field label="Link" hint="post, reels, vídeo ou página onde viu"><Input className="w-full" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://…" /></Field>
         <Field label="Print (opcional)" hint="cole (Ctrl+V) aqui, arraste ou escolha o arquivo; fica só neste computador">
           <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); void pick(e.dataTransfer.files[0]); }}
-            className="border border-dashed border-border rounded-md px-3 py-3 text-sm text-muted flex items-center gap-2">
-            {upload ? <><span className="font-mono text-text">{upload.name}</span><button className="ml-auto text-xs text-danger" onClick={() => setUpload(undefined)}>remover</button></>
-              : <label className="cursor-pointer text-accent hover:underline">escolher imagem…<input type="file" accept="image/*" className="hidden" onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ''; }} /></label>}
+            className="border border-dashed border-border rounded-md px-3 py-3 text-sm text-muted-foreground flex items-center gap-2">
+            {upload ? <><span className="font-mono text-foreground">{upload.name}</span><button className="ml-auto text-xs text-destructive" onClick={() => setUpload(undefined)}>remover</button></>
+              : <label className="cursor-pointer text-primary-ink hover:underline">escolher imagem…<input type="file" accept="image/*" className="hidden" onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ''; }} /></label>}
           </div>
         </Field>
         <Field label="O que tem de bom" hint="a essência que a gente quer copiar (o conceito, não a peça)">
@@ -217,12 +217,12 @@ function FormatDetail({ id }: { id: string }) {
   const mut = useFormatMutation();
   const [addingRef, setAddingRef] = useState(false);
   const [picking, setPicking] = useState<'' | 'marcar' | 'exemplo'>('');
-  if (isLoading) return <div className="p-8 text-muted">Carregando…</div>;
+  if (isLoading) return <div className="p-8 text-muted-foreground">Carregando…</div>;
   if (!f) return <div className="p-8"><ErrorBox error={error} /><Empty title="Formato não encontrado" action={<Button onClick={() => setSp({})}>Voltar à galeria</Button>} /></div>;
 
   return (
     <div className="p-8 max-w-[1400px]">
-      <button className="text-sm text-muted hover:text-text mb-3" onClick={() => setSp({})}>← Formatos</button>
+      <button className="text-sm text-muted-foreground hover:text-foreground mb-3" onClick={() => setSp({})}>← Formatos</button>
       <div className="flex items-start gap-4 mb-6 flex-wrap">
         <div className="flex-1 min-w-[280px]">
           <div className="flex items-center gap-2 flex-wrap">
@@ -230,14 +230,14 @@ function FormatDetail({ id }: { id: string }) {
             <Badge>{MEDIA_LABEL[f.midia]}</Badge>
             {f.status === 'rascunho' ? <Badge className="!bg-amber-100 !text-amber-800">rascunho · sem skill</Badge> : <Badge color="#16a34a">ativo</Badge>}
           </div>
-          <p className="text-muted mt-1 max-w-3xl">{f.essencia}</p>
-          <div className="text-xs text-muted mt-2 flex gap-3 flex-wrap">
+          <p className="text-muted-foreground mt-1 max-w-3xl">{f.essencia}</p>
+          <div className="text-xs text-muted-foreground mt-2 flex gap-3 flex-wrap">
             {f.tamanho && <span>{f.tamanho}</span>}
             {f.proporcoes.length > 0 && <span>{f.proporcoes.join(' · ')}</span>}
             {f.canais.length > 0 && <span>{f.canais.map((c) => CHANNEL_LABEL[c]).join(', ')}</span>}
             {f.funil.length > 0 && <span>funil: {f.funil.join(' / ')}</span>}
             {f.motor && <span>{MOTOR_LABEL[f.motor]}</span>}
-            {f.skill && <span className={cx('font-mono', !f.skillOk && 'text-danger')}>.claude/skills/{f.skill}/{f.skillOk ? '' : ' (não encontrada)'}</span>}
+            {f.skill && <span className={cx('font-mono', !f.skillOk && 'text-destructive')}>.claude/skills/{f.skill}/{f.skillOk ? '' : ' (não encontrada)'}</span>}
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -251,18 +251,18 @@ function FormatDetail({ id }: { id: string }) {
         <div className="space-y-6 min-w-0">
           <section>
             <h2 className="text-sm font-semibold mb-2">Exemplos nossos ({f.exemplos.length})</h2>
-            {!f.exemplos.length ? <Card className="text-sm text-muted">Nenhum ainda. Quando uma peça neste formato ficar boa, use <b>Promover como exemplo</b>.</Card> : (
+            {!f.exemplos.length ? <Card className="text-sm text-muted-foreground">Nenhum ainda. Quando uma peça neste formato ficar boa, use <b>Promover como exemplo</b>.</Card> : (
               <div className="grid gap-3 grid-cols-[repeat(auto-fill,minmax(220px,1fr))]">
                 {f.exemplos.map((e, i) => (
                   <Card key={`${e.empresa}/${e.peca}`} className="p-0 overflow-hidden">
-                    {e.missing ? <div className="aspect-[4/5] bg-surface-2 flex items-center justify-center text-sm text-muted">peça não encontrada</div>
+                    {e.missing ? <div className="aspect-[4/5] bg-muted flex items-center justify-center text-sm text-muted-foreground">peça não encontrada</div>
                       : <Media empresa={e.empresa} peca={e.peca} cover={e.cover} controls className="aspect-[4/5]" />}
                     <div className="p-2.5 text-xs">
                       <div className="font-medium text-sm first-letter:uppercase">{e.legenda || e.title}</div>
-                      <div className="text-muted mt-0.5 flex gap-2 items-center flex-wrap">
+                      <div className="text-muted-foreground mt-0.5 flex gap-2 items-center flex-wrap">
                         <span>{e.empresa}</span>{e.teste && <Badge className="!bg-amber-100 !text-amber-800">teste</Badge>}
-                        {e.empresa === slug && !e.missing && <Link className="text-accent hover:underline" to={`/p/${slug}/conteudos?peca=${encodeURIComponent(e.peca)}`}>abrir peça</Link>}
-                        <button className="ml-auto text-muted hover:text-danger" onClick={() => confirm('Tirar este exemplo do formato? A peça não é apagada.') && mut.mutate(() => api.removeExample(f.id, i))}>tirar</button>
+                        {e.empresa === slug && !e.missing && <Link className="text-primary-ink hover:underline" to={`/p/${slug}/conteudos?peca=${encodeURIComponent(e.peca)}`}>abrir peça</Link>}
+                        <button className="ml-auto text-muted-foreground hover:text-destructive" onClick={() => confirm('Tirar este exemplo do formato? A peça não é apagada.') && mut.mutate(() => api.removeExample(f.id, i))}>tirar</button>
                       </div>
                     </div>
                   </Card>
@@ -276,7 +276,7 @@ function FormatDetail({ id }: { id: string }) {
             <Card className="p-0 divide-y divide-border">
               {f.estrutura.map((b, i) => (
                 <div key={i} className="grid grid-cols-[130px_100px_1fr] gap-3 px-4 py-2 text-sm">
-                  <span className="font-medium">{b.bloco}</span><span className="text-muted text-xs pt-0.5">{b.quando ?? ''}</span><span>{b.oque}</span>
+                  <span className="font-medium">{b.bloco}</span><span className="text-muted-foreground text-xs pt-0.5">{b.quando ?? ''}</span><span>{b.oque}</span>
                 </div>
               ))}
             </Card>
@@ -284,7 +284,7 @@ function FormatDetail({ id }: { id: string }) {
 
           <div className="grid sm:grid-cols-2 gap-4">
             <Card><h2 className="text-sm font-semibold mb-2 text-green-700">Quando usar</h2><ul className="text-sm list-disc pl-4 space-y-1">{f.quandoUsar.map((x) => <li key={x}>{x}</li>)}</ul></Card>
-            <Card><h2 className="text-sm font-semibold mb-2 text-danger">Quando não usar</h2><ul className="text-sm list-disc pl-4 space-y-1">{f.quandoNaoUsar.map((x) => <li key={x}>{x}</li>)}</ul></Card>
+            <Card><h2 className="text-sm font-semibold mb-2 text-destructive">Quando não usar</h2><ul className="text-sm list-disc pl-4 space-y-1">{f.quandoNaoUsar.map((x) => <li key={x}>{x}</li>)}</ul></Card>
           </div>
           {f.variacoes.length > 0 && <section>
             <h2 className="text-sm font-semibold mb-2">Variações</h2>
@@ -294,17 +294,17 @@ function FormatDetail({ id }: { id: string }) {
           <section>
             <div className="flex items-center mb-2"><h2 className="text-sm font-semibold">Referências externas ({f.referencias.length})</h2>
               <Button variant="ghost" className="ml-auto" onClick={() => setAddingRef(true)}>Adicionar</Button></div>
-            <p className="text-xs text-muted mb-2">Só inspiração: a gente copia o conceito, nunca a peça.</p>
+            <p className="text-xs text-muted-foreground mb-2">Só inspiração: a gente copia o conceito, nunca a peça.</p>
             {f.referencias.length > 0 && <div className="space-y-2">
               {f.referencias.map((r, i) => (
                 <Card key={i} className="flex gap-3 items-start">
                   {r.imagem && <a href={api.formatRefUrl(f.id, r.imagem)} target="_blank" rel="noreferrer"><img src={api.formatRefUrl(f.id, r.imagem)} alt="" className="w-24 h-24 object-cover rounded-md border border-border" /></a>}
                   <div className="flex-1 min-w-0 text-sm">
-                    {r.url && <a href={r.url} target="_blank" rel="noreferrer" className="text-accent hover:underline break-all">{r.url}</a>}
+                    {r.url && <a href={r.url} target="_blank" rel="noreferrer" className="text-primary-ink hover:underline break-all">{r.url}</a>}
                     {r.observacao && <p className="mt-1 whitespace-pre-wrap">{r.observacao}</p>}
-                    <div className="text-xs text-muted mt-1">{fmtDate(r.adicionadoEm)}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{fmtDate(r.adicionadoEm)}</div>
                   </div>
-                  <button className="text-xs text-muted hover:text-danger" onClick={() => confirm('Apagar esta referência?') && mut.mutate(() => api.removeFormatRef(f.id, i))}>apagar</button>
+                  <button className="text-xs text-muted-foreground hover:text-destructive" onClick={() => confirm('Apagar esta referência?') && mut.mutate(() => api.removeFormatRef(f.id, i))}>apagar</button>
                 </Card>
               ))}
             </div>}
@@ -312,12 +312,12 @@ function FormatDetail({ id }: { id: string }) {
 
           <section>
             <h2 className="text-sm font-semibold mb-2">Peças feitas com ele ({f.usos.length})</h2>
-            {!f.usos.length ? <p className="text-sm text-muted">Nenhuma peça marcada com este formato ainda.</p> : (
+            {!f.usos.length ? <p className="text-sm text-muted-foreground">Nenhuma peça marcada com este formato ainda.</p> : (
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {f.usos.map((u) => (
-                  <Link key={`${u.empresa}/${u.peca}`} to={`/p/${u.empresa}/conteudos?peca=${encodeURIComponent(u.peca)}`} className="shrink-0 w-40 border border-border rounded-lg overflow-hidden bg-surface hover:border-accent/40">
+                  <Link key={`${u.empresa}/${u.peca}`} to={`/p/${u.empresa}/conteudos?peca=${encodeURIComponent(u.peca)}`} className="shrink-0 w-40 border border-border rounded-lg overflow-hidden bg-card hover:border-primary/40">
                     <Media empresa={u.empresa} peca={u.peca} cover={u.cover} className="aspect-[4/5]" />
-                    <div className="p-2 text-xs"><div className="font-medium line-clamp-2 first-letter:uppercase">{u.title}</div><div className="text-muted">{u.empresa}{u.status ? ` · ${u.status}` : ''}</div></div>
+                    <div className="p-2 text-xs"><div className="font-medium line-clamp-2 first-letter:uppercase">{u.title}</div><div className="text-muted-foreground">{u.empresa}{u.status ? ` · ${u.status}` : ''}</div></div>
                   </Link>
                 ))}
               </div>
@@ -354,15 +354,15 @@ function EditCard({ f }: { f: FormatInfo }) {
       </Field>
       <Field label="Nota">
         <div className="flex gap-1 text-xl">
-          {[1, 2, 3, 4, 5].map((n) => <button key={n} type="button" aria-label={`nota ${n}`} onClick={() => patch({ nota: f.nota === n ? null : n })} className={cx((f.nota ?? 0) >= n ? 'text-amber-400' : 'text-muted hover:text-amber-400')}>{(f.nota ?? 0) >= n ? '★' : '☆'}</button>)}
+          {[1, 2, 3, 4, 5].map((n) => <button key={n} type="button" aria-label={`nota ${n}`} onClick={() => patch({ nota: f.nota === n ? null : n })} className={cx((f.nota ?? 0) >= n ? 'text-amber-400' : 'text-muted-foreground hover:text-amber-400')}>{(f.nota ?? 0) >= n ? '★' : '☆'}</button>)}
         </div>
       </Field>
       <Field label="Tipos de conteúdo" hint="o porquê: filtra a galeria">
         <div className="flex gap-1 flex-wrap">
-          {CONTENT_TYPES.map((t) => <button key={t} type="button" onClick={() => toggleTipo(t)} className={cx('px-2.5 py-0.5 rounded-full text-xs border', f.tipos.includes(t) ? 'bg-accent text-white border-accent' : 'border-border text-muted hover:text-text')}>{CONTENT_TYPE_LABEL[t]}</button>)}
+          {CONTENT_TYPES.map((t) => <button key={t} type="button" onClick={() => toggleTipo(t)} className={cx('px-2.5 py-0.5 rounded-full text-xs border', f.tipos.includes(t) ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:text-foreground')}>{CONTENT_TYPE_LABEL[t]}</button>)}
         </div>
       </Field>
-      <div className="text-xs text-muted border-t border-border pt-3 mt-1 space-y-1">
+      <div className="text-xs text-muted-foreground border-t border-border pt-3 mt-1 space-y-1">
         <div><b>Pedir à IA:</b> "quero um conteúdo no formato {f.nome} sobre …", ou marque o formato na peça.</div>
         {f.status === 'rascunho' && <div>Rascunho: depois de 2–3 peças boas, peça "transforma o formato {f.nome} em skill".</div>}
       </div>
@@ -394,17 +394,17 @@ function PickPiece({ open, mode, f, slug, onClose }: { open: boolean; mode: 'mar
   };
   return (
     <Drawer open={open} onClose={onClose} title={isEx ? `Promover como exemplo de ${f.nome}` : `Marcar peça como ${f.nome}`}>
-      <p className="text-sm text-muted mb-3">{isEx ? 'A peça vira exemplo na galeria (a mídia não é copiada) e já fica marcada com este formato.' : 'A ficha da peça passa a apontar para este formato: a IA carrega a skill dele ao produzir ou refazer.'}</p>
+      <p className="text-sm text-muted-foreground mb-3">{isEx ? 'A peça vira exemplo na galeria (a mídia não é copiada) e já fica marcada com este formato.' : 'A ficha da peça passa a apontar para este formato: a IA carrega a skill dele ao produzir ou refazer.'}</p>
       <Input className="w-full mb-2" placeholder={`Buscar peça de ${slug}…`} value={q} onChange={(e) => setQ(e.target.value)} autoFocus />
       {isEx && <Input className="w-full mb-3" placeholder="legenda do exemplo (opcional)" value={legenda} onChange={(e) => setLegenda(e.target.value)} />}
       <div className="divide-y divide-border border border-border rounded-lg max-h-[60vh] overflow-y-auto">
-        {!list.length && <div className="p-4 text-sm text-muted">{isEx ? 'Nenhuma peça com arquivo exportado.' : 'Nenhuma peça.'}</div>}
+        {!list.length && <div className="p-4 text-sm text-muted-foreground">{isEx ? 'Nenhuma peça com arquivo exportado.' : 'Nenhuma peça.'}</div>}
         {list.map((p) => (
-          <button key={p.path} disabled={!!busy || taken.has(p.path)} onClick={() => void choose(p.path)} className="w-full flex items-center gap-3 p-2 text-left hover:bg-surface-2 disabled:opacity-50">
+          <button key={p.path} disabled={!!busy || taken.has(p.path)} onClick={() => void choose(p.path)} className="w-full flex items-center gap-3 p-2 text-left hover:bg-muted disabled:opacity-50">
             <Media empresa={slug} peca={p.path} cover={p.cover} className="w-12 h-14 rounded shrink-0" />
-            <div className="min-w-0 flex-1"><div className="text-sm font-medium truncate first-letter:uppercase">{p.title}</div><div className="text-xs text-muted font-mono truncate">{p.path}</div></div>
-            {taken.has(p.path) && <span className="text-xs text-muted">já está</span>}
-            {busy === p.path && <span className="text-xs text-muted">…</span>}
+            <div className="min-w-0 flex-1"><div className="text-sm font-medium truncate first-letter:uppercase">{p.title}</div><div className="text-xs text-muted-foreground font-mono truncate">{p.path}</div></div>
+            {taken.has(p.path) && <span className="text-xs text-muted-foreground">já está</span>}
+            {busy === p.path && <span className="text-xs text-muted-foreground">…</span>}
           </button>
         ))}
       </div>

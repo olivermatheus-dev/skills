@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type NewPieceInput } from '../../api';
-import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea } from '../ui';
+import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea } from '../kit';
 import { toast } from '../toast';
 import { qk, useFormats } from '../../queries';
 
@@ -69,15 +69,15 @@ export default function NewPiece({ slug, open, onClose, onCreated, initialFormat
       <Field label={formato ? 'Roteiro (opcional)' : 'Roteiro'} hint={formato ? 'Sem roteiro, a IA escreve um no formato e manda para você aprovar antes de produzir.' : 'Cole o texto ou envie um arquivo (.md, .txt, .docx). Fica salvo como roteiro.md.'}>
         {upload ? (
           <div className="flex items-center gap-2 text-sm border border-border rounded-md px-3 py-2">
-            <span className="font-mono">{upload.name}</span><span className="text-muted">(o texto é extraído ao criar)</span>
-            <button className="ml-auto text-xs text-danger" onClick={() => setUpload(undefined)}>remover</button>
+            <span className="font-mono">{upload.name}</span><span className="text-muted-foreground">(o texto é extraído ao criar)</span>
+            <button className="ml-auto text-xs text-destructive" onClick={() => setUpload(undefined)}>remover</button>
           </div>
         ) : (
           <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); void pickFile(e.dataTransfer.files[0]); }}>
             <Textarea rows={formato ? 6 : 14} className="font-mono text-[13px]" value={text} onChange={(e) => setText(e.target.value)} placeholder="Cole aqui o roteiro (ou arraste um arquivo)…" />
           </div>
         )}
-        <label className="inline-block mt-2 text-xs text-accent cursor-pointer hover:underline">
+        <label className="inline-block mt-2 text-xs text-primary-ink cursor-pointer hover:underline">
           enviar arquivo…<input type="file" accept=".md,.txt,.markdown,.docx" className="hidden" onChange={(e) => { void pickFile(e.target.files?.[0]); e.target.value = ''; }} />
         </label>
       </Field>

@@ -10,6 +10,8 @@ process.env.HUB_ROOT ??= fileURLToPath(new URL('..', import.meta.url)).replace(/
 export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   plugins: [react(), tailwindcss(), hubApi()],
+  // @ = app/src (padrão do shadcn: @/components/ui/…, @/lib/utils)
+  resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   server: { port: 5173, open: !process.env.HUB_NO_OPEN },
   preview: { port: 5173, open: !process.env.HUB_NO_OPEN },
   build: { chunkSizeWarningLimit: 1500 },

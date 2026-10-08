@@ -1,6 +1,6 @@
 // Seguidores ao longo das coletas: um gráfico pequeno por perfil (escala própria), SVG inline com cursor e tooltip.
 import { useEffect, useRef, useState } from 'react';
-import { fmtNum } from '../ui';
+import { fmtNum } from '../kit';
 import { PlatformIcon, fmtDelta } from './lib';
 
 export interface FollowerSeries { key: string; label: string; platform: string; color: string; points: { at: string; v: number }[] }
@@ -45,16 +45,16 @@ export function FollowerMini({ s }: { s: FollowerSeries }) {
   };
 
   return (
-    <div className="border border-border rounded-lg p-3 bg-surface">
-      <div className="flex items-center gap-2 text-xs text-muted">
+    <div className="border border-border rounded-lg p-3 bg-card">
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <PlatformIcon platform={s.platform} size={14} />
         <span className="truncate">{s.label}</span>
         <span className="ml-auto whitespace-nowrap">{pts.length} coleta{pts.length > 1 ? 's' : ''}</span>
       </div>
       <div className="flex items-baseline gap-2 mt-1">
         <span className="text-xl font-semibold tabular-nums">{fmtNum(h?.v ?? last.v)}</span>
-        {h ? <span className="text-xs text-muted">em {shortDate(h.at)}</span>
-          : delta != null && delta !== 0 && <span className={delta > 0 ? 'text-xs text-ok' : 'text-xs text-danger'}>{fmtDelta(delta)} desde {shortDate(first.at)}</span>}
+        {h ? <span className="text-xs text-muted-foreground">em {shortDate(h.at)}</span>
+          : delta != null && delta !== 0 && <span className={delta > 0 ? 'text-xs text-success' : 'text-xs text-destructive'}>{fmtDelta(delta)} desde {shortDate(first.at)}</span>}
       </div>
       <div ref={ref} className="relative mt-1">
         {w > 0 && (
@@ -63,15 +63,15 @@ export function FollowerMini({ s }: { s: FollowerSeries }) {
             <line x1={0} x2={w} y1={H - 1} y2={H - 1} stroke="var(--color-border)" />
             {pts.length > 1 && <path d={`${d} L${x(last.at)},${H - 1} L${x(first.at)},${H - 1} Z`} fill={s.color} opacity={0.08} />}
             {pts.length > 1 && <path d={d} fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />}
-            {hover != null && <line x1={x(pts[hover].at)} x2={x(pts[hover].at)} y1={0} y2={H} stroke="var(--color-muted)" strokeDasharray="2 3" opacity={0.6} />}
+            {hover != null && <line x1={x(pts[hover].at)} x2={x(pts[hover].at)} y1={0} y2={H} stroke="var(--color-muted-foreground)" strokeDasharray="2 3" opacity={0.6} />}
             {pts.map((p, i) => (
               <circle key={p.at} cx={x(p.at)} cy={y(p.v)} r={hover === i ? 4.5 : i === pts.length - 1 || pts.length === 1 ? 3.5 : 0}
-                fill={s.color} stroke="var(--color-surface)" strokeWidth={2} />
+                fill={s.color} stroke="var(--color-card)" strokeWidth={2} />
             ))}
             <rect x={0} y={0} width={w} height={H} fill="transparent" />
           </svg>
         )}
-        <div className="flex justify-between text-[10px] text-muted mt-1 tabular-nums">
+        <div className="flex justify-between text-[10px] text-muted-foreground mt-1 tabular-nums">
           <span>{shortDate(first.at)}</span>
           {pts.length === 1 ? <span>o gráfico cresce a cada coleta</span> : <span>{shortDate(last.at)}</span>}
         </div>

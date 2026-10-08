@@ -4,7 +4,7 @@ import { useId, useState } from 'react';
 import type { TagDef } from '../../api';
 import { useTags } from '../../queries';
 import { slugify } from '../../../../core/platform';
-import { cx } from '../ui';
+import { cx } from '../kit';
 
 export const toTag = (s: string) => (s.trim() ? slugify(s) : '');
 
@@ -20,7 +20,7 @@ export function TagChip({ id, def, onRemove, small }: { id: string; def?: TagDef
   const color = def?.color;
   return (
     <span
-      className={cx('inline-flex items-center gap-1 rounded-full font-medium bg-surface-2 text-muted', small ? 'px-1.5 py-0 text-[11px]' : 'px-2 py-0.5 text-xs')}
+      className={cx('inline-flex items-center gap-1 rounded-full font-medium bg-muted text-muted-foreground', small ? 'px-1.5 py-0 text-[11px]' : 'px-2 py-0.5 text-xs')}
       style={color ? { background: `${color}22`, color } : undefined}
     >
       {def?.label ?? id}
@@ -43,7 +43,7 @@ export function TagsInput({ value, onChange, slug, placeholder = 'adicionar tagâ
     setText('');
   };
   return (
-    <div className={cx('flex flex-wrap items-center gap-1.5 px-2 py-1.5 rounded-md border border-border bg-surface min-h-[34px] focus-within:border-accent', className)}>
+    <div className={cx('flex flex-wrap items-center gap-1.5 px-2 py-1.5 rounded-md border border-border bg-card min-h-[34px] focus-within:border-primary', className)}>
       {value.map((t) => <TagChip key={t} id={t} def={byId[t]} onRemove={() => onChange(value.filter((x) => x !== t))} />)}
       <input
         list={dl}

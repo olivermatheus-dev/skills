@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api, type Competitor, type DetectedLink } from '../../api';
 import { MarkdownEditor } from '../Markdown';
-import { Button, Drawer, ErrorBox, Field, Input, Select } from '../ui';
+import { Button, Drawer, ErrorBox, Field, Input, Select } from '../kit';
 import { useCompetitorActions } from './useCompetitorActions';
 import { KINDS, PlatformIcon, keyFor, platformLabel, slugify } from './lib';
 
@@ -78,10 +78,10 @@ export default function EditCompetitor({ slug, open, onClose, onFailed, data, bo
             <div key={`${p.platform}-${p.url}`} className="flex items-center gap-3 px-3 py-2 text-sm">
               <PlatformIcon platform={p.platform} size={18} />
               <div className="min-w-0 flex-1">
-                <div className="font-medium">{platformLabel(p.platform)} {p.handle && <span className="text-muted font-normal">{p.platform === 'site' ? p.handle : `@${p.handle}`}</span>}</div>
-                <a href={p.url} target="_blank" rel="noreferrer" className="text-xs text-muted truncate block hover:text-accent">{p.url}</a>
+                <div className="font-medium">{platformLabel(p.platform)} {p.handle && <span className="text-muted-foreground font-normal">{p.platform === 'site' ? p.handle : `@${p.handle}`}</span>}</div>
+                <a href={p.url} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground truncate block hover:text-primary-ink">{p.url}</a>
               </div>
-              <button className="text-xs text-danger hover:underline" onClick={() => setD({ ...d, profiles: d.profiles.filter((_, j) => j !== i) })}>remover</button>
+              <button className="text-xs text-destructive hover:underline" onClick={() => setD({ ...d, profiles: d.profiles.filter((_, j) => j !== i) })}>remover</button>
             </div>
           ))}
           <div className="flex items-center gap-2 px-3 py-2">
@@ -90,7 +90,7 @@ export default function EditCompetitor({ slug, open, onClose, onFailed, data, bo
             <Button variant="soft" className="!py-1 text-xs" disabled={!det} onClick={addProfile}>{det ? `+ ${platformLabel(det.platform)}` : '+ Adicionar'}</Button>
           </div>
         </div>
-        <div className="text-xs text-muted mt-1">Remover um perfil não apaga as coletas dele (ficam na pasta snapshots/).</div>
+        <div className="text-xs text-muted-foreground mt-1">Remover um perfil não apaga as coletas dele (ficam na pasta snapshots/).</div>
       </Field>
 
       <Field label="Observações">
@@ -98,7 +98,7 @@ export default function EditCompetitor({ slug, open, onClose, onFailed, data, bo
       </Field>
 
       <ErrorBox error={error} />
-      <div className="flex items-center gap-2 mt-4 sticky bottom-0 bg-surface py-3 border-t border-border">
+      <div className="flex items-center gap-2 mt-4 sticky bottom-0 bg-card py-3 border-t border-border">
         <Button variant="danger" onClick={remove}>Excluir</Button>
         <div className="flex-1" />
         <Button variant="ghost" onClick={onClose}>Cancelar</Button>

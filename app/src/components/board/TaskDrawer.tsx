@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Task } from '../../api';
 import { MarkdownEditor } from '../Markdown';
-import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea, cx } from '../ui';
+import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea, cx } from '../kit';
 import {
   ASSIGNEES, BOARD_OPTS, COLUMNS, PRIORITY_OPTS, assigneeLabel, checklist, isLate, normalizeBody,
   type BoardName, type Priority, type Status, type TaskDoc,
@@ -28,7 +28,7 @@ export function TaskDrawer({ slug, task, allTasks, onClose, onMove, actions }: {
   const guard = useRef<() => boolean>(() => true);
   return (
     <Drawer open={!!task} onClose={onClose} canClose={() => guard.current()} width="max-w-3xl"
-      title={task ? <span className="flex items-center gap-2"><span className="font-mono text-muted text-sm">{task.data.id}</span><AssigneeBadge assignee={task.data.assignee} /></span> : ''}>
+      title={task ? <span className="flex items-center gap-2"><span className="font-mono text-muted-foreground text-sm">{task.data.id}</span><AssigneeBadge assignee={task.data.assignee} /></span> : ''}>
       {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} guard={guard} actions={actions} />}
     </Drawer>
   );
@@ -131,7 +131,7 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions }: {
         </Field>
         <Field label="Prazo" hint={isLate({ ...task.data, due: f.due || undefined }) ? 'Atrasada' : undefined}>
           <div className="flex gap-1">
-            <Input type="date" className={cx('w-full min-w-0', isLate({ ...task.data, due: f.due || undefined }) && 'text-danger border-red-200')} value={f.due} onChange={(e) => set('due', e.target.value)} />
+            <Input type="date" className={cx('w-full min-w-0', isLate({ ...task.data, due: f.due || undefined }) && 'text-destructive border-red-200')} value={f.due} onChange={(e) => set('due', e.target.value)} />
             {f.due && <Button variant="ghost" type="button" title="Limpar prazo" onClick={() => set('due', '')}>×</Button>}
           </div>
         </Field>
@@ -146,13 +146,13 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions }: {
       {(deps.length > 0 || children.length > 0) && (
         <div className="-mt-2 mb-4 flex flex-wrap gap-1.5 text-xs">
           {deps.map(({ id, t }) => (
-            <span key={id} className={cx('px-2 py-0.5 rounded border', t?.data.status === 'done' ? 'border-green-200 text-ok bg-green-50' : 'border-amber-200 text-amber-700 bg-amber-50')}
+            <span key={id} className={cx('px-2 py-0.5 rounded border', t?.data.status === 'done' ? 'border-green-200 text-success bg-green-50' : 'border-amber-200 text-amber-700 bg-amber-50')}
               title={t ? `${t.data.title} (${t.data.status})` : 'não encontrada'}>
               ⛓ {id} · {t ? (t.data.status === 'done' ? 'feita' : t.data.status) : '?'}
             </span>
           ))}
           {children.map((c) => (
-            <span key={c.data.id} className="px-2 py-0.5 rounded border border-border text-muted" title={c.data.title}>↳ {c.data.id} · {c.data.status}</span>
+            <span key={c.data.id} className="px-2 py-0.5 rounded border border-border text-muted-foreground" title={c.data.title}>↳ {c.data.id} · {c.data.status}</span>
           ))}
         </div>
       )}
@@ -163,19 +163,19 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions }: {
       </Field>
 
       <div className="flex items-center justify-between mb-1">
-        <div className="text-xs font-medium text-muted uppercase tracking-wide">Descrição, checklist e log</div>
-        {ck.all > 0 && <div className="text-xs text-muted">Checklist {ck.done}/{ck.all}</div>}
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Descrição, checklist e log</div>
+        {ck.all > 0 && <div className="text-xs text-muted-foreground">Checklist {ck.done}/{ck.all}</div>}
       </div>
       <MarkdownEditor value={body} onChange={setBody} minHeight={260} />
 
-      <div className="sticky bottom-0 -mx-6 mt-6 px-6 py-3 bg-surface border-t border-border">
+      <div className="sticky bottom-0 -mx-6 mt-6 px-6 py-3 bg-card border-t border-border">
         {saveError ? <div className="-mt-3 mb-3 max-h-40 overflow-y-auto"><ErrorBox error={saveError} /></div> : null}
         <div className="flex items-center gap-3">
         <Button disabled={!dirty || !f.title.trim()} onClick={save}>Salvar</Button>
         <Button variant="ghost" onClick={close}>Fechar</Button>
         <Button variant="danger" onClick={archive} title="Move o arquivo para board/arquivo/ (não é apagado). Dá para desfazer no aviso.">Arquivar</Button>
-        <span className="text-xs text-muted whitespace-nowrap">{dirty ? 'Alterações não salvas · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
-        <span className="ml-auto text-xs text-muted font-mono truncate" title={task.file}>{task.file}</span>
+        <span className="text-xs text-muted-foreground whitespace-nowrap">{dirty ? 'Alterações não salvas · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
+        <span className="ml-auto text-xs text-muted-foreground font-mono truncate" title={task.file}>{task.file}</span>
         </div>
       </div>
     </div>

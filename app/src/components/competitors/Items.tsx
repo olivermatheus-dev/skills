@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { ItemMark } from '../../api';
-import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../ui';
+import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../kit';
 import {
   Img, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, Star, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row,
 } from './lib';
@@ -12,7 +12,7 @@ export const titleOf = (r: Row) => r.item.title || r.item.caption?.split('\n')[0
 
 function Thumb({ r, media, className }: { r: Row; media?: string; className?: string }) {
   const vertical = isVertical(r);
-  const ph = <div className="absolute inset-0 grid place-items-center text-muted"><PlatformIcon platform={r.platform} size={28} /></div>;
+  const ph = <div className="absolute inset-0 grid place-items-center text-muted-foreground"><PlatformIcon platform={r.platform} size={28} /></div>;
   return (
     <div className={cx('relative bg-zinc-900 overflow-hidden', className)}>
       {vertical && <Img local={media} remote={r.item.thumbnail} className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-60" fallback={<span />} />}
@@ -44,7 +44,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
   const status = m?.status ?? 'nova';
   const dGrowth = fmtDelta(r.viewsDelta);
   return (
-    <div className={cx('bg-surface border rounded-xl overflow-hidden flex flex-col transition hover:shadow-md',
+    <div className={cx('bg-card border rounded-xl overflow-hidden flex flex-col transition hover:shadow-md',
       r.outlier != null && r.outlier >= 3 ? 'border-amber-300 ring-1 ring-amber-200' : 'border-border', status === 'descartada' && 'opacity-55')}>
       <button type="button" onClick={onOpen} className="relative block text-left" aria-label={`Abrir ${titleOf(r)}`}>
         <Thumb r={r} media={media} className="aspect-video" />
@@ -59,41 +59,41 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
       </button>
 
       <div className="p-3 flex-1 flex flex-col gap-2">
-        <button type="button" onClick={onOpen} className="text-left text-sm font-medium leading-snug line-clamp-2 hover:text-accent" title={titleOf(r)}>{titleOf(r)}</button>
-        <div className="text-xs text-muted" title={r.item.publishedAt ? fmtDate(r.item.publishedAt) : undefined}>
+        <button type="button" onClick={onOpen} className="text-left text-sm font-medium leading-snug line-clamp-2 hover:text-primary-ink" title={titleOf(r)}>{titleOf(r)}</button>
+        <div className="text-xs text-muted-foreground" title={r.item.publishedAt ? fmtDate(r.item.publishedAt) : undefined}>
           {r.item.publishedAt ? `${fmtDate(r.item.publishedAt)} · ${timeAgo(r.item.publishedAt)}` : 'data desconhecida'}
         </div>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-text">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground">
           <span className="inline-flex items-center gap-1">
             <Metric icon="▶" v={r.item.metrics.views} title="Views" />
-            {dGrowth && <span className={cx('tabular-nums text-[11px] font-medium', r.viewsDelta! > 0 ? 'text-ok' : 'text-danger')} title={`desde a coleta de ${fmtDate(r.prevAt)}`}>{dGrowth}</span>}
+            {dGrowth && <span className={cx('tabular-nums text-[11px] font-medium', r.viewsDelta! > 0 ? 'text-success' : 'text-destructive')} title={`desde a coleta de ${fmtDate(r.prevAt)}`}>{dGrowth}</span>}
           </span>
           <Metric icon="♥" v={r.item.metrics.likes} title="Curtidas" />
           <Metric icon="💬" v={r.item.metrics.comments} title="Comentários" />
           {r.item.metrics.shares != null && <Metric icon="↗" v={r.item.metrics.shares} title="Compartilhamentos" />}
-          {r.engagement != null && <span className="text-muted ml-auto" title="(curtidas + comentários + compartilhamentos) ÷ views">{fmtPct(r.engagement)}</span>}
+          {r.engagement != null && <span className="text-muted-foreground ml-auto" title="(curtidas + comentários + compartilhamentos) ÷ views">{fmtPct(r.engagement)}</span>}
         </div>
         {(m?.tags.length || m?.note) ? (
           <div className="flex flex-wrap gap-1.5 items-center text-xs">
-            {m?.tags.map((t) => <span key={t} className="text-accent">#{t}</span>)}
-            {m?.note && <span className="text-muted truncate max-w-full" title={m.note}>✎ {m.note}</span>}
+            {m?.tags.map((t) => <span key={t} className="text-primary-ink">#{t}</span>)}
+            {m?.note && <span className="text-muted-foreground truncate max-w-full" title={m.note}>✎ {m.note}</span>}
           </div>
         ) : null}
 
         <div className="mt-auto pt-2 border-t border-border flex items-center gap-1.5">
           <Star on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="text-base" />
           <select value={status} onChange={(e) => onMark({ status: e.target.value as ItemMark['status'] })} aria-label="Status"
-            className="text-xs rounded-md border border-border bg-surface px-1.5 py-1 outline-none focus:border-accent" style={{ color: STATUS_COLOR[status] }}>
+            className="text-xs rounded-md border border-border bg-card px-1.5 py-1 outline-none focus:border-primary" style={{ color: STATUS_COLOR[status] }}>
             {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
           {m?.ideaId ? (
-            <Link to={`/p/${slug}/ideias`} className="text-xs font-medium text-ok bg-green-50 px-1.5 py-1 rounded-md" title="Já virou ideia">✦ {m.ideaId}</Link>
+            <Link to={`/p/${slug}/ideias`} className="text-xs font-medium text-success bg-green-50 px-1.5 py-1 rounded-md" title="Já virou ideia">✦ {m.ideaId}</Link>
           ) : (
-            <button type="button" onClick={onIdea} disabled={ideaBusy} className="text-xs font-medium text-accent hover:bg-accent-soft px-1.5 py-1 rounded-md disabled:opacity-50">
+            <button type="button" onClick={onIdea} disabled={ideaBusy} className="text-xs font-medium text-primary-ink hover:bg-primary-soft px-1.5 py-1 rounded-md disabled:opacity-50">
               {ideaBusy ? <Spinner /> : '✦'} Virar ideia
             </button>
           )}
-          <a href={r.item.url} target="_blank" rel="noreferrer" className="ml-auto text-muted hover:text-text text-sm px-1" title={`Abrir no ${platformLabel(r.platform)}`}>↗</a>
+          <a href={r.item.url} target="_blank" rel="noreferrer" className="ml-auto text-muted-foreground hover:text-foreground text-sm px-1" title={`Abrir no ${platformLabel(r.platform)}`}>↗</a>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
 /** mini-série de views do item ao longo das coletas */
 function ViewsHistory({ r }: { r: Row }) {
   const pts = r.history.filter((h) => h.views != null) as { at: string; views: number }[];
-  if (pts.length < 2) return <div className="text-xs text-muted">O crescimento aparece a partir da 2ª coleta que incluir este item.</div>;
+  if (pts.length < 2) return <div className="text-xs text-muted-foreground">O crescimento aparece a partir da 2ª coleta que incluir este item.</div>;
   const W = 520, H = 70, lo = Math.min(...pts.map((p) => p.views)), hi = Math.max(...pts.map((p) => p.views));
   const t0 = new Date(pts[0].at).getTime(), t1 = new Date(pts.at(-1)!.at).getTime();
   const x = (a: string) => 6 + ((new Date(a).getTime() - t0) / Math.max(1, t1 - t0)) * (W - 12);
@@ -118,9 +118,9 @@ function ViewsHistory({ r }: { r: Row }) {
         <tbody>
           {pts.map((p, i) => (
             <tr key={p.at} className="border-t border-border">
-              <td className="py-1 text-muted">{fmtDate(p.at)}</td>
+              <td className="py-1 text-muted-foreground">{fmtDate(p.at)}</td>
               <td className="py-1 text-right tabular-nums">{p.views.toLocaleString('pt-BR')}</td>
-              <td className="py-1 text-right tabular-nums w-24 text-ok">{i ? fmtDelta(p.views - pts[i - 1].views) : ''}</td>
+              <td className="py-1 text-right tabular-nums w-24 text-success">{i ? fmtDelta(p.views - pts[i - 1].views) : ''}</td>
             </tr>
           ))}
         </tbody>
@@ -156,34 +156,34 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
         <div className="absolute top-3 left-3"><OutlierBadge r={r} big /></div>
       </div>
       <h2 className="text-lg font-semibold leading-snug">{titleOf(r)}</h2>
-      <div className="text-sm text-muted mt-1">
+      <div className="text-sm text-muted-foreground mt-1">
         {r.item.publishedAt ? `Publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : 'Data de publicação desconhecida'}
         {fmtDur(r.item.durationS) && ` · ${fmtDur(r.item.durationS)}`}
-        {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-accent">abrir original ↗</a>
+        {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink">abrir original ↗</a>
       </div>
 
       <div className="grid grid-cols-4 gap-2 my-4">
         {([['Views', r.item.metrics.views, r.viewsDelta], ['Curtidas', r.item.metrics.likes], ['Comentários', r.item.metrics.comments], ['Engajamento', undefined]] as [string, number | undefined, number?][]).map(([label, v, d]) => (
-          <div key={label} className="bg-surface-2 rounded-lg p-2.5">
-            <div className="text-[11px] text-muted uppercase tracking-wide">{label}</div>
+          <div key={label} className="bg-muted rounded-lg p-2.5">
+            <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
             <div className="font-semibold tabular-nums">{label === 'Engajamento' ? fmtPct(r.engagement) : fmtNum(v)}</div>
-            {d != null && d !== 0 && <div className="text-[11px] text-ok tabular-nums">{fmtDelta(d)}</div>}
+            {d != null && d !== 0 && <div className="text-[11px] text-success tabular-nums">{fmtDelta(d)}</div>}
           </div>
         ))}
       </div>
       {(r.item.metrics.shares != null || r.item.metrics.saves != null) && (
-        <div className="text-xs text-muted -mt-2 mb-4">Compartilhamentos {fmtNum(r.item.metrics.shares)} · Salvamentos {fmtNum(r.item.metrics.saves)}</div>
+        <div className="text-xs text-muted-foreground -mt-2 mb-4">Compartilhamentos {fmtNum(r.item.metrics.shares)} · Salvamentos {fmtNum(r.item.metrics.saves)}</div>
       )}
 
       {r.item.caption && r.item.caption !== r.item.title && (
         <details className="mb-4" open={!r.item.title}>
-          <summary className="text-xs font-medium text-muted uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
-          <p className="text-sm whitespace-pre-line mt-2 max-h-48 overflow-y-auto bg-surface-2 rounded-lg p-3">{r.item.caption}</p>
+          <summary className="text-xs font-medium text-muted-foreground uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
+          <p className="text-sm whitespace-pre-line mt-2 max-h-48 overflow-y-auto bg-muted rounded-lg p-3">{r.item.caption}</p>
         </details>
       )}
 
       <div className="mb-5">
-        <div className="text-xs font-medium text-muted uppercase tracking-wide mb-1">Views por coleta</div>
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Views por coleta</div>
         <ViewsHistory r={r} />
       </div>
 
@@ -193,7 +193,7 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
           <Select value={m?.status ?? 'nova'} onChange={(e) => onMark({ status: e.target.value as ItemMark['status'] })}>
             {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </Select>
-          {m?.updated && <span className="text-xs text-muted">marcado {timeAgo(m.updated)}</span>}
+          {m?.updated && <span className="text-xs text-muted-foreground">marcado {timeAgo(m.updated)}</span>}
         </div>
         <Field label="Tags" hint="separadas por vírgula; salvam ao sair do campo">
           <Input className="w-full" list="item-tags" value={tags} onChange={(e) => setTags(e.target.value)} onBlur={saveTags} placeholder="ex.: gancho-forte, humor" />
@@ -203,17 +203,17 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
           <Textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
         </Field>
 
-        <div className="bg-accent-soft/60 border border-indigo-100 rounded-lg p-3">
+        <div className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
           {m?.ideaId ? (
-            <div className="text-sm">✦ Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-accent">Abrir banco de ideias →</Link></div>
+            <div className="text-sm">✦ Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
           ) : (
             <>
-              <div className="text-xs font-medium text-accent uppercase tracking-wide mb-2">Virar ideia</div>
+              <div className="text-xs font-medium text-primary-ink uppercase tracking-wide mb-2">Virar ideia</div>
               <div className="flex gap-2">
                 <Input className="flex-1" value={ideaTitle} onChange={(e) => setIdeaTitle(e.target.value)} placeholder="Título da ideia" />
                 <Button disabled={!ideaTitle.trim() || ideaBusy} onClick={() => { saveNote(); onIdea(ideaTitle.trim(), parseTags(tags), note); }}>{ideaBusy ? <Spinner /> : 'Criar ideia'}</Button>
               </div>
-              <div className="text-xs text-muted mt-1.5">Leva o link, as métricas, o outlier e a sua nota; o item fica como “analisada”.</div>
+              <div className="text-xs text-muted-foreground mt-1.5">Leva o link, as métricas, o outlier e a sua nota; o item fica como “analisada”.</div>
             </>
           )}
         </div>
