@@ -56,6 +56,8 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 035 | [Fontes de inteligência (Google Ads Transparency, pixels, Wayback, CNPJ, DataForSEO…)](tasks/035-fontes-de-inteligencia/TASK.md) | 031 | pesquisa feita (2026-10-08); decisões do Oliver: teto DataForSEO, e-mail de newsletters |
 | 036 | [Planejamento de campanhas (Google Ads por palavra-chave · Meta/TikTok em quadro de funil)](tasks/036-planejamento-de-campanhas/TASK.md) | 035, 037 | desenho completo (2026-10-08); aguardando respostas do Oliver e aval da fase A |
 | 037 | [Inteligência de anúncios dos concorrentes (salvos, notas, tags, funil, classificador)](tasks/037-inteligencia-de-anuncios/TASK.md) | 031 | **desenho + protótipo do classificador de regras feitos (2026-10-08)**, nada ligado ao app; aguarda respostas do Oliver (seção 13) e aval da fase A |
+| 038 | [Conteúdos e Anúncios dos concorrentes v2 (barra numa linha, card, tabela, fora da curva × perfil e × mercado, dashboard) + AppContent centralizado + Select com ícones](tasks/038-conteudos-concorrentes-v2/TASK.md) | 031, 019 | pronta (registrada 2026-10-08); C1 = desenho do dashboard pelo estrategista |
+| 039 | [Panorama dos concorrentes como dashboard + Brechas em página própria](tasks/039-panorama-dashboard/TASK.md) | 038 (A, B2) | pronta (registrada 2026-10-08); desenho pelo estrategista junto com a 038 C1 |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 

@@ -64,7 +64,7 @@ Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 - Em paralelo, sem bloquear: **026** (skills e agentes no app), 019, 021, 013.
 
 ## Como retomar
-- **Construção do hub:** `roadmap/BACKLOG.md` → `tasks/<id>/TASK.md` da vez.
+- **Construção do hub:** `roadmap/BACKLOG.md` → `tasks/<id>/TASK.md` da vez. O que o Oliver pediu e ainda não saiu: `roadmap/PEDIDOS.md`.
 - **Produção para a kz:** skill `orquestrar`; quadro com `node tools/board.mjs kz --me`.
 - **Vídeo novo:** skill `video` (lê o kit). **Material novo de vídeo/motion:** tarefa 002.
 - **Fim de sessão:** atualizar este arquivo e o `TASK.md`, commit + push, sugerir `/clear`.
