@@ -104,8 +104,10 @@ export interface Row {
   outlierMercadoBasis?: 'views' | 'likes';
   /** tamanho da amostra (itens com a métrica) usada na mediana do mercado */
   mercadoAmostra?: number;
-  /** 'formato' = rede + formato; 'rede' = amostra do formato < MERCADO_MIN_AMOSTRA, caiu para a rede inteira */
+  /** 'formato' = rede + formato; 'rede' = amostra do formato < MERCADO_MIN_AMOSTRA (ou < 3 concorrentes), caiu para a rede inteira */
   mercadoEscopo?: 'formato' | 'rede';
+  /** nº de concorrentes distintos na amostra do mercado; < MERCADO_MIN_CONCORRENTES → `outlierMercado` e `porSeguidorMercado` ficam undefined */
+  mercadoConcorrentes?: number;
   /** alcance relativo: views ÷ seguidores do perfil na mesma coleta (sem views: curtidas ÷ seguidores, mesma base do `outlier`); sem seguidores fica undefined */
   porSeguidor?: number;
   porSeguidorBasis?: 'views' | 'likes';
@@ -153,34 +155,46 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
 
 /** amostra mínima do formato (rede + type) para valer como mercado; abaixo disso usa a rede inteira */
 export const MERCADO_MIN_AMOSTRA = 10;
+/** concorrentes distintos mínimos para valer como mercado (com 1–2, "× mercado" é só "× o outro perfil") */
+export const MERCADO_MIN_CONCORRENTES = 3;
 
 /**
  * Segunda medida de fora da curva: contra o mercado. Recebe as linhas de TODOS os concorrentes (já só da última coleta de cada
- * perfil, como `buildRows`). Mediana por rede + formato (`item.type`); se o formato tiver < 10 itens, usa a rede inteira.
+ * perfil, como `buildRows`). Mediana por rede + formato (`item.type`); se o formato tiver < 10 itens ou < 3 concorrentes, usa a
+ * rede inteira; se a rede também tiver < 3 concorrentes, `outlierMercado` e `porSeguidorMercado` ficam undefined (a tela mostra "—").
  * A base (views ou curtidas) de cada linha é a mesma do `outlier`; a mediana só conta itens com a métrica > 0.
+ * `compOf` = de qual concorrente é a linha (padrão: `compId` da linha, senão o perfil).
  */
-export function withMarketOutlier<T extends Row>(rows: T[]): T[] {
-  type Pool = { views: number[]; likes: number[]; pfViews: number[]; pfLikes: number[] };
+export function withMarketOutlier<T extends Row>(rows: T[], compOf: (r: T) => string = (r) => (r as { compId?: string }).compId ?? r.profileKey): T[] {
+  type Pool = { views: number[]; likes: number[]; pfViews: number[]; pfLikes: number[]; compViews: Set<string>; compLikes: Set<string> };
   const byNet = new Map<string, Pool>(), byFmt = new Map<string, Pool>();
-  const pool = (m: Map<string, Pool>, k: string) => { let p = m.get(k); if (!p) m.set(k, p = { views: [], likes: [], pfViews: [], pfLikes: [] }); return p; };
+  const pool = (m: Map<string, Pool>, k: string) => { let p = m.get(k); if (!p) m.set(k, p = { views: [], likes: [], pfViews: [], pfLikes: [], compViews: new Set(), compLikes: new Set() }); return p; };
   for (const r of rows) {
     const { views, likes } = r.item.metrics;
+    const c = compOf(r);
     for (const p of [pool(byNet, r.platform), pool(byFmt, `${r.platform}|${r.item.type}`)]) {
-      if (views) p.views.push(views);
-      if (likes) p.likes.push(likes);
+      if (views) { p.views.push(views); p.compViews.add(c); }
+      if (likes) { p.likes.push(likes); p.compLikes.add(c); }
       if (r.porSeguidor) (r.porSeguidorBasis === 'views' ? p.pfViews : p.pfLikes).push(r.porSeguidor);
     }
   }
   const med = new Map<Pool, { views?: number; likes?: number; pfViews?: number; pfLikes?: number }>();
   const medOf = (p: Pool, b: 'views' | 'likes' | 'pfViews' | 'pfLikes') => { let c = med.get(p); if (!c) med.set(p, c = {}); return (c[b] ??= median(p[b])); };
+  const comps = (p: Pool, b: 'views' | 'likes') => (b === 'views' ? p.compViews : p.compLikes).size;
   return rows.map((r) => {
     const basis = r.outlierBasis, v = r.item.metrics[basis];
     const f = byFmt.get(`${r.platform}|${r.item.type}`)!;
-    const escopo: 'formato' | 'rede' = f[basis].length >= MERCADO_MIN_AMOSTRA ? 'formato' : 'rede';
+    const escopo: 'formato' | 'rede' = f[basis].length >= MERCADO_MIN_AMOSTRA && comps(f, basis) >= MERCADO_MIN_CONCORRENTES ? 'formato' : 'rede';
     const p = escopo === 'formato' ? f : byNet.get(r.platform)!;
+    const n = comps(p, basis), ok = n >= MERCADO_MIN_CONCORRENTES;
     const m = medOf(p, basis);
     const pb = r.porSeguidorBasis === 'views' ? 'pfViews' : 'pfLikes', pm = medOf(p, pb);
-    return { ...r, porSeguidorMercado: r.porSeguidor != null && pm ? r.porSeguidor / pm : undefined, outlierMercado: v != null && m ? v / m : undefined, outlierMercadoBasis: basis, mercadoAmostra: p[basis].length, mercadoEscopo: escopo };
+    return {
+      ...r,
+      porSeguidorMercado: ok && r.porSeguidor != null && pm ? r.porSeguidor / pm : undefined,
+      outlierMercado: ok && v != null && m ? v / m : undefined,
+      outlierMercadoBasis: basis, mercadoAmostra: p[basis].length, mercadoEscopo: escopo, mercadoConcorrentes: n,
+    };
   });
 }
 

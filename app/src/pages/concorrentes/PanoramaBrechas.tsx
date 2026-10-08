@@ -2,12 +2,15 @@
 // As contas da matriz seguem a mesma regra da Matriz de funcionalidades: tem = sim/parcial; coluna `_nos` = a própria empresa.
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, ChevronDown, ChevronRight, ListPlus, TriangleAlert } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, ListPlus, MessageSquare, Package, Tag, Target, TriangleAlert, Users, type LucideIcon } from 'lucide-react';
 import type { GapTheme, Matrix } from '../../api';
+import type { ModuleDataOf } from '../../../../schema/analysis';
 import { NOS } from '../../../../schema/matrix';
 import { useGaps, useMatrix } from '../../queries';
 import { Avatar, Chips } from '../../components/competitors/lib';
 import type { MarketRow } from '../../components/competitors/area';
+import { useTaskActions } from '../../components/board/useTaskActions';
+import { toast } from '../../components/toast';
 import { cx } from '../../components/kit';
 
 const POS = (s?: string) => s === 'sim' || s === 'parcial';
@@ -80,7 +83,7 @@ export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRo
   if (!g?.themes.length) return null;
   const total = Object.keys(g.basedOn).length;
   const comps = (t: GapTheme) => [...new Set(t.sources.map((s) => s.competitor))];
-  const themes = [...g.themes].filter((t) => kind === 'todas' || t.kind === kind).sort((a, b) => comps(b).length - comps(a).length);
+  const themes = rankGaps(g.themes.filter((t) => kind === 'todas' || t.kind === kind));
   const toggle = (id: string) => setOpen((s) => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
 
   return (
@@ -193,5 +196,135 @@ export function ProductVsMarket({ slug, s }: { slug: string; s: MatrixStats | nu
         {s.raras.length > 0 && <p className="text-[11px] text-muted-foreground mt-1">Em negrito, ninguém mais tem; o resto, no máximo 2 concorrentes.</p>}
       </div>
     </section>
+  );
+}
+
+// ---------- Panorama: card resumido + "virar tarefa" + frases por concorrente ----------
+
+/** ordem de desempate: o que vira peça sem esperar o produto vem antes */
+const KIND_RANK: Record<Kind, number> = { oferta: 0, mensagem: 1, publico: 2, produto: 3 };
+const KIND_ICON: Record<Kind, LucideIcon> = { publico: Users, mensagem: MessageSquare, oferta: Tag, produto: Package };
+export const gapComps = (t: GapTheme) => [...new Set(t.sources.map((s) => s.competitor))];
+/** temas por nº de concorrentes distintos; empate: oferta > mensagem > público > produto */
+export const rankGaps = (themes: GapTheme[]) => [...themes].sort((a, b) => gapComps(b).length - gapComps(a).length || KIND_RANK[a.kind] - KIND_RANK[b.kind]);
+
+/** brecha → tarefa no quadro Produto, em Backlog (vira "A fazer" quando o Oliver aprovar); devolve o id criado */
+export function useGapTask(slug: string, origem: string) {
+  const tasks = useTaskActions(slug);
+  return (t: GapTheme) => new Promise<string | undefined>((resolve) => {
+    const names = gapComps(t);
+    const body = `\n## Brecha\n${t.action}\n${t.dependsOn ? `\nDepende de: ${t.dependsOn}\n` : ''}\n## O que os concorrentes deixam aberto\n${t.sources.map((s) => `- ${s.competitor}: “${s.text}”`).join('\n')}\n\n## Checklist\n\n## Log\n- ${new Date().toISOString().slice(0, 10)} · criada a partir ${origem} (tema ${t.id}, ${names.length} concorrente(s))\n`;
+    const { promise } = tasks.create({ title: t.title, board: 'produto', status: 'backlog', assignee: 'oliver', priority: 'media' }, body, {
+      okMessage: false,
+      onError: () => resolve(undefined),
+    });
+    promise.then((r) => { toast.ok(`Tarefa ${r.data.id} criada em Produto`); resolve(r.data.id); }, () => resolve(undefined));
+  });
+}
+
+/** Panorama: as 5 maiores brechas, sempre à vista, com "→ tarefa" em cada linha e o produto × mercado em 2 números */
+export function GapSummaryCard({ slug, rows, s, className }: { slug: string; rows: MarketRow[]; s: MatrixStats | null; className?: string }) {
+  const gq = useGaps(slug);
+  const mq = useMatrix(slug);
+  const toTask = useGapTask(slug, 'do Panorama');
+  const [made, setMade] = useState<Record<string, string>>({});
+  const byId = useMemo(() => new Map(rows.map((r) => [r.c.data.id, r])), [rows]);
+  const g = gq.data;
+  const stale = useMemo(() => !g ? 0 : rows.filter((r) => { const at = r.res.forcas?.updatedAt; return at && (!g.basedOn[r.c.data.id] || at > g.basedOn[r.c.data.id]); }).length, [g, rows]);
+  const page = `/p/${slug}/concorrentes/brechas`;
+  if (gq.isLoading) return <section className={cx('bg-card border border-border rounded-xl h-64 animate-pulse', className)} />;
+  if (!g?.themes.length) return (
+    <section className={cx('bg-card border border-border rounded-xl p-4', className)}>
+      <h2 className="text-sm font-semibold flex items-center gap-2"><Target className="size-4 text-primary-ink" />Brechas para nós</h2>
+      <p className="text-xs text-muted-foreground mt-1">Ainda sem resumo. Peça à IA “atualiza as brechas” depois das análises de pontos fortes e fracos.</p>
+    </section>
+  );
+  const total = Object.keys(g.basedOn).length;
+  const top = rankGaps(g.themes).slice(0, 5);
+  const turn = async (t: GapTheme) => {
+    if (made[t.id]) return;
+    setMade((m) => ({ ...m, [t.id]: '…' }));
+    const id = await toTask(t);
+    setMade((m) => { const n = { ...m }; if (id) n[t.id] = id; else delete n[t.id]; return n; });
+  };
+  return (
+    <section className={cx('bg-card border border-border rounded-xl flex flex-col', className)}>
+      <header className="px-4 pt-3.5 pb-2.5 flex items-center gap-2.5 border-b border-border">
+        <span className="grid place-items-center size-7 rounded-md bg-primary-soft text-primary-ink shrink-0"><Target className="size-4" /></span>
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold leading-tight">Brechas para nós</h2>
+          <p className="text-[11px] text-muted-foreground leading-tight mt-0.5">as {top.length} maiores de {g.themes.length} · atualizado em {new Date(g.updatedAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}</p>
+        </div>
+        <Link to={page} className="ml-auto text-xs text-primary-ink hover:underline whitespace-nowrap">ver todas →</Link>
+      </header>
+      <ol className="divide-y divide-border">
+        {top.map((t) => {
+          const cs = gapComps(t);
+          const Icon = KIND_ICON[t.kind];
+          const has = t.kind === 'produto' ? nosHas(mq.data, t) : null;
+          const done = made[t.id];
+          return (
+            <li key={t.id} className="group px-4 py-2.5 hover:bg-muted/30">
+              <div className="flex items-start gap-2.5">
+                <span className="mt-0.5 shrink-0 text-muted-foreground" title={KIND[t.kind]}><Icon className="size-4" strokeWidth={1.8} /></span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Link to={page} className="flex-1 text-[13px] font-medium leading-snug line-clamp-2 hover:text-primary-ink">{t.title}</Link>
+                    <span className="shrink-0 flex items-center gap-1.5 pt-px" title={`${cs.length} de ${total} concorrentes deixam essa brecha aberta: ${cs.map((id) => byId.get(id)?.c.data.name ?? id).join(', ')}`}>
+                      <span className="flex -space-x-1.5">
+                        {cs.slice(0, 3).map((id) => { const r = byId.get(id); return r ? <Avatar key={id} name={r.c.data.name} size={18} local={r.avatar.local} remote={r.avatar.remote} className="ring-2 ring-card" /> : null; })}
+                      </span>
+                      <span className="text-xs font-semibold tabular-nums">{cs.length}<span className="font-normal text-muted-foreground">/{total}</span></span>
+                    </span>
+                  </div>
+                  <div className="mt-0.5 flex items-center gap-2">
+                    <p className="flex-1 min-w-0 truncate text-xs text-muted-foreground" title={t.action}>{t.action}</p>
+                    {has && <span className={cx('shrink-0 text-[11px] font-medium', has.cls)}>{has.label}</span>}
+                    <button type="button" disabled={!!done} onClick={() => void turn(t)} title="Cria uma tarefa em Produto, em Backlog, para você aprovar"
+                      className={cx('shrink-0 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium transition',
+                        done ? 'text-success' : 'text-muted-foreground opacity-70 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-primary-soft hover:text-primary-ink')}>
+                      {done ? <><Check className="size-3" />{done === '…' ? 'Criando…' : done}</> : <><ListPlus className="size-3" />tarefa</>}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <footer className="mt-auto px-4 py-2.5 border-t border-border bg-muted/30 rounded-b-xl text-xs flex items-center gap-2">
+        {s ? (
+          <Link to={page} className="flex items-center gap-1.5 hover:text-primary-ink" title={`Pela matriz: ${s.lacunas.length} funcionalidade(s) que metade ou mais dos concorrentes têm e você não; ${s.exclusivas.length} que só você tem.`}>
+            <Package className="size-3.5 text-muted-foreground" />
+            <span className="text-muted-foreground">Produto:</span>
+            <span><b className="tabular-nums text-destructive">{s.lacunas.length}</b> faltam</span>
+            <span className="text-muted-foreground">·</span>
+            <span><b className="tabular-nums text-success">{s.exclusivas.length}</b> só você tem</span>
+          </Link>
+        ) : <span className="text-muted-foreground">Produto × mercado: sem matriz</span>}
+        {stale > 0 && <span className="ml-auto inline-flex items-center gap-1 text-amber-700 dark:text-amber-400" title={`${stale} análise(s) nova(s) ou refeita(s) depois do resumo. Peça à IA “atualiza as brechas”.`}><TriangleAlert className="size-3.5" />desatualizado</span>}
+      </footer>
+    </section>
+  );
+}
+
+/** brechas de cada análise de pontos fortes e fracos, como vieram (o resumo por tema fica em GapThemes) */
+export function GapsByCompetitor({ slug, rows }: { slug: string; rows: MarketRow[] }) {
+  const list = rows.map((r) => ({ r, d: r.res.forcas?.data as ModuleDataOf<'forcas'> | undefined })).filter((x) => x.d?.opportunities.length);
+  if (!list.length) return null;
+  return (
+    <details className="mt-5 group">
+      <summary className="text-sm font-semibold mb-2 cursor-pointer select-none">Brechas por concorrente <span className="font-normal text-xs text-muted-foreground">as frases originais de {list.length} análise(s)</span></summary>
+      <div className="columns-1 md:columns-2 xl:columns-3 gap-4">
+        {list.map(({ r, d }) => (
+          <div key={r.c.data.id} className="break-inside-avoid mb-4 bg-card border border-border rounded-lg p-3">
+            <Link to={`/p/${slug}/concorrentes/${r.c.data.id}`} className="flex items-center gap-2 text-sm font-medium hover:text-primary-ink mb-1.5">
+              <Avatar name={r.c.data.name} size={18} local={r.avatar.local} remote={r.avatar.remote} className="!ring-0" />{r.c.data.name}
+            </Link>
+            <ul className="space-y-1 text-[13px] leading-snug">{d!.opportunities.map((o, i) => <li key={i} className="pl-3 relative before:content-[''] before:absolute before:left-0 before:top-[7px] before:size-1.5 before:rounded-full before:bg-primary/60">{o}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }

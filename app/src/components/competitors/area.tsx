@@ -2,7 +2,7 @@
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
 import { Button, cx } from '../kit';
@@ -165,7 +165,8 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fil
  * faixa de KPIs: grade de colunas iguais (mín. 160 px) com ícone, rótulo, valor e comparação.
  * Quando não cabe numa linha, reparte por igual (7 itens viram 4+3, nunca 6+1): nenhum card fica sozinho embaixo.
  */
-export interface Stat { label: string; value: ReactNode; sub?: ReactNode; title?: string; icon?: LucideIcon }
+/** `to` = o card vira link para a tela que aprofunda o número */
+export interface Stat { label: string; value: ReactNode; sub?: ReactNode; title?: string; icon?: LucideIcon; to?: string }
 export function StatStrip({ items }: { items: Stat[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [cols, setCols] = useState(items.length);
@@ -184,15 +185,19 @@ export function StatStrip({ items }: { items: Stat[] }) {
   }, [n]);
   return (
     <div ref={ref} className="grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.max(1, cols)}, minmax(0, 1fr))` }}>
-      {items.map((s) => (
-        <div key={s.label} className="bg-card border border-border rounded-lg px-3.5 py-2.5 min-w-0" title={s.title}>
+      {items.map((s) => {
+        const body = <>
           <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground min-w-0">
             {s.icon && <s.icon className="size-3.5 shrink-0" strokeWidth={1.8} />}<span className="truncate">{s.label}</span>
           </div>
           <div className="mt-1 text-lg font-semibold tabular-nums leading-tight truncate">{s.value}</div>
           <div className="text-xs text-muted-foreground truncate min-h-4">{s.sub}</div>
-        </div>
-      ))}
+        </>;
+        const cls = 'bg-card border border-border rounded-lg px-3.5 py-2.5 min-w-0';
+        return s.to
+          ? <Link key={s.label} to={s.to} title={s.title} className={cx(cls, 'block transition hover:border-primary/40 hover:bg-muted/30')}>{body}</Link>
+          : <div key={s.label} className={cls} title={s.title}>{body}</div>;
+      })}
     </div>
   );
 }
