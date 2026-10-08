@@ -7,6 +7,7 @@ Desenho: `roadmap/tasks/040-analise-de-conteudos-e-anuncios/DESENHO.md`. Esta pa
 ```
 npm run fichas -- preparar <empresa> <concorrente> <plataforma:id>… [--reanalisar]
 npm run fichas -- pacote   <empresa> <concorrente> <plataforma:id>
+npm run fichas -- quadros  <empresa> <concorrente> <arquivo.json>   # descrição/OCR dos quadros (Haiku) → insumos
 npm run fichas -- salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]
 npm run fichas -- validar                     # o mesmo roda dentro do npm run validate
 ```
@@ -20,7 +21,10 @@ Chave = `<plataforma>:<idDoItem>` (`youtube:cqGT7R6JImo`, `tiktok:7690…`, `ins
 5. **Idempotência:** `insumos.hashEntrada` = sha1(id + legenda + duração + url). Mesmo hash e quadros presentes → pula sem baixar nada. Preparo parcial (`midia-indisponivel`) tenta de novo. `--reanalisar` refaz tudo; `salvar` recusa sobrescrever análise existente sem a mesma flag (a antiga vai para `anteriores`, o `override` do Oliver nunca é tocado).
 6. As medidas (views, × perfil, × mercado, por seguidor…) usam a mesma conta do app (`buildRows` + `withMarketOutlier`).
 
-## salvar (como o Opus grava, fase C)
+## quadros (Haiku, fase C)
+Arquivo `{ "<chave>": [{ "tMs": 0, "descricao": "…", "ocr": "…" | null }] }` (vale com várias chaves; só grava as do concorrente informado). O `pacote` passa a levar essas descrições, e o Opus abre só as 2 imagens marcadas.
+
+## salvar (como o Opus grava, fase C; prompt em `prompt-analise.md`)
 Arquivo `{ "key": "instagram:ID", "analise": { versaoPrompt, modelo, termosNovos, campos: {…} } }` (ou os campos da análise soltos ao lado do `key`).
 Valida o schema e **todo valor categórico contra o vocabulário** (mais `tags.yml` e `library/formatos/`); erro sai com o campo, o valor, "você quis dizer…" e a lista aceita. Valor que não cabe entra em `termosNovos` (vale como "proposto"). Marca o item como `analisada` no `marks.json`.
 

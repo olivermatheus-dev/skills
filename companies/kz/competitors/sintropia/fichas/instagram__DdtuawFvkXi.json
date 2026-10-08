@@ -1,0 +1,491 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "instagram:DdtuawFvkXi",
+  "competitorId": "sintropia",
+  "url": "https://www.instagram.com/reel/DdtuawFvkXi/",
+  "item": {
+    "id": "DdtuawFvkXi",
+    "url": "https://www.instagram.com/reel/DdtuawFvkXi/",
+    "type": "reel",
+    "caption": "Faltam poucas semanas pro único Retiro Experiencial em ACT do Brasil ocorrer! E nesse evento vamos contar com marcas parceiras que compartilham dos mesmos valores que nós 💛\n\nO que será que a @sintropia.psi está aprontando pra vocês? \n\nComo vcs sabem, nosso cronograma é sempre SURPRESA! Mas a regra geral dele vcs já sabem: conectar vocês com experiências significativas e tempo de qualidade pra vocês cuidarem de si. O que será que vem por aí? 😮‍💨\n\nNosso evento é exclusivo para Psicólogas e estudantes de Psicologia mulheres de qualquer abordagem teórica! \n\nSe você quiser receber maiores informações, comente retiro aqui embaixo 🐝 são as últimas vagas!!! \n\n(ainda não conhece a Sintropia? aproveite 15 dias grátis e use o cupom MARCELABOHN pra ganhar 100 reais de desconto no plano anual!) \n\n_____\n#retiroparapsicologas #retiroexperiencial #terapiadeaceitacaoecompromisso #flexibilidadepsicologica",
+    "publishedAt": "2026-09-25T15:03:46Z",
+    "durationS": 34,
+    "thumbnail": "https://instagram.fvix13-1.fna.fbcdn.net/v/t51.82787-15/821974467_18395988166203153_346580548053049924_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzk5NDA1MjU5MzAyOTM2NzI2NjE4Mzk1OTg4MTYwMjAzMTUz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyMTUuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=ln-pmI7QyFAQ7kNvwGs6AFv&_nc_oc=AdqgMCvTzT0o_1BcdNYOWye3dQrgT1eHDYglmRFUPeEB-pFBpQ2qIKpw1VW5ch9yg4Pke2BbZhvFgd7t_Tq_4Ded&_nc_zt=23&_nc_ht=instagram.fvix13-1.fna&_nc_gid=tG8l-WTnSwjVXfFzsU9z7g&_nc_ss=7c689&oh=00_AQMURE0c0YEsYDs83WYCrX5_F798KO5GbNwEXTXo8zm7Aw&oe=6ACD9631",
+    "thumbnailLocal": "media/instagram-sintropia-psi/thumbs/DdtuawFvkXi-6ba8.jpg",
+    "metrics": {
+      "views": 1996,
+      "likes": 103,
+      "comments": 5
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/instagram-sintropia-psi/2026-10-08T15-12-15.json",
+    "collectedAt": "2026-10-08T15:12:15Z"
+  },
+  "medidas": {
+    "views": 1996,
+    "likes": 103,
+    "comments": 5,
+    "seguidores": 53408,
+    "xPerfil": 0.8427274646400675,
+    "xMercado": 9.573141486810552,
+    "porSeguidor": 0.03737267825044937,
+    "porSeguidorMercado": 1.2275505726254206,
+    "engajamento": 0.05410821643286573,
+    "escopoMercado": "formato",
+    "amostraMercado": 24,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "e1295cbab8478916086c9d480082586a630e8330",
+    "hashEntrada": "46f596f980fb51e9ba079ae1b712005410d23613",
+    "preparadoEm": "2026-10-08T18:23:19Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Faltam poucas semanas pro único Retiro Experiencial em ACT do Brasil ocorrer! E nesse evento vamos contar com marcas parceiras que compartilham dos mesmos valores que nós 💛\n\nO que será que a @sintropia.psi está aprontando pra vocês?\n\nComo vcs sabem, nosso cronograma é sempre SURPRESA! Mas a regra geral dele vcs já sabem: conectar vocês com experiências significativas e tempo de qualidade pra vocês cuidarem de si. O que será que vem por aí? 😮‍💨\n\nNosso evento é exclusivo para Psicólogas e estudantes de Psicologia mulheres de qualquer abordagem teórica!\n\nSe você quiser receber maiores informações, comente retiro aqui embaixo 🐝 são as últimas vagas!!!\n\n(ainda não conhece a Sintropia? aproveite 15 dias grátis e use o cupom MARCELABOHN pra ganhar 100 reais de desconto no plano anual!)\n\n_____\n#retiroparapsicologas #retiroexperiencial #terapiadeaceitacaoecompromisso #flexibilidadepsicologica",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Pessoa de cabelo loiro segurando cartão roxo grande na rua arborizada; o rosto fica oculto pelo cartão.",
+        "ocr": "E se fosse possível / aprender ACT de / forma imersiva? / é possível!!! / com sintropia / e marcela tóhn / DIAS 30/10 E 01/11 / te espera- / mos lá / Sintropia.psi"
+      }
+    ],
+    "faltou": [
+      "midia-indisponivel",
+      "sem-transcricao"
+    ],
+    "midia": {
+      "duracaoS": 34,
+      "videoApagado": false
+    },
+    "tempos": {
+      "total": 3.2,
+      "baixar": 3.1
+    }
+  },
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "e1295cbab8478916086c9d480082586a630e8330",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T18:28:44Z",
+    "custo": {
+      "entrada": 7300,
+      "saida": 2800,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "instagram",
+      "formatoMidia": "reel",
+      "duracaoS": 34,
+      "publicadoEm": "2026-09-25",
+      "tema": {
+        "texto": "Imersão em ACT (retiro) com a Sintropia e Marcela Bohn",
+        "tag": "evento-formacao"
+      },
+      "mensagem": "Últimas vagas na imersão em ACT para psicólogas, dias 30/10 e 01/11; a Sintropia assina junto.",
+      "tipoConteudo": {
+        "principal": "parceria-evento",
+        "secundarios": [
+          "oferta"
+        ]
+      },
+      "formato": "teaser-evento",
+      "estiloProducao": null,
+      "headline": {
+        "texto": "E se fosse possível aprender ACT de forma imersiva? é possível!!!",
+        "fonte": "arte"
+      },
+      "gancho": {
+        "texto": "Faltam poucas semanas pro único Retiro Experiencial em ACT do Brasil ocorrer!",
+        "tipo": "noticia-urgente",
+        "canal": "legenda"
+      },
+      "retencao5s": null,
+      "gatilhos": [
+        {
+          "id": "urgencia",
+          "onde": "legenda, 1º parágrafo",
+          "trecho": "Faltam poucas semanas"
+        },
+        {
+          "id": "exclusividade",
+          "onde": "legenda",
+          "trecho": "único Retiro Experiencial em ACT do Brasil"
+        },
+        {
+          "id": "exclusividade",
+          "onde": "legenda",
+          "trecho": "exclusivo para Psicólogas e estudantes de Psicologia mulheres"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "legenda, 2º parágrafo",
+          "trecho": "O que será que a @sintropia.psi está aprontando pra vocês?"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "legenda, 3º parágrafo",
+          "trecho": "nosso cronograma é sempre SURPRESA"
+        },
+        {
+          "id": "escassez",
+          "onde": "legenda",
+          "trecho": "são as últimas vagas!!!"
+        },
+        {
+          "id": "pertencimento",
+          "onde": "legenda",
+          "trecho": "Psicólogas e estudantes de Psicologia mulheres de qualquer abordagem teórica"
+        },
+        {
+          "id": "aspiracao",
+          "onde": "legenda",
+          "trecho": "tempo de qualidade pra vocês cuidarem de si"
+        },
+        {
+          "id": "compromisso",
+          "onde": "legenda",
+          "trecho": "comente retiro aqui embaixo"
+        },
+        {
+          "id": "gratuidade-sem-risco",
+          "onde": "legenda, parêntese final",
+          "trecho": "aproveite 15 dias grátis"
+        },
+        {
+          "id": "ancoragem-preco",
+          "onde": "legenda, parêntese final",
+          "trecho": "ganhar 100 reais de desconto no plano anual"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "capa (arte)",
+          "trecho": "E se fosse possível aprender ACT de forma imersiva?"
+        },
+        {
+          "id": "aspiracao",
+          "onde": "capa (arte)",
+          "trecho": "te esperamos lá"
+        }
+      ],
+      "estrutura": {
+        "macro": "anuncio-evento",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "capa",
+            "oque": "cartão-postal roxo: pergunta \"E se fosse possível aprender ACT de forma imersiva?\" + \"é possível!!!\" à mão, datas e logo da Sintropia"
+          },
+          {
+            "bloco": "contexto",
+            "quando": "legenda, 1º–2º parágrafo",
+            "oque": "contagem regressiva e a Sintropia como marca parceira em tom de surpresa"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "legenda, 3º–4º parágrafo",
+            "oque": "promessa de experiência e público (psicólogas e estudantes mulheres)"
+          },
+          {
+            "bloco": "cta",
+            "quando": "legenda, 5º parágrafo",
+            "oque": "\"comente retiro\" + últimas vagas"
+          },
+          {
+            "bloco": "oferta",
+            "quando": "legenda, parêntese final",
+            "oque": "15 dias grátis e cupom de R$ 100 no plano anual"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "vídeo (34 s)",
+            "oque": "indefinido: o vídeo não baixou (Instagram pede login); só a capa foi vista"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "comentar-palavra",
+        "texto": "comente retiro",
+        "momento": "legenda"
+      },
+      "produto": {
+        "presenca": "sutil",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": true,
+        "tipos": [
+          "teste-gratis",
+          "cupom"
+        ],
+        "precoBRL": null,
+        "diasTeste": 15,
+        "cupom": "MARCELABOHN",
+        "trecho": "aproveite 15 dias grátis e use o cupom MARCELABOHN pra ganhar 100 reais de desconto no plano anual"
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo",
+          "estudante"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "aspiracional",
+        "urgente"
+      ],
+      "som": null,
+      "legendaTela": null,
+      "ritmo": null,
+      "hashtags": [
+        "#retiroparapsicologas",
+        "#retiroexperiencial",
+        "#terapiadeaceitacaoecompromisso",
+        "#flexibilidadepsicologica"
+      ],
+      "porQue": "hipótese: 0,84× o perfil e 5 comentários para um CTA de \"comente retiro\". Assunto de terceiro e nichado (ACT, só mulheres); por seguidor 1,2× o mercado = alcance normal da base.",
+      "adaptar": [
+        {
+          "ideia": "Parceria com formação de psis (TCC, ACT, supervisão) com cupom nominal do organizador para medir a origem; o cupom com nome de pessoa se repete (Sintropia MARCELABOHN, Corpora CIBERPSI).",
+          "formato": null
+        },
+        {
+          "ideia": "Capa como objeto físico (cartão-postal segurado na rua) com a pergunta do evento: capa que para o feed sem depender do vídeo.",
+          "formato": "post-frase"
+        },
+        {
+          "ideia": "Um CTA só: aqui evento e produto disputam a atenção e o produto fica num parêntese.",
+          "formato": null
+        }
+      ],
+      "riscos": [],
+      "replicavel": 2,
+      "confianca": {
+        "texto": "alta",
+        "visual": "baixa",
+        "retencao": "nula"
+      },
+      "faltou": [
+        "midia-indisponivel",
+        "sem-transcricao"
+      ],
+      "autoria": "colab"
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "teaser-evento",
+        "definicao": "Vídeo ou capa curta que anuncia um evento (próprio ou de parceiro), com contagem regressiva e chamada para comentar.",
+        "exemplo": "Sintropia, reel DdtuawFvkXi (Retiro Experiencial em ACT)"
+      }
+    ]
+  },
+  "anteriores": [
+    {
+      "versaoPrompt": 0,
+      "versaoVocab": 1,
+      "modelo": "claude-opus-5-5",
+      "esforco": "medium",
+      "geradoEm": "2026-10-08T17:00:00Z",
+      "custo": {
+        "entrada": 0,
+        "saida": 0,
+        "via": "claude-code"
+      },
+      "campos": {
+        "plataforma": "instagram",
+        "formatoMidia": "reel",
+        "duracaoS": 34,
+        "publicadoEm": "2026-09-25",
+        "tema": {
+          "texto": "Retiro Experiencial em ACT para psicólogas, com a Sintropia como marca parceira",
+          "tag": "evento-formacao"
+        },
+        "mensagem": "Últimas vagas no retiro exclusivo para psicólogas; a Sintropia vai aparecer com surpresa.",
+        "tipoConteudo": {
+          "principal": "parceria-evento",
+          "secundarios": [
+            "oferta"
+          ]
+        },
+        "formato": "teaser-evento",
+        "headline": {
+          "texto": "Faltam poucas semanas pro único Retiro Experiencial em ACT do Brasil",
+          "fonte": "legenda"
+        },
+        "gancho": {
+          "texto": "Faltam poucas semanas pro único Retiro Experiencial em ACT do Brasil ocorrer!",
+          "tipo": "noticia-urgente",
+          "canal": "legenda"
+        },
+        "gatilhos": [
+          {
+            "id": "urgencia",
+            "onde": "legenda, 1º parágrafo",
+            "trecho": "Faltam poucas semanas"
+          },
+          {
+            "id": "exclusividade",
+            "onde": "legenda",
+            "trecho": "único Retiro Experiencial em ACT do Brasil"
+          },
+          {
+            "id": "exclusividade",
+            "onde": "legenda",
+            "trecho": "exclusivo para Psicólogas e estudantes de Psicologia mulheres"
+          },
+          {
+            "id": "curiosidade",
+            "onde": "legenda, 2º parágrafo",
+            "trecho": "O que será que a @sintropia.psi está aprontando pra vocês?"
+          },
+          {
+            "id": "curiosidade",
+            "onde": "legenda, 3º parágrafo",
+            "trecho": "nosso cronograma é sempre SURPRESA"
+          },
+          {
+            "id": "escassez",
+            "onde": "legenda",
+            "trecho": "são as últimas vagas!!!"
+          },
+          {
+            "id": "pertencimento",
+            "onde": "legenda",
+            "trecho": "Psicólogas e estudantes de Psicologia mulheres de qualquer abordagem teórica"
+          },
+          {
+            "id": "aspiracao",
+            "onde": "legenda",
+            "trecho": "tempo de qualidade pra vocês cuidarem de si"
+          },
+          {
+            "id": "compromisso",
+            "onde": "legenda",
+            "trecho": "comente retiro aqui embaixo"
+          },
+          {
+            "id": "gratuidade-sem-risco",
+            "onde": "legenda, parêntese final",
+            "trecho": "aproveite 15 dias grátis"
+          },
+          {
+            "id": "ancoragem-preco",
+            "onde": "legenda, parêntese final",
+            "trecho": "ganhar 100 reais de desconto no plano anual"
+          }
+        ],
+        "estrutura": {
+          "macro": "anuncio-evento",
+          "blocos": [
+            {
+              "bloco": "urgência",
+              "quando": "legenda, 1º parágrafo",
+              "oque": "contagem regressiva para o evento"
+            },
+            {
+              "bloco": "parceria",
+              "quando": "legenda, 2º parágrafo",
+              "oque": "marca parceira aparece como curiosidade (@sintropia.psi)"
+            },
+            {
+              "bloco": "promessa",
+              "quando": "legenda, 3º parágrafo",
+              "oque": "cronograma surpresa, experiências e tempo de qualidade"
+            },
+            {
+              "bloco": "público",
+              "quando": "legenda, 4º parágrafo",
+              "oque": "exclusivo para psicólogas e estudantes mulheres"
+            },
+            {
+              "bloco": "CTA",
+              "quando": "legenda, 5º parágrafo",
+              "oque": "comente retiro, últimas vagas"
+            },
+            {
+              "bloco": "oferta do produto",
+              "quando": "legenda, parêntese final",
+              "oque": "15 dias grátis e cupom de R$ 100 no plano anual"
+            }
+          ]
+        },
+        "cta": {
+          "tipo": "comentar-palavra",
+          "texto": "comente retiro",
+          "momento": "legenda"
+        },
+        "produto": {
+          "presenca": "rodape",
+          "funcionalidades": []
+        },
+        "oferta": {
+          "tem": true,
+          "tipos": [
+            "teste-gratis",
+            "cupom"
+          ],
+          "diasTeste": 15,
+          "cupom": "MARCELABOHN",
+          "trecho": "aproveite 15 dias grátis e use o cupom MARCELABOHN pra ganhar 100 reais de desconto no plano anual"
+        },
+        "publico": {
+          "quem": [
+            "psicologo-autonomo",
+            "estudante"
+          ],
+          "consciencia": "inconsciente"
+        },
+        "tom": [
+          "aspiracional",
+          "urgente"
+        ],
+        "hashtags": [
+          "#retiroparapsicologas",
+          "#retiroexperiencial",
+          "#terapiadeaceitacaoecompromisso",
+          "#flexibilidadepsicologica"
+        ],
+        "porQue": "Hipótese: abaixo da mediana da própria conta (0,84×) e com a pior taxa de comentário do perfil (5 comentários para um CTA de 'comente retiro'). O assunto é de terceiro, para um nicho (ACT, só mulheres), e a marca entra como coadjuvante. Por seguidor fica na média do mercado (1,2×): alcance normal da base, sem extrapolar.",
+        "adaptar": [
+          {
+            "ideia": "Parceria com evento ou formação de psis (TCC, ACT, supervisão), com cupom do organizador para medir quem veio dali. O cupom com nome de pessoa se repete no mercado (Sintropia MARCELABOHN, Corpora CIBERPSI)."
+          },
+          {
+            "ideia": "Se fizermos, um único CTA: aqui dois CTAs (evento e produto) disputam a atenção, e o do produto fica num parêntese."
+          },
+          {
+            "ideia": "Kit da participante (planner de sessões) em post de frase ou story, sem prometer resultado.",
+            "formato": "post-frase"
+          }
+        ],
+        "riscos": [],
+        "replicavel": 2,
+        "confianca": {
+          "texto": "alta",
+          "visual": "nula",
+          "retencao": "nula"
+        },
+        "faltou": [
+          "sem-transcricao",
+          "sem-quadros"
+        ],
+        "autoria": "colab"
+      },
+      "termosNovos": [
+        {
+          "grupo": "formato",
+          "valor": "teaser-evento",
+          "definicao": "Vídeo curto que anuncia um evento de terceiro, com contagem regressiva e chamada para comentar.",
+          "exemplo": "Sintropia, reel DdtuawFvkXi (Retiro Experiencial em ACT)"
+        }
+      ]
+    }
+  ],
+  "override": {},
+  "relatorios": []
+}

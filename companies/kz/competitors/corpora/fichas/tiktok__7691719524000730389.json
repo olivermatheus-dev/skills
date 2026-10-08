@@ -1,0 +1,288 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7691719524000730389",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7691719524000730389",
+  "item": {
+    "id": "7691719524000730389",
+    "url": "https://www.tiktok.com/@usecorpora/video/7691719524000730389",
+    "type": "video",
+    "title": "ele disse isso mesmo? #fyp #meme #lacan",
+    "caption": "ele disse isso mesmo? #fyp #meme #lacan",
+    "publishedAt": "2026-10-01T15:20:18Z",
+    "durationS": 11,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oUgUEH8ERUCfFndW9gEnvQvvQA7qdwDgfTGBFB~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=RaWtHlbjLgoB2kKEYWkOAGtLAUo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7691719524000730389-2407.jpg",
+    "metrics": {
+      "views": 568,
+      "likes": 26,
+      "comments": 0,
+      "shares": 0
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 568,
+    "likes": 26,
+    "comments": 0,
+    "shares": 0,
+    "seguidores": 1911,
+    "xPerfil": 0.737183646982479,
+    "porSeguidor": 0.2972265829408687,
+    "engajamento": 0.045774647887323945,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "f7ee81a0a3a5bd8bee2d4a6329652b0bc98adb8e",
+    "hashEntrada": "824a2ef0081c48d6c4ba223f02b641bc0179d61f",
+    "preparadoEm": "2026-10-08T18:20:42Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "ele disse isso mesmo? #fyp #meme #lacan",
+    "transcricao": {
+      "fonte": "whisper-small",
+      "idioma": "pt",
+      "texto": "Testão besta, né? O que é o que é o de reflexão? Que, menina? Isso não quer reflexionar, se você quer... É gozar... Se você quer...",
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 3.34,
+          "texto": "Testão besta, né? O que é o que é o de reflexão?"
+        },
+        {
+          "ini": 3.34,
+          "fim": 5.9,
+          "texto": "Que, menina? Isso não quer reflexionar, se você quer..."
+        },
+        {
+          "ini": 6.4,
+          "fim": 7.6,
+          "texto": "É gozar..."
+        },
+        {
+          "ini": 9.64,
+          "fim": 11.64,
+          "texto": "Se você quer..."
+        }
+      ]
+    },
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado e camiseta preta, de pé em sala, mão no queixo, pensativa; sem texto."
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesma mulher de pé, com capa de livro semitransparente sobreposta ao corpo.",
+        "ocr": "O SUJEITO / LACANIANO"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mesma mulher de pé, capa de livro semitransparente sobre o peito e o rosto.",
+        "ocr": "O SUJEITO / LACANIANO / entre / a linguagem / e o gozo / BRUCE FINK"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Capa do livro opaca cobre o rosto da mulher, que mantém a mão na testa.",
+        "ocr": "O SUJEITO / LACANIANO / entre / a linguagem / e o gozo / BRUCE FINK / ZAHAR"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Capa do livro cobre o corpo; a mulher aparece de perfil, olhando para o lado.",
+        "ocr": "O SUJEITO / LACANIANO / entre / a linguagem / e o gozo / BRUCE FINK / ZAHAR"
+      },
+      {
+        "tMs": 5793,
+        "arquivo": "quadros/05793ms.jpg",
+        "descricao": "Capa do livro cobre o corpo; a mulher aparece de perfil com a mão na cintura.",
+        "ocr": "O SUJEITO / LACANIANO / entre / a linguagem / e o gozo / BRUCE FINK / ZAHAR"
+      },
+      {
+        "tMs": 11435,
+        "arquivo": "quadros/11435ms.jpg",
+        "descricao": "Capa do livro na frente do corpo; a mulher olha para a câmera ao lado de um ventilador.",
+        "ocr": "O SUJEITO / LACANIANO / entre / a linguagem / e o gozo / BRUCE FINK / ZAHAR"
+      }
+    ],
+    "cenas": [],
+    "faltou": [],
+    "midia": {
+      "duracaoS": 11.585011,
+      "videoApagado": true,
+      "bytesVideo": 826890
+    },
+    "tempos": {
+      "total": 8.4,
+      "baixar": 2.6,
+      "transcrever": 4.3,
+      "quadros": 1.4
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "f7ee81a0a3a5bd8bee2d4a6329652b0bc98adb8e",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T18:28:39Z",
+    "custo": {
+      "entrada": 5500,
+      "saida": 2400,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 11.6,
+      "publicadoEm": "2026-10-01",
+      "tema": {
+        "texto": "Lacan e o gozo (duplo sentido)",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "indefinido: a piada parece jogar com \"gozo\" de Lacan e o sentido comum, mas a fala está ininteligível na transcrição.",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "comunidade"
+        ]
+      },
+      "formato": "meme-trend-video",
+      "estiloProducao": "trend-audio",
+      "headline": {
+        "texto": "O SUJEITO LACANIANO entre a linguagem e o gozo",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "Testão besta, né? O que é o que é o de reflexão?",
+        "tipo": null,
+        "canal": "fala"
+      },
+      "retencao5s": [
+        {
+          "t": "0–0,5 s",
+          "elemento": "fala-em-menos-de-0-5s",
+          "gatilho": null
+        },
+        {
+          "t": "0,5–1,5 s",
+          "elemento": "imagem-sobreposta",
+          "gatilho": "pertencimento"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "pertencimento",
+          "onde": "tela 0,5 s",
+          "trecho": "O SUJEITO LACANIANO"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "legenda",
+          "trecho": "ele disse isso mesmo?"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "fala 0:06",
+          "trecho": "É gozar..."
+        }
+      ],
+      "estrutura": {
+        "macro": "esquete-punchline",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0–0,5 s",
+            "oque": "ela pensativa, sem texto na tela; fala ininteligível"
+          },
+          {
+            "bloco": "contexto",
+            "quando": "0,5–3 s",
+            "oque": "capa do livro de Bruce Fink entra semitransparente e fica opaca"
+          },
+          {
+            "bloco": "payoff",
+            "quando": "6–8 s",
+            "oque": "\"É gozar...\" (sem corte de cena no vídeo inteiro)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "estudante",
+          "psicologo-autonomo"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "ironico"
+      ],
+      "som": "audio-trend",
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 0
+      },
+      "hashtags": [
+        "#fyp",
+        "#meme",
+        "#lacan"
+      ],
+      "porQue": "hipótese: 0,74× o perfil, 0 comentários e 0 compartilhamentos. Único dos 4 memes da Corpora sem texto nos 0 s; a piada depende de Lacan e de entender a fala.",
+      "adaptar": [
+        {
+          "ideia": "Capa de livro do ofício sobreposta como \"prova\" da piada, mas com texto na tela já nos 0 s dizendo a situação.",
+          "formato": "meme-trend-video"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 2,
+      "confianca": {
+        "texto": "baixa",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [],
+      "autoria": null,
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "meme-trend-video",
+        "definicao": "Vídeo curto (5–25 s) de meme: áudio conhecido ou dublado + texto na tela que troca o contexto para o nicho.",
+        "exemplo": "Capa de \"O sujeito lacaniano\" sobre a pessoa + áudio com \"gozar\""
+      },
+      {
+        "grupo": "elemento5s",
+        "valor": "imagem-sobreposta",
+        "definicao": "Imagem de referência (capa de livro, diagrama, print) entra sobre o vídeo e dá o contexto da piada.",
+        "exemplo": "capa de \"O sujeito lacaniano: entre a linguagem e o gozo\" aos 0,5 s"
+      }
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 // npm run fichas -- <comando> …   (tarefa 040; README.md desta pasta). Sem LLM: o Opus entra na fase C e grava com `salvar`.
 //   preparar <empresa> <concorrente> <chave…> [--reanalisar]   legenda/áudio → transcrição, quadros, hash (idempotente)
 //   pacote   <empresa> <concorrente> <chave>                   imprime o pacote enxuto que o Opus recebe
+//   quadros  <empresa> <concorrente> <arquivo.json>             grava descrição/OCR dos quadros (Haiku) nos insumos: { "<chave>": [{ tMs, descricao, ocr }] }
 //   salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]   valida (schema + vocabulário) e grava a análise
 //   validar                                                    confere todas as fichas (o mesmo do npm run validate)
 // chave = <plataforma>:<idDoItem> (ex.: tiktok:7691064446289988884)
@@ -17,6 +18,7 @@ const [cmd, slug, comp, ...resto] = pos;
 const USO = `uso:
   npm run fichas -- preparar <empresa> <concorrente> <plataforma:id>… [--reanalisar]
   npm run fichas -- pacote   <empresa> <concorrente> <plataforma:id>
+  npm run fichas -- quadros  <empresa> <concorrente> <arquivo.json>   (descrição/OCR do Haiku)
   npm run fichas -- salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]
   npm run fichas -- validar`;
 const falha: (m: string) => never = (m) => { console.error(`❌ ${m}`); process.exit(1); };
@@ -70,6 +72,27 @@ async function main() {
       quadros: ins.quadros.map((q) => ({ tMs: q.tMs, descricao: q.descricao ?? null, ocr: q.ocr ?? null, imagem: snaps.has(q.tMs) ? join(dir, q.arquivo) : undefined })),
       cortesDeCenaS: ins.cenas ?? null, faltou: ins.faltou, insumosHash: ins.hash,
     }, null, 2));
+    return;
+  }
+
+  if (cmd === 'quadros') {
+    const arq = resto[0] ?? falha('informe o arquivo .json com { "<chave>": [{ tMs, descricao, ocr }] }');
+    const todos = JSON.parse(readFileSync(arq, 'utf8').replace(/^﻿/, '')) as Record<string, { tMs: number; descricao?: string | null; ocr?: string | null }[]>;
+    let n = 0;
+    for (const [key, lista] of Object.entries(todos)) {
+      const f = readFicha(slug, comp, key);
+      if (!f?.insumos) continue; // chave de outro concorrente ou ainda não preparada
+      for (const q of f.insumos.quadros) {
+        const d = lista.find((x) => x.tMs === q.tMs);
+        if (!d) continue;
+        if (d.descricao) q.descricao = d.descricao;
+        if (d.ocr) q.ocr = d.ocr; else delete q.ocr;
+        n++;
+      }
+      writeFicha(slug, comp, f);
+      console.log(`✅ ${key}: ${lista.length} quadro(s) descrito(s)`);
+    }
+    if (!n) falha(`nenhum quadro de ${comp} no arquivo (as chaves precisam ter ficha preparada)`);
     return;
   }
 

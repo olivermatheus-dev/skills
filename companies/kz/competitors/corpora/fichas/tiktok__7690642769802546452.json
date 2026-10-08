@@ -1,0 +1,293 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7690642769802546452",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7690642769802546452",
+  "item": {
+    "id": "7690642769802546452",
+    "url": "https://www.tiktok.com/@usecorpora/video/7690642769802546452",
+    "type": "video",
+    "title": "ele assim #freud #psicanalise #meme",
+    "caption": "ele assim #freud #psicanalise #meme",
+    "publishedAt": "2026-09-28T17:41:57Z",
+    "durationS": 11,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oQQ7wjCVfd1TpFI43ItDcAFIo8DfAfCyoQnoEU~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=d6F9tsPJHv0R10kEkbiYeD6X5f0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7690642769802546452-2f08.jpg",
+    "metrics": {
+      "views": 1908,
+      "likes": 210,
+      "comments": 2,
+      "shares": 10
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 1908,
+    "likes": 210,
+    "comments": 2,
+    "shares": 10,
+    "seguidores": 1911,
+    "xPerfil": 2.4763140817650875,
+    "porSeguidor": 0.9984301412872841,
+    "engajamento": 0.11635220125786164,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "b69917367b2253a8e68e68fba0763d2c20df5945",
+    "hashEntrada": "0c0f7fbd2a8df5e34300f09e536bbb91d6e86420",
+    "preparadoEm": "2026-10-08T18:20:34Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "ele assim #freud #psicanalise #meme",
+    "transcricao": {
+      "fonte": "whisper-small",
+      "idioma": "pt",
+      "texto": "O meu querido, você errou o meu nome. Não é Estevon Pereira, é Estevon Ferreira com F. F de faca, Estevon Ferreira.",
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 8,
+          "texto": "O meu querido, você errou o meu nome. Não é Estevon Pereira, é Estevon Ferreira com F."
+        },
+        {
+          "ini": 8,
+          "fim": 12,
+          "texto": "F de faca, Estevon Ferreira."
+        }
+      ]
+    },
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher de cabelo ruivo em coque e camiseta azul-marinho, sentada, mão fechada apoiada no queixo; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesma mulher, gesticulando com a mão levantada, olhando para o lado; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mesma mulher com a boca aberta, mãos em movimento na frente do corpo; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Mesma mulher de olhos fechados, mãos juntas no colo; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Mesma mulher falando e gesticulando com as duas mãos; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 5967,
+        "arquivo": "quadros/05967ms.jpg",
+        "descricao": "Mesma mulher com as mãos entrelaçadas, olhando para o lado; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      },
+      {
+        "tMs": 11783,
+        "arquivo": "quadros/11783ms.jpg",
+        "descricao": "Mesma mulher de camiseta rosa com estampa floral, olhando de lado, mãos entrelaçadas; legenda na tela.",
+        "ocr": "a assombração de Freud toda / vez que alguém pronuncia / FrEUd e não FrOld"
+      }
+    ],
+    "cenas": [
+      6.53,
+      7.4,
+      10.1,
+      11.3
+    ],
+    "faltou": [],
+    "midia": {
+      "duracaoS": 11.933333,
+      "videoApagado": true,
+      "bytesVideo": 1189441
+    },
+    "tempos": {
+      "total": 11,
+      "baixar": 4,
+      "transcrever": 5.4,
+      "quadros": 1.5
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "b69917367b2253a8e68e68fba0763d2c20df5945",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T18:28:37Z",
+    "custo": {
+      "entrada": 5500,
+      "saida": 2500,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 11.9,
+      "publicadoEm": "2026-09-28",
+      "tema": {
+        "texto": "Pronúncia errada do nome de Freud",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "Quem é da área sabe o jeito certo de falar \"Freud\" e sofre (rindo) com o errado.",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "comunidade"
+        ]
+      },
+      "formato": "meme-trend-video",
+      "estiloProducao": "trend-audio",
+      "headline": {
+        "texto": "a assombração de Freud toda vez que alguém pronuncia FrEUd e não FrOId",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "a assombração de Freud toda vez que alguém pronuncia FrEUd e não FrOId",
+        "tipo": "situacao-reacao",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "pertencimento"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "fala-em-menos-de-0-5s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "0,5–5 s",
+          "elemento": "rosto-close",
+          "gatilho": "humor-alivio"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "pronuncia FrEUd e não FrOId"
+        },
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "toda vez que alguém pronuncia"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "fala 0:08",
+          "trecho": "F de faca, Estevon Ferreira."
+        }
+      ],
+      "estrutura": {
+        "macro": "esquete-punchline",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0 s",
+            "oque": "situação na tela: Freud como assombração de quem erra a pronúncia"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "0–8 s",
+            "oque": "ela encena o áudio \"você errou o meu nome… é Ferreira com F\""
+          },
+          {
+            "bloco": "payoff",
+            "quando": "8–12 s",
+            "oque": "\"F de faca\": ameaça cômica; cortes aos 6,5 · 7,4 · 10,1 · 11,3 s e troca de roupa no fim (indefinido: 2º personagem ou outro take)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "estudante",
+          "psicologo-autonomo"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "leve-humor"
+      ],
+      "som": "audio-trend",
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 20.1
+      },
+      "hashtags": [
+        "#freud",
+        "#psicanalise",
+        "#meme"
+      ],
+      "porQue": "hipótese: 2,5× o perfil e 11,6% de engajamento com piada de iniciado (pronúncia de Freud); alcance ≈ seguidores (1,0 por seguidor), ou seja, ficou na base, sem viralizar.",
+      "adaptar": [
+        {
+          "ideia": "\"O consultório toda vez que alguém chama paciente de cliente\": mesma mecânica situação-reação, sobre o jargão do ofício e não sobre a categoria.",
+          "formato": "meme-trend-video"
+        },
+        {
+          "ideia": "Série curta de pronúncias e termos do ofício (Freud, Winnicott, anamnese) como conversa do ofício, com o fundador.",
+          "formato": null
+        }
+      ],
+      "riscos": [],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "media",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [],
+      "autoria": null,
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "meme-trend-video",
+        "definicao": "Vídeo curto (5–25 s) de meme: áudio conhecido ou dublado + texto na tela que troca o contexto para o nicho.",
+        "exemplo": "Áudio \"é Ferreira com F, F de faca\" + \"a assombração de Freud toda vez que alguém pronuncia FrEUd\""
+      },
+      {
+        "grupo": "tipoGancho",
+        "valor": "situacao-reacao",
+        "definicao": "Setup clássico de meme: \"X toda vez que…\" / \"eu quando…\"; a tela descreve a situação e a pessoa encena a reação.",
+        "exemplo": "a assombração de Freud toda vez que alguém pronuncia FrEUd e não FrOId"
+      }
+    ]
+  }
+}

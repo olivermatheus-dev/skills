@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7693641699511373076",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7693641699511373076",
+  "item": {
+    "id": "7693641699511373076",
+    "url": "https://www.tiktok.com/@usecorpora/video/7693641699511373076",
+    "type": "video",
+    "title": "eu imagino assim #foryou #psicologia",
+    "caption": "eu imagino assim #foryou #psicologia",
+    "publishedAt": "2026-10-06T19:39:18Z",
+    "durationS": 10,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oIBmFAFUp4CgCIQVniLeDCAizTk9lMQejeGZIT~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=NJPYGoGSmdCNW7pI%2Bc1%2Be%2Fy0YT8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7693641699511373076-018d.jpg",
+    "metrics": {
+      "views": 1277,
+      "likes": 212,
+      "comments": 1,
+      "shares": 5
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 1277,
+    "likes": 212,
+    "comments": 1,
+    "shares": 5,
+    "seguidores": 1911,
+    "xPerfil": 1.6573653471771577,
+    "porSeguidor": 0.6682365253793825,
+    "engajamento": 0.1707126076742365,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "3cd886a4a171805d63f4711806c1d20309ec352e",
+    "hashEntrada": "972890402189e426fb5e1e407f45dda2b6b7563d",
+    "preparadoEm": "2026-10-08T18:20:23Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "eu imagino assim #foryou #psicologia",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg"
+      },
+      {
+        "tMs": 5400,
+        "arquivo": "quadros/05400ms.jpg"
+      },
+      {
+        "tMs": 10650,
+        "arquivo": "quadros/10650ms.jpg"
+      }
+    ],
+    "cenas": [
+      7.2,
+      8.53,
+      9.5
+    ],
+    "faltou": [
+      "audio-sem-fala"
+    ],
+    "midia": {
+      "duracaoS": 10.8,
+      "videoApagado": true,
+      "bytesVideo": 449075
+    },
+    "tempos": {
+      "total": 11.4,
+      "baixar": 6.1,
+      "transcrever": 4,
+      "quadros": 1.1
+    }
+  }
+}

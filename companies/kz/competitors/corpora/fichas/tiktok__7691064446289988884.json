@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7691064446289988884",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7691064446289988884",
+  "item": {
+    "id": "7691064446289988884",
+    "url": "https://www.tiktok.com/@usecorpora/video/7691064446289988884",
+    "type": "video",
+    "title": "😔 droga #fyp #meme",
+    "caption": "😔 droga #fyp #meme",
+    "publishedAt": "2026-09-29T20:58:21Z",
+    "durationS": 6,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/owfV87LABBBEbfgXvCDPcqImvI0WoJRUCF8Em9~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=FCzTxjeRjqCMsdk2MaKOESbCWRg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7691064446289988884-4712.jpg",
+    "metrics": {
+      "views": 126300,
+      "likes": 21500,
+      "comments": 56,
+      "shares": 1550
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 126300,
+    "likes": 21500,
+    "comments": 56,
+    "shares": 1550,
+    "seguidores": 1911,
+    "xPerfil": 163.91953277092796,
+    "porSeguidor": 66.09105180533751,
+    "engajamento": 0.1829453681710214,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "d0c1baf8ec35c1a5dad8adfe69f835b555e37113",
+    "hashEntrada": "3f8447a1520ff35b6bd5a714dea28e85cd7fa554",
+    "preparadoEm": "2026-10-08T18:19:31Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "😔 droga #fyp #meme",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher com lenço azul-marinho, óculos e camiseta vermelha, abrindo um pote de docinho com colher.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesma mulher segurando o pote e a colher, olhando para baixo.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mesma mulher com a colher na boca, de frente, segurando um copo com a outra mão.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Ilustração de uma caixa de Skinner com rato, com rótulos das partes do aparelho; sem pessoa.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil / Caixa de Skinner / AUTO FALANTE / SINAL LUMINOSO / BOTÃO ALIMENTO / DISPENSADOR DO ALIMENTO / GERADOR DE CHOQUE ELÉTRICO / PISO CONDUTOR"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Ilustração em fundo preto de cães com tigela e sino, em esquema de condicionamento clássico.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil"
+      },
+      {
+        "tMs": 6017,
+        "arquivo": "quadros/06017ms.jpg",
+        "descricao": "Mesma mulher de perfil, segurando um copo com as duas mãos, olhando para o lado.",
+        "ocr": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil"
+      }
+    ],
+    "cenas": [
+      3.4,
+      5.2
+    ],
+    "faltou": [
+      "audio-sem-fala"
+    ],
+    "midia": {
+      "duracaoS": 6.166667,
+      "videoApagado": true,
+      "bytesVideo": 342310
+    },
+    "tempos": {
+      "total": 6.8,
+      "baixar": 2.1,
+      "transcrever": 3.6,
+      "quadros": 0.9
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "d0c1baf8ec35c1a5dad8adfe69f835b555e37113",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T18:28:42Z",
+    "custo": {
+      "entrada": 5400,
+      "saida": 2600,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 6.2,
+      "publicadoEm": "2026-09-29",
+      "tema": {
+        "texto": "Estudante de psicologia vê condicionamento até no doce",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "Quem estuda psicologia não consegue mais ter um prazer simples sem pensar em Skinner e Pavlov.",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "identificacao"
+        ]
+      },
+      "formato": "meme-trend-video",
+      "estiloProducao": "ugc-celular",
+      "headline": {
+        "texto": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "POV: você é estudante de psicologia e resolveu comer um docinho depois de um dia difícil",
+        "tipo": "pov-esquete",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "identificacao"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "rotulo-de-identidade",
+          "gatilho": "pertencimento"
+        },
+        {
+          "t": "1,5 s",
+          "elemento": "rosto-close",
+          "gatilho": "humor-alivio"
+        },
+        {
+          "t": "1,5–3 s",
+          "elemento": "corte-rapido",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "3 s",
+          "elemento": "imagem-sobreposta",
+          "gatilho": "humor-alivio"
+        },
+        {
+          "t": "5 s",
+          "elemento": "corte-rapido",
+          "gatilho": "humor-alivio"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "resolveu comer um docinho depois de um dia difícil"
+        },
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "você é estudante de psicologia"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "quadro 3 s",
+          "trecho": "Caixa de Skinner"
+        },
+        {
+          "id": "contraste",
+          "onde": "quadros 1,5 s → 3 s",
+          "trecho": "[quadro 1,5 s: colher de doce na boca] → [quadro 3 s: rato na Caixa de Skinner com \"BOTÃO ALIMENTO\"]"
+        }
+      ],
+      "estrutura": {
+        "macro": "loop-curto",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0 s",
+            "oque": "POV na tela + ela abrindo o pote de doce"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "1,5 s",
+            "oque": "colher na boca: a recompensa"
+          },
+          {
+            "bloco": "payoff",
+            "quando": "3–5 s",
+            "oque": "corta para a Caixa de Skinner e depois para os cães de Pavlov: ela é o rato do experimento"
+          },
+          {
+            "bloco": "loop",
+            "quando": "6 s",
+            "oque": "volta para ela de perfil e o vídeo recomeça (6 s, feito para rever)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "estudante"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "leve-humor"
+      ],
+      "som": null,
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 29.2
+      },
+      "hashtags": [
+        "#fyp",
+        "#meme"
+      ],
+      "porQue": "hipótese: 164× o perfil e 66 views por seguidor = distribuição pela Para Você. Entende-se sem som em 3 s, dura 6 s (revê) e 1.550 envios: piada de estudante para mandar para colega.",
+      "adaptar": [
+        {
+          "ideia": "POV de 6 s sobre a rotina da terapeuta (\"você tirou 5 min entre sessões\") com virada visual de referência do ofício; sem fala, entende-se mudo.",
+          "formato": "meme-trend-video"
+        },
+        {
+          "ideia": "Mesma mecânica (prazer simples × teoria que não desliga) em post estático de 2 quadros para o feed.",
+          "formato": "meme"
+        },
+        {
+          "ideia": "Payoff com imagem clássica da psicologia (Skinner, Pavlov, Bobo doll) sempre aos 3 s, nunca explicada.",
+          "formato": "meme-trend-video"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [
+        "audio-sem-fala"
+      ],
+      "autoria": null,
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "meme-trend-video",
+        "definicao": "Vídeo curto (5–25 s) de meme: áudio conhecido ou dublado + texto na tela que troca o contexto para o nicho.",
+        "exemplo": "POV estudante de psicologia comendo doce → Caixa de Skinner → cães de Pavlov"
+      },
+      {
+        "grupo": "elemento5s",
+        "valor": "imagem-sobreposta",
+        "definicao": "Imagem de referência (capa de livro, diagrama, print) entra sobre o vídeo e dá o contexto da piada.",
+        "exemplo": "ilustração da Caixa de Skinner aos 3 s"
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 ---
 name: referencias
-description: "Coleta, ranqueia e analisa conteúdos de concorrentes e referências: puxa perfis e vídeos (YouTube, Instagram, TikTok), mostra o que performou fora da curva, e analisa só os itens marcados pelo Oliver (transcrição barata + tema, gancho, estrutura, estilo), transformando-os em ideias com briefing. Use quando o usuário pedir 'puxar concorrentes', 'atualizar concorrentes', 'o que está viralizando', 'analisar esses vídeos', 'analisar o que marquei', 'virar ideia', 'banco de ideias'."
+description: "Coleta, ranqueia e analisa conteúdos de concorrentes e referências: puxa perfis e vídeos (YouTube, Instagram, TikTok), mostra o que performou fora da curva, e analisa só os itens marcados pelo Oliver (ficha por item: transcrição local, quadros, análise Opus com gancho, gatilhos, 5 s, estrutura), transformando-os em ideias com briefing. Use quando o usuário pedir 'puxar concorrentes', 'atualizar concorrentes', 'o que está viralizando', 'analisar esses vídeos', 'analisar o que marquei', 'virar ideia', 'banco de ideias'."
 ---
 
 # Referências: coletar → ranquear → analisar o marcado
@@ -13,12 +13,14 @@ description: "Coleta, ranqueia e analisa conteúdos de concorrentes e referênci
 ## 2. Ranquear (sem LLM)
 O app ordena por **outlier score = views ÷ mediana de views do perfil** (≥ 3× = destaque), engajamento e recência. O Oliver marca: ★ favorito, `marcada` (analisar), `descartada`.
 
-## 3. Analisar só o marcado (modelo barato)
-Para cada item com `status: marcada` em `competitors/<id>/marks.json`:
-1. **Texto da fala:** YouTube → legenda automática (`yt-dlp --write-auto-subs --skip-download --sub-langs pt.*,en.* <url>`); Instagram/TikTok → baixar só esse vídeo (`yt-dlp <url>`), `ffmpeg -i v.mp4 -vn -ac 1 -ar 16000 a.wav`, transcrever com Whisper local (`faster-whisper` modelo `small`). Arquivos em `data/intel/` (fora do git).
-2. **Análise** (JSON curto): tema · gancho (texto + tipo) · promessa · estrutura (blocos com tempo) · CTA · estilo editorial e tom (`knowledge/video/direcao.md`) · formato `fmt-*` equivalente · por que funcionou (1 linha) · o que adaptar para a marca.
-3. **Ideia:** criar `ideas/I-NNNN-*.md` (schema `Idea`; botão "Virar ideia" no app faz o esqueleto) com `source` preenchido e o corpo na **ficha de pauta** (objetivo · mensagem · público · gancho que nunca engana · estrutura · prova · métrica) + "Observações do Oliver" vazio.
-4. Marcar o item como `analisada` e com `ideaId`.
+## 3. Analisar só o marcado (ficha da 040)
+Uma **ficha por item** em `competitors/<id>/fichas/`. Comandos, dependências e idempotência: `tools/fichas/README.md`. Prompt do Opus: `tools/fichas/prompt-analise.md` (manda sobre este resumo).
+Para os itens com `status: marcada` em `competitors/<id>/marks.json` (ou a lista que o Oliver pedir), sem os já analisados, salvo "reanalisar" explícito:
+1. **Preparar** (script, sem LLM): `npm run fichas -- preparar <slug> <concorrente> <plataforma:id>…`. Instagram sem `YTDLP_COOKIES_FROM_BROWSER` sai parcial (legenda + capa): avise o Oliver, não invente o vídeo.
+2. **Quadros** (subagente `model: "haiku"`): descreve cada quadro de `data/intel/<slug>/<concorrente>/<chave>/quadros/` em 1 linha + texto da tela literal → `{ "<chave>": [{ tMs, descricao, ocr }] }` → `npm run fichas -- quadros <slug> <concorrente> <arquivo.json>`.
+3. **Analisar** (subagente `model: "opus"`, até 5 itens por subagente): lê o prompt, roda `npm run fichas -- pacote <slug> <concorrente> <chave>`, abre só as 2 imagens que o pacote marca e grava o JSON de saída.
+4. **Salvar:** `npm run fichas -- salvar <slug> <concorrente> <arquivo.json>` (valida schema e vocabulário e marca `analisada`; com erro, corrige o valor e salva de novo). Depois, `npm run validate`.
+5. **Ideia** (só se o Oliver pedir): `ideas/I-NNNN-*.md` (schema `Idea`; "Virar ideia" no app faz o esqueleto) com `source` preenchido, a partir do `adaptar` da ficha, na **ficha de pauta** (objetivo · mensagem · público · gancho que nunca engana · estrutura · prova · métrica) + "Observações do Oliver" vazio; grava `ideaId` no `marks.json`.
 
 ## Regras
 - Nunca analisar tudo: só o marcado. Nunca copiar: adaptar tema, estrutura e estilo à marca e ao `VOICE.md`.

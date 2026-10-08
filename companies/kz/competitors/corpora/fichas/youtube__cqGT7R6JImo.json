@@ -1,0 +1,348 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "youtube:cqGT7R6JImo",
+  "competitorId": "corpora",
+  "url": "https://www.youtube.com/shorts/cqGT7R6JImo",
+  "item": {
+    "id": "cqGT7R6JImo",
+    "url": "https://www.youtube.com/shorts/cqGT7R6JImo",
+    "type": "short",
+    "title": "existe COACH INFILTRADO na PSICOLOGIA??",
+    "caption": "#psicologia #meme #humor #COACH #POLEMICA #CHAVOSODAUSP",
+    "publishedAt": "2025-11-12T18:00:48Z",
+    "durationS": 24,
+    "thumbnail": "https://i.ytimg.com/vi/cqGT7R6JImo/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYVyBlKGUwDw==&rs=AOn4CLBvFcHTHDy3QgQW8ZzzY02LRm7F_w",
+    "thumbnailLocal": "media/youtube-corporatv/thumbs/cqGT7R6JImo-6761.jpg",
+    "metrics": {
+      "views": 808,
+      "likes": 7
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/youtube-corporatv/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 808,
+    "likes": 7,
+    "seguidores": 970,
+    "xPerfil": 0.5587828492392808,
+    "porSeguidor": 0.8329896907216495,
+    "engajamento": 0.008663366336633664,
+    "escopoMercado": "rede",
+    "amostraMercado": 60,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "7d0f9bf3aaeef53ed52b81e4c8027803167167cd",
+    "hashEntrada": "60eb06ee1be700a7f8e525102c4ee8a48af55d65",
+    "preparadoEm": "2026-10-08T18:17:37Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "#psicologia #meme #humor #COACH #POLEMICA #CHAVOSODAUSP",
+    "transcricao": {
+      "fonte": "yt-auto-subs",
+      "idioma": "pt-orig",
+      "texto": "Senhor reconhece ou nega que existe crime organizado nas periferias? >> Existe em todo lugar, inclusive dentro dessa casa. >> Dentro dessa casa? >> Opa. >> Aí eu pergunto, senhor, quem é o parlamentar ligado ao crime organizado para que eu possa levar ele aidoria? Quem é aqui dentro dessa casa ligado ao crime organizado? Por gentileza, o senhor pode responder sen filmado por YouTube, pela TV Câmara. sen não responder.",
+      "segmentos": [
+        {
+          "ini": 0.199,
+          "fim": 3.84,
+          "texto": "Senhor reconhece ou nega que existe"
+        },
+        {
+          "ini": 2.24,
+          "fim": 5.319,
+          "texto": "crime organizado nas periferias?"
+        },
+        {
+          "ini": 3.84,
+          "fim": 6.2,
+          "texto": ">> Existe em todo lugar, inclusive dentro"
+        },
+        {
+          "ini": 5.319,
+          "fim": 7.319,
+          "texto": "dessa casa."
+        },
+        {
+          "ini": 6.2,
+          "fim": 7.759,
+          "texto": ">> Dentro dessa casa?"
+        },
+        {
+          "ini": 7.319,
+          "fim": 9.32,
+          "texto": ">> Opa."
+        },
+        {
+          "ini": 7.759,
+          "fim": 10.719,
+          "texto": ">> Aí eu pergunto, senhor, quem é o"
+        },
+        {
+          "ini": 9.32,
+          "fim": 12.559,
+          "texto": "parlamentar ligado ao crime organizado"
+        },
+        {
+          "ini": 10.719,
+          "fim": 14.519,
+          "texto": "para que eu possa levar ele aidoria?"
+        },
+        {
+          "ini": 12.559,
+          "fim": 15.759,
+          "texto": "Quem é aqui dentro dessa casa ligado ao"
+        },
+        {
+          "ini": 14.519,
+          "fim": 19.119,
+          "texto": "crime organizado? Por gentileza, o"
+        },
+        {
+          "ini": 15.759,
+          "fim": 21.64,
+          "texto": "senhor pode responder"
+        },
+        {
+          "ini": 19.119,
+          "fim": 24.72,
+          "texto": "sen filmado por YouTube, pela TV Câmara."
+        },
+        {
+          "ini": 21.64,
+          "fim": 24.72,
+          "texto": "sen não responder."
+        }
+      ]
+    },
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Rapaz de moletom bege e fones no pescoço, de busto, olhando de lado dentro de um quarto; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesmo rapaz, cabeça virada para o lado com expressão de dúvida; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mesmo rapaz, olhando para a esquerda enquanto fala; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Mesmo rapaz de frente para a câmera, boca fechada, expressão neutra; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Mesmo rapaz de frente com a mão no queixo, pensativo; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 12057,
+        "arquivo": "quadros/12057ms.jpg",
+        "descricao": "Mesmo rapaz de frente, falando; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      },
+      {
+        "tMs": 23964,
+        "arquivo": "quadros/23964ms.jpg",
+        "descricao": "Selfie de perto com braço estendido, rapaz de expressão neutra; legenda fixa na tela.",
+        "ocr": "\"O sr reconhece ou nega / que existe coach infiltrado / no curso de psicologia?\""
+      }
+    ],
+    "cenas": [
+      24.07
+    ],
+    "faltou": [],
+    "midia": {
+      "duracaoS": 24.114,
+      "videoApagado": true,
+      "bytesVideo": 1128373
+    },
+    "tempos": {
+      "total": 12.4,
+      "baixar": 9,
+      "quadros": 0.9
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "7d0f9bf3aaeef53ed52b81e4c8027803167167cd",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T18:28:35Z",
+    "custo": {
+      "entrada": 5900,
+      "saida": 2600,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "youtube",
+      "formatoMidia": "short",
+      "duracaoS": 24.1,
+      "publicadoEm": "2025-11-12",
+      "tema": {
+        "texto": "Coaches infiltrados no curso de psicologia",
+        "tag": "posicionamento-politico"
+      },
+      "mensagem": "Piada interna: o coaching já está dentro da formação em psicologia, como o crime \"dentro dessa casa\".",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "posicionamento"
+        ]
+      },
+      "formato": "meme-trend-video",
+      "estiloProducao": "trend-audio",
+      "headline": {
+        "texto": "\"O sr reconhece ou nega que existe coach infiltrado no curso de psicologia?\"",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "\"O sr reconhece ou nega que existe coach infiltrado no curso de psicologia?\"",
+        "tipo": "pergunta-direta",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "fala-em-menos-de-0-5s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "0–5 s",
+          "elemento": "pergunta-sem-resposta",
+          "gatilho": "indignacao-valores"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "coach infiltrado no curso de psicologia"
+        },
+        {
+          "id": "indignacao-valores",
+          "onde": "título",
+          "trecho": "existe COACH INFILTRADO na PSICOLOGIA??"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "fala 0:04",
+          "trecho": "Existe em todo lugar, inclusive dentro dessa casa."
+        },
+        {
+          "id": "curiosidade",
+          "onde": "fala 0:00",
+          "trecho": "Senhor reconhece ou nega que existe"
+        }
+      ],
+      "estrutura": {
+        "macro": "esquete-punchline",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0–4 s",
+            "oque": "pergunta de CPI na tela, adaptada para coach na psicologia; o áudio original fala de crime organizado"
+          },
+          {
+            "bloco": "payoff",
+            "quando": "4–7 s",
+            "oque": "\"inclusive dentro dessa casa\": a piada fecha aqui"
+          },
+          {
+            "bloco": "entrega",
+            "quando": "7–24 s",
+            "oque": "o áudio segue a discussão; o texto na tela não muda (indefinido se há outra virada: só há quadro aos 12 e 24 s)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "estudante",
+          "psicologo-autonomo"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "ironico",
+        "leve-humor"
+      ],
+      "som": "audio-trend",
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 0
+      },
+      "hashtags": [
+        "#psicologia",
+        "#meme",
+        "#humor",
+        "#COACH",
+        "#POLEMICA",
+        "#CHAVOSODAUSP"
+      ],
+      "porQue": "hipótese: 0,56× o perfil e 0,9% de engajamento (7 curtidas). A piada pede 7 s para fechar e fica 17 s sem nova virada; o tema coach rende mais em texto que em dublagem.",
+      "adaptar": [
+        {
+          "ideia": "Meme de áudio conhecido com texto trocado para o caos administrativo (\"o sr reconhece ou nega que o paciente remarcou 3 vezes?\"); corta logo após a punchline, até 8 s.",
+          "formato": "meme-trend-video"
+        },
+        {
+          "ideia": "Pergunta-acusação na tela nos 0 s como gancho de um texto cinético sobre os 5 apps, sem áudio de terceiro.",
+          "formato": "texto-cinetico"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 2,
+      "confianca": {
+        "texto": "media",
+        "visual": "media",
+        "retencao": "media"
+      },
+      "faltou": [],
+      "autoria": null,
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "meme-trend-video",
+        "definicao": "Vídeo curto (5–25 s) de meme: áudio conhecido ou dublado + texto na tela que troca o contexto para o nicho.",
+        "exemplo": "Áudio da TV Câmara com o texto \"existe coach infiltrado no curso de psicologia?\""
+      }
+    ]
+  }
+}

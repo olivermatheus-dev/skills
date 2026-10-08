@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "instagram:DeKnYQFRBpY",
+  "competitorId": "corpora",
+  "url": "https://www.instagram.com/reel/DeKnYQFRBpY/",
+  "item": {
+    "id": "DeKnYQFRBpY",
+    "url": "https://www.instagram.com/reel/DeKnYQFRBpY/",
+    "type": "reel",
+    "caption": "Sinistro…",
+    "publishedAt": "2026-10-06T20:13:49Z",
+    "durationS": 11,
+    "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t51.82787-15/838328487_18031238636910401_6358035167914984772_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=NDAwMjE4NDQwOTIyMTcwMDE4NDE4MDMxMjM4NjMzOTEwNDAx.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyOTAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=F0LTyZWwAaYQ7kNvwGq8NLn&_nc_oc=Adq48SWzFirGe4aF1Y4kX158FIYa4bc6qBbn25IFpFyOUKHi8-y_oqAQ3tQmjCS0QtSRjcwyxjz_eQ1p4MUGRmV6&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=0z5EM9WY5wYxL5W1vE-CUg&_nc_ss=7c689&oh=00_AQPqYgNvLV3ptOIoOUjE2Fe8bSghjikvJQg5U7KtXsnxUg&oe=6ACD9B9A",
+    "thumbnailLocal": "media/instagram-usecorpora/thumbs/DeKnYQFRBpY-58bd.jpg",
+    "metrics": {
+      "views": 44189,
+      "likes": 7617,
+      "comments": 38
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/instagram-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 44189,
+    "likes": 7617,
+    "comments": 38,
+    "seguidores": 85806,
+    "xPerfil": 1.7552033682872576,
+    "xMercado": 211.93764988009593,
+    "porSeguidor": 0.514987296925623,
+    "porSeguidorMercado": 16.915377244291147,
+    "engajamento": 0.1732331575731517,
+    "escopoMercado": "formato",
+    "amostraMercado": 24,
+    "base": "views"
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "insumos": {
+    "hash": "e1d4b443fb108e29e33833c7348b172d381cb8da",
+    "hashEntrada": "5ecd623c46c4b2732b2e659282ec0083bcfb6ccc",
+    "preparadoEm": "2026-10-08T18:19:42Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "Sinistro…",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg"
+      }
+    ],
+    "faltou": [
+      "midia-indisponivel",
+      "sem-transcricao"
+    ],
+    "midia": {
+      "duracaoS": 11,
+      "videoApagado": false
+    },
+    "tempos": {
+      "total": 2.9,
+      "baixar": 2.9
+    }
+  }
+}
