@@ -1,5 +1,5 @@
 {
-  "versao": 1,
+  "versao": 3,
   "atualizadoEm": "2026-10-08",
   "grupos": {
     "tipoConteudo": [
@@ -52,7 +52,8 @@
       { "id": "fala-de-terceiro", "nome": "Fala de terceiro", "definicao": "Depoimento ou criador falando." },
       { "id": "promessa", "nome": "Promessa", "definicao": "Promete resultado. Sinaliza risco em saúde." },
       { "id": "quebra-visual", "nome": "Quebra visual", "definicao": "Movimento ou imagem estranha, sem fala." },
-      { "id": "texto-mudo", "nome": "Texto mudo", "definicao": "Só texto na tela, com áudio de trend." }
+      { "id": "texto-mudo", "nome": "Texto mudo", "definicao": "Só texto na tela, com áudio de trend." },
+      { "id": "situacao-reacao", "nome": "Situacao reacao", "definicao": "Setup clássico de meme: \"X toda vez que…\" / \"eu quando…\"; a tela descreve a situação e a pessoa encena a reação.", "exemplo": "a assombração de Freud toda vez que alguém pronuncia FrEUd e não FrOId", "status": "proposto" }
     ],
     "canalGancho": [
       { "id": "fala", "nome": "Fala", "definicao": "O gancho é dito." },
@@ -74,7 +75,8 @@
       { "id": "payoff-visual-imediato", "nome": "Payoff visual imediato", "definicao": "A imagem forte vem logo." },
       { "id": "contraste-visual", "nome": "Contraste visual", "definicao": "Dois estados lado a lado." },
       { "id": "rotulo-de-identidade", "nome": "Rótulo de identidade", "definicao": "Chama o público: 'psis, isso é para vocês'." },
-      { "id": "produto-na-tela", "nome": "Produto na tela", "definicao": "Interface do produto visível." }
+      { "id": "produto-na-tela", "nome": "Produto na tela", "definicao": "Interface do produto visível." },
+      { "id": "imagem-sobreposta", "nome": "Imagem sobreposta", "definicao": "Imagem de referência (capa de livro, diagrama, print) entra sobre o vídeo e dá o contexto da piada.", "exemplo": "ilustração da Caixa de Skinner aos 3 s", "status": "proposto" }
     ],
     "estruturaMacro": [
       { "id": "gancho-entrega-cta", "nome": "Gancho, entrega, CTA", "definicao": "Estrutura padrão de 3 partes." },

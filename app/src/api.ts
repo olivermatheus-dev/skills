@@ -10,6 +10,10 @@ export interface QueueEntry { id: string; name: string; status: string; request:
 
 import type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo } from '../../core/fichas';
 export type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo };
+import type { FilaStatus, PedirLote } from '../../core/fichas-fila';
+import type { RelatorioLinha, RelatorioView, FichaOpcao } from '../../core/relatorios';
+export type { RelatorioLinha, RelatorioView, FichaOpcao };
+export type { FilaStatus, PedirLote };
 import type { Review, ReviewComment } from '../../schema/review';
 import type { Brand, BrandFont, BrandToken } from '../../schema/brand';
 import type { BrandPreset } from '../../core/brand-presets';
@@ -27,7 +31,7 @@ export type { PieceCover } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
-  otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
+  kind: 'fichas' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
 }
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
@@ -184,6 +188,17 @@ export const api = {
   editFicha: (slug: string, comp: string, key: string, edit: { path: string; value?: unknown; revert?: boolean }) => req<FichaView>('PUT', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/override`, edit),
   pedirFicha: (slug: string, comp: string, key: string) => req<{ naFila: boolean; itens: number }>('POST', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/pedido`),
   cancelarFicha: (slug: string, comp: string, key: string) => req<{ naFila: boolean; itens: number }>('DELETE', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/pedido`),
+  // fila de fichas (040 E)
+  fichasFila: (slug: string) => req<FilaStatus>('GET', `${pj(slug)}/fichas-fila`),
+  pedirFichas: (slug: string, b: PedirLote) => req<{ gravados: number; fora: number; rodando: boolean; aviso: string | null }>('POST', `${pj(slug)}/fichas-fila`, b),
+  rodarFichas: (slug: string) => req<{ started: boolean }>('POST', `${pj(slug)}/fichas-fila/rodar`),
+  pararFichas: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/fichas-fila/rodar`),
+  // relatórios por concorrente (040 F)
+  relatorios: (slug: string, comp: string) => req<RelatorioLinha[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios`),
+  relatorio: (slug: string, comp: string, id: string) => req<RelatorioView | null>('GET', `${pj(slug)}/competitors/${comp}/relatorios/${id}`),
+  relatorioFichas: (slug: string, comp: string) => req<FichaOpcao[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios-fichas`),
+  gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean }) => req<{ aberto: boolean; comando: string; itens: number }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
+  decidirTermos: (slug: string, comp: string, id: string, decisoes: { grupo: string; valor: string; decisao: 'aceito' | 'recusado' }[]) => req<{ resultado: { grupo: string; valor: string; ok: boolean; msg: string }[]; view: RelatorioView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios/${id}/termos`, { decisoes }),
 
   secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
   setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),

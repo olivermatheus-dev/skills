@@ -6,6 +6,7 @@ import { Ficha, fichaFileName, issuesFicha } from '../../schema/ficha';
 import { FichasPedido, Relatorio } from '../../schema/relatorio';
 import { parseMd } from '../../core/frontmatter';
 import { ROOT, VOCAB_FILE, loadVocab, loadFormatos, loadTags } from './lib';
+import { numerosForaDosAgregados } from './relatorio-lib';
 
 type Erro = { file: string; issues: string[] };
 const fmt = (e: { issues: { path: PropertyKey[]; message: string }[] }) => e.issues.map((i) => `${i.path.join('.') || '(raiz)'}: ${i.message}`);
@@ -38,8 +39,20 @@ export function validarFichas(): Erro[] {
       if (existsSync(rd)) for (const f of readdirSync(rd).filter((x) => x.endsWith('.md'))) {
         const file = join(rd, f);
         const r = Relatorio.safeParse(parseMd(readFileSync(file, 'utf8')).data);
-        if (!r.success) erros.push({ file: rel(file), issues: fmt(r.error) });
-        else if (`${r.data.id}.md` !== f) erros.push({ file: rel(file), issues: [`id "${r.data.id}" diferente do nome do arquivo`] });
+        if (!r.success) { erros.push({ file: rel(file), issues: fmt(r.error) }); continue; }
+        const issues: string[] = [];
+        if (`${r.data.id}.md` !== f) issues.push(`id "${r.data.id}" diferente do nome do arquivo`);
+        if (r.data.competitor !== comp) issues.push(`competitor "${r.data.competitor}" diferente da pasta (${comp})`);
+        const semFicha = r.data.itens.filter((k) => !existsSync(join(fd, fichaFileName(k))));
+        if (semFicha.length) issues.push(`itens sem ficha: ${semFicha.join(', ')}`);
+        const l = r.data.leitura;
+        if (l) {
+          const fora = [...l.padroes, ...l.copiar, ...l.evitar, ...l.ideias].flatMap((b) => b.itens).filter((k) => !r.data.itens.includes(k));
+          if (fora.length) issues.push(`a leitura cita item(ns) fora da rodada: ${[...new Set(fora)].join(', ')}`);
+          const nums = numerosForaDosAgregados(r.data);
+          if (nums.length) issues.push(`a leitura cita número(s) fora dos agregados: ${nums.join(', ')}`);
+        }
+        if (issues.length) erros.push({ file: rel(file), issues });
       }
     }
   }

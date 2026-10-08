@@ -5,11 +5,13 @@ import { existsSync, readFileSync, rmSync, mkdirSync, writeFileSync } from 'node
 import { join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { listTasks, commentTask, ValidationError, ROOT } from './store';
+import { fechar } from '../tools/lib/fichas-fila.mjs';
 
 const LOCK = join(ROOT, 'logs/heartbeat/.lock');
 const isAi = (a: string) => a === 'ai' || a.startsWith('agent:');
 
-interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string }
+/** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); sem kind = tarefa do quadro */
+export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' }
 
 // App aberto de dentro de outra sessão do Claude (desktop, preview): as variáveis dela confundem o claude filho.
 const cleanEnv = () => (process.env.CLAUDE_CODE_ENTRYPOINT || process.env.CLAUDECODE
@@ -17,7 +19,7 @@ const cleanEnv = () => (process.env.CLAUDE_CODE_ENTRYPOINT || process.env.CLAUDE
   : process.env);
 
 const alive = (pid: number) => { try { process.kill(pid, 0); return true; } catch (e) { return (e as NodeJS.ErrnoException).code === 'EPERM'; } };
-function readLock(): Lock | null {
+export function readLock(): Lock | null {
   if (!existsSync(LOCK)) return null;
   try {
     const raw = readFileSync(LOCK, 'utf8').trim();
@@ -53,6 +55,7 @@ export function runnerStatus(slug: string) {
     task: l?.slug === slug ? l.task ?? null : null,
     title: l?.slug === slug ? l.title ?? null : null,
     who: l?.who ?? null,
+    kind: l?.kind ?? null,
     otherProject: l?.slug && l.slug !== slug ? l.slug : null,
     ready: readyTasks(slug),
     log: tail(l?.log ?? `logs/heartbeat/${new Date().toISOString().slice(0, 10)}.log`),
@@ -87,6 +90,7 @@ export function stopAi(slug: string) {
   if (process.platform === 'win32') spawnSync('taskkill', ['/pid', String(l.pid), '/t', '/f'], { windowsHide: true });
   else { try { process.kill(-l.pid, 'SIGTERM'); } catch { try { process.kill(l.pid, 'SIGTERM'); } catch { /* já saiu */ } } }
   rmSync(LOCK, { force: true });
+  if (l.kind === 'fichas' && l.slug) fechar(l.slug, { parado: true, inicio: l.started }); // o que já foi salvo sai da fila; o resto volta a pendente
   if (l.task && l.slug === slug) {
     const t = listTasks(slug).find((x) => x.data.id === l.task);
     if (t?.data.status === 'doing') commentTask(slug, l.task, { text: 'Execução parada pelo Oliver no app; voltou para "A fazer".', who: 'oliver', status: 'todo' });
@@ -94,7 +98,16 @@ export function stopAi(slug: string) {
   return { stopped: true };
 }
 
-function openTerminal(prompt: string) {
+/** Fila de fichas (040 E): o mesmo heartbeat, em segundo plano, com `--fichas` (um `claude -p` para a fila inteira). */
+export function runFichas(slug: string) {
+  const l = readLock();
+  if (l) throw new ValidationError('heartbeat', [l.kind === 'fichas' ? 'a fila de fichas já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : ''}; o pedido ficou na fila: rode quando ela terminar`]);
+  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
+  spawn(process.execPath, ['tools/heartbeat.mjs', '--run', '--slug', slug, '--fichas'], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
+  return { started: true };
+}
+
+export function openTerminal(prompt: string) {
   const p = prompt.replace(/"/g, "'");
   if (process.platform === 'win32') {
     // Um .cmd em logs/ (fora do git) evita o inferno de aspas do cmd; a janela fica aberta (cmd /k) ao sair do claude.

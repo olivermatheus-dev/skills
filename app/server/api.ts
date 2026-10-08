@@ -154,6 +154,19 @@ on('GET', '/api/projects/:slug/competitors/:id/fichas/:key', async (p) => (await
 on('PUT', '/api/projects/:slug/competitors/:id/fichas/:key/override', async (p, b) => (await FI()).editarFicha(p.slug, p.id, p.key, b ?? {}));
 on('POST', '/api/projects/:slug/competitors/:id/fichas/:key/pedido', async (p) => (await FI()).pedirAnalise(p.slug, p.id, p.key));
 on('DELETE', '/api/projects/:slug/competitors/:id/fichas/:key/pedido', async (p) => (await FI()).cancelarPedido(p.slug, p.id, p.key));
+// Fila de fichas (040 E): seleção → pedido.json por concorrente → "Rodar agora" (heartbeat --fichas, mesmo lock do Rodar IA)
+const FF = () => import('../../core/fichas-fila');
+on('GET', '/api/projects/:slug/fichas-fila', async (p) => { slugOk(p); return (await FF()).filaStatus(p.slug); });
+on('POST', '/api/projects/:slug/fichas-fila', async (p, b) => { slugOk(p); return (await FF()).pedirLote(p.slug, b ?? {}); });
+on('POST', '/api/projects/:slug/fichas-fila/rodar', async (p) => { slugOk(p); return (await FF()).rodarFila(p.slug); });
+on('DELETE', '/api/projects/:slug/fichas-fila/rodar', async (p) => { slugOk(p); return (await FF()).pararFila(p.slug); });
+// Relatórios por concorrente (040 F): lista, leitura, termos novos em lote e "Gerar relatório" (abre o Claude Code num terminal)
+const RL = () => import('../../core/relatorios');
+on('GET', '/api/projects/:slug/competitors/:id/relatorios', async (p) => (await RL()).listarRelatoriosView(p.slug, p.id));
+on('GET', '/api/projects/:slug/competitors/:id/relatorios-fichas', async (p) => (await RL()).fichasParaRelatorio(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/relatorios', async (p, b) => (await RL()).gerarRelatorioView(p.slug, p.id, b ?? {}));
+on('GET', '/api/projects/:slug/competitors/:id/relatorios/:rid', async (p) => (await RL()).relatorioView(p.slug, p.id, p.rid));
+on('POST', '/api/projects/:slug/competitors/:id/relatorios/:rid/termos', async (p, b) => (await RL()).decidirTermosView(p.slug, p.id, p.rid, b ?? {}));
 
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
 on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));

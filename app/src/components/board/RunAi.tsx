@@ -92,7 +92,8 @@ export function RunningBar({ status, onStop, onOpenTask }: { status: RunnerStatu
               <span className="font-mono">{status.task}</span> · {status.title}
             </button>
           </span>
-        ) : <span>IA preparando a execução…</span>}
+        ) : status.kind === 'fichas' ? <span className="min-w-0 truncate">IA analisando conteúdos dos concorrentes{status.title ? ` · ${status.title}` : ''}</span>
+          : <span>IA preparando a execução…</span>}
         <span className="text-xs text-muted-foreground whitespace-nowrap">{since(status.started)}</span>
         <div className="ml-auto flex items-center gap-1">
           <Button size="sm" variant="ghost" onClick={() => setShowLog((v) => !v)}>{showLog ? <ChevronDown /> : <ChevronRight />} Log</Button>

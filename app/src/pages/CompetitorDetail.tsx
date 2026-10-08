@@ -19,6 +19,7 @@ import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
 import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
 import ContentsView from '../components/competitors/ContentsView';
+import RelatoriosSection from '../components/competitors/relatorios/Relatorios';
 import { useMarketRows } from '../components/competitors/market';
 import { StatStrip } from '../components/competitors/area';
 import { AppContent } from '../components/AppContent';
@@ -383,6 +384,9 @@ function Detalhe() {
           </div>
         )}
 
+        {/* relatórios de análise (040 F): o mais recente em destaque; itens citados abrem o painel */}
+        {sel?.platform !== 'site' && <RelatoriosSection slug={slug} comp={id} onOpenItem={(k) => setOpen(k)} />}
+
         {/* conteúdos */}
         <section className="mt-8">
           <h2 className="text-base font-semibold mb-2">Conteúdos</h2>
@@ -396,7 +400,7 @@ function Detalhe() {
           )}
           {sel && rows.length > 0 && !scopeRows.length && sel.platform === "site" && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
           {scopeRows.length > 0 && (
-            <ContentsView rows={scopeRows} slug={slug} showComp={false} fichaOf={(r) => fichas.of(id, r.mk)} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
+            <ContentsView rows={scopeRows} slug={slug} showComp={false} compId={id} compLabel={c.name} fichaOf={(r) => fichas.of(id, r.mk)} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
               searchPlaceholder="Buscar título, legenda, nota…"
               mediaOf={(r) => media(r.item.thumbnailLocal)} ideaBusy={(r) => ideaBusy === r.mk}
               onMark={(r, patch) => mark.mutate({ mk: r.mk, patch })} onIdea={(r) => makeIdea(r)} onOpen={(r) => setOpen(r.mk)} />

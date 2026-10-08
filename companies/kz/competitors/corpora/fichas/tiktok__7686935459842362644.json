@@ -1,0 +1,292 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7686935459842362644",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7686935459842362644",
+  "item": {
+    "id": "7686935459842362644",
+    "url": "https://www.tiktok.com/@usecorpora/video/7686935459842362644",
+    "type": "video",
+    "title": "recado importante #fyp #foryourpage",
+    "caption": "recado importante #fyp #foryourpage",
+    "publishedAt": "2026-09-18T17:55:37Z",
+    "durationS": 7,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oUgfaVlI8CvEhAjFEogAlLIDTeGgaWGsUeoFx4~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=vXIGF8%2BfdRcIQlc3%2BunEKaRlaGU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7686935459842362644-e2b4.jpg",
+    "metrics": {
+      "views": 1051,
+      "likes": 66,
+      "comments": 2,
+      "shares": 0
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 1051,
+    "likes": 66,
+    "comments": 2,
+    "shares": 0,
+    "seguidores": 1911,
+    "xPerfil": 1.36404931862427,
+    "porSeguidor": 0.5499738356881214,
+    "engajamento": 0.06470028544243578,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "86904ef15204a93e9946d2fe0d01eb28e72fc223",
+    "hashEntrada": "e158f7c90fcf04e9027f52802330d63b9528f746",
+    "preparadoEm": "2026-10-08T19:13:03Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "recado importante #fyp #foryourpage",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher com cabelo ruivo cacheado, camiseta preta com logos em ouro, de lado olhando para câmera, mão no peito, em frente a parede cinza com porta branca aberta.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effefffff7ffff06fe03fe03fc03f8f0f3e036001e007c003c0034001"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesma mulher, posição ligeiramente virada, expressão neutra, cabelo ruivo cacheado, camiseta preta com logos em ouro, mão tocando o peito/colar.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effefffff7ffff86ff03ff01fe01fc70f1e037001e003c003c001c001"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mulher de perfil, cabelo ruivo cacheado caindo nos ombros, expressão pensativa, camiseta preta com logos em ouro, mão no peito, parede cinza ao fundo.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effeffffffffff06ff07fe03fc03fc30f1e037001e003c001c000c001"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Mulher de frente, rosto mais visível, cabelo ruivo cacheado, olhar direto para câmera com expressão séria, camiseta preta com logos em ouro, postura frontal.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effeffffffffffbeff3ffe3ffe09fc30f80030001a00380014001c001"
+      },
+      {
+        "tMs": 3935,
+        "arquivo": "quadros/03935ms.jpg",
+        "descricao": "Mulher de frente frontal, cabelo ruivo cacheado caindo na frente dos ombros, expressão neutra/séria, camiseta preta com logos em ouro, fundo parede cinza.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effefffff7ffff3aff3bfe3bfc01fc20f00030001a00700034001c003"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Mulher de frente, cabelo ruivo cacheado, expressão séria/contemplativa, camiseta preta com logos em ouro, postura reta, parede cinza ao fundo.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effeffffffffff7afe3bfe7bfc13fc20f80030003a003800140014001"
+      },
+      {
+        "tMs": 7720,
+        "arquivo": "quadros/07720ms.jpg",
+        "descricao": "Mulher de frente, cabelo ruivo cacheado, expressão neutra com leve inclinação de cabeça, camiseta preta com logos em ouro, parede cinza e verde ao fundo.",
+        "ocr": "passando aqui para lembrar que:\nnão é pq vc ta obcecado por um assunto q é hiperfoco\nnão pq fulano é babaca q ele é narcisista\nnão é pq vc ta sofrendo num termino q vc é boderline\nnão é pq vc é esquisito q vc é autista, e muito\nmenos se vc é distraído q vc tem TDAH",
+        "assinatura": "200e200effeeffff7ffff1cff09ff05fe00fc007b003b801fc03fc01fe011f01"
+      }
+    ],
+    "cenas": [],
+    "faltou": [
+      "audio-sem-fala"
+    ],
+    "midia": {
+      "duracaoS": 7.87,
+      "videoApagado": true,
+      "bytesVideo": 245926
+    },
+    "tempos": {
+      "total": 10.1,
+      "baixar": 5,
+      "transcrever": 3.3,
+      "quadros": 1.1
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 3,
+    "insumosHash": "86904ef15204a93e9946d2fe0d01eb28e72fc223",
+    "modelo": "claude-opus-4-8",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T19:19:47Z",
+    "custo": {
+      "entrada": 0,
+      "saida": 0,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 7.87,
+      "publicadoEm": "2026-09-18",
+      "tema": {
+        "texto": "Banalização de diagnósticos psiquiátricos",
+        "tag": "diagnostico-e-psicopatologia"
+      },
+      "mensagem": "Nem todo comportamento comum é diagnóstico; não banalize termos clínicos como TDAH, autismo e borderline.",
+      "tipoConteudo": {
+        "principal": "posicionamento",
+        "secundarios": [
+          "educativo",
+          "identificacao"
+        ]
+      },
+      "formato": "recado-na-tela",
+      "estiloProducao": "talking-head",
+      "headline": {
+        "texto": "passando aqui para lembrar que:",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "passando aqui para lembrar que: não é pq vc ta obcecado por um assunto q é hiperfoco",
+        "tipo": "texto-mudo",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "1–3 s",
+          "elemento": "rotulo-de-identidade",
+          "gatilho": "identificacao"
+        },
+        {
+          "t": "3–5 s",
+          "elemento": "rotulo-de-identidade",
+          "gatilho": "indignacao-valores"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "curiosidade",
+          "onde": "tela 0 s",
+          "trecho": "passando aqui para lembrar que:"
+        },
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "não é pq vc é esquisito q vc é autista, e muito menos se vc é distraído q vc tem TDAH"
+        },
+        {
+          "id": "indignacao-valores",
+          "onde": "tela 0 s",
+          "trecho": "não pq fulano é babaca q ele é narcisista"
+        },
+        {
+          "id": "autoridade",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: camiseta preta com símbolo Ψ e 'psicologia' em dourado]"
+        }
+      ],
+      "estrutura": {
+        "macro": "lista",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0–1 s",
+            "oque": "'passando aqui para lembrar que:' abre o recado"
+          },
+          {
+            "bloco": "lista",
+            "quando": "1–7,9 s",
+            "oque": "5 pares 'não é pq X que Y' corrigindo hiperfoco, narcisista, borderline, autista e TDAH"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo",
+          "paciente"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "indignado-posicionamento",
+        "tecnico"
+      ],
+      "som": null,
+      "legendaTela": true,
+      "ritmo": {
+        "cortesPorMin": 0
+      },
+      "hashtags": [
+        "#fyp",
+        "#foryourpage"
+      ],
+      "porQue": "hipótese: recado polêmico sobre autodiagnóstico gerou identificação (66 likes em 1051 views, ~6,5%), mas alcance ficou perto da base (0,55 view por seguidor): não estourou no Para Você.",
+      "adaptar": [
+        {
+          "ideia": "Recado 'passando aqui pra lembrar': não é pq você anotou no caderno que está organizada, nem pq respondeu no WhatsApp que confirmou a sessão. Lista corretiva sobre bagunça administrativa, sem falar de paciente.",
+          "formato": "texto-cinetico"
+        },
+        {
+          "ideia": "Carrossel 'mitos de organização do consultório': planilha não é sistema, lembrete no papel não é confirmação automática, cada par corrige um hábito que dá retrabalho.",
+          "formato": "carrossel-educativo"
+        },
+        {
+          "ideia": "Recado acolhedor: 'passando pra lembrar que cuidar de quem cuida também é tirar a papelada das suas costas' — fecho com pergunta, sem promessa.",
+          "formato": "texto-cinetico"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "não é pq vc ta sofrendo num termino q vc é boderline"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "alta",
+        "visual": "media",
+        "retencao": "media"
+      },
+      "faltou": [
+        "audio-sem-fala"
+      ],
+      "autoria": "proprio",
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "tema",
+        "valor": "diagnostico-e-psicopatologia",
+        "definicao": "Diagnósticos clínicos (TDAH, autismo, borderline, narcisismo) e sua banalização no senso comum como assunto do conteúdo.",
+        "exemplo": "Corpora: 'não é pq vc é distraído q vc tem TDAH'"
+      },
+      {
+        "grupo": "formato",
+        "valor": "recado-na-tela",
+        "definicao": "Pessoa em vídeo (talking head) com um bloco de texto fixo na tela entregando um recado ou opinião, sem fala; o texto é o conteúdo.",
+        "exemplo": "Corpora: 'passando aqui para lembrar que:' + lista 'não é pq X que Y'"
+      }
+    ]
+  }
+}

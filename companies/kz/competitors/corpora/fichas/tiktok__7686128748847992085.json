@@ -1,0 +1,279 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7686128748847992085",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7686128748847992085",
+  "item": {
+    "id": "7686128748847992085",
+    "url": "https://www.tiktok.com/@usecorpora/video/7686128748847992085",
+    "type": "video",
+    "title": "ué kkkkk #foryou #foryoupage",
+    "caption": "ué kkkkk #foryou #foryoupage",
+    "publishedAt": "2026-09-16T13:45:08Z",
+    "durationS": 9,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oAsIG8TVvA1jM4sQGwLQAtCoODVWQe0eVmifSd~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=YciV47oPHEC4Hut0DvjuPmxOsu4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7686128748847992085-b850.jpg",
+    "metrics": {
+      "views": 2580,
+      "likes": 301,
+      "comments": 0,
+      "shares": 4
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 2580,
+    "likes": 301,
+    "comments": 0,
+    "shares": 4,
+    "seguidores": 1911,
+    "xPerfil": 3.3484750162232317,
+    "porSeguidor": 1.3500784929356358,
+    "engajamento": 0.1182170542635659,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "0ed41b92d0ecf480bd5c01952f7ca778a31c0426",
+    "hashEntrada": "2045f0c3cec927e66a66149fe1af6485ae718a09",
+    "preparadoEm": "2026-10-08T19:09:11Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "ué kkkkk #foryou #foryoupage",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado, camisa azul-marinho, sentada atrás de notebook prateado olhando para a tela; cadeira verde em primeiro plano; enquadramento médio com câmera baixa; legendas sobrepostas em dois blocos.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe117c010007fffff0ffe07fe67ffc31fc03fe17fb1e030c0208020"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesma cena: mulher de cabelo ruivo cacheado atrás do notebook prateado, olhando para a tela, levemente deslocada para a direita; cadeira verde em primeiro plano; legendas sobrepostas.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe11fc010007fffff0ffe47fe67ffc31fc03fe17fb1e030c0208020"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado atrás do notebook, com a cabeça mais baixa e voltada para a tela; enquadramento médio; cadeira verde em primeiro plano; legendas sobrepostas.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe117c010007fffff8ffe67fe63ffe31fc03fe17fb1e030c0208020"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Mulher de perfil virada para a direita do quadro, de cabelo ruivo cacheado, atrás do notebook e olhando para a tela; enquadramento aproximado; cadeira verde em primeiro plano; legendas sobrepostas.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe117c010007fffff8fff0fff07ffc31fc01fe17f31e030c0208020"
+      },
+      {
+        "tMs": 4967,
+        "arquivo": "quadros/04967ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado com o rosto voltado para a esquerda do quadro, boca fechada, atrás do notebook; cadeira verde em primeiro plano; legendas sobrepostas.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe117c010007fffff8fff47fe63ffc31fc01fe17fb1e030c0208020"
+      },
+      {
+        "tMs": 9783,
+        "arquivo": "quadros/09783ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado à direita do quadro, olhando para baixo e para a esquerda, atrás do notebook; cadeira verde em primeiro plano; legendas sobrepostas.",
+        "ocr": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "assinatura": "10017fe17fe117c010007fffff1ffe1ffe0fffc31fc01fc17f31e030c0208020"
+      }
+    ],
+    "cenas": [],
+    "faltou": [
+      "audio-sem-fala"
+    ],
+    "midia": {
+      "duracaoS": 9.933333,
+      "videoApagado": true,
+      "bytesVideo": 365887
+    },
+    "tempos": {
+      "total": 9,
+      "baixar": 3.4,
+      "transcrever": 3.4,
+      "quadros": 1.6
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "0ed41b92d0ecf480bd5c01952f7ca778a31c0426",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T19:11:09Z",
+    "custo": {
+      "entrada": 9000,
+      "saida": 2000,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 9.9,
+      "publicadoEm": "2026-09-16",
+      "tema": {
+        "texto": "Depressão não tem cara: estigma do senso comum",
+        "tag": "estigma-saude-mental"
+      },
+      "mensagem": "Depressão é problema psicológico, não estético; não precisa \"parecer\" para existir.",
+      "tipoConteudo": {
+        "principal": "posicionamento",
+        "secundarios": [
+          "identificacao",
+          "humor"
+        ]
+      },
+      "formato": "frase-e-resposta-na-tela",
+      "estiloProducao": "ugc-celular",
+      "headline": {
+        "texto": "“nossa mas nem parece\nque fulano tem depressão”",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "“nossa mas nem parece\nque fulano tem depressão”\n\nsim, até pq isso é um\nproblema psicológico e\nnão estético",
+        "tipo": "afirmacao-ousada",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "identificacao"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "indignacao-valores"
+        },
+        {
+          "t": "0–5 s",
+          "elemento": "contraste-visual",
+          "gatilho": "humor-alivio"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "identificacao",
+          "onde": "tela 0 s",
+          "trecho": "“nossa mas nem parece\nque fulano tem depressão”"
+        },
+        {
+          "id": "indignacao-valores",
+          "onde": "tela 0 s",
+          "trecho": "sim, até pq isso é um\nproblema psicológico e\nnão estético"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "legenda",
+          "trecho": "ué kkkkk"
+        }
+      ],
+      "estrutura": {
+        "macro": "pergunta-resposta",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0 s",
+            "oque": "frase de terceiro entre aspas e a resposta já visíveis juntas, sobre a criadora no notebook"
+          },
+          {
+            "bloco": "loop",
+            "quando": "0–9,9 s",
+            "oque": "texto fixo; só muda a postura (olha a tela, perfil aos 3 s, rosto à esquerda aos 5 s, olha para baixo aos 9,8 s)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "ironico",
+        "indignado-posicionamento"
+      ],
+      "som": "trilha",
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 0
+      },
+      "hashtags": [
+        "#foryou",
+        "#foryoupage"
+      ],
+      "porQue": "hipótese: 3,3× o perfil e 11,8% de engajamento; frase que todo mundo já ouviu rende curtida (301), não comentário (0). xMercado ausente: indefinido.",
+      "adaptar": [
+        {
+          "ideia": "Frase que a terapeuta ouve (\"mas você só fica ouvindo?\") e resposta calma sobre o administrativo invisível; terapeuta só reage. Legenda fecha em pergunta.",
+          "formato": "frase-e-resposta-na-tela"
+        },
+        {
+          "ideia": "Post estático: frase ouvida entre aspas + resposta leve sobre agenda, recibo e lembrete. CTA: qual dessas você mais ouve?",
+          "formato": "post-frase"
+        },
+        {
+          "ideia": "Carrossel \"frases que a terapeuta autônoma ouve\" × o que ela responde, sempre sobre rotina e bastidor, nunca sobre paciente.",
+          "formato": "carrossel-educativo"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "humor-com-sofrimento",
+          "trecho": "ué kkkkk"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "media",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [
+        "audio-sem-fala"
+      ],
+      "autoria": "proprio",
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "frase-e-resposta-na-tela",
+        "definicao": "Frase ouvida de terceiro entre aspas e a resposta da criadora logo abaixo, fixas na tela; ela só reage, sem fala.",
+        "exemplo": "\"“nossa mas nem parece que fulano tem depressão”\" + \"sim, até pq isso é um problema psicológico e não estético\""
+      },
+      {
+        "grupo": "tema",
+        "valor": "estigma-saude-mental",
+        "definicao": "Rebate senso comum ou preconceito sobre transtorno mental (como a doença 'deveria parecer').",
+        "exemplo": "\"nem parece que fulano tem depressão\" respondido com \"problema psicológico e não estético\""
+      }
+    ]
+  }
+}

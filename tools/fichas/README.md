@@ -9,6 +9,9 @@ npm run fichas -- preparar <empresa> <concorrente> <plataforma:id>… [--reanali
 npm run fichas -- pacote   <empresa> <concorrente> <plataforma:id>
 npm run fichas -- quadros  <empresa> <concorrente> <arquivo.json>   # descrição/OCR dos quadros (Haiku) → insumos
 npm run fichas -- salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]
+npm run fichas -- relatorio <empresa> <concorrente> [--rede tiktok] [--itens a,b | --top 10] [--rodada id] [--pacote]
+npm run fichas -- relatorio <empresa> <concorrente> --rodada <id> --leitura <arquivo.json>
+npm run fichas -- termo    <empresa> aceitar|recusar <grupo>:<valor> [--de <concorrente> --rodada <id>] [--motivo "…"]
 npm run fichas -- validar                     # o mesmo roda dentro do npm run validate
 ```
 Chave = `<plataforma>:<idDoItem>` (`youtube:cqGT7R6JImo`, `tiktok:7690…`, `instagram:DeKnYQFRBpY`), a mesma do `marks.json`.
@@ -37,3 +40,24 @@ Valida o schema e **todo valor categórico contra o vocabulário** (mais `tags.y
 
 ## Tempos medidos (CPU, `small`, vídeos de 6–24 s)
 Short do YouTube com legenda: ~12 s. TikTok com fala: ~8–11 s (baixar 2–6 s, Whisper 4–5 s, quadros 1–1,5 s). 2ª execução: 0 s por item.
+
+## relatorio (fase F)
+Um relatório por rodada em `competitors/<id>/relatorios/AAAA-MM-DD-<rede>-<escopo>.md` (schema `schema/relatorio.ts`; o corpo é gerado, o app lê o frontmatter). O mais recente do concorrente fica `emDestaque`.
+1. **Script** (`relatorio.ts`): lê as fichas analisadas com `camposEfetivos` (as correções do Oliver mandam) e as medidas da última coleta (a mesma conta do app). Agregados por tipo, formato, tipo de gancho, estrutura, tema, gatilho, elementos dos 5 s e presença do produto: n, itens, melhor item e medianas de × perfil, × mercado, por seguidor (e × mercado) e engajamento. Regras: grupo com n < 3 = fraco (⚠); rodada com < 10 itens = "observações", sem quartil de vencedores e sem lift; sem 3 concorrentes na rede, o × mercado fica indefinido e o relatório avisa. `--pacote` imprime o que o Opus lê.
+2. **Leitura do Opus** (`--leitura`, JSON `{ modelo, leitura: { resumo[≤5], padroes[], copiar[], evitar[], ideias[≤5], limites[] } }`): recusa número que não esteja nos agregados (arredondado, em % ou "mil" vale) e item fora da rodada. O `validate` refaz as duas conferências.
+3. **Termos novos**: os `termosNovos` das fichas da rodada que ainda não existem nem foram recusados. Aceitar (app ou `termo`): grupo do vocabulário → `vocabulario.json` (status `proposto`, versão +1); `formato` → `library/formatos/<id>/formato.json` como `rascunho` com as fichas como referência; `tema`/`angulo`/`publico` → `tags.yml` (comentários preservados). Recusar → `recusados` (some das próximas propostas).
+4. **No app:** ficha do concorrente → Redes e conteúdos → Relatórios de análise. "Gerar relatório" escolhe rede e fichas e abre o Claude Code num terminal (`openTerminal`, o mesmo do Rodar IA → terminal) com a skill `referencias`, passo 5; "Só o comando" mostra a linha para rodar à mão.
+
+## Quadros já descritos sobrevivem ao preparo
+Cada quadro guarda `assinatura` (16×16 em cinza, 1 bit por pixel). Um novo `preparar` (inclusive `--reanalisar`) mantém descrição e OCR do Haiku nos quadros cuja imagem não mudou (até 20 de 256 bits diferentes, no mesmo instante); só os novos ou diferentes voltam para o passo `quadros`. Capa/miniatura (Instagram sem vídeo, post, carrossel) é reduzida a 540 px de largura, como os quadros do vídeo.
+
+## Fila (fase E): o app pede, o Claude Code roda
+- **Pedido:** `competitors/<id>/fichas/pedido.json`, **um por concorrente** (o mesmo arquivo do "Analisar este" da fase D; mora ao lado das fichas e os comandos acima já trabalham por concorrente). A lista é fixada no clique (o "Top 10" vira chaves). Sem "reanalisar", os já analisados nem entram.
+- **No app:** Concorrentes → Conteúdos (ou a ficha do concorrente → Redes e conteúdos) → caixas na lista ou **Analisar ▾ → Top 10/20** (pela ordem e pelos filtros atuais) → barra embaixo → **Analisar** → **Rodar agora** (ou **Só pôr na fila**). Roda pelo mesmo caminho do Rodar IA: `tools/heartbeat.mjs --run --slug <slug> --fichas` em segundo plano, mesmo lock (`logs/heartbeat/.lock`, `kind: "fichas"`); a faixa mostra a etapa ao vivo e tem **Parar**.
+- **Pelo terminal** (mesma fila):
+  - ver o que está pedido: `node tools/fichas-fila.mjs fila <slug>`
+  - rodar tudo em segundo plano, igual ao botão: `node tools/heartbeat.mjs --run --slug <slug> --fichas`
+  - numa sessão do Claude Code: **"roda a fila de fichas da <slug>"** (skill `referencias`, passo 3)
+- **Quem roda segue o passo 3 da skill:** preparar → quadros (1 subagente Haiku para a rodada inteira) → pacote → análise (subagente Opus, até 5 itens cada) → salvar → `node tools/fichas-fila.mjs tirar <slug> <concorrente> <chave>`; no começo de cada etapa, `node tools/fichas-fila.mjs passo <slug> <etapa> [chaves]` (é o que a faixa do app mostra).
+- **Fecho:** ao sair o Claude (ou no Parar), `fechar` tira da fila tudo o que ficou analisado (com "reanalisar", só análise posterior ao pedido), devolve o resto a `pendente` e grava `logs/fichas/<slug>-ultimo.json` (o app avisa e abre o painel do primeiro feito). Rodada que morreu sem fechar volta a `pendente` sozinha na próxima leitura do app. Se a sessão rodou só pela frase, rode `node tools/fichas-fila.mjs fechar <slug>` no fim.
+- **Tempo e custo medidos (2026-10-08, 3 rodadas de 1 TikTok da Corpora):** 2,7 · 8,5 · 7,4 min. O app estima ~5 min + 1,5 min por item e ~US$ 0,08 por item (equivalente na API, §5b; pela assinatura não há cobrança por token, consome a cota).

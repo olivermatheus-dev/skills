@@ -1,6 +1,6 @@
 // Lista de conteúdos dos concorrentes (barra de filtros + grade de cards ou tabela), igual na aba Conteúdos e na ficha.
 // Filtros, ordenação e vista ficam na URL (?vista=tabela&ordem=mercado). Quem usa só entrega as linhas e as ações.
-import { useDeferredValue, useMemo, type ReactNode } from 'react';
+import { useDeferredValue, useMemo, useState, type ReactNode } from 'react';
 import { ArrowUpDown, CalendarDays, Clapperboard, Film, GalleryHorizontal, Image as ImageIcon, LayoutDashboard, LayoutGrid, ListFilter, Radio, Shapes, Share2, Sparkles, Table as TableIcon, Users, Video } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { Empty, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../kit';
@@ -8,6 +8,8 @@ import { FillBox } from '../fill';
 import { Avatar, PlatformIcon, STATUS_COLOR, STATUS_LABEL, TYPE_LABEL, fmtPct, platformLabel, timeAgo, type Row } from './lib';
 import { AnalyzedBadge, FavStar, ItemCard, RatioCell, type FichaSelo, Thumb, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from './Items';
 import ContentsPanel from './ContentsPanel';
+import { useFichasFila } from './ficha/useFila';
+import { AnalisarDialog, AnalisarMenu, Caixa, FilaFaixa, SelecaoBar, useSelecao } from './ficha/Selecao';
 import { DataTable, FavToggle, FilterBar, FlagToggle, ViewToggle, parseSort, sortRows, useUrlState, type BarFilter, type Col, type SortDef } from './toolbar';
 
 export type CRow = Row & { compId?: string; compName?: string };
@@ -60,7 +62,9 @@ const DEFAULTS_ALL = { ...DEFAULTS, periodo: 'tudo' };
 
 const VIEWS_PANEL = [{ value: 'grade', label: 'Grade', icon: LayoutGrid }, { value: 'tabela', label: 'Tabela', icon: TableIcon }, { value: 'painel', label: 'Painel', icon: LayoutDashboard }];
 
-export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass, fichaOf }: {
+export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass, fichaOf, compId, compLabel }: {
+  /** ficha de um concorrente: as linhas não trazem compId (040 E usa para a fila) */
+  compId?: string; compLabel?: string;
   /** 040 D: análise profunda do item (selo "Analisado" e filtro "Só analisados") */
   fichaOf?: (r: CRow) => FichaSelo | undefined;
   rows: CRow[]; slug: string; owners?: Map<string, Owner>; showComp: boolean; showPlatformFilter?: boolean;
@@ -82,6 +86,19 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const needle = q.toLowerCase();
   const shown = useMemo(() => sortRows(rows.filter((r) => passes(r, v, needle, undefined, fichaOf)), SORTS, sort),
     [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, v.an, fichaOf, needle, sort.k, sort.dir]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // 040 E: seleção para análise + fila (só onde há fichas). Ao terminar a rodada, abre o painel do primeiro analisado.
+  const selOn = !!fichaOf;
+  const compOf = (r: CRow) => r.compId ?? compId;
+  const fila = useFichasFila(selOn ? slug : '', (u) => {
+    const f = u.feitos[0];
+    const r = f && rows.find((x) => compOf(x) === f.comp && x.mk === f.key);
+    if (r) onOpen(r);
+  });
+  const seloOf = (r: CRow) => fila.selo(compOf(r), r.mk, fichaOf?.(r));
+  const s = useSelecao(shown, compOf, seloOf);
+  const [dialogo, setDialogo] = useState(false);
+  const compName = (c: string) => owners?.get(c)?.name ?? (c === compId && compLabel ? compLabel : c);
   /** contagem de cada opção dos selects: respeita período, status, busca e os OUTROS selects */
   const counts = useMemo(() => {
     const by = (skip: 'rede' | 'formato' | 'conc', key: (r: CRow) => string | undefined) => {
@@ -128,7 +145,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
         <SelectField size="sm" aria-label="Ordenar" icon={<ArrowUpDown />} disabled={vista === 'painel'} title={vista === 'painel' ? 'O Painel não usa ordenação' : undefined} value={sort.k} options={sortOpts} placeholder={SORTS[sort.k]?.label} onChange={(x) => set({ ordem: x, asc: '' })} />
       </>}
       secondary={secondary}
-      trailing={<>{fichaOf && (nAnalisados > 0 || v.an) ? <FlagToggle on={!!v.an} onChange={(x) => set({ an: x ? '1' : '' })} icon={Sparkles} label="Só analisados" tone="violet"
+      trailing={<>{selOn && vista !== 'painel' && <AnalisarMenu s={s} rede={v.rede} ordem={SORTS[sort.k]?.label ?? sort.k} />}{fichaOf && (nAnalisados > 0 || v.an) ? <FlagToggle on={!!v.an} onChange={(x) => set({ an: x ? '1' : '' })} icon={Sparkles} label="Só analisados" tone="violet"
         title={v.an ? 'Mostrando só os conteúdos com análise profunda da IA' : `Só os ${nAnalisados} conteúdo(s) com análise profunda da IA`} /> : null}<FavToggle on={!!v.fav} onChange={(x) => set({ fav: x ? '1' : '' })} /><ViewToggle value={vista} options={panel ? VIEWS_PANEL : undefined} onChange={(x) => set({ vista: x })} /></>}
       active={active}
       onClear={() => reset(['q', 'periodo', 'rede', 'formato', 'conc', 'status', 'fav', 'an'])}
@@ -137,10 +154,16 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
 
   const ownerOf = (r: CRow) => { const o = r.compId ? owners?.get(r.compId) : undefined; return o ? { name: o.name, avatar: <Avatar name={o.name} size={16} local={o.local} remote={o.remote} className="!ring-0" /> } : undefined; };
 
+  const selCol: Col<CRow>[] = selOn ? [{
+    k: 'sel', select: true, width: '36px', pin: 'left',
+    label: <Caixa checked={s.todos} onChange={s.toggleTodos} disabled={!s.nElegiveis} label="Selecionar todos os visíveis para analisar" title="Selecionar todos os visíveis (sem os já analisados, a menos que “Incluir já analisados” esteja ligado)" />,
+    render: (r) => { const m = s.motivo(r); return <Caixa checked={s.has(r)} onChange={() => s.toggle(r)} disabled={!!m} title={m ?? 'Selecionar para analisar'} label={`Selecionar ${titleOf(r)} para analisar`} />; },
+  }] : [];
   const cols: Col<CRow>[] = [
+    ...selCol,
     { k: 'thumb', label: '', width: '64px', pin: 'left', render: (r) => <Thumb r={r} media={mediaOf(r)} className="h-8 w-14 rounded" /> },
     { k: 'title', label: 'Título', sort: 'title', width: '180px', pin: 'left', className: 'max-w-[200px]', render: (r) => (
-      <div className="flex items-center gap-1.5 min-w-0">{r.mark?.favorite && <FavStar on size="size-3.5" />}{fichaOf?.(r) && <AnalyzedBadge ficha={fichaOf(r)!} compact />}<span className="truncate font-medium" title={titleOf(r)}>{titleOf(r)}</span></div>
+      <div className="flex items-center gap-1.5 min-w-0">{r.mark?.favorite && <FavStar on size="size-3.5" />}{seloOf(r) && <AnalyzedBadge ficha={seloOf(r)!} compact />}<span className="truncate font-medium" title={titleOf(r)}>{titleOf(r)}</span></div>
     ) },
     ...(showComp ? [{ k: 'comp', label: 'Concorrente', sort: 'comp', render: (r: CRow) => { const o = ownerOf(r); return o ? <span className="inline-flex items-center gap-1.5 whitespace-nowrap">{o.avatar}{o.name}</span> : null; } } as Col<CRow>] : []),
     { k: 'platform', label: 'Rede', sort: 'platform', render: (r) => <span title={platformLabel(r.platform)}><PlatformIcon platform={r.platform} size={16} /></span> },
@@ -160,14 +183,15 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const grid = (
     <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
       {shown.map((r) => (
-        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)} ficha={fichaOf?.(r)}
+        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)} ficha={seloOf(r)}
+          select={selOn ? { checked: s.has(r), disabled: !!s.motivo(r), title: s.motivo(r) ?? 'Selecionar para analisar', always: s.itens.length > 0 && !s.motivo(r), onChange: () => s.toggle(r) } : undefined}
           onMark={(patch) => onMark(r, patch)} onIdea={() => onIdea(r)} onOpen={() => onOpen(r)} />
       ))}
     </div>
   );
   const table = (
-    <DataTable rows={shown} cols={cols} colsKey="conteudos" rowKey={rowId} sort={sort} fill={fill} onRowClick={(r) => onOpen(r)}
-      rowClass={(r) => (r.mark?.status === 'descartada' ? 'opacity-55' : undefined)}
+    <DataTable rows={shown} cols={cols} colsKey="conteudos" rowKey={rowId} sort={sort} fill={fill} padBottom={s.itens.length > 0 || s.fora > 0} onRowClick={(r) => onOpen(r)}
+      rowClass={(r) => cx(r.mark?.status === 'descartada' && 'opacity-55', s.has(r) && '[&>td]:!bg-primary-soft') || undefined}
       onSort={(k, dir) => set({ ordem: k, asc: dir === 1 ? '1' : '' })} />
   );
 
@@ -176,12 +200,15 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
       {stickyTop != null
         ? <div style={{ top: stickyTop }} className={cx('sticky z-10 -mx-8 px-8 py-2 mb-2 bg-background/95 backdrop-blur border-b border-border', stickyClass)}>{bar}</div>
         : <div className="mb-3">{bar}</div>}
+      {selOn && <FilaFaixa fila={fila} />}
       {shown.length > 0 && summary && vista !== 'painel' && <div className="mb-4">{summary(shown)}</div>}
       {rows.length > 0 && !shown.length && <Empty title="Nada com esses filtros" hint={v.periodo !== 'tudo' ? 'Tente um período maior ou limpe os filtros.' : 'Limpe os filtros para ver tudo.'} />}
       {shown.length > 0 && (vista === 'painel'
         ? <ContentsPanel rows={shown} all={rows} periodo={v.periodo} owners={owners} mediaOf={mediaOf} ideaBusy={ideaBusy} onMark={onMark} onOpen={onOpen}
             onGoTable={() => set({ vista: 'tabela', ordem: 'outlier', asc: '' })} />
         : vista === 'tabela' ? table : fill ? <FillBox>{grid}</FillBox> : grid)}
+      {selOn && vista !== 'painel' && <SelecaoBar s={s} busy={fila.pedir.isPending} onAnalisar={() => setDialogo(true)} />}
+      {selOn && <AnalisarDialog open={dialogo} onOpenChange={setDialogo} s={s} fila={fila} compName={compName} onDone={s.limpar} />}
     </>
   );
 }

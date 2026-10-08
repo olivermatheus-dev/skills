@@ -101,9 +101,6 @@
       "quadros": 0.9
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "analise": {
     "versaoPrompt": 1,
     "versaoVocab": 1,
@@ -295,5 +292,10 @@
         "exemplo": "ilustração da Caixa de Skinner aos 3 s"
       }
     ]
-  }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-tiktok-todos-analisados"
+  ]
 }

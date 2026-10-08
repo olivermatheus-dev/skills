@@ -176,6 +176,8 @@ export interface Col<T> {
   pin?: 'left' | 'right';
   /** coluna secundária: entra no seletor "Colunas" (só com `colsKey`); `off` = começa escondida */
   optional?: boolean; off?: boolean;
+  /** coluna de seleção (caixas): o seletor "Colunas" vai para a coluna seguinte */
+  select?: boolean;
 }
 
 const colPx = (c: { width?: string }) => (c.width && c.width.endsWith('px') ? parseFloat(c.width) : 96);
@@ -201,14 +203,15 @@ function useHiddenCols<T>(key: string | undefined, cols: Col<T>[]) {
  * caixa (`fill` = ocupa o resto da tela), linha clicável. Colunas com `pin` ficam fixas à esquerda/direita ao rolar na horizontal
  * (as medidas e o status nunca somem); `colsKey` liga o seletor "Colunas" no cabeçalho da primeira coluna.
  */
-export function DataTable<T>({ rows, cols: allCols, rowKey, sort, onSort, onRowClick, fill, rowClass, colsKey }: {
-  rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; sort: SortState; onSort: (k: string, dir: 1 | -1) => void; onRowClick?: (r: T) => void; fill?: boolean; rowClass?: (r: T) => string | undefined;
+export function DataTable<T>({ rows, cols: allCols, rowKey, sort, onSort, onRowClick, fill, rowClass, colsKey, padBottom }: {
+  rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; sort: SortState; onSort: (k: string, dir: 1 | -1) => void; onRowClick?: (r: T) => void; fill?: boolean; rowClass?: (r: T) => string | undefined; /** espaço no fim da rolagem (barra flutuante por cima, 040 E) */ padBottom?: boolean;
   colsKey?: string;
 }) {
   const [ref, h] = useFillHeight();
   const [hidden, toggleCol] = useHiddenCols(colsKey, allCols);
   const cols = allCols.filter((c) => !(colsKey && c.optional && hidden.has(c.k)));
   const optional = allCols.filter((c) => c.optional);
+  const pickerAt = Math.max(0, cols.findIndex((c) => !c.select));
   // deslocamento de cada coluna fixa = soma das larguras das fixas que vêm antes (esquerda) ou depois (direita)
   const pinStyle = new Map<string, React.CSSProperties>();
   let acc = 0;
@@ -222,7 +225,7 @@ export function DataTable<T>({ rows, cols: allCols, rowKey, sort, onSort, onRowC
     onSort(c.sort, sort.k === c.sort ? (sort.dir === 1 ? -1 : 1) : isText ? 1 : -1);
   };
   return (
-    <div ref={fill ? ref : undefined} style={fill ? { height: h } : undefined} className={cx('bg-card border border-border rounded-xl overflow-auto', !fill && 'max-w-full max-h-[calc(100vh-14rem)]')}>
+    <div ref={fill ? ref : undefined} style={fill ? { height: h } : undefined} className={cx('bg-card border border-border rounded-xl overflow-auto', padBottom && 'pb-16', !fill && 'max-w-full max-h-[calc(100vh-14rem)]')}>
       <table className="w-full text-sm border-separate border-spacing-0">
         <thead>
           <tr>{cols.map((c, i) => {
@@ -234,7 +237,7 @@ export function DataTable<T>({ rows, cols: allCols, rowKey, sort, onSort, onRowC
                 className={cx('sticky top-0 bg-muted px-2 py-2 font-medium text-xs whitespace-nowrap select-none border-b border-border', pinned ? 'z-20' : 'z-10', edge(c.k), c.num ? 'text-right' : 'text-left',
                   c.sort ? 'cursor-pointer hover:text-foreground' : '', on ? 'text-foreground' : 'text-muted-foreground')}>
                 <span className={cx('inline-flex items-center gap-1', c.num && 'flex-row-reverse')}>
-                  {i === 0 && colsKey && optional.length > 0
+                  {i === pickerAt && colsKey && optional.length > 0
                     ? <ColumnsPicker cols={optional} hidden={hidden} onToggle={toggleCol} />
                     : c.label}
                   {c.sort && <span className="inline-flex items-center justify-center w-3 h-3">{on && (sort.dir === 1 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />)}</span>}

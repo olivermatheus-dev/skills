@@ -38,9 +38,6 @@
     "amostraMercado": 30,
     "base": "views"
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "insumos": {
     "hash": "3cd886a4a171805d63f4711806c1d20309ec352e",
     "hashEntrada": "972890402189e426fb5e1e407f45dda2b6b7563d",
@@ -50,31 +47,45 @@
     "quadros": [
       {
         "tMs": 0,
-        "arquivo": "quadros/00000ms.jpg"
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher jovem em close frontal dentro de quarto, mão no rosto em postura de espanto",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 500,
-        "arquivo": "quadros/00500ms.jpg"
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mesmo enquadramento, mulher com expressão espantada similar",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 1500,
-        "arquivo": "quadros/01500ms.jpg"
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mulher com expressão de choque, overlay animado com rinoceronte branco em transição",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 3000,
-        "arquivo": "quadros/03000ms.jpg"
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Enquadramento da mulher com overlay centralizado mostrando rinoceronte branco em close",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 5000,
-        "arquivo": "quadros/05000ms.jpg"
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Mulher com filtro animal de orelhas felinas, expressão mais natural, mão no rosto",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 5400,
-        "arquivo": "quadros/05400ms.jpg"
+        "arquivo": "quadros/05400ms.jpg",
+        "descricao": "Mulher com filtro animal de orelhas felinas, expressão de riso e gargalhada",
+        "ocr": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pagar a própria mãe"
       },
       {
         "tMs": 10650,
-        "arquivo": "quadros/10650ms.jpg"
+        "arquivo": "quadros/10650ms.jpg",
+        "descricao": "Personagem animada estilo cartoon com expressão de surpresa",
+        "ocr": "SINIXITRO"
       }
     ],
     "cenas": [
@@ -96,5 +107,169 @@
       "transcrever": 4,
       "quadros": 1.1
     }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 3,
+    "insumosHash": "3cd886a4a171805d63f4711806c1d20309ec352e",
+    "modelo": "claude-opus-4-8",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T19:27:42Z",
+    "custo": {
+      "entrada": 0,
+      "saida": 0,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 10.8,
+      "publicadoEm": "2026-10-06",
+      "tema": {
+        "texto": "Freud e o complexo de Édipo em meme",
+        "tag": "teorias-e-autores"
+      },
+      "mensagem": "A teoria de Freud sobre desejo pela mãe soa absurda — piada interna do nicho.",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "comunidade"
+        ]
+      },
+      "formato": "meme-trend-video",
+      "estiloProducao": "ugc-celular",
+      "headline": {
+        "texto": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pegar a própria mãe",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pegar a própria mãe",
+        "tipo": "pov-esquete",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "rosto-close",
+          "gatilho": "identificacao"
+        },
+        {
+          "t": "1–2 s",
+          "elemento": "imagem-sobreposta",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "5 s",
+          "elemento": "payoff-visual-imediato",
+          "gatilho": "humor-alivio"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "humor-alivio",
+          "onde": "tela 0 s",
+          "trecho": "POV: você é um médico no século 19 ouvindo um calvo barbudo e fumante dizer que as pessoas são assim pq querem pegar a própria mãe"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "quadro 1,5 s",
+          "trecho": "[quadro 1,5 s: imagem borrada sobreposta ao rosto, com um grande '?']"
+        },
+        {
+          "id": "pertencimento",
+          "onde": "legenda",
+          "trecho": "#psicologia"
+        }
+      ],
+      "estrutura": {
+        "macro": "esquete-punchline",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0–1,5 s",
+            "oque": "Texto POV sobre médico ouvindo Freud; rosto em close, espanto, dedo na boca"
+          },
+          {
+            "bloco": "contexto",
+            "quando": "1,5–5 s",
+            "oque": "Imagem borrada com '?' entra sobre o rosto; expressão de choque e descrédulo"
+          },
+          {
+            "bloco": "payoff",
+            "quando": "5–10,8 s",
+            "oque": "Filtro de orelhas de gato, gargalhada e corte para personagem animada"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "psicologo-autonomo",
+          "estudante"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "leve-humor",
+        "ironico"
+      ],
+      "som": "audio-trend",
+      "legendaTela": true,
+      "ritmo": {
+        "cortesPorMin": 16.7
+      },
+      "hashtags": [
+        "#foryou",
+        "#psicologia"
+      ],
+      "porQue": "hipótese: humor de nicho sobre Freud rendeu 1,66× a mediana do perfil e ~17% de engajamento; piada reconhecível gera like e compartilhamento fáceis.",
+      "adaptar": [
+        {
+          "ideia": "POV: você descobre que dá pra juntar agenda, prontuário e cobrança num lugar só; reação de alívio",
+          "formato": "meme-trend-video"
+        },
+        {
+          "ideia": "Reação em POV ao caos de usar 5 apps numa segunda-feira, com punchline no fim",
+          "formato": "meme-trend-video"
+        },
+        {
+          "ideia": "POV: fim do mês fechando o financeiro no susto, com overlay de planilha confusa e cara de choque",
+          "formato": "meme-trend-video"
+        }
+      ],
+      "riscos": [],
+      "replicavel": 1,
+      "confianca": {
+        "texto": "alta",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [
+        "audio-sem-fala"
+      ],
+      "autoria": "proprio",
+      "serie": null
+    },
+    "termosNovos": []
   }
 }

@@ -1,0 +1,37 @@
+{
+  "id": "meme-trend-video",
+  "nome": "Meme trend video",
+  "status": "rascunho",
+  "midia": "video",
+  "essencia": "Vídeo curto (5–25 s) de meme: áudio conhecido ou dublado + texto na tela que troca o contexto para o nicho.",
+  "tipos": [
+    "humor"
+  ],
+  "funil": [],
+  "canais": [],
+  "proporcoes": [],
+  "quandoUsar": [],
+  "quandoNaoUsar": [],
+  "estrutura": [],
+  "variacoes": [],
+  "observacoes": "Proposto pela análise de concorrentes (tarefa 040), aceito no relatório 2026-10-08-tiktok-todos-analisados. Exemplo: POV estudante de psicologia comendo doce → Caixa de Skinner → cães de Pavlov",
+  "exemplos": [],
+  "referencias": [
+    {
+      "url": "https://www.tiktok.com/@usecorpora/video/7691064446289988884",
+      "observacao": "ficha tiktok:7691064446289988884",
+      "adicionadoEm": "2026-10-08"
+    },
+    {
+      "url": "https://www.tiktok.com/@usecorpora/video/7690642769802546452",
+      "observacao": "ficha tiktok:7690642769802546452",
+      "adicionadoEm": "2026-10-08"
+    },
+    {
+      "url": "https://www.tiktok.com/@usecorpora/video/7691719524000730389",
+      "observacao": "ficha tiktok:7691719524000730389",
+      "adicionadoEm": "2026-10-08"
+    }
+  ],
+  "updatedAt": "2026-10-08T19:16:36Z"
+}

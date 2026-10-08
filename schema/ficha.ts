@@ -106,6 +106,8 @@ export const FichaQuadro = z.object({
   arquivo: Txt.min(1),
   descricao: Txt.optional(),
   ocr: Txt.optional(),
+  /** assinatura visual (média 16×16 em cinza, hex): o preparo só descarta descrição/OCR se o quadro mudou */
+  assinatura: Txt.optional(),
 });
 
 export const FichaInsumos = z.object({

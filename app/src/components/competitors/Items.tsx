@@ -1,7 +1,7 @@
 // Cards de conteúdo (vídeo/post) com as medidas de fora da curva, métricas e crescimento + painel de detalhe com marcação e "Virar ideia".
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, Clock, ExternalLink, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
+import { Activity, Clock, ExternalLink, Loader2, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../kit';
 import {
@@ -85,18 +85,23 @@ export function RatioCell({ v, tip }: { v?: number; tip?: ReactNode }) {
   return <Tip content={tip}><span className={cx('tabular-nums', v >= 3 ? 'font-semibold text-amber-700' : v >= 1.5 ? 'font-medium' : 'text-muted-foreground')}>{v >= 3 && <Flame className="inline size-3 -mt-0.5 mr-0.5" />}{fmtRatio(v)}</span></Tip>;
 }
 
-export interface FichaSelo { analisada: boolean; naFila: boolean; geradoEm?: string; editados: number }
+export interface FichaSelo { analisada: boolean; naFila: boolean; geradoEm?: string; editados: number; /** 040 E: a rodada da fila está analisando este item agora */ analisando?: boolean }
 /** selo da análise profunda (040): roxo = analisado (abre o painel), escuro = pedido na fila. `compact` = só o ícone (tabela) */
 export function AnalyzedBadge({ ficha, compact }: { ficha: FichaSelo; compact?: boolean }) {
-  if (!ficha.analisada && !ficha.naFila) return null;
-  const tip = ficha.analisada
-    ? `Analisado pela IA${ficha.geradoEm ? ` em ${fmtDate(ficha.geradoEm)}` : ''}${ficha.editados ? ` · ${ficha.editados} campo(s) editado(s) por você` : ''}.\nAbre o painel da análise.`
-    : 'Na fila de análise: roda quando você pedir a fila de fichas no Claude Code.';
+  if (!ficha.analisada && !ficha.naFila && !ficha.analisando) return null;
+  // "analisando" e "na fila" mandam sobre "analisado" (reanálise pedida)
+  const estado = ficha.analisando ? 'analisando' : ficha.naFila ? 'fila' : 'analisado';
+  const tip = estado === 'analisando' ? 'A IA está analisando este conteúdo agora (acompanhe na faixa acima da lista).'
+    : estado === 'fila' ? `Na fila de análise${ficha.analisada ? ' (reanálise)' : ''}: roda com "Rodar agora" ou "roda a fila de fichas" no Claude Code.`
+    : `Analisado pela IA${ficha.geradoEm ? ` em ${fmtDate(ficha.geradoEm)}` : ''}${ficha.editados ? ` · ${ficha.editados} campo(s) editado(s) por você` : ''}.\nAbre o painel da análise.`;
+  const label = { analisando: 'Analisando', fila: 'Na fila', analisado: 'Analisado' }[estado];
   return (
     <Tip content={tip}>
-      <span aria-label={ficha.analisada ? 'Analisado' : 'Na fila de análise'} className={cx('inline-flex items-center gap-1 rounded-md font-medium whitespace-nowrap shrink-0', compact ? 'p-0.5' : 'px-1.5 py-0.5 text-[11px] shadow-sm',
-        ficha.analisada ? (compact ? 'text-violet-600' : 'bg-violet-600 text-white') : (compact ? 'text-muted-foreground' : 'bg-black/65 text-white'))}>
-        {ficha.analisada ? <Sparkles className="size-3" /> : <Clock className="size-3" />}{!compact && (ficha.analisada ? 'Analisado' : 'Na fila')}
+      <span aria-label={label} className={cx('inline-flex items-center gap-1 rounded-md font-medium whitespace-nowrap shrink-0', compact ? 'p-0.5' : 'px-1.5 py-0.5 text-[11px] shadow-sm',
+        estado === 'analisado' ? (compact ? 'text-violet-600' : 'bg-violet-600 text-white')
+        : estado === 'analisando' ? (compact ? 'text-violet-600' : 'bg-violet-100 text-violet-800 ring-1 ring-violet-300')
+        : (compact ? 'text-muted-foreground' : 'bg-black/65 text-white'))}>
+        {estado === 'analisado' ? <Sparkles className="size-3" /> : estado === 'analisando' ? <Loader2 className="size-3 animate-spin" /> : <Clock className="size-3" />}{!compact && label}
       </span>
     </Tip>
   );
@@ -112,9 +117,11 @@ export const FavStar = ({ on, onClick, size = 'size-4' }: { on: boolean; onClick
   </button>
 );
 
-export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner, ficha }: {
+export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner, ficha, select }: {
   /** 040 D: selo "Analisado" (ou "Na fila") no canto da miniatura */
   ficha?: FichaSelo;
+  /** 040 E: caixa de seleção para analisar (aparece ao passar o mouse ou quando já há seleção) */
+  select?: { checked: boolean; disabled?: boolean; title?: string; always: boolean; onChange: () => void };
   r: Row; media?: string; showPlatform: boolean; slug: string; ideaBusy: boolean;
   /** concorrente dono do conteúdo (feed): avatar + nome logo abaixo do título */
   owner?: { name: string; avatar?: ReactNode };
@@ -125,10 +132,17 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
   const dGrowth = fmtDelta(r.viewsDelta);
   const hot = (r.outlier ?? 0) >= 3 || (r.outlierMercado ?? 0) >= 3;
   return (
-    <div className={cx('bg-card border rounded-xl overflow-hidden flex flex-col transition hover:shadow-md', hot ? 'border-amber-300 ring-1 ring-amber-200' : 'border-border', status === 'descartada' && 'opacity-55')}>
+    <div className={cx('group/card relative bg-card border rounded-xl overflow-hidden flex flex-col transition hover:shadow-md', select?.checked ? 'border-primary ring-2 ring-primary/40' : hot ? 'border-amber-300 ring-1 ring-amber-200' : 'border-border', status === 'descartada' && 'opacity-55')}>
+      {select && (
+        <label title={select.title} onClick={(e) => e.stopPropagation()}
+          className={cx('absolute top-2 left-2 z-[2] grid place-items-center size-6 rounded-md bg-white/95 shadow-sm ring-1 ring-black/10 transition',
+            select.checked || select.always ? 'opacity-100' : select.disabled ? 'opacity-0 group-hover/card:opacity-50' : 'opacity-0 group-hover/card:opacity-100 focus-within:opacity-100', select.disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>
+          <input type="checkbox" aria-label={`Selecionar ${titleOf(r)} para analisar`} className="size-4 accent-[var(--primary)] cursor-[inherit]" checked={select.checked} disabled={select.disabled} onChange={select.onChange} />
+        </label>
+      )}
       <button type="button" onClick={onOpen} className="relative block text-left" aria-label={`Abrir ${titleOf(r)}`}>
         <Thumb r={r} media={media} className="aspect-video" />
-        <div className="absolute top-2 left-2"><OutlierBadges r={r} /></div>
+        <div className={cx('absolute top-2 transition-[left]', select && (select.checked || select.always) ? 'left-10' : 'left-2', select && 'group-hover/card:left-10')}><OutlierBadges r={r} /></div>
         {ficha && <div className="absolute top-2 right-2"><AnalyzedBadge ficha={ficha} /></div>}
         <div className="absolute bottom-2 left-2 flex gap-1">
           <span className="bg-black/70 text-white text-[10px] font-medium px-1.5 py-0.5 rounded uppercase tracking-wide">{TYPE_LABEL[r.item.type] ?? r.item.type}</span>

@@ -124,9 +124,6 @@
       "quadros": 1.5
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "analise": {
     "versaoPrompt": 1,
     "versaoVocab": 1,
@@ -289,5 +286,10 @@
         "exemplo": "a assombração de Freud toda vez que alguém pronuncia FrEUd e não FrOId"
       }
     ]
-  }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-tiktok-todos-analisados"
+  ]
 }

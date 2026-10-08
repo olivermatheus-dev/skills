@@ -128,9 +128,6 @@
       "quadros": 1.4
     }
   },
-  "anteriores": [],
-  "override": {},
-  "relatorios": [],
   "analise": {
     "versaoPrompt": 1,
     "versaoVocab": 1,
@@ -284,5 +281,10 @@
         "exemplo": "capa de \"O sujeito lacaniano: entre a linguagem e o gozo\" aos 0,5 s"
       }
     ]
-  }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [
+    "2026-10-08-tiktok-todos-analisados"
+  ]
 }

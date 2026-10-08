@@ -3,6 +3,9 @@
 //   pacote   <empresa> <concorrente> <chave>                   imprime o pacote enxuto que o Opus recebe
 //   quadros  <empresa> <concorrente> <arquivo.json>             grava descrição/OCR dos quadros (Haiku) nos insumos: { "<chave>": [{ tMs, descricao, ocr }] }
 //   salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]   valida (schema + vocabulário) e grava a análise
+//   relatorio <empresa> <concorrente> [--rede x] [--itens a,b | --top N] [--rodada id] [--pacote]   agregados → relatorios/<id>.md
+//   relatorio <empresa> <concorrente> --rodada id --leitura arquivo.json                           grava a leitura do Opus
+//   termo    <empresa> aceitar|recusar <grupo>:<valor> [--rodada id --de <concorrente>]              termo novo em lote
 //   validar                                                    confere todas as fichas (o mesmo do npm run validate)
 // chave = <plataforma>:<idDoItem> (ex.: tiktok:7691064446289988884)
 import { readFileSync } from 'node:fs';
@@ -13,13 +16,23 @@ import { dadosDir, loadVocab, nowIso, parseKey, readFicha, writeFicha } from './
 
 const argv = process.argv.slice(2);
 const flags = new Set(argv.filter((a) => a.startsWith('--')));
-const pos = argv.filter((a) => !a.startsWith('--'));
+/** opções com valor: --rede tiktok, --itens a,b, --top 10, --rodada id, --leitura arq.json, --de concorrente */
+const COM_VALOR = new Set(['--rede', '--itens', '--top', '--rodada', '--leitura', '--de', '--motivo']);
+const opt: Record<string, string> = {};
+const pos: string[] = [];
+for (let i = 0; i < argv.length; i++) {
+  if (COM_VALOR.has(argv[i])) opt[argv[i].slice(2)] = argv[++i] ?? '';
+  else if (!argv[i].startsWith('--')) pos.push(argv[i]);
+}
 const [cmd, slug, comp, ...resto] = pos;
 const USO = `uso:
   npm run fichas -- preparar <empresa> <concorrente> <plataforma:id>… [--reanalisar]
   npm run fichas -- pacote   <empresa> <concorrente> <plataforma:id>
   npm run fichas -- quadros  <empresa> <concorrente> <arquivo.json>   (descrição/OCR do Haiku)
   npm run fichas -- salvar   <empresa> <concorrente> <arquivo.json> [--reanalisar]
+  npm run fichas -- relatorio <empresa> <concorrente> [--rede tiktok] [--itens a,b | --top 10] [--rodada id] [--pacote]
+  npm run fichas -- relatorio <empresa> <concorrente> --rodada <id> --leitura <arquivo.json>
+  npm run fichas -- termo    <empresa> aceitar|recusar <grupo>:<valor> [--de <concorrente> --rodada <id>] [--motivo "…"]
   npm run fichas -- validar`;
 const falha: (m: string) => never = (m) => { console.error(`❌ ${m}`); process.exit(1); };
 
@@ -31,7 +44,37 @@ async function main() {
     console.log(errs.length ? `\n${errs.length} ficha(s) com erro` : '✅ fichas, vocabulário e relatórios válidos');
     process.exit(errs.length ? 1 : 0);
   }
+  if (cmd === 'termo') {
+    // termo <empresa> aceitar|recusar <grupo>:<valor>; a definição vem do relatório (--de + --rodada) ou de --motivo na recusa
+    const acao = comp, alvo = resto[0] ?? '';
+    const [grupo, valor] = alvo.split(':');
+    if (!slug || !['aceitar', 'recusar'].includes(acao ?? '') || !grupo || !valor) falha(USO);
+    const { decidirTermos } = await import('./decidir');
+    const r = decidirTermos(slug, opt.de ?? '', opt.rodada ?? '', [{ grupo, valor, decisao: acao === 'aceitar' ? 'aceito' : 'recusado', motivo: opt.motivo }]);
+    for (const x of r) console.log(`${x.ok ? '✅' : '❌'} ${x.grupo}:${x.valor} ${x.msg}`);
+    process.exit(r.every((x) => x.ok) ? 0 : 1);
+  }
   if (!cmd || !slug || !comp) falha(USO);
+
+  if (cmd === 'relatorio') {
+    const R = await import('./relatorio');
+    if (opt.leitura) {
+      if (!opt.rodada) falha('informe --rodada <id> do relatório que recebe a leitura');
+      const r = R.salvarLeitura(slug, comp, opt.rodada, opt.leitura);
+      console.log(`✅ leitura gravada em companies/${slug}/competitors/${comp}/relatorios/${r.id}.md (${r.modelo}); nenhum número fora dos agregados`);
+      return;
+    }
+    const rede = opt.rede ?? (opt.itens ? opt.itens.split(':')[0] : '');
+    if (!rede) falha('informe --rede (tiktok, youtube, instagram) ou --itens');
+    const r = R.gerarRelatorio(slug, comp, { rede, itens: opt.itens?.split(',').map((x) => x.trim()).filter(Boolean), top: opt.top ? Number(opt.top) : undefined, rodada: opt.rodada });
+    const am = (r.agregados as { amostra: { n: number; nivel: string; avisos: string[] } }).amostra;
+    console.log(`✅ ${r.id}: ${am.n} item(ns), ${am.nivel === 'padroes' ? 'padrões' : 'observações (amostra pequena)'} · ${r.termosNovos.filter((t) => !t.decisao).length} termo(s) novo(s) pendente(s)${r.leitura ? ' · leitura mantida' : ' · leitura pendente'}`);
+    for (const a of am.avisos) console.log(`   · ${a}`);
+    console.log(`   arquivo: companies/${slug}/competitors/${comp}/relatorios/${r.id}.md`);
+    if (flags.has('--pacote')) console.log(JSON.stringify(R.pacoteRelatorio(slug, comp, r.id), null, 2));
+    else if (!r.leitura) console.log(`   próximo: o Opus lê --pacote e grava com: npm run fichas -- relatorio ${slug} ${comp} --rodada ${r.id} --leitura <arquivo.json>`);
+    return;
+  }
 
   if (cmd === 'preparar') {
     if (!resto.length) falha('informe ao menos uma chave <plataforma:id>');

@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "kind": "conteudo",
+  "key": "tiktok:7687998082692304148",
+  "competitorId": "corpora",
+  "url": "https://www.tiktok.com/@usecorpora/video/7687998082692304148",
+  "item": {
+    "id": "7687998082692304148",
+    "url": "https://www.tiktok.com/@usecorpora/video/7687998082692304148",
+    "type": "video",
+    "title": "URGENTE!!! ‼️ 🚨 #fyp #meme #noticia #urgente🚨",
+    "caption": "URGENTE!!! ‼️ 🚨 #fyp #meme #noticia #urgente🚨",
+    "publishedAt": "2026-09-21T14:39:08Z",
+    "durationS": 15,
+    "thumbnail": "https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/oQf115IaCtBW4xGi3QiB3ELYAEm2IwAwKFBuiA~tplv-tiktokx-origin.image?dr=14575&x-expires=1791644400&x-signature=FIqjLh%2B6B2NMAxKptyh9PAV1Th0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my3",
+    "thumbnailLocal": "media/tiktok-usecorpora/thumbs/7687998082692304148-35ff.jpg",
+    "metrics": {
+      "views": 1952,
+      "likes": 162,
+      "comments": 0,
+      "shares": 8
+    }
+  },
+  "origem": {
+    "arquivo": "snapshots/tiktok-usecorpora/2026-10-08T15-10-33.json",
+    "collectedAt": "2026-10-08T15:10:33Z"
+  },
+  "medidas": {
+    "views": 1952,
+    "likes": 162,
+    "comments": 0,
+    "shares": 8,
+    "seguidores": 1911,
+    "xPerfil": 2.5334198572355615,
+    "porSeguidor": 1.02145473574045,
+    "engajamento": 0.08709016393442623,
+    "escopoMercado": "rede",
+    "amostraMercado": 30,
+    "base": "views"
+  },
+  "insumos": {
+    "hash": "c02b976037f2db6779c2f68b37a9577a1ac5f791",
+    "hashEntrada": "a7a7c1139fd46e04c060af29ccfd1cf6ef98f548",
+    "preparadoEm": "2026-10-08T19:05:27Z",
+    "preparadoPor": "script",
+    "legendaLimpa": "URGENTE!!! ‼️ 🚨 #fyp #meme #noticia #urgente🚨",
+    "quadros": [
+      {
+        "tMs": 0,
+        "arquivo": "quadros/00000ms.jpg",
+        "descricao": "Mulher de cabelo ruivo cacheado, com a mão cobrindo a boca, olhando para a câmera, enquadramento de busto em sala clara; card de notícia sobreposto na parte inferior com papagaio de beca.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "7fff7ffefffffd0ff06ffc7ffc4ff8007c001804e004c00004000003f7ffffff"
+      },
+      {
+        "tMs": 500,
+        "arquivo": "quadros/00500ms.jpg",
+        "descricao": "Mulher de olhos semicerrados com a mão junto à boca, enquadramento de busto; mesmo card de notícia na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "7fff7ffefffffd0ff0effc7ffc8ff8047c001800e004c00004000007f7ffffff"
+      },
+      {
+        "tMs": 1500,
+        "arquivo": "quadros/01500ms.jpg",
+        "descricao": "Mulher com a mão no rosto, corpo mais aberto e uma das mãos apoiada na cintura à direita, enquadramento de plano médio; card de notícia sobreposto na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "7fff7ffcff8ffd67f067fc67fc47f8067c041800e000c00004000007fbffffff"
+      },
+      {
+        "tMs": 3000,
+        "arquivo": "quadros/03000ms.jpg",
+        "descricao": "Close-up do rosto da mulher com a mão junto à boca e ao queixo, olhar para a câmera; card de notícia na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "ffffff00fe72f8f0f0fafcf3fce3f8077c071807e007c00404000006f305ffff"
+      },
+      {
+        "tMs": 5000,
+        "arquivo": "quadros/05000ms.jpg",
+        "descricao": "Close-up da mulher com a mão no queixo e lábios pressionados, olhando para a câmera, blusa estampada à direita; card de notícia na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "ffffff00ff7df871f07ffc33fd13f8071c071907e001c00404070007f183fff9"
+      },
+      {
+        "tMs": 7523,
+        "arquivo": "quadros/07523ms.jpg",
+        "descricao": "Mulher de frente com sobrancelha franzida e mão sob o queixo, corpo deslocado para a esquerda com blusa estampada; card de notícia na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "ffff7c00f018f39ce73af3ffe1c3f8007c007800e000e004640420033ffbbfff"
+      },
+      {
+        "tMs": 14895,
+        "arquivo": "quadros/14895ms.jpg",
+        "descricao": "Mulher de perfil virada para a esquerda com a mão junto ao rosto, cabelo ruivo para trás; card de notícia na parte inferior.",
+        "ocr": "CORPORA | NEWS\nURGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "assinatura": "fffffff7ff01fdc1f0f1fcfbfdcff807fc07f907e004c00004000000fcc0ffff"
+      }
+    ],
+    "cenas": [],
+    "faltou": [
+      "audio-sem-fala"
+    ],
+    "midia": {
+      "duracaoS": 15.045011,
+      "videoApagado": true,
+      "bytesVideo": 658269
+    },
+    "tempos": {
+      "total": 10.8,
+      "baixar": 5,
+      "transcrever": 4.1,
+      "quadros": 1
+    }
+  },
+  "anteriores": [],
+  "override": {},
+  "relatorios": [],
+  "analise": {
+    "versaoPrompt": 1,
+    "versaoVocab": 1,
+    "insumosHash": "c02b976037f2db6779c2f68b37a9577a1ac5f791",
+    "modelo": "claude-opus-5-5",
+    "esforco": "medium",
+    "geradoEm": "2026-10-08T19:07:27Z",
+    "custo": {
+      "entrada": 9000,
+      "saida": 2200,
+      "via": "claude-code"
+    },
+    "campos": {
+      "plataforma": "tiktok",
+      "formatoMidia": "video",
+      "duracaoS": 15,
+      "publicadoEm": "2026-09-21",
+      "tema": {
+        "texto": "Estereótipo da psi que responde \"depende\"",
+        "tag": "memes-da-psi"
+      },
+      "mensagem": "Piada interna: a psi responde tudo com \"depende\" e \"contexto\", tanto que até um papagaio se forma.",
+      "tipoConteudo": {
+        "principal": "humor",
+        "secundarios": [
+          "identificacao"
+        ]
+      },
+      "formato": "manchete-fake-reacao",
+      "estiloProducao": "ugc-celular",
+      "headline": {
+        "texto": "URGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "fonte": "tela"
+      },
+      "gancho": {
+        "texto": "URGENTE\nPapagaio aprende a falar “depende” e “contexto” e se forma em Psicologia no interior do Ceará",
+        "tipo": "noticia-urgente",
+        "canal": "texto-na-tela"
+      },
+      "retencao5s": [
+        {
+          "t": "0–1 s",
+          "elemento": "texto-na-tela-0s",
+          "gatilho": "curiosidade"
+        },
+        {
+          "t": "0–1 s",
+          "elemento": "payoff-visual-imediato",
+          "gatilho": "humor-alivio"
+        },
+        {
+          "t": "0–5 s",
+          "elemento": "rosto-close",
+          "gatilho": "identificacao"
+        }
+      ],
+      "gatilhos": [
+        {
+          "id": "curiosidade",
+          "onde": "tela 0 s",
+          "trecho": "URGENTE"
+        },
+        {
+          "id": "pertencimento",
+          "onde": "tela 0 s",
+          "trecho": "aprende a falar “depende” e “contexto”"
+        },
+        {
+          "id": "humor-alivio",
+          "onde": "quadro 0 s",
+          "trecho": "[quadro 0 s: papagaio de beca e capelo, com o símbolo Ψ ao fundo]"
+        },
+        {
+          "id": "curiosidade",
+          "onde": "legenda",
+          "trecho": "URGENTE!!! ‼️ 🚨"
+        }
+      ],
+      "estrutura": {
+        "macro": "loop-curto",
+        "blocos": [
+          {
+            "bloco": "gancho",
+            "quando": "0 s",
+            "oque": "card de notícia \"URGENTE\" com o papagaio formado já visível; criadora com a mão na boca"
+          },
+          {
+            "bloco": "loop",
+            "quando": "0–15 s",
+            "oque": "o card fica fixo; só muda a reação (mão no queixo, sobrancelha franzida, perfil aos 14,9 s)"
+          }
+        ]
+      },
+      "cta": {
+        "tipo": "nenhum",
+        "texto": null,
+        "momento": null
+      },
+      "produto": {
+        "presenca": "nenhuma",
+        "primeiraMencaoS": null,
+        "funcionalidades": []
+      },
+      "oferta": {
+        "tem": false
+      },
+      "publico": {
+        "quem": [
+          "estudante",
+          "psicologo-autonomo"
+        ],
+        "consciencia": "inconsciente"
+      },
+      "tom": [
+        "leve-humor",
+        "ironico"
+      ],
+      "som": "trilha",
+      "legendaTela": false,
+      "ritmo": {
+        "cortesPorMin": 0
+      },
+      "hashtags": [
+        "#fyp",
+        "#meme",
+        "#noticia",
+        "#urgente"
+      ],
+      "porQue": "hipótese: 2,5× o perfil com piada de iniciado; 1,0 view por seguidor, ficou na base. xMercado ausente: indefinido.",
+      "adaptar": [
+        {
+          "ideia": "Card de \"plantão do consultório\" com manchete fictícia sobre o caos administrativo, terapeuta só reagindo; legenda fecha em pergunta.",
+          "formato": "manchete-fake-reacao"
+        },
+        {
+          "ideia": "Post estático estilo manchete leve: \"terapeuta encontra o recibo de março na quarta aba da planilha\". CTA: e você, em qual aba parou?",
+          "formato": "meme"
+        },
+        {
+          "ideia": "Carrossel de manchetes que toda terapeuta queria ler sobre a própria rotina (lembrete enviado sozinho, mês fechado sem planilha).",
+          "formato": "meme"
+        }
+      ],
+      "riscos": [
+        {
+          "tipo": "humor-com-a-categoria",
+          "trecho": "Papagaio aprende a falar “depende” e “contexto” e se forma em Psicologia"
+        },
+        {
+          "tipo": "claim-sem-prova",
+          "trecho": "CORPORA | NEWS\nURGENTE"
+        }
+      ],
+      "replicavel": 3,
+      "confianca": {
+        "texto": "baixa",
+        "visual": "alta",
+        "retencao": "media"
+      },
+      "faltou": [
+        "audio-sem-fala"
+      ],
+      "autoria": "proprio",
+      "serie": null
+    },
+    "termosNovos": [
+      {
+        "grupo": "formato",
+        "valor": "manchete-fake-reacao",
+        "definicao": "Card de notícia inventada sobre a profissão sobreposto ao criador, que só reage com a expressão, sem fala.",
+        "exemplo": "Card 'CORPORA | NEWS · URGENTE' com papagaio de beca e a criadora com a mão na boca."
+      },
+      {
+        "grupo": "risco",
+        "valor": "humor-com-a-categoria",
+        "definicao": "A piada tem como alvo a própria profissão ou a formação (estereótipo da psi), não a rotina.",
+        "exemplo": "\"Papagaio aprende a falar “depende” e “contexto” e se forma em Psicologia\""
+      }
+    ]
+  }
+}

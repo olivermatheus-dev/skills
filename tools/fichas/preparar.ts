@@ -5,7 +5,7 @@
 // Pesados em data/intel/<empresa>/<concorrente>/<plataforma>__<id>/ (fora do git); a transcrição vai para dentro da ficha.
 import { execFileSync, spawn } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
-import { dirname, extname, join } from 'node:path';
+import { basename, dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Ficha, FichaInsumos } from '../../schema/ficha';
 import { realRunner } from '../intel/runner';
@@ -43,6 +43,41 @@ function exec(cmd: string, args: string[], timeoutMs = 300_000): Promise<{ code:
   });
 }
 const secs = (t0: number) => Math.round((Date.now() - t0) / 100) / 10;
+
+/** assinatura visual do quadro: 16×16 em cinza, 1 bit por pixel (acima/abaixo da média) → 64 hex. Sobrevive a reescala e recompressão. */
+export function assinaturaQuadro(arquivo: string): Promise<string | undefined> {
+  return new Promise((resolve) => {
+    const c = spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-i', arquivo, '-vf', 'scale=16:16:flags=area,format=gray', '-frames:v', '1', '-f', 'rawvideo', '-'], { windowsHide: true, stdio: ['ignore', 'pipe', 'ignore'] });
+    const parts: Buffer[] = [];
+    c.stdout.on('data', (d: Buffer) => parts.push(d));
+    c.on('error', () => resolve(undefined));
+    c.on('close', () => {
+      const px = Buffer.concat(parts);
+      if (px.length !== 256) return resolve(undefined);
+      const media = px.reduce((a, b) => a + b, 0) / 256;
+      let hex = '';
+      for (let i = 0; i < 256; i += 4) hex += (((px[i] > media ? 8 : 0) | (px[i + 1] > media ? 4 : 0) | (px[i + 2] > media ? 2 : 0) | (px[i + 3] > media ? 1 : 0))).toString(16);
+      resolve(hex);
+    });
+  });
+}
+/** quadros iguais: até 8% dos 256 bits diferentes */
+export function mesmaImagem(a?: string, b?: string) {
+  if (!a || !b || a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) { let x = parseInt(a[i], 16) ^ parseInt(b[i], 16); while (x) { d += x & 1; x >>= 1; } }
+  return d <= 20;
+}
+
+/** imagem (capa, miniatura) reduzida a 540 px de largura em JPEG; se o ffmpeg falhar, copia como está */
+async function reduzir540(src: string, destSemExt: string): Promise<string> {
+  const dest = `${destSemExt}.jpg`;
+  const r = await exec('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error', '-i', src, '-vf', "scale='min(540,iw)':-2", '-frames:v', '1', '-q:v', '4', dest], 60_000).catch(() => ({ code: 1 }));
+  if (r.code === 0 && existsSync(dest)) return dest;
+  const copia = `${destSemExt}${extname(src) || '.jpg'}`;
+  copyFileSync(src, copia);
+  return copia;
+}
 
 /** legenda automática do YouTube (json3) → segmentos */
 function lerLegendaYt(dir: string) {
@@ -107,6 +142,10 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
 
   const dir = dadosDir(slug, comp, key);
   const qDir = join(dir, 'quadros');
+  // descrição/OCR do Haiku custam: guarda os quadros antigos (com a assinatura) para reaproveitar se a imagem não mudou
+  const antigos = await Promise.all((ins0?.quadros ?? []).filter((q) => q.descricao || q.ocr).map(async (q) => ({
+    ...q, assinatura: q.assinatura ?? (existsSync(join(dir, q.arquivo)) ? await assinaturaQuadro(join(dir, q.arquivo)) : undefined),
+  })));
   rmSync(qDir, { recursive: true, force: true });
   mkdirSync(qDir, { recursive: true });
   const faltou = new Set<FichaInsumos['faltou'][number]>();
@@ -182,12 +221,21 @@ export async function preparar(slug: string, comp: string, key: string, opt: { r
     if (!quadros.length) faltou.add('sem-quadros');
   } else if (item.thumbnailLocal && existsSync(join(compDir(slug, comp), item.thumbnailLocal))) {
     // sem vídeo (post/carrossel ou download falhou): a miniatura é o único quadro
+    // a capa do Instagram vem em 1215×2160 (~3,5 mil tokens no Opus): reduz a 540 px como os quadros do vídeo
     const src = join(compDir(slug, comp), item.thumbnailLocal);
-    const nome = `00000ms${extname(src) || '.jpg'}`;
-    copyFileSync(src, join(qDir, nome));
-    quadros = [{ tMs: 0, arquivo: `quadros/${nome}` }];
+    const f = await reduzir540(src, join(qDir, '00000ms'));
+    quadros = [{ tMs: 0, arquivo: `quadros/${basename(f)}` }];
     if (ehVideo) avisos.push('só a miniatura (o vídeo não baixou)');
   } else faltou.add('sem-quadros');
+
+  // assinatura de cada quadro; o que não mudou herda a descrição/OCR do Haiku (só quadro novo ou diferente volta para o Haiku)
+  let herdados = 0;
+  for (const q of quadros) {
+    q.assinatura = await assinaturaQuadro(join(dir, q.arquivo));
+    const velho = antigos.find((a) => Math.abs(a.tMs - q.tMs) <= 50 && mesmaImagem(a.assinatura, q.assinatura));
+    if (velho) { if (velho.descricao) q.descricao = velho.descricao; if (velho.ocr) q.ocr = velho.ocr; herdados++; }
+  }
+  if (antigos.length) avisos.push(`${herdados} de ${antigos.length} quadro(s) descrito(s) pelo Haiku mantiveram a descrição${herdados < antigos.length ? '; os que mudaram precisam do passo quadros de novo' : ''}`);
 
   if (!transcricao && ehVideo && !faltou.has('audio-sem-fala')) faltou.add('sem-transcricao');
   if (!transcricao && !ehVideo) faltou.add('sem-transcricao');
