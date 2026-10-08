@@ -21,7 +21,7 @@ export function grow(txt: string, growth: number, salt = 'x') {
   });
 }
 
-export interface FixtureOpts { dir?: string; growth?: number; salt?: string; images?: boolean; offline?: string[] }
+export interface FixtureOpts { dir?: string; growth?: number; salt?: string; images?: boolean; offline?: string[]; igPublic?: boolean }
 
 export function fixtureRunner(o: FixtureOpts = {}): Runner & { calls: string[] } {
   const dir = o.dir ?? FIXTURES;
@@ -56,6 +56,10 @@ export function fixtureRunner(o: FixtureOpts = {}): Runner & { calls: string[] }
       }
       if (url.includes('youtube.com/shorts/')) return { status: url.endsWith('bbbbbbbbbb2') ? 200 : 303, url, text: '', contentType: 'text/html' };
       if (url.includes('tiktok.com')) return ok(read('tiktok-profile.html'));
+      if (url.includes('instagram.com') && o.igPublic) {
+        if (url.includes('/embed/captioned')) return ok(read('instagram-public-post.html'));
+        return ok(read(url.includes('/embed/') ? 'instagram-public-embed.html' : 'instagram-public-profile.html'));
+      }
       if (url.includes('instagram.com')) throw new Error('sem conexão com www.instagram.com (fixture)');
       return ok(read('site.html'));
     },

@@ -1,5 +1,5 @@
-// Aba "Análise" do concorrente: escolher módulos (script roda aqui, IA vai para a fila), ver o resultado de cada módulo
-// e anotar por módulo. As anotações são do Oliver: a IA nunca sobrescreve.
+// Análise do concorrente por área de marketing (Diagnóstico, Oferta, Produto, Mensagem, Reputação, Dados): resultado de cada
+// módulo e anotação por módulo (do Oliver: a IA nunca sobrescreve). Escolher o que rodar fica no diálogo do "Puxar" (RunDialog).
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type AnalysisFull, type AnalysisResult, type Competitor, type ModuleId } from '../../api';
@@ -8,6 +8,7 @@ import type { ModuleDataOf } from '../../../../schema/analysis';
 import { qk, useAnalysis } from '../../queries';
 import { toast } from '../toast';
 import { Badge, Button, ErrorBox, Textarea, cx } from '../kit';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { PlatformIcon, Spinner, platformLabel, timeAgo, fmtDateTime } from './lib';
 
 const STALE_DAYS = 30;
@@ -23,75 +24,128 @@ export const MARKET: Record<string, { label: string; color: string }> = {
   ambos: { label: 'Brasil + exterior', color: '#7c3aed' },
   desconhecido: { label: 'A classificar', color: '#71717a' },
 };
-const ORDER: ModuleId[] = ['resumo', 'atuacao', 'precos', 'features', 'forcas', 'landing', 'reputacao', 'contato', 'perfis', 'site', 'redes'];
-const WIDE = new Set<ModuleId>(['precos', 'features', 'forcas', 'landing', 'site']);
+/** áreas da ficha, do ponto de vista do marketing; "atuacao" vira chip no cabeçalho e fica em Dados */
+export const AREAS = [
+  { id: 'diagnostico', label: 'Diagnóstico', modules: ['resumo', 'forcas'] },
+  { id: 'oferta', label: 'Oferta', modules: ['precos'] },
+  { id: 'produto', label: 'Produto', modules: ['features'] },
+  { id: 'mensagem', label: 'Mensagem', modules: ['landing'] },
+  { id: 'reputacao', label: 'Reputação', modules: ['reputacao'] },
+  { id: 'dados', label: 'Dados', modules: ['atuacao', 'contato', 'perfis', 'site'] },
+] as const satisfies readonly { id: string; label: string; modules: readonly ModuleId[] }[];
+export type AreaId = (typeof AREAS)[number]['id'];
+const WIDE = new Set<ModuleId>(['precos', 'features', 'forcas', 'landing', 'site', 'resumo', 'reputacao']);
 const ageDays = (iso?: string) => (iso ? (Date.now() - Date.parse(iso)) / 86_400_000 : Infinity);
 export const money = (v?: number, cur = 'BRL') => (v == null ? '—' : v.toLocaleString('pt-BR', { style: 'currency', currency: cur, maximumFractionDigits: v % 1 ? 2 : 0 }));
 
-export default function AnalysisPanel({ slug, c, onCollect, collecting }: { slug: string; c: Competitor; onCollect: () => Promise<void>; collecting: boolean }) {
+/** atualiza análise, ficha e listas (a IA grava pelos scripts) */
+function useRefresh(slug: string, id: string) {
   const qc = useQueryClient();
-  const a = useAnalysis(slug, c.id);
-  const d = a.data;
-  const refresh = () => {
-    void qc.invalidateQueries({ queryKey: qk.analysis(slug, c.id) });
+  return () => {
+    void qc.invalidateQueries({ queryKey: qk.analysis(slug, id) });
     void qc.invalidateQueries({ queryKey: qk.analysisOverview(slug) });
-    void qc.invalidateQueries({ queryKey: qk.competitor(slug, c.id) });
+    void qc.invalidateQueries({ queryKey: qk.competitor(slug, id) });
     void qc.invalidateQueries({ queryKey: qk.competitors(slug) });
   };
-  // a IA grava pelos scripts: enquanto houver pedido na fila, confere de tempos em tempos
+}
+
+export default function AnalysisPanel({ slug, c, area, onRun }: { slug: string; c: Competitor; area: AreaId; onRun: () => void }) {
+  const a = useAnalysis(slug, c.id);
+  const d = a.data;
+  const refresh = useRefresh(slug, c.id);
+  // enquanto houver pedido na fila, confere de tempos em tempos
   useEffect(() => {
     if (!d?.request) return;
     const t = setInterval(refresh, 15_000);
     return () => clearInterval(t);
   }, [d?.request?.requestedAt]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (a.isLoading) return <div className="mt-6 h-40 rounded-xl bg-card border border-border animate-pulse" />;
+  if (a.isLoading) return <div className="mt-5 h-40 rounded-xl bg-card border border-border animate-pulse" />;
   if (a.error || !d) return <ErrorBox error={a.error ?? new Error('sem dados')} />;
 
-  const shown = ORDER.filter((m) => d.results[m]);
+  const def = AREAS.find((x) => x.id === area) ?? AREAS[0];
+  const mods = def.modules as readonly ModuleId[];
+  const shown = mods.filter((m) => d.results[m]);
+  const pending = mods.filter((m) => !d.results[m]);
+  const interesting = area === 'diagnostico' ? (d.results.landing?.data as ModuleDataOf<'landing'> | undefined)?.interesting ?? [] : [];
   return (
-    <div className="mt-6 space-y-6">
-      <RequestBar slug={slug} c={c} d={d} onChanged={refresh} onCollect={onCollect} collecting={collecting} />
-      <NoteBox slug={slug} id={c.id} k="geral" label="Minhas anotações sobre este concorrente" value={d.notes.geral?.text ?? ''} onSaved={refresh} big />
-      {!shown.length && <div className="text-sm text-muted-foreground border border-dashed border-border rounded-xl p-8 text-center">Nenhum módulo rodado ainda. Marque acima o que quer e clique em <b>Rodar</b>.</div>}
+    <div className="mt-5 space-y-4">
+      {!shown.length && (
+        <div className="text-sm text-muted-foreground border border-dashed border-border rounded-xl p-6 text-center">
+          Ainda não analisado. <button className="text-primary-ink font-medium" onClick={onRun}>Puxar {pending.map((m) => MOD[m].label.toLowerCase()).join(', ')}</button>
+        </div>
+      )}
       <div className="grid gap-4 lg:grid-cols-2">
         {shown.map((m) => (
-          <ModuleCard key={m} slug={slug} id={c.id} r={d.results[m]!} note={d.notes[m]?.text ?? ''} queued={!!d.request?.modules.includes(m)} wide={WIDE.has(m)} onSaved={refresh}>
+          <ModuleCard key={m} slug={slug} id={c.id} r={d.results[m]!} note={d.notes[m]?.text ?? ''} queued={!!d.request?.modules.includes(m)} wide={WIDE.has(m) || mods.length === 1} onSaved={refresh}>
             <Body m={m} r={d.results[m]!} />
           </ModuleCard>
         ))}
+        {interesting.length > 0 && (
+          <section className="lg:col-span-2 bg-amber-50/60 border border-amber-200 rounded-xl px-4 py-3 text-sm">
+            <div className="text-xs font-semibold text-amber-800 mb-1">O que vale copiar (da landing page)</div>
+            <List xs={interesting} />
+          </section>
+        )}
       </div>
+      {area === 'diagnostico' && <NoteBox slug={slug} id={c.id} k="geral" label="Minhas anotações sobre este concorrente" value={d.notes.geral?.text ?? ''} onSaved={refresh} big />}
+      {shown.length > 0 && pending.length > 0 && <div className="text-xs text-muted-foreground">Falta: {pending.map((m) => MOD[m].label).join(', ')} · <button className="text-primary-ink" onClick={onRun}>puxar</button></div>}
     </div>
   );
 }
 
-// ---------- escolher e pedir ----------
-function RequestBar({ slug, c, d, onChanged, onCollect, collecting }: { slug: string; c: Competitor; d: AnalysisFull; onChanged: () => void; onCollect: () => Promise<void>; collecting: boolean }) {
+/** pedido na fila da IA, em uma linha (cabeçalho da ficha) */
+export function QueueChip({ slug, c }: { slug: string; c: Competitor }) {
+  const a = useAnalysis(slug, c.id);
+  const refresh = useRefresh(slug, c.id);
+  const r = a.data?.request;
+  if (!r) return null;
+  async function cancel() {
+    try { await api.cancelAnalysis(slug, c.id); toast.ok('Pedido cancelado'); } catch (e) { toast.error(e, 'Não cancelou'); } finally { refresh(); }
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 text-xs bg-violet-50 border border-violet-200 text-violet-800 rounded-full pl-2 pr-1 py-0.5"
+      title={`${r.modules.map((m) => MOD[m]?.label ?? m).join(', ')} · pedido ${timeAgo(r.requestedAt)} · para rodar, diga ao Claude: roda a fila de concorrentes`}>
+      {r.status === 'rodando' ? <><Spinner /> IA rodando</> : '⏳ na fila da IA'} · {r.modules.length}
+      <button className="px-1 rounded-full hover:bg-violet-100" onClick={cancel} aria-label="Cancelar pedido">×</button>
+    </span>
+  );
+}
+
+// ---------- escolher e rodar (diálogo do "Puxar") ----------
+export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: string; c: Competitor; open: boolean; onOpenChange: (v: boolean) => void; onCollect: () => Promise<void> }) {
+  const a = useAnalysis(slug, c.id);
+  const d = a.data;
+  const refresh = useRefresh(slug, c.id);
+  const hasNet = c.profiles.some((p) => p.platform !== 'site');
+  const hasSite = c.profiles.some((p) => p.platform === 'site');
+  const missing = useMemo(() => FULL_ANALYSIS.filter((m) => (m === 'redes' ? false : ageDays(d?.results[m]?.updatedAt) > STALE_DAYS)), [d?.results]);
+  const preset = (ms: ModuleId[]) => new Set<ModuleId>([...(hasNet ? ['redes' as ModuleId] : []), ...ms]);
   const [sel, setSel] = useState<Set<ModuleId>>(new Set());
   const [force, setForce] = useState(false);
   const [instr, setInstr] = useState('');
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<unknown>(null);
-  const hasSite = c.profiles.some((p) => p.platform === 'site');
-  const missing = useMemo(() => FULL_ANALYSIS.filter((m) => (m === 'redes' ? false : ageDays(d.results[m]?.updatedAt) > STALE_DAYS)), [d.results]);
+  // ao abrir: redes + o que falta
+  useEffect(() => { if (open) { setSel(preset(missing)); setErr(null); } }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (m: ModuleId) => setSel((s) => { const n = new Set(s); if (n.has(m)) n.delete(m); else n.add(m); return n; });
-  const scriptSel = [...sel].filter((m) => MOD[m].engine === 'script');
   const iaSel = [...sel].filter((m) => MOD[m].engine !== 'script');
 
   async function run() {
     setErr(null);
     try {
+      // a coleta das redes roda no fundo (a ficha mostra o progresso); o diálogo segue com o resto
+      if (sel.has('redes')) void onCollect();
       if (iaSel.length) {
         setBusy('fila');
-        // módulos de IA que leem o site: se o site não foi baixado ainda, entra junto na fila (o Claude roda o script antes)
-        const needSite = iaSel.some((m) => MOD[m].needsSite) && !d.results.site && !sel.has('site');
+        const needSite = iaSel.some((m) => MOD[m].needsSite) && !d?.results.site && !sel.has('site');
         await api.requestAnalysis(slug, c.id, { modules: needSite ? [...iaSel, 'site'] : iaSel, force, instructions: instr });
         toast.ok(`${iaSel.length} módulo(s) na fila da IA`);
       }
       if (sel.has('site')) {
         setBusy('site');
         const r = await api.runSite(slug, c.id);
-        if (r.ok) toast.ok(`Site baixado: ${r.pages} páginas, sitemap com ${r.sitemap} URLs (${Math.round(r.ms / 1000)}s)`);
+        if (r.ok) toast.ok(`Site: ${r.pages} páginas, sitemap com ${r.sitemap} URLs`);
         else toast.error(new Error(r.errors.join(' · ') || 'falhou'), 'Site não baixado');
       }
       if (sel.has('reputacao')) {
@@ -99,74 +153,57 @@ function RequestBar({ slug, c, d, onChanged, onCollect, collecting }: { slug: st
         try { const h = await api.runReclameAqui(slug, c.id); toast.ok(h.found ? `Reclame Aqui: ${h.status}${h.score != null ? ` ${h.score}` : ''} · ${h.complaints} reclamações` : 'Reclame Aqui: não achado'); }
         catch (e) { toast.error(e, 'Reclame Aqui não respondeu (a IA tenta na fila)'); }
       }
-      if (sel.has('redes')) { setBusy('redes'); await onCollect(); }
-      setSel(new Set()); setInstr(''); setForce(false);
-    } catch (e) { setErr(e); } finally { setBusy(null); onChanged(); }
-  }
-  async function cancel() {
-    try { await api.cancelAnalysis(slug, c.id); toast.ok('Pedido cancelado'); } catch (e) { setErr(e); } finally { onChanged(); }
+      setInstr(''); setForce(false);
+      onOpenChange(false);
+    } catch (e) { setErr(e); } finally { setBusy(null); refresh(); }
   }
 
+  const chip = 'px-2 py-1 rounded-md border border-border hover:border-primary';
   return (
-    <div className="bg-card border border-border rounded-xl p-4">
-      {d.request && (
-        <div className="mb-4 -mt-1 flex flex-wrap items-center gap-2 text-sm bg-violet-50 border border-violet-200 text-violet-900 rounded-lg px-3 py-2">
-          <span className="font-medium">{d.request.status === 'rodando' ? <><Spinner /> A IA está rodando</> : '⏳ Na fila da IA'}:</span>
-          {d.request.modules.map((m) => <Badge key={m} color="#7c3aed">{MOD[m]?.label ?? m}</Badge>)}
-          <span className="text-xs opacity-75">pedido {timeAgo(d.request.requestedAt)}{d.request.force ? ' · refazer' : ''}</span>
-          <span className="text-xs opacity-75 basis-full">Para rodar, diga ao Claude: <code className="bg-white/70 px-1 rounded">roda a fila de concorrentes</code></span>
-          <button className="ml-auto text-xs underline" onClick={cancel}>cancelar pedido</button>
+    <Dialog open={open} onOpenChange={(v) => !busy && onOpenChange(v)}>
+      <DialogContent className="sm:max-w-xl gap-3">
+        <DialogHeader>
+          <DialogTitle className="text-base">Puxar {c.name}</DialogTitle>
+          <DialogDescription className="text-xs">Script roda agora e é grátis; IA vai para a fila do Claude. Rode só o necessário.</DialogDescription>
+        </DialogHeader>
+        <div className="flex gap-1.5 text-xs">
+          <button className={chip} onClick={() => setSel(preset(missing))}>Redes + o que falta ({missing.length})</button>
+          <button className={chip} onClick={() => setSel(preset([]))}>Só redes</button>
+          <button className={chip} onClick={() => setSel(new Set(FULL_ANALYSIS))}>Completa</button>
+          <button className="px-2 py-1 rounded-md text-muted-foreground hover:text-foreground ml-auto" onClick={() => setSel(new Set())}>Limpar</button>
         </div>
-      )}
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        <div className="font-semibold text-sm mr-2">O que rodar</div>
-        <Button variant="ghost" className="!py-1 text-xs" onClick={() => setSel(new Set(FULL_ANALYSIS))}>Completa</Button>
-        <Button variant="ghost" className="!py-1 text-xs" onClick={() => setSel(new Set(missing))} title={`o que não existe ou tem mais de ${STALE_DAYS} dias`}>Só o que falta ({missing.length})</Button>
-        <Button variant="ghost" className="!py-1 text-xs" onClick={() => setSel(new Set())}>Limpar</Button>
-        <span className="text-xs text-muted-foreground ml-auto">Rodar só o necessário economiza tokens. A análise completa normalmente é feita 1x.</span>
-      </div>
-      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        {MODULES.map((m) => {
-          const r = d.results[m.id];
-          const on = sel.has(m.id);
-          const stale = r && ageDays(r.updatedAt) > STALE_DAYS;
-          const blocked = m.id === 'redes' && !c.profiles.some((p) => p.platform !== 'site');
-          return (
-            <label key={m.id} title={m.hint} className={cx('flex items-start gap-2 rounded-lg border px-3 py-2 cursor-pointer select-none transition', on ? 'border-primary bg-primary-soft' : 'border-border hover:border-zinc-300', blocked && 'opacity-50 cursor-not-allowed')}>
-              <input type="checkbox" className="mt-0.5" checked={on} disabled={blocked} onChange={() => toggle(m.id)} />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 text-sm font-medium">
-                  {m.label}
-                  <span className="text-[10px] px-1.5 rounded-full font-medium" style={{ background: `${ENGINE[m.engine].color}18`, color: ENGINE[m.engine].color }} title={ENGINE[m.engine].title}>{ENGINE[m.engine].label}</span>
-                </div>
-                <div className={cx('text-xs', r ? (stale ? 'text-warning' : 'text-success') : 'text-muted-foreground')}>
-                  {r ? `✓ ${timeAgo(r.updatedAt)}${stale ? ' (velho)' : ''}` : m.id === 'redes' ? 'aba Redes e conteúdos' : 'não rodado'}
-                  {d.request?.modules.includes(m.id) && <span className="text-violet-600"> · na fila</span>}
-                </div>
-              </div>
-            </label>
-          );
-        })}
-      </div>
-      {sel.size > 0 && (
-        <div className="mt-3 grid gap-3 md:grid-cols-[1fr_auto] items-end">
-          <Textarea rows={2} value={instr} onChange={(e) => setInstr(e.target.value)} placeholder="Instruções para a IA nesta rodada (opcional). Ex.: compare o preço com o nosso plano; foque no público de hipnoterapeutas…" disabled={!iaSel.length} />
-          <div className="flex flex-col items-end gap-2">
-            <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={force} onChange={(e) => setForce(e.target.checked)} /> refazer mesmo o que já existe</label>
-            <Button onClick={run} disabled={!!busy || collecting}>
-              {busy ? <><Spinner /> {busy === 'site' ? 'Baixando o site…' : busy === 'redes' ? 'Puxando redes…' : busy === 'ra' ? 'Buscando no Reclame Aqui…' : 'Enviando…'}</> : `Rodar ${sel.size} módulo(s)`}
-            </Button>
-            <div className="text-[11px] text-muted-foreground text-right">
-              {scriptSel.length > 0 && <>agora: {scriptSel.map((m) => MOD[m].label).join(', ')}</>}
-              {scriptSel.length > 0 && iaSel.length > 0 && ' · '}
-              {iaSel.length > 0 && <>fila da IA: {iaSel.length}</>}
-            </div>
-          </div>
+        <div className="border border-border rounded-lg divide-y divide-border max-h-[50vh] overflow-y-auto">
+          {[...MODULES].sort((x, y) => Number(y.id === 'redes') - Number(x.id === 'redes')).map((m) => {
+            const r = d?.results[m.id];
+            const stale = r && ageDays(r.updatedAt) > STALE_DAYS;
+            const blocked = m.id === 'redes' && !hasNet;
+            return (
+              <label key={m.id} title={m.hint} className={cx('flex items-center gap-2.5 px-3 py-1.5 text-sm cursor-pointer select-none hover:bg-muted/50', blocked && 'opacity-50 cursor-not-allowed')}>
+                <input type="checkbox" checked={sel.has(m.id)} disabled={blocked} onChange={() => toggle(m.id)} />
+                <span className="font-medium">{m.label}</span>
+                <span className="text-[10px] px-1.5 rounded-full font-medium" style={{ background: `${ENGINE[m.engine].color}18`, color: ENGINE[m.engine].color }} title={ENGINE[m.engine].title}>{ENGINE[m.engine].label}</span>
+                <span className={cx('ml-auto text-xs', r && !stale ? 'text-muted-foreground' : m.id === 'redes' ? 'text-muted-foreground' : 'text-warning')}>
+                  {d?.request?.modules.includes(m.id) ? <span className="text-violet-600">na fila</span> : r ? `${timeAgo(r.updatedAt)}${stale ? ' (velho)' : ''}` : m.id === 'redes' ? 'perfis e conteúdos' : 'nunca'}
+                </span>
+              </label>
+            );
+          })}
         </div>
-      )}
-      {sel.has('site') && !hasSite && <div className="mt-2 text-xs text-warning">Sem site cadastrado: marque também “Perfis e redes” (a IA acha o site) ou cole o link em Editar.</div>}
-      <ErrorBox error={err} />
-    </div>
+        {iaSel.length > 0 && <>
+          <Textarea rows={2} value={instr} onChange={(e) => setInstr(e.target.value)} placeholder="Instruções para a IA (opcional). Ex.: compare o preço com o nosso plano…" className="text-sm" />
+          <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={force} onChange={(e) => setForce(e.target.checked)} /> refazer mesmo o que já existe</label>
+        </>}
+        {sel.has('site') && !hasSite && <div className="text-xs text-warning">Sem site cadastrado: marque “Perfis e redes” (a IA acha o site) ou cole o link em Editar.</div>}
+        <ErrorBox error={err} />
+        <div className="flex items-center gap-2 justify-end">
+          <span className="text-xs text-muted-foreground mr-auto">{sel.size} selecionado(s){iaSel.length ? ` · ${iaSel.length} na IA` : ''}</span>
+          <Button variant="ghost" onClick={() => onOpenChange(false)} disabled={!!busy}>Cancelar</Button>
+          <Button onClick={run} disabled={!!busy || !sel.size}>
+            {busy ? <><Spinner /> {busy === 'site' ? 'Baixando o site…' : busy === 'ra' ? 'Reclame Aqui…' : 'Enviando…'}</> : 'Confirmar'}
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -196,17 +233,17 @@ function ModuleCard({ slug, id, r, note, queued, wide, onSaved, children }: { sl
 
 function NoteBox({ slug, id, k, value, onSaved, label, big }: { slug: string; id: string; k: string; value: string; onSaved: () => void; label?: string; big?: boolean }) {
   const [v, setV] = useState(value);
-  const [open, setOpen] = useState(!!value || !!big);
+  const [open, setOpen] = useState(!!value);
   useEffect(() => setV(value), [value]);
   async function save() {
     if (v === value) return;
     try { await api.setAnalysisNote(slug, id, k, v); toast.ok('Anotação salva'); onSaved(); } catch (e) { toast.error(e, 'Não salvou a anotação'); }
   }
-  if (!open) return <button className="text-xs text-muted-foreground hover:text-primary-ink" onClick={() => setOpen(true)}>✎ anotar</button>;
+  if (!open) return <button className="text-xs text-muted-foreground hover:text-primary-ink" onClick={() => setOpen(true)}>✎ {big ? label : 'anotar'}</button>;
   return (
     <div className={cx(big && 'bg-amber-50/60 border border-amber-200 rounded-xl p-3')}>
       {label && <div className="text-xs font-medium text-amber-800 mb-1.5">✎ {label}</div>}
-      <Textarea rows={big ? 3 : 2} value={v} onChange={(e) => setV(e.target.value)} onBlur={save}
+      <Textarea autoFocus={!value} rows={big ? 3 : 2} value={v} onChange={(e) => setV(e.target.value)} onBlur={save}
         placeholder={big ? 'O que você acha deles, o que copiar, o que evitar… (salva ao sair do campo)' : 'Sua anotação sobre este módulo (salva ao sair do campo)'}
         className={cx('text-sm', !big && 'bg-amber-50/40 border-amber-200')} />
     </div>

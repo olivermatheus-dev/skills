@@ -9,6 +9,7 @@ const root = mkdtempSync(join(tmpdir(), 'hub-intel-'));
 process.env.HUB_ROOT = root;
 for (const k of ['YOUTUBE_API_KEY', 'APIFY_TOKEN', 'APIFY_IG_EXTRA_POSTS', 'YTDLP_PATH', 'YTDLP_COOKIES', 'YTDLP_COOKIES_FROM_BROWSER', 'INTEL_YT_DEEP']) process.env[k] = '';
 process.env.HUB_ENV_FILE = join(root, 'nao-existe.env');
+process.env.INTEL_IG_PAUSE_MS = '1';
 mkdirSync(join(root, 'companies', 't'), { recursive: true });
 writeFileSync(join(root, 'companies', 't', 'project.yml'), 'slug: t\nname: Teste\ncreated: 2026-10-07\n');
 
@@ -120,6 +121,39 @@ await t('Instagram (og:description público)', () => {
   assert.equal(p.following, 540);
   assert.equal(p.postsCount, 688);
   assert.equal(p.handle, 'ana.x');
+});
+
+await t('Instagram sem token (embed público): perfil exato, posts, views e duração do vídeo', () => {
+  const s = valid(N.normalizePublicInstagram({
+    profileUrl: 'https://www.instagram.com/natgeo/', now, embedHtml: fx('instagram-public-embed.html'), profileHtml: fx('instagram-public-profile.html'),
+    postHtml: { DeNJLoOksoN: fx('instagram-public-post.html') },
+  }));
+  assert.equal(s.source, 'instagram-public');
+  assert.equal(s.profile.handle, 'natgeo');
+  assert.equal(s.profile.name, 'National Geographic');
+  assert.equal(s.profile.verified, true);
+  assert.ok(s.profile.followers! > 1_000_000 && s.profile.postsCount! > 30_000, 'contagens exatas do embed');
+  assert.equal(s.profile.following, 195);
+  assert.match(s.profile.bio!, /inner explorer/);
+  assert.equal(s.items.length, 4);
+  assert.deepEqual(s.items.map((i) => i.type), ['post', 'carrossel', 'reel', 'reel']);
+  const reel = s.items.find((i) => i.id === 'DeNJLoOksoN')!;
+  assert.ok(reel.metrics.views! > reel.metrics.likes! && reel.durationS! > 0, 'views e duração vieram do embed do post');
+  assert.ok(s.items.every((i) => i.publishedAt && i.metrics.likes != null && i.metrics.comments != null && /^https/.test(i.thumbnail!)));
+  assert.equal(s.items.find((i) => i.id === 'DeMwi4hA_f1')!.metrics.views, undefined, 'sem o embed do post, sem views');
+  assert.throws(() => N.normalizePublicInstagram({ profileUrl: 'https://www.instagram.com/x/', now, embedHtml: '<html>login</html>' }), /embed do perfil/);
+});
+
+await t('Instagram sem token: o adaptador usa o embed público antes de Apify/yt-dlp', async () => {
+  const saved = process.env.APIFY_TOKEN;
+  process.env.APIFY_TOKEN = 'tok';
+  const run = fixtureRunner({ igPublic: true });
+  const c2 = S.saveCompetitor('t', { name: 'Pública', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/natgeo/', handle: 'natgeo' }] }).data;
+  const r = await collectCompetitor('t', c2.id, { runner: run, noMedia: true });
+  process.env.APIFY_TOKEN = saved;
+  assert.ok(r[0].ok && r[0].source === 'instagram-public' && r[0].items === 4, JSON.stringify(r[0]));
+  assert.ok(!run.calls.some((c) => c.includes('apify')), 'nem chamou o Apify');
+  assert.equal(run.calls.filter((c) => c.includes('/embed/captioned')).length, 2, 'um embed por vídeo');
 });
 
 await t('Site: título, descrição, og:image, ícone e redes encontradas', () => {

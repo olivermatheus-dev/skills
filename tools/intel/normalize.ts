@@ -275,6 +275,73 @@ export function parseInstagramOg(html: string): ProfileDraft | null {
   };
 }
 
+// --- Instagram sem token: embed público do perfil (/<user>/embed/) + embed de cada post (/p/<code>/embed/captioned/) ---
+/** extrai o JSON do `contextJSON` que o Instagram embute nas páginas de embed (null se a página for outra coisa, ex.: casca de login) */
+export function parseInstagramEmbedContext(html: string): Any | null {
+  const m = html.match(/"contextJSON"\s*:\s*("(?:[^"\\]|\\.)*")/);
+  if (!m) return null;
+  try { return JSON.parse(JSON.parse(m[1])); } catch { return null; }
+}
+
+/** `shortcode_media` (do embed do perfil ou do post) → item. `extra` = shortcode_media do embed do post, com views/duração/tipo do vídeo */
+export function publicIgPost(sm: Any, extra?: Any): ItemDraft | null {
+  const code = str(sm?.shortcode);
+  if (!code) return null;
+  const m = { ...sm, ...(extra ?? {}) };
+  const kind = String(m.__typename ?? '');
+  const type: ItemDraft['type'] = kind === 'GraphSidecar' ? 'carrossel' : kind === 'GraphVideo' || m.is_video ? (m.product_type && m.product_type !== 'clips' ? 'video' : 'reel') : 'post';
+  const ts = num(sm.taken_at_timestamp) ?? num(m.taken_at_timestamp);
+  return {
+    id: code, url: `https://www.instagram.com/${type === 'reel' ? 'reel' : 'p'}/${code}/`, type,
+    caption: str(m.edge_media_to_caption?.edges?.[0]?.node?.text),
+    publishedAt: ts ? new Date(ts * 1000).toISOString().replace(/\.\d+Z$/, 'Z') : undefined,
+    durationS: typeof m.video_duration === 'number' ? Math.round(m.video_duration) : undefined,
+    thumbnail: [m.display_url, m.thumbnail_src].find(isUrl),
+    metrics: {
+      views: num(m.video_view_count) ?? num(m.video_play_count),
+      likes: m.like_and_view_counts_disabled ? undefined : num(m.edge_liked_by?.count) ?? num(m.edge_media_preview_like?.count),
+      comments: num(m.edge_media_to_comment?.count) ?? num(m.edge_media_to_parent_comment?.count),
+    },
+  };
+}
+
+export interface PublicInstagramInput {
+  profileUrl: string; now: Date;
+  /** HTML de https://www.instagram.com/<user>/embed/ (UA de rastreador) */
+  embedHtml: string;
+  /** HTML de https://www.instagram.com/<user>/ (UA de rastreador): bio e "seguindo" saem do og:description */
+  profileHtml?: string | null;
+  /** HTML do embed de cada vídeo, por shortcode */
+  postHtml?: Record<string, string>;
+  errors?: string[];
+}
+
+export function normalizePublicInstagram(i: PublicInstagramInput): SnapshotDraft {
+  const errors = [...(i.errors ?? [])];
+  const c = parseInstagramEmbedContext(i.embedHtml)?.context;
+  if (!c?.username) throw new Error('o Instagram não devolveu o embed do perfil (perfil privado, inexistente ou bloqueio temporário)');
+  const og = i.profileHtml ? parseInstagramOg(i.profileHtml) : null;
+  const desc = i.profileHtml ? (parseMeta(i.profileHtml).description ?? '') : '';
+  const bio = desc.match(/ on Instagram: "([\s\S]*)"\s*$/)?.[1];
+  const extras = new Map<string, Any>();
+  for (const [code, html] of Object.entries(i.postHtml ?? {})) {
+    const sm = parseInstagramEmbedContext(html)?.gql_data?.shortcode_media;
+    if (sm) extras.set(code, sm); else errors.push(`detalhes do vídeo ${code}: embed sem dados`);
+  }
+  const items = (c.graphql_media ?? []).map((g: Any) => publicIgPost(g.shortcode_media, extras.get(g.shortcode_media?.shortcode))).filter(Boolean) as ItemDraft[];
+  return {
+    collectedAt: nowIso(i.now), platform: 'instagram', profileUrl: i.profileUrl, source: 'instagram-public',
+    profile: {
+      name: str(c.full_name) ?? og?.name ?? c.username, handle: c.username,
+      bio: bio ? decodeEntities(bio) : undefined,
+      avatar: [c.profile_pic_url, og?.avatar].find(isUrl),
+      followers: num(c.followers_count) ?? og?.followers, following: og?.following, postsCount: num(c.posts_count) ?? og?.postsCount,
+      verified: typeof c.verified === 'boolean' ? c.verified : undefined, links: [],
+    },
+    items: dedupe(items), errors,
+  };
+}
+
 export function normalizeYtdlpInstagram(i: { profileUrl: string; now: Date; list: Any; errors?: string[] }): SnapshotDraft {
   const pl = i.list ?? {};
   const items = (pl.entries ?? []).map((e: Any) => ytdlpEntry(e, (id) => `https://www.instagram.com/p/${id}/`, e.duration ? 'reel' : 'post')).filter(Boolean) as ItemDraft[];

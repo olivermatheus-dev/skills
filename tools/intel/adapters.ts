@@ -2,7 +2,7 @@
 import type { Profile } from '../../schema';
 import type { Adapter, AdapterCtx, SnapshotDraft } from './types';
 import {
-  normalizeYtdlpYoutube, normalizeYoutubeApi, normalizeTiktok, normalizeApifyInstagram, normalizeYtdlpInstagram,
+  normalizeYtdlpYoutube, normalizeYoutubeApi, normalizeTiktok, normalizeApifyInstagram, normalizePublicInstagram, normalizeYtdlpInstagram,
   normalizeSite, parseInstagramOg,
 } from './normalize';
 
@@ -146,7 +146,7 @@ export const tiktok: Adapter = {
 };
 
 // ---------- Instagram ----------
-export const IG_HELP = 'Instagram precisa de APIFY_TOKEN (recomendado, apify.com → Settings → Integrations) ou cookies do navegador para o yt-dlp (YTDLP_COOKIES_FROM_BROWSER=chrome) no .env';
+export const IG_HELP = 'O acesso público ao Instagram falhou (bloqueio temporário ou perfil privado). Para garantir, use APIFY_TOKEN (recomendado, apify.com → Settings → Integrations) ou cookies do navegador para o yt-dlp (YTDLP_COOKIES_FROM_BROWSER=chrome) no .env';
 
 async function apify(actor: string, input: Any, token: string, ctx: AdapterCtx): Promise<Any[]> {
   const r = await ctx.runner.fetchText(`https://api.apify.com/v2/acts/${actor}/run-sync-get-dataset-items?format=json&clean=true`, {
@@ -158,6 +158,38 @@ async function apify(actor: string, input: Any, token: string, ctx: AdapterCtx):
   return Array.isArray(j) ? j : [];
 }
 
+/** Instagram sem token: o Instagram serve aos rastreadores (link preview) o embed do perfil com seguidores, nº de posts e os ~6 posts recentes,
+ *  e o embed de cada post com views/duração. Sem login, sem cookie. Poucas chamadas e pausa entre elas; se pedir login, desiste (não força). */
+const IG_BOT_UA = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+async function instagramViaPublicWeb(handle: string, url: string, ctx: AdapterCtx): Promise<SnapshotDraft> {
+  const headers = { 'user-agent': IG_BOT_UA, 'accept-language': 'en-US,en;q=0.9' };
+  const pauseRaw = ctx.env('INTEL_IG_PAUSE_MS');
+  const pause = pauseRaw ? Number(pauseRaw) : 1500;
+  const get = async (u: string) => {
+    const r = await ctx.runner.fetchText(u, { headers });
+    if (r.status === 429) throw new Error('Instagram limitou as requisições (429); tente de novo em alguns minutos');
+    if (r.status >= 400) throw new Error(`Instagram respondeu ${r.status}`);
+    if (/\/accounts\/login/.test(r.url)) throw new Error('Instagram pediu login');
+    return r.text;
+  };
+  const errors: string[] = [];
+  const embedHtml = await get(`https://www.instagram.com/${handle}/embed/`);
+  if (!/"contextJSON"/.test(embedHtml)) throw new Error('embed do perfil indisponível (perfil privado, inexistente ou bloqueado)');
+  await sleep(pause);
+  const profileHtml = await get(url).catch((e) => { errors.push(`bio/seguindo: ${msg(e)}`); return null; });
+  // views e duração só existem no embed de cada vídeo: 1 chamada por vídeo recente (máx. 6)
+  const first = normalizePublicInstagram({ profileUrl: url, now: ctx.now, embedHtml, profileHtml, errors: [] });
+  const postHtml: Record<string, string> = {};
+  for (const it of (first.items ?? []).filter((x) => x.type !== 'post' && x.type !== 'carrossel').slice(0, 6)) {
+    await sleep(pause);
+    try { postHtml[it.id] = await get(`https://www.instagram.com/p/${it.id}/embed/captioned/`); }
+    catch (e) { errors.push(`vídeo ${it.id}: ${msg(e)}`); if (/limitou|login/.test(msg(e))) break; }
+  }
+  return normalizePublicInstagram({ profileUrl: url, now: ctx.now, embedHtml, profileHtml, postHtml, errors });
+}
+
 export const instagram: Adapter = {
   platform: 'instagram',
   async collect(p, ctx) {
@@ -165,11 +197,16 @@ export const instagram: Adapter = {
     if (!handle || ['p', 'reel', 'reels', 'tv'].includes(handle)) throw new Error('isto é link de post; cole o link do perfil (instagram.com/perfil)');
     const url = `https://www.instagram.com/${handle}/`;
     const token = ctx.env('APIFY_TOKEN');
+    const publicErrors: string[] = [];
+    if (ctx.env('INTEL_IG_PUBLIC') !== '0') {
+      try { return await instagramViaPublicWeb(handle, url, ctx); }
+      catch (e) { publicErrors.push(`acesso público: ${msg(e)}`); }
+    }
     if (token) {
       // apify~instagram-profile-scraper: perfil + ~12 posts recentes por 1 execução (mais barato).
       const result = await apify('apify~instagram-profile-scraper', { usernames: [handle] }, token, ctx);
       let extraPosts: Any[] = [];
-      const errors: string[] = [];
+      const errors: string[] = [...publicErrors];
       const latest = result[0]?.latestPosts?.length ?? 0;
       if (ctx.env('APIFY_IG_EXTRA_POSTS') === '1' && ctx.maxItems > latest) {
         // apify~instagram-scraper (resultsType=posts) para passar dos ~12 posts — custa mais créditos, por isso é opcional.
@@ -178,10 +215,10 @@ export const instagram: Adapter = {
       }
       return normalizeApifyInstagram({ profileUrl: url, now: ctx.now, result, extraPosts, errors });
     }
-    const errors: string[] = [];
+    const errors: string[] = [...publicErrors];
     const [list, html] = await Promise.all([
       ctx.runner.ytdlp(['-J', '--flat-playlist', '--playlist-end', String(ctx.maxItems), url]).then((t) => parseJson(t, 'yt-dlp')).catch((e) => { errors.push(`yt-dlp: ${msg(e)}`); return null; }),
-      ctx.runner.fetchText(url).then((r) => r.text).catch((e) => { errors.push(`perfil: ${msg(e)}`); return null; }),
+      ctx.runner.fetchText(url, { headers: { 'user-agent': IG_BOT_UA } }).then((r) => r.text).catch((e) => { errors.push(`perfil: ${msg(e)}`); return null; }),
     ]);
     const og = html ? parseInstagramOg(html) : null;
     if (list?.entries?.length) {
