@@ -67,6 +67,19 @@ Fonte: `site/precos.md` e as linhas com preço em `site/extract.json > prices`. 
   "extras": ["NFS-e: R$ 19/mês"], "notes": "…" }
 ```
 
+### precos — modo completo (checklist da re-coleta, tarefa 043 fase D)
+O `site/precos.md` estático **não basta**: use o navegador embutido (aba nova) para clicar no seletor mensal/anual e abrir "comparar planos" / "ver todos os recursos". **Nunca invente**: sem evidência na página, o campo fica vazio e a lacuna vai em `notes` (e `confidence` baixa).
+1. **Páginas:** `/planos`, `/precos`, `/pricing`, bloco de preços da home, página de clínica/equipe, comparativo de planos, FAQ, termos de uso, central de ajuda (busque "limite", "mensagens", "cancelar", "reembolso"), início do cadastro/checkout (pede cartão no teste?). Registre cada uma lida em `checkedPages` (`kind` + `url`) e em `sources`.
+2. **Ciclos:** grave `pageDefaultCycle` (o que a página mostra ao abrir). Clique em cada opção (mensal, trimestral, anual, bienal) e grave os valores de cada plano; ciclos além de mensal/anual vão em `otherCycles`. Nunca calcule anual a partir do mensal; se o site só mostra o total, `yearlyMonthly = total / 12` e diga em `notes`.
+3. **Cada plano:** `id` (slug), `audience` (`solo|equipe`), `seats` (`included`, `max`, `unlimited`, `extraPrice`, `staff` = secretárias), `includes` com a **lista completa e explícita** (se o site diz "tudo do anterior", copie a lista do anterior, acrescente o que muda e preencha `inherits`), `limits` com número (`metric` do enum: pacientes, sessoes, profissionais, whatsapp-msgs, video-min, video-sessoes, ia-creditos, nf, cobrancas, armazenamento-gb, relatorios, outro). "Ilimitado" escrito no site → `unlimited: true`; sem informação → não grave o limite.
+4. **Matriz:** leia `companies/<slug>/intel/matriz.json > features` e, para cada plano, grave em `matrix` os ids que o plano tem (`sim`) ou tem em parte (`parcial` + `note` até 50 caracteres). Só com evidência na página; cumulativo (o plano de cima repete o que herda).
+5. **Promoção:** preço riscado → `regularMonthly`; rótulo e prazo → `promo { label, until }`.
+6. **Extras pagos:** cada add-on em `addOns` (`name`, `price`, `unit` = mes|unico|por-uso|percentual, `per`, `planIds`, `unlocks` = ids da matriz). Taxas de cobrança (Pix, cartão) entram aqui.
+7. **Condições:** `trialDays`, `trialNeedsCard`, `trialPlanId`, `refundDays` + `refundScope`, `commitment` (procure "fidelidade", "multa", "cancele quando quiser" nos termos), `paymentMethods`.
+8. **Plano sem preço** ("fale com consultor") vira plano com `onRequest: true`, não texto em `extras`.
+9. Mantenha `highlights` (até 3 destaques como o site mostra), `fromMonthly`, `trial` e `guarantee` em texto (compatibilidade). `extras` fica como legado.
+10. No fim, em até 8 linhas, diga o que mudou em relação ao arquivo anterior (preço novo, plano novo, promo) e o que não achou. Depois: `npm run validate`.
+
 ## landing — análise da landing page (home)
 Fonte: `site/home.md` > "Seções em ordem". Uma entrada por bloco visível, na ordem. Tipos: hero, logos, problema, solucao, features, como-funciona, beneficios, prova-social, depoimentos, numeros, precos, comparativo, seguranca, integracoes, fundador, faq, blog, cta, rodape, outro.
 `interesting` = o que vale observar ou copiar (gancho, oferta, objeção respondida, elemento visual, garantia, comparativo, calculadora…). `tone` = como soam em 1 linha.

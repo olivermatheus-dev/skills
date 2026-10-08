@@ -3,7 +3,7 @@
 // Script faz o que é mecânico (baixar site, sitemap, contatos); a IA só interpreta o texto já extraído.
 // Pedido (o que o Oliver marcou para rodar) → analysis/pedido.json. Anotações do Oliver → analysis/notas.json (a IA nunca sobrescreve).
 import { z } from 'zod';
-import { IsoDateTime, Url, Platform, nullish } from './common';
+import { IsoDate, IsoDateTime, Url, Platform, nullish } from './common';
 
 /** Catálogo de módulos. `engine`: script = roda no app/terminal sem IA · ia = vai para a fila do Claude · misto = script + IA. */
 export const MODULES = [
@@ -92,9 +92,43 @@ export const ModuleData = {
     plans: z.array(z.object({
       name: S, monthly: Num, yearlyMonthly: Num, yearlyTotal: Num,
       users: nullish(S), highlights: Strs, recommended: z.boolean().default(false),
+      // --- campos da re-coleta completa (043 fase D); todos opcionais ---
+      id: nullish(S), // slug estável do plano ("individual-plus")
+      audience: nullish(z.enum(['solo', 'equipe'])),
+      seats: nullish(z.object({ included: Num, max: Num, unlimited: z.boolean().default(false), extraPrice: Num, staff: Num })),
+      onRequest: z.boolean().default(false), // plano sem preço ("fale com consultor")
+      regularMonthly: Num, // preço cheio quando há promoção
+      promo: nullish(z.object({ label: S, until: nullish(IsoDate) })),
+      otherCycles: z.array(z.object({
+        cycle: z.enum(['trimestral', 'semestral', 'bienal']), total: Num, perMonth: Num, installments: nullish(S),
+      })).default([]),
+      inherits: nullish(S), // id do plano de baixo ("tudo do anterior")
+      includes: Strs, // lista completa e explícita, cumulativa
+      matrix: z.array(z.object({ id: S, status: z.enum(['sim', 'parcial']), note: nullish(S) })).default([]), // ids de intel/matriz.json
+      limits: z.array(z.object({
+        metric: z.enum(['pacientes', 'sessoes', 'profissionais', 'whatsapp-msgs', 'video-min', 'video-sessoes', 'ia-creditos', 'nf', 'cobrancas', 'armazenamento-gb', 'relatorios', 'outro']),
+        value: Num, unlimited: z.boolean().default(false),
+        period: nullish(z.enum(['mes', 'trimestre', 'ano', 'total'])), note: nullish(S),
+      })).default([]),
     })).default([]),
-    extras: Strs, // add-ons, setup, taxa por paciente…
+    extras: Strs, // add-ons, setup, taxa por paciente… (legado em texto; o estruturado é addOns)
     notes: nullish(S),
+    // --- campos da re-coleta completa (043 fase D); todos opcionais ---
+    pageDefaultCycle: nullish(z.enum(['mensal', 'anual', 'outro'])), // ciclo que a página mostra ao abrir
+    trialDays: Num,
+    trialNeedsCard: nullish(z.boolean()),
+    trialPlanId: nullish(S),
+    refundDays: Num,
+    refundScope: nullish(S),
+    commitment: nullish(z.enum(['sem-fidelidade', 'fidelidade-anual', 'multa', 'nao-informado'])),
+    paymentMethods: z.array(z.enum(['cartao', 'pix', 'boleto', 'debito', 'outro'])).default([]),
+    addOns: z.array(z.object({
+      name: S, price: Num, unit: z.enum(['mes', 'unico', 'por-uso', 'percentual']), per: nullish(S),
+      planIds: Strs, unlocks: Strs, // unlocks = ids da matriz
+    })).default([]),
+    checkedPages: z.array(z.object({
+      kind: z.enum(['precos', 'comparativo', 'faq', 'termos', 'checkout', 'ajuda', 'home']), url: Url,
+    })).default([]),
   }),
   landing: z.object({
     url: Url,

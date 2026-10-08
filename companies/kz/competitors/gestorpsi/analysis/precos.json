@@ -1,10 +1,24 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:29:55Z",
+  "updatedAt": "2026-10-08T14:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://gestorpsi.com.br/"
+      "url": "https://gestorpsi.com.br/",
+      "title": "Home com o bloco de planos"
+    },
+    {
+      "url": "https://app.gestorpsi.com.br/promotion/",
+      "title": "Página do botão Assine (cadastro)"
+    },
+    {
+      "url": "https://gestorpsi.com.br/teste-gratuito/"
+    },
+    {
+      "url": "https://gestorpsi.com.br/funcionalidades/"
+    },
+    {
+      "url": "https://gestorpsi.com.br/vantagens/"
     }
   ],
   "confidence": "alta",
@@ -14,42 +28,306 @@
     "model": "assinatura",
     "fromMonthly": 34.5,
     "trial": "14 dias grátis, sem informar cobrança",
+    "trialDays": 14,
+    "trialNeedsCard": false,
+    "pageDefaultCycle": "mensal",
+    "commitment": "nao-informado",
+    "paymentMethods": [
+      "cartao",
+      "boleto"
+    ],
     "plans": [
       {
+        "id": "individual",
         "name": "Individual",
         "monthly": 34.5,
-        "users": "1 profissional",
+        "users": "Um profissional cadastrado",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "agendas e clientes ilimitados",
-          "cadastro de secretárias",
-          "notificação por e-mail",
-          "controle de faturamento",
-          "suporte por e-mail"
+          "Um profissional cadastrado",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias"
         ],
-        "recommended": false
+        "includes": [
+          "Um profissional cadastrado",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias",
+          "Notificação de atendimentos e desmarques por e-mail",
+          "Controle de faturamento detalhado",
+          "Suporte via e-mail"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 1,
+            "note": "Um profissional cadastrado"
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true,
+            "note": "clientes ilimitados"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamento de atendimentos"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuário técnico, com impressão"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Honorários e faturas"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Convênios por serviço"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só e-mail"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Relatórios estatísticos"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Secretária, estudante, admin"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "parcial",
+            "note": "Só por e-mail"
+          }
+        ]
       },
       {
+        "id": "ate-4",
         "name": "Até 4 profissionais",
         "monthly": 59.5,
-        "users": "até 4 profissionais",
+        "users": "Até 4 profissionais cadastrados",
+        "audience": "equipe",
+        "seats": {
+          "included": 4,
+          "max": 4,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "mesmos recursos do Individual"
+          "Até 4 profissionais cadastrados",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias"
         ],
-        "recommended": false
+        "includes": [
+          "Até 4 profissionais cadastrados",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias",
+          "Notificação de atendimentos e desmarques por e-mail",
+          "Controle de faturamento detalhado",
+          "Suporte via e-mail"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 4,
+            "note": "Até 4 profissionais cadastrados"
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true,
+            "note": "clientes ilimitados"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamento de atendimentos"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuário técnico, com impressão"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Honorários e faturas"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Convênios por serviço"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só e-mail"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Relatórios estatísticos"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Secretária, estudante, admin"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "parcial",
+            "note": "Só por e-mail"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "Até 4 profissionais cadastrados"
+          }
+        ],
+        "inherits": "individual"
       },
       {
+        "id": "ate-50",
         "name": "Até 50 profissionais",
         "monthly": 124.5,
-        "users": "até 50 profissionais",
+        "users": "Até 50 profissionais cadastrados",
+        "audience": "equipe",
+        "seats": {
+          "included": 50,
+          "max": 50,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "mesmos recursos do Individual"
+          "Até 50 profissionais cadastrados",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias"
         ],
-        "recommended": false
+        "includes": [
+          "Até 50 profissionais cadastrados",
+          "Agendas e clientes ilimitados",
+          "Cadastro de secretárias",
+          "Notificação de atendimentos e desmarques por e-mail",
+          "Controle de faturamento detalhado",
+          "Suporte via e-mail"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 50,
+            "note": "Até 50 profissionais cadastrados"
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true,
+            "note": "clientes ilimitados"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamento de atendimentos"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuário técnico, com impressão"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Honorários e faturas"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Convênios por serviço"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só e-mail"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Relatórios estatísticos"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Secretária, estudante, admin"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "parcial",
+            "note": "Só por e-mail"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "Até 50 profissionais cadastrados"
+          }
+        ],
+        "inherits": "individual"
       }
     ],
     "extras": [
       "Estabelecimentos de ensino: condições especiais sob consulta"
     ],
-    "notes": "Preços da home, com 'condições exclusivas para contratação e pagamento eletrônico'; não há tabela anual."
+    "addOns": [],
+    "checkedPages": [
+      {
+        "kind": "home",
+        "url": "https://gestorpsi.com.br/"
+      },
+      {
+        "kind": "precos",
+        "url": "https://gestorpsi.com.br/#assine"
+      },
+      {
+        "kind": "checkout",
+        "url": "https://app.gestorpsi.com.br/promotion/"
+      },
+      {
+        "kind": "checkout",
+        "url": "https://gestorpsi.com.br/teste-gratuito/"
+      },
+      {
+        "kind": "comparativo",
+        "url": "https://gestorpsi.com.br/funcionalidades/"
+      }
+    ],
+    "notes": "Os 3 planos têm a mesma lista de recursos na home; só muda o nº de profissionais (a lista de inclusos foi copiada igual para os 3 porque o site a repete em cada cartão). Sem tabela anual, sem seletor de ciclo, sem plano promocional, sem add-ons e sem limite de pacientes/armazenamento/WhatsApp/vídeo/IA no site. Divergência no pagamento: a home e /teste-gratuito/ citam cartão ou boleto; a página de cadastro (/promotion/) diz cobrança mensal no cartão de crédito. Não há FAQ, termos de uso nem página de ajuda pública com preço (só política de privacidade e cookies); reembolso e fidelidade não informados. A home diz \"valores e condições exclusivas para contratação e pagamento eletrônico\" sem explicar se há outro preço fora do eletrônico. Matriz: células conforme /funcionalidades/, assumindo recursos iguais em todos os planos; multiprofissional só nos planos de equipe; sem WhatsApp, vídeo, IA, portal do paciente, cobrança online, NFS-e (a matriz marca \"nao\")."
   }
 }
