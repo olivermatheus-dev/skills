@@ -10,7 +10,7 @@
 // (`__TIME_OFFSET__`, lido por `M.offset`) —, intercala em 120 amostras/s e cada quadro de 30 soma três:
 // 1/60 s de exposição, obturador a 180°. `--no-blur` renderiza direto a 30; `--fps=60` exporta a 60 sem rastro.
 // `--blur=nativo[:N]` usa o motion blur nativo do HyperFrames (native-blur.mjs: até 16 amostras por quadro, rastro
-// liso em vez de 3 cópias), ~7–8× mais lento: para a versão final de vídeo com movimento rápido (tarefa 032).
+// liso em vez de 3 cópias), ~7–8× mais lento: para a versão final de vídeo com movimento rápido (tarefa 033).
 //
 // Uso: node tools/video-kit/scripts/produce.mjs <pasta> [--only=9x16] [--draft] [--build-only] [--no-blur] [--blur=nativo[:N]] [--fps=60] [--v=3] [--mute]
 //   → exports/<AAAA-MM-DD-nome>-<formato>-vNN.mp4  (rascunho: -rascunho.mp4, sobrescreve)

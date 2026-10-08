@@ -1,4 +1,4 @@
-# 032 — Upgrade do HyperFrames 0.8.94 → 0.8.141 + motion blur nativo
+# 033 — Upgrade do HyperFrames 0.8.94 → 0.8.141 + motion blur nativo
 
 Status: **medido (2026-10-08)** · branch `claude/hf-upgrade-0-8-141-38b00e` pronto, **sem merge** (aguarda aval do Oliver) · Depende de: 003 (kit de vídeo)
 

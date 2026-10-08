@@ -2,7 +2,7 @@
 // O CLI não expõe a opção: chamamos o producer que vem embutido no pacote `hyperframes` (versão fixa no
 // package.json). Ele integra tudo o que a composição faz dentro do obturador (posição, escala, rotação, opacidade),
 // mas captura por screenshot em PNG: bem mais lento que o 2 passes do kit. Usado pelo produce.mjs --blur=nativo.
-// Teste e números: roadmap/tasks/032-upgrade-hyperframes/TASK.md.
+// Teste e números: roadmap/tasks/033-upgrade-hyperframes/TASK.md.
 //
 // Uso: node tools/video-kit/scripts/native-blur.mjs <projeto-render> <saida.mp4> [--fps=30] [--amostras=auto|N] [--quality=high|draft]
 import { readdirSync, readFileSync } from 'node:fs';

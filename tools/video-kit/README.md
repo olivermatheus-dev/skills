@@ -1,6 +1,6 @@
 # Kit de vídeo (motor de render)
 
-HTML/CSS/GSAP → MP4 com o [HyperFrames](https://hyperframes.heygen.com) **0.8.141 (versão fixa no `package.json`; upgrade medido em `roadmap/tasks/032-upgrade-hyperframes/TASK.md`)**. Veio do kit do Ludus (`../ludus/videos/_kit`, em produção) e foi adaptado ao contrato deste hub: timeline em `vo[]`/`scenes[]`/`events[]`, SFX da biblioteca licenciada, marca de cada empresa, formatos 4:5 · 9:16 · 16:9 · 1:1. Decisão e alternativas: `roadmap/tasks/003-stack-motion/DECISAO.md`.
+HTML/CSS/GSAP → MP4 com o [HyperFrames](https://hyperframes.heygen.com) **0.8.141 (versão fixa no `package.json`; upgrade medido em `roadmap/tasks/033-upgrade-hyperframes/TASK.md`)**. Veio do kit do Ludus (`../ludus/videos/_kit`, em produção) e foi adaptado ao contrato deste hub: timeline em `vo[]`/`scenes[]`/`events[]`, SFX da biblioteca licenciada, marca de cada empresa, formatos 4:5 · 9:16 · 16:9 · 1:1. Decisão e alternativas: `roadmap/tasks/003-stack-motion/DECISAO.md`.
 
 ```
 tools/video-kit/

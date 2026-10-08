@@ -18,7 +18,7 @@
 - **O HyperFrames embute e reordena os scripts.** Nada de ler `window.__TL` no topo de um arquivo do kit: o `tl.js` lê na hora do uso. Erro típico: "T is not defined" e todos os quadros iguais. Diagnóstico: `node node_modules/hyperframes/bin/hyperframes.mjs validate .` dentro de `render/<formato>/`.
 - **Nenhum JS (kit, `lib/motion`, composição) pode conter a tag de fechar script**, nem em comentário: o HyperFrames embute os arquivos na página, a tag fecha o script cedo e sai "Invalid or unexpected token" + "gsap is not defined" (todos os quadros vazios).
 - **Componentes da galeria:** `library/motion/` é copiada para `render/<formato>/lib/motion/` pelo `produce.mjs`.
-- **Estado inicial escondido vai no CSS** (`opacity: 0`), não em `tl.set(..., 0)`: um `set` em 0 não aparece no quadro 0 (o lint avisa). Num teste simples (032, 0.8.94 e 0.8.141) o `set` em 0 apareceu; a regra fica por segurança.
+- **Estado inicial escondido vai no CSS** (`opacity: 0`), não em `tl.set(..., 0)`: um `set` em 0 não aparece no quadro 0 (o lint avisa). Num teste simples (033, 0.8.94 e 0.8.141) o `set` em 0 apareceu; a regra fica por segurança.
 - **Saída termina antes da entrada.** Na troca de cena, o que sai acaba antes do que entra aparecer. Os quadros do `check.mjs` (fim de cena e eventos) **não pegam transição**: a folha do `qc.mjs --sheet` (a cada 0,5 s) pega.
 - **Nada parado > 1,5 s** (o `qc.mjs` acusa tela congelada): na espera, algo vivo (indicador de digitação, câmera respirando com escala ≥ 1,03, cursor andando).
 - **Meça antes de qualquer transform** (`getBoundingClientRect` no início do script), para cursor e alvos.
