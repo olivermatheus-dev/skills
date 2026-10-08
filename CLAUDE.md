@@ -17,7 +17,7 @@ Antes de produzir qualquer peça, leia os arquivos relevantes de `companies/<slu
 
 ```
 companies/<slug>/
-  context/          BUSINESS · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
+  context/          BUSINESS · PRODUTO · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
   brand/            BRAND.md (regras de uso) · brand.json (tokens, editável no app) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  templates de vídeo da empresa
   contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md, mockup.json…)

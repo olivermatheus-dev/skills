@@ -21,6 +21,7 @@
 - **Conteúdo:** 21 skills + 9 formatos `fmt-*`, 7 agentes, Kanban em `companies/<slug>/board/` (`node tools/board.mjs kz --me`), heartbeat. Base de vídeo em `knowledge/video/REGRAS.md`.
 
 ## Pendências do Oliver (bloqueiam a produção da kz)
+0. **Revisar a base antes de qualquer post (T-0014, decisão de 2026-10-07):** confirmar o inventário `companies/kz/context/PRODUTO.md` (17 linhas; dúvidas: Sessão rápida, Financeiro, lembrete automático, segurança) e escolher as 6 da vitrine → prints → persona → carta de vendas. Depois: os 3 posts fixados (T-0015).
 1. **Origin story (T-0009, em review):** nome público do fundador, se há foto real, (opcional) uma cena real. Texto em `companies/kz/contents/2026-10-07-origin-story/`.
 2. **Contexto da kz (T-0001 a T-0003):** preço final, trial/garantia, link de cadastro, @ do Instagram.
 3. **Regras CFP/CRP (T-0004):** até lá, anúncio e LP saem "não publicar".
