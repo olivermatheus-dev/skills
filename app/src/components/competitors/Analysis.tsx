@@ -29,7 +29,7 @@ export const AREAS = [
   { id: 'diagnostico', label: 'Diagnóstico', modules: ['resumo', 'forcas'] },
   { id: 'oferta', label: 'Oferta', modules: ['precos'] },
   { id: 'produto', label: 'Produto', modules: ['features'] },
-  { id: 'mensagem', label: 'Mensagem', modules: ['landing'] },
+  { id: 'mensagem', label: 'Posicionamento', modules: ['landing'] },
   { id: 'reputacao', label: 'Reputação', modules: ['reputacao'] },
   { id: 'dados', label: 'Dados', modules: ['atuacao', 'contato', 'perfis', 'site'] },
 ] as const satisfies readonly { id: string; label: string; modules: readonly ModuleId[] }[];

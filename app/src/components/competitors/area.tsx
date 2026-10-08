@@ -1,7 +1,7 @@
 // Área Concorrentes: cabeçalho com as abas (cada uma com rota própria) e os dados de mercado juntos por concorrente
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
-import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowUp, Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
+import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { ArrowDown, ArrowUp, BookUser, Clapperboard, Columns3, LayoutDashboard, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
@@ -12,16 +12,17 @@ import { CONTENT_MAX } from '../AppContent';
 
 export { FillBox, useFillHeight } from '../fill';
 
+/** insight à esquerda, gestão (Cadastro, Coletas) à direita depois do divisor */
 export const AREA_TABS = [
   { path: '', label: 'Panorama', icon: LayoutDashboard },
-  { path: 'lista', label: 'Concorrentes', icon: List },
   { path: 'comparar', label: 'Comparar', icon: Columns3 },
   { path: 'brechas', label: 'Brechas', icon: Target },
   { path: 'conteudos', label: 'Conteúdos', icon: Clapperboard },
-  { path: 'redes', label: 'Redes', icon: Share2 },
   { path: 'anuncios', label: 'Anúncios', icon: Megaphone },
+  { path: 'redes', label: 'Redes', icon: Share2 },
+  { path: 'lista', label: 'Cadastro', icon: BookUser, divider: true },
   { path: 'coletas', label: 'Coletas', icon: RefreshCw },
-] as const;
+] as readonly { path: string; label: string; icon: LucideIcon; divider?: boolean }[];
 
 /** cabeçalho comum das abas da área; `actions` entra à direita ao lado de "+ Adicionar". A faixa vai de ponta a ponta, o conteúdo fica centralizado */
 export function AreaHeader({ actions, sub }: { actions?: ReactNode; sub?: ReactNode }) {
@@ -41,10 +42,13 @@ export function AreaHeader({ actions, sub }: { actions?: ReactNode; sub?: ReactN
         </div>
         <nav className="mt-3 flex gap-0.5 -mb-px overflow-x-auto">
           {AREA_TABS.map((t) => (
-            <NavLink key={t.path} end to={`/p/${slug}/concorrentes${t.path ? `/${t.path}` : ''}`}
+            <Fragment key={t.path}>
+            {t.divider && <span aria-hidden className="mx-2 my-2.5 w-px bg-border shrink-0" />}
+            <NavLink end to={`/p/${slug}/concorrentes${t.path ? `/${t.path}` : ''}`}
               className={({ isActive }) => cx('inline-flex items-center gap-1.5 px-3 py-2 text-sm border-b-2 whitespace-nowrap', isActive ? 'border-primary font-medium text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground')}>
               <t.icon className="size-4" strokeWidth={1.8} />{t.label}
             </NavLink>
+            </Fragment>
           ))}
         </nav>
       </div>

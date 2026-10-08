@@ -30,5 +30,11 @@
 
 Ondas: **1** = A ∥ B (arquivos diferentes). **2** = C (orquestrador) → D ∥ F. **3** = E (depende de D) → G.
 
+## Decisões do Oliver
+- 2026-10-08 — **Preço da Kzloo na comparação: R$ 129/mês.** **Sem somar extras por uso** por enquanto (sem perfil-padrão). Pacote equivalente (8 itens do DESENHO §5): seguir a proposta do desenho até ele mudar.
+
 ## Log
 - 2026-10-08 — registrada. Onda 1 disparada (A desenho, B Brechas).
+- 2026-10-08 — Fase D parte 1: schema `precos` com os campos novos (3.9) em `schema/analysis.ts`, checklist 3.10 em `.claude/skills/analise-concorrentes/references/modulos.md`, piloto GestorPsi re-coletado (validate e typecheck ok). Sem commit.
+- 2026-10-08 — fase C feita: AREA_TABS na ordem do desenho (Panorama · Comparar · Brechas · Conteúdos · Anúncios · Redes | Cadastro · Coletas, divisor antes de Cadastro), chips do Comparar com ícone e rótulos Preços · Funcionalidades · Posicionamento · Reputação; ?v=mensagem abre Posicionamento, ?v=oferta segue sendo Preços; ficha do concorrente: área "Mensagem" renomeada para "Posicionamento" (só rótulo).
+- 2026-10-08 — fase F feita: Comparar > Posicionamento em app/src/pages/concorrentes/comparar/Posicionamento.tsx (?p=): Estrutura (matriz seção × concorrente, classe padrão/comum/rara, linha de prova social), Promessa, Porta de entrada, Prova, Tom, Vale copiar (tema por palavras-chave, sem "Virar tarefa" ainda). Só dados atuais; o tipo `outro` é reclassificado em memória pelo título. Pendências: coluna da Kzloo na Estrutura (falta `landing.sections` em referencia.json a partir da carta-base), extensão 4.7 do schema landing (enum novo + hero.angle, chip de ângulo na Promessa) NÃO feita, "Virar tarefa" no Vale copiar.

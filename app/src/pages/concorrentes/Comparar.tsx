@@ -1,14 +1,21 @@
-// Comparar: os concorrentes lado a lado por área de marketing (?v=): Oferta e preço · Funcionalidades (matriz features × concorrentes, intel/matriz.json) ·
-// Mensagem (hero, CTA, prova social, tom) · Reputação. Clique no cabeçalho ordena; no nome, abre a ficha.
+// Comparar: os concorrentes lado a lado por área de marketing (?v=): Preços (?v=oferta) · Funcionalidades (matriz features × concorrentes, intel/matriz.json) ·
+// Posicionamento (?v=posicionamento, antes mensagem: ver comparar/Posicionamento.tsx) · Reputação. Clique no cabeçalho ordena; no nome, abre a ficha.
+import { Grid3x3, PanelsTopLeft, Star, Tag } from 'lucide-react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { AreaPage, REF_ID, SortTable, useMarket, useRefRow, type Col, type MarketRow } from '../../components/competitors/area';
 import { money } from '../../components/competitors/Analysis';
 import { Avatar, Chips } from '../../components/competitors/lib';
 import MatrizFuncionalidades from './MatrizFuncionalidades';
+import Posicionamento from './comparar/Posicionamento';
 import { Badge, Empty, ErrorBox, cx } from '../../components/kit';
 
-const VIEWS = { oferta: 'Oferta e preço', funcionalidades: 'Funcionalidades', mensagem: 'Mensagem', reputacao: 'Reputação' } as const;
+const VIEWS = {
+  oferta: { label: 'Preços', icon: Tag }, funcionalidades: { label: 'Funcionalidades', icon: Grid3x3 },
+  posicionamento: { label: 'Posicionamento', icon: PanelsTopLeft }, reputacao: { label: 'Reputação', icon: Star },
+} as const;
+/** links antigos: ?v=mensagem abre Posicionamento */
+const ALIAS: Record<string, string> = { mensagem: 'posicionamento' };
 type View = keyof typeof VIEWS;
 type P = ModuleDataOf<'precos'>; type Lp = ModuleDataOf<'landing'>; type Rp = ModuleDataOf<'reputacao'>;
 const mod = <T,>(r: MarketRow, k: 'precos' | 'features' | 'landing' | 'reputacao') => r.res[k]?.data as T | undefined;
@@ -16,7 +23,8 @@ const mod = <T,>(r: MarketRow, k: 'precos' | 'features' | 'landing' | 'reputacao
 export default function Comparar() {
   const { slug = '' } = useParams();
   const [sp, setSp] = useSearchParams();
-  const raw = sp.get('v') ?? '';
+  const raw0 = sp.get('v') ?? '';
+  const raw = ALIAS[raw0] ?? raw0;
   const v = (Object.hasOwn(VIEWS, raw) ? raw : 'oferta') as View;
   const m = useMarket(slug);
   const rows = m.rows.filter((r) => r.c.data.kind === 'concorrente');
@@ -24,12 +32,12 @@ export default function Comparar() {
   const pin = ref ? [ref] : [];
   return (
     <AreaPage>
-      <div className="mb-4"><Chips value={v} onChange={(x) => setSp(x === 'oferta' ? {} : { v: x }, { replace: true })} options={Object.entries(VIEWS).map(([value, label]) => ({ value: value as View, label }))} /></div>
+      <div className="mb-4"><Chips value={v} onChange={(x) => setSp(x === 'oferta' ? {} : { v: x }, { replace: true })} options={Object.entries(VIEWS).map(([value, x]) => ({ value: value as View, label: <span className="inline-flex items-center gap-1.5"><x.icon className="size-3.5" strokeWidth={1.8} />{x.label}</span> }))} /></div>
       <ErrorBox error={m.error} />
       {!m.isLoading && !rows.length && <Empty title="Sem concorrentes ativos" />}
       {v === 'oferta' && <Oferta slug={slug} rows={rows} pin={pin} />}
       {v === 'funcionalidades' && <MatrizFuncionalidades slug={slug} rows={rows} />}
-      {v === 'mensagem' && <Mensagem slug={slug} rows={rows} pin={pin} />}
+      {v === 'posicionamento' && <Posicionamento slug={slug} rows={rows} refRow={ref} />}
       {ref && v !== 'reputacao' && <p className="mt-2 text-[11px] text-muted-foreground">{ref.c.data.name} (você) vem de <Link to={`/p/${slug}/contexto`} className="hover:text-primary-ink">Contexto</Link> (BUSINESS, PRODUTO, COPY) via <code>intel/referencia.json</code>: preço de referência da copy, só funcionalidades prontas.</p>}
       {v === 'reputacao' && <Reputacao slug={slug} rows={rows} />}
     </AreaPage>
@@ -62,18 +70,6 @@ function Oferta({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: Mar
     { k: 'guar', label: 'Fidelidade / garantia', v: (r) => mod<P>(r, 'precos')?.guarantee ?? undefined, render: (r) => <span className="block max-w-48 truncate text-muted-foreground" title={mod<P>(r, 'precos')?.guarantee ?? ''}>{mod<P>(r, 'precos')?.guarantee ?? '—'}</span> },
   ];
   return <SortTable fill rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'price', dir: 1 }} />;
-}
-
-function Mensagem({ slug, rows, pin }: { slug: string; rows: MarketRow[]; pin: MarketRow[] }) {
-  const cols: Col<MarketRow>[] = [
-    nameCol(slug),
-    { k: 'hero', label: 'Promessa (hero)', v: (r) => mod<Lp>(r, 'landing')?.hero.headline, className: 'min-w-72', render: (r) => { const l = mod<Lp>(r, 'landing'); return l ? <div><div className="font-medium leading-snug">{l.hero.headline}</div>{l.hero.subheadline && <div className="text-xs text-muted-foreground line-clamp-2">{l.hero.subheadline}</div>}</div> : dash; } },
-    { k: 'cta', label: 'CTA principal', v: (r) => mod<Lp>(r, 'landing')?.hero.cta ?? undefined, render: (r) => { const c = mod<Lp>(r, 'landing')?.hero.cta; return c ? <span className="text-xs px-2 py-0.5 rounded bg-primary/10 text-primary-ink whitespace-nowrap">{c}</span> : dash; } },
-    { k: 'proof', label: 'Prova social', render: (r) => <span className="text-xs block max-w-64">{mod<Lp>(r, 'landing')?.socialProof.slice(0, 2).join(' · ') || '—'}</span> },
-    { k: 'tone', label: 'Tom', v: (r) => mod<Lp>(r, 'landing')?.tone ?? undefined, render: (r) => <span className="text-xs text-muted-foreground block max-w-48">{mod<Lp>(r, 'landing')?.tone ?? '—'}</span> },
-    { k: 'sec', label: 'Seções', num: true, v: (r) => r.ov?.sections, render: (r) => r.ov?.sections ?? dash },
-  ];
-  return <SortTable fill rows={rows} pin={pin} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />;
 }
 
 function Reputacao({ slug, rows }: { slug: string; rows: MarketRow[] }) {
