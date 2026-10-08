@@ -123,5 +123,12 @@ O MCP da 009 vira desnecessário no curto prazo: os comandos do `timeline.mjs`/`
 4. **Edits/cortes:** já tem a 1ª página/tema e um podcast-fonte em mente? (define quando a fase H sobe na fila)
 5. **Copy:** quer que o pacote saia como planilha de importação em massa da Meta, ou basta uma lista para colar à mão?
 
+## Respostas do Oliver (2026-10-08)
+- **Piloto:** a apresentação da kz (`contents/2026-10-07-apresentacao-kz`, v03): fase A quebra em blocos; fase B faz as variantes nela.
+- **Vozes das variantes:** rascunho grátis (Thalita/vozes edge) para escolher; ElevenLabs só nas aprovadas.
+- **Teste:** 2 rodadas (1ª: 3 aberturas com 1 voz; 2ª: a abertura vencedora × 3 vozes). A matriz completa fica como opção no `projeto.json`.
+- Em aberto: 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D.
+
 ## Log
 - 2026-10-08: plano escrito a partir do pedido do Oliver (sessão de planejamento do vídeo). Juntou 009, 013, 014 e 015 num desenho só; aguarda as respostas da §10 e o aval para começar a fase A.
+- 2026-10-08: respostas 1–3 recebidas (acima). Próximo: fase A numa sessão nova ("continua a 045").
