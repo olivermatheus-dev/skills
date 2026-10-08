@@ -1,6 +1,6 @@
 // Camada de dados da interface: chaves do cache, consultas, pré-carga e o padrão de mutação otimista.
 // Regra: a tela muda na hora (setQueryData), o servidor confirma depois; erro → desfaz e avisa (toast).
-import { queryOptions, useMutation, useQuery, useQueryClient, type QueryClient, type QueryKey } from '@tanstack/react-query';
+import { queryOptions, useMutation, useQueries, useQuery, useQueryClient, type QueryClient, type QueryKey } from '@tanstack/react-query';
 import { api, type Doc } from './api';
 import { toast } from './components/toast';
 
@@ -30,6 +30,8 @@ export const qk = {
   matrix: (slug: string) => ['matrix', slug] as const,
   gaps: (slug: string) => ['gaps', slug] as const,
   ads: (slug: string) => ['ads', slug] as const,
+  adsClassified: (slug: string) => ['ads', slug, 'classified'] as const,
+  adsHistory: (slug: string, id: string) => ['ads', slug, 'history', id] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
@@ -110,6 +112,10 @@ export const useMatrix = (slug: string) => useQuery(q.matrix(slug));
 export const useGaps = (slug: string) => useQuery(q.gaps(slug));
 export const useReferencia = (slug: string) => useQuery(q.referencia(slug));
 export const useAds = (slug: string) => useQuery(q.ads(slug));
+/** classificação das regras (funil, tipo, objetivo, oferta, destino) dos anúncios ativos, por concorrente (037 B/C) */
+export const useAdsClassified = (slug: string) => useQuery({ queryKey: qk.adsClassified(slug), queryFn: () => api.adsClassified(slug), enabled: !!slug });
+/** histórico entre coletas (saiu do ar, reapareceu, coletas seguidas), um pedido por concorrente (037 A/C) */
+export const useAdsHistories = (slug: string, ids: string[]) => useQueries({ queries: ids.map((id) => ({ queryKey: qk.adsHistory(slug, id), queryFn: () => api.adsHistory(slug, id), enabled: !!slug })) });
 export const useCompetitorsFeed = (slug: string) => useQuery(q.competitorsFeed(slug));
 export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview(slug));
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));

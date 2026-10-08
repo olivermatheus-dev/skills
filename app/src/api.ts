@@ -30,6 +30,8 @@ import type { Format } from '../../schema/format';
 import type { FormatInfo, FormatUse, FormatRefInput } from '../../core/store';
 export type { Format, FormatInfo, FormatUse, FormatRefInput };
 export type { PieceCover } from '../../core/store';
+import type { AdsHistorico } from '../../core/store';
+export type { AdsHistorico, AnuncioHistorico } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
@@ -203,6 +205,7 @@ export const api = {
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),
   adsClassified: (slug: string) => req<{ id: string; ads: (Classificacao & { adId: string })[] }[]>('GET', `${pj(slug)}/ads/classified`),
+  adsHistory: (slug: string, id: string) => req<AdsHistorico>('GET', `${pj(slug)}/competitors/${encodeURIComponent(id)}/ads/history`),
   ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
   collectAds: (slug: string, id: string) => req<AdsResult>('POST', `${pj(slug)}/competitors/${id}/ads`),
   analysisAll: (slug: string) => req<{ id: string; results: AnalysisFull['results'] }[]>('GET', `${pj(slug)}/analysis-all`),
