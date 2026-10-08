@@ -1,11 +1,10 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:42:08Z",
+  "updatedAt": "2026-10-08T16:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
-    {
-      "url": "https://psicoplanner.com.br/"
-    }
+    { "url": "https://psicoplanner.com.br/", "title": "Home: dados dos planos (abas Mensal, Anual, Clínicas) e FAQ lidos do código da página" },
+    { "url": "https://psicoplanner.com.br/termos-de-uso/", "title": "Termos de uso (pagamento, planos, cancelamento)" }
   ],
   "confidence": "alta",
   "data": {
@@ -14,36 +13,140 @@
     "model": "assinatura",
     "fromMonthly": 59,
     "trial": "7 dias grátis, sem cartão",
+    "guarantee": "cancele quando quiser; sem reembolso proporcional",
+    "trialDays": 7,
+    "trialNeedsCard": false,
+    "pageDefaultCycle": "mensal",
+    "commitment": "sem-fidelidade",
+    "refundScope": "Cancelamento a qualquer momento com efeito imediato; sem reembolso de meses pagos ou do período restante do anual (termos 10.7 e 10.8)",
+    "paymentMethods": [],
     "plans": [
       {
+        "id": "individual",
         "name": "Individual",
+        "audience": "solo",
         "monthly": 59,
         "yearlyMonthly": 49.17,
         "yearlyTotal": 590,
         "users": "1 acesso",
-        "highlights": [
-          "WhatsApp",
-          "sala de vídeo",
-          "agendamento online",
-          "prontuário e anamnese"
+        "seats": { "included": 1, "max": 1, "unlimited": false },
+        "recommended": false,
+        "highlights": ["Lembretes por WhatsApp", "Sala de vídeo", "Prontuário e anamnese"],
+        "includes": [
+          "1 acesso",
+          "Lembretes por WhatsApp (a home diz WhatsApp ilimitado)",
+          "Sala de vídeo",
+          "Agendamento online (autoagendamento)",
+          "Prontuário e anamnese",
+          "Documentos personalizados",
+          "Gestão financeira com recibos"
         ],
-        "recommended": false
+        "limits": [
+          { "metric": "profissionais", "value": 1 },
+          { "metric": "whatsapp-msgs", "unlimited": true, "note": "Home: mensalidade cobre WhatsApp ilimitado" }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim", "note": "Agenda diária e semanal" },
+          { "id": "agendamento-paciente", "status": "sim", "note": "Autoagendamento por link" },
+          { "id": "wpp-lembrete", "status": "sim" },
+          { "id": "video-nativa", "status": "sim", "note": "Sala de vídeo integrada" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "anamnese-modelos", "status": "sim", "note": "Anamnese digital" },
+          { "id": "formulario-paciente", "status": "sim", "note": "Paciente preenche antes da consulta" },
+          { "id": "documentos-laudos", "status": "parcial", "note": "Documentos personalizados" },
+          { "id": "controle-cobrancas", "status": "sim", "note": "Controle de pagamentos" },
+          { "id": "recibo-receita-saude", "status": "parcial", "note": "Emite recibos" },
+          { "id": "suporte-humano", "status": "sim", "note": "Atendimento 100% humano" }
+        ]
       },
       {
+        "id": "plus",
         "name": "Plus",
+        "audience": "solo",
         "monthly": 79,
         "yearlyMonthly": 65.83,
         "yearlyTotal": 790,
-        "highlights": [
-          "transcrição com IA",
-          "demais itens do Individual"
+        "users": "1 acesso (FAQ cita 'Psi + secretária')",
+        "seats": { "included": 1, "unlimited": false },
+        "recommended": true,
+        "inherits": "individual",
+        "highlights": ["Transcrição de sessão com IA", "Tudo do Individual"],
+        "includes": [
+          "Tudo do Individual",
+          "Transcrição de sessão com IA (até 100 transcrições por mês)",
+          "Lembretes por WhatsApp",
+          "Sala de vídeo",
+          "Agendamento online",
+          "Prontuário e anamnese",
+          "Documentos personalizados"
         ],
-        "recommended": true
+        "limits": [
+          { "metric": "ia-creditos", "value": 100, "period": "mes", "note": "Transcrições de sessão por IA (termos 5.11)" },
+          { "metric": "whatsapp-msgs", "unlimited": true, "note": "Home: mensalidade cobre WhatsApp ilimitado" }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim" },
+          { "id": "agendamento-paciente", "status": "sim" },
+          { "id": "wpp-lembrete", "status": "sim" },
+          { "id": "video-nativa", "status": "sim" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "anamnese-modelos", "status": "sim" },
+          { "id": "formulario-paciente", "status": "sim" },
+          { "id": "documentos-laudos", "status": "parcial", "note": "Documentos personalizados" },
+          { "id": "controle-cobrancas", "status": "sim" },
+          { "id": "recibo-receita-saude", "status": "parcial", "note": "Emite recibos" },
+          { "id": "suporte-humano", "status": "sim" },
+          { "id": "ia-transcricao-nota", "status": "sim", "note": "Áudio vira prontuário; até 100/mês" }
+        ]
+      },
+      {
+        "id": "clinicas",
+        "name": "Clínicas",
+        "audience": "equipe",
+        "monthly": 395,
+        "users": "Até 5 profissionais (aba) / 5 ou mais (FAQ)",
+        "seats": { "included": 5, "unlimited": false },
+        "recommended": false,
+        "highlights": ["Secretárias grátis", "IA PsiAssist", "Contratação mínima de 6 meses"],
+        "includes": [
+          "Contratação mínima de 6 meses",
+          "Secretárias grátis",
+          "IA PsiAssist",
+          "Sala de vídeo",
+          "Agendamento online",
+          "Prontuário e anamnese",
+          "Documentos personalizados",
+          "Lembretes por WhatsApp opcionais, cobrados à parte"
+        ],
+        "limits": [
+          { "metric": "profissionais", "value": 5, "note": "Aba diz 'até 5'; FAQ diz '5 ou mais, a partir de R$ 395'" }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim" },
+          { "id": "agendamento-paciente", "status": "sim" },
+          { "id": "video-nativa", "status": "sim" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "anamnese-modelos", "status": "sim" },
+          { "id": "documentos-laudos", "status": "parcial", "note": "Documentos personalizados" },
+          { "id": "wpp-lembrete", "status": "parcial", "note": "Opcional, cobrado à parte" },
+          { "id": "ia-assistente", "status": "parcial", "note": "IA PsiAssist" },
+          { "id": "secretaria", "status": "sim", "note": "Secretárias grátis" },
+          { "id": "multiprofissional", "status": "sim" }
+        ]
       }
     ],
-    "extras": [
-      "aba Clínicas existe, sem preço visível"
+    "addOns": [
+      { "name": "Lembretes por WhatsApp (Clínicas)", "unit": "por-uso", "per": "valor não informado", "planIds": ["clinicas"], "unlocks": ["wpp-lembrete"] }
     ],
-    "notes": "Estado padrão da home: Mensal (R$ 59 e R$ 79 \"mensais\"). Anual: R$ 590 e R$ 790 por ano, pagamento único (equivale a ~R$ 49,17 e ~R$ 65,83/mês; 2 meses grátis). Contexto antigo citava R$ 99, não confirmado."
+    "extras": [
+      "Clínicas: contratação mínima de 6 meses; WhatsApp opcional cobrado à parte (valor não publicado)"
+    ],
+    "checkedPages": [
+      { "kind": "precos", "url": "https://psicoplanner.com.br/" },
+      { "kind": "faq", "url": "https://psicoplanner.com.br/" },
+      { "kind": "termos", "url": "https://psicoplanner.com.br/termos-de-uso/" },
+      { "kind": "home", "url": "https://psicoplanner.com.br/" }
+    ],
+    "notes": "Re-coleta por leitura do código da home (os planos são montados por JavaScript com as 3 abas Mensal, Anual e Clínicas; o navegador embutido estava no limite de abas, então li os dados das abas direto do HTML). Mudanças: a aba Clínicas agora tem preço (R$ 395/mês, antes 'sem preço visível'), com contratação mínima de 6 meses e secretárias grátis; limite de 100 transcrições de IA/mês no Plus (termos 5.11); sem reembolso proporcional no anual (termos 10.7). Anual é pagamento único (Individual R$ 590, Plus R$ 790); yearlyMonthly = total / 12 (49,17 e 65,83). Divergências: aba Clínicas diz 'até 5 profissionais', FAQ diz '5 ou mais profissionais, a partir de R$ 395'; FAQ chama o Plus de 'Psi + secretária', mas a aba lista só 1 acesso e transcrição com IA; a home diz que a mensalidade cobre 'WhatsApp ilimitado e IA PsiAssist' (PsiAssist só aparece listada no Clínicas). Contexto antigo que citava R$ 99 não se confirma. Lacunas: formas de pagamento (Pix/boleto/cartão) não informadas; preço do WhatsApp no Clínicas; valor por profissional acima de 5; cadastro (meu.psicoplanner.com.br/criar-conta) não aberto, mas a página e o FAQ afirmam teste sem cartão; reajuste anual por IGP-M possível (termos 5.2)."
   }
 }

@@ -1,14 +1,11 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:29:59Z",
+  "updatedAt": "2026-10-08T16:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
-    {
-      "url": "https://www.maisterapias.com.br/planos-e-precos/"
-    },
-    {
-      "url": "https://www.maisterapias.com.br/"
-    }
+    { "url": "https://www.maisterapias.com.br/planos-e-precos/", "title": "Planos e preços (cards, comparativo, créditos de WhatsApp, FAQ)" },
+    { "url": "https://www.maisterapias.com.br/termos-de-uso/", "title": "Termos de uso (seções 2.3 e 2.4: planos, pagamento, cancelamento)" },
+    { "url": "https://www.maisterapias.com.br/" }
   ],
   "confidence": "alta",
   "data": {
@@ -17,52 +14,153 @@
     "model": "assinatura",
     "fromMonthly": 39.9,
     "trial": "15 dias grátis, sem cartão",
-    "guarantee": "sem fidelidade, cancele quando quiser",
+    "guarantee": "sem fidelidade, cancele quando quiser (sem reembolso proporcional)",
+    "trialDays": 15,
+    "trialNeedsCard": false,
+    "pageDefaultCycle": "mensal",
+    "commitment": "sem-fidelidade",
+    "refundScope": "Cancelamento a qualquer momento antes da próxima cobrança; sem reembolso proporcional, acesso até o fim do ciclo pago (termos 2.4)",
+    "paymentMethods": ["cartao"],
     "plans": [
       {
+        "id": "starter",
         "name": "Terapeuta Starter",
+        "audience": "solo",
         "monthly": 39.9,
+        "regularMonthly": 59.9,
+        "promo": { "label": "Preço normal riscado: R$ 59,90 (sem data de término informada)" },
         "users": "1 profissional",
-        "highlights": [
-          "agenda",
-          "prontuário",
-          "financeiro",
-          "portal do paciente e da família",
-          "preço normal R$ 59,90"
+        "seats": { "included": 1, "max": 1, "unlimited": false },
+        "recommended": false,
+        "highlights": ["Agenda e prontuário eletrônico", "Financeiro: receitas, despesas e pagamentos", "Portal do paciente e da família"],
+        "includes": [
+          "Agenda visual (dia, semana e mês) e agendamento recorrente",
+          "Cadastro completo de pacientes e histórico de sessões",
+          "Prontuário eletrônico e registros de evolução",
+          "Serviços e pacotes",
+          "Financeiro: receitas, despesas e registro de pagamentos",
+          "Portal do paciente e compartilhamento com a família",
+          "1 profissional"
         ],
-        "recommended": false
+        "limits": [
+          { "metric": "profissionais", "value": 1 }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim", "note": "Visão dia, semana e mês" },
+          { "id": "recorrencia", "status": "sim" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "pacotes-sessoes", "status": "sim", "note": "Serviços e pacotes" },
+          { "id": "controle-cobrancas", "status": "sim", "note": "Registro de pagamentos" },
+          { "id": "portal-paciente", "status": "sim", "note": "Inclui compartilhamento com família" }
+        ]
       },
       {
+        "id": "premium",
         "name": "Terapeuta Premium",
+        "audience": "solo",
         "monthly": 59.9,
+        "regularMonthly": 79.9,
+        "promo": { "label": "Preço normal riscado: R$ 79,90 (sem data de término informada)" },
         "users": "1 profissional",
-        "highlights": [
-          "tudo do Starter",
-          "IA",
-          "assinatura ICP-Brasil",
-          "WhatsApp 25 msgs/mês",
-          "relatórios",
-          "preço normal R$ 79,90"
+        "seats": { "included": 1, "max": 1, "unlimited": false },
+        "recommended": true,
+        "inherits": "starter",
+        "highlights": ["Assistente de IA para documentação", "Assinatura digital ICP-Brasil", "WhatsApp: 25 mensagens/mês"],
+        "includes": [
+          "Tudo do Starter",
+          "Assistente de IA para documentação (registro por áudio, segundo os termos)",
+          "Confirmação e lembretes por WhatsApp (25 mensagens/mês)",
+          "Relatórios de atendimentos e financeiros",
+          "Integração com Google Calendar",
+          "Assinatura digital ICP-Brasil (exige certificado A1 próprio)",
+          "Formulários dinâmicos",
+          "Papel timbrado",
+          "Suporte prioritário"
         ],
-        "recommended": true
+        "limits": [
+          { "metric": "profissionais", "value": 1 },
+          { "metric": "whatsapp-msgs", "value": 25, "period": "mes", "note": "Saldo da conta inteira, não acumula" }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim" },
+          { "id": "recorrencia", "status": "sim" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "pacotes-sessoes", "status": "sim" },
+          { "id": "controle-cobrancas", "status": "sim" },
+          { "id": "portal-paciente", "status": "sim" },
+          { "id": "google-agenda", "status": "sim" },
+          { "id": "ia-transcricao-nota", "status": "sim", "note": "Assistente de IA, registro por áudio" },
+          { "id": "assinatura-digital", "status": "sim", "note": "ICP-Brasil, certificado A1 próprio" },
+          { "id": "formulario-paciente", "status": "parcial", "note": "Formulários dinâmicos" },
+          { "id": "documentos-laudos", "status": "parcial", "note": "Papel timbrado" },
+          { "id": "wpp-lembrete", "status": "parcial", "note": "25 mensagens/mês; recarga paga" },
+          { "id": "relatorios-fin", "status": "sim", "note": "Relatórios de atendimentos e financeiros" },
+          { "id": "suporte-humano", "status": "sim", "note": "Suporte prioritário" }
+        ]
       },
       {
+        "id": "clinicas",
         "name": "Clínicas",
+        "audience": "equipe",
         "monthly": 159.9,
-        "users": "profissionais ilimitados",
-        "highlights": [
-          "perfis de acesso",
-          "secretária",
-          "dashboard",
-          "relatórios por profissional"
+        "users": "Profissionais ilimitados",
+        "seats": { "unlimited": true },
+        "recommended": false,
+        "inherits": "premium",
+        "highlights": ["Profissionais ilimitados", "Permissões por perfil e perfil de secretária", "Dashboard e relatórios por profissional"],
+        "includes": [
+          "Tudo do Premium",
+          "Profissionais ilimitados",
+          "Agenda por profissional",
+          "Permissões por perfil de usuário (Administrador, Terapeuta, Secretária)",
+          "Perfil exclusivo para secretária",
+          "Dashboard de gestão clínica",
+          "Relatórios detalhados por profissional",
+          "Suporte dedicado",
+          "Terapeutas convidados acessam sem custo individual e sem período de teste (a assinatura é do administrador)"
         ],
-        "recommended": false
+        "limits": [
+          { "metric": "profissionais", "unlimited": true },
+          { "metric": "whatsapp-msgs", "value": 25, "period": "mes", "note": "Saldo da conta inteira, não acumula" }
+        ],
+        "matrix": [
+          { "id": "agenda-visual", "status": "sim", "note": "Inclui agenda por profissional" },
+          { "id": "recorrencia", "status": "sim" },
+          { "id": "prontuario", "status": "sim" },
+          { "id": "pacotes-sessoes", "status": "sim" },
+          { "id": "controle-cobrancas", "status": "sim" },
+          { "id": "portal-paciente", "status": "sim" },
+          { "id": "google-agenda", "status": "sim" },
+          { "id": "ia-transcricao-nota", "status": "sim", "note": "Assistente de IA, registro por áudio" },
+          { "id": "assinatura-digital", "status": "sim", "note": "ICP-Brasil, certificado A1 próprio" },
+          { "id": "formulario-paciente", "status": "parcial", "note": "Formulários dinâmicos" },
+          { "id": "documentos-laudos", "status": "parcial", "note": "Papel timbrado" },
+          { "id": "wpp-lembrete", "status": "parcial", "note": "25 mensagens/mês; recarga paga" },
+          { "id": "relatorios-fin", "status": "sim" },
+          { "id": "suporte-humano", "status": "sim", "note": "Suporte dedicado" },
+          { "id": "multiprofissional", "status": "sim" },
+          { "id": "secretaria", "status": "sim", "note": "Perfil exclusivo de secretária" },
+          { "id": "indicadores-gestao", "status": "sim", "note": "Dashboard e relatórios por profissional" }
+        ]
       }
     ],
+    "addOns": [
+      { "name": "Créditos de WhatsApp: 50 mensagens", "price": 5.9, "unit": "por-uso", "per": "pacote de 50 mensagens", "planIds": ["premium", "clinicas"], "unlocks": ["wpp-lembrete"] },
+      { "name": "Créditos de WhatsApp: 100 mensagens", "price": 9.9, "unit": "por-uso", "per": "pacote de 100 mensagens", "planIds": ["premium", "clinicas"], "unlocks": ["wpp-lembrete"] },
+      { "name": "Créditos de WhatsApp: 250 mensagens", "price": 24, "unit": "por-uso", "per": "pacote de 250 mensagens", "planIds": ["premium", "clinicas"], "unlocks": ["wpp-lembrete"] },
+      { "name": "Créditos de WhatsApp: 500 mensagens", "price": 47, "unit": "por-uso", "per": "pacote de 500 mensagens", "planIds": ["premium", "clinicas"], "unlocks": ["wpp-lembrete"] }
+    ],
     "extras": [
-      "Créditos WhatsApp: 50 msgs R$ 5,90; 100 R$ 9,90; 250 R$ 24; 500 R$ 47",
+      "Créditos WhatsApp: 50 msgs R$ 5,90; 100 R$ 9,90; 250 R$ 24; 500 R$ 47 (somam ao saldo e não expiram; as 25 msgs mensais do plano não acumulam)",
       "Assinatura digital exige certificado ICP-Brasil A1 próprio"
     ],
-    "notes": "Só cobrança mensal (sem plano anual). Starter e Premium aparecem com 'preço normal' riscado (59,90 e 79,90); não há data da promoção. Plano gratuito legado só para quem entrou até jul/2025."
+    "checkedPages": [
+      { "kind": "precos", "url": "https://www.maisterapias.com.br/planos-e-precos/" },
+      { "kind": "comparativo", "url": "https://www.maisterapias.com.br/planos-e-precos/" },
+      { "kind": "faq", "url": "https://www.maisterapias.com.br/planos-e-precos/" },
+      { "kind": "termos", "url": "https://www.maisterapias.com.br/termos-de-uso/" },
+      { "kind": "home", "url": "https://www.maisterapias.com.br/" }
+    ],
+    "notes": "Re-coleta feita por leitura direta do HTML das páginas (o navegador embutido estava no limite de abas, então não houve clique em seletores; a página de planos não tem seletor de ciclo). Preços iguais ao arquivo anterior; novo: planos estruturados, comparativo recurso a recurso, add-ons, termos. Só cobrança mensal (sem anual no cadastro; outra condição só por e-mail fale@maisterapias.com.br). Starter e Premium têm 'preço normal' riscado (59,90 e 79,90) sem data de fim. Pagamento no cartão de crédito, cobrança automática mensal; 3 novas tentativas a cada 7 dias em caso de falha. Divergência: a página de planos diz 25 mensagens de WhatsApp/mês no Premium; os termos (2.3) dizem 25 SMS + 25 WhatsApp. Reajuste anual possível por IGP-M com 30 dias de aviso. Plano gratuito legado só para cadastros até jul/2025 (acesso com funcionalidades do Starter). Lacunas: preço de profissional extra e de secretária no Clínicas (a página diz ilimitados, sem valor extra); se Starter pode comprar créditos de WhatsApp (o recurso não está no plano); se o cadastro pede cartão após o teste (tela de create-account é SPA, não foi aberta); Pix/boleto não mencionados; ciclo trimestral/anual inexistente. Sem comparativo de limites de pacientes ou armazenamento (não informado)."
   }
 }
