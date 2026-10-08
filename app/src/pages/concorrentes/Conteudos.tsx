@@ -76,7 +76,7 @@ export default function Conteudos() {
       <ItemPanel compId={openRow?.compId} r={openRow} open={!!openRow} focusIdea={sp.get('ideia') === '1'} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
         profileLabel={openRow?.compName ?? ''} tagSuggestions={tagSuggestions} ideaBusy={!!openRow && idea.busy === openRow.mk}
         onMark={(patch) => openRow && mark(openRow, patch)}
-        onIdea={(title, tg, note) => openRow && idea.make({ id: openRow.compId!, name: openRow.compName! }, '', openRow, title, tg, note)} />
+        onIdea={(title, tg, note, extra) => openRow && idea.make({ id: openRow.compId!, name: openRow.compName! }, '', openRow, title, tg, note, extra)} />
     </AreaPage>
   );
 }

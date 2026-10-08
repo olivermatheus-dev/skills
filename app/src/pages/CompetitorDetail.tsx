@@ -13,6 +13,7 @@ import { useCompetitorActions } from '../components/competitors/useCompetitorAct
 import { Badge, Button, Empty, ErrorBox, cx, fmtNum } from '../components/kit';
 import EditCompetitor from '../components/competitors/EditCompetitor';
 import { useMakeIdea } from '../components/competitors/useMakeIdea';
+import type { IdeaExtra } from '../components/competitors/ficha/paraIdeia';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
 import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
@@ -231,9 +232,9 @@ function Detalhe() {
     if (!det || det.kind !== 'perfil') return;
     void actions.save(id, { ...c, profiles: [...c.profiles, { platform: det.platform as never, url: det.url, handle: det.handle, externalId: det.externalId }] }, d!.body, { okMessage: 'Perfil adicionado' });
   }
-  const makeIdea = (r: Row, title?: string, tags?: string[], note?: string) => {
+  const makeIdea = (r: Row, title?: string, tags?: string[], note?: string, extra?: IdeaExtra) => {
     const prof = profiles.find((p) => p.key === r.profileKey);
-    return idea.make({ id, name: c.name }, prof ? handleOf(prof) : '', r, title, tags, note);
+    return idea.make({ id, name: c.name }, prof ? handleOf(prof) : '', r, title, tags, note, extra);
   };
   const ideaBusy = idea.busy, ideaError = idea.error;
 
@@ -413,7 +414,7 @@ function Detalhe() {
         profileLabel={openRow ? handleOf(profiles.find((p) => p.key === openRow.profileKey) ?? { platform: openRow.platform, url: '' }) : ''}
         tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk}
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}
-        onIdea={(title, tags, note) => openRow && makeIdea(openRow, title, tags, note)} />
+        onIdea={(title, tags, note, extra) => openRow && makeIdea(openRow, title, tags, note, extra)} />
       <RunDialog slug={slug} c={c} open={runOpen} onOpenChange={setRunOpen} onCollect={pull} />
       {editing && <EditCompetitor key={editing.error ? 'erro' : 'ok'} slug={slug} open onClose={() => setEditing(false)} onFailed={(draft, error) => setEditing({ draft, error })}
         data={editing.draft?.data ?? c} body={editing.draft?.body ?? d.body} initialError={editing.error} snapshotsCount={d.snapshotsTotal} />}

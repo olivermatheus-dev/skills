@@ -8,6 +8,7 @@ import {
   Img, MERCADO_MIN_AMOSTRA, MERCADO_MIN_CONCORRENTES, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row,
 } from './lib';
 import { Tip } from './toolbar';
+import type { IdeaExtra } from './ficha/paraIdeia';
 
 export const isVertical = (r: Row) => ['short', 'reel'].includes(r.item.type) || r.platform === 'tiktok' || (r.platform === 'instagram' && r.item.type !== 'post');
 export const titleOf = (r: Row) => r.item.title || r.item.caption?.split('\n')[0] || `${TYPE_LABEL[r.item.type] ?? 'Item'} ${r.item.id}`;
@@ -237,7 +238,7 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
   /** abre já no "Virar ideia" (rola até o bloco e foca o título) */
   focusIdea?: boolean;
   r: Row | null; media?: string; open: boolean; onClose: () => void; slug: string; profileLabel?: string; tagSuggestions: string[];
-  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string) => void; ideaBusy: boolean;
+  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string, extra?: IdeaExtra) => void; ideaBusy: boolean;
 }) {
   const [note, setNote] = useState('');
   const [tags, setTags] = useState('');

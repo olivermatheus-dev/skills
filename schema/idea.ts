@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { IsoDate, Url, TagList, Platform, nullish } from './common';
+import { FICHA_KEY_RE } from './ficha';
 
 export const Objective = z.enum(['informar', 'novidade', 'curiosidade', 'engajar', 'converter', 'polemica']);
 export const Tone = z.enum(['dramatico', 'epico', 'animado', 'inspirador', 'calmo', 'urgente', 'curioso']);
@@ -17,6 +18,10 @@ export const Idea = z.object({
     platform: nullish(Platform),
     itemId: nullish(z.string()),
     url: nullish(Url),
+    /** ficha de análise do item (040): `<plataforma>:<id>`; a análise vai no corpo da ideia */
+    ficha: nullish(z.string().regex(FICHA_KEY_RE)),
+    /** relatório do concorrente que cita o item (competitors/<id>/relatorios/<relatorio>.md) */
+    relatorio: nullish(z.string().regex(/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/)),
   })),
   task: nullish(z.string().regex(/^T-\d{4}$/)),
   tags: TagList,

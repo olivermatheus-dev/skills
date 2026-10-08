@@ -16,6 +16,10 @@ import { PlatformIcon, Spinner, TYPE_LABEL, fmtPct, fmtRatio, platformLabel, tim
 import { Thumb, FavStar, ItemDrawer, isVertical, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from '../Items';
 import { Tip } from '../toolbar';
 import { useFicha, useFichasResumo, useFichasVocab, usePedido } from './useFichas';
+import { analiseParaIdeia, type IdeaExtra } from './paraIdeia';
+
+/** "Virar ideia" dentro do painel: `foco` = a adaptação escolhida (sem foco = o item inteiro) */
+type OnIdea = (title: string, foco?: { ideia: string; formato?: string | null }) => void;
 
 type Campos = Partial<FichaCampos>;
 
@@ -306,7 +310,7 @@ function Gatilhos({ c }: { c: Campos }) {
   );
 }
 
-function Resumo({ c, onIdea, ideaBusy }: { c: Campos; onIdea: (title: string, note: string) => void; ideaBusy: boolean }) {
+function Resumo({ c, onIdea, ideaBusy }: { c: Campos; onIdea: OnIdea; ideaBusy: boolean }) {
   const { v, edit } = useF();
   const termos = v.ficha.analise?.termosNovos ?? [];
   return (
@@ -337,7 +341,7 @@ function Resumo({ c, onIdea, ideaBusy }: { c: Campos; onIdea: (title: string, no
                 <VSelect grupo="formato" value={a.formato} vazio="sem formato" label="Formato da adaptação" onChange={(x) => edit('adaptar', (c.adaptar ?? []).map((y, j) => (j === i ? { ...y, formato: x || null } : y)))} />
               </div>
               <Button variant="soft" className="!h-7 !px-2 text-xs shrink-0 inline-flex items-center gap-1" disabled={ideaBusy}
-                onClick={() => onIdea(a.ideia.replace(/^["“]|["”]$/g, '').slice(0, 120), `Adaptação sugerida pela análise.\n\nPor que o original funcionou (hipótese): ${c.porQue ?? '—'}`)}>
+                onClick={() => onIdea(a.ideia.replace(/^["“]|["”]$/g, '').slice(0, 120), { ideia: a.ideia, formato: a.formato })}>
                 <Lightbulb className="size-3.5" />Virar ideia
               </Button>
             </li>
@@ -518,7 +522,7 @@ function Fonte() {
 /** "Por que funcionou" muda de título conforme o desempenho, para a leitura bater com o número */
 const tituloPorQue = (x?: number | null) => (x == null ? 'Por que performou assim' : x >= 1.5 ? 'Por que funcionou' : x < 0.9 ? 'Por que não decolou' : 'Por que ficou na média');
 
-function Corpo({ r, media, onIdea, ideaBusy }: { r: Row; media?: string; onIdea: (title: string, note: string) => void; ideaBusy: boolean }) {
+function Corpo({ r, media, onIdea, ideaBusy }: { r: Row; media?: string; onIdea: OnIdea; ideaBusy: boolean }) {
   const { v, edit } = useF();
   const c = v.campos;
   // o porQue é guardado como a IA escreve ("hipótese: …"); a tela tira o prefixo e o devolve ao salvar
@@ -614,7 +618,7 @@ function Cinco({ c }: { c: Campos }) {
 
 export function FichaDialog({ open, onClose, r, slug, compId, media, profileLabel, onMark, onIdea, ideaBusy }: {
   open: boolean; onClose: () => void; r: Row; slug: string; compId: string; media?: string; profileLabel?: string;
-  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string) => void; ideaBusy: boolean;
+  onMark: (patch: Partial<ItemMark>) => void; onIdea: (title: string, tags: string[], note: string, extra?: IdeaExtra) => void; ideaBusy: boolean;
 }) {
   const fq = useFicha(slug, compId, r.mk, open);
   const vocab = useFichasVocab(slug);
@@ -622,7 +626,8 @@ export function FichaDialog({ open, onClose, r, slug, compId, media, profileLabe
   const ctx = useMemo<Ctx | null>(() => (v ? { v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [v, vocab.data, fq.saving, fq.edit, fq.revert]);
   const m = r.mark;
   const a = v?.ficha.analise;
-  const idea = (title: string, note: string) => onIdea(title, m?.tags ?? [], note);
+  // a análise inteira vai para o corpo da ideia; a ficha e o relatório de origem ficam no `source` (040 I)
+  const idea: OnIdea = (title, foco) => onIdea(title, m?.tags ?? [], m?.note ?? '', v ? analiseParaIdeia(v, compId, foco) : undefined);
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent aria-describedby={undefined}
@@ -659,7 +664,7 @@ export function FichaDialog({ open, onClose, r, slug, compId, media, profileLabe
             <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-sm font-medium text-success-ink"><Sparkles className="size-3.5" />Virou a ideia {m.ideaId}</Link>
           ) : (
             <Button variant="soft" disabled={ideaBusy || !v} className="inline-flex items-center gap-1.5"
-              onClick={() => idea((v?.campos.headline?.texto || titleOf(r)).slice(0, 120), `Por que funcionou (hipótese da IA): ${v?.campos.porQue ?? '—'}`)}>
+              onClick={() => idea((v?.campos.headline?.texto || titleOf(r)).slice(0, 120))}>
               {ideaBusy ? <Spinner /> : <Lightbulb className="size-4" />}Virar ideia
             </Button>
           )}

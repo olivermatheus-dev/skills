@@ -43,6 +43,7 @@ Regras (se a empresa não tiver as suas): ≥ 1 topo por semana; máx. 2 seguido
 ## Modo 3 — Engenharia reversa (criador/concorrente)
 
 Com perfis ou posts de referência:
+0. **Antes, o que já foi analisado:** o relatório mais recente de cada concorrente citado (`companies/<slug>/competitors/<id>/relatorios/`, o de `gerado` mais novo por rede; seções "Em 5 linhas", padrões, "copiar", "evitar" e ideias) e, se precisar do detalhe de um item, a ficha dele (`competitors/<id>/fichas/`). Use os valores do vocabulário (`library/analise/vocabulario.json`, termos aceitos) para nomear formato, gancho e gatilho. Toda pauta que sair daí cita o relatório (`relatorio: <id>`) e a ficha de origem; o que o relatório manda "evitar" não entra. Sem relatório, siga os passos abaixo.
 1. Os 10 posts de maior desempenho (views, comentários, envios se houver).
 2. Para cada: formato, hook (texto exato), estrutura, CTA, emoção dominante.
 3. 3–5 padrões que se repetem.

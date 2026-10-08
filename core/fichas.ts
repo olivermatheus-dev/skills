@@ -9,6 +9,7 @@ import { FichasPedido } from '../schema/relatorio';
 import type { Vocabulario } from '../schema/vocabulario';
 import { ROOT, ValidationError, listCompetitors } from './store';
 import { fichasDir, loadVocab, readFicha, writeFicha } from '../tools/fichas/lib';
+import { listarRelatorios } from '../tools/fichas/relatorio-lib';
 
 const json = (f: string) => JSON.parse(readFileSync(f, 'utf8').replace(/^﻿/, ''));
 const nowIso = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
@@ -62,6 +63,13 @@ export interface FichaView {
   naFila: boolean;
   /** prefixo das imagens dos quadros (data/intel, fora do git) */
   quadrosUrl: string;
+  /** relatório mais recente do concorrente que cita este item (vira a origem da ideia no "Virar ideia") */
+  relatorio: { id: string; gerado: string } | null;
+}
+
+function relatorioDoItem(slug: string, comp: string, key: string): FichaView['relatorio'] {
+  const r = listarRelatorios(slug, comp).find((x) => x.data.itens.includes(key)); // já vem do mais novo ao mais antigo
+  return r ? { id: r.data.id, gerado: r.data.gerado } : null;
 }
 
 const quadrosUrl = (slug: string, comp: string, key: string) => `/ficha-file/${slug}/${comp}/${encodeURIComponent(fichaFileName(key).replace(/\.json$/, ''))}/`;
@@ -73,7 +81,7 @@ function view(slug: string, comp: string, f: Ficha): FichaView {
     const ia = getAt(f.analise?.campos, p);
     edicoes[p] = { em, ia: ia ?? null, diverge: !!ger && !!em && ger > em && !igual(ia, getAt(f.override, p)) };
   }
-  return { ficha: f, campos: camposEfetivos(f), edicoes, naFila: pedidoKeys(slug, comp).includes(f.key), quadrosUrl: quadrosUrl(slug, comp, f.key) };
+  return { ficha: f, campos: camposEfetivos(f), edicoes, naFila: pedidoKeys(slug, comp).includes(f.key), quadrosUrl: quadrosUrl(slug, comp, f.key), relatorio: relatorioDoItem(slug, comp, f.key) };
 }
 
 export function getFichaView(slug: string, comp: string, key: string): FichaView | null {

@@ -6,13 +6,15 @@ import { api, type CompetitorFull, type Doc, type Idea, type ItemMark } from '..
 import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc } from '../../queries';
 import { titleOf } from './Items';
 import { TYPE_LABEL, fmtPct, fmtRatio, platformLabel, type Row } from './lib';
+import type { IdeaExtra } from './ficha/paraIdeia';
 
 export function useMakeIdea(slug: string) {
   const qc = useQueryClient();
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<unknown>(null);
 
-  async function make(comp: { id: string; name: string }, profileLabel: string, r: Row, title = titleOf(r).slice(0, 120), tags = r.mark?.tags ?? [], note = r.mark?.note ?? '') {
+  /** `extra` (vindo da ficha, 040 I): a análise entra no corpo e a ficha e o relatório viram a origem da ideia */
+  async function make(comp: { id: string; name: string }, profileLabel: string, r: Row, title = titleOf(r).slice(0, 120), tags = r.mark?.tags ?? [], note = r.mark?.note ?? '', extra?: IdeaExtra) {
     setBusy(r.mk); setError(null);
     try {
       const m = r.item.metrics;
@@ -28,6 +30,7 @@ export function useMakeIdea(slug: string) {
         `| ${r.porSeguidorBasis === 'likes' ? 'curtidas' : 'views'} por seguidor | ${r.porSeguidor != null ? `${(r.porSeguidor * 100).toLocaleString('pt-BR', { maximumFractionDigits: 1 })}% dos seguidores do perfil (${r.porSeguidorMercado != null ? `${fmtRatio(r.porSeguidorMercado)} o típico do mercado` : 'sem mercado: menos de 3 concorrentes'})` : 'sem seguidores coletados'} |`,
         `| engajamento | ${fmtPct(r.engagement)} |`,
         '',
+        ...(extra?.analise ? [extra.analise] : []),
         ...(r.item.caption ? ['## Legenda original', '', `> ${r.item.caption.slice(0, 600).replace(/\n/g, '\n> ')}`, ''] : []),
         '## Observações do Oliver', '', note, '',
       ].join('\n');
@@ -36,7 +39,10 @@ export function useMakeIdea(slug: string) {
       const key = qk.competitor(slug, comp.id);
       const ideasKey = qk.ideas(slug);
       const tempId = nextSeqId('I', (qc.getQueryData<Doc<Idea>[]>(ideasKey) ?? []).map((i) => i.data.id)) as Idea['id'];
-      const data = { title, status: 'nova', source: { competitor: comp.id, platform: r.platform as never, itemId: r.item.id, url: r.item.url }, tags } as Partial<Idea> & { title: string };
+      const data = {
+        title, status: 'nova', origin: 'concorrente', tags,
+        source: { competitor: comp.id, platform: r.platform as never, itemId: r.item.id, url: r.item.url, ficha: extra?.ficha, relatorio: extra?.relatorio },
+      } as Partial<Idea> & { title: string };
       const opt: Doc<Idea> = { data: { ...data, id: tempId, created: new Date().toISOString().slice(0, 10) } as Idea, body, file: '' };
       const markPatch = (ideaId: string) => ({ ideaId, status: 'analisada' as const, tags });
       setBusy(null);
