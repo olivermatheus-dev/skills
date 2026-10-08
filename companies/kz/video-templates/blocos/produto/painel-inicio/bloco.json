@@ -1,0 +1,17 @@
+{
+  "id": "produto/painel-inicio",
+  "tipo": "produto",
+  "titulo": "Painel inicial da kz recriado nos tokens do app: entra, destaca a próxima sessão, cursor clica na lista, confirmação",
+  "camada": "palco",
+  "slots": ["saudacao", "nome", "h1", "h2", "h3"],
+  "params": {},
+  "cues": ["entra", "destaque", "lista", "feito", "sai"],
+  "min_s": 5,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "whoosh suave", "lista": "clique", "feito": "ding de confirmação" },
+  "tokens": ["--bg", "--surface", "--border", "--primary", "--primary-hover", "--accent", "--accent-soft", "--ui-*", "--success", "--shadow-lg"],
+  "dados": "ilustrativos (nomes e horários de exemplo); trocar por print real quando houver",
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s5), extraído na 045 A",
+  "licenca": "própria"
+}

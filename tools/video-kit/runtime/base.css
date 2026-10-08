@@ -1,0 +1,20 @@
+/* Base de toda composição montada por blocos (compor.mjs). Só tokens do brand.css; nada de marca aqui. */
+html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+* { box-sizing: border-box; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+  color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* palco 1080×1170: mesma altura útil no 4:5 e no 9:16 */
+.f-9x16 { --top: 300px; }
+.f-4x5 { --top: 90px; }
+#stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+.layer { position: absolute; inset: 0; }
+.icon { width: 1em; height: 1em; display: block; }
+.acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+.w { display: inline-block; opacity: 0; }
+.w.acc { font-size: 1.1em; }
+.hl { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-wrap: balance; }
+.center { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; }
+.tile-ic { display: grid; place-items: center; border-radius: 50%; }
+.burst { position: absolute; border-radius: 50%; border: 3px solid var(--primary); opacity: 0; }
+.k-cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+.k-ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }

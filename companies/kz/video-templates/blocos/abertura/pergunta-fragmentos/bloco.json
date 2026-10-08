@@ -1,0 +1,19 @@
+{
+  "id": "abertura/pergunta-fragmentos",
+  "tipo": "abertura",
+  "titulo": "Pergunta grande com selo → sobe e encolhe → a pergunta completa; 4 fragmentos da rotina se espalham",
+  "camada": "palco",
+  "slots": ["pergunta", "complemento"],
+  "params": {
+    "posicoes": { "padrao": [[-450, 30, -8], [170, 0, 6], [-400, 250, 5], [190, 270, -6]], "descricao": "x, y e giro de cada fragmento" },
+    "sobra": { "padrao": 0.8, "descricao": "s depois do fim da cena em que os fragmentos somem (eles caem por cima do começo da próxima)" }
+  },
+  "cues": ["entra", "troca", "espalha"],
+  "min_s": 3.5,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "pop", "troca": "whoosh fino", "espalha": "pops em cascata" },
+  "tokens": ["--surface", "--border", "--shadow-md", "--tile-*"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s1), extraído na 045 A",
+  "licenca": "própria"
+}

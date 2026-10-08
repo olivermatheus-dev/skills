@@ -4,7 +4,7 @@ HTML/CSS/GSAP → MP4 com o [HyperFrames](https://hyperframes.heygen.com) **0.8.
 
 ```
 tools/video-kit/
-  runtime/   motion.js (molas SNAP/FAST/SOFT/GENTLE, swap, stretchTo, cursor, offset) · tl.js (T.scene/ev/word/text) · icons.json (Lucide)
+  runtime/   blocos.js (BLOCO/ctx dos blocos, 045) · base.css (palco) · motion.js (molas SNAP/FAST/SOFT/GENTLE, swap, stretchTo, cursor, offset) · tl.js (T.scene/ev/word/text) · icons.json (Lucide)
   scripts/   tts · fit-vo · music · sfx · mix · produce · check  (+ lib.mjs, tts-windows.ps1)
   GUIA-TECNICO.md   armadilhas do HyperFrames/GSAP (leia antes de animar)
 ```
@@ -19,6 +19,7 @@ Pré-requisitos: Node 22 (`.nvmrc`, o fnm troca sozinho), `npm install`, ffmpeg 
 | 2. trilha | `node tools/video-kit/scripts/music.mjs <pasta>` **ou** `node tools/video/timeline.mjs music <pasta> <id>` | sintetiza uma trilha própria (`music.synth`) ou usa uma do catálogo |
 | 3. efeitos | `node tools/video-kit/scripts/sfx.mjs <pasta>` | posiciona os SFX da biblioteca (e os sintetizados) nos eventos |
 | 4. mix | `node tools/video-kit/scripts/mix.mjs <pasta>` | voz + trilha com ducking + efeitos → −14 LUFS (duas passadas) |
+| 4b. compor | `node tools/video-kit/scripts/compor.mjs <pasta> [--listar]` | só para vídeo **por blocos** (`scenes[].use`): gera o `composition.html` a partir dos blocos (o produce já chama sozinho). Contrato: `.claude/skills/video/references/blocos.md` |
 | 5. montar | `node tools/video-kit/scripts/produce.mjs <pasta> --build-only` | um projeto HyperFrames por formato em `render/<formato>/` |
 | 6. conferir | `node tools/video-kit/scripts/check.mjs <pasta>` | regras de tempo + quadros de cada cena e evento em `render/<formato>/check/` → **olhar** |
 | 7. exportar | `node tools/video-kit/scripts/produce.mjs <pasta>` | MP4 com motion blur (60→30), BT.709 → `exports/<pasta>-<formato>-vNN.mp4` |

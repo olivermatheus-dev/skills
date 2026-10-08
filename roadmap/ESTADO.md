@@ -19,6 +19,8 @@ Feito nesta sessão (commits `d4e68ac` … `f385891`):
 - **040 G fechada (2026-10-08, com o sim do Oliver):** 10 anúncios da Corpora analisados pelo Opus (regra corrigida com motivo em 6) + relatório `corpora/relatorios/2026-10-08-anuncios-todos-analisados.md` com leitura. Para o Oliver: conferir as 6 correções, decidir 4 termos novos (`serie-identidade-psi`, `estatico-produto-oferta`, `lista-de-ferramentas-criador`, `risco:simbolo-politico`); a ideia 2 do relatório cita lembrete automático no WhatsApp (ainda não confirmado no `PRODUTO.md`).
 - **Próximo:** 040 H. Fila em `roadmap/PEDIDOS.md`.
 
+**045 (fábrica de vídeo, 2026-10-08):** plano em `tasks/045-fabrica-de-variantes/TASK.md` (blocos → projeto com eixos → variantes por script → fluxograma no app → cortes e edits). **Fase A feita:** vídeo por blocos (`scenes[].use`, `compor.mjs`, contrato em `.claude/skills/video/references/blocos.md`); apresentação da kz = 8 blocos em `companies/kz/video-templates/blocos/`. Próximo: fase B.
+
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
 - **App local:** `npm run app` (quadro, concorrentes, ideias, personas, anotações, contexto e marca). Precisa do **Node 22** (no Node 20 o Vite não sobe).

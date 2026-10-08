@@ -1,0 +1,17 @@
+{
+  "id": "fundo/blobs",
+  "tipo": "fundo",
+  "titulo": "Fundo vivo: duas manchas desfocadas que derivam devagar o vídeo inteiro",
+  "camada": "fundo",
+  "slots": [],
+  "params": {
+    "deriva1": { "padrao": [180, 140], "descricao": "quanto a mancha de cima anda (x, y) no vídeo todo" },
+    "deriva2": { "padrao": [-160, -200], "descricao": "quanto a mancha de baixo anda (x, y)" }
+  },
+  "cues": [],
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "tokens": ["--ui-glow", "--accent-soft"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03), extraído na 045 A",
+  "licenca": "própria"
+}

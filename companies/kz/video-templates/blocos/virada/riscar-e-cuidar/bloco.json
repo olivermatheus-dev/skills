@@ -1,0 +1,16 @@
+{
+  "id": "virada/riscar-e-cuidar",
+  "tipo": "virada",
+  "titulo": "Virada: ícones do administrativo + frase que é riscada e sobe; a frase nova entra com coração",
+  "camada": "palco",
+  "slots": ["antes", "depois"],
+  "params": {},
+  "cues": ["entra", "risca", "troca", "coracao"],
+  "min_s": 3.5,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "risca": "risco de caneta", "coracao": "pop + brilho" },
+  "tokens": ["--muted", "--accent", "--tile-*"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s6), extraído na 045 A",
+  "licenca": "própria"
+}

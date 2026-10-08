@@ -1,0 +1,9 @@
+.endlogo { position: absolute; left: 50%; top: 230px; width: 380px; margin-left: -190px; clip-path: inset(0 100% 0 0); }
+.endlogo svg { width: 100%; height: auto; display: block; }
+.endlogo path { fill: var(--logo); }
+.glow7 { position: absolute; left: 50%; top: 150px; width: 900px; height: 560px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); opacity: 0; }
+.endtitle { top: 590px; font-size: 80px; }
+.endline { top: 690px; font-size: 48px; font-weight: 600; }
+.endsub { top: 990px; font-size: 38px; font-weight: 600; color: var(--text); opacity: 0; }
+.cta { top: 840px; display: flex; align-items: center; gap: 14px; background: var(--primary); color: var(--on-primary);
+  font-weight: 700; font-size: 46px; padding: 28px 56px; border-radius: 999px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }

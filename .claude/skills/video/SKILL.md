@@ -53,10 +53,14 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 - `timeline.json` nasce do áudio: o `tts.mjs` mede cada fala e monta cenas e eventos (`lead`/`gap`/`tail`/`min`/`len`; eventos presos a palavra, `at` ou `before_end`). ≤ 0,5 s entre falas; pausa ≤ 1 s só na virada (`"pause": true`); a cena dura o que a fala dura.
 - Gestos em `events`; cada SFX aponta para um evento e um asset licenciado do catálogo. Trilha e efeitos: skill `audio` (agente `sound-designer` no médio/alto). Trilhas candidatas trocadas com `timeline.mjs music`.
 
-### 3. Cenas (`composition.html`)
+### 3. Cenas = blocos (padrão desde a 045)
+- **Monte o vídeo com blocos, não escreva `composition.html`.** Cada cena aponta para um bloco (`scenes[].use`), o fundo vai em `camadas`, e o `produce.mjs` gera a composição sozinho (`compor.mjs`; o `composition.html` gerado não se edita). Contrato e ctx: `references/blocos.md`.
+- **Antes de criar, procure:** `ls companies/<slug>/video-templates/blocos/*/` e `library/blocos/*/` (ler só os `bloco.json`). Reusar = `use` + `on_screen` (slots) + `params` + eventos com `cue`: custo ≈ o texto.
+- Bloco novo nasce no projeto (`<pasta>/blocos/<tipo>/<id>/`) e sobe para `video-templates/blocos/` (marca) ou `library/blocos/` (genérico) quando o Oliver gostar.
+- As regras abaixo valem dentro de cada bloco.
 - Linkar `brand/brand.css` (gerado do `brand.json`; o `produce.mjs` copia a marca para o render); nunca hardcodar cor da marca. Ícones: só Lucide via `node tools/icon.mjs <nome> --brand <slug>` (SVG inline com `--icon-color`/`--icon-stroke`). Uma timeline GSAP principal no formato do kit (`tools/video-kit/GUIA-TECNICO.md`); **todo tempo vem de `T.scene/T.ev/T.word`** ou dos marcadores `__S:<cena>__ __D:<cena>__ __E:<evento>__`, nunca número escrito à mão (é o que deixa trocar a voz sem reescrever).
 - **Cena isolada e elástica** (para virar variante sem reescrever): sem cor ou texto fixo dentro (tokens do `brand.css` + `params`/`on_screen` do `timeline.json`), animação em tempo relativo (entrada · hold · saída), sem depender da cena vizinha. Contrato completo: `roadmap/tasks/013-cenas-modulares-variantes/TASK.md`.
-- **Ids estáveis (anotações do Oliver):** todo elemento relevante com `id` único e semântico (`#card-proxima-sessao`, não `#div7`) e cada cena/bloco com `data-bloco="nome"`; mantenha o id quando reescrever a cena. É o que `revisao.json` guarda como alvo (`selector`); sem isso a anotação se perde. Os ids de cena/fala/evento vêm da `timeline.json`.
+- **Alvos estáveis (anotações do Oliver):** em bloco, classe semântica dentro do bloco (o runtime já marca a raiz com `data-inst`/`data-bloco`); em composição antiga escrita à mão, `id` único e semântico (`#card-proxima-sessao`, não `#div7`) e cada cena/bloco com `data-bloco="nome"`; mantenha o id quando reescrever a cena. É o que `revisao.json` guarda como alvo (`selector`); sem isso a anotação se perde. Os ids de cena/fala/evento vêm da `timeline.json`.
 - Molas do kit (`SNAP/FAST/SOFT/GENTLE`, `swap`, `stretchTo`, `cursor`); não reescreva easing à mão.
 - **Siga os [Padrões do Oliver](#padrões-do-oliver-sempre-sem-ele-pedir)** em toda cena (texto inteiro, nada vazio, ícones, headline, SFX, camadas, cartão final).
 - Ordem por cena: estados → poses-chave → curvas → offsets → assentar → efeitos → som.

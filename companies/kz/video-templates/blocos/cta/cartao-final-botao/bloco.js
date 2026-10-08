@@ -1,0 +1,22 @@
+BLOCO('cta/cartao-final-botao', function ({ tl, K, root, $, cena, cue, texto, fala, box, cursor }) {
+  const f = fala(0)
+  const cta = $('.cta')
+  // medir com o texto já no botão (senão a medida sai menor) e antes de qualquer transform
+  cta.innerHTML = `${texto('botao')} {{i:chevron-right}}`
+  const pCta = box(cta, 0.9, 0.62)
+  K.type($('.endline'), texto('linha'), f, cue('cta') - 0.25, 30, true)
+  tl.fromTo($('.glow7'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' }, cue('entra') - 0.2)
+  tl.fromTo($('.endlogo'), { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.8, ease: 'power3.out' }, cue('entra') - 0.15)
+  K.type($('.endtitle'), texto('titulo'), f, cue('entra') + 0.1)
+  tl.fromTo(cta, { opacity: 0, y: 30, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, cue('cta'))
+  $('.endsub').textContent = texto('sub')
+  tl.fromTo($('.endsub'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST }, cue('cta') + 0.5)
+  tl.to(cta, { scale: 1.04, duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('cta') + 0.8)
+  const C = cursor()
+  tl.set(C.el, { x: pCta.x + 280, y: pCta.y + 240 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.2 }, cue('clique') - 0.8)
+  C.move(pCta, cue('clique') - 0.8, 0.7)
+  C.click(pCta, cue('clique'))
+  C.press(cta, cue('clique'))
+  tl.fromTo(root, { scale: 1 }, { scale: 1.03, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+})

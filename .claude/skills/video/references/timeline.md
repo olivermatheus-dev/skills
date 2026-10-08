@@ -68,4 +68,5 @@ A timeline é **montada a partir do áudio** pelo `tts.mjs` / `fit-vo.mjs` (`lay
 - Cena com fala: `lead` (respiro antes; 0,3 na 1ª, 0,15 nas outras, 0,5 com `pause`), `gap` entre falas (0,2), `tail` depois (0,3), `min` (duração mínima). Cena sem fala: `len` (2,5).
 - Evento: `word` (`"f2:WhatsApp"` ou `"f2:3"`, + `offset`), `at` (s após o início da cena) ou `before_end`; `t` é recalculado a cada encaixe.
 - SFX: `asset` (catálogo, com licença) ou `synth` (`pop`, `click`, `swish`, `whoosh`, `typing` + `until`, `chime`, `ding`); `max` corta com fade; `delay` desloca.
+- **Blocos (045):** `scenes[].use` = bloco da cena, `camadas[]` = blocos do vídeo inteiro (fundo), `events[].cue` = nome do momento que o bloco pede (`ctx.cue`). Com `use`, o `composition.html` é gerado. Ver `blocos.md`.
 - `music.synth` → `music.mjs` compõe a trilha (própria); ou `timeline.mjs music <id>` (catálogo). `gain_db` = nível da trilha antes do ducking (a trilha é levada a −16 LUFS antes); `duck` 0–1.

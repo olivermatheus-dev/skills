@@ -18,6 +18,7 @@ import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { HUB, KIT, video, ff } from './lib.mjs';
+import { compor } from './compor.mjs';
 
 const FORMATS = { '4x5': { W: 1080, H: 1350 }, '9x16': { W: 1080, H: 1920 }, '16x9': { W: 1920, H: 1080 }, '1x1': { W: 1080, H: 1080 } };
 const ALIAS = { story: '9x16', reels: '9x16', feed: '4x5' };
@@ -37,6 +38,8 @@ const blur = !draft && !fps60 && !flags.includes('--no-blur') && !native;
 const tl = v.tl;
 const duration = tl.duration ?? tl.scenes.at(-1).end;
 const icons = JSON.parse(readFileSync(join(KIT, 'runtime', 'icons.json'), 'utf8'));
+// vídeo montado por blocos (045): a composição é gerada da timeline a cada produce, nunca editada à mão
+if (tl.scenes.some((s) => s.use)) compor(v);
 const template = readFileSync(join(v.dir, 'composition.html'), 'utf8');
 const hf = join(HUB, 'node_modules', 'hyperframes', 'bin', 'hyperframes.mjs');
 const mix = join(v.dir, 'audio', 'mix.wav');
@@ -71,7 +74,7 @@ function build(format, offset) {
   if (existsSync(dir)) for (const f of readdirSync(dir)) rmSync(join(dir, f), { recursive: true, force: true });
   mkdirSync(join(dir, 'kit'), { recursive: true });
   if (v.companyDir && existsSync(join(v.companyDir, 'brand'))) cpSync(join(v.companyDir, 'brand'), join(dir, 'brand'), { recursive: true });
-  for (const f of ['motion.js', 'tl.js']) cpSync(join(KIT, 'runtime', f), join(dir, 'kit', f));
+  for (const f of ['motion.js', 'tl.js', 'blocos.js']) cpSync(join(KIT, 'runtime', f), join(dir, 'kit', f));
   cpSync(join(HUB, 'node_modules', 'gsap', 'dist', 'gsap.min.js'), join(dir, 'kit', 'gsap.min.js'));
   // galeria de componentes de motion (library/motion) → lib/motion/<categoria>/<id>/ (ex.: lib/motion/cta/navegador/navegador.js)
   if (existsSync(join(HUB, 'library', 'motion'))) cpSync(join(HUB, 'library', 'motion'), join(dir, 'lib', 'motion'), { recursive: true });

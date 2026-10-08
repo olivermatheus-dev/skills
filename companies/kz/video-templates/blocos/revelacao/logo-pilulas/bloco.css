@@ -1,0 +1,14 @@
+.logo { position: absolute; left: 50%; top: 300px; width: 540px; margin-left: -270px; clip-path: inset(0 100% 0 0); transform-origin: 50% 0%; }
+.logo svg { width: 100%; height: auto; display: block; }
+.logo path { fill: var(--logo); }
+.glow4 { position: absolute; left: 50%; top: 220px; width: 900px; height: 600px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); opacity: 0; }
+.burst4 { left: 50%; top: 290px; width: 640px; height: 440px; margin-left: -320px; border-radius: 80px; }
+.tag { top: 760px; display: flex; align-items: center; gap: 14px; font-size: 46px; font-weight: 600; opacity: 0; }
+.tag .tile-ic { width: 70px; height: 70px; font-size: 36px; }
+.h4 { top: 560px; font-size: 60px; font-weight: 600; }
+.pill { display: flex; align-items: center; gap: 16px; padding: 16px 40px 16px 16px; border-radius: 999px; font-size: 52px; font-weight: 700;
+  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); opacity: 0; }
+.pill .tile-ic { width: 76px; height: 76px; font-size: 38px; }
+.p1 { top: 680px; }
+.p2 { top: 810px; }
+.p3 { top: 940px; }

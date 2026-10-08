@@ -1,0 +1,18 @@
+{
+  "id": "cena/caos-cards",
+  "tipo": "cena",
+  "titulo": "Caos da rotina: 3 cards (agenda, pacientes, anotações) entram tortos na palavra, ganham alerta e são arremessados",
+  "camada": "palco",
+  "slots": ["linha1", "linha2", "linha3"],
+  "params": {
+    "cards": { "padrao": ["Agenda", "Pacientes", "Anotações"], "descricao": "título de cada card" }
+  },
+  "cues": ["card1", "card2", "card3", "espalha", "sai"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "card1": "notify", "card2": "notify", "card3": "notify", "espalha": "impacto leve", "sai": "whoosh" },
+  "tokens": ["--surface", "--border", "--shadow-lg", "--pastel-*", "--danger", "--ui-muted", "--ui-avatar", "--ink"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s2), extraído na 045 A",
+  "licenca": "própria"
+}

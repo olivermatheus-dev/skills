@@ -1,0 +1,5 @@
+/* Classes de marca da kz usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+.t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+.t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+.t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+.t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }

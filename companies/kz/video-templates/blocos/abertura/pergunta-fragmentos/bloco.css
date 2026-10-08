@@ -1,0 +1,9 @@
+.main, .frags { position: absolute; inset: 0; }
+.q1 { position: absolute; left: 0; right: 0; top: 250px; transform-origin: 50% 0%; }
+.badge { width: 150px; height: 150px; font-size: 76px; margin: 0 auto 34px; opacity: 0; }
+.q1t { font-size: 124px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.08; max-width: 760px; margin: 0 auto; }
+.q2 { font-size: 92px; top: 330px; }
+.frag { position: absolute; left: 540px; top: 640px; display: flex; align-items: center; gap: 14px; padding: 18px 26px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-md);
+  font-size: 30px; font-weight: 600; opacity: 0; white-space: nowrap; }
+.frag .ic { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; }

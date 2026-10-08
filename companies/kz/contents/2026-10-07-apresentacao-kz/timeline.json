@@ -615,9 +615,15 @@
       "end": 41.444
     }
   ],
+  "camadas": [
+    {
+      "use": "fundo/blobs"
+    }
+  ],
   "scenes": [
     {
       "id": "s1",
+      "use": "abertura/pergunta-fragmentos",
       "block": "gancho",
       "vo": [
         "f1"
@@ -631,6 +637,7 @@
     },
     {
       "id": "s2",
+      "use": "cena/caos-cards",
       "block": "caos",
       "vo": [
         "f2"
@@ -651,6 +658,7 @@
     },
     {
       "id": "s3",
+      "use": "cena/tempo-encolhe",
       "block": "dor",
       "vo": [
         "f3"
@@ -664,6 +672,7 @@
     },
     {
       "id": "s4",
+      "use": "revelacao/logo-pilulas",
       "block": "revelação",
       "vo": [
         "f4"
@@ -677,6 +686,7 @@
     },
     {
       "id": "s5",
+      "use": "produto/painel-inicio",
       "block": "produto",
       "vo": [
         "f5"
@@ -690,6 +700,7 @@
     },
     {
       "id": "s6",
+      "use": "virada/riscar-e-cuidar",
       "block": "virada",
       "vo": [
         "f6"
@@ -703,6 +714,7 @@
     },
     {
       "id": "s7",
+      "use": "cta/cartao-final-botao",
       "block": "cartão final",
       "vo": [
         "f7"
@@ -718,6 +730,7 @@
   "events": [
     {
       "id": "e1",
+      "cue": "entra",
       "type": "reveal",
       "scene": "s1",
       "at": 0.02,
@@ -726,6 +739,7 @@
     },
     {
       "id": "e2",
+      "cue": "troca",
       "type": "swap",
       "word": "f1:ainda",
       "offset": -0.12,
@@ -735,6 +749,7 @@
     },
     {
       "id": "e3",
+      "cue": "espalha",
       "type": "notify",
       "word": "f1:vários",
       "offset": -0.08,
@@ -744,6 +759,7 @@
     },
     {
       "id": "e4",
+      "cue": "card1",
       "type": "notify",
       "word": "f2:Agenda",
       "offset": -0.12,
@@ -753,6 +769,7 @@
     },
     {
       "id": "e5",
+      "cue": "card2",
       "type": "notify",
       "word": "f2:informações",
       "offset": -0.12,
@@ -762,6 +779,7 @@
     },
     {
       "id": "e6",
+      "cue": "card3",
       "type": "notify",
       "word": "f2:anotações",
       "offset": -0.12,
@@ -771,6 +789,7 @@
     },
     {
       "id": "e7",
+      "cue": "espalha",
       "type": "impact",
       "word": "f2:espalhadas",
       "offset": 0,
@@ -780,6 +799,7 @@
     },
     {
       "id": "e8",
+      "cue": "sai",
       "type": "cut",
       "scene": "s2",
       "before_end": 0.32,
@@ -788,6 +808,7 @@
     },
     {
       "id": "e9",
+      "cue": "entra",
       "type": "reveal",
       "scene": "s3",
       "at": 0.02,
@@ -796,6 +817,7 @@
     },
     {
       "id": "e10",
+      "cue": "encolhe",
       "type": "count",
       "word": "f3:menos",
       "offset": -0.08,
@@ -805,6 +827,7 @@
     },
     {
       "id": "e11",
+      "cue": "apoio",
       "type": "reveal",
       "word": "f3:para",
       "offset": -0.12,
@@ -814,6 +837,7 @@
     },
     {
       "id": "e12",
+      "cue": "palavra",
       "type": "reveal",
       "word": "f3:atender",
       "offset": -0.12,
@@ -823,6 +847,7 @@
     },
     {
       "id": "e13",
+      "cue": "sai",
       "type": "cut",
       "scene": "s3",
       "before_end": 0.3,
@@ -831,6 +856,7 @@
     },
     {
       "id": "e14",
+      "cue": "entra",
       "type": "reveal",
       "scene": "s4",
       "at": 0.02,
@@ -839,6 +865,7 @@
     },
     {
       "id": "e15",
+      "cue": "marca",
       "type": "impact",
       "word": "f4:kz",
       "offset": -0.1,
@@ -848,6 +875,7 @@
     },
     {
       "id": "e16",
+      "cue": "assinatura",
       "type": "reveal",
       "word": "f4:feita",
       "offset": -0.12,
@@ -857,6 +885,7 @@
     },
     {
       "id": "e17",
+      "cue": "titulo",
       "type": "swap",
       "word": "f4:gestão",
       "offset": -0.15,
@@ -866,6 +895,7 @@
     },
     {
       "id": "e18",
+      "cue": "p1",
       "type": "notify",
       "word": "f4:simples",
       "offset": -0.1,
@@ -875,6 +905,7 @@
     },
     {
       "id": "e19",
+      "cue": "p2",
       "type": "notify",
       "word": "f4:organizada",
       "offset": -0.1,
@@ -884,6 +915,7 @@
     },
     {
       "id": "e20",
+      "cue": "p3",
       "type": "notify",
       "word": "f4:profissional",
       "offset": -0.1,
@@ -893,6 +925,7 @@
     },
     {
       "id": "e21",
+      "cue": "entra",
       "type": "cut",
       "scene": "s5",
       "at": 0,
@@ -901,6 +934,7 @@
     },
     {
       "id": "e22",
+      "cue": "destaque",
       "type": "hover",
       "word": "f5:acompanhar",
       "offset": -0.12,
@@ -910,6 +944,7 @@
     },
     {
       "id": "e23",
+      "cue": "lista",
       "type": "hover",
       "word": "f5:organizar",
       "offset": -0.12,
@@ -919,6 +954,7 @@
     },
     {
       "id": "e24",
+      "cue": "feito",
       "type": "notify",
       "word": "f5:complicação",
       "offset": -0.15,
@@ -928,6 +964,7 @@
     },
     {
       "id": "e25",
+      "cue": "sai",
       "type": "cut",
       "scene": "s5",
       "before_end": 0.3,
@@ -936,6 +973,7 @@
     },
     {
       "id": "e26",
+      "cue": "entra",
       "type": "reveal",
       "scene": "s6",
       "at": 0.02,
@@ -944,6 +982,7 @@
     },
     {
       "id": "e27",
+      "cue": "risca",
       "type": "swap",
       "word": "f6:administrando",
       "offset": 0.25,
@@ -953,6 +992,7 @@
     },
     {
       "id": "e28",
+      "cue": "troca",
       "type": "reveal",
       "word": "f6:mais",
       "offset": -0.12,
@@ -962,6 +1002,7 @@
     },
     {
       "id": "e29",
+      "cue": "coracao",
       "type": "notify",
       "word": "f6:cuidando",
       "offset": -0.05,
@@ -971,6 +1012,7 @@
     },
     {
       "id": "e30",
+      "cue": "entra",
       "type": "reveal",
       "scene": "s7",
       "at": 0.02,
@@ -979,6 +1021,7 @@
     },
     {
       "id": "e31",
+      "cue": "cta",
       "type": "reveal",
       "word": "f7:descubra",
       "offset": -0.1,
@@ -988,6 +1031,7 @@
     },
     {
       "id": "e32",
+      "cue": "sub",
       "type": "reveal",
       "word": "f7:rotina",
       "offset": -0.1,
@@ -997,6 +1041,7 @@
     },
     {
       "id": "e33",
+      "cue": "clique",
       "type": "click",
       "scene": "s7",
       "before_end": 1,

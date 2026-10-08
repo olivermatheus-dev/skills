@@ -1,0 +1,10 @@
+.t1 { top: 80px; left: 110px; right: 110px; font-size: 76px; }
+.ringwrap { position: absolute; left: 50%; top: 300px; width: 290px; height: 290px; margin-left: -145px; opacity: 0; }
+.ringwrap > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ringwrap .ic { position: absolute; inset: 0; display: grid; place-items: center; font-size: 104px; color: var(--text); transform-origin: 50% 50%; }
+.ringwrap .ic .icon { width: 1em; height: 1em; }
+.ringlbl { position: absolute; left: 0; right: 0; top: 610px; text-align: center; font-size: 34px; font-weight: 600; color: var(--muted); opacity: 0; }
+.t2 { top: 690px; font-size: 54px; font-weight: 600; color: var(--text); }
+.t3 { position: absolute; left: 0; right: 0; top: 790px; text-align: center; font-size: 190px; line-height: 1.1; opacity: 0; }
+.heart3 { position: absolute; left: 50%; top: 810px; margin-left: 300px; width: 110px; height: 110px; font-size: 56px; opacity: 0; }
+.burst3 { left: 50%; top: 850px; width: 600px; height: 240px; margin-left: -300px; border-radius: 120px; }

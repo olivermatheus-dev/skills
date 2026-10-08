@@ -1,0 +1,8 @@
+.admin { top: 280px; display: flex; gap: 36px; }
+.admin .tile-ic { width: 140px; height: 140px; font-size: 66px; border-radius: 36px; opacity: 0; }
+.l1 { top: 480px; white-space: nowrap; font-size: 60px; font-weight: 600; color: var(--muted); opacity: 0; }
+.strike { position: absolute; left: 50%; top: 52%; height: 6px; width: 860px; margin-left: -430px; background: var(--accent); border-radius: 3px; transform-origin: 0 50%; transform: scaleX(0); }
+.heart6 { top: 520px; width: 130px; height: 130px; font-size: 66px; opacity: 0; }
+.burst6 { left: 50%; top: 520px; width: 130px; height: 130px; margin-left: -65px; }
+.l2 { top: 680px; font-size: 96px; }
+.l2 .w.acc { font-size: 1.12em; }

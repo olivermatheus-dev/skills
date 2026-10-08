@@ -1,0 +1,16 @@
+{
+  "id": "revelacao/logo-pilulas",
+  "tipo": "revelacao",
+  "titulo": "Revelação da marca: logo se desenha, pulsa no nome, assinatura; logo sobe e 3 pílulas de benefício entram uma a uma",
+  "camada": "palco",
+  "slots": ["assinatura", "titulo", "p1", "p2", "p3"],
+  "params": {},
+  "cues": ["entra", "marca", "assinatura", "titulo", "p1", "p2", "p3"],
+  "min_s": 5,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "riser curto", "marca": "impacto + brilho", "p1": "pop", "p2": "pop", "p3": "pop" },
+  "tokens": ["--logo", "--accent-soft", "--surface", "--border", "--shadow-md", "--tile-*"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s4), extraído na 045 A",
+  "licenca": "própria"
+}

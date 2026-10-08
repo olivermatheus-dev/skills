@@ -1,0 +1,16 @@
+{
+  "id": "cta/cartao-final-botao",
+  "tipo": "cta",
+  "titulo": "Cartão final: logo se desenha, convite, botão com o link e cursor que clica",
+  "camada": "palco",
+  "slots": ["titulo", "botao", "sub", "linha"],
+  "params": {},
+  "cues": ["entra", "cta", "clique"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "brilho", "cta": "pop", "clique": "clique de mouse" },
+  "tokens": ["--logo", "--accent-soft", "--primary", "--on-primary", "--shadow-md", "--text"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s7), extraído na 045 A",
+  "licenca": "própria"
+}

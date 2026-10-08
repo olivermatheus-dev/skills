@@ -1,0 +1,19 @@
+{
+  "id": "cena/tempo-encolhe",
+  "tipo": "cena",
+  "titulo": "O tempo encolhe: anel de relógio esvazia na palavra, frase de apoio, e a palavra-chave chega grande com coração",
+  "camada": "palco",
+  "slots": ["titulo", "apoio", "palavra"],
+  "params": {
+    "rotulo": { "padrao": "seu tempo livre", "descricao": "legenda embaixo do anel" },
+    "esvazia": { "padrao": 235, "descricao": "stroke-dashoffset final do arco (276,5 = vazio)" }
+  },
+  "cues": ["entra", "encolhe", "apoio", "palavra", "sai"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "encolhe": "tique-taque curto", "palavra": "impacto suave + ding" },
+  "tokens": ["--surface", "--border", "--primary", "--muted", "--text"],
+  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s3), extraído na 045 A",
+  "licenca": "própria"
+}

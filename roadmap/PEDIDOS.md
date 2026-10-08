@@ -7,7 +7,7 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 045 | **Fase A (blocos):** quebrar a apresentação da kz em blocos + `compor.mjs`; sair igual ao v03 | pedido do Oliver de 2026-10-08, respostas dadas |
+| 1 | 045 | **Fase B (variantes por script):** `projeto.json` + `variantes.mjs` (cache de falas, trilha ancorada, render rascunho, nomes); 1ª rodada = 3 aberturas × 1 voz grátis na apresentação da kz | fase A feita (blocos) |
 | 2 | 046 | **Atividade da IA e das coletas:** fase A feita (registro + dock, 2026-10-08); próxima: **fase B** (passos de verdade pelo stream-json + Claude que não morre com o terminal), depois D (botões que faltam) e E (página Agentes) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)

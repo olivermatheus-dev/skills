@@ -1,0 +1,20 @@
+BLOCO('cena/tempo-encolhe', function ({ tl, K, root, $, cena, cue, texto, fala, params }) {
+  const f = fala(0)
+  K.type($('.t1'), texto('titulo'), f, cue('entra'))
+  K.pop($('.ringwrap'), cue('entra') - 0.1, 0.6)
+  $('.ringlbl').textContent = params.rotulo
+  tl.fromTo($('.ringlbl'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, ...M.FAST }, cue('entra') + 0.3)
+  tl.to($('.arc'), { attr: { 'stroke-dashoffset': params.esvazia }, duration: 1.1, ease: 'power3.inOut' }, cue('encolhe'))
+  tl.fromTo($('.ringwrap .ic'), { rotation: 0 }, { rotation: -25, duration: 0.18, ease: 'sine.inOut', yoyo: true, repeat: 3 }, cue('encolhe') + 0.2)
+  tl.to($('.ringwrap'), { scale: 1.04, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('apoio') + 0.4)
+  K.type($('.t2'), texto('apoio'), f, cue('apoio') - 0.1, 26)
+  // a palavra-chave: o resto recua, ela chega com coração e um anel
+  tl.to([$('.t1'), $('.ringwrap'), $('.ringlbl'), $('.t2')], { opacity: 0.3, duration: 0.35, ease: 'power2.out' }, cue('palavra'))
+  $('.t3').textContent = texto('palavra')
+  tl.fromTo($('.t3'), { opacity: 0, y: 50, scale: 0.9, filter: 'blur(8px)' }, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', ...M.SOFT }, cue('palavra'))
+  K.burst($('.burst3'), cue('palavra') + 0.1, 1.25)
+  K.pop($('.heart3'), cue('palavra') + 0.25, 0.2)
+  tl.to($('.heart3'), { scale: 1.12, duration: 0.25, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('palavra') + 0.85)
+  tl.fromTo(root, { scale: 1 }, { scale: 1.035, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  K.out(root, cue('sai'), 0.28, -40)
+})
