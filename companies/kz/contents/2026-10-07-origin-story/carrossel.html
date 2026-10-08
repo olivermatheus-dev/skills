@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Origin story (RASCUNHO)</title>
+<!-- RASCUNHO T-0012: tipográfico, sem nome e sem foto do fundador (aguardando T-0011). Não publicar. -->
+<style>
+:root {
+  --bg: #F6F5F2; --surface: #FFFFFF; --surface-2: #EFEDE8;
+  --text: #141414; --muted: #6B6B6B; --border: #E4E1DA;
+  --primary: #2F5BEA; --on-primary: #FFFFFF; --accent: #2F5BEA;
+  --font-heading: sans-serif; --font-body: sans-serif;
+  --weight-heading: 700; --tracking-heading: -0.02em; --leading-heading: 1.08; --case-heading: none;
+  --radius: 20px; --radius-sm: 12px;
+  --shadow-md: 0 8px 24px rgba(20,20,20,.08);
+  --w: 1080px; --h: 1350px; --pad: 80px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #888; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; font-family: var(--font-body); }
+.slide {
+  position: relative; overflow: hidden; flex: none;
+  width: var(--w); height: var(--h);
+  padding: var(--pad) var(--pad) 160px;
+  background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column; justify-content: center; gap: 40px;
+  font-size: 40px; line-height: 1.6;
+}
+.slide.inverse { background: var(--inverse-bg, var(--primary)); color: var(--on-inverse, var(--on-primary)); }
+h1, h2, .big {
+  font-family: var(--font-heading); font-weight: var(--weight-heading);
+  line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); text-transform: var(--case-heading);
+}
+h1 { font-size: 112px; }
+h2 { font-size: 80px; }
+p  { font-size: 42px; }
+.sub { font-weight: 400; }
+.hl { color: var(--accent); }
+.serif { font-family: var(--font-accent); font-style: italic; font-weight: 500; }
+.footer {
+  position: absolute; left: var(--pad); right: var(--pad); bottom: 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 28px; font-weight: 600;
+}
+.footer svg { height: 44px; width: auto; display: block; }
+.footer svg path { fill: var(--logo); }
+.inverse .footer svg path { fill: var(--ink); } /* logo ink no fundo rosa: coral dá 2,57:1 */
+.footer .num { }
+
+/* lista dos apps */
+.apps { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+.apps li {
+  display: flex; align-items: center; gap: 32px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow-md); padding: 22px 32px; font-size: 44px; font-weight: 600;
+}
+.apps svg { width: 64px; height: 64px; flex: none; }
+
+/* lista de 3 */
+.list { list-style: none; display: flex; flex-direction: column; gap: 28px; counter-reset: item; }
+.list li { display: flex; gap: 28px; align-items: baseline; font-size: 46px; font-weight: 500; }
+.list li::before {
+  content: counter(item); counter-increment: item; flex: none;
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--primary); color: var(--on-primary); font: 700 32px var(--font-heading);
+  transform: translateY(6px);
+}
+
+.quote { font: 700 84px/1.18 var(--font-heading); letter-spacing: -0.01em; }
+.sign { font-size: 36px; font-weight: 600; }
+.tagline { font-size: 40px; }
+.cta-chip {
+  align-self: flex-start; background: var(--surface); border-radius: var(--radius);
+  font: 700 44px var(--font-heading); padding: 26px 48px; box-shadow: var(--shadow-md);
+}
+.cta-chip .dot { color: var(--accent); }
+</style>
+<link rel="stylesheet" href="../../brand/brand.css">
+</head>
+<body>
+
+<!-- 1. CAPA -->
+<section class="slide">
+  <h1>Eu também queria só <span class="hl">atender</span>.</h1>
+  <p class="sub">Por que um terapeuta construiu a kz →</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">01/10 · arraste →</span></div>
+</section>
+
+<!-- 2. 2ª CAPA -->
+<section class="slide">
+  <h2>Sou hipnoterapeuta. Atendo pacientes <span class="hl">até hoje</span>.</h2>
+  <p class="sub">E por muito tempo meu consultório viveu espalhado em 5 apps.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">02/10 →</span></div>
+</section>
+
+<!-- 3. A BAGUNÇA -->
+<section class="slide">
+  <ul class="apps">
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--icon-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Agenda num app.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--icon-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>Conversa no WhatsApp.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--icon-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Sessão no Meet.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--icon-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>Notas no caderno.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--icon-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Perfil num site.</li>
+  </ul>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">03/10 →</span></div>
+</section>
+
+<!-- 4. O CANSAÇO -->
+<section class="slide">
+  <p class="quote">No fim do dia, eu não estava cansado de atender.</p>
+  <p class="quote">Estava cansado de <span class="hl">gerenciar</span>.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">04/10 →</span></div>
+</section>
+
+<!-- 5. A DÚVIDA -->
+<section class="slide">
+  <h2>Achei que era <span class="hl">desorganização</span> minha.</h2>
+  <p class="sub">Então fui perguntar a colegas terapeutas.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">05/10 →</span></div>
+</section>
+
+<!-- 6. A CONFIRMAÇÃO -->
+<section class="slide">
+  <h2>Ouvi a <span class="hl">mesma</span> dor, de novo e de novo:</h2>
+  <ul class="list">
+    <li>organizar a rotina;</li>
+    <li>lembrar dos agendamentos;</li>
+    <li>documentar as sessões.</li>
+  </ul>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">06/10 →</span></div>
+</section>
+
+<!-- 7. A VIRADA (inverse) -->
+<section class="slide inverse">
+  <h2>Não era a gente que era desorganizado.</h2>
+  <p class="sub">Era o jeito de trabalhar: empilhar ferramentas, quando a sessão precisa de uma tela só.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">07/10 →</span></div>
+</section>
+
+<!-- 8. A DECISÃO -->
+<section class="slide">
+  <h2>Então decidi construir esse <span class="hl">lugar</span>.</h2>
+  <p class="sub">Um sistema só, com a sessão no centro. São 2 anos de desenvolvimento, com uma terapeuta no time testando cada decisão.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">08/10 →</span></div>
+</section>
+
+<!-- 9. A REGRA + ASSINATURA (nome omitido no rascunho) -->
+<section class="slide">
+  <p class="quote">Uma regra desde o começo: se uma feature <span class="hl">complica</span>, não entra.</p>
+  <p class="sign">Hipnoterapeuta e fundador da kz</p>
+  <p class="tagline">Feito por <span class="serif">terapeuta</span>, pra terapeuta.</p>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">09/10 →</span></div>
+</section>
+
+<!-- 10. CTA (inverse) -->
+<section class="slide inverse">
+  <h2>E você: quantos apps abre pra fazer uma sessão?</h2>
+  <span class="cta-chip">Comenta o número<span class="dot">.</span></span>
+  <div class="footer"><svg viewBox="2.5 7 43 34" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><span class="num">10/10</span></div>
+</section>
+
+</body>
+</html>

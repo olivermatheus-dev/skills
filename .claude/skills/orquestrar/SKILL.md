@@ -45,7 +45,7 @@ Cada agente lê só a tarefa + o `context:` dela (`node tools/board.mjs pacote <
 | agente | `context:` padrão |
 |---|---|
 | roteirista | `context/COPY.md#Big Idea`, `#Objeções` (e o que o tema pedir: `#Mecanismo único`, `#Provas`, `#CTAs`) · `context/AUDIENCE.md#Dores`, `#Linguagem literal` · `context/VOICE.md` · `context/BUSINESS.md#Restrições e compliance` · `brand/BRAND.md#Proibições` |
-| designer | `brand/BRAND.md` (inteiro, é curto) · roteiro da peça (`contents/<pasta>/roteiro.md`) |
+| designer | `brand/BRAND.md` (inteiro, é curto) · `brand/brand.css` (nomes dos tokens) · `brand/logo/kz-logo.svg` (ou o logo da empresa) · roteiro da peça (`contents/<pasta>/roteiro.md`) |
 | editor-de-video | `brand/BRAND.md#Vídeo`, `#Movimento`, `#Som`, `#Proibições` · `knowledge/video/REGRAS.md` · roteiro/plano da peça |
 | sound-designer | `brand/BRAND.md#Som` · plano da peça |
 | estrategista | `context/CONTENT_STRATEGY.md` · `context/AUDIENCE.md#Nível de consciência` · `context/BUSINESS.md#Estágio` (+ `context/COMPETITORS.md#Nosso ângulo` em pauta/lançamento) |

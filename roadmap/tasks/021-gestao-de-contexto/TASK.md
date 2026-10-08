@@ -1,6 +1,6 @@
 # 021 — Gestão de contexto pela própria IA (sessões, quadro e agentes)
 
-**Status:** fase A feita (2026-10-08): `context:`, `## Estado`, `pacote`, log compacto, índice de seções. Falta: 1ª tarefa real rodada por agente lendo só o `context:` e a medição de tokens (item 6). · **Liga com:** skill `orquestrar` (protocolo), `tools/board.mjs`, `tools/heartbeat.mjs`, `schema/` (tarefa), `roadmap/ESTADO.md`
+**Status:** feita (2026-10-08). Fase A + 1ª tarefa real (T-0012, rascunho) rodada pelo pacote e medida: `RESULTADO.md`. · **Liga com:** skill `orquestrar` (protocolo), `tools/board.mjs`, `tools/heartbeat.mjs`, `schema/` (tarefa), `roadmap/ESTADO.md`
 
 ## Pedido do Oliver (2026-10-07)
 - Sempre limpar o contexto (`/clear`) quando a próxima tarefa não precisa da anterior.
@@ -34,9 +34,10 @@
 ## Critérios de pronto
 - [x] `context:` no schema, no protocolo e no `board.mjs --check`; orquestrador preenche
 - [x] `## Estado` em toda tarefa ativa; agentes atualizam (regra no protocolo; T-0017 é teste, sem Estado)
-- [ ] 1 tarefa real da kz executada por agente lendo só o `context:` declarado → a próxima a rodar é a T-0012 (designer), depois do aval do Oliver na T-0011
-- [ ] Medir tokens por tarefa antes/depois (`node tools/usage.mjs`), na mesma T-0012
+- [x] 1 tarefa real da kz executada por agente lendo só o `context:` declarado (T-0012 como rascunho, sem nome/foto, por decisão do Oliver)
+- [x] Medir tokens (T-0012: US$ 1,19; leitura de contexto −40%, ~3,5 mil tokens; ver `RESULTADO.md`)
 
 ## Log
 - 2026-10-07 — criada a partir do pedido do Oliver; regra de sessão já registrada no `CLAUDE.md` (Sessões e contexto).
 - 2026-10-08 — fase A: `context:` + `pacote` + `estado` + `compactar` + `contexto.mjs indice/ler` + `--check` + campo no app; regras no protocolo, orquestrar e agentes. Testado: comandos na T-0017 (cópia restaurada), round-trip pelo app (salvar mantém `context:` e `recurring:`), campo Contexto editado e salvo pela tela; typecheck, validate e `--check` limpos. Achado: servidor de prévia herdava um `HUB_ROOT` de outra cópia (lá havia uma T-0018); para testar, pôr `HUB_ROOT` no `env` da config de prévia do `launch.json`.
+- 2026-10-08 — T-0012 rodada pelo designer como rascunho (10 PNG, review com o Oliver), começando pelo `pacote`; leu a mais só template, brand.css, logo e um peca.json de exemplo. Medição em `RESULTADO.md`: ganho é foco, não dinheiro (custo dominado por turnos e conferência de PNG). `brand.css` + logo entraram no `context:` padrão do designer.

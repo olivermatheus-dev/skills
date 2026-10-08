@@ -30,7 +30,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 008 | [Biblioteca de áudio inicial (famílias de SFX + 3–5 trilhas base)](tasks/008-biblioteca-audio/TASK.md) | 003 | SFX feitos (560, EditorPro); faltam trilhas e bases |
 | 020 | [Skill de ElevenLabs + catálogo de vozes finais (por projeto)](tasks/020-skill-elevenlabs/TASK.md) | 003 | fazendo (skill, script e chaves por projeto feitos; falta voz da kz + teste real) |
 | 022 | [Revisão com comentários ancorados (roteiro, vídeo em faixas, carrossel) + entrada de roteiros prontos](tasks/022-revisao-comentarios/TASK.md) | 018 | v1 de vídeo e **fase A (roteiro pronto + anotações no roteiro) feitas**; v1.1 (clicar no elemento) reaplicada; faltam as fases C e D |
-| 021 | [Gestão de contexto pela própria IA (contexto declarado por tarefa, estado para retomar, log compacto)](tasks/021-gestao-de-contexto/TASK.md) | — | **fase A feita (2026-10-08)**: `context:` + `board.mjs pacote`/`estado`/`compactar`; falta a 1ª tarefa real (T-0012) e medir tokens |
+| 021 | [Gestão de contexto pela própria IA (contexto declarado por tarefa, estado para retomar, log compacto)](tasks/021-gestao-de-contexto/TASK.md) | — | **feita (2026-10-08)**: `context:` + `pacote`/`estado`/`compactar`; T-0012 rodada pelo pacote e medida (`RESULTADO.md`) |
 | 009 | [MCP de edição de vídeo (voz, trilha, duração, texto, prévia, render)](tasks/009-mcp-edicao-video/TASK.md) | 003 | rascunho |
 | 010 | [Enxugar a base de vídeo + níveis de edição (simples · médio · alto)](tasks/010-enxugar-video/TASK.md) | 002 | feita |
 | 011 | [Teste A/B de custo: Opus solo × Sonnet orquestrando subagentes](tasks/011-teste-custo-ab/TASK.md) | 003, 010 | feita (medida: `RESULTADO.md`; falta a nota cega do Oliver) |

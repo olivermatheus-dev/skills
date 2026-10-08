@@ -24,11 +24,11 @@
 - **Conteúdo:** 21 skills + 9 formatos `fmt-*`, 7 agentes, Kanban em `companies/<slug>/board/` (`node tools/board.mjs kz --me`), heartbeat. Base de vídeo em `knowledge/video/REGRAS.md`.
 
 - **Inteligência e campanhas (034–037, 2026-10-08):** matriz de funcionalidades × concorrentes feita (Comparar → Funcionalidades, `intel/matriz.json`; 11 itens "?" na coluna da Kzloo para o Oliver confirmar). Desenhados, aguardando aval: **035** fontes (pixels, Wayback, CNPJ, Google Ads Transparency, DataForSEO), **037** anúncios dos concorrentes (salvos, notas, tags, classificador `tools/intel/ads-classify.ts`), **036** planejamento de campanhas (Google Ads por palavra-chave + quadro de funil em React Flow). **037 fase A feita** (histórico entre coletas: `adsHistory` + rota `/ads/history`). Próximo: 037 fase B (classificador + gabarito rotulado pelo Oliver; precisa da pergunta 1 do funil). Perguntas do Oliver nos `TASK.md`.
-- **Contexto por tarefa (021 A, 2026-10-08):** tarefa declara `context:` (arquivo#Seção) e um `## Estado` (≤ 5 linhas); agente começa por `node tools/board.mjs pacote <slug> <id>` e lê só isso. `estado`/`compactar` no `board.mjs`, `node tools/contexto.mjs indice <slug>`, campo Contexto no painel da tarefa. Falta rodar a T-0012 assim e medir tokens.
+- **Contexto por tarefa (021 A, 2026-10-08):** tarefa declara `context:` (arquivo#Seção) e um `## Estado` (≤ 5 linhas); agente começa por `node tools/board.mjs pacote <slug> <id>` e lê só isso. `estado`/`compactar` no `board.mjs`, `node tools/contexto.mjs indice <slug>`, campo Contexto no painel da tarefa. **Fechada:** T-0012 rodada assim (rascunho) e medida (`tasks/021-gestao-de-contexto/RESULTADO.md`: leitura −40%, custo dominado por turnos/PNG).
 - **Motion no Quadro (019, piloto, 2026-10-08):** cards com mola ao mover/soltar/criar (`motion@14.0.0`, só `Board.tsx`). Se o Oliver aprovar a sensação, estender a Sheet, listas e abas com a mesma mola `SPRING`.
 ## Pendências do Oliver (bloqueiam a produção da kz)
 0. **Revisar a base antes de qualquer post (T-0014, decisão de 2026-10-07):** confirmar o inventário `companies/kz/context/PRODUTO.md` (17 linhas; dúvidas: Sessão rápida, Financeiro, lembrete automático, segurança) e escolher as 6 da vitrine → prints → persona → carta de vendas. Depois: os 3 posts fixados (T-0015).
-1. **Origin story (T-0009, em review):** nome público do fundador, se há foto real, (opcional) uma cena real. Texto em `companies/kz/contents/2026-10-07-origin-story/`.
+1. **Origin story (T-0009, em review):** nome público do fundador, se há foto real, (opcional) uma cena real. Texto em `companies/kz/contents/2026-10-07-origin-story/`; rascunho dos 10 PNG (T-0012, em review) já pronto em `png/`, falta só nome/foto e reexportar.
 2. **Contexto da kz (T-0001 a T-0003):** preço final, trial/garantia, link de cadastro, @ do Instagram.
 3. **Regras CFP/CRP (T-0004):** até lá, anúncio e LP saem "não publicar".
 4. **Arquivos de marca:** logo SVG **feito** (`brand/logo/`, redesenhado do PNG) e tokens do app medidos do print do painel. Faltam mais **prints do produto** (agenda, prontuário, financeiro) para demos e o 3D.
@@ -46,7 +46,6 @@
 | **006** | Meta do MVP: 12 posts da kz | pendências 1–4 |
 | **029** | Motor de curadoria + fichas das 5 séries + inventário do produto (análise feita; 4 perguntas no `TASK.md`) | aval do Oliver |
 | **020** | Fechar: cadastrar vozes, 1º teste real do v4 no `teste-kit` | pendência 6 |
-| **021** | Fechar a gestão de contexto: rodar a T-0012 com o `context:` declarado e medir tokens (fase A feita em 2026-10-08) | aval da T-0011 |
 | **008** | Trilhas e bases (SFX já feitos) | pendência 5 |
 | **030 B** | Editor de mockups: alinhar/distribuir, seleção múltipla, girar pela alça, composições prontas em camadas, ocultar dados e recortar no quadro | aval (pendência 8) |
 | **028 (B, D, E)** | Mockups: B captura por link (login persistente), D animações/3D de verdade (Blender MCP / Three.js com as molduras calibradas), E template a partir de referência | aval (pendência 8) |
@@ -61,7 +60,7 @@ Registradas para depois: 007, 015, 016, 017 (`BACKLOG.md`).
 3. **027 Galeria de formatos:** ~~galeria + fichas~~ **fase A feita**. Fase B: escolher com o Oliver os formatos dos 12 posts (pergunta em aberto da 005) e produzir 1 exemplo de cada formato sem exemplo (de preferência já sendo posts da 006).
 4. **008 Trilhas** (só há SFX; "nunca fundo mudo") e **014 Galeria de componentes** (promover o que ficou bom = qualidade constante).
 5. Pendências do Oliver acima (1–4 e 6) → então **006: os 12 posts**.
-- Em paralelo, sem bloquear: **026** (skills e agentes no app), 019, 021, 013.
+- Em paralelo, sem bloquear: **026** (skills e agentes no app), 019, 013.
 
 ## Como retomar
 - **Construção do hub:** `roadmap/BACKLOG.md` → `tasks/<id>/TASK.md` da vez. O que o Oliver pediu e ainda não saiu: `roadmap/PEDIDOS.md`.
