@@ -1,7 +1,8 @@
 // Camada de dados da interface: chaves do cache, consultas, pré-carga e o padrão de mutação otimista.
 // Regra: a tela muda na hora (setQueryData), o servidor confirma depois; erro → desfaz e avisa (toast).
 import { queryOptions, useMutation, useQueries, useQuery, useQueryClient, type QueryClient, type QueryKey } from '@tanstack/react-query';
-import { api, type Doc } from './api';
+import { api, type AdMark, type AdMarkPatch, type Doc } from './api';
+import { aplicarMarca, adKey, marcaVazia } from '../../schema/ads-marks';
 import { toast } from './components/toast';
 
 // ---------- chaves ----------
@@ -31,6 +32,7 @@ export const qk = {
   gaps: (slug: string) => ['gaps', slug] as const,
   ads: (slug: string) => ['ads', slug] as const,
   adsClassified: (slug: string) => ['ads', slug, 'classified'] as const,
+  adsMarks: (slug: string) => ['ads', slug, 'marks'] as const,
   adsHistory: (slug: string, id: string) => ['ads', slug, 'history', id] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
@@ -116,6 +118,30 @@ export const useAds = (slug: string) => useQuery(q.ads(slug));
 export const useAdsClassified = (slug: string) => useQuery({ queryKey: qk.adsClassified(slug), queryFn: () => api.adsClassified(slug), enabled: !!slug });
 /** histórico entre coletas (saiu do ar, reapareceu, coletas seguidas), um pedido por concorrente (037 A/C) */
 export const useAdsHistories = (slug: string, ids: string[]) => useQueries({ queries: ids.map((id) => ({ queryKey: qk.adsHistory(slug, id), queryFn: () => api.adsHistory(slug, id), enabled: !!slug })) });
+/** marcas do Oliver nos anúncios (nota, tags, salvo, override): { concorrente: { 'meta:id': marca } } (037 D) */
+export const useAdsMarks = (slug: string) => useQuery({ queryKey: qk.adsMarks(slug), queryFn: () => api.adsMarks(slug), enabled: !!slug });
+type MarksMap = Record<string, Record<string, AdMark>>;
+/** grava uma marca de anúncio: o cache muda no clique (mesma regra do servidor, `aplicarMarca`); o servidor devolve a marca com a cópia (`frozen`) */
+export function useSetAdMark(slug: string) {
+  const qc = useQueryClient();
+  return (compId: string, adId: string, patch: AdMarkPatch) => runOptimistic(qc, {
+    mutationFn: () => api.setAdMark(slug, compId, adId, patch),
+    apply: () => [[qk.adsMarks(slug), (old: MarksMap | undefined) => {
+      const k = adKey(adId), next = aplicarMarca(old?.[compId]?.[k], patch, new Date().toISOString().replace(/\.\d+Z$/, 'Z'));
+      const ads = { ...old?.[compId] };
+      if (marcaVazia(next)) delete ads[k]; else ads[k] = next;
+      return { ...old, [compId]: ads };
+    }]],
+    onSuccess: (m) => qc.setQueryData(qk.adsMarks(slug), (old: MarksMap | undefined) => {
+      const ads = { ...old?.[compId] }, k = adKey(adId);
+      if (m) ads[k] = m; else delete ads[k];
+      return { ...old, [compId]: ads };
+    }),
+    invalidate: () => [qk.adsMarks(slug), qk.adsClassified(slug)],
+    okMessage: false,
+    errorMessage: 'Não foi possível guardar a marca do anúncio',
+  }, undefined);
+}
 export const useCompetitorsFeed = (slug: string) => useQuery(q.competitorsFeed(slug));
 export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview(slug));
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));

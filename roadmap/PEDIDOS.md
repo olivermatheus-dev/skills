@@ -7,8 +7,7 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 037 | **Fase D:** marcas do Oliver nos anúncios (`schema/ads-marks.ts`, nota, tags, salvar, override da classificação, coleção Salvos) | destrava a 040 G |
-| 2 | 040 | **Fase G (anúncios no painel):** depende da 037 D; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
+| 1 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

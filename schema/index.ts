@@ -13,6 +13,7 @@ export * from './brand';
 export * from './mockup';
 export * from './format';
 export * from './ads';
+export * from './ads-marks';
 export * from './referencia';
 export * from './matrix';
 export * from './gaps';

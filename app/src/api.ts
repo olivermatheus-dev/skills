@@ -1,5 +1,6 @@
 // Cliente tipado da API local. Os tipos vêm dos mesmos schemas que validam os arquivos.
-import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef, CommentKind } from '../../schema';
+import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef, CommentKind, AdMark, AdMarkPatch } from '../../schema';
+export type { AdMark, AdMarkPatch };
 export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef };
 import type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult } from '../../tools/intel/types';
 import type { Classificacao } from '../../tools/intel/ads-classify';
@@ -206,6 +207,9 @@ export const api = {
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),
   adsClassified: (slug: string) => req<{ id: string; ads: (Classificacao & { adId: string })[] }[]>('GET', `${pj(slug)}/ads/classified`),
   adsHistory: (slug: string, id: string) => req<AdsHistorico>('GET', `${pj(slug)}/competitors/${encodeURIComponent(id)}/ads/history`),
+  adsMarks: (slug: string) => req<Record<string, Record<string, AdMark>>>('GET', `${pj(slug)}/ads/marks`),
+  setAdMark: (slug: string, compId: string, adId: string, patch: AdMarkPatch) => req<AdMark | null>('PUT', `${pj(slug)}/competitors/${encodeURIComponent(compId)}/ads/marks/${encodeURIComponent(adId)}`, patch),
+  adSalvoUrl: (slug: string, compId: string, file?: string) => (file ? `/ads-salvo/${slug}/${compId}/${file}` : undefined),
   ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
   collectAds: (slug: string, id: string) => req<AdsResult>('POST', `${pj(slug)}/competitors/${id}/ads`),
   analysisAll: (slug: string) => req<{ id: string; results: AnalysisFull['results'] }[]>('GET', `${pj(slug)}/analysis-all`),

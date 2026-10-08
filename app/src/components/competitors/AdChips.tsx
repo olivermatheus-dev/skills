@@ -2,7 +2,7 @@
 // Cada chip mostra o motivo no tooltip (as linhas de `motivos[]` que decidiram o valor) e a confiança; confiança baixa leva a marca "incerto".
 // O sinal de resultado (0–100) é indireto: sem gasto nem alcance, só tempo no ar, versões e persistência (fórmula em `sinalResultado`).
 import type { ReactNode } from 'react';
-import { CircleHelp, FileText, Globe, Link2Off, MessageCircle, Smartphone, Tag, Trophy } from 'lucide-react';
+import { CircleHelp, FileText, Globe, Link2Off, MessageCircle, Smartphone, Tag, Trophy, UserRound } from 'lucide-react';
 import type { Classificacao } from '../../api';
 import { Tip } from './toolbar';
 import { cx } from '../kit';
@@ -27,7 +27,7 @@ const FUNIL_COR = {
 
 const clean = (m: string) => m.replace(/ \(\+[\d.]+\)/, '');
 /** linhas de `motivos` que falam do valor escolhido ("tipo→oferta (+2): preço no texto" vira "preço no texto") */
-function motivosDe(c: Classificacao, campo: Campo): string[] {
+export function motivosDe(c: Classificacao, campo: Campo): string[] {
   const valor = c[campo];
   return c.motivos.filter((m) => m.startsWith(`${campo}→${valor}`)).map((m) => `• ${clean(m).replace(/^[^:]*:\s*/, '')}`);
 }
@@ -46,14 +46,24 @@ function Incerto({ on }: { on: boolean }) {
   return on ? <CircleHelp className="size-3 opacity-70" aria-label="incerto" /> : null;
 }
 
-export function ChipFunil({ c }: { c: Classificacao }) {
-  return <Tip content={motivoTip('Funil', c, 'funil')}><span tabIndex={0} className={cx(BASE, FUNIL_COR[c.funil])}>{FUNIL[c.funil]}<Incerto on={c.confiancaCampos.funil < INCERTO} /></span></Tip>;
+/** correção do Oliver (037 D): `auto` = o que as regras diziam. O chip troca a confiança pelo selo "você" e o valor dele vence. */
+export type Voce = { auto: string } | undefined;
+const VOCE_RING = 'ring-1 ring-primary/50';
+function Selo({ voce }: { voce: Voce }) {
+  return voce ? <span className="inline-flex items-center gap-0.5 rounded-sm bg-primary/15 px-1 py-px text-[10px] font-semibold text-primary-ink [&_svg]:size-2.5"><UserRound />você</span> : null;
 }
-export function ChipTipo({ c }: { c: Classificacao }) {
-  return <Tip content={motivoTip('Tipo', c, 'tipo')}><span tabIndex={0} className={cx(BASE, NEUTRO)}>{TIPO[c.tipo]}<Incerto on={c.confiancaCampos.tipo < INCERTO} /></span></Tip>;
+function vozTip(titulo: string, voce: NonNullable<Voce>): ReactNode {
+  return <><b>{titulo}</b> · corrigido por você{'\n'}As regras diziam: {voce.auto}{'\n'}Vale sobre regra e IA; coleta nova não apaga. Abra o anúncio para voltar ao automático.</>;
 }
-export function ChipObjetivo({ c }: { c: Classificacao }) {
-  return <Tip content={motivoTip('Objetivo provável', c, 'objetivo')}><span tabIndex={0} className={cx(BASE, NEUTRO)}>{OBJETIVO[c.objetivo]}<Incerto on={c.confiancaCampos.objetivo < INCERTO} /></span></Tip>;
+
+export function ChipFunil({ c, voce }: { c: Classificacao; voce?: Voce }) {
+  return <Tip content={voce ? vozTip('Funil', voce) : motivoTip('Funil', c, 'funil')}><span tabIndex={0} className={cx(BASE, FUNIL_COR[c.funil], voce && VOCE_RING)}>{FUNIL[c.funil]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.funil < INCERTO} /></span></Tip>;
+}
+export function ChipTipo({ c, voce }: { c: Classificacao; voce?: Voce }) {
+  return <Tip content={voce ? vozTip('Tipo', voce) : motivoTip('Tipo', c, 'tipo')}><span tabIndex={0} className={cx(BASE, NEUTRO, voce && VOCE_RING)}>{TIPO[c.tipo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.tipo < INCERTO} /></span></Tip>;
+}
+export function ChipObjetivo({ c, voce }: { c: Classificacao; voce?: Voce }) {
+  return <Tip content={voce ? vozTip('Objetivo', voce) : motivoTip('Objetivo provável', c, 'objetivo')}><span tabIndex={0} className={cx(BASE, NEUTRO, voce && VOCE_RING)}>{OBJETIVO[c.objetivo]}<Selo voce={voce} /><Incerto on={!voce && c.confiancaCampos.objetivo < INCERTO} /></span></Tip>;
 }
 
 const brl = (n: number) => `R$ ${n.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}`;

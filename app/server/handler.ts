@@ -159,9 +159,15 @@ on('GET', '/api/projects/:slug/ads/classified', async (p) => {
   return S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => {
     const ads = (A.listAds(p.slug, c.data.id).at(-1)?.data.ads ?? []).filter((a) => a.active);
     const irmaos = C.contarIrmaos(ads);
-    return { id: c.data.id, ads: ads.map((a) => ({ adId: a.id, ...C.classificarAnuncio(a, { irmaos: irmaos.get(a.id) }) })) };
+    // salvos que já não estão na coleta (saíram do ar) também são classificados, a partir da cópia guardada
+    const vivos = new Set(ads.map((a) => a.id));
+    const congelados = Object.values(S.getAdsMarks(p.slug, c.data.id).ads).flatMap((m) => (m.saved && m.frozen && !vivos.has(m.frozen.id) ? [m.frozen] : []));
+    return { id: c.data.id, ads: [...ads.map((a) => ({ adId: a.id, ...C.classificarAnuncio(a, { irmaos: irmaos.get(a.id) }) })), ...congelados.map((a) => ({ adId: a.id, ...C.classificarAnuncio(a, {}) }))] };
   });
 });
+// marcas do Oliver (037 D): nota, tags, salvo (cópia do anúncio) e override de funil/tipo/objetivo
+on('GET', '/api/projects/:slug/ads/marks', (p) => { slugOk(p); return S.listAdsMarks(p.slug); });
+on('PUT', '/api/projects/:slug/competitors/:id/ads/marks/:adId', (p, b) => { slugOk(p); return S.setAdMark(p.slug, p.id, p.adId, b ?? {}); });
 on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
@@ -302,6 +308,15 @@ const route: Connect.NextHandleFunction = async (req, res, next) => {
     const base = ok ? normalize(join(S.ROOT, P.media(m[1], m[2]))) : '';
     const file = ok ? normalize(join(base, decodeURIComponent(m[3]))) : '';
     if (!ok || !file.startsWith(base + sep) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    return pipeFile(res, file);
+  }
+  // /ads-salvo/<slug>/<concorrente>/<arquivo> → miniaturas dos anúncios salvos (037 D; no git, ao contrário de media/)
+  const sv = url.pathname.match(/^\/ads-salvo\/([^/]+)\/([^/]+)\/([\w.-]+)$/);
+  if (sv) {
+    const ok = isSlug(sv[1]) && isSlug(sv[2]);
+    const file = ok ? join(S.ROOT, P.adsSalvos(sv[1], sv[2]), sv[3]) : '';
+    if (!ok || /\.\./.test(sv[3]) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return pipeFile(res, file);
   }

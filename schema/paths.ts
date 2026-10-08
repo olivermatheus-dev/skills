@@ -22,6 +22,9 @@ export const P = {
   competitor: (s: string, id: string) => join(company(s), 'competitors', id),
   competitorFile: (s: string, id: string) => join(company(s), 'competitors', id, 'competitor.md'),
   marks: (s: string, id: string) => join(company(s), 'competitors', id, 'marks.json'),
+  /** marcas do Oliver nos anúncios (037 D) e as miniaturas leves dos salvos (no git, ao contrário de media/) */
+  adsMarks: (s: string, id: string) => join(company(s), 'competitors', id, 'ads', 'marks.json'),
+  adsSalvos: (s: string, id: string) => join(company(s), 'competitors', id, 'ads', 'salvos'),
   snapshots: (s: string, id: string) => join(company(s), 'competitors', id, 'snapshots'),
   /** análise por módulo (analysis/<modulo>.json, pedido.json, notas.json) */
   analysis: (s: string, id: string) => join(company(s), 'competitors', id, 'analysis'),

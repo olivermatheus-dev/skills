@@ -1,12 +1,12 @@
 // "Banco de dados" em arquivos: leitura e escrita validadas pelos schemas.
 // Todo acesso a companies/ (app, ferramentas, agentes via scripts) passa por aqui.
-import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, cpSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, cpSync, copyFileSync, statSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import YAML from 'yaml';
 import { z } from 'zod';
 import {
-  Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
+  Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, AdsMarks, AdMark, aplicarMarca, marcaVazia, adKey, type AdMarkPatch, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AdsSnapshot, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
@@ -894,6 +894,12 @@ export function validateAll():{ file: string; issues: string[] }[] {
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));
+      if (exists(adsMarksFile(d, id))) tryIt(() => {
+        for (const [k, m] of Object.entries(getAdsMarks(d, id).ads)) {
+          if (m.saved && !m.frozen) throw new ValidationError(adsMarksFile(d, id), [`${k}: salvo sem cópia do anúncio (frozen)`]);
+          if (m.frozenMedia && !exists(join(P.adsSalvos(d, id), m.frozenMedia))) throw new ValidationError(adsMarksFile(d, id), [`${k}: miniatura ${m.frozenMedia} não existe em ads/salvos/`]);
+        }
+      });
       tryIt(() => listSnapshots(d, id));
       if (exists(P.competitorFile(d, id))) {
         tryIt(() => getAnalysisResults(d, id));
@@ -1029,4 +1035,75 @@ export function adsHistory(slug: string, compId: string, { hoje = new Date() }: 
     irmaos: ativos.get(h.conceito) ?? 0,
   }));
   return { slug, competitorId: compId, coletas: snaps.length, coletasCompletas: completas, ultimaColeta: ultima?.collectedAt ?? null, saidas: ads.filter((a) => a.saiuDoAr).length, ads };
+}
+
+// ───────────────────────── marcas do Oliver nos anúncios (037 fase D) ─────────────────────────
+// competitors/<id>/ads/marks.json: nota, tags, salvo (com cópia do anúncio) e override de funil/tipo/objetivo.
+// Coleta e classificação nunca escrevem aqui; o override vence a regra (e a IA) na hora de mostrar.
+
+const adsMarksFile = (slug: string, compId: string) => P.adsMarks(slug, compId);
+/** lê sem cache (arquivo pequeno, e a escrita logo em seguida não pode enxergar versão velha) */
+export function getAdsMarks(slug: string, compId: string): AdsMarks {
+  const f = adsMarksFile(slug, compId);
+  return exists(f) ? check(AdsMarks, JSON.parse(read(f)), f) : { schema: 1, ads: {} };
+}
+/** marcas de todos os concorrentes que têm arquivo: { compId: { 'meta:123': marca } } */
+export function listAdsMarks(slug: string): Record<string, AdsMarks['ads']> {
+  const out: Record<string, AdsMarks['ads']> = {};
+  if (!exists(P.competitors(slug))) return out;
+  for (const id of readdirSync(abs(P.competitors(slug)))) if (exists(adsMarksFile(slug, id))) { try { out[id] = getAdsMarks(slug, id).ads; } catch { /* inválido: aparece no validate */ } }
+  return out;
+}
+
+/** o anúncio mais recente com esse id em qualquer coleta (a mais nova primeiro) */
+function findAdInSnapshots(slug: string, compId: string, adId: string) {
+  const dir = join(P.competitor(slug, compId), 'ads');
+  const files = list(dir, /^\d.*\.json$/).reverse();
+  for (const f of files) {
+    try {
+      const snap = check(AdsSnapshot, JSON.parse(read(join(dir, f))), join(dir, f));
+      const ad = snap.ads.find((a) => a.id === adId);
+      if (ad) return ad;
+    } catch { /* ilegível: ignora */ }
+  }
+  return undefined;
+}
+
+/** miniatura leve (até 1,5 MB) copiada de media/ads/ (fora do git) para ads/salvos/ (no git). Vídeo pesado nunca entra: só o poster. */
+const SALVO_MAX_BYTES = 1.5 * 1024 * 1024;
+function copiarMiniatura(slug: string, compId: string, ad: { id: string; media: { thumbnailLocal?: string } }): string | undefined {
+  const local = ad.media.thumbnailLocal;
+  if (!local || !/^media\/ads\/[\w.-]+$/.test(local)) return undefined;
+  const src = join(P.competitor(slug, compId), local);
+  if (!exists(src) || statSync(abs(src)).size > SALVO_MAX_BYTES) return undefined;
+  const name = `${ad.id}${local.slice(local.lastIndexOf('.'))}`;
+  mkdirSync(abs(P.adsSalvos(slug, compId)), { recursive: true });
+  copyFileSync(abs(src), abs(join(P.adsSalvos(slug, compId), name)));
+  return name;
+}
+
+/**
+ * Grava a marca de um anúncio. Ao salvar, copia o anúncio inteiro (`frozen`) e a miniatura; ao tirar dos salvos, apaga a cópia.
+ * Marca que ficou sem nada do Oliver sai do arquivo. `fonte` = 'meta' (Google Transparency entra depois).
+ */
+export function setAdMark(slug: string, compId: string, adId: string, patch: AdMarkPatch, fonte = 'meta'): AdMark | null {
+  if (!/^[\w.-]+$/.test(adId)) throw new ValidationError(adsMarksFile(slug, compId), ['id de anúncio inválido']);
+  const file = getAdsMarks(slug, compId);
+  const key = adKey(adId, fonte);
+  const old = file.ads[key];
+  const next = aplicarMarca(old, patch, nowIso());
+  if (next.saved && !next.frozen) {
+    const ad = findAdInSnapshots(slug, compId, adId);
+    if (!ad) throw new ValidationError(adsMarksFile(slug, compId), [`anúncio ${adId} não está em nenhuma coleta; nada para guardar`]);
+    next.frozen = ad;
+    const media = copiarMiniatura(slug, compId, ad);
+    if (media) next.frozenMedia = media;
+  } else if (!next.saved && (next.frozen || next.frozenMedia)) {
+    if (next.frozenMedia) rmSync(abs(join(P.adsSalvos(slug, compId), next.frozenMedia)), { force: true });
+    delete next.frozen; delete next.frozenMedia;
+  }
+  if (marcaVazia(next)) delete file.ads[key]; else file.ads[key] = check(AdMark, next, `${adsMarksFile(slug, compId)}#${key}`);
+  if (Object.keys(file.ads).length) write(adsMarksFile(slug, compId), `${JSON.stringify(check(AdsMarks, file, adsMarksFile(slug, compId)), null, 2)}\n`);
+  else rmSync(abs(adsMarksFile(slug, compId)), { force: true });
+  return file.ads[key] ?? null;
 }

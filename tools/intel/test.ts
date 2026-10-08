@@ -388,6 +388,69 @@ await t('classificador de anúncios: acerto no gabarito ≥ 85% em funil e tipo 
   }
 });
 
+await t('marcas do Oliver: override sobrevive a coleta nova e a reclassificação; salvo abre sem o anúncio na coleta (037 D)', async () => {
+  const { classificarAnuncio } = await import('./ads-classify');
+  const { resolverCampo, AdsMarks } = await import('../../schema');
+  const comp = join(root, 'companies', 't', 'competitors', 'm');
+  const dir = join(comp, 'ads');
+  mkdirSync(join(comp, 'media', 'ads'), { recursive: true });
+  writeFileSync(join(comp, 'media', 'ads', 'A.jpg'), Buffer.from('miniatura-leve'));
+  const ad = (id: string, text: string, extra: Record<string, unknown> = {}) => ({ id, active: true, startedAt: '2026-09-01', text, title: `Título ${id}`, cta: 'Cadastre-se', linkUrl: 'https://app.exemplo.com/cadastro', url: `https://www.facebook.com/ads/library/?id=${id}`, ...extra });
+  const A = ad('A', 'Teste grátis por 15 dias, sem cartão. Cadastre-se!', { media: { type: 'video', thumbnail: 'https://cdn.exemplo.com/a.jpg', thumbnailLocal: 'media/ads/A.jpg', videoUrl: 'https://cdn.exemplo.com/a.mp4' } });
+  const B = ad('B', 'Outro anúncio qualquer sobre agenda e prontuário');
+  const put = (n: number, ads: unknown[]) => { mkdirSync(dir, { recursive: true }); writeFileSync(join(dir, `2026-10-0${n}T10-00-00.json`), JSON.stringify(AdsSnapshot.parse({ collectedAt: `2026-10-0${n}T10:00:00Z`, pageId: '1', total: ads.length, truncada: false, ads, errors: [] }))); };
+  put(1, [A, B]);
+  const regra = classificarAnuncio(AdsSnapshot.parse({ collectedAt: '2026-10-01T10:00:00Z', ads: [A] }).ads[0], {});
+  const contra = regra.funil === 'topo' ? 'fundo' : 'topo';
+
+  // override + nota + tags + salvar
+  S.setAdMark('t', 'm', 'A', { override: { funil: contra, tipo: 'isca' }, note: 'copiar a oferta', tags: ['gratuito-sem-risco'] });
+  let m = S.getAdsMarks('t', 'm').ads['meta:A'];
+  assert.equal(m.override?.funil, contra); assert.equal(m.note, 'copiar a oferta'); assert.equal(m.saved, false); assert.equal(m.frozen, undefined);
+  S.setAdMark('t', 'm', 'A', { saved: true });
+  m = S.getAdsMarks('t', 'm').ads['meta:A'];
+  assert.equal(m.saved, true); assert.equal(m.frozen?.id, 'A'); assert.match(m.frozen?.text ?? '', /Teste grátis/);
+  assert.equal(m.frozenMedia, 'A.jpg'); assert.ok(existsSync(join(comp, 'ads', 'salvos', 'A.jpg')), 'miniatura copiada para dentro de ads/salvos');
+  assert.equal(m.frozen?.media.videoUrl, 'https://cdn.exemplo.com/a.mp4'); // só o link: nenhum vídeo é baixado
+  assert.ok(!readdirSync(join(comp, 'ads', 'salvos')).some((f) => /\.(mp4|webm|mov)$/.test(f)));
+  assert.ok(AdsMarks.safeParse(JSON.parse(readFileSync(join(dir, 'marks.json'), 'utf8'))).success);
+  assert.equal(S.listAdsMarks('t').m['meta:A'].note, 'copiar a oferta');
+
+  // coleta nova: o anúncio A saiu do ar; B segue. As marcas ficam como estavam e o salvo abre inteiro.
+  put(2, [B]);
+  const marcasAntes = readFileSync(join(dir, 'marks.json'), 'utf8');
+  assert.equal(S.adsHistory('t', 'm', { hoje: new Date('2026-10-05T00:00:00Z') }).ads.find((a) => a.id === 'A')!.saiuDoAr, true);
+  assert.equal(readFileSync(join(dir, 'marks.json'), 'utf8'), marcasAntes, 'coleta não mexe no marks.json');
+  m = S.getAdsMarks('t', 'm').ads['meta:A'];
+  assert.equal(m.frozen?.text, A.text); assert.equal(m.frozen?.cta, 'Cadastre-se'); assert.equal(m.frozen?.linkUrl, A.linkUrl); assert.equal(m.frozen?.startedAt, '2026-09-01');
+  assert.ok(!AdsSnapshot.parse(JSON.parse(readFileSync(join(dir, '2026-10-02T10-00-00.json'), 'utf8'))).ads.some((a) => a.id === 'A'), 'o anúncio não está mais na coleta');
+
+  // reclassificação (regras de novo, a partir da cópia): o valor do Oliver continua vencendo
+  const de2 = classificarAnuncio(m.frozen!, {});
+  assert.deepEqual(resolverCampo('funil', de2.funil, m), { valor: contra, origem: 'voce' });
+  assert.deepEqual(resolverCampo('tipo', de2.tipo, m), { valor: 'isca', origem: 'voce' });
+  assert.deepEqual(resolverCampo('objetivo', de2.objetivo, m), { valor: de2.objetivo, origem: 'regra' });
+
+  // voltar ao automático (null) tira só aquele campo
+  S.setAdMark('t', 'm', 'A', { override: { funil: null } });
+  m = S.getAdsMarks('t', 'm').ads['meta:A'];
+  assert.equal(m.override?.funil, undefined); assert.equal(m.override?.tipo, 'isca'); assert.equal(m.saved, true);
+  assert.deepEqual(S.validateAll().filter((e) => /marks\.json/.test(e.file) && /ads/.test(e.file)), []);
+
+  // salvar anúncio que nunca esteve numa coleta falha sem sujar o arquivo
+  assert.throws(() => S.setAdMark('t', 'm', 'ZZZ', { saved: true }), /nenhuma coleta/);
+  assert.equal(S.getAdsMarks('t', 'm').ads['meta:ZZZ'], undefined);
+
+  // tirar dos salvos apaga a cópia e a miniatura (nota e tags ficam); sem nada do Oliver a marca sai do arquivo
+  S.setAdMark('t', 'm', 'A', { saved: false });
+  m = S.getAdsMarks('t', 'm').ads['meta:A'];
+  assert.equal(m.saved, false); assert.equal(m.frozen, undefined); assert.equal(m.note, 'copiar a oferta'); assert.ok(!existsSync(join(comp, 'ads', 'salvos', 'A.jpg')));
+  S.setAdMark('t', 'm', 'A', { note: null, tags: [], override: { tipo: null } });
+  assert.ok(!existsSync(join(dir, 'marks.json')), 'sem marcas, sem arquivo');
+  assert.throws(() => S.setAdMark('t', 'm', '../x', { note: 'a' }), /inválido/);
+  rmSync(comp, { recursive: true, force: true });
+});
+
 await t('validação geral do HUB_ROOT temporário', () => {
   assert.deepEqual(S.validateAll(), []);
 });

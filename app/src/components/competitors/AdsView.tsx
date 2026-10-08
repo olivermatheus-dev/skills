@@ -4,14 +4,16 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { ArrowUpDown, BadgePercent, ChevronDown, ChevronUp, Clapperboard, Funnel, Target, Tag, LogOut, GalleryHorizontal, Image as ImageIcon, Layers, List, LayoutGrid, CalendarClock, Info, Link2, Megaphone, RefreshCw, Share2, Shapes, Sparkles, Timer, TriangleAlert, Users } from 'lucide-react';
-import { api, type Ad, type AnuncioHistorico, type Classificacao } from '../../api';
-import { qk, useAds, useAdsClassified, useAdsHistories } from '../../queries';
+import { ArrowUpDown, BadgePercent, Bookmark, BookmarkCheck, ChevronDown, ChevronUp, Clapperboard, Funnel, Target, Tag, LogOut, GalleryHorizontal, Image as ImageIcon, Layers, List, LayoutGrid, CalendarClock, Info, Link2, Megaphone, RefreshCw, Share2, Shapes, Sparkles, Timer, TriangleAlert, Users } from 'lucide-react';
+import { api, type Ad, type AdMark, type AdMarkPatch, type AnuncioHistorico, type Classificacao } from '../../api';
+import { adKey, type AdCampo } from '../../../../schema/ads-marks';
+import { qk, useAds, useAdsClassified, useAdsHistories, useAdsMarks, useSetAdMark } from '../../queries';
 import { FillBox, StatStrip, useMarket } from './area';
 import { Avatar, Img, PlatformIcon, Spinner, platformLabel } from '../../components/competitors/lib';
 import { DataTable, FilterBar, FlagToggle, Tip, ViewToggle, parseSort, sortRows, useUrlState, type Col, type SortDef } from '../../components/competitors/toolbar';
 import { toast } from '../../components/toast';
-import { ChipDestino, ChipFunil, ChipObjetivo, ChipOferta, ChipTipo, DESTINO, FUNIL, OBJETIVO, OFERTA_TIPO, PROVADO_DIAS, STATUS, StatusBadge, TIPO, sinalResultado, statusDe, type StatusAd } from './AdChips';
+import { ChipDestino, ChipFunil, ChipObjetivo, ChipOferta, ChipTipo, DESTINO, FUNIL, OBJETIVO, OFERTA_TIPO, PROVADO_DIAS, STATUS, StatusBadge, TIPO, sinalResultado, statusDe, type StatusAd, type Voce } from './AdChips';
+import { AdPanel } from './AdPanel';
 import { Button, Empty, ErrorBox, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../../components/kit';
 
 type Row = Ad & {
@@ -20,6 +22,10 @@ type Row = Ad & {
   c?: Classificacao; hist?: AnuncioHistorico;
   /** mesmo texto+título no mesmo concorrente = mesmo conceito (vazio = não agrupa) */
   gk: string; status: StatusAd; sinal: number; gone?: boolean;
+  /** o que as regras dizem (sem a correção do Oliver) e a marca dele (nota, tags, salvo, override) */
+  auto?: Classificacao; mark?: AdMark;
+  /** não está na coleta: veio da cópia guardada ao salvar */
+  fromCopy?: boolean;
 };
 /** linha da lista: o anúncio-pai do conceito (kids = versões escondidas) ou uma versão exibida embaixo dele (child) */
 type Item = Row & { kids: number; child: boolean };
@@ -53,7 +59,17 @@ const SORTS: Record<string, SortDef<Row> & { bar?: boolean }> = {
   oferta: { label: 'Oferta', get: (r) => (r.c?.oferta.tem ? r.c.oferta.precoBRL ?? 0 : undefined) },
   destino: { label: 'Destino', get: (r) => (r.c ? DESTINO[r.c.destino.kind] : undefined), text: true },
 };
-const DEFAULTS = { q: '', conc: '', rede: '', formato: '', funil: '', tipo: '', obj: '', oferta: '', novos: '', saiu: '', vista: 'grade', ordem: 'tempo', asc: '' };
+/** o valor do Oliver vence o das regras (e a confiança dele é total); sem override devolve a classificação como veio */
+function resolver(rule: Classificacao, mark?: AdMark): Classificacao {
+  const o = mark?.override;
+  if (!o) return rule;
+  return { ...rule, ...(o.funil && { funil: o.funil }), ...(o.tipo && { tipo: o.tipo }), ...(o.objetivo && { objetivo: o.objetivo }),
+    confiancaCampos: { ...rule.confiancaCampos, ...(o.funil && { funil: 1 }), ...(o.tipo && { tipo: 1 }), ...(o.objetivo && { objetivo: 1 }) } };
+}
+const ROTULO: Record<AdCampo, Record<string, string>> = { funil: FUNIL, tipo: TIPO, objetivo: OBJETIVO };
+const voceDe = (r: Row, k: AdCampo): Voce => (r.mark?.override?.[k] && r.auto ? { auto: ROTULO[k][r.auto[k]] } : undefined);
+const diasEntre = (de?: string | null, ate?: string | null) => (de && ate ? Math.max(0, Math.floor((Date.parse(ate) - Date.parse(de)) / 86_400_000)) : undefined);
+const DEFAULTS = { q: '', conc: '', rede: '', formato: '', funil: '', tipo: '', obj: '', oferta: '', novos: '', saiu: '', salvos: '', vista: 'grade', ordem: 'tempo', asc: '' };
 
 /**
  * Anúncios em grade ou tabela. Sem `compId` = todos os concorrentes (página Anúncios); com `compId` = só esse concorrente (aba da ficha:
@@ -75,13 +91,19 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   });
   const cls = useAdsClassified(slug);
   const clsOf = new Map((cls.data ?? []).flatMap((k) => k.ads.map((a) => [`${k.id}/${a.adId}`, a] as const)));
+  const marksQ = useAdsMarks(slug);
+  const setMark = useSetAdMark(slug);
+  const onMark = (cid: string, adId: string, patch: AdMarkPatch) => void setMark(cid, adId, patch).catch(() => { /* o toast já avisou e o cache voltou */ });
+  const [openKey, setOpenKey] = useState<string | null>(null);
   const histQ = useAdsHistories(slug, per.map((p) => p.id));
   const histOf = new Map(per.map((p, i) => [p.id, new Map((histQ[i]?.data?.ads ?? []).map((h) => [h.id, h]))] as const));
   const mk = (x: Ad, p: (typeof per)[number], extra: Partial<Row> = {}): Row => {
-    const c = clsOf.get(`${p.id}/${x.id}`), hist = histOf.get(p.id)?.get(x.id);
+    const auto = clsOf.get(`${p.id}/${x.id}`), hist = histOf.get(p.id)?.get(x.id);
+    const mark = marksQ.data?.[p.id]?.[adKey(x.id)];
+    const c = auto && resolver(auto, mark);
     const days = daysSince(x.startedAt);
     const base = normKey(x);
-    return { ...x, compId: p.id, compName: names.get(p.id)?.c.data.name ?? p.id, isNew: !!p.prev && !p.prevIds.has(x.id), days, c, hist, gk: base.replace('|', '') ? `${p.id}|${base}` : '',
+    return { ...x, compId: p.id, compName: names.get(p.id)?.c.data.name ?? p.id, isNew: !!p.prev && !p.prevIds.has(x.id), days, c, auto, mark, hist, gk: base.replace('|', '') ? `${p.id}|${base}` : '',
       status: statusDe(days, false), sinal: sinalResultado({ dias: days, irmaos: c?.sinais.irmaos ?? 1, variacoes: x.variations, coletas: hist?.coletas, reapareceu: hist?.reapareceu }), ...extra };
   };
   const rows: Row[] = per.flatMap((p) => (p.cur?.ads ?? []).filter((x) => x.active).map((x) => mk(x, p)));
@@ -90,7 +112,16 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
     const ad = [...(ads.data?.find((a) => a.id === p.id)?.history ?? [])].reverse().flatMap((s) => s.data.ads).find((x) => x.id === h.id);
     return ad ? [mk(ad, p, { gone: true, isNew: false, hist: h, days: h.duracaoFinal ?? undefined, status: statusDe(h.duracaoFinal, true), sinal: sinalResultado({ dias: h.duracaoFinal, irmaos: 1, variacoes: ad.variations, coletas: h.coletas, reapareceu: h.reapareceu }) })] : [];
   }));
-  const pool = v.saiu ? gone : rows;
+  // salvos que já não estão na coleta nem no histórico de saídas (coleta truncada, por exemplo): abrem pela cópia guardada
+  const known = new Set([...rows, ...gone].map((r) => `${r.compId}/${r.id}`));
+  const copies: Row[] = per.flatMap((p) => Object.values(marksQ.data?.[p.id] ?? {}).flatMap((m) => {
+    if (!m.saved || !m.frozen || known.has(`${p.id}/${m.frozen.id}`)) return [];
+    const h = histOf.get(p.id)?.get(m.frozen.id), days = h?.duracaoFinal ?? diasEntre(m.frozen.startedAt, h?.saiuEm ?? m.savedAt);
+    return [mk(m.frozen, p, { gone: true, fromCopy: true, isNew: false, hist: h, days, status: statusDe(days, true), sinal: sinalResultado({ dias: days, irmaos: 1, variacoes: m.frozen.variations, coletas: h?.coletas, reapareceu: h?.reapareceu }) })];
+  }));
+  const allRows = [...rows, ...gone, ...copies];
+  const savedRows = allRows.filter((r) => r.mark?.saved);
+  const pool = v.salvos ? savedRows.filter((r) => !v.saiu || r.gone) : v.saiu ? gone : rows;
   const [open, setOpen] = useState<Set<string>>(new Set());
   const toggleOpen = (gk: string) => setOpen((o) => { const n = new Set(o); if (n.has(gk)) n.delete(gk); else n.add(gk); return n; });
   const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'tempo', v.asc);
@@ -167,22 +198,23 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   const ofertaOpts: SelectOption[] = [{ value: '', label: 'Com ou sem oferta', icon: <BadgePercent /> }, { value: 'com', label: 'Com oferta', count: nOferta.get('com') ?? 0, disabled: v.oferta !== 'com' && !nOferta.get('com') }, { value: 'sem', label: 'Sem oferta', count: nOferta.get('sem') ?? 0, disabled: v.oferta !== 'sem' && !nOferta.get('sem') },
     ...Object.entries(OFERTA_TIPO).map(([k, l]) => ({ value: k, label: l, count: nOferta.get(k) ?? 0, disabled: v.oferta !== k && !nOferta.get(k), group: 'Tipo de oferta' }))];
   const sortOpts: SelectOption[] = Object.entries(SORTS).filter(([, d]) => d.bar).map(([value, d]) => ({ value, label: d.label }));
-  const active = !!(v.q || v.conc || v.rede || v.formato || v.funil || v.tipo || v.obj || v.oferta || v.novos || v.saiu);
+  const active = !!(v.q || v.conc || v.rede || v.formato || v.funil || v.tipo || v.obj || v.oferta || v.novos || v.saiu || v.salvos);
 
   const dash = <span className="text-muted-foreground">—</span>;
   const cols: Col<Item>[] = [
     { k: 'thumb', label: '', width: '60px', pin: 'left', render: (r) => (
-      <a href={r.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} title="Abrir na Biblioteca de Anúncios" className="block size-11 rounded-md overflow-hidden bg-muted">
-        <Img local={api.mediaUrl(slug, r.compId, r.media.thumbnailLocal ?? undefined)} remote={r.media.thumbnail} className="size-full object-cover" fallback={<div className="size-full grid place-items-center text-muted-foreground"><Megaphone className="size-4" /></div>} />
-      </a>
+      <span className="block size-11 rounded-md overflow-hidden bg-muted">
+        <Img local={thumbOf(r)} remote={r.media.thumbnail} className="size-full object-cover" fallback={<div className="size-full grid place-items-center text-muted-foreground"><Megaphone className="size-4" /></div>} />
+      </span>
     ) },
+    { k: 'salvo', label: '', width: '40px', pin: 'left', render: (r) => <SaveBtn on={!!r.mark?.saved} onClick={() => onMark(r.compId, r.id, { saved: !r.mark?.saved })} /> },
     { k: 'comp', label: 'Concorrente', sort: 'concorrente', render: (r) => {
       const mr = names.get(r.compId);
       return <Link to={`/p/${slug}/concorrentes/${r.compId}`} className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-primary-ink"><Avatar name={r.compName} size={18} local={mr?.avatar.local} remote={mr?.avatar.remote} className="!ring-0" />{r.compName}</Link>;
     } },
-    { k: 'funil', label: 'Funil', sort: 'funil', desc: true, title: 'temperatura do público: topo (frio), meio, fundo (pede a decisão)', render: (r) => r.c ? <ChipFunil c={r.c} /> : dash },
-    { k: 'tipo', label: 'Tipo', sort: 'tipo', render: (r) => r.c ? <ChipTipo c={r.c} /> : dash },
-    { k: 'objetivo', label: 'Objetivo', sort: 'objetivo', title: 'palpite pelo botão e pelo destino (o objetivo real da campanha não é público)', render: (r) => r.c ? <ChipObjetivo c={r.c} /> : dash },
+    { k: 'funil', label: 'Funil', sort: 'funil', desc: true, title: 'temperatura do público: topo (frio), meio, fundo (pede a decisão)', render: (r) => r.c ? <ChipFunil c={r.c} voce={voceDe(r, 'funil')} /> : dash },
+    { k: 'tipo', label: 'Tipo', sort: 'tipo', render: (r) => r.c ? <ChipTipo c={r.c} voce={voceDe(r, 'tipo')} /> : dash },
+    { k: 'objetivo', label: 'Objetivo', sort: 'objetivo', title: 'palpite pelo botão e pelo destino (o objetivo real da campanha não é público)', render: (r) => r.c ? <ChipObjetivo c={r.c} voce={voceDe(r, 'objetivo')} /> : dash },
     { k: 'oferta', label: 'Oferta', sort: 'oferta', desc: true, render: (r) => r.c?.oferta.tem ? <ChipOferta c={r.c} /> : dash },
     { k: 'texto', label: 'Gancho / texto', sort: 'texto', width: '220px', render: (r) => {
       const t = adText(r.text), title = (r.title ?? '').replace(/\{\{[^}]+\}\}/g, '').trim();
@@ -207,6 +239,9 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
     { k: 'status', label: 'Status', width: '112px', pin: 'right', sort: 'status', desc: true, render: (r) => <span className="inline-flex items-center gap-1"><StatusBadge status={r.status} sinal={r.sinal} extra={statusExtra(r)} />{r.isNew && <span className="text-[11px] font-semibold rounded px-1.5 py-0.5 bg-success/15 text-success-ink">Novo</span>}</span> },
   ];
 
+  /** a miniatura guardada no repositório (salvos) vence a de media/, que não vai para o git */
+  const thumbOf = (r: Row) => (r.mark?.frozenMedia ? api.adSalvoUrl(slug, r.compId, r.mark.frozenMedia) : api.mediaUrl(slug, r.compId, r.media.thumbnailLocal ?? undefined));
+  const openRow = openKey ? allRows.find((r) => `${r.compId}/${r.id}` === openKey) : undefined;
   const pullChip = (id: string) => (
     <Button variant="ghost" onClick={() => pullOne(id)} disabled={one === id || !!pulling} title={`Puxar só os anúncios de ${names.get(id)?.c.data.name}`}>{one === id ? <Spinner /> : <RefreshCw className="size-3.5" />} {names.get(id)?.c.data.name}</Button>
   );
@@ -255,10 +290,11 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
           ]}
           trailing={<>
             {gone.length > 0 && <FlagToggle on={!!v.saiu} onChange={(x) => set({ saiu: x ? '1' : '' })} icon={LogOut} tone="amber" label="Saíram do ar" title="Só os anúncios que sumiram numa coleta completa (perdeu = saiu com menos de 30 dias; encerrado = 30+)" />}
+            {(savedRows.length > 0 || !!v.salvos) && <FlagToggle on={!!v.salvos} onChange={(x) => set({ salvos: x ? '1' : '' })} icon={Bookmark} tone="violet" label={`Salvos ${savedRows.length}`} title="Só os anúncios que você salvou. Salvo guarda uma cópia: continua abrindo mesmo se sair do ar." />}
             <FlagToggle on={!!v.novos} onChange={(x) => set({ novos: x ? '1' : '' })} icon={Sparkles} label="Só novos" title="Só os anúncios que não estavam na coleta anterior" />
             <ViewToggle value={v.vista} onChange={(x) => set({ vista: x })} options={[{ value: 'grade', label: 'Grade', icon: LayoutGrid }, { value: 'lista', label: 'Lista', icon: List }]} />
           </>}
-          active={active} onClear={() => reset(['q', 'conc', 'rede', 'formato', 'funil', 'tipo', 'obj', 'oferta', 'novos', 'saiu'])} />
+          active={active} onClear={() => reset(['q', 'conc', 'rede', 'formato', 'funil', 'tipo', 'obj', 'oferta', 'novos', 'saiu', 'salvos'])} />
 
         {(semPagina.length > 0 || withErrors.length > 0) && (
           <div className="mb-3 space-y-0.5 text-xs">
@@ -276,12 +312,26 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
         )}
         {!shown.length && <div className="mt-6"><Empty title={pool.length ? 'Nada com esses filtros' : compId ? 'Sem anúncios na Biblioteca da Meta' : 'Nenhum anúncio ativo nos concorrentes coletados'} hint={!rows.length && compId ? 'Confira o link da página do Facebook em Editar.' : undefined} /></div>}
         {shown.length > 0 && (v.vista === 'lista'
-          ? <DataTable rows={list} cols={cols} rowClass={(r) => (r.child ? 'bg-muted/30' : undefined)} colsKey="anuncios" rowKey={(r) => `${r.compId}/${r.id}`} sort={sort} fill={!compId} onSort={(k, dir) => set({ ordem: k, asc: dir === 1 ? '1' : '' })} />
+          ? <DataTable rows={list} cols={cols} onRowClick={(r) => setOpenKey(`${r.compId}/${r.id}`)} rowClass={(r) => (r.child ? 'bg-muted/30' : undefined)} colsKey="anuncios" rowKey={(r) => `${r.compId}/${r.id}`} sort={sort} fill={!compId} onSort={(k, dir) => set({ ordem: k, asc: dir === 1 ? '1' : '' })} />
                       : (compId ? (c: ReactNode) => <>{c}</> : (c: ReactNode) => <FillBox>{c}</FillBox>)(<div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
-            {list.map((r) => <AdCard key={`${r.compId}/${r.id}`} slug={slug} r={r} open={open.has(r.gk)} onToggle={() => toggleOpen(r.gk)} />)}
+            {list.map((r) => <AdCard key={`${r.compId}/${r.id}`} slug={slug} r={r} thumb={thumbOf(r)} open={open.has(r.gk)} onToggle={() => toggleOpen(r.gk)} onOpen={() => setOpenKey(`${r.compId}/${r.id}`)} onSave={() => onMark(r.compId, r.id, { saved: !r.mark?.saved })} />)}
           </div>))}
       </>}
+      {openRow && <AdPanel key={openKey} slug={slug} open onClose={() => setOpenKey(null)} mark={openRow.mark} onMark={(patch) => onMark(openRow.compId, openRow.id, patch)}
+        r={{ ad: openRow, compId: openRow.compId, compName: openRow.compName, days: openRow.days, c: openRow.c, auto: openRow.auto, hist: openRow.hist, status: openRow.status, sinal: openRow.sinal, gone: openRow.gone, fromCopy: openRow.fromCopy, thumb: thumbOf(openRow) }} />}
     </>);
+}
+
+/** botão de salvar do card e da linha (não abre o painel) */
+function SaveBtn({ on, onClick }: { on: boolean; onClick: () => void }) {
+  return (
+    <Tip content={on ? 'Salvo. Clique para tirar dos salvos.' : 'Salvar: guarda uma cópia do anúncio, que continua abrindo mesmo se sair do ar.'}>
+      <button type="button" aria-pressed={on} aria-label={on ? 'Tirar dos salvos' : 'Salvar anúncio'} onClick={(e) => { e.stopPropagation(); onClick(); }}
+        className={cx('grid place-items-center size-7 rounded-md transition outline-none focus-visible:ring-2 focus-visible:ring-ring', on ? 'text-violet-600 dark:text-violet-300' : 'text-muted-foreground hover:text-foreground hover:bg-muted')}>
+        {on ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
+      </button>
+    </Tip>
+  );
 }
 
 /** frase do histórico para o tooltip do status (saiu do ar, voltou com outro id, quantas coletas) */
@@ -304,30 +354,31 @@ function KidsToggle({ n, open, onClick }: { n: number; open: boolean; onClick: (
   );
 }
 
-function AdCard({ slug, r, open, onToggle }: { slug: string; r: Item; open: boolean; onToggle: () => void }) {
+function AdCard({ slug, r, thumb, open, onToggle, onOpen, onSave }: { slug: string; r: Item; thumb?: string; open: boolean; onToggle: () => void; onOpen: () => void; onSave: () => void }) {
   const proven = (r.days ?? 0) >= PROVEN_DAYS && !r.gone;
   const title = (r.title ?? '').replace(/\{\{[^}]+\}\}/g, '').trim();
   const host = hostOf(r.linkUrl);
   return (
-    <article className={cx('bg-card border rounded-xl overflow-hidden flex flex-col', r.child && 'border-dashed bg-muted/30', proven ? 'border-amber-300' : 'border-border', r.gone && 'opacity-80')}>
-      <a href={r.url} target="_blank" rel="noreferrer" className="relative block aspect-square bg-muted">
-        <Img local={api.mediaUrl(slug, r.compId, r.media.thumbnailLocal ?? undefined)} remote={r.media.thumbnail} className="absolute inset-0 w-full h-full object-cover" fallback={<div className="absolute inset-0 grid place-items-center text-xs text-muted-foreground">sem miniatura</div>} />
+    <article onClick={onOpen} className={cx('bg-card border rounded-xl overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition', r.child && 'border-dashed bg-muted/30', proven ? 'border-amber-300' : 'border-border', r.gone && 'opacity-80')}>
+      <div className="relative block aspect-square bg-muted">
+        <Img local={thumb} remote={r.media.thumbnail} className="absolute inset-0 w-full h-full object-cover" fallback={<div className="absolute inset-0 grid place-items-center text-xs text-muted-foreground">sem miniatura</div>} />
         <span className="absolute top-2 left-2 flex gap-1">
           {r.isNew && <span className="text-[10px] font-semibold bg-success text-white rounded px-1.5 py-0.5">NOVO</span>}
           <span className="text-[10px] font-semibold bg-black/70 text-white rounded px-1.5 py-0.5 uppercase">{r.media.type === 'desconhecido' ? 'anúncio' : r.media.type}</span>
         </span>
-        <span className="absolute top-2 right-2" onClick={(e) => e.preventDefault()}><StatusBadge status={r.status} sinal={r.sinal} extra={statusExtra(r)} className="shadow-sm ring-1 ring-black/10 !bg-card" /></span>
+        <span className="absolute top-2 right-2"><StatusBadge status={r.status} sinal={r.sinal} extra={statusExtra(r)} className="shadow-sm ring-1 ring-black/10 !bg-card" /></span>
         {r.days != null && <span className={cx('absolute bottom-2 left-2 text-[11px] font-semibold rounded px-1.5 py-0.5', proven ? 'bg-amber-400 text-black' : 'bg-black/70 text-white')} title={`no ar desde ${new Date(r.startedAt!).toLocaleDateString('pt-BR')}`}>{r.days} dia(s) no ar</span>}
         {(r.variations ?? 0) > 1 ? <span className="absolute bottom-2 right-2 text-[11px] bg-black/70 text-white rounded px-1.5 py-0.5" title="anúncios que usam este criativo e texto">{r.variations} variações</span> : null}
-      </a>
+      </div>
       <div className="p-3 flex-1 flex flex-col gap-1.5 text-sm">
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Link to={`/p/${slug}/concorrentes/${r.compId}`} className="font-medium text-foreground hover:text-primary-ink truncate">{r.compName}</Link>
+          <Link to={`/p/${slug}/concorrentes/${r.compId}`} onClick={(e) => e.stopPropagation()} className="font-medium text-foreground hover:text-primary-ink truncate">{r.compName}</Link>
           <span className="ml-auto flex gap-1">{r.platforms.map((p) => <PlatformIcon key={p} platform={p} size={12} />)}</span>
+          <span className="-my-1 -mr-1"><SaveBtn on={!!r.mark?.saved} onClick={onSave} /></span>
         </div>
         {r.c && (
           <div className="flex flex-wrap gap-1">
-            <ChipFunil c={r.c} /><ChipTipo c={r.c} /><ChipObjetivo c={r.c} />
+            <ChipFunil c={r.c} voce={voceDe(r, 'funil')} /><ChipTipo c={r.c} voce={voceDe(r, 'tipo')} /><ChipObjetivo c={r.c} voce={voceDe(r, 'objetivo')} />
             {r.c.oferta.tem && <ChipOferta c={r.c} />}
             <ChipDestino c={r.c} />
           </div>
