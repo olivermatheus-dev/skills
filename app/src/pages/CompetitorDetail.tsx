@@ -1,7 +1,7 @@
 // Ficha do concorrente, organizada por área de marketing. Cabeçalho compacto (fixo): logo, frase, chips (mercado, preço,
 // audiência, reputação, redes) e "Puxar" → diálogo com o que atualizar. Abas (?aba=): Diagnóstico · Oferta · Produto ·
 // Mensagem · Redes e conteúdos · Reputação · Dados. Redes: números do perfil, conteúdos por outlier, marcação e "Virar ideia".
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type Doc, type ItemMark } from '../api';
@@ -152,6 +152,19 @@ function Detalhe() {
   const [results, setResults] = useState<CollectResult[] | null>(null);
   const [pullError, setPullError] = useState<unknown>(null);
 
+  // altura do cabeçalho fixo: a barra de filtros dos Conteúdos gruda logo abaixo dele
+  const headRef = useRef<HTMLElement>(null);
+  const [headH, setHeadH] = useState(0);
+  useLayoutEffect(() => {
+    const el = headRef.current;
+    if (!el) return;
+    const fit = () => setHeadH(el.offsetHeight);
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  });
+
   useEffect(() => { if (!pulling) return; setElapsed(0); const t = setInterval(() => setElapsed((s) => s + 1), 1000); return () => clearInterval(t); }, [pulling]);
 
   const d = q.data;
@@ -241,7 +254,7 @@ function Detalhe() {
   return (
     <div className="max-w-[1400px] pb-16">
       {/* cabeçalho compacto, fixo ao rolar */}
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border px-8 pt-4">
+      <header ref={headRef} className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border px-8 pt-4">
         <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
           <Link to={`/p/${slug}/concorrentes`} className="hover:text-foreground">Concorrentes</Link><ChevronRight className="size-3" /><span className="text-foreground">{c.name}</span>
         </nav>
@@ -377,7 +390,7 @@ function Detalhe() {
 
         {/* conteúdos */}
         <section className="mt-8">
-          <div className="flex flex-wrap items-center gap-2 mb-4">
+          <div style={{ top: headH }} className="sticky z-10 -mx-8 px-8 py-2 mb-2 bg-background/95 backdrop-blur border-b border-border flex flex-wrap items-center gap-2">
             <h2 className="text-base font-semibold mr-2">Conteúdos</h2>
             <Select value={sort} onChange={(e) => setSort(e.target.value as Sort)} aria-label="Ordenar">
               {Object.entries(SORTS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
