@@ -1,7 +1,7 @@
 // Área Concorrentes: cabeçalho com as abas (cada uma com rota própria) e os dados de mercado juntos por concorrente
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, type LucideIcon } from 'lucide-react';
+import { Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
 import { NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
@@ -16,6 +16,7 @@ export const AREA_TABS = [
   { path: '', label: 'Panorama', icon: LayoutDashboard },
   { path: 'lista', label: 'Concorrentes', icon: List },
   { path: 'comparar', label: 'Comparar', icon: Columns3 },
+  { path: 'brechas', label: 'Brechas', icon: Target },
   { path: 'conteudos', label: 'Conteúdos', icon: Clapperboard },
   { path: 'redes', label: 'Redes', icon: Share2 },
   { path: 'anuncios', label: 'Anúncios', icon: Megaphone },

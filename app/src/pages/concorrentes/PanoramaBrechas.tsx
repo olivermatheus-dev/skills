@@ -2,7 +2,7 @@
 // As contas da matriz seguem a mesma regra da Matriz de funcionalidades: tem = sim/parcial; coluna `_nos` = a própria empresa.
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, ChevronRight, TriangleAlert } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, ListPlus, TriangleAlert } from 'lucide-react';
 import type { GapTheme, Matrix } from '../../api';
 import { NOS } from '../../../../schema/matrix';
 import { useGaps, useMatrix } from '../../queries';
@@ -57,11 +57,19 @@ function nosHas(m: Matrix | undefined, t: GapTheme) {
   return { label: 'confirmar se você tem', cls: 'text-muted-foreground' };
 }
 
-export function GapThemes({ slug, rows }: { slug: string; rows: MarketRow[] }) {
+/** `onTask`: quando vem, cada brecha ganha o botão "Virar tarefa"; devolve o id da tarefa criada (ou nada, se falhar) */
+export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRow[]; onTask?: (t: GapTheme) => Promise<string | undefined> }) {
   const gq = useGaps(slug);
   const mq = useMatrix(slug);
   const [kind, setKind] = useState<'todas' | Kind>('todas');
   const [open, setOpen] = useState<Set<string>>(new Set());
+  const [made, setMade] = useState<Record<string, string | "...">>({});
+  const turn = async (t: GapTheme) => {
+    if (!onTask || made[t.id]) return;
+    setMade((m) => ({ ...m, [t.id]: "..." }));
+    const id = await onTask(t);
+    setMade((m) => { const n = { ...m }; if (id) n[t.id] = id; else delete n[t.id]; return n; });
+  };
   const g = gq.data;
   const byId = useMemo(() => new Map(rows.map((r) => [r.c.data.id, r])), [rows]);
   // análises de pontos fortes e fracos feitas ou refeitas depois do resumo
@@ -101,8 +109,8 @@ export function GapThemes({ slug, rows }: { slug: string; rows: MarketRow[] }) {
           const has = nosHas(mq.data, t);
           const on = open.has(t.id);
           return (
-            <li key={t.id}>
-              <button type="button" onClick={() => toggle(t.id)} className="w-full text-left px-4 py-2.5 hover:bg-muted/30 flex gap-3">
+            <li key={t.id} className="relative">
+              <button type="button" onClick={() => toggle(t.id)} className={cx("w-full text-left px-4 py-2.5 hover:bg-muted/30 flex gap-3", onTask && "pr-36")}>
                 <span className="w-14 shrink-0 pt-0.5">
                   <span className="block text-sm font-semibold tabular-nums">{cs.length}<span className="text-muted-foreground font-normal text-xs">/{total}</span></span>
                   <span className="mt-1 block h-1 rounded-full bg-muted overflow-hidden"><span className="block h-full bg-primary" style={{ width: `${(cs.length / total) * 100}%` }} /></span>
@@ -121,6 +129,12 @@ export function GapThemes({ slug, rows }: { slug: string; rows: MarketRow[] }) {
                   {cs.slice(0, 6).map((id) => { const r = byId.get(id); return r ? <span key={id} title={r.c.data.name}><Avatar name={r.c.data.name} size={20} local={r.avatar.local} remote={r.avatar.remote} className="ring-2 ring-card" /></span> : null; })}
                 </span>
               </button>
+              {onTask && (
+                <button type="button" disabled={!!made[t.id]} onClick={() => void turn(t)} title="Cria uma tarefa em Produto, em Backlog, para você aprovar"
+                  className={cx("absolute right-4 top-2.5 inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs", made[t.id] ? "border-transparent text-success" : "border-border bg-card hover:bg-muted")}>
+                  {made[t.id] ? <><Check className="size-3.5" />{made[t.id] === "..." ? "Criando…" : `Criada ${made[t.id]}`}</> : <><ListPlus className="size-3.5" />Virar tarefa</>}
+                </button>
+              )}
               {on && (
                 <ul className="px-4 pb-3 pl-[6.25rem] space-y-1">
                   {t.sources.map((s, i) => (

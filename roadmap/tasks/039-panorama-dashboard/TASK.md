@@ -32,3 +32,4 @@ O problema: as brechas ocupam a parte mais nobre da tela com a lista inteira; o 
 ## Log
 - 2026-10-08 — registrada pelo orquestrador a partir do áudio do Oliver (nada alterado no código).
 - 2026-10-08 — fase A2 (agente de UI): `StatStrip` novo (grade de colunas iguais, ícone Lucide por KPI nas 5 telas que o usam, reparte 4+3 em vez de 6+1) e `AreaHeader` com ícones nas abas, "Adicionar" com `Plus` e subtítulo em chip. Aba Brechas fica para a fase B.
+- 2026-10-08 — fase B (agente de UI): aba **Brechas** (`Target`, rota `concorrentes/brechas`, entre Comparar e Conteúdos) com `GapThemes` + `ProductVsMarket`; botão "Virar tarefa" por brecha (via `useTaskActions.create`, quadro produto, Backlog, assignee oliver); link "abrir página →" no Panorama (brechas do Panorama mantidas até a fase C). Prints em `prints/faseB/`.

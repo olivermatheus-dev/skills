@@ -44,7 +44,8 @@ export default function Panorama() {
         { icon: Trophy, label: 'Maior audiência', value: biggest?.followers ? biggest.c.data.name : '—', sub: biggest?.followers ? fmtNum(biggest.followers) : undefined },
       ]} />
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] items-start">
+      <div className="mt-5 flex justify-end"><Link to={`/p/${slug}/concorrentes/brechas`} className="text-xs text-primary-ink">Brechas para nós: abrir página →</Link></div>
+      <div className="mt-1 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] items-start">
         <GapThemes slug={slug} rows={comp} />
         <ProductVsMarket slug={slug} s={ms} />
       </div>

@@ -16,6 +16,7 @@ export const PAGES: PageDef[] = [
   { path: 'concorrentes', label: 'Concorrentes', icon: Radar, sidebar: 'recolhida', ...page(() => import('./concorrentes/Panorama')), children: [
     { path: 'lista', ...page(() => import('./concorrentes/Lista')) },
     { path: 'comparar', ...page(() => import('./concorrentes/Comparar')) },
+    { path: 'brechas', ...page(() => import('./concorrentes/Brechas')) },
     { path: 'conteudos', ...page(() => import('./concorrentes/Conteudos')) },
     { path: 'redes', ...page(() => import('./concorrentes/Redes')) },
     { path: 'anuncios', ...page(() => import('./concorrentes/Anuncios')) },
