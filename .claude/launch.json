@@ -4,21 +4,58 @@
     {
       "name": "hub-app",
       "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
-      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--config", "app/vite.config.ts", "--port", "5173"],
+      "runtimeArgs": [
+        "node_modules/vite/bin/vite.js",
+        "--config",
+        "app/vite.config.ts",
+        "--port",
+        "5173"
+      ],
       "port": 5173,
-      "env": { "HUB_NO_OPEN": "1" }
+      "env": {
+        "HUB_NO_OPEN": "1"
+      }
     },
     {
       "name": "hub-app-2",
       "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
-      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--config", "app/vite.config.ts", "--port", "5174", "--strictPort"],
+      "runtimeArgs": [
+        "node_modules/vite/bin/vite.js",
+        "--config",
+        "app/vite.config.ts",
+        "--port",
+        "5174",
+        "--strictPort"
+      ],
       "port": 5174,
-      "env": { "HUB_NO_OPEN": "1" }
+      "env": {
+        "HUB_NO_OPEN": "1"
+      }
+    },
+    {
+      "name": "hub-app-3",
+      "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
+      "runtimeArgs": [
+        "node_modules/vite/bin/vite.js",
+        "--config",
+        "app/vite.config.ts",
+        "--port",
+        "5175",
+        "--strictPort"
+      ],
+      "port": 5175,
+      "env": {
+        "HUB_NO_OPEN": "1",
+        "HUB_ROOT": "C:\\Users\\OLIVER~1\\AppData\\Local\\Temp\\claude\\C--Users-Oliver-Matheus-Desktop-git-skills\\ea7f6e9b-87b9-4d0c-a56c-75039eb9796d\\scratchpad\\hubcopy"
+      }
     },
     {
       "name": "galeria-mockups",
       "runtimeExecutable": "C:\\Users\\Oliver Matheus\\AppData\\Roaming\\fnm\\node-versions\\v22.23.1\\installation\\node.exe",
-      "runtimeArgs": ["tools/mockup/servir.mjs", "5181"],
+      "runtimeArgs": [
+        "tools/mockup/servir.mjs",
+        "5181"
+      ],
       "port": 5181
     }
   ]
