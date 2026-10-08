@@ -11,13 +11,13 @@
 //   no fim marca o pedido (feito/erro/pendente). O app (Ideias → Pesquisar ideias) chama isto. Sob comando, nunca agendado.
 // Pronta = status todo · assignee agent:<nome> ou ai · todas as dependências done.
 // Recorrentes: companies/<slug>/board/recorrentes.json (ver companies/_modelo/board/recorrentes.json).
-import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, unlinkSync, statSync, openSync, closeSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, unlinkSync, statSync, utimesSync } from 'node:fs';
 import { join } from 'node:path';
-import { spawnSync } from 'node:child_process';
 import { companies, boardDir, listTasks, nextId, updateTask, addComment, today } from './lib/board.mjs';
 import { listarPedidos, marcarRodando, escreverProgresso, fechar, promptFila } from './lib/fichas-fila.mjs';
 import * as PQ from './lib/pesquisa.mjs';
 import * as AT from './lib/atividade.mjs';
+import { rodarClaude } from './lib/claude-stream.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -81,7 +81,29 @@ function readyTasks(slug) {
     .map((t) => ({ ...t, slug }));
 }
 
-function wake(t) {
+/**
+ * Roda o claude com o registro de atividade (046 B): cada ferramenta vira passo no dock, o subagente chamado vira o agente
+ * da vez, e o log ganha linhas curtas + o texto final. Devolve { status, saida, custo, turnos, ms }.
+ */
+async function claudeNoDock(cli, { at, agente, rotulo }) {
+  appendFileSync(LOG, `--- saída ${rotulo} ---\n`);
+  let ultimo = 0;
+  const r = await rodarClaude(cli, {
+    log: LOG, agente, env: cleanEnv(),
+    onPasso: (texto, quem) => {
+      AT.passo(at.id, texto, { agente: quem });
+      // a cada 30 s o lock é tocado: o mtime velho não engana a próxima batida
+      if (Date.now() - ultimo > 30e3) { ultimo = Date.now(); try { utimesSync(LOCK, new Date(), new Date()); } catch { /* sem lock */ } }
+    },
+  });
+  appendFileSync(LOG, `\n--- fim ${rotulo} ---\n`);
+  if (r.custo != null) log(`${rotulo}: ${r.turnos ?? '?'} turnos · ${Math.round((r.ms ?? 0) / 1000)} s · US$ ${r.custo.toFixed(2)}`);
+  return r;
+}
+const semLogin = (out) => /not logged in|\/login/i.test(out);
+const fimDe = (r) => ({ custo: r.custo, turnos: r.turnos });
+
+async function wake(t) {
   const agent = t.assignee.startsWith('agent:') ? t.assignee.slice(6) : null;
   const first = `Comece por \`node tools/board.mjs pacote ${t.slug} ${t.id}\` (tarefa, Estado, comentários e só o contexto declarado). `;
   const prompt = first + (agent
@@ -91,34 +113,26 @@ function wake(t) {
   if (!RUN) { log(`[simulação] acordaria ${agent ? `agent:${agent}` : 'orquestrador'} → ${t.slug}/${t.id} ${t.title}`); return; }
   updateTask(t.path, { status: 'doing' }, `${today()} · heartbeat · acordou ${agent ? `agent:${agent}` : 'orquestrador'}`);
   log(`acordando ${agent ? `agent:${agent}` : 'orquestrador'} → ${t.slug}/${t.id} ${t.title}`);
-  const at = AT.iniciar({ slug: t.slug, tipo: 'ia', fonte: 'quadro', titulo: `${t.id} · ${t.title}`, agente: agent ? `agent:${agent}` : 'orquestrador', passo: 'Abrindo o Claude Code', link: `/p/${t.slug}/quadro?t=${t.id}`, ref: t.id });
+  const quem = agent ? `agent:${agent}` : 'orquestrador';
+  const at = AT.iniciar({ slug: t.slug, tipo: 'ia', fonte: 'quadro', titulo: `${t.id} · ${t.title}`, agente: quem, passo: 'Abrindo o Claude Code', link: `/p/${t.slug}/quadro?t=${t.id}`, ref: t.id });
   writeLock({ slug: t.slug, task: t.id, title: t.title, who: agent ? `agent:${agent}` : 'ai', atividade: at.id });
-  // a saída vai direto para o log (dá para acompanhar enquanto roda)
-  appendFileSync(LOG, `--- saída ${t.id} ---\n`);
-  const from = statSync(LOG).size;
-  const fd = openSync(LOG, 'a');
-  // Windows: o claude é um .cmd (precisa de shell) e o shell não põe aspas sozinho → cada argumento vai entre aspas
-  const win = process.platform === 'win32';
-  const q = (a) => (/[\s"&|<>^()*]/.test(a) ? `"${a.replace(/"/g, "'")}"` : a);
-  const r = spawnSync('claude', win ? cli.map(q) : cli, { stdio: ['ignore', fd, fd], shell: win, env: cleanEnv() });
-  closeSync(fd);
-  const out = readFileSync(LOG).subarray(from).toString('utf8');
-  appendFileSync(LOG, `\n--- fim ${t.id} ---\n`);
+  const r = await claudeNoDock(cli, { at, agente: quem, rotulo: t.id });
+  const out = r.saida;
   const after = listTasks(t.slug).find((x) => x.id === t.id);
   if (r.status !== 0) log(`⚠ ${t.id}: claude saiu com código ${r.status}`);
   log(`${t.id} agora está em: ${after?.status} (${after?.assignee})`);
   const COL = { todo: 'A fazer', doing: 'Fazendo', review: 'Revisão', done: 'Feito', backlog: 'Backlog' };
   if (after?.status !== 'doing') {
-    if (r.status !== 0) AT.terminar(at.id, 'erro', { erro: `O Claude saiu com código ${r.status}.` });
-    else AT.terminar(at.id, 'feito', { resumo: `${t.id} foi para ${COL[after?.status] ?? after?.status}${after?.status === 'review' ? ': sua vez de revisar' : ''}` });
+    if (r.status !== 0) AT.terminar(at.id, 'erro', { erro: `O Claude saiu com código ${r.status}.`, ...fimDe(r) });
+    else AT.terminar(at.id, 'feito', { resumo: `${t.id} foi para ${COL[after?.status] ?? after?.status}${after?.status === 'review' ? ': sua vez de revisar' : ''}`, ...fimDe(r) });
     return;
   }
   // falhou ou parou no meio: avisa no card e devolve para "A fazer" (entra de novo no próximo Rodar IA)
-  const why = /not logged in|\/login/i.test(out)
+  const why = semLogin(out)
     ? 'Falhou: Claude Code do terminal sem login (`claude` → `/login`).'
     : `Terminou sem mudar o status (código ${r.status}). ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}`;
   addComment(t.path, 'heartbeat', why, 'revisar');
-  AT.terminar(at.id, 'erro', { erro: why });
+  AT.terminar(at.id, 'erro', { erro: why, ...fimDe(r) });
   if (r.status !== 0) updateTask(t.path, { status: 'todo' }, `${today()} · heartbeat · falhou (código ${r.status}); voltou para todo`);
 }
 
@@ -129,7 +143,7 @@ function cleanEnv() {
 }
 
 // ---------- fila de fichas (040 E) ----------
-function runFichas(slug) {
+async function runFichas(slug) {
   const rodada = RUN ? marcarRodando(slug) : listarPedidos(slug).map(({ comp, pedido }) => ({ comp, itens: pedido.itens, reanalisar: !!pedido.reanalisar, requestedAt: pedido.requestedAt }));
   const n = rodada.reduce((a, r) => a + r.itens.length, 0);
   if (!n) { log(`fila de fichas da ${slug} vazia`); return; }
@@ -141,25 +155,18 @@ function runFichas(slug) {
   writeLock({ slug, kind: 'fichas', title: `Fila de fichas · ${n} conteúdo(s)`, who: 'ai', atividade: at.id });
   escreverProgresso(slug, 'Abrindo o Claude Code');
   log(`fila de fichas → ${slug}: ${rodada.map((r) => `${r.comp} (${r.itens.join(', ')})`).join(' · ')}`);
-  appendFileSync(LOG, '--- saída fichas ---\n');
-  const from = statSync(LOG).size;
-  const fd = openSync(LOG, 'a');
-  const win = process.platform === 'win32';
-  const q = (a) => (/[\s"&|<>^()*]/.test(a) ? `"${a.replace(/"/g, "'")}"` : a);
-  const r = spawnSync('claude', win ? cli.map(q) : cli, { stdio: ['ignore', fd, fd], shell: win, env: cleanEnv() });
-  closeSync(fd);
-  const out = readFileSync(LOG).subarray(from).toString('utf8');
-  appendFileSync(LOG, '\n--- fim fichas ---\n');
-  const erro = /not logged in|\/login/i.test(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
+  const r = await claudeNoDock(cli, { at, agente: 'orquestrador', rotulo: 'fichas' });
+  const out = r.saida;
+  const erro = semLogin(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
     : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
   const res = fechar(slug, { erro, inicio, rodada });
   log(`fila de fichas: ${res.feitos.length} analisado(s), ${res.restantes.length} continuam na fila${erro ? ` · ${erro}` : ''}`);
   const resumo = `${res.feitos.length} analisado(s)${res.restantes.length ? `, ${res.restantes.length} continuam na fila` : ''}`;
-  AT.terminar(at.id, erro ? 'erro' : 'feito', { resumo, erro });
+  AT.terminar(at.id, erro ? 'erro' : 'feito', { resumo, erro, ...fimDe(r) });
 }
 
 // ---------- pesquisa de ideias (041 F3) ----------
-function runPesquisa(slug, round) {
+async function runPesquisa(slug, round) {
   const pedido = PQ.lerPedido(slug, round);
   if (!pedido) { log(`rodada ${round} não existe em ${slug}`); return; }
   if (pedido.status === 'feito') { log(`rodada ${round} já está feita`); return; }
@@ -171,39 +178,35 @@ function runPesquisa(slug, round) {
   writeLock({ slug, kind: 'pesquisa', round, title: `Pesquisa de ideias · ${round}`, who: 'ai', atividade: at.id });
   PQ.marcarPedido(slug, round, 'rodando');
   log(`pesquisa de ideias → ${slug}/${round}`);
-  appendFileSync(LOG, '--- saída pesquisa ---\n');
-  const from = statSync(LOG).size;
-  const fd = openSync(LOG, 'a');
-  const win = process.platform === 'win32';
-  const q = (a) => (/[\s"&|<>^()*]/.test(a) ? `"${a.replace(/"/g, "'")}"` : a);
-  const r = spawnSync('claude', win ? cli.map(q) : cli, { stdio: ['ignore', fd, fd], shell: win, env: cleanEnv() });
-  closeSync(fd);
-  const out = readFileSync(LOG).subarray(from).toString('utf8');
-  appendFileSync(LOG, '\n--- fim pesquisa ---\n');
-  const erro = /not logged in|\/login/i.test(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
+  const r = await claudeNoDock(cli, { at, agente: 'pesquisador', rotulo: 'pesquisa' });
+  const out = r.saida;
+  const erro = semLogin(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
     : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
   const res = PQ.fechar(slug, round, { erro, inicio });
   log(`pesquisa ${round}: ${res.feita ? 'feita' : `não terminou${res.erro ? ` · ${res.erro}` : ''}`}`);
-  AT.terminar(at.id, res.feita ? 'feito' : 'erro', res.feita ? { resumo: 'Pesquisa pronta' } : { erro: res.erro ?? erro ?? 'A pesquisa não terminou.' });
+  AT.terminar(at.id, res.feita ? 'feito' : 'erro', res.feita ? { resumo: 'Pesquisa pronta', ...fimDe(r) } : { erro: res.erro ?? erro ?? 'A pesquisa não terminou.', ...fimDe(r) });
 }
 
 // ---------- batida ----------
 const LOCK = 'logs/heartbeat/.lock';
 const STARTED = new Date().toISOString();
 const writeLock = (extra) => writeFileSync(LOCK, JSON.stringify({ pid: process.pid, started: STARTED, log: LOG, ...extra }));
-function beat() {
+let batendo = false;
+async function beat() {
+  if (batendo) return; // --watch: a batida anterior ainda roda
   if (existsSync(LOCK) && Date.now() - statSync(LOCK).mtimeMs < 2 * 3600e3) { log('outra batida em andamento; pulando'); return; }
+  batendo = true;
   if (RUN) writeLock({});
   try {
-    if (PESQUISA) { if (!ONLY_SLUG) log('--pesquisa precisa de --slug'); else runPesquisa(ONLY_SLUG, PESQUISA); return; }
-    if (FICHAS) { if (!ONLY_SLUG) log('--fichas precisa de --slug'); else runFichas(ONLY_SLUG); return; }
+    if (PESQUISA) { if (!ONLY_SLUG) log('--pesquisa precisa de --slug'); else await runPesquisa(ONLY_SLUG, PESQUISA); return; }
+    if (FICHAS) { if (!ONLY_SLUG) log('--fichas precisa de --slug'); else await runFichas(ONLY_SLUG); return; }
     const slugs = ONLY_SLUG ? [ONLY_SLUG] : companies();
     if (!ONLY_TASK) for (const s of slugs) createRecurring(s);
     const ready = slugs.flatMap(readyTasks).slice(0, MAX);
     if (!ready.length) log('nenhuma tarefa pronta para agentes');
-    for (const t of ready) wake(t);
-  } finally { if (RUN && existsSync(LOCK)) unlinkSync(LOCK); }
+    for (const t of ready) await wake(t);
+  } finally { batendo = false; if (RUN && existsSync(LOCK)) unlinkSync(LOCK); }
 }
 
-beat();
+await beat();
 if (WATCH > 0) { log(`watch: nova batida a cada ${WATCH} min (Ctrl+C para parar)`); setInterval(beat, WATCH * 60e3); }

@@ -31,11 +31,11 @@ export function passo(id, texto, extra = {}) {
   return gravar({ ...a, ...extra, passo: texto, em: new Date().toISOString() });
 }
 
-/** fecha: status feito | erro | parado; `resumo` = uma linha do que saiu */
-export function terminar(id, status, { resumo = null, erro = null, link } = {}) {
+/** fecha: status feito | erro | parado; `resumo` = uma linha do que saiu; `custo` (US$) e `turnos` quando é IA */
+export function terminar(id, status, { resumo = null, erro = null, link, custo = null, turnos = null } = {}) {
   const a = okId(id) && ler(id);
   if (!a) return null;
-  return gravar({ ...a, status, resumo, erro, ...(link !== undefined ? { link } : {}), fim: new Date().toISOString() });
+  return gravar({ ...a, status, resumo, erro, ...(link !== undefined ? { link } : {}), ...(custo != null ? { custo } : {}), ...(turnos != null ? { turnos } : {}), fim: new Date().toISOString() });
 }
 
 export function marcarVisto(ids) {

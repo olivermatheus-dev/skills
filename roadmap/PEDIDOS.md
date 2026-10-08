@@ -8,7 +8,7 @@
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
 | 1 | 045 | **Fase B (variantes por script):** `projeto.json` + `variantes.mjs` (cache de falas, trilha ancorada, render rascunho, nomes); 1ª rodada = 3 aberturas × 1 voz grátis na apresentação da kz | fase A feita (blocos) |
-| 2 | 046 | **Atividade da IA e das coletas:** fase A feita (registro + dock, 2026-10-08); próxima: **fase B** (passos de verdade pelo stream-json + Claude que não morre com o terminal), depois D (botões que faltam) e E (página Agentes) | pedido do Oliver de 2026-10-08 |
+| 2 | 046 | **Atividade da IA e das coletas:** fases A e B feitas (dock + passos ao vivo + Claude solto do app, 2026-10-08); próxima: **fase D** (botões que faltam), depois E (página Agentes) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

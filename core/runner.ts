@@ -81,7 +81,7 @@ export function runAi(slug: string, opts: { mode?: 'background' | 'terminal'; ma
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
   const args = ['tools/heartbeat.mjs', '--run', '--slug', slug, '--max', String(opts.task ? 1 : Math.max(1, Math.min(10, opts.max ?? ready.length)))];
   if (opts.task) args.push('--task', opts.task);
-  spawn(process.execPath, args, { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
+  soltar(args);
   return { started: true, mode: 'background' as const };
 }
 
@@ -107,7 +107,7 @@ export function runFichas(slug: string) {
   const l = readLock();
   if (l) throw new ValidationError('heartbeat', [l.kind === 'fichas' ? 'a fila de fichas já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : ''}; o pedido ficou na fila: rode quando ela terminar`]);
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  spawn(process.execPath, ['tools/heartbeat.mjs', '--run', '--slug', slug, '--fichas'], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
+  soltar(['tools/heartbeat.mjs', '--run', '--slug', slug, '--fichas']);
   return { started: true };
 }
 
@@ -121,8 +121,26 @@ export function runPesquisa(slug: string, round: string, mode: 'background' | 't
   const l = readLock();
   if (l) throw new ValidationError('heartbeat', [l.kind === 'pesquisa' ? 'a pesquisa de ideias já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : l.title ? ` com ${l.title}` : ''}; o pedido ficou gravado: rode quando ela terminar`]);
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  spawn(process.execPath, ['tools/heartbeat.mjs', '--run', '--slug', slug, '--pesquisa', round], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
+  soltar(['tools/heartbeat.mjs', '--run', '--slug', slug, '--pesquisa', round]);
   return { started: true, mode };
+}
+
+/**
+ * Dispara o heartbeat em segundo plano, solto do app (046 B). No Windows, um filho comum morre junto quando o terminal do
+ * app fecha ou o servidor reinicia (código 0xC000013A, 2 de 6 rodadas de fichas em 2026-10-08): criado pelo WMI, o processo
+ * nasce fora da árvore e do job do app, com o ambiente do usuário (sem as variáveis da sessão do Claude que abriu o app).
+ * Com HUB_ROOT (cópia de teste) ou se o WMI falhar, cai no spawn destacado de antes.
+ */
+export function soltar(args: string[]) {
+  if (process.platform === 'win32' && !process.env.HUB_ROOT) {
+    const linha = [process.execPath, ...args].map((a) => (/[\s"]/.test(a) ? `"${a.replace(/"/g, '')}"` : a)).join(' ');
+    const sq = (s: string) => s.replace(/'/g, "''"); // aspas simples do PowerShell
+    const ps = `$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = '${sq(linha)}'; CurrentDirectory = '${sq(ROOT)}' }; exit $r.ReturnValue`;
+    const r = spawnSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-EncodedCommand', Buffer.from(ps, 'utf16le').toString('base64')], { windowsHide: true, timeout: 20000 });
+    if (r.status === 0) return;
+    console.error(`[runner] WMI falhou (${r.status}); usando spawn: ${String(r.stderr ?? '').slice(0, 200)}`);
+  }
+  spawn(process.execPath, args, { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
 }
 
 export function openTerminal(prompt: string) {

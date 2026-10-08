@@ -143,7 +143,7 @@ function Linha({ a, onAbrir, onParar, onDispensar }: { a: Atividade & { podePara
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <span className="font-medium text-foreground">{quem(a)}</span>
           <span>·</span>
-          <span className="tabular-nums">{a.status === 'rodando' ? duracao(a.inicio) : `${a.status === 'erro' ? 'falhou' : a.status === 'parado' ? 'parado' : 'pronto'} em ${duracao(a.inicio, a.fim)}`}</span>
+          <span className="tabular-nums">{a.status === 'rodando' ? duracao(a.inicio) : `${a.status === 'erro' ? 'falhou' : a.status === 'parado' ? 'parado' : 'pronto'} em ${duracao(a.inicio, a.fim)}${a.custo != null ? ` · US$ ${a.custo.toFixed(2).replace('.', ',')}` : ''}`}</span>
         </div>
         <div className="text-sm truncate" title={a.titulo}>{a.titulo}</div>
         <div className={cn('text-xs mt-0.5 line-clamp-2', a.status === 'erro' ? 'text-destructive' : 'text-muted-foreground')}>
