@@ -27,3 +27,4 @@
 
 ## Log
 - 2026-10-08 — registrada pelo orquestrador a partir do áudio do Oliver; desenho disparado para um Opus especialista em social media.
+- 2026-10-08 — `DESENHO.md` entregue (Opus): ficha por item em `competitors/<id>/fichas/` com override do Oliver, vocabulários do nicho, pipeline preparar → Opus → relatório, prompt, custo (~US$ 0,08/item; ~US$ 1,9 por rodada de 20; ~1 no Batch), wireframes, fases A–I e exemplo real (Sintropia, reel DdtuawFvkXi, só legenda). Achado: coleta pública do IG traz só 6 itens por perfil (top 20 exige Apify). Nada implementado, sem commit. Aguarda as 7 perguntas do §10 e o aval da fase A.
