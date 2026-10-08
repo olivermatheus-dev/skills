@@ -1,10 +1,16 @@
 {
   "name": "Kzloo",
   "updated": "2026-10-08",
-  "sources": ["context/BUSINESS.md (Modelo e preço)", "context/PRODUTO.md (só funcionalidades prontas)", "context/COPY.md (headline, diferenciais, CTA)", "context/VOICE.md (tom)"],
+  "sources": [
+    "context/BUSINESS.md (Modelo e preço)",
+    "context/PRODUTO.md (só funcionalidades prontas)",
+    "context/COPY.md (headline, diferenciais, CTA)",
+    "context/VOICE.md (tom)",
+    "campaigns/2026-10-07-carta-base/carta.md (seções da landing)"
+  ],
   "price": {
     "fromMonthly": 129,
-    "note": "faixa R$ 100–129/mês; a copy usa R$ 129; preço final a validar",
+    "note": "faixa R$ 100–129/mês; a copy usa R$ 129 (decisão do Oliver na comparação); plano único; trimestral e anual com desconto, % a definir; entrada por aprovação manual; sem teste gratuito declarado",
     "currency": "BRL",
     "model": "assinatura",
     "plans": 1,
@@ -17,30 +23,223 @@
     "cta": "Pedir meu acesso",
     "tone": "colega terapeuta experiente e compreensiva: acolhedora, calma, direta com gentileza"
   },
+  "landing": {
+    "source": "campaigns/2026-10-07-carta-base/carta.md",
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Você está cansada de gerenciar, não de atender.",
+        "summary": "Cena das 19h50 (agenda, WhatsApp, caderno, paciente perguntando) e o lead: agenda, videochamada, prontuário e WhatsApp num lugar só. CTA Pedir meu acesso."
+      },
+      {
+        "type": "problema",
+        "title": "Identificação",
+        "summary": "Ser terapeuta vira ser secretária de si mesma: confirmar um a um, mandar link de Meet, passar nota a limpo, controlar quem pagou."
+      },
+      {
+        "type": "problema",
+        "title": "Não é você que é desorganizada",
+        "summary": "Ferramentas empilhadas, e os sistemas completos nasceram para clínicas: telas cheias, módulos que não usa. Ninguém desenhou para quem atende sozinha."
+      },
+      {
+        "type": "solucao",
+        "title": "A virada: a sessão no centro (Sessão Inteira)",
+        "summary": "Tela de atendimento com videochamada, anotações, histórico das sessões e ficha lado a lado; serve também para presencial. Feita por um terapeuta."
+      },
+      {
+        "type": "como-funciona",
+        "title": "O seu dia com a kz",
+        "summary": "Agenda do dia no WhatsApp, confirmação automática, sala de espera, anotação na sessão, sessão rápida para encaixe e busca do histórico."
+      },
+      {
+        "type": "features",
+        "title": "O que mais muda na sua rotina",
+        "summary": "Ficha preenchida pelo paciente, mensalidade e pacote sem planilha, agenda recorrente, documentos e Área do Cliente, perfil público, métricas do paciente e exportação de dados (LGPD)."
+      },
+      {
+        "type": "fundador",
+        "title": "Feito por quem atende",
+        "summary": "Fundador hipnoterapeuta que atende até hoje, 2 anos de desenvolvimento, terapeuta no time de produto, regra de não complicar. Serve a outras abordagens. Depoimentos e contagem ainda não existem."
+      },
+      {
+        "type": "outro",
+        "title": "O que a kz não faz (antes de você pagar)",
+        "summary": "Limitações declaradas: sem cobrança online/recibo/nota, paciente não agenda sozinho, sem Google Agenda, sem lembrete por e-mail/SMS, sem app de celular, não é multiprofissional, sem IA."
+      },
+      {
+        "type": "outro",
+        "title": "A oferta",
+        "summary": "Tabela do que entra na assinatura e o benefício de cada item; fluxo de entrada (pedir acesso, aprovação manual, primeira sessão). Preço, desconto e garantia ainda pendentes na carta."
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas que você talvez esteja se fazendo",
+        "summary": "Largar no segundo mês, vale o preço se o Google Agenda é grátis, segurança dos dados, precisa de outra ferramenta, serve para minha abordagem, paciente que não se adapta, presencial."
+      },
+      {
+        "type": "cta",
+        "title": "P.S. e pedido de acesso",
+        "summary": "Fecho com resumo em uma linha e o CTA único Pedir meu acesso (repetido ao longo da carta)."
+      }
+    ],
+    "ctas": [
+      "Pedir meu acesso"
+    ],
+    "socialProof": [],
+    "interesting": [
+      "Seção de limitações antes da oferta (transparência declarada)",
+      "Cenas do dia da terapeuta em vez de lista de funcionalidades",
+      "Carta com 3 headlines em teste A/B: dor, produto e identidade"
+    ]
+  },
   "followers": null,
   "features": [
-    { "name": "Agenda", "items": [
-      { "name": "Agenda dia, semana, mês e ano" }, { "name": "Agendamento online ou presencial" }, { "name": "Sessões recorrentes" },
-      { "name": "Sessão rápida (atender sem agendar)", "highlight": true }, { "name": "Painel do dia" }
-    ] },
-    { "name": "Teleatendimento", "items": [
-      { "name": "Videochamada própria, sem Meet/Zoom", "highlight": true }, { "name": "Sala de espera em tempo real", "highlight": true },
-      { "name": "Tela de atendimento (vídeo + anotações + histórico)", "highlight": true }
-    ] },
-    { "name": "Prontuário", "items": [
-      { "name": "Registro de sessão (notas + planejamento)", "highlight": true }, { "name": "Linha do tempo com busca" }, { "name": "Anotações do cliente" },
-      { "name": "Ficha do cliente (anamnese)" }, { "name": "Formulário online preenchido pelo paciente", "highlight": true }, { "name": "Documentos" }, { "name": "Métricas do cliente" }
-    ] },
-    { "name": "Comunicação/WhatsApp", "items": [
-      { "name": "Agenda do dia no WhatsApp", "highlight": true }, { "name": "Confirmação de sessão no WhatsApp", "highlight": true },
-      { "name": "Botão WhatsApp do cliente" }, { "name": "Notificações no app e no navegador" }
-    ] },
-    { "name": "Financeiro", "items": [
-      { "name": "Cobrança por mensalidade ou pacote de sessões", "highlight": true }, { "name": "Painel de cobranças" }
-    ] },
-    { "name": "Portal do paciente", "items": [{ "name": "Área do Cliente" }] },
-    { "name": "Marketing/Site", "items": [{ "name": "Perfil público do terapeuta" }, { "name": "Indicações" }] },
-    { "name": "Segurança/LGPD", "items": [{ "name": "Exportar dados do cliente (LGPD)" }, { "name": "Arquivar cliente" }, { "name": "Aceite de termos" }] },
-    { "name": "Outros", "items": [{ "name": "Busca global (Ctrl+K)" }, { "name": "Preferências" }, { "name": "Assinatura do terapeuta" }, { "name": "Suporte por tickets" }] }
+    {
+      "name": "Agenda",
+      "items": [
+        {
+          "name": "Agenda dia, semana, mês e ano"
+        },
+        {
+          "name": "Agendamento online ou presencial"
+        },
+        {
+          "name": "Sessões recorrentes"
+        },
+        {
+          "name": "Sessão rápida (atender sem agendar)",
+          "highlight": true
+        },
+        {
+          "name": "Painel do dia"
+        }
+      ]
+    },
+    {
+      "name": "Teleatendimento",
+      "items": [
+        {
+          "name": "Videochamada própria, sem Meet/Zoom",
+          "highlight": true
+        },
+        {
+          "name": "Sala de espera em tempo real",
+          "highlight": true
+        },
+        {
+          "name": "Tela de atendimento (vídeo + anotações + histórico)",
+          "highlight": true
+        }
+      ]
+    },
+    {
+      "name": "Prontuário",
+      "items": [
+        {
+          "name": "Registro de sessão (notas + planejamento)",
+          "highlight": true
+        },
+        {
+          "name": "Linha do tempo com busca"
+        },
+        {
+          "name": "Anotações do cliente"
+        },
+        {
+          "name": "Ficha do cliente (anamnese)"
+        },
+        {
+          "name": "Formulário online preenchido pelo paciente",
+          "highlight": true
+        },
+        {
+          "name": "Documentos"
+        },
+        {
+          "name": "Métricas do cliente"
+        }
+      ]
+    },
+    {
+      "name": "Comunicação/WhatsApp",
+      "items": [
+        {
+          "name": "Agenda do dia no WhatsApp",
+          "highlight": true
+        },
+        {
+          "name": "Confirmação de sessão no WhatsApp",
+          "highlight": true
+        },
+        {
+          "name": "Botão WhatsApp do cliente"
+        },
+        {
+          "name": "Notificações no app e no navegador"
+        }
+      ]
+    },
+    {
+      "name": "Financeiro",
+      "items": [
+        {
+          "name": "Cobrança por mensalidade ou pacote de sessões",
+          "highlight": true
+        },
+        {
+          "name": "Painel de cobranças"
+        }
+      ]
+    },
+    {
+      "name": "Portal do paciente",
+      "items": [
+        {
+          "name": "Área do Cliente"
+        }
+      ]
+    },
+    {
+      "name": "Marketing/Site",
+      "items": [
+        {
+          "name": "Perfil público do terapeuta"
+        },
+        {
+          "name": "Indicações"
+        }
+      ]
+    },
+    {
+      "name": "Segurança/LGPD",
+      "items": [
+        {
+          "name": "Exportar dados do cliente (LGPD)"
+        },
+        {
+          "name": "Arquivar cliente"
+        },
+        {
+          "name": "Aceite de termos"
+        }
+      ]
+    },
+    {
+      "name": "Outros",
+      "items": [
+        {
+          "name": "Busca global (Ctrl+K)"
+        },
+        {
+          "name": "Preferências"
+        },
+        {
+          "name": "Assinatura do terapeuta"
+        },
+        {
+          "name": "Suporte por tickets"
+        }
+      ]
+    }
   ]
 }

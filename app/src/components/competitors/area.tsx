@@ -112,7 +112,7 @@ export function refRow(r: Referencia): MarketRow {
     res: {
       precos: { data: { fromMonthly: p.fromMonthly, currency: p.currency, publicPrice: p.fromMonthly != null, model: p.model, trial: p.trial, guarantee: p.guarantee, notes: p.note, extras: [], plans: [{ name: 'Único', monthly: p.fromMonthly, highlights: [] }] } },
       features: { data: { groups: r.features.map((g) => ({ name: g.name, items: g.items.map((i) => ({ name: i.name, highlight: i.highlight })) })), differentials: [], missing: [] } },
-      landing: { data: { hero: { headline: r.message.headline, subheadline: r.message.subheadline, cta: r.message.cta }, sections: [], ctas: r.message.cta ? [r.message.cta] : [], socialProof: [], interesting: [], tone: r.message.tone, url: '' } },
+      landing: { data: { hero: { headline: r.message.headline, subheadline: r.message.subheadline, cta: r.message.cta }, sections: r.landing.sections, ctas: r.landing.ctas.length ? r.landing.ctas : r.message.cta ? [r.message.cta] : [], socialProof: r.landing.socialProof, interesting: r.landing.interesting, tone: r.message.tone, url: '' } },
     } as unknown as AnalysisFull['results'],
   };
 }

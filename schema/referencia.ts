@@ -27,6 +27,18 @@ export const Referencia = z.object({
     cta: nullish(z.string()),
     tone: nullish(z.string()),
   }),
+  /** landing/carta-base da empresa no formato do módulo `landing` dos concorrentes (só o que a carta já tem escrito) */
+  landing: z.object({
+    sections: z.array(z.object({
+      type: z.enum(['hero', 'logos', 'problema', 'solucao', 'features', 'como-funciona', 'beneficios', 'prova-social', 'depoimentos', 'numeros', 'precos', 'comparativo', 'seguranca', 'integracoes', 'fundador', 'faq', 'blog', 'cta', 'rodape', 'outro']),
+      title: z.string(), summary: z.string(),
+    })).default([]),
+    ctas: z.array(z.string()).default([]),
+    socialProof: z.array(z.string()).default([]),
+    interesting: z.array(z.string()).default([]),
+    /** de onde saiu (ex.: campaigns/…/carta.md) */
+    source: nullish(z.string()),
+  }).default({ sections: [], ctas: [], socialProof: [], interesting: [] }),
   /** seguidores somados das redes próprias (null = ainda sem redes) */
   followers: nullish(z.number().int().nonnegative()),
   /** mesmos nomes de grupo da análise de funcionalidades dos concorrentes; só o que está pronto */
