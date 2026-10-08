@@ -5,7 +5,7 @@ import { Activity, ExternalLink, Eye, Flame, Heart, MessageCircle, Send, Sparkle
 import type { ItemMark } from '../../api';
 import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../kit';
 import {
-  Img, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row,
+  Img, MERCADO_MIN_AMOSTRA, MERCADO_MIN_CONCORRENTES, PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtDelta, fmtDur, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row,
 } from './lib';
 import { Tip } from './toolbar';
 
@@ -29,11 +29,17 @@ const FORMATO_PLURAL: Record<string, string> = { video: 'vídeos', short: 'short
 
 /** explicação do × perfil */
 export const perfilTip = (r: Row) => `${fmtRatio(r.outlier)} a mediana de ${baseLabel(r.outlierBasis)} do próprio perfil (${platformLabel(r.platform)}) na última coleta.\nMostra o que viralizou para esse perfil.`;
+/** por que o formato não bastou: poucos itens, poucos concorrentes, ou os dois */
+function motivoRede(r: Row) {
+  const n = r.mercadoFormatoAmostra ?? 0, c = r.mercadoFormatoConcorrentes ?? 0;
+  const itens = `${n} conteúdo${n === 1 ? '' : 's'}`, conc = `${c} concorrente${c === 1 ? '' : 's'}`;
+  return n < MERCADO_MIN_AMOSTRA && c < MERCADO_MIN_CONCORRENTES ? `só ${itens} de ${conc}` : n < MERCADO_MIN_AMOSTRA ? `só ${itens}` : `só ${conc}`;
+}
 /** explicação do × mercado, com escopo e amostra */
 export function mercadoTip(r: Row) {
   const escopo = r.mercadoEscopo === 'formato' ? `${FORMATO_PLURAL[r.item.type] ?? r.item.type} no ${platformLabel(r.platform)}` : `todos os conteúdos no ${platformLabel(r.platform)}`;
   return `${fmtRatio(r.outlierMercado)} a mediana de ${baseLabel(r.outlierMercadoBasis)} de ${escopo} entre os concorrentes (${r.mercadoAmostra ?? '?'} conteúdos de ${r.mercadoConcorrentes ?? '?'} concorrentes).`
-    + (r.mercadoEscopo === 'rede' ? `\nPoucos ${FORMATO_PLURAL[r.item.type] ?? 'conteúdos'} desse formato (< 10): comparou com a rede inteira.` : '')
+    + (r.mercadoEscopo === 'rede' ? `\nComparou com a rede inteira porque o formato tem ${motivoRede(r)} (precisa de ${MERCADO_MIN_AMOSTRA} conteúdos e ${MERCADO_MIN_CONCORRENTES} concorrentes).` : '')
     + '\nPerfil grande tende a ficar alto aqui; veja também “por seguidor”.';
 }
 /** quando o × mercado não vale: poucos concorrentes na rede */
@@ -122,7 +128,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground">
           <span className="inline-flex items-center gap-1">
             <Metric icon={Eye} v={r.item.metrics.views} title="Views" />
-            {dGrowth && <span className={cx('tabular-nums text-[11px] font-medium', r.viewsDelta! > 0 ? 'text-success' : 'text-destructive')} title={`desde a coleta de ${fmtDate(r.prevAt)}`}>{dGrowth}</span>}
+            {dGrowth && <span className={cx('tabular-nums text-[11px] font-medium', r.viewsDelta! > 0 ? 'text-success-ink' : 'text-destructive')} title={`desde a coleta de ${fmtDate(r.prevAt)}`}>{dGrowth}</span>}
           </span>
           <Metric icon={Heart} v={r.item.metrics.likes} title="Curtidas" />
           <Metric icon={MessageCircle} v={r.item.metrics.comments} title="Comentários" />
@@ -149,7 +155,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
             {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </Select>
           {m?.ideaId ? (
-            <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-xs font-medium text-success bg-green-50 px-1.5 py-1 rounded-md" title="Já virou ideia"><Sparkles className="size-3" />{m.ideaId}</Link>
+            <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-xs font-medium text-success-ink bg-green-50 px-1.5 py-1 rounded-md" title="Já virou ideia"><Sparkles className="size-3" />{m.ideaId}</Link>
           ) : (
             <button type="button" onClick={onIdea} disabled={ideaBusy} className="inline-flex items-center gap-1 text-xs font-medium text-primary-ink hover:bg-primary-soft px-1.5 py-1 rounded-md disabled:opacity-50">
               {ideaBusy ? <Spinner /> : <Sparkles className="size-3" />} Virar ideia
@@ -182,7 +188,7 @@ function ViewsHistory({ r }: { r: Row }) {
             <tr key={p.at} className="border-t border-border">
               <td className="py-1 text-muted-foreground">{fmtDate(p.at)}</td>
               <td className="py-1 text-right tabular-nums">{p.views.toLocaleString('pt-BR')}</td>
-              <td className="py-1 text-right tabular-nums w-24 text-success">{i ? fmtDelta(p.views - pts[i - 1].views) : ''}</td>
+              <td className="py-1 text-right tabular-nums w-24 text-success-ink">{i ? fmtDelta(p.views - pts[i - 1].views) : ''}</td>
             </tr>
           ))}
         </tbody>
@@ -237,7 +243,7 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
           <div key={label} className="bg-muted rounded-lg p-2.5">
             <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
             <div className="font-semibold tabular-nums">{label === 'Engajamento' ? fmtPct(r.engagement) : fmtNum(v)}</div>
-            {d != null && d !== 0 && <div className="text-[11px] text-success tabular-nums">{fmtDelta(d)}</div>}
+            {d != null && d !== 0 && <div className="text-[11px] text-success-ink tabular-nums">{fmtDelta(d)}</div>}
           </div>
         ))}
       </div>

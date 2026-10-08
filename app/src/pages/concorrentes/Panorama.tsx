@@ -97,7 +97,7 @@ export default function Panorama() {
 }
 
 const Pill = ({ up, children }: { up: boolean; children: ReactNode }) =>
-  <span className={cx('ml-1.5 align-[2px] rounded px-1 py-px text-[11px] font-semibold', up ? 'bg-warning/15 text-amber-700 dark:text-amber-400' : 'bg-success/15 text-success')}>{children}</span>;
+  <span className={cx('ml-1.5 align-[2px] rounded px-1 py-px text-[11px] font-semibold', up ? 'bg-warning/15 text-amber-700 dark:text-amber-400' : 'bg-success/15 text-success-ink')}>{children}</span>;
 const Small = ({ children }: { children: ReactNode }) => <span className="ml-1 text-xs font-normal text-muted-foreground">{children}</span>;
 
 /** casca de bloco: ícone + título + dica à esquerda, controles e o link que aprofunda à direita */
@@ -266,7 +266,7 @@ function Advertisers({ slug, stats }: { slug: string; stats: ReturnType<typeof u
               {stats.list.map((x) => (
                 <Tooltip key={x.id}>
                   <TooltipTrigger asChild>
-                    <Link role="row" to={`${anuncios}?conc=${x.id}`} className="grid grid-cols-[9rem_minmax(0,1fr)_9.5rem] gap-3 items-center h-8 -mx-2 px-2 rounded-md hover:bg-muted/50 group">
+                    <Link role="row" to={`/p/${slug}/concorrentes/${x.id}?aba=anuncios`} className="grid grid-cols-[9rem_minmax(0,1fr)_9.5rem] gap-3 items-center h-8 -mx-2 px-2 rounded-md hover:bg-muted/50 group">
                       <span className="flex items-center gap-2 min-w-0">
                         <Avatar name={x.name} size={18} local={x.row?.avatar.local} remote={x.row?.avatar.remote} className="!ring-0" />
                         <span className="truncate group-hover:text-primary-ink">{x.name}</span>

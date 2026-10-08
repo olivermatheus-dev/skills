@@ -184,9 +184,9 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
                     )}
                     <div className="text-xs text-right shrink-0 max-w-[40%]">
                       {l.problem && <span className="text-destructive">{l.problem}</span>}
-                      {!l.problem && l.dupOf && <span className="text-warning">já está em {l.dupOf} (ignorado)</span>}
-                      {!l.problem && !l.dupOf && l.warn && <span className="text-warning">{l.warn}</span>}
-                      {!l.problem && !l.dupOf && !l.warn && <span className="text-success">ok</span>}
+                      {!l.problem && l.dupOf && <span className="text-warning-ink">já está em {l.dupOf} (ignorado)</span>}
+                      {!l.problem && !l.dupOf && l.warn && <span className="text-warning-ink">{l.warn}</span>}
+                      {!l.problem && !l.dupOf && !l.warn && <span className="text-success-ink">ok</span>}
                     </div>
                   </div>
                 );
@@ -235,14 +235,14 @@ export default function AddLinksModal({ slug, open, onClose, competitors, target
 export function ResultLine({ r }: { r: CollectResult }) {
   return (
     <div className="flex items-start gap-2 text-sm py-1">
-      <span className={r.ok ? 'text-success' : 'text-destructive'}>{r.ok ? '✓' : '✗'}</span>
+      <span className={r.ok ? 'text-success-ink' : 'text-destructive'}>{r.ok ? '✓' : '✗'}</span>
       {r.platform !== '-' && <PlatformIcon platform={r.platform} size={16} className="mt-0.5" />}
       <div className="min-w-0">
         <div>
           <span className="font-medium">{r.key !== '-' ? r.key.replace(/^[a-z]+-/, '') : 'coleta'}</span>
           {r.ok && <span className="text-muted-foreground"> · {r.items} itens{r.followers != null ? ` · ${r.followers.toLocaleString('pt-BR')} seguidores` : ''} · via {r.source}</span>}
         </div>
-        {r.errors.map((e) => <div key={e} className={cx('text-xs', r.ok ? 'text-warning' : 'text-destructive')}>{e}</div>)}
+        {r.errors.map((e) => <div key={e} className={cx('text-xs', r.ok ? 'text-warning-ink' : 'text-destructive')}>{e}</div>)}
         {r.warnings.map((w) => <div key={w} className="text-xs text-muted-foreground">{w}</div>)}
       </div>
     </div>

@@ -2,12 +2,12 @@
 // As contas da matriz seguem a mesma regra da Matriz de funcionalidades: tem = sim/parcial; coluna `_nos` = a própria empresa.
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, ChevronDown, ChevronRight, ListPlus, MessageSquare, Package, Tag, Target, TriangleAlert, Users, type LucideIcon } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, ChevronRight, ListPlus, MessageSquare, Package, Tag, Target, TriangleAlert, Users, type LucideIcon } from 'lucide-react';
 import type { GapTheme, Matrix } from '../../api';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { NOS } from '../../../../schema/matrix';
-import { useGaps, useMatrix } from '../../queries';
-import { Avatar, Chips } from '../../components/competitors/lib';
+import { useGaps, useMatrix, useTasks } from '../../queries';
+import { Avatar, Chips, Spinner } from '../../components/competitors/lib';
 import type { MarketRow } from '../../components/competitors/area';
 import { useTaskActions } from '../../components/board/useTaskActions';
 import { toast } from '../../components/toast';
@@ -54,25 +54,18 @@ export const coverageKpi = (s: MatrixStats | null) => s && {
 function nosHas(m: Matrix | undefined, t: GapTheme) {
   if (!m || !t.features.length) return null;
   const s = t.features.map((f) => m.cells[NOS]?.[f]?.status);
-  if (s.every(POS)) return { label: 'você tem', cls: 'text-success' };
-  if (s.some(POS)) return { label: 'você tem em parte', cls: 'text-warning' };
+  if (s.every(POS)) return { label: 'você tem', cls: 'text-success-ink' };
+  if (s.some(POS)) return { label: 'você tem em parte', cls: 'text-warning-ink' };
   if (s.some((x) => x === 'nao')) return { label: 'você não tem', cls: 'text-destructive' };
   return { label: 'confirmar se você tem', cls: 'text-muted-foreground' };
 }
 
-/** `onTask`: quando vem, cada brecha ganha o botão "Virar tarefa"; devolve o id da tarefa criada (ou nada, se falhar) */
-export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRow[]; onTask?: (t: GapTheme) => Promise<string | undefined> }) {
+/** `tasks`: quando vem, cada brecha ganha o botão "Virar tarefa" (ou "Ver T-NNNN" se o tema já virou tarefa) */
+export function GapThemes({ slug, rows, tasks }: { slug: string; rows: MarketRow[]; tasks?: GapTasks }) {
   const gq = useGaps(slug);
   const mq = useMatrix(slug);
   const [kind, setKind] = useState<'todas' | Kind>('todas');
   const [open, setOpen] = useState<Set<string>>(new Set());
-  const [made, setMade] = useState<Record<string, string | "...">>({});
-  const turn = async (t: GapTheme) => {
-    if (!onTask || made[t.id]) return;
-    setMade((m) => ({ ...m, [t.id]: "..." }));
-    const id = await onTask(t);
-    setMade((m) => { const n = { ...m }; if (id) n[t.id] = id; else delete n[t.id]; return n; });
-  };
   const g = gq.data;
   const byId = useMemo(() => new Map(rows.map((r) => [r.c.data.id, r])), [rows]);
   // análises de pontos fortes e fracos feitas ou refeitas depois do resumo
@@ -113,7 +106,7 @@ export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRo
           const on = open.has(t.id);
           return (
             <li key={t.id} className="relative">
-              <button type="button" onClick={() => toggle(t.id)} className={cx("w-full text-left px-4 py-2.5 hover:bg-muted/30 flex gap-3", onTask && "pr-36")}>
+              <button type="button" onClick={() => toggle(t.id)} className={cx("w-full text-left px-4 py-2.5 hover:bg-muted/30 flex gap-3", tasks && "pr-36")}>
                 <span className="w-14 shrink-0 pt-0.5">
                   <span className="block text-sm font-semibold tabular-nums">{cs.length}<span className="text-muted-foreground font-normal text-xs">/{total}</span></span>
                   <span className="mt-1 block h-1 rounded-full bg-muted overflow-hidden"><span className="block h-full bg-primary" style={{ width: `${(cs.length / total) * 100}%` }} /></span>
@@ -132,12 +125,7 @@ export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRo
                   {cs.slice(0, 6).map((id) => { const r = byId.get(id); return r ? <span key={id} title={r.c.data.name}><Avatar name={r.c.data.name} size={20} local={r.avatar.local} remote={r.avatar.remote} className="ring-2 ring-card" /></span> : null; })}
                 </span>
               </button>
-              {onTask && (
-                <button type="button" disabled={!!made[t.id]} onClick={() => void turn(t)} title="Cria uma tarefa em Produto, em Backlog, para você aprovar"
-                  className={cx("absolute right-4 top-2.5 inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs", made[t.id] ? "border-transparent text-success" : "border-border bg-card hover:bg-muted")}>
-                  {made[t.id] ? <><Check className="size-3.5" />{made[t.id] === "..." ? "Criando…" : `Criada ${made[t.id]}`}</> : <><ListPlus className="size-3.5" />Virar tarefa</>}
-                </button>
-              )}
+              {tasks && <GapTaskButton slug={slug} t={t} tasks={tasks} className="absolute right-4 top-2.5 px-2 py-1 text-xs" />}
               {on && (
                 <ul className="px-4 pb-3 pl-[6.25rem] space-y-1">
                   {t.sources.map((s, i) => (
@@ -159,7 +147,7 @@ export function GapThemes({ slug, rows, onTask }: { slug: string; rows: MarketRo
 /** produto × mercado pela matriz: o que falta (a maioria tem) e o que é seu */
 export function ProductVsMarket({ slug, s }: { slug: string; s: MatrixStats | null }) {
   if (!s) return null;
-  const label = (st?: string) => st === 'nao' ? { t: 'não tem', c: 'text-destructive' } : st === 'planejado' ? { t: 'planejado', c: 'text-warning' } : { t: 'confirmar', c: 'text-muted-foreground' };
+  const label = (st?: string) => st === 'nao' ? { t: 'não tem', c: 'text-destructive' } : st === 'planejado' ? { t: 'planejado', c: 'text-warning-ink' } : { t: 'confirmar', c: 'text-muted-foreground' };
   const mat = (f: string) => `/p/${slug}/concorrentes/comparar?v=funcionalidades&f=${f}`;
   return (
     <section className="bg-card border border-border rounded-xl p-4 space-y-4">
@@ -190,7 +178,7 @@ export function ProductVsMarket({ slug, s }: { slug: string; s: MatrixStats | nu
           <Link to={mat('diferencial')} className="ml-auto text-xs text-primary-ink">matriz →</Link>
         </div>
         <ul className="mt-1.5 space-y-1">
-          {s.exclusivas.map(({ f }) => <li key={f.id} className="flex items-center gap-2 text-[13px]" title={f.description}><span className="flex-1 truncate font-medium">{f.name}</span><span className="text-xs tabular-nums text-success">0/{s.n}</span></li>)}
+          {s.exclusivas.map(({ f }) => <li key={f.id} className="flex items-center gap-2 text-[13px]" title={f.description}><span className="flex-1 truncate font-medium">{f.name}</span><span className="text-xs tabular-nums text-success-ink">0/{s.n}</span></li>)}
           {s.raras.map(({ f, have }) => <li key={f.id} className="flex items-center gap-2 text-[13px]" title={f.description}><span className="flex-1 truncate">{f.name}</span><span className="text-xs tabular-nums text-muted-foreground">{have}/{s.n}</span></li>)}
         </ul>
         {s.raras.length > 0 && <p className="text-[11px] text-muted-foreground mt-1">Em negrito, ninguém mais tem; o resto, no máximo 2 concorrentes.</p>}
@@ -208,26 +196,72 @@ export const gapComps = (t: GapTheme) => [...new Set(t.sources.map((s) => s.comp
 /** temas por nº de concorrentes distintos; empate: oferta > mensagem > público > produto */
 export const rankGaps = (themes: GapTheme[]) => [...themes].sort((a, b) => gapComps(b).length - gapComps(a).length || KIND_RANK[a.kind] - KIND_RANK[b.kind]);
 
-/** brecha → tarefa no quadro Produto, em Backlog (vira "A fazer" quando o Oliver aprovar); devolve o id criado */
+/** quadro de cada tipo de brecha (DASHBOARD 039 §2): produto → Produto · oferta → Vendas (LP, anúncio) · mensagem e público → Conteúdo */
+export const GAP_BOARD = { produto: 'produto', oferta: 'vendas', mensagem: 'conteudo', publico: 'conteudo' } as const;
+const BOARD_NAME = { produto: 'Produto', vendas: 'Vendas', conteudo: 'Conteúdo' } as const;
+/** o marcador gravado no corpo da tarefa; o formato antigo "(tema <id>," do Log também vale */
+const gapMarker = (id: string) => `Tema da brecha: ${id}`;
+const MARK_RE = /Tema da brecha: (\S+)|\(tema (\S+?),/g;
+
+export type GapTasks = ReturnType<typeof useGapTask>;
+/**
+ * brecha → tarefa no quadro certo, em Backlog (vira "A fazer" quando o Oliver aprovar). Antes de criar procura no quadro uma tarefa
+ * com o marcador do tema (vale depois de recarregar e entre telas): se existir, devolve o id dela e não duplica.
+ */
 export function useGapTask(slug: string, origem: string) {
   const tasks = useTaskActions(slug);
-  return (t: GapTheme) => new Promise<string | undefined>((resolve) => {
+  const tq = useTasks(slug);
+  const [busy, setBusy] = useState<Set<string>>(new Set());
+  const index = useMemo(() => {
+    const m = new Map<string, { id: string; board: string }>();
+    for (const d of tq.data ?? []) for (const x of d.body.matchAll(MARK_RE)) m.set(x[1] ?? x[2], { id: d.data.id, board: d.data.board });
+    return m;
+  }, [tq.data]);
+  const create = (t: GapTheme) => new Promise<string | undefined>((resolve) => {
+    const prior = index.get(t.id);
+    if (prior) return resolve(prior.id);
+    const board = GAP_BOARD[t.kind];
     const names = gapComps(t);
-    const body = `\n## Brecha\n${t.action}\n${t.dependsOn ? `\nDepende de: ${t.dependsOn}\n` : ''}\n## O que os concorrentes deixam aberto\n${t.sources.map((s) => `- ${s.competitor}: “${s.text}”`).join('\n')}\n\n## Checklist\n\n## Log\n- ${new Date().toISOString().slice(0, 10)} · criada a partir ${origem} (tema ${t.id}, ${names.length} concorrente(s))\n`;
-    const { promise } = tasks.create({ title: t.title, board: 'produto', status: 'backlog', assignee: 'oliver', priority: 'media' }, body, {
+    const body = `\n${gapMarker(t.id)}\n\n## Brecha\n${t.action}\n${t.dependsOn ? `\nDepende de: ${t.dependsOn}\n` : ''}\n## O que os concorrentes deixam aberto\n${t.sources.map((s) => `- ${s.competitor}: “${s.text}”`).join('\n')}\n\n## Checklist\n\n## Log\n- ${new Date().toISOString().slice(0, 10)} · criada a partir ${origem} (tema ${t.id}, ${names.length} concorrente(s))\n`;
+    setBusy((b) => new Set(b).add(t.id));
+    const done = () => setBusy((b) => { const n = new Set(b); n.delete(t.id); return n; });
+    const { promise } = tasks.create({ title: t.title, board, status: 'backlog', assignee: 'oliver', priority: 'media' }, body, {
       okMessage: false,
-      onError: () => resolve(undefined),
+      onError: () => { done(); resolve(undefined); },
     });
-    promise.then((r) => { toast.ok(`Tarefa ${r.data.id} criada em Produto`); resolve(r.data.id); }, () => resolve(undefined));
+    promise.then((r) => { done(); toast.ok(`Tarefa ${r.data.id} criada em ${BOARD_NAME[board]}`); resolve(r.data.id); }, () => { done(); resolve(undefined); });
   });
+  return { create, existing: (t: GapTheme) => index.get(t.id), creating: (t: GapTheme) => busy.has(t.id), loading: tq.isLoading };
+}
+
+/** "Virar tarefa" → "Criando…" → "Ver T-NNNN" (link para o quadro); `compact` = o rótulo curto do card do Panorama */
+function GapTaskButton({ slug, t, tasks, className, compact }: { slug: string; t: GapTheme; tasks: GapTasks; className?: string; compact?: boolean }) {
+  const have = tasks.existing(t);
+  const board = BOARD_NAME[GAP_BOARD[t.kind]];
+  if (tasks.creating(t)) return <span className={cx('inline-flex items-center gap-1 text-muted-foreground', className)}><Spinner />Criando…</span>;
+  if (have) {
+    return (
+      <Link to={`/p/${slug}/quadro?quadro=${have.board}&t=${have.id}`} onClick={(e) => e.stopPropagation()} title={`Já existe a tarefa ${have.id} para este tema (quadro ${BOARD_NAME[have.board as keyof typeof BOARD_NAME] ?? have.board})`}
+        className={cx('inline-flex items-center gap-1 rounded-md font-medium text-primary-ink hover:underline', className)}>
+        <ArrowUpRight className={compact ? 'size-3' : 'size-3.5'} />Ver {have.id}
+      </Link>
+    );
+  }
+  return (
+    <button type="button" disabled={tasks.loading} onClick={() => void tasks.create(t)} title={`Cria uma tarefa em ${board}, em Backlog, para você aprovar`}
+      className={cx('inline-flex items-center gap-1', compact
+        ? 'rounded px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground opacity-70 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-primary-soft hover:text-primary-ink transition'
+        : 'rounded-md border border-border bg-card hover:bg-muted', className)}>
+      <ListPlus className={compact ? 'size-3' : 'size-3.5'} />{compact ? 'tarefa' : 'Virar tarefa'}
+    </button>
+  );
 }
 
 /** Panorama: as 5 maiores brechas, sempre à vista, com "→ tarefa" em cada linha e o produto × mercado em 2 números */
 export function GapSummaryCard({ slug, rows, s, className }: { slug: string; rows: MarketRow[]; s: MatrixStats | null; className?: string }) {
   const gq = useGaps(slug);
   const mq = useMatrix(slug);
-  const toTask = useGapTask(slug, 'do Panorama');
-  const [made, setMade] = useState<Record<string, string>>({});
+  const tasks = useGapTask(slug, 'do Panorama');
   const byId = useMemo(() => new Map(rows.map((r) => [r.c.data.id, r])), [rows]);
   const g = gq.data;
   const stale = useMemo(() => !g ? 0 : rows.filter((r) => { const at = r.res.forcas?.updatedAt; return at && (!g.basedOn[r.c.data.id] || at > g.basedOn[r.c.data.id]); }).length, [g, rows]);
@@ -241,12 +275,6 @@ export function GapSummaryCard({ slug, rows, s, className }: { slug: string; row
   );
   const total = Object.keys(g.basedOn).length;
   const top = rankGaps(g.themes).slice(0, 5);
-  const turn = async (t: GapTheme) => {
-    if (made[t.id]) return;
-    setMade((m) => ({ ...m, [t.id]: '…' }));
-    const id = await toTask(t);
-    setMade((m) => { const n = { ...m }; if (id) n[t.id] = id; else delete n[t.id]; return n; });
-  };
   return (
     <section className={cx('bg-card border border-border rounded-xl flex flex-col', className)}>
       <header className="px-4 pt-3.5 pb-2.5 flex items-center gap-2.5 border-b border-border">
@@ -262,7 +290,6 @@ export function GapSummaryCard({ slug, rows, s, className }: { slug: string; row
           const cs = gapComps(t);
           const Icon = KIND_ICON[t.kind];
           const has = t.kind === 'produto' ? nosHas(mq.data, t) : null;
-          const done = made[t.id];
           return (
             <li key={t.id} className="group px-4 py-2.5 hover:bg-muted/30">
               <div className="flex items-start gap-2.5">
@@ -280,11 +307,7 @@ export function GapSummaryCard({ slug, rows, s, className }: { slug: string; row
                   <div className="mt-0.5 flex items-center gap-2">
                     <p className="flex-1 min-w-0 truncate text-xs text-muted-foreground" title={t.action}>{t.action}</p>
                     {has && <span className={cx('shrink-0 text-[11px] font-medium', has.cls)}>{has.label}</span>}
-                    <button type="button" disabled={!!done} onClick={() => void turn(t)} title="Cria uma tarefa em Produto, em Backlog, para você aprovar"
-                      className={cx('shrink-0 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium transition',
-                        done ? 'text-success' : 'text-muted-foreground opacity-70 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-primary-soft hover:text-primary-ink')}>
-                      {done ? <><Check className="size-3" />{done === '…' ? 'Criando…' : done}</> : <><ListPlus className="size-3" />tarefa</>}
-                    </button>
+<span className="shrink-0"><GapTaskButton slug={slug} t={t} tasks={tasks} compact /></span>
                   </div>
                 </div>
               </div>
@@ -299,7 +322,7 @@ export function GapSummaryCard({ slug, rows, s, className }: { slug: string; row
             <span className="text-muted-foreground">Produto:</span>
             <span><b className="tabular-nums text-destructive">{s.lacunas.length}</b> faltam</span>
             <span className="text-muted-foreground">·</span>
-            <span><b className="tabular-nums text-success">{s.exclusivas.length}</b> só você tem</span>
+            <span><b className="tabular-nums text-success-ink">{s.exclusivas.length}</b> só você tem</span>
           </Link>
         ) : <span className="text-muted-foreground">Produto × mercado: sem matriz</span>}
         {stale > 0 && <span className="ml-auto inline-flex items-center gap-1 text-amber-700 dark:text-amber-400" title={`${stale} análise(s) nova(s) ou refeita(s) depois do resumo. Peça à IA “atualiza as brechas”.`}><TriangleAlert className="size-3.5" />desatualizado</span>}

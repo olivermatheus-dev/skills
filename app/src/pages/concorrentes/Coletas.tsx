@@ -10,7 +10,7 @@ import { Avatar, Chips, PlatformIcon, Spinner, fmtDateTime, platformLabel, timeA
 import { toast } from '../../components/toast';
 import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
 import WeeklyPanel from '../../components/competitors/WeeklyPanel';
-import { CircleCheck, CircleDashed, ListTodo, TriangleAlert, Users } from 'lucide-react';
+import { Check, CircleCheck, CircleDashed, ListTodo, RefreshCw, TriangleAlert, Users, X } from 'lucide-react';
 
 type R = ProfileSummary & { m: MarketRow };
 const STALE_DAYS = 7;
@@ -60,9 +60,9 @@ export default function Coletas() {
     { k: 'st', label: 'Estado', v: (p) => stateOf(p), render: (p) => {
       const s = stateOf(p);
       const err = p.latest?.errors.join('\n');
-      return <span title={err || (s === 'sem coletor' ? 'ainda não há coletor para esta rede (fica só como link)' : undefined)} className={cx('inline-flex items-center gap-1 text-xs rounded-full px-2 py-0.5 border', s === 'ok' ? 'border-success/30 text-success' : s === 'erro' ? 'border-destructive/30 bg-destructive/5 text-destructive' : s === 'velho' ? 'border-warning/30 text-warning' : s === 'sem coletor' ? 'border-transparent text-muted-foreground/70' : 'border-border text-muted-foreground')}>
-        {s === 'ok' ? '✓ ok' : s === 'erro' ? `✗ ${short(p.latest!.errors[0] ?? 'falhou')}` : s === 'velho' ? `velho (${Math.floor(age(p.latest?.collectedAt))} d)` : s === 'sem coletor' ? 'sem coletor' : 'nunca puxado'}
-        {s === 'ok' && p.latest?.errors.length ? <span className="text-warning" title={err}>⚠</span> : null}
+      return <span title={err || (s === 'sem coletor' ? 'ainda não há coletor para esta rede (fica só como link)' : undefined)} className={cx('inline-flex items-center gap-1 text-xs rounded-full px-2 py-0.5 border', s === 'ok' ? 'border-success/30 text-success-ink' : s === 'erro' ? 'border-destructive/30 bg-destructive/5 text-destructive' : s === 'velho' ? 'border-warning/30 text-warning-ink' : s === 'sem coletor' ? 'border-transparent text-muted-foreground/70' : 'border-border text-muted-foreground')}>
+        {s === 'ok' ? <><Check className="size-3" />ok</> : s === 'erro' ? <><X className="size-3" />{short(p.latest!.errors[0] ?? 'falhou')}</> : s === 'velho' ? `velho (${Math.floor(age(p.latest?.collectedAt))} d)` : s === 'sem coletor' ? 'sem coletor' : 'nunca puxado'}
+        {s === 'ok' && p.latest?.errors.length ? <span className="text-warning-ink" title={err}><TriangleAlert className="size-3" /></span> : null}
       </span>;
     } },
     { k: 'at', label: 'Última coleta', num: true, v: (p) => p.latest?.collectedAt, render: (p) => p.latest ? <span className="text-xs text-muted-foreground" title={fmtDateTime(p.latest.collectedAt)}>{timeAgo(p.latest.collectedAt)}</span> : <span className="text-muted-foreground">—</span> },
@@ -70,13 +70,13 @@ export default function Coletas() {
     { k: 'f', label: 'Seguidores', num: true, v: (p) => p.latest?.profile.followers ?? undefined, render: (p) => fmtNum(p.latest?.profile.followers ?? undefined) },
     { k: 'items', label: 'Itens', num: true, v: (p) => p.latest?.items, render: (p) => p.latest?.items ?? '—' },
     { k: 'n', label: 'Coletas', num: true, v: (p) => p.snapshots, render: (p) => p.snapshots },
-    { k: 'act', label: '', render: (p) => p.m.c.data.profiles[0] && keyFirst(p, all) ? <button className="text-xs px-2 py-1 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={!!pulling || one === p.m.c.data.id} onClick={() => pullOne(p.m)}>{one === p.m.c.data.id ? <Spinner /> : '↻'} Puxar</button> : null },
+    { k: 'act', label: '', render: (p) => p.m.c.data.profiles[0] && keyFirst(p, all) ? <button className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={!!pulling || one === p.m.c.data.id} onClick={() => pullOne(p.m)}>{one === p.m.c.data.id ? <Spinner /> : <RefreshCw className="size-3" />}Puxar</button> : null },
   ];
 
   const nOk = all.filter((p) => stateOf(p) === 'ok').length;
   const targets = m.rows.filter((r) => r.c.data.profiles.length);
   return (
-    <AreaPage actions={<Button variant="ghost" disabled={!!pulling || !targets.length} onClick={() => pullAll(targets)} title="Puxa as redes de todos, um concorrente por vez">{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : '↻ Puxar todos'}</Button>}>
+    <AreaPage actions={<Button variant="ghost" disabled={!!pulling || !targets.length} onClick={() => pullAll(targets)} title="Puxa as redes de todos, um concorrente por vez">{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : <><RefreshCw className="size-3.5" />Puxar todos</>}</Button>}>
       <ErrorBox error={m.error} />
       <WeeklyPanel slug={slug} />
       <div className="mb-4"><StatStrip items={[

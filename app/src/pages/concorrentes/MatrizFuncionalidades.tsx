@@ -36,9 +36,9 @@ const NOS_BG: Record<Status, string> = {
 
 function Icon({ s, className }: { s: Status; className?: string }) {
   const c = cx('size-4 shrink-0', className);
-  if (s === 'sim') return <Check className={cx(c, 'text-success')} strokeWidth={3} />;
-  if (s === 'parcial') return <CircleDot className={cx(c, 'text-warning')} />;
-  if (s === 'planejado') return <Clock className={cx(c, 'text-warning')} />;
+  if (s === 'sim') return <Check className={cx(c, 'text-success-ink')} strokeWidth={3} />;
+  if (s === 'parcial') return <CircleDot className={cx(c, 'text-warning-ink')} />;
+  if (s === 'planejado') return <Clock className={cx(c, 'text-warning-ink')} />;
   if (s === 'nao') return <X className={cx(c, 'text-destructive')} strokeWidth={3} />;
   return <CircleHelp className={cx(c, 'text-muted-foreground/50')} />;
 }
@@ -222,7 +222,7 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
         </table>
       </div>
       <p className="mt-2 text-[11px] text-muted-foreground">
-        <Check className="inline size-3 text-success" strokeWidth={3} /> tem · <CircleDot className="inline size-3 text-warning" /> parcial (plano, limite ou só em parte) · <X className="inline size-3 text-destructive" strokeWidth={3} /> a análise não mostra · <CircleHelp className="inline size-3" /> ninguém olhou ainda.
+        <Check className="inline size-3 text-success-ink" strokeWidth={3} /> tem · <CircleDot className="inline size-3 text-warning-ink" /> parcial (plano, limite ou só em parte) · <X className="inline size-3 text-destructive" strokeWidth={3} /> a análise não mostra · <CircleHelp className="inline size-3" /> ninguém olhou ainda.
         {' '}Clique numa célula para corrigir (fica marcada como sua e a IA não sobrescreve). Fonte: o que cada site divulga, não o produto por dentro.
       </p>
 

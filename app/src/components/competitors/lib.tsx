@@ -108,6 +108,9 @@ export interface Row {
   mercadoEscopo?: 'formato' | 'rede';
   /** nº de concorrentes distintos na amostra do mercado; < MERCADO_MIN_CONCORRENTES → `outlierMercado` e `porSeguidorMercado` ficam undefined */
   mercadoConcorrentes?: number;
+  /** itens e concorrentes do formato (rede + formato), para explicar por que caiu para a rede inteira */
+  mercadoFormatoAmostra?: number;
+  mercadoFormatoConcorrentes?: number;
   /** alcance relativo: views ÷ seguidores do perfil na mesma coleta (sem views: curtidas ÷ seguidores, mesma base do `outlier`); sem seguidores fica undefined */
   porSeguidor?: number;
   porSeguidorBasis?: 'views' | 'likes';
@@ -162,19 +165,22 @@ export const MERCADO_MIN_CONCORRENTES = 3;
  * Segunda medida de fora da curva: contra o mercado. Recebe as linhas de TODOS os concorrentes (já só da última coleta de cada
  * perfil, como `buildRows`). Mediana por rede + formato (`item.type`); se o formato tiver < 10 itens ou < 3 concorrentes, usa a
  * rede inteira; se a rede também tiver < 3 concorrentes, `outlierMercado` e `porSeguidorMercado` ficam undefined (a tela mostra "—").
- * A base (views ou curtidas) de cada linha é a mesma do `outlier`; a mediana só conta itens com a métrica > 0.
+ * A base (views ou curtidas) de cada linha é a mesma do `outlier`; a mediana só conta itens com a métrica > 0. Curtidas só entram na
+ * mediana de quem está na base curtidas (nunca misturam com reels, que têm views). `inPool` = quem forma o mercado (a tela passa só
+ * `kind` concorrente: referência de outro nicho recebe a medida, mas não muda a mediana).
  * `compOf` = de qual concorrente é a linha (padrão: `compId` da linha, senão o perfil).
  */
-export function withMarketOutlier<T extends Row>(rows: T[], compOf: (r: T) => string = (r) => (r as { compId?: string }).compId ?? r.profileKey): T[] {
+export function withMarketOutlier<T extends Row>(rows: T[], compOf: (r: T) => string = (r) => (r as { compId?: string }).compId ?? r.profileKey, inPool: (r: T) => boolean = () => true): T[] {
   type Pool = { views: number[]; likes: number[]; pfViews: number[]; pfLikes: number[]; compViews: Set<string>; compLikes: Set<string> };
   const byNet = new Map<string, Pool>(), byFmt = new Map<string, Pool>();
   const pool = (m: Map<string, Pool>, k: string) => { let p = m.get(k); if (!p) m.set(k, p = { views: [], likes: [], pfViews: [], pfLikes: [], compViews: new Set(), compLikes: new Set() }); return p; };
   for (const r of rows) {
+    if (!inPool(r)) continue;
     const { views, likes } = r.item.metrics;
     const c = compOf(r);
     for (const p of [pool(byNet, r.platform), pool(byFmt, `${r.platform}|${r.item.type}`)]) {
       if (views) { p.views.push(views); p.compViews.add(c); }
-      if (likes) { p.likes.push(likes); p.compLikes.add(c); }
+      if (likes && r.outlierBasis === 'likes') { p.likes.push(likes); p.compLikes.add(c); }
       if (r.porSeguidor) (r.porSeguidorBasis === 'views' ? p.pfViews : p.pfLikes).push(r.porSeguidor);
     }
   }
@@ -194,6 +200,7 @@ export function withMarketOutlier<T extends Row>(rows: T[], compOf: (r: T) => st
       porSeguidorMercado: ok && r.porSeguidor != null && pm ? r.porSeguidor / pm : undefined,
       outlierMercado: ok && v != null && m ? v / m : undefined,
       outlierMercadoBasis: basis, mercadoAmostra: p[basis].length, mercadoEscopo: escopo, mercadoConcorrentes: n,
+      mercadoFormatoAmostra: f[basis].length, mercadoFormatoConcorrentes: comps(f, basis),
     };
   });
 }

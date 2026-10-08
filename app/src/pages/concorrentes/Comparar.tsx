@@ -17,7 +17,7 @@ export default function Comparar() {
   const { slug = '' } = useParams();
   const [sp, setSp] = useSearchParams();
   const raw = sp.get('v') ?? '';
-  const v = (raw in VIEWS ? raw : 'oferta') as View;
+  const v = (Object.hasOwn(VIEWS, raw) ? raw : 'oferta') as View;
   const m = useMarket(slug);
   const rows = m.rows.filter((r) => r.c.data.kind === 'concorrente');
   const ref = useRefRow(slug);

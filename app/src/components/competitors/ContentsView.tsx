@@ -18,6 +18,20 @@ const FORMAT_ICON: Record<string, ReactNode> = { video: <Video />, short: <Film 
 const STATUS_RANK: Record<string, number> = { nova: 0, marcada: 1, analisada: 2, descartada: 3 };
 const dayMs = 86_400_000;
 
+type Filters = { q: string; periodo: string; rede: string; formato: string; conc: string; status: string; fav: string };
+/** a linha passa nos filtros? `skip` ignora um deles (para contar as opções desse select sem o próprio filtro) */
+function passes(r: CRow, v: Filters, needle: string, skip?: 'rede' | 'formato' | 'conc'): boolean {
+  const st = r.mark?.status ?? 'nova';
+  if (v.status === 'ativas' ? st === 'descartada' : v.status !== 'todas' && st !== v.status) return false;
+  if (skip !== 'rede' && v.rede && r.platform !== v.rede) return false;
+  if (skip !== 'formato' && v.formato && r.item.type !== v.formato) return false;
+  if (skip !== 'conc' && v.conc && r.compId !== v.conc) return false;
+  if (v.periodo !== 'tudo' && (!r.item.publishedAt || Date.parse(r.item.publishedAt) < Date.now() - Number(v.periodo) * dayMs)) return false;
+  if (v.fav && !r.mark?.favorite) return false;
+  if (needle && !`${r.item.title ?? ''} ${r.item.caption ?? ''} ${r.compName ?? ''} ${r.mark?.note ?? ''} ${(r.mark?.tags ?? []).join(' ')}`.toLowerCase().includes(needle)) return false;
+  return true;
+}
+
 export const rowId = (r: CRow) => `${r.compId ?? ''}|${r.profileKey}|${r.mk}`;
 
 /** definições de ordenação (a tabela usa todas; o "Ordenar" da barra, as marcadas com `bar`) */
@@ -62,32 +76,28 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const vista = v.vista === 'painel' && !panel ? 'grade' : v.vista;
   const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'outlier', v.asc);
 
-  const shown = useMemo(() => {
-    const since = v.periodo === 'tudo' ? 0 : Date.now() - Number(v.periodo) * dayMs;
-    const needle = q.toLowerCase();
-    const list = rows.filter((r) => {
-      const st = r.mark?.status ?? 'nova';
-      if (v.status === 'ativas' ? st === 'descartada' : v.status !== 'todas' && st !== v.status) return false;
-      if (v.rede && r.platform !== v.rede) return false;
-      if (v.formato && r.item.type !== v.formato) return false;
-      if (v.conc && r.compId !== v.conc) return false;
-      if (since && (!r.item.publishedAt || Date.parse(r.item.publishedAt) < since)) return false;
-      if (v.fav && !r.mark?.favorite) return false;
-      if (needle && !`${r.item.title ?? ''} ${r.item.caption ?? ''} ${r.compName ?? ''} ${r.mark?.note ?? ''} ${(r.mark?.tags ?? []).join(' ')}`.toLowerCase().includes(needle)) return false;
-      return true;
-    });
-    return sortRows(list, SORTS, sort);
-  }, [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, q, sort.k, sort.dir]); // eslint-disable-line react-hooks/exhaustive-deps
+  const needle = q.toLowerCase();
+  const shown = useMemo(() => sortRows(rows.filter((r) => passes(r, v, needle)), SORTS, sort),
+    [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, needle, sort.k, sort.dir]); // eslint-disable-line react-hooks/exhaustive-deps
+  /** contagem de cada opção dos selects: respeita período, status, busca e os OUTROS selects */
+  const counts = useMemo(() => {
+    const by = (skip: 'rede' | 'formato' | 'conc', key: (r: CRow) => string | undefined) => {
+      const m = new Map<string, number>();
+      for (const r of rows) if (passes(r, v, needle, skip)) { const k = key(r); if (k) m.set(k, (m.get(k) ?? 0) + 1); }
+      return m;
+    };
+    return { rede: by('rede', (r) => r.platform), formato: by('formato', (r) => r.item.type), conc: by('conc', (r) => r.compId) };
+  }, [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, needle]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const platforms = [...new Set(rows.map((r) => r.platform))];
   const types = [...new Set(rows.map((r) => r.item.type))];
   const comps = [...new Set(rows.map((r) => r.compId).filter((x): x is string => !!x))];
 
-  const redeOpts: SelectOption[] = [{ value: '', label: 'Todas as redes', icon: <Share2 /> }, ...platforms.map((p) => ({ value: p, label: platformLabel(p), icon: <PlatformIcon platform={p} size={16} />, count: rows.filter((r) => r.platform === p).length }))];
-  const formatoOpts: SelectOption[] = [{ value: '', label: 'Todos os formatos', icon: <Shapes /> }, ...types.map((t) => ({ value: t, label: TYPE_LABEL[t] ?? t, icon: FORMAT_ICON[t] ?? <Clapperboard />, count: rows.filter((r) => r.item.type === t).length }))];
+  const redeOpts: SelectOption[] = [{ value: '', label: 'Todas as redes', icon: <Share2 /> }, ...platforms.map((p) => ({ value: p, label: platformLabel(p), icon: <PlatformIcon platform={p} size={16} />, count: counts.rede.get(p) ?? 0, disabled: p !== v.rede && !counts.rede.get(p) }))];
+  const formatoOpts: SelectOption[] = [{ value: '', label: 'Todos os formatos', icon: <Shapes /> }, ...types.map((t) => ({ value: t, label: TYPE_LABEL[t] ?? t, icon: FORMAT_ICON[t] ?? <Clapperboard />, count: counts.formato.get(t) ?? 0, disabled: t !== v.formato && !counts.formato.get(t) }))];
   const concOpts: SelectOption[] = [{ value: '', label: 'Todos os concorrentes', icon: <Users /> }, ...comps.map((id) => {
     const o = owners?.get(id);
-    return { value: id, label: o?.name ?? id, icon: <Avatar name={o?.name ?? id} size={16} local={o?.local} remote={o?.remote} className="!ring-0" />, count: rows.filter((r) => r.compId === id).length };
+    return { value: id, label: o?.name ?? id, icon: <Avatar name={o?.name ?? id} size={16} local={o?.local} remote={o?.remote} className="!ring-0" />, count: counts.conc.get(id) ?? 0, disabled: id !== v.conc && !counts.conc.get(id) };
   })];
   const statusOpts: SelectOption[] = [
     { value: 'ativas', label: 'Sem descartadas', icon: <ListFilter /> }, { value: 'todas', label: 'Todos os status', icon: <ListFilter /> },
@@ -123,8 +133,8 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const ownerOf = (r: CRow) => { const o = r.compId ? owners?.get(r.compId) : undefined; return o ? { name: o.name, avatar: <Avatar name={o.name} size={16} local={o.local} remote={o.remote} className="!ring-0" /> } : undefined; };
 
   const cols: Col<CRow>[] = [
-    { k: 'thumb', label: '', width: '64px', render: (r) => <Thumb r={r} media={mediaOf(r)} className="h-8 w-14 rounded" /> },
-    { k: 'title', label: 'Título', sort: 'title', width: '180px', className: 'max-w-[200px]', render: (r) => (
+    { k: 'thumb', label: '', width: '64px', pin: 'left', render: (r) => <Thumb r={r} media={mediaOf(r)} className="h-8 w-14 rounded" /> },
+    { k: 'title', label: 'Título', sort: 'title', width: '180px', pin: 'left', className: 'max-w-[200px]', render: (r) => (
       <div className="flex items-center gap-1.5 min-w-0">{r.mark?.favorite && <FavStar on size="size-3.5" />}<span className="truncate font-medium" title={titleOf(r)}>{titleOf(r)}</span></div>
     ) },
     ...(showComp ? [{ k: 'comp', label: 'Concorrente', sort: 'comp', render: (r: CRow) => { const o = ownerOf(r); return o ? <span className="inline-flex items-center gap-1.5 whitespace-nowrap">{o.avatar}{o.name}</span> : null; } } as Col<CRow>] : []),
@@ -132,14 +142,14 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
     { k: 'type', label: 'Formato', sort: 'type', className: 'whitespace-nowrap', render: (r) => TYPE_LABEL[r.item.type] ?? r.item.type },
     { k: 'recent', label: 'Publicado', sort: 'recent', desc: true, className: 'whitespace-nowrap', render: (r) => <span title={r.item.publishedAt ? fmtDate(r.item.publishedAt) : undefined}>{r.item.publishedAt ? timeAgo(r.item.publishedAt) : '—'}</span> },
     { k: 'views', label: 'Views', sort: 'views', num: true, render: (r) => fmtNum(r.item.metrics.views) },
-    { k: 'likes', label: 'Curtidas', sort: 'likes', num: true, render: (r) => fmtNum(r.item.metrics.likes) },
-    { k: 'comments', label: 'Coment.', sort: 'comments', num: true, render: (r) => fmtNum(r.item.metrics.comments) },
-    { k: 'shares', label: 'Envios', sort: 'shares', num: true, render: (r) => fmtNum(r.item.metrics.shares) },
-    { k: 'engagement', label: 'Engaj.', sort: 'engagement', num: true, title: '(curtidas + comentários + envios) ÷ views', render: (r) => r.engagement != null ? fmtPct(r.engagement) : '—' },
-    { k: 'outlier', label: '× perfil', sort: 'outlier', num: true, title: 'contra a mediana do próprio perfil', render: (r) => <RatioCell v={r.outlier} tip={r.outlier != null ? perfilTip(r) : undefined} /> },
-    { k: 'mercado', label: '× mercado', sort: 'mercado', num: true, title: 'contra a mediana dos concorrentes (mesma rede e formato)', render: (r) => <RatioCell v={r.outlierMercado} tip={r.outlierMercado != null ? mercadoTip(r) : mercadoVazioTip(r)} /> },
-    { k: 'porSeguidor', label: 'Por seguidor', sort: 'porSeguidor', num: true, title: 'views (ou curtidas) ÷ seguidores do perfil', render: (r) => r.porSeguidor != null ? <span title={porSeguidorTip(r)}>{fmtPct(r.porSeguidor)}</span> : '—' },
-    { k: 'status', label: 'Status', sort: 'status', desc: true, render: (r) => { const s = r.mark?.status ?? 'nova'; return <span className="inline-flex items-center gap-1.5 text-xs whitespace-nowrap"><span className="size-1.5 rounded-full" style={{ background: STATUS_COLOR[s] }} />{STATUS_LABEL[s]}</span>; } },
+    { k: 'likes', label: 'Curtidas', optional: true, sort: 'likes', num: true, render: (r) => fmtNum(r.item.metrics.likes) },
+    { k: 'comments', label: 'Coment.', optional: true, off: true, sort: 'comments', num: true, render: (r) => fmtNum(r.item.metrics.comments) },
+    { k: 'shares', label: 'Envios', optional: true, off: true, sort: 'shares', num: true, render: (r) => fmtNum(r.item.metrics.shares) },
+    { k: 'engagement', label: 'Engaj.', optional: true, sort: 'engagement', num: true, title: '(curtidas + comentários + envios) ÷ views', render: (r) => r.engagement != null ? fmtPct(r.engagement) : '—' },
+    { k: 'outlier', label: '× perfil', width: '84px', pin: 'right', sort: 'outlier', num: true, title: 'contra a mediana do próprio perfil', render: (r) => <RatioCell v={r.outlier} tip={r.outlier != null ? perfilTip(r) : undefined} /> },
+    { k: 'mercado', label: '× mercado', width: '100px', pin: 'right', sort: 'mercado', num: true, title: 'contra a mediana dos concorrentes (mesma rede e formato)', render: (r) => <RatioCell v={r.outlierMercado} tip={r.outlierMercado != null ? mercadoTip(r) : mercadoVazioTip(r)} /> },
+    { k: 'porSeguidor', label: 'Por seguidor', width: '104px', pin: 'right', sort: 'porSeguidor', num: true, title: 'views (ou curtidas) ÷ seguidores do perfil', render: (r) => r.porSeguidor != null ? <span title={porSeguidorTip(r)}>{fmtPct(r.porSeguidor)}</span> : '—' },
+    { k: 'status', label: 'Status', sort: 'status', desc: true, width: '104px', pin: 'right', render: (r) => { const s = r.mark?.status ?? 'nova'; return <span className="inline-flex items-center gap-1.5 text-xs whitespace-nowrap"><span className="size-1.5 rounded-full" style={{ background: STATUS_COLOR[s] }} />{STATUS_LABEL[s]}</span>; } },
   ];
 
   const grid = (
@@ -151,7 +161,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
     </div>
   );
   const table = (
-    <DataTable rows={shown} cols={cols} rowKey={rowId} sort={sort} fill={fill} onRowClick={(r) => onOpen(r)}
+    <DataTable rows={shown} cols={cols} colsKey="conteudos" rowKey={rowId} sort={sort} fill={fill} onRowClick={(r) => onOpen(r)}
       rowClass={(r) => (r.mark?.status === 'descartada' ? 'opacity-55' : undefined)}
       onSort={(k, dir) => set({ ordem: k, asc: dir === 1 ? '1' : '' })} />
   );

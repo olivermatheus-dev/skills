@@ -4,7 +4,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { CartesianGrid, ReferenceArea, ReferenceLine, Scatter, ScatterChart, XAxis, YAxis } from 'recharts';
 import {
-  AlertTriangle, ArrowRight, CheckCircle2, Clapperboard, Eye, Flame, Globe2, Heart, Ruler, Scale, Sparkles, Info, User, X,
+  AlertTriangle, ArrowRight, ArrowUp, CheckCircle2, Clapperboard, Eye, Flame, Globe2, Heart, Ruler, Scale, Sparkles, Info, User, X,
 } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { cx, fmtNum } from '../kit';
@@ -172,16 +172,28 @@ function Mapa({ rows, onOpen, quad }: PanelProps & { quad: Quad | null }) {
     const lead = new Set(ranked.filter((r) => ['viralizou', 'achado'].includes(quadOf(r)!)).slice(0, 5));
     if (lead.size < 3) ranked.slice(0, 3).forEach((r) => lead.add(r));
     // pontos sem mercado: espalha um pouco na horizontal da faixa (determinístico) para não empilhar
+    const posOf = (r: CRow, i: number) => ({
+      x: r.outlierMercado != null ? clampLog(r.outlierMercado) : band!.mid + (((i * 37) % 11) / 10 - 0.5) * bandW * 0.6,
+      y: clampLog(r.outlier!),
+    });
+    // nome só onde cabe, do maior para o menor: descarta o rótulo que cairia em cima de outro já escolhido (o período "Tudo" tem dezenas de pontos)
+    const kept: { x: number; y: number }[] = [];
+    const named = new Set<CRow>();
+    for (const r of ranked) {
+      if (!lead.has(r)) continue;
+      const p = posOf(r, withP.indexOf(r));
+      if (kept.some((k) => Math.abs(k.x - p.x) < (xhi - xlo) * 0.2 && Math.abs(k.y - p.y) < (yhi - ylo) * 0.1)) continue;
+      kept.push(p); named.add(r);
+    }
     const pts: Pt[] = withP.map((r, i) => {
-      const q = quadOf(r)!;
-      const x = r.outlierMercado != null ? clampLog(r.outlierMercado) : band!.mid + (((i * 37) % 11) / 10 - 0.5) * bandW * 0.6;
-      return { x, y: clampLog(r.outlier!), r, q, label: lead.has(r) ? (r.compName ?? '') : undefined, left: x > xhi - (xhi - xlo) * 0.2 };
+      const { x, y } = posOf(r, i);
+      return { x, y, r, q: quadOf(r)!, label: named.has(r) ? (r.compName ?? '') : undefined, left: x > xhi - (xhi - xlo) * 0.2 };
     });
     const dec = (lo: number, hi: number) => Array.from({ length: hi - lo + 1 }, (_, i) => lo + i);
     return {
       pts, band,
       xDom: [band ? band.x0 : xlo, xhi] as [number, number], yDom: [ylo, yhi] as [number, number],
-      xTicks: [...dec(xlo, xhi), L2].sort((a, b) => a - b), yTicks: [...dec(ylo, yhi), L2].sort((a, b) => a - b),
+      xTicks: [...dec(xlo, xhi), L2].sort((a, b) => a - b), yTicks: dec(ylo, yhi), // sem o 2× aqui: o tique extra escondia o 1× (a linha tracejada já marca o 2×)
     };
   }, [rows]);
 
@@ -192,7 +204,8 @@ function Mapa({ rows, onOpen, quad }: PanelProps & { quad: Quad | null }) {
 
   return (
     <div className="relative h-[340px] -ml-2">
-      <span className="absolute left-2 top-0 text-[11px] text-muted-foreground">× perfil (log) ↑</span>
+      <span className="absolute left-2 top-0 inline-flex items-center gap-0.5 text-[11px] text-muted-foreground">× perfil (log)<ArrowUp className="size-3" /></span>
+      <span className="absolute right-3 bottom-0 inline-flex items-center gap-0.5 text-[11px] text-muted-foreground">× mercado (log)<ArrowRight className="size-3" /></span>
       <ChartContainer config={{}} className="aspect-auto h-full w-full">
         <ScatterChart margin={{ top: 20, right: 12, bottom: 18, left: 0 }}>
           <CartesianGrid stroke="var(--color-border)" strokeOpacity={0.6} />
@@ -206,7 +219,7 @@ function Mapa({ rows, onOpen, quad }: PanelProps & { quad: Quad | null }) {
           <ReferenceLine x={L2} stroke="var(--color-muted-foreground)" strokeDasharray="4 3" strokeOpacity={0.6} />
           <ReferenceLine y={L2} stroke="var(--color-muted-foreground)" strokeDasharray="4 3" strokeOpacity={0.6} />
           <XAxis type="number" dataKey="x" domain={xDom} ticks={xTicks} tickFormatter={ratioTick} allowDataOverflow tickLine={false} axisLine={false} fontSize={11}
-            label={{ value: '× mercado (log) →', position: 'insideBottomRight', offset: -12, fontSize: 11, fill: 'var(--color-muted-foreground)' }} />
+            />
           <YAxis type="number" dataKey="y" domain={yDom} ticks={yTicks} tickFormatter={ratioTick} allowDataOverflow tickLine={false} axisLine={false} fontSize={11} width={44} />
           <ChartTooltip cursor={false} isAnimationActive={false} content={<MapTip />} />
           {byQuad.map(({ q, data }) => (
@@ -290,7 +303,7 @@ function Fila({ rows, mediaOf, ideaBusy, onMark, onOpen, onGoTable, quad, onClea
       <div className="flex-1 min-h-0 overflow-y-auto border-t border-border">
         {!list.length && (
           <div className="h-full min-h-40 grid place-items-center text-center px-6">
-            <div><CheckCircle2 className="size-6 mx-auto text-success mb-1.5" /><div className="text-sm font-medium">Fila zerada</div><div className="text-xs text-muted-foreground">Nada ≥2× sem ideia neste filtro.</div></div>
+            <div><CheckCircle2 className="size-6 mx-auto text-success-ink mb-1.5" /><div className="text-sm font-medium">Fila zerada</div><div className="text-xs text-muted-foreground">Nada ≥2× sem ideia neste filtro.</div></div>
           </div>
         )}
         <ul className="divide-y divide-border">
@@ -404,9 +417,14 @@ function Aposta({ rows, all, periodo, owners, onOpen }: PanelProps) {
       const k = `${r.compId}|${r.profileKey}`, t = Date.parse(r.item.publishedAt);
       oldestOf.set(k, Math.min(oldestOf.get(k) ?? t, t));
     }
+    // todo concorrente com perfil coletado entra, mesmo sem post no filtro (0 posts/sem); o "Último" olha a coleta inteira
     const by = new Map<string, CRow[]>();
+    const allBy = new Map<string, CRow[]>();
+    for (const r of all) allBy.set(r.compId ?? '', [...(allBy.get(r.compId ?? '') ?? []), r]);
+    for (const id of allBy.keys()) by.set(id, []);
     for (const r of rows) by.set(r.compId ?? '', [...(by.get(r.compId ?? '') ?? []), r]);
     return [...by.entries()].map(([id, g]) => {
+      const ga = allBy.get(id) ?? g;
       // posts por semana: soma de cada perfil ÷ semanas da janela (o período, ou desde o post mais antigo coletado se a coleta for mais curta)
       const profiles = new Map<string, number>();
       for (const r of g) profiles.set(r.profileKey, (profiles.get(r.profileKey) ?? 0) + 1);
@@ -422,8 +440,8 @@ function Aposta({ rows, all, periodo, owners, onOpen }: PanelProps) {
       for (const r of g) mix.set(r.item.type, (mix.get(r.item.type) ?? 0) + 1);
       const vids = g.filter((r) => isVideoType(r.item.type)).map((r) => r.item.metrics.views).filter((v): v is number => !!v);
       const best = [...g].sort((a, b) => (b.outlier ?? 0) - (a.outlier ?? 0))[0];
-      const last = Math.max(...g.map((r) => (r.item.publishedAt ? Date.parse(r.item.publishedAt) : 0)));
-      return { id, name: g[0].compName ?? id, n: g.length, rate, short, mix: [...mix.entries()].sort((a, b) => FMT_ORDER.indexOf(a[0]) - FMT_ORDER.indexOf(b[0])), vid: median(vids), best, lastDays: last ? (now - last) / dayMs : undefined, lastIso: g.find((r) => r.item.publishedAt && Date.parse(r.item.publishedAt) === last)?.item.publishedAt };
+      const last = Math.max(0, ...ga.map((r) => (r.item.publishedAt ? Date.parse(r.item.publishedAt) : 0)));
+      return { id, name: ga[0]?.compName ?? id, n: g.length, rate, short, mix: [...mix.entries()].sort((a, b) => FMT_ORDER.indexOf(a[0]) - FMT_ORDER.indexOf(b[0])), vid: median(vids), best, lastDays: last ? (now - last) / dayMs : undefined, lastIso: ga.find((r) => r.item.publishedAt && Date.parse(r.item.publishedAt) === last)?.item.publishedAt };
     }).sort((a, b) => b.rate - a.rate);
   }, [rows, all, periodo]);
   const types = FMT_ORDER.filter((t) => data.some((d) => d.mix.some(([x]) => x === t)));
@@ -448,11 +466,11 @@ function Aposta({ rows, all, periodo, owners, onOpen }: PanelProps) {
                 <td className="py-1.5 pr-2 max-w-[150px]"><span className="inline-flex items-center gap-1.5 min-w-0"><Avatar name={o?.name ?? d.name} size={18} local={o?.local} remote={o?.remote} className="!ring-0 shrink-0" /><span className="truncate text-[13px]">{o?.name ?? d.name}</span></span></td>
                 <td className="px-2 text-right tabular-nums font-semibold">{d.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}{d.short && <span className="text-muted-foreground font-normal" title="a coleta deste perfil cobre menos que o período: conta desde o post mais antigo coletado">*</span>}</td>
                 <td className="px-2">
-                  <Tip content={d.mix.map(([t, n]) => `${fmtLabel(t)}: ${n} (${Math.round((n / d.n) * 100)}%)`).join('\n')}>
+                  {!d.mix.length ? <span className="text-xs text-muted-foreground">sem posts no filtro</span> : <Tip content={d.mix.map(([t, n]) => `${fmtLabel(t)}: ${n} (${Math.round((n / d.n) * 100)}%)`).join('\n')}>
                     <div className="flex h-2.5 w-full gap-[2px] rounded-sm overflow-hidden">
                       {d.mix.map(([t, n]) => <div key={t} style={{ flex: n, background: FMT_COLOR[t] ?? NEUTRAL }} />)}
                     </div>
-                  </Tip>
+                  </Tip>}
                 </td>
                 <td className="px-2 text-right tabular-nums">{d.vid != null ? fmtNum(Math.round(d.vid)) : <span className="text-muted-foreground">—</span>}</td>
                 <td className="px-2 text-right">{d.best?.outlier != null ? <button type="button" onClick={() => onOpen(d.best)} title={`Abrir: ${titleOf(d.best)}`} className="hover:underline"><RatioCell v={d.best.outlier} /></button> : '—'}</td>

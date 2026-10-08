@@ -47,6 +47,13 @@ near(get('sr4', dois).outlier, 500 / 350);
 // mesmo perfil contado uma vez: compOf junta perfis do mesmo concorrente (S e T = "x") → 2 concorrentes → "—"
 const junto = withMarketOutlier([S, B, T].flatMap((s) => buildRows([...groupSnapshots([s as never]).values()], {}, () => 'instagram')), (x) => (x.profileKey === 'b-instagram' ? 'b' : 'x'));
 assert.equal(get('sr4', junto).outlierMercado, undefined); assert.equal(get('sr4', junto).mercadoConcorrentes, 2);
+// referência de outro nicho (inPool=false) não forma o mercado: os reels voltam a ter só 2 concorrentes → "—"
+const semRef = withMarketOutlier(rowsOf([S, B, T]), undefined, (x) => (x as Row & { compId?: string }).profileKey !== 't-instagram');
+assert.equal(get('sr4', semRef).outlierMercado, undefined);
+// curtidas só entram na mediana de quem está na base curtidas: perfil sem views (L1, L2, L3) não mistura com os likes dos reels
+const likesOnly = (key: string, ls: number[]) => ({ key, file: key + '.json', data: { platform: 'instagram', collectedAt: '2026-10-08T10:00:00Z', profile: { followers: 1000 }, items: ls.map((l, i) => ({ id: key + i, url: 'u', type: 'carrossel', metrics: { likes: l } })) } }) as never;
+const mixed = rowsOf([S, B, T, likesOnly('l1-instagram', [10, 20, 30]), likesOnly('l2-instagram', [10, 20, 30]), likesOnly('l3-instagram', [10, 20, 30])]);
+near(get('l1-instagram0', mixed).outlierMercado, 10 / 20); // mediana só de curtidas de quem é base curtidas (20), sem os likes dos reels
 console.log('ok: 5 casos à mão (perfil pequeno, perfil grande, formato com amostra < 10 → rede, < 3 concorrentes → sem mercado, compOf)');
 
 // ---- dados reais (só leitura)

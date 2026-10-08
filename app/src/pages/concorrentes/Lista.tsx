@@ -2,7 +2,7 @@
 // filtros (tipo, onde atua, plataforma, tag), candidatos achados pela IA (aceitar → análise completa) e "Puxar todos".
 // A comparação lado a lado (oferta, funcionalidades, mensagem, reputação) fica na aba Comparar.
 import { useMemo, useState, type ReactNode } from 'react';
-import { Archive, CircleCheck, Globe, Hash, Hourglass, LayoutGrid, MapPin, RefreshCw, Sparkles, Table as TableIcon, Users, WifiOff } from 'lucide-react';
+import { Archive, ArrowDown, ArrowUp, Check, CircleCheck, Globe, Hash, Hourglass, LayoutGrid, MapPin, RefreshCw, Sparkles, Table as TableIcon, TriangleAlert, Users, WifiOff, X } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../../api';
@@ -21,7 +21,7 @@ type Stage = Competitor['status'];
 const MODE_KEY = 'hub:comp-mode';
 const lastMode = () => { try { return localStorage.getItem(MODE_KEY) === 'cards' ? 'cards' : 'tabela'; } catch { return 'tabela'; } };
 const STAGES: { value: Stage; label: string; icon: ReactNode }[] = [
-  { value: 'ativo', label: 'Ativos', icon: <CircleCheck className="text-success" /> },
+  { value: 'ativo', label: 'Ativos', icon: <CircleCheck className="text-success-ink" /> },
   { value: 'candidato', label: 'Candidatos', icon: <Sparkles className="text-violet-600" /> },
   { value: 'arquivado', label: 'Arquivados', icon: <Archive className="text-muted-foreground" /> },
 ];
@@ -223,7 +223,7 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
         {o?.oneLiner && <p className="mt-2 text-[13px] leading-snug text-foreground/85 line-clamp-2">{o.oneLiner}</p>}
         {d.status === 'candidato' && (
           <div className="mt-3 flex gap-2">
-            <Button className="!py-1 text-xs flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAccept(); }}>✓ Aceitar</Button>
+            <Button className="!py-1 text-xs flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAccept(); }}><span className="inline-flex items-center justify-center gap-1"><Check className="size-3.5" />Aceitar</span></Button>
             <Button variant="ghost" className="!py-1 text-xs" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onReject(); }}>Recusar</Button>
           </div>
         )}
@@ -242,7 +242,7 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
                 {f != null ? (
                   <span className="tabular-nums font-medium">{fmtNum(f)}</span>
                 ) : <span className="text-xs text-muted-foreground">{ps?.latest ? (p.platform === 'site' ? 'site' : '—') : loadingSummary ? '' : 'não puxado'}</span>}
-                {delta != null && delta !== 0 && <span className={cx('text-xs tabular-nums min-w-16 text-right whitespace-nowrap', delta > 0 ? 'text-success' : 'text-destructive')} title="vs coleta anterior">{delta > 0 ? '▲' : '▼'} {fmtDelta(delta)!.slice(1)}</span>}
+                {delta != null && delta !== 0 && <span className={cx('inline-flex items-center justify-end gap-0.5 text-xs tabular-nums min-w-16 whitespace-nowrap', delta > 0 ? 'text-success-ink' : 'text-destructive')} title="vs coleta anterior">{delta > 0 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />}{fmtDelta(delta)!.slice(1)}</span>}
                 {(delta == null || delta === 0) && <span className="min-w-16" />}
               </div>
             );
@@ -254,7 +254,7 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
             {s?.lastCollected ? `Puxado ${timeAgo(s.lastCollected)}` : 'Nunca puxado'}
           </span>
           {items > 0 && <span>· {fmtNum(items)} itens</span>}
-          {hadErrors && <span className="text-warning" title="A última coleta teve avisos">· ⚠</span>}
+          {hadErrors && <span className="text-warning-ink" title="A última coleta teve avisos"><TriangleAlert className="inline size-3 align-[-1px]" /></span>}
           <button className="ml-auto inline-flex items-center gap-1 px-2 py-1 rounded-md border border-border hover:bg-muted text-foreground disabled:opacity-50" disabled={pulling || !d.profiles.length}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPull(); }}>
             {pulling ? <Spinner /> : <RefreshCw className="size-3" />}Puxar
@@ -272,10 +272,10 @@ function PullLog({ log, onClose, slug }: { log: { id: string; name: string; resu
   return (
     <div className={cx('mb-5 border rounded-xl p-3 bg-card', okN === total ? 'border-green-200' : 'border-amber-200')}>
       <div className="flex items-center gap-3 text-sm">
-        <span className={okN === total ? 'text-success' : 'text-warning'}>{okN === total ? '✓' : '⚠'}</span>
+        <span className={okN === total ? 'text-success-ink' : 'text-warning-ink'}>{okN === total ? <Check className="size-3.5" /> : <TriangleAlert className="size-3.5" />}</span>
         <span><b>{okN}</b> de {total} perfil(is) coletado(s){okN < total ? ' — veja os erros' : ''}</span>
         <button className="text-primary-ink text-xs" onClick={() => setOpen(!open)}>{open ? 'ocultar' : 'detalhes'}</button>
-        <button className="ml-auto text-muted-foreground hover:text-foreground" onClick={onClose} aria-label="Fechar">×</button>
+        <button className="ml-auto text-muted-foreground hover:text-foreground" onClick={onClose} aria-label="Fechar"><X className="size-4" /></button>
       </div>
       {open && (
         <div className="mt-2 grid gap-2 md:grid-cols-2">
@@ -329,7 +329,7 @@ function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, on
     { k: 'act', label: '', render: (c) => (
       <span className="flex items-center justify-end gap-1.5">
         {c.data.status === 'candidato' ? <>
-          <Button className="!py-0.5 !px-2 text-xs" onClick={() => onAccept(c)}>✓ Aceitar</Button>
+          <Button className="!py-0.5 !px-2 text-xs" onClick={() => onAccept(c)}><span className="inline-flex items-center gap-1"><Check className="size-3.5" />Aceitar</span></Button>
           <Button variant="ghost" className="!py-0.5 !px-2 text-xs" onClick={() => onReject(c)}>Recusar</Button>
         </> : <>
           <Star on={c.data.favorite} onClick={() => onFav(c)} size="text-base" />

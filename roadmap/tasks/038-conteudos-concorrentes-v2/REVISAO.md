@@ -68,3 +68,31 @@ Depois das correções: typecheck limpo e teste do fora da curva ok.
 - Servidor: `handler` → `route` em try/catch (400 para `URIError`, 500 no resto, `destroy` se o corpo já começou); `pipeFile` trata o `error` do stream (404 para ENOENT/EISDIR). Nenhuma regressão de segurança nova (A1 é anterior).
 - Consistência: `grep "<select"` só acha comentários no `kit.tsx`; todas as páginas usam `AppContent` ou `AreaPage`, exceto Contexto e Anotações (tela cheia com painel lateral, de propósito); nenhuma barra quebra linha a 1280 (todas com 32 px de altura e `scrollWidth == clientWidth`); StatStrip 6 → 1 linha a 1280 e a 1920.
 - `APP.md#Princípio central`: "Ideia" na fila do Painel abre a gaveta já no "Virar ideia" com o título pronto (um clique até um diálogo). O "Virar tarefa" cria direto, sem diálogo; aceitável por não ser ação de IA, mas veja M2.
+
+## Status das correções (agente de UI, 2026-10-08, sem commit)
+Verificação: `npm run typecheck` limpo, `npx tsx tools/intel/test-outlier.ts` ok (2 casos novos: `inPool` e curtidas só entre quem é base curtidas), prints a 1280 e 1920 px em `prints/revisao/`, M2 testado numa cópia (`HUB_ROOT`), servidores derrubados.
+
+| item | status | o que foi feito |
+|---|---|---|
+| A1 | corrigido antes | rota `/media` |
+| M1 | corrigido | `ContentsPanel.tsx` (Aposta): lista todo concorrente de `all`; sem post no filtro mostra 0 posts/sem, "sem posts no filtro" e o "Último" sobre a coleta inteira. PersonCare aparece com "há 6 sem" e alerta no período de 30 dias |
+| M2 | corrigido | `PanoramaBrechas.tsx`: `useGapTask` lê as tarefas (`useTasks`), acha o marcador `Tema da brecha: <id>` (ou o "(tema <id>," do Log antigo) e mostra "Ver T-NNNN" (link para o quadro) em vez de criar outra; "Criando…" com Spinner. Quadro por tipo: produto → produto, oferta → vendas, mensagem e público → conteudo. Testado na cópia: criou T-0016 em conteudo, após recarregar e no Panorama virou "Ver T-0016" |
+| M3 | corrigido | `components/ErrorBoundary.tsx` no `Layout` (chaveado pela rota; "Algo quebrou nesta tela", Recarregar, detalhes); `Comparar.tsx` com `Object.hasOwn` |
+| M4 | corrigido | `DataTable` ganhou `pin` (colunas fixas esquerda/direita) e `colsKey` (seletor "Colunas" no cabeçalho da 1ª coluna, escolha guardada). Conteúdos e ficha: miniatura e título fixos à esquerda; × perfil, × mercado, por seguidor e Status fixos à direita; Coment. e Envios escondidos por padrão. Anúncios: Status e Dias no ar fixos, Variações escondida. A tabela sem `fill` (ficha) agora rola dentro de uma caixa com altura máxima, então a barra horizontal fica à vista |
+| M5 | corrigido | `--muted-foreground` de #71717a para #686872 (4,84:1 sobre `--muted`, 5,5:1 sobre branco) em `index.css`; vale para cabeçalhos, "SEM MERCADO" e chips |
+| M6 | corrigido | tokens `--success-ink` (#166534) e `--warning-ink` (#b45309) em `index.css`; `text-success`/`text-warning` de texto trocados nas telas de concorrentes e na ficha (selo "Novo", "você tem", toggle, "Criada") |
+| M7 | corrigido | `ContentsView.tsx`: `passes(r, v, needle, skip)` único; contagem de Rede, Formato e Concorrente respeita período, status, busca, favoritos e os outros selects; opção com 0 fica `disabled` (a selecionada não) |
+| B1 | corrigido | aba Anúncios na ficha (pedido do Oliver, ver Log da 038) |
+| B2 | corrigido | faixa da ficha agora é o `StatStrip` com ícones |
+| B3 | corrigido, menos Ideas | ↻ ⚠ ✓ ✗ × ▲ ▼ ↑ ↓ ↗ e emoji trocados por Lucide em Anúncios, ficha, Coletas, Lista, `SortTable`, `Delta`. Fica `Ideas.tsx:90` (outro agente) e símbolos de fora do escopo (toast, AddLinksModal, Mockups, Settings) |
+| B4 | corrigido | `withMarketOutlier`: curtidas só entram na mediana de quem está na base curtidas (nunca com reels). Separar também por formato não é possível no recuo (o recuo existe porque o formato não tem amostra) |
+| B5 | corrigido | `withMarketOutlier(..., inPool)`; `market.ts` só deixa `kind` concorrente formar o mercado (as outras linhas recebem a medida, mas não mexem na mediana) |
+| B6 | corrigido | tooltip diz o motivo real: "só N conteúdos", "só N concorrentes" ou os dois (`mercadoFormatoAmostra` e `mercadoFormatoConcorrentes` na linha) |
+| B7 | corrigido | `useMakeIdea.ts`: "sem mercado: menos de 3 concorrentes na rede X" e "sem seguidores coletados" |
+| B8 | corrigido | eixo Y sem o tique do 2×: o 1× aparece (visto a 1280 e 1920) |
+| B9 | corrigido | rótulos do mapa escolhidos do maior para o menor, descartando o que cai perto de outro; em "Tudo" sobram os não sobrepostos |
+| B10 | corrigido | "Criando…" com Spinner |
+| B11 | corrigido | Anúncios: "Sem anúncios na biblioteca" (cinza, ícone de info) separado de "Coleta com erro" (âmbar, ícone de alerta); a separação usa a mensagem "nenhuma página de anunciante" |
+| B12 | não corrigido | Ideias é de outro agente (`Ideas.tsx`); o padrão da vista da Lista vir do `localStorage` não foi pedido |
+
+Sobrou, sem decisão: as contagens dos selects de Anúncios (concorrente, rede, formato) ainda ignoram os outros filtros (mesmo defeito do M7, só nessa tela).

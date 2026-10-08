@@ -1,7 +1,7 @@
 // Área Concorrentes: cabeçalho com as abas (cada uma com rota própria) e os dados de mercado juntos por concorrente
 // (cadastro + resumo das coletas + visão da análise + resultados completos), para Panorama, Lista, Comparar e Redes.
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp, Clapperboard, Columns3, LayoutDashboard, List, Megaphone, Plus, RefreshCw, Share2, Target, type LucideIcon } from 'lucide-react';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import { api, type AnalysisFull, type AnalysisOverview, type Competitor, type CompetitorSummary, type Doc, type Referencia } from '../../api';
 import { useAnalysisAll, useAnalysisOverview, useCompetitors, useCompetitorsSummary, useReferencia } from '../../queries';
@@ -143,7 +143,7 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fil
             <th key={c.k} title={c.title} onClick={() => c.v && setSort((s) => ({ k: c.k, dir: s.k === c.k ? (s.dir === 1 ? -1 : 1) : c.num ? -1 : 1 }))}
               className={cx('px-3 py-2 font-medium text-xs text-muted-foreground whitespace-nowrap select-none', c.num ? 'text-right' : 'text-left', c.v && 'cursor-pointer hover:text-foreground',
                 fill && 'sticky top-0 z-10 bg-muted shadow-[inset_0_-1px_0_var(--border)]')}>
-              {c.label}{sort.k === c.k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
+              <span className="inline-flex items-center gap-1">{c.label}{sort.k === c.k && (sort.dir === 1 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />)}</span>
             </th>
           ))}</tr>
         </thead>
@@ -204,4 +204,4 @@ export function StatStrip({ items }: { items: Stat[] }) {
 
 /** Δ com seta e cor */
 export const Delta = ({ n, fmt }: { n?: number; fmt: (n: number) => string }) =>
-  n ? <span className={cx('text-xs tabular-nums', n > 0 ? 'text-success' : 'text-destructive')}>{n > 0 ? '▲' : '▼'}{fmt(Math.abs(n))}</span> : null;
+  n ? <span className={cx('inline-flex items-center text-xs tabular-nums', n > 0 ? 'text-success-ink' : 'text-destructive')}>{n > 0 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />}{fmt(Math.abs(n))}</span> : null;

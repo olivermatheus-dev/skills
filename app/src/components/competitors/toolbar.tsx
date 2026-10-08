@@ -2,9 +2,10 @@
 // e estado de filtros/vista na URL. A barra nunca quebra de linha: o que não cabe vai para o botão "Filtros" (popover).
 import { useCallback, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowDown, ArrowUp, LayoutGrid, ListFilter, Search, Star, Table as TableIcon, X, type LucideIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp, Columns3, LayoutGrid, ListFilter, Search, Star, Table as TableIcon, X, type LucideIcon } from 'lucide-react';
 import { cx } from '../kit';
 import { useFillHeight } from '../fill';
+import { Checkbox } from '../ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
@@ -83,7 +84,7 @@ export function FlagToggle({ on, onChange, icon: Icon, label, title, tone = 'suc
     <Tip content={title}>
       <button type="button" aria-pressed={on} onClick={() => onChange(!on)}
         className={cx('h-7 shrink-0 inline-flex items-center gap-1.5 rounded-md border px-2 text-xs transition whitespace-nowrap',
-          on ? (tone === 'amber' ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-success/40 bg-success/10 text-success') : 'border-border bg-card text-muted-foreground hover:text-foreground hover:bg-muted/50')}>
+          on ? (tone === 'amber' ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-success/40 bg-success/10 text-success-ink') : 'border-border bg-card text-muted-foreground hover:text-foreground hover:bg-muted/50')}>
         <Icon className="size-3.5" />{label}
       </button>
     </Tip>
@@ -171,33 +172,71 @@ export function parseSort(ordem: string, asc: string): SortState { return { k: o
 export interface Col<T> {
   k: string; label: ReactNode; title?: string; num?: boolean; /** chave em SortDef: sem isso a coluna não ordena */ sort?: string; /** 1º clique ordena do maior para o menor (datas, ranks); números já fazem isso */ desc?: boolean; width?: string;
   render: (r: T) => ReactNode; className?: string;
+  /** fica à vista ao rolar na horizontal (precisa de `width` em px; sem ele usa 96px) */
+  pin?: 'left' | 'right';
+  /** coluna secundária: entra no seletor "Colunas" (só com `colsKey`); `off` = começa escondida */
+  optional?: boolean; off?: boolean;
+}
+
+const colPx = (c: { width?: string }) => (c.width && c.width.endsWith('px') ? parseFloat(c.width) : 96);
+
+/** colunas escondidas, guardadas por tabela (localStorage; falha em silêncio) */
+function useHiddenCols<T>(key: string | undefined, cols: Col<T>[]) {
+  const initial = () => {
+    if (!key) return new Set<string>();
+    try { const raw = localStorage.getItem(`hub.cols.${key}`); if (raw) return new Set<string>(JSON.parse(raw) as string[]); } catch { /* sem storage */ }
+    return new Set(cols.filter((c) => c.off).map((c) => c.k));
+  };
+  const [hidden, setHidden] = useState<Set<string>>(initial);
+  const toggle = (k: string) => setHidden((h) => {
+    const n = new Set(h); if (n.has(k)) n.delete(k); else n.add(k);
+    try { if (key) localStorage.setItem(`hub.cols.${key}`, JSON.stringify([...n])); } catch { /* sem storage */ }
+    return n;
+  });
+  return [hidden, toggle] as const;
 }
 
 /**
- * Tabela de dados: cabeçalho clicável com seta (a ordenação é do chamador, controlada), cabeçalho fixo e rolagem dentro da
- * caixa (`fill` = ocupa o resto da tela), linha clicável.
+ * Tabela de dados: cabeçalho clicável com ícone de seta (a ordenação é do chamador, controlada), cabeçalho fixo e rolagem dentro da
+ * caixa (`fill` = ocupa o resto da tela), linha clicável. Colunas com `pin` ficam fixas à esquerda/direita ao rolar na horizontal
+ * (as medidas e o status nunca somem); `colsKey` liga o seletor "Colunas" no cabeçalho da primeira coluna.
  */
-export function DataTable<T>({ rows, cols, rowKey, sort, onSort, onRowClick, fill, rowClass }: {
+export function DataTable<T>({ rows, cols: allCols, rowKey, sort, onSort, onRowClick, fill, rowClass, colsKey }: {
   rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; sort: SortState; onSort: (k: string, dir: 1 | -1) => void; onRowClick?: (r: T) => void; fill?: boolean; rowClass?: (r: T) => string | undefined;
+  colsKey?: string;
 }) {
   const [ref, h] = useFillHeight();
+  const [hidden, toggleCol] = useHiddenCols(colsKey, allCols);
+  const cols = allCols.filter((c) => !(colsKey && c.optional && hidden.has(c.k)));
+  const optional = allCols.filter((c) => c.optional);
+  // deslocamento de cada coluna fixa = soma das larguras das fixas que vêm antes (esquerda) ou depois (direita)
+  const pinStyle = new Map<string, React.CSSProperties>();
+  let acc = 0;
+  for (const c of cols) if (c.pin === 'left') { pinStyle.set(c.k, { position: 'sticky', left: acc }); acc += colPx(c); }
+  acc = 0;
+  for (const c of [...cols].reverse()) if (c.pin === 'right') { pinStyle.set(c.k, { position: 'sticky', right: acc }); acc += colPx(c); }
+  const lastLeft = [...cols].reverse().find((c) => c.pin === 'left')?.k, firstRight = cols.find((c) => c.pin === 'right')?.k;
+  const edge = (k: string) => (k === lastLeft ? 'shadow-[inset_-1px_0_0_var(--border)]' : k === firstRight ? 'shadow-[inset_1px_0_0_var(--border)]' : '');
   const click = (c: Col<T>, isText: boolean) => {
     if (!c.sort) return;
     onSort(c.sort, sort.k === c.sort ? (sort.dir === 1 ? -1 : 1) : isText ? 1 : -1);
   };
   return (
-    <div ref={fill ? ref : undefined} style={fill ? { height: h } : undefined} className={cx('bg-card border border-border rounded-xl overflow-auto', !fill && 'max-w-full')}>
+    <div ref={fill ? ref : undefined} style={fill ? { height: h } : undefined} className={cx('bg-card border border-border rounded-xl overflow-auto', !fill && 'max-w-full max-h-[calc(100vh-14rem)]')}>
       <table className="w-full text-sm border-separate border-spacing-0">
         <thead>
-          <tr>{cols.map((c) => {
+          <tr>{cols.map((c, i) => {
             const on = !!c.sort && sort.k === c.sort;
+            const pinned = pinStyle.has(c.k);
             return (
-              <th key={c.k} title={c.title} aria-sort={on ? (sort.dir === 1 ? 'ascending' : 'descending') : undefined} style={c.width ? { width: c.width, minWidth: c.width } : undefined}
+              <th key={c.k} title={c.title} aria-sort={on ? (sort.dir === 1 ? 'ascending' : 'descending') : undefined} style={{ ...(c.width ? { width: c.width, minWidth: c.width } : null), ...pinStyle.get(c.k) }}
                 onClick={() => click(c, !c.num && !c.desc)}
-                className={cx('sticky top-0 z-10 bg-muted px-2 py-2 font-medium text-xs whitespace-nowrap select-none border-b border-border', c.num ? 'text-right' : 'text-left',
+                className={cx('sticky top-0 bg-muted px-2 py-2 font-medium text-xs whitespace-nowrap select-none border-b border-border', pinned ? 'z-20' : 'z-10', edge(c.k), c.num ? 'text-right' : 'text-left',
                   c.sort ? 'cursor-pointer hover:text-foreground' : '', on ? 'text-foreground' : 'text-muted-foreground')}>
                 <span className={cx('inline-flex items-center gap-1', c.num && 'flex-row-reverse')}>
-                  {c.label}
+                  {i === 0 && colsKey && optional.length > 0
+                    ? <ColumnsPicker cols={optional} hidden={hidden} onToggle={toggleCol} />
+                    : c.label}
                   {c.sort && <span className="inline-flex items-center justify-center w-3 h-3">{on && (sort.dir === 1 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />)}</span>}
                 </span>
               </th>
@@ -207,11 +246,36 @@ export function DataTable<T>({ rows, cols, rowKey, sort, onSort, onRowClick, fil
         <tbody>
           {rows.map((r) => (
             <tr key={rowKey(r)} onClick={onRowClick ? () => onRowClick(r) : undefined} className={cx('group', onRowClick && 'cursor-pointer', 'hover:bg-muted/40', rowClass?.(r))}>
-              {cols.map((c) => <td key={c.k} className={cx('px-2 py-1.5 align-middle border-b border-border group-last:border-b-0', c.num && 'text-right tabular-nums whitespace-nowrap', c.className)}>{c.render(r)}</td>)}
+              {cols.map((c) => (
+                <td key={c.k} style={pinStyle.get(c.k)}
+                  className={cx('px-2 py-1.5 align-middle border-b border-border group-last:border-b-0', pinStyle.has(c.k) && 'z-[5] bg-card group-hover:bg-muted', edge(c.k), c.num && 'text-right tabular-nums whitespace-nowrap', c.className)}>{c.render(r)}</td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+  );
+}
+
+/** botão "Colunas" (dentro do cabeçalho da 1ª coluna): liga e desliga as colunas secundárias */
+function ColumnsPicker<T>({ cols, hidden, onToggle }: { cols: Col<T>[]; hidden: Set<string>; onToggle: (k: string) => void }) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <button type="button" onClick={(e) => e.stopPropagation()} title="Escolher colunas" aria-label="Escolher colunas"
+          className="h-6 w-6 grid place-items-center rounded-md text-muted-foreground hover:text-foreground hover:bg-card">
+          <Columns3 className="size-3.5" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-48 p-2 font-normal" onClick={(e) => e.stopPropagation()}>
+        <div className="px-1.5 pb-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wide">Colunas</div>
+        {cols.map((c) => (
+          <label key={c.k} className="flex items-center gap-2 rounded px-1.5 py-1 text-xs text-foreground hover:bg-muted cursor-pointer">
+            <Checkbox checked={!hidden.has(c.k)} onCheckedChange={() => onToggle(c.k)} />{c.label}
+          </label>
+        ))}
+      </PopoverContent>
+    </Popover>
   );
 }

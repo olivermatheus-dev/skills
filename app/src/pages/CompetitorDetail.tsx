@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type Doc, type ItemMark } from '../api';
 import type { ModuleDataOf } from '../../../schema/analysis';
 import { qk, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, useTags } from '../queries';
-import { ChevronRight, MapPin, RefreshCw, Star as StarIcon, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Clapperboard, ChevronRight, ExternalLink, Eye, Globe2, Lightbulb, Link2, MapPin, Plus, RefreshCw, Star as StarIcon, TriangleAlert, User, Users, X, Zap } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, cx, fmtNum } from '../components/kit';
@@ -16,8 +16,10 @@ import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
 import { ItemDrawer } from '../components/competitors/Items';
+import AdsView from '../components/competitors/AdsView';
 import ContentsView from '../components/competitors/ContentsView';
 import { useMarketRows } from '../components/competitors/market';
+import { StatStrip } from '../components/competitors/area';
 import { AppContent } from '../components/AppContent';
 import {
   Avatar, KINDS, KIND_COLOR, PlatformIcon, SERIES, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
@@ -28,8 +30,8 @@ const handleOf = (p: { platform: string; handle?: string; externalId?: string; u
   p.handle ? (p.platform === 'site' ? p.handle : `@${p.handle}`) : p.externalId ?? p.url.replace(/^https?:\/\/(www\.)?/, '');
 
 /** abas da ficha: as áreas da análise + Redes e conteúdos depois de Mensagem */
-const TABS = [...AREAS.slice(0, 4), { id: 'redes', label: 'Redes e conteúdos' } as const, ...AREAS.slice(4)];
-type TabId = AreaId | 'redes';
+const TABS = [...AREAS.slice(0, 4), { id: 'redes', label: 'Redes e conteúdos' } as const, ...AREAS.slice(4), { id: 'anuncios', label: 'Anúncios' } as const];
+type TabId = AreaId | 'redes' | 'anuncios';
 
 /** links do site que não são perfil de verdade (páginas de produto das redes, compartilhar, políticas) */
 const JUNK_LINK = /facebook\.com\/(business|sharer|policies|privacy|help|tr\b)|instagram\.com\/(p|reel|explore|accounts)\/|twitter\.com\/(intent|share)|x\.com\/(intent|share)|linkedin\.com\/(shareArticle|sharing)|youtube\.com\/(watch|embed)|wa\.me|api\.whatsapp/i;
@@ -102,7 +104,7 @@ function ListaConcorrentes({ slug, id }: { slug: string; id: string }) {
     return (
       <ContextSidebar.Item key={d.data.id} to={`/p/${slug}/concorrentes/${d.data.id}${aba ? `?aba=${aba}` : ''}`} active={d.data.id === id}
         icon={<Avatar name={d.data.name} size={18} local={l?.local} remote={l?.remote} className="!ring-0" />}
-        trailing={<span className="flex items-center gap-1">{l?.followers ? <span className="text-[10px] tabular-nums text-muted-foreground">{fmtNum(l.followers)}</span> : null}{d.data.favorite && <StarIcon className="size-3 fill-current text-warning" />}</span>}>{d.data.name}</ContextSidebar.Item>
+        trailing={<span className="flex items-center gap-1">{l?.followers ? <span className="text-[10px] tabular-nums text-muted-foreground">{fmtNum(l.followers)}</span> : null}{d.data.favorite && <StarIcon className="size-3 fill-current text-warning-ink" />}</span>}>{d.data.name}</ContextSidebar.Item>
     );
   };
   const grupos: [string, Doc<Competitor>[]][] = [
@@ -266,7 +268,7 @@ function Detalhe() {
         <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
           {atu && <Chip title={`${atu.countries.join(', ')} · ${atu.languages.join(', ')} · ${atu.currencies.join(', ')}\n${atu.evidence}`}><MapPin className="size-3 text-muted-foreground" />{atu.countries.length > 2 ? `${atu.countries.length} países` : atu.countries.join(', ') || '—'} · {atu.languages.join(', ')}</Chip>}
           {pre && <Chip onClick={() => setView('oferta')} title={pre.notes ?? undefined}>{pre.publicPrice && pre.fromMonthly != null ? <><b className="font-semibold">{money(pre.fromMonthly, pre.currency)}</b>/mês</> : 'preço oculto'} · {pre.model}{pre.trial ? ` · ${pre.trial.replace(/,? sem cartão/i, '').slice(0, 28)}` : ''}</Chip>}
-          {fTotalAll != null && <Chip onClick={() => setView('redes')} title="seguidores somados das redes puxadas">{fmtNum(fTotalAll)} seguidores{fDeltaAll ? <span className={fDeltaAll > 0 ? 'text-success' : 'text-destructive'}> {fDeltaAll > 0 ? '▲' : '▼'}{fmtNum(Math.abs(fDeltaAll))}</span> : null}</Chip>}
+          {fTotalAll != null && <Chip onClick={() => setView('redes')} title="seguidores somados das redes puxadas">{fmtNum(fTotalAll)} seguidores{fDeltaAll ? <span className={cx('ml-1 inline-flex items-center', fDeltaAll > 0 ? 'text-success-ink' : 'text-destructive')}>{fDeltaAll > 0 ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />}{fmtNum(Math.abs(fDeltaAll))}</span> : null}</Chip>}
           {rep && <Chip onClick={() => setView('reputacao')} title={rep.summary}>Reclame Aqui {rep.reclameAqui?.found ? <b className="font-semibold">{rep.reclameAqui.score?.toLocaleString('pt-BR') ?? '—'}</b> : '—'}{rep.stores.find((s) => s.rating != null) ? ` · app ★ ${rep.stores.find((s) => s.rating != null)!.rating}` : ''}</Chip>}
           <span className="inline-flex items-center gap-1.5 ml-1">
             {profiles.map((p) => {
@@ -296,7 +298,11 @@ function Detalhe() {
       </div></header>
 
       <div className="mx-auto w-full max-w-[1440px] px-8">
-        {view !== 'redes' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => setRunOpen(true)} />}
+        {view === 'anuncios' && <AdsView slug={slug} compId={id} shell={(actions, body) => <>
+          <div className="flex items-center justify-end gap-2 mb-3">{actions}</div>
+          {body}
+        </>} />}
+        {view !== 'redes' && view !== 'anuncios' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => setRunOpen(true)} />}
         {view === 'redes' && <>
 
         {/* perfis: os puxados como abas; os sem coleta só como ícone apagado */}
@@ -327,10 +333,10 @@ function Detalhe() {
 
         {sel && (
           <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-            <a href={sel.url} target="_blank" rel="noreferrer" className="text-primary-ink">{sel.url} ↗</a>
+            <a href={sel.url} target="_blank" rel="noreferrer" className="text-primary-ink"><span className="inline-flex items-center gap-1">{sel.url}<ExternalLink className="size-3" /></span></a>
             {sel.series?.latest && <span>via {sel.series.latest.data.source}</span>}
-            {sel.series?.latest?.data.profile.links.filter((l) => !siteLinks.includes(l)).map((l) => <a key={l} href={l} target="_blank" rel="noreferrer" className="hover:text-primary-ink">🔗 {l.replace(/^https?:\/\//, '')}</a>)}
-            {sel.series?.latest?.data.errors.map((e) => <span key={e} className="text-warning">⚠ {e}</span>)}
+            {sel.series?.latest?.data.profile.links.filter((l) => !siteLinks.includes(l)).map((l) => <a key={l} href={l} target="_blank" rel="noreferrer" className="hover:text-primary-ink"><Link2 className="size-3 inline mr-1" />{l.replace(/^https?:\/\//, '')}</a>)}
+            {sel.series?.latest?.data.errors.map((e) => <span key={e} className="inline-flex items-center gap-1 text-warning-ink"><TriangleAlert className="size-3.5" />{e}</span>)}
           </div>
         )}
 
@@ -340,14 +346,16 @@ function Detalhe() {
           const ideas = scopeRows.filter((r) => r.mark?.ideaId).length;
           const eng = median(scopeRows.map((r) => r.engagement).filter((v): v is number => v != null));
           return (
-            <div className="mt-4 flex flex-wrap items-stretch bg-card border border-border rounded-lg divide-x divide-border">
-              <Stat label={sel ? 'Seguidores' : 'Seguidores (soma)'} value={fmtNum(fTotal)} sub={fDelta ? <span className={fDelta > 0 ? 'text-success' : 'text-destructive'}>{fmtDelta(fDelta)}</span> : undefined} />
-              <Stat label="Conteúdos" value={fmtNum(scopeRows.length)} sub={types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ')} />
-              <Stat label="Mediana de views" value={fmtNum(medViews != null ? Math.round(medViews) : undefined)} />
-              {eng != null && <Stat label="Engajamento (mediana)" value={fmtPct(eng)} />}
-              <Stat label="≥3× o perfil" value={String(hot)} accent={hot > 0} />
-              <Stat label="≥3× o mercado" value={String(hotMkt)} accent={hotMkt > 0} />
-              {(marked > 0 || ideas > 0) && <Stat label="Marcados" value={String(marked)} sub={ideas ? `${ideas} viraram ideia` : undefined} />}
+            <div className="mt-4">
+              <StatStrip items={[
+                { icon: Users, label: sel ? 'Seguidores' : 'Seguidores (soma)', value: fmtNum(fTotal), sub: fDelta ? <span className={fDelta > 0 ? 'text-success-ink' : 'text-destructive'}>{fmtDelta(fDelta)}</span> : undefined },
+                { icon: Clapperboard, label: 'Conteúdos', value: fmtNum(scopeRows.length), sub: types.map((t) => `${scopeRows.filter((r) => r.item.type === t).length} ${TYPE_LABEL[t]?.toLowerCase()}`).join(' · ') },
+                { icon: Eye, label: 'Mediana de views', value: fmtNum(medViews != null ? Math.round(medViews) : undefined) },
+                ...(eng != null ? [{ icon: Zap, label: 'Engajamento (mediana)', value: fmtPct(eng) }] : []),
+                { icon: User, label: '≥3× o perfil', value: String(hot) },
+                { icon: Globe2, label: '≥3× o mercado', value: String(hotMkt) },
+                ...(marked > 0 || ideas > 0 ? [{ icon: Lightbulb, label: 'Marcados', value: String(marked), sub: ideas ? `${ideas} viraram ideia` : undefined }] : []),
+              ]} />
             </div>
           );
         })()}
@@ -366,7 +374,7 @@ function Detalhe() {
             <div className="flex flex-wrap gap-2">
               {missingLinks.map((l) => (
                 <button key={l} onClick={() => addLink(l)} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md border border-border hover:border-primary hover:text-primary-ink text-xs">
-                  + {l.replace(/^https?:\/\/(www\.)?/, '')}
+                  <Plus className="size-3" />{l.replace(/^https?:\/\/(www\.)?/, '')}
                 </button>
               ))}
             </div>
@@ -382,7 +390,7 @@ function Detalhe() {
           {c.profiles.length > 0 && !rows.length && (
             <Empty title={series.size ? "Nenhum conteúdo coletado" : "Ainda não puxado"}
               hint={series.size ? "Sites trazem só o perfil. Confira os avisos da última coleta." : "Clique em “Puxar agora” para trazer perfil, vídeos e métricas."}
-              action={!series.size ? <Button onClick={pull} disabled={pulling}>↻ Puxar agora</Button> : undefined} />
+              action={!series.size ? <Button onClick={pull} disabled={pulling} className="inline-flex items-center gap-1.5"><RefreshCw className="size-3.5" />Puxar agora</Button> : undefined} />
           )}
           {sel && rows.length > 0 && !scopeRows.length && sel.platform === "site" && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
           {scopeRows.length > 0 && (
@@ -407,14 +415,3 @@ function Detalhe() {
   );
 }
 
-function Stat({ label, value, sub, accent }: { label: string; value: string; sub?: React.ReactNode; accent?: boolean }) {
-  return (
-    <div className="px-4 py-2 min-w-0">
-      <div className="text-[11px] text-muted-foreground">{label}</div>
-      <div className="flex items-baseline gap-1.5">
-        <span className={cx('text-lg font-semibold tabular-nums', accent && 'text-warning')}>{value}</span>
-        {sub && <span className="text-xs text-muted-foreground truncate">{sub}</span>}
-      </div>
-    </div>
-  );
-}

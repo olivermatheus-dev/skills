@@ -41,5 +41,6 @@
 | 040 | **Análise profunda de conteúdos e anúncios:** por concorrente/rede (top 20) ou seleção na aba (top 10, só os não analisados; reanalisar é opção à parte), transcrição barata, Opus analisa (tipo, tema, gancho, gatilhos dos 5 s…), tudo salvo por item, relatório dentro do concorrente, painel do item editável | desenho (Opus) → aval |
 | 041 | **Fontes e referências:** cadastro (nome, link, tipo…) que a IA usa para pesquisar ideias e temas com subagentes por fonte | desenho (Opus) → aval |
 | 038 | **Lista de concorrentes:** barra numa linha (tabs viram selects, mais compacta) · erro "Failed to fetch" acima da tabela | em execução (Opus UX + correção) |
+| 038 | **Aba Anúncios na ficha do concorrente** (aprovada pelo Oliver em 2026-10-08) | em execução, junto das correções da revisão |
 | — | **Polimento visual geral do app** ("o app como um todo precisa de ajustes"): ir juntando aqui os pontos que o Oliver apontar, tela a tela | acumular; vira tarefa quando houver lista |
 | 038 | **Concorrentes → Conteúdos:** dashboard estratégico, projetado antes por um agente de marketing | C1 (estrategista) → aval → C2 |

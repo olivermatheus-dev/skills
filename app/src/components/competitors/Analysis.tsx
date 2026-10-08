@@ -182,7 +182,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
                 <input type="checkbox" checked={sel.has(m.id)} disabled={blocked} onChange={() => toggle(m.id)} />
                 <span className="font-medium">{m.label}</span>
                 <span className="text-[10px] px-1.5 rounded-full font-medium" style={{ background: `${ENGINE[m.engine].color}18`, color: ENGINE[m.engine].color }} title={ENGINE[m.engine].title}>{ENGINE[m.engine].label}</span>
-                <span className={cx('ml-auto text-xs', r && !stale ? 'text-muted-foreground' : m.id === 'redes' ? 'text-muted-foreground' : 'text-warning')}>
+                <span className={cx('ml-auto text-xs', r && !stale ? 'text-muted-foreground' : m.id === 'redes' ? 'text-muted-foreground' : 'text-warning-ink')}>
                   {d?.request?.modules.includes(m.id) ? <span className="text-violet-600">na fila</span> : r ? `${timeAgo(r.updatedAt)}${stale ? ' (velho)' : ''}` : m.id === 'redes' ? 'perfis e conteúdos' : 'nunca'}
                 </span>
               </label>
@@ -193,7 +193,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
           <Textarea rows={2} value={instr} onChange={(e) => setInstr(e.target.value)} placeholder="Instruções para a IA (opcional). Ex.: compare o preço com o nosso plano…" className="text-sm" />
           <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={force} onChange={(e) => setForce(e.target.checked)} /> refazer mesmo o que já existe</label>
         </>}
-        {sel.has('site') && !hasSite && <div className="text-xs text-warning">Sem site cadastrado: marque “Perfis e redes” (a IA acha o site) ou cole o link em Editar.</div>}
+        {sel.has('site') && !hasSite && <div className="text-xs text-warning-ink">Sem site cadastrado: marque “Perfis e redes” (a IA acha o site) ou cole o link em Editar.</div>}
         <ErrorBox error={err} />
         <div className="flex items-center gap-2 justify-end">
           <span className="text-xs text-muted-foreground mr-auto">{sel.size} selecionado(s){iaSel.length ? ` · ${iaSel.length} na IA` : ''}</span>
@@ -441,7 +441,7 @@ function Site({ d }: { d: ModuleDataOf<'site'> }) {
       <L label={`Páginas baixadas (${d.pages.length})`}>
         {d.pages.map((p) => <div key={p.url} className="text-[13px] flex gap-2"><Badge>{p.kind}</Badge><a href={p.url} target="_blank" rel="noreferrer" className="truncate hover:text-primary-ink">{p.title || p.url}</a><span className="text-xs text-muted-foreground ml-auto shrink-0">{(p.chars / 1000).toFixed(1)}k</span></div>)}
       </L>
-      {d.errors.length > 0 && <L label="Avisos"><List xs={d.errors} className="text-warning text-xs" /></L>}
+      {d.errors.length > 0 && <L label="Avisos"><List xs={d.errors} className="text-warning-ink text-xs" /></L>}
     </div>
     <div>
       <L label={`Sitemap básico · ${d.sitemap.total} URLs (${d.sitemap.source})`}>

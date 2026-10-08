@@ -54,7 +54,7 @@ export function FollowerMini({ s }: { s: FollowerSeries }) {
       <div className="flex items-baseline gap-2 mt-1">
         <span className="text-xl font-semibold tabular-nums">{fmtNum(h?.v ?? last.v)}</span>
         {h ? <span className="text-xs text-muted-foreground">em {shortDate(h.at)}</span>
-          : delta != null && delta !== 0 && <span className={delta > 0 ? 'text-xs text-success' : 'text-xs text-destructive'}>{fmtDelta(delta)} desde {shortDate(first.at)}</span>}
+          : delta != null && delta !== 0 && <span className={delta > 0 ? 'text-xs text-success-ink' : 'text-xs text-destructive'}>{fmtDelta(delta)} desde {shortDate(first.at)}</span>}
       </div>
       <div ref={ref} className="relative mt-1">
         {w > 0 && (

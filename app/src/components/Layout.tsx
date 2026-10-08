@@ -8,6 +8,7 @@ import { preloadMarkdownEditor } from './Markdown';
 import { Select } from './kit';
 import { cn } from '@/lib/utils';
 import { AppContent } from './AppContent';
+import ErrorBoundary from './ErrorBoundary';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useCorDoProjeto } from '@/lib/theme';
 
@@ -98,7 +99,8 @@ export default function Layout({ children }: { children?: ReactNode }) {
           )}
         </aside>
         <main className="flex-1 min-w-0 overflow-y-auto">
-          <Suspense fallback={<PageSkeleton />}>{children ?? <Outlet />}</Suspense>
+          {/* key = rota: sair de uma tela quebrada e entrar em outra limpa o aviso */}
+          <ErrorBoundary key={pathname}><Suspense fallback={<PageSkeleton />}>{children ?? <Outlet />}</Suspense></ErrorBoundary>
         </main>
       </div>
     </TooltipProvider>

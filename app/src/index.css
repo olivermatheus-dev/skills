@@ -26,12 +26,14 @@
   --secondary: #f0f0f2;
   --secondary-foreground: #18181b;
   --muted: #f0f0f2;
-  --muted-foreground: #71717a;
+  --muted-foreground: #686872; /* >= 4,5:1 sobre --muted e branco */
   --accent: color-mix(in oklab, var(--primary) 7%, white);
   --accent-foreground: var(--primary-ink);
   --destructive: #dc2626;
   --success: #16a34a;
+  --success-ink: #166534; /* texto verde pequeno: >= 4,5:1 sobre branco e sobre success/15 */
   --warning: #d97706;
+  --warning-ink: #b45309; /* texto âmbar pequeno: 5:1 sobre branco */
   --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: var(--primary);
@@ -67,7 +69,9 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-success: var(--success);
+  --color-success-ink: var(--success-ink);
   --color-warning: var(--warning);
+  --color-warning-ink: var(--warning-ink);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
