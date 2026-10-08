@@ -15,6 +15,9 @@ export const qk = {
   ideas: (slug: string) => ['ideas', slug] as const,
   sources: (slug: string) => ['sources', slug] as const,
   strategyRefs: (slug: string) => ['strategy-refs', slug] as const,
+  refs: (slug: string) => ['refs', slug] as const,
+  pesquisas: (slug: string) => ['pesquisas', slug] as const,
+  pesquisa: (slug: string, rodada: string) => ['pesquisa', slug, rodada] as const,
   competitors: (slug: string) => ['competitors', slug] as const,
   competitor: (slug: string, id: string) => ['competitor', slug, id] as const,
   competitorsSummary: (slug: string) => ['competitors-summary', slug] as const,
@@ -39,6 +42,10 @@ export const qk = {
 };
 
 // ---------- consultas ----------
+/** pesquisa de ideias: confere a cada 3 s enquanto roda, e a cada 2 s no 1º minuto e meio depois do pedido (o Claude Code leva um instante para abrir) */
+const pesquisaViva = (rodadas?: { estado: string; req: { requestedAt: string } }[]) =>
+  (rodadas?.some((r) => r.estado === 'rodando') ? 3000 : rodadas?.some((r) => r.estado === 'pendente' && Date.now() - Date.parse(r.req.requestedAt) < 90_000) ? 2000 : false);
+
 export const q = {
   projects: () => queryOptions({ queryKey: qk.projects(), queryFn: api.projects }),
   project: (slug: string) => queryOptions({ queryKey: qk.project(slug), queryFn: () => api.project(slug), enabled: !!slug }),
@@ -49,6 +56,10 @@ export const q = {
   ideas: (slug: string) => queryOptions({ queryKey: qk.ideas(slug), queryFn: () => api.ideas(slug), enabled: !!slug }),
   sources: (slug: string) => queryOptions({ queryKey: qk.sources(slug), queryFn: () => api.sources(slug), enabled: !!slug }),
   strategyRefs: (slug: string) => queryOptions({ queryKey: qk.strategyRefs(slug), queryFn: () => api.strategyRefs(slug), enabled: !!slug, staleTime: 5 * 60_000 }),
+  refs: (slug: string) => queryOptions({ queryKey: qk.refs(slug), queryFn: () => api.refs(slug), enabled: !!slug }),
+  // enquanto a IA pesquisa, confere a cada 3 s (o painel de progresso e o aviso de fim leem daqui)
+  pesquisas: (slug: string) => queryOptions({ queryKey: qk.pesquisas(slug), queryFn: () => api.pesquisas(slug), enabled: !!slug, refetchInterval: (qr) => pesquisaViva(qr.state.data?.rodadas) }),
+  pesquisa: (slug: string, rodada: string) => queryOptions({ queryKey: qk.pesquisa(slug, rodada), queryFn: () => api.pesquisa(slug, rodada), enabled: !!slug && !!rodada, refetchInterval: (qr) => pesquisaViva(qr.state.data ? [qr.state.data.linha] : undefined) }),
   competitors: (slug: string) => queryOptions({ queryKey: qk.competitors(slug), queryFn: () => api.competitors(slug), enabled: !!slug }),
   // recém-criado (otimista): espera a criação e usa o id real
   competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: async () => api.competitor(slug, await realId('competitor', slug, id)), enabled: !!slug && !!id }),
@@ -86,6 +97,9 @@ export const useNotes = (slug: string) => useQuery(q.notes(slug));
 export const useIdeas = (slug: string) => useQuery(q.ideas(slug));
 export const useSources = (slug: string) => useQuery(q.sources(slug));
 export const useStrategyRefs = (slug: string) => useQuery(q.strategyRefs(slug));
+export const useRefs = (slug: string) => useQuery(q.refs(slug));
+export const usePesquisas = (slug: string) => useQuery(q.pesquisas(slug));
+export const usePesquisa = (slug: string, rodada: string) => useQuery(q.pesquisa(slug, rodada));
 export const useCompetitors = (slug: string) => useQuery(q.competitors(slug));
 export const useCompetitor = (slug: string, id: string) => useQuery(q.competitor(slug, id));
 export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSummary(slug));
@@ -114,7 +128,7 @@ const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> =
   '': (s) => [q.project(s), q.tasks(s), q.notes(s), q.ideas(s), q.competitors(s)],
   quadro: (s) => [q.tasks(s)],
   concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s), q.analysisOverview(s), q.analysisAll(s)],
-  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s), q.sources(s)],
+  ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s), q.sources(s), q.refs(s), q.pesquisas(s)],
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],
   contexto: (s) => [q.contextList(s), q.project(s), q.tags(s)],

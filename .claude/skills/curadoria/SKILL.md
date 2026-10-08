@@ -22,6 +22,8 @@ Tarefa 041 (1ª peça da 029). **Tudo sob comando**, nada agendado. Fonte = onde
 | 4 | **Síntese e ranking**: escolhe as N ideias, nota 0–10, ficha de pauta | **você (Opus)**, lendo só os verificados | `sintese.json` (formato abaixo) |
 | 5 | **Gravar**: referências, ideias (`status: nova`), `resultado.json`, `lastUsedAt` das fontes | script | `npm run curadoria -- gravar <slug> <id>` → depois `npm run validate` |
 
+**Rodada pedida pelo app** (Ideias → Pesquisar ideias): o `pedido.json` já existe (mesma função do `pedir`, `tools/curadoria/pedido.ts`) e, para série ou pilar, **sem `consultas.json`**. O heartbeat (`--pesquisa <rodada>`) ou o terminal te dá só o id: leia o pedido, defina as consultas com `npm run curadoria -- consultas <slug> <id> --pt "a; b" --en "c; d" --termos "x; y"` e siga do passo 1. O app acompanha pelos arquivos da rodada (consultas, brutos, candidatos, achados, verificados, sintese, resultado): grave cada um assim que o passo acabar. Respeite `depth` (rapida = sem subagente Sonnet), `maxIdeas`, `languages` e `instructions` do pedido; avisos de fonte não aceita estão em `instructions`.
+
 Outros: `buscar <slug> <id> --fontes a,b` (refaz só essas fontes e junta), `triar <slug> <id> --anexar doi1,doi2` (põe itens escolhidos a dedo nos candidatos sem renumerar), `status <slug>`.
 
 **Padrões aprovados pelo Oliver (041, F0):** 8 ideias · estudos de até 24 meses · notícias de até 60 dias · estudos em inglês aceitos com **prioridade para os brasileiros** · aviso se a rodada passar de **US$ 3**. Sem fonte aceita (`ativa`), use `pedir … --sugeridas` (sugeridas conferidas de confiança 3) e registre isso nas notas.

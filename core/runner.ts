@@ -6,12 +6,13 @@ import { join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { listTasks, commentTask, ValidationError, ROOT } from './store';
 import { fechar } from '../tools/lib/fichas-fila.mjs';
+import * as PQ from '../tools/lib/pesquisa.mjs';
 
 const LOCK = join(ROOT, 'logs/heartbeat/.lock');
 const isAi = (a: string) => a === 'ai' || a.startsWith('agent:');
 
-/** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); sem kind = tarefa do quadro */
-export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' }
+/** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); `'pesquisa'` = rodada de pesquisa de ideias da 041 (`round`); sem kind = tarefa do quadro */
+export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' | 'pesquisa'; round?: string }
 
 // App aberto de dentro de outra sessão do Claude (desktop, preview): as variáveis dela confundem o claude filho.
 const cleanEnv = () => (process.env.CLAUDE_CODE_ENTRYPOINT || process.env.CLAUDECODE
@@ -91,6 +92,7 @@ export function stopAi(slug: string) {
   else { try { process.kill(-l.pid, 'SIGTERM'); } catch { try { process.kill(l.pid, 'SIGTERM'); } catch { /* já saiu */ } } }
   rmSync(LOCK, { force: true });
   if (l.kind === 'fichas' && l.slug) fechar(l.slug, { parado: true, inicio: l.started }); // o que já foi salvo sai da fila; o resto volta a pendente
+  if (l.kind === 'pesquisa' && l.slug && l.round) PQ.fechar(l.slug, l.round, { parado: true, inicio: l.started }); // a rodada volta a pendente (dá para rodar de novo)
   if (l.task && l.slug === slug) {
     const t = listTasks(slug).find((x) => x.data.id === l.task);
     if (t?.data.status === 'doing') commentTask(slug, l.task, { text: 'Execução parada pelo Oliver no app; voltou para "A fazer".', who: 'oliver', status: 'todo' });
@@ -105,6 +107,20 @@ export function runFichas(slug: string) {
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
   spawn(process.execPath, ['tools/heartbeat.mjs', '--run', '--slug', slug, '--fichas'], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
   return { started: true };
+}
+
+/** Pesquisa de ideias (041 F3): o mesmo heartbeat, em segundo plano, com `--pesquisa <rodada>` (um `claude -p` para a rodada inteira). */
+export function runPesquisa(slug: string, round: string, mode: 'background' | 'terminal' = 'background') {
+  if (mode === 'terminal') {
+    // janela interativa: o Oliver acompanha; o pedido fica "rodando" até o resultado.json aparecer (o app confere pelos arquivos)
+    openTerminal(PQ.promptPesquisa(slug, round, { interativo: true }));
+    return { started: true, mode };
+  }
+  const l = readLock();
+  if (l) throw new ValidationError('heartbeat', [l.kind === 'pesquisa' ? 'a pesquisa de ideias já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : l.title ? ` com ${l.title}` : ''}; o pedido ficou gravado: rode quando ela terminar`]);
+  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
+  spawn(process.execPath, ['tools/heartbeat.mjs', '--run', '--slug', slug, '--pesquisa', round], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true, env: cleanEnv() }).unref();
+  return { started: true, mode };
 }
 
 export function openTerminal(prompt: string) {

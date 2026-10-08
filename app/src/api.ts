@@ -31,7 +31,7 @@ export type { PieceCover } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
-  kind: 'fichas' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
+  kind: 'fichas' | 'pesquisa' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
 }
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
@@ -75,8 +75,10 @@ import type { Gaps, GapTheme } from '../../schema/gaps';
 export type { Gaps, GapTheme };
 import type { Referencia } from '../../schema/referencia';
 export type { Referencia };
-import type { CuratedSource as Source, SourceSuggestion } from '../../schema/curadoria';
-export type { Source, SourceSuggestion };
+import type { CuratedSource as Source, SourceSuggestion, SourceRef, ResearchRequest, ResearchResult } from '../../schema/curadoria';
+export type { Source, SourceSuggestion, SourceRef, ResearchRequest, ResearchResult };
+import type { PesquisasStatus, RodadaView, RodadaLinha, Progresso, FonteProg, EtapaProg, Estimativa, PesquisaBody, UltimoPesquisa } from '../../core/pesquisas';
+export type { PesquisasStatus, RodadaView, RodadaLinha, Progresso, FonteProg, EtapaProg, Estimativa, PesquisaBody, UltimoPesquisa };
 export interface StrategyRefs { pillars: { n: number; name: string }[]; series: { n: number; name: string; pillars: number[] }[] }
 export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
 export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; snapshotsTotal: number; marks: Record<string, ItemMark> }
@@ -152,6 +154,13 @@ export const api = {
   setSourcesStatus: (slug: string, ids: string[], status: Source['status']) => req<Source[]>('POST', `${pj(slug)}/sources-status`, { ids, status }),
   suggestSource: (slug: string, url: string) => req<SourceSuggestion>('POST', `${pj(slug)}/sources-suggest`, { url }),
   strategyRefs: (slug: string) => req<StrategyRefs>('GET', `${pj(slug)}/strategy-refs`),
+  // pesquisar ideias (041 F3)
+  refs: (slug: string) => req<SourceRef[]>('GET', `${pj(slug)}/refs`),
+  pesquisas: (slug: string) => req<PesquisasStatus>('GET', `${pj(slug)}/pesquisas`),
+  pesquisa: (slug: string, rodada: string) => req<RodadaView>('GET', `${pj(slug)}/pesquisas/${encodeURIComponent(rodada)}`),
+  pedirPesquisa: (slug: string, b: PesquisaBody) => req<{ round: string; rodando: boolean; aviso: string | null; modo: string }>('POST', `${pj(slug)}/pesquisas`, b),
+  rodarPesquisa: (slug: string, rodada: string, modo: 'background' | 'terminal' = 'background') => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/pesquisas/${encodeURIComponent(rodada)}/rodar`, { modo }),
+  pararPesquisa: (slug: string) => req<{ stopped: boolean }>('POST', `${pj(slug)}/pesquisas-parar`),
 
   contextList: (slug: string) => req<{ name: string; file: string }[]>('GET', `${pj(slug)}/context`),
   context: (slug: string, name: string) => req<{ name: string; text: string }>('GET', `${pj(slug)}/context/${encodeURIComponent(name)}`),

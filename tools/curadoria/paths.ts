@@ -4,8 +4,10 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { P } from '../../schema';
 
-export const roundDir = (slug: string, round: string) => join(P.curadoria(slug), 'rodadas', round);
-export const workDir = (slug: string, round: string) => join('data', 'curadoria', slug, round);
+// Caminhos absolutos a partir da raiz do hub (HUB_ROOT quando o app roda numa cópia; senão a pasta atual), como o core/store.ts.
+const ROOT = process.env.HUB_ROOT ?? process.cwd();
+export const roundDir = (slug: string, round: string) => join(ROOT, P.curadoria(slug), 'rodadas', round);
+export const workDir = (slug: string, round: string) => join(ROOT, 'data', 'curadoria', slug, round);
 export const work = (slug: string, round: string, f: string) => join(workDir(slug, round), f);
 
 export function readJsonFile<T>(file: string): T {

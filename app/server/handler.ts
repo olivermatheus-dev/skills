@@ -68,6 +68,14 @@ on('PUT', '/api/projects/:slug/sources/:id', (p, b) => { slugOk(p); return S.sav
 on('POST', '/api/projects/:slug/sources-status', (p, b) => { slugOk(p); return S.setSourcesStatus(p.slug, Array.isArray(b?.ids) ? b.ids.map(String) : [], b?.status); });
 on('POST', '/api/projects/:slug/sources-suggest', async (p, b) => { slugOk(p); return (await import('../../core/curadoria')).suggestSource(p.slug, String(b?.url ?? '')); });
 on('GET', '/api/projects/:slug/strategy-refs', (p) => { slugOk(p); return S.strategyRefs(p.slug); });
+// Pesquisar ideias (041 F3): rodadas (aba Pesquisas), andamento lido dos arquivos, pedido (o mesmo do terminal) e Rodar/Parar (heartbeat --pesquisa)
+const PS = () => import('../../core/pesquisas');
+on('GET', '/api/projects/:slug/refs', (p) => { slugOk(p); return S.listRefs(p.slug); });
+on('GET', '/api/projects/:slug/pesquisas', async (p) => { slugOk(p); return (await PS()).pesquisasStatus(p.slug); });
+on('POST', '/api/projects/:slug/pesquisas', async (p, b) => { slugOk(p); return (await PS()).pedirPesquisa(p.slug, b ?? {}); });
+on('POST', '/api/projects/:slug/pesquisas-parar', async (p) => { slugOk(p); return (await PS()).pararPesquisa(p.slug); });
+on('GET', '/api/projects/:slug/pesquisas/:rodada', async (p) => { slugOk(p); return (await PS()).rodadaView(p.slug, p.rodada); });
+on('POST', '/api/projects/:slug/pesquisas/:rodada/rodar', async (p, b) => { slugOk(p); return (await PS()).rodarPesquisa(p.slug, p.rodada, b?.modo === 'terminal' ? 'terminal' : 'background'); });
 
 // Contexto (markdown livre)
 on('GET', '/api/projects/:slug/context', (p) => S.listContext(p.slug));

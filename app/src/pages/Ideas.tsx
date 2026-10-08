@@ -1,20 +1,22 @@
 // Banco de ideias (tarefa 012): quadro/lista por status, filtros e editor com a ficha de pauta.
 // "Virar tarefa" cria a tarefa no Kanban (agent:estrategista) e liga as duas pontas.
 import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type Doc, type Idea, type Task } from '../api';
-import { MessageCircle, Plus, Search, Tag as TagIcon, Target, Users } from 'lucide-react';
+import { FlaskConical, MessageCircle, Plus, Search, Tag as TagIcon, Target, Users, X } from 'lucide-react';
 import { Button, Drawer, Empty, ErrorBox, Field, Input, PageHeader, Select, SelectField, cx } from '../components/kit';
 import { FillBox } from '../components/fill';
 import { MarkdownEditor } from '../components/Markdown';
 import { TagChip, TagsInput, useProjectTags } from '../components/notes/TagsInput';
 import { tidyMd } from '../components/notes/tidy';
-import { nextSeqId, qk, realId, runOptimistic, trackCreate, upsertDoc, useCompetitors, useIdeas } from '../queries';
+import { nextSeqId, qk, realId, runOptimistic, trackCreate, upsertDoc, useCompetitors, useIdeas, useRefs } from '../queries';
 import { slugify } from '../../../core/platform';
 import { FICHA_TEMPLATE, FORMATS, OBJECTIVES, STATUSES, TONES, label, type Objective, type Status, type Tone } from '../components/ideas/meta';
 import { AppContent } from '../components/AppContent';
 import { IdeasTabs } from '../components/ideas/IdeasTabs';
+import { PesquisarIdeias } from '../components/ideas/PesquisarIdeias';
+import { RefChip, RefChips } from '../components/ideas/RefChips';
 
 type View = 'quadro' | 'lista';
 const VIEW_KEY = 'hub:ideas:view';
@@ -34,6 +36,10 @@ export default function Ideas() {
   const { slug = '' } = useParams();
   const { data, isLoading, error } = useIdeas(slug);
   const { data: competitors } = useCompetitors(slug);
+  const refs = useRefs(slug).data;
+  // ?rodada=<id>: só as ideias de uma pesquisa (o painel de progresso e o aviso de fim abrem assim)
+  const [sp, setSp] = useSearchParams();
+  const rodada = sp.get('rodada') ?? '';
   const { byId: tagDefs } = useProjectTags(slug);
   const compName = (id?: string) => competitors?.find((c) => c.data.id === id)?.data.name ?? id;
 
@@ -51,14 +57,15 @@ export default function Ideas() {
     .filter((i) => !f.tone || i.data.tone === f.tone)
     .filter((i) => !f.tag || i.data.tags.includes(f.tag))
     .filter((i) => !f.competitor || i.data.source?.competitor === f.competitor)
+    .filter((i) => !rodada || i.data.round === rodada)
     .filter((i) => !f.q || fold(`${i.data.id} ${i.data.title} ${i.data.format ?? ''} ${i.body}`).includes(fold(f.q)))
-    .sort((a, b) => b.data.id.localeCompare(a.data.id)), [all, f]);
+    .sort((a, b) => b.data.id.localeCompare(a.data.id)), [all, f, rodada]);
   const anyFilter = Object.values(f).some(Boolean);
   const cols = STATUSES.filter((s) => !(hideDiscarded && s.id === 'descartada'));
 
   const card = (i: Doc<Idea>) => (
-    <button key={i.data.id} onClick={() => setOpen(i)}
-      className="w-full text-left bg-card border border-border rounded-lg p-3 hover:border-primary/50 hover:shadow-sm transition">
+    <div key={i.data.id} role="button" tabIndex={0} onClick={() => setOpen(i)} onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setOpen(i); } }}
+      className="w-full cursor-pointer text-left bg-card border border-border rounded-lg p-3 hover:border-primary/50 hover:shadow-sm transition focus-visible:outline-2 focus-visible:outline-primary">
       <div className="flex items-center gap-2 text-[11px] text-muted-foreground mb-1">
         <span className="font-mono">{i.data.id}</span>
         {i.data.task && <span className="ml-auto font-mono text-primary-ink">→ {i.data.task}</span>}
@@ -75,7 +82,8 @@ export default function Ideas() {
           {i.data.tags.map((t) => <TagChip key={t} id={t} def={tagDefs[t]} small />)}
         </div>
       )}
-    </button>
+      <RefChips ids={i.data.refs} refs={refs} />
+    </div>
   );
 
   return (
@@ -89,10 +97,20 @@ export default function Ideas() {
               <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1.5 capitalize', view === v ? 'bg-muted font-medium' : 'bg-card text-muted-foreground hover:text-foreground')}>{v}</button>
             ))}
           </div>
-          <Button onClick={() => setOpen(blank())}><Plus className="size-4 inline -mt-0.5 mr-1" aria-hidden />Nova ideia</Button>
+          <Button variant="ghost" onClick={() => setOpen(blank())}><Plus className="size-4 inline -mt-0.5 mr-1" aria-hidden />Nova ideia</Button>
+          <PesquisarIdeias slug={slug} />
         </>}
       />
       <IdeasTabs className="-mt-2 mb-5" />
+
+      {rodada && (
+        <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-primary/30 bg-primary-soft px-3 py-2 text-sm">
+          <FlaskConical className="size-4 text-primary-ink" aria-hidden />
+          <span>Só as ideias da pesquisa <span className="font-mono text-xs">{rodada}</span> · {filtered.length}</span>
+          <Link to={`/p/${slug}/ideias/pesquisas/${encodeURIComponent(rodada)}`} className="text-primary-ink hover:underline">ver a rodada</Link>
+          <button type="button" onClick={() => setSp((p) => { const n = new URLSearchParams(p); n.delete('rodada'); return n; }, { replace: true })} className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="size-3.5" />Mostrar todas</button>
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
         <div className="relative w-56">
@@ -308,6 +326,8 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
         <Field label="Tags"><TagsInput slug={slug} value={d.tags} onChange={(v) => set('tags', v)} /></Field>
       </div>
 
+      <DrawerRefs ids={d.refs} slug={slug} />
+
       {(d.source || d.task) && (
         <div className="mb-4 grid gap-2 sm:grid-cols-2">
           {d.source && (
@@ -356,5 +376,25 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
         )}
       </div>
     </Drawer>
+  );
+}
+
+/** referências verificadas da ideia (pesquisa nas fontes, 041): chip com veículo e ano, título e o trecho conferido */
+function DrawerRefs({ ids, slug }: { ids: string[]; slug: string }) {
+  const refs = useRefs(slug).data;
+  const lista = ids.map((id) => refs?.find((r) => r.id === id)).filter((r): r is NonNullable<typeof r> => !!r);
+  if (!lista.length) return null;
+  return (
+    <div className="mb-4 rounded-lg border border-border bg-muted/50 px-3 py-2">
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-1">Referências verificadas</div>
+      <ul className="space-y-1.5">
+        {lista.map((r) => (
+          <li key={r.id} className="text-sm">
+            <div className="flex flex-wrap items-center gap-2"><RefChip r={r} /><span className="min-w-0 flex-1 leading-snug">{r.title}</span></div>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-1.5 text-[11px] text-muted-foreground">Link, DOI e trecho conferidos por script. O trecho e a paráfrase estão na seção Fontes da ficha.</p>
+    </div>
   );
 }

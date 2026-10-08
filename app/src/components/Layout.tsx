@@ -9,6 +9,7 @@ import { Select } from './kit';
 import { cn } from '@/lib/utils';
 import { AppContent } from './AppContent';
 import ErrorBoundary from './ErrorBoundary';
+import { PesquisaAviso } from './ideas/PesquisaAviso';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useCorDoProjeto } from '@/lib/theme';
 
@@ -102,6 +103,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
           {/* key = rota: sair de uma tela quebrada e entrar em outra limpa o aviso */}
           <ErrorBoundary key={pathname}><Suspense fallback={<PageSkeleton />}>{children ?? <Outlet />}</Suspense></ErrorBoundary>
         </main>
+        {slug && <PesquisaAviso slug={slug} />}
       </div>
     </TooltipProvider>
   );

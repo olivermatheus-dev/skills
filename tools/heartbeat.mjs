@@ -7,6 +7,8 @@
 // O app (Quadro → Rodar IA) chama este mesmo script; o lock (logs/heartbeat/.lock, JSON) diz qual tarefa está rodando.
 // --fichas (com --slug): roda a fila de fichas da 040 (pedido.json de cada concorrente) num `claude -p` só, com o mesmo lock;
 //   no fim tira da fila o que ficou analisado (tools/lib/fichas-fila.mjs). O app (Concorrentes → Conteúdos → Analisar) chama isto.
+// --pesquisa <rodada> (com --slug): roda UMA rodada de pesquisa de ideias da 041 (curadoria/rodadas/<id>/pedido.json) num `claude -p`, com o mesmo lock;
+//   no fim marca o pedido (feito/erro/pendente). O app (Ideias → Pesquisar ideias) chama isto. Sob comando, nunca agendado.
 // Pronta = status todo · assignee agent:<nome> ou ai · todas as dependências done.
 // Recorrentes: companies/<slug>/board/recorrentes.json (ver companies/_modelo/board/recorrentes.json).
 import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, unlinkSync, statSync, openSync, closeSync } from 'node:fs';
@@ -14,6 +16,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { companies, boardDir, listTasks, nextId, updateTask, addComment, today } from './lib/board.mjs';
 import { listarPedidos, marcarRodando, escreverProgresso, fechar, promptFila } from './lib/fichas-fila.mjs';
+import * as PQ from './lib/pesquisa.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -24,6 +27,7 @@ const ONLY_AGENT = opt('--agent');
 const ONLY_TASK = opt('--task');
 const WATCH = parseInt(opt('--watch', '0'), 10);
 const FICHAS = args.includes('--fichas');
+const PESQUISA = opt('--pesquisa');
 const PERMISSION = process.env.HEARTBEAT_PERMISSION_MODE || 'acceptEdits';
 const ALLOWED = (process.env.HEARTBEAT_ALLOWED_TOOLS || 'Read,Write,Edit,Glob,Grep,Skill,Agent,Bash(node tools/*),Bash(node .claude/skills/*),Bash(ffmpeg *),Bash(npx hyperframes *)').split(',');
 
@@ -143,6 +147,33 @@ function runFichas(slug) {
   log(`fila de fichas: ${res.feitos.length} analisado(s), ${res.restantes.length} continuam na fila${erro ? ` · ${erro}` : ''}`);
 }
 
+// ---------- pesquisa de ideias (041 F3) ----------
+function runPesquisa(slug, round) {
+  const pedido = PQ.lerPedido(slug, round);
+  if (!pedido) { log(`rodada ${round} não existe em ${slug}`); return; }
+  if (pedido.status === 'feito') { log(`rodada ${round} já está feita`); return; }
+  const allowed = [...ALLOWED, 'Bash(npm run curadoria *)', 'Bash(npm run validate)'];
+  const cli = ['-p', '--permission-mode', PERMISSION, '--allowedTools', ...allowed, '--', PQ.promptPesquisa(slug, round)];
+  if (!RUN) { log(`[simulação] rodaria a pesquisa ${round} da ${slug}`); return; }
+  const inicio = new Date().toISOString();
+  writeLock({ slug, kind: 'pesquisa', round, title: `Pesquisa de ideias · ${round}`, who: 'ai' });
+  PQ.marcarPedido(slug, round, 'rodando');
+  log(`pesquisa de ideias → ${slug}/${round}`);
+  appendFileSync(LOG, '--- saída pesquisa ---\n');
+  const from = statSync(LOG).size;
+  const fd = openSync(LOG, 'a');
+  const win = process.platform === 'win32';
+  const q = (a) => (/[\s"&|<>^()*]/.test(a) ? `"${a.replace(/"/g, "'")}"` : a);
+  const r = spawnSync('claude', win ? cli.map(q) : cli, { stdio: ['ignore', fd, fd], shell: win, env: cleanEnv() });
+  closeSync(fd);
+  const out = readFileSync(LOG).subarray(from).toString('utf8');
+  appendFileSync(LOG, '\n--- fim pesquisa ---\n');
+  const erro = /not logged in|\/login/i.test(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
+    : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
+  const res = PQ.fechar(slug, round, { erro, inicio });
+  log(`pesquisa ${round}: ${res.feita ? 'feita' : `não terminou${res.erro ? ` · ${res.erro}` : ''}`}`);
+}
+
 // ---------- batida ----------
 const LOCK = 'logs/heartbeat/.lock';
 const STARTED = new Date().toISOString();
@@ -151,6 +182,7 @@ function beat() {
   if (existsSync(LOCK) && Date.now() - statSync(LOCK).mtimeMs < 2 * 3600e3) { log('outra batida em andamento; pulando'); return; }
   if (RUN) writeLock({});
   try {
+    if (PESQUISA) { if (!ONLY_SLUG) log('--pesquisa precisa de --slug'); else runPesquisa(ONLY_SLUG, PESQUISA); return; }
     if (FICHAS) { if (!ONLY_SLUG) log('--fichas precisa de --slug'); else runFichas(ONLY_SLUG); return; }
     const slugs = ONLY_SLUG ? [ONLY_SLUG] : companies();
     if (!ONLY_TASK) for (const s of slugs) createRecurring(s);

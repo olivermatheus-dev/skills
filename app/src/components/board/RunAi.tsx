@@ -93,6 +93,7 @@ export function RunningBar({ status, onStop, onOpenTask }: { status: RunnerStatu
             </button>
           </span>
         ) : status.kind === 'fichas' ? <span className="min-w-0 truncate">IA analisando conteúdos dos concorrentes{status.title ? ` · ${status.title}` : ''}</span>
+          : status.kind === 'pesquisa' ? <span className="min-w-0 truncate">IA pesquisando ideias nas fontes{status.title ? ` · ${status.title}` : ''}</span>
           : <span>IA preparando a execução…</span>}
         <span className="text-xs text-muted-foreground whitespace-nowrap">{since(status.started)}</span>
         <div className="ml-auto flex items-center gap-1">

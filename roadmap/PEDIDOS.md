@@ -7,8 +7,7 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 041 | **F3:** botão "Pesquisar ideias" no app (diálogo com padrões + estimativa, Rodar pelo mesmo caminho da fila de fichas/heartbeat, aba Pesquisas, chips de referência no cartão da ideia). Medir uma rodada limpa (a 1ª custou US$ 4,51, acima do aviso de US$ 3) | não depende do Oliver |
-| 2 | 040 | **Fase G (anúncios no painel):** depende da 037 B (classificador) → depende da pergunta 1 da 037 (abaixo). Sem resposta, seguir a recomendação (funil pela temperatura do público) e avisar | aguarda resposta curta |
+| 1 | 040 | **Fase G (anúncios no painel):** depende da 037 B (classificador) → depende da pergunta 1 da 037 (abaixo). Sem resposta, seguir a recomendação (funil pela temperatura do público) e avisar | aguarda resposta curta |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

@@ -15,6 +15,7 @@ import { toast } from '../components/toast';
 import { Dots, LANGS, METHODS, STATUS, TRUST, TYPES, VerifiedBadge, WEIGHT, consultaLabel, domainOf, methodMeta, statusMeta, typeMeta } from '../components/ideas/sources-meta';
 import { SourceDrawer } from '../components/ideas/SourceDrawer';
 import { AddSourceDialog } from '../components/ideas/AddSourceDialog';
+import { PesquisarIdeias } from '../components/ideas/PesquisarIdeias';
 
 const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const DEFAULTS = { q: '', tipo: '', tema: '', status: '', idioma: '', consulta: '', ordem: 'status', asc: '1' };
@@ -178,7 +179,10 @@ export default function Fontes() {
       <PageHeader
         title="Ideias"
         subtitle="Fontes onde a IA procura ideias e temas. Só as ativas entram nas pesquisas."
-        actions={<Button onClick={() => setAdding(true)} className="inline-flex items-center gap-1.5"><Plus className="size-4" />Adicionar fonte</Button>}
+        actions={<>
+          <Button variant="ghost" onClick={() => setAdding(true)} className="inline-flex items-center gap-1.5"><Plus className="size-4" />Adicionar fonte</Button>
+          <PesquisarIdeias slug={slug} />
+        </>}
       />
       <IdeasTabs className="-mt-2 mb-5" />
 

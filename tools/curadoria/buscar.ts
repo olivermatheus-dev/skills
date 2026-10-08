@@ -43,7 +43,10 @@ export async function buscar(slug: string, round: string, only: string[] = [], l
     }
   }
 
+  // o app lê brutos.json inteiro (vários MB) só no fim; durante a busca o andamento por fonte vem deste arquivinho
+  const prog = (atual: string | null) => writeJsonFile(work(slug, round, 'buscar-progresso.json'), { atual, em: new Date().toISOString(), perSource: perSource.map((p) => ({ sourceId: p.sourceId, status: p.status, fetched: p.fetched })) });
   for (const id of only.length ? req.sources.filter((x) => only.includes(x)) : req.sources) {
+    prog(id);
     const src = all.get(id) as CuratedSource | undefined;
     const run: SourceRun = { sourceId: id, status: 'ok', fetched: 0, errors: [], warnings: [] };
     perSource.push(run);
@@ -74,6 +77,7 @@ export async function buscar(slug: string, round: string, only: string[] = [], l
     }
     log(`${run.status === 'ok' ? '✓' : run.status === 'vazio' ? '·' : '✗'} ${id}: ${run.fetched} itens${run.errors.length ? ` — ${run.errors.join('; ')}` : ''}`);
   }
+  prog(null);
   perSource.sort((a, b) => req.sources.indexOf(a.sourceId) - req.sources.indexOf(b.sourceId));
   const out: RawFile = { round, slug, fetchedAt: new Date().toISOString(), params: { ...base, queries: [...q.pt, ...q.en], newsFrom }, perSource, items: [...byKey.values()] };
   writeJsonFile(file, out);
