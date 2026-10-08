@@ -12,6 +12,7 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 - Colunas: `backlog` · `todo` · `doing` · `review` · `done`. Quadros: `conteudo` · `vendas` · `produto`.
 - `assignee`: `oliver` (visão dele, inclui tudo em `review`) · `ai` (aguardando o orquestrador) · `agent:<nome>`.
 - Protocolo que todo agente segue: `references/protocolo.md`.
+- **Assinatura dos comentários:** você (orquestrador) comenta sempre com `--as ai`; cada agente com `--as agent:<nome dele>`. Nunca assine por outro (o app mostra a cor e o ícone de quem comentou).
 
 ## Fluxo
 1. **Entrada.** Pedido no chat → criar a tarefa-mãe (`--next-id`, `assignee: ai`, quadro certo). "Rode as tarefas" (ou o botão **Rodar IA** do app) → pegar `todo` com `assignee: ai` ou `agent:*` cujas dependências estão `done`. `todo` = aprovado pelo Oliver; `backlog` nunca roda.

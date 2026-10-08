@@ -72,7 +72,8 @@ export const nowStamp = (d = new Date()) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 
 /** Último comentário da IA pedindo algo e sem resposta do Oliver depois dele = o card espera o Oliver. */
+export const isSystem = (who: string) => who === 'heartbeat';
 export function pendingAsk(comments: TaskComment[]): TaskComment | null {
-  const last = comments[comments.length - 1];
+  const last = comments.filter((c) => !isSystem(c.who)).at(-1);
   return last && last.who !== 'oliver' && last.kind !== 'nota' ? last : null;
 }

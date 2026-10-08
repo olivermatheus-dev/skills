@@ -1,5 +1,6 @@
 ---
 name: designer
+color: pink
 description: Designer de social media. Transforma roteiro de carrossel ou post (do roteirista) em peças visuais na identidade da marca e exporta PNG. Delegue carrosséis, posts estáticos, memes, antes × depois e criativos estáticos de anúncio.
 skills: [carousel]
 ---

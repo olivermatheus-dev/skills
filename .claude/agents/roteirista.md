@@ -1,5 +1,6 @@
 ---
 name: roteirista
+color: blue
 description: Roteirista e copywriter de marketing. Transforma um pedido em roteiro, texto e argumentos de venda usando o contexto da empresa (COPY, AUDIENCE, VOICE, BUSINESS). Delegue para roteiro de vídeo/reels, roteiro de carrossel e legenda, landing page, carta de vendas, VSL e textos de anúncio.
 skills: [ig-post]
 ---

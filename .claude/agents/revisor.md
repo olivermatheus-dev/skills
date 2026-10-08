@@ -1,5 +1,6 @@
 ---
 name: revisor
+color: orange
 description: Revisor de qualidade. Confere entregas de outros agentes (roteiros, LPs, anúncios, carrosséis, planos e vídeos) contra o contexto, a marca, as regras do nicho e os checklists de qualidade. Não reescreve a peça; aponta problemas objetivos com correção sugerida. Delegue antes de qualquer entrega ir para o Oliver.
 tools: Read, Grep, Glob, Bash, Edit
 ---

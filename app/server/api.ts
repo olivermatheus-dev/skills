@@ -33,6 +33,7 @@ on('PUT', '/api/projects/:slug/tasks/:id', (p, b) => S.saveTask(p.slug, { ...b.d
 on('DELETE', '/api/projects/:slug/tasks/:id', (p) => S.archiveTask(p.slug, p.id));
 on('POST', '/api/projects/:slug/tasks/:id/unarchive', (p) => S.unarchiveTask(p.slug, p.id));
 on('POST', '/api/projects/:slug/tasks/:id/move', (p, b) => S.moveTask(p.slug, p.id, b.status, b.who ?? 'oliver'));
+on('GET', '/api/agents', () => S.listAgents());
 on('POST', '/api/projects/:slug/tasks/:id/comments', (p, b) => S.commentTask(p.slug, p.id, b ?? {}));
 // Rodar IA: Claude Code nas tarefas prontas (segundo plano = heartbeat · terminal = janela interativa)
 on('GET', '/api/projects/:slug/runner', (p) => R.runnerStatus(p.slug));
@@ -101,6 +102,23 @@ on('GET', '/api/projects/:slug/analysis-all', (p) => S.listCompetitors(p.slug).m
 on('GET', '/api/projects/:slug/competitors-feed', (p) => S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({
   id: c.data.id, ...S.listSnapshotsForView(p.slug, c.data.id, { full: 2, max: 2 }), marks: S.getMarks(p.slug, c.data.id),
 })));
+// Coleta semanal (redes + anúncios) e anúncios da Biblioteca da Meta (fase D da 031)
+on('GET', '/api/projects/:slug/weekly', async (p) => (await import('../../tools/intel/semanal')).withNext(p.slug));
+on('PUT', '/api/projects/:slug/weekly', async (p, b) => (await import('../../tools/intel/semanal')).saveSettings(p.slug, b ?? {}));
+on('POST', '/api/projects/:slug/weekly', async (p) => {
+  const W = await import('../../tools/intel/semanal');
+  void W.runWeekly(p.slug, { force: true }).catch((e) => console.error(`[coleta semanal] ${p.slug}: ${e.message}`));
+  await new Promise((r) => setTimeout(r, 300));
+  return W.withNext(p.slug);
+});
+on('GET', '/api/projects/:slug/weekly/report', async (p, _, q) => ({ text: (await import('../../tools/intel/semanal')).readReport(p.slug, q.get('week') ?? '') }));
+// o coletor de anúncios é opcional (carrega por caminho em variável: o servidor sobe mesmo sem ele)
+const adsMod = (): Promise<any> => { const m = '../../tools/intel/ads'; return import(/* @vite-ignore */ m); };
+on('GET', '/api/projects/:slug/ads', async (p) => {
+  const A = await adsMod().catch(() => null);
+  return S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({ id: c.data.id, history: A ? A.listAds(p.slug, c.data.id).slice(-2) : [] }));
+});
+on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
@@ -244,9 +262,11 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
   send(res, 404, { error: `rota não encontrada: ${req.method} ${url.pathname}` });
 };
 
+/** coleta semanal dos concorrentes enquanto o app estiver aberto (HUB_NO_WEEKLY=1 desliga) */
+const startWeekly = () => { if (!process.env.HUB_NO_WEEKLY) void import('../../tools/intel/semanal').then((W) => W.startWeeklyScheduler()); };
 export const hubApi = (): Plugin => ({
   name: 'hub-api',
-  configureServer: (s) => { s.middlewares.use(handler); },
+  configureServer: (s) => { s.middlewares.use(handler); startWeekly(); },
   // modo rápido (npm run app = build + preview): mesma API sobre o bundle otimizado
-  configurePreviewServer: (s) => { s.middlewares.use(handler); },
+  configurePreviewServer: (s) => { s.middlewares.use(handler); startWeekly(); },
 });

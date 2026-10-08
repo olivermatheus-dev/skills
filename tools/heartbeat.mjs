@@ -99,8 +99,8 @@ function wake(t) {
   if (after?.status !== 'doing') return;
   // falhou ou parou no meio: avisa no card e devolve para "A fazer" (entra de novo no próximo Rodar IA)
   const why = /not logged in|\/login/i.test(out)
-    ? 'O Claude Code do terminal não está logado. Abra um terminal na pasta do hub, rode `claude`, faça `/login` uma vez e clique em Rodar IA de novo.'
-    : `O agente terminou sem mudar o status (código ${r.status}). Últimas linhas:\n${out.trim().split('\n').slice(-6).join('\n')}`;
+    ? 'Falhou: Claude Code do terminal sem login (`claude` → `/login`).'
+    : `Terminou sem mudar o status (código ${r.status}). ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}`;
   addComment(t.path, 'heartbeat', why, 'revisar');
   if (r.status !== 0) updateTask(t.path, { status: 'todo' }, `${today()} · heartbeat · falhou (código ${r.status}); voltou para todo`);
 }

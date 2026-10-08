@@ -1,17 +1,17 @@
-// Painel da tarefa: título, propriedades, descrição + checklist (editor), comentários (Oliver ↔ IA) e atividade (log).
+// Painel da tarefa (compacto): título, propriedades em linhas, descrição + checklist, comentários (Oliver ↔ IA) e atividade.
 // Tudo no mesmo arquivo T-NNNN.md: o editor mexe só na descrição/checklist; comentários e log são seções próprias.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowRight, Check, ChevronDown, ChevronRight, CornerDownLeft, Loader2, MessageSquareWarning, Play, SquareTerminal } from 'lucide-react';
+import { Activity as ActivityIcon, ArrowRight, Check, ChevronDown, ChevronRight, CornerDownLeft, Loader2, MessageSquareWarning, Play, SquareTerminal } from 'lucide-react';
 import { Button as UiButton } from '@/components/ui/button';
 import type { Task } from '../../api';
 import { MarkdownEditor } from '../Markdown';
-import { Button, Drawer, ErrorBox, Field, Input, Select, Textarea, cx } from '../kit';
+import { Drawer, ErrorBox, cx } from '../kit';
 import {
   ASSIGNEES, BOARD_OPTS, COLUMNS, PRIORITY_OPTS, STATUS_LABEL, assigneeLabel, checklist, fmtStamp, isAi, isLate, isReady, joinTaskBody,
   normalizeBody, splitTaskBody, taskThread, type BoardName, type Priority, type Status, type TaskComment, type TaskDoc,
 } from './taskUtils';
-import { AssigneeBadge } from './TaskCard';
-import { WhoAvatar, whoLabel } from './Who';
+import { WhoAvatar, WhoChip, WhoName, whoLabel, useWhoColor } from './Who';
+import { isSystem } from '../../../../schema/task';
 import type { useTaskActions } from './useTaskActions';
 import type { useRunner } from './useRunner';
 
@@ -29,17 +29,20 @@ const toForm = (t: Task): Form => ({
 const splitList = (s: string, re: RegExp) => s.split(re).map((x) => x.trim()).filter(Boolean);
 const mainOf = (body: string) => splitTaskBody(body).main;
 
+/** Controle "sem borda até passar o mouse" (estilo Linear), para as propriedades caberem em linhas. */
+const ctl = 'w-full h-7 rounded-md border border-transparent bg-transparent px-1.5 text-sm outline-none hover:border-border focus:border-primary/60 focus:bg-card';
+
 export function TaskDrawer({ slug, task, allTasks, onClose, onMove, actions, runner }: {
   slug: string; task: TaskDoc | null; allTasks: TaskDoc[]; onClose: () => void; onMove: (id: string, s: Status) => void; actions: Actions; runner: Runner;
 }) {
   const guard = useRef<() => boolean>(() => true);
   return (
-    <Drawer open={!!task} onClose={onClose} canClose={() => guard.current()} width="max-w-3xl"
+    <Drawer open={!!task} onClose={onClose} canClose={() => guard.current()} width="max-w-2xl" dense
       title={task ? (
-        <span className="flex items-center gap-2.5">
-          <span className="font-mono text-muted-foreground text-sm">{task.data.id}</span>
-          <span className="text-xs font-medium rounded-full border border-border px-2 py-0.5">{STATUS_LABEL[task.data.status]}</span>
-          <AssigneeBadge assignee={task.data.assignee} />
+        <span className="flex items-center gap-2 text-muted-foreground">
+          <span className="font-mono text-xs">{task.data.id}</span>
+          <span className="text-[11px] rounded-full border border-border px-1.5 py-px text-foreground">{STATUS_LABEL[task.data.status]}</span>
+          <WhoChip who={task.data.assignee} />
         </span>
       ) : ''}>
       {task && <TaskEditor key={task.data.id} slug={slug} task={task} allTasks={allTasks} onMove={onMove} onClose={onClose} guard={guard} actions={actions} runner={runner} />}
@@ -108,84 +111,78 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
 
   const t = task.data;
   const running = runner.status?.running && runner.status.task === t.id;
+  const late = isLate({ ...t, due: f.due || undefined });
   return (
     <div>
-      <input
-        aria-label="Título"
-        className="w-full text-xl font-semibold tracking-tight bg-transparent outline-none border-b border-transparent focus:border-border pb-1 mb-4"
-        value={f.title} onChange={(e) => set('title', e.target.value)} placeholder="Título"
+      <textarea
+        aria-label="Título" rows={1}
+        className="w-full resize-none text-lg font-semibold leading-snug tracking-tight bg-transparent outline-none rounded-md -mx-1.5 px-1.5 py-0.5 hover:bg-muted/60 focus:bg-muted/60 [field-sizing:content]"
+        value={f.title} onChange={(e) => set('title', e.target.value.replace(/\n/g, ' '))} placeholder="Título"
       />
 
       <NextStep task={task} byId={byId} pending={pending} running={!!running} onMove={onMove} actions={actions} runner={runner} />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4">
-        <Field label="Status">
-          <Select aria-label="Status" className="w-full" value={t.status} onChange={(e) => onMove(t.id, e.target.value as Status)}>
+      <div className="grid grid-cols-2 gap-x-4 mt-2">
+        <Prop label="Status">
+          <select aria-label="Status" className={ctl} value={t.status} onChange={(e) => onMove(t.id, e.target.value as Status)}>
             {COLUMNS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
-          </Select>
-        </Field>
-        <Field label="Responsável" hint={custom ? 'oliver · ai · agent:<nome>' : undefined}>
+          </select>
+        </Prop>
+        <Prop label="Responsável">
           {custom ? (
-            <div className="flex gap-1">
-              <Input className="w-full min-w-0 font-mono" value={f.assignee} onChange={(e) => set('assignee', e.target.value)} placeholder="agent:nome" />
-              <Button variant="ghost" type="button" title="Voltar à lista" onClick={() => { setCustom(false); if (!ASSIGNEES.includes(f.assignee)) set('assignee', base.assignee && ASSIGNEES.includes(base.assignee) ? base.assignee : 'oliver'); }}>↺</Button>
-            </div>
+            <input className={cx(ctl, 'font-mono')} value={f.assignee} onChange={(e) => set('assignee', e.target.value)} placeholder="agent:nome"
+              onBlur={() => { if (ASSIGNEES.includes(f.assignee)) setCustom(false); }} />
           ) : (
-            <Select className="w-full" value={f.assignee} onChange={(e) => (e.target.value === '__custom' ? (setCustom(true), set('assignee', 'agent:')) : set('assignee', e.target.value))}>
-              <optgroup label="Pessoas"><option value="oliver">Oliver</option></optgroup>
-              <optgroup label="IA">
-                {ASSIGNEES.filter((a) => a !== 'oliver').map((a) => <option key={a} value={a}>{a === 'ai' ? 'IA (orquestrador)' : assigneeLabel(a)}</option>)}
-              </optgroup>
+            <select className={ctl} value={f.assignee} onChange={(e) => (e.target.value === '__custom' ? (setCustom(true), set('assignee', 'agent:')) : set('assignee', e.target.value))}>
+              <option value="oliver">Oliver</option>
+              {ASSIGNEES.filter((a) => a !== 'oliver').map((a) => <option key={a} value={a}>{a === 'ai' ? 'IA (orquestrador)' : assigneeLabel(a)}</option>)}
               <option value="__custom">Outro…</option>
-            </Select>
+            </select>
           )}
-        </Field>
-        <Field label="Prioridade">
-          <Select className="w-full" value={f.priority} onChange={(e) => set('priority', e.target.value as Priority)}>
+        </Prop>
+        <Prop label="Prioridade">
+          <select className={ctl} value={f.priority} onChange={(e) => set('priority', e.target.value as Priority)}>
             {PRIORITY_OPTS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
-          </Select>
-        </Field>
-        <Field label="Quadro">
-          <Select className="w-full" value={f.board} onChange={(e) => set('board', e.target.value as BoardName)}>
+          </select>
+        </Prop>
+        <Prop label="Quadro">
+          <select className={ctl} value={f.board} onChange={(e) => set('board', e.target.value as BoardName)}>
             {BOARD_OPTS.map((b) => <option key={b.id} value={b.id}>{b.label}</option>)}
-          </Select>
-        </Field>
-        <Field label="Prazo" hint={isLate({ ...t, due: f.due || undefined }) ? 'Atrasada' : undefined}>
-          <div className="flex gap-1">
-            <Input type="date" className={cx('w-full min-w-0', isLate({ ...t, due: f.due || undefined }) && 'text-destructive border-red-200')} value={f.due} onChange={(e) => set('due', e.target.value)} />
-            {f.due && <Button variant="ghost" type="button" title="Limpar prazo" onClick={() => set('due', '')}>×</Button>}
-          </div>
-        </Field>
-        <Field label="Tarefa-mãe">
-          <Input className="w-full font-mono" placeholder="T-0000" value={f.parent} onChange={(e) => set('parent', e.target.value)} list="hub-task-ids" />
-        </Field>
+          </select>
+        </Prop>
+        <Prop label="Prazo">
+          <input type="date" className={cx(ctl, late && 'text-destructive')} value={f.due} onChange={(e) => set('due', e.target.value)} title={late ? 'Atrasada' : undefined} />
+        </Prop>
+        <Prop label="Tarefa-mãe">
+          <input className={cx(ctl, 'font-mono')} placeholder="—" value={f.parent} onChange={(e) => set('parent', e.target.value)} list="hub-task-ids" />
+        </Prop>
       </div>
 
       <MoreFields open={!!(t.depends.length || t.links.length)}>
-        <Field label="Depende de" hint="IDs separados por vírgula (ex.: T-0011, T-0012)">
-          <Input className="w-full font-mono" placeholder="T-0000, T-0000" value={f.depends} onChange={(e) => set('depends', e.target.value)} />
-        </Field>
+        <Prop label="Depende de">
+          <input className={cx(ctl, 'font-mono')} placeholder="T-0000, T-0000" value={f.depends} onChange={(e) => set('depends', e.target.value)} />
+        </Prop>
         {(deps.length > 0 || children.length > 0) && (
-          <div className="-mt-2 mb-4 flex flex-wrap gap-1.5 text-xs">
+          <div className="ml-24 mb-1 flex flex-wrap gap-1 text-[11px]">
             {deps.map(({ id, t: d }) => (
-              <span key={id} className={cx('px-2 py-0.5 rounded border', d?.data.status === 'done' ? 'border-green-200 text-success bg-green-50' : 'border-amber-200 text-amber-700 bg-amber-50')}
+              <span key={id} className={cx('px-1.5 py-px rounded border', d?.data.status === 'done' ? 'border-green-200 text-success bg-green-50' : 'border-amber-200 text-amber-700 bg-amber-50')}
                 title={d ? `${d.data.title} (${d.data.status})` : 'não encontrada'}>
                 {id} · {d ? (d.data.status === 'done' ? 'feita' : STATUS_LABEL[d.data.status]) : '?'}
               </span>
             ))}
             {children.map((c) => (
-              <span key={c.data.id} className="px-2 py-0.5 rounded border border-border text-muted-foreground" title={c.data.title}>↳ {c.data.id} · {STATUS_LABEL[c.data.status]}</span>
+              <span key={c.data.id} className="px-1.5 py-px rounded border border-border text-muted-foreground" title={c.data.title}>↳ {c.data.id} · {STATUS_LABEL[c.data.status]}</span>
             ))}
           </div>
         )}
-        <Field label="Links" hint="Um por linha (caminho no repo ou URL): entregas, peças, referências">
-          <Textarea rows={2} className="font-mono text-xs" value={f.links} onChange={(e) => set('links', e.target.value)} />
-        </Field>
+        <Prop label="Links" top>
+          <textarea rows={2} className={cx(ctl, 'h-auto py-1 font-mono text-xs resize-y')} placeholder="um por linha (caminho no repo ou URL)" value={f.links} onChange={(e) => set('links', e.target.value)} />
+        </Prop>
       </MoreFields>
       <datalist id="hub-task-ids">{allTasks.map((x) => <option key={x.data.id} value={x.data.id}>{x.data.title}</option>)}</datalist>
 
-      <SectionTitle right={ck.all > 0 ? `Checklist ${ck.done}/${ck.all}` : undefined}>Descrição e checklist</SectionTitle>
-      <MarkdownEditor value={main} onChange={setMain} minHeight={160} />
+      <SectionTitle right={ck.all > 0 ? `${ck.done}/${ck.all}` : undefined}>Descrição e checklist</SectionTitle>
+      <MarkdownEditor value={main} onChange={setMain} minHeight={110} />
 
       <SectionTitle right={comments.length ? `${comments.length}` : undefined}>Comentários</SectionTitle>
       <Thread comments={comments} />
@@ -193,16 +190,25 @@ function TaskEditor({ task, allTasks, onMove, onClose, guard, actions, runner }:
 
       <Activity log={log} />
 
-      <div className="sticky bottom-0 -mx-6 mt-6 px-6 py-3 bg-card border-t border-border">
-        {saveError ? <div className="-mt-3 mb-3 max-h-40 overflow-y-auto"><ErrorBox error={saveError} /></div> : null}
-        <div className="flex items-center gap-3">
-          <Button disabled={!dirty || !f.title.trim()} onClick={save}>Salvar</Button>
-          <Button variant="ghost" onClick={close}>Fechar</Button>
-          <Button variant="danger" onClick={archive} title="Move o arquivo para board/arquivo/ (não é apagado). Dá para desfazer no aviso.">Arquivar</Button>
-          <span className="text-xs text-muted-foreground whitespace-nowrap">{dirty ? 'Alterações não salvas · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
-          <span className="ml-auto text-xs text-muted-foreground font-mono truncate" title={task.file}>{task.file.split(/[\\/]/).pop()}</span>
+      <div className="sticky bottom-0 -mx-5 mt-4 px-5 py-2 bg-card border-t border-border">
+        {saveError ? <div className="mb-2 max-h-40 overflow-y-auto"><ErrorBox error={saveError} /></div> : null}
+        <div className="flex items-center gap-1.5">
+          <UiButton size="sm" disabled={!dirty || !f.title.trim()} onClick={save}>Salvar</UiButton>
+          <UiButton size="sm" variant="ghost" onClick={close}>Fechar</UiButton>
+          <UiButton size="sm" variant="ghost" className="text-destructive hover:text-destructive" onClick={archive} title="Move o arquivo para board/arquivo/ (não é apagado). Dá para desfazer no aviso.">Arquivar</UiButton>
+          <span className="ml-1 text-xs text-muted-foreground whitespace-nowrap">{dirty ? 'Não salvo · Ctrl+S' : saved ? 'Salvo ✓' : ''}</span>
+          <span className="ml-auto text-[11px] text-muted-foreground font-mono truncate" title={task.file}>{task.file.split(/[\\/]/).pop()}</span>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Prop({ label, children, top }: { label: string; children: React.ReactNode; top?: boolean }) {
+  return (
+    <div className={cx('flex gap-2 min-h-8', top ? 'items-start pt-1' : 'items-center')}>
+      <span className={cx('w-22 shrink-0 text-xs text-muted-foreground', top && 'pt-1')}>{label}</span>
+      <div className="flex-1 min-w-0">{children}</div>
     </div>
   );
 }
@@ -213,26 +219,26 @@ function NextStep({ task, byId, pending, running, onMove, actions, runner }: {
   onMove: (id: string, s: Status) => void; actions: Actions; runner: Runner;
 }) {
   const t = task.data;
-  const box = 'mb-5 rounded-lg border px-3.5 py-3 text-sm flex flex-wrap items-center gap-x-3 gap-y-2';
+  const box = 'mt-2 rounded-md border px-2.5 py-1.5 text-xs flex flex-wrap items-center gap-x-2 gap-y-1.5';
   if (running) {
-    return <div className={cx(box, 'border-primary/30 bg-primary-soft/60')}><Loader2 className="size-4 animate-spin text-primary" /> A IA está trabalhando nesta tarefa. Os comentários aparecem aqui quando ela registrar.</div>;
+    return <div className={cx(box, 'border-primary/30 bg-primary-soft/60')}><Loader2 className="size-3.5 animate-spin text-primary" /> A IA está trabalhando nesta tarefa.</div>;
   }
   const ready = isReady(t, byId);
   if (t.status === 'review' || (pending && !ready)) {
     return (
       <div className={cx(box, 'border-amber-200 bg-amber-50/70')}>
-        <MessageSquareWarning className="size-4 text-amber-700" />
-        <span className="flex-1 min-w-48">{pending ? <>{whoLabel(pending.who)} {pending.kind === 'pergunta' ? 'fez uma pergunta' : 'pediu revisão'}. Responda nos comentários abaixo.</> : 'Esperando você conferir.'}</span>
-        <UiButton size="sm" variant="outline" onClick={() => actions.comment(t.id, { text: 'Aprovado.', status: 'done' })}><Check /> Aprovar e concluir</UiButton>
-        <UiButton size="sm" onClick={() => actions.comment(t.id, { text: 'Aprovado, pode seguir.', status: 'todo', assignee: 'ai' })}><ArrowRight /> Aprovar e devolver à IA</UiButton>
+        <MessageSquareWarning className="size-3.5 text-amber-700" />
+        <span className="flex-1 min-w-40">{pending ? <><WhoName who={pending.who} /> {pending.kind === 'pergunta' ? 'fez uma pergunta' : 'pediu revisão'}</> : 'Esperando você conferir'}</span>
+        <UiButton size="xs" variant="outline" onClick={() => actions.comment(t.id, { text: 'Aprovado.', status: 'done' })}><Check /> Concluir</UiButton>
+        <UiButton size="xs" onClick={() => actions.comment(t.id, { text: 'Aprovado, pode seguir.', status: 'todo', assignee: 'ai' })}><ArrowRight /> Aprovar e devolver à IA</UiButton>
       </div>
     );
   }
   if (isAi(t.assignee) && t.status === 'backlog') {
     return (
       <div className={cx(box, 'border-border bg-muted/50')}>
-        <span className="flex-1 min-w-48 text-muted-foreground">Tarefa da IA no backlog. Aprovar = mover para <b className="text-foreground">A fazer</b>; ela entra no próximo Rodar IA.</span>
-        <UiButton size="sm" onClick={() => onMove(t.id, 'todo')}><Check /> Aprovar</UiButton>
+        <span className="flex-1 min-w-40 text-muted-foreground">Da IA, no backlog: aprovar = mover para A fazer.</span>
+        <UiButton size="xs" onClick={() => onMove(t.id, 'todo')}><Check /> Aprovar</UiButton>
       </div>
     );
   }
@@ -240,12 +246,9 @@ function NextStep({ task, byId, pending, running, onMove, actions, runner }: {
     const busy = runner.running || runner.run.isPending;
     return (
       <div className={cx(box, 'border-primary/25 bg-primary-soft/40')}>
-        <span className="flex-1 min-w-48">
-          Pronta para a IA.
-          {pending && <span className="block text-xs text-amber-800 mt-0.5">Último aviso de {whoLabel(pending.who)}: veja nos comentários.</span>}
-        </span>
-        <UiButton size="sm" variant="outline" disabled={busy} onClick={() => runner.run.mutate({ mode: 'terminal', task: t.id })}><SquareTerminal /> No terminal</UiButton>
-        <UiButton size="sm" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> Rodar agora</UiButton>
+        <span className="flex-1 min-w-40">Pronta para a IA</span>
+        <UiButton size="xs" variant="outline" disabled={busy} onClick={() => runner.run.mutate({ mode: 'terminal', task: t.id })}><SquareTerminal /> No terminal</UiButton>
+        <UiButton size="xs" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> Rodar agora</UiButton>
       </div>
     );
   }
@@ -254,9 +257,9 @@ function NextStep({ task, byId, pending, running, onMove, actions, runner }: {
 
 function SectionTitle({ children, right }: { children: React.ReactNode; right?: string }) {
   return (
-    <div className="flex items-center justify-between mt-6 mb-2">
-      <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{children}</div>
-      {right && <div className="text-xs text-muted-foreground tabular-nums">{right}</div>}
+    <div className="flex items-center gap-2 mt-4 mb-1.5">
+      <div className="text-xs font-medium text-muted-foreground">{children}</div>
+      {right && <div className="text-[11px] text-muted-foreground tabular-nums">{right}</div>}
     </div>
   );
 }
@@ -264,7 +267,7 @@ function SectionTitle({ children, right }: { children: React.ReactNode; right?: 
 function MoreFields({ open: initial, children }: { open: boolean; children: React.ReactNode }) {
   const [open, setOpen] = useState(initial);
   return open ? <>{children}</> : (
-    <button type="button" onClick={() => setOpen(true)} className="mb-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+    <button type="button" onClick={() => setOpen(true)} className="mt-0.5 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
       <ChevronRight className="size-3.5" /> Dependências e links
     </button>
   );
@@ -273,26 +276,41 @@ function MoreFields({ open: initial, children }: { open: boolean; children: Reac
 const KIND_TAG: Record<string, string> = { revisar: 'Revisar', pergunta: 'Pergunta' };
 
 function Thread({ comments }: { comments: TaskComment[] }) {
-  if (!comments.length) return <div className="text-sm text-muted-foreground mb-3">Nenhum comentário. A IA registra aqui o que fez e o que você precisa revisar.</div>;
+  if (!comments.length) return <div className="text-xs text-muted-foreground mb-2">Nenhum comentário. A IA registra aqui o que fez e o que você precisa revisar.</div>;
   return (
-    <ol className="flex flex-col gap-3 mb-3">
-      {comments.map((c, i) => {
-        const fromOliver = c.who === 'oliver';
-        return (
-          <li key={i} className="flex gap-2.5">
-            <WhoAvatar who={c.who} size="md" />
-            <div className={cx('flex-1 min-w-0 rounded-lg border px-3 py-2', c.kind !== 'nota' && !fromOliver ? 'border-amber-200 bg-amber-50/50' : 'border-border bg-card')}>
-              <div className="flex items-center gap-2 text-xs mb-1">
-                <span className="font-medium">{whoLabel(c.who)}</span>
-                <span className="text-muted-foreground">{fmtStamp(c.at)}</span>
-                {KIND_TAG[c.kind] && <span className="rounded-full bg-amber-100 text-amber-800 px-1.5 py-px text-[10px] font-medium">{KIND_TAG[c.kind]}</span>}
-              </div>
-              <div className="text-sm whitespace-pre-wrap break-words">{c.text}</div>
-            </div>
-          </li>
-        );
-      })}
+    <ol className="flex flex-col gap-2 mb-2">
+      {comments.map((c, i) => (isSystem(c.who) ? <SystemLine key={i} c={c} /> : <CommentItem key={i} c={c} />))}
     </ol>
+  );
+}
+
+function CommentItem({ c }: { c: TaskComment }) {
+  const color = useWhoColor(c.who);
+  const ask = c.kind !== 'nota' && c.who !== 'oliver';
+  return (
+    <li className="flex gap-2">
+      <WhoAvatar who={c.who} size="md" className="mt-0.5" />
+      <div className={cx('flex-1 min-w-0 rounded-md border px-2.5 py-1.5', ask ? 'border-amber-200 bg-amber-50/50' : 'border-border bg-card')}
+        style={c.who !== 'oliver' && !ask ? { borderLeft: `2px solid ${color}` } : undefined}>
+        <div className="flex items-center gap-1.5 text-xs">
+          <WhoName who={c.who} />
+          <span className="text-muted-foreground">{fmtStamp(c.at)}</span>
+          {KIND_TAG[c.kind] && <span className="rounded-full bg-amber-100 text-amber-800 px-1.5 text-[10px] font-medium">{KIND_TAG[c.kind]}</span>}
+        </div>
+        <div className="text-sm whitespace-pre-wrap break-words mt-0.5">{c.text}</div>
+      </div>
+    </li>
+  );
+}
+
+/** Mensagem de sistema (heartbeat): uma linha discreta, sem balão. */
+function SystemLine({ c }: { c: TaskComment }) {
+  return (
+    <li className="flex items-start gap-2 pl-1 text-[11px] text-muted-foreground" title={c.text}>
+      <ActivityIcon className="size-3 mt-0.5 shrink-0" />
+      <span className="min-w-0 truncate">{c.text}</span>
+      <span className="ml-auto shrink-0 tabular-nums">{fmtStamp(c.at)}</span>
+    </li>
   );
 }
 
@@ -308,24 +326,21 @@ function CommentBox({ task, actions }: { task: TaskDoc; actions: Actions }) {
   // devolver à IA faz sentido quando a bola está com o Oliver (revisão, ou tarefa dele parada)
   const canHandBack = t.status === 'review' || t.assignee === 'oliver';
   return (
-    <div className="flex gap-2.5">
-      <WhoAvatar who="oliver" size="md" />
-      <div className="flex-1 rounded-lg border border-border bg-card focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10">
-        <textarea rows={2} value={text} onChange={(e) => setText(e.target.value)} placeholder="Escreva um comentário, uma resposta ou uma instrução para a IA…"
-          onKeyDown={(e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(false); } }}
-          className="w-full resize-y bg-transparent px-3 py-2 text-sm outline-none" />
-        <div className="flex items-center gap-2 px-2 pb-2">
-          <span className="text-[11px] text-muted-foreground pl-1">Ctrl+Enter comenta</span>
+    <div className="rounded-md border border-border bg-card focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10">
+      <textarea rows={1} value={text} onChange={(e) => setText(e.target.value)} placeholder="Comentar ou dar uma instrução para a IA…"
+        onKeyDown={(e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(false); } }}
+        className="w-full resize-none bg-transparent px-2.5 py-1.5 text-sm outline-none [field-sizing:content] min-h-8 max-h-48" />
+      {text.trim() && (
+        <div className="flex items-center gap-1.5 px-1.5 pb-1.5">
+          <span className="text-[11px] text-muted-foreground pl-1">Ctrl+Enter</span>
           <div className="ml-auto flex gap-1.5">
             {canHandBack && (
-              <UiButton size="sm" variant="outline" disabled={!text.trim()} onClick={() => send(true)} title="Comenta, volta para A fazer e passa para a IA">
-                <ArrowRight /> Comentar e devolver à IA
-              </UiButton>
+              <UiButton size="xs" variant="outline" onClick={() => send(true)} title="Comenta, volta para A fazer e passa para a IA"><ArrowRight /> Comentar e devolver à IA</UiButton>
             )}
-            <UiButton size="sm" disabled={!text.trim()} onClick={() => send(false)}><CornerDownLeft /> Comentar</UiButton>
+            <UiButton size="xs" onClick={() => send(false)}><CornerDownLeft /> Comentar</UiButton>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -333,24 +348,23 @@ function CommentBox({ task, actions }: { task: TaskDoc; actions: Actions }) {
 function Activity({ log }: { log: string[] }) {
   const [open, setOpen] = useState(false);
   if (!log.length) return null;
-  const shown = open ? log : log.slice(-3);
   return (
-    <div className="mt-6">
-      <button type="button" onClick={() => setOpen((v) => !v)} className="flex items-center gap-1 text-xs font-medium text-muted-foreground uppercase tracking-wide hover:text-foreground">
-        {open ? <ChevronDown className="size-3.5" /> : <ChevronRight className="size-3.5" />} Atividade <span className="normal-case font-normal tabular-nums">({log.length})</span>
+    <div className="mt-4">
+      <button type="button" onClick={() => setOpen((v) => !v)} className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground">
+        {open ? <ChevronDown className="size-3.5" /> : <ChevronRight className="size-3.5" />} Atividade <span className="font-normal tabular-nums">{log.length}</span>
       </button>
-      <ol className="mt-2 border-l border-border ml-1.5 pl-4 flex flex-col gap-1.5">
-        {!open && log.length > 3 && <li className="text-xs text-muted-foreground">… {log.length - 3} anteriores</li>}
-        {shown.map((l, i) => {
-          const [date, who, ...rest] = l.split(' · ');
-          return (
-            <li key={i} className="text-xs text-muted-foreground relative">
-              <span className="absolute -left-[21px] top-1.5 size-1.5 rounded-full bg-border" />
-              {rest.length ? <><span className="tabular-nums">{date}</span> · <span className="text-foreground font-medium">{whoLabel(who)}</span> · {rest.join(' · ')}</> : l}
-            </li>
-          );
-        })}
-      </ol>
+      {open && (
+        <ol className="mt-1.5 border-l border-border ml-1.5 pl-3 flex flex-col gap-1">
+          {log.map((l, i) => {
+            const [date, who, ...rest] = l.split(' · ');
+            return (
+              <li key={i} className="text-[11px] text-muted-foreground">
+                {rest.length ? <><span className="tabular-nums">{date}</span> · <span className="text-foreground">{whoLabel(who)}</span> · {rest.join(' · ')}</> : l}
+              </li>
+            );
+          })}
+        </ol>
+      )}
     </div>
   );
 }

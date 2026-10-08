@@ -173,6 +173,14 @@ export function commentTask(slug: string, id: string, input: { text: string; who
   return saveTask(slug, data, joinTaskBody(parts));
 }
 
+/** Agentes (.claude/agents/*.md): nome, cor (campo color do Claude Code) e descrição — para o app mostrar quem é quem. */
+export function listAgents() {
+  return list('.claude/agents', /\.md$/).map((f) => {
+    const { data } = parseSimple(read(join('.claude/agents', f)));
+    return { name: String(data.name ?? f.replace(/\.md$/, '')), color: data.color ? String(data.color) : null, description: String(data.description ?? '') };
+  });
+}
+
 /** Arquivar = mover para board/arquivo/ (fora do quadro e do heartbeat, sem apagar). */
 export function archiveTask(slug: string, id: string, who = 'oliver') {
   const t = listTasks(slug).find((x) => x.data.id === id);

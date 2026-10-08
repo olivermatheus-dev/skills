@@ -1,5 +1,6 @@
 ---
 name: estrategista
+color: purple
 description: Estrategista de marketing. Gera pautas e calendário, planos de lançamento, analisa resultados (posts e anúncios) e transforma aprendizados em atualização do contexto da empresa. Delegue planejamento, priorização de conteúdo, plano de lançamento e análise de desempenho.
 skills: [content-ideas, launch-plan]
 ---

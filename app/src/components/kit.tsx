@@ -61,7 +61,7 @@ export const Empty = ({ title, hint, action }: { title: string; hint?: string; a
 );
 
 /** Painel lateral (detalhe/edição). Fecha com Esc. */
-export function Drawer({ open, onClose, title, children, width = 'max-w-2xl', canClose }: { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; width?: string; /** devolve false para impedir o fechamento (ex.: alterações não salvas) */ canClose?: () => boolean }) {
+export function Drawer({ open, onClose, title, children, width = 'max-w-2xl', canClose, dense }: { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; width?: string; /** devolve false para impedir o fechamento (ex.: alterações não salvas) */ canClose?: () => boolean; /** cabeçalho baixo e margens menores */ dense?: boolean }) {
   const tryClose = () => { if (!canClose || canClose()) onClose(); };
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === 'Escape' && tryClose();
@@ -72,11 +72,11 @@ export function Drawer({ open, onClose, title, children, width = 'max-w-2xl', ca
   return (
     <div className="fixed inset-0 z-40 flex justify-end bg-black/20" onClick={tryClose}>
       <div className={cx('h-full w-full bg-card shadow-xl overflow-y-auto', width)} onClick={(e) => e.stopPropagation()}>
-        <div className="sticky top-0 bg-card border-b border-border px-6 py-3 flex items-center justify-between z-10">
-          <div className="font-semibold">{title}</div>
+        <div className={cx('sticky top-0 bg-card border-b border-border flex items-center justify-between z-10', dense ? 'px-4 py-1.5' : 'px-6 py-3')}>
+          <div className={dense ? 'text-sm' : 'font-semibold'}>{title}</div>
           <button onClick={tryClose} className="text-muted-foreground hover:text-foreground text-xl leading-none">×</button>
         </div>
-        <div className="p-6">{children}</div>
+        <div className={dense ? 'px-5 py-3' : 'p-6'}>{children}</div>
       </div>
     </div>
   );

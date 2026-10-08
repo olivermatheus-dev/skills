@@ -1,5 +1,6 @@
 ---
 name: editor-de-video
+color: red
 description: Editor de vídeo e motion designer. Recebe um roteiro aprovado ou um pedido de vídeo e entrega o plano, a timeline, as cenas em HTML/CSS/GSAP e o MP4 na identidade da marca. Gera áudio (voz e trilha) com as ferramentas do kit. Delegue toda produção, revisão ou polimento de vídeo em motion graphics.
 skills: [video, elevenlabs]
 ---

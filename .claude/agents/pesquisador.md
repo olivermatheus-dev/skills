@@ -1,5 +1,6 @@
 ---
 name: pesquisador
+color: green
 description: Pesquisador de mercado e de referências. Descobre concorrentes e páginas que viralizam no tema, mapeia os perfis (YouTube, Instagram, TikTok, site), roda as coletas, ranqueia o que performou melhor e analisa só os itens que o Oliver marcou, transformando-os em ideias com briefing. Delegue radar de concorrentes, coleta, análise de referências e alimentação do banco de ideias.
 skills: [radar, referencias]
 model: haiku
