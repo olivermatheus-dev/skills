@@ -102,14 +102,13 @@ on('GET', '/api/projects/:slug/analysis-all', (p) => S.listCompetitors(p.slug).m
 on('GET', '/api/projects/:slug/competitors-feed', (p) => S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({
   id: c.data.id, ...S.listSnapshotsForView(p.slug, c.data.id, { full: 2, max: 2 }), marks: S.getMarks(p.slug, c.data.id),
 })));
-// Coleta semanal (redes + anúncios) e anúncios da Biblioteca da Meta (fase D da 031)
-on('GET', '/api/projects/:slug/weekly', async (p) => (await import('../../tools/intel/semanal')).withNext(p.slug));
-on('PUT', '/api/projects/:slug/weekly', async (p, b) => (await import('../../tools/intel/semanal')).saveSettings(p.slug, b ?? {}));
+// Coleta semanal (redes + anúncios; só sob comando) e anúncios da Biblioteca da Meta (fase D da 031)
+on('GET', '/api/projects/:slug/weekly', async (p) => (await import('../../tools/intel/semanal')).status(p.slug));
 on('POST', '/api/projects/:slug/weekly', async (p) => {
   const W = await import('../../tools/intel/semanal');
-  void W.runWeekly(p.slug, { force: true }).catch((e) => console.error(`[coleta semanal] ${p.slug}: ${e.message}`));
+  void W.runWeekly(p.slug).catch((e) => console.error(`[coleta semanal] ${p.slug}: ${e.message}`));
   await new Promise((r) => setTimeout(r, 300));
-  return W.withNext(p.slug);
+  return W.status(p.slug);
 });
 on('GET', '/api/projects/:slug/weekly/report', async (p, _, q) => ({ text: (await import('../../tools/intel/semanal')).readReport(p.slug, q.get('week') ?? '') }));
 // coletor de anúncios (Playwright só carrega dentro do collectAds)
@@ -262,11 +261,9 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
   send(res, 404, { error: `rota não encontrada: ${req.method} ${url.pathname}` });
 };
 
-/** coleta semanal dos concorrentes enquanto o app estiver aberto (HUB_NO_WEEKLY=1 desliga) */
-const startWeekly = () => { if (!process.env.HUB_NO_WEEKLY) void import('../../tools/intel/semanal').then((W) => W.startWeeklyScheduler()); };
 export const hubApi = (): Plugin => ({
   name: 'hub-api',
-  configureServer: (s) => { s.middlewares.use(handler); startWeekly(); },
+  configureServer: (s) => { s.middlewares.use(handler); },
   // modo rápido (npm run app = build + preview): mesma API sobre o bundle otimizado
-  configurePreviewServer: (s) => { s.middlewares.use(handler); startWeekly(); },
+  configurePreviewServer: (s) => { s.middlewares.use(handler); },
 });

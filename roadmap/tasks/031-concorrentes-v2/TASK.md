@@ -25,8 +25,8 @@ Rotas fixas em `pages/index.ts` (ganham da `:id` da ficha); casca comum `compone
 ## Fase D: anúncios e coleta semanal (2026-10-08)
 - **Anúncios** (`tools/intel/ads.ts`, CLI `npm run ads -- kz <id>|--all`, schema `schema/ads.ts`): Biblioteca de Anúncios da Meta, página pública, BR, só ativos, sem login. Playwright headless lê o JSON embutido na página (`ad_library_main.search_results_connection`) e o `/api/graphql/` da rolagem. Acha a página do anunciante pelo nome (o `page_id` fica no snapshot). Campos: id, página, início, plataformas, texto, título, CTA, destino, imagem/vídeo/carrossel, miniatura (baixada em `media/ads/`), variações. Gravado em `competitors/<id>/ads/<data>.json` (imutável). Para em login/checkpoint/captcha; pausa de 4 s entre concorrentes. Até 30 por concorrente.
 - **Aba Anúncios:** faixa (ativos, quantos anunciam, novos, no ar há 30+ dias = sinal de resultado, formato mais usado), chip por concorrente com contagem, novos e ↻, filtros (formato, plataforma, só novos, busca), ordenação por tempo no ar; card com miniatura, dias no ar (âmbar ≥ 30), variações, texto, título, CTA e domínio. Anúncio de catálogo (`{{product.brand}}`) aparece como "Catálogo (texto dinâmico)".
-- **Coleta semanal** (`tools/intel/semanal.ts`, `npm run intel:semanal -- kz [--force] [--sem-anuncios]`): redes de todos os ativos + anúncios, e o relatório `companies/<slug>/intel/semanas/AAAA-Wss.md` (audiência com Δ e a data da base, publicado nos últimos 7 dias ordenado por fora da curva, anúncios ativos e novos, falhas). Estado em `intel/coleta-semanal.json`. **Roda sozinha com o app aberto**: o servidor confere 1 min depois de abrir e a cada hora; vence toda segunda a partir das 8h (dia/hora/ligar no painel); um projeto por vez, trava contra rodada dupla (3 h). `HUB_NO_WEEKLY=1` desliga no servidor. Script puro: não gasta tokens.
-- **Painel na aba Coletas:** ligar/desligar, dia e hora, última/próxima, progresso ao vivo, "Rodar agora", relatórios por semana (abre formatado).
+- **Coleta semanal** (`tools/intel/semanal.ts`, `npm run intel:semanal -- kz [--sem-anuncios]`): redes de todos os ativos + anúncios, e o relatório `companies/<slug>/intel/semanas/AAAA-Wss.md` (audiência com Δ e a data da base, publicado nos últimos 7 dias ordenado por fora da curva, anúncios ativos e novos, falhas). Estado em `intel/coleta-semanal.json`. **Só roda quando o Oliver manda** (decisão de 2026-10-08: nada recorrente nem agendado): botão "Rodar agora" com o app aberto ou o comando acima. Trava contra rodada dupla (3 h). Script puro: não gasta tokens.
+- **Painel na aba Coletas:** última rodada, progresso ao vivo, "Rodar agora", relatórios por semana (abre formatado).
 - Skills `content-ideas` e `ads-meta` passam a ler o relatório mais recente.
 - **Primeira rodada real (2026-W41):** 28/29 perfis ok; 50 anúncios ativos em 6 de 11 concorrentes (Sintropia 15, Corpora 10, Allminds 9, PsicoManager 7, Mais Terapias 6, Psicoplanner 3); 40 dos 50 no ar há 30+ dias. Na 2ª busca seguida a Corpora deu HTTP 403 (limite da Meta): o relatório avisa e a aba usa a coleta anterior.
 - Prints: `prints/fase-d/`.
@@ -35,7 +35,6 @@ Rotas fixas em `pages/index.ts` (ganham da `:id` da ficha); casca comum `compone
 - **Oliver:** usar a ficha nova e dizer o que ainda ocupa espaço demais.
 - **Oliver:** usar as abas e apontar o que sobra ou falta (ex.: incluir a Kzloo como linha de referência no Comparar e no gráfico preço × audiência).
 - Sem página achada na Biblioteca: Clínica Ágil, GestorPsi, PersonCare, PsiNota AI e Terapee (0 anúncios ou nome diferente). Se anunciam com outro nome de página, cadastrar o link do Facebook em Editar.
-- A coleta semanal só roda com o app aberto. Para rodar com ele fechado: agendar `npm run intel:semanal -- kz` no Agendador de Tarefas do Windows (pede o aval do Oliver).
 - Allminds: o YouTube `@allmindsapp` dá 404 (canal mudou ou não existe): conferir o link.
 - YouTube da Sintropia (`@sintropiapsi`) volta com 0 itens pelo yt-dlp: investigar.
 - `npm run test:intel`: o teste "coleta completa (fixtures)" já falhava antes (`by.facebook` undefined), segundo o subagente.
@@ -124,6 +123,7 @@ Pesquisa e implementação em paralelo (subagente, 2026-10-08): rotas públicas 
 
 ## Log
 - 2026-10-08 — diagnóstico com prints (`prints/antes/`), plano da estrutura. Pesquisa do Instagram sem token disparada em paralelo.
+- 2026-10-08 — Oliver: coleta semanal só sob comando, sem agendamento → agendador removido (servidor, painel e estado).
 - 2026-10-08 — fase D: coletor de anúncios da Meta (subagente) + coleta semanal com relatório e agendador no app; 1ª rodada real W41.
 - 2026-10-08 — abas da área feitas (Panorama, Concorrentes, Comparar, Conteúdos, Redes, Anúncios, Coletas), conferidas com prints em `prints/area/`.
 - 2026-10-08 — pedidos do Oliver: "o que rodar" só no Puxar; onde atua e afins como chips; resultado da coleta compacto; organizar como gestor de marketing. Fase A da ficha feita. Instagram público implementado (subagente) e conferido numa coleta real.

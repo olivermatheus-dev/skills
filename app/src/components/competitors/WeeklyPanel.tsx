@@ -1,15 +1,13 @@
-// Coleta semanal (aba Coletas): quando roda, última e próxima, progresso, rodar agora, ligar/desligar, dia e hora,
-// e os relatórios digeridos de cada semana (companies/<slug>/intel/semanas/AAAA-Wss.md).
+// Coleta semanal (aba Coletas): roda só quando o Oliver clica em "Rodar agora" (sem agendamento). Mostra a última
+// rodada, o progresso e os relatórios digeridos de cada semana (companies/<slug>/intel/semanas/AAAA-Wss.md).
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { CalendarClock } from 'lucide-react';
 import { api } from '../../api';
 import { qk, useWeekly } from '../../queries';
 import { toast } from '../toast';
-import { Button, Drawer, Select, cx } from '../kit';
+import { Button, Drawer, cx } from '../kit';
 import { Spinner, fmtDateTime, timeAgo } from './lib';
-
-const DAYS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 
 export default function WeeklyPanel({ slug }: { slug: string }) {
   const qc = useQueryClient();
@@ -21,9 +19,6 @@ export default function WeeklyPanel({ slug }: { slug: string }) {
     if (d?.last) for (const k of ['competitors-summary', 'competitors-feed', 'ads', 'analysis-all']) void qc.invalidateQueries({ queryKey: [k, slug] });
   }, [d?.last]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!d) return null;
-  const set = async (patch: Parameters<typeof api.saveWeekly>[1]) => {
-    try { qc.setQueryData(qk.weekly(slug), await api.saveWeekly(slug, patch)); } catch (e) { toast.error(e, 'Não salvou'); }
-  };
   async function run() {
     try { qc.setQueryData(qk.weekly(slug), await api.runWeekly(slug)); toast.ok('Coleta semanal começou (roda no fundo)'); } catch (e) { toast.error(e, 'Não começou'); }
   }
@@ -35,18 +30,9 @@ export default function WeeklyPanel({ slug }: { slug: string }) {
     <section className="mb-4 bg-card border border-border rounded-xl px-4 py-3">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <span className="inline-flex items-center gap-2 font-medium"><CalendarClock className="size-4 text-muted-foreground" />Coleta semanal</span>
-        <label className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-          <input type="checkbox" checked={d.enabled} onChange={(e) => set({ enabled: e.target.checked })} /> ligada
-        </label>
-        <span className={cx('inline-flex items-center gap-1 text-xs', !d.enabled && 'opacity-50')}>
-          toda
-          <Select value={d.weekday} onChange={(e) => set({ weekday: Number(e.target.value) })} className="!py-0.5 !text-xs" aria-label="Dia">{DAYS.map((x, i) => <option key={x} value={i}>{x}</option>)}</Select>
-          a partir das
-          <Select value={d.hour} onChange={(e) => set({ hour: Number(e.target.value) })} className="!py-0.5 !text-xs" aria-label="Hora">{Array.from({ length: 24 }, (_, h) => <option key={h} value={h}>{h}h</option>)}</Select>
-        </span>
         <span className="text-xs text-muted-foreground">
           {d.last ? <>última <span title={fmtDateTime(d.last)}>{timeAgo(d.last)}</span>{d.lastSummary && <> · {d.lastSummary.ok}/{d.lastSummary.profiles} perfis{d.lastSummary.ads != null ? ` · ${d.lastSummary.ads} anúncios (${d.lastSummary.newAds ?? 0} novos)` : ''}{d.lastSummary.errors ? ` · ${d.lastSummary.errors} falha(s)` : ''}</>}</> : 'nunca rodou'}
-          {d.enabled && <> · {d.due ? <span className="text-warning">vencida: roda com o app aberto</span> : <>próxima {new Date(d.next).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' })}</>}</>}
+          {!r && <span className="opacity-70"> · roda só quando você manda: redes + anúncios de todos, alguns minutos</span>}
         </span>
         <span className="ml-auto flex items-center gap-2">
           {d.reports.slice(0, 4).map((x) => <button key={x.week} onClick={() => open(x.week)} className="text-xs px-2 py-0.5 rounded-md border border-border hover:border-primary hover:text-primary-ink">{x.week.replace(/^\d{4}-/, '')}</button>)}

@@ -1,7 +1,7 @@
 // Coleta semanal dos concorrentes: redes de todos os ativos + anúncios ativos (Biblioteca da Meta) e um relatório digerido
 // da semana em companies/<slug>/intel/semanas/AAAA-Wss.md (o que as skills leem). Estado em intel/coleta-semanal.json.
-// Roda sozinha com o app aberto (agendador abaixo, toda segunda a partir das 8h, ou na primeira abertura depois disso)
-// e à mão: npm run intel:semanal -- <slug> [--force]. Script puro: não gasta tokens.
+// Roda só quando o Oliver manda (sem agendamento): botão "Rodar agora" na aba Coletas, com o app aberto,
+// ou npm run intel:semanal -- <slug>. Script puro: não gasta tokens.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import * as S from '../../core/store';
@@ -10,35 +10,24 @@ import { collectCompetitor } from './collect';
 import type { CollectResult } from './types';
 
 const posix = (...xs: string[]) => join(...xs).replace(/\\/g, '/');
-const HOUR = 3_600_000;
-const STALE_RUN_MS = 3 * HOUR;
+const STALE_RUN_MS = 3 * 3_600_000;
 const DAY = 86_400_000;
 
 export interface WeeklyState {
-  /** dia da semana (0 = domingo) e hora a partir da qual a coleta vence */
-  weekday: number;
-  hour: number;
-  enabled: boolean;
   last?: string;
   lastWeek?: string;
   running?: { startedAt: string; done: number; total: number; current?: string } | null;
   lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
 }
-const DEFAULT: WeeklyState = { weekday: 1, hour: 8, enabled: true };
 
 const dir = (slug: string) => join(S.ROOT, company(slug), 'intel');
 const stateFile = (slug: string) => join(dir(slug), 'coleta-semanal.json');
 export function readState(slug: string): WeeklyState {
-  try { return { ...DEFAULT, ...JSON.parse(readFileSync(stateFile(slug), 'utf8')) }; } catch { return { ...DEFAULT }; }
+  try { const { last, lastWeek, running, lastSummary } = JSON.parse(readFileSync(stateFile(slug), 'utf8')); return { last, lastWeek, running, lastSummary }; } catch { return {}; }
 }
 function writeState(slug: string, s: WeeklyState) {
   mkdirSync(dir(slug), { recursive: true });
   writeFileSync(stateFile(slug), `${JSON.stringify(s, null, 2)}\n`);
-}
-export function saveSettings(slug: string, patch: Partial<Pick<WeeklyState, 'weekday' | 'hour' | 'enabled'>>) {
-  const s = { ...readState(slug), ...patch };
-  writeState(slug, s);
-  return withNext(slug, s);
 }
 
 /** semana ISO (AAAA-Wss) */
@@ -50,19 +39,10 @@ export function isoWeek(d: Date) {
   const w = Math.ceil(((t.getTime() - Date.UTC(y, 0, 1)) / DAY + 1) / 7);
   return `${y}-W${String(w).padStart(2, '0')}`;
 }
-/** último horário de vencimento (dia/hora configurados) até `now` */
-export function lastDue(s: WeeklyState, now = new Date()) {
-  const d = new Date(now);
-  d.setHours(s.hour, 0, 0, 0);
-  d.setDate(d.getDate() - ((d.getDay() - s.weekday + 7) % 7));
-  if (d > now) d.setDate(d.getDate() - 7);
-  return d;
-}
-export const isDue = (s: WeeklyState, now = new Date()) => s.enabled && (!s.last || Date.parse(s.last) < lastDue(s, now).getTime());
 const isRunning = (s: WeeklyState) => !!s.running && Date.now() - Date.parse(s.running.startedAt) < STALE_RUN_MS;
-export function withNext(slug: string, s = readState(slug)) {
-  const next = new Date(lastDue(s).getTime() + 7 * DAY);
-  return { ...s, running: isRunning(s) ? s.running : null, due: isDue(s), next: next.toISOString(), reports: listReports(slug) };
+/** estado para a tela: última rodada, progresso (se rodando) e os relatórios */
+export function status(slug: string, s = readState(slug)) {
+  return { ...s, running: isRunning(s) ? s.running : null, reports: listReports(slug) };
 }
 export function listReports(slug: string) {
   const d = join(dir(slug), 'semanas');
@@ -82,10 +62,9 @@ async function adsModule(): Promise<AdsMod | null> {
 }
 
 /** roda a semana (não roda duas ao mesmo tempo); devolve o resumo */
-export async function runWeekly(slug: string, { force = false, ads = true } = {}) {
+export async function runWeekly(slug: string, { ads = true } = {}) {
   const st = readState(slug);
   if (isRunning(st)) throw new Error('a coleta semanal já está rodando');
-  if (!force && !isDue(st)) return withNext(slug, st);
   const comps = S.listCompetitors(slug).filter((c) => c.data.status === 'ativo');
   const A = ads ? await adsModule() : null;
   const total = comps.length * (A ? 2 : 1);
@@ -114,7 +93,7 @@ export async function runWeekly(slug: string, { force = false, ads = true } = {}
     const s: WeeklyState = { ...readState(slug), running: null, last: new Date().toISOString(), lastWeek: week,
       lastSummary: { profiles: all.length, ok: all.filter((r) => r.ok).length, ads: A ? Object.values(adRes).reduce((n, r) => n + r.ads, 0) : undefined, newAds: md.newAds, report: posix(company(slug), 'intel', 'semanas', `${week}.md`), errors: all.filter((r) => !r.ok).length + Object.values(adRes).filter((r) => !r.ok).length } };
     writeState(slug, s);
-    return withNext(slug, s);
+    return status(slug, s);
   } catch (e) {
     writeState(slug, { ...readState(slug), running: null });
     throw e;
@@ -188,31 +167,11 @@ function report(slug: string, week: string, at: Date, results: Record<string, Co
   return { text, newAds };
 }
 
-// ---------- agendador (com o app aberto) ----------
-let timer: ReturnType<typeof setInterval> | null = null;
-/** confere a cada hora (e 1 min depois de abrir) se algum projeto venceu; roda um projeto por vez, no fundo */
-export function startWeeklyScheduler() {
-  if (timer) return;
-  const check = async () => {
-    for (const p of S.listProjects()) {
-      const slug = p.slug;
-      if (!slug) continue;
-      const st = readState(slug);
-      if (!isDue(st) || isRunning(st) || !S.listCompetitors(slug).some((c) => c.data.status === 'ativo')) continue;
-      console.log(`[coleta semanal] ${slug}: começando`);
-      try { const r = await runWeekly(slug); console.log(`[coleta semanal] ${slug}: ${r.lastSummary?.ok}/${r.lastSummary?.profiles} perfis · ${r.lastSummary?.report}`); }
-      catch (e) { console.error(`[coleta semanal] ${slug}: ${(e as Error).message}`); }
-    }
-  };
-  setTimeout(() => void check(), 60_000);
-  timer = setInterval(() => void check(), HOUR);
-}
-
 // ---------- CLI ----------
 if (process.argv[1]?.replace(/\\/g, '/').endsWith('tools/intel/semanal.ts')) {
   const [slug, ...rest] = process.argv.slice(2);
-  if (!slug) { console.log('uso: npm run intel:semanal -- <slug> [--force] [--sem-anuncios]'); process.exit(1); }
-  runWeekly(slug, { force: rest.includes('--force'), ads: !rest.includes('--sem-anuncios') })
-    .then((r) => { console.log(r.lastSummary ? `ok: ${r.lastSummary.ok}/${r.lastSummary.profiles} perfis · relatório ${r.lastSummary.report}` : `não venceu ainda (próxima: ${new Date(r.next).toLocaleString('pt-BR')}); use --force`); })
+  if (!slug) { console.log('uso: npm run intel:semanal -- <slug> [--sem-anuncios]'); process.exit(1); }
+  runWeekly(slug, { ads: !rest.includes('--sem-anuncios') })
+    .then((r) => { console.log(`ok: ${r.lastSummary?.ok}/${r.lastSummary?.profiles} perfis · relatório ${r.lastSummary?.report}`); })
     .catch((e) => { console.error(e.message); process.exit(1); });
 }

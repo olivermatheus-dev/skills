@@ -54,7 +54,7 @@ import type { AdsSnapshot, Ad } from '../../schema/ads';
 export type { AdsSnapshot, Ad };
 /** coleta semanal (tools/intel/semanal.ts) */
 export interface WeeklyInfo {
-  weekday: number; hour: number; enabled: boolean; last?: string; lastWeek?: string; due: boolean; next: string;
+  last?: string; lastWeek?: string;
   running?: { startedAt: string; done: number; total: number; current?: string } | null;
   lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
   reports: { week: string; file: string }[];
@@ -140,7 +140,6 @@ export const api = {
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
   runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
-  saveWeekly: (slug: string, s: Partial<Pick<WeeklyInfo, 'weekday' | 'hour' | 'enabled'>>) => req<WeeklyInfo>('PUT', `${pj(slug)}/weekly`, s),
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),
   ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
