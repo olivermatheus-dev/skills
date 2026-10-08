@@ -1,62 +1,410 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:41:58Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://allminds.app/planos/"
+      "url": "https://allminds.app/planos/",
+      "title": "Planos (mensal e anual)"
+    },
+    {
+      "url": "https://allminds.app/",
+      "title": "Home (teste de 15 dias, menos de R$ 2/dia)"
+    },
+    {
+      "url": "https://web.allminds.app/cadastre-se",
+      "title": "Início do cadastro (escolha de perfil)"
     }
   ],
-  "confidence": "alta",
+  "confidence": "media",
   "data": {
     "publicPrice": true,
     "currency": "BRL",
     "model": "assinatura",
     "fromMonthly": 74.9,
     "trial": "15 dias grátis",
-    "guarantee": "reembolso integral em até 7 dias no anual",
+    "trialDays": 15,
+    "trialNeedsCard": null,
+    "trialPlanId": null,
+    "guarantee": "Reembolso integral em até 7 dias corridos (só plano anual)",
+    "refundDays": 7,
+    "refundScope": "Somente plano anual, até 7 dias corridos da contratação; depois o anual segue até o fim do ciclo, sem reembolso",
+    "pageDefaultCycle": "mensal",
+    "commitment": "fidelidade-anual",
+    "paymentMethods": [],
     "plans": [
       {
+        "id": "captacao",
         "name": "Captação",
+        "audience": "solo",
+        "users": "Sem sistema de gestão",
+        "recommended": false,
+        "otherCycles": [
+          {
+            "cycle": "trimestral",
+            "total": 279,
+            "perMonth": 93,
+            "installments": null
+          }
+        ],
         "highlights": [
           "9 leads por trimestre",
-          "R$ 279 por trimestre, sem gestão"
+          "R$ 279 por trimestre, sem gestão",
+          "100% da sessão é do profissional"
         ],
-        "recommended": false
+        "includes": [
+          "Envio de 9 leads por trimestre (pessoas interessadas em psicoterapia)",
+          "Você entra em contato diretamente",
+          "100% da sessão é do profissional",
+          "Sem taxa nem repasse sobre as sessões",
+          "Perfil on-line para divulgação",
+          "Visibilidade no Portal Allminds",
+          "Biblioteca de conteúdos limitada",
+          "Assistente de conversas com IA e mensagens prontas para WhatsApp",
+          "Curso de WhatsApp Business"
+        ],
+        "limits": [
+          {
+            "metric": "outro",
+            "value": 9,
+            "period": "trimestre",
+            "note": "Leads de pacientes"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "9 leads por trimestre"
+          },
+          {
+            "id": "perfil-publico",
+            "status": "sim"
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "Assistente de conversas"
+          },
+          {
+            "id": "cursos-comunidade",
+            "status": "parcial",
+            "note": "Biblioteca limitada"
+          }
+        ]
       },
       {
+        "id": "gestao",
         "name": "Gestão",
         "monthly": 74.9,
         "yearlyMonthly": 67.41,
         "yearlyTotal": 808.92,
+        "audience": "solo",
+        "users": "Profissional (número de usuários não informado)",
+        "recommended": false,
         "highlights": [
           "agenda, prontuário, financeiro",
           "vídeo R$ 2/sessão",
           "lembrete por e-mail"
         ],
-        "recommended": false
+        "includes": [
+          "Agenda online inteligente",
+          "Agendamento manual",
+          "Confirmação de sessão",
+          "Lembrete de sessão por e-mail",
+          "Cobranças automáticas",
+          "Controle financeiro completo",
+          "Relatórios de desempenho",
+          "Prontuário e anamnese do paciente",
+          "Sala de vídeo (R$ 2,00 por sessão)",
+          "Link personalizado",
+          "Perfil on-line para divulgação",
+          "Visibilidade no Portal Allminds",
+          "Biblioteca de conteúdos limitada",
+          "Central de Conhecimento Allminds",
+          "Assistente de conversas com IA e mensagens prontas para WhatsApp",
+          "Curso de WhatsApp Business"
+        ],
+        "limits": [
+          {
+            "metric": "video-sessoes",
+            "note": "R$ 2,00 por sessão"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agenda online inteligente"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só e-mail"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Controle financeiro completo"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Cobranças automáticas"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Relatórios de desempenho"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim",
+            "note": "Prontuário e anamnese"
+          },
+          {
+            "id": "video-nativa",
+            "status": "parcial",
+            "note": "R$ 2 por sessão"
+          },
+          {
+            "id": "perfil-publico",
+            "status": "sim"
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "Assistente de conversas"
+          },
+          {
+            "id": "cursos-comunidade",
+            "status": "parcial",
+            "note": "Central e biblioteca limitada"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "parcial",
+            "note": "Consultoria R$ 100 à parte"
+          }
+        ]
       },
       {
+        "id": "ecossistema",
         "name": "Ecossistema",
         "monthly": 179.9,
         "yearlyMonthly": 161.91,
         "yearlyTotal": 1942.92,
+        "audience": "solo",
+        "users": "Profissional (número de usuários não informado)",
+        "recommended": true,
+        "inherits": "gestao",
         "highlights": [
           "12 leads/trimestre",
           "30 sessões de vídeo",
-          "100 NF/mês",
-          "WhatsApp",
-          "cursos e mentorias"
+          "100 NF/mês"
         ],
-        "recommended": true
+        "includes": [
+          "Agenda online inteligente",
+          "Agendamento manual",
+          "Confirmação de sessão",
+          "Lembrete de sessão por e-mail",
+          "Cobranças automáticas",
+          "Controle financeiro completo",
+          "Relatórios de desempenho",
+          "Prontuário e anamnese do paciente",
+          "Link personalizado",
+          "Perfil on-line para divulgação",
+          "Visibilidade no Portal Allminds",
+          "Central de Conhecimento Allminds",
+          "Assistente de conversas com IA e mensagens prontas para WhatsApp",
+          "Curso de WhatsApp Business",
+          "Tudo do Gestão",
+          "Captação de 12 leads por trimestre",
+          "Lembrete por e-mail, SMS ou WhatsApp (2 canais à escolha)",
+          "Rankeamento prioritário no Portal Allminds",
+          "30 sessões de vídeo inclusas (R$ 2,00 por sessão adicional)",
+          "100 emissões de NF gratuitas/mês (+ R$ 0,20 por NF adicional)",
+          "Base de conteúdos completa (valor de referência R$ 490,90)",
+          "Mais de 20 cursos de marketing e ferramentas (Canva, YouTube, Meta Ads…)",
+          "Formação Empreendedora Allminds (valor de referência R$ 1.997,00)",
+          "Mentorias mensais e ao vivo com especialistas",
+          "Suporte dedicado (valor de referência R$ 499,90)",
+          "Comunidades Allminds",
+          "Clube Allminds de descontos gratuito",
+          "Consultoria de implementação inclusa",
+          "No anual: 1 mentoria de marketing ou vendas por ano"
+        ],
+        "limits": [
+          {
+            "metric": "outro",
+            "value": 12,
+            "period": "trimestre",
+            "note": "Leads de pacientes"
+          },
+          {
+            "metric": "video-sessoes",
+            "value": 30,
+            "note": "Período não informado; extra R$ 2,00/sessão"
+          },
+          {
+            "metric": "nf",
+            "value": 100,
+            "period": "mes",
+            "note": "Extra R$ 0,20 por NF"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail, SMS ou WhatsApp"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "2 canais à escolha"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Cobranças automáticas"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "30 sessões incluídas"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "100/mês, +R$ 0,20"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "12 leads/trimestre"
+          },
+          {
+            "id": "perfil-publico",
+            "status": "sim",
+            "note": "Ranking prioritário"
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "Assistente de conversas"
+          },
+          {
+            "id": "cursos-comunidade",
+            "status": "sim",
+            "note": "Cursos, mentorias e comunidades"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte dedicado"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim",
+            "note": "Consultoria inclusa"
+          }
+        ]
       }
     ],
     "extras": [
-      "Clube de descontos: R$ 19,90/mês",
-      "Consultoria de implementação: R$ 100 único",
+      "Clube de descontos: R$ 19,90/mês (grátis no Ecossistema)",
+      "Consultoria de implementação: R$ 100 único (inclusa no Ecossistema)",
       "Vídeo adicional: R$ 2/sessão",
       "NF adicional: R$ 0,20"
     ],
-    "notes": "Estado padrão da página: Mensal (R$ 74,90 e R$ 179,90 /mês; Captação é trimestral, R$ 279). O anual aparece só como \"Cobrado como R$ 808,92/ano\" e \"R$ 1942,92/ano\" (= 10% off sobre 12x o mensal); o valor mensal equivalente do anual foi calculado (total/12). Anual inclui 1 mentoria de marketing ou vendas/ano e tem reembolso só em 7 dias. Home: menos de R$ 2 por dia."
+    "addOns": [
+      {
+        "name": "Clube Allminds de descontos",
+        "price": 19.9,
+        "unit": "mes",
+        "per": "assinante",
+        "planIds": [
+          "gestao"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Consultoria de implementação",
+        "price": 100,
+        "unit": "unico",
+        "per": "conta",
+        "planIds": [
+          "gestao"
+        ],
+        "unlocks": [
+          "migracao-assistida"
+        ]
+      },
+      {
+        "name": "Sessão de vídeo adicional",
+        "price": 2,
+        "unit": "por-uso",
+        "per": "sessão",
+        "planIds": [
+          "gestao",
+          "ecossistema"
+        ],
+        "unlocks": [
+          "video-nativa"
+        ]
+      },
+      {
+        "name": "NF adicional (acima de 100/mês)",
+        "price": 0.2,
+        "unit": "por-uso",
+        "per": "nota",
+        "planIds": [
+          "ecossistema"
+        ],
+        "unlocks": [
+          "nfse"
+        ]
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "precos",
+        "url": "https://allminds.app/planos/"
+      },
+      {
+        "kind": "home",
+        "url": "https://allminds.app/"
+      },
+      {
+        "kind": "checkout",
+        "url": "https://web.allminds.app/cadastre-se"
+      }
+    ],
+    "notes": "Preços iguais aos da coleta de 07/10. Página abre em Mensal (R$ 74,90 e R$ 179,90). Captação é trimestral (R$ 279 por trimestre; perMonth 93 = 279/3, cálculo nosso), cobrada pelo Hotmart; sem preço mensal, por isso fromMonthly considera só Gestão. No Anual a página mostra o mensal equivalente (R$ 67,41 e R$ 161,91) e \"Cobrado como R$ 808,92/ano\" e \"R$ 1942,92/ano\". A mentoria de marketing/vendas por ano aparece só no Anual, no cartão do Ecossistema. Os valores 490,90 / 1.997,00 / 499,90 são preços de referência de conteúdos inclusos, não cobranças. O anual tem compromisso de permanência (reembolso integral só nos primeiros 7 dias corridos); mensal: regra de cancelamento não encontrada. Não há página de termos de uso nem FAQ de preços acessível pelo site; só política de privacidade. Teste de 15 dias: a página de cadastro abre na escolha de perfil (profissional/clínica/paciente) e não foi seguida adiante; se pede cartão, não foi verificado (trialNeedsCard vazio). Formas de pagamento não informadas. Número de profissionais por plano e plano para clínica não informados (cadastro tem perfil \"Somos uma clínica\"). Período das 30 sessões de vídeo do Ecossistema não é dito. Plano Gestão tem lembrete só por e-mail; WhatsApp só no Ecossistema."
   }
 }

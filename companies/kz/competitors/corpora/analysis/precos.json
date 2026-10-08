@@ -1,13 +1,23 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:29:33Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://usecorpora.com.br/precos/"
+      "url": "https://usecorpora.com.br/planos/",
+      "title": "Planos e tabela comparativa"
     },
     {
-      "url": "https://usecorpora.com.br/"
+      "url": "https://usecorpora.com.br/plano-profissional/",
+      "title": "Página do plano Profissional"
+    },
+    {
+      "url": "https://usecorpora.com.br/termos-de-uso/",
+      "title": "Termos de uso (cobrança, renovação, cancelamento)"
+    },
+    {
+      "url": "https://usecorpora.com.br/faq/",
+      "title": "FAQ (sem conteúdo de preço)"
     }
   ],
   "confidence": "alta",
@@ -16,40 +26,317 @@
     "currency": "BRL",
     "model": "freemium",
     "fromMonthly": 89,
-    "trial": "7 dias do plano Pro, sem cartão",
-    "guarantee": "sem fidelidade",
+    "trial": "Plano Grátis para sempre, sem cartão; PRO sem prazo de teste informado",
+    "guarantee": "Sem fidelidade, sem taxa de cancelamento",
+    "trialNeedsCard": null,
+    "pageDefaultCycle": "outro",
+    "commitment": "sem-fidelidade",
+    "paymentMethods": [],
+    "refundScope": "Termos: cancelamento vale ao fim do ciclo, sem devolução proporcional; prevalece garantia legal ou regra informada na contratação",
     "plans": [
       {
+        "id": "gratis",
         "name": "Grátis",
         "monthly": 0,
         "users": "1 profissional",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false,
+          "staff": 0
+        },
+        "recommended": false,
         "highlights": [
           "pacientes ilimitados",
-          "50 sessões por mês",
-          "prontuário só texto",
-          "sala virtual",
-          "site de agendamento",
+          "até 50 sessões/mês",
           "Pix a 4,99%"
         ],
-        "recommended": false
+        "includes": [
+          "1 profissional",
+          "Gestão de pacientes ilimitados",
+          "Link de cadastro para pacientes",
+          "Organização personalizada",
+          "Exportação e importação facilitadas",
+          "Agenda inteligente (até 50 sessões/mês)",
+          "Gestão de status por sessão",
+          "Reagendamento e cancelamento",
+          "Criação de sessões recorrentes",
+          "Site de agendamentos (Corpora.bio)",
+          "Sala Virtual via Jitsi Meet",
+          "Gestão financeira, receitas, despesas e financeiro por paciente",
+          "Cobrança automática personalizada, repasse de taxas ao paciente",
+          "Cobrança Pix a 4,99%",
+          "Prontuário e anotações só em texto",
+          "Cadastro de locais e serviços",
+          "Personalização com foto e logo",
+          "Lembrete de aniversários"
+        ],
+        "limits": [
+          {
+            "metric": "sessoes",
+            "value": 50,
+            "period": "mes"
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "profissionais",
+            "value": 1
+          }
+        ],
+        "matrix": [
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Site de agendamento Corpora.bio"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Sala virtual Jitsi"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Link de cadastro"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança automática"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "parcial",
+            "note": "Pix a 4,99%"
+          },
+          {
+            "id": "agenda-visual",
+            "status": "parcial",
+            "note": "Até 50 sessões/mês"
+          },
+          {
+            "id": "prontuario",
+            "status": "parcial",
+            "note": "Só texto"
+          }
+        ]
       },
       {
+        "id": "profissional",
         "name": "Profissional",
         "monthly": 89,
-        "users": "1 profissional",
+        "yearlyMonthly": 74.17,
+        "yearlyTotal": 890,
+        "users": "1 profissional + 1 secretária",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false,
+          "staff": 1
+        },
+        "recommended": true,
+        "inherits": "gratis",
         "highlights": [
           "sessões ilimitadas",
-          "IA",
-          "notificações WhatsApp",
-          "instrumentos e documentos",
-          "Pix a 1,99%, cartão a 4,59%"
+          "IA clínica",
+          "WhatsApp oficial"
         ],
-        "recommended": true
+        "includes": [
+          "Tudo do Grátis",
+          "Sessões ilimitadas",
+          "Acesso administrativo (secretária)",
+          "Notificações por WhatsApp (lembrete, confirmação, cobrança)",
+          "Link de atualização de cadastro",
+          "Confirmação de presença e lembrete de sessão",
+          "Bloqueio de horários e bloqueio com cancelamento automático",
+          "Sala Virtual via Google Meet ou outra",
+          "Emissão de Receita Saúde (em lote)",
+          "Cobrança Pix a 1,99% e cartão a 4,59%",
+          "Prontuário e anotações completos com imagens, tabelas e anexos",
+          "Instrumentos clínicos e escalas com cálculo automático",
+          "Modelos de documentos",
+          "Diário de Bordo e evoluções",
+          "IA: transcrição, manuscrito para texto, reescrita e planejamento de sessão",
+          "Modelos de post no Canva",
+          "Aulas práticas e tutoriais"
+        ],
+        "limits": [
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "profissionais",
+            "value": 1
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Corpora.bio"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Jitsi, Meet ou outra"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança automática"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Pix 1,99%, cartão 4,59%"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Texto, imagens, tabelas, anexos"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "WhatsApp oficial"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Acesso administrativo"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Em lote"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "Instrumentos e escalas"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim",
+            "note": "Modelos de documentos"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "sim",
+            "note": "Diário de Bordo"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Transcrição e evolução"
+          },
+          {
+            "id": "ia-apoio-clinico",
+            "status": "sim",
+            "note": "Planejar sessão com IA"
+          },
+          {
+            "id": "materiais-marketing",
+            "status": "sim",
+            "note": "Modelos de post no Canva"
+          },
+          {
+            "id": "cursos-comunidade",
+            "status": "sim",
+            "note": "Aulas e tutoriais"
+          }
+        ]
       }
     ],
     "extras": [
-      "Taxa de cobrança: Pix 4,99% (grátis) ou 1,99% (Pro); cartão 4,59% (Pro)"
+      "Taxa de cobrança: Pix 4,99% (Grátis) ou 1,99% (Pro); cartão 4,59% (Pro)"
     ],
-    "notes": "Valores da página de planos; só mensal encontrado, sem preço anual."
+    "addOns": [
+      {
+        "name": "Taxa Corpora Pay — Pix",
+        "price": 4.99,
+        "unit": "percentual",
+        "per": "transação recebida",
+        "planIds": [
+          "gratis"
+        ],
+        "unlocks": [
+          "cobranca-online"
+        ]
+      },
+      {
+        "name": "Taxa Corpora Pay — Pix",
+        "price": 1.99,
+        "unit": "percentual",
+        "per": "transação recebida",
+        "planIds": [
+          "profissional"
+        ],
+        "unlocks": [
+          "cobranca-online"
+        ]
+      },
+      {
+        "name": "Taxa Corpora Pay — cartão de crédito",
+        "price": 4.59,
+        "unit": "percentual",
+        "per": "transação recebida",
+        "planIds": [
+          "profissional"
+        ],
+        "unlocks": [
+          "cobranca-online"
+        ]
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "precos",
+        "url": "https://usecorpora.com.br/planos/"
+      },
+      {
+        "kind": "comparativo",
+        "url": "https://usecorpora.com.br/plano-profissional/"
+      },
+      {
+        "kind": "faq",
+        "url": "https://usecorpora.com.br/faq/"
+      },
+      {
+        "kind": "termos",
+        "url": "https://usecorpora.com.br/termos-de-uso/"
+      },
+      {
+        "kind": "home",
+        "url": "https://usecorpora.com.br/"
+      }
+    ],
+    "notes": "MUDANÇAS: (1) a URL /precos/ foi removida (404); os preços estão em /planos/. (2) NOVO ciclo anual: R$ 890/ano (\"Economize 2 meses\"); a página mostra só o total, então yearlyMonthly = 890/12 = 74,17 (cálculo nosso). (3) A coleta anterior citava \"7 dias do plano Pro, sem cartão\": isso NÃO aparece mais no site (CTAs \"Comece Grátis\"/\"Testar Plano PRO\" levam ao cadastro gratuito, sem prazo de teste), por isso trialDays vazio. A página /planos/ abre mostrando os três cartões lado a lado (grátis, R$ 89/mês e R$ 890/ano). Plano Grátis: até 50 sessões/mês, prontuário só texto, Pix 4,99%, sem WhatsApp, IA, instrumentos, documentos nem secretária; a página avisa que funcionalidades do grátis podem mudar. Pro: sem fidelidade; termos cl. 7: renovação automática, cancelamento só ao fim do ciclo, sem devolução proporcional. Formas de pagamento da assinatura e se o PRO pede cartão não foram encontradas (FAQ da página tem perguntas fechadas sem resposta carregada). Sem plano para clínicas/equipes: apenas 1 profissional por plano."
   }
 }

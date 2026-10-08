@@ -1,10 +1,19 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:42:18Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://www.terapee.com.br/"
+      "url": "https://www.terapee.com.br/planos/",
+      "title": "Planos e tabela comparativa (mensal e anual)"
+    },
+    {
+      "url": "https://www.terapee.com.br/",
+      "title": "Home com bloco de planos e FAQ"
+    },
+    {
+      "url": "https://www.terapee.com.br/termos-de-uso",
+      "title": "Termos de uso (teste, pagamento, renovação)"
     }
   ],
   "confidence": "alta",
@@ -12,55 +21,415 @@
     "publicPrice": true,
     "currency": "BRL",
     "model": "assinatura",
-    "fromMonthly": 55.9,
+    "fromMonthly": 79,
     "trial": "14 dias grátis, sem cartão",
+    "trialDays": 14,
+    "trialNeedsCard": false,
+    "guarantee": "Cancele quando quiser; sem fidelidade",
+    "pageDefaultCycle": "mensal",
+    "commitment": "sem-fidelidade",
+    "paymentMethods": [
+      "cartao"
+    ],
+    "refundScope": "Sem reembolso informado; cancelamento mantém acesso até o fim do período pago",
     "plans": [
       {
+        "id": "individual",
         "name": "Individual",
-        "monthly": 55.9,
-        "yearlyMonthly": 44.72,
-        "yearlyTotal": 536.64,
+        "monthly": 79,
+        "yearlyMonthly": 63.2,
+        "yearlyTotal": 758.4,
         "users": "1 usuário",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "agenda ilimitada",
-          "lembretes WhatsApp",
-          "prontuário",
-          "telemedicina",
-          "NFS-e"
+          "agenda com recorrência e pacotes",
+          "lembretes por WhatsApp",
+          "NFS-e sem custo por nota"
         ],
-        "recommended": false
+        "includes": [
+          "1 usuário",
+          "Agenda com sessões recorrentes e pacotes",
+          "Lembretes e confirmação pelo WhatsApp",
+          "Prontuário, formulários e teleconsulta",
+          "Cobrança pelo WhatsApp, recibos e documentos",
+          "NFS-e sem custo por nota",
+          "Check-in",
+          "Assinatura digital",
+          "Acesso por computador, tablet e celular",
+          "Migração feita pelo time"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 1
+          },
+          {
+            "metric": "sessoes",
+            "unlimited": true,
+            "note": "Agendamentos ilimitados"
+          },
+          {
+            "metric": "nf",
+            "unlimited": true,
+            "note": "NFS-e sem custo por nota"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamentos ilimitados"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Formulários personalizáveis"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim",
+            "note": "Documentos personalizáveis"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Teleconsulta"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança via WhatsApp"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "Sem custo por nota"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembrete e confirmação"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim",
+            "note": "Feita pelo time"
+          }
+        ]
       },
       {
+        "id": "clinica",
         "name": "Clínica",
-        "monthly": 89.9,
-        "yearlyMonthly": 71.92,
-        "yearlyTotal": 863.04,
-        "users": "até 15 usuários",
+        "monthly": 229,
+        "yearlyMonthly": 183.2,
+        "yearlyTotal": 2198.4,
+        "users": "Até 15 usuários",
+        "audience": "equipe",
+        "seats": {
+          "included": 1,
+          "max": 15,
+          "unlimited": false
+        },
+        "recommended": true,
+        "inherits": "individual",
         "highlights": [
           "multi-agenda",
-          "cadastro de secretária",
-          "tudo do Individual"
+          "acesso para secretária",
+          "repasse por profissional"
         ],
-        "recommended": true
+        "includes": [
+          "Agenda com sessões recorrentes e pacotes",
+          "Lembretes e confirmação pelo WhatsApp",
+          "Prontuário, formulários e teleconsulta",
+          "Cobrança pelo WhatsApp, recibos e documentos",
+          "NFS-e sem custo por nota",
+          "Check-in",
+          "Assinatura digital",
+          "Acesso por computador, tablet e celular",
+          "Migração feita pelo time",
+          "Até 15 usuários",
+          "Multi-agenda: a equipe toda numa tela",
+          "Acesso para a secretária marcar e confirmar",
+          "Repasse calculado para cada profissional"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 15,
+            "note": "Até 15 usuários"
+          },
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "nf",
+            "unlimited": true
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamentos ilimitados"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Formulários personalizáveis"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim",
+            "note": "Documentos personalizáveis"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Teleconsulta"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança via WhatsApp"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "Sem custo por nota"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembrete e confirmação"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim",
+            "note": "Feita pelo time"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "Multi-agenda"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Repasse calculado"
+          }
+        ]
       },
       {
+        "id": "clinica-max",
         "name": "Clínica Max",
-        "monthly": 175,
-        "yearlyMonthly": 140,
-        "yearlyTotal": 1680,
-        "users": "ilimitados",
+        "monthly": 349,
+        "yearlyMonthly": 279.2,
+        "yearlyTotal": 3350.4,
+        "users": "Usuários ilimitados",
+        "audience": "equipe",
+        "seats": {
+          "unlimited": true
+        },
+        "recommended": false,
+        "inherits": "clinica",
         "highlights": [
           "WhatsApp próprio incluso",
-          "logo na plataforma",
-          "página de agendamento online"
+          "página de agendamento online",
+          "logo na plataforma"
         ],
-        "recommended": false
+        "includes": [
+          "Agenda com sessões recorrentes e pacotes",
+          "Lembretes e confirmação pelo WhatsApp",
+          "Prontuário, formulários e teleconsulta",
+          "Cobrança pelo WhatsApp, recibos e documentos",
+          "NFS-e sem custo por nota",
+          "Check-in",
+          "Assinatura digital",
+          "Acesso por computador, tablet e celular",
+          "Migração feita pelo time",
+          "Usuários ilimitados",
+          "Multi-agenda: a equipe toda numa tela",
+          "Acesso para a secretária marcar e confirmar",
+          "Repasse calculado para cada profissional",
+          "WhatsApp próprio da clínica, já incluído",
+          "Página de agendamento online",
+          "Seu logo na plataforma",
+          "Lembrete de aniversariantes"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "unlimited": true
+          },
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "nf",
+            "unlimited": true
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agendamentos ilimitados"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Formulários personalizáveis"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim",
+            "note": "Documentos personalizáveis"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Teleconsulta"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança via WhatsApp"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "Sem custo por nota"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembrete e confirmação"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim",
+            "note": "Feita pelo time"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Página de agendamento online"
+          }
+        ]
       }
     ],
     "extras": [
-      "WhatsApp próprio é cobrado à parte nos planos Individual e Clínica",
-      "NFS-e incluída sem custo por nota"
+      "WhatsApp próprio (número da clínica) é contratado à parte nos planos Individual e Clínica; preço não publicado"
     ],
-    "notes": "Estado padrão da home: Mensal (R$ 55,90 / 89,90 / 175). Anual com 20% de desconto: R$ 44,72 / 71,92 / 140,00 por mês (totais calculados = 12x). Pagamento só por cartão de crédito. Os planos estão na home, não em precos.md."
+    "addOns": [
+      {
+        "name": "WhatsApp próprio da clínica (mensagens saindo do número da clínica)",
+        "price": null,
+        "unit": "mes",
+        "per": "preço não publicado",
+        "planIds": [
+          "individual",
+          "clinica"
+        ],
+        "unlocks": [
+          "wpp-lembrete"
+        ]
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "precos",
+        "url": "https://www.terapee.com.br/planos/"
+      },
+      {
+        "kind": "comparativo",
+        "url": "https://www.terapee.com.br/planos/#comparar"
+      },
+      {
+        "kind": "home",
+        "url": "https://www.terapee.com.br/"
+      },
+      {
+        "kind": "faq",
+        "url": "https://www.terapee.com.br/#faq"
+      },
+      {
+        "kind": "termos",
+        "url": "https://www.terapee.com.br/termos-de-uso"
+      }
+    ],
+    "notes": "MUDANÇA GRANDE: preços subiram em relação à coleta de 07/10 (Individual 55,90 -> 79; Clínica 89,90 -> 229, agora \"até 15 usuários\" a R$ 15,27/profissional; Clínica Max 175 -> 349). Home e /planos/ concordam. Página abre em Mensal; seletor Anual dá 20% de desconto, cobrado em parcela única (R$ 758,40 / 2.198,40 / 3.350,40 por ano), valores mensais equivalentes mostrados pela própria página. Preço é por clínica, não por profissional. Pagamento só por cartão de crédito (Stripe; termos citam \"outros meios informados na plataforma, como Asaas\"). Renovação automática; cancelamento sem multa, acesso até o fim do período pago (termos, cláusula 11). Reembolso não informado. Teste de 14 dias sem cartão em qualquer plano. \"Cadastro de secretária\" aparece só em Clínica/Max, mas a quantidade de secretárias não é informada (seats.staff vazio). Não há limite de pacientes informado. Check-in está na tabela mas não tem id na matriz. Preço do WhatsApp próprio não publicado."
   }
 }

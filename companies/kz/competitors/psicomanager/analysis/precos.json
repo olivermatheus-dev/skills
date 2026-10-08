@@ -1,10 +1,23 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:42:03Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     {
-      "url": "https://psicomanager.com.br/planos"
+      "url": "https://psicomanager.com.br/planos",
+      "title": "Planos (perfil Individual; ciclo mensal e anual)"
+    },
+    {
+      "url": "https://psicomanager.com.br/clinica",
+      "title": "Planos do perfil Clínica"
+    },
+    {
+      "url": "https://psicomanager.com.br/termos-de-uso",
+      "title": "Termos de uso (pagamento, cancelamento, reembolso)"
+    },
+    {
+      "url": "https://app2.psicomanager.com/cadastro-novo",
+      "title": "Início do cadastro (sem cartão)"
     }
   ],
   "confidence": "alta",
@@ -14,37 +27,474 @@
     "model": "assinatura",
     "fromMonthly": 109,
     "trial": "7 dias grátis, sem cartão",
+    "guarantee": "7 dias (arrependimento, reembolso total)",
+    "trialDays": 7,
+    "trialNeedsCard": false,
+    "refundDays": 7,
+    "refundScope": "Reembolso total dos valores pagos em até 7 dias da compra; serviços extras (SMS, WhatsApp, etc.) não são reembolsáveis",
+    "pageDefaultCycle": "anual",
+    "commitment": "multa",
+    "paymentMethods": [
+      "cartao",
+      "boleto"
+    ],
     "plans": [
       {
+        "id": "individual-pro",
         "name": "Individual Pró",
         "monthly": 109,
         "yearlyMonthly": 89,
         "yearlyTotal": 1068,
         "users": "1 profissional + atendente",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false,
+          "staff": 1
+        },
+        "recommended": false,
         "highlights": [
           "pacientes ilimitados",
           "créditos limitados de IA e WhatsApp",
           "5 relatórios"
         ],
-        "recommended": false
+        "includes": [
+          "Pacientes ilimitados",
+          "Usuário adicional para atendente",
+          "Gestão de pacientes",
+          "Agenda inteligente",
+          "Sessões",
+          "Financeiro e cobrança",
+          "Notificações ao cliente",
+          "App para pacientes",
+          "Sala virtual",
+          "Créditos limitados de IA",
+          "Créditos limitados de WhatsApp",
+          "5 relatórios"
+        ],
+        "limits": [
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "profissionais",
+            "value": 1
+          },
+          {
+            "metric": "ia-creditos",
+            "note": "Créditos limitados (quantidade não informada)"
+          },
+          {
+            "metric": "whatsapp-msgs",
+            "note": "Créditos limitados (quantidade não informada)"
+          },
+          {
+            "metric": "relatorios",
+            "value": 5
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agenda inteligente"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online pelo paciente"
+          },
+          {
+            "id": "google-agenda",
+            "status": "sim",
+            "note": "Google e iCalendar"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Link de cadastro"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim",
+            "note": "Com validade jurídica"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Créditos limitados"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Sala virtual"
+          },
+          {
+            "id": "app-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "parcial",
+            "note": "Pix grátis só no Plus"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Créditos limitados"
+          },
+          {
+            "id": "ia-apoio-clinico",
+            "status": "parcial",
+            "note": "Créditos limitados"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "parcial",
+            "note": "Só 5 relatórios"
+          }
+        ]
       },
       {
+        "id": "individual-plus",
         "name": "Individual Plus",
         "monthly": 149,
         "yearlyMonthly": 119,
         "yearlyTotal": 1428,
         "users": "1 profissional + atendente",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false,
+          "staff": 1
+        },
+        "recommended": true,
+        "inherits": "individual-pro",
         "highlights": [
           "IA ilimitada",
           "NFe e Receita Saúde ilimitados",
           "30 cobranças Pix grátis"
         ],
-        "recommended": true
+        "includes": [
+          "Usuário adicional para atendente",
+          "Gestão de pacientes",
+          "Agenda inteligente",
+          "Sessões",
+          "Financeiro e cobrança",
+          "Notificações ao cliente",
+          "App para pacientes",
+          "Sala virtual",
+          "Todos os recursos do Individual Pró",
+          "IA ilimitada",
+          "Human Track ilimitado",
+          "30 cobranças grátis no Pix",
+          "NFe ilimitado",
+          "Receita Saúde ilimitado",
+          "+ relatórios",
+          "Créditos limitados de WhatsApp (não citado como ilimitado)"
+        ],
+        "limits": [
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "profissionais",
+            "value": 1
+          },
+          {
+            "metric": "ia-creditos",
+            "unlimited": true
+          },
+          {
+            "metric": "nf",
+            "unlimited": true
+          },
+          {
+            "metric": "cobrancas",
+            "value": 30,
+            "period": "mes",
+            "note": "Cobranças Pix grátis (período não informado)"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim",
+            "note": "Agenda inteligente"
+          },
+          {
+            "id": "recorrencia",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online pelo paciente"
+          },
+          {
+            "id": "google-agenda",
+            "status": "sim",
+            "note": "Google e iCalendar"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim"
+          },
+          {
+            "id": "formulario-paciente",
+            "status": "sim",
+            "note": "Link de cadastro"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim",
+            "note": "Com validade jurídica"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Créditos limitados"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Sala virtual"
+          },
+          {
+            "id": "app-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Link Pix, boleto ou cartão"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "IA ilimitada"
+          },
+          {
+            "id": "ia-apoio-clinico",
+            "status": "sim",
+            "note": "IA ilimitada"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "+ relatórios"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "NFe ilimitado"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Ilimitado"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim"
+          }
+        ]
+      },
+      {
+        "id": "clinica",
+        "name": "Clínica",
+        "monthly": 159.9,
+        "yearlyMonthly": 129.9,
+        "yearlyTotal": 1558.8,
+        "users": "Até 6 profissionais + atendentes",
+        "audience": "equipe",
+        "seats": {
+          "max": 6,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "até 6 profissionais",
+          "repasses e comissões",
+          "agenda de salas compartilhada"
+        ],
+        "includes": [
+          "Multi-profissionais (até 6 profissionais)",
+          "Repasses e comissões",
+          "Agenda de salas compartilhada",
+          "Relatórios consolidados",
+          "Atendentes e colaboradores",
+          "Serviços extras opcionais por clínica ou profissional",
+          "Psicobank: condições comerciais dedicadas"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 6
+          }
+        ],
+        "matrix": [
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "Até 6 profissionais"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Repasses e comissões"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Atendentes e colaboradores"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Relatórios consolidados"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "NFS-e integrada (página Clínica)"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Receita Saúde integrada"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Convênios; TISS não citado"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Cobrança automática"
+          }
+        ]
       }
     ],
     "extras": [
-      "Plano Clínica Multiprofissional: preço não exibido"
+      "Psicobank (extrato e saque): condições comerciais dedicadas, sem preço público",
+      "SMS, WhatsApp, push, app do paciente e sala virtual: cobrados além da assinatura segundo os termos"
     ],
-    "notes": "Estado padrão da página: Anual (R$ 89 e R$ 119 /mês). Clicando em Mensal: R$ 109 e R$ 149. yearlyTotal = 12x o equivalente mensal (a página não mostra o total; cálculo nosso)."
+    "addOns": [
+      {
+        "name": "Serviços extras (SMS, WhatsApp, push, app do paciente, sala virtual)",
+        "price": null,
+        "unit": "por-uso",
+        "per": "preço não publicado",
+        "planIds": [
+          "individual-pro",
+          "individual-plus",
+          "clinica"
+        ],
+        "unlocks": [
+          "email-sms",
+          "wpp-lembrete",
+          "app-paciente"
+        ]
+      },
+      {
+        "name": "Psicobank (conta digital, extrato e saque)",
+        "price": null,
+        "unit": "percentual",
+        "per": "condições dedicadas, não publicadas",
+        "planIds": [
+          "clinica"
+        ],
+        "unlocks": []
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "precos",
+        "url": "https://psicomanager.com.br/planos"
+      },
+      {
+        "kind": "precos",
+        "url": "https://psicomanager.com.br/clinica"
+      },
+      {
+        "kind": "termos",
+        "url": "https://psicomanager.com.br/termos-de-uso"
+      },
+      {
+        "kind": "checkout",
+        "url": "https://app2.psicomanager.com/cadastro-novo"
+      }
+    ],
+    "notes": "Página abre em Anual (R$ 89 / 119 / 129,90 por mês); clicando em Mensal: R$ 109 / 149 / 159,90. A página não mostra o total do ano: yearlyTotal = 12x o valor mensal equivalente (cálculo nosso). NOVO: plano Clínica com preço público (até 6 profissionais), antes \"não exibido\". Termos de uso (5.7): cancelamento do plano gera multa de 30% sobre os valores ainda devidos (vale sobretudo para o anual); reembolso total em até 7 dias (5.4); pagamento por cartão de crédito e boleto via Asaas (5.5). DIVERGÊNCIA: os termos (5.3) dizem que sala virtual, app do paciente, SMS, WhatsApp e push são cobrados à parte, mas a página de planos lista app do paciente e sala virtual dentro do Individual Pró e fala em \"créditos limitados\" de WhatsApp; preços desses extras não são públicos. Plus não afirma WhatsApp ilimitado nem NFS-e no Pró (por isso NFS-e só no Plus). Na página Clínica não está dito se os recursos do Individual (IA, prontuário…) estão incluídos; só foi registrado o que a página afirma. Valores de limites de créditos (IA, WhatsApp) e período das 30 cobranças Pix não informados."
   }
 }
