@@ -1,77 +1,571 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:42:13Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
+  "confidence": "alta",
   "sources": [
     {
-      "url": "https://psinotaai.com/planos"
+      "url": "https://psinotaai.com/planos",
+      "title": "Planos e preços, comparação e FAQ"
+    },
+    {
+      "url": "https://psinotaai.com/termos",
+      "title": "Termos de uso (política de reembolso)"
     }
   ],
-  "confidence": "alta",
   "data": {
     "publicPrice": true,
     "currency": "BRL",
     "model": "freemium",
     "fromMonthly": 49,
-    "guarantee": "7 dias de reembolso total nos planos pagos",
+    "trial": "Sem trial; plano Free permanente",
+    "guarantee": "7 dias, reembolso integral nos planos pagos",
+    "pageDefaultCycle": "anual",
+    "refundDays": 7,
+    "refundScope": "Reembolso integral em até 7 dias corridos da contratação, em todos os planos pagos; depois disso, sem reembolso proporcional",
+    "commitment": "sem-fidelidade",
+    "paymentMethods": [
+      "cartao",
+      "boleto"
+    ],
     "plans": [
       {
+        "id": "free",
         "name": "Free",
         "monthly": 0,
         "users": "1 profissional",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
           "10 sessões/mês",
           "5 pacientes",
-          "60 min de vídeo",
-          "nota DAP"
+          "60 min de vídeo"
         ],
-        "recommended": false
+        "includes": [
+          "10 sessões/mês",
+          "5 pacientes ativos",
+          "60 min de vídeo/mês",
+          "Nota DAP gerada por IA",
+          "Detecção automática de risco clínico (IA)",
+          "7 escalas com correção automática",
+          "Transcrição da sessão (60 min)",
+          "QR code de consentimento",
+          "Exportação em PDF",
+          "Confirmação de presença por e-mail"
+        ],
+        "limits": [
+          {
+            "metric": "sessoes",
+            "value": 10,
+            "period": "mes"
+          },
+          {
+            "metric": "pacientes",
+            "value": 5,
+            "note": "pacientes ativos"
+          },
+          {
+            "metric": "video-min",
+            "value": 60,
+            "period": "mes"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Notas DAP"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Transcrição 60 min"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "7 escalas"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "60 min/mês"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só confirmação por e-mail"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim",
+            "note": "Dados conforme a LGPD"
+          }
+        ]
       },
       {
+        "id": "clinico",
         "name": "Clínico",
         "monthly": 49,
         "yearlyMonthly": 32.5,
         "yearlyTotal": 390,
         "users": "1 profissional",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "sessões e pacientes ilimitados",
-          "todos os formatos de nota",
-          "laudos",
-          "financeiro + IRPF",
-          "300 min de vídeo"
+          "Sessões e pacientes ilimitados",
+          "Todos os formatos de nota",
+          "Laudos e financeiro + IRPF"
         ],
-        "recommended": false
+        "includes": [
+          "Detecção automática de risco clínico (IA)",
+          "QR code de consentimento",
+          "Exportação em PDF",
+          "Confirmação de presença por e-mail",
+          "Sessões e pacientes ilimitados",
+          "Todos os formatos de nota (DAP, BIRP, Anamnese…)",
+          "Laudos psicológicos ilimitados",
+          "13 testes psicológicos com correção automática",
+          "Controle financeiro + relatório IRPF",
+          "CID-11 com autocomplete",
+          "Ditado por voz (pt-BR)",
+          "Plano de Segurança Digital",
+          "Plano terapêutico IA",
+          "Check-ins entre sessões",
+          "Lista de espera",
+          "Psicoeducação por IA",
+          "Mapa Relacional (genograma IA)",
+          "Agendamento online",
+          "Transcrição ilimitada",
+          "300 min de vídeo/mês"
+        ],
+        "inherits": "free",
+        "limits": [
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "video-min",
+            "value": 300,
+            "period": "mes"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Ilimitada"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "13 testes"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "300 min/mês"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só confirmação por e-mail"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim",
+            "note": "Dados conforme a LGPD"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "parcial",
+            "note": "Formato Anamnese de nota"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Controle financeiro"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "parcial",
+            "note": "Relatório IRPF"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim",
+            "note": "Lista de espera"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Check-ins entre sessões"
+          }
+        ]
       },
       {
+        "id": "pro",
         "name": "Pro",
         "monthly": 119,
         "yearlyMonthly": 79,
         "yearlyTotal": 948,
         "users": "1 profissional",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false
+        },
+        "recommended": true,
         "highlights": [
           "IA de apoio em tempo real",
-          "supervisão IA",
-          "Consultório Simulado",
-          "Companheiro do Paciente",
-          "800 min de vídeo"
+          "Supervisão IA e Consultório Simulado",
+          "Companheiro do Paciente"
         ],
-        "recommended": true
+        "includes": [
+          "Detecção automática de risco clínico (IA)",
+          "QR code de consentimento",
+          "Exportação em PDF",
+          "Confirmação de presença por e-mail",
+          "Sessões e pacientes ilimitados",
+          "Todos os formatos de nota (DAP, BIRP, Anamnese…)",
+          "Laudos psicológicos ilimitados",
+          "13 testes psicológicos com correção automática",
+          "Controle financeiro + relatório IRPF",
+          "CID-11 com autocomplete",
+          "Ditado por voz (pt-BR)",
+          "Plano de Segurança Digital",
+          "Plano terapêutico IA",
+          "Check-ins entre sessões",
+          "Lista de espera",
+          "Psicoeducação por IA",
+          "Mapa Relacional (genograma IA)",
+          "Agendamento online",
+          "Transcrição ilimitada",
+          "IA de apoio clínico em tempo real na sessão",
+          "Supervisão IA semanal e Chat com o Prontuário",
+          "Consultório Simulado (treine com pacientes IA)",
+          "Companheiro do Paciente (chat entre sessões)",
+          "Estúdio Visual (materiais IA)",
+          "Analytics do consultório",
+          "Painel de risco clínico",
+          "800 min de vídeo/mês"
+        ],
+        "inherits": "clinico",
+        "limits": [
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "video-min",
+            "value": 800,
+            "period": "mes"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Ilimitada"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "13 testes"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "800 min/mês"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só confirmação por e-mail"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim",
+            "note": "Dados conforme a LGPD"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "parcial",
+            "note": "Formato Anamnese de nota"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Controle financeiro"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "parcial",
+            "note": "Relatório IRPF"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim",
+            "note": "Lista de espera"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Check-ins entre sessões"
+          },
+          {
+            "id": "ia-apoio-clinico",
+            "status": "sim",
+            "note": "IA em tempo real"
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "Chat com o prontuário"
+          },
+          {
+            "id": "app-paciente",
+            "status": "parcial",
+            "note": "Companheiro do Paciente (chat)"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Analytics do consultório"
+          }
+        ]
       },
       {
+        "id": "clinica",
         "name": "Clínica",
-        "users": "equipe",
+        "users": "Equipe (2 ou mais psicólogos)",
+        "audience": "equipe",
+        "onRequest": true,
+        "seats": {
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "tudo do Pro por psicólogo",
-          "dashboard administrativo",
+          "Tudo do Pro por psicólogo",
+          "Dashboard administrativo",
           "2000 min de vídeo"
         ],
-        "recommended": false
+        "includes": [
+          "Detecção automática de risco clínico (IA)",
+          "QR code de consentimento",
+          "Exportação em PDF",
+          "Confirmação de presença por e-mail",
+          "Sessões e pacientes ilimitados",
+          "Todos os formatos de nota (DAP, BIRP, Anamnese…)",
+          "Laudos psicológicos ilimitados",
+          "13 testes psicológicos com correção automática",
+          "Controle financeiro + relatório IRPF",
+          "CID-11 com autocomplete",
+          "Ditado por voz (pt-BR)",
+          "Plano de Segurança Digital",
+          "Plano terapêutico IA",
+          "Check-ins entre sessões",
+          "Lista de espera",
+          "Psicoeducação por IA",
+          "Mapa Relacional (genograma IA)",
+          "Agendamento online",
+          "Transcrição ilimitada",
+          "IA de apoio clínico em tempo real na sessão",
+          "Supervisão IA semanal e Chat com o Prontuário",
+          "Consultório Simulado (treine com pacientes IA)",
+          "Companheiro do Paciente (chat entre sessões)",
+          "Estúdio Visual (materiais IA)",
+          "Analytics do consultório",
+          "Painel de risco clínico",
+          "Tudo do Pro para cada psicólogo da equipe",
+          "Gestão de equipe",
+          "Supervisão de notas clínicas pela equipe",
+          "Dashboard administrativo da clínica",
+          "Onboarding e suporte prioritário",
+          "2000 min de vídeo/mês"
+        ],
+        "inherits": "pro",
+        "limits": [
+          {
+            "metric": "sessoes",
+            "unlimited": true
+          },
+          {
+            "metric": "pacientes",
+            "unlimited": true
+          },
+          {
+            "metric": "video-min",
+            "value": 2000,
+            "period": "mes"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Ilimitada"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "13 testes"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "2000 min/mês"
+          },
+          {
+            "id": "email-sms",
+            "status": "parcial",
+            "note": "Só confirmação por e-mail"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim",
+            "note": "Dados conforme a LGPD"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "parcial",
+            "note": "Formato Anamnese de nota"
+          },
+          {
+            "id": "documentos-laudos",
+            "status": "sim"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim",
+            "note": "Controle financeiro"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "parcial",
+            "note": "Relatório IRPF"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "fila-espera",
+            "status": "sim",
+            "note": "Lista de espera"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Check-ins entre sessões"
+          },
+          {
+            "id": "ia-apoio-clinico",
+            "status": "sim",
+            "note": "IA em tempo real"
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "Chat com o prontuário"
+          },
+          {
+            "id": "app-paciente",
+            "status": "parcial",
+            "note": "Companheiro do Paciente (chat)"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim",
+            "note": "Analytics do consultório"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "Gestão de equipe"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "parcial",
+            "note": "Suporte prioritário"
+          }
+        ]
       }
     ],
     "extras": [
-      "Pagamento por cartão ou boleto via Stripe",
-      "Anual cobra 8 mensalidades para 12 meses"
+      "Anual cobra 8 mensalidades por 12 meses de uso (33% a menos)",
+      "Pagamento por cartão ou boleto via Stripe"
     ],
-    "notes": "Estado padrão da página: Anual (R$ 32,50 e R$ 79 /mês, cobrado R$ 390 e R$ 948/ano; \"paga 8 meses\"). Mensal: Clínico R$ 49 e Pro R$ 119. Plano Clínica (equipe) sob consulta. Sem trial; o Free é permanente."
+    "addOns": [],
+    "checkedPages": [
+      {
+        "kind": "precos",
+        "url": "https://psinotaai.com/planos"
+      },
+      {
+        "kind": "comparativo",
+        "url": "https://psinotaai.com/planos"
+      },
+      {
+        "kind": "faq",
+        "url": "https://psinotaai.com/planos"
+      },
+      {
+        "kind": "termos",
+        "url": "https://psinotaai.com/termos"
+      }
+    ],
+    "notes": "A página abre em Anual (R$ 32,50 e R$ 79/mês, cobrado R$ 390 e R$ 948/ano, \"anual paga 8 meses\"); no Mensal: Clínico R$ 49 e Pro R$ 119. Free permanente (sem trial, sem vencimento). Clínica é sob consulta (sem preço); o site só diz \"dois ou mais psicólogos\". Cancelamento sem fidelidade nem multa, plano vale até o fim do período pago, depois a conta volta ao Free com os dados e exportação em PDF (termos: exportação em até 90 dias). Upgrade/downgrade a qualquer momento com crédito proporcional no upgrade. Matriz: o site não mostra agenda visual, WhatsApp, NFS-e nem cobrança online; \"Agendamento online\" e \"Lista de espera\" só do Clínico em diante. Divergência: os termos de uso citam planos \"Básico, Essencial, Pro, Clínica\" (nomenclatura antiga), enquanto a página de preços tem Free, Clínico, Pro, Clínica. A tabela de comparação lista \"Transcrição da sessão\" de 60 min no Free e ilimitada nos pagos. Não abri o checkout/cadastro."
   }
 }

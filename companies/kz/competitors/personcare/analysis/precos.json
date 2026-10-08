@@ -1,53 +1,450 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:30:20Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
+  "confidence": "media",
   "sources": [
     {
-      "url": "https://personcare.com.br/"
+      "url": "https://personcare.com.br/",
+      "title": "Home com planos (alternância mensal/anual) e FAQ"
+    },
+    {
+      "url": "https://personcare.com.br/termos.html",
+      "title": "Termos de uso"
     }
   ],
-  "confidence": "media",
   "data": {
     "publicPrice": true,
     "currency": "BRL",
     "model": "assinatura",
     "fromMonthly": 69.9,
-    "trial": "7 dias grátis",
+    "trial": "7 dias grátis, acesso completo, sem cartão",
+    "trialDays": 7,
+    "trialNeedsCard": false,
+    "pageDefaultCycle": "mensal",
+    "commitment": "sem-fidelidade",
+    "paymentMethods": [
+      "cartao",
+      "pix"
+    ],
     "plans": [
       {
+        "id": "profissional",
         "name": "Profissional",
         "monthly": 69.9,
+        "yearlyMonthly": 54.16,
+        "yearlyTotal": 649.9,
         "users": "1 profissional + 1 secretário",
+        "audience": "solo",
+        "seats": {
+          "included": 1,
+          "max": 1,
+          "unlimited": false,
+          "staff": 1
+        },
+        "recommended": false,
         "highlights": [
-          "agenda",
-          "financeiro",
-          "telepsicologia",
-          "NFS-e",
-          "WhatsApp ilimitado"
+          "1 profissional + 1 secretário",
+          "Agenda, financeiro e telepsicologia",
+          "NFS-e e WhatsApp ilimitado"
         ],
-        "recommended": false
+        "includes": [
+          "1 profissional + 1 secretário",
+          "Gestão de agenda",
+          "Módulo financeiro",
+          "Telepsicologia (atendimento online)",
+          "Emissão de nota fiscal",
+          "Envios por WhatsApp ilimitados (sem recarga)"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 1,
+            "note": "1 profissional + 1 secretário"
+          },
+          {
+            "metric": "whatsapp-msgs",
+            "unlimited": true,
+            "note": "Envios por WhatsApp ilimitados, sem recarga"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Link de agendamento"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuários digitais"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim",
+            "note": "Aplicação de anamnese"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "Escalas de avaliação"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Transcrição de áudio no prontuário"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Receitas, despesas e relatórios"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "NFS-e"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Receita Saúde"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembretes via WhatsApp ilimitados"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Telepsicologia"
+          },
+          {
+            "id": "google-agenda",
+            "status": "sim"
+          },
+          {
+            "id": "app-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "app-profissional",
+            "status": "sim"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Humor e hábitos no app"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "parcial",
+            "note": "Citada só no FAQ"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "1 secretário incluído"
+          }
+        ]
       },
       {
+        "id": "clinica-5",
         "name": "Clínica - 5 acessos",
         "monthly": 119.9,
+        "yearlyMonthly": 93.33,
+        "yearlyTotal": 1119.9,
         "users": "5 acessos",
+        "audience": "equipe",
+        "seats": {
+          "included": 5,
+          "max": 5,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "mesmos recursos do Profissional"
+          "5 acessos",
+          "Mesmos recursos do Profissional",
+          "WhatsApp ilimitado"
         ],
-        "recommended": false
+        "includes": [
+          "5 acessos",
+          "Gestão de agenda",
+          "Módulo financeiro",
+          "Telepsicologia (atendimento online)",
+          "Emissão de nota fiscal",
+          "Envios por WhatsApp ilimitados (sem recarga)"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 5,
+            "note": "5 acessos"
+          },
+          {
+            "metric": "whatsapp-msgs",
+            "unlimited": true,
+            "note": "Envios por WhatsApp ilimitados, sem recarga"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Link de agendamento"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuários digitais"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim",
+            "note": "Aplicação de anamnese"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "Escalas de avaliação"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Transcrição de áudio no prontuário"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Receitas, despesas e relatórios"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "NFS-e"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Receita Saúde"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembretes via WhatsApp ilimitados"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Telepsicologia"
+          },
+          {
+            "id": "google-agenda",
+            "status": "sim"
+          },
+          {
+            "id": "app-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "app-profissional",
+            "status": "sim"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Humor e hábitos no app"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "parcial",
+            "note": "Citada só no FAQ"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "5 acessos"
+          }
+        ],
+        "inherits": "profissional"
       },
       {
+        "id": "clinica-10",
         "name": "Clínica - 10 acessos",
         "monthly": 349.9,
+        "yearlyMonthly": 269.16,
+        "yearlyTotal": 3229.9,
         "users": "10 acessos",
+        "audience": "equipe",
+        "seats": {
+          "included": 10,
+          "max": 10,
+          "unlimited": false
+        },
+        "recommended": false,
         "highlights": [
-          "mesmos recursos do Profissional"
+          "10 acessos",
+          "Mesmos recursos do Profissional",
+          "WhatsApp ilimitado"
         ],
-        "recommended": false
+        "includes": [
+          "10 acessos",
+          "Gestão de agenda",
+          "Módulo financeiro",
+          "Telepsicologia (atendimento online)",
+          "Emissão de nota fiscal",
+          "Envios por WhatsApp ilimitados (sem recarga)"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 10,
+            "note": "10 acessos"
+          },
+          {
+            "metric": "whatsapp-msgs",
+            "unlimited": true,
+            "note": "Envios por WhatsApp ilimitados, sem recarga"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Link de agendamento"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim",
+            "note": "Prontuários digitais"
+          },
+          {
+            "id": "anamnese-modelos",
+            "status": "sim",
+            "note": "Aplicação de anamnese"
+          },
+          {
+            "id": "escalas-testes",
+            "status": "sim",
+            "note": "Escalas de avaliação"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "sim",
+            "note": "Transcrição de áudio no prontuário"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Receitas, despesas e relatórios"
+          },
+          {
+            "id": "nfse",
+            "status": "sim",
+            "note": "NFS-e"
+          },
+          {
+            "id": "recibo-receita-saude",
+            "status": "sim",
+            "note": "Receita Saúde"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Lembretes via WhatsApp ilimitados"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Telepsicologia"
+          },
+          {
+            "id": "google-agenda",
+            "status": "sim"
+          },
+          {
+            "id": "app-paciente",
+            "status": "sim"
+          },
+          {
+            "id": "app-profissional",
+            "status": "sim"
+          },
+          {
+            "id": "diario-tarefas",
+            "status": "parcial",
+            "note": "Humor e hábitos no app"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "parcial",
+            "note": "Citada só no FAQ"
+          },
+          {
+            "id": "lgpd-criptografia",
+            "status": "sim"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim",
+            "note": "10 acessos"
+          }
+        ],
+        "inherits": "profissional"
       }
     ],
     "extras": [],
-    "notes": "Valores lidos na aba Mensal. Há aba Anual com 'mais de 20% de desconto', mas os preços anuais não foram capturados. O salto de R$ 119,90 (5 acessos) para R$ 349,90 (10 acessos) é o que o site mostra."
+    "addOns": [],
+    "checkedPages": [
+      {
+        "kind": "home",
+        "url": "https://personcare.com.br/"
+      },
+      {
+        "kind": "precos",
+        "url": "https://personcare.com.br/#planos"
+      },
+      {
+        "kind": "faq",
+        "url": "https://personcare.com.br/#perguntas"
+      },
+      {
+        "kind": "termos",
+        "url": "https://personcare.com.br/termos.html"
+      }
+    ],
+    "notes": "Anual coletado pelo seletor (e confirmado no script da página): Profissional R$ 649,90/ano, Clínica 5 acessos R$ 1.119,90/ano, Clínica 10 acessos R$ 3.229,90/ano; yearlyMonthly = total/12 (cálculo nosso, o site mostra só o total); economia real de 22-23% sobre o mensal (\"mais de 20%\"). Divergência: o cartão da Clínica 5 acessos continua com o rótulo \"/mês\" ao trocar para anual (bug do site; o valor 1.119,90 é anual, os outros dois trocam para \"/anual\"). Os 3 planos têm a mesma lista de 5 itens nos cartões; a matriz usa a seção de recursos da home (financeiro, agenda, escalas, prontuário, transcrição, NFS-e/Receita Saúde, vídeo, apps, Google Calendar), assumindo recursos iguais em todos os planos (o site não separa por plano). \"Acessos\" dos planos Clínica não é definido (profissionais, secretárias ou ambos): seats.included usa o número do nome do plano. Sem limite de pacientes, armazenamento ou sessões informado. Reembolso não informado; os termos de uso não trazem preço, ciclo nem cancelamento. FAQ: cancela a qualquer momento sem taxa ou fidelidade, pelo painel; pagamento por cartão de crédito e Pix (não cita boleto); teste de 7 dias com todas as funcionalidades e sem cartão. Não abri o cadastro (portal.personcare.com.br/registrar). \"Gestão de projetos\" aparece na home mas não na lista dos planos."
   }
 }

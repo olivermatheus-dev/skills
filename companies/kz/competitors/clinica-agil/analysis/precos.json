@@ -1,22 +1,1280 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-07T19:29:39Z",
+  "updatedAt": "2026-10-08T18:00:00Z",
   "by": "claude-sonnet-5-5",
+  "confidence": "media",
   "sources": [
     {
-      "url": "https://www.clinicaagil.com.br/site/"
+      "url": "https://www.clinicaagil.com.br/site/software-para-psicologos/",
+      "title": "Planos e preços (psicologia)"
     },
     {
-      "url": "https://www.clinicaagil.com.br/site/sobre/"
+      "url": "https://www.clinicaagil.com.br/site/software-para-fisioterapia/",
+      "title": "Mesma tabela, TISS"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/software-para-tiss/",
+      "title": "Tabela com TISS por plano"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/",
+      "title": "Funcionalidades"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/especialidades/ia-para-clinicas/",
+      "title": "IA para clínicas"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/termos-e-condicoes/",
+      "title": "Termos e condições"
+    },
+    {
+      "url": "https://www.clinicaagil.com.br/site/",
+      "title": "Home"
     }
   ],
-  "confidence": "baixa",
   "data": {
-    "publicPrice": false,
+    "publicPrice": true,
     "currency": "BRL",
-    "model": "sob-consulta",
-    "plans": [],
-    "extras": [],
-    "notes": "Sem página de preços no site; CTA é Solicitar Demonstração. Procurei /planos e a home sem achar valores. Referência interna de abr/2026 em COMPETITORS.md: ~R$ 199/mês (3 usuários), sem fonte pública confirmada agora."
+    "model": "assinatura",
+    "fromMonthly": 249,
+    "trial": "Sem teste grátis; demonstração gratuita com especialista",
+    "pageDefaultCycle": "mensal",
+    "refundDays": 0,
+    "refundScope": "Termos: valores cobrados não são reembolsáveis",
+    "commitment": "fidelidade-anual",
+    "paymentMethods": [],
+    "plans": [
+      {
+        "id": "start",
+        "name": "Start",
+        "monthly": 249,
+        "users": "Até 3 profissionais",
+        "audience": "solo",
+        "seats": {
+          "included": 3,
+          "max": 3,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 3 profissionais",
+          "Usuários ilimitados",
+          "Agenda, prontuário e financeiro"
+        ],
+        "includes": [
+          "Até 3 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 3,
+            "note": "Até 3 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Módulo TISS R$ 99/mês"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Módulo à parte (preço n/i)"
+          }
+        ]
+      },
+      {
+        "id": "basic",
+        "name": "Basic",
+        "monthly": 299,
+        "users": "Até 5 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 5,
+          "max": 5,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 5 profissionais",
+          "Usuários ilimitados",
+          "Teleatendimento ilimitado"
+        ],
+        "includes": [
+          "Até 5 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 5,
+            "note": "Até 5 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Módulo TISS R$ 99/mês"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Módulo à parte (preço n/i)"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "start"
+      },
+      {
+        "id": "essencial",
+        "name": "Essencial",
+        "monthly": 360,
+        "users": "Até 10 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 10,
+          "max": 10,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 10 profissionais",
+          "Usuários ilimitados",
+          "Teleatendimento ilimitado"
+        ],
+        "includes": [
+          "Até 10 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 10,
+            "note": "Até 10 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Módulo TISS R$ 99/mês"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Módulo à parte (preço n/i)"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "basic"
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 460,
+        "users": "Até 20 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 20,
+          "max": 20,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 20 profissionais",
+          "Usuários ilimitados",
+          "Teleatendimento ilimitado"
+        ],
+        "includes": [
+          "Até 20 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 20,
+            "note": "Até 20 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "parcial",
+            "note": "Módulo TISS R$ 99/mês"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Módulo à parte (preço n/i)"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "essencial"
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 699,
+        "users": "Até 30 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 30,
+          "max": 30,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 30 profissionais",
+          "Usuários ilimitados",
+          "TISS incluso"
+        ],
+        "includes": [
+          "Até 30 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda",
+          "Faturamento TISS incluso (guias, lotes XML, glosas)"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 30,
+            "note": "Até 30 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "sim",
+            "note": "TISS incluso"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "parcial",
+            "note": "Módulo à parte (preço n/i)"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "pro"
+      },
+      {
+        "id": "expert",
+        "name": "Expert",
+        "monthly": 1199,
+        "users": "Até 50 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 50,
+          "max": 50,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 50 profissionais",
+          "Usuários ilimitados",
+          "TISS incluso"
+        ],
+        "includes": [
+          "Até 50 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda",
+          "Faturamento TISS incluso (guias, lotes XML, glosas)",
+          "Lembretes por WhatsApp inclusos"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 50,
+            "note": "Até 50 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "sim",
+            "note": "TISS incluso"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Incluso"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "master"
+      },
+      {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "monthly": 1999,
+        "users": "Até 100 profissionais",
+        "audience": "equipe",
+        "seats": {
+          "included": 100,
+          "max": 100,
+          "unlimited": false
+        },
+        "recommended": false,
+        "highlights": [
+          "Até 100 profissionais",
+          "Usuários ilimitados",
+          "TISS incluso"
+        ],
+        "includes": [
+          "Até 100 profissionais",
+          "Usuários ilimitados (recepção e equipe sem custo por acesso)",
+          "Agenda por profissional, sala e especialidade",
+          "Agendamento online e pagamentos online pelo paciente",
+          "Prontuário eletrônico com acesso por profissional",
+          "Assinatura digital de contratos e termos",
+          "Financeiro: contas a pagar/receber, fluxo de caixa, DRE gerencial, cobranças",
+          "Repasse/comissão automático por profissional",
+          "Indicadores e relatórios gerenciais",
+          "Lembretes por e-mail e SMS",
+          "CRM de contatos e origem do paciente",
+          "Implantação com migração de dados e treinamento",
+          "Suporte contínuo",
+          "Teleatendimento ilimitado integrado à agenda",
+          "Faturamento TISS incluso (guias, lotes XML, glosas)",
+          "Lembretes por WhatsApp inclusos"
+        ],
+        "limits": [
+          {
+            "metric": "profissionais",
+            "value": 100,
+            "note": "Até 100 profissionais"
+          },
+          {
+            "metric": "outro",
+            "unlimited": true,
+            "note": "Usuários (recepção/admin) ilimitados"
+          },
+          {
+            "metric": "video-min",
+            "unlimited": true,
+            "note": "Teleatendimento ilimitado"
+          }
+        ],
+        "matrix": [
+          {
+            "id": "agenda-visual",
+            "status": "sim"
+          },
+          {
+            "id": "agendamento-paciente",
+            "status": "sim",
+            "note": "Agendamento online"
+          },
+          {
+            "id": "prontuario",
+            "status": "sim"
+          },
+          {
+            "id": "pacotes-sessoes",
+            "status": "sim",
+            "note": "Pacotes e mensalidades"
+          },
+          {
+            "id": "controle-cobrancas",
+            "status": "sim"
+          },
+          {
+            "id": "cobranca-online",
+            "status": "sim",
+            "note": "Paciente paga pelo link"
+          },
+          {
+            "id": "relatorios-fin",
+            "status": "sim",
+            "note": "Fluxo de caixa e DRE"
+          },
+          {
+            "id": "assinatura-digital",
+            "status": "sim"
+          },
+          {
+            "id": "repasses",
+            "status": "sim",
+            "note": "Comissão por atendimento"
+          },
+          {
+            "id": "indicadores-gestao",
+            "status": "sim"
+          },
+          {
+            "id": "secretaria",
+            "status": "sim",
+            "note": "Usuários ilimitados"
+          },
+          {
+            "id": "multiprofissional",
+            "status": "sim"
+          },
+          {
+            "id": "email-sms",
+            "status": "sim",
+            "note": "E-mail e SMS"
+          },
+          {
+            "id": "leads-pacientes",
+            "status": "sim",
+            "note": "CRM para psicólogos"
+          },
+          {
+            "id": "migracao-assistida",
+            "status": "sim"
+          },
+          {
+            "id": "suporte-humano",
+            "status": "sim",
+            "note": "Suporte e WhatsApp"
+          },
+          {
+            "id": "ia-transcricao-nota",
+            "status": "parcial",
+            "note": "Add-on R$ 59,90/prof."
+          },
+          {
+            "id": "ia-assistente",
+            "status": "parcial",
+            "note": "LIA: add-on a partir de R$ 399"
+          },
+          {
+            "id": "nfse",
+            "status": "parcial",
+            "note": "Add-on a partir de R$ 79,90"
+          },
+          {
+            "id": "convenios-tiss",
+            "status": "sim",
+            "note": "TISS incluso"
+          },
+          {
+            "id": "wpp-lembrete",
+            "status": "sim",
+            "note": "Incluso"
+          },
+          {
+            "id": "video-nativa",
+            "status": "sim",
+            "note": "Ilimitado"
+          }
+        ],
+        "inherits": "expert"
+      }
+    ],
+    "extras": [
+      "IA no prontuário: R$ 59,90/mês por profissional",
+      "NFS-e: a partir de R$ 79,90/mês (100 notas) + ativação R$ 90",
+      "LIA (IA de agendamento no WhatsApp): a partir de R$ 399/mês (até 1.000 conversas)",
+      "Faturamento TISS: R$ 99/mês (incluso a partir do Master)"
+    ],
+    "addOns": [
+      {
+        "name": "IA no prontuário (transcrição)",
+        "price": 59.9,
+        "unit": "mes",
+        "per": "profissional",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro",
+          "master",
+          "expert",
+          "enterprise"
+        ],
+        "unlocks": [
+          "ia-transcricao-nota"
+        ]
+      },
+      {
+        "name": "NFS-e (100 notas)",
+        "price": 79.9,
+        "unit": "mes",
+        "per": "a partir de, 100 notas",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro",
+          "master",
+          "expert",
+          "enterprise"
+        ],
+        "unlocks": [
+          "nfse"
+        ]
+      },
+      {
+        "name": "Ativação NFS-e",
+        "price": 90,
+        "unit": "unico",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro",
+          "master",
+          "expert",
+          "enterprise"
+        ],
+        "unlocks": [
+          "nfse"
+        ]
+      },
+      {
+        "name": "LIA, IA de agendamento no WhatsApp",
+        "price": 399,
+        "unit": "mes",
+        "per": "a partir de, até 1.000 conversas",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro",
+          "master",
+          "expert",
+          "enterprise"
+        ],
+        "unlocks": [
+          "ia-assistente"
+        ]
+      },
+      {
+        "name": "Faturamento TISS",
+        "price": 99,
+        "unit": "mes",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro"
+        ],
+        "unlocks": [
+          "convenios-tiss"
+        ]
+      },
+      {
+        "name": "Lembretes por WhatsApp (módulo)",
+        "unit": "mes",
+        "planIds": [
+          "start",
+          "basic",
+          "essencial",
+          "pro",
+          "master"
+        ],
+        "unlocks": [
+          "wpp-lembrete"
+        ]
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "home",
+        "url": "https://www.clinicaagil.com.br/site/"
+      },
+      {
+        "kind": "precos",
+        "url": "https://www.clinicaagil.com.br/site/software-para-psicologos/"
+      },
+      {
+        "kind": "precos",
+        "url": "https://www.clinicaagil.com.br/site/software-para-fisioterapia/"
+      },
+      {
+        "kind": "precos",
+        "url": "https://www.clinicaagil.com.br/site/software-para-tiss/"
+      },
+      {
+        "kind": "comparativo",
+        "url": "https://www.clinicaagil.com.br/site/especialidades/sistema-para-clinicas/"
+      },
+      {
+        "kind": "ajuda",
+        "url": "https://www.clinicaagil.com.br/site/especialidades/ia-para-clinicas/"
+      },
+      {
+        "kind": "termos",
+        "url": "https://www.clinicaagil.com.br/site/termos-e-condicoes/"
+      }
+    ],
+    "notes": "MUDANÇA: antes registrado como sob-consulta (a home só tem \"Solicitar Demonstração\"; /planos e /precos não existem). Os preços estão públicos nas páginas por especialidade (psicologia, fisioterapia, fonoaudiologia, TISS), com a mesma tabela de 7 planos por nº de profissionais, só mensal; não há seletor anual, trimestral nem promoção, e não achei página de planos própria. A referência antiga de ~R$ 199/mês (3 usuários) não bate com o Start atual (R$ 249, até 3 profissionais). Todos os planos têm usuários ilimitados, agendamento e pagamentos online e assinatura digital; teleatendimento ilimitado a partir do Basic (Start sem, por dedução da frase \"a partir do Basic\"); TISS incluso só do Master em diante (R$ 99/mês abaixo disso); lembretes por WhatsApp inclusos só em Expert e Enterprise (módulo nos demais, sem preço publicado). O site não traz lista de recursos por plano: a matriz assume recursos iguais, exceto os itens condicionados acima. Divergência: a página de IA diz que a IA (Secretária Inteligente e prontuário transcrito) \"já vem dentro da plataforma\", mas as páginas de preço listam IA no prontuário (R$ 59,90/prof.) e LIA (a partir de R$ 399) como pagos à parte; tratei como add-on (parcial). Termos de uso: contrato com período inicial de 12 meses e renovação por prazo indeterminado, aviso prévio de 30 dias depois do período inicial, rescisão antecipada obriga a pagar as parcelas vincendas, valores não reembolsáveis, reajuste anual pelo IPCA, preços \"variáveis conforme proposta comercial\" e planos \"mensais e anuais\" (só o mensal está público). Formas de pagamento e teste grátis não informados. Não enviei o formulário de demonstração."
   }
 }
