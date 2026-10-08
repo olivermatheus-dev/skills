@@ -112,28 +112,50 @@ export function useRefRow(slug: string) {
 /** tabela densa com ordenação por coluna (clique no cabeçalho); `v` dá o valor de ordenação */
 export interface Col<T> { k: string; label: ReactNode; title?: string; num?: boolean; v?: (r: T) => string | number | undefined; render: (r: T) => ReactNode; className?: string }
 /**
- * Altura para uma caixa ocupar o resto da tela: mede onde ela começa e desconta `reserve` px embaixo
- * (o que vem depois dela + o respiro do fim da AreaPage, 64 px). Recalcula a cada render e ao redimensionar.
+ * Altura para uma caixa ocupar o resto da área que rola (o <main>): mede onde ela começa e quanto conteúdo vem
+ * depois dela até o fim da página (avisos, legendas, o respiro da AreaPage), então nada embaixo fica escondido
+ * e a página não rola. Recalcula a cada render e quando a página muda de tamanho.
  */
-export function useFillHeight(reserve: number) {
+export function useFillHeight() {
   const ref = useRef<HTMLDivElement>(null);
   const [h, setH] = useState<number>();
   useLayoutEffect(() => {
-    const fit = () => { const el = ref.current; if (el) setH(Math.max(320, Math.floor(window.innerHeight - el.getBoundingClientRect().top - reserve))); };
-    fit();
+    let ro: ResizeObserver | undefined, raf = 0;
+    const fit = () => {
+      const el = ref.current;
+      const scroller = el?.closest('main');
+      if (!el || !scroller) return;
+      let page: HTMLElement = el;
+      while (page.parentElement && page.parentElement !== scroller) page = page.parentElement;
+      const box = el.getBoundingClientRect(), sc = scroller.getBoundingClientRect();
+      const top = box.top - sc.top + scroller.scrollTop;
+      const below = page.getBoundingClientRect().bottom - box.bottom;
+      setH(Math.max(320, Math.floor(scroller.clientHeight - top - below)));
+    };
+    // o que carrega depois (painéis acima ou avisos abaixo) muda a página sem renderizar a tabela de novo;
+    // na 1ª montagem (rota carregando no Suspense) a caixa ainda pode estar fora do <main>: tenta no quadro seguinte
+    const watch = () => {
+      const scroller = ref.current?.closest('main');
+      if (!scroller) { raf = requestAnimationFrame(watch); return; }
+      ro = new ResizeObserver(fit);
+      ro.observe(scroller);
+      for (const c of scroller.children) ro.observe(c);
+      fit();
+    };
+    watch();
     window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
+    return () => { cancelAnimationFrame(raf); ro?.disconnect(); window.removeEventListener('resize', fit); };
   });
   return [ref, h] as const;
 }
 
 /**
  * `pin` = linhas fixas no topo, fora da ordenação (ex.: a própria empresa como referência).
- * `fill` = ocupa o resto da tela (número = px reservados embaixo, ver useFillHeight), com o cabeçalho fixo e a rolagem dentro.
+ * `fill` = ocupa o resto da tela (useFillHeight), com o cabeçalho fixo e a rolagem dentro.
  */
-export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fill }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode; pin?: T[]; fill?: number }) {
+export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fill }: { rows: T[]; cols: Col<T>[]; rowKey: (r: T) => string; initial?: { k: string; dir: 1 | -1 }; empty?: ReactNode; pin?: T[]; fill?: boolean }) {
   const [sort, setSort] = useState(initial ?? { k: cols[0].k, dir: 1 as 1 | -1 });
-  const [boxRef, boxH] = useFillHeight(fill ?? 0);
+  const [boxRef, boxH] = useFillHeight();
   const col = cols.find((c) => c.k === sort.k);
   const sorted = !col?.v ? rows : [...rows].sort((a, b) => {
     const va = col.v!(a), vb = col.v!(b);
@@ -144,13 +166,13 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fil
   });
   if (!rows.length && empty) return <>{empty}</>;
   return (
-    <div ref={fill != null ? boxRef : undefined} style={fill != null ? { height: boxH } : undefined} className={cx('bg-card border border-border rounded-xl', fill != null ? 'overflow-auto' : 'overflow-x-auto')}>
-      <table className={cx('w-full text-sm', fill != null && 'h-full')}>
+    <div ref={fill ? boxRef : undefined} style={fill ? { height: boxH } : undefined} className={cx('bg-card border border-border rounded-xl', fill ? 'overflow-auto' : 'overflow-x-auto')}>
+      <table className={cx('w-full text-sm', fill && 'h-full')}>
         <thead className="border-b border-border bg-muted/40">
           <tr>{cols.map((c) => (
             <th key={c.k} title={c.title} onClick={() => c.v && setSort((s) => ({ k: c.k, dir: s.k === c.k ? (s.dir === 1 ? -1 : 1) : c.num ? -1 : 1 }))}
               className={cx('px-3 py-2 font-medium text-xs text-muted-foreground whitespace-nowrap select-none', c.num ? 'text-right' : 'text-left', c.v && 'cursor-pointer hover:text-foreground',
-                fill != null && 'sticky top-0 z-10 bg-muted shadow-[inset_0_-1px_0_var(--border)]')}>
+                fill && 'sticky top-0 z-10 bg-muted shadow-[inset_0_-1px_0_var(--border)]')}>
               {c.label}{sort.k === c.k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
             </th>
           ))}</tr>
@@ -162,7 +184,7 @@ export function SortTable<T>({ rows, cols, rowKey, initial, empty, pin = [], fil
             </tr>
           ))}
           {/* preenche a sobra de altura sem esticar as linhas de dados */}
-          {fill != null && <tr aria-hidden className="h-full"><td colSpan={cols.length} className="p-0" /></tr>}
+          {fill && <tr aria-hidden className="h-full"><td colSpan={cols.length} className="p-0" /></tr>}
         </tbody>
       </table>
     </div>

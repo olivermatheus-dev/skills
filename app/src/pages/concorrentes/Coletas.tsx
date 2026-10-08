@@ -94,7 +94,7 @@ export default function Coletas() {
       ]} />
         {every.length > all.length || showAll ? <label className="ml-3 text-xs text-muted-foreground inline-flex items-center gap-1.5"><input type="checkbox" checked={showAll} onChange={(e) => setShowAll(e.target.checked)} /> mostrar redes sem coletor ({every.filter((p) => !COLLECTABLE.has(p.platform)).length})</label> : null}
       </div>
-      <SortTable rows={shown} cols={cols} rowKey={(p) => `${p.m.c.data.id}/${p.key}`} initial={{ k: 'name', dir: 1 }} />
+      <SortTable fill rows={shown} cols={cols} rowKey={(p) => `${p.m.c.data.id}/${p.key}`} initial={{ k: 'name', dir: 1 }} />
       <p className="mt-3 text-[11px] text-muted-foreground">Cada coleta grava um arquivo novo (o histórico nunca é apagado). Instagram sem token: 6 posts mais recentes. LinkedIn, Facebook e X ainda não têm coletor.</p>
     </AreaPage>
   );

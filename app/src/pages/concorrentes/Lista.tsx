@@ -313,7 +313,7 @@ function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, on
       </span>
     ) },
   ];
-  return <SortTable rows={rows} cols={cols} rowKey={(c) => c.data.id} initial={{ k: 'f', dir: -1 }} />;
+  return <SortTable fill rows={rows} cols={cols} rowKey={(c) => c.data.id} initial={{ k: 'f', dir: -1 }} />;
 }
 
 const SkeletonGrid = () => (

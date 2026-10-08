@@ -62,8 +62,8 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   const [closed, setClosed] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<Editing | null>(null);
   const [featDlg, setFeatDlg] = useState<{ f?: MatrixFeature } | null>(null);
-  // a caixa da tabela ocupa o resto da tela (reserva a legenda e o respiro do fim da página)
-  const [boxRef, boxH] = useFillHeight(116);
+  // a caixa da tabela ocupa o resto da tela (a legenda fica embaixo)
+  const [boxRef, boxH] = useFillHeight();
   const m: Matrix | undefined = mq.data;
   const nosName = proj.data?.name ?? 'Nós';
 

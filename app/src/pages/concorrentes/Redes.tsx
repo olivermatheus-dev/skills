@@ -65,7 +65,7 @@ export default function Redes() {
       ]} /></div>}
       <ErrorBox error={feed.error ?? m.error} />
       {feed.isLoading && <div className="h-64 rounded-xl bg-card border border-border animate-pulse" />}
-      {feed.data && <SortTable rows={rows} cols={cols} rowKey={(r) => `${r.compId}/${r.key}`} initial={{ k: 'f', dir: -1 }}
+      {feed.data && <SortTable fill rows={rows} cols={cols} rowKey={(r) => `${r.compId}/${r.key}`} initial={{ k: 'f', dir: -1 }}
         empty={<Empty title="Nenhum perfil coletado nessa rede" hint="Puxe as redes na aba Coletas." />} />}
       {missing.length > 0 && <div className="mt-3 text-xs text-muted-foreground">Sem coleta de {platformLabel(plat)}: {missing.map((r) => <Link key={r.c.data.id} to={`/p/${slug}/concorrentes/${r.c.data.id}`} className="hover:text-primary-ink mr-2">{r.c.data.name}</Link>)}</div>}
       {plat === 'instagram' && rows.length > 0 && <div className="mt-2 text-[11px] text-muted-foreground">Instagram sem token traz os 6 posts mais recentes: frequência e medianas valem para esse recorte. O histórico cresce com a coleta semanal.</div>}
