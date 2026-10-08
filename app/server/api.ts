@@ -119,6 +119,7 @@ on('GET', '/api/projects/:slug/referencia', async (p) => {
 });
 // matriz de funcionalidades × concorrentes (intel/matriz.json); célula editada aqui vira by: 'oliver'
 on('GET', '/api/projects/:slug/matrix', (p) => S.getMatrix(p.slug));
+on('GET', '/api/projects/:slug/gaps', (p) => S.getGaps(p.slug));
 on('PUT', '/api/projects/:slug/matrix/cells/:col/:feat', (p, b) => S.setMatrixCell(p.slug, p.col, p.feat, { status: b.status ?? null, note: b.note, source: b.source }, 'oliver'));
 on('POST', '/api/projects/:slug/matrix/features', (p, b) => S.saveMatrixFeature(p.slug, b));
 on('PUT', '/api/projects/:slug/matrix/features/:id', (p, b) => S.saveMatrixFeature(p.slug, { ...b, id: p.id }));

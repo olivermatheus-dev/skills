@@ -129,6 +129,7 @@ Pesquisa e implementação em paralelo (subagente, 2026-10-08): rotas públicas 
 - **D — Anúncios** (Biblioteca da Meta) e coleta semanal automática.
 
 ## Log
+- 2026-10-08 — fase C feita: Panorama com **Brechas para nós** por tema (`intel/brechas.json`, `schema/gaps.ts`: 52 brechas de 11 análises → 13 temas, contagem n/11, filtro por tipo, "você tem?" pela matriz, depende de, frases originais ao abrir, aviso de resumo desatualizado), **Faltam no produto** e **Só você tem** (da matriz, com link para a matriz filtrada `?f=`), KPI de cobertura de funcionalidades. Regenerar: skill analise-concorrentes → "atualiza as brechas".
 - 2026-10-08 — fase C (parte): matriz de funcionalidades editável no Comparar (API `/matrix`, store, schema), preenchida para os 11 concorrentes (Sintropia entrou) e a Kzloo; conferida no app.
 - 2026-10-08 — diagnóstico com prints (`prints/antes/`), plano da estrutura. Pesquisa do Instagram sem token disparada em paralelo.
 - 2026-10-08 — Kzloo como linha de referência no Comparar e no gráfico do Panorama (dados do contexto).

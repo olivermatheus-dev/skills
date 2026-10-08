@@ -52,3 +52,20 @@ npm run analise -- salvar kz <id> <arquivo.json>
 npm run analise -- feito kz <id> redes
 npm run analise -- status kz
 ```
+
+## Matriz de funcionalidades
+Arquivo por projeto: `companies/<slug>/intel/matriz.json` (schema `schema/matrix.ts`). Linhas = catálogo canônico de funcionalidades (`features`, por `groups`); colunas = `id` do concorrente e `_nos` (a própria empresa). Aparece em Concorrentes → Comparar → Funcionalidades.
+Ao analisar um concorrente novo (módulo `features`) ou refazer um:
+1. Leia o `features.json` dele e o catálogo da matriz. Para cada funcionalidade do catálogo grave a célula `cells.<id>.<feature>`: `status` `sim` (tem) · `parcial` (só em plano, limite ou em parte) · `nao` (SÓ com evidência: `missing` ou "não mostram") · `desconhecido` (sem evidência; pode nem gravar a célula). `note` até 50 caracteres, `source` = URL da página, `by: "ia"`, `updatedAt`.
+2. Una sinônimos: item do concorrente que já cabe numa linha do catálogo vira célula dessa linha. Só crie linha nova se for relevante na decisão de compra de um terapeuta (nome até 40 caracteres, grupo existente, `order` no fim).
+3. **Nunca altere célula com `by: "oliver"`** (o Oliver corrigiu à mão). `setMatrixCell(slug, col, feat, {...}, 'ia')` em `core/store.ts` já garante isso; editando o JSON direto, confira antes.
+4. A coluna `_nos` vem de `context/PRODUTO.md`; dúvida = `desconhecido` com nota "confirmar".
+5. Rode `npm run validate`.
+
+## Brechas somadas ("atualiza as brechas")
+Arquivo por projeto: `companies/<slug>/intel/brechas.json` (schema `schema/gaps.ts`). Aparece em Concorrentes → Panorama → **Brechas para nós**, que avisa quando alguma análise `forcas` ficou mais nova que o resumo (ou entrou concorrente novo).
+Rode depois de qualquer análise `forcas` nova ou refeita:
+1. Leia `opportunities` de todos os `competitors/*/analysis/forcas.json` dos concorrentes ativos. `basedOn.<id>` = o `updatedAt` de cada um.
+2. Agrupe por tema (a mesma ideia com palavras diferentes = 1 tema). Toda brecha cai em pelo menos um tema; tema com 1 concorrente vale. `sources` = a frase original + o concorrente (sem reescrever).
+3. Por tema: `title` (até 70 caracteres), `kind` (`publico` · `mensagem` · `oferta` · `produto`), `action` = o que a nossa empresa faz com isso, sem inventar fato do produto (dúvida → `dependsOn` com a tarefa ou a pendência), `features` = ids da matriz ligados ao tema (o Panorama mostra se já temos).
+4. Mantenha o `id` dos temas que continuam. Rode `npm run validate`.

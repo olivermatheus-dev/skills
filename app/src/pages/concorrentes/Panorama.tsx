@@ -1,5 +1,5 @@
-// Panorama do mercado: números da concorrência, preço × audiência, quem cresce, conteúdos fora da curva e as brechas
-// somadas de todas as análises (o que o gestor lê primeiro).
+// Panorama do mercado: números da concorrência, você × mercado (brechas somadas por tema + produto contra a matriz),
+// preço × audiência, quem cresce e conteúdos fora da curva (o que o gestor lê primeiro).
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { ModuleDataOf } from '../../../../schema/analysis';
@@ -10,6 +10,7 @@ import { money } from '../../components/competitors/Analysis';
 import { Avatar, Img, PlatformIcon, TYPE_LABEL, buildRows, fmtRatio, groupSnapshots, median } from '../../components/competitors/lib';
 import { titleOf } from '../../components/competitors/Items';
 import { Empty, ErrorBox, fmtNum } from '../../components/kit';
+import { GapThemes, ProductVsMarket, coverageKpi, useMatrixStats } from './PanoramaBrechas';
 
 export default function Panorama() {
   const { slug = '' } = useParams();
@@ -24,6 +25,8 @@ export default function Panorama() {
   const refPrice = ref?.ov?.fromMonthly;
   const medPrice = median(prices);
   const cheaper = refPrice != null ? prices.filter((p) => p < refPrice).length : 0;
+  const ms = useMatrixStats(slug, comp);
+  const cov = coverageKpi(ms);
 
   if (m.error) return <AreaPage><ErrorBox error={m.error} /></AreaPage>;
   if (!m.isLoading && !m.rows.length) return <AreaPage><Empty title="Nenhum concorrente ainda" hint="Use + Adicionar para colar os links (site, Instagram, YouTube, TikTok)." /></AreaPage>;
@@ -33,11 +36,17 @@ export default function Panorama() {
         ...(ref && refPrice != null ? [{ label: `${ref.c.data.name} (você)`, value: money(refPrice), title: (ref.res.precos?.data as { notes?: string } | undefined)?.notes ?? undefined,
           sub: medPrice ? `${refPrice >= medPrice ? '+' : ''}${Math.round((refPrice / medPrice - 1) * 100)}% vs mediana · ${cheaper}/${prices.length} cobram menos` : undefined }] : []),
         { label: 'Preço de entrada (mediana)', value: prices.length ? money(median(prices)) : '—', sub: prices.length > 1 ? `${money(Math.min(...prices))} a ${money(Math.max(...prices))}` : undefined },
+        ...(cov ? [cov] : []),
         { label: 'Com plano grátis', value: `${free.length}/${comp.length}`, title: free.map((r) => r.c.data.name).join(', ') },
         { label: 'Com teste grátis', value: `${trial.length}/${comp.length}`, title: trial.map((r) => `${r.c.data.name}: ${r.ov?.trial}`).join('\n') },
         { label: 'Audiência somada', value: fmtNum(audience || undefined), sub: 'seguidores nas redes puxadas' },
         { label: 'Maior audiência', value: biggest?.followers ? biggest.c.data.name : '—', sub: biggest?.followers ? fmtNum(biggest.followers) : undefined },
       ]} />
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] items-start">
+        <GapThemes slug={slug} rows={comp} />
+        <ProductVsMarket slug={slug} s={ms} />
+      </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <section className="bg-card border border-border rounded-xl p-4">
@@ -168,13 +177,13 @@ function TopContent({ slug, rows }: { slug: string; rows: MarketRow[] }) {
   );
 }
 
-/** brechas para nós, somadas de todas as análises de pontos fortes e fracos */
+/** brechas de cada análise de pontos fortes e fracos, como vieram (o resumo por tema fica em GapThemes) */
 function Gaps({ slug, rows }: { slug: string; rows: MarketRow[] }) {
   const list = rows.map((r) => ({ r, d: r.res.forcas?.data as ModuleDataOf<'forcas'> | undefined })).filter((x) => x.d?.opportunities.length);
   if (!list.length) return null;
   return (
-    <section className="mt-5">
-      <h2 className="text-sm font-semibold mb-2">Brechas para nós <span className="font-normal text-xs text-muted-foreground">de {list.length} análise(s) de pontos fortes e fracos</span></h2>
+    <details className="mt-5 group">
+      <summary className="text-sm font-semibold mb-2 cursor-pointer select-none">Brechas por concorrente <span className="font-normal text-xs text-muted-foreground">as frases originais de {list.length} análise(s)</span></summary>
       <div className="columns-1 md:columns-2 xl:columns-3 gap-4">
         {list.map(({ r, d }) => (
           <div key={r.c.data.id} className="break-inside-avoid mb-4 bg-card border border-border rounded-lg p-3">
@@ -185,6 +194,6 @@ function Gaps({ slug, rows }: { slug: string; rows: MarketRow[] }) {
           </div>
         ))}
       </div>
-    </section>
+    </details>
   );
 }

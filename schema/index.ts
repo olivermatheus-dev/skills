@@ -15,3 +15,4 @@ export * from './format';
 export * from './ads';
 export * from './referencia';
 export * from './matrix';
+export * from './gaps';

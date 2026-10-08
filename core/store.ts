@@ -7,7 +7,7 @@ import { z } from 'zod';
 import {
   Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
-  Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
+  Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
@@ -755,6 +755,10 @@ export function renameMatrixGroup(slug: string, from: string, to: string) {
   return saveMatrix(slug, m);
 }
 
+// ---------- Brechas somadas (intel/brechas.json, gerado pela IA a partir das análises `forcas`) ----------
+const gapsFile = (slug: string) => join(company(slug), 'intel', 'brechas.json');
+export const getGaps = (slug: string): Gaps | null => (exists(gapsFile(slug)) ? readJson(Gaps, gapsFile(slug)) : null);
+
 // ---------- Validação geral ----------
 export function validateAll():{ file: string; issues: string[] }[] {
   const errors: { file: string; issues: string[] }[] = [];
@@ -781,6 +785,7 @@ export function validateAll():{ file: string; issues: string[] }[] {
     for (const c of list(P.capturas(d), /^\d{4}-\d{2}-\d{2}-/)) if (exists(join(P.capturas(d), c, 'captura.json'))) tryIt(() => readJson(Capture, join(P.capturas(d), c, 'captura.json')));
     if (exists(join(P.brand(d), 'mockups.json'))) tryIt(() => readJson(MockupBrand, join(P.brand(d), 'mockups.json')));
     if (exists(matrixFile(d))) tryIt(() => getMatrix(d));
+    if (exists(gapsFile(d))) tryIt(() => getGaps(d));
     if (exists(P.competitors(d))) for (const id of readdirSync(abs(P.competitors(d)))) {
       tryIt(() => getCompetitor(d, id));
       tryIt(() => getMarks(d, id));

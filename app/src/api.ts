@@ -61,6 +61,8 @@ export interface WeeklyInfo {
 }
 import type { Matrix, CellStatus } from '../../schema/matrix';
 export type { Matrix, CellStatus };
+import type { Gaps, GapTheme } from '../../schema/gaps';
+export type { Gaps, GapTheme };
 import type { Referencia } from '../../schema/referencia';
 export type { Referencia };
 export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
@@ -144,6 +146,7 @@ export const api = {
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
   runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
   matrix: (slug: string) => req<Matrix>('GET', `${pj(slug)}/matrix`),
+  gaps: (slug: string) => req<Gaps | null>('GET', `${pj(slug)}/gaps`),
   setMatrixCell: (slug: string, col: string, feat: string, c: { status: CellStatus | null; note?: string; source?: string }) => req<Matrix>('PUT', `${pj(slug)}/matrix/cells/${encodeURIComponent(col)}/${encodeURIComponent(feat)}`, c),
   saveMatrixFeature: (slug: string, f: { id?: string; name: string; group: string; description?: string }) => req<Matrix>(f.id ? 'PUT' : 'POST', `${pj(slug)}/matrix/features${f.id ? `/${encodeURIComponent(f.id)}` : ''}`, f),
   deleteMatrixFeature: (slug: string, id: string) => req<Matrix>('DELETE', `${pj(slug)}/matrix/features/${encodeURIComponent(id)}`),

@@ -23,6 +23,7 @@ export const qk = {
   weekly: (slug: string) => ['weekly', slug] as const,
   referencia: (slug: string) => ['referencia', slug] as const,
   matrix: (slug: string) => ['matrix', slug] as const,
+  gaps: (slug: string) => ['gaps', slug] as const,
   ads: (slug: string) => ['ads', slug] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
@@ -53,6 +54,7 @@ export const q = {
   // enquanto a coleta semanal roda, confere a cada 5 s
   weekly: (slug: string) => queryOptions({ queryKey: qk.weekly(slug), queryFn: () => api.weekly(slug), enabled: !!slug, refetchInterval: (qr) => (qr.state.data?.running ? 5000 : false) }),
   matrix: (slug: string) => queryOptions({ queryKey: qk.matrix(slug), queryFn: () => api.matrix(slug), enabled: !!slug }),
+  gaps: (slug: string) => queryOptions({ queryKey: qk.gaps(slug), queryFn: () => api.gaps(slug), enabled: !!slug }),
   referencia: (slug: string) => queryOptions({ queryKey: qk.referencia(slug), queryFn: () => api.referencia(slug), enabled: !!slug }),
   ads: (slug: string) => queryOptions({ queryKey: qk.ads(slug), queryFn: () => api.ads(slug), enabled: !!slug }),
   competitorsFeed: (slug: string) => queryOptions({ queryKey: qk.competitorsFeed(slug), queryFn: () => api.competitorsFeed(slug), enabled: !!slug }),
@@ -85,6 +87,7 @@ export const useAnalysis = (slug: string, id: string) => useQuery(q.analysis(slu
 export const useAnalysisAll = (slug: string) => useQuery(q.analysisAll(slug));
 export const useWeekly = (slug: string) => useQuery(q.weekly(slug));
 export const useMatrix = (slug: string) => useQuery(q.matrix(slug));
+export const useGaps = (slug: string) => useQuery(q.gaps(slug));
 export const useReferencia = (slug: string) => useQuery(q.referencia(slug));
 export const useAds = (slug: string) => useQuery(q.ads(slug));
 export const useCompetitorsFeed = (slug: string) => useQuery(q.competitorsFeed(slug));

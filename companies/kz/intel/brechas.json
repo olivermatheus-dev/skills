@@ -1,0 +1,361 @@
+{
+  "updatedAt": "2026-10-08T15:51:15Z",
+  "by": "claude-opus-5-5",
+  "basedOn": {
+    "allminds": "2026-10-07T19:29:13Z",
+    "clinica-agil": "2026-10-07T19:29:36Z",
+    "corpora": "2026-10-07T19:29:30Z",
+    "gestorpsi": "2026-10-07T19:29:53Z",
+    "mais-terapias": "2026-10-07T19:29:56Z",
+    "personcare": "2026-10-07T19:30:17Z",
+    "psicomanager": "2026-10-07T19:30:19Z",
+    "psicoplanner": "2026-10-07T19:30:38Z",
+    "psinota-ai": "2026-10-07T19:31:26Z",
+    "sintropia": "2026-10-08T14:09:27Z",
+    "terapee": "2026-10-07T19:31:52Z"
+  },
+  "themes": [
+    {
+      "id": "alem-do-psicologo",
+      "title": "Falar com terapeutas além do psicólogo",
+      "kind": "publico",
+      "action": "Nomear psicanalistas, hipnoterapeutas e terapeutas integrativos na LP, nos anúncios e nos exemplos dos posts. Quase todos falam só com psicólogo.",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "corpora",
+          "text": "Atrair terapeutas não psicólogos (hipnoterapia, holística, etc.)"
+        },
+        {
+          "competitor": "mais-terapias",
+          "text": "Voz de terapeuta autônomo adulto (psicanalista, hipnoterapeuta, integrativo), não de clínica de reabilitação"
+        },
+        {
+          "competitor": "personcare",
+          "text": "Falar com psicanalistas, hipnoterapeutas e integrativos"
+        },
+        {
+          "competitor": "psicomanager",
+          "text": "terapeutas não psicólogos (hipnoterapeutas, psicanalistas)"
+        },
+        {
+          "competitor": "psicoplanner",
+          "text": "públicos além do psicólogo"
+        },
+        {
+          "competitor": "psinota-ai",
+          "text": "Posicionar para além da psicologia clínica (terapeutas em geral)"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "Atender terapeutas não psicólogos (hipnoterapia, psicanálise, integrativos) que a Sintropia não nomeia"
+        }
+      ]
+    },
+    {
+      "id": "voz-de-terapeuta",
+      "title": "Voz humana, de terapeuta para terapeuta",
+      "kind": "mensagem",
+      "action": "Tom acolhedor e próximo (VOICE.md) contra o discurso técnico, empresarial ou \"AI-first\" do mercado.",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "allminds",
+          "text": "Tom acolhedor de profissional de saúde, não de empreendedor"
+        },
+        {
+          "competitor": "clinica-agil",
+          "text": "Tom humano e próximo do terapeuta"
+        },
+        {
+          "competitor": "corpora",
+          "text": "Voz de terapeuta para terapeuta, mais humana e menos científica"
+        },
+        {
+          "competitor": "psicoplanner",
+          "text": "identidade de marca forte contra o tom só de funcionalidades"
+        },
+        {
+          "competitor": "psinota-ai",
+          "text": "Tom humano e acolhedor contra o discurso AI-first"
+        },
+        {
+          "competitor": "terapee",
+          "text": "Tom humano e próximo contra o discurso de gestão"
+        }
+      ]
+    },
+    {
+      "id": "preco-tudo-incluso",
+      "title": "Preço único, público e com tudo incluso",
+      "kind": "oferta",
+      "action": "Um preço só, na página, com WhatsApp e vídeo dentro. Os concorrentes cobram extra, limitam por plano ou escondem o preço.",
+      "dependsOn": "preço final (T-0001)",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "allminds",
+          "text": "Preço único sem extras (vídeo, WhatsApp, NF inclusos)"
+        },
+        {
+          "competitor": "clinica-agil",
+          "text": "Preço público e simples para solo"
+        },
+        {
+          "competitor": "corpora",
+          "text": "Preço único e simples, sem funil de upgrade para ter WhatsApp"
+        },
+        {
+          "competitor": "gestorpsi",
+          "text": "Competir no preço de entrada com plano solo acessível"
+        },
+        {
+          "competitor": "psicomanager",
+          "text": "preço único sem limites de WhatsApp"
+        },
+        {
+          "competitor": "terapee",
+          "text": "Oferecer WhatsApp e cobrança como parte do preço, sem extra"
+        }
+      ]
+    },
+    {
+      "id": "fundador-terapeuta",
+      "title": "Fundador terapeuta em exercício",
+      "kind": "mensagem",
+      "action": "Contar a história do fundador (origin story). Nenhum concorrente analisado tem.",
+      "dependsOn": "T-0009 (nome público e foto)",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "gestorpsi",
+          "text": "Mostrar prova social e fundador terapeuta, que eles não têm"
+        },
+        {
+          "competitor": "personcare",
+          "text": "Marca com voz e história de terapeuta fundador"
+        },
+        {
+          "competitor": "psicomanager",
+          "text": "fundador terapeuta em exercício"
+        },
+        {
+          "competitor": "psicoplanner",
+          "text": "narrativa de fundador terapeuta"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "Fundador terapeuta em exercício como contraponto a um discurso corporativo"
+        }
+      ]
+    },
+    {
+      "id": "simples-para-solo",
+      "title": "Simples e completo para quem atende sozinho",
+      "kind": "produto",
+      "action": "Vender a rotina inteira num lugar só e sem excesso: começar em minutos, sem vendedor, sem 75 funções.",
+      "features": [
+        "sessao-rapida",
+        "atendimento-integrado"
+      ],
+      "sources": [
+        {
+          "competitor": "allminds",
+          "text": "Simplicidade para quem não quer mentoria nem marketplace"
+        },
+        {
+          "competitor": "clinica-agil",
+          "text": "Começar em minutos sem demonstração com vendedor"
+        },
+        {
+          "competitor": "psicomanager",
+          "text": "simplicidade radical contra 75+ funções"
+        },
+        {
+          "competitor": "psinota-ai",
+          "text": "Falar da rotina inteira (agenda, cobrança, lembrete automático) em vez de só nota"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "Simplicidade radical contra um produto cheio de IA e planos nebulosos"
+        }
+      ]
+    },
+    {
+      "id": "whatsapp-automatico",
+      "title": "Lembrete automático no WhatsApp, sem franquia",
+      "kind": "produto",
+      "action": "Mostrar o lembrete e a confirmação automáticos já no plano de entrada (há concorrente com envio manual, franquia ou recarga paga).",
+      "dependsOn": "confirmar o lembrete automático (T-0014)",
+      "features": [
+        "wpp-lembrete"
+      ],
+      "sources": [
+        {
+          "competitor": "allminds",
+          "text": "Lembrete por WhatsApp já no plano de entrada"
+        },
+        {
+          "competitor": "mais-terapias",
+          "text": "WhatsApp incluído sem franquia/recarga"
+        },
+        {
+          "competitor": "psinota-ai",
+          "text": "Lembrete automático no WhatsApp como contraste ao envio manual"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "WhatsApp automático de agenda do dia e confirmação como diferencial concreto"
+        }
+      ]
+    },
+    {
+      "id": "prova-social",
+      "title": "Prova social com terapeutas reais",
+      "kind": "mensagem",
+      "action": "Depoimentos e casos de terapeutas autônomos reais. Vários concorrentes não mostram nenhum.",
+      "dependsOn": "depoimentos reais (nunca inventar)",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "gestorpsi",
+          "text": "Mostrar prova social e fundador terapeuta, que eles não têm"
+        },
+        {
+          "competitor": "personcare",
+          "text": "Prova social e conteúdo que a PersonCare não tem"
+        },
+        {
+          "competitor": "psinota-ai",
+          "text": "Mostrar prova social real de terapeutas autônomos"
+        },
+        {
+          "competitor": "terapee",
+          "text": "Prova social com terapeutas reais"
+        }
+      ]
+    },
+    {
+      "id": "portal-relato",
+      "title": "Portal com relato do paciente entre sessões",
+      "kind": "produto",
+      "action": "Contar o portal como cuidado contínuo (o paciente relata entre as sessões), não como mais uma funcionalidade.",
+      "features": [
+        "portal-paciente",
+        "diario-tarefas"
+      ],
+      "sources": [
+        {
+          "competitor": "corpora",
+          "text": "Portal do paciente com relato entre sessões como diferencial"
+        },
+        {
+          "competitor": "mais-terapias",
+          "text": "Portal com relato do paciente entre sessões como narrativa, não só 'compartilhamento'"
+        },
+        {
+          "competitor": "personcare",
+          "text": "Mostrar o portal com relato entre sessões como cuidado, não como feature"
+        },
+        {
+          "competitor": "psicoplanner",
+          "text": "portal com relato entre sessões"
+        }
+      ]
+    },
+    {
+      "id": "video-sala-espera",
+      "title": "Videochamada com sala de espera e tela única",
+      "kind": "produto",
+      "action": "Demonstrar vídeo, sala de espera e notas na mesma tela: ninguém mais tem as três juntas.",
+      "features": [
+        "video-nativa",
+        "sala-espera",
+        "atendimento-integrado"
+      ],
+      "sources": [
+        {
+          "competitor": "gestorpsi",
+          "text": "Vender o que falta: WhatsApp, vídeo e portal do paciente"
+        },
+        {
+          "competitor": "mais-terapias",
+          "text": "Videochamada com sala de espera nativa"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "Vender videochamada com sala de espera e tela de atendimento única"
+        }
+      ]
+    },
+    {
+      "id": "autonomo-nao-clinica",
+      "title": "Feito para o autônomo, não para a clínica",
+      "kind": "publico",
+      "action": "Deixar claro que é para quem atende sozinho: sem convênio, TISS e gestão de equipe que o autônomo não usa.",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "clinica-agil",
+          "text": "Menos módulos de convênio/TISS que o autônomo não usa"
+        },
+        {
+          "competitor": "mais-terapias",
+          "text": "Voz de terapeuta autônomo adulto (psicanalista, hipnoterapeuta, integrativo), não de clínica de reabilitação"
+        },
+        {
+          "competitor": "terapee",
+          "text": "Falar direto ao terapeuta autônomo, não à clínica"
+        }
+      ]
+    },
+    {
+      "id": "trial-e-preco-justificado",
+      "title": "Teste grátis ou garantia, e o preço justificado",
+      "kind": "oferta",
+      "action": "A Sintropia cobra R$ 99 com IA e dá 15 dias sem cartão: a Kzloo (R$ 100–129) precisa de trial ou garantia e de um motivo claro para o valor.",
+      "dependsOn": "trial/garantia (T-0002)",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "sintropia",
+          "text": "Oferecer trial ou garantia clara, já que a Sintropia dá 15 dias sem cartão"
+        },
+        {
+          "competitor": "sintropia",
+          "text": "Preço de R$ 99 mensal com IA e trial é referência direta: a Kzloo (R$ 100 a 129) precisa justificar o valor"
+        }
+      ]
+    },
+    {
+      "id": "troca-de-sistema",
+      "title": "Quem quer trocar de sistema",
+      "kind": "oferta",
+      "action": "Migração fácil e interface moderna para quem está num sistema antigo.",
+      "features": [
+        "migracao-assistida"
+      ],
+      "sources": [
+        {
+          "competitor": "gestorpsi",
+          "text": "Captar quem quer trocar um sistema velho: migração fácil e interface moderna"
+        }
+      ]
+    },
+    {
+      "id": "pix-boleto",
+      "title": "Cobrança do paciente por Pix ou boleto",
+      "kind": "produto",
+      "action": "Se a Kzloo cobrar por Pix/boleto, mostrar; a Terapee aceita só cartão.",
+      "features": [
+        "cobranca-online"
+      ],
+      "sources": [
+        {
+          "competitor": "terapee",
+          "text": "Pagamento por Pix ou boleto"
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 // Linhas = funcionalidades (por grupo, recolhíveis) · colunas = concorrentes · a coluna da própria empresa fica fixa,
 // na cor do projeto, logo depois do nome. Clicar numa célula edita (vira by: 'oliver'; a IA nunca sobrescreve).
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown, ChevronRight, CircleDot, CircleHelp, Clock, Pencil, Plus, X } from 'lucide-react';
 import type { Matrix, MatrixCell, MatrixFeature } from '../../../../schema/matrix';
 import { NOS } from '../../../../schema/matrix';
@@ -53,7 +53,10 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
   const proj = useProject(slug);
   const act = useMatrixActions(slug);
   const [q, setQ] = useState('');
-  const [mode, setMode] = useState<'todas' | 'diferenca' | 'brecha' | 'diferencial'>('todas');
+  type Mode = 'todas' | 'diferenca' | 'brecha' | 'diferencial';
+  const [sp] = useSearchParams();
+  // ?f= abre já filtrado (links do Panorama)
+  const [mode, setMode] = useState<Mode>(() => (['diferenca', 'brecha', 'diferencial'].includes(sp.get('f') ?? '') ? sp.get('f') as Mode : 'todas'));
   const [group, setGroup] = useState('todos');
   const [order, setOrder] = useState<'cobertura' | 'alfabetica'>('cobertura');
   const [closed, setClosed] = useState<Set<string>>(new Set());
