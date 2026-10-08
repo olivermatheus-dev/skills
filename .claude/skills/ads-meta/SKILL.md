@@ -10,7 +10,7 @@ Dois modos: **(A) Criar** ou **(B) Analisar**. Se não estiver claro, perguntar.
 ## Antes de começar
 
 1. **Empresa:** pelo `CLAUDE.md`; na dúvida, perguntar.
-2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`; `companies/<slug>/brand/BRAND.md` (proibições); `companies/<slug>/campaigns/LOG_ANGULOS.md` se existir (não repetir aposentados).
+2. **Ler** `companies/<slug>/context/`: `BUSINESS.md`, `AUDIENCE.md`, `VOICE.md`, `COPY.md`, `COMPETITORS.md`; `companies/<slug>/brand/BRAND.md` (proibições); `companies/<slug>/campaigns/LOG_ANGULOS.md` se existir (não repetir aposentados); o relatório mais recente em `companies/<slug>/intel/semanas/` (anúncios ativos dos concorrentes: os que estão no ar há 30+ dias são os que dão resultado).
 3. **Confirmar** objetivo (venda, lead, conversa no WhatsApp), destino, oferta e verba diária. O que faltar: assumir o mais provável pelo contexto, marcar `[a confirmar]` e seguir. Destino inexistente (sem LP/link) → avisar que não dá para subir e sugerir `landing-page`.
 4. **Nunca inventar** provas, números, depoimentos, prazos ou escassez.
 

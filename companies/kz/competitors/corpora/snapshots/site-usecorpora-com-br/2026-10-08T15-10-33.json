@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:10:33Z",
+  "platform": "site",
+  "profileUrl": "https://usecorpora.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Corpora",
+    "handle": "usecorpora.com.br",
+    "bio": "A Corpora é um software para psicólogas com prontuário eletrônico, agenda online, cobrança automática, site de agendamento, financeiro e apoio com IA.",
+    "avatar": "https://usecorpora.com.br/brand/others/logo_apple.png",
+    "avatarLocal": "media/site-usecorpora-com-br/avatar-0519c660.png",
+    "banner": "https://usecorpora.com.br/brand/others/og-default.png",
+    "bannerLocal": "media/site-usecorpora-com-br/banner-1484fb59.png",
+    "links": [
+      "https://instagram.com/psicohumor",
+      "https://instagram.com/usecorpora",
+      "https://www.youtube.com/@CorporaTV",
+      "https://www.tiktok.com/@usecorpora",
+      "https://linkedin.com/company/usecorpora",
+      "https://x.com/usecorpora",
+      "https://www.facebook.com/business/marketing-partners"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

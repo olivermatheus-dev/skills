@@ -13,6 +13,8 @@
     "collect": "tsx tools/intel/cli.ts",
     "analise": "tsx tools/intel/analysis-cli.ts",
     "test:intel": "tsx tools/intel/test.ts",
+    "intel:semanal": "tsx tools/intel/semanal.ts",
+    "ads": "tsx tools/intel/ads-cli.ts",
     "app:dev": "vite --config app/vite.config.ts",
     "brand": "tsx tools/brand.ts"
   },

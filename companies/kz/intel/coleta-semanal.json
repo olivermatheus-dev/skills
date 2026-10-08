@@ -1,0 +1,16 @@
+{
+  "weekday": 1,
+  "hour": 8,
+  "enabled": true,
+  "running": null,
+  "last": "2026-10-08T15:12:52.567Z",
+  "lastWeek": "2026-W41",
+  "lastSummary": {
+    "profiles": 29,
+    "ok": 28,
+    "ads": 40,
+    "newAds": 0,
+    "report": "companies/kz/intel/semanas/2026-W41.md",
+    "errors": 2
+  }
+}

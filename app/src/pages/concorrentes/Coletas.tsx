@@ -9,6 +9,7 @@ import { AreaPage, SortTable, StatStrip, useMarket, type Col, type MarketRow } f
 import { Avatar, Chips, PlatformIcon, Spinner, fmtDateTime, platformLabel, timeAgo } from '../../components/competitors/lib';
 import { toast } from '../../components/toast';
 import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
+import WeeklyPanel from '../../components/competitors/WeeklyPanel';
 
 type R = ProfileSummary & { m: MarketRow };
 const STALE_DAYS = 7;
@@ -76,6 +77,7 @@ export default function Coletas() {
   return (
     <AreaPage actions={<Button variant="ghost" disabled={!!pulling || !targets.length} onClick={() => pullAll(targets)} title="Puxa as redes de todos, um concorrente por vez">{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : '↻ Puxar todos'}</Button>}>
       <ErrorBox error={m.error} />
+      <WeeklyPanel slug={slug} />
       <div className="mb-4"><StatStrip items={[
         { label: 'Perfis', value: String(all.length) },
         { label: 'Em dia', value: `${nOk}/${all.length}`, sub: `coleta com menos de ${STALE_DAYS} dias` },

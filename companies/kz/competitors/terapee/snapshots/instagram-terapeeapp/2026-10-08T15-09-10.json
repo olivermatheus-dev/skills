@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:09:10Z",
+  "platform": "instagram",
+  "profileUrl": "https://www.instagram.com/terapeeapp/",
+  "source": "instagram-public",
+  "profile": {
+    "name": "Terapee • Sistema para Clínicas de Terapia",
+    "handle": "terapeeapp",
+    "bio": "Gestão de clínicas multidisciplinares 🧩\nAgenda, faltas, repasse e NFS-e sem planilha\nFeito com +400 clínicas reais\n👇 Teste grátis por 14 dias",
+    "avatar": "https://scontent.cdninstagram.com/v/t51.2885-19/449823880_8069844399745073_4918274691440282679_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=100&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4zMjAuQzMifQ%3D%3D&_nc_ohc=iwyJsqkNVE4Q7kNvwHIZYiN&_nc_oc=AdqDzgUTqgdtaFHX4UDfQFCX4Nake1iXTdLOATxvz3eaCVFB_4DIiIve5mSlW7-7DMsEKKM3d5cSdw_1o-TfZALg&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ss=7c689&oh=00_AQMtOzit3iPrYgaxwuJW3sTz3UUy3W7aBMr7n3KGC4qbcQ&oe=6ACD736E",
+    "avatarLocal": "media/instagram-terapeeapp/avatar-8ea74bce.jpg",
+    "followers": 132,
+    "following": 403,
+    "postsCount": 36,
+    "verified": false,
+    "links": []
+  },
+  "items": [
+    {
+      "id": "DePNQlqAj9g",
+      "url": "https://www.instagram.com/reel/DePNQlqAj9g/",
+      "type": "reel",
+      "publishedAt": "2026-10-08T15:01:29Z",
+      "durationS": 29,
+      "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t51.82787-15/842087131_18020226524932033_8473166832525220367_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=NDAwMzQ3NjkwODMwNTE3MDI3MjE4MDIwMjI2NTE4OTMyMDMz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=RIIymeXk0hMQ7kNvwHQDJKc&_nc_oc=Ado9dqXpywUQ2bVIFORNFlFVu4dRML7NBTN4EQVQSPzjm5-GqY90QBQlQNQ98jCqtwGUUmcW4rAAR7jppcXSk9Fw&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=SqRRiMVuTCqOEi2VtNQsjA&_nc_ss=7c689&oh=00_AQOr27m2yslBVNQvA1WVK5HjKaX7INarGTdBl-QnU2A-fw&oe=6ACD9C6A",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/DePNQlqAj9g-c8aa.jpg",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      }
+    },
+    {
+      "id": "DeMobJ2jUdK",
+      "url": "https://www.instagram.com/p/DeMobJ2jUdK/",
+      "type": "carrossel",
+      "publishedAt": "2026-10-07T15:00:38Z",
+      "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t39.30808-6/832513635_1075665248774120_5032716148303895074_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=NDAwMjc1MTkzNTgxMTQ5Mjg3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=XYXMf2Nt0E4Q7kNvwEOqvh2&_nc_oc=AdoKe01BLN7lI8XWmKBmknvaq3Ag3D3bYPKgriG4nGNpkWEarigJrQYqidljPJXNM6nAvK5W0s_mQo_AOx5NRSIY&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=HAAFpwQdSnT2CBUs0LjoLg&_nc_ss=7c689&oh=00_AQMiWNRGueLmJVtqjymCsrIScTVjiReIzzK5HzF2WAJZpA&oe=6ACD92F8",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/DeMobJ2jUdK-56c5.jpg",
+      "metrics": {
+        "likes": 0,
+        "comments": 0
+      }
+    },
+    {
+      "id": "DeJ1656D_kC",
+      "url": "https://www.instagram.com/reel/DeJ1656D_kC/",
+      "type": "reel",
+      "publishedAt": "2026-10-06T13:01:15Z",
+      "durationS": 25,
+      "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t51.82787-15/837194189_18019953656932033_359512458235435239_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=104&ig_cache_key=NDAwMTk2Njg4ODI2NzU0NDgzNDE4MDE5OTUzNjUzOTMyMDMz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=ks9eAjuD_vQQ7kNvwFR_1zI&_nc_oc=AdpLVgzpeLuqh2eKplPYHNcUk0RgpK-8pu1jgjnucfhNUll6cxS3-hqfOwxG92V_kiNsRojOvrW30fjBLZGbceMZ&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=B7D8S_UyNmelNznranrq5w&_nc_ss=7c689&oh=00_AQPJ-O4K2RIPAwkrESmBtVadMFWlN8wdoH7aYaG0Ho1E9g&oe=6ACD8EA3",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/DeJ1656D_kC-9ddf.jpg",
+      "metrics": {
+        "views": 8,
+        "likes": 0,
+        "comments": 0
+      }
+    },
+    {
+      "id": "DeHezZJiEc6",
+      "url": "https://www.instagram.com/p/DeHezZJiEc6/",
+      "type": "carrossel",
+      "publishedAt": "2026-10-05T15:00:22Z",
+      "thumbnail": "https://instagram.fvix13-1.fna.fbcdn.net/v/t39.30808-6/832531782_1075661218774523_2269406239116898692_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ig_cache_key=NDAwMTMwMjIxNDY2NDAzMjMzOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=djMyJfNcK_AQ7kNvwHB6k54&_nc_oc=AdrZO-NXrzatk6l2p2-r1HZY-cOV-oO8dy__bm7HnuAv1s0QNd5fwfZt_KzvWnorAlRyV_moYkKsrfS9o_ctmLYB&_nc_zt=23&_nc_ht=instagram.fvix13-1.fna&_nc_gid=HAAFpwQdSnT2CBUs0LjoLg&_nc_ss=7c689&oh=00_AQONlFESsH1_WqUYhNeRJGkiYd7ZIyiOob1ZIM1ALuNbow&oe=6ACD969B",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/DeHezZJiEc6-5b31.jpg",
+      "metrics": {
+        "likes": 2,
+        "comments": 0
+      }
+    },
+    {
+      "id": "Ddv_HA8jVfa",
+      "url": "https://www.instagram.com/p/Ddv_HA8jVfa/",
+      "type": "carrossel",
+      "caption": "Pacote vendido não é sessão feita. Três perguntas que toda clínica que vende pacotes precisa responder em segundos, e como a Terapee responde cada uma.\nSalve para mostrar para a recepção.\n#pacotesdesessoes #gestaodeclinicas #clinicadeterapia",
+      "publishedAt": "2026-09-26T12:00:12Z",
+      "thumbnail": "https://instagram.fvix13-1.fna.fbcdn.net/v/t51.82787-15/826395566_18018499034932033_7490377880150792461_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzk5NDQyMTY3OTA4NjIxNzM5Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UJf2iAhQs98Q7kNvwHTi-b1&_nc_oc=Adq5rZEWYuTmrkvHZDb3fwW0eZA2IG-uus0goDDlY12CmXzLR-fIvy7o65c5F8AFkZvA3Mu0O4kKPGVd9GHKSs76&_nc_zt=23&_nc_ht=instagram.fvix13-1.fna&_nc_gid=HAAFpwQdSnT2CBUs0LjoLg&_nc_ss=7c689&oh=00_AQOukEtAdfg8Wiyn4Q-7B4zwFFjDi8kit0L4n3HdX83ZUw&oe=6ACD9428",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/Ddv_HA8jVfa-2d38.jpg",
+      "metrics": {
+        "likes": 0,
+        "comments": 0
+      }
+    },
+    {
+      "id": "DdnC6yRFQHk",
+      "url": "https://www.instagram.com/reel/DdnC6yRFQHk/",
+      "type": "reel",
+      "publishedAt": "2026-09-23T00:41:25Z",
+      "durationS": 31,
+      "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t51.82787-15/821196080_18018060068932033_2181837029990722237_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&ig_cache_key=Mzk5MjE3MjQzMDQ4MzU4NzU1NjE4MDE4MDYwMDY1OTMyMDMz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=8nBFYnEc-BkQ7kNvwEW4or5&_nc_oc=AdpTVCfvLSgQRHmz-QN-NFlQTznkWb5dg4VN550qBeEuE2Hxff0P8yqGqwHjtQnepjTBeGiF8A0miXfvdXj6_P2v&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=5B_3vMKUw5cpQN4FuB_cDw&_nc_ss=7c689&oh=00_AQMLB7Hy7H3UP4-zkaxElFPSzebrvlCZl81SttCMtpIrUw&oe=6ACD6E40",
+      "thumbnailLocal": "media/instagram-terapeeapp/thumbs/DdnC6yRFQHk-4870.jpg",
+      "metrics": {
+        "views": 7,
+        "likes": 3,
+        "comments": 0
+      }
+    }
+  ],
+  "errors": []
+}

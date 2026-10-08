@@ -228,6 +228,55 @@ await t('yt-dlp ausente: mensagem com instrução de instalação', async () => 
   process.env.YTDLP_PATH = '';
 });
 
+await t('anúncios Meta: normaliza JSON da biblioteca (imagem, vídeo, carrossel, variações)', async () => {
+  const A = await import('./ads');
+  const { AdsSnapshot } = await import('../../schema');
+  const json = fj('ads-library.json');
+  const r = A.normalizeAdsLibrary(json)!;
+  assert.equal(r.total, 456);
+  assert.equal(r.hasNext, true);
+  assert.equal(r.endCursor, 'AQH-FIXTURE');
+  assert.equal(r.ads.length, 4);
+  const by = Object.fromEntries(r.ads.map((a) => [a.id, a]));
+  const img = by['1719624392496275'], vid = by['1147792874353936'], car = by['2208553209888919'], dco = by['1309568727845896'];
+  assert.equal(img.media.type, 'imagem');
+  assert.ok(img.media.thumbnail?.startsWith('https://'));
+  assert.equal(img.pageName, 'Salomé Uniformes');
+  assert.equal(img.pageId, '180332498797281');
+  assert.equal(img.startedAt, '2026-07-07');
+  assert.deepEqual(img.platforms.slice(0, 2), ['facebook', 'instagram']);
+  assert.equal(img.cta, 'Enviar mensagem pelo WhatsApp');
+  assert.match(img.text!, /^Uniforme não é detalhe/);
+  assert.equal(img.url, 'https://www.facebook.com/ads/library/?id=1719624392496275');
+  assert.equal(vid.media.type, 'video');
+  assert.match(vid.media.videoUrl!, /^https:\/\//);
+  assert.equal(car.media.type, 'carrossel');
+  assert.equal(dco.variations, 2);
+  assert.equal(img.active, true);
+  assert.equal(img.endedAt, undefined);
+  // HTML com o JSON embutido (como a página entrega) e corpo graphql
+  const html = `<html><script type="application/json" data-sjs>${JSON.stringify({ require: [json] })}</script></html>`;
+  assert.equal(A.parseLibraryHtml(html)!.ads.length, 4);
+  assert.equal(A.parseGraphqlBody(JSON.stringify(json))!.ads.length, 4);
+  assert.equal(A.parseLibraryHtml('<html>nada</html>'), null);
+  // escolha da página do anunciante
+  assert.ok(A.pageMatches('Corpora Technology', ['Corpora']));
+  assert.ok(A.pageMatches('PsiNota AI', ['Psinota ai']));
+  assert.ok(!A.pageMatches('Corporate Brasil', ['Corpora']));
+  assert.deepEqual(A.pickPage(r, ['Meu.ollie']), { pageId: '101255382057646', pageName: 'Meu.ollie' });
+  assert.equal(A.pickPage(r, ['Inexistente Nome']), undefined);
+  // gravação/leitura: listAds ordenado e latestAds
+  const dir = join(root, 'companies', 't', 'competitors', 'x', 'ads');
+  mkdirSync(dir, { recursive: true });
+  for (const [f, at] of [['2026-10-08T10-00-00.json', '2026-10-08T10:00:00Z'], ['2026-10-01T10-00-00.json', '2026-10-01T10:00:00Z']] as const)
+    writeFileSync(join(dir, f), JSON.stringify(AdsSnapshot.parse({ collectedAt: at, pageId: '1', ads: r.ads, total: 456 })));
+  const l = A.listAds('t', 'x');
+  assert.deepEqual(l.map((x) => x.data.collectedAt), ['2026-10-01T10:00:00Z', '2026-10-08T10:00:00Z']);
+  assert.equal(A.latestAds('t', 'x')!.file, 'companies/t/competitors/x/ads/2026-10-08T10-00-00.json');
+  assert.equal(A.latestAds('t', 'nada'), undefined);
+  rmSync(join(root, 'companies', 't', 'competitors', 'x'), { recursive: true, force: true });
+});
+
 await t('validação geral do HUB_ROOT temporário', () => {
   assert.deepEqual(S.validateAll(), []);
 });

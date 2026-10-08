@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:10:51Z",
+  "platform": "site",
+  "profileUrl": "https://gestorpsi.com.br",
+  "source": "html",
+  "profile": {
+    "name": "GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia | GestorPsi: Prontuários Eletrônicos e Gestão de Serviços em Psicologia",
+    "handle": "gestorpsi.com.br",
+    "avatar": "https://gestorpsi.com.br/wp-content/uploads/2019/08/cropped-favicon-180x180.png",
+    "avatarLocal": "media/site-gestorpsi-com-br/avatar-50d63685.png",
+    "links": [
+      "https://www.facebook.com/gestorpsi",
+      "https://www.youtube.com/playlist?list=PLJCW24WotJerfoEQvjutaG-NQg_4IgY6j"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

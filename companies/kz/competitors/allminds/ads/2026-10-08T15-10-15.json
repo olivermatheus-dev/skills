@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:10:15Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "Allminds",
+  "pageId": "513678438485643",
+  "pageName": "Allminds",
+  "total": 9,
+  "ads": [
+    {
+      "id": "1072765912388161",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-08-06",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "Depois de tentativas frustradas, indicações que não encaixavam e buscas sem fim… chegou o match que realmente importa: a compatibilidade entre o que você precisa e quem pode te ajudar.\n\nEnvie-nos uma mensagem e encaminharemos seu contato para até 3 profissionais de acordo com as suas necessidades.\n\n➡️ Encontre seu terapeuta ideal agora",
+      "title": "Encontre seu terapeuta",
+      "description": "Responda algumas perguntas rápidas e receba até 3 psicólogos compatíveis com você direto no seu WhatsApp. Psicólogos verificados, valores transparentes, online ou presencial.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://lp.captamaispsi.com.br/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/765188023_2372953403513338_2944149566487006612_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=GC22biWqK_8Q7kNvwEu08sp&_nc_oc=AdpZnq7B9gyJT4mBTtLiHOsi6uqQHdVLZ3nYfy32DBJV9E9zoXzr5564bcQQlya-goRJ572Nsz6sUXTkO4w1p96j&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQP4Lss373p-xgXk_1ZGdGl_2fgYb_38kLvbr8jS1CZirg&oe=6ACDA047",
+        "thumbnailLocal": "media/ads/1072765912388161.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1072765912388161"
+    },
+    {
+      "id": "972523402349423",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-05-29",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "{{product.brand}}",
+      "title": "{{product.name}}",
+      "description": "{{product.description}}",
+      "cta": "Ver detalhes",
+      "linkUrl": "https://lp-manifesto.lovable.app/",
+      "media": {
+        "type": "carrossel",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/710098525_2228796354554611_5802029967715416153_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=fIdCNM5o2SUQ7kNvwEMlV0t&_nc_oc=AdrMTQYPTCT4R5ryIuK4bB304gvfFMJG4zsR9HlOWZuVCRQZNXmqCKqObSDh9h1UdWZ7gJ1pwodQ6aoHQzTxrOgK&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQPadi8_Ld77P41XFQx7TSG5Xiwdx3qM-U15XhJiYZIY2A&oe=6ACD8B1F",
+        "thumbnailLocal": "media/ads/972523402349423.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=972523402349423"
+    },
+    {
+      "id": "1100512279508931",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-09-15",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "whatsapp"
+      ],
+      "text": "Quanto da sua sessão fica com você, de verdade?\n\nNos marketplaces, você atende, acolhe, se dedica. E ainda divide o valor com quem só te apresentou o paciente.\n\nNa Allminds não. Você recebe 9 pessoas interessadas em psicoterapia em 3 meses, por R$223,20 (R$74,40/mês). Sem comissão. Sem repasse por sessão.\n\nVocê entra em contato, conduz a conversa e fecha a sessão. O valor é 100% seu, sempre.\n\nPlanos com até 30%OFF. Chama a gente no WhatsApp e fala com uma especialista Allminds.",
+      "title": "Converse conosco",
+      "cta": "Enviar mensagem pelo WhatsApp",
+      "linkUrl": "https://api.whatsapp.com/send",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/770884641_4234963046753713_4686648702945179991_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=z5yR6vlPA0QQ7kNvwEMiTpB&_nc_oc=AdqlMq8cn8kSkLzW0sE0acAFcYOZyhw14AeqJCm87atgwxkt_LCXB7S1_mNuH401wCfqIDr61j5jIELyVfQV-EK5&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNrjmCp1P66Rcccn16EboJRnXwMOnujayTiMnhEs3bV9A&oe=6ACD92CA",
+        "thumbnailLocal": "media/ads/1100512279508931.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1100512279508931"
+    },
+    {
+      "id": "2513495322460918",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-08-06",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "messenger",
+        "threads"
+      ],
+      "text": "Você estudou para cuidar de pessoas. Mas ninguém te ensinou a cuidar de um negócio.\n\nE aí começa o caos:\n\n❌ dificuldade para atrair pacientes\n❌ agenda desorganizada\n❌ horas gastas com tarefas administrativas\n❌ financeiro que você não consegue acompanhar\n❌ várias ferramentas diferentes para dar conta de tudo\n\nE se você pudesse colocar tudo isso em um só lugar?\n\nNa Allminds, você tem:\n🔹 Captação: pacientes interessados em psicoterapia chegando até você\n🔹 Gestão: agenda, prontuário, financeiro, pagamentos e muito mais\n🔹 Conhecimento: cursos e comunidade para você desenvolver seu negócio\n\nE o melhor: sem comissão sobre suas sessões.\nVocê atrai. Você conversa. Você agenda.\n\nO valor da sua sessão continua sendo 100% seu.\n\nMenos improviso. Mais estrutura.\nMais autonomia para crescer.",
+      "title": "Teste grátis",
+      "description": "Organize sua clínica, receba pacientes interessados sem comissão por sessão e cresça com previsibilidade. A partir de R$2,00 por dia.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://lp-menoscaosmaispacientes.lovable.app/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/764925259_1523421545630621_7747153440054620802_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3BBoYsSszKMQ7kNvwGcjNvM&_nc_oc=Adq7M6SxQWXSLXXRT0K7SJ6SwCSEezFkVpMARePJGmg4R_fiZuTYiT9ESo6umTpzmU-CVAVYT3zGhlfQzRvPTmMj&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQP_50rcNu9DM7zNbORnJHYN5VLIenoxnCGNRXQaIqm1nQ&oe=6ACD8D99",
+        "thumbnailLocal": "media/ads/2513495322460918.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=2513495322460918"
+    },
+    {
+      "id": "4294286304235456",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-07-20",
+      "platforms": [
+        "instagram",
+        "whatsapp"
+      ],
+      "text": "Você estudou para atender pessoas, não para passar horas tentando conseguir novos pacientes.\n\nCom a Allminds, você recebe contatos de pessoas que já passaram por uma triagem e procuram atendimento na sua faixa de valor (R$ 80 a R$ 100 por sessão), sem pagar comissão sobre as sessões realizadas.\n\nE agora ficou ainda melhor:\n\n🔹 Plano Trimestral\n✔️ 9 contatos em 3 meses\n💙 De R$ 279 por R$ 223,20\nCupom: ALL20TRIMESTRAL\n\n🔸 Plano Semestral (melhor custo-benefício)\n✔️ 18 contatos em 6 meses\n💙 De R$ 499 por R$ 349,30\nCupom: ALL30\n\nPor apenas R$ 126,10 a mais, você dobra o período de captação e também a quantidade de contatos.\n\nAlém disso, você recebe:\n✔️ Contatos com triagem prévia\n✔️ Perfil no Portal Allminds\n✔️ 100% do valor das suas sessões fica com você\n\n💡 Um único paciente já pode pagar o investimento.\n\nClique para garantir seu desconto agora mesmo e começar a crescer com autonomia!",
+      "title": "Garanta seu desconto",
+      "cta": "Enviar mensagem pelo WhatsApp",
+      "linkUrl": "https://api.whatsapp.com/send",
+      "media": {
+        "type": "video",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/749286170_2095167367703780_8466817778788098099_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=B-k7picIEQMQ7kNvwEKhxlh&_nc_oc=Adp5fza2l0p31dsETZCLbtN3umTaWvd4A96MTIVbwVFNhWP3X4hKrY6RPfc2w0wDRuHz2O3Gyg1geROhQbH1sBcj&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQN6CZf3ecj8GCeknD2EeSQt1OcBxNOwmTtcbQrtDwVOZw&oe=6ACD84F3",
+        "thumbnailLocal": "media/ads/4294286304235456.jpg",
+        "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNuTEwt1TVGtS-QEHdudLWW9I0_FHfVTZgvkUbRV0t_eWYgiskn3sr0fTNwvVrioP8g7iHs_T8FUGepo_ZVbvkHGkwtxpAzbNi0j_AjrKyD6g.mp4?_nc_cat=104&_nc_oc=Adpc3wbJaigj4fE8U_ARMeT9gcYJCtJWbqOrROySe8Wt6qSC50snVDKjPNwErvmOBRsmenYjr0vUJjrQi824s5eO&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=E0JWawhu39oQ7kNvwG-Kaeb&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEwMjcyNTYwMTAwMzM5NjksImFzc2V0X2FnZV9kYXlzIjo3OSwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjE2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=1a2d2f914a84b2e2&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC84NTQwNjFFRTk4NUU0NERBQUFEMTc2NDRBNkM0Qzk4NV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIwNEQwQkM2MTQwNjczQ0VBRjIwMTVBOUQ3Q0YyNEJDX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbirJLZlZLTAxUCKAJDMywXQDCzMzMzMzMYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQOEmOcHEtBXs19givFuXa0ozj_1QdNLE6xEWp0ySAJ-RQ&oe=6ACDA010"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=4294286304235456"
+    },
+    {
+      "id": "1516968696853420",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-09-09",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "text": "Ser um “bom psicólogo” hoje mudou. E você precisa estar atento a isso! 🧠✨\n\nAntigamente, entregar bons resultados na sessão parecia ser o único requisito. Hoje, o conceito de resultado se ampliou: o paciente busca uma experiência completa, desde o primeiro contato até a gestão do consultório e a presença nas redes sociais. \n\nAlém disso, os próprios pacientes perguntam: \"Qual é o seu Instagram? Quero te acompanhar!\".\n\nO profissional que se destaca atualmente não é só aquele que entrega ótimos resultados na terapia, mas também aquele que cuida da experiência do cliente, da tecnologia e da gestão do seu negócio. \n\nA tal \"solidão clínica\" ficou no passado. O mercado exige que o psicólogo do presente também saiba gerir e se posicionar.\n\n💡 Quer ver a conversa completa com a Cris Linhares sobre o futuro da psicologia e gestão?\n\nAssista ao 1º episódio completo da nossa série!\n\n👉 Clique no link da bio e assista agora ao Capítulo 1!\n\n#Allminds #Allmindsapp",
+      "cta": "Acessar o perfil do Instagram",
+      "linkUrl": "https://instagram.com/allminds.app",
+      "media": {
+        "type": "video",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/800073608_1720718965897798_7646439627586094503_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=gHA7WLwFCS4Q7kNvwFBXof1&_nc_oc=AdqW0Owxf_cqEbBBysfyr-JFeEl3h2kiYLQLNpZ1LnlK5SlYl6AtcxVTBCMJhRThDAU8lvVkfTntxMsvchg8TfNK&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNtedCrmAeMGzxwoli6U88SJlTbqsT9nrHLxhYZmcQYzA&oe=6ACD837E",
+        "thumbnailLocal": "media/ads/1516968696853420.jpg",
+        "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m367/AQMajG_DnVM9OXZLnM66wi-PTSzP09X8cQyArO-TRmyoy17naowWrV_lAgZmCVfd29D8MqcHVNfMVnjEQ9NlQNx620nCOaIOu_MRqoZtOg.mp4?_nc_cat=108&_nc_oc=AdrsqLAZVIacgzBfNWjmlTsBkFBdKmnhc1mmo9YpPKWLfesNKI3Xn5uaTWxR8Y7g3jvYt4gozy3xAGvO1KfRfmNs&_nc_sid=ef5aa3&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=h83kgg5jpmgQ7kNvwGMRZFJ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLnByb2dyZXNzaXZlX2gyNjQtYmFzaWMtZ2VuMl83MjBwIiwieHB2X2Fzc2V0X2lkIjoxNzg2NzgyNDk5MjI2OTE3LCJhc3NldF9hZ2VfZGF5cyI6MzMsInZpX3VzZWNhc2VfaWQiOjEyMzc0LCJkdXJhdGlvbl9zIjo2NSwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQO09M-2XFprsF8bOAhdoQwKRHIUQkuzAYgvQWbQEjw9cg&oe=6ACD8DDA"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1516968696853420"
+    },
+    {
+      "id": "1713025166432440",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-10-08",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "Você passou anos aprendendo a ser psicóloga.\nAgora começa uma parte que quase ninguém ensina na faculdade: como construir sua própria prática.\n\n✅ Como se posicionar?\n✅ Como atrair pacientes?\n✅ Como organizar seu financeiro?\n✅ Como organizar sua rotina?\n✅ Como divulgar seu trabalho?\n\nNa Allminds, você encontra tudo em um único lugar: sistema de gestão do consultório, captação de pacientes interessados, formação empreendedora e suporte humano de verdade. Porque crescer com autonomia não significa precisar descobrir tudo sozinha.\n\nCresça com autonomia. Construa sua jornada com a Allminds. 👉 Conheça a Allminds.",
+      "title": "Allminds | Cresça com autonomia na psicologia",
+      "description": "Presença, pacientes, conhecimento e gestão em um só lugar: a Allminds oferece estrutura, conteúdos e suporte para você construir sua carreira na psicologia.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/831313351_1268165822112580_7982358303096044609_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=uM6mFjAMWh8Q7kNvwH4TRoH&_nc_oc=AdrChivIoC0cjWf3kh0Z0XRXY8a49P15I0KGjD6fy0JQnYBwh8fTSilmXBP6vDecdO8UX4treBBPkW6rkm2uwiDn&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQPRE2UyLYVrXQE_7EaGU7Y-9yLCHBPmh9Qh6R02fP2PWQ&oe=6ACD7DB0",
+        "thumbnailLocal": "media/ads/1713025166432440.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1713025166432440"
+    },
+    {
+      "id": "1301904321986345",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-10-08",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "Você passou anos aprendendo a ser psicóloga.\nAgora começa uma parte que quase ninguém ensina na faculdade: como construir sua própria prática.\n\n✅ Como se posicionar?\n✅ Como atrair pacientes?\n✅ Como organizar seu financeiro?\n✅ Como organizar sua rotina?\n✅ Como divulgar seu trabalho?\n\nNa Allminds, você encontra tudo em um único lugar: sistema de gestão do consultório, captação de pacientes interessados, formação empreendedora e suporte humano de verdade. Porque crescer com autonomia não significa precisar descobrir tudo sozinha.\n\nCresça com autonomia. Construa sua jornada com a Allminds. 👉 Conheça a Allminds.",
+      "cta": "Ver detalhes",
+      "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+      "media": {
+        "type": "video",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/831224144_1740090140587622_5399464469850567647_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=9ljJIuixAl0Q7kNvwFjwivw&_nc_oc=AdrE-L41w5NfhlZE8uQeb0dCC5WMTprGtNwUdx1PfpLimYOT9J6Z2dZjp0x8glGRo9MGFO4MoSeRsbVwfNcCxZ_Y&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNGbAloSEekeVcVkZ4L9X5b3wYfpwXsZWAFw7K12kpdvw&oe=6ACD74B8",
+        "thumbnailLocal": "media/ads/1301904321986345.jpg",
+        "videoUrl": "https://video.fvix3-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQO6SZ2OHTu6PLQoRah2OZQZSPMvsTz4XOWmtRIM96f3SYwPHxAghJkOvzIneo-qxmWcKSzDq3NpKcCEEEoB65wbKsFtRnVVhYttVjE34SRDvA.mp4?_nc_cat=108&_nc_oc=AdqEwKCy4NVIjGjnua1lYBPuWuuId3-qDPbMytHEGK0NIF9x-St7xKYjJcHHeP0x5rnVkIriNTLcRRDWcwboTHce&_nc_sid=b66105&_nc_ht=video.fvix3-1.fna.fbcdn.net&_nc_ohc=CAIBEOWYQG8Q7kNvwEnXoeN&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjE4NjU4NDI3NTc3MzI5NzgsImFzc2V0X2FnZV9kYXlzIjo1LCJ2aV91c2VjYXNlX2lkIjoxMDc5OSwiZHVyYXRpb25fcyI6NjEsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=f25d8739a0161a1&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC8yNTU5QjM1RDJFMTE0OTAxQkZFNzdDMjA5MTY2NzVFM19tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzIxQTE3NjhDQkJFNzRDNzQ5NDcyRjI0NzZBQUJGREZFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbkqcDsq77QBhUCKAJDMywXQE6zMzMzMzMYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&_nc_zt=28&oh=00_AQOevgSEj-P1WrOEwYjL-LCkq2vHs0LtpbLJxFoDX927EA&oe=6ACD8230"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1301904321986345"
+    },
+    {
+      "id": "1302995391951963",
+      "pageName": "Allminds",
+      "pageId": "513678438485643",
+      "active": true,
+      "startedAt": "2026-10-08",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "Se você acabou de se formar, provavelmente já percebeu:\nsaber atender é só uma parte de construir uma carreira na psicologia.\n\nExiste também a parte de se posicionar, encontrar pacientes, organizar a rotina, entender de marketing, cuidar do financeiro e descobrir como transformar o consultório em uma prática sustentável.\n\nVocê não precisa dominar tudo isso antes de começar.\nA Allminds reúne ferramentas, oportunidades e conhecimento para acompanhar você nessa construção.\n\n🌱 Cresça com autonomia. Construa sua jornada com a Allminds. 👉 Fale conosco e conheça a Allminds.",
+      "title": "Allminds",
+      "cta": "Ver detalhes",
+      "linkUrl": "https://allminds-campanha-icp.lovable.app/",
+      "media": {
+        "type": "carrossel",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/830686863_1676970640664093_627645689127512602_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=5-Oxf0LFRHIQ7kNvwG4WYqH&_nc_oc=AdpqxbPSd8aFK8UPTKoe8mzXV0Nz4d6FP_gz-FWDbWncOVswNxZvhI9z4H_2hArMkDaYw23L8tXg6qON8emwc3U2&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=8WO1O-_fi9-jip5c5tdLfg&_nc_ss=7b289&oh=00_AQNfcVIjYWAPApLbVDqsIgs-oMihVoq6mHUUGotn_UGNDw&oe=6ACD9915",
+        "thumbnailLocal": "media/ads/1302995391951963.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1302995391951963"
+    }
+  ],
+  "errors": []
+}

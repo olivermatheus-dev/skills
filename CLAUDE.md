@@ -23,6 +23,7 @@ companies/<slug>/
   contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md, mockup.json…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
   board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
+  intel/            coleta-semanal.json + semanas/AAAA-Wss.md (relatório semanal dos concorrentes: redes + anúncios; npm run intel:semanal)
   capturas/         AAAA-MM-DD-<tela>/ (original.png + captura.json: regiões e áreas a borrar) → skill `mockup`
   project.yml · tags.yml · personas/ · notes/ · ideas/ · competitors/   (dados tipados: schema/, validar com npm run validate)
 ```

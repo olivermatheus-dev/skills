@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:08:49Z",
+  "platform": "site",
+  "profileUrl": "https://psinotaai.com",
+  "source": "html",
+  "profile": {
+    "name": "PsiNota AI — Prontuário Eletrônico com IA para Psicólogos",
+    "handle": "psinotaai.com",
+    "bio": "Prontuário eletrônico que escreve o rascunho da nota clínica de cada sessão (DAP, BIRP, Evolução Livre, Anamnese). Você revisa e assina. Plano grátis, sem cartão.",
+    "avatar": "https://psinotaai.com/icon.png",
+    "avatarLocal": "media/site-psinotaai-com/avatar-34ae1c21.png",
+    "banner": "https://psinotaai.com/opengraph-image?a4da39a7c9a383a0",
+    "bannerLocal": "media/site-psinotaai-com/banner-ce5f0b15.png",
+    "links": [
+      "https://www.facebook.com/tr?id=1417952809565580&ev=PageView&noscript=1",
+      "https://www.instagram.com/psinotaai",
+      "https://www.linkedin.com/company/psinotaai"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

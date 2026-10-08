@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:08:17Z",
+  "platform": "site",
+  "profileUrl": "https://maisterapias.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Mais Terapias",
+    "handle": "maisterapias.com.br",
+    "bio": "Reúna pacientes, agenda, prontuários, documentos e financeiro em uma plataforma feita para terapeutas e clínicas. Teste grátis por 15 dias, sem cartão.",
+    "avatar": "https://b4086679.assetcdn.net/2.0/4086679/wp-content/themes/maisterapias-tailwind/assets/images/icon-180x180.png?lossy=0&strip=1&webp=1",
+    "avatarLocal": "media/site-maisterapias-com-br/avatar-bd6c1985.png",
+    "banner": "https://www.maisterapias.com.br/wp-content/themes/maisterapias-tailwind/assets/images/v2/og-default.jpg",
+    "bannerLocal": "media/site-maisterapias-com-br/banner-6f4c1c32.jpg",
+    "links": [
+      "https://www.instagram.com/mais.terapias",
+      "https://www.linkedin.com/company/maisterapias",
+      "https://www.youtube.com/@maisterapias",
+      "https://www.facebook.com/mais.terapias"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

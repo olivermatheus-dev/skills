@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:07:38Z",
+  "platform": "site",
+  "profileUrl": "https://allminds.app",
+  "source": "html",
+  "profile": {
+    "name": "Allminds",
+    "handle": "allminds.app",
+    "bio": "Allminds é uma plataforma para psicólogos completa que sempre busca modernizar e otimizar a gestão de suas clínicas e consultórios.",
+    "avatar": "https://allminds.app/wp-content/uploads/2025/03/favicon-300x300.png",
+    "avatarLocal": "media/site-allminds-app/avatar-d19b8f08.png",
+    "banner": "https://allminds.app/wp-content/uploads/2025/03/capa-allminds.webp",
+    "bannerLocal": "media/site-allminds-app/banner-b66a0fde.webp",
+    "links": [
+      "https://www.facebook.com/allminds.app.ofc",
+      "https://www.instagram.com/allminds.app",
+      "https://www.linkedin.com/company/allmindsapp",
+      "https://www.youtube.com/@allmindsapp"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

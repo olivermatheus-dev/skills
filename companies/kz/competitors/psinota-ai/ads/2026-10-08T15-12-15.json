@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:12:15Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "PsiNota AI",
+  "total": 0,
+  "ads": [],
+  "errors": [
+    "nenhuma página de anunciante com o nome \"PsiNota AI\" entre os resultados (a biblioteca achou 8 anúncios que só citam o termo)"
+  ]
+}

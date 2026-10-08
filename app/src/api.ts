@@ -50,6 +50,16 @@ export interface MockupExport { ok: boolean; arquivos: string[]; qa: string[]; e
 export interface Doc<T> { data: T; body: string; file: string }
 export interface SnapshotEntry { key: string; file: string; data: Snapshot }
 /** `snapshots`: por perfil, as 2 últimas completas + até 10 anteriores leves (seguidores e views/curtidas). `snapshotsTotal`: todas no disco. */
+import type { AdsSnapshot, Ad } from '../../schema/ads';
+export type { AdsSnapshot, Ad };
+/** coleta semanal (tools/intel/semanal.ts) */
+export interface WeeklyInfo {
+  weekday: number; hour: number; enabled: boolean; last?: string; lastWeek?: string; due: boolean; next: string;
+  running?: { startedAt: string; done: number; total: number; current?: string } | null;
+  lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
+  reports: { week: string; file: string }[];
+}
+export interface AdsResult { id: string; ok: boolean; ads: number; total?: number; pageId?: string; pageName?: string; file?: string; errors: string[] }
 export interface CompetitorFull extends Doc<Competitor> { snapshots: SnapshotEntry[]; snapshotsTotal: number; marks: Record<string, ItemMark> }
 export interface DetectedLink { platform: string; url: string; handle?: string; externalId?: string; kind: 'perfil' | 'conteudo' }
 
@@ -129,6 +139,12 @@ export const api = {
   cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
   runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
   runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
+  weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
+  saveWeekly: (slug: string, s: Partial<Pick<WeeklyInfo, 'weekday' | 'hour' | 'enabled'>>) => req<WeeklyInfo>('PUT', `${pj(slug)}/weekly`, s),
+  runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
+  weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),
+  ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
+  collectAds: (slug: string, id: string) => req<AdsResult>('POST', `${pj(slug)}/competitors/${id}/ads`),
   analysisAll: (slug: string) => req<{ id: string; results: AnalysisFull['results'] }[]>('GET', `${pj(slug)}/analysis-all`),
   competitorsFeed: (slug: string) => req<{ id: string; snapshots: SnapshotEntry[]; marks: Record<string, ItemMark> }[]>('GET', `${pj(slug)}/competitors-feed`),
   analysisOverview: (slug: string) => req<AnalysisOverview[]>('GET', `${pj(slug)}/analysis-overview`),

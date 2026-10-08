@@ -20,6 +20,8 @@ export const qk = {
   analysisOverview: (slug: string) => ['analysis-overview', slug] as const,
   analysisAll: (slug: string) => ['analysis-all', slug] as const,
   competitorsFeed: (slug: string) => ['competitors-feed', slug] as const,
+  weekly: (slug: string) => ['weekly', slug] as const,
+  ads: (slug: string) => ['ads', slug] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
@@ -46,6 +48,9 @@ export const q = {
   competitorsSummary: (slug: string) => queryOptions({ queryKey: qk.competitorsSummary(slug), queryFn: () => api.competitorsSummary(slug), enabled: !!slug }),
   analysis: (slug: string, id: string) => queryOptions({ queryKey: qk.analysis(slug, id), queryFn: () => api.analysis(slug, id), enabled: !!slug && !!id }),
   analysisAll: (slug: string) => queryOptions({ queryKey: qk.analysisAll(slug), queryFn: () => api.analysisAll(slug), enabled: !!slug }),
+  // enquanto a coleta semanal roda, confere a cada 5 s
+  weekly: (slug: string) => queryOptions({ queryKey: qk.weekly(slug), queryFn: () => api.weekly(slug), enabled: !!slug, refetchInterval: (qr) => (qr.state.data?.running ? 5000 : false) }),
+  ads: (slug: string) => queryOptions({ queryKey: qk.ads(slug), queryFn: () => api.ads(slug), enabled: !!slug }),
   competitorsFeed: (slug: string) => queryOptions({ queryKey: qk.competitorsFeed(slug), queryFn: () => api.competitorsFeed(slug), enabled: !!slug }),
   analysisOverview: (slug: string) => queryOptions({ queryKey: qk.analysisOverview(slug), queryFn: () => api.analysisOverview(slug), enabled: !!slug }),
   contextList: (slug: string) => queryOptions({ queryKey: qk.contextList(slug), queryFn: () => api.contextList(slug), enabled: !!slug }),
@@ -74,6 +79,8 @@ export const useCompetitor = (slug: string, id: string) => useQuery(q.competitor
 export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSummary(slug));
 export const useAnalysis = (slug: string, id: string) => useQuery(q.analysis(slug, id));
 export const useAnalysisAll = (slug: string) => useQuery(q.analysisAll(slug));
+export const useWeekly = (slug: string) => useQuery(q.weekly(slug));
+export const useAds = (slug: string) => useQuery(q.ads(slug));
 export const useCompetitorsFeed = (slug: string) => useQuery(q.competitorsFeed(slug));
 export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview(slug));
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));

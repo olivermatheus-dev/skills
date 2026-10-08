@@ -1,0 +1,510 @@
+{
+ "data": {
+  "ad_library_main": {
+   "search_results_connection": {
+    "count": 456,
+    "edges": [
+     {
+      "node": {
+       "collated_results": [
+        {
+         "ad_archive_id": "1719624392496275",
+         "collation_count": 1,
+         "collation_id": "1022032186903997",
+         "is_active": true,
+         "page_id": "180332498797281",
+         "page_is_deleted": false,
+         "snapshot": {
+          "branded_content": null,
+          "page_id": "180332498797281",
+          "page_is_deleted": false,
+          "page_profile_uri": "https://www.facebook.com/salomeuniformes/",
+          "root_reshared_post": null,
+          "byline": null,
+          "disclaimer_label": null,
+          "page_name": "Salomé Uniformes",
+          "event": null,
+          "caption": "WhatsApp",
+          "cta_text": "Enviar mensagem pelo WhatsApp",
+          "cards": [],
+          "body": {
+           "text": "Uniforme não é detalhe.\nÉ padrão, segurança e imagem da sua marca no pátio.\n\nProduzimos uniformes para postos de gasolina com tecido resistente, caimento profissional e identidade visual alinhada à Petrobras, pois somos fornecedores homologados.\nTudo direto da fábrica, sem intermediários.\n\n✔ Conforto para a rotina pesada\n✔ Acabamento profissional\n✔ Entrega confiável para sua operação\n\n📲 Peça seu orçamento e equipe seu posto com quem entende do segmento.\n\n+55 77 99902-8786"
+          },
+          "cta_type": "WHATSAPP_MESSAGE",
+          "display_format": "IMAGE",
+          "link_description": null,
+          "link_url": "https://api.whatsapp.com/send",
+          "images": [
+           {
+            "image_crops": [],
+            "original_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/742446337_3223822821160039_2450367244217221224_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=KhReLECsS4YQ7kNvwHhhOZ4&_nc_oc=AdrBZFz7pfpZOaw7Ew0E5ccN0c3Eq2FoL4pcj4IJ7P-W0yfWAS30eqdhSV0QfyAk0Ko0iUDEm5FEIp2ye5d60T_v&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQNHDsH4mwM7FnobEPEhy2fEkFr6LJuEtsF-xXfuUqN5PQ&oe=6ACD7C5C",
+            "resized_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/740152970_1860649092010307_8919402397685475223_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=sKePtwEueooQ7kNvwG-h0RS&_nc_oc=AdrgCYF_QlKJ4f6rNrT2VsStvab3YXU0gJdfzXRqYSh0RZ_sWiaTLzhPOXYaPSnrpCMBLVO0ocKCOyHgZuofqyGp&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQOH6fzCm7fD4O25P5idEoAuccW-uCGNFj9K9HXgXJCpQA&oe=6ACD9FA6",
+            "watermarked_resized_image_url": ""
+           }
+          ],
+          "page_categories": [
+           "Business"
+          ],
+          "page_like_count": 1929,
+          "title": "api.whatsapp.com",
+          "videos": [],
+          "is_reshared": false,
+          "extra_links": [],
+          "extra_texts": [],
+          "extra_images": [],
+          "extra_videos": [],
+          "country_iso_code": null,
+          "brazil_tax_id": null,
+          "additional_info": null,
+          "ec_certificates": []
+         },
+         "has_user_reported": false,
+         "report_count": null,
+         "menu_items": [],
+         "state_media_run_label": null,
+         "page_name": "Salomé Uniformes",
+         "impressions_with_index": {
+          "impressions_text": null,
+          "impressions_index": -1
+         },
+         "gated_type": "ELIGIBLE",
+         "categories": [
+          "UNKNOWN"
+         ],
+         "is_aaa_eligible": false,
+         "contains_digital_created_media": false,
+         "reach_estimate": null,
+         "currency": "",
+         "spend": null,
+         "end_date": 1791442800,
+         "publisher_platform": [
+          "FACEBOOK",
+          "INSTAGRAM",
+          "AUDIENCE_NETWORK",
+          "MESSENGER",
+          "WHATSAPP"
+         ],
+         "start_date": 1783407600,
+         "contains_sensitive_content": false,
+         "total_active_time": null,
+         "regional_regulation_data": {
+          "finserv": {
+           "is_deemed_finserv": false,
+           "is_limited_delivery": false
+          },
+          "tw_anti_scam": {
+           "is_limited_delivery": false
+          }
+         },
+         "hide_data_status": "NONE",
+         "fev_info": null,
+         "ad_id": null,
+         "targeted_or_reached_countries": []
+        }
+       ],
+       "__typename": "CollatedSearchResults"
+      },
+      "cursor": null
+     },
+     {
+      "node": {
+       "collated_results": [
+        {
+         "ad_archive_id": "1147792874353936",
+         "collation_count": 1,
+         "collation_id": "1044368941307072",
+         "is_active": true,
+         "page_id": "447711295081868",
+         "page_is_deleted": false,
+         "snapshot": {
+          "branded_content": null,
+          "page_id": "447711295081868",
+          "page_is_deleted": false,
+          "page_profile_uri": "https://www.facebook.com/journalclub.io/",
+          "root_reshared_post": null,
+          "byline": "",
+          "disclaimer_label": null,
+          "page_name": "JournalClub.io",
+          "event": null,
+          "caption": "journalclub.io/courses/foundations-of-ai",
+          "cta_text": "Cadastre-se",
+          "cards": [],
+          "body": {
+           "text": "The Foundations of Artificial Intelligence: A new course from Journal Club"
+          },
+          "cta_type": "SIGN_UP",
+          "display_format": "VIDEO",
+          "link_description": "Get up to speed on the fundamentals of machine learning, deep learning, computer vision, and natural language processing.",
+          "link_url": "https://journalclub.io/courses/foundations-of-ai",
+          "images": [],
+          "page_categories": [
+           "Education website",
+           "Media/news company",
+           "Science & Tech"
+          ],
+          "page_like_count": 12629,
+          "title": "The Foundations of Artificial Intelligence: A new course from Journal Club",
+          "videos": [
+           {
+            "video_hd_url": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQM5lon2XskzlDlWRwDtsvxUeKP514YOHUj2IfaBapUKKPaLqAGdcHQLoqH3KAzAYEP-zkpzXEcRJoXGpa2QL75r3yt-U3abHmj3whgjFetcdQ.mp4?_nc_cat=107&_nc_oc=AdrHmSa4-hDtkp1T2f6lRVmzEN_tOqOUSX7cwqOVvh40SkGUoAu4jgS7l8jc4CqHPUfrQYZjHQ4hJUgMMDi9g9T1&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=KhusLDRkJaAQ7kNvwGO-DxA&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEwNjE4NjI5MDYzMDQwNjYsImFzc2V0X2FnZV9kYXlzIjo2NiwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjE1NDUsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=30eda10ebd718c48&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC9COTQ0Q0YyRDhGNzFBMkVBRDUxQTRGNjFFNzdGQ0RCOV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzJDNDkwNEU3RDc4Q0NERDUyNDkzOTlFNTBDMjYwMzlEX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaE2aSVx_DiAxUCKAJDMywXQJglmZmZmZoYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&_nc_zt=28&oh=00_AQPMoW4xhs_m7RZnDrYYbGcKLCrndYyazWi1mJ9N_XThiw&oe=6ACD9B7D",
+            "video_preview_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/832040845_4503487736557154_3162140439494969356_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=BrM4KPF7vq0Q7kNvwE5thmy&_nc_oc=AdpRa-PDnZPEO08YSS2cvhx5RW-xKDkdXNtb0eN_EW_TX3cq3W57Zaror0dhJaV0c39sewXuLCzXDyeKGh-S6pTQ&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQOr1iyXOAyWiJd0v6lk5aE22fxTwE3iTRr0KBldicV3xw&oe=6ACD787B",
+            "video_sd_url": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m412/AQNcrNDyWhKJ-Y1w5msToYemk9MjrcGRhs2w5LUuxwfIgY-ntmuwAQwESS1TX5SxfoBv0HsnpDc6Hn5B7Qsgw1GttGDWoTeFqYV2bBl9DQ.mp4?_nc_cat=100&_nc_oc=AdpjKu0mFE51l8lp2Fd6KYvfQjge4fcZsVrZ_iJsgJP3kFKy6gHrOqHb1Vbfl2V0RmAfL502qH4QBuYTkuNUU4VQ&_nc_sid=ef5aa3&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=j_ZW4gYj8lYQ7kNvwE108eI&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTA2MTg2MjkwNjMwNDA2NiwiYXNzZXRfYWdlX2RheXMiOjY2LCJ2aV91c2VjYXNlX2lkIjoxMDc5OSwiZHVyYXRpb25fcyI6MTU0NSwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&_nc_zt=28&oh=00_AQMte1ghSGSD281pWAFZFpeOgiOdymnQgGHpoRpobqC5Hw&oe=6ACD728E",
+            "watermarked_video_hd_url": null,
+            "watermarked_video_sd_url": null
+           }
+          ],
+          "is_reshared": false,
+          "extra_links": [],
+          "extra_texts": [],
+          "extra_images": [],
+          "extra_videos": [],
+          "country_iso_code": null,
+          "brazil_tax_id": null,
+          "additional_info": null,
+          "ec_certificates": []
+         },
+         "has_user_reported": false,
+         "report_count": null,
+         "menu_items": [],
+         "state_media_run_label": null,
+         "page_name": "JournalClub.io",
+         "impressions_with_index": {
+          "impressions_text": null,
+          "impressions_index": -1
+         },
+         "gated_type": "ELIGIBLE",
+         "categories": [
+          "UNKNOWN"
+         ],
+         "is_aaa_eligible": true,
+         "contains_digital_created_media": false,
+         "reach_estimate": null,
+         "currency": "",
+         "spend": null,
+         "end_date": 1791442800,
+         "publisher_platform": [
+          "FACEBOOK",
+          "INSTAGRAM",
+          "THREADS"
+         ],
+         "start_date": 1791270000,
+         "contains_sensitive_content": false,
+         "total_active_time": null,
+         "regional_regulation_data": {
+          "finserv": {
+           "is_deemed_finserv": false,
+           "is_limited_delivery": false
+          },
+          "tw_anti_scam": {
+           "is_limited_delivery": false
+          }
+         },
+         "hide_data_status": "NONE",
+         "fev_info": null,
+         "ad_id": null,
+         "targeted_or_reached_countries": []
+        }
+       ],
+       "__typename": "CollatedSearchResults"
+      },
+      "cursor": null
+     },
+     {
+      "node": {
+       "collated_results": [
+        {
+         "ad_archive_id": "2208553209888919",
+         "collation_count": 1,
+         "collation_id": "983359837465939",
+         "is_active": true,
+         "page_id": "119132594455650",
+         "page_is_deleted": false,
+         "snapshot": {
+          "branded_content": null,
+          "page_id": "119132594455650",
+          "page_is_deleted": false,
+          "page_profile_uri": "https://www.facebook.com/100089774433290/",
+          "root_reshared_post": null,
+          "byline": null,
+          "disclaimer_label": null,
+          "page_name": "Dra Luisa Sommerlatte",
+          "event": null,
+          "caption": "api.whatsapp.com",
+          "cta_text": "Enviar mensagem pelo WhatsApp",
+          "cards": [
+           {
+            "body": " ",
+            "cta_type": "WHATSAPP_MESSAGE",
+            "caption": "api.whatsapp.com",
+            "link_description": " ",
+            "link_url": "https://api.whatsapp.com/send?phone=557399883434",
+            "title": "Fale conosco",
+            "cta_text": "Send WhatsApp Message",
+            "video_hd_url": null,
+            "video_preview_image_url": null,
+            "video_sd_url": null,
+            "watermarked_video_hd_url": null,
+            "watermarked_video_sd_url": null,
+            "image_crops": [],
+            "original_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/685346914_1447195643313637_9022820490734917529_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=1T5cWd84GmoQ7kNvwEmuh9t&_nc_oc=Adpa6Jr9t_cQX988jvBQOUsABxZ1TRJShYwhYtgl8J5ZU0g936i8_RrNOFrvZNiu0xfD_k8cUxfkxHJqtbgtfI6q&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQP-njstZ3e8yJxKOb3DFFFzWpFPHxSZw7awCv7Yog6Wsw&oe=6ACD6DE8",
+            "resized_image_url": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/688729020_971795359048506_5360347643767561279_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=zU-yINEQhjcQ7kNvwERmPN-&_nc_oc=AdrGNjL5l9Rf4GPOw1uPBmAsZ6udH0al_fMet3iUsicR4FoqWnkttQcehPalnLlPcBb1nfeRZuTLM80MQtZcKCHC&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQOxw6nvUcfvHiJuDpkob8kpS6EPEeU2566xi12pV5XT4Q&oe=6ACD848F",
+            "watermarked_resized_image_url": ""
+           },
+           {
+            "body": " ",
+            "cta_type": "WHATSAPP_MESSAGE",
+            "caption": "api.whatsapp.com",
+            "link_description": " ",
+            "link_url": "https://api.whatsapp.com/send?phone=557399883434",
+            "title": "Fale conosco",
+            "cta_text": "Send WhatsApp Message",
+            "video_hd_url": null,
+            "video_preview_image_url": null,
+            "video_sd_url": null,
+            "watermarked_video_hd_url": null,
+            "watermarked_video_sd_url": null,
+            "image_crops": [],
+            "original_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/686516698_1610642980233431_676432679570704138_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=72817RekI34Q7kNvwE9lN0f&_nc_oc=Adp8fhie9wjyCosb0J4qDmxxZXhPV6E0i3tvLwYlbNkW6R2KqpG9Dn2TBSbK455A3aXwer86eev34xhm5h12V2Gz&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQN54j4YMAnX_AAV84Obp_eQ2vVdLPK5aiNTqL3nSm0DGQ&oe=6ACD9856",
+            "resized_image_url": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/687584429_1149954810615690_3433738481508782469_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=F_liQ-abBYkQ7kNvwEbZOIZ&_nc_oc=Ado4zbgU3GLZ1mC5BWHmVRR1eNsqsy56Vl4rW9lcvkOZcNdpqKMau90AREmDutclFovElO-5xuZgQ-ADkgd4s_Re&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQOpGZpXTOqDOaky7Gc0pdZ7BQUchtpRoQSw6jq9MEgFqg&oe=6ACD75A5",
+            "watermarked_resized_image_url": ""
+           }
+          ],
+          "body": {
+           "text": "Esse ainda é um tema cercado por dúvidas e muita informação distorcida.\n\nQuando o assunto é pouco falado, o medo cresce e as decisões ficam baseadas em achismos, não em conhecimento.\n\nPor isso, antes de qualquer escolha, o mais importante é entender como tudo funciona na prática, com segurança e critério.\n\nSe esse conteúdo te ajudou de alguma forma, me manda uma DM ou agende sua avaliação pelo link na bio."
+          },
+          "cta_type": "WHATSAPP_MESSAGE",
+          "display_format": "CAROUSEL",
+          "link_description": null,
+          "link_url": "https://api.whatsapp.com/send",
+          "images": [],
+          "page_categories": [
+           "Health/beauty"
+          ],
+          "page_like_count": 127,
+          "title": "Dra Luisa Sommerlatte",
+          "videos": [],
+          "is_reshared": false,
+          "extra_links": [],
+          "extra_texts": [],
+          "extra_images": [],
+          "extra_videos": [],
+          "country_iso_code": null,
+          "brazil_tax_id": null,
+          "additional_info": null,
+          "ec_certificates": []
+         },
+         "has_user_reported": false,
+         "report_count": null,
+         "menu_items": [],
+         "state_media_run_label": null,
+         "page_name": "Dra Luisa Sommerlatte",
+         "impressions_with_index": {
+          "impressions_text": null,
+          "impressions_index": -1
+         },
+         "gated_type": "ELIGIBLE",
+         "categories": [
+          "UNKNOWN"
+         ],
+         "is_aaa_eligible": false,
+         "contains_digital_created_media": false,
+         "reach_estimate": null,
+         "currency": "",
+         "spend": null,
+         "end_date": 1791442800,
+         "publisher_platform": [
+          "INSTAGRAM",
+          "WHATSAPP"
+         ],
+         "start_date": 1777618800,
+         "contains_sensitive_content": false,
+         "total_active_time": null,
+         "regional_regulation_data": {
+          "finserv": {
+           "is_deemed_finserv": false,
+           "is_limited_delivery": false
+          },
+          "tw_anti_scam": {
+           "is_limited_delivery": false
+          }
+         },
+         "hide_data_status": "NONE",
+         "fev_info": null,
+         "ad_id": null,
+         "targeted_or_reached_countries": []
+        }
+       ],
+       "__typename": "CollatedSearchResults"
+      },
+      "cursor": null
+     },
+     {
+      "node": {
+       "collated_results": [
+        {
+         "ad_archive_id": "1309568727845896",
+         "collation_count": 2,
+         "collation_id": "2954972448182673",
+         "is_active": true,
+         "page_id": "101255382057646",
+         "page_is_deleted": false,
+         "snapshot": {
+          "branded_content": null,
+          "page_id": "101255382057646",
+          "page_is_deleted": false,
+          "page_profile_uri": "https://www.facebook.com/100065592365486/",
+          "root_reshared_post": null,
+          "byline": null,
+          "disclaimer_label": null,
+          "page_name": "Meu.ollie",
+          "event": null,
+          "caption": "meuollie.com.br",
+          "cta_text": "Comprar agora",
+          "cards": [
+           {
+            "body": "Chegou o óleo que protege, perfuma e hidrata: FPS 60, textura aveludada e fragrância que você vai amar sentir na pele.",
+            "cta_type": "SHOP_NOW",
+            "caption": "",
+            "link_description": " Conheça o óleo com FPS 60",
+            "link_url": "https://meuollie.com.br/pages/protetor-solar-oleo-corporal",
+            "title": "Bodycare com FPS",
+            "cta_text": "Shop Now",
+            "video_hd_url": null,
+            "video_preview_image_url": null,
+            "video_sd_url": null,
+            "watermarked_video_hd_url": null,
+            "watermarked_video_sd_url": null,
+            "image_crops": [],
+            "original_image_url": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/794969789_1605768661057835_1829588159549490690_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=22NZXfw6GSAQ7kNvwGeczvX&_nc_oc=AdqGywS6o8kDkEbFxJOLvn55UWkeaVAWBPu6D-GLkgNClb2-1iQaJ9AUIZEX_Jly1PszxMdnszn-Xq7WNc9GhoAz&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQM5cB1wFckn28L-joZIxts2NZPEqjGL3OC5apwXfITkZg&oe=6ACD6BEA",
+            "resized_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/794727116_2035265980523834_7265290986391319408_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Q_prDpMokGsQ7kNvwFvFMSE&_nc_oc=AdrnwmaHzRJJlbJxCDLPJTxdvIb-xLpFKhFg-ZohRy_Y0GqTlvA5HleO60A9s1NJZ8hQ03IVMOxNBnF5SHjuNj0Z&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQODO8iHLGz5PF0etWtfQzRIOL2fChTI66MJiQ7UVd9l1Q&oe=6ACD9AB6",
+            "watermarked_resized_image_url": ""
+           },
+           {
+            "body": "Chegou o óleo que protege, perfuma e hidrata: FPS 60, textura aveludada e fragrância que você vai amar sentir na pele.",
+            "cta_type": "SHOP_NOW",
+            "caption": "",
+            "link_description": " Conheça o óleo com FPS 60",
+            "link_url": "https://meuollie.com.br/pages/protetor-solar-oleo-corporal",
+            "title": "Bodycare com FPS",
+            "cta_text": "Shop Now",
+            "video_hd_url": null,
+            "video_preview_image_url": null,
+            "video_sd_url": null,
+            "watermarked_video_hd_url": null,
+            "watermarked_video_sd_url": null,
+            "image_crops": [],
+            "original_image_url": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/795081536_1726252665309393_4144862734063410782_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=grnm7AYph1gQ7kNvwGgc-ku&_nc_oc=AdrdpEg3LYdDXBr8ju0-E494lWOVPrELfVopdhA-i7CG58RTGLwqV9uaT8_5-f3oPti9OkPPwpxJ0i462HutKEmk&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQNtZERdt-8bspwfF0PZ_eyQKbqcpHm2QwiPmmnwb-BigQ&oe=6ACD709C",
+            "resized_image_url": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/797088198_1048309828104970_4340697406532484053_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=MCfHD7c6oTkQ7kNvwGKRpCC&_nc_oc=AdpkbRRUEDYuu9O8jW4Ul0_XD8yxIC65CE7AvffCwn4VeijksVBZ7XdWXdPRgCasOUyluIzYlJTkye5C0FuLkEPL&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=jaHWZxLugvHHn0AbAraEng&_nc_ss=7b289&oh=00_AQMTNnvqGnkxV5_zG5KaFrAzB7LKVZOX-LB9k_j6mUr67A&oe=6ACD7EAA",
+            "watermarked_resized_image_url": ""
+           }
+          ],
+          "body": {
+           "text": "Chegou o óleo que protege, perfuma e hidrata: FPS 60, textura aveludada e fragrância que você vai amar sentir na pele."
+          },
+          "cta_type": "SHOP_NOW",
+          "display_format": "DCO",
+          "link_description": "Conheça o óleo com FPS 60",
+          "link_url": "https://meuollie.com.br/pages/protetor-solar-oleo-corporal",
+          "images": [],
+          "page_categories": [
+           "Health/beauty"
+          ],
+          "page_like_count": 140939,
+          "title": "Bodycare com FPS",
+          "videos": [],
+          "is_reshared": false,
+          "extra_links": [],
+          "extra_texts": [],
+          "extra_images": [],
+          "extra_videos": [],
+          "country_iso_code": null,
+          "brazil_tax_id": null,
+          "additional_info": null,
+          "ec_certificates": []
+         },
+         "has_user_reported": false,
+         "report_count": null,
+         "menu_items": [],
+         "state_media_run_label": null,
+         "page_name": "Meu.ollie",
+         "impressions_with_index": {
+          "impressions_text": null,
+          "impressions_index": -1
+         },
+         "gated_type": "ELIGIBLE",
+         "categories": [
+          "UNKNOWN"
+         ],
+         "is_aaa_eligible": false,
+         "contains_digital_created_media": false,
+         "reach_estimate": null,
+         "currency": "",
+         "spend": null,
+         "end_date": 1791442800,
+         "publisher_platform": [
+          "FACEBOOK",
+          "INSTAGRAM",
+          "AUDIENCE_NETWORK",
+          "WHATSAPP",
+          "THREADS"
+         ],
+         "start_date": 1790924400,
+         "contains_sensitive_content": false,
+         "total_active_time": null,
+         "regional_regulation_data": {
+          "finserv": {
+           "is_deemed_finserv": false,
+           "is_limited_delivery": false
+          },
+          "tw_anti_scam": {
+           "is_limited_delivery": false
+          }
+         },
+         "hide_data_status": "NONE",
+         "fev_info": null,
+         "ad_id": null,
+         "targeted_or_reached_countries": []
+        }
+       ],
+       "__typename": "CollatedSearchResults"
+      },
+      "cursor": null
+     }
+    ],
+    "page_info": {
+     "end_cursor": "AQH-FIXTURE",
+     "has_next_page": true
+    }
+   },
+   "dynamic_filter_options": {
+    "pages": [
+     {
+      "count": 1,
+      "key": "489302127600334",
+      "display_name": "28 Day Challenge"
+     },
+     {
+      "count": 1,
+      "key": "971726076032669",
+      "display_name": "Adriana Miranda Paramédica"
+     },
+     {
+      "count": 1,
+      "key": "107551714805038",
+      "display_name": "Alessandra Alexandre"
+     },
+     {
+      "count": 1,
+      "key": "531178943405230",
+      "display_name": "ariane_storeperfumaria"
+     },
+     {
+      "count": 1,
+      "key": "1296585513542845",
+      "display_name": "aromaseacessorios__"
+     }
+    ]
+   }
+  }
+ }
+}

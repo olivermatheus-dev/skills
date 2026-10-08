@@ -6,7 +6,7 @@ description: "Gera pautas de conteúdo e calendário editorial para Instagram (c
 # Ideias e calendário de conteúdo
 
 ## Ler antes
-`companies/<slug>/context/` → `CONTENT_STRATEGY.md`, `AUDIENCE.md`, `BUSINESS.md`, `COMPETITORS.md`. Olhe os nomes das pastas em `contents/` para não repetir pauta.
+`companies/<slug>/context/` → `CONTENT_STRATEGY.md`, `AUDIENCE.md`, `BUSINESS.md`, `COMPETITORS.md`. Olhe os nomes das pastas em `contents/` para não repetir pauta. Se existir, leia o relatório da semana mais recente em `companies/<slug>/intel/semanas/` (o que os concorrentes publicaram e o que ficou fora da curva).
 
 **Precedência:** pilares, mix de funil, frequência, regras de sequência e temas proibidos do `CONTENT_STRATEGY.md`/`BUSINESS.md` vencem os defaults desta skill.
 

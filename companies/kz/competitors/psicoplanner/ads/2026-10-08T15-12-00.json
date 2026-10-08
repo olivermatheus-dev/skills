@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:12:00Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "Psicoplanner",
+  "pageId": "103084358197167",
+  "pageName": "Psicoplanner",
+  "total": 3,
+  "ads": [
+    {
+      "id": "1563844412026080",
+      "pageName": "Psicoplanner",
+      "pageId": "103084358197167",
+      "active": true,
+      "startedAt": "2026-05-23",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "{{product.brand}}",
+      "title": "{{product.name}}",
+      "description": "{{product.description}}",
+      "cta": "Saiba mais",
+      "linkUrl": "https://psicoplanner.com.br/?utm_source=instagram&utm_medium=cpc&utm_campaign=ads5",
+      "media": {
+        "type": "carrossel",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/387775328_309957151655645_5380642966488572175_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=os70uSsWd-cQ7kNvwF_QjV7&_nc_oc=AdrYUCtkAWzqf7xebIXI-ZEsN_Ok2cg1aMmQmOCt5fXtqzZ-0M5wlFI8Ke6dnD2BbK-gkFp6hXjD2YuXTfLzijRQ&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=OhReSmAWzdzjS9mi-09SkA&_nc_ss=7b289&oh=00_AQO4QzqQrr4uAkEbEApWmgZyZFOEt3p32QtN1TvwIog-wQ&oe=6ACD926F",
+        "thumbnailLocal": "media/ads/1563844412026080.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1563844412026080"
+    },
+    {
+      "id": "3296505650521271",
+      "pageName": "Psicoplanner",
+      "pageId": "103084358197167",
+      "active": true,
+      "startedAt": "2026-07-07",
+      "platforms": [
+        "instagram"
+      ],
+      "text": "O Psicoplanner é um aplicativo completo para psicólogas! Oferecemos todas as ferramentas para tornar a rotina do dia a dia ainda mais fácil. Estes são apenas alguns dos nossos benefícios. Faça um teste grátis por 7 dias e conheça todas as possibilidades.",
+      "cta": "Ver detalhes",
+      "linkUrl": "https://psicoplanner.com.br/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/740741045_991156960580954_9161275682860898254_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=hrXFZbxcRj4Q7kNvwGQ0T5m&_nc_oc=AdqtmIs99HmJlrsYOOpdJXGLGZ8sLfkpKYpj1WOFEzp8uOz6nun795DfA2ierOkKCNJ4sri_8bfsPoq3D77iHjUE&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=OhReSmAWzdzjS9mi-09SkA&_nc_ss=7b289&oh=00_AQNRrChVD3Cu-oeg5WcsVMj6dH0x0d5qH3lE3zLdGJgyIg&oe=6ACD9607",
+        "thumbnailLocal": "media/ads/3296505650521271.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=3296505650521271"
+    },
+    {
+      "id": "1171647048182622",
+      "pageName": "Psicoplanner",
+      "pageId": "103084358197167",
+      "active": true,
+      "startedAt": "2025-10-24",
+      "platforms": [
+        "instagram"
+      ],
+      "text": "O Psicoplanner é um aplicativo completo para psicólogas! Oferecemos todas as ferramentas para tornar a rotina do dia a dia ainda mais fácil. \n\nEstes são apenas alguns dos nossos benefícios. Faça um teste grátis por 7 dias e conheça todas as possibilidades.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://psicoplanner.com.br/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/571343330_1314368297136771_1140869542861304212_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=xNtGn8BZZ6kQ7kNvwFmxV_D&_nc_oc=Adq97Vdq4GU4NgMKnDvEfuk7GOpf6v-1pEegceWN49Jsfv95cOxK6c0URZe6t2m1Db0MNjn2Tk7kmw5u6PhnFbXQ&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=OhReSmAWzdzjS9mi-09SkA&_nc_ss=7b289&oh=00_AQNCEqnYps-PfbqxZvoxcnmIVRKh-lAmStMRzD7o9cqs5g&oe=6ACD7C15",
+        "thumbnailLocal": "media/ads/1171647048182622.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1171647048182622"
+    }
+  ],
+  "errors": []
+}

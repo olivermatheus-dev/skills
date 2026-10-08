@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-08T15:07:46Z",
+  "platform": "site",
+  "profileUrl": "https://clinicaagil.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Sistema Clínica Ágil",
+    "handle": "clinicaagil.com.br",
+    "bio": "Software para clínicas com agenda inteligente, prontuário eletrônico, financeiro e IA nativa. Solicite uma demonstração gratuita.",
+    "avatar": "https://www.clinicaagil.com.br/site/wp-content/uploads/2026/09/Flavicon-clinica-agil-software-para-clinicas-2-330x200.png",
+    "avatarLocal": "media/site-clinicaagil-com-br/avatar-00ee695c.png",
+    "links": [
+      "https://www.instagram.com/clinicaagil",
+      "https://www.facebook.com/clinicaagil",
+      "https://www.linkedin.com/company/clinicaagil",
+      "https://www.youtube.com/channel/UCRGJJiW-mD-Tt3zALebevhQ"
+    ]
+  },
+  "items": [],
+  "errors": []
+}
