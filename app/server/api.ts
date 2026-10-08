@@ -218,7 +218,32 @@ const send = (res: ServerResponse, code: number, data: unknown) => {
 };
 const MIME: Record<string, string> = { '.mp4': 'video/mp4', '.json': 'application/json', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf', '.otf': 'font/otf', '.mp3': 'audio/mpeg', '.wav': 'audio/wav' };
 
+/**
+ * Arquivo → resposta, sem derrubar o servidor: erro do stream (pasta no lugar de arquivo, arquivo apagado ou travado
+ * por uma coleta no meio) sem 'error' handler é exceção não tratada e mata o processo (o app inteiro passa a dar
+ * "Failed to fetch"). Aqui vira 404/500 ou só encerra a conexão se o corpo já começou.
+ */
+function pipeFile(res: ServerResponse, file: string, opts?: { start: number; end: number }) {
+  const st = createReadStream(file, opts);
+  st.on('error', (e) => {
+    if (!res.headersSent) { res.removeHeader('content-length'); res.removeHeader('content-range'); send(res, (e as NodeJS.ErrnoException).code === 'ENOENT' || (e as NodeJS.ErrnoException).code === 'EISDIR' ? 404 : 500, { error: 'arquivo indisponível' }); }
+    else res.destroy();
+  });
+  st.pipe(res);
+}
+
 const handler: Connect.NextHandleFunction = async (req, res, next) => {
+  // o handler é async: exceção fora do try das rotas (URI malformada em decodeURIComponent, statSync de arquivo que
+  // sumiu…) vira promise rejeitada sem tratamento, e o Node encerra o processo. Tudo passa por aqui.
+  try { await route(req, res, next); }
+  catch (e) {
+    console.error('[hub-api]', req.method, req.url, e);
+    if (!res.headersSent) send(res, (e as Error)?.name === 'URIError' ? 400 : 500, { error: String((e as Error)?.message ?? e) });
+    else res.destroy();
+  }
+};
+
+const route: Connect.NextHandleFunction = async (req, res, next) => {
   const url = new URL(req.url ?? '/', 'http://x');
   // /media/<slug>/<competitor>/<arquivo> → imagens baixadas pelos coletores
   const m = url.pathname.match(/^\/media\/([^/]+)\/([^/]+)\/(.+)$/);
@@ -226,7 +251,7 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     const file = normalize(join(S.ROOT, P.media(m[1], m[2]), decodeURIComponent(m[3])));
     if (!file.startsWith(join(S.ROOT, 'companies')) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
-    return createReadStream(file).pipe(res);
+    return pipeFile(res, file);
   }
   // /brand-file/<slug>/<fonts|logo|icons>/<arquivo> → fontes e logo da marca para a prévia do kit
   const bf = url.pathname.match(/^\/brand-file\/([a-z0-9][a-z0-9-]*)\/(fonts|logo|icons)\/([^/]+)$/);
@@ -234,7 +259,7 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     const file = join(S.ROOT, P.brand(bf[1]), bf[2], decodeURIComponent(bf[3]));
     if (/\.\./.test(bf[3]) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
-    return createReadStream(file).pipe(res);
+    return pipeFile(res, file);
   }
   // /format-ref/<formato>/<arquivo> → prints de referência da galeria de formatos
   const fr = url.pathname.match(/^\/format-ref\/([a-z0-9][a-z0-9-]*)\/([^/]+)$/);
@@ -242,7 +267,7 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     const file = S.formatRefFile(fr[1], decodeURIComponent(fr[2]));
     if (!file) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
-    return createReadStream(file).pipe(res);
+    return pipeFile(res, file);
   }
   // /piece-file/<slug>/<pasta da peça>/<arquivo> → MP4, slides e quadros da peça, com Range (o player precisa para pular no tempo)
   const pf = url.pathname.match(/^\/piece-file\/([^/]+)\/(.+?)\/(exports|render|png)\/(.+)$/);
@@ -252,10 +277,10 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     const size = statSync(file).size, range = req.headers.range?.match(/^bytes=(\d*)-(\d*)$/);
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     res.setHeader('accept-ranges', 'bytes');
-    if (!range) { res.setHeader('content-length', size); return createReadStream(file).pipe(res); }
+    if (!range) { res.setHeader('content-length', size); return pipeFile(res, file); }
     const start = range[1] ? +range[1] : Math.max(0, size - +range[2]), end = range[1] && range[2] ? Math.min(+range[2], size - 1) : size - 1;
     res.statusCode = 206; res.setHeader('content-range', `bytes ${start}-${end}/${size}`); res.setHeader('content-length', end - start + 1);
-    return createReadStream(file, { start, end }).pipe(res);
+    return pipeFile(res, file, { start, end });
   }
   // /mk/lib/… (runtime, molduras, fundos) e /mk/emp/<slug>/(brand|capturas)/… → editor de mockups (o iframe do runtime)
   const mk = url.pathname.match(/^\/mk\/(lib|emp)\/(.+)$/);
@@ -265,7 +290,7 @@ const handler: Connect.NextHandleFunction = async (req, res, next) => {
     if (!file) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     res.setHeader('cache-control', mk[1] === 'lib' && !resto.startsWith('runtime/') ? 'max-age=3600' : 'no-cache');
-    return createReadStream(file).pipe(res);
+    return pipeFile(res, file);
   }
   if (!url.pathname.startsWith('/api/')) return next();
   for (const [method, pattern, h] of routes) {

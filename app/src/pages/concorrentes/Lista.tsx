@@ -1,21 +1,31 @@
 // Aba "Concorrentes" da área: quem são. Tabela densa (logo, frase, preço, audiência, redes, atualizado) ou cards;
 // filtros (tipo, onde atua, plataforma, tag), candidatos achados pela IA (aceitar → análise completa) e "Puxar todos".
 // A comparação lado a lado (oferta, funcionalidades, mensagem, reputação) fica na aba Comparar.
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
+import { Archive, CircleCheck, Globe, Hash, Hourglass, LayoutGrid, MapPin, RefreshCw, Sparkles, Table as TableIcon, Users, WifiOff } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../../api';
 import { MARKET, money } from '../../components/competitors/Analysis';
 import { FULL_ANALYSIS } from '../../../../schema/analysis';
 import { toast } from '../../components/toast';
-import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../../components/kit';
+import { Badge, Button, Empty, ErrorBox, SelectField, cx, fmtNum, type SelectOption } from '../../components/kit';
+import { FavToggle, FilterBar, ViewToggle, useUrlState, type BarFilter } from '../../components/competitors/toolbar';
 import { AreaPage, Delta, SortTable, type Col } from '../../components/competitors/area';
 import { ResultLine } from '../../components/competitors/AddLinksModal';
 import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
 import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../../queries';
-import { Avatar, Chips, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../../components/competitors/lib';
+import { Avatar, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../../components/competitors/lib';
 
-type KindFilter = 'todos' | Competitor['kind'];
+type Stage = Competitor['status'];
+const MODE_KEY = 'hub:comp-mode';
+const lastMode = () => { try { return localStorage.getItem(MODE_KEY) === 'cards' ? 'cards' : 'tabela'; } catch { return 'tabela'; } };
+const STAGES: { value: Stage; label: string; icon: ReactNode }[] = [
+  { value: 'ativo', label: 'Ativos', icon: <CircleCheck className="text-success" /> },
+  { value: 'candidato', label: 'Candidatos', icon: <Sparkles className="text-violet-600" /> },
+  { value: 'arquivado', label: 'Arquivados', icon: <Archive className="text-muted-foreground" /> },
+];
+const dot = (color: string) => <span className="size-2 rounded-full" style={{ background: color }} />;
 
 export default function Competitors() {
   const { slug = '' } = useParams();
@@ -23,15 +33,14 @@ export default function Competitors() {
   const list = useCompetitors(slug);
   const summary = useCompetitorsSummary(slug);
   const actions = useCompetitorActions(slug);
-  const [q, setQ] = useState('');
-  const [kind, setKind] = useState<KindFilter>('todos');
-  const [platform, setPlatform] = useState('');
-  const [tag, setTag] = useState('');
-  const [favOnly, setFavOnly] = useState(false);
-  const [stage, setStage] = useState<Competitor['status']>('ativo');
-  const [market, setMarket] = useState('');
-  const [mode, setMode] = useState<'cards' | 'tabela'>(() => { try { return (localStorage.getItem('hub:comp-mode') as 'cards' | 'tabela') ?? 'tabela'; } catch { return 'tabela'; } });
-  const setModeP = (m: 'cards' | 'tabela') => { setMode(m); try { localStorage.setItem('hub:comp-mode', m); } catch { /* sem storage */ } };
+  // filtros e vista na URL (como em Conteúdos e Anúncios); a vista lembra a última escolha
+  const [defaults] = useState(() => ({ q: '', etapa: 'ativo', tipo: '', rede: '', tag: '', onde: '', fav: '', vista: lastMode() }));
+  const { values: v, set, reset } = useUrlState(defaults);
+  const { q, tipo: kind, rede: platform, tag, onde: market } = v;
+  const stage = v.etapa as Stage;
+  const favOnly = !!v.fav;
+  const mode = v.vista === 'cards' ? 'cards' : 'tabela';
+  const setMode = (m: string) => { set({ vista: m }); try { localStorage.setItem(MODE_KEY, m); } catch { /* sem storage */ } };
   const overview = useAnalysisOverview(slug);
   const ov = useMemo(() => new Map((overview.data ?? []).map((o) => [o.id, o])), [overview.data]);
   const [pulling, setPulling] = useState<{ i: number; n: number; name: string } | null>(null);
@@ -42,15 +51,15 @@ export default function Competitors() {
   const all = list.data ?? [];
   const allTags = [...new Set(all.flatMap((c) => c.data.tags))].sort();
   const allPlatforms = [...new Set(all.flatMap((c) => c.data.profiles.map((p) => p.platform)))];
-  const counts = (k: KindFilter) => all.filter((c) => c.data.status === stage && (k === 'todos' || c.data.kind === k)).length;
-  const nStage = (st: Competitor['status']) => all.filter((c) => c.data.status === st).length;
+  const counts = (k: string) => all.filter((c) => c.data.status === stage && (!k || c.data.kind === k)).length;
+  const nStage = (st: Stage) => all.filter((c) => c.data.status === st).length;
   const queued = (overview.data ?? []).filter((o) => o.request).length;
 
   const shown = all.filter((c) => {
     const d = c.data;
     if (d.status !== stage) return false;
     if (market && marketOf(c, ov.get(d.id)) !== market) return false;
-    if (kind !== 'todos' && d.kind !== kind) return false;
+    if (kind && d.kind !== kind) return false;
     if (platform && !d.profiles.some((p) => p.platform === platform)) return false;
     if (tag && !d.tags.includes(tag)) return false;
     if (favOnly && !d.favorite) return false;
@@ -94,11 +103,55 @@ export default function Competitors() {
   }
   const pullTargets = shown.filter((c) => c.data.status === 'ativo' && c.data.profiles.length);
 
+  // barra numa linha só (FilterBar de components/competitors/toolbar): busca · etapa e tipo sempre visíveis ·
+  // rede, tag e onde atua inline se couber, senão no popover "Filtros" · favoritos e vista no fim
+  const stageOpts: SelectOption[] = STAGES.map((s) => ({ ...s, count: nStage(s.value) }));
+  const kindOpts: SelectOption[] = [
+    { value: '', label: 'Todos os tipos', icon: <Users className="text-muted-foreground" />, count: counts('') },
+    ...Object.entries(KINDS).map(([k, label]) => ({ value: k, label, icon: dot(KIND_COLOR[k]), count: counts(k), disabled: !counts(k) && kind !== k })),
+  ];
+  const platformOpts: SelectOption[] = [
+    { value: '', label: 'Todas as redes', icon: <Globe className="text-muted-foreground" /> },
+    ...allPlatforms.map((p) => ({ value: p, label: platformLabel(p), icon: <PlatformIcon platform={p} size={14} /> })),
+  ];
+  const tagOpts: SelectOption[] = [{ value: '', label: 'Todas as tags', icon: <Hash className="text-muted-foreground" /> }, ...allTags.map((t) => ({ value: t, label: `#${t}` }))];
+  const marketOpts: SelectOption[] = [
+    { value: '', label: 'Brasil e exterior', icon: <MapPin className="text-muted-foreground" /> },
+    ...Object.entries(MARKET).map(([k, m]) => ({ value: k, label: m.label, icon: dot(m.color) })),
+  ];
+  const sel = (label: string, opts: SelectOption[], value: string, onChange: (x: string) => void) => <SelectField size="sm" aria-label={label} title={label} value={value} options={opts} onChange={onChange} />;
+  const secondary: BarFilter[] = [
+    ...(allPlatforms.length > 1 ? [{ label: 'Rede', node: sel('Rede', platformOpts, platform, (x) => set({ rede: x })), active: !!platform }] : []),
+    ...(allTags.length ? [{ label: 'Tag', node: sel('Tag', tagOpts, tag, (x) => set({ tag: x })), active: !!tag }] : []),
+    { label: 'Onde atua', node: sel('Onde atua', marketOpts, market, (x) => set({ onde: x })), active: !!market },
+  ];
+  const filtered = !!(q || kind || platform || tag || market || favOnly);
+  const bar = (
+    <div data-lista-bar className="mb-4"><FilterBar
+      search={{ value: q, onChange: (x) => set({ q: x }), placeholder: 'Buscar nome ou @' }}
+      primary={<>
+        {sel('Etapa', stageOpts, stage, (x) => set({ etapa: x }))}
+        {sel('Tipo', kindOpts, kind, (x) => set({ tipo: x }))}
+      </>}
+      secondary={secondary}
+      trailing={<>
+        <FavToggle on={favOnly} onChange={(x) => set({ fav: x ? '1' : '' })} />
+        <ViewToggle value={mode} onChange={setMode} options={[{ value: 'tabela', label: 'Tabela', icon: TableIcon }, { value: 'cards', label: 'Cards', icon: LayoutGrid }]} />
+      </>}
+      active={filtered}
+      onClear={() => reset(['q', 'tipo', 'rede', 'tag', 'onde', 'fav'])}
+    /></div>
+  );
+
   return (
     <AreaPage sub={list.data ? `${active.length} monitorado(s)` : undefined} actions={<>
-      {queued > 0 && <span className="text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">⏳ {queued} na fila da IA</span>}
-      <Button variant="ghost" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
-        {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : `↻ Puxar todos${pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}`}
+      {queued > 0 && (
+        <span className="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">
+          <Hourglass className="size-3.5" />{queued} na fila da IA
+        </span>
+      )}
+      <Button variant="ghost" className="inline-flex items-center gap-1.5" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
+        {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : <><RefreshCw className="size-4" />Puxar todos{pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}</>}
       </Button>
     </>}>
       {pulling && (
@@ -109,44 +162,16 @@ export default function Competitors() {
       )}
       {pullLog && <PullLog log={pullLog} onClose={() => setPullLog(null)} slug={slug} />}
 
-      {/* filtros */}
-      {all.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 mb-5">
-          <Input placeholder="Buscar nome ou @" value={q} onChange={(e) => setQ(e.target.value)} className="w-56" />
-          <Chips value={kind} onChange={setKind} options={[{ value: 'todos', label: 'Todos', count: counts('todos') }, ...Object.entries(KINDS).map(([k, v]) => ({ value: k as KindFilter, label: v, count: counts(k as KindFilter) }))]} />
-          <Select value={platform} onChange={(e) => setPlatform(e.target.value)}>
-            <option value="">Todas as plataformas</option>
-            {allPlatforms.map((p) => <option key={p} value={p}>{platformLabel(p)}</option>)}
-          </Select>
-          {allTags.length > 0 && (
-            <Select value={tag} onChange={(e) => setTag(e.target.value)}>
-              <option value="">Todas as tags</option>
-              {allTags.map((t) => <option key={t} value={t}>#{t}</option>)}
-            </Select>
-          )}
-          <button onClick={() => setFavOnly(!favOnly)} className={cx('px-2.5 py-1.5 rounded-md text-sm border', favOnly ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-border text-muted-foreground hover:text-foreground')}>★ Favoritos</button>
-          <Select value={market} onChange={(e) => setMarket(e.target.value)} aria-label="Onde atua">
-            <option value="">Brasil e exterior</option>
-            {Object.entries(MARKET).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
-          </Select>
-          <div className="ml-auto flex flex-wrap items-center gap-2">
-            <Chips value={stage} onChange={setStage} options={[
-              { value: 'ativo', label: 'Ativos', count: nStage('ativo') },
-              { value: 'candidato', label: 'Candidatos', count: nStage('candidato') },
-              { value: 'arquivado', label: 'Arquivados', count: nStage('arquivado') },
-            ]} />
-            <Chips value={mode} onChange={setModeP} options={[{ value: 'tabela', label: '☰ Tabela' }, { value: 'cards', label: '▦ Cards' }]} />
-          </div>
-        </div>
-      )}
+      {all.length > 0 && bar}
 
-      <ErrorBox error={list.error ?? summary.error} />
+      <LoadError errors={[list, summary, overview]} onRetry={() => { void list.refetch(); void summary.refetch(); void overview.refetch(); }} />
       {list.isLoading && <SkeletonGrid />}
       {list.data && all.length === 0 && (
         <Empty title="Nenhum concorrente ainda" hint="Cole os links de perfis (YouTube, Instagram, TikTok, site) de concorrentes, criadores e páginas de referência."
  />
       )}
-      {list.data && all.length > 0 && shown.length === 0 && <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque os filtros." />}
+      {list.data && all.length > 0 && shown.length === 0 && <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque os filtros."
+        action={filtered ? <Button variant="ghost" onClick={() => reset(['q', 'tipo', 'rede', 'tag', 'onde', 'fav'])}>Limpar filtros</Button> : undefined} />}
 
       {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted-foreground">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
       {mode === 'tabela' && shown.length > 0 && <ListTable slug={slug} rows={shown} ov={ov} sum={sum} onFav={(c) => actions.toggleFavorite(c)} onPull={pullOne} pullingId={pullingOne} onAccept={accept}
@@ -230,9 +255,9 @@ function CompetitorCard({ slug, c, s, o, onFav, onWarm, onPull, pulling, loading
           </span>
           {items > 0 && <span>· {fmtNum(items)} itens</span>}
           {hadErrors && <span className="text-warning" title="A última coleta teve avisos">· ⚠</span>}
-          <button className="ml-auto px-2 py-1 rounded-md border border-border hover:bg-muted text-foreground disabled:opacity-50" disabled={pulling || !d.profiles.length}
+          <button className="ml-auto inline-flex items-center gap-1 px-2 py-1 rounded-md border border-border hover:bg-muted text-foreground disabled:opacity-50" disabled={pulling || !d.profiles.length}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPull(); }}>
-            {pulling ? <Spinner /> : '↻'} Puxar
+            {pulling ? <Spinner /> : <RefreshCw className="size-3" />}Puxar
           </button>
         </div>
       </div>
@@ -308,12 +333,34 @@ function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, on
           <Button variant="ghost" className="!py-0.5 !px-2 text-xs" onClick={() => onReject(c)}>Recusar</Button>
         </> : <>
           <Star on={c.data.favorite} onClick={() => onFav(c)} size="text-base" />
-          <button className="text-xs px-2 py-0.5 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={pullingId === c.data.id || !c.data.profiles.length} onClick={() => onPull(c)}>{pullingId === c.data.id ? <Spinner /> : '↻'}</button>
+          <button title="Puxar agora" aria-label="Puxar agora" className="h-6 w-6 grid place-items-center rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={pullingId === c.data.id || !c.data.profiles.length} onClick={() => onPull(c)}>{pullingId === c.data.id ? <Spinner /> : <RefreshCw className="size-3.5" />}</button>
         </>}
       </span>
     ) },
   ];
   return <SortTable fill rows={rows} cols={cols} rowKey={(c) => c.data.id} initial={{ k: 'f', dir: -1 }} />;
+}
+
+/**
+ * Erro de carga. "Failed to fetch" = o servidor do app não respondeu (caiu, reiniciou ou está fora do ar): com dados já
+ * na tela vira um aviso discreto com "Tentar de novo" em vez de uma caixa vermelha sobre uma tabela que está certa.
+ */
+function LoadError({ errors, onRetry }: { errors: { error: unknown; data?: unknown; isFetching: boolean }[]; onRetry: () => void }) {
+  const failed = errors.filter((e) => e.error);
+  if (!failed.length) return null;
+  const offline = failed.every((e) => e.error instanceof TypeError);
+  if (!offline) return <ErrorBox error={failed[0].error} />;
+  const stale = failed.every((e) => e.data != null);
+  const busy = failed.some((e) => e.isFetching);
+  return (
+    <div className="mb-4 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+      <WifiOff className="size-4 shrink-0" />
+      <span>Sem resposta do servidor do app.{stale ? ' Mostrando os últimos dados carregados.' : ''} Se continuar, rode <code className="text-xs">npm run app</code> de novo.</span>
+      <button type="button" onClick={onRetry} disabled={busy} className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium hover:bg-amber-100 disabled:opacity-50">
+        <RefreshCw className={cx('size-3.5', busy && 'animate-spin')} />Tentar de novo
+      </button>
+    </div>
+  );
 }
 
 const SkeletonGrid = () => (
