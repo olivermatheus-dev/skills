@@ -6,7 +6,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type ItemMark } from '../../api';
 import { qk, useTags } from '../../queries';
 import { AreaPage, StatStrip, useMarket } from '../../components/competitors/area';
-import { ItemDrawer } from '../../components/competitors/Items';
+import { ItemPanel } from '../../components/competitors/ficha/FichaPanel';
+import { useFichasResumo } from '../../components/competitors/ficha/useFichas';
 import ContentsView, { type CRow, type Owner } from '../../components/competitors/ContentsView';
 import { TYPE_LABEL, fmtPct, median } from '../../components/competitors/lib';
 import { useMarketRows } from '../../components/competitors/market';
@@ -24,6 +25,7 @@ export default function Conteudos() {
   const tags = useTags(slug);
   const actions = useCompetitorActions(slug);
   const idea = useMakeIdea(slug);
+  const fichas = useFichasResumo(slug);
   // gaveta aberta = ?item=<compId>/<mk> (o Panorama linka direto para um item)
   const [sp, setSp] = useSearchParams();
   const open = sp.get('item');
@@ -66,12 +68,12 @@ export default function Conteudos() {
       {market.loading && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">{[0, 1, 2, 3].map((i) => <div key={i} className="h-80 rounded-xl bg-card border border-border animate-pulse" />)}</div>}
       {!market.loading && !rows.length && <Empty title="Nenhum conteúdo coletado" hint="Puxe as redes dos concorrentes (aba Coletas ou a ficha de cada um)." />}
       {rows.length > 0 && (
-        <ContentsView rows={rows} slug={slug} owners={owners} showComp fill panel summary={summary}
+        <ContentsView rows={rows} slug={slug} owners={owners} showComp fill panel summary={summary} fichaOf={(r) => fichas.of(r.compId, r.mk)}
           mediaOf={(r) => api.mediaUrl(slug, r.compId!, r.item.thumbnailLocal)} ideaBusy={(r) => idea.busy === r.mk}
           onMark={mark} onOpen={(r, ideia) => setOpen(itemKey(r), ideia)} onIdea={(r) => idea.make({ id: r.compId!, name: r.compName! }, '', r)} />
       )}
 
-      <ItemDrawer r={openRow} open={!!openRow} focusIdea={sp.get('ideia') === '1'} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
+      <ItemPanel compId={openRow?.compId} r={openRow} open={!!openRow} focusIdea={sp.get('ideia') === '1'} onClose={() => setOpen(null)} slug={slug} media={api.mediaUrl(slug, openRow?.compId ?? '', openRow?.item.thumbnailLocal)}
         profileLabel={openRow?.compName ?? ''} tagSuggestions={tagSuggestions} ideaBusy={!!openRow && idea.busy === openRow.mk}
         onMark={(patch) => openRow && mark(openRow, patch)}
         onIdea={(title, tg, note) => openRow && idea.make({ id: openRow.compId!, name: openRow.compName! }, '', openRow, title, tg, note)} />

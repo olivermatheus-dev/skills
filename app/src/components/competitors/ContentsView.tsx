@@ -1,14 +1,14 @@
 // Lista de conteúdos dos concorrentes (barra de filtros + grade de cards ou tabela), igual na aba Conteúdos e na ficha.
 // Filtros, ordenação e vista ficam na URL (?vista=tabela&ordem=mercado). Quem usa só entrega as linhas e as ações.
 import { useDeferredValue, useMemo, type ReactNode } from 'react';
-import { ArrowUpDown, CalendarDays, Clapperboard, Film, GalleryHorizontal, Image as ImageIcon, LayoutDashboard, LayoutGrid, ListFilter, Radio, Shapes, Share2, Table as TableIcon, Users, Video } from 'lucide-react';
+import { ArrowUpDown, CalendarDays, Clapperboard, Film, GalleryHorizontal, Image as ImageIcon, LayoutDashboard, LayoutGrid, ListFilter, Radio, Shapes, Share2, Sparkles, Table as TableIcon, Users, Video } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { Empty, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../kit';
 import { FillBox } from '../fill';
 import { Avatar, PlatformIcon, STATUS_COLOR, STATUS_LABEL, TYPE_LABEL, fmtPct, platformLabel, timeAgo, type Row } from './lib';
-import { FavStar, ItemCard, RatioCell, Thumb, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from './Items';
+import { AnalyzedBadge, FavStar, ItemCard, RatioCell, type FichaSelo, Thumb, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from './Items';
 import ContentsPanel from './ContentsPanel';
-import { DataTable, FavToggle, FilterBar, ViewToggle, parseSort, sortRows, useUrlState, type BarFilter, type Col, type SortDef } from './toolbar';
+import { DataTable, FavToggle, FilterBar, FlagToggle, ViewToggle, parseSort, sortRows, useUrlState, type BarFilter, type Col, type SortDef } from './toolbar';
 
 export type CRow = Row & { compId?: string; compName?: string };
 export interface Owner { name: string; local?: string; remote?: string | null }
@@ -18,9 +18,10 @@ const FORMAT_ICON: Record<string, ReactNode> = { video: <Video />, short: <Film 
 const STATUS_RANK: Record<string, number> = { nova: 0, marcada: 1, analisada: 2, descartada: 3 };
 const dayMs = 86_400_000;
 
-type Filters = { q: string; periodo: string; rede: string; formato: string; conc: string; status: string; fav: string };
+type Filters = { q: string; periodo: string; rede: string; formato: string; conc: string; status: string; fav: string; an: string };
 /** a linha passa nos filtros? `skip` ignora um deles (para contar as opções desse select sem o próprio filtro) */
-function passes(r: CRow, v: Filters, needle: string, skip?: 'rede' | 'formato' | 'conc'): boolean {
+function passes(r: CRow, v: Filters, needle: string, skip?: 'rede' | 'formato' | 'conc', fichaOf?: (r: CRow) => FichaSelo | undefined): boolean {
+  if (v.an && !fichaOf?.(r)?.analisada) return false;
   const st = r.mark?.status ?? 'nova';
   if (v.status === 'ativas' ? st === 'descartada' : v.status !== 'todas' && st !== v.status) return false;
   if (skip !== 'rede' && v.rede && r.platform !== v.rede) return false;
@@ -54,12 +55,14 @@ const SORTS: Record<string, SortDef<CRow> & { bar?: boolean }> = {
   status: { label: 'Status', get: (r) => STATUS_RANK[r.mark?.status ?? 'nova'] },
 };
 
-const DEFAULTS = { q: '', periodo: '30', rede: '', formato: '', conc: '', status: 'ativas', fav: '', vista: 'grade', ordem: 'outlier', asc: '' };
+const DEFAULTS = { q: '', periodo: '30', rede: '', formato: '', conc: '', status: 'ativas', fav: '', an: '', vista: 'grade', ordem: 'outlier', asc: '' };
 const DEFAULTS_ALL = { ...DEFAULTS, periodo: 'tudo' };
 
 const VIEWS_PANEL = [{ value: 'grade', label: 'Grade', icon: LayoutGrid }, { value: 'tabela', label: 'Tabela', icon: TableIcon }, { value: 'painel', label: 'Painel', icon: LayoutDashboard }];
 
-export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass }: {
+export default function ContentsView({ rows, slug, owners, showComp, showPlatformFilter = true, defaultAll, panel, fill, stickyTop, mediaOf, ideaBusy, onMark, onIdea, onOpen, summary, searchPlaceholder, stickyClass, fichaOf }: {
+  /** 040 D: análise profunda do item (selo "Analisado" e filtro "Só analisados") */
+  fichaOf?: (r: CRow) => FichaSelo | undefined;
   rows: CRow[]; slug: string; owners?: Map<string, Owner>; showComp: boolean; showPlatformFilter?: boolean;
   /** período padrão "Tudo" (ficha) em vez de 30 dias (feed) */
   defaultAll?: boolean; fill: boolean; stickyTop?: number; stickyClass?: string;
@@ -77,17 +80,17 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const sort = parseSort(Object.hasOwn(SORTS, v.ordem) ? v.ordem : 'outlier', v.asc);
 
   const needle = q.toLowerCase();
-  const shown = useMemo(() => sortRows(rows.filter((r) => passes(r, v, needle)), SORTS, sort),
-    [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, needle, sort.k, sort.dir]); // eslint-disable-line react-hooks/exhaustive-deps
+  const shown = useMemo(() => sortRows(rows.filter((r) => passes(r, v, needle, undefined, fichaOf)), SORTS, sort),
+    [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, v.an, fichaOf, needle, sort.k, sort.dir]); // eslint-disable-line react-hooks/exhaustive-deps
   /** contagem de cada opção dos selects: respeita período, status, busca e os OUTROS selects */
   const counts = useMemo(() => {
     const by = (skip: 'rede' | 'formato' | 'conc', key: (r: CRow) => string | undefined) => {
       const m = new Map<string, number>();
-      for (const r of rows) if (passes(r, v, needle, skip)) { const k = key(r); if (k) m.set(k, (m.get(k) ?? 0) + 1); }
+      for (const r of rows) if (passes(r, v, needle, skip, fichaOf)) { const k = key(r); if (k) m.set(k, (m.get(k) ?? 0) + 1); }
       return m;
     };
     return { rede: by('rede', (r) => r.platform), formato: by('formato', (r) => r.item.type), conc: by('conc', (r) => r.compId) };
-  }, [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, needle]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [rows, v.periodo, v.status, v.rede, v.formato, v.conc, v.fav, v.an, fichaOf, needle]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const platforms = [...new Set(rows.map((r) => r.platform))];
   const types = [...new Set(rows.map((r) => r.item.type))];
@@ -113,7 +116,8 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
     ...(showComp && comps.length > 1 ? [{ label: 'Concorrente', node: sel(concOpts, v.conc, 'conc', 'Concorrente'), active: !!v.conc }] : []),
     { label: 'Status', node: sel(statusOpts, v.status, 'status', 'Status'), active: v.status !== 'ativas' },
   ];
-  const active = !!(v.q || v.periodo !== defaults.periodo || v.rede || v.formato || v.conc || v.status !== 'ativas' || v.fav);
+  const active = !!(v.q || v.periodo !== defaults.periodo || v.rede || v.formato || v.conc || v.status !== 'ativas' || v.fav || v.an);
+  const nAnalisados = fichaOf ? rows.filter((r) => fichaOf(r)?.analisada).length : 0;
 
   const bar = (
     <FilterBar
@@ -124,9 +128,10 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
         <SelectField size="sm" aria-label="Ordenar" icon={<ArrowUpDown />} disabled={vista === 'painel'} title={vista === 'painel' ? 'O Painel não usa ordenação' : undefined} value={sort.k} options={sortOpts} placeholder={SORTS[sort.k]?.label} onChange={(x) => set({ ordem: x, asc: '' })} />
       </>}
       secondary={secondary}
-      trailing={<><FavToggle on={!!v.fav} onChange={(x) => set({ fav: x ? '1' : '' })} /><ViewToggle value={vista} options={panel ? VIEWS_PANEL : undefined} onChange={(x) => set({ vista: x })} /></>}
+      trailing={<>{fichaOf && (nAnalisados > 0 || v.an) ? <FlagToggle on={!!v.an} onChange={(x) => set({ an: x ? '1' : '' })} icon={Sparkles} label="Só analisados" tone="violet"
+        title={v.an ? 'Mostrando só os conteúdos com análise profunda da IA' : `Só os ${nAnalisados} conteúdo(s) com análise profunda da IA`} /> : null}<FavToggle on={!!v.fav} onChange={(x) => set({ fav: x ? '1' : '' })} /><ViewToggle value={vista} options={panel ? VIEWS_PANEL : undefined} onChange={(x) => set({ vista: x })} /></>}
       active={active}
-      onClear={() => reset(['q', 'periodo', 'rede', 'formato', 'conc', 'status', 'fav'])}
+      onClear={() => reset(['q', 'periodo', 'rede', 'formato', 'conc', 'status', 'fav', 'an'])}
     />
   );
 
@@ -135,7 +140,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const cols: Col<CRow>[] = [
     { k: 'thumb', label: '', width: '64px', pin: 'left', render: (r) => <Thumb r={r} media={mediaOf(r)} className="h-8 w-14 rounded" /> },
     { k: 'title', label: 'Título', sort: 'title', width: '180px', pin: 'left', className: 'max-w-[200px]', render: (r) => (
-      <div className="flex items-center gap-1.5 min-w-0">{r.mark?.favorite && <FavStar on size="size-3.5" />}<span className="truncate font-medium" title={titleOf(r)}>{titleOf(r)}</span></div>
+      <div className="flex items-center gap-1.5 min-w-0">{r.mark?.favorite && <FavStar on size="size-3.5" />}{fichaOf?.(r) && <AnalyzedBadge ficha={fichaOf(r)!} compact />}<span className="truncate font-medium" title={titleOf(r)}>{titleOf(r)}</span></div>
     ) },
     ...(showComp ? [{ k: 'comp', label: 'Concorrente', sort: 'comp', render: (r: CRow) => { const o = ownerOf(r); return o ? <span className="inline-flex items-center gap-1.5 whitespace-nowrap">{o.avatar}{o.name}</span> : null; } } as Col<CRow>] : []),
     { k: 'platform', label: 'Rede', sort: 'platform', render: (r) => <span title={platformLabel(r.platform)}><PlatformIcon platform={r.platform} size={16} /></span> },
@@ -155,7 +160,7 @@ export default function ContentsView({ rows, slug, owners, showComp, showPlatfor
   const grid = (
     <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
       {shown.map((r) => (
-        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)}
+        <ItemCard key={rowId(r)} r={r} slug={slug} media={mediaOf(r)} showPlatform owner={ownerOf(r)} ideaBusy={ideaBusy(r)} ficha={fichaOf?.(r)}
           onMark={(patch) => onMark(r, patch)} onIdea={() => onIdea(r)} onOpen={() => onOpen(r)} />
       ))}
     </div>

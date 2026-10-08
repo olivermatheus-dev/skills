@@ -146,6 +146,15 @@ on('GET', '/api/projects/:slug/competitors/:id/ads/history', (p) => S.adsHistory
 on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
+// Fichas de análise (040 D): resumo para o selo, vocabulário dos selects, a ficha do item, edição como override e pedido de fila
+const FI = () => import('../../core/fichas');
+on('GET', '/api/projects/:slug/fichas', async (p) => { slugOk(p); return (await FI()).resumoFichas(p.slug); });
+on('GET', '/api/projects/:slug/fichas-vocab', async (p) => { slugOk(p); return (await FI()).vocabView(p.slug); });
+on('GET', '/api/projects/:slug/competitors/:id/fichas/:key', async (p) => (await FI()).getFichaView(p.slug, p.id, p.key));
+on('PUT', '/api/projects/:slug/competitors/:id/fichas/:key/override', async (p, b) => (await FI()).editarFicha(p.slug, p.id, p.key, b ?? {}));
+on('POST', '/api/projects/:slug/competitors/:id/fichas/:key/pedido', async (p) => (await FI()).pedirAnalise(p.slug, p.id, p.key));
+on('DELETE', '/api/projects/:slug/competitors/:id/fichas/:key/pedido', async (p) => (await FI()).cancelarPedido(p.slug, p.id, p.key));
+
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
 on('GET', '/api/projects/:slug/competitors-summary', async (p) => (await import('../../tools/intel/summary')).summarizeCompetitors(p.slug));
 
@@ -261,6 +270,14 @@ const route: Connect.NextHandleFunction = async (req, res, next) => {
     const base = ok ? normalize(join(S.ROOT, P.media(m[1], m[2]))) : '';
     const file = ok ? normalize(join(base, decodeURIComponent(m[3]))) : '';
     if (!ok || !file.startsWith(base + sep) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    return pipeFile(res, file);
+  }
+  // /ficha-file/<slug>/<concorrente>/<plataforma>__<id>/quadros/<arquivo> → quadros-chave das fichas (data/intel, fora do git)
+  const ff = url.pathname.match(/^\/ficha-file\/([^/]+)\/([^/]+)\/([^/]+)\/(quadros\/[^/]+)$/);
+  if (ff) {
+    const file = (await import('../../core/fichas')).quadroFile(ff[1], ff[2], decodeURIComponent(ff[3]), decodeURIComponent(ff[4]));
+    if (!file) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return pipeFile(res, file);
   }

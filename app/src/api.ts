@@ -8,6 +8,8 @@ export type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId };
 export interface AnalysisFull { results: Partial<Record<ModuleId, AnalysisResult>>; notes: AnalysisNotes; request: AnalysisRequest | null }
 export interface QueueEntry { id: string; name: string; status: string; request: AnalysisRequest }
 
+import type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo } from '../../core/fichas';
+export type { FichaResumo, FichaView, VocabView, OpcaoVocab, EdicaoInfo };
 import type { Review, ReviewComment } from '../../schema/review';
 import type { Brand, BrandFont, BrandToken } from '../../schema/brand';
 import type { BrandPreset } from '../../core/brand-presets';
@@ -175,6 +177,13 @@ export const api = {
   competitorsFeed: (slug: string) => req<{ id: string; snapshots: SnapshotEntry[]; marks: Record<string, ItemMark> }[]>('GET', `${pj(slug)}/competitors-feed`),
   analysisOverview: (slug: string) => req<AnalysisOverview[]>('GET', `${pj(slug)}/analysis-overview`),
   analysisQueue: (slug: string) => req<QueueEntry[]>('GET', `${pj(slug)}/analysis-queue`),
+  // fichas de análise (040 D)
+  fichasResumo: (slug: string) => req<Record<string, Record<string, FichaResumo>>>('GET', `${pj(slug)}/fichas`),
+  fichasVocab: (slug: string) => req<VocabView>('GET', `${pj(slug)}/fichas-vocab`),
+  ficha: (slug: string, comp: string, key: string) => req<FichaView | null>('GET', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}`),
+  editFicha: (slug: string, comp: string, key: string, edit: { path: string; value?: unknown; revert?: boolean }) => req<FichaView>('PUT', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/override`, edit),
+  pedirFicha: (slug: string, comp: string, key: string) => req<{ naFila: boolean; itens: number }>('POST', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/pedido`),
+  cancelarFicha: (slug: string, comp: string, key: string) => req<{ naFila: boolean; itens: number }>('DELETE', `${pj(slug)}/competitors/${comp}/fichas/${encodeURIComponent(key)}/pedido`),
 
   secrets: (slug: string) => req<SecretState[]>('GET', `${pj(slug)}/secrets`),
   setSecret: (slug: string, key: string, value: string, scope: 'projeto' | 'geral' = 'projeto') => req<SecretState | null>('PUT', `${pj(slug)}/secrets/${encodeURIComponent(key)}`, { value, scope }),

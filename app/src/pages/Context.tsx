@@ -254,7 +254,8 @@ function TagsEditor({ slug, onDirty }: { slug: string; onDirty: (v: boolean) => 
   const [saveError, setSaveError] = useState<unknown>(null);
   const [justSaved, setJustSaved] = useState(false);
   const save = (r: TagRow[]) => {
-    const tags = r.filter((x) => x.id || x.label).map(({ id, label, color }) => ({ id, label: label.trim(), color }));
+    // preserva todos os campos da tag (grupo, definicao… da 040); só tira o marcador interno _auto
+    const tags = r.filter((x) => x.id || x.label).map(({ _auto, ...t }) => ({ ...t, label: t.label.trim() })); // eslint-disable-line @typescript-eslint/no-unused-vars
     setDirty(false); setJustSaved(true); setSaveError(null);
     void runOptimistic(qc, {
       mutationFn: () => api.saveTags(slug, tags),

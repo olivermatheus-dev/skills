@@ -150,8 +150,14 @@ export const Ficha = z.object({
   analise: FichaAnalise.optional(),
   /** análises antigas (até 3): reanálise não perde o que custou */
   anteriores: z.array(FichaAnalise).max(3).default([]),
-  /** edições do Oliver: SEMPRE ganham da análise */
-  override: FichaCampos.partial().extend({ editadoEm: IsoDateTime.optional() }).default({}),
+  /**
+   * edições do Oliver: SEMPRE ganham da análise.
+   * `editados` diz QUAIS caminhos o Oliver editou e quando (`"gancho.tipo": "2026-10-08T…Z"`). Com ele, só esses caminhos valem;
+   * o resto de um objeto copiado (ex.: `gancho.texto` ao editar só `gancho.tipo`) é ignorado e segue a IA. Sem `editados`
+   * (override escrito à mão), cada chave de topo vale inteira. O "a IA agora diz" compara a data da edição com `analise.geradoEm`.
+   * Leia o valor efetivo com `camposEfetivos` de core/fichas.ts, nunca com `{ ...analise.campos, ...override }`.
+   */
+  override: FichaCampos.partial().extend({ editadoEm: IsoDateTime.optional(), editados: z.record(z.string(), IsoDateTime).optional() }).default({}),
   /** ids dos relatórios (schema/relatorio.ts) que usaram esta ficha */
   relatorios: z.array(Txt).default([]),
 });

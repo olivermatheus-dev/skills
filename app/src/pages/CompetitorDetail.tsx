@@ -15,7 +15,8 @@ import EditCompetitor from '../components/competitors/EditCompetitor';
 import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
-import { ItemDrawer } from '../components/competitors/Items';
+import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
+import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
 import ContentsView from '../components/competitors/ContentsView';
 import { useMarketRows } from '../components/competitors/market';
@@ -128,6 +129,7 @@ function Detalhe() {
   const projectTags = useTags(slug);
   const actions = useCompetitorActions(slug);
   const idea = useMakeIdea(slug);
+  const fichas = useFichasResumo(slug);
 
   const [search_, setSearch_] = useSearchParams();
   const view = (TABS.some((t) => t.id === search_.get('aba')) ? search_.get('aba') : 'diagnostico') as TabId;
@@ -394,7 +396,7 @@ function Detalhe() {
           )}
           {sel && rows.length > 0 && !scopeRows.length && sel.platform === "site" && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
           {scopeRows.length > 0 && (
-            <ContentsView rows={scopeRows} slug={slug} showComp={false} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
+            <ContentsView rows={scopeRows} slug={slug} showComp={false} fichaOf={(r) => fichas.of(id, r.mk)} showPlatformFilter={!sel} defaultAll fill={false} stickyTop={headH}
               searchPlaceholder="Buscar título, legenda, nota…"
               mediaOf={(r) => media(r.item.thumbnailLocal)} ideaBusy={(r) => ideaBusy === r.mk}
               onMark={(r, patch) => mark.mutate({ mk: r.mk, patch })} onIdea={(r) => makeIdea(r)} onOpen={(r) => setOpen(r.mk)} />
@@ -403,7 +405,7 @@ function Detalhe() {
         </>}
       </div>
 
-      <ItemDrawer r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={media(openRow?.item.thumbnailLocal)}
+      <ItemPanel compId={id} r={openRow} open={!!openRow} onClose={() => setOpen(null)} slug={slug} media={media(openRow?.item.thumbnailLocal)}
         profileLabel={openRow ? handleOf(profiles.find((p) => p.key === openRow.profileKey) ?? { platform: openRow.platform, url: '' }) : ''}
         tagSuggestions={allTagSuggestions} ideaBusy={!!openRow && ideaBusy === openRow.mk}
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}

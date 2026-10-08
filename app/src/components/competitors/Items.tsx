@@ -1,7 +1,7 @@
 // Cards de conteúdo (vídeo/post) com as medidas de fora da curva, métricas e crescimento + painel de detalhe com marcação e "Virar ideia".
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, ExternalLink, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
+import { Activity, Clock, ExternalLink, Eye, Flame, Heart, MessageCircle, Send, Sparkles, Star as StarIcon, type LucideIcon } from 'lucide-react';
 import type { ItemMark } from '../../api';
 import { Button, Drawer, Field, Input, Select, Textarea, cx, fmtDate, fmtNum } from '../kit';
 import {
@@ -85,7 +85,24 @@ export function RatioCell({ v, tip }: { v?: number; tip?: ReactNode }) {
   return <Tip content={tip}><span className={cx('tabular-nums', v >= 3 ? 'font-semibold text-amber-700' : v >= 1.5 ? 'font-medium' : 'text-muted-foreground')}>{v >= 3 && <Flame className="inline size-3 -mt-0.5 mr-0.5" />}{fmtRatio(v)}</span></Tip>;
 }
 
-const Metric = ({ icon: Icon, v, title }: { icon: LucideIcon; v?: number; title: string }) =>
+export interface FichaSelo { analisada: boolean; naFila: boolean; geradoEm?: string; editados: number }
+/** selo da análise profunda (040): roxo = analisado (abre o painel), escuro = pedido na fila. `compact` = só o ícone (tabela) */
+export function AnalyzedBadge({ ficha, compact }: { ficha: FichaSelo; compact?: boolean }) {
+  if (!ficha.analisada && !ficha.naFila) return null;
+  const tip = ficha.analisada
+    ? `Analisado pela IA${ficha.geradoEm ? ` em ${fmtDate(ficha.geradoEm)}` : ''}${ficha.editados ? ` · ${ficha.editados} campo(s) editado(s) por você` : ''}.\nAbre o painel da análise.`
+    : 'Na fila de análise: roda quando você pedir a fila de fichas no Claude Code.';
+  return (
+    <Tip content={tip}>
+      <span aria-label={ficha.analisada ? 'Analisado' : 'Na fila de análise'} className={cx('inline-flex items-center gap-1 rounded-md font-medium whitespace-nowrap shrink-0', compact ? 'p-0.5' : 'px-1.5 py-0.5 text-[11px] shadow-sm',
+        ficha.analisada ? (compact ? 'text-violet-600' : 'bg-violet-600 text-white') : (compact ? 'text-muted-foreground' : 'bg-black/65 text-white'))}>
+        {ficha.analisada ? <Sparkles className="size-3" /> : <Clock className="size-3" />}{!compact && (ficha.analisada ? 'Analisado' : 'Na fila')}
+      </span>
+    </Tip>
+  );
+}
+
+const Metric =({ icon: Icon, v, title }: { icon: LucideIcon; v?: number; title: string }) =>
   v == null ? null : <span title={`${title}: ${v.toLocaleString('pt-BR')}`} className="inline-flex items-center gap-1 tabular-nums"><Icon className="size-3.5 text-muted-foreground" strokeWidth={1.8} />{fmtNum(v)}</span>;
 
 export const FavStar = ({ on, onClick, size = 'size-4' }: { on: boolean; onClick?: () => void; size?: string }) => (
@@ -95,7 +112,9 @@ export const FavStar = ({ on, onClick, size = 'size-4' }: { on: boolean; onClick
   </button>
 );
 
-export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner }: {
+export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaBusy, slug, owner, ficha }: {
+  /** 040 D: selo "Analisado" (ou "Na fila") no canto da miniatura */
+  ficha?: FichaSelo;
   r: Row; media?: string; showPlatform: boolean; slug: string; ideaBusy: boolean;
   /** concorrente dono do conteúdo (feed): avatar + nome logo abaixo do título */
   owner?: { name: string; avatar?: ReactNode };
@@ -110,6 +129,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
       <button type="button" onClick={onOpen} className="relative block text-left" aria-label={`Abrir ${titleOf(r)}`}>
         <Thumb r={r} media={media} className="aspect-video" />
         <div className="absolute top-2 left-2"><OutlierBadges r={r} /></div>
+        {ficha && <div className="absolute top-2 right-2"><AnalyzedBadge ficha={ficha} /></div>}
         <div className="absolute bottom-2 left-2 flex gap-1">
           <span className="bg-black/70 text-white text-[10px] font-medium px-1.5 py-0.5 rounded uppercase tracking-wide">{TYPE_LABEL[r.item.type] ?? r.item.type}</span>
         </div>
@@ -197,7 +217,9 @@ function ViewsHistory({ r }: { r: Row }) {
   );
 }
 
-export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, slug, profileLabel, tagSuggestions, focusIdea }: {
+export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, slug, profileLabel, tagSuggestions, focusIdea, extra }: {
+  /** bloco logo abaixo do título (040 D: "Analisar este" quando o item ainda não tem análise) */
+  extra?: ReactNode;
   /** abre já no "Virar ideia" (rola até o bloco e foca o título) */
   focusIdea?: boolean;
   r: Row | null; media?: string; open: boolean; onClose: () => void; slug: string; profileLabel?: string; tagSuggestions: string[];
@@ -237,6 +259,7 @@ export function ItemDrawer({ r, media, open, onClose, onMark, onIdea, ideaBusy, 
         {fmtDur(r.item.durationS) && ` · ${fmtDur(r.item.durationS)}`}
         {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink">abrir original ↗</a>
       </div>
+      {extra}
 
       <div className="grid grid-cols-4 gap-2 my-4">
         {([['Views', r.item.metrics.views, r.viewsDelta], ['Curtidas', r.item.metrics.likes], ['Comentários', r.item.metrics.comments], ['Engajamento', undefined]] as [string, number | undefined, number?][]).map(([label, v, d]) => (
