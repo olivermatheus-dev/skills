@@ -30,7 +30,22 @@ export function useFillHeight() {
         if (p === page) break;
       }
       const below = Math.max(0, page.getBoundingClientRect().bottom - box.bottom - pad);
-      // a caixa invade o respiro do fim da página (margem negativa): termina a ~12 px do fim e a página não rola
+      // há conteúdo DEPOIS da caixa (abaixo dela, não ao lado, como a outra coluna de uma grade)?
+      let after = false;
+      for (let n: HTMLElement | null = el; n && n !== scroller && !after; n = n.parentElement) {
+        for (let s = n.nextElementSibling; s; s = s.nextElementSibling) {
+          const r = s.getBoundingClientRect();
+          if (r.height > 0 && r.top >= box.bottom - 1) { after = true; break; }
+        }
+        if (n === page) break;
+      }
+      if (after) {
+        // há legenda/aviso depois da caixa: margem negativa puxaria esse texto para cima da caixa (sobreposição).
+        // Então a caixa só desconta o respiro e o texto de baixo fica no lugar.
+        setH(Math.max(320, Math.floor(scroller.clientHeight - top - below - pad)));
+        return;
+      }
+      // nada depois: a caixa invade o respiro do fim da página (margem negativa), termina a ~12 px do fim e a página não rola
       el.style.marginBottom = `${-Math.max(0, pad - 12)}px`;
       setH(Math.max(320, Math.floor(scroller.clientHeight - top - below - 12)));
     };

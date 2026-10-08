@@ -39,6 +39,8 @@ const EQUIPE_USERS = /(at[eé]|ate)\s*\d|\b([2-9]|\d{2,})\s*(profissionais|acess
 const EQUIPE_NAME = /cl[ií]nica|equipe|time\b/i;
 
 export function audienceOf(p: Plan): { a: 'solo' | 'equipe'; inferred: boolean } {
+  // preço que já inclui mais de 1 profissional não é base solo, mesmo que a coleta marque "solo" (ex.: Clínica Ágil Start, até 3)
+  if ((p.seats?.included ?? 1) > 1) return { a: 'equipe', inferred: false };
   if (p.audience) return { a: p.audience, inferred: false };
   if (p.seats && ((p.seats.max ?? p.seats.included ?? 1) > 1 || p.seats.unlimited)) return { a: 'equipe', inferred: false };
   if (EQUIPE_NAME.test(p.name) || EQUIPE_USERS.test(p.users ?? '')) return { a: 'equipe', inferred: true };
@@ -119,7 +121,8 @@ export function statsOf(pr: PlanRow[], lens: Lens): Stats {
   for (const p of comp) { const d = discount(p); if (d != null) dBy.set(p.compId, [...(dBy.get(p.compId) ?? []), d]); }
   const discounts = [...dBy.values()].map((v) => mean(v)!);
   const rows = new Map<string, MarketRow>(comp.map((p) => [p.compId, p.row]));
-  const hasTrial = (r: MarketRow) => { const d = r.res.precos?.data as Pr | undefined; return !!d && ((d.trialDays ?? 0) > 0 || (!!d.trial && !/^(n[aã]o|sem teste)/i.test(d.trial))); };
+  // teste com prazo; plano grátis permanente não conta como teste ("Sem trial; plano Free permanente", "Plano Grátis para sempre")
+  const hasTrial = (r: MarketRow) => { const d = r.res.precos?.data as Pr | undefined; return !!d && ((d.trialDays ?? 0) > 0 || (d.trialDays == null && !!d.trial && !/^(n[aã]o|sem)\b|gr[aá]tis para sempre|permanente|sem prazo/i.test(d.trial))); };
   const withData = [...rows.values()].filter((r) => (r.res.precos?.data as Pr | undefined)?.publicPrice !== false || (r.res.precos?.data as Pr | undefined)?.plans.length);
   const free = [...rows.values()].filter((r) => { const d = r.res.precos?.data as Pr | undefined; return !!d && (d.model === 'freemium' || d.plans.some((p) => p.monthly === 0)); }).length;
   return { cuts: cutsOf(vals), entry, top, discounts, mean: mean(vals), med: median(vals), trial: { n: withData.filter(hasTrial).length, of: withData.length, free } };
@@ -205,6 +208,7 @@ export const COMMIT_LABEL: Record<string, string> = { 'sem-fidelidade': 'sem fid
 export const PAY_LABEL: Record<string, string> = { cartao: 'cartão', pix: 'Pix', boleto: 'boleto', debito: 'débito', outro: 'outro' };
 export const seatsText = (p: PlanRow) => {
   const s = p.plan.seats;
+  if (p.isRef) return '1 profissional';
   if (s) return s.unlimited ? 'profissionais ilimitados' : s.max != null && s.max !== s.included && s.included != null ? `${s.included} a ${s.max} prof.` : `${s.max ?? s.included ?? '?'} prof.`;
   return p.plan.users ?? undefined;
 };

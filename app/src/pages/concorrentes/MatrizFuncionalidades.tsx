@@ -155,8 +155,8 @@ export default function MatrizFuncionalidades({ slug, rows }: { slug: string; ro
         <Chips value={mode} onChange={setMode} options={[
           { value: 'todas', label: 'Todas', count: counts.todas },
           { value: 'diferenca', label: 'Só onde há diferença', count: counts.diferenca },
-          { value: 'brecha', label: 'Eles têm, nós não', count: counts.brecha },
-          { value: 'diferencial', label: 'Só nós temos', count: counts.diferencial },
+          { value: 'brecha', label: 'Eles têm, você não', count: counts.brecha },
+          { value: 'diferencial', label: 'Só você tem', count: counts.diferencial },
         ]} />
         <Select value={group} onValueChange={setGroup}>
           <SelectTrigger size="sm" className="w-52"><SelectValue /></SelectTrigger>

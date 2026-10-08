@@ -37,7 +37,7 @@ export default function PorConcorrente({ slug, rows }: { slug: string; rows: Mar
                   <Avatar name={r.c.data.name} size={28} local={r.avatar.local} remote={r.avatar.remote} className="!ring-0 shrink-0" />
                   <div className="min-w-0">
                     <Link to={`/p/${slug}/concorrentes/${id}`} className="block text-sm font-semibold truncate hover:text-primary-ink">{r.c.data.name}</Link>
-                    <p className="text-[11px] text-muted-foreground">{ops.length} brecha(s) apontada(s){temas.size ? ` · em ${temas.size} tema(s)` : ''}</p>
+                    <p className="text-[11px] text-muted-foreground">{ops.length} {ops.length === 1 ? 'frase' : 'frases'}{temas.size ? ` · ${temas.size === 1 ? 'entra em 1 brecha' : `entram em ${temas.size} brechas`}` : ''}</p>
                   </div>
                 </header>
                 <ul className="p-3.5 space-y-2.5">

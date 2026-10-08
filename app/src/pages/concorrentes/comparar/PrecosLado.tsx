@@ -120,7 +120,7 @@ export default function Lado({ slug, pr, m, lens }: { slug: string; pr: PlanRow[
                     <div className="mt-1 flex flex-wrap items-center gap-1">
                       {!p.free && !p.onRequest && <BandChip b={b} />}
                       {mode === 'equiv' && !p.isRef && (cov.known
-                        ? <span className={cx('rounded px-1.5 py-0.5 text-[11px]', cov.sim + cov.parcial / 2 >= PACOTE.length ? 'bg-success/15 text-success-ink' : 'bg-muted text-muted-foreground')} title={`${cov.sim} itens do pacote Kzloo com ✓${cov.parcial ? ` e ${cov.parcial} parciais` : ''}`}>cobre {cov.sim}{cov.parcial ? `+${cov.parcial}` : ''} de {PACOTE.length}</span>
+                        ? <span className={cx('rounded px-1.5 py-0.5 text-[11px]', cov.sim + cov.parcial / 2 >= PACOTE.length ? 'bg-success/15 text-success-ink' : 'bg-muted text-muted-foreground')} title={`Dos ${PACOTE.length} itens do pacote Kzloo, ${cov.sim} completos${cov.parcial ? ` e ${cov.parcial} em parte` : ''}`}>cobre {cov.sim} de {PACOTE.length}{cov.parcial ? ` · ${cov.parcial} em parte` : ''}</span>
                         : <span className="rounded bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground" title="matriz por plano ainda não coletada: mostrando o plano de entrada">pacote não conferido</span>)}
                     </div>
                   </th>
@@ -143,7 +143,7 @@ export default function Lado({ slug, pr, m, lens }: { slug: string; pr: PlanRow[
                   </tr>
                   {open && rows.map((r) => (
                     <tr key={r.id} className="group">
-                      <td className={cx('sticky left-0 z-10 border-b border-r border-border bg-card px-3 py-1.5 text-[13px] group-hover:bg-muted', NAME_W)} title={r.title}>{r.label}</td>
+                      <td className={cx('sticky left-0 z-10 border-b border-r border-border bg-card px-3 py-1.5 align-top text-[13px] group-hover:bg-muted', NAME_W)} title={r.title}>{r.label}</td>
                       {r.cells.map((c, i) => {
                         const t = vsKz && cols[i] && !cols[i].isRef && kzIdx >= 0 ? r.tint?.[i] : undefined;
                         return <td key={cols[i].key} className={cx('border-b border-border px-3 py-1.5 align-top text-[13px] group-hover:bg-muted/40', COL_W, cols[i].isRef && 'bg-primary/5', t === 'plus' && 'bg-emerald-500/15', t === 'minus' && 'bg-red-500/15')}>{c}</td>;
@@ -158,7 +158,7 @@ export default function Lado({ slug, pr, m, lens }: { slug: string; pr: PlanRow[
         </table>
       </div>
       <p className="mt-2 text-[11px] text-muted-foreground">
-        Comparação justa: 1 profissional, mesmo ciclo, promoção marcada. “—” = não coletado (a re-coleta completa preenche limites, matriz e extras por plano). Ícone cinza claro = vem da matriz do concorrente, não do plano. Kzloo a {brl(kz?.monthly)} sem somar extras por uso.
+        Comparação justa: 1 profissional, mesmo ciclo, promoção marcada. “—” = o site não informa (ou não coletado). Ícone cinza claro = vem da matriz do concorrente, não do plano. Kzloo a {brl(kz?.monthly)} sem somar extras por uso.
       </p>
     </div>
   );
@@ -193,7 +193,7 @@ function buildGroups(cols: PlanRow[], m: Matrix | undefined, lens: Lens, _cuts: 
     R('desc', 'Desconto no anual', (p) => p.monthly && p.yearly != null && p.yearly < p.monthly ? `${Math.round((1 - p.yearly / p.monthly) * 100)}%` : dash, (p) => String(p.monthly && p.yearly != null ? Math.round((1 - p.yearly / p.monthly) * 100) : '')),
     R('outros', 'Outros ciclos', (p) => p.plan.otherCycles.length ? <div className="space-y-0.5 text-[12px]">{p.plan.otherCycles.map((c) => <div key={c.cycle}>{c.cycle}: {brl(c.total)}{c.perMonth != null && <span className="text-muted-foreground"> ({brl(c.perMonth)}/mês)</span>}</div>)}</div> : dash, (p) => p.plan.otherCycles.map((c) => `${c.cycle}${c.total}`).join()),
     R('padrao', 'Ciclo que o site mostra primeiro', (p) => p.data?.pageDefaultCycle ? <span className={cx(p.data.pageDefaultCycle === 'anual' && 'font-medium text-warning-ink')} title={p.data.pageDefaultCycle === 'anual' ? 'A vitrine mostra o preço do anual: cuidado ao comparar com o mensal de outro' : undefined}>{p.data.pageDefaultCycle}</span> : dash, (p) => p.data?.pageDefaultCycle ?? undefined),
-    R('promo', 'Promoção', (p) => p.plan.promo ? <div className="text-[12px]">{p.plan.promo.label}{p.plan.promo.until && <div className="text-muted-foreground">até {dmy(p.plan.promo.until)}</div>}</div> : p.regular && p.monthly && p.regular > p.monthly ? <span className="text-[12px]">cheio {brl(p.regular)}</span> : dash, (p) => p.plan.promo?.label ?? (p.regular && p.monthly && p.regular > p.monthly ? String(p.regular) : undefined)),
+    R('promo', 'Promoção', (p) => p.plan.promo ? <div className="text-[12px]"><span className="line-clamp-3" title={p.plan.promo.label}>{p.plan.promo.label}</span>{p.plan.promo.until && <div className="text-muted-foreground">até {dmy(p.plan.promo.until)}</div>}</div> : p.regular && p.monthly && p.regular > p.monthly ? <span className="text-[12px]">cheio {brl(p.regular)}</span> : dash, (p) => p.plan.promo?.label ?? (p.regular && p.monthly && p.regular > p.monthly ? String(p.regular) : undefined)),
     R('dia', 'R$ por dia', (p) => p.monthly ? brl(p.monthly / 30) : dash, (p) => String(p.monthly ? p.monthly / 30 : '')),
     R('custo', 'Custo real por mês', (p) => {
       const c = realCost(p, m, lens);
@@ -203,7 +203,11 @@ function buildGroups(cols: PlanRow[], m: Matrix | undefined, lens: Lens, _cuts: 
           <div><b className="tabular-nums">{brl(c.total)}</b></div>
           {c.added.length > 0 && <div className="text-[11px] text-muted-foreground">+ {c.added.join(' + ')}</div>}
           {c.unknown.length > 0 && <div className="text-[11px] text-warning-ink">+ {c.unknown.join(', ')} (preço não informado)</div>}
-          {c.perUse.length > 0 && <div className="text-[11px] text-muted-foreground">sem somar: {c.perUse.join(' · ')}</div>}
+          {c.perUse.length > 0 && (
+            <Tooltip><TooltipTrigger asChild>
+              <div className="w-fit cursor-help text-[11px] text-muted-foreground underline decoration-dotted underline-offset-2">+ {c.perUse.length === 1 ? '1 extra por uso' : `${c.perUse.length} extras por uso`} (não somados)</div>
+            </TooltipTrigger><TooltipContent className="max-w-80"><ul className="space-y-0.5">{c.perUse.map((x) => <li key={x}>{x}</li>)}</ul></TooltipContent></Tooltip>
+          )}
           {!p.isRef && !c.added.length && !c.unknown.length && !c.perUse.length && <div className="text-[11px] text-muted-foreground">= preço do plano</div>}
           {p.isRef && <div className="text-[11px] text-muted-foreground">sem extras por uso</div>}
         </div>
@@ -261,15 +265,15 @@ function buildGroups(cols: PlanRow[], m: Matrix | undefined, lens: Lens, _cuts: 
     R('addons', 'Add-ons e taxas', (p) => {
       if (p.isRef) return MUTED('sem extras por uso', 'decisão de 2026-10-08');
       const a = addOnsOf(p);
-      if (a.length) return <ul className="space-y-0.5 text-[12px]">{a.map((x) => <li key={x.name}>{x.name}: <b>{x.price != null ? `${x.price.toLocaleString('pt-BR', { minimumFractionDigits: x.price % 1 ? 2 : 0 })}${x.unit === 'percentual' ? '%' : ''}` : '?'}</b><span className="text-muted-foreground"> {x.unit === 'por-uso' ? `por ${x.per ?? 'uso'}` : x.unit === 'mes' ? '/mês' : x.unit === 'unico' ? 'único' : x.per ? `por ${x.per}` : ''}</span></li>)}</ul>;
+      if (a.length) return <ul className="space-y-0.5 text-[12px]">{a.slice(0, 3).map((x) => <li key={x.name}>{x.name}: {x.price != null ? <><b>{`${x.price.toLocaleString('pt-BR', { minimumFractionDigits: x.price % 1 ? 2 : 0 })}${x.unit === 'percentual' ? '%' : ''}`}</b><span className="text-muted-foreground"> {x.unit === 'por-uso' ? `por ${x.per ?? 'uso'}` : x.unit === 'mes' ? '/mês' : x.unit === 'unico' ? 'único' : x.per ? `por ${x.per}` : ''}</span></> : <span className="text-muted-foreground">preço não publicado</span>}</li>)}{a.length > 3 && <li className="text-muted-foreground" title={a.slice(3).map((x) => `${x.name}: ${x.price ?? 'preço não publicado'}`).join('\n')}>+{a.length - 3} outros</li>}</ul>;
       const t = p.data?.extras ?? [];
-      return t.length ? <div title="texto do site, ainda sem preço estruturado">{list(t, 4)}<div className="text-[10px] text-muted-foreground">em texto (legado)</div></div> : dash;
+      return t.length ? <div title="observações do site sobre cobranças, sem preço estruturado">{list(t, 3)}<div className="text-[10px] text-muted-foreground">observações do site</div></div> : dash;
     }, (p) => p.isRef ? '' : addOnsOf(p).map((x) => `${x.name}${x.price}`).join() || (p.data?.extras ?? []).join()),
   ] };
 
   // ---- condições
   const cond: GroupDef = { id: 'cond', label: 'Condições', rows: [
-    R('trial', 'Teste grátis', (p) => { if (p.isRef) return MUTED('sem teste (acesso por aprovação)'); const d = p.data; if (!d) return dash; if (d.trialDays) return <span>{d.trialDays} dias{d.trialNeedsCard === false ? ', sem cartão' : d.trialNeedsCard ? ', pede cartão' : ''}{d.trialPlanId && <div className="text-[11px] text-muted-foreground">do plano {d.trialPlanId}</div>}</span>; return d.trial ? <span className="text-[12px]">{d.trial}</span> : MUTED('sem teste informado'); }, (p) => p.isRef ? 'sem' : p.data?.trialDays ? `${p.data.trialDays}${p.data.trialNeedsCard}` : p.data?.trial ?? undefined),
+    R('trial', 'Teste grátis', (p) => { if (p.isRef) return MUTED('sem teste (acesso por aprovação)'); const d = p.data; if (!d) return dash; if (d.trialDays) return <span>{d.trialDays} dias{d.trialNeedsCard === false ? ', sem cartão' : d.trialNeedsCard ? ', pede cartão' : ''}{d.trialPlanId && d.plans.length > 1 && <div className="text-[11px] text-muted-foreground">do plano {d.plans.find((x) => x.id === d.trialPlanId)?.name ?? d.trialPlanId}</div>}</span>; return d.trial ? <span className="text-[12px]">{d.trial}</span> : MUTED('sem teste informado'); }, (p) => p.isRef ? 'sem' : p.data?.trialDays ? `${p.data.trialDays}${p.data.trialNeedsCard}` : p.data?.trial ?? undefined),
     R('refund', 'Garantia / reembolso', (p) => { if (p.isRef) return MUTED('a definir'); const d = p.data; if (!d) return dash; if (d.refundDays) return <span>{d.refundDays} dias{d.refundScope && <div className="text-[11px] text-muted-foreground">{d.refundScope}</div>}</span>; return d.guarantee ? <span className="text-[12px]">{d.guarantee}</span> : dash; }, (p) => p.isRef ? 'a definir' : p.data?.refundDays ? String(p.data.refundDays) : p.data?.guarantee ?? undefined),
     R('commit', 'Fidelidade', (p) => p.data?.commitment ? COMMIT_LABEL[p.data.commitment] : dash, (p) => p.data?.commitment ?? undefined),
     R('pay', 'Formas de pagamento', (p) => p.data?.paymentMethods?.length ? p.data.paymentMethods.map((x) => PAY_LABEL[x]).join(', ') : dash, (p) => p.data?.paymentMethods?.join()),

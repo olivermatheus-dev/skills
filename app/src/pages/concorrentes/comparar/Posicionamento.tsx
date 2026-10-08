@@ -8,6 +8,7 @@ import type { ModuleDataOf } from '../../../../../schema/analysis';
 import { FillBox, REF_ID, SortTable, useFillHeight, type Col, type MarketRow } from '../../../components/competitors/area';
 import { Avatar, Chips } from '../../../components/competitors/lib';
 import { Badge, cx } from '../../../components/kit';
+import { COMMIT_LABEL } from './precosLib';
 
 type Lp = ModuleDataOf<'landing'>;
 type Pr = ModuleDataOf<'precos'>;
@@ -126,11 +127,11 @@ function Estrutura({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; re
       <div className="mb-2 flex flex-wrap items-center gap-3 text-xs">
         <Chips value={cf} onChange={setCf} options={[{ value: 'todas', label: 'Todas', count: lines.length }, ...(['padrao', 'comum', 'rara'] as Cls[]).map((c) => ({ value: c, label: CLS[c].label, count: counts(c) }))]} />
         <Chips value={ord} onChange={setOrd} options={[{ value: 'pos', label: 'Posição típica' }, { value: 'freq', label: 'Frequência' }]} />
-        <span className="text-muted-foreground">Padrão ≥ 70% · Comum 40–69% · Rara &lt; 40% · número = posição da seção na página · tom: mais escuro = mais perto do topo · rodapé fora da conta</span>
+        <span className="text-muted-foreground" title="Padrão: 70% ou mais dos concorrentes têm · Comum: 40 a 69% · Rara: menos de 40%. Rodapé fica fora da conta.">número = em que posição a seção aparece na página (mais escuro = mais perto do topo) · Padrão ≥ 70% · Comum 40–69% · Rara &lt; 40%</span>
       </div>
       <p className="mb-2 text-[11px] text-muted-foreground">
         Mais seções: {ranking.slice(0, 3).map(([n, c]) => `${n} ${c}`).join(' · ')}. Menos: {ranking.slice(-2).reverse().map(([n, c]) => `${n} ${c}`).join(' · ')}.
-        {!kz && ' A Kzloo ainda não tem coluna: falta registrar as seções da carta-base em referencia.json (landing.sections).'} Linha "Prova social (qualquer)": o número é a quantidade de blocos de depoimentos, números, logos ou prova social.
+        {!kz && ' A Kzloo ainda não tem coluna (falta mapear as seções da sua página).'} Na linha “Prova social (qualquer)” o número é quantos blocos de prova a página tem.
       </p>
       <div ref={boxRef} style={{ height: boxH }} className="bg-card border border-border rounded-xl overflow-auto">
         <table className="text-sm border-separate border-spacing-0">
@@ -154,7 +155,7 @@ function Estrutura({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; re
               <tr key={l.kind} className={cx('hover:bg-muted/30', l.any && 'bg-muted/20')}>
                 <td className="sticky left-0 z-10 bg-card px-3 py-1.5 font-medium whitespace-nowrap border-b border-border">{l.label}</td>
                 <td className="px-2 py-1.5 border-b border-border">
-                  <div className="flex items-center gap-2 w-32"><div className="h-1.5 w-16 rounded-full bg-muted overflow-hidden"><div className="h-full bg-primary" style={{ width: `${l.pct}%` }} /></div><span className="text-xs tabular-nums text-muted-foreground">{l.n}/{rows.length} · {l.pct}%</span></div>
+                  <div className="flex items-center gap-2 w-36"><div className="h-1.5 w-14 shrink-0 rounded-full bg-muted overflow-hidden"><div className="h-full bg-primary" style={{ width: `${l.pct}%` }} /></div><span className="whitespace-nowrap text-xs tabular-nums text-muted-foreground">{l.n}/{rows.length} · {l.pct}%</span></div>
                 </td>
                 <td className="px-2 py-1.5 border-b border-border"><span className={cx('text-[10px] font-medium px-1.5 py-0.5 rounded-full', CLS[l.cls].cls)}>{CLS[l.cls].label}</span></td>
                 {cols.map((r) => {
@@ -184,7 +185,7 @@ function Promessa({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; ref
       <div className="mb-2 flex items-center gap-3">
         <label className="relative"><Search className="absolute left-2 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar palavra (IA, WhatsApp…)" className="h-8 w-64 rounded-md border border-border bg-card pl-7 pr-2 text-xs outline-none focus:border-primary" /></label>
-        <span className="text-xs text-muted-foreground">{view.length} promessas · o chip de ângulo (dor, resultado, categoria…) entra quando o campo existir na coleta</span>
+        <span className="text-xs text-muted-foreground">{view.length} promessas{refRow ? ' (a sua primeiro)' : ''} · a frase principal do topo de cada página, com o subtítulo e o botão</span>
       </div>
       <FillBox>
         <div className="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
@@ -206,9 +207,9 @@ function Promessa({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; ref
 }
 
 // ---------- Porta de entrada ----------
-type Door = 'teste' | 'conta' | 'demo' | 'contato' | 'outro';
+type Door = 'teste' | 'conta' | 'demo' | 'pedido' | 'contato' | 'outro';
 const DOOR: Record<Door, { label: string; color?: string }> = {
-  teste: { label: 'Testar grátis', color: '#16a34a' }, conta: { label: 'Criar conta grátis', color: '#16a34a' }, demo: { label: 'Demonstração', color: '#d97706' }, contato: { label: 'Falar com alguém', color: '#d97706' }, outro: { label: 'Outro' },
+  teste: { label: 'Testar grátis', color: '#16a34a' }, conta: { label: 'Criar conta grátis', color: '#16a34a' }, demo: { label: 'Demonstração', color: '#d97706' }, pedido: { label: 'Pedir acesso', color: '#d97706' }, contato: { label: 'Falar com alguém', color: '#d97706' }, outro: { label: 'Outro' },
 };
 const doorOf = (cta?: string | null): Door | undefined => {
   if (!cta) return undefined;
@@ -216,6 +217,7 @@ const doorOf = (cta?: string | null): Door | undefined => {
   if (/conta/.test(c) && /gr[aá]t/.test(c)) return 'conta';
   if (/gr[aá]t|teste|experimente|testar|come[cç]ar/.test(c)) return 'teste';
   if (/demonstra/.test(c)) return 'demo';
+  if (/acesso/.test(c) && /pedir|solicit|quero/.test(c)) return 'pedido';
   if (/consultor|whatsapp|falar|pedir|acesso/.test(c)) return 'contato';
   return 'outro';
 };
@@ -228,16 +230,18 @@ function Entrada({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; refR
   const cols: Col<MarketRow>[] = [
     { k: 'name', label: 'Concorrente', v: (r) => r.c.data.name, className: 'min-w-44', render: (r) => r.c.data.id === REF_ID ? <span className="inline-flex items-center gap-1.5 font-semibold text-primary-ink"><Avatar name={r.c.data.name} size={20} className="!ring-0" />{r.c.data.name}<span className="text-[10px] px-1.5 rounded-full bg-primary text-primary-foreground">você</span></span> : who(slug, r) },
     { k: 'cta', label: 'CTA principal', v: (r) => cleanCta(lp(r)?.hero.cta), render: (r) => { const c = cleanCta(lp(r)?.hero.cta); return c ? <span className="text-xs px-2 py-0.5 rounded bg-primary/10 text-primary-ink whitespace-nowrap">{c}</span> : dash; } },
-    { k: 'tipo', label: 'Tipo', title: 'classificado pelo texto do CTA', v: (r) => doorRow(r), render: (r) => { const d = doorRow(r); return d ? <Badge color={DOOR[d].color}>{DOOR[d].label}</Badge> : dash; } },
-    { k: 'sec', label: 'Outros CTAs', render: (r) => { const main = cleanCta(lp(r)?.hero.cta); const o = (lp(r)?.ctas ?? []).filter((c) => c !== main && !main.startsWith(c)); return o.length ? <div className="flex flex-wrap gap-1 max-w-80">{o.slice(0, 4).map((c) => <span key={c} className="text-[11px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{c}</span>)}</div> : dash; } },
-    { k: 'trial', label: 'Teste', v: (r) => r.ov?.trial ?? undefined, render: (r) => <span className="block max-w-56 truncate" title={r.ov?.trial ?? ''}>{r.ov?.trial ?? '—'}</span> },
+    { k: 'tipo', label: 'Tipo', title: 'classificado pelo texto do CTA', v: (r) => doorRow(r), render: (r) => { const d = doorRow(r); return d ? <span className="whitespace-nowrap"><Badge color={DOOR[d].color}>{DOOR[d].label}</Badge></span> : dash; } },
+    { k: 'sec', label: 'Outros CTAs', render: (r) => { const main = cleanCta(lp(r)?.hero.cta); const o = (lp(r)?.ctas ?? []).filter((c) => c !== main && !main.startsWith(c)); return o.length ? <div className="flex flex-wrap gap-1 max-w-72">{o.slice(0, 3).map((c) => <span key={c} className="whitespace-nowrap text-[11px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{c}</span>)}{o.length > 3 && <span className="text-[11px] text-muted-foreground" title={o.slice(3).join('\n')}>+{o.length - 3}</span>}</div> : dash; } },
+    { k: 'trial', label: 'Teste', v: (r) => (r.res.precos?.data as Pr | undefined)?.trialDays ?? undefined, render: (r) => { const d = r.res.precos?.data as Pr | undefined; const t = d?.trialDays ? `${d.trialDays} dias${d.trialNeedsCard === false ? ', sem cartão' : ''}` : r.ov?.trial; return <span className="block max-w-40 truncate" title={r.ov?.trial ?? ''}>{t ?? '—'}</span>; } },
     { k: 'free', label: 'Plano grátis', v: (r) => (r.ov?.priceModel === 'freemium' ? 1 : 0), render: (r) => (r.ov?.priceModel === 'freemium' ? <Badge color="#16a34a">sim</Badge> : dash) },
-    { k: 'price', label: 'Preço na página', v: (r) => (lp(r)?.sections.some((s) => s.type === 'precos') ? 1 : 0), render: (r) => (lp(r)?.sections.some((s) => s.type === 'precos') ? 'sim' : r.c.data.id === REF_ID ? dash : <span className="text-muted-foreground">não</span>) },
-    { k: 'guar', label: 'Garantia / fidelidade', v: (r) => (r.res.precos?.data as Pr | undefined)?.guarantee ?? undefined, render: (r) => { const g = (r.res.precos?.data as Pr | undefined)?.guarantee; return <span className="block max-w-56 truncate text-muted-foreground" title={g ?? ''}>{g ?? '—'}</span>; } },
+    { k: 'price', label: 'Preço na página', title: 'a página inicial mostra os preços', v: (r) => (lp(r)?.sections.some((s) => s.type === 'precos') ? 1 : 0), render: (r) => (lp(r)?.sections.some((s) => s.type === 'precos') ? 'sim' : r.c.data.id === REF_ID ? dash : <span className="text-muted-foreground">não</span>) },
+    { k: 'guar', label: 'Garantia', v: (r) => (r.res.precos?.data as Pr | undefined)?.refundDays || undefined, render: (r) => { const d = r.res.precos?.data as Pr | undefined; return d?.refundDays ? <span className="whitespace-nowrap" title={d.guarantee ?? ''}>{d.refundDays} dias</span> : <span className="text-muted-foreground" title={d?.guarantee ?? 'sem garantia informada'}>—</span>; } },
+    { k: 'fid', label: 'Fidelidade', v: (r) => (r.res.precos?.data as Pr | undefined)?.commitment ?? undefined, render: (r) => { const c = (r.res.precos?.data as Pr | undefined)?.commitment; return c && c !== 'nao-informado' ? <span className={cx('whitespace-nowrap text-xs', c !== 'sem-fidelidade' && 'font-medium text-warning-ink')}>{COMMIT_LABEL[c]}</span> : dash; } },
   ];
+  const refCta = refRow ? cleanCta(lp(refRow)?.hero.cta) : '';
   return (
     <div>
-      <p className="mb-2 text-xs text-muted-foreground">{free} de {rows.length} levam a teste ou conta grátis e {demo} a demonstração.{refRow && ' A Kzloo (“Pedir meu acesso”, com aprovação manual) é a porta com mais fricção: vale explicar o motivo na própria página.'}</p>
+      <p className="mb-2 text-xs text-muted-foreground">{free} de {rows.length} levam a teste ou conta grátis e {demo} a demonstração.{refCta && ` A Kzloo (“${refCta}”, sem teste grátis) é a porta com mais fricção: vale explicar o motivo na própria página.`}</p>
       <SortTable fill rows={rows} pin={refRow ? [refRow] : []} cols={cols} rowKey={(r) => r.c.data.id} initial={{ k: 'name', dir: 1 }} />
     </div>
   );
@@ -258,7 +262,12 @@ function Prova({ slug, rows }: { slug: string; rows: MarketRow[] }) {
   const biggest = (r: MarketRow) => Math.max(0, ...(lp(r)?.socialProof ?? []).filter((s) => cls(s) === 'base').map(bigNum));
   const cols: Col<MarketRow>[] = [
     { k: 'name', label: 'Concorrente', v: (r) => r.c.data.name, className: 'min-w-40', render: (r) => who(slug, r) },
-    { k: 'big', label: 'Maior base declarada', num: true, v: (r) => biggest(r) || undefined, render: (r) => { const b = biggest(r); return b ? <b>{b >= 1e3 ? `+${(b / 1e3).toLocaleString('pt-BR')} mil` : b}</b> : dash; } },
+    { k: 'big', label: 'Maior base declarada', num: true, title: 'o maior número de usuários que a página declara (a unidade é a deles: profissionais, psicólogas, clínicas)', v: (r) => biggest(r) || undefined, render: (r) => {
+      const b = biggest(r); if (!b) return dash;
+      const src = (lp(r)?.socialProof ?? []).find((s) => cls(s) === 'base' && bigNum(s) === b);
+      const unit = src?.match(/(profissionais|psic[oó]log[ao]s?(?: e psic[oó]log[ao]s)?|usu[aá]rios|terapeutas|cl[ií]nicas)/i)?.[1];
+      return <span className="whitespace-nowrap" title={src}><b>{b >= 1e3 ? `+${(b / 1e3).toLocaleString('pt-BR')} mil` : b}</b>{unit && <span className="ml-1 text-xs text-muted-foreground">{unit.toLowerCase()}</span>}</span>;
+    } },
     ...[...PTYPES, { id: 'outro', label: 'Outros' }].map((t): Col<MarketRow> => ({
       k: t.id, label: t.label, className: 'min-w-36 align-top',
       render: (r) => { const it = (lp(r)?.socialProof ?? []).filter((s) => cls(s) === t.id); return it.length ? <div className="flex flex-col gap-0.5">{it.map((s) => <span key={s} className="text-xs leading-snug">{s}</span>)}</div> : <span className="text-muted-foreground/40">·</span>; },
@@ -274,7 +283,7 @@ function Prova({ slug, rows }: { slug: string; rows: MarketRow[] }) {
 }
 
 // ---------- Tom ----------
-const ADJ: [string, RegExp][] = [['institucional', /institucion/i], ['corporativo', /corporativ|empresarial/i], ['acolhedor', /acolhed|cuidad|calmo|humano/i], ['técnico', /t[eé]cnic|cient[ií]f|compliance|conformidade/i], ['direto', /direto|pr[aá]tic|objetiv/i], ['sóbrio', /s[oó]brio/i], ['confiante', /confiante|l[ií]der/i]];
+const ADJ: [string, RegExp][] = [['institucional', /institucion/i], ['corporativo', /corporativ|empresarial/i], ['acolhedor', /acolhed|cuidad|calm[oa]|humano/i], ['técnico', /t[eé]cnic|cient[ií]f|compliance|conformidade/i], ['direto', /diret[oa]|pr[aá]tic|objetiv/i], ['sóbrio', /s[oó]brio/i], ['confiante', /confiante|l[ií]der/i]];
 function Tom({ slug, rows, refRow }: { slug: string; rows: MarketRow[]; refRow: MarketRow | null }) {
   const all = refRow ? [refRow, ...rows] : rows;
   const adj = (t?: string | null) => ADJ.filter(([, re]) => re.test(t ?? '')).map(([a]) => a);
@@ -302,7 +311,7 @@ const THEMES: [string, string, RegExp][] = [
   ['preco', 'Preço e ancoragem', /pre[cç]o|plano|R\$|desconto|promo|garantia|gr[aá]tis|teste|cart[aã]o|anual/i],
   ['prova', 'Prova e autoridade', /prova|depoimento|n[uú]mero|mil |avalia|selo|crp|cliente|case/i],
   ['demo', 'Demonstração e produto', /demonstra|v[ií]deo|tour|interface|print|mockup|simula|calculadora/i],
-  ['ia', 'IA com limite', /\bIA\b|intelig[eê]ncia|transcri|cr[eé]dito/i],
+  ['ia', 'IA', /\bIA\b|intelig[eê]ncia|transcri|cr[eé]dito/i],
   ['objecao', 'Quebra de objeção', /lgpd|seguran|migra|suporte|cancel|fidelidade|sem |obje[cç]/i],
   ['seo', 'SEO e conteúdo', /seo|blog|google|artigo|conte[uú]do/i],
 ];
@@ -316,7 +325,7 @@ function Copiar({ slug, rows }: { slug: string; rows: MarketRow[] }) {
     <div>
       <div className="mb-2 flex flex-wrap items-center gap-3">
         <Chips value={th} onChange={setTh} options={[{ value: 'todos', label: 'Todos', count: items.length }, ...[...THEMES.map(([id]) => id), 'outros'].map((id) => ({ value: id, label: label(id), count: items.filter((i) => i.th === id).length })).filter((o) => o.count)]} />
-        <span className="text-xs text-muted-foreground">o que cada página faz que vale copiar ou observar · tema por palavras-chave</span>
+        <span className="text-xs text-muted-foreground">Ideias que cada página usa e valem copiar ou observar · tema separado por palavras-chave</span>
       </div>
       <FillBox>
         <div className="bg-card border border-border rounded-xl divide-y divide-border">

@@ -1,5 +1,5 @@
 // Comparar > Preços > Régua: faixa de números, régua (cada plano é um ponto sobre as faixas de preço calculadas), tabela de planos e resumo por faixa.
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { Crown, Gift, Percent, Plus, Scale, Star, Tag, TrendingUp } from 'lucide-react';
 import { FillBox, SortTable, StatStrip, type Col, type Stat } from '../../../components/competitors/area';
 import { Chips } from '../../../components/competitors/lib';
@@ -8,7 +8,7 @@ import type { Matrix } from '../../../../../schema/matrix';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cx } from '../../../components/kit';
 import {
-  BANDS, bandOf, brl, discount, featureCount, hasMatrix, limitText, median, perSeat, planCell, seatsText, statsOf, valueOf,
+  BANDS, bandOf, brl, discount, featureCount, hasMatrix, limitText, mean, median, perSeat, planCell, seatsText, statsOf, valueOf,
   type Band, type Cuts, type Lens, type PlanRow,
 } from './precosLib';
 import { BAND_CLS, BandChip, PriceTag, Who, bandLabel, dash } from './precosUi';
@@ -29,18 +29,23 @@ export default function Regua({ slug, pr, m, lens, onOpen }: { slug: string; pr:
   const inBase = (p: PlanRow) => !p.isRef && (base === 'todos' || p.audience === base);
 
   const topSoloMed = median(st.top);
+  const entryMed = median(st.entry), entryMean = mean(st.entry);
   const kzBand = kz && cuts ? bandOf(kz.monthly!, cuts) : undefined;
-  const cyc = lens.cycle === 'anual' ? ' (anual eq.)' : '';
+  const cyc = lens.cycle === 'anual' ? ' · anual eq.' : '';
+  const nCompAll = new Set(pr.filter((p) => !p.isRef).map((p) => p.compId)).size;
+  const outSolo = nCompAll - st.entry.length;
+  const vs = (base?: number) => (kz?.monthly != null && base ? `${kz.monthly >= base ? '+' : ''}${Math.round((kz.monthly / base - 1) * 100)}%` : '—');
   const stats: Stat[] = [
-    { label: 'Entrada mediana', icon: Tag, value: st.entry.length ? brl(median(st.entry)) : '—', sub: `${st.entry.length} concorrentes${cyc}`, title: `Mediana do menor plano solo pago de cada concorrente (${st.entry.length}). Média: ${brl(st.entry.length ? st.entry.reduce((a, b) => a + b, 0) / st.entry.length : undefined)}.` },
-    { label: 'Plano solo mediano', icon: Scale, value: brl(st.med), sub: `média ${brl(st.mean)} · ${cuts?.n ?? 0} planos`, title: 'Mediana de todos os planos solo pagos (1 profissional). Os quartis desta amostra definem as faixas da régua.' },
-    { label: 'Topo solo mediano', icon: TrendingUp, value: brl(topSoloMed), sub: `${st.top.length} concorrentes${cyc}`, title: 'Mediana do plano solo mais caro de cada concorrente.' },
+    { label: 'Entrada mediana', icon: Tag, value: st.entry.length ? brl(entryMed) : '—', sub: `média ${brl(entryMean)} · ${st.entry.length} concorrentes${cyc}`,
+      title: `Menor plano pago para 1 profissional de cada concorrente (${st.entry.length}).${outSolo > 0 ? ` ${outSolo} fora por não ter plano para 1 profissional (só equipe).` : ''}` },
+    { label: 'Plano solo mediano', icon: Scale, value: brl(st.med), sub: `média ${brl(st.mean)} · ${cuts?.n ?? 0} planos${cyc}`, title: 'Mediana de todos os planos pagos para 1 profissional. Os quartis desta amostra definem as faixas da régua.' },
+    { label: 'Topo solo mediano', icon: TrendingUp, value: brl(topSoloMed), sub: `${st.top.length} concorrentes${cyc}`, title: 'Mediana do plano mais caro para 1 profissional de cada concorrente.' },
     { label: 'Desconto anual mediano', icon: Percent, value: st.discounts.length ? `${Math.round(median(st.discounts)!)}%` : '—', sub: `${st.discounts.length} de ${new Set(pr.filter((p) => !p.isRef).map((p) => p.compId)).size} têm anual`, title: 'Derivado: 1 − anual equivalente ÷ mensal, média por concorrente e depois a mediana. Quem não tem anual não entra (nunca se usa o mensal no lugar).' },
-    { label: 'Teste grátis', icon: Gift, value: `${st.trial.n}/${st.trial.of}`, sub: `${st.trial.free} com plano grátis para sempre`, title: 'Concorrentes com teste grátis declarado sobre os que têm preço coletado.' },
+    { label: 'Teste grátis', icon: Gift, value: `${st.trial.n}/${st.trial.of}`, sub: `${st.trial.free} com plano grátis para sempre`, title: 'Concorrentes com teste grátis com prazo (dias) sobre os que têm preço coletado. Plano grátis para sempre conta à parte, não como teste.' },
     kz && kz.monthly != null ? {
       label: 'Kzloo', icon: Crown, value: brl(kz.monthly),
-      sub: kzBand && topSoloMed ? `${bandLabel(kzBand)} · ${kz.monthly >= topSoloMed ? '+' : ''}${Math.round((kz.monthly / topSoloMed - 1) * 100)}% vs topo solo` : 'sem comparação',
-      title: 'Preço de referência da copy (R$ 129/mês, sem somar extras por uso). Faixa e % calculados contra a amostra acima, no ciclo mensal.',
+      sub: kzBand && entryMed ? `${bandLabel(kzBand)} · ${vs(entryMed)} vs entrada` : 'sem comparação',
+      title: `Preço de referência da copy (sem somar extras por uso). Contra a entrada mediana ${vs(entryMed)}, contra o topo solo mediano ${vs(topSoloMed)}. Faixa calculada pelos quartis dos planos para 1 profissional, no ciclo mensal.`,
     } : { label: 'Kzloo', icon: Crown, value: '—', sub: 'sem preço de referência' },
   ];
   if (lens.cycle === 'anual' && stats[5].value !== '—') stats[5] = { ...stats[5], sub: 'anual ainda a definir', title: 'A Kzloo não tem ciclo anual definido (BUSINESS: % a definir).' };
@@ -74,6 +79,7 @@ export default function Regua({ slug, pr, m, lens, onOpen }: { slug: string; pr:
             <span className="inline-flex items-center gap-1"><i className="size-2.5 rounded-full bg-foreground" />solo</span>
             <span className="inline-flex items-center gap-1"><i className="size-2.5 rounded-full border-2 border-foreground" />equipe</span>
             <span className="inline-flex items-center gap-1"><i className="size-3 rounded-full ring-2 ring-primary ring-offset-1 ring-offset-card bg-foreground" />recomendado</span>
+            <span className="inline-flex items-center gap-1"><i className="h-3 w-px bg-foreground/50" />mediana</span>
             <span className="inline-flex items-center gap-1"><i className="h-3 w-px border-l border-dashed border-foreground/60" />média</span>
           </span>
         </div>
@@ -86,13 +92,18 @@ export default function Regua({ slug, pr, m, lens, onOpen }: { slug: string; pr:
         )}
       </section>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Chips value={low} onChange={setLow} options={[{ value: 'planos', label: 'Planos' }, { value: 'faixas', label: 'Por faixa' }]} />
-        {low === 'planos' && <span className="text-xs text-muted-foreground">Clique no plano para abri-lo no Lado a lado.</span>}
-        {low === 'faixas' && cuts && <span className="text-xs text-muted-foreground">Cortes: {brl(cuts.q1)} · {brl(cuts.med)} · {brl(cuts.q3)} (quartis de {cuts.n} planos solo pagos)</span>}
-      </div>
-      {low === 'planos' && <Tabela slug={slug} pr={pr} m={m} lens={lens} base={base} band={band} onOpen={onOpen} />}
-      {low === 'faixas' && <PorFaixa pr={pr.filter((p) => !p.isRef && p.paid && p.audience === 'solo')} m={m} lens={lens} cuts={cuts} band={band} />}
+      {/* uma linha só: alternância Planos/Por faixa + filtros da tabela (economiza uma faixa de altura) */}
+      {low === 'planos' && <Tabela slug={slug} pr={pr} m={m} lens={lens} base={base} band={band} onOpen={onOpen}
+        lead={<Chips value={low} onChange={setLow} options={[{ value: 'planos', label: 'Planos' }, { value: 'faixas', label: 'Por faixa' }]} />} />}
+      {low === 'faixas' && (
+        <>
+          <div className="flex flex-wrap items-center gap-3">
+            <Chips value={low} onChange={setLow} options={[{ value: 'planos', label: 'Planos' }, { value: 'faixas', label: 'Por faixa' }]} />
+            {cuts && <span className="text-xs text-muted-foreground">Cortes: {brl(cuts.q1)} · {brl(cuts.med)} · {brl(cuts.q3)} (quartis de {cuts.n} planos para 1 profissional)</span>}
+          </div>
+          <PorFaixa pr={pr.filter((p) => !p.isRef && p.paid && p.audience === 'solo')} m={m} lens={lens} cuts={cuts} band={band} />
+        </>
+      )}
     </div>
   );
 }
@@ -129,7 +140,7 @@ function Ruler({ slug, comps, kz, cuts, mean, lens, band, onOpen }: {
           {kzOn && <div className="absolute inset-y-0 w-px bg-primary/70" style={{ left: pct(kz!.monthly!) }} />}
         </div>
         {kz && (
-          <div className="relative flex h-8 items-center border-b border-primary/30">
+          <div className="relative flex h-7 items-center border-b border-primary/30">
             <div className="shrink-0 truncate pr-2" style={{ width: LABEL_W }}><Who slug={slug} p={kz} size={18} /></div>
             <div className="relative mr-3 h-full flex-1">
               {kzOn ? (
@@ -146,7 +157,7 @@ function Ruler({ slug, comps, kz, cuts, mean, lens, band, onOpen }: {
         {comps.map((ps) => {
           const lo = valueOf(ps[0], lens)!, hi = valueOf(ps[ps.length - 1], lens)!;
           return (
-            <div key={ps[0].compId} className="relative flex h-7 items-center border-b border-border/40 last:border-0">
+            <div key={ps[0].compId} className="relative flex h-6 items-center border-b border-border/40 last:border-0">
               <div className="shrink-0 truncate pr-2 text-[13px]" style={{ width: LABEL_W }}><Who slug={slug} p={ps[0]} size={18} /></div>
               <div className="relative mr-3 h-full flex-1">
                 {ps.length > 1 && <span className="absolute top-1/2 h-px -translate-y-1/2 bg-foreground/35" style={{ left: pct(lo), width: `${(Math.min(hi, AXIS) - lo) / AXIS * 100}%` }} />}
@@ -159,7 +170,7 @@ function Ruler({ slug, comps, kz, cuts, mean, lens, band, onOpen }: {
       {/* eixo */}
       <div className="flex" style={{ paddingLeft: LABEL_W }}>
         <div className="relative mr-3 h-4 flex-1 text-[10px] text-muted-foreground tabular-nums">
-          {[0, 50, 100, 150, 200].map((t) => <span key={t} className={cx('absolute top-0.5', t === 0 ? '' : t === AXIS ? '-translate-x-full' : '-translate-x-1/2')} style={{ left: pct(t) }}>{t === AXIS ? 'R$ 200' : t}</span>)}
+          {[0, 50, 100, 150, 200].map((t) => <span key={t} className={cx('absolute top-0.5 whitespace-nowrap', t === 0 ? '' : t === AXIS ? '-translate-x-full' : '-translate-x-1/2')} style={{ left: pct(t) }}>{t === AXIS ? 'R$ 200' : t}</span>)}
         </div>
       </div>
     </div>
@@ -193,7 +204,7 @@ function Dot({ p, lens, band, onOpen }: { p: PlanRow; lens: Lens; band?: Band; o
 }
 
 // ---------- tabela de planos ----------
-function Tabela({ slug, pr, m, lens, base, band, onOpen }: { slug: string; pr: PlanRow[]; m: Matrix | undefined; lens: Lens; base: Base; band: (p: PlanRow) => Band | undefined; onOpen: (key: string) => void }) {
+function Tabela({ slug, pr, m, lens, base, band, onOpen, lead }: { lead?: ReactNode; slug: string; pr: PlanRow[]; m: Matrix | undefined; lens: Lens; base: Base; band: (p: PlanRow) => Band | undefined; onOpen: (key: string) => void }) {
   const [fb, setFb] = useState<'todas' | Band>('todas');
   const kz = pr.filter((p) => p.isRef);
   const rows = pr.filter((p) => !p.isRef && (base === 'todos' || p.audience === base) && (fb === 'todas' || band(p) === fb));
@@ -211,12 +222,12 @@ function Tabela({ slug, pr, m, lens, base, band, onOpen }: { slug: string; pr: P
     { k: 'disc', label: 'Desc.', num: true, title: 'desconto do anual sobre o mensal (derivado)', v: (p) => discount(p), render: (p) => { const d = discount(p); return d != null ? `${d}%` : dash; } },
     { k: 'day', label: 'R$/dia', num: true, v: (p) => (p.monthly ? p.monthly / 30 : undefined), render: (p) => (p.monthly ? brl(p.monthly / 30) : dash) },
     { k: 'lim', label: 'Limites', render: (p) => p.plan.limits.length ? (
-      <span className="flex max-w-56 flex-wrap gap-1">{p.plan.limits.slice(0, 2).map((l, i) => <span key={i} className="rounded bg-muted px-1.5 py-0.5 text-[11px] whitespace-nowrap">{limitText(l)}</span>)}{p.plan.limits.length > 2 && <span className="text-[11px] text-muted-foreground" title={p.plan.limits.map(limitText).join('\n')}>+{p.plan.limits.length - 2}</span>}</span>
+      <span className="flex flex-nowrap items-center gap-1">{p.plan.limits.slice(0, 2).map((l, i) => <span key={i} className="rounded bg-muted px-1.5 py-0.5 text-[11px] whitespace-nowrap">{limitText(l)}</span>)}{p.plan.limits.length > 2 && <span className="text-[11px] text-muted-foreground" title={p.plan.limits.map(limitText).join('\n')}>+{p.plan.limits.length - 2}</span>}</span>
     ) : <span className="text-muted-foreground" title="sem limite informado ou não coletado">—</span> },
     { k: 'feat', label: 'Funcionalidades', num: true, title: 'funcionalidades da matriz que o plano tem (sim ou parcial)', v: (p) => (hasMatrix(p) ? featureCount(p, m) : undefined), render: (p) => (hasMatrix(p) ? <span className="tabular-nums">{featureCount(p, m)}<span className="text-muted-foreground">/{total}</span></span> : <span className="text-muted-foreground" title="matriz por plano ainda não coletada">—</span>) },
     { k: 'add', label: 'Extras', render: (p) => { const a = addOnsOf(p); return a.length ? (
       <Tooltip><TooltipTrigger asChild><span className="inline-flex items-center gap-0.5 text-xs text-warning-ink"><Plus className="size-3" />{a.length}</span></TooltipTrigger>
-        <TooltipContent className="space-y-0.5">{a.map((x) => <div key={x.name}>{x.name}: {x.price != null ? `${x.price.toLocaleString('pt-BR')}${x.unit === 'percentual' ? '%' : ''}${x.unit === 'por-uso' ? ` por ${x.per ?? 'uso'}` : x.unit === 'mes' ? '/mês' : ''}` : 'preço não informado'}</div>)}</TooltipContent></Tooltip>
+        <TooltipContent className="space-y-0.5">{a.map((x) => <div key={x.name}>{x.name}: {x.price != null ? `${x.price.toLocaleString('pt-BR')}${x.unit === 'percentual' ? '%' : ''}${x.unit === 'por-uso' ? ` por ${x.per ?? 'uso'}` : x.unit === 'mes' ? '/mês' : x.unit === 'unico' ? ' único' : ''}` : 'preço não publicado'}</div>)}</TooltipContent></Tooltip>
     ) : dash; } },
     { k: 'trial', label: 'Teste', v: (p) => p.data?.trialDays ?? undefined, render: (p) => { const d = p.data; if (p.isRef) return <span className="text-xs text-muted-foreground" title="acesso por aprovação manual">sem teste</span>; return d?.trialDays ? <span className="whitespace-nowrap text-xs" title={d.trial ?? ''}>{d.trialDays} d{d.trialNeedsCard === false ? ' · sem cartão' : d.trialNeedsCard ? ' · cartão' : ''}</span> : d?.trial ? <span className="block max-w-36 truncate text-xs" title={d.trial}>{d.trial}</span> : dash; } },
   ];
@@ -224,8 +235,9 @@ function Tabela({ slug, pr, m, lens, base, band, onOpen }: { slug: string; pr: P
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center gap-2">
+        {lead}
         <Chips value={fb} onChange={setFb} options={[{ value: 'todas', label: 'Todas as faixas' }, ...BANDS.map((b) => ({ value: b.id, label: b.label }))]} />
-        <span className="text-xs text-muted-foreground">{rows.length} planos{hidden > 0 && ` · ${hidden} de outra base escondidos (troque a Base na régua)`}</span>
+        <span className="text-xs text-muted-foreground" title="Clique no nome do plano para abri-lo no Lado a lado.">{rows.length} planos{hidden > 0 && ` · ${hidden} de equipe/solo escondidos (troque a Base na régua)`} · clique no plano para comparar</span>
       </div>
       <SortTable fill rows={rows} pin={kz} cols={cols} rowKey={(p) => p.key} initial={{ k: 'monthly', dir: 1 }} empty={<p className="py-8 text-center text-sm text-muted-foreground">Nenhum plano nesta faixa.</p>} />
     </div>

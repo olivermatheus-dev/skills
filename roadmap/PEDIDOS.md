@@ -7,12 +7,12 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 043 | **Abas da área Concorrentes:** nomes, Preços e planos profundo (compacto × completo, faixas, o que cada plano tem), "Mensagem" → posicionamento com seções lado a lado, Brechas redesenhada | pedido de 2026-10-08, em andamento |
-| 2 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
+| 1 | 040 | **Fase G (anúncios no painel):** 037 D feita; gasta Opus em 10 anúncios da Corpora | depois da 037 D |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
+| 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |
 | 040 | revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |
 | 041 | avaliar as 8 ideias I-0001…I-0008 (app → Ideias) · aceitar as fontes (app → Ideias → Fontes, "Aceitar as 36 conferidas") · decidir as 7 "não conferido" · criar chave grátis do OpenAlex (`OPENALEX_API_KEY`) · podcasts/newsletters/criadores que ele segue |
 | 038/039 | usar as telas novas e apontar ajustes (Panorama, Conteúdos Grade/Tabela/Painel, Anúncios, Brechas, Lista, ficha com aba Anúncios) · Instagram da Kzloo como referência? · token do Instagram para > 6 posts? · preço final e teste grátis da Kzloo |

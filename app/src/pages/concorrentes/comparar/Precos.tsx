@@ -29,6 +29,7 @@ export default function Precos({ slug, rows, refRow }: { slug: string; rows: Mar
     setSp(n, { replace: true });
   };
   const nComp = new Set(pr.filter((x) => !x.isRef).map((x) => x.compId)).size;
+  const nSolo = new Set(pr.filter((x) => !x.isRef && x.paid && x.audience === 'solo').map((x) => x.compId)).size;
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -39,7 +40,9 @@ export default function Precos({ slug, rows, refRow }: { slug: string; rows: Mar
         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">Promoção
           <Chips value={lens.promo} onChange={(promo) => setLens((l) => ({ ...l, promo }))} options={[{ value: 'vigente', label: 'Vigente' }, { value: 'cheio', label: 'Preço cheio' }]} />
         </span>
-        <span className="text-xs text-muted-foreground">{nComp} concorrentes com preço · base: 1 profissional, mesmo ciclo</span>
+        <span className="text-xs text-muted-foreground" title="Comparação justa: plano para 1 profissional, mensal com mensal e anual com anual. Planos de equipe só na Base Equipe/Todos.">
+          {nComp} concorrentes com preço{nSolo < nComp ? ` · ${nSolo} com plano para 1 profissional` : ''} · mesmo ciclo
+        </span>
       </div>
       {p === 'regua' && <Regua slug={slug} pr={pr} m={m} lens={lens} onOpen={(key) => set('lado', { s: 'custom', sel: key })} />}
       {p === 'lado' && <Lado slug={slug} pr={pr} m={m} lens={lens} />}

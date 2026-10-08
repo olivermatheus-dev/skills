@@ -50,7 +50,7 @@
         "name": "Start",
         "monthly": 249,
         "users": "Até 3 profissionais",
-        "audience": "solo",
+        "audience": "equipe",
         "seats": {
           "included": 3,
           "max": 3,
