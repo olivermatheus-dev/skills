@@ -1,6 +1,14 @@
 # Onde paramos (ler primeiro numa sessão nova)
 
-> Atualizado em 2026-10-07 (022 fase A + v1.1 reaplicada + 024 kit de marca + 028 fase A + 027 fase A + 030 fase A editor de mockups). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+> Atualizado em 2026-10-08 (sessão orquestradora: 038–041). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
+
+## Retomar daqui (sessão orquestradora de 2026-10-08)
+O Oliver usa a sessão principal como **orquestrador**: ele dita pedidos sobre o app, a sessão registra em `roadmap/PEDIDOS.md` + `TASK.md` e dispara subagentes com persona de especialista (UX/UI, social media, estrategista), em ondas sem dois agentes no mesmo arquivo, revisa, faz commit e devolve para o aval. **Numa sessão nova, "continua" = seguir `roadmap/PEDIDOS.md` > "Próximo da fila"**, nessa ordem.
+Feito nesta sessão (commits `d4e68ac` … `f385891`):
+- **038/039 (concorrentes, feitas):** `AppContent` centralizado, `SelectField` com ícones (sem `<select>` nativo), `StatStrip` em grade, ícones nas abas; Conteúdos com barra numa linha, card novo, Tabela ordenável e **Painel** (mapa perfil × mercado, fila "Para virar ideia", régua por formato, aposta por concorrente); Anúncios em Grade/Lista; **aba Anúncios na ficha**; **Panorama dashboard** + aba **Brechas** (Virar tarefa sem duplicar, quadro pelo tipo); Lista compacta; **fora da curva × perfil, × mercado (rede+formato, "—" com < 3 concorrentes) e por seguidor**; revisão Opus aplicada (`tasks/038-…/REVISAO.md`); servidor não cai mais e `/media` fechado para `../`.
+- **040 (análise profunda, fases A–F feitas):** ficha por item (`schema/ficha.ts`, `library/analise/vocabulario.json`), preparo por script (`npm run fichas`), prompt Opus, **painel do item editável** (override sobrevive à reanálise), **seleção Top 10/20 + fila + Rodar agora** pelo heartbeat (testado de ponta a ponta), **relatório por concorrente** (Corpora TikTok). Falta G (anúncios), H (no painel), I (ligações). Aval do Oliver: `AVAL-FICHAS.md`.
+- **041 (fontes, F1–F2 feitas):** aba Ideias · **Fontes** (43 sugeridas), `npm run curadoria`, skill `curadoria`, 1ª rodada real: 8 ideias da série 3 com 13 referências verificadas. Falta F3 (botão no app).
+- Regra nova do app: **falar com a IA pelo app tem que ser fácil** (`roadmap/APP.md` > Princípio central).
 
 ## Pronto para usar
 - **Máquina:** Node 22 por projeto (`.nvmrc`; o fnm troca sozinho ao entrar na pasta), `npm install` feito, ffmpeg, Python (pyenv) + edge-tts, yt-dlp, Chromium do Playwright. `.env` criado (chaves vazias).
