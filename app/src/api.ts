@@ -2,6 +2,8 @@
 import type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef, CommentKind } from '../../schema';
 export type { Project, Persona, Note, Idea, Task, Competitor, Snapshot, ItemMark, TagDef };
 import type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult } from '../../tools/intel/types';
+import type { Classificacao } from '../../tools/intel/ads-classify';
+export type { Classificacao };
 export type { CollectResult, CompetitorSummary, ProfileSummary, AnalysisOverview, SiteRunResult };
 import type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId } from '../../schema/analysis';
 export type { AnalysisResult, AnalysisRequest, AnalysisNotes, ModuleId };
@@ -200,6 +202,7 @@ export const api = {
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),
+  adsClassified: (slug: string) => req<{ id: string; ads: (Classificacao & { adId: string })[] }[]>('GET', `${pj(slug)}/ads/classified`),
   ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
   collectAds: (slug: string, id: string) => req<AdsResult>('POST', `${pj(slug)}/competitors/${id}/ads`),
   analysisAll: (slug: string) => req<{ id: string; results: AnalysisFull['results'] }[]>('GET', `${pj(slug)}/analysis-all`),

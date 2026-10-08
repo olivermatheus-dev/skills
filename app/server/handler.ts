@@ -152,6 +152,16 @@ on('GET', '/api/projects/:slug/ads', async (p) => {
   return S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({ id: c.data.id, history: A ? A.listAds(p.slug, c.data.id).slice(-2) : [] }));
 });
 on('GET', '/api/projects/:slug/competitors/:id/ads/history', (p) => S.adsHistory(p.slug, p.id));
+// classificador de regras (037 B): funil, tipo, objetivo, destino, oferta e motivos dos anúncios ativos da última coleta
+on('GET', '/api/projects/:slug/ads/classified', async (p) => {
+  if (!isSlug(p.slug)) throw new S.ValidationError('ads', ['slug inválido']);
+  const [A, C] = await Promise.all([adsMod(), import('../../tools/intel/ads-classify')]);
+  return S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => {
+    const ads = (A.listAds(p.slug, c.data.id).at(-1)?.data.ads ?? []).filter((a) => a.active);
+    const irmaos = C.contarIrmaos(ads);
+    return { id: c.data.id, ads: ads.map((a) => ({ adId: a.id, ...C.classificarAnuncio(a, { irmaos: irmaos.get(a.id) }) })) };
+  });
+});
 on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => (await adsMod()).collectAds(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
