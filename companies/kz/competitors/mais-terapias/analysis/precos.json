@@ -1,11 +1,13 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-08T16:00:00Z",
+  "updatedAt": "2026-10-08T22:10:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     { "url": "https://www.maisterapias.com.br/planos-e-precos/", "title": "Planos e preços (cards, comparativo, créditos de WhatsApp, FAQ)" },
     { "url": "https://www.maisterapias.com.br/termos-de-uso/", "title": "Termos de uso (seções 2.3 e 2.4: planos, pagamento, cancelamento)" },
-    { "url": "https://www.maisterapias.com.br/" }
+    { "url": "https://www.maisterapias.com.br/" },
+    { "url": "https://app.maisterapias.com.br/criar-conta/planos", "title": "Escolha de plano do cadastro (15 dias, sem cartão)" },
+    { "url": "https://app.maisterapias.com.br/entrar?plan=a4fc650d-f595-4e17-83f9-977fe32dc973&intent=signup", "title": "Etapa 1 de 3 do cadastro (Google, WhatsApp, e-mail)" }
   ],
   "confidence": "alta",
   "data": {
@@ -39,6 +41,8 @@
           "Prontuário eletrônico e registros de evolução",
           "Serviços e pacotes",
           "Financeiro: receitas, despesas e registro de pagamentos",
+          "Cobrança via Pix (QR Code e copia e cola para enviar ao paciente; só na tela de escolha de plano do cadastro)",
+          "Comunicação multiprofissional (só na tela de escolha de plano do cadastro)",
           "Portal do paciente e compartilhamento com a família",
           "1 profissional"
         ],
@@ -159,8 +163,10 @@
       { "kind": "comparativo", "url": "https://www.maisterapias.com.br/planos-e-precos/" },
       { "kind": "faq", "url": "https://www.maisterapias.com.br/planos-e-precos/" },
       { "kind": "termos", "url": "https://www.maisterapias.com.br/termos-de-uso/" },
+      { "kind": "checkout", "url": "https://app.maisterapias.com.br/criar-conta/planos" },
+      { "kind": "checkout", "url": "https://app.maisterapias.com.br/entrar?plan=a4fc650d-f595-4e17-83f9-977fe32dc973&intent=signup" },
       { "kind": "home", "url": "https://www.maisterapias.com.br/" }
     ],
-    "notes": "Re-coleta feita por leitura direta do HTML das páginas (o navegador embutido estava no limite de abas, então não houve clique em seletores; a página de planos não tem seletor de ciclo). Preços iguais ao arquivo anterior; novo: planos estruturados, comparativo recurso a recurso, add-ons, termos. Só cobrança mensal (sem anual no cadastro; outra condição só por e-mail fale@maisterapias.com.br). Starter e Premium têm 'preço normal' riscado (59,90 e 79,90) sem data de fim. Pagamento no cartão de crédito, cobrança automática mensal; 3 novas tentativas a cada 7 dias em caso de falha. Divergência: a página de planos diz 25 mensagens de WhatsApp/mês no Premium; os termos (2.3) dizem 25 SMS + 25 WhatsApp. Reajuste anual possível por IGP-M com 30 dias de aviso. Plano gratuito legado só para cadastros até jul/2025 (acesso com funcionalidades do Starter). Lacunas: preço de profissional extra e de secretária no Clínicas (a página diz ilimitados, sem valor extra); se Starter pode comprar créditos de WhatsApp (o recurso não está no plano); se o cadastro pede cartão após o teste (tela de create-account é SPA, não foi aberta); Pix/boleto não mencionados; ciclo trimestral/anual inexistente. Sem comparativo de limites de pacientes ou armazenamento (não informado)."
+    "notes": "Complemento com navegador (2026-10-08): a página de planos não tem seletor de ciclo (confirmado, só mensal). O cadastro (app.maisterapias.com.br/criar-conta/planos e /entrar?plan=...&intent=signup, etapa 1 de 3) mostra os 3 planos com 15 dias grátis sem cartão, entrada por Google, WhatsApp ou e-mail, campo de cupom/código de indicação; o plano é escolhido antes do cadastro (os 3 têm teste). trialNeedsCard=false confirmado. Na tela de planos do cadastro, Starter lista também Cobrança via Pix para o paciente (recurso, não forma de pagamento da assinatura) e Comunicação multiprofissional; desconto exibido -33% (Starter) e -25% (Premium). Re-coleta anterior por leitura direta do HTML (sem seletor de ciclo na página). Preços iguais ao arquivo anterior; novo: planos estruturados, comparativo recurso a recurso, add-ons, termos. Só cobrança mensal (sem anual no cadastro; outra condição só por e-mail fale@maisterapias.com.br). Starter e Premium têm 'preço normal' riscado (59,90 e 79,90) sem data de fim. Pagamento no cartão de crédito, cobrança automática mensal; 3 novas tentativas a cada 7 dias em caso de falha. Divergência: a página de planos diz 25 mensagens de WhatsApp/mês no Premium; os termos (2.3) dizem 25 SMS + 25 WhatsApp. Reajuste anual possível por IGP-M com 30 dias de aviso. Plano gratuito legado só para cadastros até jul/2025 (acesso com funcionalidades do Starter). Lacunas: preço de profissional extra e de secretária no Clínicas (a página diz ilimitados, sem valor extra); se Starter pode comprar créditos de WhatsApp (o recurso não está no plano); o que acontece ao fim do teste (cobrança só aparece depois do cadastro, não aberto); forma de pagamento da assinatura só pelos termos (cartão; Pix/boleto da assinatura não mencionados); ciclo trimestral/anual inexistente. Sem comparativo de limites de pacientes ou armazenamento (não informado)."
   }
 }

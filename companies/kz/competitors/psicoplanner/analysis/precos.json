@@ -1,10 +1,11 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-08T16:00:00Z",
+  "updatedAt": "2026-10-08T22:10:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     { "url": "https://psicoplanner.com.br/", "title": "Home: dados dos planos (abas Mensal, Anual, Clínicas) e FAQ lidos do código da página" },
-    { "url": "https://psicoplanner.com.br/termos-de-uso/", "title": "Termos de uso (pagamento, planos, cancelamento)" }
+    { "url": "https://psicoplanner.com.br/termos-de-uso/", "title": "Termos de uso (pagamento, planos, cancelamento)" },
+    { "url": "https://meu.psicoplanner.com.br/criar-conta", "title": "Tela inicial do cadastro (7 dias, sem cartão)" }
   ],
   "confidence": "alta",
   "data": {
@@ -145,8 +146,9 @@
       { "kind": "precos", "url": "https://psicoplanner.com.br/" },
       { "kind": "faq", "url": "https://psicoplanner.com.br/" },
       { "kind": "termos", "url": "https://psicoplanner.com.br/termos-de-uso/" },
+      { "kind": "checkout", "url": "https://meu.psicoplanner.com.br/criar-conta" },
       { "kind": "home", "url": "https://psicoplanner.com.br/" }
     ],
-    "notes": "Re-coleta por leitura do código da home (os planos são montados por JavaScript com as 3 abas Mensal, Anual e Clínicas; o navegador embutido estava no limite de abas, então li os dados das abas direto do HTML). Mudanças: a aba Clínicas agora tem preço (R$ 395/mês, antes 'sem preço visível'), com contratação mínima de 6 meses e secretárias grátis; limite de 100 transcrições de IA/mês no Plus (termos 5.11); sem reembolso proporcional no anual (termos 10.7). Anual é pagamento único (Individual R$ 590, Plus R$ 790); yearlyMonthly = total / 12 (49,17 e 65,83). Divergências: aba Clínicas diz 'até 5 profissionais', FAQ diz '5 ou mais profissionais, a partir de R$ 395'; FAQ chama o Plus de 'Psi + secretária', mas a aba lista só 1 acesso e transcrição com IA; a home diz que a mensalidade cobre 'WhatsApp ilimitado e IA PsiAssist' (PsiAssist só aparece listada no Clínicas). Contexto antigo que citava R$ 99 não se confirma. Lacunas: formas de pagamento (Pix/boleto/cartão) não informadas; preço do WhatsApp no Clínicas; valor por profissional acima de 5; cadastro (meu.psicoplanner.com.br/criar-conta) não aberto, mas a página e o FAQ afirmam teste sem cartão; reajuste anual por IGP-M possível (termos 5.2)."
+    "notes": "Complemento com navegador (2026-10-08): cliquei nas 3 abas (Mensal, Anual, Clínicas) e os valores batem com os gravados: Individual R$ 59/mês ou R$ 590 anual (pagamento único), Plus R$ 79/mês ou R$ 790 anual, Clínicas R$ 395/mês (só mensal; a aba mostra 'Clínicas até 5 profissionais'); a home abre na aba Mensal. Tela inicial do cadastro (meu.psicoplanner.com.br/criar-conta): 'Teste por 7 dias Grátis! Não precisa de cartão de crédito para testar', só telefone (+55) e senha, sem plano nem forma de pagamento. trialNeedsCard=false confirmado. Re-coleta anterior por leitura do código da home (planos montados por JavaScript). Mudanças: a aba Clínicas agora tem preço (R$ 395/mês, antes 'sem preço visível'), com contratação mínima de 6 meses e secretárias grátis; limite de 100 transcrições de IA/mês no Plus (termos 5.11); sem reembolso proporcional no anual (termos 10.7). Anual é pagamento único (Individual R$ 590, Plus R$ 790); yearlyMonthly = total / 12 (49,17 e 65,83). Divergências: aba Clínicas diz 'até 5 profissionais', FAQ diz '5 ou mais profissionais, a partir de R$ 395'; FAQ chama o Plus de 'Psi + secretária', mas a aba lista só 1 acesso e transcrição com IA; a home diz que a mensalidade cobre 'WhatsApp ilimitado e IA PsiAssist' (PsiAssist só aparece listada no Clínicas). Contexto antigo que citava R$ 99 não se confirma. Lacunas: formas de pagamento (Pix/boleto/cartão) não informadas; preço do WhatsApp no Clínicas; valor por profissional acima de 5; o que acontece ao fim do teste (cobrança só aparece dentro do app); reajuste anual por IGP-M possível (termos 5.2)."
   }
 }

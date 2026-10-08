@@ -1,12 +1,13 @@
 {
   "module": "precos",
-  "updatedAt": "2026-10-08T16:00:00Z",
+  "updatedAt": "2026-10-08T22:10:00Z",
   "by": "claude-sonnet-5-5",
   "sources": [
     { "url": "https://sintropia.app/", "title": "Home (bloco Testar grátis, FAQ)" },
     { "url": "https://sintropia.app/2anos", "title": "Promoção de aniversário 08 a 14/10/2026" },
     { "url": "https://sintropia.app/software-para-psicologos/", "title": "Seção Quanto custa a Sintropia" },
-    { "url": "https://sintropia.app/termos-de-servico/", "title": "Termos de serviço (seção 8: assinaturas e cancelamento)" }
+    { "url": "https://sintropia.app/termos-de-servico/", "title": "Termos de serviço (seção 8: assinaturas e cancelamento)" },
+    { "url": "https://sintropia.me/", "title": "Login e tela inicial de cadastro profissional (Google ou e-mail, sem cartão)" }
   ],
   "confidence": "media",
   "data": {
@@ -73,8 +74,9 @@
       { "kind": "home", "url": "https://sintropia.app/" },
       { "kind": "precos", "url": "https://sintropia.app/2anos" },
       { "kind": "faq", "url": "https://sintropia.app/software-para-psicologos/" },
-      { "kind": "termos", "url": "https://sintropia.app/termos-de-servico/" }
+      { "kind": "termos", "url": "https://sintropia.app/termos-de-servico/" },
+      { "kind": "checkout", "url": "https://sintropia.me/" }
     ],
-    "notes": "Re-coleta por leitura direta do HTML (o navegador embutido estava no limite de abas; a página não tem tabela de planos nem seletor de ciclo). Mudança principal: 'Mensal' e 'Anual' agora são 1 plano com dois ciclos (o mesmo produto), não dois planos. Correção: yearlyMonthly era 66,58; R$ 790 / 12 = 65,83. A home abre mostrando o anual primeiro (R$ 790 à vista ou 12x R$ 79,90 por ano) e depois 'Prefere o plano mensal? R$ 99/mês'. Parcelado o anual sai R$ 958,80 (12x 79,90), mais caro que os R$ 790 à vista. Não está claro se R$ 790 é o preço cheio do anual ou já inclui cupom: na página /2anos o preço de 24 meses é R$ 790 com cupom de R$ 100 e R$ 890 sem cupom; a home e o FAQ citam R$ 790/12x 79,90 como 'plano anual' sem condicionar a cupom. Promoção de 24 meses vai de 08/10 a 14/10/2026 (cupom SINTROPIA2ANOS ou de parceira; valor do cupom de parceira varia). Lacunas: a Sintropia NÃO publica recursos por plano nem limites (pacientes, mensagens, IA); frases como 'conforme o plano' indicam que há diferenças, mas não dizem quais, por isso a matriz é só do que a página de marketing promete (parcial quando depende de plano). Não há preço de profissional extra, secretária ou clínica. Pix/boleto não mencionados (só 'no cartão' no parcelado). Fidelidade/multa não informadas (termos dizem que seguem a oferta e o contrato). Garantia: só o arrependimento legal de 7 dias nos termos. Cadastro/checkout não aberto (confiança média)."
+    "notes": "Complemento com navegador (2026-10-08): sem seletor de ciclo; a home mostra 'Depois dos 15 dias grátis: Plano anual em 12x de R$ 79,90 ou R$ 790 à vista por ano' e 'Prefere o plano mensal? R$ 99/mês', ou seja, o anual de R$ 790 é o preço regular, sem cupom (a dúvida abaixo sobre cupom fica resolvida: o cupom de R$ 100 só vale para o pacote de 24 meses, R$ 890 sem cupom). Cadastro profissional (sintropia.me > Criar conta profissional): só Google ou e-mail e senha, sem plano, preço nem cartão na tela; 'sem cartão' vem da home/FAQ. Lacuna de cadastro/pagamento segue: o plano é escolhido só depois do teste, dentro do produto. Re-coleta anterior por leitura direta do HTML (a página não tem tabela de planos nem seletor de ciclo). Mudança principal: 'Mensal' e 'Anual' agora são 1 plano com dois ciclos (o mesmo produto), não dois planos. Correção: yearlyMonthly era 66,58; R$ 790 / 12 = 65,83. A home abre mostrando o anual primeiro (R$ 790 à vista ou 12x R$ 79,90 por ano) e depois 'Prefere o plano mensal? R$ 99/mês'. Parcelado o anual sai R$ 958,80 (12x 79,90), mais caro que os R$ 790 à vista. Promoção de 24 meses vai de 08/10 a 14/10/2026 (cupom SINTROPIA2ANOS ou de parceira; valor do cupom de parceira varia). Lacunas: a Sintropia NÃO publica recursos por plano nem limites (pacientes, mensagens, IA); frases como 'conforme o plano' indicam que há diferenças, mas não dizem quais, por isso a matriz é só do que a página de marketing promete (parcial quando depende de plano). Não há preço de profissional extra, secretária ou clínica. Pix/boleto não mencionados (só 'no cartão' no parcelado). Fidelidade/multa não informadas (termos dizem que seguem a oferta e o contrato). Garantia: só o arrependimento legal de 7 dias nos termos. Checkout (tela de pagamento) não aberto, exige conta (confiança média)."
   }
 }
