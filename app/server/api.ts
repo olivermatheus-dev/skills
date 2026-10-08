@@ -3,7 +3,7 @@
 import type { Plugin, Connect } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
-import { join, normalize, extname, dirname } from 'node:path';
+import { join, normalize, extname, dirname, sep } from 'node:path';
 import { spawn } from 'node:child_process';
 import * as S from '../../core/store';
 import { detectLink } from '../../core/platform';
@@ -248,8 +248,11 @@ const route: Connect.NextHandleFunction = async (req, res, next) => {
   // /media/<slug>/<competitor>/<arquivo> → imagens baixadas pelos coletores
   const m = url.pathname.match(/^\/media\/([^/]+)\/([^/]+)\/(.+)$/);
   if (m) {
-    const file = normalize(join(S.ROOT, P.media(m[1], m[2]), decodeURIComponent(m[3])));
-    if (!file.startsWith(join(S.ROOT, 'companies')) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
+    // só dentro da pasta de mídia do próprio concorrente (nada de ../ até o .env ou o project.yml)
+    const ok = /^[a-z0-9][a-z0-9-]*$/i.test(m[1]) && /^[a-z0-9][a-z0-9_-]*$/i.test(m[2]);
+    const base = ok ? normalize(join(S.ROOT, P.media(m[1], m[2]))) : '';
+    const file = ok ? normalize(join(base, decodeURIComponent(m[3]))) : '';
+    if (!ok || !file.startsWith(base + sep) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return pipeFile(res, file);
   }
