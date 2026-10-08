@@ -18,6 +18,8 @@ export const qk = {
   competitorsSummary: (slug: string) => ['competitors-summary', slug] as const,
   analysis: (slug: string, id: string) => ['analysis', slug, id] as const,
   analysisOverview: (slug: string) => ['analysis-overview', slug] as const,
+  analysisAll: (slug: string) => ['analysis-all', slug] as const,
+  competitorsFeed: (slug: string) => ['competitors-feed', slug] as const,
   contextList: (slug: string) => ['context-list', slug] as const,
   context: (slug: string, name: string) => ['context', slug, name] as const,
   brandCss: (slug: string) => ['brand-css', slug] as const,
@@ -43,6 +45,8 @@ export const q = {
   competitor: (slug: string, id: string) => queryOptions({ queryKey: qk.competitor(slug, id), queryFn: async () => api.competitor(slug, await realId('competitor', slug, id)), enabled: !!slug && !!id }),
   competitorsSummary: (slug: string) => queryOptions({ queryKey: qk.competitorsSummary(slug), queryFn: () => api.competitorsSummary(slug), enabled: !!slug }),
   analysis: (slug: string, id: string) => queryOptions({ queryKey: qk.analysis(slug, id), queryFn: () => api.analysis(slug, id), enabled: !!slug && !!id }),
+  analysisAll: (slug: string) => queryOptions({ queryKey: qk.analysisAll(slug), queryFn: () => api.analysisAll(slug), enabled: !!slug }),
+  competitorsFeed: (slug: string) => queryOptions({ queryKey: qk.competitorsFeed(slug), queryFn: () => api.competitorsFeed(slug), enabled: !!slug }),
   analysisOverview: (slug: string) => queryOptions({ queryKey: qk.analysisOverview(slug), queryFn: () => api.analysisOverview(slug), enabled: !!slug }),
   contextList: (slug: string) => queryOptions({ queryKey: qk.contextList(slug), queryFn: () => api.contextList(slug), enabled: !!slug }),
   // documento importante com salvar explícito: não recarrega sozinho por baixo da edição
@@ -69,6 +73,8 @@ export const useCompetitors = (slug: string) => useQuery(q.competitors(slug));
 export const useCompetitor = (slug: string, id: string) => useQuery(q.competitor(slug, id));
 export const useCompetitorsSummary = (slug: string) => useQuery(q.competitorsSummary(slug));
 export const useAnalysis = (slug: string, id: string) => useQuery(q.analysis(slug, id));
+export const useAnalysisAll = (slug: string) => useQuery(q.analysisAll(slug));
+export const useCompetitorsFeed = (slug: string) => useQuery(q.competitorsFeed(slug));
 export const useAnalysisOverview = (slug: string) => useQuery(q.analysisOverview(slug));
 export const useContextList = (slug: string) => useQuery(q.contextList(slug));
 export const useContextDoc = (slug: string, name: string) => useQuery(q.context(slug, name));
@@ -85,7 +91,7 @@ export const useFormats = () => useQuery(q.formats());
 const PAGE_QUERIES: Record<string, (slug: string) => { queryKey: QueryKey }[]> = {
   '': (s) => [q.project(s), q.tasks(s), q.notes(s), q.ideas(s), q.competitors(s)],
   quadro: (s) => [q.tasks(s)],
-  concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s), q.analysisOverview(s)],
+  concorrentes: (s) => [q.competitors(s), q.competitorsSummary(s), q.analysisOverview(s), q.analysisAll(s)],
   ideias: (s) => [q.ideas(s), q.competitors(s), q.tags(s), q.tasks(s)],
   personas: (s) => [q.personas(s), q.tags(s)],
   anotacoes: (s) => [q.notes(s), q.tags(s)],

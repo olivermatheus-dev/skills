@@ -12,7 +12,16 @@ export interface PageDef { path: string; label: string; icon: LucideIcon; sideba
 export const PAGES: PageDef[] = [
   { path: '', label: 'Visão geral', icon: LayoutDashboard, ...page(() => import('./Dashboard')) },
   { path: 'quadro', label: 'Quadro', icon: SquareKanban, ...page(() => import('./Board')) },
-  { path: 'concorrentes', label: 'Concorrentes', icon: Radar, sidebar: 'recolhida', ...page(() => import('./Competitors')), children: [{ path: ':id', ...page(() => import('./CompetitorDetail')) }] },
+  // área Concorrentes: Panorama na raiz; as outras abas são rotas fixas (ganham da `:id` da ficha)
+  { path: 'concorrentes', label: 'Concorrentes', icon: Radar, sidebar: 'recolhida', ...page(() => import('./concorrentes/Panorama')), children: [
+    { path: 'lista', ...page(() => import('./concorrentes/Lista')) },
+    { path: 'comparar', ...page(() => import('./concorrentes/Comparar')) },
+    { path: 'conteudos', ...page(() => import('./concorrentes/Conteudos')) },
+    { path: 'redes', ...page(() => import('./concorrentes/Redes')) },
+    { path: 'anuncios', ...page(() => import('./concorrentes/Anuncios')) },
+    { path: 'coletas', ...page(() => import('./concorrentes/Coletas')) },
+    { path: ':id', ...page(() => import('./CompetitorDetail')) },
+  ] },
   { path: 'conteudos', label: 'Conteúdos', icon: Clapperboard, ...page(() => import('./Conteudos')) },
   { path: 'mockups', label: 'Mockups', icon: Smartphone, sidebar: 'recolhida', ...page(() => import('./Mockups')) },
   { path: 'formatos', label: 'Formatos', icon: LayoutTemplate, ...page(() => import('./Formatos')) },

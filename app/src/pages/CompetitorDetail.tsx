@@ -4,17 +4,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, type CollectResult, type Competitor, type CompetitorFull, type Doc, type Idea, type ItemMark } from '../api';
+import { api, type CollectResult, type Competitor, type Doc, type ItemMark } from '../api';
 import type { ModuleDataOf } from '../../../schema/analysis';
-import { nextSeqId, qk, runOptimistic, trackCreate, upsertDoc, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, useTags } from '../queries';
+import { qk, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, useTags } from '../queries';
 import { ChevronRight, MapPin, RefreshCw, Star as StarIcon, X } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../components/kit';
 import EditCompetitor from '../components/competitors/EditCompetitor';
+import { useMakeIdea } from '../components/competitors/useMakeIdea';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import FollowersChart, { type FollowerSeries } from '../components/competitors/FollowersChart';
-import { ItemCard, ItemDrawer, titleOf } from '../components/competitors/Items';
+import { ItemCard, ItemDrawer } from '../components/competitors/Items';
 import {
   Avatar, Chips, KINDS, KIND_COLOR, PlatformIcon, SERIES, STATUS_LABEL, Spinner, Star, TYPE_LABEL, buildRows, fmtDateTime, fmtDelta,
   fmtPct, fmtRatio, groupSnapshots, keyFor, median, platformLabel, timeAgo, type Row,
@@ -130,6 +131,7 @@ function Detalhe() {
   const q = useCompetitor(slug, id);
   const projectTags = useTags(slug);
   const actions = useCompetitorActions(slug);
+  const idea = useMakeIdea(slug);
 
   const [search_, setSearch_] = useSearchParams();
   const view = (TABS.some((t) => t.id === search_.get('aba')) ? search_.get('aba') : 'diagnostico') as TabId;
@@ -149,8 +151,6 @@ function Detalhe() {
   const [elapsed, setElapsed] = useState(0);
   const [results, setResults] = useState<CollectResult[] | null>(null);
   const [pullError, setPullError] = useState<unknown>(null);
-  const [ideaBusy, setIdeaBusy] = useState<string | null>(null);
-  const [ideaError, setIdeaError] = useState<unknown>(null);
 
   useEffect(() => { if (!pulling) return; setElapsed(0); const t = setInterval(() => setElapsed((s) => s + 1), 1000); return () => clearInterval(t); }, [pulling]);
 
@@ -229,54 +229,11 @@ function Detalhe() {
     if (!det || det.kind !== 'perfil') return;
     void actions.save(id, { ...c, profiles: [...c.profiles, { platform: det.platform as never, url: det.url, handle: det.handle, externalId: det.externalId }] }, d!.body, { okMessage: 'Perfil adicionado' });
   }
-  async function makeIdea(r: Row, title = titleOf(r).slice(0, 120), tags = r.mark?.tags ?? [], note = r.mark?.note ?? '') {
-    setIdeaBusy(r.mk); setIdeaError(null);
-    try {
-      const prof = profiles.find((p) => p.key === r.profileKey);
-      const m = r.item.metrics;
-      const body = [
-        `Referência: [${titleOf(r).replace(/[[\]]/g, '')}](${r.item.url}) — ${c.name} (${platformLabel(r.platform)} ${prof ? handleOf(prof) : ''}), ${TYPE_LABEL[r.item.type]?.toLowerCase() ?? r.item.type}${r.item.publishedAt ? ` publicado em ${new Date(r.item.publishedAt).toLocaleDateString('pt-BR')}` : ''}.`,
-        '',
-        '| métrica | valor |', '|---|---|',
-        `| views | ${m.views?.toLocaleString('pt-BR') ?? '—'} |`,
-        `| curtidas | ${m.likes?.toLocaleString('pt-BR') ?? '—'} |`,
-        `| comentários | ${m.comments?.toLocaleString('pt-BR') ?? '—'} |`,
-        `| outlier | ${fmtRatio(r.outlier)} a mediana do perfil |`,
-        `| engajamento | ${fmtPct(r.engagement)} |`,
-        '',
-        ...(r.item.caption ? ['## Legenda original', '', `> ${r.item.caption.slice(0, 600).replace(/\n/g, '\n> ')}`, ''] : []),
-        '## Observações do Oliver', '', note, '',
-      ].join('\n');
-      // otimista: a ideia entra no banco e o item já aparece como "virou ideia" (id previsto);
-      // o servidor cria a ideia e só então grava a marcação com o id real (sem marcação órfã se falhar)
-      const ideasKey = qk.ideas(slug);
-      const tempId = nextSeqId('I', (qc.getQueryData<Doc<Idea>[]>(ideasKey) ?? []).map((i) => i.data.id)) as Idea['id'];
-      const data = { title, status: 'nova', source: { competitor: id, platform: r.platform as never, itemId: r.item.id, url: r.item.url }, tags } as Partial<Idea> & { title: string };
-      const opt: Doc<Idea> = { data: { ...data, id: tempId, created: new Date().toISOString().slice(0, 10) } as Idea, body, file: '' };
-      const markPatch = (ideaId: string) => ({ ideaId, status: 'analisada' as const, tags });
-      setIdeaBusy(null);
-      await runOptimistic(qc, {
-        mutationFn: async () => {
-          const p = api.createIdea(slug, data, body);
-          trackCreate('idea', slug, tempId, p.then((x) => x.data.id));
-          const idea = await p;
-          const m = await api.setMark(slug, id, r.mk, markPatch(idea.data.id));
-          return { idea, m };
-        },
-        apply: () => [
-          [ideasKey, (old: Doc<Idea>[] | undefined) => (old ? upsertDoc(old, opt) : old)],
-          [key, (old: CompetitorFull | undefined) => old && { ...old, marks: { ...old.marks, [r.mk]: { ...({ status: 'nova', favorite: false, tags: [], note: '' } as Partial<ItemMark>), ...old.marks[r.mk], ...markPatch(tempId), updated: new Date().toISOString() } } }],
-        ],
-        onSuccess: ({ idea, m }) => {
-          qc.setQueryData<Doc<Idea>[]>(ideasKey, (old) => (old ? upsertDoc(old, idea, tempId) : old));
-          qc.setQueryData<CompetitorFull>(key, (old) => old && { ...old, marks: { ...old.marks, [r.mk]: m } });
-        },
-        invalidate: () => [ideasKey, key],
-        okMessage: `Ideia ${tempId} criada`,
-        errorMessage: 'Não foi possível criar a ideia',
-      }, undefined);
-    } catch (e) { setIdeaError(e); } finally { setIdeaBusy(null); }
-  }
+  const makeIdea = (r: Row, title?: string, tags?: string[], note?: string) => {
+    const prof = profiles.find((p) => p.key === r.profileKey);
+    return idea.make({ id, name: c.name }, prof ? handleOf(prof) : '', r, title, tags, note);
+  };
+  const ideaBusy = idea.busy, ideaError = idea.error;
 
   const openRow = rows.find((r) => r.mk === open) ?? null;
   const allTagSuggestions = [...new Set([...(projectTags.data?.tags ?? []).map((t) => t.id), ...Object.values(d.marks).flatMap((m) => m.tags)])];

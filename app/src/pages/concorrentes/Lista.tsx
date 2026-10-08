@@ -1,17 +1,19 @@
-// Concorrentes e referências: cards (resumo, onde atua, preço, seguidores por plataforma) ou tabela comparativa;
+// Aba "Concorrentes" da área: quem são. Tabela densa (logo, frase, preço, audiência, redes, atualizado) ou cards;
 // filtros (tipo, onde atua, plataforma, tag), candidatos achados pela IA (aceitar → análise completa) e "Puxar todos".
+// A comparação lado a lado (oferta, funcionalidades, mensagem, reputação) fica na aba Comparar.
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../api';
-import { MARKET, money } from '../components/competitors/Analysis';
-import { FULL_ANALYSIS } from '../../../schema/analysis';
-import { toast } from '../components/toast';
-import { Badge, Button, Empty, ErrorBox, Input, PageHeader, Select, cx, fmtNum } from '../components/kit';
-import AddLinksModal, { ResultLine } from '../components/competitors/AddLinksModal';
-import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
-import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../queries';
-import { Avatar, Chips, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../components/competitors/lib';
+import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../../api';
+import { MARKET, money } from '../../components/competitors/Analysis';
+import { FULL_ANALYSIS } from '../../../../schema/analysis';
+import { toast } from '../../components/toast';
+import { Badge, Button, Empty, ErrorBox, Input, Select, cx, fmtNum } from '../../components/kit';
+import { AreaPage, Delta, SortTable, type Col } from '../../components/competitors/area';
+import { ResultLine } from '../../components/competitors/AddLinksModal';
+import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
+import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../../queries';
+import { Avatar, Chips, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../../components/competitors/lib';
 
 type KindFilter = 'todos' | Competitor['kind'];
 
@@ -21,7 +23,6 @@ export default function Competitors() {
   const list = useCompetitors(slug);
   const summary = useCompetitorsSummary(slug);
   const actions = useCompetitorActions(slug);
-  const [adding, setAdding] = useState(false);
   const [q, setQ] = useState('');
   const [kind, setKind] = useState<KindFilter>('todos');
   const [platform, setPlatform] = useState('');
@@ -29,7 +30,7 @@ export default function Competitors() {
   const [favOnly, setFavOnly] = useState(false);
   const [stage, setStage] = useState<Competitor['status']>('ativo');
   const [market, setMarket] = useState('');
-  const [mode, setMode] = useState<'cards' | 'tabela'>(() => { try { return (localStorage.getItem('hub:comp-mode') as 'cards' | 'tabela') ?? 'cards'; } catch { return 'cards'; } });
+  const [mode, setMode] = useState<'cards' | 'tabela'>(() => { try { return (localStorage.getItem('hub:comp-mode') as 'cards' | 'tabela') ?? 'tabela'; } catch { return 'tabela'; } });
   const setModeP = (m: 'cards' | 'tabela') => { setMode(m); try { localStorage.setItem('hub:comp-mode', m); } catch { /* sem storage */ } };
   const overview = useAnalysisOverview(slug);
   const ov = useMemo(() => new Map((overview.data ?? []).map((o) => [o.id, o])), [overview.data]);
@@ -94,19 +95,12 @@ export default function Competitors() {
   const pullTargets = shown.filter((c) => c.data.status === 'ativo' && c.data.profiles.length);
 
   return (
-    <div className="p-8 max-w-[1400px]">
-      <PageHeader
-        title="Concorrentes e referências"
-        subtitle={list.data ? `${active.length} monitorado(s) · cada “Puxar” guarda uma coleta nova, o histórico nunca é apagado` : undefined}
-        actions={<>
-          <Button variant="ghost" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
-            {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : `↻ Puxar todos${pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}`}
-          </Button>
-          {queued > 0 && <span className="self-center text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">⏳ {queued} na fila da IA</span>}
-          <Button onClick={() => setAdding(true)}>+ Adicionar</Button>
-        </>}
-      />
-
+    <AreaPage sub={list.data ? `${active.length} monitorado(s)` : undefined} actions={<>
+      {queued > 0 && <span className="text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">⏳ {queued} na fila da IA</span>}
+      <Button variant="ghost" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
+        {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : `↻ Puxar todos${pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}`}
+      </Button>
+    </>}>
       {pulling && (
         <div className="mb-5 bg-card border border-border rounded-xl p-3">
           <div className="flex justify-between text-sm mb-2"><span>Puxando <b>{pulling.name}</b>…</span><span className="text-muted-foreground tabular-nums">{pulling.i} de {pulling.n}</span></div>
@@ -141,7 +135,7 @@ export default function Competitors() {
               { value: 'candidato', label: 'Candidatos', count: nStage('candidato') },
               { value: 'arquivado', label: 'Arquivados', count: nStage('arquivado') },
             ]} />
-            <Chips value={mode} onChange={setModeP} options={[{ value: 'cards', label: '▦ Cards' }, { value: 'tabela', label: '☰ Comparar' }]} />
+            <Chips value={mode} onChange={setModeP} options={[{ value: 'tabela', label: '☰ Tabela' }, { value: 'cards', label: '▦ Cards' }]} />
           </div>
         </div>
       )}
@@ -150,12 +144,13 @@ export default function Competitors() {
       {list.isLoading && <SkeletonGrid />}
       {list.data && all.length === 0 && (
         <Empty title="Nenhum concorrente ainda" hint="Cole os links de perfis (YouTube, Instagram, TikTok, site) de concorrentes, criadores e páginas de referência."
-          action={<Button onClick={() => setAdding(true)}>+ Adicionar o primeiro</Button>} />
+ />
       )}
       {list.data && all.length > 0 && shown.length === 0 && <Empty title="Nada com esses filtros" hint="Limpe a busca ou troque os filtros." />}
 
       {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted-foreground">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
-      {mode === 'tabela' && shown.length > 0 && <CompareTable slug={slug} rows={shown} ov={ov} />}
+      {mode === 'tabela' && shown.length > 0 && <ListTable slug={slug} rows={shown} ov={ov} sum={sum} onFav={(c) => actions.toggleFavorite(c)} onPull={pullOne} pullingId={pullingOne} onAccept={accept}
+        onReject={(c) => { void actions.save(c.data.id, { ...c.data, status: 'arquivado' }, c.body, { okMessage: 'Candidato recusado (arquivado)' }); }} />}
       {mode === 'cards' && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {shown.map((c) => (
           <CompetitorCard key={c.data.id} slug={slug} c={c} s={sum.get(c.data.id)} o={ov.get(c.data.id)} loadingSummary={summary.isLoading}
@@ -163,9 +158,7 @@ export default function Competitors() {
             onFav={() => actions.toggleFavorite(c)} onWarm={() => prefetchCompetitor(qc, slug, c.data.id)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name} />
         ))}
       </div>}
-
-      <AddLinksModal slug={slug} open={adding} onClose={() => setAdding(false)} competitors={all} />
-    </div>
+    </AreaPage>
   );
 }
 
@@ -276,59 +269,51 @@ function PullLog({ log, onClose, slug }: { log: { id: string; name: string; resu
 
 const marketOf = (c: Doc<Competitor>, o?: AnalysisOverview) => (c.data.market ?? o?.market ?? 'desconhecido') as keyof typeof MARKET;
 
-/** Tabela comparativa: o essencial de cada análise lado a lado. Clique no cabeçalho ordena; no nome, abre o concorrente. */
-function CompareTable({ slug, rows, ov }: { slug: string; rows: Doc<Competitor>[]; ov: Map<string, AnalysisOverview> }) {
-  type O = AnalysisOverview | undefined;
-  type Col = { k: string; label: string; num?: boolean; v: (o: O, c: Doc<Competitor>) => string | number | undefined; render?: (o: O, c: Doc<Competitor>) => React.ReactNode };
-  const cols: Col[] = [
-    { k: 'market', label: 'Onde atua', v: (o, c) => marketOf(c, o), render: (o, c) => { const m = MARKET[marketOf(c, o)]; return <span style={{ color: m.color }}>{m.label}</span>; } },
-    { k: 'price', label: 'A partir de', num: true, v: (o) => o?.fromMonthly ?? undefined, render: (o) => (o?.fromMonthly != null ? <b>{money(o.fromMonthly, o.currency)}</b> : o?.publicPrice === false ? <span className="text-muted-foreground">oculto</span> : '—') },
-    { k: 'model', label: 'Modelo', v: (o) => o?.priceModel },
-    { k: 'plans', label: 'Planos', num: true, v: (o) => o?.plans },
-    { k: 'trial', label: 'Teste grátis', v: (o) => o?.trial ?? undefined, render: (o) => <span className="block max-w-44 truncate" title={o?.trial ?? ''}>{o?.trial ?? '—'}</span> },
-    { k: 'features', label: 'Features', num: true, v: (o) => o?.features },
-    { k: 'fw', label: 'Fortes / fracos', v: (o) => (o?.strengths != null ? `${o.strengths} / ${o.weaknesses}` : undefined) },
-    { k: 'sections', label: 'Seções da LP', num: true, v: (o) => o?.sections },
-    { k: 'ra', label: 'Reclame Aqui', num: true, v: (o) => o?.raScore ?? undefined, render: (o) => (o?.raScore != null ? o.raScore.toLocaleString('pt-BR') : o?.raFound === false ? <span className="text-muted-foreground">não achado</span> : '—') },
-    { k: 'store', label: 'Nota app', num: true, v: (o) => o?.storeRating ?? undefined },
-    { k: 'done', label: 'Módulos', num: true, v: (o) => Object.keys(o?.updated ?? {}).length, render: (o) => <span className="text-muted-foreground">{Object.keys(o?.updated ?? {}).length}/{FULL_ANALYSIS.length - 1}{o?.request ? ' ⏳' : ''}{o?.hasNotes ? ' ✎' : ''}</span> },
+/** Tabela da lista: quem são, quanto cobram, que audiência têm e quando foram atualizados. Clique ordena; nome abre. */
+function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, onReject }: {
+  slug: string; rows: Doc<Competitor>[]; ov: Map<string, AnalysisOverview>; sum: Map<string, CompetitorSummary>;
+  onFav: (c: Doc<Competitor>) => void; onPull: (c: Doc<Competitor>) => void; pullingId: string | null; onAccept: (c: Doc<Competitor>) => void; onReject: (c: Doc<Competitor>) => void;
+}) {
+  const followers = (c: Doc<Competitor>) => { const ps = (sum.get(c.data.id)?.profiles ?? []).filter((p) => p.latest?.profile.followers != null); return ps.length ? ps.reduce((n, p) => n + p.latest!.profile.followers!, 0) : undefined; };
+  const delta = (c: Doc<Competitor>) => { const ps = (sum.get(c.data.id)?.profiles ?? []).filter((p) => p.latest?.profile.followers != null); return ps.length && ps.every((p) => p.prevFollowers != null) ? ps.reduce((n, p) => n + p.latest!.profile.followers! - p.prevFollowers!, 0) : undefined; };
+  const cols: Col<Doc<Competitor>>[] = [
+    { k: 'name', label: 'Concorrente', v: (c) => c.data.name, className: 'min-w-64 max-w-[26rem]', render: (c) => {
+      const profs = sum.get(c.data.id)?.profiles ?? [];
+      const av = profs.find((p) => p.latest?.profile.avatarLocal) ?? profs.find((p) => p.latest?.profile.avatar);
+      return (
+        <Link to={`/p/${slug}/concorrentes/${c.data.id}`} onMouseEnter={() => undefined} className="flex items-center gap-2.5 group">
+          <Avatar name={c.data.name} size={30} local={api.mediaUrl(slug, c.data.id, av?.latest?.profile.avatarLocal)} remote={av?.latest?.profile.avatar} className="!ring-0" />
+          <span className="min-w-0">
+            <span className="flex items-center gap-1.5 font-medium group-hover:text-primary-ink">{c.data.name}{c.data.kind !== 'concorrente' && <Badge color={KIND_COLOR[c.data.kind]}>{KINDS[c.data.kind]}</Badge>}{ov.get(c.data.id)?.request && <span className="text-[10px] text-violet-600">⏳</span>}</span>
+            {ov.get(c.data.id)?.oneLiner && <span className="block text-xs text-muted-foreground truncate">{ov.get(c.data.id)!.oneLiner}</span>}
+          </span>
+        </Link>
+      );
+    } },
+    { k: 'price', label: 'A partir de', num: true, v: (c) => ov.get(c.data.id)?.fromMonthly, render: (c) => { const o = ov.get(c.data.id); return o?.fromMonthly != null ? <b>{money(o.fromMonthly, o.currency)}</b> : <span className="text-muted-foreground text-xs">{o?.publicPrice === false ? 'oculto' : '—'}</span>; } },
+    { k: 'model', label: 'Modelo', v: (c) => ov.get(c.data.id)?.priceModel, render: (c) => <span className="text-xs text-muted-foreground">{ov.get(c.data.id)?.priceModel ?? '—'}</span> },
+    { k: 'f', label: 'Seguidores', num: true, v: followers, render: (c) => { const f = followers(c); return f != null ? <span className="inline-flex items-baseline gap-1.5"><b>{fmtNum(f)}</b><Delta n={delta(c)} fmt={fmtNum} /></span> : <span className="text-muted-foreground">—</span>; } },
+    { k: 'nets', label: 'Redes', render: (c) => {
+      const profs = sum.get(c.data.id)?.profiles ?? [];
+      return <span className="inline-flex items-center gap-1.5">{c.data.profiles.map((p) => { const ps = profs.find((x) => x.key === keyFor(p)); const err = !!ps?.latest?.errors.length && !ps.latest.items && p.platform !== 'site'; return (
+        <a key={p.url} href={p.url} target="_blank" rel="noreferrer" className={cx('relative', !ps?.latest && 'opacity-30 hover:opacity-80')} title={`${platformLabel(p.platform)}${ps?.latest?.profile.followers != null ? ` · ${fmtNum(ps.latest.profile.followers)}` : ''}${ps?.latest ? '' : ' · não puxado'}`}>
+          <PlatformIcon platform={p.platform} size={14} />{err && <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-destructive" />}
+        </a>); })}</span>;
+    } },
+    { k: 'at', label: 'Atualizado', num: true, v: (c) => sum.get(c.data.id)?.lastCollected, render: (c) => { const at = sum.get(c.data.id)?.lastCollected; return <span className="text-xs text-muted-foreground" title={at ? new Date(at).toLocaleString('pt-BR') : undefined}>{at ? timeAgo(at) : 'nunca'}</span>; } },
+    { k: 'act', label: '', render: (c) => (
+      <span className="flex items-center justify-end gap-1.5">
+        {c.data.status === 'candidato' ? <>
+          <Button className="!py-0.5 !px-2 text-xs" onClick={() => onAccept(c)}>✓ Aceitar</Button>
+          <Button variant="ghost" className="!py-0.5 !px-2 text-xs" onClick={() => onReject(c)}>Recusar</Button>
+        </> : <>
+          <Star on={c.data.favorite} onClick={() => onFav(c)} size="text-base" />
+          <button className="text-xs px-2 py-0.5 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={pullingId === c.data.id || !c.data.profiles.length} onClick={() => onPull(c)}>{pullingId === c.data.id ? <Spinner /> : '↻'}</button>
+        </>}
+      </span>
+    ) },
   ];
-  const [sort, setSort] = useState<{ k: string; dir: 1 | -1 }>({ k: 'price', dir: 1 });
-  const col = cols.find((c) => c.k === sort.k);
-  const sorted = [...rows].sort((a, b) => {
-    if (!col) return a.data.name.localeCompare(b.data.name, 'pt-BR') * sort.dir;
-    const va = col.v(ov.get(a.data.id), a), vb = col.v(ov.get(b.data.id), b);
-    if (va == null && vb == null) return 0;
-    if (va == null) return 1;
-    if (vb == null) return -1;
-    return (typeof va === 'number' && typeof vb === 'number' ? va - vb : String(va).localeCompare(String(vb), 'pt-BR')) * sort.dir;
-  });
-  const th = (k: string, label: string) => (
-    <th key={k} className="px-3 py-2 text-left font-medium text-xs text-muted-foreground whitespace-nowrap cursor-pointer select-none hover:text-foreground" onClick={() => setSort((s) => ({ k, dir: s.k === k ? (s.dir === 1 ? -1 : 1) : 1 }))}>
-      {label}{sort.k === k ? (sort.dir === 1 ? ' ↑' : ' ↓') : ''}
-    </th>
-  );
-  return (
-    <div className="bg-card border border-border rounded-xl overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="border-b border-border bg-muted/50"><tr>{th('name', 'Concorrente')}{cols.map((c) => th(c.k, c.label))}</tr></thead>
-        <tbody>
-          {sorted.map((c) => {
-            const o = ov.get(c.data.id);
-            return (
-              <tr key={c.data.id} className="border-b border-border last:border-0 hover:bg-muted/40 align-top">
-                <td className="px-3 py-2 min-w-56 max-w-80">
-                  <Link to={`/p/${slug}/concorrentes/${c.data.id}`} className="font-medium hover:text-primary-ink">{c.data.name}</Link>
-                  {o?.oneLiner && <div className="text-xs text-muted-foreground line-clamp-2">{o.oneLiner}</div>}
-                </td>
-                {cols.map((cl) => <td key={cl.k} className={cx('px-3 py-2 whitespace-nowrap', cl.num && 'tabular-nums')}>{cl.render ? cl.render(o, c) : (cl.v(o, c) ?? '—')}</td>)}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
+  return <SortTable rows={rows} cols={cols} rowKey={(c) => c.data.id} initial={{ k: 'f', dir: -1 }} />;
 }
 
 const SkeletonGrid = () => (

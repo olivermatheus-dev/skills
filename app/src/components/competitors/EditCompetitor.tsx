@@ -49,7 +49,7 @@ export default function EditCompetitor({ slug, open, onClose, onFailed, data, bo
   function remove() {
     if (!window.confirm(`Excluir "${d.name}"?\n\nApaga a pasta inteira: ${snapshotsCount} coleta(s), marcações e imagens. Não dá para desfazer.\n(Para só parar de acompanhar, use Status → Arquivado.)`)) return;
     void actions.remove(d.id, { onError: () => nav(`/p/${slug}/concorrentes/${d.id}`) });
-    nav(`/p/${slug}/concorrentes`);
+    nav(`/p/${slug}/concorrentes/lista`);
   }
 
   return (

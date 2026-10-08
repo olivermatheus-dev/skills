@@ -90,6 +90,11 @@ on('DELETE', '/api/projects/:slug/competitors/:id/analysis/request', (p) => S.cl
 on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => (await import('../../tools/intel/site')).analyzeSite(p.slug, p.id));
 on('POST', '/api/projects/:slug/competitors/:id/analysis/ra', async (p) => (await import('../../tools/intel/reclameaqui')).runReclameAqui(p.slug, p.id));
 on('GET', '/api/projects/:slug/analysis-overview', async (p) => (await import('../../tools/intel/summary')).analysisOverview(p.slug));
+// Visões da área (Panorama, Comparar, Conteúdos): análises de todos e a última coleta de cada perfil com as marcações
+on('GET', '/api/projects/:slug/analysis-all', (p) => S.listCompetitors(p.slug).map((c) => ({ id: c.data.id, results: S.getAnalysisResults(p.slug, c.data.id) })));
+on('GET', '/api/projects/:slug/competitors-feed', (p) => S.listCompetitors(p.slug).filter((c) => c.data.status === 'ativo').map((c) => ({
+  id: c.data.id, ...S.listSnapshotsForView(p.slug, c.data.id, { full: 2, max: 2 }), marks: S.getMarks(p.slug, c.data.id),
+})));
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));
 
 // Concorrentes: resumo leve para a lista (última coleta por perfil, sem itens)
