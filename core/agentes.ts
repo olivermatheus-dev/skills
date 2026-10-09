@@ -16,7 +16,7 @@ const NOTAS = (nome: string) => join(ROOT, '.claude', 'agent-notes', `${nome}.md
 
 export type EstadoAgente = 'trabalhando' | 'acordado' | 'dormindo';
 export interface AgenteCard {
-  id: string; nome: string; descricao: string; cor: string | null; modelo: string | null; skills: string[];
+  id: string; nome: string; descricao: string; /** descrição inteira (frontmatter) */ sobre: string; cor: string | null; modelo: string | null; skills: string[];
   estado: EstadoAgente; atual: Atividade | null; desde: string | null; /** trabalhos rodando ao mesmo tempo (ex.: 2 sessões) */ simultaneos: number;
   fila: { id: string; title: string; status: string; pronta: boolean }[];
   ultimas: Atividade[]; semana: { trabalhos: number; custo: number };
@@ -67,7 +67,7 @@ export function agentesView(slug: string) {
     const notasArq = id === 'orquestrador' ? null : NOTAS(id);
     const notasTxt = notasArq && existsSync(notasArq) ? readFileSync(notasArq, 'utf8') : '';
     return {
-      id, nome: NOMES[id] ?? id, descricao: d.description.split('. ')[0].replace(/\.$/, ''), cor: d.color,
+      id, nome: NOMES[id] ?? id, descricao: d.description.split('. ')[0].replace(/\.$/, ''), sobre: d.description, cor: d.color,
       modelo: fm.model ? String(fm.model) : null,
       skills: Array.isArray(fm.skills) ? fm.skills.map(String) : [],
       estado, atual: atual || (sessao || null), simultaneos: rodando.length, desde: atual ? atual.inicio : sessao ? sessao.inicio : null,
@@ -78,9 +78,16 @@ export function agentesView(slug: string) {
   }).sort((a, b) => (ORDEM.indexOf(a.id) + 1 || 99) - (ORDEM.indexOf(b.id) + 1 || 99));
 
   const hoje = new Date().toISOString().slice(0, 10);
+  const tarefa = (t: (typeof tarefas)[number]) => ({ id: t.id, title: t.title, board: t.board, status: t.status, assignee: t.assignee, priority: t.priority });
   return {
     agentes: cards,
     historico,
+    /** aba Em andamento: o que está em execução no quadro e o que a IA pega a seguir */
+    quadro: {
+      fazendo: tarefas.filter((t) => t.status === 'doing').map(tarefa),
+      prontas: tarefas.filter((t) => prontas.has(t.id) && t.status !== 'doing').map(tarefa),
+      revisao: tarefas.filter((t) => t.status === 'review').length,
+    },
     resumo: {
       rodando: historico.filter((a) => a.status === 'rodando').length,
       sessoes: historico.filter((a) => a.origem === 'terminal' && !a.encerrada && agora - Date.parse(a.em ?? a.fim ?? a.inicio) < ACORDADO_H * 3600e3).length,
