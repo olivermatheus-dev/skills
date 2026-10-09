@@ -63,7 +63,7 @@ export default function PesquisaDetalhe() {
         <div className="flex items-center gap-2">
           {rodando && !l.terminal && <Button variant="ghost" disabled={parar.isPending} onClick={() => parar.mutate()} className="inline-flex items-center gap-1.5"><Square className="size-3.5" />Parar</Button>}
           {(l.estado === 'pendente' || l.estado === 'erro') && !rodando && (
-            <Button disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.naFila ? `Na fila (${l.naFila}º)` : l.estado === 'erro' ? 'Tentar de novo' : st?.ocupado ? 'Entrar na fila' : 'Rodar agora'}</Button>
+            <Button variant="ai" disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.naFila ? `Na fila (${l.naFila}º)` : l.estado === 'erro' ? 'Tentar de novo' : st?.ocupado ? 'Entrar na fila' : 'Rodar agora'}</Button>
           )}
           {l.estado === 'feito' && r && r.ideas.length > 0 && <Link to={`/p/${slug}/ideias?rodada=${encodeURIComponent(rodada)}`}><Button variant="soft">Ver as {r.ideas.length} ideias no banco</Button></Link>}
         </div>

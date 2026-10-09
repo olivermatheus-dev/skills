@@ -271,7 +271,7 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
 
   return shell(<>
       {!compId && v.conc && pullChip(v.conc)}
-      <Button variant="ghost" className="inline-flex items-center gap-1.5 whitespace-nowrap" disabled={!paraAnalisar.length || fila.pedir.isPending}
+      <Button variant="ai-soft" className="inline-flex items-center gap-1.5 whitespace-nowrap border border-ai-border" disabled={!paraAnalisar.length || fila.pedir.isPending}
         title="Põe na fila de análise da IA os 10 primeiros da lista (pela ordem e pelos filtros de agora) que ainda não têm análise. Só grava o pedido: rode pela faixa “Rodar agora” ou com “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por anúncio)."
         onClick={() => fila.pedir.mutate({ itens: paraAnalisar.map((r) => ({ comp: r.compId, key: fichaKeyDeAd(r.id) })), origem: 'top', n: paraAnalisar.length, rodar: false })}>
         {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}Analisar {paraAnalisar.length ? `os ${paraAnalisar.length} primeiros` : 'anúncios'}

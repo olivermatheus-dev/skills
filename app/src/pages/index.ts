@@ -12,7 +12,11 @@ export interface PageDef { path: string; label: string; icon: LucideIcon; sideba
 export const PAGES: PageDef[] = [
   { path: '', label: 'Visão geral', icon: LayoutDashboard, ...page(() => import('./Dashboard')) },
   { path: 'quadro', label: 'Quadro', icon: SquareKanban, ...page(() => import('./Board')) },
-  { path: 'agentes', label: 'Agentes', icon: Bot, ...page(() => import('./Agentes')) },
+  // área Agentes e skills: abas na raiz (Em andamento · Equipe · Skills · Histórico); página de cada agente e de cada skill
+  { path: 'agentes', label: 'Agentes e skills', icon: Bot, ...page(() => import('./Agentes')), children: [
+    { path: 'skills/:skill', ...page(() => import('./SkillDetalhe')) },
+    { path: ':agente', ...page(() => import('./AgenteDetalhe')) },
+  ] },
   // área Concorrentes: Panorama na raiz; as outras abas são rotas fixas (ganham da `:id` da ficha)
   { path: 'concorrentes', label: 'Concorrentes', icon: Radar, sidebar: 'recolhida', ...page(() => import('./concorrentes/Panorama')), children: [
     { path: 'lista', ...page(() => import('./concorrentes/Lista')) },

@@ -53,12 +53,20 @@ export const avisoFila = (f: NaFila | undefined, comecou: string) => (f?.ocupado
 /** página Agentes (046 E) */
 export type EstadoAgente = 'trabalhando' | 'acordado' | 'dormindo';
 export interface AgenteCard {
-  id: string; nome: string; descricao: string; cor: string | null; modelo: string | null; skills: string[];
+  id: string; nome: string; descricao: string; /** descrição inteira */ sobre: string; cor: string | null; modelo: string | null; skills: string[];
   estado: EstadoAgente; atual: Atividade | null; desde: string | null; simultaneos: number;
   fila: { id: string; title: string; status: string; pronta: boolean }[];
   ultimas: Atividade[]; semana: { trabalhos: number; custo: number }; notas: { arquivo: string | null; itens: number };
 }
-export interface AgentesView { agentes: AgenteCard[]; historico: Atividade[]; resumo: { rodando: number; sessoes: number; custoHoje: number; custoSemana: number } }
+export interface TarefaResumo { id: string; title: string; board: string; status: string; assignee: string; priority: string }
+export interface AgentesView { agentes: AgenteCard[]; historico: Atividade[]; resumo: { rodando: number; sessoes: number; custoHoje: number; custoSemana: number }; quadro: { fazendo: TarefaResumo[]; prontas: TarefaResumo[]; revisao: number } }
+/** agentes e skills: arquivos (core/skills.ts) */
+export interface NoArquivo { nome: string; path: string; pasta: boolean; texto: boolean; filhos?: NoArquivo[] }
+export interface ArquivoFixo { path: string; titulo: string; dica: string; existe: boolean }
+export interface SkillResumo { id: string; nome: string; descricao: string; grupo: 'formato' | 'skill'; arquivos: number; agentes: string[]; principal: boolean }
+export type SkillDetalhe = SkillResumo & { arvore: NoArquivo[] };
+export interface ArquivosAgente { fixos: ArquivoFixo[]; skills: SkillDetalhe[] }
+export interface ArquivoTexto { path: string; texto: string; existe: boolean; mtime: number | null }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
   kind: 'fichas' | 'pesquisa' | 'pedido' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
@@ -194,6 +202,12 @@ export const api = {
   agentes: (slug: string) => req<AgentesView>('GET', `${pj(slug)}/agentes`),
   agenteNotas: (nome: string) => req<{ arquivo: string; texto: string }>('GET', `/api/agentes/${encodeURIComponent(nome)}/notas`),
   salvarAgenteNotas: (nome: string, b: { nova?: string; texto?: string }) => req<{ arquivo: string; texto: string }>('POST', `/api/agentes/${encodeURIComponent(nome)}/notas`, b),
+  agenteArquivos: (nome: string) => req<ArquivosAgente>('GET', `/api/agentes/${encodeURIComponent(nome)}/arquivos`),
+  agenteSkills: (nome: string, skills: string[]) => req<ArquivosAgente>('PUT', `/api/agentes/${encodeURIComponent(nome)}/skills`, { skills }),
+  skills: () => req<SkillResumo[]>('GET', '/api/skills'),
+  skill: (id: string) => req<SkillDetalhe>('GET', `/api/skills/${encodeURIComponent(id)}`),
+  arquivo: (path: string) => req<ArquivoTexto>('GET', `/api/arquivo?path=${encodeURIComponent(path)}`),
+  salvarArquivo: (path: string, texto: string, mtime: number | null) => req<ArquivoTexto>('PUT', '/api/arquivo', { path, texto, mtime }),
   pedidoIa: (slug: string, ref: string) => req<PedidoIaView | null>('GET', `${pj(slug)}/pedido-ia?ref=${encodeURIComponent(ref)}`),
   pedirAjustes: (slug: string, path: string, b: { aba: 'video' | 'slides' | 'roteiro'; ids?: string[]; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
     req<PedidoIaStart & { ids: string[] }>('POST', `${pj(slug)}/piece/ajustes?path=${encodeURIComponent(path)}`, b),

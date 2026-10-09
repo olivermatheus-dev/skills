@@ -953,7 +953,7 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
   return (
     <>
       <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
-        <DialogContent aria-describedby={undefined}
+        <DialogContent aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}
           className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
           {/* cabeçalho: o que é (esquerda) e TODAS as ações (direita): marcar, virar ideia, IA (roxo) e abrir o original (cor do projeto) */}
           <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">

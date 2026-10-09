@@ -50,7 +50,7 @@ export function PedirAjustesBar({ slug, path, aba, comments }: { slug: string; p
         <>
           {abertas.length > 0 && (
             <PedirIa
-              trigger={<Button size="sm" className="gap-1.5"><Sparkles />Pedir ajustes ao Claude<span className="ml-0.5 rounded-full bg-black/10 px-1.5 text-[11px] tabular-nums">{abertas.length}</span></Button>}
+              trigger={<Button size="sm" variant="ai" className="gap-1.5"><Sparkles />Pedir ajustes ao Claude<span className="ml-0.5 rounded-full bg-black/10 px-1.5 text-[11px] tabular-nums">{abertas.length}</span></Button>}
               titulo={`Pedir ajustes: ${abertas.length} anotação(ões)`}
               descricao={<>Vai para {AGENTE[aba]}, que {DEPOIS[aba]}. O que precisar de decisão sua volta como pergunta na anotação. Anotações “ok” ficam de fora.</>}
               placeholder="Algo a mais para esta rodada? (opcional)"

@@ -373,7 +373,7 @@ function Painel({ slug, round, onClose }: { slug: string; round: string; onClose
         </>)}
         {(l.estado === 'erro' || l.estado === 'pendente') && !rodando && (<>
           <Button variant="ghost" onClick={onClose}>Fechar</Button>
-          <Button disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.estado === 'erro' ? 'Tentar de novo' : 'Rodar agora'}</Button>
+          <Button variant="ai" disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.estado === 'erro' ? 'Tentar de novo' : 'Rodar agora'}</Button>
         </>)}
       </div>
     </>

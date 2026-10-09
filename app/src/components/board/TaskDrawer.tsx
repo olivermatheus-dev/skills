@@ -254,7 +254,7 @@ function NextStep({ task, byId, pending, running, onMove, actions, runner }: {
       <div className={cx(box, 'border-primary/25 bg-primary-soft/40')}>
         <span className="flex-1 min-w-40">{naFila ? `Na fila da IA (${naFila.posicao}º): começa sozinha quando a anterior acabar` : 'Pronta para a IA'}</span>
         <UiButton size="xs" variant="outline" disabled={busy} onClick={() => runner.run.mutate({ mode: 'terminal', task: t.id })}><SquareTerminal /> No terminal</UiButton>
-        {!naFila && <UiButton size="xs" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> {runner.running ? 'Pôr na fila' : 'Rodar agora'}</UiButton>}
+        {!naFila && <UiButton size="xs" variant="ai" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> {runner.running ? 'Pôr na fila' : 'Rodar agora'}</UiButton>}
       </div>
     );
   }

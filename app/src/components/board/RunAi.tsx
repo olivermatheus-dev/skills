@@ -19,7 +19,7 @@ export function RunAiButton({ runner, onOpenTask }: { runner: Runner; onOpenTask
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button size="sm" variant={ready.length && !runner.running ? 'default' : 'outline'} className="gap-1.5">
+        <Button size="sm" variant={ready.length && !runner.running ? 'ai' : 'ai-soft'} className="gap-1.5">
           {runner.running ? <Loader2 className="animate-spin" /> : <Play />}
           {runner.running ? 'IA rodando' : 'Rodar IA'}
           {!!s?.fila.length && <span className="ml-0.5 inline-flex items-center gap-0.5 rounded-full bg-black/10 px-1.5 text-[11px] tabular-nums" title="Na fila da IA"><Clock className="size-3" />{s.fila.length}</span>}

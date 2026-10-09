@@ -1,17 +1,19 @@
-// Painel do anúncio (037 D): o mesmo desenho do painel de conteúdo (cabeçalho com todas as ações, mídia à esquerda, miolo), para o que o Oliver faz com o anúncio:
+// Painel do anúncio (037 D): cabeçalho com todas as ações (como o painel de conteúdo); à esquerda a prévia do anúncio como no feed e o destino;
+// à direita, separados por divisores: tags, sinal de resultado, classificação, análise da IA e nota. Para o que o Oliver faz com o anúncio:
 // corrigir funil/tipo/objetivo (o valor dele vence regra e IA, coleta nova não apaga), anotar, pôr tags e SALVAR (guarda uma cópia do anúncio
 // e da miniatura: o salvo continua abrindo inteiro mesmo se a Biblioteca tirar o anúncio do ar).
 import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Bookmark, BookmarkCheck, LogOut, Megaphone, Sparkles, Undo2, UserRound } from 'lucide-react';
+import { Activity, Bookmark, BookmarkCheck, CircleHelp, Filter, Info, LogOut, Megaphone, Sparkles, StickyNote, Tag as TagIcon, Undo2, UserRound } from 'lucide-react';
 import type { Ad, AdMark, AdMarkPatch, AnuncioHistorico, Classificacao } from '../../api';
 import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, fichaKeyDeAd, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
+import { Separator } from '../ui/separator';
 import { Button, SelectField, Textarea, cx, fmtDate, type SelectOption } from '../kit';
 import { Img, PlatformIcon, platformLabel, timeAgo } from './lib';
 import { Tip } from './toolbar';
 import { TagsInput, TagChip, useProjectTags } from '../notes/TagsInput';
-import { ChipDestino, ChipOferta, FUNIL, OBJETIVO, StatusBadge, TIPO, motivosDe, type StatusAd } from './AdChips';
+import { ChipDestino, ChipOferta, FUNIL, INCERTO, OBJETIVO, StatusBadge, TIPO, motivosDe, type StatusAd } from './AdChips';
 import { AnaliseAnuncio } from './ficha/AdFicha';
 import { AbrirOriginal, BotaoAnalisar, SeloAnalise } from './ficha/FichaPanel';
 import { useFichasResumo } from './ficha/useFichas';
@@ -66,7 +68,7 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
-      <DialogContent aria-describedby={undefined}
+      <DialogContent aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}
         className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1100px] sm:max-w-[1100px] h-[calc(100vh-2rem)] max-h-[860px]">
         {/* cabeçalho no mesmo padrão do painel de conteúdo: o que é (esquerda) e TODAS as ações (direita): salvar, IA (roxo) e abrir na Biblioteca (cor do projeto) */}
         <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">
@@ -106,112 +108,100 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 flex flex-col md:flex-row">
-          {/* mídia e destino */}
-          <aside className="md:w-[360px] shrink-0 border-b md:border-b-0 md:border-r border-border bg-muted/30 overflow-y-auto p-5 space-y-4">
-            <div className="rounded-xl overflow-hidden bg-muted border border-border">
-              {ad.media.type === 'video' && ad.media.videoUrl && !r.gone
-                ? <video src={ad.media.videoUrl} poster={r.thumb ?? ad.media.thumbnail ?? undefined} controls preload="none" playsInline className="w-full max-h-[460px] bg-black" />
-                : <Img local={r.thumb} remote={ad.media.thumbnail} className="w-full max-h-[460px] object-contain" fallback={<div className="aspect-square grid place-items-center text-xs text-muted-foreground">sem miniatura</div>} />}
-            </div>
-            {ad.media.type === 'video' && (r.gone || !ad.media.videoUrl) && <p className="text-xs text-muted-foreground">Vídeo pesado não vai para o repositório: só a miniatura fica guardada.</p>}
-            <dl className="text-xs space-y-1.5">
-              <Linha k="Plataformas"><span className="inline-flex gap-1.5 items-center">{ad.platforms.map((p) => <span key={p} title={platformLabel(p)}><PlatformIcon platform={p} size={14} /></span>)}{!ad.platforms.length && '—'}</span></Linha>
-              {ad.variations != null && ad.variations > 1 && <Linha k="Variações">{ad.variations} anúncios usam este criativo</Linha>}
-              {r.hist && <Linha k="Coletas">visto em {r.hist.coletas}{r.hist.saiuEm ? `; saiu até ${fmtDate(r.hist.saiuEm)}` : ''}{r.hist.reapareceu ? '; o criativo voltou com outro id' : ''}</Linha>}
-              {ad.endedAt && <Linha k="Terminou">{fmtDate(ad.endedAt)}</Linha>}
-            </dl>
-            {(ad.cta || ad.linkUrl) && (
-              <div className="rounded-lg border border-border bg-card p-3 text-xs space-y-1.5">
-                <div className="flex items-center gap-2">
-                  {ad.cta && <span className="px-2 py-0.5 rounded bg-muted font-medium">{ad.cta}</span>}
-                  {c && <ChipDestino c={c} />}
-                </div>
-                {ad.linkUrl && <a href={ad.linkUrl} target="_blank" rel="noreferrer" className="block text-primary-ink hover:underline break-all" title={ad.linkUrl}>{host}{(() => { try { const u = new URL(ad.linkUrl); return u.pathname !== '/' ? u.pathname : ''; } catch { return ''; } })()}</a>}
-                {c?.sinais.utm?.campaign && <p className="text-muted-foreground">Campanha (UTM): {c.sinais.utm.campaign}</p>}
-              </div>
-            )}
+        <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+          {/* esquerda: o anúncio como a pessoa vê no feed (texto, criativo, botão) e para onde o clique leva */}
+          <aside className="md:w-[380px] shrink-0 border-b md:border-b-0 md:border-r border-border bg-muted/30 md:overflow-y-auto p-5 space-y-4">
+            <Previa r={r} title={title} text={text} host={host} />
+            <Destino r={r} host={host} />
           </aside>
 
-          {/* miolo */}
-          <div className="flex-1 min-w-0 overflow-y-auto p-6 space-y-6">
-            <Secao titulo="Texto do anúncio">
-              {title && <p className="font-semibold text-sm">{title}</p>}
-              {text ? <p className="text-sm leading-relaxed whitespace-pre-line">{text}</p> : <p className="text-sm text-muted-foreground italic">{ad.text?.includes('{{') ? 'Catálogo (texto dinâmico): a Biblioteca não traz o texto real.' : 'Sem texto.'}</p>}
-              {clean(ad.description) && <p className="text-xs text-muted-foreground">{clean(ad.description)}</p>}
-              {c?.oferta.tem && <div><ChipOferta c={c} /></div>}
-            </Secao>
+          {/* direita: o que o Oliver faz com o anúncio, de cima para baixo; cada bloco separado por divisor */}
+          <div className="flex-1 min-w-0 md:overflow-y-auto">
+            <div className="p-6 space-y-5">
+              <Secao icone={<TagIcon />} titulo="Tags" dica="Para achar e agrupar depois. Clique numa sugestão para pôr ou tirar.">
+                <TagsInput slug={slug} value={tags} onChange={(t) => onMark({ tags: t })} />
+                {grupos.map((g) => (
+                  <div key={g.g} className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-[11px] font-medium text-muted-foreground mr-1">{g.nome}</span>
+                    {g.defs.map((d) => {
+                      const on = tags.includes(d.id);
+                      return (
+                        <button key={d.id} type="button" aria-pressed={on} onClick={() => toggleTag(d.id)} title={d.definicao}
+                          className={cx('rounded-full transition outline-none focus-visible:ring-2 focus-visible:ring-ring', on ? 'ring-1 ring-primary' : 'opacity-60 hover:opacity-100')}>
+                          <TagChip id={d.id} def={d} small />
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))}
+              </Secao>
 
-            {c && auto && (
-              <Secao titulo="Classificação" dica="Escolha o valor certo. O seu vale sobre a regra (e sobre a IA); coleta nova e reclassificação não apagam.">
-                <div className="grid gap-3">
-                  {CAMPOS.map((f) => {
-                    const regra = auto[f.k];
-                    // ordem fixa: a sua correção (marks.json) > a análise da IA (ficha) > a regra. Editar aqui escreve SÓ no marks.json
-                    const { valor, origem } = resolverCampo(f.k, regra as string, mark, ia?.[f.k]);
-                    // o que valeria sem a sua correção: escolher esse valor desfaz a correção
-                    const { valor: semVoce, origem: origemSemVoce } = resolverCampo(f.k, regra as string, undefined, ia?.[f.k]);
-                    const linhas = origem === 'regra' ? motivosDe(auto, f.k) : [];
-                    const motivoIa = ia?.motivo?.[f.k];
-                    const iaTxt = ia?.[f.k] ? (ia[f.k] === regra ? `A IA confirmou a regra (${f.labels[regra as string]}).` : `A IA ${motivoIa ? 'corrigiu a regra' : 'disse'}: ${f.labels[ia[f.k]!]}.`) : '';
-                    return (
-                      <div key={f.k} className="grid grid-cols-[88px_1fr] gap-x-3 items-start">
-                        <Tip content={f.hint}><span className="text-xs font-medium text-muted-foreground pt-2 cursor-default">{f.label}</span></Tip>
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <SelectField aria-label={f.label} value={valor} options={optionsOf(f)}
-                              onChange={(x) => x && onMark({ override: { [f.k]: x === semVoce ? null : x } })} />
-                            {origem === 'voce'
-                              ? <>
-                                <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 text-primary-ink text-[11px] font-semibold px-2 py-0.5"><UserRound className="size-3" />você</span>
-                                <Tip content={`Voltar ao automático (${origemSemVoce === 'ia' ? 'IA' : 'regras'}: ${f.labels[semVoce as string]})`}>
-                                  <button type="button" onClick={() => onMark({ override: { [f.k]: null } })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><Undo2 className="size-3.5" />voltar ao automático</button>
-                                </Tip>
-                              </>
-                              : origem === 'ia'
-                                ? <span className="inline-flex items-center gap-1 rounded-full bg-ai-muted text-ai-ink text-[11px] font-semibold px-2 py-0.5"><Sparkles className="size-3" />IA</span>
-                                : <span className={cx('text-[11px]', auto.confiancaCampos[f.k] < 0.5 ? 'text-warning-ink' : 'text-muted-foreground')}>regra · {Math.round(auto.confiancaCampos[f.k] * 100)}%{auto.confiancaCampos[f.k] < 0.5 ? ' (incerto)' : ''}</span>}
+              <Separator />
+
+              <Secao icone={<Activity />} titulo="Sinal de resultado" dica="Indireto: a Biblioteca não mostra gasto nem alcance. Anúncio que fica muito tempo no ar, ganha variações ou volta depois de sair tende a estar dando resultado.">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <Stat k={r.gone ? 'dias no ar (até sair)' : 'dias no ar'} v={r.days != null ? String(r.days) : '—'} extra={<StatusBadge status={r.status} sinal={r.sinal} />} />
+                  <Stat k="variações" v={ad.variations != null ? String(ad.variations) : '—'} tip="Anúncios que usam este mesmo criativo e texto." />
+                  <Stat k="do mesmo conceito" v={c ? String(c.sinais.irmaos) : '—'} tip="Anúncios ativos do mesmo concorrente com o mesmo texto e título." />
+                  <Stat k="coletas" v={r.hist ? String(r.hist.coletas) : '—'}
+                    tip={r.hist ? `Visto em ${r.hist.coletas} coleta(s)${r.hist.saiuEm ? `; saiu até ${fmtDate(r.hist.saiuEm)}` : ''}${r.hist.reapareceu ? '; o criativo voltou com outro id (sinal de que vale manter)' : ''}.` : undefined}
+                    extra={r.hist?.reapareceu ? <span className="text-[11px] font-medium text-success-ink">voltou</span> : ad.endedAt ? <span className="text-[11px] text-muted-foreground">terminou {fmtDate(ad.endedAt)}</span> : undefined} />
+                </div>
+              </Secao>
+
+              {c && auto && <>
+                <Separator />
+                <Secao icone={<Filter />} titulo="Classificação" dica="Quem decidiu cada valor aparece no selo: regra, IA ou você. O seu vale sobre a regra e sobre a IA; coleta nova não apaga.">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {CAMPOS.map((f) => {
+                      const regra = auto[f.k] as string;
+                      // ordem fixa: a sua correção (marks.json) > a análise da IA (ficha) > a regra. Editar aqui escreve SÓ no marks.json
+                      const { valor, origem } = resolverCampo(f.k, regra, mark, ia?.[f.k]);
+                      // o que valeria sem a sua correção: escolher esse valor desfaz a correção
+                      const { valor: semVoce, origem: origemSemVoce } = resolverCampo(f.k, regra, undefined, ia?.[f.k]);
+                      const conf = auto.confiancaCampos[f.k], incerto = origem === 'regra' && conf < INCERTO;
+                      const motivoIa = ia?.motivo?.[f.k];
+                      const porque = origem === 'voce'
+                        ? `Você corrigiu. ${origemSemVoce === 'ia' ? 'A IA' : 'As regras'} diziam: ${f.labels[semVoce as string]}.`
+                        : origem === 'ia'
+                          ? (ia?.[f.k] === regra ? 'A IA confirmou a regra.' : `A IA corrigiu a regra (${f.labels[regra]}).`) + (motivoIa ? ` ${motivoIa}` : '')
+                          : motivosDe(auto, f.k).map((x) => x.replace(/^• /, '')).join(' · ') || 'Nenhum sinal forte: valor padrão das regras.';
+                      return (
+                        <div key={f.k} className={cx('rounded-xl border bg-card p-3 flex flex-col gap-2', incerto ? 'border-warning/40' : 'border-border')}>
+                          <div className="flex items-center gap-2">
+                            <Tip content={f.hint}><span className="text-xs font-semibold cursor-help">{f.label}</span></Tip>
+                            <span className="ml-auto"><Origem origem={origem} conf={conf} incerto={incerto} /></span>
                           </div>
-                          <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                            {origem === 'voce' ? `As regras diziam: ${f.labels[regra as string]}.${iaTxt ? ` ${iaTxt}` : ''}`
-                              : origem === 'ia' ? `${iaTxt}${motivoIa ? ` Motivo: ${motivoIa}` : ''}`
-                              : linhas.length ? linhas.join(' · ').replace(/• /g, '') : 'Nenhum sinal forte: valor padrão das regras.'}
-                          </p>
+                          <SelectField aria-label={f.label} value={valor} options={optionsOf(f)} className="w-full"
+                            onChange={(x) => x && onMark({ override: { [f.k]: x === semVoce ? null : x } })} />
+                          <Tip content={porque.length > 110 ? porque : undefined}>
+                            <p className="text-xs text-muted-foreground leading-snug line-clamp-3">{porque}</p>
+                          </Tip>
+                          {origem === 'voce' && (
+                            <button type="button" onClick={() => onMark({ override: { [f.k]: null } })} className="mt-auto self-start inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+                              <Undo2 className="size-3.5" />voltar ao automático
+                            </button>
+                          )}
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                </Secao>
+              </>}
+
+              {selo?.analisada && <>
+                <Separator />
+                <Secao icone={<Sparkles className="text-ai" />} titulo="Análise da IA" dica="Ficha do anúncio. Funil, tipo e objetivo ficam em Classificação, acima.">
+                  <AnaliseAnuncio slug={slug} compId={r.compId} fichaKey={fichaKey} resumo={selo} />
+                </Secao>
+              </>}
+
+              <Separator />
+
+              <Secao icone={<StickyNote />} titulo="Nota" dica="Por que este anúncio importa e o que copiar: o mecanismo, não a frase.">
+                <Textarea rows={4} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com a dor do prontuário; oferta de 15 dias sem cartão." />
               </Secao>
-            )}
-
-            {selo?.analisada && (
-              <Secao titulo="Análise da IA" dica="Ficha do anúncio (040). Funil, tipo e objetivo ficam em Classificação, acima.">
-                <AnaliseAnuncio slug={slug} compId={r.compId} fichaKey={fichaKey} resumo={selo} />
-              </Secao>
-            )}
-
-            <Secao titulo="Nota" dica="Por que este anúncio importa, o que copiar (o mecanismo, não a frase).">
-              <Textarea rows={4} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com a dor do prontuário; oferta de 15 dias sem cartão." />
-            </Secao>
-
-            <Secao titulo="Tags">
-              <TagsInput slug={slug} value={tags} onChange={(t) => onMark({ tags: t })} />
-              {grupos.map((g) => (
-                <div key={g.g} className="flex flex-wrap items-center gap-1.5">
-                  <span className="text-[11px] text-muted-foreground w-full sm:w-auto sm:mr-1">{g.nome}</span>
-                  {g.defs.map((d) => {
-                    const on = tags.includes(d.id);
-                    return (
-                      <button key={d.id} type="button" aria-pressed={on} onClick={() => toggleTag(d.id)} title={d.definicao}
-                        className={cx('rounded-full transition outline-none focus-visible:ring-2 focus-visible:ring-ring', on ? 'ring-1 ring-primary' : 'opacity-60 hover:opacity-100')}>
-                        <TagChip id={d.id} def={d} small />
-                      </button>
-                    );
-                  })}
-                </div>
-              ))}
-            </Secao>
+            </div>
           </div>
         </div>
       </DialogContent>
@@ -219,17 +209,114 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
   );
 }
 
-function Secao({ titulo, dica, children }: { titulo: string; dica?: string; children: ReactNode }) {
+/** o anúncio como aparece no feed: anunciante + "Patrocinado", texto principal (com "ver mais"), criativo e a faixa do link com o botão */
+function Previa({ r, title, text, host }: { r: AdPanelData; title: string; text: string; host: string | null }) {
+  const { ad, c } = r;
+  const [aberto, setAberto] = useState(false);
+  const longo = text.length > 220 || text.split('\n').length > 4;
+  const nome = ad.pageName || r.compName;
+  const desc = clean(ad.description);
   return (
-    <section className="space-y-2">
-      <div className="flex items-baseline gap-2">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{titulo}</h3>
-        {dica && <span className="text-xs text-muted-foreground">{dica}</span>}
+    <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="flex items-center gap-2.5 px-3 pt-3">
+        <span className="size-8 rounded-full bg-muted grid place-items-center text-xs font-semibold text-muted-foreground shrink-0">{nome.slice(0, 1).toUpperCase()}</span>
+        <div className="min-w-0 leading-tight">
+          <div className="text-sm font-semibold truncate">{nome}</div>
+          <div className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
+            Patrocinado · {MEDIA_LABEL[ad.media.type].toLowerCase()}
+            <span className="inline-flex items-center gap-1 ml-1">{ad.platforms.map((p) => <span key={p} title={platformLabel(p)}><PlatformIcon platform={p} size={11} /></span>)}</span>
+          </div>
+        </div>
       </div>
+
+      <div className="px-3 py-2.5 text-[13px] leading-relaxed">
+        {text ? (
+          <>
+            <div className={cx('whitespace-pre-line break-words', !aberto && longo && 'line-clamp-4')}>{text}</div>
+            {longo && <button type="button" onClick={() => setAberto(!aberto)} className="text-xs font-medium text-muted-foreground hover:text-foreground mt-0.5">{aberto ? 'ver menos' : 'ver mais'}</button>}
+          </>
+        ) : (
+          <p className="text-xs text-muted-foreground italic">{ad.text?.includes('{{') ? 'Catálogo (texto dinâmico): a Biblioteca não traz o texto real.' : 'Sem texto principal.'}</p>
+        )}
+        {c?.oferta.tem && <div className="mt-2"><ChipOferta c={c} /></div>}
+      </div>
+
+      <div className="bg-muted">
+        {ad.media.type === 'video' && ad.media.videoUrl && !r.gone
+          ? <video src={ad.media.videoUrl} poster={r.thumb ?? ad.media.thumbnail ?? undefined} controls preload="none" playsInline className="w-full max-h-[440px] bg-black" />
+          : <Img local={r.thumb} remote={ad.media.thumbnail} className="w-full max-h-[440px] object-contain" fallback={<div className="aspect-square grid place-items-center text-xs text-muted-foreground">sem miniatura</div>} />}
+      </div>
+      {ad.media.type === 'video' && (r.gone || !ad.media.videoUrl) && <p className="px-3 pt-2 text-[11px] text-muted-foreground">Vídeo pesado não vai para o repositório: só a miniatura fica guardada.</p>}
+
+      {(host || title || desc || ad.cta) && (
+        <div className="flex items-center gap-3 px-3 py-2.5 bg-muted/60 border-t border-border">
+          <div className="min-w-0 flex-1 leading-tight">
+            {host && <div className="text-[10px] uppercase tracking-wide text-muted-foreground truncate">{host}</div>}
+            {title && <div className="text-[13px] font-semibold line-clamp-2">{title}</div>}
+            {desc && <div className="text-[11px] text-muted-foreground line-clamp-2">{desc}</div>}
+          </div>
+          {ad.cta && <span className="shrink-0 rounded-md bg-card border border-border px-2.5 py-1 text-xs font-semibold">{ad.cta}</span>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** para onde o clique leva: tipo de destino, o link inteiro e a campanha (UTM) */
+function Destino({ r, host }: { r: AdPanelData; host: string | null }) {
+  const { ad, c } = r;
+  if (!ad.linkUrl && !c) return null;
+  const caminho = (() => { try { const u = new URL(ad.linkUrl ?? ''); return u.pathname !== '/' ? u.pathname : ''; } catch { return ''; } })();
+  return (
+    <div className="rounded-xl border border-border bg-card p-3 space-y-1.5">
+      <div className="flex items-center gap-2">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Destino do clique</span>
+        {c && <span className="ml-auto"><ChipDestino c={c} /></span>}
+      </div>
+      {ad.linkUrl
+        ? <a href={ad.linkUrl} target="_blank" rel="noreferrer" className="block text-sm text-primary-ink hover:underline break-all" title={ad.linkUrl}>{host}{caminho}</a>
+        : <p className="text-sm text-muted-foreground">Sem link.</p>}
+      {c?.sinais.utm?.campaign && <p className="text-xs text-muted-foreground">Campanha (UTM): <span className="text-foreground">{c.sinais.utm.campaign}</span></p>}
+    </div>
+  );
+}
+
+/** bloco da coluna da direita: título curto com ícone; a explicação mora no (i) para não poluir */
+function Secao({ icone, titulo, dica, children }: { icone?: ReactNode; titulo: string; dica?: string; children: ReactNode }) {
+  return (
+    <section className="space-y-3">
+      <h3 className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground [&_svg]:size-3.5">
+        {icone}{titulo}
+        {dica && <Tip content={dica}><Info className="!size-3 cursor-help opacity-70" aria-label={dica} /></Tip>}
+      </h3>
       {children}
     </section>
   );
 }
-function Linha({ k, children }: { k: string; children: ReactNode }) {
-  return <div className="flex gap-2"><dt className="w-20 shrink-0 text-muted-foreground">{k}</dt><dd className="min-w-0">{children}</dd></div>;
+
+function Stat({ k, v, tip, extra }: { k: string; v: string; tip?: string; extra?: ReactNode }) {
+  return (
+    <Tip content={tip}>
+      <div className={cx('rounded-lg border border-border bg-card px-3 py-2', tip && 'cursor-help')}>
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-semibold tabular-nums leading-tight">{v}</span>
+          {extra && <span className="ml-auto">{extra}</span>}
+        </div>
+        <div className="text-[11px] text-muted-foreground">{k}</div>
+      </div>
+    </Tip>
+  );
+}
+
+/** quem decidiu o valor: você (cor do projeto), IA (roxo) ou regra (com a confiança; âmbar se incerto) */
+function Origem({ origem, conf, incerto }: { origem: 'voce' | 'ia' | 'regra'; conf: number; incerto: boolean }) {
+  if (origem === 'voce') return <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 text-primary-ink text-[10px] font-semibold px-1.5 py-px"><UserRound className="size-3" />você</span>;
+  if (origem === 'ia') return <span className="inline-flex items-center gap-1 rounded-full bg-ai-muted text-ai-ink text-[10px] font-semibold px-1.5 py-px"><Sparkles className="size-3" />IA</span>;
+  return (
+    <Tip content={`Regra automática, confiança ${Math.round(conf * 100)}%.${incerto ? '\nIncerto: vale conferir.' : ''}`}>
+      <span className={cx('inline-flex items-center gap-1 rounded-full text-[10px] font-semibold px-1.5 py-px cursor-help', incerto ? 'bg-warning/15 text-warning-ink' : 'bg-muted text-muted-foreground')}>
+        {incerto && <CircleHelp className="size-3" />}regra · {Math.round(conf * 100)}%
+      </span>
+    </Tip>
+  );
 }

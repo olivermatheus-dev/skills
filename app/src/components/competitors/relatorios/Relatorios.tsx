@@ -69,7 +69,7 @@ export default function RelatoriosSection({ slug, comp, onOpenItem }: { slug: st
         {lista.length > 0 && <span className="text-xs text-muted-foreground tabular-nums">{lista.length}</span>}
         {rodando
           ? <PedidoStatus slug={slug} pedido={pedido} className="ml-auto max-w-md" />
-          : <Button variant="ghost" className="ml-auto inline-flex items-center gap-1.5" onClick={() => setGerar(true)}><ScanSearch className="size-3.5" />Gerar relatório</Button>}
+          : <Button variant="ai-soft" className="ml-auto inline-flex items-center gap-1.5 border border-ai-border" onClick={() => setGerar(true)}><ScanSearch className="size-3.5" />Gerar relatório</Button>}
       </div>
       {!rodando && pedido?.status === 'erro' && <PedidoStatus slug={slug} pedido={pedido} className="mb-2" />}
       {q.isLoading && <div className="h-24 rounded-lg border border-border bg-card animate-pulse" />}
@@ -368,7 +368,7 @@ function GerarDialog({ slug, comp, onClose }: { slug: string; comp: string; onCl
           <div className="flex items-center justify-end gap-2">
             <Button variant="ghost" disabled={!sel.length || m.isPending} onClick={() => m.mutate('comando')} className="inline-flex items-center gap-1.5"><Copy className="size-3.5" />Só o comando</Button>
             <Button variant="ghost" disabled={!sel.length || m.isPending} onClick={() => m.mutate('terminal')} className="inline-flex items-center gap-1.5"><ExternalLink className="size-3.5" />Abrir no terminal</Button>
-            <Button disabled={!sel.length || m.isPending} onClick={() => m.mutate('background')} className="inline-flex items-center gap-1.5">{m.isPending ? <Spinner /> : <Play className="size-3.5" />}Gerar em segundo plano</Button>
+            <Button variant="ai" disabled={!sel.length || m.isPending} onClick={() => m.mutate('background')} className="inline-flex items-center gap-1.5">{m.isPending ? <Spinner /> : <Play className="size-3.5" />}Gerar em segundo plano</Button>
           </div>
         </>}
       </DialogContent>

@@ -1,28 +1,16 @@
 // Análise da IA no painel do anúncio (040 G): o mini painel da ficha de um anúncio, com o que importa de um criativo (por que roda há tanto tempo,
-// headline da arte, gancho, ângulo, prova, gatilhos, o que adaptar) e o sinal de resultado (histórico da 037, congelado na análise).
+// headline da arte, gancho, ângulo, prova, gatilhos, o que adaptar) (o sinal de resultado mora no painel do anúncio, ao vivo).
 // Reaproveita os componentes de edição do painel de conteúdo (FichaPanel): cada edição vai para `ficha.override`, como no conteúdo.
 // Funil, tipo e objetivo NÃO se editam aqui: moram na seção "Classificação" do painel do anúncio e vão só para ads/marks.json (um lugar só).
 import { useMemo } from 'react';
 import { Lightbulb, RefreshCw, Sparkles } from 'lucide-react';
 import { FCtx, Campo, EditText, Gatilhos, MultiSelect, VSelect, type Ctx } from './FichaPanel';
 import { useFicha, useFichasVocab } from './useFichas';
-import { fmtDate, fmtNum } from '../../kit';
+import { fmtDate } from '../../kit';
 import { Spinner } from '../lib';
-import { Tip } from '../toolbar';
 import type { FichaResumo } from '../../../api';
 
 const NOME_CAMPO = { funil: 'Funil', tipo: 'Tipo', objetivo: 'Objetivo' } as const;
-
-function Stat({ k, v, tip }: { k: string; v: string; tip?: string }) {
-  return (
-    <Tip content={tip}>
-      <div className="rounded-lg border border-border bg-card px-2.5 py-2 cursor-help">
-        <div className="text-base font-semibold tabular-nums leading-tight">{v}</div>
-        <div className="text-[11px] text-muted-foreground">{k}</div>
-      </div>
-    </Tip>
-  );
-}
 
 export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: string; compId: string; fichaKey: string; resumo?: Pick<FichaResumo, 'analisada'> }) {
   const analisada = !!resumo?.analisada;
@@ -49,16 +37,6 @@ export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: strin
             onSave={(x) => ctx.edit('porQue', x.trim() ? `hipótese: ${x.trim().replace(/^hip[oó]tese:\s*/i, '')}` : null)} /></div>
         </Campo>
 
-        {h && (
-          <Campo label="Sinal de resultado" aside={<span className="text-[11px] text-muted-foreground">indireto · congelado em {fmtDate(a?.geradoEm)}</span>}>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-              <Stat k="dias no ar" v={h.diasNoAr != null ? fmtNum(h.diasNoAr) : '—'} tip="Desde o início informado pela Biblioteca. Sem gasto nem alcance: longevidade pode ser anúncio barato ou institucional." />
-              <Stat k="variações" v={h.variations != null ? fmtNum(h.variations) : '—'} tip="Anúncios que usam este criativo e texto." />
-              <Stat k="do mesmo conceito" v={h.irmaos != null ? fmtNum(h.irmaos) : '—'} tip="Anúncios ativos do mesmo concorrente com o mesmo texto e título." />
-              <Stat k={h.saiuDoAr ? 'saiu do ar' : h.reapareceu ? 'voltou' : 'no ar'} v={h.saiuDoAr ? 'sim' : h.reapareceu ? 'sim' : 'segue'} tip="Saiu do ar numa coleta completa, ou o mesmo criativo voltou com outro id (sinal de que vale manter)." />
-            </div>
-          </Campo>
-        )}
 
         <div className="grid gap-5 lg:grid-cols-2">
           <Campo label={<>Headline da arte <span className="font-normal normal-case tracking-normal">· {c.headline?.fonte === 'arte' ? 'texto na imagem' : c.headline?.fonte ?? '—'}</span></>} paths={['headline.texto']}>

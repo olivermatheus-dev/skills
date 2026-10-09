@@ -115,7 +115,7 @@ export function SelecaoBar({ s, onAnalisar, busy }: { s: Selecao; onAnalisar: ()
         <label className="inline-flex items-center gap-2 text-xs whitespace-nowrap cursor-pointer">
           <Switch checked={s.incluir} onCheckedChange={s.setIncluir} aria-label="Incluir já analisados" />Incluir já analisados
         </label>
-        <Button disabled={!n || busy} onClick={onAnalisar} className="inline-flex items-center gap-1.5 whitespace-nowrap"><ScanSearch className="size-4" />Analisar</Button>
+        <Button variant="ai" disabled={!n || busy} onClick={onAnalisar} className="inline-flex items-center gap-1.5 whitespace-nowrap"><ScanSearch className="size-4" />Analisar</Button>
       </div>
     </div>
   );
@@ -198,7 +198,7 @@ export function AnalisarDialog({ open, onOpenChange, s, fila, compName, onDone }
         <div className="flex items-center justify-end gap-2 pt-1">
           <Button variant="ghost" onClick={() => onOpenChange(false)}>Cancelar</Button>
           <Button variant="ghost" disabled={!itens.length || fila.pedir.isPending} onClick={() => enviar(false)} title="Grava o pedido sem rodar (para rodar depois, aqui ou no terminal)">Só pôr na fila</Button>
-          <Button disabled={!itens.length || fila.pedir.isPending} onClick={() => enviar(true)} className="inline-flex items-center gap-1.5">
+          <Button variant="ai" disabled={!itens.length || fila.pedir.isPending} onClick={() => enviar(true)} className="inline-flex items-center gap-1.5">
             {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-4" />}{ocupado ? 'Entrar na fila' : 'Rodar agora'}
           </Button>
         </div>
@@ -264,14 +264,14 @@ export function FilaFaixa({ fila }: { fila: Fila }) {
         </div>
       )}
       {n > 0 && (
-        <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-4 py-2 text-sm">
-          <Clock className="size-4 text-muted-foreground" />
+        <div className="flex items-center gap-3 rounded-xl border border-ai-border bg-ai-soft px-4 py-2 text-sm text-ai-ink">
+          <Clock className="size-4 text-ai" />
           <span><b className="font-semibold tabular-nums">{n}</b> na fila de análise</span>
-          <span className="text-xs text-muted-foreground">~{fmtUsd(e.usd)} · ~{e.min} min</span>
+          <span className="text-xs text-ai-ink/75">~{fmtUsd(e.usd)} · ~{e.min} min</span>
           <div className="ml-auto flex items-center gap-2">
             {s.naFila
-              ? <span className="text-xs text-muted-foreground">Na fila da IA ({s.naFila}º): começa sozinha quando a anterior acabar.</span>
-              : <Button disabled={fila.rodar.isPending} onClick={() => fila.rodar.mutate()} className="!py-1 inline-flex items-center gap-1.5 text-xs"
+              ? <span className="text-xs text-ai-ink/75">Na fila da IA ({s.naFila}º): começa sozinha quando a anterior acabar.</span>
+              : <Button variant="ai" disabled={fila.rodar.isPending} onClick={() => fila.rodar.mutate()} className="!py-1 inline-flex items-center gap-1.5 text-xs"
                 title={s.ocupado ? `A IA está ocupada${s.ocupado.task ? ` com ${s.ocupado.task}` : ''}: entra na fila e roda sozinha quando ela acabar` : undefined}>
                 {fila.rodar.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}{s.ocupado ? 'Entrar na fila' : 'Rodar agora'}</Button>}
           </div>

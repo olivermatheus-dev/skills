@@ -117,7 +117,7 @@ export function PedirIa({ trigger, titulo, descricao, instrucoes = true, placeho
           </div>
         )}
         <div className="p-3 flex flex-col gap-2">
-          <Button size="sm" disabled={!!busy} onClick={() => go('background')}>{busy === 'background' ? <Loader2 className="animate-spin" /> : <Play />} Rodar em segundo plano</Button>
+          <Button size="sm" variant="ai" disabled={!!busy} onClick={() => go('background')}>{busy === 'background' ? <Loader2 className="animate-spin" /> : <Play />} Rodar em segundo plano</Button>
           <Button size="sm" variant="outline" disabled={!!busy} onClick={() => go('terminal')}><SquareTerminal /> Abrir no terminal (acompanhar e conversar)</Button>
         </div>
       </PopoverContent>
