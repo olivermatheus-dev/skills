@@ -365,7 +365,9 @@ export async function getBrand(slug: string) {
 export async function saveBrand(slug: string, data: unknown) {
   const { brandToCss, brandMdBlock, upsertBrandMd } = await import('./brand');
   const json = brandFile(slug, 'brand.json');
-  const v = check(Brand, data, json);
+  let v = check(Brand, data, json);
+  const primary = v.groups.flatMap((g) => g.tokens).find((t) => t.name === 'primary')?.value;
+  if (primary && /^#[0-9a-f]{6}$/i.test(primary)) { const { resolveTonal } = await import('./tonal'); v = { ...v, tonal: resolveTonal(primary, v.tonal) }; }
   write(json, `${JSON.stringify(v, null, 2)}\n`);
   write(brandFile(slug, 'brand.css'), brandToCss(v));
   const md = brandFile(slug, 'BRAND.md');

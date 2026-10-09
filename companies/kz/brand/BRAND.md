@@ -6,10 +6,13 @@
 ## Kit de marca (estilo, ícones e anotações)
 
 **Ícones:** só **Lucide** (lucide.dev, licença ISC), sem misturar bibliotecas. Traço `1.5` (`--icon-stroke`), estilo linha, cor `--primary` (`--icon-color`). SVG pronto: `node tools/icon.mjs <nome> --brand <slug>`.
+
+**Anotações:**
+Nosso estilo na maioria das vezes será monocromática, usando variações mas mantendo a cor principal e suas versões mais pastéis na composição.
 <!-- kit-de-marca:fim -->
 
 ## Essência visual
-**Calma antes de impacto.** Fundo creme, coral só como destaque, pastéis suaves, cantos arredondados e muito respiro. Acolhedor, nunca corporativo. Peças sempre no modo claro (o modo escuro existe só dentro do app).
+**Calma antes de impacto.** Fundo creme, coral só como destaque, pastéis suaves, cantos arredondados e muito respiro. Acolhedor, nunca corporativo. Peças no modo claro por padrão; slide escuro só com os tons 800–900 da escala (ver Fundo).
 
 ## Cores
 | token | hex | papel / significado |
@@ -26,19 +29,25 @@
 | --primary como texto | — | **não usar coral #ef7960 como cor de texto** (2,6:1 sobre o creme) |
 | --accent | #d66954 | coral profundo: palavra de ênfase sobre fundo claro (#bc5a47 se precisar de AAA) |
 | --accent-soft | #fce0d7 | fundo de tag e de realce |
-| pastéis | sage #cfe0d0 · lavanda #d8d2e3 · céu #cdd8e0 · manteiga #f1e7c9 · rosa #f1d6cc · argila #ddcfc2 | categorias e apoios (ex.: tipos de sessão na agenda), nunca fundo da peça inteira |
+| pastéis | sage #cfe0d0 · lavanda #d8d2e3 · céu #cdd8e0 · manteiga #f1e7c9 · rosa #f1d6cc · argila #ddcfc2 | **só semânticos**: cor de uma funcionalidade ou categoria (ex.: tipos de sessão na agenda); nunca como paleta geral nem fundo da peça inteira |
+| --tone-50 … --tone-950 | escala gerada da cor principal (kit de marca → Paleta tonal) | **a paleta das peças**: tons claros e escuros do coral. Texto sobre cada tom: `--on-tone-N` (contraste ≥ 4,5:1) |
 
 ## UI do produto (para recriar telas em vídeo e carrossel)
-Medido no print do painel (2026-10-07): fundo `--bg`, barra lateral e cards brancos (raio ~16 px, borda `--border` #ece4dc, sombra quase nula), divisórias `--ui-divider`, botões coral com texto branco, avatar com iniciais coral sobre `--ui-avatar`, brilho coral suave no canto do card de destaque (`--ui-glow`), blocos de ícone dos Atalhos em 4 pares fundo/traço (`--tile-coral`, `--tile-teal`, `--tile-amber`, `--tile-lilac`), rótulos pequenos em caixa alta `--ui-muted`. Saudação: "Boa tarde," em Montserrat + **nome em Fraunces itálico coral**. Ícones de linha (Lucide). Tokens em `brand.css` > "UI do app".
+Medido no print do painel (2026-10-07): fundo `--bg`, barra lateral e cards brancos (raio ~16 px, borda `--border` #ece4dc, sombra quase nula), divisórias `--ui-divider`, botões coral com texto branco, avatar com iniciais coral sobre `--ui-avatar`, brilho coral suave no canto do card de destaque (`--ui-glow`), blocos de ícone dos Atalhos em 4 pares fundo/traço (`--tile-coral`, `--tile-teal`, `--tile-amber`, `--tile-lilac`), rótulos pequenos em caixa alta `--ui-muted`. Saudação: "Boa tarde," em Montserrat + **nome em serifa itálica coral (hoje Newsreader no material; o app ainda usa Fraunces)**. Ícones de linha (Lucide). Tokens em `brand.css` > "UI do app".
 
 ## Texto
-- **Serifa de destaque:** Fraunces itálico (`--font-accent`), 1 palavra por tela (nome, palavra-chave), como o nome na saudação do app.
-- Título e frase em `--text`. Ênfase: 1 palavra por título em `--accent` (3,3:1 sobre o creme: só em título grande, nunca em texto corrido).
+- **Serifa de destaque:** Newsreader (itálico ou romano; trocou a Fraunces em 2026-10-09) (`--font-accent`): nome, palavra da virada ou citação curta, como o nome na saudação do app.
+- Título e frase em `--text`. Ênfase **rara** (decisão de 2026-10-09): no máximo em 1 a cada 3 slides, só na palavra da virada, alternando `--accent` (3,3:1 sobre o creme: só em título grande, nunca em texto corrido) e a serifa de destaque. Título comum fica numa cor só; o destaque vem de escala e layout.
 - Montserrat em tudo: títulos 700 (line-height 1.15, −0.01em), subtítulos 600, corpo 400 (line-height 1.6).
-- Sem caixa alta em texto longo. Sem peso 900. Sem serifa.
+- Sem caixa alta em texto longo. Sem peso 900. Serifa só a de destaque (nunca em corpo de texto).
 
 ## Fundo
-Liso, creme `--bg`. Profundidade com cards brancos e sombra suave.
+- O fundo do slide é **creme `--bg` / branco** ou **um tom da escala** (`--tone-50`…`--tone-950`). Claros: 50–100; campos de cor: 200–300; ênfase: 600–700.
+- **Slide escuro permitido** com os tons 800–900 (quente, nunca preto puro); texto com `--on-tone-N`. Isto vale para peças; o modo escuro do app segue só dentro do app.
+- Pastéis são **só semânticos** (cor de uma funcionalidade/categoria), nunca fundo geral.
+- Coral `#ef7960` continua **só em pontos** (CTA, ícone, palavra de destaque), nunca em bloco grande. Para campos de cor use os tons 200–300 ou 600–700.
+- Gradiente só **local** (brilho num canto, transição entre dois tons vizinhos da escala dentro de um elemento), nunca como fundo inteiro.
+- Profundidade com cards brancos e sombra suave.
 
 ## Formas
 Raio 16 px (cards) e 10 px (chips e botões pequenos). Sombras suaves (`--shadow-md` padrão). Bordas `--border` 1 px.

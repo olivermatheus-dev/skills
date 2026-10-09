@@ -7,6 +7,7 @@ import { api, type Brand, type BrandFont, type BrandPreset } from '../../api';
 import { Badge, Button, Card, ErrorBox, Input, LinesInput, Select, Textarea, cx } from '../kit';
 import { toast } from '../toast';
 import { qk, useBrandKit } from '../../queries';
+import TonalPalette from './TonalPalette';
 
 const SAMPLE_ICONS: [string, LucideIcon][] = [['calendar-check', CalendarCheck], ['bell', Bell], ['users', Users], ['wallet', Wallet], ['file-text', FileText], ['message-circle', MessageCircle], ['clock', Clock], ['heart', Heart], ['check', Check]];
 const isColor = (v: string) => /^(#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\()/i.test(v.trim());
@@ -160,6 +161,10 @@ export default function BrandEditor({ slug, onDirty }: { slug: string; onDirty?:
                 </div>
               </div>
             ))}
+          </Section>
+
+          <Section title="Paleta tonal" hint="Gerada da cor principal: o fundo e os campos de cor das peças saem daqui">
+            <TonalPalette draft={draft} update={update} />
           </Section>
 
           <Section title="Tipografia" hint="Fontes locais rendem sem internet (vídeo e carrossel). Envie .woff2 com a licença.">

@@ -72,6 +72,15 @@ export const REQUIRED_TOKENS = [
   'radius', 'radius-sm', 'border-width', 'shadow-sm', 'shadow-md', 'shadow-lg',
 ] as const;
 
+/** paleta tonal (tarefa 049 F): escala 50…950 gerada da cor principal (core/tonal.ts). auto = regera a cada salvar; overrides = passos que o Oliver fixou */
+export const BrandTonal = z.object({
+  base: z.string().regex(/^#[0-9a-f]{6}$/i),
+  auto: z.boolean().default(true),
+  steps: z.record(z.string(), z.string().regex(/^#[0-9a-f]{6}$/i)).default({}),
+  overrides: z.record(z.string(), z.string().regex(/^#[0-9a-f]{6}$/i)).default({}),
+});
+export type BrandTonal = z.infer<typeof BrandTonal>;
+
 export const Brand = z.object({
   /** comentário do topo do CSS (origem dos tokens etc.) */
   header: z.string().optional(),
@@ -79,11 +88,13 @@ export const Brand = z.object({
   icons: BrandIcons.default({ library: 'lucide', stroke: 1.75, style: 'linha', color: 'primary' }),
   fonts: z.array(BrandFont).default([]),
   groups: z.array(BrandGroup).min(1),
+  tonal: BrandTonal.optional(),
 }).superRefine((b, ctx) => {
   const names = new Set<string>();
   b.groups.forEach((g, gi) => g.tokens.forEach((t, ti) => {
     if (['icon-stroke', 'icon-color', 'icon-fill'].includes(t.name)) ctx.addIssue({ code: 'custom', path: ['groups', gi, 'tokens', ti, 'name'], message: `${t.name} é gerado a partir de icons` });
     if (names.has(t.name)) ctx.addIssue({ code: 'custom', path: ['groups', gi, 'tokens', ti, 'name'], message: `token repetido: ${t.name}` });
+    if (/^(on-)?tone-d+$/.test(t.name)) ctx.addIssue({ code: 'custom', path: ['groups', gi, 'tokens', ti, 'name'], message: `${t.name} é gerado a partir de tonal` });
     names.add(t.name);
   }));
   const missing = REQUIRED_TOKENS.filter((n) => !names.has(n));

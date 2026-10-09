@@ -2,7 +2,8 @@
   "header": "brand.css — kz. Tokens medidos no app real (print do painel, 2026-10-07) + CSS de kz.app.br. Regras de uso em BRAND.md.",
   "style": {
     "do": [],
-    "dont": []
+    "dont": [],
+    "notes": "Nosso estilo na maioria das vezes será monocromática, usando variações mas mantendo a cor principal e suas versões mais pastéis na composição."
   },
   "icons": {
     "library": "lucide",
@@ -33,25 +34,37 @@
       "note": "Montserrat local (variável 100–900, OFL: fonts/OFL-Montserrat.txt): render de vídeo e carrossel sem internet"
     },
     {
-      "family": "Fraunces",
+      "family": "Newsreader",
       "source": "local",
       "files": [
         {
-          "src": "fonts/fraunces-italic-latin.woff2",
-          "style": "italic",
-          "weight": "300 700",
+          "src": "fonts/newsreader-latin-opsz-normal.woff2",
+          "style": "normal",
+          "weight": "200 800",
           "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
         },
         {
-          "src": "fonts/fraunces-italic-latin-ext.woff2",
+          "src": "fonts/newsreader-latin-ext-opsz-normal.woff2",
+          "style": "normal",
+          "weight": "200 800",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
+        },
+        {
+          "src": "fonts/newsreader-latin-opsz-italic.woff2",
           "style": "italic",
-          "weight": "300 700",
-          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF"
+          "weight": "200 800",
+          "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+        },
+        {
+          "src": "fonts/newsreader-latin-ext-opsz-italic.woff2",
+          "style": "italic",
+          "weight": "200 800",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
         }
       ],
-      "license": "fonts/OFL-Fraunces.txt",
+      "license": "fonts/OFL-Newsreader.txt",
       "display": "block",
-      "note": "Fraunces itálica (variável 300–700, OFL: fonts/OFL-Fraunces.txt): a serifa de destaque do app (\"Boa tarde, <nome>\")"
+      "note": "Newsreader (variável 200–800 com tamanho óptico, normal e itálico; OFL: fonts/OFL-Newsreader.txt): serifa de destaque. Trocou a Fraunces em 2026-10-09 (pedido do Oliver: serifa mais limpa)"
     }
   ],
   "groups": [
@@ -274,8 +287,8 @@
         },
         {
           "name": "font-accent",
-          "value": "\"Fraunces\",Georgia,serif",
-          "note": "sempre itálico, 1 palavra (nome, ênfase), como no app"
+          "value": "\"Newsreader\",Georgia,serif",
+          "note": "serifa de destaque: 1 palavra ou frase curta (nome, virada, citação); itálico como no app"
         },
         {
           "name": "weight-heading",
@@ -324,5 +337,23 @@
         }
       ]
     }
-  ]
+  ],
+  "tonal": {
+    "base": "#ef7960",
+    "auto": true,
+    "steps": {
+      "50": "#fff4f2",
+      "100": "#fee8e3",
+      "200": "#fed3c9",
+      "300": "#fdb7a7",
+      "400": "#fa9781",
+      "500": "#ef7960",
+      "600": "#bc4f38",
+      "700": "#933724",
+      "800": "#6c2718",
+      "900": "#48170c",
+      "950": "#2c0803"
+    },
+    "overrides": {}
+  }
 }

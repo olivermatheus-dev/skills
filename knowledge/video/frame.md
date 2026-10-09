@@ -50,6 +50,7 @@
 ## 4. Texto no frame
 - Título e frase principal em **tinta** (`--text`). **Nunca cinza.**
 - Contraste ≥ **4,5:1** (meta ≥ 7:1 em título); palavra de destaque em título grande ≥ 3:1. `node tools/contrast.mjs <cor1> <cor2>`.
+- **Medir no render, não só nos tokens:** `node tools/contrast.mjs --html <pasta>/render/<fmt>/index.html --tempos 1,3,6` (pausa a timeline em cada instante, esconde o texto, lê o fundo real em pixels e reprova ✗ abaixo de 4,5:1, ou 3:1 se grande ≥ 48 px em 1080; pior caso p10). Escolha instantes em que o texto já está inteiro. Sai com código 1 se houver ✗. Carrossel: `--html carrossel.html` (`.slide`).
 - Texto sobre cor clara/quente da marca (coral, amarelo, verde-claro) quase sempre pede **texto escuro**. Ex.: branco sobre #ef7960 = 2,8:1 (reprovado); #2b2b2b = 5,1:1.
 - **No máximo 1 ênfase por título**, na palavra-chave, pela cor de destaque ou peso. Nunca cores aleatórias.
 - Mínimos em 1080 px de largura: título ≥ 64–72 px · apoio ≥ 36–40 px · rótulo de UI ampliado ≥ 28 px.

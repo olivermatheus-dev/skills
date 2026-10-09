@@ -2,6 +2,7 @@
 // + bloco gerado no BRAND.md (estilo, ícones, fazer / não fazer). Também importa um brand.css antigo para JSON.
 import { Brand, type BrandFont, type BrandToken } from '../schema/brand';
 import { BRAND_PRESETS } from './brand-presets';
+import { resolveTonal, bestInk, TONE_STEPS } from './tonal';
 
 const GENERATED = '/* brand.css — GERADO de brand.json pelo kit de marca (app → Contexto e marca → Marca, ou `npm run brand -- <slug>`). Não edite à mão: edite o brand.json. */';
 /** tokens que o gerador escreve a partir de `icons` (não podem estar nos grupos) */
@@ -41,6 +42,23 @@ export function brandToCss(input: unknown): string {
   out.push(`  --icon-stroke:${b.icons.stroke};`);
   out.push(`  --icon-color:var(--${b.icons.color});`);
   out.push(`  --icon-fill:${b.icons.style === 'preenchido' ? `var(--${b.icons.color})` : 'none'};`);
+  const all = b.groups.flatMap((g) => g.tokens);
+  const val = (n: string) => all.find((t) => t.name === n)?.value;
+  const primary = val('primary');
+  if (primary && /^#[0-9a-f]{6}$/i.test(primary)) {
+    const tn = resolveTonal(primary, b.tonal);
+    const hex6 = (v?: string) => !!v && /^#[0-9a-f]{6}$/i.test(v);
+    const cands = [
+      ...(['ink', 'text'] as const).filter((n) => hex6(val(n))).map((n) => ({ name: n as string, hex: val(n)!, ref: `var(--${n})` })),
+      { name: 'white', hex: '#ffffff', ref: '#fff' },
+    ];
+    out.push('', `  ${comment(`Paleta tonal (kit): escala clara→escura da cor principal${tn.auto ? ' (automática)' : ''} · --on-tone-N = tinta legível sobre o tom`)}`);
+    for (const s of TONE_STEPS) out.push(`  --tone-${s}:${tn.steps[s]};`);
+    for (const s of TONE_STEPS) {
+      const best = bestInk(tn.steps[s], cands);
+      out.push(`  --on-tone-${s}:${cands.find((c) => c.name === best.name)!.ref};`);
+    }
+  }
   out.push('}', '');
   return out.join('\n');
 }
@@ -101,7 +119,7 @@ export function cssToBrand(css: string): Brand {
     if (!line) continue;
     if (/^\/\*[\s\S]*\*\/$/.test(line)) {
       const label = unComment(line);
-      if (/^Ícones \(kit\)/.test(label)) { cur = null; continue; }
+      if (/^Ícones \(kit\)|^Paleta tonal \(kit\)/.test(label)) { cur = null; continue; }
       cur = { label, tokens: [] }; groups.push(cur);
       continue;
     }
@@ -110,7 +128,7 @@ export function cssToBrand(css: string): Brand {
     const note = line.match(/;\s*\/\*\s*([\s\S]*?)\s*\*\/\s*$/)?.[1];
     if (!cur) { cur = { label: 'Tokens', tokens: [] }; groups.push(cur); }
     decls.forEach((d, i) => {
-      if (ICON_TOKENS.includes(d[1])) return;
+      if (ICON_TOKENS.includes(d[1]) || /^(on-)?tone-\d+$/.test(d[1])) return;
       cur!.tokens.push({ name: d[1], value: d[2].trim(), ...(note && i === decls.length - 1 ? { note } : {}) });
     });
   }
