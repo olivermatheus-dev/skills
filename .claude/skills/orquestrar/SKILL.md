@@ -29,7 +29,7 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 ## Receitas de delegação
 | pedido | cadeia |
 |---|---|
-| vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (plano.md) → revisor → **aval do Oliver** → editor-de-video (voz + timeline) → **sound-designer (trilha + efeitos) ∥ editor-de-video (cenas)** → editor-de-video (render) → revisor (QA) → Oliver |
+| vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (skill `plano-de-cenas`: cenas.json + revisão crítica pelo revisor/Opus + storyboard) → **aval do Oliver** → editor-de-video (voz + timeline) → **sound-designer (trilha + efeitos) ∥ editor-de-video (cenas)** → editor-de-video (render) → revisor (QA) → Oliver |
 | concorrentes / referências / ideias | pesquisador (radar → **aval da lista** → coleta) → Oliver marca no painel → pesquisador (analisa só o marcado → ideias) → Oliver aprova ideia → estrategista (ficha de pauta) → roteirista → produção |
 | trilha sonora / sons | sound-designer (Modo A ou C da skill `audio`) → **Oliver ouve** |
 | carrossel / post | roteirista (roteiro + legenda) → designer (PNG) → revisor → Oliver |

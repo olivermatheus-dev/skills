@@ -7,8 +7,9 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 045 | **Fase D (app):** aba Variantes no projeto de vídeo — Fluxo (React Flow) + Matriz, selo do QC (`indice.json > qc`, `sincronia.md`), Gerar variantes (faixa de progresso), baixar, anotar (revisão 022), aprovar/descartar | fases A, B e C feitas |
-| 2 | 046 | **Atividade da IA e das coletas:** fases A–E feitas (dock, passos ao vivo, coletas como trabalho em segundo plano, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano, página Agentes + hooks do terminal); próxima: **fase F** (fila de verdade) | pedido do Oliver de 2026-10-08 |
+| 1 | 047 | **Fase B:** refazer o plano da apresentação kz com a skill `plano-de-cenas` (revisão Opus + storyboard) e comparar com a v03; calibrar rubrica e `plano.mjs check` | pedido do Oliver de 2026-10-08 (fase A feita) |
+| 2 | 045 | **Fase D (app):** aba Variantes no projeto de vídeo — Fluxo (React Flow) + Matriz, selo do QC (`indice.json > qc`, `sincronia.md`), Gerar variantes (faixa de progresso), baixar, anotar (revisão 022), aprovar/descartar | fases A, B e C feitas |
+| 3 | 046 | **Atividade da IA e das coletas:** fases A–E feitas (dock, passos ao vivo, coletas como trabalho em segundo plano, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano, página Agentes + hooks do terminal); próxima: **fase F** (fila de verdade) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

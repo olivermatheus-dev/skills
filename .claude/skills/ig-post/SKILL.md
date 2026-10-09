@@ -54,7 +54,7 @@ Frase central (máx. 15 palavras) + apoio visual + legenda.
 |---|---|
 | carrossel | `carousel` (lê o `roteiro.md`) |
 | post único estático | `carousel` com 1 slide |
-| reels/vídeo em motion | `video` (usa o roteiro como briefing do `plano.md`) |
+| reels/vídeo em motion | `plano-de-cenas` (o roteiro é a entrada; as cenas sugeridas aqui são pista, quem decide o visual é o plano) → `video` |
 | reels de câmera | o roteiro é a entrega final; o usuário grava |
 
 Ofereça a próxima skill ao terminar. Se houver uma receita `fmt-*` que case com a peça (ex.: `fmt-post-frase`, `fmt-recorte-funcionalidade`), ofereça-a: ela usa essas mesmas skills como motor.

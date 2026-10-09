@@ -13,7 +13,7 @@ Se o pedido não disser, é **médio**. "Rápido", "simples", "só um teste" →
 | | **simples** | **médio (padrão)** | **alto** |
 |---|---|---|---|
 | ler | `BRAND.md` + receita `fmt-*` | + `knowledge/video/REGRAS.md` | + o arquivo de `knowledge/video/` de cada tema que o vídeo usa (`README.md` diz qual) |
-| plano | falas + folha de batidas curta **no chat**; segue sem portão se o pedido já veio claro | `plano.md` enxuto + **1 style frame** → **aval** | `plano.md` completo (estilo e 8 controles) + 2–3 style frames → **aval** |
+| plano (skill `plano-de-cenas`) | tabela curta **no chat** + autocrítica; segue sem portão se o pedido já veio claro | `cenas.json` + `plano.md` + revisão crítica (Opus) + **storyboard** → **aval** | idem + 3 conceitos com style frame, 2 rodadas de revisão |
 | áudio | 1 trilha do catálogo, sem SFX extra | trilha (2–3 candidatas) + SFX nos gestos-chave | sound-designer completo (camadas, texturas, mix) |
 | conferência | `timeline.mjs check` + `qc.mjs` | + 1 rodada de folhas de contato | passadas de `qc-final.md` + agente `revisor` + **2ª iteração** de polimento |
 | entrega | 1 formato | formatos pedidos (default 4:5 + 9:16) | idem + motion blur com 4–8 amostras |
@@ -34,19 +34,18 @@ Recorte (obrigatório) · duração (default 15–20 s; lançamento 30 s) · for
 plano.md · locucao.json · timeline.json · composition.html · data/*.json
 audio/ render/ exports/      ← gerados, fora do git
 ```
-Moldes: `references/plano.md` (médio usa só §1, 4, 5, 7 e 8), `references/timeline.md`.
+Plano: skill `plano-de-cenas` (`cenas.json` + `plano.md` + `storyboard-<fmt>.png`). Molde da timeline: `references/timeline.md`.
 
 ## Etapas
 
 ### 0. Galeria antes de criar
 Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte `library/INDEX.md` e `companies/<slug>/video-templates/` (quando existirem; tarefa 014). Reaproveite e ajuste parâmetros; crie do zero só se não houver nada adaptável.
 
-### 1. Plano → PARE e peça o aval (exceto simples)
-1. Médio/alto: 2–3 conceitos em 1 linha, recomende 1.
-2. Plano: recorte, falas exatas, **folha de batidas** (tempo · na tela · o que entender · som · intensidade 0–4), cor/fundo por cena, **afirmações com fonte** (sem fonte = não entra), perguntas com recomendação.
-3. **Style frames:** quadros-chave **estáticos** com o `brand.css` real (inclua o quadro mais cheio). Um aval cobre roteiro e visual.
-4. Confira: cabe na duração (≤ 2,7 palavras/s de locução); arco gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s.
-5. **Sem "pode seguir", não anime.**
+### 1. Plano de cenas → PARE e peça o aval (exceto simples)
+**Use a skill `plano-de-cenas`**: roteiro, transcrição ou tema → mapa de ideias → conceito e motivo → ficha de cada cena → revisão crítica por outro agente → storyboard em quadros. Ela entrega `cenas.json`, `plano.md`, a `timeline.json` com a voz de rascunho e o `storyboard-<fmt>.png`.
+- Já existe `cenas.json` aprovado? Não refaça: siga da etapa 2.
+- Confira: cabe na duração (≤ 2,7 palavras/s de locução); arco gancho ≤ 2 s → conceito → produto em uso → virada → revelação → cartão final ≥ 2 s.
+- **Sem "pode seguir", não anime.** Com o aval, as cenas com `novo` (no storyboard aparecem como `rascunho/cena-nova`) viram blocos de verdade, seguindo o `spec` e o style frame do plano.
 
 ### 2. Voz e tempos (o áudio manda no relógio)
 - Locução: **v1.0 com voz gratuita** (`tts.mjs`, voz de rascunho da empresa; skill `locucao`); voz final só depois do aval: **Eleven v4** pela API com a chave do projeto (skill `elevenlabs`: `vo[].el` com emoção → `elevenlabs.mjs`, que encaixa sozinho). Sem locução: escolha o BPM e monte a grade (cenas com `len`).
@@ -120,7 +119,7 @@ Correções que o Oliver fez nos vídeos de 2026-10-07 (vídeo 01, A/B A-opus e 
 - Procure: meia frase na tela, vácuo > 0,5 s com a voz falando, cena começando vazia, logo atrasada, linha aparecendo atrás de card, texto cortado ou saindo da área segura, headline por cima de card. Liste no relatório os quadros vistos.
 
 ## Nunca
-- Animar antes do plano aprovado (exceto nível simples com pedido claro).
+- Animar antes do plano de cenas aprovado (exceto nível simples com pedido claro).
 - Recurso, número, métrica, depoimento ou preço sem fonte.
 - Quebrar proibição do BRAND.md (saúde: nada de promessa de resultado terapêutico nem depoimento de paciente).
 - Áudio ou asset sem licença registrada.

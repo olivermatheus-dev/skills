@@ -1,0 +1,18 @@
+{
+  "id": "rascunho/cena-nova",
+  "tipo": "rascunho",
+  "titulo": "Lugar de um bloco que ainda não existe (storyboard do plano de cenas): mostra os textos da cena e o nome do bloco novo",
+  "camada": "palco",
+  "slots": [],
+  "params": {
+    "novo": { "padrao": "", "descricao": "tipo/id do bloco que vai substituir este" },
+    "spec": { "padrao": "", "descricao": "o que o bloco novo faz (vem do cenas.json)" }
+  },
+  "cues": [],
+  "min_s": 1,
+  "elastico": true,
+  "formatos": ["4x5", "9x16", "16x9", "1x1"],
+  "tokens": ["--surface", "--border", "--text", "--muted"],
+  "origem": "tarefa 047 (plano de cenas): o plano.mjs timeline põe este bloco onde a cena tem \"novo\"; no storyboard o quadro é trocado pelo style frame",
+  "licenca": "própria"
+}

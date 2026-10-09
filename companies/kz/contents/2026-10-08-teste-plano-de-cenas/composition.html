@@ -1,0 +1,191 @@
+<!doctype html>
+<!--
+  GERADO por tools/video-kit/scripts/compor.mjs a partir dos blocos da timeline. NÃO edite aqui: edite o bloco
+  (fundo/blobs [empresa], cena/tempo-encolhe [empresa], rascunho/cena-nova [global], cta/cartao-final-botao [empresa]) ou a timeline.json e rode o compor/produce de novo.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+/* Base de toda composição montada por blocos (compor.mjs). Só tokens do brand.css; nada de marca aqui. */
+html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+* { box-sizing: border-box; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+  color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* palco 1080×1170: mesma altura útil no 4:5 e no 9:16 */
+.f-9x16 { --top: 300px; }
+.f-4x5 { --top: 90px; }
+#stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+.layer { position: absolute; inset: 0; }
+.icon { width: 1em; height: 1em; display: block; }
+.acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+.w { display: inline-block; opacity: 0; }
+.w.acc { font-size: 1.1em; }
+.hl { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-wrap: balance; }
+.center { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; }
+.tile-ic { display: grid; place-items: center; border-radius: 50%; }
+.burst { position: absolute; border-radius: 50%; border: 3px solid var(--primary); opacity: 0; }
+.k-cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+.k-ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
+
+/* Classes de marca da kz usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+.t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+.t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+.t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+.t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
+
+/* ── fundo/blobs (empresa) ── */
+.b-fundo-blobs .blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+.b-fundo-blobs .b1 { width: 760px; height: 760px; left: -260px; top: -200px; background: var(--ui-glow); opacity: 0.9; }
+.b-fundo-blobs .b2 { width: 640px; height: 640px; right: -240px; bottom: -160px; background: var(--accent-soft); opacity: 0.55; }
+
+/* ── cena/tempo-encolhe (empresa) ── */
+.b-cena-tempo-encolhe .t1 { top: 80px; left: 110px; right: 110px; font-size: 76px; }
+.b-cena-tempo-encolhe .ringwrap { position: absolute; left: 50%; top: 300px; width: 290px; height: 290px; margin-left: -145px; opacity: 0; }
+.b-cena-tempo-encolhe .ringwrap > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.b-cena-tempo-encolhe .ringwrap .ic { position: absolute; inset: 0; display: grid; place-items: center; font-size: 104px; color: var(--text); transform-origin: 50% 50%; }
+.b-cena-tempo-encolhe .ringwrap .ic .icon { width: 1em; height: 1em; }
+.b-cena-tempo-encolhe .ringlbl { position: absolute; left: 0; right: 0; top: 610px; text-align: center; font-size: 34px; font-weight: 600; color: var(--muted); opacity: 0; }
+.b-cena-tempo-encolhe .t2 { top: 690px; font-size: 54px; font-weight: 600; color: var(--text); }
+.b-cena-tempo-encolhe .t3 { position: absolute; left: 0; right: 0; top: 790px; text-align: center; font-size: 190px; line-height: 1.1; opacity: 0; }
+.b-cena-tempo-encolhe .heart3 { position: absolute; left: 50%; top: 810px; margin-left: 300px; width: 110px; height: 110px; font-size: 56px; opacity: 0; }
+.b-cena-tempo-encolhe .burst3 { left: 50%; top: 850px; width: 600px; height: 240px; margin-left: -300px; border-radius: 120px; }
+
+/* ── rascunho/cena-nova (global) ── */
+.b-rascunho-cena-nova .rc-box { position: absolute; inset: 12% 8%; border: 4px dashed var(--border); border-radius: 32px; background: var(--surface);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding: 60px; text-align: center; }
+.b-rascunho-cena-nova .rc-tag { font-size: 30px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+.b-rascunho-cena-nova .rc-textos { display: flex; flex-direction: column; gap: 18px; font-size: 64px; font-weight: 700; color: var(--text); line-height: 1.12; text-wrap: balance; }
+.b-rascunho-cena-nova .rc-spec { font-size: 28px; color: var(--muted); line-height: 1.35; max-width: 80%; }
+
+/* ── cta/cartao-final-botao (empresa) ── */
+.b-cta-cartao-final-botao .endlogo { position: absolute; left: 50%; top: 230px; width: 380px; margin-left: -190px; clip-path: inset(0 100% 0 0); }
+.b-cta-cartao-final-botao .endlogo svg { width: 100%; height: auto; display: block; }
+.b-cta-cartao-final-botao .endlogo path { fill: var(--logo); }
+.b-cta-cartao-final-botao .glow7 { position: absolute; left: 50%; top: 150px; width: 900px; height: 560px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); opacity: 0; }
+.b-cta-cartao-final-botao .endtitle { top: 590px; font-size: 80px; }
+.b-cta-cartao-final-botao .endline { top: 690px; font-size: 48px; font-weight: 600; }
+.b-cta-cartao-final-botao .endsub { top: 990px; font-size: 38px; font-weight: 600; color: var(--text); opacity: 0; }
+.b-cta-cartao-final-botao .cta { top: 840px; display: flex; align-items: center; gap: 14px; background: var(--primary); color: var(--on-primary);
+  font-weight: 700; font-size: 46px; padding: 28px 56px; border-radius: 999px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+<div class="layer b-fundo-blobs" data-inst="c1" data-bloco="fundo/blobs">
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+</div>
+      <div id="stage">
+<div class="layer b-cena-tempo-encolhe" data-inst="s1" data-bloco="cena/tempo-encolhe">
+<div class="hl t1"></div>
+<div class="ringwrap">
+  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--surface)" stroke-width="9" /><circle cx="50" cy="50" r="44" fill="none" stroke="var(--border)" stroke-width="1" /><circle class="arc" cx="50" cy="50" r="44" fill="none" stroke="var(--primary)" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="0" /></svg>
+  <div class="ic">{{i:timer}}</div>
+</div>
+<div class="ringlbl"></div>
+<div class="hl t2"></div>
+<div class="burst burst3"></div>
+<div class="t3 acc"></div>
+<div class="heart3 tile-ic t-coral">{{i:heart}}</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s2" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+<div class="layer b-cta-cartao-final-botao" data-inst="s3" data-bloco="cta/cartao-final-botao">
+<div class="glow7"></div>
+<div class="endlogo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+<div class="hl endtitle"></div>
+<div class="hl endline"></div>
+<div class="hl endsub"></div>
+<div class="center cta"></div>
+</div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script src="kit/blocos.js"></script>
+    <script>
+BLOCO('fundo/blobs', function ({ tl, $, cena, params }) {
+  const [x1, y1] = params.deriva1, [x2, y2] = params.deriva2
+  tl.fromTo($('.b1'), { x: 0, y: 0 }, { x: x1, y: y1, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  tl.fromTo($('.b2'), { x: 0, y: 0 }, { x: x2, y: y2, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+})
+    </script>
+    <script>
+BLOCO('cena/tempo-encolhe', function ({ tl, K, root, $, cena, cue, texto, fala, params }) {
+  const f = fala(0)
+  K.type($('.t1'), texto('titulo'), f, cue('entra'))
+  K.pop($('.ringwrap'), cue('entra') - 0.1, 0.6)
+  $('.ringlbl').textContent = params.rotulo
+  tl.fromTo($('.ringlbl'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, ...M.FAST }, cue('entra') + 0.3)
+  tl.to($('.arc'), { attr: { 'stroke-dashoffset': params.esvazia }, duration: 1.1, ease: 'power3.inOut' }, cue('encolhe'))
+  tl.fromTo($('.ringwrap .ic'), { rotation: 0 }, { rotation: -25, duration: 0.18, ease: 'sine.inOut', yoyo: true, repeat: 3 }, cue('encolhe') + 0.2)
+  tl.to($('.ringwrap'), { scale: 1.04, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('apoio') + 0.4)
+  K.type($('.t2'), texto('apoio'), f, cue('apoio') - 0.1, 26)
+  // a palavra-chave: o resto recua, ela chega com coração e um anel
+  tl.to([$('.t1'), $('.ringwrap'), $('.ringlbl'), $('.t2')], { opacity: 0.3, duration: 0.35, ease: 'power2.out' }, cue('palavra'))
+  $('.t3').textContent = texto('palavra')
+  tl.fromTo($('.t3'), { opacity: 0, y: 50, scale: 0.9, filter: 'blur(8px)' }, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', ...M.SOFT }, cue('palavra'))
+  K.burst($('.burst3'), cue('palavra') + 0.1, 1.25)
+  K.pop($('.heart3'), cue('palavra') + 0.25, 0.2)
+  tl.to($('.heart3'), { scale: 1.12, duration: 0.25, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('palavra') + 0.85)
+  tl.fromTo(root, { scale: 1 }, { scale: 1.035, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  K.out(root, cue('sai'), 0.28, -40)
+})
+    </script>
+    <script>
+BLOCO('rascunho/cena-nova', function ({ tl, root, $, cena, partes, params }) {
+  $('.rc-tag').textContent = `bloco novo: ${params.novo || '?'}`
+  $('.rc-textos').innerHTML = partes().filter(Boolean).map((p) => `<div>${p.replace(/\*(.+?)\*/g, '<span class="acc">$1</span>')}</div>`).join('')
+  $('.rc-spec').textContent = params.spec || ''
+  tl.fromTo(root, { opacity: 0 }, { opacity: 1, duration: 0.2 }, cena.start)
+  tl.to(root, { opacity: 0, duration: 0.15 }, cena.end - 0.15)
+})
+    </script>
+    <script>
+BLOCO('cta/cartao-final-botao', function ({ tl, K, root, $, cena, cue, texto, fala, box, cursor }) {
+  const f = fala(0)
+  const cta = $('.cta')
+  // medir com o texto já no botão (senão a medida sai menor) e antes de qualquer transform
+  cta.innerHTML = `${texto('botao')} {{i:chevron-right}}`
+  const pCta = box(cta, 0.9, 0.62)
+  K.type($('.endline'), texto('linha'), f, cue('cta') - 0.25, 30, true)
+  tl.fromTo($('.glow7'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' }, cue('entra') - 0.2)
+  tl.fromTo($('.endlogo'), { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.8, ease: 'power3.out' }, cue('entra') - 0.15)
+  K.type($('.endtitle'), texto('titulo'), f, cue('entra') + 0.1)
+  tl.fromTo(cta, { opacity: 0, y: 30, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, cue('cta'))
+  $('.endsub').textContent = texto('sub')
+  tl.fromTo($('.endsub'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST }, cue('cta') + 0.5)
+  tl.to(cta, { scale: 1.04, duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('cta') + 0.8)
+  const C = cursor()
+  tl.set(C.el, { x: pCta.x + 280, y: pCta.y + 240 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.2 }, cue('clique') - 0.8)
+  C.move(pCta, cue('clique') - 0.8, 0.7)
+  C.click(pCta, cue('clique'))
+  C.press(cta, cue('clique'))
+  tl.fromTo(root, { scale: 1 }, { scale: 1.03, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+})
+    </script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      BLOCOS.montar(tl, [{"inst":"c1","use":"fundo/blobs","cena":null,"slots":[],"padroes":{"deriva1":[180,140],"deriva2":[-160,-200]}},{"inst":"s1","use":"cena/tempo-encolhe","cena":"s1","slots":["titulo","apoio","palavra"],"padroes":{"rotulo":"seu tempo livre","esvazia":235}},{"inst":"s2","use":"rascunho/cena-nova","cena":"s2","slots":[],"padroes":{"novo":"","spec":""}},{"inst":"s3","use":"cta/cartao-final-botao","cena":"s3","slots":["titulo","botao","sub","linha"],"padroes":{}}])
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

@@ -49,6 +49,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `ads-meta` | criar e analisar anúncios Meta/Instagram |
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
 | `launch-plan` | plano de lançamento semana a semana |
+| `plano-de-cenas` | plano de cenas antes de animar: roteiro/transcrição/tema → ideias → conceito e motivo → ficha por cena → revisão crítica (Opus) → storyboard → aval (`node tools/video/plano.mjs`) |
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
 | `locucao` | voz v1.0 gratuita → voz final → encaixe do áudio final |
@@ -61,7 +62,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
 - Vídeo: `fmt-trailer-lancamento`, `fmt-recorte-funcionalidade`, `fmt-texto-cinetico`, `fmt-dialogo`, `fmt-3d-produto`.
 
-Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` (imagem) ou `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
+Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` (imagem) ou `plano-de-cenas` → `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
 
 ## Ao terminar uma tarefa
 - Salve a peça na pasta certa (acima).

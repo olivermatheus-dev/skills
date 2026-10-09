@@ -16,6 +16,7 @@ Regras executáveis de motion, verificadas. **Leia conforme o nível da skill `v
 | `montagem.md` | motivo do corte, escada de soluções, J/L-cut e match cut em motion; seção "Com filmagem" | trocas de cena; filmagem real |
 | `efeitos.md` | transições, integração (UI no aparelho, sombra, BT.709), partículas determinísticas | transição marcada, mockup, partícula |
 | `som.md` | função dos SFX, família, alinhamento, ducking, loudness | trilha e sound design (com a skill `audio`) |
+| `repertorio.md` | soluções visuais aprovadas pelo Oliver por tipo de ideia (e o que evitar) | **toda** ficha de cena (skill `plano-de-cenas`) |
 | `qc-final.md` | passadas por nível, triagem, entrega, checklist do Oliver | conferir e entregar |
 | `tecnico.md` | armadilhas de HyperFrames/GSAP, render, export | escrever o código das cenas |
 

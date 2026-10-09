@@ -62,6 +62,7 @@ Status: `rascunho` · `pronta` · `fazendo` · `feita` · `contínua`
 | 041 | [Fontes e referências (catálogo no app que a IA usa para pesquisar ideias; 1ª peça da 029)](tasks/041-fontes-e-referencias/TASK.md) | 029, 012 | **F1–F2 feitas (2026-10-08)**; falta F3 (botão no app) e F4 |
 | 043 | [Abas da área Concorrentes: nomes, Preços e planos profundo, Posicionamento, Brechas redesenhada](tasks/043-comparar-e-abas-concorrentes/TASK.md) | 034, 039 | **feita (2026-10-08)**: A–G + Kzloo no referencia.json; faltam dados da Kzloo (PEDIDOS) |
 | 045 | [Fábrica de vídeo: projeto, blocos reutilizáveis, variantes A/B (vozes × aberturas × CTA) com fluxograma no app; depois cortes e edits](tasks/045-fabrica-de-variantes/TASK.md) — junta 009, 013, 014, 015 | 003, 022 | **fase A feita (2026-10-08)**: blocos + `compor.mjs`, apresentação da kz em 8 blocos idêntica à v03; próxima: B (variantes) |
+| 047 | [Skill de plano de cenas: roteiro/transcrição → ideias → conceito e motivo → ficha por cena → revisão crítica (Opus) → storyboard](tasks/047-plano-de-cenas/TASK.md) | 045 | **fase A feita (2026-10-08)**: skill `plano-de-cenas`, `tools/video/plano.mjs`, repertório; próxima: B (refazer o plano da apresentação kz e comparar) |
 | 026 | [Skills e agentes no app (mini pastas, rich text, editar)](tasks/026-skills-e-agentes-no-app/TASK.md) | 018 | rascunho |
 | 007 | [Formato tipado dos arquivos (projeto, personas, kanban, comentários, concorrentes)](tasks/007-formato-tipado/TASK.md) | — | Kanban + agentes feitos; faltam project.yml, personas, comentários, concorrentes |
 

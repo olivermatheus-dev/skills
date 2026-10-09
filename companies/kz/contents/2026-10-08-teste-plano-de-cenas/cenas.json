@@ -1,0 +1,78 @@
+{
+  "versao": 1,
+  "nivel": "medio",
+  "recorte": "Teste do plano de cenas (047): a kz devolve o tempo do terapeuta",
+  "duracao_alvo": 15,
+  "formatos": ["4x5"],
+  "entrada": { "tipo": "roteiro", "fonte": "teste" },
+  "conceito": {
+    "nome": "O tempo volta",
+    "mundo": "o tempo do terapeuta é um anel que esvazia com a burocracia e enche de novo com a kz",
+    "motivo": "anel de relógio",
+    "transicao": "match no anel; hard cut na batida no resto",
+    "curva": [3, 2, 1],
+    "evitar": ["relógio derretendo", "pessoa olhando o relógio"],
+    "alternativas": ["Agenda da semana que se fecha e reabre"]
+  },
+  "vo": [
+    { "id": "f1", "text": "No fim do dia, sobra menos tempo para o que importa: atender." },
+    { "id": "f2", "text": "Com a kz, a burocracia cabe num lugar só." },
+    { "id": "f3", "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina." }
+  ],
+  "ideias": [
+    { "id": "i1", "fala": "f1", "trecho": "sobra menos tempo", "tipo": "dor", "ancora": "menos", "emocao": "cansaço", "entender": "a burocracia come o tempo de atender", "prova": null },
+    { "id": "i2", "fala": "f2", "trecho": "num lugar só", "tipo": "promessa", "ancora": "lugar", "emocao": "alívio", "entender": "tudo junto devolve tempo", "prova": null },
+    { "id": "i3", "fala": "f3", "trecho": "Conheça a kz", "tipo": "CTA", "ancora": "descubra", "emocao": "convite", "entender": "onde entrar", "prova": "kz.app.br" }
+  ],
+  "camadas": [{ "use": "fundo/blobs" }],
+  "scenes": [
+    {
+      "id": "s1", "ideias": ["i1"], "block": "dor", "intensidade": 3, "vo": ["f1"],
+      "relacao": "complementa", "acrescenta": "o tempo livre vira um anel que esvazia: a perda fica visível",
+      "motivo": "o anel nasce cheio e esvazia em 'menos'",
+      "composicao": "anel no centro-alto, frase acima, palavra-chave grande embaixo", "olhar": "centro",
+      "poses": ["início: anel cheio + frase inteira", "meio: anel esvaziado", "fim: 'atender.' grande com coração"],
+      "use": "cena/tempo-encolhe", "on_screen": "No fim do dia, sobra *menos* tempo|para o que importa:|atender.",
+      "icone": "clock",
+      "gestos": [
+        { "cue": "entra", "at": 0.02, "o_que": "frase e anel entram juntos", "sfx": "whoosh fino" },
+        { "cue": "encolhe", "word": "f1:menos", "offset": -0.08, "o_que": "anel esvazia", "sfx": "tique" },
+        { "cue": "apoio", "word": "f1:para", "offset": -0.12, "o_que": "frase de apoio", "sfx": "swish" },
+        { "cue": "palavra", "word": "f1:atender", "offset": -0.12, "o_que": "palavra-chave chega com coração", "sfx": "ding" },
+        { "cue": "sai", "before_end": 0.3, "o_que": "tudo recua", "sfx": "—" }
+      ],
+      "entra": "1º quadro já com frase e anel", "sai": "o anel fica e vira o anel da cena 2 (match)", "som": "whoosh · tique · ding",
+      "fontes": []
+    },
+    {
+      "id": "s2", "ideias": ["i2"], "block": "virada", "intensidade": 2, "vo": ["f2"],
+      "relacao": "contrasta", "acrescenta": "os papéis soltos entram no anel e ele enche de novo: o tempo volta",
+      "motivo": "o anel enche com as peças",
+      "composicao": "anel no centro, 4 ícones entrando de fora", "olhar": "centro",
+      "poses": ["início: anel vazio e 4 ícones soltos", "meio: ícones entram no anel", "fim: anel cheio com o logo"],
+      "novo": { "tipo": "virada", "id": "anel-enche", "spec": "anel vazio; 4 ícones (agenda, ficha, nota, mensagem) voam para dentro em cascata no cue 'junta'; anel enche; logo no centro em 'kz'. slots: titulo; cues: entra, junta", "slots": ["titulo"], "cues": ["entra", "junta"] },
+      "on_screen": "Num *lugar só*.", "headline": "Num lugar só.", "icone": "layers",
+      "gestos": [
+        { "cue": "entra", "at": 0.02, "o_que": "anel vazio + ícones soltos", "sfx": "swish" },
+        { "cue": "junta", "word": "f2:lugar", "offset": -0.1, "o_que": "ícones entram no anel em cascata", "sfx": "4 pops" }
+      ],
+      "entra": "match no anel da cena 1", "sai": "hard cut na batida", "som": "swish · pops",
+      "fontes": [{ "afirmacao": "agenda, prontuário e anotações na kz", "fonte": "print do painel (2026-10-07)", "status": "ok" }]
+    },
+    {
+      "id": "s3", "ideias": ["i3"], "block": "cartão final", "intensidade": 1, "vo": ["f3"],
+      "relacao": "mostra", "acrescenta": "onde entrar: o botão com o site", "motivo": "",
+      "composicao": "logo no alto, botão no centro", "olhar": "centro",
+      "poses": ["início: logo se desenhando", "meio: botão com o site", "fim: cursor clica"],
+      "use": "cta/cartao-final-botao", "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas|Uma forma *mais simples* de cuidar da sua rotina.",
+      "gestos": [
+        { "cue": "entra", "at": 0.02, "o_que": "logo se desenha", "sfx": "brilho" },
+        { "cue": "cta", "word": "f3:descubra", "offset": -0.1, "o_que": "botão entra", "sfx": "pop" },
+        { "cue": "clique", "before_end": 1, "o_que": "cursor clica no botão", "sfx": "clique" }
+      ],
+      "entra": "corte seco", "sai": "fim com cauda", "som": "brilho · pop · clique", "tail": 1.6,
+      "fontes": [{ "afirmacao": "Plataforma para terapeutas", "fonte": "título do site kz.app.br", "status": "ok" }]
+    }
+  ],
+  "status": "teste"
+}
