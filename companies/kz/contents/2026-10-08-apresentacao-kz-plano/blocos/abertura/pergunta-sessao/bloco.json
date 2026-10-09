@@ -1,0 +1,36 @@
+{
+  "id": "abertura/pergunta-sessao",
+  "tipo": "abertura",
+  "titulo": "abertura/pergunta-sessao (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "pergunta",
+    "complemento"
+  ],
+  "params": {
+    "escala": {
+      "padrao": 0.62,
+      "descricao": ""
+    },
+    "giro": {
+      "padrao": [
+        -4,
+        5,
+        -2
+      ],
+      "descricao": ""
+    }
+  },
+  "cues": [
+    "entra",
+    "troca",
+    "espalha"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

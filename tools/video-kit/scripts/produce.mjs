@@ -19,6 +19,7 @@ import { cpSync, mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync
 import { join } from 'node:path';
 import { HUB, KIT, video, ff } from './lib.mjs';
 import { compor } from './compor.mjs';
+import { hashFonte, numeroVersao, gravarVersao } from './versao.mjs';
 
 const FORMATS = { '4x5': { W: 1080, H: 1350 }, '9x16': { W: 1080, H: 1920 }, '16x9': { W: 1920, H: 1080 }, '1x1': { W: 1080, H: 1080 } };
 const ALIAS = { story: '9x16', reels: '9x16', feed: '4x5' };
@@ -39,8 +40,11 @@ const tl = v.tl;
 const duration = tl.duration ?? tl.scenes.at(-1).end;
 const icons = JSON.parse(readFileSync(join(KIT, 'runtime', 'icons.json'), 'utf8'));
 // vídeo montado por blocos (045): a composição é gerada da timeline a cada produce, nunca editada à mão
-if (tl.scenes.some((s) => s.use)) compor(v);
+const composto = tl.scenes.some((s) => s.use) ? compor(v) : null;
 const template = readFileSync(join(v.dir, 'composition.html'), 'utf8');
+// fonte desta rodada (050): vai para versoes/vNN junto com o MP4
+const fonte = { html: template, blocos: composto?.blocos ?? [] };
+const hash = hashFonte(v, fonte);
 const hf = join(HUB, 'node_modules', 'hyperframes', 'bin', 'hyperframes.mjs');
 const mix = join(v.dir, 'audio', 'mix.wav');
 if (!buildOnly && !mute && !existsSync(mix)) throw new Error('sem audio/mix.wav: rode mix.mjs (ou --mute para testar sem som)');
@@ -49,10 +53,12 @@ const only = flag('only');
 const targets = (only ? only.split(',') : tl.formats || ['4x5', '9x16']).map((f) => ALIAS[f] || f);
 for (const f of targets) if (!FORMATS[f]) throw new Error(`formato desconhecido: ${f} (${Object.keys(FORMATS).join(', ')})`);
 
-// versão: a próxima livre para este vídeo (todos os formatos da rodada saem com o mesmo número)
+// versão: uma por FONTE, não por formato (050). Fonte igual à última versão e formato que ainda não saiu nela = mesmo
+// número (4x5 hoje, 9x16 amanhã = os dois na v03); fonte mudou = próxima livre. --v=N força.
 const exportsDir = join(v.dir, 'exports');
-const existing = existsSync(exportsDir) ? readdirSync(exportsDir).map((f) => +(f.match(/-v(\d+)\.mp4$/)?.[1] ?? 0)) : [];
-const version = String(flag('v') ?? Math.max(0, ...existing) + 1).padStart(2, '0');
+const existing = existsSync(exportsDir) ? readdirSync(exportsDir).map((f) => +(f.match(/-v(\d+)(?:-60fps)?\.mp4$/)?.[1] ?? 0)) : [];
+const versionFor = (format) => (flag('v') ? String(flag('v')).padStart(2, '0') : numeroVersao(v, hash, format, existing));
+const version = versionFor(targets[0]);
 
 // param de cena "@data/arquivo.html" (texto grande, ex.: a página do bloco cta/navegador) é lido da pasta do vídeo (ou da origem, numa variante)
 function comArquivos(sc) {
@@ -128,5 +134,6 @@ for (const format of targets) {
        '-map', '[v]', '-r', '30', '-c:v', 'libx264', '-crf', '16', '-preset', 'slow', '-pix_fmt', 'yuv420p', ...bt709]
     : ['-vf', 'setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv', '-map', '0:v', '-c:v', 'libx264', '-crf', draft ? '23' : '16', '-preset', draft ? 'veryfast' : 'slow', '-pix_fmt', 'yuv420p', ...bt709];
   ff([...silents.flatMap((s) => ['-i', s]), ...(mute ? [] : ['-i', mix]), ...vid, ...(mute ? ['-an'] : ['-map', `${silents.length}:a`, '-c:a', 'aac', '-b:a', '192k']), '-t', String(duration), '-movflags', '+faststart', out], { stdio: 'inherit' });
-  console.log(`✓ ${out}`);
+  if (!draft) gravarVersao(v, version, { ...fonte, hash, formato: format, saida: out });
+  console.log(`✓ ${out}${draft ? '' : `  (fonte em versoes/v${version}/)`}`);
 }

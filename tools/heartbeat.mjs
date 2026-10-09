@@ -39,7 +39,7 @@ const PESQUISA = opt('--pesquisa');
 const PEDIDO = opt('--pedido');
 const FILA_SO = args.includes('--fila');
 const PERMISSION = process.env.HEARTBEAT_PERMISSION_MODE || 'acceptEdits';
-const ALLOWED = (process.env.HEARTBEAT_ALLOWED_TOOLS || 'Read,Write,Edit,Glob,Grep,Skill,Agent,Bash(node tools/*),Bash(node .claude/skills/*),Bash(ffmpeg *),Bash(npx hyperframes *)').split(',');
+const ALLOWED = (process.env.HEARTBEAT_ALLOWED_TOOLS || 'Read,Write,Edit,Glob,Grep,Skill,Agent,Bash(node tools/*),Bash(node .claude/skills/*),Bash(ffmpeg *),Bash(npx hyperframes *),Bash(git status *),Bash(git diff *),Bash(git log *),Bash(git grep *)').split(',');
 
 mkdirSync('logs/heartbeat', { recursive: true });
 const LOG = join('logs/heartbeat', `${today()}.log`);

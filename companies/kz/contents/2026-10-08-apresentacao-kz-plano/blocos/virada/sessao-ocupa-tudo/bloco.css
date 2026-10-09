@@ -1,0 +1,64 @@
+.app { position: absolute; left: 50px; top: 175px; width: 980px; height: 985px; border: 1px solid transparent; padding: 44px 48px; opacity: 0; }
+.ui { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; position: absolute; overflow: hidden; }
+.next { left: 48px; right: 48px; top: 175px; height: 290px; padding: 28px 34px; }
+.next .glow { position: absolute; right: -120px; top: -140px; width: 420px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); }
+.lbl { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: var(--ui-muted); }
+.lbl .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); }
+.lbl b { color: var(--primary-hover); }
+.av { width: 58px; height: 58px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 19px; font-weight: 700; flex: none; }
+.who { display: flex; gap: 24px; align-items: center; margin-top: 22px; }
+.who .av { width: 92px; height: 92px; font-size: 30px; }
+.who b { font-size: 38px; font-weight: 700; display: block; }
+.who small { font-size: 23px; color: var(--ui-muted); font-weight: 500; }
+.btns { display: flex; gap: 14px; margin-top: 24px; }
+.btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-size: 23px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); }
+.btn.pri { background: var(--primary); color: var(--on-primary-app); border-color: var(--primary); }
+.btn .icon { font-size: 24px; }
+.list { left: 48px; top: 490px; width: 430px; height: 445px; padding: 26px; }
+.short { left: 500px; top: 490px; width: 432px; height: 445px; padding: 26px; }
+.ui h4 { margin: 0 0 16px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.ui h4 .icon { color: var(--primary); font-size: 30px; }
+.sess { position: relative; display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; font-size: 24px; font-weight: 600; background: var(--surface); }
+.sess .t { font-size: 21px; color: var(--accent); font-weight: 700; width: 66px; }
+.sess small { display: block; color: var(--ui-muted); font-size: 18px; font-weight: 500; }
+.sess .av { width: 48px; height: 48px; font-size: 16px; }
+.sess .ok { margin-left: auto; font-size: 34px; color: var(--accent); opacity: 0; }
+.sess .aro { position: absolute; inset: -4px; border: 4px solid var(--accent); border-radius: 18px; opacity: 0; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tile { border: 1px solid var(--border); border-radius: 18px; padding: 16px; height: 168px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; background: var(--surface); }
+.tile .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+.ok.on { opacity: 1; }
+.aro.on { opacity: 1; }
+.hl { top: 50px; left: 20px; right: 20px; font-size: 64px; }
+.h6b { display: flex; justify-content: center; align-items: center; gap: 22px; }
+.heart6 { width: 82px; height: 82px; border-radius: 50%; background: var(--surface); box-shadow: 0 0 0 8px var(--accent-soft), var(--shadow-md); display: grid; place-items: center; font-size: 42px; color: var(--accent); opacity: 0; flex: none; }
+.chips { position: absolute; left: 12px; top: 420px; display: flex; flex-direction: column; gap: 14px; }
+.chip { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 32px; box-shadow: var(--shadow-sm); opacity: 0; }
+.atd { position: absolute; left: 90px; top: 180px; width: 940px; height: 930px; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; }
+.atd > * { opacity: 0; }
+.wbar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 22px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 27px; font-weight: 700; white-space: nowrap; }
+.wbar .icon { font-size: 30px; color: var(--accent); }
+.dots { display: flex; gap: 8px; margin-right: 4px; }
+.dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.top { display: flex; align-items: center; gap: 20px; padding: 26px 34px 18px; }
+.top b { font-size: 36px; font-weight: 700; }
+.av.big { width: 80px; height: 80px; font-size: 26px; }
+.pill6 { display: flex; align-items: center; gap: 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); padding: 8px 18px; font-size: 22px; font-weight: 600; }
+.pill6 .icon { font-size: 24px; color: var(--accent); }
+.clock { margin-left: auto; font-size: 40px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--ui-divider); padding: 0 34px; }
+.tabs b { font-size: 26px; padding: 16px 18px; color: var(--muted); font-weight: 600; }
+.tabs b.on { color: var(--text); box-shadow: inset 0 -4px 0 var(--primary); }
+.caderno { padding: 14px 52px; }
+.linha { position: relative; height: 72px; border-bottom: 1px solid var(--ui-divider); }
+.esc { position: absolute; left: 0; bottom: 18px; height: 16px; border-radius: 8px; background: var(--border); transform-origin: 0 50%; transform: scaleX(0); }
+.e1 { width: 82%; }
+.e2 { width: 64%; }
+.e3 { width: 90%; }
+.e4 { width: 48%; }
+.e5 { width: 76%; }
+.e6 { width: 38%; }
+.caret { position: absolute; left: 39%; bottom: 10px; width: 4px; height: 36px; background: var(--text); opacity: 0; }
+.fim { position: absolute; right: 30px; bottom: 28px; }
+.btnf { background: var(--primary); color: var(--on-primary-app); font-weight: 700; border-radius: 12px; padding: 14px 26px; font-size: 24px; }
+.illus { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 20px; color: var(--ui-muted); opacity: 0; }

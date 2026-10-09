@@ -1,0 +1,401 @@
+<!doctype html>
+<!--
+  GERADO por tools/video-kit/scripts/compor.mjs a partir dos blocos da timeline. NÃO edite aqui: edite o bloco
+  (fundo/blobs [empresa], abertura/pergunta-fragmentos [empresa], rascunho/cena-nova [global], produto/painel-inicio [empresa]) ou a timeline.json e rode o compor/produce de novo.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+/* Base de toda composição montada por blocos (compor.mjs). Só tokens do brand.css; nada de marca aqui. */
+html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+* { box-sizing: border-box; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+  color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* palco 1080×1170: mesma altura útil no 4:5 e no 9:16 */
+.f-9x16 { --top: 300px; }
+.f-4x5 { --top: 90px; }
+#stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+.layer { position: absolute; inset: 0; }
+.icon { width: 1em; height: 1em; display: block; }
+.acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+.w { display: inline-block; opacity: 0; }
+.w.acc { font-size: 1.1em; }
+.hl { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-wrap: balance; }
+.center { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; }
+.tile-ic { display: grid; place-items: center; border-radius: 50%; }
+.burst { position: absolute; border-radius: 50%; border: 3px solid var(--primary); opacity: 0; }
+.k-cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+.k-ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
+
+/* Classes de marca da kz usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+.t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+.t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+.t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+.t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
+
+/* ── fundo/blobs (empresa) ── */
+.b-fundo-blobs .blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+.b-fundo-blobs .b1 { width: 760px; height: 760px; left: -260px; top: -200px; background: var(--ui-glow); opacity: 0.9; }
+.b-fundo-blobs .b2 { width: 640px; height: 640px; right: -240px; bottom: -160px; background: var(--accent-soft); opacity: 0.55; }
+
+/* ── abertura/pergunta-fragmentos (empresa) ── */
+.b-abertura-pergunta-fragmentos .main, .b-abertura-pergunta-fragmentos .frags { position: absolute; inset: 0; }
+.b-abertura-pergunta-fragmentos .q1 { position: absolute; left: 0; right: 0; top: 250px; transform-origin: 50% 0%; }
+.b-abertura-pergunta-fragmentos .badge { width: 150px; height: 150px; font-size: 76px; margin: 0 auto 34px; opacity: 0; }
+.b-abertura-pergunta-fragmentos .q1t { font-size: 124px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.08; max-width: 760px; margin: 0 auto; }
+.b-abertura-pergunta-fragmentos .q2 { font-size: 92px; top: 330px; }
+.b-abertura-pergunta-fragmentos .frag { position: absolute; left: 540px; top: 640px; display: flex; align-items: center; gap: 14px; padding: 18px 26px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-md);
+  font-size: 30px; font-weight: 600; opacity: 0; white-space: nowrap; }
+.b-abertura-pergunta-fragmentos .frag .ic { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; }
+.b-abertura-pergunta-fragmentos .frag .lb { line-height: 1.2; }
+.b-abertura-pergunta-fragmentos .frag .dt { display: block; font-size: 21px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+.b-abertura-pergunta-fragmentos .frag .bd { position: absolute; right: -12px; top: -16px; min-width: 40px; height: 40px; padding: 0 10px; box-sizing: border-box; border-radius: 20px;
+  background: var(--primary); color: var(--ink); display: grid; place-items: center; font-size: 22px; font-weight: 700; box-shadow: var(--shadow-sm); }
+
+/* ── rascunho/cena-nova (global) ── */
+.b-rascunho-cena-nova .rc-box { position: absolute; inset: 12% 8%; border: 4px dashed var(--border); border-radius: 32px; background: var(--surface);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding: 60px; text-align: center; }
+.b-rascunho-cena-nova .rc-tag { font-size: 30px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+.b-rascunho-cena-nova .rc-textos { display: flex; flex-direction: column; gap: 18px; font-size: 64px; font-weight: 700; color: var(--text); line-height: 1.12; text-wrap: balance; }
+.b-rascunho-cena-nova .rc-spec { font-size: 28px; color: var(--muted); line-height: 1.35; max-width: 80%; }
+
+/* ── produto/painel-inicio (empresa) ── */
+.b-produto-painel-inicio .hl { top: 50px; left: 20px; right: 20px; font-size: 56px; }
+.b-produto-painel-inicio .app { position: absolute; left: 50px; top: 175px; width: 980px; height: 985px; background: var(--bg); border-radius: 36px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; padding: 44px 48px; transform-origin: 50% 40%; }
+.b-produto-painel-inicio .hello { font-size: 52px; font-weight: 500; letter-spacing: -0.01em; }
+.b-produto-painel-inicio .hello .acc { color: var(--accent); font-size: 1.08em; }
+.b-produto-painel-inicio .sub { font-size: 23px; color: var(--ui-muted); margin-top: 4px; font-weight: 500; }
+.b-produto-painel-inicio .ui { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; position: absolute; overflow: hidden; }
+.b-produto-painel-inicio .next { left: 48px; right: 48px; top: 175px; height: 290px; padding: 28px 34px; }
+.b-produto-painel-inicio .next .glow { position: absolute; right: -120px; top: -140px; width: 420px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); }
+.b-produto-painel-inicio .lbl { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: var(--ui-muted); }
+.b-produto-painel-inicio .lbl .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); }
+.b-produto-painel-inicio .lbl b { color: var(--primary-hover); }
+.b-produto-painel-inicio .av { width: 58px; height: 58px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 21px; font-weight: 700; flex: none; }
+.b-produto-painel-inicio .who { display: flex; gap: 24px; align-items: center; margin-top: 22px; }
+.b-produto-painel-inicio .who .av { width: 92px; height: 92px; font-size: 32px; }
+.b-produto-painel-inicio .who b { font-size: 38px; font-weight: 700; display: block; }
+.b-produto-painel-inicio .who small { font-size: 23px; color: var(--ui-muted); font-weight: 500; }
+.b-produto-painel-inicio .btns { display: flex; gap: 14px; margin-top: 24px; }
+.b-produto-painel-inicio .btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-size: 23px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); }
+.b-produto-painel-inicio .btn.pri { background: var(--primary); color: var(--on-primary-app); border-color: var(--primary); }
+.b-produto-painel-inicio .btn .icon { font-size: 24px; }
+.b-produto-painel-inicio .ring5 { position: absolute; left: 44px; right: 44px; top: 171px; height: 298px; border-radius: 30px; border: 4px solid var(--primary); opacity: 0; }
+.b-produto-painel-inicio .list { left: 48px; top: 490px; width: 430px; height: 445px; padding: 26px; }
+.b-produto-painel-inicio .short { left: 500px; top: 490px; width: 432px; height: 445px; padding: 26px; }
+.b-produto-painel-inicio .ui h4 { margin: 0 0 16px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.b-produto-painel-inicio .ui h4 .icon { color: var(--primary); font-size: 30px; }
+.b-produto-painel-inicio .sess { display: flex; gap: 14px; align-items: center; padding: 12px 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 11px; font-size: 22px; font-weight: 600; opacity: 0; }
+.b-produto-painel-inicio .sess .t { font-size: 20px; color: var(--accent); font-weight: 700; width: 66px; }
+.b-produto-painel-inicio .sess small { display: block; color: var(--ui-muted); font-size: 18px; font-weight: 500; }
+.b-produto-painel-inicio .sess .av { width: 46px; height: 46px; font-size: 17px; }
+.b-produto-painel-inicio .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.b-produto-painel-inicio .tile { border: 1px solid var(--border); border-radius: 18px; padding: 16px; height: 168px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; opacity: 0; }
+.b-produto-painel-inicio .tile .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+.b-produto-painel-inicio .done { bottom: 80px; z-index: 3; color: var(--ink); display: flex; align-items: center; gap: 14px; padding: 20px 32px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; box-shadow: var(--shadow-lg); font-size: 31px; font-weight: 600; white-space: nowrap; opacity: 0; }
+.b-produto-painel-inicio .done .icon { color: var(--success); font-size: 34px; }
+.b-produto-painel-inicio .illus { position: absolute; right: 30px; bottom: 14px; font-size: 18px; color: var(--ui-muted); }
+.b-produto-painel-inicio .sess .ok { margin-left: auto; color: var(--success); font-size: 26px; display: flex; }
+.b-produto-painel-inicio .mpc { position: absolute; z-index: 4; opacity: 0; display: grid; place-items: center; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); box-sizing: border-box; box-shadow: var(--shadow-md); }
+.b-produto-painel-inicio .mpc .mpi { width: 1.4em; height: 1.4em; border-radius: 0.34em; display: grid; place-items: center; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+<div class="layer b-fundo-blobs" data-inst="c1" data-bloco="fundo/blobs">
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+</div>
+      <div id="stage">
+<div class="layer b-abertura-pergunta-fragmentos" data-inst="s1" data-bloco="abertura/pergunta-fragmentos">
+<div class="main">
+  <div class="q1">
+    <div class="badge tile-ic t-coral">{{i:heart-handshake}}</div>
+    <div class="q1t"></div>
+  </div>
+  <div class="hl q2"></div>
+</div>
+<div class="frags">
+  <div class="frag"><div class="ic t-teal">{{i:calendar}}</div>Agenda</div>
+  <div class="frag"><div class="ic t-lilac">{{i:message-circle}}</div>Mensagens</div>
+  <div class="frag"><div class="ic t-amber">{{i:file-text}}</div>Planilha</div>
+  <div class="frag"><div class="ic t-coral">{{i:notebook-pen}}</div>Caderno</div>
+</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s2" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s3" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s4" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+<div class="layer b-produto-painel-inicio" data-inst="s5" data-bloco="produto/painel-inicio">
+<div class="hl h5a"></div>
+<div class="hl h5b"></div>
+<div class="hl h5c"></div>
+<div class="app">
+  <div class="hello"></div>
+  <div class="sub">Quarta-feira · 3 sessões hoje</div>
+  <div class="ui next">
+    <div class="glow"></div>
+    <div class="lbl"><span class="dot"></span>PRÓXIMA SESSÃO · <b>EM 15 MIN</b></div>
+    <div class="who"><div class="av">MS</div><div><b>Marina S.</b><small>15:00 — 15:50 · Online · 4ª sessão</small></div></div>
+    <div class="btns"><div class="btn pri">{{i:video}}Iniciar sessão</div><div class="btn">{{i:file-text}}Ver prontuário</div></div>
+  </div>
+  <div class="ring5"></div>
+  <div class="ui list">
+    <h4>Próximas sessões {{i:calendar}}</h4>
+    <div class="sess"><span class="t">15:00</span><div class="av">MS</div><div>Marina S.<small>Online</small></div></div>
+    <div class="sess"><span class="t">16:00</span><div class="av">LP</div><div>Lucas P.<small>Presencial</small></div></div>
+    <div class="sess"><span class="t">17:30</span><div class="av">HR</div><div>Helena R.<small>Online</small></div></div>
+    <div class="sess"><span class="t">Qui</span><div class="av">CA</div><div>Clara A.<small>Presencial</small></div></div>
+  </div>
+  <div class="ui short">
+    <h4>Atalhos {{i:sparkles}}</h4>
+    <div class="tiles">
+      <div class="tile"><span class="ic t-coral">{{i:zap}}</span>Sessão rápida</div>
+      <div class="tile"><span class="ic t-teal">{{i:calendar}}</span>Agendar</div>
+      <div class="tile"><span class="ic t-amber">{{i:user-plus}}</span>Novo cliente</div>
+      <div class="tile"><span class="ic t-lilac">{{i:notebook-pen}}</span>Nova anotação</div>
+    </div>
+  </div>
+  <div class="center done">{{i:circle-check}}Sessão agendada · lembrete enviado</div>
+  <div class="illus">dados ilustrativos</div>
+</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s6" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+<div class="layer b-rascunho-cena-nova" data-inst="s7" data-bloco="rascunho/cena-nova">
+<div class="rc-box">
+  <div class="rc-tag"></div>
+  <div class="rc-textos"></div>
+  <div class="rc-spec"></div>
+</div>
+</div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script src="kit/blocos.js"></script>
+    <script>
+BLOCO('fundo/blobs', function ({ tl, $, cena, params }) {
+  const [x1, y1] = params.deriva1, [x2, y2] = params.deriva2
+  tl.fromTo($('.b1'), { x: 0, y: 0 }, { x: x1, y: y1, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  tl.fromTo($('.b2'), { x: 0, y: 0 }, { x: x2, y: y2, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+})
+    </script>
+    <script>
+BLOCO('abertura/pergunta-fragmentos', function ({ tl, K, $, $$, cena, cue, texto, fala, params }) {
+  const f = fala(0)
+  // ícones que `fragmentos` pode pedir (os {{i:…}} são trocados pelo SVG na hora de montar; outro Lucide = acrescentar aqui)
+  const ICONES = {
+    calendar: `{{i:calendar}}`, contact: `{{i:contact}}`, 'notebook-pen': `{{i:notebook-pen}}`, 'message-circle': `{{i:message-circle}}`,
+    'file-text': `{{i:file-text}}`, users: `{{i:users}}`, folder: `{{i:folder}}`, wallet: `{{i:wallet}}`, sheet: `{{i:sheet}}`, clock: `{{i:clock}}`,
+  }
+  // params novos, todos opcionais: sem eles o bloco é o original (Agenda · Mensagens · Planilha · Caderno, entrando do nada em `espalha`)
+  if (params.fragmentos) {
+    $('.frags').innerHTML = params.fragmentos.map(([ic, rot, tom]) => {
+      if (!ICONES[ic]) throw new Error(`pergunta-fragmentos: ícone "${ic}" fora da lista do bloco.js`)
+      return `<div class="frag"><div class="ic ${tom}">${ICONES[ic]}</div>${rot}</div>`
+    }).join('')
+  }
+  // detalhes: 1 por peça. Número puro vira selo no canto (3 mensagens); texto vira linha curta sob o rótulo (Qui 14h)
+  ;(params.detalhes || []).forEach((d, i) => {
+    const el = $$('.frag')[i]
+    if (!el || !d) return
+    if (/^\d+$/.test(String(d))) return el.insertAdjacentHTML('beforeend', `<span class="bd">${d}</span>`)
+    const tn = [...el.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim())
+    const lb = document.createElement('div')
+    lb.className = 'lb'
+    lb.innerHTML = `${tn.textContent}<small class="dt">${d}</small>`
+    tn.replaceWith(lb)
+  })
+  // apagadas: as peças já existem no 1º quadro (em arco, pequenas, a 30%, atrás da pergunta) e em `espalha` acendem e se espalham
+  const apagadas = !!params.apagadas
+  if (apagadas) {
+    $('.frags').style.zIndex = 1
+    $('.main').style.zIndex = 2
+  }
+
+  K.pop($('.badge'), cue('entra'), 0.3)
+  tl.fromTo($('.badge'), { rotation: -12 }, { rotation: 0, ...M.SOFT, duration: 0.7 }, cue('entra'))
+  if (params.inteira) K.flash($('.q1t'), texto('pergunta'), cue('entra') + 0.06, 50)
+  else K.type($('.q1t'), texto('pergunta'), f, cue('entra') + 0.06, 60)
+  tl.to($('.q1'), { y: -190, scale: 0.42, duration: 0.75, ease: M.GENTLE.ease }, cue('troca'))
+  if (params.inteira) K.flash($('.q2'), texto('complemento'), cue('troca') + 0.12, 40)
+  else K.type($('.q2'), texto('complemento'), f, cue('troca') + 0.12, 40, true)
+  const some = cena.end + params.sobra
+  $$('.frag').forEach((el, i) => {
+    const [x, y, r] = params.posicoes[i]
+    if (apagadas) {
+      const [ax, ay, ar] = params.arco[i]
+      tl.set(el, { opacity: params.opacidade_apagada, x: ax, y: ay, scale: params.escala_apagada, rotation: ar }, cena.start)
+      // deriva lenta até acender (termina antes do `espalha`, que pega o ponto onde ela parou)
+      tl.to(el, { y: ay + (i % 2 ? 9 : -9), rotation: ar + (i % 2 ? 1.5 : -1.5), duration: Math.max(0.1, cue('espalha') - cena.start - 0.02), ease: 'none' }, cena.start)
+      tl.to(el, { opacity: 1, x, y, scale: 1, rotation: r, ...M.SOFT }, cue('espalha') + i * 0.09)
+    } else {
+      tl.fromTo(el, { opacity: 0, x: -110, y: -40, scale: 0.3, rotation: 0 }, { opacity: 1, x, y, scale: 1, rotation: r, ...M.SOFT }, cue('espalha') + i * 0.09)
+    }
+    // o suspiro do começo da cena seguinte: os pedaços "caem" um pouco e somem
+    tl.to(el, { y: y + 40 + i * 6, rotation: r * 1.6, duration: 1.0, ease: 'sine.inOut' }, cena.end)
+    tl.to(el, { opacity: 0, scale: 0.6, filter: 'blur(6px)', duration: 0.25, ease: 'power2.in' }, some - 0.12 + i * 0.04)
+  })
+  tl.fromTo($('.main'), { scale: 1 }, { scale: 1.03, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  K.out($('.main'), cena.end - 0.26, 0.28, -50)
+})
+    </script>
+    <script>
+BLOCO('rascunho/cena-nova', function ({ tl, root, $, cena, partes, params }) {
+  $('.rc-tag').textContent = `bloco novo: ${params.novo || '?'}`
+  $('.rc-textos').innerHTML = partes().filter(Boolean).map((p) => `<div>${p.replace(/\*(.+?)\*/g, '<span class="acc">$1</span>')}</div>`).join('')
+  $('.rc-spec').textContent = params.spec || ''
+  tl.fromTo(root, { opacity: 0 }, { opacity: 1, duration: 0.2 }, cena.start)
+  tl.to(root, { opacity: 0, duration: 0.15 }, cena.end - 0.15)
+})
+    </script>
+    <script>
+BLOCO('produto/painel-inicio', function ({ tl, K, root, $, $$, cena, cue, texto, fala, box, cursor, params }) {
+  const f = fala(0)
+  const app = $('.app')
+  // params novos, todos opcionais: sem eles o bloco é o original (Marina 15:00, "3 sessões hoje", toast "Sessão agendada · lembrete enviado", entrada pelo painel)
+  const E = params.elenco && typeof params.elenco === 'object' ? params.elenco : null // "P.elenco" (texto solto) = ainda não resolvido: ignora
+  let alvoLista = 2 // linha da lista que o cursor clica (original: a 2ª)
+  if (E) {
+    const iniciais = (n) => n.replace(/\./g, '').split(/\s+/).map((p) => p[0]).join('').toUpperCase()
+    const hhmm = (h, mais) => { const [a, b] = h.split(':').map(Number), m = a * 60 + b + mais; return `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}` }
+    const ses = E.sessoes || []
+    const [hProx, nProx, quando] = String(E.proxima || '').split(' · ')
+    if (E.dia) $('.sub').textContent = E.dia.charAt(0).toUpperCase() + E.dia.slice(1).replace(', ', ' · ')
+    if (nProx) {
+      $('.lbl b').textContent = String(quando || '').toUpperCase()
+      $('.who .av').textContent = iniciais(nProx)
+      $('.who b').textContent = nProx
+      $('.who small').textContent = `${hProx} — ${hhmm(hProx, 50)} · Online`
+    }
+    const iProx = ses.findIndex(([h]) => h === hProx)
+    if (iProx >= 0) alvoLista = iProx + 1
+    // a lista do dia: as que já passaram ganham o visto
+    $$('.list .sess').forEach((el) => el.remove())
+    ses.forEach(([h, n], i) => $('.list').insertAdjacentHTML('beforeend',
+      `<div class="sess"><span class="t">${h}</span><div class="av">${iniciais(n)}</div><div>${n}<small>${i % 2 ? 'Presencial' : 'Online'}</small></div>${iProx >= 0 && i < iProx ? '<span class="ok">{{i:check}}</span>' : ''}</div>`))
+  }
+  if (params.toast) {
+    const tn = [...$('.done').childNodes].find((n) => n.nodeType === 3 && n.textContent.trim())
+    tn.textContent = params.toast
+  }
+
+  // medir antes de qualquer transform; a "câmera" (scale do painel em torno de O) é aplicada à mão nos alvos do cursor
+  const a = box(app, 0.5, 0.4), O = { x: a.x, y: a.y }
+  const cam = (p, s, dx, dy) => ({ x: O.x + (p.x - O.x) * s + dx, y: O.y + (p.y - O.y) * s + dy })
+  const pIniciar = cam(box($('.next .btn.pri'), 0.55, 0.6), 1.05, 0, 30)
+  const pList = cam(box($(`.list .sess:nth-of-type(${alvoLista})`), 0.8, 0.6), 1.05, 0, -15)
+  // de_atalhos: onde a câmera começa (dentro do card Atalhos, ampliada) — mede agora, antes de qualquer transform
+  let zoom0 = null
+  if (params.de_atalhos) {
+    // o card Atalhos ampliado fica no centro do palco (1080×1170: dentro da área segura nos dois formatos), um pouco abaixo para deixar a headline livre
+    const s = params.zoom_atalhos, A = box($('.short'), 0.5, 0.5), st = document.getElementById('stage') || document.getElementById('root')
+    zoom0 = { scale: s, x: st.offsetWidth / 2 - O.x - s * (A.x - O.x), y: st.offsetHeight / 2 + params.desloc_atalhos - O.y - s * (A.y - O.y) }
+    // a headline fica por cima do painel ampliado (na ordem normal o painel cobriria o topo)
+    $$('.hl').forEach((h) => (h.style.zIndex = 6))
+  }
+
+  $('.hello').innerHTML = `${texto('saudacao')} <span class="acc">${texto('nome')}</span>`
+  params.inteira ? K.flash($('.h5a'), texto('h1'), cue('entra') + 0.05) : K.type($('.h5a'), texto('h1'), f, cue('entra') + 0.05, 34, true)
+  K.out($('.h5a'), cue('destaque') - 0.2, 0.2, -30)
+  params.inteira ? K.flash($('.h5b'), texto('h2'), cue('destaque')) : K.type($('.h5b'), texto('h2'), f, cue('destaque'), 34, true)
+  K.out($('.h5b'), cue('lista') - 0.2, 0.2, -30)
+  params.inteira ? K.flash($('.h5c'), texto('h3'), cue('lista')) : K.type($('.h5c'), texto('h3'), f, cue('lista'), 34, true)
+  if (zoom0) {
+    // a cena nasce com o card Atalhos enchendo o quadro (1º quadro já com conteúdo); a câmera recua até o painel inteiro e o resto aparece na periferia
+    const e = cue('entra')
+    tl.set(app, { opacity: 1 }, cena.start)
+    tl.set($$('.tile'), { opacity: 1, scale: 1 }, cena.start)
+    tl.fromTo(app, zoom0, { x: 0, y: 0, scale: 1, ...M.GENTLE, duration: params.recuo_atalhos }, e + params.espera_atalhos)
+    // saudação, subtítulo e rodapé só aparecem quando a câmera já recuou (não ficam cortados na borda durante o zoom)
+    tl.fromTo([$('.hello'), $('.sub'), $('.illus')], { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.06 }, e + 0.4)
+    tl.fromTo($('.next'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, e + 0.45)
+    tl.fromTo($('.list'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, e + 0.55)
+    $$('.list .sess').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -24 }, { opacity: 1, x: 0, ...M.FAST }, e + 0.7 + i * 0.07))
+  } else {
+    tl.fromTo(app, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power1.out' }, cue('entra') - 0.18)
+    tl.fromTo(app, { y: 140, scale: 0.92 }, { y: 0, scale: 1, ...M.GENTLE, duration: 0.9 }, cue('entra') - 0.18)
+    tl.fromTo($('.next'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST }, cue('entra') + 0.15)
+    tl.fromTo([$('.list'), $('.short')], { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.08 }, cue('entra') + 0.25)
+    $$('.list .sess').forEach((el, i) => tl.fromTo(el, { opacity: 0, x: -24 }, { opacity: 1, x: 0, ...M.FAST }, cue('entra') + 0.4 + i * 0.07))
+    $$('.tile').forEach((el, i) => tl.fromTo(el, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ...M.SOFT }, cue('entra') + 0.45 + i * 0.07))
+  }
+  tl.to(app, { scale: 1.05, y: 30, duration: 1.1, ease: M.GENTLE.ease }, cue('destaque') - 0.2)
+  tl.fromTo($('.ring5'), { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, ...M.FAST }, cue('destaque'))
+  const C = cursor()
+  tl.set(C.el, { x: pIniciar.x + 300, y: pIniciar.y + 260 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.2 }, cue('destaque') - 0.1)
+  C.move(pIniciar, cue('destaque') - 0.1, 0.65)
+  tl.to($('.ring5'), { opacity: 0, duration: 0.25 }, cue('lista') - 0.2)
+  tl.to(app, { scale: 1.05, y: -15, duration: 1.1, ease: M.GENTLE.ease }, cue('lista') - 0.2)
+  C.move(pList, cue('lista') - 0.15, 0.6)
+  tl.to($(`.list .sess:nth-of-type(${alvoLista})`), { backgroundColor: 'var(--ui-glow)', borderColor: 'var(--accent-soft)', duration: 0.25 }, cue('lista') + 0.4)
+  C.click(pList, cue('lista') + 0.45)
+  if (params.toast && params.toast_de_mensagens) {
+    // a peça Mensagens (coral) desce do canto do painel, pousa na ponta do toast e ele se abre a partir dela
+    const d = $('.done'), ts = d.offsetHeight, W = d.offsetWidth, pf = cue('feito') - 0.3 // a peça já está caindo quando a palavra chega: sobra pouco entre feito e sai
+    app.insertAdjacentHTML('beforeend', `<div class="mpc"><span class="mpi t-coral">{{i:message-circle}}</span></div>`)
+    const pc = $('.mpc')
+    Object.assign(pc.style, { left: `${d.offsetLeft}px`, top: `${d.offsetTop}px`, width: `${ts}px`, height: `${ts}px`, fontSize: `${Math.round(ts * 0.42)}px` })
+    const dx = app.offsetWidth - 70 - ts - d.offsetLeft, dy = -ts - 30 - d.offsetTop
+    tl.fromTo(pc, { opacity: 1, x: dx, rotation: -16, scale: 0.9 }, { x: 0, rotation: 0, scale: 1, duration: 0.4, ease: 'power2.out', immediateRender: false }, pf)
+    tl.fromTo(pc, { y: dy }, { y: 0, duration: 0.4, ease: 'power3.in', immediateRender: false }, pf)
+    tl.fromTo(pc, { scaleY: 1 }, { scaleY: 0.86, duration: 0.07, ease: 'power1.out', yoyo: true, repeat: 1, immediateRender: false }, pf + 0.4)
+    tl.set(d, { opacity: 1 }, pf + 0.43)
+    tl.fromTo(d, { clipPath: `inset(0px ${W - ts}px 0px 0px round 18px)` }, { clipPath: 'inset(-90px -90px -110px -90px round 18px)', ...M.SOFT, duration: 0.5, immediateRender: false }, pf + 0.43)
+    tl.to(pc, { opacity: 0, duration: 0.2, ease: 'power1.in' }, pf + 0.55)
+    K.pop($('.done .icon'), pf + 0.62, 0.2)
+  } else {
+    tl.fromTo($('.done'), { opacity: 0, y: 40, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, cue('feito'))
+    K.pop($('.done .icon'), cue('feito') + 0.12, 0.2)
+  }
+  tl.to(C.el, { opacity: 0, duration: 0.2 }, cue('sai') - 0.15)
+  tl.to(app, { opacity: 0, scale: 0.9, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in' }, cue('sai'))
+  K.out($('.h5c'), cue('sai'), 0.28)
+})
+    </script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      BLOCOS.montar(tl, [{"inst":"c1","use":"fundo/blobs","cena":null,"slots":[],"padroes":{"deriva1":[180,140],"deriva2":[-160,-200]}},{"inst":"s1","use":"abertura/pergunta-fragmentos","cena":"s1","slots":["pergunta","complemento"],"padroes":{"posicoes":[[-450,30,-8],[170,0,6],[-400,250,5],[190,270,-6]],"sobra":0.8,"fragmentos":null,"apagadas":false,"detalhes":null,"arco":[[-330,-20,-10],[-150,-80,-4],[60,-80,4],[240,-20,10]],"opacidade_apagada":0.3,"escala_apagada":0.6,"inteira":false}},{"inst":"s2","use":"rascunho/cena-nova","cena":"s2","slots":[],"padroes":{"novo":"","spec":""}},{"inst":"s3","use":"rascunho/cena-nova","cena":"s3","slots":[],"padroes":{"novo":"","spec":""}},{"inst":"s4","use":"rascunho/cena-nova","cena":"s4","slots":[],"padroes":{"novo":"","spec":""}},{"inst":"s5","use":"produto/painel-inicio","cena":"s5","slots":["saudacao","nome","h1","h2","h3"],"padroes":{"de_atalhos":false,"zoom_atalhos":2.2,"desloc_atalhos":35,"recuo_atalhos":1.5,"toast":null,"toast_de_mensagens":true,"elenco":null,"espera_atalhos":0.12,"inteira":false}},{"inst":"s6","use":"rascunho/cena-nova","cena":"s6","slots":[],"padroes":{"novo":"","spec":""}},{"inst":"s7","use":"rascunho/cena-nova","cena":"s7","slots":[],"padroes":{"novo":"","spec":""}}])
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

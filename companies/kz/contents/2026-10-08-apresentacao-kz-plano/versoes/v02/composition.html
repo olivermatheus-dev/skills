@@ -1,0 +1,739 @@
+<!doctype html>
+<!--
+  GERADO por tools/video-kit/scripts/compor.mjs a partir dos blocos da timeline. NÃO edite aqui: edite o bloco
+  (fundo/blobs [empresa], abertura/pergunta-sessao [projeto], cena/janelas-abrem [projeto], cena/janelas-espremem [projeto], revelacao/janela-unica [projeto], produto/painel-janela [projeto], virada/sessao-ocupa-tudo [projeto], cta/cartao-janela [projeto]) ou a timeline.json e rode o compor/produce de novo.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+/* Base de toda composição montada por blocos (compor.mjs). Só tokens do brand.css; nada de marca aqui. */
+html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+* { box-sizing: border-box; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+  color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* palco 1080×1170: mesma altura útil no 4:5 e no 9:16 */
+.f-9x16 { --top: 300px; }
+.f-4x5 { --top: 90px; }
+#stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+.layer { position: absolute; inset: 0; }
+.icon { width: 1em; height: 1em; display: block; }
+.acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+.w { display: inline-block; opacity: 0; }
+.w.acc { font-size: 1.1em; }
+.hl { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-wrap: balance; }
+.center { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; }
+.tile-ic { display: grid; place-items: center; border-radius: 50%; }
+.burst { position: absolute; border-radius: 50%; border: 3px solid var(--primary); opacity: 0; }
+.k-cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+.k-ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
+
+/* Classes de marca da kz usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+.t-coral { background: var(--tile-coral); color: var(--tile-coral-ink); }
+.t-teal { background: var(--tile-teal); color: var(--tile-teal-ink); }
+.t-amber { background: var(--tile-amber); color: var(--tile-amber-ink); }
+.t-lilac { background: var(--tile-lilac); color: var(--tile-lilac-ink); }
+
+/* ── fundo/blobs (empresa) ── */
+.b-fundo-blobs .blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+.b-fundo-blobs .b1 { width: 760px; height: 760px; left: -260px; top: -200px; background: var(--ui-glow); opacity: 0.9; }
+.b-fundo-blobs .b2 { width: 640px; height: 640px; right: -240px; bottom: -160px; background: var(--accent-soft); opacity: 0.55; }
+
+/* ── abertura/pergunta-sessao (projeto) ── */
+.b-abertura-pergunta-sessao .cam { position: absolute; inset: 0; }
+.b-abertura-pergunta-sessao .win { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); overflow: hidden; opacity: 0; }
+.b-abertura-pergunta-sessao .wbar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 27px; font-weight: 700; white-space: nowrap; color: var(--text); }
+.b-abertura-pergunta-sessao .dots { display: flex; gap: 8px; margin-right: 4px; }
+.b-abertura-pergunta-sessao .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-abertura-pergunta-sessao .wbar .icon { font-size: 30px; color: var(--accent); }
+.b-abertura-pergunta-sessao .wb { padding: 20px 22px; }
+.b-abertura-pergunta-sessao .dias { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; font-size: 18px; font-weight: 700; color: var(--ui-muted); text-align: center; margin-bottom: 8px; }
+.b-abertura-pergunta-sessao .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.b-abertura-pergunta-sessao .grid i { display: block; height: 42px; border-radius: 8px; background: var(--surface-2); font-style: normal; }
+.b-abertura-pergunta-sessao .grid .a { background: var(--pastel-sage); }
+.b-abertura-pergunta-sessao .grid .b { background: var(--pastel-lavender); }
+.b-abertura-pergunta-sessao .grid .c { background: var(--pastel-sky); }
+.b-abertura-pergunta-sessao .grid .mc { background: var(--accent-soft); color: var(--ink); font-size: 17px; font-weight: 700; display: grid; place-items: center; white-space: nowrap; }
+.b-abertura-pergunta-sessao .ficha { display: flex; gap: 20px; align-items: center; }
+.b-abertura-pergunta-sessao .fl { flex: 1; }
+.b-abertura-pergunta-sessao .av { width: 84px; height: 84px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; flex: none; }
+.b-abertura-pergunta-sessao .ln { height: 14px; border-radius: 7px; background: var(--surface-2); margin: 12px 0; }
+.b-abertura-pergunta-sessao .ln.forte { background: var(--border); height: 18px; }
+.b-abertura-pergunta-sessao .w50 { width: 50%; }
+.b-abertura-pergunta-sessao .w55 { width: 55%; }
+.b-abertura-pergunta-sessao .w60 { width: 60%; }
+.b-abertura-pergunta-sessao .w70 { width: 70%; }
+.b-abertura-pergunta-sessao .w80 { width: 80%; }
+.b-abertura-pergunta-sessao .notas { position: relative; height: 220px; }
+.b-abertura-pergunta-sessao .postit { position: absolute; border-radius: 8px; box-shadow: var(--shadow-sm); padding: 14px 16px; background: var(--pastel-butter); }
+.b-abertura-pergunta-sessao .postit .ln { background: var(--surface); opacity: 0.75; height: 10px; margin: 10px 0; }
+.b-abertura-pergunta-sessao .p1 { left: 24px; top: 16px; width: 210px; height: 175px; transform: rotate(-4deg); }
+.b-abertura-pergunta-sessao .p2 { left: 270px; top: 22px; width: 200px; height: 165px; transform: rotate(3deg); background: var(--pastel-rose); }
+.b-abertura-pergunta-sessao .tag { display: inline-block; font-size: 22px; font-weight: 700; color: var(--ink); padding: 2px 10px; border-radius: 8px; background: var(--surface); }
+.b-abertura-pergunta-sessao .ses { left: 270px; top: 520px; width: 540px; height: 250px; }
+.b-abertura-pergunta-sessao .ag { left: 40px; top: 250px; width: 540px; height: 330px; }
+.b-abertura-pergunta-sessao .pa { left: 520px; top: 380px; width: 520px; height: 290px; }
+.b-abertura-pergunta-sessao .an { left: 150px; top: 700px; width: 560px; height: 290px; }
+.b-abertura-pergunta-sessao .q1 { position: absolute; left: 0; right: 0; top: 100px; transform-origin: 50% 0%; z-index: 5; }
+.b-abertura-pergunta-sessao .badge { width: 110px; height: 110px; font-size: 56px; margin: 0 auto 26px; opacity: 0; }
+.b-abertura-pergunta-sessao .q1t { font-size: 112px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.08; max-width: 820px; margin: 0 auto; }
+.b-abertura-pergunta-sessao .q2 { font-size: 66px; top: 165px; z-index: 5; }
+
+/* ── cena/janelas-abrem (projeto) ── */
+.b-cena-janelas-abrem .cam { position: absolute; inset: 0; }
+.b-cena-janelas-abrem .win { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); overflow: hidden; opacity: 0; }
+.b-cena-janelas-abrem .wbar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 27px; font-weight: 700; white-space: nowrap; color: var(--text); }
+.b-cena-janelas-abrem .dots { display: flex; gap: 8px; margin-right: 4px; }
+.b-cena-janelas-abrem .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-cena-janelas-abrem .wbar .icon { font-size: 30px; color: var(--accent); }
+.b-cena-janelas-abrem .wb { padding: 20px 22px; }
+.b-cena-janelas-abrem .dias { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; font-size: 18px; font-weight: 700; color: var(--ui-muted); text-align: center; margin-bottom: 8px; }
+.b-cena-janelas-abrem .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.b-cena-janelas-abrem .grid i { display: block; height: 42px; border-radius: 8px; background: var(--surface-2); font-style: normal; }
+.b-cena-janelas-abrem .grid .a { background: var(--pastel-sage); }
+.b-cena-janelas-abrem .grid .b { background: var(--pastel-lavender); }
+.b-cena-janelas-abrem .grid .c { background: var(--pastel-sky); }
+.b-cena-janelas-abrem .grid .mc { background: var(--accent-soft); color: var(--ink); font-size: 17px; font-weight: 700; display: grid; place-items: center; white-space: nowrap; }
+.b-cena-janelas-abrem .ficha { display: flex; gap: 20px; align-items: center; }
+.b-cena-janelas-abrem .fl { flex: 1; }
+.b-cena-janelas-abrem .av { width: 84px; height: 84px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; flex: none; }
+.b-cena-janelas-abrem .ln { height: 14px; border-radius: 7px; background: var(--surface-2); margin: 12px 0; }
+.b-cena-janelas-abrem .ln.forte { background: var(--border); height: 18px; }
+.b-cena-janelas-abrem .w50 { width: 50%; }
+.b-cena-janelas-abrem .w55 { width: 55%; }
+.b-cena-janelas-abrem .w60 { width: 60%; }
+.b-cena-janelas-abrem .w70 { width: 70%; }
+.b-cena-janelas-abrem .w80 { width: 80%; }
+.b-cena-janelas-abrem .notas { position: relative; height: 220px; }
+.b-cena-janelas-abrem .postit { position: absolute; border-radius: 8px; box-shadow: var(--shadow-sm); padding: 14px 16px; background: var(--pastel-butter); }
+.b-cena-janelas-abrem .postit .ln { background: var(--surface); opacity: 0.75; height: 10px; margin: 10px 0; }
+.b-cena-janelas-abrem .p1 { left: 24px; top: 16px; width: 210px; height: 175px; transform: rotate(-4deg); }
+.b-cena-janelas-abrem .p2 { left: 270px; top: 22px; width: 200px; height: 165px; transform: rotate(3deg); background: var(--pastel-rose); }
+.b-cena-janelas-abrem .tag { display: inline-block; font-size: 22px; font-weight: 700; color: var(--ink); padding: 2px 10px; border-radius: 8px; background: var(--surface); }
+.b-cena-janelas-abrem .ses { left: 270px; top: 520px; width: 540px; height: 250px; }
+.b-cena-janelas-abrem .ag { left: 40px; top: 250px; width: 540px; height: 330px; }
+.b-cena-janelas-abrem .pa { left: 520px; top: 380px; width: 520px; height: 290px; }
+.b-cena-janelas-abrem .an { left: 150px; top: 700px; width: 560px; height: 290px; }
+.b-cena-janelas-abrem .illus { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 20px; color: var(--ui-muted); opacity: 0; }
+.b-cena-janelas-abrem .h2 { top: 70px; font-size: 72px; }
+.b-cena-janelas-abrem .mark { position: relative; }
+.b-cena-janelas-abrem .rg { position: absolute; inset: -6px; border: 4px solid var(--accent); border-radius: 12px; opacity: 0; }
+.b-cena-janelas-abrem .av.mark .rg { border-radius: 50%; inset: -8px; }
+
+/* ── cena/janelas-espremem (projeto) ── */
+.b-cena-janelas-espremem .cam { position: absolute; inset: 0; }
+.b-cena-janelas-espremem .win { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); overflow: hidden; opacity: 0; }
+.b-cena-janelas-espremem .wbar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 27px; font-weight: 700; white-space: nowrap; color: var(--text); }
+.b-cena-janelas-espremem .dots { display: flex; gap: 8px; margin-right: 4px; }
+.b-cena-janelas-espremem .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-cena-janelas-espremem .wbar .icon { font-size: 30px; color: var(--accent); }
+.b-cena-janelas-espremem .wb { padding: 20px 22px; }
+.b-cena-janelas-espremem .dias { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; font-size: 18px; font-weight: 700; color: var(--ui-muted); text-align: center; margin-bottom: 8px; }
+.b-cena-janelas-espremem .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.b-cena-janelas-espremem .grid i { display: block; height: 42px; border-radius: 8px; background: var(--surface-2); font-style: normal; }
+.b-cena-janelas-espremem .grid .a { background: var(--pastel-sage); }
+.b-cena-janelas-espremem .grid .b { background: var(--pastel-lavender); }
+.b-cena-janelas-espremem .grid .c { background: var(--pastel-sky); }
+.b-cena-janelas-espremem .grid .mc { background: var(--accent-soft); color: var(--ink); font-size: 17px; font-weight: 700; display: grid; place-items: center; white-space: nowrap; }
+.b-cena-janelas-espremem .ficha { display: flex; gap: 20px; align-items: center; }
+.b-cena-janelas-espremem .fl { flex: 1; }
+.b-cena-janelas-espremem .av { width: 84px; height: 84px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; flex: none; }
+.b-cena-janelas-espremem .ln { height: 14px; border-radius: 7px; background: var(--surface-2); margin: 12px 0; }
+.b-cena-janelas-espremem .ln.forte { background: var(--border); height: 18px; }
+.b-cena-janelas-espremem .w50 { width: 50%; }
+.b-cena-janelas-espremem .w55 { width: 55%; }
+.b-cena-janelas-espremem .w60 { width: 60%; }
+.b-cena-janelas-espremem .w70 { width: 70%; }
+.b-cena-janelas-espremem .w80 { width: 80%; }
+.b-cena-janelas-espremem .notas { position: relative; height: 220px; }
+.b-cena-janelas-espremem .postit { position: absolute; border-radius: 8px; box-shadow: var(--shadow-sm); padding: 14px 16px; background: var(--pastel-butter); }
+.b-cena-janelas-espremem .postit .ln { background: var(--surface); opacity: 0.75; height: 10px; margin: 10px 0; }
+.b-cena-janelas-espremem .p1 { left: 24px; top: 16px; width: 210px; height: 175px; transform: rotate(-4deg); }
+.b-cena-janelas-espremem .p2 { left: 270px; top: 22px; width: 200px; height: 165px; transform: rotate(3deg); background: var(--pastel-rose); }
+.b-cena-janelas-espremem .tag { display: inline-block; font-size: 22px; font-weight: 700; color: var(--ink); padding: 2px 10px; border-radius: 8px; background: var(--surface); }
+.b-cena-janelas-espremem .ses { left: 270px; top: 520px; width: 540px; height: 250px; }
+.b-cena-janelas-espremem .ag { left: 40px; top: 250px; width: 540px; height: 330px; }
+.b-cena-janelas-espremem .pa { left: 520px; top: 380px; width: 520px; height: 290px; }
+.b-cena-janelas-espremem .an { left: 150px; top: 700px; width: 560px; height: 290px; }
+.b-cena-janelas-espremem .illus { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 20px; color: var(--ui-muted); opacity: 0; }
+.b-cena-janelas-espremem .h3 { top: 60px; font-size: 68px; z-index: 30; }
+.b-cena-janelas-espremem .cam { transform-origin: 78% 80%; }
+.b-cena-janelas-espremem .ses { overflow: visible; }
+.b-cena-janelas-espremem .ses .wbar { border-radius: 20px 20px 0 0; }
+.b-cena-janelas-espremem .sring { position: absolute; inset: -14px; border: 6px solid var(--primary); border-radius: 32px; opacity: 0; }
+.b-cena-janelas-espremem .sheart { position: absolute; right: -34px; top: -34px; width: 76px; height: 76px; border-radius: 50%; background: var(--surface); box-shadow: 0 0 0 8px var(--accent-soft), var(--shadow-md); display: grid; place-items: center; font-size: 40px; color: var(--accent); opacity: 0; }
+.b-cena-janelas-espremem .unica { left: 110px; top: 130px; width: 860px; height: 960px; border-radius: 28px; box-shadow: var(--shadow-lg); }
+.b-cena-janelas-espremem .trio { position: absolute; left: 0; right: 0; top: 380px; display: flex; justify-content: center; gap: 40px; }
+.b-cena-janelas-espremem .trio .tile-ic { width: 180px; height: 180px; border-radius: 44px; font-size: 96px; }
+
+/* ── revelacao/janela-unica (projeto) ── */
+.b-revelacao-janela-unica .win { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; }
+.b-revelacao-janela-unica .wbar { position: relative; height: 58px; display: flex; align-items: center; padding: 0 22px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.b-revelacao-janela-unica .dots { display: flex; gap: 8px; }
+.b-revelacao-janela-unica .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-revelacao-janela-unica .uni { left: 110px; top: 130px; width: 860px; height: 960px; }
+.b-revelacao-janela-unica .glow { position: absolute; right: -260px; top: -260px; width: 900px; height: 820px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), var(--ui-glow) 55%, transparent); opacity: 0; }
+.b-revelacao-janela-unica .logo { position: absolute; left: 50%; top: 110px; width: 360px; margin-left: -180px; clip-path: inset(0 100% 0 0); transform-origin: 50% 50%; }
+.b-revelacao-janela-unica .logo svg { width: 100%; height: auto; display: block; }
+.b-revelacao-janela-unica .logo path { fill: var(--logo); }
+.b-revelacao-janela-unica .ass { top: 420px; left: 30px; right: 30px; font-size: 54px; }
+.b-revelacao-janela-unica .div { position: absolute; left: 90px; right: 90px; top: 520px; height: 2px; background: var(--border); transform-origin: 0 50%; transform: scaleX(0); }
+.b-revelacao-janela-unica .frase { top: 545px; left: 30px; right: 30px; font-size: 42px; font-weight: 600; }
+.b-revelacao-janela-unica .pills { position: absolute; left: 0; right: 0; top: 630px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.b-revelacao-janela-unica .pill { display: flex; align-items: center; gap: 16px; padding: 10px 34px 10px 10px; border-radius: 999px; font-size: 44px; font-weight: 700;
+  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); opacity: 0; }
+.b-revelacao-janela-unica .pill .tile-ic { width: 60px; height: 60px; font-size: 32px; }
+.b-revelacao-janela-unica .trio { position: absolute; left: 0; right: 0; top: 380px; display: flex; justify-content: center; gap: 40px; }
+.b-revelacao-janela-unica .trio .tile-ic { width: 180px; height: 180px; border-radius: 44px; font-size: 96px; }
+
+/* ── produto/painel-janela (projeto) ── */
+.b-produto-painel-janela .hl { top: 50px; left: 20px; right: 20px; font-size: 60px; z-index: 5; }
+.b-produto-painel-janela .app { position: absolute; left: 50px; top: 175px; width: 980px; height: 985px; background: var(--bg); border-radius: 36px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; padding: 44px 48px; transform-origin: 50% 40%; }
+.b-produto-painel-janela .hello { font-size: 52px; font-weight: 500; letter-spacing: -0.01em; }
+.b-produto-painel-janela .hello .acc { color: var(--accent); font-size: 1.08em; }
+.b-produto-painel-janela .sub { font-size: 23px; color: var(--ui-muted); margin-top: 4px; font-weight: 500; }
+.b-produto-painel-janela .ui { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; position: absolute; overflow: hidden; }
+.b-produto-painel-janela .next { left: 48px; right: 48px; top: 175px; height: 290px; padding: 28px 34px; }
+.b-produto-painel-janela .next .glow { position: absolute; right: -120px; top: -140px; width: 420px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); }
+.b-produto-painel-janela .lbl { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: var(--ui-muted); }
+.b-produto-painel-janela .lbl .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); }
+.b-produto-painel-janela .lbl b { color: var(--primary-hover); }
+.b-produto-painel-janela .av { width: 58px; height: 58px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 19px; font-weight: 700; flex: none; }
+.b-produto-painel-janela .who { display: flex; gap: 24px; align-items: center; margin-top: 22px; }
+.b-produto-painel-janela .who .av { width: 92px; height: 92px; font-size: 30px; }
+.b-produto-painel-janela .who b { font-size: 38px; font-weight: 700; display: block; }
+.b-produto-painel-janela .who small { font-size: 23px; color: var(--ui-muted); font-weight: 500; }
+.b-produto-painel-janela .btns { display: flex; gap: 14px; margin-top: 24px; }
+.b-produto-painel-janela .btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-size: 23px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); }
+.b-produto-painel-janela .btn.pri { background: var(--primary); color: var(--on-primary-app); border-color: var(--primary); }
+.b-produto-painel-janela .btn .icon { font-size: 24px; }
+.b-produto-painel-janela .ring5 { position: absolute; left: 44px; right: 44px; top: 171px; height: 298px; border-radius: 30px; border: 4px solid var(--primary); opacity: 0; }
+.b-produto-painel-janela .list { left: 48px; top: 490px; width: 430px; height: 445px; padding: 26px; }
+.b-produto-painel-janela .short { left: 500px; top: 490px; width: 432px; height: 445px; padding: 26px; }
+.b-produto-painel-janela .ui h4 { margin: 0 0 16px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.b-produto-painel-janela .ui h4 .icon { color: var(--primary); font-size: 30px; }
+.b-produto-painel-janela .sess { position: relative; display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; font-size: 24px; font-weight: 600; background: var(--surface); }
+.b-produto-painel-janela .sess .t { font-size: 21px; color: var(--accent); font-weight: 700; width: 66px; }
+.b-produto-painel-janela .sess small { display: block; color: var(--ui-muted); font-size: 18px; font-weight: 500; }
+.b-produto-painel-janela .sess .av { width: 48px; height: 48px; font-size: 16px; }
+.b-produto-painel-janela .sess .ok { margin-left: auto; font-size: 34px; color: var(--accent); opacity: 0; }
+.b-produto-painel-janela .sess .aro { position: absolute; inset: -4px; border: 4px solid var(--accent); border-radius: 18px; opacity: 0; }
+.b-produto-painel-janela .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.b-produto-painel-janela .tile { border: 1px solid var(--border); border-radius: 18px; padding: 16px; height: 168px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; background: var(--surface); }
+.b-produto-painel-janela .tile .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+.b-produto-painel-janela .illus { position: absolute; right: 30px; bottom: 14px; font-size: 18px; color: var(--ui-muted); }
+.b-produto-painel-janela .gh { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-md); opacity: 0; padding: 12px; z-index: 4; }
+.b-produto-painel-janela .g1 { left: 40px; top: 300px; width: 270px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.b-produto-painel-janela .g1 i { display: block; height: 30px; border-radius: 6px; background: var(--surface-2); font-style: normal; }
+.b-produto-painel-janela .g1 .a { background: var(--pastel-sage); }
+.b-produto-painel-janela .g1 .b { background: var(--pastel-lavender); }
+.b-produto-painel-janela .g1 .c { background: var(--pastel-sky); }
+.b-produto-painel-janela .g1 .mc { background: var(--accent-soft); font-size: 13px; font-weight: 700; color: var(--ink); display: grid; place-items: center; white-space: nowrap; }
+.b-produto-painel-janela .g2 { left: 760px; top: 420px; width: 250px; display: flex; gap: 12px; align-items: center; }
+.b-produto-painel-janela .gav { width: 54px; height: 54px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 17px; font-weight: 700; flex: none; }
+.b-produto-painel-janela .gln { flex: 1; height: 14px; border-radius: 7px; background: var(--surface-2); }
+.b-produto-painel-janela .g3 { left: 260px; top: 960px; width: 230px; background: var(--pastel-butter); display: flex; gap: 12px; align-items: center; }
+.b-produto-painel-janela .gtag { font-size: 18px; font-weight: 700; color: var(--ink); background: var(--surface); padding: 2px 8px; border-radius: 6px; }
+
+/* ── virada/sessao-ocupa-tudo (projeto) ── */
+.b-virada-sessao-ocupa-tudo .app { position: absolute; left: 50px; top: 175px; width: 980px; height: 985px; border: 1px solid transparent; padding: 44px 48px; opacity: 0; }
+.b-virada-sessao-ocupa-tudo .ui { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; position: absolute; overflow: hidden; }
+.b-virada-sessao-ocupa-tudo .next { left: 48px; right: 48px; top: 175px; height: 290px; padding: 28px 34px; }
+.b-virada-sessao-ocupa-tudo .next .glow { position: absolute; right: -120px; top: -140px; width: 420px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); }
+.b-virada-sessao-ocupa-tudo .lbl { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: var(--ui-muted); }
+.b-virada-sessao-ocupa-tudo .lbl .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-hover); box-shadow: 0 0 0 6px var(--ui-avatar); }
+.b-virada-sessao-ocupa-tudo .lbl b { color: var(--primary-hover); }
+.b-virada-sessao-ocupa-tudo .av { width: 58px; height: 58px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 19px; font-weight: 700; flex: none; }
+.b-virada-sessao-ocupa-tudo .who { display: flex; gap: 24px; align-items: center; margin-top: 22px; }
+.b-virada-sessao-ocupa-tudo .who .av { width: 92px; height: 92px; font-size: 30px; }
+.b-virada-sessao-ocupa-tudo .who b { font-size: 38px; font-weight: 700; display: block; }
+.b-virada-sessao-ocupa-tudo .who small { font-size: 23px; color: var(--ui-muted); font-weight: 500; }
+.b-virada-sessao-ocupa-tudo .btns { display: flex; gap: 14px; margin-top: 24px; }
+.b-virada-sessao-ocupa-tudo .btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-size: 23px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); }
+.b-virada-sessao-ocupa-tudo .btn.pri { background: var(--primary); color: var(--on-primary-app); border-color: var(--primary); }
+.b-virada-sessao-ocupa-tudo .btn .icon { font-size: 24px; }
+.b-virada-sessao-ocupa-tudo .list { left: 48px; top: 490px; width: 430px; height: 445px; padding: 26px; }
+.b-virada-sessao-ocupa-tudo .short { left: 500px; top: 490px; width: 432px; height: 445px; padding: 26px; }
+.b-virada-sessao-ocupa-tudo .ui h4 { margin: 0 0 16px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.b-virada-sessao-ocupa-tudo .ui h4 .icon { color: var(--primary); font-size: 30px; }
+.b-virada-sessao-ocupa-tudo .sess { position: relative; display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; font-size: 24px; font-weight: 600; background: var(--surface); }
+.b-virada-sessao-ocupa-tudo .sess .t { font-size: 21px; color: var(--accent); font-weight: 700; width: 66px; }
+.b-virada-sessao-ocupa-tudo .sess small { display: block; color: var(--ui-muted); font-size: 18px; font-weight: 500; }
+.b-virada-sessao-ocupa-tudo .sess .av { width: 48px; height: 48px; font-size: 16px; }
+.b-virada-sessao-ocupa-tudo .sess .ok { margin-left: auto; font-size: 34px; color: var(--accent); opacity: 0; }
+.b-virada-sessao-ocupa-tudo .sess .aro { position: absolute; inset: -4px; border: 4px solid var(--accent); border-radius: 18px; opacity: 0; }
+.b-virada-sessao-ocupa-tudo .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.b-virada-sessao-ocupa-tudo .tile { border: 1px solid var(--border); border-radius: 18px; padding: 16px; height: 168px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; background: var(--surface); }
+.b-virada-sessao-ocupa-tudo .tile .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+.b-virada-sessao-ocupa-tudo .ok.on { opacity: 1; }
+.b-virada-sessao-ocupa-tudo .aro.on { opacity: 1; }
+.b-virada-sessao-ocupa-tudo .hl { top: 50px; left: 20px; right: 20px; font-size: 64px; }
+.b-virada-sessao-ocupa-tudo .h6b { display: flex; justify-content: center; align-items: center; gap: 22px; }
+.b-virada-sessao-ocupa-tudo .heart6 { width: 82px; height: 82px; border-radius: 50%; background: var(--surface); box-shadow: 0 0 0 8px var(--accent-soft), var(--shadow-md); display: grid; place-items: center; font-size: 42px; color: var(--accent); opacity: 0; flex: none; }
+.b-virada-sessao-ocupa-tudo .chips { position: absolute; left: 12px; top: 420px; display: flex; flex-direction: column; gap: 14px; }
+.b-virada-sessao-ocupa-tudo .chip { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 32px; box-shadow: var(--shadow-sm); opacity: 0; }
+.b-virada-sessao-ocupa-tudo .atd { position: absolute; left: 90px; top: 180px; width: 940px; height: 930px; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; }
+.b-virada-sessao-ocupa-tudo .atd > * { opacity: 0; }
+.b-virada-sessao-ocupa-tudo .wbar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 22px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 27px; font-weight: 700; white-space: nowrap; }
+.b-virada-sessao-ocupa-tudo .wbar .icon { font-size: 30px; color: var(--accent); }
+.b-virada-sessao-ocupa-tudo .dots { display: flex; gap: 8px; margin-right: 4px; }
+.b-virada-sessao-ocupa-tudo .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-virada-sessao-ocupa-tudo .top { display: flex; align-items: center; gap: 20px; padding: 26px 34px 18px; }
+.b-virada-sessao-ocupa-tudo .top b { font-size: 36px; font-weight: 700; }
+.b-virada-sessao-ocupa-tudo .av.big { width: 80px; height: 80px; font-size: 26px; }
+.b-virada-sessao-ocupa-tudo .pill6 { display: flex; align-items: center; gap: 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); padding: 8px 18px; font-size: 22px; font-weight: 600; }
+.b-virada-sessao-ocupa-tudo .pill6 .icon { font-size: 24px; color: var(--accent); }
+.b-virada-sessao-ocupa-tudo .clock { margin-left: auto; font-size: 40px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.b-virada-sessao-ocupa-tudo .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--ui-divider); padding: 0 34px; }
+.b-virada-sessao-ocupa-tudo .tabs b { font-size: 26px; padding: 16px 18px; color: var(--muted); font-weight: 600; }
+.b-virada-sessao-ocupa-tudo .tabs b.on { color: var(--text); box-shadow: inset 0 -4px 0 var(--primary); }
+.b-virada-sessao-ocupa-tudo .caderno { padding: 14px 52px; }
+.b-virada-sessao-ocupa-tudo .linha { position: relative; height: 72px; border-bottom: 1px solid var(--ui-divider); }
+.b-virada-sessao-ocupa-tudo .esc { position: absolute; left: 0; bottom: 18px; height: 16px; border-radius: 8px; background: var(--border); transform-origin: 0 50%; transform: scaleX(0); }
+.b-virada-sessao-ocupa-tudo .e1 { width: 82%; }
+.b-virada-sessao-ocupa-tudo .e2 { width: 64%; }
+.b-virada-sessao-ocupa-tudo .e3 { width: 90%; }
+.b-virada-sessao-ocupa-tudo .e4 { width: 48%; }
+.b-virada-sessao-ocupa-tudo .e5 { width: 76%; }
+.b-virada-sessao-ocupa-tudo .e6 { width: 38%; }
+.b-virada-sessao-ocupa-tudo .caret { position: absolute; left: 39%; bottom: 10px; width: 4px; height: 36px; background: var(--text); opacity: 0; }
+.b-virada-sessao-ocupa-tudo .fim { position: absolute; right: 30px; bottom: 28px; }
+.b-virada-sessao-ocupa-tudo .btnf { background: var(--primary); color: var(--on-primary-app); font-weight: 700; border-radius: 12px; padding: 14px 26px; font-size: 24px; }
+.b-virada-sessao-ocupa-tudo .illus { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 20px; color: var(--ui-muted); opacity: 0; }
+
+/* ── cta/cartao-janela (projeto) ── */
+.b-cta-cartao-janela .card { position: absolute; left: 140px; top: 120px; width: 800px; height: 920px; background: var(--surface); border: 1px solid var(--border); border-radius: 36px; box-shadow: var(--shadow-lg); overflow: hidden; opacity: 0; }
+.b-cta-cartao-janela .wbar { position: relative; height: 58px; display: flex; align-items: center; padding: 0 24px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.b-cta-cartao-janela .dots { display: flex; gap: 8px; }
+.b-cta-cartao-janela .dots i { display: block; width: 13px; height: 13px; border-radius: 50%; background: var(--ui-divider); }
+.b-cta-cartao-janela .glow7 { position: absolute; left: 50%; top: 40px; width: 820px; height: 520px; margin-left: -410px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), var(--ui-glow) 60%, transparent); opacity: 0; }
+.b-cta-cartao-janela .endlogo { position: absolute; left: 50%; top: 140px; width: 340px; margin-left: -170px; clip-path: inset(0 100% 0 0); }
+.b-cta-cartao-janela .endlogo svg { width: 100%; height: auto; display: block; }
+.b-cta-cartao-janela .endlogo path { fill: var(--logo); }
+.b-cta-cartao-janela .endtitle { top: 445px; left: 30px; right: 30px; font-size: 78px; }
+.b-cta-cartao-janela .endline { top: 552px; left: 40px; right: 40px; font-size: 44px; font-weight: 600; }
+.b-cta-cartao-janela .cta { top: 670px; display: flex; align-items: center; gap: 14px; background: var(--primary); color: var(--on-primary);
+  font-weight: 700; font-size: 46px; padding: 26px 54px; border-radius: 999px; box-shadow: var(--shadow-md); opacity: 0; white-space: nowrap; }
+.b-cta-cartao-janela .endsub { top: 810px; left: 30px; right: 30px; font-size: 32px; font-weight: 600; color: var(--muted); opacity: 0; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+<div class="layer b-fundo-blobs" data-inst="c1" data-bloco="fundo/blobs">
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+</div>
+      <div id="stage">
+<div class="layer b-abertura-pergunta-sessao" data-inst="s1" data-bloco="abertura/pergunta-sessao">
+<div class="cam">
+  <div class="win ses"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>Sessão · 14h</div>
+    <div class="wb ficha"><div class="av">M.C.</div><div class="fl"><div class="ln w70"></div><div class="ln"></div><div class="ln w50"></div></div></div></div>
+  <div class="win adm ag"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:calendar-days}}Agenda</div>
+    <div class="wb"><div class="dias"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span></div>
+      <div class="grid"><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="mc">M.C. 14h</i><i class="a"></i><i></i><i></i><i class="b"></i><i></i><i></i><i class="a"></i></div></div></div>
+  <div class="win adm pa"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v2"/><path d="M17.915 21a6 6 0 10-12 0"/><path d="M8 2v2"/><circle cx="12" cy="11" r="4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Pacientes</div>
+    <div class="wb ficha"><div class="av">M.C.</div><div class="fl"><div class="ln w60 forte"></div><div class="ln"></div><div class="ln w80"></div><div class="ln w55"></div></div></div></div>
+  <div class="win adm an"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:notebook-pen}}Anotações</div>
+    <div class="wb notas"><div class="postit p1"><span class="tag">M.C.</span><div class="ln"></div><div class="ln"></div></div><div class="postit p2"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div></div></div>
+</div>
+<div class="q1"><div class="badge tile-ic t-coral"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg></div><div class="q1t"></div></div>
+<div class="hl q2"></div>
+</div>
+<div class="layer b-cena-janelas-abrem" data-inst="s2" data-bloco="cena/janelas-abrem">
+<div class="cam">
+  <div class="win ses"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>Sessão · 14h</div>
+    <div class="wb ficha"><div class="av">M.C.</div><div class="fl"><div class="ln w70"></div><div class="ln"></div><div class="ln w50"></div></div></div></div>
+  <div class="win adm ag"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:calendar-days}}Agenda</div>
+    <div class="wb"><div class="dias"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span></div>
+      <div class="grid"><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="mc mark">M.C. 14h<span class="rg"></span></i><i class="a"></i><i></i><i></i><i class="b"></i><i></i><i></i><i class="a"></i></div></div></div>
+  <div class="win adm pa"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v2"/><path d="M17.915 21a6 6 0 10-12 0"/><path d="M8 2v2"/><circle cx="12" cy="11" r="4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Pacientes</div>
+    <div class="wb ficha"><div class="av mark">M.C.<span class="rg"></span></div><div class="fl"><div class="ln w60 forte"></div><div class="ln"></div><div class="ln w80"></div><div class="ln w55"></div></div></div></div>
+  <div class="win adm an"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:notebook-pen}}Anotações</div>
+    <div class="wb notas"><div class="postit p1"><span class="tag mark">M.C.<span class="rg"></span></span><div class="ln"></div><div class="ln"></div></div><div class="postit p2"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div></div></div>
+</div>
+<div class="hl h2"></div>
+<div class="illus">dados ilustrativos</div>
+</div>
+<div class="layer b-cena-janelas-espremem" data-inst="s3" data-bloco="cena/janelas-espremem">
+<div class="cam">
+  <div class="win ses"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg><span class="slot-ses">Sessão · 14h</span></div>
+    <div class="wb ficha"><div class="av">M.C.</div><div class="fl"><div class="ln w70"></div><div class="ln"></div><div class="ln w50"></div></div></div><div class="sring"></div><div class="sheart">{{i:heart}}</div></div>
+  <div class="win adm ag"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:calendar-days}}Agenda</div>
+    <div class="wb"><div class="dias"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span></div>
+      <div class="grid"><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="a"></i><i></i><i class="b"></i><i></i><i class="c"></i><i></i><i class="mc">M.C. 14h</i><i class="a"></i><i></i><i></i><i class="b"></i><i></i><i></i><i class="a"></i></div></div></div>
+  <div class="win adm pa"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v2"/><path d="M17.915 21a6 6 0 10-12 0"/><path d="M8 2v2"/><circle cx="12" cy="11" r="4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Pacientes</div>
+    <div class="wb ficha"><div class="av">M.C.</div><div class="fl"><div class="ln w60 forte"></div><div class="ln"></div><div class="ln w80"></div><div class="ln w55"></div></div></div></div>
+  <div class="win adm an"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span>{{i:notebook-pen}}Anotações</div>
+    <div class="wb notas"><div class="postit p1"><span class="tag">M.C.</span><div class="ln"></div><div class="ln"></div></div><div class="postit p2"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div></div></div>
+</div>
+<div class="win unica"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span></div><div class="trio"><span class="tile-ic t-teal">{{i:calendar-days}}</span><span class="tile-ic t-amber"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v2"/><path d="M17.915 21a6 6 0 10-12 0"/><path d="M8 2v2"/><circle cx="12" cy="11" r="4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span><span class="tile-ic t-lilac">{{i:notebook-pen}}</span></div></div>
+<div class="hl h3"></div>
+<div class="illus">dados ilustrativos</div>
+</div>
+<div class="layer b-revelacao-janela-unica" data-inst="s4" data-bloco="revelacao/janela-unica">
+<div class="win uni">
+  <div class="glow"></div>
+  <div class="wbar"><span class="dots"><i></i><i></i><i></i></span></div>
+  <div class="trio"><span class="tile-ic t-teal">{{i:calendar-days}}</span><span class="tile-ic t-amber"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v2"/><path d="M17.915 21a6 6 0 10-12 0"/><path d="M8 2v2"/><circle cx="12" cy="11" r="4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span><span class="tile-ic t-lilac">{{i:notebook-pen}}</span></div>
+  <div class="logo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+  <div class="hl ass"></div>
+  <div class="div"></div>
+  <div class="hl frase"></div>
+  <div class="pills">
+    <div class="pill q1"><span class="tile-ic t-teal">{{i:check}}</span><span class="tx"></span></div>
+    <div class="pill q2"><span class="tile-ic t-amber">{{i:layout-grid}}</span><span class="tx"></span></div>
+    <div class="pill q3"><span class="tile-ic t-lilac"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg></span><span class="tx"></span></div>
+  </div>
+</div>
+</div>
+<div class="layer b-produto-painel-janela" data-inst="s5" data-bloco="produto/painel-janela">
+<div class="hl h5a"></div>
+<div class="hl h5b"></div>
+<div class="app">
+  <div class="hello"></div>
+  <div class="sub">Quarta-feira · 3 sessões hoje</div>
+  <div class="ui next">
+    <div class="glow"></div>
+    <div class="lbl"><span class="dot"></span>PRÓXIMA SESSÃO · <b>EM 15 MIN</b></div>
+    <div class="who"><div class="av">M.C.</div><div><b>M.C.</b><small>14:00 — 14:50 · Presencial · 4ª sessão</small></div></div>
+    <div class="btns"><div class="btn pri"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>Iniciar sessão</div><div class="btn">{{i:file-text}}Ver prontuário</div></div>
+  </div>
+  <div class="ring5"></div>
+  <div class="ui list">
+    <h4>Sessões de hoje {{i:calendar}}</h4>
+    <div class="sess mc"><span class="t">14:00</span><div class="av">M.C.</div><div>M.C.<small>Presencial</small></div><span class="ok">{{i:circle-check}}</span><span class="aro"></span></div>
+    <div class="sess"><span class="t">16:00</span><div class="av">L.P.</div><div>L.P.<small>Online</small></div></div>
+    <div class="sess"><span class="t">17:30</span><div class="av">H.R.</div><div>H.R.<small>Presencial</small></div></div>
+  </div>
+  <div class="ui short">
+    <h4>Atalhos {{i:sparkles}}</h4>
+    <div class="tiles">
+      <div class="tile"><span class="ic t-coral">{{i:zap}}</span>Sessão rápida</div>
+      <div class="tile"><span class="ic t-teal">{{i:calendar}}</span>Agendar</div>
+      <div class="tile"><span class="ic t-amber">{{i:user-plus}}</span>Novo cliente</div>
+      <div class="tile nota"><span class="ic t-lilac">{{i:notebook-pen}}</span>Nova anotação</div>
+    </div>
+  </div>
+  <div class="illus">dados ilustrativos</div>
+</div>
+<div class="gh g1"><i class="a"></i><i></i><i class="b"></i><i class="mc">M.C. 14h</i><i class="c"></i><i></i></div>
+<div class="gh g2"><span class="gav">M.C.</span><span class="gln"></span></div>
+<div class="gh g3"><span class="gtag">M.C.</span><span class="gln"></span></div>
+</div>
+<div class="layer b-virada-sessao-ocupa-tudo" data-inst="s6" data-bloco="virada/sessao-ocupa-tudo">
+<div class="hl h6a"></div>
+<div class="hl h6b"><span class="tx"></span><span class="heart6">{{i:heart}}</span></div>
+<div class="app">
+  <div class="ui next">
+    <div class="glow"></div>
+    <div class="lbl"><span class="dot"></span>PRÓXIMA SESSÃO · <b>EM 15 MIN</b></div>
+    <div class="who"><div class="av">M.C.</div><div><b>M.C.</b><small>14:00 — 14:50 · Presencial · 4ª sessão</small></div></div>
+    <div class="btns"><div class="btn pri"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>Iniciar sessão</div><div class="btn">{{i:file-text}}Ver prontuário</div></div>
+  </div>
+  <div class="ui list">
+    <h4>Sessões de hoje {{i:calendar}}</h4>
+    <div class="sess mc"><span class="t">14:00</span><div class="av">M.C.</div><div>M.C.<small>Presencial</small></div><span class="ok on">{{i:circle-check}}</span><span class="aro on"></span></div>
+    <div class="sess"><span class="t">16:00</span><div class="av">L.P.</div><div>L.P.<small>Online</small></div></div>
+    <div class="sess"><span class="t">17:30</span><div class="av">H.R.</div><div>H.R.<small>Presencial</small></div></div>
+  </div>
+  <div class="ui short">
+    <h4>Atalhos {{i:sparkles}}</h4>
+    <div class="tiles">
+      <div class="tile"><span class="ic t-coral">{{i:zap}}</span>Sessão rápida</div>
+      <div class="tile"><span class="ic t-teal">{{i:calendar}}</span>Agendar</div>
+      <div class="tile"><span class="ic t-amber">{{i:user-plus}}</span>Novo cliente</div>
+      <div class="tile nota"><span class="ic t-lilac">{{i:notebook-pen}}</span>Nova anotação</div>
+    </div>
+  </div>
+</div>
+<div class="chips"><span class="chip t-teal">{{i:calendar}}</span><span class="chip t-coral">{{i:zap}}</span></div>
+<div class="atd">
+  <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg><span class="cl"></span></div>
+  <div class="top"><div class="av big">M.C.</div><b>M.C.</b><span class="pill6"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>Presencial</span><span class="clock">00:12</span></div>
+  <div class="tabs"><b class="on">Anotações</b><b>Histórico</b><b>Cliente</b></div>
+  <div class="caderno">
+    <div class="linha"><i class="esc e1"></i></div><div class="linha"><i class="esc e2"></i></div><div class="linha"><i class="esc e3"></i></div>
+    <div class="linha"><i class="esc e4"></i></div><div class="linha"><i class="esc e5"></i></div><div class="linha"><i class="esc e6"></i><span class="caret"></span></div>
+    <div class="linha"></div>
+  </div>
+  <div class="fim"><span class="btnf">Finalizar sessão</span></div>
+</div>
+<div class="illus">dados ilustrativos</div>
+</div>
+<div class="layer b-cta-cartao-janela" data-inst="s7" data-bloco="cta/cartao-janela">
+<div class="card">
+  <div class="wbar"><span class="dots"><i></i><i></i><i></i></span></div>
+  <div class="glow7"></div>
+  <div class="endlogo"><svg viewBox="2.5 7 43 34"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></div>
+  <div class="hl endtitle"></div>
+  <div class="hl endline"></div>
+  <div class="center cta"></div>
+  <div class="hl endsub"></div>
+</div>
+</div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script src="kit/blocos.js"></script>
+    <script>
+BLOCO('fundo/blobs', function ({ tl, $, cena, params }) {
+  const [x1, y1] = params.deriva1, [x2, y2] = params.deriva2
+  tl.fromTo($('.b1'), { x: 0, y: 0 }, { x: x1, y: y1, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+  tl.fromTo($('.b2'), { x: 0, y: 0 }, { x: x2, y: y2, duration: cena.dur, ease: 'sine.inOut' }, cena.start)
+})
+    </script>
+    <script>
+BLOCO('abertura/pergunta-sessao', function ({ tl, K, root, $, $$, cena, cue, texto, params }) {
+  const e = cue('entra'), ad = [$('.ag'), $('.pa'), $('.an')], ses = $('.ses')
+  // 1º quadro: a Sessão calma no centro e a pergunta inteira por cima
+  tl.fromTo(ses, { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, Math.max(cena.start, e - 0.02))
+  K.pop($('.badge'), e, 0.4)
+  K.flash($('.q1t'), texto('pergunta'), e + 0.04, 50)
+  // a pergunta sobe e encolhe; o complemento entra inteiro
+  tl.to($('.q1'), { y: -85, scale: 0.3, duration: 0.75, ease: M.GENTLE.ease }, cue('troca'))
+  K.flash($('.q2'), texto('complemento'), cue('troca') + 0.12, 34)
+  // as 3 janelas da rotina pipocam por cima da Sessão (a cena seguinte começa exatamente neste estado)
+  ad.forEach((el, i) => tl.fromTo(el, { opacity: 0, scale: 0.3, rotation: 0, y: 50 }, { opacity: 1, scale: params.escala, rotation: params.giro[i], y: 0, ...M.SOFT }, cue('espalha') + i * 0.09))
+  // vivo: a Sessão respira até ser coberta
+  tl.fromTo(ses, { scale: 1 }, { scale: 1.025, duration: Math.max(0.4, cue('espalha') - e), ease: 'sine.inOut' }, e + 0.6)
+  tl.to(ses, { scale: 1, duration: 0.4, ease: 'power2.out' }, cue('espalha'))
+  // saída: o texto sai; as janelas ficam até o corte (a s2 parte delas)
+  K.out([$('.q1'), $('.q2')], cena.end - 0.25, 0.25, -30)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('cena/janelas-abrem', function ({ tl, K, root, $, $$, cena, cue, texto, params }) {
+  const s = cena.start, ad = [$('.ag'), $('.pa'), $('.an')], G = params.giro, GF = params.giro_final, DX = params.dx_final
+  // começa no estado em que a abertura terminou: Sessão no centro, 3 janelas pequenas por cima
+  tl.set($('.ses'), { opacity: 1 }, s)
+  ad.forEach((el, i) => tl.set(el, { opacity: 1, scale: params.escala_inicial, rotation: G[i] }, s))
+  tl.fromTo($('.illus'), { opacity: 0 }, { opacity: 1, duration: 0.3 }, s + 0.2)
+  K.flash($('.h2'), texto('headline'), cue('entra') + 0.04)
+  // o suspiro: tudo assenta um pouco
+  tl.to(ad, { y: 14, duration: 0.8, ease: 'sine.inOut' }, s + 0.05)
+  // cada janela cresce na sua palavra e vem para a frente
+  ;[['agenda', 0], ['pacientes', 1], ['notas', 2]].forEach(([c, i], k) => {
+    tl.set(ad[i], { zIndex: 3 + k }, cue(c) - 0.01)
+    tl.to(ad[i], { scale: 1, y: 0, ...M.SOFT }, cue(c))
+  })
+  // vivo: a câmera respira (volta a 1 no corte; a s3 começa sem escala) e a Sessão por trás também
+  tl.to($('.cam'), { scale: 1.025, duration: cena.dur / 2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, s)
+  tl.to($('.ses'), { y: -10, duration: Math.max(0.4, cue('pacientes') - s), ease: 'sine.inOut' }, s)
+  tl.to($('.ses'), { y: 0, duration: 0.6, ease: 'sine.inOut' }, cue('pacientes'))
+  // "espalhadas": a mesma paciente nos 3 lugares acende junto; tudo entorta e se afasta
+  tl.to($$('.rg'), { opacity: 1, duration: 0.22, stagger: 0.05 }, cue('espalha'))
+  tl.fromTo($$('.mark'), { scale: 1 }, { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out', stagger: 0.05 }, cue('espalha'))
+  ad.forEach((el, i) => tl.to(el, { rotation: GF[i], x: DX[i], duration: 0.6, ease: 'power2.out' }, cue('espalha')))
+  // vivo até o corte, voltando ao mesmo lugar (a s3 começa nele)
+  const resto = cena.end - cue('espalha') - 0.6
+  if (resto > 0.4) tl.to(ad, { y: 8, duration: resto / 2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, cue('espalha') + 0.6)
+  K.out($('.h2'), cena.end - 0.22, 0.2, -24)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('cena/janelas-espremem', function ({ tl, K, root, $, $$, cena, cue, texto, params, box }) {
+  const s = cena.start, ad = [$('.ag'), $('.pa'), $('.an')], ses = $('.ses'), cam = $('.cam'), uni = $('.unica')
+  // centros medidos antes de qualquer transform (para a fusão no centro)
+  const cU = box(uni), cs = [...ad, ses].map((el) => box(el))
+  // começa no estado em que a s2 terminou
+  tl.set(ses, { opacity: 1 }, s)
+  ad.forEach((el, i) => tl.set(el, { opacity: 1, rotation: params.giro[i], x: params.dx[i], zIndex: 3 + i }, s))
+  tl.set($('.illus'), { opacity: 1 }, s)
+  K.flash($('.h3'), texto('headline'), cue('entra') + 0.04)
+  // 1º empurrão: a gestão cresce, a Sessão vai para o canto e fica por cima (para ser vista)
+  const [cx, cy] = params.canto
+  tl.set(ses, { zIndex: 10 }, cue('espreme') - 0.02)
+  tl.to(ses, { x: cx, y: cy, scale: 0.62, ...M.GENTLE, duration: 0.9 }, cue('espreme'))
+  tl.to(ad, { scale: 1.1, y: 30, duration: 0.9, ease: M.GENTLE.ease }, cue('espreme'))
+  // pressão contínua até o 2º empurrão
+  tl.to(ses, { scale: 0.58, duration: Math.max(0.3, cue('aperta') - cue('espreme') - 0.9), ease: 'none' }, cue('espreme') + 0.9)
+  tl.to(ses, { x: cx + 20, y: cy + 25, scale: 0.5, duration: 0.6, ease: 'power2.out' }, cue('aperta'))
+  tl.to(ad, { scale: 1.16, y: 50, duration: 0.6, ease: 'power2.out' }, cue('aperta'))
+  tl.to(ses, { scale: 0.47, duration: Math.max(0.3, cue('importa') - cue('aperta') - 0.6), ease: 'none' }, cue('aperta') + 0.6)
+  // "atender": tudo para, a gestão apaga (o conteúdo, não a janela) e só a Sessão pulsa; a câmera chega perto
+  tl.to(ad.flatMap((el) => [...el.children]), { opacity: 0.3, duration: 0.4, ease: 'power2.out' }, cue('importa'))
+  tl.to(ses, { scale: 0.6, duration: 0.6, ease: M.SOFT.ease }, cue('importa'))
+  tl.fromTo($('.sring'), { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, ...M.FAST }, cue('importa'))
+  K.pop($('.sheart'), cue('importa') + 0.12, 0.3)
+  tl.to($('.sring'), { scale: 1.05, duration: 0.3, yoyo: true, repeat: 1, ease: 'sine.inOut' }, cue('importa') + 0.45)
+  // fim: tudo desliza para o centro e encaixa numa janela única (a revelação começa nela)
+  const t = cue('sai')
+  ;[...ad, ses].forEach((el, i) => tl.to(el, { x: cU.x - cs[i].x, y: cU.y - cs[i].y, scale: 0.25, rotation: 0, duration: 0.32, ease: 'power3.in' }, t + i * 0.02))
+  tl.to([...ad, ses], { opacity: 0, duration: 0.12 }, t + 0.24)
+  tl.fromTo($('.trio'), { scale: 0.6 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t + 0.22)
+  tl.fromTo(uni, { opacity: 0, scale: 0.22 }, { opacity: 1, scale: 0.3, duration: 0.18, ease: 'power2.out' }, t + 0.22)
+  tl.to([$('.h3'), $('.illus')], { opacity: 0, duration: 0.25 }, t)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('revelacao/janela-unica', function ({ tl, K, root, $, cena, cue, texto, params }) {
+  const s = cena.start, uni = $('.uni'), logo = $('.logo'), glow = $('.glow')
+  // 1º quadro: a janela única pequena no centro (a fusão da cena anterior); respira no silêncio
+  tl.set(uni, { opacity: 1, scale: params.escala_inicial }, s)
+  tl.to(uni, { scale: params.escala_inicial * 1.08, duration: Math.max(0.2, cue('marca') - s - 0.1), ease: 'sine.inOut' }, s)
+  // "kz": a janela abre, a logo se desenha dentro dela, o brilho acende
+  tl.to(uni, { scale: 1, ...M.GENTLE, duration: 0.9 }, cue('marca') - 0.12)
+  // os 3 ícones das janelas que se juntaram somem no centro enquanto a logo nasce
+  tl.to($('.trio'), { scale: 0.2, opacity: 0, duration: 0.35, ease: 'power2.in' }, cue('marca') - 0.05)
+  tl.fromTo(glow, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' }, cue('marca'))
+  tl.fromTo(logo, { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.8, ease: 'power3.out' }, cue('marca') + 0.05)
+  tl.to(logo, { scale: 1.04, duration: 0.2, ease: 'power2.out', yoyo: true, repeat: 1 }, cue('marca') + 0.85)
+  K.flash($('.ass'), texto('assinatura'), cue('assinatura'))
+  // vivo: a logo respira e o brilho deriva até o rodapé abrir
+  tl.to(logo, { scale: 1.03, duration: Math.max(0.3, cue('rodape') - cue('assinatura')), ease: 'sine.inOut' }, cue('assinatura') + 0.2)
+  tl.to(glow, { x: -60, y: 40, duration: cena.end - cue('marca'), ease: 'sine.inOut' }, cue('marca') + 1)
+  // rodapé: divisória se desenha e a frase entra inteira; as 3 pílulas uma a uma
+  tl.to($('.div'), { scaleX: 1, duration: 0.6, ease: 'power3.out' }, cue('rodape'))
+  K.flash($('.frase'), texto('frase'), cue('rodape') + 0.08, 26)
+  ;['p1', 'p2', 'p3'].forEach((p, i) => {
+    const el = $('.q' + (i + 1))
+    el.querySelector('.tx').textContent = texto(p)
+    tl.fromTo(el, { opacity: 0, y: 30, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, cue(p))
+    tl.fromTo(el.querySelector('.tile-ic'), { rotation: -90, scale: 0.3 }, { rotation: 0, scale: 1, ...M.SOFT }, cue(p) + 0.06)
+  })
+  tl.to($('.q3'), { scale: 1.05, duration: 0.22, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('p3') + 0.5)
+  // saída: o conteúdo sai e a janela cresce para virar a moldura do painel (s5)
+  tl.to([logo, $('.ass'), $('.div'), $('.frase'), $('.pills'), glow], { opacity: 0, duration: 0.25, ease: 'power2.in' }, cena.end - 0.3)
+  tl.to(uni, { scale: 1.12, y: 40, duration: 0.3, ease: 'power2.in' }, cena.end - 0.3)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('produto/painel-janela', function ({ tl, K, root, $, cena, cue, texto, box }) {
+  const app = $('.app'), e = cue('entra')
+  // alvos do encaixe (medidos antes de qualquer transform): agenda → Sessões de hoje, ficha → Próxima sessão, post-it → Nova anotação
+  const alvo = [box($('.list .mc')), box($('.next .who')), box($('.tile.nota'))]
+  const gh = [$('.g1'), $('.g2'), $('.g3')], de = gh.map((el) => box(el))
+  $('.hello').innerHTML = `${texto('saudacao')} <span class="acc">${texto('nome')}</span>`
+  K.flash($('.h5a'), texto('h1'), e + 0.05)
+  // a janela da revelação vira a moldura do painel
+  tl.fromTo(app, { opacity: 0, scale: 0.96, y: 20 }, { opacity: 1, scale: 1, y: 0, ...M.GENTLE, duration: 0.8 }, e - 0.05)
+  tl.fromTo([$('.hello'), $('.sub')], { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.05 }, e + 0.05)
+  tl.fromTo([$('.next'), $('.list'), $('.short')], { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.FAST, stagger: 0.08 }, e + 0.35)
+  // encaixe: os 3 pedaços da s2 chegam cada um do seu lado e entram no módulo
+  gh.forEach((el, i) => {
+    const at = e + 0.12 + i * 0.12
+    tl.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' }, at)
+    tl.to(el, { x: alvo[i].x - de[i].x, y: alvo[i].y - de[i].y, scale: 0.6, duration: 0.55, ease: 'power3.inOut' }, at + 0.15)
+    tl.to(el, { opacity: 0, duration: 0.15 }, at + 0.62)
+  })
+  // "atendimentos": câmera na próxima sessão
+  tl.to(app, { scale: 1.05, y: 30, duration: 1.0, ease: M.GENTLE.ease }, cue('destaque') - 0.15)
+  tl.fromTo($('.ring5'), { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, ...M.FAST }, cue('destaque'))
+  // "organizar": headline troca, câmera desce, a paciente que estava em 3 lugares aparece 1 vez e acende
+  K.out($('.h5a'), cue('lista') - 0.2, 0.2, -30)
+  K.flash($('.h5b'), texto('h2'), cue('lista'))
+  tl.to($('.ring5'), { opacity: 0, duration: 0.25 }, cue('lista') - 0.2)
+  tl.to(app, { scale: 1.05, y: -15, duration: 1.0, ease: M.GENTLE.ease }, cue('lista') - 0.15)
+  tl.fromTo($('.list .mc .aro'), { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, ...M.FAST }, cue('lista') + 0.2)
+  // vivo: a câmera segue chegando devagar até o check
+  tl.to(app, { scale: 1.075, y: -25, duration: Math.max(0.4, cue('sai') - cue('lista') - 1.1), ease: 'sine.inOut' }, cue('lista') + 0.85)
+  tl.to($('.list .mc .aro'), { scale: 1.03, duration: 0.45, yoyo: true, repeat: 1, ease: 'sine.inOut' }, cue('lista') + 0.9)
+  // "complicação": o check entra ao lado de M.C.
+  tl.fromTo($('.list .mc .ok'), { opacity: 0, scale: 0.3, rotation: -60 }, { opacity: 1, scale: 1, rotation: 0, ...M.SOFT }, cue('feito'))
+  // saída: a câmera volta; fica só o que a s6 usa (próxima sessão, sessões de hoje, atalhos)
+  tl.to(app, { scale: 1, y: 0, duration: 0.45, ease: 'power2.inOut' }, cue('sai') - 0.2)
+  tl.to([$('.hello'), $('.sub'), $('.illus')], { opacity: 0, duration: 0.2 }, cue('sai') - 0.2)
+  tl.to(app, { borderColor: 'rgba(0,0,0,0)', boxShadow: '0 0 0 rgba(0,0,0,0)', duration: 0.3 }, cue('sai') - 0.1)
+  K.out($('.h5b'), cue('sai'), 0.25)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('virada/sessao-ocupa-tudo', function ({ tl, K, root, $, $$, cena, cue, texto, params, box, cursor }) {
+  const s = cena.start, app = $('.app'), atd = $('.atd'), next = $('.next'), mods = [$('.list'), $('.short')]
+  // medidas antes de qualquer transform
+  const pBtn = box($('.next .btn.pri'), 0.5, 0.6), cN = box(next), rN = next.getBoundingClientRect(), rA = atd.getBoundingClientRect(), cA = box(atd)
+  const chipC = [box($$('.chip')[0]), box($$('.chip')[1])], cM = mods.map((m) => box(m))
+  $('.atd .cl').textContent = texto('cliente')
+  // 1º quadro: o painel como a s5 terminou (próxima sessão, sessões de hoje, atalhos)
+  tl.set(app, { opacity: 1 }, s)
+  tl.set($('.illus'), { opacity: 1 }, s)
+  K.flash($('.h6a'), texto('antes'), cue('entra') + 0.04)
+  // "administrando": os módulos da gestão recolhem para chips na lateral
+  mods.forEach((m, i) => tl.to(m, { x: chipC[i].x - cM[i].x, y: chipC[i].y - cM[i].y, scale: 0.12, opacity: 0, duration: 0.5, ease: 'power3.in' }, cue('recolhe') + i * 0.06))
+  $$('.chip').forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, ...M.SOFT }, cue('recolhe') + 0.4 + i * 0.06))
+  tl.to(next, { y: 60, duration: 0.6, ease: M.GENTLE.ease }, cue('recolhe') + 0.2)
+  // o cursor vai até "Iniciar sessão" e clica (o botão desceu 60 px com o card)
+  const alvo = { x: pBtn.x, y: pBtn.y + 60 }
+  const C = cursor()
+  tl.set(C.el, { x: alvo.x + 260, y: alvo.y + 300 }, s)
+  tl.to(C.el, { opacity: 1, duration: 0.2 }, cue('recolhe') + 0.15)
+  C.move(alvo, cue('recolhe') + 0.15, Math.max(0.4, cue('inicia') - cue('recolhe') - 0.35))
+  C.click(alvo, cue('inicia') - 0.12)
+  C.press($('.next .btn.pri'), cue('inicia') - 0.12)
+  tl.to(C.el, { opacity: 0, duration: 0.2 }, cue('inicia') + 0.25)
+  // "Mais": a headline troca e a sessão abre a partir do card e ocupa a janela inteira
+  K.out($('.h6a'), cue('inicia') - 0.05, 0.2, -30)
+  K.flash($('.h6b .tx'), texto('depois'), cue('inicia') + 0.1)
+  const sx = rN.width / rA.width, sy = rN.height / rA.height
+  tl.fromTo(atd, { opacity: 1, x: cN.x - cA.x, y: cN.y + 60 - cA.y, scaleX: sx, scaleY: sy }, { x: 0, y: 0, scaleX: 1, scaleY: 1, ...M.GENTLE, duration: 0.75, immediateRender: false }, cue('inicia'))
+  tl.to(next, { opacity: 0, duration: 0.15 }, cue('inicia') + 0.05)
+  tl.to($$('.atd > *'), { opacity: 1, duration: 0.3, stagger: 0.05 }, cue('inicia') + 0.35)
+  // "cuidando": coração; a anotação vai sendo escrita (traços sem texto clínico) e o relógio corre
+  K.pop($('.heart6'), cue('cuida'), 0.3)
+  tl.to($('.heart6'), { scale: 1.1, duration: 0.25, yoyo: true, repeat: 1, ease: 'sine.inOut' }, cue('cuida') + 0.7)
+  const esc = $$('.esc'), passo = Math.max(0.25, (cena.end - cue('cuida') - 0.4) / esc.length)
+  esc.forEach((el, i) => tl.to(el, { scaleX: 1, duration: passo * 0.9, ease: 'power1.inOut' }, cue('cuida') - 0.2 + i * passo))
+  tl.to($('.caret'), { opacity: 1, duration: 0.01, yoyo: true, repeat: 7, repeatDelay: 0.25 }, cue('cuida') - 0.2 + (esc.length - 1) * passo)
+  const rel = { v: 0 }, [mm, ss] = String(params.relogio_inicio).split(':').map(Number), ini = mm * 60 + ss
+  tl.to(rel, { v: cena.end - cue('inicia'), duration: cena.end - cue('inicia'), ease: 'none',
+    onUpdate: () => { const t = ini + Math.floor(rel.v); $('.clock').textContent = `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}` } }, cue('inicia'))
+  tl.to([$('.h6b'), $('.illus'), $('.chips')], { opacity: 0, duration: 0.25 }, cena.end - 0.28)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('cta/cartao-janela', function ({ tl, K, root, $, cena, cue, texto, params, box, cursor }) {
+  const card = $('.card'), cta = $('.cta'), e = cue('entra')
+  // medir com o texto já no botão e antes de qualquer transform
+  cta.innerHTML = `${texto('botao')} <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`
+  const pCta = box(cta, 0.88, 0.62), cC = box(card), r = card.getBoundingClientRect()
+  const [dx, dy, dw, dh] = params.de
+  // 1º quadro: o cartão tem o tamanho da janela anterior e encolhe até virar o cartão final
+  tl.fromTo(card, { opacity: 1, x: dx + dw / 2 - cC.x, y: dy + dh / 2 - cC.y, scaleX: dw / r.width, scaleY: dh / r.height },
+    { x: 0, y: 0, scaleX: 1, scaleY: 1, ...M.GENTLE, duration: 0.8, immediateRender: false }, cena.start)
+  tl.set(card, { opacity: 1 }, cena.start)
+  tl.fromTo($('.glow7'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' }, e + 0.1)
+  tl.fromTo($('.endlogo'), { clipPath: 'inset(0 100% 0 0)', scale: 0.92 }, { clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 0.8, ease: 'power3.out' }, e + 0.15)
+  K.flash($('.endtitle'), texto('titulo'), e + 0.2)
+  // "descubra": a linha entra inteira e o botão aparece
+  K.flash($('.endline'), texto('linha'), cue('cta') - 0.1, 26)
+  tl.fromTo(cta, { opacity: 0, y: 30, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT }, cue('cta') + 0.1)
+  $('.endsub').textContent = texto('sub')
+  tl.fromTo($('.endsub'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST }, cue('cta') + 0.5)
+  tl.to(cta, { scale: 1.04, duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('cta') + 0.9)
+  // o cursor chega e clica; o botão pulsa de novo na cauda
+  const C = cursor()
+  tl.set(C.el, { x: pCta.x + 280, y: pCta.y + 260 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.2 }, cue('clique') - 0.85)
+  C.move(pCta, cue('clique') - 0.85, 0.75)
+  C.click(pCta, cue('clique'))
+  C.press(cta, cue('clique'))
+  tl.to(cta, { scale: 1.035, duration: 0.6, ease: 'sine.inOut', yoyo: true, repeat: 1 }, cue('clique') + 0.6)
+  tl.to($('.endlogo'), { scale: 1.03, duration: Math.max(0.5, cena.end - cue('clique') - 0.3), ease: 'sine.inOut' }, cue('clique') + 0.3)
+})
+    </script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      BLOCOS.montar(tl, [{"inst":"c1","use":"fundo/blobs","cena":null,"slots":[],"padroes":{"deriva1":[180,140],"deriva2":[-160,-200]}},{"inst":"s1","use":"abertura/pergunta-sessao","cena":"s1","slots":["pergunta","complemento"],"padroes":{"escala":0.62,"giro":[-4,5,-2]}},{"inst":"s2","use":"cena/janelas-abrem","cena":"s2","slots":["headline"],"padroes":{"escala_inicial":0.62,"giro":[-4,5,-2],"giro_final":[-6,7.5,-3],"dx_final":[-18,18,-10]}},{"inst":"s3","use":"cena/janelas-espremem","cena":"s3","slots":["headline"],"padroes":{"giro":[-6,7.5,-3],"dx":[-18,18,-10],"canto":[300,330]}},{"inst":"s4","use":"revelacao/janela-unica","cena":"s4","slots":["assinatura","frase","p1","p2","p3"],"padroes":{"escala_inicial":0.3}},{"inst":"s5","use":"produto/painel-janela","cena":"s5","slots":["saudacao","nome","h1","h2"],"padroes":{}},{"inst":"s6","use":"virada/sessao-ocupa-tudo","cena":"s6","slots":["antes","depois","cliente"],"padroes":{"relogio_inicio":"00:12"}},{"inst":"s7","use":"cta/cartao-janela","cena":"s7","slots":["titulo","linha","botao","sub"],"padroes":{"de":[90,180,940,930]}}])
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "id": "cena/janelas-abrem",
+  "tipo": "cena",
+  "titulo": "cena/janelas-abrem (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "headline"
+  ],
+  "params": {
+    "escala_inicial": {
+      "padrao": 0.62,
+      "descricao": ""
+    },
+    "giro": {
+      "padrao": [
+        -4,
+        5,
+        -2
+      ],
+      "descricao": ""
+    },
+    "giro_final": {
+      "padrao": [
+        -6,
+        7.5,
+        -3
+      ],
+      "descricao": ""
+    },
+    "dx_final": {
+      "padrao": [
+        -18,
+        18,
+        -10
+      ],
+      "descricao": ""
+    }
+  },
+  "cues": [
+    "entra",
+    "agenda",
+    "pacientes",
+    "notas",
+    "espalha"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

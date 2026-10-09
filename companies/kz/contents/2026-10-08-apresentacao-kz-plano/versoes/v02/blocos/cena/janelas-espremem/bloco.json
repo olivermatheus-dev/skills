@@ -1,0 +1,48 @@
+{
+  "id": "cena/janelas-espremem",
+  "tipo": "cena",
+  "titulo": "cena/janelas-espremem (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "headline"
+  ],
+  "params": {
+    "giro": {
+      "padrao": [
+        -6,
+        7.5,
+        -3
+      ],
+      "descricao": ""
+    },
+    "dx": {
+      "padrao": [
+        -18,
+        18,
+        -10
+      ],
+      "descricao": ""
+    },
+    "canto": {
+      "padrao": [
+        300,
+        330
+      ],
+      "descricao": ""
+    }
+  },
+  "cues": [
+    "entra",
+    "espreme",
+    "aperta",
+    "importa",
+    "sai"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

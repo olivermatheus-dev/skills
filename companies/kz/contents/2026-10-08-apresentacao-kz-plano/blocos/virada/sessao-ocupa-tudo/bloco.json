@@ -1,0 +1,30 @@
+{
+  "id": "virada/sessao-ocupa-tudo",
+  "tipo": "virada",
+  "titulo": "virada/sessao-ocupa-tudo (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "antes",
+    "depois",
+    "cliente"
+  ],
+  "params": {
+    "relogio_inicio": {
+      "padrao": "00:12",
+      "descricao": ""
+    }
+  },
+  "cues": [
+    "entra",
+    "recolhe",
+    "inicia",
+    "cuida"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

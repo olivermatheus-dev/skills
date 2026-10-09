@@ -1,0 +1,35 @@
+{
+  "id": "revelacao/janela-unica",
+  "tipo": "revelacao",
+  "titulo": "revelacao/janela-unica (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "assinatura",
+    "frase",
+    "p1",
+    "p2",
+    "p3"
+  ],
+  "params": {
+    "escala_inicial": {
+      "padrao": 0.3,
+      "descricao": ""
+    }
+  },
+  "cues": [
+    "entra",
+    "marca",
+    "assinatura",
+    "rodape",
+    "p1",
+    "p2",
+    "p3"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

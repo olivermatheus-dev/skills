@@ -60,7 +60,7 @@ export function prefixar(css, pre) {
   return out;
 }
 
-export function compor(v) {
+export function compor(v, { gravar = true } = {}) {
   const tl = v.tl;
   const cenas = tl.scenes.filter((s) => s.use);
   if (!cenas.length) throw new Error('a timeline não usa blocos (nenhuma cena com "use")');
@@ -149,13 +149,15 @@ ${js}
   </body>
 </html>
 `;
-  writeFileSync(join(v.dir, 'composition.html'), html);
-  return { blocos: [...blocos.values()].map((b) => ({ use: b.use, escopo: b.escopo })) };
+  if (gravar) writeFileSync(join(v.dir, 'composition.html'), html);
+  return { html, blocos: [...blocos.values()].map((b) => ({ use: b.use, escopo: b.escopo, dir: b.dir })) };
 }
 
-if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}` || process.argv[1]?.endsWith('compor.mjs')) {
+if (process.argv[1]?.endsWith('compor.mjs')) {
   const v = video(process.argv[2]);
-  const r = compor(v);
-  if (process.argv.includes('--listar')) for (const b of r.blocos) console.log(`${b.use}  [${b.escopo}]`);
-  console.log(`✓ composition.html montado com ${r.blocos.length} bloco(s)`);
+  // --listar só lê: não toca no composition.html (050: listar sobrescrevia a composição de uma versão já exportada)
+  const listar = process.argv.includes('--listar');
+  const r = compor(v, { gravar: !listar });
+  if (listar) for (const b of r.blocos) console.log(`${b.use}  [${b.escopo}]`);
+  else console.log(`✓ composition.html montado com ${r.blocos.length} bloco(s)`);
 }

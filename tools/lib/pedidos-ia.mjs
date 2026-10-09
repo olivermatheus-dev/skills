@@ -49,12 +49,17 @@ function fecharAjustes(p, saida) {
   // resolvida sem resposta (a IA não usou o review.mjs): a resposta vira o texto final do Claude, para o Oliver ver o que mudou
   const semResposta = cs.filter((c) => c.status === 'resolvido' && !c.reply);
   const fala = (saida ?? '').trim().replace(/\s+/g, ' ').slice(0, 400);
-  if (semResposta.length && fala) {
+  // ficou aberta sem pergunta nesta rodada (a IA parou ou travou sem usar o `responde`): o texto final vira a resposta no
+  // card, senão o Oliver só vê "0 de 1" e nunca sabe por quê (050)
+  const caladas = cs.filter((c) => c.status === 'aberto' && !(c.reply && c.replyAt && c.replyAt >= (p.inicio ?? '').slice(0, 19)));
+  const motivo = (saida ?? '').trim().replace(/\n{3,}/g, '\n\n').slice(0, 1500);
+  if ((semResposta.length && fala) || (caladas.length && motivo)) {
     for (const c of semResposta) { c.reply = fala; c.resolvedAt ??= agora().slice(0, 19); }
+    if (motivo) for (const c of caladas) { c.reply = `Não resolvi nesta rodada. ${motivo}`; c.replyAt = agora().slice(0, 19); }
     writeFileSync(f, `${JSON.stringify(rev, null, 2)}\n`);
   }
   const feitas = cs.filter((c) => c.status === 'resolvido').length;
-  const respondidas = cs.filter((c) => c.status === 'aberto' && c.reply && (!c.replyAt || c.replyAt >= p.inicio)).length;
+  const respondidas = cs.filter((c) => c.status === 'aberto' && c.reply && (!c.replyAt || c.replyAt >= (p.inicio ?? '').slice(0, 19))).length;
   return `${feitas} de ${ids.length} anotação(ões) resolvida(s)${respondidas ? ` · ${respondidas} com pergunta para você` : ''}`;
 }
 

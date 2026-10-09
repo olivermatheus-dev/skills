@@ -106,9 +106,11 @@ Antes de tudo: pasta com `revisao.json` e anotações abertas, ou pedido "revisa
 `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`):
 ```
 plano.md · cenas.json · storyboard-<fmt>.png · locucao.json · timeline.json · composition.html · data/*.json
-blocos/<tipo>/<id>/   ← blocos novos do projeto
+blocos/<tipo>/<id>/   ← blocos novos do projeto (nunca apague: a versão exportada depende deles)
+versoes/vNN/          ← fonte de cada versão exportada (timeline + composição + todos os blocos), gravada pelo produce; vai para o git
 audio/ render/ exports/      ← gerados, fora do git
 ```
+**Versão = fonte, não formato** (050): um export grava `versoes/vNN/`; 4:5 e 9:16 da mesma fonte saem com o mesmo número. Plano novo depois de um export **não** sobrescreve a versão: `node tools/video-kit/scripts/versao.mjs <pasta> listar|diff vNN|restaurar vNN`.
 Plano: skill `plano-de-cenas`. Molde da timeline: `references/timeline.md`.
 
 ## Regras de cena (dentro de cada bloco)
@@ -122,9 +124,11 @@ Plano: skill `plano-de-cenas`. Molde da timeline: `references/timeline.md`.
 
 ## Revisão por anotações (comece por aqui se houver anotações abertas)
 O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e a anotação vai para `<pasta>/revisao.json`.
-1. `node tools/review.mjs <pasta>` → só as abertas, com cena, fala, tempo, alvo (trecho do `composition.html`) e o **quadro** do momento em `render/review/` (abra com Read). **Não pergunte de volta**: o contexto está ali; se o seletor sumiu, ache pelo texto da cena.
+1. `node tools/review.mjs <pasta>` → só as abertas, com cena, fala, tempo, alvo (trecho do `composition.html`), o **quadro** do MP4 anotado em `render/review/` (abra com Read) e a **fonte desse MP4** (`versoes/vNN`). **Não pergunte de volta**: o contexto está ali; se o seletor sumiu, ache pelo texto da cena.
+   - Antes de mexer: `versao.mjs <pasta> diff vNN`. Se a fonte atual não é a do vídeo anotado (plano refeito, blocos trocados), `restaurar vNN` e corrija a partir dela. MP4 sem versão (peça anterior à 050): `node tools/video-kit/scripts/recuperar.mjs <pasta> --de render/<formato>` reconstrói timeline e blocos do HTML montado.
+   - Travou (fonte perdida, comando barrado, decisão do Oliver)? `review.mjs <pasta> responde <id> "o que travou"`: nunca termine só com texto no chat, o Oliver lê o card.
 2. Aja por tipo: `corrigir` = bug, conserte a causa · `ajustar` = ajuste fino (tente `timeline.mjs` antes de reescrever HTML) · `ok` = não mexer · `template` = **promover para a galeria** (`library/motion/`, tarefa 014): extraia o elemento/cena com parâmetros e tokens, registre no catálogo e deixe a peça usando o componente.
-3. Depois de corrigir e **re-renderizar numa versão nova** (`vNN`, nunca sobrescrever): `node tools/review.mjs <pasta> resolve <id> "o que mudou"` (guarda a resposta; o Oliver vê no app e reabre se não ficou bom). Fim da rodada: `qc.mjs --sheet` como sempre.
+3. Depois de corrigir e **re-renderizar numa versão nova** (`produce.mjs` sem `--v`, os formatos todos: sai a próxima `vNN` com a fonte guardada): `node tools/review.mjs <pasta> resolve <id> "o que mudou"` (guarda a resposta; o Oliver vê no app e reabre se não ficou bom). Fim da rodada: `qc.mjs --sheet` como sempre.
 4. Âncoras: `cena`/`fala`/`evento` valem por id mesmo se o tempo mudar; `elemento` = `selector` + `t`; `tempo` = só o instante (use o quadro).
 
 ## Ajustes depois da entrega (quase zero token)

@@ -1,0 +1,27 @@
+{
+  "id": "produto/painel-janela",
+  "tipo": "produto",
+  "titulo": "produto/painel-janela (recuperado do render)",
+  "camada": "palco",
+  "slots": [
+    "saudacao",
+    "nome",
+    "h1",
+    "h2"
+  ],
+  "params": {},
+  "cues": [
+    "entra",
+    "destaque",
+    "lista",
+    "feito",
+    "sai"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}

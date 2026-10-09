@@ -69,6 +69,7 @@ export function pedirAjustes(slug: string, path: string, body: { aba?: string; i
     'Nunca edite o revisao.json à mão (está bloqueado): status e resposta só pelo review.mjs, que é o que o Oliver lê no app.',
     `Para cada uma: corrija na fonte, ${cfg.depois} e rode \`node tools/review.mjs "${pasta}" resolve <id> "o que mudou"\` (uma frase para o Oliver).`,
     `O Oliver não está na conversa. Se uma anotação depender de decisão dele ou de algo pago (voz final, ElevenLabs), não resolva: rode \`node tools/review.mjs "${pasta}" responde <id> "a pergunta"\` e siga com as outras.`,
+    `Travou (fonte não bate com o vídeo anotado, comando barrado, erro)? Não termine calado: \`responde <id> "o que travou e o que você precisa"\`. Sem ninguém para aprovar, só rodam os scripts do hub a partir da raiz (\`node tools/…\`, sem \`cd\`, sem \`node -e\` nem script improvisado). Vídeo: a fonte de cada MP4 está em versoes/vNN (o review.mjs diz qual; versao.mjs diff/restaurar).`,
     ...(instr ? [`Instruções do Oliver para esta rodada: ${instr}`] : []),
     'Termine com uma linha: o que mudou e onde ver.',
   ].join('\n');

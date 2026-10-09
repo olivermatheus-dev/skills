@@ -118,10 +118,17 @@ function resolveCtx(c) {
 
 // ---- quadros ----
 const exportsDir = join(dir, 'exports');
-const latest = existsSync(exportsDir) ? readdirSync(exportsDir).filter((f) => /\.mp4$/i.test(f)).sort((a, b) => a.localeCompare(b, 'en', { numeric: true })).at(-1) : null;
+// o mais recente pela versão (-vNN), não pelo nome: "9x16-v01" vinha depois de "4x5-v02" na ordem alfabética
+const vnum = (f) => +(f.match(/-v(\d+)(?:-60fps)?\.mp4$/i)?.[1] ?? 0);
+const latest = existsSync(exportsDir) ? readdirSync(exportsDir).filter((f) => /\.mp4$/i.test(f)).sort((a, b) => vnum(a) - vnum(b) || a.localeCompare(b, 'en', { numeric: true })).at(-1) : null;
 const wantFrames = !flags.includes('--no-frames');
+// fonte de cada MP4 (050): versoes/vNN/versao.json diz quais exports saíram daquela fonte
+const versoesDir = join(dir, 'versoes');
+const versoes = existsSync(versoesDir) ? readdirSync(versoesDir).filter((n) => /^v\d+$/.test(n)).map((n) => ({ n, ...JSON.parse(readFileSync(join(versoesDir, n, 'versao.json'), 'utf8')) })) : [];
+const versaoDe = (mp4) => versoes.find((x) => Object.values(x.formatos ?? {}).some((p) => p.endsWith(`/${mp4}`) || p === mp4));
 function frame(c, t) {
-  const mp4 = latest;
+  // o quadro sai do MP4 que o Oliver anotou (não do "mais recente", que pode ser outro formato)
+  const mp4 = c.video && existsSync(join(exportsDir, c.video)) ? c.video : latest;
   if (!wantFrames || !mp4 || t == null) return null;
   const out = join(dir, 'render', 'review');
   mkdirSync(out, { recursive: true });
@@ -168,6 +175,13 @@ for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?
   console.log(`   "${c.text.replace(/\n/g, '\n   ')}"`);
   if (varProj) console.log(`   · vale para: ${c.alcance === 'todas' ? 'TODAS as variantes (base ou opção do eixo)' : `só esta variante (ajustes["${varId}"])`}`);
   for (const l of x.lines) console.log(`   · ${l}`);
+  if (c.video && !['roteiro', 'slide'].includes(c.anchor.kind)) {
+    const vs = versaoDe(c.video);
+    const kit = 'node tools/video-kit/scripts/versao.mjs';
+    console.log(vs
+      ? `   · fonte do vídeo anotado: versoes/${vs.n}/ → antes de mexer: ${kit} "${pos[0]}" diff ${vs.n} (se a fonte atual for outra: restaurar ${vs.n}). Exporte sem --v: sai a versão nova nos 2 formatos.`
+      : `   · ⚠ ${c.video} não tem versão guardada (peça anterior à 050): a fonte atual pode não ser a dele. Recupere com node tools/video-kit/scripts/recuperar.mjs "${pos[0]}" --de render/<formato> e compare.`);
+  }
   const f = x.img ? pinned(c, x.img) : frame(c, x.t);
   if (f) console.log(`   · ${x.img ? 'imagem' : 'quadro'}: ${f}`);
   if (c.reply) console.log(`   · resposta anterior: ${c.reply}`);

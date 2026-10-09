@@ -1,0 +1,64 @@
+{
+  "id": "cena/janelas-espremem",
+  "tipo": "cena",
+  "titulo": "Gestão espreme a Sessão para o canto; em \"realmente importa\" a Sessão cresce no centro e o resto apaga; janelas fundem numa só",
+  "camada": "palco",
+  "slots": [
+    "headline"
+  ],
+  "params": {
+    "giro": {
+      "padrao": [
+        -6,
+        7.5,
+        -3
+      ],
+      "descricao": "rotação de Agenda, Pacientes, Anotações"
+    },
+    "dx": {
+      "padrao": [
+        -18,
+        18,
+        -10
+      ],
+      "descricao": "deslocamento x das mesmas"
+    },
+    "canto": {
+      "padrao": [
+        300,
+        330
+      ],
+      "descricao": "x,y para onde a Sessão é empurrada"
+    },
+    "destaque": {
+      "padrao": [
+        540,
+        640
+      ],
+      "descricao": "ponto do palco (x,y) onde a Sessão para no cue destaca"
+    },
+    "escala_destaque": {
+      "padrao": 1.3,
+      "descricao": "tamanho da Sessão no destaque"
+    },
+    "apagado": {
+      "padrao": 0.22,
+      "descricao": "opacidade das janelas da gestão no destaque"
+    }
+  },
+  "cues": [
+    "entra",
+    "espreme",
+    "aperta",
+    "destaca",
+    "importa",
+    "sai"
+  ],
+  "elastico": true,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "origem": "recuperado de render/4x5/index.html pelo recuperar.mjs",
+  "licenca": "própria"
+}
