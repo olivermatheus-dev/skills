@@ -23,7 +23,7 @@ const MODE_KEY = 'hub:comp-mode';
 const lastMode = () => { try { return localStorage.getItem(MODE_KEY) === 'cards' ? 'cards' : 'tabela'; } catch { return 'tabela'; } };
 const STAGES: { value: Stage; label: string; icon: ReactNode }[] = [
   { value: 'ativo', label: 'Ativos', icon: <CircleCheck className="text-success-ink" /> },
-  { value: 'candidato', label: 'Candidatos', icon: <Sparkles className="text-violet-600" /> },
+  { value: 'candidato', label: 'Candidatos', icon: <Sparkles className="text-ai" /> },
   { value: 'arquivado', label: 'Arquivados', icon: <Archive className="text-muted-foreground" /> },
 ];
 const dot = (color: string) => <span className="size-2 rounded-full" style={{ background: color }} />;
@@ -307,7 +307,7 @@ function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, on
         <Link to={`/p/${slug}/concorrentes/${c.data.id}`} onMouseEnter={() => undefined} className="flex items-center gap-2.5 group">
           <Avatar name={c.data.name} size={30} local={api.mediaUrl(slug, c.data.id, av?.latest?.profile.avatarLocal)} remote={av?.latest?.profile.avatar} className="!ring-0" />
           <span className="min-w-0">
-            <span className="flex items-center gap-1.5 font-medium group-hover:text-primary-ink">{c.data.name}{c.data.kind !== 'concorrente' && <Badge color={KIND_COLOR[c.data.kind]}>{KINDS[c.data.kind]}</Badge>}{ov.get(c.data.id)?.request && <span className="text-[10px] text-violet-600">⏳</span>}</span>
+            <span className="flex items-center gap-1.5 font-medium group-hover:text-primary-ink">{c.data.name}{c.data.kind !== 'concorrente' && <Badge color={KIND_COLOR[c.data.kind]}>{KINDS[c.data.kind]}</Badge>}{ov.get(c.data.id)?.request && <span className="text-[10px] text-ai">⏳</span>}</span>
             {ov.get(c.data.id)?.oneLiner && <span className="block text-xs text-muted-foreground truncate">{ov.get(c.data.id)!.oneLiner}</span>}
           </span>
         </Link>

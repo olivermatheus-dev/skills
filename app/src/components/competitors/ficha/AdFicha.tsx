@@ -19,8 +19,8 @@ function Convite({ slug, compId, fichaKey, naFila }: { slug: string; compId: str
   const busy = pedir.isPending || cancelar.isPending;
   const erro = ((pedir.error ?? cancelar.error) as { message?: string } | null)?.message;
   return (
-    <div className="rounded-xl border border-dashed border-violet-300 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/30 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-      <ScanSearch className="size-7 text-violet-600 shrink-0" strokeWidth={1.5} />
+    <div className="rounded-xl border border-dashed border-ai-border bg-ai-soft/60 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+      <ScanSearch className="size-7 text-ai shrink-0" strokeWidth={1.5} />
       <div className="flex-1 min-w-0">
         <div className="text-sm font-semibold">{naFila ? 'Na fila de análise' : 'Ainda sem análise'}</div>
         <p className="text-xs text-muted-foreground mt-0.5">{naFila
@@ -68,7 +68,7 @@ export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: strin
     <FCtx.Provider value={ctx}>
       <div className="space-y-5">
         <Campo label={`Por que está no ar${h?.diasNoAr != null ? ` há ${h.diasNoAr} dias` : ''}`} icon={<Sparkles />} paths={['porQue']} aside={<span className="text-[11px] text-muted-foreground">hipótese da IA</span>}
-          className="rounded-xl border border-violet-200 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/25 p-3.5">
+          className="rounded-xl border border-ai-border bg-ai-soft/60 p-3.5">
           <div className="text-sm leading-relaxed"><EditText path="porQue" value={porQue} multiline placeholder="hipótese de por que o anúncio segue no ar"
             onSave={(x) => ctx.edit('porQue', x.trim() ? `hipótese: ${x.trim().replace(/^hip[oó]tese:\s*/i, '')}` : null)} /></div>
         </Campo>

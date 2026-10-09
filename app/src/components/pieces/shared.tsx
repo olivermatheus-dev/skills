@@ -56,7 +56,7 @@ export function CommentCard({ c, anchor, onJump, onToggle, onDelete, extra }: {
         <Badge color={tipoOf(c.tipo).color}>{tipoOf(c.tipo).label}</Badge>
         {onJump ? <button className="text-primary-ink hover:underline text-left" onClick={onJump}>{anchor}</button> : <span className="text-muted-foreground">{anchor}</span>}
         {extra}
-        {emAjuste && <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 border border-violet-200 px-1.5 text-[11px] text-violet-800"><Loader2 className="size-3 animate-spin" />em ajuste</span>}
+        {emAjuste && <span className="inline-flex items-center gap-1 rounded-full bg-ai-soft border border-ai-border px-1.5 text-[11px] text-ai-ink"><Loader2 className="size-3 animate-spin" />em ajuste</span>}
         <span className="ml-auto flex gap-2">
           <button className="text-muted-foreground hover:text-foreground" onClick={onToggle}>{c.status === 'aberto' ? 'marcar resolvida' : 'reabrir'}</button>
           <button className="text-destructive" onClick={onDelete}>excluir</button>

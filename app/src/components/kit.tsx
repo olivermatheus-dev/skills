@@ -8,10 +8,13 @@ import { ApiError, net } from '../api';
 const cx = (...c: (string | false | undefined | null)[]) => c.filter(Boolean).join(' ');
 export { cx };
 
-export function Button({ variant = 'primary', className, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger' | 'soft' }) {
+export function Button({ variant = 'primary', className, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger' | 'soft' | 'ai' | 'ai-soft' }) {
   const v = {
     primary: 'bg-primary text-primary-foreground hover:opacity-90',
     soft: 'bg-primary-soft text-primary-ink hover:bg-primary/15',
+    // roxo = ação de IA (analisar, gerar, pedir ao Claude): o usuário reconhece pela cor
+    ai: 'bg-ai text-ai-foreground hover:bg-ai-ink',
+    'ai-soft': 'bg-ai-soft text-ai-ink hover:bg-ai-muted',
     ghost: 'bg-transparent text-foreground hover:bg-muted border border-border',
     danger: 'bg-transparent text-destructive hover:bg-red-50 border border-border',
   }[variant];

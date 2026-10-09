@@ -333,7 +333,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
               })}
             </Track>
             <Track label="Trilha" h="h-7">
-              <div className="absolute inset-0 cursor-pointer flex items-center px-2 text-[11px] text-violet-800 bg-violet-100 rounded" onClick={areaClick}>
+              <div className="absolute inset-0 cursor-pointer flex items-center px-2 text-[11px] text-ai-ink bg-ai-muted rounded" onClick={areaClick}>
                 ♪ {tl.music?.file ?? 'sem trilha'}{tl.music?.bpm ? ` · ${tl.music.bpm} bpm` : ''}{tl.music?.gain_db != null ? ` · ${tl.music.gain_db} dB` : ''}{tl.sfx?.length ? ` · ${tl.sfx.length} efeitos` : ''}
               </div>
             </Track>

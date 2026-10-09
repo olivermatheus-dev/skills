@@ -62,12 +62,12 @@ export function TermoDialog({ slug, grupo, valor, modo: modoIni, onClose }: { sl
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
       <DialogContent aria-describedby={undefined} className="sm:max-w-[520px]">
-        <DialogTitle className="text-base font-semibold inline-flex items-center gap-2"><Sparkles className="size-4 text-violet-600" />Termo novo: <code className="font-mono text-[15px]">{valor}</code></DialogTitle>
+        <DialogTitle className="text-base font-semibold inline-flex items-center gap-2"><Sparkles className="size-4 text-ai" />Termo novo: <code className="font-mono text-[15px]">{valor}</code></DialogTitle>
         <DialogDescription className="text-sm text-muted-foreground -mt-2">A IA propôs este {nomeGrupo} porque nenhum da lista servia. Você decide se ele entra.</DialogDescription>
         {q.isLoading ? <div className="py-6 grid place-items-center"><Spinner /></div> : !info ? (
           <p className="text-sm text-muted-foreground">Nenhuma ficha propõe este termo agora: a análise que o propôs foi refeita sem ele.</p>
         ) : <>
-          <div className="rounded-lg border border-dashed border-violet-300 bg-violet-50/50 dark:bg-violet-500/5 dark:border-violet-500/30 p-3 text-sm space-y-1">
+          <div className="rounded-lg border border-dashed border-ai-border bg-ai-soft/50 p-3 text-sm space-y-1">
             <p>{info.definicao}</p>
             {info.exemplo && <p className="text-xs text-muted-foreground">Exemplo: {info.exemplo}</p>}
             <p className="text-xs text-muted-foreground">

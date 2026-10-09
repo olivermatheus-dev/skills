@@ -60,12 +60,12 @@ export function PedidoStatus({ slug, pedido, className, mostrarFim = true }: { s
     finally { setParando(false); void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] }); }
   }
   if (rodando) return (
-    <div className={cn('flex items-center gap-2 rounded-md border border-violet-200 bg-violet-50 px-3 py-1.5 text-xs text-violet-900', className)}>
+    <div className={cn('flex items-center gap-2 rounded-md border border-ai-border bg-ai-soft px-3 py-1.5 text-xs text-ai-ink', className)}>
       <Loader2 className="size-3.5 animate-spin shrink-0" />
       <span className="font-medium shrink-0">{nome}</span>
       <span className="min-w-0 truncate opacity-80" title={pedido.passo ?? undefined}>{pedido.status === 'fila' ? 'Abrindo o Claude Code…' : pedido.passo ?? 'Trabalhando…'}</span>
       <span className="ml-auto tabular-nums opacity-70 shrink-0">{duracao(pedido.inicio ?? pedido.criado)}</span>
-      {pedido.atividade && <button onClick={parar} disabled={parando} className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-violet-100 shrink-0"><Square className="size-3" />Parar</button>}
+      {pedido.atividade && <button onClick={parar} disabled={parando} className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-ai-muted shrink-0"><Square className="size-3" />Parar</button>}
     </div>
   );
   const erro = pedido.status === 'erro';

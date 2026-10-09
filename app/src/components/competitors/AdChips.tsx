@@ -21,7 +21,7 @@ export const INCERTO = 0.5;
 
 const FUNIL_COR = {
   topo: 'bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300',
-  meio: 'bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-300',
+  meio: 'bg-ai-muted text-ai-ink',
   fundo: 'bg-success/15 text-success-ink',
 } as const;
 
@@ -52,12 +52,12 @@ function Incerto({ on }: { on: boolean }) {
  */
 export type Voce = { auto: string; origem?: 'voce' | 'ia'; motivo?: string } | undefined;
 const VOCE_RING = 'ring-1 ring-primary/50';
-const IA_RING = 'ring-1 ring-violet-400/60';
+const IA_RING = 'ring-1 ring-ai/60';
 const ringDe = (voce: Voce) => (voce ? (voce.origem === 'ia' ? IA_RING : VOCE_RING) : undefined);
 function Selo({ voce }: { voce: Voce }) {
   if (!voce) return null;
   return voce.origem === 'ia'
-    ? <span className="inline-flex items-center gap-0.5 rounded-sm bg-violet-100 px-1 py-px text-[10px] font-semibold text-violet-800 dark:bg-violet-500/20 dark:text-violet-300 [&_svg]:size-2.5"><Sparkles />IA</span>
+    ? <span className="inline-flex items-center gap-0.5 rounded-sm bg-ai-muted px-1 py-px text-[10px] font-semibold text-ai-ink [&_svg]:size-2.5"><Sparkles />IA</span>
     : <span className="inline-flex items-center gap-0.5 rounded-sm bg-primary/15 px-1 py-px text-[10px] font-semibold text-primary-ink [&_svg]:size-2.5"><UserRound />você</span>;
 }
 function vozTip(titulo: string, voce: NonNullable<Voce>, valor: string): ReactNode {

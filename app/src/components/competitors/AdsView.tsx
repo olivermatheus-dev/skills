@@ -356,7 +356,7 @@ function SaveBtn({ on, onClick }: { on: boolean; onClick: () => void }) {
   return (
     <Tip content={on ? 'Salvo. Clique para tirar dos salvos.' : 'Salvar: guarda uma cópia do anúncio, que continua abrindo mesmo se sair do ar.'}>
       <button type="button" aria-pressed={on} aria-label={on ? 'Tirar dos salvos' : 'Salvar anúncio'} onClick={(e) => { e.stopPropagation(); onClick(); }}
-        className={cx('grid place-items-center size-7 rounded-md transition outline-none focus-visible:ring-2 focus-visible:ring-ring', on ? 'text-violet-600 dark:text-violet-300' : 'text-muted-foreground hover:text-foreground hover:bg-muted')}>
+        className={cx('grid place-items-center size-7 rounded-md transition outline-none focus-visible:ring-2 focus-visible:ring-ring', on ? 'text-ai' : 'text-muted-foreground hover:text-foreground hover:bg-muted')}>
         {on ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
       </button>
     </Tip>

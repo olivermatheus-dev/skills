@@ -87,7 +87,7 @@ export default function RelatoriosSection({ slug, comp, onOpenItem }: { slug: st
               <span className="w-28 inline-flex items-center gap-1.5"><PlatformIcon platform={r.rede} size={13} />{platformLabel(r.rede)}</span>
               <span className="w-36 text-xs text-muted-foreground">{ESCOPO[r.escopo]} · {r.itens} itens</span>
               <span className="flex-1 min-w-0 truncate">{r.resumo ?? <span className="text-muted-foreground">leitura pendente (só os números)</span>}</span>
-              {r.termosPendentes > 0 && <span className="text-xs text-violet-700 dark:text-violet-300">{r.termosPendentes} termo(s)</span>}
+              {r.termosPendentes > 0 && <span className="text-xs text-ai-ink">{r.termosPendentes} termo(s)</span>}
               <ChevronRight className="size-4 text-muted-foreground" />
             </button>
           ))}
@@ -110,7 +110,7 @@ function Destaque({ r, onOpen }: { r: RelatorioLinha; onOpen: () => void }) {
         <span className="ml-auto inline-flex items-center gap-1 text-primary-ink font-medium group-hover:underline"><FileBarChart className="size-3.5" />Abrir relatório</span>
       </div>
       <p className="mt-1.5 text-sm leading-relaxed line-clamp-2">{r.resumo ?? <span className="text-muted-foreground">Leitura do Opus pendente: o relatório tem só os números do script.</span>}</p>
-      {r.termosPendentes > 0 && <p className="mt-1 text-xs text-violet-700 dark:text-violet-300 inline-flex items-center gap-1"><Sparkles className="size-3" />{r.termosPendentes} termo(s) novo(s) para aceitar ou recusar</p>}
+      {r.termosPendentes > 0 && <p className="mt-1 text-xs text-ai-ink inline-flex items-center gap-1"><Sparkles className="size-3" />{r.termosPendentes} termo(s) novo(s) para aceitar ou recusar</p>}
     </button>
   );
 }
@@ -247,7 +247,7 @@ function Mix({ ag, itens }: { ag: Agregados; itens: Map<string, ItemAg> }) {
         </tr></thead>
         <tbody>{gs.map((g) => (
           <tr key={g.valor} className="border-t border-border" title={`${g.n} item(ns): ${g.itens.map((k) => itens.get(k)?.titulo ?? k).join(' · ')}${g.lift != null ? `\nlift ${g.lift}` : ''}`}>
-            <td className="py-1.5 pr-2">{g.nome}{g.proposto && <span className="ml-1 text-[10px] text-violet-700 dark:text-violet-300">proposto</span>}{g.fraca && <span className="ml-1 text-warning-ink" title="amostra fraca (n < 3)">⚠</span>}</td>
+            <td className="py-1.5 pr-2">{g.nome}{g.proposto && <span className="ml-1 text-[10px] text-ai-ink">proposto</span>}{g.fraca && <span className="ml-1 text-warning-ink" title="amostra fraca (n < 3)">⚠</span>}</td>
             <td className="text-right pl-2">{g.n}</td>
             <td className="text-right pl-2">{fmtX(g.med.xPerfil)}</td>
             {temMercado && <td className="text-right pl-2">{fmtX(g.med.xMercado)}</td>}
@@ -281,7 +281,7 @@ function Termos({ slug, comp, id, v }: { slug: string; comp: string; id: string;
   const pend = v.termos.filter((t) => t.estado === 'pendente');
   const decide = (ts: typeof v.termos, decisao: 'aceito' | 'recusado') => m.mutate(ts.map((t) => ({ grupo: t.grupo, valor: t.valor, decisao })));
   return (
-    <Bloco titulo="Termos novos" hint={pend.length ? `${pend.length} para decidir` : 'todos decididos'} icon={<Sparkles className="size-3.5 text-violet-600" />}
+    <Bloco titulo="Termos novos" hint={pend.length ? `${pend.length} para decidir` : 'todos decididos'} icon={<Sparkles className="size-3.5 text-ai" />}
       acao={pend.length > 1 ? <Button variant="soft" className="!py-0.5 !px-2 text-xs inline-flex items-center gap-1" disabled={m.isPending} onClick={() => decide(pend, 'aceito')}>{m.isPending ? <Spinner /> : <Check className="size-3" />}Aceitar todos</Button> : undefined}>
       <div className="rounded-md border border-border divide-y divide-border">
         {v.termos.map((t) => (

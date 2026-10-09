@@ -84,7 +84,7 @@ export function FlagToggle({ on, onChange, icon: Icon, label, title, tone = 'suc
     <Tip content={title}>
       <button type="button" aria-pressed={on} onClick={() => onChange(!on)}
         className={cx('h-7 shrink-0 inline-flex items-center gap-1.5 rounded-md border px-2 text-xs transition whitespace-nowrap',
-          on ? (tone === 'amber' ? 'border-amber-300 bg-amber-50 text-amber-700' : tone === 'violet' ? 'border-violet-300 bg-violet-50 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300 dark:border-violet-500/40' : 'border-success/40 bg-success/10 text-success-ink') : 'border-border bg-card text-muted-foreground hover:text-foreground hover:bg-muted/50')}>
+          on ? (tone === 'amber' ? 'border-amber-300 bg-amber-50 text-amber-700' : tone === 'violet' ? 'border-ai-border bg-ai-soft text-ai-ink' : 'border-success/40 bg-success/10 text-success-ink') : 'border-border bg-card text-muted-foreground hover:text-foreground hover:bg-muted/50')}>
         <Icon className="size-3.5" />{label}
       </button>
     </Tip>

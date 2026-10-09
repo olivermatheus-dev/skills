@@ -5,7 +5,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Ban, Captions, Check, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
+  Ban, Captions, Check, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Play, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
 } from 'lucide-react';
 import type { EdicaoInfo, FichaView, ItemMark, OpcaoVocab, VocabView } from '../../../api';
 import type { FichaCampos } from '../../../../../schema/ficha';
@@ -71,7 +71,7 @@ function useVoc() {
   const options = (g: string, atual?: string | null, vazio?: string): SelectOption[] => {
     const base = (vocab?.grupos[g] ?? []).map((t) => ({ value: t.id, label: t.nome }));
     const prop = novos.filter((t) => t.grupo === g && !base.some((b) => b.value === t.valor))
-      .map((t) => ({ value: t.valor, label: t.valor.replace(/-/g, ' '), icon: <Sparkles className="text-violet-600" />, group: 'Proposto pela IA' }));
+      .map((t) => ({ value: t.valor, label: t.valor.replace(/-/g, ' '), icon: <Sparkles className="text-ai" />, group: 'Proposto pela IA' }));
     const fora = atual && !base.some((b) => b.value === atual) && !prop.some((p) => p.value === atual) ? [{ value: atual, label: `${atual} (fora do vocabulário)` }] : [];
     return [...(vazio ? [{ value: '', label: vazio }] : []), ...base, ...prop, ...fora];
   };
@@ -108,9 +108,9 @@ export function VSelect({ path, grupo, value, onChange, vazio, size = 'sm', clas
     <Tip content={t?.definicao ? `${t.proposto ? 'Termo novo proposto pela IA: use o selo ao lado para aceitar ou recusar.\n' : ''}${t.definicao}` : undefined}>
       <span className="inline-flex max-w-full">
         <SelectField size="sm" aria-label={label ?? GRUPO_NOME[grupo] ?? grupo} value={value ?? ''} options={options(grupo, value, vazio)} placeholder={<span className="text-muted-foreground">escolher…</span>}
-          icon={t?.proposto ? <Sparkles className="text-violet-600" /> : undefined} onChange={set}
+          icon={t?.proposto ? <Sparkles className="text-ai" /> : undefined} onChange={set}
           className={cx('rounded-full border max-w-full', size === 'md' ? '!h-8 !px-3 !text-[13px] font-medium' : '!h-7 font-medium',
-            t?.proposto ? 'border-dashed border-violet-400 bg-violet-50 text-violet-800 hover:bg-violet-100 dark:bg-violet-500/10 dark:text-violet-200' : 'bg-muted/70 border-transparent hover:bg-muted', className)} />
+            t?.proposto ? 'border-dashed border-ai/60 bg-ai-soft text-ai-ink hover:bg-ai-muted' : 'bg-muted/70 border-transparent hover:bg-muted', className)} />
       </span>
     </Tip>
     {(t?.proposto || t?.recusado) && value && <TermoSelo grupo={grupo} valor={value} recusado={t.recusado} />}
@@ -126,7 +126,7 @@ export function TermoSelo({ grupo, valor, recusado, mini }: { grupo: string; val
     <>
       <button type="button" onClick={() => setAberto(true)} title={recusado ? 'Termo recusado que esta ficha ainda usa: reetiquetar' : 'Termo novo proposto pela IA: aceitar ou recusar'}
         className={cx('inline-flex items-center gap-1 rounded-full border font-semibold shrink-0', mini ? 'h-5 px-1.5 text-[10px]' : 'h-6 px-2 text-[11px]',
-          recusado ? 'border-border bg-muted text-muted-foreground hover:text-foreground' : 'border-violet-300 bg-violet-600 text-white hover:bg-violet-700 dark:border-violet-500/40')}>
+          recusado ? 'border-border bg-muted text-muted-foreground hover:text-foreground' : 'border-ai-border bg-ai text-white hover:bg-ai-ink')}>
         {recusado ? <Ban className="size-3" /> : <Sparkles className="size-3" />}{recusado ? 'recusado' : 'termo novo'}
       </button>
       {aberto && <TermoDialog slug={slug} grupo={grupo} valor={valor} modo={recusado ? 'recusar' : undefined} onClose={() => setAberto(false)} />}
@@ -145,7 +145,7 @@ export function MultiSelect({ path, grupo, values, max }: { path: string; grupo:
         const t = termo(grupo, id);
         return (
           <Tip key={id} content={t?.definicao}>
-            <span className={cx('inline-flex items-center gap-1 rounded-full pl-2.5 pr-1 h-7 text-xs font-medium', t?.proposto ? 'border border-dashed border-violet-400 bg-violet-50 text-violet-800 dark:bg-violet-500/10 dark:text-violet-200' : 'bg-muted/70')}>
+            <span className={cx('inline-flex items-center gap-1 rounded-full pl-2.5 pr-1 h-7 text-xs font-medium', t?.proposto ? 'border border-dashed border-ai/60 bg-ai-soft text-ai-ink' : 'bg-muted/70')}>
               {t?.proposto && <Sparkles className="size-3" />}{t?.nome ?? id}{(t?.proposto || t?.recusado) && <TermoSelo grupo={grupo} valor={id} recusado={t.recusado} mini />}
               <button type="button" aria-label={`Tirar ${t?.nome ?? id}`} className="rounded-full p-0.5 text-muted-foreground hover:text-foreground hover:bg-background" onClick={() => edit(path, values.filter((x) => x !== id))}><X className="size-3" /></button>
             </span>
@@ -238,6 +238,108 @@ function Ratio({ v, label, tip, fmt = fmtRatio }: { v?: number | null; label: st
   );
 }
 
+// ───────────────────────── tocar no painel ─────────────────────────
+/** player oficial da rede (iframe de embed): Instagram (reel, carrossel e foto), YouTube e TikTok; outras redes ficam só com "abrir original" */
+function embedDe(r: Row): { src: string; aspect: string } | null {
+  const u = r.item.url, vertical = isVertical(r);
+  if (r.platform === 'instagram') {
+    const code = u.match(/instagram\.com\/(?:[^/]+\/)?(?:p|reels?|tv)\/([^/?#]+)/)?.[1] ?? r.item.id;
+    // o embed traz cabeçalho e rodapé do Instagram em volta da mídia: a proporção já conta com eles
+    return { src: `https://www.instagram.com/p/${code}/embed/`, aspect: vertical && r.item.type !== 'carrossel' ? 'aspect-[9/19]' : 'aspect-[4/6.4]' };
+  }
+  if (r.platform === 'youtube') {
+    const id = u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/)?.[1] ?? (/^[\w-]{11}$/.test(r.item.id) ? r.item.id : null);
+    return id ? { src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`, aspect: vertical ? 'aspect-[9/16]' : 'aspect-video' } : null;
+  }
+  if (r.platform === 'tiktok') {
+    const id = u.match(/\/video\/(\d+)/)?.[1] ?? (/^\d+$/.test(r.item.id) ? r.item.id : null);
+    return id ? { src: `https://www.tiktok.com/player/v1/${id}?autoplay=1&rel=0`, aspect: 'aspect-[9/16]' } : null;
+  }
+  return null;
+}
+
+/** a mídia parada (capa ou quadro) com um "play" por cima: clicar troca pelo player da rede, sem sair do painel */
+function Tocavel({ r, children }: { r: Row; children: ReactNode }) {
+  const [tocando, setTocando] = useState(false);
+  const e = embedDe(r);
+  if (tocando && e) return (
+    <div className="space-y-1.5">
+      <iframe src={e.src} title={`Conteúdo original: ${titleOf(r)}`} className={cx('block w-full rounded-xl bg-white border border-border', e.aspect)}
+        allow="autoplay; encrypted-media; picture-in-picture; clipboard-write" allowFullScreen />
+      <button type="button" onClick={() => setTocando(false)} className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1"><X className="size-3" />voltar para a capa</button>
+    </div>
+  );
+  return (
+    <div className="relative group/play">
+      {children}
+      {e && (
+        <button type="button" onClick={() => setTocando(true)} aria-label={r.item.type === 'carrossel' || r.item.type === 'post' ? 'Ver no painel' : 'Assistir no painel'}
+          className="absolute inset-0 grid place-items-center rounded-xl bg-black/0 hover:bg-black/25 transition">
+          <span className="size-12 rounded-full bg-black/60 text-white grid place-items-center opacity-90 group-hover/play:opacity-100 group-hover/play:scale-105 transition">
+            <Play className="size-5 fill-current ml-0.5" />
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ───────────────────────── números ─────────────────────────
+type Medidas = { views?: number | null; likes?: number | null; comments?: number | null; shares?: number | null; saves?: number | null; seguidores?: number | null; engajamento?: number | null };
+
+/** por que um número falta: o que a rede não mostra para quem não é dono da conta é "não público", não "—" */
+function naoPublico(r: Row, campo: 'views' | 'shares'): string | undefined {
+  if (r.platform !== 'instagram') return undefined;
+  if (campo === 'views' && (r.item.type === 'carrossel' || r.item.type === 'post'))
+    return 'O Instagram só mostra views de reels e vídeos. De carrossel e foto, o número fica nos insights do dono da conta.';
+  if (campo === 'shares') return 'O Instagram não mostra envios (compartilhamentos) de conteúdo de terceiros; só o dono vê nos insights.';
+  return undefined;
+}
+
+/** os números do conteúdo + engajamento = interações ÷ views (sem views: ÷ seguidores, rotulado) */
+function Numeros({ r, md, rodape }: { r: Row; md: Medidas; rodape?: ReactNode }) {
+  const inter = md.likes != null || md.comments != null ? (md.likes ?? 0) + (md.comments ?? 0) + (md.shares ?? 0) : undefined;
+  const taxaViews = md.engajamento ?? (md.views && inter != null ? inter / md.views : undefined);
+  const taxaSeg = taxaViews == null && md.seguidores && inter != null ? inter / md.seguidores : undefined;
+  const linhas: [string, number | null | undefined, string | undefined][] = [
+    ['Views', md.views, naoPublico(r, 'views')], ['Curtidas', md.likes, undefined], ['Comentários', md.comments, undefined], ['Envios', md.shares, naoPublico(r, 'shares')],
+    ...(md.saves != null ? [['Salvos', md.saves, undefined] as [string, number, undefined]] : []), ['Seguidores', md.seguidores, undefined],
+  ];
+  const oQueSoma = `curtidas + comentários${md.shares != null ? ' + envios' : ''}`;
+  return (
+    <div>
+      <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Números</div>
+      <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
+        {linhas.map(([k, n, np]) => (
+          <div key={k} className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1">
+            <dt className="text-xs text-muted-foreground">{k}</dt>
+            {n == null && np
+              ? <Tip content={np}><dd className="text-[11px] text-muted-foreground cursor-help underline decoration-dotted underline-offset-2">não público</dd></Tip>
+              : <dd className="font-semibold tabular-nums">{fmtNum(n ?? undefined)}</dd>}
+          </div>
+        ))}
+      </dl>
+      <div className="mt-2.5 rounded-lg border border-border bg-card px-3 py-2">
+        <div className="flex items-baseline justify-between gap-2">
+          <Tip content={`Interações = ${oQueSoma}.${md.shares == null && naoPublico(r, 'shares') ? '\nSem envios: o Instagram não mostra.' : ''}`}>
+            <span className="text-xs text-muted-foreground cursor-help">Interações</span>
+          </Tip>
+          <span className="font-semibold tabular-nums">{fmtNum(inter)}</span>
+        </div>
+        <div className="flex items-baseline justify-between gap-2 mt-1">
+          <Tip content={taxaViews != null ? `Engajamento = interações ÷ views (${fmtNum(inter)} ÷ ${fmtNum(md.views ?? undefined)}).`
+            : taxaSeg != null ? `Sem views públicas: interações ÷ seguidores (${fmtNum(inter)} ÷ ${fmtNum(md.seguidores ?? undefined)}).\nNão compare direto com a taxa sobre views.`
+              : 'Precisa de views ou de seguidores para calcular.'}>
+            <span className="text-xs text-muted-foreground cursor-help">Engajamento <span className="text-[10px]">{taxaViews != null ? '÷ views' : taxaSeg != null ? '÷ seguidores' : ''}</span></span>
+          </Tip>
+          <span className="font-semibold tabular-nums">{fmtPct(taxaViews ?? taxaSeg)}</span>
+        </div>
+      </div>
+      {rodape}
+    </div>
+  );
+}
+
 function MediaCol({ r, media }: { r: Row; media?: string }) {
   const { v } = useF();
   const f = v.ficha, md = f.medidas;
@@ -256,12 +358,14 @@ function MediaCol({ r, media }: { r: Row; media?: string }) {
         <Ratio v={md.xMercado} label="× mercado" tip={md.xMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
         <Ratio v={md.porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
       </div>
-      <div className={cx('relative rounded-xl overflow-hidden bg-zinc-900 mx-auto', vertical ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')}>
-        {q ? <img src={src(q.arquivo)} alt={q.descricao ?? `quadro em ${fmtS(q.tMs)}`} className="absolute inset-0 w-full h-full object-contain" />
-          : <Thumb r={r} media={media} className="absolute inset-0" />}
-        {q && quadros.length > 1 && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[11px] font-medium px-1.5 py-0.5 rounded tabular-nums">{fmtS(q.tMs)}</span>}
-        {q?.ocr && <Tip content={`Texto na tela (OCR): ${q.ocr}`}><span className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">texto na tela</span></Tip>}
-      </div>
+      <Tocavel r={r}>
+        <div className={cx('relative rounded-xl overflow-hidden bg-zinc-900 mx-auto', vertical ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')}>
+          {q ? <img src={src(q.arquivo)} alt={q.descricao ?? `quadro em ${fmtS(q.tMs)}`} className="absolute inset-0 w-full h-full object-contain" />
+            : <Thumb r={r} media={media} className="absolute inset-0" />}
+          {q && quadros.length > 1 && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[11px] font-medium px-1.5 py-0.5 rounded tabular-nums">{fmtS(q.tMs)}</span>}
+        </div>
+        {q?.ocr && <Tip content={`Texto na tela (OCR): ${q.ocr}`}><span className="absolute z-10 bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">texto na tela</span></Tip>}
+      </Tocavel>
       {quadros.length > 1 ? (
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 flex items-center gap-1.5"><Film className="size-3.5" />Quadros-chave <span className="font-normal normal-case tracking-normal">· {quadros.length}</span></div>
@@ -277,22 +381,10 @@ function MediaCol({ r, media }: { r: Row; media?: string }) {
         </div>
       ) : quadros.length === 1 ? <div className="text-xs text-muted-foreground -mt-2">Só a capa: o vídeo não pôde ser baixado.</div> : null}
 
-      <div>
-        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Números</div>
-        <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
-          {([['Views', md.views], ['Curtidas', md.likes], ['Comentários', md.comments], ['Envios', md.shares], ...(md.saves != null ? [['Salvos', md.saves]] : []), ['Seguidores', md.seguidores]] as [string, number | null | undefined][]).map(([k, n]) => (
-            <div key={k} className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1">
-              <dt className="text-xs text-muted-foreground">{k}</dt><dd className="font-semibold tabular-nums">{fmtNum(n ?? undefined)}</dd>
-            </div>
-          ))}
-          <div className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1 col-span-2">
-            <dt className="text-xs text-muted-foreground">Engajamento</dt><dd className="font-semibold tabular-nums">{fmtPct(md.engajamento ?? undefined)}</dd>
-          </div>
-        </dl>
+      <Numeros r={r} md={md} rodape={
         <div className="text-[11px] text-muted-foreground mt-1.5">
           Medidas congeladas na análise ({fmtDate(f.analise?.geradoEm)}).{mudou && <> Hoje: <b className="text-foreground">{fmtNum(viewsHoje)}</b> views.</>}
-        </div>
-      </div>
+        </div>} />
     </div>
   );
 }
@@ -397,9 +489,9 @@ function TermosNovos() {
         {termos.map((t) => {
           const estado = estadoNoVocab(vocab, t.grupo, t.valor);
           return (
-            <li key={`${t.grupo}:${t.valor}`} className={cx('rounded-lg border p-3', estado === 'pendente' ? 'border-dashed border-violet-300 bg-violet-50/50 dark:bg-violet-500/5 dark:border-violet-500/30' : 'border-border bg-muted/30')}>
+            <li key={`${t.grupo}:${t.valor}`} className={cx('rounded-lg border p-3', estado === 'pendente' ? 'border-dashed border-ai-border bg-ai-soft/50' : 'border-border bg-muted/30')}>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-[10px] uppercase tracking-wider text-violet-700 dark:text-violet-300 font-semibold">{GRUPO_NOME[t.grupo] ?? t.grupo}</span>
+                <span className="text-[10px] uppercase tracking-wider text-ai-ink font-semibold">{GRUPO_NOME[t.grupo] ?? t.grupo}</span>
                 <b className="truncate">{t.valor}</b>
               </div>
               <p className="text-xs text-muted-foreground mt-1">{t.definicao}</p>
@@ -584,7 +676,7 @@ function Corpo({ r, media, onIdea, ideaBusy, nota, temNota }: { r: Row; media?: 
           {/* 1. o porquê, primeiro: é a pergunta de quem abre */}
           <Campo label={tituloPorQue(v.ficha.medidas.xPerfil)} icon={<ScanSearch />} paths={['porQue']}
             aside={<span className="text-[11px] text-muted-foreground">hipótese da IA</span>}
-            className="rounded-xl border border-violet-200 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/25 p-4">
+            className="rounded-xl border border-ai-border bg-ai-soft/60 p-4">
             <div className="text-[15px] leading-relaxed"><EditText path="porQue" value={porQue} multiline placeholder="hipótese de por que performou" onSave={(x) => edit('porQue', x.trim() ? `hipótese: ${x.trim().replace(/^hip[oó]tese:\s*/i, '')}` : null)} /></div>
           </Campo>
 
@@ -710,25 +802,6 @@ function useAnalisar(slug: string, compId: string, mk: string) {
   return { pedir, cancelar, busy: pedir.isPending || cancelar.isPending, erro: err?.message };
 }
 
-/** estado vazio de um conteúdo ainda sem análise: o convite é a ação principal da tela */
-function SemAnaliseConvite({ naFila, a }: { naFila: boolean; a: ReturnType<typeof useAnalisar> }) {
-  return (
-    <div className="rounded-xl border border-dashed border-violet-300 bg-violet-50/60 dark:bg-violet-500/5 dark:border-violet-500/30 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
-      <ScanSearch className="size-8 text-violet-600 shrink-0" strokeWidth={1.5} />
-      <div className="flex-1 min-w-0">
-        <div className="font-semibold">{naFila ? 'Na fila de análise' : 'Ainda sem análise'}</div>
-        <p className="text-sm text-muted-foreground mt-0.5">{naFila
-          ? 'Roda quando você pedir “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por item).'
-          : 'A IA lê o vídeo e devolve tema, tipo, gancho, gatilhos dos 5 s e por que funcionou. Grava o pedido; nada roda sozinho.'}</p>
-        {a.erro && <p className="text-xs text-destructive mt-1">{a.erro}</p>}
-      </div>
-      {naFila
-        ? <Button variant="ghost" disabled={a.busy} onClick={() => a.cancelar.mutate()} className="shrink-0">{a.busy ? <Spinner /> : 'Tirar da fila'}</Button>
-        : <Button disabled={a.busy} onClick={() => a.pedir.mutate()} className="shrink-0 inline-flex items-center gap-1.5">{a.busy ? <Spinner /> : <ScanSearch className="size-4" />}Analisar este</Button>}
-    </div>
-  );
-}
-
 // ───────────────────────── sem análise: o miolo ─────────────────────────
 /** coluna da esquerda sem ficha: os mesmos números (× perfil, × mercado, por seguidor) lidos da última coleta */
 function ColunaSimples({ r, media }: { r: Row; media?: string }) {
@@ -740,26 +813,16 @@ function ColunaSimples({ r, media }: { r: Row; media?: string }) {
         <Ratio v={r.outlierMercado} label="× mercado" tip={r.outlierMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
         <Ratio v={r.porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
       </div>
-      <Thumb r={r} media={media} className={cx('rounded-xl mx-auto', isVertical(r) ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')} />
-      <div>
-        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Números</div>
-        <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
-          {([['Views', m.views], ['Curtidas', m.likes], ['Comentários', m.comments], ['Envios', m.shares], ...(m.saves != null ? [['Salvos', m.saves]] : [])] as [string, number | undefined][]).map(([k, n]) => (
-            <div key={k} className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1">
-              <dt className="text-xs text-muted-foreground">{k}</dt><dd className="font-semibold tabular-nums">{fmtNum(n)}</dd>
-            </div>
-          ))}
-          <div className="flex items-baseline justify-between gap-2 border-b border-border/60 pb-1 col-span-2">
-            <dt className="text-xs text-muted-foreground">Engajamento</dt><dd className="font-semibold tabular-nums">{fmtPct(r.engagement)}</dd>
-          </div>
-        </dl>
-      </div>
+      <Tocavel r={r}>
+        <Thumb r={r} media={media} className={cx('rounded-xl mx-auto', isVertical(r) ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')} />
+      </Tocavel>
+      <Numeros r={r} md={{ ...m, seguidores: r.seguidores, engajamento: r.engagement }} />
     </div>
   );
 }
 
-function CorpoSemAnalise({ r, media, mar, suggestions, a, naFila, slug, ideaTitle, setIdeaTitle, ideaBusy, onIdea, focusIdea, ideaRef }: {
-  r: Row; media?: string; mar: Marcacao; suggestions: string[]; a: ReturnType<typeof useAnalisar>; naFila: boolean; slug: string;
+function CorpoSemAnalise({ r, media, mar, suggestions, slug, ideaTitle, setIdeaTitle, ideaBusy, onIdea, focusIdea, ideaRef }: {
+  r: Row; media?: string; mar: Marcacao; suggestions: string[]; slug: string;
   ideaTitle: string; setIdeaTitle: (s: string) => void; ideaBusy: boolean; onIdea: () => void; focusIdea?: boolean; ideaRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const m = r.mark;
@@ -772,7 +835,6 @@ function CorpoSemAnalise({ r, media, mar, suggestions, a, naFila, slug, ideaTitl
     <div className="flex-1 min-h-0 grid lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)] overflow-y-auto lg:overflow-hidden">
       <aside className="lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-border bg-muted/30 p-5"><ColunaSimples r={r} media={media} /></aside>
       <div className="lg:overflow-y-auto p-6 space-y-6">
-        <SemAnaliseConvite naFila={naFila} a={a} />
         {r.item.caption && r.item.caption !== r.item.title && (
           <details open={!r.item.title}>
             <summary className="text-xs font-medium text-muted-foreground uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
@@ -816,8 +878,8 @@ export interface ItemPanelProps {
 }
 
 /**
- * Um painel só para o conteúdo (042): mesma moldura com ou sem análise (cabeçalho, coluna da mídia e dos números, rodapé com favorito,
- * status, Virar ideia e Analisar/Reanalisar). O miolo muda: com análise = abas da ficha; sem = convite "Analisar este" + nota, tags e ideia.
+ * Um painel só para o conteúdo (042): mesma moldura com ou sem análise (cabeçalho com todas as ações: favorito,
+ * status, Virar ideia, Analisar/Reanalisar em roxo de IA e Abrir original; coluna da mídia tocável e dos números). O miolo muda: com análise = abas da ficha; sem = legenda, nota, tags e ideia.
  */
 export function ItemPanel(p: ItemPanelProps) {
   const res = useFichasResumo(p.slug);
@@ -850,35 +912,82 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
       <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
         <DialogContent aria-describedby={undefined}
           className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
-          <header className="flex items-center gap-3 px-6 py-3.5 pr-14 border-b border-border">
-            <PlatformIcon platform={r.platform} size={20} />
-            <div className="min-w-0 flex-1">
-              <DialogTitle className="text-base font-semibold leading-snug truncate" title={titleOf(r)}>{titleOf(r)}</DialogTitle>
-              <DialogDescription className="text-xs text-muted-foreground mt-0.5 truncate">
-                {platformLabel(r.platform)} · {TYPE_LABEL[r.item.type] ?? r.item.type}{profileLabel ? ` · ${profileLabel}` : ''}
-                {r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : ' · data desconhecida'}
-                {' · '}<a href={r.item.url} target="_blank" rel="noreferrer" className="text-primary-ink inline-flex items-center gap-0.5">abrir original<ExternalLink className="size-3" /></a>
-              </DialogDescription>
+          {/* cabeçalho: o que é (esquerda) e TODAS as ações (direita): marcar, virar ideia, IA (roxo) e abrir o original (cor do projeto) */}
+          <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">
+            <div className="flex items-center gap-3 min-w-0 flex-1 basis-[320px]">
+              <PlatformIcon platform={r.platform} size={20} />
+              <div className="min-w-0 flex-1">
+                <DialogTitle className="text-base font-semibold leading-snug truncate" title={titleOf(r)}>{titleOf(r)}</DialogTitle>
+                <DialogDescription className="text-xs text-muted-foreground mt-0.5 flex items-center gap-2 min-w-0">
+                  <span className="truncate">
+                    {platformLabel(r.platform)} · {TYPE_LABEL[r.item.type] ?? r.item.type}{profileLabel ? ` · ${profileLabel}` : ''}
+                    {r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : ' · data desconhecida'}
+                  </span>
+                  {a && (
+                    <Tip content={`Análise de ${a.modelo} em ${fmtDate(a.geradoEm)}.\nClique em qualquer valor para corrigir: o que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-ai-soft text-ai-ink text-[11px] font-medium px-2 py-px shrink-0 cursor-help"><Sparkles className="size-3" />Análise da IA · {fmtDate(a.geradoEm)}</span>
+                    </Tip>
+                  )}
+                  {rel && (
+                    <Tip content={`Este conteúdo é citado no relatório de ${fmtDate(rel.gerado)}.\nAbre o relatório.`}>
+                      <button type="button" onClick={() => setRelAberto(true)} className="inline-flex items-center gap-1 rounded-full border border-ai-border text-ai-ink hover:bg-ai-soft text-[11px] font-medium px-2 py-px shrink-0">
+                        <FileText className="size-3" />Relatório de origem
+                      </button>
+                    </Tip>
+                  )}
+                  {fq.saving && <span className="inline-flex items-center gap-1 shrink-0"><Spinner />salvando</span>}
+                </DialogDescription>
+              </div>
             </div>
-            {fq.saving && <span className="text-xs text-muted-foreground inline-flex items-center gap-1"><Spinner />salvando</span>}
-            {rel && (
-              <Tip content={`Este conteúdo é citado no relatório de ${fmtDate(rel.gerado)}.\nAbre o relatório.`}>
-                <button type="button" onClick={() => setRelAberto(true)} className="inline-flex items-center gap-1 rounded-full border border-violet-300 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-500/10 text-[11px] font-medium px-2 py-0.5 shrink-0">
-                  <FileText className="size-3" />Relatório de origem
-                </button>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <Tip content={m?.updated ? `Marcado ${timeAgo(m.updated)}` : undefined}>
+                <span className="inline-flex items-center gap-2">
+                  <FavStar on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="size-5" />
+                  <SelectField size="sm" aria-label="Status" value={m?.status ?? 'nova'} options={STATUS_OPTS} onChange={(x) => onMark({ status: x as ItemMark['status'] })} className="!h-8" />
+                </span>
               </Tip>
-            )}
-            {a ? (
-              <Tip content={`Análise de ${a.modelo} em ${fmtDate(a.geradoEm)}.\nO que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
-                <span className="inline-flex items-center gap-1 rounded-full bg-violet-600 text-white text-[11px] font-medium px-2 py-0.5 shrink-0"><Sparkles className="size-3" />Análise da IA · {fmtDate(a.geradoEm)}</span>
-              </Tip>
-            ) : !analisada && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground text-[11px] font-medium px-2 py-0.5 shrink-0">{naFila ? <><Clock className="size-3" />Na fila</> : 'Sem análise'}</span>
-            )}
+              {m?.ideaId ? (
+                <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 h-8 px-2 text-sm font-medium text-success-ink"><Lightbulb className="size-4" />Ideia {m.ideaId}</Link>
+              ) : (
+                <Button variant="soft" disabled={ideaBusy || (analisada && !v)} className="inline-flex items-center gap-1.5 h-8"
+                  onClick={() => analisada
+                    ? ideiaAnalisada((v?.campos.headline?.texto || titleOf(r)).slice(0, 120))
+                    : (ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }))}>
+                  {ideaBusy ? <Spinner /> : <Lightbulb className="size-4" />}Virar ideia
+                </Button>
+              )}
+
+              <span className="w-px h-6 bg-border mx-1" aria-hidden />
+
+              {an.erro && <span className="text-xs text-destructive max-w-48 truncate" title={an.erro}>{an.erro}</span>}
+              {naFila ? (
+                <Tip content={`${analisada ? 'Reanálise' : 'Análise'} na fila: roda quando você pedir “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por item).`}>
+                  <span className="inline-flex items-center h-8 rounded-md bg-ai-soft text-ai-ink text-sm font-medium pl-2.5 pr-1 gap-1.5">
+                    <Clock className="size-4" />Na fila
+                    <button type="button" disabled={an.busy} onClick={() => an.cancelar.mutate()} aria-label="Tirar da fila" className="grid place-items-center size-6 rounded hover:bg-ai-muted">
+                      {an.busy ? <Spinner /> : <X className="size-3.5" />}
+                    </button>
+                  </span>
+                </Tip>
+              ) : (
+                <Tip content={analisada
+                  ? 'Pede uma nova análise (entra na fila de fichas; roda com “roda a fila de fichas” no Claude Code). Suas edições continuam.'
+                  : 'A IA lê o conteúdo e devolve tema, tipo, gancho, gatilhos dos 5 s e por que funcionou.\nGrava o pedido na fila; nada roda sozinho (≈ US$ 0,08 por item).'}><span>
+                  <Button variant={analisada ? 'ai-soft' : 'ai'} disabled={an.busy} onClick={() => an.pedir.mutate()} className="inline-flex items-center gap-1.5 h-8">
+                    {an.busy ? <Spinner /> : analisada ? <RefreshCw className="size-3.5" /> : <ScanSearch className="size-4" />}{analisada ? 'Reanalisar' : 'Analisar'}
+                  </Button>
+                </span></Tip>
+              )}
+              <a href={r.item.url} target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition">
+                <ExternalLink className="size-4" />Abrir original
+              </a>
+            </div>
           </header>
 
           {!analisada ? (
-            <CorpoSemAnalise r={r} media={media} mar={mar} suggestions={tagSuggestions} a={an} naFila={naFila} slug={slug} ideaTitle={ideaTitle} setIdeaTitle={setIdeaTitle}
+            <CorpoSemAnalise r={r} media={media} mar={mar} suggestions={tagSuggestions} slug={slug} ideaTitle={ideaTitle} setIdeaTitle={setIdeaTitle}
               ideaBusy={ideaBusy} onIdea={ideiaSimples} focusIdea={focusIdea} ideaRef={ideaRef} />
           ) : !ctx ? (
             <div className="flex-1 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>
@@ -888,36 +997,6 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
                 nota={<CamposMarcacao mar={mar} suggestions={tagSuggestions} />} temNota={!!(m?.note || m?.tags.length)} />
             </FCtx.Provider>
           )}
-
-          <footer className="flex flex-wrap items-center gap-x-3 gap-y-2 px-6 py-3 border-t border-border bg-muted/30">
-            <FavStar on={!!m?.favorite} onClick={() => onMark({ favorite: !m?.favorite })} size="size-5" />
-            <SelectField size="sm" aria-label="Status" value={m?.status ?? 'nova'} options={STATUS_OPTS} onChange={(x) => onMark({ status: x as ItemMark['status'] })} />
-            {m?.ideaId ? (
-              <Link to={`/p/${slug}/ideias`} className="inline-flex items-center gap-1 text-sm font-medium text-success-ink"><Sparkles className="size-3.5" />Virou a ideia {m.ideaId}</Link>
-            ) : analisada ? (
-              <Button variant="soft" disabled={ideaBusy || !v} className="inline-flex items-center gap-1.5"
-                onClick={() => ideiaAnalisada((v?.campos.headline?.texto || titleOf(r)).slice(0, 120))}>
-                {ideaBusy ? <Spinner /> : <Lightbulb className="size-4" />}Virar ideia
-              </Button>
-            ) : (
-              <Button variant="soft" disabled={ideaBusy} className="inline-flex items-center gap-1.5"
-                onClick={() => { ideaRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); ideaRef.current?.querySelector('input')?.focus({ preventScroll: true }); }}>
-                <Lightbulb className="size-4" />Virar ideia
-              </Button>
-            )}
-            {m?.updated && <span className="text-xs text-muted-foreground hidden lg:inline">marcado {timeAgo(m.updated)}</span>}
-            {analisada && <span className="text-xs text-muted-foreground hidden xl:inline">Clique em qualquer valor para corrigir. O que você muda fica guardado à parte e vale sobre a IA.</span>}
-            {analisada && (
-              <span className="ml-auto inline-flex items-center gap-2">
-                {an.erro && <span className="text-xs text-destructive">{an.erro}</span>}
-                {naFila
-                  ? <><span className="text-xs text-muted-foreground inline-flex items-center gap-1"><Clock className="size-3.5" />Reanálise na fila</span><Button variant="ghost" disabled={an.busy} onClick={() => an.cancelar.mutate()}>Tirar da fila</Button></>
-                  : <Tip content="Entra na fila de fichas; roda com “roda a fila de fichas” no Claude Code. Suas edições continuam."><span>
-                    <Button variant="ghost" disabled={an.busy} onClick={() => an.pedir.mutate()} className="inline-flex items-center gap-1.5">{an.busy ? <Spinner /> : <RefreshCw className="size-3.5" />}Reanalisar</Button>
-                  </span></Tip>}
-              </span>
-            )}
-          </footer>
         </DialogContent>
       </Dialog>
       {relAberto && rel && (

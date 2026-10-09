@@ -75,7 +75,7 @@ export function AnalisarMenu({ s, rede, ordem }: { s: Selecao; rede: string; ord
       <PopoverTrigger asChild>
         <button type="button" title="Selecionar conteúdos para a IA analisar (Top 10, Top 20 ou as caixas da lista)"
           className={cx('h-8 inline-flex items-center gap-1.5 rounded-md border px-2.5 text-sm font-medium transition whitespace-nowrap',
-            s.itens.length ? 'border-violet-300 bg-violet-50 text-violet-800' : 'border-border bg-card text-foreground hover:bg-muted')}>
+            s.itens.length ? 'border-ai-border bg-ai-soft text-ai-ink' : 'border-border bg-card text-foreground hover:bg-muted')}>
           <ScanSearch className="size-4" />Analisar<ChevronDown className="size-3.5 text-muted-foreground" />
         </button>
       </PopoverTrigger>
@@ -160,7 +160,7 @@ export function AnalisarDialog({ open, onOpenChange, s, fila, compName, onDone }
                   <li key={r.mk} className="flex items-center gap-1.5 text-xs min-w-0">
                     <PlatformIcon platform={r.platform} size={13} />
                     <span className="truncate">{titleOf(r)}</span>
-                    {s.analisada(r) && <span className="ml-auto shrink-0 text-[10px] text-violet-700">reanálise</span>}
+                    {s.analisada(r) && <span className="ml-auto shrink-0 text-[10px] text-ai-ink">reanálise</span>}
                   </li>
                 ))}
                 {rs.length > 5 && <li className="text-[11px] text-muted-foreground">+ {rs.length - 5} outro(s)</li>}
@@ -227,11 +227,11 @@ export function FilaFaixa({ fila }: { fila: Fila }) {
   if (s.running) {
     const n = s.pedidos.reduce((a, p) => a + p.itens.length, 0);
     return (
-      <div className="mb-3 rounded-xl border border-violet-300/60 bg-violet-50/70" role="status" aria-live="polite">
+      <div className="mb-3 rounded-xl border border-ai-border/60 bg-ai-soft/70" role="status" aria-live="polite">
         <div className="flex items-center gap-3 px-4 py-2.5 text-sm">
           <span className="relative flex size-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-500 opacity-60" />
-            <span className="relative inline-flex size-2.5 rounded-full bg-violet-600" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ai opacity-60" />
+            <span className="relative inline-flex size-2.5 rounded-full bg-ai" />
           </span>
           <span className="min-w-0 truncate"><b className="font-semibold">IA analisando {n} conteúdo{n === 1 ? '' : 's'}</b> · {s.passo ?? 'trabalhando'}</span>
           <span className="text-xs text-muted-foreground whitespace-nowrap">{since(s.started)}</span>

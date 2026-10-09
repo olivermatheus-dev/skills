@@ -98,8 +98,8 @@ export function AnalyzedBadge({ ficha, compact }: { ficha: FichaSelo; compact?: 
   return (
     <Tip content={tip}>
       <span aria-label={label} className={cx('inline-flex items-center gap-1 rounded-md font-medium whitespace-nowrap shrink-0', compact ? 'p-0.5' : 'px-1.5 py-0.5 text-[11px] shadow-sm',
-        estado === 'analisado' ? (compact ? 'text-violet-600' : 'bg-violet-600 text-white')
-        : estado === 'analisando' ? (compact ? 'text-violet-600' : 'bg-violet-100 text-violet-800 ring-1 ring-violet-300')
+        estado === 'analisado' ? (compact ? 'text-ai' : 'bg-ai text-white')
+        : estado === 'analisando' ? (compact ? 'text-ai' : 'bg-ai-muted text-ai-ink ring-1 ring-ai-border')
         : (compact ? 'text-muted-foreground' : 'bg-black/65 text-white'))}>
         {estado === 'analisado' ? <Sparkles className="size-3" /> : estado === 'analisando' ? <Loader2 className="size-3 animate-spin" /> : <Clock className="size-3" />}{!compact && label}
       </span>
@@ -199,7 +199,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
           )}
           {relatorio && onRelatorio && (
             <Tip content={`Relatório: citado em ${fmtDate(relatorio.gerado)}. Clique para abrir.`}>
-              <button type="button" onClick={onRelatorio} aria-label="Abrir o relatório que cita este conteúdo" className="ml-auto inline-flex items-center text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-500/10 p-1 rounded-md"><FileText className="size-3.5" /></button>
+              <button type="button" onClick={onRelatorio} aria-label="Abrir o relatório que cita este conteúdo" className="ml-auto inline-flex items-center text-ai-ink hover:bg-ai-soft p-1 rounded-md"><FileText className="size-3.5" /></button>
             </Tip>
           )}
           <a href={r.item.url} target="_blank" rel="noreferrer" className={cx(!relatorio && 'ml-auto', 'text-muted-foreground hover:text-foreground px-1')} title={`Abrir no ${platformLabel(r.platform)}`}><ExternalLink className="size-3.5" /></a>

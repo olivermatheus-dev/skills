@@ -7,7 +7,8 @@
    Nomes: background (fundo da página) · card (superfícies) · muted (superfície 2 / hover neutro) ·
    muted-foreground (texto secundário) · primary (cor do projeto: botões, seleção, foco) · primary-soft (fundo
    claro da cor do projeto) · primary-ink (texto na cor do projeto, sempre com contraste ≥ 4,5:1 no branco) ·
-   accent (hover de menus, tingido) · success · warning · destructive. */
+   accent (hover de menus, tingido) · success · warning · destructive.
+   Semânticas por função: ai (+ ai-ink, ai-soft, ai-muted, ai-border) = roxo de tudo que é IA; nunca usar violet-* solto. */
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -34,6 +35,13 @@
   --success-ink: #166534; /* texto verde pequeno: >= 4,5:1 sobre branco e sobre success/15 */
   --warning: #d97706;
   --warning-ink: #b45309; /* texto âmbar pequeno: 5:1 sobre branco */
+  /* cores semânticas por função (não mudam com o projeto): ai = tudo que chama ou mostra a IA (analisar, hipótese, termo proposto…) */
+  --ai: #7c3aed;
+  --ai-foreground: #ffffff;
+  --ai-ink: #6d28d9; /* texto roxo pequeno: >= 4,5:1 sobre branco e sobre ai-soft */
+  --ai-soft: color-mix(in oklab, var(--ai) 7%, white);
+  --ai-muted: color-mix(in oklab, var(--ai) 14%, white);
+  --ai-border: color-mix(in oklab, var(--ai) 35%, white);
   --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: var(--primary);
@@ -72,6 +80,12 @@
   --color-success-ink: var(--success-ink);
   --color-warning: var(--warning);
   --color-warning-ink: var(--warning-ink);
+  --color-ai: var(--ai);
+  --color-ai-foreground: var(--ai-foreground);
+  --color-ai-ink: var(--ai-ink);
+  --color-ai-soft: var(--ai-soft);
+  --color-ai-muted: var(--ai-muted);
+  --color-ai-border: var(--ai-border);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

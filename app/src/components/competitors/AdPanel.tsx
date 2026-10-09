@@ -145,7 +145,7 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
                                 </Tip>
                               </>
                               : origem === 'ia'
-                                ? <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 text-violet-800 dark:bg-violet-500/20 dark:text-violet-300 text-[11px] font-semibold px-2 py-0.5"><Sparkles className="size-3" />IA</span>
+                                ? <span className="inline-flex items-center gap-1 rounded-full bg-ai-muted text-ai-ink text-[11px] font-semibold px-2 py-0.5"><Sparkles className="size-3" />IA</span>
                                 : <span className={cx('text-[11px]', auto.confiancaCampos[f.k] < 0.5 ? 'text-warning-ink' : 'text-muted-foreground')}>regra · {Math.round(auto.confiancaCampos[f.k] * 100)}%{auto.confiancaCampos[f.k] < 0.5 ? ' (incerto)' : ''}</span>}
                           </div>
                           <p className="mt-1 text-xs text-muted-foreground leading-snug">

@@ -109,12 +109,12 @@ export function QueueChip({ slug, c }: { slug: string; c: Competitor }) {
   }
   const mods = r.modules.map((m) => MOD[m]?.label ?? m).join(', ');
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs bg-violet-50 border border-violet-200 text-violet-800 rounded-full pl-2 pr-1 py-0.5"
+    <span className="inline-flex items-center gap-1.5 text-xs bg-ai-soft border border-ai-border text-ai-ink rounded-full pl-2 pr-1 py-0.5"
       title={`${mods} · pedido ${timeAgo(r.requestedAt)}`}>
       <Hourglass className="size-3" />na fila da IA · {r.modules.length}
       <RodarAnalise slug={slug} comp={c.id} titulo={`Rodar a análise de ${c.name}`} mods={mods.toLowerCase()} onFeito={() => { atualizar(); refresh(); }}
-        trigger={<button className="inline-flex items-center gap-0.5 rounded-full bg-violet-600 text-white px-1.5 py-px hover:bg-violet-700"><Play className="size-3" />Rodar agora</button>} />
-      <button className="px-1 rounded-full hover:bg-violet-100" onClick={cancel} aria-label="Cancelar pedido">×</button>
+        trigger={<button className="inline-flex items-center gap-0.5 rounded-full bg-ai text-white px-1.5 py-px hover:bg-ai-ink"><Play className="size-3" />Rodar agora</button>} />
+      <button className="px-1 rounded-full hover:bg-ai-muted" onClick={cancel} aria-label="Cancelar pedido">×</button>
     </span>
   );
 }
@@ -139,7 +139,7 @@ export function FilaAnalise({ slug, fila }: { slug: string; fila: { id: string; 
     <RodarAnalise slug={slug} titulo={`Rodar a fila de análise (${fila.length} concorrente${fila.length > 1 ? 's' : ''})`}
       mods={fila.map((f) => `${f.name} (${f.modules.map((m) => MOD[m as ModuleId]?.label.toLowerCase() ?? m).join(', ')})`).join('; ')}
       onFeito={() => { atualizar(); refresh(); }}
-      trigger={<button className="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100">
+      trigger={<button className="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-ai-soft text-ai-ink border border-ai-border hover:bg-ai-muted">
         <Hourglass className="size-3.5" />{fila.length} na fila da IA · <span className="inline-flex items-center gap-0.5 font-medium"><Play className="size-3" />Rodar agora</span>
       </button>} />
   );
@@ -223,7 +223,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
                 <span className="font-medium">{m.label}</span>
                 <span className="text-[10px] px-1.5 rounded-full font-medium" style={{ background: `${ENGINE[m.engine].color}18`, color: ENGINE[m.engine].color }} title={ENGINE[m.engine].title}>{ENGINE[m.engine].label}</span>
                 <span className={cx('ml-auto text-xs', r && !stale ? 'text-muted-foreground' : m.id === 'redes' ? 'text-muted-foreground' : 'text-warning-ink')}>
-                  {d?.request?.modules.includes(m.id) ? <span className="text-violet-600">na fila</span> : r ? `${timeAgo(r.updatedAt)}${stale ? ' (velho)' : ''}` : m.id === 'redes' ? 'perfis e conteúdos' : 'nunca'}
+                  {d?.request?.modules.includes(m.id) ? <span className="text-ai">na fila</span> : r ? `${timeAgo(r.updatedAt)}${stale ? ' (velho)' : ''}` : m.id === 'redes' ? 'perfis e conteúdos' : 'nunca'}
                 </span>
               </label>
             );

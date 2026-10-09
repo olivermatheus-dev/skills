@@ -117,7 +117,11 @@ export interface Row {
   porSeguidorBasis?: 'views' | 'likes';
   /** `porSeguidor` ÷ mediana de `porSeguidor` do mercado (mesmo escopo/amostra de `outlierMercado`) */
   porSeguidorMercado?: number;
+  /** (curtidas + comentários + envios) ÷ views; sem views fica undefined (o painel mostra ÷ seguidores, rotulado) */
   engagement?: number;
+  /** curtidas + comentários + envios (o que a rede expõe) e seguidores do perfil na mesma coleta */
+  interacoes?: number;
+  seguidores?: number;
   viewsDelta?: number;
   prevAt?: string;
   history: { at: string; views?: number; likes?: number }[];
@@ -146,6 +150,7 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
       const mk = `${platform}:${item.id}`;
       rows.push({
         mk, profileKey: g.key, platform, item, outlier, outlierBasis: useViews ? 'views' : 'likes', porSeguidor, porSeguidorBasis: useViews ? 'views' : 'likes',
+        interacoes: item.metrics.likes != null || item.metrics.comments != null ? inter : undefined, seguidores: fol,
         engagement: v && (item.metrics.likes != null || item.metrics.comments != null) ? inter / v : undefined,
         viewsDelta: prev?.metrics.views != null && v != null ? v - prev.metrics.views : undefined,
         prevAt: prev ? g.prev!.data.collectedAt : undefined,
