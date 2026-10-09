@@ -64,7 +64,7 @@ export function parseItem(linha) {
   let quando = 'sempre';
   let agentes = [];
   for (const p0 of resto.split('·').map((x) => x.trim()).filter(Boolean)) {
-    const p = p0.replace(/^\(|\)$/g, '');
+    const p = /^\(.*\)$/.test(p0) ? p0.slice(1, -1).trim() : p0; // só tira parênteses que envolvem a parte inteira
     if (/^s[oó]\s*:/i.test(p)) agentes = p.replace(/^s[oó]\s*:\s*/i, '').split(',').map((x) => x.trim()).filter(Boolean);
     else if (/^quando\b/i.test(p)) quando = p.replace(/^quando\s*:?\s*/i, '').trim() || 'sempre';
     else if (/^sempre$/i.test(p)) quando = 'sempre';

@@ -57,3 +57,11 @@ Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-
 ## Log
 - 2026-10-08: registrada a pedido do Oliver (para tratar numa sessão limpa).
 - 2026-10-08: decisões do Oliver; molde, leitor, CLI, validate, pacote e ficha no app feitos; roteirista + ig-post migrados como exemplo. Próximo: resto da onda 1 (editor-de-video + video + plano-de-cenas · designer + carousel) com revisão Opus → aval do Oliver.
+- 2026-10-08: onda 1 no molde (revisão Opus): editor-de-video + video + plano-de-cenas, designer + carousel; check ✓ nos 7. Bug do leitor corrigido (parêntese no fim do "quando:"). Aguardando aval do Oliver.
+
+## Para o Oliver decidir (achados da onda 1)
+1. Tempo máximo sem nada novo na tela: `knowledge/video/REGRAS.md` diz 2–3 s, os Padrões do Oliver dizem ~1,5 s. As fichas seguem 1,5 s; alinhar o REGRAS.md?
+2. Template do carrossel: `.compare .yes` pinta uma coluna inteira em coral, e o BRAND.md da kz diz "coral nunca em blocos grandes". Trocar no template?
+3. `.inverse` usa `--primary` como padrão: numa empresa nova vira bloco coral cheio (na kz o brand.css já suaviza).
+4. BRAND.md da kz: "Sem serifa" × Fraunces itálico como serifa de destaque. Qual vale?
+5. `library/INDEX.md` citado na galeria do vídeo ainda não existe (tarefa 014).
