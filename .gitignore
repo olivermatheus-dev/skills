@@ -44,3 +44,5 @@ data/curadoria/
 
 # variantes de vídeo (045 B): a composição é gerada pelo variantes.mjs/compor a cada rodada
 companies/*/contents/*/variantes/*/composition.html
+# medidas de tela da base para o QC de sincronia (045 C): cache, refeito sozinho
+companies/*/contents/*/variantes/qc-base.json

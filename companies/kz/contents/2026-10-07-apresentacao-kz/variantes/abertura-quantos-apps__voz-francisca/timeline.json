@@ -10,16 +10,19 @@
     "stage": "draft"
   },
   "music": {
-    "bpm": 84,
+    "bpm": 90.2,
     "gain_db": -13,
     "duck": 0.7,
-    "file": "../../audio/cache/trilha-204e2c61bf00/audio/music.wav",
+    "file": "../../audio/cache/trilha-22f847166ef9/audio/music.wav",
     "id": null,
     "license": "própria (sintetizada no kit)",
-    "start": 6.169,
+    "start": 5.423,
     "ancora": {
       "cena": "s2",
-      "base_s": 5.142
+      "base_s": 5.142,
+      "fim": "s7",
+      "residuo_s": 0.006,
+      "andamento": 1.074
     }
   },
   "vo": [
@@ -96,64 +99,66 @@
         {
           "w": "Agenda",
           "s": 4.827,
-          "e": 5.277
+          "e": 5.381
         },
         {
           "w": "de",
-          "s": 5.277,
-          "e": 5.377
+          "s": 5.381,
+          "e": 5.494
         },
         {
           "w": "um",
-          "s": 5.377,
-          "e": 5.477
+          "s": 5.494,
+          "e": 5.622
         },
         {
           "w": "lado",
-          "s": 5.477,
-          "e": 5.927
+          "s": 5.622,
+          "e": 6.396
         },
         {
-          "w": "informações",
-          "s": 5.927,
-          "e": 6.627
+          "w": "Informações",
+          "s": 6.396,
+          "e": 7.234
         },
         {
           "w": "dos",
-          "s": 6.627,
-          "e": 6.802
+          "s": 7.234,
+          "e": 7.433
         },
         {
           "w": "pacientes",
-          "s": 6.802,
-          "e": 7.39
+          "s": 7.433,
+          "e": 8.101
         },
         {
           "w": "de",
-          "s": 7.39,
-          "e": 7.515
+          "s": 8.101,
+          "e": 8.214
         },
         {
           "w": "outro",
-          "s": 7.515,
-          "e": 7.977
+          "s": 8.214,
+          "e": 8.981
         },
         {
-          "w": "anotações",
-          "s": 7.977,
-          "e": 8.564
+          "w": "Anotações",
+          "s": 8.981,
+          "e": 9.677
         },
         {
           "w": "espalhadas",
-          "s": 8.564,
-          "e": 9.452
+          "s": 9.677,
+          "e": 10.649
         }
       ],
-      "length": 4.665,
-      "file": "../../audio/cache/vo/edge-francisca/7d6751189851.wav",
+      "length": 5.862,
+      "file": "../../audio/cache/vo/edge-francisca/03ba15219b8c.wav",
       "voice": "edge-francisca",
       "start": 4.787,
-      "end": 9.452
+      "say": "Agenda de um lado. Informações dos pacientes de outro. Anotações espalhadas…",
+      "rate": "-12%",
+      "end": 10.649
     },
     {
       "id": "f3",
@@ -161,70 +166,70 @@
       "words": [
         {
           "w": "E",
-          "s": 9.892,
-          "e": 9.992
+          "s": 11.089,
+          "e": 11.189
         },
         {
           "w": "no",
-          "s": 9.992,
-          "e": 10.104
+          "s": 11.189,
+          "e": 11.301
         },
         {
           "w": "fim",
-          "s": 10.104,
-          "e": 10.405
+          "s": 11.301,
+          "e": 11.602
         },
         {
           "w": "sobra",
-          "s": 10.405,
-          "e": 10.78
+          "s": 11.602,
+          "e": 11.977
         },
         {
           "w": "menos",
-          "s": 10.78,
-          "e": 11.092
+          "s": 11.977,
+          "e": 12.289
         },
         {
           "w": "tempo",
-          "s": 11.092,
-          "e": 11.379
+          "s": 12.289,
+          "e": 12.576
         },
         {
           "w": "para",
-          "s": 11.379,
-          "e": 11.542
+          "s": 12.576,
+          "e": 12.739
         },
         {
           "w": "aquilo",
-          "s": 11.542,
-          "e": 11.892
+          "s": 12.739,
+          "e": 13.089
         },
         {
           "w": "que",
-          "s": 11.892,
-          "e": 12.017
+          "s": 13.089,
+          "e": 13.214
         },
         {
           "w": "realmente",
-          "s": 12.017,
-          "e": 12.542
+          "s": 13.214,
+          "e": 13.739
         },
         {
           "w": "importa",
-          "s": 12.542,
-          "e": 13.267
+          "s": 13.739,
+          "e": 14.464
         },
         {
           "w": "atender",
-          "s": 13.267,
-          "e": 13.784
+          "s": 14.464,
+          "e": 14.981
         }
       ],
       "length": 3.932,
       "file": "../../audio/cache/vo/edge-francisca/dc9777a142e5.wav",
       "voice": "edge-francisca",
-      "start": 9.852,
-      "end": 13.784
+      "start": 11.049,
+      "end": 14.981
     },
     {
       "id": "f4",
@@ -232,110 +237,110 @@
       "words": [
         {
           "w": "A",
-          "s": 14.674,
-          "e": 14.799
+          "s": 15.871,
+          "e": 15.996
         },
         {
           "w": "kz",
-          "s": 14.799,
-          "e": 15.162
+          "s": 15.996,
+          "e": 16.359
         },
         {
           "w": "é",
-          "s": 15.162,
-          "e": 15.211
+          "s": 16.359,
+          "e": 16.408
         },
         {
           "w": "uma",
-          "s": 15.211,
-          "e": 15.374
+          "s": 16.408,
+          "e": 16.571
         },
         {
           "w": "plataforma",
-          "s": 15.374,
-          "e": 16.024
+          "s": 16.571,
+          "e": 17.221
         },
         {
           "w": "feita",
-          "s": 16.024,
-          "e": 16.399
+          "s": 17.221,
+          "e": 17.596
         },
         {
           "w": "para",
-          "s": 16.399,
-          "e": 16.587
+          "s": 17.596,
+          "e": 17.784
         },
         {
           "w": "terapeutas",
-          "s": 16.587,
-          "e": 17.249
+          "s": 17.784,
+          "e": 18.446
         },
         {
           "w": "que",
-          "s": 17.249,
-          "e": 17.386
+          "s": 18.446,
+          "e": 18.583
         },
         {
           "w": "querem",
-          "s": 17.386,
-          "e": 17.649
+          "s": 18.583,
+          "e": 18.846
         },
         {
           "w": "deixar",
-          "s": 17.649,
-          "e": 18.049
+          "s": 18.846,
+          "e": 19.246
         },
         {
           "w": "a",
-          "s": 18.049,
-          "e": 18.112
+          "s": 19.246,
+          "e": 19.309
         },
         {
           "w": "gestão",
-          "s": 18.112,
-          "e": 18.499
+          "s": 19.309,
+          "e": 19.696
         },
         {
           "w": "da",
-          "s": 18.499,
-          "e": 18.624
+          "s": 19.696,
+          "e": 19.821
         },
         {
           "w": "rotina",
-          "s": 18.624,
-          "e": 19.061
+          "s": 19.821,
+          "e": 20.258
         },
         {
           "w": "mais",
-          "s": 19.061,
-          "e": 19.299
+          "s": 20.258,
+          "e": 20.496
         },
         {
           "w": "simples",
-          "s": 19.299,
-          "e": 19.899
+          "s": 20.496,
+          "e": 21.096
         },
         {
           "w": "organizada",
-          "s": 19.899,
-          "e": 20.674
+          "s": 21.096,
+          "e": 21.871
         },
         {
           "w": "e",
-          "s": 20.674,
-          "e": 20.736
+          "s": 21.871,
+          "e": 21.933
         },
         {
           "w": "profissional",
-          "s": 20.736,
-          "e": 21.417
+          "s": 21.933,
+          "e": 22.614
         }
       ],
       "length": 6.783,
       "file": "../../audio/cache/vo/edge-francisca/760ab0604222.wav",
       "voice": "edge-francisca",
-      "start": 14.634,
-      "end": 21.417
+      "start": 15.831,
+      "end": 22.614
     },
     {
       "id": "f5",
@@ -343,95 +348,95 @@
       "words": [
         {
           "w": "Tudo",
-          "s": 21.907,
-          "e": 22.157
+          "s": 23.104,
+          "e": 23.354
         },
         {
           "w": "pensado",
-          "s": 22.157,
-          "e": 22.682
+          "s": 23.354,
+          "e": 23.879
         },
         {
           "w": "para",
-          "s": 22.682,
-          "e": 22.882
+          "s": 23.879,
+          "e": 24.079
         },
         {
           "w": "você",
-          "s": 22.882,
-          "e": 23.17
+          "s": 24.079,
+          "e": 24.367
         },
         {
           "w": "acompanhar",
-          "s": 23.17,
-          "e": 23.769
+          "s": 24.367,
+          "e": 24.966
         },
         {
           "w": "seus",
-          "s": 23.769,
-          "e": 23.957
+          "s": 24.966,
+          "e": 25.154
         },
         {
           "w": "atendimentos",
-          "s": 23.957,
-          "e": 24.669
+          "s": 25.154,
+          "e": 25.866
         },
         {
           "w": "e",
-          "s": 24.669,
-          "e": 24.794
+          "s": 25.866,
+          "e": 25.991
         },
         {
           "w": "organizar",
-          "s": 24.794,
-          "e": 25.419
+          "s": 25.991,
+          "e": 26.616
         },
         {
           "w": "seu",
-          "s": 25.419,
-          "e": 25.644
+          "s": 26.616,
+          "e": 26.841
         },
         {
           "w": "dia",
-          "s": 25.644,
-          "e": 25.957
+          "s": 26.841,
+          "e": 27.154
         },
         {
           "w": "a",
-          "s": 25.957,
-          "e": 26.02
+          "s": 27.154,
+          "e": 27.217
         },
         {
           "w": "dia",
-          "s": 26.02,
-          "e": 26.357
+          "s": 27.217,
+          "e": 27.554
         },
         {
           "w": "com",
-          "s": 26.357,
-          "e": 26.532
+          "s": 27.554,
+          "e": 27.729
         },
         {
           "w": "muito",
-          "s": 26.532,
-          "e": 26.857
+          "s": 27.729,
+          "e": 28.054
         },
         {
           "w": "menos",
-          "s": 26.857,
-          "e": 27.182
+          "s": 28.054,
+          "e": 28.379
         },
         {
           "w": "complicação",
-          "s": 27.182,
-          "e": 27.927
+          "s": 28.379,
+          "e": 29.124
         }
       ],
       "length": 6.06,
       "file": "../../audio/cache/vo/edge-francisca/21d9a78b2206.wav",
       "voice": "edge-francisca",
-      "start": 21.867,
-      "end": 27.927
+      "start": 23.064,
+      "end": 29.124
     },
     {
       "id": "f6",
@@ -439,55 +444,55 @@
       "words": [
         {
           "w": "Menos",
-          "s": 28.467,
-          "e": 28.854
+          "s": 29.664,
+          "e": 30.051
         },
         {
           "w": "tempo",
-          "s": 28.854,
-          "e": 29.142
+          "s": 30.051,
+          "e": 30.339
         },
         {
           "w": "administrando",
-          "s": 29.142,
-          "e": 30.317
+          "s": 30.339,
+          "e": 31.514
         },
         {
           "w": "Mais",
-          "s": 30.317,
-          "e": 30.592
+          "s": 31.514,
+          "e": 31.789
         },
         {
           "w": "tempo",
-          "s": 30.592,
-          "e": 30.917
+          "s": 31.789,
+          "e": 32.114
         },
         {
           "w": "cuidando",
-          "s": 30.917,
-          "e": 31.405
+          "s": 32.114,
+          "e": 32.602
         },
         {
           "w": "dos",
-          "s": 31.405,
-          "e": 31.555
+          "s": 32.602,
+          "e": 32.752
         },
         {
           "w": "seus",
-          "s": 31.555,
-          "e": 31.755
+          "s": 32.752,
+          "e": 32.952
         },
         {
           "w": "pacientes",
-          "s": 31.755,
-          "e": 32.52
+          "s": 32.952,
+          "e": 33.717
         }
       ],
       "length": 4.093,
       "file": "../../audio/cache/vo/edge-francisca/29fa0c8fc113.wav",
       "voice": "edge-francisca",
-      "start": 28.427,
-      "end": 32.52
+      "start": 29.624,
+      "end": 33.717
     },
     {
       "id": "f7",
@@ -495,85 +500,85 @@
       "words": [
         {
           "w": "Conheça",
-          "s": 33.01,
-          "e": 33.447
+          "s": 34.207,
+          "e": 34.644
         },
         {
           "w": "a",
-          "s": 33.447,
-          "e": 33.51
+          "s": 34.644,
+          "e": 34.707
         },
         {
           "w": "kz",
-          "s": 33.51,
-          "e": 34.01
+          "s": 34.707,
+          "e": 35.207
         },
         {
           "w": "e",
-          "s": 34.01,
-          "e": 34.098
+          "s": 35.207,
+          "e": 35.295
         },
         {
           "w": "descubra",
-          "s": 34.098,
-          "e": 34.648
+          "s": 35.295,
+          "e": 35.845
         },
         {
           "w": "uma",
-          "s": 34.648,
-          "e": 34.823
+          "s": 35.845,
+          "e": 36.02
         },
         {
           "w": "forma",
-          "s": 34.823,
-          "e": 35.16
+          "s": 36.02,
+          "e": 36.357
         },
         {
           "w": "mais",
-          "s": 35.16,
-          "e": 35.46
+          "s": 36.357,
+          "e": 36.657
         },
         {
           "w": "simples",
-          "s": 35.46,
-          "e": 35.885
+          "s": 36.657,
+          "e": 37.082
         },
         {
           "w": "de",
-          "s": 35.885,
-          "e": 35.985
+          "s": 37.082,
+          "e": 37.182
         },
         {
           "w": "cuidar",
-          "s": 35.985,
-          "e": 36.372
+          "s": 37.182,
+          "e": 37.569
         },
         {
           "w": "da",
-          "s": 36.372,
-          "e": 36.497
+          "s": 37.569,
+          "e": 37.694
         },
         {
           "w": "sua",
-          "s": 36.497,
-          "e": 36.71
+          "s": 37.694,
+          "e": 37.907
         },
         {
           "w": "rotina",
-          "s": 36.71,
-          "e": 37.173
+          "s": 37.907,
+          "e": 38.37
         },
         {
           "w": "profissional",
-          "s": 37.173,
-          "e": 37.828
+          "s": 38.37,
+          "e": 39.025
         }
       ],
       "length": 4.858,
       "file": "../../audio/cache/vo/edge-francisca/8fe53e9dd479.wav",
       "voice": "edge-francisca",
-      "start": 32.97,
-      "end": 37.828
+      "start": 34.167,
+      "end": 39.025
     }
   ],
   "camadas": [
@@ -608,7 +613,7 @@
       "on_screen": "*Agenda* de um lado,|*Pacientes* de outro,|*Anotações* espalhadas…",
       "note": "3 cards aparecem nas palavras, tortos e espalhados, com leve deriva",
       "start": 4.687,
-      "end": 9.702,
+      "end": 10.899,
       "params": {
         "cards": [
           "Agenda",
@@ -628,8 +633,8 @@
       "tail": 0.35,
       "on_screen": "E no fim, sobra *menos* tempo|para aquilo que realmente importa:|atender.",
       "note": "barra de tempo encolhe em 'menos'; 'atender' em Fraunces itálico",
-      "start": 9.702,
-      "end": 14.134
+      "start": 10.899,
+      "end": 15.331
     },
     {
       "id": "s4",
@@ -642,8 +647,8 @@
       "tail": 0.3,
       "on_screen": "Feita para terapeutas|A gestão da sua rotina mais|simples|organizada|profissional",
       "note": "logo kz desenha na palavra KZ; 3 pílulas nas palavras",
-      "start": 14.134,
-      "end": 21.717
+      "start": 15.331,
+      "end": 22.914
     },
     {
       "id": "s5",
@@ -656,8 +661,8 @@
       "tail": 0.3,
       "on_screen": "Boa tarde,|Ana|Tudo pensado para *você*|Acompanhe seus *atendimentos*|Organize seu *dia a dia*",
       "note": "painel recriado nos tokens do app (dados ilustrativos); destaque nos atendimentos e no dia a dia",
-      "start": 21.717,
-      "end": 28.227
+      "start": 22.914,
+      "end": 29.424
     },
     {
       "id": "s6",
@@ -670,8 +675,8 @@
       "tail": 0.3,
       "on_screen": "Menos tempo administrando.|Mais tempo *cuidando* dos seus pacientes.",
       "note": "a 1ª linha encolhe e apaga; a 2ª entra com 'cuidando' em Fraunces",
-      "start": 28.227,
-      "end": 32.82
+      "start": 29.424,
+      "end": 34.017
     },
     {
       "id": "s7",
@@ -684,8 +689,8 @@
       "tail": 1.6,
       "on_screen": "Conheça a kz|kz.app.br|Plataforma para terapeutas|Uma forma *mais simples* de cuidar da sua rotina.",
       "note": "logo + convite + botão; cursor clica",
-      "start": 32.82,
-      "end": 39.428
+      "start": 34.017,
+      "end": 40.625
     }
   ],
   "events": [
@@ -735,7 +740,7 @@
       "word": "f2:informações",
       "offset": -0.12,
       "target": "#c2",
-      "t": 5.807,
+      "t": 6.276,
       "scene": "s2"
     },
     {
@@ -745,7 +750,7 @@
       "word": "f2:anotações",
       "offset": -0.12,
       "target": "#c3",
-      "t": 7.857,
+      "t": 8.861,
       "scene": "s2"
     },
     {
@@ -755,7 +760,7 @@
       "word": "f2:espalhadas",
       "offset": 0,
       "target": ".warn",
-      "t": 8.564,
+      "t": 9.677,
       "scene": "s2"
     },
     {
@@ -765,7 +770,7 @@
       "scene": "s2",
       "before_end": 0.32,
       "target": "#s2",
-      "t": 9.382
+      "t": 10.579
     },
     {
       "id": "e9",
@@ -774,7 +779,7 @@
       "scene": "s3",
       "at": 0.02,
       "target": "#t1",
-      "t": 9.722
+      "t": 10.919
     },
     {
       "id": "e10",
@@ -783,7 +788,7 @@
       "word": "f3:menos",
       "offset": -0.08,
       "target": "#ring",
-      "t": 10.7,
+      "t": 11.897,
       "scene": "s3"
     },
     {
@@ -793,7 +798,7 @@
       "word": "f3:para",
       "offset": -0.12,
       "target": "#t2",
-      "t": 11.259,
+      "t": 12.456,
       "scene": "s3"
     },
     {
@@ -803,7 +808,7 @@
       "word": "f3:atender",
       "offset": -0.12,
       "target": "#t3",
-      "t": 13.147,
+      "t": 14.344,
       "scene": "s3"
     },
     {
@@ -813,7 +818,7 @@
       "scene": "s3",
       "before_end": 0.3,
       "target": "#s3",
-      "t": 13.834
+      "t": 15.031
     },
     {
       "id": "e14",
@@ -822,7 +827,7 @@
       "scene": "s4",
       "at": 0.02,
       "target": "#logo",
-      "t": 14.154
+      "t": 15.351
     },
     {
       "id": "e15",
@@ -831,7 +836,7 @@
       "word": "f4:kz",
       "offset": -0.1,
       "target": "#logo",
-      "t": 14.699,
+      "t": 15.896,
       "scene": "s4"
     },
     {
@@ -841,7 +846,7 @@
       "word": "f4:feita",
       "offset": -0.12,
       "target": "#tag",
-      "t": 15.904,
+      "t": 17.101,
       "scene": "s4"
     },
     {
@@ -851,7 +856,7 @@
       "word": "f4:gestão",
       "offset": -0.15,
       "target": "#h4",
-      "t": 17.962,
+      "t": 19.159,
       "scene": "s4"
     },
     {
@@ -861,7 +866,7 @@
       "word": "f4:simples",
       "offset": -0.1,
       "target": "#p1",
-      "t": 19.199,
+      "t": 20.396,
       "scene": "s4"
     },
     {
@@ -871,7 +876,7 @@
       "word": "f4:organizada",
       "offset": -0.1,
       "target": "#p2",
-      "t": 19.799,
+      "t": 20.996,
       "scene": "s4"
     },
     {
@@ -881,7 +886,7 @@
       "word": "f4:profissional",
       "offset": -0.1,
       "target": "#p3",
-      "t": 20.636,
+      "t": 21.833,
       "scene": "s4"
     },
     {
@@ -891,7 +896,7 @@
       "scene": "s5",
       "at": 0,
       "target": "#app",
-      "t": 21.717
+      "t": 22.914
     },
     {
       "id": "e22",
@@ -900,7 +905,7 @@
       "word": "f5:acompanhar",
       "offset": -0.12,
       "target": "#next",
-      "t": 23.05,
+      "t": 24.247,
       "scene": "s5"
     },
     {
@@ -910,7 +915,7 @@
       "word": "f5:organizar",
       "offset": -0.12,
       "target": "#list",
-      "t": 24.674,
+      "t": 25.871,
       "scene": "s5"
     },
     {
@@ -920,7 +925,7 @@
       "word": "f5:complicação",
       "offset": -0.15,
       "target": "#done",
-      "t": 27.032,
+      "t": 28.229,
       "scene": "s5"
     },
     {
@@ -930,7 +935,7 @@
       "scene": "s5",
       "before_end": 0.3,
       "target": "#app",
-      "t": 27.927
+      "t": 29.124
     },
     {
       "id": "e26",
@@ -939,7 +944,7 @@
       "scene": "s6",
       "at": 0.02,
       "target": "#l1",
-      "t": 28.247
+      "t": 29.444
     },
     {
       "id": "e27",
@@ -948,7 +953,7 @@
       "word": "f6:administrando",
       "offset": 0.25,
       "target": "#strike",
-      "t": 29.392,
+      "t": 30.589,
       "scene": "s6"
     },
     {
@@ -958,7 +963,7 @@
       "word": "f6:mais",
       "offset": -0.12,
       "target": "#l2",
-      "t": 30.197,
+      "t": 31.394,
       "scene": "s6"
     },
     {
@@ -968,7 +973,7 @@
       "word": "f6:cuidando",
       "offset": -0.05,
       "target": "#heart",
-      "t": 30.867,
+      "t": 32.064,
       "scene": "s6"
     },
     {
@@ -978,7 +983,7 @@
       "scene": "s7",
       "at": 0.02,
       "target": "#end",
-      "t": 32.84
+      "t": 34.037
     },
     {
       "id": "e31",
@@ -987,7 +992,7 @@
       "word": "f7:descubra",
       "offset": -0.1,
       "target": "#cta",
-      "t": 33.998,
+      "t": 35.195,
       "scene": "s7"
     },
     {
@@ -997,7 +1002,7 @@
       "word": "f7:rotina",
       "offset": -0.1,
       "target": "#endsub",
-      "t": 36.61,
+      "t": 37.807,
       "scene": "s7"
     },
     {
@@ -1007,7 +1012,7 @@
       "scene": "s7",
       "before_end": 1,
       "target": "#cta",
-      "t": 38.428
+      "t": 39.625
     }
   ],
   "sfx": [
@@ -1239,7 +1244,7 @@
       "max": 0.5
     }
   ],
-  "duration": 39.428,
+  "duration": 40.625,
   "origem": "../..",
   "nome_export": "kz-apresentacao__abertura-quantos-apps__voz-francisca",
   "variante": {

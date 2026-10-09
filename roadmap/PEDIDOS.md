@@ -7,13 +7,13 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 1 | 045 | **Fase C (sincronia por variante):** QC por variante (§5: leitura, palavra presa, `min_s`, gancho ≤ 3 s, texto × cartões, trilha), correção automática e relatório curto para o LLM (`ajustes` no `projeto.json`) | fases A e B feitas |
+| 1 | 045 | **Fase D (app):** aba Variantes no projeto de vídeo — Fluxo (React Flow) + Matriz, selo do QC (`indice.json > qc`, `sincronia.md`), Gerar variantes (faixa de progresso), baixar, anotar (revisão 022), aprovar/descartar | fases A, B e C feitas |
 | 2 | 046 | **Atividade da IA e das coletas:** fases A–E feitas (dock, passos ao vivo, coletas como trabalho em segundo plano, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano, página Agentes + hooks do terminal); próxima: **fase F** (fila de verdade) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
-| 045 | assistir às 3 aberturas da rodada 1 (`contents/2026-10-07-apresentacao-kz/variantes/abertura-*__voz-thalita/exports/`) e escolher a vencedora (vira `rodadas.r2`; as 9 da matriz já existem em 9:16) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
+| 045 | assistir às 3 aberturas da rodada 1 (`contents/2026-10-07-apresentacao-kz/variantes/abertura-*__voz-thalita/exports/`) e escolher a vencedora (vira `rodadas.r2`; as 9 da matriz já existem em 4:5 e 9:16, sincronia ok) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
 | 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |
 | 040 | aceitar/recusar os 4 termos novos do relatório de anúncios da Corpora · revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |
 | 041 | avaliar as 8 ideias I-0001…I-0008 (app → Ideias) · aceitar as fontes (app → Ideias → Fontes, "Aceitar as 36 conferidas") · decidir as 7 "não conferido" · criar chave grátis do OpenAlex (`OPENALEX_API_KEY`) · podcasts/newsletters/criadores que ele segue |

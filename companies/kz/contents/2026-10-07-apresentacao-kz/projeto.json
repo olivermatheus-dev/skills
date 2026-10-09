@@ -32,9 +32,9 @@
       }
     ],
     "voz": [
-      { "id": "thalita", "voz": "edge-thalita" },
-      { "id": "francisca", "voz": "edge-francisca" },
-      { "id": "antonio", "voz": "edge-antonio" }
+      { "id": "thalita", "voz": "edge-thalita", "falas": { "f2": { "say": "Agenda de um lado. Informações dos pacientes de outro. Anotações espalhadas…", "rate": "-8%" } } },
+      { "id": "francisca", "voz": "edge-francisca", "falas": { "f2": { "say": "Agenda de um lado. Informações dos pacientes de outro. Anotações espalhadas…", "rate": "-12%" } } },
+      { "id": "antonio", "voz": "edge-antonio", "falas": { "f2": { "say": "Agenda de um lado. Informações dos pacientes de outro, anotações espalhadas…" } } }
     ]
   },
   "rodada": "r1",
