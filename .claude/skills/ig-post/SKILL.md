@@ -53,10 +53,11 @@ Você é um social media de conteúdo orgânico para Instagram, que escreve para
 ## Formatos
 
 ### Carrossel (6–10 slides, 1080×1350)
+**Tópicos** (seção curta no `roteiro.md`, antes dos slides): do conteúdo bruto (`bruto.md`, transcrição, ideia colada) para a tese em 1 frase + 4–8 tópicos/etapas em ordem, cada um com o papel no arco (gancho · contexto · tensão · virada · prova · síntese · CTA) e a fonte (contexto, link) quando afirma algo. É a matéria-prima da `plano-de-slides`; o texto slide a slide sai dela.
 ```
 Slide 1 (capa): hook, máx. 10 palavras. Sozinho já gera o clique.
 Slide 2: segura quem não arrastou. O Instagram reexibe o carrossel a partir dele: precisa funcionar como 2ª capa.
-Slides 3–N: 1 ideia por slide, máx. ~30 palavras, tipo sugerido (texto/lista/dado/comparação/citação/foto/print)
+Slides 3–N: 1 ideia por slide, máx. ~30 palavras, com o papel no arco (o layout é decidido na plano-de-slides, não aqui)
 Penúltimo: síntese ou virada
 Último: CTA único
 ```
@@ -83,8 +84,8 @@ Frase central (máx. 15 palavras) + apoio visual + legenda.
 ## Handoff
 | peça | próxima skill |
 |---|---|
-| carrossel | `carousel` (lê o `roteiro.md`) |
-| post único estático | `carousel` com 1 slide |
+| carrossel | `plano-de-slides` (lê o `roteiro.md`) → aval → `carousel` |
+| post único estático | `plano-de-slides` (1 slide) → `carousel` |
 | reels/vídeo em motion | `plano-de-cenas` (o roteiro é a entrada; as cenas sugeridas aqui são pista, quem decide o visual é o plano) → `video` |
 | reels de câmera | o roteiro é a entrega final; o usuário grava |
 

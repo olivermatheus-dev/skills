@@ -1,0 +1,18 @@
+<!-- família: pilha · papel: contexto ou tensão (o acúmulo, a bagunça, as camadas) · densidade: densa
+     slots: .pilha-topo (t-lead ou t-sub curto) · .pilha com 3–5 .card (ícone + frase ≤ 5 palavras + rótulo opcional)
+     regra da cascata: card de 168 px com passo vertical de 140 px (sobreposição ~17%), zigue-zague horizontal de 24–136 px,
+     rotação 0 (ordem) ou alternando ±0,5–2° (caos legível); o último card fica por cima.
+     variações: caos (rotação) · ordem (rotação 0, alinhados) · o motivo do carrossel (mesmos ícones da capa) -->
+<section class="slide fundo-creme" data-layout="pilha">
+  <div class="pilha-topo">
+    <p class="t-sub">Meu consultório, por muito tempo:</p>
+  </div>
+  <div class="pilha">
+    <div class="card" style="left:0; top:0; transform:rotate(-2deg); z-index:1"><span class="icone">{{icone:calendar}}</span><p>Agenda num app.</p></div>
+    <div class="card" style="left:112px; top:140px; transform:rotate(1.5deg); z-index:2"><span class="icone">{{icone:message-circle}}</span><p>Conversa no WhatsApp.</p></div>
+    <div class="card" style="left:24px; top:280px; transform:rotate(-.5deg); z-index:3"><span class="icone">{{icone:video}}</span><p>Sessão no Meet.</p></div>
+    <div class="card" style="left:136px; top:420px; transform:rotate(2deg); z-index:4"><span class="icone">{{icone:notebook-pen}}</span><p>Notas no caderno.</p></div>
+    <div class="card alto" style="left:48px; top:560px; transform:rotate(-1deg); z-index:5"><span class="icone">{{icone:globe}}</span><p>Perfil num site.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca">{{logo}}</span><span class="pag"><b>{{n}}</b>/{{t}}</span></footer>
+</section>

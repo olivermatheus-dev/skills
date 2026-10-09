@@ -45,7 +45,8 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `setup` | criar/atualizar o contexto de uma empresa |
 | `content-ideas` | pautas, calendário, engenharia reversa de criadores |
 | `ig-post` | roteiro de carrossel, reels, post e legenda |
-| `carousel` | gerar o carrossel em HTML e exportar PNG |
+| `plano-de-slides` | plano do carrossel antes do HTML: roteiro → papel no arco → leitura de design + motivo → família, herói, fundo, camadas e ligação por slide → regras de ritmo → wireframes (`node tools/carrossel/plano.mjs`) → aval |
+| `carousel` | motor do carrossel/post: sistema de layout (grade, 12 famílias, camadas) a partir do `slides.json` → PNG + `contato.png` → lint (`node tools/carrossel/check.mjs`) → crítica isolada (revisor Opus) e implementação, até 3 rodadas |
 | `mockup` | print → mockups premium em 3× (iPhone/iPad/MacBook/iMac/Pixel reais, vidro, perspectiva, duo/trio/leque/pilha, zoom, cards, anotações, transparente), sugere cortes no print, alternativas + folha de contato · galeria: `node tools/mockup/galeria.mjs` |
 | `ads-meta` | criar e analisar anúncios Meta/Instagram |
 | `landing-page` | LP, página de captura, carta de vendas, VSL |
@@ -63,7 +64,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
 - Vídeo: `fmt-trailer-lancamento`, `fmt-recorte-funcionalidade`, `fmt-texto-cinetico`, `fmt-dialogo`, `fmt-3d-produto`.
 
-Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` (imagem) ou `plano-de-cenas` → `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
+Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `plano-de-slides` → `carousel` (imagem) ou `plano-de-cenas` → `video` (motion). Venda: `COPY.md` → `landing-page` + `ads-meta`.
 
 ## Ao terminar uma tarefa
 - Salve a peça na pasta certa (acima).

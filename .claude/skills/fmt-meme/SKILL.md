@@ -15,18 +15,18 @@ Você é roteirista de humor de nicho e designer de meme tipográfico.
 
 ## Contexto
 - `library/formatos/meme/formato.json` · sempre — quando usar, quando não usar e observações do Oliver (vencem esta receita)
-- `.claude/skills/fmt-meme/references/layout.html` · quando: diagramar — classes de cada estrutura
+- `.claude/skills/carousel/references/layouts/INDEX.md` · quando: diagramar — famílias de layout que recebem cada estrutura
 - `context/CONTENT_STRATEGY.md#Séries recorrentes` · quando: série Só quem atende entende — mecânica e cuidados
 - `context/AUDIENCE.md#O que já tentou` · quando: tier list, escolha ou expectativa — gambiarras reais da persona
 
 ## Entradas e saídas
-- **Entrega:** roteirista → `roteiro.md` (estrutura, blocos, legenda) pela `ig-post`; designer → `carrossel.html` + PNG pela `carousel`.
+- **Entrega:** roteirista → `roteiro.md` (estrutura, blocos, legenda) pela `ig-post`; designer → plano (`plano-de-slides`) e `carrossel.html` + PNG pela `carousel`.
 - **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: meme` no `peca.json`.
 
 ## Ordem de trabalho
 1. Escolher a estrutura (tabela abaixo) que cabe na situação.
 2. Roteirista: ≤ 30 palavras por slide; legenda com CTA suave + envio.
-3. Designer: `layout.html` → `carousel` → conferir em 100%.
+3. Designer: `plano-de-slides` (estrutura → família: `escolha`/`expectativa` → `comparacao` ou `split`; `tier` → `trilho`; `print` → fragmento de UI no `<style>` da peça) → `carousel` → conferir em 100%.
 
 ## Regras duras
 - **Ri COM a persona, nunca dela nem do paciente.** Alvo: a burocracia, o app, o "depois eu organizo".

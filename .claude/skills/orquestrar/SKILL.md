@@ -88,7 +88,7 @@ Você é um produtor executivo de agência criativa que também desenha sistemas
 | vídeo (motion) | roteirista (roteiro, via `fmt-*`) → editor-de-video (skill `plano-de-cenas`: cenas.json + revisão crítica pelo revisor/Opus + storyboard) → **aval do Oliver** → editor-de-video (voz + timeline) → **sound-designer (trilha + efeitos) ∥ editor-de-video (cenas)** → editor-de-video (render) → revisor (QA) → Oliver |
 | concorrentes / referências / ideias | pesquisador (radar → **aval da lista** → coleta) → Oliver marca no painel → pesquisador (analisa só o marcado → ideias) → Oliver aprova ideia → estrategista (ficha de pauta) → roteirista → produção |
 | trilha sonora / sons | sound-designer (Modo A ou C da skill `audio`) → **Oliver ouve** |
-| carrossel / post | roteirista (roteiro + legenda) → designer (PNG) → revisor → Oliver |
+| carrossel / post | roteirista (`ig-post`: tópicos + roteiro + legenda) → designer (`plano-de-slides`: slides.json + wireframes) → **aval do Oliver** → designer (`carousel`: HTML + PNG + check) → revisor/Opus (crítica isolada, `critica-N.md`) → designer em sessão limpa (implementa; aceita só se a nota subir; máx. 3 rodadas) → Oliver |
 | LP / carta / VSL | roteirista (landing-page) → revisor → Oliver |
 | anúncios | roteirista (ads-meta: ângulos e textos) → designer e/ou editor-de-video (criativos) → revisor → Oliver |
 | pautas / calendário | estrategista (content-ideas) → Oliver escolhe → (vira tarefas de conteúdo) |
@@ -101,7 +101,7 @@ Todo agente está no molde (`references/ficha.md`): o contexto da função já v
 | agente | `skills:` típicas | `context:` específico (exemplos) |
 |---|---|---|
 | roteirista | `ig-post` · `landing-page` · `ads-meta` | pauta ou briefing da peça; `context/COPY.md#Big Idea` e `#Mecanismo único` quando o tema pedir |
-| designer | `carousel` | `contents/<pasta>/roteiro.md`; o logo (`brand/logo/<arquivo>`) se a peça usa |
+| designer | `plano-de-slides` · `carousel` | `contents/<pasta>/roteiro.md` (plano) ou `slides.json` (produção) ou `critica-N.md` (implementação) |
 | editor-de-video | `plano-de-cenas` · `video` · `elevenlabs` (voz final) | `contents/<pasta>/roteiro.md` ou `plano.md` da peça |
 | sound-designer | `audio` | `contents/<pasta>/plano.md` da peça |
 | estrategista | `content-ideas` · `launch-plan` | `context/COMPETITORS.md#Nosso ângulo / gaps` em pauta ou lançamento |

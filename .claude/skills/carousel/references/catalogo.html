@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Catálogo de famílias · carrossel (kz)</title>
+<!-- GERADO por scripts/catalogo.mjs a partir de references/layouts/*.html — edite os fragmentos, não este arquivo -->
+<link rel="stylesheet" href="../../../../companies/kz/brand/brand.css">
+<link rel="stylesheet" href="sistema.css">
+</head>
+<body>
+<!-- família: capa-tipografica · papel: gancho · densidade: leve
+     slots: eyebrow (opcional, ≤ 4 palavras) · .capa-motivo (o motivo do carrossel entrando pelo alto e sangrando
+     120–240 px à direita = pista de deslize) · h1.t-display (≤ 10 palavras, 3–4 linhas) · .t-lead (apoio ≤ 10 palavras)
+     variações: sem motivo (só tipo, título sobe para o meio-baixo) · fundo tom-100 · ênfase serifa na palavra da virada
+     tokens: {{icone:nome}} = node tools/icon.mjs nome --brand <slug> · {{logo}} = logo da marca com fill currentColor
+     rodapé da capa: sem marca, só "arraste" -->
+<section class="slide fundo-creme" data-layout="capa-tipografica">
+  <p class="eyebrow">Carta do fundador</p>
+  <div class="capa-motivo" data-sangra>
+    <div class="card janela-mini" style="left:560px; top:176px; z-index:1"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span><span>Agenda</span></div>
+    <div class="card janela-mini" style="left:632px; top:236px; z-index:2"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span><span>WhatsApp</span></div>
+    <div class="card janela-mini" style="left:704px; top:296px; z-index:3"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span><span>Meet</span></div>
+    <div class="card janela-mini" style="left:776px; top:356px; z-index:4"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span><span>Caderno</span></div>
+    <div class="card janela-mini alto" style="left:848px; top:416px; z-index:5"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><span>Site</span></div>
+  </div>
+  <div class="capa-texto">
+    <h1 class="t-display">Eu também queria só <span class="enf-serifa">atender.</span></h1>
+    <p class="t-lead">Por que um terapeuta construiu a kz</p>
+  </div>
+  <footer class="rodape"><span></span><span class="arraste">arraste <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></footer>
+</section>
+
+<!-- família: split · papel: contexto (2ª capa), tensão ou virada em 2 tempos · densidade: média
+     slots: .split-campo (fundo-tom-200/100/800, a ideia 1: âncora t-titulo ancorada embaixo do campo) ·
+     .split-resto (a ideia 2: t-lead + um detalhe com função: régua, chips, fio)
+     variações: horizontal 58/42 (padrão) · .vertical (campo à esquerda em 3 colunas) · campo escuro (tom-800/900)
+     a costura entre campo e fundo é o "corte" entre as duas ideias: não ponha texto atravessando -->
+<section class="slide fundo-tom-50" data-layout="split">
+  <div class="split-campo fundo-tom-200">
+    <p class="t-rotulo">Quem escreve</p>
+    <h2 class="t-titulo">Sou hipnoterapeuta. Atendo pacientes até hoje.</h2>
+  </div>
+  <div class="split-resto">
+    <p class="t-lead">E por muito tempo meu consultório viveu espalhado em 5 apps.</p>
+    <div class="regua" style="--n:5">
+      <span><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span><span class="t-nota">Agenda</span></span>
+      <span><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span><span class="t-nota">WhatsApp</span></span>
+      <span><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span><span class="t-nota">Meet</span></span>
+      <span><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span><span class="t-nota">Caderno</span></span>
+      <span><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><span class="t-nota">Site</span></span>
+    </div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>02</b>/12</span></footer>
+</section>
+
+<!-- família: pilha · papel: contexto ou tensão (o acúmulo, a bagunça, as camadas) · densidade: densa
+     slots: .pilha-topo (t-lead ou t-sub curto) · .pilha com 3–5 .card (ícone + frase ≤ 5 palavras + rótulo opcional)
+     regra da cascata: card de 168 px com passo vertical de 140 px (sobreposição ~17%), zigue-zague horizontal de 24–136 px,
+     rotação 0 (ordem) ou alternando ±0,5–2° (caos legível); o último card fica por cima.
+     variações: caos (rotação) · ordem (rotação 0, alinhados) · o motivo do carrossel (mesmos ícones da capa) -->
+<section class="slide fundo-creme" data-layout="pilha">
+  <div class="pilha-topo">
+    <p class="t-sub">Meu consultório, por muito tempo:</p>
+  </div>
+  <div class="pilha">
+    <div class="card" style="left:0; top:0; transform:rotate(-2deg); z-index:1"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span><p>Agenda num app.</p></div>
+    <div class="card" style="left:112px; top:140px; transform:rotate(1.5deg); z-index:2"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span><p>Conversa no WhatsApp.</p></div>
+    <div class="card" style="left:24px; top:280px; transform:rotate(-.5deg); z-index:3"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span><p>Sessão no Meet.</p></div>
+    <div class="card" style="left:136px; top:420px; transform:rotate(2deg); z-index:4"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span><p>Notas no caderno.</p></div>
+    <div class="card alto" style="left:48px; top:560px; transform:rotate(-1deg); z-index:5"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><p>Perfil num site.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>03</b>/12</span></footer>
+</section>
+
+<!-- família: campo · papel: tensão, virada ou respiro · densidade: leve
+     slots: .campo-alto (a primeira metade da frase, t-sub em --s-fg2) · .campo-baixo (o golpe, t-titulo/t-display em --s-fg)
+     o meio vazio é o assunto (o cansaço, a pausa): não preencha. Fundo sólido da escala: tom-800/900 (escuro) ou tom-200/300.
+     variações: frase única ancorada embaixo · frase única no alto · .campo-fio (hairline curta no meio, marca a pausa) -->
+<section class="slide fundo-tom-900" data-layout="campo">
+  <p class="campo-alto t-sub" style="font-weight:500">No fim do dia, eu não estava cansado de atender.</p>
+  <h2 class="campo-baixo t-display">Estava cansado de <span class="enf-cor">gerenciar.</span></h2>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>04</b>/12</span></footer>
+</section>
+
+<!-- família: trilho · papel: prova, contexto, passo a passo, síntese · densidade: média
+     slots: .trilho-topo (eyebrow opcional + t-titulo) · ul.trilho-lista com 3–5 li (nó com ícone ou número real + frase ≤ 5 palavras)
+     o trilho vertical liga os nós: use quando os itens são da mesma família (mesma dor, passos de um processo).
+     número no nó só se houver sequência real (passo 1, 2, 3); senão, ícone Lucide.
+     variações: 3 itens (padrão, 168 px por linha) · 5 itens (linha 144 px, frase 44 px) -->
+<section class="slide fundo-creme" data-layout="trilho">
+  <div class="trilho-topo">
+    <p class="eyebrow">Perguntei a colegas terapeutas</p>
+    <h2 class="t-titulo">Ouvi a mesma dor, de novo e de novo.</h2>
+  </div>
+  <ul class="trilho-lista">
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span></span><p>Organizar a rotina.</p></li>
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></span></span><p>Lembrar dos agendamentos.</p></li>
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span></span><p>Documentar as sessões.</p></li>
+  </ul>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>05</b>/12</span></footer>
+</section>
+
+<!-- família: fluxo · papel: virada, mecanismo, "como funciona" · densidade: média
+     slots: .fluxo-topo (t-titulo) · .fluxo com 3–5 .no (ícone + nome) e 1 .destino (card) + svg.fios (curvas de 2 px) · .fluxo-pe (t-corpo)
+     geometria: nós de 72 px a cada 104 px (centros 36, 140, 244, 348, 452); destino centrado em y 244;
+     fio = C do fim do nó (x 296) ao início do destino (x 544), alças em x 420. Sem seta, sem decoração.
+     variações: convergência N → 1 (padrão) · sequência 1 → 2 → 3 em linha · divergência 1 → N -->
+<section class="slide fundo-tom-100" data-layout="fluxo">
+  <div class="fluxo-topo">
+    <h2 class="t-titulo">Não era a gente.</h2>
+    <p class="t-sub" style="color:var(--s-fg2); font-weight:500">Era o jeito de trabalhar.</p>
+  </div>
+  <div class="fluxo">
+    <svg class="fios" viewBox="0 0 888 488" width="888" height="488">
+      <path d="M296 36 C420 36 420 244 544 244"/><path d="M296 140 C420 140 420 244 544 244"/><path d="M296 244 L544 244"/>
+      <path d="M296 348 C420 348 420 244 544 244"/><path d="M296 452 C420 452 420 244 544 244"/>
+    </svg>
+    <div class="no" style="top:0"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>Agenda</div>
+    <div class="no" style="top:104px"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>WhatsApp</div>
+    <div class="no" style="top:208px"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>Meet</div>
+    <div class="no" style="top:312px"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>Caderno</div>
+    <div class="no" style="top:416px"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>Site</div>
+    <div class="destino card alto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg><p>Uma tela só.</p></div>
+  </div>
+  <p class="fluxo-pe t-corpo">Empilhar ferramentas, quando a sessão precisa de uma tela só.</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>06</b>/12</span></footer>
+</section>
+
+<!-- família: zoom · papel: prova (a funcionalidade de verdade) · densidade: média
+     slots: .zoom-topo (t-titulo + t-corpo opcional) · .zoom-quadro com um fragmento de UI ampliado 1,4–2× (transform: scale)
+     e cortado pela moldura · .moldura com 4 marcas de registro · .anota (fio + ponto + frase ≤ 10 palavras) apontando o detalhe ·
+     t-nota "dados ilustrativos" quando a tela tem nomes/horários fictícios.
+     UI: só tokens e medidas do BRAND.md > UI do produto; nada de painel inventado (recrie a tela real ou use print de brand/screenshots/).
+     o .ui-brilho é o único gradiente aceito no carrossel inteiro (1 slide) -->
+<section class="slide fundo-creme" data-layout="zoom">
+  <div class="zoom-topo">
+    <h2 class="t-titulo">A sessão no centro.</h2>
+  </div>
+  <div class="zoom-quadro">
+    <div class="ui-janela" style="left:-16px; top:-40px; width:760px; transform:scale(1.32)">
+      <div class="ui-brilho"></div>
+      <div style="position:relative; padding:72px 36px 64px 36px; display:flex; flex-direction:column; gap:28px">
+        <p class="ui-rotulo"><span class="vivo"></span>Próxima sessão · em 20 min</p>
+        <div style="display:flex; gap:20px; align-items:center">
+          <span class="ui-avatar">AL</span>
+          <div><p class="ui-nome">Ana L.</p><p class="ui-det">15:00 · 15:50 · Online · 2ª sessão</p></div>
+        </div>
+        <div style="display:flex; gap:12px">
+          <span class="ui-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Iniciar sessão</span>
+          <span class="ui-btn sec"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Ver prontuário</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="anota" style="left:var(--s-m); top:var(--zy-nota); width:var(--c6)">
+    <span class="fio" style="left:var(--zx-fio); top:calc(var(--zy-ponto) - var(--zy-nota)); width:2px; height:calc(var(--zy-nota) - var(--zy-ponto) - 16px)"></span>
+    <span class="ponto" style="left:calc(var(--zx-fio) - 7px); top:calc(var(--zy-ponto) - var(--zy-nota) - 8px)"></span>
+    <p class="t-corpo" style="padding-left:calc(var(--zx-fio) + 32px)">A chamada abre aqui. Sem link para procurar.</p>
+  </div>
+  <p class="t-nota" style="position:absolute; right:var(--s-m); top:calc(var(--zy-quadro-fim) + 24px)">dados ilustrativos</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>07</b>/12</span></footer>
+</section>
+
+<!-- família: numero · papel: prova (dado com fonte), decisão, passo · densidade: leve
+     slots: .num-titulo (t-sub: a frase que o número prova) · .num-bloco (t-giga 1–3 algarismos + .num-legenda t-sub "o que é") ·
+     .num-ficha (hairline + 2 fatos curtos com t-rotulo em cima: ficha técnica)
+     número só do contexto (BUSINESS/COPY/PRODUTO) e com fonte; nada de número redondo inventado.
+     variações: numeral em --font-accent romano (class "serifa") quando não há outra serifa a menos de 2 slides -->
+<section class="slide fundo-branco" data-layout="numero">
+  <h2 class="num-titulo t-sub">Então decidi construir esse lugar.</h2>
+  <div class="num-bloco">
+    <span class="t-giga">2</span>
+    <p class="num-legenda t-sub">anos de<br>desenvolvimento</p>
+  </div>
+  <div class="num-ficha">
+    <hr class="hairline">
+    <div><p class="t-rotulo">O quê</p><p class="t-corpo" style="font-size:36px">Um sistema só, com a sessão no centro.</p></div>
+    <div><p class="t-rotulo">Com quem</p><p class="t-corpo" style="font-size:36px">Uma terapeuta no time testando cada decisão.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>08</b>/12</span></footer>
+</section>
+
+<!-- família: citacao · papel: síntese, regra, voz do fundador · densidade: leve
+     slots: eyebrow (o contexto da frase) · .aspas (ornamento na serifa de destaque, cor --s-orn) ·
+     .cit-bloco (p.citacao-texto ≤ 14 palavras em --font-accent romano + .cit-autor: hairline curta + quem disse)
+     conta como uso da serifa de destaque: nenhuma ênfase serifa a menos de 2 slides.
+     autor real e verificável (ou o fundador); nunca citação inventada nem fala de paciente.
+     variações: fundo escuro tom-900 (padrão) · creme com aspas em tom-200 -->
+<section class="slide fundo-tom-900" data-layout="citacao">
+  <p class="eyebrow">Uma regra desde o começo</p>
+  <span class="aspas" aria-hidden="true">“</span>
+  <div class="cit-bloco">
+    <p class="citacao-texto">Se uma feature complica, não entra.</p>
+    <div class="cit-autor">
+      <hr class="hairline curta">
+      <p class="t-nota" style="color:var(--s-fg2)">Fundador da kz, hipnoterapeuta</p>
+    </div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>09</b>/12</span></footer>
+</section>
+
+<!-- família: comparacao · papel: virada, prova, antes × depois · densidade: densa
+     slots: .cmp-topo (t-titulo) · .cmp com 2 .cmp-col (.antes sem campo, .depois com campo --s-card): .cmp-cab (t-rotulo) +
+     2–3 .cmp-item (ícone + frase ≤ 6 palavras), as linhas das duas colunas na mesma altura
+     o lado bom ganha campo e peso, não cor nova; nada de vermelho × verde. Funcionalidade do "depois" só se existir (PRODUTO.md).
+     variações: 2 linhas (frases maiores, 44 px) · 3 linhas (padrão) -->
+<section class="slide fundo-creme" data-layout="comparacao">
+  <div class="cmp-topo">
+    <h2 class="t-titulo">O mesmo dia, de dois jeitos.</h2>
+  </div>
+  <div class="cmp">
+    <p class="cmp-cab t-rotulo">Antes</p>
+    <p class="cmp-cab t-rotulo">Com a kz</p>
+    <div class="cmp-item antes"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span><p>Lembrete manual.</p></div>
+    <div class="cmp-item depois"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></span><p>Confirmação no WhatsApp.</p></div>
+    <div class="cmp-item antes"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span><p>Link perdido na conversa.</p></div>
+    <div class="cmp-item depois"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></span><p>Videochamada na sessão.</p></div>
+    <div class="cmp-item antes"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span><p>Nota em outro lugar.</p></div>
+    <div class="cmp-item depois"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></span><p>Histórico ao lado.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>10</b>/12</span></footer>
+</section>
+
+<!-- família: capa-objeto · papel: gancho (capa alternativa) ou 2ª capa · densidade: média
+     slots: .co-texto (t-display ≤ 6 palavras ou t-titulo + t-lead) · .co-objeto (UM objeto real: fragmento de UI, card, print em
+     brand/screenshots/) sangrando 120–240 px à direita · t-nota "dados ilustrativos" ao lado do objeto quando houver dado fictício
+     o objeto é a prova do título; nunca ilustração de banco, ícone gigante ou mockup genérico.
+     variações: objeto sangrando por baixo (sem rodapé visível: mantenha só a paginação no .topo) · objeto = pilha do motivo -->
+<section class="slide fundo-tom-100" data-layout="capa-objeto">
+  <div class="co-texto">
+    <h1 class="t-display">De 5 apps para 1.</h1>
+    <p class="t-lead" style="max-width:var(--c5)">Agenda, conversa, sessão e notas no mesmo lugar.</p>
+  </div>
+    <div class="co-objeto ui-janela" data-sangra>
+    <div class="ui-cab"><h4>Hoje · 3 sessões</h4><span class="icone" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span></div>
+    <div class="ui-linha"><span class="ui-hora">08:00</span><span class="ui-avatar">AL</span><div><p class="ui-nome">Ana L.</p><p class="ui-det">4ª sessão</p></div><span class="ui-tipo online">Online</span></div>
+    <div class="ui-linha"><span class="ui-hora">10:30</span><span class="ui-avatar">BT</span><div><p class="ui-nome">Bruno T.</p><p class="ui-det">1ª sessão</p></div><span class="ui-tipo presencial">Presencial</span></div>
+    <div class="ui-linha"><span class="ui-hora">14:00</span><span class="ui-avatar">CS</span><div><p class="ui-nome">Clara S.</p><p class="ui-det">12ª sessão</p></div><span class="ui-tipo online">Online</span></div>
+  </div>
+  <p class="co-nota t-nota">dados ilustrativos</p>
+  <footer class="rodape"><span></span><span class="arraste">arraste <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></footer>
+</section>
+
+<!-- família: cta · papel: CTA (sempre o último) · densidade: leve
+     slots: .cta-texto (t-titulo: o pedido, ≤ 12 palavras) · .cta-resposta (t-rotulo com a ação + o "objeto da resposta":
+     régua de opções para comentar número, ou 1 botão .ui-btn para link na bio, ou o gesto de salvar)
+     UM pedido só (comentar OU salvar OU enviar OU link). Rodapé sem seta. A marca já está no rodapé: sem logo extra.
+     variações: fundo tom-800 (padrão) · tom-200 · creme com régua em cards -->
+<section class="slide fundo-tom-800" data-layout="cta">
+  <h2 class="cta-texto t-display">E você: <span class="enf-cor">quantos</span> apps abre pra fazer uma sessão?</h2>
+  <div class="cta-resposta">
+    <p class="t-rotulo">Comenta o número</p>
+    <div class="opcoes"><span>1</span><span>2</span><span>3</span><span>4</span><span>5+</span></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>12</b>/12</span></footer>
+</section>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- família: capa-objeto · papel: gancho (capa alternativa) ou 2ª capa · densidade: média
+     slots: .co-texto (t-display ≤ 6 palavras ou t-titulo + t-lead) · .co-objeto (UM objeto real: fragmento de UI, card, print em
+     brand/screenshots/) sangrando 120–240 px à direita · t-nota "dados ilustrativos" ao lado do objeto quando houver dado fictício
+     o objeto é a prova do título; nunca ilustração de banco, ícone gigante ou mockup genérico.
+     variações: objeto sangrando por baixo (sem rodapé visível: mantenha só a paginação no .topo) · objeto = pilha do motivo -->
+<section class="slide fundo-tom-100" data-layout="capa-objeto">
+  <div class="co-texto">
+    <h1 class="t-display">De 5 apps para 1.</h1>
+    <p class="t-lead" style="max-width:var(--c5)">Agenda, conversa, sessão e notas no mesmo lugar.</p>
+  </div>
+    <div class="co-objeto ui-janela" data-sangra>
+    <div class="ui-cab"><h4>Hoje · 3 sessões</h4><span class="icone" style="width:40px;height:40px">{{icone:calendar}}</span></div>
+    <div class="ui-linha"><span class="ui-hora">08:00</span><span class="ui-avatar">AL</span><div><p class="ui-nome">Ana L.</p><p class="ui-det">4ª sessão</p></div><span class="ui-tipo online">Online</span></div>
+    <div class="ui-linha"><span class="ui-hora">10:30</span><span class="ui-avatar">BT</span><div><p class="ui-nome">Bruno T.</p><p class="ui-det">1ª sessão</p></div><span class="ui-tipo presencial">Presencial</span></div>
+    <div class="ui-linha"><span class="ui-hora">14:00</span><span class="ui-avatar">CS</span><div><p class="ui-nome">Clara S.</p><p class="ui-det">12ª sessão</p></div><span class="ui-tipo online">Online</span></div>
+  </div>
+  <p class="co-nota t-nota">dados ilustrativos</p>
+  <footer class="rodape"><span></span><span class="arraste">arraste {{icone:arrow-right}}</span></footer>
+</section>

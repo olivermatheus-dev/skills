@@ -1,0 +1,21 @@
+<!-- família: comparacao · papel: virada, prova, antes × depois · densidade: densa
+     slots: .cmp-topo (t-titulo) · .cmp com 2 .cmp-col (.antes sem campo, .depois com campo --s-card): .cmp-cab (t-rotulo) +
+     2–3 .cmp-item (ícone + frase ≤ 6 palavras), as linhas das duas colunas na mesma altura
+     o lado bom ganha campo e peso, não cor nova; nada de vermelho × verde. Funcionalidade do "depois" só se existir (PRODUTO.md).
+     variações: 2 linhas (frases maiores, 44 px) · 3 linhas (padrão) -->
+<section class="slide fundo-creme" data-layout="comparacao">
+  <div class="cmp-topo">
+    <h2 class="t-titulo">O mesmo dia, de dois jeitos.</h2>
+  </div>
+  <div class="cmp">
+    <p class="cmp-cab t-rotulo">Antes</p>
+    <p class="cmp-cab t-rotulo">Com a kz</p>
+    <div class="cmp-item antes"><span class="icone">{{icone:x}}</span><p>Lembrete manual.</p></div>
+    <div class="cmp-item depois"><span class="icone">{{icone:check}}</span><p>Confirmação no WhatsApp.</p></div>
+    <div class="cmp-item antes"><span class="icone">{{icone:x}}</span><p>Link perdido na conversa.</p></div>
+    <div class="cmp-item depois"><span class="icone">{{icone:check}}</span><p>Videochamada na sessão.</p></div>
+    <div class="cmp-item antes"><span class="icone">{{icone:x}}</span><p>Nota em outro lugar.</p></div>
+    <div class="cmp-item depois"><span class="icone">{{icone:check}}</span><p>Histórico ao lado.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca">{{logo}}</span><span class="pag"><b>{{n}}</b>/{{t}}</span></footer>
+</section>

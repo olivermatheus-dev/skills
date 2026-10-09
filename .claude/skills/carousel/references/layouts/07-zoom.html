@@ -1,0 +1,35 @@
+<!-- família: zoom · papel: prova (a funcionalidade de verdade) · densidade: média
+     slots: .zoom-topo (t-titulo + t-corpo opcional) · .zoom-quadro com um fragmento de UI ampliado 1,4–2× (transform: scale)
+     e cortado pela moldura · .moldura com 4 marcas de registro · .anota (fio + ponto + frase ≤ 10 palavras) apontando o detalhe ·
+     t-nota "dados ilustrativos" quando a tela tem nomes/horários fictícios.
+     UI: só tokens e medidas do BRAND.md > UI do produto; nada de painel inventado (recrie a tela real ou use print de brand/screenshots/).
+     o .ui-brilho é o único gradiente aceito no carrossel inteiro (1 slide) -->
+<section class="slide fundo-creme" data-layout="zoom">
+  <div class="zoom-topo">
+    <h2 class="t-titulo">A sessão no centro.</h2>
+  </div>
+  <div class="zoom-quadro">
+    <div class="ui-janela" style="left:-16px; top:-40px; width:760px; transform:scale(1.32)">
+      <div class="ui-brilho"></div>
+      <div style="position:relative; padding:72px 36px 64px 36px; display:flex; flex-direction:column; gap:28px">
+        <p class="ui-rotulo"><span class="vivo"></span>Próxima sessão · em 20 min</p>
+        <div style="display:flex; gap:20px; align-items:center">
+          <span class="ui-avatar">AL</span>
+          <div><p class="ui-nome">Ana L.</p><p class="ui-det">15:00 · 15:50 · Online · 2ª sessão</p></div>
+        </div>
+        <div style="display:flex; gap:12px">
+          <span class="ui-btn">{{icone:video}}Iniciar sessão</span>
+          <span class="ui-btn sec">{{icone:file-text}}Ver prontuário</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="anota" style="left:var(--s-m); top:var(--zy-nota); width:var(--c6)">
+    <span class="fio" style="left:var(--zx-fio); top:calc(var(--zy-ponto) - var(--zy-nota)); width:2px; height:calc(var(--zy-nota) - var(--zy-ponto) - 16px)"></span>
+    <span class="ponto" style="left:calc(var(--zx-fio) - 7px); top:calc(var(--zy-ponto) - var(--zy-nota) - 8px)"></span>
+    <p class="t-corpo" style="padding-left:calc(var(--zx-fio) + 32px)">A chamada abre aqui. Sem link para procurar.</p>
+  </div>
+  <p class="t-nota" style="position:absolute; right:var(--s-m); top:calc(var(--zy-quadro-fim) + 24px)">dados ilustrativos</p>
+  <footer class="rodape"><span class="marca">{{logo}}</span><span class="pag"><b>{{n}}</b>/{{t}}</span></footer>
+</section>

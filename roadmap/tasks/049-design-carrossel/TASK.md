@@ -84,3 +84,4 @@ Respondidas em 2026-10-09:
 
 ## Log
 - 2026-10-09 · diagnóstico do origin story + 2 pesquisas (Sonnet) + esta proposta.
+- 2026-10-09 · A–D construídos (Opus): skill `plano-de-slides` (slides.json + plano.md + wireframes; exemplo em `references/exemplo/`) · `carousel` reescrita (`sistema.css`, 12 famílias em `references/layouts/` + `INDEX.md`, `catalogo.html` → `references/catalogo/png` + `contato.png`, `base.html`; `template.html` e os `layout.html` dos fmt-* saíram) · `render.mjs` (--escala, fontes, contato com grade do perfil) · `scripts/catalogo.mjs` (catálogo + `--expandir` tokens) · `tools/carrossel/check.mjs` (lint + contraste via `contraste-pagina.mjs`) · `tools/carrossel/plano.mjs` (check + wireframes) · `rubrica.md` (10 critérios com peso, P0–P3, prompts do crítico e do implementador, ciclo de 3) · designer/revisor/orquestrar/ig-post (Tópicos)/fmt-* de imagem/CLAUDE.md. Próximo: onda 2 (origin story pelo fluxo novo).

@@ -1,0 +1,25 @@
+<!-- família: fluxo · papel: virada, mecanismo, "como funciona" · densidade: média
+     slots: .fluxo-topo (t-titulo) · .fluxo com 3–5 .no (ícone + nome) e 1 .destino (card) + svg.fios (curvas de 2 px) · .fluxo-pe (t-corpo)
+     geometria: nós de 72 px a cada 104 px (centros 36, 140, 244, 348, 452); destino centrado em y 244;
+     fio = C do fim do nó (x 296) ao início do destino (x 544), alças em x 420. Sem seta, sem decoração.
+     variações: convergência N → 1 (padrão) · sequência 1 → 2 → 3 em linha · divergência 1 → N -->
+<section class="slide fundo-tom-100" data-layout="fluxo">
+  <div class="fluxo-topo">
+    <h2 class="t-titulo">Não era a gente.</h2>
+    <p class="t-sub" style="color:var(--s-fg2); font-weight:500">Era o jeito de trabalhar.</p>
+  </div>
+  <div class="fluxo">
+    <svg class="fios" viewBox="0 0 888 488" width="888" height="488">
+      <path d="M296 36 C420 36 420 244 544 244"/><path d="M296 140 C420 140 420 244 544 244"/><path d="M296 244 L544 244"/>
+      <path d="M296 348 C420 348 420 244 544 244"/><path d="M296 452 C420 452 420 244 544 244"/>
+    </svg>
+    <div class="no" style="top:0"><span class="icone">{{icone:calendar}}</span>Agenda</div>
+    <div class="no" style="top:104px"><span class="icone">{{icone:message-circle}}</span>WhatsApp</div>
+    <div class="no" style="top:208px"><span class="icone">{{icone:video}}</span>Meet</div>
+    <div class="no" style="top:312px"><span class="icone">{{icone:notebook-pen}}</span>Caderno</div>
+    <div class="no" style="top:416px"><span class="icone">{{icone:globe}}</span>Site</div>
+    <div class="destino card alto">{{logo}}<p>Uma tela só.</p></div>
+  </div>
+  <p class="fluxo-pe t-corpo">Empilhar ferramentas, quando a sessão precisa de uma tela só.</p>
+  <footer class="rodape"><span class="marca">{{logo}}</span><span class="pag"><b>{{n}}</b>/{{t}}</span></footer>
+</section>

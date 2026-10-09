@@ -1,0 +1,313 @@
+/* sistema.css — motor de layout do carrossel (tarefa 049).
+   Ordem no <head>: brand.css da empresa (tokens) → este arquivo (sistema). Aqui não há cor nova: tudo vem
+   do brand.css (com fallback neutro-coral para rodar sem a escala tonal). Não edite por peça: o que for da
+   peça vai num <style> curto no carrossel.html; o que se repetir em 2 peças sobe para cá.
+   Mapa: 1 grade e escala · 2 fundos (variáveis locais) · 3 tipografia · 4 ênfase · 5 rodapé e meta ·
+         6 componentes de detalhe · 7 fragmento de UI · 8 famílias de layout (data-layout) */
+
+/* ============ 1. Grade e escala ============ */
+:root {
+  --s-w: 1080px; --s-h: 1350px;
+  --s-m: 96px;                 /* margem externa (zona de texto 888 × 1158) */
+  --s-rod: 64px;               /* base do rodapé, dentro da faixa da margem */
+  --s-base: 168px;             /* limite de baixo do conteúdo (rodapé + respiro) */
+  /* 6 colunas de 128 + gutter 24: --xN = início da coluna N · --cN = largura de N colunas */
+  --x1: 96px; --x2: 248px; --x3: 400px; --x4: 552px; --x5: 704px; --x6: 856px;
+  --c1: 128px; --c2: 280px; --c3: 432px; --c4: 584px; --c5: 736px; --c6: 888px;
+  /* espaço: escala 8 */
+  --e-1: 8px; --e-2: 16px; --e-3: 24px; --e-4: 32px; --e-5: 48px; --e-6: 64px; --e-7: 96px; --e-8: 128px; --e-9: 192px;
+  /* tipo: poucos degraus, razão ~1,5 */
+  --t-giga: 560px; --t-display: 136px; --t-titulo: 84px; --t-sub: 64px; --t-lead: 48px;
+  --t-corpo: 40px; --t-nota: 28px; --t-rotulo: 24px;
+  --s-raio: var(--radius, 16px); --s-raio-sm: var(--radius-sm, 10px);
+  /* escala tonal da cor principal (brand.css > Paleta tonal); fallback = kz */
+  --s-t50: var(--tone-50, #fff4f2); --s-t100: var(--tone-100, #fee8e3); --s-t200: var(--tone-200, #fed3c9);
+  --s-t300: var(--tone-300, #fdb7a7); --s-t400: var(--tone-400, #fa9781); --s-t500: var(--tone-500, var(--primary, #ef7960));
+  --s-t600: var(--tone-600, #bc4f38); --s-t700: var(--tone-700, #933724); --s-t800: var(--tone-800, #6c2718);
+  --s-t900: var(--tone-900, #48170c); --s-t950: var(--tone-950, #2c0803);
+}
+body.square { --s-h: 1080px; }
+body.stories { --s-h: 1920px; --s-m: 96px; --s-rod: 320px; --s-base: 400px; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #8c8c8c; /* fora do slide: só a página de revisão */
+  display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+/* ============ 2. Fundos: cada classe define as variáveis locais que todos os componentes usam ============
+   Funciona no slide e em qualquer bloco dentro dele (campo de cor de um split, painel, card escuro). */
+.slide, [class*="fundo-"] {
+  --s-fg: var(--text);                 /* âncora e texto */
+  --s-fg2: var(--text);                /* apoio (o peso diferencia, não o cinza) */
+  --s-forte: var(--ink);
+  --s-meta: var(--muted);              /* rótulo e índice */
+  --s-hair: color-mix(in srgb, var(--text) 16%, transparent);
+  --s-hair-forte: color-mix(in srgb, var(--text) 38%, transparent);
+  --s-enf: var(--accent);              /* ênfase em cor (só título grande sobre claro) */
+  --s-orn: var(--s-t200);              /* ornamento: aspas, número de fundo */
+  --s-card: var(--surface);
+  --s-card-borda: var(--border);
+  --s-sombra: var(--s-t800);           /* sombra tingida: matiz da marca, nunca preto */
+  --s-logo: var(--logo, var(--primary));
+  --s-icone: var(--primary);
+}
+.fundo-creme   { --s-bg: var(--bg); }
+.fundo-branco  { --s-bg: var(--surface); --s-card: var(--bg); }
+.fundo-tom-50  { --s-bg: var(--s-t50); }
+.fundo-tom-100 { --s-bg: var(--s-t100); --s-enf: var(--s-t700); --s-orn: var(--s-t300);
+                 --s-card-borda: color-mix(in srgb, var(--s-t300) 55%, transparent); }
+.fundo-tom-200 { --s-bg: var(--s-t200); --s-enf: var(--s-t700); --s-orn: var(--s-t400); --s-meta: var(--ink);
+                 --s-hair: color-mix(in srgb, var(--s-t800) 18%, transparent); --s-hair-forte: color-mix(in srgb, var(--s-t800) 40%, transparent);
+                 --s-card-borda: color-mix(in srgb, var(--s-t400) 50%, transparent); --s-icone: var(--s-t700); }
+.fundo-tom-300 { --s-bg: var(--s-t300); --s-fg: var(--ink); --s-fg2: var(--ink); --s-enf: var(--s-t800); --s-orn: var(--s-t400); --s-meta: var(--ink);
+                 --s-hair: color-mix(in srgb, var(--s-t900) 20%, transparent); --s-hair-forte: color-mix(in srgb, var(--s-t900) 45%, transparent); --s-icone: var(--s-t800); }
+.fundo-tom-800, .fundo-tom-900 {
+  --s-fg: var(--s-t50); --s-fg2: var(--s-t200); --s-forte: var(--s-t50); --s-meta: var(--s-t300);
+  --s-hair: color-mix(in srgb, var(--s-t200) 22%, transparent); --s-hair-forte: color-mix(in srgb, var(--s-t200) 48%, transparent);
+  --s-enf: var(--s-t400); --s-card-borda: color-mix(in srgb, var(--s-t200) 16%, transparent);
+  --s-sombra: var(--s-t950); --s-logo: var(--s-t50); --s-icone: var(--s-t300);
+}
+.fundo-tom-800 { --s-bg: var(--s-t800); --s-orn: var(--s-t700); --s-card: var(--s-t900); }
+.fundo-tom-900 { --s-bg: var(--s-t900); --s-orn: var(--s-t800); --s-card: var(--s-t800); }
+[class*="fundo-"] { background-color: var(--s-bg); color: var(--s-fg); }
+
+/* ============ O slide ============ */
+.slide {
+  position: relative; overflow: hidden; flex: none;
+  width: var(--s-w); height: var(--s-h);
+  background-color: var(--s-bg, var(--bg)); color: var(--s-fg);
+  font: 400 var(--t-corpo)/1.5 var(--font-body);
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+  font-kerning: normal; font-variant-numeric: lining-nums;
+}
+.slide svg { display: block; }
+
+/* ============ 3. Tipografia (4 níveis: âncora · apoio · rótulo · meta) ============ */
+.t-display, .t-titulo, .t-sub, .t-giga { font-family: var(--font-heading); color: var(--s-fg); text-wrap: balance; }
+.t-display { font-size: var(--t-display); font-weight: var(--weight-heading, 700);
+  line-height: calc(var(--leading-heading, 1.15) - .11);          /* display aperta a entrelinha da marca */
+  letter-spacing: calc(var(--tracking-heading, -0.01em) * 3); }
+.t-titulo { font-size: var(--t-titulo); font-weight: var(--weight-heading, 700);
+  line-height: calc(var(--leading-heading, 1.15) - .05); letter-spacing: calc(var(--tracking-heading, -0.01em) * 2); }
+.t-sub { font-size: var(--t-sub); font-weight: 600; line-height: 1.15; letter-spacing: var(--tracking-heading, -0.01em); }
+.t-lead { font-size: var(--t-lead); font-weight: 500; line-height: 1.3; letter-spacing: -0.005em; color: var(--s-fg2); text-wrap: pretty; }
+.t-corpo { font-size: var(--t-corpo); font-weight: 400; line-height: 1.5; color: var(--s-fg2); text-wrap: pretty; }
+.t-nota { font-size: var(--t-nota); font-weight: 500; line-height: 1.45; color: var(--s-meta); }
+.t-rotulo, .eyebrow { font-size: var(--t-rotulo); font-weight: 600; line-height: 1.2; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--s-meta); font-variant-numeric: tabular-nums; }
+.t-giga { font-size: var(--t-giga); font-weight: 600; line-height: .8; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+.forte { font-weight: 600; color: var(--s-forte); }
+.serifa { font-family: var(--font-accent); font-optical-sizing: auto; font-weight: 400; } /* romano: citação, número */
+
+/* ============ 4. Ênfase (rara: ≤ 1 a cada 3 slides, alternando cor e serifa; só a palavra da virada) ============ */
+.enf-cor { color: var(--s-enf); }
+.enf-serifa { font-family: var(--font-accent); font-style: italic; font-weight: 400; font-optical-sizing: auto;
+  font-size: 1.1em; line-height: 0; letter-spacing: -0.015em; }
+
+/* ============ 5. Rodapé e meta (mesma posição em todos os slides) ============ */
+.rodape { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-rod); height: 40px; z-index: 40;
+  display: flex; justify-content: space-between; align-items: center;
+  font: 600 var(--t-rotulo)/1 var(--font-body); color: var(--s-meta); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.rodape .marca { color: var(--s-logo); display: flex; align-items: center; }
+.rodape .marca svg { height: 30px; width: auto; fill: currentColor; }
+.rodape .pag b { color: var(--s-fg); font-weight: 600; }
+.rodape .arraste { display: flex; align-items: center; gap: 12px; color: var(--s-fg); }
+.rodape .arraste svg { width: 32px; height: 32px; stroke: currentColor; }
+.topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); display: flex; justify-content: space-between; align-items: baseline; }
+
+/* ============ 6. Componentes de detalhe (cada um precisa de função no plano) ============ */
+/* hairline: separa grupos e itens; 2 px sobrevive à compressão */
+.hairline { height: 2px; background-color: var(--s-hair); border: 0; }
+.hairline.curta { width: var(--c1); }
+/* régua: escala com marcas que contam algo (5 apps, 1–5+) */
+.regua { position: relative; display: grid; grid-template-columns: repeat(var(--n, 5), 1fr); border-top: 2px solid var(--s-hair-forte); }
+.regua > * { position: relative; padding-top: var(--e-4); display: flex; flex-direction: column; gap: var(--e-2); align-items: flex-start; }
+.regua > *::before { content: ""; position: absolute; left: 0; top: -2px; width: 2px; height: 20px; background-color: var(--s-hair-forte); }
+/* card em camadas: papel, borda fina, sombra tingida em 6 camadas (luz única, de cima) */
+.card { position: relative; background-color: var(--s-card); border: 1px solid var(--s-card-borda); border-radius: var(--s-raio);
+  box-shadow:
+    0 1px 1px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 2px 2px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 4px 4px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 8px 8px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 16px 16px color-mix(in srgb, var(--s-sombra) 4%, transparent),
+    0 32px 32px color-mix(in srgb, var(--s-sombra) 3%, transparent); }
+.card.alto { box-shadow:
+    0 2px 2px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 4px 4px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 8px 8px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 16px 16px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 32px 32px color-mix(in srgb, var(--s-sombra) 5%, transparent),
+    0 64px 64px color-mix(in srgb, var(--s-sombra) 4%, transparent); }
+/* chip: categoria ou opção (raio pequeno da marca) */
+.chip { display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px; border-radius: var(--s-raio-sm);
+  font: 600 26px/1 var(--font-body); color: var(--s-forte); background-color: color-mix(in srgb, var(--s-t200) 70%, transparent); }
+.icone { width: 56px; height: 56px; flex: none; stroke: var(--s-icone); }
+.icone svg { width: 100%; height: 100%; stroke: inherit; }
+/* moldura com marcas de registro: "isto é um recorte/detalhe" (no máx. 1 a cada 3 slides) */
+.moldura { position: absolute; border: 2px solid var(--s-hair); pointer-events: none; }
+.moldura > i { position: absolute; width: 32px; height: 32px; }
+.moldura > i::before, .moldura > i::after { content: ""; position: absolute; background-color: var(--s-hair-forte); }
+.moldura > i::before { left: 0; right: 0; top: 15px; height: 2px; }
+.moldura > i::after { top: 0; bottom: 0; left: 15px; width: 2px; }
+.moldura > i:nth-child(1) { left: -17px; top: -17px; } .moldura > i:nth-child(2) { right: -17px; top: -17px; }
+.moldura > i:nth-child(3) { left: -17px; bottom: -17px; } .moldura > i:nth-child(4) { right: -17px; bottom: -17px; }
+/* aspas e citação: a serifa de destaque como ornamento e voz */
+.aspas { font-family: var(--font-accent); font-optical-sizing: auto; font-weight: 300; font-size: 440px; line-height: .62; color: var(--s-orn); }
+.citacao-texto { font-family: var(--font-accent); font-optical-sizing: auto; font-weight: 400; font-size: 108px; line-height: 1.08;
+  letter-spacing: -0.02em; color: var(--s-fg); text-wrap: balance; }
+/* anotação: fio + ponto ligando a explicação ao detalhe */
+.anota { position: absolute; display: flex; align-items: flex-start; gap: var(--e-3); }
+.anota .fio { position: absolute; background-color: var(--s-hair-forte); }
+.anota .ponto { position: absolute; width: 16px; height: 16px; border-radius: 50%; background-color: var(--s-t600); box-shadow: 0 0 0 6px color-mix(in srgb, var(--s-t600) 18%, transparent); }
+/* grão opcional (3–8%): tira o "flat digital"; não deve ser visível como textura no celular */
+.slide.grao::after { content: ""; position: absolute; inset: 0; z-index: 60; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+/* ============ 7. Fragmento de UI (BRAND.md > UI do produto): recria a tela, não inventa painel ============ */
+.ui { font-family: var(--font-body); color: var(--text); }
+.ui-janela { background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--s-raio); overflow: hidden; color: var(--text);
+  box-shadow:
+    0 1px 1px color-mix(in srgb, var(--s-t800) 4%, transparent),
+    0 4px 4px color-mix(in srgb, var(--s-t800) 4%, transparent),
+    0 12px 12px color-mix(in srgb, var(--s-t800) 4%, transparent),
+    0 24px 24px color-mix(in srgb, var(--s-t800) 4%, transparent),
+    0 48px 48px color-mix(in srgb, var(--s-t800) 4%, transparent); }
+.ui-cab { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 32px 40px; border-bottom: 1px solid var(--ui-divider, var(--border)); }
+.ui-cab h4 { font: 600 32px/1.2 var(--font-body); color: var(--text); }
+.ui-rotulo { font: 700 24px/1.2 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.ui-rotulo .vivo { width: 14px; height: 14px; border-radius: 50%; background-color: var(--primary-hover, var(--primary)); box-shadow: 0 0 0 5px var(--ui-btn-soft, var(--s-t100)); }
+.ui-linha { display: grid; grid-template-columns: 120px 72px 1fr auto; align-items: center; gap: 24px; padding: 24px 40px; border-bottom: 1px solid var(--ui-divider, var(--border)); }
+.ui-linha:last-child { border-bottom: 0; }
+.ui-hora { font: 600 28px/1 var(--font-body); color: var(--text); font-variant-numeric: tabular-nums; }
+.ui-avatar { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background-color: var(--ui-avatar, var(--s-t100)); color: var(--s-t700); font: 700 26px/1 var(--font-body); letter-spacing: .02em; }
+.ui-nome { font: 600 30px/1.25 var(--font-body); color: var(--text); }
+.ui-det { font: 500 24px/1.3 var(--font-body); color: var(--muted); }
+.ui-tipo { font: 600 24px/1 var(--font-body); padding: 12px 16px; border-radius: var(--s-raio-sm); color: var(--ink); }
+.ui-tipo.online { background-color: var(--pastel-sky, var(--s-t100)); }
+.ui-tipo.presencial { background-color: var(--pastel-sage, var(--s-t100)); }
+.ui-btn { display: inline-flex; align-items: center; gap: 12px; height: 72px; padding: 0 32px; border-radius: var(--s-raio-sm);
+  font: 600 28px/1 var(--font-body); white-space: nowrap; background-color: var(--primary); color: var(--on-primary); }
+.ui-btn svg { width: 32px; height: 32px; stroke: currentColor; }
+.ui-btn.sec { background-color: var(--surface); color: var(--text); border: 1px solid var(--border); }
+/* brilho coral do card "Próxima sessão" do app: o ÚNICO gradiente admitido, local (≤ 30% da área) */
+.ui-brilho { position: absolute; right: 0; top: 0; width: 55%; height: 75%; pointer-events: none;
+  background-image: radial-gradient(circle at 100% 0, var(--ui-glow, var(--s-t50)) 0, color-mix(in srgb, var(--ui-glow, var(--s-t50)) 0%, transparent) 70%); }
+
+/* ============ 8. Famílias de layout ============
+   Cada <section class="slide fundo-…" data-layout="<família>">. Guia de uso: references/layouts/INDEX.md. */
+
+/* --- capa-tipografica: título display ancorado embaixo; o motivo entra pelo alto e sangra à direita --- */
+[data-layout="capa-tipografica"] .eyebrow { position: absolute; left: var(--s-m); top: var(--s-m); }
+[data-layout="capa-tipografica"] .capa-motivo { position: absolute; left: 0; top: 0; width: 100%; height: 640px; }
+[data-layout="capa-tipografica"] .capa-texto { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base);
+  display: flex; flex-direction: column; gap: var(--e-5); }
+[data-layout="capa-tipografica"] .capa-texto .t-lead { max-width: var(--c5); }
+/* janela-mini: uma ferramenta do motivo (ícone + nome), usada em capa, pilha e fluxo */
+.janela-mini { position: absolute; width: 392px; height: 136px; display: flex; align-items: flex-start; gap: 20px; padding: 18px 32px 0; }
+.janela-mini .icone { margin-top: 2px; }
+.janela-mini .icone { width: 48px; height: 48px; }
+.janela-mini > span:last-child { font: 600 32px/44px var(--font-body); color: var(--text); }
+
+/* --- capa-objeto: título no alto, um objeto real (tela, card) sangrando por baixo/direita --- */
+[data-layout="capa-objeto"] .co-texto { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); display: flex; flex-direction: column; gap: var(--e-4); }
+[data-layout="capa-objeto"] .co-objeto { position: absolute; left: var(--x2); top: 680px; width: 960px; }
+[data-layout="capa-objeto"] .co-objeto .ui-linha { grid-template-columns: 120px 72px 300px auto; justify-content: start; }
+[data-layout="capa-objeto"] .co-nota { position: absolute; left: var(--x2); top: 624px; }
+
+/* --- split: campo de cor em cima (ou à esquerda) e o resto no fundo do slide; a costura divide duas ideias --- */
+[data-layout="split"] .split-campo { position: absolute; left: 0; right: 0; top: 0; height: 58%;
+  padding: var(--s-m); padding-bottom: var(--e-6); display: flex; flex-direction: column; justify-content: space-between; }
+[data-layout="split"] .split-resto { position: absolute; left: var(--s-m); right: var(--s-m); top: calc(58% + var(--e-6)); bottom: var(--s-base);
+  display: flex; flex-direction: column; justify-content: space-between; }
+[data-layout="split"].vertical .split-campo { right: auto; width: calc(var(--x3) + var(--c1) / 2); height: 100%; padding-right: var(--e-5); }
+[data-layout="split"].vertical .split-resto { left: calc(var(--x4)); top: var(--s-m); }
+
+/* --- campo: cor sólida inteira e uma frase; o vazio é o assunto (respiro) --- */
+[data-layout="campo"] .campo-alto { position: absolute; left: var(--s-m); top: calc(var(--s-m) + var(--e-5)); width: var(--c5); color: var(--s-fg2); }
+[data-layout="campo"] .campo-baixo { position: absolute; left: var(--s-m); width: var(--c6); bottom: var(--s-base); }
+[data-layout="campo"] .campo-fio { position: absolute; left: var(--s-m); width: var(--c1); top: 50%; }
+
+/* --- numero: um numeral gigante é o herói; o resto vira ficha técnica --- */
+[data-layout="numero"] .num-titulo { position: absolute; left: var(--s-m); top: var(--s-m); width: var(--c5); }
+[data-layout="numero"] .num-bloco { position: absolute; left: calc(var(--s-m) - 28px); top: 300px; display: flex; align-items: flex-end; gap: var(--e-4); }
+[data-layout="numero"] .num-bloco .t-giga { margin-bottom: -18px; }
+[data-layout="numero"] .num-bloco .num-legenda { padding-bottom: 8px; width: 520px; font-size: 56px; }
+[data-layout="numero"] .num-ficha { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base);
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--e-3); row-gap: var(--e-4); }
+[data-layout="numero"] .num-ficha .hairline { grid-column: 1 / -1; }
+[data-layout="numero"] .num-ficha > div { display: flex; flex-direction: column; gap: var(--e-2); padding-right: var(--e-5); }
+
+/* --- citacao: voz de alguém; aspas da serifa de destaque como ornamento --- */
+[data-layout="citacao"] .aspas { position: absolute; left: calc(var(--s-m) - 28px); top: 560px; font-size: 720px; }
+[data-layout="citacao"] .eyebrow { position: absolute; left: var(--s-m); top: var(--s-m); }
+[data-layout="citacao"] .cit-bloco { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base); display: flex; flex-direction: column; gap: var(--e-6); }
+[data-layout="citacao"] .cit-autor { display: flex; flex-direction: column; gap: var(--e-3); }
+
+/* --- trilho: lista de 3–5 itens num trilho vertical com hairlines --- */
+[data-layout="trilho"] .trilho-topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); display: flex; flex-direction: column; gap: var(--e-4); }
+[data-layout="trilho"] .trilho-lista { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base); list-style: none; }
+[data-layout="trilho"] .trilho-lista li { position: relative; display: grid; grid-template-columns: var(--c1) 1fr; column-gap: var(--e-3);
+  align-items: center; min-height: 200px; border-top: 2px solid var(--s-hair); }
+[data-layout="trilho"] .trilho-lista li:last-child { border-bottom: 2px solid var(--s-hair); }
+[data-layout="trilho"] .trilho-lista .no { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center;
+  border: 2px solid var(--s-hair-forte); background-color: var(--s-bg); position: relative; z-index: 1; }
+[data-layout="trilho"] .trilho-lista .no .icone { width: 40px; height: 40px; }
+[data-layout="trilho"] .trilho-lista::before { content: ""; position: absolute; left: 43px; top: 100px; bottom: 100px; width: 2px; background-color: var(--s-hair-forte); }
+[data-layout="trilho"] .trilho-lista p { font: 600 52px/1.15 var(--font-heading); letter-spacing: -0.01em; color: var(--s-fg); }
+
+/* --- pilha: cards sobrepostos em cascata (caos legível ±2°, ou ordem) --- */
+[data-layout="pilha"] .pilha-topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); }
+[data-layout="pilha"] .pilha { position: absolute; left: var(--s-m); top: 360px; width: var(--c6); height: 728px; }
+[data-layout="pilha"] .pilha .card { position: absolute; width: 744px; height: 168px; display: flex; align-items: center; gap: var(--e-4); padding: 0 var(--e-5); }
+[data-layout="pilha"] .pilha .card p { font: 600 44px/1.1 var(--font-heading); letter-spacing: -0.01em; color: var(--s-fg); }
+[data-layout="pilha"] .pilha .card .t-rotulo { margin-left: auto; }
+
+/* --- comparacao: duas colunas na mesma linha de base; o lado bom ganha campo, não cor nova --- */
+[data-layout="comparacao"] .cmp-topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); }
+/* grade única de 2 colunas: as linhas das duas colunas ficam na mesma altura; o campo do "depois" é uma camada atrás */
+[data-layout="comparacao"] .cmp { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base);
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--e-3); }
+[data-layout="comparacao"] .cmp::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: calc(50% - var(--e-3) / 2);
+  background-color: var(--s-card); border: 1px solid var(--s-card-borda); border-radius: var(--s-raio); }
+[data-layout="comparacao"] .cmp > * { position: relative; }
+[data-layout="comparacao"] .cmp > :nth-child(odd) { padding-right: var(--e-4); }
+[data-layout="comparacao"] .cmp > :nth-child(even) { padding-left: var(--e-5); padding-right: var(--e-5); }
+[data-layout="comparacao"] .cmp-cab { height: 112px; display: flex; align-items: center; }
+[data-layout="comparacao"] .cmp-item { min-height: 168px; display: flex; gap: var(--e-3); align-items: flex-start; padding-top: var(--e-5); padding-bottom: var(--e-5); }
+[data-layout="comparacao"] .cmp-item::before { content: ""; position: absolute; top: 0; left: 0; right: var(--e-4); height: 2px; background-color: var(--s-hair); }
+[data-layout="comparacao"] .cmp > :nth-child(even).cmp-item::before { left: var(--e-5); right: var(--e-5); }
+[data-layout="comparacao"] .cmp-item .icone { width: 40px; height: 40px; margin-top: 4px; }
+[data-layout="comparacao"] .cmp-item p { font: 400 38px/1.3 var(--font-body); color: var(--s-fg2); text-wrap: balance; }
+[data-layout="comparacao"] .cmp-item.antes .icone { stroke: var(--s-meta); }
+[data-layout="comparacao"] .cmp-item.depois p { font-weight: 600; color: var(--s-fg); }
+[data-layout="comparacao"] .cmp > :nth-last-child(-n+2) { padding-bottom: var(--e-6); }
+
+/* --- zoom: um detalhe da tela ampliado dentro de uma moldura, com anotação --- */
+[data-layout="zoom"] { --zy-quadro: 448px; --zy-quadro-fim: 872px; --zx-fio: 230px; --zy-ponto: 820px; --zy-nota: 968px; }
+[data-layout="zoom"] .zoom-topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); display: flex; flex-direction: column; gap: var(--e-3); }
+[data-layout="zoom"] .zoom-quadro, [data-layout="zoom"] .moldura { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--zy-quadro); height: calc(var(--zy-quadro-fim) - var(--zy-quadro)); }
+[data-layout="zoom"] .zoom-quadro { overflow: hidden; }
+[data-layout="zoom"] .zoom-quadro .ui-janela { position: absolute; transform-origin: 0 0; }
+
+/* --- fluxo: 3–5 nós ligados por fios de 2 px; sem decoração --- */
+[data-layout="fluxo"] .fluxo-topo { position: absolute; left: var(--s-m); right: var(--s-m); top: var(--s-m); display: flex; flex-direction: column; gap: var(--e-2); }
+[data-layout="fluxo"] .fluxo { position: absolute; left: var(--s-m); width: var(--c6); top: 500px; height: 488px; }
+[data-layout="fluxo"] .fluxo svg.fios { position: absolute; inset: 0; overflow: visible; }
+[data-layout="fluxo"] .fluxo .fios path { fill: none; stroke: var(--s-hair-forte); stroke-width: 2; }
+[data-layout="fluxo"] .fluxo .no { position: absolute; left: 0; width: 296px; height: 72px; display: flex; align-items: center; gap: 16px;
+  padding: 0 24px; border-radius: var(--s-raio-sm); border: 2px solid var(--s-hair-forte); background-color: var(--s-bg);
+  font: 600 28px/1 var(--font-body); color: var(--s-fg); }
+[data-layout="fluxo"] .fluxo .no .icone { width: 32px; height: 32px; }
+[data-layout="fluxo"] .fluxo .destino { position: absolute; right: 0; top: 124px; width: 360px; height: 240px; padding: var(--e-5);
+  display: flex; flex-direction: column; justify-content: space-between; color: var(--text); }
+[data-layout="fluxo"] .fluxo .destino svg { flex: none; height: 48px; width: 61px; fill: var(--logo, var(--primary)); }
+[data-layout="fluxo"] .fluxo .destino p { margin-top: auto; font: 600 40px/1.15 var(--font-heading); letter-spacing: -0.01em; color: var(--text); }
+[data-layout="fluxo"] .fluxo-pe { position: absolute; left: var(--s-m); width: var(--c5); bottom: var(--s-base); }
+
+/* --- cta: um pedido só; a resposta vira régua --- */
+[data-layout="cta"] .cta-texto { position: absolute; left: var(--s-m); right: var(--s-m); top: calc(var(--s-m) + var(--e-6)); font-size: 112px; }
+[data-layout="cta"] .cta-resposta { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base); display: flex; flex-direction: column; gap: var(--e-5); }
+[data-layout="cta"] .opcoes { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--e-3); }
+[data-layout="cta"] .opcoes span { height: 136px; border-radius: var(--s-raio); border: 2px solid var(--s-hair-forte); display: grid; place-items: center;
+  font: 600 56px/1 var(--font-heading); color: var(--s-fg); font-variant-numeric: tabular-nums; }

@@ -17,16 +17,16 @@ Você é roteirista e designer de comparação visual: a virada só convence se 
 - `library/formatos/antes-depois/formato.json` · sempre — quando usar, quando não usar e observações do Oliver (vencem esta receita)
 - `context/AUDIENCE.md#O que já tentou` · sempre — o caos real do antes
 - `context/PRODUTO.md#1. Funcionalidades por grupo` · quando: o depois cita funcionalidade — o que existe
-- `.claude/skills/fmt-antes-depois/references/layout.html` · quando: variante split — classes do slide dividido
+- `.claude/skills/carousel/references/layouts/INDEX.md` · quando: diagramar — famílias `split`, `comparacao`, `pilha` (caos) e `zoom` (a tela do depois)
 
 ## Entradas e saídas
-- **Entrega:** roteirista → `roteiro.md` slide a slide pela `ig-post`; designer → `carrossel.html` + PNG pela `carousel`; variante `video` → a estrutura vira plano da `video` (o caos se recolhe em 1 tela).
+- **Entrega:** roteirista → `roteiro.md` slide a slide pela `ig-post`; designer → plano (`plano-de-slides`) e `carrossel.html` + PNG pela `carousel`; variante `video` → a estrutura vira plano da `video` (o caos se recolhe em 1 tela).
 - **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: antes-depois` no `peca.json`.
 
 ## Ordem de trabalho
 1. Variante (`carrossel` 3–6 slides, padrão · `split` 1 slide · `video`) e eixo (`apps` N × 1, padrão · `tempo` · `tarefa`).
 2. Roteirista: fixar o momento (horário, tarefa) e escrever tudo sobre ele.
-3. Designer: depois com tela real de `brand/screenshots/` (ou ícones) → `carousel` → conferir em 100%.
+3. Designer: `plano-de-slides` (o antes em `pilha`, o depois em `zoom`/`capa-objeto` com tela real de `brand/screenshots/`) → `carousel` → conferir em 100%.
 
 ## Regras duras
 - **Mesmo enquadramento:** mesmo horário, tarefa e posição.
@@ -49,10 +49,10 @@ Você é roteirista e designer de comparação visual: a virada só convence se 
 | 2 | antes | cena do caos + frase literal da persona |
 | 3 | antes (opcional) | custo: tempo, retrabalho, sensação |
 | 4 | depois | mesma cena organizada, 1 tela |
-| 5 | comparação | `.compare`, até 3 linhas |
+| 5 | comparação | família `comparacao`, até 3 linhas |
 | 6 | CTA | salvar, enviar ou link na bio |
 
-**`split`:** em cima "Antes" (chips tortos sobre `--surface-2`), embaixo "Depois" (1 card alinhado sobre `--bg`).
+**`split`:** família `split`: no campo de cor, "Antes" (chips tortos); embaixo, "Depois" (1 card alinhado sobre o fundo).
 
 ## Exemplo (kz)
 Eixo `tempo`: 1. "Segunda, 8h. Dois jeitos de começar a semana." 2. Google Agenda, WhatsApp, Meet, caderno, planilha sobrepostos: "Tá tudo espalhado." 3. "Lembrete manual, link por mensagem, nota em 3 lugares." 4. Agenda da kz com a semana à vista: "Abro um app só." 5. Lembrete manual × confirmação no WhatsApp · link procurado × videochamada na agenda · notas espalhadas × nota anterior na mão. 6. "Qual segunda é a sua? Manda pra colega que vive no antes."
