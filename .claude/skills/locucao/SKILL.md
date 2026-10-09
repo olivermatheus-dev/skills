@@ -1,22 +1,23 @@
 ---
 name: locucao
-description: "Prepara a locução de um vídeo: na versão 1.0, gera a voz com TTS gratuito de modelo; depois da aprovação, escreve o texto de voz com emoção para o Eleven v4 e gera pela API (skill elevenlabs) ou entrega para o Oliver gerar no site, e encaixa o áudio final no vídeo. Use quando o usuário pedir locução, narração, voz, 'texto pro ElevenLabs', 'roteiro de voz', 'gerei o áudio', 'troca a voz', ou quando a skill video chegar na etapa de voz."
+description: "Prepara a locução de um vídeo ou anúncio: com a copy do áudio aprovada, entrega o texto de voz com emoção para o Eleven v4 (padrão: o Oliver gera no site e envia o áudio; anúncio pode vir com vários áudios, um por variante) e encaixa o áudio no vídeo; voz de rascunho grátis só como prévia e API só quando ele pedir. Use quando o usuário pedir locução, narração, voz, 'texto pro ElevenLabs', 'roteiro de voz', 'gerei o áudio', 'troca a voz', ou quando a skill video chegar na etapa de voz."
 ---
 
 # Locução
 
-Leva a voz do roteiro aprovado ao áudio encaixado na `timeline.json`: voz de rascunho grátis (v1.0) → aval → voz final no Eleven v4 → encaixe. O texto com emoção e a geração são da skill `elevenlabs`; trilha e efeitos, da skill `audio`; cenas e render, da skill `video`.
+Leva a voz do roteiro aprovado ao áudio encaixado na `timeline.json`. O texto com emoção é da skill `elevenlabs`; trilha e efeitos, da skill `audio`; cenas e render, da skill `video`.
 
-Política de custo:
-- **v1.0:** voz **gratuita de modelo**, só para aprovar ritmo e cenas.
-- **Depois do aval:** voz final na ElevenLabs (Eleven v4), pela API com a chave do projeto (skill `elevenlabs`).
-- **Encaixe:** feito pelas ferramentas do kit, quase sem gastar tokens.
+**Padrão do Oliver (2026-10-09): ele gera o áudio.**
+1. Primeiro fecha-se a **copy do áudio** (o que vai ser dito). Entregar o **texto de voz pronto para o Eleven v4** (com emoção, `locucao-elevenlabs.md`) faz parte de toda produção com locução: conteúdo, anúncio ou outra peça.
+2. O Oliver gera no site da ElevenLabs e **envia o áudio** (em `_inbox/audio/<vídeo>/` ou anexado). **Conteúdo:** 1 áudio → `split-vo` corta e encaixa. **Anúncio:** pode vir **vários áudios** → uma variante por áudio (skill `video`, `references/variantes.md`).
+3. Encaixe pelas ferramentas do kit, quase sem gastar tokens.
+- **API (`elevenlabs.mjs`)**: só quando o Oliver pedir. **Voz de rascunho grátis (`tts.mjs`)**: opcional, para prévia de ritmo e cenas enquanto o áudio não chega; nunca vai ao ar.
 
 ## Especialista
 Você é diretor de locução para vídeo curto, trabalhando com TTS. Régua: voz que soa dita para a persona, no tempo das cenas, sem gastar crédito à toa.
 - **Repertório que você aplica:** o áudio manda no relógio (a timeline nasce da fala medida); texto escrito para o ouvido (número, hora e sigla por extenso; frase curta acelera, vírgula e reticências desaceleram); ≤ 2,7 palavras/s; silêncio entre falas ≤ 0,5 s e ≤ 1 s só na virada; uma fala = um arquivo, para trocar uma sem regenerar o resto.
-- **Bom, para você, é:** a locução cabe na duração · nenhuma fala mudou de ritmo sem você conferir os gestos presos a palavras · o Oliver aprova o ritmo com voz grátis antes de qualquer crédito · nada vai ao ar com voz de rascunho.
-- **Você não faz:** reescrever o roteiro aprovado (é do `roteirista`); gastar crédito de voz final antes do aval da v1.0; mexer em cena para compensar fala longa (reescreve a fala mais curta).
+- **Bom, para você, é:** a locução cabe na duração · nenhuma fala mudou de ritmo sem você conferir os gestos presos a palavras · o texto de voz chega ao Oliver junto com a copy aprovada · nada vai ao ar com voz de rascunho.
+- **Você não faz:** reescrever o roteiro aprovado (é do `roteirista`); gerar voz final pela API sem o Oliver pedir; mexer em cena para compensar fala longa (reescreve a fala mais curta).
 
 ## Contexto
 - `brand/BRAND.md#Vídeo` · sempre — voz de rascunho e final da empresa, pronúncia da marca
@@ -34,13 +35,14 @@ Você é diretor de locução para vídeo curto, trabalhando com TTS. Régua: vo
 ## Ordem de trabalho
 | situação | caminho |
 |---|---|
-| vídeo novo, plano aprovado | 1 |
-| v1.0 aprovada, com API | 2 (skill `elevenlabs`) |
-| v1.0 aprovada, o Oliver gera no site um arquivo por fala | 2 sem API → 3 |
-| o Oliver gerou tudo num arquivo só no site | 2b |
-| "gerei o áudio", arquivos chegaram | 3 |
+| copy do áudio aprovada (padrão) | 2 sem API: entregar o texto de voz → o Oliver gera e envia |
+| chegou 1 áudio único (conteúdo) | 2b |
+| chegaram vários áudios (anúncio) | 2b ou 3 por áudio → uma variante cada (skill `video`, `references/variantes.md`) |
+| "gerei o áudio", um arquivo por fala | 3 |
+| prévia de ritmo antes do áudio chegar | 1 (opcional) |
+| o Oliver pediu para gerar pela API | 2 (skill `elevenlabs`) |
 
-### 1. v1.0: voz de rascunho (padrão de todo vídeo)
+### 1. Prévia com voz de rascunho (opcional)
 - `node tools/video-kit/scripts/tts.mjs <pasta>`: gera todas as falas com a voz `draft` da empresa (`companies/<slug>/brand/voices.json`; catálogo `library/voices/`). Padrão do hub: **Thalita** (`edge-thalita`, neural da Microsoft, grátis, online). Sem internet: `--voice win-maria` (Windows, offline). Corta o silêncio, mede cada palavra e **encaixa a timeline** sozinho.
 - Número, hora e sigla: escreva em `vo[].say` como se fala ("onze da noite"); `text` fica como se lê.
 - Registre no `plano.md`: "voz de rascunho; trocar pela final após aval".
@@ -48,10 +50,10 @@ Você é diretor de locução para vídeo curto, trabalhando com TTS. Régua: vo
 ### 2. Voz final: ElevenLabs, sempre Eleven v4
 **Siga a skill `elevenlabs`** (regras do v4, audio tags, vozes, comando). Resumo:
 - Para cada fala, escreva `vo[].el` na `timeline.json`: o `say` aprovado + emoção em audio tags (`[tired, end of a long day]`, `[sighs]`, `[relieved]`), reticências para pausa e no máximo 1 palavra em MAIÚSCULAS. No v4 **não existe** `<break>`, style nem speed.
-- `node tools/video-kit/scripts/elevenlabs.mjs <pasta> --dry` (confere texto, voz e créditos) → com o aval do Oliver, `--aprovado` (gera pela API com a chave do projeto, tempos exatos por palavra, e encaixa sozinho).
-- Sem API: entregue `<pasta>/locucao-elevenlabs.md`, um bloco por fala (`### f1 · arquivo: f1.mp3 · alvo ≈ 1,8 s`, modelo Eleven v4, stability, similarity e o texto `el`); os arquivos voltam pelo passo 3.
+- Só se o Oliver pedir API: `node tools/video-kit/scripts/elevenlabs.mjs <pasta> --dry` (confere texto, voz e créditos) → com o aval dele, `--aprovado` (gera pela API com a chave do projeto, tempos exatos por palavra, e encaixa sozinho).
+- **Padrão (sem API):** entregue `<pasta>/locucao-elevenlabs.md`, um bloco por fala (`### f1 · arquivo: f1.mp3 · alvo ≈ 1,8 s`, modelo Eleven v4, stability, similarity e o texto `el`); os arquivos voltam pelo passo 3.
 
-### 2b. Locução única (o Oliver gera tudo num arquivo só no site)
+### 2b. Áudio único (o Oliver gera tudo num arquivo só no site; padrão do conteúdo)
 Com os `vo[].text` já no `timeline.json`:
 ```
 node tools/video-kit/scripts/split-vo.mjs <pasta> <arquivo.mp3> --voice el-carla
@@ -69,7 +71,7 @@ O script guarda o original (`audio/vo/final/`), **corta o silêncio das pontas, 
 Depois: ajustes pontuais na timeline (`lead`/`gap`/`tail`/`min`, ou `timeline.mjs text|dur`) → `sfx` → `mix` → `produce --build-only` → `check` → `produce` → `qc.mjs --sheet`.
 
 ## Regras duras
-- Nunca gastar crédito de voz final antes do aval da v1.0.
+- Nunca gerar voz final pela API sem o Oliver pedir (o padrão é ele gerar no site).
 - Nunca publicar com voz de rascunho.
 - Número, hora, preço ou sigla sempre por extenso no texto da voz (`say` e `el`).
 - Locução que não cabe na duração (≤ ~2,7 palavras/s) volta para o texto, não para a cena.

@@ -1,11 +1,11 @@
 ---
 name: elevenlabs
-description: "Voz final com a ElevenLabs, sempre no modelo Eleven v4: escreve o texto de cada fala com emoção (audio tags, pontuação, ênfase), escolhe e registra vozes, gera pela API com tempos por palavra e encaixa no vídeo. Use quando o usuário falar em ElevenLabs, voz final, voz v4, 'gera a voz', 'aprovado, pode gerar a voz', emoção na voz, audio tags, cadastrar voz, testar vozes, ou quando a skill locucao/video chegar na voz final."
+description: "Voz final com a ElevenLabs, sempre no modelo Eleven v4: escreve o texto de cada fala com emoção (audio tags, pontuação, ênfase), escolhe e registra vozes; padrão: o Oliver gera no site com esse texto e envia o áudio (pela API só quando ele pedir), e o áudio é encaixado no vídeo. Use quando o usuário falar em ElevenLabs, voz final, voz v4, 'gera a voz', 'aprovado, pode gerar a voz', emoção na voz, audio tags, cadastrar voz, testar vozes, ou quando a skill locucao/video chegar na voz final."
 ---
 
 # ElevenLabs (voz final, Eleven v4)
 
-Transforma as falas aprovadas na v1.0 em voz final: escreve `vo[].el` com emoção, gera pela API com tempos por palavra e deixa a timeline reencaixada. Também escolhe e registra vozes. A voz de rascunho e o encaixe manual são da skill `locucao`; trilha e efeitos, da skill `audio`.
+Transforma a copy do áudio aprovada em texto de voz final: escreve `vo[].el` com emoção para o Oliver gerar no site (padrão, 2026-10-09) ou, se ele pedir, gera pela API com tempos por palavra; a timeline é reencaixada com o áudio. Também escolhe e registra vozes. A voz de rascunho e o encaixe manual são da skill `locucao`; trilha e efeitos, da skill `audio`.
 
 Fonte: documentação oficial da ElevenLabs, conferida em 2026-10-07 (Eleven v4 saiu em 28/09/2026). Os modelos mudam: em dúvida, confira de novo [modelos](https://elevenlabs.io/docs/overview/models) e o [guia de prompting](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices).
 
@@ -13,7 +13,7 @@ Fonte: documentação oficial da ElevenLabs, conferida em 2026-10-07 (Eleven v4 
 Você é diretor de voz para TTS expressivo, especialista no Eleven v4. Régua: locução que soa como atriz dirigida, não como leitura de robô nem novela.
 - **Repertório que você aplica:** emoção por audio tags descritivas em inglês (qualidade da voz, não efeito sonoro) e por contexto coerente com a tag; pausa e ritmo pela pontuação (o v4 não tem speed nem `<break>`); stability como o controle principal (`creative` · `natural` · `robust`); várias versões (`--takes`) onde a fala é decisiva, porque o v4 varia a cada geração.
 - **Bom, para você, é:** 1–2 tags por fala, a voz segue a emoção sem instabilidade · a fala cabe no tempo da cena · número, hora, preço e sigla por extenso e a marca pronunciada como o `BRAND.md` manda · cada geração registrada (voz, ajustes, texto, request-id) · nenhum crédito gasto antes do aval.
-- **Você não faz:** gerar antes do aval da v1.0; efeitos sonoros por tag (vêm da biblioteca, skill `audio`); sotaque forçado ou `[sings]` no vídeo da marca; reescrever o sentido da fala aprovada (só a forma falada); clonar voz sem autorização escrita da dona da voz.
+- **Você não faz:** gerar pela API sem o Oliver pedir; efeitos sonoros por tag (vêm da biblioteca, skill `audio`); sotaque forçado ou `[sings]` no vídeo da marca; reescrever o sentido da fala aprovada (só a forma falada); clonar voz sem autorização escrita da dona da voz.
 
 ## Contexto
 - `brand/BRAND.md#Vídeo` · sempre — voz final da empresa e stability usada, pronúncia da marca
@@ -29,25 +29,25 @@ Você é diretor de voz para TTS expressivo, especialista no Eleven v4. Régua: 
 ## Ordem de trabalho
 | pedido | caminho |
 |---|---|
-| "aprovado, pode gerar a voz" | 1 → 2 → 3 → 4 |
+| copy do áudio aprovada (**padrão**: o Oliver gera no site e envia o áudio) | 1 → 2 → entregar o `el` (skill `locucao`, passo 2 sem API) |
+| o Oliver pediu para gerar pela API | 1 → 2 → 3 → 4 |
 | testar ou cadastrar voz nova | **Vozes** > Escolher voz nova |
-| o Oliver vai gerar no site | 1 → 2 → entregar o `el` (skill `locucao`, passo 2 sem API) |
 
-1. **Confirme o aval da v1.0** e a voz final da empresa (`voices.json` > `final`; personagens em `roles`).
+1. **Confirme a copy do áudio aprovada** e a voz final da empresa (`voices.json` > `final`; personagens em `roles`).
 2. **Escreva `vo[].el`** de cada fala pela seção **Texto da voz**.
 3. `node tools/video-kit/scripts/elevenlabs.mjs <pasta> --dry` (texto, voz e créditos, não gasta) → com o aval do Oliver, `--aprovado`. No gancho e nas falas com tag forte, `--only fN --takes 3` → o Oliver ouve → `--pick fN=K`.
 4. Confira o aviso de falas que mudaram mais de 0,6 s e siga para a skill `video`.
 
 ## Regras duras
 - **Modelo: sempre `eleven_v4`** (`eleven_v4_turbo` é para tempo real, não para vídeo).
-- Nunca gerar antes do aval da v1.0 (o script exige `--aprovado`).
+- Nunca gerar pela API sem o Oliver pedir (o padrão é ele gerar no site; o script exige `--aprovado`).
 - Nunca `<break>`, style ou speed no v4 (são ignorados ou dão erro).
 - Nunca número, hora, preço ou sigla em algarismo no `el`.
 - **Uma fala = um arquivo** (`f1`, `f2`…), para trocar uma sem regenerar o resto.
 - **Chave por projeto:** `ELEVENLABS_API_KEY` salva no app → **Configurações** (grava em `companies/<slug>/.env`, fora do git); a `.env` da raiz é só reserva. Nunca a chave no git, no chat ou em arquivo que não seja a `.env`.
 
 ## Checklist antes de entregar
-- O aval da v1.0 existe antes de qualquer `--aprovado`?
+- A copy do áudio está aprovada e, se for pela API, o Oliver pediu antes do `--aprovado`?
 - Toda fala tem `el` com no máximo 1–2 tags e no máximo 1 palavra em MAIÚSCULAS, sem `<break>`?
 - Número, hora, preço e sigla estão por extenso e a marca escrita como se pronuncia?
 - O `--dry` foi rodado e conferido (texto, voz, créditos) antes de gerar?

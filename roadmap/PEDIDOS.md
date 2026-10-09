@@ -9,7 +9,6 @@
 |---|---|---|---|
 | 1 | 047 | **Fase B:** refazer o plano da apresentação kz com a skill `plano-de-cenas` (revisão Opus + storyboard) e comparar com a v03; calibrar rubrica e `plano.mjs check` | pedido do Oliver de 2026-10-08 (fase A feita) |
 | 2 | 045 | **Fase E:** insumos pela IA ("Pedir à IA" +5 aberturas/headlines/copys/CTAs com contexto + intel; insumos editáveis na aba Variantes; seção Variantes nas skills `video` e `ads-meta`) | fase D feita em 2026-10-09 |
-| 3 | 048 | **Ficha de agente e skill:** formulário guiado (papel de especialista, contexto exato por select de arquivos, ordem, regras, checklist) + conferência do contexto + revisão das skills no molde. Sessão limpa; começa pelas 3 perguntas do `TASK.md` | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
@@ -27,6 +26,7 @@
 | 029 | 4 perguntas no `TASK.md` (a 041 já cobre as fontes) |
 | 030 | testar o editor de mockups + aprovar os 8 fundos → fase B |
 | 032 | ~~`/login`~~ feito em 2026-10-08; falta o teste com a T-0017 no Rodar IA |
+| 048 | feita (34 fichas no molde); decisões pontuais restantes no fim do `TASK.md` (área segura de anúncio, Write no revisor, ads-meta no estrategista, PRODUTO.md na setup, teto dos fmt-*, etc.) |
 
 ## Na fila (pedido antigo, não implementado)
 | tarefa | pedido | próximo passo |

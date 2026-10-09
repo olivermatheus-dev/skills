@@ -93,3 +93,8 @@ Status: feita (2026-10-09): molde, app, conferência, pacote e as 34 fichas (7 a
 8. `heartbeat --watch 30`: manter (só roda sob comando) ou tirar?
 9. `setup` cria 6 arquivos de contexto, mas a kz tem `PRODUTO.md`: a setup deve criar o PRODUTO.md?
 10. Mockup sem título no pedido usa `COPY.md#Diferenciais`: confirma?
+
+## Decididas pelo Oliver (2026-10-09)
+- **Voz:** padrão = copy do áudio aprovada → a IA entrega o texto de voz com emoção para o Eleven v4 (parte de toda produção com locução) → **o Oliver gera no site e envia** (conteúdo: 1 áudio; anúncio: vários áudios = uma variante por áudio) → `split-vo`/`fit-vo`. API só se ele pedir; rascunho grátis só como prévia. Aplicado em `locucao`, `elevenlabs`, `video`, `editor-de-video` e CLAUDE.md (resolve o item 6 da onda 3).
+- **Pesquisador em Sonnet** (item 2).
+- **Analisado não vira ideia**: só com pedido no chat ou "Virar ideia" marcado no app (item 1). Aplicado em `pesquisador` e `referencias`.

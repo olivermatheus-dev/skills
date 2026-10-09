@@ -31,7 +31,7 @@ companies/<slug>/
 Molde: `companies/_modelo/`. Arquivos novos do usuário → `_inbox/` (fora do git) → a skill `setup` classifica e move.
 Marca: **`brand.json` é a fonte única de tokens** (app → Contexto e marca → Kit de marca, ou editar o JSON e rodar `npm run brand -- <slug>`); ele gera o `brand.css`, que carrossel e vídeo linkam direto (nunca editar o `brand.css` à mão: o `validate` acusa). Ícones: só **Lucide** → `node tools/icon.mjs <nome> --brand <slug>` (busca: `--busca <termo>`); `BRAND.md` manda sobre os defaults das skills; **Proibições** são regra dura. Contraste: `node tools/contrast.mjs`.
 Arquivos pesados (vídeo, áudio, renders, .psd/.ai/.fig) não vão para o git.
-Vídeo: motor em `tools/video-kit/` (README = comandos; voz de rascunho grátis → aval → Eleven v4 pela API → `elevenlabs.mjs` encaixa).
+Vídeo: motor em `tools/video-kit/` (README = comandos). **Voz (padrão do Oliver):** copy do áudio aprovada → a IA entrega o texto de voz com emoção para o Eleven v4 → o Oliver gera no site e envia o áudio (conteúdo: 1; anúncio: vários = uma variante por áudio) → `split-vo`/`fit-vo` encaixa. Rascunho grátis só como prévia; API (`elevenlabs.mjs`) só se ele pedir.
 **Chaves de API:** uma por projeto, salvas no app → Configurações (`companies/<slug>/.env`, fora do git); `.env` da raiz é reserva. Scripts leem por `tools/lib/env.mjs`. Vozes: `library/voices/` + `companies/<slug>/brand/voices.json`. Ajuste de voz, duração, texto e trilha sem reescrever nada → `node tools/video/timeline.mjs` (núcleo do futuro MCP de edição). QC do MP4 final antes de entregar → `node tools/video/qc.mjs <pasta> --sheet`.
 **Onde fica cada asset** (sons, efeitos, templates, marca, entrada bruta): `library/README.md`.
 Biblioteca visual global (ícones, mapas, bandeiras, logos de terceiros): `library/visual/` (sem licença registrada, não usa). Galeria de reuso (componentes de motion, fx, looks): consultar o índice antes de criar, promover o que ficou bom (tarefa 014).
@@ -53,7 +53,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `video` | vídeo em motion graphics: briefing → plano aprovado → timeline → cenas → QA → MP4 |
 | `audio` | trilhas, sound design de vídeo, biblioteca de sons (buscar, gerar, baixar, catalogar) |
 | `locucao` | voz v1.0 gratuita → voz final → encaixe do áudio final |
-| `elevenlabs` | voz final sempre no Eleven v4: emoção (audio tags), vozes, geração pela API e encaixe |
+| `elevenlabs` | texto de voz final no Eleven v4: emoção (audio tags), vozes; o Oliver gera no site (API só se ele pedir) |
 | `radar` | descobrir concorrentes, referências e páginas → candidatos (aceite do Oliver) |
 | `analise-concorrentes` | análise por módulos (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui): roda a fila marcada no app, script + subagentes Sonnet |
 | `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
