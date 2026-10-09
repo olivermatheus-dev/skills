@@ -3,37 +3,15 @@
 // Reaproveita os componentes de edição do painel de conteúdo (FichaPanel): cada edição vai para `ficha.override`, como no conteúdo.
 // Funil, tipo e objetivo NÃO se editam aqui: moram na seção "Classificação" do painel do anúncio e vão só para ads/marks.json (um lugar só).
 import { useMemo } from 'react';
-import { Clock, Lightbulb, RefreshCw, ScanSearch, Sparkles } from 'lucide-react';
+import { Lightbulb, RefreshCw, Sparkles } from 'lucide-react';
 import { FCtx, Campo, EditText, Gatilhos, MultiSelect, VSelect, type Ctx } from './FichaPanel';
-import { useFicha, useFichasVocab, usePedido } from './useFichas';
-import { Button, cx, fmtDate, fmtNum } from '../../kit';
+import { useFicha, useFichasVocab } from './useFichas';
+import { fmtDate, fmtNum } from '../../kit';
 import { Spinner } from '../lib';
 import { Tip } from '../toolbar';
 import type { FichaResumo } from '../../../api';
 
 const NOME_CAMPO = { funil: 'Funil', tipo: 'Tipo', objetivo: 'Objetivo' } as const;
-
-/** convite do anúncio ainda sem análise: grava o pedido na fila (nada roda sozinho) */
-function Convite({ slug, compId, fichaKey, naFila }: { slug: string; compId: string; fichaKey: string; naFila: boolean }) {
-  const { pedir, cancelar } = usePedido(slug, compId, fichaKey);
-  const busy = pedir.isPending || cancelar.isPending;
-  const erro = ((pedir.error ?? cancelar.error) as { message?: string } | null)?.message;
-  return (
-    <div className="rounded-xl border border-dashed border-ai-border bg-ai-soft/60 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-      <ScanSearch className="size-7 text-ai shrink-0" strokeWidth={1.5} />
-      <div className="flex-1 min-w-0">
-        <div className="text-sm font-semibold">{naFila ? 'Na fila de análise' : 'Ainda sem análise'}</div>
-        <p className="text-xs text-muted-foreground mt-0.5">{naFila
-          ? 'Roda quando você pedir “Rodar agora” (aba Conteúdos ou Anúncios) ou “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por anúncio).'
-          : 'A IA lê a arte e o texto, confirma ou corrige funil, tipo e objetivo (com o motivo) e diz por que o anúncio fica no ar. Grava o pedido; nada roda sozinho.'}</p>
-        {erro && <p className="text-xs text-destructive mt-1">{erro}</p>}
-      </div>
-      {naFila
-        ? <Button variant="ghost" disabled={busy} onClick={() => cancelar.mutate()} className="shrink-0">{busy ? <Spinner /> : 'Tirar da fila'}</Button>
-        : <Button disabled={busy} onClick={() => pedir.mutate()} className="shrink-0 inline-flex items-center gap-1.5">{busy ? <Spinner /> : <ScanSearch className="size-4" />}Analisar este</Button>}
-    </div>
-  );
-}
 
 function Stat({ k, v, tip }: { k: string; v: string; tip?: string }) {
   return (
@@ -46,23 +24,21 @@ function Stat({ k, v, tip }: { k: string; v: string; tip?: string }) {
   );
 }
 
-export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: string; compId: string; fichaKey: string; resumo?: Pick<FichaResumo, 'analisada' | 'naFila'> }) {
+export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: string; compId: string; fichaKey: string; resumo?: Pick<FichaResumo, 'analisada'> }) {
   const analisada = !!resumo?.analisada;
   const fq = useFicha(slug, compId, fichaKey, analisada);
   const vocab = useFichasVocab(slug);
-  const { pedir, cancelar } = usePedido(slug, compId, fichaKey);
   const v = analisada ? fq.data : undefined;
   const ctx = useMemo<Ctx | null>(() => (v ? { slug, v, vocab: vocab.data, saving: fq.saving, edit: fq.edit, revert: fq.revert } : null), [slug, v, vocab.data, fq.saving, fq.edit, fq.revert]);
 
-  if (!analisada) return <Convite slug={slug} compId={compId} fichaKey={fichaKey} naFila={!!resumo?.naFila} />;
+  // sem análise não há o que mostrar: o pedido (Analisar / Na fila) fica no cabeçalho do painel
+  if (!analisada) return null;
   if (!v || !ctx) return <div className="py-6 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>;
 
   const f = v.ficha, a = f.analise, c = v.campos, h = f.medidas.historico;
   // o porQue é guardado como a IA escreve ("hipótese: …"); a tela tira o prefixo e o devolve ao salvar
   const porQue = c.porQue?.replace(/^hip[oó]tese:\s*/i, '');
   const correcoes = c.correcaoRegra ?? [];
-  const naFila = !!resumo?.naFila;
-  const busy = pedir.isPending || cancelar.isPending;
 
   return (
     <FCtx.Provider value={ctx}>
@@ -136,13 +112,6 @@ export function AnaliseAnuncio({ slug, compId, fichaKey, resumo }: { slug: strin
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground pt-1">
           <span>Análise de {a?.modelo} em {fmtDate(a?.geradoEm)}. Clique em qualquer valor para corrigir: o que você muda fica à parte e vale sobre a IA.</span>
           {fq.saving && <span className="inline-flex items-center gap-1"><Spinner />salvando</span>}
-          <span className="ml-auto inline-flex items-center gap-2">
-            {naFila
-              ? <><span className="inline-flex items-center gap-1"><Clock className="size-3.5" />Reanálise na fila</span><Button variant="ghost" disabled={busy} onClick={() => cancelar.mutate()}>Tirar da fila</Button></>
-              : <Tip content="Entra na fila de fichas; roda com “Rodar agora” ou “roda a fila de fichas” no Claude Code. Suas edições continuam."><span>
-                <Button variant="ghost" disabled={busy} onClick={() => pedir.mutate()} className={cx('inline-flex items-center gap-1.5')}>{busy ? <Spinner /> : <RefreshCw className="size-3.5" />}Reanalisar</Button>
-              </span></Tip>}
-          </span>
         </div>
       </div>
     </FCtx.Provider>

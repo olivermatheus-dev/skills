@@ -795,11 +795,55 @@ function CamposMarcacao({ mar, suggestions }: { mar: Marcacao; suggestions: stri
   );
 }
 
-// ───────────────────────── "Analisar / Reanalisar" ─────────────────────────
-function useAnalisar(slug: string, compId: string, mk: string) {
-  const { pedir, cancelar } = usePedido(slug, compId, mk);
-  const err = (pedir.error ?? cancelar.error) as { message?: string } | null;
-  return { pedir, cancelar, busy: pedir.isPending || cancelar.isPending, erro: err?.message };
+// ───────────────────────── cabeçalho: peças comuns aos painéis de conteúdo e de anúncio ─────────────────────────
+/** Analisar / Reanalisar (roxo = IA) ou, se o pedido já está na fila, o selo "Na fila" com × para tirar. `explica` = o que a análise devolve */
+export function BotaoAnalisar({ slug, compId, chave, analisada, naFila, explica, custo = 'item' }: {
+  slug: string; compId: string; chave: string; analisada: boolean; naFila: boolean; explica: string; custo?: string;
+}) {
+  const { pedir, cancelar } = usePedido(slug, compId, chave);
+  const busy = pedir.isPending || cancelar.isPending;
+  const erro = ((pedir.error ?? cancelar.error) as { message?: string } | null)?.message;
+  const fila = `roda quando você pedir “Rodar agora” ou “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por ${custo})`;
+  return (
+    <>
+      {erro && <span className="text-xs text-destructive max-w-48 truncate" title={erro}>{erro}</span>}
+      {naFila ? (
+        <Tip content={`${analisada ? 'Reanálise' : 'Análise'} na fila: ${fila}.`}>
+          <span className="inline-flex items-center h-8 rounded-md bg-ai-soft text-ai-ink text-sm font-medium pl-2.5 pr-1 gap-1.5">
+            <Clock className="size-4" />Na fila
+            <button type="button" disabled={busy} onClick={() => cancelar.mutate()} aria-label="Tirar da fila" className="grid place-items-center size-6 rounded hover:bg-ai-muted">
+              {busy ? <Spinner /> : <X className="size-3.5" />}
+            </button>
+          </span>
+        </Tip>
+      ) : (
+        <Tip content={analisada ? `Pede uma nova análise: entra na fila e ${fila}. Suas edições continuam.` : `${explica}\nGrava o pedido na fila; nada roda sozinho (≈ US$ 0,08 por ${custo}).`}><span>
+          <Button variant={analisada ? 'ai-soft' : 'ai'} disabled={busy} onClick={() => pedir.mutate()} className="inline-flex items-center gap-1.5 h-8">
+            {busy ? <Spinner /> : analisada ? <RefreshCw className="size-3.5" /> : <ScanSearch className="size-4" />}{analisada ? 'Reanalisar' : 'Analisar'}
+          </Button>
+        </span></Tip>
+      )}
+    </>
+  );
+}
+
+/** selo da análise na linha de baixo do título */
+export function SeloAnalise({ modelo, geradoEm }: { modelo?: string; geradoEm?: string }) {
+  return (
+    <Tip content={`Análise${modelo ? ` de ${modelo}` : ''} em ${fmtDate(geradoEm)}.\nClique em qualquer valor para corrigir: o que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
+      <span className="inline-flex items-center gap-1 rounded-full bg-ai-soft text-ai-ink text-[11px] font-medium px-2 py-px shrink-0 cursor-help"><Sparkles className="size-3" />Análise da IA · {fmtDate(geradoEm)}</span>
+    </Tip>
+  );
+}
+
+/** abrir a fonte (post, Biblioteca de Anúncios): a ação final do cabeçalho, na cor do projeto */
+export function AbrirOriginal({ href, label = 'Abrir original' }: { href: string; label?: string }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer"
+      className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition">
+      <ExternalLink className="size-4" />{label}
+    </a>
+  );
 }
 
 // ───────────────────────── sem análise: o miolo ─────────────────────────
@@ -897,7 +941,6 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
   const m = r.mark;
   const a = v?.ficha.analise;
   const mar = useMarcacao(r, onMark);
-  const an = useAnalisar(slug, compId, r.mk);
   const [ideaTitle, setIdeaTitle] = useState(() => titleOf(r).slice(0, 120));
   const [relAberto, setRelAberto] = useState(false);
   const ideaRef = useRef<HTMLDivElement>(null);
@@ -923,11 +966,7 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
                     {platformLabel(r.platform)} · {TYPE_LABEL[r.item.type] ?? r.item.type}{profileLabel ? ` · ${profileLabel}` : ''}
                     {r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · publicado em ${fmtDate(r.item.publishedAt)} (${timeAgo(r.item.publishedAt)})` : ' · data desconhecida'}
                   </span>
-                  {a && (
-                    <Tip content={`Análise de ${a.modelo} em ${fmtDate(a.geradoEm)}.\nClique em qualquer valor para corrigir: o que tem o selo "você" foi editado por você e nenhuma reanálise apaga.`}>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-ai-soft text-ai-ink text-[11px] font-medium px-2 py-px shrink-0 cursor-help"><Sparkles className="size-3" />Análise da IA · {fmtDate(a.geradoEm)}</span>
-                    </Tip>
-                  )}
+                  {a && <SeloAnalise modelo={a.modelo} geradoEm={a.geradoEm} />}
                   {rel && (
                     <Tip content={`Este conteúdo é citado no relatório de ${fmtDate(rel.gerado)}.\nAbre o relatório.`}>
                       <button type="button" onClick={() => setRelAberto(true)} className="inline-flex items-center gap-1 rounded-full border border-ai-border text-ai-ink hover:bg-ai-soft text-[11px] font-medium px-2 py-px shrink-0">
@@ -960,29 +999,9 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
 
               <span className="w-px h-6 bg-border mx-1" aria-hidden />
 
-              {an.erro && <span className="text-xs text-destructive max-w-48 truncate" title={an.erro}>{an.erro}</span>}
-              {naFila ? (
-                <Tip content={`${analisada ? 'Reanálise' : 'Análise'} na fila: roda quando você pedir “roda a fila de fichas” no Claude Code (≈ US$ 0,08 por item).`}>
-                  <span className="inline-flex items-center h-8 rounded-md bg-ai-soft text-ai-ink text-sm font-medium pl-2.5 pr-1 gap-1.5">
-                    <Clock className="size-4" />Na fila
-                    <button type="button" disabled={an.busy} onClick={() => an.cancelar.mutate()} aria-label="Tirar da fila" className="grid place-items-center size-6 rounded hover:bg-ai-muted">
-                      {an.busy ? <Spinner /> : <X className="size-3.5" />}
-                    </button>
-                  </span>
-                </Tip>
-              ) : (
-                <Tip content={analisada
-                  ? 'Pede uma nova análise (entra na fila de fichas; roda com “roda a fila de fichas” no Claude Code). Suas edições continuam.'
-                  : 'A IA lê o conteúdo e devolve tema, tipo, gancho, gatilhos dos 5 s e por que funcionou.\nGrava o pedido na fila; nada roda sozinho (≈ US$ 0,08 por item).'}><span>
-                  <Button variant={analisada ? 'ai-soft' : 'ai'} disabled={an.busy} onClick={() => an.pedir.mutate()} className="inline-flex items-center gap-1.5 h-8">
-                    {an.busy ? <Spinner /> : analisada ? <RefreshCw className="size-3.5" /> : <ScanSearch className="size-4" />}{analisada ? 'Reanalisar' : 'Analisar'}
-                  </Button>
-                </span></Tip>
-              )}
-              <a href={r.item.url} target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition">
-                <ExternalLink className="size-4" />Abrir original
-              </a>
+              <BotaoAnalisar slug={slug} compId={compId} chave={r.mk} analisada={analisada} naFila={naFila}
+                explica='A IA lê o conteúdo e devolve tema, tipo, gancho, gatilhos dos 5 s e por que funcionou.' />
+              <AbrirOriginal href={r.item.url} />
             </div>
           </header>
 

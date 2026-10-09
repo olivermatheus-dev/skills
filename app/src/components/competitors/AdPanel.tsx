@@ -1,9 +1,9 @@
-// Painel do anúncio (037 D): o mesmo desenho do painel de conteúdo (mídia à esquerda, miolo, rodapé), para o que o Oliver faz com o anúncio:
+// Painel do anúncio (037 D): o mesmo desenho do painel de conteúdo (cabeçalho com todas as ações, mídia à esquerda, miolo), para o que o Oliver faz com o anúncio:
 // corrigir funil/tipo/objetivo (o valor dele vence regra e IA, coleta nova não apaga), anotar, pôr tags e SALVAR (guarda uma cópia do anúncio
 // e da miniatura: o salvo continua abrindo inteiro mesmo se a Biblioteca tirar o anúncio do ar).
 import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Bookmark, BookmarkCheck, ExternalLink, Info, LogOut, Megaphone, Sparkles, Undo2, UserRound } from 'lucide-react';
+import { Bookmark, BookmarkCheck, LogOut, Megaphone, Sparkles, Undo2, UserRound } from 'lucide-react';
 import type { Ad, AdMark, AdMarkPatch, AnuncioHistorico, Classificacao } from '../../api';
 import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, fichaKeyDeAd, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
@@ -13,6 +13,7 @@ import { Tip } from './toolbar';
 import { TagsInput, TagChip, useProjectTags } from '../notes/TagsInput';
 import { ChipDestino, ChipOferta, FUNIL, OBJETIVO, StatusBadge, TIPO, motivosDe, type StatusAd } from './AdChips';
 import { AnaliseAnuncio } from './ficha/AdFicha';
+import { AbrirOriginal, BotaoAnalisar, SeloAnalise } from './ficha/FichaPanel';
 import { useFichasResumo } from './ficha/useFichas';
 
 /** o que o painel precisa saber de um anúncio (a linha da aba Anúncios, já com a classificação resolvida) */
@@ -67,19 +68,42 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
     <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
       <DialogContent aria-describedby={undefined}
         className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1100px] sm:max-w-[1100px] h-[calc(100vh-2rem)] max-h-[860px]">
-        <header className="flex items-center gap-3 px-6 py-3.5 pr-14 border-b border-border">
-          <Megaphone className="size-5 shrink-0 text-muted-foreground" />
-          <div className="min-w-0 flex-1">
-            <DialogTitle className="text-base font-semibold leading-snug truncate" title={title || text}>{title || text.slice(0, 90) || 'Anúncio sem texto'}</DialogTitle>
-            <DialogDescription className="text-xs text-muted-foreground mt-0.5 truncate">
-              <Link to={`/p/${slug}/concorrentes/${r.compId}`} className="font-medium text-foreground hover:text-primary-ink">{r.compName}</Link>
-              {' · '}{MEDIA_LABEL[ad.media.type]}
-              {ad.startedAt ? ` · no ar desde ${fmtDate(ad.startedAt)}${r.days != null ? ` (${r.days} dias${r.gone ? ' até sair' : ''})` : ''}` : ''}
-              {' · '}<a href={ad.url} target="_blank" rel="noreferrer" className="text-primary-ink inline-flex items-center gap-0.5">abrir na Biblioteca<ExternalLink className="size-3" /></a>
-            </DialogDescription>
+        {/* cabeçalho no mesmo padrão do painel de conteúdo: o que é (esquerda) e TODAS as ações (direita): salvar, IA (roxo) e abrir na Biblioteca (cor do projeto) */}
+        <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">
+          <div className="flex items-center gap-3 min-w-0 flex-1 basis-[320px]">
+            <Megaphone className="size-5 shrink-0 text-muted-foreground" />
+            <div className="min-w-0 flex-1">
+              <DialogTitle className="text-base font-semibold leading-snug truncate" title={title || text}>{title || text.slice(0, 90) || 'Anúncio sem texto'}</DialogTitle>
+              <DialogDescription className="text-xs text-muted-foreground mt-0.5 flex items-center gap-2 min-w-0">
+                <span className="truncate">
+                  <Link to={`/p/${slug}/concorrentes/${r.compId}`} className="font-medium text-foreground hover:text-primary-ink">{r.compName}</Link>
+                  {' · '}{MEDIA_LABEL[ad.media.type]}
+                  {ad.startedAt ? ` · no ar desde ${fmtDate(ad.startedAt)}${r.days != null ? ` (${r.days} dias${r.gone ? ' até sair' : ''})` : ''}` : ''}
+                </span>
+                <span className="shrink-0"><StatusBadge status={r.status} sinal={r.sinal} /></span>
+                {r.gone && <Tip content={r.fromCopy ? 'Aberto pela cópia guardada: o anúncio não está mais na coleta.' : undefined}>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-800 text-[11px] font-medium px-2 py-px shrink-0"><LogOut className="size-3" />Fora do ar</span>
+                </Tip>}
+                {selo?.analisada && <SeloAnalise geradoEm={selo.geradoEm} />}
+              </DialogDescription>
+            </div>
           </div>
-          {r.gone && <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 text-[11px] font-medium px-2 py-0.5 shrink-0"><LogOut className="size-3" />Fora do ar</span>}
-          <StatusBadge status={r.status} sinal={r.sinal} />
+
+          <div className="flex items-center gap-2 shrink-0">
+            <Tip content={saved
+              ? `Salvo ${mark?.savedAt ? timeAgo(mark.savedAt) : ''}${mark?.frozenMedia ? ' · miniatura guardada' : ''}.\nClique para tirar dos salvos (apaga a cópia guardada; nota e tags ficam).`
+              : 'Guarda uma cópia do anúncio e da miniatura: continua abrindo inteiro mesmo se a Biblioteca tirar do ar.'}>
+              <span><Button variant="soft" className="inline-flex items-center gap-1.5 h-8" onClick={() => onMark({ saved: !saved })}>
+                {saved ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}{saved ? 'Salvo' : 'Salvar'}
+              </Button></span>
+            </Tip>
+
+            <span className="w-px h-6 bg-border mx-1" aria-hidden />
+
+            <BotaoAnalisar slug={slug} compId={r.compId} chave={fichaKey} analisada={!!selo?.analisada} naFila={!!selo?.naFila} custo="anúncio"
+              explica="A IA lê a arte e o texto, confirma ou corrige funil, tipo e objetivo (com o motivo) e diz por que o anúncio fica no ar." />
+            <AbrirOriginal href={ad.url} label="Abrir na Biblioteca" />
+          </div>
         </header>
 
         <div className="flex-1 min-h-0 flex flex-col md:flex-row">
@@ -161,9 +185,11 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
               </Secao>
             )}
 
-            <Secao titulo="Análise da IA" dica="Ficha do anúncio (040). Funil, tipo e objetivo ficam em Classificação, acima.">
-              <AnaliseAnuncio slug={slug} compId={r.compId} fichaKey={fichaKey} resumo={selo} />
-            </Secao>
+            {selo?.analisada && (
+              <Secao titulo="Análise da IA" dica="Ficha do anúncio (040). Funil, tipo e objetivo ficam em Classificação, acima.">
+                <AnaliseAnuncio slug={slug} compId={r.compId} fichaKey={fichaKey} resumo={selo} />
+              </Secao>
+            )}
 
             <Secao titulo="Nota" dica="Por que este anúncio importa, o que copiar (o mecanismo, não a frase).">
               <Textarea rows={4} value={note} onChange={(e) => setNote(e.target.value)} onBlur={saveNote} placeholder="Ex.: abre com a dor do prontuário; oferta de 15 dias sem cartão." />
@@ -188,17 +214,6 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
             </Secao>
           </div>
         </div>
-
-        <footer className="flex flex-wrap items-center gap-x-3 gap-y-2 px-6 py-3 border-t border-border bg-muted/30">
-          <Tip content={saved ? 'Tirar dos salvos (apaga a cópia guardada; nota e tags ficam)' : 'Guarda uma cópia do anúncio e da miniatura: continua abrindo inteiro mesmo se a Biblioteca tirar do ar.'}>
-            <Button variant={saved ? 'soft' : 'primary'} className="inline-flex items-center gap-1.5" onClick={() => onMark({ saved: !saved })}>
-              {saved ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}{saved ? 'Salvo' : 'Salvar anúncio'}
-            </Button>
-          </Tip>
-          {saved && mark?.savedAt && <span className="text-xs text-muted-foreground">salvo {timeAgo(mark.savedAt)}{mark.frozenMedia ? ' · miniatura guardada' : ''}</span>}
-          {r.fromCopy && <span className="inline-flex items-center gap-1 text-xs text-muted-foreground"><Info className="size-3.5" />Aberto pela cópia guardada: o anúncio não está mais na coleta.</span>}
-          <span className="ml-auto text-xs text-muted-foreground hidden lg:inline">Sem gasto nem alcance na Biblioteca: o sinal é indireto.</span>
-        </footer>
       </DialogContent>
     </Dialog>
   );
