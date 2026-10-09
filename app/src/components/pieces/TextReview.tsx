@@ -174,7 +174,7 @@ export default function TextReview({ slug, path, texts, review, saveReview, savi
             <Badge>{mine.filter((c) => c.status === 'aberto').length} abertas</Badge>
             <Select className="ml-auto" value={filter} onChange={(e) => setFilter(e.target.value as 'abertas' | 'todas')}><option value="abertas">só abertas</option><option value="todas">todas</option></Select>
           </div>
-          {!shown.length && <p className="text-sm text-muted-foreground">Nada por aqui. Depois de anotar, peça: <code>revisa as anotações de {path}</code>.</p>}
+          {!shown.length && <p className="text-sm text-muted-foreground">Nada por aqui. Depois de anotar, use <b>Pedir ajustes ao Claude</b> (acima): a IA corrige e responde em cada anotação.</p>}
           <div className="space-y-2">
             {shown.map(({ c, at }) => (
               <CommentCard key={c.id} c={c}

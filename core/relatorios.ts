@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import type { Relatorio, RelatorioTermo } from '../schema/relatorio';
 import type { Ficha } from '../schema/ficha';
 import { ValidationError } from './store';
-import { openTerminal } from './runner';
+import { openTerminal, runPedido } from './runner';
 import { fichasDir } from '../tools/fichas/lib';
 import { lerRelatorio, listarRelatorios } from '../tools/fichas/relatorio-lib';
 import { decidirTermos, type Decisao } from '../tools/fichas/decidir';
@@ -85,10 +85,10 @@ export function comandoRelatorio(slug: string, comp: string, rede: string, itens
 }
 
 /**
- * "Gerar relatório": abre o Claude Code num terminal (o mesmo caminho do Rodar IA → terminal) com a skill referencias, passo 5.
- * Devolve o comando para quem preferir rodar à mão. Rodar em segundo plano fica para a fila (fase seguinte).
+ * "Gerar relatório" (skill referencias, passo 5): em segundo plano pelo heartbeat (046 D, padrão) ou numa janela de terminal (`modo: terminal`).
+ * Devolve o comando para quem preferir rodar à mão (`abrir: false`).
  */
-export function gerarRelatorioView(slug: string, comp: string, body: { rede?: string; itens?: string[]; abrir?: boolean }) {
+export function gerarRelatorioView(slug: string, comp: string, body: { rede?: string; itens?: string[]; abrir?: boolean; modo?: string }) {
   guard(slug, comp);
   const rede = String(body?.rede ?? '');
   if (!['tiktok', 'youtube', 'instagram', 'anuncios'].includes(rede)) throw new ValidationError('relatorio', ['escolha a rede (TikTok, YouTube, Instagram ou Anúncios)']);
@@ -98,8 +98,19 @@ export function gerarRelatorioView(slug: string, comp: string, body: { rede?: st
   const todos = !itens.length || itens.length === ops.length;
   const comando = comandoRelatorio(slug, comp, rede, todos ? undefined : itens);
   const prompt = `Use a skill referencias, passo 5 (relatório da rodada): gere o relatório de ${comp} (empresa ${slug}) no ${rede} com ${todos ? `todas as ${ops.length} fichas analisadas` : `as fichas ${itens.join(', ')}`}. Rode ${comando}, leia o pacote, escreva a leitura como especialista sênior em social media (só números dos agregados; amostra pequena = observações) e grave com --rodada <id> --leitura. Termine com npm run validate e me diga o id do relatório.`;
-  if (body?.abrir !== false) openTerminal(prompt);
-  return { aberto: body?.abrir !== false, comando, itens: todos ? ops.length : itens.length };
+  const n = todos ? ops.length : itens.length;
+  if (body?.abrir === false) return { aberto: false, modo: 'comando' as const, comando, itens: n };
+  if (body?.modo === 'terminal') { openTerminal(prompt); return { aberto: true, modo: 'terminal' as const, comando, itens: n }; }
+  // segundo plano (046 D): mesmo caminho do Rodar IA (heartbeat --pedido), com dock e Parar
+  const r = runPedido({
+    slug, tipo: 'relatorio', ref: `relatorio:${comp}`, agente: 'agent:pesquisador',
+    prompt: `${prompt} O Oliver não está na conversa: decida sozinho e deixe as dúvidas na própria leitura.`,
+    titulo: `Relatório · ${comp} no ${rede} (${n} ficha(s))`,
+    link: `/p/${slug}/concorrentes/${comp}?aba=redes`,
+    allowed: ['Bash(npm run fichas *)', 'Bash(npm run validate)'],
+    extra: { comp, rede, itens: n },
+  });
+  return { aberto: true, modo: 'background' as const, comando, itens: n, pedido: r.pedido };
 }
 
 /** aceitar/recusar FORA de um relatório (painel da ficha): mesma função, a definição vem da ficha que propôs */

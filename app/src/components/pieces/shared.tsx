@@ -1,7 +1,9 @@
 // Peças (tarefa 022): tipos de anotação e o cartão de anotação, comuns ao vídeo e ao roteiro.
 import type { ReactNode } from 'react';
+import { Loader2 } from 'lucide-react';
 import type { PieceKind, Review, ReviewComment } from '../../api';
 import { Badge, Card, cx } from '../kit';
+import { useEmAjuste } from './PedirAjustes';
 
 export type Anchor = ReviewComment['anchor'];
 export type Tipo = ReviewComment['tipo'];
@@ -46,6 +48,7 @@ export const nowLocal = () => new Date().toISOString().slice(0, 19);
 export function CommentCard({ c, anchor, onJump, onToggle, onDelete, extra }: {
   c: ReviewComment; anchor: ReactNode; onJump?: () => void; onToggle: () => void; onDelete: () => void; extra?: ReactNode;
 }) {
+  const emAjuste = useEmAjuste().has(c.id) && c.status === 'aberto';
   return (
     <Card className={cx('py-3', c.status === 'resolvido' && 'opacity-60')} data-comment={c.id}>
       <div className="flex items-center gap-2 text-xs flex-wrap">
@@ -53,13 +56,16 @@ export function CommentCard({ c, anchor, onJump, onToggle, onDelete, extra }: {
         <Badge color={tipoOf(c.tipo).color}>{tipoOf(c.tipo).label}</Badge>
         {onJump ? <button className="text-primary-ink hover:underline text-left" onClick={onJump}>{anchor}</button> : <span className="text-muted-foreground">{anchor}</span>}
         {extra}
+        {emAjuste && <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 border border-violet-200 px-1.5 text-[11px] text-violet-800"><Loader2 className="size-3 animate-spin" />em ajuste</span>}
         <span className="ml-auto flex gap-2">
           <button className="text-muted-foreground hover:text-foreground" onClick={onToggle}>{c.status === 'aberto' ? 'marcar resolvida' : 'reabrir'}</button>
           <button className="text-destructive" onClick={onDelete}>excluir</button>
         </span>
       </div>
       <p className="text-sm mt-1 whitespace-pre-wrap">{c.text}</p>
-      {c.reply && <p className="text-sm mt-1 text-muted-foreground border-l-2 border-success pl-2">IA: {c.reply}</p>}
+      {c.reply && (c.status === 'aberto'
+        ? <p className="text-sm mt-1 text-warning-ink border-l-2 border-warning pl-2">IA pergunta: {c.reply}</p>
+        : <p className="text-sm mt-1 text-muted-foreground border-l-2 border-success pl-2">IA: {c.reply}</p>)}
     </Card>
   );
 }

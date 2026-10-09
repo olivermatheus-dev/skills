@@ -10,6 +10,8 @@ import { toast } from '../toast';
 import { Badge, Button, ErrorBox, Textarea, cx } from '../kit';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { PlatformIcon, Spinner, platformLabel, timeAgo, fmtDateTime } from './lib';
+import { Hourglass, Play } from 'lucide-react';
+import { PedidoStatus, PedirIa, usePedidoIa } from '../atividade/PedidoIa';
 
 const STALE_DAYS = 30;
 const MOD = Object.fromEntries(MODULES.map((m) => [m.id, m])) as Record<ModuleId, (typeof MODULES)[number]>;
@@ -94,21 +96,52 @@ export default function AnalysisPanel({ slug, c, area, onRun }: { slug: string; 
   );
 }
 
-/** pedido na fila da IA, em uma linha (cabeçalho da ficha) */
+/** pedido na fila da IA, em uma linha (cabeçalho da ficha): Rodar agora (046 D) ou o andamento */
 export function QueueChip({ slug, c }: { slug: string; c: Competitor }) {
   const a = useAnalysis(slug, c.id);
   const refresh = useRefresh(slug, c.id);
+  const { pedido, rodando, atualizar } = usePedidoIa(slug, `analise:${c.id}`, { enquantoRoda: refresh, aoTerminar: refresh });
   const r = a.data?.request;
+  if (rodando) return <PedidoStatus slug={slug} pedido={pedido} className="max-w-md !py-0.5 rounded-full" />;
   if (!r) return null;
   async function cancel() {
     try { await api.cancelAnalysis(slug, c.id); toast.ok('Pedido cancelado'); } catch (e) { toast.error(e, 'Não cancelou'); } finally { refresh(); }
   }
+  const mods = r.modules.map((m) => MOD[m]?.label ?? m).join(', ');
   return (
     <span className="inline-flex items-center gap-1.5 text-xs bg-violet-50 border border-violet-200 text-violet-800 rounded-full pl-2 pr-1 py-0.5"
-      title={`${r.modules.map((m) => MOD[m]?.label ?? m).join(', ')} · pedido ${timeAgo(r.requestedAt)} · para rodar, diga ao Claude: roda a fila de concorrentes`}>
-      {r.status === 'rodando' ? <><Spinner /> IA rodando</> : '⏳ na fila da IA'} · {r.modules.length}
+      title={`${mods} · pedido ${timeAgo(r.requestedAt)}`}>
+      <Hourglass className="size-3" />na fila da IA · {r.modules.length}
+      <RodarAnalise slug={slug} comp={c.id} titulo={`Rodar a análise de ${c.name}`} mods={mods.toLowerCase()} onFeito={() => { atualizar(); refresh(); }}
+        trigger={<button className="inline-flex items-center gap-0.5 rounded-full bg-violet-600 text-white px-1.5 py-px hover:bg-violet-700"><Play className="size-3" />Rodar agora</button>} />
       <button className="px-1 rounded-full hover:bg-violet-100" onClick={cancel} aria-label="Cancelar pedido">×</button>
     </span>
+  );
+}
+
+/** popover "Rodar agora" da fila de análise (um concorrente ou a fila inteira), pelo mesmo caminho do Rodar IA */
+export function RodarAnalise({ slug, comp, titulo, mods, trigger, onFeito }: { slug: string; comp?: string; titulo: string; mods: string; trigger: ReactNode; onFeito?: () => void }) {
+  return (
+    <PedirIa trigger={trigger} titulo={titulo} instrucoes={false}
+      descricao={<>O pesquisador roda {mods}: script no que é mecânico (site, Reclame Aqui) e um subagente Sonnet por concorrente no que exige leitura. As instruções que você deixou no pedido valem.</>}
+      onRodar={async (modo) => { await api.rodarAnalise(slug, { comp, modo }); toast.ok(modo === 'terminal' ? 'Claude Code aberto num terminal' : 'Análise rodando em segundo plano'); onFeito?.(); }} />
+  );
+}
+
+/** a fila inteira (Lista e Coletas): "N na fila da IA · Rodar agora", ou o andamento */
+export function FilaAnalise({ slug, fila }: { slug: string; fila: { id: string; name: string; modules: string[] }[] }) {
+  const qc = useQueryClient();
+  const refresh = () => { void qc.invalidateQueries({ queryKey: qk.analysisOverview(slug) }); void qc.invalidateQueries({ queryKey: ['analysis', slug] }); };
+  const { pedido, rodando, atualizar } = usePedidoIa(slug, 'analise:*', { enquantoRoda: refresh, aoTerminar: refresh });
+  if (rodando) return <PedidoStatus slug={slug} pedido={pedido} className="max-w-sm" />;
+  if (!fila.length) return null;
+  return (
+    <RodarAnalise slug={slug} titulo={`Rodar a fila de análise (${fila.length} concorrente${fila.length > 1 ? 's' : ''})`}
+      mods={fila.map((f) => `${f.name} (${f.modules.map((m) => MOD[m as ModuleId]?.label.toLowerCase() ?? m).join(', ')})`).join('; ')}
+      onFeito={() => { atualizar(); refresh(); }}
+      trigger={<button className="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100">
+        <Hourglass className="size-3.5" />{fila.length} na fila da IA · <span className="inline-flex items-center gap-0.5 font-medium"><Play className="size-3" />Rodar agora</span>
+      </button>} />
   );
 }
 
@@ -124,6 +157,8 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
   const [sel, setSel] = useState<Set<ModuleId>>(new Set());
   const [force, setForce] = useState(false);
   const [instr, setInstr] = useState('');
+  const [agora, setAgora] = useState(true);
+  const qc = useQueryClient();
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<unknown>(null);
   // ao abrir: redes + o que falta
@@ -140,7 +175,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
         setBusy('fila');
         const needSite = iaSel.some((m) => MOD[m].needsSite) && !d?.results.site && !sel.has('site');
         await api.requestAnalysis(slug, c.id, { modules: needSite ? [...iaSel, 'site'] : iaSel, force, instructions: instr });
-        toast.ok(`${iaSel.length} módulo(s) na fila da IA`);
+        if (!agora) toast.ok(`${iaSel.length} módulo(s) na fila da IA`);
       }
       if (sel.has('site')) {
         setBusy('site');
@@ -153,6 +188,11 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
         try { const h = await api.runReclameAqui(slug, c.id); toast.ok(h.found ? `Reclame Aqui: ${h.status}${h.score != null ? ` ${h.score}` : ''} · ${h.complaints} reclamações` : 'Reclame Aqui: não achado'); }
         catch (e) { toast.error(e, 'Reclame Aqui não respondeu (a IA tenta na fila)'); }
       }
+      // depois do script (site já baixado): a IA roda agora, em segundo plano (046 D)
+      if (iaSel.length && agora) {
+        try { await api.rodarAnalise(slug, { comp: c.id }); toast.ok(`IA rodando ${iaSel.length} módulo(s) em segundo plano`); void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] }); }
+        catch (e) { toast.error(e, 'Ficou na fila (use Rodar agora quando a IA estiver livre)'); }
+      }
       setInstr(''); setForce(false);
       onOpenChange(false);
     } catch (e) { setErr(e); } finally { setBusy(null); refresh(); }
@@ -164,7 +204,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
       <DialogContent className="sm:max-w-xl gap-3">
         <DialogHeader>
           <DialogTitle className="text-base">Puxar {c.name}</DialogTitle>
-          <DialogDescription className="text-xs">Script roda agora e é grátis; IA vai para a fila do Claude. Rode só o necessário.</DialogDescription>
+          <DialogDescription className="text-xs">Script roda agora e é grátis; a IA roda em segundo plano (ou fica na fila, se desmarcar). Rode só o necessário.</DialogDescription>
         </DialogHeader>
         <div className="flex gap-1.5 text-xs">
           <button className={chip} onClick={() => setSel(preset(missing))}>Redes + o que falta ({missing.length})</button>
@@ -191,7 +231,10 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
         </div>
         {iaSel.length > 0 && <>
           <Textarea rows={2} value={instr} onChange={(e) => setInstr(e.target.value)} placeholder="Instruções para a IA (opcional). Ex.: compare o preço com o nosso plano…" className="text-sm" />
-          <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={force} onChange={(e) => setForce(e.target.checked)} /> refazer mesmo o que já existe</label>
+          <div className="flex gap-4">
+            <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={agora} onChange={(e) => setAgora(e.target.checked)} /> rodar a IA agora (segundo plano)</label>
+            <label className="text-xs text-muted-foreground flex items-center gap-1.5"><input type="checkbox" checked={force} onChange={(e) => setForce(e.target.checked)} /> refazer mesmo o que já existe</label>
+          </div>
         </>}
         {sel.has('site') && !hasSite && <div className="text-xs text-warning-ink">Sem site cadastrado: marque “Perfis e redes” (a IA acha o site) ou cole o link em Editar.</div>}
         <ErrorBox error={err} />

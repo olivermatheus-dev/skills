@@ -14,6 +14,7 @@ import NewPiece from '../components/pieces/NewPiece';
 import TextReview from '../components/pieces/TextReview';
 import VideoReview from '../components/pieces/VideoReview';
 import SlideReview from '../components/pieces/SlideReview';
+import { AjustesProvider, PedirAjustesBar } from '../components/pieces/PedirAjustes';
 import PieceSheet from '../components/pieces/PieceSheet';
 import { KIND_LABEL, STATUS_LABEL } from '../components/pieces/shared';
 import { Star, Thumb, desktop, useSaveMeta } from '../components/pieces/library';
@@ -240,12 +241,15 @@ function PieceDetail({ path }: { path: string }) {
               );
             })}
           </div>
+          <AjustesProvider slug={slug} path={path}>
+          {(tab === 'video' || tab === 'slides' || tab === 'roteiro') && <PedirAjustesBar slug={slug} path={path} aba={tab} comments={review.comments} />}
           {tab === 'ficha' && <PieceSheet slug={slug} piece={piece} />}
           {tab === 'roteiro' && <TextReview slug={slug} path={path} texts={piece.texts} review={review} saveReview={(r) => save.mutate(r)} saving={save.isPending} />}
           {tab === 'video' && (piece.videos.length || piece.timeline
             ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />
             : <Card className="text-sm text-muted-foreground">Sem vídeo exportado ainda.</Card>)}
           {tab === 'slides' && <SlideReview slug={slug} path={path} images={piece.images} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />}
+          </AjustesProvider>
         </>
       )}
     </AppContent>

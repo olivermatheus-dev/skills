@@ -1,9 +1,9 @@
 // Relatórios de análise do concorrente (040 F), na aba Redes e conteúdos: o mais recente em destaque, os anteriores numa lista
 // compacta por data e rede, a leitura num diálogo (leitura em blocos à esquerda, números em tabela compacta à direita) e os
-// termos novos da rodada com "Aceitar todos" ou um a um. "Gerar relatório" abre o Claude Code num terminal (mesmo caminho do Rodar IA).
+// termos novos da rodada com "Aceitar todos" ou um a um. "Gerar relatório" roda em segundo plano (046 D, mesmo caminho do Rodar IA, com dock e Parar) ou abre o Claude Code num terminal.
 import { useMemo, useState, type ReactNode } from 'react';
 import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Ban, Check, ChevronRight, Copy, ExternalLink, FileBarChart, Lightbulb, ScanSearch, ShieldAlert, Sparkles, TriangleAlert } from 'lucide-react';
+import { Ban, Check, ChevronRight, Copy, ExternalLink, FileBarChart, Lightbulb, Play, ScanSearch, ShieldAlert, Sparkles, TriangleAlert } from 'lucide-react';
 import { api, type RelatorioLinha, type RelatorioView } from '../../../api';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { Checkbox } from '../../ui/checkbox';
@@ -12,6 +12,7 @@ import { toast } from '../../toast';
 import { PlatformIcon, Spinner, fmtPct, fmtRatio, platformLabel } from '../lib';
 import { fk } from '../ficha/useFichas';
 import { TermoDialog, rotuloAceitar } from '../ficha/TermoDialog';
+import { PedidoStatus, usePedidoIa } from '../../atividade/PedidoIa';
 
 const rk = {
   lista: (slug: string, comp: string) => ['relatorios', slug, comp] as const,
@@ -54,6 +55,9 @@ export default function RelatoriosSection({ slug, comp, onOpenItem }: { slug: st
   const q = useQuery({ queryKey: rk.lista(slug, comp), queryFn: () => api.relatorios(slug, comp) });
   const [aberto, setAberto] = useState<string | null>(null);
   const [gerar, setGerar] = useState(false);
+  const qc = useQueryClient();
+  const recarregar = () => void qc.invalidateQueries({ queryKey: rk.lista(slug, comp) });
+  const { pedido, rodando } = usePedidoIa(slug, `relatorio:${comp}`, { aoTerminar: (x) => { recarregar(); if (x.status === 'feito') toast.ok('Relatório pronto'); } });
   const lista = q.data ?? [];
   const destaque = lista.find((r) => r.emDestaque) ?? lista[0];
   const resto = lista.filter((r) => r !== destaque);
@@ -63,8 +67,11 @@ export default function RelatoriosSection({ slug, comp, onOpenItem }: { slug: st
       <div className="flex items-center gap-2 mb-2">
         <h2 className="text-base font-semibold">Relatórios de análise</h2>
         {lista.length > 0 && <span className="text-xs text-muted-foreground tabular-nums">{lista.length}</span>}
-        <Button variant="ghost" className="ml-auto inline-flex items-center gap-1.5" onClick={() => setGerar(true)}><ScanSearch className="size-3.5" />Gerar relatório</Button>
+        {rodando
+          ? <PedidoStatus slug={slug} pedido={pedido} className="ml-auto max-w-md" />
+          : <Button variant="ghost" className="ml-auto inline-flex items-center gap-1.5" onClick={() => setGerar(true)}><ScanSearch className="size-3.5" />Gerar relatório</Button>}
       </div>
+      {!rodando && pedido?.status === 'erro' && <PedidoStatus slug={slug} pedido={pedido} className="mb-2" />}
       {q.isLoading && <div className="h-24 rounded-lg border border-border bg-card animate-pulse" />}
       {!q.isLoading && !lista.length && (
         <div className="rounded-lg border border-dashed border-border px-4 py-3 text-sm text-muted-foreground">
@@ -312,8 +319,14 @@ function GerarDialog({ slug, comp, onClose }: { slug: string; comp: string; onCl
   const sel = daRede.filter((f) => !fora.has(f.key));
   const [feito, setFeito] = useState<{ comando: string; aberto: boolean } | null>(null);
   const m = useMutation({
-    mutationFn: (abrir: boolean) => api.gerarRelatorio(slug, comp, { rede: r!, itens: sel.map((f) => f.key), abrir }),
-    onSuccess: (res) => { setFeito(res); void qc.invalidateQueries({ queryKey: rk.lista(slug, comp) }); if (res.aberto) toast.ok('Claude Code aberto num terminal'); },
+    mutationFn: (modo: 'background' | 'terminal' | 'comando') => api.gerarRelatorio(slug, comp, { rede: r!, itens: sel.map((f) => f.key), abrir: modo !== 'comando', ...(modo !== 'comando' && { modo }) }),
+    onSuccess: (res) => {
+      void qc.invalidateQueries({ queryKey: rk.lista(slug, comp) });
+      void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] });
+      if (res.modo === 'background') { toast.ok('Relatório rodando em segundo plano'); onClose(); return; }
+      setFeito(res);
+      if (res.aberto) toast.ok('Claude Code aberto num terminal');
+    },
     onError: (e) => toast.error(e, 'Não foi possível gerar'),
   });
   const copiar = (t: string) => { void navigator.clipboard?.writeText(t).then(() => toast.ok('Comando copiado')); };
@@ -322,7 +335,7 @@ function GerarDialog({ slug, comp, onClose }: { slug: string; comp: string; onCl
       <DialogContent aria-describedby={undefined} className="sm:max-w-[560px]">
         <DialogTitle className="text-base font-semibold">Gerar relatório</DialogTitle>
         <DialogDescription className="text-sm text-muted-foreground -mt-2">
-          O script calcula os números das fichas escolhidas; o Opus escreve a leitura no Claude Code, que abre num terminal. O relatório aparece aqui quando terminar.
+          O script calcula os números das fichas escolhidas; o Opus escreve a leitura no Claude Code, em segundo plano (acompanhe aqui ou no painel de atividade). O relatório aparece aqui quando terminar.
         </DialogDescription>
         {q.isLoading ? <div className="py-6 grid place-items-center"><Spinner /></div> : !fichas.length ? (
           <p className="text-sm text-muted-foreground">Nenhum conteúdo deste concorrente foi analisado ainda. Selecione conteúdos na tabela e use "Analisar" antes.</p>
@@ -353,8 +366,9 @@ function GerarDialog({ slug, comp, onClose }: { slug: string; comp: string; onCl
             </div>
           )}
           <div className="flex items-center justify-end gap-2">
-            <Button variant="ghost" disabled={!sel.length || m.isPending} onClick={() => m.mutate(false)} className="inline-flex items-center gap-1.5"><Copy className="size-3.5" />Só o comando</Button>
-            <Button disabled={!sel.length || m.isPending} onClick={() => m.mutate(true)} className="inline-flex items-center gap-1.5">{m.isPending ? <Spinner /> : <ExternalLink className="size-3.5" />}Abrir no Claude Code</Button>
+            <Button variant="ghost" disabled={!sel.length || m.isPending} onClick={() => m.mutate('comando')} className="inline-flex items-center gap-1.5"><Copy className="size-3.5" />Só o comando</Button>
+            <Button variant="ghost" disabled={!sel.length || m.isPending} onClick={() => m.mutate('terminal')} className="inline-flex items-center gap-1.5"><ExternalLink className="size-3.5" />Abrir no terminal</Button>
+            <Button disabled={!sel.length || m.isPending} onClick={() => m.mutate('background')} className="inline-flex items-center gap-1.5">{m.isPending ? <Spinner /> : <Play className="size-3.5" />}Gerar em segundo plano</Button>
           </div>
         </>}
       </DialogContent>

@@ -48,6 +48,12 @@ on('POST', '/api/projects/:slug/atividade/visto', (p, b) => AV.marcarVisto(p.slu
 on('POST', '/api/projects/:slug/atividade/:id/parar', (p) => AV.pararAtividade(p.slug, p.id));
 on('POST', '/api/projects/:slug/runner', (p, b) => R.runAi(p.slug, b ?? {}));
 on('DELETE', '/api/projects/:slug/runner', (p) => R.stopAi(p.slug));
+// Pedidos avulsos de IA (046 D): estado do mais novo de uma tela (?ref=peca:<pasta> | analise:<id|*> | relatorio:<id>),
+// Pedir ajustes ao Claude (anotações da peça, ?path=) e Rodar agora a fila de análise dos concorrentes
+const PD = () => import('../../core/pedidos-ia');
+on('GET', '/api/projects/:slug/pedido-ia', async (p, _, q) => (await PD()).pedidoView(p.slug, q.get('ref') ?? ''));
+on('POST', '/api/projects/:slug/piece/ajustes', async (p, b, q) => (await PD()).pedirAjustes(p.slug, q.get('path') ?? '', b ?? {}));
+on('POST', '/api/projects/:slug/analysis-queue/rodar', async (p, b) => (await PD()).rodarAnalise(p.slug, b ?? {}));
 
 // Personas
 on('GET', '/api/projects/:slug/personas', (p) => S.listPersonas(p.slug));

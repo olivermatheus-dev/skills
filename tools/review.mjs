@@ -4,6 +4,7 @@
 // Uso:
 //   node tools/review.mjs <pasta-da-peça> [--all] [--no-frames]       lista (abertas por padrão)
 //   node tools/review.mjs <pasta-da-peça> resolve <id> "o que mudou"   marca resolvida e guarda a resposta
+//   node tools/review.mjs <pasta-da-peça> responde <id> "pergunta"     responde sem resolver (precisa de decisão do Oliver)
 // Os quadros vão para <pasta>/render/review/<id>-<tempo>s.jpg: abra com Read para ver o que o Oliver viu.
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, resolve as rpath } from 'node:path';
@@ -33,6 +34,18 @@ if (pos[1] === 'resolve') {
   save();
   const left = review.comments.filter((x) => x.status === 'aberto').length;
   console.log(`✅ ${id} resolvida. Abertas restantes: ${left}`);
+  process.exit(0);
+}
+
+// ---- responde (pergunta ao Oliver sem resolver: decisão dele ou algo pago) ----
+if (pos[1] === 'responde') {
+  const [id, ...msg] = pos.slice(2);
+  const c = review.comments.find((x) => x.id === id);
+  if (!c) { console.log(`❌ anotação ${id} não existe (ids: ${review.comments.map((x) => x.id).join(', ') || 'nenhuma'})`); process.exit(1); }
+  if (!msg.length) { console.log('❌ escreva a pergunta: responde <id> "pergunta"'); process.exit(1); }
+  c.reply = msg.join(' '); c.replyAt = new Date().toISOString().slice(0, 19);
+  save();
+  console.log(`💬 ${id} respondida (continua aberta para o Oliver decidir).`);
   process.exit(0);
 }
 

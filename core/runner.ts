@@ -8,12 +8,13 @@ import { listTasks, commentTask, ValidationError, ROOT } from './store';
 import { fechar } from '../tools/lib/fichas-fila.mjs';
 import * as PQ from '../tools/lib/pesquisa.mjs';
 import * as AT from '../tools/lib/atividade.mjs';
+import * as PI from '../tools/lib/pedidos-ia.mjs';
 
 const LOCK = join(ROOT, 'logs/heartbeat/.lock');
 const isAi = (a: string) => a === 'ai' || a.startsWith('agent:');
 
-/** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); `'pesquisa'` = rodada de pesquisa de ideias da 041 (`round`); sem kind = tarefa do quadro */
-export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' | 'pesquisa'; round?: string; atividade?: string }
+/** `kind: 'fichas'` = fila de fichas da 040 (Concorrentes → Conteúdos → Analisar); `'pesquisa'` = rodada de pesquisa de ideias da 041 (`round`); `'pedido'` = pedido avulso do app (046 D, `pedido`); sem kind = tarefa do quadro */
+export interface Lock { pid: number; started: string; log?: string; slug?: string; task?: string; title?: string; who?: string; kind?: 'fichas' | 'pesquisa' | 'pedido'; round?: string; pedido?: string; atividade?: string }
 
 // App aberto de dentro de outra sessão do Claude (desktop, preview): as variáveis dela confundem o claude filho.
 const cleanEnv = () => (process.env.CLAUDE_CODE_ENTRYPOINT || process.env.CLAUDECODE
@@ -95,6 +96,7 @@ export function stopAi(slug: string) {
   if (l.atividade) AT.terminar(l.atividade, 'parado', { resumo: 'Parado por você' });
   if (l.kind === 'fichas' && l.slug) fechar(l.slug, { parado: true, inicio: l.started }); // o que já foi salvo sai da fila; o resto volta a pendente
   if (l.kind === 'pesquisa' && l.slug && l.round) PQ.fechar(l.slug, l.round, { parado: true, inicio: l.started }); // a rodada volta a pendente (dá para rodar de novo)
+  if (l.kind === 'pedido' && l.pedido) PI.fechar(l.pedido, { parado: true });
   if (l.task && l.slug === slug) {
     const t = listTasks(slug).find((x) => x.data.id === l.task);
     if (t?.data.status === 'doing') commentTask(slug, l.task, { text: 'Execução parada pelo Oliver no app; voltou para "A fazer".', who: 'oliver', status: 'todo' });
@@ -123,6 +125,21 @@ export function runPesquisa(slug: string, round: string, mode: 'background' | 't
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
   soltar(['tools/heartbeat.mjs', '--run', '--slug', slug, '--pesquisa', round]);
   return { started: true, mode };
+}
+
+/**
+ * Pedido avulso do app (046 D): grava em logs/pedidos-ia/ e dispara o heartbeat com `--pedido` (mesmo lock, dock e passos).
+ * `terminal` = janela interativa com o mesmo prompt (o app não acompanha: fase E). `antes` roda só se o disparo for aceito.
+ */
+export function runPedido(p: Parameters<typeof PI.criar>[0], mode: 'background' | 'terminal' = 'background', antes?: () => void) {
+  if (mode === 'terminal') { openTerminal(p.prompt); return { started: true, mode, pedido: null }; }
+  const l = readLock();
+  if (l) throw new ValidationError('heartbeat', [`a IA está ocupada${l.title ? ` com "${l.title}"` : l.task ? ` com ${l.task}` : ''}; rode quando ela terminar (ou pare pelo painel de atividade)`]);
+  const job = PI.criar(p);
+  antes?.();
+  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
+  soltar(['tools/heartbeat.mjs', '--run', '--slug', p.slug, '--pedido', job.id]);
+  return { started: true, mode, pedido: job };
 }
 
 /**

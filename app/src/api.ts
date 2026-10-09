@@ -40,10 +40,14 @@ export interface NewFormatInput extends FormatRefInput { nome: string; midia: Fo
 import type { Atividade } from '../../tools/lib/atividade.mjs';
 export type { Atividade };
 /** atividade (046 A): dock = o que mostrar agora; historico = últimos trabalhos (página Agentes) */
+import type { PedidoIa } from '../../tools/lib/pedidos-ia.mjs';
+/** pedido avulso de IA (046 D) como a tela vê: `passo`/`agenteAtivo` enquanto roda */
+export type PedidoIaView = PedidoIa & { passo?: string | null; agenteAtivo?: string | null };
+export interface PedidoIaStart { started: boolean; mode: 'background' | 'terminal'; pedido: PedidoIaView | null }
 export interface AtividadeView { dock: (Atividade & { podeParar: boolean })[]; historico: Atividade[] }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
-  kind: 'fichas' | 'pesquisa' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
+  kind: 'fichas' | 'pesquisa' | 'pedido' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
 }
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
@@ -150,6 +154,10 @@ export const api = {
   atividade: (slug: string) => req<AtividadeView>('GET', `${pj(slug)}/atividade`),
   atividadeVisto: (slug: string, ids: string[]) => req<AtividadeView>('POST', `${pj(slug)}/atividade/visto`, { ids }),
   atividadeParar: (slug: string, id: string) => req<AtividadeView>('POST', `${pj(slug)}/atividade/${encodeURIComponent(id)}/parar`),
+  pedidoIa: (slug: string, ref: string) => req<PedidoIaView | null>('GET', `${pj(slug)}/pedido-ia?ref=${encodeURIComponent(ref)}`),
+  pedirAjustes: (slug: string, path: string, b: { aba: 'video' | 'slides' | 'roteiro'; ids?: string[]; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
+    req<PedidoIaStart & { ids: string[] }>('POST', `${pj(slug)}/piece/ajustes?path=${encodeURIComponent(path)}`, b),
+  rodarAnalise: (slug: string, b: { comp?: string; modo?: 'background' | 'terminal' } = {}) => req<PedidoIaStart>('POST', `${pj(slug)}/analysis-queue/rodar`, b),
   runAi: (slug: string, o: { mode: 'background' | 'terminal'; max?: number; task?: string }) => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/runner`, o),
   stopAi: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/runner`),
 
@@ -246,7 +254,7 @@ export const api = {
   relatorios: (slug: string, comp: string) => req<RelatorioLinha[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios`),
   relatorio: (slug: string, comp: string, id: string) => req<RelatorioView | null>('GET', `${pj(slug)}/competitors/${comp}/relatorios/${id}`),
   relatorioFichas: (slug: string, comp: string) => req<FichaOpcao[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios-fichas`),
-  gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean }) => req<{ aberto: boolean; comando: string; itens: number }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
+  gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean; modo?: 'background' | 'terminal' }) => req<{ aberto: boolean; modo: 'background' | 'terminal' | 'comando'; comando: string; itens: number; pedido?: PedidoIaView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
   decidirTermos: (slug: string, comp: string, id: string, decisoes: { grupo: string; valor: string; decisao: 'aceito' | 'recusado'; substituto?: string }[]) => req<{ resultado: DecisaoTermo[]; view: RelatorioView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios/${id}/termos`, { decisoes }),
   // vocabulário vivo (040 H): termos novos da ficha, info para o diálogo, decisão fora do relatório
   termoInfo: (slug: string, grupo: string, valor: string) => req<TermoInfo | null>('GET', `${pj(slug)}/termos/${encodeURIComponent(grupo)}/${encodeURIComponent(valor)}`),

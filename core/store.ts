@@ -579,6 +579,12 @@ export function getReview(slug: string, path: string): Review {
 export function saveReview(slug: string, path: string, data: unknown): Review {
   const f = join(piecePath(slug, path), 'revisao.json');
   const v = check(Review, data, f);
+  // a IA pode ter respondido enquanto a tela estava aberta (Pedir ajustes, 046 D): a resposta do disco não some com o salvar
+  // de uma tela que ainda não a viu (sem `reply` no que chegou = a tela não viu; reabrir mantém o reply, então não cai aqui)
+  if (exists(f)) {
+    const disco = new Map(getReview(slug, path).comments.map((c) => [c.id, c]));
+    v.comments = v.comments.map((c) => { const d = disco.get(c.id); return d?.reply && !c.reply ? { ...c, status: d.status, reply: d.reply, replyAt: d.replyAt, resolvedAt: d.resolvedAt } : c; });
+  }
   write(f, `${JSON.stringify(v, null, 2)}
 `);
   return v;

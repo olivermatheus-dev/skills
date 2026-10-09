@@ -32,8 +32,9 @@ export const ReviewComment = z.object({
   video: z.string().optional(),
   anchor: ReviewAnchor,
   text: z.string().min(1, 'escreva o que está errado'),
-  /** preenchido pela IA em `review.mjs resolve` */
+  /** preenchido pela IA em `review.mjs resolve` (ou `responde`, que deixa aberta com uma pergunta) */
   reply: z.string().optional(),
+  replyAt: IsoDateTime.optional(),
   resolvedAt: IsoDateTime.optional(),
 });
 export type ReviewComment = z.infer<typeof ReviewComment>;

@@ -2,11 +2,11 @@
 // filtros (tipo, onde atua, plataforma, tag), candidatos achados pela IA (aceitar → análise completa) e "Puxar todos".
 // A comparação lado a lado (oferta, funcionalidades, mensagem, reputação) fica na aba Comparar.
 import { useMemo, useState, type ReactNode } from 'react';
-import { Archive, ArrowDown, ArrowUp, Check, CircleCheck, Globe, Hash, Hourglass, LayoutGrid, MapPin, RefreshCw, Sparkles, Table as TableIcon, TriangleAlert, Users, WifiOff, X } from 'lucide-react';
+import { Archive, ArrowDown, ArrowUp, Check, CircleCheck, Globe, Hash, LayoutGrid, MapPin, RefreshCw, Sparkles, Table as TableIcon, TriangleAlert, Users, WifiOff, X } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type AnalysisOverview, type CollectResult, type Competitor, type CompetitorSummary, type Doc } from '../../api';
-import { MARKET, money } from '../../components/competitors/Analysis';
+import { FilaAnalise, MARKET, money } from '../../components/competitors/Analysis';
 import { FULL_ANALYSIS } from '../../../../schema/analysis';
 import { toast } from '../../components/toast';
 import { Badge, Button, Empty, ErrorBox, SelectField, cx, fmtNum, type SelectOption } from '../../components/kit';
@@ -53,7 +53,7 @@ export default function Competitors() {
   const allPlatforms = [...new Set(all.flatMap((c) => c.data.profiles.map((p) => p.platform)))];
   const counts = (k: string) => all.filter((c) => c.data.status === stage && (!k || c.data.kind === k)).length;
   const nStage = (st: Stage) => all.filter((c) => c.data.status === st).length;
-  const queued = (overview.data ?? []).filter((o) => o.request).length;
+  const fila = (overview.data ?? []).filter((o) => o.request).map((o) => ({ id: o.id, name: (list.data ?? []).find((c) => c.data.id === o.id)?.data.name ?? o.id, modules: o.request!.modules }));
 
   const shown = all.filter((c) => {
     const d = c.data;
@@ -145,11 +145,7 @@ export default function Competitors() {
 
   return (
     <AreaPage sub={list.data ? `${active.length} monitorado(s)` : undefined} actions={<>
-      {queued > 0 && (
-        <span className="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-violet-50 text-violet-700 border border-violet-200" title="Diga ao Claude: roda a fila de concorrentes">
-          <Hourglass className="size-3.5" />{queued} na fila da IA
-        </span>
-      )}
+      <FilaAnalise slug={slug} fila={fila} />
       <Button variant="ghost" className="inline-flex items-center gap-1.5" disabled={!!pulling || !pullTargets.length} onClick={() => pull(pullTargets)} title="Puxa um por vez os concorrentes visíveis">
         {pulling ? <><Spinner /> {pulling.i}/{pulling.n}</> : <><RefreshCw className="size-4" />Puxar todos{pullTargets.length !== active.length ? ` (${pullTargets.length})` : ''}</>}
       </Button>

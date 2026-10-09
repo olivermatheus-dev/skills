@@ -9,6 +9,8 @@
 //   no fim tira da fila o que ficou analisado (tools/lib/fichas-fila.mjs). O app (Concorrentes → Conteúdos → Analisar) chama isto.
 // --pesquisa <rodada> (com --slug): roda UMA rodada de pesquisa de ideias da 041 (curadoria/rodadas/<id>/pedido.json) num `claude -p`, com o mesmo lock;
 //   no fim marca o pedido (feito/erro/pendente). O app (Ideias → Pesquisar ideias) chama isto. Sob comando, nunca agendado.
+// --pedido <id>: roda UM pedido avulso do app (046 D: ajustes por anotação, análise do concorrente, relatório), gravado em
+//   logs/pedidos-ia/<id>.json (tools/lib/pedidos-ia.mjs) com prompt, agente e ferramentas extras; mesmo lock e dock.
 // Pronta = status todo · assignee agent:<nome> ou ai · todas as dependências done.
 // Recorrentes: companies/<slug>/board/recorrentes.json (ver companies/_modelo/board/recorrentes.json).
 import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, unlinkSync, statSync, utimesSync } from 'node:fs';
@@ -16,6 +18,7 @@ import { join } from 'node:path';
 import { companies, boardDir, listTasks, nextId, updateTask, addComment, today } from './lib/board.mjs';
 import { listarPedidos, marcarRodando, escreverProgresso, fechar, promptFila } from './lib/fichas-fila.mjs';
 import * as PQ from './lib/pesquisa.mjs';
+import * as PI from './lib/pedidos-ia.mjs';
 import * as AT from './lib/atividade.mjs';
 import { rodarClaude } from './lib/claude-stream.mjs';
 
@@ -29,6 +32,7 @@ const ONLY_TASK = opt('--task');
 const WATCH = parseInt(opt('--watch', '0'), 10);
 const FICHAS = args.includes('--fichas');
 const PESQUISA = opt('--pesquisa');
+const PEDIDO = opt('--pedido');
 const PERMISSION = process.env.HEARTBEAT_PERMISSION_MODE || 'acceptEdits';
 const ALLOWED = (process.env.HEARTBEAT_ALLOWED_TOOLS || 'Read,Write,Edit,Glob,Grep,Skill,Agent,Bash(node tools/*),Bash(node .claude/skills/*),Bash(ffmpeg *),Bash(npx hyperframes *)').split(',');
 
@@ -187,6 +191,27 @@ async function runPesquisa(slug, round) {
   AT.terminar(at.id, res.feita ? 'feito' : 'erro', res.feita ? { resumo: 'Pesquisa pronta', ...fimDe(r) } : { erro: res.erro ?? erro ?? 'A pesquisa não terminou.', ...fimDe(r) });
 }
 
+// ---------- pedido avulso do app (046 D) ----------
+async function runPedido(id) {
+  const p = PI.ler(id);
+  if (!p) { log(`pedido ${id} não existe`); return; }
+  if (p.status !== 'fila') { log(`pedido ${id} já está ${p.status}`); return; }
+  const agent = p.agente?.startsWith('agent:') ? p.agente.slice(6) : null;
+  const cli = ['-p', ...(agent ? ['--agent', agent] : []), '--permission-mode', PERMISSION, '--allowedTools', ...ALLOWED, ...(p.allowed ?? []), ...(p.disallowed?.length ? ['--disallowedTools', ...p.disallowed] : []), '--', p.prompt];
+  if (!RUN) { log(`[simulação] rodaria o pedido ${id} (${p.titulo})`); return; }
+  const at = AT.iniciar({ slug: p.slug, tipo: 'ia', fonte: p.tipo, titulo: p.titulo, agente: p.agente, passo: 'Abrindo o Claude Code', link: p.link, ref: p.ref });
+  PI.atualizar(id, { status: 'rodando', inicio: new Date().toISOString(), atividade: at.id });
+  writeLock({ slug: p.slug, kind: 'pedido', pedido: id, title: p.titulo, who: agent ? p.agente : 'ai', atividade: at.id });
+  log(`pedido ${p.tipo} → ${p.slug}: ${p.titulo}`);
+  const r = await claudeNoDock(cli, { at, agente: p.agente, rotulo: p.tipo });
+  const out = r.saida;
+  const erro = semLogin(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
+    : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;
+  const res = PI.fechar(id, { erro, saida: erro ? '' : r.texto ?? '' });
+  log(`pedido ${id}: ${res.resumo ?? ''}${erro ? ` · ${erro}` : ''}`);
+  AT.terminar(at.id, erro ? 'erro' : 'feito', { resumo: res.resumo, erro, ...fimDe(r) });
+}
+
 // ---------- batida ----------
 const LOCK = 'logs/heartbeat/.lock';
 const STARTED = new Date().toISOString();
@@ -198,6 +223,7 @@ async function beat() {
   batendo = true;
   if (RUN) writeLock({});
   try {
+    if (PEDIDO) { await runPedido(PEDIDO); return; }
     if (PESQUISA) { if (!ONLY_SLUG) log('--pesquisa precisa de --slug'); else await runPesquisa(ONLY_SLUG, PESQUISA); return; }
     if (FICHAS) { if (!ONLY_SLUG) log('--fichas precisa de --slug'); else await runFichas(ONLY_SLUG); return; }
     const slugs = ONLY_SLUG ? [ONLY_SLUG] : companies();

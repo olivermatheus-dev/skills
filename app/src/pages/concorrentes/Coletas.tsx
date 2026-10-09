@@ -10,6 +10,7 @@ import { Avatar, Chips, PlatformIcon, Spinner, fmtDateTime, platformLabel, timeA
 import { toast } from '../../components/toast';
 import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
 import WeeklyPanel from '../../components/competitors/WeeklyPanel';
+import { FilaAnalise } from '../../components/competitors/Analysis';
 import { Check, CircleCheck, CircleDashed, ListTodo, RefreshCw, TriangleAlert, Users, X } from 'lucide-react';
 
 type R = ProfileSummary & { m: MarketRow };
@@ -78,13 +79,14 @@ export default function Coletas() {
   return (
     <AreaPage actions={<Button variant="ghost" disabled={!!pulling || !targets.length} onClick={() => pullAll(targets)} title="Puxa as redes de todos, um concorrente por vez">{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : <><RefreshCw className="size-3.5" />Puxar todos</>}</Button>}>
       <ErrorBox error={m.error} />
+      {queue.length > 0 && <div className="mb-3 flex"><FilaAnalise slug={slug} fila={queue.map((r) => ({ id: r.c.data.id, name: r.c.data.name, modules: r.ov!.request!.modules }))} /></div>}
       <WeeklyPanel slug={slug} />
       <div className="mb-4"><StatStrip items={[
         { icon: Users, label: 'Perfis', value: String(all.length) },
         { icon: CircleCheck, label: 'Em dia', value: `${nOk}/${all.length}`, sub: `coleta com menos de ${STALE_DAYS} dias` },
         { icon: TriangleAlert, label: 'Com erro', value: String(all.filter((p) => stateOf(p) === 'erro').length) },
         { icon: CircleDashed, label: 'Nunca puxados', value: String(all.filter((p) => stateOf(p) === 'nunca').length) },
-        { icon: ListTodo, label: 'Fila da IA', value: String(queue.length), title: queue.map((r) => `${r.c.data.name}: ${r.ov!.request!.modules.join(', ')}`).join('\n') || undefined, sub: queue.length ? 'diga ao Claude: roda a fila de concorrentes' : undefined },
+        { icon: ListTodo, label: 'Fila da IA', value: String(queue.length), title: queue.map((r) => `${r.c.data.name}: ${r.ov!.request!.modules.join(', ')}`).join('\n') || undefined, sub: queue.length ? 'rode pelo botão acima' : undefined },
       ]} /></div>
       {pulling && <div className="mb-3 h-1 bg-muted rounded-full overflow-hidden"><div className="h-full bg-primary transition-all" style={{ width: `${((pulling.i - 0.5) / pulling.n) * 100}%` }} /></div>}
       <div className="mb-3 flex items-center"><Chips value={filter} onChange={setFilter} options={[
