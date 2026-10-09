@@ -1,6 +1,6 @@
 // Análise do concorrente por área de marketing (Diagnóstico, Oferta, Produto, Mensagem, Reputação, Dados): resultado de cada
 // módulo e anotação por módulo (do Oliver: a IA nunca sobrescreve). Escolher o que rodar fica no diálogo do "Puxar" (RunDialog).
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, avisoFila, type AnalysisFull, type AnalysisResult, type Competitor, type ModuleId } from '../../api';
 import { MODULES, FULL_ANALYSIS } from '../../../../schema/analysis';
@@ -10,7 +10,9 @@ import { toast } from '../toast';
 import { Badge, Button, ErrorBox, Textarea, cx } from '../kit';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { PlatformIcon, Spinner, platformLabel, timeAgo, fmtDateTime } from './lib';
-import { Hourglass, Play } from 'lucide-react';
+import { AtSign, BadgeDollarSign, FileText, Globe, Hourglass, LayoutTemplate, Lightbulb, ListChecks, MapPin, Pencil, Phone, Play, Scale, ScanSearch, ShieldCheck, Sparkles, StickyNote } from 'lucide-react';
+import { Separator } from '../ui/separator';
+import { Secao } from './ficha/FichaPanel';
 import { PedidoStatus, PedirIa, usePedidoIa } from '../atividade/PedidoIa';
 
 const STALE_DAYS = 30;
@@ -36,7 +38,6 @@ export const AREAS = [
   { id: 'dados', label: 'Dados', modules: ['atuacao', 'contato', 'perfis', 'site'] },
 ] as const satisfies readonly { id: string; label: string; modules: readonly ModuleId[] }[];
 export type AreaId = (typeof AREAS)[number]['id'];
-const WIDE = new Set<ModuleId>(['precos', 'features', 'forcas', 'landing', 'site', 'resumo', 'reputacao']);
 const ageDays = (iso?: string) => (iso ? (Date.now() - Date.parse(iso)) / 86_400_000 : Infinity);
 export const money = (v?: number, cur = 'BRL') => (v == null ? '—' : v.toLocaleString('pt-BR', { style: 'currency', currency: cur, maximumFractionDigits: v % 1 ? 2 : 0 }));
 
@@ -70,28 +71,36 @@ export default function AnalysisPanel({ slug, c, area, onRun }: { slug: string; 
   const shown = mods.filter((m) => d.results[m]);
   const pending = mods.filter((m) => !d.results[m]);
   const interesting = area === 'diagnostico' ? (d.results.landing?.data as ModuleDataOf<'landing'> | undefined)?.interesting ?? [] : [];
+  // uma superfície só, cada módulo uma seção separada por divisor (mesmo padrão dos painéis de conteúdo e de anúncio)
   return (
-    <div className="mt-5 space-y-4">
+    <div className="mt-5 rounded-xl border border-border bg-card p-6 space-y-5">
       {!shown.length && (
-        <div className="text-sm text-muted-foreground border border-dashed border-border rounded-xl p-6 text-center">
-          Ainda não analisado. <button className="text-primary-ink font-medium" onClick={onRun}>Puxar {pending.map((m) => MOD[m].label.toLowerCase()).join(', ')}</button>
+        <div className="flex flex-col items-center gap-3 py-6 text-center">
+          <p className="text-sm text-muted-foreground">Ainda sem {pending.map((m) => MOD[m].label.toLowerCase()).join(' e ')}.</p>
+          <Button variant="ai" onClick={onRun} className="inline-flex items-center gap-1.5"><ScanSearch className="size-4" />Analisar</Button>
         </div>
       )}
-      <div className="grid gap-4 lg:grid-cols-2">
-        {shown.map((m) => (
-          <ModuleCard key={m} slug={slug} id={c.id} r={d.results[m]!} note={d.notes[m]?.text ?? ''} queued={!!d.request?.modules.includes(m)} wide={WIDE.has(m) || mods.length === 1} onSaved={refresh}>
+      {shown.map((m, i) => (
+        <Fragment key={m}>
+          {i > 0 && <Separator />}
+          <ModuloSecao slug={slug} id={c.id} r={d.results[m]!} note={d.notes[m]?.text ?? ''} queued={!!d.request?.modules.includes(m)} onSaved={refresh}>
             <Body m={m} r={d.results[m]!} />
-          </ModuleCard>
-        ))}
-        {interesting.length > 0 && (
-          <section className="lg:col-span-2 bg-amber-50/60 border border-amber-200 rounded-xl px-4 py-3 text-sm">
-            <div className="text-xs font-semibold text-amber-800 mb-1">O que vale copiar (da landing page)</div>
-            <List xs={interesting} />
-          </section>
-        )}
-      </div>
-      {area === 'diagnostico' && <NoteBox slug={slug} id={c.id} k="geral" label="Minhas anotações sobre este concorrente" value={d.notes.geral?.text ?? ''} onSaved={refresh} big />}
-      {shown.length > 0 && pending.length > 0 && <div className="text-xs text-muted-foreground">Falta: {pending.map((m) => MOD[m].label).join(', ')} · <button className="text-primary-ink" onClick={onRun}>puxar</button></div>}
+          </ModuloSecao>
+        </Fragment>
+      ))}
+      {interesting.length > 0 && <>
+        <Separator />
+        <Secao icone={<Lightbulb />} titulo="O que vale copiar" dica="Tirado da análise da landing page (aba Posicionamento).">
+          <List xs={interesting} className="text-sm" />
+        </Secao>
+      </>}
+      {shown.length > 0 && pending.length > 0 && <p className="text-xs text-muted-foreground">Falta: {pending.map((m) => MOD[m].label).join(', ')} · <button className="text-ai-ink font-medium hover:underline" onClick={onRun}>analisar</button></p>}
+      {area === 'diagnostico' && <>
+        <Separator />
+        <Secao icone={<StickyNote />} titulo="Minhas anotações" dica="O que você acha deles, o que copiar, o que evitar. A IA nunca sobrescreve.">
+          <NoteBox slug={slug} id={c.id} k="geral" value={d.notes.geral?.text ?? ''} onSaved={refresh} big />
+        </Secao>
+      </>}
     </div>
   );
 }
@@ -146,7 +155,8 @@ export function FilaAnalise({ slug, fila }: { slug: string; fila: { id: string; 
 }
 
 // ---------- escolher e rodar (diálogo do "Puxar") ----------
-export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: string; c: Competitor; open: boolean; onOpenChange: (v: boolean) => void; onCollect: () => Promise<void> }) {
+/** diálogo do Puxar (coleta: redes e site) e do Analisar (módulos da IA); `inicial` só muda a pré-seleção e o título */
+export function RunDialog({ slug, c, open, onOpenChange, onCollect, inicial = 'coleta' }: { slug: string; c: Competitor; open: boolean; onOpenChange: (v: boolean) => void; onCollect: () => Promise<void>; inicial?: 'coleta' | 'analise' }) {
   const a = useAnalysis(slug, c.id);
   const d = a.data;
   const refresh = useRefresh(slug, c.id);
@@ -162,7 +172,10 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<unknown>(null);
   // ao abrir: redes + o que falta
-  useEffect(() => { if (open) { setSel(preset(missing)); setErr(null); } }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Puxar: as redes (e o site, se nunca baixado); Analisar: os módulos da IA que faltam ou estão velhos (nenhum faltando = todos)
+  const iaMods: ModuleId[] = MODULES.filter((m) => m.engine !== 'script').map((m) => m.id);
+  const faltaIa = missing.filter((m) => iaMods.includes(m));
+  useEffect(() => { if (open) { setSel(inicial === 'analise' ? new Set(faltaIa.length ? faltaIa : iaMods) : preset(missing.filter((m) => !iaMods.includes(m)))); setErr(null); } }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (m: ModuleId) => setSel((s) => { const n = new Set(s); if (n.has(m)) n.delete(m); else n.add(m); return n; });
   const iaSel = [...sel].filter((m) => MOD[m].engine !== 'script');
 
@@ -203,7 +216,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
     <Dialog open={open} onOpenChange={(v) => !busy && onOpenChange(v)}>
       <DialogContent className="sm:max-w-xl gap-3">
         <DialogHeader>
-          <DialogTitle className="text-base">Puxar {c.name}</DialogTitle>
+          <DialogTitle className="text-base">{inicial === 'analise' ? 'Analisar' : 'Puxar'} {c.name}</DialogTitle>
           <DialogDescription className="text-xs">Script roda agora e é grátis; a IA roda em segundo plano (ou fica na fila, se desmarcar). Rode só o necessário.</DialogDescription>
         </DialogHeader>
         <div className="flex gap-1.5 text-xs">
@@ -241,7 +254,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
         <div className="flex items-center gap-2 justify-end">
           <span className="text-xs text-muted-foreground mr-auto">{sel.size} selecionado(s){iaSel.length ? ` · ${iaSel.length} na IA` : ''}</span>
           <Button variant="ghost" onClick={() => onOpenChange(false)} disabled={!!busy}>Cancelar</Button>
-          <Button onClick={run} disabled={!!busy || !sel.size}>
+          <Button variant={iaSel.length ? 'ai' : 'primary'} onClick={run} disabled={!!busy || !sel.size}>
             {busy ? <><Spinner /> {busy === 'site' ? 'Baixando o site…' : busy === 'ra' ? 'Reclame Aqui…' : 'Enviando…'}</> : 'Confirmar'}
           </Button>
         </div>
@@ -250,46 +263,49 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
   );
 }
 
-// ---------- cartão de módulo ----------
-function ModuleCard({ slug, id, r, note, queued, wide, onSaved, children }: { slug: string; id: string; r: AnalysisResult; note: string; queued: boolean; wide: boolean; onSaved: () => void; children: ReactNode }) {
+// ---------- seção de módulo ----------
+const ICONE: Partial<Record<ModuleId, ReactNode>> = {
+  resumo: <FileText />, forcas: <Scale />, precos: <BadgeDollarSign />, features: <ListChecks />, landing: <LayoutTemplate />,
+  reputacao: <ShieldCheck />, atuacao: <MapPin />, contato: <Phone />, perfis: <AtSign />, site: <Globe />,
+};
+/** um módulo da análise: título com ícone; à direita confiança, quem fez e quando, fontes e "anotar" */
+function ModuloSecao({ slug, id, r, note, queued, onSaved, children }: { slug: string; id: string; r: AnalysisResult; note: string; queued: boolean; onSaved: () => void; children: ReactNode }) {
   const m = MOD[r.module];
   const [src, setSrc] = useState(false);
+  const [anotar, setAnotar] = useState(!!note);
+  const ia = r.by !== 'script';
   return (
-    <section className={cx('bg-card border border-border rounded-xl flex flex-col', wide && 'lg:col-span-2')}>
-      <header className="flex items-center gap-2 px-4 pt-3 pb-2 border-b border-border">
-        <h3 className="font-semibold text-sm">{m.label}</h3>
-        {r.confidence !== 'alta' && <Badge color={r.confidence === 'baixa' ? '#dc2626' : '#d97706'}>confiança {r.confidence}</Badge>}
-        {queued && <Badge color="#7c3aed">na fila</Badge>}
-        <span className="ml-auto text-[11px] text-muted-foreground" title={fmtDateTime(r.updatedAt)}>{r.by === 'script' ? 'script' : r.by.replace('claude-', '')} · {timeAgo(r.updatedAt)}</span>
-        {r.sources.length > 0 && <button className="text-[11px] text-primary-ink" onClick={() => setSrc(!src)}>{r.sources.length} fonte(s)</button>}
-      </header>
+    <Secao icone={ICONE[r.module]} titulo={m.label} dica={m.hint}
+      aside={<span className="inline-flex items-center gap-2 text-[11px] text-muted-foreground">
+        {r.confidence !== 'alta' && <span className={cx('rounded-full px-1.5 py-px font-medium', r.confidence === 'baixa' ? 'bg-destructive/10 text-destructive' : 'bg-warning/15 text-warning-ink')}>confiança {r.confidence}</span>}
+        {queued && <span className="rounded-full px-1.5 py-px font-medium bg-ai-soft text-ai-ink">na fila</span>}
+        <span title={fmtDateTime(r.updatedAt)} className={cx('inline-flex items-center gap-1', ia && 'text-ai-ink')}>{ia && <Sparkles className="!size-3" />}{ia ? r.by.replace('claude-', '') : 'script'} · {timeAgo(r.updatedAt)}</span>
+        {r.sources.length > 0 && <button className="hover:text-foreground underline-offset-2 hover:underline" onClick={() => setSrc(!src)}>{r.sources.length} fonte(s)</button>}
+        {!anotar && <button className="hover:text-foreground inline-flex items-center gap-1" onClick={() => setAnotar(true)}><Pencil className="!size-3" />anotar</button>}
+      </span>}>
       {src && (
-        <div className="px-4 py-2 text-xs border-b border-border bg-muted/50 space-y-0.5">
+        <div className="rounded-lg bg-muted/60 px-3 py-2 text-xs space-y-0.5">
           {r.sources.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="block truncate text-muted-foreground hover:text-primary-ink">↗ {s.title ? `${s.title} — ` : ''}{s.url}</a>)}
         </div>
       )}
-      <div className="px-4 py-3 text-sm flex-1">{children}</div>
-      <div className="px-4 pb-3"><NoteBox slug={slug} id={id} k={r.module} value={note} onSaved={onSaved} /></div>
-    </section>
+      <div className="text-sm">{children}</div>
+      {anotar && <NoteBox slug={slug} id={id} k={r.module} value={note} onSaved={onSaved} />}
+    </Secao>
   );
 }
 
-function NoteBox({ slug, id, k, value, onSaved, label, big }: { slug: string; id: string; k: string; value: string; onSaved: () => void; label?: string; big?: boolean }) {
+/** anotação do Oliver num módulo (ou a geral, `big`): salva ao sair do campo */
+function NoteBox({ slug, id, k, value, onSaved, big }: { slug: string; id: string; k: string; value: string; onSaved: () => void; big?: boolean }) {
   const [v, setV] = useState(value);
-  const [open, setOpen] = useState(!!value);
   useEffect(() => setV(value), [value]);
   async function save() {
     if (v === value) return;
     try { await api.setAnalysisNote(slug, id, k, v); toast.ok('Anotação salva'); onSaved(); } catch (e) { toast.error(e, 'Não salvou a anotação'); }
   }
-  if (!open) return <button className="text-xs text-muted-foreground hover:text-primary-ink" onClick={() => setOpen(true)}>✎ {big ? label : 'anotar'}</button>;
   return (
-    <div className={cx(big && 'bg-amber-50/60 border border-amber-200 rounded-xl p-3')}>
-      {label && <div className="text-xs font-medium text-amber-800 mb-1.5">✎ {label}</div>}
-      <Textarea autoFocus={!value} rows={big ? 3 : 2} value={v} onChange={(e) => setV(e.target.value)} onBlur={save}
-        placeholder={big ? 'O que você acha deles, o que copiar, o que evitar… (salva ao sair do campo)' : 'Sua anotação sobre este módulo (salva ao sair do campo)'}
-        className={cx('text-sm', !big && 'bg-amber-50/40 border-amber-200')} />
-    </div>
+    <Textarea autoFocus={!big && !value} rows={big ? 4 : 2} value={v} onChange={(e) => setV(e.target.value)} onBlur={save}
+      placeholder={big ? 'O que você acha deles, o que copiar, o que evitar… (salva ao sair do campo)' : 'Sua anotação sobre este módulo (salva ao sair do campo)'}
+      className="text-sm" />
   );
 }
 

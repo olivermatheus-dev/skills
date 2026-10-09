@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { api, type CollectResult, type Competitor, type Doc, type ItemMark } from '../api';
 import type { ModuleDataOf } from '../../../schema/analysis';
 import { qk, useAnalysis, useCompetitor, useCompetitors, useCompetitorsSummary, useTags } from '../queries';
-import { ArrowDown, ArrowUp, ChevronRight, ExternalLink, Link2, MapPin, RefreshCw, Star as StarIcon, TriangleAlert, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, ChevronRight, ExternalLink, Link2, MapPin, RefreshCw, ScanSearch, Star as StarIcon, TriangleAlert, X } from 'lucide-react';
 import ContextSidebar from '../components/ContextSidebar';
 import { useCompetitorActions } from '../components/competitors/useCompetitorActions';
 import { Badge, Button, Empty, ErrorBox, cx, fmtNum } from '../components/kit';
@@ -17,7 +17,7 @@ import type { IdeaExtra } from '../components/competitors/ficha/paraIdeia';
 import AnalysisPanel, { AREAS, QueueChip, RunDialog, money, type AreaId } from '../components/competitors/Analysis';
 import { type FollowerSeries } from '../components/competitors/FollowersChart';
 import FaixaRedes from '../components/competitors/FaixaRedes';
-import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
+import { AbrirOriginal, ItemPanel } from '../components/competitors/ficha/FichaPanel';
 import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
 import { useColetas, segundosDesde } from '../components/atividade/useColeta';
@@ -140,6 +140,7 @@ function Detalhe() {
   const view = (TABS.some((t) => t.id === search_.get('aba')) ? search_.get('aba') : 'diagnostico') as TabId;
   const setView = (v: TabId) => setSearch_((s) => { const n = new URLSearchParams(s); if (v === 'diagnostico') n.delete('aba'); else n.set('aba', v); return n; }, { replace: true });
   const [runOpen, setRunOpen] = useState(false);
+  const [runModo, setRunModo] = useState<'coleta' | 'analise'>('coleta');
   const analysis = useAnalysis(slug, id);
   const [tab, setTab] = useState<string>('all');
   const [open, setOpen] = useState<string | null>(null);
@@ -194,6 +195,7 @@ function Detalhe() {
   const lookAvatar = profiles.find((p) => p.series?.latest?.data.profile.avatarLocal) ?? profiles.find((p) => p.series?.latest?.data.profile.avatar);
   const ap = lookAvatar?.series?.latest?.data.profile;
   const media = (local?: string) => api.mediaUrl(slug, id, local);
+  const siteUrl = c.profiles.find((p) => p.platform === 'site')?.url;
 
   // chips do cabeçalho (o essencial de cada módulo)
   const res = analysis.data?.results;
@@ -268,15 +270,21 @@ function Detalhe() {
               <Star on={c.favorite} onClick={toggleFav} size="text-base" />
               {c.kind !== 'concorrente' && <Badge color={KIND_COLOR[c.kind]}>{KINDS[c.kind]}</Badge>}
               {c.status !== 'ativo' && <Badge color={c.status === 'candidato' ? '#d97706' : undefined}>{c.status}</Badge>}
-              <QueueChip slug={slug} c={c} />
             </div>
             {oneLiner && <p className="text-sm text-muted-foreground truncate" title={oneLiner}>{oneLiner}</p>}
           </div>
-          <div className="flex gap-2">
-            <Button variant="ghost" onClick={() => setEditing({})}>Editar</Button>
-            <Button onClick={() => setRunOpen(true)} disabled={!c.profiles.length} title="Escolher o que atualizar (redes, site, análises)">
-              {ocupado ? <><Spinner /> {elapsed}s</> : <><RefreshCw className="size-3.5 inline -mt-0.5 mr-1" />Puxar</>}
+          {/* todas as ações à direita, no padrão dos painéis: editar · coletar · IA (roxo) · abrir o site (cor do projeto) */}
+          <div className="flex items-center gap-2 shrink-0">
+            <Button variant="ghost" className="h-8" onClick={() => setEditing({})}>Editar</Button>
+            <span className="w-px h-6 bg-border mx-1" aria-hidden />
+            <Button variant="soft" className="h-8 inline-flex items-center gap-1.5" onClick={() => { setRunModo('coleta'); setRunOpen(true); }} disabled={!c.profiles.length} title="Coletar redes e site agora (script, grátis)">
+              {ocupado ? <><Spinner /> {elapsed}s</> : <><RefreshCw className="size-3.5" />Puxar</>}
             </Button>
+            <QueueChip slug={slug} c={c} />
+            <Button variant="ai" className="h-8 inline-flex items-center gap-1.5" onClick={() => { setRunModo('analise'); setRunOpen(true); }} title="Escolher os módulos da análise da IA (resumo, preços, funcionalidades, landing, reputação…)">
+              <ScanSearch className="size-4" />Analisar
+            </Button>
+            {siteUrl && <AbrirOriginal href={siteUrl} label="Abrir site" />}
           </div>
         </div>
 
@@ -318,7 +326,7 @@ function Detalhe() {
           <div className="flex items-center justify-end gap-2 mb-3">{actions}</div>
           {body}
         </>} />}
-        {view !== 'redes' && view !== 'anuncios' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => setRunOpen(true)} />}
+        {view !== 'redes' && view !== 'anuncios' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => { setRunModo('analise'); setRunOpen(true); }} />}
         {view === 'redes' && <>
 
         {/* perfis: os puxados como abas; os sem coleta só como ícone apagado */}
@@ -406,7 +414,7 @@ function Detalhe() {
         onMark={(patch) => openRow && mark.mutate({ mk: openRow.mk, patch })}
         onIdea={(title, tags, note, extra) => openRow && makeIdea(openRow, title, tags, note, extra)} />
       {relAberto && <RelatorioDialog slug={slug} comp={id} id={relAberto} onClose={() => setRelAberto(null)} onOpenItem={(k) => { setRelAberto(null); setOpen(k); }} />}
-      <RunDialog slug={slug} c={c} open={runOpen} onOpenChange={setRunOpen} onCollect={pull} />
+      <RunDialog slug={slug} c={c} open={runOpen} onOpenChange={setRunOpen} onCollect={pull} inicial={runModo} />
       {editing && <EditCompetitor key={editing.error ? 'erro' : 'ok'} slug={slug} open onClose={() => setEditing(false)} onFailed={(draft, error) => setEditing({ draft, error })}
         data={editing.draft?.data ?? c} body={editing.draft?.body ?? d.body} initialError={editing.error} snapshotsCount={d.snapshotsTotal} />}
     </div>
