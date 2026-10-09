@@ -39,10 +39,11 @@ export default function TonalPalette({ draft, update }: { draft: Brand; update: 
             const hex = tonal.steps[s], ink = bestInk(hex, cands), over = tonal.overrides[s] != null;
             return (
               <div key={s} className="min-w-0">
-                <button type="button" onClick={() => copy(hex)} title={`Copiar ${hex}`} className="group w-full h-20 rounded-lg border border-border flex flex-col items-start justify-between p-1.5 text-left"
+                <button type="button" onClick={() => copy(hex)} title={`Copiar ${hex}`} className="group relative w-full h-20 rounded-lg border border-border flex flex-col items-start justify-between px-1 py-1.5 text-left overflow-hidden"
                   style={{ background: hex, color: ink.hex }}>
                   <span className="text-[11px] font-semibold">{s}{s === 500 && ' ·base'}</span>
-                  <span className="flex items-center gap-1 text-[10px] font-mono opacity-90"><Copy size={10} className="opacity-0 group-hover:opacity-100" />{hex}</span>
+                  <Copy size={10} className="absolute top-1.5 right-1 opacity-0 group-hover:opacity-100" />
+                  <span className="max-w-full text-[9px] leading-none font-mono tracking-tighter uppercase opacity-90">{hex.slice(1)}</span>
                 </button>
                 <div className="mt-1 flex items-center gap-1 text-[10px]" title={`Texto sobre este tom: ${ink.name} · ${ink.ratio.toFixed(1)}:1`}>
                   <span className={cx('font-semibold rounded px-1', grade(ink.ratio) === '✗' ? 'bg-red-100 text-red-700' : grade(ink.ratio) === 'AAA' ? 'bg-green-100 text-green-700' : 'bg-emerald-50 text-emerald-700')}>{grade(ink.ratio)}</span>
