@@ -74,6 +74,49 @@ if (cmd === 'check') {
   if (esc > Math.ceil(n / 3)) W.push(`${esc} slides escuros (alvo ≤ 1/3)`);
   const cards = S.filter((s) => ['pilha', 'capa-objeto', 'zoom'].includes(s.familia) || (s.camadas || []).some((c) => /card/i.test(c.o_que))).length;
   if (n > 2 && cards > Math.ceil(n * 0.4)) W.push(`card em ${cards} de ${n} slides (teto ~40%)`);
+  // ---------- motivo (049): presença ≥ 70% ou falta justificada; o destino é o maior objeto da virada ----------
+  if (plano.motivo?.o_que && n >= 3) {
+    let tem = S.map((s) => !!s.motivo), inferido = false;
+    if (!S.some((s) => 'motivo' in s)) {
+      // plano antigo, sem motivo por slide: lê a evolução ("s1 … → s4–s6 somem → s7 …")
+      inferido = true; tem = S.map(() => false);
+      for (const seg of String(plano.motivo.evolucao).split(/→|->|;/)) {
+        const some = /\bsom(e|em)\b|some\b|sem o motivo|ausente|desaparec/i.test(seg);
+        if (some) continue;
+        for (const m of seg.matchAll(/\bs(\d+)(?:\s*[–-]\s*s?(\d+))?/g)) for (let k = +m[1]; k <= +(m[2] || m[1]); k++) if (k >= 1 && k <= n) tem[k - 1] = true;
+        if (/\bcapa\b/i.test(seg)) tem[0] = true;
+        if (/\bCTA\b|\bfim\b|último/i.test(seg)) tem[n - 1] = true;
+      }
+      W.push(`motivo por slide inferido da evolução (${tem.map((t, i) => (t ? 's' + (i + 1) : '')).filter(Boolean).join(' ')}): declare "motivo" em cada slide`);
+    }
+    const pres = tem.filter(Boolean).length, pct = Math.round((pres / n) * 100);
+    const sem = S.map((s, i) => (!tem[i] && !s.motivo_falta ? `s${i + 1}` : '')).filter(Boolean);
+    if (pct < 70 && sem.length) X.push(`motivo em ${pres} de ${n} slides (${pct}% < 70%) e ${sem.join(', ')} sem "motivo_falta": ponha o motivo ou escreva por que ele falta ali`);
+    else if (pct < 70) W.push(`motivo em ${pres} de ${n} slides (${pct}%), faltas justificadas: confira se a justificativa é do roteiro, não comodidade`);
+    const vi = S.findIndex((s) => s.papel === 'virada');
+    if (vi < 0) { if (n >= 5) W.push('nenhum slide de virada: onde o motivo se resolve?'); }
+    else {
+      const v = S[vi], id = `s${vi + 1}`;
+      if (!tem[vi]) X.push(`${id} (virada) sem o motivo: é onde ele se resolve`);
+      if (!plano.motivo.destino) X.push('falta motivo.destino: o que o motivo vira na virada (é o maior objeto daquele slide)');
+      const anc = String(v.texto?.ancora || '').trim().toLowerCase();
+      const h = String(v.heroi || '').trim();
+      if (/^['"“‘]/.test(h) || (anc && h.toLowerCase().includes(anc))) X.push(`${id} (virada): o herói é o título ("${h.slice(0, 40)}…"); o destino do motivo tem que ser o maior objeto do slide`);
+    }
+  }
+  // ---------- fundos vizinhos que não se distinguem na miniatura (ΔL* < 4 no brand.css, mesmo limiar do check.mjs) ----------
+  try {
+    const css = readFileSync(join(ROOT, 'companies', plano.empresa || 'kz', 'brand', 'brand.css'), 'utf8');
+    const hexDe = (f) => css.match(new RegExp(`--${f === 'creme' ? 'bg' : f === 'branco' ? 'surface' : f.replace('tom', 'tone')}:\\s*(#[0-9a-f]{6})`, 'i'))?.[1];
+    const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    const Lde = (f) => { const h = hexDe(f); if (!h) return null; const [r, g, b] = [1, 3, 5].map((k) => parseInt(h.slice(k, k + 2), 16)); return 116 * Math.cbrt(0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)) - 16; };
+    const OBJETO = new Set(['pilha', 'fluxo', 'zoom', 'capa-objeto', 'split']); // a forma (objeto ou campo) já distingue a miniatura
+    for (let i = 1; i < n; i++) {
+      const a = S[i - 1], b = S[i], la = Lde(a.fundo), lb = Lde(b.fundo);
+      if (la == null || lb == null || OBJETO.has(a.familia) || OBJETO.has(b.familia)) continue;
+      if (Math.abs(la - lb) < 4) W.push(`s${i}–s${i + 1}: fundos ${a.fundo} × ${b.fundo} não se distinguem na miniatura (ΔL ${Math.abs(la - lb).toFixed(1)} < 4): pule ≥ 2 passos da escala ou troque claro/escuro`);
+    }
+  } catch { /* sem brand.css: o check.mjs mede no render */ }
   console.log(`plano ${plano.peca || ''} · ${n} slides · ${fam} famílias · leitura: ${String(plano.leitura || '—').slice(0, 90)}`);
   console.log('  ' + S.map((s, i) => `${i + 1} ${s.familia}${enf[i] ? '*' : ''} (${s.fundo})`).join(' · '));
   for (const x of X) console.log(`✗ ${x}`);
@@ -116,15 +159,15 @@ const tile = (s, i) => {
     return `<i style="left:${x * K}px;top:${y * K}px;width:${w * K}px;height:${Math.max(1, h * K)}px;background:${st};${borda}${t === 'o' && h < 100 ? '' : ''}"></i>`;
   }).join('');
   const enf = s.enfase ? ` · ênfase ${s.enfase.tipo}: “${s.enfase.palavra}”` : '';
-  return `<figure><div class="q" style="background:${fundo(s.fundo)}">${blocos}</div><figcaption><b>${String(i + 1).padStart(2, '0')} ${s.papel}</b> · ${s.familia} · ${s.fundo}${enf}<br><span>${(s.heroi || '').slice(0, 70)}</span></figcaption></figure>`;
+  return `<figure><div class="q" style="background:${fundo(s.fundo)}">${blocos}</div><figcaption><b>${String(i + 1).padStart(2, '0')} ${s.papel}</b> · ${s.familia} · ${s.fundo}${enf}<br><span>${(s.heroi || '').slice(0, 70)}</span>${s.motivo ? `<br><em>◆ motivo: ${s.motivo.slice(0, 60)}</em>` : 'motivo' in s ? `<br><em class="sem">◇ sem motivo${s.motivo_falta ? ': ' + s.motivo_falta.slice(0, 50) : ' (sem justificativa)'}</em>` : ''}</figcaption></figure>`;
 };
 const htmlW = `<!doctype html><meta charset="utf-8"><style>
 *{box-sizing:border-box;margin:0}body{background:#ecebe8;font:500 12px/1.35 system-ui,sans-serif;color:#333;padding:24px;width:${Math.min(n, 6) * 286 + 40}px}
 h1{font-size:14px;margin-bottom:4px}p.l{color:#666;margin-bottom:16px;max-width:1100px}
 .g{display:grid;grid-template-columns:repeat(${Math.min(n, 6)},270px);gap:20px 16px}
 .q{position:relative;width:270px;height:337px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.q i{position:absolute;border-radius:2px}figcaption{margin-top:6px}figcaption span{color:#777}
-</style><h1>Wireframes · ${plano.peca || ''}</h1><p class="l">${plano.leitura || ''}<br>motivo: ${plano.motivo?.o_que || ''} → ${plano.motivo?.evolucao || ''}</p>
+.q i{position:absolute;border-radius:2px}figcaption{margin-top:6px}figcaption span{color:#777}figcaption em{font-style:normal;color:#b4533c}figcaption em.sem{color:#999}
+</style><h1>Wireframes · ${plano.peca || ''}</h1><p class="l">${plano.leitura || ''}<br>motivo: ${plano.motivo?.o_que || ''} → ${plano.motivo?.evolucao || ''}${plano.motivo?.destino ? `<br>destino (o maior objeto da virada): ${plano.motivo.destino}` : ''}</p>
 <div class="g">${S.map(tile).join('')}</div>`;
 const { chromium } = await import('playwright');
 const b = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));

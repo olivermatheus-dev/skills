@@ -11,6 +11,7 @@ Curto: o Oliver aprova olhando `wireframes.png`; o `plano.md` explica as escolha
 
 ## Motivo
 <o objeto/forma> — <como evolui: entra → acumula → converge → resolve> · identidade fixa: <quantidade, ícone, cor>
+Destino (o maior objeto da virada): <o que o motivo vira> · presença: <K de N slides>; faltas: <sN: por quê>
 
 ## Arco
 | # | papel | família | fundo | herói | ênfase |
@@ -26,6 +27,9 @@ Curto: o Oliver aprova olhando `wireframes.png`; o `plano.md` explica as escolha
 
 ## Check
 <saída do node tools/carrossel/plano.mjs check, resumo>
+
+## Crítica do plano
+<critica-plano-N.md: PRODUZIR/REFAZER, nota prevista, o que mudou por causa dela>
 
 ## Perguntas ao Oliver (com recomendação)
 1. … Recomendo: …

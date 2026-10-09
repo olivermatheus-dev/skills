@@ -7,6 +7,9 @@
 // texto corrido pequeno · área vazia / faixa vazia · vizinhos com a mesma família · nº de famílias · eyebrow > 1/3 ·
 // card > 40% · ênfase > 1 a cada 3 (e alternância) · gradiente em > 1 slide · placeholder · cor fora do brand.css ·
 // respiro a cada 3–4 · capa sem marca, último sem seta · fonte que não carregou · contraste medido (tools/lib/contraste-pagina.mjs).
+// Miniatura (049): âncora (texto de maior corpo) no mesmo terço em vizinhos ou em 3 de 4 slides tipográficos · molde "título solto
+// sobre cor" em ≥ 3 slides · fundos vizinhos com ΔL* < 4 no tom dominante · destino do motivo (.destino / data-motivo="destino")
+// menor que outro objeto ou que a soma da origem no slide da virada.
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import { resolve, join, dirname, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -100,6 +103,7 @@ const dados = await page.evaluate(async ({ paleta }) => {
     // ---------- cor, gradiente, ocupação dos objetos ----------
     const corRuim = new Map();
     let gradiente = false;
+    const objs = [];
     for (const el of [s, ...s.querySelectorAll('*')]) {
       const cs = getComputedStyle(el);
       if (cs.display === 'none') continue;
@@ -120,7 +124,7 @@ const dados = await page.evaluate(async ({ paleta }) => {
       const area = b.width * b.height;
       const objeto = el.tagName === 'svg' || el.tagName === 'IMG' || el.classList.contains('card') || el.classList.contains('ui-janela') ||
         el.classList.contains('chip') || (cs.boxShadow !== 'none' && area > 400) || (parseFloat(cs.borderTopWidth) > 0 && area > 2000 && area < W * H * 0.4);
-      if (objeto) marca(b.left - o.left, b.top - o.top, b.right - o.left, b.bottom - o.top);
+      if (objeto) { marca(b.left - o.left, b.top - o.top, b.right - o.left, b.bottom - o.top); if (!el.closest('.rodape')) objs.push({ el, area: area / (W * H) }); }
     }
     for (const [h, onde] of corRuim) r.problemas.push(`cor fora do brand.css: ${h} (${onde})`);
     r.gradiente = gradiente;
@@ -138,6 +142,61 @@ const dados = await page.evaluate(async ({ paleta }) => {
     r.enfase = enf.length ? (enf[0].classList.contains('enf-serifa') ? 'serifa' : 'cor') : (r.layout === 'citacao' ? 'serifa' : null);
     r.marca = !!s.querySelector('.rodape .marca svg, .rodape .marca img');
     r.arraste = !!s.querySelector('.arraste');
+    // ---------- âncora: o texto de maior corpo (fora do rodapé e de ornamento), onde cai na altura ----------
+    const tw = document.createTreeWalker(s, NodeFilter.SHOW_TEXT), txts = [];
+    for (let t = tw.nextNode(); t; t = tw.nextNode()) {
+      const el = t.parentElement;
+      if (!t.textContent.trim() || el.closest('.rodape, [aria-hidden="true"]')) continue;
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity === 0) continue;
+      const rg = document.createRange(); rg.selectNodeContents(t);
+      const q = [...rg.getClientRects()].filter((x) => x.width > 1 && x.height > 1);
+      if (q.length) txts.push({ fs: parseFloat(cs.fontSize), q, el, txt: t.textContent });
+    }
+    const fsMax = Math.max(0, ...txts.map((t) => t.fs));
+    const anc = txts.filter((t) => t.fs >= fsMax * 0.85);
+    if (anc.length) {
+      const rs = anc.flatMap((t) => t.q);
+      const y0 = Math.min(...rs.map((q) => q.top)) - o.top, y1 = Math.max(...rs.map((q) => q.bottom)) - o.top;
+      const x0 = Math.min(...rs.map((q) => q.left)) - o.left, x1 = Math.max(...rs.map((q) => q.right)) - o.left;
+      const c = (y0 + y1) / 2 / H;
+      // terços óticos: o centro ótico do slide fica acima do geométrico (~45%), então "inferior" começa em 55%
+      const txtAnc = anc.map((t) => t.txt).join(' ').replace(/\s+/g, ' ').trim();
+      r.ancora = { terco: c < 0.35 ? 'superior' : c > 0.55 ? 'inferior' : 'médio', centro: Math.round(c * 100), numeral: /^[\d.,%+×x ]+$/.test(txtAnc), fs: Math.round(fsMax * (1080 / W)), texto: txtAnc.slice(0, 32) };
+    }
+    // ---------- objetos: cobertura (fora do rodapé) e o maior ----------
+    const og = new Uint8Array(30 * 36);
+    for (const { el } of objs) {
+      const b = el.getBoundingClientRect();
+      for (let y = Math.max(0, Math.floor((b.top - o.top) / H * 36)); y < Math.min(36, Math.ceil((b.bottom - o.top) / H * 36)); y++)
+        for (let x = Math.max(0, Math.floor((b.left - o.left) / W * 30)); x < Math.min(30, Math.ceil((b.right - o.left) / W * 30)); x++) og[y * 30 + x] = 1;
+    }
+    r.objetos = Math.round(og.reduce((a, v) => a + v, 0) / og.length * 100);
+    const maior = objs.reduce((m, x) => (x.area > (m?.area || 0) ? x : m), null);
+    r.maiorObjeto = maior ? { area: Math.round(maior.area * 100), onde: curto(maior.el), motivo: maior.el.closest('[data-motivo]')?.dataset.motivo || null } : null;
+    // destino do motivo (049): [data-motivo="destino"] ou o .destino da família fluxo; origens = os irmãos que convergem para ele
+    const dest = s.querySelector('[data-motivo="destino"]') || s.querySelector('.destino');
+    if (dest) {
+      const ar = (e) => { const b = e.getBoundingClientRect(); return b.width * b.height / (W * H); };
+      const linha = (e) => e.matches('svg.fios, [data-linha]');
+      const origens = [...(s.querySelectorAll('[data-motivo="origem"]').length ? s.querySelectorAll('[data-motivo="origem"]') : dest.parentElement.children)].filter((e) => e !== dest && !linha(e) && ar(e) > 0.002);
+      const outros = objs.filter((x) => !linha(x.el) && !dest.contains(x.el) && !x.el.contains(dest));
+      r.destino = { marcado: dest.matches('[data-motivo="destino"]'), area: Math.round(ar(dest) * 100), origens: origens.length, somaOrigens: Math.round(origens.reduce((a, e) => a + ar(e), 0) * 100), maiorOutro: Math.round(Math.max(0, ...outros.map((x) => x.area)) * 100) };
+    }
+    // ---------- tom da miniatura: o fundo visível sob uma grade de pontos (texto não conta) ----------
+    s.scrollIntoView();
+    const o2 = s.getBoundingClientRect(), hist = new Map();
+    const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    const Lstar = ([R, G, B]) => { const Y = 0.2126 * lin(R) + 0.7152 * lin(G) + 0.0722 * lin(B); return Y > 0.008856 ? 116 * Math.cbrt(Y) - 16 : 903.3 * Y; };
+    let pts = 0, somaL = 0;
+    for (let gy = 0; gy < 27; gy++) for (let gx = 0; gx < 22; gx++) {
+      const x = o2.left + (gx + 0.5) * o2.width / 22, y = o2.top + (gy + 0.5) * o2.height / 27;
+      let e = document.elementFromPoint(x, y), cor = null;
+      for (; e && s.contains(e); e = e.parentElement) { const p = parse(getComputedStyle(e).backgroundColor); if (p && p.a > 0.5) { cor = p.rgb; break; } }
+      if (!cor) continue;
+      const L = Lstar(cor); pts++; somaL += L; const k = Math.round(L); hist.set(k, (hist.get(k) || 0) + 1);
+    }
+    if (pts) { const [k, c] = [...hist].sort((a, b) => b[1] - a[1])[0]; r.tom = { L: k, cobre: Math.round(c / pts * 100), media: Math.round(somaL / pts) }; }
     // ---------- placeholder ----------
     const tx = s.innerText;
     const ph = tx.match(/\[[^\]\n]{1,40}\]|\{\{[^}]*\}\}|@suamarca|@handle|lorem ipsum|\bTODO\b|\bXXX\b|a confirmar/i);
@@ -188,6 +247,44 @@ if (gr.length > 1) tot.push(`gradiente em ${gr.length} slides (${gr.map((d) => '
 const leve = (d, i) => (plano?.slides?.[i]?.densidade ? plano.slides[i].densidade === 'leve' : LEVES.has(d.layout));
 for (let i = 0; i + 4 <= n; i++) if (!dados.slice(i, i + 4).some((d, k) => leve(d, i + k))) { av.push(`s${i + 1}–s${i + 4} sem slide de respiro (campo, número, citação…)`); break; }
 for (let i = 0; i + 3 <= n; i++) { const f = dados.slice(i, i + 3).map((d) => d.fundo); if (f[0] && f.every((x) => x === f[0])) { av.push(`s${i + 1}–s${i + 3} com o mesmo fundo (${f[0]}): máx. 2 seguidos`); break; } }
+// ---------- composição na miniatura (049, erros (a), (b), (d), (e) da rubrica) ----------
+// slide tipográfico = a âncora manda na composição (objetos < 15% da área, âncora não é numeral); é nele que a posição repete
+const tipo = (d) => d.ancora && !d.ancora.numeral && d.objetos < 15;
+for (let i = 1; i < n; i++) {
+  const a = dados[i - 1], b = dados[i];
+  if (tipo(a) && tipo(b) && a.ancora.terco === b.ancora.terco && a.tom && b.tom && (a.tom.L > 60) === (b.tom.L > 60)) av.push(`s${a.n}–s${b.n} âncora no mesmo terço (${b.ancora.terco}) e sem objeto que mude a composição: recompor um dos dois`);
+}
+const jaVisto = new Set();
+for (let i = 0; i + 4 <= n; i++) {
+  const g = {};
+  for (const d of dados.slice(i, i + 4)) if (tipo(d)) (g[d.ancora.terco] ||= []).push(d.n);
+  for (const [t, ss] of Object.entries(g)) if (ss.length >= 3 && !jaVisto.has(ss.join())) { jaVisto.add(ss.join()); av.push(`âncora no terço ${t} em ${ss.map((k) => 's' + k).join(', ')} (3 em 4 slides): recompor um deles`); }
+}
+// molde "título solto sobre cor": famílias com nomes diferentes, mesma composição (fundo chapado, sem objeto, só título)
+const solto = (d) => tipo(d) && d.objetos < 10 && d.tom && d.tom.cobre >= 80;
+for (const claro of [true, false]) {
+  const ss = dados.filter((d) => solto(d) && (d.tom.L > 60) === claro);
+  if (ss.length >= Math.max(3, Math.ceil(n / 4))) av.push(`mesmo molde "título solto sobre cor ${claro ? 'clara' : 'escura'}" em ${ss.map((d) => 's' + d.n).join(', ')}: a família muda no nome, a miniatura é a mesma; dê objeto (o motivo) a pelo menos um`);
+}
+// fundos vizinhos que não se distinguem na miniatura: ΔL* do tom dominante < 4 (calibrado em C0001: creme 97 · branco 100 · tom-50 97 · tom-100 94 · tom-200 88)
+// não conta quando um dos dois tem um objeto-herói (≥ 25% da área): aí a miniatura se distingue pela forma
+const LIMIAR_L = 4;
+for (let i = 1; i < n; i++) {
+  const a = dados[i - 1], b = dados[i];
+  if (!a.tom || !b.tom) continue;
+  const heroi = (d) => (d.maiorObjeto?.area || 0) >= 25;
+  const dl = Math.abs(a.tom.L - b.tom.L);
+  if (dl < LIMIAR_L && !heroi(a) && !heroi(b)) av.push(`s${a.n}–s${b.n} fundos que não se distinguem na miniatura (${a.fundo.replace('fundo-', '')} L${a.tom.L} × ${b.fundo.replace('fundo-', '')} L${b.tom.L}, Δ${dl} < ${LIMIAR_L}): pule ≥ 2 passos da escala ou troque claro/escuro`);
+}
+// destino do motivo: no slide da virada (slides.json) ou marcado com data-motivo="destino", é o maior objeto e pesa mais que a origem
+const virada = new Set((plano?.slides || []).map((p, i) => (p.papel === 'virada' ? i : -1)).filter((i) => i >= 0));
+dados.forEach((d, i) => {
+  if (d.destino && (virada.has(i) || d.destino.marcado)) {
+    const { area, somaOrigens, origens, maiorOutro } = d.destino;
+    if (area < maiorOutro) av.push(`s${d.n} o destino do motivo (${area}% do slide) é menor que outro objeto (${maiorOutro}%): o destino é o maior objeto do slide`);
+    else if (origens > 1 && area < somaOrigens) av.push(`s${d.n} o destino do motivo (${area}% do slide) pesa menos que a origem (${origens} itens, ${somaOrigens}%): reescalar o destino`);
+  } else if (!d.destino && virada.has(i) && plano?.motivo) av.push(`s${d.n} (virada) sem o destino do motivo marcado: use .destino ou data-motivo="destino" no objeto em que o motivo se resolve`);
+});
 if (n > 1 && dados[0].marca) av.push('s1 (capa) com a marca no rodapé: a marca vai no fim');
 if (n > 1 && dados[n - 1].arraste) av.push(`s${n} (último) com "arraste"`);
 if (plano?.slides) {
