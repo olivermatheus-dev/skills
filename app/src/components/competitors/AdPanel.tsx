@@ -4,7 +4,7 @@
 // e da miniatura: o salvo continua abrindo inteiro mesmo se a Biblioteca tirar o anúncio do ar).
 import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, Bookmark, BookmarkCheck, CircleHelp, Filter, Info, LogOut, Megaphone, Sparkles, StickyNote, Tag as TagIcon, Undo2, UserRound } from 'lucide-react';
+import { Activity, Bookmark, BookmarkCheck, CircleHelp, Filter, LogOut, Megaphone, Sparkles, StickyNote, Tag as TagIcon, Undo2, UserRound } from 'lucide-react';
 import type { Ad, AdMark, AdMarkPatch, AnuncioHistorico, Classificacao } from '../../api';
 import { AD_FUNIS, AD_OBJETIVOS, AD_TIPOS, fichaKeyDeAd, resolverCampo, type AdCampo } from '../../../../schema/ads-marks';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
@@ -15,7 +15,7 @@ import { Tip } from './toolbar';
 import { TagsInput, TagChip, useProjectTags } from '../notes/TagsInput';
 import { ChipDestino, ChipOferta, FUNIL, INCERTO, OBJETIVO, StatusBadge, TIPO, motivosDe, type StatusAd } from './AdChips';
 import { AnaliseAnuncio } from './ficha/AdFicha';
-import { AbrirOriginal, BotaoAnalisar, SeloAnalise } from './ficha/FichaPanel';
+import { AbrirOriginal, BotaoAnalisar, SeloAnalise, Secao } from './ficha/FichaPanel';
 import { useFichasResumo } from './ficha/useFichas';
 
 /** o que o painel precisa saber de um anúncio (a linha da aba Anúncios, já com a classificação resolvida) */
@@ -69,7 +69,7 @@ export function AdPanel({ slug, r, mark, open, onClose, onMark }: {
   return (
     <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
       <DialogContent aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}
-        className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1100px] sm:max-w-[1100px] h-[calc(100vh-2rem)] max-h-[860px]">
+        className="p-0 gap-0 flex flex-col overflow-hidden outline-none w-[calc(100vw-2rem)] max-w-[1100px] sm:max-w-[1100px] h-[calc(100vh-2rem)] max-h-[860px]">
         {/* cabeçalho no mesmo padrão do painel de conteúdo: o que é (esquerda) e TODAS as ações (direita): salvar, IA (roxo) e abrir na Biblioteca (cor do projeto) */}
         <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">
           <div className="flex items-center gap-3 min-w-0 flex-1 basis-[320px]">
@@ -278,19 +278,6 @@ function Destino({ r, host }: { r: AdPanelData; host: string | null }) {
         : <p className="text-sm text-muted-foreground">Sem link.</p>}
       {c?.sinais.utm?.campaign && <p className="text-xs text-muted-foreground">Campanha (UTM): <span className="text-foreground">{c.sinais.utm.campaign}</span></p>}
     </div>
-  );
-}
-
-/** bloco da coluna da direita: título curto com ícone; a explicação mora no (i) para não poluir */
-function Secao({ icone, titulo, dica, children }: { icone?: ReactNode; titulo: string; dica?: string; children: ReactNode }) {
-  return (
-    <section className="space-y-3">
-      <h3 className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground [&_svg]:size-3.5">
-        {icone}{titulo}
-        {dica && <Tip content={dica}><Info className="!size-3 cursor-help opacity-70" aria-label={dica} /></Tip>}
-      </h3>
-      {children}
-    </section>
   );
 }
 

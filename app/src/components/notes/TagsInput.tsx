@@ -31,8 +31,10 @@ export function TagChip({ id, def, onRemove, small }: { id: string; def?: TagDef
   );
 }
 
-export function TagsInput({ value, onChange, slug, placeholder = 'adicionar tag…', className }: {
+export function TagsInput({ value, onChange, slug, placeholder = 'adicionar tag…', className, sugestoes = [] }: {
   value: string[]; onChange: (v: string[]) => void; slug?: string; placeholder?: string; className?: string;
+  /** tags já usadas em outros itens (entram no autocompletar junto com as do tags.yml) */
+  sugestoes?: string[];
 }) {
   const [text, setText] = useState('');
   const { list, byId } = useProjectTags(slug);
@@ -59,6 +61,7 @@ export function TagsInput({ value, onChange, slug, placeholder = 'adicionar tag�
       />
       <datalist id={dl}>
         {list.filter((t) => !value.includes(t.id)).map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+        {sugestoes.filter((t) => !value.includes(t) && !byId[t]).map((t) => <option key={t} value={t} />)}
       </datalist>
     </div>
   );

@@ -5,14 +5,16 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Ban, Captions, Check, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Lightbulb, Pencil, Play, Plus, RefreshCw, ScanSearch, Sparkles, TriangleAlert, Undo2, X,
+  Activity, Ban, Captions, Check, CircleDot, Clock, ExternalLink, FileText, Film, Flame, Info, Lightbulb, Pencil, Play, Plus, RefreshCw, ScanSearch, Sparkles, StickyNote, Tag as TagIcon, TriangleAlert, Undo2, X,
 } from 'lucide-react';
 import type { EdicaoInfo, FichaView, ItemMark, OpcaoVocab, VocabView } from '../../../api';
 import type { FichaCampos } from '../../../../../schema/ficha';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
-import { Button, Field, Input, SelectField, Textarea, cx, fmtDate, fmtNum, type SelectOption } from '../../kit';
-import { PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtPct, fmtRatio, platformLabel, slugify, timeAgo, type Row } from '../lib';
+import { Separator } from '../../ui/separator';
+import { TagsInput } from '../../notes/TagsInput';
+import { Button, Input, SelectField, Textarea, cx, fmtDate, fmtNum, type SelectOption } from '../../kit';
+import { PlatformIcon, STATUS_COLOR, STATUS_LABEL, Spinner, TYPE_LABEL, fmtPct, fmtRatio, platformLabel, timeAgo, type Row } from '../lib';
 import { Thumb, FavStar, ViewsHistory, isVertical, mercadoTip, mercadoVazioTip, perfilTip, porSeguidorTip, titleOf } from '../Items';
 import { Tip } from '../toolbar';
 import { useFicha, useFichasResumo, useFichasVocab, usePedido } from './useFichas';
@@ -340,7 +342,68 @@ function Numeros({ r, md, rodape }: { r: Row; md: Medidas; rodape?: ReactNode })
   );
 }
 
-function MediaCol({ r, media }: { r: Row; media?: string }) {
+// ───────────────────────── layout comum (painel de conteúdo e de anúncio) ─────────────────────────
+/** coluna da esquerda: a peça como aparece na rede */
+export const ASIDE = 'md:w-[380px] shrink-0 border-b md:border-b-0 md:border-r border-border bg-muted/30 md:overflow-y-auto p-5 space-y-4';
+
+/** bloco da coluna da direita: título curto com ícone; a explicação mora no (i) para não poluir */
+export function Secao({ icone, titulo, dica, aside, children }: { icone?: ReactNode; titulo: ReactNode; dica?: string; aside?: ReactNode; children: ReactNode }) {
+  return (
+    <section className="space-y-3">
+      <h3 className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground [&_svg]:size-3.5">
+        {icone}{titulo}
+        {dica && <Tip content={dica}><Info className="!size-3 cursor-help opacity-70" aria-label={dica} /></Tip>}
+        {aside && <span className="ml-auto normal-case tracking-normal font-normal">{aside}</span>}
+      </h3>
+      {children}
+    </section>
+  );
+}
+
+/** o post como aparece na rede: perfil, mídia (tocável) e a legenda com "ver mais" */
+function PreviaPost({ r, profileLabel, midia }: { r: Row; profileLabel?: string; midia: ReactNode }) {
+  const [aberto, setAberto] = useState(false);
+  const texto = (r.item.caption || r.item.title || '').trim();
+  const longo = texto.length > 220 || texto.split('\n').length > 4;
+  const nome = profileLabel || platformLabel(r.platform);
+  return (
+    <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="flex items-center gap-2.5 px-3 py-2.5">
+        <span className="size-8 rounded-full bg-muted grid place-items-center text-xs font-semibold text-muted-foreground shrink-0">{nome.slice(0, 1).toUpperCase()}</span>
+        <div className="min-w-0 leading-tight">
+          <div className="text-sm font-semibold truncate">{nome}</div>
+          <div className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
+            <PlatformIcon platform={r.platform} size={11} />{TYPE_LABEL[r.item.type] ?? r.item.type}{r.item.durationS ? ` · ${Math.round(r.item.durationS)} s` : ''}{r.item.publishedAt ? ` · ${timeAgo(r.item.publishedAt)}` : ''}
+          </div>
+        </div>
+      </div>
+      <div className="bg-zinc-900">{midia}</div>
+      <div className="px-3 py-2.5 text-[13px] leading-relaxed">
+        {texto ? (
+          <>
+            <div className={cx('whitespace-pre-line break-words', !aberto && longo && 'line-clamp-4')}>{texto}</div>
+            {longo && <button type="button" onClick={() => setAberto(!aberto)} className="text-xs font-medium text-muted-foreground hover:text-foreground mt-0.5">{aberto ? 'ver menos' : 'ver mais'}</button>}
+          </>
+        ) : <p className="text-xs text-muted-foreground italic">Sem legenda.</p>}
+      </div>
+    </div>
+  );
+}
+
+const MIDIA = (r: Row) => cx('relative overflow-hidden mx-auto', isVertical(r) ? 'aspect-[9/16] max-h-[min(440px,46vh)]' : 'aspect-video');
+
+/** esquerda sem ficha: a capa (tocável) e os números da última coleta */
+function ColunaSimples({ r, media, profileLabel }: { r: Row; media?: string; profileLabel?: string }) {
+  return (
+    <>
+      <PreviaPost r={r} profileLabel={profileLabel} midia={<Tocavel r={r}><Thumb r={r} media={media} className={MIDIA(r)} /></Tocavel>} />
+      <Numeros r={r} md={{ ...r.item.metrics, seguidores: r.seguidores, engajamento: r.engagement }} />
+    </>
+  );
+}
+
+/** esquerda com ficha: o quadro escolhido no lugar da capa, a fita de quadros-chave e os números congelados na análise */
+function ColunaAnalisada({ r, media, profileLabel }: { r: Row; media?: string; profileLabel?: string }) {
   const { v } = useF();
   const f = v.ficha, md = f.medidas;
   const quadros = [...(f.insumos?.quadros ?? [])].sort((a, b) => a.tMs - b.tMs);
@@ -351,21 +414,16 @@ function MediaCol({ r, media }: { r: Row; media?: string }) {
   const viewsHoje = r.item.metrics.views, viewsAnalise = md.views;
   const mudou = viewsHoje != null && viewsAnalise != null && Math.abs(viewsHoje - viewsAnalise) / Math.max(1, viewsAnalise) > 0.05;
   return (
-    <div className="space-y-4">
-      {/* o número que explica o resto vem antes da mídia: precisa estar visível sem rolar */}
-      <div className="grid grid-cols-3 gap-1.5">
-        <Ratio v={md.xPerfil} label="× perfil" tip={r.outlier != null ? perfilTip(r) : 'views ÷ mediana do próprio perfil'} />
-        <Ratio v={md.xMercado} label="× mercado" tip={md.xMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
-        <Ratio v={md.porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
-      </div>
-      <Tocavel r={r}>
-        <div className={cx('relative rounded-xl overflow-hidden bg-zinc-900 mx-auto', vertical ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')}>
-          {q ? <img src={src(q.arquivo)} alt={q.descricao ?? `quadro em ${fmtS(q.tMs)}`} className="absolute inset-0 w-full h-full object-contain" />
-            : <Thumb r={r} media={media} className="absolute inset-0" />}
-          {q && quadros.length > 1 && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[11px] font-medium px-1.5 py-0.5 rounded tabular-nums">{fmtS(q.tMs)}</span>}
-        </div>
-        {q?.ocr && <Tip content={`Texto na tela (OCR): ${q.ocr}`}><span className="absolute z-10 bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">texto na tela</span></Tip>}
-      </Tocavel>
+    <>
+      <PreviaPost r={r} profileLabel={profileLabel} midia={
+        <Tocavel r={r}>
+          <div className={cx(MIDIA(r), 'bg-zinc-900')}>
+            {q ? <img src={src(q.arquivo)} alt={q.descricao ?? `quadro em ${fmtS(q.tMs)}`} className="absolute inset-0 w-full h-full object-contain" />
+              : <Thumb r={r} media={media} className="absolute inset-0" />}
+            {q && quadros.length > 1 && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[11px] font-medium px-1.5 py-0.5 rounded tabular-nums">{fmtS(q.tMs)}</span>}
+          </div>
+          {q?.ocr && <Tip content={`Texto na tela (OCR): ${q.ocr}`}><span className="absolute z-10 bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">texto na tela</span></Tip>}
+        </Tocavel>} />
       {quadros.length > 1 ? (
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 flex items-center gap-1.5"><Film className="size-3.5" />Quadros-chave <span className="font-normal normal-case tracking-normal">· {quadros.length}</span></div>
@@ -379,13 +437,47 @@ function MediaCol({ r, media }: { r: Row; media?: string }) {
             ))}
           </div>
         </div>
-      ) : quadros.length === 1 ? <div className="text-xs text-muted-foreground -mt-2">Só a capa: o vídeo não pôde ser baixado.</div> : null}
-
+      ) : quadros.length === 1 ? <div className="text-xs text-muted-foreground">Só a capa: o vídeo não pôde ser baixado.</div> : null}
       <Numeros r={r} md={md} rodape={
         <div className="text-[11px] text-muted-foreground mt-1.5">
           Medidas congeladas na análise ({fmtDate(f.analise?.geradoEm)}).{mudou && <> Hoje: <b className="text-foreground">{fmtNum(viewsHoje)}</b> views.</>}
         </div>} />
-    </div>
+    </>
+  );
+}
+
+/** direita, 2º bloco: o quanto saiu da curva (perfil, mercado, seguidores) e a evolução das views entre coletas */
+function SecaoSinal({ r, xPerfil, xMercado, porSeguidor }: { r: Row; xPerfil?: number | null; xMercado?: number | null; porSeguidor?: number | null }) {
+  return (
+    <Secao icone={<Activity />} titulo="Sinal de resultado" dica="× perfil = contra a mediana do próprio perfil (o que viralizou para ele). × mercado = contra os concorrentes na mesma rede e formato. Por seguidor = alcance relativo ao tamanho do perfil.">
+      <div className="grid grid-cols-3 gap-2">
+        <Ratio v={xPerfil} label="× perfil" tip={r.outlier != null ? perfilTip(r) : 'views ÷ mediana do próprio perfil'} />
+        <Ratio v={xMercado} label="× mercado" tip={xMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
+        <Ratio v={porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
+      </div>
+      <div>
+        <div className="text-xs font-medium text-muted-foreground mb-1">Views por coleta</div>
+        <ViewsHistory r={r} />
+      </div>
+    </Secao>
+  );
+}
+
+/** direita, 1º bloco: tags em chips (salvam na hora) */
+function SecaoTags({ r, slug, sugestoes, onMark }: { r: Row; slug: string; sugestoes: string[]; onMark: (patch: Partial<ItemMark>) => void }) {
+  return (
+    <Secao icone={<TagIcon />} titulo="Tags" dica="Para achar e agrupar depois (ex.: gancho-forte, humor). Enter ou vírgula põe a tag; salvam na hora.">
+      <TagsInput slug={slug} value={r.mark?.tags ?? []} onChange={(t) => onMark({ tags: t })} sugestoes={sugestoes} placeholder="ex.: gancho-forte, humor" />
+    </Secao>
+  );
+}
+
+/** direita: a nota do Oliver (salva ao sair do campo e ao fechar) */
+function SecaoNota({ mar }: { mar: Marcacao }) {
+  return (
+    <Secao icone={<StickyNote />} titulo="Nota" dica="O que chamou atenção: gancho, estrutura, formato. Vai junto quando vira ideia.">
+      <Textarea rows={4} value={mar.note} onChange={(e) => mar.setNote(e.target.value)} onBlur={mar.flush} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
+    </Secao>
   );
 }
 
@@ -662,75 +754,84 @@ function Fonte() {
 /** "Por que funcionou" muda de título conforme o desempenho, para a leitura bater com o número */
 const tituloPorQue = (x?: number | null) => (x == null ? 'Por que performou assim' : x >= 1.5 ? 'Por que funcionou' : x < 0.9 ? 'Por que não decolou' : 'Por que ficou na média');
 
-function Corpo({ r, media, onIdea, ideaBusy, nota, temNota }: { r: Row; media?: string; onIdea: OnIdea; ideaBusy: boolean; nota: ReactNode; temNota: boolean }) {
+/** com ficha: esquerda = o post como na rede; direita = tags, sinal, análise da IA (com as abas) e nota, separados por divisores */
+function Corpo({ r, media, profileLabel, slug, sugestoes, onMark, mar, onIdea, ideaBusy }: {
+  r: Row; media?: string; profileLabel?: string; slug: string; sugestoes: string[]; onMark: (patch: Partial<ItemMark>) => void; mar: Marcacao; onIdea: OnIdea; ideaBusy: boolean;
+}) {
   const { v, edit } = useF();
-  const c = v.campos;
+  const c = v.campos, md = v.ficha.medidas;
   // o porQue é guardado como a IA escreve ("hipótese: …"); a tela tira o prefixo e o devolve ao salvar
   const porQue = c.porQue?.replace(/^hip[oó]tese:\s*/i, '');
   const [tab, setTab] = useState('resumo');
   return (
-    <div className="flex-1 min-h-0 grid lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)] overflow-y-auto lg:overflow-hidden">
-      <aside className="lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-border bg-muted/30 p-5"><MediaCol r={r} media={media} /></aside>
-      <div className="lg:overflow-y-auto">
-        <div className="p-6 space-y-6">
-          {/* 1. o porquê, primeiro: é a pergunta de quem abre */}
-          <Campo label={tituloPorQue(v.ficha.medidas.xPerfil)} icon={<ScanSearch />} paths={['porQue']}
-            aside={<span className="text-[11px] text-muted-foreground">hipótese da IA</span>}
-            className="rounded-xl border border-ai-border bg-ai-soft/60 p-4">
-            <div className="text-[15px] leading-relaxed"><EditText path="porQue" value={porQue} multiline placeholder="hipótese de por que performou" onSave={(x) => edit('porQue', x.trim() ? `hipótese: ${x.trim().replace(/^hip[oó]tese:\s*/i, '')}` : null)} /></div>
-          </Campo>
+    <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+      <aside className={ASIDE}><ColunaAnalisada r={r} media={media} profileLabel={profileLabel} /></aside>
+      <div className="flex-1 min-w-0 md:overflow-y-auto">
+        <div className="p-6 space-y-5">
+          <SecaoTags r={r} slug={slug} sugestoes={sugestoes} onMark={onMark} />
+          <Separator />
+          <SecaoSinal r={r} xPerfil={md.xPerfil} xMercado={md.xMercado} porSeguidor={md.porSeguidor} />
+          <Separator />
 
-          {/* 2. o que a pessoa vê e ouve primeiro */}
-          <div className="grid gap-5 xl:grid-cols-2">
-            <Campo label={<>Headline <span className="font-normal normal-case tracking-normal">· {c.headline?.fonte === 'tela' ? 'na tela' : c.headline?.fonte ?? '—'}</span></>} paths={['headline.texto']}>
-              <blockquote className="border-l-[3px] border-foreground/80 pl-3 text-[15px] font-semibold leading-snug"><EditText path="headline.texto" value={c.headline?.texto} placeholder="sem headline" /></blockquote>
-            </Campo>
-            <Campo label="Gancho" paths={['gancho.texto', 'gancho.tipo', 'gancho.canal']}>
-              <blockquote className="border-l-[3px] border-primary pl-3 text-[15px] leading-snug"><EditText path="gancho.texto" value={c.gancho?.texto} placeholder="gancho não identificado" /></blockquote>
-              <div className="flex flex-wrap gap-1.5 mt-2 pl-3">
-                <VSelect path="gancho.tipo" grupo="tipoGancho" value={c.gancho?.tipo} vazio="tipo indefinido" />
-                <VSelect path="gancho.canal" grupo="canalGancho" value={c.gancho?.canal} vazio="canal —" />
+          <Secao icone={<Sparkles className="text-ai" />} titulo="Análise da IA" dica="Clique em qualquer valor para corrigir. O que você muda fica guardado à parte, ganha o selo “você” e nenhuma reanálise apaga.">
+            <div className="space-y-6">
+              {/* o porquê, primeiro: é a pergunta de quem abre */}
+              <Campo label={tituloPorQue(md.xPerfil)} icon={<ScanSearch />} paths={['porQue']}
+                aside={<span className="text-[11px] text-muted-foreground">hipótese da IA</span>}
+                className="rounded-xl border border-ai-border bg-ai-soft/60 p-4">
+                <div className="text-[15px] leading-relaxed"><EditText path="porQue" value={porQue} multiline placeholder="hipótese de por que performou" onSave={(x) => edit('porQue', x.trim() ? `hipótese: ${x.trim().replace(/^hip[oó]tese:\s*/i, '')}` : null)} /></div>
+              </Campo>
+
+              {/* o que a pessoa vê e ouve primeiro */}
+              <div className="grid gap-5 xl:grid-cols-2">
+                <Campo label={<>Headline <span className="font-normal normal-case tracking-normal">· {c.headline?.fonte === 'tela' ? 'na tela' : c.headline?.fonte ?? '—'}</span></>} paths={['headline.texto']}>
+                  <blockquote className="border-l-[3px] border-foreground/80 pl-3 text-[15px] font-semibold leading-snug"><EditText path="headline.texto" value={c.headline?.texto} placeholder="sem headline" /></blockquote>
+                </Campo>
+                <Campo label="Gancho" paths={['gancho.texto', 'gancho.tipo', 'gancho.canal']}>
+                  <blockquote className="border-l-[3px] border-primary pl-3 text-[15px] leading-snug"><EditText path="gancho.texto" value={c.gancho?.texto} placeholder="gancho não identificado" /></blockquote>
+                  <div className="flex flex-wrap gap-1.5 mt-2 pl-3">
+                    <VSelect path="gancho.tipo" grupo="tipoGancho" value={c.gancho?.tipo} vazio="tipo indefinido" />
+                    <VSelect path="gancho.canal" grupo="canalGancho" value={c.gancho?.canal} vazio="canal —" />
+                  </div>
+                </Campo>
               </div>
-            </Campo>
-          </div>
 
-          <Cinco c={c} />
+              <Cinco c={c} />
 
-          {/* 3. classificação */}
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4 rounded-xl border border-border p-4">
-            <Campo label="Tipo" paths={['tipoConteudo.principal', 'tipoConteudo.secundarios']}>
-              <div className="flex flex-wrap gap-1.5 items-center">
-                <VSelect path="tipoConteudo.principal" grupo="tipoConteudo" value={c.tipoConteudo?.principal} size="md" />
-                {c.tipoConteudo?.principal && <MultiSelect path="tipoConteudo.secundarios" grupo="tipoConteudo" values={c.tipoConteudo?.secundarios ?? []} max={2} />}
+              {/* classificação: um cartão por eixo, como no painel do anúncio */}
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <Campo label="Tipo" paths={['tipoConteudo.principal', 'tipoConteudo.secundarios']} className="rounded-xl border border-border bg-card p-3">
+                  <div className="flex flex-wrap gap-1.5 items-center">
+                    <VSelect path="tipoConteudo.principal" grupo="tipoConteudo" value={c.tipoConteudo?.principal} size="md" />
+                    {c.tipoConteudo?.principal && <MultiSelect path="tipoConteudo.secundarios" grupo="tipoConteudo" values={c.tipoConteudo?.secundarios ?? []} max={2} />}
+                  </div>
+                </Campo>
+                <Campo label="Formato" paths={['formato']} className="rounded-xl border border-border bg-card p-3"><VSelect path="formato" grupo="formato" value={c.formato} vazio="sem formato" size="md" /></Campo>
+                <Campo label="Estilo" paths={['estiloProducao']} className="rounded-xl border border-border bg-card p-3"><VSelect path="estiloProducao" grupo="estiloProducao" value={c.estiloProducao} vazio="—" size="md" /></Campo>
+                <Campo label="Tema" paths={['tema.texto', 'tema.tag']} className="rounded-xl border border-border bg-card p-3">
+                  <div className="text-sm leading-snug mb-1.5"><EditText path="tema.texto" value={c.tema?.texto} placeholder="tema" /></div>
+                  <VSelect path="tema.tag" grupo="tema" value={c.tema?.tag} vazio="sem tag" />
+                </Campo>
               </div>
-            </Campo>
-            <Campo label="Formato" paths={['formato']}><VSelect path="formato" grupo="formato" value={c.formato} vazio="sem formato" size="md" /></Campo>
-            <Campo label="Estilo" paths={['estiloProducao']}><VSelect path="estiloProducao" grupo="estiloProducao" value={c.estiloProducao} vazio="—" size="md" /></Campo>
-            <Campo label="Tema" paths={['tema.texto', 'tema.tag']}>
-              <div className="text-sm leading-snug mb-1.5"><EditText path="tema.texto" value={c.tema?.texto} placeholder="tema" /></div>
-              <VSelect path="tema.tag" grupo="tema" value={c.tema?.tag} vazio="sem tag" />
-            </Campo>
-          </div>
+
+              <Tabs value={tab} onValueChange={setTab} className="gap-4">
+                <TabsList>
+                  <TabsTrigger value="resumo">Resumo</TabsTrigger>
+                  <TabsTrigger value="roteiro"><Captions />Roteiro</TabsTrigger>
+                  <TabsTrigger value="detalhes">Detalhes</TabsTrigger>
+                  <TabsTrigger value="fonte">Fonte</TabsTrigger>
+                </TabsList>
+                <TabsContent value="resumo"><Resumo c={c} onIdea={onIdea} ideaBusy={ideaBusy} /></TabsContent>
+                <TabsContent value="roteiro"><Roteiro c={c} /></TabsContent>
+                <TabsContent value="detalhes"><Detalhes c={c} /></TabsContent>
+                <TabsContent value="fonte"><Fonte /></TabsContent>
+              </Tabs>
+            </div>
+          </Secao>
+
+          <Separator />
+          <SecaoNota mar={mar} />
         </div>
-
-        <Tabs value={tab} onValueChange={setTab} className="gap-0">
-          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-y border-border px-6 py-2">
-            <TabsList>
-              <TabsTrigger value="resumo">Resumo</TabsTrigger>
-              <TabsTrigger value="roteiro"><Captions />Roteiro</TabsTrigger>
-              <TabsTrigger value="detalhes">Detalhes</TabsTrigger>
-              <TabsTrigger value="nota">Minha nota{temNota && <span className="size-1.5 rounded-full bg-primary" />}</TabsTrigger>
-              <TabsTrigger value="fonte">Fonte</TabsTrigger>
-            </TabsList>
-          </div>
-          <div className="p-6">
-            <TabsContent value="resumo"><Resumo c={c} onIdea={onIdea} ideaBusy={ideaBusy} /></TabsContent>
-            <TabsContent value="roteiro"><Roteiro c={c} /></TabsContent>
-            <TabsContent value="detalhes"><Detalhes c={c} /></TabsContent>
-            <TabsContent value="nota"><div className="max-w-xl">{nota}</div></TabsContent>
-            <TabsContent value="fonte"><Fonte /></TabsContent>
-          </div>
-        </Tabs>
       </div>
     </div>
   );
@@ -758,42 +859,22 @@ function Cinco({ c }: { c: Campos }) {
   );
 }
 
-// ───────────────────────── marcação do Oliver (status, tags, nota) ─────────────────────────
-/** tags e nota em edição; salvam ao sair do campo, ao trocar de item e ao fechar o painel (o cleanup grava o que sobrou) */
+// ───────────────────────── marcação do Oliver (nota) ─────────────────────────
+/** nota em edição; salva ao sair do campo, ao trocar de item e ao fechar o painel (o cleanup grava o que sobrou). As tags salvam na hora (SecaoTags) */
 function useMarcacao(r: Row, onMark: (patch: Partial<ItemMark>) => void) {
   const m = r.mark;
   const [note, setNote] = useState(m?.note ?? '');
-  const [tags, setTags] = useState((m?.tags ?? []).join(', '));
-  const parseTags = (s: string) => [...new Set(s.split(/[,\s]+/).map((t) => slugify(t.replace(/^#/, ''))).filter((t) => t && t !== 'item'))];
-  const latest = useRef({ note, tags, m, onMark });
-  latest.current = { note, tags, m, onMark };
+  const latest = useRef({ note, m, onMark });
+  latest.current = { note, m, onMark };
   const flush = useCallback(() => {
-    const { note: n, tags: t, m: mk, onMark: om } = latest.current;
-    const patch: Partial<ItemMark> = {};
-    if (n !== (mk?.note ?? '')) patch.note = n;
-    const pt = parseTags(t);
-    if (pt.join() !== (mk?.tags ?? []).join()) patch.tags = pt;
-    if (Object.keys(patch).length) om(patch);
+    const { note: n, m: mk, onMark: om } = latest.current;
+    if (n !== (mk?.note ?? '')) om({ note: n });
   }, []);
   useEffect(() => () => flush(), [flush]);
-  const saveTags = () => { flush(); setTags(parseTags(tags).join(', ')); };
-  return { note, setNote, tags, setTags, parseTags, flush, saveTags };
+  return { note, setNote, flush };
 }
 type Marcacao = ReturnType<typeof useMarcacao>;
 
-function CamposMarcacao({ mar, suggestions }: { mar: Marcacao; suggestions: string[] }) {
-  return (
-    <div className="space-y-3">
-      <Field label="Tags" hint="separadas por vírgula; salvam ao sair do campo">
-        <Input className="w-full" list="item-tags" value={mar.tags} onChange={(e) => mar.setTags(e.target.value)} onBlur={mar.saveTags} placeholder="ex.: gancho-forte, humor" />
-        <datalist id="item-tags">{suggestions.map((t) => <option key={t} value={t} />)}</datalist>
-      </Field>
-      <Field label="Nota" hint="o que chamou atenção: gancho, estrutura, formato…">
-        <Textarea rows={3} value={mar.note} onChange={(e) => mar.setNote(e.target.value)} onBlur={mar.flush} placeholder="Ex.: abre com pergunta; prova social aos 10 s; CTA para salvar." />
-      </Field>
-    </div>
-  );
-}
 
 // ───────────────────────── cabeçalho: peças comuns aos painéis de conteúdo e de anúncio ─────────────────────────
 /** Analisar / Reanalisar (roxo = IA) ou, se o pedido já está na fila, o selo "Na fila" com × para tirar. `explica` = o que a análise devolve */
@@ -847,26 +928,9 @@ export function AbrirOriginal({ href, label = 'Abrir original' }: { href: string
 }
 
 // ───────────────────────── sem análise: o miolo ─────────────────────────
-/** coluna da esquerda sem ficha: os mesmos números (× perfil, × mercado, por seguidor) lidos da última coleta */
-function ColunaSimples({ r, media }: { r: Row; media?: string }) {
-  const m = r.item.metrics;
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-1.5">
-        <Ratio v={r.outlier} label="× perfil" tip={r.outlier != null ? perfilTip(r) : 'views ÷ mediana do próprio perfil'} />
-        <Ratio v={r.outlierMercado} label="× mercado" tip={r.outlierMercado != null ? mercadoTip(r) : (mercadoVazioTip(r) ?? 'Sem mercado: menos de 3 concorrentes com dados nesta rede.')} />
-        <Ratio v={r.porSeguidor} label="por seguidor" fmt={(n) => (n != null && n >= 1 ? fmtRatio(n) : fmtPct(n))} tip={porSeguidorTip(r) ?? 'views ÷ seguidores do perfil'} />
-      </div>
-      <Tocavel r={r}>
-        <Thumb r={r} media={media} className={cx('rounded-xl mx-auto', isVertical(r) ? 'aspect-[9/16] max-h-[min(400px,42vh)]' : 'aspect-video')} />
-      </Tocavel>
-      <Numeros r={r} md={{ ...m, seguidores: r.seguidores, engajamento: r.engagement }} />
-    </div>
-  );
-}
-
-function CorpoSemAnalise({ r, media, mar, suggestions, slug, ideaTitle, setIdeaTitle, ideaBusy, onIdea, focusIdea, ideaRef }: {
-  r: Row; media?: string; mar: Marcacao; suggestions: string[]; slug: string;
+/** sem ficha: o mesmo esqueleto (post à esquerda; tags, sinal, nota e Virar ideia à direita); a análise é pedida no cabeçalho */
+function CorpoSemAnalise({ r, media, profileLabel, slug, sugestoes, onMark, mar, ideaTitle, setIdeaTitle, ideaBusy, onIdea, focusIdea, ideaRef }: {
+  r: Row; media?: string; profileLabel?: string; slug: string; sugestoes: string[]; onMark: (patch: Partial<ItemMark>) => void; mar: Marcacao;
   ideaTitle: string; setIdeaTitle: (s: string) => void; ideaBusy: boolean; onIdea: () => void; focusIdea?: boolean; ideaRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const m = r.mark;
@@ -876,38 +940,34 @@ function CorpoSemAnalise({ r, media, mar, suggestions, slug, ideaTitle, setIdeaT
     return () => clearTimeout(t);
   }, [focusIdea, r.mk, ideaRef]);
   return (
-    <div className="flex-1 min-h-0 grid lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)] overflow-y-auto lg:overflow-hidden">
-      <aside className="lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-border bg-muted/30 p-5"><ColunaSimples r={r} media={media} /></aside>
-      <div className="lg:overflow-y-auto p-6 space-y-6">
-        {r.item.caption && r.item.caption !== r.item.title && (
-          <details open={!r.item.title}>
-            <summary className="text-xs font-medium text-muted-foreground uppercase tracking-wide cursor-pointer">Legenda / descrição</summary>
-            <p className="text-sm whitespace-pre-line mt-2 max-h-48 overflow-y-auto bg-muted rounded-lg p-3">{r.item.caption}</p>
-          </details>
-        )}
-        <div>
-          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Views por coleta</div>
-          <ViewsHistory r={r} />
-        </div>
-        <CamposMarcacao mar={mar} suggestions={suggestions} />
-        <div ref={ideaRef} data-virar-ideia className="bg-primary-soft/60 border border-primary/20 rounded-lg p-3">
-          {m?.ideaId ? (
-            <div className="text-sm"><Sparkles className="inline size-3.5 -mt-0.5" /> Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
-          ) : (
-            <>
-              <div className="text-xs font-medium text-primary-ink uppercase tracking-wide mb-2">Virar ideia</div>
-              <div className="flex gap-2">
-                <Input className="flex-1" value={ideaTitle} onChange={(e) => setIdeaTitle(e.target.value)} placeholder="Título da ideia" />
-                <Button disabled={!ideaTitle.trim() || ideaBusy} onClick={onIdea}>{ideaBusy ? <Spinner /> : 'Criar ideia'}</Button>
-              </div>
-              <div className="text-xs text-muted-foreground mt-1.5">Leva o link, as métricas, o outlier e a sua nota; o item fica como “analisada”.</div>
-            </>
-          )}
+    <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+      <aside className={ASIDE}><ColunaSimples r={r} media={media} profileLabel={profileLabel} /></aside>
+      <div className="flex-1 min-w-0 md:overflow-y-auto">
+        <div className="p-6 space-y-5">
+          <SecaoTags r={r} slug={slug} sugestoes={sugestoes} onMark={onMark} />
+          <Separator />
+          <SecaoSinal r={r} xPerfil={r.outlier} xMercado={r.outlierMercado} porSeguidor={r.porSeguidor} />
+          <Separator />
+          <SecaoNota mar={mar} />
+          <Separator />
+          <div ref={ideaRef} data-virar-ideia>
+            <Secao icone={<Lightbulb />} titulo="Virar ideia" dica="Leva o link, as métricas, o outlier, as tags e a sua nota para o banco de ideias; o item fica como “analisada”.">
+              {m?.ideaId ? (
+                <div className="text-sm"><Sparkles className="inline size-3.5 -mt-0.5" /> Virou a ideia <b>{m.ideaId}</b>. <Link to={`/p/${slug}/ideias`} className="text-primary-ink">Abrir banco de ideias →</Link></div>
+              ) : (
+                <div className="flex gap-2">
+                  <Input className="flex-1" value={ideaTitle} onChange={(e) => setIdeaTitle(e.target.value)} placeholder="Título da ideia" />
+                  <Button disabled={!ideaTitle.trim() || ideaBusy} onClick={onIdea}>{ideaBusy ? <Spinner /> : 'Criar ideia'}</Button>
+                </div>
+              )}
+            </Secao>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 // ───────────────────────── o diálogo único (042) ─────────────────────────
 const STATUS_OPTS: SelectOption[] = Object.entries(STATUS_LABEL).map(([k, label]) => ({ value: k, label, icon: <span className="size-2 rounded-full" style={{ background: STATUS_COLOR[k as ItemMark['status']] }} /> }));
@@ -923,7 +983,8 @@ export interface ItemPanelProps {
 
 /**
  * Um painel só para o conteúdo (042): mesma moldura com ou sem análise (cabeçalho com todas as ações: favorito,
- * status, Virar ideia, Analisar/Reanalisar em roxo de IA e Abrir original; coluna da mídia tocável e dos números). O miolo muda: com análise = abas da ficha; sem = legenda, nota, tags e ideia.
+ * status, Virar ideia, Analisar/Reanalisar em roxo de IA e Abrir original). Mesmo esqueleto do painel do anúncio: à esquerda o post como na rede
+ * (mídia tocável, legenda) e os números; à direita, com divisores, tags, sinal, análise da IA (só com ficha), nota e Virar ideia (só sem ficha).
  */
 export function ItemPanel(p: ItemPanelProps) {
   const res = useFichasResumo(p.slug);
@@ -946,7 +1007,7 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
   const ideaRef = useRef<HTMLDivElement>(null);
   // com análise: a análise inteira vai para o corpo da ideia; a ficha e o relatório de origem ficam no `source` (040 I)
   const ideiaAnalisada: OnIdea = (title, foco) => { mar.flush(); onIdea(title, m?.tags ?? [], m?.note ?? '', v ? analiseParaIdeia(v, compId, foco) : undefined); };
-  const ideiaSimples = () => { mar.flush(); onIdea(ideaTitle.trim(), mar.parseTags(mar.tags), mar.note); };
+  const ideiaSimples = () => { mar.flush(); onIdea(ideaTitle.trim(), m?.tags ?? [], mar.note); };
   const rel = v?.relatorio ?? null;
   const fechar = () => { mar.flush(); onClose(); };
 
@@ -954,7 +1015,7 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
     <>
       <Dialog open={open} onOpenChange={(o) => !o && fechar()}>
         <DialogContent aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}
-          className="p-0 gap-0 flex flex-col overflow-hidden w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
+          className="p-0 gap-0 flex flex-col overflow-hidden outline-none w-[calc(100vw-2rem)] max-w-[1280px] sm:max-w-[1280px] h-[calc(100vh-2rem)] max-h-[1000px]">
           {/* cabeçalho: o que é (esquerda) e TODAS as ações (direita): marcar, virar ideia, IA (roxo) e abrir o original (cor do projeto) */}
           <header className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 pr-14 border-b border-border">
             <div className="flex items-center gap-3 min-w-0 flex-1 basis-[320px]">
@@ -1006,14 +1067,13 @@ function Painel({ r, compId, analisada, naFila, slug, media, open, onClose, prof
           </header>
 
           {!analisada ? (
-            <CorpoSemAnalise r={r} media={media} mar={mar} suggestions={tagSuggestions} slug={slug} ideaTitle={ideaTitle} setIdeaTitle={setIdeaTitle}
+            <CorpoSemAnalise r={r} media={media} profileLabel={profileLabel} mar={mar} sugestoes={tagSuggestions} onMark={onMark} slug={slug} ideaTitle={ideaTitle} setIdeaTitle={setIdeaTitle}
               ideaBusy={ideaBusy} onIdea={ideiaSimples} focusIdea={focusIdea} ideaRef={ideaRef} />
           ) : !ctx ? (
             <div className="flex-1 grid place-items-center text-sm text-muted-foreground">{fq.isError ? 'Não foi possível abrir a ficha.' : <Spinner />}</div>
           ) : (
             <FCtx.Provider value={ctx}>
-              <Corpo r={r} media={media} onIdea={ideiaAnalisada} ideaBusy={ideaBusy}
-                nota={<CamposMarcacao mar={mar} suggestions={tagSuggestions} />} temNota={!!(m?.note || m?.tags.length)} />
+              <Corpo r={r} media={media} profileLabel={profileLabel} slug={slug} sugestoes={tagSuggestions} onMark={onMark} mar={mar} onIdea={ideiaAnalisada} ideaBusy={ideaBusy} />
             </FCtx.Provider>
           )}
         </DialogContent>
