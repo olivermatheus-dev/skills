@@ -93,9 +93,10 @@ async function claudeNoDock(cli, { at, agente, rotulo }) {
   appendFileSync(LOG, `--- saída ${rotulo} ---\n`);
   let ultimo = 0;
   const r = await rodarClaude(cli, {
-    log: LOG, agente, env: cleanEnv(),
-    onPasso: (texto, quem) => {
-      AT.passo(at.id, texto, { agente: quem });
+    // HUB_ATIVIDADE: os hooks do terminal (046 E) veem que esta sessão já está no registro e não a duplicam
+    log: LOG, agente, env: { ...cleanEnv(), HUB_ATIVIDADE: at.id },
+    onPasso: (texto, quem, extra = {}) => {
+      AT.passo(at.id, texto, { agente: quem, ...(extra.sessao ? { sessao: extra.sessao } : {}) });
       // a cada 30 s o lock é tocado: o mtime velho não engana a próxima batida
       if (Date.now() - ultimo > 30e3) { ultimo = Date.now(); try { utimesSync(LOCK, new Date(), new Date()); } catch { /* sem lock */ } }
     },
@@ -105,7 +106,7 @@ async function claudeNoDock(cli, { at, agente, rotulo }) {
   return r;
 }
 const semLogin = (out) => /not logged in|\/login/i.test(out);
-const fimDe = (r) => ({ custo: r.custo, turnos: r.turnos });
+const fimDe = (r) => ({ custo: r.custo, turnos: r.turnos, final: r.texto || null });
 
 async function wake(t) {
   const agent = t.assignee.startsWith('agent:') ? t.assignee.slice(6) : null;

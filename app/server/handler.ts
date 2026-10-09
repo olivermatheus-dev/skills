@@ -14,6 +14,7 @@ import * as MK from '../../core/mockups';
 import * as R from '../../core/runner';
 import * as VE from '../../core/videoedit';
 import * as AV from '../../core/atividade';
+import * as AG from '../../core/agentes';
 import { resetEnvCache } from '../../tools/intel/env';
 
 type Params = Record<string, string>;
@@ -46,6 +47,10 @@ on('GET', '/api/projects/:slug/runner', (p) => R.runnerStatus(p.slug));
 on('GET', '/api/projects/:slug/atividade', (p) => AV.atividadeView(p.slug));
 on('POST', '/api/projects/:slug/atividade/visto', (p, b) => AV.marcarVisto(p.slug, b?.ids));
 on('POST', '/api/projects/:slug/atividade/:id/parar', (p) => AV.pararAtividade(p.slug, p.id));
+// Página Agentes (046 E): equipe, estado, fila, histórico e instruções permanentes
+on('GET', '/api/projects/:slug/agentes', (p) => AG.agentesView(p.slug));
+on('GET', '/api/agentes/:nome/notas', (p) => AG.lerNotas(p.nome));
+on('POST', '/api/agentes/:nome/notas', (p, b) => AG.salvarNotas(p.nome, b ?? {}));
 on('POST', '/api/projects/:slug/runner', (p, b) => R.runAi(p.slug, b ?? {}));
 on('DELETE', '/api/projects/:slug/runner', (p) => R.stopAi(p.slug));
 // Pedidos avulsos de IA (046 D): estado do mais novo de uma tela (?ref=peca:<pasta> | analise:<id|*> | relatorio:<id>),

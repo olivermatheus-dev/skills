@@ -8,7 +8,7 @@
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
 | 1 | 045 | **Fase C (sincronia por variante):** QC por variante (§5: leitura, palavra presa, `min_s`, gancho ≤ 3 s, texto × cartões, trilha), correção automática e relatório curto para o LLM (`ajustes` no `projeto.json`) | fases A e B feitas |
-| 2 | 046 | **Atividade da IA e das coletas:** fases A, B e D feitas (dock, passos ao vivo, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano); próxima: **fase E** (página Agentes + hooks do terminal), depois C e F | pedido do Oliver de 2026-10-08 |
+| 2 | 046 | **Atividade da IA e das coletas:** fases A, B, D e E feitas (dock, passos ao vivo, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano, página Agentes + hooks do terminal); próxima: **fase C** (coletas como trabalho em segundo plano), depois F (fila) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

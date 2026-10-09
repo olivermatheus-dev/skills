@@ -18,7 +18,7 @@ export function atividadeView(slug: string) {
     || (!a.visto && (a.tipo === 'ia' || a.status === 'erro'))
     || (a.fim && agora - Date.parse(a.fim) < 10_000))
     .sort((a, b) => Number(b.status === 'rodando') - Number(a.status === 'rodando')) // rodando primeiro, depois o mais novo
-    .map((a) => ({ ...a, podeParar: a.status === 'rodando' && a.id === lock }));
+    .map((a) => ({ ...a, link: a.link ?? `/p/${slug}/agentes?h=${a.id}`, podeParar: a.status === 'rodando' && a.id === lock })); // sem link = o histórico na página Agentes
   return { dock, historico: todos };
 }
 

@@ -28,7 +28,7 @@ export function passoDaFerramenta(nome, input = {}) {
 
 /**
  * @param {string[]} cli argumentos do claude (sem --output-format; este módulo põe)
- * @param {{ log: string, agente: string, onPasso?: (texto: string, agente: string) => void, env?: NodeJS.ProcessEnv }} op
+ * @param {{ log: string, agente: string, onPasso?: (texto: string, agente: string, extra?: { sessao?: string }) => void, env?: NodeJS.ProcessEnv }} op
  */
 export function rodarClaude(cli, { log, agente, onPasso = () => {}, env = process.env }) {
   const args = [...cli];
@@ -45,7 +45,7 @@ export function rodarClaude(cli, { log, agente, onPasso = () => {}, env = proces
   let ultimo = '';
   let resto = '';
   const bruto = []; // linhas que não são JSON (erros do próprio claude, "not logged in")
-  const fim = { texto: '', custo: null, turnos: null, ms: null, erro: false };
+  const fim = { texto: '', custo: null, turnos: null, ms: null, erro: false, sessao: null };
   const escreve = (l) => appendFileSync(log, `${l}\n`);
 
   const entregues = new Set(); // subagentes que já devolveram: o que chegar deles depois só vai para o log
@@ -55,7 +55,7 @@ export function rodarClaude(cli, { log, agente, onPasso = () => {}, env = proces
     const atrasado = e.parent_tool_use_id && entregues.has(e.parent_tool_use_id);
     if (e.type === 'system' && e.subtype === 'init') {
       if (aberto) return; // o subagente também manda init
-      aberto = true; onPasso('Claude Code aberto', agente); escreve(`  · sessão ${e.session_id ?? ''} · ${e.model ?? ''}`); return;
+      aberto = true; fim.sessao = e.session_id ?? null; onPasso('Claude Code aberto', agente, { sessao: e.session_id }); escreve(`  · sessão ${e.session_id ?? ''} · ${e.model ?? ''}`); return;
     }
     if (e.type === 'assistant') {
       for (const c of e.message?.content ?? []) {

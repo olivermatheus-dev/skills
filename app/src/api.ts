@@ -45,6 +45,15 @@ import type { PedidoIa } from '../../tools/lib/pedidos-ia.mjs';
 export type PedidoIaView = PedidoIa & { passo?: string | null; agenteAtivo?: string | null };
 export interface PedidoIaStart { started: boolean; mode: 'background' | 'terminal'; pedido: PedidoIaView | null }
 export interface AtividadeView { dock: (Atividade & { podeParar: boolean })[]; historico: Atividade[] }
+/** página Agentes (046 E) */
+export type EstadoAgente = 'trabalhando' | 'acordado' | 'dormindo';
+export interface AgenteCard {
+  id: string; nome: string; descricao: string; cor: string | null; modelo: string | null; skills: string[];
+  estado: EstadoAgente; atual: Atividade | null; desde: string | null; simultaneos: number;
+  fila: { id: string; title: string; status: string; pronta: boolean }[];
+  ultimas: Atividade[]; semana: { trabalhos: number; custo: number }; notas: { arquivo: string | null; itens: number };
+}
+export interface AgentesView { agentes: AgenteCard[]; historico: Atividade[]; resumo: { rodando: number; sessoes: number; custoHoje: number; custoSemana: number } }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
   kind: 'fichas' | 'pesquisa' | 'pedido' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
@@ -154,6 +163,9 @@ export const api = {
   atividade: (slug: string) => req<AtividadeView>('GET', `${pj(slug)}/atividade`),
   atividadeVisto: (slug: string, ids: string[]) => req<AtividadeView>('POST', `${pj(slug)}/atividade/visto`, { ids }),
   atividadeParar: (slug: string, id: string) => req<AtividadeView>('POST', `${pj(slug)}/atividade/${encodeURIComponent(id)}/parar`),
+  agentes: (slug: string) => req<AgentesView>('GET', `${pj(slug)}/agentes`),
+  agenteNotas: (nome: string) => req<{ arquivo: string; texto: string }>('GET', `/api/agentes/${encodeURIComponent(nome)}/notas`),
+  salvarAgenteNotas: (nome: string, b: { nova?: string; texto?: string }) => req<{ arquivo: string; texto: string }>('POST', `/api/agentes/${encodeURIComponent(nome)}/notas`, b),
   pedidoIa: (slug: string, ref: string) => req<PedidoIaView | null>('GET', `${pj(slug)}/pedido-ia?ref=${encodeURIComponent(ref)}`),
   pedirAjustes: (slug: string, path: string, b: { aba: 'video' | 'slides' | 'roteiro'; ids?: string[]; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
     req<PedidoIaStart & { ids: string[] }>('POST', `${pj(slug)}/piece/ajustes?path=${encodeURIComponent(path)}`, b),

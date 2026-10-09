@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Bot, Check, ChevronDown, Clapperboard, Globe, Loader2, Square, X, AlertTriangle, ArrowUpRight } from 'lucide-react';
+import { Bot, Check, ChevronDown, Clapperboard, Globe, Loader2, Square, SquareTerminal, X, AlertTriangle, ArrowUpRight } from 'lucide-react';
 import { api, type Atividade, type AtividadeView } from '../../api';
 import { setToastOffset, toast } from '../toast';
 import { cn } from '@/lib/utils';
@@ -123,8 +123,8 @@ export function AtividadeDock({ slug }: { slug: string }) {
   );
 }
 
-function Selo({ a }: { a: Atividade }) {
-  const Icone = ICONE[a.tipo] ?? Bot;
+export function Selo({ a }: { a: Atividade }) {
+  const Icone = a.origem === 'terminal' ? SquareTerminal : ICONE[a.tipo] ?? Bot;
   return (
     <span className={cn('relative size-7 shrink-0 rounded-full grid place-items-center',
       a.status === 'erro' ? 'bg-destructive/10 text-destructive' : a.status === 'rodando' ? 'bg-primary-soft text-primary-ink' : 'bg-success/10 text-success')}>
@@ -150,7 +150,8 @@ function Linha({ a, onAbrir, onParar, onDispensar }: { a: Atividade & { podePara
           {a.status === 'rodando' ? a.passo : a.status === 'erro' ? a.erro : a.resumo}
         </div>
         <div className="flex gap-3 mt-1.5 text-xs">
-          {a.link && <button className="inline-flex items-center gap-1 text-primary-ink hover:underline" onClick={onAbrir}><ArrowUpRight className="size-3" />{a.status === 'rodando' ? 'Abrir' : 'Ver resultado'}</button>}
+          {a.origem === 'terminal' && <span className="text-muted-foreground">no terminal</span>}
+          {a.link && <button className="inline-flex items-center gap-1 text-primary-ink hover:underline" onClick={onAbrir}><ArrowUpRight className="size-3" />{a.origem === 'terminal' ? 'Ver passos' : a.status === 'rodando' ? 'Abrir' : 'Ver resultado'}</button>}
           {podeParar && <button className="inline-flex items-center gap-1 text-destructive hover:underline" onClick={onParar}><Square className="size-3" />Parar</button>}
         </div>
       </div>

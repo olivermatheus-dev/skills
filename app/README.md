@@ -25,7 +25,7 @@ Lista, tabela ou grade longa **ocupa o resto da tela e rola por dentro**: títul
 - Exceção: muita coisa acima da lista (ex.: ficha do concorrente → Redes e conteúdos) → a lista rola com a página e só a barra de filtros gruda no topo (`sticky`), senão a caixa fica pequena demais.
 
 ### Atividade (046): tudo que roda por trás de um clique aparece no dock
-IA, coleta ou render novo **registra o trabalho** em `logs/atividade/` (`tools/lib/atividade.mjs`): no servidor, embrulhe a rota com `comAtividade({ slug, tipo, fonte, titulo, passo, link }, (passo) => …, resumir)` (`core/atividade.ts`); em script/heartbeat, `iniciar` → `passo` → `terminar`. O dock (`components/atividade/AtividadeDock.tsx`) mostra sozinho, em qualquer tela, e recarrega os dados quando termina.
+IA, coleta ou render novo **registra o trabalho** em `logs/atividade/` (`tools/lib/atividade.mjs`): no servidor, embrulhe a rota com `comAtividade({ slug, tipo, fonte, titulo, passo, link }, (passo) => …, resumir)` (`core/atividade.ts`); em script/heartbeat, `iniciar` → `passo` → `terminar`. O dock (`components/atividade/AtividadeDock.tsx`) mostra sozinho, em qualquer tela, e recarrega os dados quando termina. Cada `passo` entra no histórico do trabalho (página **Agentes** → Histórico). Sessões do Claude Code abertas no terminal (ou no app desktop) entram no mesmo registro pelos hooks de `.claude/settings.json` → `tools/hooks/atividade.mjs` (o `settings.json` fica fora do git; em outra máquina, copie os `hooks` de `tools/hooks/settings.hooks.json` para ele) (sessão do heartbeat é ignorada: `HUB_ATIVIDADE` no ambiente).
 
 ## Arquivos por projeto
 ```

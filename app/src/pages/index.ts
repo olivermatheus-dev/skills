@@ -1,7 +1,7 @@
 // Registro das telas do projeto (menu lateral + rotas). Cada frente adiciona só a própria linha.
 // Cada tela é um pedaço separado do bundle (React.lazy); `load` pré-carrega o pedaço (hover no menu, ocioso).
 import { lazy, type ComponentType } from 'react';
-import { Clapperboard, LayoutDashboard, LayoutTemplate, Lightbulb, NotebookPen, Palette, Radar, Settings, Smartphone, SquareKanban, UsersRound, type LucideIcon } from 'lucide-react';
+import { Bot, Clapperboard, LayoutDashboard, LayoutTemplate, Lightbulb, NotebookPen, Palette, Radar, Settings, Smartphone, SquareKanban, UsersRound, type LucideIcon } from 'lucide-react';
 
 type Loader = () => Promise<{ default: ComponentType }>;
 const page = (load: Loader) => ({ element: lazy(load), load });
@@ -12,6 +12,7 @@ export interface PageDef { path: string; label: string; icon: LucideIcon; sideba
 export const PAGES: PageDef[] = [
   { path: '', label: 'Visão geral', icon: LayoutDashboard, ...page(() => import('./Dashboard')) },
   { path: 'quadro', label: 'Quadro', icon: SquareKanban, ...page(() => import('./Board')) },
+  { path: 'agentes', label: 'Agentes', icon: Bot, ...page(() => import('./Agentes')) },
   // área Concorrentes: Panorama na raiz; as outras abas são rotas fixas (ganham da `:id` da ficha)
   { path: 'concorrentes', label: 'Concorrentes', icon: Radar, sidebar: 'recolhida', ...page(() => import('./concorrentes/Panorama')), children: [
     { path: 'lista', ...page(() => import('./concorrentes/Lista')) },
