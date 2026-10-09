@@ -88,8 +88,8 @@ const quando = (iso: string) => {
  * Popover de pedir (mesmo do Rodar IA): o que vai acontecer, instruções opcionais e os dois jeitos de rodar.
  * `onRodar` recebe o modo e as instruções; o popover fecha quando ele resolve.
  */
-export function PedirIa({ trigger, titulo, descricao, instrucoes = true, placeholder, onRodar, align = 'end', children }: {
-  trigger: ReactNode; titulo: string; descricao: ReactNode; instrucoes?: boolean; placeholder?: string; align?: 'start' | 'end';
+export function PedirIa({ trigger, titulo, descricao, instrucoes = true, terminal = true, placeholder, onRodar, align = 'end', children }: {
+  trigger: ReactNode; titulo: string; descricao: ReactNode; instrucoes?: boolean; /** false = só segundo plano (esconde o modo terminal) */ terminal?: boolean; placeholder?: string; align?: 'start' | 'end';
   onRodar: (modo: 'background' | 'terminal', instrucoes: string) => Promise<unknown>; children?: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
@@ -118,7 +118,7 @@ export function PedirIa({ trigger, titulo, descricao, instrucoes = true, placeho
         )}
         <div className="p-3 flex flex-col gap-2">
           <Button size="sm" variant="ai" disabled={!!busy} onClick={() => go('background')}>{busy === 'background' ? <Loader2 className="animate-spin" /> : <Play />} Rodar em segundo plano</Button>
-          <Button size="sm" variant="outline" disabled={!!busy} onClick={() => go('terminal')}><SquareTerminal /> Abrir no terminal (acompanhar e conversar)</Button>
+          {terminal && <Button size="sm" variant="outline" disabled={!!busy} onClick={() => go('terminal')}><SquareTerminal /> Abrir no terminal (acompanhar e conversar)</Button>}
         </div>
       </PopoverContent>
     </Popover>

@@ -94,12 +94,12 @@ function readyTasks(slug, { agent, task } = {}) {
  * Roda o claude com o registro de atividade (046 B): cada ferramenta vira passo no dock, o subagente chamado vira o agente
  * da vez, e o log ganha linhas curtas + o texto final. Devolve { status, saida, custo, turnos, ms }.
  */
-async function claudeNoDock(cli, { at, agente, rotulo }) {
+async function claudeNoDock(cli, { at, agente, rotulo, env = {} }) {
   appendFileSync(LOG, `--- saída ${rotulo} ---\n`);
   let ultimo = 0;
   const r = await rodarClaude(cli, {
     // HUB_ATIVIDADE: os hooks do terminal (046 E) veem que esta sessão já está no registro e não a duplicam
-    log: LOG, agente, env: { ...cleanEnv(), HUB_ATIVIDADE: at.id },
+    log: LOG, agente, env: { ...cleanEnv(), HUB_ATIVIDADE: at.id, ...env },
     onPasso: (texto, quem, extra = {}) => {
       AT.passo(at.id, texto, { agente: quem, ...(extra.sessao ? { sessao: extra.sessao } : {}) });
       // a cada 30 s o lock é tocado: o mtime velho não engana a próxima batida
@@ -209,7 +209,8 @@ async function runPedido(id, filaAt = null) {
   PI.atualizar(id, { status: 'rodando', inicio: new Date().toISOString(), atividade: at.id });
   writeLock({ slug: p.slug, kind: 'pedido', pedido: id, title: p.titulo, who: agent ? p.agente : 'ai', atividade: at.id });
   log(`pedido ${p.tipo} → ${p.slug}: ${p.titulo}`);
-  const r = await claudeNoDock(cli, { at, agente: p.agente, rotulo: p.tipo });
+  // HUB_PEDIDO_IA: ferramentas que gravam dados (insumos.mjs) sabem que é a IA do app e recusam mexer no que é do Oliver
+  const r = await claudeNoDock(cli, { at, agente: p.agente, rotulo: p.tipo, env: { HUB_PEDIDO_IA: '1' } });
   const out = r.saida;
   const erro = semLogin(out) ? 'Claude Code do terminal sem login (abra um terminal: claude → /login).'
     : r.status !== 0 ? `O Claude saiu com código ${r.status}. ${out.trim().split('\n').slice(-2).join(' · ').slice(0, 200)}` : null;

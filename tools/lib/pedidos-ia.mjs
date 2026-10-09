@@ -15,7 +15,7 @@ const gravar = (p) => { mkdirSync(DIR(), { recursive: true }); writeFileSync(fil
 const agora = () => new Date().toISOString();
 
 /**
- * Novo pedido. `tipo`: ajustes | analise | relatorio. `ref`: chave da tela que acompanha (peca:<pasta> · analise:<id|*> ·
+ * Novo pedido. `tipo`: ajustes | analise | relatorio | insumos. `ref`: chave da tela que acompanha (peca:<pasta> · analise:<id|*> ·
  * relatorio:<concorrente>). `agente`: orquestrador ou agent:<nome> (este roda com --agent). `allowed`: ferramentas além das
  * do heartbeat. `extra`: o que o fecho do tipo precisa (ids das anotações, concorrentes…).
  */
@@ -58,6 +58,14 @@ function fecharAjustes(p, saida) {
   return `${feitas} de ${ids.length} anotação(ões) resolvida(s)${respondidas ? ` · ${respondidas} com pergunta para você` : ''}`;
 }
 
+/** quantas opções a IA gravou (origem ia, criada depois do início do pedido) */
+function fecharInsumos(p) {
+  const proj = json(join(pecaDir(p.slug, p.extra.pasta), 'projeto.json')) ?? {};
+  const lista = { abertura: proj.eixos?.abertura, headline: proj.insumos?.headlines, cta: proj.insumos?.ctas, copy: proj.insumos?.copys }[p.extra.tipo] ?? [];
+  const novas = lista.filter((o) => o?.origem === 'ia' && o.criado && o.criado >= (p.inicio ?? p.criado).slice(0, 19)).length;
+  return `${novas} de ${p.extra.quantidade ?? '?'} opção(ões) gravada(s)`;
+}
+
 function fecharAnalise(p) {
   // o que ficou "rodando" volta a pendente (dá para rodar de novo); cada `salvar` do script já tirou do pedido o que ficou pronto
   let restam = 0;
@@ -81,6 +89,7 @@ export function fechar(id, { parado = false, erro = null, saida = '' } = {}) {
   try {
     if (p.tipo === 'ajustes') resumo = fecharAjustes(p, saida);
     else if (p.tipo === 'analise') resumo = fecharAnalise(p);
+    else if (p.tipo === 'insumos') resumo = fecharInsumos(p);
     else if (p.tipo === 'relatorio') resumo = 'Relatório pronto';
   } catch (e) { resumo = `(não consegui resumir: ${e.message})`; }
   const status = parado ? 'parado' : erro ? 'erro' : 'feito';

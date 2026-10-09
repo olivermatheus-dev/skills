@@ -6,12 +6,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Check, Download, FolderOpen, GitBranch, Grid3x3, Loader2, MessageSquarePlus, Square, Star, X } from 'lucide-react';
-import { api, type VariantesView, type VarianteView } from '../../api';
+import { api, type VariantesView, type VariantesVista, type VarianteView } from '../../api';
 import { toast } from '../toast';
 import { Badge, Button, Card, Select, cx } from '../kit';
 import { useFillHeight } from '../fill';
 import { desktop } from './library';
 import VariantesFluxo from './VariantesFluxo';
+import VariantesInsumos from './VariantesInsumos';
 
 const qkVar = (slug: string, path: string) => ['variantes', slug, path] as const;
 const MODO_KEY = 'hub:variantes:modo';
@@ -56,7 +57,7 @@ export default function Variantes({ slug, path }: { slug: string; path: string }
     queryFn: () => api.variantes(slug, path),
     refetchInterval: (q) => (q.state.data?.job?.estado === 'rodando' ? 2000 : 20_000), // parado: confere de vez em quando (o terminal ou outra aba pode ter gerado)
   });
-  const set = (v: VariantesView) => qc.setQueryData(qkVar(slug, path), v);
+  const set = (v: VariantesVista) => qc.setQueryData(qkVar(slug, path), v);
   const [modo, setModo] = useState(loadModo);
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [foco, setFoco] = useState<string | null>(null);
@@ -79,7 +80,13 @@ export default function Variantes({ slug, path }: { slug: string; path: string }
   const formatos = useMemo(() => [...new Set(data?.variantes.flatMap((v) => v.exports.map((e) => e.formato)).filter(Boolean) ?? [])].sort(), [data]);
   if (error) return <Card className="text-sm text-destructive">{String((error as Error).message)}</Card>;
   if (!data) return <div className="text-muted-foreground">Carregando…</div>;
-  if (!data.variantes.length) return <Card className="text-sm text-muted-foreground">O projeto.json ainda não tem eixos (ver .claude/skills/video/references/variantes.md).</Card>;
+  if (!data.variantes.length) return (
+    <div className="space-y-3">
+      {data.insumosErro && <Card className="text-sm text-destructive">Insumos indisponíveis: {data.insumosErro}</Card>}
+      {data.insumos && <VariantesInsumos slug={slug} path={path} ins={data.insumos} onView={set} onRecarregar={() => void qc.invalidateQueries({ queryKey: qkVar(slug, path) })} />}
+      <Card className="text-sm text-muted-foreground">O projeto.json ainda não tem eixos (ver .claude/skills/video/references/variantes.md).</Card>
+    </div>
+  );
 
   const job = data.job;
   const rodando = job?.estado === 'rodando';
@@ -108,6 +115,8 @@ export default function Variantes({ slug, path }: { slug: string; path: string }
 
   return (
     <div className="space-y-3">
+      {data.insumosErro && <Card className="text-sm text-destructive">Insumos indisponíveis: {data.insumosErro}</Card>}
+      {data.insumos && <VariantesInsumos slug={slug} path={path} ins={data.insumos} onView={set} onRecarregar={() => void qc.invalidateQueries({ queryKey: qkVar(slug, path) })} />}
       {/* barra: modo, marcar por rodada, formato, ações */}
       <div className="flex flex-wrap items-center gap-2">
         <div className="inline-flex rounded-lg border border-border p-0.5 bg-card">

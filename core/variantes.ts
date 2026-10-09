@@ -9,6 +9,7 @@ import type { ServerResponse } from 'node:http';
 import { ROOT, ValidationError, getReview } from './store';
 import { Slug } from '../schema';
 import * as AT from '../tools/lib/atividade.mjs';
+import * as INS from '../tools/lib/insumos.mjs';
 
 const okPath = (p: string) => !!p && !/(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(p);
 function pasta(slug: string, path: string) {
@@ -55,6 +56,10 @@ export interface VariantesView {
   rodadas: { id: string; ids: string[]; pendente: { eixo: string; texto: string }[] }[];
   base: { duracao?: number; exports: string[] };
   variantes: VarianteView[];
+  /** insumos editáveis do projeto (045 E): aberturas e vozes viram eixo; headlines, CTAs e copys só listam */
+  insumos?: INS.InsumosView;
+  /** o projeto.json não deu para ler os insumos (JSON quebrado…): a tela mostra o motivo no lugar da seção */
+  insumosErro?: string;
   job: Job | null;
 }
 
@@ -68,6 +73,10 @@ function primeiraFala(o: Record<string, unknown>): string | undefined {
     if (v && typeof v === 'object' && typeof (v as { say?: unknown }).say === 'string') return (v as { say: string }).say;
   }
   return undefined;
+}
+
+function insumosDe(dir: string, empresa: string): { insumos?: INS.InsumosView; insumosErro?: string } {
+  try { return { insumos: INS.view(dir, { empresa }) }; } catch (e) { return { insumosErro: (e as Error).message }; }
 }
 
 export function lerVariantes(slug: string, path: string): VariantesView {
@@ -123,6 +132,7 @@ export function lerVariantes(slug: string, path: string): VariantesView {
     eixos, rodadas,
     base: { duracao: base.duration, exports: existsSync(bexp) ? readdirSync(bexp).filter((f) => f.endsWith('.mp4')).sort().map((f) => `exports/${f}`) : [] },
     variantes,
+    ...insumosDe(dir, slug),
     job: jobs.get(chave(slug, path)) ?? null,
   };
 }
@@ -160,7 +170,24 @@ export async function definirRodada(slug: string, path: string, b: { rodada?: un
   if (Array.isArray(r)) throw new ValidationError(f, ['esta rodada é uma lista de combinações: edite o projeto.json']);
   proj.rodadas = { ...proj.rodadas, [rodada]: { ...(r ?? {}), [eixo]: opcoes } };
   const { writeFileSync } = await import('node:fs');
-  writeFileSync(f, JSON.stringify(proj, null, 2) + '\n');
+  writeFileSync(f, INS.jsonCompacto(proj) + '\n');
+  return lerVariantes(slug, path);
+}
+
+/** insumos (045 E): add | editar | rm de abertura, voz, headline, cta ou copy; erro de validação = 400 com as mensagens */
+export function salvarInsumo(slug: string, path: string, b: { acao?: unknown; tipo?: unknown; id?: unknown; dados?: unknown; forcar?: unknown }) {
+  const dir = pasta(slug, path);
+  const tipo = String(b?.tipo ?? '') as INS.TipoInsumo;
+  const acao = String(b?.acao ?? '') as 'add' | 'editar' | 'rm';
+  const id = b?.id == null || b.id === '' ? undefined : String(b.id);
+  const dados = b?.dados && typeof b.dados === 'object' ? (b.dados as INS.InsumoDados) : {};
+  if (id && !okId(id)) throw new ValidationError(dir, ['id inválido']);
+  try {
+    INS.aplicar(dir, { acao, tipo, id, dados, forcar: !!b?.forcar, empresa: slug });
+  } catch (e) {
+    if (e instanceof INS.InsumoErro) throw new ValidationError(dir, e.erros);
+    throw e;
+  }
   return lerVariantes(slug, path);
 }
 

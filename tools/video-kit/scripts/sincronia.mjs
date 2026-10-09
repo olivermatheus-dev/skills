@@ -13,6 +13,7 @@
 // Nas variantes, o variantes.mjs chama tudo sozinho. Contrato: .claude/skills/video/references/variantes.md > Sincronia.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fold, palavras, casar } from '../../lib/texto-fala.mjs';
 import { pathToFileURL } from 'node:url';
 import { r3, video } from './lib.mjs';
 import { resolverBloco } from './compor.mjs';
@@ -32,19 +33,7 @@ const FORMATOS = { '4x5': [1080, 1350], '9x16': [1080, 1920], '16x9': [1920, 108
 /** Área segura do texto-chave (knowledge/video/REGRAS.md §3). */
 const seguro = (f, tipo) => (f === '9x16' ? { x0: 65, x1: 930, y0: 270, y1: tipo === 'anuncio' ? 1250 : 1440 } : { x0: 80, x1: FORMATOS[f][0] - 80, y0: 80, y1: FORMATOS[f][1] - 80 });
 
-const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w]/g, '');
-const palavras = (s = '') => s.replace(/\*/g, '').split(/[\s|]+/).filter((w) => fold(w));
 const falaDaCena = (tl, s) => (s?.vo || []).flatMap((id) => tl.vo?.find((x) => x.id === id)?.words || []);
-/** Casa o texto da tela com a fala na ordem, como o K.type do runtime: [{ w, t }] (t = null se a fala não diz). */
-function casar(texto, ws) {
-  let j = 0;
-  return palavras(texto).map((w) => {
-    const k = ws.findIndex((x, i) => i >= j && fold(x.w) === fold(w));
-    if (k < 0) return { w, t: null };
-    j = k + 1;
-    return { w, t: ws[k].s };
-  });
-}
 const parado = (tl, s) => {
   const marcas = [s.start, s.end, ...(tl.events || []).filter((e) => e.scene === s.id).map((e) => e.t), ...(tl.vo || []).filter((v) => v.start >= s.start && v.start < s.end).map((v) => v.start)].sort((a, b) => a - b);
   return r3(Math.max(0, ...marcas.slice(1).map((m, i) => m - marcas[i])));

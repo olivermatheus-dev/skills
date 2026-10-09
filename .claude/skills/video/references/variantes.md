@@ -72,3 +72,31 @@ Alavancas de voz de rascunho: `rate` (por fala ou na opção de voz; edge: `"-10
 
 ## No app (aba Variantes, fase D)
 Peça com `projeto.json` ganha a aba **Variantes** (Conteúdos → peça): **Fluxo** (insumos → base v1 → ramo por opção → variantes) ou **Matriz** (colunas = 1º eixo, linhas = os outros), miniatura que toca no hover, selo do QC, aval. **Marcar** por rodada/linha/coluna/ramo → **Conferir** (`--qc`) ou **Gerar** no fundo (`variantes.mjs <pasta> --matriz --so <ids> [--only=<formato>]`, faixa de progresso + dock, Parar) → **Baixar** as marcadas (.zip). Rodada com opção pendente (`"<vencedora da r1>"`) mostra os botões para escolher (grava `rodadas.<r>.<eixo>`). **Anotar** abre a Edição do vídeo da própria variante (`contents/<projeto>/variantes/<id>`, sem os ajustes diretos): a anotação leva `alcance: variante | todas`, e o `review.mjs` da pasta da variante diz onde mexer (`ajustes["<id>"]` ou a base/opção do eixo). Núcleo: `core/variantes.ts`.
+
+## Insumos (fase E)
+Os insumos do projeto (o que vira variante e o que vira texto do anúncio) vivem no `projeto.json` e se mudam **só** por `tools/video-kit/scripts/insumos.mjs` (lib `tools/lib/insumos.mjs`, a mesma do app). Nunca edite o `projeto.json` à mão para isso: o script valida, carimba e preserva a ordem das chaves.
+
+| tipo | onde fica | vira variante? |
+|---|---|---|
+| `abertura` | `eixos.abertura[]` | sim (eixo; aparece tracejada na matriz até o Gerar) |
+| `voz` | `eixos.voz[]` | sim (só voz de rascunho `edge-*`/`win-*`; a IA não escolhe voz) |
+| `headline` `{ id, texto }` · `cta` `{ id, botao, fala? }` · `copy` `{ id, texto_principal, titulo, descricao? }` | `insumos.headlines/ctas/copys[]` | não: a Meta testa sozinha; entram no pacote do anúncio (fase F) |
+
+Todas levam `origem: "oliver" | "ia"`, `criado` (ISO) e `por_que` (o ângulo + a fonte, 1 linha).
+
+```
+node tools/video-kit/scripts/insumos.mjs <pasta> listar [--json]          # o que existe, [em uso] (já gerou variante), avisos
+node tools/video-kit/scripts/insumos.mjs <pasta> contexto                 # pacote curto para a IA (≈ 2,3 mil tokens)
+node tools/video-kit/scripts/insumos.mjs <pasta> add abertura --fala "…" --tela "a *b*|c" --cues troca=palavra,espalha=palavra [--id] [--titulo] --origem ia --por-que "…"
+node tools/video-kit/scripts/insumos.mjs <pasta> add voz --voz edge-francisca [--id] [--rate -8%]
+node tools/video-kit/scripts/insumos.mjs <pasta> add headline --texto "…"  |  add cta --botao "Saiba mais" [--fala]  |  add copy --principal "…" --titulo "…" [--descricao]
+node tools/video-kit/scripts/insumos.mjs <pasta> editar <tipo> <id> --campo valor   |   rm <tipo> <id> [--forcar]
+```
+- **Abertura nova reaproveita o molde** da 1ª abertura do eixo (mesma `cena`, `use`, `params` e as **mesmas chaves de `cues`**): só troca `falas.f1`, `on_screen` e as palavras dos cues. `--cues` leva uma palavra dita na fala por chave do molde (`troca=ainda`; o script grava `f1:ainda`).
+- **Erro (recusa, nada é gravado, saída 1):** id fora de `[a-z0-9-]` ou repetido · cue faltando, com número (escolha uma palavra) ou com palavra que a fala não diz · palavra da tela que a fala não diz **na ordem** (mesma regra `texto-fala` do QC, via `tools/lib/texto-fala.mjs`; "e-mail" = "email") · voz que não é de rascunho ou não está em `library/voices/voices.json` · botão fora dos CTAs da Meta · termo proibido da `VOICE.md` (casa o radical e o plural: "cliente" pega "clientes", "transforme" pega "transformar") · "cura"/"curar" · apagar a única abertura/voz.
+- **Pede `--forcar` (a tela pergunta):** editar texto/fala/voz de opção que já gerou variante (o vídeo e o aval ficam com o texto antigo) · `rm` de opção em uso · `rm` que esvazia uma rodada (a mensagem diz qual opção assume) ou tira combinações de rodada em lista · criar a 1ª voz de um projeto sem eixo de voz (os ids das variantes mudam).
+- **Aviso (grava e mostra):** gancho longo (1ª frase da tela > ~9 palavras ou fala de abertura > ~16 palavras: não fecha em 3 s/5 s) · headline > 40 caracteres · título > 40 · texto principal > 125 · CAIXA ALTA · tema sensível (tratamento, garantia, resultado garantido, depoimento, antes e depois, Setembro Amarelo: BUSINESS.md#Restrições e compliance). `rm` da 1ª abertura/voz avisa qual vira o molde/padrão.
+- `editar ... --campo ""` apaga o campo opcional (título, por_que, rate, descrição…). `editar voz --rate` vale também nas `falas.*.rate` que a voz já tinha.
+- `rm` de abertura/voz também tira o id das `rodadas` (objeto ou lista) e apaga o eixo da rodada se esvaziar (vale a 1ª opção).
+- **Pedido de IA do app** roda com a env `HUB_PEDIDO_IA=1` (o heartbeat põe): a lib recusa `voz`, recusa `editar`/`rm` do que não tem `origem: "ia"` e ignora `forcar`; além disso o pedido bloqueia `variantes.mjs`, `tts`, `voz`, `elevenlabs`, `produce` e `tools/video/*`. Terminal interativo (sem env) não tem essa trava.
+- **Pedir à IA** (app, aba Variantes → Insumos → "+5"): `core/pedidos-ia.ts > pedirInsumos` abre o `agent:roteirista` com o prompt: começar por `contexto`, escrever N opções com ângulos diferentes entre si e das existentes, usar só `add` (nunca `editar`/`rm`) com `--origem ia --por-que "…"`, corrigir e repetir quando o `add` recusar, nunca editar o `projeto.json`, nunca gerar voz nem render. O Oliver confere, e manda **Gerar** pela matriz.

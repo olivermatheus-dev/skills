@@ -204,7 +204,12 @@ export function soltar(args: string[]) {
 }
 
 export function openTerminal(prompt: string) {
-  const p = prompt.replace(/"/g, "'");
+  // O prompt vai para um arquivo (logs/prompts/, fora do git) e o claude recebe uma linha só: prompt de várias linhas quebrava
+  // o .cmd (só a 1ª linha chegava e o resto virava comando; "<" derrubava). Caminho relativo: o cwd é a raiz e sem espaços.
+  mkdirSync(join(ROOT, 'logs', 'prompts'), { recursive: true });
+  const rel = `logs/prompts/${new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)}-${Math.random().toString(36).slice(2, 6)}.md`;
+  writeFileSync(join(ROOT, rel), `${prompt.trimEnd()}${String.fromCharCode(10)}`);
+  const p = `Leia ${rel} e siga as instruções que estão nele.`;
   if (process.platform === 'win32') {
     // Um .cmd em logs/ (fora do git) evita o inferno de aspas do cmd; a janela fica aberta (cmd /k) ao sair do claude.
     const file = join(ROOT, 'logs', 'abrir-ia.cmd');

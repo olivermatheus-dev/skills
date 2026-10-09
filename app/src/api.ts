@@ -94,6 +94,22 @@ export interface PreviewJob { estado: 'rodando' | 'ok' | 'erro'; passo: string; 
 export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta;
   /** tem projeto.json (045): ganha a aba Variantes */ projeto?: boolean;
   /** é a pasta de uma variante: de qual projeto e qual id */ variante?: { projeto: string; id: string } }
+/** insumos do projeto de variantes (045 E): o que o Oliver e a IA escreveram para os eixos e o anúncio */
+export type InsumoOrigem = 'oliver' | 'ia';
+export interface InsumosView {
+  aberturas: { id: string; titulo?: string; fala: string; tela: string; cues: Record<string, string>; origem?: InsumoOrigem; por_que?: string; criado?: string; usada: boolean }[];
+  vozes: { id: string; voz: string; nome: string; genero?: string; rate?: string; origem?: InsumoOrigem; usada: boolean }[];
+  headlines: { id: string; texto: string; origem?: InsumoOrigem; por_que?: string }[];
+  ctas: { id: string; botao: string; fala?: string; origem?: InsumoOrigem; por_que?: string }[];
+  copys: { id: string; texto_principal: string; titulo: string; descricao?: string; origem?: InsumoOrigem; por_que?: string }[];
+  molde: { cena: string; cues: string[] } | null;
+  vozesDisponiveis: { id: string; nome: string; genero?: string }[];
+  /** chave = 'tipo:id' (ex.: 'abertura:quantos-apps') */
+  avisos: Record<string, string[]>;
+}
+export type InsumoTipo = 'abertura' | 'voz' | 'headline' | 'cta' | 'copy';
+/** a view das variantes; `insumos` pode faltar num servidor antigo */
+export type VariantesVista = VariantesView & { insumos?: InsumosView; insumosErro?: string };
 export type { VariantesView, VarianteView, Aval as VarianteAval, Job as VariantesJob } from '../../core/variantes';
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 // Editor de mockups (tarefa 030)
@@ -339,11 +355,16 @@ export const api = {
   previewStatus: (slug: string, path: string) => req<PreviewJob | null>('GET', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`),
   generatePreview: (slug: string, path: string, formato?: string) => req<PreviewJob>('POST', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`, { formato }),
   // variantes de um projeto de vídeo (045 D)
-  variantes: (slug: string, path: string) => req<VariantesView>('GET', `${pj(slug)}/piece/variantes?path=${encodeURIComponent(path)}`),
-  gerarVariantes: (slug: string, path: string, b: { ids: string[]; formato?: string; soQc?: boolean }) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/gerar?path=${encodeURIComponent(path)}`, b),
-  pararVariantes: (slug: string, path: string) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/parar?path=${encodeURIComponent(path)}`),
-  avaliarVariantes: (slug: string, path: string, ids: string[], status: string) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/aval?path=${encodeURIComponent(path)}`, { ids, status }),
-  definirRodada: (slug: string, path: string, b: { rodada: string; eixo: string; opcoes: string[] }) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/rodada?path=${encodeURIComponent(path)}`, b),
+  variantes: (slug: string, path: string) => req<VariantesVista>('GET', `${pj(slug)}/piece/variantes?path=${encodeURIComponent(path)}`),
+  gerarVariantes: (slug: string, path: string, b: { ids: string[]; formato?: string; soQc?: boolean }) => req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/gerar?path=${encodeURIComponent(path)}`, b),
+  pararVariantes: (slug: string, path: string) => req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/parar?path=${encodeURIComponent(path)}`),
+  avaliarVariantes: (slug: string, path: string, ids: string[], status: string) => req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/aval?path=${encodeURIComponent(path)}`, { ids, status }),
+  definirRodada: (slug: string, path: string, b: { rodada: string; eixo: string; opcoes: string[] }) => req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/rodada?path=${encodeURIComponent(path)}`, b),
+  /** insumos (045 E): add / editar / rm um insumo; erro de validação = 400 com as mensagens */
+  insumoVariantes: (slug: string, path: string, b: { acao: 'add' | 'editar' | 'rm'; tipo: InsumoTipo; id?: string; dados?: Record<string, unknown>; forcar?: boolean }) =>
+    req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/insumo?path=${encodeURIComponent(path)}`, b),
+  pedirInsumos: (slug: string, path: string, b: { tipo: 'abertura' | 'headline' | 'cta' | 'copy'; quantidade?: number; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
+    req<PedidoIaStart>('POST', `${pj(slug)}/piece/variantes/pedir?path=${encodeURIComponent(path)}`, b),
   variantesZipUrl: (slug: string, path: string, ids: string[], formato?: string) => `/variantes-zip/${slug}?path=${encodeURIComponent(path)}&ids=${ids.map(encodeURIComponent).join(',')}${formato ? `&formato=${formato}` : ''}`,
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 

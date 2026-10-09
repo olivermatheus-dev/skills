@@ -2,6 +2,8 @@
 // --pedido: lock, dock com passos, Parar): "Pedir ajustes ao Claude" nas anotações (vídeo, slides, roteiro), "Rodar agora"
 // na fila de análise dos concorrentes e o relatório em segundo plano (core/relatorios.ts). Aqui ficam os prompts e o estado
 // que a tela acompanha (o pedido mais novo dela, pelo `ref`).
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import * as S from './store';
 import { ValidationError } from './store';
 import { runPedido, posicaoNaFila } from './runner';
@@ -103,4 +105,49 @@ export function rodarAnalise(slug: string, body: { comp?: string; modo?: string 
     extra: { comps: fila.map((q) => q.id), modulos },
   }, modoDe(body?.modo), () => { for (const q of fila) S.setAnalysisRequestStatus(slug, q.id, 'rodando'); });
   return { ...r, pedido: estadoPedido(r.pedido) };
+}
+
+// ---------- Pedir insumos à IA (fábrica de variantes, 045 E) ----------
+const TIPOS_IA = {
+  abertura: { nome: 'aberturas', um: 'abertura', exemplo: 'add abertura --fala "…" --tela "a *b*|c" --cues <chave>=<palavra>,…' },
+  headline: { nome: 'headlines', um: 'headline', exemplo: 'add headline --texto "…"' },
+  cta: { nome: 'CTAs', um: 'CTA', exemplo: 'add cta --botao "<um botão da Meta>" [--fala "…"]' },
+  copy: { nome: 'copys', um: 'copy', exemplo: 'add copy --principal "…" --titulo "…" [--descricao "…"]' },
+} as const;
+type TipoIa = keyof typeof TIPOS_IA;
+
+export function pedirInsumos(slug: string, path: string, body: { tipo?: string; quantidade?: number; instrucoes?: string; modo?: string }) {
+  if (!okSlug(slug) || !path || /(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(path)) throw new ValidationError('insumos', ['peça inválida']);
+  if (!existsSync(join(S.ROOT, 'companies', slug, 'contents', path, 'projeto.json'))) throw new ValidationError('insumos', ['peça sem projeto.json (variantes)']);
+  const tipo = body?.tipo as TipoIa;
+  const cfg = Object.hasOwn(TIPOS_IA, String(tipo)) ? TIPOS_IA[tipo] : undefined;
+  if (!cfg) throw new ValidationError('insumos', ['tipo inválido (a IA escreve abertura, headline, cta ou copy; voz o Oliver escolhe)']);
+  const q = body?.quantidade == null ? 5 : Number(body.quantidade);
+  const qtd = Math.min(10, Math.max(1, Number.isFinite(q) ? Math.round(q) : 5)); // ausente = 5; 0 vira 1; máx. 10
+  const piece = S.getPiece(slug, path);
+  const ref = `insumos:${path}`;
+  if (ativo(slug, ref)) throw new ValidationError('insumos', ['a IA já está escrevendo insumos para esta peça']);
+  const pasta = `companies/${slug}/contents/${path}`;
+  const cmd = `node tools/video-kit/scripts/insumos.mjs "${pasta}"`;
+  const instr = String(body?.instrucoes ?? '').trim();
+  const prompt = [
+    `Pedido do Oliver pelo app (Conteúdos → Variantes → Insumos): escreva ${qtd} ${cfg.nome} novas para o projeto de vídeo ${pasta}.`,
+    `Comece por \`${cmd} contexto\`: traz o briefing, o molde, o que já existe e os trechos de COPY, AUDIENCE, VOICE, anúncios dos concorrentes e proibições. Não leia mais nada do repositório sem necessidade.`,
+    `Escreva ${qtd} opções com ângulos realmente diferentes entre si e das que já existem (dor, identidade, número, pergunta, prova/fundador, objeção...). Cada uma com fonte no contexto; nada de número, prova ou depoimento inventado.`,
+    'Respeite as proibições do contexto (nada de promessa de resultado terapêutico nem fala de paciente: CFP/CRP; termos que a VOICE evita).',
+    `Use só o \`add\`: nunca \`editar\` nem \`rm\` (o que existe é do Oliver). Grave cada uma com \`${cmd} ${cfg.exemplo} --origem ia --por-que "<ângulo + fonte, 1 linha>"\`. Se o add recusar, leia a mensagem, corrija e tente de novo; aviso (gancho longo, limite de caracteres) grava, mas prefira resolver.`,
+    'Siga a seção "Variantes (fábrica de vídeo)" da skill ads-meta. Nunca edite o projeto.json à mão (está bloqueado) e não gere voz nem render (variantes.mjs, produce, tts, elevenlabs estão bloqueados): o Oliver confere e manda gerar pela aba Variantes.',
+    ...(instr ? [`Instruções do Oliver para esta rodada: ${instr}`] : []),
+    'Termine com uma linha: quantas opções gravou e o ângulo de cada uma.',
+  ].join('\n');
+  const r = runPedido({
+    slug, tipo: 'insumos', ref, agente: 'agent:roteirista', prompt,
+    titulo: `Insumos · ${qtd} ${cfg.nome} · ${piece.title}`,
+    link: `/p/${slug}/conteudos?peca=${encodeURIComponent(path)}&aba=variantes`,
+    allowed: ['Bash(node tools/video-kit/scripts/insumos.mjs *)'],
+    // a IA só escreve opções: sem gerar voz/render (o Oliver manda pela aba) e sem editar o projeto.json à mão
+    disallowed: ['Edit(**/projeto.json)', 'Write(**/projeto.json)', ...['video-kit/scripts/variantes.mjs', 'video-kit/scripts/tts.mjs', 'video-kit/scripts/voz.mjs', 'video-kit/scripts/elevenlabs.mjs', 'video-kit/scripts/produce.mjs'].map((x) => `Bash(node tools/${x} *)`), 'Bash(node tools/video/*)'],
+    extra: { pasta: path, tipo, quantidade: qtd },
+  }, modoDe(body?.modo));
+  return { ...r, quantidade: qtd, pedido: estadoPedido(r.pedido) };
 }

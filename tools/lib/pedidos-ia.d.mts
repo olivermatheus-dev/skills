@@ -1,5 +1,5 @@
 // Tipos do pedidos-ia.mjs (usado pelo app em TypeScript).
-export type PedidoTipo = 'ajustes' | 'analise' | 'relatorio';
+export type PedidoTipo = 'ajustes' | 'analise' | 'relatorio' | 'insumos';
 export interface PedidoIa {
   id: string; slug: string; tipo: PedidoTipo; titulo: string; agente: string; link: string | null; ref: string;
   prompt: string; allowed: string[]; disallowed?: string[]; extra: Record<string, any>;

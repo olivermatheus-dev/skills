@@ -28,6 +28,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa.
 - `library/analise/vocabulario.json` · quando: ângulo tirado de relatório de concorrente — termos aceitos do vocabulário
 - `knowledge/video/frame.md#2. Áreas seguras` · quando: briefing de criativo 9:16 — onde o texto-chave pode ficar
 - `context/BUSINESS.md#Modelo e preço` · quando: modo Analisar — preço e meta de CPA/ROAS, se houver
+- `.claude/skills/video/references/variantes.md#Insumos (fase E)` · quando: variantes de anúncio em vídeo (aberturas, headlines, CTAs, copys no projeto de vídeo) — comandos e validação
 
 ## Entradas e saídas
 - **Recebe (Criar):** objetivo (venda, lead, conversa no WhatsApp), destino, oferta e verba diária, pelo pedido ou pela tarefa.
@@ -154,3 +155,10 @@ Adicionar ao fim (criar se não existir; nunca apagar linhas):
 |---|---|---|---|---|---|
 ```
 Status: `em teste`, `vencedor`, `aposentado`.
+
+## Variantes (fábrica de vídeo)
+Anúncio em vídeo com várias opções de teste vive num projeto de vídeo (`projeto.json`, aba **Variantes** do app). Aqui você só escreve os **insumos**, sempre por script (`node tools/video-kit/scripts/insumos.mjs <pasta> …`, contrato em `video/references/variantes.md`), nunca editando o `projeto.json`:
+1. Comece por `insumos.mjs <pasta> contexto` (briefing, molde, o que já existe, trechos de COPY/AUDIENCE/VOICE, anúncios dos concorrentes, proibições) e por `campaigns/LOG_ANGULOS.md`.
+2. Escreva N opções de **ângulos realmente diferentes** entre si e das existentes (dor, identidade, número, pergunta, prova/fundador, objeção), cada uma com fonte: `add abertura|headline|cta|copy … --origem ia --por-que "<ângulo + fonte>"`.
+3. Abertura = fala curta (até ~16 palavras) + tela de gancho (1ª frase até ~9 palavras) + 1 palavra dita por cue do molde; toda palavra da tela tem de estar na fala. Headline e título até 40 caracteres, texto principal até 125 antes do "ver mais", botão entre os CTAs da Meta.
+4. Se o `add` recusar, corrija e repita. Voz a IA não escolhe, e voz/render ela não gera: o Oliver confere na aba e manda Gerar. Ângulo novo vai ao `LOG_ANGULOS.md` como `em teste`.

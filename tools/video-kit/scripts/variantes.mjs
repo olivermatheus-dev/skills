@@ -149,7 +149,7 @@ function aplicar(tl, o, ctx) {
     if (typeof txt === 'string') { x.text = txt; delete x.say; } else Object.assign(x, txt);
   }
   const cenas = { ...(o.cenas || {}) };
-  if (o.cena) cenas[o.cena] = { ...cenas[o.cena], ...Object.fromEntries(Object.entries(o).filter(([k]) => !['id', 'cena', 'voz', 'rate', 'falas', 'cenas', 'titulo', 'nota'].includes(k))) };
+  if (o.cena) cenas[o.cena] = { ...cenas[o.cena], ...Object.fromEntries(Object.entries(o).filter(([k]) => !['id', 'cena', 'voz', 'rate', 'falas', 'cenas', 'titulo', 'nota', 'origem', 'criado', 'por_que'].includes(k))) };
   for (const [sid, patch] of Object.entries(cenas)) {
     const sc = tl.scenes.find((s) => s.id === sid);
     if (!sc) throw new Error(`opção ${o.id}: cena ${sid} não existe na base`);
@@ -315,7 +315,7 @@ for (const c of lista) {
   // QC: status, o que o script corrigiu, o que sobra para o LLM
   const status = problemas.some((p) => p.nivel === 'erro') ? 'erro' : problemas.some((p) => p.nivel === 'aviso' && !p.auto) ? 'aviso' : 'ok';
   const restam = problemas.filter((p) => ['erro', 'aviso'].includes(p.nivel) && !p.auto);
-  const opcoes = Object.fromEntries(nomesEixos.map((e) => [e, opcao(e, c[e])]).filter(([, o]) => Object.keys(o).some((k) => !['id', 'titulo', 'nota', 'voz'].includes(k))));
+  const opcoes = Object.fromEntries(nomesEixos.map((e) => [e, opcao(e, c[e])]).filter(([, o]) => Object.keys(o).some((k) => !['id', 'titulo', 'nota', 'voz', 'origem', 'criado', 'por_que'].includes(k))));
   const md = relatorio({ id, tl, problemas, auto, escolhas: c, opcoes });
   writeFileSync(join(dirVar, 'sincronia.json'), JSON.stringify({ status, auto, ajuste_auto, problemas, medido_em: new Date().toISOString().slice(0, 19) + 'Z' }, null, 2) + '\n');
   if (restam.length) writeFileSync(join(dirVar, 'sincronia.md'), md + '\n'); else rmSync(join(dirVar, 'sincronia.md'), { force: true });
