@@ -20,6 +20,7 @@ Pré-requisitos: Node 22 (`.nvmrc`, o fnm troca sozinho), `npm install`, ffmpeg 
 | 3. efeitos | `node tools/video-kit/scripts/sfx.mjs <pasta>` | posiciona os SFX da biblioteca (e os sintetizados) nos eventos |
 | 4. mix | `node tools/video-kit/scripts/mix.mjs <pasta>` | voz + trilha com ducking + efeitos → −14 LUFS (duas passadas) |
 | 4b. compor | `node tools/video-kit/scripts/compor.mjs <pasta> [--listar]` | só para vídeo **por blocos** (`scenes[].use`): gera o `composition.html` a partir dos blocos (o produce já chama sozinho). Contrato: `.claude/skills/video/references/blocos.md` |
+| 4c. variantes | `node tools/video-kit/scripts/variantes.mjs <pasta> [--listar] [--rodada r2\|--matriz]` | depois do aval da base: `projeto.json` (eixos voz/abertura…) → uma timeline por variante, falas em cache, trilha ancorada no corpo, sfx + mix + rascunho em `variantes/<id>/`. Contrato: `.claude/skills/video/references/variantes.md` |
 | 5. montar | `node tools/video-kit/scripts/produce.mjs <pasta> --build-only` | um projeto HyperFrames por formato em `render/<formato>/` |
 | 6. conferir | `node tools/video-kit/scripts/check.mjs <pasta>` | regras de tempo + quadros de cada cena e evento em `render/<formato>/check/` → **olhar** |
 | 7. exportar | `node tools/video-kit/scripts/produce.mjs <pasta>` | MP4 com motion blur (60→30), BT.709 → `exports/<pasta>-<formato>-vNN.mp4` |

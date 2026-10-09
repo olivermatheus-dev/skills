@@ -67,7 +67,9 @@ for (const f of files) {
   if (Math.abs(fps - avg) > 0.05) add('maior', name, `fps variável (${fps.toFixed(2)} × média ${avg.toFixed(2)}); exporte CFR`);
   if (tl?.fps && Math.abs(fps - tl.fps) > 0.05) add('menor', name, `fps ${fps.toFixed(2)} ≠ timeline ${tl.fps} (ok só se for decisão)`);
   if (tl?.duration && Math.abs(d - tl.duration) > 2 / (fps || 30)) add('crit', name, `duração ${d.toFixed(2)} s ≠ timeline ${tl.duration} s`);
-  if (!/^\d{4}-\d{2}-\d{2}-.+-(4x5|9x16|16x9|1x1)-v\d{2}\.mp4$/.test(name)) add('menor', name, 'nome fora do padrão <AAAA-MM-DD>-<nome>-<formato>-vNN.mp4 (nada de final.mp4)');
+  // variante (045 B): <nome do projeto>__<eixos>-<formato>-rascunho|vNN.mp4 (o nome é o do anúncio)
+  const variante = tl?.variante && name.startsWith(`${tl.nome_export}-`) && /-(4x5|9x16|16x9|1x1)-(rascunho|v\d{2})\.mp4$/.test(name);
+  if (!variante && !/^\d{4}-\d{2}-\d{2}-.+-(4x5|9x16|16x9|1x1)-v\d{2}\.mp4$/.test(name)) add('menor', name, 'nome fora do padrão <AAAA-MM-DD>-<nome>-<formato>-vNN.mp4 (nada de final.mp4)');
 
   // 3. áudio: existe, especificação e loudness medida (o Claude não escuta; mede)
   if (!a) add('crit', name, 'sem áudio (regra: nunca fundo mudo)');

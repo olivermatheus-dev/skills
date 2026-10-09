@@ -41,3 +41,6 @@ data/intel/
 
 # curadoria (041): brutos, candidatos, achados e páginas baixadas; refazíveis com npm run curadoria
 data/curadoria/
+
+# variantes de vídeo (045 B): a composição é gerada pelo variantes.mjs/compor a cada rodada
+companies/*/contents/*/variantes/*/composition.html

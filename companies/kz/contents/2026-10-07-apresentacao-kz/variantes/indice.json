@@ -1,0 +1,134 @@
+{
+  "projeto": "kz-apresentacao",
+  "variantes": [
+    {
+      "id": "abertura-pergunta__voz-thalita",
+      "nome": "kz-apresentacao__abertura-pergunta__voz-thalita",
+      "escolhas": {
+        "abertura": "pergunta",
+        "voz": "thalita"
+      },
+      "duracao": 41.304,
+      "abertura_s": 5.006,
+      "exports": [
+        "variantes/abertura-pergunta__voz-thalita/exports/kz-apresentacao__abertura-pergunta__voz-thalita-4x5-rascunho.mp4",
+        "variantes/abertura-pergunta__voz-thalita/exports/kz-apresentacao__abertura-pergunta__voz-thalita-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:03:07Z"
+    },
+    {
+      "id": "abertura-pergunta__voz-francisca",
+      "nome": "kz-apresentacao__abertura-pergunta__voz-francisca",
+      "escolhas": {
+        "abertura": "pergunta",
+        "voz": "francisca"
+      },
+      "duracao": 39.785,
+      "abertura_s": 5.044,
+      "exports": [
+        "variantes/abertura-pergunta__voz-francisca/exports/kz-apresentacao__abertura-pergunta__voz-francisca-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:04:13Z"
+    },
+    {
+      "id": "abertura-pergunta__voz-antonio",
+      "nome": "kz-apresentacao__abertura-pergunta__voz-antonio",
+      "escolhas": {
+        "abertura": "pergunta",
+        "voz": "antonio"
+      },
+      "duracao": 40.838,
+      "abertura_s": 4.753,
+      "exports": [
+        "variantes/abertura-pergunta__voz-antonio/exports/kz-apresentacao__abertura-pergunta__voz-antonio-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:05:19Z"
+    },
+    {
+      "id": "abertura-quantos-apps__voz-thalita",
+      "nome": "kz-apresentacao__abertura-quantos-apps__voz-thalita",
+      "escolhas": {
+        "abertura": "quantos-apps",
+        "voz": "thalita"
+      },
+      "duracao": 40.83,
+      "abertura_s": 4.532,
+      "exports": [
+        "variantes/abertura-quantos-apps__voz-thalita/exports/kz-apresentacao__abertura-quantos-apps__voz-thalita-4x5-rascunho.mp4",
+        "variantes/abertura-quantos-apps__voz-thalita/exports/kz-apresentacao__abertura-quantos-apps__voz-thalita-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:06:09Z"
+    },
+    {
+      "id": "abertura-quantos-apps__voz-francisca",
+      "nome": "kz-apresentacao__abertura-quantos-apps__voz-francisca",
+      "escolhas": {
+        "abertura": "quantos-apps",
+        "voz": "francisca"
+      },
+      "duracao": 39.428,
+      "abertura_s": 4.687,
+      "exports": [
+        "variantes/abertura-quantos-apps__voz-francisca/exports/kz-apresentacao__abertura-quantos-apps__voz-francisca-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:06:59Z"
+    },
+    {
+      "id": "abertura-quantos-apps__voz-antonio",
+      "nome": "kz-apresentacao__abertura-quantos-apps__voz-antonio",
+      "escolhas": {
+        "abertura": "quantos-apps",
+        "voz": "antonio"
+      },
+      "duracao": 40.58,
+      "abertura_s": 4.495,
+      "exports": [
+        "variantes/abertura-quantos-apps__voz-antonio/exports/kz-apresentacao__abertura-quantos-apps__voz-antonio-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:08:00Z"
+    },
+    {
+      "id": "abertura-virou-terapeuta__voz-thalita",
+      "nome": "kz-apresentacao__abertura-virou-terapeuta__voz-thalita",
+      "escolhas": {
+        "abertura": "virou-terapeuta",
+        "voz": "thalita"
+      },
+      "duracao": 40.627,
+      "abertura_s": 4.329,
+      "exports": [
+        "variantes/abertura-virou-terapeuta__voz-thalita/exports/kz-apresentacao__abertura-virou-terapeuta__voz-thalita-4x5-rascunho.mp4",
+        "variantes/abertura-virou-terapeuta__voz-thalita/exports/kz-apresentacao__abertura-virou-terapeuta__voz-thalita-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:08:49Z"
+    },
+    {
+      "id": "abertura-virou-terapeuta__voz-francisca",
+      "nome": "kz-apresentacao__abertura-virou-terapeuta__voz-francisca",
+      "escolhas": {
+        "abertura": "virou-terapeuta",
+        "voz": "francisca"
+      },
+      "duracao": 38.886,
+      "abertura_s": 4.145,
+      "exports": [
+        "variantes/abertura-virou-terapeuta__voz-francisca/exports/kz-apresentacao__abertura-virou-terapeuta__voz-francisca-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:09:35Z"
+    },
+    {
+      "id": "abertura-virou-terapeuta__voz-antonio",
+      "nome": "kz-apresentacao__abertura-virou-terapeuta__voz-antonio",
+      "escolhas": {
+        "abertura": "virou-terapeuta",
+        "voz": "antonio"
+      },
+      "duracao": 40.264,
+      "abertura_s": 4.179,
+      "exports": [
+        "variantes/abertura-virou-terapeuta__voz-antonio/exports/kz-apresentacao__abertura-virou-terapeuta__voz-antonio-9x16-rascunho.mp4"
+      ],
+      "gerada_em": "2026-10-09T00:10:25Z"
+    }
+  ]
+}

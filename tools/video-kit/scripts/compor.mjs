@@ -7,7 +7,7 @@
 //   "scenes":  [{ "id": "s1", "use": "abertura/pergunta-fragmentos", "vo": ["f1"], "on_screen": "a|b", "params": {…} }]
 //   "events":  [{ "id": "e2", "scene": "s1", "cue": "troca", "word": "f1:ainda", … }]   ← o bloco pede o tempo por ctx.cue('troca')
 //
-// Onde o bloco é procurado (o 1º que existir): <pasta>/blocos/<use> → companies/<slug>/video-templates/blocos/<use> → library/blocos/<use>.
+// Onde o bloco é procurado (o 1º que existir): <pasta>/blocos/<use> (ou <origem>/blocos, numa variante) → companies/<slug>/video-templates/blocos/<use> → library/blocos/<use>.
 // Bloco = bloco.json (slots, params padrão, camada) + bloco.html + bloco.css + bloco.js (BLOCO('<use>', fn)). Contrato em
 // tools/video-kit/runtime/blocos.js e no TASK.md da 045. O CSS de cada bloco é prefixado com a classe do bloco (.b-<use>),
 // então dois blocos podem usar os mesmos nomes de classe. `:scope` no CSS = a raiz do bloco.
@@ -19,6 +19,8 @@ import { HUB, KIT, video } from './lib.mjs';
 export function resolverBloco(v, use) {
   const lugares = [
     ['projeto', join(v.dir, 'blocos', use)],
+    // variante (045 B): a pasta da variante aponta para o projeto de origem, onde moram os blocos do projeto
+    ['projeto', v.tl.origem && join(v.dir, v.tl.origem, 'blocos', use)],
     ['empresa', v.companyDir && join(v.companyDir, 'video-templates', 'blocos', use)],
     ['global', join(HUB, 'library', 'blocos', use)],
   ];

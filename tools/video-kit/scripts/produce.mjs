@@ -13,7 +13,7 @@
 // liso em vez de 3 cópias), ~7–8× mais lento: para a versão final de vídeo com movimento rápido (tarefa 033).
 //
 // Uso: node tools/video-kit/scripts/produce.mjs <pasta> [--only=9x16] [--draft] [--build-only] [--no-blur] [--blur=nativo[:N]] [--fps=60] [--v=3] [--mute]
-//   → exports/<AAAA-MM-DD-nome>-<formato>-vNN.mp4  (rascunho: -rascunho.mp4, sobrescreve)
+//   → exports/<AAAA-MM-DD-nome>-<formato>-vNN.mp4  (rascunho: -rascunho.mp4, sobrescreve; `nome_export` na timeline troca o nome)
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
@@ -78,7 +78,11 @@ function build(format, offset) {
   cpSync(join(HUB, 'node_modules', 'gsap', 'dist', 'gsap.min.js'), join(dir, 'kit', 'gsap.min.js'));
   // galeria de componentes de motion (library/motion) → lib/motion/<categoria>/<id>/ (ex.: lib/motion/cta/navegador/navegador.js)
   if (existsSync(join(HUB, 'library', 'motion'))) cpSync(join(HUB, 'library', 'motion'), join(dir, 'lib', 'motion'), { recursive: true });
-  for (const d of ['data', 'assets']) if (existsSync(join(v.dir, d))) cpSync(join(v.dir, d), join(dir, d), { recursive: true });
+  // numa variante (045 B), data/ e assets/ vêm do projeto de origem quando a variante não tem os seus
+  for (const d of ['data', 'assets']) {
+    const src = [v.dir, tl.origem && join(v.dir, tl.origem)].filter(Boolean).map((b) => join(b, d)).find(existsSync);
+    if (src) cpSync(src, join(dir, d), { recursive: true });
+  }
   writeFileSync(join(dir, 'index.html'), html);
   return dir;
 }
@@ -103,7 +107,7 @@ for (const format of targets) {
   if (buildOnly) { console.log(`${format}: montado em render/${format}/ (abra o index.html ou rode check.mjs)`); continue; }
 
   mkdirSync(exportsDir, { recursive: true });
-  const out = join(exportsDir, `${v.name}-${format}${draft ? '-rascunho' : `-v${version}`}${fps60 ? '-60fps' : ''}.mp4`);
+  const out = join(exportsDir, `${tl.nome_export || v.name}-${format}${draft ? '-rascunho' : `-v${version}`}${fps60 ? '-60fps' : ''}.mp4`);
   // BT.709 completo (matriz, primárias e transferência), no stream e no contêiner: sem isso a cor da marca muda em alguns players
   const bt709 = ['-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv', '-x264-params', 'colorprim=bt709:transfer=bt709:colormatrix=bt709'];
   // o passe B mostra a cena meio quadro atrás; intercalado antes do A, dá uma amostra a cada 1/120 s, e o

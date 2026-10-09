@@ -56,6 +56,7 @@ Antes de escrever fundo, gráfico, mapa, transição ou bloco de cena: consulte 
 ### 3. Cenas = blocos (padrão desde a 045)
 - **Monte o vídeo com blocos, não escreva `composition.html`.** Cada cena aponta para um bloco (`scenes[].use`), o fundo vai em `camadas`, e o `produce.mjs` gera a composição sozinho (`compor.mjs`; o `composition.html` gerado não se edita). Contrato e ctx: `references/blocos.md`.
 - **Antes de criar, procure:** `ls companies/<slug>/video-templates/blocos/*/` e `library/blocos/*/` (ler só os `bloco.json`). Reusar = `use` + `on_screen` (slots) + `params` + eventos com `cue`: custo ≈ o texto.
+- **Variantes (A/B de abertura, voz…) depois do aval da base:** `projeto.json` + `variantes.mjs`, sem LLM e sem reescrever cena (`references/variantes.md`).
 - Bloco novo nasce no projeto (`<pasta>/blocos/<tipo>/<id>/`) e sobe para `video-templates/blocos/` (marca) ou `library/blocos/` (genérico) quando o Oliver gostar.
 - As regras abaixo valem dentro de cada bloco.
 - Linkar `brand/brand.css` (gerado do `brand.json`; o `produce.mjs` copia a marca para o render); nunca hardcodar cor da marca. Ícones: só Lucide via `node tools/icon.mjs <nome> --brand <slug>` (SVG inline com `--icon-color`/`--icon-stroke`). Uma timeline GSAP principal no formato do kit (`tools/video-kit/GUIA-TECNICO.md`); **todo tempo vem de `T.scene/T.ev/T.word`** ou dos marcadores `__S:<cena>__ __D:<cena>__ __E:<evento>__`, nunca número escrito à mão (é o que deixa trocar a voz sem reescrever).

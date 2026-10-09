@@ -1,0 +1,46 @@
+{
+  "tipo": "apresentacao",
+  "objetivo": "piloto da fábrica de variantes (045 B): qual abertura prende mais na apresentação da kz",
+  "nome": "kz-apresentacao",
+  "base": "timeline.json",
+  "trilha": { "ancora": "s2", "respiro_compassos": 2 },
+  "eixos": {
+    "abertura": [
+      {
+        "id": "pergunta",
+        "titulo": "a da v03",
+        "cena": "s1",
+        "falas": { "f1": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?" },
+        "on_screen": "Você é *terapeuta*?|Sua rotina em *vários lugares* diferentes?",
+        "cues": { "troca": "f1:ainda", "espalha": "f1:vários" }
+      },
+      {
+        "id": "quantos-apps",
+        "titulo": "pergunta de contagem (ângulo dor, COPY.md: 'cinco apps')",
+        "cena": "s1",
+        "falas": { "f1": "Quantos aplicativos você abre por dia só para organizar o consultório?" },
+        "on_screen": "Quantos *aplicativos*?|Só para *organizar* o consultório?",
+        "cues": { "troca": "f1:você", "espalha": "f1:organizar" }
+      },
+      {
+        "id": "virou-terapeuta",
+        "titulo": "identidade (COPY.md: 'Queria só atender')",
+        "cena": "s1",
+        "falas": { "f1": "Você virou terapeuta para atender, não para organizar planilha." },
+        "on_screen": "Você virou *terapeuta*|para *atender*, não para planilha.",
+        "cues": { "troca": "f1:para", "espalha": "f1:organizar" }
+      }
+    ],
+    "voz": [
+      { "id": "thalita", "voz": "edge-thalita" },
+      { "id": "francisca", "voz": "edge-francisca" },
+      { "id": "antonio", "voz": "edge-antonio" }
+    ]
+  },
+  "rodada": "r1",
+  "rodadas": {
+    "r1": { "abertura": ["pergunta", "quantos-apps", "virou-terapeuta"], "voz": ["thalita"] },
+    "r2": { "abertura": ["<vencedora da r1>"], "voz": ["thalita", "francisca", "antonio"] }
+  },
+  "ajustes": {}
+}
