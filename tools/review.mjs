@@ -152,6 +152,10 @@ if (formato) {
   console.log(fm ? `formato: ${fm.nome} → ${fm.skill ? `skill ${fm.skill}` : 'rascunho sem skill (seguir essência e estrutura do formato.json)'}${fm.observacoes ? `\n   observações do Oliver: ${fm.observacoes.replace(/\n/g, ' / ')}` : ''}\n` : `⚠ formato "${formato}" não existe em library/formatos/\n`);
 }
 if (!list.length) { console.log(`Nenhuma anotação ${all ? '' : 'aberta '}em ${dir}.`); process.exit(0); }
+// pasta de uma variante (045 D): timeline e composição são geradas; o ajuste vai no projeto.json, nunca na variante
+const varProj = /[\\/]variantes[\\/][\w-]+$/.test(dir) && existsSync(join(dir, '..', '..', 'projeto.json')) ? rpath(dir, '..', '..') : null;
+const varId = varProj && dir.split(/[\\/]/).pop();
+if (varProj) console.log(`VARIANTE ${varId} do projeto ${varProj}: não edite a timeline/composição desta pasta (são geradas).\n   alcance "variante" → projeto.json > ajustes["${varId}"] · alcance "todas" → base (timeline.json do projeto) ou a opção do eixo\n   contrato: .claude/skills/video/references/variantes.md · depois: node tools/video-kit/scripts/variantes.mjs "${varProj}" --matriz --so <ids>\n`);
 console.log(`# Anotações ${all ? '' : 'abertas '}— ${dir}`);
 const appr = Object.entries(review.approvals ?? {}).filter(([, d]) => d).map(([k, d]) => `${k} aprovado em ${d}`);
 console.log(`status: ${review.status ?? '—'}${appr.length ? ` · ${appr.join(' · ')}` : ' · roteiro ainda NÃO aprovado'}`);
@@ -162,6 +166,7 @@ for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?
   const x = resolveCtx(c);
   console.log(`## ${c.id} · ${c.tipo.toUpperCase()}${c.status === 'resolvido' ? ' (resolvida)' : ''} · âncora: ${c.anchor.kind}${x.t != null ? ` · ${fmt(x.t)}` : ''}${c.video && latest && c.video !== latest ? ` · ⚠ anotada em ${c.video} (o mais recente é ${latest})` : ''}`);
   console.log(`   "${c.text.replace(/\n/g, '\n   ')}"`);
+  if (varProj) console.log(`   · vale para: ${c.alcance === 'todas' ? 'TODAS as variantes (base ou opção do eixo)' : `só esta variante (ajustes["${varId}"])`}`);
   for (const l of x.lines) console.log(`   · ${l}`);
   const f = x.img ? pinned(c, x.img) : frame(c, x.t);
   if (f) console.log(`   · ${x.img ? 'imagem' : 'quadro'}: ${f}`);

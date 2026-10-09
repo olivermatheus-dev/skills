@@ -32,6 +32,8 @@ export const ReviewComment = z.object({
   video: z.string().optional(),
   anchor: ReviewAnchor,
   text: z.string().min(1, 'escreva o que está errado'),
+  /** anotação numa variante (045 D): o ajuste vale só para ela (patch em `projeto.json > ajustes`) ou para todas (base/opção do eixo) */
+  alcance: z.enum(['variante', 'todas']).optional(),
   /** preenchido pela IA em `review.mjs resolve` (ou `responde`, que deixa aberta com uma pergunta) */
   reply: z.string().optional(),
   replyAt: IsoDateTime.optional(),

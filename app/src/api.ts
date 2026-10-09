@@ -35,6 +35,7 @@ import type { FormatInfo, FormatUse, FormatRefInput } from '../../core/store';
 export type { Format, FormatInfo, FormatUse, FormatRefInput };
 export type { PieceCover } from '../../core/store';
 import type { AdsHistorico } from '../../core/store';
+import type { VariantesView } from '../../core/variantes';
 export type { AdsHistorico, AnuncioHistorico } from '../../core/store';
 export interface NewFormatInput extends FormatRefInput { nome: string; midia: Format['midia']; essencia?: string; tipos?: Format['tipos'] }
 import type { Atividade } from '../../tools/lib/atividade.mjs';
@@ -78,7 +79,10 @@ export interface PieceTimeline {
 /** ajuste direto no vídeo (core/videoedit.ts) */
 export type VideoAdjust = { op: 'volume'; alvo: string; db: number } | { op: 'duracao'; cena: string; s: number } | { op: 'texto'; cena: string; texto: string };
 export interface PreviewJob { estado: 'rodando' | 'ok' | 'erro'; passo: string; passos: string[]; formato: string; log: string[]; inicio: string; fim?: string; arquivo?: string; erro?: string }
-export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta }
+export interface PieceFull extends PieceInfo { timeline: PieceTimeline | null; previews: string[]; review: Review; meta: PieceMeta;
+  /** tem projeto.json (045): ganha a aba Variantes */ projeto?: boolean;
+  /** é a pasta de uma variante: de qual projeto e qual id */ variante?: { projeto: string; id: string } }
+export type { VariantesView, VarianteView, Aval as VarianteAval, Job as VariantesJob } from '../../core/variantes';
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 // Editor de mockups (tarefa 030)
 import type { MockupScene } from '../../schema/mockup';
@@ -312,6 +316,13 @@ export const api = {
   adjustVideo: (slug: string, path: string, a: VideoAdjust) => req<{ saida: string; timeline: PieceTimeline }>('POST', `${pj(slug)}/piece/adjust?path=${encodeURIComponent(path)}`, a),
   previewStatus: (slug: string, path: string) => req<PreviewJob | null>('GET', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`),
   generatePreview: (slug: string, path: string, formato?: string) => req<PreviewJob>('POST', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`, { formato }),
+  // variantes de um projeto de vídeo (045 D)
+  variantes: (slug: string, path: string) => req<VariantesView>('GET', `${pj(slug)}/piece/variantes?path=${encodeURIComponent(path)}`),
+  gerarVariantes: (slug: string, path: string, b: { ids: string[]; formato?: string; soQc?: boolean }) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/gerar?path=${encodeURIComponent(path)}`, b),
+  pararVariantes: (slug: string, path: string) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/parar?path=${encodeURIComponent(path)}`),
+  avaliarVariantes: (slug: string, path: string, ids: string[], status: string) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/aval?path=${encodeURIComponent(path)}`, { ids, status }),
+  definirRodada: (slug: string, path: string, b: { rodada: string; eixo: string; opcoes: string[] }) => req<VariantesView>('POST', `${pj(slug)}/piece/variantes/rodada?path=${encodeURIComponent(path)}`, b),
+  variantesZipUrl: (slug: string, path: string, ids: string[], formato?: string) => `/variantes-zip/${slug}?path=${encodeURIComponent(path)}&ids=${ids.map(encodeURIComponent).join(',')}${formato ? `&formato=${formato}` : ''}`,
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 
   formats: () => req<FormatInfo[]>('GET', '/api/formats'),

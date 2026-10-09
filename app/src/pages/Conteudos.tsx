@@ -1,7 +1,8 @@
 // Conteúdos: a central de peças (vídeos, carrosséis, posts e roteiros) de contents/.
 // Lista em grade ou lista, com busca, filtros, favoritos e arquivadas. Em cada peça, abas:
 // Ficha (prévia, versões, legenda/copy/notas, tags, publicação → peca.json),
-// Roteiro (texto anotável) e Edição do vídeo (player + faixas → revisao.json; a IA lê com `node tools/review.mjs <pasta>`).
+// Roteiro (texto anotável), Edição do vídeo (player + faixas → revisao.json; a IA lê com `node tools/review.mjs <pasta>`)
+// e Variantes (projeto de vídeo com projeto.json, 045 D: fluxo/matriz, gerar, aprovar, baixar; anotar abre a variante).
 import { useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ import VideoReview from '../components/pieces/VideoReview';
 import SlideReview from '../components/pieces/SlideReview';
 import { AjustesProvider, PedirAjustesBar } from '../components/pieces/PedirAjustes';
 import PieceSheet from '../components/pieces/PieceSheet';
+import Variantes from '../components/pieces/Variantes';
 import { KIND_LABEL, STATUS_LABEL } from '../components/pieces/shared';
 import { Star, Thumb, desktop, useSaveMeta } from '../components/pieces/library';
 import { TagChip, useProjectTags } from '../components/notes/TagsInput';
@@ -185,7 +187,10 @@ function PieceDetail({ path }: { path: string }) {
     onSettled: () => { void qc.invalidateQueries({ queryKey: qk.pieces(slug) }); },
   });
 
-  const tabs = piece ? ['ficha', ...(piece.texts.length ? ['roteiro'] : []), ...(piece.kind === 'video' ? ['video'] : []), ...(piece.kind !== 'video' && piece.images.length ? ['slides'] : [])] : [];
+  const tabs = piece ? ['ficha', ...(piece.texts.length ? ['roteiro'] : []), ...(piece.kind === 'video' ? ['video'] : []), ...(piece.projeto ? ['variantes'] : []), ...(piece.kind !== 'video' && piece.images.length ? ['slides'] : [])] : [];
+  // anotação numa variante: vale só para ela ou para todas (escolhido na hora; o review.mjs diz à IA onde mexer)
+  const [alcance, setAlcance] = useState<'variante' | 'todas'>('variante');
+  const setVideoComments = (cs: ReviewComment[]) => save.mutate({ ...review, comments: piece?.variante ? cs.map((c) => c.alcance || review.comments.some((o) => o.id === c.id) ? c : { ...c, alcance }) : cs });
   const tab = tabs.includes(sp.get('aba') ?? '') ? sp.get('aba')! : 'ficha';
   const go = (aba: string) => setSp({ peca: path, aba });
   const review = piece?.review ?? { comments: [] };
@@ -195,11 +200,15 @@ function PieceDetail({ path }: { path: string }) {
     if (piece && t && t !== piece.title) saveMeta.mutate({ path, patch: { title: t } });
     setRenaming(null);
   };
-  const TAB_LABEL: Record<string, string> = { ficha: 'Ficha', roteiro: 'Roteiro', video: 'Edição do vídeo', slides: piece?.kind === 'carrossel' ? 'Slides' : 'Imagens' };
+  const TAB_LABEL: Record<string, string> = { ficha: 'Ficha', roteiro: 'Roteiro', video: 'Edição do vídeo', slides: piece?.kind === 'carrossel' ? 'Slides' : 'Imagens', variantes: 'Variantes' };
 
   return (
     <AppContent>
-      <div className="mb-1 text-sm"><Link to="?" className="text-muted-foreground hover:text-foreground">← Conteúdos</Link></div>
+      <div className="mb-1 text-sm">
+        {piece?.variante
+          ? <Link to={`?peca=${encodeURIComponent(piece.variante.projeto)}&aba=variantes`} className="text-muted-foreground hover:text-foreground">← Variantes</Link>
+          : <Link to="?" className="text-muted-foreground hover:text-foreground">← Conteúdos</Link>}
+      </div>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div className="min-w-0 flex-1">
           {renaming !== null ? (
@@ -231,6 +240,17 @@ function PieceDetail({ path }: { path: string }) {
       {piece && (
         <>
           {piece.archived && <Card className="mb-4 text-sm bg-muted">Peça arquivada: não aparece na lista principal.</Card>}
+          {piece.variante && (
+            <Card className="mb-4 py-2.5 text-sm flex flex-wrap items-center gap-2">
+              <span>Variante <b className="font-mono text-xs">{piece.variante.id}</b>: a timeline é gerada pelo projeto, então ajuste pelas anotações.</span>
+              <span className="ml-auto text-muted-foreground">Próximas anotações valem para:</span>
+              {(['variante', 'todas'] as const).map((a) => (
+                <button key={a} onClick={() => setAlcance(a)} className={cx('px-2.5 py-0.5 rounded-full border text-xs', alcance === a ? 'border-primary text-primary-ink font-medium' : 'border-border text-muted-foreground hover:text-foreground')}>
+                  {a === 'variante' ? 'só esta variante' : 'todas as variantes'}
+                </button>
+              ))}
+            </Card>
+          )}
           <div className="flex gap-1 border-b border-border mb-5">
             {tabs.map((t) => {
               const n = t === 'ficha' ? 0 : open((c) => (c.anchor.kind === 'roteiro' ? 'roteiro' : c.anchor.kind === 'slide' ? 'slides' : 'video') === t);
@@ -246,8 +266,9 @@ function PieceDetail({ path }: { path: string }) {
           {tab === 'ficha' && <PieceSheet slug={slug} piece={piece} />}
           {tab === 'roteiro' && <TextReview slug={slug} path={path} texts={piece.texts} review={review} saveReview={(r) => save.mutate(r)} saving={save.isPending} />}
           {tab === 'video' && (piece.videos.length || piece.timeline
-            ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />
+            ? <VideoReview slug={slug} path={path} piece={piece} comments={review.comments} setComments={setVideoComments} saving={save.isPending} />
             : <Card className="text-sm text-muted-foreground">Sem vídeo exportado ainda.</Card>)}
+          {tab === 'variantes' && <Variantes slug={slug} path={path} />}
           {tab === 'slides' && <SlideReview slug={slug} path={path} images={piece.images} comments={review.comments} setComments={(cs) => save.mutate({ ...review, comments: cs })} saving={save.isPending} />}
           </AjustesProvider>
         </>

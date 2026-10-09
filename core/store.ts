@@ -475,6 +475,8 @@ export function listPieces(slug: string): Piece[] {
     if (pc) out.push(pc);
     if (depth < 3) for (const d of exists(dir) ? readdirSync(abs(dir)) : []) {
       if (SKIP_DIRS.includes(d) || d.startsWith('qc') || d.startsWith('.')) continue;
+      // variantes de um projeto de vídeo (045) aparecem na aba Variantes da peça, não soltas na lista
+      if (d === 'variantes' && exists(join(dir, 'projeto.json'))) continue;
       if (statSync(abs(join(dir, d))).isDirectory()) walk(join(rel, d), depth + 1);
     }
   };
@@ -488,7 +490,10 @@ export function getPiece(slug: string, path: string) {
   // previews = pastas render/<formato>/ com index.html (composição montada): a UI renderiza ao vivo para clicar no elemento
   const previews = exists(join(dir, 'render')) ? readdirSync(abs(join(dir, 'render'))).filter((d) => exists(join(dir, 'render', d, 'index.html'))) : [];
   const summary = pieceSummary(slug, path) ?? emptyPiece(path);
-  return { ...summary, timeline: exists(tl) ? JSON.parse(read(tl)) : null, previews, review: getReview(slug, path), meta: getPieceMeta(slug, path) };
+  // projeto de vídeo com variantes (045 D): a peça ganha a aba Variantes; a pasta de uma variante sabe de quem ela é
+  const vm = path.match(/^(.+)\/variantes\/([\w-]+)$/);
+  const variante = vm && exists(join(contentsDir(slug), vm[1], 'projeto.json')) ? { projeto: vm[1], id: vm[2] } : undefined;
+  return { ...summary, timeline: exists(tl) ? JSON.parse(read(tl)) : null, previews, review: getReview(slug, path), meta: getPieceMeta(slug, path), projeto: exists(join(dir, 'projeto.json')), variante };
 }
 const emptyPiece = (path: string): Piece => ({ path, kind: 'roteiro', title: defaultTitle(path), hasTimeline: false, videos: [], images: [], texts: [], tags: [], favorite: false, archived: false, openComments: 0, totalComments: 0, mtime: 0 });
 /** caminho absoluto de um arquivo da peça (ou da própria pasta, file vazio), para abrir no Explorer/player */

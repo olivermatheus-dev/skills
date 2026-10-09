@@ -264,7 +264,8 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
             </div>
           )}
         </Card>
-        {tl && <VideoAdjust slug={slug} path={path} tl={tl} sel={draft?.kind === 'cena' || draft?.kind === 'evento' ? draft : null} onPreview={onPreview} />}
+        {/* variante (045): a timeline é gerada pelo projeto.json; ajuste direto nela se perderia na próxima geração */}
+        {tl && !piece.variante && <VideoAdjust slug={slug} path={path} tl={tl} sel={draft?.kind === 'cena' || draft?.kind === 'evento' ? draft : null} onPreview={onPreview} />}
         </div>
       </div>
 

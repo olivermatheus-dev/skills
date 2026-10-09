@@ -13,6 +13,7 @@ import * as K from '../../core/secrets';
 import * as MK from '../../core/mockups';
 import * as R from '../../core/runner';
 import * as VE from '../../core/videoedit';
+import * as VR from '../../core/variantes';
 import * as AV from '../../core/atividade';
 import * as AG from '../../core/agentes';
 import { resetEnvCache } from '../../tools/intel/env';
@@ -262,6 +263,12 @@ on('PUT', '/api/projects/:slug/piece/meta', (p, b, q) => S.savePieceMeta(p.slug,
 on('POST', '/api/projects/:slug/piece/adjust', (p, b, q) => VE.ajustar(p.slug, piece(q), b));
 on('GET', '/api/projects/:slug/piece/preview', (p, _, q) => VE.previaStatus(p.slug, piece(q)));
 on('POST', '/api/projects/:slug/piece/preview', (p, b, q) => VE.gerarPrevia(p.slug, piece(q), b ?? {}));
+// Variantes de um projeto de vídeo (045 D): matriz + índice + QC, gerar no fundo (variantes.mjs), parar, aval, rodadas
+on('GET', '/api/projects/:slug/piece/variantes', (p, _, q) => VR.lerVariantes(p.slug, piece(q)));
+on('POST', '/api/projects/:slug/piece/variantes/gerar', (p, b, q) => VR.gerar(p.slug, piece(q), b ?? {}));
+on('POST', '/api/projects/:slug/piece/variantes/parar', (p, _, q) => VR.parar(p.slug, piece(q)));
+on('POST', '/api/projects/:slug/piece/variantes/aval', (p, b, q) => VR.avaliar(p.slug, piece(q), b ?? {}));
+on('POST', '/api/projects/:slug/piece/variantes/rodada', (p, b, q) => VR.definirRodada(p.slug, piece(q), b ?? {}));
 on('POST', '/api/projects/:slug/piece/reveal', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'reveal'));
 on('POST', '/api/projects/:slug/piece/open', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'open'));
 
@@ -391,6 +398,20 @@ const route: Connect.NextHandleFunction = async (req, res, next) => {
     if (!file) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
     return pipeFile(res, file);
+  }
+  // /variantes-zip/<slug>?path=<peça>&ids=a,b[&formato=9x16] → .zip com os MP4 das variantes marcadas
+  const vz = url.pathname.match(/^\/variantes-zip\/([a-z0-9][a-z0-9-]*)$/);
+  if (vz) {
+    try {
+      const path = url.searchParams.get('path') ?? '', formato = url.searchParams.get('formato') || undefined;
+      const files = VR.arquivosZip(vz[1], path, (url.searchParams.get('ids') ?? '').split(',').filter(Boolean), formato);
+      if (!files.length) return send(res, 404, { error: 'nenhum vídeo gerado nas variantes marcadas' });
+      return await VR.enviarZip(res, `${path.split('/').pop()}-variantes${formato ? `-${formato}` : ''}.zip`, files);
+    } catch (e) {
+      if (e instanceof S.ValidationError) return send(res, 422, { error: 'validação', file: e.file, issues: e.issues });
+      if (!res.headersSent) return send(res, 500, { error: String((e as Error)?.message ?? e) });
+      return res.destroy();
+    }
   }
   // /piece-file/<slug>/<pasta da peça>/<arquivo> → MP4, slides e quadros da peça, com Range (o player precisa para pular no tempo)
   const pf = url.pathname.match(/^\/piece-file\/([^/]+)\/(.+?)\/(exports|render|png)\/(.+)$/);
