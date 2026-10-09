@@ -32,7 +32,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa (o `pacote` já junta 
 ## Entradas e saídas
 - **Recebe:** a tarefa pelo `pacote` (pedido, `context:`, comentários) e o `contents/<pasta>/roteiro.md` do roteirista (ou roteiro do Oliver colado no app: é a fonte, ajuste a forma, nunca o sentido); às vezes anotações em `revisao.json` e o formato `fmt-*` indicado.
 - **Entrega:** `contents/<pasta>/carrossel.html` + `png/slide-NN.png` (estrutura da skill `carousel`), com a lista dos PNG e o que foi cortado do texto no comentário do card.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`.
+- **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`.
 - **Depois de você:** revisor → Oliver em `review`.
 
 ## Ordem de trabalho

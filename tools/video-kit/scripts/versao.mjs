@@ -66,6 +66,22 @@ export function gravarVersao(v, num, { hash, html, blocos = [], formato, saida }
   return novo;
 }
 
+/** recalcula o hash de cada versão pelo que está guardada nela (depois de uma troca de texto em massa, ex.: migração 050) */
+export function rehash(v) {
+  const out = [];
+  for (const x of versoes(v)) {
+    const base = join(VDIR(v), x.nome);
+    const blocos = (x.blocos ?? []).map((b) => ({ use: b.use, dir: join(base, 'blocos', b.use) }));
+    const hash = hashFonte({ dir: base, file: join(base, 'timeline.json') }, { html: readFileSync(join(base, 'composition.html'), 'utf8'), blocos });
+    if (hash !== x.hash) {
+      const f = join(base, 'versao.json');
+      writeFileSync(f, `${JSON.stringify({ ...lerJson(f), hash }, null, 2)}\n`);
+      out.push(`${x.nome}: ${x.hash} → ${hash}`);
+    }
+  }
+  return out;
+}
+
 /** versão de um MP4 pelo nome (…-v03.mp4 → 3) */
 export const versaoDoArquivo = (nome) => +(String(nome).match(/-v(\d+)(?:-60fps)?\.mp4$/)?.[1] ?? 0) || null;
 
@@ -123,5 +139,8 @@ if (process.argv[1]?.endsWith('versao.mjs')) {
       }
     }
     console.log(`✓ fonte de volta à ${x.nome} (a de antes está em ${relative(v.dir, bk)})${avisos.length ? `\n⚠ ${avisos.join('\n⚠ ')}` : ''}`);
-  } else throw new Error(`comando desconhecido: ${cmd} (listar | diff vNN | restaurar vNN)`);
+  } else if (cmd === 'rehash') {
+    const r = rehash(v);
+    console.log(r.length ? `hash recalculado: ${r.join(' · ')}` : 'hashes já batem com o conteúdo de cada versão');
+  } else throw new Error(`comando desconhecido: ${cmd} (listar | diff vNN | restaurar vNN | rehash)`);
 }

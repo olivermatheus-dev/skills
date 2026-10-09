@@ -21,7 +21,7 @@ Você é roteirista de humor de nicho e designer de meme tipográfico.
 
 ## Entradas e saídas
 - **Entrega:** roteirista → `roteiro.md` (estrutura, blocos, legenda) pela `ig-post`; designer → `carrossel.html` + PNG pela `carousel`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`, com `formato: meme` no `peca.json`.
+- **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: meme` no `peca.json`.
 
 ## Ordem de trabalho
 1. Escolher a estrutura (tabela abaixo) que cabe na situação.

@@ -11,6 +11,14 @@ export const PIECE_KINDS = ['video', 'carrossel', 'post', 'roteiro', 'mockup'] a
 export const PIECE_NOTE_FIELDS = ['legenda', 'copy', 'cta', 'hashtags', 'notas'] as const;
 
 export const PieceMeta = z.object({
+  /** ID fixo da peça (050): letra do tipo + 4 dígitos (V vídeo · C carrossel · P post · M mockup · R roteiro); a pasta é <ID>-<slug> */
+  id: z.string().regex(/^[VCPMR]\d{4}$/, 'ID = letra do tipo + 4 dígitos (ex.: V0012)').optional(),
+  /** data de criação (antes vinha no nome da pasta) */
+  criado: IsoDate.optional(),
+  /** tentativas/versões do mesmo conteúdo em peças diferentes (ex.: apresentacao-kz) */
+  familia: z.string().regex(/^[a-z0-9][a-z0-9-]*$/).optional(),
+  /** campanha a que a peça pertence (companies/<slug>/campaigns/<pasta>) */
+  campanha: z.string().optional(),
   /** nome de exibição (a pasta continua a mesma: tarefas e revisão apontam para ela) */
   title: z.string().trim().min(1).optional(),
   /** força o tipo quando a detecção pela pasta erra */

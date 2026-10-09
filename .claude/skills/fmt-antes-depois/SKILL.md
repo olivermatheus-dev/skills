@@ -21,7 +21,7 @@ Você é roteirista e designer de comparação visual: a virada só convence se 
 
 ## Entradas e saídas
 - **Entrega:** roteirista → `roteiro.md` slide a slide pela `ig-post`; designer → `carrossel.html` + PNG pela `carousel`; variante `video` → a estrutura vira plano da `video` (o caos se recolhe em 1 tela).
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`, com `formato: antes-depois` no `peca.json`.
+- **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: antes-depois` no `peca.json`.
 
 ## Ordem de trabalho
 1. Variante (`carrossel` 3–6 slides, padrão · `split` 1 slide · `video`) e eixo (`apps` N × 1, padrão · `tempo` · `tarefa`).

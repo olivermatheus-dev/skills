@@ -29,7 +29,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa (o `pacote` já junta 
 
 ## Entradas e saídas
 - **Recebe:** a tarefa pelo `pacote` (pedido, nível, `context:`, comentários); o `roteiro.md` do roteirista, se existir; a receita `.claude/skills/fmt-<formato>/SKILL.md`; o `plano.md` do vídeo anterior da empresa com o feedback registrado (ponto de partida, não modelo); anotações do Oliver em `<pasta>/revisao.json`.
-- **Entrega:** na pasta do vídeo (`companies/<slug>/contents/AAAA-MM-DD-<nome>/`; anúncio: `campaigns/…`): `cenas.json` + `plano.md` + `storyboard-<fmt>.png` para o aval; depois `timeline.json`, blocos e os MP4 em `exports/…-vNN.mp4`, com a saída do `qc.mjs` e o que o Oliver precisa ouvir e ver no celular.
+- **Entrega:** na pasta do vídeo (`companies/<slug>/contents/<ID>-<nome>/`; anúncio: `campaigns/…`): `cenas.json` + `plano.md` + `storyboard-<fmt>.png` para o aval; depois `timeline.json`, blocos e os MP4 em `exports/…-vNN.mp4`, com a saída do `qc.mjs` e o que o Oliver precisa ouvir e ver no celular.
 - **Depois de você:** portão do plano → Oliver; trilha e sound design (médio/alto) → `sound-designer`; nível alto → `revisor` antes do Oliver.
 
 ## Ordem de trabalho

@@ -10,6 +10,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node
 import { join, resolve, relative, sep, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { novaPasta } from '../lib/pecas.mjs';
 import { root, lib, FORMATOS, aparelhos, capturasDoDoc, docNovo, salvarJson } from './cena-lib.mjs';
 const ROOT = root(), LIB = lib();
 
@@ -77,7 +78,7 @@ if (opt.novo) {
   const capAbs = resolve(ROOT, opt.captura), partes = rel(capAbs).split('/');
   if (partes[0] !== 'companies' || partes[2] !== 'capturas') fail('a captura precisa estar em companies/<slug>/capturas/');
   const slug = partes[1], ref = partes.slice(2).join('/');
-  pasta = resolve(ROOT, opt.saida ?? join('companies', slug, 'contents', `${new Date().toLocaleDateString('sv-SE')}-mockup-${basename(capAbs).replace(/^\d{4}-\d{2}-\d{2}-/, '')}`));
+  pasta = resolve(ROOT, opt.saida ?? join('companies', slug, 'contents', novaPasta(slug, 'mockup', basename(capAbs).replace(/^\d{4}-\d{2}-\d{2}-/, '')).pasta));
   if (existsSync(join(pasta, 'mockup.json'))) fail(`${rel(pasta)} já tem mockup.json`);
   salvarJson(join(pasta, 'mockup.json'), docNovo(slug, { captura: ref, formatos: (opt.formatos ?? '4:5').split(','), titulo: opt.titulo }));
 } else {

@@ -11,7 +11,7 @@ tools/video-kit/
 
 Pré-requisitos: Node 22 (`.nvmrc`, o fnm troca sozinho), `npm install`, ffmpeg no PATH, Python + `edge-tts` só para as vozes `edge-*`. Molde de vídeo novo: `library/templates/video/base/`.
 
-## Fluxo (pasta = `companies/<slug>/contents/AAAA-MM-DD-<nome>/`)
+## Fluxo (pasta = `companies/<slug>/contents/<ID>-<nome>/`)
 
 | etapa | comando | o que faz |
 |---|---|---|

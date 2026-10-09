@@ -29,7 +29,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa (o `pacote` já junta 
 ## Entradas e saídas
 - **Recebe:** a tarefa pelo `pacote` (pedido, `context:`, comentários); no vídeo, a pasta com `plano.md` (blocos e intensidade 0–4) e `timeline.json` (eventos, voz já encaixada), em geral pelo `PRECISA: agent:sound-designer` do `editor-de-video`.
 - **Entrega:** trilha avulsa → arquivo + versões + ficha em `music.json`; vídeo → 2–3 trilhas candidatas, `sfx` e `music` no `timeline.json`, mix medido e valores no `plano.md`; biblioteca → arquivos novos com ficha e `check` limpo. Sempre com LUFS, true peak e "ouvido final: Oliver".
-- **Salva em:** pasta do vídeo (`companies/<slug>/contents/AAAA-MM-DD-<nome>/`) ou `library/audio/` (arquivos fora do git, catálogos no git).
+- **Salva em:** pasta do vídeo (`companies/<slug>/contents/<ID>-<nome>/`) ou `library/audio/` (arquivos fora do git, catálogos no git).
 - **Depois de você:** `editor-de-video` faz `produce` e `qc.mjs`; o Oliver ouve e escolhe a trilha.
 
 ## Ordem de trabalho

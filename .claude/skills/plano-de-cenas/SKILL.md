@@ -35,7 +35,7 @@ Você é diretor de arte e roteirista visual de um estúdio premium de lançamen
 
 ## Entradas e saídas
 - **Recebe** (qualquer uma, normalizada em `vo[]` na fase A): `roteiro.md` do roteirista/`ig-post` ou colado · transcrição de áudio/vídeo já gravado (com tempos do Whisper ou não) · tema ou pedido solto · pedido sem locução (só trilha + texto). Mais a receita `.claude/skills/fmt-<formato>/SKILL.md`, se houver, e a lista de blocos de `node tools/video/plano.mjs blocos <pasta|slug>` (1 linha cada; nunca abra os `bloco.json` um a um).
-- **Entrega**, numa pasta **nova e só sua** (`companies/<slug>/contents/AAAA-MM-DD-<nome>/`):
+- **Entrega**, numa pasta **nova e só sua** (`companies/<slug>/contents/<ID>-<nome>/`):
   ```
   cenas.json            ← plano em formato de máquina (contrato: references/cenas-json.md); vira a timeline.json
   plano.md              ← o mesmo plano para o Oliver ler (molde: references/molde-plano.md)

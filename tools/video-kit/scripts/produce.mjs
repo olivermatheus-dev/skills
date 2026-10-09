@@ -13,13 +13,14 @@
 // liso em vez de 3 cópias), ~7–8× mais lento: para a versão final de vídeo com movimento rápido (tarefa 033).
 //
 // Uso: node tools/video-kit/scripts/produce.mjs <pasta> [--only=9x16] [--draft] [--build-only] [--no-blur] [--blur=nativo[:N]] [--fps=60] [--v=3] [--mute]
-//   → exports/<AAAA-MM-DD-nome>-<formato>-vNN.mp4  (rascunho: -rascunho.mp4, sobrescreve; `nome_export` na timeline troca o nome)
+//   → exports/<ID>-<formato>-vNN.mp4 + versoes/vNN/ (pasta sem ID: <pasta>-<formato>-vNN.mp4; rascunho: -rascunho.mp4, sobrescreve; `nome_export` na timeline troca o nome)
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { HUB, KIT, video, ff } from './lib.mjs';
 import { compor } from './compor.mjs';
 import { hashFonte, numeroVersao, gravarVersao } from './versao.mjs';
+import { idDaPasta } from '../../lib/pecas.mjs';
 
 const FORMATS = { '4x5': { W: 1080, H: 1350 }, '9x16': { W: 1080, H: 1920 }, '16x9': { W: 1920, H: 1080 }, '1x1': { W: 1080, H: 1080 } };
 const ALIAS = { story: '9x16', reels: '9x16', feed: '4x5' };
@@ -124,7 +125,8 @@ for (const format of targets) {
   if (buildOnly) { console.log(`${format}: montado em render/${format}/ (abra o index.html ou rode check.mjs)`); continue; }
 
   mkdirSync(exportsDir, { recursive: true });
-  const out = join(exportsDir, `${tl.nome_export || v.name}-${format}${draft ? '-rascunho' : `-v${version}`}${fps60 ? '-60fps' : ''}.mp4`);
+  // pasta com ID (050): "V0003-apresentacao-janela" exporta "V0003-9x16-v04.mp4" (o slug fica na pasta)
+  const out = join(exportsDir, `${tl.nome_export || idDaPasta(v.name) || v.name}-${format}${draft ? '-rascunho' : `-v${version}`}${fps60 ? '-60fps' : ''}.mp4`);
   // BT.709 completo (matriz, primárias e transferência), no stream e no contêiner: sem isso a cor da marca muda em alguns players
   const bt709 = ['-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv', '-x264-params', 'colorprim=bt709:transfer=bt709:colormatrix=bt709'];
   // o passe B mostra a cena meio quadro atrás; intercalado antes do A, dá uma amostra a cada 1/120 s, e o

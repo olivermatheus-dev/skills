@@ -1,4 +1,4 @@
-// Novo conteúdo: colar/enviar um roteiro pronto (.md/.txt/.docx) → contents/AAAA-MM-DD-<tema>/roteiro.md,
+// Novo conteúdo: colar/enviar um roteiro pronto (.md/.txt/.docx) → contents/<ID>-<tema>/roteiro.md,
 // ou escolher um formato da galeria (027) e escrever só o pedido → briefing.md, para a IA escrever o roteiro.
 // O formato fica na ficha (peca.json) e (opcional) vira a tarefa no quadro para a IA, já com a skill certa.
 import { useEffect, useState } from 'react';

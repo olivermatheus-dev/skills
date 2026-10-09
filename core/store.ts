@@ -14,6 +14,7 @@ import {
 } from '../schema';
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
+import * as PC from '../tools/lib/pecas.mjs';
 
 export const ROOT = process.env.HUB_ROOT ?? process.cwd();
 const abs = (p: string) => join(ROOT, p);
@@ -395,6 +396,8 @@ export async function brandInSync(slug: string) {
 export type PieceKind = PieceMeta['kind'] & string;
 export interface PieceCover { type: 'video' | 'image'; file: string }
 export interface Piece {
+  /** id: V0012 (050) · teste: peça em contents/_testes/ (fora da lista principal) · familia: tentativas do mesmo conteúdo */
+  id?: string; teste?: boolean; familia?: string;
   path: string; kind: PieceKind; title: string; date?: string; hasTimeline: boolean; videos: string[]; images: string[]; texts: string[];
   cover?: PieceCover; tags: string[]; favorite: boolean; archived: boolean; publication?: PieceMeta['publication'];
   status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number; mtime: number;
@@ -423,8 +426,8 @@ function pieceKind(dir: string, videos: string[], hasTimeline: boolean, images: 
   if (textsOf(dir).length || exists(join(dir, 'revisao.json')) || exists(join(dir, 'peca.json'))) return 'roteiro';
   return null;
 }
-/** nome padrão de uma peça sem ficha: pastas sem a data, "ab sessao · A opus" */
-const defaultTitle = (path: string) => path.split('/').map((s) => s.replace(/^\d{4}-\d{2}-\d{2}-?/, '').replace(/-/g, ' ').trim()).filter(Boolean).join(' · ') || path;
+/** nome padrão de uma peça sem ficha: pastas sem a data nem o ID, "ab sessao · A opus" */
+const defaultTitle = (path: string) => path.split('/').filter((s) => s !== PC.TESTES).map((s) => s.replace(/^\d{4}-\d{2}-\d{2}-?/, '').replace(PC.ID_RE, '').replace(/-/g, ' ').trim()).filter(Boolean).join(' · ') || path;
 function coverOf(kind: PieceKind, videos: string[], images: string[], principal?: string): PieceCover | undefined {
   if (principal && (videos.includes(principal.replace(/^exports\//, '')) || images.includes(principal.replace(/^png\//, ''))))
     return { type: principal.startsWith('exports/') ? 'video' : 'image', file: principal };
@@ -461,8 +464,10 @@ function pieceSummary(slug: string, rel: string): Piece | null {
   let r: Review = { comments: [] };
   try { r = getReview(slug, path); } catch { /* arquivo inválido: aparece no npm run validate */ }
   const mtime = Math.max(statSync(abs(dir)).mtimeMs, ...['exports', 'png', 'peca.json', 'revisao.json'].filter((f) => exists(join(dir, f))).map((f) => statSync(abs(join(dir, f))).mtimeMs));
+  const testePath = path.startsWith(`${PC.TESTES}/`);
   return {
-    path, kind, title: meta.title ?? defaultTitle(path), date: path.match(/^(\d{4}-\d{2}-\d{2})/)?.[1], hasTimeline, videos, images, texts: textsOf(dir),
+    id: meta.id ?? PC.idDaPasta(path.split('/')[0]) ?? undefined, ...(testePath && { teste: true }), ...(meta.familia && { familia: meta.familia }),
+    path, kind, title: meta.title ?? defaultTitle(path), date: meta.criado ?? path.replace(`${PC.TESTES}/`, '').match(/^(\d{4}-\d{2}-\d{2})/)?.[1], hasTimeline, videos, images, texts: textsOf(dir),
     cover: coverOf(kind, videos, images, meta.principal), tags: meta.tags, favorite: !!meta.favorite, archived: !!meta.archived, publication: meta.publication,
     status: r.status, approvals: r.approvals, openComments: r.comments.filter((c) => c.status === 'aberto').length, totalComments: r.comments.length, mtime,
   };
@@ -481,7 +486,8 @@ export function listPieces(slug: string): Piece[] {
     }
   };
   if (exists(contentsDir(slug))) walk('', 0);
-  return out.sort((a, b) => b.path.localeCompare(a.path));
+  // mais nova primeiro pela data de criação (o nome da pasta começa pelo ID, não pela data); empate: o ID/pasta maior
+  return out.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || b.path.localeCompare(a.path, 'en', { numeric: true }));
 }
 export function getPiece(slug: string, path: string) {
   const dir = piecePath(slug, path);
@@ -521,7 +527,7 @@ export function savePieceText(slug: string, path: string, file: string, text: st
 }
 
 /**
- * Novo conteúdo: a partir de um roteiro pronto (colado ou enviado) → contents/AAAA-MM-DD-<tema>/roteiro.md,
+ * Novo conteúdo: a partir de um roteiro pronto (colado ou enviado) → contents/<ID>-<tema>/roteiro.md,
  * ou só com um formato da galeria + o pedido ("quero um X sobre Y") → briefing.md, para a IA escrever o roteiro.
  * O formato escolhido fica na ficha (peca.json → formato) e, se pedido, vira a tarefa no quadro para a IA produzir.
  */
@@ -543,9 +549,8 @@ export async function createPiece(slug: string, input: { title: string; text?: s
   text = text.replace(/\r\n/g, '\n').trim();
   if (!text && !fmt) throw new ValidationError('roteiro.md', ['o roteiro está vazio (ou escolha um formato para a IA escrever)']);
   const hasScript = !!text;
-  const base = `${today()}-${slugify(title).split('-').slice(0, 6).join('-')}`;
-  let rel = base, n = 2;
-  while (exists(join(contentsDir(slug), rel))) rel = `${base}-${n++}`;
+  // pasta com ID (050): o tipo sai do formato (vídeo V, carrossel C, post P); sem formato é roteiro (R)
+  const { id, pasta: rel } = PC.novaPasta(slug, PC.tipoDoFormato(fmt?.id), title);
   if (hasScript) {
     if (!/^#\s/m.test(text.split('\n').slice(0, 3).join('\n'))) text = `# ${title}\n\n${text}`;
     write(join(contentsDir(slug), rel, 'roteiro.md'), `${text}\n`);
@@ -553,7 +558,7 @@ export async function createPiece(slug: string, input: { title: string; text?: s
     write(join(contentsDir(slug), rel, 'briefing.md'), [`# ${title}`, '', `**Formato:** ${fmt!.nome} (\`${fmt!.skill ?? `library/formatos/${fmt!.id}`}\`)`, '', '## Pedido', input.notes?.trim() || '(o nome acima é o pedido)', ''].join('\n'));
   }
   saveReview(slug, rel, { status: 'rascunho', comments: [] });
-  savePieceMeta(slug, rel, { title, ...(fmt && { formato: fmt.id }) });
+  savePieceMeta(slug, rel, { id, criado: today(), title, ...(fmt && { formato: fmt.id }) });
   let task: z.infer<typeof Task> | undefined;
   if (input.task) {
     const fmtLine = fmt

@@ -32,7 +32,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa. O `BRAND.md` da empre
 ## Entradas e saídas
 - **Recebe:** o print: arquivo solto (no chat, `_inbox/visual/`, `brand/screenshots/`) ou captura já registrada em `companies/<slug>/capturas/`. Texto de título/rótulo: do pedido, do `peca.json` (`notes`) ou do `context/COPY.md`. Às vezes a formatação pedida (aparelho, cor, formato, transparente).
 - **Entrega:** peça em camadas (`mockup.json` versão 2) + PNG 3× por formato, conferidos; a mensagem diz "abra em app → Mockups para ajustar".
-- **Salva em:** captura em `companies/<slug>/capturas/AAAA-MM-DD-<tela>/` (`original.png` + `captura.json`); peça em `companies/<slug>/contents/<data>-mockup-<tela>/` (`mockup.json`, `peca.json` tipo `mockup` com `principal`, `png/` em 3×).
+- **Salva em:** captura em `companies/<slug>/capturas/AAAA-MM-DD-<tela>/` (`original.png` + `captura.json`); peça em `companies/<slug>/contents/<ID>-<tela>/ (ex.: M0004-painel)` (`mockup.json`, `peca.json` tipo `mockup` com `principal`, `png/` em 3×).
 - **Depois:** o Oliver ajusta no editor do app (mesmo runtime: o que ele vê é o que sai); em tarefa do quadro, revisor antes.
 
 ## Ordem de trabalho
@@ -47,7 +47,7 @@ Custo baixo: ler o terminal e, no máximo, **1 `analise.png`**; você não abre 
 1. **Registrar o print** (se ainda não é captura): `node tools/mockup/captura.mjs <arquivo> --empresa <slug> --nome <tela> [--dpr N] [--ficticios]`. O script mede tamanho, aparelho e cor e analisa onde cortar.
 2. **Cortes:** leia o resumo do terminal. Confiança alta (fio, rolagem) já entra sozinha. Confiança **média** (barra do navegador/sistema, sobra vazia) → olhe **só** a `analise.png` (vermelho sai, verde fica) e decida: `--recorte auto`, ajustar `sugestoes.recorte` no `captura.json` ou ignorar. "Elemento cortado sem vão perto": dentro de aparelho é natural; em `recorte`/`sem-moldura` peça outro print ou corte manual.
 3. **Dados sensíveis (obrigatório):** tela com nome, e-mail ou telefone de pessoa real → marque `ocultar` no `captura.json` (px da imagem; borrado no render) ou peça um print de conta demo. `dadosFicticios: true` só com dados fictícios confirmados pelo Oliver; até lá a peça sai `nao-publicar`.
-4. **Criar a peça:** `node tools/mockup/cena.mjs --novo --captura companies/<slug>/capturas/<pasta> --formatos 4:5,9:16 [--titulo "Texto com *ênfase*"]` → `contents/<data>-mockup-<tela>/mockup.json` (versão 2).
+4. **Criar a peça:** `node tools/mockup/cena.mjs --novo --captura companies/<slug>/capturas/<pasta> --formatos 4:5,9:16 [--titulo "Texto com *ênfase*"]` → `contents/<ID>-<tela>/ (ex.: M0004-painel)mockup.json` (versão 2).
 5. **Ajustar e exportar:** edite o `mockup.json` (camadas aparelho/imagem/texto/forma; x/y = centro em fração do formato; w em u = menor lado; `formatos` da camada = ajuste fino por proporção; fundo = preset de `library/mockups/fundos.json` copiado inteiro, ou `tipo: 'transparente'` para LP) → `node tools/mockup/cena.mjs <pasta> [--formatos …] [--escala 3] [--webp]` (PNG 3× por formato; o terminal avisa texto fora da área segura).
 6. **QA:** abra cada PNG em 100% num recorte (texto, borda do aparelho, sombra, fundo) e trate os avisos do terminal: print esticado → reduza a ampliação ou peça captura em 2–3×; texto fora da área segura → encurte ou mova; desktop dentro do celular → outro aparelho. Defeito visível = não entrega.
 7. **Entregar:** confira `principal` no `peca.json` e diga "abra em app → Mockups para ajustar", com os caminhos dos PNG e o que não foi verificado.

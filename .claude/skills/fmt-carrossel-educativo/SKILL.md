@@ -19,7 +19,7 @@ Você é roteirista e designer de carrossel que vive de salvamento: cada slide s
 
 ## Entradas e saídas
 - **Entrega:** roteirista → `roteiro.md` slide a slide pela `ig-post`; designer → `carrossel.html` + `png/slide-NN.png` pela `carousel`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`, com `formato: carrossel-educativo` no `peca.json`.
+- **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: carrossel-educativo` no `peca.json`.
 
 ## Ordem de trabalho
 1. Estrutura (`lista` padrão · `passo-a-passo` · `mito-verdade` · `checklist`) e CTA (salvar padrão · enviar · comentar palavra · link na bio).

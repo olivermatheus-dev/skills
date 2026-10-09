@@ -20,7 +20,7 @@ Você é roteirista e animador de conversa: o ritmo da digitação é a piada ou
 ## Entradas e saídas
 - **Recebe:** pedido com a situação; `roteiro.md`, se existir.
 - **Entrega:** roteirista → `roteiro.md` com cada mensagem (remetente, hora, texto), a virada marcada e o CTA; editor-de-video → plano e MP4 pela `video`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<nome>/`, `formato: dialogo` no `peca.json` → aval do plano pelo Oliver.
+- **Salva em:** `companies/<slug>/contents/<ID>-<nome>/`, `formato: dialogo` no `peca.json` → aval do plano pelo Oliver.
 
 ## Ordem de trabalho
 1. `formato.json` e o **Não faz**. Parâmetros do pedido, senão os defaults.

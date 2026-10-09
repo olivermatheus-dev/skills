@@ -69,7 +69,8 @@ for (const f of files) {
   if (tl?.duration && Math.abs(d - tl.duration) > 2 / (fps || 30)) add('crit', name, `duração ${d.toFixed(2)} s ≠ timeline ${tl.duration} s`);
   // variante (045 B): <nome do projeto>__<eixos>-<formato>-rascunho|vNN.mp4 (o nome é o do anúncio)
   const variante = tl?.variante && name.startsWith(`${tl.nome_export}-`) && /-(4x5|9x16|16x9|1x1)-(rascunho|v\d{2})\.mp4$/.test(name);
-  if (!variante && !/^\d{4}-\d{2}-\d{2}-.+-(4x5|9x16|16x9|1x1)-v\d{2}\.mp4$/.test(name)) add('menor', name, 'nome fora do padrão <AAAA-MM-DD>-<nome>-<formato>-vNN.mp4 (nada de final.mp4)');
+  // 050: <ID>-<formato>-vNN.mp4 (V0003-9x16-v04.mp4); o padrão antigo <AAAA-MM-DD>-<nome>-… continua aceito nos testes
+  if (!variante && !/^([VCPMR]\d{4}|\d{4}-\d{2}-\d{2}-.+)-(4x5|9x16|16x9|1x1)-v\d{2}\.mp4$/.test(name)) add('menor', name, 'nome fora do padrão <ID>-<formato>-vNN.mp4 (ex.: V0003-9x16-v04.mp4; nada de final.mp4)');
 
   // 3. áudio: existe, especificação e loudness medida (o Claude não escuta; mede)
   if (!a) add('crit', name, 'sem áudio (regra: nunca fundo mudo)');

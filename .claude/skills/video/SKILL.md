@@ -37,8 +37,8 @@ Você é o diretor e o editor de um estúdio de motion graphics que faz lançame
 
 ## Entradas e saídas
 - **Recebe:** o pedido ou a tarefa (pelo `pacote`); o `roteiro.md` do roteirista, se existir; o `cenas.json` + `plano.md` aprovados (se já existem, não refaça: siga da etapa 2); a receita `.claude/skills/fmt-<formato>/SKILL.md`; o `plano.md` do vídeo anterior da empresa com o feedback registrado (ponto de partida, não modelo); anotações do Oliver em `<pasta>/revisao.json`.
-- **Entrega:** MP4 de cada formato em `exports/<AAAA-MM-DD>-<nome>-<formato>-vNN.mp4` + saída do `qc.mjs` + a lista do que o Oliver precisa conferir; `plano.md` atualizado (entregue, em aberto, feedback).
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`), na estrutura de **Pasta do vídeo**.
+- **Entrega:** MP4 de cada formato em `exports/<ID>-<formato>-vNN.mp4` + saída do `qc.mjs` + a lista do que o Oliver precisa conferir; `plano.md` atualizado (entregue, em aberto, feedback).
+- **Salva em:** `companies/<slug>/contents/<ID>-<nome>/` (anúncio: `campaigns/…`), na estrutura de **Pasta do vídeo**.
 - **Depois:** nível alto → agente `revisor` antes do Oliver; ajustes pedidos depois → **Ajustes depois da entrega** ou **Revisão por anotações**.
 
 ## Ordem de trabalho
@@ -67,7 +67,7 @@ Antes de tudo: pasta com `revisao.json` e anotações abertas, ou pedido "revisa
    - Alto: + passadas de `knowledge/video/qc-final.md` + delegar ao `revisor` → corrigir → **2ª rodada de polimento** (curvas, offsets, som).
 5. **Exportar e entregar.**
    - Render de cada formato com motion blur (kit: 2 amostras; alto: 4–8 amostras se houver movimento rápido). Export com BT.709 marcado (`tecnico.md`).
-   - Nome `<AAAA-MM-DD>-<nome>-<formato>-vNN.mp4` em `exports/`; nunca sobrescrever versão aprovada.
+   - Nome `<ID>-<formato>-vNN.mp4` (ex.: `V0003-9x16-v04.mp4`) em `exports/`; nunca sobrescrever versão aprovada.
    - **Sempre:** `node tools/video/qc.mjs <pasta> --sheet` (sem crítico) e **olhar a folha de contato do MP4 final**.
    - Entregar: caminhos dos MP4 + saída do `qc.mjs` + **o que o Oliver precisa conferir** (o Claude não escuta: ouvir com fone e no celular; ver pequeno e sem som; prévia na plataforma).
    - **Promover para a galeria:** algo reutilizável (fundo, gráfico, mapa, transição, bloco)? Extraia com parâmetros e tokens para `library/` (genérico) ou `video-templates/` (marca) e registre no catálogo.
@@ -85,6 +85,7 @@ Antes de tudo: pasta com `revisao.json` e anotações abertas, ou pedido "revisa
 - O plano foi aprovado (ou é nível simples com pedido claro) antes de qualquer cena?
 - As folhas de contato foram olhadas com a lista de **Conferência** dos Padrões do Oliver, e os quadros vistos estão no relatório?
 - Toda cor vem de token do `brand.css` e todo tempo vem de `T.*` ou dos marcadores?
+- `node tools/contrast.mjs --html <pasta>/render/<fmt>/index.html --tempos <instantes com texto>` sem ✗ (contraste medido no render, sobre imagem/card)?
 - `qc.mjs <pasta> --sheet` rodou sem crítico e a folha do MP4 final foi olhada?
 - O vídeo tem trilha (nunca mudo) e todo áudio tem licença registrada?
 - Toda funcionalidade, número ou afirmação tem fonte, e dado de demonstração é elenco fictício marcado como ilustrativo?
@@ -103,7 +104,7 @@ Antes de tudo: pasta com `revisao.json` e anotações abertas, ou pedido "revisa
 **Não leia além do nível.** Dúvida pontual → abra só o arquivo do tema.
 
 ## Pasta do vídeo
-`companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`):
+`companies/<slug>/contents/<ID>-<nome>/` (anúncio: `campaigns/…`):
 ```
 plano.md · cenas.json · storyboard-<fmt>.png · locucao.json · timeline.json · composition.html · data/*.json
 blocos/<tipo>/<id>/   ← blocos novos do projeto (nunca apague: a versão exportada depende deles)

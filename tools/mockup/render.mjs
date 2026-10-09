@@ -11,12 +11,13 @@
 //   re-render:      node tools/mockup/render.mjs <pasta-da-peça> [--so a2,a5] [--escala 3]   (lê o mockup.json)
 //   catálogo:       node tools/mockup/render.mjs --listar
 //   prévias:        node tools/mockup/render.mjs --previews --captura <pasta>   (preview.png de cada template)
-// Comuns: --saida <pasta da peça> (padrão companies/<slug>/contents/<hoje>-mockup-<tela>) · --webp · --substituir · --sem-folha
+// Comuns: --saida <pasta da peça> (padrão companies/<slug>/contents/<M0004>-<tela>, ID da peça, 050) · --webp · --substituir · --sem-folha
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, rmSync } from 'node:fs';
 import { join, resolve, dirname, relative, basename, sep } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
+import { novaPasta, idDaPasta } from '../lib/pecas.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LIB = join(ROOT, 'library', 'mockups');
@@ -305,7 +306,7 @@ if (pecaDir) {
   if (!opt.captura) fail('informe --captura <pasta> (ou a pasta de uma peça com mockup.json). Ajuda: cabeçalho deste arquivo.');
   const c = loadCaptura(opt.captura);
   slug = c.slug;
-  pasta = resolve(ROOT, opt.saida ?? join('companies', slug, 'contents', `${hoje()}-mockup-${c.nome.replace(/^\d{4}-\d{2}-\d{2}-/, '')}`));
+  pasta = resolve(ROOT, opt.saida ?? join('companies', slug, 'contents', novaPasta(slug, 'mockup', c.nome.replace(/^\d{4}-\d{2}-\d{2}-/, '')).pasta));
   if (existsSync(join(pasta, 'mockup.json')) && !opt.substituir) fail(`${rel(pasta)} já tem mockup.json: re-renderize com "node tools/mockup/render.mjs ${rel(pasta)}", ou use --substituir / outra --saida`);
   const base = { formato: opt.formato ?? '4:5', transparente: !!opt.transparente, textos: textosDasFlags() };
   const composicoes = opt.alternativas ? alternativas(c, Math.max(1, Math.min(9, Number(opt.alternativas))), base) : [composicaoDasFlags(c)];
@@ -337,6 +338,8 @@ const reais = [...capsUsadas.values()].filter((c) => !c.cap.dadosFicticios);
 const fichaF = join(pasta, 'peca.json');
 const ficha = existsSync(fichaF) ? readJson(fichaF) : { title: `Mockup · ${[...capsUsadas.values()][0]?.nome.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ') ?? 'tela'}`, tags: [], notes: {} };
 ficha.kind = 'mockup';
+// pasta com ID (050): a ficha guarda o ID e a data de criação
+if (!ficha.id && idDaPasta(basename(pasta))) { ficha.id = idDaPasta(basename(pasta)); ficha.criado ??= hoje(); }
 ficha.tags = [...new Set([...(ficha.tags || []), 'mockup', ...(reais.length ? ['nao-publicar'] : [])])];
 ficha.updatedAt = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 writeJson(fichaF, ficha);

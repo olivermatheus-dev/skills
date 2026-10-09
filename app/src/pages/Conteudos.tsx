@@ -45,7 +45,7 @@ function PieceList() {
   const [creating, setCreating] = useState(sp.has('novo'));
   const closeNew = () => { setCreating(false); if (sp.has('novo')) setF('novo', ''); };
   const [view, setView] = useState(loadView);
-  const f = { q: sp.get('q') ?? '', kind: sp.get('tipo') ?? '', status: sp.get('status') ?? '', tag: sp.get('tag') ?? '', fav: sp.has('fav'), arq: sp.has('arquivadas'), sort: (sp.get('ordem') ?? 'recentes') as Sort };
+  const f = { q: sp.get('q') ?? '', kind: sp.get('tipo') ?? '', status: sp.get('status') ?? '', tag: sp.get('tag') ?? '', fav: sp.has('fav'), arq: sp.has('arquivadas'), testes: sp.has('testes'), sort: (sp.get('ordem') ?? 'recentes') as Sort };
   const setF = (k: string, v: string | boolean) => {
     const n = new URLSearchParams(sp);
     if (v === '' || v === false) n.delete(k); else n.set(k, v === true ? '1' : v);
@@ -56,17 +56,21 @@ function PieceList() {
   const allTags = useMemo(() => [...new Set(pieces.flatMap((p) => p.tags))].sort(), [pieces]);
   const shown = useMemo(() => {
     const q = f.q.trim().toLowerCase();
-    const out = pieces.filter((p) => (f.arq ? p.archived : !p.archived)
+    // "V12", "v0012", "12" acha a peça pelo ID (050); a letra, se vier, restringe o tipo
+    const porId = q.match(/^([vcpmr])?\s*0*(\d+)$/);
+    const out = pieces.filter((p) => (f.arq ? p.archived : !p.archived) && !!p.teste === f.testes
       && (!f.kind || p.kind === f.kind) && (!f.status || (p.status ?? 'sem') === f.status) && (!f.tag || p.tags.includes(f.tag)) && (!f.fav || p.favorite)
-      && (!q || `${p.title} ${p.path} ${p.tags.join(' ')}`.toLowerCase().includes(q)));
+      && (!q || (porId ? !!p.id && +p.id.slice(1) === +porId[2] && (!porId[1] || p.id[0].toLowerCase() === porId[1])
+        : `${p.id ?? ''} ${p.title} ${p.path} ${p.familia ?? ''} ${p.tags.join(' ')}`.toLowerCase().includes(q))));
     const by: Record<Sort, (a: PieceInfo, b: PieceInfo) => number> = {
       recentes: (a, b) => b.mtime - a.mtime,
       data: (a, b) => (b.date ?? '').localeCompare(a.date ?? '') || b.path.localeCompare(a.path),
       nome: (a, b) => a.title.localeCompare(b.title, 'pt-BR'),
     };
     return out.sort((a, b) => Number(b.favorite) - Number(a.favorite) || by[f.sort](a, b));
-  }, [pieces, f.q, f.kind, f.status, f.tag, f.fav, f.arq, f.sort]);
-  const counts = useMemo(() => Object.fromEntries(Object.keys(KIND_LABEL).map((k) => [k, pieces.filter((p) => !p.archived && p.kind === k).length])), [pieces]);
+  }, [pieces, f.q, f.kind, f.status, f.tag, f.fav, f.arq, f.testes, f.sort]);
+  const counts = useMemo(() => Object.fromEntries(Object.keys(KIND_LABEL).map((k) => [k, pieces.filter((p) => !p.archived && !p.teste && p.kind === k).length])), [pieces]);
+  const testesCount = pieces.filter((p) => p.teste).length;
   const archivedCount = pieces.filter((p) => p.archived).length;
   const openPiece = (p: PieceInfo) => setSp({ peca: p.path });
 
@@ -82,14 +86,14 @@ function PieceList() {
 
       {/* tipos como abas rápidas */}
       <div className="flex gap-1 flex-wrap mb-3">
-        {[['', 'Todos', pieces.filter((p) => !p.archived).length] as const, ...Object.entries(KIND_LABEL).map(([k, v]) => [k, v.label, counts[k]] as const)].map(([k, label, n]) => (
+        {[['', 'Todos', pieces.filter((p) => !p.archived && !p.teste).length] as const, ...Object.entries(KIND_LABEL).map(([k, v]) => [k, v.label, counts[k]] as const)].map(([k, label, n]) => (
           <button key={k} onClick={() => setF('tipo', k)} className={cx('px-3 py-1 rounded-full text-sm border', f.kind === k ? 'bg-primary text-primary-foreground border-primary' : 'bg-card border-border text-muted-foreground hover:text-foreground')}>
             {label} <span className="opacity-70">{n}</span>
           </button>
         ))}
       </div>
       <div className="flex gap-2 flex-wrap items-center mb-5">
-        <Input className="w-64" placeholder="Buscar por nome, pasta ou tag…" value={f.q} onChange={(e) => setF('q', e.target.value)} />
+        <Input className="w-64" placeholder="Buscar por nome, ID (V12), família ou tag…" value={f.q} onChange={(e) => setF('q', e.target.value)} />
         <Select aria-label="Status" value={f.status} onChange={(e) => setF('status', e.target.value)}>
           <option value="">todo status</option>{Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}<option value="sem">sem status</option>
         </Select>
@@ -101,6 +105,7 @@ function PieceList() {
         </Select>
         <label className="text-sm flex items-center gap-1.5"><input type="checkbox" checked={f.fav} onChange={(e) => setF('fav', e.target.checked)} /> só favoritos</label>
         <label className="text-sm flex items-center gap-1.5"><input type="checkbox" checked={f.arq} onChange={(e) => setF('arquivadas', e.target.checked)} /> arquivadas ({archivedCount})</label>
+        {testesCount > 0 && <label className="text-sm flex items-center gap-1.5" title="contents/_testes: testes do hub, fora da lista principal"><input type="checkbox" checked={f.testes} onChange={(e) => setF('testes', e.target.checked)} /> testes ({testesCount})</label>}
         <div className="ml-auto flex border border-border rounded-md overflow-hidden text-sm">
           {(['grade', 'lista'] as const).map((v) => <button key={v} onClick={() => changeView(v)} className={cx('px-3 py-1', view === v ? 'bg-muted font-medium' : 'text-muted-foreground')}>{v === 'grade' ? 'Grade' : 'Lista'}</button>)}
         </div>
@@ -122,9 +127,10 @@ function PieceList() {
                 {p.openComments > 0 && <span className="absolute bottom-2 right-2 text-[11px] font-medium bg-red-600 text-white rounded-full px-2 py-0.5">{p.openComments} anotação(ões)</span>}
               </div>
               <div className="p-3">
-                <div className="font-medium text-sm leading-snug line-clamp-2 first-letter:uppercase">{p.title}</div>
+                <div className="font-medium text-sm leading-snug line-clamp-2">{p.id && <span className="font-mono text-xs text-muted-foreground mr-1.5">{p.id}</span>}<span className="first-letter:uppercase inline-block">{p.title}</span></div>
                 <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1.5 flex-wrap">
                   {p.date && <span>{fmtDate(p.date)}</span>}
+                  {p.familia && <span>· {p.familia}</span>}
                   {p.videos.length > 1 && <span>· {p.videos.length} versões</span>}
                   {p.images.length > 1 && <span>· {p.images.length} slides</span>}
                 </div>
@@ -148,8 +154,8 @@ function PieceList() {
               <Thumb slug={slug} piece={p} className="w-12 h-14 rounded" />
               <Badge color={KIND_LABEL[p.kind].color} className="w-20 justify-center">{KIND_LABEL[p.kind].label}</Badge>
               <div className="min-w-0 flex-1">
-                <div className="font-medium truncate first-letter:uppercase">{p.title}</div>
-                <div className="text-xs text-muted-foreground truncate">{p.date ? fmtDate(p.date) : ''} · <span className="font-mono">{p.path}</span>{p.videos.length ? ` · ${p.videos.length} vídeo(s)` : ''}{p.images.length ? ` · ${p.images.length} imagem(ns)` : ''}</div>
+                <div className="font-medium truncate">{p.id && <span className="font-mono text-xs text-muted-foreground mr-2">{p.id}</span>}<span className="first-letter:uppercase inline-block">{p.title}</span></div>
+                <div className="text-xs text-muted-foreground truncate">{p.date ? fmtDate(p.date) : ''}{p.familia ? ` · ${p.familia}` : ''} · <span className="font-mono">{p.path}</span>{p.videos.length ? ` · ${p.videos.length} vídeo(s)` : ''}{p.images.length ? ` · ${p.images.length} imagem(ns)` : ''}</div>
               </div>
               {p.tags.slice(0, 3).map((t) => <TagChip key={t} id={t} def={byId[t]} small />)}
               {p.approvals?.roteiro && <Badge color="#16a34a">roteiro aprovado</Badge>}
@@ -217,6 +223,7 @@ function PieceDetail({ path }: { path: string }) {
           ) : (
             <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2 first-letter:uppercase">
               {piece && <Star on={piece.favorite} onClick={() => saveMeta.mutate({ path, patch: { favorite: !piece.favorite } })} />}
+              {piece?.id && <span className="font-mono text-sm font-normal text-muted-foreground">{piece.id}</span>}
               <span className="truncate">{piece?.title ?? path}</span>
               {piece && <button className="text-xs font-normal text-muted-foreground hover:text-foreground" onClick={() => setRenaming(piece.title)}>renomear</button>}
             </h1>

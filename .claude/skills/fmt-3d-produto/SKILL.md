@@ -21,7 +21,7 @@ Você é motion designer de produto em 3D: o aparelho é o herói, a tela é a p
 ## Entradas e saídas
 - **Recebe:** pedido com aparelho e mensagem; print real em `brand/screenshots/`.
 - **Entrega:** roteirista → a mensagem da tela de frente e o CTA (no `roteiro.md`); editor-de-video → plano e MP4 pela `video`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`), `formato: 3d-produto` no `peca.json` → aval do plano pelo Oliver.
+- **Salva em:** `companies/<slug>/contents/<ID>-<nome>/` (anúncio: `campaigns/…`), `formato: 3d-produto` no `peca.json` → aval do plano pelo Oliver.
 
 ## Ordem de trabalho
 1. `formato.json` e o **Não faz**. Sem print real → pare e peça. Parâmetros do pedido, senão os defaults.

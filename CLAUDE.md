@@ -20,7 +20,8 @@ companies/<slug>/
   context/          BUSINESS · PRODUTO · AUDIENCE · VOICE · COMPETITORS · CONTENT_STRATEGY · COPY
   brand/            BRAND.md (regras de uso) · brand.json (tokens, editável no app) → brand.css (gerado) · logo/ icons/ vectors/ fonts/ photos/ screenshots/
   video-templates/  templates de vídeo da empresa
-  contents/         AAAA-MM-DD-<tema>/  (peca.json = ficha: nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/*.mp4, png/, plano.md, mockup.json…)
+  contents/         <ID>-<tema>/ (V0003 vídeo · C carrossel · P post · M mockup · R roteiro; ID novo: node tools/pecas.mjs proximo <slug> <tipo>) · _testes/ (testes do hub)
+                    (peca.json = ficha: id, criado, família, nome, legenda/copy/notas, principal · revisao.json · roteiro.md, exports/<ID>-<fmt>-vNN.mp4, versoes/vNN/ (fonte de cada export), png/, plano.md, mockup.json…)
   campaigns/        AAAA-MM-DD-<campanha>/  (ads.md, lp.md, carta.md, plano.md) + LOG_ANGULOS.md
   board/            Kanban: 1 arquivo por tarefa (T-NNNN-<slug>.md)
   intel/            coleta-semanal.json + semanas/AAAA-Wss.md (relatório semanal dos concorrentes: redes + anúncios; npm run intel:semanal) · referencia.json (a própria empresa no Comparar; atualizar quando o contexto mudar)

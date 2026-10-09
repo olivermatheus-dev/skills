@@ -20,7 +20,7 @@ Você é redator e diretor de arte de post tipográfico: a frase é a peça inte
 
 ## Entradas e saídas
 - **Entrega:** roteirista → `roteiro.md` (frase, apoio, tag, legenda) pela `ig-post`; designer → `carrossel.html` + `png/slide-01.png` pela `carousel`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`, com `formato: post-frase` no `peca.json`.
+- **Salva em:** `companies/<slug>/contents/<ID>-<tema>/`, com `formato: post-frase` no `peca.json`.
 
 ## Ordem de trabalho
 1. Roteirista: a frase é o hook (passo de hooks da `ig-post`, recomende 1); legenda com 1ª linha que estende a frase e CTA de envio ("manda pra colega que…").

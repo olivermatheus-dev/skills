@@ -7,6 +7,7 @@ import { execFile } from 'node:child_process';
 import { ROOT, ValidationError } from './store';
 import { MockupScene, Slug } from '../schema';
 import * as L from '../tools/mockup/cena-lib.mjs';
+import * as PC from '../tools/lib/pecas.mjs';
 
 const readJson = (f: string) => JSON.parse(readFileSync(f, 'utf8'));
 const contents = (slug: string) => join(ROOT, 'companies', slug, 'contents');
@@ -82,12 +83,11 @@ export function listarMockups(slug: string) {
 }
 export function criarMockup(slug: string, b: { nome?: string; captura?: string; titulo?: string; formatos?: string[] }) {
   okSlug(slug);
-  const base = `${hoje()}-mockup-${slugify(b.nome || b.captura?.split('/').pop()?.replace(/^\d{4}-\d{2}-\d{2}-/, '') || 'editor')}`;
-  let path = base, i = 2;
-  while (existsSync(join(contents(slug), path))) path = `${base}-${i++}`;
+  // pasta com ID (050): M0004-<tela>; a data vai para a ficha
+  const { id, pasta: path } = PC.novaPasta(slug, 'mockup', b.nome || b.captura?.split('/').pop()?.replace(/^\d{4}-\d{2}-\d{2}-/, '') || 'editor');
   const doc = L.docNovo(slug, { captura: b.captura, formatos: b.formatos?.length ? b.formatos : ['4:5', '9:16'], titulo: b.titulo });
   L.salvarJson(join(contents(slug), path, 'mockup.json'), MockupScene.parse(doc));
-  L.salvarJson(join(contents(slug), path, 'peca.json'), { title: b.nome?.trim() || `Mockup · ${path.replace(/^\d{4}-\d{2}-\d{2}-mockup-/, '').replace(/-/g, ' ')}`, kind: 'mockup', tags: ['mockup'], notes: {} });
+  L.salvarJson(join(contents(slug), path, 'peca.json'), { id, criado: hoje(), title: b.nome?.trim() || `Mockup · ${path.replace(PC.ID_RE, '').replace(/-/g, ' ').trim()}`, kind: 'mockup', tags: ['mockup'], notes: {} });
   return { path };
 }
 export function lerMockup(slug: string, path: string) {

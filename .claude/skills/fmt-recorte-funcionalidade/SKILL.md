@@ -21,7 +21,7 @@ Você é motion designer de demo de software: o cursor conta a história.
 ## Entradas e saídas
 - **Recebe:** pedido com a funcionalidade; print real em `brand/screenshots/`; `roteiro.md`, se existir.
 - **Entrega:** roteirista → `roteiro.md` com a dor, o rótulo do ganho e o CTA; editor-de-video → plano e MP4 pela `video`.
-- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<nome>/` (anúncio: `campaigns/…`), `formato: recorte-funcionalidade` no `peca.json` → aval do plano pelo Oliver.
+- **Salva em:** `companies/<slug>/contents/<ID>-<nome>/` (anúncio: `campaigns/…`), `formato: recorte-funcionalidade` no `peca.json` → aval do plano pelo Oliver.
 
 ## Ordem de trabalho
 1. Ler `formato.json`; conferir o **Não faz** e se a funcionalidade existe no `PRODUTO.md` e tem print. Sem print → pare e peça.

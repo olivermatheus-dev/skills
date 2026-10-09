@@ -36,11 +36,11 @@ Com `context:` na tarefa, ele vem primeiro; isto completa. O `BRAND.md` da empre
 - `context/VOICE.md#Vocabulário` · quando: escrever tag, CTA ou rodapé que o roteiro não trouxe — palavras da marca
 
 ## Entradas e saídas
-- **Recebe:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md` (texto slide a slide da skill `ig-post`) **ou** texto colado no chat; roteiro do Oliver colado no app é a fonte (ajuste a forma, nunca o sentido). Às vezes uma receita `fmt-*` (com `references/layout.html`) e anotações em `revisao.json`. Fotos, logo e prints em `companies/<slug>/brand/` (`photos/`, `logo/`, `screenshots/`).
+- **Recebe:** `companies/<slug>/contents/<ID>-<tema>/roteiro.md` (texto slide a slide da skill `ig-post`) **ou** texto colado no chat; roteiro do Oliver colado no app é a fonte (ajuste a forma, nunca o sentido). Às vezes uma receita `fmt-*` (com `references/layout.html`) e anotações em `revisao.json`. Fotos, logo e prints em `companies/<slug>/brand/` (`photos/`, `logo/`, `screenshots/`).
 - **Entrega:** um `carrossel.html` com todos os slides empilhados (abre no navegador para revisão) + um PNG por slide; lista dos arquivos e um resumo de uma linha por slide.
 - **Salva em:**
   ```
-  companies/<slug>/contents/AAAA-MM-DD-<tema>/
+  companies/<slug>/contents/<ID>-<tema>/
   ├── roteiro.md
   ├── carrossel.html
   └── png/slide-01.png, slide-02.png, ...
