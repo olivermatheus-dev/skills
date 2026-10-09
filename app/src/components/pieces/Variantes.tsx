@@ -13,6 +13,7 @@ import { useFillHeight } from '../fill';
 import { desktop } from './library';
 import VariantesFluxo from './VariantesFluxo';
 import VariantesInsumos from './VariantesInsumos';
+import VariantesAnuncio from './VariantesAnuncio';
 
 const qkVar = (slug: string, path: string) => ['variantes', slug, path] as const;
 const MODO_KEY = 'hub:variantes:modo';
@@ -117,6 +118,7 @@ export default function Variantes({ slug, path }: { slug: string; path: string }
     <div className="space-y-3">
       {data.insumosErro && <Card className="text-sm text-destructive">Insumos indisponíveis: {data.insumosErro}</Card>}
       {data.insumos && <VariantesInsumos slug={slug} path={path} ins={data.insumos} onView={set} onRecarregar={() => void qc.invalidateQueries({ queryKey: qkVar(slug, path) })} />}
+      <VariantesAnuncio slug={slug} path={path} data={data} marcadas={[...sel]} onView={set} />
       {/* barra: modo, marcar por rodada, formato, ações */}
       <div className="flex flex-wrap items-center gap-2">
         <div className="inline-flex rounded-lg border border-border p-0.5 bg-card">
@@ -158,7 +160,8 @@ export default function Variantes({ slug, path }: { slug: string; path: string }
           <span><b>{r.id}</b> espera: {p.texto.replace(/[<>]/g, '')}.</span>
           <span className="text-muted-foreground">Escolher {p.eixo}:</span>
           {data.eixos.find((e) => e.nome === p.eixo)?.opcoes.map((o) => (
-            <Button key={o.id} variant="soft" onClick={() => void vencedora(r.id, p.eixo, o.id)}><Star className="size-3.5" />{o.id}</Button>
+            <Button key={o.id} variant={data.anuncio?.resultado?.eixos.find((x) => x.eixo === p.eixo)?.vencedora === o.id ? 'primary' : 'soft'} onClick={() => void vencedora(r.id, p.eixo, o.id)}
+              title={data.anuncio?.resultado?.eixos.find((x) => x.eixo === p.eixo)?.vencedora === o.id ? 'venceu no resultado importado' : undefined}><Star className="size-3.5" />{o.id}</Button>
           ))}
         </Card>
       )))}
@@ -301,6 +304,7 @@ function Detalhe({ slug, path, data, v, formato, eixos, onAval }: { slug: string
         {v.gerada && <div className="text-xs text-muted-foreground mt-0.5">{v.duracao?.toFixed(1)} s · corpo começa em {v.abertura_s?.toFixed(1)} s{v.exports.length ? ` · ${v.exports.map((e) => e.formato.replace('x', ':')).join(', ')}` : ''}</div>}
       </div>
       <div className="flex flex-wrap gap-1.5"><QcSelo v={v} /><AvalSelo v={v} /></div>
+      {data.anuncio?.resultado?.variantes[v.id] && <Metricas m={data.anuncio.resultado.variantes[v.id]} data={data.anuncio.resultado.data} />}
       {v.erro && <p className="text-xs text-destructive">{v.erro}</p>}
       {v.auto.length > 0 && <p className="text-xs text-muted-foreground">O script corrigiu sozinho: {v.auto.join('; ')}.</p>}
       {pend.length > 0 && (
@@ -322,5 +326,16 @@ function Detalhe({ slug, path, data, v, formato, eixos, onAval }: { slug: string
         {v.gerada && <Button variant="ghost" onClick={() => desktop(slug, vpath, 'reveal', ex?.file ?? '')}><FolderOpen className="size-4" />Pasta</Button>}
       </div>
     </Card>
+  );
+}
+
+/** resultado do anúncio da variante (último CSV importado) */
+function Metricas({ m, data }: { m: NonNullable<NonNullable<VariantesView['anuncio']>['resultado']>['variantes'][string]; data: string }) {
+  const p = (x: number | null) => (x == null ? '—' : `${(x * 100).toFixed(1).replace('.', ',')}%`);
+  return (
+    <div className="text-xs rounded-lg bg-muted/60 px-2.5 py-1.5 tabular-nums">
+      <span className="text-muted-foreground">Anúncio ({data.split('-').reverse().join('/')}): </span>
+      gancho {p(m.hook)} · retenção {p(m.retencao)} · CTR {p(m.ctr)} · {m.impressoes?.toLocaleString('pt-BR') ?? '—'} impr.{m.cpr != null ? ` · R$ ${m.cpr.toFixed(2).replace('.', ',')}/resultado` : ''}
+    </div>
   );
 }

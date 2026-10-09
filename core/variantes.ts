@@ -10,6 +10,7 @@ import { ROOT, ValidationError, getReview } from './store';
 import { Slug } from '../schema';
 import * as AT from '../tools/lib/atividade.mjs';
 import * as INS from '../tools/lib/insumos.mjs';
+import * as PAC from '../tools/lib/pacote.mjs';
 
 const okPath = (p: string) => !!p && !/(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(p);
 function pasta(slug: string, path: string) {
@@ -60,6 +61,8 @@ export interface VariantesView {
   insumos?: INS.InsumosView;
   /** o projeto.json não deu para ler os insumos (JSON quebrado…): a tela mostra o motivo no lugar da seção */
   insumosErro?: string;
+  /** anúncio (045 F): link/campanha do projeto.json, pacotes já montados e o último resultado importado */
+  anuncio: { link?: string; campanha?: string; pacotes: string[]; resultado: ReturnType<typeof PAC.ultimoResultado> };
   job: Job | null;
 }
 
@@ -133,6 +136,11 @@ export function lerVariantes(slug: string, path: string): VariantesView {
     base: { duracao: base.duration, exports: existsSync(bexp) ? readdirSync(bexp).filter((f) => f.endsWith('.mp4')).sort().map((f) => `exports/${f}`) : [] },
     variantes,
     ...insumosDe(dir, slug),
+    anuncio: {
+      link: proj.anuncio?.link, campanha: proj.anuncio?.campanha,
+      pacotes: existsSync(join(dir, 'pacote')) ? readdirSync(join(dir, 'pacote')).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().reverse() : [],
+      resultado: PAC.ultimoResultado(dir),
+    },
     job: jobs.get(chave(slug, path)) ?? null,
   };
 }
@@ -189,6 +197,46 @@ export function salvarInsumo(slug: string, path: string, b: { acao?: unknown; ti
     throw e;
   }
   return lerVariantes(slug, path);
+}
+
+/** pacote do anúncio (045 F): marcadas (ou as aprovadas) → <pasta>/pacote/<data>/; o link digitado fica em projeto.json > anuncio.link */
+export async function pacote(slug: string, path: string, b: { ids?: unknown; link?: unknown; campanha?: unknown; formatos?: unknown }) {
+  const dir = pasta(slug, path);
+  const ids = Array.isArray(b?.ids) ? b.ids.map(String).filter(okId) : [];
+  const link = typeof b?.link === 'string' ? b.link.trim() : undefined;
+  const campanha = typeof b?.campanha === 'string' && b.campanha.trim() ? b.campanha.trim() : undefined;
+  if (link && !/^https?:\/\/\S+$/.test(link)) throw new ValidationError(dir, ['link inválido (comece com https://)']);
+  const formatos = Array.isArray(b?.formatos) ? b.formatos.map(String).filter((x) => /^\d+x\d+$/.test(x)) : undefined;
+  if (link !== undefined || campanha) {
+    const f = join(dir, 'projeto.json');
+    const proj = JSON.parse(readFileSync(f, 'utf8'));
+    const antes = JSON.stringify(proj.anuncio ?? {});
+    proj.anuncio = { ...proj.anuncio, ...(link !== undefined ? { link } : {}), ...(campanha ? { campanha } : {}) };
+    if (!proj.anuncio.link) delete proj.anuncio.link;
+    if (JSON.stringify(proj.anuncio) !== antes) { const { writeFileSync } = await import('node:fs'); writeFileSync(f, INS.jsonCompacto(proj) + '\n'); }
+  }
+  try {
+    const p = PAC.montarPacote(dir, { ids, formatos, empresa: slug });
+    return { pacote: { ...p, saida: `${path}/pacote/${p.data}` }, view: lerVariantes(slug, path) };
+  } catch (e) {
+    if (e instanceof PAC.PacoteErro) throw new ValidationError(dir, [e.message]);
+    throw e;
+  }
+}
+
+/** resultados (045 F): CSV do Gerenciador (texto) → variantes/resultados/<data> + LOG_ANGULOS.md; seco = só mostra */
+export function resultados(slug: string, path: string, b: { csv?: unknown; seco?: unknown; nome?: unknown }) {
+  const dir = pasta(slug, path);
+  const csv = typeof b?.csv === 'string' ? b.csv : '';
+  if (!csv.trim()) throw new ValidationError(dir, ['CSV vazio']);
+  if (csv.length > 5_000_000) throw new ValidationError(dir, ['CSV grande demais (> 5 MB)']);
+  try {
+    const r = PAC.importarResultados(dir, csv, { seco: !!b?.seco, empresa: slug, arquivo: typeof b?.nome === 'string' ? basename(b.nome) : undefined });
+    return { resultado: { ...r, arquivos: r.arquivos.map((x) => x.replace(ROOT, '').replace(/\\/g, '/').replace(/^\//, '')) }, view: lerVariantes(slug, path) };
+  } catch (e) {
+    if (e instanceof PAC.PacoteErro) throw new ValidationError(dir, [e.message]);
+    throw e;
+  }
 }
 
 // ---------- gerar (um job por projeto, em memória; o dock acompanha pelo registro de atividade) ----------

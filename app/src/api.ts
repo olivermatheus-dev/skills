@@ -111,6 +111,9 @@ export type InsumoTipo = 'abertura' | 'voz' | 'headline' | 'cta' | 'copy';
 /** a view das variantes; `insumos` pode faltar num servidor antigo */
 export type VariantesVista = VariantesView & { insumos?: InsumosView; insumosErro?: string };
 export type { VariantesView, VarianteView, Aval as VarianteAval, Job as VariantesJob } from '../../core/variantes';
+export type { Pacote as PacoteAnuncio, Resultados as ResultadosAnuncio, EixoResultado } from '../../tools/lib/pacote.mjs';
+type PacoteResp = { pacote: import('../../tools/lib/pacote.mjs').Pacote; view: VariantesVista };
+type ResultadosResp = { resultado: import('../../tools/lib/pacote.mjs').Resultados; view: VariantesVista };
 export interface SecretState { key: string; label: string; hint: string; test?: string; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 // Editor de mockups (tarefa 030)
 import type { MockupScene } from '../../schema/mockup';
@@ -365,7 +368,10 @@ export const api = {
     req<VariantesVista>('POST', `${pj(slug)}/piece/variantes/insumo?path=${encodeURIComponent(path)}`, b),
   pedirInsumos: (slug: string, path: string, b: { tipo: 'abertura' | 'headline' | 'cta' | 'copy'; quantidade?: number; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
     req<PedidoIaStart>('POST', `${pj(slug)}/piece/variantes/pedir?path=${encodeURIComponent(path)}`, b),
-  variantesZipUrl: (slug: string, path: string, ids: string[], formato?: string) => `/variantes-zip/${slug}?path=${encodeURIComponent(path)}&ids=${ids.map(encodeURIComponent).join(',')}${formato ? `&formato=${formato}` : ''}`,
+  // pacote do anúncio e resultados (045 F)
+  pacoteAnuncio: (slug: string, path: string, b: { ids: string[]; link?: string; formatos?: string[] }) => req<PacoteResp>('POST', `${pj(slug)}/piece/variantes/pacote?path=${encodeURIComponent(path)}`, b),
+  resultadosAnuncio: (slug: string, path: string, b: { csv: string; nome?: string; seco?: boolean }) => req<ResultadosResp>('POST', `${pj(slug)}/piece/variantes/resultados?path=${encodeURIComponent(path)}`, b),
+  variantesZipUrl:(slug: string, path: string, ids: string[], formato?: string) => `/variantes-zip/${slug}?path=${encodeURIComponent(path)}&ids=${ids.map(encodeURIComponent).join(',')}${formato ? `&formato=${formato}` : ''}`,
   pieceFileUrl: (slug: string, path: string, file: string) => `/piece-file/${slug}/${path.split('/').map(encodeURIComponent).join('/')}/${file.split('/').map(encodeURIComponent).join('/')}`,
 
   formats: () => req<FormatInfo[]>('GET', '/api/formats'),

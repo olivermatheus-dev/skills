@@ -8,8 +8,8 @@
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
 | 0 | 050 | **Fase C:** organização dos vídeos com ID (`V0001-<slug>`, data na ficha, status/família, exports `V0001-v03-9x16.mp4`, testes em `_testes/`), migração por script com `--dry` mostrado ao Oliver antes de mover; desenho no `TASK.md` | pedido do Oliver em 2026-10-09 (aprovou ID + data na ficha) |
-| 1 | 045 | **Fase F:** pacote do anúncio (planilha para subir em massa na Meta, nomes, copys/CTAs dos insumos, UTMs) + import de resultados → `LOG_ANGULOS.md` | fase E feita em 2026-10-09 |
-| 2 | 047 | calibrar rubrica e `plano.mjs check` com o julgamento do Oliver sobre "As peças da rotina" v01 | fase B feita (v01 renderizada) |
+| 1 | 047 | calibrar rubrica e `plano.mjs check` com o julgamento do Oliver sobre "As peças da rotina" v01 | fase B feita (v01 renderizada) |
+| 2 | 045 | **Fase G:** galeria de blocos (`library/INDEX.md` gerado, busca, folha de previews, Promover no app) | fase F feita em 2026-10-09 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |

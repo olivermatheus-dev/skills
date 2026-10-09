@@ -284,6 +284,8 @@ on('POST', '/api/projects/:slug/piece/variantes/aval', (p, b, q) => VR.avaliar(p
 on('POST', '/api/projects/:slug/piece/variantes/rodada', (p, b, q) => VR.definirRodada(p.slug, piece(q), b ?? {}));
 // Insumos do projeto (045 E): add/editar/rm de abertura, voz, headline, cta, copy; Pedir à IA grava por insumos.mjs
 on('POST', '/api/projects/:slug/piece/variantes/insumo', (p, b, q) => VR.salvarInsumo(p.slug, piece(q), b ?? {}));
+on('POST', '/api/projects/:slug/piece/variantes/pacote', (p, b, q) => VR.pacote(p.slug, piece(q), b ?? {}));
+on('POST', '/api/projects/:slug/piece/variantes/resultados', (p, b, q) => VR.resultados(p.slug, piece(q), b ?? {}));
 on('POST', '/api/projects/:slug/piece/variantes/pedir', async (p, b, q) => (await PD()).pedirInsumos(p.slug, piece(q), b ?? {}));
 on('POST', '/api/projects/:slug/piece/reveal', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'reveal'));
 on('POST', '/api/projects/:slug/piece/open', (p, _, q) => openOnDesktop(S.pieceAbsPath(p.slug, piece(q), q.get('file') ?? ''), 'open'));
