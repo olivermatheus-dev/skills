@@ -1,0 +1,33 @@
+.cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1170px; }
+/* logo e assinatura: as mesmas do revelacao/logo-pilulas, com 300 px de largura */
+.logo { position: absolute; left: 50%; top: 75px; width: 300px; margin-left: -150px; clip-path: inset(0 100% 0 0); transform-origin: 50% 0%; }
+.logo svg { width: 100%; height: auto; display: block; }
+.logo path { fill: var(--logo); }
+.glow4 { position: absolute; left: 50%; top: 10px; width: 900px; height: 520px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); opacity: 0; }
+.ring { left: 50%; top: 0; width: 240px; height: 240px; margin-left: -120px; margin-top: -120px; }
+.tag { top: 340px; display: flex; align-items: center; gap: 14px; font-size: 46px; font-weight: 600; opacity: 0; }
+.tag .tile-ic { width: 70px; height: 70px; font-size: 36px; }
+.h4 { top: 140px; font-size: 62px; font-weight: 700; }
+.h4 .ln { display: block; }
+.h4 .l2 { display: flex; justify-content: center; gap: 0.26em; }
+.h4 .l2 .w { flex: none; }
+.pal { position: relative; display: block; flex: none; height: 1.12em; }
+.pw { position: absolute; left: 0; top: 0; white-space: nowrap; opacity: 0; color: var(--accent); font-weight: 700; }
+
+/* card Atalhos: geometria idêntica à seção .short do produto/painel-inicio (432×445, padding 26, tiles 168, ícone 52, fonte 21) */
+.grade { position: absolute; left: 0; top: 0; width: 432px; height: 445px; transform-origin: 0 0; }
+.cardbg { position: absolute; left: 0; top: 0; width: 432px; height: 445px; background: var(--surface); border: 1px solid var(--border); border-radius: 26px; box-shadow: var(--shadow-md); opacity: 0; }
+.card { position: absolute; left: 0; top: 0; width: 432px; height: 445px; padding: 26px; border: 1px solid transparent; }
+.cab { margin: 0 0 16px; font-size: 27px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; opacity: 0; }
+.cab .icon { color: var(--primary); font-size: 30px; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tile { position: relative; border: 1px solid transparent; border-radius: 18px; padding: 16px; height: 168px; display: flex; flex-direction: column; justify-content: space-between; font-size: 21px; font-weight: 600; opacity: 0; }
+.tl { position: absolute; inset: -1px; border: 1px solid var(--border); border-radius: 18px; opacity: 0; pointer-events: none; }
+.ic { position: relative; isolation: isolate; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; flex: none; }
+.sh { position: absolute; inset: 0; border-radius: 14px; box-shadow: var(--shadow-md); z-index: -1; }
+.lb { opacity: 0; }
+
+/* Mensagens: peça que sai para o canto (vira o toast na s5) */
+.msg { position: absolute; left: 0; top: 0; width: 96px; height: 96px; border-radius: 22px; display: grid; place-items: center; font-size: 48px; box-shadow: var(--shadow-md); opacity: 0; }
+.badge { position: absolute; top: -10px; right: -10px; background: var(--primary); color: var(--on-primary); font-size: 20px; font-weight: 700; line-height: 1.2; border-radius: 999px; padding: 4px 10px; }
+.rl { left: 50%; top: 193px; width: 400px; height: 300px; margin-left: -200px; margin-top: -150px; border-radius: 80px; }

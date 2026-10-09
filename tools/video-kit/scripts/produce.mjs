@@ -54,11 +54,22 @@ const exportsDir = join(v.dir, 'exports');
 const existing = existsSync(exportsDir) ? readdirSync(exportsDir).map((f) => +(f.match(/-v(\d+)\.mp4$/)?.[1] ?? 0)) : [];
 const version = String(flag('v') ?? Math.max(0, ...existing) + 1).padStart(2, '0');
 
+// param de cena "@data/arquivo.html" (texto grande, ex.: a página do bloco cta/navegador) é lido da pasta do vídeo (ou da origem, numa variante)
+function comArquivos(sc) {
+  if (!sc.params || !Object.values(sc.params).some((x) => typeof x === 'string' && /^@[\w./-]+$/.test(x))) return sc;
+  const ler = (rel) => {
+    const p = [v.dir, tl.origem && join(v.dir, tl.origem)].filter(Boolean).map((b) => join(b, rel)).find(existsSync);
+    if (!p) throw new Error(`cena ${sc.id}: param aponta para ${rel}, que não existe na pasta do vídeo`);
+    return readFileSync(p, 'utf8');
+  };
+  return { ...sc, params: Object.fromEntries(Object.entries(sc.params).map(([k, x]) => [k, typeof x === 'string' && /^@[\w./-]+$/.test(x) ? ler(x.slice(1)) : x])) };
+}
+
 function build(format, offset) {
   const { W, H } = FORMATS[format];
   const html = template
     .replaceAll('__W__', W).replaceAll('__H__', H).replaceAll('__FORMAT__', format).replaceAll('__DURATION__', duration)
-    .replaceAll('__TIMELINE__', JSON.stringify({ ...tl, duration, format, W, H }))
+    .replaceAll('__TIMELINE__', JSON.stringify({ ...tl, duration, format, W, H, scenes: tl.scenes.map(comArquivos) }))
     .replaceAll('__TIME_OFFSET__', String(offset))
     .replace(/__([SDE]):([\w-]+)__/g, (m, k, id) => {
       if (k === 'E') { const e = (tl.events || []).find((x) => x.id === id); if (!e) throw new Error(`marcador sem evento: ${m}`); return e.t; }

@@ -17,3 +17,12 @@
 .av { width: 58px; height: 58px; border-radius: 50%; background: var(--ui-avatar); color: var(--tile-coral-ink); display: grid; place-items: center; font-size: 21px; font-weight: 700; flex: none; }
 .lines i { display: block; height: 14px; border-radius: 7px; background: rgba(43, 43, 43, 0.12); margin: 16px 0; }
 .hand { font-family: var(--font-accent); font-style: italic; font-size: 34px; color: var(--ink); margin-top: 4px; }
+.cont { display: inline-block; margin: -6px 0 16px; padding: 9px 16px; border-radius: 12px; background: var(--accent-soft); color: var(--ink); font-size: 26px; font-weight: 600; }
+.msg { position: absolute; left: 868px; top: 168px; width: 100px; height: 100px; opacity: 0; }
+.msg .mic { width: 100px; height: 100px; border-radius: 26px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); box-sizing: border-box; box-shadow: var(--shadow-md); }
+.msg .mi { width: 60px; height: 60px; border-radius: 16px; display: grid; place-items: center; font-size: 32px; }
+.msg .mbd { position: absolute; right: -14px; top: -16px; min-width: 42px; height: 42px; padding: 0 11px; box-sizing: border-box; border-radius: 21px;
+  background: var(--primary); color: var(--ink); display: grid; place-items: center; font-size: 24px; font-weight: 700; box-shadow: var(--shadow-sm); }
+.lig { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.lig-linha { fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-linecap: butt; stroke-dasharray: 12 9; }
+.lig-ponta { fill: var(--ink); opacity: 0; }

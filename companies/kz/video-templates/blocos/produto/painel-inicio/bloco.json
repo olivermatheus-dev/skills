@@ -3,14 +3,81 @@
   "tipo": "produto",
   "titulo": "Painel inicial da kz recriado nos tokens do app: entra, destaca a próxima sessão, cursor clica na lista, confirmação",
   "camada": "palco",
-  "slots": ["saudacao", "nome", "h1", "h2", "h3"],
-  "params": {},
-  "cues": ["entra", "destaque", "lista", "feito", "sai"],
+  "slots": [
+    "saudacao",
+    "nome",
+    "h1",
+    "h2",
+    "h3"
+  ],
+  "params": {
+    "de_atalhos": {
+      "padrao": false,
+      "descricao": "true = a cena começa com a câmera dentro do card Atalhos, ampliada (zoom_atalhos), e recua até o painel inteiro no cue entra; o resto do painel aparece na periferia. O card Atalhos não muda de geometria (é a referência da s4 e da s7). false = o painel entra inteiro (original)"
+    },
+    "zoom_atalhos": {
+      "padrao": 2.2,
+      "descricao": "ampliação do 1º quadro com de_atalhos=true (1 = painel inteiro)"
+    },
+    "desloc_atalhos": {
+      "padrao": 35,
+      "descricao": "px para baixo do centro do palco onde o card Atalhos fica no 1º quadro (deixa a headline livre no topo)"
+    },
+    "recuo_atalhos": {
+      "padrao": 1.5,
+      "descricao": "s que a câmera leva para recuar até o painel inteiro (mola GENTLE)"
+    },
+    "toast": {
+      "padrao": null,
+      "descricao": "texto do aviso do cue feito (ícone circle-check). null = \"Sessão agendada · lembrete enviado\" aparecendo sozinho (original)"
+    },
+    "toast_de_mensagens": {
+      "padrao": true,
+      "descricao": "só vale com toast preenchido: o aviso nasce de uma peça Mensagens (coral, ícone message-circle) que desce do canto do painel e pousa na ponta do aviso; false = o aviso aparece sozinho como no original"
+    },
+    "elenco": {
+      "padrao": null,
+      "descricao": "objeto { dia, sessoes: [[hora, nome]…], proxima: \"14:00 · Helena R. · em 15 min\" } (o P.elenco do cenas.json; pode ser colado inteiro): troca \"3 sessões hoje\", o card da próxima sessão (nome, iniciais, hora e contagem) e a lista do dia (as anteriores à próxima ganham o visto; o cursor clica na próxima). null ou texto solto = Marina 15:00, Lucas, Helena, Clara (original)"
+    },
+    "espera_atalhos": {
+      "padrao": 0.12,
+      "descricao": "s que o 1º quadro (dentro do card Atalhos) fica parado antes da câmera começar a recuar"
+    },
+    "inteira": {
+      "padrao": false,
+      "descricao": "headlines entram inteiras em cascata (Padrões do Oliver) em vez de palavra a palavra com a voz; padrão false = v03"
+    }
+  },
+  "cues": [
+    "entra",
+    "destaque",
+    "lista",
+    "feito",
+    "sai"
+  ],
   "min_s": 5,
   "elastico": true,
-  "formatos": ["4x5", "9x16"],
-  "sfx_sugeridos": { "entra": "whoosh suave", "lista": "clique", "feito": "ding de confirmação" },
-  "tokens": ["--bg", "--surface", "--border", "--primary", "--primary-hover", "--accent", "--accent-soft", "--ui-*", "--success", "--shadow-lg"],
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "sfx_sugeridos": {
+    "entra": "whoosh suave",
+    "lista": "clique",
+    "feito": "ding de confirmação"
+  },
+  "tokens": [
+    "--bg",
+    "--surface",
+    "--border",
+    "--primary",
+    "--primary-hover",
+    "--accent",
+    "--accent-soft",
+    "--ui-*",
+    "--success",
+    "--shadow-lg"
+  ],
   "dados": "ilustrativos (nomes e horários de exemplo); trocar por print real quando houver",
   "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s5), extraído na 045 A",
   "licenca": "própria"

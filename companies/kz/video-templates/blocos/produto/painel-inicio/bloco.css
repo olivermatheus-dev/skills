@@ -35,3 +35,6 @@
   border-radius: 18px; box-shadow: var(--shadow-lg); font-size: 31px; font-weight: 600; white-space: nowrap; opacity: 0; }
 .done .icon { color: var(--success); font-size: 34px; }
 .illus { position: absolute; right: 30px; bottom: 14px; font-size: 18px; color: var(--ui-muted); }
+.sess .ok { margin-left: auto; color: var(--success); font-size: 26px; display: flex; }
+.mpc { position: absolute; z-index: 4; opacity: 0; display: grid; place-items: center; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); box-sizing: border-box; box-shadow: var(--shadow-md); }
+.mpc .mpi { width: 1.4em; height: 1.4em; border-radius: 0.34em; display: grid; place-items: center; }

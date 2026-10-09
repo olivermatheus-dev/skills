@@ -21735,5 +21735,87 @@
     },
     "license": "EditorPro-comprado (uso comercial)",
     "attribution": ""
+  },
+  {
+    "id": "impact-soft-01",
+    "file": "sfx/impact/Impact_Soft_01.wav",
+    "duration_s": 1.4,
+    "channels": 2,
+    "family": "Impact_Soft",
+    "category": "impact",
+    "subcategory": null,
+    "function": [
+      "impact"
+    ],
+    "intensity": "light",
+    "character": [
+      "soft",
+      "organic"
+    ],
+    "movement": "slow",
+    "weight": "medium",
+    "scale": "medium",
+    "peak_s": 0.009,
+    "tonal": false,
+    "key": "",
+    "style": "natural",
+    "texture": "sub arredondado + sopro curto, sem cauda",
+    "uses": "soft impact da revelação (kz s4, encaixe); nunca como bass drop",
+    "source": {
+      "type": "synthesized",
+      "origin": "hub",
+      "author": "sound-designer (síntese em código)"
+    },
+    "license": "própria (sintetizada no hub)",
+    "attribution": "",
+    "tags": [
+      "soft",
+      "warm",
+      "revelacao"
+    ],
+    "label": "Impact Soft",
+    "length": "short",
+    "auto": false
+  },
+  {
+    "id": "impact-soft-02",
+    "file": "sfx/impact/Impact_Soft_02.wav",
+    "duration_s": 1.4,
+    "channels": 2,
+    "family": "Impact_Soft",
+    "category": "impact",
+    "subcategory": null,
+    "function": [
+      "impact"
+    ],
+    "intensity": "light",
+    "character": [
+      "soft",
+      "organic"
+    ],
+    "movement": "slow",
+    "weight": "medium",
+    "scale": "medium",
+    "peak_s": 0.009,
+    "tonal": false,
+    "key": "",
+    "style": "natural",
+    "texture": "sub arredondado + sopro curto, sem cauda",
+    "uses": "soft impact da revelação (kz s4, encaixe); nunca como bass drop",
+    "source": {
+      "type": "synthesized",
+      "origin": "hub",
+      "author": "sound-designer (síntese em código)"
+    },
+    "license": "própria (sintetizada no hub)",
+    "attribution": "",
+    "tags": [
+      "soft",
+      "warm",
+      "revelacao"
+    ],
+    "label": "Impact Soft",
+    "length": "short",
+    "auto": false
   }
 ]

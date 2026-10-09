@@ -3,7 +3,7 @@
 > Gerado por `node tools/audio/catalog.mjs index`. Não editar à mão. Uma linha por família: `família ×variantes · duração · intensidade · caráter · licença`.
 > Detalhes de um item: `node tools/audio/catalog.mjs search sfx --family <Família>`.
 
-## SFX (560 arquivos)
+## SFX (562 arquivos)
 
 ### ambience (26)
 - Ambiente_Abafado · 10.1s · medium · soft/organic · EditorPro-comprado (uso comercial)
@@ -159,11 +159,12 @@
 - HUD_Rise_Relogio · 6.1s · medium · futuristic/digital · EditorPro-comprado (uso comercial)
 - HUD_Scanner_Curto · 14.1s · medium · futuristic/digital · EditorPro-comprado (uso comercial)
 
-### impact (24)
+### impact (26)
 - Cinematic_Hit · 8.1s · medium · cinematic · EditorPro-comprado (uso comercial)
 - Cinematic_Impacto ×8 · 5.2–8.9s · medium · cinematic · EditorPro-comprado (uso comercial)
 - Explosao · 6.2s · extreme · cinematic · EditorPro-comprado (uso comercial)
 - Hit_Orquestra_Epico · 7.1s · extreme · cinematic · EditorPro-comprado (uso comercial)
+- Impact_Soft ×2 · 1.4s · light · soft/organic · própria (sintetizada no hub)
 - Impacto_Curto ×2 · 6.7–8.0s · medium · cinematic · EditorPro-comprado (uso comercial)
 - Impacto_Distorcido ×3 · 4.1–6.3s · strong · aggressive/cinematic · EditorPro-comprado (uso comercial)
 - Impacto_Epico · 8.7s · extreme · cinematic · EditorPro-comprado (uso comercial)

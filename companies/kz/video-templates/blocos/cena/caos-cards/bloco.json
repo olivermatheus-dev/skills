@@ -3,16 +3,96 @@
   "tipo": "cena",
   "titulo": "Caos da rotina: 3 cards (agenda, pacientes, anotações) entram tortos na palavra, ganham alerta e são arremessados",
   "camada": "palco",
-  "slots": ["linha1", "linha2", "linha3"],
+  "slots": [
+    "linha1",
+    "linha2",
+    "linha3"
+  ],
   "params": {
-    "cards": { "padrao": ["Agenda", "Pacientes", "Anotações"], "descricao": "título de cada card" }
+    "cards": {
+      "padrao": [
+        "Agenda",
+        "Pacientes",
+        "Anotações"
+      ],
+      "descricao": "título de cada card"
+    },
+    "conteudo": {
+      "padrao": null,
+      "descricao": "uma linha de texto por card, na ordem Agenda, Pacientes, Anotações: as duas primeiras viram etiqueta sob o título; a terceira é o bilhete à mão do caderno (troca o \"ligar pro Lucas…?\"). null = cards como antes"
+    },
+    "ligacao": {
+      "padrao": false,
+      "descricao": "true = linha tracejada em --ink ligando as 3 etiquetas (triângulo, 3 trechos) que tenta se fechar enquanto os cards entram e se rompe trecho a trecho no cue espalha (1 ruptura por trecho, 0,14 s entre elas; SFX: 1 click seco em cada). As pontas acompanham os cards. false = sem linha"
+    },
+    "ligacao_arcos": {
+      "padrao": [
+        -60,
+        -60,
+        -150
+      ],
+      "descricao": "curvatura em px (com sinal) de cada trecho da ligação: Agenda→Pacientes, Pacientes→Anotações, Anotações→Agenda (o último contorna pela esquerda, fora dos cards)"
+    },
+    "alerta": {
+      "padrao": "danger",
+      "descricao": "cor do triângulo de alerta: danger = --danger (original); ink = --ink (coral + vermelho juntos é proibido no BRAND.md)"
+    },
+    "mensagens": {
+      "padrao": 0,
+      "descricao": "número no selo da peça Mensagens (peça branca com ícone message-circle coral, pequena no canto superior direito, presente desde o 1º quadro: o 4º elemento da cena). 0 = sem a peça"
+    },
+    "ligacao_lados": {
+      "padrao": [
+        [
+          "dir",
+          "esq"
+        ],
+        [
+          "esq",
+          "dir"
+        ],
+        [
+          "esq",
+          "esq"
+        ]
+      ],
+      "descricao": "de que borda de cada etiqueta sai e chega cada trecho da ligação: auto (voltada para o outro) | esq | dir | cima | baixo"
+    },
+    "inteira": {
+      "padrao": false,
+      "descricao": "headlines entram inteiras em cascata (Padrões do Oliver) em vez de palavra a palavra com a voz; padrão false = v03"
+    }
   },
-  "cues": ["card1", "card2", "card3", "espalha", "sai"],
+  "cues": [
+    "card1",
+    "card2",
+    "card3",
+    "espalha",
+    "sai"
+  ],
   "min_s": 4,
   "elastico": true,
-  "formatos": ["4x5", "9x16"],
-  "sfx_sugeridos": { "card1": "notify", "card2": "notify", "card3": "notify", "espalha": "impacto leve", "sai": "whoosh" },
-  "tokens": ["--surface", "--border", "--shadow-lg", "--pastel-*", "--danger", "--ui-muted", "--ui-avatar", "--ink"],
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "sfx_sugeridos": {
+    "card1": "notify",
+    "card2": "notify",
+    "card3": "notify",
+    "espalha": "impacto leve",
+    "sai": "whoosh"
+  },
+  "tokens": [
+    "--surface",
+    "--border",
+    "--shadow-lg",
+    "--pastel-*",
+    "--danger",
+    "--ui-muted",
+    "--ui-avatar",
+    "--ink"
+  ],
   "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s2), extraído na 045 A",
   "licenca": "própria"
 }

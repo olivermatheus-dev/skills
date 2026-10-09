@@ -6,7 +6,14 @@
   "slots": ["pergunta", "complemento"],
   "params": {
     "posicoes": { "padrao": [[-450, 30, -8], [170, 0, 6], [-400, 250, 5], [190, 270, -6]], "descricao": "x, y e giro de cada fragmento" },
-    "sobra": { "padrao": 0.8, "descricao": "s depois do fim da cena em que os fragmentos somem (eles caem por cima do começo da próxima)" }
+    "sobra": { "padrao": 0.8, "descricao": "s depois do fim da cena em que os fragmentos somem (eles caem por cima do começo da próxima)" },
+    "fragmentos": { "padrao": null, "descricao": "lista de [ícone lucide, rótulo, classe de tom (t-teal|t-lilac|t-amber|t-coral)] no lugar dos 4 fixos do HTML (Agenda, Mensagens, Planilha, Caderno). Ícones aceitos: calendar, contact, notebook-pen, message-circle, file-text, users, folder, wallet, sheet, clock (outro: acrescentar em ICONES no bloco.js). null = os 4 fixos" },
+    "apagadas": { "padrao": false, "descricao": "true = no 1º quadro as peças já estão em arco, pequenas, a 30% e atrás da pergunta; em espalha acendem e se espalham. false = entram do nada em espalha (original)" },
+    "detalhes": { "padrao": null, "descricao": "1 detalhe por peça, na ordem dos fragmentos (\"\" = nenhum): número puro vira selo no canto em --primary com texto --ink (ex.: \"3\" em Mensagens); texto vira linha sob o rótulo (ex.: \"Qui 14h\" na Agenda). null = sem detalhes" },
+    "arco": { "padrao": [[-330, -20, -10], [-150, -80, -4], [60, -80, 4], [240, -20, 10]], "descricao": "x, y e giro de cada peça no 1º quadro quando apagadas=true (mesma origem de posicoes)" },
+    "opacidade_apagada": { "padrao": 0.3, "descricao": "opacidade das peças antes de acenderem (só com apagadas=true)" },
+    "escala_apagada": { "padrao": 0.6, "descricao": "escala das peças antes de acenderem (só com apagadas=true)" },
+    "inteira": { "padrao": false, "descricao": "true = a pergunta e o complemento entram inteiros em cascata rápida (Padrões do Oliver), em vez de palavra a palavra seguindo a voz (original)" }
   },
   "cues": ["entra", "troca", "espalha"],
   "min_s": 3.5,

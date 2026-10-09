@@ -11,559 +11,559 @@
       "text": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
       "start": 0.35,
       "file": "audio/vo/f1.wav",
-      "length": 4.406,
+      "length": 4.542,
       "words": [
         {
           "w": "Você",
           "s": 0.39,
-          "e": 0.64
+          "e": 0.796
         },
         {
           "w": "é",
-          "s": 0.64,
-          "e": 0.678
+          "s": 0.796,
+          "e": 1.186
         },
         {
           "w": "terapeuta",
-          "s": 0.678,
-          "e": 1.54
+          "s": 1.186,
+          "e": 1.846
         },
         {
           "w": "e",
-          "s": 1.54,
-          "e": 1.652
+          "s": 1.846,
+          "e": 2.046
         },
         {
           "w": "ainda",
-          "s": 1.652,
-          "e": 1.953
+          "s": 2.046,
+          "e": 2.266
         },
         {
           "w": "organiza",
-          "s": 1.953,
-          "e": 2.452
+          "s": 2.266,
+          "e": 2.746
         },
         {
           "w": "sua",
-          "s": 2.452,
-          "e": 2.603
+          "s": 2.746,
+          "e": 2.886
         },
         {
           "w": "rotina",
-          "s": 2.603,
-          "e": 3.077
+          "s": 2.886,
+          "e": 3.266
         },
         {
           "w": "em",
-          "s": 3.077,
-          "e": 3.19
+          "s": 3.266,
+          "e": 3.566
         },
         {
           "w": "vários",
-          "s": 3.19,
-          "e": 3.565
+          "s": 3.566,
+          "e": 3.846
         },
         {
           "w": "lugares",
-          "s": 3.565,
-          "e": 3.965
+          "s": 3.846,
+          "e": 4.286
         },
         {
-          "w": "diferentes",
-          "s": 3.965,
-          "e": 4.756
+          "w": "diferentes?",
+          "s": 4.286,
+          "e": 4.892
         }
       ],
-      "voice": "edge-thalita",
-      "end": 4.756
+      "voice": "el-carla",
+      "end": 4.892
     },
     {
       "id": "f2",
       "text": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
-      "start": 5.106,
+      "start": 5.242,
       "file": "audio/vo/f2.wav",
-      "length": 4.943,
+      "length": 6.15,
       "words": [
         {
           "w": "Agenda",
-          "s": 5.146,
-          "e": 5.633
+          "s": 6.062,
+          "e": 6.782
         },
         {
           "w": "de",
-          "s": 5.633,
-          "e": 5.709
+          "s": 6.782,
+          "e": 6.942
         },
         {
           "w": "um",
-          "s": 5.709,
-          "e": 5.821
+          "s": 6.942,
+          "e": 7.202
         },
         {
-          "w": "lado",
-          "s": 5.821,
-          "e": 6.346
+          "w": "lado,",
+          "s": 7.202,
+          "e": 8.022
         },
         {
           "w": "informações",
-          "s": 6.346,
-          "e": 7.109
+          "s": 8.022,
+          "e": 8.302
         },
         {
           "w": "dos",
-          "s": 7.109,
-          "e": 7.259
+          "s": 8.302,
+          "e": 8.562
         },
         {
           "w": "pacientes",
-          "s": 7.259,
-          "e": 7.859
+          "s": 8.562,
+          "e": 9.042
         },
         {
           "w": "de",
-          "s": 7.859,
-          "e": 8.034
+          "s": 9.042,
+          "e": 9.402
         },
         {
-          "w": "outro",
-          "s": 8.034,
-          "e": 8.558
+          "w": "outro,",
+          "s": 9.402,
+          "e": 9.826
         },
         {
           "w": "anotações",
-          "s": 8.558,
-          "e": 9.221
+          "s": 9.826,
+          "e": 10.286
         },
         {
-          "w": "espalhadas",
-          "s": 9.221,
-          "e": 10.049
+          "w": "espalhadas…",
+          "s": 10.286,
+          "e": 11.392
         }
       ],
-      "voice": "edge-thalita",
-      "end": 10.049
+      "voice": "el-carla",
+      "end": 11.392
     },
     {
       "id": "f3",
       "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender.",
-      "start": 10.449,
+      "start": 11.792,
       "file": "audio/vo/f3.wav",
-      "length": 4.52,
+      "length": 4.798,
       "words": [
         {
           "w": "E",
-          "s": 10.489,
-          "e": 10.589
+          "s": 11.832,
+          "e": 11.969
         },
         {
           "w": "no",
-          "s": 10.589,
-          "e": 10.689
+          "s": 11.969,
+          "e": 12.209
         },
         {
-          "w": "fim",
-          "s": 10.689,
-          "e": 11.289
+          "w": "fim,",
+          "s": 12.209,
+          "e": 12.54
         },
         {
           "w": "sobra",
-          "s": 11.289,
-          "e": 11.589
+          "s": 12.54,
+          "e": 12.72
         },
         {
           "w": "menos",
-          "s": 11.589,
-          "e": 12.052
+          "s": 12.72,
+          "e": 13.1
         },
         {
           "w": "tempo",
-          "s": 12.052,
-          "e": 12.414
+          "s": 13.1,
+          "e": 13.4
         },
         {
           "w": "para",
-          "s": 12.414,
-          "e": 12.577
+          "s": 13.4,
+          "e": 13.7
         },
         {
           "w": "aquilo",
-          "s": 12.577,
-          "e": 12.864
+          "s": 13.7,
+          "e": 13.84
         },
         {
           "w": "que",
-          "s": 12.864,
-          "e": 12.989
+          "s": 13.84,
+          "e": 14.16
         },
         {
           "w": "realmente",
-          "s": 12.989,
-          "e": 13.639
+          "s": 14.16,
+          "e": 14.7
         },
         {
-          "w": "importa",
-          "s": 13.639,
-          "e": 14.401
+          "w": "importa:",
+          "s": 14.7,
+          "e": 15.922
         },
         {
-          "w": "atender",
-          "s": 14.401,
-          "e": 14.969
+          "w": "atender.",
+          "s": 15.922,
+          "e": 16.59
         }
       ],
-      "voice": "edge-thalita",
-      "end": 14.969
+      "voice": "el-carla",
+      "end": 16.59
     },
     {
       "id": "f4",
       "text": "A kz é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
       "say": "A cá-zê é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
-      "start": 15.969,
+      "start": 17.59,
       "file": "audio/vo/f4.wav",
-      "length": 7.178,
+      "length": 7.483,
       "words": [
         {
           "w": "A",
-          "s": 16.009,
-          "e": 16.147
+          "s": 17.63,
+          "e": 17.962
         },
         {
-          "w": "cá-zê",
-          "s": 16.147,
-          "e": 16.621
+          "w": "kz",
+          "s": 17.962,
+          "e": 18.342
         },
         {
           "w": "é",
-          "s": 16.621,
-          "e": 16.697
+          "s": 18.342,
+          "e": 18.502
         },
         {
           "w": "uma",
-          "s": 16.697,
-          "e": 16.822
+          "s": 18.502,
+          "e": 18.662
         },
         {
           "w": "plataforma",
-          "s": 16.822,
-          "e": 17.384
+          "s": 18.662,
+          "e": 19.142
         },
         {
           "w": "feita",
-          "s": 17.384,
-          "e": 17.796
+          "s": 19.142,
+          "e": 19.702
         },
         {
           "w": "para",
-          "s": 17.796,
-          "e": 17.997
+          "s": 19.702,
+          "e": 19.922
         },
         {
           "w": "terapeutas",
-          "s": 17.997,
-          "e": 18.759
+          "s": 19.922,
+          "e": 20.152
         },
         {
           "w": "que",
-          "s": 18.759,
-          "e": 18.909
+          "s": 20.152,
+          "e": 20.332
         },
         {
           "w": "querem",
-          "s": 18.909,
-          "e": 19.171
+          "s": 20.332,
+          "e": 20.572
         },
         {
           "w": "deixar",
-          "s": 19.171,
-          "e": 19.521
+          "s": 20.572,
+          "e": 20.912
         },
         {
           "w": "a",
-          "s": 19.521,
-          "e": 19.571
+          "s": 20.912,
+          "e": 21.072
         },
         {
           "w": "gestão",
-          "s": 19.571,
-          "e": 19.996
+          "s": 21.072,
+          "e": 21.392
         },
         {
           "w": "da",
-          "s": 19.996,
-          "e": 20.084
+          "s": 21.392,
+          "e": 21.532
         },
         {
           "w": "rotina",
-          "s": 20.084,
-          "e": 20.472
+          "s": 21.532,
+          "e": 21.972
         },
         {
           "w": "mais",
-          "s": 20.472,
-          "e": 20.734
+          "s": 21.972,
+          "e": 22.332
         },
         {
-          "w": "simples",
-          "s": 20.734,
-          "e": 21.422
+          "w": "simples,",
+          "s": 22.332,
+          "e": 23.352
         },
         {
           "w": "organizada",
-          "s": 21.422,
-          "e": 22.347
+          "s": 23.352,
+          "e": 23.752
         },
         {
           "w": "e",
-          "s": 22.347,
-          "e": 22.422
+          "s": 23.752,
+          "e": 24.38
         },
         {
-          "w": "profissional",
-          "s": 22.422,
-          "e": 23.147
+          "w": "profissional.",
+          "s": 24.38,
+          "e": 25.073
         }
       ],
-      "voice": "edge-thalita",
-      "end": 23.147
+      "voice": "el-carla",
+      "end": 25.073
     },
     {
       "id": "f5",
       "text": "Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação.",
-      "start": 23.597,
+      "start": 25.523,
       "file": "audio/vo/f5.wav",
-      "length": 5.808,
+      "length": 6.214,
       "words": [
         {
           "w": "Tudo",
-          "s": 23.637,
-          "e": 23.85
+          "s": 25.563,
+          "e": 25.872
         },
         {
           "w": "pensado",
-          "s": 23.85,
-          "e": 24.45
+          "s": 25.872,
+          "e": 26.492
         },
         {
           "w": "para",
-          "s": 24.45,
-          "e": 24.625
+          "s": 26.492,
+          "e": 26.732
         },
         {
           "w": "você",
-          "s": 24.625,
-          "e": 24.825
+          "s": 26.732,
+          "e": 27.012
         },
         {
           "w": "acompanhar",
-          "s": 24.825,
-          "e": 25.387
+          "s": 27.012,
+          "e": 27.572
         },
         {
           "w": "seus",
-          "s": 25.387,
-          "e": 25.537
+          "s": 27.572,
+          "e": 27.752
         },
         {
           "w": "atendimentos",
-          "s": 25.537,
-          "e": 26.262
+          "s": 27.752,
+          "e": 28.432
         },
         {
           "w": "e",
-          "s": 26.262,
-          "e": 26.375
+          "s": 28.432,
+          "e": 28.712
         },
         {
           "w": "organizar",
-          "s": 26.375,
-          "e": 26.912
+          "s": 28.712,
+          "e": 29.292
         },
         {
           "w": "seu",
-          "s": 26.912,
-          "e": 27.125
+          "s": 29.292,
+          "e": 29.412
         },
         {
           "w": "dia",
-          "s": 27.125,
-          "e": 27.337
+          "s": 29.412,
+          "e": 29.752
         },
         {
           "w": "a",
-          "s": 27.337,
-          "e": 27.362
+          "s": 29.752,
+          "e": 29.812
         },
         {
           "w": "dia",
-          "s": 27.362,
-          "e": 27.737
+          "s": 29.812,
+          "e": 29.952
         },
         {
           "w": "com",
-          "s": 27.737,
-          "e": 27.962
+          "s": 29.952,
+          "e": 30.312
         },
         {
           "w": "muito",
-          "s": 27.962,
-          "e": 28.387
+          "s": 30.312,
+          "e": 30.772
         },
         {
           "w": "menos",
-          "s": 28.387,
-          "e": 28.675
+          "s": 30.772,
+          "e": 31.032
         },
         {
-          "w": "complicação",
-          "s": 28.675,
-          "e": 29.405
+          "w": "complicação.",
+          "s": 31.032,
+          "e": 31.737
         }
       ],
-      "voice": "edge-thalita",
-      "end": 29.405
+      "voice": "el-carla",
+      "end": 31.737
     },
     {
       "id": "f6",
       "text": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
-      "start": 29.905,
+      "start": 32.237,
       "file": "audio/vo/f6.wav",
-      "length": 4.622,
+      "length": 4.256,
       "words": [
         {
           "w": "Menos",
-          "s": 29.945,
-          "e": 30.583
+          "s": 32.277,
+          "e": 32.854
         },
         {
           "w": "tempo",
-          "s": 30.583,
-          "e": 30.97
+          "s": 32.854,
+          "e": 33.054
         },
         {
-          "w": "administrando",
-          "s": 30.97,
-          "e": 32.295
+          "w": "administrando.",
+          "s": 33.054,
+          "e": 33.979
         },
         {
           "w": "Mais",
-          "s": 32.295,
-          "e": 32.67
+          "s": 33.979,
+          "e": 34.199
         },
         {
           "w": "tempo",
-          "s": 32.67,
-          "e": 33.058
+          "s": 34.199,
+          "e": 34.559
         },
         {
           "w": "cuidando",
-          "s": 33.058,
-          "e": 33.52
+          "s": 34.559,
+          "e": 35.119
         },
         {
           "w": "dos",
-          "s": 33.52,
-          "e": 33.645
+          "s": 35.119,
+          "e": 35.299
         },
         {
           "w": "seus",
-          "s": 33.645,
-          "e": 33.808
+          "s": 35.299,
+          "e": 35.499
         },
         {
-          "w": "pacientes",
-          "s": 33.808,
-          "e": 34.527
+          "w": "pacientes!",
+          "s": 35.499,
+          "e": 36.493
         }
       ],
-      "voice": "edge-thalita",
-      "end": 34.527
+      "voice": "el-carla",
+      "end": 36.493
     },
     {
       "id": "f7",
       "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
       "say": "Conheça a cá-zê e descubra uma forma mais simples de cuidar da sua rotina profissional.",
-      "start": 35.027,
+      "start": 36.993,
       "file": "audio/vo/f7.wav",
-      "length": 4.86,
+      "length": 4.651,
       "words": [
         {
           "w": "Conheça",
-          "s": 35.067,
-          "e": 35.53
+          "s": 37.033,
+          "e": 37.568
         },
         {
           "w": "a",
-          "s": 35.53,
-          "e": 35.567
+          "s": 37.568,
+          "e": 37.708
         },
         {
-          "w": "cá-zê",
-          "s": 35.567,
-          "e": 36.017
+          "w": "kz",
+          "s": 37.708,
+          "e": 38.068
         },
         {
           "w": "e",
-          "s": 36.017,
-          "e": 36.193
+          "s": 38.068,
+          "e": 38.328
         },
         {
           "w": "descubra",
-          "s": 36.193,
-          "e": 36.68
+          "s": 38.328,
+          "e": 38.648
         },
         {
           "w": "uma",
-          "s": 36.68,
-          "e": 36.83
+          "s": 38.648,
+          "e": 38.808
         },
         {
           "w": "forma",
-          "s": 36.83,
-          "e": 37.13
+          "s": 38.808,
+          "e": 39.148
         },
         {
           "w": "mais",
-          "s": 37.13,
-          "e": 37.43
+          "s": 39.148,
+          "e": 39.448
         },
         {
           "w": "simples",
-          "s": 37.43,
-          "e": 37.918
+          "s": 39.448,
+          "e": 39.848
         },
         {
           "w": "de",
-          "s": 37.918,
-          "e": 38.018
+          "s": 39.848,
+          "e": 40.028
         },
         {
           "w": "cuidar",
-          "s": 38.018,
-          "e": 38.43
+          "s": 40.028,
+          "e": 40.428
         },
         {
           "w": "da",
-          "s": 38.43,
-          "e": 38.555
+          "s": 40.428,
+          "e": 40.528
         },
         {
           "w": "sua",
-          "s": 38.555,
-          "e": 38.755
+          "s": 40.528,
+          "e": 40.668
         },
         {
           "w": "rotina",
-          "s": 38.755,
-          "e": 39.242
+          "s": 40.668,
+          "e": 41.068
         },
         {
-          "w": "profissional",
-          "s": 39.242,
-          "e": 39.887
+          "w": "profissional.",
+          "s": 41.068,
+          "e": 41.644
         }
       ],
-      "voice": "edge-thalita",
-      "end": 39.887
+      "voice": "el-carla",
+      "end": 41.644
     }
   ],
   "camadas": [
@@ -611,11 +611,38 @@
           "",
           "",
           "3"
-        ]
+        ],
+        "inteira": true,
+        "por_formato": {
+          "9x16": {
+            "posicoes": [
+              [
+                -450,
+                30,
+                -8
+              ],
+              [
+                170,
+                0,
+                6
+              ],
+              [
+                -400,
+                250,
+                5
+              ],
+              [
+                50,
+                270,
+                -6
+              ]
+            ]
+          }
+        }
       },
       "note": "'vários lugares' vira 4 peças concretas da rotina dela, presentes desde o 1º quadro, que se separam: o problema ganha forma",
       "start": 0,
-      "end": 5.006
+      "end": 5.142
     },
     {
       "id": "s2",
@@ -639,15 +666,17 @@
           "Marina: remarcou p/ sexta?"
         ],
         "ligacao": true,
-        "alerta": "ink"
+        "alerta": "ink",
+        "mensagens": 3,
+        "inteira": true
       },
       "note": "os 3 cards falam da mesma paciente e se contradizem (Agenda diz quinta 14h; a anotação diz que ela remarcou para sexta); a linha que tenta ligá-los se rompe: nada conversa com nada",
-      "start": 5.006,
-      "end": 10.299
+      "start": 5.142,
+      "end": 11.642
     },
     {
       "id": "s3",
-      "use": "rascunho/cena-nova",
+      "use": "cena/dia-do-terapeuta",
       "block": "dor",
       "vo": [
         "f3"
@@ -743,18 +772,15 @@
             "t-amber",
             "21:50"
           ]
-        ],
-        "novo": "cena/dia-do-terapeuta",
-        "spec": "Coluna do dia (card branco, raio 16, largura ≥ 60% do quadro no 4:5, rótulos de hora ≥ 22 px em --ui-muted) com coluna com px/hora fixo de 8h a 22h; cada sessão no y da sua hora, nos dois modos; N sessões sage de altura fixa (1 h) (hora + nome ilustrativo, texto --ink). Modo `aperta`: no `muda`, as tarefas (chips com nome, 1–2 por vão, cada uma na sua hora, nos tons tile, ícone Lucide + verbo, mola FAST) entram nos intervalos entre as sessões e a coluna estica para baixo (20h → 22h) com uma faixa de noite crescendo; no `apoio`, a headline troca pelo apoio (não empilha), os rótulos de hora somem e a câmera fecha 1,3× na sessão destacada; no `transborda`, a última tarefa empurra a noite até 22h e a faixa escurece; no `fecho`, a palavra (slot `palavra`) entra grande em --accent sobre o creme, fora da coluna, + coração com anel. Modo `devolve`: começa como o meio do `aperta` (vãos cheios, noite escura, sem câmera); no `muda`, as sessões NÃO se movem: as tarefas voam para um chip só ('tudo na kz' + 4 mini ícones) no CABEÇALHO da coluna, fora da escala de horas, e a noite clareia junto (um movimento só); no `apoio`, a headline troca; no `transborda`, a coluna encolhe de volta para terminar às 20h; no `fecho`, coração pousa na sessão destacada. Elástico; params: modo, sessoes ([hora, nome]), destaque (índice), tarefas ([ícone, rótulo, tom, hora]). Rótulo 'noite' em #5a4d42 (5,05:1) na calha das horas, sem chip por cima. 9:16: ~58 px/h (coluna 8h–22h entre y ≈ 430 e 1300), a mesma escala na s3 e na s6."
+        ]
       },
-      "novo": "cena/dia-do-terapeuta",
       "note": "o tempo vira o dia dela: as sessões ficam no lugar (50 min é 50 min), mas não sobra nenhum branco entre elas: as tarefas enchem todos os vãos e transbordam para a noite, e a última sai cortada pela borda",
-      "start": 10.299,
-      "end": 15.769
+      "start": 11.642,
+      "end": 17.39
     },
     {
       "id": "s4",
-      "use": "rascunho/cena-nova",
+      "use": "revelacao/grade-estados",
       "block": "revelação",
       "vo": [
         "f4"
@@ -792,14 +818,11 @@
           "Nova anotação",
           "Sessão rápida"
         ],
-        "mensagens": 3,
-        "novo": "revelacao/grade-estados",
-        "spec": "No `entra` (desde a cauda da s3), as 4 peças chegam ao centro e Mensagens se desprende para o canto superior direito (antes da grade, para o coral não trocar de dono na frente de quem assiste); no `encaixe` (f4:A) as 3 peças restantes assentam numa grade 2×2 frouxa (giros ±6°) com uma vaga, soft impact; a logo (clip-path, 300 px) se desenha acima até `marca`; `assinatura` = 'Feita para terapeutas' com ícone; em `aproxima` (f4:terapeutas) as peças param de girar e se aproximam; em `titulo` a logo sobe e entra a headline; em `p1` (simples) as peças se alinham; em `p2` (organizada) Sessão rápida (zap, coral) entra por baixo na vaga e os rótulos reais aparecem (2 mudanças só); em `p3` (profissional) a logo e a tagline saem e o card branco fecha em volta (geometria idêntica ao card Atalhos do painel-inicio: ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação), centralizado. Sai por câmera contínua: zoom no card. Params: pecas, rotulos, mensagens."
+        "mensagens": 3
       },
-      "novo": "revelacao/grade-estados",
       "note": "os adjetivos viram estados da grade: em 'simples' as peças se alinham, em 'organizada' ganham os rótulos reais do app, em 'profissional' viram o card Atalhos do painel no centro do quadro, e a câmera entra nele",
-      "start": 15.769,
-      "end": 23.447
+      "start": 17.39,
+      "end": 25.373
     },
     {
       "id": "s5",
@@ -812,15 +835,47 @@
       "tail": 0.3,
       "on_screen": "Boa tarde,|Ana|Tudo pensado para *você*|Acompanhe seus *atendimentos*|Organize seu *dia a dia*",
       "params": {
-        "elenco": "P.elenco"
+        "de_atalhos": true,
+        "toast": "Confirmação enviada no WhatsApp",
+        "elenco": {
+          "dia": "Quarta-feira · 4 sessões hoje",
+          "sessoes": [
+            [
+              "09:00",
+              "Marina S."
+            ],
+            [
+              "11:00",
+              "Lucas P."
+            ],
+            [
+              "14:00",
+              "Helena R."
+            ],
+            [
+              "16:00",
+              "Clara A."
+            ]
+          ],
+          "proxima": "14:00 · Helena R. · em 15 min"
+        },
+        "zoom_atalhos": 1.59,
+        "desloc_atalhos": 76,
+        "por_formato": {
+          "9x16": {
+            "zoom_atalhos": 1.94,
+            "desloc_atalhos": 133
+          }
+        },
+        "inteira": true
       },
       "note": "o painel de verdade: a câmera sai do card Atalhos e mostra a próxima sessão com contagem, as sessões do dia e a peça Mensagens virando a confirmação enviada no WhatsApp",
-      "start": 23.447,
-      "end": 29.705
+      "start": 25.373,
+      "end": 32.037
     },
     {
       "id": "s6",
-      "use": "rascunho/cena-nova",
+      "use": "cena/dia-do-terapeuta",
       "block": "virada",
       "vo": [
         "f6"
@@ -916,18 +971,15 @@
             "t-amber",
             "21:50"
           ]
-        ],
-        "novo": "cena/dia-do-terapeuta",
-        "spec": "mesmo bloco da s3, modo `devolve` (ver o spec da s3: um spec só)"
+        ]
       },
-      "novo": "cena/dia-do-terapeuta",
       "note": "o mesmo dia da s3, no mesmo enquadramento e com as sessões paradas nas mesmas horas: só as tarefas saem (para um chip no cabeçalho), a noite clareia, e os vãos entre as sessões ficam brancos; é o tempo voltando",
-      "start": 29.705,
-      "end": 34.877
+      "start": 32.037,
+      "end": 36.843
     },
     {
       "id": "s7",
-      "use": "rascunho/cena-nova",
+      "use": "cta/navegador",
       "block": "cartão final",
       "vo": [
         "f7"
@@ -936,13 +988,13 @@
       "tail": 3,
       "on_screen": "Conheça a kz|kz.app.br|Uma forma *mais simples*",
       "params": {
-        "novo": "cta/navegador",
-        "spec": "Converter library/motion/cta/navegador (navegador.js/css, origem A-opus s9) em bloco: slots titulo|url|frase; cues entra (aba abre), digita (URL digitada; foley de teclado), clique (cursor clica em Ir), carrega (a página carrega: param `pagina` = print do painel ou HTML com logo + frase); cauda de 2–4 s sem fala."
+        "pagina": "@data/pagina-kz.html",
+        "aba": "kz · Plataforma para terapeutas",
+        "rodape": "dados ilustrativos"
       },
-      "novo": "cta/navegador",
       "note": "ela vê onde entrar: a aba abre, kz.app.br é digitado e a página carrega o mesmo painel da s5 (logo no cabeçalho, próxima sessão Helena 14:00 e o card Atalhos igual ao da s4)",
-      "start": 34.877,
-      "end": 42.887
+      "start": 36.843,
+      "end": 44.644
     }
   ],
   "events": [
@@ -961,7 +1013,7 @@
       "scene": "s1",
       "word": "f1:ainda",
       "offset": -0.12,
-      "t": 1.532
+      "t": 1.926
     },
     {
       "id": "e3",
@@ -970,7 +1022,7 @@
       "scene": "s1",
       "word": "f1:vários",
       "offset": -0.08,
-      "t": 3.11
+      "t": 3.486
     },
     {
       "id": "e4",
@@ -979,7 +1031,7 @@
       "scene": "s2",
       "word": "f2:Agenda",
       "offset": -0.12,
-      "t": 5.026
+      "t": 5.942
     },
     {
       "id": "e5",
@@ -988,7 +1040,7 @@
       "scene": "s2",
       "word": "f2:informações",
       "offset": -0.12,
-      "t": 6.226
+      "t": 7.902
     },
     {
       "id": "e6",
@@ -997,7 +1049,7 @@
       "scene": "s2",
       "word": "f2:anotações",
       "offset": -0.12,
-      "t": 8.438
+      "t": 9.706
     },
     {
       "id": "e7",
@@ -1005,7 +1057,7 @@
       "type": "reveal",
       "scene": "s2",
       "word": "f2:espalhadas",
-      "t": 9.221
+      "t": 10.286
     },
     {
       "id": "e8",
@@ -1013,7 +1065,7 @@
       "type": "reveal",
       "scene": "s2",
       "before_end": 0.32,
-      "t": 9.979
+      "t": 11.322
     },
     {
       "id": "e9",
@@ -1021,7 +1073,7 @@
       "type": "reveal",
       "scene": "s3",
       "at": 0.02,
-      "t": 10.319
+      "t": 11.662
     },
     {
       "id": "e10",
@@ -1030,7 +1082,7 @@
       "scene": "s3",
       "word": "f3:menos",
       "offset": -0.08,
-      "t": 11.509
+      "t": 12.64
     },
     {
       "id": "e11",
@@ -1039,7 +1091,7 @@
       "scene": "s3",
       "word": "f3:para",
       "offset": -0.12,
-      "t": 12.294
+      "t": 13.28
     },
     {
       "id": "e12",
@@ -1048,7 +1100,7 @@
       "scene": "s3",
       "word": "f3:importa",
       "offset": -0.1,
-      "t": 13.539
+      "t": 14.6
     },
     {
       "id": "e13",
@@ -1057,15 +1109,15 @@
       "scene": "s3",
       "word": "f3:atender",
       "offset": -0.12,
-      "t": 14.281
+      "t": 15.802
     },
     {
       "id": "e14",
       "cue": "sai",
       "type": "reveal",
       "scene": "s3",
-      "before_end": 0.3,
-      "t": 15.469
+      "before_end": 0.8,
+      "t": 16.59
     },
     {
       "id": "e15",
@@ -1073,7 +1125,7 @@
       "type": "reveal",
       "scene": "s4",
       "at": 0.02,
-      "t": 15.789
+      "t": 17.41
     },
     {
       "id": "e16",
@@ -1082,7 +1134,7 @@
       "scene": "s4",
       "word": "f4:A",
       "offset": -0.05,
-      "t": 15.959
+      "t": 17.58
     },
     {
       "id": "e17",
@@ -1091,7 +1143,7 @@
       "scene": "s4",
       "word": "f4:plataforma",
       "offset": -0.1,
-      "t": 16.722
+      "t": 18.562
     },
     {
       "id": "e18",
@@ -1100,7 +1152,7 @@
       "scene": "s4",
       "word": "f4:feita",
       "offset": -0.12,
-      "t": 17.264
+      "t": 19.022
     },
     {
       "id": "e19",
@@ -1109,7 +1161,7 @@
       "scene": "s4",
       "word": "f4:terapeutas",
       "offset": -0.1,
-      "t": 17.897
+      "t": 19.822
     },
     {
       "id": "e20",
@@ -1118,7 +1170,7 @@
       "scene": "s4",
       "word": "f4:gestão",
       "offset": -0.15,
-      "t": 19.421
+      "t": 20.922
     },
     {
       "id": "e21",
@@ -1127,7 +1179,7 @@
       "scene": "s4",
       "word": "f4:simples",
       "offset": -0.1,
-      "t": 20.634
+      "t": 22.232
     },
     {
       "id": "e22",
@@ -1136,7 +1188,7 @@
       "scene": "s4",
       "word": "f4:organizada",
       "offset": -0.1,
-      "t": 21.322
+      "t": 23.252
     },
     {
       "id": "e23",
@@ -1145,7 +1197,7 @@
       "scene": "s4",
       "word": "f4:profissional",
       "offset": -0.1,
-      "t": 22.322
+      "t": 24.28
     },
     {
       "id": "e24",
@@ -1153,7 +1205,7 @@
       "type": "reveal",
       "scene": "s5",
       "at": 0,
-      "t": 23.447
+      "t": 25.373
     },
     {
       "id": "e25",
@@ -1162,7 +1214,7 @@
       "scene": "s5",
       "word": "f5:acompanhar",
       "offset": -0.12,
-      "t": 24.705
+      "t": 26.892
     },
     {
       "id": "e26",
@@ -1171,7 +1223,7 @@
       "scene": "s5",
       "word": "f5:organizar",
       "offset": -0.12,
-      "t": 26.255
+      "t": 28.592
     },
     {
       "id": "e27",
@@ -1180,7 +1232,7 @@
       "scene": "s5",
       "word": "f5:complicação",
       "offset": -0.15,
-      "t": 28.525
+      "t": 30.882
     },
     {
       "id": "e28",
@@ -1188,7 +1240,7 @@
       "type": "reveal",
       "scene": "s5",
       "before_end": 0.3,
-      "t": 29.405
+      "t": 31.737
     },
     {
       "id": "e29",
@@ -1196,7 +1248,7 @@
       "type": "reveal",
       "scene": "s6",
       "at": 0.02,
-      "t": 29.725
+      "t": 32.057
     },
     {
       "id": "e30",
@@ -1205,7 +1257,7 @@
       "scene": "s6",
       "word": "f6:administrando",
       "offset": -0.1,
-      "t": 30.87
+      "t": 32.954
     },
     {
       "id": "e31",
@@ -1214,7 +1266,7 @@
       "scene": "s6",
       "word": "f6:Mais",
       "offset": -0.12,
-      "t": 32.175
+      "t": 33.859
     },
     {
       "id": "e32",
@@ -1223,7 +1275,7 @@
       "scene": "s6",
       "word": "f6:cuidando",
       "offset": -0.1,
-      "t": 32.958
+      "t": 34.459
     },
     {
       "id": "e33",
@@ -1232,7 +1284,7 @@
       "scene": "s6",
       "word": "f6:pacientes",
       "offset": -0.1,
-      "t": 33.708
+      "t": 35.399
     },
     {
       "id": "e34",
@@ -1240,7 +1292,7 @@
       "type": "reveal",
       "scene": "s6",
       "before_end": 0.3,
-      "t": 34.577
+      "t": 36.543
     },
     {
       "id": "e35",
@@ -1248,7 +1300,7 @@
       "type": "reveal",
       "scene": "s7",
       "at": 0.02,
-      "t": 34.897
+      "t": 36.863
     },
     {
       "id": "e36",
@@ -1257,7 +1309,7 @@
       "scene": "s7",
       "word": "f7:Conheça",
       "offset": 0.3,
-      "t": 35.367
+      "t": 37.333
     },
     {
       "id": "e37",
@@ -1266,7 +1318,7 @@
       "scene": "s7",
       "word": "f7:descubra",
       "offset": -0.1,
-      "t": 36.093
+      "t": 38.228
     },
     {
       "id": "e38",
@@ -1275,7 +1327,7 @@
       "scene": "s7",
       "word": "f7:simples",
       "offset": -0.1,
-      "t": 37.33
+      "t": 39.348
     },
     {
       "id": "e39",
@@ -1284,7 +1336,7 @@
       "scene": "s7",
       "word": "f7:profissional",
       "offset": -0.1,
-      "t": 39.142
+      "t": 40.968
     },
     {
       "id": "e40",
@@ -1292,13 +1344,543 @@
       "type": "reveal",
       "scene": "s7",
       "before_end": 1.2,
-      "t": 41.687
+      "t": 43.444
     }
   ],
-  "sfx": [],
+  "sfx": [
+    {
+      "event": "e1",
+      "asset": "whoosh-whoosh-fino-curto-01",
+      "align": "start",
+      "gain_db": -25.2,
+      "max": 1.1
+    },
+    {
+      "event": "e2",
+      "asset": "whoosh-whoosh-fino-03",
+      "align": "peak",
+      "gain_db": -21.4
+    },
+    {
+      "event": "e3",
+      "asset": "ui-hud-pop-up-02",
+      "align": "peak",
+      "delay": 0,
+      "pan": -0.3,
+      "gain_db": -15.9,
+      "max": 0.5
+    },
+    {
+      "event": "e3",
+      "asset": "ui-hud-pop-up-05",
+      "align": "peak",
+      "delay": 0.08,
+      "pan": 0.3,
+      "gain_db": -16.6,
+      "max": 0.5
+    },
+    {
+      "event": "e3",
+      "asset": "ui-hud-pop-up-03",
+      "align": "peak",
+      "delay": 0.16,
+      "pan": -0.2,
+      "gain_db": -16.4,
+      "max": 0.5
+    },
+    {
+      "event": "e3",
+      "asset": "ui-hud-pop-up-06",
+      "align": "peak",
+      "delay": 0.24,
+      "pan": 0.25,
+      "gain_db": -19.3,
+      "max": 0.5
+    },
+    {
+      "event": "e4",
+      "asset": "ui-ui-interface-03",
+      "align": "peak",
+      "gain_db": -18.1,
+      "max": 0.6
+    },
+    {
+      "event": "e5",
+      "asset": "ui-ui-interface-04",
+      "align": "peak",
+      "pan": 0.2,
+      "gain_db": -15.1,
+      "max": 0.6
+    },
+    {
+      "event": "e6",
+      "asset": "ui-ui-interface-03",
+      "align": "peak",
+      "pan": -0.2,
+      "gain_db": -19.1,
+      "max": 0.6
+    },
+    {
+      "event": "e7",
+      "asset": "ui-futurista-click-06",
+      "align": "peak",
+      "delay": 0,
+      "pan": -0.25,
+      "gain_db": -24.1,
+      "max": 0.25
+    },
+    {
+      "event": "e7",
+      "asset": "ui-futurista-click-02",
+      "align": "peak",
+      "delay": 0.17,
+      "pan": 0.25,
+      "gain_db": -24.8,
+      "max": 0.25
+    },
+    {
+      "event": "e7",
+      "asset": "ui-futurista-click-05",
+      "align": "peak",
+      "delay": 0.34,
+      "gain_db": -27.4,
+      "max": 0.25
+    },
+    {
+      "event": "e8",
+      "asset": "whoosh-whoosh-fino-06",
+      "align": "peak",
+      "gain_db": -20.1,
+      "max": 1.2
+    },
+    {
+      "event": "e9",
+      "asset": "whoosh-whoosh-fino-09",
+      "align": "peak",
+      "gain_db": -21.9,
+      "max": 1.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-ui-interface-03",
+      "align": "peak",
+      "delay": 0,
+      "pan": -0.3,
+      "gain_db": -18.5,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-futurista-click-06",
+      "align": "peak",
+      "delay": 0.085,
+      "pan": 0.2,
+      "gain_db": -24.2,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-ui-interface-04",
+      "align": "peak",
+      "delay": 0.17,
+      "pan": -0.1,
+      "gain_db": -17.8,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-hud-pop-up-04",
+      "align": "peak",
+      "delay": 0.255,
+      "pan": 0.3,
+      "gain_db": -22.5,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-futurista-click-02",
+      "align": "peak",
+      "delay": 0.34,
+      "pan": -0.25,
+      "gain_db": -23.2,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-ui-interface-05",
+      "align": "peak",
+      "delay": 0.425,
+      "pan": 0.1,
+      "gain_db": -23.5,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-futurista-click-03",
+      "align": "peak",
+      "delay": 0.51,
+      "pan": -0.2,
+      "gain_db": -19.7,
+      "max": 0.2
+    },
+    {
+      "event": "e10",
+      "asset": "ui-futurista-click-04",
+      "align": "peak",
+      "delay": 0.595,
+      "pan": 0.25,
+      "gain_db": -27.3,
+      "max": 0.2
+    },
+    {
+      "event": "e11",
+      "asset": "whoosh-whoosh-fino-04",
+      "align": "peak",
+      "gain_db": -16.4
+    },
+    {
+      "event": "e12",
+      "asset": "ui-futurista-click-07",
+      "align": "peak",
+      "gain_db": -26.4,
+      "max": 0.18
+    },
+    {
+      "event": "e13",
+      "synth": "chime",
+      "gain_db": -8.5
+    },
+    {
+      "event": "e14",
+      "asset": "whoosh-whoosh-fino-07",
+      "align": "peak",
+      "delay": -0.5,
+      "gain_db": -14.6,
+      "max": 0.95
+    },
+    {
+      "event": "e16",
+      "asset": "impact-soft-01",
+      "align": "start",
+      "gain_db": -13.9,
+      "max": 1.3
+    },
+    {
+      "event": "e17",
+      "asset": "tonal-piano-f-maior-expansivo-01",
+      "align": "start",
+      "gain_db": -19.9,
+      "max": 3.6
+    },
+    {
+      "event": "e18",
+      "asset": "ui-hud-pop-up-06",
+      "align": "peak",
+      "gain_db": -16.7,
+      "max": 0.5
+    },
+    {
+      "event": "e19",
+      "asset": "whoosh-whoosh-fino-02",
+      "align": "peak",
+      "gain_db": -24,
+      "max": 1.1
+    },
+    {
+      "event": "e20",
+      "asset": "whoosh-whoosh-fino-09",
+      "align": "peak",
+      "gain_db": -19.9
+    },
+    {
+      "event": "e21",
+      "asset": "ui-futurista-click-06",
+      "align": "peak",
+      "gain_db": -22.1,
+      "max": 0.25
+    },
+    {
+      "event": "e22",
+      "asset": "ui-ui-interface-05",
+      "align": "peak",
+      "gain_db": -20,
+      "max": 0.5
+    },
+    {
+      "event": "e23",
+      "asset": "foley-clique-mouse-01",
+      "align": "peak",
+      "gain_db": -8.6,
+      "max": 0.4
+    },
+    {
+      "event": "e24",
+      "asset": "whoosh-whoosh-fino-01",
+      "align": "peak",
+      "gain_db": -17.8,
+      "max": 1.2
+    },
+    {
+      "event": "e24",
+      "asset": "ui-hud-pop-up-02",
+      "align": "peak",
+      "delay": 0.35,
+      "pan": -0.3,
+      "gain_db": -18.9,
+      "max": 0.3
+    },
+    {
+      "event": "e24",
+      "asset": "ui-hud-pop-up-05",
+      "align": "peak",
+      "delay": 0.49,
+      "pan": 0.3,
+      "gain_db": -18.9,
+      "max": 0.3
+    },
+    {
+      "event": "e24",
+      "asset": "ui-hud-pop-up-04",
+      "align": "peak",
+      "delay": 0.63,
+      "pan": -0.15,
+      "gain_db": -24.2,
+      "max": 0.3
+    },
+    {
+      "event": "e24",
+      "asset": "ui-hud-pop-up-06",
+      "align": "peak",
+      "delay": 0.77,
+      "pan": 0.2,
+      "gain_db": -20.2,
+      "max": 0.3
+    },
+    {
+      "event": "e25",
+      "asset": "whoosh-whoosh-fino-05",
+      "align": "peak",
+      "gain_db": -22.1
+    },
+    {
+      "event": "e25",
+      "asset": "ui-ui-interface-02",
+      "align": "peak",
+      "delay": 0.2,
+      "gain_db": -19.7,
+      "max": 0.4
+    },
+    {
+      "event": "e26",
+      "asset": "whoosh-whoosh-fino-06",
+      "align": "peak",
+      "gain_db": -17.1
+    },
+    {
+      "event": "e27",
+      "asset": "ui-hud-sound-04",
+      "align": "peak",
+      "gain_db": -21.2,
+      "max": 1.1
+    },
+    {
+      "event": "e30",
+      "asset": "whoosh-whoosh-fino-03",
+      "align": "peak",
+      "delay": -0.1,
+      "gain_db": -21.4
+    },
+    {
+      "event": "e30",
+      "asset": "ui-hud-pop-up-05",
+      "align": "peak",
+      "delay": 0.14,
+      "pan": 0.25,
+      "gain_db": -17.4,
+      "max": 0.3
+    },
+    {
+      "event": "e30",
+      "asset": "ui-hud-pop-up-02",
+      "align": "peak",
+      "delay": 0.24,
+      "gain_db": -18.9,
+      "max": 0.3
+    },
+    {
+      "event": "e30",
+      "asset": "ui-hud-pop-up-04",
+      "align": "peak",
+      "delay": 0.34,
+      "pan": -0.25,
+      "gain_db": -24.2,
+      "max": 0.3
+    },
+    {
+      "event": "e31",
+      "asset": "whoosh-whoosh-fino-07",
+      "align": "peak",
+      "gain_db": -11.6
+    },
+    {
+      "event": "e33",
+      "synth": "chime",
+      "gain_db": -8.5
+    },
+    {
+      "event": "e35",
+      "asset": "ui-hud-pop-up-01",
+      "align": "peak",
+      "gain_db": -13.8,
+      "max": 0.6
+    },
+    {
+      "event": "e36",
+      "asset": "foley-teclado-notebook-01",
+      "align": "start",
+      "delay": -0.4,
+      "gain_db": -7.9,
+      "max": 1.15
+    },
+    {
+      "event": "e37",
+      "asset": "foley-clique-mouse-01",
+      "align": "peak",
+      "delay": -0.02,
+      "gain_db": -7.6,
+      "max": 0.4
+    },
+    {
+      "event": "e38",
+      "asset": "ui-futurista-click-02",
+      "align": "peak",
+      "gain_db": -24.3,
+      "max": 0.2
+    },
+    {
+      "event": "e39",
+      "synth": "ding",
+      "gain_db": -12
+    },
+    {
+      "event": "e40",
+      "asset": "whoosh-whoosh-fino-09",
+      "align": "peak",
+      "delay": -0.1,
+      "gain_db": -22.9,
+      "max": 1.3
+    }
+  ],
   "voice": {
     "current": "edge-thalita",
-    "stage": "draft"
+    "stage": "final"
   },
-  "duration": 42.887
+  "duration": 44.644,
+  "music": {
+    "bpm": 81.9,
+    "gain_db": -13,
+    "duck": 0.7,
+    "synth": {
+      "beatsPerBar": 4,
+      "seed": 11,
+      "chords": [
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "C",
+        "Dm",
+        "Bb",
+        "F",
+        "F"
+      ],
+      "sections": [
+        {
+          "from": 0,
+          "to": 14,
+          "style": "light"
+        },
+        {
+          "from": 14,
+          "to": 99,
+          "style": "resolve"
+        }
+      ],
+      "risers": [
+        {
+          "from": 5,
+          "to": 6
+        }
+      ],
+      "impacts": []
+    },
+    "file": "audio/music-a.wav",
+    "id": null,
+    "license": "própria (sintetizada no kit)",
+    "escolhida": "a",
+    "build": "audio/build-trilha.mjs (síntese do music.mjs + envelopes por cena; 6 compassos = 17,58 s)",
+    "candidatas": [
+      {
+        "id": "a",
+        "file": "audio/music-a.wav",
+        "nota": "v03 reancorada (Dm–Bb–F–C, seed 11): riser no compasso 5, silêncio seco 17,17–17,58, pulso grave suave só na s4, s5 leve, respiro (só pad+baixo) na s6, resolve em Fmaj9 no ding (41,02 s)"
+      },
+      {
+        "id": "b",
+        "file": "audio/music-b.wav",
+        "nota": "variação mais quente (F–C–Dm–Bb, seed 23, tom maior): riser sobre a dominante C→F, sem pulso, brilho aparado (shelf −3,5 dB a 5,5 kHz), mesmos envelopes",
+        "synth": {
+          "beatsPerBar": 4,
+          "seed": 23,
+          "chords": [
+            "F",
+            "C",
+            "Dm",
+            "Bb",
+            "F",
+            "C",
+            "F",
+            "C",
+            "Dm",
+            "Bb",
+            "F",
+            "C",
+            "Dm",
+            "Bb",
+            "F",
+            "F"
+          ],
+          "sections": [
+            {
+              "from": 0,
+              "to": 14,
+              "style": "light"
+            },
+            {
+              "from": 14,
+              "to": 99,
+              "style": "resolve"
+            }
+          ],
+          "risers": [
+            {
+              "from": 5,
+              "to": 6
+            }
+          ],
+          "impacts": []
+        }
+      }
+    ]
+  },
+  "mix": {
+    "sfx_db": 0
+  }
 }

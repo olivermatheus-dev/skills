@@ -1,7 +1,7 @@
 # Plano — kz · apresentação, "As peças da rotina"
 
 > Empresa: kz · Nível: médio · Formato: livre (apresentação) · Duração: ≈ 43 s (voz de rascunho Thalita; a Carla da v03 tem ≈ 44 s) · Formatos: 4:5, 9:16 · Áudio: locução + trilha + efeitos
-> Entrada: roteiro da v03 (falas f1–f7 sem mudar o texto) · Status: **aguardando aval** · Data: 2026-10-08
+> Entrada: roteiro da v03 (falas f1–f7 sem mudar o texto) · Status: **aprovado (2026-10-08)**: "vai com as peças da rotina" · Data: 2026-10-08
 > Máquina: `cenas.json` (fonte da verdade) · Tarefa 047 fase B: o mesmo roteiro da v03, planejado com a skill `plano-de-cenas`, para comparar.
 > Há um 2º plano da fase B, feito em paralelo por outra sessão: `2026-10-08-apresentacao-kz-plano/` (conceito "Uma janela só").
 
@@ -111,3 +111,17 @@ Conferido contra o `BRAND.md`.
   - o zoom da s4 para a s5 parte do painel a ~2,5× e só fica nítido porque o bloco é HTML vetorial;
   - a s6 tem 4 mudanças em ~3,9 s; se ficar apertada, a primeira coisa a tirar é a coluna encolhendo;
   - o quadro 0 da s1 e o fim da s3 (câmera a 1,3×) só aparecem no render: exigir os dois na folha do QC.
+
+---
+## Entrega (2026-10-09)
+- **Arquivos:** `exports/2026-10-08-apresentacao-kz-pecas-4x5-v01.mp4` e `-9x16-v01.mp4` (44,6 s; fora do git).
+- **Medições (`qc.mjs`):** −13,9 LUFS, true peak −1,4 dBTP, H.264 yuv420p 30 fps, BT.709, AAC 48 kHz. QC técnico limpo. Folhas: `render/qc/*-sheet.png`.
+- **Voz:** Carla (Eleven v4) da v03, reaproveitada (falas idênticas, sem custo). **Trilha:** A (v03 reancorada, 81,9 BPM; silêncio seco + soft impact no encaixe da s4); a candidata B (tom maior, sem pulso grave) está em `audio/music-b.wav`.
+- **Blocos:** novos `cena/dia-do-terapeuta` e `revelacao/grade-estados` (nesta pasta, em `blocos/`) e `cta/navegador` (global, `library/blocos/`); ajustes retrocompatíveis em `pergunta-fragmentos`, `caos-cards` e `painel-inicio` (a v03 sai igual, 0 pixel diferente em 80 quadros).
+- **Não verificado:** o áudio (o Claude não escuta).
+- **Em aberto:**
+  - s4 com o meio da cena esparso (3 peças afastadas entre "marca" e "simples");
+  - na passagem s3→s4, os ícones das peças trocam no corte (tarefa → peça);
+  - toast da s5 fica ~0,5 s aberto antes do corte;
+  - a s7 mostra o painel logado (pergunta 0 do plano, sem resposta).
+- **Feedback do Oliver:** …

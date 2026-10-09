@@ -263,7 +263,34 @@
           "",
           "",
           "3"
-        ]
+        ],
+        "inteira": true,
+        "por_formato": {
+          "9x16": {
+            "posicoes": [
+              [
+                -450,
+                30,
+                -8
+              ],
+              [
+                170,
+                0,
+                6
+              ],
+              [
+                -400,
+                250,
+                5
+              ],
+              [
+                50,
+                270,
+                -6
+              ]
+            ]
+          }
+        }
       },
       "ajuste_bloco": "params novos: `fragmentos` (ícone, rótulo, tom) no lugar dos 4 fixos do HTML e `apagadas` (no 1º quadro as peças já estão em arco, pequenas e a 30% atrás da pergunta; em `espalha` acendem e se espalham); `detalhes` (1 detalhe concreto por peça já no 1º quadro: Agenda \"Qui 14h\", Mensagens \"3\")"
     },
@@ -343,7 +370,9 @@
           "Marina: remarcou p/ sexta?"
         ],
         "ligacao": true,
-        "alerta": "ink"
+        "alerta": "ink",
+        "mensagens": 3,
+        "inteira": true
       },
       "ajuste_bloco": "params novos: `conteudo` (1 linha por card), `ligacao` (linha tracejada entre os cards que se rompe no cue `espalha`, um click seco por ruptura) e `alerta` em --ink (sem --danger: evita coral + vermelho + âmbar juntos); Mensagens como 4º elemento pequeno no canto",
       "sai": "os cards encolhem de volta em peças e descem para dentro da coluna do dia da s3 (match no motivo)",
@@ -368,24 +397,6 @@
       ],
       "relacao": "complementa",
       "olhar": "topo → coluna → sessão destacada",
-      "novo": {
-        "tipo": "cena",
-        "id": "dia-do-terapeuta",
-        "slots": [
-          "titulo",
-          "apoio",
-          "palavra"
-        ],
-        "spec": "Coluna do dia (card branco, raio 16, largura ≥ 60% do quadro no 4:5, rótulos de hora ≥ 22 px em --ui-muted) com coluna com px/hora fixo de 8h a 22h; cada sessão no y da sua hora, nos dois modos; N sessões sage de altura fixa (1 h) (hora + nome ilustrativo, texto --ink). Modo `aperta`: no `muda`, as tarefas (chips com nome, 1–2 por vão, cada uma na sua hora, nos tons tile, ícone Lucide + verbo, mola FAST) entram nos intervalos entre as sessões e a coluna estica para baixo (20h → 22h) com uma faixa de noite crescendo; no `apoio`, a headline troca pelo apoio (não empilha), os rótulos de hora somem e a câmera fecha 1,3× na sessão destacada; no `transborda`, a última tarefa empurra a noite até 22h e a faixa escurece; no `fecho`, a palavra (slot `palavra`) entra grande em --accent sobre o creme, fora da coluna, + coração com anel. Modo `devolve`: começa como o meio do `aperta` (vãos cheios, noite escura, sem câmera); no `muda`, as sessões NÃO se movem: as tarefas voam para um chip só ('tudo na kz' + 4 mini ícones) no CABEÇALHO da coluna, fora da escala de horas, e a noite clareia junto (um movimento só); no `apoio`, a headline troca; no `transborda`, a coluna encolhe de volta para terminar às 20h; no `fecho`, coração pousa na sessão destacada. Elástico; params: modo, sessoes ([hora, nome]), destaque (índice), tarefas ([ícone, rótulo, tom, hora]). Rótulo 'noite' em #5a4d42 (5,05:1) na calha das horas, sem chip por cima. 9:16: ~58 px/h (coluna 8h–22h entre y ≈ 430 e 1300), a mesma escala na s3 e na s6.",
-        "cues": [
-          "entra",
-          "muda",
-          "apoio",
-          "transborda",
-          "fecho",
-          "sai"
-        ]
-      },
       "style_frame": {
         "4x5": "style/png/slide-01.png",
         "9x16": "style/png/slide-05.png"
@@ -531,7 +542,7 @@
         },
         {
           "cue": "sai",
-          "before_end": 0.3,
+          "before_end": 0.8,
           "o_que": "1 tarefa de cada tom se solta e sobe para o centro (Confirmar Lucas teal · Responder 3 mensagens coral · Cobrar Marina âmbar · Anotar sessão da Marina lilás): são as 4 peças da s4",
           "sfx": "air longo"
         }
@@ -550,7 +561,26 @@
           "status": "ok"
         }
       ],
-      "vivo": "a faixa da noite cresce e escurece sem parar desde o `muda`"
+      "vivo": "a faixa da noite cresce e escurece sem parar desde o `muda`",
+      "use": "cena/dia-do-terapeuta",
+      "bloco_feito": {
+        "tipo": "cena",
+        "id": "dia-do-terapeuta",
+        "slots": [
+          "titulo",
+          "apoio",
+          "palavra"
+        ],
+        "spec": "Coluna do dia (card branco, raio 16, largura ≥ 60% do quadro no 4:5, rótulos de hora ≥ 22 px em --ui-muted) com coluna com px/hora fixo de 8h a 22h; cada sessão no y da sua hora, nos dois modos; N sessões sage de altura fixa (1 h) (hora + nome ilustrativo, texto --ink). Modo `aperta`: no `muda`, as tarefas (chips com nome, 1–2 por vão, cada uma na sua hora, nos tons tile, ícone Lucide + verbo, mola FAST) entram nos intervalos entre as sessões e a coluna estica para baixo (20h → 22h) com uma faixa de noite crescendo; no `apoio`, a headline troca pelo apoio (não empilha), os rótulos de hora somem e a câmera fecha 1,3× na sessão destacada; no `transborda`, a última tarefa empurra a noite até 22h e a faixa escurece; no `fecho`, a palavra (slot `palavra`) entra grande em --accent sobre o creme, fora da coluna, + coração com anel. Modo `devolve`: começa como o meio do `aperta` (vãos cheios, noite escura, sem câmera); no `muda`, as sessões NÃO se movem: as tarefas voam para um chip só ('tudo na kz' + 4 mini ícones) no CABEÇALHO da coluna, fora da escala de horas, e a noite clareia junto (um movimento só); no `apoio`, a headline troca; no `transborda`, a coluna encolhe de volta para terminar às 20h; no `fecho`, coração pousa na sessão destacada. Elástico; params: modo, sessoes ([hora, nome]), destaque (índice), tarefas ([ícone, rótulo, tom, hora]). Rótulo 'noite' em #5a4d42 (5,05:1) na calha das horas, sem chip por cima. 9:16: ~58 px/h (coluna 8h–22h entre y ≈ 430 e 1300), a mesma escala na s3 e na s6.",
+        "cues": [
+          "entra",
+          "muda",
+          "apoio",
+          "transborda",
+          "fecho",
+          "sai"
+        ]
+      }
     },
     {
       "id": "s4",
@@ -578,29 +608,6 @@
         "meio: logo desenhada até 'plataforma'; 'Feita para terapeutas'; em 'terapeutas' as peças param de girar e se aproximam; em 'gestão' a logo sobe e entra 'A gestão da sua rotina mais *simples*'",
         "fim: Sessão rápida entra por baixo na vaga; rótulos reais; logo e tagline saem; o card Atalhos fica sozinho no centro e a câmera começa a entrar"
       ],
-      "novo": {
-        "tipo": "revelacao",
-        "id": "grade-estados",
-        "spec": "No `entra` (desde a cauda da s3), as 4 peças chegam ao centro e Mensagens se desprende para o canto superior direito (antes da grade, para o coral não trocar de dono na frente de quem assiste); no `encaixe` (f4:A) as 3 peças restantes assentam numa grade 2×2 frouxa (giros ±6°) com uma vaga, soft impact; a logo (clip-path, 300 px) se desenha acima até `marca`; `assinatura` = 'Feita para terapeutas' com ícone; em `aproxima` (f4:terapeutas) as peças param de girar e se aproximam; em `titulo` a logo sobe e entra a headline; em `p1` (simples) as peças se alinham; em `p2` (organizada) Sessão rápida (zap, coral) entra por baixo na vaga e os rótulos reais aparecem (2 mudanças só); em `p3` (profissional) a logo e a tagline saem e o card branco fecha em volta (geometria idêntica ao card Atalhos do painel-inicio: ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação), centralizado. Sai por câmera contínua: zoom no card. Params: pecas, rotulos, mensagens.",
-        "slots": [
-          "assinatura",
-          "titulo",
-          "p1",
-          "p2",
-          "p3"
-        ],
-        "cues": [
-          "entra",
-          "encaixe",
-          "marca",
-          "assinatura",
-          "aproxima",
-          "titulo",
-          "p1",
-          "p2",
-          "p3"
-        ]
-      },
       "style_frame": {
         "4x5": "style/png/slide-02.png",
         "9x16": "style/png/slide-06.png"
@@ -715,7 +722,31 @@
         }
       ],
       "vivo": "grade frouxa com giro lento (±2°) até \"simples\"",
-      "lead": 0.2
+      "lead": 0.2,
+      "use": "revelacao/grade-estados",
+      "bloco_feito": {
+        "tipo": "revelacao",
+        "id": "grade-estados",
+        "spec": "No `entra` (desde a cauda da s3), as 4 peças chegam ao centro e Mensagens se desprende para o canto superior direito (antes da grade, para o coral não trocar de dono na frente de quem assiste); no `encaixe` (f4:A) as 3 peças restantes assentam numa grade 2×2 frouxa (giros ±6°) com uma vaga, soft impact; a logo (clip-path, 300 px) se desenha acima até `marca`; `assinatura` = 'Feita para terapeutas' com ícone; em `aproxima` (f4:terapeutas) as peças param de girar e se aproximam; em `titulo` a logo sobe e entra a headline; em `p1` (simples) as peças se alinham; em `p2` (organizada) Sessão rápida (zap, coral) entra por baixo na vaga e os rótulos reais aparecem (2 mudanças só); em `p3` (profissional) a logo e a tagline saem e o card branco fecha em volta (geometria idêntica ao card Atalhos do painel-inicio: ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação), centralizado. Sai por câmera contínua: zoom no card. Params: pecas, rotulos, mensagens.",
+        "slots": [
+          "assinatura",
+          "titulo",
+          "p1",
+          "p2",
+          "p3"
+        ],
+        "cues": [
+          "entra",
+          "encaixe",
+          "marca",
+          "assinatura",
+          "aproxima",
+          "titulo",
+          "p1",
+          "p2",
+          "p3"
+        ]
+      }
     },
     {
       "id": "s5",
@@ -801,7 +832,39 @@
       "sai": "hard cut na batida para o enquadramento exato da s3",
       "ajuste_bloco": "começar com a câmera dentro do card Atalhos (param `de_atalhos`; o card Atalhos do bloco é a referência de geometria da s4 e s7; zoom só funciona se o painel for HTML vetorial, conferido: é HTML); toast 'Confirmação enviada no WhatsApp' (hoje 'Sessão agendada · lembrete enviado') nascendo da peça Mensagens; elenco param (`elenco`: o de P.elenco, '4 sessões hoje', próxima Helena 14:00 em 15 min; hoje está Marina 15:00 e '3 sessões')",
       "params": {
-        "elenco": "P.elenco"
+        "de_atalhos": true,
+        "toast": "Confirmação enviada no WhatsApp",
+        "elenco": {
+          "dia": "Quarta-feira · 4 sessões hoje",
+          "sessoes": [
+            [
+              "09:00",
+              "Marina S."
+            ],
+            [
+              "11:00",
+              "Lucas P."
+            ],
+            [
+              "14:00",
+              "Helena R."
+            ],
+            [
+              "16:00",
+              "Clara A."
+            ]
+          ],
+          "proxima": "14:00 · Helena R. · em 15 min"
+        },
+        "zoom_atalhos": 1.59,
+        "desloc_atalhos": 76,
+        "por_formato": {
+          "9x16": {
+            "zoom_atalhos": 1.94,
+            "desloc_atalhos": 133
+          }
+        },
+        "inteira": true
       }
     },
     {
@@ -818,24 +881,6 @@
       "motivo": "callback da coluna do dia: o que a s3 apertou, a s6 devolve",
       "composicao": "idêntica à s3 (mesma coluna, mesma escala, mesmas sessões no mesmo y); chip \"tudo na kz\" no cabeçalho da coluna; coração sobre a sessão das 14h",
       "olhar": "topo → coluna",
-      "novo": {
-        "tipo": "cena",
-        "id": "dia-do-terapeuta",
-        "slots": [
-          "titulo",
-          "apoio",
-          "palavra"
-        ],
-        "cues": [
-          "entra",
-          "muda",
-          "apoio",
-          "transborda",
-          "fecho",
-          "sai"
-        ],
-        "spec": "mesmo bloco da s3, modo `devolve` (ver o spec da s3: um spec só)"
-      },
       "style_frame": {
         "4x5": "style/png/slide-03.png",
         "9x16": "style/png/slide-07.png"
@@ -997,7 +1042,26 @@
           "fonte": "elenco fictício, rodapé 'dados ilustrativos'",
           "status": "ok"
         }
-      ]
+      ],
+      "use": "cena/dia-do-terapeuta",
+      "bloco_feito": {
+        "tipo": "cena",
+        "id": "dia-do-terapeuta",
+        "slots": [
+          "titulo",
+          "apoio",
+          "palavra"
+        ],
+        "cues": [
+          "entra",
+          "muda",
+          "apoio",
+          "transborda",
+          "fecho",
+          "sai"
+        ],
+        "spec": "mesmo bloco da s3, modo `devolve` (ver o spec da s3: um spec só)"
+      }
     },
     {
       "id": "s7",
@@ -1021,24 +1085,6 @@
         "meio: 'kz.app.br' digitado; o cursor vai ao Ir",
         "fim: a página carrega o painel; 'Uma forma *mais simples*' embaixo; cauda de 3 s"
       ],
-      "novo": {
-        "tipo": "cta",
-        "id": "navegador",
-        "spec": "Converter library/motion/cta/navegador (navegador.js/css, origem A-opus s9) em bloco: slots titulo|url|frase; cues entra (aba abre), digita (URL digitada; foley de teclado), clique (cursor clica em Ir), carrega (a página carrega: param `pagina` = print do painel ou HTML com logo + frase); cauda de 2–4 s sem fala.",
-        "slots": [
-          "titulo",
-          "url",
-          "frase"
-        ],
-        "cues": [
-          "entra",
-          "digita",
-          "clique",
-          "carregando",
-          "carrega",
-          "fecha"
-        ]
-      },
       "style_frame": {
         "4x5": "style/png/slide-04.png",
         "9x16": "style/png/slide-08.png"
@@ -1102,7 +1148,31 @@
           "fonte": "print do painel 2026-10-07",
           "status": "ok"
         }
-      ]
+      ],
+      "params": {
+        "pagina": "@data/pagina-kz.html",
+        "aba": "kz · Plataforma para terapeutas",
+        "rodape": "dados ilustrativos"
+      },
+      "use": "cta/navegador",
+      "bloco_feito": {
+        "tipo": "cta",
+        "id": "navegador",
+        "spec": "Converter library/motion/cta/navegador (navegador.js/css, origem A-opus s9) em bloco: slots titulo|url|frase; cues entra (aba abre), digita (URL digitada; foley de teclado), clique (cursor clica em Ir), carrega (a página carrega: param `pagina` = print do painel ou HTML com logo + frase); cauda de 2–4 s sem fala.",
+        "slots": [
+          "titulo",
+          "url",
+          "frase"
+        ],
+        "cues": [
+          "entra",
+          "digita",
+          "clique",
+          "carregando",
+          "carrega",
+          "fecha"
+        ]
+      }
     }
   ],
   "revisao": [
@@ -1131,7 +1201,7 @@
       "recusado": "cauda da s6 em 0,7 s: deixava 0,85 s de silêncio antes da s7 (limite 0,5 s, REGRAS §2; o check acusa); fica 0,35 s e o respiro vem da cauda de 3 s da s7"
     }
   ],
-  "status": "v3.1 (depois da revisão 3: passa com 28/36; bloqueantes corrigidos) · aguardando aval",
+  "status": "aprovado pelo Oliver (2026-10-08): conceito As peças da rotina",
   "elenco": {
     "dia": "quarta-feira, 4 sessões hoje",
     "sessoes": [

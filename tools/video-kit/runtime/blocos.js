@@ -72,7 +72,12 @@
       tl, K, root, id: item.cena || item.inst, use: item.use,
       $, $$: (s) => [...root.querySelectorAll(s)],
       cena: { start: sc.start, end: sc.end, dur: sc.dur },
-      params: { ...(item.padroes || {}), ...(sc.params || {}), ...(item.params || {}) },
+      // params.por_formato = { "9x16": { … } }: sobrescreve só no formato em render (#root.f-<formato>)
+      params: (() => {
+        const p = { ...(item.padroes || {}), ...(sc.params || {}), ...(item.params || {}) }
+        const fmt = ((document.getElementById('root') || {}).className || '').match(/\bf-(\w+)/)?.[1]
+        return p.por_formato && fmt && p.por_formato[fmt] ? { ...p, ...p.por_formato[fmt] } : p
+      })(),
       partes,
       texto(nome) {
         const i = (item.slots || []).indexOf(nome)

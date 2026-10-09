@@ -1,0 +1,47 @@
+:scope { opacity: 0; --noite-ink: #5a4d42; }
+.pool { display: none; }
+.hl { font-weight: 700; }
+.t-tit { white-space: nowrap; left: 0; right: 0; }
+.t-tit .w.acc { font-family: var(--font-heading); font-style: normal; font-weight: 700; font-size: 1em; color: var(--accent); }
+.t-apo { left: 90px; right: 90px; }
+.card { position: absolute; background: var(--surface); border-radius: 16px; box-shadow: 0 0 0 1px var(--border), var(--shadow-md); }
+.cab { position: absolute; left: 0; right: 0; top: 0; height: 72px; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 22px; border-bottom: 1px solid var(--border); font-size: 24px; font-weight: 700; color: var(--muted); }
+.cab small { display: block; font-size: 18px; font-weight: 500; color: var(--muted); line-height: 1.2; }
+.cab-t b { font-weight: 700; display: block; }
+.aviso-r { display: block; }
+.chip-kz { display: none; height: 52px; border-radius: 10px; background: var(--surface-2); box-shadow: 0 0 0 1px var(--border); align-items: center; gap: 10px; padding: 0 14px; font-size: 22px; font-weight: 700; color: var(--text); white-space: nowrap; opacity: 0; }
+.chip-kz .mini { width: 40px; display: block; }
+.mini svg { width: 100%; display: block; }
+.mini path { fill: var(--logo); }
+.ci-box { display: flex; gap: 8px; align-items: center; }
+.ci { width: 24px; height: 24px; display: grid; place-items: center; opacity: 0.35; }
+.ci svg { width: 24px; height: 24px; display: block; }
+:scope.devolve .chip-kz { display: flex; }
+:scope.devolve .aviso-r { display: none; }
+:scope.aperta .cab-t .aviso { display: none; }
+.view { position: absolute; left: 0; right: 0; top: 97px; bottom: 0; z-index: 2; border-radius: 0 0 16px 16px; }
+:scope.aperta .view { overflow: hidden; }
+.cam { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 0 0; }
+.area { position: absolute; left: 96px; right: 22px; top: 0; bottom: 0; }
+.horas { position: absolute; left: -82px; top: 0; bottom: 0; z-index: 1; }
+.horas i { position: absolute; font-style: normal; font-size: 24px; font-weight: 600; color: var(--muted); line-height: 24px; }
+.noite { position: absolute; left: -96px; right: -22px; height: 0; overflow: hidden; background: var(--surface-2); border-top: 1px dashed var(--pastel-clay); z-index: 0; }
+.noite-d { position: absolute; inset: 0; opacity: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--pastel-clay) 62%, var(--surface-2)), var(--pastel-clay)); }
+.noite-l { position: absolute; left: 12px; top: 34px; font-size: 20px; font-weight: 700; color: var(--noite-ink); opacity: 0; }
+.sessao { position: absolute; left: 0; right: 0; z-index: 1; background: var(--pastel-sage); border-radius: 12px; padding: 0 20px; display: flex; align-items: center; gap: 14px; font-size: 28px; color: var(--ink); white-space: nowrap; opacity: 0; }
+.sessao b { font-weight: 700; }
+.sessao span { font-weight: 500; }
+.tarefa { position: absolute; left: 0; right: 0; z-index: 2; border-radius: 8px; padding: 0 14px; display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; white-space: nowrap; box-shadow: var(--shadow-sm); }
+.tarefa .tic { display: block; width: 24px; height: 24px; }
+.tarefa .tic svg { width: 24px; height: 24px; display: block; }
+.anel { position: absolute; z-index: 3; border-radius: 12px; opacity: 0; box-shadow: 0 0 0 4px var(--surface), 0 0 0 8px var(--accent-soft), var(--shadow-md); }
+.coracao { position: absolute; z-index: 5; width: 96px; height: 96px; border-radius: 50%; background: var(--surface); box-shadow: 0 0 0 10px var(--accent-soft), var(--shadow-md); display: grid; place-items: center; color: var(--accent); opacity: 0; }
+.coracao svg { width: 54px; height: 54px; display: block; }
+.burst { position: absolute; z-index: 4; width: 96px; height: 96px; border-radius: 50%; }
+.grande { position: absolute; left: 0; right: 0; text-align: center; line-height: 1; opacity: 0; white-space: nowrap; }
+.voos { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 6; }
+.voa { position: absolute; left: 0; top: 0; opacity: 0; }
+.v-rect { position: absolute; left: 0; top: 0; border-radius: 8px; padding: 0 14px; display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; white-space: nowrap; box-shadow: var(--shadow-sm); }
+.v-rect svg { width: 24px; height: 24px; display: block; }
+.v-tile { position: absolute; left: 0; top: 0; width: 96px; height: 96px; border-radius: 22px; display: grid; place-items: center; box-shadow: var(--shadow-md); opacity: 0; }
+.v-tile svg { width: 48px; height: 48px; display: block; }

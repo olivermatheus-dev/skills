@@ -41,5 +41,8 @@ Classes de marca compartilhadas (ex.: `.t-coral`): `companies/<slug>/video-templ
 "scenes": [{ "id": "s1", "use": "abertura/pergunta-fragmentos", "vo": ["f1"], "on_screen": "Você é *terapeuta*?|…" }],
 "events": [{ "id": "e2", "cue": "troca", "scene": "s1", "word": "f1:ainda", "offset": -0.12 }]
 ```
+- **Param por formato:** `"params": { "zoom": 1.5, "por_formato": { "9x16": { "zoom": 1.9 } } }` (o runtime sobrescreve só no formato em render).
+- **Param de arquivo:** `"pagina": "@data/pagina.html"` (texto grande; o `produce.mjs` lê da pasta do vídeo, ou da origem numa variante).
+
 Comandos: `node tools/video-kit/scripts/compor.mjs <pasta> --listar` (monta e diz de onde veio cada bloco); o resto do fluxo não muda.
 Exemplo completo: `companies/kz/contents/2026-10-07-apresentacao-kz` (8 blocos da kz em `companies/kz/video-templates/blocos/`).

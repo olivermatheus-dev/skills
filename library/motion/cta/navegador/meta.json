@@ -3,10 +3,36 @@
   "categoria": "cta",
   "titulo": "CTA navegador: aba abre, URL é digitada, cursor clica em Ir, página carrega",
   "uso": "cartão final com site/URL; pode passar do fim da locução (2–4 s a mais)",
-  "arquivos": ["navegador.js", "navegador.css"],
-  "parametros": { "url": "texto digitado", "tab": "título da aba depois de carregar", "page": "HTML da página (logo, frase)", "at": "entrada", "typeAt": "início da digitação", "clickAt": "clique em Ir" },
-  "eventos_sugeridos": ["entrada (pop)", "digitação (foley-teclado-notebook-01, delay -0.45, max ~1)", "clique (foley-clique-mouse-01)", "carregou (ding)"],
-  "tokens": ["--surface", "--surface-2", "--border", "--text", "--muted", "--primary", "--on-primary", "--font-body", "--shadow-lg"],
+  "arquivos": [
+    "navegador.js",
+    "navegador.css"
+  ],
+  "parametros": {
+    "url": "texto digitado",
+    "tab": "título da aba depois de carregar",
+    "page": "HTML da página (logo, frase)",
+    "at": "entrada",
+    "typeAt": "início da digitação",
+    "clickAt": "clique em Ir"
+  },
+  "eventos_sugeridos": [
+    "entrada (pop)",
+    "digitação (foley-teclado-notebook-01, delay -0.45, max ~1)",
+    "clique (foley-clique-mouse-01)",
+    "carregou (ding)"
+  ],
+  "tokens": [
+    "--surface",
+    "--surface-2",
+    "--border",
+    "--text",
+    "--muted",
+    "--primary",
+    "--on-primary",
+    "--font-body",
+    "--shadow-lg"
+  ],
   "origem": "companies/kz/contents/2026-10-07-ab-sessao/A-opus (2026-10-07), pedido do Oliver",
-  "exemplo": "companies/kz/contents/2026-10-07-ab-sessao/A-opus/composition.html (cena s9)"
+  "exemplo": "companies/kz/contents/2026-10-07-ab-sessao/A-opus/composition.html (cena s9)",
+  "bloco": "library/blocos/cta/navegador (global, 047 B): versão em bloco com cues entra/digita/clique/carregando/carrega/fecha, esqueleto, câmera e página por param; prefira o bloco em vídeos novos. Este componente continua válido para composição escrita à mão."
 }

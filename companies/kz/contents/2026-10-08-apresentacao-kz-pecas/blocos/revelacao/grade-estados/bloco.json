@@ -1,0 +1,22 @@
+{
+  "id": "revelacao/grade-estados",
+  "tipo": "revelacao",
+  "titulo": "Revelação da marca: as 4 peças da rotina chegam, Mensagens sai para o canto, 3 encaixam em grade 2×2 frouxa; a logo se desenha; os adjetivos viram estados da grade (alinha, rótulos, card Atalhos)",
+  "camada": "palco",
+  "slots": ["assinatura", "titulo", "p1", "p2", "p3"],
+  "params": {
+    "pecas": { "padrao": [["calendar", "Agenda", "t-teal"], ["contact", "Pacientes", "t-amber"], ["notebook-pen", "Anotações", "t-lilac"], ["message-circle", "Mensagens", "t-coral"]], "descricao": "as 4 peças vindas da s3: [ícone, nome, tom]. Só o tom (3º item) é lido; os ícones são fixos no HTML (iguais aos dos atalhos finais; 'contact' não existe no kit, Pacientes usa user-plus)." },
+    "rotulos": { "padrao": ["Agendar", "Novo cliente", "Nova anotação", "Sessão rápida"], "descricao": "rótulos reais do app: os 3 primeiros nas peças Agenda, Pacientes, Anotações; o 4º na peça que entra na vaga (Sessão rápida)" },
+    "mensagens": { "padrao": 3, "descricao": "número no selo da peça Mensagens, que vai para o canto" },
+    "zoom_fim": { "padrao": 1.1, "descricao": "câmera contínua para a s5: escala extra aplicada em torno do centro do card nos últimos ~0,5 s (1 = sem zoom). Escala final do card = k × zoom_fim (k = 1,4 no 4:5; 1,7 no 9:16)" }
+  },
+  "cues": ["entra", "encaixe", "marca", "assinatura", "aproxima", "titulo", "p1", "p2", "p3"],
+  "min_s": 7,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "air (cauda)", "encaixe": "soft impact", "marca": "piano (acorde)", "assinatura": "pop suave", "aproxima": "air curto", "titulo": "swish fino", "p1": "click de encaixe", "p2": "pop de UI", "p3": "click suave" },
+  "tokens": ["--logo", "--accent", "--accent-soft", "--surface", "--border", "--primary", "--on-primary", "--shadow-md", "--tile-*"],
+  "dados": "nenhum dado de pessoa; rótulos e ícones dos atalhos reais do painel (PRODUTO.md > Painel do dia)",
+  "origem": "companies/kz/contents/2026-10-08-apresentacao-kz-pecas (cena s4); base de logo/assinatura: revelacao/logo-pilulas; card = seção .short do produto/painel-inicio",
+  "licenca": "própria"
+}

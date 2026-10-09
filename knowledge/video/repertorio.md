@@ -8,7 +8,7 @@
 | tipo | ideia | solução | bloco | origem |
 |---|---|---|---|---|
 | pergunta / identificação | "você é X e ainda faz Y?" | pergunta grande com selo no 1º quadro → sobe e encolhe → segunda frase; fragmentos da rotina saltam na palavra do problema | `kz: abertura/pergunta-fragmentos` | apresentação kz v03 (2026-10-07) |
-| dor | coisas espalhadas | 3 cards tortos entram cada um na sua palavra, headline troca junto, ganham alerta e são arremessados | `kz: cena/caos-cards` | idem |
+| dor | coisas espalhadas | 3 cards tortos entram cada um na sua palavra, headline troca junto, ganham alerta e são arremessados (alerta em --danger é o padrão do bloco; no kz use `alerta: ink`: coral + vermelho juntos é proibido no BRAND.md) | `kz: cena/caos-cards` | idem |
 | dor | "sobra menos tempo" | anel de relógio que esvazia na palavra "menos" + frase de apoio + palavra-chave grande com coração | `kz: cena/tempo-encolhe` | idem (v02: relógio corrigido na v03) |
 | revelação | marca + o que é | brilho + logo se desenha; logo sobe e encolhe; 3 pílulas com ícone em cascata | `kz: revelacao/logo-pilulas` | idem |
 | produto | "tudo pensado para você" | headline que troca a cada frase + painel montando peça a peça + câmera e cursor na próxima sessão + toast de confirmação | `kz: produto/painel-inicio` | idem |

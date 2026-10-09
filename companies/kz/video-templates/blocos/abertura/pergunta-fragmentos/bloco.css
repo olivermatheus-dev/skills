@@ -7,3 +7,7 @@
   background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-md);
   font-size: 30px; font-weight: 600; opacity: 0; white-space: nowrap; }
 .frag .ic { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; }
+.frag .lb { line-height: 1.2; }
+.frag .dt { display: block; font-size: 21px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+.frag .bd { position: absolute; right: -12px; top: -16px; min-width: 40px; height: 40px; padding: 0 10px; box-sizing: border-box; border-radius: 20px;
+  background: var(--primary); color: var(--ink); display: grid; place-items: center; font-size: 22px; font-weight: 700; box-shadow: var(--shadow-sm); }
