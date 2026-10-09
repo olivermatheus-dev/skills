@@ -26,6 +26,11 @@ function arquivos(dir) {
 // miniatura do bloco (preview.png/.json, gerada para a galeria) não é fonte: não muda o vídeo nem a versão
 const naoFonte = (f) => /[\\/]preview\.[^\\/]+$/.test(f);
 const arquivosFonte = (dir) => arquivos(dir).filter((f) => !naoFonte(f));
+/** troca só a fonte de um bloco pela da versão guardada; a miniatura (preview.*) da galeria fica */
+function trocarFonte(snap, local) {
+  for (const f of arquivosFonte(local)) rmSync(f, { force: true });
+  cpSync(snap, local, { recursive: true });
+}
 
 /** hash da fonte: timeline + modelo da composição + arquivos de cada bloco usado + data/ */
 export function hashFonte(v, { html, blocos = [] }) {
@@ -130,7 +135,8 @@ function acharVersao(v, nome) {
 export function restaurar(v, nome, { fiel = true } = {}) {
   const x = acharVersao(v, nome);
   const base = join(VDIR(v), x.nome);
-  const bk = join(VDIR(v), `_backup-${new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '')}`);
+  // com milissegundos: dois restauros seguidos não podem cair no mesmo backup (o segundo apagaria o primeiro)
+  const bk = join(VDIR(v), `_backup-${new Date().toISOString().slice(0, 23).replace(/[-:T.]/g, '')}`);
   mkdirSync(bk, { recursive: true });
   for (const f of ['timeline.json', 'composition.html']) if (existsSync(join(v.dir, f))) cpSync(join(v.dir, f), join(bk, f));
   if (existsSync(join(v.dir, 'blocos'))) cpSync(join(v.dir, 'blocos'), join(bk, 'blocos'), { recursive: true });
@@ -140,11 +146,11 @@ export function restaurar(v, nome, { fiel = true } = {}) {
   for (const b of x.blocos ?? []) {
     const snap = join(base, 'blocos', b.use);
     const local = join(v.dir, 'blocos', b.use);
-    if (b.escopo === 'projeto') { rmSync(local, { recursive: true, force: true }); cpSync(snap, local, { recursive: true }); continue; }
+    if (b.escopo === 'projeto') { trocarFonte(snap, local); continue; }
     const atual = resolverBloco(v, b.use).dir;
     const mudou = arquivosFonte(snap).some((f) => { const g = join(atual, relative(snap, f)); return !existsSync(g) || !readFileSync(g).equals(readFileSync(f)); });
     if (!mudou) continue;
-    if (fiel) { rmSync(local, { recursive: true, force: true }); cpSync(snap, local, { recursive: true }); avisos.push(`${b.use} [${b.escopo}] mudou na biblioteca: a cópia da ${x.nome} entrou em blocos/${b.use} da peça`); }
+    if (fiel) { trocarFonte(snap, local); avisos.push(`${b.use} [${b.escopo}] mudou na biblioteca: a cópia da ${x.nome} entrou em blocos/${b.use} da peça`); }
     else avisos.push(`${b.use} [${b.escopo}] mudou na biblioteca desde a ${x.nome}: para ficar igual, copie versoes/${x.nome}/blocos/${b.use} para blocos/${b.use}`);
   }
   return { versao: x.nome, backup: relative(v.dir, bk).replace(/\\/g, '/'), avisos };

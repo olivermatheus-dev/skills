@@ -111,7 +111,7 @@ blocos/<tipo>/<id>/   ← blocos novos do projeto (nunca apague: a versão expor
 versoes/vNN/          ← fonte de cada versão exportada (timeline + composição + todos os blocos), gravada pelo produce; vai para o git
 audio/ render/ exports/      ← gerados, fora do git
 ```
-**Versão = fonte, não formato** (050): um export grava `versoes/vNN/`; 4:5 e 9:16 da mesma fonte saem com o mesmo número. Plano novo depois de um export **não** sobrescreve a versão: `node tools/video-kit/scripts/versao.mjs <pasta> listar|diff vNN|restaurar vNN`.
+**Versão = fonte, não formato** (050): um export grava `versoes/vNN/`; 4:5 e 9:16 da mesma fonte saem com o mesmo número. Plano novo depois de um export **não** sobrescreve a versão: `node tools/video-kit/scripts/versao.mjs <pasta> listar|diff vNN|restaurar vNN`. No app (Edição do vídeo) o Oliver vê "fonte: vNN · é a atual/mudou depois", restaura uma versão e compara duas lado a lado; a anotação grava `versao` (a fonte do MP4 em que ele anotou). Restaurar copia também os blocos da biblioteca que mudaram desde então para `blocos/` da peça, para o vídeo sair igual (`--so-projeto` só avisa); a fonte anterior fica em `versoes/_backup-…` (fora do git).
 Plano: skill `plano-de-cenas`. Molde da timeline: `references/timeline.md`.
 
 ## Regras de cena (dentro de cada bloco)

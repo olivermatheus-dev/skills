@@ -1,6 +1,6 @@
 # 050 — Vídeos: versão de verdade, anotação que funciona e organização para 100–200 peças
 
-Status: A, B e C feitas (2026-10-09); falta migrar a origin-story (em uso pela 049) · D depois
+Status: A, B, C e D feitas (2026-10-09); falta só migrar a origin-story (a sessão da 049 roda ao terminar)
 
 ## Pedido do Oliver (2026-10-09)
 - Anotou um elemento num quadro do vídeo (c1 da `V0003-apresentacao-janela`, 9:16, 14,88 s: "a janela da sessão, quando fala que é o que realmente importa, deve crescer e ficar centralizada, o resto com menos opacidade"), pediu ajuste ao Claude pelo app e **nada mudou**.
@@ -50,10 +50,19 @@ Decisões do Oliver: ID + slug na pasta, data na ficha; **todos os tipos ganham 
 
 - **Falta:** a `origin-story` ficou de fora porque a sessão do carrossel (tarefa 049) está trabalhando nela; avisada para rodar `node tools/pecas.mjs migrar kz --aplicar` ao terminar.
 
-## D — Depois
-- App: anotação guarda a versão (`video` já guarda o MP4; somar `versao`), botão "Restaurar esta versão" e comparação lado a lado vNN × vMM no player; `principal` por versão em vez de arquivo.
+## D — Versões no app (feita)
+- **Anotação guarda a versão** (`revisao.json` > `versao`, `schema/review.ts`); o `review.mjs` usa ela antes do nome do MP4.
+- **Edição do vídeo** (`components/pieces/VideoVersoes.tsx`): seletor "v03 · 9x16 (fonte atual)"; selo **fonte: vNN · é a atual** (verde) ou **· mudou depois** (laranja) com **Restaurar esta versão** (confirmação; a fonte de antes vai para `versoes/_backup-…`, fora do git); **Comparar com…** = segundo player mudo, preso ao tempo do principal.
+- **Ficha:** cada MP4 na lista de arquivos mostra a versão (verde = fonte atual).
+- **API:** `GET /piece/versoes`, `POST /piece/versoes/restaurar` (`core/versoes.ts`, em processo, sobre `versao.mjs`: `versoes`, `hashAtual`, `diffVersao`, `restaurar`). Restaurar recusa durante "Gerar prévia".
+- `restaurar` é **fiel**: bloco da biblioteca que mudou desde a versão entra em `blocos/` da peça (o projeto vence); troca só a fonte (`preview.*` da galeria de blocos ficam e não contam no hash).
+- Conferido no navegador (V0003): selo, troca para v02 ("mudou depois" + botão), comparar v03 × v02 sincronizado em 15,6 s, restaurar v02 → v03 pela API e pelo terminal com a fonte voltando idêntica.
+- **Não feito (de propósito):** `principal` continua sendo um arquivo (a capa precisa de um MP4 de um formato); a versão aparece ao lado.
+
+## Depois
 - Campanhas (`campaigns/AAAA-MM-DD-…`) e capturas seguem com data no nome; decidir se ganham ID quando crescerem.
 
 ## Log
 - 2026-10-09 · diagnóstico do c1 (log `logs/atividade/20261009032445-ajustes-suyz.json`) · A feita · B: fonte recuperada (idêntica), ajuste aplicado, quadros conferidos em 4:5 e 9:16, v03 exportada.
 - 2026-10-09 · C feita: regra de ID, app, ferramentas, docs (skills, agentes, CLAUDE.md, protocolo); migração aplicada (9 pastas, 18 MP4, 52 textos); app conferido no navegador (busca "v3", ID no título, player na V0003-9x16-v03, sem erro no console). Tarefa renumerada de 049 para 050 (a 049 é a do carrossel, de outra sessão).
+- 2026-10-09 · D feita: versões no app (selo, restaurar, comparar, versão na anotação e na Ficha). Corrigido no caminho: restaurar apagava as miniaturas preview.* dos blocos e dois restauros no mesmo segundo dividiam o backup.

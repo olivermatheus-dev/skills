@@ -46,3 +46,6 @@ data/curadoria/
 companies/*/contents/*/variantes/*/composition.html
 # medidas de tela da base para o QC de sincronia (045 C): cache, refeito sozinho
 companies/*/contents/*/variantes/qc-base.json
+
+# backups do "Restaurar esta versão" (050 D): ficam no disco, fora do git
+companies/**/versoes/_backup-*/
