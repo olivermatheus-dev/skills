@@ -24,6 +24,8 @@ export const Task = z.object({
   // 021: o que o agente lê para esta tarefa (e só isso). "arquivo#Seção", relativo a companies/<slug>/ ou à raiz.
   // Ver tools/lib/contexto.mjs; `node tools/board.mjs pacote <slug> <id>` monta a leitura; --check confere se existe.
   context: list,
+  // 048: skills que a tarefa usa → o pacote junta o ## Contexto delas (só o que vale para o agente) ao do agente e da tarefa
+  skills: list,
   recurring: nullish(z.string()), // id da recorrência que criou a tarefa (heartbeat)
 });
 export type Task = z.infer<typeof Task>;

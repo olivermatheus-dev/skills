@@ -21,6 +21,7 @@ export interface DecisaoTermo { grupo: string; valor: string; ok: boolean; msg: 
 export type { RelatorioLinha, RelatorioView, FichaOpcao };
 export type { FilaStatus, PedirLote };
 import type { Review, ReviewComment } from '../../schema/review';
+import type { Ficha, Conferencia, CampoMolde, Candidato, RefConferida, EdicaoFicha, ItemDaFuncao, TipoFicha } from '../../tools/lib/ficha-agente.mjs';
 import type { Brand, BrandFont, BrandToken } from '../../schema/brand';
 import type { BrandPreset } from '../../core/brand-presets';
 export type { Brand, BrandFont, BrandToken, BrandPreset };
@@ -66,6 +67,9 @@ export interface ArquivoFixo { path: string; titulo: string; dica: string; exist
 export interface SkillResumo { id: string; nome: string; descricao: string; grupo: 'formato' | 'skill'; arquivos: number; agentes: string[]; principal: boolean }
 export type SkillDetalhe = SkillResumo & { arvore: NoArquivo[] };
 export interface ArquivosAgente { fixos: ArquivoFixo[]; skills: SkillDetalhe[] }
+/** ficha do agente/skill (048): campos do molde (tools/lib/ficha-agente.mjs) */
+export type { ItemContexto, ContextoFicha, SecaoLivre, CampoMolde, Candidato, RefConferida, EdicaoFicha, TipoFicha } from '../../tools/lib/ficha-agente.mjs';
+export type FichaAgenteView = Omit<Ficha, 'blocos' | 'fmRaw' | 'texto'> & { conferencia: Conferencia; molde: CampoMolde[]; agentes: string[]; leitura: ItemDaFuncao[] | null };
 export interface ArquivoTexto { path: string; texto: string; existe: boolean; mtime: number | null }
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
@@ -208,6 +212,10 @@ export const api = {
   skill: (id: string) => req<SkillDetalhe>('GET', `/api/skills/${encodeURIComponent(id)}`),
   arquivo: (path: string) => req<ArquivoTexto>('GET', `/api/arquivo?path=${encodeURIComponent(path)}`),
   salvarArquivo: (path: string, texto: string, mtime: number | null) => req<ArquivoTexto>('PUT', '/api/arquivo', { path, texto, mtime }),
+  fichaAgente: (tipo: TipoFicha, id: string, slug: string) => req<FichaAgenteView>('GET', `/api/ficha/${tipo}/${encodeURIComponent(id)}?slug=${encodeURIComponent(slug)}`),
+  salvarFichaAgente: (tipo: TipoFicha, id: string, slug: string, edit: EdicaoFicha, mtime: number | null) => req<FichaAgenteView>('PUT', `/api/ficha/${tipo}/${encodeURIComponent(id)}?slug=${encodeURIComponent(slug)}`, { edit, mtime }),
+  fichaCandidatos: (slug: string) => req<Candidato[]>('GET', `/api/ficha-candidatos?slug=${encodeURIComponent(slug)}`),
+  fichaRefs: (refs: string[], slug: string) => req<RefConferida[]>('POST', '/api/ficha-refs', { refs, slug }),
   pedidoIa: (slug: string, ref: string) => req<PedidoIaView | null>('GET', `${pj(slug)}/pedido-ia?ref=${encodeURIComponent(ref)}`),
   pedirAjustes: (slug: string, path: string, b: { aba: 'video' | 'slides' | 'roteiro'; ids?: string[]; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
     req<PedidoIaStart & { ids: string[] }>('POST', `${pj(slug)}/piece/ajustes?path=${encodeURIComponent(path)}`, b),

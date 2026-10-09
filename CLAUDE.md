@@ -88,6 +88,7 @@ Fluxo típico: `content-ideas` → `ig-post` → formato `fmt-*` → `carousel` 
   | `pesquisador` | radar de concorrentes e referências, coletas, análise só do que o Oliver marcou → ideias |
 
   Todos seguem `.claude/skills/orquestrar/references/protocolo.md` e leem suas instruções permanentes em `.claude/agent-notes/<agente>.md`.
+- **Ficha de agente e skill (048):** todo agente e `SKILL.md` segue o molde `.claude/skills/orquestrar/references/ficha.md` (Especialista · Contexto exato · Entradas e saídas · Ordem · Regras · Checklist); o app abre como formulário. `node tools/agentes.mjs check` confere (também no `validate`); `… contexto <agente> --skill x` mostra o que ele lê. Tarefa declara `skills: [x]` e o `pacote` junta o contexto da ficha.
 - **Falar com um agente:**
   - instrução permanente → `.claude/agent-notes/`;
   - trabalhar junto → `claude --agent <agente>` num terminal.

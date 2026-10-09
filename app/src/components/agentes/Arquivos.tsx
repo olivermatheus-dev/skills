@@ -5,13 +5,14 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  Braces, ChevronRight, File, FileCode2, FileText, Folder, FolderOpen, Loader2, NotebookPen, Pin, ScrollText, Settings2, Sparkles, Undo2, X, type LucideIcon,
+  Braces, ChevronRight, ClipboardList, File, FileCode2, FileText, Folder, FolderOpen, Loader2, NotebookPen, Pin, ScrollText, Settings2, Sparkles, Undo2, X, type LucideIcon,
 } from 'lucide-react';
 import { api, type ArquivoFixo, type NoArquivo, type SkillDetalhe } from '../../api';
 import { MarkdownEditor } from '../Markdown';
 import { useFillHeight } from '../fill';
 import { Button, ErrorBox, cx } from '../kit';
 import { toast } from '../toast';
+import { FichaEditor, fichaDoArquivo } from './Ficha';
 
 const ext = (p: string) => p.slice(p.lastIndexOf('.') + 1).toLowerCase();
 function iconeArquivo(nome: string): LucideIcon {
@@ -70,7 +71,7 @@ const Titulo = ({ children, extra }: { children: ReactNode; extra?: ReactNode })
 );
 
 // ── editor de um arquivo ──────────────────────────────────────────────────────
-function ArquivoEditor({ path, fixo, onDirty }: { path: string; fixo?: ArquivoFixo; onDirty: (d: boolean) => void }) {
+function ArquivoEditor({ path, fixo, onDirty, onFicha }: { path: string; fixo?: ArquivoFixo; onDirty: (d: boolean) => void; /** arquivo que tem ficha: volta para ela */ onFicha?: () => void }) {
   const qc = useQueryClient();
   const { data, error, isLoading } = useQuery({ queryKey: ['arquivo', path], queryFn: () => api.arquivo(path), staleTime: 0 });
   const [draft, setDraft] = useState<string | null>(null);
@@ -108,6 +109,7 @@ function ArquivoEditor({ path, fixo, onDirty }: { path: string; fixo?: ArquivoFi
         {data && !data.existe && <span className="text-xs text-muted-foreground">Arquivo novo: nasce ao salvar</span>}
         {dirty && <span className="inline-flex items-center gap-1.5 text-xs text-warning-ink"><span className="size-1.5 rounded-full bg-warning" />Não salvo</span>}
         {dirty && <Button variant="ghost" className="h-8 px-2.5 text-xs inline-flex items-center gap-1" onClick={() => setDraft(data!.texto)} title="Descartar alterações"><Undo2 className="size-3.5" />Descartar</Button>}
+        {onFicha && <Button variant="ghost" className="h-8 px-2.5 text-xs inline-flex items-center gap-1.5" onClick={() => { if (!dirty || window.confirm('Há alterações não salvas no arquivo. Voltar para a ficha sem salvar?')) onFicha(); }} title="Ver em campos (formulário)"><ClipboardList className="size-3.5" />Ver a ficha</Button>}
         <Button className="h-8 px-3 text-xs inline-flex items-center gap-1.5" disabled={!dirty || salvar.isPending} onClick={() => salvarRef.current()} title="Salvar (Ctrl+S)">
           {salvar.isPending && <Loader2 className="size-3.5 animate-spin" />}Salvar
         </Button>
@@ -151,7 +153,7 @@ export function ArquivosWorkspace({ fixos = [], skills = [], arvore, padrao, rod
   const abrir = (p: string) => {
     if (p === sel) return;
     if (dirty.current && !window.confirm('Há alterações não salvas neste arquivo. Sair sem salvar?')) return;
-    setSp((s) => { const n = new URLSearchParams(s); n.set('f', p); return n; }, { replace: true });
+    setSp((s) => { const n = new URLSearchParams(s); n.set('f', p); n.delete('modo'); return n; }, { replace: true });
   };
 
   // pastas abertas: a skill (e subpastas) do arquivo aberto começam abertas
@@ -163,6 +165,13 @@ export function ArquivosWorkspace({ fixos = [], skills = [], arvore, padrao, rod
   }, [sel]);
   const alternar = (p: string) => setAbertas((a) => { const n = new Set(a); if (n.has(p)) n.delete(p); else n.add(p); return n; });
   const fixo = useMemo(() => fixos.find((f) => f.path === sel), [fixos, sel]);
+  // definição do agente e SKILL.md abrem na ficha (048); ?modo=arquivo = markdown cru
+  const ficha = sel ? fichaDoArquivo(sel) : null;
+  const cru = sp.get('modo') === 'arquivo';
+  const trocarModo = (arquivo: boolean) => {
+    if (dirty.current && !window.confirm('Há alterações não salvas. Trocar de visão sem salvar?')) return;
+    setSp((s) => { const n = new URLSearchParams(s); if (arquivo) n.set('modo', 'arquivo'); else n.delete('modo'); return n; }, { replace: true });
+  };
 
   return (
     <div ref={fillRef} style={{ height: fillH }} className="grid grid-cols-[280px_1fr] rounded-xl border border-border bg-card overflow-hidden min-h-[420px]">
@@ -215,7 +224,9 @@ export function ArquivosWorkspace({ fixos = [], skills = [], arvore, padrao, rod
         )}
       </nav>
       <div className="overflow-y-auto min-w-0">
-        {sel ? <ArquivoEditor key={sel} path={sel} fixo={fixo} onDirty={onDirty} /> : <div className="p-10 text-sm text-muted-foreground text-center">Escolha um arquivo na lista.</div>}
+        {!sel ? <div className="p-10 text-sm text-muted-foreground text-center">Escolha um arquivo na lista.</div>
+          : ficha && !cru ? <FichaEditor key={sel} tipo={ficha.tipo} id={ficha.id} onDirty={onDirty} onArquivo={() => trocarModo(true)} />
+          : <ArquivoEditor key={sel} path={sel} fixo={fixo} onDirty={onDirty} onFicha={ficha ? () => trocarModo(false) : undefined} />}
       </div>
     </div>
   );

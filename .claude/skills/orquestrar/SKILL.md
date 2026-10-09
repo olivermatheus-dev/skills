@@ -42,9 +42,11 @@ Você (sessão principal) é o **orquestrador**. Não produz as peças: planeja,
 ## Contexto por tarefa (021)
 Cada agente lê só a tarefa + o `context:` dela (`node tools/board.mjs pacote <slug> <id>`). Ao criar a subtarefa, escolha as seções com `node tools/contexto.mjs indice <slug>` e comece pelos defaults abaixo, cortando o que a entrega não usa e somando o que o pedido cita (peça, formato, LP). Ref = `arquivo#Seção` (sem vírgula; prefixo do título basta). `--check` acusa ref quebrada.
 
+**Agente no molde (048, `references/ficha.md`):** o contexto da função já está no `## Contexto` da ficha dele e das skills; o `pacote` junta sozinho. Na tarefa vão só o específico da entrega (peça, campanha, seção a mais) e **`skills: [..]`** (as skills que a entrega usa: o pacote traz o contexto delas que vale para o agente). Ver o que ele lê: `node tools/agentes.mjs contexto <agente> --skill <x>`. Agentes ainda fora do molde: use os defaults abaixo.
+
 | agente | `context:` padrão |
 |---|---|
-| roteirista | `context/COPY.md#Big Idea`, `#Objeções` (e o que o tema pedir: `#Mecanismo único`, `#Provas`, `#CTAs`) · `context/AUDIENCE.md#Dores`, `#Linguagem literal` · `context/VOICE.md` · `context/BUSINESS.md#Restrições e compliance` · `brand/BRAND.md#Proibições` |
+| roteirista | **no molde**: só o específico da entrega + `skills: [ig-post]` (ou a skill do pedido); `context/COPY.md#Big Idea` e `#Mecanismo único` quando o tema pedir |
 | designer | `brand/BRAND.md` (inteiro, é curto) · `brand/brand.css` (nomes dos tokens) · `brand/logo/kz-logo.svg` (ou o logo da empresa) · roteiro da peça (`contents/<pasta>/roteiro.md`) |
 | editor-de-video | `brand/BRAND.md#Vídeo`, `#Movimento`, `#Som`, `#Proibições` · `knowledge/video/REGRAS.md` · roteiro/plano da peça |
 | sound-designer | `brand/BRAND.md#Som` · plano da peça |

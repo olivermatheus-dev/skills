@@ -61,6 +61,11 @@ on('GET', '/api/skills', () => SK.listarSkills());
 on('GET', '/api/skills/:id', (p) => SK.lerSkill(p.id));
 on('GET', '/api/arquivo', (_, __, q) => SK.lerArquivo(q.get('path') ?? ''));
 on('PUT', '/api/arquivo', (_, b) => SK.salvarArquivo(b?.path, b ?? {}));
+// Ficha do agente/skill (048): campos do molde ⇄ markdown, select de contexto e conferência das refs
+on('GET', '/api/ficha/:tipo/:id', (p, _, q) => SK.fichaView(p.tipo, p.id, q.get('slug') ?? undefined));
+on('PUT', '/api/ficha/:tipo/:id', (p, b, q) => SK.salvarFichaView(p.tipo, p.id, b ?? {}, q.get('slug') ?? undefined));
+on('GET', '/api/ficha-candidatos', (_, __, q) => SK.candidatosContexto(q.get('slug') ?? undefined));
+on('POST', '/api/ficha-refs', (_, b) => SK.conferirRefs(b?.refs ?? [], b?.slug));
 on('POST', '/api/projects/:slug/runner', (p, b) => R.runAi(p.slug, b ?? {}));
 on('DELETE', '/api/projects/:slug/runner', (p) => R.stopAi(p.slug));
 // Pedidos avulsos de IA (046 D): estado do mais novo de uma tela (?ref=peca:<pasta> | analise:<id|*> | relatorio:<id>),

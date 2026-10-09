@@ -2,9 +2,12 @@
 import { readdirSync } from 'node:fs';
 import { validateAll, brandInSync } from '../core/store';
 import { validarFichas } from './fichas/validar';
+import { conferirTudo } from './lib/ficha-agente.mjs';
 const errs = validateAll();
 // fichas de análise, vocabulário e relatórios (tarefa 040)
 errs.push(...validarFichas());
+// fichas de agente e skill no molde (048): campos obrigatórios e refs do ## Contexto (fora do molde não acusa)
+for (const f of conferirTudo()) if (f.erros.length) errs.push({ file: f.path, issues: f.erros });
 // kit de marca: brand.css tem que ser o gerado pelo brand.json (tarefa 024)
 for (const d of readdirSync('companies').filter((x) => !x.startsWith('_') && !x.includes('.'))) {
   if ((await brandInSync(d).catch(() => true)) === false) errs.push({ file: `companies/${d}/brand/brand.css`, issues: [`diferente do brand.json (editado à mão?): edite o brand.json e rode npm run brand -- ${d}`] });

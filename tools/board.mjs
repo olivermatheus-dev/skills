@@ -9,14 +9,15 @@
 //   node tools/board.mjs comment <slug> <T-NNNN> "texto" --as agent:<nome> [--tipo nota|revisar|pergunta] [--status review --para oliver]
 //        comentário no card (aparece no app, na aba da tarefa). revisar/pergunta = o Oliver precisa ver/responder.
 //   node tools/board.mjs pacote <slug> <T-NNNN>          o que ler para executar/retomar: Estado, tarefa, mãe, comentários
-//        e SÓ os trechos do `context:` declarado (021). É a 1ª leitura de todo agente.
+//        e SÓ os trechos do `context:` declarado (021) + o 
 //   node tools/board.mjs estado <slug> <T-NNNN> "linha 1\nlinha 2" [--as agent:<nome>]   reescreve o ## Estado (≤ 5 linhas)
 //   node tools/board.mjs compactar <slug> <T-NNNN> "resumo" [--manter 5] [--as …]   log antigo vira 1 linha
 //   node tools/contexto.mjs indice <slug>                seções do contexto da empresa (para escolher o `context:`)
 import { existsSync, readFileSync } from 'node:fs';
 import { STATUS, BOARDS, PRIORITY, boardDir, listTasks, nextId, addComment, updateTask, today,
   getSection, setEstado, compactLog, ESTADO_MAX, LOG_MAX } from './lib/board.mjs';
-import { readRef } from './lib/contexto.mjs';
+import { readRef, norm } from './lib/contexto.mjs';
+import { contextoDoAgente } from './lib/ficha-agente.mjs';
 
 const argv = process.argv.slice(2);
 if (argv[0] === 'comment') {
@@ -88,12 +89,24 @@ if (argv[0] === 'pacote') {
       out.push('', `## Tarefa-mãe ${p.id} — ${p.title} (${p.status})`, pe || '(sem Estado)', `arquivo: ${p.path}`);
     }
   }
-  out.push('', `## Contexto declarado (${refs.length})`);
-  if (!refs.length) out.push('(nenhum `context:` declarado: leia o que sua função exige e, ao terminar, registre em `context:` o que de fato usou)');
-  for (const r of refs) {
-    const x = readRef(cslug, r);
-    out.push('', `### ▸ ${r}${x.warn ? `  ⚠ ${x.warn}` : ''}`);
+  // 048: contexto da função = ## Contexto da ficha do agente + das skills da tarefa (`skills:`; sem lista, as do agente só como índice)
+  const agente = /^agent:/.test(t.assignee || '') ? t.assignee.slice(6) : null;
+  const tskills = [].concat(t.skills || []);
+  const naTarefa = new Set(refs.map(norm));
+  const funcao = contextoDoAgente(agente, tskills).filter((i) => !naTarefa.has(norm(i.ref)));
+  const ler = funcao.filter((i) => i.quando === 'sempre' && (tskills.length || i.de.some((d) => d.startsWith('agente'))));
+  const indice = funcao.filter((i) => !ler.includes(i));
+  const lidos = [...refs.map((r) => ({ ref: r, de: 'tarefa' })), ...ler.map((i) => ({ ref: i.ref, de: i.de.join(', ') }))];
+  out.push('', `## Contexto (${lidos.length}: tarefa${agente ? ` + ficha do ${agente}` : ''}${tskills.length ? ` + skills ${tskills.join(', ')}` : ''})`);
+  if (!lidos.length) out.push('(nenhum contexto declarado: leia o que sua função exige e, ao terminar, registre em `context:` o que de fato usou)');
+  for (const r of lidos) {
+    const x = readRef(cslug, r.ref);
+    out.push('', `### ▸ ${r.ref}  [${r.de}]${x.warn ? `  ⚠ ${x.warn}` : ''}`);
     out.push(x.ok ? x.text : `✗ ${x.error}`);
+  }
+  if (indice.length) {
+    out.push('', `## Contexto sob condição (${indice.length}) — leia só se valer: \`node tools/contexto.mjs ler ${cslug} "<ref>"\``);
+    for (const i of indice) out.push(`- ${i.ref} · ${i.quando === 'sempre' ? 'sempre que usar a skill' : `quando: ${i.quando}`}${i.motivo ? ` — ${i.motivo}` : ''}  [${i.de.join(', ')}]`);
   }
   console.log(out.join('\n'));
   process.exit(0);

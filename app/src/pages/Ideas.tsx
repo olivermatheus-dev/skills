@@ -258,7 +258,7 @@ function IdeaDrawer({ slug, initial, compName, onClose, onSaved }: {
     const optIdea: Doc<Idea> = { data: { ...v, id: tempIdea as Idea['id'], status: 'virou-tarefa', task: tempTask }, body: md, file };
     const rel0 = relToCompany(file);
     const optTask: Doc<Task> = {
-      data: { id: tempTask, title: v.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', priority: 'media', depends: [], links: [rel0], context: [] } as Task,
+      data: { id: tempTask, title: v.title, board: 'conteudo', status: 'todo', assignee: 'agent:estrategista', priority: 'media', depends: [], links: [rel0], context: [], skills: [] } as Task,
       body: taskBody(optIdea, rel0), file: '',
     };
     setD(optIdea.data); setDirty(false); setError(null); setToTaskBusy(true);

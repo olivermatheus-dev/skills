@@ -1,6 +1,6 @@
 # 048 — Ficha de agente e de skill (formulário guiado: especialista + contexto exato) e revisão das skills
 
-Status: registrada (não começou) · Depende de: 026 (Agentes e skills no app, entregue em 2026-10-08) · Liga com: 021 (`context:` das tarefas, `tools/contexto.mjs`), skill `orquestrar` (protocolo), todos os agentes de `.claude/agents/`
+Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-post no molde como exemplo, aguardando aval) · Depende de: 026 (Agentes e skills no app, entregue em 2026-10-08) · Liga com: 021 (`context:` das tarefas, `tools/contexto.mjs`), skill `orquestrar` (protocolo), todos os agentes de `.claude/agents/`
 
 ## Pedido do Oliver (2026-10-08, palavras dele resumidas)
 - Dentro de um **agente** e de uma **skill**, a visualização padrão deve ser uma **estrutura pré-definida em campos (formulário)** que direciona quem escreve. Editar o arquivo direto continua possível, mas é a segunda opção.
@@ -34,12 +34,26 @@ Status: registrada (não começou) · Depende de: 026 (Agentes e skills no app, 
 - Contexto por **projeto**: a ficha aponta para `companies/<slug>/context/…` genérico (vale para toda empresa) ou por empresa?
 - Revisão das skills: todas de uma vez em ondas, ou começar pelas mais usadas (roteirista/`ig-post`, `video`, `plano-de-cenas`, `carousel`)?
 
+## Decisões do Oliver (2026-10-08, começo da sessão)
+- Ficha é a visão **padrão**; "Editar o arquivo" abre o markdown cru (o mesmo arquivo).
+- Contexto **genérico**: `context/…`, `brand/…` valem para toda empresa (o agente lê a do projeto da tarefa).
+- Revisão: **mais usadas primeiro** (onda 1: roteirista + ig-post · editor-de-video + video + plano-de-cenas · designer + carousel), aval por onda.
+
+## Feito (2026-10-08)
+- **Molde:** `.claude/skills/orquestrar/references/ficha.md`. Frontmatter do Claude Code (description = Quando usar; model, color, skills, tools) + seções fixas no corpo: `## Especialista`, `## Contexto` (lista ``- `ref` · sempre|quando: X · só: agente — para quê``), `## Entradas e saídas`, `## Ordem de trabalho`, `## Regras duras`, `## Checklist antes de entregar`; outras seções ficam intactas. No corpo (e não em chaves novas do frontmatter) para o Claude Code seguir lendo tudo e o agente ver o próprio contexto.
+- **Leitor/gravador:** `tools/lib/ficha-agente.mjs` (+ `.d.mts`): parse ⇄ markdown sem perda (34 arquivos: gravar sem mudança = idêntico), conferência das refs em cada empresa, `contextoDoAgente`, candidatos do select.
+- **CLI:** `node tools/agentes.mjs check | contexto <agente> [--skill] [--ler] | ficha <id>`; `npm run validate` acusa ficha no molde com ref quebrada ou campo obrigatório vazio (fora do molde não acusa).
+- **Pacote:** `board.mjs pacote` junta tarefa + ficha do agente ("sempre", com o texto) + `skills:` da tarefa (campo novo em `schema/task.ts`); "quando:" e skills não citadas entram como índice. Protocolo e `orquestrar` atualizados.
+- **App:** definição do agente e `SKILL.md` abrem na **Ficha** (`components/agentes/Ficha.tsx`): Quando usar (+ modelo, cor, ferramentas), Especialista em destaque, Contexto com select com busca (arquivo ou seção) e conferência ao vivo (✓/⚠/✗), Sempre × Só quando…, "para quê", "Quem lê" por agente na skill + quadro "o que cada agente lê", leitura total do agente; demais campos em Tiptap; outras seções recolhíveis; "Editar o arquivo" ⇄ "Ver a ficha" (`?modo=arquivo`). Rotas `/api/ficha/:tipo/:id`, `/api/ficha-candidatos`, `/api/ficha-refs`. Testado no app: abrir, buscar, adicionar, salvar (só a linha nova mudou no arquivo).
+- **Exemplo no molde:** `roteirista` + `ig-post` (sem perder conteúdo; Especialista novo, Contexto exato).
+
 ## Critérios de pronto
-- [ ] Molde da ficha definido e aprovado pelo Oliver
-- [ ] App: agente e skill abrem na ficha (campos) com o select de arquivos de contexto; arquivo cru continua acessível
-- [ ] Contexto declarado conferido automaticamente (arquivo/seção existe)
-- [ ] `board.mjs pacote` entrega o contexto exato (agente + skill + tarefa)
+- [ ] Molde da ficha definido e aprovado pelo Oliver (definido; falta o aval)
+- [x] App: agente e skill abrem na ficha (campos) com o select de arquivos de contexto; arquivo cru continua acessível
+- [x] Contexto declarado conferido automaticamente (arquivo/seção existe)
+- [x] `board.mjs pacote` entrega o contexto exato (agente + skill + tarefa)
 - [ ] Skills e agentes revisados no molde, com aval do Oliver
 
 ## Log
 - 2026-10-08: registrada a pedido do Oliver (para tratar numa sessão limpa).
+- 2026-10-08: decisões do Oliver; molde, leitor, CLI, validate, pacote e ficha no app feitos; roteirista + ig-post migrados como exemplo. Próximo: resto da onda 1 (editor-de-video + video + plano-de-cenas · designer + carousel) com revisão Opus → aval do Oliver.

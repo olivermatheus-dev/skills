@@ -7,6 +7,7 @@ import { existsSync, readFileSync, readdirSync, statSync, writeFileSync, mkdirSy
 import { join, relative, sep, extname, dirname } from 'node:path';
 import { listAgents, ValidationError, ROOT } from './store';
 import { parseSimple } from './frontmatter';
+import * as FA from '../tools/lib/ficha-agente.mjs';
 
 const SKILLS = join(ROOT, '.claude', 'skills');
 const AGENTS = join(ROOT, '.claude', 'agents');
@@ -127,3 +128,37 @@ export function definirSkills(nome: string, skills: string[]) {
   writeFileSync(abs, txt.replace(m[0], `---\n${fm}\n---`));
   return arquivosDoAgente(nome);
 }
+
+// ── Ficha (048): o agente ou a skill em campos do molde (tools/lib/ficha-agente.mjs) ─────────────────────────
+// O formulário do app lê e grava pelo mesmo módulo que o validate e o `board.mjs pacote` usam.
+export function fichaView(tipo: string, id: string, slug?: string) {
+  if (tipo !== 'agente' && tipo !== 'skill') throw new ValidationError('ficha', ['tipo: agente | skill']);
+  const f = FA.lerFicha(tipo, id);
+  if (!f) throw new ValidationError('ficha', [`${tipo} desconhecido: ${id}`]);
+  const uso = skillsPorAgente();
+  const { blocos: _b, fmRaw: _r, texto: _t, ...resto } = f;
+  return {
+    ...resto,
+    conferencia: FA.conferirFicha(tipo, id, slug && okId(slug) ? slug : undefined),
+    molde: FA.CAMPOS,
+    /** skill: agentes que a usam (para o "só:") · agente: todos os agentes (para referência) */
+    agentes: tipo === 'skill' ? Object.entries(uso).filter(([a, s]) => a !== 'orquestrador' && s.includes(id)).map(([a]) => a) : FA.listarAgentes(),
+    /** agente: o que ele lê ao todo (ficha + skills ativadas), para a visão "o que este agente lê" */
+    leitura: tipo === 'agente' ? FA.contextoDoAgente(id) : null,
+  };
+}
+
+export function salvarFichaView(tipo: string, id: string, b: { edit?: FA.EdicaoFicha; mtime?: number | null }, slug?: string) {
+  if (tipo !== 'agente' && tipo !== 'skill') throw new ValidationError('ficha', ['tipo: agente | skill']);
+  const atual = FA.lerFicha(tipo, id);
+  if (!atual) throw new ValidationError('ficha', [`${tipo} desconhecido: ${id}`]);
+  if (b?.mtime != null && Math.abs(atual.mtime - b.mtime) > 1) throw new ValidationError('ficha', ['o arquivo mudou no disco desde que você abriu: recarregue antes de salvar']);
+  const edit = b?.edit ?? {};
+  // name não muda pelo formulário (é o id do agente/skill no Claude Code)
+  if (edit.fm) delete (edit.fm as Record<string, unknown>).name;
+  FA.salvarFicha(tipo, id, edit);
+  return fichaView(tipo, id, slug);
+}
+
+export const candidatosContexto = (slug?: string) => FA.candidatos(slug && okId(slug) ? slug : undefined);
+export const conferirRefs = (refs: string[], slug?: string) => (refs ?? []).slice(0, 200).map((r) => FA.conferirRef(String(r), slug && okId(slug) ? slug : undefined));

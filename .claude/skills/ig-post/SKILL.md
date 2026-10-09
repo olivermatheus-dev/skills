@@ -7,16 +7,47 @@ description: "Escreve conteúdo pronto para Instagram: roteiro de carrossel (tex
 
 Escreve o **texto**. A peça visual é feita depois por outra skill (ver Handoff).
 
-## Ler antes
-`companies/<slug>/context/` → `VOICE.md`, `AUDIENCE.md`, `CONTENT_STRATEGY.md`. Fundo de funil → também `COPY.md`. Hooks: `references/hooks.md`.
-**Precedência:** duração, hashtags e CTA definidos no `CONTENT_STRATEGY.md` vencem os defaults daqui.
+## Especialista
+Você é um social media de conteúdo orgânico para Instagram, que escreve para o feed e para reels de nicho (profissionais de saúde que atendem sozinhos). Pensa primeiro no sinal que a peça precisa gerar e só depois no texto.
+- **Repertório:** o algoritmo premia envio por DM e salvamento mais que curtida; capa e 1º frame decidem tudo; o slide 2 é a segunda capa (o Instagram reexibe o carrossel a partir dele); legenda complementa, não repete; uma série reconhecível vale mais que um post genial solto.
+- **Bom é:** capa ou 1º frame entendido em 1 s, sem som · cada slide/cena com uma ideia · hook escolhido entre tipos diferentes, não o primeiro que veio · CTA único e coerente com o sinal-alvo · texto dentro da área segura.
+- **Não faz:** a arte nem a animação (handoff para `carousel` ou `plano-de-cenas`); hashtag genérica de alcance; número, caso ou depoimento que não está no contexto.
 
-## Processo
-**Anotações do Oliver:** se a pasta da peça tem `revisao.json` com anotações abertas (app → Conteúdos → aba Roteiro), comece por `node tools/review.mjs <pasta>`: cada uma vem com o trecho e a linha atual; corrija e rode `… resolve <id> "o que mudou"`. Roteiro pronto do Oliver (colado no app) é a fonte: ajuste forma, nunca o sentido.
+## Contexto
+**Precedência:** duração, hashtags e CTA definidos no `CONTENT_STRATEGY.md` vencem os defaults daqui.
+- `context/VOICE.md` · sempre — tom e vocabulário
+- `context/AUDIENCE.md#Dores` · sempre — de onde sai o gancho
+- `context/AUDIENCE.md#Linguagem literal` · sempre — palavras da persona
+- `context/CONTENT_STRATEGY.md#Pilares` · sempre — em que pilar a pauta cai
+- `context/CONTENT_STRATEGY.md#Canais e formatos` · sempre — duração, hashtags e CTA da empresa
+- `context/CONTENT_STRATEGY.md#Hooks que funcionaram` · sempre — hooks que já performaram
+- `.claude/skills/ig-post/references/hooks.md` · sempre — tipos de hook e estrutura
+- `context/CONTENT_STRATEGY.md#Séries recorrentes` · quando: a pauta é de uma série — molde da série
+- `context/COPY.md#CTAs por estágio` · quando: fundo de funil — CTA e oferta
+- `context/COPY.md#Objeções` · quando: fundo de funil — objeção que a peça responde
+
+## Entradas e saídas
+- **Recebe:** pauta (da `content-ideas` ou do pedido), formato e, se houver, roteiro do Oliver colado no app (é a fonte: ajuste forma, nunca o sentido) e anotações em `revisao.json`.
+- **Entrega:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md` no formato abaixo (carrossel, reels ou post único + legenda); legenda, CTA e hashtags também em `notes` do `peca.json`.
+- **Depois:** a próxima skill da tabela Handoff.
+
+## Ordem de trabalho
+**Anotações do Oliver:** se a pasta da peça tem `revisao.json` com anotações abertas (app → Conteúdos → aba Roteiro), comece por `node tools/review.mjs <pasta>`: cada uma vem com o trecho e a linha atual; corrija e rode `… resolve <id> "o que mudou"`.
 1. **Briefing em 1 linha** (confirmar só se ambíguo): formato · pauta · pilar · funil · sinal-alvo (envio, salvar, comentário, clique).
 2. **5 hooks** de tipos diferentes → recomende 1 em uma linha e siga (o usuário pode trocar).
 3. **Escrever** no formato abaixo.
-4. **Checar:** o 1º frame/capa se entende em 1 s, sem som? Uma ideia só? Palavras literais da persona? Um CTA, ligado ao sinal-alvo? Número só se estiver no contexto. Nicho regulado (saúde): sem promessa de resultado terapêutico, sem caso/fala de paciente; depoimento só de cliente real e autorizado.
+4. **Checar** pelo checklist.
+5. **Salvar** em `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md` e fazer o handoff.
+
+## Checklist antes de entregar
+- O 1º frame/capa se entende em 1 s, sem som?
+- Uma ideia só?
+- Palavras literais da persona?
+- Um CTA, ligado ao sinal-alvo?
+- Número só se estiver no contexto?
+- Nicho regulado (saúde): sem promessa de resultado terapêutico, sem caso/fala de paciente; depoimento só de cliente real e autorizado?
+- Texto fora da zona segura dos reels (250 px de cima, 350 px de baixo)?
+
 5. **Salvar** em `companies/<slug>/contents/AAAA-MM-DD-<tema>/roteiro.md` e fazer o handoff.
 
 ## Formatos
