@@ -1,6 +1,6 @@
 # 048 — Ficha de agente e de skill (formulário guiado: especialista + contexto exato) e revisão das skills
 
-Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-post no molde como exemplo, aguardando aval) · Depende de: 026 (Agentes e skills no app, entregue em 2026-10-08) · Liga com: 021 (`context:` das tarefas, `tools/contexto.mjs`), skill `orquestrar` (protocolo), todos os agentes de `.claude/agents/`
+Status: feita (2026-10-09): molde, app, conferência, pacote e as 34 fichas (7 agentes + 27 skills) no molde; ficam decisões pontuais do Oliver abaixo
 
 ## Pedido do Oliver (2026-10-08, palavras dele resumidas)
 - Dentro de um **agente** e de uma **skill**, a visualização padrão deve ser uma **estrutura pré-definida em campos (formulário)** que direciona quem escreve. Editar o arquivo direto continua possível, mas é a segunda opção.
@@ -48,11 +48,11 @@ Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-
 - **Exemplo no molde:** `roteirista` + `ig-post` (sem perder conteúdo; Especialista novo, Contexto exato).
 
 ## Critérios de pronto
-- [ ] Molde da ficha definido e aprovado pelo Oliver (definido; falta o aval)
+- [x] Molde da ficha definido e aprovado pelo Oliver (2026-10-08)
 - [x] App: agente e skill abrem na ficha (campos) com o select de arquivos de contexto; arquivo cru continua acessível
 - [x] Contexto declarado conferido automaticamente (arquivo/seção existe)
 - [x] `board.mjs pacote` entrega o contexto exato (agente + skill + tarefa)
-- [ ] Skills e agentes revisados no molde, com aval do Oliver
+- [x] Skills e agentes revisados no molde, com aval do Oliver (ondas 1 e 2 aprovadas; onda 3 entregue)
 
 ## Log
 - 2026-10-08: registrada a pedido do Oliver (para tratar numa sessão limpa).
@@ -80,3 +80,16 @@ Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-
 10. fmt-meme com dois CTAs × "CTA único" da ig-post; educativo com `.inverse` possivelmente em 2 slides seguidos.
 11. Vídeo: cartão final "parado" nas receitas antigas virou microanimação (Padrões do Oliver); texto cinético × "ícone em cada ideia"; duração padrão de lançamento 30 s (video) × 20 s (trailer).
 12. `observacoes` vazias nos 9 `formato.json`.
+- 2026-10-09: onda 2 aprovada. Onda 3 no molde: pesquisador + radar + referencias + analise-concorrentes + curadoria · sound-designer + audio + locucao + elevenlabs · orquestrar + setup + mockup. **34/34 fichas no molde, check sem erros.** orquestrar ganhou "Quadro e formato da tarefa" e perdeu os comandos de agendar (schtasks/cron).
+
+## Para o Oliver decidir (achados da onda 3)
+1. Item analisado vira ideia sempre ou só a pedido? (segui a skill `referencias`: só a pedido)
+2. Pesquisador em Haiku, mas radar/referências exigem julgamento: subir para Sonnet?
+3. `analise-concorrentes` e `curadoria` ativadas no pesquisador ou ficam com a sessão principal?
+4. Curadoria: "depth rápida = sem subagente Sonnet" cita um Sonnet que o fluxo atual não usa.
+5. `.claude/agent-notes/pesquisador.md` não existe.
+6. Voz final padrão da kz: Eleven v4 pela API (CLAUDE.md, video, elevenlabs) × arquivo único gerado no site + `split-vo` (locucao 2b e `voices.json`)?
+7. Mockup: pedido explícito ("iPhone preto, fundo transparente") agora vai para o editor, não para o `render.mjs`. Fundos premium só no caminho de alternativas: enxugar `brand/mockups.json`?
+8. `heartbeat --watch 30`: manter (só roda sob comando) ou tirar?
+9. `setup` cria 6 arquivos de contexto, mas a kz tem `PRODUTO.md`: a setup deve criar o PRODUTO.md?
+10. Mockup sem título no pedido usa `COPY.md#Diferenciais`: confirma?
