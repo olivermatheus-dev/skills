@@ -1,0 +1,890 @@
+{
+  "versao": 1,
+  "nivel": "medio",
+  "recorte": "Para a terapeuta autônoma que vive com a rotina espalhada em vários lugares: a kz junta tudo numa janela só e devolve o tempo de atender",
+  "duracao_alvo": 43,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "entrada": {
+    "tipo": "roteiro",
+    "fonte": "companies/kz/contents/2026-10-07-apresentacao-kz/timeline.json > vo[] (texto) + plano.md (tags v4)",
+    "tempos": true,
+    "voz": "Carla (el-carla, Eleven v4), cortada por split-vo.mjs; wav e tempos por palavra em audio/vo/split/ (+ audio/vo/tempos.json), fora do git",
+    "nota": "locução final já gravada: o plano se encaixa nos tempos reais (start/end abaixo); nada de TTS. Timeline: plano.mjs timeline → fit-vo.mjs <pasta> --dir audio/vo/split"
+  },
+  "conceito": {
+    "nome": "Uma janela só",
+    "mundo": "a rotina da terapeuta é uma área de trabalho em que as janelas da gestão cobrem a sessão e a empurram para o canto; a kz junta tudo numa janela só, que vira o painel, depois a sessão inteira, e no fim se revela o navegador em kz.app.br",
+    "motivo": "a janela (barra com 3 pontos, cantos de 16 px): a janela Sessão calma no centro (s1) é coberta por 4 janelas da rotina → elas se espalham com a mesma paciente partida em 3 (s2) → empurram a Sessão para o canto e encaixam numa janela única (s3) → a logo nasce dentro dela (s4) → a janela única abre e vira o painel, cada conteúdo vira um módulo (s5) → a Sessão ocupa a janela inteira (s6) → a câmera recua e a janela era o navegador em kz.app.br (s7)",
+    "transicao": "match no motivo (a última pose da cena é a primeira da próxima, mesma região); J-cut do som só na revelação (s4). Sem dissolve, sem efeito.",
+    "curva": [
+      3,
+      3,
+      2,
+      4,
+      2,
+      3,
+      1
+    ],
+    "paleta": "fundo --bg (creme) liso o vídeo todo, com fundo/blobs; janelas --surface com --border e --shadow-md; categorias nos pastéis/--tile-*; ênfase de título --accent (1 palavra); --primary só em pontos (anel da sessão, botão, cursor de clique); brilho --ui-glow só na janela única (s4). Sem vermelho/amarelo de alerta (proibido coral + vermelho + amarelo juntos). Fundo não muda.",
+    "evitar": [
+      "foguete, gráfico subindo, lâmpada, aperto de mão (BRAND.md)",
+      "pessoa frustrada no notebook, relógio derretendo, rosto de banco de imagem",
+      "logos de terceiros (Google Agenda, WhatsApp, Meet): as janelas são genéricas, com ícone Lucide e nome da função",
+      "alerta vermelho de erro para dizer 'caos'",
+      "lembrete automático ao paciente e cobranças (sem fonte no PRODUTO.md para o que se mostra)",
+      "nome ou rosto de paciente (paciente só com iniciais M.C.; terapeuta com nome: Ana) e texto clínico legível",
+      "reveal genérico (tudo num ponto + brilho): a logo nasce dentro da janela única",
+      "aba nova ou página do site desenhada à mão no CTA",
+      "fundo pastel na peça inteira (BRAND.md)"
+    ],
+    "alternativas": [
+      "O dia que respira: a coluna de horários do dia é o motivo; a administração entra como blocos que espremem as sessões, e com a kz os blocos administrativos encolhem e o dia volta a ter espaço (forte em 'tempo', fraco em 'vários lugares' e sem gancho visual no CTA)",
+      "Peças que se juntam: 4 fragmentos da rotina espalhados que se encaixam e viram o painel (a lógica da v03, com um fio contínuo; reaproveita mais blocos, mas repete o que já foi visto)"
+    ],
+    "por_que_este": "as falas são espaciais ('de um lado', 'de outro', 'espalhadas', 'vários lugares'): janelas dão lugar físico a cada uma; a Sessão é o mesmo objeto em s1 (centro), s3 (canto) e s6 (tela cheia), e o CTA revela que tudo era o navegador em kz.app.br, fechando o motivo"
+  },
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
+      "el": "[confident] Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
+      "start": 0.35,
+      "end": 4.892
+    },
+    {
+      "id": "f2",
+      "text": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
+      "el": "[sighs] Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
+      "start": 5.242,
+      "end": 11.392
+    },
+    {
+      "id": "f3",
+      "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender.",
+      "el": "e no fim, sobra menos tempo para aquilo que realmente importa: atender.",
+      "start": 11.792,
+      "end": 16.59
+    },
+    {
+      "id": "f4",
+      "text": "A kz é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
+      "el": "[confident] A KZ é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
+      "start": 17.44,
+      "end": 24.923
+    },
+    {
+      "id": "f5",
+      "text": "Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação.",
+      "el": "[warm] Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação.",
+      "start": 25.373,
+      "end": 31.587
+    },
+    {
+      "id": "f6",
+      "text": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
+      "el": "[slightly upbeat] Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
+      "start": 32.087,
+      "end": 36.343
+    },
+    {
+      "id": "f7",
+      "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "el": "[confident] [inviting] Conheça a KZ e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "start": 36.793,
+      "end": 41.444
+    }
+  ],
+  "ideias": [
+    {
+      "id": "i1",
+      "fala": "f1",
+      "trecho": "Você é terapeuta",
+      "tipo": "pergunta",
+      "ancora": "terapeuta",
+      "emocao": "reconhecimento",
+      "entender": "este vídeo é para mim",
+      "prova": null
+    },
+    {
+      "id": "i2",
+      "fala": "f1",
+      "trecho": "organiza sua rotina em vários lugares diferentes?",
+      "tipo": "dor",
+      "ancora": "vários",
+      "emocao": "incômodo leve (é verdade, é assim)",
+      "entender": "o problema é a rotina estar fragmentada, não a falta de esforço",
+      "prova": null
+    },
+    {
+      "id": "i3",
+      "fala": "f2",
+      "trecho": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
+      "tipo": "dor",
+      "ancora": "espalhadas",
+      "emocao": "cansaço (o suspiro)",
+      "entender": "as 3 coisas que ela usa todo dia vivem separadas",
+      "prova": null
+    },
+    {
+      "id": "i4",
+      "fala": "f3",
+      "trecho": "E no fim, sobra menos tempo",
+      "tipo": "promessa",
+      "ancora": "menos",
+      "emocao": "perda",
+      "entender": "a administração come o tempo",
+      "prova": null
+    },
+    {
+      "id": "i5",
+      "fala": "f3",
+      "trecho": "para aquilo que realmente importa: atender.",
+      "tipo": "emoção",
+      "ancora": "atender",
+      "emocao": "saudade do essencial",
+      "entender": "o que fica espremido é justamente a sessão",
+      "prova": null
+    },
+    {
+      "id": "i6",
+      "fala": "f4",
+      "trecho": "A kz é uma plataforma feita para terapeutas",
+      "tipo": "revelação",
+      "ancora": "kz",
+      "emocao": "alívio",
+      "entender": "existe uma ferramenta feita para a minha profissão",
+      "prova": "BUSINESS.md: plataforma de gestão de consultório para terapeutas autônomos"
+    },
+    {
+      "id": "i7",
+      "fala": "f4",
+      "trecho": "deixar a gestão da rotina mais simples, organizada e profissional",
+      "tipo": "lista",
+      "ancora": "simples",
+      "emocao": "segurança",
+      "entender": "3 ganhos: simples, organizada, profissional",
+      "prova": null
+    },
+    {
+      "id": "i8",
+      "fala": "f5",
+      "trecho": "acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação",
+      "tipo": "produto",
+      "ancora": "atendimentos",
+      "emocao": "clareza",
+      "entender": "um painel mostra o dia e a próxima sessão num lugar só",
+      "prova": "PRODUTO.md > Painel do dia (pronta)"
+    },
+    {
+      "id": "i9",
+      "fala": "f6",
+      "trecho": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
+      "tipo": "contraste",
+      "ancora": "cuidando",
+      "emocao": "alívio e propósito",
+      "entender": "o tempo que a gestão comia volta para a sessão",
+      "prova": "PRODUTO.md > Tela de atendimento (pronta)"
+    },
+    {
+      "id": "i10",
+      "fala": "f7",
+      "trecho": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "tipo": "CTA",
+      "ancora": "kz",
+      "emocao": "convite sem pressão",
+      "entender": "onde conhecer: kz.app.br",
+      "prova": "BUSINESS.md: site/app kz.app.br"
+    }
+  ],
+  "camadas": [
+    {
+      "use": "fundo/blobs"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "ideias": [
+        "i1",
+        "i2"
+      ],
+      "block": "gancho",
+      "intensidade": 3,
+      "vo": [
+        "f1"
+      ],
+      "tempo_real": "0,00–5,14",
+      "relacao": "complementa",
+      "acrescenta": "a sessão (o que a terapeuta quer fazer) aparece calma no centro, e os 'vários lugares' são 4 janelas que pipocam por cima e a cobrem: o problema é o que tapa o atendimento",
+      "motivo": "nasce: a janela Sessão no centro; em 'vários', 4 janelas da rotina (Agenda, Pacientes, Anotações, Mensagens) pipocam por cima dela",
+      "composicao": "4:5: janela Sessão (barra 'Sessão · 14h' com ícone armchair ≥ 32 px; por dentro avatar de iniciais 'M.C.' e linhas de anotação) no centro, 620×460; selo + pergunta por cima, no terço de cima (título 84 px); em 'ainda' a pergunta encolhe para o topo (y 80–200); as 4 janelas pequenas pousam sobre a Sessão em arco (x 80–1000, y 380–1100) · 9:16: Sessão em y 560–1000; pergunta em y 280–480; janelas em y 520–1300 (nada abaixo de 1350)",
+      "olhar": "centro (a Sessão) → em volta (as 4 janelas que a cobrem)",
+      "poses": [
+        "início: janela Sessão calma no centro + selo com poltrona e 'Você é terapeuta?' grande por cima, já no 1º quadro",
+        "meio: a pergunta sobe e encolhe; 'Sua rotina em vários lugares?' entra inteira",
+        "fim: 4 janelas pequenas (Agenda, Pacientes, Anotações, Mensagens) tortas por cima da Sessão, que quase some"
+      ],
+      "use": "abertura/pergunta-fragmentos",
+      "on_screen": "Você é *terapeuta*?|Sua rotina em *vários lugares*?",
+      "params": {
+        "estilo": "janela",
+        "rotulos": [
+          "Agenda",
+          "Pacientes",
+          "Anotações",
+          "Mensagens"
+        ],
+        "icones": [
+          "calendar-days",
+          "contact-round",
+          "notebook-pen",
+          "message-circle"
+        ],
+        "fundo": "janela-sessao",
+        "sobra": 0
+      },
+      "ajuste_bloco": "3 params novos no bloco: 'estilo: janela' (fragmentos com barra de 3 pontos), 'rotulos'/'icones' (hoje fixos: Agenda, Mensagens, Planilha, Caderno) e 'fundo: janela-sessao' (a janela Sessão no centro, atrás de tudo); 'sobra: 0' porque as janelas não somem, continuam na s2",
+      "headline": "Você é terapeuta?",
+      "icone": "armchair (selo e barra da Sessão) · calendar-days, contact-round, notebook-pen, message-circle (janelas)",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "Sessão já no centro; selo + pergunta entram inteiros (cascata ≤ 0,4 s)",
+          "sfx": "whoosh fino"
+        },
+        {
+          "cue": "troca",
+          "word": "f1:ainda",
+          "offset": -0.12,
+          "o_que": "pergunta sobe e encolhe; complemento entra inteiro",
+          "sfx": "swish"
+        },
+        {
+          "cue": "espalha",
+          "word": "f1:vários",
+          "offset": -0.08,
+          "o_que": "4 janelas pipocam em cascata (60 ms) por cima da Sessão",
+          "sfx": "4 pops da mesma família"
+        }
+      ],
+      "vivo": "a Sessão respira (escala 1,00 → 1,02) até ser coberta; as janelas derivam 10–20 px/s",
+      "entra": "1º quadro já com a Sessão e a pergunta (sem fade do preto)",
+      "sai": "match: as 4 janelas ficam; na s2, 3 delas crescem no mesmo lugar e a Mensagens fica pequena",
+      "som": "whoosh fino · swish · 4 pops",
+      "fontes": [],
+      "dados": "ilustrativos (iniciais M.C.)",
+      "lead": 0.35,
+      "style_frame": {
+        "4x5": "style/s1-4x5.png",
+        "9x16": "style/s1-9x16.png"
+      }
+    },
+    {
+      "id": "s2",
+      "ideias": [
+        "i3"
+      ],
+      "block": "dor",
+      "intensidade": 3,
+      "vo": [
+        "f2"
+      ],
+      "tempo_real": "5,14–11,64",
+      "relacao": "complementa",
+      "acrescenta": "a mesma paciente (M.C., 14h) está partida em 3 lugares: na agenda, na ficha e num post-it; em 'espalhadas' as 3 marcas de M.C. acendem juntas e mostram o custo de juntar tudo de cabeça",
+      "motivo": "Agenda, Pacientes e Anotações crescem no mesmo lugar onde pousaram na s1; Mensagens fica pequena; a Sessão segue coberta atrás",
+      "composicao": "4:5: headline no topo (y 80–190); Agenda à esquerda (x 60–560, y 280–740) com a semana e o bloco 'M.C. 14h'; Pacientes à direita (x 520–1020, y 400–860) com a ficha de M.C.; Anotações embaixo (x 200–760, y 880–1180) com post-it 'M.C.'; Mensagens pequena no canto de cima à direita · 9:16: headline em y 280–390; Agenda y 440–940; Pacientes y 760–1240 à direita; Anotações y 1060–1350; Mensagens y 420–520 à direita",
+      "olhar": "esquerda (Agenda) → direita (Pacientes) → baixo (Anotações) → as 3 marcas M.C. ao mesmo tempo",
+      "poses": [
+        "início: headline 'Cada coisa num canto.' inteira; as janelas da s1 assentam no suspiro",
+        "meio: Agenda aberta com 'M.C. 14h' na semana; Pacientes aberta com a ficha de M.C.",
+        "fim: post-it 'M.C.' nas Anotações; as 3 marcas M.C. acesas em --accent; janelas tortas e sobrepostas"
+      ],
+      "novo": {
+        "tipo": "cena",
+        "id": "janelas-abrem",
+        "spec": "fase 1 de 2 (a fase 2 é cena/janelas-espremem, s3; os dois leem o mesmo params.posicoes e a mesma biblioteca de janelas, que fica num arquivo comum do projeto). Janelas genéricas (barra de 3 pontos + ícone Lucide + nome) desenhadas nos tokens: Agenda (grade da semana, blocos pastel, um deles 'M.C. 14h'), Pacientes (ficha com avatar de iniciais M.C. e 4 linhas), Anotações (post-it com linhas de caderno e 'M.C.'), Mensagens (pequena, só ícone e contador), Sessão (barra 'Sessão · 14h' com ícone armchair; por dentro avatar de iniciais e linhas de anotação, sem tile de vídeo). Cue 'entra': headline entra inteira; cue 'agenda' abre a Agenda com o bloco M.C. já dentro; 'pacientes' abre a ficha já preenchida; 'notas' solta o post-it; 'espalha' acende as 3 marcas M.C. em --accent e entorta tudo 2–6°. Card opaco: o conteúdo anima, a janela não muda de opacidade. slots: headline | sessao. cues: entra, agenda, pacientes, notas, espalha. params: posicoes = [{ id, x, y, w, h, giro }] por formato.",
+        "slots": [
+          "headline",
+          "sessao"
+        ],
+        "cues": [
+          "entra",
+          "agenda",
+          "pacientes",
+          "notas",
+          "espalha"
+        ]
+      },
+      "on_screen": "Cada coisa num *canto*.|M.C. · 14h",
+      "params": {},
+      "headline": "Cada coisa num canto.",
+      "icone": "calendar-days · contact-round · notebook-pen · message-circle (um por janela)",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline entra inteira; as janelas da s1 assentam no suspiro",
+          "sfx": "air suave"
+        },
+        {
+          "cue": "agenda",
+          "word": "f2:Agenda",
+          "offset": -0.1,
+          "o_que": "Agenda cresce à esquerda com 'M.C. 14h' na semana",
+          "sfx": "pop de janela"
+        },
+        {
+          "cue": "pacientes",
+          "word": "f2:informações",
+          "offset": -0.1,
+          "o_que": "Pacientes abre à direita, por cima da Agenda, com a ficha de M.C.",
+          "sfx": "pop de janela (variante)"
+        },
+        {
+          "cue": "notas",
+          "word": "f2:anotações",
+          "offset": -0.1,
+          "o_que": "post-it 'M.C.' cai nas Anotações",
+          "sfx": "papel leve"
+        },
+        {
+          "cue": "espalha",
+          "word": "f2:espalhadas",
+          "offset": -0.06,
+          "o_que": "as 3 marcas M.C. acendem juntas em --accent; tudo entorta e se afasta",
+          "sfx": "3 ticks em acorde + whoosh fino"
+        }
+      ],
+      "vivo": "janelas com deriva lenta e leve balanço",
+      "entra": "match: as janelas da s1 crescem no lugar onde pousaram",
+      "sai": "match: as janelas ficam onde estão; a s3 começa com elas (só a headline troca)",
+      "som": "air · pops de janela · papel · ticks + whoosh fino",
+      "fontes": [],
+      "dados": "ilustrativos (iniciais e horário de exemplo, rodapé)",
+      "style_frame": {
+        "4x5": "style/s2-4x5.png",
+        "9x16": "style/s2-9x16.png"
+      }
+    },
+    {
+      "id": "s3",
+      "ideias": [
+        "i4",
+        "i5"
+      ],
+      "block": "dor",
+      "intensidade": 2,
+      "vo": [
+        "f3"
+      ],
+      "tempo_real": "11,64–17,29",
+      "relacao": "complementa",
+      "acrescenta": "o que a gestão empurra para o canto é a própria sessão que abriu o vídeo no centro: ela encolhe enquanto as janelas administrativas crescem; em 'atender' tudo para e só ela pulsa",
+      "motivo": "a Sessão, que estava no centro na s1, é empurrada para o canto; no fim todas as janelas encaixam numa janela única no centro",
+      "composicao": "4:5: headline no topo; janelas administrativas no centro, crescendo; Sessão desliza para o canto de baixo à direita (x 700–1000, y 1000–1230) a 40% · 9:16: Sessão em y 1100–1300 à direita (acima da faixa do Reels)",
+      "olhar": "centro → canto de baixo à direita (a Sessão) → centro (a janela única)",
+      "poses": [
+        "início: headline 'Sobra *menos* tempo para atender.' inteira; a Sessão aparece de trás das janelas, ainda média",
+        "meio: janelas administrativas maiores; a Sessão pequena no canto, ainda encolhendo devagar",
+        "fim: tudo parado e só o anel coral pulsando na Sessão; depois tudo encaixa numa janela única a ~30% no centro"
+      ],
+      "novo": {
+        "tipo": "cena",
+        "id": "janelas-espremem",
+        "spec": "fase 2 de 2 (continua cena/janelas-abrem com o mesmo params.posicoes e as mesmas janelas). cue 'entra': headline troca inteira e a Sessão sai de trás das janelas; 'espreme': as janelas administrativas crescem 10% e empurram a Sessão para o canto de baixo à direita a 40%, e o encolhimento continua devagar até 'importa'; 'aperta': segundo empurrão (mais um degrau, Sessão a ~30%); 'importa': tudo para 0,4 s e só o anel --primary pulsa na Sessão; 'sai': tudo desliza para o centro e encaixa numa janela única (as barras de 3 pontos se sobrepõem até sobrar uma) a ~30% de escala. Card opaco. slots: headline | sessao. params: posicoes = [{ id, x, y, w, h, giro }] por formato (as mesmas da s2), canto.",
+        "slots": [
+          "headline",
+          "sessao"
+        ],
+        "cues": [
+          "entra",
+          "espreme",
+          "aperta",
+          "importa",
+          "sai"
+        ]
+      },
+      "on_screen": "Sobra *menos* tempo para atender.|M.C. · 14h",
+      "params": {
+        "canto": "baixo-direita"
+      },
+      "headline": "Sobra menos tempo para atender.",
+      "icone": "armchair (na Sessão) · anel --primary no pulso",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline troca inteira; a Sessão sai de trás das janelas",
+          "sfx": "pop baixo"
+        },
+        {
+          "cue": "espreme",
+          "word": "f3:menos",
+          "offset": -0.1,
+          "o_que": "janelas administrativas crescem; a Sessão é empurrada para o canto",
+          "sfx": "compressão suave (air grave)"
+        },
+        {
+          "cue": "aperta",
+          "word": "f3:aquilo",
+          "offset": -0.1,
+          "o_que": "segundo empurrão: as janelas administrativas avançam mais um degrau e a Sessão cai para ~30% no canto",
+          "sfx": "compressão curta (variante)"
+        },
+        {
+          "cue": "importa",
+          "word": "f3:atender",
+          "offset": -0.12,
+          "o_que": "tudo para 0,4 s; só o anel coral pulsa na Sessão",
+          "sfx": "ding suave, sozinho"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.35,
+          "o_que": "todas as janelas deslizam para o centro e encaixam numa janela única a ~30%",
+          "sfx": "encaixe macio (clique abafado) → silêncio"
+        }
+      ],
+      "vivo": "entre os empurrões a Sessão continua encolhendo devagar (pressão contínua)",
+      "entra": "match: começa com as janelas da s2 no mesmo lugar",
+      "sai": "match: a janela única fica parada no centro no respiro de ~0,85 s da voz (setup → payoff); a s4 começa nela",
+      "som": "pop · compressão · ding sozinho · encaixe e silêncio",
+      "fontes": [],
+      "dados": "ilustrativos (iniciais)",
+      "style_frame": {
+        "4x5": "style/s3-4x5.png",
+        "9x16": "style/s3-9x16.png"
+      }
+    },
+    {
+      "id": "s4",
+      "ideias": [
+        "i6",
+        "i7"
+      ],
+      "block": "revelação",
+      "intensidade": 4,
+      "vo": [
+        "f4"
+      ],
+      "pause": true,
+      "tempo_real": "17,29–25,22",
+      "relacao": "complementa",
+      "acrescenta": "as janelas espalhadas viraram uma janela só, e a kz nasce dentro dela: a marca é o lugar onde tudo foi junto; os 3 ganhos entram como chips arrumados no rodapé da própria janela",
+      "motivo": "paga o conceito: a janela única, formada no fim da s3, abre e a logo se desenha dentro dela",
+      "composicao": "4:5: janela única no centro, cresce de ~30% para ~70% (x 160–920, y 300–1000); logo no centro da janela (~160 px); 'Feita para terapeutas' embaixo da logo, dentro da janela; 3 chips no rodapé da janela · 9:16: janela y 420–1180; chips empilhados em 2 linhas no rodapé dela",
+      "olhar": "centro (a janela única, no mesmo ponto onde se formou) → rodapé da janela (chips)",
+      "poses": [
+        "início: a janela única a ~30%, parada no centro (vem do encaixe da s3)",
+        "meio: a janela abriu; a logo desenhada no centro dela; brilho --ui-glow cobrindo ~1/3 da janela; 'Feita para *terapeutas*' embaixo",
+        "fim: rodapé aberto com 'A gestão da sua rotina mais' e 3 chips: check + 'simples', layout-grid + 'organizada', badge-check + 'profissional'"
+      ],
+      "novo": {
+        "tipo": "revelacao",
+        "id": "janela-unica",
+        "spec": "recebe a janela única a ~30% no centro (fim de cena/janelas-espremem). cue 'entra': fica parada (a pausa é o setup), só um respiro de escala. cue 'marca': a janela abre para ~70% (GENTLE, 0,7 s), a logo se desenha no centro dela e o brilho --ui-glow cresce até cobrir ≥ 1/3 da janela (a revelação tem mais luz que a s3). cue 'assinatura': frase curta entra inteira embaixo da logo. cue 'rodape': o rodapé da janela se abre (divisória se desenha) e a frase 'A gestão da sua rotina mais' entra inteira nele. cues 'p1', 'p2', 'p3': chips com ícone Lucide que combina com a palavra (check = simples, layout-grid = organizada, badge-check = profissional) entram em fileira embaixo da frase. Sai: a janela cresce para a moldura do painel e a logo desliza para a barra lateral. slots: assinatura | frase | p1 | p2 | p3. cues: entra, marca, assinatura, rodape, p1, p2, p3. params: icones.",
+        "slots": [
+          "assinatura",
+          "frase",
+          "p1",
+          "p2",
+          "p3"
+        ],
+        "cues": [
+          "entra",
+          "marca",
+          "assinatura",
+          "rodape",
+          "p1",
+          "p2",
+          "p3"
+        ]
+      },
+      "on_screen": "Feita para *terapeutas*|A gestão da sua rotina mais|simples|organizada|profissional",
+      "params": {
+        "icones": [
+          "check",
+          "layout-grid",
+          "badge-check"
+        ]
+      },
+      "headline": "Feita para terapeutas",
+      "icone": "check · layout-grid · badge-check (chips, combinam com a palavra)",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "janela única parada no centro; respiro de escala no silêncio",
+          "sfx": "riser curto em J-cut (começa no fim da s3)"
+        },
+        {
+          "cue": "marca",
+          "word": "f4:kz",
+          "offset": -0.12,
+          "o_que": "a janela abre, a logo se desenha dentro dela e o brilho --ui-glow cresce até ~1/3 da janela",
+          "sfx": "impacto suave + brilho (piano)"
+        },
+        {
+          "cue": "assinatura",
+          "word": "f4:feita",
+          "offset": -0.1,
+          "o_que": "'Feita para terapeutas' entra inteira embaixo da logo",
+          "sfx": "pop"
+        },
+        {
+          "cue": "rodape",
+          "word": "f4:gestão",
+          "offset": -0.1,
+          "o_que": "rodapé da janela se abre e 'A gestão da sua rotina mais' entra inteira",
+          "sfx": "air curto"
+        },
+        {
+          "cue": "p1",
+          "word": "f4:simples",
+          "offset": -0.1,
+          "o_que": "chip check + 'simples'",
+          "sfx": "pop de UI 1"
+        },
+        {
+          "cue": "p2",
+          "word": "f4:organizada",
+          "offset": -0.1,
+          "o_que": "chip layout-grid + 'organizada'",
+          "sfx": "pop de UI 2"
+        },
+        {
+          "cue": "p3",
+          "word": "f4:profissional",
+          "offset": -0.1,
+          "o_que": "chip badge-check + 'profissional'",
+          "sfx": "pop de UI 3"
+        }
+      ],
+      "vivo": "a logo respira e o brilho do canto deriva devagar entre os gestos",
+      "entra": "match: a janela única da s3, no mesmo ponto; o som (riser) entra antes da imagem",
+      "sai": "match: a janela cresce e vira a moldura do painel; a logo desliza para a barra lateral",
+      "som": "riser · impacto suave com piano · pop · 3 pops",
+      "fontes": [
+        {
+          "afirmacao": "plataforma feita para terapeutas",
+          "fonte": "BUSINESS.md (plataforma all-in-one de gestão de consultório para terapeutas autônomos)",
+          "status": "ok"
+        }
+      ],
+      "style_frame": {
+        "4x5": "style/s4-4x5.png",
+        "9x16": "style/s4-9x16.png"
+      }
+    },
+    {
+      "id": "s5",
+      "ideias": [
+        "i8"
+      ],
+      "block": "produto",
+      "intensidade": 2,
+      "vo": [
+        "f5"
+      ],
+      "tempo_real": "25,22–31,94",
+      "relacao": "prova",
+      "acrescenta": "a janela única abre e é o painel real da kz: a agenda, a ficha e o post-it que estavam espalhados encaixam cada um no seu módulo, e a paciente M.C., que estava em 3 lugares na s2, aparece uma vez só em 'Sessões de hoje'",
+      "motivo": "a janela única vira o painel; os 3 conteúdos da s2 viram módulos dele",
+      "composicao": "4:5: headline no topo (y 80–190); painel (janela com barra lateral) de x 60–1020, y 240–1180; câmera em 1,3× no card 'Próxima sessão' em 'atendimentos'; desce para os Atalhos em 'organizar'; toast no canto de baixo à direita · 9:16: começa já em 1,4× na coluna principal (card 'Próxima sessão'), headline em y 280–390, painel em y 440–1350",
+      "olhar": "topo (headline) → card 'Próxima sessão' → 'Sessões de hoje' (M.C. 14h)",
+      "poses": [
+        "início: a janela da s4 vira a moldura do painel; logo na barra lateral; grade, ficha e post-it encaixam em 'Sessões de hoje', 'Próxima sessão' e 'Nova anotação'; headline 'Acompanhe seus *atendimentos*'",
+        "meio: câmera em 1,3× no card 'Próxima sessão' (Iniciar sessão / Ver prontuário)",
+        "fim: headline 'Organize seu *dia a dia*'; câmera em 'Sessões de hoje', o item 'M.C. 14h' aceso em --accent com um check"
+      ],
+      "use": "produto/painel-inicio",
+      "on_screen": "Boa tarde,|Ana|Acompanhe seus *atendimentos*|Organize seu *dia a dia*|Organize seu *dia a dia*",
+      "params": {
+        "headlines": 2,
+        "feito": "marca",
+        "destaque_lista": "M.C. 14h",
+        "encaixe": [
+          {
+            "de": "agenda",
+            "para": "sessoes-hoje",
+            "lado": "esquerda"
+          },
+          {
+            "de": "pacientes",
+            "para": "proxima-sessao",
+            "lado": "direita"
+          },
+          {
+            "de": "anotacoes",
+            "para": "atalho-nova-anotacao",
+            "lado": "baixo"
+          }
+        ]
+      },
+      "ajuste_bloco": "params novos: 'headlines: 2' (h3 repete o h2 = não troca; hoje o bloco troca 3 vezes), 'encaixe' (dentro do cue 'entra': os 3 conteúdos da s2 saem do centro e encaixam no módulo, cada um pelo lado onde estava), 'destaque_lista' (no cue 'lista' a câmera desce e o item 'M.C. 14h' acende em --accent, sem clique do cursor) e 'feito: marca' (o cue 'feito' vira um check ao lado de 'M.C. 14h'; sai o toast com 'lembrete enviado', que hoje é fixo e não tem fonte)",
+      "headline": "Acompanhe seus atendimentos → Organize seu dia a dia",
+      "icone": "layout-dashboard (selo da headline) · ícones dos Atalhos do próprio painel",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "a janela vira a moldura do painel; logo encaixa na barra lateral; grade, ficha e post-it encaixam nos módulos (cascata 120 ms, cada um pelo lado onde estava na s2); headline entra inteira",
+          "sfx": "whoosh suave + 3 encaixes macios"
+        },
+        {
+          "cue": "destaque",
+          "word": "f5:atendimentos",
+          "offset": -0.12,
+          "o_que": "câmera aproxima o card 'Próxima sessão'",
+          "sfx": "air curto"
+        },
+        {
+          "cue": "lista",
+          "word": "f5:organizar",
+          "offset": -0.1,
+          "o_que": "headline troca; câmera desce para 'Sessões de hoje' e 'M.C. 14h' acende em --accent",
+          "sfx": "tick"
+        },
+        {
+          "cue": "feito",
+          "word": "f5:complicação",
+          "offset": -0.12,
+          "o_que": "um check aparece ao lado de 'M.C. 14h' e a marca assenta",
+          "sfx": "ding gentil"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.3,
+          "o_que": "câmera volta ao card 'Próxima sessão' (ponto de partida da s6)",
+          "sfx": "—"
+        }
+      ],
+      "vivo": "câmera em deriva lenta (GENTLE) entre os gestos; cursor anda em curva",
+      "entra": "match: a janela única da s4 cresce até virar a moldura do painel; a logo vai para a barra lateral",
+      "sai": "match: termina no card 'Próxima sessão', onde o cursor da s6 clica 'Iniciar sessão'",
+      "som": "whoosh + encaixes · air · tick · ding",
+      "fontes": [
+        {
+          "afirmacao": "painel do dia com saudação, próxima sessão (Iniciar sessão / Ver prontuário), sessões de hoje e atalhos (Sessão rápida, Agendar, Novo cliente, Nova anotação)",
+          "fonte": "PRODUTO.md > Agenda > Painel do dia (pronta) + brand/screenshots/painel-inicio-2026-10-07.png",
+          "status": "ok"
+        }
+      ],
+      "dados": "ilustrativos (terapeuta Ana; paciente só com iniciais M.C.; rodapé)",
+      "style_frame": {
+        "4x5": "style/s5-4x5.png",
+        "9x16": "style/s5-9x16.png"
+      }
+    },
+    {
+      "id": "s6",
+      "ideias": [
+        "i9"
+      ],
+      "block": "virada",
+      "intensidade": 3,
+      "vo": [
+        "f6"
+      ],
+      "tempo_real": "31,94–36,64",
+      "relacao": "contrasta",
+      "acrescenta": "a sessão de M.C., que abriu o vídeo no centro e foi espremida no canto na s3, agora ocupa a janela inteira: é a tela de atendimento real, com as Anotações em primeiro plano, não um ícone de coração",
+      "motivo": "a janela Sessão (centro na s1, canto na s3) ocupa tudo",
+      "composicao": "4:5: headline no topo; painel com 'Sessões de hoje' e 'Atalhos' recolhendo para chips na lateral; depois a tela de atendimento enche a janela no modo Presencial: relógio e 'M.C.' no alto, aba Anotações em primeiro plano (linhas de caderno, cursor de texto), abas Histórico/Cliente ao lado, 'Finalizar sessão' · 9:16: headline em y 280–390; atendimento em y 440–1340",
+      "olhar": "topo (headline) → card 'Próxima sessão' → centro (vídeo da sessão) → aba Anotações",
+      "poses": [
+        "início: painel (estado final da s5) com headline 'Menos tempo *administrando*.' inteira",
+        "meio: 'Sessões de hoje' e 'Atalhos' recolhem para chips na lateral; cursor clica 'Iniciar sessão'",
+        "fim: tela de atendimento (modo Presencial) ocupando a janela inteira, Anotações em primeiro plano, headline 'Mais tempo *cuidando*.' com coração, cursor de texto piscando"
+      ],
+      "novo": {
+        "tipo": "virada",
+        "id": "sessao-ocupa-tudo",
+        "spec": "começa no estado final de produto/painel-inicio (card 'Próxima sessão' em foco); headline 'antes' entra inteira; no cue 'recolhe' os módulos que a s5 mostrou ('Sessões de hoje' e 'Atalhos') recolhem para chips com ícone na lateral (FAST, cascata 60 ms); no cue 'inicia' a headline troca para 'depois' e o cursor clica 'Iniciar sessão' (botão afunda 0,96, eco só no clique); a tela de atendimento abre a partir do card e ocupa a janela (GENTLE, 0,6–0,8 s) no modo Presencial (param modo; 'online' mostra o painel de vídeo só se a videochamada for confirmada): relógio, iniciais da paciente, abas Anotações/Histórico/Cliente com Anotações em primeiro plano, botão 'Finalizar sessão'; no cue 'cuida' aparece o coração ao lado da headline e o cursor de texto pisca em Anotações. Sem rosto, sem nome de paciente, sem texto clínico legível (linhas de caderno vazias). slots: antes | depois | cliente. cues: entra, recolhe, inicia, cuida. params: relogio_inicio, modo.",
+        "slots": [
+          "antes",
+          "depois",
+          "cliente"
+        ],
+        "cues": [
+          "entra",
+          "recolhe",
+          "inicia",
+          "cuida"
+        ]
+      },
+      "on_screen": "Menos tempo *administrando*.|Mais tempo *cuidando*.|M.C. · sessão",
+      "params": {
+        "relogio_inicio": "00:12",
+        "modo": "presencial"
+      },
+      "headline": "Menos tempo administrando. → Mais tempo cuidando.",
+      "icone": "heart (na headline) · armchair (barra da sessão)",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline 'Menos tempo administrando.' entra inteira sobre o painel",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "recolhe",
+          "word": "f6:administrando",
+          "offset": -0.1,
+          "o_que": "'Sessões de hoje' e 'Atalhos' recolhem para chips na lateral",
+          "sfx": "2 clicks suaves descendo"
+        },
+        {
+          "cue": "inicia",
+          "word": "f6:Mais",
+          "offset": -0.12,
+          "o_que": "headline troca; cursor clica 'Iniciar sessão'; tela de atendimento abre e ocupa a janela",
+          "sfx": "clique + air de abertura"
+        },
+        {
+          "cue": "cuida",
+          "word": "f6:cuidando",
+          "offset": -0.1,
+          "o_que": "coração ao lado da headline; cursor de texto pisca em Anotações",
+          "sfx": "pop suave + brilho curto"
+        }
+      ],
+      "vivo": "relógio da sessão corre (00:12 → 00:16) e o cursor de texto pisca até o corte",
+      "entra": "match: começa exatamente no card 'Próxima sessão' onde a s5 terminou",
+      "sai": "match: a câmera recua da sessão em tela cheia (começa a s7)",
+      "som": "swish · clicks · clique + air · pop com brilho",
+      "fontes": [
+        {
+          "afirmacao": "botão 'Iniciar sessão' no painel",
+          "fonte": "PRODUTO.md > Painel do dia (pronta)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "tela de atendimento com relógio, abas Anotações/Histórico/Cliente, alterna Online/Presencial, 'Finalizar sessão'",
+          "fonte": "PRODUTO.md > Teleatendimento > Tela de atendimento (pronta)",
+          "status": "ok"
+        }
+      ],
+      "dados": "ilustrativos (iniciais M.C.)",
+      "style_frame": {
+        "4x5": "style/s6-4x5.png",
+        "9x16": "style/s6-9x16.png"
+      }
+    },
+    {
+      "id": "s7",
+      "ideias": [
+        "i10"
+      ],
+      "block": "cartão final",
+      "intensidade": 1,
+      "vo": [
+        "f7"
+      ],
+      "tempo_real": "36,64–≈43,6 (cauda de 2,2 s depois da voz)",
+      "relacao": "complementa",
+      "acrescenta": "a câmera recua e mostra que a sessão inteira acontecia num navegador, em kz.app.br: não há o que instalar, o endereço é o próximo passo",
+      "motivo": "resolve: a janela era o navegador em kz.app.br",
+      "composicao": "4:5: recuo mostra o navegador inteiro (x 90–990, y 280–1080); depois a câmera avança até 1,8× na barra de endereço ('kz.app.br' ≥ 56 px, centro do quadro); headline 'Conheça a' + logo kz (caixa ≥ 90 px) no topo (y 110–260) · 9:16: headline em y 300–460; barra ampliada em y 760–960",
+      "olhar": "centro (sessão) → barra de endereço ampliada → logo na headline",
+      "poses": [
+        "início: a câmera recua da tela de atendimento; 'Conheça a' + logo kz já no topo",
+        "meio: em 'kz' a câmera avança até 1,8× na barra, 'kz.app.br' grande e selecionado",
+        "fim: logo no topo (acabou de pulsar), URL grande com o cursor de texto piscando no fim; cauda parada com a trilha resolvendo"
+      ],
+      "novo": {
+        "tipo": "cta",
+        "id": "navegador",
+        "spec": "bloco em volta de library/motion/cta/navegador/ (hoje componente de motion, não bloco), com param 'modo': 'digitar' (o de hoje) ou 'revelar' (novo: a cena anterior já está dentro do navegador; sem aba nova, sem digitação, sem página desenhada). No modo revelar: cue 'entra' recua a câmera (GENTLE, 0,8 s) e mostra a moldura do navegador com a URL; a headline 'Conheça a' + logo kz inline (caixa ≥ 90 px) entra inteira no topo junto com o recuo; cue 'destaca' avança a câmera até 'zoom_url' (1,8×) na barra de endereço, com 'kz.app.br' ≥ 56 px e seleção em --accent; cue 'marca' passa um traço coral de brilho pela logo da headline, que pulsa uma vez; cue 'fecha' troca a seleção pelo cursor de texto piscando no fim da URL e assenta a câmera; a cauda fica nesse enquadramento com a trilha resolvendo. Genérico: sobe para library/blocos/ depois do aval. slots: titulo | url. cues: entra, destaca, marca, fecha. params: modo, zoom_url, logo (true = logo inline depois do título).",
+        "slots": [
+          "titulo",
+          "url"
+        ],
+        "cues": [
+          "entra",
+          "destaca",
+          "marca",
+          "fecha"
+        ]
+      },
+      "on_screen": "Conheça a|kz.app.br",
+      "params": {
+        "modo": "revelar",
+        "zoom_url": 1.8,
+        "logo": true,
+        "tab": "kz"
+      },
+      "headline": "Conheça a [logo kz]",
+      "icone": "app-window (navegador) · logo kz na headline",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "a câmera recua da sessão e mostra o navegador em kz.app.br; 'Conheça a' + logo kz entram inteiros no topo",
+          "sfx": "air de recuo"
+        },
+        {
+          "cue": "destaca",
+          "word": "f7:kz",
+          "offset": -0.1,
+          "o_que": "câmera avança até 1,8× na barra; 'kz.app.br' selecionado em --accent",
+          "sfx": "pop"
+        },
+        {
+          "cue": "marca",
+          "word": "f7:simples",
+          "offset": -0.1,
+          "o_que": "um traço coral passa pela logo da headline (brilho de assinatura) e ela pulsa uma vez",
+          "sfx": "brilho curto"
+        },
+        {
+          "cue": "fecha",
+          "word": "f7:profissional",
+          "offset": -0.1,
+          "o_que": "a seleção some e fica o cursor de texto piscando no fim da URL; a câmera assenta (1,85 → 1,8×)",
+          "sfx": "— (trilha resolve)"
+        }
+      ],
+      "vivo": "push-in lento (1,8 → 1,85×) entre os gestos; cursor de texto piscando na cauda",
+      "entra": "match: é a mesma tela de atendimento da s6; só a câmera recua",
+      "sai": "fim com cauda de 2,6 s (trilha resolvendo, sem fala)",
+      "som": "air de recuo · pop com brilho · trilha resolve",
+      "fontes": [
+        {
+          "afirmacao": "o app roda no navegador em kz.app.br",
+          "fonte": "BUSINESS.md > Site/app (kz.app.br) + PRODUTO.md (rotas /app/…, app mobile não existe: web)",
+          "status": "ok"
+        }
+      ],
+      "tail": 2.2,
+      "style_frame": {
+        "4x5": "style/s7-4x5.png",
+        "9x16": "style/s7-9x16.png"
+      }
+    }
+  ],
+  "revisao": [
+    {
+      "rodada": 1,
+      "por": "agent:revisor (opus)",
+      "nota": "22/36",
+      "arquivo": "revisao-plano-1.md",
+      "aplicado": "s1 abre com a Sessão no centro e 4 janelas consistentes; s2 mesma paciente M.C. em 3 lugares, 5 cues; s3 sem bolhas, Sessão empurrada, fusão numa janela única; s4 novo revelacao/janela-unica; s5 encaixe dos 3 conteúdos + clique em Agendar; s6 sem cobranças, só iniciais; s7 navegador modo revelar, sem aba nova, 2 textos",
+      "recusado": "fundo pastel na s4 (BRAND.md); alternativas B de s3 e s4; s2/s3 viraram 2 blocos irmãos (cena/janelas-abrem e cena/janelas-espremem) com as mesmas posições, porque o check exige 1 contrato por bloco"
+    },
+    {
+      "rodada": 2,
+      "por": "agent:revisor (opus)",
+      "nota": "28/36",
+      "arquivo": "revisao-plano-2.md",
+      "aplicado": "s4 spec corrigido, frase de volta e chips com ícones que combinam com a palavra; s5 alt. A (sem clique nem toast, M.C. 14h acende); s7 alt. A (zoom 1,8× na URL, logo na headline, 3 gestos); Sessão sem tile de vídeo (armchair) e s6 em modo Presencial; revisao[0] corrigido",
+      "recusado": "s4 alt. A (miniaturas): ver revisao-plano-2.md"
+    }
+  ],
+  "status": "aguardando aval"
+}

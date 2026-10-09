@@ -23,7 +23,7 @@ Skill `.claude/skills/plano-de-cenas/` com as fases **A entrada → B mapa de id
 
 ## 3. Fases
 - **A (feita, 2026-10-08):** skill, referências, repertório, `plano.mjs`, bloco `rascunho/cena-nova`, integração (skill `video` etapa 1, `editor-de-video`, `orquestrar`, `ig-post`, CLAUDE.md, README do knowledge). Teste de ponta a ponta: `companies/kz/contents/2026-10-08-teste-plano-de-cenas/` (3 cenas, 1 bloco novo): check → timeline → tts → build → storyboard ok.
-- **B:** refazer o plano da apresentação kz com a skill (roteiro atual como entrada), com revisão Opus e storyboard; comparar com a v03 (o Oliver julga) e calibrar rubrica, gramática e avisos do `check`.
+- **B (plano feito, aguardando o julgamento do Oliver, 2026-10-08):** refazer o plano da apresentação kz com a skill (roteiro atual como entrada), com revisão Opus e storyboard; comparar com a v03 (o Oliver julga) e calibrar rubrica, gramática e avisos do `check`.
 - **C:** entrada por transcrição com tempos (vídeo/áudio já gravado): `entrada.tempos` → falas com `words` já medidas, sem TTS (liga com cortes e edits da 045).
 - **D (talvez):** storyboard no app (Conteúdos → plano: quadros + ficha + anotar por cena, como a revisão 022).
 
@@ -36,3 +36,4 @@ Skill `.claude/skills/plano-de-cenas/` com as fases **A entrada → B mapa de id
 
 ## Log
 - 2026-10-08: análise crítica da skill `video` (etapa de plano) com o Oliver; 3 decisões dele (acima). Fase A feita. Nota: o HyperFrames pede Node 22 (`fnm exec --using=22 node …` quando o terminal está no 20).
+- 2026-10-08 (fase B, sessão Fluxo IA): plano "Uma janela só" em `companies/kz/contents/2026-10-08-apresentacao-kz-plano/` (voz real da Carla, sem TTS). Revisão Opus: rodada 1 22/36 → rodada 2 28/36 (passa). Storyboard 4:5 + 9:16, style frames das 7 cenas, gestos na palavra real ±0,15 s (fit-vo). Comparação com a v03: `comparacao/v03-x-janela-4x5.png` + `COMPARACAO.md`; 6 perguntas no `plano.md`. Calibragem da skill/check: `notas-calibragem.md` (33 pontos), aplicada pela outra sessão (dona do `plano.mjs`), que fez um 2º conceito em `2026-10-08-apresentacao-kz-pecas/`. Incidente: as duas sessões escreveram na mesma pasta; regra → conferir sessões antes de criar pasta de saída.

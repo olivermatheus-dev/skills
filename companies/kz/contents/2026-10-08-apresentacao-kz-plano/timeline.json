@@ -1,0 +1,1032 @@
+{
+  "status": "plano",
+  "fps": 30,
+  "formats": [
+    "4x5",
+    "9x16"
+  ],
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?",
+      "start": 0.35,
+      "words": [
+        {
+          "w": "Você",
+          "s": 0.39,
+          "e": 0.796
+        },
+        {
+          "w": "é",
+          "s": 0.796,
+          "e": 1.186
+        },
+        {
+          "w": "terapeuta",
+          "s": 1.186,
+          "e": 1.846
+        },
+        {
+          "w": "e",
+          "s": 1.846,
+          "e": 2.046
+        },
+        {
+          "w": "ainda",
+          "s": 2.046,
+          "e": 2.266
+        },
+        {
+          "w": "organiza",
+          "s": 2.266,
+          "e": 2.746
+        },
+        {
+          "w": "sua",
+          "s": 2.746,
+          "e": 2.886
+        },
+        {
+          "w": "rotina",
+          "s": 2.886,
+          "e": 3.266
+        },
+        {
+          "w": "em",
+          "s": 3.266,
+          "e": 3.566
+        },
+        {
+          "w": "vários",
+          "s": 3.566,
+          "e": 3.846
+        },
+        {
+          "w": "lugares",
+          "s": 3.846,
+          "e": 4.286
+        },
+        {
+          "w": "diferentes?",
+          "s": 4.286,
+          "e": 4.892
+        }
+      ],
+      "length": 4.542,
+      "file": "audio/vo/f1.wav",
+      "voice": "final",
+      "end": 4.892
+    },
+    {
+      "id": "f2",
+      "text": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…",
+      "start": 5.342,
+      "words": [
+        {
+          "w": "Agenda",
+          "s": 6.162,
+          "e": 6.882
+        },
+        {
+          "w": "de",
+          "s": 6.882,
+          "e": 7.042
+        },
+        {
+          "w": "um",
+          "s": 7.042,
+          "e": 7.302
+        },
+        {
+          "w": "lado,",
+          "s": 7.302,
+          "e": 8.122
+        },
+        {
+          "w": "informações",
+          "s": 8.122,
+          "e": 8.402
+        },
+        {
+          "w": "dos",
+          "s": 8.402,
+          "e": 8.662
+        },
+        {
+          "w": "pacientes",
+          "s": 8.662,
+          "e": 9.142
+        },
+        {
+          "w": "de",
+          "s": 9.142,
+          "e": 9.502
+        },
+        {
+          "w": "outro,",
+          "s": 9.502,
+          "e": 9.926
+        },
+        {
+          "w": "anotações",
+          "s": 9.926,
+          "e": 10.386
+        },
+        {
+          "w": "espalhadas…",
+          "s": 10.386,
+          "e": 11.492
+        }
+      ],
+      "length": 6.15,
+      "file": "audio/vo/f2.wav",
+      "voice": "final",
+      "end": 11.492
+    },
+    {
+      "id": "f3",
+      "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender.",
+      "start": 11.942,
+      "words": [
+        {
+          "w": "E",
+          "s": 11.982,
+          "e": 12.119
+        },
+        {
+          "w": "no",
+          "s": 12.119,
+          "e": 12.359
+        },
+        {
+          "w": "fim,",
+          "s": 12.359,
+          "e": 12.69
+        },
+        {
+          "w": "sobra",
+          "s": 12.69,
+          "e": 12.87
+        },
+        {
+          "w": "menos",
+          "s": 12.87,
+          "e": 13.25
+        },
+        {
+          "w": "tempo",
+          "s": 13.25,
+          "e": 13.55
+        },
+        {
+          "w": "para",
+          "s": 13.55,
+          "e": 13.85
+        },
+        {
+          "w": "aquilo",
+          "s": 13.85,
+          "e": 13.99
+        },
+        {
+          "w": "que",
+          "s": 13.99,
+          "e": 14.31
+        },
+        {
+          "w": "realmente",
+          "s": 14.31,
+          "e": 14.85
+        },
+        {
+          "w": "importa:",
+          "s": 14.85,
+          "e": 16.072
+        },
+        {
+          "w": "atender.",
+          "s": 16.072,
+          "e": 16.74
+        }
+      ],
+      "length": 4.798,
+      "file": "audio/vo/f3.wav",
+      "voice": "final",
+      "end": 16.74
+    },
+    {
+      "id": "f4",
+      "text": "A kz é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
+      "start": 17.54,
+      "words": [
+        {
+          "w": "A",
+          "s": 17.58,
+          "e": 17.912
+        },
+        {
+          "w": "kz",
+          "s": 17.912,
+          "e": 18.292
+        },
+        {
+          "w": "é",
+          "s": 18.292,
+          "e": 18.452
+        },
+        {
+          "w": "uma",
+          "s": 18.452,
+          "e": 18.612
+        },
+        {
+          "w": "plataforma",
+          "s": 18.612,
+          "e": 19.092
+        },
+        {
+          "w": "feita",
+          "s": 19.092,
+          "e": 19.652
+        },
+        {
+          "w": "para",
+          "s": 19.652,
+          "e": 19.872
+        },
+        {
+          "w": "terapeutas",
+          "s": 19.872,
+          "e": 20.102
+        },
+        {
+          "w": "que",
+          "s": 20.102,
+          "e": 20.282
+        },
+        {
+          "w": "querem",
+          "s": 20.282,
+          "e": 20.522
+        },
+        {
+          "w": "deixar",
+          "s": 20.522,
+          "e": 20.862
+        },
+        {
+          "w": "a",
+          "s": 20.862,
+          "e": 21.022
+        },
+        {
+          "w": "gestão",
+          "s": 21.022,
+          "e": 21.342
+        },
+        {
+          "w": "da",
+          "s": 21.342,
+          "e": 21.482
+        },
+        {
+          "w": "rotina",
+          "s": 21.482,
+          "e": 21.922
+        },
+        {
+          "w": "mais",
+          "s": 21.922,
+          "e": 22.282
+        },
+        {
+          "w": "simples,",
+          "s": 22.282,
+          "e": 23.302
+        },
+        {
+          "w": "organizada",
+          "s": 23.302,
+          "e": 23.702
+        },
+        {
+          "w": "e",
+          "s": 23.702,
+          "e": 24.33
+        },
+        {
+          "w": "profissional.",
+          "s": 24.33,
+          "e": 25.023
+        }
+      ],
+      "length": 7.483,
+      "file": "audio/vo/f4.wav",
+      "voice": "final",
+      "end": 25.023
+    },
+    {
+      "id": "f5",
+      "text": "Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação.",
+      "start": 25.473,
+      "words": [
+        {
+          "w": "Tudo",
+          "s": 25.513,
+          "e": 25.822
+        },
+        {
+          "w": "pensado",
+          "s": 25.822,
+          "e": 26.442
+        },
+        {
+          "w": "para",
+          "s": 26.442,
+          "e": 26.682
+        },
+        {
+          "w": "você",
+          "s": 26.682,
+          "e": 26.962
+        },
+        {
+          "w": "acompanhar",
+          "s": 26.962,
+          "e": 27.522
+        },
+        {
+          "w": "seus",
+          "s": 27.522,
+          "e": 27.702
+        },
+        {
+          "w": "atendimentos",
+          "s": 27.702,
+          "e": 28.382
+        },
+        {
+          "w": "e",
+          "s": 28.382,
+          "e": 28.662
+        },
+        {
+          "w": "organizar",
+          "s": 28.662,
+          "e": 29.242
+        },
+        {
+          "w": "seu",
+          "s": 29.242,
+          "e": 29.362
+        },
+        {
+          "w": "dia",
+          "s": 29.362,
+          "e": 29.702
+        },
+        {
+          "w": "a",
+          "s": 29.702,
+          "e": 29.762
+        },
+        {
+          "w": "dia",
+          "s": 29.762,
+          "e": 29.902
+        },
+        {
+          "w": "com",
+          "s": 29.902,
+          "e": 30.262
+        },
+        {
+          "w": "muito",
+          "s": 30.262,
+          "e": 30.722
+        },
+        {
+          "w": "menos",
+          "s": 30.722,
+          "e": 30.982
+        },
+        {
+          "w": "complicação.",
+          "s": 30.982,
+          "e": 31.687
+        }
+      ],
+      "length": 6.214,
+      "file": "audio/vo/f5.wav",
+      "voice": "final",
+      "end": 31.687
+    },
+    {
+      "id": "f6",
+      "text": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!",
+      "start": 32.137,
+      "words": [
+        {
+          "w": "Menos",
+          "s": 32.177,
+          "e": 32.754
+        },
+        {
+          "w": "tempo",
+          "s": 32.754,
+          "e": 32.954
+        },
+        {
+          "w": "administrando.",
+          "s": 32.954,
+          "e": 33.879
+        },
+        {
+          "w": "Mais",
+          "s": 33.879,
+          "e": 34.099
+        },
+        {
+          "w": "tempo",
+          "s": 34.099,
+          "e": 34.459
+        },
+        {
+          "w": "cuidando",
+          "s": 34.459,
+          "e": 35.019
+        },
+        {
+          "w": "dos",
+          "s": 35.019,
+          "e": 35.199
+        },
+        {
+          "w": "seus",
+          "s": 35.199,
+          "e": 35.399
+        },
+        {
+          "w": "pacientes!",
+          "s": 35.399,
+          "e": 36.393
+        }
+      ],
+      "length": 4.256,
+      "file": "audio/vo/f6.wav",
+      "voice": "final",
+      "end": 36.393
+    },
+    {
+      "id": "f7",
+      "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "start": 36.843,
+      "words": [
+        {
+          "w": "Conheça",
+          "s": 36.883,
+          "e": 37.418
+        },
+        {
+          "w": "a",
+          "s": 37.418,
+          "e": 37.558
+        },
+        {
+          "w": "kz",
+          "s": 37.558,
+          "e": 37.918
+        },
+        {
+          "w": "e",
+          "s": 37.918,
+          "e": 38.178
+        },
+        {
+          "w": "descubra",
+          "s": 38.178,
+          "e": 38.498
+        },
+        {
+          "w": "uma",
+          "s": 38.498,
+          "e": 38.658
+        },
+        {
+          "w": "forma",
+          "s": 38.658,
+          "e": 38.998
+        },
+        {
+          "w": "mais",
+          "s": 38.998,
+          "e": 39.298
+        },
+        {
+          "w": "simples",
+          "s": 39.298,
+          "e": 39.698
+        },
+        {
+          "w": "de",
+          "s": 39.698,
+          "e": 39.878
+        },
+        {
+          "w": "cuidar",
+          "s": 39.878,
+          "e": 40.278
+        },
+        {
+          "w": "da",
+          "s": 40.278,
+          "e": 40.378
+        },
+        {
+          "w": "sua",
+          "s": 40.378,
+          "e": 40.518
+        },
+        {
+          "w": "rotina",
+          "s": 40.518,
+          "e": 40.918
+        },
+        {
+          "w": "profissional.",
+          "s": 40.918,
+          "e": 41.494
+        }
+      ],
+      "length": 4.651,
+      "file": "audio/vo/f7.wav",
+      "voice": "final",
+      "end": 41.494
+    }
+  ],
+  "camadas": [
+    {
+      "use": "fundo/blobs"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "use": "abertura/pergunta-fragmentos",
+      "block": "gancho",
+      "vo": [
+        "f1"
+      ],
+      "lead": 0.35,
+      "on_screen": "Você é *terapeuta*?|Sua rotina em *vários lugares*?",
+      "params": {
+        "estilo": "janela",
+        "rotulos": [
+          "Agenda",
+          "Pacientes",
+          "Anotações",
+          "Mensagens"
+        ],
+        "icones": [
+          "calendar-days",
+          "contact-round",
+          "notebook-pen",
+          "message-circle"
+        ],
+        "fundo": "janela-sessao",
+        "sobra": 0
+      },
+      "note": "a sessão (o que a terapeuta quer fazer) aparece calma no centro, e os 'vários lugares' são 4 janelas que pipocam por cima e a cobrem: o problema é o que tapa o atendimento",
+      "start": 0,
+      "end": 5.192
+    },
+    {
+      "id": "s2",
+      "use": "rascunho/cena-nova",
+      "block": "dor",
+      "vo": [
+        "f2"
+      ],
+      "on_screen": "Cada coisa num *canto*.|M.C. · 14h",
+      "params": {
+        "novo": "cena/janelas-abrem",
+        "spec": "fase 1 de 2 (a fase 2 é cena/janelas-espremem, s3; os dois leem o mesmo params.posicoes e a mesma biblioteca de janelas, que fica num arquivo comum do projeto). Janelas genéricas (barra de 3 pontos + ícone Lucide + nome) desenhadas nos tokens: Agenda (grade da semana, blocos pastel, um deles 'M.C. 14h'), Pacientes (ficha com avatar de iniciais M.C. e 4 linhas), Anotações (post-it com linhas de caderno e 'M.C.'), Mensagens (pequena, só ícone e contador), Sessão (barra 'Sessão · 14h' com ícone armchair; por dentro avatar de iniciais e linhas de anotação, sem tile de vídeo). Cue 'entra': headline entra inteira; cue 'agenda' abre a Agenda com o bloco M.C. já dentro; 'pacientes' abre a ficha já preenchida; 'notas' solta o post-it; 'espalha' acende as 3 marcas M.C. em --accent e entorta tudo 2–6°. Card opaco: o conteúdo anima, a janela não muda de opacidade. slots: headline | sessao. cues: entra, agenda, pacientes, notas, espalha. params: posicoes = [{ id, x, y, w, h, giro }] por formato."
+      },
+      "novo": "cena/janelas-abrem",
+      "note": "a mesma paciente (M.C., 14h) está partida em 3 lugares: na agenda, na ficha e num post-it; em 'espalhadas' as 3 marcas de M.C. acendem juntas e mostram o custo de juntar tudo de cabeça",
+      "start": 5.192,
+      "end": 11.792
+    },
+    {
+      "id": "s3",
+      "use": "rascunho/cena-nova",
+      "block": "dor",
+      "vo": [
+        "f3"
+      ],
+      "on_screen": "Sobra *menos* tempo para atender.|M.C. · 14h",
+      "params": {
+        "canto": "baixo-direita",
+        "novo": "cena/janelas-espremem",
+        "spec": "fase 2 de 2 (continua cena/janelas-abrem com o mesmo params.posicoes e as mesmas janelas). cue 'entra': headline troca inteira e a Sessão sai de trás das janelas; 'espreme': as janelas administrativas crescem 10% e empurram a Sessão para o canto de baixo à direita a 40%, e o encolhimento continua devagar até 'importa'; 'aperta': segundo empurrão (mais um degrau, Sessão a ~30%); 'importa': tudo para 0,4 s e só o anel --primary pulsa na Sessão; 'sai': tudo desliza para o centro e encaixa numa janela única (as barras de 3 pontos se sobrepõem até sobrar uma) a ~30% de escala. Card opaco. slots: headline | sessao. params: posicoes = [{ id, x, y, w, h, giro }] por formato (as mesmas da s2), canto."
+      },
+      "novo": "cena/janelas-espremem",
+      "note": "o que a gestão empurra para o canto é a própria sessão que abriu o vídeo no centro: ela encolhe enquanto as janelas administrativas crescem; em 'atender' tudo para e só ela pulsa",
+      "start": 11.792,
+      "end": 17.04
+    },
+    {
+      "id": "s4",
+      "use": "rascunho/cena-nova",
+      "block": "revelação",
+      "vo": [
+        "f4"
+      ],
+      "pause": true,
+      "on_screen": "Feita para *terapeutas*|A gestão da sua rotina mais|simples|organizada|profissional",
+      "params": {
+        "icones": [
+          "check",
+          "layout-grid",
+          "badge-check"
+        ],
+        "novo": "revelacao/janela-unica",
+        "spec": "recebe a janela única a ~30% no centro (fim de cena/janelas-espremem). cue 'entra': fica parada (a pausa é o setup), só um respiro de escala. cue 'marca': a janela abre para ~70% (GENTLE, 0,7 s), a logo se desenha no centro dela e o brilho --ui-glow cresce até cobrir ≥ 1/3 da janela (a revelação tem mais luz que a s3). cue 'assinatura': frase curta entra inteira embaixo da logo. cue 'rodape': o rodapé da janela se abre (divisória se desenha) e a frase 'A gestão da sua rotina mais' entra inteira nele. cues 'p1', 'p2', 'p3': chips com ícone Lucide que combina com a palavra (check = simples, layout-grid = organizada, badge-check = profissional) entram em fileira embaixo da frase. Sai: a janela cresce para a moldura do painel e a logo desliza para a barra lateral. slots: assinatura | frase | p1 | p2 | p3. cues: entra, marca, assinatura, rodape, p1, p2, p3. params: icones."
+      },
+      "novo": "revelacao/janela-unica",
+      "note": "as janelas espalhadas viraram uma janela só, e a kz nasce dentro dela: a marca é o lugar onde tudo foi junto; os 3 ganhos entram como chips arrumados no rodapé da própria janela",
+      "start": 17.04,
+      "end": 25.323
+    },
+    {
+      "id": "s5",
+      "use": "produto/painel-inicio",
+      "block": "produto",
+      "vo": [
+        "f5"
+      ],
+      "on_screen": "Boa tarde,|Ana|Acompanhe seus *atendimentos*|Organize seu *dia a dia*|Organize seu *dia a dia*",
+      "params": {
+        "headlines": 2,
+        "feito": "marca",
+        "destaque_lista": "M.C. 14h",
+        "encaixe": [
+          {
+            "de": "agenda",
+            "para": "sessoes-hoje",
+            "lado": "esquerda"
+          },
+          {
+            "de": "pacientes",
+            "para": "proxima-sessao",
+            "lado": "direita"
+          },
+          {
+            "de": "anotacoes",
+            "para": "atalho-nova-anotacao",
+            "lado": "baixo"
+          }
+        ]
+      },
+      "note": "a janela única abre e é o painel real da kz: a agenda, a ficha e o post-it que estavam espalhados encaixam cada um no seu módulo, e a paciente M.C., que estava em 3 lugares na s2, aparece uma vez só em 'Sessões de hoje'",
+      "start": 25.323,
+      "end": 31.987
+    },
+    {
+      "id": "s6",
+      "use": "rascunho/cena-nova",
+      "block": "virada",
+      "vo": [
+        "f6"
+      ],
+      "on_screen": "Menos tempo *administrando*.|Mais tempo *cuidando*.|M.C. · sessão",
+      "params": {
+        "relogio_inicio": "00:12",
+        "modo": "presencial",
+        "novo": "virada/sessao-ocupa-tudo",
+        "spec": "começa no estado final de produto/painel-inicio (card 'Próxima sessão' em foco); headline 'antes' entra inteira; no cue 'recolhe' os módulos que a s5 mostrou ('Sessões de hoje' e 'Atalhos') recolhem para chips com ícone na lateral (FAST, cascata 60 ms); no cue 'inicia' a headline troca para 'depois' e o cursor clica 'Iniciar sessão' (botão afunda 0,96, eco só no clique); a tela de atendimento abre a partir do card e ocupa a janela (GENTLE, 0,6–0,8 s) no modo Presencial (param modo; 'online' mostra o painel de vídeo só se a videochamada for confirmada): relógio, iniciais da paciente, abas Anotações/Histórico/Cliente com Anotações em primeiro plano, botão 'Finalizar sessão'; no cue 'cuida' aparece o coração ao lado da headline e o cursor de texto pisca em Anotações. Sem rosto, sem nome de paciente, sem texto clínico legível (linhas de caderno vazias). slots: antes | depois | cliente. cues: entra, recolhe, inicia, cuida. params: relogio_inicio, modo."
+      },
+      "novo": "virada/sessao-ocupa-tudo",
+      "note": "a sessão de M.C., que abriu o vídeo no centro e foi espremida no canto na s3, agora ocupa a janela inteira: é a tela de atendimento real, com as Anotações em primeiro plano, não um ícone de coração",
+      "start": 31.987,
+      "end": 36.693
+    },
+    {
+      "id": "s7",
+      "use": "rascunho/cena-nova",
+      "block": "cartão final",
+      "vo": [
+        "f7"
+      ],
+      "tail": 2.2,
+      "on_screen": "Conheça a|kz.app.br",
+      "params": {
+        "modo": "revelar",
+        "zoom_url": 1.8,
+        "logo": true,
+        "tab": "kz",
+        "novo": "cta/navegador",
+        "spec": "bloco em volta de library/motion/cta/navegador/ (hoje componente de motion, não bloco), com param 'modo': 'digitar' (o de hoje) ou 'revelar' (novo: a cena anterior já está dentro do navegador; sem aba nova, sem digitação, sem página desenhada). No modo revelar: cue 'entra' recua a câmera (GENTLE, 0,8 s) e mostra a moldura do navegador com a URL; a headline 'Conheça a' + logo kz inline (caixa ≥ 90 px) entra inteira no topo junto com o recuo; cue 'destaca' avança a câmera até 'zoom_url' (1,8×) na barra de endereço, com 'kz.app.br' ≥ 56 px e seleção em --accent; cue 'marca' passa um traço coral de brilho pela logo da headline, que pulsa uma vez; cue 'fecha' troca a seleção pelo cursor de texto piscando no fim da URL e assenta a câmera; a cauda fica nesse enquadramento com a trilha resolvendo. Genérico: sobe para library/blocos/ depois do aval. slots: titulo | url. cues: entra, destaca, marca, fecha. params: modo, zoom_url, logo (true = logo inline depois do título)."
+      },
+      "novo": "cta/navegador",
+      "note": "a câmera recua e mostra que a sessão inteira acontecia num navegador, em kz.app.br: não há o que instalar, o endereço é o próximo passo",
+      "start": 36.693,
+      "end": 43.694
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s1",
+      "at": 0.02,
+      "t": 0.02
+    },
+    {
+      "id": "e2",
+      "cue": "troca",
+      "type": "reveal",
+      "scene": "s1",
+      "word": "f1:ainda",
+      "offset": -0.12,
+      "t": 1.926
+    },
+    {
+      "id": "e3",
+      "cue": "espalha",
+      "type": "reveal",
+      "scene": "s1",
+      "word": "f1:vários",
+      "offset": -0.08,
+      "t": 3.486
+    },
+    {
+      "id": "e4",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s2",
+      "at": 0.02,
+      "t": 5.212
+    },
+    {
+      "id": "e5",
+      "cue": "agenda",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:Agenda",
+      "offset": -0.1,
+      "t": 6.062
+    },
+    {
+      "id": "e6",
+      "cue": "pacientes",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:informações",
+      "offset": -0.1,
+      "t": 8.022
+    },
+    {
+      "id": "e7",
+      "cue": "notas",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:anotações",
+      "offset": -0.1,
+      "t": 9.826
+    },
+    {
+      "id": "e8",
+      "cue": "espalha",
+      "type": "reveal",
+      "scene": "s2",
+      "word": "f2:espalhadas",
+      "offset": -0.06,
+      "t": 10.326
+    },
+    {
+      "id": "e9",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s3",
+      "at": 0.02,
+      "t": 11.812
+    },
+    {
+      "id": "e10",
+      "cue": "espreme",
+      "type": "reveal",
+      "scene": "s3",
+      "word": "f3:menos",
+      "offset": -0.1,
+      "t": 12.77
+    },
+    {
+      "id": "e11",
+      "cue": "aperta",
+      "type": "reveal",
+      "scene": "s3",
+      "word": "f3:aquilo",
+      "offset": -0.1,
+      "t": 13.75
+    },
+    {
+      "id": "e12",
+      "cue": "importa",
+      "type": "reveal",
+      "scene": "s3",
+      "word": "f3:atender",
+      "offset": -0.12,
+      "t": 15.952
+    },
+    {
+      "id": "e13",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s3",
+      "before_end": 0.35,
+      "t": 16.69
+    },
+    {
+      "id": "e14",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s4",
+      "at": 0.02,
+      "t": 17.06
+    },
+    {
+      "id": "e15",
+      "cue": "marca",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:kz",
+      "offset": -0.12,
+      "t": 17.792
+    },
+    {
+      "id": "e16",
+      "cue": "assinatura",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:feita",
+      "offset": -0.1,
+      "t": 18.992
+    },
+    {
+      "id": "e17",
+      "cue": "rodape",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:gestão",
+      "offset": -0.1,
+      "t": 20.922
+    },
+    {
+      "id": "e18",
+      "cue": "p1",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:simples",
+      "offset": -0.1,
+      "t": 22.182
+    },
+    {
+      "id": "e19",
+      "cue": "p2",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:organizada",
+      "offset": -0.1,
+      "t": 23.202
+    },
+    {
+      "id": "e20",
+      "cue": "p3",
+      "type": "reveal",
+      "scene": "s4",
+      "word": "f4:profissional",
+      "offset": -0.1,
+      "t": 24.23
+    },
+    {
+      "id": "e21",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s5",
+      "at": 0.02,
+      "t": 25.343
+    },
+    {
+      "id": "e22",
+      "cue": "destaque",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:atendimentos",
+      "offset": -0.12,
+      "t": 27.582
+    },
+    {
+      "id": "e23",
+      "cue": "lista",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:organizar",
+      "offset": -0.1,
+      "t": 28.562
+    },
+    {
+      "id": "e24",
+      "cue": "feito",
+      "type": "reveal",
+      "scene": "s5",
+      "word": "f5:complicação",
+      "offset": -0.12,
+      "t": 30.862
+    },
+    {
+      "id": "e25",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s5",
+      "before_end": 0.3,
+      "t": 31.687
+    },
+    {
+      "id": "e26",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s6",
+      "at": 0.02,
+      "t": 32.007
+    },
+    {
+      "id": "e27",
+      "cue": "recolhe",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:administrando",
+      "offset": -0.1,
+      "t": 32.854
+    },
+    {
+      "id": "e28",
+      "cue": "inicia",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:Mais",
+      "offset": -0.12,
+      "t": 33.759
+    },
+    {
+      "id": "e29",
+      "cue": "cuida",
+      "type": "reveal",
+      "scene": "s6",
+      "word": "f6:cuidando",
+      "offset": -0.1,
+      "t": 34.359
+    },
+    {
+      "id": "e30",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s7",
+      "at": 0.02,
+      "t": 36.713
+    },
+    {
+      "id": "e31",
+      "cue": "destaca",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:kz",
+      "offset": -0.1,
+      "t": 37.458
+    },
+    {
+      "id": "e32",
+      "cue": "marca",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:simples",
+      "offset": -0.1,
+      "t": 39.198
+    },
+    {
+      "id": "e33",
+      "cue": "fecha",
+      "type": "reveal",
+      "scene": "s7",
+      "word": "f7:profissional",
+      "offset": -0.1,
+      "t": 40.818
+    }
+  ],
+  "sfx": [],
+  "voice": {
+    "stage": "final"
+  },
+  "duration": 43.694
+}
