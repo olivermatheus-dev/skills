@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:35:01Z",
+  "platform": "site",
+  "profileUrl": "https://eclasse.com.br",
+  "source": "html",
+  "profile": {
+    "name": "eClasse - Sua Gestão de Aulas Particulares em um Só Lugar",
+    "handle": "eclasse.com.br",
+    "bio": "Organize alunos, agenda e finanças de forma simples e profissional. Ideal para professores que querem focar no que realmente importa: ensinar.",
+    "avatar": "https://eclasse.com.br/img/faviconeclasse.ico",
+    "avatarLocal": "media/site-eclasse-com-br/avatar-8acec932.ico",
+    "banner": "https://eclasse.com.br/img/logoeclasse50.png",
+    "bannerLocal": "media/site-eclasse-com-br/banner-2f6f3c32.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

@@ -1,0 +1,41 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:59:04Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.teachworks.com/"
+    },
+    {
+      "url": "https://www.teachworks.com/about"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://teachworks.com",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/teachworks",
+        "handle": "teachworks",
+        "note": "linkado no rodapé do site oficial"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/teachworks",
+        "handle": "teachworks",
+        "note": "linkado no rodapé do site oficial"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}

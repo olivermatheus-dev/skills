@@ -1,0 +1,89 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:38:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://iprofe.com.br/",
+    "hero": {
+      "headline": "Gerencie sua prática profissional em um só lugar",
+      "subheadline": "Disponível nas lojas Apple e Android e no navegador por R$ 29,90 mensais",
+      "cta": "Testar gratuitamente",
+      "visual": "mockups do app em vários dispositivos"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Gerencie sua prática profissional em um só lugar",
+        "summary": "preço já na primeira dobra, lojas e navegador"
+      },
+      {
+        "type": "beneficios",
+        "title": "Vantagens do app",
+        "summary": "8 itens curtos: cadastro, seguro, relatórios PDF, sempre online"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Como funciona",
+        "summary": "4 passos: baixar, criar conta, cadastrar alunos, controlar"
+      },
+      {
+        "type": "outro",
+        "title": "Vídeo de 53 s",
+        "summary": "demonstração do app"
+      },
+      {
+        "type": "faq",
+        "title": "FAQ",
+        "summary": "10 perguntas: SaaS, PWA, teste, preço, boleto"
+      },
+      {
+        "type": "features",
+        "title": "Porque usar o iProfe?",
+        "summary": "agenda, pagamentos, clientes, acesso, evolução, relatórios para pais"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Clientes muito satisfeitos",
+        "summary": "6 depoimentos de professores e personal"
+      },
+      {
+        "type": "precos",
+        "title": "Tudo isso por apenas R$29,90 mensais!",
+        "summary": "sem fidelidade, botão Testar Grátis"
+      },
+      {
+        "type": "cta",
+        "title": "O controle da sua rotina na palma da sua mão",
+        "summary": "repete lojas e preço"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "e-mail de contato, blog, © 2024"
+      }
+    ],
+    "ctas": [
+      "Testar gratuitamente",
+      "Testar Grátis!"
+    ],
+    "socialProof": [
+      "6 depoimentos de professores (matemática, inglês, guitarra, squash), personal e terapeuta ocupacional",
+      "apps nas lojas Apple e Google Play"
+    ],
+    "interesting": [
+      "Preço repetido 3 vezes na página",
+      "Objeções do teste respondidas no FAQ: sem cartão, grátis até 3 alunos",
+      "'Sem fidelidade' como garantia",
+      "Depoimento que valoriza simplicidade em vez de recursos",
+      "Relatório para os pais como benefício nomeado"
+    ],
+    "tone": "simples, direto e informal; promessa de organização sem estresse"
+  }
+}

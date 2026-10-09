@@ -1,0 +1,198 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:54:59Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://tuton.io/",
+      "title": "Tuton - The Platform Built for Independent Language Tutors"
+    },
+    {
+      "url": "https://tuton.io/pricing",
+      "title": "Pricing: simple plans for language tutors | Tuton"
+    },
+    {
+      "url": "https://tuton.io/features/space",
+      "title": "Online Whiteboard for Language Tutors: The Space | Tuton"
+    },
+    {
+      "url": "https://tuton.io/schools",
+      "title": "Tuton for schools: group classes, courses and one shared library | Tuton"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://tuton.io/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://tuton.io/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Tuton - The Platform Built for Independent Language Tutors",
+        "chars": 20886
+      },
+      {
+        "url": "https://tuton.io/pricing",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Pricing: simple plans for language tutors | Tuton",
+        "chars": 11740
+      },
+      {
+        "url": "https://tuton.io/features/space",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Online Whiteboard for Language Tutors: The Space | Tuton",
+        "chars": 5897
+      },
+      {
+        "url": "https://tuton.io/schools",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Tuton for schools: group classes, courses and one shared library | Tuton",
+        "chars": 6378
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 407,
+      "groups": [
+        {
+          "name": "/esl-resources",
+          "count": 232,
+          "sample": [
+            "/esl-resources",
+            "/esl-resources/lesson-plans",
+            "/esl-resources/topics/basic-basics",
+            "/esl-resources/topics/business-english"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 120,
+          "sample": [
+            "/blog",
+            "/blog/content-loop-feeds-tutor-booking-page",
+            "/blog/progress-updates-parents-professionals-actually-read",
+            "/blog/run-trial-lessons-that-protect-your-calendar"
+          ]
+        },
+        {
+          "name": "/games",
+          "count": 18,
+          "sample": [
+            "/games",
+            "/games/story-bubbles",
+            "/games/would-you-rather",
+            "/games/question-wheel"
+          ]
+        },
+        {
+          "name": "/features",
+          "count": 13,
+          "sample": [
+            "/features",
+            "/features/space",
+            "/features/classroom",
+            "/features/ai-assistant"
+          ]
+        },
+        {
+          "name": "/tools",
+          "count": 5,
+          "sample": [
+            "/tools",
+            "/tools/cancellation-policy-generator",
+            "/tools/invoice-generator",
+            "/tools/rate-calculator"
+          ]
+        },
+        {
+          "name": "/compare",
+          "count": 5,
+          "sample": [
+            "/compare",
+            "/compare/tuton-vs-marketplaces",
+            "/compare/tuton-vs-diy-stack",
+            "/compare/tuton-vs-video-calls"
+          ]
+        },
+        {
+          "name": "/for",
+          "count": 5,
+          "sample": [
+            "/for/esl-tutors",
+            "/for/ielts-tutors",
+            "/for/business-english-tutors",
+            "/for/online-english-teachers"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing"
+          ]
+        },
+        {
+          "name": "/schools",
+          "count": 1,
+          "sample": [
+            "/schools"
+          ]
+        },
+        {
+          "name": "/app",
+          "count": 1,
+          "sample": [
+            "/app"
+          ]
+        },
+        {
+          "name": "/about",
+          "count": 1,
+          "sample": [
+            "/about"
+          ]
+        },
+        {
+          "name": "/statistics",
+          "count": 1,
+          "sample": [
+            "/statistics/online-english-tutoring"
+          ]
+        },
+        {
+          "name": "/support",
+          "count": 1,
+          "sample": [
+            "/support"
+          ]
+        },
+        {
+          "name": "/@derek",
+          "count": 1,
+          "sample": [
+            "/@derek"
+          ]
+        },
+        {
+          "name": "/@joseph-iglesias",
+          "count": 1,
+          "sample": [
+            "/@joseph-iglesias"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

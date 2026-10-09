@@ -1,0 +1,39 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:17:28Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://traus.com.br/"
+    },
+    {
+      "url": "https://traus.com.br/contato"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://traus.com.br",
+        "note": "domínio oficial, CNPJ no rodapé"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/suite.traus/",
+        "handle": "suite.traus",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/profile.php?id=61560260056690",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:17:50Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemawebmusica.com.br/"
+    },
+    {
+      "url": "https://sistemawebmusica.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Sistema web para escolas de música, da captação do aluno à folha do professor.",
+    "text": "Gestão para escolas de música no Brasil e em Portugal: interessados, matrícula, grade por sala, mensalidade (carnê, boleto, PIX), folha de professores e apps próprios de aluno e professor. Preço por faixa de alunos (a partir de R$ 79/mês; faixa até 50 alunos aparece a R$ 119), usuários ilimitados, sistema completo em qualquer faixa. Teste sem cartão; suporte direto com quem desenvolve, por WhatsApp e assistente de IA.",
+    "audience": "escolas de música, de pequenas (até 50 alunos) a maiores, com secretaria e vários professores",
+    "positioning": "Sua escola de música, organizada de ponta a ponta.",
+    "size": "não declarado (depoimentos de escolas no Brasil e em Portugal, uma com 10 anos de uso)"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:16:43Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, domínio .com.br, cobrança por Pix, telefone +55 12; sem CNPJ visível"
+  }
+}

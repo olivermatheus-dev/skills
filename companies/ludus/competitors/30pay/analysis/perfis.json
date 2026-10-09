@@ -1,0 +1,33 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:17:17Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://30pay.com.br/sobre-30pay.html",
+      "title": "Sobre o 30pay"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://30pay.com.br",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/30paybr/",
+        "handle": "30paybr",
+        "note": "linkado no rodapé e na página Sobre do site (não aberto diretamente)"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

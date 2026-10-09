@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:57:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    },
+    {
+      "url": "https://proffin.com.br/quem-somos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "App financeiro para professor particular: alunos, agenda e pagamentos",
+    "text": "App focado no controle financeiro do professor particular: extrato de entradas e saídas, previsão de recebimentos, agenda semanal/mensal/diária, histórico de aulas e relatórios. Plano grátis até 20 alunos e Premium com alunos ilimitados (R$ 28/mês, de R$ 50 riscado). Criado por um professor e dev solo (Arthur), tom simples e anti-planilha.",
+    "audience": "professores particulares autônomos",
+    "positioning": "Adeus planilhas! Gerencie os pagamentos das aulas com clareza e agilidade.",
+    "size": "centenas de professores (declarado no site)"
+  }
+}

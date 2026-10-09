@@ -1,0 +1,33 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:19:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mensalli.com.br/",
+      "title": "Mensalli - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://mensalli.com.br",
+        "note": "domínio do produto"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/mensalli/",
+        "handle": "mensalli",
+        "note": "linkado pelo site (extract.json > contacts.socials); não abri o perfil"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

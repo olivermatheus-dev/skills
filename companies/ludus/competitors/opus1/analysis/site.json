@@ -1,0 +1,302 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:09:56Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://opus1.io/",
+      "title": "Opus1 | Everything You Need to Run Your School in One Place"
+    },
+    {
+      "url": "https://opus1.io/pricing/",
+      "title": "Pricing - Opus1"
+    },
+    {
+      "url": "https://opus1.io/about/",
+      "title": "About - Opus1"
+    },
+    {
+      "url": "https://opus1.io/about/contact/",
+      "title": "Contact - Opus1"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://opus1.io/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://opus1.io/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Opus1 | Everything You Need to Run Your School in One Place",
+        "chars": 5043
+      },
+      {
+        "url": "https://opus1.io/pricing/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Pricing - Opus1",
+        "chars": 5910
+      },
+      {
+        "url": "https://opus1.io/about/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "About - Opus1",
+        "chars": 6933
+      },
+      {
+        "url": "https://opus1.io/about/contact/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contact - Opus1",
+        "chars": 1718
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 198,
+      "groups": [
+        {
+          "name": "/resources",
+          "count": 107,
+          "sample": [
+            "/resources/a-back-to-school-checklist-for-busy-studio-owners/",
+            "/resources/the-role-of-analytics-in-music-education-tracking-student-progress/",
+            "/resources/how-to-market-your-summer-programs/",
+            "/resources/optimizing-your-music-lesson-scheduling-tips-and-tricks/"
+          ]
+        },
+        {
+          "name": "/lessons",
+          "count": 45,
+          "sample": [
+            "/lessons/podcast-using-systems-to-scale-with-lawrence-jasmine-yu/",
+            "/lessons/podcast-episode-whats-working-in-music-school-marketing-with-kaena-miller/",
+            "/lessons/webinar-back-to-school-marketing-for-music-schools/",
+            "/lessons/webinar-the-most-valuable-marketing-asset-in-your-music-school/"
+          ]
+        },
+        {
+          "name": "/capabilities",
+          "count": 13,
+          "sample": [
+            "/capabilities/",
+            "/capabilities/teacher-management/",
+            "/capabilities/learning-management/",
+            "/capabilities/student-and-family-management/"
+          ]
+        },
+        {
+          "name": "/legal",
+          "count": 4,
+          "sample": [
+            "/legal/privacy-policy/",
+            "/legal/terms-of-use/",
+            "/legal/accessibility/",
+            "/legal/"
+          ]
+        },
+        {
+          "name": "/about",
+          "count": 2,
+          "sample": [
+            "/about/contact/",
+            "/about/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/schedule-a-consultation",
+          "count": 1,
+          "sample": [
+            "/schedule-a-consultation/"
+          ]
+        },
+        {
+          "name": "/opus1-growth-summit-nyc",
+          "count": 1,
+          "sample": [
+            "/opus1-growth-summit-nyc/"
+          ]
+        },
+        {
+          "name": "/the-most-valuable-marketing-asset-in-your-music-school-and-how-it-can-bring-you-new-students-for-free",
+          "count": 1,
+          "sample": [
+            "/the-most-valuable-marketing-asset-in-your-music-school-and-how-it-can-bring-you-new-students-for-free/"
+          ]
+        },
+        {
+          "name": "/10-retention-strategies-to-keep-students-enrolled-webinar",
+          "count": 1,
+          "sample": [
+            "/10-retention-strategies-to-keep-students-enrolled-webinar/"
+          ]
+        },
+        {
+          "name": "/book-a-demo",
+          "count": 1,
+          "sample": [
+            "/book-a-demo/"
+          ]
+        },
+        {
+          "name": "/before-the-curtain-call-recital-season-prep-for-music-and-dance-schools",
+          "count": 1,
+          "sample": [
+            "/before-the-curtain-call-recital-season-prep-for-music-and-dance-schools/"
+          ]
+        },
+        {
+          "name": "/school-owner-hot-seat-june-2026",
+          "count": 1,
+          "sample": [
+            "/school-owner-hot-seat-june-2026/"
+          ]
+        },
+        {
+          "name": "/my-music-staff",
+          "count": 1,
+          "sample": [
+            "/my-music-staff/"
+          ]
+        },
+        {
+          "name": "/wellness-living",
+          "count": 1,
+          "sample": [
+            "/wellness-living/"
+          ]
+        },
+        {
+          "name": "/jackrabbit",
+          "count": 1,
+          "sample": [
+            "/jackrabbit/"
+          ]
+        },
+        {
+          "name": "/pike13",
+          "count": 1,
+          "sample": [
+            "/pike13/"
+          ]
+        },
+        {
+          "name": "/mindbody",
+          "count": 1,
+          "sample": [
+            "/mindbody/"
+          ]
+        },
+        {
+          "name": "/teacher-zone",
+          "count": 1,
+          "sample": [
+            "/teacher-zone/"
+          ]
+        },
+        {
+          "name": "/resources-archived",
+          "count": 1,
+          "sample": [
+            "/resources-archived/"
+          ]
+        },
+        {
+          "name": "/breaking-down-ai-for-the-busy-music-school-owner",
+          "count": 1,
+          "sample": [
+            "/breaking-down-ai-for-the-busy-music-school-owner/"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing/"
+          ]
+        },
+        {
+          "name": "/dance-schools",
+          "count": 1,
+          "sample": [
+            "/dance-schools/"
+          ]
+        },
+        {
+          "name": "/music-schools",
+          "count": 1,
+          "sample": [
+            "/music-schools/"
+          ]
+        },
+        {
+          "name": "/sessionup",
+          "count": 1,
+          "sample": [
+            "/sessionup/"
+          ]
+        },
+        {
+          "name": "/term_conditions",
+          "count": 1,
+          "sample": [
+            "/term_conditions/"
+          ]
+        },
+        {
+          "name": "/lp-profile",
+          "count": 1,
+          "sample": [
+            "/lp-profile/"
+          ]
+        },
+        {
+          "name": "/lp-checkout",
+          "count": 1,
+          "sample": [
+            "/lp-checkout/"
+          ]
+        },
+        {
+          "name": "/courses",
+          "count": 1,
+          "sample": [
+            "/courses/"
+          ]
+        },
+        {
+          "name": "/instructor",
+          "count": 1,
+          "sample": [
+            "/instructor/"
+          ]
+        },
+        {
+          "name": "/instructors",
+          "count": 1,
+          "sample": [
+            "/instructors/"
+          ]
+        },
+        {
+          "name": "/new-school-connect-and-learn",
+          "count": 1,
+          "sample": [
+            "/new-school-connect-and-learn/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

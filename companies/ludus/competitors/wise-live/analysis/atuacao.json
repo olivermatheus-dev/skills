@@ -1,0 +1,22 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:19:31Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.wise.live/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Estados Unidos"
+    ],
+    "languages": [
+      "en"
+    ],
+    "currencies": [],
+    "evidence": "Site só em inglês, descrição 'for US tutoring businesses', 'US and globally'. Sem pt-BR nem preço em R$. Reclame Aqui encontrado é do homônimo Wise (transferência de dinheiro), ignorado."
+  }
+}

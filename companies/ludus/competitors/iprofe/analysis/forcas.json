@@ -1,0 +1,69 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:38:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe home e FAQ"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço de entrada muito baixo e simples",
+        "evidence": "R$ 29,90/mês, plano único, sem fidelidade, cancela quando quiser"
+      },
+      {
+        "point": "Teste sem cartão e plano gratuito completo",
+        "evidence": "FAQ: versão gratuita com todas as funcionalidades, limitada a 3 alunos, sem cartão"
+      },
+      {
+        "point": "Está em todo lugar: web, PWA, App Store e Google Play",
+        "evidence": "FAQ: três formas de uso"
+      },
+      {
+        "point": "Simplicidade como promessa",
+        "evidence": "depoimentos: 'app simples', 'faz o essencial muito bem'; app anterior já tinha base de usuários"
+      },
+      {
+        "point": "Relatório em PDF para os pais",
+        "evidence": "seção 'Relatórios para os pais' na home"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Não cobra: sem boleto, Pix ou cobrança",
+        "evidence": "FAQ: 'Não é possível utilizar o iProfe para fazer cobranças'"
+      },
+      {
+        "point": "Sem videochamada, sem WhatsApp, sem portal do aluno",
+        "evidence": "nenhuma menção na home nem no FAQ"
+      },
+      {
+        "point": "Relatórios só na versão web",
+        "evidence": "FAQ: 'por enquanto só na versão web'"
+      },
+      {
+        "point": "Site e marca com sinais de abandono",
+        "evidence": "rodapé © 2024, home com lang en, depoimentos de 2 ou 3 linhas sem prova numérica; tamanho da base não declarado"
+      },
+      {
+        "point": "Limite de 150 alunos e só um plano",
+        "evidence": "FAQ: assinatura limitada a 150 alunos"
+      },
+      {
+        "point": "Sem material, plano de aula ou pacote/crédito",
+        "evidence": "não aparecem entre as funcionalidades"
+      }
+    ],
+    "opportunities": [
+      "Ludus entrega o que o iProfe nega: pacote virando crédito, cobrança por falta e contas a receber ligados à aula",
+      "Videochamada própria e link do aluno sem login: iProfe não tem nenhum dos dois",
+      "Mensagem pronta e 'Aulas de amanhã' no WhatsApp do professor, algo ausente no iProfe",
+      "Âncora de preço: iProfe a R$ 29,90 e 3 alunos grátis definem a expectativa; o Ludus precisa justificar acima disso ou igualar o gratuito de entrada",
+      "Acabamento e cuidado visual contra um produto 'das antigas' (palavras do próprio depoimento)"
+    ]
+  }
+}

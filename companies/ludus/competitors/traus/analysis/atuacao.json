@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:17:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://traus.com.br/"
+    },
+    {
+      "url": "https://traus.com.br/contato"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site em pt-br, CNPJ e sede em São José do Rio Preto (SP), WhatsApp (17), 'atendemos escolas em todo o Brasil'"
+  }
+}

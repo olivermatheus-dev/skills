@@ -1,0 +1,204 @@
+{
+  "header": "brand.css — ludus. Tokens do app real (ludus/src/app/tokens.css, tema claro, neutros Stone; ouro trocado em 2026-09-30). Regras de uso em BRAND.md.",
+  "style": {
+    "do": [],
+    "dont": [],
+    "notes": "Neutros quentes (Stone) com o ouro como único destaque. O ouro é preenchimento (botão, marca, realce), nunca texto."
+  },
+  "icons": {
+    "library": "lucide",
+    "stroke": 1.75,
+    "style": "linha",
+    "color": "accent"
+  },
+  "fonts": [
+    {
+      "family": "Nunito Sans",
+      "source": "local",
+      "files": [
+        {
+          "src": "fonts/nunito-sans-200_1000-latin.woff2",
+          "style": "normal",
+          "weight": "200 900",
+          "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+        },
+        {
+          "src": "fonts/nunito-sans-200_1000-latin-ext.woff2",
+          "style": "normal",
+          "weight": "200 900",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
+        },
+        {
+          "src": "fonts/nunito-sans-italic-200_1000-latin.woff2",
+          "style": "italic",
+          "weight": "200 900",
+          "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+        },
+        {
+          "src": "fonts/nunito-sans-italic-200_1000-latin-ext.woff2",
+          "style": "italic",
+          "weight": "200 900",
+          "unicodeRange": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
+        }
+      ],
+      "license": "fonts/OFL-NunitoSans.txt",
+      "display": "block",
+      "note": "Nunito Sans local (variável 200–1000, OFL), a mesma fonte do app Ludus"
+    }
+  ],
+  "groups": [
+    {
+      "label": "Cores — papéis",
+      "tokens": [
+        {
+          "name": "bg",
+          "value": "#F9F8F7",
+          "note": "fundo das peças (liso)"
+        },
+        {
+          "name": "surface",
+          "value": "#FFFFFF",
+          "note": "cards, janelas"
+        },
+        {
+          "name": "surface-2",
+          "value": "#F5F5F4",
+          "note": "poço do app (--muted): campos, fundos recuados"
+        },
+        {
+          "name": "text",
+          "value": "#1C1917",
+          "note": "tinta: títulos e frases (nunca cinza)"
+        },
+        {
+          "name": "muted",
+          "value": "#6C645F",
+          "note": "texto de apoio do app (legenda, placeholder)"
+        },
+        {
+          "name": "border",
+          "value": "#E7E5E4"
+        },
+        {
+          "name": "primary",
+          "value": "#F6BF51",
+          "note": "ouro da marca: logo, botão principal, realce. NUNCA texto (contraste 1,6:1 no fundo)"
+        },
+        {
+          "name": "on-primary",
+          "value": "#1C1917",
+          "note": "texto sobre o ouro (10,4:1)"
+        },
+        {
+          "name": "accent",
+          "value": "#825B0C",
+          "note": "tinta da marca (--brand-accent do app): texto e ícone dourado pequeno, links (5,7:1)"
+        },
+        {
+          "name": "success",
+          "value": "#216D4E",
+          "note": "status, só dentro de interface"
+        },
+        {
+          "name": "warning",
+          "value": "#9A4A05"
+        },
+        {
+          "name": "danger",
+          "value": "#AE2322"
+        },
+        {
+          "name": "inverse-bg",
+          "value": "#1C1917",
+          "note": "fundo de contraste (slide/cena \"inverse\")"
+        },
+        {
+          "name": "on-inverse",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "accent-soft",
+          "value": "#FFF6E4",
+          "note": "ouro claríssimo: fundo de item marcado, realce"
+        }
+      ]
+    },
+    {
+      "label": "Tipografia",
+      "tokens": [
+        {
+          "name": "font-heading",
+          "value": "\"Nunito Sans\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "font-body",
+          "value": "\"Nunito Sans\",-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif"
+        },
+        {
+          "name": "weight-heading",
+          "value": "700"
+        },
+        {
+          "name": "tracking-heading",
+          "value": "-0.01em"
+        },
+        {
+          "name": "leading-heading",
+          "value": "1.08"
+        },
+        {
+          "name": "case-heading",
+          "value": "none",
+          "note": "none | uppercase — caixa alta só se a marca quiser"
+        }
+      ]
+    },
+    {
+      "label": "Forma",
+      "tokens": [
+        {
+          "name": "radius",
+          "value": "20px"
+        },
+        {
+          "name": "radius-sm",
+          "value": "12px"
+        },
+        {
+          "name": "border-width",
+          "value": "1px"
+        },
+        {
+          "name": "shadow-sm",
+          "value": "0 1px 2px rgba(20,20,20,.06), 0 1px 1px rgba(20,20,20,.04)"
+        },
+        {
+          "name": "shadow-md",
+          "value": "0 8px 24px rgba(20,20,20,.08)"
+        },
+        {
+          "name": "shadow-lg",
+          "value": "0 24px 60px rgba(20,20,20,.12)"
+        }
+      ]
+    }
+  ],
+  "tonal": {
+    "base": "#f6bf51",
+    "auto": true,
+    "steps": {
+      "50": "#fcf6ec",
+      "100": "#fcf1de",
+      "200": "#fce7c2",
+      "300": "#fcdba0",
+      "400": "#facd79",
+      "500": "#f6bf51",
+      "600": "#bc8603",
+      "700": "#8c6310",
+      "800": "#654506",
+      "900": "#402900",
+      "950": "#211300"
+    },
+    "overrides": {}
+  }
+}

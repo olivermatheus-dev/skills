@@ -7,6 +7,7 @@ Central de gestão, estratégia, conteúdo e vendas com IA para as empresas do O
 | slug | empresa | o que é |
 |---|---|---|
 | `kz` | Kzloo | SaaS de gestão para terapeutas autônomos (Brasil) |
+| `ludus` | Ludus | SaaS para o professor independente organizar alunos, agenda, aulas, pagamentos e vídeo (Brasil; pré-lançamento) |
 
 Se o pedido não disser a empresa e houver mais de uma, pergunte. Empresa nova → skill `setup`.
 

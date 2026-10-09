@@ -1,0 +1,31 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:59:06Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.teachworks.com/"
+    },
+    {
+      "url": "https://www.teachworks.com/pricing"
+    },
+    {
+      "url": "https://www.teachworks.com/about"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Canadá (sede em Kitchener, Ontário)",
+      "Global"
+    ],
+    "languages": [
+      "en"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "Site e preços em inglês e dólar; sede no Canadá; diz atender o mundo todo (45 idiomas de suporte). Sem português/BRL evidente no site; não há loja local no Brasil."
+  }
+}

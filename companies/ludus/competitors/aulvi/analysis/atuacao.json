@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:39:37Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, PIX, CNPJ brasileiro no rodapé (Vitor Brito Rocha Ltda), WhatsApp +55 85, domínio .com.br"
+  }
+}

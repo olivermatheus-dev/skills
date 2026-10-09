@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:57:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de aulas, agenda e finanças para professores particulares, com app do aluno.",
+    "text": "Software para professor particular (presencial e online, individual ou em grupo) que reúne gestão de alunos, agenda, financeiro, plano de aula, contratos, recibos, funil de vendas de aulas e arquivos. Alunos têm app com agenda, anotações e pagamentos. Teste de 1 mês grátis; planos pagos à vista de 6 e 12 meses. Exclui escolas com vários professores. Idealizada por Carol Hends.",
+    "audience": "professores particulares autônomos (aulas presenciais e online, individuais ou em grupo)",
+    "positioning": "O primeiro e único software para professores particulares que organiza aulas, finanças e conecta alunos",
+    "size": "não declarado"
+  }
+}

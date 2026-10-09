@@ -1,0 +1,96 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:39:46Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://aulvi.com.br/",
+    "hero": {
+      "headline": "Suas aulas organizadas. Sua cobrança em dia.",
+      "subheadline": "Sistema web para professores particulares e cursos: agenda, confirmação de presença e recibo com PIX no mesmo lugar.",
+      "cta": "Começar 14 dias grátis",
+      "visual": "cartões do app: aula agendada e recibo pago"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Suas aulas organizadas. Sua cobrança em dia.",
+        "summary": "promessa, selo Google Agenda, CTA teste e WhatsApp"
+      },
+      {
+        "type": "problema",
+        "title": "Se você já passou por isso…",
+        "summary": "quatro dores: caderno, remarcações, conta na mão, falta de comprovante"
+      },
+      {
+        "type": "features",
+        "title": "O que você tem em mãos",
+        "summary": "oito cards: agenda, confirmação, pendências, recibo, mensalidade, aulão, equipe, Google Agenda"
+      },
+      {
+        "type": "solucao",
+        "title": "Veja funcionando",
+        "summary": "mocks do recibo com PIX e da turma de aulão"
+      },
+      {
+        "type": "beneficios",
+        "title": "Dá aula e coordena outros professores?",
+        "summary": "área de equipe e financeiro somado"
+      },
+      {
+        "type": "integracoes",
+        "title": "Sua agenda de aulas, direto no Google Agenda",
+        "summary": "calendário \"Aulas\", opcional e reversível"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Como funciona",
+        "summary": "três passos: cadastrar, confirmar, cobrar"
+      },
+      {
+        "type": "precos",
+        "title": "Quanto custa",
+        "summary": "cinco faixas por alunos, calculadora \"quantos alunos você atende\", teste de 14 dias"
+      },
+      {
+        "type": "blog",
+        "title": "Antes de assinar, resolva o método",
+        "summary": "dois guias abertos sem cadastro"
+      },
+      {
+        "type": "cta",
+        "title": "Prefere que a gente te chame?",
+        "summary": "formulário de contato"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "WhatsApp, suporte, CNPJ, privacidade, termos"
+      }
+    ],
+    "ctas": [
+      "Começar 14 dias grátis",
+      "Falar no WhatsApp",
+      "Testar com minha equipe",
+      "Assinar",
+      "Criar minha conta",
+      "Quero saber mais"
+    ],
+    "socialProof": [],
+    "interesting": [
+      "Preço por faixa de alunos com todas as funções liberadas em todas as faixas e a frase \"Não limitamos as suas funcionalidades\"",
+      "Seletor \"Quantos alunos você atende hoje?\" que indica a faixa",
+      "Objeção \"sem cartão\" repetida no hero e no preço",
+      "Mock de recibo com mensagem pronta de WhatsApp mostra o resultado, não a tela",
+      "Guias de conteúdo úteis como isca de busca antes da venda",
+      "Segmento duplo (solo e curso) já no hero"
+    ],
+    "tone": "Direto e prático, linguagem de professor, sem jargão; promessa de organização e cobrança sem constrangimento."
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:15:48Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.wise.live/",
+      "title": "Tutor Management Software for US Tutoring Businesses"
+    },
+    {
+      "url": "https://www.wise.live/pricing/",
+      "title": "Pricing - Wise Tutor Management Software"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.wise.live/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.wise.live/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Tutor Management Software for US Tutoring Businesses",
+        "chars": 5579
+      },
+      {
+        "url": "https://www.wise.live/pricing/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Pricing - Wise Tutor Management Software",
+        "chars": 4616
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 40,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/contact",
+          "count": 1,
+          "sample": [
+            "/contact/"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing/"
+          ]
+        },
+        {
+          "name": "/about-us",
+          "count": 1,
+          "sample": [
+            "/about-us/"
+          ]
+        },
+        {
+          "name": "/terms-and-conditions",
+          "count": 1,
+          "sample": [
+            "/terms-and-conditions/"
+          ]
+        },
+        {
+          "name": "/privacy-policy",
+          "count": 1,
+          "sample": [
+            "/privacy-policy/"
+          ]
+        },
+        {
+          "name": "/one-on-one-tutoring-software",
+          "count": 1,
+          "sample": [
+            "/one-on-one-tutoring-software/"
+          ]
+        },
+        {
+          "name": "/online-group-tutoring-platform",
+          "count": 1,
+          "sample": [
+            "/online-group-tutoring-platform/"
+          ]
+        },
+        {
+          "name": "/download",
+          "count": 1,
+          "sample": [
+            "/download/"
+          ]
+        },
+        {
+          "name": "/gdpr",
+          "count": 1,
+          "sample": [
+            "/gdpr/"
+          ]
+        },
+        {
+          "name": "/lms-for-chess-schools",
+          "count": 1,
+          "sample": [
+            "/lms-for-chess-schools/"
+          ]
+        },
+        {
+          "name": "/lms-for-corporate-training",
+          "count": 1,
+          "sample": [
+            "/lms-for-corporate-training/"
+          ]
+        },
+        {
+          "name": "/lms-for-language-schools",
+          "count": 1,
+          "sample": [
+            "/lms-for-language-schools/"
+          ]
+        },
+        {
+          "name": "/software-for-music-schools",
+          "count": 1,
+          "sample": [
+            "/software-for-music-schools/"
+          ]
+        },
+        {
+          "name": "/lms-for-online-schools",
+          "count": 1,
+          "sample": [
+            "/lms-for-online-schools/"
+          ]
+        },
+        {
+          "name": "/lms-for-private-tutoring",
+          "count": 1,
+          "sample": [
+            "/lms-for-private-tutoring/"
+          ]
+        },
+        {
+          "name": "/lms-for-small-group-tutoring",
+          "count": 1,
+          "sample": [
+            "/lms-for-small-group-tutoring/"
+          ]
+        },
+        {
+          "name": "/sat-tutoring-software",
+          "count": 1,
+          "sample": [
+            "/sat-tutoring-software/"
+          ]
+        },
+        {
+          "name": "/lms-for-upskilling",
+          "count": 1,
+          "sample": [
+            "/lms-for-upskilling/"
+          ]
+        },
+        {
+          "name": "/lms-for-yoga-schools",
+          "count": 1,
+          "sample": [
+            "/lms-for-yoga-schools/"
+          ]
+        },
+        {
+          "name": "/video-course-hosting-platform",
+          "count": 1,
+          "sample": [
+            "/video-course-hosting-platform/"
+          ]
+        },
+        {
+          "name": "/in-person-tutoring-software",
+          "count": 1,
+          "sample": [
+            "/in-person-tutoring-software/"
+          ]
+        },
+        {
+          "name": "/tutor-scheduling-software",
+          "count": 1,
+          "sample": [
+            "/tutor-scheduling-software/"
+          ]
+        },
+        {
+          "name": "/automated-session-reminders",
+          "count": 1,
+          "sample": [
+            "/automated-session-reminders/"
+          ]
+        },
+        {
+          "name": "/uk",
+          "count": 1,
+          "sample": [
+            "/uk/"
+          ]
+        },
+        {
+          "name": "/es",
+          "count": 1,
+          "sample": [
+            "/es/"
+          ]
+        },
+        {
+          "name": "/in",
+          "count": 1,
+          "sample": [
+            "/in/"
+          ]
+        },
+        {
+          "name": "/au",
+          "count": 1,
+          "sample": [
+            "/au/"
+          ]
+        },
+        {
+          "name": "/calculators",
+          "count": 1,
+          "sample": [
+            "/calculators/tutoring-revenue-profit"
+          ]
+        },
+        {
+          "name": "/ad-tutor-management-software",
+          "count": 1,
+          "sample": [
+            "/ad-tutor-management-software/"
+          ]
+        },
+        {
+          "name": "/ad-tms-private-tutoring",
+          "count": 1,
+          "sample": [
+            "/ad-tms-private-tutoring/"
+          ]
+        },
+        {
+          "name": "/ad-tms-online-schools",
+          "count": 1,
+          "sample": [
+            "/ad-tms-online-schools/"
+          ]
+        },
+        {
+          "name": "/ad-tms-small-group-tutoring",
+          "count": 1,
+          "sample": [
+            "/ad-tms-small-group-tutoring/"
+          ]
+        },
+        {
+          "name": "/ad-tms-test-prep",
+          "count": 1,
+          "sample": [
+            "/ad-tms-test-prep/"
+          ]
+        },
+        {
+          "name": "/ad-tms-language-1",
+          "count": 1,
+          "sample": [
+            "/ad-tms-language-1/"
+          ]
+        },
+        {
+          "name": "/ad-tms-2",
+          "count": 1,
+          "sample": [
+            "/ad-tms-2/"
+          ]
+        },
+        {
+          "name": "/ad-tms-3",
+          "count": 1,
+          "sample": [
+            "/ad-tms-3/"
+          ]
+        },
+        {
+          "name": "/ad-page",
+          "count": 1,
+          "sample": [
+            "/ad-page/"
+          ]
+        },
+        {
+          "name": "/ad-page-copy",
+          "count": 1,
+          "sample": [
+            "/ad-page-copy/"
+          ]
+        },
+        {
+          "name": "/ad-page-copy-2",
+          "count": 1,
+          "sample": [
+            "/ad-page-copy-2/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

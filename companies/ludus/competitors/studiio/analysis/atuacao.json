@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:28Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://apps.apple.com/br/app/id1639003423"
+    },
+    {
+      "url": "https://www.infomoney.com.br/?p=2502713"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "app em pt-BR na App Store Brasil, desenvolvedor Tecnofit (empresa brasileira), preço em R$; site não pôde ser aberto"
+  }
+}

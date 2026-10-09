@@ -1,0 +1,67 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:37:14Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/",
+      "title": "Classis - Gestão de Alunos para Professores"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sistemaclassis.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://sistemaclassis.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Classis - Gestão de Alunos para Professores",
+        "chars": 6728
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 5,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/auth",
+          "count": 1,
+          "sample": [
+            "/auth"
+          ]
+        },
+        {
+          "name": "/plans",
+          "count": 1,
+          "sample": [
+            "/plans"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

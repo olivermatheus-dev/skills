@@ -1,0 +1,68 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:38:54Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/sobre-nos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "App do aluno nativo com lições autocorrigíveis e gamificação",
+        "evidence": "jornada de 100 níveis, correção instantânea, iOS e Android"
+      },
+      {
+        "point": "Já no mercado, com trial de 21 dias e prova social",
+        "evidence": "depoimentos de professores e alunos na home"
+      },
+      {
+        "point": "IA para gerar aulas e lições",
+        "evidence": "créditos de IA mensais nos planos Pro e Premium"
+      },
+      {
+        "point": "Reposição autoatendida pelo aluno",
+        "evidence": "horários liberados pelo professor, sincroniza com Google Agenda"
+      },
+      {
+        "point": "Atendimento próximo",
+        "evidence": "depoimento elogia o atendimento; Premium tem onboarding de 7 dias"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Preço sobe por faixa de alunos; Starter só 5 alunos",
+        "evidence": "R$ 49,90 até 5, R$ 89,90 até 15, R$ 129,90 até 25"
+      },
+      {
+        "point": "Cobranças só a partir do Essential",
+        "evidence": "Starter não lista gestão financeira"
+      },
+      {
+        "point": "Aluno precisa instalar app",
+        "evidence": "home: aluno acompanha tudo pelo app das lojas"
+      },
+      {
+        "point": "Exemplos quase só de inglês/idiomas",
+        "evidence": "mockups e depoimentos de aulas de inglês"
+      },
+      {
+        "point": "Sem videochamada nem pacote/crédito visíveis",
+        "evidence": "ausentes na home e nos planos"
+      }
+    ],
+    "opportunities": [
+      "Aluno sem instalar nada: link sem login (cobrança, confirmar aula, entrar na sala)",
+      "Pacote de aulas virando crédito e falta com regra de cobrança",
+      "Videochamada ligada à aula",
+      "Preço sem teto apertado de alunos (Beaky cobra R$ 129,90 por 25)",
+      "Lembrete pelo WhatsApp do próprio professor"
+    ]
+  }
+}

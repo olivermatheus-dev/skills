@@ -1,0 +1,38 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:18:17Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemagalileu.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/sistemagalileu/",
+        "handle": "sistemagalileu",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/sistemagalileu",
+        "handle": "sistemagalileu",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@SistemaGalileu",
+        "handle": "SistemaGalileu",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "linkedin",
+      "x"
+    ]
+  }
+}

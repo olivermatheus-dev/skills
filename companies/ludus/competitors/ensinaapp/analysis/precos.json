@@ -1,0 +1,84 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:40:44Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/precos"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/ajuda"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 47,
+    "trial": "14 dias grátis, sem cartão",
+    "plans": [
+      {
+        "name": "Iniciante",
+        "monthly": 47,
+        "yearlyMonthly": 38,
+        "yearlyTotal": 451.2,
+        "users": "até 10 alunos ativos",
+        "highlights": [
+          "todas as funções",
+          "20% off no anual"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Pro",
+        "monthly": 97,
+        "yearlyMonthly": 78,
+        "yearlyTotal": 931.2,
+        "users": "até 30 alunos ativos",
+        "highlights": [
+          "todas as funções",
+          "mais popular"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Plus",
+        "monthly": 197,
+        "yearlyMonthly": 158,
+        "yearlyTotal": 1891.2,
+        "users": "até 100 alunos ativos",
+        "highlights": [
+          "todas as funções",
+          "suporte prioritário"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [
+      "taxas da InfinitePay sobre o pagamento do aluno (não são do EnsinaApp)"
+    ],
+    "notes": "Aluno ativo = aula confirmada ou concluída nos últimos 30 dias; passar do limite gera aviso de upgrade, sem bloqueio. Anual: valores mensais exibidos (38, 78, 158) e totais 1x/ano. Assinatura por cartão via Stripe com renovação automática. Upgrade na hora com pro-rata; downgrade no próximo ciclo. Dados ficam 30 dias após o fim do trial. Sem comissão. Meta description cita plano Escola, que não aparece na tela. Cancele quando quiser; reembolso não encontrado.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

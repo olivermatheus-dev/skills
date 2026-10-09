@@ -1,0 +1,67 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:40:16Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Cobrança automática pronta, com Pix, boleto e cartão",
+        "evidence": "Integração com Asaas, descontos e acréscimos por vencimento"
+      },
+      {
+        "point": "Portal do cliente com faturas e pagamento",
+        "evidence": "Seção Portal do Cliente e cadastro de cliente separado"
+      },
+      {
+        "point": "Já está no ar e vende planos",
+        "evidence": "Três planos com checkout (Assinar Agora) e garantia de 7 dias"
+      },
+      {
+        "point": "Sem pegadinha de plano: tudo liberado",
+        "evidence": "Rodapé dos planos: todas as funcionalidades em qualquer plano"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Preço alto para professor autônomo",
+        "evidence": "R$ 187/mês no mensal; R$ 74,75/mês só no anual pago à vista"
+      },
+      {
+        "point": "Sem teste grátis visível",
+        "evidence": "Home só leva a planos pagos; só garantia de reembolso de 7 dias"
+      },
+      {
+        "point": "Sem videochamada, WhatsApp ou materiais",
+        "evidence": "Agenda só guarda link de aula online; nenhuma menção a WhatsApp"
+      },
+      {
+        "point": "Prova social e presença de marca fracas",
+        "evidence": "Só 'diversos professores'; sem redes sociais linkadas; sem página no Reclame Aqui"
+      },
+      {
+        "point": "Pacote sem lógica de crédito/falta explícita",
+        "evidence": "Pacotes descritos só como 'usar em contratações'"
+      },
+      {
+        "point": "Home enxuta, sem demonstração do produto",
+        "evidence": "Sem prints, vídeo, depoimentos ou FAQ na home"
+      }
+    ],
+    "opportunities": [
+      "Preço de entrada muito abaixo de R$ 187 e teste grátis, em contraste direto com eClasse",
+      "Pacote que vira crédito + regra de cobrança por falta (eClasse não mostra)",
+      "Videochamada própria ligada à aula, sem link externo",
+      "Lembrete e mensagens prontas pelo WhatsApp do professor",
+      "Link sem login para o aluno, em vez de cadastro de cliente",
+      "Mostrar o produto (prints, vídeo) e prova social, que a home do eClasse não tem",
+      "Cuidado: eClasse já tem cobrança Asaas automática; Ludus não tem gateway por decisão, então vender como controle do professor"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:18:51Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://dojo10.com/",
+      "title": "Home Dojo10"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Plataforma de gestão com IA e gamificação para academias de artes marciais.",
+    "text": "Vende gestão de academia de artes marciais: cobrança automática (Pix, boleto, cartão), chamada rápida, graduação e app do aluno gamificado (XP, badges, ranking, clãs). Promete 3 agentes de IA e 17 robôs trabalhando 24/7, com painel de saúde da academia e TV/telão para o tatame. Cadastro em minutos, alunos entram por link. Oferta de 3 meses grátis em anúncios; preços dos planos não aparecem sem login.",
+    "audience": "donos de academias de artes marciais",
+    "positioning": "A primeira plataforma com IA Real que gerencia, vende e engaja."
+  }
+}

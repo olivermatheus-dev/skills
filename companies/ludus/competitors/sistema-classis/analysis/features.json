@@ -1,0 +1,106 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:39:22Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Calendário com detecção de conflito",
+            "detail": "evita aulas sobrepostas",
+            "highlight": true
+          },
+          {
+            "name": "Confirmação de presença",
+            "detail": "aluno confirma a aula",
+            "highlight": false
+          },
+          {
+            "name": "Controle de frequência",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembrete automático de aula por WhatsApp",
+            "detail": "1h antes; reduz faltas em até 40% (declarado)",
+            "highlight": true
+          },
+          {
+            "name": "Aviso automático de mensalidade/fatura pendente",
+            "highlight": true
+          },
+          {
+            "name": "Alertas de pagamento e aulas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Controle de quem pagou, quem deve e previsão do mês",
+            "highlight": true
+          },
+          {
+            "name": "Cobrança via Pix",
+            "highlight": false
+          },
+          {
+            "name": "Cobrança automática de atrasados",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Cadastro e histórico completo do aluno",
+            "highlight": true
+          },
+          {
+            "name": "Migração de planilha feita pelo suporte, grátis",
+            "highlight": false
+          },
+          {
+            "name": "Painel Saúde do Negócio: relatórios e métricas",
+            "highlight": false
+          },
+          {
+            "name": "Criptografia (declarada, sem detalhes)",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Lembrete e cobrança automáticos pelo WhatsApp, com limite mensal por plano",
+      "Todos os recursos liberados em todos os planos; muda só a cota de mensagens e o suporte",
+      "Migração de planilha grátis",
+      "Suporte direto com os fundadores no WhatsApp (plano do meio)"
+    ],
+    "missing": [
+      "videochamada nativa",
+      "portal/link do aluno",
+      "pacote de aulas virando crédito",
+      "regra de cobrança de falta",
+      "planejamento de aula e materiais",
+      "app mobile (só web)",
+      "nota fiscal",
+      "equipe/multi-professor"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:17:48Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemawebmusica.com.br/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://sistemawebmusica.com.br",
+        "note": "site oficial; domínio do produto"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

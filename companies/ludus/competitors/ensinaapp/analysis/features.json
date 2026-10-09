@@ -1,0 +1,144 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:40:40Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/precos"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/ajuda"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Grade semanal com página pública de agendamento",
+            "detail": "aluno marca sozinho nos horários abertos",
+            "highlight": true
+          },
+          {
+            "name": "Remarcação com regras e voucher",
+            "detail": "voucher de remarcação automático",
+            "highlight": true
+          },
+          {
+            "name": "Google Calendar sincronizado",
+            "detail": "bloqueia horários",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Pagamento por PIX/cartão via InfinitePay",
+            "detail": "cai direto na conta da professora, sem comissão",
+            "highlight": true
+          },
+          {
+            "name": "Pacotes de 4 ou 8 aulas",
+            "detail": "pacote libera na hora do pagamento",
+            "highlight": true
+          },
+          {
+            "name": "Painel financeiro",
+            "detail": "receita do mês, pendentes, pacotes ativos",
+            "highlight": false
+          },
+          {
+            "name": "Preço por aluno",
+            "detail": "definido no convite",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação",
+        "items": [
+          {
+            "name": "Chat interno",
+            "detail": "texto, áudio e vídeo gravado",
+            "highlight": true
+          },
+          {
+            "name": "Lembretes por e-mail e push",
+            "detail": "véspera e dia da aula",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Teleatendimento",
+        "items": [
+          {
+            "name": "Google Meet integrado",
+            "detail": "link gerado e enviado automático",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do aluno",
+        "items": [
+          {
+            "name": "Convite por e-mail com link próprio",
+            "detail": "aluno entra no painel dele",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Materiais por aluno",
+            "detail": "PDF protegido, texto rico, GitHub",
+            "highlight": false
+          },
+          {
+            "name": "Anotações de aula públicas e privadas",
+            "detail": "histórico por aluno",
+            "highlight": false
+          },
+          {
+            "name": "Flashcards com repetição espaçada",
+            "detail": "sistema decide quando o card volta",
+            "highlight": true
+          },
+          {
+            "name": "Exercícios de código",
+            "detail": "JS, Python, React, SQL, Flutter; correção com feedback",
+            "highlight": true
+          },
+          {
+            "name": "Quizzes",
+            "detail": "resultado por questão",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "flashcards com repetição espaçada e exercícios de código dentro do painel",
+      "preço só por faixa de alunos ativos, todas as funções em todos os planos",
+      "sem comissão; pagamento do aluno vai direto para a professora"
+    ],
+    "missing": [
+      "videochamada própria (usa Meet)",
+      "falta com regra de cobrança",
+      "despesas e relatórios",
+      "nota fiscal",
+      "lembrete por WhatsApp (só e-mail e push)",
+      "plano para escola/equipe visível"
+    ]
+  }
+}

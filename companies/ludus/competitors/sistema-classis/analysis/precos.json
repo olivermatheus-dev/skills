@@ -1,0 +1,74 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:39:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 59.9,
+    "trial": "7 dias grátis, sem cartão, todos os recursos liberados",
+    "guarantee": "sem garantia declarada; cancelamento em 1 clique",
+    "plans": [
+      {
+        "name": "Particular",
+        "monthly": 59.9,
+        "users": "1 professor, média ideal até 20 alunos",
+        "highlights": [
+          "até 250 lembretes WhatsApp/mês",
+          "suporte por chat em até 24h",
+          "todos os recursos do software"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Profissional",
+        "monthly": 99.9,
+        "users": "1 professor, média ideal até 45 alunos",
+        "highlights": [
+          "até 600 lembretes WhatsApp/mês",
+          "suporte por WhatsApp com os fundadores",
+          "prioridade em dúvidas"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Reforço & Escolas",
+        "monthly": 199.9,
+        "users": "45+ alunos ou turmas grandes",
+        "highlights": [
+          "até 1.500 lembretes WhatsApp/mês",
+          "suporte VIP no WhatsApp",
+          "onboarding concierge com migração feita por eles"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [],
+    "notes": "Só preços mensais; sem plano anual nem preço de mensagem extra. Cadastro de alunos 'livre': os números de alunos são média recomendada, não limite. Cobrança só após o trial. Não achei termos de uso, o que acontece ao estourar a cota de mensagens, nem fidelidade (respostas do FAQ não estão no HTML).",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

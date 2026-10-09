@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:57:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt, preços em R$, domínio .com.br, WhatsApp +55 47"
+  }
+}

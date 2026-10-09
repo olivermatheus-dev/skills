@@ -1,0 +1,30 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:20:19Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://wehelputeacher.com.br/"
+    },
+    {
+      "url": "https://wehelputeacher.com.br/lessons-plans-pp-newc/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://wehelputeacher.com.br",
+        "note": "domínio do cadastro; home leva à página de planos de aula, sem links de redes"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:39:44Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 24.75,
+    "trial": "14 dias grátis, sistema inteiro e sem limite de alunos, sem cartão",
+    "plans": [
+      {
+        "name": "Essencial",
+        "monthly": 24.75,
+        "users": "Até 20 alunos ativos",
+        "highlights": [
+          "Até 20 alunos ativos"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Basic",
+        "monthly": 38.35,
+        "users": "Até 45 alunos ativos",
+        "highlights": [
+          "Até 45 alunos ativos"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Pro",
+        "monthly": 64.55,
+        "users": "Até 80 alunos ativos",
+        "highlights": [
+          "Até 80 alunos ativos"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Ultra",
+        "monthly": 98.95,
+        "users": "Alunos sem limite",
+        "highlights": [
+          "Alunos sem limite"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Curso",
+        "monthly": 149.9,
+        "users": "Alunos sem limite, até 12 professores auxiliares",
+        "highlights": [
+          "Alunos sem limite, até 12 professores auxiliares"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [
+      "Mais de 12 auxiliares: combinado direto"
+    ],
+    "notes": "Todas as faixas têm as mesmas funções (Agenda com horário fixo que se repete; Confirmação de aula pelo celular; Aula não dada vira pendência até remarcar; Recibo com link público e chave PIX; Mensalidade antecipada ou aula avulsa; Aulão em turma com presença por sessão; Google Agenda nos dois sentidos). Preços na home \"por mês\"; não vi seletor mensal/anual nem fidelidade (cancela pelo sistema). Não confirmei se o valor é mensal puro ou desconto de ciclo, nem forma de pagamento, reembolso ou termos: só a home foi lida.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

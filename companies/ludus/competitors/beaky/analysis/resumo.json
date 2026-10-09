@@ -1,0 +1,22 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:38:50Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/sobre-nos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Plataforma de gestão e app do aluno para professor particular e pequena escola online.",
+    "text": "Assinatura por faixa de alunos (R$ 49,90 a R$ 149,90/mês) com agenda, reposição, cobrança por Pix, materiais e lições autocorrigíveis. Tem app iOS/Android para o aluno e IA para gerar aulas. Compara-se com Notion e Google Classroom. Fundada por dois engenheiros de software, ex-alunos de professores particulares.",
+    "audience": "professores particulares (foco em idiomas/inglês) e pequenas escolas online",
+    "positioning": "A plataforma do professor particular.",
+    "size": "não declarado; só depoimentos de professores"
+  }
+}

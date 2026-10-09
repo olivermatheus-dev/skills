@@ -1,0 +1,80 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:39:03Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    },
+    {
+      "url": "https://proffin.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://proffin.com.br/",
+    "hero": {
+      "headline": "Gerencie suas aulas online. Comece grátis!",
+      "subheadline": "Administre aulas, alunos e pagamentos recebidos de forma produtiva. Nunca foi tão fácil organizar suas aulas particulares.",
+      "cta": "Experimente Grátis!"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Gerencie suas aulas online Comece grátis!",
+        "summary": "promessa de organizar aulas, alunos e pagamentos, CTA grátis"
+      },
+      {
+        "type": "solucao",
+        "title": "Um sistema simples e funcional!",
+        "summary": "Adeus planilhas: extrato financeiro com entradas, saídas e pendências por aluno"
+      },
+      {
+        "type": "features",
+        "title": "Tudo o que você precisa num único app!",
+        "summary": "blocos de previsão financeira, alunos, agenda e resultados em gráficos, cada um com CTA Teste Gratuito"
+      },
+      {
+        "type": "precos",
+        "title": "Escolha seu plano ideal",
+        "summary": "Gratuito R$ 0 e Premium R$ 28 (de R$ 50), cancele quando quiser, bloco de suporte com prazos"
+      },
+      {
+        "type": "depoimentos",
+        "title": "O que dizem os professores",
+        "summary": "4 depoimentos de professoras e professores de inglês"
+      },
+      {
+        "type": "cta",
+        "title": "Testar Grátis / Falar no WhatsApp",
+        "summary": "fecho com dois botões"
+      },
+      {
+        "type": "rodape",
+        "title": "Sobre / Contato",
+        "summary": "descrição, e-mail e WhatsApp do fundador"
+      }
+    ],
+    "ctas": [
+      "Experimente Grátis!",
+      "Criar conta",
+      "Teste Gratuito!",
+      "Começar Gratuitamente",
+      "Assinar Premium",
+      "Falar no WhatsApp"
+    ],
+    "socialProof": [
+      "4 depoimentos de professores de inglês",
+      "usuária há 3 anos",
+      "centenas de professores (declarado no site)"
+    ],
+    "interesting": [
+      "Preços na própria home, sem exigir página separada",
+      "Plano grátis como porta de entrada, CTA repetido a cada bloco",
+      "Preço riscado R$ 50 para R$ 28 como âncora",
+      "Prazo de resposta do suporte por plano (24 h x 4 h) como argumento de venda",
+      "Mensagem anti-planilha: Adeus planilhas!"
+    ],
+    "tone": "simples, direto e acolhedor, de professor para professor; sem FAQ, garantia ou prints do produto"
+  }
+}

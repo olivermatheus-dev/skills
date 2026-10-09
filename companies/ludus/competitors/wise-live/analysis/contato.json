@@ -1,0 +1,38 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:15:48Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.wise.live/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/wiseapplive"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/wiseapplive"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/wiseapplive/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/wiseapplive"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@WiseAppLive"
+      }
+    ]
+  }
+}

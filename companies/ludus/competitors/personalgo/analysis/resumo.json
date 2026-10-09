@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:20:01Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.personalgo.com.br/"
+    },
+    {
+      "url": "https://www.personalgo.com.br/a-personalgo/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "App de treino que liga personal trainer e aluno, grátis para prescrever a alunos ilimitados.",
+    "text": "App iOS/Android (e versão web) com dois perfis: aluno e personal. O personal prescreve treinos com biblioteca de +4.000 exercícios em vídeo, registra PSE e acompanha a evolução. Diferencial: escaneamento corporal por IA, citado como validado por DEXA. Foco em treino e dados, não em agenda e cobrança.",
+    "audience": "personal trainers e alunos de academia",
+    "positioning": "A plataforma fitness tech que potencializa alunos e personal trainers",
+    "size": "não declarado de forma verificável"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:08:30Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://esportivahub.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+553182913826"
+    ],
+    "cnpj": "63.222.912/0001-28",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/esportivahub/"
+      }
+    ]
+  }
+}

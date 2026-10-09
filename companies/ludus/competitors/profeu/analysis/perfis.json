@@ -1,0 +1,40 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:52:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br",
+      "title": "Home do Profeu (linka Instagram e WhatsApp)"
+    },
+    {
+      "url": "https://www.instagram.com/app.profeu/",
+      "title": "Bio: Profeu: Gestão inteligente para profs particulares"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://profeu.com.br",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/app.profeu/",
+        "handle": "app.profeu",
+        "note": "linkado pela home; bio cita o Profeu (cerca de 5 seguidores)"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x",
+      "telegram",
+      "loja de app"
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "name": "Ludus",
+  "updated": "2026-10-09",
+  "sources": [
+    "context/BUSINESS.md (Modelo e preço)",
+    "context/PRODUTO.md (só o que está no código)",
+    "context/COPY.md (big idea, diferenciais)",
+    "context/VOICE.md (tom)",
+    "ludus/src/components/marketing/ (seções da landing, lidas em 2026-10-09)"
+  ],
+  "price": {
+    "fromMonthly": null,
+    "note": "sem preço definido; acesso gratuito durante a fase de testes, por fila de acesso antecipado",
+    "currency": "BRL",
+    "model": "fila de testes gratuita (assinatura futura, modelo em aberto)",
+    "plans": 0,
+    "trial": "gratuito durante a fase de testes",
+    "guarantee": null
+  },
+  "message": {
+    "headline": "Tire sua escola da cabeça.",
+    "subheadline": "Você cuida da aula. O Ludus organiza tudo ao redor dela.",
+    "cta": "Quero testar gratuitamente",
+    "tone": "direto e humano, em português do Brasil; textos curtos; nunca caixa alta"
+  },
+  "landing": {
+    "source": "ludus/src/components/marketing/landing-page.tsx",
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Tire sua escola da cabeça.",
+        "summary": "Você cuida da aula; o Ludus organiza tudo ao redor dela. Coloque tudo em um sistema."
+      },
+      {
+        "type": "problema",
+        "title": "O trabalho ao redor da aula",
+        "summary": "Nenhuma tarefa é grande; o cansativo é precisar lembrar de todas elas, todos os dias."
+      },
+      {
+        "type": "problema",
+        "title": "Oito lugares, e uma pessoa ligando todos",
+        "summary": "Planilha, mensagem, pasta, agenda e vídeo separados; o professor vira a única coisa conectando tudo."
+      },
+      {
+        "type": "solucao",
+        "title": "O que importa passa a morar no mesmo lugar",
+        "summary": "O que vinha depois da aula acontece no mesmo sistema. Abre o Ludus e continua de onde parou."
+      },
+      {
+        "type": "como-funciona",
+        "title": "Uma aula, tudo conectado",
+        "summary": "A próxima aula não começa do zero: ao abrir o aluno antes da aula, a continuidade dele está ali."
+      },
+      {
+        "type": "beneficios",
+        "title": "Aprendizagem é o motivo de tudo existir",
+        "summary": "Agenda e pagamento mantêm a escola funcionando; a tecnologia também deveria ajudar a ensinar melhor."
+      },
+      {
+        "type": "beneficios",
+        "title": "Abra o Ludus e entenda como está sua escola",
+        "summary": "Visão da operação para decidir o que fazer agora."
+      },
+      {
+        "type": "outro",
+        "title": "O sistema se adapta ao seu jeito de ensinar",
+        "summary": "Seus tipos de aula, sua identidade, sua escola."
+      },
+      {
+        "type": "features",
+        "title": "Tudo que sustenta sua escola",
+        "summary": "Índice de funcionalidades e tour do produto: feito para usar, não para configurar durante semanas."
+      },
+      {
+        "type": "outro",
+        "title": "Construindo junto",
+        "summary": "Acesso antecipado gratuito para grupos de professores durante a fase de testes; quem entra ajuda a construir."
+      },
+      {
+        "type": "outro",
+        "title": "Feito para quem ensina do próprio jeito",
+        "summary": "Professor independente, pequena escola e professor com método próprio."
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas",
+        "summary": "Inclui: alunos também usam o Ludus? existe app para celular? quanto vai custar (ainda sem plano e preço)."
+      },
+      {
+        "type": "cta",
+        "title": "Espaço na sua cabeça",
+        "summary": "Fechamento com o convite para a fila de testes."
+      }
+    ],
+    "ctas": [
+      "Quero testar gratuitamente"
+    ],
+    "socialProof": [],
+    "interesting": [
+      "landing longa e narrativa, sem preço nem depoimento",
+      "fala mais largo que o MVP (pequena escola e método próprio)"
+    ]
+  },
+  "followers": null,
+  "features": [
+    {
+      "name": "Alunos",
+      "items": [
+        {
+          "name": "Ficha do aluno com aulas, plano e financeiro",
+          "highlight": true
+        },
+        {
+          "name": "Convite por link (responsável abaixo de 12 anos)"
+        }
+      ]
+    },
+    {
+      "name": "Agenda",
+      "items": [
+        {
+          "name": "Recorrência com alcance (só esta, próximas, todas)",
+          "highlight": true
+        },
+        {
+          "name": "Indisponibilidade e férias"
+        },
+        {
+          "name": "Painel do dia"
+        },
+        {
+          "name": "Agenda assinável no Google ou iPhone"
+        }
+      ]
+    },
+    {
+      "name": "Aulas",
+      "items": [
+        {
+          "name": "Presença e falta com regra de cobrança",
+          "highlight": true
+        },
+        {
+          "name": "Planejamento visual do aluno"
+        },
+        {
+          "name": "Matérias: roteiro reutilizável"
+        }
+      ]
+    },
+    {
+      "name": "Financeiro",
+      "items": [
+        {
+          "name": "Pacote de aulas que vira crédito",
+          "highlight": true
+        },
+        {
+          "name": "Contas a receber e a pagar"
+        },
+        {
+          "name": "Relatórios"
+        }
+      ]
+    },
+    {
+      "name": "Comunicação",
+      "items": [
+        {
+          "name": "Mensagens prontas no WhatsApp do professor"
+        },
+        {
+          "name": "Aulas de amanhã (lembrete em um toque)"
+        }
+      ]
+    },
+    {
+      "name": "Aluno",
+      "items": [
+        {
+          "name": "Páginas sem login: cobrança, confirmar aula, entrar na sala",
+          "highlight": true
+        },
+        {
+          "name": "App do aluno básico"
+        }
+      ]
+    },
+    {
+      "name": "Teleatendimento",
+      "items": [
+        {
+          "name": "Videochamada própria ligada à aula (2 pessoas)",
+          "highlight": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:57:02Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe Software para professores particulares"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "App de gestão de alunos, aulas e pagamentos para professor particular, R$ 29,90/mês.",
+    "text": "Web app instalável (PWA) com apps nas lojas Apple e Android. Cobre cadastro de alunos, agenda semanal, controle de pagamentos, evolução das aulas e relatórios em PDF para os pais. Plano único de R$ 29,90 por mês, sem fidelidade, com teste grátis. Posicionamento de simplicidade: faz o essencial. Atende também personal trainer, terapeuta e professores de música e esportes.",
+    "audience": "professores particulares autônomos (matemática, inglês, música, esportes), também personal e terapeuta",
+    "positioning": "controle da sua prática profissional em um só lugar, simples",
+    "size": "não declarado"
+  }
+}

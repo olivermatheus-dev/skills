@@ -1,0 +1,22 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:14:46Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.tutonomi.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/mgneale/"
+      }
+    ]
+  }
+}

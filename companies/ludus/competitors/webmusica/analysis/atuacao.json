@@ -1,0 +1,28 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:17:53Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemawebmusica.com.br/"
+    },
+    {
+      "url": "https://sistemawebmusica.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "ambos",
+    "countries": [
+      "Brasil",
+      "Portugal"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "rodapé e FAQ dizem 'No Brasil e em Portugal'; site em pt-BR, preços em R$, WhatsApp +55 11, Asaas (cobrança brasileira); CNPJ não encontrado"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:37:14Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "sistemaclassis@gmail.com"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": []
+  }
+}

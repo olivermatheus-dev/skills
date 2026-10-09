@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:38:48Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site em pt-BR, preços em R$, CNPJ brasileiro no rodapé, cobrança por Pix, \"Feito no Brasil\" em Sobre Nós."
+  }
+}

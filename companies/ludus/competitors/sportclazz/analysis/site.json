@@ -1,0 +1,142 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:13:12Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sportclazz.com/",
+      "title": "SportClazz — Gestão esportiva para quem ensina e para quem aprende"
+    },
+    {
+      "url": "https://sportclazz.com/planos",
+      "title": "Planos e preços — SportClazz"
+    },
+    {
+      "url": "https://sportclazz.com/recursos",
+      "title": "Recursos — SportClazz"
+    },
+    {
+      "url": "https://sportclazz.com/sobre",
+      "title": "Sobre o SportClazz"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sportclazz.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://sportclazz.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "SportClazz — Gestão esportiva para quem ensina e para quem aprende",
+        "chars": 2701
+      },
+      {
+        "url": "https://sportclazz.com/planos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos e preços — SportClazz",
+        "chars": 1353
+      },
+      {
+        "url": "https://sportclazz.com/recursos",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Recursos — SportClazz",
+        "chars": 1490
+      },
+      {
+        "url": "https://sportclazz.com/sobre",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre o SportClazz",
+        "chars": 1379
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 11,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/recursos",
+          "count": 1,
+          "sample": [
+            "/recursos"
+          ]
+        },
+        {
+          "name": "/portais",
+          "count": 1,
+          "sample": [
+            "/portais"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/instalar",
+          "count": 1,
+          "sample": [
+            "/instalar"
+          ]
+        },
+        {
+          "name": "/aluno",
+          "count": 1,
+          "sample": [
+            "/aluno"
+          ]
+        },
+        {
+          "name": "/professor",
+          "count": 1,
+          "sample": [
+            "/professor"
+          ]
+        },
+        {
+          "name": "/sobre-professor",
+          "count": 1,
+          "sample": [
+            "/sobre-professor"
+          ]
+        },
+        {
+          "name": "/sobre-aluno",
+          "count": 1,
+          "sample": [
+            "/sobre-aluno"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

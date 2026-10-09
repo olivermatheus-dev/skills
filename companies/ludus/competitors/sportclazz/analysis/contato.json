@@ -1,0 +1,19 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:13:12Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sportclazz.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@sportclazz.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": []
+  }
+}

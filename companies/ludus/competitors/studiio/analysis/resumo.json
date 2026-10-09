@@ -1,0 +1,23 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:18:26Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://apps.apple.com/br/app/id1639003423"
+    },
+    {
+      "url": "https://www.capterra.com/p/10013461/Studiio-by-Tecnofit/"
+    },
+    {
+      "url": "https://www.getapp.com/all-software/a/studiio-by-tecnofit/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "App da Tecnofit de agenda e gestão para estúdios de pilates, dança e aulas com horário marcado",
+    "text": "Produto da Tecnofit (gestão fitness) para estúdios de agendamento: pilates, yoga, funcional, pole dance, fisioterapia, escola de dança. Controla presença, falta, reposição, evolução do aluno, planos, pacotes e mensalidades, com lembrete de plano acabando. O aluno cancela e marca reposição ou vaga sozinho. Avaliação no GetApp aponta que ainda não recebe pagamento direto pelo app (set/2025).",
+    "audience": "donos e profissionais de estúdios de pilates, dança e aulas agendadas",
+    "size": "não declarado (a Tecnofit afirma ~30% do mercado de gestão fitness, matéria sem data)"
+  }
+}

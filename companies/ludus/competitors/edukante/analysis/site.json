@@ -1,0 +1,93 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:08:05Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.edukante.com/",
+      "title": "Sistema de Gestão Escolar Online | ERP Educacional | edukante"
+    },
+    {
+      "url": "https://www.edukante.com/sistemas-gestao-escolar/contrate-software-para-escolas-cursos-edukante.aspx",
+      "title": "Software de Gestão Escolar: Planos e Preços para Escolas, Cursos e Faculdades | edukante"
+    },
+    {
+      "url": "https://www.edukante.com/sistemas-gestao-escolar/software-gestao-academica-para-escolas-cursos-faculdades-recursos.aspx",
+      "title": "Software de Gestão Financeira Escolar e Controle de Mensalidades | edukante"
+    },
+    {
+      "url": "https://www.edukante.com/sistemas-gestao-escolar/Contato.aspx",
+      "title": "Contato Edukante | Fale com um Consultor do Software de Gestão Escolar"
+    },
+    {
+      "url": "https://www.edukante.com/sistemas-gestao-escolar/software-gestao-para-cursos-escolas-faculdades-perguntas-respostas.aspx",
+      "title": "Sistema para Escolas | FAQ | Perguntas e Respostas | edukante"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.edukante.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.edukante.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema de Gestão Escolar Online | ERP Educacional | edukante",
+        "chars": 4067
+      },
+      {
+        "url": "https://www.edukante.com/sistemas-gestao-escolar/contrate-software-para-escolas-cursos-edukante.aspx",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Software de Gestão Escolar: Planos e Preços para Escolas, Cursos e Faculdades | edukante",
+        "chars": 1882
+      },
+      {
+        "url": "https://www.edukante.com/sistemas-gestao-escolar/software-gestao-academica-para-escolas-cursos-faculdades-recursos.aspx",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Software de Gestão Financeira Escolar e Controle de Mensalidades | edukante",
+        "chars": 24365
+      },
+      {
+        "url": "https://www.edukante.com/sistemas-gestao-escolar/Contato.aspx",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contato Edukante | Fale com um Consultor do Software de Gestão Escolar",
+        "chars": 505
+      },
+      {
+        "url": "https://www.edukante.com/sistemas-gestao-escolar/software-gestao-para-cursos-escolas-faculdades-perguntas-respostas.aspx",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Sistema para Escolas | FAQ | Perguntas e Respostas | edukante",
+        "chars": 10881
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 132,
+      "groups": [
+        {
+          "name": "/sistemas-gestao-escolar",
+          "count": 131,
+          "sample": [
+            "/sistemas-gestao-escolar/software-gestao-escolar-versoes-modulos.aspx",
+            "/sistemas-gestao-escolar/sistema-gestao-cursos.aspx",
+            "/sistemas-gestao-escolar/erp-escolar.aspx",
+            "/sistemas-gestao-escolar/sistema-escola-particular.aspx"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

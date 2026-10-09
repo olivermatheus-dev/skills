@@ -1,0 +1,35 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:14:21Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://traus.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [
+      "(17) 99666-2345",
+      "(17) 99733-1702",
+      "(17) 99622-5257"
+    ],
+    "whatsapp": [
+      "+5517996662345",
+      "+5517997331702",
+      "+5517996225257"
+    ],
+    "cnpj": "33.483.156/0001-20",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/suite.traus/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/profile.php?id=61560260056690"
+      }
+    ]
+  }
+}

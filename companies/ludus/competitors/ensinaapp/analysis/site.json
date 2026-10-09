@@ -1,0 +1,120 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:35:20Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/",
+      "title": "EnsinaApp: agenda, PIX, chat e materiais pra professora particular"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/precos",
+      "title": "Preços | EnsinaApp · EnsinaApp"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/ajuda",
+      "title": "Central de Ajuda | EnsinaApp · EnsinaApp"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://aula.ensinaapp.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://aula.ensinaapp.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "EnsinaApp: agenda, PIX, chat e materiais pra professora particular",
+        "chars": 3588
+      },
+      {
+        "url": "https://aula.ensinaapp.com.br/precos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Preços | EnsinaApp · EnsinaApp",
+        "chars": 1438
+      },
+      {
+        "url": "https://aula.ensinaapp.com.br/ajuda",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Central de Ajuda | EnsinaApp · EnsinaApp",
+        "chars": 1422
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 12,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 4,
+          "sample": [
+            "/blog",
+            "/blog/como-organizar-agenda-aulas-particulares",
+            "/blog/como-cobrar-pix-alunos-aula-particular",
+            "/blog/alternativas-google-classroom-professor-particular"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/cadastro",
+          "count": 1,
+          "sample": [
+            "/cadastro"
+          ]
+        },
+        {
+          "name": "/precos",
+          "count": 1,
+          "sample": [
+            "/precos"
+          ]
+        },
+        {
+          "name": "/ajuda",
+          "count": 1,
+          "sample": [
+            "/ajuda"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        },
+        {
+          "name": "/quiz-perfil",
+          "count": 1,
+          "sample": [
+            "/quiz-perfil"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

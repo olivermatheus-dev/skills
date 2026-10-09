@@ -1,0 +1,74 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:40:34Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    },
+    {
+      "url": "https://profeu.com.br/sobre"
+    },
+    {
+      "url": "https://profeu.com.br/termos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Entrada de preço muito baixa",
+        "evidence": "grátis até 5 alunos; Essencial R$ 9,90/mês; cancela com um clique"
+      },
+      {
+        "point": "Cobrança automática (fatura, Pix, lembrete)",
+        "evidence": "destaque da home, \"sem o constrangimento de cobrar\""
+      },
+      {
+        "point": "IA pedagógica incluída",
+        "evidence": "plano de aula e relatórios gerados por palavras-chave"
+      },
+      {
+        "point": "Sem instalar app: Telegram",
+        "evidence": "FAQ: funciona no navegador ou bot"
+      },
+      {
+        "point": "Suporte elogiado",
+        "evidence": "depoimento da Caju Educa cita atendimento"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "WhatsApp, o canal real do aluno brasileiro, ainda \"em breve\"",
+        "evidence": "home repete \"(em breve)\"; nos Termos só no plano Profissional"
+      },
+      {
+        "point": "Telegram é pouco usado por alunos e pais no Brasil",
+        "evidence": "interface principal depende do bot"
+      },
+      {
+        "point": "Preços dos planos acima do Essencial não aparecem",
+        "evidence": "seletor 5/10/15/30/ilimitado só mostra R$ 9,90"
+      },
+      {
+        "point": "Prova social frágil",
+        "evidence": "Instagram com poucos seguidores; dois depoimentos; \"+10 mil aulas\" sem fonte"
+      },
+      {
+        "point": "Multa de 10% no plano semestral/anual e sem reembolso",
+        "evidence": "Termos"
+      },
+      {
+        "point": "Não mostra videochamada, pacote/crédito nem portal do aluno",
+        "evidence": "ausentes na home e no sobre"
+      }
+    ],
+    "opportunities": [
+      "Vender o link sem login no celular do aluno contra o Telegram",
+      "Pacote que vira crédito e falta com regra de cobrança: o Profeu não mostra",
+      "Videochamada ligada à aula no mesmo lugar",
+      "Posicionar \"o professor decide\" contra automação que age sozinha, com WhatsApp no toque do professor",
+      "Preço: competir com o grátis até 5 alunos e os R$ 9,90 de entrada"
+    ]
+  }
+}

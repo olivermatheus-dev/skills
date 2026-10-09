@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:16:57Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://agende-me.com/"
+    },
+    {
+      "url": "https://agende-me.com/planos/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Agendamento online com lembrete WhatsApp e sinal Pix para autônomos de horário marcado",
+    "text": "Sistema de agendamento por link: o cliente marca sozinho, paga sinal via Pix e recebe lembrete automático no WhatsApp. Atende salão, studio e autônomos em geral (manicure, esteticista, fisioterapeuta, professores particulares entre os segmentos). Tem plano grátis (30 agendamentos/mês, 50 clientes), teste de 14 dias e planos pagos. Suporte humano por WhatsApp. Não é focado em ensino: sem ficha pedagógica nem videochamada citadas.",
+    "audience": "profissionais autônomos e estabelecimentos de horário marcado (salão, studio, etc.)",
+    "positioning": "O sistema de agendamento que automatiza seu WhatsApp e sua agenda",
+    "size": "+4.000 estabelecimentos (declarado no site)"
+  }
+}

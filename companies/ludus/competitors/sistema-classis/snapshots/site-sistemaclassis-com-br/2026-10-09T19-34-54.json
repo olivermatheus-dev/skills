@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:54Z",
+  "platform": "site",
+  "profileUrl": "https://sistemaclassis.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Classis",
+    "handle": "sistemaclassis.com.br",
+    "bio": "Agenda, pagamentos e lembretes por WhatsApp para professores particulares.",
+    "avatar": "https://sistemaclassis.com.br/classis-favicon.png",
+    "avatarLocal": "media/site-sistemaclassis-com-br/avatar-a7ce53e6.png",
+    "banner": "https://sistemaclassis.com.br/og-image.png",
+    "bannerLocal": "media/site-sistemaclassis-com-br/banner-4d2444c2.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

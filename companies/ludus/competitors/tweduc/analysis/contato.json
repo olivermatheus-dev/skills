@@ -1,0 +1,40 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T18:56:06Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://tweduc.com.br/professor-particular"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "atendimento@tweduc.com.br",
+      "comercial@tweduc.com.br"
+    ],
+    "phones": [
+      "+55 51 3061 2550",
+      "(51) 3061-2550",
+      "+55 (51) 3061 2550",
+      "+555130612550"
+    ],
+    "whatsapp": [
+      "+555130612550"
+    ],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/teraware.sistemas"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/tweduc/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/teraware-solu-es-em-software-e-internet"
+      }
+    ]
+  }
+}

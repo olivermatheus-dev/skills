@@ -1,0 +1,71 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:40:46Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://aula.ensinaapp.com.br/",
+    "hero": {
+      "headline": "Suas aulas merecem mais que o WhatsApp.",
+      "subheadline": "Agenda, PIX, chat, materiais e lembretes automáticos, num painel só seu, com a sua cara.",
+      "cta": "Criar conta grátis",
+      "visual": "mock do painel com aulas de hoje, PIX recebido e chat com aluna"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Suas aulas merecem mais que o WhatsApp.",
+        "summary": "promessa, 14 dias grátis sem cartão e painel de exemplo"
+      },
+      {
+        "type": "problema",
+        "title": "Sua rotina, antes e depois",
+        "summary": "comparativo improviso no WhatsApp x com o EnsinaApp"
+      },
+      {
+        "type": "features",
+        "title": "Tudo que você precisa. Nada que não vai usar.",
+        "summary": "11 cards: grade, PIX, chat, materiais, lembretes, Meet, anotações, financeiro, flashcards, código, quizzes"
+      },
+      {
+        "type": "como-funciona",
+        "title": "No ar em minutos",
+        "summary": "3 passos: criar conta, montar grade, chamar alunos"
+      },
+      {
+        "type": "precos",
+        "title": "Cresce com o tamanho da sua agenda",
+        "summary": "3 planos por alunos ativos, alternador mensal/anual -20%"
+      },
+      {
+        "type": "cta",
+        "title": "Volte a ter tempo pra ensinar.",
+        "summary": "CTA final de conta grátis"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "Ajuda, Blog, Termos, Privacidade"
+      }
+    ],
+    "ctas": [
+      "Criar conta grátis",
+      "Começar grátis",
+      "Já tenho conta"
+    ],
+    "socialProof": [],
+    "interesting": [
+      "comparativo antes/depois com a dor \"Prof, pode remarcar?\" às 23h",
+      "Todos os planos têm tudo: preço só por faixa de alunos",
+      "14 dias sem cartão repetido em quase toda seção",
+      "segmento aberto: idiomas, música, reforço, programação",
+      "sem prova social, depoimentos ou números"
+    ],
+    "tone": "direto, coloquial, no feminino (professora), foco em sair do WhatsApp"
+  }
+}

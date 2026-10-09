@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:33:56Z",
+  "platform": "site",
+  "profileUrl": "https://beaky.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Plataforma para professores particulares e pequenas escolas online | Beaky",
+    "handle": "beaky.com.br",
+    "bio": "Gerencie agenda, alunos, pagamentos, materiais e reposições, trabalhando por conta própria ou em uma pequena escola online. Teste a Beaky grátis por 21 dias.",
+    "avatar": "https://beaky.com.br/apple-touch-icon.png",
+    "avatarLocal": "media/site-beaky-com-br/avatar-a5b21967.png",
+    "banner": "https://assets.beaky.com.br/beaky-logo-instagram.png",
+    "bannerLocal": "media/site-beaky-com-br/banner-b34de5ac.png",
+    "links": [
+      "https://www.instagram.com/beaky.com.br",
+      "https://x.com/beakycombr",
+      "https://www.youtube.com/channel/UCPWg3bsYGwz4Sk6QSf1IIcw"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

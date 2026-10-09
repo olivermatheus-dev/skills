@@ -1,0 +1,103 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:40:37Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    },
+    {
+      "url": "https://profeu.com.br/termos"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "freemium",
+    "fromMonthly": 9.9,
+    "trial": "trial existe nos Termos (duração não informada); plano grátis permanente",
+    "guarantee": "sem reembolso por período faturado (Termos)",
+    "plans": [
+      {
+        "name": "Gratuito",
+        "monthly": 0,
+        "users": "1 professor",
+        "highlights": [
+          "até 5 alunos ativos",
+          "agenda automática e financeiro básico",
+          "5 créditos de IA para testar"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Essencial",
+        "monthly": 9.9,
+        "users": "1 professor",
+        "highlights": [
+          "até 10 alunos ativos",
+          "agendamento automático",
+          "financeiro básico, IA básica, via Telegram"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Básico",
+        "users": "1 professor",
+        "highlights": [
+          "até 15 alunos ativos"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Intermediário",
+        "users": "1 professor",
+        "highlights": [
+          "até 30 alunos ativos",
+          "relatórios com IA"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Profissional",
+        "users": "1 professor",
+        "highlights": [
+          "alunos ilimitados",
+          "IA avançada",
+          "WhatsApp"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [],
+    "notes": "Só o Essencial (R$ 9,90/mês, até 10 alunos) tem preço público; o seletor 15/30/ilimitado não mostra valor na home estática. Não há preço anual nem semestral visível, embora os Termos citem planos semestral e anual com multa de 10% das parcelas restantes (mensal sem multa). Pagamento via Asaas. Mapeamento faixa para nome do plano vem dos Termos. Recomenda-se abrir o seletor no navegador para ler os preços de Básico, Intermediário e Profissional.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

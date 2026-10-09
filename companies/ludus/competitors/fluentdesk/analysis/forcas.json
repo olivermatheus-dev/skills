@@ -1,0 +1,75 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:41:09Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Cobertura ampla: aula, material, tarefa, cobrança e equipe no mesmo produto",
+        "evidence": "mais de 100 funcionalidades, todas em qualquer plano"
+      },
+      {
+        "point": "Cobrança Pix automática com Asaas, boleto e controle de inadimplência",
+        "evidence": "seção Financeiro & PIX da home"
+      },
+      {
+        "point": "Engajamento do aluno via gamificação e portal do responsável",
+        "evidence": "XP, ranking, feed e três portais independentes"
+      },
+      {
+        "point": "Entrada sem atrito",
+        "evidence": "teste grátis sem cartão, ambiente em menos de 2 minutos, aluno não paga"
+      },
+      {
+        "point": "Cresce junto: serve do solo à escola com 10 professores",
+        "evidence": "planos Iniciante, Profissional e Empresarial"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Preço de entrada alto para professor solo: R$ 89,90 por 15 alunos",
+        "evidence": "plano Iniciante; aluno extra R$ 4,90"
+      },
+      {
+        "point": "Produto dividido entre idiomas e personal trainer, mensagem diluída",
+        "evidence": "seção de treino com +870 exercícios na mesma home"
+      },
+      {
+        "point": "Videochamada é só link externo de Meet/Zoom",
+        "evidence": "'Link do Google Meet/Zoom na aula'"
+      },
+      {
+        "point": "Sem lembrete pelo WhatsApp do professor; usa push e e-mail",
+        "evidence": "lista de comunicação sem WhatsApp"
+      },
+      {
+        "point": "Informação inconsistente nos planos e no cancelamento",
+        "evidence": "FAQ cita plano Professor (50 alunos) e Escola, que não existem na tabela; cancelamento 'segue o contrato' enquanto o topo diz 'cancele quando quiser'"
+      },
+      {
+        "point": "Prova social fraca e promessa genérica",
+        "evidence": "250+ aulas agendadas, três depoimentos sem sobrenome; sem Reclame Aqui nem lojas"
+      },
+      {
+        "point": "Visual e tom de produto genérico, sem rosto nem história",
+        "evidence": "home sem fundador ou equipe; rodapé 'powered by Deskflow' e e-mail Gmail"
+      }
+    ],
+    "opportunities": [
+      "Entrar abaixo de R$ 89,90 ou com limite de alunos mais generoso para o professor solo",
+      "Foco só no professor independente, sem treino, contra o produto 'faz tudo' deles",
+      "Videochamada própria dentro da aula, sem link externo",
+      "Lembrete e cobrança pelo WhatsApp do próprio professor, sem automação que fale em nome dele",
+      "Pacote de aulas que vira crédito e falta com regra de cobrança, que não aparecem na lista deles",
+      "Link sem login para o aluno, enquanto eles têm portais com acesso e senha",
+      "Mostrar acabamento e prova real (a Gaby), onde a prova social deles é fraca"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:11:09Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.personalgo.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+5521995198191"
+    ],
+    "socials": [
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@personalgoapp"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/personalgo_br/"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://tiktok.com/@personalgo"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@d-load"
+      },
+      {
+        "platform": "linkedin",
+        "url": "http://linkedin.com/company/personalgoapp"
+      }
+    ]
+  }
+}

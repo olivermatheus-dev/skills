@@ -1,0 +1,29 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T18:52:24Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/emusys/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Emusys",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/emusys/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 0,
+      "period": "3 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Sem índice, 0 reclamações, 3 anos no RA."
+  }
+}

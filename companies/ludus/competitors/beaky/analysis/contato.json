@@ -1,0 +1,35 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:34:48Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@beaky.app"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+5512996129730"
+    ],
+    "cnpj": "65.625.358/0001-55",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/beaky.com.br/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/beakycombr"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/channel/UCPWg3bsYGwz4Sk6QSf1IIcw"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:57:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, domínio .com.br, WhatsApp +55 48 (SC)"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:19:17Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mensalli.com.br/",
+      "title": "Mensalli - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, Pix, LGPD, domínio .com.br, WhatsApp +55 62; CNPJ não encontrado"
+  }
+}

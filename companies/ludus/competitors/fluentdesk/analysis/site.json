@@ -1,0 +1,88 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:35:38Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk — Plataforma para professores particulares e personal trainers"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://fluentdesk.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://fluentdesk.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "FluentDesk — Plataforma para professores particulares e personal trainers",
+        "chars": 13720
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 8,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/buscar.php",
+          "count": 1,
+          "sample": [
+            "/buscar.php"
+          ]
+        },
+        {
+          "name": "/login.php",
+          "count": 1,
+          "sample": [
+            "/login.php"
+          ]
+        },
+        {
+          "name": "/register.php",
+          "count": 1,
+          "sample": [
+            "/register.php"
+          ]
+        },
+        {
+          "name": "/para-professores.php",
+          "count": 1,
+          "sample": [
+            "/para-professores.php"
+          ]
+        },
+        {
+          "name": "/para-personais.php",
+          "count": 1,
+          "sample": [
+            "/para-personais.php"
+          ]
+        },
+        {
+          "name": "/termos.php",
+          "count": 1,
+          "sample": [
+            "/termos.php"
+          ]
+        },
+        {
+          "name": "/privacidade.php",
+          "count": 1,
+          "sample": [
+            "/privacidade.php"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

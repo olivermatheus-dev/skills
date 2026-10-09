@@ -1,0 +1,30 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:11:49Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.sistemaeasy.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@sistemaeasy.com.br"
+    ],
+    "phones": [
+      "44 99741-7546"
+    ],
+    "whatsapp": [
+      "+5544997417546",
+      "+44997417546"
+    ],
+    "cnpj": "44.489.794/0001-74",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/app.sistemaeasy/"
+      }
+    ]
+  }
+}

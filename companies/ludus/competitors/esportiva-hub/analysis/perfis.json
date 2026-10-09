@@ -1,0 +1,35 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:18:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://esportivahub.com.br/contato"
+    },
+    {
+      "url": "https://esportivahub.com.br/sobre"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://esportivahub.com.br",
+        "note": "site oficial; app em app.esportivahub.com.br"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/esportivahub/",
+        "handle": "esportivahub",
+        "note": "site cita @esportivahub em contato e sobre; busca web não confirmou a conta"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

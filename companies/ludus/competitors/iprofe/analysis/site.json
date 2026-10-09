@@ -1,0 +1,46 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:36:18Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe Software para professores particulares"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://iprofe.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://iprofe.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "iProfe Software para professores particulares",
+        "chars": 4289
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 2,
+      "groups": [
+        {
+          "name": "/index.html",
+          "count": 1,
+          "sample": [
+            "/index.html"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

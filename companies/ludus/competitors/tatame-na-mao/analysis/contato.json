@@ -1,0 +1,19 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:13:43Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://tatamenamaov2.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [
+      "(17) 99755-5734"
+    ],
+    "whatsapp": [],
+    "socials": []
+  }
+}

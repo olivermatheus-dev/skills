@@ -1,0 +1,24 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:09:14Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.mensalli.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+5562981618862"
+    ],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/mensalli/"
+      }
+    ]
+  }
+}

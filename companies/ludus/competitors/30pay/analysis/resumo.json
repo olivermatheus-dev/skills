@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:17:19Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://30pay.com.br/"
+    },
+    {
+      "url": "https://30pay.com.br/sobre-30pay.html"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Cobrança de mensalidade por WhatsApp e gestão para escolas de música, idiomas, dança e esporte",
+    "text": "Sistema da 3035TECH que automatiza avisos de mensalidade por WhatsApp antes e depois do vencimento, com Pix e baixa automática via integração bancária. Reúne também pré-matrícula por link, contrato digital, chamada, diário de classe, agenda e app para responsáveis, professores e coordenação. Vende para a escola (secretaria), não para o professor autônomo. Preço por faixa de alunos, implantação gratuita, sem fidelidade e sem percentual sobre recebimentos.",
+    "audience": "escolas infantis, de esporte, música, dança e idiomas, com secretaria",
+    "positioning": "Mensalidades no WhatsApp. Mais tempo para cuidar da escola.",
+    "size": "não declarado; entrada em R$ 249 para até 100 alunos"
+  }
+}

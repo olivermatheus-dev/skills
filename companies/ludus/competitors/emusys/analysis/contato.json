@@ -1,0 +1,36 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T18:52:20Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://emusys.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "comercial@emusys.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/emusys.oficial/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@emusys"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/emusys"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/emusys"
+      }
+    ]
+  }
+}

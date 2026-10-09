@@ -1,0 +1,186 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:13:01Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.sistemagalileu.com.br/",
+      "title": "Software de Gestão Escolar Completo e Online | GALILEU"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.sistemagalileu.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.sistemagalileu.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Software de Gestão Escolar Completo e Online | GALILEU",
+        "chars": 10787
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 22,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/software-de-gestao-escolar",
+          "count": 1,
+          "sample": [
+            "/software-de-gestao-escolar/"
+          ]
+        },
+        {
+          "name": "/gestao-pedagogica-e-academica",
+          "count": 1,
+          "sample": [
+            "/gestao-pedagogica-e-academica/"
+          ]
+        },
+        {
+          "name": "/gestao-financeira",
+          "count": 1,
+          "sample": [
+            "/gestao-financeira/"
+          ]
+        },
+        {
+          "name": "/portal-dos-pais-e-alunos",
+          "count": 1,
+          "sample": [
+            "/portal-dos-pais-e-alunos/"
+          ]
+        },
+        {
+          "name": "/portal-e-aplicativo-dos-professores",
+          "count": 1,
+          "sample": [
+            "/portal-e-aplicativo-dos-professores/"
+          ]
+        },
+        {
+          "name": "/matricula-online",
+          "count": 1,
+          "sample": [
+            "/matricula-online/"
+          ]
+        },
+        {
+          "name": "/assinatura-eletronica",
+          "count": 1,
+          "sample": [
+            "/assinatura-eletronica/"
+          ]
+        },
+        {
+          "name": "/emissao-notas-fiscais-escolas",
+          "count": 1,
+          "sample": [
+            "/emissao-notas-fiscais-escolas/"
+          ]
+        },
+        {
+          "name": "/emissao-de-documentos",
+          "count": 1,
+          "sample": [
+            "/emissao-de-documentos/"
+          ]
+        },
+        {
+          "name": "/whatsapp-para-escolas",
+          "count": 1,
+          "sample": [
+            "/whatsapp-para-escolas/"
+          ]
+        },
+        {
+          "name": "/cantina",
+          "count": 1,
+          "sample": [
+            "/cantina/"
+          ]
+        },
+        {
+          "name": "/controle-de-acesso-escolar-com-catraca-e-biometria-facial",
+          "count": 1,
+          "sample": [
+            "/controle-de-acesso-escolar-com-catraca-e-biometria-facial/"
+          ]
+        },
+        {
+          "name": "/sistema-para-escola-infantil",
+          "count": 1,
+          "sample": [
+            "/sistema-para-escola-infantil/"
+          ]
+        },
+        {
+          "name": "/cobranca-direta",
+          "count": 1,
+          "sample": [
+            "/cobranca-direta/"
+          ]
+        },
+        {
+          "name": "/aplicativo-dos-pais-e-alunos",
+          "count": 1,
+          "sample": [
+            "/aplicativo-dos-pais-e-alunos/"
+          ]
+        },
+        {
+          "name": "/atendimento",
+          "count": 1,
+          "sample": [
+            "/atendimento/"
+          ]
+        },
+        {
+          "name": "/responsabilidade-social",
+          "count": 1,
+          "sample": [
+            "/responsabilidade-social/"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre/"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog/"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade/"
+          ]
+        },
+        {
+          "name": "/termo-de-uso",
+          "count": 1,
+          "sample": [
+            "/termo-de-uso/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

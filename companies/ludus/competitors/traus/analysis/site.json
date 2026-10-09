@@ -1,0 +1,194 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:14:21Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://traus.com.br/",
+      "title": "Sistema de Gestão para Estúdios e Escolas de Cursos Livres"
+    },
+    {
+      "url": "https://traus.com.br/sobre",
+      "title": "Sobre a Traus | Quem Somos"
+    },
+    {
+      "url": "https://traus.com.br/contato",
+      "title": "Contato | Fale com a Traus"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://traus.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://traus.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema de Gestão para Estúdios e Escolas de Cursos Livres",
+        "chars": 8774
+      },
+      {
+        "url": "https://traus.com.br/sobre",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre a Traus | Quem Somos",
+        "chars": 2527
+      },
+      {
+        "url": "https://traus.com.br/contato",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contato | Fale com a Traus",
+        "chars": 1739
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 50,
+      "groups": [
+        {
+          "name": "/en",
+          "count": 16,
+          "sample": [
+            "/en",
+            "/en/language-school-software",
+            "/en/vocational-school-software",
+            "/en/online-class-register"
+          ]
+        },
+        {
+          "name": "/es",
+          "count": 16,
+          "sample": [
+            "/es",
+            "/es/software-para-escuela-de-idiomas",
+            "/es/software-para-cursos-tecnicos",
+            "/es/diario-de-clase-online"
+          ]
+        },
+        {
+          "name": "/termos-de-uso",
+          "count": 2,
+          "sample": [
+            "/termos-de-uso",
+            "/termos-de-uso/sla"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/sistema-para-escola-de-idiomas",
+          "count": 1,
+          "sample": [
+            "/sistema-para-escola-de-idiomas"
+          ]
+        },
+        {
+          "name": "/sistema-para-curso-profissionalizante",
+          "count": 1,
+          "sample": [
+            "/sistema-para-curso-profissionalizante"
+          ]
+        },
+        {
+          "name": "/diario-de-classe-online",
+          "count": 1,
+          "sample": [
+            "/diario-de-classe-online"
+          ]
+        },
+        {
+          "name": "/software-de-gestao-escolar",
+          "count": 1,
+          "sample": [
+            "/software-de-gestao-escolar"
+          ]
+        },
+        {
+          "name": "/controle-de-frequencia-escolar",
+          "count": 1,
+          "sample": [
+            "/controle-de-frequencia-escolar"
+          ]
+        },
+        {
+          "name": "/portal-do-aluno",
+          "count": 1,
+          "sample": [
+            "/portal-do-aluno"
+          ]
+        },
+        {
+          "name": "/aplicativo-para-escola",
+          "count": 1,
+          "sample": [
+            "/aplicativo-para-escola"
+          ]
+        },
+        {
+          "name": "/inadimplencia",
+          "count": 1,
+          "sample": [
+            "/inadimplencia"
+          ]
+        },
+        {
+          "name": "/recorrencia-cartao-credito",
+          "count": 1,
+          "sample": [
+            "/recorrencia-cartao-credito"
+          ]
+        },
+        {
+          "name": "/comunicacao-escolar",
+          "count": 1,
+          "sample": [
+            "/comunicacao-escolar"
+          ]
+        },
+        {
+          "name": "/gestao-contratos",
+          "count": 1,
+          "sample": [
+            "/gestao-contratos"
+          ]
+        },
+        {
+          "name": "/gestao-financeira",
+          "count": 1,
+          "sample": [
+            "/gestao-financeira"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/contato",
+          "count": 1,
+          "sample": [
+            "/contato"
+          ]
+        },
+        {
+          "name": "/experimente-gratis",
+          "count": 1,
+          "sample": [
+            "/experimente-gratis"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:32Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sportclazz.com/"
+    },
+    {
+      "url": "https://sportclazz.com/planos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, e-mail .com.br, esportes populares no Brasil (beach tennis); sem CNPJ nem endereço visíveis"
+  }
+}

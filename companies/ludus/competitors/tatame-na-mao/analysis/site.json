@@ -1,0 +1,172 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:13:43Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://tatamenamaov2.com.br/",
+      "title": "Sistema para Academias de Artes Marciais | Tatame na Mão"
+    },
+    {
+      "url": "https://tatamenamaov2.com.br/faq",
+      "title": "Perguntas Frequentes | Tatame na Mão V2"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://tatamenamaov2.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://tatamenamaov2.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema para Academias de Artes Marciais | Tatame na Mão",
+        "chars": 16516
+      },
+      {
+        "url": "https://tatamenamaov2.com.br/faq",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Perguntas Frequentes | Tatame na Mão V2",
+        "chars": 1399
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 171,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 154,
+          "sample": [
+            "/blog",
+            "/blog/documentos-assinatura-digital-academia-artes-marciais",
+            "/blog/documentos-aluno-atestados-termos",
+            "/blog/cadastro-aluno-automacoes-completas"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/assinar",
+          "count": 1,
+          "sample": [
+            "/assinar"
+          ]
+        },
+        {
+          "name": "/ajuda",
+          "count": 1,
+          "sample": [
+            "/ajuda"
+          ]
+        },
+        {
+          "name": "/faq",
+          "count": 1,
+          "sample": [
+            "/faq"
+          ]
+        },
+        {
+          "name": "/app-aluno-info",
+          "count": 1,
+          "sample": [
+            "/app-aluno-info"
+          ]
+        },
+        {
+          "name": "/app-gestor-info",
+          "count": 1,
+          "sample": [
+            "/app-gestor-info"
+          ]
+        },
+        {
+          "name": "/trial-sucesso",
+          "count": 1,
+          "sample": [
+            "/trial-sucesso"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/signup",
+          "count": 1,
+          "sample": [
+            "/signup"
+          ]
+        },
+        {
+          "name": "/definir-senha",
+          "count": 1,
+          "sample": [
+            "/definir-senha"
+          ]
+        },
+        {
+          "name": "/set-password",
+          "count": 1,
+          "sample": [
+            "/set-password"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        },
+        {
+          "name": "/jiu-jitsu",
+          "count": 1,
+          "sample": [
+            "/jiu-jitsu"
+          ]
+        },
+        {
+          "name": "/muay-thai",
+          "count": 1,
+          "sample": [
+            "/muay-thai"
+          ]
+        },
+        {
+          "name": "/boxe",
+          "count": 1,
+          "sample": [
+            "/boxe"
+          ]
+        },
+        {
+          "name": "/gestao-profissional",
+          "count": 1,
+          "sample": [
+            "/gestao-profissional"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

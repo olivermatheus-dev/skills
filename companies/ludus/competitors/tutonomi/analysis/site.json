@@ -1,0 +1,127 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:14:46Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.tutonomi.com/",
+      "title": "Free Tutor Management Software for Private Tutors | Tutonomi"
+    },
+    {
+      "url": "https://www.tutonomi.com/pricing",
+      "title": "Tutor Pricing – Free to Use, No Subscriptions | Tutonomi"
+    },
+    {
+      "url": "https://www.tutonomi.com/articles/tutoring-trust",
+      "title": "How We Think About Trust"
+    },
+    {
+      "url": "https://www.tutonomi.com/contact",
+      "title": "Contact Tutonomi | Support for Independent Tutors"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.tutonomi.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.tutonomi.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Free Tutor Management Software for Private Tutors | Tutonomi",
+        "chars": 8194
+      },
+      {
+        "url": "https://www.tutonomi.com/pricing",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Tutor Pricing – Free to Use, No Subscriptions | Tutonomi",
+        "chars": 4230
+      },
+      {
+        "url": "https://www.tutonomi.com/articles/tutoring-trust",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "How We Think About Trust",
+        "chars": 4575
+      },
+      {
+        "url": "https://www.tutonomi.com/contact",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contact Tutonomi | Support for Independent Tutors",
+        "chars": 1254
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 94,
+      "groups": [
+        {
+          "name": "/help",
+          "count": 48,
+          "sample": [
+            "/help",
+            "/help/set-default-hourly-rate",
+            "/help/set-default-lesson-duration",
+            "/help/set-default-currency"
+          ]
+        },
+        {
+          "name": "/articles",
+          "count": 40,
+          "sample": [
+            "/articles",
+            "/articles/private-tutor-tax-guide-uk",
+            "/articles/do-private-tutors-need-insurance-uk",
+            "/articles/how-to-use-google-calendar-for-tutoring"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing"
+          ]
+        },
+        {
+          "name": "/how",
+          "count": 1,
+          "sample": [
+            "/how"
+          ]
+        },
+        {
+          "name": "/contact",
+          "count": 1,
+          "sample": [
+            "/contact"
+          ]
+        },
+        {
+          "name": "/signup",
+          "count": 1,
+          "sample": [
+            "/signup"
+          ]
+        },
+        {
+          "name": "/how-it-works",
+          "count": 1,
+          "sample": [
+            "/how-it-works"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

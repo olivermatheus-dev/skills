@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:59:08Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.teachworks.com/"
+    },
+    {
+      "url": "https://www.teachworks.com/about"
+    },
+    {
+      "url": "https://www.teachworks.com/pricing"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Software de gestão para tutoria, escolas de música e idiomas, de tutor solo a redes",
+    "text": "Plataforma web (desde 2014, Canadá) para negócios de ensino: agenda de aulas individuais e em grupo, ficha do aluno, cobrança de clientes, folha/pagamento de professores, comunicação e várias unidades. Modular, mais de 60 integrações (Stripe, QuickBooks). Preço por assinatura base mais valor por aula de aluno, com teste grátis de 21 dias.",
+    "audience": "empresas de tutoria, escolas de música, idiomas e preparatórios, de solo a multi-unidade",
+    "positioning": "The Platform That Started It All. Teach more, manage less.",
+    "size": "não declarado"
+  }
+}

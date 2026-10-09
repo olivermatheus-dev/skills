@@ -1,0 +1,35 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:58:22Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.instagram.com/tutonhq/"
+    },
+    {
+      "url": "https://tuton.io/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://tuton.io",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/tutonhq/",
+        "handle": "tutonhq",
+        "note": "bio cita 'all-in-one platform for independent language tutors' e linka tuton.io"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "facebook",
+      "linkedin",
+      "tiktok"
+    ]
+  }
+}

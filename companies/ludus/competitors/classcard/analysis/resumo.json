@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:17:00Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.classcardapp.com/"
+    },
+    {
+      "url": "https://www.classcardapp.com/pricing"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de aulas para estúdios e academias: agenda, presença, reserva online e app de marca",
+    "text": "Software de gestão de aulas para estúdios, academias e instrutores independentes. Agenda, presença com autocheck-in, reserva e pagamento online, lembretes automáticos, e-mails segmentados e app de marca para o aluno via link (adicionar à tela inicial, sem loja). Planos pagos a partir de US$ 99/mês com alunos e equipe ilimitados, teste de 7 dias sem cartão. Foco em negócio com equipe e vendas online, mais que em professor solo.",
+    "audience": "estúdios, academias e pequenos negócios de aulas (inclui instrutores independentes no plano Starter)",
+    "positioning": "The simplest way to manage your classes",
+    "size": "mais de 3.000 provedores (declarado no contexto do radar; não confirmado no site baixado)"
+  }
+}

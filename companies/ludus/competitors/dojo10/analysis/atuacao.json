@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:49Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://dojo10.com/",
+      "title": "Home Dojo10"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "Site em pt-BR com seletor de idioma, preços em R$, Pix/boleto, CNPJ brasileiro (10.672.775/0001-67). WhatsApp de contato tem DDI +351 (Portugal), indício de operação ou equipe lá; não confirmado."
+  }
+}

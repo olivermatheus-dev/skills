@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:16Z",
+  "platform": "site",
+  "profileUrl": "https://aula.ensinaapp.com.br",
+  "source": "html",
+  "profile": {
+    "name": "EnsinaApp",
+    "handle": "aula.ensinaapp.com.br",
+    "bio": "Painel completo pra professora particular: alunos agendam sozinhos, pagam por PIX, conversam por chat interno (texto/áudio/vídeo), recebem materiais, exercícios corrigidos, flashcards e lembretes automáticos. Saia do WhatsApp. 14 dias grátis sem cartão.",
+    "avatar": "https://aula.ensinaapp.com.br/apple-icon?45924645ab74bcf2",
+    "avatarLocal": "media/site-aula-ensinaapp-com-br/avatar-a756b92e.png",
+    "banner": "https://aula.ensinaapp.com.br/opengraph-image?09345f0cfed8cc3e",
+    "bannerLocal": "media/site-aula-ensinaapp-com-br/banner-46bf48e2.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

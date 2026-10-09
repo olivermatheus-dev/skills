@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:19:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://paperbell.com/faq/"
+    },
+    {
+      "url": "https://paperbell.com/pricing/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Estados Unidos"
+    ],
+    "languages": [
+      "en-US"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "site só em inglês, preços em US$, suporte em inglês; FAQ cita várias moedas via Stripe, mas não há pt-BR nem menção ao Brasil"
+  }
+}

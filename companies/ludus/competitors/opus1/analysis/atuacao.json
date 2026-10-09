@@ -1,0 +1,30 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:19:17Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://opus1.io/"
+    },
+    {
+      "url": "https://opus1.io/about/contact/"
+    },
+    {
+      "url": "https://opus1.io/pricing/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Estados Unidos"
+    ],
+    "languages": [
+      "en-US"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "Site só em inglês, preços em US$, endereço em Marshfield, MA, fundador da Bay Area, pagamentos por cartão/ACH/cheque. Sem menção ao Brasil nem pt-BR."
+  }
+}

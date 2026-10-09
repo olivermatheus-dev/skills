@@ -1,0 +1,59 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:51:42Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://alunoemdia.com.br/",
+      "title": "Aluno Em Dia — Sistema para Personal Trainer, Professor e Academia"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://alunoemdia.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://alunoemdia.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Aluno Em Dia — Sistema para Personal Trainer, Professor e Academia",
+        "chars": 7946
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 46,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 40,
+          "sample": [
+            "/blog",
+            "/blog/pilar/organizacao",
+            "/blog/pilar/retencao",
+            "/blog/pilar/jiu-jitsu"
+          ]
+        },
+        {
+          "name": "/para",
+          "count": 5,
+          "sample": [
+            "/para/personal-trainer",
+            "/para/professor-jiu-jitsu",
+            "/para/professor-musculacao",
+            "/para/professor-lutas"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

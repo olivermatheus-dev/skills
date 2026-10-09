@@ -1,0 +1,24 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:19Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemagalileu.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, .com.br, CNPJ e sede em Ourinhos/SP, clientes em 26 estados do Brasil"
+  }
+}

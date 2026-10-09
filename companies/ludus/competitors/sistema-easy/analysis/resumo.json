@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:17:40Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemaeasy.com.br/",
+      "title": "Sistema Easy"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de alunos, aulas, finanças e material para escolas de idiomas e cursos livres",
+    "text": "Sistema web para escolas de idiomas e cursos livres: alunos (histórico, ausências, nível, documentos), aulas e cursos, financeiro (EasyPay), relatórios, colaboradores, livros didáticos e biblioteca. Inclui website para a escola e suporte dedicado. Foco em escola/gestor, não em professor autônomo. Sem preço público; entrada por avaliação gratuita.",
+    "audience": "escolas de idiomas e cursos livres (pequeno a grande porte)",
+    "positioning": "Sistema de gestão completo para escolas de idiomas e cursos livres",
+    "size": "não informado no site"
+  }
+}

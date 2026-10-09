@@ -1,0 +1,95 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:38:58Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://beaky.com.br/",
+    "hero": {
+      "headline": "A plataforma do professor particular.",
+      "subheadline": "Organize alunos, aulas recorrentes, pagamentos, reposições, lições e mais; alunos acompanham tudo pelo app.",
+      "cta": "Testar grátis por 21 dias",
+      "visual": "painel do professor com agenda e receita ao lado do app do aluno"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "A plataforma do professor particular",
+        "summary": "promessa + trial de 21 dias"
+      },
+      {
+        "type": "features",
+        "title": "Tudo que o aluno precisa entre uma aula e outra",
+        "summary": "app do aluno"
+      },
+      {
+        "type": "features",
+        "title": "Lições que corrigem na hora",
+        "summary": "4 passos, 100 níveis"
+      },
+      {
+        "type": "features",
+        "title": "Sua semana inteira em uma tela",
+        "summary": "agenda, receita, reposição"
+      },
+      {
+        "type": "features",
+        "title": "Menos tempo organizando",
+        "summary": "plano de estudos, IA, reposição"
+      },
+      {
+        "type": "depoimentos",
+        "title": "O que professores e alunos contam",
+        "summary": "mensagens de WhatsApp, Instagram, Threads"
+      },
+      {
+        "type": "comparativo",
+        "title": "O que a Beaky reúne em um só produto",
+        "summary": "vs Notion, Classroom, outras"
+      },
+      {
+        "type": "precos",
+        "title": "Planos que crescem com a sua turma",
+        "summary": "4 planos por número de alunos"
+      },
+      {
+        "type": "faq",
+        "title": "Antes de começar",
+        "summary": "7 perguntas"
+      },
+      {
+        "type": "cta",
+        "title": "Organize suas aulas e convide seus alunos",
+        "summary": "trial de 21 dias"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "suporte, comparações, legal, CNPJ"
+      }
+    ],
+    "ctas": [
+      "Testar grátis por 21 dias",
+      "Encontrar professores",
+      "Falar com a Beaky"
+    ],
+    "socialProof": [
+      "5 depoimentos de professores e alunos",
+      "link para o Instagram da marca"
+    ],
+    "interesting": [
+      "depoimentos como mensagens reais",
+      "tabela comparativa contra Notion e Classroom",
+      "plano \"Mais escolhido\" (Pro)",
+      "bônus de IA de lançamento",
+      "app do aluno como argumento central"
+    ],
+    "tone": "profissional e acolhedor, focado em organização e menos trabalho repetitivo"
+  }
+}

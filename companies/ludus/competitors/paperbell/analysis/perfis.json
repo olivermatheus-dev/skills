@@ -1,0 +1,44 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:19:38Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://paperbell.com/",
+      "title": "Paperbell home (links do rodapé)"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://paperbell.com",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/bypaperbell/",
+        "handle": "bypaperbell",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/lovepaperbell",
+        "handle": "lovepaperbell",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/bypaperbell",
+        "handle": "bypaperbell",
+        "note": "linkado no site oficial (twitter.com/bypaperbell)"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}

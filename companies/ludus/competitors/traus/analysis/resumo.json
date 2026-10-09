@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:17:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://traus.com.br/"
+    },
+    {
+      "url": "https://traus.com.br/sobre"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Sistema de gestão para escolas e estúdios de cursos livres (idiomas, música, dança, natação).",
+    "text": "Sistema em nuvem para a secretaria de escolas de curso livre: matrícula, financeiro com cobrança recorrente, contratos, diário de classe, frequência e portal/app do aluno. Vende implantação guiada com migração de planilhas, teste de 15 dias sem cartão e sem fidelidade. Foco em escola/estúdio com equipe, não no professor solo. Declara +8 anos de mercado; sem preço público na home.",
+    "audience": "institutos, estúdios e escolas de cursos livres, de poucas dezenas a milhares de alunos",
+    "positioning": "Especialista no seu segmento, não um sistema genérico de colégio",
+    "size": "+8 anos (declarado no site); cliente desde 2017 citado em depoimento"
+  }
+}

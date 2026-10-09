@@ -1,0 +1,34 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:16:49Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.tutonomi.com/"
+    },
+    {
+      "url": "https://www.tutonomi.com/pricing"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Reino Unido",
+      "Estados Unidos",
+      "Canadá",
+      "Austrália"
+    ],
+    "languages": [
+      "en"
+    ],
+    "currencies": [
+      "USD",
+      "CAD",
+      "GBP",
+      "AUD",
+      "EUR"
+    ],
+    "evidence": "Site só em inglês (grafia britânica, 'pupils'), moedas USD/CAD/GBP/AUD/EUR, guias de imposto e seguro do Reino Unido; sem pt-BR, BRL nem menção ao Brasil."
+  }
+}

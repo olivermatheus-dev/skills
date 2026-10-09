@@ -1,0 +1,48 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:06:50Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.classcardapp.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "careers@classcardapp.com"
+    ],
+    "phones": [
+      "65 8574 0181"
+    ],
+    "whatsapp": [
+      "+14158401211"
+    ],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/classcardapp/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/classcardapp"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/classcard"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/classcardapp"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/channel/UCTeEFzU2WCd_iOUhudHRkSg"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/sharmilshah/"
+      }
+    ]
+  }
+}

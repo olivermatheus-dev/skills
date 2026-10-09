@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:58:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://emusys.com.br/"
+    },
+    {
+      "url": "https://emusys.com.br/sobre/"
+    },
+    {
+      "url": "https://emusys.com.br/planos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Sistema de gestão completo só para escolas de música (agenda, financeiro, CRM, apps)",
+    "text": "ERP/CRM para escolas de música: agenda integrada, alunos, professores com repasses, financeiro, cobrança de mensalidades, CRM de matrículas e apps de aluno e professor. Fala com o dono/gestor da escola, não com o professor autônomo. Plano único com todos os módulos, preço por faixa de alunos ativos (ex.: R$ 348/mês de 101 a 150 alunos) mais implantação de R$ 289. Diferenciais: foco exclusivo em música, implantação guiada, suporte por WhatsApp, sem fidelidade. Fundada em 2017 em Florianópolis (SC).",
+    "audience": "donos e gestores de escolas de música",
+    "positioning": "O sistema de gestão nr. 1 para escolas de música",
+    "size": "1.300 escolas e 133,5 mil alunos (declarado no site)"
+  }
+}

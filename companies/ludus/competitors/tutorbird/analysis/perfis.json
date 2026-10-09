@@ -1,0 +1,53 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:58:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.tutorbird.com/",
+      "title": "Site oficial (rodapé linka as redes)"
+    },
+    {
+      "url": "https://linkedin.com/company/tutorbird",
+      "title": "LinkedIn TutorBird"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.tutorbird.com",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/tutorbirdapp/",
+        "handle": "tutorbirdapp",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/TutorBirdApp",
+        "handle": "TutorBirdApp",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/tutorbird/",
+        "handle": "tutorbird",
+        "note": "linkado no site; página da empresa em Burlington, Ontario"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@TutorBird",
+        "handle": "TutorBird",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "x"
+    ]
+  }
+}

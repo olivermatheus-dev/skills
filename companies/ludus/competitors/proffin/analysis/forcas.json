@@ -1,0 +1,67 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:38:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    },
+    {
+      "url": "https://proffin.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Entrada grátis sem cartão",
+        "evidence": "plano Gratuito R$ 0 com até 20 alunos e financeiro completo"
+      },
+      {
+        "point": "Premium barato",
+        "evidence": "R$ 28/mês (de R$ 50 riscado), cancele quando quiser"
+      },
+      {
+        "point": "Foco claro no financeiro do professor particular",
+        "evidence": "extrato, previsão de recebimentos, relatórios e gráficos"
+      },
+      {
+        "point": "Suporte humano e rápido",
+        "evidence": "resposta em até 4 h no Premium; depoimento cita suporte presente e humano"
+      },
+      {
+        "point": "Tração com uso longo",
+        "evidence": "depoimento de usuária há 3 anos; 4 depoimentos de professoras de inglês"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Produto estreito: só alunos, agenda e financeiro",
+        "evidence": "sem vídeo, WhatsApp, materiais, pacote/crédito listados no site"
+      },
+      {
+        "point": "Área do Aluno ainda em desenvolvimento",
+        "evidence": "item marcado em desenvolvimento no plano Premium, já vendido"
+      },
+      {
+        "point": "Operação de uma pessoa só",
+        "evidence": "contato por e-mail pessoal (gmail) e WhatsApp do fundador"
+      },
+      {
+        "point": "Site simples, sem prints do produto, FAQ ou garantia",
+        "evidence": "home e preços repetem o mesmo conteúdo; prova social só em texto"
+      },
+      {
+        "point": "Limite de 20 alunos pode frustrar quem cresce",
+        "evidence": "plano grátis limitado a 20 alunos ativos"
+      }
+    ],
+    "opportunities": [
+      "Ludus entrega a aula inteira (agenda, plano, materiais, vídeo, pacote/crédito) onde o Proffin é só financeiro",
+      "Link do aluno sem login já funciona no Ludus; o portal do Proffin ainda está em desenvolvimento",
+      "Mensagens prontas no WhatsApp e cobrança de falta por regra não aparecem no Proffin",
+      "Referência de preço: grátis até 20 alunos e R$ 28 no Premium; o Ludus precisa de entrada grátis ou barata comparável",
+      "Acabamento e confiança (marca, prova real, prints) contra um site básico de dev solo"
+    ]
+  }
+}

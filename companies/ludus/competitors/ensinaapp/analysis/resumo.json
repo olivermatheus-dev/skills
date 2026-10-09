@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:40:38Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Painel para professora particular: agenda, PIX, chat, materiais e lembretes.",
+    "text": "Vende um painel único para a professora autônoma sair do WhatsApp: o aluno agenda sozinho numa página pública, paga por PIX/cartão (InfinitePay) em pacotes de 4 ou 8 aulas e recebe materiais, exercícios e lembretes. Cobra por faixa de alunos ativos (R$ 47 a R$ 197/mês), sem comissão. Diferencial: ferramentas de ensino dentro do painel (flashcards, quizzes, exercícios de código).",
+    "audience": "professoras particulares de idiomas, música, reforço e programação",
+    "positioning": "Suas aulas merecem mais que o WhatsApp.",
+    "size": "não declarado no site"
+  }
+}

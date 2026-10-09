@@ -1,0 +1,162 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:05:57Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://30pay.com.br/",
+      "title": "30pay | Cobrança e gestão escolar com implantação gratuita"
+    },
+    {
+      "url": "https://30pay.com.br/sobre-30pay.html",
+      "title": "Sobre o 30pay | 30pay"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://30pay.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://30pay.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "30pay | Cobrança e gestão escolar com implantação gratuita",
+        "chars": 9214
+      },
+      {
+        "url": "https://30pay.com.br/sobre-30pay.html",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre o 30pay | 30pay",
+        "chars": 2673
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 17,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/privacidade.html",
+          "count": 1,
+          "sample": [
+            "/privacidade.html"
+          ]
+        },
+        {
+          "name": "/termos.html",
+          "count": 1,
+          "sample": [
+            "/termos.html"
+          ]
+        },
+        {
+          "name": "/app-pais-comunicacao-escolar.html",
+          "count": 1,
+          "sample": [
+            "/app-pais-comunicacao-escolar.html"
+          ]
+        },
+        {
+          "name": "/blog.html",
+          "count": 1,
+          "sample": [
+            "/blog.html"
+          ]
+        },
+        {
+          "name": "/cobranca-mensalidades-whatsapp.html",
+          "count": 1,
+          "sample": [
+            "/cobranca-mensalidades-whatsapp.html"
+          ]
+        },
+        {
+          "name": "/controle-mensalidades-escolares.html",
+          "count": 1,
+          "sample": [
+            "/controle-mensalidades-escolares.html"
+          ]
+        },
+        {
+          "name": "/controle-presenca-diario-classe.html",
+          "count": 1,
+          "sample": [
+            "/controle-presenca-diario-classe.html"
+          ]
+        },
+        {
+          "name": "/gestao-financeira-escolas.html",
+          "count": 1,
+          "sample": [
+            "/gestao-financeira-escolas.html"
+          ]
+        },
+        {
+          "name": "/matricula-contrato-digital.html",
+          "count": 1,
+          "sample": [
+            "/matricula-contrato-digital.html"
+          ]
+        },
+        {
+          "name": "/mensagem-cobranca-mensalidade-atrasada.html",
+          "count": 1,
+          "sample": [
+            "/mensagem-cobranca-mensalidade-atrasada.html"
+          ]
+        },
+        {
+          "name": "/nfse-escolas.html",
+          "count": 1,
+          "sample": [
+            "/nfse-escolas.html"
+          ]
+        },
+        {
+          "name": "/organizar-matricula-curso-livre.html",
+          "count": 1,
+          "sample": [
+            "/organizar-matricula-curso-livre.html"
+          ]
+        },
+        {
+          "name": "/regua-cobranca-escolar.html",
+          "count": 1,
+          "sample": [
+            "/regua-cobranca-escolar.html"
+          ]
+        },
+        {
+          "name": "/sistema-escola-infantil.html",
+          "count": 1,
+          "sample": [
+            "/sistema-escola-infantil.html"
+          ]
+        },
+        {
+          "name": "/sobre-30pay.html",
+          "count": 1,
+          "sample": [
+            "/sobre-30pay.html"
+          ]
+        },
+        {
+          "name": "/solucoes.html",
+          "count": 1,
+          "sample": [
+            "/solucoes.html"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

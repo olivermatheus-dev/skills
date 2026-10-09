@@ -1,0 +1,27 @@
+tags:
+  # Tipo de fonte (concorrentes e referências do radar)
+  - { id: sistema-professor, label: "Sistema para professor", color: '#64748b', definicao: "Software de gestão feito para o professor particular ou autônomo." }
+  - { id: sistema-escola, label: "Sistema para escola", color: '#64748b', definicao: "Software de gestão para escola ou curso com equipe." }
+  - { id: vizinho, label: "Vizinho de nicho", color: '#64748b', definicao: "Mesmo problema em outro ofício (personal trainer, luta, dança)." }
+  - { id: marketplace, label: "Marketplace de aula", color: '#64748b', definicao: "Vitrine que liga aluno a professor; não é gestão." }
+  - { id: musica, label: "Música", color: '#64748b', definicao: "Foco em aula ou escola de música." }
+  - { id: idiomas, label: "Idiomas", color: '#64748b', definicao: "Foco em aula ou escola de idiomas." }
+  - { id: mentoria-professor, label: "Mentoria de professor", color: '#64748b', definicao: "Criador que vende mentoria ou curso sobre o ofício de professor (captar, cobrar, organizar)." }
+  # Grupo "tema": assunto do conteúdo do concorrente (ficha de análise). Termo novo é proposto pela IA e aceito pelo Oliver.
+  - { id: rotina-do-professor, label: "Rotina do professor", color: '#6366f1', grupo: tema, definicao: "O dia a dia de preparar, dar e fechar as aulas." }
+  - { id: financeiro-cobranca, label: "Financeiro e cobrança", color: '#6366f1', grupo: tema, definicao: "Preço da aula, pacote, cobrança, Pix, recibo, imposto." }
+  - { id: agenda-e-faltas, label: "Agenda e faltas", color: '#6366f1', grupo: tema, definicao: "Marcar, remarcar, reposição e falta do aluno." }
+  - { id: didatica-e-material, label: "Didática e material", color: '#6366f1', grupo: tema, definicao: "Como ensinar, planejar e montar material." }
+  - { id: carreira-e-captacao, label: "Carreira e captação", color: '#6366f1', grupo: tema, definicao: "Conseguir alunos, preço da aula, crescer como professor." }
+  - { id: ferramentas-e-ia, label: "Ferramentas e IA", color: '#6366f1', grupo: tema, definicao: "Software, apps e inteligência artificial para dar aula." }
+  # Grupo "angulo": a promessa/motivo de compra de um anúncio.
+  - { id: carga-mental, label: "Carga mental", color: '#f59e0b', grupo: angulo, definicao: "Lembrar de tudo ao mesmo tempo; tirar a escola da cabeça." }
+  - { id: ganho-de-tempo, label: "Ganho de tempo", color: '#f59e0b', grupo: angulo, definicao: "Menos tempo em administração." }
+  - { id: dinheiro-em-dia, label: "Dinheiro em dia", color: '#f59e0b', grupo: angulo, definicao: "Saber quem pagou, cobrar sem constrangimento." }
+  - { id: automacao, label: "Automação", color: '#f59e0b', grupo: angulo, definicao: "Cobrança, lembrete ou confirmação que acontece sozinha." }
+  - { id: gratuito-sem-risco, label: "Grátis e sem risco", color: '#f59e0b', grupo: angulo, definicao: "Plano grátis, teste, sem cartão." }
+  - { id: profissionalismo, label: "Profissionalismo", color: '#f59e0b', grupo: angulo, definicao: "Parecer escola séria para o aluno." }
+  # Grupo "publico": para quem o conteúdo fala.
+  - { id: professor-independente, label: "Professor independente", color: '#10b981', grupo: publico, definicao: "Dá aula por conta própria, sem equipe; o público do MVP." }
+  - { id: pequena-escola, label: "Pequena escola", color: '#10b981', grupo: publico, definicao: "Começou sozinho ou com equipe pequena." }
+  - { id: aluno-e-responsavel, label: "Aluno e responsável", color: '#10b981', grupo: publico, definicao: "Quem faz a aula ou paga por ela." }

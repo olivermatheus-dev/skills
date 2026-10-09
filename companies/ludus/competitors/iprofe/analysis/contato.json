@@ -1,0 +1,28 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:36:18Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@iprofe.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/iprofewebapp/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/channel/UCDJ1548_Z5Dr_Zx0F9cahNA"
+      }
+    ]
+  }
+}

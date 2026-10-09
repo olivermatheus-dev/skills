@@ -1,0 +1,101 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:38:50Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://www.iorclass.com.br/",
+    "hero": {
+      "headline": "O primeiro e único software para professores particulares que organiza aulas, finanças e conecta alunos",
+      "subheadline": "Descubra como professores particulares estão ganhando tempo, dinheiro e praticidade sem precisar de planilhas",
+      "cta": "Quero melhorar minha gestão"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "O primeiro e único software para professores particulares",
+        "summary": "Promessa de aulas, finanças e alunos conectados, teste de 1 mês grátis"
+      },
+      {
+        "type": "features",
+        "title": "Tudo em um único lugar",
+        "summary": "4 blocos: aplicativo do aluno, calendário, relatórios, gestão financeira"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Olha a reação dos professores",
+        "summary": "Reações em imagem/vídeo, sem texto no HTML"
+      },
+      {
+        "type": "problema",
+        "title": "Professor, você tem apego em preencher planilhas?",
+        "summary": "Ataca a planilha: perde tempo para achar e preencher dados"
+      },
+      {
+        "type": "beneficios",
+        "title": "Para quem a iorCLASS foi feita",
+        "summary": "Lista de perfis e também de quem não é (escolas, ensino regular)"
+      },
+      {
+        "type": "features",
+        "title": "Veja o que tem na iorCLASS",
+        "summary": "14 funcionalidades em lista: app do aluno, grupos, plano de aula, financeiro, contratos, vendas, arquivos, relatórios"
+      },
+      {
+        "type": "prova-social",
+        "title": "Veja alguns resultados de professores",
+        "summary": "Resultados em imagem, sem números no texto"
+      },
+      {
+        "type": "precos",
+        "title": "Semestral, anual, mensal",
+        "summary": "3 cards: R$ 415, R$ 717 e R$ 99, todos com 1 mês grátis"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Como utilizar no seu dispositivo",
+        "summary": "Navegador, PWA e app Android"
+      },
+      {
+        "type": "fundador",
+        "title": "Carol Hends",
+        "summary": "Professora de canto e idealizadora"
+      },
+      {
+        "type": "faq",
+        "title": "Dúvidas frequentes",
+        "summary": "5 perguntas: acesso, preço pós-teste, cancelamento, segurança, dificuldade de organização"
+      },
+      {
+        "type": "cta",
+        "title": "Chega de desculpas",
+        "summary": "Fecho com teste de 1 mês grátis"
+      }
+    ],
+    "ctas": [
+      "Quero melhorar minha gestão",
+      "Quero testar agora por 1 mês grátis",
+      "Quero organizar minhas aulas agora!",
+      "Me cadastrar"
+    ],
+    "socialProof": [
+      "Depoimentos e resultados de professores (em imagem, sem números)",
+      "Fundadora professora há mais de 6 anos"
+    ],
+    "interesting": [
+      "Seção de para quem não é deixa o público claro e filtra",
+      "Inimigo claro: a planilha",
+      "1 mês grátis mesmo no plano anual",
+      "Âncora de desconto por ciclo (30% e 40%) com selo melhor preço",
+      "Fundadora do nicho como autoridade",
+      "Instalação explicada em 3 caminhos (navegador, PWA, loja)"
+    ],
+    "tone": "Direto e comercial, caixa alta nos títulos, foco em tempo, dinheiro e praticidade."
+  }
+}

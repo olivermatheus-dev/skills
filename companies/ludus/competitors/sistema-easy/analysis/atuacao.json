@@ -1,0 +1,23 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:17:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemaeasy.com.br/",
+      "title": "Sistema Easy"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [],
+    "evidence": "site só em pt-BR, domínio .com.br, CNPJ e sede em Maringá/PR; sem preços públicos"
+  }
+}

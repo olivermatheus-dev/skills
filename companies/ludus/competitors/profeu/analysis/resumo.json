@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:40:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    },
+    {
+      "url": "https://profeu.com.br/sobre"
+    },
+    {
+      "url": "https://profeu.com.br/termos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de aulas particulares com agenda, cobrança e IA pedagógica, operada pelo Telegram",
+    "text": "Sistema para professores particulares de idiomas, música, reforço e educação inclusiva. Vende agenda automática, cobrança com fatura e link Pix, lembretes e IA que gera plano de aula e relatório. Diferencial: opera por bot do Telegram, sem baixar app; lembrete por WhatsApp ainda \"em breve\". Entrada barata: grátis até 5 alunos, pago a partir de R$ 9,90/mês.",
+    "audience": "professores particulares autônomos e pequenos espaços pedagógicos",
+    "positioning": "Sua rotina de professor no piloto automático",
+    "size": "+10 mil aulas, nota 4.8/5 (declarado no site, sem fonte)"
+  }
+}

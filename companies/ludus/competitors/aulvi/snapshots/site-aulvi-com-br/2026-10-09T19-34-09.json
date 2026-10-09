@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:09Z",
+  "platform": "site",
+  "profileUrl": "https://aulvi.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Aulvi",
+    "handle": "aulvi.com.br",
+    "bio": "Agenda, confirmação de aulas e recibos com PIX — o Aulvi é feito para professores particulares.",
+    "avatar": "https://aulvi.com.br/favicon.ico",
+    "avatarLocal": "media/site-aulvi-com-br/avatar-99dd3a74.ico",
+    "banner": "https://aulvi.com.br/landing/opengraph-image?64157222fa15e66c",
+    "bannerLocal": "media/site-aulvi-com-br/banner-479b4cf4.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

@@ -1,0 +1,52 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:16:55Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.classcardapp.com/",
+      "title": "Site Classcard (rodapé com redes)"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.classcardapp.com",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/classcardapp/",
+        "handle": "classcardapp",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/channel/UCTeEFzU2WCd_iOUhudHRkSg",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/classcardapp",
+        "handle": "classcardapp",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/classcard",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/classcardapp",
+        "handle": "classcardapp",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

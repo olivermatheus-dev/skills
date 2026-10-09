@@ -1,0 +1,364 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:54:33Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.teachworks.com/",
+      "title": "Teachworks"
+    },
+    {
+      "url": "https://www.teachworks.com/pricing",
+      "title": "Plans for Education Companies of All Sizes | Teachworks"
+    },
+    {
+      "url": "https://www.teachworks.com/features/overview",
+      "title": "Overview | Teachworks"
+    },
+    {
+      "url": "https://www.teachworks.com/about",
+      "title": "About Us | Teachworks"
+    },
+    {
+      "url": "https://www.teachworks.com/contact",
+      "title": "Contact Us | Teachworks"
+    },
+    {
+      "url": "https://www.teachworks.com/faq",
+      "title": "Frequently Asked Questions | Teachworks"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.teachworks.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.teachworks.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Teachworks",
+        "chars": 5724
+      },
+      {
+        "url": "https://www.teachworks.com/pricing",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Plans for Education Companies of All Sizes | Teachworks",
+        "chars": 4551
+      },
+      {
+        "url": "https://www.teachworks.com/features/overview",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Overview | Teachworks",
+        "chars": 992
+      },
+      {
+        "url": "https://www.teachworks.com/about",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "About Us | Teachworks",
+        "chars": 2665
+      },
+      {
+        "url": "https://www.teachworks.com/contact",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contact Us | Teachworks",
+        "chars": 1643
+      },
+      {
+        "url": "https://www.teachworks.com/faq",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Frequently Asked Questions | Teachworks",
+        "chars": 13186
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 148,
+      "groups": [
+        {
+          "name": "/addons",
+          "count": 74,
+          "sample": [
+            "/addons/2-factor-authentication",
+            "/addons/2-way-sync-for-google-calendar",
+            "/addons/activity-logs",
+            "/addons/api"
+          ]
+        },
+        {
+          "name": "/tutorials",
+          "count": 14,
+          "sample": [
+            "/tutorials/all",
+            "/tutorials/video/completing-lessons",
+            "/tutorials/video/deleting-lessons",
+            "/tutorials/video/employees"
+          ]
+        },
+        {
+          "name": "/features",
+          "count": 9,
+          "sample": [
+            "/features/billing",
+            "/features/calendar",
+            "/features/communication",
+            "/features/customize"
+          ]
+        },
+        {
+          "name": "/demo",
+          "count": 6,
+          "sample": [
+            "/demo/welcome",
+            "/demo/website-booking",
+            "/demo/custom-forms",
+            "/demo/website-profiles"
+          ]
+        },
+        {
+          "name": "/getting-started",
+          "count": 4,
+          "sample": [
+            "/getting-started/automate",
+            "/getting-started/customize",
+            "/getting-started/introduction",
+            "/getting-started/wrap-up"
+          ]
+        },
+        {
+          "name": "/tools",
+          "count": 4,
+          "sample": [
+            "/tools/driving-school-name-generator",
+            "/tools/language-school-name-generator",
+            "/tools/music-school-name-generator",
+            "/tools/tutoring-business-name-generator"
+          ]
+        },
+        {
+          "name": "/calculators",
+          "count": 4,
+          "sample": [
+            "/calculators/language-school-business-plan-profit",
+            "/calculators/music-school-business-plan-profit",
+            "/calculators/tutoring-business-plan-profit",
+            "/calculators/tutoring-time-savings-calculator"
+          ]
+        },
+        {
+          "name": "/business-academy",
+          "count": 3,
+          "sample": [
+            "/business-academy/business-coaches",
+            "/business-academy/business-owners",
+            "/business-academy"
+          ]
+        },
+        {
+          "name": "/offers",
+          "count": 3,
+          "sample": [
+            "/offers/educators-guide-to-efficient-scheduling",
+            "/offers/educators-guide-to-productivity",
+            "/offers/how-to-make-your-teaching-business-franchisable"
+          ]
+        },
+        {
+          "name": "/about",
+          "count": 1,
+          "sample": [
+            "/about"
+          ]
+        },
+        {
+          "name": "/careers",
+          "count": 1,
+          "sample": [
+            "/careers"
+          ]
+        },
+        {
+          "name": "/contact",
+          "count": 1,
+          "sample": [
+            "/contact"
+          ]
+        },
+        {
+          "name": "/cookies",
+          "count": 1,
+          "sample": [
+            "/cookies"
+          ]
+        },
+        {
+          "name": "/driving-school-management-software",
+          "count": 1,
+          "sample": [
+            "/driving-school-management-software"
+          ]
+        },
+        {
+          "name": "/faq",
+          "count": 1,
+          "sample": [
+            "/faq"
+          ]
+        },
+        {
+          "name": "/language-school-management-software",
+          "count": 1,
+          "sample": [
+            "/language-school-management-software"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/music-school-management-software",
+          "count": 1,
+          "sample": [
+            "/music-school-management-software"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing"
+          ]
+        },
+        {
+          "name": "/privacy",
+          "count": 1,
+          "sample": [
+            "/privacy"
+          ]
+        },
+        {
+          "name": "/reviews",
+          "count": 1,
+          "sample": [
+            "/reviews"
+          ]
+        },
+        {
+          "name": "/closed",
+          "count": 1,
+          "sample": [
+            "/closed/success"
+          ]
+        },
+        {
+          "name": "/terms",
+          "count": 1,
+          "sample": [
+            "/terms"
+          ]
+        },
+        {
+          "name": "/test-preparation-school-management",
+          "count": 1,
+          "sample": [
+            "/test-preparation-school-management"
+          ]
+        },
+        {
+          "name": "/thank-you",
+          "count": 1,
+          "sample": [
+            "/thank-you"
+          ]
+        },
+        {
+          "name": "/tutoring-management-software",
+          "count": 1,
+          "sample": [
+            "/tutoring-management-software"
+          ]
+        },
+        {
+          "name": "/association-partnerships",
+          "count": 1,
+          "sample": [
+            "/association-partnerships"
+          ]
+        },
+        {
+          "name": "/teaching-business-software",
+          "count": 1,
+          "sample": [
+            "/teaching-business-software"
+          ]
+        },
+        {
+          "name": "/ai-policy",
+          "count": 1,
+          "sample": [
+            "/ai-policy"
+          ]
+        },
+        {
+          "name": "/book-a-demo",
+          "count": 1,
+          "sample": [
+            "/book-a-demo"
+          ]
+        },
+        {
+          "name": "/teachworks-demo-video",
+          "count": 1,
+          "sample": [
+            "/teachworks-demo-video"
+          ]
+        },
+        {
+          "name": "/referral-program",
+          "count": 1,
+          "sample": [
+            "/referral-program"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/whatsapp",
+          "count": 1,
+          "sample": [
+            "/whatsapp"
+          ]
+        },
+        {
+          "name": "/studio-and-class-management-software",
+          "count": 1,
+          "sample": [
+            "/studio-and-class-management-software"
+          ]
+        },
+        {
+          "name": "/resources",
+          "count": 1,
+          "sample": [
+            "/resources"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:38:52Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/faq"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Aulas recorrentes, individuais e em grupo",
+            "highlight": true
+          },
+          {
+            "name": "Reposição inteligente: aluno remarca em horários liberados pelo professor",
+            "highlight": true
+          },
+          {
+            "name": "Integração com Google Calendar",
+            "highlight": false
+          },
+          {
+            "name": "Calendário personalizado",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Gestão financeira e cobranças agendadas por aluno (Essential+)",
+            "highlight": true
+          },
+          {
+            "name": "Cobrança via Pix",
+            "highlight": false
+          },
+          {
+            "name": "Receita do mês e cobranças marcadas como pagas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "App do aluno",
+        "items": [
+          {
+            "name": "App iOS e Android do aluno: aulas, links, materiais, lições, comunicados",
+            "highlight": true
+          },
+          {
+            "name": "Lembretes 15 min antes e no início da aula",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Lições autocorrigíveis (Pro+)",
+            "highlight": true
+          },
+          {
+            "name": "Jornada de 100 níveis para o aluno",
+            "detail": "gamificação",
+            "highlight": false
+          },
+          {
+            "name": "Flashcards",
+            "highlight": false
+          },
+          {
+            "name": "Páginas customizadas (diário de classe, frequência, planejamento)",
+            "highlight": false
+          },
+          {
+            "name": "Catálogo colaborativo de aulas entre professores (Pro+)",
+            "highlight": false
+          },
+          {
+            "name": "Plano de estudos por aluno ou turma",
+            "highlight": false
+          },
+          {
+            "name": "To-do list, bloquinho de notas, comunicados semanais",
+            "highlight": false
+          },
+          {
+            "name": "Contratos dos alunos (FAQ)",
+            "highlight": false
+          },
+          {
+            "name": "Marketplace \"Encontrar professores\"",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "Gerador de aulas com IA (créditos mensais)",
+            "highlight": true
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "app dedicado ao aluno com lições corrigidas na hora e níveis",
+      "reposição em que o aluno escolhe horário liberado",
+      "IA para gerar aula e lição",
+      "marketplace para captar alunos",
+      "planos por faixa de alunos"
+    ],
+    "missing": [
+      "videochamada própria",
+      "pacote de aulas virando crédito",
+      "regra de cobrança de falta/presença",
+      "acesso do aluno por link sem login",
+      "despesas e relatórios financeiros",
+      "mensagens pelo WhatsApp do professor"
+    ]
+  }
+}

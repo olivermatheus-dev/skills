@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:18:22Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemagalileu.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Software de gestão escolar completo, com página para idiomas e cursos livres, para escolas de todos os portes.",
+    "text": "Gestão financeira, pedagógica e secretaria integradas em 20+ módulos (cobrança automática, matrícula online, NFS-e, assinatura eletrônica, portais e app para pais e professores). Vende por apresentação com especialista, com migração gratuita e implantação assistida. Para idiomas e cursos livres: turmas por nível, frequência, mensalidades, parcelamento e certificados. Foco em escola com secretaria, não em professor solo.",
+    "audience": "escolas de todos os portes, do ensino regular a idiomas, cursos livres e técnico",
+    "positioning": "Planilha, WhatsApp e boleto manual. Isso não é gestão escolar — é sobrevivência.",
+    "size": "+2.000 escolas, +150 mil alunos, 15 anos (declarado no site)"
+  }
+}

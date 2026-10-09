@@ -1,0 +1,137 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:36:53Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/",
+      "title": "Proffin - Aplicativo financeiro para professores particulares"
+    },
+    {
+      "url": "https://proffin.com.br/precos",
+      "title": "Proffin - Aplicativo financeiro para professores particulares"
+    },
+    {
+      "url": "https://proffin.com.br/funcionalidades",
+      "title": "Proffin - Aplicativo financeiro para professores particulares"
+    },
+    {
+      "url": "https://proffin.com.br/quem-somos/",
+      "title": "Quem Somos | Proffin - Sobre nós e nossa história"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://proffin.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://proffin.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Proffin - Aplicativo financeiro para professores particulares",
+        "chars": 4790
+      },
+      {
+        "url": "https://proffin.com.br/precos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Proffin - Aplicativo financeiro para professores particulares",
+        "chars": 4790
+      },
+      {
+        "url": "https://proffin.com.br/funcionalidades",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Proffin - Aplicativo financeiro para professores particulares",
+        "chars": 4790
+      },
+      {
+        "url": "https://proffin.com.br/quem-somos/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Quem Somos | Proffin - Sobre nós e nossa história",
+        "chars": 3981
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 21,
+      "groups": [
+        {
+          "name": "/home",
+          "count": 6,
+          "sample": [
+            "/home/prints/Screenshot%20from%202025-06-06%2023-18-54.png",
+            "/home/prints/print-financeiro.png",
+            "/home/prints/print-previsao.png",
+            "/home/prints/print-aluno.png"
+          ]
+        },
+        {
+          "name": "/app",
+          "count": 4,
+          "sample": [
+            "/app",
+            "/app/configuracoes",
+            "/app/configuracoes/servicos",
+            "/app/configuracoes/senha"
+          ]
+        },
+        {
+          "name": "/cadastro",
+          "count": 3,
+          "sample": [
+            "/cadastro",
+            "/cadastro/"
+          ]
+        },
+        {
+          "name": "/quem-somos",
+          "count": 2,
+          "sample": [
+            "/quem-somos",
+            "/quem-somos/"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 2,
+          "sample": [
+            "/termos/privacidade.html",
+            "/termos/termos-de-uso.html"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/precos",
+          "count": 1,
+          "sample": [
+            "/precos"
+          ]
+        },
+        {
+          "name": "/funcionalidades",
+          "count": 1,
+          "sample": [
+            "/funcionalidades"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

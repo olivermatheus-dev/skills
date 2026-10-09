@@ -1,0 +1,29 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:58:26Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.tutorbird.com/"
+    },
+    {
+      "url": "https://www.tutorbird.com/contact/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Canadá",
+      "Estados Unidos",
+      "Reino Unido"
+    ],
+    "languages": [
+      "en-US"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "site só em inglês, preço em US$, telefones EUA/Canadá/Reino Unido, pagamentos por ACH (EUA) e Bacs (Reino Unido); sem versão pt-BR"
+  }
+}

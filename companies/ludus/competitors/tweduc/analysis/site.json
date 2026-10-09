@@ -1,0 +1,247 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:56:06Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://tweduc.com.br/professor-particular",
+      "title": "Sistema para Professor Particular | Tweduc"
+    },
+    {
+      "url": "https://tweduc.com.br/planos"
+    },
+    {
+      "url": "https://tweduc.com.br/funcionalidades"
+    },
+    {
+      "url": "https://tweduc.com.br/empresa",
+      "title": "Quem Somos | Tweduc"
+    },
+    {
+      "url": "https://tweduc.com.br/contato",
+      "title": "Fale Conosco | Tweduc"
+    },
+    {
+      "url": "https://tweduc.com.br/faq",
+      "title": "Perguntas Frequentes | Tweduc"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://tweduc.com.br/professor-particular",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://tweduc.com.br/professor-particular",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema para Professor Particular | Tweduc",
+        "chars": 2063
+      },
+      {
+        "url": "https://tweduc.com.br/planos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "chars": 578
+      },
+      {
+        "url": "https://tweduc.com.br/funcionalidades",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "chars": 859
+      },
+      {
+        "url": "https://tweduc.com.br/empresa",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Quem Somos | Tweduc",
+        "chars": 1681
+      },
+      {
+        "url": "https://tweduc.com.br/contato",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Fale Conosco | Tweduc",
+        "chars": 1983
+      },
+      {
+        "url": "https://tweduc.com.br/faq",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Perguntas Frequentes | Tweduc",
+        "chars": 2348
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 167,
+      "groups": [
+        {
+          "name": "/blog-detalhe",
+          "count": 145,
+          "sample": [
+            "/blog-detalhe/checklist-erp-pronto-nfs-e-nacional",
+            "/blog-detalhe/nfs-e-nacional-2026-o-que-muda-empresas-de-servicos",
+            "/blog-detalhe/plano-90-dias-reforma-tributaria",
+            "/blog-detalhe/sistemas-legados-reforma-tributaria-adequar-ou-substituir"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/erp-educacional",
+          "count": 1,
+          "sample": [
+            "/erp-educacional"
+          ]
+        },
+        {
+          "name": "/portal-aluno",
+          "count": 1,
+          "sample": [
+            "/portal-aluno"
+          ]
+        },
+        {
+          "name": "/portal-educador",
+          "count": 1,
+          "sample": [
+            "/portal-educador"
+          ]
+        },
+        {
+          "name": "/professor-particular",
+          "count": 1,
+          "sample": [
+            "/professor-particular"
+          ]
+        },
+        {
+          "name": "/educacao-continuada",
+          "count": 1,
+          "sample": [
+            "/educacao-continuada"
+          ]
+        },
+        {
+          "name": "/educacao-empresarial",
+          "count": 1,
+          "sample": [
+            "/educacao-empresarial"
+          ]
+        },
+        {
+          "name": "/ead",
+          "count": 1,
+          "sample": [
+            "/ead"
+          ]
+        },
+        {
+          "name": "/faq",
+          "count": 1,
+          "sample": [
+            "/faq"
+          ]
+        },
+        {
+          "name": "/contato",
+          "count": 1,
+          "sample": [
+            "/contato"
+          ]
+        },
+        {
+          "name": "/blog-list",
+          "count": 1,
+          "sample": [
+            "/blog-list"
+          ]
+        },
+        {
+          "name": "/download-simulador-reforma-tributaria",
+          "count": 1,
+          "sample": [
+            "/download-simulador-reforma-tributaria"
+          ]
+        },
+        {
+          "name": "/empresa",
+          "count": 1,
+          "sample": [
+            "/empresa"
+          ]
+        },
+        {
+          "name": "/comoFunciona",
+          "count": 1,
+          "sample": [
+            "/comoFunciona"
+          ]
+        },
+        {
+          "name": "/loja-virtual",
+          "count": 1,
+          "sample": [
+            "/loja-virtual"
+          ]
+        },
+        {
+          "name": "/recursos",
+          "count": 1,
+          "sample": [
+            "/recursos"
+          ]
+        },
+        {
+          "name": "/lgpd",
+          "count": 1,
+          "sample": [
+            "/lgpd"
+          ]
+        },
+        {
+          "name": "/politicaPrivacidade",
+          "count": 1,
+          "sample": [
+            "/politicaPrivacidade"
+          ]
+        },
+        {
+          "name": "/termodeUso",
+          "count": 1,
+          "sample": [
+            "/termodeUso"
+          ]
+        },
+        {
+          "name": "/educacao-basica",
+          "count": 1,
+          "sample": [
+            "/educacao-basica"
+          ]
+        },
+        {
+          "name": "/educacao-superior",
+          "count": 1,
+          "sample": [
+            "/educacao-superior"
+          ]
+        },
+        {
+          "name": "/criacao-de-site",
+          "count": 1,
+          "sample": [
+            "/criacao-de-site"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

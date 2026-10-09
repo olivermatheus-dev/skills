@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:16:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://agende-me.com/"
+    },
+    {
+      "url": "https://agende-me.com/planos/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preços em R$, Pix e WhatsApp, telefone +55, app na Google Play"
+  }
+}

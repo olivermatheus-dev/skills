@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:58:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tuton.io/"
+    },
+    {
+      "url": "https://tuton.io/pricing"
+    },
+    {
+      "url": "https://tuton.io/schools"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Plataforma para professor de idiomas independente: sala de aula, reservas, alunos e relatório por IA",
+    "text": "Plataforma tudo-em-um para tutores de idiomas independentes: sala de aula própria, página pública de reserva, alunos, biblioteca de 850+ aulas, jogos ao vivo e relatórios de aula escritos por IA. Sem comissão (aluno paga direto ao professor). App de iPhone, Android em breve. Tem versão para escolas de idiomas. Planos a partir de US$ 9/mês, teste de 7 dias sem cartão.",
+    "audience": "tutores de idiomas independentes e pequenas escolas de idiomas",
+    "positioning": "Run your own tutoring business. / You shouldn't need five apps to run a tutoring business.",
+    "size": ""
+  }
+}

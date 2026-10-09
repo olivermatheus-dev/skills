@@ -1,0 +1,49 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:19:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://opus1.io/",
+      "title": "Opus1 home (rodapé/redes)"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://opus1.io",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/opus1.io/",
+        "handle": "opus1.io",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@opus1io262",
+        "handle": "opus1io262",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/opus1.io",
+        "handle": "opus1.io",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/opus1-io",
+        "handle": "opus1-io",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "x"
+    ]
+  }
+}

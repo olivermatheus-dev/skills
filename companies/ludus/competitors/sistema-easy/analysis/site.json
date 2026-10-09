@@ -1,0 +1,47 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:11:49Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.sistemaeasy.com.br/",
+      "title": "Sistema Easy™ — Sistema de gestão para escolas de idiomas e cursos livres"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.sistemaeasy.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.sistemaeasy.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema Easy™ — Sistema de gestão para escolas de idiomas e cursos livres",
+        "chars": 8583
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 3,
+      "groups": [
+        {
+          "name": "/documentos",
+          "count": 2,
+          "sample": [
+            "/documentos/21398/politica-de-privacidade-integracoes-de-terceiros",
+            "/documentos/21399/termos-de-uso-integracoes-de-terceiros"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

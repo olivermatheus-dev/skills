@@ -1,0 +1,70 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:38:46Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Cobre o ciclo completo do professor particular, incluindo captação",
+        "evidence": "Processo de vendas com aula experimental e contratos digitais, além de agenda, financeiro e recibos"
+      },
+      {
+        "point": "Preço baixo no anual e teste longo",
+        "evidence": "1 mês grátis; anual R$ 717 (cerca de R$ 59,75/mês)"
+      },
+      {
+        "point": "Tem app do aluno com notificações e app na Play Store",
+        "evidence": "Aluno vê agenda, anotações, plano de aula e financeiro; notificado nos dias de aula e pagamento"
+      },
+      {
+        "point": "Credibilidade de fundadora do nicho",
+        "evidence": "Idealizadora Carol Hends, professora de canto há mais de 6 anos"
+      },
+      {
+        "point": "Posicionamento claro, com seção de para quem não é",
+        "evidence": "Exclui escolas com vários professores e ensino regular"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Sem videochamada própria",
+        "evidence": "Nenhuma menção a aula online dentro da plataforma"
+      },
+      {
+        "point": "Aluno depende de login/app",
+        "evidence": "Acesso do aluno por Sou Aluno e aplicativo; sem menção a link sem login"
+      },
+      {
+        "point": "Sem cobrança automática nem baixa de pagamento",
+        "evidence": "Financeiro descrito como controle e recibo; sem gateway citado"
+      },
+      {
+        "point": "Sem reembolso de períodos parciais",
+        "evidence": "Os planos mensal, semestral e anual não oferecem reembolso para períodos parciais de uso"
+      },
+      {
+        "point": "Mensal caro frente ao anual",
+        "evidence": "R$ 99 no mensal contra R$ 717 no anual; empurra para pagamento à vista"
+      },
+      {
+        "point": "Site pouco desenvolvido",
+        "evidence": "Home única, sem blog nem comparativo; depoimentos e resultados só em imagem"
+      }
+    ],
+    "opportunities": [
+      "Videochamada ligada à aula: iorCLASS não mostra",
+      "Link sem login e sem app para o aluno (cobrança, confirmar aula, entrar na sala)",
+      "Falta com regra de cobrança e pacote virando crédito: não aparecem lá",
+      "Mensagens prontas e Aulas de amanhã pelo WhatsApp do professor",
+      "Entrada sem exigir pagamento à vista de 6 ou 12 meses",
+      "Acabamento visual e promessa de tirar a escola da cabeça contra o tom de planilha e funil"
+    ]
+  }
+}

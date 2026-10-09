@@ -1,0 +1,32 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:06:16Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://agende-me.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@agende-me.com"
+    ],
+    "phones": [
+      "+55 (34) 99838-4286"
+    ],
+    "whatsapp": [
+      "+5534998384286"
+    ],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/people/Agende-me/61556545863326/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/agendemebrasil/"
+      }
+    ]
+  }
+}

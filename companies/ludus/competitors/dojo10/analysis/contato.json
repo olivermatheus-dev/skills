@@ -1,0 +1,32 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:07:33Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://dojo10.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@dojo10.com",
+      "vendas@dojo10.com"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+351935814242"
+    ],
+    "cnpj": "10.672.775/0001-67",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/dojo10/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://facebook.com/dojo10"
+      }
+    ]
+  }
+}

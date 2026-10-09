@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:19:15Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mensalli.com.br/",
+      "title": "Mensalli - home"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Cobrança automática de mensalidade pelo WhatsApp do próprio profissional (academias, studios, escolas).",
+    "text": "Conecta o WhatsApp do profissional por QR Code e envia régua de cobrança (3 dias antes, no dia, após o vencimento) com Pix, link de pagamento e controle de inadimplência. Planos de R$49 a R$149/mês mais custo por mensagem. No Premium acrescenta link na bio, CRM, bot de WhatsApp, agendamento online e campanhas. Foco em cobrança, não em aula.",
+    "audience": "academias, studios, escolas de música e personal trainers que vivem de mensalidade",
+    "positioning": "Nunca mais cobre aluno por aluno no WhatsApp.",
+    "size": "não declarado"
+  }
+}

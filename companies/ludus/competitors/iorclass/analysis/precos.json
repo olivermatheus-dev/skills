@@ -1,0 +1,78 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:38:48Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 99,
+    "trial": "1 mês grátis em todos os ciclos",
+    "guarantee": "sem reembolso de períodos parciais",
+    "plans": [
+      {
+        "name": "Mensal",
+        "monthly": 99,
+        "users": "1 professor",
+        "highlights": [
+          "todas as funcionalidades",
+          "cobrança recorrente no cartão",
+          "cancela a qualquer momento"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Semestral",
+        "yearlyTotal": 415,
+        "users": "1 professor",
+        "highlights": [
+          "todas as funcionalidades",
+          "30% de desconto",
+          "pagamento único de R$ 415 por 6 meses"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Anual",
+        "yearlyMonthly": 59.75,
+        "yearlyTotal": 717,
+        "users": "1 professor",
+        "highlights": [
+          "todas as funcionalidades",
+          "40% de desconto",
+          "melhor preço"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [
+      "Armazenamento além de 1 GB: contratável, preço não público"
+    ],
+    "notes": "Plano único com todas as funcionalidades, só muda o ciclo. Semestral R$ 415 em parcela única (equivale a cerca de R$ 69,17/mês, cálculo nosso). Anual R$ 717 em parcela única (R$ 59,75/mês, cálculo nosso). Mensal R$ 99 em cartão recorrente. A FAQ (preço após o teste, cancelamento) está recolhida e não foi lida; termos de uso, limite de alunos e se o teste pede cartão não foram verificados. Coleta feita do site estático, sem clicar nos acordeões.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

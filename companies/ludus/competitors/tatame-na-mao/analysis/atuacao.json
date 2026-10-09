@@ -1,0 +1,24 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:19:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tatamenamaov2.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, preço em R$ 197/mês, cobrança por PIX, telefone (17) com DDD de SP"
+  }
+}

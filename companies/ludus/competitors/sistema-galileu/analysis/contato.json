@@ -1,0 +1,39 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:13:01Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.sistemagalileu.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [
+      "(14) 99168-3698"
+    ],
+    "whatsapp": [
+      "+5514991683698"
+    ],
+    "cnpj": "14.397.198/0001-01",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/projetovidaearteoficial/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/sistemagalileu/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/sistemagalileu"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@SistemaGalileu"
+      }
+    ]
+  }
+}

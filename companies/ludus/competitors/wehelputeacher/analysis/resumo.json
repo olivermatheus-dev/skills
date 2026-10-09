@@ -1,0 +1,20 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:20:22Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://wehelputeacher.com.br/"
+    },
+    {
+      "url": "https://wehelputeacher.com.br/lessons-plans-pp-newc/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "oneLiner": "Planos de aula prontos por assinatura para professores de inglês",
+    "text": "Vende acesso por assinatura a planos de aula (lesson plans) baseados em atualidades, temas polêmicos, filmes e séries. Fala com professores de idiomas. Preço não público: a página leva a um formulário. Usa funis de captação e maratonas (páginas por professora). Não faz gestão de alunos.",
+    "audience": "professores de inglês",
+    "positioning": "planos de aula altamente envolventes, baseados em atualidades, temas controversos, cinema e séries"
+  }
+}

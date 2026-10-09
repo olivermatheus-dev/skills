@@ -1,0 +1,29 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:13:05Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/galileu/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Sistema%20Galileu",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/galileu/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 1,
+      "period": "7 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Sem índice, 1 reclamações, 7 anos no RA."
+  }
+}

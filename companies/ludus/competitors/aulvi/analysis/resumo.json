@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:39:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Sistema web de agenda, presença e recibo com PIX para professores particulares e cursos.",
+    "text": "Vende agenda com horário fixo que se repete, confirmação de aula por notificação, recibo com link público e chave PIX pronto para colar no WhatsApp. Cobra por aula ou por mensalidade antecipada, tem aulão em turma e área de equipe para quem coordena auxiliares. Preço por faixa de alunos ativos, com todas as funções em todas as faixas. Teste de 14 dias sem cartão.",
+    "audience": "professores particulares solo e donos de curso com professores auxiliares",
+    "positioning": "Suas aulas organizadas. Sua cobrança em dia."
+  }
+}

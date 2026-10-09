@@ -1,0 +1,81 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:40:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://profeu.com.br/",
+    "hero": {
+      "headline": "Sua rotina de professor no piloto automático. Agenda, finanças e lembretes com IA.",
+      "subheadline": "A ferramenta definitiva para organizar seus alunos particulares",
+      "cta": "Começar Gratuitamente",
+      "visual": "painel com aulas de hoje, faturamento do mês e agenda do dia"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Piloto automático",
+        "summary": "promessa + 3 bullets (Telegram, IA, financeiro) + \"sem cartão, cancele quando quiser\""
+      },
+      {
+        "type": "numeros",
+        "title": "Confiado por educadores em todo o Brasil",
+        "summary": "+10 mil aulas, nota 4.8/5"
+      },
+      {
+        "type": "features",
+        "title": "Tudo que você precisa em um só lugar",
+        "summary": "agenda via Telegram, cobrança automática, IA pedagógica"
+      },
+      {
+        "type": "outro",
+        "title": "Especializado para",
+        "summary": "idiomas, música, reforço, educação inclusiva, escolas"
+      },
+      {
+        "type": "depoimentos",
+        "title": "O que dizem os professores",
+        "summary": "dois depoimentos de professores com @ do Instagram"
+      },
+      {
+        "type": "precos",
+        "title": "Qual o tamanho do seu sucesso?",
+        "summary": "seletor por número de alunos; mostra Essencial R$ 9,90"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas frequentes",
+        "summary": "app, cancelamento, IA, plano grátis, migração"
+      },
+      {
+        "type": "rodape",
+        "title": "Soluções e institucional",
+        "summary": "páginas por nicho, sobre, termos, CNPJ"
+      }
+    ],
+    "ctas": [
+      "Começar Gratuitamente",
+      "Ver como funciona",
+      "Começar Agora",
+      "Falar com nosso suporte"
+    ],
+    "socialProof": [
+      "+10 mil aulas",
+      "Nota 4.8/5",
+      "depoimentos Caju Educa e Julio Cesar"
+    ],
+    "interesting": [
+      "Seletor deslizante por número de alunos para preço",
+      "Páginas por nicho (idiomas, música, reforço, inclusiva, escolas)",
+      "\"Sem cartão\" e \"cancele quando quiser\" junto ao CTA",
+      "Migração por planilha com suporte grátis",
+      "Admite \"WhatsApp em breve\" abertamente"
+    ],
+    "tone": "direto, promessa de economia de tempo, linguagem de produtividade"
+  }
+}

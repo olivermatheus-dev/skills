@@ -1,0 +1,64 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:39:24Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Promessa direta: menos falta e menos inadimplência",
+        "evidence": "Lembretes que 'reduzem faltas em até 40%' e cobrança 'sem constrangimento'"
+      },
+      {
+        "point": "Oferta sem risco",
+        "evidence": "7 dias grátis, sem cartão, dados nunca bloqueados, cancelamento em 1 clique"
+      },
+      {
+        "point": "Onboarding facilitado",
+        "evidence": "Migração de planilha grátis; concierge no plano de topo"
+      },
+      {
+        "point": "Já está no ar e cobrando, com preço público",
+        "evidence": "Três planos de R$ 59,90 a R$ 199,90"
+      },
+      {
+        "point": "Suporte próximo",
+        "evidence": "WhatsApp direto com os fundadores no plano Profissional"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Foco em lembrete e cobrança; a aula em si fica de fora",
+        "evidence": "Sem planejamento, materiais, pacote/crédito ou vídeo na lista de recursos"
+      },
+      {
+        "point": "Preço sobe por volume de mensagens e alunos",
+        "evidence": "250/600/1.500 msgs por mês; R$ 59,90 para média de 20 alunos"
+      },
+      {
+        "point": "Prova social frágil",
+        "evidence": "3 depoimentos genéricos e 'centenas de professores' sem número"
+      },
+      {
+        "point": "Site raso: respostas do FAQ não aparecem, só a home foi encontrada",
+        "evidence": "Perguntas do FAQ sem texto visível; sem blog nem página de recursos"
+      },
+      {
+        "point": "Sem app nem portal do aluno evidente",
+        "evidence": "'100% Online'; nada sobre link do aluno"
+      }
+    ],
+    "opportunities": [
+      "Ludus tem pacote que vira crédito, falta com regra de cobrança e vídeo: ângulo 'a aula inteira, não só o lembrete'",
+      "Link sem login para o aluno, contra um concorrente centrado em disparo de mensagem",
+      "Mensagem sai pelo WhatsApp do professor, sem cota por plano",
+      "Acabamento e simplicidade contra visual de template",
+      "Preço do Ludus indefinido: R$ 59,90 é a âncora de entrada deste concorrente"
+    ]
+  }
+}

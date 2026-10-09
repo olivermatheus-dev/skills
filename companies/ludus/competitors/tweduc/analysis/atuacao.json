@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:57:11Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tweduc.com.br/professor-particular"
+    },
+    {
+      "url": "https://tweduc.com.br/planos"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, domínio .com.br, preços em R$, telefone (51) de Porto Alegre, PayPal/PagSeguro"
+  }
+}

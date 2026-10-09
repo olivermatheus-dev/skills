@@ -1,0 +1,116 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:40:32Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    },
+    {
+      "url": "https://profeu.com.br/sobre"
+    },
+    {
+      "url": "https://profeu.com.br/termos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agendamento automático",
+            "highlight": true
+          },
+          {
+            "name": "Agenda e lembretes via bot do Telegram",
+            "detail": "para professor e alunos, sem instalar app",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobrança automática",
+            "detail": "fatura, link Pix e lembrete de vencimento",
+            "highlight": true
+          },
+          {
+            "name": "Financeiro básico (planos baixos)",
+            "highlight": false
+          },
+          {
+            "name": "Controle de despesas",
+            "detail": "citado em depoimento",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "IA",
+        "items": [
+          {
+            "name": "IA pedagógica: plano de aula por palavras-chave",
+            "highlight": true
+          },
+          {
+            "name": "Relatórios de evolução para pais/alunos com IA",
+            "detail": "plano Intermediário em diante",
+            "highlight": false
+          },
+          {
+            "name": "IA avançada",
+            "detail": "plano Profissional",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Lembretes por WhatsApp",
+            "detail": "\"em breve\" na home; plano Profissional nos Termos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Integrações",
+        "items": [
+          {
+            "name": "Importação de alunos e aulas por planilha (Excel/CSV)",
+            "detail": "suporte à migração grátis nos 30 dias para pagantes",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Conformidade LGPD declarada",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Telegram como interface, sem app",
+      "Cobrança automática com Pix",
+      "IA para plano de aula e relatório",
+      "Plano grátis até 5 alunos"
+    ],
+    "missing": [
+      "videochamada nativa",
+      "portal/link do aluno",
+      "pacote de aulas virando crédito",
+      "regra de cobrança por falta",
+      "materiais/biblioteca de conteúdo",
+      "app nativo"
+    ]
+  }
+}

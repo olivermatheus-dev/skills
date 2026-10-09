@@ -1,0 +1,42 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:36:03Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    },
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.iorclass.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.iorclass.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "iorCLASS | Gestão para Professores",
+        "chars": 7345
+      },
+      {
+        "url": "https://www.iorclass.com.br/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "iorCLASS | Gestão para Professores",
+        "chars": 7345
+      }
+    ],
+    "sitemap": {
+      "source": "nenhum",
+      "total": 0,
+      "groups": []
+    },
+    "errors": []
+  }
+}

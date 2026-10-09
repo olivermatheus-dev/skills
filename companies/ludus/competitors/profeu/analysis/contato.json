@@ -1,0 +1,33 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:36:36Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+5547991087070"
+    ],
+    "cnpj": "15.281.304/0001-41",
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/cajueduca/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/teacherjuliocesar/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/app.profeu/"
+      }
+    ]
+  }
+}

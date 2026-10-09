@@ -1,0 +1,34 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:18:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sportclazz.com/",
+      "title": "Site oficial"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://sportclazz.com",
+        "note": "domínio oficial; e-mail contato@sportclazz.com.br no rodapé"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/sportclazz/",
+        "handle": "sportclazz",
+        "note": "confirmado antes (ficha do candidato): bio cita sportclazz.com; não reconfirmado nesta busca"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

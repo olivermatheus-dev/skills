@@ -1,0 +1,229 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:06:50Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.classcardapp.com/",
+      "title": "Class Management Software for Academies | Classcard"
+    },
+    {
+      "url": "https://www.classcardapp.com/pricing",
+      "title": "Classcard Pricing: Simple Plans for Class & Studio Management"
+    },
+    {
+      "url": "https://www.classcardapp.com/features",
+      "title": "Class Management Software Features | Classcard"
+    },
+    {
+      "url": "https://www.classcardapp.com/about",
+      "title": "About Classcard | Our Story, Mission & Team"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.classcardapp.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.classcardapp.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Class Management Software for Academies | Classcard",
+        "chars": 5775
+      },
+      {
+        "url": "https://www.classcardapp.com/pricing",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Classcard Pricing: Simple Plans for Class & Studio Management",
+        "chars": 5187
+      },
+      {
+        "url": "https://www.classcardapp.com/features",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Class Management Software Features | Classcard",
+        "chars": 6084
+      },
+      {
+        "url": "https://www.classcardapp.com/about",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "About Classcard | Our Story, Mission & Team",
+        "chars": 6679
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 278,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 197,
+          "sample": [
+            "/blog",
+            "/blog/10-beginner-swimming-drills-every-swim-coach-should-teach",
+            "/blog/10-cognitive-skills-gymnastics-develops-in-students",
+            "/blog/10-creative-music-games-for-kids-classes"
+          ]
+        },
+        {
+          "name": "/integrations",
+          "count": 23,
+          "sample": [
+            "/integrations",
+            "/integrations/ccavenue",
+            "/integrations/classmarker",
+            "/integrations/google-calendar"
+          ]
+        },
+        {
+          "name": "/customer",
+          "count": 17,
+          "sample": [
+            "/customer/archibald-sports-academy",
+            "/customer/aspire-gymnastics-dubai",
+            "/customer/ballet-quarter",
+            "/customer/coach-sveta-academy"
+          ]
+        },
+        {
+          "name": "/solutions",
+          "count": 12,
+          "sample": [
+            "/solutions/dance-studio",
+            "/solutions/football-academy",
+            "/solutions/gymnastics",
+            "/solutions/language-school"
+          ]
+        },
+        {
+          "name": "/compare",
+          "count": 11,
+          "sample": [
+            "/compare",
+            "/compare/class4kids",
+            "/compare/classcard-vs-gymdesk-pricing-features-and-fit-for-2026",
+            "/compare/classcard-vs-iclasspro-feature-by-feature-comparison-for-2026"
+          ]
+        },
+        {
+          "name": "/free-tools",
+          "count": 3,
+          "sample": [
+            "/free-tools/free-guide-teaching-classes-online",
+            "/free-tools",
+            "/free-tools/swim-lesson-plans-by-age-group"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/ux",
+          "count": 1,
+          "sample": [
+            "/ux"
+          ]
+        },
+        {
+          "name": "/pricing-ae",
+          "count": 1,
+          "sample": [
+            "/pricing-ae"
+          ]
+        },
+        {
+          "name": "/about",
+          "count": 1,
+          "sample": [
+            "/about"
+          ]
+        },
+        {
+          "name": "/student-apps",
+          "count": 1,
+          "sample": [
+            "/student-apps"
+          ]
+        },
+        {
+          "name": "/staff-apps",
+          "count": 1,
+          "sample": [
+            "/staff-apps"
+          ]
+        },
+        {
+          "name": "/features",
+          "count": 1,
+          "sample": [
+            "/features"
+          ]
+        },
+        {
+          "name": "/request-demo",
+          "count": 1,
+          "sample": [
+            "/request-demo"
+          ]
+        },
+        {
+          "name": "/privacy-policy",
+          "count": 1,
+          "sample": [
+            "/privacy-policy"
+          ]
+        },
+        {
+          "name": "/terms-of-use",
+          "count": 1,
+          "sample": [
+            "/terms-of-use"
+          ]
+        },
+        {
+          "name": "/customers",
+          "count": 1,
+          "sample": [
+            "/customers"
+          ]
+        },
+        {
+          "name": "/log-in",
+          "count": 1,
+          "sample": [
+            "/log-in"
+          ]
+        },
+        {
+          "name": "/verifyzoom",
+          "count": 1,
+          "sample": [
+            "/verifyzoom"
+          ]
+        },
+        {
+          "name": "/security",
+          "count": 1,
+          "sample": [
+            "/security"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

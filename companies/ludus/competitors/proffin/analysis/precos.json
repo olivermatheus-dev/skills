@@ -1,0 +1,90 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:39:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    },
+    {
+      "url": "https://proffin.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "freemium",
+    "fromMonthly": 28,
+    "trial": "plano Gratuito sem prazo (até 20 alunos ativos); site não informa trial do Premium",
+    "plans": [
+      {
+        "name": "Gratuito",
+        "monthly": 0,
+        "users": "1 professor",
+        "highlights": [
+          "até 20 alunos ativos",
+          "controle financeiro completo",
+          "suporte por WhatsApp"
+        ],
+        "recommended": false,
+        "id": "gratuito",
+        "audience": "solo",
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [
+          "Até 20 alunos ativos",
+          "Gestão de alunos e turmas",
+          "Agenda de aulas inteligente",
+          "Controle financeiro completo",
+          "Histórico de aulas",
+          "Relatórios mensais",
+          "Suporte por WhatsApp (resposta em até 24 h)"
+        ],
+        "matrix": [],
+        "limits": [
+          {
+            "metric": "pacientes",
+            "value": 20,
+            "unlimited": false,
+            "note": "alunos ativos"
+          }
+        ]
+      },
+      {
+        "name": "Premium",
+        "monthly": 28,
+        "users": "1 professor",
+        "highlights": [
+          "alunos ilimitados",
+          "CRM de vendas",
+          "backup automático"
+        ],
+        "recommended": true,
+        "id": "premium",
+        "audience": "solo",
+        "onRequest": false,
+        "regularMonthly": 50,
+        "otherCycles": [],
+        "inherits": "gratuito",
+        "includes": [
+          "Tudo do plano Gratuito",
+          "Cadastro ilimitado de alunos",
+          "Gestão de vendas (CRM)",
+          "Suporte premium (resposta em até 4 h)",
+          "Backup automático",
+          "Relatórios estatísticos avançados",
+          "Área do Aluno (em desenvolvimento)"
+        ],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [],
+    "notes": "R$ 28/mês é o preço mostrado com R$ 50,00 riscado, sem rótulo ou prazo da promoção. Só há preço mensal: nenhum plano anual visível. Trial do Premium, fidelidade e reembolso não informados; termos e cadastro não foram abertos. Área do Aluno vendida no Premium mas marcada como em desenvolvimento.",
+    "commitment": "sem-fidelidade",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

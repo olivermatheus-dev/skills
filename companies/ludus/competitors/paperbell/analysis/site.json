@@ -1,0 +1,228 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:10:30Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://paperbell.com/",
+      "title": "Paperbell Coaching Website"
+    },
+    {
+      "url": "https://paperbell.com/pricing/",
+      "title": "How much is Paperbell coaching software?"
+    },
+    {
+      "url": "https://paperbell.com/coaching-software/",
+      "title": "Coaching Software Platform | Paperbell"
+    },
+    {
+      "url": "https://paperbell.com/about-the-company/",
+      "title": "About Paperbell Coaching Software"
+    },
+    {
+      "url": "https://paperbell.com/faq/",
+      "title": "FAQ | Paperbell"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://paperbell.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://paperbell.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Paperbell Coaching Website",
+        "chars": 7819
+      },
+      {
+        "url": "https://paperbell.com/pricing/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "How much is Paperbell coaching software?",
+        "chars": 3167
+      },
+      {
+        "url": "https://paperbell.com/coaching-software/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Coaching Software Platform | Paperbell",
+        "chars": 8244
+      },
+      {
+        "url": "https://paperbell.com/about-the-company/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "About Paperbell Coaching Software",
+        "chars": 2276
+      },
+      {
+        "url": "https://paperbell.com/faq/",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "FAQ | Paperbell",
+        "chars": 12433
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 38,
+      "groups": [
+        {
+          "name": "/support",
+          "count": 16,
+          "sample": [
+            "/support/",
+            "/support/knowledge-base/is-paperbell-hipaa-compliant/",
+            "/support/knowledge-base/multiple-users-logins/",
+            "/support/knowledge-base/does-paperbell-have-a-mobile-app/"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 3,
+          "sample": [
+            "/blog/",
+            "/blog/paperbell-reviews/",
+            "/blog/how-to-offer-group-coaching-the-everything-you-need-to-know-guide/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/coaching-software",
+          "count": 1,
+          "sample": [
+            "/coaching-software/"
+          ]
+        },
+        {
+          "name": "/pricing",
+          "count": 1,
+          "sample": [
+            "/pricing/"
+          ]
+        },
+        {
+          "name": "/about-the-company",
+          "count": 1,
+          "sample": [
+            "/about-the-company/"
+          ]
+        },
+        {
+          "name": "/about-the-product",
+          "count": 1,
+          "sample": [
+            "/about-the-product/"
+          ]
+        },
+        {
+          "name": "/faq",
+          "count": 1,
+          "sample": [
+            "/faq/"
+          ]
+        },
+        {
+          "name": "/coaching-software-reviews",
+          "count": 1,
+          "sample": [
+            "/coaching-software-reviews/"
+          ]
+        },
+        {
+          "name": "/pb",
+          "count": 1,
+          "sample": [
+            "/pb/free-account/"
+          ]
+        },
+        {
+          "name": "/paperbell-alternatives",
+          "count": 1,
+          "sample": [
+            "/paperbell-alternatives/"
+          ]
+        },
+        {
+          "name": "/affiliate-information",
+          "count": 1,
+          "sample": [
+            "/affiliate-information/"
+          ]
+        },
+        {
+          "name": "/privacy-policy",
+          "count": 1,
+          "sample": [
+            "/privacy-policy/"
+          ]
+        },
+        {
+          "name": "/terms-and-conditions",
+          "count": 1,
+          "sample": [
+            "/terms-and-conditions/"
+          ]
+        },
+        {
+          "name": "/kajabi-vs-paperbell",
+          "count": 1,
+          "sample": [
+            "/kajabi-vs-paperbell/"
+          ]
+        },
+        {
+          "name": "/squarespace-vs-paperbell",
+          "count": 1,
+          "sample": [
+            "/squarespace-vs-paperbell/"
+          ]
+        },
+        {
+          "name": "/wix-vs-paperbell",
+          "count": 1,
+          "sample": [
+            "/wix-vs-paperbell/"
+          ]
+        },
+        {
+          "name": "/calendly-vs-paperbell",
+          "count": 1,
+          "sample": [
+            "/calendly-vs-paperbell/"
+          ]
+        },
+        {
+          "name": "/acuity-vs-paperbell",
+          "count": 1,
+          "sample": [
+            "/acuity-vs-paperbell/"
+          ]
+        },
+        {
+          "name": "/coaching-contract-signing-signatures",
+          "count": 1,
+          "sample": [
+            "/coaching-contract-signing-signatures/"
+          ]
+        },
+        {
+          "name": "/group-coaching-tool",
+          "count": 1,
+          "sample": [
+            "/group-coaching-tool/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

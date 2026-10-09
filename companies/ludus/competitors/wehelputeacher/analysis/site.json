@@ -1,0 +1,312 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:15:20Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://wehelputeacher.com.br/",
+      "title": "Home - wehelputeacher.com.br"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://wehelputeacher.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://wehelputeacher.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Home - wehelputeacher.com.br",
+        "chars": 72
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 40,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-captacao-c-maratona-pascoa",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-captacao-c-maratona-pascoa/"
+          ]
+        },
+        {
+          "name": "/obrigado-quero",
+          "count": 1,
+          "sample": [
+            "/obrigado-quero/"
+          ]
+        },
+        {
+          "name": "/obrigado-nao-quero",
+          "count": 1,
+          "sample": [
+            "/obrigado-nao-quero/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-grazi",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-grazi/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-sama",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-sama/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-vanuza",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-vanuza/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-kaian",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-kaian/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-sama-ind",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-sama-ind/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-vanuza-ind",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-vanuza-ind/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-kaian-ind",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-kaian-ind/"
+          ]
+        },
+        {
+          "name": "/maratona-ocu-grazi-ind",
+          "count": 1,
+          "sample": [
+            "/maratona-ocu-grazi-ind/"
+          ]
+        },
+        {
+          "name": "/lessons-plans-pp",
+          "count": 1,
+          "sample": [
+            "/lessons-plans-pp/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-venda-perpetuo-novo-design-copy-antiga",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-venda-perpetuo-novo-design-copy-antiga/"
+          ]
+        },
+        {
+          "name": "/lessonplans-thankyou-b",
+          "count": 1,
+          "sample": [
+            "/lessonplans-thankyou-b/"
+          ]
+        },
+        {
+          "name": "/lessonplans-c",
+          "count": 1,
+          "sample": [
+            "/lessonplans-c/"
+          ]
+        },
+        {
+          "name": "/lessonplans-b",
+          "count": 1,
+          "sample": [
+            "/lessonplans-b/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-captacao-b-maratona-pascoa",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-captacao-b-maratona-pascoa/"
+          ]
+        },
+        {
+          "name": "/lessonplans-a",
+          "count": 1,
+          "sample": [
+            "/lessonplans-a/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-captacao-a-maratona-pascoa",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-captacao-a-maratona-pascoa/"
+          ]
+        },
+        {
+          "name": "/lessons-plans-pp-new",
+          "count": 1,
+          "sample": [
+            "/lessons-plans-pp-new/"
+          ]
+        },
+        {
+          "name": "/lessons-plans-pp-newc",
+          "count": 1,
+          "sample": [
+            "/lessons-plans-pp-newc/"
+          ]
+        },
+        {
+          "name": "/maratona-de-aniversario",
+          "count": 1,
+          "sample": [
+            "/maratona-de-aniversario/"
+          ]
+        },
+        {
+          "name": "/travel-inicio",
+          "count": 1,
+          "sample": [
+            "/travel-inicio/"
+          ]
+        },
+        {
+          "name": "/travel",
+          "count": 1,
+          "sample": [
+            "/travel/"
+          ]
+        },
+        {
+          "name": "/a1-beginner",
+          "count": 1,
+          "sample": [
+            "/a1-beginner/"
+          ]
+        },
+        {
+          "name": "/a1-inicio",
+          "count": 1,
+          "sample": [
+            "/a1-inicio/"
+          ]
+        },
+        {
+          "name": "/app",
+          "count": 1,
+          "sample": [
+            "/app/"
+          ]
+        },
+        {
+          "name": "/lessonplans-d",
+          "count": 1,
+          "sample": [
+            "/lessonplans-d/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-captacao-set5",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-captacao-set5/"
+          ]
+        },
+        {
+          "name": "/acs-pagina-de-captacao-c-set25",
+          "count": 1,
+          "sample": [
+            "/acs-pagina-de-captacao-c-set25/"
+          ]
+        },
+        {
+          "name": "/time-saver-12-aulas-de-gramatica",
+          "count": 1,
+          "sample": [
+            "/time-saver-12-aulas-de-gramatica/"
+          ]
+        },
+        {
+          "name": "/upsell-a1",
+          "count": 1,
+          "sample": [
+            "/upsell-a1/"
+          ]
+        },
+        {
+          "name": "/lessons-plans-a",
+          "count": 1,
+          "sample": [
+            "/lessons-plans-a/"
+          ]
+        },
+        {
+          "name": "/lessons-plans-b",
+          "count": 1,
+          "sample": [
+            "/lessons-plans-b/"
+          ]
+        },
+        {
+          "name": "/0909099809777-2",
+          "count": 1,
+          "sample": [
+            "/0909099809777-2/"
+          ]
+        },
+        {
+          "name": "/0080909898lessons-plans-b",
+          "count": 1,
+          "sample": [
+            "/0080909898lessons-plans-b/"
+          ]
+        },
+        {
+          "name": "/aula-gratuito-whu-obrigado",
+          "count": 1,
+          "sample": [
+            "/aula-gratuito-whu-obrigado/"
+          ]
+        },
+        {
+          "name": "/aula-gratuita-whu",
+          "count": 1,
+          "sample": [
+            "/aula-gratuita-whu/"
+          ]
+        },
+        {
+          "name": "/acs-black-friday-nov25",
+          "count": 1,
+          "sample": [
+            "/acs-black-friday-nov25/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

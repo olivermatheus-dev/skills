@@ -1,0 +1,95 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:39:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sistemaclassis.com.br/",
+    "hero": {
+      "headline": "Sua agenda organizada, seu bolso cheio e mais tempo para ensinar.",
+      "subheadline": "Lembretes automáticos que reduzem faltas em até 40%. O sistema de gestão preferido dos professores particulares que valorizam seu tempo.",
+      "cta": "Começar 7 dias grátis",
+      "visual": "conversa de WhatsApp com lembrete de aula"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Agenda organizada, bolso cheio",
+        "summary": "Promessa de menos faltas com lembrete no WhatsApp; selos: 7 dias, sem cartão, dados nunca bloqueados"
+      },
+      {
+        "type": "outro",
+        "title": "Respostas às dúvidas que travam você",
+        "summary": "Responde cedo o que acontece após o trial e se dá trabalho cadastrar alunos"
+      },
+      {
+        "type": "comparativo",
+        "title": "Caos das Planilhas vs Organização Classis",
+        "summary": "Quatro dores lado a lado com a solução"
+      },
+      {
+        "type": "features",
+        "title": "Funcionalidades pensadas para você ensinar",
+        "summary": "WhatsApp, financeiro, calendário, alunos, saúde do negócio"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Comece em 3 passos simples",
+        "summary": "Criar conta, adicionar alunos, gerenciar"
+      },
+      {
+        "type": "beneficios",
+        "title": "Feito para quem ensina",
+        "summary": "Seis benefícios curtos: rápido, seguro, online, alertas, escala de 5 a 500 alunos"
+      },
+      {
+        "type": "precos",
+        "title": "Escolha o plano ideal",
+        "summary": "Três planos de R$ 59,90 a R$ 199,90, 'mais escolhido' no do meio"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Quem usa, recomenda",
+        "summary": "Três depoimentos de professores de música"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas Frequentes",
+        "summary": "Oito perguntas, respostas recolhidas"
+      },
+      {
+        "type": "cta",
+        "title": "Pronto para zerar a inadimplência?",
+        "summary": "Fecho com CTA e os mesmos selos"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "Termos, privacidade e e-mail de contato"
+      }
+    ],
+    "ctas": [
+      "Começar 7 dias grátis",
+      "Ver Funcionalidades"
+    ],
+    "socialProof": [
+      "centenas de professores (declarado)",
+      "3 depoimentos de professores de música",
+      "reduz faltas em até 40% (declarado)",
+      "economia de 5h por semana (depoimento)"
+    ],
+    "interesting": [
+      "Bloco 'sem letras miúdas' logo após o hero, matando a objeção de cobrança surpresa",
+      "Comparativo caos das planilhas × com o produto",
+      "Selo 'mais escolhido' no plano do meio",
+      "Migração de planilha grátis como argumento",
+      "Mockup de conversa de WhatsApp como imagem principal"
+    ],
+    "tone": "Direto, comercial, focado em dinheiro e tempo; informal sem ser técnico."
+  }
+}

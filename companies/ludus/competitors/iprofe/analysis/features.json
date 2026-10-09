@@ -1,0 +1,89 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:38:28Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe home e FAQ"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda de aulas e grade horária semanal",
+            "detail": "organiza e visualiza aulas futuras",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Alunos",
+        "items": [
+          {
+            "name": "Cadastro de alunos",
+            "detail": "nível, preferências de aprendizado e histórico de aulas",
+            "highlight": true
+          },
+          {
+            "name": "Anotações por aula",
+            "detail": "registro do que foi abordado na última aula",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Controle de pagamentos",
+            "detail": "quem pagou e quem está pendente; não emite cobrança nem boleto (FAQ)",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Relatórios",
+        "items": [
+          {
+            "name": "Relatório mensal em PDF para os pais",
+            "detail": "aulas dadas, evolução e status de pagamento; só na versão web",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Plataforma",
+        "items": [
+          {
+            "name": "Web app, PWA e apps iOS/Android",
+            "detail": "uso em qualquer dispositivo",
+            "highlight": true
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Preço baixo e plano único, sem fidelidade",
+      "Plano gratuito com todas as funcionalidades (até 3 alunos)",
+      "Relatório PDF para pais/responsáveis",
+      "Presente nas lojas Apple e Google Play"
+    ],
+    "missing": [
+      "videochamada",
+      "lembretes por WhatsApp",
+      "portal ou link para o aluno",
+      "pacote de aulas/crédito",
+      "recorrência e remarcação em lote",
+      "materiais e plano de aula",
+      "cobrança, boleto ou Pix",
+      "nota fiscal",
+      "gestão de equipe/escola",
+      "IA"
+    ]
+  }
+}

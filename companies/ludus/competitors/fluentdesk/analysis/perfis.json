@@ -1,0 +1,28 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:16:39Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://fluentdesk.com.br",
+        "note": "domínio oficial; home lista contato e rodapé, sem links de redes"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

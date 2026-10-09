@@ -1,0 +1,134 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:38:57Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    },
+    {
+      "url": "https://proffin.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Alunos",
+        "items": [
+          {
+            "name": "Gestão de alunos e turmas",
+            "detail": "cadastro e histórico por aluno",
+            "highlight": true
+          },
+          {
+            "name": "Cadastro ilimitado de alunos",
+            "detail": "só no Premium; grátis até 20 ativos",
+            "highlight": false
+          },
+          {
+            "name": "Contratos e histórico do aluno",
+            "detail": "citado em depoimento de cliente",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda inteligente",
+            "detail": "visão diária, semanal e mensal, no celular ou computador",
+            "highlight": true
+          },
+          {
+            "name": "Histórico de aulas ministradas e previsão das próximas",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Extrato financeiro",
+            "detail": "entradas, saídas, recebido, pendente e despesas por aluno",
+            "highlight": true
+          },
+          {
+            "name": "Previsão financeira",
+            "detail": "quanto vai receber nos próximos dias e meses",
+            "highlight": true
+          },
+          {
+            "name": "Relatórios mensais",
+            "highlight": false
+          },
+          {
+            "name": "Gráficos de faturamento e comparação entre meses",
+            "highlight": true
+          },
+          {
+            "name": "Relatórios estatísticos avançados",
+            "detail": "Premium",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Gestão de vendas (CRM)",
+            "detail": "Premium",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do paciente",
+        "items": [
+          {
+            "name": "Área do Aluno",
+            "detail": "listada como em desenvolvimento (Premium)",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Backup automático",
+            "detail": "Premium",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Suporte por WhatsApp e e-mail",
+            "detail": "resposta em até 24 h (grátis) e 4 h (premium)",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Plano grátis real (até 20 alunos) com financeiro completo",
+      "Previsão financeira de recebimentos futuros",
+      "Criado por professor, tom anti-planilha, suporte humano direto"
+    ],
+    "missing": [
+      "videochamada nativa",
+      "lembrete/mensagem por WhatsApp",
+      "pacote de aulas virando crédito",
+      "link do aluno sem login (portal ainda em desenvolvimento)",
+      "materiais e planejamento de aula",
+      "nota fiscal",
+      "cobrança online/gateway"
+    ]
+  }
+}

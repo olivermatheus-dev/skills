@@ -1,0 +1,2031 @@
+{
+  "updatedAt": "2026-10-09T22:00:00Z",
+  "groups": [
+    "Alunos",
+    "Agenda",
+    "Aulas e presença",
+    "Planejamento e materiais",
+    "Financeiro",
+    "Cobrança",
+    "Comunicação",
+    "Área do aluno",
+    "Videochamada",
+    "IA",
+    "Equipe e escola",
+    "Captação e plataforma"
+  ],
+  "features": [
+    {
+      "id": "ficha-aluno",
+      "name": "Ficha e cadastro do aluno",
+      "group": "Alunos",
+      "order": 1
+    },
+    {
+      "id": "historico-aluno",
+      "name": "Histórico e extrato de aulas",
+      "group": "Alunos",
+      "order": 2
+    },
+    {
+      "id": "contratos",
+      "name": "Contratos digitais",
+      "group": "Alunos",
+      "order": 3
+    },
+    {
+      "id": "crm-vendas",
+      "name": "Funil de vendas (CRM)",
+      "group": "Alunos",
+      "order": 4
+    },
+    {
+      "id": "importar-planilha",
+      "name": "Importação de planilha",
+      "group": "Alunos",
+      "order": 5
+    },
+    {
+      "id": "responsavel",
+      "name": "Responsável (aluno menor)",
+      "group": "Alunos",
+      "order": 6
+    },
+    {
+      "id": "agenda-visual",
+      "name": "Agenda visual (dia/semana/mês)",
+      "group": "Agenda",
+      "order": 7
+    },
+    {
+      "id": "recorrencia",
+      "name": "Aulas recorrentes",
+      "group": "Agenda",
+      "order": 8
+    },
+    {
+      "id": "remarcacao",
+      "name": "Remarcação com regras",
+      "group": "Agenda",
+      "order": 9
+    },
+    {
+      "id": "reposicao-aluno",
+      "name": "Reposição pelo próprio aluno",
+      "group": "Agenda",
+      "order": 10
+    },
+    {
+      "id": "conflito",
+      "name": "Aviso de choque de horário",
+      "group": "Agenda",
+      "order": 11
+    },
+    {
+      "id": "google-agenda",
+      "name": "Google Agenda / iCal",
+      "group": "Agenda",
+      "order": 12
+    },
+    {
+      "id": "agendamento-publico",
+      "name": "Agendamento online pelo aluno",
+      "group": "Agenda",
+      "order": 13
+    },
+    {
+      "id": "presenca",
+      "name": "Presença e frequência",
+      "group": "Aulas e presença",
+      "order": 14
+    },
+    {
+      "id": "falta-cobranca",
+      "name": "Falta com regra de cobrança",
+      "group": "Aulas e presença",
+      "order": 15
+    },
+    {
+      "id": "diario-aula",
+      "name": "Anotações e diário da aula",
+      "group": "Aulas e presença",
+      "order": 16
+    },
+    {
+      "id": "turmas",
+      "name": "Turmas e aulas em grupo",
+      "group": "Aulas e presença",
+      "order": 17
+    },
+    {
+      "id": "plano-aula",
+      "name": "Plano de aula",
+      "group": "Planejamento e materiais",
+      "order": 18
+    },
+    {
+      "id": "materiais",
+      "name": "Materiais e biblioteca",
+      "group": "Planejamento e materiais",
+      "order": 19
+    },
+    {
+      "id": "tarefas",
+      "name": "Tarefas e correção",
+      "group": "Planejamento e materiais",
+      "order": 20
+    },
+    {
+      "id": "quizzes",
+      "name": "Quizzes e exercícios",
+      "group": "Planejamento e materiais",
+      "order": 21
+    },
+    {
+      "id": "gamificacao",
+      "name": "Gamificação e flashcards",
+      "group": "Planejamento e materiais",
+      "order": 22
+    },
+    {
+      "id": "controle-pagamentos",
+      "name": "Controle de pagamentos (a receber)",
+      "group": "Financeiro",
+      "order": 23
+    },
+    {
+      "id": "pacote-credito",
+      "name": "Pacote de aulas que vira crédito",
+      "group": "Financeiro",
+      "order": 24
+    },
+    {
+      "id": "despesas",
+      "name": "Despesas e contas a pagar",
+      "group": "Financeiro",
+      "order": 25
+    },
+    {
+      "id": "relatorios-fin",
+      "name": "Relatórios financeiros",
+      "group": "Financeiro",
+      "order": 26
+    },
+    {
+      "id": "recibo",
+      "name": "Recibo digital",
+      "group": "Financeiro",
+      "order": 27
+    },
+    {
+      "id": "nota-fiscal",
+      "name": "Nota fiscal",
+      "group": "Financeiro",
+      "order": 28
+    },
+    {
+      "id": "cobranca-pix",
+      "name": "Cobrança por Pix (copia e cola/QR)",
+      "group": "Cobrança",
+      "order": 29
+    },
+    {
+      "id": "cobranca-automatica",
+      "name": "Cobrança e baixa automáticas",
+      "group": "Cobrança",
+      "order": 30
+    },
+    {
+      "id": "whatsapp-lembrete",
+      "name": "Lembrete de aula por WhatsApp",
+      "group": "Comunicação",
+      "order": 31
+    },
+    {
+      "id": "mensagens-prontas",
+      "name": "Mensagens prontas (modelos)",
+      "group": "Comunicação",
+      "order": 32
+    },
+    {
+      "id": "lembrete-push",
+      "name": "Lembretes por e-mail ou push",
+      "group": "Comunicação",
+      "order": 33
+    },
+    {
+      "id": "chat-interno",
+      "name": "Chat professor-aluno",
+      "group": "Comunicação",
+      "order": 34
+    },
+    {
+      "id": "relatorio-evolucao",
+      "name": "Relatório de evolução para os pais",
+      "group": "Comunicação",
+      "order": 35
+    },
+    {
+      "id": "app-aluno",
+      "name": "Portal ou app do aluno (com login)",
+      "group": "Área do aluno",
+      "order": 36
+    },
+    {
+      "id": "link-sem-login",
+      "name": "Link do aluno sem login",
+      "group": "Área do aluno",
+      "order": 37
+    },
+    {
+      "id": "confirmar-aula",
+      "name": "Aluno confirma a aula",
+      "group": "Área do aluno",
+      "order": 38
+    },
+    {
+      "id": "video-propria",
+      "name": "Videochamada própria na aula",
+      "group": "Videochamada",
+      "order": 39
+    },
+    {
+      "id": "video-externa",
+      "name": "Link de Meet/Zoom na aula",
+      "group": "Videochamada",
+      "order": 40
+    },
+    {
+      "id": "ia-aulas",
+      "name": "IA para plano de aula e lições",
+      "group": "IA",
+      "order": 41
+    },
+    {
+      "id": "equipe",
+      "name": "Vários professores / equipe",
+      "group": "Equipe e escola",
+      "order": 42
+    },
+    {
+      "id": "white-label",
+      "name": "Marca própria (white-label)",
+      "group": "Equipe e escola",
+      "order": 43
+    },
+    {
+      "id": "perfil-publico",
+      "name": "Perfil público / vitrine",
+      "group": "Captação e plataforma",
+      "order": 44
+    },
+    {
+      "id": "app-mobile",
+      "name": "App mobile ou PWA do professor",
+      "group": "Captação e plataforma",
+      "order": 45
+    }
+  ],
+  "cells": {
+    "beaky": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Calendário personalizado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "reposicao-aluno": {
+        "status": "sim",
+        "note": "Horários liberados pelo professor",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Só a partir do Essential",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "parcial",
+        "note": "Cobranças agendadas",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "despesas": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "parcial",
+        "note": "Só receita do mês",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Aluno instala o app",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "sim",
+        "note": "iOS e Android",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "lembrete-push": {
+        "status": "sim",
+        "note": "15 min antes",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "quizzes": {
+        "status": "sim",
+        "note": "Lições autocorrigíveis (Pro+)",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "gamificacao": {
+        "status": "sim",
+        "note": "100 níveis e flashcards",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "sim",
+        "note": "Plano de estudos",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "sim",
+        "note": "Diário de classe",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "note": "Frequência",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "contratos": {
+        "status": "sim",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ia-aulas": {
+        "status": "sim",
+        "note": "Créditos mensais",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "sim",
+        "note": "Marketplace de professores",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "chat-interno": {
+        "status": "parcial",
+        "note": "Comunicados semanais",
+        "source": "https://beaky.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "aulvi": {
+      "recorrencia": {
+        "status": "sim",
+        "note": "Horário fixo gera as aulas",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "conflito": {
+        "status": "sim",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "note": "Nos dois sentidos",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "remarcacao": {
+        "status": "parcial",
+        "note": "Pendência até remarcar",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "note": "Confirmação em um toque",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "sim",
+        "note": "Aulão com presença por sessão",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recibo": {
+        "status": "sim",
+        "note": "Link público com Pix",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "sim",
+        "note": "Pix copia e cola no recibo",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Por aula ou mensalidade",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "nao",
+        "note": "Sem baixa automática",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "mensagens-prontas": {
+        "status": "sim",
+        "note": "Cobrança para colar no WhatsApp",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Só mensagem para colar",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "sim",
+        "note": "Até 12 auxiliares",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "nao",
+        "note": "É sistema web",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Só guia explicativo",
+        "source": "https://aulvi.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "ensinaapp": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Grade semanal",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agendamento-publico": {
+        "status": "sim",
+        "note": "Página pública",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "remarcacao": {
+        "status": "sim",
+        "note": "Regras e voucher",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "google-agenda": {
+        "status": "sim",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "sim",
+        "note": "Pix e cartão (InfinitePay)",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "sim",
+        "note": "Pix libera o pacote",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "parcial",
+        "note": "Pacotes de 4 ou 8 aulas",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Painel financeiro",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "despesas": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "chat-interno": {
+        "status": "sim",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "lembrete-push": {
+        "status": "sim",
+        "note": "E-mail e push",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Só e-mail e push",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Usa Google Meet",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-externa": {
+        "status": "sim",
+        "note": "Google Meet integrado",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "sim",
+        "note": "Convite por e-mail",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "sim",
+        "note": "Por aluno",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "sim",
+        "note": "Anotações públicas e privadas",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "gamificacao": {
+        "status": "sim",
+        "note": "Flashcards",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "quizzes": {
+        "status": "sim",
+        "note": "Quizzes e exercícios",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "nao",
+        "note": "Não visível no site",
+        "source": "https://aula.ensinaapp.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "profeu": {
+      "agendamento-publico": {
+        "status": "parcial",
+        "note": "Agendamento automático",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "sim",
+        "note": "Também bot de Telegram",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "sim",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Básico nos planos baixos",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "despesas": {
+        "status": "sim",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ia-aulas": {
+        "status": "sim",
+        "note": "Plano de aula por palavras-chave",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorio-evolucao": {
+        "status": "sim",
+        "note": "Gerado com IA",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "importar-planilha": {
+        "status": "sim",
+        "note": "Excel/CSV",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "nao",
+        "note": "Sem app nativo",
+        "source": "https://profeu.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "iorclass": {
+      "ficha-aluno": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "contratos": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "crm-vendas": {
+        "status": "sim",
+        "note": "Processo de vendas",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agenda-visual": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "tarefas": {
+        "status": "parcial",
+        "note": "Tarefas na agenda",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "sim",
+        "note": "Acompanhamento da aula",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "historico-aluno": {
+        "status": "sim",
+        "note": "Extrato de aulas",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recibo": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "sim",
+        "note": "App e PWA",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "sim",
+        "note": "Play Store e PWA",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "sim",
+        "note": "Arquivos compartilhados",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "nao",
+        "note": "Fora do escopo",
+        "source": "https://www.iorclass.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "iprofe": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Grade semanal",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ficha-aluno": {
+        "status": "sim",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "sim",
+        "note": "Anotações por aula",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorio-evolucao": {
+        "status": "sim",
+        "note": "PDF mensal para os pais",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "sim",
+        "note": "Web, PWA, iOS e Android",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recorrencia": {
+        "status": "nao",
+        "note": "Sem recorrência em lote",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ia-aulas": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://iprofe.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "proffin": {
+      "ficha-aluno": {
+        "status": "sim",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "sim",
+        "note": "Cadastro ilimitado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "contratos": {
+        "status": "sim",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "historico-aluno": {
+        "status": "sim",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Agenda inteligente",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Extrato e previsão",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "note": "Gráficos e comparação",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "crm-vendas": {
+        "status": "sim",
+        "note": "Gestão de vendas",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "parcial",
+        "note": "Em desenvolvimento",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://proffin.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "sistema-classis": {
+      "conflito": {
+        "status": "sim",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "note": "Confirmação e frequência",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Calendário",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "sim",
+        "note": "Automático",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "sim",
+        "note": "Atrasados",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "sim",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Quem pagou e quem deve",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ficha-aluno": {
+        "status": "sim",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "historico-aluno": {
+        "status": "sim",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "importar-planilha": {
+        "status": "parcial",
+        "note": "Migração feita pelo suporte",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "note": "Painel Saúde do Negócio",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Não mostrado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "nao",
+        "note": "Só web",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://sistemaclassis.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "fluentdesk": {
+      "agenda-visual": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "remarcacao": {
+        "status": "sim",
+        "note": "Com histórico",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "lembrete-push": {
+        "status": "sim",
+        "note": "Push e e-mail",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-externa": {
+        "status": "sim",
+        "note": "Meet ou Zoom",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "sim",
+        "note": "Apostilas e biblioteca",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "tarefas": {
+        "status": "sim",
+        "note": "Correção com nota",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "quizzes": {
+        "status": "sim",
+        "note": "Provas e questionários",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "gamificacao": {
+        "status": "sim",
+        "note": "XP, selos e ranking",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "sim",
+        "note": "Pix via Asaas",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "sim",
+        "note": "Mensalidade recorrente",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Inadimplência",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "responsavel": {
+        "status": "sim",
+        "note": "Cobrança ao responsável",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "chat-interno": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "sim",
+        "note": "Três portais",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "sim",
+        "note": "PWA",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "sim",
+        "note": "Repasses",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "white-label": {
+        "status": "sim",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "sim",
+        "note": "Vitrine e leads",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Só push e e-mail",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Usa Meet ou Zoom",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "nao",
+        "note": "Portais com login",
+        "source": "https://fluentdesk.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "eclasse": {
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Cores por aluno",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "sim",
+        "note": "Diário de classe",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "parcial",
+        "note": "Pacotes sem crédito listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "sim",
+        "note": "Via Asaas",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "sim",
+        "note": "Portal do cliente",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "nao",
+        "note": "Só link externo",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-externa": {
+        "status": "parcial",
+        "note": "Link externo",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "nao",
+        "note": "Não listado",
+        "source": "https://eclasse.com.br/",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    },
+    "_nos": {
+      "ficha-aluno": {
+        "status": "sim",
+        "note": "Resumo, objetivo e abas",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "historico-aluno": {
+        "status": "sim",
+        "note": "Abas de aulas e financeiro",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "contratos": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "crm-vendas": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "importar-planilha": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "responsavel": {
+        "status": "parcial",
+        "note": "Convite sim; cobrança a confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agenda-visual": {
+        "status": "sim",
+        "note": "Semana, dia e mês",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recorrencia": {
+        "status": "sim",
+        "note": "Com alcance (esta, próximas, todas)",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "remarcacao": {
+        "status": "sim",
+        "note": "Remarca e cancela",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "reposicao-aluno": {
+        "status": "planejado",
+        "note": "Em desenvolvimento",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "conflito": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "google-agenda": {
+        "status": "parcial",
+        "note": "Agenda assinável, sem 2 vias",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "agendamento-publico": {
+        "status": "planejado",
+        "note": "Página pública do professor",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "presenca": {
+        "status": "sim",
+        "note": "Concluir, desfazer, avisou",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "falta-cobranca": {
+        "status": "sim",
+        "note": "Sem aviso cobra; experimental não",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "diario-aula": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "turmas": {
+        "status": "parcial",
+        "note": "v2, em desenvolvimento",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "plano-aula": {
+        "status": "parcial",
+        "note": "Quadro do aluno, em evolução",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "materiais": {
+        "status": "sim",
+        "note": "Matéria > módulo > tópico > material",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "tarefas": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "quizzes": {
+        "status": "planejado",
+        "note": "Exercícios e Trilhas",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "gamificacao": {
+        "status": "planejado",
+        "note": "Trilhas, em laboratório",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "controle-pagamentos": {
+        "status": "sim",
+        "note": "Contas a receber e a pagar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "pacote-credito": {
+        "status": "sim",
+        "note": "Pacote vira crédito; estorno",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "despesas": {
+        "status": "sim",
+        "note": "Livro de entradas e saídas",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorios-fin": {
+        "status": "sim",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "recibo": {
+        "status": "planejado",
+        "note": "Recibo oficial em desenvolvimento",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "nota-fiscal": {
+        "status": "nao",
+        "note": "Por decisão",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-pix": {
+        "status": "parcial",
+        "note": "Página /pagar; cobrança em dev.",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "cobranca-automatica": {
+        "status": "nao",
+        "note": "Por decisão",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "whatsapp-lembrete": {
+        "status": "sim",
+        "note": "Um toque, do WhatsApp do professor",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "mensagens-prontas": {
+        "status": "sim",
+        "note": "Modelos com variáveis",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "lembrete-push": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "chat-interno": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "relatorio-evolucao": {
+        "status": "planejado",
+        "note": "Jornal do professor / relatório do mês",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-aluno": {
+        "status": "parcial",
+        "note": "/student básico",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "link-sem-login": {
+        "status": "sim",
+        "note": "Cobrança, confirmação e sala",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "confirmar-aula": {
+        "status": "sim",
+        "note": "Página /confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-propria": {
+        "status": "sim",
+        "note": "WebRTC, 2 pessoas",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "video-externa": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "ia-aulas": {
+        "status": "planejado",
+        "note": "IA pontual: nota, relatório, exercício",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "equipe": {
+        "status": "planejado",
+        "note": "Tela de equipe adiada",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "white-label": {
+        "status": "planejado",
+        "note": "Portal white label",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "perfil-publico": {
+        "status": "planejado",
+        "note": "Página pública do professor",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      },
+      "app-mobile": {
+        "status": "desconhecido",
+        "note": "Confirmar",
+        "source": "companies/ludus/context/PRODUTO.md",
+        "by": "ia",
+        "updatedAt": "2026-10-09T22:00:00Z"
+      }
+    }
+  }
+}

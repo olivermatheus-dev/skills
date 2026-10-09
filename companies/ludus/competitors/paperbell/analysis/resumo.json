@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:19:40Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://paperbell.com/"
+    },
+    {
+      "url": "https://paperbell.com/pricing/"
+    },
+    {
+      "url": "https://paperbell.com/about-the-company/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Site, agenda, pagamentos e mensagens tudo em um para coach e consultor solo vender online",
+    "text": "Plataforma que dá ao coach um site próprio com agenda, pacotes, pagamentos (Stripe/PayPal), contratos, formulários e mensagens embutidos. Vende pacotes de sessões, grupos, downloads, planos de pagamento e assinaturas. Posiciona-se como substituto barato de juntar Squarespace, Calendly e Stripe ($97/mês contra $238 declarados). Fundada em 2020 por Laura Roeder e o marido, bootstrapped, com suporte humano por e-mail.",
+    "audience": "coaches e consultores solo, sem perfil técnico",
+    "positioning": "the simple way to sell coaching online",
+    "size": "US$ 47 milhões pagos a coaches (declarado no site)"
+  }
+}

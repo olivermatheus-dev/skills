@@ -1,0 +1,56 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:05:57Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://30pay.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@30pay.com.br"
+    ],
+    "phones": [
+      "(51) 98090-3535"
+    ],
+    "whatsapp": [
+      "+5551980903535"
+    ],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/camillarp_/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/escolagremiofbpacampobom/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/mairazimpel/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/escolawisdom/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/maxalbertibr/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/escolamaxvolei/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/gaias_volei_club/"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/30paybr/"
+      }
+    ]
+  }
+}

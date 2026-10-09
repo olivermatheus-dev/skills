@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:57:06Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de aulas particulares com cobrança Asaas e portal do cliente, R$ 187/mês",
+    "text": "Sistema para professor particular: conexões professor-cliente, agenda com links de aula online, diário de classe, pacotes de aulas e cobranças automáticas via Asaas (boleto, Pix, cartão). O cliente tem portal para ver horários, faturas e pagar. Planos pagos mensal, semestral e anual, sem plano grátis visível. Sem redes sociais linkadas e sem videochamada própria aparente.",
+    "audience": "professores particulares e seus clientes (alunos ou responsáveis)",
+    "positioning": "Simplificando a vida de professores particulares",
+    "size": "não declarado (site diz apenas 'diversos professores')"
+  }
+}

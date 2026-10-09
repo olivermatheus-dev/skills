@@ -1,0 +1,42 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:56:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe"
+    },
+    {
+      "url": "https://apps.apple.com/il/app/iprofe/id1567311665",
+      "title": "iProfe na App Store"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://iprofe.com.br",
+        "note": "site oficial; app web em app.iprofe.com.br (termos da App Store apontam para lá)"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/iprofewebapp/",
+        "handle": "iprofewebapp",
+        "note": "linkado pelo site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/channel/UCDJ1548_Z5Dr_Zx0F9cahNA",
+        "note": "linkado pelo site oficial"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

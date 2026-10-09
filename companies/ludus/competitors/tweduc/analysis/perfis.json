@@ -1,0 +1,42 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:57:08Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tweduc.com.br/professor-particular",
+      "title": "Rodapé do site linka as redes"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://tweduc.com.br",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/tweduc/",
+        "handle": "tweduc",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/teraware.sistemas",
+        "handle": "teraware.sistemas",
+        "note": "linkado no site; página da Teraware, empresa-mãe"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/teraware-solu-es-em-software-e-internet",
+        "note": "linkado no site; página da Teraware"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok"
+    ]
+  }
+}

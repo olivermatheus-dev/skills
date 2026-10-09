@@ -1,0 +1,72 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:09:56Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://opus1.io/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "support@opus1.io"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/opus1.io"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/opus1.io/"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@opus1io262"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/opus1-io"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/sharadcmohan/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/slellouche/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/shari-mcgrath-a9400929/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/brownsteve17/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/jeromethibaud/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/ericjgoode/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/michaelstruthers/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/mastersonlauren/"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/rory-cain/"
+      }
+    ]
+  }
+}

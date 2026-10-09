@@ -1,0 +1,142 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:34:48Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Plataforma para professores particulares e pequenas escolas online | Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/sobre-nos",
+      "title": "Sobre Nós | Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/entre-em-contato",
+      "title": "Entre em Contato | Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/perguntas-frequentes",
+      "title": "Perguntas Frequentes | Beaky"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://beaky.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://beaky.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Plataforma para professores particulares e pequenas escolas online | Beaky",
+        "chars": 8923
+      },
+      {
+        "url": "https://beaky.com.br/sobre-nos",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre Nós | Beaky",
+        "chars": 2540
+      },
+      {
+        "url": "https://beaky.com.br/entre-em-contato",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Entre em Contato | Beaky",
+        "chars": 790
+      },
+      {
+        "url": "https://beaky.com.br/perguntas-frequentes",
+        "kind": "faq",
+        "file": "site/faq.md",
+        "title": "Perguntas Frequentes | Beaky",
+        "chars": 2257
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 11,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/plataforma-para-professor-particular",
+          "count": 1,
+          "sample": [
+            "/plataforma-para-professor-particular"
+          ]
+        },
+        {
+          "name": "/professores-particulares",
+          "count": 1,
+          "sample": [
+            "/professores-particulares"
+          ]
+        },
+        {
+          "name": "/beaky-vs-notion",
+          "count": 1,
+          "sample": [
+            "/beaky-vs-notion"
+          ]
+        },
+        {
+          "name": "/beaky-vs-classroom",
+          "count": 1,
+          "sample": [
+            "/beaky-vs-classroom"
+          ]
+        },
+        {
+          "name": "/beaky-vs-concorrentes",
+          "count": 1,
+          "sample": [
+            "/beaky-vs-concorrentes"
+          ]
+        },
+        {
+          "name": "/sobre-nos",
+          "count": 1,
+          "sample": [
+            "/sobre-nos"
+          ]
+        },
+        {
+          "name": "/redes-sociais",
+          "count": 1,
+          "sample": [
+            "/redes-sociais"
+          ]
+        },
+        {
+          "name": "/entre-em-contato",
+          "count": 1,
+          "sample": [
+            "/entre-em-contato"
+          ]
+        },
+        {
+          "name": "/termos-de-uso",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

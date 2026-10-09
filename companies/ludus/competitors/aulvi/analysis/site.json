@@ -1,0 +1,99 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:34:22Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi — Gestão de aulas particulares: agenda, recibos e PIX"
+    },
+    {
+      "url": "https://aulvi.com.br/suporte",
+      "title": "Suporte · Aulvi"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://aulvi.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://aulvi.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Aulvi — Gestão de aulas particulares: agenda, recibos e PIX",
+        "chars": 7911
+      },
+      {
+        "url": "https://aulvi.com.br/suporte",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Suporte · Aulvi",
+        "chars": 3240
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 8,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/cadastro",
+          "count": 1,
+          "sample": [
+            "/cadastro"
+          ]
+        },
+        {
+          "name": "/como-cobrar-mensalidade-de-aluno-particular",
+          "count": 1,
+          "sample": [
+            "/como-cobrar-mensalidade-de-aluno-particular"
+          ]
+        },
+        {
+          "name": "/modelo-de-recibo-de-aula-particular",
+          "count": 1,
+          "sample": [
+            "/modelo-de-recibo-de-aula-particular"
+          ]
+        },
+        {
+          "name": "/suporte",
+          "count": 1,
+          "sample": [
+            "/suporte"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/politica-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-privacidade"
+          ]
+        },
+        {
+          "name": "/termos-uso",
+          "count": 1,
+          "sample": [
+            "/termos-uso"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

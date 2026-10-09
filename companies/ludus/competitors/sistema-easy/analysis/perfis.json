@@ -1,0 +1,33 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:17:37Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.sistemaeasy.com.br/",
+      "title": "Sistema Easy"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.sistemaeasy.com.br",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/app.sistemaeasy/",
+        "handle": "app.sistemaeasy",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

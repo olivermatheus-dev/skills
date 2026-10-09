@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:18:44Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://esportivahub.com.br/"
+    },
+    {
+      "url": "https://esportivahub.com.br/sobre"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Gestão e cobrança automática (Pix, boleto, cartão) para escolinhas de futebol",
+    "text": "Plataforma para donos de escolas de futebol: cobrança automática, frequência, cadastro de alunos, CRM, nota fiscal e IA de gestão. Promete reduzir inadimplência em até 75%. Mensalidade sob medida mais taxa por transação (Pix R$ 1,29, boleto R$ 1,49, cartão 3,69% + R$ 0,45), com comparativo contra Asaas e Vindi. Oferece ferramentas grátis (calculadoras, planilhas, contrato) e blog.",
+    "audience": "donos e gestores de escolinhas de futebol e academias esportivas",
+    "positioning": "Se você usa WhatsApp, usa o EsportivaHub",
+    "size": "+200 escolinhas (declarado no site)"
+  }
+}

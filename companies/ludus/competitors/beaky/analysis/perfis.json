@@ -1,0 +1,57 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:52:05Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br",
+      "title": "Site Beaky"
+    },
+    {
+      "url": "https://beaky.com.br/redes-sociais",
+      "title": "Página de redes sociais"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://beaky.com.br",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/beaky.com.br/",
+        "handle": "beaky.com.br",
+        "note": "linkado pelo site e por /redes-sociais"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/channel/UCPWg3bsYGwz4Sk6QSf1IIcw",
+        "note": "linkado por /redes-sociais"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/beakycombr",
+        "handle": "beakycombr",
+        "note": "linkado pelo site e por /redes-sociais"
+      },
+      {
+        "platform": "outro",
+        "url": "https://apps.apple.com/br/app/beaky/id6770173623",
+        "note": "App Store (app do aluno), linkado pelo site"
+      },
+      {
+        "platform": "outro",
+        "url": "https://play.google.com/store/apps/details?id=com.beaky.studentapp",
+        "note": "Google Play (app do aluno), linkado pelo site"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

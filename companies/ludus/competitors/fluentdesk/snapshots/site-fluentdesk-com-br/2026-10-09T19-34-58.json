@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:58Z",
+  "platform": "site",
+  "profileUrl": "https://fluentdesk.com.br",
+  "source": "html",
+  "profile": {
+    "name": "FluentDesk",
+    "handle": "fluentdesk.com.br",
+    "bio": "Agenda, materiais, tarefas, treinos, avaliação física e cobrança automática por PIX em um só lugar. Área do aluno com gamificação. Comece grátis.",
+    "avatar": "https://fluentdesk.com.br/icons/apple-touch-icon.png",
+    "avatarLocal": "media/site-fluentdesk-com-br/avatar-bd5be65c.png",
+    "banner": "https://fluentdesk.com.br/icons/icon-512.png",
+    "bannerLocal": "media/site-fluentdesk-com-br/banner-f294a773.png",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

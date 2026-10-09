@@ -1,0 +1,106 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:36:36Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://profeu.com.br/",
+      "title": "Profeu | Sistema de Gestão para Professores Particulares"
+    },
+    {
+      "url": "https://profeu.com.br/sobre",
+      "title": "Sobre o Profeu - Plataforma de Gestão Educacional"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://profeu.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://profeu.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Profeu | Sistema de Gestão para Professores Particulares",
+        "chars": 4267
+      },
+      {
+        "url": "https://profeu.com.br/sobre",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre o Profeu - Plataforma de Gestão Educacional",
+        "chars": 1632
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 9,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos"
+          ]
+        },
+        {
+          "name": "/professores-reforco-escolar",
+          "count": 1,
+          "sample": [
+            "/professores-reforco-escolar"
+          ]
+        },
+        {
+          "name": "/professores-idiomas",
+          "count": 1,
+          "sample": [
+            "/professores-idiomas"
+          ]
+        },
+        {
+          "name": "/professores-musica",
+          "count": 1,
+          "sample": [
+            "/professores-musica"
+          ]
+        },
+        {
+          "name": "/professores-escolas",
+          "count": 1,
+          "sample": [
+            "/professores-escolas"
+          ]
+        },
+        {
+          "name": "/educacao-inclusiva",
+          "count": 1,
+          "sample": [
+            "/educacao-inclusiva"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

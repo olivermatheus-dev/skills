@@ -1,0 +1,48 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:58:08Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://emusys.com.br/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://emusys.com.br",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/emusys.oficial/",
+        "handle": "emusys.oficial",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@emusys",
+        "handle": "emusys",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/emusys",
+        "handle": "emusys",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/emusys",
+        "handle": "emusys",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "x"
+    ]
+  }
+}

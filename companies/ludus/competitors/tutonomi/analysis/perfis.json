@@ -1,0 +1,31 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:16:47Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.tutonomi.com/"
+    },
+    {
+      "url": "https://www.musicmark.org.uk/providers/tutonomi"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://tutonomi.com",
+        "note": "site oficial; único canal confirmado"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

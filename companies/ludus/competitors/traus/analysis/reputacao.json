@@ -1,0 +1,29 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:14:26Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/traus01/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Traus",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/traus01/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 1,
+      "period": "1 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Sem índice, 1 reclamações, 1 anos no RA."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:18:46Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://dojo10.com/",
+      "title": "Site oficial (rodapé linka Instagram e Facebook)"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://dojo10.com",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/dojo10/",
+        "handle": "dojo10",
+        "note": "linkado pelo site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://facebook.com/dojo10",
+        "handle": "dojo10",
+        "note": "linkado pelo site"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "linkedin",
+      "x"
+    ]
+  }
+}

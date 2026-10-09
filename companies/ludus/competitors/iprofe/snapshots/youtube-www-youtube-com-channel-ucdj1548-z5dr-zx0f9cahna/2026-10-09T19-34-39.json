@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:39Z",
+  "platform": "youtube",
+  "profileUrl": "https://www.youtube.com/channel/UCDJ1548_Z5Dr_Zx0F9cahNA",
+  "source": "yt-dlp",
+  "profile": {
+    "name": "iProfe - app para professores particulares",
+    "handle": "iprofeapp",
+    "bio": "Canal do app iProfe - Software para professores particulares",
+    "avatar": "https://yt3.googleusercontent.com/foosARLimrn8Yorsa56Pdxxq1nYiJMFAg7LcJkFcDnfnfGeZcz5Ek8KjZLtgQTuCZSw_-6iUAWI=s0",
+    "avatarLocal": "media/youtube-www-youtube-com-channel-ucdj1548-z5dr-zx0f9cahna/avatar-088ed3a7.jpg",
+    "links": []
+  },
+  "items": [
+    {
+      "id": "hqNegIlP1EA",
+      "url": "https://www.youtube.com/watch?v=hqNegIlP1EA",
+      "type": "video",
+      "title": "iProfe - Software para Professores Particulares",
+      "caption": "Perfeito para gerenciar seus alunos, aulas, pagamentos, agenda semanal e grade horária!",
+      "publishedAt": "2021-03-16T21:56:32Z",
+      "durationS": 53,
+      "thumbnail": "https://i.ytimg.com/vi/hqNegIlP1EA/hq720.jpg?sqp=-oaymwE2CNAFEJQDSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB1AaAAuADigIMCAAQARhlIGEoVjAP&rs=AOn4CLAc7NX_pq49K57mY_4Wnje7El8KTw",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucdj1548-z5dr-zx0f9cahna/thumbs/hqNegIlP1EA-7bbd.webp",
+      "metrics": {
+        "views": 640,
+        "likes": 2,
+        "comments": 1
+      }
+    },
+    {
+      "id": "DRpV22ToMMw",
+      "url": "https://www.youtube.com/watch?v=DRpV22ToMMw",
+      "type": "video",
+      "title": "Instalando o iProfe no smartphone",
+      "caption": "Esse vídeo mostra, na tela do celular, como instalar o iProfe. \nTambém mostra como utilizá-lo.\nPara acessar o iProfe: https://app.iprofe.com.br\n\nA versão grátis é limitada a 3 alunos.",
+      "publishedAt": "2020-07-16T00:02:32Z",
+      "durationS": 209,
+      "thumbnail": "https://i.ytimg.com/vi/DRpV22ToMMw/hq720.jpg?sqp=-oaymwE2CNAFEJQDSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgBygKAAtAFigIMCAAQARhlIGEoTzAP&rs=AOn4CLDFm0Or_pzioXlYJR0kVxjXSmrytA",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucdj1548-z5dr-zx0f9cahna/thumbs/DRpV22ToMMw-ee3d.webp",
+      "metrics": {
+        "views": 103,
+        "likes": 2
+      }
+    }
+  ],
+  "errors": []
+}

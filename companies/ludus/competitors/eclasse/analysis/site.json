@@ -1,0 +1,67 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:35:03Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse - Simplifique sua Gestão de Aulas Particulares"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://eclasse.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://eclasse.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "eClasse - Simplifique sua Gestão de Aulas Particulares",
+        "chars": 2597
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 8,
+      "groups": [
+        {
+          "name": "/assinatura.php",
+          "count": 4,
+          "sample": [
+            "/assinatura.php"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/painel",
+          "count": 1,
+          "sample": [
+            "/painel/"
+          ]
+        },
+        {
+          "name": "/cadastrocliente",
+          "count": 1,
+          "sample": [
+            "/cadastrocliente"
+          ]
+        },
+        {
+          "name": "/termos-de-uso.php",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso.php"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

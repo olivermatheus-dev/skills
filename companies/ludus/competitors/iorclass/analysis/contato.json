@@ -1,0 +1,28 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:36:03Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+554731701273"
+    ],
+    "socials": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/iorclass/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/iorclass"
+      }
+    ]
+  }
+}

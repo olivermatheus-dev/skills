@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:00Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.edukante.com/"
+    },
+    {
+      "url": "https://www.edukante.com/sistemas-gestao-escolar/contrate-software-para-escolas-cursos-edukante.aspx"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt, preços em R$, WhatsApp +55 (DDD 81), política LGPD; CNPJ não visto"
+  }
+}

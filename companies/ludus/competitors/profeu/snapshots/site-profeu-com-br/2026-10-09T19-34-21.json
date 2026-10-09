@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:21Z",
+  "platform": "site",
+  "profileUrl": "https://profeu.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Profeu | Sistema de Gestão para Professores Particulares",
+    "handle": "profeu.com.br",
+    "bio": "Organize sua agenda de aulas, automatize o financeiro e use IA para criar atividades.",
+    "avatar": "https://profeu.com.br/apple-touch-icon.png",
+    "avatarLocal": "media/site-profeu-com-br/avatar-1662b121.png",
+    "banner": "https://profeu.com.br/assets/images/cover.png",
+    "bannerLocal": "media/site-profeu-com-br/banner-1cb76d03.png",
+    "links": [
+      "https://instagram.com/cajueduca",
+      "https://instagram.com/teacherjuliocesar",
+      "https://instagram.com/app.profeu"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

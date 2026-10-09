@@ -1,0 +1,31 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:15:52Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/transferwise/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Wise",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/transferwise/",
+      "found": true,
+      "score": 6.9,
+      "status": "Regular",
+      "complaints": 1824,
+      "solvedRate": 72,
+      "period": "9 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Regular (6,9/10), 1824 reclamações, 72% resolvidas, 9 anos no RA (achado pelo nome: conferir)."
+  }
+}

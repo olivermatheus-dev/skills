@@ -1,0 +1,29 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:16:58Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.classcardapp.com/pricing",
+      "title": "Pricing"
+    },
+    {
+      "url": "https://www.classcardapp.com/about"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Estados Unidos",
+      "Singapura"
+    ],
+    "languages": [
+      "en"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "site só em inglês, preços em US$ (Starter US$ 99/mês), ACH, contatos com telefone dos EUA e de Singapura; taxas 'variam por região'; nada em pt-BR nem em R$"
+  }
+}

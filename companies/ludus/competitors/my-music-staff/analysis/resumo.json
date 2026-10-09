@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:58:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mymusicstaff.com/"
+    },
+    {
+      "url": "https://www.mymusicstaff.com/pricing/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Gestão completa para professores e escolas de música, canadense, desde 2013.",
+    "text": "Software de gestão de estúdio: agenda de aulas particulares e em grupo, alunos e famílias, lembretes por e-mail e SMS, faturas, cobrança online e pacotes de aulas. Inclui portal do aluno, criador de site e automação de aula experimental. Plano único com tudo incluso (US$ 16,95/mês, +US$ 4,95 por professor extra), 30 dias grátis sem cartão e garantia de 90 dias. Diferencial: foco total em música, longa trajetória e suporte por telefone.",
+    "audience": "professores particulares de música, estúdios, escolas e professores itinerantes",
+    "positioning": "#1 studio management software for private music teachers & music studios",
+    "size": "4,8 de nota em 760 avaliações; milhares de professores (declarado no site)"
+  }
+}

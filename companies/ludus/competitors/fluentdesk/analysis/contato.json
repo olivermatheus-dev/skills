@@ -1,0 +1,23 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:35:38Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "fluentdeskcontato@gmail.com"
+    ],
+    "phones": [
+      "+55 12 99112-6592"
+    ],
+    "whatsapp": [
+      "+5512991126592"
+    ],
+    "socials": []
+  }
+}

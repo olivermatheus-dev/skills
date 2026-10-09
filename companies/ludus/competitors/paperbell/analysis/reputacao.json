@@ -1,0 +1,21 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:10:34Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Paperbell",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "found": false,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: empresa não encontrada na busca."
+  }
+}

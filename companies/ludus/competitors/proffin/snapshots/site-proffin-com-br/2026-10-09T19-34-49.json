@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:49Z",
+  "platform": "site",
+  "profileUrl": "https://proffin.com.br",
+  "source": "html",
+  "profile": {
+    "name": "Proffin - Aplicativo financeiro para professores particulares",
+    "handle": "proffin.com.br",
+    "bio": "Gerencie suas aulas, alunos e pagamentos de forma simples, produtiva e segura. Plataforma gratuita para professores particulares.",
+    "avatar": "https://proffin.com.br/app/assets/favicon.svg",
+    "banner": "https://proffin.com.br/img/proffin-share.jpg",
+    "bannerLocal": "media/site-proffin-com-br/banner-7ea29ff6.jpg",
+    "links": []
+  },
+  "items": [],
+  "errors": []
+}

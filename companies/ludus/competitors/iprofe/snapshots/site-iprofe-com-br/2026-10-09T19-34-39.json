@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T19:34:39Z",
+  "platform": "site",
+  "profileUrl": "https://iprofe.com.br",
+  "source": "html",
+  "profile": {
+    "name": "iProfe - Gerenciador de Alunos",
+    "handle": "iprofe.com.br",
+    "avatar": "https://iprofe.com.br/assets/img/favicon.png",
+    "avatarLocal": "media/site-iprofe-com-br/avatar-a310b9e3.png",
+    "banner": "http://www.iprofe.com.br/images/icon.png",
+    "links": [
+      "https://www.instagram.com/iprofewebapp/channel",
+      "https://www.youtube.com/channel/UCDJ1548_Z5Dr_Zx0F9cahNA"
+    ]
+  },
+  "items": [],
+  "errors": []
+}

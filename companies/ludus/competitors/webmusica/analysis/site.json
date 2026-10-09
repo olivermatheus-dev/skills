@@ -1,0 +1,124 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:15:00Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://sistemawebmusica.com.br/",
+      "title": "WebMúsica — sistema de gestão para escolas de música"
+    },
+    {
+      "url": "https://sistemawebmusica.com.br/precos",
+      "title": "Preços — WebMúsica"
+    },
+    {
+      "url": "https://sistemawebmusica.com.br/funcionalidades/",
+      "title": "Funcionalidades — WebMúsica"
+    },
+    {
+      "url": "https://sistemawebmusica.com.br/ajuda",
+      "title": "Ajuda — WebMúsica"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://sistemawebmusica.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://sistemawebmusica.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "WebMúsica — sistema de gestão para escolas de música",
+        "chars": 5856
+      },
+      {
+        "url": "https://sistemawebmusica.com.br/precos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Preços — WebMúsica",
+        "chars": 3443
+      },
+      {
+        "url": "https://sistemawebmusica.com.br/funcionalidades/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades — WebMúsica",
+        "chars": 5747
+      },
+      {
+        "url": "https://sistemawebmusica.com.br/ajuda",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Ajuda — WebMúsica",
+        "chars": 2713
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 18,
+      "groups": [
+        {
+          "name": "/funcionalidades",
+          "count": 11,
+          "sample": [
+            "/funcionalidades",
+            "/funcionalidades/captacao-de-alunos",
+            "/funcionalidades/alunos-e-contratos",
+            "/funcionalidades/grade-de-horarios"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/precos",
+          "count": 1,
+          "sample": [
+            "/precos"
+          ]
+        },
+        {
+          "name": "/ajuda",
+          "count": 1,
+          "sample": [
+            "/ajuda"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog"
+          ]
+        },
+        {
+          "name": "/teste",
+          "count": 1,
+          "sample": [
+            "/teste"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

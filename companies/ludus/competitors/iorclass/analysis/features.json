@@ -1,0 +1,139 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:38:44Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.iorclass.com.br/",
+      "title": "iorCLASS | Gestão para Professores"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Alunos",
+        "items": [
+          {
+            "name": "Gestão de alunos em uma tela",
+            "detail": "aulas realizadas e financeiro do aluno",
+            "highlight": true
+          },
+          {
+            "name": "Processo de vendas",
+            "detail": "alunos em potencial, histórico de contatos, nível de interesse, aula experimental e status da negociação",
+            "highlight": true
+          },
+          {
+            "name": "Contratos digitais",
+            "detail": "controle de períodos de renovação",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda completa",
+            "detail": "aulas individuais ou em grupo e compromissos pessoais",
+            "highlight": true
+          },
+          {
+            "name": "Aulas em grupo / turmas",
+            "detail": "presença e financeiro por aluno",
+            "highlight": true
+          },
+          {
+            "name": "Tarefas",
+            "detail": "fora da agenda, com previsão de entrega",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Plano de aulas",
+            "detail": "aluno vê antes o que será feito",
+            "highlight": false
+          },
+          {
+            "name": "Acompanhamento da aula",
+            "detail": "relatório do que foi lecionado, feedbacks e tarefas para o aluno",
+            "highlight": false
+          },
+          {
+            "name": "Extrato de aulas",
+            "detail": "enviado ao aluno com aulas do período",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Gestão financeira",
+            "detail": "entradas, saídas, lançamentos recorrentes, fluxo de caixa, contas a pagar",
+            "highlight": true
+          },
+          {
+            "name": "Recibo digital",
+            "highlight": false
+          },
+          {
+            "name": "Relatórios financeiros",
+            "detail": "fluxo de caixa e evolução anual",
+            "highlight": false
+          },
+          {
+            "name": "Relatórios de aulas",
+            "detail": "realizadas, pendentes e canceladas por aluno",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do aluno",
+        "items": [
+          {
+            "name": "Aplicativo do aluno",
+            "detail": "agenda, anotações, plano de aula, financeiro, notificação de aula e pagamento",
+            "highlight": true
+          },
+          {
+            "name": "App Android na Play Store, PWA e navegador",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Arquivos compartilhados com o aluno",
+            "detail": "1 GB incluso, mais espaço contratável",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Funil de vendas de aulas (aula experimental, nível de interesse) dentro do sistema",
+      "Aplicativo do aluno com login e notificações de aula e pagamento",
+      "Contratos digitais com controle de renovação",
+      "Criada por uma professora de canto (história de fundadora)"
+    ],
+    "missing": [
+      "videochamada própria",
+      "cobrança automática/gateway de pagamento do aluno",
+      "lembrete por WhatsApp (não citado)",
+      "remarcação por alcance/recorrência (não citado)",
+      "pacote de aulas virando crédito (não citado)",
+      "nota fiscal",
+      "equipe/escola com vários professores (declarado fora do escopo)"
+    ]
+  }
+}

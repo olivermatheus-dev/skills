@@ -1,0 +1,304 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:06:16Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://agende-me.com/",
+      "title": "Sistema de Agendamento com WhatsApp Automático para Salão e Studio | Agende-me"
+    },
+    {
+      "url": "https://agende-me.com/planos/",
+      "title": "Planos e Preços | Agende-me"
+    },
+    {
+      "url": "https://agende-me.com/ajuda/",
+      "title": "Central de Ajuda do Agende-me | Perguntas Frequentes e Contato"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://agende-me.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://agende-me.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Sistema de Agendamento com WhatsApp Automático para Salão e Studio | Agende-me",
+        "chars": 17189
+      },
+      {
+        "url": "https://agende-me.com/planos/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos e Preços | Agende-me",
+        "chars": 3601
+      },
+      {
+        "url": "https://agende-me.com/ajuda/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Central de Ajuda do Agende-me | Perguntas Frequentes e Contato",
+        "chars": 2187
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 95,
+      "groups": [
+        {
+          "name": "/ajuda",
+          "count": 21,
+          "sample": [
+            "/ajuda/",
+            "/ajuda/contato/",
+            "/ajuda/perguntas-frequentes/",
+            "/ajuda/tutoriais/"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 21,
+          "sample": [
+            "/blog/",
+            "/blog/agendamento-online-para-barbeiros/",
+            "/blog/agendamento-online-para-esteticistas/",
+            "/blog/agendamento-online-para-lash-designers/"
+          ]
+        },
+        {
+          "name": "/glossario",
+          "count": 17,
+          "sample": [
+            "/glossario/",
+            "/glossario/agenda-compartilhada/",
+            "/glossario/agendamento-online/",
+            "/glossario/cliente-recorrente/"
+          ]
+        },
+        {
+          "name": "/guias",
+          "count": 6,
+          "sample": [
+            "/guias/",
+            "/guias/agendamento-para-barbearias-guia-completo/",
+            "/guias/agendamento-para-cabeleireiras-guia-completo/",
+            "/guias/agendamento-para-esteticistas-guia-completo/"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/app",
+          "count": 1,
+          "sample": [
+            "/app/"
+          ]
+        },
+        {
+          "name": "/barbearia",
+          "count": 1,
+          "sample": [
+            "/barbearia/"
+          ]
+        },
+        {
+          "name": "/beleza",
+          "count": 1,
+          "sample": [
+            "/beleza/"
+          ]
+        },
+        {
+          "name": "/cabeleireira",
+          "count": 1,
+          "sample": [
+            "/cabeleireira/"
+          ]
+        },
+        {
+          "name": "/comparacao-sistemas-agendamento",
+          "count": 1,
+          "sample": [
+            "/comparacao-sistemas-agendamento/"
+          ]
+        },
+        {
+          "name": "/dados",
+          "count": 1,
+          "sample": [
+            "/dados/"
+          ]
+        },
+        {
+          "name": "/dentista",
+          "count": 1,
+          "sample": [
+            "/dentista/"
+          ]
+        },
+        {
+          "name": "/depiladora",
+          "count": 1,
+          "sample": [
+            "/depiladora/"
+          ]
+        },
+        {
+          "name": "/esteticista",
+          "count": 1,
+          "sample": [
+            "/esteticista/"
+          ]
+        },
+        {
+          "name": "/fisioterapeuta",
+          "count": 1,
+          "sample": [
+            "/fisioterapeuta/"
+          ]
+        },
+        {
+          "name": "/lash-designer",
+          "count": 1,
+          "sample": [
+            "/lash-designer/"
+          ]
+        },
+        {
+          "name": "/lava-jato",
+          "count": 1,
+          "sample": [
+            "/lava-jato/"
+          ]
+        },
+        {
+          "name": "/link-de-agendamento-para-clientes",
+          "count": 1,
+          "sample": [
+            "/link-de-agendamento-para-clientes/"
+          ]
+        },
+        {
+          "name": "/link-de-marcacoes-para-clientes",
+          "count": 1,
+          "sample": [
+            "/link-de-marcacoes-para-clientes/"
+          ]
+        },
+        {
+          "name": "/manicure",
+          "count": 1,
+          "sample": [
+            "/manicure/"
+          ]
+        },
+        {
+          "name": "/maquiadora",
+          "count": 1,
+          "sample": [
+            "/maquiadora/"
+          ]
+        },
+        {
+          "name": "/massoterapia",
+          "count": 1,
+          "sample": [
+            "/massoterapia/"
+          ]
+        },
+        {
+          "name": "/medico",
+          "count": 1,
+          "sample": [
+            "/medico/"
+          ]
+        },
+        {
+          "name": "/o-que-e-o-agende-me",
+          "count": 1,
+          "sample": [
+            "/o-que-e-o-agende-me/"
+          ]
+        },
+        {
+          "name": "/personal-trainer",
+          "count": 1,
+          "sample": [
+            "/personal-trainer/"
+          ]
+        },
+        {
+          "name": "/pet-shop",
+          "count": 1,
+          "sample": [
+            "/pet-shop/"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos/"
+          ]
+        },
+        {
+          "name": "/podologa",
+          "count": 1,
+          "sample": [
+            "/podologa/"
+          ]
+        },
+        {
+          "name": "/privacidade",
+          "count": 1,
+          "sample": [
+            "/privacidade/"
+          ]
+        },
+        {
+          "name": "/professor-particular",
+          "count": 1,
+          "sample": [
+            "/professor-particular/"
+          ]
+        },
+        {
+          "name": "/psicologo",
+          "count": 1,
+          "sample": [
+            "/psicologo/"
+          ]
+        },
+        {
+          "name": "/segmentos",
+          "count": 1,
+          "sample": [
+            "/segmentos/"
+          ]
+        },
+        {
+          "name": "/sistema-de-agendamento-para-salao-de-beleza",
+          "count": 1,
+          "sample": [
+            "/sistema-de-agendamento-para-salao-de-beleza/"
+          ]
+        },
+        {
+          "name": "/termos",
+          "count": 1,
+          "sample": [
+            "/termos/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

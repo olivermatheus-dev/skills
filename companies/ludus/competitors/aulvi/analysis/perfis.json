@@ -1,0 +1,29 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:52:16Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br",
+      "title": "Aulvi - site oficial"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://aulvi.com.br",
+        "note": "site oficial; rodapé: Vitor Brito Rocha Ltda, WhatsApp comercial; sem links de redes"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

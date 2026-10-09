@@ -1,0 +1,100 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:08:30Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://esportivahub.com.br/",
+      "title": "EsportivaHub | Plataforma Completa para Escolas de Futebol"
+    },
+    {
+      "url": "https://esportivahub.com.br/sobre",
+      "title": "Sobre o EsportivaHub | Gestão para Escolinhas de Futebol"
+    },
+    {
+      "url": "https://esportivahub.com.br/contato",
+      "title": "Contato | EsportivaHub"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://esportivahub.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://esportivahub.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "EsportivaHub | Plataforma Completa para Escolas de Futebol",
+        "chars": 5857
+      },
+      {
+        "url": "https://esportivahub.com.br/sobre",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre o EsportivaHub | Gestão para Escolinhas de Futebol",
+        "chars": 3217
+      },
+      {
+        "url": "https://esportivahub.com.br/contato",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contato | EsportivaHub",
+        "chars": 2405
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 58,
+      "groups": [
+        {
+          "name": "/ferramentas",
+          "count": 52,
+          "sample": [
+            "/ferramentas",
+            "/ferramentas/calculadora-inadimplencia",
+            "/ferramentas/contrato-matricula-escola-futebol",
+            "/ferramentas/calculadora-mensalidade"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 2,
+          "sample": [
+            "/blog",
+            "/blog/como-reduzir-inadimplencia-escolinha-futebol"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/contato",
+          "count": 1,
+          "sample": [
+            "/contato"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

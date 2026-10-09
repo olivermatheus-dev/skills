@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:58:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://alunoemdia.com.br/",
+      "title": "Home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Sistema via WhatsApp para personal, professor de luta e academia pequena: agenda, cobrança e portal do aluno",
+    "text": "Vende assinatura (R$ 34,90/mês; R$ 27,90/mês no anual) para professores particulares de jiu-jitsu, lutas, musculação e funcional. O professor conecta o próprio WhatsApp, registra a aula por áudio, e o sistema transcreve, cobra, lembra e alimenta um portal do aluno por link, sem app. Diferencial: tudo acontece no WhatsApp do professor e há fluxos por modalidade (faixa/grau, treino A/B/C). Modalidade extra custa R$ 14,90/mês.",
+    "audience": "personal trainers, professores de musculação, jiu-jitsu e lutas, academias e estúdios pequenos",
+    "positioning": "Você dá a aula, o Aluno Em Dia organiza o resto."
+  }
+}

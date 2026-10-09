@@ -1,0 +1,245 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:41:10Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home, seção Planos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 89.9,
+    "trial": "teste grátis, sem cartão (duração não informada)",
+    "plans": [
+      {
+        "name": "Iniciante",
+        "monthly": 89.9,
+        "yearlyMonthly": 74.92,
+        "yearlyTotal": 899,
+        "users": "até 2 professores, até 15 alunos",
+        "highlights": [
+          "até 15 alunos",
+          "até 2 professores",
+          "todas as funcionalidades"
+        ],
+        "recommended": false,
+        "id": "iniciante",
+        "audience": "solo",
+        "seats": {
+          "included": 2,
+          "max": 2,
+          "unlimited": false,
+          "extraPrice": 44.9
+        },
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [
+          "Todas as funcionalidades",
+          "Portais professor, aluno e responsável",
+          "Cobrança automática Pix + Asaas",
+          "Notificações push + e-mail",
+          "App no celular (PWA)"
+        ],
+        "matrix": [],
+        "limits": [
+          {
+            "metric": "outro",
+            "value": 15,
+            "unlimited": false,
+            "period": "total",
+            "note": "alunos; extra R$ 4,90 cada"
+          },
+          {
+            "metric": "profissionais",
+            "value": 2,
+            "unlimited": false,
+            "period": "total"
+          }
+        ]
+      },
+      {
+        "name": "Profissional",
+        "monthly": 139.9,
+        "yearlyMonthly": 116.58,
+        "yearlyTotal": 1399,
+        "users": "até 5 professores, até 60 alunos",
+        "highlights": [
+          "até 60 alunos",
+          "até 5 professores",
+          "suporte prioritário"
+        ],
+        "recommended": true,
+        "id": "profissional",
+        "audience": "equipe",
+        "seats": {
+          "included": 5,
+          "max": 5,
+          "unlimited": false,
+          "extraPrice": 22.9
+        },
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [
+          "Todas as funcionalidades",
+          "Portais professor, aluno e responsável",
+          "Cobrança automática Pix + Asaas",
+          "Notificações push + e-mail",
+          "App no celular (PWA)",
+          "Suporte prioritário"
+        ],
+        "matrix": [],
+        "limits": [
+          {
+            "metric": "outro",
+            "value": 60,
+            "unlimited": false,
+            "period": "total",
+            "note": "alunos; extra R$ 2,90 cada"
+          },
+          {
+            "metric": "profissionais",
+            "value": 5,
+            "unlimited": false,
+            "period": "total"
+          }
+        ]
+      },
+      {
+        "name": "Empresarial",
+        "monthly": 299.9,
+        "yearlyMonthly": 249.92,
+        "yearlyTotal": 2999,
+        "users": "até 10 professores, até 200 alunos",
+        "highlights": [
+          "até 200 alunos",
+          "até 10 professores",
+          "painel de gestão"
+        ],
+        "recommended": false,
+        "id": "empresarial",
+        "audience": "equipe",
+        "seats": {
+          "included": 10,
+          "max": 10,
+          "unlimited": false,
+          "extraPrice": 22.9
+        },
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [
+          "Todas as funcionalidades",
+          "Portais professor, aluno e responsável",
+          "Cobrança automática Pix + Asaas",
+          "Painel de gestão centralizado",
+          "Notificações push + e-mail",
+          "Suporte prioritário + onboarding"
+        ],
+        "matrix": [],
+        "limits": [
+          {
+            "metric": "outro",
+            "value": 200,
+            "unlimited": false,
+            "period": "total",
+            "note": "alunos; extra R$ 2,90 cada"
+          },
+          {
+            "metric": "profissionais",
+            "value": 10,
+            "unlimited": false,
+            "period": "total"
+          }
+        ]
+      }
+    ],
+    "extras": [
+      "Aluno e responsável acessam grátis",
+      "Anual = 2 meses grátis"
+    ],
+    "notes": "Só a home foi lida: não há página de preços, termos nem checkout no site baixado. Preço anual lido do alternador (74,92; 116,58; 249,92 por mês, total cobrado de uma vez). Preço de marca personalizada e onboarding não informado. Duração do teste e prazo de cancelamento não informados (FAQ remete ao contrato). A FAQ cita 'plano Professor, até 50 alunos' e 'plano Escola' ilimitado, o que contradiz a tabela (conferir). O 'Escola' nos add-ons da tabela refere-se ao Empresarial.",
+    "pageDefaultCycle": "mensal",
+    "trialNeedsCard": false,
+    "commitment": "nao-informado",
+    "paymentMethods": [],
+    "addOns": [
+      {
+        "name": "Aluno extra",
+        "price": 4.9,
+        "unit": "mes",
+        "per": "aluno",
+        "planIds": [
+          "iniciante"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Aluno extra",
+        "price": 2.9,
+        "unit": "mes",
+        "per": "aluno",
+        "planIds": [
+          "profissional",
+          "empresarial"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Professor extra",
+        "price": 44.9,
+        "unit": "mes",
+        "per": "professor",
+        "planIds": [
+          "iniciante"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Professor extra",
+        "price": 22.9,
+        "unit": "mes",
+        "per": "professor",
+        "planIds": [
+          "profissional",
+          "empresarial"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Marca personalizada",
+        "unit": "mes",
+        "planIds": [
+          "profissional",
+          "empresarial"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Onboarding 1:1",
+        "unit": "unico",
+        "planIds": [
+          "profissional"
+        ],
+        "unlocks": []
+      },
+      {
+        "name": "Migração de dados assistida",
+        "unit": "unico",
+        "planIds": [
+          "empresarial"
+        ],
+        "unlocks": []
+      }
+    ],
+    "checkedPages": [
+      {
+        "kind": "home",
+        "url": "https://fluentdesk.com.br/"
+      }
+    ]
+  }
+}

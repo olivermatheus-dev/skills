@@ -1,0 +1,23 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:18:30Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sportclazz.com/"
+    },
+    {
+      "url": "https://sportclazz.com/planos"
+    },
+    {
+      "url": "https://sportclazz.com/sobre"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de agenda, presença e reposição para professor de tênis, beach tennis, padel e pickleball.",
+    "text": "Plataforma com portal do professor e portal do aluno. Agenda, presenças, reposições e faltas com regras, histórico de aulas e relatórios. O professor começa sozinho: usa tudo no primeiro dia, sem aluno conectado, e traz os alunos depois. Plano Pro único (R$ 79,90/mês ou R$ 799,90/ano) com 14 dias grátis sem cartão; plano Academia para equipes marcado como em breve.",
+    "audience": "professores autônomos de esportes de raquete (tênis, beach tennis, padel, pickleball)",
+    "positioning": "Gestão esportiva para quem ensina e para quem aprende."
+  }
+}

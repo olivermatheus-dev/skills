@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:58:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tuton.io/"
+    },
+    {
+      "url": "https://tuton.io/pricing"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "internacional",
+    "countries": [],
+    "languages": [
+      "en"
+    ],
+    "currencies": [
+      "USD",
+      "EUR",
+      "GBP"
+    ],
+    "evidence": "site só em inglês, preços em dólar (com moeda local como EUR/GBP), sem CNPJ nem pt-BR; lado do aluno em 17 idiomas, tradução de palavras em 75+. Não há menção ao Brasil."
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:39:40Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Horário fixo do aluno que gera as aulas das próximas semanas",
+            "highlight": true
+          },
+          {
+            "name": "Aviso de choque de horário",
+            "highlight": false
+          },
+          {
+            "name": "Sincronização com Google Agenda nos dois sentidos",
+            "detail": "calendário próprio \"Aulas\"; horários ocupados aparecem no painel",
+            "highlight": true
+          },
+          {
+            "name": "Aula não dada vira pendência com contador até remarcar",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Presença",
+        "items": [
+          {
+            "name": "Confirmação em um toque por notificação no celular",
+            "detail": "confirmar, remarcar ou marcar que não deu",
+            "highlight": true
+          },
+          {
+            "name": "Presença por sessão em aulão (turma)",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Recibo com link público e chave PIX copia e cola",
+            "detail": "mensagem pronta para WhatsApp",
+            "highlight": true
+          },
+          {
+            "name": "Cobrança por aula dada ou mensalidade antecipada",
+            "detail": "desconto de pontualidade e crédito de aula que não rolou",
+            "highlight": false
+          },
+          {
+            "name": "Mensalidade compartilhada da turma",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação/WhatsApp",
+        "items": [
+          {
+            "name": "Mensagem de cobrança escrita para colar no WhatsApp",
+            "detail": "envio manual pelo professor",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Professores auxiliares até 12, cada um com a própria agenda",
+            "highlight": true
+          },
+          {
+            "name": "Financeiro somado no dono do curso; auxiliar não vê valores",
+            "highlight": false
+          },
+          {
+            "name": "Resumo semanal da equipe por notificação",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Guias abertos: cobrar mensalidade e modelo de recibo",
+            "detail": "conteúdo para atrair",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Sem limite de função por faixa: só muda o número de alunos ativos",
+      "Aulão em turma com mensalidade compartilhada",
+      "Área de equipe com financeiro centralizado no dono do curso",
+      "Recibo nasce da agenda, sem digitar duas vezes"
+    ],
+    "missing": [
+      "videochamada nativa",
+      "portal ou link do aluno com login/ações (não mostrado)",
+      "plano de aula e materiais",
+      "lembrete automático ao aluno por WhatsApp (só mensagem para colar)",
+      "baixa automática de pagamento",
+      "nota fiscal (só explicam a diferença no guia)",
+      "app nativo (é sistema web)"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:07:33Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://dojo10.com/",
+      "title": "DOJO10 - O Aplicativo das Artes Marciais | Gestão com IA"
+    },
+    {
+      "url": "https://dojo10.com/planos",
+      "title": "DOJO10 - O Aplicativo das Artes Marciais | Gestão com IA"
+    },
+    {
+      "url": "https://dojo10.com/funcionalidades",
+      "title": "Centro de Treinamento não encontrado | DOJO10 | DOJO10"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://dojo10.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://dojo10.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "DOJO10 - O Aplicativo das Artes Marciais | Gestão com IA",
+        "chars": 17064
+      },
+      {
+        "url": "https://dojo10.com/planos",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "DOJO10 - O Aplicativo das Artes Marciais | Gestão com IA",
+        "chars": 1147
+      },
+      {
+        "url": "https://dojo10.com/funcionalidades",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Centro de Treinamento não encontrado | DOJO10 | DOJO10",
+        "chars": 554
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 392,
+      "groups": [
+        {
+          "name": "/artigos",
+          "count": 385,
+          "sample": [
+            "/artigos",
+            "/artigos/karate-schiedsrichterwesen-wertung-kata-kumite-leitfaden-interne-turniere",
+            "/artigos/karate-refereeing-scoring-kata-kumite-internal-tournaments",
+            "/artigos/arbitragem-pontuacao-karate-kata-kumite-torneios-internos"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/comparativo",
+          "count": 1,
+          "sample": [
+            "/comparativo"
+          ]
+        },
+        {
+          "name": "/oferta",
+          "count": 1,
+          "sample": [
+            "/oferta"
+          ]
+        },
+        {
+          "name": "/login",
+          "count": 1,
+          "sample": [
+            "/login"
+          ]
+        },
+        {
+          "name": "/signup",
+          "count": 1,
+          "sample": [
+            "/signup"
+          ]
+        },
+        {
+          "name": "/privacy",
+          "count": 1,
+          "sample": [
+            "/privacy"
+          ]
+        },
+        {
+          "name": "/terms",
+          "count": 1,
+          "sample": [
+            "/terms"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:15:24Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/wehelpu-teacher/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=We%20Help%20U%20Teacher",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/wehelpu-teacher/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 0,
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Sem índice, 0 reclamações (achado pelo nome: conferir)."
+  }
+}

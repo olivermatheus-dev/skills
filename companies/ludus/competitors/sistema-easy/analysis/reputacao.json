@@ -1,0 +1,29 @@
+{
+  "module": "reputacao",
+  "updatedAt": "2026-10-09T19:11:53Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/eleve-web-design/",
+      "title": "Reclame Aqui"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/busca/?q=Sistema%20Easy",
+      "title": "Busca no Reclame Aqui"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "reclameAqui": {
+      "url": "https://www.reclameaqui.com.br/empresa/eleve-web-design/",
+      "found": true,
+      "status": "Sem índice",
+      "complaints": 0,
+      "period": "2 anos no RA",
+      "topComplaints": []
+    },
+    "stores": [],
+    "mentions": [],
+    "summary": "Reclame Aqui: Sem índice, 0 reclamações, 2 anos no RA."
+  }
+}

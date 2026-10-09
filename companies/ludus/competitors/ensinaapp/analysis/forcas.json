@@ -1,0 +1,67 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:40:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br/"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/precos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço de entrada baixo e simples, todas as funções em todos os planos",
+        "evidence": "R$ 47/mês até 10 alunos; só o limite de alunos muda"
+      },
+      {
+        "point": "Trial de 14 dias sem cartão e sem comissão",
+        "evidence": "FAQ: sem cobrança automática; 100% do pagamento do aluno vai para a professora"
+      },
+      {
+        "point": "Fluxo completo: aluno agenda, paga e recebe tudo automático",
+        "evidence": "página pública, PIX/cartão InfinitePay, Meet e lembretes"
+      },
+      {
+        "point": "Ferramentas de ensino embutidas",
+        "evidence": "flashcards, quizzes, exercícios com sandbox de código"
+      },
+      {
+        "point": "Mensagem clara contra o WhatsApp para vários tipos de aula",
+        "evidence": "hero e comparativo antes/depois"
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Sem presença online: nenhuma rede social e sem Reclame Aqui",
+        "evidence": "nenhum perfil linkado no site; Reclame Aqui sem página"
+      },
+      {
+        "point": "Sem prova social na home",
+        "evidence": "nenhum depoimento, número de usuárias ou nota de loja"
+      },
+      {
+        "point": "Limite de alunos encarece quem cresce",
+        "evidence": "R$ 97 até 30 alunos; R$ 197 até 100"
+      },
+      {
+        "point": "Depende de Google Meet, Calendar e de um só gateway",
+        "evidence": "sem videochamada própria; pagamento só InfinitePay"
+      },
+      {
+        "point": "Financeiro mais raso: sem falta com cobrança, despesas ou nota fiscal visíveis",
+        "evidence": "não aparecem na lista de funcionalidades"
+      }
+    ],
+    "opportunities": [
+      "Ludus tem videochamada própria e financeiro mais profundo (crédito, parcelas, falta com regra, despesas) que o EnsinaApp não mostra",
+      "Aluno sem login por link no WhatsApp, contra o convite por e-mail e painel do aluno deles",
+      "O professor decide e nada é automático: contraponto ao PIX automático que libera pacote sozinho",
+      "EnsinaApp não tem redes nem prova social: espaço para autoridade e acabamento",
+      "Referência de preço: R$ 47 a R$ 97 por faixa de alunos; o Ludus ainda não definiu preço"
+    ]
+  }
+}

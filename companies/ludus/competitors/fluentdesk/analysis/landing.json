@@ -1,0 +1,122 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:41:12Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://fluentdesk.com.br/",
+    "hero": {
+      "headline": "Pare de gerenciar aulas pelo WhatsApp. Existe jeito melhor.",
+      "subheadline": "Agenda, tarefas, materiais e progresso dos alunos em um único sistema profissional. Para professores solo ou escolas com equipe.",
+      "cta": "Criar meu ambiente",
+      "visual": "mock do painel do professor com alunos, entregas e progresso"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Pare de gerenciar aulas pelo WhatsApp",
+        "summary": "Promessa de trocar o WhatsApp por um sistema; selo '250+ aulas agendadas' e 'sem cartão'"
+      },
+      {
+        "type": "problema",
+        "title": "Você se identifica?",
+        "summary": "Cinco dores: alunos esquecendo, tarefas no WhatsApp, materiais espalhados, equipe sem controle, agenda bagunçada"
+      },
+      {
+        "type": "solucao",
+        "title": "Veja em ação",
+        "summary": "Demonstração em vídeo de 1 minuto"
+      },
+      {
+        "type": "como-funciona",
+        "title": "Organize em 4 passos",
+        "summary": "Crie a aula, adicione materiais, envie tarefas, acompanhe progresso"
+      },
+      {
+        "type": "beneficios",
+        "title": "Mais organização, mais profissionalismo",
+        "summary": "Cinco benefícios e mock do painel com progresso dos alunos"
+      },
+      {
+        "type": "features",
+        "title": "Tudo em um só lugar",
+        "summary": "12 cartões: agenda, apostilas, tarefas, cobrança, equipe, portais, gamificação"
+      },
+      {
+        "type": "features",
+        "title": "Treino também",
+        "summary": "Bloco para personal trainers e academias"
+      },
+      {
+        "type": "features",
+        "title": "Mais de 100 funcionalidades",
+        "summary": "Lista longa por categoria, 11 grupos"
+      },
+      {
+        "type": "depoimentos",
+        "title": "Professores que transformaram a rotina",
+        "summary": "Três depoimentos de cinco estrelas e exemplo ao vivo da escola Glow English"
+      },
+      {
+        "type": "comparativo",
+        "title": "FluentDesk vs a gambiarra",
+        "summary": "Tabela contra WhatsApp+Drive e planilha, 7 linhas"
+      },
+      {
+        "type": "precos",
+        "title": "Preço simples e transparente",
+        "summary": "Três planos com alternador mensal/anual e add-ons"
+      },
+      {
+        "type": "faq",
+        "title": "Perguntas frequentes",
+        "summary": "8 perguntas: instalação, aluno paga, planos, cancelamento, marca, Meet, pais, Pix"
+      },
+      {
+        "type": "cta",
+        "title": "Prefere que a gente te chame?",
+        "summary": "Formulário de WhatsApp e botão de falar agora"
+      },
+      {
+        "type": "cta",
+        "title": "Comece a organizar suas aulas hoje",
+        "summary": "CTA final: sem cartão, menos de 2 minutos, cancele quando quiser"
+      },
+      {
+        "type": "rodape",
+        "title": "Rodapé",
+        "summary": "Termos, privacidade, WhatsApp, e-mail e 'powered by Deskflow'"
+      }
+    ],
+    "ctas": [
+      "Criar meu ambiente",
+      "Começar grátis",
+      "Ver demo",
+      "Quero organizar minhas aulas",
+      "Quero sair da gambiarra",
+      "Começar agora",
+      "Quero que me chamem"
+    ],
+    "socialProof": [
+      "250+ aulas agendadas",
+      "3 depoimentos 5 estrelas (Juliana M., Carlos A., Fernanda R.)",
+      "Glow English como exemplo ao vivo",
+      "R$ 0 de custo para os alunos"
+    ],
+    "interesting": [
+      "Comparativo contra a 'gambiarra' (WhatsApp, Drive, planilha) em vez de contra concorrente",
+      "Selo 'sem cartão, menos de 2 minutos' repetido no topo e no fim",
+      "Alternador mensal/anual com '2 meses grátis'",
+      "Formulário 'prefere que a gente te chame' para quem não quer se cadastrar",
+      "Exemplo ao vivo de cliente com domínio e marca próprios",
+      "Argumento 'o aluno não paga' em número e na FAQ"
+    ],
+    "tone": "profissional e direto, foco em organização e imagem de profissional; mais produto do que pessoa"
+  }
+}

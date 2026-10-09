@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:16:33Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de alunos para professor particular, com lembrete e cobrança por WhatsApp.",
+    "text": "Sistema online de agenda, financeiro (cobrança via Pix) e lembretes automáticos por WhatsApp para professores particulares, escolas de idiomas, música e reforço. Teste de 7 dias sem cartão; planos de R$ 59,90, R$ 99,90 e um terceiro para reforço e escolas, limitados por alunos e mensagens. Posiciona-se contra a planilha e o constrangimento de cobrar. Suporte direto com os fundadores no plano do meio.",
+    "audience": "professores particulares e pequenos centros de reforço, idiomas e música",
+    "positioning": "Sua agenda organizada, seu bolso cheio e mais tempo para ensinar.",
+    "size": "\"centenas de professores\" (declarado no site, sem prova)"
+  }
+}

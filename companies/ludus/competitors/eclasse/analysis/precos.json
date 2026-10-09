@@ -1,0 +1,74 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:40:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 187,
+    "guarantee": "7 dias de reembolso",
+    "plans": [
+      {
+        "name": "eClasse - Professor Mensal",
+        "monthly": 187,
+        "users": "1 professor",
+        "highlights": [
+          "Pagamento mensal",
+          "Todas as funcionalidades"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "eClasse - Professor Semestral",
+        "yearlyMonthly": 103.17,
+        "users": "1 professor",
+        "highlights": [
+          "R$ 619 por 6 meses",
+          "Economize R$ 503 em 6 meses"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "eClasse - Professor Anual",
+        "yearlyMonthly": 74.75,
+        "yearlyTotal": 897,
+        "users": "1 professor",
+        "highlights": [
+          "R$ 897 por 12 meses",
+          "Economize R$ 1.347 no ano"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [
+      "Taxas do Asaas nas cobranças dos alunos: não informadas na home"
+    ],
+    "notes": "Coletado só da home estática (2026-10-09). Semestral = R$ 619 total (equiv. R$ 103,17/mês, calculado). Anual equivale a R$ 74,75/mês. Planos diferem só pela periodicidade; todas as funcionalidades em qualquer plano. Sem trial, limite de alunos, fidelidade ou taxa Asaas encontrados; não abri /assinatura.php nem termos.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

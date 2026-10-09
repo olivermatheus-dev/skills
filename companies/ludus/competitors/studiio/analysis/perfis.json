@@ -1,0 +1,38 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:18:24Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://apps.apple.com/br/app/id1639003423",
+      "title": "Studiio: Agenda para pilates (App Store)"
+    },
+    {
+      "url": "https://www.capterra.com/p/10013461/Studiio-by-Tecnofit/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://studiio.tecnofit.com.br",
+        "note": "domínio do produto conferido na App Store; o script não baixou (certificado inválido)"
+      },
+      {
+        "platform": "outro",
+        "url": "https://apps.apple.com/br/app/id1639003423",
+        "handle": "id1639003423",
+        "note": "página do app na App Store Brasil, desenvolvedor Tecnofit"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

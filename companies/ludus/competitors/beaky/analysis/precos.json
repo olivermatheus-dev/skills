@@ -1,0 +1,91 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:38:56Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://beaky.com.br/",
+      "title": "Home Beaky"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "assinatura",
+    "fromMonthly": 49.9,
+    "trial": "21 dias grátis; cobrança começa depois; cancele quando quiser",
+    "plans": [
+      {
+        "name": "Starter",
+        "monthly": 49.9,
+        "users": "até 5 alunos",
+        "highlights": [
+          "2 GB",
+          "App do aluno",
+          "Reposição de aulas"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Essential",
+        "monthly": 89.9,
+        "users": "até 15 alunos",
+        "highlights": [
+          "5 GB",
+          "Gestão financeira e cobranças agendadas"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Pro",
+        "monthly": 129.9,
+        "users": "até 25 alunos",
+        "highlights": [
+          "200 créditos de IA/mês",
+          "Lições autocorrigíveis",
+          "Suporte por WhatsApp"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Premium",
+        "monthly": 149.9,
+        "users": "alunos ilimitados",
+        "highlights": [
+          "400 créditos de IA/mês",
+          "20 GB",
+          "Onboarding de 7 dias"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [
+      "Bônus de lançamento: 1 geração de aula com IA nos planos Starter e Essential após o trial (tempo limitado)"
+    ],
+    "notes": "Valores mensais da home; ciclo anual não encontrado. Taxa sobre Pix, cartão no trial e reembolso não confirmados (respostas do FAQ não vieram no texto baixado; central de ajuda exige login).",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:16:51Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.tutonomi.com/"
+    },
+    {
+      "url": "https://www.tutonomi.com/pricing"
+    },
+    {
+      "url": "https://www.musicmark.org.uk/providers/tutonomi"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "App grátis para tutor particular: agenda, cobrança, fatura, lembrete e notas de aula",
+    "text": "Software gratuito para tutores particulares que reúne agenda, cobrança e fatura automáticas, lembretes, notas de aula e mensagens com alunos e responsáveis. Sem mensalidade nem cartão para começar; ganha 2% de comissão sobre taxas de processamento de cartão. Posiciona-se como software calmo, feito sem investidores, para devolver tempo ao tutor. Listado como opção para professores de música independentes.",
+    "audience": "tutores particulares independentes (Reino Unido e países de língua inglesa), incluindo professores de música",
+    "positioning": "The Free Tutoring Management Software for Private Tutors",
+    "size": ""
+  }
+}

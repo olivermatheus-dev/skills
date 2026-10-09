@@ -1,0 +1,224 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:41:07Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda semanal visual, aulas individuais e em turma",
+            "highlight": true
+          },
+          {
+            "name": "Aulas recorrentes e remarcação com histórico",
+            "detail": "o aluno também pede remarcação",
+            "highlight": false
+          },
+          {
+            "name": "Link do Google Meet/Zoom colado na aula",
+            "detail": "videochamada de terceiros, sem sala própria",
+            "highlight": true
+          },
+          {
+            "name": "Controle de presença",
+            "detail": "status concluída, falta, cancelada",
+            "highlight": false
+          },
+          {
+            "name": "Lembrete de aula automático",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Materiais e plano de aula",
+        "items": [
+          {
+            "name": "Apostilas em módulos (PDF, links, textos, áudios, galerias, vídeo YouTube/Vimeo/Loom)",
+            "highlight": true
+          },
+          {
+            "name": "Materiais por aluno ou por turma, biblioteca reutilizável",
+            "highlight": false
+          },
+          {
+            "name": "Player protegido com marca d'água",
+            "highlight": false
+          },
+          {
+            "name": "Plano de aula e anotações",
+            "detail": "objetivos e conteúdo de cada aula",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Tarefas e avaliação",
+        "items": [
+          {
+            "name": "Envio de tarefas com entrega por foto/arquivo",
+            "highlight": true
+          },
+          {
+            "name": "Correção com nota e feedback, modelos de tarefa",
+            "highlight": false
+          },
+          {
+            "name": "Provas, questionários e certificados",
+            "highlight": false
+          },
+          {
+            "name": "Progresso visual do aluno",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobrança automática por Pix via Asaas (QR Code e copia-e-cola)",
+            "highlight": true
+          },
+          {
+            "name": "Boleto, mensalidade recorrente e cobrança avulsa",
+            "highlight": false
+          },
+          {
+            "name": "Lembretes de vencimento e controle de inadimplência",
+            "highlight": false
+          },
+          {
+            "name": "Cobrança para o responsável, fatura única do aluno",
+            "highlight": false
+          },
+          {
+            "name": "Relatórios financeiros e repasse automático",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Comunicação",
+        "items": [
+          {
+            "name": "Chat interno professor-aluno com anexos",
+            "highlight": false
+          },
+          {
+            "name": "Notificações push (PWA) e e-mails automáticos",
+            "detail": "não cita WhatsApp automático",
+            "highlight": false
+          },
+          {
+            "name": "Avisos globais e notificação ao responsável",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Portal do aluno",
+        "items": [
+          {
+            "name": "Três portais independentes: professor, aluno e responsável",
+            "highlight": true
+          },
+          {
+            "name": "Área do aluno com a marca do professor",
+            "detail": "domínio e identidade próprios com plano de personalização",
+            "highlight": false
+          },
+          {
+            "name": "Instala como app (PWA) com acesso offline básico",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gamificação",
+        "items": [
+          {
+            "name": "Pontos, níveis (XP), selos, sequência de semanas e ranking da turma",
+            "highlight": true
+          },
+          {
+            "name": "Feed social e kudos entre alunos",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Gestão de equipe",
+        "items": [
+          {
+            "name": "Vários professores, turmas, convites por e-mail, cálculo de repasses",
+            "highlight": true
+          },
+          {
+            "name": "Painel de gestão e marca própria (white-label)",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Marketing/Site",
+        "items": [
+          {
+            "name": "Marketplace: cursos e treinos à venda, vitrine pública, cupons, reembolso em 7 dias",
+            "highlight": false
+          },
+          {
+            "name": "Perfil público com captação de leads",
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "name": "Outros",
+        "items": [
+          {
+            "name": "Módulo de personal trainer: rotinas, +870 exercícios, avaliação física, recordes",
+            "detail": "para outro público",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Segurança/LGPD",
+        "items": [
+          {
+            "name": "Conformidade com a LGPD, trilha de auditoria, dados isolados por conta",
+            "highlight": false
+          },
+          {
+            "name": "Suporte por WhatsApp",
+            "highlight": false
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Gamificação do aluno (XP, ranking, kudos)",
+      "Três portais incluindo o do responsável",
+      "Pix automático via Asaas com repasse",
+      "Apostilas em módulos e marketplace de cursos",
+      "Cobre professor solo, escola com equipe e personal no mesmo produto"
+    ],
+    "missing": [
+      "videochamada própria (usa link de Meet/Zoom)",
+      "lembrete de aula pelo WhatsApp do professor (só push e e-mail)",
+      "pacote de aulas que vira crédito",
+      "falta com regra de cobrança",
+      "nota fiscal"
+    ]
+  }
+}

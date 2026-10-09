@@ -1,0 +1,345 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:53:50Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.mymusicstaff.com/",
+      "title": "My Music Staff"
+    },
+    {
+      "url": "https://www.mymusicstaff.com/pricing/",
+      "title": "Pricing - My Music Staff"
+    },
+    {
+      "url": "https://www.mymusicstaff.com/business-features/",
+      "title": "Business Features - My Music Staff"
+    },
+    {
+      "url": "https://www.mymusicstaff.com/contact/",
+      "title": "Contact - My Music Staff"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.mymusicstaff.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.mymusicstaff.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "My Music Staff",
+        "chars": 4309
+      },
+      {
+        "url": "https://www.mymusicstaff.com/pricing/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Pricing - My Music Staff",
+        "chars": 3248
+      },
+      {
+        "url": "https://www.mymusicstaff.com/business-features/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Business Features - My Music Staff",
+        "chars": 2435
+      },
+      {
+        "url": "https://www.mymusicstaff.com/contact/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contact - My Music Staff",
+        "chars": 1841
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 40,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog/"
+          ]
+        },
+        {
+          "name": "/bah-humbugs-and-bug-fixes",
+          "count": 1,
+          "sample": [
+            "/bah-humbugs-and-bug-fixes/"
+          ]
+        },
+        {
+          "name": "/brighten-your-day",
+          "count": 1,
+          "sample": [
+            "/brighten-your-day/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/giving-thanks-squashing-bugs",
+          "count": 1,
+          "sample": [
+            "/giving-thanks-squashing-bugs/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/how-music-teachers-can-use-google-my-business-to-get-students",
+          "count": 1,
+          "sample": [
+            "/how-music-teachers-can-use-google-my-business-to-get-students/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2-2-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/mms-merch-store-launch",
+          "count": 1,
+          "sample": [
+            "/mms-merch-store-launch/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2-2/"
+          ]
+        },
+        {
+          "name": "/online-music-lessons-2",
+          "count": 1,
+          "sample": [
+            "/online-music-lessons-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2-2/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files-2",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files-2/"
+          ]
+        },
+        {
+          "name": "/no-strings-attached-just-files",
+          "count": 1,
+          "sample": [
+            "/no-strings-attached-just-files/"
+          ]
+        },
+        {
+          "name": "/spring-2020-social-media-calendar-for-music-teachers-2",
+          "count": 1,
+          "sample": [
+            "/spring-2020-social-media-calendar-for-music-teachers-2/"
+          ]
+        },
+        {
+          "name": "/april-showers-bring-may-updates",
+          "count": 1,
+          "sample": [
+            "/april-showers-bring-may-updates/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

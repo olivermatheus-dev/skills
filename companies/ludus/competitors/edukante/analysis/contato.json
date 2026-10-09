@@ -1,0 +1,35 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:08:05Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.edukante.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "sac@edukante.com",
+      "suporte@edukante.com"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+5581997747378"
+    ],
+    "socials": [
+      {
+        "platform": "youtube",
+        "url": "https://youtube.com/@edukante"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/software_gestao_escolar/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/Edukante/?locale=pt_BR"
+      }
+    ]
+  }
+}

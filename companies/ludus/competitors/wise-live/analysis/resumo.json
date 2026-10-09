@@ -1,0 +1,21 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:19:29Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.wise.live/"
+    },
+    {
+      "url": "https://www.wise.live/pricing/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão de negócios de tutoria (EUA) com apps iOS/Android de marca própria",
+    "text": "Software de gestão para negócios de tutoria: agenda com Google Calendar e Zoom, fatura por sessão, gravação e resumo de aulas, portal de famílias e alunos. Vende para empresas que escalam com vários tutores, com demo e suporte humano. Diferencial: apps nativos white-label na App Store/Play e 0% de taxa de transação. Preço por sessão, por assento ou enterprise.",
+    "audience": "negócios de tutoria, escolas de idiomas e música (1-1 e turmas), com equipe de tutores",
+    "positioning": "#1 Tutor Management Software for Growing Tutoring Businesses",
+    "size": "1000+ negócios de tutoria (declarado no site)"
+  }
+}

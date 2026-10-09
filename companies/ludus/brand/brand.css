@@ -1,0 +1,79 @@
+/* brand.css — GERADO de brand.json pelo kit de marca (app → Contexto e marca → Marca, ou `npm run brand -- <slug>`). Não edite à mão: edite o brand.json. */
+/* brand.css — ludus. Tokens do app real (ludus/src/app/tokens.css, tema claro, neutros Stone; ouro trocado em 2026-09-30). Regras de uso em BRAND.md. */
+/* Nunito Sans local (variável 200–1000, OFL), a mesma fonte do app Ludus · licença: fonts/OFL-NunitoSans.txt */
+@font-face{font-family:"Nunito Sans";font-style:normal;font-weight:200 900;font-display:block;
+  src:url("fonts/nunito-sans-200_1000-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Nunito Sans";font-style:normal;font-weight:200 900;font-display:block;
+  src:url("fonts/nunito-sans-200_1000-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Nunito Sans";font-style:italic;font-weight:200 900;font-display:block;
+  src:url("fonts/nunito-sans-italic-200_1000-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Nunito Sans";font-style:italic;font-weight:200 900;font-display:block;
+  src:url("fonts/nunito-sans-italic-200_1000-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  /* Cores — papéis */
+  --bg:#F9F8F7; /* fundo das peças (liso) */
+  --surface:#FFFFFF; /* cards, janelas */
+  --surface-2:#F5F5F4; /* poço do app (--muted): campos, fundos recuados */
+  --text:#1C1917; /* tinta: títulos e frases (nunca cinza) */
+  --muted:#6C645F; /* texto de apoio do app (legenda, placeholder) */
+  --border:#E7E5E4;
+  --primary:#F6BF51; /* ouro da marca: logo, botão principal, realce. NUNCA texto (contraste 1,6:1 no fundo) */
+  --on-primary:#1C1917; /* texto sobre o ouro (10,4:1) */
+  --accent:#825B0C; /* tinta da marca (--brand-accent do app): texto e ícone dourado pequeno, links (5,7:1) */
+  --success:#216D4E; /* status, só dentro de interface */
+  --warning:#9A4A05;
+  --danger:#AE2322;
+  --inverse-bg:#1C1917; /* fundo de contraste (slide/cena "inverse") */
+  --on-inverse:#FFFFFF;
+  --accent-soft:#FFF6E4; /* ouro claríssimo: fundo de item marcado, realce */
+
+  /* Tipografia */
+  --font-heading:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --weight-heading:700;
+  --tracking-heading:-0.01em;
+  --leading-heading:1.08;
+  --case-heading:none; /* none | uppercase — caixa alta só se a marca quiser */
+
+  /* Forma */
+  --radius:20px;
+  --radius-sm:12px;
+  --border-width:1px;
+  --shadow-sm:0 1px 2px rgba(20,20,20,.06), 0 1px 1px rgba(20,20,20,.04);
+  --shadow-md:0 8px 24px rgba(20,20,20,.08);
+  --shadow-lg:0 24px 60px rgba(20,20,20,.12);
+
+  /* Ícones (kit): lucide, traço 1.75, linha */
+  --icon-stroke:1.75;
+  --icon-color:var(--accent);
+  --icon-fill:none;
+
+  /* Paleta tonal (kit): escala clara→escura da cor principal (automática) · --on-tone-N = tinta legível sobre o tom */
+  --tone-50:#fcf6ec;
+  --tone-100:#fcf1de;
+  --tone-200:#fce7c2;
+  --tone-300:#fcdba0;
+  --tone-400:#facd79;
+  --tone-500:#f6bf51;
+  --tone-600:#bc8603;
+  --tone-700:#8c6310;
+  --tone-800:#654506;
+  --tone-900:#402900;
+  --tone-950:#211300;
+  --on-tone-50:var(--text);
+  --on-tone-100:var(--text);
+  --on-tone-200:var(--text);
+  --on-tone-300:var(--text);
+  --on-tone-400:var(--text);
+  --on-tone-500:var(--text);
+  --on-tone-600:var(--text);
+  --on-tone-700:#fff;
+  --on-tone-800:#fff;
+  --on-tone-900:#fff;
+  --on-tone-950:#fff;
+}

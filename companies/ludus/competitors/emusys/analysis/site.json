@@ -1,0 +1,138 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:52:20Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://emusys.com.br/",
+      "title": "Emusys | Gestão para escolas de música"
+    },
+    {
+      "url": "https://emusys.com.br/planos/",
+      "title": "Planos | Emusys"
+    },
+    {
+      "url": "https://emusys.com.br/funcionalidades/",
+      "title": "Funcionalidades | Emusys"
+    },
+    {
+      "url": "https://emusys.com.br/sobre/",
+      "title": "Sobre a Emusys"
+    },
+    {
+      "url": "https://emusys.com.br/funcionalidades/crm/",
+      "title": "Gestão de Vendas (CRM) | Emusys"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://emusys.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://emusys.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Emusys | Gestão para escolas de música",
+        "chars": 14038
+      },
+      {
+        "url": "https://emusys.com.br/planos/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Planos | Emusys",
+        "chars": 4954
+      },
+      {
+        "url": "https://emusys.com.br/funcionalidades/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Funcionalidades | Emusys",
+        "chars": 5851
+      },
+      {
+        "url": "https://emusys.com.br/sobre/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre a Emusys",
+        "chars": 5017
+      },
+      {
+        "url": "https://emusys.com.br/funcionalidades/crm/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Gestão de Vendas (CRM) | Emusys",
+        "chars": 4422
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 27,
+      "groups": [
+        {
+          "name": "/funcionalidades",
+          "count": 15,
+          "sample": [
+            "/funcionalidades",
+            "/funcionalidades/agenda",
+            "/funcionalidades/alunos",
+            "/funcionalidades/professores"
+          ]
+        },
+        {
+          "name": "/clientes",
+          "count": 6,
+          "sample": [
+            "/clientes",
+            "/clientes/cases",
+            "/clientes/numeros",
+            "/clientes/depoimentos"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/planos",
+          "count": 1,
+          "sample": [
+            "/planos"
+          ]
+        },
+        {
+          "name": "/demonstracao",
+          "count": 1,
+          "sample": [
+            "/demonstracao"
+          ]
+        },
+        {
+          "name": "/sobre",
+          "count": 1,
+          "sample": [
+            "/sobre"
+          ]
+        },
+        {
+          "name": "/lp",
+          "count": 1,
+          "sample": [
+            "/lp/instagram-demonstracao"
+          ]
+        },
+        {
+          "name": "/academy",
+          "count": 1,
+          "sample": [
+            "/academy"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

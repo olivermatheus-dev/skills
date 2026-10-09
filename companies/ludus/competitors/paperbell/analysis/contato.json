@@ -1,0 +1,33 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:10:30Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://paperbell.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "hello@paperbell.com",
+      "%20hello@paperbell.com"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/lovepaperbell"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/bypaperbell"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/bypaperbell/"
+      }
+    ]
+  }
+}

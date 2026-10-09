@@ -1,0 +1,389 @@
+{
+  "updatedAt": "2026-10-09T22:00:00Z",
+  "by": "ia",
+  "basedOn": {
+    "beaky": "2026-10-09T19:38:54Z",
+    "aulvi": "2026-10-09T19:39:42Z",
+    "ensinaapp": "2026-10-09T19:40:42Z",
+    "profeu": "2026-10-09T19:40:34Z",
+    "iorclass": "2026-10-09T19:38:46Z",
+    "iprofe": "2026-10-09T19:38:30Z",
+    "proffin": "2026-10-09T19:38:59Z",
+    "sistema-classis": "2026-10-09T19:39:24Z",
+    "fluentdesk": "2026-10-09T19:41:09Z",
+    "eclasse": "2026-10-09T19:40:16Z"
+  },
+  "themes": [
+    {
+      "id": "aluno-sem-instalar-nada",
+      "title": "O aluno abre tudo por link, sem login e sem app",
+      "kind": "produto",
+      "action": "Vender o link sem login como a porta do Ludus: cobrança, confirmação de aula e entrada na sala abrem em qualquer celular. Contra apps que o aluno precisa instalar e portais com senha.",
+      "dependsOn": "Cobrança ao aluno (\"Já paguei\", recibo) ainda em desenvolvimento; hoje o link cobre confirmar aula, sala e página de cobrança básica",
+      "features": [
+        "link-sem-login",
+        "confirmar-aula",
+        "app-aluno"
+      ],
+      "sources": [
+        {
+          "competitor": "beaky",
+          "text": "Aluno sem instalar nada: link sem login (cobrança, confirmar aula, entrar na sala)"
+        },
+        {
+          "competitor": "aulvi",
+          "text": "Link do aluno sem login (confirmar aula, cobrança, entrar na sala) como diferencial de experiência"
+        },
+        {
+          "competitor": "ensinaapp",
+          "text": "Aluno sem login por link no WhatsApp, contra o convite por e-mail e painel do aluno deles"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Vender o link sem login no celular do aluno contra o Telegram"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Link sem login e sem app para o aluno (cobrança, confirmar aula, entrar na sala)"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Videochamada própria e link do aluno sem login: iProfe não tem nenhum dos dois"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Link do aluno sem login já funciona no Ludus; o portal do Proffin ainda está em desenvolvimento"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Link sem login para o aluno, contra um concorrente centrado em disparo de mensagem"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Link sem login para o aluno, enquanto eles têm portais com acesso e senha"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Link sem login para o aluno, em vez de cadastro de cliente"
+        }
+      ]
+    },
+    {
+      "id": "pacote-credito-falta-cobra",
+      "title": "Pacote que vira crédito e falta que cobra pela regra",
+      "kind": "produto",
+      "action": "Mostrar o financeiro ligado à aula (pacote, crédito, falta sem aviso cobra, experimental não) como o que o mercado não mostra. Comunicar só o que já existe no código.",
+      "features": [
+        "pacote-credito",
+        "falta-cobranca",
+        "controle-pagamentos",
+        "despesas"
+      ],
+      "sources": [
+        {
+          "competitor": "beaky",
+          "text": "Pacote de aulas virando crédito e falta com regra de cobrança"
+        },
+        {
+          "competitor": "aulvi",
+          "text": "Falta com regra de cobrança aplicada sozinha"
+        },
+        {
+          "competitor": "ensinaapp",
+          "text": "Ludus tem videochamada própria e financeiro mais profundo (crédito, parcelas, falta com regra, despesas) que o EnsinaApp não mostra"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Pacote que vira crédito e falta com regra de cobrança: o Profeu não mostra"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Falta com regra de cobrança e pacote virando crédito: não aparecem lá"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Ludus entrega o que o iProfe nega: pacote virando crédito, cobrança por falta e contas a receber ligados à aula"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Mensagens prontas no WhatsApp e cobrança de falta por regra não aparecem no Proffin"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Ludus tem pacote que vira crédito, falta com regra de cobrança e vídeo: ângulo 'a aula inteira, não só o lembrete'"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Pacote de aulas que vira crédito e falta com regra de cobrança, que não aparecem na lista deles"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Pacote que vira crédito + regra de cobrança por falta (eClasse não mostra)"
+        }
+      ]
+    },
+    {
+      "id": "videochamada-na-aula",
+      "title": "Videochamada própria ligada à aula, sem link externo",
+      "kind": "produto",
+      "action": "Posicionar a sala própria dentro da aula (o aluno entra pelo link) contra quem usa Meet/Zoom ou não tem vídeo. Não prometer vídeo em grupo: hoje a chamada é de duas pessoas.",
+      "dependsOn": "Sala de aula online refeita (em desenvolvimento); vídeo em grupo é só planejado",
+      "features": [
+        "video-propria",
+        "video-externa"
+      ],
+      "sources": [
+        {
+          "competitor": "beaky",
+          "text": "Videochamada ligada à aula"
+        },
+        {
+          "competitor": "aulvi",
+          "text": "Videochamada própria ligada à aula"
+        },
+        {
+          "competitor": "ensinaapp",
+          "text": "Ludus tem videochamada própria e financeiro mais profundo (crédito, parcelas, falta com regra, despesas) que o EnsinaApp não mostra"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Videochamada ligada à aula no mesmo lugar"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Videochamada ligada à aula: iorCLASS não mostra"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Videochamada própria e link do aluno sem login: iProfe não tem nenhum dos dois"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Ludus entrega a aula inteira (agenda, plano, materiais, vídeo, pacote/crédito) onde o Proffin é só financeiro"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Ludus tem pacote que vira crédito, falta com regra de cobrança e vídeo: ângulo 'a aula inteira, não só o lembrete'"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Videochamada própria dentro da aula, sem link externo"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Videochamada própria ligada à aula, sem link externo"
+        }
+      ]
+    },
+    {
+      "id": "preco-de-entrada",
+      "title": "Preço e entrada abaixo das âncoras, com porta grátis",
+      "kind": "oferta",
+      "action": "Definir plano e limite de alunos comparáveis às âncoras citadas (grátis até 3 a 20 alunos, de R$ 9,90 a R$ 187) antes de qualquer peça com preço. Hoje só vale falar de acesso grátis na fase de testes.",
+      "dependsOn": "Preço não definido (BUSINESS.md, Modelo e preço)",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "beaky",
+          "text": "Preço sem teto apertado de alunos (Beaky cobra R$ 129,90 por 25)"
+        },
+        {
+          "competitor": "aulvi",
+          "text": "Preço da Aulvi é a âncora: R$ 24,75 a R$ 64,55 para solo; Ludus precisa definir preço comparável"
+        },
+        {
+          "competitor": "ensinaapp",
+          "text": "Referência de preço: R$ 47 a R$ 97 por faixa de alunos; o Ludus ainda não definiu preço"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Preço: competir com o grátis até 5 alunos e os R$ 9,90 de entrada"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Entrada sem exigir pagamento à vista de 6 ou 12 meses"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Âncora de preço: iProfe a R$ 29,90 e 3 alunos grátis definem a expectativa; o Ludus precisa justificar acima disso ou igualar o gratuito de entrada"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Referência de preço: grátis até 20 alunos e R$ 28 no Premium; o Ludus precisa de entrada grátis ou barata comparável"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Preço do Ludus indefinido: R$ 59,90 é a âncora de entrada deste concorrente"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Entrar abaixo de R$ 89,90 ou com limite de alunos mais generoso para o professor solo"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Preço de entrada muito abaixo de R$ 187 e teste grátis, em contraste direto com eClasse"
+        }
+      ]
+    },
+    {
+      "id": "whatsapp-do-professor",
+      "title": "Lembrete e mensagens pelo WhatsApp do próprio professor",
+      "kind": "produto",
+      "action": "Destacar \"Aulas de amanhã\" e as mensagens prontas que abrem o WhatsApp do professor com um toque, sem cota por plano e sem número de terceiros.",
+      "features": [
+        "whatsapp-lembrete",
+        "mensagens-prontas"
+      ],
+      "sources": [
+        {
+          "competitor": "beaky",
+          "text": "Lembrete pelo WhatsApp do próprio professor"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Posicionar \"o professor decide\" contra automação que age sozinha, com WhatsApp no toque do professor"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Mensagens prontas e Aulas de amanhã pelo WhatsApp do professor"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Mensagem pronta e 'Aulas de amanhã' no WhatsApp do professor, algo ausente no iProfe"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Mensagens prontas no WhatsApp e cobrança de falta por regra não aparecem no Proffin"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Mensagem sai pelo WhatsApp do professor, sem cota por plano"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Lembrete e cobrança pelo WhatsApp do próprio professor, sem automação que fale em nome dele"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Lembrete e mensagens prontas pelo WhatsApp do professor"
+        }
+      ]
+    },
+    {
+      "id": "acabamento-e-prova-real",
+      "title": "Acabamento e prova real contra sites de template",
+      "kind": "mensagem",
+      "action": "Mostrar o produto (prints, vídeo) e a prova da persona de referência (a Gaby) contra concorrentes com visual datado ou sem prova social. Promessa \"Tire sua escola da cabeça\".",
+      "dependsOn": "Prints e vídeos de lançamento; depoimento real da Gaby",
+      "features": [],
+      "sources": [
+        {
+          "competitor": "aulvi",
+          "text": "Acabamento visual e promessa \"Tire sua escola da cabeça\" contra um discurso mais funcional"
+        },
+        {
+          "competitor": "ensinaapp",
+          "text": "EnsinaApp não tem redes nem prova social: espaço para autoridade e acabamento"
+        },
+        {
+          "competitor": "iorclass",
+          "text": "Acabamento visual e promessa de tirar a escola da cabeça contra o tom de planilha e funil"
+        },
+        {
+          "competitor": "iprofe",
+          "text": "Acabamento e cuidado visual contra um produto 'das antigas' (palavras do próprio depoimento)"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Acabamento e confiança (marca, prova real, prints) contra um site básico de dev solo"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Acabamento e simplicidade contra visual de template"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Mostrar acabamento e prova real (a Gaby), onde a prova social deles é fraca"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Mostrar o produto (prints, vídeo) e prova social, que a home do eClasse não tem"
+        }
+      ]
+    },
+    {
+      "id": "professor-decide",
+      "title": "O professor decide, nada acontece sozinho em nome dele",
+      "kind": "mensagem",
+      "action": "Contrapor a automação que cobra e fala sozinha: no Ludus a mensagem sai pelo WhatsApp do professor e não há gateway nem baixa automática (decisão do produto). Vender como controle, não como falta de recurso.",
+      "features": [
+        "cobranca-automatica",
+        "whatsapp-lembrete"
+      ],
+      "sources": [
+        {
+          "competitor": "ensinaapp",
+          "text": "O professor decide e nada é automático: contraponto ao PIX automático que libera pacote sozinho"
+        },
+        {
+          "competitor": "profeu",
+          "text": "Posicionar \"o professor decide\" contra automação que age sozinha, com WhatsApp no toque do professor"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Mensagem sai pelo WhatsApp do professor, sem cota por plano"
+        },
+        {
+          "competitor": "fluentdesk",
+          "text": "Lembrete e cobrança pelo WhatsApp do próprio professor, sem automação que fale em nome dele"
+        },
+        {
+          "competitor": "eclasse",
+          "text": "Cuidado: eClasse já tem cobrança Asaas automática; Ludus não tem gateway por decisão, então vender como controle do professor"
+        }
+      ]
+    },
+    {
+      "id": "aula-como-centro",
+      "title": "A aula inteira num lugar, não só financeiro ou lembrete",
+      "kind": "mensagem",
+      "action": "Comunicar a aula como centro (ficha, agenda, plano, materiais, vídeo, presença, crédito) contra concorrentes que resolvem uma ponta só.",
+      "features": [
+        "ficha-aluno",
+        "plano-aula",
+        "materiais",
+        "agenda-visual"
+      ],
+      "sources": [
+        {
+          "competitor": "aulvi",
+          "text": "Aula como centro: ficha, plano, materiais e vídeo ligados, o que a Aulvi não mostra"
+        },
+        {
+          "competitor": "proffin",
+          "text": "Ludus entrega a aula inteira (agenda, plano, materiais, vídeo, pacote/crédito) onde o Proffin é só financeiro"
+        },
+        {
+          "competitor": "sistema-classis",
+          "text": "Ludus tem pacote que vira crédito, falta com regra de cobrança e vídeo: ângulo 'a aula inteira, não só o lembrete'"
+        }
+      ]
+    },
+    {
+      "id": "foco-professor-solo",
+      "title": "Foco só no professor independente, sem treino nem escola",
+      "kind": "publico",
+      "action": "Falar só com o professor particular solo, contra produtos que misturam personal trainer, marketplace e escola.",
+      "features": [
+        "equipe",
+        "perfil-publico"
+      ],
+      "sources": [
+        {
+          "competitor": "fluentdesk",
+          "text": "Foco só no professor independente, sem treino, contra o produto 'faz tudo' deles"
+        }
+      ]
+    }
+  ]
+}

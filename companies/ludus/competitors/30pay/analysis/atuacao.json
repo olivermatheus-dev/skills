@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:17:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://30pay.com.br/"
+    },
+    {
+      "url": "https://30pay.com.br/sobre-30pay.html"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, domínio .com.br, preços em R$, telefone (51) e Pix; 3035TECH cita clientes no exterior, mas o produto 30pay é para escolas no Brasil"
+  }
+}

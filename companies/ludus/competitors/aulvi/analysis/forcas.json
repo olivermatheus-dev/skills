@@ -1,0 +1,66 @@
+{
+  "module": "forcas",
+  "updatedAt": "2026-10-09T19:39:42Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/",
+      "title": "Aulvi - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "strengths": [
+      {
+        "point": "Preço de entrada baixo e escalonado por aluno",
+        "evidence": "Essencial R$ 24,75/mês até 20 alunos; funções iguais em todas as faixas"
+      },
+      {
+        "point": "Teste sem fricção",
+        "evidence": "14 dias grátis, sem cartão, sem limite de alunos"
+      },
+      {
+        "point": "Recibo com PIX pronto para o WhatsApp",
+        "evidence": "link público + chave PIX + mensagem escrita na home"
+      },
+      {
+        "point": "Atende professor solo e curso com equipe",
+        "evidence": "plano Curso até 12 auxiliares, financeiro somado"
+      },
+      {
+        "point": "Conteúdo de apoio que atrai busca",
+        "evidence": "guias \"Como cobrar mensalidade\" e \"Modelo de recibo\""
+      }
+    ],
+    "weaknesses": [
+      {
+        "point": "Sem videochamada própria",
+        "evidence": "nenhuma menção na home"
+      },
+      {
+        "point": "Sem plano de aula, materiais ou matérias",
+        "evidence": "foco em agenda e cobrança"
+      },
+      {
+        "point": "Presença sem regra de cobrança automática de falta",
+        "evidence": "falta vira pendência de remarcação; não cita cobrança por regra"
+      },
+      {
+        "point": "Pouca prova social e sem redes",
+        "evidence": "home sem depoimentos ou números; nenhum perfil social linkado; Reclame Aqui sem página"
+      },
+      {
+        "point": "Marca nova e pequena",
+        "evidence": "CNPJ aberto recentemente (65.972...), empresa de um sócio, contato só por WhatsApp"
+      }
+    ],
+    "opportunities": [
+      "Aula como centro: ficha, plano, materiais e vídeo ligados, o que a Aulvi não mostra",
+      "Videochamada própria ligada à aula",
+      "Link do aluno sem login (confirmar aula, cobrança, entrar na sala) como diferencial de experiência",
+      "Falta com regra de cobrança aplicada sozinha",
+      "Acabamento visual e promessa \"Tire sua escola da cabeça\" contra um discurso mais funcional",
+      "Preço da Aulvi é a âncora: R$ 24,75 a R$ 64,55 para solo; Ludus precisa definir preço comparável"
+    ]
+  }
+}

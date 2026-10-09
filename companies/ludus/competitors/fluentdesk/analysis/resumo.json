@@ -1,0 +1,19 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:16:41Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://fluentdesk.com.br/",
+      "title": "FluentDesk home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Sistema web para professor particular, escola pequena e personal trainer: aulas, tarefas e Pix",
+    "text": "Plataforma com agenda (Google Meet), apostilas/módulos, tarefas, progresso do aluno, chat, gamificação e cobrança automática por Pix. Três portais (professor, aluno, escola). Também vende treino/avaliação física para personal trainers. Área do aluno grátis; professor paga plano por nº de alunos. Teste sem cartão. Posiciona-se contra a 'gambiarra' de WhatsApp + Drive + planilha.",
+    "audience": "professores particulares, escolas com equipe e personal trainers",
+    "positioning": "Pare de gerenciar aulas pelo WhatsApp. Existe jeito melhor.",
+    "size": "250+ aulas agendadas (declarado no site)"
+  }
+}

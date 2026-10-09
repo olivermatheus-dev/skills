@@ -1,0 +1,36 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T18:54:33Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.teachworks.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "support@teachworks.com"
+    ],
+    "phones": [],
+    "whatsapp": [],
+    "socials": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/teachworks"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/teachworks"
+      }
+    ]
+  }
+}

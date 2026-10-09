@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T18:57:13Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tweduc.com.br/professor-particular"
+    },
+    {
+      "url": "https://tweduc.com.br/empresa"
+    },
+    {
+      "url": "https://tweduc.com.br/planos"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão educacional do Grupo Teraware para escolas, com página para professor particular",
+    "text": "Plataforma de gestão para instituições de ensino (captação, matrícula, cursos, boletim online, portais do aluno e do instrutor). Tem uma página dedicada ao professor particular: agenda com recorrência, presença e faltas, recibos, alerta de inadimplência e relatórios, com acesso mobile. Planos mensais de R$ 3 a R$ 46 com alunos e cursos ilimitados; a venda passa por demonstração. O foco é escola, o autônomo é um segmento.",
+    "audience": "instituições de ensino e, como segmento, professores particulares",
+    "positioning": "Sistema desenvolvido especialmente para profissionais autônomos",
+    "size": "não declarado"
+  }
+}

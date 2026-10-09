@@ -1,0 +1,39 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:09:14Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.mensalli.com.br/",
+      "title": "Mensalli - Cobre Mensalidades pelo WhatsApp no Automático"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.mensalli.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.mensalli.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "Mensalli - Cobre Mensalidades pelo WhatsApp no Automático",
+        "chars": 7164
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 1,
+      "groups": [
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

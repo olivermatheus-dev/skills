@@ -1,0 +1,91 @@
+{
+  "module": "features",
+  "updatedAt": "2026-10-09T19:40:14Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "groups": [
+      {
+        "name": "Gestão de alunos/clientes",
+        "items": [
+          {
+            "name": "Conexões professor-cliente (cliente com vários professores e vice-versa)",
+            "detail": "contatos e histórico centralizados",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Agenda",
+        "items": [
+          {
+            "name": "Agenda visual com cores por aluno",
+            "detail": "inclui link da aula online",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Diário de classe",
+        "items": [
+          {
+            "name": "Registro de presença, atividades e observações por aula",
+            "detail": "histórico de desenvolvimento do aluno",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Pacotes",
+        "items": [
+          {
+            "name": "Pacotes de aulas personalizados para contratação",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "items": [
+          {
+            "name": "Cobranças automáticas via Asaas",
+            "detail": "boleto, Pix e cartão; desconto e acréscimo por vencimento",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "name": "Portal do cliente",
+        "items": [
+          {
+            "name": "Portal com horários, faturas e pagamento",
+            "detail": "cadastro próprio do cliente",
+            "highlight": true
+          }
+        ]
+      }
+    ],
+    "differentials": [
+      "Cobrança automatizada integrada ao Asaas",
+      "Cliente conectado a vários professores",
+      "Todas as funcionalidades em qualquer plano"
+    ],
+    "missing": [
+      "videochamada nativa (só link externo)",
+      "lembrete por WhatsApp",
+      "crédito de pacote consumido por aula",
+      "regra de cobrança por falta",
+      "materiais/planejamento de aula",
+      "app mobile",
+      "relatórios",
+      "nota fiscal",
+      "gestão de equipe/escola"
+    ]
+  }
+}

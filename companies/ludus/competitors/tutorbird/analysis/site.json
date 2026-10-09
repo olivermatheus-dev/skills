@@ -1,0 +1,345 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T18:55:43Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.tutorbird.com/",
+      "title": "TutorBird - The #1 Tutor Management Software"
+    },
+    {
+      "url": "https://www.tutorbird.com/pricing/",
+      "title": "Pricing - TutorBird"
+    },
+    {
+      "url": "https://www.tutorbird.com/business-features/",
+      "title": "Business Features - TutorBird"
+    },
+    {
+      "url": "https://www.tutorbird.com/contact/",
+      "title": "Contact - TutorBird"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.tutorbird.com/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.tutorbird.com/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "TutorBird - The #1 Tutor Management Software",
+        "chars": 3918
+      },
+      {
+        "url": "https://www.tutorbird.com/pricing/",
+        "kind": "precos",
+        "file": "site/precos.md",
+        "title": "Pricing - TutorBird",
+        "chars": 3188
+      },
+      {
+        "url": "https://www.tutorbird.com/business-features/",
+        "kind": "recursos",
+        "file": "site/recursos.md",
+        "title": "Business Features - TutorBird",
+        "chars": 2424
+      },
+      {
+        "url": "https://www.tutorbird.com/contact/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Contact - TutorBird",
+        "chars": 1829
+      }
+    ],
+    "sitemap": {
+      "source": "sitemap.xml",
+      "total": 40,
+      "groups": [
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog/"
+          ]
+        },
+        {
+          "name": "/sign-updates-calendar-traits-2",
+          "count": 1,
+          "sample": [
+            "/sign-updates-calendar-traits-2/"
+          ]
+        },
+        {
+          "name": "/sign-updates-calendar-traits",
+          "count": 1,
+          "sample": [
+            "/sign-updates-calendar-traits/"
+          ]
+        },
+        {
+          "name": "/a-backpack-of-updates",
+          "count": 1,
+          "sample": [
+            "/a-backpack-of-updates/"
+          ]
+        },
+        {
+          "name": "/inte-great-update",
+          "count": 1,
+          "sample": [
+            "/inte-great-update/"
+          ]
+        },
+        {
+          "name": "/invoice-archive-high-five-2",
+          "count": 1,
+          "sample": [
+            "/invoice-archive-high-five-2/"
+          ]
+        },
+        {
+          "name": "/invoice-archive-high-five",
+          "count": 1,
+          "sample": [
+            "/invoice-archive-high-five/"
+          ]
+        },
+        {
+          "name": "/you-may-be-wondering",
+          "count": 1,
+          "sample": [
+            "/you-may-be-wondering/"
+          ]
+        },
+        {
+          "name": "/somewhere-over-the-rainbow",
+          "count": 1,
+          "sample": [
+            "/somewhere-over-the-rainbow/"
+          ]
+        },
+        {
+          "name": "/grow-grow-grow-your-notes",
+          "count": 1,
+          "sample": [
+            "/grow-grow-grow-your-notes/"
+          ]
+        },
+        {
+          "name": "/calendar-clean-up-date",
+          "count": 1,
+          "sample": [
+            "/calendar-clean-up-date/"
+          ]
+        },
+        {
+          "name": "/calendar-attendance-lesson-notes-oh-my",
+          "count": 1,
+          "sample": [
+            "/calendar-attendance-lesson-notes-oh-my/"
+          ]
+        },
+        {
+          "name": "/february-fixes",
+          "count": 1,
+          "sample": [
+            "/february-fixes/"
+          ]
+        },
+        {
+          "name": "/more-students-more-options",
+          "count": 1,
+          "sample": [
+            "/more-students-more-options/"
+          ]
+        },
+        {
+          "name": "/new-year-new-portal",
+          "count": 1,
+          "sample": [
+            "/new-year-new-portal/"
+          ]
+        },
+        {
+          "name": "/bah-humbugs",
+          "count": 1,
+          "sample": [
+            "/bah-humbugs/"
+          ]
+        },
+        {
+          "name": "/brighten-your-day",
+          "count": 1,
+          "sample": [
+            "/brighten-your-day/"
+          ]
+        },
+        {
+          "name": "/giving-thanks-squashing-bugs",
+          "count": 1,
+          "sample": [
+            "/giving-thanks-squashing-bugs/"
+          ]
+        },
+        {
+          "name": "/mark-your-calendar",
+          "count": 1,
+          "sample": [
+            "/mark-your-calendar/"
+          ]
+        },
+        {
+          "name": "/nov-updates-no-problem",
+          "count": 1,
+          "sample": [
+            "/nov-updates-no-problem/"
+          ]
+        },
+        {
+          "name": "/you-autumn-know",
+          "count": 1,
+          "sample": [
+            "/you-autumn-know/"
+          ]
+        },
+        {
+          "name": "/fresh-fall-facelift",
+          "count": 1,
+          "sample": [
+            "/fresh-fall-facelift/"
+          ]
+        },
+        {
+          "name": "/blast-from-the-past",
+          "count": 1,
+          "sample": [
+            "/blast-from-the-past/"
+          ]
+        },
+        {
+          "name": "/do-you-remember",
+          "count": 1,
+          "sample": [
+            "/do-you-remember/"
+          ]
+        },
+        {
+          "name": "/dont-dia-log-off",
+          "count": 1,
+          "sample": [
+            "/dont-dia-log-off/"
+          ]
+        },
+        {
+          "name": "/aug-updates-2022",
+          "count": 1,
+          "sample": [
+            "/aug-updates-2022/"
+          ]
+        },
+        {
+          "name": "/july-updates-2022",
+          "count": 1,
+          "sample": [
+            "/july-updates-2022/"
+          ]
+        },
+        {
+          "name": "/june-bugs",
+          "count": 1,
+          "sample": [
+            "/june-bugs/"
+          ]
+        },
+        {
+          "name": "/listen-to-tutorbird-on-the-qualified-tutor-podcast-2",
+          "count": 1,
+          "sample": [
+            "/listen-to-tutorbird-on-the-qualified-tutor-podcast-2/"
+          ]
+        },
+        {
+          "name": "/march-madness",
+          "count": 1,
+          "sample": [
+            "/march-madness/"
+          ]
+        },
+        {
+          "name": "/listen-to-tutorbird-on-the-qualified-tutor-podcast",
+          "count": 1,
+          "sample": [
+            "/listen-to-tutorbird-on-the-qualified-tutor-podcast/"
+          ]
+        },
+        {
+          "name": "/2021-wrap-up",
+          "count": 1,
+          "sample": [
+            "/2021-wrap-up/"
+          ]
+        },
+        {
+          "name": "/pumpkin-spice-latte-of-updates",
+          "count": 1,
+          "sample": [
+            "/pumpkin-spice-latte-of-updates/"
+          ]
+        },
+        {
+          "name": "/sharing-content",
+          "count": 1,
+          "sample": [
+            "/sharing-content/"
+          ]
+        },
+        {
+          "name": "/june-update-roundup",
+          "count": 1,
+          "sample": [
+            "/june-update-roundup/"
+          ]
+        },
+        {
+          "name": "/social-media-brand-identity",
+          "count": 1,
+          "sample": [
+            "/social-media-brand-identity/"
+          ]
+        },
+        {
+          "name": "/mini-may-updates",
+          "count": 1,
+          "sample": [
+            "/mini-may-updates/"
+          ]
+        },
+        {
+          "name": "/student-portal-use",
+          "count": 1,
+          "sample": [
+            "/student-portal-use/"
+          ]
+        },
+        {
+          "name": "/sender-engagement",
+          "count": 1,
+          "sample": [
+            "/sender-engagement/"
+          ]
+        },
+        {
+          "name": "/save-and-continue-releasing-updates",
+          "count": 1,
+          "sample": [
+            "/save-and-continue-releasing-updates/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T18:58:31Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mymusicstaff.com/"
+    },
+    {
+      "url": "https://www.mymusicstaff.com/pricing/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "internacional",
+    "countries": [
+      "Canadá",
+      "Estados Unidos",
+      "Reino Unido"
+    ],
+    "languages": [
+      "en-US",
+      "fr",
+      "ja",
+      "es",
+      "nl",
+      "de"
+    ],
+    "currencies": [
+      "USD"
+    ],
+    "evidence": "Empresa canadense; telefones EUA/Canadá/Reino Unido; pagamentos Visa/Mastercard/Amex, ACH (EUA) e Bacs (UK); preço em dólar; interface em inglês, francês, japonês, espanhol, holandês e alemão, sem português."
+  }
+}

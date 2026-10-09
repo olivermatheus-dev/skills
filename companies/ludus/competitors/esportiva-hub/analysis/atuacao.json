@@ -1,0 +1,27 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:18:46Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://esportivahub.com.br/"
+    },
+    {
+      "url": "https://esportivahub.com.br/contato"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [
+      "BRL"
+    ],
+    "evidence": "site só em pt-BR, domínio .com.br, preços em R$, CNPJ brasileiro, 'escolinhas em todo Brasil'"
+  }
+}

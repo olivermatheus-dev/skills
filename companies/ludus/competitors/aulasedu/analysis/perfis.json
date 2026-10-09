@@ -1,0 +1,31 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:52:36Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.aulasedu.com.br"
+    },
+    {
+      "url": "https://www.instagram.com/aulasedu/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/aulasedu/",
+        "handle": "aulasedu",
+        "note": "bio linka www.aulasedu.com.br e diz 'O sistema que facilita sua vida de professor'; sem selo de verificado"
+      }
+    ],
+    "notFound": [
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x"
+    ]
+  }
+}

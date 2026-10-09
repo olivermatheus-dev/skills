@@ -1,0 +1,49 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:19:59Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.personalgo.com.br/",
+      "title": "Home PersonalGO (rodapé linka as redes)"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.personalgo.com.br",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/personalgo_br/",
+        "handle": "personalgo_br",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@personalgoapp",
+        "handle": "personalgoapp",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@personalgo",
+        "handle": "personalgo",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/personalgoapp",
+        "handle": "personalgoapp",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "facebook",
+      "x"
+    ]
+  }
+}

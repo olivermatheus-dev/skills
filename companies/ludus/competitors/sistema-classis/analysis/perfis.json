@@ -1,0 +1,27 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:16:31Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://sistemaclassis.com.br/"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://sistemaclassis.com.br",
+        "note": "domínio oficial; o site não linka nenhuma rede, só o e-mail sistemaclassis@gmail.com"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin"
+    ]
+  }
+}

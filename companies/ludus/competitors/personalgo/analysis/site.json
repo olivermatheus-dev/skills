@@ -1,0 +1,155 @@
+{
+  "module": "site",
+  "updatedAt": "2026-10-09T19:11:09Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://www.personalgo.com.br/",
+      "title": "PersonalGO - App que conecta personal trainers e alunos"
+    },
+    {
+      "url": "https://www.personalgo.com.br/a-personalgo/",
+      "title": "Sobre a PersonalGO | App que Conecta Personais e Alunos"
+    },
+    {
+      "url": "https://ajuda.personalgo.com.br/",
+      "title": "Central de Ajuda PersonalGO"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "url": "https://www.personalgo.com.br/",
+    "rendered": true,
+    "pages": [
+      {
+        "url": "https://www.personalgo.com.br/",
+        "kind": "home",
+        "file": "site/home.md",
+        "title": "PersonalGO - App que conecta personal trainers e alunos",
+        "chars": 8624
+      },
+      {
+        "url": "https://www.personalgo.com.br/a-personalgo/",
+        "kind": "sobre",
+        "file": "site/sobre.md",
+        "title": "Sobre a PersonalGO | App que Conecta Personais e Alunos",
+        "chars": 2891
+      },
+      {
+        "url": "https://ajuda.personalgo.com.br/",
+        "kind": "contato",
+        "file": "site/contato.md",
+        "title": "Central de Ajuda PersonalGO",
+        "chars": 5377
+      }
+    ],
+    "sitemap": {
+      "source": "links",
+      "total": 61,
+      "groups": [
+        {
+          "name": "/wp-content",
+          "count": 48,
+          "sample": [
+            "/wp-content/uploads/2026/01/remada-supinada.webp",
+            "/wp-content/uploads/2026/01/Crucifixo-inverso-curvado.webp",
+            "/wp-content/uploads/2026/01/Remada-cavalo.webp",
+            "/wp-content/uploads/2026/01/remada-renegada.webp"
+          ]
+        },
+        {
+          "name": "/",
+          "count": 1,
+          "sample": [
+            "/"
+          ]
+        },
+        {
+          "name": "/baixeoapp",
+          "count": 1,
+          "sample": [
+            "/baixeoapp/"
+          ]
+        },
+        {
+          "name": "/para-personal-trainer",
+          "count": 1,
+          "sample": [
+            "/para-personal-trainer/"
+          ]
+        },
+        {
+          "name": "/para-o-seu-treino",
+          "count": 1,
+          "sample": [
+            "/para-o-seu-treino/"
+          ]
+        },
+        {
+          "name": "/escaneamento-corporal",
+          "count": 1,
+          "sample": [
+            "/escaneamento-corporal/"
+          ]
+        },
+        {
+          "name": "/a-personalgo",
+          "count": 1,
+          "sample": [
+            "/a-personalgo/"
+          ]
+        },
+        {
+          "name": "/central-de-ajuda",
+          "count": 1,
+          "sample": [
+            "/central-de-ajuda/"
+          ]
+        },
+        {
+          "name": "/blog",
+          "count": 1,
+          "sample": [
+            "/blog/"
+          ]
+        },
+        {
+          "name": "/acessar-personalgo",
+          "count": 1,
+          "sample": [
+            "/acessar-personalgo/"
+          ]
+        },
+        {
+          "name": "/politica-de-privacidade-app",
+          "count": 1,
+          "sample": [
+            "/politica-de-privacidade-app/"
+          ]
+        },
+        {
+          "name": "/termos-de-uso-app",
+          "count": 1,
+          "sample": [
+            "/termos-de-uso-app/"
+          ]
+        },
+        {
+          "name": "/guia-ativacao-pagamentos",
+          "count": 1,
+          "sample": [
+            "/guia-ativacao-pagamentos/"
+          ]
+        },
+        {
+          "name": "/perfil-personal",
+          "count": 1,
+          "sample": [
+            "/perfil-personal/"
+          ]
+        }
+      ]
+    },
+    "errors": []
+  }
+}

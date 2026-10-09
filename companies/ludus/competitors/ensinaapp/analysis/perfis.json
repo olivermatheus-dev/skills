@@ -1,0 +1,35 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:52:18Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://aula.ensinaapp.com.br",
+      "title": "Home EnsinaApp"
+    },
+    {
+      "url": "https://aula.ensinaapp.com.br/termos",
+      "title": "Termos de Uso"
+    }
+  ],
+  "confidence": "baixa",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://aula.ensinaapp.com.br",
+        "note": "site oficial; termos citam o EnsinaApp operado pela Corestack Desenvolvimento de Softwares LTDA"
+      }
+    ],
+    "notFound": [
+      "instagram",
+      "youtube",
+      "tiktok",
+      "facebook",
+      "linkedin",
+      "x",
+      "app-store",
+      "google-play"
+    ]
+  }
+}

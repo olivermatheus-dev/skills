@@ -1,0 +1,22 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:20:25Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://wehelputeacher.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [],
+    "evidence": "site em pt-BR e domínio .com.br; sem preço, CNPJ ou seletor de país na página"
+  }
+}

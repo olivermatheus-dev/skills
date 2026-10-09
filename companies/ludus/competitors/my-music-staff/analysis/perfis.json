@@ -1,0 +1,48 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T18:58:28Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.mymusicstaff.com/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.mymusicstaff.com",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/mymusicstaffapp/",
+        "handle": "mymusicstaffapp",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@MyMusicStaff",
+        "handle": "MyMusicStaff",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/mymusicstaffofficial",
+        "handle": "mymusicstaffofficial",
+        "note": "linkado no rodapé do site"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/mymusicstaff",
+        "handle": "mymusicstaff",
+        "note": "linkado no rodapé do site"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}

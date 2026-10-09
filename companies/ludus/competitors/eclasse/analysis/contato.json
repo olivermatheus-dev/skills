@@ -1,0 +1,21 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:35:03Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "contato@eclasse.com.br"
+    ],
+    "phones": [],
+    "whatsapp": [
+      "+5547992297331"
+    ],
+    "socials": []
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "module": "landing",
+  "updatedAt": "2026-10-09T19:40:21Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://eclasse.com.br/",
+      "title": "eClasse - home"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "url": "https://eclasse.com.br/",
+    "hero": {
+      "headline": "Transforme a Gestão das Suas Aulas Particulares",
+      "subheadline": "Organize alunos, agenda, finanças e comunicação de forma simples, para focar em ensinar.",
+      "cta": "Conheça Nossos Planos",
+      "visual": "sem imagem identificada"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Transforme a Gestão das Suas Aulas Particulares",
+        "summary": "Promessa genérica de organização; CTA leva aos planos."
+      },
+      {
+        "type": "features",
+        "title": "Tudo o que Você Precisa em um Só Lugar",
+        "summary": "6 cards: conexões, agenda, diário, pacotes, cobranças, portal do cliente."
+      },
+      {
+        "type": "beneficios",
+        "title": "Pagamentos Seguros e Automatizados",
+        "summary": "Integração Asaas com boleto, Pix e cartão."
+      },
+      {
+        "type": "precos",
+        "title": "Nossos Planos",
+        "summary": "Mensal R$ 187, anual R$ 897 (mais popular), semestral R$ 619; garantia de 7 dias."
+      },
+      {
+        "type": "cta",
+        "title": "Pronto para simplificar a gestão de suas aulas?",
+        "summary": "Comece Agora!"
+      },
+      {
+        "type": "rodape",
+        "title": "eClasse",
+        "summary": "Links: funcionalidades, planos, termos de uso, contato."
+      }
+    ],
+    "ctas": [
+      "Conheça Nossos Planos",
+      "Assinar Agora",
+      "Comece Agora!",
+      "Cadastro Professor",
+      "Cadastro Cliente"
+    ],
+    "socialProof": [
+      "'diversos professores' (sem número)"
+    ],
+    "interesting": [
+      "Preço exposto na home, com economia em reais ('Economize R$ 1.347')",
+      "Âncora forte: mensal R$ 187 faz o anual parecer barato",
+      "Garantia de 7 dias em nota de rodapé",
+      "Cadastro separado para professor e cliente já no menu",
+      "Sem teste grátis, depoimentos, prints, FAQ nem prova social"
+    ],
+    "tone": "Corporativo e genérico, focado em gestão; pouca emoção."
+  }
+}

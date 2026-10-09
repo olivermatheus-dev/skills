@@ -1,0 +1,24 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:19:15Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://opus1.io/"
+    },
+    {
+      "url": "https://opus1.io/pricing/"
+    },
+    {
+      "url": "https://opus1.io/about/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "oneLiner": "Plataforma tudo-em-um de gestão para escolas de música e artes cênicas (EUA)",
+    "text": "Vende gestão de escola: agenda com autoagendamento das famílias, cobrança automática com portal de pagamento, comunicação por e-mail/SMS/voz e CRM de leads. Feito para donos de escola de música e dança, com planos por número de alunos ativos (200/500/1000), mês a mês e sem contrato. Preço de entrada declarado: US$ 98/mês. Venda por demo com time de vendas, não por cadastro self-service.",
+    "audience": "escolas de música e artes cênicas pequenas a grandes, multi-unidade",
+    "positioning": "Built by school owners for school owners",
+    "size": "cerca de mil escolas (declarado no site); +40% de matrículas em 18 meses (declarado)"
+  }
+}

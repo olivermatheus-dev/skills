@@ -1,0 +1,58 @@
+{
+  "module": "precos",
+  "updatedAt": "2026-10-09T19:38:31Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://iprofe.com.br/",
+      "title": "iProfe home e FAQ"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "publicPrice": true,
+    "currency": "BRL",
+    "model": "freemium",
+    "fromMonthly": 29.9,
+    "trial": "plano gratuito permanente com todas as funcionalidades, limitado a 3 alunos, sem cartão",
+    "plans": [
+      {
+        "name": "Gratuito",
+        "monthly": 0,
+        "users": "1 professor",
+        "highlights": [
+          "todas as funcionalidades",
+          "até 3 alunos",
+          "sem cartão"
+        ],
+        "recommended": false,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      },
+      {
+        "name": "Plano Mensal",
+        "monthly": 29.9,
+        "users": "1 professor",
+        "highlights": [
+          "até 150 alunos",
+          "sem fidelidade",
+          "cancela quando quiser"
+        ],
+        "recommended": true,
+        "onRequest": false,
+        "otherCycles": [],
+        "includes": [],
+        "matrix": [],
+        "limits": []
+      }
+    ],
+    "extras": [],
+    "notes": "Só existe cobrança mensal (cartão de crédito, pelo perfil no app); não há plano anual no site. Garantia ou reembolso, formas de pagamento além de cartão e taxas não encontrados. Não há página /planos; preço na home e no FAQ.",
+    "paymentMethods": [],
+    "addOns": [],
+    "checkedPages": []
+  }
+}

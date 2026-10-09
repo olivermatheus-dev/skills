@@ -1,0 +1,18 @@
+{
+  "module": "resumo",
+  "updatedAt": "2026-10-09T19:19:29Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://tatamenamaov2.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "oneLiner": "Gestão para academias de artes marciais com cobrança PIX/cartão e check-in QR.",
+    "text": "Sistema para dono de academia de artes marciais: alunos, check-in por QR, graduações, cobrança automática por PIX e cartão (sem gateway externo), saldo e saque, despesas, produtos e relatórios. Inclui app do aluno e app do gestor (PWA). Plano único de R$ 197/mês (de R$ 397, preço de lançamento), 7 dias grátis sem cartão, sem fidelidade. Está na versão 2.0.",
+    "audience": "professores donos de academia de artes marciais",
+    "positioning": "Só o essencial. Sem dezenas de módulos esquecidos.",
+    "size": "não declarado"
+  }
+}

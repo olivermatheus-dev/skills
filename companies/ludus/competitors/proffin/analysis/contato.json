@@ -1,0 +1,23 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:36:53Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://proffin.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [
+      "webarthur@gmail.com"
+    ],
+    "phones": [
+      "+55 48 99105-8272"
+    ],
+    "whatsapp": [
+      "+5548991058272"
+    ],
+    "socials": []
+  }
+}

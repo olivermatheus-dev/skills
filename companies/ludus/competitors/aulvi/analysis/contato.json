@@ -1,0 +1,20 @@
+{
+  "module": "contato",
+  "updatedAt": "2026-10-09T19:34:22Z",
+  "by": "script",
+  "sources": [
+    {
+      "url": "https://aulvi.com.br/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "emails": [],
+    "phones": [],
+    "whatsapp": [
+      "+5585981071102"
+    ],
+    "cnpj": "65.972.541/0001-27",
+    "socials": []
+  }
+}

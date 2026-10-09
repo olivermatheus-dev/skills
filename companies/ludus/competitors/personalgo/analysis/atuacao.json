@@ -1,0 +1,25 @@
+{
+  "module": "atuacao",
+  "updatedAt": "2026-10-09T19:20:03Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.personalgo.com.br/"
+    },
+    {
+      "url": "https://www.reclameaqui.com.br/empresa/personalgo-desenvolvimento-de-software-ltda/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "market": "brasil",
+    "countries": [
+      "Brasil"
+    ],
+    "languages": [
+      "pt-BR"
+    ],
+    "currencies": [],
+    "evidence": "domínio .com.br, site em pt-BR, empresa com página no Reclame Aqui (domínio confere), WhatsApp +55. Há seletor PT/EN no site, mas sem evidência de operação fora do Brasil."
+  }
+}

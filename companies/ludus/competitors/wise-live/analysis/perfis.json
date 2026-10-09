@@ -1,0 +1,53 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:19:27Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.wise.live/"
+    }
+  ],
+  "confidence": "alta",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.wise.live",
+        "note": "site oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/wiseapplive/",
+        "handle": "wiseapplive",
+        "note": "linkado no rodapé do wise.live"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@WiseAppLive",
+        "handle": "WiseAppLive",
+        "note": "linkado no rodapé do wise.live"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/company/wiseapplive",
+        "handle": "wiseapplive",
+        "note": "linkado no rodapé do wise.live"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/wiseapplive",
+        "handle": "wiseapplive",
+        "note": "linkado no rodapé do wise.live"
+      },
+      {
+        "platform": "x",
+        "url": "https://twitter.com/wiseapplive",
+        "handle": "wiseapplive",
+        "note": "linkado no rodapé do wise.live"
+      }
+    ],
+    "notFound": [
+      "tiktok"
+    ]
+  }
+}

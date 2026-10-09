@@ -1,0 +1,42 @@
+{
+  "module": "perfis",
+  "updatedAt": "2026-10-09T19:17:55Z",
+  "by": "claude-sonnet-5-5",
+  "sources": [
+    {
+      "url": "https://www.edukante.com/"
+    }
+  ],
+  "confidence": "media",
+  "data": {
+    "found": [
+      {
+        "platform": "site",
+        "url": "https://www.edukante.com",
+        "note": "domínio oficial"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/software_gestao_escolar/",
+        "handle": "software_gestao_escolar",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/@edukante",
+        "handle": "edukante",
+        "note": "linkado no site oficial"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/Edukante/",
+        "handle": "Edukante",
+        "note": "linkado no site oficial"
+      }
+    ],
+    "notFound": [
+      "tiktok",
+      "linkedin"
+    ]
+  }
+}
