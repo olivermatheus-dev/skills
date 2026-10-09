@@ -12,6 +12,7 @@ import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
 import WeeklyPanel from '../../components/competitors/WeeklyPanel';
 import { FilaAnalise } from '../../components/competitors/Analysis';
 import { Check, CircleCheck, CircleDashed, ListTodo, RefreshCw, TriangleAlert, Users, X } from 'lucide-react';
+import { useColetas } from '../../components/atividade/useColeta';
 
 type R = ProfileSummary & { m: MarketRow };
 const STALE_DAYS = 7;
@@ -28,6 +29,7 @@ export default function Coletas() {
   const [showAll, setShowAll] = useState(false);
   const [pulling, setPulling] = useState<{ i: number; n: number; name: string } | null>(null);
   const [one, setOne] = useState<string | null>(null);
+  const coleta = useColetas(slug); // coleta rodando no servidor (046 C), mesmo disparada em outra tela
 
   const refresh = () => ['competitors-summary', 'competitors-feed', 'analysis-all'].forEach((k) => qc.invalidateQueries({ queryKey: [k, slug] }));
   const every: R[] = m.rows.flatMap((r) => (r.sum?.profiles ?? []).map((p) => ({ ...p, m: r })));
@@ -71,7 +73,7 @@ export default function Coletas() {
     { k: 'f', label: 'Seguidores', num: true, v: (p) => p.latest?.profile.followers ?? undefined, render: (p) => fmtNum(p.latest?.profile.followers ?? undefined) },
     { k: 'items', label: 'Itens', num: true, v: (p) => p.latest?.items, render: (p) => p.latest?.items ?? '—' },
     { k: 'n', label: 'Coletas', num: true, v: (p) => p.snapshots, render: (p) => p.snapshots },
-    { k: 'act', label: '', render: (p) => p.m.c.data.profiles[0] && keyFirst(p, all) ? <button className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={!!pulling || one === p.m.c.data.id} onClick={() => pullOne(p.m)}>{one === p.m.c.data.id ? <Spinner /> : <RefreshCw className="size-3" />}Puxar</button> : null },
+    { k: 'act', label: '', render: (p) => p.m.c.data.profiles[0] && keyFirst(p, all) ? <button className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={!!pulling || one === p.m.c.data.id || !!coleta('coleta', p.m.c.data.id)} onClick={() => pullOne(p.m)} title={coleta('coleta', p.m.c.data.id)?.passo}>{one === p.m.c.data.id || coleta('coleta', p.m.c.data.id) ? <Spinner /> : <RefreshCw className="size-3" />}Puxar</button> : null },
   ];
 
   const nOk = all.filter((p) => stateOf(p) === 'ok').length;

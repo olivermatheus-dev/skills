@@ -20,6 +20,7 @@ import { useFichasResumo } from './ficha/useFichas';
 import { useFichasFila } from './ficha/useFila';
 import { FilaFaixa } from './ficha/Selecao';
 import { Button, Empty, ErrorBox, SelectField, cx, fmtDate, fmtNum, type SelectOption } from '../../components/kit';
+import { useColetas } from '../atividade/useColeta';
 
 type Row = Ad & {
   compId: string; compName: string; isNew: boolean; days?: number;
@@ -97,6 +98,8 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   const { values: v, set, reset } = useUrlState(DEFAULTS);
   const [pulling, setPulling] = useState<{ i: number; n: number; name: string } | null>(null);
   const [one, setOne] = useState<string | null>(null);
+  const coleta = useColetas(slug); // coleta de anúncios rodando no servidor (046 C), mesmo disparada em outra tela
+  const puxando = (id: string) => one === id || !!coleta('anuncios', id);
 
   const names = useMemo(() => new Map(m.rows.map((r) => [r.c.data.id, r])), [m.rows]);
   const per = (ads.data ?? []).filter((a) => !compId || a.id === compId).map((a) => {
@@ -263,7 +266,7 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
   const thumbOf = (r: Row) => (r.mark?.frozenMedia ? api.adSalvoUrl(slug, r.compId, r.mark.frozenMedia) : api.mediaUrl(slug, r.compId, r.media.thumbnailLocal ?? undefined));
   const openRow = openKey ? allRows.find((r) => `${r.compId}/${r.id}` === openKey) : undefined;
   const pullChip = (id: string) => (
-    <Button variant="ghost" onClick={() => pullOne(id)} disabled={one === id || !!pulling} title={`Puxar só os anúncios de ${names.get(id)?.c.data.name}`}>{one === id ? <Spinner /> : <RefreshCw className="size-3.5" />} {names.get(id)?.c.data.name}</Button>
+    <Button variant="ghost" onClick={() => pullOne(id)} disabled={puxando(id) || !!pulling} title={`Puxar só os anúncios de ${names.get(id)?.c.data.name}`}>{puxando(id) ? <Spinner /> : <RefreshCw className="size-3.5" />} {names.get(id)?.c.data.name}</Button>
   );
 
   return shell(<>
@@ -273,7 +276,7 @@ export default function AdsView({ slug, compId, shell }: { slug: string; compId?
         onClick={() => fila.pedir.mutate({ itens: paraAnalisar.map((r) => ({ comp: r.compId, key: fichaKeyDeAd(r.id) })), origem: 'top', n: paraAnalisar.length, rodar: false })}>
         {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}Analisar {paraAnalisar.length ? `os ${paraAnalisar.length} primeiros` : 'anúncios'}
       </Button>
-      <Button variant="ghost" className="inline-flex items-center gap-1.5 whitespace-nowrap" onClick={compId ? () => pullOne(compId) : pullAll} disabled={!!pulling || (!!compId && one === compId)} title={compId ? 'Busca os anúncios deste concorrente na Biblioteca de Anúncios da Meta' : 'Busca na Biblioteca de Anúncios da Meta, um concorrente por vez'}>{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : <><RefreshCw className="size-3.5" />Puxar anúncios</>}</Button>
+      <Button variant="ghost" className="inline-flex items-center gap-1.5 whitespace-nowrap" onClick={compId ? () => pullOne(compId) : pullAll} disabled={!!pulling || (!!compId && puxando(compId))} title={compId ? 'Busca os anúncios deste concorrente na Biblioteca de Anúncios da Meta' : 'Busca na Biblioteca de Anúncios da Meta, um concorrente por vez'}>{pulling ? <><Spinner /> {pulling.i}/{pulling.n} {pulling.name}</> : compId && puxando(compId) ? <><Spinner /> {coleta('anuncios', compId)?.passo ?? 'Puxando anúncios'}</> : <><RefreshCw className="size-3.5" />Puxar anúncios</>}</Button>
     </>, <>
       <ErrorBox error={ads.error} />
       {ads.isLoading && <div className="h-64 rounded-xl bg-card border border-border animate-pulse" />}

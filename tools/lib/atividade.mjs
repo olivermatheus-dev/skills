@@ -38,13 +38,14 @@ export function passo(id, texto, extra = {}) {
 
 /**
  * fecha: status feito | erro | parado; `resumo` = uma linha do que saiu; `custo` (US$) e `turnos` quando é IA;
- * `final` = texto final do Claude (cortado), para o histórico; `visto` = já nasce visto (não pede atenção no dock)
+ * `final` = texto final do Claude (cortado), para o histórico; `visto` = já nasce visto (não pede atenção no dock);
+ * `resultado` = o que a coleta devolveu (046 C: a tela que disparou lê daqui, mesmo se saiu e voltou)
  */
-export function terminar(id, status, { resumo = null, erro = null, link, custo = null, turnos = null, final = null, visto } = {}) {
+export function terminar(id, status, { resumo = null, erro = null, link, custo = null, turnos = null, final = null, visto, resultado } = {}) {
   const a = okId(id) && ler(id);
   if (!a) return null;
   return gravar({ ...a, status, resumo, erro, ...(link !== undefined ? { link } : {}), ...(custo != null ? { custo } : {}), ...(turnos != null ? { turnos } : {}),
-    ...(final ? { final: String(final).slice(0, 6000) } : {}), ...(visto !== undefined ? { visto } : {}), fim: new Date().toISOString() });
+    ...(final ? { final: String(final).slice(0, 6000) } : {}), ...(visto !== undefined ? { visto } : {}), ...(resultado !== undefined ? { resultado } : {}), fim: new Date().toISOString() });
 }
 
 /** grava campos soltos (ex.: `encerrada` da sessão de terminal) sem mexer no status */

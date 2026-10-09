@@ -52,6 +52,36 @@ export async function comAtividade<T>(meta: Parameters<typeof AT.iniciar>[0], fn
   }
 }
 
+/**
+ * Coleta como trabalho (046 C): responde na hora com o id e roda `fn` no fundo, no processo do app. A tela que disparou
+ * acompanha pelo registro (`GET …/atividade/:id`) e lê o `resultado` no fim; sair da tela não perde nada.
+ * O mesmo trabalho (empresa + fonte + ref) já rodando não roda duas vezes: devolve o id dele.
+ */
+export function emSegundoPlano<T>(meta: Parameters<typeof AT.iniciar>[0], fn: (passo: (t: string) => void) => Promise<T>, resumir?: (r: T) => { resumo?: string; erro?: string | null }) {
+  const igual = AT.listar({ slug: meta.slug, limite: 60 }).find((a) => a.status === 'rodando' && a.fonte === meta.fonte && a.ref === (meta.ref ?? null) && a.pid === process.pid);
+  if (igual) return { atividade: igual.id, jaRodando: true };
+  const a = AT.iniciar(meta);
+  void (async () => {
+    try {
+      const r = await fn((t) => AT.passo(a.id, t));
+      const s = resumir?.(r) ?? {};
+      AT.terminar(a.id, s.erro ? 'erro' : 'feito', { resumo: s.resumo ?? null, erro: s.erro ?? null, resultado: r ?? null });
+    } catch (e) {
+      console.error(`[${meta.fonte}] ${meta.slug}/${meta.ref ?? ''}: ${(e as Error).message}`);
+      AT.terminar(a.id, 'erro', { erro: (e as Error).message });
+    }
+  })();
+  return { atividade: a.id, jaRodando: false };
+}
+
+/** um trabalho (para a tela que disparou acompanhar até o fim) */
+export function lerTrabalho(slug: string, id: string) {
+  const a = AT.lerAtividade(id);
+  if (!a || (a.slug !== slug && a.slug !== '*')) throw new ValidationError('atividade', ['trabalho não encontrado']);
+  if (a.status === 'rodando' && a.pid && a.pid !== process.pid) AT.listar({ slug, limite: 60 }); // confere se o processo dele ainda vive
+  return AT.lerAtividade(id);
+}
+
 export const iniciar = AT.iniciar;
 export const passo = AT.passo;
 export const terminar = AT.terminar;

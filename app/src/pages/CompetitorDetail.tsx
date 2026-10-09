@@ -20,6 +20,7 @@ import FaixaRedes from '../components/competitors/FaixaRedes';
 import { ItemPanel } from '../components/competitors/ficha/FichaPanel';
 import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
+import { useColetas, segundosDesde } from '../components/atividade/useColeta';
 import ContentsView from '../components/competitors/ContentsView';
 import RelatoriosSection, { RelatorioDialog, useRelatorioPorItem } from '../components/competitors/relatorios/Relatorios';
 import { useMarketRows } from '../components/competitors/market';
@@ -49,8 +50,8 @@ function shortError(e: string) {
 }
 
 /** resultado da coleta em uma linha: um chip por perfil; tooltip com o detalhe */
-function CollectStrip({ results, pulling, elapsed, total, onClose }: { results: CollectResult[] | null; pulling: boolean; elapsed: number; total: number; onClose: () => void }) {
-  if (pulling) return <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground"><Spinner /> Coletando {total} perfil(is)… {elapsed}s <span className="opacity-70">(YouTube com detalhes leva 1–2 min)</span></div>;
+function CollectStrip({ results, pulling, passo, elapsed, total, onClose }: { results: CollectResult[] | null; pulling: boolean; passo?: string; elapsed: number; total: number; onClose: () => void }) {
+  if (pulling) return <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground"><Spinner /> Coletando {total} perfil(is){passo ? ` · ${passo}` : ''}… {elapsed}s <span className="opacity-70">(roda no fundo: pode sair desta tela; YouTube com detalhes leva 1–2 min)</span></div>;
   if (!results) return null;
   const okN = results.filter((r) => r.ok).length;
   return (
@@ -161,7 +162,16 @@ function Detalhe() {
     return () => ro.disconnect();
   });
 
-  useEffect(() => { if (!pulling) return; setElapsed(0); const t = setInterval(() => setElapsed((s) => s + 1), 1000); return () => clearInterval(t); }, [pulling]);
+  // a coleta roda no servidor (046 C): ao voltar para a ficha, o registro diz se ela ainda está rodando e desde quando
+  const emColeta = useColetas(slug)('coleta', id);
+  const ocupado = pulling || !!emColeta;
+  useEffect(() => {
+    if (!ocupado) return;
+    const ini = emColeta?.inicio;
+    setElapsed(segundosDesde(ini));
+    const t = setInterval(() => setElapsed((s) => (ini ? segundosDesde(ini) : s + 1)), 1000);
+    return () => clearInterval(t);
+  }, [ocupado, emColeta?.inicio]);
 
   const d = q.data;
   const series = useMemo(() => groupSnapshots(d?.snapshots ?? []), [d?.snapshots]);
@@ -265,7 +275,7 @@ function Detalhe() {
           <div className="flex gap-2">
             <Button variant="ghost" onClick={() => setEditing({})}>Editar</Button>
             <Button onClick={() => setRunOpen(true)} disabled={!c.profiles.length} title="Escolher o que atualizar (redes, site, análises)">
-              {pulling ? <><Spinner /> {elapsed}s</> : <><RefreshCw className="size-3.5 inline -mt-0.5 mr-1" />Puxar</>}
+              {ocupado ? <><Spinner /> {elapsed}s</> : <><RefreshCw className="size-3.5 inline -mt-0.5 mr-1" />Puxar</>}
             </Button>
           </div>
         </div>
@@ -291,7 +301,7 @@ function Detalhe() {
           </span>
           <span className="text-[11px] text-muted-foreground ml-auto" title={lastAt ? `${fmtDateTime(lastAt)} · ${nSnaps} coleta(s) no histórico` : undefined}>{lastAt ? `atualizado ${timeAgo(lastAt)}` : 'ainda não puxado'}</span>
         </div>
-        <CollectStrip results={results} pulling={pulling} elapsed={elapsed} total={c.profiles.length} onClose={() => setResults(null)} />
+        <CollectStrip results={results} pulling={ocupado} passo={emColeta?.passo} elapsed={elapsed} total={c.profiles.length} onClose={() => setResults(null)} />
         {pullError ? <ErrorBox error={pullError} /> : null}
 
         <div className="mt-3 flex gap-0.5 -mb-px overflow-x-auto">
@@ -376,7 +386,7 @@ function Detalhe() {
           {c.profiles.length > 0 && !rows.length && (
             <Empty title={series.size ? "Nenhum conteúdo coletado" : "Ainda não puxado"}
               hint={series.size ? "Sites trazem só o perfil. Confira os avisos da última coleta." : "Clique em “Puxar agora” para trazer perfil, vídeos e métricas."}
-              action={!series.size ? <Button onClick={pull} disabled={pulling} className="inline-flex items-center gap-1.5"><RefreshCw className="size-3.5" />Puxar agora</Button> : undefined} />
+              action={!series.size ? <Button onClick={pull} disabled={ocupado} className="inline-flex items-center gap-1.5"><RefreshCw className="size-3.5" />Puxar agora</Button> : undefined} />
           )}
           {sel && rows.length > 0 && !scopeRows.length && sel.platform === "site" && <Empty title="Site não tem lista de conteúdos" hint="A coleta do site traz título, descrição, imagem de capa, ícone e as redes linkadas." />}
           {scopeRows.length > 0 && (

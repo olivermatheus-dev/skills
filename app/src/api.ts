@@ -143,6 +143,25 @@ async function req<T>(method: string, path: string, body?: unknown): Promise<T> 
 }
 const pj = (slug: string) => `/api/projects/${encodeURIComponent(slug)}`;
 
+/**
+ * Coleta como trabalho (046 C): o POST responde na hora com o id e a coleta roda no servidor; aqui espera o fim lendo o
+ * registro (o dock e as outras telas leem o mesmo). Servidor reiniciando no meio = tenta de novo até voltar.
+ * Devolve o `resultado` da coleta; sem resultado (a coleta lançou erro) vira exceção com a mensagem.
+ */
+async function trabalho<T>(slug: string, start: Promise<{ atividade: string }>): Promise<T> {
+  const { atividade: id } = await start;
+  for (;;) {
+    await new Promise((r) => setTimeout(r, 1500));
+    let a: Atividade;
+    try { a = await req<Atividade>('GET', `${pj(slug)}/atividade/${encodeURIComponent(id)}`); }
+    catch (e) { if (net.isNetworkError(e)) continue; throw e; }
+    if (a.status === 'rodando') continue;
+    if (a.resultado !== undefined && a.resultado !== null) return a.resultado as T;
+    throw new Error(a.erro ?? (a.status === 'parado' ? 'parado' : 'a coleta falhou'));
+  }
+}
+const bg = <T>(slug: string, path: string, body?: unknown) => trabalho<T>(slug, req<{ atividade: string }>('POST', `${pj(slug)}${path}`, body));
+
 export const api = {
   projects: () => req<Project[]>('GET', '/api/projects'),
   createProject: (slug: string, name: string) => req<Project>('POST', '/api/projects', { slug, name }),
@@ -217,18 +236,18 @@ export const api = {
   saveCompetitor: (slug: string, id: string, data: Partial<Competitor> & { name: string }, body?: string) => req<Doc<Competitor>>('PUT', `${pj(slug)}/competitors/${id}`, { data, body }),
   deleteCompetitor: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}`),
   setMark: (slug: string, id: string, key: string, mark: Partial<ItemMark>) => req<ItemMark>('PUT', `${pj(slug)}/competitors/${id}/marks`, { key, mark }),
-  collect: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<unknown>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
+  collect: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => bg<CollectResult[]>(slug, `/competitors/${id}/collect`, opt),
   mediaUrl: (slug: string, compId: string, local?: string) => (local ? `/media/${slug}/${compId}/${local.replace(/^media\//, '')}` : undefined),
 
   competitorsSummary: (slug: string) => req<CompetitorSummary[]>('GET', `${pj(slug)}/competitors-summary`),
-  collectResults: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => req<CollectResult[]>('POST', `${pj(slug)}/competitors/${id}/collect`, opt),
+  collectResults: (slug: string, id: string, opt: { platforms?: string[]; maxItems?: number } = {}) => bg<CollectResult[]>(slug, `/competitors/${id}/collect`, opt),
 
   analysis: (slug: string, id: string) => req<AnalysisFull>('GET', `${pj(slug)}/competitors/${id}/analysis`),
   setAnalysisNote: (slug: string, id: string, key: string, text: string) => req<AnalysisNotes>('PUT', `${pj(slug)}/competitors/${id}/analysis/notes/${key}`, { text }),
   requestAnalysis: (slug: string, id: string, r: { modules: ModuleId[]; force?: boolean; instructions?: string }) => req<AnalysisRequest>('PUT', `${pj(slug)}/competitors/${id}/analysis/request`, r),
   cancelAnalysis: (slug: string, id: string) => req<null>('DELETE', `${pj(slug)}/competitors/${id}/analysis/request`),
-  runSite: (slug: string, id: string) => req<SiteRunResult>('POST', `${pj(slug)}/competitors/${id}/analysis/site`),
-  runReclameAqui: (slug: string, id: string) => req<{ found: boolean; status?: string; score?: number; complaints?: number }>('POST', `${pj(slug)}/competitors/${id}/analysis/ra`),
+  runSite: (slug: string, id: string) => bg<SiteRunResult>(slug, `/competitors/${id}/analysis/site`),
+  runReclameAqui: (slug: string, id: string) => bg<{ found: boolean; status?: string; score?: number; complaints?: number }>(slug, `/competitors/${id}/analysis/ra`),
   matrix: (slug: string) => req<Matrix>('GET', `${pj(slug)}/matrix`),
   gaps: (slug: string) => req<Gaps | null>('GET', `${pj(slug)}/gaps`),
   setMatrixCell: (slug: string, col: string, feat: string, c: { status: CellStatus | null; note?: string; source?: string }) => req<Matrix>('PUT', `${pj(slug)}/matrix/cells/${encodeURIComponent(col)}/${encodeURIComponent(feat)}`, c),
@@ -245,7 +264,7 @@ export const api = {
   setAdMark: (slug: string, compId: string, adId: string, patch: AdMarkPatch) => req<AdMark | null>('PUT', `${pj(slug)}/competitors/${encodeURIComponent(compId)}/ads/marks/${encodeURIComponent(adId)}`, patch),
   adSalvoUrl: (slug: string, compId: string, file?: string) => (file ? `/ads-salvo/${slug}/${compId}/${file}` : undefined),
   ads: (slug: string) => req<{ id: string; history: { file: string; data: AdsSnapshot }[] }[]>('GET', `${pj(slug)}/ads`),
-  collectAds: (slug: string, id: string) => req<AdsResult>('POST', `${pj(slug)}/competitors/${id}/ads`),
+  collectAds: (slug: string, id: string) => bg<AdsResult>(slug, `/competitors/${id}/ads`),
   analysisAll: (slug: string) => req<{ id: string; results: AnalysisFull['results'] }[]>('GET', `${pj(slug)}/analysis-all`),
   competitorsFeed: (slug: string) => req<{ id: string; snapshots: SnapshotEntry[]; marks: Record<string, ItemMark> }[]>('GET', `${pj(slug)}/competitors-feed`),
   analysisOverview: (slug: string) => req<AnalysisOverview[]>('GET', `${pj(slug)}/analysis-overview`),

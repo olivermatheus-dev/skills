@@ -47,6 +47,7 @@ on('GET', '/api/projects/:slug/runner', (p) => R.runnerStatus(p.slug));
 on('GET', '/api/projects/:slug/atividade', (p) => AV.atividadeView(p.slug));
 on('POST', '/api/projects/:slug/atividade/visto', (p, b) => AV.marcarVisto(p.slug, b?.ids));
 on('POST', '/api/projects/:slug/atividade/:id/parar', (p) => AV.pararAtividade(p.slug, p.id));
+on('GET', '/api/projects/:slug/atividade/:id', (p) => AV.lerTrabalho(p.slug, p.id));
 // Página Agentes (046 E): equipe, estado, fila, histórico e instruções permanentes
 on('GET', '/api/projects/:slug/agentes', (p) => AG.agentesView(p.slug));
 on('GET', '/api/agentes/:nome/notas', (p) => AG.lerNotas(p.nome));
@@ -123,9 +124,11 @@ on('PUT', '/api/projects/:slug/competitors/:id/marks', (p, b) => S.setMark(p.slu
 /** nome do concorrente para o título no dock */
 const nomeComp = (slug: string, id: string) => { try { return S.getCompetitor(slug, id).data.name; } catch { return id; } };
 const linkComp = (slug: string, id: string) => `/p/${slug}/concorrentes/${id}`;
+// Coletas (046 C): respondem na hora com { atividade } e rodam no fundo; a tela acompanha por GET …/atividade/:id
 on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
   const { collectCompetitor } = await import('../../tools/intel/collect');
-  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'coleta', titulo: `Puxando ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo os perfis', link: linkComp(p.slug, p.id), ref: p.id },
+  slugOk(p);
+  return AV.emSegundoPlano({ slug: p.slug, tipo: 'coleta', fonte: 'coleta', titulo: `Puxando ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo os perfis', link: linkComp(p.slug, p.id), ref: p.id },
     (passo) => collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems, onPasso: passo }),
     (r) => { const ok = r.filter((x) => x.ok).length; return { resumo: `${ok}/${r.length} perfis · ${r.reduce((n, x) => n + x.items, 0)} posts`, erro: r.length && !ok ? 'nenhum perfil coletado' : null }; });
 });
@@ -137,13 +140,15 @@ on('PUT', '/api/projects/:slug/competitors/:id/analysis/request', (p, b) => S.re
 on('DELETE', '/api/projects/:slug/competitors/:id/analysis/request', (p) => S.clearAnalysisRequest(p.slug, p.id));
 on('POST', '/api/projects/:slug/competitors/:id/analysis/site', async (p) => {
   const { analyzeSite } = await import('../../tools/intel/site');
-  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'site', titulo: `Lendo o site de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo o site e o sitemap', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
-    () => analyzeSite(p.slug, p.id));
+  slugOk(p);
+  return AV.emSegundoPlano({ slug: p.slug, tipo: 'coleta', fonte: 'site', titulo: `Lendo o site de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo o site e o sitemap', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
+    () => analyzeSite(p.slug, p.id), (r) => ({ resumo: `${r.pages} página(s) · sitemap ${r.sitemap}`, erro: r.ok ? null : r.errors.join(' · ') || 'falhou' }));
 });
 on('POST', '/api/projects/:slug/competitors/:id/analysis/ra', async (p) => {
   const { runReclameAqui } = await import('../../tools/intel/reclameaqui');
-  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'reclameaqui', titulo: `Reclame Aqui de ${nomeComp(p.slug, p.id)}`, passo: 'Buscando a página da empresa', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
-    () => runReclameAqui(p.slug, p.id));
+  slugOk(p);
+  return AV.emSegundoPlano({ slug: p.slug, tipo: 'coleta', fonte: 'reclameaqui', titulo: `Reclame Aqui de ${nomeComp(p.slug, p.id)}`, passo: 'Buscando a página da empresa', link: `${linkComp(p.slug, p.id)}?aba=analise`, ref: p.id },
+    () => runReclameAqui(p.slug, p.id), (r) => ({ resumo: r?.found ? `${r.status ?? ''}${r.score != null ? ` ${r.score}` : ''} · ${r.complaints ?? 0} reclamações`.trim() : 'página não achada' }));
 });
 on('GET', '/api/projects/:slug/analysis-overview', async (p) => (await import('../../tools/intel/summary')).analysisOverview(p.slug));
 // Visões da área (Panorama, Comparar, Conteúdos): análises de todos e a última coleta de cada perfil com as marcações
@@ -202,7 +207,8 @@ on('GET', '/api/projects/:slug/ads/marks', (p) => { slugOk(p); return S.listAdsM
 on('PUT', '/api/projects/:slug/competitors/:id/ads/marks/:adId', (p, b) => { slugOk(p); return S.setAdMark(p.slug, p.id, p.adId, b ?? {}); });
 on('POST', '/api/projects/:slug/competitors/:id/ads', async (p) => {
   const { collectAds } = await adsMod();
-  return AV.comAtividade({ slug: p.slug, tipo: 'coleta', fonte: 'anuncios', titulo: `Anúncios de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo a Biblioteca de Anúncios da Meta', link: `${linkComp(p.slug, p.id)}?aba=anuncios`, ref: p.id },
+  slugOk(p);
+  return AV.emSegundoPlano({ slug: p.slug, tipo: 'coleta', fonte: 'anuncios', titulo: `Anúncios de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo a Biblioteca de Anúncios da Meta', link: `${linkComp(p.slug, p.id)}?aba=anuncios`, ref: p.id },
     () => collectAds(p.slug, p.id), (r) => ({ resumo: `${r.ads} anúncio(s) ativo(s)`, erro: r.ok ? null : r.errors.join(' · ') || 'falhou' }));
 });
 on('GET', '/api/projects/:slug/analysis-queue', (p) => S.listAnalysisQueue(p.slug));

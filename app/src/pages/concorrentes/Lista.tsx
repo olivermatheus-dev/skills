@@ -16,6 +16,7 @@ import { ResultLine } from '../../components/competitors/AddLinksModal';
 import { useCompetitorActions } from '../../components/competitors/useCompetitorActions';
 import { prefetchCompetitor, qk, useAnalysisOverview, useCompetitors, useCompetitorsSummary } from '../../queries';
 import { Avatar, Img, KINDS, KIND_COLOR, PlatformIcon, Spinner, Star, fmtDelta, keyFor, platformLabel, timeAgo } from '../../components/competitors/lib';
+import { useColetas } from '../../components/atividade/useColeta';
 
 type Stage = Competitor['status'];
 const MODE_KEY = 'hub:comp-mode';
@@ -46,6 +47,7 @@ export default function Competitors() {
   const [pulling, setPulling] = useState<{ i: number; n: number; name: string } | null>(null);
   const [pullLog, setPullLog] = useState<{ id: string; name: string; results: CollectResult[] }[] | null>(null);
   const [pullingOne, setPullingOne] = useState<string | null>(null);
+  const coleta = useColetas(slug); // coleta rodando no servidor (046 C), mesmo disparada em outra tela
 
   const sum = useMemo(() => new Map((summary.data ?? []).map((s) => [s.id, s])), [summary.data]);
   const all = list.data ?? [];
@@ -170,13 +172,13 @@ export default function Competitors() {
         action={filtered ? <Button variant="ghost" onClick={() => reset(['q', 'tipo', 'rede', 'tag', 'onde', 'fav'])}>Limpar filtros</Button> : undefined} />}
 
       {stage === 'candidato' && shown.length > 0 && <div className="mb-4 text-sm text-muted-foreground">Achados pela IA (radar). <b>Aceitar</b> = vira ativo e entra na fila da análise completa (feita 1x). <b>Recusar</b> = arquiva.</div>}
-      {mode === 'tabela' && shown.length > 0 && <ListTable slug={slug} rows={shown} ov={ov} sum={sum} onFav={(c) => actions.toggleFavorite(c)} onPull={pullOne} pullingId={pullingOne} onAccept={accept}
+      {mode === 'tabela' && shown.length > 0 && <ListTable slug={slug} rows={shown} ov={ov} sum={sum} onFav={(c) => actions.toggleFavorite(c)} onPull={pullOne} pullingId={(cid) => pullingOne === cid || !!coleta('coleta', cid)} onAccept={accept}
         onReject={(c) => { void actions.save(c.data.id, { ...c.data, status: 'arquivado' }, c.body, { okMessage: 'Candidato recusado (arquivado)' }); }} />}
       {mode === 'cards' && <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {shown.map((c) => (
           <CompetitorCard key={c.data.id} slug={slug} c={c} s={sum.get(c.data.id)} o={ov.get(c.data.id)} loadingSummary={summary.isLoading}
             onAccept={() => accept(c)} onReject={() => { void actions.save(c.data.id, { ...c.data, status: 'arquivado' }, c.body, { okMessage: 'Candidato recusado (arquivado)' }); }}
-            onFav={() => actions.toggleFavorite(c)} onWarm={() => prefetchCompetitor(qc, slug, c.data.id)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name} />
+            onFav={() => actions.toggleFavorite(c)} onWarm={() => prefetchCompetitor(qc, slug, c.data.id)} onPull={() => pullOne(c)} pulling={pullingOne === c.data.id || pulling?.name === c.data.name || !!coleta('coleta', c.data.id)} />
         ))}
       </div>}
     </AreaPage>
@@ -293,7 +295,7 @@ const marketOf = (c: Doc<Competitor>, o?: AnalysisOverview) => (c.data.market ??
 /** Tabela da lista: quem são, quanto cobram, que audiência têm e quando foram atualizados. Clique ordena; nome abre. */
 function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, onReject }: {
   slug: string; rows: Doc<Competitor>[]; ov: Map<string, AnalysisOverview>; sum: Map<string, CompetitorSummary>;
-  onFav: (c: Doc<Competitor>) => void; onPull: (c: Doc<Competitor>) => void; pullingId: string | null; onAccept: (c: Doc<Competitor>) => void; onReject: (c: Doc<Competitor>) => void;
+  onFav: (c: Doc<Competitor>) => void; onPull: (c: Doc<Competitor>) => void; pullingId: (id: string) => boolean; onAccept: (c: Doc<Competitor>) => void; onReject: (c: Doc<Competitor>) => void;
 }) {
   const followers = (c: Doc<Competitor>) => { const ps = (sum.get(c.data.id)?.profiles ?? []).filter((p) => p.latest?.profile.followers != null); return ps.length ? ps.reduce((n, p) => n + p.latest!.profile.followers!, 0) : undefined; };
   const delta = (c: Doc<Competitor>) => { const ps = (sum.get(c.data.id)?.profiles ?? []).filter((p) => p.latest?.profile.followers != null); return ps.length && ps.every((p) => p.prevFollowers != null) ? ps.reduce((n, p) => n + p.latest!.profile.followers! - p.prevFollowers!, 0) : undefined; };
@@ -329,7 +331,7 @@ function ListTable({ slug, rows, ov, sum, onFav, onPull, pullingId, onAccept, on
           <Button variant="ghost" className="!py-0.5 !px-2 text-xs" onClick={() => onReject(c)}>Recusar</Button>
         </> : <>
           <Star on={c.data.favorite} onClick={() => onFav(c)} size="text-base" />
-          <button title="Puxar agora" aria-label="Puxar agora" className="h-6 w-6 grid place-items-center rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={pullingId === c.data.id || !c.data.profiles.length} onClick={() => onPull(c)}>{pullingId === c.data.id ? <Spinner /> : <RefreshCw className="size-3.5" />}</button>
+          <button title="Puxar agora" aria-label="Puxar agora" className="h-6 w-6 grid place-items-center rounded-md border border-border hover:bg-muted disabled:opacity-50" disabled={pullingId(c.data.id) || !c.data.profiles.length} onClick={() => onPull(c)}>{pullingId(c.data.id) ? <Spinner /> : <RefreshCw className="size-3.5" />}</button>
         </>}
       </span>
     ) },
