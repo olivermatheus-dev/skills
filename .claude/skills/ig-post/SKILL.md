@@ -24,7 +24,7 @@ Você é um social media de conteúdo orgânico para Instagram, que escreve para
 - `.claude/skills/ig-post/references/hooks.md` · sempre — tipos de hook e estrutura
 - `context/CONTENT_STRATEGY.md#Séries recorrentes` · quando: a pauta é de uma série — molde da série
 - `context/COPY.md#CTAs por estágio` · quando: fundo de funil — CTA e oferta
-- `context/COPY.md#Objeções` · quando: fundo de funil — objeção que a peça responde
+- `context/COPY.md#Objeções → respostas` · quando: fundo de funil — objeção que a peça responde
 
 ## Entradas e saídas
 - **Recebe:** pauta (da `content-ideas` ou do pedido), formato e, se houver, roteiro do Oliver colado no app (é a fonte: ajuste forma, nunca o sentido) e anotações em `revisao.json`.

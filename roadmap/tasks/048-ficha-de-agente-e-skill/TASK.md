@@ -65,3 +65,18 @@ Status: em andamento (molde, app, conferência e pacote feitos; roteirista + ig-
 3. `.inverse` usa `--primary` como padrão: numa empresa nova vira bloco coral cheio (na kz o brand.css já suaviza).
 4. BRAND.md da kz: "Sem serifa" × Fraunces itálico como serifa de destaque. Qual vale?
 5. `library/INDEX.md` citado na galeria do vídeo ainda não existe (tarefa 014).
+- 2026-10-08: onda 1 aprovada pelo Oliver. Onda 2 no molde (revisão Opus): estrategista + content-ideas + launch-plan · revisor + landing-page + ads-meta · 9 `fmt-*`. Check ✓ em 22 fichas. Check não acusa mais `só:` em `fmt-*` (receitas não ficam ativadas no agente). Falta onda 3: pesquisador + radar + referencias + analise-concorrentes + curadoria · sound-designer + audio + locucao + elevenlabs · orquestrar + setup + mockup.
+
+## Para o Oliver decidir (achados da onda 2)
+1. Estrategista usa o Modo Analisar da `ads-meta` mas não tem a skill ativada: ativar?
+2. `COMPETITORS.md` da kz: "temas saturados" é parágrafo solto (a content-ideas lê o arquivo inteiro); criar `## Temas saturados`?
+3. `BUSINESS.md#Estágio` velho ("lançamento ~mai/2026"): atualizar.
+4. Área segura 9:16 de anúncio: ads-meta diz ~20% de rodapé livre, REGRAS.md §3 diz texto até y 1250 (~35%). Qual vale?
+5. Revisor sem a ferramenta Write, mas a rubrica manda criar `revisao-plano-N.md`: acrescentar Write?
+6. Achado "maior" do revisor bloqueia ou não?
+7. Landing-page "mostrar as 5 linhas antes de escrever": em tarefa do quadro, registrar no checklist e seguir (como a carousel)?
+8. Meta de CPA/ROAS: criar seção no BUSINESS.md?
+9. Teto de ~600 palavras por `fmt-*`: com o molde, as de imagem ficam ~550 no corpo e as de vídeo 600–690. Aceitar, ou cortar o exemplo kz?
+10. fmt-meme com dois CTAs × "CTA único" da ig-post; educativo com `.inverse` possivelmente em 2 slides seguidos.
+11. Vídeo: cartão final "parado" nas receitas antigas virou microanimação (Padrões do Oliver); texto cinético × "ícone em cada ideia"; duração padrão de lançamento 30 s (video) × 20 s (trailer).
+12. `observacoes` vazias nos 9 `formato.json`.

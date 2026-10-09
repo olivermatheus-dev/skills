@@ -28,7 +28,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa (o `pacote` já junta 
 - `context/BUSINESS.md#Restrições e compliance` · sempre — regras do nicho (saúde)
 - `brand/BRAND.md#Proibições` · sempre — o que a marca não diz nem mostra
 - `context/BUSINESS.md#Oferta atual` · quando: a peça tem oferta ou CTA de cadastro — o que é verdade hoje
-- `context/COPY.md#Objeções` · quando: meio ou fundo de funil, LP, carta, anúncio — objeções e respostas
+- `context/COPY.md#Objeções → respostas` · quando: meio ou fundo de funil, LP, carta, anúncio — objeções e respostas
 - `context/COPY.md#Provas` · quando: a peça afirma resultado ou diferencial — o que pode ser citado
 - `context/COPY.md#CTAs por estágio` · quando: escolher o CTA — CTA certo para o estágio
 - `context/PRODUTO.md#1. Funcionalidades por grupo` · quando: o texto cita funcionalidade — o que o produto faz de verdade

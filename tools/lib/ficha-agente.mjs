@@ -257,7 +257,8 @@ export function conferirFicha(tipo, id, slug) {
   for (const i of f.contexto.itens) for (const a of i.agentes) {
     if (tipo === 'agente') avisos.push(`contexto ${i.ref}: "só:" vale só dentro de skill`);
     else if (!agentes.has(a)) erros.push(`contexto ${i.ref}: agente desconhecido em "só:" (${a})`);
-    else if (!skillsDoAgente(a).includes(id)) avisos.push(`contexto ${i.ref}: ${a} não tem a skill ${id} ativada`);
+    // receitas fmt-* não ficam ativadas no agente: ele as lê pela ordem de trabalho (roteirista, designer, editor)
+    else if (!id.startsWith('fmt-') && !skillsDoAgente(a).includes(id)) avisos.push(`contexto ${i.ref}: ${a} não tem a skill ${id} ativada`);
   }
   return { erros, avisos, noMolde: true, refs };
 }

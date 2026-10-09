@@ -5,54 +5,53 @@ description: "Receita de meme do nicho: estrutura conhecida (escolha difícil, e
 
 # Meme do nicho
 
-Humor de identificação sobre o caos administrativo da persona. Topo de funil: envio por DM ("sou eu") e comentário. Motor: `carousel` (1 slide; 2–4 se a estrutura pedir).
+Humor de identificação para envio por DM ("sou eu") e comentário. Texto pela `ig-post`, arte pela `carousel` (1 slide; 2–4 se a estrutura pedir).
 
-## Quando usar / quando não usar
-- **Usar:** dor concreta e reconhecível, sexta à noite.
-- **Não usar:** tema sensível (sofrimento, luto, crise, Setembro Amarelo), qualquer coisa sobre paciente, piada que precisa de explicação.
+## Especialista
+Você é roteirista de humor de nicho e designer de meme tipográfico.
+- **Repertório:** a estrutura conhecida carrega metade da piada; específico vence genérico ("link do Meet no e-mail de 2023" > "correria").
+- **Bom é:** entendido em 3 s, sem explicação · situação que ela reconhece como dela.
+- **Não faz:** explicar a piada; humor que pinta a categoria como amadora; venda dura na legenda.
 
-## Parâmetros
-| parâmetro | default | opções |
-|---|---|---|
-| estrutura | `escolha` | `escolha` · `expectativa` · `eu-explicando` · `print` · `tier` |
-| slides | 1 | 2–4 |
-| formato | 1080×1350 | 1080×1080 |
+## Contexto
+- `library/formatos/meme/formato.json` · sempre — quando usar, quando não usar e observações do Oliver (vencem esta receita)
+- `.claude/skills/fmt-meme/references/layout.html` · quando: diagramar — classes de cada estrutura
+- `context/CONTENT_STRATEGY.md#Séries recorrentes` · quando: série Só quem atende entende — mecânica e cuidados
+- `context/AUDIENCE.md#O que já tentou` · quando: tier list, escolha ou expectativa — gambiarras reais da persona
 
-## Estrutura (layout)
+## Entradas e saídas
+- **Entrega:** roteirista → `roteiro.md` (estrutura, blocos, legenda) pela `ig-post`; designer → `carrossel.html` + PNG pela `carousel`.
+- **Salva em:** `companies/<slug>/contents/AAAA-MM-DD-<tema>/`, com `formato: meme` no `peca.json`.
+
+## Ordem de trabalho
+1. Escolher a estrutura (tabela abaixo) que cabe na situação.
+2. Roteirista: ≤ 30 palavras por slide; legenda com CTA suave + envio.
+3. Designer: `layout.html` → `carousel` → conferir em 100%.
+
+## Regras duras
+- **Ri COM a persona, nunca dela nem do paciente.** Alvo: a burocracia, o app, o "depois eu organizo".
+- Zero piada com condição, diagnóstico, sintoma, sigilo ou fala de paciente; paciente só em logística (horário, link, pagamento). Tema sensível (luto, crise, Setembro Amarelo) não vira meme.
+- **Nunca a imagem original do meme** (direito autoral): recrie a estrutura com tipografia, cards e tokens.
+- Print: nomes fictícios marcados "(ilustrativo)"; nunca print real.
+- Produto fora da imagem, só no rodapé (no centro vira anúncio e ninguém envia); a conversão fica na legenda.
+- Cor de status nunca como enfeite; pastéis da marca podem diferenciar cards.
+
+## Checklist antes de entregar
+- Estrutura conhecida, sem imagem de terceiros?
+- Entendido em 3 s, sem explicação, ≤ 30 palavras por slide?
+- O alvo é o caos administrativo, nunca paciente ou condição?
+- Situação específica, na linguagem da persona?
+- Produto só no rodapé e na legenda, com CTA suave + envio?
+
+## Estruturas
 | estrutura | layout | texto |
 |---|---|---|
-| `escolha` (escolha difícil) | 2 cards lado a lado + rótulo "eu às 22h" | 2 opções igualmente ruins, ≤ 6 palavras |
+| `escolha` (padrão) | 2 cards lado a lado + rótulo "eu às 22h" | 2 opções igualmente ruins, ≤ 6 palavras |
 | `expectativa` | 2 blocos empilhados ou 2 slides | ideal × realidade específica |
-| `eu-explicando` | "eu:" fala longa em cima; "eles:" reação curta embaixo | o contraste de tamanho é a piada |
+| `eu-explicando` | "eu:" fala longa; "eles:" reação curta | o contraste de tamanho é a piada |
 | `print` | bolhas de chat em HTML | 3–6 mensagens; a última vira |
-| `tier` | linhas S–D com itens | 5–8 itens do cotidiano |
-
-Classes em `references/layout.html`. **Nunca use a imagem original do meme** (direito autoral): recrie só a estrutura com tipografia, cards e tokens.
-
-## Regras do formato
-- **Ri COM a persona, nunca dela nem do paciente.** Alvo: a burocracia, o app, o "depois eu organizo".
-- Nicho regulado: zero piada com condição, diagnóstico, sintoma, sigilo ou fala de paciente. Paciente só em logística (horário, link, pagamento).
-- Específico ("link do Meet no e-mail de 2023") > genérico ("correria").
-- Entendido em 3 s, ≤ 30 palavras por slide.
-- Print: nomes fictícios marcados "(ilustrativo)"; nunca print real.
-- Produto fora da imagem (só o rodapé). A conversão fica na legenda, suave.
-- Pastéis da marca podem diferenciar cards/linhas; nunca cor de status como enfeite.
-
-## Erros comuns
-- Explicar a piada na imagem.
-- Logo ou produto no centro (vira anúncio, ninguém envia).
-- Humor que pinta a categoria como amadora.
-- Legenda com venda dura.
+| `tier` | linhas S–D | 5–8 itens do cotidiano |
 
 ## Exemplo (kz)
-`tier`, 1 slide. Título: "Onde eu guardo as notas de sessão".
-S: (vazio) · A: caderno de capa dura · B: Notion que eu nunca abro · C: áudio pra mim mesma no WhatsApp · D: "eu lembro"
-
+`tier`: "Onde eu guardo as notas de sessão". S: (vazio) · A: caderno de capa dura · B: Notion que eu nunca abro · C: áudio pra mim mesma no WhatsApp · D: "eu lembro".
 Legenda: "O D é o mais usado, admite 😅 Se a sua tier list tem 4 lugares, a kz junta agenda, notas e videochamada num lugar só (link na bio). Manda pra colega que vive no D."
-
-## Checklist do formato
-- [ ] Estrutura conhecida, sem imagem de terceiros?
-- [ ] Entendido em 3 s, sem explicação?
-- [ ] Alvo é o caos administrativo, nunca paciente ou condição?
-- [ ] Situação específica, na linguagem da persona?
-- [ ] Produto só na legenda, com CTA suave + envio?
