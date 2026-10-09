@@ -9,6 +9,7 @@ import { Button, Card, Field, Input, Select, Textarea, cx } from '../kit';
 import { SaveIndicator, useAutosave } from '../notes/useAutosave';
 import { TagsInput } from '../notes/TagsInput';
 import { desktop, useSaveMeta } from './library';
+import { useVersoes, versaoDoArquivo } from './VideoVersoes';
 
 type Notes = PieceMeta['notes'];
 const NOTE_FIELDS: { key: keyof Notes; label: string; rows: number; hint?: string }[] = [
@@ -55,6 +56,8 @@ function Versions({ slug, piece }: { slug: string; piece: PieceFull }) {
   const files = [...piece.videos.map((v) => `exports/${v}`).reverse(), ...piece.images.map((i) => `png/${i}`)];
   if (!files.length) return null;
   const principal = piece.cover?.file;
+  // versão da fonte de cada MP4 (050 D): 4:5 e 9:16 da mesma fonte saem com o mesmo vNN
+  const { vs } = useVersoes(slug, piece.hasTimeline ? piece.path : '', piece.videos.join('|'));
   return (
     <Card className="p-0">
       <div className="px-4 py-2.5 border-b border-border flex items-center">
@@ -66,6 +69,9 @@ function Versions({ slug, piece }: { slug: string; piece: PieceFull }) {
           <div key={f} className="flex items-center gap-2 px-4 py-2 text-sm">
             <input type="radio" name="principal" checked={principal === f} title="usar como principal" aria-label={`principal: ${f}`}
               onChange={() => save.mutate({ path: piece.path, patch: { principal: f } })} />
+            {(() => { const x = versaoDoArquivo(vs, f.replace(/^exports\//, '')); return x
+              ? <span title={x.atual ? 'fonte desta versão = fonte atual' : 'a fonte mudou depois desta versão'} className={cx('text-[11px] rounded px-1.5 font-medium', x.atual ? 'bg-emerald-100 text-emerald-800' : 'bg-muted text-muted-foreground')}>{x.versao}</span>
+              : null; })()}
             <span className={cx('font-mono text-xs truncate flex-1', principal === f && 'font-semibold')}>{f.replace(/^(exports|png)\//, '')}</span>
             {principal === f && <span className="text-xs text-primary-ink">principal</span>}
             <button className="text-xs text-primary-ink hover:underline" onClick={() => desktop(slug, piece.path, 'open', f)}>abrir</button>

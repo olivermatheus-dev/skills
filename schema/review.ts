@@ -30,6 +30,8 @@ export const ReviewComment = z.object({
   status: z.enum(['aberto', 'resolvido']).default('aberto'),
   /** vídeo visto ao anotar (ex.: B-sonnet-9x16-v06.mp4) */
   video: z.string().optional(),
+  /** versão da FONTE desse vídeo (versoes/vNN, tarefa 050): a IA parte dela, mesmo que a timeline tenha mudado depois */
+  versao: z.string().regex(/^v\d+$/, 'v01, v02…').optional(),
   anchor: ReviewAnchor,
   text: z.string().min(1, 'escreva o que está errado'),
   /** anotação numa variante (045 D): o ajuste vale só para ela (patch em `projeto.json > ajustes`) ou para todas (base/opção do eixo) */

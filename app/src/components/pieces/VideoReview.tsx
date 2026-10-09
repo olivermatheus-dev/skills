@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { api, type PieceFull, type PieceTimeline, type ReviewComment } from '../../api';
 import { Badge, Button, Card, Empty, Select, Textarea, Input, cx } from '../kit';
 import VideoAdjust from './VideoAdjust';
+import { BarraVersao, PlayerComparar, useVersoes, versaoDoArquivo } from './VideoVersoes';
 import { CommentCard, TipoPicker, nextCommentId, nowLocal, tipoOf, type Anchor, type Tipo } from './shared';
 
 type VideoAnchor = Exclude<Anchor, { kind: 'roteiro' | 'slide' }>;
@@ -163,6 +164,10 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
   const videoRef = useRef<HTMLVideoElement>(null);
   const duration = tl?.duration ?? 1;
   const mine = comments.filter(isVideo);
+  // versões da fonte (050 D): selo do MP4 no player, restaurar e comparar lado a lado
+  const { vs, setVs } = useVersoes(slug, path, videos.join('|'));
+  const [comparar, setComparar] = useState('');
+  const outro = comparar && comparar !== video && videos.includes(comparar) ? comparar : '';
 
   const [draft, setDraft] = useState<VideoAnchor | null>(null);
   const [tipo, setTipo] = useState<Tipo>('corrigir');
@@ -207,7 +212,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
   const submit = () => {
     const anchor = finalAnchor();
     if (!anchor || !text.trim()) return;
-    const c: ReviewComment = { id: nextCommentId(comments), at: nowLocal(), author: 'oliver', tipo, status: 'aberto', video: video || undefined, anchor, text: text.trim() };
+    const c: ReviewComment = { id: nextCommentId(comments), at: nowLocal(), author: 'oliver', tipo, status: 'aberto', video: video || undefined, versao: versaoDoArquivo(vs, video)?.versao, anchor, text: text.trim() };
     setComments([...comments, c]);
     setText(''); setSelector(''); setDraft(null);
   };
@@ -225,9 +230,15 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
         <div className="space-y-2">
           {video ? (
             <>
-              <video ref={videoRef} key={video} src={api.pieceFileUrl(slug, path, `exports/${video}`)} controls={!live} preload="metadata"
-                className={cx('rounded-lg bg-black max-h-[60vh] w-auto max-w-full', live && 'hidden')} data-testid="player" />
+              <div className={cx(outro && !live && 'flex gap-3 items-start')}>
+                <video ref={videoRef} key={video} src={api.pieceFileUrl(slug, path, `exports/${video}`)} controls={!live} preload="metadata"
+                  className={cx('rounded-lg bg-black max-h-[60vh] w-auto max-w-full', live && 'hidden')} data-testid="player" />
+                {outro && !live && <PlayerComparar src={api.pieceFileUrl(slug, path, `exports/${outro}`)} principal={videoRef}
+                  rotulo={`${versaoDoArquivo(vs, outro)?.versao ?? ''} ${outro}`.trim()} />}
+              </div>
               {live && <LivePreview src={api.pieceFileUrl(slug, path, `render/${preview}/index.html`)} video={videoRef} onPick={pickElement} />}
+              {!live && <BarraVersao slug={slug} path={path} vs={vs} file={video} videos={videos} comparar={outro} setComparar={setComparar}
+                onRestaurado={(r) => setVs({ versoes: r.versoes, fonteMudou: r.fonteMudou })} />}
             </>
           ) : <Empty title="Sem MP4 em exports/" hint="Renderize o vídeo para poder anotar sobre ele." />}
           <div className="flex items-center gap-2 flex-wrap">
@@ -240,7 +251,10 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
                 onClick={() => setMode(live ? 'video' : 'elemento')}>{live ? 'Voltar ao MP4' : 'Clicar no elemento'}</Button>
             )}
             {live && previews.length > 1 && <Select aria-label="Composição" value={preview} onChange={(e) => setPreviewSel(e.target.value)}>{previews.map((p) => <option key={p}>{p}</option>)}</Select>}
-            {videos.length > 1 && <Select className="ml-auto" aria-label="Versão do vídeo" value={video} onChange={(e) => setVersion(e.target.value)}>{videos.map((v) => <option key={v}>{v}</option>)}</Select>}
+            {videos.length > 1 && <Select className="ml-auto" aria-label="Versão do vídeo" value={video} onChange={(e) => setVersion(e.target.value)}>{videos.map((v) => {
+              const x = versaoDoArquivo(vs, v), fmt = v.match(/-(4x5|9x16|16x9|1x1)-/)?.[1];
+              return <option key={v} value={v}>{x ? `${x.versao} · ${fmt ?? v}${x.atual ? ' (fonte atual)' : ''}` : v}</option>;
+            })}</Select>}
           </div>
         </div>
 
@@ -355,7 +369,7 @@ export default function VideoReview({ slug, path, piece, comments, setComments, 
         <div className="space-y-2">
           {shown.map((c) => (
             <CommentCard key={c.id} c={c} anchor={describe(c.anchor, tl)} onJump={() => seek(anchorTime(c.anchor, tl))}
-              extra={c.video ? <span className="text-muted-foreground">{c.video}</span> : undefined}
+              extra={c.video ? <span className="text-muted-foreground">{c.versao ? `${c.versao} · ` : ''}{c.video}</span> : undefined}
               onToggle={() => setComments(comments.map((x) => (x.id === c.id ? { ...x, status: x.status === 'aberto' ? 'resolvido' : 'aberto' } : x)))}
               onDelete={() => setComments(comments.filter((x) => x.id !== c.id))} />
           ))}

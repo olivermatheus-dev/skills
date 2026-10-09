@@ -176,7 +176,8 @@ for (const c of [...list].sort((a, b) => (ORDER[a.tipo] ?? 9) - (ORDER[b.tipo] ?
   if (varProj) console.log(`   · vale para: ${c.alcance === 'todas' ? 'TODAS as variantes (base ou opção do eixo)' : `só esta variante (ajustes["${varId}"])`}`);
   for (const l of x.lines) console.log(`   · ${l}`);
   if (c.video && !['roteiro', 'slide'].includes(c.anchor.kind)) {
-    const vs = versaoDe(c.video);
+    // a anotação feita no app guarda a versão (050 D); a antiga só tem o MP4, e a versão sai do versao.json
+    const vs = (c.versao && versoes.find((x) => x.n === c.versao)) || versaoDe(c.video);
     const kit = 'node tools/video-kit/scripts/versao.mjs';
     console.log(vs
       ? `   · fonte do vídeo anotado: versoes/${vs.n}/ → antes de mexer: ${kit} "${pos[0]}" diff ${vs.n} (se a fonte atual for outra: restaurar ${vs.n}). Exporte sem --v: sai a versão nova nos 2 formatos.`
