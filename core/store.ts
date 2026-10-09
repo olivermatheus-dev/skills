@@ -403,7 +403,7 @@ export interface Piece {
   status?: Review['status']; approvals?: Review['approvals']; openComments: number; totalComments: number; mtime: number;
 }
 const contentsDir = (slug: string) => join(COMPANIES, slug, 'contents');
-/** caminho da peça relativo a contents/ (ex.: "2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
+/** caminho da peça relativo a contents/ (ex.: "_testes/2026-10-07-ab-sessao/B-sonnet"); recusa "..", absolutos e barras invertidas */
 function piecePath(slug: string, path: string) {
   if (!path || /(^|\/)\.\.(\/|$)|^\/|[\\:]/.test(path)) throw new ValidationError(path, ['caminho da peça inválido']);
   return join(contentsDir(slug), path);
@@ -478,6 +478,8 @@ export function listPieces(slug: string): Piece[] {
     const dir = join(contentsDir(slug), rel);
     const pc = rel ? pieceSummary(slug, rel) : null;
     if (pc) out.push(pc);
+    // peça com ID (050) é uma peça só: versoes/, blocos/, style/, comparacao/… são partes dela, não peças soltas
+    if (pc?.id && depth === 1) return;
     if (depth < 3) for (const d of exists(dir) ? readdirSync(abs(dir)) : []) {
       if (SKIP_DIRS.includes(d) || d.startsWith('qc') || d.startsWith('.')) continue;
       // variantes de um projeto de vídeo (045) aparecem na aba Variantes da peça, não soltas na lista

@@ -1,7 +1,7 @@
 # Blocos de vídeo da kz
 
 Blocos com a marca da kz (contrato: `.claude/skills/video/references/blocos.md`). Use na timeline com `"use": "<id>"`. Classes de marca comuns: `base.css`.
-Exemplo de vídeo montado só com eles: `companies/kz/contents/2026-10-07-apresentacao-kz`.
+Exemplo de vídeo montado só com eles: `companies/kz/contents/V0001-apresentacao-kz`.
 
 | bloco | o que faz | slots (on_screen) | cues (eventos) |
 |---|---|---|---|

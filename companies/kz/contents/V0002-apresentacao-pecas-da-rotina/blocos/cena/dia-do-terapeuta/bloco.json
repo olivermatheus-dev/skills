@@ -1,0 +1,27 @@
+{
+  "id": "cena/dia-do-terapeuta",
+  "tipo": "cena",
+  "titulo": "O dia do terapeuta: coluna de 8h a 22h com escala fixa de px/hora; as tarefas enchem os vãos entre as sessões e transbordam para a noite (aperta) ou voam para o chip 'tudo na kz' e devolvem o tempo (devolve)",
+  "camada": "palco",
+  "slots": ["titulo", "apoio", "palavra"],
+  "params": {
+    "modo": { "padrao": "aperta", "descricao": "aperta (tarefas enchem o dia, câmera fecha, palavra grande, as 4 tarefas voam para o centro) ou devolve (tarefas voam para o chip, noite clareia, vãos brancos, coração)" },
+    "sessoes": { "padrao": [["09:00", "Marina S."], ["11:00", "Lucas P."], ["14:00", "Helena R."], ["16:00", "Clara A."]], "descricao": "[hora, nome ilustrativo]; 50 min de altura, no y da hora" },
+    "destaque": { "padrao": 2, "descricao": "índice da sessão que recebe a câmera (aperta), o anel e o coração" },
+    "tarefas": { "padrao": [["check-check", "Confirmar Lucas", "t-teal", "10:00"], ["wallet", "Cobrar Marina", "t-amber", "10:30"], ["message-circle", "Responder 3 mensagens", "t-coral", "12:00"], ["notebook-pen", "Anotar sessão da Marina", "t-lilac", "12:30"]], "descricao": "[ícone Lucide, rótulo, tom (t-coral|t-teal|t-amber|t-lilac), hora]; as de hora >= noite_a são as noturnas; a 1ª de cada tom é a que voa para o centro no `sai` (aperta)" },
+    "dia": { "padrao": "Quarta-feira", "descricao": "dia no cabeçalho da coluna (ao lado de 'N sessões')" },
+    "aviso": { "padrao": "dados ilustrativos", "descricao": "aviso no cabeçalho da coluna (--muted)" },
+    "chip": { "padrao": "tudo na kz", "descricao": "texto do chip do cabeçalho (modo devolve)" },
+    "noite_a": { "padrao": "20:00", "descricao": "hora em que a faixa da noite começa" },
+    "zoom": { "padrao": 1.3, "descricao": "câmera na sessão destacada (aperta)" },
+    "centro": { "padrao": [540, 585], "descricao": "ponto do palco para onde as 4 tarefas convergem no `sai` (aperta); grade 2x2 de peças 96x96 em volta dele" }
+  },
+  "cues": ["entra", "muda", "apoio", "transborda", "fecho", "sai"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "entra": "air", "muda": "3 clicks (aperta) / whoosh fino + clicks reversos (devolve)", "apoio": "swish fino", "transborda": "tique curto", "fecho": "chime suave", "sai": "air longo (aperta)" },
+  "tokens": ["--surface", "--surface-2", "--border", "--shadow-*", "--muted", "--ink", "--accent", "--accent-soft", "--pastel-sage", "--pastel-clay", "--logo", "--tile-*"],
+  "origem": "companies/kz/contents/V0002-apresentacao-pecas-da-rotina (047 B, cenas s3 e s6)",
+  "licenca": "própria"
+}

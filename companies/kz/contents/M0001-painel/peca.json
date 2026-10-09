@@ -1,0 +1,17 @@
+{
+  "id": "M0001",
+  "title": "Mockup · painel (teste 028)",
+  "tags": [
+    "mockup",
+    "nao-publicar",
+    "teste"
+  ],
+  "notes": {
+    "notas": "Teste do motor de mockups (028 fase A). Não publicar: print da conta real (nomes/e-mails borrados). Sugestão da IA: a2 (navegador em ângulo, sangrando) e a5 (anotações). Re-render: node tools/mockup/render.mjs companies/kz/contents/M0001-painel"
+  },
+  "kind": "mockup",
+  "updatedAt": "2026-10-07T23:18:25Z",
+  "principal": "png/a2.png",
+  "criado": "2026-10-07",
+  "familia": "mockup-painel"
+}

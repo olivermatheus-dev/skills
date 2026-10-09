@@ -45,4 +45,4 @@ Classes de marca compartilhadas (ex.: `.t-coral`): `companies/<slug>/video-templ
 - **Param de arquivo:** `"pagina": "@data/pagina.html"` (texto grande; o `produce.mjs` lê da pasta do vídeo, ou da origem numa variante).
 
 Comandos: `node tools/video-kit/scripts/compor.mjs <pasta> --listar` (monta e diz de onde veio cada bloco); o resto do fluxo não muda.
-Exemplo completo: `companies/kz/contents/2026-10-07-apresentacao-kz` (8 blocos da kz em `companies/kz/video-templates/blocos/`).
+Exemplo completo: `companies/kz/contents/V0001-apresentacao-kz` (8 blocos da kz em `companies/kz/video-templates/blocos/`).

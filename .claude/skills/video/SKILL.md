@@ -136,11 +136,11 @@ O Oliver anota no app (aba **Conteúdos**: player + faixas da `timeline.json`) e
 `node tools/video/timeline.mjs show|check|vo|dur|text|music|vol <pasta> …` troca voz, duração, texto, trilha e volume (`vol <voz|trilha|efeitos|evento> <dB>` → `mix.vo_db`/`music.gain_db`/`mix.sfx_db`/`sfx[].gain_db`) e reencaixa o resto; `dur` grava `min`/`len` na cena e refaz o layout. O Oliver faz o mesmo no app (Edição do vídeo → **Ajustes diretos** + **Gerar prévia** = sfx → mix → `produce --draft`): ajuste que já está na `timeline.json` não se desfaz. **Pedido de ajuste → tente primeiro por aqui**, sem reescrever `composition.html`.
 
 ## Kit (motor de render)
-`tools/video-kit/` (HyperFrames 0.8.141 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/2026-10-07-teste-kit/`.
+`tools/video-kit/` (HyperFrames 0.8.141 fixo + GSAP + `motion.js` + `tl.js`). **Leia `tools/video-kit/README.md` (comandos) e `GUIA-TECNICO.md` (armadilhas) antes de animar.** Molde de pasta nova: `library/templates/video/base/`. Exemplo funcionando: `companies/kz/contents/_testes/2026-10-07-teste-kit/`.
 Ordem: `tts` → `music` (ou trilha do catálogo) → `sfx` → `mix` → `produce --build-only` → `check` (olhar) → `produce` → `qc.mjs --sheet` (olhar).
 
 ## Padrões do Oliver (sempre, sem ele pedir)
-Correções que o Oliver fez nos vídeos de 2026-10-07 (vídeo 01, A/B A-opus e B-sonnet). Valem **acima das receitas `fmt-*`** e em todo nível. Detalhe: `knowledge/video/REGRAS.md` §2, §4 e §7. Exemplo em código: `companies/kz/contents/2026-10-07-ab-sessao/A-opus/composition.html`.
+Correções que o Oliver fez nos vídeos de 2026-10-07 (vídeo 01, A/B A-opus e B-sonnet). Valem **acima das receitas `fmt-*`** e em todo nível. Detalhe: `knowledge/video/REGRAS.md` §2, §4 e §7. Exemplo em código: `companies/kz/contents/_testes/2026-10-07-ab-sessao/A-opus/composition.html`.
 
 **Texto e ritmo**
 - **Frase inteira de uma vez** (cascata ≤ 0,5 s) no início da fala ou da cena. Nunca palavra a palavra esperando a locução, nunca meia frase na tela, nunca vazio enquanto a narração segue. Frase de impacto entra completa (pode diferir da fala). A palavra da fala só dispara **gestos** (clique, pop de card, ícone). No código: função `phrase`, não sincronia por palavra.

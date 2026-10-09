@@ -14,6 +14,6 @@
   "formatos": ["4x5", "9x16"],
   "sfx_sugeridos": { "encolhe": "tique-taque curto", "palavra": "impacto suave + ding" },
   "tokens": ["--surface", "--border", "--primary", "--muted", "--text"],
-  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s3), extraído na 045 A",
+  "origem": "companies/kz/contents/V0001-apresentacao-kz (v03, cena s3), extraído na 045 A",
   "licenca": "própria"
 }

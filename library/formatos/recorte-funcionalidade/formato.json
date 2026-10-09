@@ -72,7 +72,7 @@
   "exemplos": [
     {
       "empresa": "kz",
-      "peca": "2026-10-07-teste-kit",
+      "peca": "_testes/2026-10-07-teste-kit",
       "legenda": "lembrete automático no WhatsApp (teste do kit, nível simples)",
       "teste": true,
       "adicionadoEm": "2026-10-07"

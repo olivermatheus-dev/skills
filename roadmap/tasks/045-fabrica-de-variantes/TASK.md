@@ -124,7 +124,7 @@ O MCP da 009 vira desnecessário no curto prazo: os comandos do `timeline.mjs`/`
 5. **Copy:** quer que o pacote saia como planilha de importação em massa da Meta, ou basta uma lista para colar à mão?
 
 ## Respostas do Oliver (2026-10-08)
-- **Piloto:** a apresentação da kz (`contents/2026-10-07-apresentacao-kz`, v03): fase A quebra em blocos; fase B faz as variantes nela.
+- **Piloto:** a apresentação da kz (`contents/V0001-apresentacao-kz`, v03): fase A quebra em blocos; fase B faz as variantes nela.
 - **Vozes das variantes:** rascunho grátis (Thalita/vozes edge) para escolher; ElevenLabs só nas aprovadas.
 - **Teste:** 2 rodadas (1ª: 3 aberturas com 1 voz; 2ª: a abertura vencedora × 3 vozes). A matriz completa fica como opção no `projeto.json`.
 - Em aberto: 4 (1º projeto de edits). A 5 saiu com os dois (planilha da Meta + lista para colar), sem esperar.

@@ -7,14 +7,13 @@
 ## Próximo da fila (fazer nesta ordem, sem esperar o Oliver)
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
-| 0 | 050 | **Fase C:** organização dos vídeos com ID (`V0001-<slug>`, data na ficha, status/família, exports `V0001-v03-9x16.mp4`, testes em `_testes/`), migração por script com `--dry` mostrado ao Oliver antes de mover; desenho no `TASK.md` | pedido do Oliver em 2026-10-09 (aprovou ID + data na ficha) |
 | 1 | 047 | calibrar rubrica e `plano.mjs check` com o julgamento do Oliver sobre "As peças da rotina" v01 | fase B feita (v01 renderizada) |
 | 2 | 045 | **Fase G:** galeria de blocos (`library/INDEX.md` gerado, busca, folha de previews, Promover no app) | fase F feita em 2026-10-09 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
-| 050 | assistir à **v03** de `2026-10-08-apresentacao-kz-plano` (app → Conteúdos; anotação c1: Sessão cresce e centraliza em "realmente importa") e resolver/reabrir o c1 · responder se carrossel/post/mockup também ganham ID na fase C |
+| 050 | assistir à **v03** da **V0003** (app → Conteúdos, busque "v3"; c1: a Sessão cresce e centraliza em "realmente importa") e reabrir o c1 se não ficou bom · conferir a lista nova (IDs, testes escondidos) · a origin-story vira C0001 quando a sessão do carrossel terminar |
 | 046 | usar a fila da IA (pedir duas coisas seguidas: a 2ª fica "na fila" no dock e roda sozinha) e o resto da 046 (dock, página Agentes, Pedir ajustes, Rodar agora) e apontar ajustes |
 | 045 | **fase E:** clicar "Pedir à IA: +5" em Insumos (apresentacao kz → Variantes) e gerar as que gostar · assistir às 3 aberturas da rodada 1 (app → Conteúdos → apresentacao kz → aba **Variantes**) e escolher a vencedora no botão da faixa "r2 espera" (vira `rodadas.r2`; as 9 da matriz já existem em 4:5 e 9:16, sincronia ok) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
 | 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |

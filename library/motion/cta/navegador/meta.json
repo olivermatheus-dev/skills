@@ -32,7 +32,7 @@
     "--font-body",
     "--shadow-lg"
   ],
-  "origem": "companies/kz/contents/2026-10-07-ab-sessao/A-opus (2026-10-07), pedido do Oliver",
-  "exemplo": "companies/kz/contents/2026-10-07-ab-sessao/A-opus/composition.html (cena s9)",
+  "origem": "companies/kz/contents/_testes/2026-10-07-ab-sessao/A-opus (2026-10-07), pedido do Oliver",
+  "exemplo": "companies/kz/contents/_testes/2026-10-07-ab-sessao/A-opus/composition.html (cena s9)",
   "bloco": "library/blocos/cta/navegador (global, 047 B): versão em bloco com cues entra/digita/clique/carregando/carrega/fecha, esqueleto, câmera e página por param; prefira o bloco em vídeos novos. Este componente continua válido para composição escrita à mão."
 }

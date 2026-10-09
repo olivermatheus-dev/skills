@@ -61,7 +61,7 @@ Skill `mockup` com modo **"criar template"**: a partir de uma referência (print
 - `library/mockups/`: `runtime/mockup.{js,css}` (4 aparelhos com ângulos CSS 3D, 8 fundos, textos, chips, QA), 6 templates com `meta.json` + `preview.png`, `catalogo.json`, `README.md` (contrato).
 - Schemas `schema/mockup.ts` (captura, mockup, preferências da marca) validados no `npm run validate`; tipo `mockup` na central de peças (filtro + rótulo).
 - Skill `mockup`. Marca kz: `brand/mockups.json` (fundos liso → gradiente → brilho → desfoque).
-- Teste: `companies/kz/capturas/2026-10-07-painel-inicio/` (regiões + nomes/e-mails borrados) → `contents/2026-10-07-mockup-painel/`: 6 alternativas 4:5 em **4–5 s** (também testado 16:9, 9:16, livre transparente). Sugestão: a2 e a5.
+- Teste: `companies/kz/capturas/2026-10-07-painel-inicio/` (regiões + nomes/e-mails borrados) → `contents/M0001-painel/`: 6 alternativas 4:5 em **4–5 s** (também testado 16:9, 9:16, livre transparente). Sugestão: a2 e a5.
 - **Desvios do desenho:** aparelhos e fundos vivem no runtime (CSS/JS) + `catalogo.json`, não em pastas `frames/`/`fundos/` (1 lugar só, o editor da fase C reaproveita); são 4 aparelhos (navegador, notebook, celular, sem moldura) — tablet e monitor ficam para quando houver print. Renders (`png/`, `folha.png`) de peças `*mockup*` fora do git.
 - **Defaults assumidos para as perguntas abaixo** (o Oliver pode trocar): 1 estilo = minimalista da 024; 2 todos os formatos, 4:5 padrão; 3 CSS 3D; 4 sem conta demo → print colado + `ocultar`; 5 molduras próprias genéricas.
 - **Limite conhecido:** print em 1× (o do painel) fica macio no zoom/cards; o QA avisa e a ampliação padrão cai para 1,4×/1,3×. Resolve com print em 2–3× (zoom 200% do navegador) ou a captura da fase B.
@@ -74,7 +74,7 @@ Skill `mockup` com modo **"criar template"**: a partir de uma referência (print
 - **Onde cortar** (`tools/mockup/analisar.mjs`, roda no `captura.mjs`): fio na beirada, barra do sistema, barra do navegador/abas, rolagem, elemento cortado (recua até o vão), sobra vazia, resolução baixa → `captura.json → sugestoes` + `analise.png`. Alta confiança aplica sozinho (`recorteSeguro`); média só com `--recorte auto`.
 - **Alta resolução:** escala padrão 3 (4:5 = 3240×4050).
 - **Galeria:** `node tools/mockup/galeria.mjs` → `library/mockups/galeria/index.html` (111 peças com a flag de cada uma; telas de exemplo fictícias em `library/mockups/exemplos/`, app "Rotina"). Os `preview.png` dos templates saem dela.
-- Teste real: `contents/2026-10-07-mockup-painel-premium/` (8 alternativas 4:5 em 3×, ~45 s).
+- Teste real: `contents/M0003-painel-premium/` (8 alternativas 4:5 em 3×, ~45 s).
 - Respondidas pelo pedido: pergunta 5 → molduras **realistas** (com licença); pergunta 3 → CSS 3D por ora, 3D de verdade (Blender MCP disponível / Three.js) na fase D.
 
 ## Para o Oliver conferir (critério da fase A)

@@ -11,6 +11,6 @@
   "formatos": ["4x5", "9x16"],
   "sfx_sugeridos": { "entra": "riser curto", "marca": "impacto + brilho", "p1": "pop", "p2": "pop", "p3": "pop" },
   "tokens": ["--logo", "--accent-soft", "--surface", "--border", "--shadow-md", "--tile-*"],
-  "origem": "companies/kz/contents/2026-10-07-apresentacao-kz (v03, cena s4), extraído na 045 A",
+  "origem": "companies/kz/contents/V0001-apresentacao-kz (v03, cena s4), extraído na 045 A",
   "licenca": "própria"
 }

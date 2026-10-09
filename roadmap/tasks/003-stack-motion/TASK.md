@@ -35,7 +35,7 @@ Critérios de escolha: (1) qualidade final, (2) o Claude escreve com facilidade,
 
 ## Critérios de pronto
 - [x] `DECISAO.md` nesta pasta (escolha, prós/contras, como instalar)
-- [x] Protótipo 9:16 (e 4:5) de 15 s com tipografia animada, marca em texto (logo final pendente) e cores da kz, renderizado em MP4 — `companies/kz/contents/2026-10-07-teste-kit/`
+- [x] Protótipo 9:16 (e 4:5) de 15 s com tipografia animada, marca em texto (logo final pendente) e cores da kz, renderizado em MP4 — `companies/kz/contents/_testes/2026-10-07-teste-kit/`
 - [ ] Teste com 1 elemento 3D (ex.: celular girando com print do produto) renderizado sem perda de qualidade — **aguarda prints da kz**
 
 ## Log

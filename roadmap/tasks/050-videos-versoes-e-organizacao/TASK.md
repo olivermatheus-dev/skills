@@ -1,9 +1,9 @@
 # 050 — Vídeos: versão de verdade, anotação que funciona e organização para 100–200 peças
 
-Status: A e B feitas (2026-10-09) · C (organização com ID) é a próxima · D depois
+Status: A, B e C feitas (2026-10-09); falta migrar a origin-story (em uso pela 049) · D depois
 
 ## Pedido do Oliver (2026-10-09)
-- Anotou um elemento num quadro do vídeo (c1 da `2026-10-08-apresentacao-kz-plano`, 9:16, 14,88 s: "a janela da sessão, quando fala que é o que realmente importa, deve crescer e ficar centralizada, o resto com menos opacidade"), pediu ajuste ao Claude pelo app e **nada mudou**.
+- Anotou um elemento num quadro do vídeo (c1 da `V0003-apresentacao-janela`, 9:16, 14,88 s: "a janela da sessão, quando fala que é o que realmente importa, deve crescer e ficar centralizada, o resto com menos opacidade"), pediu ajuste ao Claude pelo app e **nada mudou**.
 - A nomenclatura e a organização dos vídeos confundem; precisa aguentar 100–200 vídeos.
 - Decidiu: **ID `V0012` + slug na pasta, data na ficha** · c1 pelo caminho (a): recuperar a v01, aplicar e exportar.
 
@@ -29,26 +29,31 @@ Status: A e B feitas (2026-10-09) · C (organização com ID) é a próxima · D
 - `blocos/cena/janelas-espremem`: cue novo `destaca` (palavra "importa", −0,15 s): a Sessão sai do canto, cresce (×1,3) e para no centro; Agenda, Pacientes e Anotações apagam a 22%; em "atender" a Sessão pulsa (anel + coração). Params `destaque`, `escala_destaque`, `apagado`.
 - Exportada a **v03** (4:5 + 9:16).
 
-## C — Organização com ID (próxima)
-Proposta aprovada no princípio (ID + slug, data na ficha). Desenho para executar:
-1. **Pasta:** `contents/V0001-<slug>/`. Numeração única por empresa, nunca reaproveitada; `node tools/pecas.mjs <slug> --next-id` (como o `board.mjs --next-id`). O slug pode mudar; o ID não.
-2. **Ficha (`peca.json`):** `id`, `criado` (a data que saiu do nome), `status` (`ideia → roteiro → plano → producao → revisao → aprovado → publicado`), `formato`, `familia` (tentativas do mesmo vídeo), `campanha`, `principal` = versão (`v03`), não arquivo.
-3. **Exports:** `exports/V0001-v03-9x16.mp4` (curto; o slug fica na pasta). Versões antigas continuam ali; o app mostra só a principal e "outras versões".
-4. **Testes do hub** (`teste-kit`, `teste-plano-de-cenas`, `ab-sessao`) → `contents/_testes/`, fora da lista principal.
-5. **Gerados** (`render/`, `qc*/`, `check*.txt`, `*.bak.*`) → nada disso na raiz da peça; `render/` já é fora do git.
-6. **Migração por script** (`tools/pecas.mjs migrar <slug> --dry`): renomeia pasta e MP4s, preenche a ficha, reescreve referências (`revisao.json` > `video`, `peca.json` > `principal`, `board/T-*.md`, `roadmap/`, `variantes/indice.json`, `projeto.json`, `logs/pedidos-ia`), e só então move. Rodar com `--dry` e mostrar a tabela ao Oliver antes.
-7. **App:** Conteúdos lista por status/formato/família (não por nome), busca por `V12`; aba Vídeo com seletor de versão (anotar sempre numa versão).
-Mapa proposto (confirmar no --dry):
-| hoje | vira | família |
+## C — Organização com ID (feita, falta a origin-story)
+Decisões do Oliver: ID + slug na pasta, data na ficha; **todos os tipos ganham ID**.
+- **Regra** (`tools/lib/pecas.mjs`): `<letra><4 dígitos>-<slug>`, letra = tipo (`V` vídeo · `C` carrossel · `P` post · `M` mockup · `R` roteiro), contador por tipo e por empresa, nunca reaproveitado. ID novo: `node tools/pecas.mjs proximo <slug> <tipo>`; o app (Novo conteúdo pelo formato, editor de Mockups) e `tools/mockup/render|cena.mjs` já criam assim.
+- **Ficha** (`schema/piece.ts`): `id`, `criado`, `familia`, `campanha`. Status continua no `revisao.json` (o app já filtra por ele).
+- **Exports:** `<ID>-<formato>-vNN.mp4` (`V0003-9x16-v03.mp4`); `qc.mjs` aceita o padrão novo.
+- **Testes do hub** em `contents/_testes/`: fora da lista e das contagens; caixa "testes (N)" no app.
+- **App (Conteúdos):** ID no card, na lista e no título da peça; busca "V3", "v0003", "3"; família no subtítulo; ordem por data de criação; subpastas de peça com ID (`versoes/`, `style/`, `comparacao/`) não viram peças soltas.
+- **Migração** (`node tools/pecas.mjs migrar <slug> [--aplicar] [--slug pasta=novo] [--familia pasta=nome] [--teste pasta] [--exceto pasta]`): simulação por padrão; renomeia MP4 e pasta, preenche a ficha, troca o caminho em todo texto do hub (pula `.claude/worktrees`) e recalcula o hash das versões (`versao.mjs rehash`).
+- **Aplicada na kz (2026-10-09):**
+
+| antes | agora | família |
 |---|---|---|
-| 2026-10-07-apresentacao-kz (v03 + variantes) | V0001-apresentacao-kz | apresentacao-kz |
-| 2026-10-08-apresentacao-kz-plano | V0002-apresentacao-janela | apresentacao-kz |
-| 2026-10-08-apresentacao-kz-pecas | V0003-apresentacao-pecas-da-rotina | apresentacao-kz |
-| 2026-10-07-teste-kit · 2026-10-08-teste-plano-de-cenas · 2026-10-07-ab-sessao | _testes/… | — |
-Pergunta aberta: carrossel/post/mockup também ganham ID (`C0001`, `M0001`) ou só vídeo por enquanto? Recomendação: um prefixo por tipo, mesma regra, na mesma migração.
+| 2026-10-07-apresentacao-kz | V0001-apresentacao-kz | apresentacao-kz |
+| 2026-10-08-apresentacao-kz-pecas | V0002-apresentacao-pecas-da-rotina | apresentacao-kz |
+| 2026-10-08-apresentacao-kz-plano | V0003-apresentacao-janela | apresentacao-kz |
+| 2026-10-07-mockup-painel · -inicio · -premium | M0001-painel · M0002-painel-inicio · M0003-painel-premium | mockup-painel |
+| teste-kit · teste-plano-de-cenas · ab-sessao | _testes/… | — |
+| 2026-10-07-origin-story | **pendente** → C0001-origin-story | — |
+
+- **Falta:** a `origin-story` ficou de fora porque a sessão do carrossel (tarefa 049) está trabalhando nela; avisada para rodar `node tools/pecas.mjs migrar kz --aplicar` ao terminar.
 
 ## D — Depois
-- App: anotação guarda a versão (`video` já guarda o MP4; somar `versao`), botão "Restaurar esta versão" e comparação lado a lado vNN × vMM no player.
+- App: anotação guarda a versão (`video` já guarda o MP4; somar `versao`), botão "Restaurar esta versão" e comparação lado a lado vNN × vMM no player; `principal` por versão em vez de arquivo.
+- Campanhas (`campaigns/AAAA-MM-DD-…`) e capturas seguem com data no nome; decidir se ganham ID quando crescerem.
 
 ## Log
 - 2026-10-09 · diagnóstico do c1 (log `logs/atividade/20261009032445-ajustes-suyz.json`) · A feita · B: fonte recuperada (idêntica), ajuste aplicado, quadros conferidos em 4:5 e 9:16, v03 exportada.
+- 2026-10-09 · C feita: regra de ID, app, ferramentas, docs (skills, agentes, CLAUDE.md, protocolo); migração aplicada (9 pastas, 18 MP4, 52 textos); app conferido no navegador (busca "v3", ID no título, player na V0003-9x16-v03, sem erro no console). Tarefa renumerada de 049 para 050 (a 049 é a do carrossel, de outra sessão).

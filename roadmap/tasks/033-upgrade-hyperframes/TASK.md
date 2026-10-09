@@ -14,7 +14,7 @@ Status: **feita (2026-10-08)**: aprovada pelo Oliver e mergeada na main · Depen
 - **Não mudou:** `runtime/motion.js` (o `M.offset` continua servindo ao 2 passes).
 
 ## Como foi medido
-Vídeo: `companies/kz/contents/2026-10-07-teste-kit/` (13,4 s, 4:5 e 9:16, voz + trilha + SFX). `audio/` copiado do checkout principal (fora do git). Node 22.23.1, Windows 11, GPU AMD (Chrome em hardware).
+Vídeo: `companies/kz/contents/_testes/2026-10-07-teste-kit/` (13,4 s, 4:5 e 9:16, voz + trilha + SFX). `audio/` copiado do checkout principal (fora do git). Node 22.23.1, Windows 11, GPU AMD (Chrome em hardware).
 
 ```
 fnm exec --using=22 npm.cmd install
@@ -49,7 +49,7 @@ O nativo usa captura por screenshot + PNG (o padrão usa a captura rápida em st
 | **ruído:** 0.8.94 × 0.8.94 (mesmo projeto, 2 renders) | 804 | 0,99979 | 0,99896 | 0 |
 
 - O pior trecho (2,2–2,5 s, cartão "Paciente") difere só na **borda dos glifos e do cartão** (diferença ampliada 20×: `provas/diff-n142-ampliada-20x.png`; lado a lado no zoom: `provas/texto-zoom-v94-cima-v141-baixo.png`). A olho, idêntico. O próprio 0.8.94 já não é bit a bit idêntico entre dois renders (linha "ruído").
-- **Folhas de contato** (`qc.mjs --sheet`, 1 quadro a cada 0,5 s): `provas/folha-4x5-v94.png` e `provas/folha-4x5-v141.png` — iguais quadro a quadro, inclusive as transições (fade do cartão, entrada do "Feito por terapeuta", CTA com cursor). As de 9:16 ficaram em `companies/kz/contents/2026-10-07-teste-kit/render/qc/` (fora do git) no worktree.
+- **Folhas de contato** (`qc.mjs --sheet`, 1 quadro a cada 0,5 s): `provas/folha-4x5-v94.png` e `provas/folha-4x5-v141.png` — iguais quadro a quadro, inclusive as transições (fade do cartão, entrada do "Feito por terapeuta", CTA com cursor). As de 9:16 ficaram em `companies/kz/contents/_testes/2026-10-07-teste-kit/render/qc/` (fora do git) no worktree.
 - `hyperframes check` (novo nome do `validate`, que agora avisa "deprecated") e `lint`: 0 erros, 0 avisos, 24/24 contrastes nas duas versões. `check.mjs` do kit: 12 quadros por formato, sem erro.
 
 ## Armadilhas do GUIA-TECNICO remedidas (mini composição, 0.8.94 × 0.8.141, quadro 0/15/31 a 30 q/s)

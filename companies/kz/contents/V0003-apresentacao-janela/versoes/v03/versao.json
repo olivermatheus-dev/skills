@@ -1,0 +1,43 @@
+{
+  "versao": "v03",
+  "criado": "2026-10-09T16:02:24",
+  "hash": "992fd8046ee6",
+  "formatos": {
+    "4x5": "exports/V0003-4x5-v03.mp4",
+    "9x16": "exports/V0003-9x16-v03.mp4"
+  },
+  "blocos": [
+    {
+      "use": "fundo/blobs",
+      "escopo": "empresa"
+    },
+    {
+      "use": "abertura/pergunta-sessao",
+      "escopo": "projeto"
+    },
+    {
+      "use": "cena/janelas-abrem",
+      "escopo": "projeto"
+    },
+    {
+      "use": "cena/janelas-espremem",
+      "escopo": "projeto"
+    },
+    {
+      "use": "revelacao/janela-unica",
+      "escopo": "projeto"
+    },
+    {
+      "use": "produto/painel-janela",
+      "escopo": "projeto"
+    },
+    {
+      "use": "virada/sessao-ocupa-tudo",
+      "escopo": "projeto"
+    },
+    {
+      "use": "cta/cartao-janela",
+      "escopo": "projeto"
+    }
+  ]
+}

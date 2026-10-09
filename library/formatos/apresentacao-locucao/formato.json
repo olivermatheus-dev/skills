@@ -57,20 +57,20 @@
   "exemplos": [
     {
       "empresa": "kz",
-      "peca": "2026-10-07-apresentacao-kz",
+      "peca": "V0001-apresentacao-kz",
       "legenda": "apresentação da kz, voz Carla (v03)",
       "adicionadoEm": "2026-10-07"
     },
     {
       "empresa": "kz",
-      "peca": "2026-10-07-ab-sessao/A-opus",
+      "peca": "_testes/2026-10-07-ab-sessao/A-opus",
       "legenda": "teste A/B: versão Opus",
       "teste": true,
       "adicionadoEm": "2026-10-07"
     },
     {
       "empresa": "kz",
-      "peca": "2026-10-07-ab-sessao/B-sonnet",
+      "peca": "_testes/2026-10-07-ab-sessao/B-sonnet",
       "legenda": "teste A/B: versão Sonnet + subagentes",
       "teste": true,
       "adicionadoEm": "2026-10-07"

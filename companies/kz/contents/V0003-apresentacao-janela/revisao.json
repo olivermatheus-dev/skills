@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "id": "c1",
+      "at": "2026-10-09T03:24:00",
+      "author": "oliver",
+      "tipo": "corrigir",
+      "status": "resolvido",
+      "video": "V0003-9x16-v01.mp4",
+      "anchor": {
+        "kind": "elemento",
+        "selector": "[data-bloco=\"cena/janelas-espremem\"]",
+        "t": 14.88,
+        "scene": "s3"
+      },
+      "text": "Ao final a janela da sessão, quando fala que é o que realmente importa, deve crescer e ficar centralizado deixando o restante com menos opacidade.",
+      "reply": "v03: em 'realmente importa' a janela da Sessão sai do canto, cresce e para no centro; Agenda, Pacientes e Anotações apagam a 22%; em 'atender' ela pulsa com o anel e o coração (4:5 e 9:16).",
+      "resolvedAt": "2026-10-09T16:05:25"
+    }
+  ]
+}

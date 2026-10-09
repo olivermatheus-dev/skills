@@ -1,6 +1,6 @@
 # 011 — Resultado do A/B de custo (2026-10-07)
 
-Mesmo pedido nos dois: vídeo de apresentação da kz (62 s, 9:16, nível médio) com a voz final da Carla já pronta e 4 prints da plataforma (`companies/kz/contents/2026-10-07-ab-sessao/input/`).
+Mesmo pedido nos dois: vídeo de apresentação da kz (62 s, 9:16, nível médio) com a voz final da Carla já pronta e 4 prints da plataforma (`companies/kz/contents/_testes/2026-10-07-ab-sessao/input/`).
 Medido com `node tools/usage.mjs <sessão> --until <entrega>`, que lê os transcripts do Claude Code e soma os subagentes. Preços: Opus 5.5 = US$ 4 entrada / 20 saída / 0,20 leitura de cache por milhão; Sonnet 5.5 = 2 / 10 / 0,20; escrita de cache = 1,25× a entrada.
 
 | | **A: Opus 5.5 sozinho** | **B: Sonnet 5.5 médio + subagentes Sonnet** |

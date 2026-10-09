@@ -1,0 +1,19 @@
+{
+  "comments": [
+    {
+      "id": "c1",
+      "at": "2026-10-08T22:42:40",
+      "author": "oliver",
+      "tipo": "corrigir",
+      "status": "aberto",
+      "video": "2026-10-07-ab-sessao-A-opus-9x16-v02.mp4",
+      "anchor": {
+        "kind": "elemento",
+        "selector": "#b4",
+        "t": 18.84,
+        "scene": "s3"
+      },
+      "text": "bAGULHO TÁ ZOADO"
+    }
+  ]
+}
