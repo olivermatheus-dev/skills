@@ -1,6 +1,6 @@
 # 026 — Skills e agentes no app (ler e editar em rich text, estilo Notion)
 
-Status: rascunho · Depende de: 018 (app) · Liga com: 019 (visual), 027 (galeria de formatos)
+Status: entregue (2026-10-08); continua na 048 · Depende de: 018 (app) · Liga com: 019 (visual), 027 (galeria de formatos)
 
 ## Objetivo
 Ver e gerenciar o "cérebro" do hub sem abrir arquivos: as **skills** (`.claude/skills/<nome>/`) e os **agentes** (`.claude/agents/*.md` + `.claude/agent-notes/*.md`) como mini pastas navegáveis, lidas como texto formatado e editáveis.
@@ -18,3 +18,4 @@ Ver e gerenciar o "cérebro" do hub sem abrir arquivos: as **skills** (`.claude/
 
 ## Log
 - 2026-10-07: registrada a pedido do Oliver.
+- 2026-10-08: entregue no app (Agentes e skills: abas Em andamento · Equipe · Skills · Histórico, página do agente e da skill, editor Tiptap). Ficaram para a 048: frontmatter em campos de verdade (formulário), validação e diff antes de gravar.

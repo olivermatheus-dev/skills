@@ -9,6 +9,7 @@
 |---|---|---|---|
 | 1 | 047 | **Fase B:** refazer o plano da apresentação kz com a skill `plano-de-cenas` (revisão Opus + storyboard) e comparar com a v03; calibrar rubrica e `plano.mjs check` | pedido do Oliver de 2026-10-08 (fase A feita) |
 | 2 | 045 | **Fase E:** insumos pela IA ("Pedir à IA" +5 aberturas/headlines/copys/CTAs com contexto + intel; insumos editáveis na aba Variantes; seção Variantes nas skills `video` e `ads-meta`) | fase D feita em 2026-10-09 |
+| 3 | 048 | **Ficha de agente e skill:** formulário guiado (papel de especialista, contexto exato por select de arquivos, ordem, regras, checklist) + conferência do contexto + revisão das skills no molde. Sessão limpa; começa pelas 3 perguntas do `TASK.md` | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
@@ -36,7 +37,6 @@
 | 022 | pinos no carrossel (fase D) | — |
 | 030 B · 028 B/D/E | editor de mockups e estúdio | aval do Oliver |
 | 025 | ficha de produção (briefing, funil de status, custo por peça) | pronta para começar |
-| 026 | skills e agentes no app | rascunho |
 | 019 | front-end passo 6 + motion no resto do app | aval da mola do Quadro |
 | 021 | rodar a T-0012 com `context:` e medir tokens | aval da T-0011 |
 | central de peças | renomear o arquivo exportado (hoje só o nome de exibição) | pequeno |
