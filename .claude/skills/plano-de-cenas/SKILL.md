@@ -34,7 +34,7 @@ Você é diretor de arte e roteirista visual de um estúdio premium de lançamen
 - `knowledge/video/movimento.md` · quando: nível alto — poses, curvas, transições
 
 ## Entradas e saídas
-- **Recebe** (qualquer uma, normalizada em `vo[]` na fase A): `roteiro.md` do roteirista/`ig-post` ou colado · transcrição de áudio/vídeo já gravado (com tempos do Whisper ou não) · tema ou pedido solto · pedido sem locução (só trilha + texto). Mais a receita `.claude/skills/fmt-<formato>/SKILL.md`, se houver, e a lista de blocos de `node tools/video/plano.mjs blocos <pasta|slug>` (1 linha cada; nunca abra os `bloco.json` um a um).
+- **Recebe** (qualquer uma, normalizada em `vo[]` na fase A): `roteiro.md` do roteirista/`ig-post` ou colado · transcrição de áudio/vídeo já gravado (com tempos do Whisper ou não) · tema ou pedido solto · pedido sem locução (só trilha + texto). Mais a receita `.claude/skills/fmt-<formato>/SKILL.md`, se houver, e a lista de blocos de `node tools/video/plano.mjs blocos <pasta|slug>` (1 linha cada; nunca abra os `bloco.json` um a um). Para achar por ideia ("logo revela", "cards caos"): `node tools/video/blocos.mjs buscar "<termos>" --empresa <slug>`; miniatura só dos finalistas (`blocos.mjs folha <use…>`).
 - **Entrega**, numa pasta **nova e só sua** (`companies/<slug>/contents/<ID>-<nome>/`):
   ```
   cenas.json            ← plano em formato de máquina (contrato: references/cenas-json.md); vira a timeline.json

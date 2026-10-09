@@ -54,3 +54,4 @@ Já coberto pelo contrato de cena (013): **uma timeline e um áudio**, layout po
 
 ## Log
 - 2026-10-07: pedido registrado e desenhado.
+- 2026-10-09: a parte de **blocos** saiu na 045 G (`library/INDEX.md`, `tools/video/blocos.mjs buscar|previews|folha|promover`, app → Formatos → Blocos de vídeo). Falta daqui: fx (clipes), looks e o import do PC (`tools/library/import.mjs`).

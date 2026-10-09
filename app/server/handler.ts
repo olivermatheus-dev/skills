@@ -13,11 +13,13 @@ import * as K from '../../core/secrets';
 import * as MK from '../../core/mockups';
 import * as R from '../../core/runner';
 import * as VE from '../../core/videoedit';
+import * as VSN from '../../core/versoes';
 import * as VR from '../../core/variantes';
 import * as AV from '../../core/atividade';
 import * as AG from '../../core/agentes';
 import * as SK from '../../core/skills';
 import { resetEnvCache } from '../../tools/intel/env';
+import * as BL from '../../tools/lib/blocos.mjs';
 
 type Params = Record<string, string>;
 type Handler = (p: Params, body: any, q: URLSearchParams) => unknown | Promise<unknown>;
@@ -276,6 +278,9 @@ on('PUT', '/api/projects/:slug/piece/meta', (p, b, q) => S.savePieceMeta(p.slug,
 on('POST', '/api/projects/:slug/piece/adjust', (p, b, q) => VE.ajustar(p.slug, piece(q), b));
 on('GET', '/api/projects/:slug/piece/preview', (p, _, q) => VE.previaStatus(p.slug, piece(q)));
 on('POST', '/api/projects/:slug/piece/preview', (p, b, q) => VE.gerarPrevia(p.slug, piece(q), b ?? {}));
+// versões do vídeo (050 D): fonte de cada export em versoes/vNN/; restaurar = a fonte volta a ser a daquela versão
+on('GET', '/api/projects/:slug/piece/versoes', (p, _, q) => VSN.listarVersoes(p.slug, piece(q)));
+on('POST', '/api/projects/:slug/piece/versoes/restaurar', (p, b, q) => VSN.restaurarVersao(p.slug, piece(q), b ?? {}));
 // Variantes de um projeto de vídeo (045 D): matriz + índice + QC, gerar no fundo (variantes.mjs), parar, aval, rodadas
 on('GET', '/api/projects/:slug/piece/variantes', (p, _, q) => VR.lerVariantes(p.slug, piece(q)));
 on('POST', '/api/projects/:slug/piece/variantes/gerar', (p, b, q) => VR.gerar(p.slug, piece(q), b ?? {}));
@@ -324,6 +329,16 @@ on('POST', '/api/formats/:id/refs', (p, b) => S.addFormatRef(p.id, b ?? {}));
 on('DELETE', '/api/formats/:id/refs/:i', (p) => S.removeFormatRef(p.id, Number(p.i)));
 on('POST', '/api/formats/:id/examples', (p, b) => S.promoteExample(p.id, b ?? {}));
 on('DELETE', '/api/formats/:id/examples/:i', (p) => S.removeExample(p.id, Number(p.i)));
+
+// Galeria de blocos de vídeo (tarefa 045 G): global + marca + projetos da empresa, miniaturas e Promover
+on('GET', '/api/projects/:slug/blocos', (p) => { slugOk(p); return BL.catalogo({ empresa: p.slug }); });
+on('POST', '/api/projects/:slug/blocos/previews', (p, b) => { slugOk(p); const r = BL.gerarPreviews({ empresa: p.slug, forcar: !!b?.forcar }); BL.escreverIndice(); return r; });
+on('POST', '/api/projects/:slug/blocos/promover', (p, b) => {
+  slugOk(p);
+  if (!['empresa', 'global'].includes(b?.para)) throw new S.ValidationError('blocos', ['para = empresa | global']);
+  try { return BL.promover({ empresa: p.slug, use: String(b.use ?? ''), de: String(b.de ?? p.slug), para: b.para, forcar: !!b.forcar }); }
+  catch (e) { throw new S.ValidationError('blocos', [(e as Error).message]); }
+});
 
 on('GET', '/api/validate', () => S.validateAll());
 
@@ -391,6 +406,13 @@ const route: Connect.NextHandleFunction = async (req, res, next) => {
     const file = ok ? join(S.ROOT, P.adsSalvos(sv[1], sv[2]), sv[3]) : '';
     if (!ok || /\.\./.test(sv[3]) || !existsSync(file)) return send(res, 404, { error: 'não encontrado' });
     res.setHeader('content-type', MIME[extname(file).toLowerCase()] ?? 'application/octet-stream');
+    return pipeFile(res, file);
+  }
+  // /bloco-preview?f=<library/blocos/…/preview.png> → miniatura de um bloco de vídeo (045 G)
+  if (url.pathname === '/bloco-preview') {
+    const file = BL.arquivoPreview(url.searchParams.get('f') ?? '');
+    if (!file) return send(res, 404, { error: 'não encontrado' });
+    res.setHeader('content-type', 'image/png');
     return pipeFile(res, file);
   }
   // /ficha-file/<slug>/<concorrente>/<plataforma>__<id>/quadros/<arquivo> → quadros-chave das fichas (data/intel, fora do git)

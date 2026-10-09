@@ -25,6 +25,8 @@ Mapa de **onde fica cada asset** do hub. Regra de decisão:
 | templates de vídeo da marca | `companies/<slug>/video-templates/` | sim | — |
 | **entrada bruta** (tudo que ainda não foi organizado) | `_inbox/{audio,visual,video}/` | não | — |
 
+**Blocos de vídeo** (cenas reaproveitáveis em código): `library/blocos/` (global) · `companies/<slug>/video-templates/blocos/` (marca) · `contents/<peça>/blocos/` (nasceu no vídeo). Índice gerado de tudo: [`INDEX.md`](INDEX.md) (`node tools/video/blocos.mjs indice|buscar|previews|promover`; app → Formatos → Blocos de vídeo).
+
 Detalhes por tipo: [`audio/README.md`](audio/README.md) · [`visual/README.md`](visual/README.md) · contrato de motion, fx e looks em `roadmap/tasks/014-galeria-reutilizavel/TASK.md`.
 
 ## Mídia fora do git

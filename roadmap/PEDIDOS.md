@@ -8,14 +8,13 @@
 | # | tarefa | o quê | por que agora |
 |---|---|---|---|
 | 1 | 047 | calibrar rubrica e `plano.mjs check` com o julgamento do Oliver sobre "As peças da rotina" v01 | fase B feita (v01 renderizada) |
-| 2 | 045 | **Fase G:** galeria de blocos (`library/INDEX.md` gerado, busca, folha de previews, Promover no app) | fase F feita em 2026-10-09 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
 | 050 | assistir à **v03** da **V0003** (app → Conteúdos, busque "v3"; c1: a Sessão cresce e centraliza em "realmente importa") e reabrir o c1 se não ficou bom · conferir a lista nova (IDs, testes escondidos) · a origin-story vira C0001 quando a sessão do carrossel terminar |
 | 046 | usar a fila da IA (pedir duas coisas seguidas: a 2ª fica "na fila" no dock e roda sozinha) e o resto da 046 (dock, página Agentes, Pedir ajustes, Rodar agora) e apontar ajustes |
-| 045 | **fase E:** clicar "Pedir à IA: +5" em Insumos (apresentacao kz → Variantes) e gerar as que gostar · assistir às 3 aberturas da rodada 1 (app → Conteúdos → apresentacao kz → aba **Variantes**) e escolher a vencedora no botão da faixa "r2 espera" (vira `rodadas.r2`; as 9 da matriz já existem em 4:5 e 9:16, sincronia ok) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
+| 045 | **fase G (feita 2026-10-09):** olhar Formatos → **Blocos de vídeo** e promover o que servir de novo (sugestão: `cena/dia-do-terapeuta` e `revelacao/grade-estados` da V0002 para a marca) · **fase E:** clicar "Pedir à IA: +5" em Insumos (apresentacao kz → Variantes) e gerar as que gostar · assistir às 3 aberturas da rodada 1 (app → Conteúdos → apresentacao kz → aba **Variantes**) e escolher a vencedora no botão da faixa "r2 espera" (vira `rodadas.r2`; as 9 da matriz já existem em 4:5 e 9:16, sincronia ok) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
 | 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |
 | 040 | aceitar/recusar os 4 termos novos do relatório de anúncios da Corpora · revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |
 | 041 | avaliar as 8 ideias I-0001…I-0008 (app → Ideias) · aceitar as fontes (app → Ideias → Fontes, "Aceitar as 36 conferidas") · decidir as 7 "não conferido" · criar chave grátis do OpenAlex (`OPENALEX_API_KEY`) · podcasts/newsletters/criadores que ele segue |

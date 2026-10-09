@@ -44,5 +44,10 @@ Classes de marca compartilhadas (ex.: `.t-coral`): `companies/<slug>/video-templ
 - **Param por formato:** `"params": { "zoom": 1.5, "por_formato": { "9x16": { "zoom": 1.9 } } }` (o runtime sobrescreve só no formato em render).
 - **Param de arquivo:** `"pagina": "@data/pagina.html"` (texto grande; o `produce.mjs` lê da pasta do vídeo, ou da origem numa variante).
 
+## Galeria (045 G): achar antes de criar, promover depois
+- **Achar:** `library/INDEX.md` (1 linha por bloco, todas as empresas) ou `node tools/video/blocos.mjs buscar "<termos>" --empresa <slug> [--tipo cta] [--formato 9x16]`. Só abra a `preview.png` dos finalistas (`blocos.mjs folha <use…>` junta numa imagem) e o `bloco.json` do escolhido. Ajustar param de um bloco existente vem antes de criar outro.
+- **Miniatura:** `blocos.mjs previews` tira 1 quadro assentado (0,6 s antes do fim da cena) do vídeo exportado onde o bloco foi usado → `preview.png` + `preview.json` na pasta do bloco; o índice é regerado junto.
+- **Promover:** `blocos.mjs promover <use> --de <pasta-do-video|slug> [--para empresa|global]` (ou app → Formatos → Blocos de vídeo). Move (uma fonte só; os vídeos continuam achando, porque a busca desce até o global), nunca sobrescreve, anota em `origem`. Para o **global** recusa texto/dado fixo no HTML e cor fora de token (reserva em `var(--x, #fff)` vale); avisa token só da marca sem reserva.
+
 Comandos: `node tools/video-kit/scripts/compor.mjs <pasta> --listar` (monta e diz de onde veio cada bloco); o resto do fluxo não muda.
 Exemplo completo: `companies/kz/contents/V0001-apresentacao-kz` (8 blocos da kz em `companies/kz/video-templates/blocos/`).

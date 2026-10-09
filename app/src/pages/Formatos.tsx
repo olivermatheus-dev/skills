@@ -14,6 +14,7 @@ import { SaveIndicator, useAutosave } from '../components/notes/useAutosave';
 import { qk, useFormats, usePieces } from '../queries';
 import { CONTENT_TYPES, CONTENT_TYPE_LABEL, FORMAT_CHANNELS, FORMAT_RATIOS } from '../../../schema/format';
 import { AppContent } from '../components/AppContent';
+import GaleriaBlocos, { AbaGaleria } from '../components/blocos/GaleriaBlocos';
 
 const MEDIA_LABEL = { imagem: 'Imagem', video: 'Vídeo' } as const;
 const CHANNEL_LABEL: Record<string, string> = { feed: 'Feed', reels: 'Reels', stories: 'Stories', tiktok: 'TikTok', 'youtube-shorts': 'Shorts', anuncio: 'Anúncio', lp: 'Landing page' };
@@ -22,7 +23,7 @@ const MOTOR_LABEL = { carousel: 'motor carousel (PNG)', video: 'motor video (MP4
 export default function Formatos() {
   const [sp] = useSearchParams();
   const id = sp.get('formato');
-  return id ? <FormatDetail id={id} /> : <Gallery />;
+  return id ? <FormatDetail id={id} /> : sp.get('aba') === 'blocos' ? <GaleriaBlocos /> : <Gallery />;
 }
 
 const toBase64 = (f: File) => new Promise<string>((res, rej) => {
@@ -83,7 +84,7 @@ function Gallery() {
     <AppContent>
       <div className="flex items-start justify-between gap-4 mb-5">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Formatos</h1>
+          <div className="flex items-center gap-3"><h1 className="text-2xl font-semibold tracking-tight">Formatos</h1><AbaGaleria /></div>
           <p className="text-sm text-muted-foreground mt-1">Galeria de todas as empresas: escolha "quero um conteúdo no estilo X" e a IA segue a skill e as suas observações daquele formato.</p>
         </div>
         <Button onClick={() => setAdding(true)}>Nova referência</Button>

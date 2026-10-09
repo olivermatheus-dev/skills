@@ -22,6 +22,7 @@ export type { RelatorioLinha, RelatorioView, FichaOpcao };
 export type { FilaStatus, PedirLote };
 import type { Review, ReviewComment } from '../../schema/review';
 import type { Ficha, Conferencia, CampoMolde, Candidato, RefConferida, EdicaoFicha, ItemDaFuncao, TipoFicha } from '../../tools/lib/ficha-agente.mjs';
+import type { Bloco } from '../../tools/lib/blocos.mjs';
 import type { Brand, BrandFont, BrandToken } from '../../schema/brand';
 import type { BrandPreset } from '../../core/brand-presets';
 export type { Brand, BrandFont, BrandToken, BrandPreset };
@@ -35,6 +36,9 @@ import type { Format } from '../../schema/format';
 import type { FormatInfo, FormatUse, FormatRefInput } from '../../core/store';
 export type { Format, FormatInfo, FormatUse, FormatRefInput };
 export type { PieceCover } from '../../core/store';
+import type { VersaoVista } from '../../core/versoes';
+export type { VersaoVista };
+export interface VersoesVideo { versoes: VersaoVista[]; fonteMudou: boolean }
 import type { AdsHistorico } from '../../core/store';
 import type { VariantesView } from '../../core/variantes';
 export type { AdsHistorico, AnuncioHistorico } from '../../core/store';
@@ -166,6 +170,9 @@ export const net = {
   /** o fetch falhou por rede (não é uma resposta de erro da API) */
   isNetworkError: (e: unknown) => e instanceof TypeError,
 };
+
+export type { Bloco };
+export type PromoverResp = { ok: true; de: string; para: string; movido: boolean; avisos: string[]; usos: number } | { ok: false; erros: string[]; avisos: string[] };
 
 async function req<T>(method: string, path: string, body?: unknown): Promise<T> {
   let r: Response;
@@ -356,6 +363,9 @@ export const api = {
   pieceDesktop: (slug: string, path: string, how: 'reveal' | 'open', file = '') => req<{ ok: boolean }>('POST', `${pj(slug)}/piece/${how}?path=${encodeURIComponent(path)}&file=${encodeURIComponent(file)}`),
   adjustVideo: (slug: string, path: string, a: VideoAdjust) => req<{ saida: string; timeline: PieceTimeline }>('POST', `${pj(slug)}/piece/adjust?path=${encodeURIComponent(path)}`, a),
   previewStatus: (slug: string, path: string) => req<PreviewJob | null>('GET', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`),
+  versoesVideo: (slug: string, path: string) => req<VersoesVideo>('GET', `${pj(slug)}/piece/versoes?path=${encodeURIComponent(path)}`),
+  restaurarVersao: (slug: string, path: string, versao: string) =>
+    req<VersoesVideo & { versao: string; backup: string; avisos: string[] }>('POST', `${pj(slug)}/piece/versoes/restaurar?path=${encodeURIComponent(path)}`, { versao }),
   generatePreview: (slug: string, path: string, formato?: string) => req<PreviewJob>('POST', `${pj(slug)}/piece/preview?path=${encodeURIComponent(path)}`, { formato }),
   // variantes de um projeto de vídeo (045 D)
   variantes: (slug: string, path: string) => req<VariantesVista>('GET', `${pj(slug)}/piece/variantes?path=${encodeURIComponent(path)}`),
@@ -383,6 +393,12 @@ export const api = {
   promoteExample: (id: string, ex: { empresa: string; peca: string; arquivo?: string; legenda?: string }) => req<Format>('POST', `/api/formats/${encodeURIComponent(id)}/examples`, ex),
   removeExample: (id: string, i: number) => req<Format>('DELETE', `/api/formats/${encodeURIComponent(id)}/examples/${i}`),
   formatRefUrl: (id: string, file: string) => `/format-ref/${id}/${encodeURIComponent(file)}`,
+
+  // galeria de blocos de vídeo (045 G)
+  blocos: (slug: string) => req<Bloco[]>('GET', `${pj(slug)}/blocos`),
+  blocosPreviews: (slug: string, forcar = false) => req<{ feitos: string[]; pulados: string[]; sem_fonte: string[] }>('POST', `${pj(slug)}/blocos/previews`, { forcar }),
+  promoverBloco: (slug: string, b: { use: string; de: string; para: 'empresa' | 'global'; forcar?: boolean }) => req<PromoverResp>('POST', `${pj(slug)}/blocos/promover`, b),
+  blocoPreviewUrl: (rel: string, v?: string | number) => `/bloco-preview?f=${encodeURIComponent(rel)}${v ? `&v=${v}` : ''}`,
 
   mockupCatalogo: () => req<MockupCatalogo>('GET', '/api/mockup/catalogo'),
   mockupAparelhos: () => req<Record<string, unknown>>('GET', '/api/mockup/aparelhos'),
