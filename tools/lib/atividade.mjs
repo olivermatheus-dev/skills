@@ -27,6 +27,22 @@ export function iniciar({ slug, tipo, fonte, titulo, agente = null, passo = 'Com
   return gravar({ id, slug, tipo, fonte, titulo, agente, passo, status: 'rodando', inicio, fim: null, pid, link, ref, erro: null, resumo: null, visto: false, ...extra, passos: [{ em: inicio, texto: passo, agente }] });
 }
 
+/** trabalho que espera a vez na fila da IA (046 F): status `fila`, sem processo; o heartbeat chama `comecar` quando chega a vez */
+export function enfileirar({ slug, tipo = 'ia', fonte, titulo, agente = null, link = null, ref = null }) {
+  const id = `${new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)}-${fonte}-${Math.random().toString(36).slice(2, 6)}`;
+  const em = new Date().toISOString();
+  return gravar({ id, slug, tipo, fonte, titulo, agente, passo: 'Na fila', status: 'fila', inicio: em, fim: null, pid: null, link, ref, erro: null, resumo: null, visto: false, passos: [{ em, texto: 'Entrou na fila', agente }] });
+}
+
+/** a vez chegou: o trabalho da fila passa a rodar neste processo (mesmo id, o dock não perde de vista). Sem o id, cria um novo. */
+export function comecar(id, meta) {
+  const a = okId(id) && ler(id);
+  if (!a || a.status !== 'fila') return iniciar(meta);
+  const inicio = new Date().toISOString();
+  const { passo: texto = 'Começando', pid = process.pid, ...resto } = meta;
+  return gravar({ ...a, ...resto, status: 'rodando', inicio, pid, passo: texto, em: inicio, passos: [...(a.passos ?? []), { em: inicio, texto, agente: meta.agente ?? a.agente }] });
+}
+
 /** atualiza o passo (e o agente, se mudou) de um trabalho rodando; o passo entra no histórico (`passos`) */
 export function passo(id, texto, extra = {}) {
   const a = okId(id) && ler(id);

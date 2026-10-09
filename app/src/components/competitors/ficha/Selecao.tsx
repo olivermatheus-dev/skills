@@ -190,7 +190,7 @@ export function AnalisarDialog({ open, onOpenChange, s, fila, compName, onDone }
         </div>
         {ocupado && (
           <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-            A IA está ocupada{ocupado.task ? ` com ${ocupado.task}` : ocupado.title ? ` com ${ocupado.title}` : ''}. Ponha na fila e rode quando ela terminar.
+            A IA está ocupada{ocupado.task ? ` com ${ocupado.task}` : ocupado.title ? ` com ${ocupado.title}` : ''}. Rodar agora entra na fila e começa sozinho quando ela acabar.
           </p>
         )}
         {fila.pedir.error && <p className="text-xs text-destructive">{(fila.pedir.error as Error).message}</p>}
@@ -198,8 +198,8 @@ export function AnalisarDialog({ open, onOpenChange, s, fila, compName, onDone }
         <div className="flex items-center justify-end gap-2 pt-1">
           <Button variant="ghost" onClick={() => onOpenChange(false)}>Cancelar</Button>
           <Button variant="ghost" disabled={!itens.length || fila.pedir.isPending} onClick={() => enviar(false)} title="Grava o pedido sem rodar (para rodar depois, aqui ou no terminal)">Só pôr na fila</Button>
-          <Button disabled={!itens.length || fila.pedir.isPending || !!ocupado} onClick={() => enviar(true)} className="inline-flex items-center gap-1.5">
-            {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-4" />}Rodar agora
+          <Button disabled={!itens.length || fila.pedir.isPending} onClick={() => enviar(true)} className="inline-flex items-center gap-1.5">
+            {fila.pedir.isPending ? <Spinner /> : <ScanSearch className="size-4" />}{ocupado ? 'Entrar na fila' : 'Rodar agora'}
           </Button>
         </div>
       </DialogContent>
@@ -269,9 +269,11 @@ export function FilaFaixa({ fila }: { fila: Fila }) {
           <span><b className="font-semibold tabular-nums">{n}</b> na fila de análise</span>
           <span className="text-xs text-muted-foreground">~{fmtUsd(e.usd)} · ~{e.min} min</span>
           <div className="ml-auto flex items-center gap-2">
-            {s.ocupado
-              ? <span className="text-xs text-muted-foreground">A IA está ocupada{s.ocupado.task ? ` com ${s.ocupado.task}` : ''}; rode quando ela terminar.</span>
-              : <Button disabled={fila.rodar.isPending} onClick={() => fila.rodar.mutate()} className="!py-1 inline-flex items-center gap-1.5 text-xs">{fila.rodar.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}Rodar agora</Button>}
+            {s.naFila
+              ? <span className="text-xs text-muted-foreground">Na fila da IA ({s.naFila}º): começa sozinha quando a anterior acabar.</span>
+              : <Button disabled={fila.rodar.isPending} onClick={() => fila.rodar.mutate()} className="!py-1 inline-flex items-center gap-1.5 text-xs"
+                title={s.ocupado ? `A IA está ocupada${s.ocupado.task ? ` com ${s.ocupado.task}` : ''}: entra na fila e roda sozinha quando ela acabar` : undefined}>
+                {fila.rodar.isPending ? <Spinner /> : <ScanSearch className="size-3.5" />}{s.ocupado ? 'Entrar na fila' : 'Rodar agora'}</Button>}
           </div>
         </div>
       )}

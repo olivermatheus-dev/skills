@@ -1,7 +1,7 @@
 // Fila de fichas (040 E): estado da rodada (pedidos, etapa, "analisando"), pedir em lote + Rodar agora, Parar e o fecho.
 import { useCallback, useEffect, useRef } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api, type FilaStatus, type PedirLote } from '../../../api';
+import { api, avisoFila, type FilaStatus, type PedirLote } from '../../../api';
 import { toast } from '../../toast';
 import type { FichaSelo } from '../Items';
 
@@ -50,7 +50,7 @@ export function useFichasFila(slug: string, onFim?: (u: Ultimo) => void) {
   });
   const rodar = useMutation({
     mutationFn: () => api.rodarFichas(slug),
-    onSuccess: () => { toast.ok('Análise iniciada no Claude Code'); refresh(); setTimeout(refresh, 1200); },
+    onSuccess: (r) => { toast.ok(avisoFila(r.fila, 'Análise iniciada no Claude Code')); refresh(); setTimeout(refresh, 1200); },
     onError: (e) => toast.error(e, 'Não foi possível rodar a fila'),
   });
   const parar = useMutation({

@@ -248,12 +248,13 @@ function NextStep({ task, byId, pending, running, onMove, actions, runner }: {
     );
   }
   if (ready) {
-    const busy = runner.running || runner.run.isPending;
+    const busy = runner.run.isPending;
+    const naFila = runner.status?.fila.find((f) => f.kind === 'quadro' && f.task === t.id); // 046 F
     return (
       <div className={cx(box, 'border-primary/25 bg-primary-soft/40')}>
-        <span className="flex-1 min-w-40">Pronta para a IA</span>
+        <span className="flex-1 min-w-40">{naFila ? `Na fila da IA (${naFila.posicao}º): começa sozinha quando a anterior acabar` : 'Pronta para a IA'}</span>
         <UiButton size="xs" variant="outline" disabled={busy} onClick={() => runner.run.mutate({ mode: 'terminal', task: t.id })}><SquareTerminal /> No terminal</UiButton>
-        <UiButton size="xs" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> Rodar agora</UiButton>
+        {!naFila && <UiButton size="xs" disabled={busy} onClick={() => runner.run.mutate({ mode: 'background', task: t.id })}><Play /> {runner.running ? 'Pôr na fila' : 'Rodar agora'}</UiButton>}
       </div>
     );
   }

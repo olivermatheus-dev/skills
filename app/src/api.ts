@@ -42,9 +42,13 @@ export type { Atividade };
 /** atividade (046 A): dock = o que mostrar agora; historico = últimos trabalhos (página Agentes) */
 import type { PedidoIa } from '../../tools/lib/pedidos-ia.mjs';
 /** pedido avulso de IA (046 D) como a tela vê: `passo`/`agenteAtivo` enquanto roda */
-export type PedidoIaView = PedidoIa & { passo?: string | null; agenteAtivo?: string | null };
-export interface PedidoIaStart { started: boolean; mode: 'background' | 'terminal'; pedido: PedidoIaView | null }
-export interface AtividadeView { dock: (Atividade & { podeParar: boolean })[]; historico: Atividade[] }
+export type PedidoIaView = PedidoIa & { passo?: string | null; agenteAtivo?: string | null; /** na fila da IA (046 F) */ posicao?: number };
+/** entrou na fila da IA (046 F): `ocupado` = o que roda agora (null = começa já) */
+export interface NaFila { posicao: number; ja: boolean; atividade: string; ocupado: string | null }
+export interface PedidoIaStart { started: boolean; mode: 'background' | 'terminal'; pedido: PedidoIaView | null; fila?: NaFila }
+export interface AtividadeView { dock: (Atividade & { podeParar: boolean; posicao: number | null })[]; historico: Atividade[] }
+/** frase do toast depois de pedir algo à IA: começa já ou espera a vez */
+export const avisoFila = (f: NaFila | undefined, comecou: string) => (f?.ocupado ? `Na fila (${f.posicao}º): roda sozinho quando "${f.ocupado}" acabar` : comecou);
 /** página Agentes (046 E) */
 export type EstadoAgente = 'trabalhando' | 'acordado' | 'dormindo';
 export interface AgenteCard {
@@ -57,6 +61,7 @@ export interface AgentesView { agentes: AgenteCard[]; historico: Atividade[]; re
 export interface RunnerStatus {
   running: boolean; pid: number | null; started: string | null; task: string | null; title: string | null; who: string | null;
   kind: 'fichas' | 'pesquisa' | 'pedido' | null; otherProject: string | null; ready: { id: string; title: string; assignee: string }[]; log: string[];
+  /** fila da IA (046 F), na ordem em que vai rodar */ fila: { posicao: number; titulo: string; atividade: string; slug: string; kind: string; task: string | null }[];
 }
 export interface NewPieceInput { title: string; text?: string; upload?: { name: string; base64: string }; formato?: string; format?: string; notes?: string; task?: boolean }
 /** timeline.json da peça (só os campos que a tela lê) */
@@ -189,7 +194,7 @@ export const api = {
   pedirAjustes: (slug: string, path: string, b: { aba: 'video' | 'slides' | 'roteiro'; ids?: string[]; instrucoes?: string; modo?: 'background' | 'terminal' }) =>
     req<PedidoIaStart & { ids: string[] }>('POST', `${pj(slug)}/piece/ajustes?path=${encodeURIComponent(path)}`, b),
   rodarAnalise: (slug: string, b: { comp?: string; modo?: 'background' | 'terminal' } = {}) => req<PedidoIaStart>('POST', `${pj(slug)}/analysis-queue/rodar`, b),
-  runAi: (slug: string, o: { mode: 'background' | 'terminal'; max?: number; task?: string }) => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/runner`, o),
+  runAi: (slug: string, o: { mode: 'background' | 'terminal'; max?: number; task?: string }) => req<{ started: boolean; mode: string; fila?: NaFila }>('POST', `${pj(slug)}/runner`, o),
   stopAi: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/runner`),
 
   personas: (slug: string) => req<Doc<Persona>[]>('GET', `${pj(slug)}/personas`),
@@ -217,7 +222,7 @@ export const api = {
   pesquisas: (slug: string) => req<PesquisasStatus>('GET', `${pj(slug)}/pesquisas`),
   pesquisa: (slug: string, rodada: string) => req<RodadaView>('GET', `${pj(slug)}/pesquisas/${encodeURIComponent(rodada)}`),
   pedirPesquisa: (slug: string, b: PesquisaBody) => req<{ round: string; rodando: boolean; aviso: string | null; modo: string }>('POST', `${pj(slug)}/pesquisas`, b),
-  rodarPesquisa: (slug: string, rodada: string, modo: 'background' | 'terminal' = 'background') => req<{ started: boolean; mode: string }>('POST', `${pj(slug)}/pesquisas/${encodeURIComponent(rodada)}/rodar`, { modo }),
+  rodarPesquisa: (slug: string, rodada: string, modo: 'background' | 'terminal' = 'background') => req<{ started: boolean; mode: string; fila?: NaFila }>('POST', `${pj(slug)}/pesquisas/${encodeURIComponent(rodada)}/rodar`, { modo }),
   pararPesquisa: (slug: string) => req<{ stopped: boolean }>('POST', `${pj(slug)}/pesquisas-parar`),
 
   contextList: (slug: string) => req<{ name: string; file: string }[]>('GET', `${pj(slug)}/context`),
@@ -279,13 +284,13 @@ export const api = {
   // fila de fichas (040 E)
   fichasFila: (slug: string) => req<FilaStatus>('GET', `${pj(slug)}/fichas-fila`),
   pedirFichas: (slug: string, b: PedirLote) => req<{ gravados: number; fora: number; rodando: boolean; aviso: string | null }>('POST', `${pj(slug)}/fichas-fila`, b),
-  rodarFichas: (slug: string) => req<{ started: boolean }>('POST', `${pj(slug)}/fichas-fila/rodar`),
+  rodarFichas: (slug: string) => req<{ started: boolean; fila?: NaFila }>('POST', `${pj(slug)}/fichas-fila/rodar`),
   pararFichas: (slug: string) => req<{ stopped: boolean }>('DELETE', `${pj(slug)}/fichas-fila/rodar`),
   // relatórios por concorrente (040 F)
   relatorios: (slug: string, comp: string) => req<RelatorioLinha[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios`),
   relatorio: (slug: string, comp: string, id: string) => req<RelatorioView | null>('GET', `${pj(slug)}/competitors/${comp}/relatorios/${id}`),
   relatorioFichas: (slug: string, comp: string) => req<FichaOpcao[]>('GET', `${pj(slug)}/competitors/${comp}/relatorios-fichas`),
-  gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean; modo?: 'background' | 'terminal' }) => req<{ aberto: boolean; modo: 'background' | 'terminal' | 'comando'; comando: string; itens: number; pedido?: PedidoIaView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
+  gerarRelatorio: (slug: string, comp: string, b: { rede: string; itens?: string[]; abrir?: boolean; modo?: 'background' | 'terminal' }) => req<{ aberto: boolean; modo: 'background' | 'terminal' | 'comando'; comando: string; itens: number; pedido?: PedidoIaView | null; fila?: NaFila }>('POST', `${pj(slug)}/competitors/${comp}/relatorios`, b),
   decidirTermos: (slug: string, comp: string, id: string, decisoes: { grupo: string; valor: string; decisao: 'aceito' | 'recusado'; substituto?: string }[]) => req<{ resultado: DecisaoTermo[]; view: RelatorioView | null }>('POST', `${pj(slug)}/competitors/${comp}/relatorios/${id}/termos`, { decisoes }),
   // vocabulário vivo (040 H): termos novos da ficha, info para o diálogo, decisão fora do relatório
   termoInfo: (slug: string, grupo: string, valor: string) => req<TermoInfo | null>('GET', `${pj(slug)}/termos/${encodeURIComponent(grupo)}/${encodeURIComponent(valor)}`),

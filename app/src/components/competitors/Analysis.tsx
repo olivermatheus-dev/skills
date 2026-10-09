@@ -2,7 +2,7 @@
 // módulo e anotação por módulo (do Oliver: a IA nunca sobrescreve). Escolher o que rodar fica no diálogo do "Puxar" (RunDialog).
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, type AnalysisFull, type AnalysisResult, type Competitor, type ModuleId } from '../../api';
+import { api, avisoFila, type AnalysisFull, type AnalysisResult, type Competitor, type ModuleId } from '../../api';
 import { MODULES, FULL_ANALYSIS } from '../../../../schema/analysis';
 import type { ModuleDataOf } from '../../../../schema/analysis';
 import { qk, useAnalysis } from '../../queries';
@@ -124,7 +124,7 @@ export function RodarAnalise({ slug, comp, titulo, mods, trigger, onFeito }: { s
   return (
     <PedirIa trigger={trigger} titulo={titulo} instrucoes={false}
       descricao={<>O pesquisador roda {mods}: script no que é mecânico (site, Reclame Aqui) e um subagente Sonnet por concorrente no que exige leitura. As instruções que você deixou no pedido valem.</>}
-      onRodar={async (modo) => { await api.rodarAnalise(slug, { comp, modo }); toast.ok(modo === 'terminal' ? 'Claude Code aberto num terminal' : 'Análise rodando em segundo plano'); onFeito?.(); }} />
+      onRodar={async (modo) => { const r = await api.rodarAnalise(slug, { comp, modo }); toast.ok(modo === 'terminal' ? 'Claude Code aberto num terminal' : avisoFila(r.fila, 'Análise rodando em segundo plano')); onFeito?.(); }} />
   );
 }
 
@@ -190,7 +190,7 @@ export function RunDialog({ slug, c, open, onOpenChange, onCollect }: { slug: st
       }
       // depois do script (site já baixado): a IA roda agora, em segundo plano (046 D)
       if (iaSel.length && agora) {
-        try { await api.rodarAnalise(slug, { comp: c.id }); toast.ok(`IA rodando ${iaSel.length} módulo(s) em segundo plano`); void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] }); }
+        try { const r = await api.rodarAnalise(slug, { comp: c.id }); toast.ok(avisoFila(r.fila, `IA rodando ${iaSel.length} módulo(s) em segundo plano`)); void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] }); }
         catch (e) { toast.error(e, 'Ficou na fila (use Rodar agora quando a IA estiver livre)'); }
       }
       setInstr(''); setForce(false);

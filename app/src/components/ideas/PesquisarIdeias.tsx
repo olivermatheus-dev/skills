@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChevronDown, ChevronRight, CircleAlert, Clock, Coins, Loader2, Settings2, Sparkles, SquareTerminal, Square, TriangleAlert, Check } from 'lucide-react';
-import { api, type PesquisaBody, type RodadaView, type Source } from '../../api';
+import { api, avisoFila, type PesquisaBody, type RodadaView, type Source } from '../../api';
 import { Button, Input, SelectField, Textarea, cx, type SelectOption } from '../kit';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
@@ -225,7 +225,7 @@ function FormularioPronto({ slug, qc, sources, ideas, refs, st, onClose, onStart
         )}
         {ocupado && (
           <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-200">
-            A IA está ocupada{ocupado.task ? ` com ${ocupado.task}` : ocupado.title ? ` com ${ocupado.title}` : ''}. Grave o pedido e rode quando ela terminar (aba Pesquisas).
+            A IA está ocupada{ocupado.task ? ` com ${ocupado.task}` : ocupado.title ? ` com ${ocupado.title}` : ''}. A pesquisa entra na fila e começa sozinha quando ela acabar.
           </p>
         )}
         <p className="text-xs text-muted-foreground">As ideias chegam na aba Ideias, com fonte e link conferidos. Só roda quando você clica.</p>
@@ -236,11 +236,10 @@ function FormularioPronto({ slug, qc, sources, ideas, refs, st, onClose, onStart
         <Button variant="ghost" disabled={invalido || pedir.isPending} onClick={() => pedir.mutate('terminal')} className="inline-flex items-center gap-1.5" title="Abre uma janela do Claude Code para você acompanhar e responder">
           <SquareTerminal className="size-4" />Abrir no terminal
         </Button>
-        {ocupado
-          ? <Button disabled={invalido || pedir.isPending} onClick={() => pedir.mutate('so-pedir')}>Só gravar o pedido</Button>
-          : <Button disabled={invalido || pedir.isPending} onClick={() => pedir.mutate('rodar')} className="inline-flex items-center gap-1.5">
-            {pedir.isPending ? <Spinner /> : <Sparkles className="size-4" />}Pesquisar
-          </Button>}
+        {ocupado && <Button variant="ghost" disabled={invalido || pedir.isPending} onClick={() => pedir.mutate('so-pedir')}>Só gravar o pedido</Button>}
+        <Button disabled={invalido || pedir.isPending} onClick={() => pedir.mutate('rodar')} className="inline-flex items-center gap-1.5">
+          {pedir.isPending ? <Spinner /> : <Sparkles className="size-4" />}{ocupado ? 'Pesquisar (entra na fila)' : 'Pesquisar'}
+        </Button>
       </div>
     </>
   );
@@ -311,7 +310,7 @@ function Painel({ slug, round, onClose }: { slug: string; round: string; onClose
   const v: RodadaView | undefined = q.data;
   const refresh = () => { void qc.invalidateQueries({ queryKey: qk.pesquisas(slug) }); void qc.invalidateQueries({ queryKey: qk.pesquisa(slug, round) }); };
   const parar = useMutation({ mutationFn: () => api.pararPesquisa(slug), onSuccess: () => { toast.ok('Pesquisa parada'); refresh(); }, onError: (e) => toast.error(e, 'Não foi possível parar') });
-  const rodar = useMutation({ mutationFn: () => api.rodarPesquisa(slug, round), onSuccess: () => { toast.ok('Pesquisa iniciada no Claude Code'); refresh(); setTimeout(refresh, 1200); }, onError: (e) => toast.error(e, 'Não foi possível rodar') });
+  const rodar = useMutation({ mutationFn: () => api.rodarPesquisa(slug, round), onSuccess: (r) => { toast.ok(avisoFila(r.fila, 'Pesquisa iniciada no Claude Code')); refresh(); setTimeout(refresh, 1200); }, onError: (e) => toast.error(e, 'Não foi possível rodar') });
 
   if (!v) return (<><DialogTitle>Pesquisa</DialogTitle><div className="h-48 rounded-lg bg-muted animate-pulse" /></>);
   const l = v.linha, rotulo = rotuloRodada(l.req, refs);
@@ -362,7 +361,7 @@ function Painel({ slug, round, onClose }: { slug: string; round: string; onClose
         </div>
       )}
       {l.estado === 'pendente' && !ultimo?.erro && !rodando && (
-        <p className="rounded-lg border border-border bg-muted/40 px-3 py-2 text-xs text-muted-foreground">Pedido gravado, ainda não rodou.{st?.ocupado ? ' A IA está ocupada; rode quando ela terminar.' : ''}</p>
+        <p className="rounded-lg border border-border bg-muted/40 px-3 py-2 text-xs text-muted-foreground">{l.naFila ? `Na fila da IA (${l.naFila}º): começa sozinha quando a anterior acabar.` : `Pedido gravado, ainda não rodou.${st?.ocupado ? ' A IA está ocupada: Rodar agora entra na fila.' : ''}`}</p>
       )}
 
       <div className="flex flex-wrap items-center justify-end gap-2">
@@ -374,7 +373,7 @@ function Painel({ slug, round, onClose }: { slug: string; round: string; onClose
         </>)}
         {(l.estado === 'erro' || l.estado === 'pendente') && !rodando && (<>
           <Button variant="ghost" onClick={onClose}>Fechar</Button>
-          <Button disabled={rodar.isPending || !!st?.ocupado} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.estado === 'erro' ? 'Tentar de novo' : 'Rodar agora'}</Button>
+          <Button disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.estado === 'erro' ? 'Tentar de novo' : 'Rodar agora'}</Button>
         </>)}
       </div>
     </>

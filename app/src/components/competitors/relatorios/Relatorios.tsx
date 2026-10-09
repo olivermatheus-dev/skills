@@ -4,7 +4,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Ban, Check, ChevronRight, Copy, ExternalLink, FileBarChart, Lightbulb, Play, ScanSearch, ShieldAlert, Sparkles, TriangleAlert } from 'lucide-react';
-import { api, type RelatorioLinha, type RelatorioView } from '../../../api';
+import { api, avisoFila, type RelatorioLinha, type RelatorioView } from '../../../api';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { Checkbox } from '../../ui/checkbox';
 import { Button, cx, fmtDate, fmtNum } from '../../kit';
@@ -323,7 +323,7 @@ function GerarDialog({ slug, comp, onClose }: { slug: string; comp: string; onCl
     onSuccess: (res) => {
       void qc.invalidateQueries({ queryKey: rk.lista(slug, comp) });
       void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] });
-      if (res.modo === 'background') { toast.ok('Relatório rodando em segundo plano'); onClose(); return; }
+      if (res.modo === 'background') { toast.ok(avisoFila(res.fila, 'Relatório rodando em segundo plano')); onClose(); return; }
       setFeito(res);
       if (res.aberto) toast.ok('Claude Code aberto num terminal');
     },

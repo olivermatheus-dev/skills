@@ -5,7 +5,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ResearchRequest, ResearchResult, SourceRef } from '../schema/curadoria';
 import * as S from './store';
-import { readLock, runPesquisa as dispararPesquisa, stopAi } from './runner';
+import { readLock, runPesquisa as dispararPesquisa, stopAi, filaPor, posicaoNaFila } from './runner';
 import { ESTIMATIVA_PADRAO, criarPedido } from '../tools/curadoria/pedido';
 import { ADAPTERS } from '../tools/curadoria/adapters';
 import { workDir } from '../tools/curadoria/paths';
@@ -120,6 +120,8 @@ export interface RodadaLinha {
   estado: EstadoRodada;
   /** rodando numa janela de terminal (sem o lock do app): o estado vem dos arquivos que mudaram há pouco */
   terminal: boolean;
+  /** esperando a vez na fila da IA (046 F): posição (1 = a próxima) */
+  naFila: number | null;
   ideias: { id: string; title: string; status: string; score: number | null }[];
   aprovadas: number;
   custo: number | null;
@@ -176,6 +178,7 @@ export function pesquisasStatus(slug: string): PesquisasStatus {
       id, req, result,
       estado: result || req.status === 'feito' ? 'feito' : rodandoApp || terminal ? 'rodando' : req.status === 'rodando' ? 'erro' : req.status,
       terminal,
+      naFila: posicaoNaFila(filaPor((j) => j.kind === 'pesquisa' && j.slug === slug && j.round === id)?.atividade),
       ideias: dela.map((i) => ({ id: i.data.id, title: i.data.title, status: i.data.status, score: i.data.score ?? null })),
       aprovadas: dela.filter((i) => i.data.status === 'aprovada' || i.data.status === 'virou-tarefa').length,
       custo: result?.cost?.usd ?? null,
@@ -264,7 +267,10 @@ export function pedirPesquisa(slug: string, b: PesquisaBody) {
   const acao = b.acao ?? 'rodar';
   let rodando = false, aviso: string | null = null;
   if (acao !== 'so-pedir') {
-    try { dispararPesquisa(slug, round, acao === 'terminal' ? 'terminal' : 'background'); rodando = true; } catch (err) { aviso = err instanceof S.ValidationError ? err.issues.join('; ') : String(err); }
+    try {
+      const r = dispararPesquisa(slug, round, acao === 'terminal' ? 'terminal' : 'background'); rodando = true;
+      if ('fila' in r && r.fila?.ocupado) aviso = `a IA está ocupada com "${r.fila.ocupado}": entrou na fila (${r.fila.posicao}º) e roda sozinha quando ela acabar`;
+    } catch (err) { aviso = err instanceof S.ValidationError ? err.issues.join('; ') : String(err); }
   }
   return { round, rodando, aviso, modo: acao };
 }

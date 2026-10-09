@@ -4,7 +4,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Sparkles } from 'lucide-react';
-import { api, type RodadaLinha } from '../api';
+import { api, avisoFila, type RodadaLinha } from '../api';
 import { Button, Empty, ErrorBox, PageHeader } from '../components/kit';
 import { AppContent } from '../components/AppContent';
 import { IdeasTabs } from '../components/ideas/IdeasTabs';
@@ -26,7 +26,7 @@ export default function Pesquisas() {
   const nomes = new Map((sources ?? []).map((s) => [s.id, s.name]));
   const rodar = useMutation({
     mutationFn: (id: string) => api.rodarPesquisa(slug, id),
-    onSuccess: () => { toast.ok('Pesquisa iniciada no Claude Code'); void qc.invalidateQueries({ queryKey: qk.pesquisas(slug) }); },
+    onSuccess: (r) => { toast.ok(avisoFila(r.fila, 'Pesquisa iniciada no Claude Code')); void qc.invalidateQueries({ queryKey: qk.pesquisas(slug) }); },
     onError: (e) => toast.error(e, 'Não foi possível rodar'),
   });
   const rows = data?.rodadas ?? [];
@@ -61,10 +61,10 @@ export default function Pesquisas() {
     {
       k: 'acao', label: '', width: '104px',
       render: (r) => (r.estado === 'pendente' || r.estado === 'erro') && !r.terminal ? (
-        <Button variant="soft" className="!py-1 inline-flex items-center gap-1.5 text-xs" disabled={rodar.isPending || !!data?.ocupado || !!data?.rodando}
-          title={data?.ocupado || data?.rodando ? 'A IA está ocupada; rode quando ela terminar' : 'Roda a pesquisa no Claude Code, em segundo plano'}
+        <Button variant="soft" className="!py-1 inline-flex items-center gap-1.5 text-xs" disabled={rodar.isPending || !!r.naFila}
+          title={r.naFila ? `Na fila da IA (${r.naFila}º): começa sozinha quando a anterior acabar` : data?.ocupado || data?.rodando ? 'A IA está ocupada: entra na fila e roda sozinha quando ela acabar' : 'Roda a pesquisa no Claude Code, em segundo plano'}
           onClick={(e) => { e.stopPropagation(); rodar.mutate(r.id); }}>
-          {rodar.isPending && rodar.variables === r.id ? <Spinner /> : <Sparkles className="size-3.5" />}{r.estado === 'erro' ? 'De novo' : 'Rodar'}
+          {rodar.isPending && rodar.variables === r.id ? <Spinner /> : <Sparkles className="size-3.5" />}{r.naFila ? `Fila ${r.naFila}º` : r.estado === 'erro' ? 'De novo' : 'Rodar'}
         </Button>
       ) : null,
     },

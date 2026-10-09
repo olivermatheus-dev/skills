@@ -4,7 +4,7 @@
 // que a tela acompanha (o pedido mais novo dela, pelo `ref`).
 import * as S from './store';
 import { ValidationError } from './store';
-import { runPedido } from './runner';
+import { runPedido, posicaoNaFila } from './runner';
 import * as PI from '../tools/lib/pedidos-ia.mjs';
 import * as AT from '../tools/lib/atividade.mjs';
 import type { PedidoIa } from '../tools/lib/pedidos-ia.mjs';
@@ -16,7 +16,11 @@ const NAO_INICIOU_MS = 2 * 60e3;
 /** estado do pedido para a tela: o do arquivo, corrigido pelo registro de atividade (processo morto) e pelo "nunca começou" */
 export function estadoPedido(p: PedidoIa | null) {
   if (!p) return null;
-  if (p.status === 'fila' && Date.now() - Date.parse(p.criado) > NAO_INICIOU_MS) return { ...p, status: 'erro' as const, erro: 'A IA não começou (o heartbeat não abriu). Tente de novo.' };
+  if (p.status === 'fila') {
+    const posicao = posicaoNaFila(p.fila); // esperando a vez (046 F): não é erro, por mais que demore
+    if (posicao) return { ...p, posicao };
+    if (Date.now() - Date.parse(p.criado) > NAO_INICIOU_MS) return { ...p, status: 'erro' as const, erro: 'A IA não começou (o heartbeat não abriu). Tente de novo.' };
+  }
   if (p.status === 'rodando' && p.atividade) {
     const a = AT.listar({ slug: p.slug, limite: 60 }).find((x) => x.id === p.atividade); // listar marca como erro o processo que morreu
     if (a && a.status !== 'rodando') return { ...p, status: a.status === 'parado' ? 'parado' as const : 'erro' as const, erro: a.erro ?? p.erro, passo: null };

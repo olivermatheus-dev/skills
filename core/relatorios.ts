@@ -110,7 +110,7 @@ export function gerarRelatorioView(slug: string, comp: string, body: { rede?: st
     allowed: ['Bash(npm run fichas *)', 'Bash(npm run validate)'],
     extra: { comp, rede, itens: n },
   });
-  return { aberto: true, modo: 'background' as const, comando, itens: n, pedido: r.pedido };
+  return { aberto: true, modo: 'background' as const, comando, itens: n, pedido: r.pedido, fila: r.fila };
 }
 
 /** aceitar/recusar FORA de um relatório (painel da ficha): mesma função, a definição vem da ficha que propôs */

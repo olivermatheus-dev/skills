@@ -23,7 +23,7 @@ const ESTADO = {
   acordado: { label: 'Acordado', cls: 'bg-success/10 text-success', dot: 'bg-success' },
   dormindo: { label: 'Dormindo', cls: 'bg-muted text-muted-foreground', dot: 'bg-muted-foreground/40' },
 } as const;
-const STATUS: Record<Atividade['status'], string> = { rodando: 'rodando', feito: 'pronto', erro: 'falhou', parado: 'parado' };
+const STATUS: Record<Atividade['status'], string> = { fila: 'na fila', rodando: 'rodando', feito: 'pronto', erro: 'falhou', parado: 'parado' };
 
 export default function Agentes() {
   const { slug = '' } = useParams();

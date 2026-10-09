@@ -4,7 +4,7 @@
 // o dock global mostra o mesmo trabalho.
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { AlertTriangle, Check, Loader2, Play, Square, SquareTerminal } from 'lucide-react';
+import { AlertTriangle, Check, Clock, Loader2, Play, Square, SquareTerminal, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { api, type PedidoIaView } from '../../api';
@@ -53,19 +53,21 @@ export function PedidoStatus({ slug, pedido, className, mostrarFim = true }: { s
   const [parando, setParando] = useState(false);
   if (!pedido || (!rodando && !mostrarFim)) return null;
   const nome = quem({ agente: pedido.agenteAtivo ?? pedido.agente, tipo: 'ia' } as Parameters<typeof quem>[0]);
+  const naFila = pedido?.status === 'fila' && !!pedido.posicao;
   async function parar() {
-    if (!pedido?.atividade) return;
+    const id = naFila ? pedido?.fila : pedido?.atividade; // na fila (046 F): tira da fila; rodando: para
+    if (!id) return;
     setParando(true);
-    try { await api.atividadeParar(slug, pedido.atividade); toast.ok('Parado'); } catch (e) { toast.error(e, 'Não foi possível parar'); }
+    try { await api.atividadeParar(slug, id); toast.ok(naFila ? 'Tirado da fila' : 'Parado'); } catch (e) { toast.error(e, 'Não foi possível parar'); }
     finally { setParando(false); void qc.invalidateQueries({ queryKey: ['pedido-ia', slug] }); }
   }
   if (rodando) return (
     <div className={cn('flex items-center gap-2 rounded-md border border-ai-border bg-ai-soft px-3 py-1.5 text-xs text-ai-ink', className)}>
-      <Loader2 className="size-3.5 animate-spin shrink-0" />
+      {naFila ? <Clock className="size-3.5 shrink-0" /> : <Loader2 className="size-3.5 animate-spin shrink-0" />}
       <span className="font-medium shrink-0">{nome}</span>
-      <span className="min-w-0 truncate opacity-80" title={pedido.passo ?? undefined}>{pedido.status === 'fila' ? 'Abrindo o Claude Code…' : pedido.passo ?? 'Trabalhando…'}</span>
+      <span className="min-w-0 truncate opacity-80" title={pedido.passo ?? undefined}>{naFila ? `Na fila (${pedido.posicao}º): começa sozinho quando a IA ficar livre` : pedido.status === 'fila' ? 'Abrindo o Claude Code…' : pedido.passo ?? 'Trabalhando…'}</span>
       <span className="ml-auto tabular-nums opacity-70 shrink-0">{duracao(pedido.inicio ?? pedido.criado)}</span>
-      {pedido.atividade && <button onClick={parar} disabled={parando} className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-ai-muted shrink-0"><Square className="size-3" />Parar</button>}
+      {(naFila ? pedido.fila : pedido.atividade) && <button onClick={parar} disabled={parando} className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-ai-muted shrink-0">{naFila ? <><X className="size-3" />Tirar da fila</> : <><Square className="size-3" />Parar</>}</button>}
     </div>
   );
   const erro = pedido.status === 'erro';

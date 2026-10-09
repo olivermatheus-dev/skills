@@ -4,7 +4,7 @@ export interface PedidoIa {
   id: string; slug: string; tipo: PedidoTipo; titulo: string; agente: string; link: string | null; ref: string;
   prompt: string; allowed: string[]; disallowed?: string[]; extra: Record<string, any>;
   status: 'fila' | 'rodando' | 'feito' | 'erro' | 'parado';
-  criado: string; inicio: string | null; fim: string | null; atividade: string | null; resumo: string | null; erro: string | null;
+  criado: string; inicio: string | null; fim: string | null; atividade: string | null; /** atividade que espera na fila da IA (046 F) */ fila?: string; resumo: string | null; erro: string | null;
 }
 export function criar(p: { slug: string; tipo: PedidoTipo; titulo: string; agente?: string; link?: string | null; ref: string; prompt: string; allowed?: string[]; disallowed?: string[]; extra?: Record<string, unknown> }): PedidoIa;
 export function ler(id: string): PedidoIa | null;

@@ -39,7 +39,10 @@ export function rodarClaude(cli, { log, agente, onPasso = () => {}, env = proces
   // Windows: o claude é um .cmd (precisa de shell) e o shell não põe aspas sozinho → cada argumento vai entre aspas
   const win = process.platform === 'win32';
   const q = (a) => (/[\s"&|<>^()*]/.test(a) ? `"${a.replace(/"/g, "'")}"` : a);
-  const filho = spawn('claude', win ? args.map(q) : args, { stdio: ['ignore', 'pipe', 'pipe'], shell: win, env, windowsHide: true });
+  // HUB_CLAUDE_BIN = um .mjs que imita o claude (teste da fila sem gastar: node <bin> <args>)
+  const falso = env.HUB_CLAUDE_BIN;
+  const filho = falso ? spawn(process.execPath, [falso, ...args], { stdio: ['ignore', 'pipe', 'pipe'], env, windowsHide: true })
+    : spawn('claude', win ? args.map(q) : args, { stdio: ['ignore', 'pipe', 'pipe'], shell: win, env, windowsHide: true });
 
   const subagentes = new Map(); // id da chamada Agent → tipo do subagente
   let ultimo = '';

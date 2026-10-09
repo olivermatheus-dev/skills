@@ -5,7 +5,7 @@ import { createContext, useContext, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { api, type ReviewComment } from '../../api';
+import { api, avisoFila, type ReviewComment } from '../../api';
 import { qk } from '../../queries';
 import { toast } from '../toast';
 import { PedidoStatus, PedirIa, usePedidoIa } from '../atividade/PedidoIa';
@@ -57,7 +57,7 @@ export function PedirAjustesBar({ slug, path, aba, comments }: { slug: string; p
               align="start"
               onRodar={async (modo, instrucoes) => {
                 const r = await api.pedirAjustes(slug, path, { aba, modo, instrucoes });
-                toast.ok(modo === 'terminal' ? 'Claude Code aberto num terminal' : `Claude ajustando ${r.ids.length} anotação(ões)`);
+                toast.ok(modo === 'terminal' ? 'Claude Code aberto num terminal' : avisoFila(r.fila, `Claude ajustando ${r.ids.length} anotação(ões)`));
                 atualizar();
               }}
             >

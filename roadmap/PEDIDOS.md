@@ -9,11 +9,11 @@
 |---|---|---|---|
 | 1 | 047 | **Fase B:** refazer o plano da apresentação kz com a skill `plano-de-cenas` (revisão Opus + storyboard) e comparar com a v03; calibrar rubrica e `plano.mjs check` | pedido do Oliver de 2026-10-08 (fase A feita) |
 | 2 | 045 | **Fase D (app):** aba Variantes no projeto de vídeo — Fluxo (React Flow) + Matriz, selo do QC (`indice.json > qc`, `sincronia.md`), Gerar variantes (faixa de progresso), baixar, anotar (revisão 022), aprovar/descartar | fases A, B e C feitas |
-| 3 | 046 | **Atividade da IA e das coletas:** fases A–E feitas (dock, passos ao vivo, coletas como trabalho em segundo plano, Pedir ajustes ao Claude, Rodar agora na análise, relatório em segundo plano, página Agentes + hooks do terminal); próxima: **fase F** (fila de verdade) | pedido do Oliver de 2026-10-08 |
 
 ## Esperando o Oliver (não travam o resto)
 | tarefa | o que falta |
 |---|---|
+| 046 | usar a fila da IA (pedir duas coisas seguidas: a 2ª fica "na fila" no dock e roda sozinha) e o resto da 046 (dock, página Agentes, Pedir ajustes, Rodar agora) e apontar ajustes |
 | 045 | assistir às 3 aberturas da rodada 1 (`contents/2026-10-07-apresentacao-kz/variantes/abertura-*__voz-thalita/exports/`) e escolher a vencedora (vira `rodadas.r2`; as 9 da matriz já existem em 4:5 e 9:16, sincronia ok) · perguntas 4 (1º projeto de edits) e 5 (planilha da Meta × lista); não travam A–D |
 | 043 | dados da Kzloo para Preços: preço final (100–129; hoje 129), % trimestral/anual, teste/garantia (e se pede cartão), limites por plano, formas de pagamento/fidelidade, headline de referência · card "Já viraram tarefa" das Brechas abre qual filtro? · comparar a Kzloo contra a entrada mediana (atual) ou o topo solo? · usar as telas e apontar ajustes |
 | 040 | aceitar/recusar os 4 termos novos do relatório de anúncios da Corpora · revisar as 5 fichas em `tasks/040-…/AVAL-FICHAS.md` (meta: corrigir < 20% dos campos ★) · **cookies do Chrome** para baixar reels do Instagram (`YTDLP_COOKIES_FROM_BROWSER=chrome`; mexe com a sessão dele, só com o sim) |

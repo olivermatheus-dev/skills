@@ -1,7 +1,8 @@
 // Botão "Rodar IA" (cabeçalho do quadro) e faixa "IA trabalhando" com log e Parar.
 // Prontas = A fazer · responsável IA/agente · dependências feitas. Segundo plano = heartbeat; terminal = janela interativa.
+// IA uma por vez (046 F): com a IA ocupada, o segundo plano entra na fila e roda sozinho quando a anterior acaba.
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, ChevronRight, Loader2, Play, Square, SquareTerminal } from 'lucide-react';
+import { ChevronDown, ChevronRight, Clock, Loader2, Play, Square, SquareTerminal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import type { RunnerStatus } from '../../api';
@@ -21,6 +22,7 @@ export function RunAiButton({ runner, onOpenTask }: { runner: Runner; onOpenTask
         <Button size="sm" variant={ready.length && !runner.running ? 'default' : 'outline'} className="gap-1.5">
           {runner.running ? <Loader2 className="animate-spin" /> : <Play />}
           {runner.running ? 'IA rodando' : 'Rodar IA'}
+          {!!s?.fila.length && <span className="ml-0.5 inline-flex items-center gap-0.5 rounded-full bg-black/10 px-1.5 text-[11px] tabular-nums" title="Na fila da IA"><Clock className="size-3" />{s.fila.length}</span>}
           {!runner.running && <span className="ml-0.5 rounded-full bg-black/10 px-1.5 text-[11px] tabular-nums">{ready.length}</span>}
         </Button>
       </PopoverTrigger>
@@ -45,13 +47,26 @@ export function RunAiButton({ runner, onOpenTask }: { runner: Runner; onOpenTask
             ))}
           </ol>
         )}
+        {!!s?.fila.length && (
+          <div className="border-t border-border py-1">
+            <div className="px-4 pt-1.5 pb-1 text-xs font-medium text-muted-foreground">Na fila da IA (roda um por vez, sozinho)</div>
+            <ol className="max-h-32 overflow-y-auto">
+              {s.fila.map((f) => (
+                <li key={f.atividade} className="flex items-center gap-2 px-4 py-1 text-sm">
+                  <span className="text-xs text-muted-foreground tabular-nums w-4">{f.posicao}º</span>
+                  <span className="truncate">{f.titulo}</span>
+                  {f.slug !== runner.slug && <span className="ml-auto text-xs text-muted-foreground">{f.slug}</span>}
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
         <div className="p-3 border-t border-border flex flex-col gap-2">
-          {runner.running ? (
-            <Button variant="outline" size="sm" onClick={() => { runner.stop.mutate(); setOpen(false); }}><Square /> Parar a execução</Button>
-          ) : (
+          {runner.running && <Button variant="outline" size="sm" onClick={() => { runner.stop.mutate(); setOpen(false); }}><Square /> Parar a execução atual</Button>}
+          {(!runner.running || ready.length > 0) && (
             <>
               <Button size="sm" disabled={!ready.length || runner.run.isPending} onClick={() => go('background')}>
-                <Play /> Rodar {ready.length > 1 ? `as ${ready.length}` : ''} em segundo plano
+                {runner.running ? <><Clock /> Pôr {ready.length > 1 ? `as ${ready.length}` : ''} na fila</> : <><Play /> Rodar {ready.length > 1 ? `as ${ready.length}` : ''} em segundo plano</>}
               </Button>
               <Button size="sm" variant="outline" disabled={!ready.length || runner.run.isPending} onClick={() => go('terminal')}>
                 <SquareTerminal /> Abrir no terminal (acompanhar e conversar)
@@ -94,7 +109,9 @@ export function RunningBar({ status, onStop, onOpenTask }: { status: RunnerStatu
           </span>
         ) : status.kind === 'fichas' ? <span className="min-w-0 truncate">IA analisando conteúdos dos concorrentes{status.title ? ` · ${status.title}` : ''}</span>
           : status.kind === 'pesquisa' ? <span className="min-w-0 truncate">IA pesquisando ideias nas fontes{status.title ? ` · ${status.title}` : ''}</span>
+          : status.title ? <span className="min-w-0 truncate">IA trabalhando · {status.title}</span>
           : <span>IA preparando a execução…</span>}
+        {!!status.fila.length && <span className="text-xs text-muted-foreground whitespace-nowrap">· {status.fila.length} na fila</span>}
         <span className="text-xs text-muted-foreground whitespace-nowrap">{since(status.started)}</span>
         <div className="ml-auto flex items-center gap-1">
           <Button size="sm" variant="ghost" onClick={() => setShowLog((v) => !v)}>{showLog ? <ChevronDown /> : <ChevronRight />} Log</Button>

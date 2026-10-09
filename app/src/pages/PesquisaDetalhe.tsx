@@ -3,7 +3,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Clock, Coins, ExternalLink, Quote, Sparkles, Square, TriangleAlert } from 'lucide-react';
-import { api } from '../api';
+import { api, avisoFila } from '../api';
 import { Button, ErrorBox, PageHeader, cx } from '../components/kit';
 import { AppContent } from '../components/AppContent';
 import { IdeasTabs } from '../components/ideas/IdeasTabs';
@@ -34,7 +34,7 @@ export default function PesquisaDetalhe() {
   const sources = useSources(slug).data;
   const v = q.data;
   const refresh = () => { void qc.invalidateQueries({ queryKey: qk.pesquisas(slug) }); void qc.invalidateQueries({ queryKey: qk.pesquisa(slug, rodada) }); };
-  const rodar = useMutation({ mutationFn: () => api.rodarPesquisa(slug, rodada), onSuccess: () => { toast.ok('Pesquisa iniciada no Claude Code'); refresh(); setTimeout(refresh, 1200); }, onError: (e) => toast.error(e, 'Não foi possível rodar') });
+  const rodar = useMutation({ mutationFn: () => api.rodarPesquisa(slug, rodada), onSuccess: (r) => { toast.ok(avisoFila(r.fila, 'Pesquisa iniciada no Claude Code')); refresh(); setTimeout(refresh, 1200); }, onError: (e) => toast.error(e, 'Não foi possível rodar') });
   const parar = useMutation({ mutationFn: () => api.pararPesquisa(slug), onSuccess: () => { toast.ok('Pesquisa parada'); refresh(); }, onError: (e) => toast.error(e, 'Não foi possível parar') });
 
   const voltar = <Link to={`/p/${slug}/ideias/pesquisas`} className="mb-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4" />Todas as pesquisas</Link>;
@@ -63,7 +63,7 @@ export default function PesquisaDetalhe() {
         <div className="flex items-center gap-2">
           {rodando && !l.terminal && <Button variant="ghost" disabled={parar.isPending} onClick={() => parar.mutate()} className="inline-flex items-center gap-1.5"><Square className="size-3.5" />Parar</Button>}
           {(l.estado === 'pendente' || l.estado === 'erro') && !rodando && (
-            <Button disabled={rodar.isPending || !!st?.ocupado} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.estado === 'erro' ? 'Tentar de novo' : 'Rodar agora'}</Button>
+            <Button disabled={rodar.isPending || !!l.naFila} onClick={() => rodar.mutate()} className="inline-flex items-center gap-1.5">{rodar.isPending ? <Spinner /> : <Sparkles className="size-4" />}{l.naFila ? `Na fila (${l.naFila}º)` : l.estado === 'erro' ? 'Tentar de novo' : st?.ocupado ? 'Entrar na fila' : 'Rodar agora'}</Button>
           )}
           {l.estado === 'feito' && r && r.ideas.length > 0 && <Link to={`/p/${slug}/ideias?rodada=${encodeURIComponent(rodada)}`}><Button variant="soft">Ver as {r.ideas.length} ideias no banco</Button></Link>}
         </div>

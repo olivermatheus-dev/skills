@@ -3,22 +3,36 @@
 // O formato e a gravação ficam em tools/lib/atividade.mjs (o heartbeat usa o mesmo).
 import * as AT from '../tools/lib/atividade.mjs';
 import { ValidationError } from './store';
-import { stopAi, readLock } from './runner';
+import { stopAi, readLock, conferirFila, posicaoNaFila, tirarDaFila } from './runner';
 export type { Atividade } from '../tools/lib/atividade.mjs';
 
 const okSlug = (s: string) => /^[a-z0-9][a-z0-9-]*$/.test(s);
 
-/** o que o dock mostra: rodando, terminados que pedem atenção (IA ou erro não vistos) e os recém-terminados (10 s) */
+const SEM_FILA_MS = 2 * 60e3;
+
+/** o que o dock mostra: rodando, na fila (046 F), terminados que pedem atenção (IA ou erro não vistos) e os recém-terminados (10 s) */
 export function atividadeView(slug: string) {
   if (!okSlug(slug)) throw new ValidationError('atividade', ['empresa inválida']);
-  const todos = AT.listar({ slug, limite: 60 });
+  conferirFila(); // fila parada sem heartbeat (app reiniciado, Parar no meio): chama de novo
   const agora = Date.now();
+  const posicoes = new Map<string, number>();
+  for (const a of AT.listar({ slug, limite: 60 })) {
+    if (a.status !== 'fila') continue;
+    const pos = posicaoNaFila(a.id);
+    if (pos) posicoes.set(a.id, pos);
+    // saiu da fila e não começou (heartbeat morreu entre pegar e rodar): não fica "na fila" para sempre
+    else if (agora - Date.parse(a.inicio) > SEM_FILA_MS) AT.terminar(a.id, 'erro', { erro: 'Saiu da fila sem começar. Peça de novo.' });
+  }
+  const todos = AT.listar({ slug, limite: 60 });
   const lock = readLock()?.atividade;
-  const dock = todos.filter((a) => a.status === 'rodando'
+  const ordem = (a: AT.Atividade) => (a.status === 'rodando' ? 0 : a.status === 'fila' ? 1 : 2);
+  const dock = todos.filter((a) => a.status === 'rodando' || a.status === 'fila'
     || (!a.visto && (a.tipo === 'ia' || a.status === 'erro'))
     || (a.fim && agora - Date.parse(a.fim) < 10_000))
-    .sort((a, b) => Number(b.status === 'rodando') - Number(a.status === 'rodando')) // rodando primeiro, depois o mais novo
-    .map((a) => ({ ...a, link: a.link ?? `/p/${slug}/agentes?h=${a.id}`, podeParar: a.status === 'rodando' && a.id === lock })); // sem link = o histórico na página Agentes
+    // rodando primeiro, depois a fila na ordem em que vai rodar, depois o mais novo
+    .sort((a, b) => ordem(a) - ordem(b) || (a.status === 'fila' ? (posicoes.get(a.id) ?? 99) - (posicoes.get(b.id) ?? 99) : 0))
+    .map((a) => ({ ...a, link: a.link ?? `/p/${slug}/agentes?h=${a.id}`, posicao: posicoes.get(a.id) ?? null, // sem link = o histórico na página Agentes
+      podeParar: (a.status === 'rodando' && a.id === lock) || (a.status === 'fila' && posicoes.has(a.id)) }));
   return { dock, historico: todos };
 }
 
@@ -28,10 +42,11 @@ export function marcarVisto(slug: string, ids: unknown) {
   return atividadeView(slug);
 }
 
-/** Parar pelo dock: só o que roda no heartbeat (IA) dá para parar; coleta no servidor termina sozinha */
+/** Parar pelo dock: só o que roda no heartbeat (IA) dá para parar (o que espera na fila sai dela); coleta no servidor termina sozinha */
 export function pararAtividade(slug: string, id: string) {
   const a = AT.lerAtividade(id);
   if (!a || a.slug !== slug) throw new ValidationError('atividade', ['trabalho não encontrado']);
+  if (a.status === 'fila') { tirarDaFila(id); return atividadeView(slug); } // ainda não começou: só sai da fila
   if (a.status !== 'rodando') return atividadeView(slug);
   if (readLock()?.atividade !== id) throw new ValidationError('atividade', ['este trabalho não pode ser parado daqui: espere terminar']);
   stopAi(slug);

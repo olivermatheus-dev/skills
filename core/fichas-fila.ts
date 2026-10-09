@@ -7,7 +7,7 @@ import { dirname, isAbsolute, join } from 'node:path';
 import { FICHA_KEY_RE } from '../schema/ficha';
 import { FichasPedido } from '../schema/relatorio';
 import { ROOT, ValidationError, listCompetitors } from './store';
-import { readLock, runFichas, stopAi } from './runner';
+import { readLock, runFichas, stopAi, filaPor, posicaoNaFila } from './runner';
 import { env } from '../tools/intel/env';
 import * as L from '../tools/lib/fichas-fila.mjs';
 
@@ -24,6 +24,8 @@ export interface FilaStatus {
   analisando: string[];
   /** a IA está ocupada com outra coisa (tarefa do quadro ou outra empresa) */
   ocupado: { task: string | null; title: string | null; slug: string | null } | null;
+  /** a fila de fichas esperando a vez na fila da IA (046 F): posição (1 = a próxima) */
+  naFila: number | null;
   pedidos: { comp: string; itens: string[]; status: 'pendente' | 'rodando'; reanalisar: boolean; requestedAt: string }[];
   ultimo: L.Ultimo | null;
   /** cookies do navegador para o yt-dlp (sem isso, reel do Instagram sai só com capa e legenda) */
@@ -50,6 +52,7 @@ export function filaStatus(slug: string): FilaStatus {
   return {
     running, started: running ? l!.started : null, passo: prog?.passo ?? (running ? 'Abrindo o Claude Code' : null), analisando,
     ocupado: l && !running ? { task: l.task ?? null, title: l.title ?? null, slug: l.slug ?? null } : null,
+    naFila: posicaoNaFila(filaPor((j) => j.kind === 'fichas' && j.slug === slug)?.atividade),
     pedidos, ultimo: L.lerUltimo(slug),
     igCookies: !!(env('YTDLP_COOKIES_FROM_BROWSER', slug) || env('YTDLP_COOKIES', slug)),
     log,
@@ -99,7 +102,7 @@ export function pedirLote(slug: string, body: PedirLote) {
   const gravados = [...porComp.values()].reduce((a, k) => a + k.length, 0);
   let rodando = false, aviso: string | null = null;
   if (body.rodar && gravados + L.listarPedidos(slug).length > 0) {
-    try { runFichas(slug); rodando = true; } catch (e) { aviso = e instanceof ValidationError ? e.issues.join('; ') : String(e); }
+    try { const r = runFichas(slug); rodando = true; if (r.fila.ocupado) aviso = `a IA está ocupada com "${r.fila.ocupado}": entrou na fila (${r.fila.posicao}º) e roda sozinha quando ela acabar`; } catch (e) { aviso = e instanceof ValidationError ? e.issues.join('; ') : String(e); }
   }
   return { gravados, fora: fora.length, rodando, aviso };
 }

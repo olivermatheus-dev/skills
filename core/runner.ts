@@ -9,6 +9,8 @@ import { fechar } from '../tools/lib/fichas-fila.mjs';
 import * as PQ from '../tools/lib/pesquisa.mjs';
 import * as AT from '../tools/lib/atividade.mjs';
 import * as PI from '../tools/lib/pedidos-ia.mjs';
+import * as FILA from '../tools/lib/fila-ia.mjs';
+import type { JobFila } from '../tools/lib/fila-ia.mjs';
 
 const LOCK = join(ROOT, 'logs/heartbeat/.lock');
 const isAi = (a: string) => a === 'ai' || a.startsWith('agent:');
@@ -61,6 +63,8 @@ export function runnerStatus(slug: string) {
     kind: l?.kind ?? null,
     otherProject: l?.slug && l.slug !== slug ? l.slug : null,
     ready: readyTasks(slug),
+    /** fila da IA (046 F), na ordem em que vai rodar; a do quadro desta empresa diz qual tarefa */
+    fila: FILA.listar().map((e, i) => ({ posicao: i + 1, titulo: e.titulo, atividade: e.atividade, slug: e.job.slug, kind: e.job.kind, task: e.job.task ?? null })),
     log: tail(l?.log ?? `logs/heartbeat/${new Date().toISOString().slice(0, 10)}.log`),
   };
 }
@@ -78,12 +82,58 @@ export function runAi(slug: string, opts: { mode?: 'background' | 'terminal'; ma
     return { started: true, mode: 'terminal' as const };
   }
 
-  if (readLock()) throw new ValidationError('heartbeat', ['a IA já está rodando; espere terminar ou pare antes']);
+  const l = readLock();
+  if (opts.task && l?.slug === slug && l.task === opts.task) throw new ValidationError('heartbeat', [`a IA já está rodando ${opts.task}`]);
+  const t = opts.task ? ready.find((x) => x.id === opts.task)! : null;
+  const max = opts.task ? 1 : Math.max(1, Math.min(10, opts.max ?? ready.length));
+  const fila = naFila({ kind: 'quadro', slug, max, ...(t ? { task: t.id } : {}) }, `quadro:${slug}:${t?.id ?? '*'}`, {
+    titulo: t ? `${t.id} · ${t.title}` : `Rodar IA · ${Math.min(max, ready.length)} tarefa(s) do quadro`, fonte: 'quadro',
+    agente: t ? (t.assignee === 'ai' ? 'orquestrador' : t.assignee) : 'orquestrador', link: `/p/${slug}/quadro${t ? `?t=${t.id}` : ''}`, ref: t?.id ?? null,
+  });
+  return { started: true, mode: 'background' as const, fila };
+}
+
+// ---------- fila da IA (046 F) ----------
+let ultimoChute = 0;
+/** chama o heartbeat para esvaziar a fila (o que já roda pega a entrada nova sozinho; um a mais só confere e sai) */
+export function chutarFila(forcar = false) {
+  if (!forcar && Date.now() - ultimoChute < 15_000) return false; // o último chute ainda está abrindo (WMI leva 1–2 s)
+  ultimoChute = Date.now();
   mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  const args = ['tools/heartbeat.mjs', '--run', '--slug', slug, '--max', String(opts.task ? 1 : Math.max(1, Math.min(10, opts.max ?? ready.length)))];
-  if (opts.task) args.push('--task', opts.task);
-  soltar(args);
-  return { started: true, mode: 'background' as const };
+  soltar(['tools/heartbeat.mjs', '--run', '--fila']);
+  return true;
+}
+
+/** a fila travou (heartbeat morto, app reiniciado no meio): sem lock e com entrada esperando há mais de 20 s, chama de novo */
+export function conferirFila() {
+  const fila = FILA.listar();
+  if (!fila.length || readLock()) return;
+  if (Date.now() - Date.parse(fila[0].criado) > 20_000) chutarFila();
+}
+
+/**
+ * IA uma por vez: todo disparo de IA em segundo plano entra na fila e chama o heartbeat. Livre = começa em 1–2 s; ocupada =
+ * espera a vez e roda sozinha quando a anterior acabar (sob o clique, nada agendado). `ocupado` = o que roda agora.
+ */
+export function naFila(job: JobFila, chave: string, meta: Parameters<typeof FILA.entrar>[2]) {
+  const r = FILA.entrar(job, chave, meta);
+  const l = readLock();
+  if (!l) chutarFila(true);
+  return { posicao: r.posicao, ja: r.ja, atividade: r.entrada.atividade, ocupado: l ? (l.title ?? l.task ?? 'outro trabalho') : null };
+}
+export type NaFila = ReturnType<typeof naFila>;
+
+/** posição na fila de quem espera (pela atividade); null = não está esperando */
+export const posicaoNaFila = (atividade: string | null | undefined) => (atividade ? FILA.posicao((e) => e.atividade === atividade) : null);
+export const filaPor = (pred: (j: JobFila) => boolean) => FILA.listar().find((e) => pred(e.job)) ?? null;
+
+/** tira da fila (antes de começar) e arruma o que é de cada tipo: o pedido avulso fecha como parado (a análise volta a pendente) */
+export function tirarDaFila(atividade: string) {
+  const e = FILA.listar().find((x) => x.atividade === atividade);
+  if (!e) return null;
+  const tirada = FILA.tirar(e.id);
+  if (tirada?.job.kind === 'pedido' && tirada.job.pedido) PI.fechar(tirada.job.pedido, { parado: true });
+  return tirada;
 }
 
 /** Parar: mata o heartbeat e o Claude que ele abriu; a tarefa volta para "A fazer" com um comentário. */
@@ -101,16 +151,14 @@ export function stopAi(slug: string) {
     const t = listTasks(slug).find((x) => x.data.id === l.task);
     if (t?.data.status === 'doing') commentTask(slug, l.task, { text: 'Execução parada pelo Oliver no app; voltou para "A fazer".', who: 'oliver', status: 'todo' });
   }
+  if (FILA.listar().length) chutarFila(true); // parar é só este: o próximo da fila começa
   return { stopped: true };
 }
 
 /** Fila de fichas (040 E): o mesmo heartbeat, em segundo plano, com `--fichas` (um `claude -p` para a fila inteira). */
 export function runFichas(slug: string) {
-  const l = readLock();
-  if (l) throw new ValidationError('heartbeat', [l.kind === 'fichas' ? 'a fila de fichas já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : ''}; o pedido ficou na fila: rode quando ela terminar`]);
-  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  soltar(['tools/heartbeat.mjs', '--run', '--slug', slug, '--fichas']);
-  return { started: true };
+  const fila = naFila({ kind: 'fichas', slug }, `fichas:${slug}`, { titulo: 'Análise de conteúdos de concorrentes', fonte: 'fichas', agente: 'orquestrador', link: `/p/${slug}/concorrentes/conteudos` });
+  return { started: true, fila };
 }
 
 /** Pesquisa de ideias (041 F3): o mesmo heartbeat, em segundo plano, com `--pesquisa <rodada>` (um `claude -p` para a rodada inteira). */
@@ -120,11 +168,8 @@ export function runPesquisa(slug: string, round: string, mode: 'background' | 't
     openTerminal(PQ.promptPesquisa(slug, round, { interativo: true }));
     return { started: true, mode };
   }
-  const l = readLock();
-  if (l) throw new ValidationError('heartbeat', [l.kind === 'pesquisa' ? 'a pesquisa de ideias já está rodando' : `a IA está ocupada${l.task ? ` com ${l.task}` : l.title ? ` com ${l.title}` : ''}; o pedido ficou gravado: rode quando ela terminar`]);
-  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  soltar(['tools/heartbeat.mjs', '--run', '--slug', slug, '--pesquisa', round]);
-  return { started: true, mode };
+  const fila = naFila({ kind: 'pesquisa', slug, round }, `pesquisa:${slug}:${round}`, { titulo: `Pesquisa de ideias · ${round}`, fonte: 'pesquisa', agente: 'pesquisador', link: `/p/${slug}/ideias/pesquisas/${round}`, ref: round });
+  return { started: true, mode, fila };
 }
 
 /**
@@ -133,13 +178,11 @@ export function runPesquisa(slug: string, round: string, mode: 'background' | 't
  */
 export function runPedido(p: Parameters<typeof PI.criar>[0], mode: 'background' | 'terminal' = 'background', antes?: () => void) {
   if (mode === 'terminal') { openTerminal(p.prompt); return { started: true, mode, pedido: null }; }
-  const l = readLock();
-  if (l) throw new ValidationError('heartbeat', [`a IA está ocupada${l.title ? ` com "${l.title}"` : l.task ? ` com ${l.task}` : ''}; rode quando ela terminar (ou pare pelo painel de atividade)`]);
   const job = PI.criar(p);
   antes?.();
-  mkdirSync(join(ROOT, 'logs/heartbeat'), { recursive: true });
-  soltar(['tools/heartbeat.mjs', '--run', '--slug', p.slug, '--pedido', job.id]);
-  return { started: true, mode, pedido: job };
+  const fila = naFila({ kind: 'pedido', slug: p.slug, pedido: job.id }, `pedido:${job.id}`, { titulo: job.titulo, fonte: job.tipo, agente: job.agente, link: job.link, ref: job.ref });
+  PI.atualizar(job.id, { fila: fila.atividade });
+  return { started: true, mode, pedido: PI.ler(job.id), fila };
 }
 
 /**
