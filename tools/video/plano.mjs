@@ -23,6 +23,9 @@ const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCa
 const words = (s = '') => String(s).trim().split(/\s+/).filter(Boolean);
 const json = (f) => JSON.parse(readFileSync(f, 'utf8'));
 const r1 = (x) => Math.round(x * 10) / 10;
+// âncora de gesto: "f5:dia" (1ª ocorrência) ou "f5:dia#2" (2ª); compara com o texto falado (say ?? text)
+const ancora = (word) => { const [f, resto = ''] = String(word).split(':'); const [w, n] = resto.split('#'); return { f, w, n: Math.max(1, +n || 1) }; };
+const posicoes = (falaTxt, w) => words(falaTxt).map((x, i) => [fold(x), i]).filter(([x]) => x === fold(w)).map(([, i]) => i);
 
 // pasta do vídeo ou slug da empresa
 function alvo(a) {
@@ -78,13 +81,21 @@ if (cmd === 'timeline') {
     status: 'plano',
     fps: P.fps ?? 30,
     formats: P.formatos ?? ['4x5', '9x16'],
-    vo: (P.vo || []).map(({ id, text, say }) => ({ id, text, ...(say ? { say } : {}) })),
+    // voz já gravada (vo[].words com tempos): leva arquivo e tempos; aí não rode o tts.mjs (use fit-vo.mjs para encaixar)
+    vo: (P.vo || []).map(({ id, text, say, file, start, end, length, words, voice }) =>
+      Object.fromEntries(Object.entries({ id, text, say, ...(words?.length ? { file, start, end, length, words, voice } : {}) }).filter(([, v]) => v !== undefined))),
     ...(P.camadas ? { camadas: P.camadas } : {}),
     scenes: scenes.map((s) => {
       for (const g of s.gestos || []) {
         if (!g.cue) continue;
         const e = { id: `e${++n}`, cue: g.cue, type: g.type || 'reveal', scene: s.id };
-        if (g.word) { e.word = g.word; if (g.offset != null) e.offset = g.offset; } else if (g.before_end != null) e.before_end = g.before_end; else e.at = g.at ?? 0.02;
+        if (g.word) {
+          const a = ancora(g.word);
+          // 2ª+ ocorrência: o layout aceita o índice da palavra na fala (f5:12); a contagem segue o texto falado
+          const pos = a.n > 1 ? posicoes(vo[a.f]?.say ?? vo[a.f]?.text, a.w)[a.n - 1] : undefined;
+          e.word = pos != null ? `${a.f}:${pos}` : `${a.f}:${a.w}`;
+          if (g.offset != null) e.offset = g.offset;
+        } else if (g.before_end != null) e.before_end = g.before_end; else e.at = g.at ?? 0.02;
         events.push(e);
       }
       // bloco novo ainda não existe: entra o rascunho (library/blocos/rascunho/cena-nova) até o bloco ser escrito, depois do aval
@@ -127,7 +138,10 @@ if (cmd === 'storyboard') {
       { cwd: dir, stdio: ['ignore', 'ignore', 'inherit'] });
     const pngs = readdirSync(join(dir, 'storyboard')).filter((f) => f.endsWith('.png')).sort();
     const quadros = tl.scenes.map((s, k) => {
-      const sf = porId[s.id]?.style_frame && join(t.dir, porId[s.id].style_frame);
+      // style_frame: "arquivo.png" (um formato) ou { "4x5": "…", "9x16": "…" }; formato sem o seu fica com o rascunho do bloco
+      const sfr = porId[s.id]?.style_frame;
+      const sfp = typeof sfr === 'string' ? (fmts.length === 1 || fmt === '4x5' ? sfr : null) : sfr?.[fmt];
+      const sf = sfp && join(t.dir, sfp);
       return sf && existsSync(sf) ? sf : join(dir, 'storyboard', pngs[k]);
     }).filter((f) => f && existsSync(f));
     const cols = Math.min(4, quadros.length);
@@ -166,6 +180,18 @@ for (const i of ideias) if (!i.tipo) avisos.push(`ideia ${i.id} sem tipo (dor, p
 const usadas = new Set(scenes.flatMap((s) => s.vo || []));
 for (const id of Object.keys(vo)) if (!usadas.has(id)) erros.push(`fala ${id} não está em nenhuma cena`);
 
+// tipos da gramática (references/gramatica.md); outro tipo = aviso, para a tabela crescer de propósito
+const TIPOS = ['pergunta', 'identificacao', 'dor', 'problema', 'numero', 'dado', 'processo', 'lista', 'contraste', 'virada', 'revelacao', 'marca', 'produto', 'funcionalidade', 'promessa', 'beneficio', 'emocao', 'cuidado', 'objecao', 'cta'];
+for (const i of ideias) if (i.tipo && !TIPOS.includes(fold(i.tipo))) avisos.push(`ideia ${i.id}: tipo "${i.tipo}" fora da gramática (${TIPOS.join(', ')})`);
+// o mesmo bloco novo em 2+ cenas precisa do mesmo contrato (slots e cues)
+const novos = {};
+for (const s of scenes) if (!s.use && s.novo?.tipo) {
+  const k = `${s.novo.tipo}/${s.novo.id}`, sig = JSON.stringify([s.novo.slots || [], s.novo.cues || []]);
+  if (novos[k] && novos[k].sig !== sig) avisos.push(`bloco novo ${k}: slots/cues diferentes em ${novos[k].id} e ${s.id} (um bloco, um contrato; a diferença vai em params, ex.: modo)`);
+  novos[k] ??= { sig, id: s.id };
+}
+
+let temposReais = false;
 let tEst = 0;
 const linhas = [];
 let literal = 0;
@@ -190,26 +216,51 @@ scenes.forEach((s, k) => {
     if (!s.novo.tipo || !s.novo.id) erros.push(`${id}: "novo" precisa de tipo e id (vira <pasta>/blocos/<tipo>/<id>)`);
     if (!s.novo.spec) erros.push(`${id}: bloco novo sem "spec" (o que o bloco faz, slots, cues, params)`);
     if (!s.style_frame) avisos.push(`${id}: bloco novo sem style_frame (o storyboard precisa de um quadro estático)`);
+    else {
+      const tem = typeof s.style_frame === 'string' ? ['4x5'] : Object.keys(s.style_frame);
+      const falta = (P.formatos || ['4x5', '9x16']).filter((f) => !tem.includes(f));
+      if (falta.length) avisos.push(`${id}: style frame só em ${tem.join(', ')} (falta ${falta.join(', ')}: use { "4x5": "…", "9x16": "…" })`);
+      for (const f of Object.values(typeof s.style_frame === 'string' ? { x: s.style_frame } : s.style_frame)) if (!existsSync(join(t.dir, f))) avisos.push(`${id}: style frame ${f} não existe`);
+    }
     meta = { slots: s.novo.slots, cues: s.novo.cues };
   } else erros.push(`${id}: sem "use" (bloco existente) nem "novo"`);
   const partes = String(s.on_screen || '').split('|');
   if (meta?.slots && partes.length < meta.slots.length) erros.push(`${id}: on_screen tem ${partes.length} parte(s), o bloco espera ${meta.slots.length} (${meta.slots.join(' | ')})`);
+  if (s.use && meta && s.params && !s.ajuste_bloco) for (const k of Object.keys(s.params)) if (!(k in (meta.params || {}))) avisos.push(`${id}: param "${k}" não existe em ${s.use} (é ajuste de bloco? declare em "ajuste_bloco")`);
+  for (const pt of partes) { const n = words(pt.replaceAll('*', '')).length; if (n > 10) erros.push(`${id}: texto de tela com ${n} palavras ("${pt.trim()}"): máx. ~10, ideal ≤ 6`); else if (n > 6) avisos.push(`${id}: texto de tela com ${n} palavras ("${pt.trim()}"): ideal ≤ 6 por momento`); }
   const cuesCena = new Set((s.gestos || []).map((g) => g.cue).filter(Boolean));
   for (const c of meta?.cues || []) if (!['entra', 'sai'].includes(c) && !cuesCena.has(c)) avisos.push(`${id}: cue "${c}" do bloco sem gesto na cena (o compor recusa cue declarado sem evento)`);
 
-  // tempo estimado da cena e gestos (posição da palavra na fala ≈ proporção das palavras)
-  const ws = (s.vo || []).flatMap((f) => words(vo[f]?.say ?? vo[f]?.text).map((w) => ({ f, w })));
-  const lead = s.lead ?? (k === 0 ? 0.3 : 0.15);
-  const dur = s.vo?.length ? lead + ws.length / WPS + 0.2 * ((s.vo.length || 1) - 1) + (s.tail ?? 0.3) : (s.len ?? s.min ?? 2.5);
+  if (s.use && meta && !s.ajuste_bloco) for (const g of s.gestos || []) if (g.cue && !['entra', 'sai'].includes(g.cue) && !(meta.cues || []).includes(g.cue)) avisos.push(`${id}: gesto com cue "${g.cue}" que ${s.use} não tem (é ajuste de bloco? declare em "ajuste_bloco")`);
+
+  // tempo da cena e dos gestos: com voz já gravada (vo[].words com s/e), o real; senão, estimado a 2,7 palavras/s
+  const lead = s.lead ?? (k === 0 ? 0.3 : s.pause ? 0.5 : 0.15);
+  let cur = lead;
+  const ws = [];
+  (s.vo || []).forEach((f, j) => {
+    const x = vo[f];
+    if (j) cur += s.gap ?? 0.2;
+    const txt = words(x?.say ?? x?.text);
+    const real = x?.words?.length && x.words[0].s != null;
+    const ini = real ? (x.start ?? x.words[0].s) : 0;
+    if (real) x.words.forEach((w) => ws.push({ f, w: w.w, t: cur + (w.s - ini) }));
+    else txt.forEach((w, i) => ws.push({ f, w, t: cur + i / WPS }));
+    cur += real ? (x.length ?? (x.end ?? x.words.at(-1).e) - ini) : txt.length / WPS;
+  });
+  if (s.vo?.some((f) => vo[f]?.words?.length)) temposReais = true;
+  const dur = s.vo?.length ? cur + (s.tail ?? 0.3) : (s.len ?? s.min ?? 2.5);
   const durC = Math.max(dur, s.min ?? 0);
   const marcas = [0];
   for (const g of s.gestos || []) {
     if (!g.o_que) avisos.push(`${id}: gesto ${g.cue || g.word || ''} sem "o_que" (o que acontece na tela)`);
     if (g.word) {
-      const [f, w] = String(g.word).split(':');
-      const idx = ws.findIndex((x) => x.f === f && fold(x.w) === fold(w));
-      if (idx < 0) erros.push(`${id}: gesto na palavra "${g.word}" que não está nas falas da cena`);
-      else marcas.push(lead + idx / WPS + (g.offset ?? 0));
+      const { f, w, n } = ancora(g.word);
+      const achados = ws.map((x, i) => [x, i]).filter(([x]) => x.f === f && fold(x.w) === fold(w)).map(([, i]) => i);
+      if (achados.length < n) erros.push(`${id}: gesto na palavra "${g.word}" que não está nas falas da cena (compara com o texto falado: "say" quando existe)`);
+      else {
+        if (achados.length > 1 && !String(g.word).includes('#')) avisos.push(`${id}: "${g.word}" aparece ${achados.length}× na fala; vale a 1ª (para outra: "${f}:${w}#2")`);
+        marcas.push(ws[achados[n - 1]].t + (g.offset ?? 0));
+      }
     } else if (g.at != null) marcas.push(g.at);
     else if (g.before_end != null) marcas.push(durC - g.before_end);
   }
@@ -217,12 +268,21 @@ scenes.forEach((s, k) => {
   marcas.sort((a, b) => a - b);
   const vao = Math.max(...marcas.slice(1).map((m, j) => m - marcas[j]));
   if (vao > 1.5 && !s.vivo) avisos.push(`${id}: ~${r1(vao)} s sem gesto novo (Padrões: ≤ 1,5 s sem algo novo; deriva ou ambiente que segura a tela vai em "vivo")`);
+  else if (vao > 3) avisos.push(`${id}: ~${r1(vao)} s sem gesto novo, mesmo com "vivo" (teto 3 s: REGRAS §2)`);
   if (!s.headline && /ui|card|painel|produto|lista/i.test(`${s.use || ''} ${s.block || ''}`)) avisos.push(`${id}: tela de UI/cards sem headline (Padrões do Oliver)`);
   if (!s.icone && !/cart|cta|final|logo|revela/i.test(`${s.use || ''} ${s.block || ''}`)) avisos.push(`${id}: ideia sem ícone/elemento de apoio declarado ("icone")`);
   for (const a of s.fontes || []) if (!a.fonte || /confirmar/i.test(a.status || '')) erros.push(`${id}: afirmação sem fonte confirmada: "${a.afirmacao}" (não entra)`);
 
   linhas.push({ id, t: `${r1(tEst)}–${r1(tEst + durC)}`, int: s.intensidade, rel: s.relacao, bloco: s.use || `novo:${s.novo?.tipo}/${s.novo?.id}`, acrescenta: s.acrescenta });
   tEst += durC;
+});
+
+// silêncio entre falas (cauda da cena + lead da próxima): ≤ 0,5 s; até 1 s só com "pause" declarada (REGRAS §2)
+scenes.forEach((s, k) => {
+  const prox = scenes[k + 1];
+  if (!prox || !s.vo?.length || !prox.vo?.length) return;
+  const sil = (s.tail ?? 0.3) + (prox.lead ?? (prox.pause ? 0.5 : 0.15));
+  if (sil > (prox.pause ? 1 : 0.5) + 1e-9) avisos.push(`${s.id}→${prox.id}: ~${r1(sil)} s de silêncio entre falas (tail ${s.tail ?? 0.3} + lead ${prox.lead ?? (prox.pause ? 0.5 : 0.15)}; máx. ${prox.pause ? '1 s com pause' : '0,5 s'})`);
 });
 
 // curva e arco
@@ -238,7 +298,7 @@ if (scenes.length >= 3 && comMotivo < Math.ceil(scenes.length / 2)) avisos.push(
 if (P.duracao_alvo && Math.abs(tEst - P.duracao_alvo) / P.duracao_alvo > 0.2) avisos.push(`duração estimada ${r1(tEst)} s × alvo ${P.duracao_alvo} s (> 20% de diferença)`);
 
 if (has('json')) { console.log(JSON.stringify({ erros, avisos, duracao_estimada: r1(tEst), cenas: linhas }, null, 2)); process.exit(erros.length ? 2 : 0); }
-console.log(`Plano: ${scenes.length} cenas · ${ideias.length} ideias · ${Object.keys(vo).length} falas · ≈ ${r1(tEst)} s${P.duracao_alvo ? ` (alvo ${P.duracao_alvo} s)` : ''} · motivo: ${P.conceito?.motivo || '—'}`);
+console.log(`Plano: ${scenes.length} cenas · ${ideias.length} ideias · ${Object.keys(vo).length} falas · ≈ ${r1(tEst)} s ${temposReais ? '(tempos reais da voz)' : '(estimado a 2,7 palavras/s)'}${P.duracao_alvo ? ` (alvo ${P.duracao_alvo} s)` : ''} · motivo: ${P.conceito?.motivo || '—'}`);
 for (const l of linhas) console.log(`  ${l.id.padEnd(4)} ${l.t.padEnd(11)} int ${l.int ?? '?'} · ${String(l.rel || '?').padEnd(11)} ${l.bloco}  — ${String(l.acrescenta || '').slice(0, 70)}`);
 for (const e of erros) console.log(`✗ ${e}`);
 for (const a of avisos) console.log(`⚠ ${a}`);

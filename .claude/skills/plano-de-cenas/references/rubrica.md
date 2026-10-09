@@ -15,7 +15,7 @@ Escreva <pasta>/revisao-plano-N.md com:
 3. As 3 cenas mais fracas, cada uma com 2 alternativas concretas (o que entra na tela, relação, bloco existente ou novo, gesto na palavra X).
 4. O que está bom e não deve mudar (no máximo 3 itens).
 Seja específico: "s3 é literal: relógio quando a fala diz 'tempo'; troque por a agenda da semana que se fecha em 'menos'"; nunca "melhorar o dinamismo".
-Não reescreva o cenas.json. Não elogie para equilibrar.
+Não reescreva o cenas.json. Não elogie para equilibrar. O BRAND.md vence a sua sugestão (ex.: nunca proponha fundo pastel na peça inteira, cor proibida ou partícula festiva).
 ```
 
 ## Critérios (0 = falha · 1 = fraco · 2 = bom · 3 = excelente)
@@ -26,17 +26,20 @@ Não reescreva o cenas.json. Não elogie para equilibrar.
 | 3 | **Literal** | quantas cenas só repetem a palavra (ícone de agenda quando a fala diz "agenda")? | |
 | 4 | **Teste do template** | um gerador de slides ou um template de Canva faria isto? | sim |
 | 5 | **Fio condutor** | o motivo aparece, evolui e se resolve na virada/revelação? | |
-| 6 | **Conexão** | cada corte tem motivo; o olhar continua na mesma região; ≤ 2 tipos de transição | |
+| 6 | **Conexão** | cada corte tem motivo; o olhar continua na mesma região; ≤ 2 tipos de transição (câmera contínua sobre o motivo conta como match, não como 3º tipo) | |
 | 7 | **Gancho** | 1º quadro com conteúdo; a persona se reconhece em 2 s (situação concreta, não genérica) | sim |
 | 8 | **Ritmo e curva** | intensidade sobe e desce; nada parado > 1,5 s; setup antes do payoff; cauda no final | |
 | 9 | **Clareza** | uma ideia por momento; ≤ 6 palavras na tela; hierarquia clara no quadro mais cheio | |
-| 10 | **Verdade e marca** | toda funcionalidade com fonte; proibições do BRAND.md; nada de clichê da lista | sim |
-| 11 | **Construível** | cada cena tem bloco existente ou `spec` claro; poses e gestos desenháveis; nos 2 formatos | |
+| 10 | **Verdade e marca** | toda funcionalidade com fonte; proibições do BRAND.md; nada de clichê da lista; **integridade do dado na UI fictícia**: escala (horas, eixos), contagens ("4 sessões hoje") e elenco batem entre as cenas e com a própria tela (`knowledge/video/texto-e-dados.md`); contraste de todo texto, inclusive rótulo pequeno e botão (`tools/contrast.mjs`) | sim |
+| 11 | **Construível** | cada cena tem bloco existente ou `spec` claro; poses e gestos desenháveis; **nos 2 formatos de verdade** (style frame 9:16 próprio, não o 4:5 reaproveitado); ajuste de bloco prometido é viável | |
 | 12 | **Beleza** | no storyboard: composição, respiro, contraste e cor estão no nível de estúdio? | |
 
 Total máximo: 36. **Passa** com ≥ 27 (75%) e nenhum eliminatório em 0. Senão, o autor aplica e roda outra rodada (máx. 3; na 3ª, leve o impasse ao Oliver com as duas opções).
 
 ## Erros que já aconteceram (cada um virou critério)
+- Horas das sessões fora da escala da coluna e elenco diferente entre cenas ("3 sessões" × 4 sessões); botão branco sobre coral (2,77:1) (plano 047 B, rodada 2) → 10.
+- Storyboard 9:16 com os style frames 4:5 repetidos (idem) → 11.
+- Revisor sugerindo fundo pastel, contra o BRAND.md (plano "Uma janela só", 047 B) → regra do prompt.
 - Abertura com tela vazia; "sobra menos tempo" com a tela vazia esperando a palavra (v01 da apresentação kz, 2026-10-07) → 7 e 8.
 - Tela de cards sem headline; ideias sem ícone ou elemento de apoio (idem) → 9 e 11.
 - Cada cena com um recurso diferente, sem ligação entre elas → 5 e 6.

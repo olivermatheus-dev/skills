@@ -90,9 +90,10 @@ Plano em formato de máquina. `node tools/video/plano.mjs check <pasta>` confere
 | `composicao`, `olhar` | sim | layout nos 2 formatos; região do ponto de atenção |
 | `poses` | sim | início · meio · fim |
 | `use` ou `novo` | sim | bloco existente, ou bloco a criar com `tipo`, `id`, `spec`, `slots`, `cues` (+ `style_frame`) |
+| `ajuste_bloco` | se `use` precisa mudar | o que muda no bloco existente (param novo, detalhe); feito depois do aval. Sem ele, param que o `bloco.json` não declara gera aviso |
 | `on_screen`, `params` | sim / se houver | textos por slot (`|`, `*ênfase*`) e params do bloco |
 | `headline`, `icone` | Padrões do Oliver | headline em tela de UI/cards; ícone Lucide de apoio por ideia |
-| `gestos[]` | sim | `{ cue, word: "f1:palavra" \| at, offset?, type?, o_que, sfx }`; todo cue do bloco precisa de um |
+| `gestos[]` | sim | `{ cue, word: "f1:palavra" \| at \| before_end, offset?, type?, o_que, sfx }`; todo cue do bloco precisa de um. A palavra é a **falada** (`say` quando existe); 2ª ocorrência: `"f1:palavra#2"` |
 | `vivo` | se ficar > 1,5 s sem gesto | o que mantém a tela viva (deriva, partícula, câmera lenta) |
 | `entra`, `sai` | sim | ligação com a cena anterior e a próxima |
 | `som` | sim | resumo do som da cena (detalhe: `sound-designer`) |

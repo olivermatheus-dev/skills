@@ -1,0 +1,11 @@
+Plano: 7 cenas · 10 ideias · 7 falas · ≈ 42.1 s (estimado a 2,7 palavras/s) (alvo 43 s) · motivo: 4 peças com identidade fixa nos tons reais dos Atalhos do app: Agenda (teal) · Pacientes (âmbar) · Anotações (lilás) · Mensagens (coral) + a coluna do dia
+  s1   0–5         int 3 · complementa abertura/pergunta-fragmentos  — 'vários lugares' vira 4 peças concretas da rotina dela, presentes desd
+  s2   5–9.5       int 2 · complementa cena/caos-cards  — os 3 cards falam da mesma paciente e se contradizem (Agenda diz quinta
+  s3   9.5–14.9    int 2 · complementa novo:cena/dia-do-terapeuta  — o tempo vira o dia dela: as sessões ficam no lugar (50 min é 50 min), 
+  s4   14.9–22.8   int 4 · mostra      novo:revelacao/grade-estados  — os adjetivos viram estados da grade: em 'simples' as peças se alinham,
+  s5   22.8–29.5   int 2 · prova       produto/painel-inicio  — o painel de verdade: a câmera sai do card Atalhos e mostra a próxima s
+  s6   29.5–33.4   int 3 · contrasta   novo:cena/dia-do-terapeuta  — o mesmo dia da s3, no mesmo enquadramento e com as sessões paradas nas
+  s7   33.4–42.1   int 1 · mostra      novo:cta/navegador  — ela vê onde entrar: a aba abre, kz.app.br é digitado e a página carreg
+⚠ s4: "f4:A" aparece 2× na fala; vale a 1ª (para outra: "f4:A#2")
+
+✓ sem bloqueios · 1 aviso(s) para a revisão olhar.

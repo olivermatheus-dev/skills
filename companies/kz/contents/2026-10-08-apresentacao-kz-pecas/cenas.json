@@ -1,0 +1,1159 @@
+{
+  "versao": 1,
+  "nivel": "medio",
+  "recorte": "A kz junta num lugar só a rotina espalhada do terapeuta autônomo e devolve o tempo de atender",
+  "duracao_alvo": 43,
+  "formatos": [
+    "4x5",
+    "9x16"
+  ],
+  "entrada": {
+    "tipo": "roteiro",
+    "fonte": "contents/2026-10-07-apresentacao-kz (falas f1–f7 da v03, sem mudar o texto)",
+    "tempos": false
+  },
+  "conceito": {
+    "nome": "As peças da rotina",
+    "mundo": "a rotina do terapeuta são 4 peças soltas (agenda, mensagens, pacientes, anotações) que se espalham, comem o dia e, na kz, se encaixam no painel",
+    "motivo": "4 peças com identidade fixa nos tons reais dos Atalhos do app: Agenda (teal) · Pacientes (âmbar) · Anotações (lilás) · Mensagens (coral) + a coluna do dia",
+    "evolucao": "s1 apagadas em arco, acendem e se espalham → s2 viram 3 cards que falam da mesma paciente sem se entender (Mensagens pisca no canto) → s3 viram as 4 tarefas que enchem os intervalos e a noite → s4 se alinham numa grade 2×2, ganham os rótulos reais e viram o card Atalhos (Mensagens sai para o canto; Sessão rápida completa a grade) → s5 a câmera sai do card Atalhos para o painel; Mensagens vira o toast da confirmação no WhatsApp → s6 hard cut para o dia da s3: as tarefas recolhem num chip, a noite clareia → s7 o navegador abre o painel",
+    "transicao": "match no motivo (inclui a câmera contínua da s4→s5, que é o mesmo motivo, o card Atalhos, crescendo) + hard cut na batida nas outras, inclusive s5→s6 (callback 'lembra disso?'). 2 tipos.",
+    "curva": [
+      3,
+      2,
+      2,
+      4,
+      2,
+      3,
+      1
+    ],
+    "evitar": [
+      "relógio derretendo",
+      "pessoa frustrada no notebook",
+      "gráfico subindo",
+      "foguete",
+      "partícula festiva",
+      "logo de terceiros (WhatsApp, Google)"
+    ],
+    "alternativas": [
+      "O dia em fast-forward: a coluna do dia de segunda a sexta acelerando, tarefas engolindo as sessões; a kz desacelera tudo (mais forte na dor, mais fraco no produto)",
+      "Abas abertas: as abas do navegador se multiplicam (agenda, mensagens, chamada, caderno) e fecham uma a uma até sobrar a aba da kz; casa com o CTA de navegador (mais literal, menos acolhedor)"
+    ]
+  },
+  "vo": [
+    {
+      "id": "f1",
+      "text": "Você é terapeuta e ainda organiza sua rotina em vários lugares diferentes?"
+    },
+    {
+      "id": "f2",
+      "text": "Agenda de um lado, informações dos pacientes de outro, anotações espalhadas…"
+    },
+    {
+      "id": "f3",
+      "text": "E no fim, sobra menos tempo para aquilo que realmente importa: atender."
+    },
+    {
+      "id": "f4",
+      "text": "A kz é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional.",
+      "say": "A cá-zê é uma plataforma feita para terapeutas que querem deixar a gestão da rotina mais simples, organizada e profissional."
+    },
+    {
+      "id": "f5",
+      "text": "Tudo pensado para você acompanhar seus atendimentos e organizar seu dia a dia com muito menos complicação."
+    },
+    {
+      "id": "f6",
+      "text": "Menos tempo administrando. Mais tempo cuidando dos seus pacientes!"
+    },
+    {
+      "id": "f7",
+      "text": "Conheça a kz e descubra uma forma mais simples de cuidar da sua rotina profissional.",
+      "say": "Conheça a cá-zê e descubra uma forma mais simples de cuidar da sua rotina profissional."
+    }
+  ],
+  "ideias": [
+    {
+      "id": "i1",
+      "fala": "f1",
+      "trecho": "Você é terapeuta",
+      "tipo": "pergunta",
+      "ancora": "terapeuta",
+      "emocao": "reconhecimento",
+      "entender": "isto é para mim",
+      "prova": null
+    },
+    {
+      "id": "i2",
+      "fala": "f1",
+      "trecho": "rotina em vários lugares diferentes",
+      "tipo": "dor",
+      "ancora": "vários",
+      "emocao": "incômodo leve",
+      "entender": "minha rotina está espalhada",
+      "prova": "AUDIENCE.md: Google Agenda + WhatsApp + Meet + caderno"
+    },
+    {
+      "id": "i3",
+      "fala": "f2",
+      "trecho": "Agenda de um lado… anotações espalhadas",
+      "tipo": "dor",
+      "ancora": "espalhadas",
+      "emocao": "desordem",
+      "entender": "cada coisa num lugar, nada conversa",
+      "prova": null
+    },
+    {
+      "id": "i4",
+      "fala": "f3",
+      "trecho": "sobra menos tempo",
+      "tipo": "dor",
+      "ancora": "menos",
+      "emocao": "cansaço",
+      "entender": "a administração come o dia",
+      "prova": "AUDIENCE.md: 4–8 h/semana de administração invisível (hipótese, não vai para a tela como número)"
+    },
+    {
+      "id": "i5",
+      "fala": "f3",
+      "trecho": "o que realmente importa: atender",
+      "tipo": "emocao",
+      "ancora": "atender",
+      "emocao": "saudade do essencial",
+      "entender": "eu virei terapeuta para atender",
+      "prova": null
+    },
+    {
+      "id": "i6",
+      "fala": "f4",
+      "trecho": "A kz é uma plataforma feita para terapeutas",
+      "tipo": "virada",
+      "ancora": "kz",
+      "emocao": "alívio",
+      "entender": "existe uma ferramenta feita para mim",
+      "prova": "título do site kz.app.br"
+    },
+    {
+      "id": "i7",
+      "fala": "f4",
+      "trecho": "mais simples, organizada e profissional",
+      "tipo": "lista",
+      "ancora": "simples",
+      "emocao": "confiança",
+      "entender": "3 ganhos",
+      "prova": null
+    },
+    {
+      "id": "i8",
+      "fala": "f5",
+      "trecho": "acompanhar seus atendimentos e organizar seu dia a dia",
+      "tipo": "produto",
+      "ancora": "acompanhar",
+      "emocao": "controle",
+      "entender": "como a kz faz isso na prática",
+      "prova": "PRODUTO.md: Painel do dia, Agenda, Confirmação de sessão no WhatsApp; print do painel 2026-10-07"
+    },
+    {
+      "id": "i9",
+      "fala": "f6",
+      "trecho": "Menos tempo administrando. Mais tempo cuidando",
+      "tipo": "contraste",
+      "ancora": "mais",
+      "emocao": "alívio",
+      "entender": "o tempo volta para as sessões",
+      "prova": null
+    },
+    {
+      "id": "i10",
+      "fala": "f7",
+      "trecho": "Conheça a kz",
+      "tipo": "CTA",
+      "ancora": "descubra",
+      "emocao": "convite",
+      "entender": "onde entrar",
+      "prova": "kz.app.br"
+    }
+  ],
+  "camadas": [
+    {
+      "use": "fundo/blobs"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "ideias": [
+        "i1",
+        "i2"
+      ],
+      "block": "gancho",
+      "intensidade": 3,
+      "vo": [
+        "f1"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "'vários lugares' vira 4 peças concretas da rotina dela, presentes desde o 1º quadro, que se separam: o problema ganha forma",
+      "motivo": "as 4 peças nascem aqui, nos tons dos Atalhos do app",
+      "composicao": "4:5: pergunta grande no centro, depois no terço de cima; peças em arco em volta · 9:16: tudo entre y 300 e 1250 (legenda do Reels embaixo)",
+      "olhar": "centro → centro-alto",
+      "poses": [
+        "início: selo + 'Você é terapeuta?' grande no centro + as 4 peças pequenas e apagadas em arco atrás, já no 1º quadro",
+        "meio: a pergunta sobe e encolhe; entra 'Sua rotina em vários lugares diferentes?'",
+        "fim: as 4 peças acesas e espalhadas, com deriva lenta"
+      ],
+      "use": "abertura/pergunta-fragmentos",
+      "on_screen": "Você é *terapeuta*?|Sua rotina em *vários lugares* diferentes?",
+      "headline": "Você é terapeuta?",
+      "icone": "heart-handshake",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "selo e pergunta entram inteiros",
+          "sfx": "air suave"
+        },
+        {
+          "cue": "troca",
+          "word": "f1:ainda",
+          "offset": -0.12,
+          "o_que": "pergunta sobe e encolhe; segunda frase entra inteira",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "espalha",
+          "word": "f1:vários",
+          "offset": -0.08,
+          "o_que": "as 4 peças acendem e saltam para longe umas das outras",
+          "sfx": "4 pops de UI (variantes)"
+        }
+      ],
+      "vivo": "peças com deriva lenta e giro de ±2°",
+      "entra": "1º quadro já com selo e pergunta (sem fade do preto)",
+      "sai": "as peças não somem: caem e viram os cards da s2 na mesma região (match no motivo)",
+      "som": "air · swish · pops",
+      "lead": 0.35,
+      "tail": 0.25,
+      "fontes": [],
+      "params": {
+        "fragmentos": [
+          [
+            "calendar",
+            "Agenda",
+            "t-teal"
+          ],
+          [
+            "contact",
+            "Pacientes",
+            "t-amber"
+          ],
+          [
+            "notebook-pen",
+            "Anotações",
+            "t-lilac"
+          ],
+          [
+            "message-circle",
+            "Mensagens",
+            "t-coral"
+          ]
+        ],
+        "apagadas": true,
+        "detalhes": [
+          "Qui 14h",
+          "",
+          "",
+          "3"
+        ]
+      },
+      "ajuste_bloco": "params novos: `fragmentos` (ícone, rótulo, tom) no lugar dos 4 fixos do HTML e `apagadas` (no 1º quadro as peças já estão em arco, pequenas e a 30% atrás da pergunta; em `espalha` acendem e se espalham); `detalhes` (1 detalhe concreto por peça já no 1º quadro: Agenda \"Qui 14h\", Mensagens \"3\")"
+    },
+    {
+      "id": "s2",
+      "ideias": [
+        "i3"
+      ],
+      "block": "dor",
+      "intensidade": 2,
+      "vo": [
+        "f2"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "os 3 cards falam da mesma paciente e se contradizem (Agenda diz quinta 14h; a anotação diz que ela remarcou para sexta); a linha que tenta ligá-los se rompe: nada conversa com nada",
+      "composicao": "headline no topo que troca a cada frase; 3 cards espalhados e tortos no centro; no 9:16, cards empilhados mais no alto",
+      "olhar": "topo (headline) → card da vez",
+      "use": "cena/caos-cards",
+      "on_screen": "*Agenda* de um lado,|*Pacientes* de outro,|*Anotações* espalhadas…",
+      "headline": "Agenda de um lado,",
+      "icone": "calendar",
+      "gestos": [
+        {
+          "cue": "card1",
+          "word": "f2:Agenda",
+          "offset": -0.12,
+          "o_que": "card Agenda cresce da peça",
+          "sfx": "click de UI"
+        },
+        {
+          "cue": "card2",
+          "word": "f2:informações",
+          "offset": -0.12,
+          "o_que": "card Pacientes entra torto do outro lado; headline troca",
+          "sfx": "click de UI"
+        },
+        {
+          "cue": "card3",
+          "word": "f2:anotações",
+          "offset": -0.12,
+          "o_que": "card Anotações entra; headline troca",
+          "sfx": "click de UI"
+        },
+        {
+          "cue": "espalha",
+          "word": "f2:espalhadas",
+          "o_que": "a linha tracejada tenta ligar os 3 nomes e se rompe trecho a trecho; alertas em --ink; tudo se afasta",
+          "sfx": "3 clicks secos (ruptura)"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.32,
+          "o_que": "cards encolhem de volta em peças e descem",
+          "sfx": "air"
+        }
+      ],
+      "vivo": "cards com deriva lenta e leve balanço",
+      "entra": "match: os cards nascem das peças da s1, na mesma região",
+      "som": "clicks · alerta · air",
+      "lead": 0.1,
+      "tail": 0.25,
+      "motivo": "3 peças viram cards (Agenda teal, Pacientes âmbar, Anotações lilás); Mensagens (coral) pisca no canto com '3 não lidas'",
+      "poses": [
+        "início: headline '*Agenda* de um lado,' + card Agenda 'Qui 14h · Marina S.' crescendo da peça da s1",
+        "meio: card Pacientes 'Marina S. · tel. —' e card Anotações 'M. — sessão 12?' entram tortos, cada um num canto",
+        "fim: a linha tracejada entre os 3 'Marina' se rompe em cada trecho; '?' no card Agenda; alerta em --ink; tudo se afasta"
+      ],
+      "params": {
+        "cards": [
+          "Agenda",
+          "Pacientes",
+          "Anotações"
+        ],
+        "conteudo": [
+          "Qui 14h · Marina S.",
+          "Marina S. · tel. —",
+          "Marina: remarcou p/ sexta?"
+        ],
+        "ligacao": true,
+        "alerta": "ink"
+      },
+      "ajuste_bloco": "params novos: `conteudo` (1 linha por card), `ligacao` (linha tracejada entre os cards que se rompe no cue `espalha`, um click seco por ruptura) e `alerta` em --ink (sem --danger: evita coral + vermelho + âmbar juntos); Mensagens como 4º elemento pequeno no canto",
+      "sai": "os cards encolhem de volta em peças e descem para dentro da coluna do dia da s3 (match no motivo)",
+      "fontes": [
+        {
+          "afirmacao": "Marina S. e dados dos cards",
+          "fonte": "elenco fictício, rodapé 'dados ilustrativos'",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "ideias": [
+        "i4",
+        "i5"
+      ],
+      "block": "dor",
+      "intensidade": 2,
+      "vo": [
+        "f3"
+      ],
+      "relacao": "complementa",
+      "olhar": "topo → coluna → sessão destacada",
+      "novo": {
+        "tipo": "cena",
+        "id": "dia-do-terapeuta",
+        "slots": [
+          "titulo",
+          "apoio",
+          "palavra"
+        ],
+        "spec": "Coluna do dia (card branco, raio 16, largura ≥ 60% do quadro no 4:5, rótulos de hora ≥ 22 px em --ui-muted) com coluna com px/hora fixo de 8h a 22h; cada sessão no y da sua hora, nos dois modos; N sessões sage de altura fixa (1 h) (hora + nome ilustrativo, texto --ink). Modo `aperta`: no `muda`, as tarefas (chips com nome, 1–2 por vão, cada uma na sua hora, nos tons tile, ícone Lucide + verbo, mola FAST) entram nos intervalos entre as sessões e a coluna estica para baixo (20h → 22h) com uma faixa de noite crescendo; no `apoio`, a headline troca pelo apoio (não empilha), os rótulos de hora somem e a câmera fecha 1,3× na sessão destacada; no `transborda`, a última tarefa empurra a noite até 22h e a faixa escurece; no `fecho`, a palavra (slot `palavra`) entra grande em --accent sobre o creme, fora da coluna, + coração com anel. Modo `devolve`: começa como o meio do `aperta` (vãos cheios, noite escura, sem câmera); no `muda`, as sessões NÃO se movem: as tarefas voam para um chip só ('tudo na kz' + 4 mini ícones) no CABEÇALHO da coluna, fora da escala de horas, e a noite clareia junto (um movimento só); no `apoio`, a headline troca; no `transborda`, a coluna encolhe de volta para terminar às 20h; no `fecho`, coração pousa na sessão destacada. Elástico; params: modo, sessoes ([hora, nome]), destaque (índice), tarefas ([ícone, rótulo, tom, hora]). Rótulo 'noite' em #5a4d42 (5,05:1) na calha das horas, sem chip por cima. 9:16: ~58 px/h (coluna 8h–22h entre y ≈ 430 e 1300), a mesma escala na s3 e na s6.",
+        "cues": [
+          "entra",
+          "muda",
+          "apoio",
+          "transborda",
+          "fecho",
+          "sai"
+        ]
+      },
+      "style_frame": {
+        "4x5": "style/png/slide-01.png",
+        "9x16": "style/png/slide-05.png"
+      },
+      "on_screen": "E no fim, sobra *menos* tempo|para aquilo que realmente importa:|atender.",
+      "headline": "E no fim, sobra menos tempo",
+      "icone": "calendar-clock",
+      "entra": "match: as peças que desceram da s2 caem dentro da coluna",
+      "som": "air · clicks · tique · chime",
+      "lead": 0.15,
+      "acrescenta": "o tempo vira o dia dela: as sessões ficam no lugar (50 min é 50 min), mas não sobra nenhum branco entre elas: as tarefas enchem todos os vãos e transbordam para a noite, e a última sai cortada pela borda",
+      "motivo": "as 4 peças viram as 4 tarefas (Confirmar teal · Responder coral · Cobrar âmbar · Anotar lilás)",
+      "composicao": "headline no topo; coluna com px/hora fixo de 8h a 22h; cada sessão no y da sua hora, nos dois modos; 4 sessões sage; em 'menos' cada vão recebe 1–2 tarefas com nome (Confirmar Lucas, Cobrar Marina…); a faixa da noite (20h–22h) escurece de argila clara para argila; o último chip sai cortado pela borda de baixo; 'atender.' grande em --accent sobre o creme, fora da coluna · 9:16: coluna mais alta (mesma escala), headline em y ≈ 320",
+      "poses": [
+        "início: headline 'E no fim, sobra *menos* tempo' + coluna 8h–22h com 4 sessões e vãos brancos",
+        "meio: os vãos enchem de tarefas, sem branco entre 9h e 20h; a noite escurece e recebe tarefas",
+        "fim: a câmera fecha na sessão das 14h; o apoio troca a headline; 'atender.' grande embaixo com coração"
+      ],
+      "params": {
+        "modo": "aperta",
+        "sessoes": [
+          [
+            "09:00",
+            "Marina S."
+          ],
+          [
+            "11:00",
+            "Lucas P."
+          ],
+          [
+            "14:00",
+            "Helena R."
+          ],
+          [
+            "16:00",
+            "Clara A."
+          ]
+        ],
+        "destaque": 2,
+        "tarefas": [
+          [
+            "check-check",
+            "Confirmar Lucas",
+            "t-teal",
+            "10:00"
+          ],
+          [
+            "wallet",
+            "Cobrar Marina",
+            "t-amber",
+            "10:30"
+          ],
+          [
+            "message-circle",
+            "Responder 3 mensagens",
+            "t-coral",
+            "12:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão da Marina",
+            "t-lilac",
+            "12:30"
+          ],
+          [
+            "check-check",
+            "Confirmar Helena",
+            "t-teal",
+            "13:15"
+          ],
+          [
+            "wallet",
+            "Cobrar Clara",
+            "t-amber",
+            "15:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão do Lucas",
+            "t-lilac",
+            "17:00"
+          ],
+          [
+            "message-circle",
+            "Responder",
+            "t-coral",
+            "19:00"
+          ],
+          [
+            "check-check",
+            "Confirmar amanhã",
+            "t-teal",
+            "20:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão da Clara",
+            "t-lilac",
+            "20:45"
+          ],
+          [
+            "wallet",
+            "Cobrar",
+            "t-amber",
+            "21:50"
+          ]
+        ]
+      },
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline inteira + coluna do dia com 4 sessões arejadas",
+          "sfx": "air"
+        },
+        {
+          "cue": "muda",
+          "word": "f3:menos",
+          "offset": -0.08,
+          "o_que": "as 8 tarefas diurnas (Confirmar Lucas … Responder) caem em cascata nos vãos entre as sessões, 1–2 por vão",
+          "sfx": "3 clicks"
+        },
+        {
+          "cue": "apoio",
+          "word": "f3:para",
+          "offset": -0.12,
+          "o_que": "headline troca pelo apoio; horas somem; câmera fecha na sessão das 14h",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "transborda",
+          "word": "f3:importa",
+          "offset": -0.1,
+          "o_que": "as 3 tarefas noturnas descem para depois das 20h e a faixa da noite escurece; \"Cobrar\" (21:50) sai cortado pela base",
+          "sfx": "tique curto"
+        },
+        {
+          "cue": "fecho",
+          "word": "f3:atender",
+          "offset": -0.12,
+          "o_que": "'atender.' grande embaixo, coração com anel",
+          "sfx": "chime suave"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.3,
+          "o_que": "1 tarefa de cada tom se solta e sobe para o centro (Confirmar Lucas teal · Responder 3 mensagens coral · Cobrar Marina âmbar · Anotar sessão da Marina lilás): são as 4 peças da s4",
+          "sfx": "air longo"
+        }
+      ],
+      "tail": 0.8,
+      "sai": "as 4 tarefas sobem e convergem na cauda (0,8 s) para o centro, onde a grade vai se formar (match no motivo)",
+      "fontes": [
+        {
+          "afirmacao": "a administração fica nos intervalos e à noite; tarefas confirmar, responder, cobrar, anotar",
+          "fonte": "AUDIENCE.md > Rotina",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "nomes e horários",
+          "fonte": "elenco fictício, rodapé 'dados ilustrativos'",
+          "status": "ok"
+        }
+      ],
+      "vivo": "a faixa da noite cresce e escurece sem parar desde o `muda`"
+    },
+    {
+      "id": "s4",
+      "ideias": [
+        "i6",
+        "i7"
+      ],
+      "block": "revelação",
+      "intensidade": 4,
+      "vo": [
+        "f4"
+      ],
+      "pause": true,
+      "olhar": "centro → centro-alto",
+      "on_screen": "Feita para terapeutas|A gestão da sua rotina mais|simples|organizada|profissional",
+      "icone": "sparkles",
+      "som": "air · soft impact · piano · pops",
+      "tail": 0.3,
+      "relacao": "mostra",
+      "acrescenta": "os adjetivos viram estados da grade: em 'simples' as peças se alinham, em 'organizada' ganham os rótulos reais do app, em 'profissional' viram o card Atalhos do painel no centro do quadro, e a câmera entra nele",
+      "motivo": "as 4 peças encaixam numa grade 2×2; Mensagens sai para o canto (vai virar o toast) e Sessão rápida (coral, o que ela não tinha) completa a grade",
+      "composicao": "logo no terço de cima (300 px, nada a menos de 150 px) até \"gestão\"; grade 2×2 no centro-baixo com a geometria exata do card Atalhos do painel (ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação); em \"profissional\" a logo e a tagline saem e o card vai para o centro, no enquadramento do 1º quadro da s5 · 9:16: logo em y ≈ 380, grade maior; o card Atalhos é o do painel-inicio em escala (mesmo cabeçalho com ícone, tiles 183×168, \"Sessão rápida\" em 2 linhas): só a escala muda até a s5",
+      "poses": [
+        "início: as tarefas da s3 chegam ao centro; Mensagens se desprende e vai para o canto; silêncio seco; as 3 peças encaixam numa grade frouxa em 'A' com 1 vaga; a logo começa a se desenhar acima",
+        "meio: logo desenhada até 'plataforma'; 'Feita para terapeutas'; em 'terapeutas' as peças param de girar e se aproximam; em 'gestão' a logo sobe e entra 'A gestão da sua rotina mais *simples*'",
+        "fim: Sessão rápida entra por baixo na vaga; rótulos reais; logo e tagline saem; o card Atalhos fica sozinho no centro e a câmera começa a entrar"
+      ],
+      "novo": {
+        "tipo": "revelacao",
+        "id": "grade-estados",
+        "spec": "No `entra` (desde a cauda da s3), as 4 peças chegam ao centro e Mensagens se desprende para o canto superior direito (antes da grade, para o coral não trocar de dono na frente de quem assiste); no `encaixe` (f4:A) as 3 peças restantes assentam numa grade 2×2 frouxa (giros ±6°) com uma vaga, soft impact; a logo (clip-path, 300 px) se desenha acima até `marca`; `assinatura` = 'Feita para terapeutas' com ícone; em `aproxima` (f4:terapeutas) as peças param de girar e se aproximam; em `titulo` a logo sobe e entra a headline; em `p1` (simples) as peças se alinham; em `p2` (organizada) Sessão rápida (zap, coral) entra por baixo na vaga e os rótulos reais aparecem (2 mudanças só); em `p3` (profissional) a logo e a tagline saem e o card branco fecha em volta (geometria idêntica ao card Atalhos do painel-inicio: ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação), centralizado. Sai por câmera contínua: zoom no card. Params: pecas, rotulos, mensagens.",
+        "slots": [
+          "assinatura",
+          "titulo",
+          "p1",
+          "p2",
+          "p3"
+        ],
+        "cues": [
+          "entra",
+          "encaixe",
+          "marca",
+          "assinatura",
+          "aproxima",
+          "titulo",
+          "p1",
+          "p2",
+          "p3"
+        ]
+      },
+      "style_frame": {
+        "4x5": "style/png/slide-02.png",
+        "9x16": "style/png/slide-06.png"
+      },
+      "params": {
+        "pecas": [
+          [
+            "calendar",
+            "Agenda",
+            "t-teal"
+          ],
+          [
+            "contact",
+            "Pacientes",
+            "t-amber"
+          ],
+          [
+            "notebook-pen",
+            "Anotações",
+            "t-lilac"
+          ],
+          [
+            "message-circle",
+            "Mensagens",
+            "t-coral"
+          ]
+        ],
+        "rotulos": [
+          "Agendar",
+          "Novo cliente",
+          "Nova anotação",
+          "Sessão rápida"
+        ],
+        "mensagens": 3
+      },
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "as peças da s3 chegam; Mensagens se desprende para o canto (silêncio de 0,3 s antes do encaixe)",
+          "sfx": "air (cauda)"
+        },
+        {
+          "cue": "encaixe",
+          "word": "f4:A",
+          "offset": -0.05,
+          "o_que": "3 peças numa grade 2×2 frouxa com 1 vaga; a logo começa a se desenhar",
+          "sfx": "soft impact"
+        },
+        {
+          "cue": "marca",
+          "word": "f4:plataforma",
+          "offset": -0.1,
+          "o_que": "a logo termina de se desenhar com pulso leve",
+          "sfx": "piano (acorde da revelação)"
+        },
+        {
+          "cue": "assinatura",
+          "word": "f4:feita",
+          "offset": -0.12,
+          "o_que": "'Feita para terapeutas' com ícone",
+          "sfx": "pop suave"
+        },
+        {
+          "cue": "aproxima",
+          "word": "f4:terapeutas",
+          "offset": -0.1,
+          "o_que": "as peças param de girar e se aproximam",
+          "sfx": "air curto"
+        },
+        {
+          "cue": "titulo",
+          "word": "f4:gestão",
+          "offset": -0.15,
+          "o_que": "logo sobe; headline 'A gestão da sua rotina mais *simples*' inteira",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "p1",
+          "word": "f4:simples",
+          "offset": -0.1,
+          "o_que": "as peças se alinham na grade",
+          "sfx": "click de encaixe"
+        },
+        {
+          "cue": "p2",
+          "word": "f4:organizada",
+          "offset": -0.1,
+          "o_que": "Sessão rápida entra por baixo na vaga; rótulos reais aparecem; ênfase troca para *organizada*",
+          "sfx": "pop de UI"
+        },
+        {
+          "cue": "p3",
+          "word": "f4:profissional",
+          "offset": -0.1,
+          "o_que": "logo e tagline saem; card Atalhos fecha em volta e centraliza; ênfase troca para *profissional*",
+          "sfx": "click suave"
+        }
+      ],
+      "entra": "match: as tarefas que subiram na cauda da s3 chegam ao centro; silêncio seco de 0,3 s antes do encaixe",
+      "sai": "câmera contínua: zoom no card Atalhos (a s5 começa dentro dele)",
+      "fontes": [
+        {
+          "afirmacao": "plataforma feita para terapeutas",
+          "fonte": "título do site kz.app.br",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "atalhos Agendar, Novo cliente, Nova anotação, Sessão rápida",
+          "fonte": "PRODUTO.md > Painel do dia; print do painel 2026-10-07",
+          "status": "ok"
+        }
+      ],
+      "vivo": "grade frouxa com giro lento (±2°) até \"simples\"",
+      "lead": 0.2
+    },
+    {
+      "id": "s5",
+      "ideias": [
+        "i8"
+      ],
+      "block": "produto",
+      "intensidade": 2,
+      "vo": [
+        "f5"
+      ],
+      "relacao": "prova",
+      "composicao": "headline no topo que troca a cada frase; painel recriado (UI do BRAND.md) no centro, câmera 1,3× na próxima sessão e depois na lista; toast no canto de baixo do painel · 9:16: painel maior, headline em y ≈ 300",
+      "olhar": "topo → card da próxima sessão → lista → toast",
+      "use": "produto/painel-inicio",
+      "on_screen": "Boa tarde,|Ana|Tudo pensado para *você*|Acompanhe seus *atendimentos*|Organize seu *dia a dia*",
+      "headline": "Tudo pensado para você",
+      "icone": "layout-dashboard",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0,
+          "o_que": "câmera recua do card Atalhos para o painel; headline inteira",
+          "sfx": "air + 4 clicks suaves"
+        },
+        {
+          "cue": "destaque",
+          "word": "f5:acompanhar",
+          "offset": -0.12,
+          "o_que": "headline troca; câmera e cursor na próxima sessão",
+          "sfx": "swish fino + click"
+        },
+        {
+          "cue": "lista",
+          "word": "f5:organizar",
+          "offset": -0.12,
+          "o_que": "headline troca; câmera desce para a lista do dia",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "feito",
+          "word": "f5:complicação",
+          "offset": -0.15,
+          "o_que": "a peça Mensagens desce do canto e se abre no toast de confirmação",
+          "sfx": "notificação gentil"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.3,
+          "o_que": "câmera parada; corte seco",
+          "sfx": "—"
+        }
+      ],
+      "vivo": "câmera em drift lento (1,00 → 1,03) e contagem regressiva da próxima sessão andando",
+      "som": "clicks · swish · notificação",
+      "lead": 0.15,
+      "tail": 0.3,
+      "fontes": [
+        {
+          "afirmacao": "painel com próxima sessão, sessões do dia e atalhos",
+          "fonte": "PRODUTO.md > Painel do dia + print do painel 2026-10-07",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "confirmação de sessão no WhatsApp",
+          "fonte": "PRODUTO.md > Comunicação/WhatsApp (pronta)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "nomes (Ana, Marina S., Lucas P.…)",
+          "fonte": "elenco fictício, rodapé 'dados ilustrativos'",
+          "status": "ok"
+        }
+      ],
+      "acrescenta": "o painel de verdade: a câmera sai do card Atalhos e mostra a próxima sessão com contagem, as sessões do dia e a peça Mensagens virando a confirmação enviada no WhatsApp",
+      "motivo": "a grade da s4 é o card Atalhos; a peça Mensagens (coral) desce do canto e vira o toast",
+      "poses": [
+        "início: câmera dentro do card Atalhos (continuação da s4) recuando para o painel inteiro; headline 'Tudo pensado para *você*'",
+        "meio: câmera e cursor na próxima sessão ('Iniciar sessão'); headline 'Acompanhe seus *atendimentos*'",
+        "fim: lista do dia; a peça Mensagens desce e vira o toast 'Confirmação enviada no WhatsApp'"
+      ],
+      "entra": "câmera contínua desde a s4 (sem corte)",
+      "sai": "hard cut na batida para o enquadramento exato da s3",
+      "ajuste_bloco": "começar com a câmera dentro do card Atalhos (param `de_atalhos`; o card Atalhos do bloco é a referência de geometria da s4 e s7; zoom só funciona se o painel for HTML vetorial, conferido: é HTML); toast 'Confirmação enviada no WhatsApp' (hoje 'Sessão agendada · lembrete enviado') nascendo da peça Mensagens; elenco param (`elenco`: o de P.elenco, '4 sessões hoje', próxima Helena 14:00 em 15 min; hoje está Marina 15:00 e '3 sessões')",
+      "params": {
+        "elenco": "P.elenco"
+      }
+    },
+    {
+      "id": "s6",
+      "ideias": [
+        "i9"
+      ],
+      "block": "virada",
+      "intensidade": 3,
+      "vo": [
+        "f6"
+      ],
+      "relacao": "contrasta",
+      "motivo": "callback da coluna do dia: o que a s3 apertou, a s6 devolve",
+      "composicao": "idêntica à s3 (mesma coluna, mesma escala, mesmas sessões no mesmo y); chip \"tudo na kz\" no cabeçalho da coluna; coração sobre a sessão das 14h",
+      "olhar": "topo → coluna",
+      "novo": {
+        "tipo": "cena",
+        "id": "dia-do-terapeuta",
+        "slots": [
+          "titulo",
+          "apoio",
+          "palavra"
+        ],
+        "cues": [
+          "entra",
+          "muda",
+          "apoio",
+          "transborda",
+          "fecho",
+          "sai"
+        ],
+        "spec": "mesmo bloco da s3, modo `devolve` (ver o spec da s3: um spec só)"
+      },
+      "style_frame": {
+        "4x5": "style/png/slide-03.png",
+        "9x16": "style/png/slide-07.png"
+      },
+      "on_screen": "Menos tempo *administrando*.|Mais tempo *cuidando* dos seus pacientes.| ",
+      "headline": "Menos tempo administrando.",
+      "icone": "heart",
+      "sai": "hard cut na batida para o cartão final",
+      "som": "air · clicks · whoosh · chime",
+      "lead": 0.2,
+      "tail": 0.35,
+      "acrescenta": "o mesmo dia da s3, no mesmo enquadramento e com as sessões paradas nas mesmas horas: só as tarefas saem (para um chip no cabeçalho), a noite clareia, e os vãos entre as sessões ficam brancos; é o tempo voltando",
+      "poses": [
+        "início: hard cut para a coluna exatamente como no meio da s3 (vãos cheios, noite escura) + 'Menos tempo *administrando*.'",
+        "meio: as tarefas voam para o chip 'tudo na kz' no cabeçalho e a noite clareia junto; as sessões não se mexem",
+        "fim: vãos brancos entre as 4 sessões + 'Mais tempo *cuidando* dos seus pacientes.' + coração na sessão das 14h"
+      ],
+      "params": {
+        "modo": "devolve",
+        "sessoes": [
+          [
+            "09:00",
+            "Marina S."
+          ],
+          [
+            "11:00",
+            "Lucas P."
+          ],
+          [
+            "14:00",
+            "Helena R."
+          ],
+          [
+            "16:00",
+            "Clara A."
+          ]
+        ],
+        "destaque": 2,
+        "tarefas": [
+          [
+            "check-check",
+            "Confirmar Lucas",
+            "t-teal",
+            "10:00"
+          ],
+          [
+            "wallet",
+            "Cobrar Marina",
+            "t-amber",
+            "10:30"
+          ],
+          [
+            "message-circle",
+            "Responder 3 mensagens",
+            "t-coral",
+            "12:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão da Marina",
+            "t-lilac",
+            "12:30"
+          ],
+          [
+            "check-check",
+            "Confirmar Helena",
+            "t-teal",
+            "13:15"
+          ],
+          [
+            "wallet",
+            "Cobrar Clara",
+            "t-amber",
+            "15:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão do Lucas",
+            "t-lilac",
+            "17:00"
+          ],
+          [
+            "message-circle",
+            "Responder",
+            "t-coral",
+            "19:00"
+          ],
+          [
+            "check-check",
+            "Confirmar amanhã",
+            "t-teal",
+            "20:00"
+          ],
+          [
+            "notebook-pen",
+            "Anotar sessão da Clara",
+            "t-lilac",
+            "20:45"
+          ],
+          [
+            "wallet",
+            "Cobrar",
+            "t-amber",
+            "21:50"
+          ]
+        ]
+      },
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline inteira + coluna como no meio da s3 (vãos cheios, noite escura)",
+          "sfx": "— (hard cut)"
+        },
+        {
+          "cue": "muda",
+          "word": "f6:administrando",
+          "offset": -0.1,
+          "o_que": "as tarefas voam para o chip 'tudo na kz' no cabeçalho; a noite clareia junto (um movimento só)",
+          "sfx": "whoosh fino + 3 clicks reversos"
+        },
+        {
+          "cue": "apoio",
+          "word": "f6:Mais",
+          "offset": -0.12,
+          "o_que": "headline troca para 'Mais tempo *cuidando* dos seus pacientes.'",
+          "sfx": "swish fino"
+        },
+        {
+          "cue": "transborda",
+          "word": "f6:cuidando",
+          "offset": -0.1,
+          "o_que": "a coluna encolhe de volta para terminar às 20h",
+          "sfx": "—"
+        },
+        {
+          "cue": "fecho",
+          "word": "f6:pacientes",
+          "offset": -0.1,
+          "o_que": "coração com anel pousa na sessão das 14h",
+          "sfx": "chime suave"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.3,
+          "o_que": "corte seco",
+          "sfx": "—"
+        }
+      ],
+      "entra": "hard cut na batida, mesmo enquadramento do fim da s3 (callback)",
+      "fontes": [
+        {
+          "afirmacao": "confirmar no WhatsApp, cobrar e anotar na kz (chip 'tudo na kz')",
+          "fonte": "PRODUTO.md > Confirmação de sessão no WhatsApp · Cobrança por cliente (controle, não meio de pagamento) · Anotações do cliente",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "nomes e horários",
+          "fonte": "elenco fictício, rodapé 'dados ilustrativos'",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "ideias": [
+        "i10"
+      ],
+      "block": "cartão final",
+      "intensidade": 1,
+      "vo": [
+        "f7"
+      ],
+      "relacao": "mostra",
+      "olhar": "centro",
+      "headline": "Conheça a kz",
+      "lead": 0.15,
+      "acrescenta": "ela vê onde entrar: a aba abre, kz.app.br é digitado e a página carrega o mesmo painel da s5 (logo no cabeçalho, próxima sessão Helena 14:00 e o card Atalhos igual ao da s4)",
+      "motivo": "a página que carrega é o painel com a grade de Atalhos (as peças, enfim no lugar)",
+      "composicao": "janela de navegador no centro; página com cabeçalho (logo kz), saudação, próxima sessão e o card Atalhos 2×2 com rótulos; câmera 1,1× na página depois de carregar; 'Conheça a kz' acima e 'Uma forma *mais simples*' abaixo da janela; botão Ir em --primary com texto --on-primary (#2b2b2b)",
+      "poses": [
+        "início: a aba abre vazia com o cursor na barra; 'Conheça a kz' em cima",
+        "meio: 'kz.app.br' digitado; o cursor vai ao Ir",
+        "fim: a página carrega o painel; 'Uma forma *mais simples*' embaixo; cauda de 3 s"
+      ],
+      "novo": {
+        "tipo": "cta",
+        "id": "navegador",
+        "spec": "Converter library/motion/cta/navegador (navegador.js/css, origem A-opus s9) em bloco: slots titulo|url|frase; cues entra (aba abre), digita (URL digitada; foley de teclado), clique (cursor clica em Ir), carrega (a página carrega: param `pagina` = print do painel ou HTML com logo + frase); cauda de 2–4 s sem fala.",
+        "slots": [
+          "titulo",
+          "url",
+          "frase"
+        ],
+        "cues": [
+          "entra",
+          "digita",
+          "clique",
+          "carregando",
+          "carrega",
+          "fecha"
+        ]
+      },
+      "style_frame": {
+        "4x5": "style/png/slide-04.png",
+        "9x16": "style/png/slide-08.png"
+      },
+      "on_screen": "Conheça a kz|kz.app.br|Uma forma *mais simples*",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "a aba abre vazia; 'Conheça a kz' entra inteiro",
+          "sfx": "pop"
+        },
+        {
+          "cue": "digita",
+          "word": "f7:Conheça",
+          "offset": 0.3,
+          "o_que": "'kz.app.br' é digitado",
+          "sfx": "teclado (foley)"
+        },
+        {
+          "cue": "clique",
+          "word": "f7:descubra",
+          "offset": -0.1,
+          "o_que": "o cursor clica em Ir",
+          "sfx": "click de mouse"
+        },
+        {
+          "cue": "carregando",
+          "word": "f7:simples",
+          "offset": -0.1,
+          "o_que": "barra de progresso corre, o esqueleto do painel aparece e a frase 'Uma forma *mais simples*' entra embaixo da janela",
+          "sfx": "tique suave"
+        },
+        {
+          "cue": "carrega",
+          "word": "f7:profissional",
+          "offset": -0.1,
+          "o_que": "a página carrega o painel (cabeçalho com a logo, próxima sessão, card Atalhos)",
+          "sfx": "ding gentil"
+        },
+        {
+          "cue": "fecha",
+          "before_end": 1.2,
+          "o_que": "câmera 1,1× na página; a logo do cabeçalho dá um pulso leve",
+          "sfx": "air"
+        }
+      ],
+      "vivo": "cursor pisca na barra; página com drift lento",
+      "tail": 3,
+      "entra": "hard cut na batida",
+      "sai": "fim: a trilha resolve na cauda de 3 s",
+      "som": "pop · teclado · click · ding",
+      "fontes": [
+        {
+          "afirmacao": "kz.app.br",
+          "fonte": "site da kz",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "o painel na página",
+          "fonte": "print do painel 2026-10-07",
+          "status": "ok"
+        }
+      ]
+    }
+  ],
+  "revisao": [
+    {
+      "rodada": 1,
+      "por": "agent:revisor (opus)",
+      "nota": "21/36",
+      "arquivo": "revisao-plano-1.md",
+      "aplicado": "peças com identidade fixa nos tons reais; s2 com a mesma paciente e a linha que se rompe; s3 com as tarefas nos intervalos e na noite (sessões fixas); s4 grade-estados (sem pílulas, câmera contínua para a s5); s5→s6 hard cut; s6 gestos espalhados e fonte do chip; s7 navegador com cauda de 3 s; s1 peças apagadas desde o 1º quadro",
+      "recusado": "'style frames inexistentes': foram gerados enquanto a revisão rodava · 'Mensagens pousa como atalho': no painel real o atalho coral é Sessão rápida, então Mensagens vira o toast e Sessão rápida entra na grade como o que faltava"
+    },
+    {
+      "rodada": 2,
+      "por": "agent:revisor (opus)",
+      "nota": "25/36",
+      "arquivo": "revisao-plano-2.md",
+      "aplicado": "um dia e uma escala (elenco único em P.elenco); s3 sem branco entre as sessões, noite com tarefas e chip cortado; s6 com sessões paradas e chip no cabeçalho; card Atalhos com a geometria do painel na s4/s5/s7; Mensagens sai antes da grade; s4 termina no card centralizado + gesto em \"terapeutas\"; style frames 9:16; s7 com página completa e Ir em #2b2b2b; \"dados ilustrativos\" em --muted; s2 com contradição legível; s3/s4 com vivo",
+      "recusado": "quadro 0 da s1: não dá para gerar antes do ajuste do bloco (fica para depois do aval; o plano descreve o detalhe concreto por peça)"
+    },
+    {
+      "rodada": 3,
+      "por": "agent:revisor (opus)",
+      "nota": "28/36 (passa)",
+      "arquivo": "revisao-plano-3.md",
+      "aplicado": "área segura do 9:16 (coluna a ~58 px/h, \"atender.\" até y 1440, janela da s7 em x 150–930, coração e balão para dentro); contraste (\"noite\" #5a4d42 na calha; badge #2b2b2b sobre --primary); spec da s3/s6 unificado e gestos iguais aos params (8 diurnas, 3 noturnas, 1 de cada tom sobe); chip às 19:00 e Cobrar às 21:50 cortado; card Atalhos = o do painel-inicio em escala (s4, s7); frase da s7 no cue carregando",
+      "recusado": "cauda da s6 em 0,7 s: deixava 0,85 s de silêncio antes da s7 (limite 0,5 s, REGRAS §2; o check acusa); fica 0,35 s e o respiro vem da cauda de 3 s da s7"
+    }
+  ],
+  "status": "v3.1 (depois da revisão 3: passa com 28/36; bloqueantes corrigidos) · aguardando aval",
+  "elenco": {
+    "dia": "quarta-feira, 4 sessões hoje",
+    "sessoes": [
+      [
+        "09:00",
+        "Marina S."
+      ],
+      [
+        "11:00",
+        "Lucas P."
+      ],
+      [
+        "14:00",
+        "Helena R."
+      ],
+      [
+        "16:00",
+        "Clara A."
+      ]
+    ],
+    "proxima": "14:00 · Helena R. · em 15 min",
+    "terapeuta": "Ana",
+    "nota": "fictício, rodapé \"dados ilustrativos\" em --muted (#5a5a5a; --ui-muted sobre o creme reprova: 2,79:1)"
+  }
+}

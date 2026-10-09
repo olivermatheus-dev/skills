@@ -21,12 +21,12 @@ Régua: estúdio premium de lançamento de software. A pergunta de cada cena é 
 ## Sempre ler
 - `companies/<slug>/brand/BRAND.md` (proibições = regra dura) e `context/BUSINESS.md` + `context/PRODUTO.md` (o que é verdade).
 - `AUDIENCE.md` só para o gancho (a persona tem que se reconhecer em 2 s).
-- `references/gramatica.md` (tipo de ideia → tratamento) e `knowledge/video/repertorio.md` (soluções já aprovadas pelo Oliver: **reuse antes de inventar**).
+- `references/gramatica.md` (tipo de ideia → tratamento) e `knowledge/video/repertorio.md` (soluções já aprovadas pelo Oliver: **reuse antes de inventar**, mas como ponto de partida, não como default: o repertório ainda é de poucos vídeos e puxa para repetir o último; se a solução aprovada não serve ao conceito novo, invente).
 - Receita `fmt-*`, se houver. Precedência: **BRAND.md > Padrões do Oliver (skill `video`) > fmt-* > esta skill > knowledge**.
 - `node tools/video/plano.mjs blocos <pasta|slug>` (blocos existentes, 1 linha cada; nunca abra os `bloco.json` um a um).
 
 ## Saída
-Na pasta do vídeo (`companies/<slug>/contents/AAAA-MM-DD-<nome>/`):
+Numa pasta **nova e só sua** (`companies/<slug>/contents/AAAA-MM-DD-<nome>/`). Antes de criar, confira se outra sessão não está no mesmo pedido (`git status` + lista de sessões): duas sessões na mesma pasta sobrescrevem `cenas.json` uma da outra (aconteceu na 047 B). Pasta com arquivos que você não criou → pare e pergunte.
 ```
 cenas.json            ← plano em formato de máquina (contrato: references/cenas-json.md); vira a timeline.json
 plano.md              ← o mesmo plano para o Oliver ler (molde: references/molde-plano.md)
@@ -40,7 +40,7 @@ storyboard-<fmt>.png  ← 1 quadro por cena (plano.mjs storyboard)
 ### A. Entrada
 Aceite qualquer uma e normalize em `vo[]` (falas com `id` e `text` exato):
 - **roteiro** (`roteiro.md` do `ig-post`/roteirista ou colado): as falas são do roteiro. As "cenas" que o roteiro sugere são **pista, não decisão**: quem decide o visual é este plano.
-- **transcrição** de áudio/vídeo já gravado (com tempos do Whisper ou não): as falas são a transcrição limpa (sem "é…", repetições); guarde os tempos em `entrada.tempos` se vierem. A voz já existe: o plano se encaixa nela.
+- **transcrição** de áudio/vídeo já gravado (com tempos do Whisper ou não): as falas são a transcrição limpa (sem "é…", repetições); guarde os tempos em `entrada.tempos` se vierem. A voz já existe: o plano se encaixa nela. Copie `file/start/end/length/words` de cada fala para o `vo[]` do `cenas.json`: o `check` passa a medir com os tempos reais, e o `timeline` os leva junto. Marque onde a voz respira (suspiro, pausa antes da revelação): esses buracos viram gesto ou `pause`.
 - **tema** ou pedido solto: chame primeiro o `roteirista` (ou a skill `ig-post`) para o roteiro, e só então planeje.
 - **Sem locução** (só trilha + texto): as "falas" são os textos de tela, com `len` por cena e BPM em `musica.bpm`.
 Confira o tamanho: palavras ÷ 2,7 ≈ segundos de locução. Não cabe na duração → corte texto agora, com o Oliver, não depois.
@@ -52,7 +52,8 @@ Uma ideia sem `entender` claro não vira cena: volte ao roteiro.
 
 ### C. Conceito visual
 Proponha 2–3 **mundos** (médio/alto), cada um em 1 linha, e recomende 1. Um conceito tem:
-- **motivo**: o objeto ou forma que atravessa o vídeo e **evolui** com a história (ex.: os 4 fragmentos da rotina que se juntam e viram o painel da kz). É o que faz parecer um filme, e não slides.
+- **motivo**: o objeto ou forma que atravessa o vídeo e **evolui** com a história (ex.: os 4 fragmentos da rotina que se juntam e viram o painel da kz). É o que faz parecer um filme, e não slides. O motivo tem **identidade fixa** (mesma quantidade, cor e ícone de ponta a ponta; se uma peça sai, a saída é um gesto com destino) e, se imita o produto, usa os tons e ícones reais dele.
+- **palavras espaciais e de quantidade da fala** ("de um lado… de outro", "vários lugares", "num só") são o melhor gancho para o conceito: o mundo escolhido deve dar forma a elas.
 - **transição**: a regra de passagem (1–2 tipos no vídeo inteiro; match cut no motivo > hard cut > efeito), conforme `knowledge/video/montagem.md`.
 - **curva de intensidade** (0–4 por cena, sobe e desce; nunca 4 contínuo) e a **paleta por cena** (fundo, ênfase) dentro do `BRAND.md`.
 - **o que não vamos fazer**: os clichês do tema (`montagem.md` §5 + proibições da marca).
@@ -62,10 +63,10 @@ Uma cena por ideia, ou por grupo de ideias que dividem o mesmo visual. Preencha 
 1. **Relação com a fala**: `mostra` (a coisa citada, de verdade: a tela) · `complementa` (algo que a fala não diz) · `contrasta` (ironia, antes × depois) · `prova` (dado, UI real) · `literal` (só repete a palavra; **no máximo 30% das cenas**). E `acrescenta`: 1 frase com o que a imagem diz que a fala não diz.
 2. **Composição** no 4:5 e no 9:16 (onde fica cada coisa, hierarquia, área segura) e **olhar** (região do ponto de atenção; a próxima cena começa ali ou leva o olho de lá).
 3. **Poses-chave**: início (o 1º quadro já tem conteúdo) · meio · fim (assentado). Três frases que alguém desenharia.
-4. **Gestos**: cada um preso a uma palavra (`word: "f2:WhatsApp"`, até ~4 quadros antes) ou instante, com `o_que` acontece e o SFX. A palavra dispara **gesto**; o texto entra inteiro (Padrões do Oliver). No máximo ~1,5 s sem algo novo; deriva ou ambiente que segura a tela vai em `vivo`.
+4. **Gestos**: cada um preso a uma palavra **falada** (`word: "f2:WhatsApp"`; compara com `say` quando existe, ex.: kz → "cá-zê"; 2ª ocorrência: `"f5:dia#2"`; até ~4 quadros antes) ou instante, com `o_que` acontece e o SFX. A palavra dispara **gesto**; o texto entra inteiro (Padrões do Oliver). No máximo ~1,5 s sem algo novo; deriva ou ambiente que segura a tela vai em `vivo`.
 5. **Entra / sai**: como a cena nasce da anterior e passa para a próxima (match no motivo, corte na batida, J-cut do som…). Nunca "fade".
 6. **Headline, ícone (Lucide) e texto de tela** (`on_screen`, partes em `|` na ordem dos slots do bloco, `*ênfase*`), ≤ 6 palavras por momento.
-7. **Bloco**: primeiro o `repertorio.md` e a lista do `plano.mjs blocos`. Existe → `use` + `on_screen` + `params`. Não existe → `novo` com `spec` (o que faz, slots, cues, params) e um **style frame** estático em `style/`. Prefira ajustar params de um bloco a criar outro.
+7. **Bloco**: primeiro o `repertorio.md` e a lista do `plano.mjs blocos`. Existe → `use` + `on_screen` + `params`. Existe, mas precisa de param ou detalhe novo → `use` + `ajuste_bloco` (o que muda; feito depois do aval). Não existe → `novo` com `spec` (o que faz, slots, cues, params) e um **style frame** estático em `style/`. Prefira ajustar params de um bloco a criar outro.
 8. **Fontes**: toda funcionalidade, número ou afirmação mostrada tem fonte (`PRODUTO.md`, LP, print). Sem fonte não entra; dado de demo = elenco fictício do `BRAND.md`, marcado ilustrativo.
 
 Rode `node tools/video/plano.mjs check <pasta>` até **zero ✗**. Os ⚠ vão para a revisão olhar.
@@ -77,8 +78,8 @@ Você decide: aplique o que melhora, registre no relatório o que recusou e **po
 ### F. Storyboard (médio e alto)
 O Oliver aprova imagens:
 1. `node tools/video/plano.mjs timeline <pasta>` → `timeline.json` (esqueleto).
-2. Voz de rascunho grátis: `node tools/video-kit/scripts/tts.mjs <pasta>` (mede e encaixa; sem locução, as cenas usam `len`).
-3. `node tools/video-kit/scripts/produce.mjs <pasta> --build-only`. Cena com bloco novo entra como `rascunho/cena-nova` (mostra os textos e o `spec`); faça o style frame estático dela (HTML com o `brand.css` real → PNG em `style/`, caminho em `style_frame`). Não escreva o bloco novo antes do aval.
+2. Voz de rascunho grátis: `node tools/video-kit/scripts/tts.mjs <pasta>` (mede e encaixa; sem locução, as cenas usam `len`). **Com voz já gravada, não rode o `tts.mjs`** (ele grava a voz de rascunho por cima): os tempos já vieram do `cenas.json`; se os wav estiverem soltos, encaixe com `node tools/video-kit/scripts/fit-vo.mjs <pasta> --dir <pasta-dos-wav>`.
+3. `node tools/video-kit/scripts/produce.mjs <pasta> --build-only`. Cena com bloco novo entra como `rascunho/cena-nova` (mostra os textos e o `spec`); faça o style frame estático dela: `style/gerar.mjs` monta um `style-frames.html` com o `brand.css` real (`@import` relativo), `base.css` da marca e ícones do `tools/icon.mjs`, uma `<section class="slide">` por quadro (1080×1350), e `node .claude/skills/carousel/scripts/render.mjs <pasta>/style/style-frames.html` exporta `style/png/slide-NN.png` (caminho em `style_frame`). Modelo: `companies/kz/contents/2026-10-08-apresentacao-kz-pecas/style/gerar.mjs`. Confira os quadros você mesmo (lado a lado) antes do storyboard. Não escreva o bloco novo antes do aval.
 4. `node tools/video/plano.mjs storyboard <pasta>` → `storyboard-<fmt>.png` (1 quadro assentado por cena, na ordem; cena com `style_frame` usa o PNG dele no lugar do rascunho). O HyperFrames pede **Node 22**: se o `node` do terminal for mais velho, rode com `fnm exec --using=22 node …`. Olhe a folha você primeiro (texto cortado, cena vazia, cor fora da marca) e conserte.
 Exemplo funcionando (3 cenas, 1 bloco novo): `companies/kz/contents/2026-10-08-teste-plano-de-cenas/`.
 

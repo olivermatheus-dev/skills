@@ -1,0 +1,47 @@
+# Revisão crítica do plano · rodada 2
+
+> Agente `revisor` (Opus), 2026-10-08, sobre o `cenas.json` v2 "As peças da rotina", o `check-2.txt` e os storyboards 4:5 e 9:16 (s3, s4, s6 e s7 em style frame; s1, s2 e s5 ainda no estado antigo, julgados pelo `ajuste_bloco`). Contrastes medidos com `node tools/contrast.mjs`.
+
+## 1. Notas
+
+| # | critério | nota | evidência | correção concreta |
+|---|---|---|---|---|
+| 1 | Teste do mudo | 2 | s3: sem a headline, o quadro parece uma agenda **bem organizada** (4 sessões, 2 chips com folga, coração na sessão): é a cara do produto, não da dor. s6: as sessões mudam de lugar, então não se lê "o mesmo dia, devolvido" | s3 com os intervalos cheios de ponta a ponta (correção 2); s6 com as sessões paradas nas mesmas horas e os vãos ficando vazios |
+| 2 | Acréscimo | 2 | s3 `acrescenta` diz "as tarefas enchem todos os intervalos": no quadro, 2 dos 4 vãos têm chip e o de 16h–18h está vazio. s7 diz "carrega o mesmo painel da s5": carrega uma fileira 1×4 de tiles sem rótulo, outro layout. s2: os dados "não batem" no papel, mas na tela estão só **incompletos** ("tel. —", "sessão 12?"), não se contradizem | s3: encher todos os vãos. s7: o mesmo card Atalhos 2×2 com rótulos. s2: contradição legível (Agenda "Qui 14h · Marina S." × Anotações "Marina: remarcou p/ sexta?") |
+| 3 | Literal | 2 | s2: card Agenda / Pacientes / Anotações nas palavras agenda / pacientes / anotações, mesmo com o conteúdo novo. As headlines repetirem a fala é padrão do Oliver; aqui a nota vale para a imagem | aceitável se a contradição da s2 for legível; sem isso, a s2 continua sendo a v03 |
+| 4 | Teste do template | 2 | s4 no fim = logo + tagline + headline + card de UI embaixo: é o hero de uma landing page. Os estados `p1` (alinhar = "simples") e `p3` (card fecha = "profissional") só se leem com a palavra | a s4 termina na grade, não no hero: em `p3` a logo e "Feita para terapeutas" saem e o card Atalhos ocupa o centro (já preparando o zoom da s5) |
+| 5 | Fio condutor | 3 | as peças tingidas atravessam s1→s7 e resolvem na s4 (grade) e na s6 (chip). É o maior ganho sobre a v03. Ressalva: o coral muda de dono na s4 (Mensagens sai e Sessão rápida entra, as duas coral na mesma tela) | correção 3 |
+| 6 | Conexão | 2 | s4→s5: a grade da s4 (ícone ao lado do rótulo, ordem Agendar · Novo cliente · Nova anotação · Sessão rápida, card largo) não é o card Atalhos da s5 (ícone em cima, Sessão rápida primeiro, card estreito no canto): o zoom "contínuo" vai pular. s3→s6: o callback depende do mesmo enquadramento, e as sessões estão em y diferentes. 3 tipos de ligação (match, câmera contínua, hard cut) contra a regra de ≤ 2 | geometria única para o card Atalhos nas 3 cenas (correção 3); tratar a câmera contínua como match no motivo e registrar isso em `conceito.transicao` |
+| 7 | Gancho | 2 | o 1º quadro (selo + "Você é terapeuta?" + 4 peças a 30%) não aparece no storyboard. A persona se reconhece pelo texto; as peças apagadas são genéricas (rótulo + ícone, nenhum detalhe da rotina dela) | gerar o quadro 0 da s1; dar a cada peça apagada 1 detalhe concreto (Mensagens com "3", Agenda com "Qui 14h") já no 1º quadro |
+| 8 | Ritmo e curva | 2 | check: s4 com ~2,6 s sem gesto (entre "feita" e "gestão") e s3 com ~1,5 s; nenhuma das duas tem `vivo`. s6 concentra o payoff do vídeo inteiro (tarefas saem, coluna volta, noite clareia, coração) em 3,9 s, 4 mudanças a ~0,7 s uma da outra. Curva 3-2-2-4-2-3-1 ok | s3 `vivo`: a noite cresce sem parar desde `muda`. s4: gesto em "f4:terapeutas" (as peças param de girar e se aproximam) + `vivo` na grade frouxa. s6: a noite clareia junto com `muda` (um movimento só) e a cauda vai de 0,4 para 0,7 s |
+| 9 | Clareza | 2 | s4 é o quadro mais cheio: logo, "Feita para terapeutas", headline de 7 palavras, "ATALHOS", 4 rótulos e o badge "3": ~17 palavras e 3 pontos de coral. s6: o chip "tudo na kz" está na linha das 20h e se lê como **mais uma tarefa às 20h** | s4: item 4. s6: chip fora da escala de horas (cabeçalho da coluna ou abaixo dela), nunca numa linha de hora |
+| 10 | Verdade e marca | 2 | **integridade do dado**: s3 põe 09:00 na linha "8h" e 11:00 na "12h"; s6 põe 14:00 na "12h" e 16:00 na "14h". Elenco inconsistente: s3/s6 = 4 sessões, Marina 09:00, Helena 14:00; s5 = "3 sessões hoje", Marina 15:00 "em 15 min", Helena 17:30; s7 = Helena 14:00 "em 25 min". "Ir" do navegador branco sobre coral = 2,77:1, e não é tela do produto (a exceção do BRAND.md não vale). Fontes: todas presentes | correção 1; "Ir" em `--on-primary` #2b2b2b; conferir a cor de "dados ilustrativos" (se for `--ui-muted` sobre creme = 2,79:1, reprova) |
+| 11 | Construível | 2 | o storyboard 9:16 repete os style frames 4:5 de s3, s4, s6 e s7 (360×450 dentro da célula 9:16): a coluna "mais alta" e a logo em y ≈ 380 não foram provadas. O ajuste da s5 (`de_atalhos`) é o mais arriscado: o card Atalhos ocupa ~40% da largura do painel, então o 1º quadro da s5 é o painel a ~2,5×, e isso só fica nítido se o painel for HTML vetorial, nunca o print. Spec da s4 com 8 cues e troca de peça em `p2` | style frames 9:16 de s3, s4, s6 e s7 antes do aval; confirmar que o painel-inicio é HTML; `p2` com no máximo 2 mudanças |
+| 12 | Beleza | 2 | s3 está no nível de estúdio. s6: metade de baixo da coluna vazia (16h–20h) + chip na base = desequilíbrio; o vazio deveria ser o respiro entre as sessões, mas ficou num fim de dia sem sessão nenhuma. s7: metade de baixo da janela vazia; logo só no favicon. 9:16 de s1 e s5: 35–40% do quadro vazio | s6 se resolve com a correção 1 (vãos entre sessões, não buraco no fim do dia). s7: página com cabeçalho e logo + card Atalhos, câmera 1,1× para encher a janela |
+
+## 2. Total
+**25 / 36.** Eliminatórios em 0: nenhum. **Não passa** (precisa de ≥ 27) → rodada 3.
+
+Bloqueantes (voltam ao autor independentemente da nota):
+- **s3 e s6**: horas das sessões fora da escala da coluna (dado errado na tela).
+- **s7**: "Ir" branco sobre coral, 2,77:1.
+
+## 3. Correções que faltam (ordem de impacto)
+1. **Um dia só, uma escala só (s3, s5, s6, s7).** A coluna tem px/hora fixo de 8h a 22h, e cada sessão fica no y da sua hora nos dois modos. Na s6 as sessões **não se movem**: as tarefas saem e os vãos entre elas ficam vazios. O elenco é o mesmo nas 4 cenas: 09:00 Marina · 11:00 Lucas · 14:00 Helena · 16:00 Clara, "4 sessões hoje", próxima = Helena 14:00 "em 15 min" (s5 e s7 iguais). É isso que faz o callback funcionar.
+2. **A s3 tem que apertar de verdade.** Nenhum branco entre 9h e 20h: cada vão recebe 1–2 chips (tarefas repetidas nos 4 tons: "Confirmar Lucas", "Cobrar Marina"…). A faixa da noite escurece de argila clara para argila, e o último chip sai cortado pela borda de baixo da coluna. Na s6, o chip "tudo na kz" sai da escala de horas e vai para o cabeçalho da coluna.
+3. **Card Atalhos com a mesma geometria na s4, s5 e s7.** Usar o layout do painel real (ícone em cima, ordem Sessão rápida · Agendar / Novo cliente · Nova anotação) na grade final da s4 e na página da s7. Na s4, Mensagens sai para o canto já no `encaixe`, antes de a grade se formar, e Sessão rápida entra em `p2` por baixo, com o ícone próprio. Assim o coral não troca de dono na frente do espectador, e `p2` fica com 2 mudanças (rótulos + ênfase).
+4. **A s4 termina na grade, não no hero.** Em `p3`, a logo e "Feita para terapeutas" saem e o card Atalhos vai para o centro, já no enquadramento do 1º quadro da s5. O buraco de 2,6 s se preenche com um gesto em "f4:terapeutas" (as peças param de girar e se aproximam).
+5. **Style frames 9:16 de s3, s4, s6 e s7** (hoje são cópias do 4:5) e o quadro 0 da s1. Sem eles, o critério 11 não tem como subir.
+6. **A s6 respira e a s7 fecha o arco.** s6: a noite clareia junto com `muda`, e a cauda vai de 0,4 para 0,7 s. s7: página com cabeçalho e logo + o card Atalhos com rótulos; "Ir" em #2b2b2b.
+
+## 4. v03 × este plano (storyboards)
+- **Ganhou:** um fio que a v03 não tinha. As peças coloridas viram tarefas, atalhos e chip, e a s6 é a consequência visível da s3, não um texto riscado.
+- **Ganhou:** a s3 trocou o relógio literal pelo dia dela, e a s4 trocou as pílulas de adjetivo pelos atalhos reais do produto.
+- **Perdeu:** leitura instantânea e respiro. Na v03, s3, s6 e s7 eram uma ideia num elemento grande; agora são UIs densas com texto pequeno, e o pico emocional da s6 ("Mais tempo *cuidando*" gigante com coração) virou uma agenda.
+- **Perdeu:** a marca no fim. A v03 fechava com a logo grande e a URL num botão; aqui a logo fica só no favicon e a URL na barra de endereço.
+- **Igual:** s1, s2 e s5 ainda são a v03 até os ajustes, e o da s5 (zoom a partir do card Atalhos) é o mais arriscado do plano.
+
+## 5. Calibragem da rubrica / skill
+1. **Integridade do dado em UI fictícia** não está na rubrica: a escala de horas, as contagens ("3 sessões hoje") e o elenco precisam bater entre as cenas. Pôr no critério 10, com referência a `knowledge/video/texto-e-dados.md`; nesta rodada só apareceu porque o storyboard estava aberto.
+2. **"Nos 2 formatos" não é verificado.** O storyboard 9:16 reaproveita em silêncio os style frames 4:5. O `plano.mjs check` (ou o gerador do storyboard) deveria avisar quando a proporção do style frame não é a do formato.
+3. **O critério 6 ("≤ 2 tipos de transição") é ambíguo** com a gramática, que separa câmera contínua de match no motivo. A rubrica precisa dizer se câmera contínua conta como tipo próprio; do jeito que está, a nota do plano depende de quem lê.
