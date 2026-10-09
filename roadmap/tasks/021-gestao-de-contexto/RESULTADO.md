@@ -1,7 +1,7 @@
 # 021 — Medição: tarefa real lendo só o `context:` (2026-10-08)
 
 **Tarefa:** T-0012 (PNG do carrossel da origin story, kz), rodada como rascunho pelo agente `designer` (Opus 5.5), começando por `node tools/board.mjs pacote kz T-0012`.
-**Saída:** 10 PNG em `companies/kz/contents/2026-10-07-origin-story/png/`, tarefa em `review`.
+**Saída:** 10 PNG em `companies/kz/contents/C0001-origin-story/png/`, tarefa em `review`.
 
 ## Custo da execução (transcript do subagente)
 | item | tokens | US$ |

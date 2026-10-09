@@ -4,7 +4,7 @@
 > Pesquisas: `pesquisa-skills.md` (skills e repositórios) · `pesquisa-direcao-de-arte.md` (regras com números).
 > Status: **proposta, aguardando o aval do Oliver nas decisões do fim.**
 
-## 1. Diagnóstico (origin story, 10 slides, `contents/2026-10-07-origin-story/png/`)
+## 1. Diagnóstico (origin story, 10 slides, `contents/C0001-origin-story/png/`)
 | o que se vê | causa na skill |
 |---|---|
 | 9 de 10 slides com o **mesmo layout** (bloco de texto à esquerda, centralizado na vertical) | `template.html`: todo `.slide` tem `justify-content:center`; os 8 "tipos" trocam o conteúdo, não a composição |
@@ -85,3 +85,11 @@ Respondidas em 2026-10-09:
 ## Log
 - 2026-10-09 · diagnóstico do origin story + 2 pesquisas (Sonnet) + esta proposta.
 - 2026-10-09 · A–D construídos (Opus): skill `plano-de-slides` (slides.json + plano.md + wireframes; exemplo em `references/exemplo/`) · `carousel` reescrita (`sistema.css`, 12 famílias em `references/layouts/` + `INDEX.md`, `catalogo.html` → `references/catalogo/png` + `contato.png`, `base.html`; `template.html` e os `layout.html` dos fmt-* saíram) · `render.mjs` (--escala, fontes, contato com grade do perfil) · `scripts/catalogo.mjs` (catálogo + `--expandir` tokens) · `tools/carrossel/check.mjs` (lint + contraste via `contraste-pagina.mjs`) · `tools/carrossel/plano.mjs` (check + wireframes) · `rubrica.md` (10 critérios com peso, P0–P3, prompts do crítico e do implementador, ciclo de 3) · designer/revisor/orquestrar/ig-post (Tópicos)/fmt-* de imagem/CLAUDE.md. Próximo: onda 2 (origin story pelo fluxo novo).
+- 2026-10-09 · F (paleta tonal, `core/tonal.ts` + Kit de marca) e G (`tools/contrast.mjs --html`) feitos; serifa da kz Fraunces → **Newsreader** (pedido do Oliver; folha `fontes-serifadas.png`). Commits `1775df2`, `5faa53e`.
+- 2026-10-09 · **Onda 2 (prova) feita** em `companies/kz/contents/C0001-origin-story/` (migrada para o padrão de ID): plano (Opus) → v1 → crítica-1 **2,35** → v2 (Sonnet) **2,30** (não subiu) → v3 (Opus, mexeu no plano do miolo) **2,65** = melhor, promovida à raiz (`carrossel.html`, `png/`, `contato.png`). Não passou no corte 3,0 em 3 rodadas → vai ao Oliver. Antiga em `v1-antigo/`; lado a lado: `comparacao-v1-antigo-x-v3.png`. Pendências da crítica-3 (P1): s7 a "tela só" tem de ser o maior objeto; s9 vazio (título junto da assinatura). Aprendizados viraram itens na `rubrica.md` > Erros.
+
+## Próximos passos (propostos)
+1. **Lint:** posição da âncora (topo/meio/baixo) repetida em 3 slides próximos = ⚠; fundos vizinhos com diferença de luminância < limiar = ⚠ (miolo pálido).
+2. **Plano:** regra "o motivo aparece em ≥ 70% dos slides ou tem motivo escrito para faltar" e "o destino do motivo é o maior objeto do slide da virada"; crítica do PLANO (wireframes) por um crítico isolado antes de produzir — as notas só subiram quando o plano mudou.
+3. **Calibrar a rubrica** com o julgamento do Oliver sobre a v3 (ele acha 2,65 justo? qual slide incomoda?).
+4. Assinatura do s9 e foto: dependem do nome público (T-0009).

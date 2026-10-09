@@ -9,7 +9,7 @@ due:
 depends: [T-0012]
 parent: T-0009
 links: []
-context: [context/VOICE.md, context/AUDIENCE.md#Linguagem literal, context/BUSINESS.md#Origem, contents/2026-10-07-origin-story/roteiro.md, contents/2026-10-07-origin-story/lp-secao-origem.md]
+context: [context/VOICE.md, context/AUDIENCE.md#Linguagem literal, context/BUSINESS.md#Origem, contents/C0001-origin-story/roteiro.md, contents/C0001-origin-story/lp-secao-origem.md]
 ---
 Revisar roteiro, legenda, seção da LP e PNG da origin story antes de ir para o Oliver.
 

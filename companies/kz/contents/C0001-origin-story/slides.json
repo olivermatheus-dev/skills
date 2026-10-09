@@ -1,0 +1,310 @@
+{
+  "versao": 1,
+  "peca": "C0001-origin-story",
+  "empresa": "kz",
+  "formato": "1080x1350",
+  "leitura": "carta de fundador em 10 slides: voz de par para a terapeuta que atende sozinha, editorial e calma, tipo grande em grafite sobre creme e tons do coral, as 5 ferramentas como único objeto, coral só em pontos",
+  "motivo": {
+    "o_que": "as 5 ferramentas abertas (Agenda, WhatsApp, Meet, Caderno, Site): ícone Lucide no coral + nome curto, sempre nesta ordem",
+    "evolucao": "s1 entram como 5 abas fixadas (só ícone) no alto → s2 viram 5 marcas numa régua → s3 caem em pilha torta → s4–s6 somem (o peso vira frase) → s7 os 5 fios convergem para uma tela só, que mostra as 5 numa fileira (as abas do s1 agora dentro de uma tela) com a logo só como assinatura → s8 a mesma fileira, pequena, abre a ficha 'um sistema só' → s10 a pergunta conta quantas você abre (1 a 5+)",
+    "identidade": "5 itens, mesmos 5 ícones Lucide no coral, mesma ordem, nome curto em Montserrat 600, raio 10–16 da marca"
+  },
+  "sistema": {
+    "fundos": [
+      "creme",
+      "branco",
+      "tom-50",
+      "tom-100",
+      "tom-200",
+      "tom-300",
+      "tom-800",
+      "tom-900"
+    ],
+    "enfase": [
+      "cor",
+      "serifa"
+    ],
+    "dials": {
+      "variancia": 6,
+      "densidade": 4
+    }
+  },
+  "slides": [
+    {
+      "n": 1,
+      "papel": "gancho",
+      "familia": "capa-tipografica",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "'Eu também queria só atender.' em display 136, ancorado no terço de baixo",
+      "texto": {
+        "ancora": "Eu também queria só atender.",
+        "apoio": "Por que um terapeuta construiu a kz",
+        "meta": "arraste"
+      },
+      "hierarquia": "âncora 152 (3 linhas) · apoio 48 · meta 24",
+      "camadas": [
+        {
+          "o_que": "faixa de 5 abas fixadas (só o ícone, a 1ª ativa em branco) sobre uma barra de 2 px que sangra dos dois lados",
+          "funcao": "apresenta o motivo (5 coisas abertas ao mesmo tempo) e faz da capa a página de uma aba"
+        }
+      ],
+      "liga": {
+        "proximo": "as 5 abas descem e viram 5 marcas da régua do s2"
+      },
+      "enfase": null,
+      "notas": "Sem foto do fundador (não confirmada no roteiro): capa 100% tipográfica. Sem eyebrow: o título já diz quem fala."
+    },
+    {
+      "n": 2,
+      "papel": "contexto",
+      "familia": "split",
+      "fundo": "tom-50",
+      "densidade": "media",
+      "heroi": "o campo tom-200 com 'Sou hipnoterapeuta. Atendo pacientes até hoje.'",
+      "texto": {
+        "ancora": "Sou hipnoterapeuta. Atendo pacientes até hoje.",
+        "apoio": "E por muito tempo meu consultório viveu espalhado em 5 apps."
+      },
+      "hierarquia": "âncora 84 · apoio 48",
+      "camadas": [
+        {
+          "o_que": "campo tom-200 nos 52% de cima",
+          "funcao": "separa quem ele é (o campo) do problema (o fundo): 2ª capa que se lê sozinha"
+        },
+        {
+          "o_que": "régua com 5 marcas, ícone e nome de cada ferramenta",
+          "funcao": "mede o 'espalhado em 5 apps': o número vira objeto"
+        }
+      ],
+      "liga": {
+        "anterior": "as abas da capa",
+        "proximo": "a régua se desmonta e as 5 caem na pilha do s3"
+      },
+      "enfase": null
+    },
+    {
+      "n": 3,
+      "papel": "tensao",
+      "familia": "pilha",
+      "fundo": "creme",
+      "densidade": "densa",
+      "heroi": "a pilha de 5 cards tortos ocupando o slide de cima a baixo",
+      "texto": {
+        "ancora": "Agenda num app. Conversa no WhatsApp. Sessão no Meet. Notas no caderno. Perfil num site."
+      },
+      "hierarquia": "frase do card 52 (cada card é uma linha do roteiro)",
+      "camadas": [
+        {
+          "o_que": "5 cards sobrepostos (~15%), ±2°, zigue-zague dentro da margem, cada um na largura do texto",
+          "funcao": "a bagunça é vista, não dita: nenhum título acima da pilha"
+        }
+      ],
+      "liga": {
+        "anterior": "as mesmas 5 da régua",
+        "proximo": "a pilha some de vez: o s4 é só a frase, num campo de cor quente (fim do dia)"
+      },
+      "enfase": null,
+      "notas": "O roteiro não tem título neste slide: não acrescentar 'Meu consultório, por muito tempo:'."
+    },
+    {
+      "n": 4,
+      "papel": "tensao",
+      "familia": "campo",
+      "fundo": "tom-300",
+      "densidade": "leve",
+      "heroi": "'Estava cansado de gerenciar.' em display, embaixo",
+      "texto": {
+        "ancora": "Estava cansado de gerenciar.",
+        "apoio": "No fim do dia, eu não estava cansado de atender."
+      },
+      "hierarquia": "apoio 64 no alto · âncora 136 embaixo",
+      "camadas": [
+        {
+          "o_que": "o vazio entre a frase de cima e o golpe de baixo",
+          "funcao": "a pausa é o cansaço; nenhum objeto aqui"
+        }
+      ],
+      "liga": {
+        "anterior": "depois da pilha cheia, o slide vazio",
+        "proximo": "volta ao creme com a dúvida, em voz baixa"
+      },
+      "enfase": {
+        "tipo": "cor",
+        "palavra": "gerenciar"
+      },
+      "notas": "Logo na variante ink (a coral some no tom-300)."
+    },
+    {
+      "n": 5,
+      "papel": "tensao",
+      "familia": "capa-tipografica",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "'Achei que era desorganização minha.' em display no meio da altura",
+      "texto": {
+        "ancora": "Achei que era desorganização minha.",
+        "apoio": "Então fui perguntar a colegas terapeutas."
+      },
+      "hierarquia": "âncora 112 (3 linhas, meio da altura) · apoio 48 preso ao rodapé, à direita",
+      "camadas": [
+        {
+          "o_que": "seta Lucide arrow-right no fim do apoio, no canto inferior direito",
+          "funcao": "empurra para o s6, onde está a resposta dos colegas"
+        }
+      ],
+      "liga": {
+        "anterior": "o golpe do s4",
+        "proximo": "a pergunta aos colegas vira o trilho de respostas do s6"
+      },
+      "enfase": null,
+      "notas": "v3: âncora no meio (o s4 ancora embaixo, o s6 no alto), apoio e seta presos ao rodapé direito, apontando para o s6."
+    },
+    {
+      "n": 6,
+      "papel": "prova",
+      "familia": "trilho",
+      "fundo": "tom-100",
+      "densidade": "media",
+      "heroi": "o título 'Ouvi a mesma dor, de novo e de novo:'",
+      "texto": {
+        "ancora": "Ouvi a mesma dor, de novo e de novo:",
+        "apoio": "Organizar a rotina. Lembrar dos agendamentos. Documentar as sessões."
+      },
+      "hierarquia": "âncora 84 · itens 52",
+      "camadas": [
+        {
+          "o_que": "trilho vertical ligando 3 nós com ícone (sem número)",
+          "funcao": "as 3 dores são da mesma família e se repetem; não há sequência, por isso sem 1-2-3"
+        },
+        {
+          "o_que": "hairlines entre os itens",
+          "funcao": "agrupa sem card"
+        }
+      ],
+      "liga": {
+        "anterior": "a seta do s5",
+        "proximo": "corte para o escuro: a virada"
+      },
+      "enfase": null,
+      "notas": "v3: tom-100 para não somar com o creme do s5 num bloco pálido; nós em branco."
+    },
+    {
+      "n": 7,
+      "papel": "virada",
+      "familia": "fluxo",
+      "fundo": "tom-900",
+      "densidade": "media",
+      "heroi": "'Não era a gente que era desorganizado.' em título, e os 5 fios convergindo numa tela só",
+      "texto": {
+        "ancora": "Não era a gente que era desorganizado.",
+        "apoio": "Era o jeito de trabalhar: empilhar ferramentas, quando a sessão precisa de uma tela só."
+      },
+      "hierarquia": "âncora 84 · apoio 40 (frase inteira no alto) · diagrama embaixo",
+      "camadas": [
+        {
+          "o_que": "os 5 nós do motivo à esquerda, fios de 2 px convergindo",
+          "funcao": "o motivo se resolve: 5 → 1 (é o 'empilhar ferramentas' desenhado)"
+        },
+        {
+          "o_que": "uma tela branca à direita com os 5 ícones numa fileira e a logo pequena no canto, como assinatura",
+          "funcao": "a 'tela só' mostra as mesmas 5 juntas: abas → régua → pilha → uma tela com as 5"
+        }
+      ],
+      "liga": {
+        "anterior": "as 3 dores",
+        "proximo": "a tela só vira 'esse lugar' que ele decidiu construir"
+      },
+      "enfase": {
+        "tipo": "serifa",
+        "palavra": "jeito"
+      },
+      "notas": "Único slide 900. A ênfase serifa fica no 'jeito' (a palavra que muda a culpa de lugar)."
+    },
+    {
+      "n": 8,
+      "papel": "prova",
+      "familia": "numero",
+      "fundo": "tom-200",
+      "densidade": "leve",
+      "heroi": "o numeral 2",
+      "texto": {
+        "ancora": "Então decidi construir esse lugar.",
+        "apoio": "Um sistema só, com a sessão no centro. 2 anos de desenvolvimento. Uma terapeuta no time testando cada decisão."
+      },
+      "hierarquia": "âncora 64 · numeral 640 · legenda 46 · ficha 36",
+      "camadas": [
+        {
+          "o_que": "ficha de 2 linhas sob uma hairline, sem rótulos, uma coluna",
+          "funcao": "organiza os 2 fatos (o quê, com quem) sem card e sem inventar microcopy"
+        },
+        {
+          "o_que": "fileira mínima dos 5 ícones já unidos num card branco, abrindo a ficha",
+          "funcao": "ecoa a tela só do s7 ao lado de 'um sistema só'; sem texto novo"
+        }
+      ],
+      "liga": {
+        "anterior": "a tela só do s7",
+        "proximo": "a regra que guia esse lugar, na voz dele"
+      },
+      "enfase": null,
+      "notas": "'2 anos' tem fonte (BUSINESS > Origem; COPY > Provas). v3: tom-200 (s8 e s9 não ficam dois claros seguidos); 1 linha de respiro entre título e numeral."
+    },
+    {
+      "n": 9,
+      "papel": "sintese",
+      "familia": "campo",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "'Se uma feature complica, não entra.' em display",
+      "texto": {
+        "ancora": "Se uma feature complica, não entra.",
+        "apoio": "Fundador da kz, hipnoterapeuta · Feito por terapeuta, pra terapeuta.",
+        "rotulo": "Uma regra desde o começo"
+      },
+      "hierarquia": "rótulo 24 · âncora 100 em 3 linhas na largura útil · assinatura e slogan 28 no terço de baixo, com hairline curta",
+      "camadas": [
+        {
+          "o_que": "assinatura com hairline curta, embaixo",
+          "funcao": "fecha a carta: a regra é dele"
+        }
+      ],
+      "liga": {
+        "anterior": "o lugar que ele construiu",
+        "proximo": "a pergunta devolve a régua de 5 para a leitora"
+      },
+      "enfase": null,
+      "notas": "Não usar a família citacao: ela conta como serifa e cairia na mesma janela de 3 da ênfase do s7. Assinatura sem nome (nome público não confirmado)."
+    },
+    {
+      "n": 10,
+      "papel": "cta",
+      "familia": "cta",
+      "fundo": "tom-800",
+      "densidade": "leve",
+      "heroi": "a pergunta em display",
+      "texto": {
+        "ancora": "E você: quantos apps abre pra fazer uma sessão?",
+        "apoio": "Comenta o número."
+      },
+      "hierarquia": "âncora 112 · rótulo 24 · opções 56",
+      "camadas": [
+        {
+          "o_que": "régua de respostas 1, 2, 3, 4, 5+",
+          "funcao": "o motivo volta como contagem: a resposta vira o gesto do comentário"
+        }
+      ],
+      "liga": {
+        "anterior": "a regra do s9"
+      },
+      "enfase": null,
+      "notas": "v3: quebras por sentido ('E você: / quantos apps / abre pra fazer / uma sessão?') e bloco mais perto da régua de respostas."
+    }
+  ],
+  "autocritica": [
+    "O default (a v1 antiga) seria texto centralizado na vertical em todos os slides, mesmo fundo creme e cards brancos: trocamos por 8 famílias, âncora mudando de lugar (baixo, alto, cheio, dividido) e 7 fundos sem 3 iguais seguidos.",
+    "O default do catálogo seria copiar a capa em leque e pôr título 'Meu consultório, por muito tempo:' na pilha: a capa vira faixa de abas (o gesto de 'ter tudo aberto') e a pilha fica sem título, como no roteiro.",
+    "O default seria citação em serifa na regra (s9) e ênfase em 3–4 títulos: a serifa fica só no 'jeito' da virada (s7) e a cor só no 'gerenciar' (s4); a regra fica em Montserrat grande, porque a citação contaria como 2ª serifa na mesma janela.",
+    "O default seria rótulos 'O quê / Com quem' na ficha do número e eyebrow 'Carta do fundador' na capa: cortados (microcopy que não está no roteiro); o único rótulo é 'Uma regra desde o começo', que é do roteiro."
+  ]
+}
