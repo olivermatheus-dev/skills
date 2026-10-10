@@ -1,0 +1,281 @@
+{
+  "empresa": "kz",
+  "nos": "Kzloo",
+  "modulo": "redes",
+  "data": "2026-10-10",
+  "cabecalho": "Kzloo · Redes sociais",
+  "fonte": "Fonte: coleta das redes de 08–09/10/2026",
+  "paginas": [
+    {
+      "tipo": "capa",
+      "titulo": "Redes sociais: *Kzloo × benchmarks*",
+      "subtitulo": "Audiência, ritmo e o que mais rendeu nos 5 maiores concorrentes.",
+      "pontos": [
+        "**Corpora** domina: 86 mil no Instagram, a mediana de views mais alta e o único TikTok que viraliza (127 mil views num meme).",
+        "Seguidor não é atenção: **PsicoManager** (41 mil) e **Clínica Ágil** (31 mil) têm engajamento de 0,05%. O público existe no papel, não no feed.",
+        "O que rende é **opinião e humor do ofício**, não a funcionalidade. Os posts de produto ficam na mediana ou abaixo."
+      ],
+      "meta": [
+        [
+          "Concorrentes",
+          "5: Corpora, Sintropia, PsicoManager, Clínica Ágil, Allminds"
+        ],
+        [
+          "Critério",
+          "sugestão automática (maior audiência somada nas redes); confirmar a lista de benchmarks"
+        ],
+        [
+          "Dados",
+          "coleta de 08–09/10/2026 · Instagram sem token = 6 últimos posts por perfil · top = últimos 90 dias"
+        ],
+        [
+          "Kzloo",
+          "sem redes ativas ainda (Instagram a definir)"
+        ]
+      ]
+    },
+    {
+      "tipo": "tabela",
+      "titulo": "Audiência e *ritmo*",
+      "sub": "Último retrato de cada perfil. Engaj. = curtidas medianas ÷ seguidores.",
+      "colunas": [
+        "Marca",
+        "Rede",
+        "Seguidores",
+        "Posts/sem.",
+        "Views (mediana)",
+        "Engaj."
+      ],
+      "numericas": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "linhas": [
+        {
+          "celulas": [
+            "**Kzloo**",
+            "sem redes ativas",
+            "—",
+            "—",
+            "—",
+            "—"
+          ],
+          "destaque": true
+        },
+        [
+          "**Corpora**",
+          "instagram",
+          85857,
+          19.1,
+          6669,
+          "0,99%"
+        ],
+        [
+          "**Sintropia**",
+          "instagram",
+          53408,
+          3.1,
+          2369,
+          "0,51%"
+        ],
+        [
+          "**PsicoManager**",
+          "instagram",
+          41204,
+          6.5,
+          209,
+          "0,05%"
+        ],
+        [
+          "**Clínica Ágil**",
+          "instagram",
+          31344,
+          2.5,
+          286,
+          "0,06%"
+        ],
+        [
+          "**Allminds**",
+          "instagram",
+          3997,
+          2.5,
+          156,
+          "0,34%"
+        ],
+        [
+          "**Corpora**",
+          "tiktok",
+          1915,
+          2.7,
+          798,
+          "3,26%"
+        ],
+        [
+          "**Sintropia**",
+          "youtube",
+          1830,
+          "—",
+          "—",
+          "—"
+        ],
+        [
+          "**Corpora**",
+          "youtube",
+          970,
+          1.7,
+          35,
+          "2,37%"
+        ],
+        [
+          "**Clínica Ágil**",
+          "youtube",
+          672,
+          0.1,
+          2564,
+          "3,72%"
+        ]
+      ]
+    },
+    {
+      "tipo": "conteudos",
+      "titulo": "Top conteúdos: *instagram*",
+      "sub": "Últimos 90 dias, por alcance (views; sem views, curtidas). Até 2 por marca.",
+      "itens": [
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/corpora/media/instagram-usecorpora/thumbs/DeLFIWdAOgE-0bcb.jpg",
+          "perfil": "Corpora",
+          "rede": "instagram",
+          "tipo": "carrossel",
+          "data": "06/10/2026",
+          "legenda": "A psicologia está diretamente ligada à política - quer vc queira ou não.",
+          "metricas": "12.076 ♥ · 183 coment.",
+          "multiplo": null,
+          "obs": "Carrossel de opinião forte sobre o ofício. Muito comentário porque divide: o público quer se posicionar."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/corpora/media/instagram-usecorpora/thumbs/DeNK6SjPp_--9eb2.jpg",
+          "perfil": "Corpora",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "07/10/2026",
+          "legenda": "Foi mais forte que eu…\nDito isto, ao falar de sofrimento mental, não podemos esquecer de nossa responsabilidade.",
+          "metricas": "**7.284** views · 328 ♥ · 2 coment.",
+          "multiplo": "1,1×",
+          "obs": "Fala da responsabilidade do psicólogo. Tema sério com gancho de confissão (\"foi mais forte que eu\")."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/sintropia/media/instagram-sintropia-psi/thumbs/DeKvuB2Nx9R-3446.jpg",
+          "perfil": "Sintropia",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "06/10/2026",
+          "legenda": "Sintropia no Artmed Experience? 🤭💜🤫💙",
+          "metricas": "**3.154** views · 287 ♥ · 97 coment.",
+          "multiplo": "1,3×",
+          "obs": "Bastidor de evento com tom brincalhão: **97 comentários**, o maior volume de conversa do top."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/sintropia/media/instagram-sintropia-psi/thumbs/Dd4yiuQsAHT-b67a.jpg",
+          "perfil": "Sintropia",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "29/09/2026",
+          "legenda": "Quem não ama uma “conversa fiada”? Assista agora no @sintroflix 🍿✨\n\nFoi tudo @joaoguilherme.psi 💜",
+          "metricas": "**2.741** views · 293 ♥ · 24 coment.",
+          "multiplo": "1,2×",
+          "obs": "Série própria (Sintroflix) com psicólogo convidado. Formato que se repete e cria hábito."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/psicomanager/media/instagram-psico-manager/thumbs/Dd9G_wRB-sL-1184.jpg",
+          "perfil": "PsicoManager",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "01/10/2026",
+          "legenda": "Hey psi, não seja seu maior inimigo! Se liberte da auto sabotagem",
+          "metricas": "**423** views · 31 ♥ · 2 coment.",
+          "multiplo": "2×",
+          "obs": "**2× a mediana** do perfil: frase de autoajuda para a própria terapeuta. Cuidar de quem cuida rende mais que o produto."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/clinica-agil/media/instagram-clinicaagil/thumbs/Ddmb9-dDRQM-62ad.jpg",
+          "perfil": "Clínica Ágil",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "22/09/2026",
+          "legenda": "Gerenciar protocolos ABA e administrar uma clínica são desafios diferentes, mas você não precisa cuidar de tudo em sistemas separados.\nCom o Clínica Ágil, você centraliza protocolos, agenda, financeiro e toda a gestão da clínica em um só lugar, com informações conectadas e organi",
+          "metricas": "**403** views · 22 ♥ · 0 coment.",
+          "multiplo": "1,4×",
+          "obs": "Produto + nicho (ABA). Fica na média: funcionalidade sozinha não puxa alcance."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/clinica-agil/media/instagram-clinicaagil/thumbs/Dd7CUegiKgo-a063.jpg",
+          "perfil": "Clínica Ágil",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "30/09/2026",
+          "legenda": "Tecnologia que facilita a rotina e um suporte humanizado que faz toda a diferença. Com o Clínica Ágil, sua clínica conta com implantação, acompanhamento e uma equipe preparada para ajudar de verdade. Fale com um especialista, agende uma demonstração e conheça o Clínica Ágil!",
+          "metricas": "**350** views · 30 ♥ · 5 coment.",
+          "multiplo": "1,2×",
+          "obs": "Suporte humanizado como argumento. Bom para conversão, fraco para alcance."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/allminds/media/instagram-allminds-app/thumbs/DeAh_Qqy8JH-efb1.jpg",
+          "perfil": "Allminds",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "02/10/2026",
+          "legenda": "Você acabou de se formar em Psicologia... mas, e agora?\n\n💡 Calma que a gente tem a resposta! A Allminds é uma plataforma para psis com\n\norganização da sua clínica\nconexão aos pacientes\nconteúdos exclusivos\nformação empreendedora... \n\ne muito mais!\n\nÉ tudo em um só lugar, o ecoss",
+          "metricas": "**212** views · 29 ♥ · 7 coment.",
+          "multiplo": "1,4×",
+          "obs": "Fala com recém-formado. Público com dor clara (\"e agora?\"), ainda pouco disputado."
+        }
+      ]
+    },
+    {
+      "tipo": "conteudos",
+      "titulo": "Top conteúdos: *tiktok*",
+      "sub": "Últimos 90 dias, por alcance (views; sem views, curtidas). Até 2 por marca.",
+      "itens": [
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/corpora/media/tiktok-usecorpora/thumbs/7691064446289988884-4712.jpg",
+          "perfil": "Corpora",
+          "rede": "tiktok",
+          "tipo": "video",
+          "data": "29/09/2026",
+          "legenda": "😔 droga #fyp #meme",
+          "metricas": "**126.900** views · 21.600 ♥ · 56 coment.",
+          "multiplo": "159,1×",
+          "obs": "**159× a mediana**: meme de 2 palavras pegou fora da bolha. Sorte de algoritmo, mas só acontece a quem posta meme com constância."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/kz/competitors/corpora/media/tiktok-usecorpora/thumbs/7694301785070030100-3d09.jpg",
+          "perfil": "Corpora",
+          "rede": "tiktok",
+          "tipo": "video",
+          "data": "08/10/2026",
+          "legenda": "essa eu já conheço #fyp #foryoupage #psicologo",
+          "metricas": "**4.907** views · 787 ♥ · 0 coment.",
+          "multiplo": "6,2×",
+          "obs": "Meme de situação do consultório, 6× a mediana. É exatamente a nossa série \"Só quem atende entende\"."
+        }
+      ]
+    },
+    {
+      "tipo": "insights",
+      "titulo": "O que *aproveitar*",
+      "pontos": [
+        "Os maiores crescem com **humor e opinião do ofício** (Corpora) e **séries com gente real** (Sintropia). Produto aparece, mas não puxa alcance.",
+        "Base grande e parada (PsicoManager, Clínica Ágil) mostra que seguidor antigo não vira atenção sozinho. Vale mais começar pequeno e vivo.",
+        "Quase ninguém fala com **psicanalista, hipnoterapeuta ou integrativa**, nem com o recém-formado. É espaço aberto."
+      ],
+      "sugestoes": [
+        "Começar pela série **\"Só quem atende entende\"** (fmt-meme): é o formato que mais rende no nicho e já está aprovado na nossa estratégia.",
+        "Ter uma série com rosto: o fundador terapeuta em **\"Mito, verdade ou… depende?\"**, 1 vez por mês, como a Sintropia faz com convidados.",
+        "Produto só em **\"kz na prática\"**, começando pela dor e nunca pela funcionalidade. Nos concorrentes, post de produto fica na mediana.",
+        "Medir pelo **múltiplo da mediana** do nosso perfil, não pelo número bruto. Com perfil novo, é o que mostra o que funciona."
+      ]
+    }
+  ]
+}

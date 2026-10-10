@@ -49,3 +49,9 @@ companies/*/contents/*/variantes/qc-base.json
 
 # backups do "Restaurar esta versão" (050 D): ficam no disco, fora do git
 companies/**/versoes/_backup-*/
+
+# relatórios em PDF (skill relatorio-pdf): fica no git só o relatorio.json (a análise); dados, PNG e PDF refazem com tools/relatorio/
+companies/*/intel/relatorios/*/png/
+companies/*/intel/relatorios/*/*.pdf
+companies/*/intel/relatorios/*/dados.json
+companies/*/intel/relatorios/*/esqueleto.json

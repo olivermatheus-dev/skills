@@ -60,6 +60,7 @@ Biblioteca de áudio (todas as empresas): `library/audio/`. Arquivos ficam locai
 | `radar` | descobrir concorrentes, referências e páginas → candidatos (aceite do Oliver) |
 | `analise-concorrentes` | análise por módulos (perfis, site/sitemap, contato, onde atua, resumo, features, fortes/fracos, preços, LP, Reclame Aqui): roda a fila marcada no app, script + subagentes Sonnet |
 | `referencias` | coletar, ranquear e analisar o que o Oliver marcou → banco de ideias |
+| `relatorio-pdf` | exportar PDF de concorrência, 1 por módulo: funcionalidades × benchmarks · seções e copy das landings · redes e top conteúdos (`node tools/relatorio/dados.mjs` → `relatorio.json` → `render.mjs`; saída em `intel/relatorios/`) |
 
 **Formatos (`fmt-*`)**: receitas curtas por tipo de conteúdo que usam os motores `carousel` (imagem) ou `video` (motion). Galeria global com ficha, exemplos e observações do Oliver (mandam sobre a skill): `library/formatos/` (app → Formatos; peça → `formato` no `peca.json`).
 - Imagem: `fmt-post-frase`, `fmt-meme`, `fmt-antes-depois`, `fmt-carrossel-educativo`.
