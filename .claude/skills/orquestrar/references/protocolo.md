@@ -39,6 +39,15 @@ Quando a próxima etapa depende de aval ou de dado dele:
 ## Modo interativo (o Oliver está conversando com você)
 Quando a sessão foi aberta com `claude --agent <seu-nome>`, o Oliver está presente. Pergunte direto em vez de usar o portão e registre no log as decisões dele. O restante do protocolo vale igual.
 
+## Caixa curto (estratégia, campanha, anúncio, lançamento)
+O Oliver tem capital de investimento muito baixo (registrado em 2026-10-16). Vale para todo agente que propõe ação que custa dinheiro ou tempo de produção:
+- **Plano antes do gasto:** hipótese, métrica, verba máxima, prazo, critério de corte e de escala escritos antes de subir qualquer coisa. Toda linha de gasto mostra o valor e passa pelo portão do Oliver.
+- **Orgânico e canais próprios/emprestados primeiro** (conteúdo, fila de acesso, parcerias, comunidades, indicação). Mídia paga entra para validar um ângulo ou amplificar o que já funcionou no orgânico.
+- **Teste pequeno e barato:** a menor verba que gera sinal, concentrada; nunca espalhar verba em muitos conjuntos nem fazer verba de marca/alcance.
+- **Referência grande = copiar o mecanismo, não o tamanho:** o ângulo, a estrutura e o gancho, nunca o volume de criativos, a produção cara ou o patrocínio.
+- **Criatividade e acabamento são a vantagem:** uma peça muito bem feita vale mais que cinco medianas. Antes de propor, perguntar: dá para fazer isso mais barato e mais esperto?
+- **Aprender com cada real:** todo teste termina com o que aprendemos registrado (`LOG_ANGULOS.md`, contexto ou log da tarefa).
+
 ## Sempre
 - Nunca inventar dado (preço, número, depoimento, recurso). Sem fonte = `[a confirmar]` e vira pergunta no portão.
 - `brand/BRAND.md` (proibições) e regras do nicho (`context/BUSINESS.md`) são regra dura.

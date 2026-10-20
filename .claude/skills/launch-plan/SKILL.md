@@ -48,6 +48,7 @@ Você é um estrategista de lançamento sênior para produto digital pequeno, co
 10. **Tarefas** depois do aval (ver "Saída: tarefas") e `node tools/board.mjs <slug> --check` no fim.
 
 ## Regras duras
+- **Caixa curto** (`.claude/skills/orquestrar/references/protocolo.md#Caixa curto`): o plano começa pelos canais próprios, emprestados e orgânicos; mídia paga só com verba, objetivo e critério de corte declarados; o plano traz o custo total e por fase.
 - **Perpétuo não "fecha carrinho":** a escassez real é a condição de fundador (preço/bônus) com prazo ou nº de vagas declarados.
 - **Todo canal leva para um canal próprio.**
 - **A fase 5 (Pós) sempre entra no plano** (mín. 1 semana).

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>C0002 · Fixado 1 · Dor</title>
+<!-- Plano: slides.json (v2, aprovado) · roteiro.md · capa: estudo v3 aprovado (campaigns/2026-10-09-posts-fixados/capas/).
+     Componentes do app e capa do trio: ../../campaigns/2026-10-09-posts-fixados/fixados.css -->
+<link rel="stylesheet" href="../../../brand/brand.css">
+<link rel="stylesheet" href="../../../../../.claude/skills/carousel/references/sistema.css">
+<link rel="stylesheet" href="../../../campaigns/2026-10-09-posts-fixados/fixados.css">
+<style>
+  /* s2 · split: régua de 5 ferramentas no resto */
+  .s2 .split-campo { height: 52%; }
+  .s2 .split-campo .t-titulo { font-size: 96px; line-height: 1.06; }
+  .s2 .split-resto { top: calc(52% + var(--e-7)); }
+  .s2 .split-resto { gap: var(--e-6); justify-content: flex-start; }
+
+  /* s3 · pilha: 4 gestos, cada um com o bloco de ícone do app */
+  .s3 .pilha-topo .t-titulo { font-size: 76px; }
+  .s3 .pilha-topo .hora { display: block; color: var(--primary); }
+  .s3 .pilha { top: 470px; height: 640px; }
+  .s3 .pilha .card { width: 820px; height: 150px; gap: var(--e-4); padding: 0 var(--e-5) 0 var(--e-4); }
+  .s3 .pilha .card p { font: 600 38px/1.18 var(--font-heading); text-wrap: balance; }
+  .s3 .pilha .app-tile { width: 76px; height: 76px; }
+
+  /* s4 · zoom: a mensagem do paciente ampliada, a pilha atrás */
+  .s4 .zoom-topo .t-titulo { font-size: 76px; }
+  .s4 .palco { position: absolute; left: var(--s-m); right: var(--s-m); top: 520px; height: 560px;
+    background: var(--bg); border-radius: 28px; border: 2px solid var(--border); }
+  .s4 .palco .app-msg { left: 140px; top: 180px; transform: rotate(-1.5deg) scale(1.45); transform-origin: 0 0; }
+  .s4 .nota { position: absolute; right: var(--s-m); top: 1100px; }
+
+  /* s5 · número: o 5 contado */
+  .s5 .num-titulo { width: var(--c6); font-size: 76px; line-height: 1.1; font-weight: 700; }
+  .s5 .num-bloco { top: 330px; }
+  .s5 .num-bloco .t-giga { color: var(--primary); }
+  .s5 .num-bloco { top: 360px; }
+  .s5 .num-bloco .num-legenda { width: 520px; font-size: 46px; line-height: 1.2; font-weight: 600; }
+  .s5 .regua5 > span { color: var(--text); }
+  .s5 .regua5 { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base); padding-top: var(--e-5); border-top: 2px solid var(--s-hair); justify-content: space-between; }
+
+  /* s6 · campo: a frase sozinha */
+  .s6 .campo-baixo { font-size: 84px; bottom: 360px; }
+  .s6 .campo-apoio { position: absolute; left: var(--s-m); bottom: var(--s-base); }
+
+  /* s7 · split: a virada da culpa, com o motivo ainda empilhado */
+  .s7 .split-campo { height: 46%; }
+  .s7 .split-campo .t-display { font-size: 112px; }
+  .s7 .split-resto { top: calc(46% + var(--e-6)); gap: var(--e-6); }
+  .s7 .mini { position: relative; height: 150px; }
+  .s7 .mini .app-tile { position: absolute; width: 76px; height: 76px; border: 2px solid var(--border); }
+
+  /* s8 · fluxo: 5 ferramentas → a tela única da kz (o destino, o maior objeto) */
+  .s8 .fluxo-topo .t-titulo { font-size: 76px; }
+  .s8 .linha5 { position: absolute; left: var(--s-m); right: var(--s-m); top: 392px; justify-content: center; }
+  .s8 .linha5 .app-tile { width: 76px; height: 76px; border: 2px solid var(--border); }
+  .s8 svg.conv { position: absolute; left: var(--s-m); top: 470px; }
+  .s8 .tela { left: var(--s-m); right: var(--s-m); top: 540px; height: 470px; display: flex; overflow: hidden; }
+  .s8 .lateral { width: 330px; padding: 36px 28px; border-right: 2px solid var(--border); display: flex; flex-direction: column; gap: 22px; }
+  .s8 .lateral .logo svg { height: 34px; width: auto; fill: var(--logo); margin-bottom: 14px; }
+  .s8 .lateral span { display: flex; align-items: center; gap: 14px; font: 500 25px/1 var(--font-body); color: var(--text); white-space: nowrap; }
+  .s8 .lateral span svg { width: 26px; height: 26px; fill: none; stroke: var(--text); stroke-width: 1.6; }
+  .s8 .principal { flex: 1; padding: 40px 40px; background: var(--bg); position: relative; }
+  .s8 .principal h4 { font: 500 44px/1.1 var(--font-body); color: var(--text); }
+  .s8 .principal h4 em { font: italic 400 1.14em var(--font-accent); color: var(--primary); }
+  .s8 .principal .sub { font: 500 24px/1.3 var(--font-body); color: var(--ui-subtle); margin-top: 10px; }
+  .s8 .mini-prox { position: relative; margin-top: 28px; padding: 26px 28px; }
+  .s8 .mini-prox .app-rot { letter-spacing: .06em; white-space: nowrap; }
+  .s8 .mini-prox .pac { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
+  .s8 .mini-prox .app-av { width: 64px; height: 64px; font-size: 24px; }
+  .s8 .mini-prox b { font: 700 28px/1.1 var(--font-body); }
+  .s8 .mini-prox p { font: 500 24px/1.3 var(--font-body); color: var(--ui-muted); margin-top: 4px; }
+  .s8 .mini-prox .app-btn { height: 56px; font-size: 24px; padding: 0 22px; margin-top: 20px; }
+  .s8 .fluxo-pe { bottom: var(--s-base); width: var(--c6); font-size: 36px; }
+  .s8 .nota { position: absolute; right: var(--s-m); top: 1022px; }
+
+  /* s9 · cta: o pedido + o botão de enviar */
+  .s9 .cta-texto { font-size: 104px; line-height: 1.06; top: 300px; }
+  .s9 .envio { left: var(--s-m); right: var(--s-m); bottom: var(--s-base); padding: 40px 44px; }
+  .s9 .envio h3 { font: 700 44px/1.15 var(--font-heading); color: var(--text); }
+  .s9 .contatos { display: flex; gap: 40px; margin: 34px 0 36px; }
+  .s9 .contatos > span { display: flex; flex-direction: column; align-items: center; gap: 14px; font: 500 26px/1 var(--font-body); color: var(--text); }
+  .s9 .contatos .app-av { width: 108px; height: 108px; font-size: 36px; }
+  .s9 .contatos .mais { background: var(--surface); border: 2px dashed var(--border); color: var(--ui-muted); }
+  .s9 .envio .app-btn { height: 80px; font-size: 30px; padding: 0 34px; }
+  .s9 .envio .app-btn svg { width: 30px; height: 30px; }
+  .s9 .envio .t-nota { position: absolute; right: 44px; bottom: 40px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · gancho · capa-tipografica · creme (capa do trio, estudo v3) -->
+<section class="slide fundo-creme" data-layout="capa-tipografica">
+  <div class="capa-cena">
+    <div class="app-card app-ferr" style="left:0; top:0; transform:rotate(-2deg)"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>Agenda</div>
+    <div class="app-card app-ferr" style="left:104px; top:84px; transform:rotate(1.5deg)"><span class="app-tile t-teal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>WhatsApp</div>
+    <div class="app-card app-ferr" style="left:208px; top:168px; transform:rotate(-1.5deg)"><span class="app-tile t-lilac"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>Meet</div>
+    <div class="app-card app-ferr" style="left:312px; top:252px; transform:rotate(2deg)"><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>Caderno</div>
+    <div class="app-card app-ferr" style="left:416px; top:336px; transform:rotate(-1deg)"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span>Planilha</div>
+    <div class="app-msg" style="right:0; top:14px; transform:rotate(1.5deg)"><div class="app-rot"><i></i>Paciente · 19h52</div>Amanhã está de pé?</div>
+  </div>
+  <h1 class="capa-titulo">Você está cansada de gerenciar, não de <span class="enf-serifa" data-contraste="marca">atender.</span></h1>
+  <footer class="rodape"><span></span><span class="arraste">arraste <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></footer>
+</section>
+
+<!-- 2 · contexto · split · creme / campo tom-100 -->
+<section class="slide fundo-creme s2" data-layout="split">
+  <div class="split-campo so-ancora fundo-tom-100">
+    <h2 class="t-titulo">No fim do dia, o cansaço não vem das sessões.</h2>
+  </div>
+  <div class="split-resto">
+    <p class="t-lead">Vem de tudo o que está em volta delas.</p>
+    <div class="app-regua">
+      <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span></span>
+      <span><span class="app-tile t-teal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span></span>
+      <span><span class="app-tile t-lilac"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span></span>
+      <span><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span></span>
+      <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span></span>
+    </div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>02</b>/09</span></footer>
+</section>
+
+<!-- 3 · tensão · pilha · tom-50 -->
+<section class="slide fundo-tom-50 s3" data-layout="pilha">
+  <div class="pilha-topo">
+    <h2 class="t-titulo"><span class="hora" data-contraste="marca">19h50.</span>A sessão das 20h começa em dez minutos.</h2>
+  </div>
+  <div class="pilha">
+    <div class="card" style="left:0; top:0; transform:rotate(-1.5deg); z-index:1"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span><p>Abre a agenda para ver quem é.</p></div>
+    <div class="card" style="left:60px; top:150px; transform:rotate(1.2deg); z-index:2"><span class="app-tile t-teal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span><p>Procura o link no WhatsApp.</p></div>
+    <div class="card" style="left:16px; top:300px; transform:rotate(-.8deg); z-index:3"><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span><p>Abre o caderno para lembrar onde parou.</p></div>
+    <div class="card alto" style="left:56px; top:450px; transform:rotate(1.5deg); z-index:4"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span><p>Confere se ele pagou o mês.</p></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>03</b>/09</span></footer>
+</section>
+
+<!-- 4 · tensão · zoom · branco -->
+<section class="slide fundo-branco s4" data-layout="zoom">
+  <div class="zoom-topo">
+    <h2 class="t-titulo">E, no meio disso, outro paciente quer confirmar amanhã.</h2>
+  </div>
+  <div class="palco">
+    <div class="app-card app-ferr" style="left:40px; top:60px; transform:rotate(-1.5deg)"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>Agenda</div>
+    <div class="app-card app-ferr" style="left:420px; top:330px; transform:rotate(1.5deg)"><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>Caderno</div>
+    <div class="app-msg"><div class="app-rot"><i></i>Paciente · 19h52</div>Oi! Amanhã está de pé?</div>
+  </div>
+  <p class="t-nota nota">conversa ilustrativa</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>04</b>/09</span></footer>
+</section>
+
+<!-- 5 · tensão · numero · tom-200 -->
+<section class="slide fundo-tom-200 s5" data-layout="numero">
+  <h2 class="num-titulo t-sub">Nenhuma dessas coisas é difícil.</h2>
+  <div class="num-bloco">
+    <span class="t-giga" data-contraste="marca">5</span>
+    <p class="num-legenda t-sub">O problema é que são cinco. Todo dia. Entre uma sessão e outra.</p>
+  </div>
+  <div class="app-regua regua5">
+    <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>Agenda</span>
+    <span><span class="app-tile t-teal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>Link</span>
+    <span><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>Caderno</span>
+    <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span>Planilha</span>
+    <span><span class="app-tile t-lilac"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-square-text"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M7 11h10"/><path d="M7 15h6"/><path d="M7 7h8"/></svg></span>Mensagem</span>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>05</b>/09</span></footer>
+</section>
+
+<!-- 6 · tensão · campo · tom-100 (sem motivo: a pausa) -->
+<section class="slide fundo-tom-100 s6" data-layout="campo">
+  <h2 class="campo-baixo t-titulo">E quando o paciente entra, uma parte de você ainda está lá fora.</h2>
+  <p class="campo-apoio t-lead">Conferindo se não esqueceu nada.</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>06</b>/09</span></footer>
+</section>
+
+<!-- 7 · contexto · split · creme / campo tom-200 -->
+<section class="slide fundo-creme s7" data-layout="split">
+  <div class="split-campo so-ancora fundo-tom-200">
+    <h2 class="t-display">Não é falta de disciplina.</h2>
+  </div>
+  <div class="split-resto">
+    <p class="t-lead">É que o seu consultório foi montado empilhando ferramentas. Nenhuma foi pensada para o momento em que você atende.</p>
+    <div class="mini">
+      <span class="app-tile t-coral" style="left:0; top:56px; transform:rotate(-8deg)"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>
+      <span class="app-tile t-teal" style="left:62px; top:30px; transform:rotate(6deg)"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>
+      <span class="app-tile t-lilac" style="left:124px; top:62px; transform:rotate(-4deg)"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>
+      <span class="app-tile t-amber" style="left:186px; top:26px; transform:rotate(9deg)"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>
+      <span class="app-tile t-coral" style="left:248px; top:58px; transform:rotate(-6deg)"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span>
+    </div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>07</b>/09</span></footer>
+</section>
+
+<!-- 8 · virada · fluxo · tom-100: o destino do motivo -->
+<section class="slide fundo-tom-100 s8" data-layout="fluxo">
+  <div class="fluxo-topo">
+    <h2 class="t-titulo">Dá para atender com tudo <span class="enf-serifa" data-contraste="marca">numa tela só.</span></h2>
+  </div>
+  <div class="app-regua linha5">
+    <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span></span>
+    <span><span class="app-tile t-teal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span></span>
+    <span><span class="app-tile t-lilac"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span></span>
+    <span><span class="app-tile t-amber"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span></span>
+    <span><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-table"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></span></span>
+  </div>
+  <svg class="conv" width="888" height="70" viewBox="0 0 888 70" fill="none" stroke="#ef7960" stroke-width="2.5" stroke-linecap="round" opacity=".7">
+    <path d="M228 2 C 228 40, 444 30, 444 68"/><path d="M336 2 C 336 40, 444 30, 444 68"/><path d="M444 2 L 444 68"/><path d="M552 2 C 552 40, 444 30, 444 68"/><path d="M660 2 C 660 40, 444 30, 444 68"/>
+  </svg>
+  <div class="app-card tela" data-motivo="destino" data-contraste="ui">
+    <div class="lateral">
+      <span class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>Meu Consultório</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Sala de Espera</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>Meus clientes</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-wallet"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>Financeiro</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-calendar"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Calendário</span>
+    </div>
+    <div class="principal">
+      <h4>Boa tarde, <em data-contraste="marca">Clara</em></h4>
+      <p class="sub">Terça-feira · 4 sessões agendadas</p>
+      <div class="app-card mini-prox" style="position:relative">
+        <div class="app-rot"><i></i>Próxima · <b>em 10 min</b></div>
+        <div class="pac"><span class="app-av">AL</span><div><b>Ana L.</b><p>15:00 — 15:50 · Online</p></div></div>
+        <span class="app-btn coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Iniciar sessão</span>
+      </div>
+    </div>
+  </div>
+  <p class="t-nota nota">dados ilustrativos</p>
+  <p class="fluxo-pe t-corpo">Agenda, videochamada, anotações e WhatsApp no mesmo lugar. É para isso que a kz existe.</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>08</b>/09</span></footer>
+</section>
+
+<!-- 9 · cta · cta · creme -->
+<section class="slide fundo-creme s9" data-layout="cta">
+  <h2 class="cta-texto t-display">Conhece uma colega que vive essa semana?</h2>
+  <div class="app-card envio" data-contraste="ui">
+    <h3>Manda este post pra ela.</h3>
+    <div class="contatos">
+      <span><span class="app-av">BI</span>Bia</span>
+      <span><span class="app-av">RÔ</span>Rô</span>
+      <span><span class="app-av">LU</span>Lu</span>
+      <span><span class="app-av mais">+</span>Outra</span>
+    </div>
+    <span class="app-btn coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>Enviar</span>
+    <p class="t-nota">nomes ilustrativos</p>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>09</b>/09</span></footer>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T01:00:04Z",
+  "platform": "youtube",
+  "profileUrl": "https://www.youtube.com/channel/UCRGJJiW-mD-Tt3zALebevhQ",
+  "source": "yt-dlp",
+  "profile": {
+    "name": "Clínica Ágil",
+    "handle": "clinicaagil",
+    "bio": "Software de gestão para clínicas, consultórios e profissionais da saúde. Gerencie tudo em um só lugar com o Sistema Clínica Ágil!",
+    "avatar": "https://yt3.googleusercontent.com/ytc/AIdro_mDY51FKmuGJ1ved-w6WVkTLjVJB-vzxgCmRY1p7Oa2HGg=s0",
+    "avatarLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/avatar-43d99010.png",
+    "banner": "https://yt3.googleusercontent.com/gvueqVmCuukRJcnq3ed_fDPASRucGE5GTIVjD7P6_L1daOVFM2SHfYkhdFlr7u8XxQdUCfGo=s0",
+    "bannerLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/banner-e9004ee3.png",
+    "followers": 672,
+    "links": []
+  },
+  "items": [
+    {
+      "id": "mpREYShrAtg",
+      "url": "https://www.youtube.com/watch?v=mpREYShrAtg",
+      "type": "video",
+      "title": "O MAIS COMPLETO SISTEMA PARA CLÍNICAS  E CONSULTÓRIOS",
+      "publishedAt": "2025-06-23T13:45:29Z",
+      "durationS": 140,
+      "thumbnail": "https://i.ytimg.com/vi/mpREYShrAtg/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB6BJn0SaSjq-9i8t9shvLfSmplIg",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/mpREYShrAtg-8b3c.webp",
+      "metrics": {
+        "views": 457,
+        "likes": 7
+      }
+    },
+    {
+      "id": "kL_sVE7umTk",
+      "url": "https://www.youtube.com/watch?v=kL_sVE7umTk",
+      "type": "video",
+      "title": "SISTEMA PARA CLÍNICAS MULTIPROFISSIONAIS",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nSistema para clínicas multiprofissionais - Conheça o Clínica Ágil",
+      "publishedAt": "2024-10-24T20:30:05Z",
+      "durationS": 294,
+      "thumbnail": "https://i.ytimg.com/vi/kL_sVE7umTk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDeThahqv84hSUlgzcqis0wiI8-nA",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/kL_sVE7umTk-339f.webp",
+      "metrics": {
+        "views": 6518,
+        "likes": 68,
+        "comments": 5
+      }
+    },
+    {
+      "id": "cWpA1V1QNfs",
+      "url": "https://www.youtube.com/watch?v=cWpA1V1QNfs",
+      "type": "video",
+      "title": "Sistema de faturamento de GUIAS TISS XML - Conheça o Clínica Ágil",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nSistema para faturamento de GUIAS TISS XML - Conheça o Clínica Ágil",
+      "publishedAt": "2024-10-04T12:44:23Z",
+      "durationS": 70,
+      "thumbnail": "https://i.ytimg.com/vi/cWpA1V1QNfs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAnCr1-g7OJsKIj5xkIuC4UWd8IUw",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/cWpA1V1QNfs-e88d.webp",
+      "metrics": {
+        "views": 1371,
+        "likes": 13,
+        "comments": 5
+      }
+    },
+    {
+      "id": "b0cGzmz8vU0",
+      "url": "https://www.youtube.com/watch?v=b0cGzmz8vU0",
+      "type": "video",
+      "title": "Sistema para Psicólogos 2024 - O mais completo software para psicologia - Plataforma para Psicologia",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nSistema para Psicólogos - O mais completo software para psicologia - Plataforma para Psicologia",
+      "publishedAt": "2024-05-27T18:58:41Z",
+      "durationS": 163,
+      "thumbnail": "https://i.ytimg.com/vi/b0cGzmz8vU0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB80dCaf98NOTHpWSES7TN_Eas1hw",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/b0cGzmz8vU0-9926.webp",
+      "metrics": {
+        "views": 2564,
+        "likes": 34,
+        "comments": 2
+      }
+    },
+    {
+      "id": "rdptY7RaeCo",
+      "url": "https://www.youtube.com/watch?v=rdptY7RaeCo",
+      "type": "video",
+      "title": "Sistema para clínicas de estética 2024 - Software para estética",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nSistema para clínicas de estética 2024 - Software para estética",
+      "publishedAt": "2024-05-27T18:58:38Z",
+      "durationS": 235,
+      "thumbnail": "https://i.ytimg.com/vi/rdptY7RaeCo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBlcF61bZm0Gw-m8mJu-ZfiEPmIJQ",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/rdptY7RaeCo-348c.webp",
+      "metrics": {
+        "views": 1274,
+        "likes": 15,
+        "comments": 11
+      }
+    },
+    {
+      "id": "rIkzoGVTRFc",
+      "url": "https://www.youtube.com/watch?v=rIkzoGVTRFc",
+      "type": "video",
+      "title": "Sistema para Clínicas e Profissionais de Fisioterapia",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/",
+      "publishedAt": "2024-05-27T18:58:19Z",
+      "durationS": 140,
+      "thumbnail": "https://i.ytimg.com/vi/rIkzoGVTRFc/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkJHvYW6Pd6l7sm_47OBuOtpDDTA",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/rIkzoGVTRFc-b49f.webp",
+      "metrics": {
+        "views": 3166,
+        "likes": 25,
+        "comments": 1
+      }
+    },
+    {
+      "id": "JqCGXTokv_4",
+      "url": "https://www.youtube.com/watch?v=JqCGXTokv_4",
+      "type": "video",
+      "title": "Sistema para Studios de Pilates  - O mais completo software para pilates",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/",
+      "publishedAt": "2024-04-23T20:29:16Z",
+      "durationS": 166,
+      "thumbnail": "https://i.ytimg.com/vi/JqCGXTokv_4/hq720.jpg?sqp=-oaymwE2CNAFEJQDSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhCIFUoZTAP&rs=AOn4CLDdIV-87BnCDOdNFtAqASf6bABt-w",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/JqCGXTokv_4-60c6.webp",
+      "metrics": {
+        "views": 1470,
+        "likes": 14,
+        "comments": 1
+      }
+    },
+    {
+      "id": "5nIJzT6Z4S0",
+      "url": "https://www.youtube.com/watch?v=5nIJzT6Z4S0",
+      "type": "video",
+      "title": "SISTEMA PARA CLÍNICAS DE ESTÉTICA - MELHOR SOFTWARE PARA  ESTÉTICA",
+      "caption": "Conheça GRATUITAMENTE: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nO Clínica Ágil Estética é um sistema desenvolvido sob medida para clínicas, centros e profissionais de estética e beleza. O software possui ferramentas completas para uma gestão online profissional, incluindo: prontuário para estética, controle de sessões, agenda para estética, controle financeiro completo, lembretes no WhatsApp, CRM para clínica de estética, relatórios de gestão, assinatura eletrônica, contratos e termos profissionais, e muito mais!",
+      "publishedAt": "2022-11-11T14:05:49Z",
+      "durationS": 320,
+      "thumbnail": "https://i.ytimg.com/vi/5nIJzT6Z4S0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDM-sTwqj5Zme41bBNjSdszhiwXuA",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/5nIJzT6Z4S0-422b.webp",
+      "metrics": {
+        "views": 9913,
+        "likes": 90,
+        "comments": 14
+      }
+    },
+    {
+      "id": "NV5qSAlsgns",
+      "url": "https://www.youtube.com/watch?v=NV5qSAlsgns",
+      "type": "video",
+      "title": "SOFTWARE PARA PSICÓLOGOS COMPLETO - SISTEMA PARA CONSULTÓRIOS DE PSICOLOGIA",
+      "caption": "Conheça GRATUITAMENTE, acesse: \nhttps://www.clinicaagil.com.br/site/demonstracao-gratis-youtube/\n\nSoftware completo para consultórios de psicologia, incluindo prontuário para psicologia, agendamento online, controle financeiro, controle de sessões, teleatendimento, lembretes no WhatsApp e muito mais!",
+      "publishedAt": "2022-11-11T14:03:19Z",
+      "durationS": 201,
+      "thumbnail": "https://i.ytimg.com/vi/NV5qSAlsgns/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBEc09FPoeoDsPgMdfztF3Yk-38ZQ",
+      "thumbnailLocal": "media/youtube-www-youtube-com-channel-ucrgjjiw-md-tt3zalebevhq/thumbs/NV5qSAlsgns-9b1e.webp",
+      "metrics": {
+        "views": 6753,
+        "likes": 43,
+        "comments": 4
+      }
+    }
+  ],
+  "errors": []
+}

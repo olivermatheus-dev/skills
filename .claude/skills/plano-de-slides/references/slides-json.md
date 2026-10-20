@@ -31,10 +31,12 @@ Fica na pasta da peça (`companies/<slug>/contents/<ID>-<slug>/slides.json`). É
 | `liga` | ✓ (menos o último) | `{ anterior, proximo }`: o que passa de um slide para o outro (o motivo, a cor, a posição do olho) |
 | `enfase` | ✓ | `null` ou `{ tipo: "cor"|"serifa", palavra }`: só a palavra da virada |
 | `notas` | | o que o designer precisa saber (foto a confirmar, dado a checar) |
+| `campo` | | tom do campo de cor interno (split): `tom-100` · `tom-200` (padrão) · `tom-300` · `tom-800` · `tom-900`; o wireframe usa esta cor |
+| `molde` | | nome de uma série dentro da peça (ex.: `faq`): os slides do mesmo molde repetem a família e a estrutura e variam fundo e detalhe. Descreva o molde em `sistema.moldes.<nome>` (o que é fixo · o que varia). Pedido do Oliver em 2026-10-09 (FAQ dos fixados) |
 
 ## Regras mecânicas (o `check` mede)
 - ✗ família ou fundo fora da lista · camada sem função · capa (s1) fora de `capa-*` ou com > 10 palavras na âncora.
-- ✗ **vizinhos com a mesma família** · < 4 famílias em 8+ slides.
+- ✗ **vizinhos com a mesma família** (exceto vizinhos do mesmo `molde`, que precisam de fundos diferentes) · < 4 famílias em 8+ slides.
 - ✗ 4 slides seguidos sem `densidade: leve` (respiro a cada 3–4).
 - ✗ ênfase em mais de 1 slide numa janela de 3 (citação conta como serifa) · gradiente em mais de 1 slide · rótulo em mais de 1/3.
 - ✗ **motivo em < 70% dos slides** com algum slide sem `motivo_falta` · virada sem o motivo · sem `motivo.destino` · herói da virada = o título (começa com aspas ou repete a âncora). Plano antigo sem `motivo` por slide: o check infere da `evolucao` (⚠) e aplica a regra.

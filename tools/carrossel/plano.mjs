@@ -55,7 +55,14 @@ if (cmd === 'check') {
   });
   if (n > 1 && !String(S[0]?.familia).startsWith('capa')) X.push(`s1 precisa de uma família de capa (${FAMILIAS.filter((f) => f.startsWith('capa')).join(', ')})`);
   if (n >= 3 && S[n - 1]?.papel !== 'cta') W.push(`último slide não é CTA`);
-  for (let i = 1; i < n; i++) if (S[i].familia === S[i - 1].familia) X.push(`s${i}–s${i + 1}: vizinhos com a mesma família (${S[i].familia})`);
+  // molde (série dentro da peça, ex.: FAQ): vizinhos do mesmo molde podem repetir a família, desde que o fundo mude
+  const mesmoMolde = (a, b) => a.molde && a.molde === b.molde;
+  for (let i = 1; i < n; i++) {
+    if (S[i].familia !== S[i - 1].familia) continue;
+    if (!mesmoMolde(S[i], S[i - 1])) X.push(`s${i}–s${i + 1}: vizinhos com a mesma família (${S[i].familia})`);
+    else if (S[i].fundo === S[i - 1].fundo) X.push(`s${i}–s${i + 1}: mesmo molde "${S[i].molde}" com o mesmo fundo (varie o fundo entre vizinhos)`);
+  }
+  for (const m of new Set(S.map((s) => s.molde).filter(Boolean))) if (!plano.sistema?.moldes?.[m]) W.push(`molde "${m}" sem descrição em sistema.moldes`);
   const fam = new Set(S.map((s) => s.familia)).size;
   if (n >= 8 && fam < 4) X.push(`só ${fam} famílias em ${n} slides (mín. 4)`);
   if (n >= 5 && n < 8 && fam < 3) W.push(`só ${fam} famílias em ${n} slides`);
@@ -154,7 +161,7 @@ const tile = (s, i) => {
   const esc = ESCUROS.includes(s.fundo);
   const tinta = esc ? 'rgba(255,255,255,' : 'rgba(80,80,94,';
   const blocos = (B[s.familia] || [[96, 96, 888, 1158, 'a']]).map(([x, y, w, h, t]) => {
-    const st = { t: `${tinta}.55)`, a: `${tinta}.25)`, r: `${tinta}.4)`, o: esc ? 'rgba(255,255,255,.14)' : '#fff', c: fundo('tom-200'), n: `${tinta}.7)`, l: `${tinta}.35)` }[t];
+    const st = { t: `${tinta}.55)`, a: `${tinta}.25)`, r: `${tinta}.4)`, o: esc ? 'rgba(255,255,255,.14)' : '#fff', c: fundo(s.campo || 'tom-200'), n: `${tinta}.7)`, l: `${tinta}.35)` }[t];
     const borda = t === 'o' ? `border:1px solid ${tinta}.25);` : '';
     return `<i style="left:${x * K}px;top:${y * K}px;width:${w * K}px;height:${Math.max(1, h * K)}px;background:${st};${borda}${t === 'o' && h < 100 ? '' : ''}"></i>`;
   }).join('');

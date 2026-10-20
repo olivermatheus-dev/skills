@@ -8,7 +8,7 @@ priority: media
 due:
 depends: []
 parent:
-links: [contents/2026-10-07-origin-story/roteiro.md, contents/2026-10-07-origin-story/lp-secao-origem.md]
+links: [contents/C0001-origin-story/roteiro.md, contents/C0001-origin-story/lp-secao-origem.md]
 ---
 
 Escrever a origin story do founder (post + seção da LP), confirmando nome público e foto.

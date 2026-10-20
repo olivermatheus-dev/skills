@@ -1,0 +1,319 @@
+{
+  "empresa": "fulger",
+  "nos": "Fulger",
+  "modulo": "redes",
+  "data": "2026-10-10",
+  "cabecalho": "Fulger · Redes sociais e anúncios",
+  "fonte": "Fonte: coleta das redes e da Biblioteca de Anúncios da Meta · 10/10/2026",
+  "paginas": [
+    {
+      "tipo": "capa",
+      "titulo": "Redes e anúncios: *Fulger × concorrentes*",
+      "subtitulo": "O que os 10 concorrentes principais postam e anunciam, e onde o Fulger entra.",
+      "pontos": [
+        "**Só 3 de 10 anunciam** na Meta: Sistema Classis, iorCLASS e Beaky.",
+        "O pago inteiro bate na **vergonha de cobrar o aluno**, sempre com promessa de lembrete automático.",
+        "Redes fracas no nicho todo: o maior perfil tem 11,9 mil seguidores e *8 a 33 curtidas por post*.",
+        "Ninguém fala de **falta sem aviso, pacote que vira crédito** nem do aluno que não instala app."
+      ],
+      "meta": [
+        [
+          "Concorrentes",
+          "10: iorCLASS, Beaky, iProfe, Profeu, Aulvi, eClasse, EnsinaApp, FluentDesk, Proffin, Sistema Classis"
+        ],
+        [
+          "Critério",
+          "todos os concorrentes ativos (os 10 principais escolhidos pelo Oliver)"
+        ],
+        [
+          "Dados",
+          "coleta de 10/10/2026. Instagram sem token traz só os ~6 últimos posts. A Biblioteca da Meta mostra só anúncio ativo, sem gasto nem resultado."
+        ]
+      ]
+    },
+    {
+      "tipo": "tabela",
+      "titulo": "Anúncios *ativos* na Meta",
+      "sub": "Biblioteca de Anúncios da Meta, Brasil. Tempo no ar é o único sinal de desempenho.",
+      "colunas": [
+        "Marca",
+        "Nº",
+        "Formato",
+        "No ar desde",
+        "Ângulo",
+        "Oferta"
+      ],
+      "numericas": [
+        1
+      ],
+      "linhas": [
+        {
+          "celulas": [
+            "**Fulger**",
+            0,
+            "—",
+            "—",
+            "ainda sem anúncio",
+            "fila de testes grátis"
+          ],
+          "destaque": true
+        },
+        [
+          "**Sistema Classis**",
+          3,
+          "imagem",
+          "15/08 e 20/09",
+          "vergonha de cobrar; \"professora, não cobradora\"",
+          "7 dias sem cartão"
+        ],
+        [
+          "**iorCLASS**",
+          2,
+          "vídeo com rosto",
+          "20/09",
+          "carreira; preço no gancho (\"menos de R$ 100\")",
+          "30 dias grátis"
+        ],
+        [
+          "**Beaky**",
+          1,
+          "imagem tipográfica",
+          "30/08",
+          "a mensagem de cobrança do dia 05",
+          "começar grátis"
+        ],
+        [
+          "**Aulvi, eClasse, EnsinaApp, FluentDesk, iProfe, Profeu, Proffin**",
+          0,
+          "—",
+          "—",
+          "sem anúncio ativo",
+          "—"
+        ]
+      ]
+    },
+    {
+      "tipo": "conteudos",
+      "titulo": "Os criativos *no ar*",
+      "sub": "Um por anunciante, mais as variações da Classis.",
+      "fonte": "Fonte: Biblioteca de Anúncios da Meta · 10/10/2026",
+      "itens": [
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/sistema-classis/media/ads/1891531921810139.jpg",
+          "perfil": "Sistema Classis",
+          "rede": "Meta Ads",
+          "tipo": "imagem",
+          "data": "desde 20/09/2026",
+          "legenda": "Professora, cansada de virar cobradora de 40 mães todo início de mês?",
+          "metricas": "público frio · CTA Cadastre-se · **3 variações**",
+          "obs": "Cena real e específica (\"vou ver e te mando\", 40 mães). A professora se reconhece na frase. Foto de banco, sem marca."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/sistema-classis/media/ads/1707642463842041.jpg",
+          "perfil": "Sistema Classis",
+          "rede": "Meta Ads",
+          "tipo": "imagem",
+          "data": "desde 15/08/2026",
+          "legenda": "Odeia cobrar seus alunos? A Classis resolve para você automaticamente.",
+          "metricas": "no ar há ~8 semanas · **mais antigo**",
+          "obs": "O anúncio mais antigo do nicho: sinal de que converte. Promessa: o sistema cobra no lugar dela."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/beaky/media/ads/1391958709784839.jpg",
+          "perfil": "Beaky",
+          "rede": "Meta Ads",
+          "tipo": "imagem",
+          "data": "desde 30/08/2026",
+          "legenda": "Professor, a mensagem mais difícil do mês? Nunca mais.",
+          "metricas": "CTA Saiba mais · **1 anúncio**",
+          "obs": "Melhor criativo do grupo: antes × depois numa tela só, na marca. O texto do anúncio é vago e não acompanha a imagem."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/iorclass/media/ads/1380272937598603.jpg",
+          "perfil": "iorCLASS",
+          "rede": "Meta Ads",
+          "tipo": "vídeo",
+          "data": "desde 20/09/2026",
+          "legenda": "pov: você encontrou um aplicativo de professores particulares por menos de R$ 100 por mês",
+          "metricas": "30 dias grátis · **2 vídeos**",
+          "obs": "Rosto humano em formato de reels, preço como gancho. Mesmo texto nos 2 anúncios: testa só o vídeo."
+        }
+      ]
+    },
+    {
+      "tipo": "tabela",
+      "titulo": "Audiência e *ritmo*",
+      "sub": "Último retrato de cada perfil. Engaj. = curtidas medianas ÷ seguidores. Aulvi, eClasse, EnsinaApp, FluentDesk, Proffin e Sistema Classis não têm rede ativa.",
+      "colunas": [
+        "Marca",
+        "Rede",
+        "Seguidores",
+        "Posts/sem.",
+        "Views (mediana)",
+        "Engaj."
+      ],
+      "numericas": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "linhas": [
+        {
+          "celulas": [
+            "**Fulger**",
+            "sem perfil ainda",
+            "—",
+            "—",
+            "—",
+            "—"
+          ],
+          "destaque": true
+        },
+        [
+          "**iorCLASS**",
+          "instagram",
+          11866,
+          2.9,
+          134,
+          "0,11%"
+        ],
+        [
+          "**Beaky**",
+          "instagram",
+          1433,
+          0.9,
+          106,
+          "1,36%"
+        ],
+        [
+          "**iProfe**",
+          "instagram",
+          214,
+          "parado desde 2021",
+          56,
+          "4,67%"
+        ],
+        [
+          "**Beaky**",
+          "youtube",
+          13,
+          "parado desde jul.",
+          150,
+          "15,38%"
+        ],
+        [
+          "**Profeu**",
+          "instagram",
+          5,
+          "1 post em 2026",
+          "—",
+          "0%"
+        ],
+        [
+          "**iProfe**",
+          "youtube",
+          null,
+          "parado desde 2021",
+          372,
+          "—"
+        ]
+      ]
+    },
+    {
+      "tipo": "conteudos",
+      "titulo": "Top conteúdos: *instagram*",
+      "sub": "Últimos 90 dias, por alcance (views). Até 2 por marca. Nenhum passa de 2,1× a mediana do próprio perfil.",
+      "itens": [
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/beaky/media/instagram-www-instagram-com-beaky-com-br/thumbs/DdzflNsTLeO-b011.jpg",
+          "perfil": "Beaky",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "27/09/2026",
+          "legenda": "Vem conhecer uma das vantagens de usar a Beaky na gestão das suas aulas 🦉💜",
+          "metricas": "**221** views · 48 ♥ · 8 coment.",
+          "multiplo": "2,1×",
+          "obs": "O único acima da curva no nicho. Uma vantagem do produto mostrada na tela, com CTA de teste grátis."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/iorclass/media/instagram-iorclass/thumbs/DduhU0KBYLu-c516.jpg",
+          "perfil": "iorCLASS",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "25/09/2026",
+          "legenda": "Quem mais se sente com a missão da semana cumprida, levanta a mão 🤚",
+          "metricas": "**169** views · 13 ♥ · 1 coment.",
+          "multiplo": "1,3×",
+          "obs": "Identificação com o alívio de fechar a semana organizado. Leve, sem produto."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/iorclass/media/instagram-iorclass/thumbs/Dd1ByNVBQxe-cb7d.jpg",
+          "perfil": "iorCLASS",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "28/09/2026",
+          "legenda": "Você já conversou com um possível aluno, ele demonstrou interesse, mas a conversa simplesmente parou?",
+          "metricas": "**134** views · 15 ♥ · 0 coment.",
+          "multiplo": "1×",
+          "obs": "Conteúdo de carreira (vender aula). É a linha do perfil inteiro, e não engaja."
+        },
+        {
+          "thumb": "C:/Users/Oliver Matheus/Desktop/git/skills/companies/fulger/competitors/beaky/media/instagram-www-instagram-com-beaky-com-br/thumbs/DeC5A4eTDyH-b0d7.jpg",
+          "perfil": "Beaky",
+          "rede": "instagram",
+          "tipo": "reel",
+          "data": "03/10/2026",
+          "legenda": "Repor aulas nunca foi tão fácil 🦉💜",
+          "metricas": "**106** views · 28 ♥ · 2 coment.",
+          "multiplo": "1×",
+          "obs": "Dor concreta da aula (reposição) resolvida na tela. O tipo de tema que o Fulger tem de sobra."
+        }
+      ]
+    },
+    {
+      "tipo": "cards",
+      "titulo": "Onde o Fulger *se diferencia*",
+      "sub": "Território que nenhum dos 10 ocupa no pago nem no orgânico.",
+      "itens": [
+        {
+          "rotulo": "Cobrança",
+          "titulo": "Sem constrangimento, com você no controle",
+          "texto": "O mercado promete \"automático, sem você\". O Fulger deixa a mensagem pronta, educada e com o valor certo: você toca e manda do seu WhatsApp. Nunca dizer \"automático\"."
+        },
+        {
+          "rotulo": "Falta",
+          "titulo": "A falta sem aviso cobra pela sua regra",
+          "texto": "Ninguém anuncia regra de falta. É dor forte e diária, e o Fulger já tem pronto."
+        },
+        {
+          "rotulo": "Pacote",
+          "titulo": "O pacote que vira crédito, não conta de cabeça",
+          "texto": "Nenhum concorrente fala de pacote e crédito. Encaixa no pilar \"Dinheiro sem conta de cabeça\"."
+        },
+        {
+          "rotulo": "Aluno",
+          "titulo": "Seu aluno não instala nada",
+          "texto": "A Beaky depende de app do aluno. O link sem login é contraste direto e ainda não explorado."
+        }
+      ]
+    },
+    {
+      "tipo": "insights",
+      "titulo": "O que *aproveitar*",
+      "pontos": [
+        "**Cena real vence promessa genérica:** a Classis, com frases que a professora já ouviu, é o anúncio mais antigo no ar.",
+        "**Antes × depois numa tela** (Beaky) explica o produto sem texto longo.",
+        "**Dor da aula engaja mais que carreira:** o reel de produto da Beaky passa o conteúdo de carreira do iorCLASS com 8× menos seguidores.",
+        "**O orgânico está vazio:** ninguém tem conteúdo fora da curva. Constância e acabamento já destacam o Fulger."
+      ],
+      "sugestoes": [
+        "Primeiro anúncio: cobrança sem constrangimento, com a cena real do dia 05 e a mensagem pronta saindo do WhatsApp do professor.",
+        "Reels de dor com o produto na tela: reposição, falta sem aviso, pacote que vira crédito, aluno que não instala app.",
+        "Criativos no visual do Fulger (antes × depois tipográfico), nunca foto de banco.",
+        "Evitar preço no gancho enquanto não houver preço, e qualquer promessa de automação ou de \"receber em dia\".",
+        "Repetir a coleta em ~1 semana: anúncio que sair do ar é sinal de que não converteu."
+      ]
+    }
+  ]
+}

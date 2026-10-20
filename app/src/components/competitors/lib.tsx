@@ -39,7 +39,7 @@ export function PlatformIcon({ platform, size = 16, className, mono }: { platfor
   }
 }
 
-export const KINDS = { concorrente: 'Concorrente', referencia: 'Referência', criador: 'Criador', pagina: 'Página' } as const;
+export const KINDS = { concorrente: 'Concorrente', referencia: 'Referência (benchmark)', criador: 'Criador', pagina: 'Página' } as const;
 export const KIND_COLOR: Record<string, string> = { concorrente: '#dc2626', referencia: '#4f46e5', criador: '#0d9488', pagina: '#d97706' };
 export const STATUS_LABEL: Record<ItemMark['status'], string> = { nova: 'Nova', marcada: 'Marcada', analisada: 'Analisada', descartada: 'Descartada' };
 export const STATUS_COLOR: Record<ItemMark['status'], string> = { nova: '#71717a', marcada: '#4f46e5', analisada: '#16a34a', descartada: '#a1a1aa' };

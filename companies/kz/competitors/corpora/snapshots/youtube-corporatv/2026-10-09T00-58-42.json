@@ -1,0 +1,886 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-09T00:58:42Z",
+  "platform": "youtube",
+  "profileUrl": "https://www.youtube.com/@CorporaTV",
+  "source": "yt-dlp",
+  "profile": {
+    "name": "CorporaTV",
+    "handle": "CorporaTV",
+    "bio": "Volte a Ser Psicóloga.\nAutomatizamos toda gestão do seu consultório para que você foque no seu paciente.",
+    "avatar": "https://yt3.googleusercontent.com/xTrGCYHnAGzNKanu4Bzd4p-YIQ-Q7t_Thu1HVb94OamawWS0vRhqzcxZs_P-W9pAU7N2SHVp8A=s0",
+    "avatarLocal": "media/youtube-corporatv/avatar-9445e525.png",
+    "followers": 970,
+    "links": []
+  },
+  "items": [
+    {
+      "id": "zPYp4EVDIZw",
+      "url": "https://www.youtube.com/watch?v=zPYp4EVDIZw",
+      "type": "video",
+      "title": "Testes e escalas | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Testes e escalas na Corpora.\n\nFuncionalidade: Testes e escalas\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 33,
+      "thumbnail": "https://i.ytimg.com/vi/zPYp4EVDIZw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDns2X5sk6pilwFlH6P6SQG0ck0LA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/zPYp4EVDIZw-6ca8.webp",
+      "metrics": {
+        "views": 21
+      }
+    },
+    {
+      "id": "xR_-JAgyYr4",
+      "url": "https://www.youtube.com/watch?v=xR_-JAgyYr4",
+      "type": "video",
+      "title": "Cobrar pacientes pelo financeiro | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Cobrar pacientes pelo financeiro na Corpora.\n\nFuncionalidade: Cobrar pacientes pelo financeiro\nCategoria: Menu / Financeiro\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 28,
+      "thumbnail": "https://i.ytimg.com/vi/xR_-JAgyYr4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDENDfozKXM574ErGnAwrImXjfIIw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/xR_-JAgyYr4-958e.webp",
+      "metrics": {
+        "views": 32
+      }
+    },
+    {
+      "id": "vGqreNgEiNo",
+      "url": "https://www.youtube.com/watch?v=vGqreNgEiNo",
+      "type": "video",
+      "title": "Variáveis em documentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar variáveis para preencher dados automaticamente em documentos.\n\nFuncionalidade: Variáveis em documentos\nCategoria: Menu / Documentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 33,
+      "thumbnail": "https://i.ytimg.com/vi/vGqreNgEiNo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB4gyNtWYJrlmsjgEl_bFYPpCGamw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/vGqreNgEiNo-a6d5.webp",
+      "metrics": {
+        "views": 10
+      }
+    },
+    {
+      "id": "v8_h77ZBNWo",
+      "url": "https://www.youtube.com/watch?v=v8_h77ZBNWo",
+      "type": "video",
+      "title": "Emitir documento para paciente | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a emitir um documento real dentro da ficha do paciente.\n\nFuncionalidade: Emitir documento para paciente\nCategoria: Menu / Documentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 60,
+      "thumbnail": "https://i.ytimg.com/vi/v8_h77ZBNWo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCR1kQFfOKwggEabCy1bDvf1gze9g&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/v8_h77ZBNWo-f4f8.webp",
+      "metrics": {
+        "views": 16
+      }
+    },
+    {
+      "id": "szZVoOo4wTo",
+      "url": "https://www.youtube.com/watch?v=szZVoOo4wTo",
+      "type": "video",
+      "title": "Enviar formulários por terceiros | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a entender quando formulários podem ser respondidos por responsáveis ou terceiros.\n\nFuncionalidade: Enviar formulários por terceiros\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 29,
+      "thumbnail": "https://i.ytimg.com/vi/szZVoOo4wTo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA-ufo9P-ZjC_h0LEUhKmr6JYc3dA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/szZVoOo4wTo-a053.webp",
+      "metrics": {
+        "views": 2
+      }
+    },
+    {
+      "id": "qhLoky4QPE8",
+      "url": "https://www.youtube.com/watch?v=qhLoky4QPE8",
+      "type": "video",
+      "title": "Cobrança automática | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Cobrança automática na Corpora.\n\nFuncionalidade: Cobrança automática\nCategoria: Menu / Cobranca\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 28,
+      "thumbnail": "https://i.ytimg.com/vi/qhLoky4QPE8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCdxqvVvaLuqP-DV8YDXAyXJ8zHEA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/qhLoky4QPE8-110b.webp",
+      "metrics": {
+        "views": 26
+      }
+    },
+    {
+      "id": "phoc1_-PgfQ",
+      "url": "https://www.youtube.com/watch?v=phoc1_-PgfQ",
+      "type": "video",
+      "title": "Secretárias e acessos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Secretárias e acessos na Corpora.\n\nFuncionalidade: Secretárias e acessos\nCategoria: Configuracoes\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 27,
+      "thumbnail": "https://i.ytimg.com/vi/phoc1_-PgfQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4s6u830bHCR7jmyhz6ARs4lX43w&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/phoc1_-PgfQ-ca1b.webp",
+      "metrics": {
+        "views": 16
+      }
+    },
+    {
+      "id": "h51FWiPAyUA",
+      "url": "https://www.youtube.com/watch?v=h51FWiPAyUA",
+      "type": "video",
+      "title": "Sincronização de calendários | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Sincronização de calendários na Corpora.\n\nFuncionalidade: Sincronização de calendários\nCategoria: Configuracoes\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:37Z",
+      "durationS": 29,
+      "thumbnail": "https://i.ytimg.com/vi/h51FWiPAyUA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCOCZ0U5JL6TqrDSgD2GvE37l7MCA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/h51FWiPAyUA-e593.webp",
+      "metrics": {
+        "views": 38
+      }
+    },
+    {
+      "id": "Yqyj4dSDATQ",
+      "url": "https://www.youtube.com/watch?v=Yqyj4dSDATQ",
+      "type": "video",
+      "title": "Instrumentos versus documentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a entender a diferença entre instrumento clínico e documento emitido.\n\nFuncionalidade: Instrumentos versus documentos\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:35Z",
+      "durationS": 29,
+      "thumbnail": "https://i.ytimg.com/vi/Yqyj4dSDATQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDlx1tbM-XaxIjLBC0pw6G3sE-ndA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/Yqyj4dSDATQ-6618.webp",
+      "metrics": {
+        "views": 3
+      }
+    },
+    {
+      "id": "NjgtTPJEFCw",
+      "url": "https://www.youtube.com/watch?v=NjgtTPJEFCw",
+      "type": "video",
+      "title": "Exportar ou enviar documentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a revisar a prévia de um documento e usar as ações de envio ou impressão.\n\nFuncionalidade: Exportar ou enviar documentos\nCategoria: Menu / Documentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:35Z",
+      "durationS": 40,
+      "thumbnail": "https://i.ytimg.com/vi/NjgtTPJEFCw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBxTPKmkwslGDAZp-nUenukpMvxuQ&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/NjgtTPJEFCw-561b.webp",
+      "metrics": {
+        "views": 3
+      }
+    },
+    {
+      "id": "Metby3OYMXk",
+      "url": "https://www.youtube.com/watch?v=Metby3OYMXk",
+      "type": "video",
+      "title": "Criar modelo personalizado de documento | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a criar um modelo próprio para reutilizar documentos clínicos.\n\nFuncionalidade: Criar modelo personalizado de documento\nCategoria: Menu / Documentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:35Z",
+      "durationS": 37,
+      "thumbnail": "https://i.ytimg.com/vi/Metby3OYMXk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB7q-lsCFE2zwl33mJM4_Azxue7pg&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/Metby3OYMXk-a127.webp",
+      "metrics": {
+        "views": 7
+      }
+    },
+    {
+      "id": "75bFrnhiLi8",
+      "url": "https://www.youtube.com/watch?v=75bFrnhiLi8",
+      "type": "video",
+      "title": "Respostas dos pacientes em instrumentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a localizar aplicações e respostas de instrumentos dentro da ficha do paciente.\n\nFuncionalidade: Respostas dos pacientes em instrumentos\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:35Z",
+      "durationS": 35,
+      "thumbnail": "https://i.ytimg.com/vi/75bFrnhiLi8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAOYsxJNaFp2lnSyD48jJPC4Aw1Mw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/75bFrnhiLi8-b3ac.webp",
+      "metrics": {
+        "views": 5
+      }
+    },
+    {
+      "id": "gVX45pQ6li0",
+      "url": "https://www.youtube.com/watch?v=gVX45pQ6li0",
+      "type": "video",
+      "title": "Instrumentos Clínicos da Corpora | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a entender a biblioteca de instrumentos clínicos da Corpora.\n\nFuncionalidade: Instrumentos Clínicos da Corpora\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 32,
+      "thumbnail": "https://i.ytimg.com/vi/gVX45pQ6li0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLArSPDvXPJ8MaO5cs1bUAO9apIciA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/gVX45pQ6li0-b67f.webp",
+      "metrics": {
+        "views": 13
+      }
+    },
+    {
+      "id": "T4H9s-GEZ_8",
+      "url": "https://www.youtube.com/watch?v=T4H9s-GEZ_8",
+      "type": "video",
+      "title": "Formulários personalizados | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a iniciar um formulário clínico personalizado.\n\nFuncionalidade: Formulários personalizados\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 32,
+      "thumbnail": "https://i.ytimg.com/vi/T4H9s-GEZ_8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC0SVALUAUT-A-7AiKOzZLpftmorg&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/T4H9s-GEZ_8-f9eb.webp",
+      "metrics": {
+        "views": 6
+      }
+    },
+    {
+      "id": "SMTMs7sRtGU",
+      "url": "https://www.youtube.com/watch?v=SMTMs7sRtGU",
+      "type": "video",
+      "title": "Formulários Corpora | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar a funcionalidade Formulários Corpora na Corpora.\n\nFuncionalidade: Formulários Corpora\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 30,
+      "thumbnail": "https://i.ytimg.com/vi/SMTMs7sRtGU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC5KBiTI4BJ6y0uvwy-ho-zHRl_Dw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/SMTMs7sRtGU-34c0.webp",
+      "metrics": {
+        "views": 4
+      }
+    },
+    {
+      "id": "9YdKmpnGC28",
+      "url": "https://www.youtube.com/watch?v=9YdKmpnGC28",
+      "type": "video",
+      "title": "Modelos prontos de documentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a localizar modelos prontos e escolher uma base para documentos clínicos.\n\nFuncionalidade: Modelos prontos de documentos\nCategoria: Menu / Documentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 31,
+      "thumbnail": "https://i.ytimg.com/vi/9YdKmpnGC28/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDMu-SLdPLc1er55jmtocYJFKWe4A&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/9YdKmpnGC28-2317.webp",
+      "metrics": {
+        "views": 14
+      }
+    },
+    {
+      "id": "5ERqjiUJUos",
+      "url": "https://www.youtube.com/watch?v=5ERqjiUJUos",
+      "type": "video",
+      "title": "Enviar instrumento por link | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a enviar um instrumento para o paciente responder por link.\n\nFuncionalidade: Enviar instrumento por link\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 25,
+      "thumbnail": "https://i.ytimg.com/vi/5ERqjiUJUos/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDyuM_leGxKt13fqX-2ZGOn4GLDig&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/5ERqjiUJUos-4c84.webp",
+      "metrics": {
+        "views": 1
+      }
+    },
+    {
+      "id": "3wx_rd5FfYo",
+      "url": "https://www.youtube.com/watch?v=3wx_rd5FfYo",
+      "type": "video",
+      "title": "Aplicar instrumento em sessão | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a aplicar um instrumento clínico real para um paciente durante o atendimento.\n\nFuncionalidade: Aplicar instrumento em sessão\nCategoria: Menu / Instrumentos\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-22T00:35:34Z",
+      "durationS": 48,
+      "thumbnail": "https://i.ytimg.com/vi/3wx_rd5FfYo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCuhrioqb0JAVKJrncGMvkXacszAg&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/3wx_rd5FfYo-a71d.webp",
+      "metrics": {
+        "views": 8
+      }
+    },
+    {
+      "id": "shaJsFre61Q",
+      "url": "https://www.youtube.com/watch?v=shaJsFre61Q",
+      "type": "video",
+      "title": "Aniversários na Agenda | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a visualizar aniversários de pacientes na agenda.\n\nFuncionalidade: Aniversários na Agenda\nCategoria: Menu / Agenda\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:41Z",
+      "durationS": 26,
+      "thumbnail": "https://i.ytimg.com/vi/shaJsFre61Q/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAVuWlpXtfm0Mt8Cp73bUtrO8Ug_g&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/shaJsFre61Q-56b2.webp",
+      "metrics": {
+        "views": 4
+      }
+    },
+    {
+      "id": "vCaagZmJjeM",
+      "url": "https://www.youtube.com/watch?v=vCaagZmJjeM",
+      "type": "video",
+      "title": "Filtros | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a usar filtros para organizar a lista de pacientes.\n\nFuncionalidade: Filtros\nCategoria: Menu / Pacientes\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 62,
+      "thumbnail": "https://i.ytimg.com/vi/vCaagZmJjeM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBdg7HA5dNdZ5VUtQNs4DjYQ_3-1g&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/vCaagZmJjeM-b3de.webp",
+      "metrics": {
+        "views": 2
+      }
+    },
+    {
+      "id": "uNmnT3VHMsg",
+      "url": "https://www.youtube.com/watch?v=uNmnT3VHMsg",
+      "type": "video",
+      "title": "Bloqueio com Cancelamentos | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a bloquear horários e lidar com cancelamentos relacionados.\n\nFuncionalidade: Bloqueio com Cancelamentos\nCategoria: Menu / Agenda\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 34,
+      "thumbnail": "https://i.ytimg.com/vi/uNmnT3VHMsg/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBPXH5q7kC3_6OKHcYNX9pj4nuWIg&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/uNmnT3VHMsg-1953.webp",
+      "metrics": {
+        "views": 0
+      }
+    },
+    {
+      "id": "stqX7hsoOP8",
+      "url": "https://www.youtube.com/watch?v=stqX7hsoOP8",
+      "type": "video",
+      "title": "Meu Perfil | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a configurar os dados principais do perfil profissional dentro da Corpora.\n\nFuncionalidade: Meu Perfil\nCategoria: Comece Aqui / Configurações iniciais\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 69,
+      "thumbnail": "https://i.ytimg.com/vi/stqX7hsoOP8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAY2ly9Kk3cpY_4vCwutNsb0tAktw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/stqX7hsoOP8-8604.webp",
+      "metrics": {
+        "views": 8
+      }
+    },
+    {
+      "id": "rfcmjCPUWa0",
+      "url": "https://www.youtube.com/watch?v=rfcmjCPUWa0",
+      "type": "video",
+      "title": "Horários de Atendimento | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a montar faixas de horários, modalidades e disponibilidade para agendamento.\n\nFuncionalidade: Horários de Atendimento\nCategoria: Comece Aqui / Configurações iniciais\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 79,
+      "thumbnail": "https://i.ytimg.com/vi/rfcmjCPUWa0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD8nPGAkoqd1IouCcqCZzf9MPfzlQ&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/rfcmjCPUWa0-6e6b.webp",
+      "metrics": {
+        "views": 7
+      }
+    },
+    {
+      "id": "qDQIdRlMOlw",
+      "url": "https://www.youtube.com/watch?v=qDQIdRlMOlw",
+      "type": "video",
+      "title": "Agenda Recorrente | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a criar uma agenda recorrente e revisar como ela aparece no sistema.\n\nFuncionalidade: Agenda Recorrente\nCategoria: Comece Aqui / Tudo pronto pra atender / Criando agendas\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 59,
+      "thumbnail": "https://i.ytimg.com/vi/qDQIdRlMOlw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDXzDZaJdNRv7lzmakUt25tQF0M6A&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/qDQIdRlMOlw-f2ad.webp",
+      "metrics": {
+        "views": 8
+      }
+    },
+    {
+      "id": "opMiiDp94_g",
+      "url": "https://www.youtube.com/watch?v=opMiiDp94_g",
+      "type": "video",
+      "title": "Criando Agendas | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a criar agendamentos dentro da agenda da Corpora.\n\nFuncionalidade: Criando Agendas\nCategoria: Menu / Agenda\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 36,
+      "thumbnail": "https://i.ytimg.com/vi/opMiiDp94_g/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDcs4GR1aFgisCrLY1wGQG3JbLWKA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/opMiiDp94_g-770e.webp",
+      "metrics": {
+        "views": 7
+      }
+    },
+    {
+      "id": "oV3oBpJsJN0",
+      "url": "https://www.youtube.com/watch?v=oV3oBpJsJN0",
+      "type": "video",
+      "title": "Detalhes do Agendamento | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a abrir e entender os detalhes de um agendamento.\n\nFuncionalidade: Detalhes do Agendamento\nCategoria: Menu / Agenda\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 28,
+      "thumbnail": "https://i.ytimg.com/vi/oV3oBpJsJN0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBiAm5CxypvJEq8pnX3FdbBgVADZg&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/oV3oBpJsJN0-4bd7.webp",
+      "metrics": {
+        "views": 5
+      }
+    },
+    {
+      "id": "l_5XCXtAD8w",
+      "url": "https://www.youtube.com/watch?v=l_5XCXtAD8w",
+      "type": "video",
+      "title": "Visão Geral | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a entender a tela principal da agenda e seus controles.\n\nFuncionalidade: Visão Geral\nCategoria: Menu / Agenda\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:40Z",
+      "durationS": 38,
+      "thumbnail": "https://i.ytimg.com/vi/l_5XCXtAD8w/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCOOf_yNo5mJMI4M_7MBLdksWV5cA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/l_5XCXtAD8w-78af.webp",
+      "metrics": {
+        "views": 7
+      }
+    },
+    {
+      "id": "jmea7WoczF0",
+      "url": "https://www.youtube.com/watch?v=jmea7WoczF0",
+      "type": "video",
+      "title": "Link de Pagamento | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a gerar e enviar links de pagamento quando disponível.\n\nFuncionalidade: Link de Pagamento\nCategoria: Comece Aqui / Entendendo o financeiro\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:39Z",
+      "durationS": 64,
+      "thumbnail": "https://i.ytimg.com/vi/jmea7WoczF0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAgNqNxkPvwVoHy8rYU9BQmptVVBA&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/jmea7WoczF0-9291.webp",
+      "metrics": {
+        "views": 5
+      }
+    },
+    {
+      "id": "i-nUb7NP3Ck",
+      "url": "https://www.youtube.com/watch?v=i-nUb7NP3Ck",
+      "type": "video",
+      "title": "Link de Cadastro | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a copiar e usar o link de cadastro para o próprio paciente preencher seus dados.\n\nFuncionalidade: Link de Cadastro\nCategoria: Comece Aqui / Tudo pronto pra atender / Cadastro de pacientes\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:39Z",
+      "durationS": 34,
+      "thumbnail": "https://i.ytimg.com/vi/i-nUb7NP3Ck/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQm2qJK2Pg3XfeFzNGdT-kjWYRQw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/i-nUb7NP3Ck-5f07.webp",
+      "metrics": {
+        "views": 10
+      }
+    },
+    {
+      "id": "cKBhMgEtFKA",
+      "url": "https://www.youtube.com/watch?v=cKBhMgEtFKA",
+      "type": "video",
+      "title": "Download CSV | Tutorial Corpora",
+      "caption": "Neste tutorial da Corpora, você aprende a exportar a lista de pacientes em CSV.\n\nFuncionalidade: Download CSV\nCategoria: Menu / Pacientes\n\nLinks úteis:\nConheça a Corpora: https://usecorpora.com.br\nAcesse a plataforma: https://app.usecorpora.com.br\n\nA Corpora é uma plataforma para profissionais de saúde organizarem agenda, pacientes, documentos e financeiro em um só lugar.\n\n#Corpora #SaudeInteligente #TutorialCorpora",
+      "publishedAt": "2026-05-21T16:59:39Z",
+      "durationS": 39,
+      "thumbnail": "https://i.ytimg.com/vi/cKBhMgEtFKA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCukvBsbaaVFxLQXKweK0G71xGuBw&usqp=CBQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/cKBhMgEtFKA-7051.webp",
+      "metrics": {
+        "views": 4
+      }
+    },
+    {
+      "id": "kDxbaC7idqA",
+      "url": "https://www.youtube.com/shorts/kDxbaC7idqA",
+      "type": "short",
+      "title": "O MOSQUITO DEPOIS DE TOMAR MEU SANGUE COM SERTRALINA E RITALINA",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-14T18:00:57Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/kDxbaC7idqA/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYfyBCKDEwDw==&rs=AOn4CLDA0iI19rzKNWLPsa_WfwVJ58xrDA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/kDxbaC7idqA-4f7a.jpg",
+      "metrics": {
+        "views": 2316,
+        "likes": 26,
+        "comments": 1
+      }
+    },
+    {
+      "id": "sOM1UAy3neA",
+      "url": "https://www.youtube.com/shorts/sOM1UAy3neA",
+      "type": "short",
+      "title": "Não julgue um livro pela capa, MENOS ESSE!",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-13T18:01:04Z",
+      "durationS": 6,
+      "thumbnail": "https://i.ytimg.com/vi/sOM1UAy3neA/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBlKEAwDw==&rs=AOn4CLBoLR0yBUNvws8fFMArG4q5LvB5xA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/sOM1UAy3neA-98a8.jpg",
+      "metrics": {
+        "views": 1213,
+        "likes": 16,
+        "comments": 1
+      }
+    },
+    {
+      "id": "cqGT7R6JImo",
+      "url": "https://www.youtube.com/shorts/cqGT7R6JImo",
+      "type": "short",
+      "title": "existe COACH INFILTRADO na PSICOLOGIA??",
+      "caption": "#psicologia #meme #humor #COACH #POLEMICA #CHAVOSODAUSP",
+      "publishedAt": "2025-11-12T18:00:48Z",
+      "durationS": 24,
+      "thumbnail": "https://i.ytimg.com/vi/cqGT7R6JImo/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYVyBlKGUwDw==&rs=AOn4CLBvFcHTHDy3QgQW8ZzzY02LRm7F_w",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/cqGT7R6JImo-6761.jpg",
+      "metrics": {
+        "views": 808,
+        "likes": 7
+      }
+    },
+    {
+      "id": "N5rb1hgtHL0",
+      "url": "https://www.youtube.com/shorts/N5rb1hgtHL0",
+      "type": "short",
+      "title": "Até o GENIO da lampada ficou com DÓ",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-11T18:00:21Z",
+      "durationS": 9,
+      "thumbnail": "https://i.ytimg.com/vi/N5rb1hgtHL0/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBcKFIwDw==&rs=AOn4CLAKdNemycl13c8KZDp1PapDXxzw8Q",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/N5rb1hgtHL0-a020.jpg",
+      "metrics": {
+        "views": 1528,
+        "likes": 24
+      }
+    },
+    {
+      "id": "D4G9YWG1mx0",
+      "url": "https://www.youtube.com/shorts/D4G9YWG1mx0",
+      "type": "short",
+      "title": "Cometendo um ATO FALHO!",
+      "caption": "#psicologia #meme #humor #freud",
+      "publishedAt": "2025-11-10T18:00:23Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/D4G9YWG1mx0/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYUiBlKFUwDw==&rs=AOn4CLDm1jYvSj0QzyVJDw5xTk9NQRd6iw",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/D4G9YWG1mx0-2f89.jpg",
+      "metrics": {
+        "views": 1358,
+        "likes": 16
+      }
+    },
+    {
+      "id": "m2PSf3HeQQ0",
+      "url": "https://www.youtube.com/shorts/m2PSf3HeQQ0",
+      "type": "short",
+      "title": "quando a psicóloga faz AQUELA pergunta específica e vc sabe que ela te pegou",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-07T18:00:58Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/m2PSf3HeQQ0/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBZKFcwDw==&rs=AOn4CLB-3LucrNW3L-GGZ6NbVDUZUuS0uA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/m2PSf3HeQQ0-49b1.jpg",
+      "metrics": {
+        "views": 1513,
+        "likes": 32
+      }
+    },
+    {
+      "id": "Rqq2Y8LtDzM",
+      "url": "https://www.youtube.com/shorts/Rqq2Y8LtDzM",
+      "type": "short",
+      "title": "existe psicologia neutra?",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-06T18:00:40Z",
+      "durationS": 10,
+      "thumbnail": "https://i.ytimg.com/vi/Rqq2Y8LtDzM/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBRKEQwDw==&rs=AOn4CLCSUYJohryPPCvT1xOyBf4M5Qz8sA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/Rqq2Y8LtDzM-2efd.jpg",
+      "metrics": {
+        "views": 1720,
+        "likes": 17
+      }
+    },
+    {
+      "id": "osYGwEVSlEU",
+      "url": "https://www.youtube.com/shorts/osYGwEVSlEU",
+      "type": "short",
+      "title": "ouvindo da pessoa mais tóxica que vai fazer psicologia por minha causa",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-11-05T18:00:54Z",
+      "durationS": 9,
+      "thumbnail": "https://i.ytimg.com/vi/osYGwEVSlEU/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBSKEwwDw==&rs=AOn4CLBMLdSQSHdByVUDqLZnrr17TShVwA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/osYGwEVSlEU-b821.jpg",
+      "metrics": {
+        "views": 1533,
+        "likes": 39,
+        "comments": 1
+      }
+    },
+    {
+      "id": "RYBmlr_nTGo",
+      "url": "https://www.youtube.com/shorts/RYBmlr_nTGo",
+      "type": "short",
+      "title": "psicologo entrando no instagram",
+      "caption": "#psicologia #meme #humor #donl #marketing #critica",
+      "publishedAt": "2025-11-04T18:00:38Z",
+      "durationS": 15,
+      "thumbnail": "https://i.ytimg.com/vi/RYBmlr_nTGo/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYUiBcKGUwDw==&rs=AOn4CLBKNuKH47qWzi-zXMV8o7YhQJbxQw",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/RYBmlr_nTGo-b7ea.jpg",
+      "metrics": {
+        "views": 1296,
+        "likes": 23
+      }
+    },
+    {
+      "id": "UVinDCdhDhM",
+      "url": "https://www.youtube.com/shorts/UVinDCdhDhM",
+      "type": "short",
+      "title": "Por que é tão difícil ESCOLHER?",
+      "caption": "#psicologia #meme #humor #existencialismo #reflexão #kierkegaard",
+      "publishedAt": "2025-11-03T18:00:25Z",
+      "durationS": 68,
+      "thumbnail": "https://i.ytimg.com/vi/UVinDCdhDhM/maxresdefault.jpg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/UVinDCdhDhM-251a.jpg",
+      "metrics": {
+        "views": 1197,
+        "likes": 35,
+        "comments": 1
+      }
+    },
+    {
+      "id": "J0dMrp17ac0",
+      "url": "https://www.youtube.com/shorts/J0dMrp17ac0",
+      "type": "short",
+      "title": "o maior demonio da PSICOLOGIA",
+      "caption": "#psicologia #meme #humor",
+      "publishedAt": "2025-10-31T18:00:32Z",
+      "durationS": 10,
+      "thumbnail": "https://i.ytimg.com/vi/J0dMrp17ac0/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBYKE0wDw==&rs=AOn4CLDNQT_NlnggdYqaNLKVolToePquHg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/J0dMrp17ac0-45db.jpg",
+      "metrics": {
+        "views": 26,
+        "likes": 2
+      }
+    },
+    {
+      "id": "62iuZ8tBJgM",
+      "url": "https://www.youtube.com/shorts/62iuZ8tBJgM",
+      "type": "short",
+      "title": "O Lado SOMBRIO da PSICOLOGIA",
+      "caption": "#psicologia #meme #humor #autoajuda #livros #livrosdepsicologia",
+      "publishedAt": "2025-10-29T18:00:06Z",
+      "durationS": 15,
+      "thumbnail": "https://i.ytimg.com/vi/62iuZ8tBJgM/maxresdefault.jpg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/62iuZ8tBJgM-c9ae.jpg",
+      "metrics": {
+        "views": 1152,
+        "likes": 19,
+        "comments": 1
+      }
+    },
+    {
+      "id": "w2EnjIIf0LQ",
+      "url": "https://www.youtube.com/shorts/w2EnjIIf0LQ",
+      "type": "short",
+      "title": "como BEBER ÁGUA sem INCOMODAR O PACIENTE",
+      "caption": "#psicologia #humor #memedepsicologia #beberagua #polemica",
+      "publishedAt": "2025-10-28T18:01:16Z",
+      "durationS": 22,
+      "thumbnail": "https://i.ytimg.com/vi/w2EnjIIf0LQ/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBRKEQwDw==&rs=AOn4CLBA_7yY6feYtvKsQuTUjxBJKyLGSA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/w2EnjIIf0LQ-f993.jpg",
+      "metrics": {
+        "views": 2090,
+        "likes": 24,
+        "comments": 2
+      }
+    },
+    {
+      "id": "moB2-2zaGpA",
+      "url": "https://www.youtube.com/shorts/moB2-2zaGpA",
+      "type": "short",
+      "title": "Não posso mais falar que ainda to no segundo semestre",
+      "publishedAt": "2025-10-20T18:01:00Z",
+      "durationS": 9,
+      "thumbnail": "https://i.ytimg.com/vi/moB2-2zaGpA/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBMKD8wDw==&rs=AOn4CLDGL3eUP6aE81pKyDiju8uhecAAJA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/moB2-2zaGpA-77ca.jpg",
+      "metrics": {
+        "views": 1490,
+        "likes": 44
+      }
+    },
+    {
+      "id": "Dvjo6XJh2QA",
+      "url": "https://www.youtube.com/shorts/Dvjo6XJh2QA",
+      "type": "short",
+      "title": "quando eu LEMBRO que FREUD JÁ DESMAIOU só porque JUNG DISCORDOU dele",
+      "publishedAt": "2025-10-16T18:00:23Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/Dvjo6XJh2QA/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBeKFUwDw==&rs=AOn4CLCas7O9DxLh69TVpFVkw7KO7mov2Q",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/Dvjo6XJh2QA-9ce8.jpg",
+      "metrics": {
+        "views": 1605,
+        "likes": 31,
+        "comments": 1
+      }
+    },
+    {
+      "id": "BTIhQ5UPWYM",
+      "url": "https://www.youtube.com/shorts/BTIhQ5UPWYM",
+      "type": "short",
+      "title": "como BEBER ÁGUA sem INCOMODAR O PACIENTE",
+      "publishedAt": "2025-10-15T18:00:16Z",
+      "durationS": 22,
+      "thumbnail": "https://i.ytimg.com/vi/BTIhQ5UPWYM/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBRKEQwDw==&rs=AOn4CLB-DAylNMV8LGA5z4QscohiWfNvbQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/BTIhQ5UPWYM-8455.jpg",
+      "metrics": {
+        "views": 1399,
+        "likes": 23,
+        "comments": 1
+      }
+    },
+    {
+      "id": "yAx_goNglns",
+      "url": "https://www.youtube.com/shorts/yAx_goNglns",
+      "type": "short",
+      "title": "Lembrando que NÃO posso ser AMIGO do meu paciente FAVORITO",
+      "publishedAt": "2025-10-14T18:01:05Z",
+      "durationS": 6,
+      "thumbnail": "https://i.ytimg.com/vi/yAx_goNglns/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYVSBbKGUwDw==&rs=AOn4CLA2zN5TYm_tOPuWEw5x77lwI0LAYg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/yAx_goNglns-7e55.jpg",
+      "metrics": {
+        "views": 2402,
+        "likes": 22
+      }
+    },
+    {
+      "id": "2HxuGhNJfuw",
+      "url": "https://www.youtube.com/shorts/2HxuGhNJfuw",
+      "type": "short",
+      "title": "quando vc ODEIA tanto uma pessoa que começa a pesquisar a PSICOLOGIA do comportamento dela",
+      "publishedAt": "2025-10-13T18:00:02Z",
+      "durationS": 5,
+      "thumbnail": "https://i.ytimg.com/vi/2HxuGhNJfuw/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBhKFAwDw==&rs=AOn4CLC5-zV9hzXar2e4mAEcBTJLo9w4sQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/2HxuGhNJfuw-96a3.jpg",
+      "metrics": {
+        "views": 2024,
+        "likes": 53
+      }
+    },
+    {
+      "id": "ckC4P3X6S1o",
+      "url": "https://www.youtube.com/shorts/ckC4P3X6S1o",
+      "type": "short",
+      "title": "ta vivendo uma FANTASIA PSI!",
+      "publishedAt": "2025-10-10T18:00:53Z",
+      "durationS": 8,
+      "thumbnail": "https://i.ytimg.com/vi/ckC4P3X6S1o/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBIKEowDw==&rs=AOn4CLCu24wjfHachJto0DjvEllI3eyxZA",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/ckC4P3X6S1o-93c3.jpg",
+      "metrics": {
+        "views": 364,
+        "likes": 5
+      }
+    },
+    {
+      "id": "PL_bE0v-szc",
+      "url": "https://www.youtube.com/shorts/PL_bE0v-szc",
+      "type": "short",
+      "title": "quanto FREUD cobrava",
+      "publishedAt": "2025-10-09T18:00:22Z",
+      "durationS": 85,
+      "thumbnail": "https://i.ytimg.com/vi/PL_bE0v-szc/maxresdefault.jpg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/PL_bE0v-szc-f66b.jpg",
+      "metrics": {
+        "views": 526,
+        "likes": 8
+      }
+    },
+    {
+      "id": "q9IYsua8rF8",
+      "url": "https://www.youtube.com/shorts/q9IYsua8rF8",
+      "type": "short",
+      "title": "a sensação de ler fenomenologia",
+      "publishedAt": "2025-10-08T18:01:00Z",
+      "durationS": 14,
+      "thumbnail": "https://i.ytimg.com/vi/q9IYsua8rF8/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBKKEQwDw==&rs=AOn4CLCAIrbZb1jBlzdB3rRNiWQmarnNCg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/q9IYsua8rF8-2976.jpg",
+      "metrics": {
+        "views": 1569,
+        "likes": 22,
+        "comments": 1
+      }
+    },
+    {
+      "id": "5WT1m-vO9jg",
+      "url": "https://www.youtube.com/shorts/5WT1m-vO9jg",
+      "type": "short",
+      "title": "encontrando LACAN no pós-vida",
+      "publishedAt": "2025-10-07T18:00:10Z",
+      "durationS": 5,
+      "thumbnail": "https://i.ytimg.com/vi/5WT1m-vO9jg/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBIKEIwDw==&rs=AOn4CLCk36sCsL5Gc38et92GzGRy2umQJQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/5WT1m-vO9jg-a24f.jpg",
+      "metrics": {
+        "views": 1567,
+        "likes": 17
+      }
+    },
+    {
+      "id": "rnGS64DTDq4",
+      "url": "https://www.youtube.com/shorts/rnGS64DTDq4",
+      "type": "short",
+      "title": "INTERPRETAÇÃO DOS SONHOS sem base nenhuma achando que era fácil...",
+      "publishedAt": "2025-10-06T18:00:53Z",
+      "durationS": 11,
+      "thumbnail": "https://i.ytimg.com/vi/rnGS64DTDq4/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBfKDcwDw==&rs=AOn4CLB89ZxHzVeR6yIY6V-xsOcQvQVGYw",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/rnGS64DTDq4-92d3.jpg",
+      "metrics": {
+        "views": 1601,
+        "likes": 33
+      }
+    },
+    {
+      "id": "8ZJEveMDrnc",
+      "url": "https://www.youtube.com/shorts/8ZJEveMDrnc",
+      "type": "short",
+      "title": "bate-bola com psicólogo da SÓCIO-HISTÓRICA",
+      "publishedAt": "2025-10-03T18:00:08Z",
+      "durationS": 34,
+      "thumbnail": "https://i.ytimg.com/vi/8ZJEveMDrnc/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBSKEowDw==&rs=AOn4CLBlFChUNLI7yqwm-bLp3gF7czXG6w",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/8ZJEveMDrnc-5ddb.jpg",
+      "metrics": {
+        "views": 1889,
+        "likes": 34
+      }
+    },
+    {
+      "id": "pCE2MC5gf0g",
+      "url": "https://www.youtube.com/shorts/pCE2MC5gf0g",
+      "type": "short",
+      "title": "Fui METAFORADO pela PSICÓLOGA!!",
+      "publishedAt": "2025-10-02T18:01:02Z",
+      "durationS": 15,
+      "thumbnail": "https://i.ytimg.com/vi/pCE2MC5gf0g/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBIKEMwDw==&rs=AOn4CLClWk9nQEAa1BbqH2ydrBEYVKlV_w",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/pCE2MC5gf0g-d991.jpg",
+      "metrics": {
+        "views": 1295,
+        "likes": 33,
+        "comments": 1
+      }
+    },
+    {
+      "id": "AVl-XvorvnM",
+      "url": "https://www.youtube.com/shorts/AVl-XvorvnM",
+      "type": "short",
+      "title": "O VERDADEIRO DASEIN",
+      "caption": "#PSICOLOGIA #humor #meme #fenomenologia",
+      "publishedAt": "2025-09-27T18:00:08Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/AVl-XvorvnM/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYYyBlKE4wDw==&rs=AOn4CLCgbzmicr6J7KosJKeNq0kkt59IcQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/AVl-XvorvnM-f16a.jpg",
+      "metrics": {
+        "views": 1378,
+        "likes": 14
+      }
+    },
+    {
+      "id": "dFSXdJCbH-I",
+      "url": "https://www.youtube.com/shorts/dFSXdJCbH-I",
+      "type": "short",
+      "title": "NÃO EXISTE O MÉTODO CIENTÍFICO! As psicologias como ciência!",
+      "publishedAt": "2025-09-26T18:00:47Z",
+      "durationS": 129,
+      "thumbnail": "https://i.ytimg.com/vi/dFSXdJCbH-I/maxresdefault.jpg",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/dFSXdJCbH-I-cc31.jpg",
+      "metrics": {
+        "views": 99,
+        "likes": 5
+      }
+    },
+    {
+      "id": "mvW5RxVENs0",
+      "url": "https://www.youtube.com/shorts/mvW5RxVENs0",
+      "type": "short",
+      "title": "Aí você é da área da saúde e acorda com o presidente dos EUA falando que TYLENOL CAUSA AUTISMO",
+      "caption": "#psicologia #meme #humor #critica #ciencia #geopolitica",
+      "publishedAt": "2025-09-25T18:00:54Z",
+      "durationS": 7,
+      "thumbnail": "https://i.ytimg.com/vi/mvW5RxVENs0/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBgKFYwDw==&rs=AOn4CLDmA4Q90FWLkMFPzGAnjIb_9NhFvQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/mvW5RxVENs0-7e9f.jpg",
+      "metrics": {
+        "views": 1538,
+        "likes": 24
+      }
+    },
+    {
+      "id": "J3101Z-9vlc",
+      "url": "https://www.youtube.com/shorts/J3101Z-9vlc",
+      "type": "short",
+      "title": "quando você tem que DEFENDER FREUD dos caras que chamam a psicanalise de PSEUDOCIENCIA",
+      "publishedAt": "2025-09-24T18:00:28Z",
+      "durationS": 12,
+      "thumbnail": "https://i.ytimg.com/vi/J3101Z-9vlc/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBlKEowDw==&rs=AOn4CLB8_bSJWBHGEeouoymzMkEfOyG-eQ",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/J3101Z-9vlc-920d.jpg",
+      "metrics": {
+        "views": 1402,
+        "likes": 25,
+        "comments": 2
+      }
+    },
+    {
+      "id": "5ilLIs3lvHI",
+      "url": "https://www.youtube.com/shorts/5ilLIs3lvHI",
+      "type": "short",
+      "title": "A PSICOLOGIA só serve para adequar ao SISTEMA???",
+      "publishedAt": "2025-09-23T18:00:05Z",
+      "durationS": 18,
+      "thumbnail": "https://i.ytimg.com/vi/5ilLIs3lvHI/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYZSBlKFAwDw==&rs=AOn4CLDl6Rt-hJZzr5CSKJ3fX7F6rIIrhw",
+      "thumbnailLocal": "media/youtube-corporatv/thumbs/5ilLIs3lvHI-4926.jpg",
+      "metrics": {
+        "views": 1050,
+        "likes": 22,
+        "comments": 2
+      }
+    }
+  ],
+  "errors": []
+}

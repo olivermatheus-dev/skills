@@ -1,0 +1,351 @@
+{
+  "versao": 1,
+  "peca": "C0004-fixado-duvidas",
+  "empresa": "kz",
+  "formato": "1080x1350",
+  "leitura": "FAQ antes da compra no visual do app (creme, cards e chips brancos, selo coral #ef7960, ênfase em serifa itálica coral): honesto e calmo, um molde só de pergunta e resposta que muda de tom a cada slide, sempre claro",
+  "motivo": {
+    "o_que": "a fila de chips das perguntas (como os filtros do app: Garantia, Videochamada, Paciente…), com a da vez acesa em coral claro",
+    "evolucao": "na capa, a fila aparece com Garantia acesa → a cada slide de FAQ acende a próxima → no s9 todas ficam marcadas → no CTA a fila some e fica só o selo",
+    "destino": "o selo 14 dias grande (s2): a resposta da dúvida principal, o maior objeto daquele slide",
+    "identidade": "7 chips brancos de borda #ece4dc, a ativa em tom-200; sempre no alto, na mesma posição"
+  },
+  "sistema": {
+    "fundos": [
+      "creme",
+      "branco",
+      "tom-50",
+      "tom-100",
+      "tom-200"
+    ],
+    "enfase": [
+      "serifa"
+    ],
+    "dials": {
+      "variancia": 3,
+      "densidade": 3
+    },
+    "moldes": {
+      "faq": "família split: fila de chips das perguntas no alto (a da vez acesa), pergunta entre aspas no campo de cor (t-titulo 84 px, até 3 linhas), resposta curta embaixo (42 px), card do app em largura de coluna (256 px) entre a fila e a pergunta; título em --text. FIXO: posições, tamanhos, aspas, ícone, fila de chips. VARIA: o tom do campo (100 · 200 · 300), o fundo do slide (creme · branco · tom-50) e o ícone. Pedido do Oliver em 2026-10-09."
+    },
+    "trio": "capa v3 (visual do app, grade 1:1): fundo creme | brilho tom-100 | creme; tudo na zona x 96–984 · y 222–1140 (o quadrado da grade é y 135–1215); cena em cards do app em y 222–682; título 92 px com a base em y 1074; apoio em y 1098; ênfase em serifa itálica coral; arraste coral fora do quadrado (y 1260); estudo em campaigns/2026-10-09-posts-fixados/capas/estudo.html"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "papel": "gancho",
+      "familia": "capa-tipografica",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "a pergunta 'E se eu pagar e não usar?' em display, com o selo de 14 dias no alto",
+      "texto": {
+        "ancora": "E se eu pagar e não usar?",
+        "apoio": "E outras 6 perguntas antes de pedir seu acesso",
+        "meta": "arraste"
+      },
+      "hierarquia": "âncora 108 px (sistema do trio, base em y 1060) · apoio 40 px · meta 24 px",
+      "camadas": [
+        {
+          "o_que": "fio horizontal em y 360 entrando pela borda esquerda",
+          "funcao": "continua a tela da capa do meio: a sequência dos fixados se lê como uma linha"
+        },
+        {
+          "o_que": "selo '14 dias de garantia' na faixa de cima, à direita",
+          "funcao": "a resposta já aparece na grade, antes do clique"
+        }
+      ],
+      "liga": {
+        "proximo": "o selo desce e responde a pergunta da capa"
+      },
+      "enfase": {
+        "tipo": "serifa",
+        "palavra": "não usar?"
+      },
+      "notas": "Seguir capa-3.png do estudo.",
+      "motivo": "a fila de chips (Garantia acesa) + o card do selo 14 dias"
+    },
+    {
+      "n": 2,
+      "papel": "virada",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "creme",
+      "campo": "tom-200",
+      "densidade": "media",
+      "heroi": "o selo 14 dias grande, coral, com a resposta ao lado",
+      "texto": {
+        "ancora": "Você tem 14 dias para ver se a kz cabe no seu consultório.",
+        "apoio": "Se ela não tiver lugar na sua rotina, você pede pelo suporte do app e recebe tudo de volta.",
+        "meta": "1 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "campo tom-200 com a pergunta da capa repetida pequena + a resposta em destaque",
+          "funcao": "2ª capa: funciona sozinho se o Instagram reexibir daqui"
+        },
+        {
+          "o_que": "o selo de 14 dias no lugar do ícone do molde",
+          "funcao": "a garantia é a resposta; o mesmo selo da capa"
+        }
+      ],
+      "liga": {
+        "anterior": "selo da capa",
+        "proximo": "o molde segue, outra cor"
+      },
+      "enfase": null,
+      "notas": "Única variação de hierarquia do molde: aqui a resposta é a âncora (a pergunta já está na capa). ",
+      "motivo": "o destino: o selo 14 dias grande + a fila com Garantia acesa"
+    },
+    {
+      "n": 3,
+      "papel": "prova",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "branco",
+      "campo": "tom-100",
+      "densidade": "leve",
+      "heroi": "a pergunta “Preciso de Meet ou Zoom?” no campo tom-100",
+      "texto": {
+        "ancora": "“Preciso de Meet ou Zoom?”",
+        "apoio": "Não. A videochamada é da própria kz, e você vê na sala de espera quando o paciente chega.",
+        "meta": "2 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide video no canto do campo",
+          "funcao": "o assunto da pergunta num relance"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq, campo muda de tom",
+        "proximo": "molde faq"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 2 acesa"
+    },
+    {
+      "n": 4,
+      "papel": "prova",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "creme",
+      "campo": "tom-300",
+      "densidade": "leve",
+      "heroi": "a pergunta “Meu paciente precisa instalar alguma coisa?” no campo tom-300",
+      "texto": {
+        "ancora": "“Meu paciente precisa instalar alguma coisa?”",
+        "apoio": "Não. A sessão abre por um link no navegador, e a confirmação chega no WhatsApp dele.",
+        "meta": "3 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide monitor-smartphone no canto do campo",
+          "funcao": "o assunto da pergunta num relance"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq",
+        "proximo": "molde faq"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 3 acesa"
+    },
+    {
+      "n": 5,
+      "papel": "prova",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "tom-200",
+      "campo": "branco",
+      "densidade": "leve",
+      "heroi": "a pergunta “Atendo presencial. Serve?” no campo tom-100",
+      "texto": {
+        "ancora": "“Atendo presencial. Serve?”",
+        "apoio": "Serve. Você atende na mesma tela, no modo presencial. Agenda, ficha e anotações funcionam igual.",
+        "meta": "4 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide armchair no canto do campo",
+          "funcao": "o assunto (consultório físico) num relance"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq",
+        "proximo": "molde faq"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 4 acesa"
+    },
+    {
+      "n": 6,
+      "papel": "prova",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "branco",
+      "campo": "tom-100",
+      "densidade": "leve",
+      "heroi": "a pergunta “Sou psicanalista, hipnoterapeuta ou integrativa. É pra mim?” no campo tom-100",
+      "texto": {
+        "ancora": "“Sou psicanalista, hipnoterapeuta ou integrativa. É pra mim?”",
+        "apoio": "É. O que muda de uma abordagem para outra é o que você anota, não a ferramenta.",
+        "meta": "5 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide notebook-pen no canto do campo",
+          "funcao": "o assunto (o que você anota) num relance"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq",
+        "proximo": "o molde escurece: a pergunta do dinheiro"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 5 acesa"
+    },
+    {
+      "n": 7,
+      "papel": "tensao",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "tom-50",
+      "campo": "tom-300",
+      "densidade": "media",
+      "heroi": "a pergunta “Vale pagar se o Google Agenda é de graça?” no campo tom-100",
+      "texto": {
+        "ancora": "“Vale pagar se o Google Agenda é de graça?”",
+        "apoio": "A agenda é grátis. O que custa é o resto: confirmar um por um, mandar link, anotar em outro lugar. Na kz, vem tudo junto.",
+        "meta": "6 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide calendar no canto do campo",
+          "funcao": "o assunto (a agenda grátis) num relance"
+        },
+        {
+          "o_que": "o molde invertido claro",
+          "funcao": "a objeção de preço é a mais pesada depois da 1ª: claro marca o peso sem mudar a estrutura"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq claro",
+        "proximo": "volta ao claro"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 6 acesa"
+    },
+    {
+      "n": 8,
+      "papel": "prova",
+      "familia": "split",
+      "molde": "faq",
+      "fundo": "tom-200",
+      "campo": "branco",
+      "densidade": "leve",
+      "heroi": "a pergunta “Se eu sair, levo os dados dos meus pacientes?” no campo branco",
+      "texto": {
+        "ancora": "“Se eu sair, levo os dados dos meus pacientes?”",
+        "apoio": "Leva. A kz exporta os dados de cada paciente quando você quiser. Eles são do seu consultório, não nossos.",
+        "meta": "7 de 7"
+      },
+      "camadas": [
+        {
+          "o_que": "ícone Lucide download no canto do campo",
+          "funcao": "o assunto (exportar) num relance"
+        },
+        {
+          "o_que": "fila de chips no alto com a pergunta da vez acesa",
+          "funcao": "mostra onde ela está entre as 7 e segura até o fim"
+        }
+      ],
+      "liga": {
+        "anterior": "molde faq",
+        "proximo": "sai do molde: o que a kz não faz"
+      },
+      "enfase": null,
+      "motivo": "a fila de chips no alto, com a pergunta 7 acesa"
+    },
+    {
+      "n": 9,
+      "papel": "prova",
+      "familia": "trilho",
+      "fundo": "tom-200",
+      "densidade": "media",
+      "heroi": "o título 'O que a kz não faz, para você saber antes:' e 3 linhas",
+      "texto": {
+        "ancora": "O que a kz não faz, para você saber antes:",
+        "apoio": "Não cobra o paciente nem emite recibo ou nota. · Não sincroniza com o Google Agenda. · Não tem app: funciona no navegador. · Prometemos bastar para você atender."
+      },
+      "camadas": [
+        {
+          "o_que": "trilho com 3 itens, marcador de traço (Lucide minus) em vez de X",
+          "funcao": "lista sóbria: limite dito sem cara de alerta"
+        },
+        {
+          "o_que": "hairline e a frase final abaixo do trilho",
+          "funcao": "separa a lista da posição da marca"
+        }
+      ],
+      "liga": {
+        "anterior": "fim do molde",
+        "proximo": "o selo volta inteiro"
+      },
+      "enfase": null,
+      "notas": "'Não tem app: funciona no navegador' vale com ou sem a resposta sobre o celular (pergunta 9 da carta).",
+      "motivo": "a fila de chips toda marcada no alto"
+    },
+    {
+      "n": 10,
+      "papel": "cta",
+      "familia": "cta",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "a pergunta 'Quer ver se a kz cabe no seu consultório?' em display + o selo",
+      "texto": {
+        "ancora": "Quer ver se a kz cabe no seu consultório?",
+        "apoio": "Peça seu acesso no link da bio.",
+        "meta": "14 dias de garantia"
+      },
+      "camadas": [
+        {
+          "o_que": "selo '14 dias de garantia' inteiro (círculo tom-100 sobre claro)",
+          "funcao": "fecha o motivo: começou na capa, responde no fim"
+        }
+      ],
+      "liga": {
+        "anterior": "o que a kz não faz"
+      },
+      "enfase": null,
+      "notas": "Marca no rodapé, sem 'arraste'.",
+      "motivo": "o selo 14 dias inteiro (a fila some: as dúvidas acabaram)"
+    }
+  ],
+  "autocritica": [
+    "v2 (2026-10-09): sem claro; a objeção de preço (s7) ganha peso com o campo tom-300, o mais forte dos claros.",
+    "O default seria um FAQ em lista corrida num slide só; trocamos por 7 slides de um molde fixo (pedido do Oliver) com o contador N de 7.",
+    "A variação do molde é governada: o tom do campo gira (200 · 100 · 300 · 100 · 200 · 300 · 100) e o fundo alterna creme/branco/tom-50.",
+    "O default seria marcar o não faz com X vermelho; trocamos por traço sóbrio, porque é honestidade e não alerta.",
+    "v3: card do app vira herói do campo (largura total, altura fixa); resposta 42 px; s6 branco/tom-100 e s8 tom-200/branco para o ciclo de cor legível; s9 quebra por sentido."
+  ]
+}

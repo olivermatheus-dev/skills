@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>C0004 · Fixado 3 · Dúvidas</title>
+<!-- Plano: slides.json (v2, aprovado) · roteiro.md · capa: estudo v3 aprovado (campaigns/2026-10-09-posts-fixados/capas/).
+     Molde "faq" (s2–s8): campo de cor com o progresso das 7 perguntas + ícone + pergunta; resposta embaixo.
+     Varia: tom do campo, fundo do slide, ícone. Componentes do app: fixados.css -->
+<link rel="stylesheet" href="../../../brand/brand.css">
+<link rel="stylesheet" href="../../../../../.claude/skills/carousel/references/sistema.css">
+<link rel="stylesheet" href="../../../campaigns/2026-10-09-posts-fixados/fixados.css">
+<style>
+  /* ---------- molde faq ---------- */
+  .faq .split-campo { height: 66%; justify-content: flex-end; gap: var(--e-5); }
+  .faq .split-campo .t-titulo { font-size: 80px; line-height: 1.08; text-wrap: balance; color: var(--text); }
+  .faq .split-resto { top: calc(66% + var(--e-6)); justify-content: flex-start; }
+  .faq .resposta { font: 500 42px/1.3 var(--font-body); color: var(--text); text-wrap: pretty; }
+  .faq .resposta b { font-weight: 700; }
+  /* card do app (herói do campo): largura da coluna, mesma posição e altura em s3–s8; muda só o conteúdo */
+  .faq .mini { left: var(--s-m); right: var(--s-m); top: 172px; height: 256px; box-sizing: border-box; padding: 28px 40px; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+  .faq .mini .app-rot { font-size: 24px; } .faq .mini .app-rot i { display: none; }
+  .faq .mini svg { width: 44px; height: 44px; fill: none; stroke: var(--primary); stroke-width: 1.7; flex: none; }
+  .mini .ilus { font: 600 24px/1 var(--font-body); color: var(--muted); }
+  .mini .chegou { display: flex; align-items: center; gap: 28px; }
+  .mini .chegou .app-av { width: 104px; height: 104px; font-size: 40px; }
+  .mini .chegou b { display: block; font: 700 48px/1.1 var(--font-body); }
+  .mini .chegou span { font: 500 38px/1.2 var(--font-body); color: var(--muted); }
+  .mini .seg { display: flex; gap: 10px; padding: 10px; border-radius: 20px; background: var(--tone-100); }
+  .mini .seg span { flex: 1; text-align: center; padding: 26px 0; border-radius: 14px; font: 600 40px/1 var(--font-body); color: var(--muted); }
+  .mini .seg span.on { background: var(--primary); color: #fff; }
+  .mini .abas { display: flex; gap: 14px; }
+  .mini .abas span { flex: 1; text-align: center; padding: 24px 0; border-radius: 40px; background: var(--tone-100); font: 600 36px/1 var(--font-body); color: var(--muted); }
+  .mini .abas span.on { background: var(--primary); color: #fff; }
+  .mini .tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .mini .tres > div { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 22px 0 20px; border-radius: 20px; background: var(--tone-100); font: 600 36px/1.1 var(--font-body); color: var(--text); }
+  .mini .tres svg { width: 52px; height: 52px; }
+  .mini .nav { display: flex; align-items: center; gap: 18px; height: 84px; padding: 0 30px; border-radius: 42px; background: var(--bg); border: 2px solid var(--border); font: 600 38px/1 var(--font-body); color: var(--text); }
+  .mini .wpp { align-self: flex-start; padding: 22px 34px 24px; border-radius: 28px 28px 28px 8px; background: var(--tone-100); border: 2px solid var(--tone-200); font: 600 38px/1.1 var(--font-body); color: var(--text); }
+  .mini .app-btn { height: 92px; font-size: 38px; padding: 0 40px; align-self: flex-start; border-radius: 16px; }
+  .mini .app-btn svg { width: 40px; height: 40px; stroke: var(--text); }
+  /* progresso das 7 perguntas (motivo): no alto do campo, mesma posição em s2–s9 */
+  .prog { position: absolute; left: var(--s-m); right: var(--s-m); top: 96px; display: flex; align-items: center; gap: 10px; }
+  .prog i { width: 44px; height: 44px; border-radius: 22px; background: var(--surface); border: 2px solid var(--border);
+    font: 700 24px/40px var(--font-body); font-style: normal; text-align: center; color: var(--muted); flex: none; }
+  .prog i.ok { color: var(--primary); }
+  .prog i.ok svg { display: block; width: 26px; height: 26px; margin: 7px; fill: none; stroke: var(--primary); stroke-width: 2.6; }
+  .prog i.agora { width: auto; padding: 0 22px; background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  /* s2 · a resposta-mãe: a garantia é o maior objeto (destino) */
+  .s2 .split-campo { height: 43%; gap: var(--e-3); }
+  .s2 .split-campo .t-titulo { font-size: 68px; }
+  .gar { left: var(--s-m); right: var(--s-m); top: 680px; padding: 40px 40px 36px; }
+  .gar .cab { display: flex; align-items: center; gap: 24px; }
+  .gar .cab .app-tile { width: 88px; height: 88px; border-radius: 20px; }
+  .gar .cab .app-tile svg { width: 46px; height: 46px; }
+  .gar h3 { font: 700 44px/1.1 var(--font-body); color: var(--text); }
+  .gar .cab p { font: 500 28px/1.35 var(--font-body); color: var(--text); margin-top: 8px; }
+  .s2 .gar { top: 636px; padding: 40px 44px 38px; }
+  .s2 .gar .cab { gap: 28px; }
+  .s2 .gar h3 { font-size: 66px; }
+  .s2 .gar .apoio { font: 500 36px/1.35 var(--font-body); color: var(--text); margin-top: 28px; text-wrap: balance; }
+  .s2 .dias { margin-top: 32px; } .s2 .dias i { height: 124px; border-radius: 14px; }
+  .dias { display: grid; grid-template-columns: repeat(14, 1fr); gap: 8px; margin-top: 34px; }
+  .dias i { height: 44px; border-radius: 10px; background: var(--tone-100); border: 2px solid var(--tone-200); }
+  .dias i:first-child { background: var(--primary); border-color: var(--primary); }
+  .dias-leg { display: flex; justify-content: space-between; margin-top: 14px; font: 600 24px/1 var(--font-body); color: var(--muted); }
+
+  /* s9 · trilho: o que a kz não faz (sóbrio, sem alerta) */
+  .s9 .trilho-topo { top: 220px; }
+  .s9 .trilho-topo .t-titulo { font-size: 76px; white-space: nowrap; }
+  .s9 .trilho-lista { bottom: 330px; }
+  .s9 .trilho-lista li { min-height: 160px; }
+  .s9 .trilho-lista p { font-size: 38px; font-weight: 600; text-wrap: balance; }
+  .s9 .trilho-lista li { grid-template-columns: 88px 1fr; column-gap: 32px; }
+  .s9 .trilho-lista .no { width: 72px; height: 72px; margin-left: 8px; background: var(--surface); border-color: var(--border); }
+  .s9 .trilho-lista .no .icone svg { stroke: var(--primary); }
+  .s9 .trilho-lista::before { display: none; }
+  .s9 .fecho { position: absolute; left: var(--s-m); right: var(--s-m); bottom: var(--s-base); font: 600 44px/1.2 var(--font-heading); color: var(--text); }
+
+  /* s10 · cta */
+  .s10 .cta-texto { top: 200px; font-size: 88px; line-height: 1.08; }
+  .s10 .gar { top: auto; bottom: var(--s-base); padding: 48px 46px 44px; }
+  .s10 .gar h3 { font-size: 52px; }
+  .s10 .gar .cab p { font-size: 32px; }
+  .s10 .cta-texto { top: 320px; }
+  .s10 .gar .app-btn { margin-top: 30px; height: 84px; font-size: 32px; padding: 0 38px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · gancho · capa-tipografica · creme (capa do trio, estudo v3) -->
+<section class="slide fundo-creme" data-layout="capa-tipografica">
+  <div class="capa-cena">
+    <div data-contraste="ui" style="position:absolute; left:0; top:0; display:flex; gap:12px"><span class="app-chip on">Garantia</span><span class="app-chip">Videochamada</span><span class="app-chip">Paciente</span><span class="app-chip">+4</span></div>
+    <div class="app-card gar" data-contraste="ui" style="left:0; right:0; top:104px">
+      <div class="cab"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h3>Garantia de 14 dias</h3><p>Reembolso integral pelo suporte do app</p></div></div>
+      <div class="dias"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="dias-leg"><span style="color:var(--primary)">Dia 1</span><span>Dia 14</span></div>
+    </div>
+  </div>
+  <h1 class="capa-titulo">E se eu pagar e <span class="enf-serifa" data-contraste="marca">não usar?</span></h1>
+  <p class="capa-apoio">E mais 6 perguntas antes de pedir seu acesso</p>
+  <footer class="rodape"><span></span><span class="arraste">arraste <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></footer>
+</section>
+
+<!-- 2 · virada · split (faq) · creme / campo tom-200 · 1 de 7 -->
+<section class="slide fundo-creme faq s2" data-layout="split">
+  <div class="split-campo fundo-tom-200">
+    <div class="prog" data-contraste="ui"><i class="agora">Garantia</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    <h2 class="t-titulo">Você tem 14 dias para ver se a kz cabe no seu consultório.</h2>
+  </div>
+  <div class="app-card gar" data-motivo="destino" data-contraste="ui">
+    <div class="cab"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h3>Reembolso integral</h3></div></div>
+    <p class="apoio">Se ela não tiver lugar na sua rotina, você pede pelo suporte do app e recebe tudo de volta.</p>
+    <div class="dias"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="dias-leg"><span style="color:var(--primary)">Dia 1</span><span>Dia 14</span></div>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>02</b>/10</span></footer>
+</section>
+
+<!-- 3 · prova · split (faq) · branco / campo tom-100 · 2 de 7 -->
+<section class="slide fundo-branco faq" data-layout="split">
+  <div class="split-campo fundo-tom-100">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Videochamada</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    <div class="app-card mini" data-contraste="ui"><span class="app-rot"><i></i>Sala de espera</span>
+      <div class="chegou"><span class="app-av">AM</span><div><b>Ana M.</b><span>chegou agora</span></div></div>
+      <span class="ilus">dados ilustrativos</span></div>
+    <h2 class="t-titulo">“Preciso de Meet ou Zoom?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta"><b>Não.</b> A videochamada é da própria kz, e você vê na sala de espera quando o paciente chega.</p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>03</b>/10</span></footer>
+</section>
+
+<!-- 4 · prova · split (faq) · creme / campo tom-300 · 3 de 7 -->
+<section class="slide fundo-creme faq" data-layout="split">
+  <div class="split-campo fundo-tom-300">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Paciente</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    <div class="app-card mini" data-contraste="ui"><div class="nav"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Link da sessão</div>
+      <div class="wpp">Sessão confirmada</div></div>
+    <h2 class="t-titulo">“Meu paciente precisa instalar alguma coisa?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta"><b>Não.</b> A sessão abre por um link no navegador, e a confirmação chega no WhatsApp dele.</p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>04</b>/10</span></footer>
+</section>
+
+<!-- 5 · prova · split (faq) · tom-200 / campo branco · 4 de 7 -->
+<section class="slide fundo-tom-200 faq" data-layout="split">
+  <div class="split-campo fundo-branco">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Presencial</i><i>5</i><i>6</i><i>7</i></div>
+    <div class="app-card mini" data-contraste="ui">
+      <div class="seg"><span>Online</span><span class="on">Presencial</span></div></div>
+    <h2 class="t-titulo">“Atendo presencial. Serve?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta"><b>Serve.</b> Você atende na mesma tela, no modo presencial. Agenda, ficha e anotações funcionam igual.</p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>05</b>/10</span></footer>
+</section>
+
+<!-- 6 · prova · split (faq) · branco / campo tom-100 · 5 de 7 -->
+<section class="slide fundo-branco faq" data-layout="split">
+  <div class="split-campo fundo-tom-100">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Abordagem</i><i>6</i><i>7</i></div>
+    <div class="app-card mini" data-contraste="ui"><span class="app-rot"><i></i>Tela de atendimento</span>
+      <div class="abas"><span class="on">Anotações</span><span>Histórico</span><span>Cliente</span></div></div>
+    <h2 class="t-titulo">“Sou psicanalista, hipnoterapeuta ou integrativa. É pra mim?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta"><b>É.</b> O que muda de uma abordagem para outra é o que você anota, não a ferramenta.</p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>06</b>/10</span></footer>
+</section>
+
+<!-- 7 · tensão · split (faq) · tom-50 / campo tom-300 · 6 de 7 (a objeção de preço) -->
+<section class="slide fundo-tom-50 faq" data-layout="split">
+  <div class="split-campo fundo-tom-300">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Preço</i><i>7</i></div>
+    <div class="app-card mini" data-contraste="ui"><div class="tres"><div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg>Confirmar</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Mandar link</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>Anotar</div></div></div>
+    <h2 class="t-titulo">“Vale pagar<br>se o Google Agenda<br>é de graça?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta">A agenda é grátis. O que custa é o resto: confirmar um por um, mandar link, anotar em outro lugar. <b>Na kz, vem tudo junto.</b></p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>07</b>/10</span></footer>
+</section>
+
+<!-- 8 · prova · split (faq) · tom-200 / campo branco · 7 de 7 -->
+<section class="slide fundo-tom-200 faq" data-layout="split">
+  <div class="split-campo fundo-branco">
+    <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="agora">Seus dados</i></div>
+    <div class="app-card mini" data-contraste="ui"><span class="app-rot"><i></i>Ficha do paciente</span>
+      <span class="app-btn sec"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-download"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>Exportar dados</span></div>
+    <h2 class="t-titulo">“Se eu sair, levo os dados dos meus pacientes?”</h2>
+  </div>
+  <div class="split-resto"><p class="resposta"><b>Leva.</b> A kz exporta os dados de cada paciente quando você quiser. Eles são do seu consultório, não nossos.</p></div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>08</b>/10</span></footer>
+</section>
+
+<!-- 9 · prova · trilho · tom-200 -->
+<section class="slide fundo-tom-200 s9" data-layout="trilho">
+  <div class="prog" data-contraste="ui"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-check"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+  <div class="trilho-topo">
+    <h2 class="t-titulo">O que a kz<br>não faz, para você<br>saber antes:</h2>
+  </div>
+  <ul class="trilho-lista">
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-minus"><path d="M5 12h14"/></svg></span></span><p>Não cobra o paciente nem emite recibo ou nota.</p></li>
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-minus"><path d="M5 12h14"/></svg></span></span><p>Não sincroniza com o Google Agenda.</p></li>
+    <li><span class="no"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-minus"><path d="M5 12h14"/></svg></span></span><p>Não tem app: funciona no navegador.</p></li>
+  </ul>
+  <p class="fecho">Prometemos bastar para você atender.</p>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>09</b>/10</span></footer>
+</section>
+
+<!-- 10 · cta · cta · creme -->
+<section class="slide fundo-creme s10" data-layout="cta">
+  <h2 class="cta-texto t-display">Quer ver<br>se a kz cabe<br>no seu consultório?</h2>
+  <div class="app-card gar" data-contraste="ui">
+    <div class="cab"><span class="app-tile t-coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h3>14 dias de garantia</h3><p>Peça seu acesso no link da bio.</p></div></div>
+    <div class="dias"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <span class="app-btn coral"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>Pedir meu acesso</span>
+  </div>
+  <footer class="rodape"><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 7 43 34" role="img" aria-label="kz"><path fill-rule="evenodd" d="M2.5 7H9.5V24.5L18 16H45.5V21.5L31.5 35.5H45.5V41H18.6L11.2 31H9.5V41H2.5Z M22.8 18.7H24V21.5H37.5L23.7 35.3L16.5 25Z"/></svg></span><span class="pag"><b>10</b>/10</span></footer>
+</section>
+
+</body>
+</html>

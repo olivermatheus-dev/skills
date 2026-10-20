@@ -133,8 +133,8 @@
         },
         {
           "name": "accent",
-          "value": "#d66954",
-          "note": "coral profundo: ênfase em texto sobre claro (#bc5a47 p/ AAA)"
+          "value": "#ef7960",
+          "note": "ênfase = o coral da marca, como o nome \"Oliver\" na serifa do app (2026-10-09, pedido do Oliver). Só em título grande (≥ 64 px); em texto pequeno use --text"
         },
         {
           "name": "success",
@@ -155,7 +155,8 @@
       "tokens": [
         {
           "name": "inverse-bg",
-          "value": "#fce0d7"
+          "value": "#ffede8",
+          "note": "fundo de contraste = brilho coral do card \"Próxima sessão\" (nunca escuro)"
         },
         {
           "name": "on-inverse",
@@ -168,8 +169,8 @@
       "tokens": [
         {
           "name": "accent-soft",
-          "value": "#fce0d7",
-          "note": "fundo de tag/realce"
+          "value": "#fddbd3",
+          "note": "fundo de tag/realce = fundo do avatar do app"
         },
         {
           "name": "pastel-sage",
@@ -342,11 +343,11 @@
     "base": "#ef7960",
     "auto": true,
     "steps": {
-      "50": "#fff4f2",
-      "100": "#fee8e3",
-      "200": "#fed3c9",
-      "300": "#fdb7a7",
-      "400": "#fa9781",
+      "50": "#fff8f6",
+      "100": "#ffede8",
+      "200": "#fddbd3",
+      "300": "#f7bdb1",
+      "400": "#f39b88",
       "500": "#ef7960",
       "600": "#bc4f38",
       "700": "#933724",
@@ -354,6 +355,12 @@
       "900": "#48170c",
       "950": "#2c0803"
     },
-    "overrides": {}
+    "overrides": {
+      "50": "#fff8f6",
+      "100": "#ffede8",
+      "200": "#fddbd3",
+      "300": "#f7bdb1",
+      "400": "#f39b88"
+    }
   }
 }

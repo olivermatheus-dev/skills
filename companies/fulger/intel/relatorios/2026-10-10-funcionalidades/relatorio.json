@@ -1,0 +1,1944 @@
+{
+  "empresa": "fulger",
+  "nos": "Fulger",
+  "modulo": "funcionalidades",
+  "data": "2026-10-10",
+  "cabecalho": "Fulger · Funcionalidades e como são vendidas",
+  "fonte": "Fonte: matriz do app (09/10) + texto dos sites dos concorrentes (10/10/2026)",
+  "paginas": [
+    {
+      "tipo": "capa",
+      "titulo": "Funcionalidades: *o que eles têm e como vendem*",
+      "subtitulo": "Quantos dos 10 concorrentes têm cada funcionalidade, e a copy, o benefício e a dor que usam para vender cada uma.",
+      "pontos": [
+        "**O piso do mercado é dinheiro e agenda:** controle de pagamentos (10 de 10), agenda visual (8), Pix (7), lembrete automático (6) e ficha do aluno (6). Ter isso não diferencia ninguém.",
+        "**Ninguém vende pela função:** os melhores sites vendem pela cena. \"Prof, pode remarcar? às 23h\", \"perder o controle de quem faltou e quem pagou\".",
+        "**Os vilões são a planilha e o WhatsApp:** 8 de 10 sites citam a planilha, e dois põem o WhatsApp no título como o problema.",
+        "**O Fulger tem o que quase ninguém tem:** pacote que vira crédito (1 de 10 completo), falta com regra de cobrança (0), link do aluno sem login (0) e videochamada própria (0)."
+      ],
+      "meta": [
+        [
+          "Concorrentes",
+          "10: Aulvi, Beaky, eClasse, EnsinaApp, FluentDesk, iorCLASS, iProfe, Profeu, Proffin, Sistema Classis"
+        ],
+        [
+          "Critério",
+          "todos os concorrentes ativos (os 10 principais escolhidos pelo Oliver)"
+        ],
+        [
+          "Dados",
+          "matriz do app (09/10) cruzada com o texto dos sites (10/10). Conta só o que o site mostra: o que não aparece no site entra como \"não vimos\". Copy entre aspas é literal."
+        ]
+      ]
+    },
+    {
+      "tipo": "ranking",
+      "titulo": "Quantos têm *cada funcionalidade*",
+      "sub": "As 45 funcionalidades da matriz, da mais comum à mais rara. Na etiqueta, a situação do Fulger.",
+      "total": 10,
+      "itens": [
+        {
+          "grupo": "Financeiro",
+          "nome": "Controle de pagamentos (a receber)",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "iorCLASS",
+            "iProfe",
+            "Profeu",
+            "Proffin",
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Agenda visual (dia/semana/mês)",
+          "tem": [
+            "Beaky",
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "iorCLASS",
+            "iProfe",
+            "Proffin",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "Aulvi",
+            "Profeu"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Cobrança",
+          "nome": "Cobrança por Pix (copia e cola/QR)",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "Profeu",
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Lembretes por e-mail ou push",
+          "tem": [
+            "Beaky",
+            "EnsinaApp",
+            "FluentDesk",
+            "iorCLASS",
+            "Profeu",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "Aulvi"
+          ],
+          "nota": "Fulger: em parte (lembrete sai pelo WhatsApp do professor)"
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Anotações e diário da aula",
+          "tem": [
+            "Beaky",
+            "eClasse",
+            "EnsinaApp",
+            "iorCLASS",
+            "iProfe"
+          ],
+          "parcial": [
+            "FluentDesk",
+            "Proffin"
+          ],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Ficha e cadastro do aluno",
+          "tem": [
+            "Beaky",
+            "eClasse",
+            "iorCLASS",
+            "iProfe",
+            "Proffin",
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Cobrança",
+          "nome": "Cobrança e baixa automáticas",
+          "tem": [
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "Profeu",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "Beaky"
+          ],
+          "nota": "Fulger: não tem (por decisão)"
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Portal ou app do aluno (com login)",
+          "tem": [
+            "Beaky",
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "iorCLASS"
+          ],
+          "parcial": [
+            "Proffin"
+          ],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Presença e frequência",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "eClasse",
+            "FluentDesk",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "iorCLASS"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Relatórios financeiros",
+          "tem": [
+            "FluentDesk",
+            "iorCLASS",
+            "Proffin",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "Aulvi",
+            "Beaky",
+            "EnsinaApp"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Turmas e aulas em grupo",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "FluentDesk",
+            "iorCLASS",
+            "Proffin"
+          ],
+          "parcial": [
+            "Sistema Classis"
+          ],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Histórico e extrato de aulas",
+          "tem": [
+            "iorCLASS",
+            "Proffin",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk",
+            "iProfe"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Materiais e biblioteca",
+          "tem": [
+            "Beaky",
+            "EnsinaApp",
+            "FluentDesk",
+            "iorCLASS"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Plano de aula",
+          "tem": [
+            "Beaky",
+            "FluentDesk",
+            "iorCLASS",
+            "Profeu"
+          ],
+          "parcial": [],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Captação e plataforma",
+          "nome": "App mobile ou PWA do professor",
+          "tem": [
+            "FluentDesk",
+            "iorCLASS",
+            "iProfe"
+          ],
+          "parcial": [
+            "EnsinaApp"
+          ],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Videochamada",
+          "nome": "Link de Meet/Zoom na aula",
+          "tem": [
+            "eClasse",
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [
+            "Beaky"
+          ],
+          "nota": "Fulger: não tem (tem vídeo próprio)"
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Tarefas e correção",
+          "tem": [
+            "Beaky",
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [
+            "iorCLASS"
+          ],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Aulas recorrentes",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Contratos digitais",
+          "tem": [
+            "Beaky",
+            "iorCLASS",
+            "Proffin"
+          ],
+          "parcial": [],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Despesas e contas a pagar",
+          "tem": [
+            "iorCLASS",
+            "Profeu",
+            "Proffin"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Gamificação e flashcards",
+          "tem": [
+            "Beaky",
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Google Agenda / iCal",
+          "tem": [
+            "Aulvi",
+            "Beaky",
+            "EnsinaApp"
+          ],
+          "parcial": [],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Quizzes e exercícios",
+          "tem": [
+            "Beaky",
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Relatório de evolução para os pais",
+          "tem": [
+            "FluentDesk",
+            "iProfe",
+            "Profeu"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Remarcação com regras",
+          "tem": [
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [
+            "Aulvi",
+            "Beaky"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Chat professor-aluno",
+          "tem": [
+            "EnsinaApp",
+            "FluentDesk"
+          ],
+          "parcial": [
+            "Beaky"
+          ],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Importação de planilha",
+          "tem": [
+            "Profeu",
+            "Sistema Classis"
+          ],
+          "parcial": [
+            "FluentDesk"
+          ],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Equipe e escola",
+          "nome": "Vários professores / equipe",
+          "tem": [
+            "Aulvi",
+            "FluentDesk"
+          ],
+          "parcial": [
+            "Beaky"
+          ],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Agendamento online pelo aluno",
+          "tem": [
+            "EnsinaApp"
+          ],
+          "parcial": [
+            "Beaky",
+            "Profeu"
+          ],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Aviso de choque de horário",
+          "tem": [
+            "Aulvi",
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Funil de vendas (CRM)",
+          "tem": [
+            "iorCLASS",
+            "Proffin"
+          ],
+          "parcial": [],
+          "nota": "Fulger: a confirmar"
+        },
+        {
+          "grupo": "IA",
+          "nome": "IA para plano de aula e lições",
+          "tem": [
+            "Beaky",
+            "Profeu"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Lembrete de aula por WhatsApp",
+          "tem": [
+            "Profeu",
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Pacote de aulas que vira crédito",
+          "tem": [
+            "EnsinaApp"
+          ],
+          "parcial": [
+            "Aulvi",
+            "eClasse"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Captação e plataforma",
+          "nome": "Perfil público / vitrine",
+          "tem": [
+            "Beaky",
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Recibo digital",
+          "tem": [
+            "Aulvi",
+            "iorCLASS"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Reposição pelo próprio aluno",
+          "tem": [
+            "Beaky",
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Aluno confirma a aula",
+          "tem": [
+            "Sistema Classis"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Equipe e escola",
+          "nome": "Marca própria (white-label)",
+          "tem": [
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: planejado"
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Mensagens prontas (modelos)",
+          "tem": [
+            "Aulvi"
+          ],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Responsável (aluno menor)",
+          "tem": [
+            "FluentDesk"
+          ],
+          "parcial": [],
+          "nota": "Fulger: em parte"
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Falta com regra de cobrança",
+          "tem": [],
+          "parcial": [
+            "Aulvi"
+          ],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Link do aluno sem login",
+          "tem": [],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Nota fiscal",
+          "tem": [],
+          "parcial": [],
+          "nota": "Fulger: não tem"
+        },
+        {
+          "grupo": "Videochamada",
+          "nome": "Videochamada própria na aula",
+          "tem": [],
+          "parcial": [],
+          "nota": "Fulger: tem"
+        }
+      ]
+    },
+    {
+      "tipo": "insights",
+      "titulo": "Obrigação × *diferencial*",
+      "pontosTitulo": "Como ler o ranking",
+      "pontos": [
+        "**Obrigação (6 ou mais de 10):** controle de pagamentos, agenda visual, Pix, lembrete automático, ficha do aluno. Quem chega sem isso perde na comparação. O Fulger tem quatro: o **Pix está em parte** e o **lembrete não é automático** (sai pelo WhatsApp do professor).",
+        "**Comum (4 a 5):** diário de aula, presença, turmas, relatórios financeiros, cobrança automática, app do aluno, plano de aula, materiais. O mercado já espera, mas não é decisivo.",
+        "**Raro (até 2):** reposição pelo aluno, mensagens prontas, confirmação de aula, pacote que vira crédito, falta com regra, link sem login, vídeo próprio. É aqui que está a **posição**.",
+        "**A cobrança automática divide o mercado:** 5 de 10 cobram e dão baixa sozinhos. O Fulger não faz isso por decisão e precisa transformar a escolha em argumento."
+      ],
+      "sugestoesTitulo": "O que isso pede",
+      "sugestoes": [
+        "Na landing, mostrar o piso rápido (pagamentos, agenda, ficha, Pix) e gastar o espaço nobre no raro.",
+        "Fechar o Pix copia-e-cola na cobrança antes do lançamento: é obrigação, e 7 de 10 já têm.",
+        "Responder a \"não é automático?\" na própria página: o professor decide e a mensagem sai pelo WhatsApp dele."
+      ]
+    },
+    {
+      "tipo": "cards",
+      "titulo": "Como eles *vendem*",
+      "sub": "O jeito de apresentar as funcionalidades, lido no texto de cada site.",
+      "itens": [
+        {
+          "rotulo": "Pela dor (4 de 10)",
+          "titulo": "Aulvi, EnsinaApp, FluentDesk, Sistema Classis",
+          "texto": "Abrem com a cena do problema (\"Se você já passou por isso…\", \"Você se identifica?\", \"Sua rotina, antes e depois\") e só depois listam a função. São os sites mais fortes do grupo."
+        },
+        {
+          "rotulo": "Pela função (4 de 10)",
+          "titulo": "eClasse, iorCLASS, iProfe, Proffin",
+          "texto": "Blocos com o nome da função e uma frase (\"Gestão de Alunos\", \"Agenda e Horários\"). Dor quase nunca nomeada. O eClasse não cita nenhuma."
+        },
+        {
+          "rotulo": "Pela automação (2 de 10)",
+          "titulo": "Profeu e EnsinaApp",
+          "texto": "\"Sua rotina de professor no piloto automático.\" \"Você dá a aula; o resto anda sozinho.\" A promessa é o sistema fazer no lugar do professor."
+        },
+        {
+          "rotulo": "Pelo público (1 de 10)",
+          "titulo": "Beaky",
+          "texto": "Separa o que o aluno ganha (app, lições) do que o professor ganha (painel), e fecha com comparativo contra Notion e Classroom."
+        }
+      ]
+    },
+    {
+      "tipo": "cards",
+      "titulo": "Os vilões e as *dores* mais usadas",
+      "sub": "O que os sites nomeiam como problema, contado no texto das páginas.",
+      "itens": [
+        {
+          "rotulo": "Planilha (8 de 10 citam)",
+          "titulo": "\"Adeus planilhas!\" (Proffin)",
+          "texto": "O vilão número 1. Proffin, Sistema Classis e iorCLASS citam mais de 10 vezes cada. Vira genérico: todo mundo é \"contra a planilha\"."
+        },
+        {
+          "rotulo": "WhatsApp como bagunça",
+          "titulo": "\"Suas aulas merecem mais que o WhatsApp.\" (EnsinaApp)",
+          "texto": "EnsinaApp e FluentDesk põem o WhatsApp no título como o problema. Aulvi e Classis fazem o contrário: usam o WhatsApp como canal de entrega."
+        },
+        {
+          "rotulo": "Constrangimento de cobrar (3 de 10)",
+          "titulo": "\"Receba sem o constrangimento de cobrar.\" (Profeu)",
+          "texto": "Aulvi, Profeu e Sistema Classis. A Aulvi resolve como o Fulger: \"a mensagem pronta. Você só encaminha.\" Os outros dois, com cobrança automática."
+        },
+        {
+          "rotulo": "Tempo e falta",
+          "titulo": "\"Lembretes automáticos que reduzem faltas em até 40%.\" (Classis)",
+          "texto": "O aluno que esquece e o professor \"no vácuo\". A Classis é a única que põe número na promessa."
+        }
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Controle de pagamentos: *10 de 10*",
+      "quantos": 10,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "Sistema Classis",
+          "\"Saiba quem pagou, quem deve e quanto você vai ganhar no mês, em um segundo.\" Benefício: a previsão do mês. Dor: perder o controle."
+        ],
+        [
+          "Aulvi",
+          "Dor explícita: \"perder o controle de quem remarcou, quem faltou e quem já pagou\". Mostra o recibo \"Pago\"."
+        ],
+        [
+          "Proffin",
+          "\"Adeus planilhas! Gerencie os pagamentos das aulas com clareza.\" Extrato por aluno."
+        ],
+        [
+          "iorCLASS",
+          "Dor: não saber \"para onde seu dinheiro está indo\"."
+        ],
+        [
+          "eClasse, iProfe",
+          "Só o nome da função (\"Controle dos pagamentos\"), sem dor."
+        ]
+      ],
+      "nos": "Temos: contas a receber, pacote, estorno e relatórios. É obrigação, não diferencial.",
+      "sugestoes": [
+        "Vender pela pergunta que dói: *\"quem me deve este mês?\"*, respondida numa tela.",
+        "Juntar com o pacote e a falta: \"o que cada aluno deve, já descontado o que ele faltou e o crédito que sobrou\". Nenhum deles faz essa conta."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Agenda visual: *8 de 10* (+2 em parte)",
+      "quantos": 8,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "Beaky",
+          "\"Sua semana inteira em uma tela.\" Junta agenda, receita e reposições."
+        ],
+        [
+          "Sistema Classis",
+          "\"Calendário Inteligente: agende aulas sem conflitos.\" Dor: aulas sobrepostas."
+        ],
+        [
+          "iorCLASS",
+          "Agenda de aulas junto com \"seus compromissos pessoais\". Dor: vida pessoal e aulas misturadas."
+        ],
+        [
+          "EnsinaApp",
+          "\"Grade semanal\": monta uma vez e o aluno agenda sozinho. Dor: agenda espalhada no WhatsApp."
+        ],
+        [
+          "iProfe",
+          "\"Nunca perca um compromisso.\""
+        ]
+      ],
+      "nos": "Temos: semana, dia e mês, indisponibilidade e férias, painel do dia, agenda assinável no Google e no iPhone.",
+      "sugestoes": [
+        "A agenda é obrigação. O que vende é o que ela evita: o choque de horário (Classis) e a semana montada sozinha (Aulvi).",
+        "Mostrar a recorrência com alcance (\"só esta, as próximas ou todas\"): é o que tira o retrabalho de remarcar."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Cobrança por Pix: *7 de 10*",
+      "quantos": 7,
+      "de": 10,
+      "status": "parcial",
+      "eles": [
+        [
+          "Aulvi",
+          "\"A cobrança fecha aqui dentro.\" Chave Pix e copia-e-cola no recibo. Dor: \"montar a conta na mão toda vez\"."
+        ],
+        [
+          "EnsinaApp",
+          "\"PIX e pacotes\": o aluno paga pelo painel, \"sem comissão\"."
+        ],
+        [
+          "FluentDesk, eClasse",
+          "Pix e boleto por gateway (Asaas). Venda pela automação."
+        ],
+        [
+          "Profeu",
+          "\"Receba sem o constrangimento de cobrar.\""
+        ],
+        [
+          "Beaky",
+          "Pix só a partir do plano Essential. Aparece no FAQ, não na vitrine."
+        ]
+      ],
+      "nos": "Em parte: a página de cobrança sem login existe; \"Já paguei\", comprovante e recibo estão em construção.",
+      "sugestoes": [
+        "Fechar o Pix copia-e-cola na página `/pagar` antes do lançamento: 7 de 10 têm.",
+        "Vender como a Aulvi: *a conta já somada, com o Pix pronto*. O aluno abre o link, sem app nem login."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Lembrete de aula automático: *6 de 10*",
+      "quantos": 6,
+      "de": 10,
+      "status": "parcial",
+      "eles": [
+        [
+          "Sistema Classis",
+          "\"Lembretes automáticos que reduzem faltas em até 40%.\" No WhatsApp, com cota por plano. Dor: \"aluno esquece da aula e você fica no vácuo\"."
+        ],
+        [
+          "EnsinaApp",
+          "E-mail na véspera e aviso no dia. Dor explícita: o aluno que não aparece."
+        ],
+        [
+          "FluentDesk",
+          "Push e e-mail para aluno, pai e professor. Dor: \"cancelamentos sem aviso\"."
+        ],
+        [
+          "Beaky",
+          "\"Dois lembretes automáticos, 15 min antes e quando a aula começa.\" Depende do app do aluno."
+        ],
+        [
+          "Profeu",
+          "Pelo Telegram. O WhatsApp está \"em breve\"."
+        ]
+      ],
+      "nos": "Em parte: \"Aulas de amanhã\" abre o WhatsApp com a mensagem pronta para todos os alunos, em um toque. Não é automático por decisão.",
+      "sugestoes": [
+        "Vender o toque como vantagem: *\"o lembrete sai do seu WhatsApp, com o seu jeito\"*. O aluno lê no app que ele já usa, sem instalar nada.",
+        "Não prometer redução de falta com número enquanto não houver dado nosso."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Ficha do aluno: *6 de 10*",
+      "quantos": 6,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "iorCLASS",
+          "\"Acompanhe todas as informações de seus alunos em uma única tela.\" Dor: planilhas que \"fazem você gastar muito mais tempo para encontrar as suas informações\"."
+        ],
+        [
+          "iProfe",
+          "Depoimento: com planilhas, \"era um pesadelo\"."
+        ],
+        [
+          "Sistema Classis",
+          "\"Cadastre, organize e acompanhe o histórico completo de cada aluno.\""
+        ],
+        [
+          "Beaky",
+          "\"Cadastre seus alunos em menos de 5 minutos.\""
+        ]
+      ],
+      "nos": "Temos: ficha com resumo, objetivo, foto e abas de aulas, plano e financeiro.",
+      "sugestoes": [
+        "Vender pela dor da Gaby: *\"abrir o aluno e saber onde ele parou\"*. Ninguém fala de continuidade pedagógica, só de cadastro."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Diário e anotações da aula: *5 de 10*",
+      "quantos": 5,
+      "de": 10,
+      "status": "desconhecido",
+      "eles": [
+        [
+          "iProfe",
+          "\"Saiba exatamente o que foi abordado na última aula.\" O melhor argumento do grupo."
+        ],
+        [
+          "iorCLASS",
+          "Relatório \"do que foi lecionado e realizado em cada aula\", que vira extrato para o aluno."
+        ],
+        [
+          "EnsinaApp",
+          "Notas públicas e privadas por aula."
+        ],
+        [
+          "eClasse, Beaky",
+          "\"Diário de Classe Digital\", \"bloquinho de notas\". Só o nome."
+        ]
+      ],
+      "nos": "A confirmar: o planejamento do aluno mostra a última aula dada; nota por aula não está no registro do produto.",
+      "sugestoes": [
+        "Conferir no código se há nota por aula. Se houver, vender como o iProfe: *\"comece a aula de onde parou\"*.",
+        "É a ponte para a Big Idea \"tire sua escola da cabeça\": a memória do professor fica no sistema."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Presença e frequência: *5 de 10*",
+      "quantos": 5,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "Aulvi",
+          "\"Confirmação em um toque\" pela notificação. Dor: \"perder o controle de quem remarcou, quem faltou e quem já pagou\"."
+        ],
+        [
+          "Sistema Classis",
+          "Frequência em todos os planos, para \"acabar com faltas e atrasos\"."
+        ],
+        [
+          "FluentDesk",
+          "Status da aula: concluída, falta, cancelada."
+        ],
+        [
+          "eClasse, Beaky",
+          "Presença dentro do diário ou de página customizada."
+        ]
+      ],
+      "nos": "Temos: presença, concluir e desfazer, \"avisou\". E a falta sem aviso cobra pela regra do professor.",
+      "sugestoes": [
+        "Ninguém liga presença a dinheiro. Vender a junção: *\"marcou falta sem aviso, a cobrança já sabe\"*."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Cobrança e baixa automáticas: *5 de 10*",
+      "quantos": 5,
+      "de": 10,
+      "status": "nao",
+      "eles": [
+        [
+          "Sistema Classis",
+          "\"Fica sem graça de cobrar o aluno que atrasou → cobrança profissional e automática sem constrangimento.\""
+        ],
+        [
+          "Profeu",
+          "\"Cobrança Automática: receba sem o constrangimento de cobrar.\""
+        ],
+        [
+          "EnsinaApp",
+          "\"PIX cai e o pacote libera na hora.\""
+        ],
+        [
+          "eClasse, FluentDesk",
+          "Faturas geradas sozinhas pelo Asaas, com juros e desconto."
+        ]
+      ],
+      "nos": "Não temos, por decisão: o professor confirma o pagamento e nada sai sozinho no nome dele.",
+      "sugestoes": [
+        "Não brigar no \"automático\". Vender o controle: *\"nenhuma mensagem sai sem você ver, e o dinheiro cai direto na sua conta, sem intermediário\"*.",
+        "A Aulvi prova que funciona: \"a mensagem pronta. Você só encaminha.\" É o mesmo ângulo, então o Fulger precisa de acabamento melhor, não de outra promessa."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "App ou portal do aluno: *5 de 10*",
+      "quantos": 5,
+      "de": 10,
+      "status": "parcial",
+      "eles": [
+        [
+          "Beaky",
+          "\"Tudo que você, como aluno, precisa entre uma aula e outra.\" App iOS e Android. Dor: procurar informação em conversas."
+        ],
+        [
+          "EnsinaApp",
+          "\"Envie o link. Eles agendam, pagam e recebem tudo automático.\""
+        ],
+        [
+          "FluentDesk",
+          "\"Área do aluno com sua marca. Não parece mais improviso.\""
+        ],
+        [
+          "iorCLASS",
+          "App com agenda, anotações e pagamentos do aluno."
+        ],
+        [
+          "eClasse",
+          "\"Portal do Cliente\" para ver horário e pagar."
+        ]
+      ],
+      "nos": "Em parte: o app do aluno é básico, mas as páginas sem login (pagar, confirmar, entrar na sala) já existem. Nenhum concorrente tem isso.",
+      "sugestoes": [
+        "Virar o jogo: *\"seu aluno não instala nada\"*. Contra a Beaky, que depende de app, e contra os portais com login.",
+        "Usar a dor da FluentDesk a nosso favor: o link do Fulger também \"não parece improviso\"."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Relatórios financeiros: *4 de 10* (+3 em parte)",
+      "quantos": 4,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "Proffin",
+          "\"Entenda seus resultados com clareza! Porque dar aula é também gerir com inteligência.\" Gráficos e previsão."
+        ],
+        [
+          "iorCLASS",
+          "Relatórios para \"entender melhor o seu faturamento\"."
+        ],
+        [
+          "Sistema Classis",
+          "\"Saúde do Negócio: relatórios e métricas para entender e crescer.\""
+        ],
+        [
+          "Beaky, EnsinaApp",
+          "Só o número da receita do mês no painel."
+        ]
+      ],
+      "nos": "Temos: relatórios do livro de entradas e saídas. O arquivo do Carnê-Leão e do MEI está em construção.",
+      "sugestoes": [
+        "Quando o arquivo do imposto existir, é argumento único: nenhum dos 10 fala de Carnê-Leão nem de MEI."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Plano de aula e materiais: *4 de 10* cada",
+      "quantos": 4,
+      "de": 10,
+      "status": "parcial",
+      "eles": [
+        [
+          "Beaky",
+          "\"Planos de estudo ligados ao aluno.\" Dor: trabalho repetitivo de planejamento."
+        ],
+        [
+          "iorCLASS",
+          "Plano \"para que seus alunos saibam antecipadamente o que será realizado em cada aula\"."
+        ],
+        [
+          "FluentDesk",
+          "Dor nomeada: \"PDFs no Drive, links perdidos, arquivos sumidos\"."
+        ],
+        [
+          "Profeu",
+          "IA que gera o plano de aula \"em segundos\"."
+        ],
+        [
+          "EnsinaApp",
+          "Materiais por aluno, PDF protegido."
+        ]
+      ],
+      "nos": "Plano em parte (quadro visual das aulas). Materiais: sim, em matéria, módulos e tópicos, reaproveitáveis entre alunos.",
+      "sugestoes": [
+        "Vender como método: *\"monte uma vez, use com todos os alunos\"*. Os concorrentes guardam arquivo por aluno; o Fulger guarda o roteiro do professor.",
+        "A dor da FluentDesk (\"PDFs no Drive, links perdidos\") é boa e pode ser adaptada na nossa voz."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Remarcação e reposição: *2 de 10* (+2 em parte)",
+      "quantos": 2,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "EnsinaApp",
+          "\"Remarcação com regras, sem drama.\" Dor: \"Prof, pode remarcar?\" às 23h. A melhor cena de todos os sites."
+        ],
+        [
+          "Beaky",
+          "\"O aluno remarca aula por conta própria\" nos horários que o professor libera. Dor: \"ping pong de mensagens\". Os reels sobre isso são os que mais rendem."
+        ],
+        [
+          "Aulvi",
+          "\"Nenhuma aula esquecida\": aula não dada fica pendente até remarcar."
+        ],
+        [
+          "FluentDesk",
+          "Remarcação com histórico; o aluno pede pelo sistema."
+        ]
+      ],
+      "nos": "Temos a remarcação pelo professor com alcance (só esta, as próximas, todas). A reposição pelo aluno está em construção.",
+      "sugestoes": [
+        "Hoje: vender o alcance, *\"remarcou uma, remarcou o semestre\"*. Ninguém mostra isso.",
+        "Quando a reposição pelo aluno sair: atacar a cena das 23h, pelo link e sem app."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Pacote que vira crédito: *1 de 10* (+2 em parte)",
+      "quantos": 1,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "EnsinaApp",
+          "\"Pacotes de 4 ou 8 aulas\", liberados quando o Pix cai. Sem crédito consumido aula a aula."
+        ],
+        [
+          "Aulvi",
+          "Mensalidade antecipada em que a aula que não rolou vira crédito."
+        ],
+        [
+          "eClasse",
+          "\"Pacotes e Contratações\", sem falar de saldo."
+        ]
+      ],
+      "nos": "Temos: o pacote vira crédito, a aula dada consome, o professor vê o saldo. É o diferencial mais forte do Fulger em dinheiro.",
+      "sugestoes": [
+        "Vender pela dor da persona: *\"o pacote de aulas que vira conta de cabeça\"*. Nenhum site nomeia essa dor.",
+        "Peça de conteúdo e de anúncio: \"Quantas aulas faltam no pacote da Ana?\", respondido numa tela."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Falta com regra de cobrança: *0 de 10*",
+      "quantos": 0,
+      "de": 10,
+      "status": "sim",
+      "eles": [
+        [
+          "Aulvi",
+          "O mais perto: a aula que não rolou vira crédito, e um guia explica a regra de falta e reposição."
+        ],
+        [
+          "Sistema Classis, Beaky",
+          "Falam de falta só para reduzir com lembrete. Nada sobre o que fazer com o dinheiro dela."
+        ]
+      ],
+      "nos": "Temos: a falta sem aviso cobra, a avisada não, a experimental não. A regra é do professor.",
+      "sugestoes": [
+        "Território vazio: *\"o aluno faltou sem avisar, e a dúvida de cobrar acabou\"*. É o gatilho de compra listado no `AUDIENCE.md`.",
+        "Encaixa no pilar \"Dinheiro sem conta de cabeça\" e vale um anúncio próprio."
+      ]
+    },
+    {
+      "tipo": "secao",
+      "titulo": "Videochamada: *0 de 10* com vídeo próprio",
+      "quantos": 0,
+      "de": 10,
+      "status": "nao",
+      "eles": [
+        [
+          "EnsinaApp",
+          "\"Meet + Calendar\": link do Meet gerado e enviado. Dor: \"link do Meet mandado na última hora\"."
+        ],
+        [
+          "FluentDesk",
+          "Link do Meet ou Zoom anexado à aula."
+        ],
+        [
+          "eClasse, Beaky",
+          "O link da aula guardado na agenda ou no app."
+        ]
+      ],
+      "nos": "Temos: sala própria por aula, o aluno entra pelo link. É só para duas pessoas.",
+      "sugestoes": [
+        "Vender o fim da caça ao link: *\"a aula já tem sala, o aluno entra pelo link\"*.",
+        "Não prometer aula em grupo por vídeo."
+      ]
+    },
+    {
+      "tipo": "cards",
+      "titulo": "O que *só o Fulger* tem",
+      "sub": "Nenhum dos 10 mostra no site.",
+      "itens": [
+        {
+          "rotulo": "Área do aluno",
+          "titulo": "Link sem login",
+          "texto": "Pagar, confirmar a aula e entrar na sala no celular, sem instalar nada e sem senha."
+        },
+        {
+          "rotulo": "Aulas e presença",
+          "titulo": "Falta com regra de cobrança",
+          "texto": "A falta sem aviso cobra pela regra do professor; a avisada e a experimental não."
+        },
+        {
+          "rotulo": "Videochamada",
+          "titulo": "Sala própria por aula",
+          "texto": "Sem Meet nem Zoom: a aula já nasce com a sala."
+        },
+        {
+          "rotulo": "Financeiro",
+          "titulo": "Pacote que vira crédito",
+          "texto": "Só a EnsinaApp tem pacote completo, e sem saldo consumido aula a aula."
+        },
+        {
+          "rotulo": "Comunicação",
+          "titulo": "Mensagens prontas no WhatsApp do professor",
+          "texto": "Só a Aulvi tem algo parecido (a mensagem de cobrança pronta)."
+        }
+      ]
+    },
+    {
+      "tipo": "matriz",
+      "titulo": "Matriz *completa*",
+      "sub": "Matriz do app cruzada com o texto dos sites em 10/10/2026. \"?\" = não aparece no site.",
+      "colunas": [
+        "Fulger",
+        "Aulvi",
+        "Beaky",
+        "eClasse",
+        "EnsinaApp",
+        "FluentDesk",
+        "iorCLASS",
+        "iProfe",
+        "Profeu",
+        "Proffin",
+        "Sistema Classis"
+      ],
+      "colunaNos": 0,
+      "linhas": [
+        {
+          "grupo": "Alunos",
+          "nome": "Ficha e cadastro do aluno",
+          "valores": [
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Histórico e extrato de aulas",
+          "valores": [
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "parcial",
+            "parcial",
+            "parcial",
+            "sim",
+            "parcial",
+            "desconhecido",
+            "sim",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Contratos digitais",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Funil de vendas (CRM)",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Importação de planilha",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "parcial",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Alunos",
+          "nome": "Responsável (aluno menor)",
+          "valores": [
+            "parcial",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Agenda visual (dia/semana/mês)",
+          "valores": [
+            "sim",
+            "parcial",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "parcial",
+            "sim",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Aulas recorrentes",
+          "valores": [
+            "sim",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Remarcação com regras",
+          "valores": [
+            "sim",
+            "parcial",
+            "parcial",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Reposição pelo próprio aluno",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Aviso de choque de horário",
+          "valores": [
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Google Agenda / iCal",
+          "valores": [
+            "parcial",
+            "sim",
+            "sim",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Agenda",
+          "nome": "Agendamento online pelo aluno",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "parcial",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "parcial",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Presença e frequência",
+          "valores": [
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "desconhecido",
+            "sim",
+            "parcial",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Falta com regra de cobrança",
+          "valores": [
+            "sim",
+            "parcial",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Anotações e diário da aula",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "sim",
+            "sim",
+            "parcial",
+            "sim",
+            "sim",
+            "desconhecido",
+            "parcial",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Aulas e presença",
+          "nome": "Turmas e aulas em grupo",
+          "valores": [
+            "parcial",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "parcial"
+          ]
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Plano de aula",
+          "valores": [
+            "parcial",
+            "nao",
+            "sim",
+            "nao",
+            "desconhecido",
+            "sim",
+            "sim",
+            "nao",
+            "sim",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Materiais e biblioteca",
+          "valores": [
+            "sim",
+            "nao",
+            "sim",
+            "nao",
+            "sim",
+            "sim",
+            "sim",
+            "nao",
+            "nao",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Tarefas e correção",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "parcial",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Quizzes e exercícios",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Planejamento e materiais",
+          "nome": "Gamificação e flashcards",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Controle de pagamentos (a receber)",
+          "valores": [
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Pacote de aulas que vira crédito",
+          "valores": [
+            "sim",
+            "parcial",
+            "nao",
+            "parcial",
+            "sim",
+            "nao",
+            "desconhecido",
+            "nao",
+            "nao",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Despesas e contas a pagar",
+          "valores": [
+            "sim",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Relatórios financeiros",
+          "valores": [
+            "sim",
+            "parcial",
+            "parcial",
+            "nao",
+            "parcial",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Recibo digital",
+          "valores": [
+            "nao",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Financeiro",
+          "nome": "Nota fiscal",
+          "valores": [
+            "nao",
+            "nao",
+            "desconhecido",
+            "nao",
+            "nao",
+            "nao",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Cobrança",
+          "nome": "Cobrança por Pix (copia e cola/QR)",
+          "valores": [
+            "parcial",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "nao",
+            "nao",
+            "sim",
+            "nao",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Cobrança",
+          "nome": "Cobrança e baixa automáticas",
+          "valores": [
+            "nao",
+            "nao",
+            "parcial",
+            "sim",
+            "sim",
+            "sim",
+            "nao",
+            "nao",
+            "sim",
+            "nao",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Lembrete de aula por WhatsApp",
+          "valores": [
+            "sim",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "desconhecido",
+            "nao",
+            "sim",
+            "nao",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Mensagens prontas (modelos)",
+          "valores": [
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Lembretes por e-mail ou push",
+          "valores": [
+            "parcial",
+            "parcial",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "sim",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Chat professor-aluno",
+          "valores": [
+            "desconhecido",
+            "desconhecido",
+            "parcial",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Comunicação",
+          "nome": "Relatório de evolução para os pais",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Portal ou app do aluno (com login)",
+          "valores": [
+            "parcial",
+            "desconhecido",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "sim",
+            "nao",
+            "nao",
+            "parcial",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Link do aluno sem login",
+          "valores": [
+            "sim",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "nao",
+            "nao",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Área do aluno",
+          "nome": "Aluno confirma a aula",
+          "valores": [
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim"
+          ]
+        },
+        {
+          "grupo": "Videochamada",
+          "nome": "Videochamada própria na aula",
+          "valores": [
+            "sim",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Videochamada",
+          "nome": "Link de Meet/Zoom na aula",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "parcial",
+            "sim",
+            "sim",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "IA",
+          "nome": "IA para plano de aula e lições",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "nao",
+            "sim",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Equipe e escola",
+          "nome": "Vários professores / equipe",
+          "valores": [
+            "nao",
+            "sim",
+            "parcial",
+            "nao",
+            "nao",
+            "sim",
+            "nao",
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "nao"
+          ]
+        },
+        {
+          "grupo": "Equipe e escola",
+          "nome": "Marca própria (white-label)",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Captação e plataforma",
+          "nome": "Perfil público / vitrine",
+          "valores": [
+            "nao",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "sim",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido",
+            "desconhecido"
+          ]
+        },
+        {
+          "grupo": "Captação e plataforma",
+          "nome": "App mobile ou PWA do professor",
+          "valores": [
+            "desconhecido",
+            "nao",
+            "desconhecido",
+            "nao",
+            "parcial",
+            "sim",
+            "sim",
+            "sim",
+            "nao",
+            "desconhecido",
+            "nao"
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "insights",
+      "titulo": "O que *priorizar*",
+      "pontosTitulo": "No produto",
+      "pontos": [
+        "**Pix copia-e-cola na cobrança** antes do lançamento: obrigação, 7 de 10 têm.",
+        "**Confirmar a nota por aula** (diário): 5 de 10 têm, e é o \"onde o aluno parou\" da persona.",
+        "**Reposição pelo aluno, pelo link:** 2 de 10 têm, e é o tema que mais rende no Instagram da Beaky."
+      ],
+      "sugestoesTitulo": "Na copy, enquanto isso",
+      "sugestoes": [
+        "Vender pela cena, não pela função: falta sem aviso, pacote de cabeça, \"Prof, pode remarcar?\", o link do Meet na última hora.",
+        "Gastar o espaço nobre no que é raro: pacote que vira crédito, falta com regra, aluno que não instala nada, sala de vídeo própria.",
+        "Transformar o \"não é automático\" em controle: nada sai sem você ver, e o dinheiro cai direto na sua conta.",
+        "Fugir do \"adeus planilha\": 8 de 10 já dizem isso. O vilão do Fulger é lembrar de tudo, todos os dias.",
+        "Atualizar a matriz do app com o que os sites mostraram (39 células saíram de \"desconhecido\")."
+      ]
+    }
+  ]
+}

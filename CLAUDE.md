@@ -7,12 +7,15 @@ Central de gestão, estratégia, conteúdo e vendas com IA para as empresas do O
 | slug | empresa | o que é |
 |---|---|---|
 | `kz` | Kzloo | SaaS de gestão para terapeutas autônomos (Brasil) |
-| `ludus` | Ludus | SaaS para o professor independente organizar alunos, agenda, aulas, pagamentos e vídeo (Brasil; pré-lançamento) |
+| `fulger` | Fulger | SaaS para o professor independente organizar alunos, agenda, aulas, pagamentos e vídeo (Brasil; pré-lançamento) |
 
 Se o pedido não disser a empresa e houver mais de uma, pergunte. Empresa nova → skill `setup`.
 
 ## Regra de ouro
 Antes de produzir qualquer peça, leia os arquivos relevantes de `companies/<slug>/context/` e, se for visual, `brand/BRAND.md`. Nunca invente dados (preço, números, depoimentos): use o contexto ou pergunte.
+
+## Caixa curto (regra de estratégia)
+O capital de investimento é **muito baixo**. Estratégia, campanha e anúncio precisam ser assertivos: plano antes de gastar, hipótese clara, teste pequeno com critério de corte, escalar só o que provou. Empresa grande é referência de **mecanismo**, nunca de orçamento: ganhamos com criatividade, inteligência, testes e acabamento, não com verba. Regras: `.claude/skills/orquestrar/references/protocolo.md#Caixa curto`.
 
 ## Estrutura
 

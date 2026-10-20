@@ -46,7 +46,7 @@ Decisões do Oliver: ID + slug na pasta, data na ficha; **todos os tipos ganham 
 | 2026-10-08-apresentacao-kz-plano | V0003-apresentacao-janela | apresentacao-kz |
 | 2026-10-07-mockup-painel · -inicio · -premium | M0001-painel · M0002-painel-inicio · M0003-painel-premium | mockup-painel |
 | teste-kit · teste-plano-de-cenas · ab-sessao | _testes/… | — |
-| 2026-10-07-origin-story | **pendente** → C0001-origin-story | — |
+| C0001-origin-story | **pendente** → C0001-origin-story | — |
 
 - **Falta:** a `origin-story` ficou de fora porque a sessão do carrossel (tarefa 049) está trabalhando nela; avisada para rodar `node tools/pecas.mjs migrar kz --aplicar` ao terminar.
 

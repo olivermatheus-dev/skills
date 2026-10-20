@@ -1,0 +1,57 @@
+/* fixados.css — componentes compartilhados pelos 3 posts fixados da kz (C0002 · C0003 · C0004).
+   Ordem no <head>: brand.css → sistema.css → este arquivo. Só tokens do brand.css; nada de cor nova.
+   Regras (BRAND.md, 2026-10-09): visual do app, sempre claro, coral #ef7960 forte, nada cortado,
+   capa pensada para a grade 1:1 (zona x 96–984 · y 222–1140; o quadrado da grade é y 135–1215). */
+
+/* ---------- ênfase da marca: serifa itálica coral (como "Boa tarde, Oliver" no app) ----------
+   coral #ef7960 sobre claro = 2,6:1: só em texto grande e marcado data-contraste="marca" (exceção aprovada pelo Oliver) */
+.enf-serifa { color: var(--primary); }
+.capa-rodape .arraste svg, .rodape .arraste svg { stroke: var(--primary); }
+
+/* ---------- capa do trio (aprovada no estudo v3: campaigns/2026-10-09-posts-fixados/capas/estudo.html) ---------- */
+.capa-cena { position: absolute; left: var(--s-m); right: var(--s-m); top: 222px; height: 460px; }
+.capa-titulo { position: absolute; left: var(--s-m); right: var(--s-m); bottom: 276px;
+  font: 700 92px/1.06 var(--font-heading); letter-spacing: -0.022em; color: var(--text); text-wrap: balance; }
+.capa-titulo .enf-serifa { font-size: 1.16em; line-height: .9; letter-spacing: -0.01em; }
+.capa-apoio { position: absolute; left: var(--s-m); right: var(--s-m); top: 1098px; font: 500 34px/1.3 var(--font-body); color: var(--muted); }
+.capa-arraste { position: absolute; right: var(--s-m); bottom: 58px; display: flex; align-items: center; gap: 12px;
+  font: 600 28px/1 var(--font-body); color: var(--primary); }
+.capa-arraste svg { width: 30px; height: 30px; stroke: var(--primary); }
+
+/* ---------- componentes do app ---------- */
+.app-card { position: absolute; background: var(--surface); border: 2px solid var(--border); border-radius: 24px;
+  box-shadow: 0 1px 2px rgb(80 60 50 / .04), 0 10px 28px rgb(80 60 50 / .07); color: var(--text); }
+.app-tile { width: 68px; height: 68px; border-radius: 16px; display: grid; place-items: center; flex: none; }
+.app-tile svg { width: 36px; height: 36px; fill: none; stroke-width: 1.6; }
+.t-coral { background: var(--tile-coral); } .t-coral svg { stroke: var(--primary); }
+.t-teal { background: var(--tile-teal); } .t-teal svg { stroke: var(--tile-teal-ink); }
+.t-amber { background: var(--tile-amber); } .t-amber svg { stroke: var(--tile-amber-ink); }
+.t-lilac { background: var(--tile-lilac); } .t-lilac svg { stroke: var(--tile-lilac-ink); }
+.t-cinza { background: var(--surface); border: 2px solid var(--border); } .t-cinza svg { stroke: var(--ui-subtle); }
+.app-rot { display: flex; align-items: center; gap: 14px; font: 700 24px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.app-rot i { width: 14px; height: 14px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 6px var(--tone-200); flex: none; }
+.app-rot b { color: var(--primary); font-weight: 700; }
+.app-ferr { width: 372px; height: 112px; display: flex; align-items: center; gap: 22px; padding: 0 22px; font: 600 33px/1 var(--font-body); }
+.app-msg { position: absolute; padding: 24px 30px 26px; background: var(--surface); border: 2px solid var(--border);
+  border-radius: 26px 26px 26px 8px; box-shadow: 0 14px 36px rgb(80 60 50 / .12); white-space: nowrap; font: 500 33px/1.2 var(--font-body); color: var(--text); }
+.app-msg .app-rot { margin-bottom: 14px; }
+.app-btn { height: 64px; padding: 0 26px; border-radius: 12px; display: inline-flex; align-items: center; gap: 12px; font: 600 26px/1 var(--font-body); }
+.app-btn svg { width: 26px; height: 26px; fill: none; stroke-width: 1.8; }
+.app-btn.coral { background: var(--primary); color: #fff; } .app-btn.coral svg { stroke: #fff; }
+.app-btn.sec { background: var(--surface); color: var(--text); border: 2px solid var(--border); } .app-btn.sec svg { stroke: var(--text); }
+.app-av { width: 100px; height: 100px; border-radius: 50%; background: var(--ui-avatar); color: var(--primary); display: grid; place-items: center; font: 700 36px/1 var(--font-body); flex: none; }
+.app-chip { height: 58px; padding: 0 24px; border-radius: 29px; background: var(--surface); border: 2px solid var(--border);
+  display: inline-flex; align-items: center; gap: 10px; font: 600 25px/1 var(--font-body); color: var(--text); }
+.app-chip.on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.app-chip.feito { background: var(--tone-100); border-color: var(--tone-200); }
+/* régua de ícones do motivo (5 ferramentas, sem nome ou com nome pequeno) */
+.app-regua { display: flex; gap: 20px; }
+.app-regua > span { display: flex; flex-direction: column; align-items: center; gap: 12px; font: 600 24px/1 var(--font-body); color: var(--muted); }
+.app-regua .app-tile { width: 84px; height: 84px; border-radius: 20px; }
+.app-regua .app-tile svg { width: 40px; height: 40px; }
+
+/* split com uma ideia só no campo: âncora embaixo do campo */
+[data-layout="split"] .split-campo.so-ancora { justify-content: flex-end; }
+
+/* rodapé em todos os slides de dentro: marca coral */
+.rodape .marca { color: var(--logo); }

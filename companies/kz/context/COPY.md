@@ -56,7 +56,7 @@ Escrever sempre com maiúsculas e como "a Sessão Inteira da kz". Na primeira me
 ## Objeções → respostas (ordem de peso)
 | Objeção | Resposta curta |
 |---|---|
-| "E se eu pagar e não usar? Vou cair em mais um sistema pesado que largo no mês 2?" | "A gente também teria medo. Por isso a kz foi construída pra caber na cabeça já na primeira abertura — não pra ter 'curso de onboarding'." E mais: "Se em 7 dias não tiver lugar natural no seu consultório, a gente não quer que você continue pagando." |
+| "E se eu pagar e não usar? Vou cair em mais um sistema pesado que largo no mês 2?" | "A gente também teria medo. Por isso a kz foi construída pra caber na cabeça já na primeira abertura — não pra ter 'curso de onboarding'." E mais: "Você tem 14 dias de garantia: se a kz não tiver lugar natural no seu consultório, a gente devolve o seu dinheiro." (garantia decidida em 2026-10-09: reembolso integral, pedido pelo suporte do app) |
 | "Vale R$ 100+/mês sendo que uso Google Agenda de graça?" | "Google Agenda é grátis só no recibo: custa 4–8 horas da sua semana. Uma sessão perdida por mês já passa de R$ 100." Honestidade: com 0–2 pacientes por semana talvez não compense; a partir de 3–4, compensa. |
 | "Meus dados ficam seguros? Vocês são novos…" | "[a confirmar por escrito, T-0010: criptografia em trânsito e em repouso]. Você exporta os dados de cada paciente quando quiser (LGPD). Somos novos, sim: 2 anos de desenvolvimento, founder terapeuta em exercício. E você fala direto com a gente pelo suporte do app." Não publicar a frase de criptografia antes da confirmação. |
 | "Resolve tudo ou vou complementar com outra ferramenta?" | "Agenda, videochamada, prontuário, ficha, WhatsApp e controle de pacotes num lugar só. O que não entra (cobrança online, nota/recibo, agendamento pelo paciente, app de celular) está declarado antes da compra. Não prometemos ser tudo; prometemos bastar para atender." |
@@ -105,7 +105,7 @@ Um nível por peça. Pergunta funciona melhor que ordem. Usar "meu/minha". Insta
 ## A validar
 - A objeção principal é mesmo "pagar e não usar"? Se o preço pesar mais nos 10 primeiros fechamentos, inverter a ordem.
 - Valores do stack e faixa de perda (R$ 500–1.500), além do valor-hora de R$ 150
-- Garantia de 7 dias e trial: existem de fato? Se houver trial, trocar os CTAs de nível 5 por "Começar meu teste"
+- Garantia de 14 dias decidida (2026-10-09), sem trial. Reembolso integral pelo suporte do app. Se um dia houver trial, trocar os CTAs de nível 5 por "Começar meu teste"
 - Os primeiros pagantes reconhecem a "Sessão Inteira" como algo distinto?
 - Afirmações de segurança (criptografia, LGPD) confirmadas tecnicamente e por escrito (T-0010)
 - Link da videochamada: fixo por terapeuta ou novo a cada sessão? (muda o argumento "sem caçar link")

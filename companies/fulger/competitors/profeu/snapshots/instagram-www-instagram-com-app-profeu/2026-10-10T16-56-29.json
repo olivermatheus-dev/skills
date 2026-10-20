@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:56:29Z",
+  "platform": "instagram",
+  "profileUrl": "https://www.instagram.com/app.profeu/",
+  "source": "instagram-public",
+  "profile": {
+    "name": "Profeu - Gestão para Professores Particulares",
+    "handle": "app.profeu",
+    "bio": "Profeu: Gestão inteligente para profs particulares! \n📚 Agenda aulas, IA para atividades e relatórios, financeiro auto. \nComece grátis! profeu.com.br",
+    "avatar": "https://scontent.cdninstagram.com/v/t51.82787-19/622103922_17847198273670414_9131508312740543871_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=w9sJKVjMGP0Q7kNvwFk3Yjm&_nc_oc=AdqDa_crZgwxT2Jx8iSbvrDLi09ot0zkUiyURRDN5aRfDzXXi7YNAZkhYUIkAKk2ydPQbrySbCkpO2BZSgcUSXzP&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=2w_DpLYOwDtNA5F6Jp7NYw&_nc_ss=7c689&oh=00_AQPIhR3JdUPtDtMRAuIhXcyiCbs85zEzWvMRfaa0IcHmiA&oe=6AD0432E",
+    "avatarLocal": "media/instagram-www-instagram-com-app-profeu/avatar-cd84a786.jpg",
+    "followers": 5,
+    "following": 5,
+    "postsCount": 1,
+    "verified": false,
+    "links": []
+  },
+  "items": [
+    {
+      "id": "DT5bHhFkWHd",
+      "url": "https://www.instagram.com/p/DT5bHhFkWHd/",
+      "type": "post",
+      "caption": "Telegram: integração com o Profeu, permitindo receber alertas e consulta rápida sem necessidade de abrir o sistema.\nEm breve, novas funcionalidades.",
+      "publishedAt": "2026-01-24T14:44:51Z",
+      "thumbnail": "https://instagram.fvix3-1.fna.fbcdn.net/v/t51.82787-15/622392590_17847361611670414_1652534636504335561_n.heic?stp=dst-jpg_e35_s1080x1080_sh2.08_tt6&_nc_cat=102&ig_cache_key=MzgxNzIwMTQyMjk5MjIzNzAyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=TV1Hctulfj0Q7kNvwGH0Tx0&_nc_oc=Adr5GSGwUKzaHgYgx9y6Dqor8Zdw0tUGTLTBJBIhTUoLnfJBcBP_ECz2BuNnYW42LR159GrEiIIBDJO9XLfSzYYZ&_nc_zt=23&_nc_ht=instagram.fvix3-1.fna&_nc_gid=2w_DpLYOwDtNA5F6Jp7NYw&_nc_ss=7c689&oh=00_AQM8Vdby3OygtMYhRG57QnOCzXNbeFHZcs-uKmlpyET2ng&oe=6AD02CA0",
+      "thumbnailLocal": "media/instagram-www-instagram-com-app-profeu/thumbs/DT5bHhFkWHd-5d89.jpg",
+      "metrics": {
+        "likes": 0,
+        "comments": 0
+      }
+    }
+  ],
+  "errors": []
+}

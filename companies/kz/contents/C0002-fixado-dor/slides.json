@@ -1,0 +1,288 @@
+{
+  "versao": 1,
+  "peca": "C0002-fixado-dor",
+  "empresa": "kz",
+  "formato": "1080x1350",
+  "leitura": "espelho da rotina em carrossel, no visual do app (creme, cards brancos, coral #ef7960 forte, ênfase em serifa itálica coral): calmo, voz de colega para terapeuta autônoma; sempre claro, nada cortado",
+  "motivo": {
+    "o_que": "as 5 ferramentas (Agenda, WhatsApp, Meet, Caderno, Planilha) como janelas brancas com ícone Lucide coral, mais o balão do paciente 'Amanhã está de pé?'",
+    "evolucao": "empilham tortas na capa (caos) → viram os 4 gestos da cena das 19h50 (s3) → o balão interrompe (s4) → são contadas: 5 (s5) → somem claro (s6) → convergem numa tela só (s8)",
+    "identidade": "sempre 5 ferramentas, mesmos nomes e ícones na mesma ordem, card branco de raio 16; o balão é sempre a fala do paciente, sem nome",
+    "destino": "a tela única da kz: card branco grande (60% do slide) com as 5 ferramentas entrando nela como abas"
+  },
+  "sistema": {
+    "fundos": [
+      "creme",
+      "branco",
+      "tom-50",
+      "tom-100",
+      "tom-200"
+    ],
+    "enfase": [
+      "serifa",
+      "cor"
+    ],
+    "dials": {
+      "variancia": 6,
+      "densidade": 4
+    },
+    "trio": "capa v3 (visual do app, grade 1:1): fundo creme | brilho tom-100 | creme; tudo na zona x 96–984 · y 222–1140 (o quadrado da grade é y 135–1215); cena em cards do app em y 222–682; título 92 px com a base em y 1074; apoio em y 1098; ênfase em serifa itálica coral; arraste coral fora do quadrado (y 1260); estudo em campaigns/2026-10-09-posts-fixados/capas/estudo.html"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "papel": "gancho",
+      "familia": "capa-tipografica",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "o título 'Você está cansada de gerenciar, não de atender.' em branco quente, ancorado embaixo",
+      "texto": {
+        "ancora": "Você está cansada de gerenciar, não de atender.",
+        "meta": "arraste"
+      },
+      "hierarquia": "âncora 108 px (sistema do trio, base em y 1060) · meta 24 px",
+      "camadas": [
+        {
+          "o_que": "pilha de 5 janelas brancas tortas (±6°) na faixa de cima, sangrando à direita",
+          "funcao": "o caos se vê antes de se ler; continua na capa do fixado do meio, onde as mesmas 5 entram pela esquerda"
+        },
+        {
+          "o_que": "balão 'Paciente · 19h52 / Amanhã está de pé?' com ponto coral de não lida",
+          "funcao": "a interrupção que a persona reconhece; adianta a cena do s3–s4"
+        }
+      ],
+      "liga": {
+        "proximo": "corte dclaro para o creme: a frase explica o peso"
+      },
+      "enfase": {
+        "tipo": "serifa",
+        "palavra": "atender."
+      },
+      "notas": "Seguir o estudo das capas (capa-1.png). Sem logo na capa.",
+      "motivo": "5 cards de ferramenta do app espalhados e inteiros + o balão do paciente"
+    },
+    {
+      "n": 2,
+      "papel": "contexto",
+      "familia": "split",
+      "fundo": "tom-200",
+      "campo": "branco",
+      "densidade": "media",
+      "heroi": "o campo tom-100 com 'No fim do dia, o cansaço não vem das sessões.'",
+      "texto": {
+        "ancora": "No fim do dia, o cansaço não vem das sessões.",
+        "apoio": "Vem de tudo o que está em volta delas."
+      },
+      "camadas": [
+        {
+          "o_que": "campo tom-100 nos 58% de cima",
+          "funcao": "separa a sessão (campo) do que está em volta dela (fundo)"
+        },
+        {
+          "o_que": "régua com os 5 ícones do motivo, sem nome, embaixo do apoio",
+          "funcao": "'tudo o que está em volta' vira objeto contável"
+        }
+      ],
+      "liga": {
+        "anterior": "as 5 janelas da capa viram 5 ícones na régua",
+        "proximo": "a régua se abre em cards: a cena das 19h50"
+      },
+      "enfase": null,
+      "notas": "2ª capa: precisa funcionar sozinho se o Instagram reexibir daqui.",
+      "motivo": "régua com os 5 ícones, sem nome"
+    },
+    {
+      "n": 3,
+      "papel": "tensao",
+      "familia": "pilha",
+      "fundo": "tom-50",
+      "densidade": "densa",
+      "heroi": "a pilha de 4 cards com os gestos, um sobre o outro",
+      "texto": {
+        "ancora": "19h50. A sessão das 20h começa em dez minutos.",
+        "apoio": "Abre a agenda para ver quem é. · Procura o link no WhatsApp. · Abre o caderno para lembrar onde parou. · Confere se ele pagou o mês."
+      },
+      "camadas": [
+        {
+          "o_que": "4 cards sobrepostos (±2°), cada um com o ícone da ferramenta do motivo e o gesto",
+          "funcao": "a pressa se vê: cada gesto é uma janela a mais por cima da outra"
+        }
+      ],
+      "liga": {
+        "anterior": "ícones da régua",
+        "proximo": "o balão do paciente cai por cima da pilha"
+      },
+      "enfase": null,
+      "notas": "As 4 linhas ficam dentro dos cards, uma por card, com o ícone da ferramenta (Agenda, WhatsApp, Caderno, Planilha).",
+      "motivo": "4 cards empilhados com os gestos"
+    },
+    {
+      "n": 4,
+      "papel": "tensao",
+      "familia": "zoom",
+      "fundo": "tom-200",
+      "densidade": "media",
+      "heroi": "o balão ampliado (888 px de largura), título no terço inferior",
+      "texto": {
+        "ancora": "E, no meio disso, outro paciente quer confirmar amanhã.",
+        "meta": "conversa ilustrativa"
+      },
+      "camadas": [
+        {
+          "o_que": "balão de mensagem na UI da marca (não é print de WhatsApp), com hora e ponto coral de não lida",
+          "funcao": "a interrupção como objeto: o 5º item que ninguém agenda"
+        },
+        {
+          "o_que": "2 cards de gesto do s3, inteiros, atrás do balão",
+          "funcao": "diz que a mensagem chegou por cima da pilha"
+        }
+      ],
+      "liga": {
+        "anterior": "a pilha do s3",
+        "proximo": "a conta: 4 gestos + 1 mensagem = 5"
+      },
+      "enfase": null,
+      "notas": "Usa a família zoom para um detalhe que não é da kz (é a dor): registrado aqui para o Oliver avaliar. Sem nome nem foto de paciente.",
+      "motivo": "o balão do paciente ampliado sobre 2 cards de gesto da pilha"
+    },
+    {
+      "n": 5,
+      "papel": "tensao",
+      "familia": "numero",
+      "fundo": "branco",
+      "densidade": "leve",
+      "heroi": "o numeral 5",
+      "texto": {
+        "ancora": "Nenhuma dessas coisas é difícil.",
+        "apoio": "O problema é que são cinco. Todo dia. Entre uma sessão e outra."
+      },
+      "camadas": [
+        {
+          "o_que": "régua de 5 marcas colada sob o numeral: Agenda, WhatsApp, Meet, Caderno, Planilha (os 5 da capa, mesma ordem)",
+          "funcao": "prova a conta: são os 5 que ela acabou de ver, não um dado inventado"
+        }
+      ],
+      "liga": {
+        "anterior": "os 4 cards + o balão",
+        "proximo": "corte seco para claro: o custo de verdade"
+      },
+      "enfase": null,
+      "motivo": "régua com as 5 ferramentas da capa sob o numeral 5"
+    },
+    {
+      "n": 6,
+      "papel": "tensao",
+      "familia": "campo",
+      "fundo": "tom-100",
+      "densidade": "leve",
+      "heroi": "'E quando o paciente entra, uma parte de você ainda está lá fora.' em display",
+      "texto": {
+        "ancora": "E quando o paciente entra, uma parte de você ainda está lá fora.",
+        "apoio": "Conferindo se não esqueceu nada."
+      },
+      "camadas": [
+        {
+          "o_que": "o vaziclaro acima da frase",
+          "funcao": "a pausa é a presença que falta"
+        }
+      ],
+      "liga": {
+        "anterior": "claro volta (é o mesmo tom da capa)",
+        "proximo": "volta à luz com a virada"
+      },
+      "enfase": null,
+      "motivo": null,
+      "motivo_falta": "pausa: a presença que falta vira só frase, sem objeto"
+    },
+    {
+      "n": 7,
+      "papel": "contexto",
+      "familia": "split",
+      "fundo": "tom-300",
+      "campo": "branco",
+      "densidade": "media",
+      "heroi": "'Não é falta de disciplina.' no campo tom-200",
+      "texto": {
+        "ancora": "Não é falta de disciplina.",
+        "apoio": "É que o seu consultório foi montado empilhando ferramentas. Nenhuma foi pensada para o momento em que você atende."
+      },
+      "camadas": [
+        {
+          "o_que": "pilha torta das 5 ferramentas (~270 px cada) atravessando a divisa branco/tom-300",
+          "funcao": "empilhando ferramentas vira o objeto maior do slide"
+        }
+      ],
+      "liga": {
+        "anterior": "claro do s6",
+        "proximo": "'empilhando ferramentas' vira as 5 janelas convergindo"
+      },
+      "enfase": null,
+      "motivo": "os 5 ícones empilhados tortos, grandes, atravessando a divisa"
+    },
+    {
+      "n": 8,
+      "papel": "virada",
+      "familia": "fluxo",
+      "fundo": "tom-100",
+      "densidade": "media",
+      "heroi": "a tela única da kz, card branco grande, com as 5 ferramentas entrando nela",
+      "texto": {
+        "ancora": "Dá para atender com tudo numa tela só.",
+        "apoio": "É para isso que a kz existe."
+      },
+      "camadas": [
+        {
+          "o_que": "5 abas (os tiles do motivo) dentro do card da tela única",
+          "funcao": "o motivo se resolve: 5 viram 1, como abas de um lugar só"
+        },
+        {
+          "o_que": "card branco com a logo kz no destino",
+          "funcao": "a kz aparece como resposta, sem 'conheça'"
+        }
+      ],
+      "liga": {
+        "anterior": "'empilhando ferramentas'",
+        "proximo": "a tela única vira o pedido de envio"
+      },
+      "enfase": {
+        "tipo": "serifa",
+        "palavra": "numa tela só."
+      },
+      "notas": "É a mesma composição da capa do fixado do meio, em menor escala: quem lê os fixados em sequência reconhece.",
+      "motivo": "o destino: a tela única grande recebendo as 5 ferramentas"
+    },
+    {
+      "n": 9,
+      "papel": "cta",
+      "familia": "cta",
+      "fundo": "creme",
+      "densidade": "leve",
+      "heroi": "a pergunta 'Conhece uma colega que vive essa semana?' em display",
+      "texto": {
+        "ancora": "Conhece uma colega que vive essa semana?",
+        "apoio": "Manda este post pra ela. 🤍"
+      },
+      "camadas": [
+        {
+          "o_que": "botão de enviar (ícone Lucide send) em chip coral no lugar do objeto-resposta",
+          "funcao": "mostra o gesto pedido: enviar"
+        }
+      ],
+      "liga": {
+        "anterior": "a tela só"
+      },
+      "enfase": null,
+      "notas": "Marca no rodapé (último slide), sem 'arraste'.",
+      "motivo": null,
+      "motivo_falta": "CTA: o pedido de envio é o herói"
+    }
+  ],
+  "autocritica": [
+    "v2 (2026-10-09, depois da reprovação): sem claro; o peso do s6 vem do vazio no tom-100 e da frase grande, não do fundo.",
+    "O default seria capa creme com o título no meio; trocamos por 5 cards de ferramenta do app espalhados + a mensagem do paciente, inteiros na área segura, porque o caos se vê antes de se ler.",
+    "O default seria listar os 5 apps num trilho; trocamos por pilha (s3) + balão em zoom (s4) porque a dor é o acúmulo e a interrupção.",
+    "O default seria fechar com conheça a kz; trocamos por fluxo 5 → 1 (s8) e um CTA de envio: este fixado espelha a dor, o do meio mostra o produto.",
+    "v2 (implementação da crítica 1): s2 e s7 invertidos (campo branco sobre tom-200) para se distinguirem dos vizinhos; s4 recomposto com o balão como herói; s8 com as 5 abas dentro do card.",
+    "v3 (crítica 2): s5 conta = as 5 ferramentas da capa; s7 com a pilha como herói em tom-300; s4 balão sobre os 2 cards; s8 sem saudação (única serifa é o título)."
+  ]
+}

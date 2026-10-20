@@ -9,7 +9,9 @@
 // ou ≥ 38 px com peso ≥ 600. Demais: corpo (4,5:1).
 // Ignorados: display:none, visibility:hidden, opacidade efetiva < 0,05, cor transparente (ex.: texto em
 // gradiente com background-clip:text), texto com menos de metade da caixa dentro do slide/quadro.
-// Retorna [{ slide, texto, seletor, cor, fundo, razao, minimo, ok, grande, px, bbox:{x,y,w,h} }].
+// Retorna [{ slide, texto, seletor, cor, fundo, razao, minimo, ok, grande, px, marca, bbox:{x,y,w,h} }].
+// marca = exceção declarada no HTML: "marca" (cor da marca em texto grande, ex.: ênfase coral da kz) ou "ui" (tela do produto
+// recriada fiel ao app, ex.: branco sobre o botão coral; BRAND.md > Cores). null = sem exceção.
 
 const COLETAR = ({ seletor }) => {
   const curto = (el) => {
@@ -69,7 +71,8 @@ const COLETAR = ({ seletor }) => {
       const box = { x0: r.left + scrollX, y0: r.top + scrollY, x1: r.right + scrollX, y1: r.bottom + scrollY };
       let g = grupos.get(chave);
       if (!g) {
-        g = { slide: si + 1, texto: '', seletor: curto(host), cor, alfa: cor.a * o, grande, px: Math.round(fs / esc * 10) / 10, box };
+        g = { slide: si + 1, texto: '', seletor: curto(host), cor, alfa: cor.a * o, grande, px: Math.round(fs / esc * 10) / 10, box,
+          marca: el.closest('[data-contraste]')?.dataset.contraste || null };
         grupos.set(chave, g);
         itens.push(g);
       } else {
@@ -139,7 +142,7 @@ export async function auditarContraste(page, { seletor = null, minimoCorpo = 4.5
     const razao = Math.round(m.razao * 100) / 100;
     return {
       slide: it.slide, texto: it.texto, seletor: it.seletor, cor: hex(it.cor) + (it.alfa < 0.99 ? `@${Math.round(it.alfa * 100)}%` : ''),
-      fundo: m.fundo, razao, minimo, ok: razao >= minimo, grande: it.grande, px: it.px,
+      fundo: m.fundo, razao, minimo, ok: razao >= minimo, grande: it.grande, px: it.px, marca: it.marca,
       bbox: { x: Math.round(it.box.x0), y: Math.round(it.box.y0), w: Math.round(it.box.x1 - it.box.x0), h: Math.round(it.box.y1 - it.box.y0) },
     };
   }).filter(Boolean);

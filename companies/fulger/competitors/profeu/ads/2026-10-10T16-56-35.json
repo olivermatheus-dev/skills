@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:56:35Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "Profeu",
+  "total": 0,
+  "max": 30,
+  "truncada": false,
+  "ads": [],
+  "errors": [
+    "nenhuma página de anunciante com o nome \"Profeu\" entre os resultados (a biblioteca achou 0 anúncios que só citam o termo)"
+  ]
+}

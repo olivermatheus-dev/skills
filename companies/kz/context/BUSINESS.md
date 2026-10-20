@@ -26,7 +26,7 @@ O fundador é hipnoterapeuta e terapeuta em exercício. Sofreu com ferramentas f
 - **Plano:** único, R$ 100–129/mês, com desconto no trimestral e no anual (os percentuais ainda não foram definidos)
 - **Entrada:** aprovação manual de cada novo terapeuta antes do acesso completo. A porta de entrada é "pedir acesso".
 - **Trial:** não existe trial gratuito universal declarado
-- **Garantia:** a definir. A copy já sugere: "se em 7 dias o sistema não tiver lugar natural no seu consultório, a gente não quer que você continue pagando".
+- **Garantia:** **14 dias** (decisão do Oliver, 2026-10-09). Texto-base: "Se em 14 dias a kz não tiver lugar natural no seu consultório, a gente devolve o seu dinheiro." **Reembolso integral, pedido pelo suporte do app** (Oliver, 2026-10-09). A confirmar: vale também para o trimestral e o anual?
 
 ## Diferenciais
 Detalhe, prova e cuidados de cada um: `COPY.md` → Diferenciais.
@@ -57,7 +57,7 @@ Detalhe, prova e cuidados de cada um: `COPY.md` → Diferenciais.
 ## A validar
 - Estágio atual: a kz lançou? Há pagantes? Contexto escrito em abr/2026 e não revisado desde então
 - Preço final dentro de R$ 100–129 e % de desconto do trimestral e do anual
-- Garantia ou trial: existe? Qual prazo?
+- Garantia de 14 dias (reembolso integral pelo suporte do app): vale para o trimestral e o anual?
 - Como funciona a aprovação manual (critério e prazo)
 - URL do site, @ do Instagram e link de cadastro
 - Nome público do fundador (aparece como "Rafael" em um arquivo)

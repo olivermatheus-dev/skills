@@ -53,6 +53,7 @@ Com `context:` na tarefa, ele vem primeiro; isto completa.
 | Analisar | dados → diagnóstico → decisão por anúncio → novas variações → salvar `analise-AAAA-MM-DD.md` → acrescentar ao fim de `LOG_ANGULOS.md` |
 
 ## Regras duras
+- **Caixa curto** (`.claude/skills/orquestrar/references/protocolo.md#Caixa curto`): todo teste declara verba máxima, prazo, critério de corte e de escala antes de subir; preferir ângulo já validado no orgânico; sem campanha de marca/alcance; o teste mínimo abaixo se ajusta à verba (menos anúncios, nunca verba diluída).
 - Nunca inventar provas, números, depoimentos, prazos ou escassez. Urgência só se for real e datada.
 - Diversidade real: cada anúncio é um conceito diferente (ângulo × formato × pessoa/cena); mínimo por teste 3 ângulos × 2 formatos = 6 anúncios.
 - `LOG_ANGULOS.md`: só acrescentar linhas, nunca apagar (criar se não existir).

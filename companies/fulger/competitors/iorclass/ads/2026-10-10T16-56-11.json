@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:56:11Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "iorCLASS",
+  "pageId": "100948071964826",
+  "pageName": "IorClass",
+  "total": 2,
+  "max": 30,
+  "truncada": false,
+  "ads": [
+    {
+      "id": "1380272937598603",
+      "pageName": "IorClass",
+      "pageId": "100948071964826",
+      "active": true,
+      "startedAt": "2026-09-21",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "Cresça na sua carreira como professor(a) particular através da organização! Tenha acesso rápido e controle fácil de toda a sua agenda de aulas, finanças e alunos, tudo na palma da mão. Valorize ainda mais o seu trabalho de forma estratégica e conquiste elogios pelo seu profissionalismo. \n\nExperimente agora a melhor plataforma de organização para suas aulas particulares! \n\nClique no botão \"Saiba Mais\" para testar por 30 dias grátis!",
+      "title": "Transforme a gestão das suas aulas com eficiência!",
+      "description": "Com a plataforma iorCLASS, você moderniza e profissionaliza a organização das suas aulas, com acesso rápido à sua agenda, finanças e informações dos alunos, tudo ao alcance de suas mãos, a qualquer hora e em qualquer lugar. Clique no botão \"Saiba Mais\" para conhecer e testar por 30 dias grátis!",
+      "cta": "Saiba mais",
+      "linkUrl": "https://iorclass.com/?ads=vcrl&utm_source={{site_source_name}}&utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_term={{placement}}&utm_content={{adset.name}}",
+      "media": {
+        "type": "video",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/819088046_947526031760888_2147767113667337260_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=n8dJhwF1kH8Q7kNvwEAGiwH&_nc_oc=AdpId2EAQo2cym7J55kBHjViFe6XJQJ7nXlOATf_nZWIzACMhrHMulaIABCoXO__Lt09MNaBXIlJNzx825iFNibF&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=SbLItn2Y5ptdM6zDHffiIA&_nc_ss=7b289&oh=00_AQMnqurZc9RtdcEKhVfG_4W8V0AusRTLPQWGH814uQtE1g&oe=6AD0471E",
+        "thumbnailLocal": "media/ads/1380272937598603.jpg",
+        "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQP6PGd1fBFdcRgB-x1BgjV0IzbrUH2LShp2IEgfSjF9zZolzRfvvoIFsnF-cVW1NHcwNq07KIU95keYdtFZqHp_gqYBu7rlgPMrB_E3Bc2T0g.mp4?_nc_cat=101&_nc_oc=Adp0zAdKbr5L29AE7A9vhwRN8wFo97T_scAUb-AUPjlw3KH_GQsizIpUrS7RNVBsco1IOCrWjOrv6npCjhyYtYxW&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=IYTU1FgSmPQQ7kNvwHq-VbO&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjExMDUyNDE5NDUxOTIxMTAsImFzc2V0X2FnZV9kYXlzIjoyNSwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjU1LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=21ad25971b7a15e6&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC80RDRFRjE3M0JCRTNCODdFRTUxMDZFQ0EwQzZBQ0ZBOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzhFNDMzQUMwNzMwODFBMUVDOUY3QTJGQkQxMUJFQThCX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbc2sWYxs32AxUCKAJDMywXQEuqn752yLQYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=SbLItn2Y5ptdM6zDHffiIA&_nc_ss=7b289&_nc_zt=28&oh=00_AQMaH3mDvKt2ls3lR5XvbuyPxkbRoWtaKgHJ4Xu2IowU7A&oe=6AD024EB"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1380272937598603"
+    },
+    {
+      "id": "2629978747435513",
+      "pageName": "IorClass",
+      "pageId": "100948071964826",
+      "active": true,
+      "startedAt": "2026-09-21",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "Cresça na sua carreira como professor(a) particular através da organização! Tenha acesso rápido e controle fácil de toda a sua agenda de aulas, finanças e alunos, tudo na palma da mão. Valorize ainda mais o seu trabalho de forma estratégica e conquiste elogios pelo seu profissionalismo. \n\nExperimente agora a melhor plataforma de organização para suas aulas particulares! \n\nClique no botão \"Saiba Mais\" para testar por 30 dias grátis!",
+      "title": "Transforme a gestão das suas aulas com eficiência!",
+      "description": "Com a plataforma iorCLASS, você moderniza e profissionaliza a organização das suas aulas, com acesso rápido à sua agenda, finanças e informações dos alunos, tudo ao alcance de suas mãos, a qualquer hora e em qualquer lugar. Clique no botão \"Saiba Mais\" para conhecer e testar por 30 dias grátis!",
+      "cta": "Saiba mais",
+      "linkUrl": "https://iorclass.com/?ads=vdni&utm_source={{site_source_name}}&utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_term={{placement}}&utm_content={{adset.name}}",
+      "media": {
+        "type": "video",
+        "thumbnail": "https://scontent.fvix3-1.fna.fbcdn.net/v/t39.35426-6/796588070_1812974656363313_5721852839808654724_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=0bTDJFL454YQ7kNvwEhjRMw&_nc_oc=AdpDAOjyeEgNXpnvdqD_RZN1DXmJUmvS8cqY1buWKP67-pHUJGeWrdOEN5Ti8srozEmKw9Wzp8oB5u1Q0LLYGkB7&_nc_zt=14&_nc_ht=scontent.fvix3-1.fna&_nc_gid=SbLItn2Y5ptdM6zDHffiIA&_nc_ss=7b289&oh=00_AQN3UCwmPtjbzbiZqsj-eOs8zECFLodpLAa4PCnL6xZ3lw&oe=6AD041C5",
+        "thumbnailLocal": "media/ads/2629978747435513.jpg",
+        "videoUrl": "https://video.fvix13-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQPMQtt5etHXysAdBFaeao7-mqcmdjqR0dCAGqp4Gmxv0iBOrZnVM45b4PP-kOpw_a2iIx8jcLVi15NODA5hZ0ry4Zz1IISNpEWGXVDZNMbXLA.mp4?_nc_cat=109&_nc_oc=Adqw3346nLxsxC-O-GBPSmk1OvsMGV7FsIyE9vNp8vjfqS8o3KGQFkLV8IUvRTC0hqcq4S8CmyskfULcO5KlpBlV&_nc_sid=b66105&_nc_ht=video.fvix13-1.fna.fbcdn.net&_nc_ohc=KZ5zR6FRyeMQ7kNvwGQZqVH&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjgxODQ0Mjk3NDM4MzMxNywiYXNzZXRfYWdlX2RheXMiOjE0MiwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjQ3LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=8c5015e0134be4be&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC9BQjRGNThGMEY0NjExRUJFNDg4MEM1MDg3Q0M1RUQ5NV9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzZBNDJBQjBBNDczMkRFNjEzNjVDMEJDNjdCMzFEOUI0X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaqs46s05f0AhUCKAJDMywXQEf7peNT988YGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZd6oAQA&_nc_gid=SbLItn2Y5ptdM6zDHffiIA&_nc_ss=7b289&_nc_zt=28&oh=00_AQPIuegQDX8Pvzz-EiwE8CDVg3a-ZaTEu0frpdYgVh2RBw&oe=6AD04257"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=2629978747435513"
+    }
+  ],
+  "errors": []
+}

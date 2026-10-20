@@ -199,7 +199,8 @@ const dados = await page.evaluate(async ({ paleta }) => {
     if (pts) { const [k, c] = [...hist].sort((a, b) => b[1] - a[1])[0]; r.tom = { L: k, cobre: Math.round(c / pts * 100), media: Math.round(somaL / pts) }; }
     // ---------- placeholder ----------
     const tx = s.innerText;
-    const ph = tx.match(/\[[^\]\n]{1,40}\]|\{\{[^}]*\}\}|@suamarca|@handle|lorem ipsum|\bTODO\b|\bXXX\b|a confirmar/i);
+    // TODO/XXX só em caixa alta: "Todo dia" não é placeholder
+    const ph = tx.match(/\[[^\]\n]{1,40}\]|\{\{[^}]*\}\}|@suamarca|@handle|lorem ipsum|a confirmar/i) || tx.match(/\bTODO\b|\bXXX\b/);
     if (ph) r.problemas.push(`placeholder: "${ph[0]}"`);
     // fonte de verdade: as famílias usadas carregaram?
     for (const el of s.querySelectorAll('*')) {
@@ -227,7 +228,12 @@ await browser.close();
 const n = dados.length, tot = [], av = [];
 const L = dados.map((d) => d.layout);
 if (L.some((l) => !l)) tot.push(`slide sem data-layout: ${dados.filter((d) => !d.layout).map((d) => 's' + d.n).join(', ')}`);
-for (let i = 1; i < n; i++) if (L[i] && L[i] === L[i - 1]) tot.push(`s${i}–s${i + 1} vizinhos com a mesma família (${L[i]})`);
+// molde do plano (série dentro da peça, ex.: FAQ): vizinhos do mesmo molde repetem a família, com fundo diferente
+const molde = (i) => plano?.slides?.[i]?.molde;
+for (let i = 1; i < n; i++) if (L[i] && L[i] === L[i - 1]) {
+  if (!(molde(i) && molde(i) === molde(i - 1))) tot.push(`s${i}–s${i + 1} vizinhos com a mesma família (${L[i]})`);
+  else if (dados[i].fundo && dados[i].fundo === dados[i - 1].fundo) tot.push(`s${i}–s${i + 1} mesmo molde "${molde(i)}" com o mesmo fundo`);
+}
 const fam = new Set(L.filter(Boolean)).size;
 if (n >= 8 && fam < 4) tot.push(`só ${fam} famílias em ${n} slides (mín. 4)`);
 else if (n >= 5 && n < 8 && fam < 3) av.push(`só ${fam} famílias em ${n} slides`);
@@ -313,7 +319,11 @@ if (contraste === null) linhas.push('⚠ contraste não medido: tools/lib/contra
 else if (contraste.erro) linhas.push(`⚠ contraste não medido: ${contraste.erro}`);
 else {
   // ornamento tipográfico (aspas gigantes, aria-hidden) não é texto de leitura
-  const r = contraste.filter((c) => c && !c.ok && !/^[“”"«»‘’]+$/.test(String(c.texto).trim())); ruins = r.length;
+  const baixos = contraste.filter((c) => c && !c.ok && !/^[“”"«»‘’]+$/.test(String(c.texto).trim()));
+  // exceção declarada: data-contraste="marca" (cor da marca, só em texto grande) ou "ui" (tela do app recriada): vira aviso
+  const exc = (c) => (c.marca === 'marca' && c.grande) || c.marca === 'ui';
+  for (const c of baixos.filter(exc)) linhas.push(`⚠ s${c.slide} contraste ${c.razao}:1 em exceção de ${c.marca} "${c.texto}" (${c.cor} sobre ${c.fundo})`);
+  const r = baixos.filter((c) => !exc(c)); ruins = r.length;
   for (const c of r.slice(0, 10)) linhas.push(`✗ s${c.slide} contraste ${c.razao}:1 < ${c.minimo} "${c.texto}" (${c.cor} sobre ${c.fundo})`);
   linhas.push(`${r.length ? '✗' : '✓'} contraste: ${contraste.length} textos medidos, ${r.length} abaixo do mínimo`);
 }

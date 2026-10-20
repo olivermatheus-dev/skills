@@ -201,8 +201,10 @@ Tudo isto numa assinatura:
 
 ## 10. Garantia
 
-[PENDENTE: garantia ou teste, com prazo. Texto sugerido no `COPY.md`, ainda não aprovado:]
-> "Se em 7 dias a kz não tiver um lugar natural no seu consultório, a gente não quer que você continue pagando."
+**14 dias para ver se a kz cabe no seu consultório.**
+> "Se em 14 dias a kz não tiver um lugar natural no seu consultório, a gente devolve o seu dinheiro."
+
+Reembolso integral: você pede pelo suporte do próprio app. [PENDENTE: vale também para trimestral e anual?]
 
 [CTA] **Pedir meu acesso** →
 
@@ -211,7 +213,7 @@ Tudo isto numa assinatura:
 ## 11. Perguntas que você talvez esteja se fazendo
 
 **E se eu pagar e não usar? Já larguei outros sistemas no segundo mês.**
-A gente também teria medo. Por isso a kz foi construída para caber na cabeça na primeira abertura: uma tela para atender, sem curso de configuração. E [PENDENTE: garantia].
+A gente também teria medo. Por isso a kz foi construída para caber na cabeça na primeira abertura: uma tela para atender, sem curso de configuração. E você tem 14 dias de garantia: se ela não tiver lugar no seu consultório, a gente devolve o seu dinheiro.
 
 **Vale [PENDENTE: preço] por mês se o Google Agenda é de graça?**
 O Google Agenda é grátis no recibo. O que custa é o resto: confirmar um por um, mandar link, anotar em outro lugar. A kz faz isso junto com a agenda.
@@ -234,7 +236,7 @@ Serve. A mesma tela de atendimento tem o modo Presencial, e a agenda, a ficha e 
 ---
 
 ## P.S.
-Se você leu até aqui, provavelmente reconheceu a sua semana em algum pedaço desta carta. A kz é um lugar só para atender, anotar, lembrar e confirmar, feito por quem também atende. [PENDENTE: garantia em uma linha.]
+Se você leu até aqui, provavelmente reconheceu a sua semana em algum pedaço desta carta. A kz é um lugar só para atender, anotar, lembrar e confirmar, feito por quem também atende. E você tem 14 dias para ver se ela cabe no seu consultório.
 
 **Quer conhecer por dentro?** → **Pedir meu acesso** [PENDENTE: link de cadastro]
 
@@ -242,7 +244,7 @@ Se você leu até aqui, provavelmente reconheceu a sua semana em algum pedaço d
 
 ## Pendências (o que falta para publicar)
 - [PENDENTE] Preço final (R$ 100–129) e % de desconto do trimestral e do anual
-- [PENDENTE] Garantia ou teste: existe? prazo? texto
+- ~~Garantia ou teste~~ → **14 dias de garantia** (Oliver, 2026-10-09). reembolso integral pelo suporte do app
 - [PENDENTE] Critério e prazo da aprovação manual; link de "pedir acesso"
 - [PENDENTE] Nome público do fundador (aparece "Rafael" em um arquivo) e se ele assina a carta
 - [PENDENTE] Criptografia em trânsito e em repouso confirmada por escrito (T-0010)
@@ -254,7 +256,7 @@ Se você leu até aqui, provavelmente reconheceu a sua semana em algum pedaço d
 
 ## Perguntas para o Oliver
 1. Qual é o preço final e os descontos do trimestral e do anual?
-2. Vai ter garantia ou teste? Se sim, quantos dias e com que texto?
+2. ~~Vai ter garantia ou teste?~~ Respondida: garantia de 14 dias (2026-10-09). Reembolso integral, pedido pelo suporte do app. Falta: vale para trimestral e anual?
 3. Como funciona a aprovação manual: quem aprova, em quanto tempo, com que critério? E qual é o link?
 4. Qual é o nome público do fundador? A carta deve ser assinada por ele, em primeira pessoa?
 5. O link da videochamada é fixo por terapeuta ou novo a cada sessão? (Se for fixo, o argumento "sem caçar link" fica bem mais forte.)

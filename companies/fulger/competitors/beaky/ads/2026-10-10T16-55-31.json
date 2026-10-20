@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:55:31Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "Beaky",
+  "pageId": "903747569483808",
+  "pageName": "Beaky",
+  "total": 1,
+  "max": 30,
+  "truncada": false,
+  "ads": [
+    {
+      "id": "1391958709784839",
+      "pageName": "Beaky",
+      "pageId": "903747569483808",
+      "active": true,
+      "startedAt": "2026-08-31",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "whatsapp",
+        "threads"
+      ],
+      "text": "imagina transformar o caos com simplicidade? 💜\n\n.\n.\n\n#beaky #professor #plataforma",
+      "title": "Plataforma para professores particulares e pequenas escolas online | Beaky",
+      "description": "Gerencie agenda, alunos, pagamentos, materiais e reposições, trabalhando por conta própria ou em uma pequena escola online. Teste a Beaky grátis por 21 dias.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://beaky.com.br/",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/789426416_1079704007807705_3215821102645890615_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=109&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=mia-KRgis-EQ7kNvwE96Q_r&_nc_oc=Ado6FzvVcmsyHYkukmSM3XV_zCY93TqHsm3hvs-IxCqIvFnGASFJh93ZiJIW4Qt2th0GFmAQxTuGzkxOzd_7rCcF&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=-HqIWCmBF41hxI_ggJPAUQ&_nc_ss=7b289&oh=00_AQMddBCOv0hV9-rzQ82oELPO-g1oYkEAlgBr0VBD5VmFJw&oe=6AD05B92",
+        "thumbnailLocal": "media/ads/1391958709784839.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1391958709784839"
+    }
+  ],
+  "errors": []
+}

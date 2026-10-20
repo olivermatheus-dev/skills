@@ -56,7 +56,7 @@ Você é um analista de inteligência competitiva que mapeia o mercado e o ecoss
 8. **Internacionais**: os mesmos termos em inglês/espanhol, para referência de produto e marca (o módulo `atuacao` classifica Brasil × internacional).
 
 ## Para cada fonte
-- `kind`: `concorrente` (vende algo parecido) · `referencia` (marca boa de conteúdo, outro nicho) · `criador` (pessoa) · `pagina` (página temática/viral).
+- `kind`: `concorrente` (concorrente **direto**: mesmo nicho, mesmo cliente, disputa preço com a gente; só ele entra em Comparar, Brechas e precificação) · `referencia` (**benchmark do setor**: SaaS de outro nicho, de preferência grande e bem-sucedido, para aprender conteúdo, anúncio, oferta e produto; copiar o mecanismo, não o orçamento) · `criador` (pessoa) · `pagina` (página temática/viral).
 - `profiles`: todos os links achados e confirmados (o app detecta plataforma e @ ao colar; formato canônico em `core/platform.ts`).
 - Corpo: 2–4 linhas — por que seguir, o que observar, como foi achada.
 - `tags`: tema e funil.

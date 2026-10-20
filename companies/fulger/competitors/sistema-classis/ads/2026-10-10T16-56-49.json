@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:56:49Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "Sistema Classis",
+  "pageId": "1103414859514051",
+  "pageName": "Sistema classis",
+  "total": 3,
+  "max": 30,
+  "truncada": false,
+  "ads": [
+    {
+      "id": "1707642463842041",
+      "pageName": "Sistema classis",
+      "pageId": "1103414859514051",
+      "active": true,
+      "startedAt": "2026-08-16",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "Cobrar os alunos no final do mês é a parte mais constrangedora e cansativa de dar aulas particulares? 😖\n\nVocê passa dias adiando aquela mensagem com medo de parecer inconveniente, ou pior, acaba esquecendo de cobrar e trabalhando de graça. O resultado? Fluxo de caixa instável e dor de cabeça.\n\nCom o Sistema Classis, você nunca mais precisará ser o \"chato\" da cobrança. O sistema envia lembretes automáticos e profissionais diretamente no WhatsApp dos seus alunos antes do vencimento.\n\nEles recebem o aviso amigável e você recebe em dia, mantendo a relação 100% profissional.\n\nToque em \"Saiba Mais\" e organize suas aulas hoje mesmo! 🚀",
+      "title": "Receba em Dia via WhatsApp Automático",
+      "description": "Reduza a inadimplência e o estresse na cobrança.",
+      "cta": "Saiba mais",
+      "linkUrl": "https://sistemaclassis.com.br/?utm_source=meta&utm_medium=cpc&utm_campaign=classis_frio_top_estados&utm_content=ad01_imagem_whatsapp",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/777828073_1380787374025516_3103744289863216155_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=IXkPDenBvwUQ7kNvwEYT1-e&_nc_oc=AdofpY_xj56FxEiPL_YfY9Y5S_yJsq2j4Obat1WJI-WGZRlX_UCHjsZnF2V8qCALdBcCenyyJdMF8CLarMAt-qQ3&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=dU4SKku_Lw98YODEpWGVUw&_nc_ss=7b289&oh=00_AQOsK_MFJ3ug6B4Fgmo-U6l0puaq2wh4Q43QA0RCzQf1kg&oe=6AD0424B",
+        "thumbnailLocal": "media/ads/1707642463842041.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1707642463842041"
+    },
+    {
+      "id": "1891531921810139",
+      "pageName": "Sistema classis",
+      "pageId": "1103414859514051",
+      "active": true,
+      "startedAt": "2026-09-21",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "Todo início de mês é a mesma coisa: você precisa abrir o WhatsApp, respirar fundo e mandar dezenas de mensagens cobrando mensalidade de mãe por mãe...\n\nUmas visualizam e não respondem, outras dizem \"vou ver e te mando\" e esquecem, e você fica naquela situação desgastante de ter que cobrar de novo. Você é professora, não cobradora!\n\nCom o Sistema Classis, suas turmas de reforço ficam 100% organizadas e os lembretes de mensalidade chegam no WhatsApp das famílias de forma automática, profissional e com a sua chave Pix já pronta para copiar e colar.\n\nA mãe recebe o aviso educado, faz o Pix e você só recebe a notificação do dinheiro caindo na conta.\n\n👉 Toque no botão abaixo e comece seu teste gratuito de 7 dias. Não precisa cadastrar cartão de crédito!",
+      "title": "Pare de cobrar mães todo início de mês",
+      "description": "Teste 7 dias grátis • Sem cartão de crédito",
+      "cta": "Cadastre-se",
+      "linkUrl": "https://sistemaclassis.com.br/?utm_source=meta&utm_medium=cpc&utm_campaign=classis_frio_top_estados&utm_content=ad01_imagem_whatsapp",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/795189527_2336637850207517_3514361039553760114_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ZVwjJBQF-iQQ7kNvwF8dNQr&_nc_oc=AdpSEOFbcn-B0jATmwqNkVbkvNzBHMAErau26pzsEhxxJ5NJq53p6H_1FwaI7Nvcs58hsgx7RDmOeTrI4e_FQ-vS&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=dU4SKku_Lw98YODEpWGVUw&_nc_ss=7b289&oh=00_AQMONSQfUoLI_4bGwuf9zKrDygYB9ws7VAfl7Hq76ZjpUw&oe=6AD04043",
+        "thumbnailLocal": "media/ads/1891531921810139.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1891531921810139"
+    },
+    {
+      "id": "1389577146712751",
+      "pageName": "Sistema classis",
+      "pageId": "1103414859514051",
+      "active": true,
+      "startedAt": "2026-09-21",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "threads"
+      ],
+      "text": "Você também adia ao máximo a hora de cobrar o aluno por pura vergonha ou medo de parecer chata?\n\nQuem dá aula particular sabe: a gente cria carinho pelo aluno e falar sobre dinheiro no final do mês é sempre desconfortável. O problema é que, sem cobrar, os alunos esquecem, atrasam semanas e o seu orçamento fica no vermelho.\n\nO Sistema Classis tira esse peso das suas costas: ele envia um lembrete carinhoso e profissional direto no WhatsApp do aluno, avisando o vencimento com a sua chave Pix prontinha para pagamento.\n\nComo o aviso parece um comunicado formal do próprio sistema, o aluno não se ofende, agradece o lembrete e transfere na hora!\n\n✨ Recupere a sua paz e receba suas aulas em dia.\n\nToque abaixo e teste grátis por 7 dias — sem pedir cartão de crédito.",
+      "title": "Receba sua mensalidade sem constrangimento",
+      "description": "Alunos em dia e zero estresse na cobrança",
+      "cta": "Saiba mais",
+      "linkUrl": "https://sistemaclassis.com.br/?utm_source=meta&utm_medium=cpc&utm_campaign=classis_frio_top_estados&utm_content=ad01_imagem_whatsapp",
+      "media": {
+        "type": "imagem",
+        "thumbnail": "https://scontent.fvix13-1.fna.fbcdn.net/v/t39.35426-6/818530616_3336999173175690_1943111275298688002_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=N2WYDkvMSrUQ7kNvwHX_seN&_nc_oc=AdqDapyTTkcvWHsMLGp_HHYPsctW2eZ4PTexqJU-_pyYtqfP4vcODEIA1CNV10op5AWDPfUmfFJ43_ws5QtnBLSA&_nc_zt=14&_nc_ht=scontent.fvix13-1.fna&_nc_gid=dU4SKku_Lw98YODEpWGVUw&_nc_ss=7b289&oh=00_AQPwd5HUt4Fu98QuB53LggukkfXZudIJKUxEM4OAGOlgfw&oe=6AD054FF",
+        "thumbnailLocal": "media/ads/1389577146712751.jpg"
+      },
+      "variations": 1,
+      "url": "https://www.facebook.com/ads/library/?id=1389577146712751"
+    }
+  ],
+  "errors": []
+}

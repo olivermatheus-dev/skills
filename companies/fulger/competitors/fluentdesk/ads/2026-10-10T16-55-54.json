@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "collectedAt": "2026-10-10T16:55:54Z",
+  "source": "meta-ads-library",
+  "country": "BR",
+  "query": "FluentDesk",
+  "total": 0,
+  "max": 30,
+  "truncada": true,
+  "ads": [],
+  "errors": [
+    "nenhuma página de anunciante com o nome \"FluentDesk\" entre os resultados (a biblioteca achou 36 anúncios que só citam o termo)"
+  ]
+}

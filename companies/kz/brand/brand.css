@@ -35,17 +35,17 @@
   --logo:#d8735e; /* cor exata da logo (mais fechada que o coral dos botões) */
   --on-primary:#2b2b2b; /* tinta sobre coral nas PEÇAS (5,1:1). */
   --on-primary-app:#ffffff; /* o app usa branco sobre coral (2,8:1): só ao recriar a tela do produto, botão curto, peso 600+ */
-  --accent:#d66954; /* coral profundo: ênfase em texto sobre claro (#bc5a47 p/ AAA) */
+  --accent:#ef7960; /* ênfase = o coral da marca, como o nome "Oliver" na serifa do app (2026-10-09, pedido do Oliver). Só em título grande (≥ 64 px); em texto pequeno use --text */
   --success:#5f9a6b;
   --warning:#c99a2e;
   --danger:#c4553f;
 
   /* Fundo de contraste (slide/cena "inverse"): coral suave, nunca coral em bloco grande */
-  --inverse-bg:#fce0d7;
+  --inverse-bg:#ffede8; /* fundo de contraste = brilho coral do card "Próxima sessão" (nunca escuro) */
   --on-inverse:#2b2b2b;
 
   /* Extras da marca */
-  --accent-soft:#fce0d7; /* fundo de tag/realce */
+  --accent-soft:#fddbd3; /* fundo de tag/realce = fundo do avatar do app */
   --pastel-sage:#cfe0d0;
   --pastel-lavender:#d8d2e3;
   --pastel-sky:#cdd8e0;
@@ -95,11 +95,11 @@
   --icon-fill:none;
 
   /* Paleta tonal (kit): escala clara→escura da cor principal (automática) · --on-tone-N = tinta legível sobre o tom */
-  --tone-50:#fff4f2;
-  --tone-100:#fee8e3;
-  --tone-200:#fed3c9;
-  --tone-300:#fdb7a7;
-  --tone-400:#fa9781;
+  --tone-50:#fff8f6;
+  --tone-100:#ffede8;
+  --tone-200:#fddbd3;
+  --tone-300:#f7bdb1;
+  --tone-400:#f39b88;
   --tone-500:#ef7960;
   --tone-600:#bc4f38;
   --tone-700:#933724;
