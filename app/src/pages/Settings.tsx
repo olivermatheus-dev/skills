@@ -1,7 +1,8 @@
 // Configurações do projeto: cor do projeto (cor principal da interface) e chaves de API. Cada projeto tem a sua (companies/<slug>/.env); a geral (.env da raiz) é reserva.
 // O valor só vai do navegador para o arquivo: a tela mostra se está definida e os 4 últimos caracteres.
-import { useEffect, useState } from 'react';
-import { Palette as PaletteIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { CircleHelp, Palette as PaletteIcon } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Card as UiCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button as UiButton } from '@/components/ui/button';
 import { Input as UiInput } from '@/components/ui/input';
@@ -73,12 +74,36 @@ function SecretRow({ slug, s, scope }: { slug: string; s: SecretState; scope: 'p
       </div>
       <form className="flex gap-2 mt-3" onSubmit={(e) => { e.preventDefault(); if (value.trim()) void save(value); }}>
         <Input type="password" autoComplete="off" spellCheck={false} className="flex-1 font-mono" placeholder={current ? 'Colar nova chave para trocar' : 'Colar a chave'} value={value} onChange={(e) => setValue(e.target.value)} />
+        {s.tutorial && <ComoPegar t={s.tutorial} />}
         <Button type="submit" disabled={busy || !value.trim()}>Salvar</Button>
         {s.test && scope === 'projeto' && <Button type="button" variant="ghost" disabled={busy || !s.active} onClick={runTest}>Testar</Button>}
         {current && <Button type="button" variant="danger" disabled={busy} onClick={() => confirm(`Remover ${s.key} (${scope})?`) && save('')}>Remover</Button>}
       </form>
       {test && <div className={`text-xs mt-2 ${test.ok ? 'text-green-700' : 'text-destructive'}`}>{test.ok ? '✓' : '✗'} {test.message}</div>}
     </Card>
+  );
+}
+
+/** "Como pegar": passo a passo ao lado do campo. Abre ao passar o mouse e fica aberto ao clicar (para seguir os passos). */
+function ComoPegar({ t }: { t: NonNullable<SecretState['tutorial']> }) {
+  const [open, setOpen] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const hover = (v: boolean) => { clearTimeout(timer.current); if (!pinned) timer.current = setTimeout(() => setOpen(v), v ? 120 : 250); };
+  return (
+    <Popover open={open} onOpenChange={(v) => { setOpen(v); if (!v) setPinned(false); }}>
+      <PopoverTrigger asChild>
+        <button type="button" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)} onClick={() => { clearTimeout(timer.current); setPinned(true); setOpen(true); }}
+          className="inline-flex items-center gap-1.5 px-2.5 text-xs font-medium rounded-md border border-border text-muted-foreground hover:text-primary-ink hover:border-primary">
+          <CircleHelp className="size-3.5" />Como pegar
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-96" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>
+        <div className="text-sm font-semibold mb-2">{t.title}</div>
+        <ol className="space-y-1.5 text-xs leading-snug list-decimal pl-4 marker:text-muted-foreground">{t.steps.map((x) => <li key={x}>{x}</li>)}</ol>
+        {t.notes?.length ? <ul className="mt-3 pt-2 border-t border-border space-y-1 text-[11px] text-muted-foreground">{t.notes.map((x) => <li key={x}>· {x}</li>)}</ul> : null}
+      </PopoverContent>
+    </Popover>
   );
 }
 

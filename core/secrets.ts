@@ -6,11 +6,29 @@ import { join } from 'node:path';
 import { ROOT, ValidationError } from './store';
 import { company } from '../schema/paths';
 
-export interface SecretDef { key: string; label: string; hint: string; test?: 'elevenlabs' }
+/** passo a passo mostrado no "Como pegar" ao lado do campo */
+export interface SecretTutorial { title: string; steps: string[]; notes?: string[] }
+export interface SecretDef { key: string; label: string; hint: string; test?: 'elevenlabs'; tutorial?: SecretTutorial }
 /** Chaves conhecidas (aparecem na tela). Outras podem existir no arquivo e são preservadas. */
 export const SECRETS: SecretDef[] = [
   { key: 'ELEVENLABS_API_KEY', label: 'ElevenLabs', hint: 'Voz final (Eleven v4) e efeitos. elevenlabs.io → Developers → API Keys.', test: 'elevenlabs' },
-  { key: 'INSTAGRAM_SESSIONID', label: 'Instagram (sessão)', hint: 'Coleta de concorrentes além dos 6 posts, sem custo. Use uma conta SECUNDÁRIA: entre em instagram.com no navegador → F12 → Aplicativo/Application → Cookies → copie o valor de sessionid.' },
+  { key: 'INSTAGRAM_SESSIONID', label: 'Instagram (sessão)', hint: 'Coleta de concorrentes além dos 6 posts, sem custo. Use uma conta SECUNDÁRIA, nunca a da empresa.',
+    tutorial: {
+      title: 'Como pegar o sessionid (Chrome ou Edge, no computador)',
+      steps: [
+        'Abra uma janela anônima (Ctrl + Shift + N) e entre em instagram.com com a conta SECUNDÁRIA.',
+        'Com o Instagram aberto e logado, aperte F12 (ou Ctrl + Shift + I) para abrir o painel do desenvolvedor.',
+        'Na barra de cima do painel, clique em "Application" ("Aplicativo"). Se não aparecer, clique em » para ver as abas escondidas.',
+        'No menu da esquerda, abra Storage → Cookies → https://www.instagram.com.',
+        'Na lista, ache a linha "sessionid", dê dois cliques no valor (coluna Value) e copie com Ctrl + C.',
+        'Cole no campo "Colar a chave", ao lado do botão Como pegar, e clique em Salvar. O selo muda de "vazia" para "projeto".',
+      ],
+      notes: [
+        'Depois, só feche a janela. Não clique em "Sair" no Instagram: sair invalida a sessão.',
+        'Se a coleta avisar "sessão recusada", repita o passo a passo.',
+        'É uma senha: não mande para ninguém nem cole em outro lugar.',
+      ],
+    } },
   { key: 'APIFY_TOKEN', label: 'Apify', hint: 'Coleta de Instagram com views (concorrentes).' },
   { key: 'YOUTUBE_API_KEY', label: 'YouTube Data API', hint: 'Coleta de YouTube mais rica (opcional; sem ela usa o yt-dlp).' },
   { key: 'META_ACCESS_TOKEN', label: 'Meta (token)', hint: 'Leitura de anúncios e posts da conta.' },
