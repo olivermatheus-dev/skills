@@ -24,11 +24,25 @@ export interface CollectResult {
 
 export interface FetchedText { status: number; url: string; text: string; contentType: string }
 
+type IgMedia = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface IgBrowseOpts {
+  /** com os posts da grade lidos até agora (mais novo primeiro): já basta? */
+  done: (timeline: IgMedia[]) => boolean;
+  /** códigos dos reels escolhidos, para buscar as views na aba Reels */
+  reels: (timeline: IgMedia[]) => string[];
+  maxScrolls?: number;
+  pauseMs?: number;
+}
+/** timeline: posts da grade (formato da API v1: code, taken_at, media_type, caption…) · clips: itens da aba Reels (com play_count) */
+export interface IgBrowseResult { user: IgMedia | null; timeline: IgMedia[]; clips: IgMedia[]; errors: string[] }
+
 /** Tudo que toca rede ou processo passa por aqui — nos testes é trocado por fixtures. */
 export interface Runner {
   /** roda o yt-dlp e devolve o stdout (lança Error com mensagem clara se faltar o binário) */
   ytdlp(args: string[], opt?: { timeoutMs?: number; allowFail?: boolean }): Promise<string>;
   fetchText(url: string, init?: { method?: string; headers?: Record<string, string>; body?: string; timeoutMs?: number; redirect?: 'follow' | 'manual' }): Promise<FetchedText>;
+  /** Instagram logado: abre o perfil num navegador sem tela com os cookies, rola até `done` e lê o que o site carrega */
+  igBrowse?(handle: string, cookies: { name: string; value: string }[], opt: IgBrowseOpts): Promise<IgBrowseResult>;
   /** baixa uma imagem para `absBase` + extensão; devolve a extensão usada ou null se não deu */
   download(url: string, absBase: string, kind: 'avatar' | 'banner' | 'thumb'): Promise<string | null>;
 }

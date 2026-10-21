@@ -82,6 +82,10 @@ export const realRunner: Runner = {
     return { status: r.status, url: r.url || url, text: await r.text(), contentType: r.headers.get('content-type') ?? '' };
   },
 
+  async igBrowse(handle, cookies, opt) {
+    return (await import('./ig-browser')).igBrowse(handle, cookies, opt);
+  },
+
   async download(url, absBase) {
     try {
       const r = await fetch(url, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(20_000) });

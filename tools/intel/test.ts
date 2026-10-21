@@ -165,19 +165,21 @@ const fakeFeed = (n: number) => Array.from({ length: n }, (_, i) => ({
   image_versions2: { candidates: [{ url: `https://cdninstagram.example/${i}.jpg` }] },
   ...(i === 0 ? { timeline_pinned_user_ids: [1] } : {}),
 }));
+/** navegador de mentira: cada "rolagem" mostra mais 12 posts da grade (sem views); a aba Reels devolve as views */
 function loggedRunner(o: { total?: number; expired?: boolean } = {}) {
   const base = fixtureRunner({ igPublic: true });
-  const pub = base.fetchText.bind(base);
   const all = fakeFeed(o.total ?? 120);
-  const json = (url: string, v: unknown, status = 200) => ({ status, url, text: JSON.stringify(v), contentType: 'application/json' });
-  base.fetchText = async (url, init) => {
-    if (!url.includes('/api/v1/')) return pub(url, init);
-    base.calls.push(`fetch GET ${url} cookie=${init?.headers?.cookie ?? ''}`);
-    if (o.expired) return json(url, { message: 'login_required', require_login: true, status: 'fail' }, 401);
-    if (url.includes('web_profile_info')) return json(url, { data: { user: { id: '42', username: 'concorrente', full_name: 'Concorrente', biography: 'bio', edge_followed_by: { count: 5000 }, edge_follow: { count: 10 }, edge_owner_to_timeline_media: { count: all.length }, is_verified: false, external_url: 'https://concorrente.example' } } });
-    const start = Number(new URL(url).searchParams.get('max_id') ?? 0);
-    const more = start + 12 < all.length;
-    return json(url, { items: all.slice(start, start + 12), more_available: more, next_max_id: more ? String(start + 12) : undefined, status: 'ok' });
+  base.igBrowse = async (handle, cookies, opt) => {
+    base.calls.push(`igBrowse ${handle} cookies=${cookies.map((c) => `${c.name}=${c.value}`).join('; ')}`);
+    if (o.expired) throw new Error('sessão do Instagram recusada (expirou ou pediu verificação)');
+    let n = 12;
+    while (n < all.length && !opt.done(all.slice(0, n).map(({ play_count, ...m }) => m))) { n += 12; base.calls.push('rolagem'); }
+    const timeline = all.slice(0, n).map(({ play_count, ...m }) => m);
+    const need = new Set(opt.reels(timeline));
+    return {
+      user: { username: handle, full_name: 'Concorrente', follower_count: 5000, following_count: 10, media_count: all.length },
+      timeline, clips: all.filter((m) => need.has(m.code)).map((m) => ({ code: m.code, play_count: m.play_count })), errors: [],
+    };
   };
   return base;
 }
@@ -210,24 +212,41 @@ await t('Instagram logado: corte por quantidade (só reels pula fotos) e por per
   assert.deepEqual(p30.items.map((m) => m.code), Array.from({ length: 15 }, (_, i) => `C${String(i + 1).padStart(3, '0')}`), 'dias 2…30, sem o fixado de 400 dias');
 });
 
-await t('Instagram logado: o adaptador pagina até 24 reels, ou tudo de 60 dias, com o cookie da sessão', async () => {
+await t('Instagram logado: o navegador rola até 24 reels, ou tudo de 60 dias, com os cookies e as views da aba Reels', async () => {
   process.env.INSTAGRAM_SESSIONID = '42%3Aabc%3A9';
   try {
     const c = S.saveCompetitor('t', { name: 'Logada', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/concorrente/', handle: 'concorrente' }] }).data;
     const run = loggedRunner();
     const r = await collectCompetitor('t', c.id, { runner: run, noMedia: true, now });
     assert.ok(r[0].ok && r[0].source === 'instagram-login' && r[0].items === 24, JSON.stringify(r[0]));
-    const pages = run.calls.filter((x) => x.includes('/feed/user/42/'));
-    assert.equal(pages.length, 3, '24 reels = 36 posts lidos (1 em 3 é foto)');
-    assert.ok(pages[0].includes('cookie=sessionid=42%3Aabc%3A9; ds_user_id=42'));
+    assert.equal(run.calls.filter((x) => x === 'rolagem').length, 2, '24 reels = 36 posts lidos (1 em 3 é foto)');
+    assert.ok(run.calls.find((x) => x.startsWith('igBrowse'))!.endsWith('cookies=sessionid=42%3Aabc%3A9; ds_user_id=42'));
     assert.ok(!run.calls.some((x) => x.includes('/embed/')), 'não usou o acesso público');
+    const snap = S.listSnapshots('t', c.id).at(-1)!.data;
+    assert.ok(snap.items.every((i) => i.type === 'reel' && i.metrics.views != null), 'views vieram da aba Reels');
+    assert.equal(snap.profile.followers, 5000);
     const run2 = loggedRunner();
     const r2 = await collectCompetitor('t', c.id, { runner: run2, noMedia: true, now, instagram: { modo: 'periodo', dias: 60, conteudo: 'tudo' } });
     assert.equal(r2[0].items, 30, 'dias 2…60');
-    assert.equal(run2.calls.filter((x) => x.includes('/feed/user/')).length, 3);
+    assert.equal(run2.calls.filter((x) => x === 'rolagem').length, 2);
     const r3 = await collectCompetitor('t', c.id, { runner: loggedRunner({ total: 10 }), noMedia: true, now, instagram: { modo: 'quantidade', quantidade: 24, conteudo: 'tudo' } });
     assert.equal(r3[0].items, 10, 'perfil com poucos posts: acaba quando o Instagram diz que não há mais');
   } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
+await t('Instagram logado: leitura das respostas do site (grade, aba Reels, perfil; ignora posts de outros perfis)', async () => {
+  const { harvest, parseChunks } = await import('./ig-browser');
+  const acc = { user: null, timeline: new Map(), clips: new Map() };
+  const grade = { data: { xdt_api__v1__feed__user_timeline_graphql_connection: { edges: [
+    { node: { code: 'A1', taken_at: 1, media_type: 2, user: { username: 'Concorrente' } } },
+    { node: { code: 'X9', taken_at: 2, media_type: 1, user: { username: 'outro' } } },
+  ] } } };
+  const reels = { data: { fetch__XDTUserDict: { clips_connection: { edges: [{ node: { media: { code: 'A1', play_count: 77 } } }] } } } };
+  const perfil = { data: { user: { username: 'concorrente', follower_count: 5, media_count: 3 } } };
+  for (const j of parseChunks(`for (;;);${JSON.stringify(grade)}\n${JSON.stringify(reels)}\nnão é json\n${JSON.stringify(perfil)}`)) harvest(j, 'concorrente', acc);
+  assert.deepEqual([...acc.timeline.keys()], ['A1']);
+  assert.equal(acc.clips.get('A1').play_count, 77);
+  assert.equal((acc.user as unknown as { follower_count: number }).follower_count, 5);
 });
 
 await t('Instagram logado: sessão recusada cai no acesso público (6 posts) e avisa', async () => {

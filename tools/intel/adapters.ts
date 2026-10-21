@@ -190,9 +190,7 @@ async function instagramViaPublicWeb(handle: string, url: string, ctx: AdapterCt
   return normalizePublicInstagram({ profileUrl: url, now: ctx.now, embedHtml, profileHtml, postHtml, errors });
 }
 
-/** Instagram com sessão logada (cookie de uma conta secundária em INSTAGRAM_SESSIONID): os mesmos endpoints que o site
- *  chama ao rolar o perfil. Pagina de 12 em 12 até o critério do projeto (quantidade ou período), com pausa entre páginas. */
-const IG_APP_ID = '936619743392459';
+/** Instagram com sessão logada (cookies de uma conta secundária, salvos em Configurações): ver instagramViaLogin. */
 export const IG_SESSION_HELP = 'sessão do Instagram recusada (expirou ou pediu verificação): entre de novo na conta secundária e cole o sessionid em Configurações';
 
 /** valor do sessionid ou o cabeçalho Cookie inteiro → cabeçalho Cookie (ds_user_id sai do próprio sessionid) */
@@ -212,45 +210,34 @@ export function igCookieFromEnv(env: (k: string) => string | undefined, session:
   return { cookie: [...parts].map(([k, v]) => `${k}=${v}`).join('; '), csrf: parts.get('csrftoken') };
 }
 
+/** cookies salvos → lista nome/valor para o navegador */
+export function igCookieList(env: (k: string) => string | undefined, session: string) {
+  return igCookieFromEnv(env, session).cookie.split(/;\s*/).flatMap((p) => { const i = p.indexOf('='); return i > 0 ? [{ name: p.slice(0, i), value: p.slice(i + 1) }] : []; });
+}
+
+/** As chamadas diretas da API respondem 429/302 fora de um navegador; por isso a coleta logada abre o perfil num Chrome
+ *  sem tela (runner.igBrowse), rola a grade até o critério e lê o que o próprio site carrega. Views dos reels: aba Reels. */
 async function instagramViaLogin(handle: string, url: string, ctx: AdapterCtx, session: string): Promise<SnapshotDraft> {
+  if (!ctx.runner.igBrowse) throw new Error('coleta logada do Instagram indisponível aqui (sem navegador)');
   const o = ctx.instagram ?? DEFAULT_IG;
   const pauseRaw = ctx.env('INTEL_IG_PAUSE_MS');
-  const pause = pauseRaw ? Number(pauseRaw) : 2500;
-  const { cookie, csrf } = igCookieFromEnv(ctx.env, session);
-  const headers: Record<string, string> = { cookie, 'x-ig-app-id': IG_APP_ID, 'x-requested-with': 'XMLHttpRequest', accept: '*/*', referer: url, ...(csrf ? { 'x-csrftoken': csrf } : {}) };
-  const get = async (u: string) => {
-    const r = await ctx.runner.fetchText(u, { headers, redirect: 'manual' });
-    if (r.status === 429) throw new Error('Instagram limitou as requisições (429); tente de novo em alguns minutos');
-    if (r.status === 401 || r.status === 403 || (r.status >= 300 && r.status < 400) || /\/accounts\/login|challenge/.test(r.url)) throw new Error(IG_SESSION_HELP);
-    let j: Any;
-    try { j = JSON.parse(r.text); } catch { throw new Error(r.status >= 400 ? `Instagram respondeu ${r.status}` : IG_SESSION_HELP); }
-    if (j?.require_login || /login_required|checkpoint/.test(String(j?.message ?? ''))) throw new Error(IG_SESSION_HELP);
-    if (r.status === 404) throw new Error('perfil não encontrado no Instagram');
-    if (r.status >= 400) throw new Error(`Instagram respondeu ${r.status}: ${String(j?.message ?? '').slice(0, 120)}`);
-    return j;
-  };
-  const user = (await get(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(handle)}`))?.data?.user;
-  if (!user?.id) throw new Error('perfil não encontrado no Instagram');
-  const errors: string[] = [];
-  const raw: Any[] = [];
-  let picked = { items: [] as Any[], done: false };
-  if (!user.is_private) {
-    // teto de páginas: quantidade só reels pode precisar pular fotos; período de 90 dias de quem posta muito
-    const maxPages = o.modo === 'periodo' ? 25 : Math.ceil(o.quantidade / 12) * (o.conteudo === 'reels' ? 4 : 1) + 1;
-    let maxId = '';
-    for (let page = 0; page < maxPages; page++) {
-      if (page) await sleep(pause);
-      let feed: Any;
-      try { feed = await get(`https://www.instagram.com/api/v1/feed/user/${user.id}/?count=12${maxId ? `&max_id=${encodeURIComponent(maxId)}` : ''}`); }
-      catch (e) { if (!raw.length) throw e; errors.push(`parou na página ${page + 1}: ${msg(e)}`); break; }
-      raw.push(...(feed.items ?? []));
-      picked = pickLoggedItems(raw, o, ctx.now);
-      if (picked.done || !feed.more_available || !feed.next_max_id) break;
-      maxId = String(feed.next_max_id);
-      if (page === maxPages - 1) errors.push(`parou no teto de ${maxPages} páginas (${raw.length} posts lidos)`);
-    }
-  }
-  return normalizeLoggedInstagram({ profileUrl: url, now: ctx.now, user, media: picked.items, errors });
+  const pick = (tl: Any[]) => pickLoggedItems(tl, o, ctx.now);
+  const res = await ctx.runner.igBrowse(handle, igCookieList(ctx.env, session), {
+    done: (tl) => pick(tl).done,
+    reels: (tl) => pick(tl).items.filter((m) => m.media_type === 2).map((m) => String(m.code)),
+    maxScrolls: o.modo === 'periodo' ? 40 : 25,
+    pauseMs: pauseRaw ? Number(pauseRaw) : 2500,
+  });
+  if (!res.user && !res.timeline.length) throw new Error('o perfil não carregou com a sessão (privado, inexistente ou sessão recusada)');
+  const views = new Map(res.clips.map((c) => [String(c.code), c]));
+  const media = pick(res.timeline).items.map((m) => {
+    const c = views.get(String(m.code));
+    return c ? { ...m, play_count: m.play_count ?? c.play_count, view_count: m.view_count ?? c.view_count } : m;
+  });
+  const errors = [...res.errors];
+  const noViews = media.filter((m) => m.media_type === 2 && m.play_count == null && m.view_count == null).length;
+  if (noViews) errors.push(`${noViews} reel(s) sem views (a aba Reels não chegou neles)`);
+  return normalizeLoggedInstagram({ profileUrl: url, now: ctx.now, user: res.user ?? { username: handle }, media, errors });
 }
 
 export const instagram: Adapter = {
