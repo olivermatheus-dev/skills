@@ -33,9 +33,22 @@ export interface Runner {
   download(url: string, absBase: string, kind: 'avatar' | 'banner' | 'thumb'): Promise<string | null>;
 }
 
+/** Instagram com sessão logada (companies/<slug>/intel/coleta.json): quantos ou de quando, e o quê */
+export interface IgOptions {
+  modo: 'quantidade' | 'periodo';
+  /** modo quantidade: itens por perfil */
+  quantidade: number;
+  /** modo período: tudo dos últimos N dias */
+  dias: number;
+  conteudo: 'reels' | 'tudo';
+}
+export const DEFAULT_IG: IgOptions = { modo: 'quantidade', quantidade: 24, dias: 30, conteudo: 'reels' };
+
 export interface AdapterCtx {
   runner: Runner;
   maxItems: number;
+  /** opções do Instagram logado (sem elas: padrão de coleta-config) */
+  instagram?: IgOptions;
   /** lê só a chave pedida do process.env / .env */
   env: (key: string) => string | undefined;
   now: Date;

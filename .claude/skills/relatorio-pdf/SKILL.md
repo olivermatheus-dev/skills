@@ -42,7 +42,7 @@ Você é analista de inteligência competitiva e de marketing de produto, que en
 - Um PDF por módulo, nunca um PDF único misturando os três (pedido do Oliver, 2026-10-10).
 - "Não temos" só com `_nos = nao` na matriz e conferido no `PRODUTO.md`; `desconhecido` vai para "a confirmar", nunca para "não temos".
 - Toda sugestão usa o que existe hoje ou diz a condição ("quando houver depoimentos", "depois da T-0010").
-- Número de rede com data da coleta e a limitação (Instagram sem token = ~6 últimos posts).
+- Número de rede com data da coleta e a limitação (Instagram sem sessão = ~6 últimos posts; com a sessão logada, o critério de `intel/coleta.json`; a fonte do snapshot diz qual: `instagram-public` ou `instagram-login`).
 - Texto da página: frases curtas, sem travessão; nome de concorrente sempre como no `competitor.md`.
 
 ## Checklist antes de entregar

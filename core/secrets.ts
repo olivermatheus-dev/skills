@@ -10,6 +10,7 @@ export interface SecretDef { key: string; label: string; hint: string; test?: 'e
 /** Chaves conhecidas (aparecem na tela). Outras podem existir no arquivo e são preservadas. */
 export const SECRETS: SecretDef[] = [
   { key: 'ELEVENLABS_API_KEY', label: 'ElevenLabs', hint: 'Voz final (Eleven v4) e efeitos. elevenlabs.io → Developers → API Keys.', test: 'elevenlabs' },
+  { key: 'INSTAGRAM_SESSIONID', label: 'Instagram (sessão)', hint: 'Coleta de concorrentes além dos 6 posts, sem custo. Use uma conta SECUNDÁRIA: entre em instagram.com no navegador → F12 → Aplicativo/Application → Cookies → copie o valor de sessionid.' },
   { key: 'APIFY_TOKEN', label: 'Apify', hint: 'Coleta de Instagram com views (concorrentes).' },
   { key: 'YOUTUBE_API_KEY', label: 'YouTube Data API', hint: 'Coleta de YouTube mais rica (opcional; sem ela usa o yt-dlp).' },
   { key: 'META_ACCESS_TOKEN', label: 'Meta (token)', hint: 'Leitura de anúncios e posts da conta.' },

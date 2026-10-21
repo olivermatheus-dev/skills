@@ -10,6 +10,7 @@ import { Avatar, Chips, PlatformIcon, Spinner, fmtDateTime, platformLabel, timeA
 import { toast } from '../../components/toast';
 import { Button, ErrorBox, cx, fmtNum } from '../../components/kit';
 import WeeklyPanel from '../../components/competitors/WeeklyPanel';
+import IgColetaPanel from '../../components/competitors/IgColetaPanel';
 import { FilaAnalise } from '../../components/competitors/Analysis';
 import { Check, CircleCheck, CircleDashed, ListTodo, RefreshCw, TriangleAlert, Users, X } from 'lucide-react';
 import { useColetas } from '../../components/atividade/useColeta';
@@ -19,7 +20,7 @@ const STALE_DAYS = 7;
 /** redes com coletor (tools/intel/adapters.ts → ADAPTERS); as outras ficam só como link */
 const COLLECTABLE = new Set(['youtube', 'tiktok', 'instagram', 'site']);
 const age = (iso?: string) => (iso ? (Date.now() - Date.parse(iso)) / 86_400_000 : Infinity);
-const short = (e: string) => (/APIFY_TOKEN|cookies|login/i.test(e) ? 'precisa de acesso' : /429|limit/i.test(e) ? 'limite de acesso' : /404|não encontrado/i.test(e) ? 'não encontrado' : e.slice(0, 36) + (e.length > 36 ? '…' : ''));
+const short = (e: string) => (/APIFY_TOKEN|cookies|login|sessão/i.test(e) ? 'precisa de acesso' : /429|limit/i.test(e) ? 'limite de acesso' : /404|não encontrado/i.test(e) ? 'não encontrado' : e.slice(0, 36) + (e.length > 36 ? '…' : ''));
 
 export default function Coletas() {
   const { slug = '' } = useParams();
@@ -83,6 +84,7 @@ export default function Coletas() {
       <ErrorBox error={m.error} />
       {queue.length > 0 && <div className="mb-3 flex"><FilaAnalise slug={slug} fila={queue.map((r) => ({ id: r.c.data.id, name: r.c.data.name, modules: r.ov!.request!.modules }))} /></div>}
       <WeeklyPanel slug={slug} />
+      <IgColetaPanel slug={slug} />
       <div className="mb-4"><StatStrip items={[
         { icon: Users, label: 'Perfis', value: String(all.length) },
         { icon: CircleCheck, label: 'Em dia', value: `${nOk}/${all.length}`, sub: `coleta com menos de ${STALE_DAYS} dias` },
@@ -100,7 +102,7 @@ export default function Coletas() {
         {every.length > all.length || showAll ? <label className="ml-3 text-xs text-muted-foreground inline-flex items-center gap-1.5"><input type="checkbox" checked={showAll} onChange={(e) => setShowAll(e.target.checked)} /> mostrar redes sem coletor ({every.filter((p) => !COLLECTABLE.has(p.platform)).length})</label> : null}
       </div>
       <SortTable fill rows={shown} cols={cols} rowKey={(p) => `${p.m.c.data.id}/${p.key}`} initial={{ k: 'name', dir: 1 }} />
-      <p className="mt-3 text-[11px] text-muted-foreground">Cada coleta grava um arquivo novo (o histórico nunca é apagado). Instagram sem token: 6 posts mais recentes. LinkedIn, Facebook e X ainda não têm coletor.</p>
+      <p className="mt-3 text-[11px] text-muted-foreground">Cada coleta grava um arquivo novo (o histórico nunca é apagado). Instagram: com a sessão salva, segue o critério do painel acima; sem ela, 6 posts mais recentes. LinkedIn, Facebook e X ainda não têm coletor.</p>
     </AreaPage>
   );
 }

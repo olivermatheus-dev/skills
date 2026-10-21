@@ -2,6 +2,8 @@
 
 > Atualizado em 2026-10-08 (sessão orquestradora: 038–041). Branch: `main`. Leia **só isto** e depois o `TASK.md` (ou `board/T-NNNN.md`) da vez; não percorra o repo. Regras de sessão: `CLAUDE.md` > Sessões e contexto.
 
+**Instagram logado na coleta de concorrentes (2026-10-21, feito):** sem login o Instagram só entrega ~6 posts por perfil. Agora, com `INSTAGRAM_SESSIONID` (cookie `sessionid` de uma **conta secundária**, app → Configurações), a coleta lê o feed do perfil de 12 em 12 até o critério do projeto: **quantidade** (12/24/36/48) ou **período** (30/60/90 dias), **só reels** ou **tudo** (painel na aba Coletas → `companies/<slug>/intel/coleta.json`; padrão 24 reels). Fixado antigo não corta o período; teto de páginas; pausa de 2,5 s. Sessão recusada → acesso público (6 posts) com aviso no estado do perfil. Fonte `instagram-login`. Código: `tools/intel/adapters.ts` (`instagramViaLogin`), `normalize.ts` (`normalizeLoggedInstagram`, `pickLoggedItems`), `coleta-config.ts`; testes em `npm run test:intel`. **Falta do Oliver:** salvar o sessionid e rodar uma coleta real (os endpoints só foram testados com respostas simuladas).
+
 ## Retomar daqui (sessão orquestradora de 2026-10-08)
 O Oliver usa a sessão principal como **orquestrador**: ele dita pedidos sobre o app, a sessão registra em `roadmap/PEDIDOS.md` + `TASK.md` e dispara subagentes com persona de especialista (UX/UI, social media, estrategista), em ondas sem dois agentes no mesmo arquivo, revisa, faz commit e devolve para o aval. **Numa sessão nova, "continua" = seguir `roadmap/PEDIDOS.md` > "Próximo da fila"**, nessa ordem.
 Feito nesta sessão (commits `d4e68ac` … `f385891`):

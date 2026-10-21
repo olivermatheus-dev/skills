@@ -138,6 +138,9 @@ export interface WeeklyInfo {
   lastSummary?: { profiles: number; ok: number; ads?: number; newAds?: number; report: string; errors: number };
   reports: { week: string; file: string }[];
 }
+/** opções de coleta do projeto (tools/intel/coleta-config.ts) + onde está a sessão do Instagram */
+export interface IgOptions { modo: 'quantidade' | 'periodo'; quantidade: number; dias: number; conteudo: 'reels' | 'tudo' }
+export interface ColetaConfigInfo { instagram: IgOptions; sessao: 'projeto' | 'geral' | null }
 import type { Matrix, CellStatus } from '../../schema/matrix';
 export type { Matrix, CellStatus };
 import type { Gaps, GapTheme } from '../../schema/gaps';
@@ -312,6 +315,8 @@ export const api = {
   deleteMatrixFeature: (slug: string, id: string) => req<Matrix>('DELETE', `${pj(slug)}/matrix/features/${encodeURIComponent(id)}`),
   renameMatrixGroup: (slug: string, from: string, to: string) => req<Matrix>('POST', `${pj(slug)}/matrix/rename-group`, { from, to }),
   referencia: (slug: string) => req<Referencia | null>('GET', `${pj(slug)}/referencia`),
+  coletaConfig: (slug: string) => req<ColetaConfigInfo>('GET', `${pj(slug)}/coleta-config`),
+  saveColetaConfig: (slug: string, instagram: Partial<IgOptions>) => req<ColetaConfigInfo>('PUT', `${pj(slug)}/coleta-config`, { instagram }),
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),
   runWeekly: (slug: string) => req<WeeklyInfo>('POST', `${pj(slug)}/weekly`),
   weeklyReport: (slug: string, week: string) => req<{ text: string }>('GET', `${pj(slug)}/weekly/report?week=${encodeURIComponent(week)}`),

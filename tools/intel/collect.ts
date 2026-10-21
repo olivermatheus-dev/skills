@@ -5,11 +5,12 @@ import * as S from '../../core/store';
 import { P } from '../../schema';
 import type { Snapshot } from '../../schema';
 import { ADAPTERS } from './adapters';
+import { cleanIg, readColetaConfig } from './coleta-config';
 import { env } from './env';
 import { keyFor } from './keys';
 import { attachMedia } from './media';
 import { realRunner } from './runner';
-import type { Adapter, CollectResult, Runner, SnapshotDraft } from './types';
+import type { Adapter, CollectResult, IgOptions, Runner, SnapshotDraft } from './types';
 
 export type { CollectResult } from './types';
 
@@ -17,6 +18,8 @@ export interface CollectOptions {
   platforms?: string[];
   /** itens por perfil (no YouTube: por aba, vídeos e shorts). Padrão 30. */
   maxItems?: number;
+  /** Instagram logado: sobrepõe o intel/coleta.json do projeto */
+  instagram?: Partial<IgOptions>;
   /** testes/demonstração: troca rede e processos por fixtures */
   runner?: Runner;
   adapters?: Record<string, Adapter>;
@@ -51,6 +54,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
   const runner = opt.runner ?? realRunner;
   const adapters = opt.adapters ?? ADAPTERS;
   const maxItems = Math.max(1, Math.min(200, opt.maxItems ?? 30));
+  const instagram = cleanIg({ ...readColetaConfig(slug).instagram, ...(opt.instagram ?? {}) });
   const compDir = join(S.ROOT, P.competitor(slug, id));
   // perfis sem coletor (Facebook, LinkedIn, X, lojas) são só links de referência: não entram na coleta nem viram erro
   const profiles = comp.profiles.filter((p) => (opt.platforms?.length ? opt.platforms.includes(p.platform) : !!adapters[p.platform]));
@@ -66,7 +70,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
     if (!adapter) { res.errors.push(`coleta automática de ${p.platform} ainda não existe (por enquanto: YouTube, TikTok, Instagram e site)`); return res; }
     let snap: SnapshotDraft;
     try {
-      snap = await adapter.collect(p, { runner, maxItems, env: (k: string) => env(k, slug), now: opt.now ?? new Date() });
+      snap = await adapter.collect(p, { runner, maxItems, instagram, env: (k: string) => env(k, slug), now: opt.now ?? new Date() });
     } catch (e) {
       res.errors.push(String((e as Error)?.message ?? e));
       return res;

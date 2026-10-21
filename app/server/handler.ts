@@ -183,6 +183,13 @@ on('POST', '/api/projects/:slug/weekly', async (p) => {
   await new Promise((r) => setTimeout(r, 300));
   return W.status(p.slug);
 });
+// opções de coleta do projeto (intel/coleta.json): Instagram logado por quantidade ou período, só reels ou tudo
+const coletaView = async (slug: string, cfg?: { instagram: unknown }) => {
+  const C = await import('../../tools/intel/coleta-config');
+  return { ...(cfg ?? C.readColetaConfig(slug)), sessao: K.listSecrets(slug).find((s) => s.key === 'INSTAGRAM_SESSIONID')?.active ?? null };
+};
+on('GET', '/api/projects/:slug/coleta-config', (p) => coletaView(p.slug));
+on('PUT', '/api/projects/:slug/coleta-config', async (p, b) => coletaView(p.slug, (await import('../../tools/intel/coleta-config')).saveColetaConfig(p.slug, b ?? {})));
 on('GET', '/api/projects/:slug/weekly/report', async (p, _, q) => ({ text: (await import('../../tools/intel/semanal')).readReport(p.slug, q.get('week') ?? '') }));
 // a própria empresa como referência no Comparar e no Panorama (companies/<slug>/intel/referencia.json; null se não houver)
 on('GET', '/api/projects/:slug/referencia', async (p) => {

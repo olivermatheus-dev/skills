@@ -7,7 +7,7 @@ import { join } from 'node:path';
 
 const root = mkdtempSync(join(tmpdir(), 'hub-intel-'));
 process.env.HUB_ROOT = root;
-for (const k of ['YOUTUBE_API_KEY', 'APIFY_TOKEN', 'APIFY_IG_EXTRA_POSTS', 'YTDLP_PATH', 'YTDLP_COOKIES', 'YTDLP_COOKIES_FROM_BROWSER', 'INTEL_YT_DEEP']) process.env[k] = '';
+for (const k of ['YOUTUBE_API_KEY', 'APIFY_TOKEN', 'APIFY_IG_EXTRA_POSTS', 'YTDLP_PATH', 'YTDLP_COOKIES', 'YTDLP_COOKIES_FROM_BROWSER', 'INTEL_YT_DEEP', 'INSTAGRAM_SESSIONID']) process.env[k] = '';
 process.env.HUB_ENV_FILE = join(root, 'nao-existe.env');
 process.env.INTEL_IG_PAUSE_MS = '1';
 mkdirSync(join(root, 'companies', 't'), { recursive: true });
@@ -154,6 +154,100 @@ await t('Instagram sem token: o adaptador usa o embed público antes de Apify/yt
   assert.ok(r[0].ok && r[0].source === 'instagram-public' && r[0].items === 4, JSON.stringify(r[0]));
   assert.ok(!run.calls.some((c) => c.includes('apify')), 'nem chamou o Apify');
   assert.equal(run.calls.filter((c) => c.includes('/embed/captioned')).length, 2, 'um embed por vídeo');
+});
+
+// --- Instagram logado: feed v1 de mentira (12 por página), 1 post a cada 2 dias, a cada 3 um é foto, o 1º é fixado e antigo ---
+const DAY_S = 86_400;
+const fakeFeed = (n: number) => Array.from({ length: n }, (_, i) => ({
+  code: `C${String(i).padStart(3, '0')}`, taken_at: Math.floor(now.getTime() / 1000) - (i === 0 ? 400 : i * 2) * DAY_S,
+  media_type: i % 3 === 1 ? 1 : 2, product_type: i % 3 === 1 ? 'feed' : 'clips', caption: { text: `post ${i}` },
+  like_count: 10 + i, comment_count: i, play_count: 100 * i, video_duration: 30.4,
+  image_versions2: { candidates: [{ url: `https://cdninstagram.example/${i}.jpg` }] },
+  ...(i === 0 ? { timeline_pinned_user_ids: [1] } : {}),
+}));
+function loggedRunner(o: { total?: number; expired?: boolean } = {}) {
+  const base = fixtureRunner({ igPublic: true });
+  const pub = base.fetchText.bind(base);
+  const all = fakeFeed(o.total ?? 120);
+  const json = (url: string, v: unknown, status = 200) => ({ status, url, text: JSON.stringify(v), contentType: 'application/json' });
+  base.fetchText = async (url, init) => {
+    if (!url.includes('/api/v1/')) return pub(url, init);
+    base.calls.push(`fetch GET ${url} cookie=${init?.headers?.cookie ?? ''}`);
+    if (o.expired) return json(url, { message: 'login_required', require_login: true, status: 'fail' }, 401);
+    if (url.includes('web_profile_info')) return json(url, { data: { user: { id: '42', username: 'concorrente', full_name: 'Concorrente', biography: 'bio', edge_followed_by: { count: 5000 }, edge_follow: { count: 10 }, edge_owner_to_timeline_media: { count: all.length }, is_verified: false, external_url: 'https://concorrente.example' } } });
+    const start = Number(new URL(url).searchParams.get('max_id') ?? 0);
+    const more = start + 12 < all.length;
+    return json(url, { items: all.slice(start, start + 12), more_available: more, next_max_id: more ? String(start + 12) : undefined, status: 'ok' });
+  };
+  return base;
+}
+
+await t('Instagram logado: item do feed v1 vira reel/post/carrossel com views, data e capa', () => {
+  const s = valid(N.normalizeLoggedInstagram({
+    profileUrl: 'https://www.instagram.com/concorrente/', now,
+    user: { username: 'concorrente', full_name: 'C', edge_followed_by: { count: 7 }, bio_links: [{ url: 'https://x.example' }] },
+    media: [...fakeFeed(3), { code: 'CAR', media_type: 8, taken_at: 1, carousel_media: [{ image_versions2: { candidates: [{ url: 'https://c.example/1.jpg' }] } }] }],
+  }));
+  assert.equal(s.source, 'instagram-login');
+  assert.deepEqual(s.items.map((i) => i.type), ['reel', 'post', 'reel', 'carrossel']);
+  assert.equal(s.items[2].url, 'https://www.instagram.com/reel/C002/');
+  assert.equal(s.items[2].metrics.views, 200);
+  assert.equal(s.items[2].durationS, 30);
+  assert.equal(s.items[3].thumbnail, 'https://c.example/1.jpg');
+  assert.equal(s.profile.followers, 7);
+  assert.deepEqual(s.profile.links, ['https://x.example']);
+});
+
+await t('Instagram logado: corte por quantidade (só reels pula fotos) e por período (fixado antigo não para a leitura)', () => {
+  const feed = fakeFeed(60);
+  const q = N.pickLoggedItems(feed, { modo: 'quantidade', quantidade: 24, dias: 30, conteudo: 'reels' }, now);
+  assert.equal(q.items.length, 24);
+  assert.ok(q.done && q.items.every((m) => m.media_type === 2));
+  const tudo = N.pickLoggedItems(feed.slice(0, 12), { modo: 'quantidade', quantidade: 24, dias: 30, conteudo: 'tudo' }, now);
+  assert.ok(!tudo.done && tudo.items.length === 12, 'precisa da próxima página');
+  const p30 = N.pickLoggedItems(feed, { modo: 'periodo', quantidade: 24, dias: 30, conteudo: 'tudo' }, now);
+  assert.ok(p30.done);
+  assert.deepEqual(p30.items.map((m) => m.code), Array.from({ length: 15 }, (_, i) => `C${String(i + 1).padStart(3, '0')}`), 'dias 2…30, sem o fixado de 400 dias');
+});
+
+await t('Instagram logado: o adaptador pagina até 24 reels, ou tudo de 60 dias, com o cookie da sessão', async () => {
+  process.env.INSTAGRAM_SESSIONID = '42%3Aabc%3A9';
+  try {
+    const c = S.saveCompetitor('t', { name: 'Logada', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/concorrente/', handle: 'concorrente' }] }).data;
+    const run = loggedRunner();
+    const r = await collectCompetitor('t', c.id, { runner: run, noMedia: true, now });
+    assert.ok(r[0].ok && r[0].source === 'instagram-login' && r[0].items === 24, JSON.stringify(r[0]));
+    const pages = run.calls.filter((x) => x.includes('/feed/user/42/'));
+    assert.equal(pages.length, 3, '24 reels = 36 posts lidos (1 em 3 é foto)');
+    assert.ok(pages[0].includes('cookie=sessionid=42%3Aabc%3A9; ds_user_id=42'));
+    assert.ok(!run.calls.some((x) => x.includes('/embed/')), 'não usou o acesso público');
+    const run2 = loggedRunner();
+    const r2 = await collectCompetitor('t', c.id, { runner: run2, noMedia: true, now, instagram: { modo: 'periodo', dias: 60, conteudo: 'tudo' } });
+    assert.equal(r2[0].items, 30, 'dias 2…60');
+    assert.equal(run2.calls.filter((x) => x.includes('/feed/user/')).length, 3);
+    const r3 = await collectCompetitor('t', c.id, { runner: loggedRunner({ total: 10 }), noMedia: true, now, instagram: { modo: 'quantidade', quantidade: 24, conteudo: 'tudo' } });
+    assert.equal(r3[0].items, 10, 'perfil com poucos posts: acaba quando o Instagram diz que não há mais');
+  } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
+await t('Instagram logado: sessão recusada cai no acesso público (6 posts) e avisa', async () => {
+  process.env.INSTAGRAM_SESSIONID = 'velho';
+  try {
+    const c = S.saveCompetitor('t', { name: 'Expirada', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/natgeo/', handle: 'natgeo' }] }).data;
+    const r = await collectCompetitor('t', c.id, { runner: loggedRunner({ expired: true }), noMedia: true });
+    assert.ok(r[0].ok && r[0].source === 'instagram-public' && r[0].items === 4, JSON.stringify(r[0]));
+    assert.match(r[0].errors.join(' '), /sessão logada: sessão do Instagram recusada.*acesso público/);
+  } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
+await t('Configuração de coleta: valores fora da faixa voltam ao padrão e salva no intel/coleta.json', async () => {
+  const C = await import('./coleta-config');
+  assert.deepEqual(C.cleanIg({ modo: 'x', quantidade: 9999, dias: -1, conteudo: 'reels' }), C.DEFAULT_IG);
+  assert.deepEqual(C.readColetaConfig('t').instagram, C.DEFAULT_IG);
+  const saved = C.saveColetaConfig('t', { instagram: { modo: 'periodo', dias: 90 } as never });
+  assert.deepEqual(saved.instagram, { ...C.DEFAULT_IG, modo: 'periodo', dias: 90 });
+  assert.deepEqual(C.readColetaConfig('t'), saved);
+  C.saveColetaConfig('t', { instagram: C.DEFAULT_IG });
 });
 
 await t('Site: título, descrição, og:image, ícone e redes encontradas', () => {

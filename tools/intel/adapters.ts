@@ -1,9 +1,9 @@
 // Adaptadores por plataforma: decidem COMO buscar (yt-dlp, API, Apify, HTML) e entregam o bruto aos normalizadores puros.
 import type { Profile } from '../../schema';
-import type { Adapter, AdapterCtx, SnapshotDraft } from './types';
+import { DEFAULT_IG, type Adapter, type AdapterCtx, type SnapshotDraft } from './types';
 import {
   normalizeYtdlpYoutube, normalizeYoutubeApi, normalizeTiktok, normalizeApifyInstagram, normalizePublicInstagram, normalizeYtdlpInstagram,
-  normalizeSite, parseInstagramOg,
+  normalizeLoggedInstagram, pickLoggedItems, normalizeSite, parseInstagramOg,
 } from './normalize';
 
 type Any = Record<string, any>;
@@ -190,6 +190,59 @@ async function instagramViaPublicWeb(handle: string, url: string, ctx: AdapterCt
   return normalizePublicInstagram({ profileUrl: url, now: ctx.now, embedHtml, profileHtml, postHtml, errors });
 }
 
+/** Instagram com sessão logada (cookie de uma conta secundária em INSTAGRAM_SESSIONID): os mesmos endpoints que o site
+ *  chama ao rolar o perfil. Pagina de 12 em 12 até o critério do projeto (quantidade ou período), com pausa entre páginas. */
+const IG_APP_ID = '936619743392459';
+export const IG_SESSION_HELP = 'sessão do Instagram recusada (expirou ou pediu verificação): entre de novo na conta secundária e cole o sessionid em Configurações';
+
+/** valor do sessionid ou o cabeçalho Cookie inteiro → cabeçalho Cookie (ds_user_id sai do próprio sessionid) */
+export function igCookie(raw: string): string {
+  const v = raw.trim().replace(/^cookie:\s*/i, '');
+  if (v.includes('=')) return v;
+  const uid = decodeURIComponent(v).split(':')[0];
+  return `sessionid=${v}${/^\d+$/.test(uid) ? `; ds_user_id=${uid}` : ''}`;
+}
+
+async function instagramViaLogin(handle: string, url: string, ctx: AdapterCtx, cookie: string): Promise<SnapshotDraft> {
+  const o = ctx.instagram ?? DEFAULT_IG;
+  const pauseRaw = ctx.env('INTEL_IG_PAUSE_MS');
+  const pause = pauseRaw ? Number(pauseRaw) : 2500;
+  const headers = { cookie: igCookie(cookie), 'x-ig-app-id': IG_APP_ID, 'x-requested-with': 'XMLHttpRequest', accept: '*/*', referer: url };
+  const get = async (u: string) => {
+    const r = await ctx.runner.fetchText(u, { headers, redirect: 'manual' });
+    if (r.status === 429) throw new Error('Instagram limitou as requisições (429); tente de novo em alguns minutos');
+    if (r.status === 401 || r.status === 403 || (r.status >= 300 && r.status < 400) || /\/accounts\/login|challenge/.test(r.url)) throw new Error(IG_SESSION_HELP);
+    let j: Any;
+    try { j = JSON.parse(r.text); } catch { throw new Error(r.status >= 400 ? `Instagram respondeu ${r.status}` : IG_SESSION_HELP); }
+    if (j?.require_login || /login_required|checkpoint/.test(String(j?.message ?? ''))) throw new Error(IG_SESSION_HELP);
+    if (r.status === 404) throw new Error('perfil não encontrado no Instagram');
+    if (r.status >= 400) throw new Error(`Instagram respondeu ${r.status}: ${String(j?.message ?? '').slice(0, 120)}`);
+    return j;
+  };
+  const user = (await get(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(handle)}`))?.data?.user;
+  if (!user?.id) throw new Error('perfil não encontrado no Instagram');
+  const errors: string[] = [];
+  const raw: Any[] = [];
+  let picked = { items: [] as Any[], done: false };
+  if (!user.is_private) {
+    // teto de páginas: quantidade só reels pode precisar pular fotos; período de 90 dias de quem posta muito
+    const maxPages = o.modo === 'periodo' ? 25 : Math.ceil(o.quantidade / 12) * (o.conteudo === 'reels' ? 4 : 1) + 1;
+    let maxId = '';
+    for (let page = 0; page < maxPages; page++) {
+      if (page) await sleep(pause);
+      let feed: Any;
+      try { feed = await get(`https://www.instagram.com/api/v1/feed/user/${user.id}/?count=12${maxId ? `&max_id=${encodeURIComponent(maxId)}` : ''}`); }
+      catch (e) { if (!raw.length) throw e; errors.push(`parou na página ${page + 1}: ${msg(e)}`); break; }
+      raw.push(...(feed.items ?? []));
+      picked = pickLoggedItems(raw, o, ctx.now);
+      if (picked.done || !feed.more_available || !feed.next_max_id) break;
+      maxId = String(feed.next_max_id);
+      if (page === maxPages - 1) errors.push(`parou no teto de ${maxPages} páginas (${raw.length} posts lidos)`);
+    }
+  }
+  return normalizeLoggedInstagram({ profileUrl: url, now: ctx.now, user, media: picked.items, errors });
+}
+
 export const instagram: Adapter = {
   platform: 'instagram',
   async collect(p, ctx) {
@@ -198,8 +251,13 @@ export const instagram: Adapter = {
     const url = `https://www.instagram.com/${handle}/`;
     const token = ctx.env('APIFY_TOKEN');
     const publicErrors: string[] = [];
+    const session = ctx.env('INSTAGRAM_SESSIONID');
+    if (session) {
+      try { return await instagramViaLogin(handle, url, ctx, session); }
+      catch (e) { publicErrors.push(`sessão logada: ${msg(e)} → usei o acesso público (6 posts)`); }
+    }
     if (ctx.env('INTEL_IG_PUBLIC') !== '0') {
-      try { return await instagramViaPublicWeb(handle, url, ctx); }
+      try { const s = await instagramViaPublicWeb(handle, url, ctx); return { ...s, errors: [...publicErrors, ...(s.errors ?? [])] }; }
       catch (e) { publicErrors.push(`acesso público: ${msg(e)}`); }
     }
     if (token) {

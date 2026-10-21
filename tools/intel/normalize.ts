@@ -342,6 +342,70 @@ export function normalizePublicInstagram(i: PublicInstagramInput): SnapshotDraft
   };
 }
 
+// --- Instagram com sessão logada: /api/v1/users/web_profile_info (perfil) + /api/v1/feed/user/<id>/ (posts, 12 por página) ---
+/** item do feed v1 (media_type 1 foto, 2 vídeo, 8 carrossel; product_type 'clips' = reel) → item */
+export function loggedIgPost(m: Any): ItemDraft | null {
+  const code = str(m?.code);
+  if (!code) return null;
+  const type: ItemDraft['type'] = m.media_type === 8 ? 'carrossel' : m.media_type === 2 ? (m.product_type && m.product_type !== 'clips' ? 'video' : 'reel') : 'post';
+  const ts = num(m.taken_at);
+  const cand = (x: Any) => x?.image_versions2?.candidates?.[0]?.url;
+  return {
+    id: code, url: `https://www.instagram.com/${type === 'reel' ? 'reel' : 'p'}/${code}/`, type,
+    caption: str(m.caption?.text),
+    publishedAt: ts ? new Date(ts * 1000).toISOString().replace(/\.\d+Z$/, 'Z') : undefined,
+    durationS: typeof m.video_duration === 'number' ? Math.round(m.video_duration) : undefined,
+    thumbnail: [cand(m), cand(m.carousel_media?.[0])].find(isUrl),
+    metrics: {
+      views: num(m.play_count) ?? num(m.ig_play_count) ?? num(m.view_count),
+      likes: m.like_and_view_counts_disabled ? undefined : num(m.like_count),
+      comments: num(m.comment_count),
+    },
+  };
+}
+
+/** post fixado (no topo do perfil ou da aba Reels): pode ser antigo, não serve para decidir onde parar */
+export const igPinned = (m: Any) => !!(m?.timeline_pinned_user_ids?.length || m?.clips_tab_pinned_user_ids?.length);
+
+/**
+ * Corta as páginas do feed pelo critério do projeto. `done` = já tem o bastante (não precisa da próxima página).
+ * quantidade: os N primeiros do tipo pedido · período: tudo desde `now - dias`; para no primeiro não fixado mais antigo.
+ */
+export function pickLoggedItems(raw: Any[], o: { modo: 'quantidade' | 'periodo'; quantidade: number; dias: number; conteudo: 'reels' | 'tudo' }, now: Date) {
+  const since = now.getTime() - o.dias * 86_400_000;
+  const out: Any[] = [];
+  let tooOld = false;
+  for (const m of raw) {
+    const old = (num(m?.taken_at) ?? Infinity) * 1000 < since;
+    if (o.modo === 'periodo' && old) { if (igPinned(m)) continue; tooOld = true; break; }
+    if (o.conteudo === 'reels' && !(m?.media_type === 2)) continue;
+    out.push(m);
+    if (o.modo === 'quantidade' && out.length >= o.quantidade) break;
+  }
+  return { items: out, done: tooOld || (o.modo === 'quantidade' && out.length >= o.quantidade) };
+}
+
+export interface LoggedInstagramInput { profileUrl: string; now: Date; user: Any; media: Any[]; errors?: string[] }
+
+export function normalizeLoggedInstagram(i: LoggedInstagramInput): SnapshotDraft {
+  const u = i.user ?? {};
+  if (!str(u.username)) throw new Error('o Instagram não devolveu o perfil');
+  const links = [u.external_url, ...(u.bio_links ?? []).map((l: Any) => l?.url)].filter(isUrl);
+  const errors = [...(i.errors ?? [])];
+  if (u.is_private) errors.push('perfil privado: só os dados públicos do perfil');
+  return {
+    collectedAt: nowIso(i.now), platform: 'instagram', profileUrl: i.profileUrl, source: 'instagram-login',
+    profile: {
+      name: str(u.full_name) ?? u.username, handle: u.username, bio: str(u.biography),
+      avatar: [u.profile_pic_url_hd, u.profile_pic_url].find(isUrl),
+      followers: num(u.edge_followed_by?.count) ?? num(u.follower_count), following: num(u.edge_follow?.count) ?? num(u.following_count),
+      postsCount: num(u.edge_owner_to_timeline_media?.count) ?? num(u.media_count),
+      verified: typeof u.is_verified === 'boolean' ? u.is_verified : undefined, links: [...new Set(links)],
+    },
+    items: dedupe(i.media.map(loggedIgPost).filter(Boolean) as ItemDraft[]), errors,
+  };
+}
+
 export function normalizeYtdlpInstagram(i: { profileUrl: string; now: Date; list: Any; errors?: string[] }): SnapshotDraft {
   const pl = i.list ?? {};
   const items = (pl.entries ?? []).map((e: Any) => ytdlpEntry(e, (id) => `https://www.instagram.com/p/${id}/`, e.duration ? 'reel' : 'post')).filter(Boolean) as ItemDraft[];
