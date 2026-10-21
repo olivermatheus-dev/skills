@@ -1,6 +1,6 @@
 // Adaptadores por plataforma: decidem COMO buscar (yt-dlp, API, Apify, HTML) e entregam o bruto aos normalizadores puros.
 import type { Profile } from '../../schema';
-import { DEFAULT_IG, type Adapter, type AdapterCtx, type SnapshotDraft } from './types';
+import { DEFAULT_IG, IG_COOKIES, igCookieKey, type Adapter, type AdapterCtx, type SnapshotDraft } from './types';
 import {
   normalizeYtdlpYoutube, normalizeYoutubeApi, normalizeTiktok, normalizeApifyInstagram, normalizePublicInstagram, normalizeYtdlpInstagram,
   normalizeLoggedInstagram, pickLoggedItems, normalizeSite, parseInstagramOg,
@@ -203,11 +203,21 @@ export function igCookie(raw: string): string {
   return `sessionid=${v}${/^\d+$/.test(uid) ? `; ds_user_id=${uid}` : ''}`;
 }
 
-async function instagramViaLogin(handle: string, url: string, ctx: AdapterCtx, cookie: string): Promise<SnapshotDraft> {
+/** cabeçalho Cookie com todos os cookies salvos em Configurações (um campo por nome do navegador); sessionid manda */
+export function igCookieFromEnv(env: (k: string) => string | undefined, session: string): { cookie: string; csrf?: string } {
+  if (session.includes('=')) return { cookie: igCookie(session), csrf: session.match(/csrftoken=([^;]+)/)?.[1] };
+  const parts = new Map<string, string>();
+  for (const name of IG_COOKIES) { const v = name === 'sessionid' ? session.trim() : env(igCookieKey(name))?.trim(); if (v) parts.set(name, v); }
+  if (!parts.has('ds_user_id')) { const uid = decodeURIComponent(session).split(':')[0]; if (/^\d+$/.test(uid)) parts.set('ds_user_id', uid); }
+  return { cookie: [...parts].map(([k, v]) => `${k}=${v}`).join('; '), csrf: parts.get('csrftoken') };
+}
+
+async function instagramViaLogin(handle: string, url: string, ctx: AdapterCtx, session: string): Promise<SnapshotDraft> {
   const o = ctx.instagram ?? DEFAULT_IG;
   const pauseRaw = ctx.env('INTEL_IG_PAUSE_MS');
   const pause = pauseRaw ? Number(pauseRaw) : 2500;
-  const headers = { cookie: igCookie(cookie), 'x-ig-app-id': IG_APP_ID, 'x-requested-with': 'XMLHttpRequest', accept: '*/*', referer: url };
+  const { cookie, csrf } = igCookieFromEnv(ctx.env, session);
+  const headers: Record<string, string> = { cookie, 'x-ig-app-id': IG_APP_ID, 'x-requested-with': 'XMLHttpRequest', accept: '*/*', referer: url, ...(csrf ? { 'x-csrftoken': csrf } : {}) };
   const get = async (u: string) => {
     const r = await ctx.runner.fetchText(u, { headers, redirect: 'manual' });
     if (r.status === 429) throw new Error('Instagram limitou as requisições (429); tente de novo em alguns minutos');

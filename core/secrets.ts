@@ -5,30 +5,39 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, ValidationError } from './store';
 import { company } from '../schema/paths';
+import { IG_COOKIES, igCookieKey } from '../tools/intel/types';
 
 /** passo a passo mostrado no "Como pegar" ao lado do campo */
 export interface SecretTutorial { title: string; steps: string[]; notes?: string[] }
-export interface SecretDef { key: string; label: string; hint: string; test?: 'elevenlabs'; tutorial?: SecretTutorial }
+/** `group`: chaves que a tela mostra juntas num card só (o primeiro item do grupo leva o título, a dica e o tutorial) */
+export interface SecretDef { key: string; label: string; hint: string; test?: 'elevenlabs'; tutorial?: SecretTutorial; group?: { id: string; title: string; hint: string; tutorial?: SecretTutorial } }
+
+const IG_GROUP = {
+  id: 'instagram', title: 'Instagram (sessão)',
+  hint: 'Coleta de concorrentes além dos 6 posts, sem custo. Use uma conta SECUNDÁRIA, nunca a sua pessoal nem a da empresa. Só o sessionid é obrigatório; com os outros, a coleta parece mais um navegador comum.',
+  tutorial: {
+    title: 'Como pegar os cookies (Chrome ou Edge, no computador)',
+    steps: [
+      'Abra uma janela anônima (Ctrl + Shift + N) e entre em instagram.com com a conta SECUNDÁRIA.',
+      'Com o Instagram aberto e logado, aperte F12 (ou Ctrl + Shift + I) para abrir o painel do desenvolvedor.',
+      'Na barra de cima do painel, clique em "Application" ("Aplicativo"). Se não aparecer, clique em » para ver as abas escondidas.',
+      'No menu da esquerda, abra Storage → Cookies → https://www.instagram.com.',
+      'Para cada linha da lista (csrftoken, datr, ds_user_id…), dê dois cliques no valor (coluna Value), copie com Ctrl + C e cole no campo com o mesmo nome aqui. Salve cada um.',
+      'O sessionid é o que importa: sem ele, nada funciona. Os selos mudam de "vazia" para "projeto".',
+    ],
+    notes: [
+      'Depois, só feche a janela. Não clique em "Sair" no Instagram: sair invalida a sessão.',
+      'Se a coleta avisar "sessão recusada", repita o passo a passo (todos os campos).',
+      'Isto é uma senha: não mande para ninguém nem cole em outro lugar.',
+    ],
+  },
+};
+const IG_HINT: Record<string, string> = { sessionid: 'obrigatório: a sessão da conta', csrftoken: 'também vai no cabeçalho x-csrftoken', ds_user_id: 'ID da conta (sai do sessionid se faltar)' };
+
 /** Chaves conhecidas (aparecem na tela). Outras podem existir no arquivo e são preservadas. */
 export const SECRETS: SecretDef[] = [
   { key: 'ELEVENLABS_API_KEY', label: 'ElevenLabs', hint: 'Voz final (Eleven v4) e efeitos. elevenlabs.io → Developers → API Keys.', test: 'elevenlabs' },
-  { key: 'INSTAGRAM_SESSIONID', label: 'Instagram (sessão)', hint: 'Coleta de concorrentes além dos 6 posts, sem custo. Use uma conta SECUNDÁRIA, nunca a da empresa.',
-    tutorial: {
-      title: 'Como pegar o sessionid (Chrome ou Edge, no computador)',
-      steps: [
-        'Abra uma janela anônima (Ctrl + Shift + N) e entre em instagram.com com a conta SECUNDÁRIA.',
-        'Com o Instagram aberto e logado, aperte F12 (ou Ctrl + Shift + I) para abrir o painel do desenvolvedor.',
-        'Na barra de cima do painel, clique em "Application" ("Aplicativo"). Se não aparecer, clique em » para ver as abas escondidas.',
-        'No menu da esquerda, abra Storage → Cookies → https://www.instagram.com.',
-        'Na lista, ache a linha "sessionid", dê dois cliques no valor (coluna Value) e copie com Ctrl + C.',
-        'Cole no campo "Colar a chave", ao lado do botão Como pegar, e clique em Salvar. O selo muda de "vazia" para "projeto".',
-      ],
-      notes: [
-        'Depois, só feche a janela. Não clique em "Sair" no Instagram: sair invalida a sessão.',
-        'Se a coleta avisar "sessão recusada", repita o passo a passo.',
-        'É uma senha: não mande para ninguém nem cole em outro lugar.',
-      ],
-    } },
+  ...IG_COOKIES.map((name) => ({ key: igCookieKey(name), label: name, hint: IG_HINT[name] ?? 'opcional', group: IG_GROUP })),
   { key: 'APIFY_TOKEN', label: 'Apify', hint: 'Coleta de Instagram com views (concorrentes).' },
   { key: 'YOUTUBE_API_KEY', label: 'YouTube Data API', hint: 'Coleta de YouTube mais rica (opcional; sem ela usa o yt-dlp).' },
   { key: 'META_ACCESS_TOKEN', label: 'Meta (token)', hint: 'Leitura de anúncios e posts da conta.' },
@@ -77,7 +86,9 @@ export function setSecret(slug: string | null, key: string, value: string) {
   const f = envFile(slug);
   const lines = existsSync(f) ? readFileSync(f, 'utf8').split(/\r?\n/) : [`# Chaves de API ${slug ? `do projeto ${slug}` : 'gerais do hub'} (fora do git). Editável pela interface: Configurações.`];
   const i = lines.findIndex((l) => new RegExp(`^\\s*(?:export\\s+)?${key}\\s*=`).test(l));
-  const line = `${key}=${v}`;
+  // valor com aspas nas pontas (o cookie rur vem assim) ou " #": embrulha nas outras aspas para a leitura devolver igual
+  const wrap = /^["']|["']$|\s#/.test(v) ? (v.includes("'") ? '"' : "'") : '';
+  const line = `${key}=${wrap}${v}${wrap}`;
   if (i >= 0) { if (v) lines[i] = line; else lines.splice(i, 1); } else if (v) lines.push(line);
   while (lines.length && lines.at(-1) === '') lines.pop();
   writeFileSync(f, lines.join('\n') + '\n');

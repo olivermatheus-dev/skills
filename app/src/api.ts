@@ -118,7 +118,8 @@ export type { VariantesView, VarianteView, Aval as VarianteAval, Job as Variante
 export type { Pacote as PacoteAnuncio, Resultados as ResultadosAnuncio, EixoResultado } from '../../tools/lib/pacote.mjs';
 type PacoteResp = { pacote: import('../../tools/lib/pacote.mjs').Pacote; view: VariantesVista };
 type ResultadosResp = { resultado: import('../../tools/lib/pacote.mjs').Resultados; view: VariantesVista };
-export interface SecretState { key: string; label: string; hint: string; test?: string; tutorial?: { title: string; steps: string[]; notes?: string[] }; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
+export interface SecretTutorial { title: string; steps: string[]; notes?: string[] }
+export interface SecretState { key: string; label: string; hint: string; test?: string; tutorial?: SecretTutorial; group?: { id: string; title: string; hint: string; tutorial?: SecretTutorial }; project: string | null; general: string | null; active: 'projeto' | 'geral' | null }
 // Editor de mockups (tarefa 030)
 import type { MockupScene } from '../../schema/mockup';
 import type { CapturaRuntime } from '../../tools/mockup/cena-lib.mjs';

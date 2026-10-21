@@ -42,6 +42,10 @@ export interface IgOptions {
   dias: number;
   conteudo: 'reels' | 'tudo';
 }
+/** cookies do Instagram que a tela Configurações aceita, com o nome exato do navegador → chave no .env.
+ *  sessionid é o obrigatório; os outros deixam a coleta com cara de navegador (csrftoken também vai no cabeçalho x-csrftoken). */
+export const IG_COOKIES = ['csrftoken', 'datr', 'ds_user_id', 'ig_did', 'mid', 'rd_challenge', 'rur', 'sessionid', 'wd'] as const;
+export const igCookieKey = (name: string) => (name === 'sessionid' ? 'INSTAGRAM_SESSIONID' : `INSTAGRAM_COOKIE_${name.toUpperCase()}`);
 export const DEFAULT_IG: IgOptions = { modo: 'quantidade', quantidade: 24, dias: 30, conteudo: 'reels' };
 
 export interface AdapterCtx {

@@ -27,18 +27,42 @@ export default function Settings() {
       <p className="text-sm text-muted-foreground mb-4">{`Ficam em companies/${slug}/.env, fora do git. Ordem de uso: projeto > geral.`}</p>
       <ErrorBox error={error} />
       {isLoading && <div className="h-40 rounded-xl bg-muted animate-pulse" />}
-      <div className="space-y-3">{data?.map((s) => <SecretRow key={s.key} slug={slug} s={s} scope="projeto" />)}</div>
+      <div className="space-y-3"><Secrets slug={slug} list={data} scope="projeto" /></div>
       <div className="mt-10">
         <button className="text-sm text-muted-foreground hover:text-foreground" onClick={() => setShowGeneral(!showGeneral)}>
           {showGeneral ? '▾' : '▸'} Chaves gerais do hub (.env da raiz, usadas só quando o projeto não tem a sua)
         </button>
-        {showGeneral && <div className="space-y-3 mt-3">{data?.map((s) => <SecretRow key={s.key} slug={slug} s={s} scope="geral" />)}</div>}
+        {showGeneral && <div className="space-y-3 mt-3"><Secrets slug={slug} list={data} scope="geral" /></div>}
       </div>
     </AppContent>
   );
 }
 
-function SecretRow({ slug, s, scope }: { slug: string; s: SecretState; scope: 'projeto' | 'geral' }) {
+/** uma chave por card; as de um mesmo grupo (ex.: cookies do Instagram) ficam juntas num card só, uma linha por campo */
+function Secrets({ slug, list, scope }: { slug: string; list?: SecretState[]; scope: 'projeto' | 'geral' }) {
+  const seen = new Set<string>();
+  return <>{(list ?? []).map((s) => {
+    if (!s.group) return <SecretRow key={s.key} slug={slug} s={s} scope={scope} />;
+    if (seen.has(s.group.id)) return null;
+    seen.add(s.group.id);
+    const g = s.group;
+    const items = list!.filter((x) => x.group?.id === g.id);
+    const filled = items.filter((x) => (scope === 'projeto' ? x.project : x.general)).length;
+    return (
+      <Card key={g.id}>
+        <div className="flex items-center gap-2">
+          <span className="font-medium">{g.title}</span>
+          <Badge color={filled ? '#16a34a' : undefined}>{filled}/{items.length} salvos</Badge>
+          {g.tutorial && <span className="ml-auto"><ComoPegar t={g.tutorial} /></span>}
+        </div>
+        <div className="text-xs text-muted-foreground mt-1">{g.hint}</div>
+        <div className="mt-3 divide-y divide-border">{items.map((x) => <SecretRow key={x.key} slug={slug} s={x} scope={scope} compact />)}</div>
+      </Card>
+    );
+  })}</>;
+}
+
+function SecretRow({ slug, s, scope, compact }: { slug: string; s: SecretState; scope: 'projeto' | 'geral'; compact?: boolean }) {
   const qc = useQueryClient();
   const [value, setValue] = useState('');
   const [busy, setBusy] = useState(false);
@@ -58,6 +82,19 @@ function SecretRow({ slug, s, scope }: { slug: string; s: SecretState; scope: 'p
     setBusy(true);
     try { setTest(await api.testSecret(slug, s.key)); } catch (e) { setTest({ ok: false, message: String((e as Error).message) }); } finally { setBusy(false); }
   };
+
+  if (compact) return (
+    <form className="flex flex-wrap items-center gap-2 py-2" onSubmit={(e) => { e.preventDefault(); if (value.trim()) void save(value); }}>
+      <div className="w-44 min-w-0" title={`${s.key} · ${s.hint}`}>
+        <code className="text-[13px] font-medium">{s.label}</code>
+        <div className="text-[10px] text-muted-foreground truncate">{s.hint}</div>
+      </div>
+      {current ? <Badge color="#16a34a">{current}</Badge> : <Badge>vazia</Badge>}
+      <Input type="password" autoComplete="off" spellCheck={false} className="flex-1 min-w-40 font-mono" placeholder={current ? `Colar novo ${s.label} para trocar` : `Colar o valor de ${s.label}`} value={value} onChange={(e) => setValue(e.target.value)} />
+      <Button type="submit" disabled={busy || !value.trim()}>Salvar</Button>
+      {current && <Button type="button" variant="danger" disabled={busy} onClick={() => confirm(`Remover ${s.label} (${scope})?`) && save('')}>Remover</Button>}
+    </form>
+  );
 
   return (
     <Card>

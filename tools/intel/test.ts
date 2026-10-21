@@ -7,7 +7,7 @@ import { join } from 'node:path';
 
 const root = mkdtempSync(join(tmpdir(), 'hub-intel-'));
 process.env.HUB_ROOT = root;
-for (const k of ['YOUTUBE_API_KEY', 'APIFY_TOKEN', 'APIFY_IG_EXTRA_POSTS', 'YTDLP_PATH', 'YTDLP_COOKIES', 'YTDLP_COOKIES_FROM_BROWSER', 'INTEL_YT_DEEP', 'INSTAGRAM_SESSIONID']) process.env[k] = '';
+for (const k of ['YOUTUBE_API_KEY', 'APIFY_TOKEN', 'APIFY_IG_EXTRA_POSTS', 'YTDLP_PATH', 'YTDLP_COOKIES', 'YTDLP_COOKIES_FROM_BROWSER', 'INTEL_YT_DEEP', 'INSTAGRAM_SESSIONID', 'INSTAGRAM_COOKIE_CSRFTOKEN', 'INSTAGRAM_COOKIE_RUR', 'INSTAGRAM_COOKIE_DS_USER_ID']) process.env[k] = '';
 process.env.HUB_ENV_FILE = join(root, 'nao-existe.env');
 process.env.INTEL_IG_PAUSE_MS = '1';
 mkdirSync(join(root, 'companies', 't'), { recursive: true });
@@ -238,6 +238,19 @@ await t('Instagram logado: sessão recusada cai no acesso público (6 posts) e a
     assert.ok(r[0].ok && r[0].source === 'instagram-public' && r[0].items === 4, JSON.stringify(r[0]));
     assert.match(r[0].errors.join(' '), /sessão logada: sessão do Instagram recusada.*acesso público/);
   } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
+await t('Instagram logado: cookie montado dos campos de Configurações, csrftoken no cabeçalho, rur com aspas preservado', async () => {
+  const { igCookieFromEnv } = await import('./adapters');
+  const envs: Record<string, string> = { INSTAGRAM_COOKIE_CSRFTOKEN: 'csrfX', INSTAGRAM_COOKIE_RUR: '"LDC\\05442\\0541"' };
+  const r = igCookieFromEnv((k) => envs[k], '42%3Aabc%3A9');
+  assert.equal(r.cookie, 'csrftoken=csrfX; rur="LDC\\05442\\0541"; sessionid=42%3Aabc%3A9; ds_user_id=42');
+  assert.equal(r.csrf, 'csrfX');
+  assert.equal(igCookieFromEnv(() => undefined, 'sessionid=a; csrftoken=b').csrf, 'b', 'cabeçalho inteiro colado também vale');
+  const K = await import('../../core/secrets');
+  K.setSecret('t', 'INSTAGRAM_COOKIE_RUR', envs.INSTAGRAM_COOKIE_RUR);
+  assert.equal(K.secret('INSTAGRAM_COOKIE_RUR', 't'), envs.INSTAGRAM_COOKIE_RUR, 'aspas das pontas sobrevivem ao .env');
+  K.setSecret('t', 'INSTAGRAM_COOKIE_RUR', '');
 });
 
 await t('Configuração de coleta: valores fora da faixa voltam ao padrão e salva no intel/coleta.json', async () => {
