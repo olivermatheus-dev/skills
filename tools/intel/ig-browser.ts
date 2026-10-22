@@ -68,7 +68,8 @@ export async function igBrowse(handle: string, cookies: { name: string; value: s
     const open = async (path: string) => {
       await page.goto(`https://www.instagram.com/${handle}/${path}`, { waitUntil: 'domcontentloaded', timeout: 60_000 });
       await page.waitForTimeout(pause + 1500);
-      if (/\/accounts\/login|\/challenge\//.test(page.url())) throw new Error('sessão do Instagram recusada (expirou ou pediu verificação): entre de novo na conta secundária e salve os cookies em Configurações');
+      // login, desafio ou "confirme seu contato" (accounts/update_risky_contactpoint): parar na hora, sem insistir
+      if (/\/accounts\/|\/challenge\/|challenge_context|__coig_challenge/.test(page.url())) throw new Error(`sessão do Instagram recusada (${/contactpoint|challenge/.test(page.url()) ? 'o Instagram pediu uma verificação na conta' : 'expirou'}): abra o Instagram com a conta secundária no navegador, resolva o aviso e salve os cookies de novo em Configurações`);
       // o começo da grade já vem no HTML
       for (const s of await page.$$eval('script[type="application/json"]', (els) => els.map((e) => e.textContent ?? ''))) {
         for (const j of parseChunks(s)) harvest(j, handle, acc);
