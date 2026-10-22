@@ -86,14 +86,16 @@ export async function runLote(slug: string, id: string, o: LoteOpts = {}) {
   if (!o.noMedia && items.length) await attachMedia({ items } as SnapshotDraft, key, join(S.ROOT, P.competitor(slug, id)), runner).catch(() => undefined);
   const byId = new Map<string, ItemDraft>((atual?.items ?? []).map((i) => [i.id, i]));
   for (const it of items) byId.set(it.id, { ...byId.get(it.id), ...it });
-  const datas = [...byId.values()].map((i) => i.publishedAt).filter(Boolean).sort() as string[];
+  // até onde a leitura chegou: post fixado no topo pode ser antigo e não conta
+  const lidoAte = res.timeline.filter((n) => !fixado(n) && typeof n.taken_at === 'number').map((n) => new Date(n.taken_at * 1000).toISOString().slice(0, 10)).sort()[0];
+  const ate = [lidoAte, prog.maisAntigo].filter(Boolean).sort()[0] ?? null;
   const chegou = res.timeline.some((n) => velha(n) && !fixado(n)) || !res.hasNext;
   const novos = items.filter((i) => !conhecidos.has(i.id)).length;
   const data: AcervoFile = S.saveAcervo(slug, id, key, {
     platform: 'instagram', profileUrl: url, updated: now.toISOString(), items: [...byId.values()],
     progresso: {
-      ...prog, cursor: res.cursor, clipsCursor: res.clipsCursor, maisAntigo: datas[0]?.slice(0, 10) ?? prog.maisAntigo, terminado: chegou,
-      lotes: [...prog.lotes, { at: now.toISOString(), posts: items.length, novos, ate: datas[0]?.slice(0, 10) ?? null, erro: res.errors[0]?.slice(0, 200) ?? null }],
+      ...prog, cursor: res.cursor, clipsCursor: res.clipsCursor, maisAntigo: ate, terminado: chegou,
+      lotes: [...prog.lotes, { at: now.toISOString(), posts: items.length, novos, ate: lidoAte ?? null, erro: res.errors[0]?.slice(0, 200) ?? null }],
     },
   });
   if (res.errors.some((x) => conta.erro(x))) res.errors.push('conta pausada por 48 h para proteger');
