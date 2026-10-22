@@ -10,7 +10,7 @@ const show = () => {
   const s = A.status(slug, id);
   const a = s.acervo;
   console.log(`@${s.handle ?? '?'} · acervo: ${a ? `${a.posts} posts · chegou até ${a.maisAntigo ?? '—'} · alvo ${a.alvoDias} dias${a.terminado ? ' · TERMINADO' : ''}` : 'nunca rodou'}`);
-  console.log(`conta: ${s.conta.ok ? `livre (${s.conta.lotes24h}/${A.LIMITES.lotesPorDia} lotes nas últimas 24 h)` : `${s.conta.motivo} · libera ${new Date(s.conta.liberaEm!).toLocaleString('pt-BR')}`}`);
+  console.log(`conta: ${s.conta.ok ? `livre (${s.conta.lotes24h}/${s.conta.limites.lotesPorDia} lotes nas últimas 24 h)` : `${s.conta.motivo} · libera ${new Date(s.conta.liberaEm!).toLocaleString('pt-BR')}`}`);
 };
 if (argv.includes('--status')) { show(); process.exit(0); }
 const alvoDias = flag('--dias') ? Number(flag('--dias')) : flag('--anos') ? Number(flag('--anos')) * 365 : undefined;

@@ -273,61 +273,91 @@ await t('Acervo na tela: post que saiu da última coleta continua (com "medido e
   assert.equal(out[2].seenAt, '2026-10-05T00:00:00Z');
 });
 
-await t('Coleta longa: limites da conta (3 lotes/24 h, 2 h entre lotes, pausa de 24 h)', async () => {
-  const A = await import('./acervo');
-  const n = new Date('2026-10-22T12:00:00Z');
-  const h = (x: number) => new Date(n.getTime() - x * 3_600_000).toISOString();
-  assert.ok(A.liberacao({ lotes: [] }, n).ok);
-  assert.match(A.liberacao({ lotes: [h(1)] }, n).motivo!, /2 h/);
-  assert.ok(A.liberacao({ lotes: [h(3)] }, n).ok);
-  assert.match(A.liberacao({ lotes: [h(20), h(10), h(3)] }, n).motivo!, /3 lotes/);
-  assert.equal(A.liberacao({ lotes: [h(20), h(10), h(3)] }, n).liberaEm, new Date(Date.parse(h(20)) + 86_400_000).toISOString());
-  assert.match(A.liberacao({ lotes: [], pausadoAte: h(-5), ultimoErro: 'verificação' }, n).motivo!, /pausada.*verificação/);
+await t('Conta do Instagram: horário, 12 perfis/24 h, 1,5–3 min entre perfis, 2 lotes/24 h com 4 h entre eles, pausa após alerta', async () => {
+  const G = await import('./ig-conta');
+  const n = new Date(2026, 9, 22, 12, 0); // meio-dia, hora local
+  const m = (x: number) => new Date(n.getTime() - x * 60_000).toISOString();
+  assert.ok(G.podeAbrir({ aberturas: [], lotes: [] }, n).ok);
+  assert.equal(G.podeAbrir({ aberturas: [m(1)], lotes: [], proximoIntervaloMs: 120_000 }, n).esperarMs, 60_000, 'espera o resto do intervalo');
+  assert.match(G.podeAbrir({ aberturas: [], lotes: [] }, new Date(2026, 9, 22, 3, 0)).motivo!, /fora do horário/);
+  assert.match(G.podeAbrir({ aberturas: Array.from({ length: 12 }, (_, i) => m(60 * i + 5)), lotes: [] }, n).motivo!, /12 perfis/);
+  assert.match(G.podeLote({ aberturas: [], lotes: [m(60)] }, n).motivo!, /4 h/);
+  assert.ok(G.podeLote({ aberturas: [], lotes: [m(300)] }, n).ok);
+  assert.match(G.podeLote({ aberturas: [], lotes: [m(900), m(300)] }, n).motivo!, /2 lotes/);
+  assert.match(G.podeAbrir({ aberturas: [], lotes: [], pausadoAte: new Date(n.getTime() + 3_600_000).toISOString(), ultimoErro: 'verificação' }, n).motivo!, /pausada.*verificação/);
+  // guarda de verdade (arquivo do projeto t): espera, registra e pausa 48 h num alerta
+  const esperas: number[] = [];
+  let agora = n;
+  const g = G.guarda('t', { sleep: async (ms) => { esperas.push(ms); }, now: () => agora });
+  await g.antesDeAbrir();
+  agora = new Date(n.getTime() + 30_000);
+  await g.antesDeAbrir();
+  assert.ok(esperas.length === 1 && esperas[0] >= 60_000 && esperas[0] <= 150_000, `esperou o intervalo (${esperas})`);
+  assert.equal(g.erro('timeout de rede'), false, 'erro comum não pausa');
+  assert.equal(g.erro('sessão do Instagram recusada (o Instagram pediu uma verificação na conta)'), true);
+  await assert.rejects(g.antesDeAbrir(), /protegida: conta pausada/);
+  assert.equal(G.statusConta('t', agora).pausadoAte, new Date(agora.getTime() + 48 * 3_600_000).toISOString());
   const { withCursor } = await import('./ig-browser');
   const b = new URLSearchParams(withCursor(new URLSearchParams({ doc_id: '1', variables: JSON.stringify({ username: 'x', first: 12, after: null }) }).toString(), 'CUR'));
   assert.deepEqual(JSON.parse(b.get('variables')!), { username: 'x', first: 12, after: 'CUR' });
   assert.equal(b.get('doc_id'), '1');
 });
 
-await t('Coleta longa: lote continua do cursor, guarda posts e views no acervo, termina na data e pausa a conta se o Instagram pedir verificação', async () => {
+await t('Conta pausada: a coleta normal nem abre o navegador e cai nos 6 posts públicos, avisando', async () => {
+  process.env.INSTAGRAM_SESSIONID = '42%3Aabc%3A9';
+  try {
+    const G = await import('./ig-conta');
+    G.writeConta('t', { aberturas: [], lotes: [], pausadoAte: new Date(Date.now() + 3_600_000).toISOString(), ultimoErro: 'verificação' });
+    const c = S.saveCompetitor('t', { name: 'Pausada', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/natgeo/', handle: 'natgeo' }] }).data;
+    const run = loggedRunner();
+    const r = await collectCompetitor('t', c.id, { runner: run, noMedia: true, conta: G.guarda('t') });
+    assert.ok(r[0].ok && r[0].source === 'instagram-public', JSON.stringify(r[0]));
+    assert.match(r[0].errors.join(' '), /protegida: conta pausada/);
+    assert.ok(!run.calls.some((x) => x.startsWith('igBrowse')), 'não abriu o perfil logado');
+  } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
+await t('Coleta longa: lote continua do cursor, guarda posts e views no acervo, termina na data; alerta pausa a conta', async () => {
   const A = await import('./acervo');
+  const G = await import('./ig-conta');
   process.env.INSTAGRAM_SESSIONID = '42%3Aabc%3A9';
   try {
     const c = S.saveCompetitor('t', { name: 'Acervo', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/concorrente/', handle: 'concorrente' }] }).data;
     const all = fakeFeed(80).slice(1); // sem o fixado; 1 post a cada 2 dias
-    const calls: { cursor: string | null }[] = [];
+    const calls: { cursor: string | null; perfilDir?: string }[] = [];
     const run = fixtureRunner();
     run.igBackfill = async (_h, _c, o) => {
-      calls.push({ cursor: o.cursor });
+      calls.push({ cursor: o.cursor, perfilDir: o.perfilDir });
       const start = Number(o.cursor ?? 0);
       let end = start;
       for (let p = 0; p < o.pages && end < all.length && !o.stop(all.slice(start, end)); p++) end += 12;
       const tl = all.slice(start, end).map(({ play_count, ...m }) => m);
       return { user: null, timeline: tl, clips: all.slice(start, end).filter((m) => m.media_type === 2).map((m) => ({ code: m.code, play_count: m.play_count })), cursor: end < all.length ? String(end) : null, hasNext: end < all.length, clipsCursor: null, errors: [] };
     };
+    const livre = { perfilDir: 'perfil-fixo', antesDeAbrir: async () => {}, erro: () => false, ok: () => {} };
     let t0 = now.getTime();
-    const lote = (alvoDias?: number) => { t0 += 3 * 3_600_000; return A.runLote('t', c.id, { runner: run, now: new Date(t0), noMedia: true, alvoDias, ignorarLimites: true }); };
+    const lote = (alvoDias?: number) => { t0 += 5 * 3_600_000; return A.runLote('t', c.id, { runner: run, now: new Date(t0), noMedia: true, alvoDias, conta: livre }); };
     const r1 = await lote(180);
-    assert.equal(r1.posts, 60, '1º lote: 5 páginas de 12');
-    assert.ok(!r1.terminado);
+    assert.equal(r1.posts, 36, '1º lote: 3 páginas de 12');
+    assert.equal(calls[0].perfilDir, 'perfil-fixo', 'usa o perfil fixo do navegador');
     const r2 = await lote();
-    assert.equal(calls[1].cursor, '60', 'continua de onde parou');
-    assert.ok(r2.terminado, 'acabou o perfil antes dos 180 dias');
-    assert.equal(r2.posts, 79, 'perfil inteiro, sem repetir');
+    assert.equal(calls[1].cursor, '36', 'continua de onde parou');
+    assert.ok(!r2.terminado);
+    const r3 = await lote();
+    assert.ok(r3.terminado, 'acabou o perfil antes dos 180 dias');
+    assert.equal(r3.posts, 79, 'perfil inteiro, sem repetir');
     const ac = S.getAcervo('t', c.id, 'instagram-concorrente')!;
     assert.equal(ac.items.filter((i) => i.type === 'reel').every((i) => i.metrics.views != null), true, 'views da aba Reels');
     assert.ok(ac.items.every((i) => i.seenAt), 'todo post do acervo diz quando foi medido');
-    const view = S.listSnapshotsForView('t', c.id);
-    assert.equal(view.snapshots.length, 0, 'sem coleta normal ainda: a tela mostra o acervo quando houver coleta');
     const { findItem } = await import('../fichas/lib');
     assert.equal(findItem('t', c.id, `instagram:${ac.items.at(-1)!.id}`).snap.file, 'acervo/instagram-concorrente.json', 'dá para analisar um post que só está no acervo');
-    assert.deepEqual(await lote(365), { novos: 0, posts: 79, ate: r2.ate, terminado: true, erros: [] }, 'perfil acabou: nem abre o navegador');
-    assert.equal(calls.length, 2);
+    assert.deepEqual(await lote(365), { novos: 0, posts: 79, ate: r3.ate, terminado: true, erros: [] }, 'perfil acabou: nem abre o navegador');
+    assert.equal(calls.length, 3);
     run.igBackfill = async () => { throw new Error(`sessão do Instagram recusada (o Instagram pediu uma verificação na conta)`); };
     const c2 = S.saveCompetitor('t', { name: 'Acervo 2', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/outro/', handle: 'outro' }] }).data;
-    await assert.rejects(A.runLote('t', c2.id, { runner: run, now: new Date(t0), noMedia: true, ignorarLimites: true }), /verificação/);
-    const st = A.status('t', c.id, new Date(t0));
-    assert.ok(!st.conta.ok && /pausada/.test(st.conta.motivo!), 'conta pausada por 24 h');
+    const pausas: string[] = [];
+    await assert.rejects(A.runLote('t', c2.id, { runner: run, now: new Date(t0), noMedia: true, conta: { ...livre, erro: (m) => { pausas.push(m); return G.ehAlerta(m); } } }), /verificação/);
+    assert.equal(pausas.length, 1, 'avisou a guarda (que pausa a conta)');
   } finally { process.env.INSTAGRAM_SESSIONID = ''; }
 });
 

@@ -5,10 +5,11 @@
 //   aba Reels       → fetch__XDTUserDict.clips_connection (views dos reels)
 // Coleta longa (igBackfill): em vez de rolar tudo desde o topo, repete a consulta que o site usa para a próxima página,
 // de dentro da própria página, a partir do cursor onde o lote anterior parou.
+import { mkdirSync } from 'node:fs';
+import type { BrowserContext, Page } from 'playwright';
 import type { IgBackfillOpts, IgBackfillResult, IgBrowseOpts, IgBrowseResult } from './types';
 
 type Any = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 
 export interface PageInfo { end: string | null; hasNext: boolean }
 export interface IgHarvest {
@@ -72,20 +73,31 @@ export function withCursor(body: string, after: string | null): string {
 export const IG_CHALLENGE = 'o Instagram pediu uma verificação na conta';
 type Template = { url: string; body: string; headers: Record<string, string> };
 
-/** navegador sem tela logado, com as respostas do site alimentando `acc` e os modelos das consultas da grade e da aba Reels */
-async function session(handle: string, cookies: { name: string; value: string }[], pause: number) {
+/**
+ * navegador sem tela logado, com as respostas do site alimentando `acc` e os modelos das consultas da grade e da aba Reels.
+ * Com `perfilDir`, usa sempre o MESMO perfil de navegador (cookies, armazenamento, cache): para o Instagram é o mesmo
+ * aparelho voltando, não um aparelho novo a cada coleta. Identifica-se como o Chrome instalado (versão real, sem "Headless").
+ */
+async function session(handle: string, cookies: { name: string; value: string }[], pause: number, perfilDir?: string) {
   const { chromium } = await import('playwright');
-  let browser: Awaited<ReturnType<typeof chromium.launch>> | null = null;
+  type Ctx = Awaited<ReturnType<typeof chromium.launchPersistentContext>>;
+  const base = { headless: true, locale: 'pt-BR', timezoneId: 'America/Sao_Paulo', viewport: { width: 1366, height: 860 }, args: ['--disable-blink-features=AutomationControlled'] };
+  let ctx: Ctx | null = null;
   let lastErr: unknown;
+  if (perfilDir) mkdirSync(perfilDir, { recursive: true });
   for (const channel of ['chrome', 'msedge', undefined]) {
-    try { browser = await chromium.launch({ channel, headless: true }); break; } catch (e) { lastErr = e; }
+    try {
+      ctx = perfilDir ? await chromium.launchPersistentContext(perfilDir, { ...base, channel }) : await (await chromium.launch({ channel, headless: true, args: base.args })).newContext({ locale: base.locale, timezoneId: base.timezoneId, viewport: base.viewport });
+      break;
+    } catch (e) { lastErr = e; }
   }
-  if (!browser) throw new Error(`não achei Chrome nem Edge para a coleta logada do Instagram (${String((lastErr as Error)?.message ?? lastErr).split('\n')[0]})`);
+  if (!ctx) throw new Error(`não achei Chrome nem Edge para a coleta logada do Instagram (${String((lastErr as Error)?.message ?? lastErr).split('\n')[0]})`);
   const acc: IgHarvest = { user: null, timeline: new Map(), clips: new Map() };
   const tpl: { timeline?: Template; clips?: Template } = {};
-  const ctx = await browser.newContext({ userAgent: UA, locale: 'pt-BR', viewport: { width: 1280, height: 900 } });
+  // os cookies salvos em Configurações mandam (sessão nova depois de uma verificação); os que o site criou ficam
   await ctx.addCookies(cookies.map((c) => ({ ...c, domain: '.instagram.com', path: '/', secure: true, httpOnly: c.name === 'sessionid' })));
-  const page = await ctx.newPage();
+  const page = ctx.pages()[0] ?? await ctx.newPage();
+  await comoChromeComum(ctx, page);
   page.on('response', async (r) => {
     const u = r.url();
     if (!/instagram\.com\/(api\/graphql|graphql\/query|api\/v1\/)/.test(u)) return;
@@ -99,7 +111,7 @@ async function session(handle: string, cookies: { name: string; value: string }[
   });
   const open = async (path: string) => {
     await page.goto(`https://www.instagram.com/${handle}/${path}`, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-    await page.waitForTimeout(pause + 1500);
+    await page.waitForTimeout(pause + 1500 + Math.round(Math.random() * pause));
     // login, desafio ou "confirme seu contato" (accounts/update_risky_contactpoint): parar na hora, sem insistir
     if (/\/accounts\/|\/challenge\/|challenge_context|__coig_challenge/.test(page.url())) throw new Error(`sessão do Instagram recusada (${/contactpoint|challenge/.test(page.url()) ? IG_CHALLENGE : 'expirou'}): abra o Instagram com a conta secundária no navegador, resolva o aviso e salve os cookies de novo em Configurações`);
     // o começo da grade já vem no HTML
@@ -108,7 +120,11 @@ async function session(handle: string, cookies: { name: string; value: string }[
     }
   };
   const wait = (ms: number) => page.waitForTimeout(ms);
-  const wheel = () => page.mouse.wheel(0, 3500);
+  /** rolagem de gente: distância variada, com o mouse em cima da grade */
+  const wheel = async () => {
+    await page.mouse.move(400 + Math.round(Math.random() * 500), 300 + Math.round(Math.random() * 300), { steps: 5 });
+    await page.mouse.wheel(0, 1600 + Math.round(Math.random() * 1600));
+  };
   /** repete a consulta `k` a partir de `after`, de dentro da página (mesmos cookies e cabeçalhos do site) */
   const replay = async (k: 'timeline' | 'clips', after: string | null): Promise<PageInfo | undefined> => {
     const t = tpl[k];
@@ -126,13 +142,33 @@ async function session(handle: string, cookies: { name: string; value: string }[
     if (!info) throw new Error(`resposta sem a ${k === 'timeline' ? 'grade' : 'aba Reels'} (o Instagram pode ter mudado o site)`);
     return info;
   };
-  return { acc, tpl, open, wait, wheel, replay, close: () => browser!.close() };
+  return { acc, tpl, open, wait, wheel, replay, close: async () => { const b = ctx!.browser(); await ctx!.close(); if (b && !perfilDir) await b.close(); } };
+}
+
+/** o Chrome sem tela se apresenta como "HeadlessChrome": troca pela identificação do Chrome comum da MESMA versão */
+async function comoChromeComum(ctx: BrowserContext, page: Page) {
+  try {
+    const ua0 = await page.evaluate(() => navigator.userAgent);
+    const ver = ua0.match(/(?:Headless)?Chrome\/([\d.]+)/)?.[1];
+    if (!ver || !/Headless/.test(ua0)) return;
+    const major = ver.split('.')[0];
+    const cdp = await ctx.newCDPSession(page);
+    await cdp.send('Emulation.setUserAgentOverride', {
+      userAgent: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ver} Safari/537.36`,
+      acceptLanguage: 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7', platform: 'Win32',
+      userAgentMetadata: {
+        brands: [{ brand: 'Google Chrome', version: major }, { brand: 'Chromium', version: major }, { brand: 'Not?A_Brand', version: '99' }],
+        fullVersionList: [{ brand: 'Google Chrome', version: ver }, { brand: 'Chromium', version: ver }, { brand: 'Not?A_Brand', version: '99.0.0.0' }],
+        fullVersion: ver, platform: 'Windows', platformVersion: '10.0.0', architecture: 'x86', bitness: '64', model: '', mobile: false,
+      },
+    });
+  } catch { /* sem CDP (Edge antigo): segue com a identificação padrão */ }
 }
 
 export async function igBrowse(handle: string, cookies: { name: string; value: string }[], opt: IgBrowseOpts): Promise<IgBrowseResult> {
-  const pause = opt.pauseMs ?? 2500;
-  const maxScrolls = opt.maxScrolls ?? 25;
-  const s = await session(handle, cookies, pause);
+  const pause = opt.pauseMs ?? 4000;
+  const maxScrolls = opt.maxScrolls ?? 15;
+  const s = await session(handle, cookies, pause, opt.perfilDir);
   const errors: string[] = [];
   try {
     /** rola até `stop`, até o teto, ou até 3 rolagens seguidas sem nada novo (fim do perfil) */
@@ -141,7 +177,7 @@ export async function igBrowse(handle: string, cookies: { name: string; value: s
       for (let i = 0; i < maxScrolls && !stop(); i++) {
         const before = size();
         await s.wheel();
-        await s.wait(pause + Math.round(Math.random() * 800));
+        await s.wait(pause + Math.round(Math.random() * pause));
         idle = size() === before ? idle + 1 : 0;
         if (idle >= 3) return;
         if (i === maxScrolls - 1) errors.push(`${what}: parou no teto de ${maxScrolls} rolagens`);
@@ -167,9 +203,9 @@ export async function igBrowse(handle: string, cookies: { name: string; value: s
  * a partir do `clipsCursor`. Para antes se `stop` disser que já chegou na data alvo.
  */
 export async function igBackfill(handle: string, cookies: { name: string; value: string }[], opt: IgBackfillOpts): Promise<IgBackfillResult> {
-  const pause = opt.pauseMs ?? 6000;
+  const pause = opt.pauseMs ?? 12_000;
   const jitter = () => pause + Math.round(Math.random() * pause);
-  const s = await session(handle, cookies, 2500);
+  const s = await session(handle, cookies, 4000, opt.perfilDir);
   const errors: string[] = [];
   try {
     await s.open('');

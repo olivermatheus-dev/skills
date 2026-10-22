@@ -32,6 +32,8 @@ export interface IgBrowseOpts {
   reels: (timeline: IgMedia[]) => string[];
   maxScrolls?: number;
   pauseMs?: number;
+  /** perfil fixo do navegador (o mesmo "aparelho" em toda coleta) */
+  perfilDir?: string;
 }
 /** timeline: posts da grade (formato da API v1: code, taken_at, media_type, caption…) · clips: itens da aba Reels (com play_count) */
 export interface IgBrowseResult { user: IgMedia | null; timeline: IgMedia[]; clips: IgMedia[]; errors: string[] }
@@ -48,6 +50,7 @@ export interface IgBackfillOpts {
   clips: boolean;
   /** com os posts deste lote: já chegou na data alvo? */
   stop: (timeline: IgMedia[]) => boolean;
+  perfilDir?: string;
 }
 export interface IgBackfillResult extends IgBrowseResult { cursor: string | null; hasNext: boolean; clipsCursor: string | null }
 
@@ -79,11 +82,21 @@ export const IG_COOKIES = ['csrftoken', 'datr', 'ds_user_id', 'ig_did', 'mid', '
 export const igCookieKey = (name: string) => (name === 'sessionid' ? 'INSTAGRAM_SESSIONID' : `INSTAGRAM_COOKIE_${name.toUpperCase()}`);
 export const DEFAULT_IG: IgOptions = { modo: 'quantidade', quantidade: 24, dias: 30, conteudo: 'reels' };
 
+export interface IgGuard {
+  perfilDir: string;
+  antesDeAbrir(tipo?: 'perfil' | 'lote'): Promise<void>;
+  /** true = era alerta do Instagram e a conta foi pausada */
+  erro(msg: string): boolean;
+  ok(): void;
+}
+
 export interface AdapterCtx {
   runner: Runner;
   maxItems: number;
   /** opções do Instagram logado (sem elas: padrão de coleta-config) */
   instagram?: IgOptions;
+  /** guarda da conta secundária do Instagram (tools/intel/ig-conta.ts): intervalo, teto diário e pausa após alerta */
+  conta?: IgGuard;
   /** lê só a chave pedida do process.env / .env */
   env: (key: string) => string | undefined;
   now: Date;

@@ -197,7 +197,11 @@ on('POST', '/api/projects/:slug/weekly', async (p) => {
 // opções de coleta do projeto (intel/coleta.json): Instagram logado por quantidade ou período, só reels ou tudo
 const coletaView = async (slug: string, cfg?: { instagram: unknown }) => {
   const C = await import('../../tools/intel/coleta-config');
-  return { ...(cfg ?? C.readColetaConfig(slug)), sessao: K.listSecrets(slug).find((s) => s.key === 'INSTAGRAM_SESSIONID')?.active ?? null };
+  const G = (await import('../../tools/intel/ig-conta')).statusConta(slug);
+  return {
+    ...(cfg ?? C.readColetaConfig(slug)), sessao: K.listSecrets(slug).find((s) => s.key === 'INSTAGRAM_SESSIONID')?.active ?? null,
+    conta: { ok: G.perfil.ok, motivo: G.perfil.motivo, liberaEm: G.perfil.liberaEm, aberturas24h: G.aberturas24h, aberturasPorDia: G.regras.aberturasPorDia, pausadoAte: G.pausadoAte },
+  };
 };
 on('GET', '/api/projects/:slug/coleta-config', (p) => coletaView(p.slug));
 on('PUT', '/api/projects/:slug/coleta-config', async (p, b) => coletaView(p.slug, (await import('../../tools/intel/coleta-config')).saveColetaConfig(p.slug, b ?? {})));

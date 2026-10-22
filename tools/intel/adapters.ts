@@ -222,12 +222,21 @@ async function instagramViaLogin(handle: string, url: string, ctx: AdapterCtx, s
   const o = ctx.instagram ?? DEFAULT_IG;
   const pauseRaw = ctx.env('INTEL_IG_PAUSE_MS');
   const pick = (tl: Any[]) => pickLoggedItems(tl, o, ctx.now);
-  const res = await ctx.runner.igBrowse(handle, igCookieList(ctx.env, session), {
-    done: (tl) => pick(tl).done,
-    reels: (tl) => pick(tl).items.filter((m) => m.media_type === 2).map((m) => String(m.code)),
-    maxScrolls: o.modo === 'periodo' ? 40 : 25,
-    pauseMs: pauseRaw ? Number(pauseRaw) : 2500,
-  });
+  await ctx.conta?.antesDeAbrir(); // espera o intervalo desde o último perfil; lança se a conta estiver protegida
+  let res;
+  try {
+    res = await ctx.runner.igBrowse(handle, igCookieList(ctx.env, session), {
+      done: (tl) => pick(tl).done,
+      reels: (tl) => pick(tl).items.filter((m) => m.media_type === 2).map((m) => String(m.code)),
+      maxScrolls: o.modo === 'periodo' ? 30 : 15,
+      pauseMs: pauseRaw ? Number(pauseRaw) : 4000,
+      perfilDir: ctx.conta?.perfilDir,
+    });
+  } catch (e) {
+    if (ctx.conta?.erro(msg(e))) throw new Error(`${msg(e)} → conta pausada por 48 h para proteger`);
+    throw e;
+  }
+  ctx.conta?.ok();
   if (!res.user && !res.timeline.length) throw new Error('o perfil não carregou com a sessão (privado, inexistente ou sessão recusada)');
   const views = new Map(res.clips.map((c) => [String(c.code), c]));
   const media = pick(res.timeline).items.map((m) => {

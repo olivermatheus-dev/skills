@@ -40,8 +40,14 @@ export default function IgColetaPanel({ slug }: { slug: string }) {
         </span>
       </div>
       <p className="mt-1.5 text-[11px] text-muted-foreground">
-        {o.modo === 'periodo' ? `Tudo dos últimos ${o.dias} dias` : `${o.quantidade} mais recentes`}{o.conteudo === 'reels' ? ' (só reels e vídeos)' : ' (fotos, carrosséis e reels)'} por perfil, com a conta secundária logada. Se a sessão cair, usa o acesso público (6 posts) e avisa no estado do perfil.
+        {o.modo === 'periodo' ? `Tudo dos últimos ${o.dias} dias` : `${o.quantidade} mais recentes`}{o.conteudo === 'reels' ? ' (só reels e vídeos)' : ' (fotos, carrosséis e reels)'} por perfil, com a conta secundária logada, devagar: 1,5–3 min entre um perfil e outro. Se a sessão cair, usa o acesso público (6 posts) e avisa no estado do perfil.
       </p>
+      {d.conta && (
+        <p className={cx('mt-1 text-[11px]', d.conta.ok ? 'text-muted-foreground' : 'text-warning-ink')}>
+          Conta: {d.conta.aberturas24h} de {d.conta.aberturasPorDia} perfis abertos nas últimas 24 h
+          {!d.conta.ok && <> · {d.conta.motivo}{d.conta.liberaEm ? `; libera ${new Date(d.conta.liberaEm).toLocaleString('pt-BR')}` : ''} (até lá, 6 posts públicos)</>}
+        </p>
+      )}
     </section>
   );
 }

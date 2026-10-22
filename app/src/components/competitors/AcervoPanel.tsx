@@ -56,7 +56,7 @@ export default function AcervoPanel({ slug, id }: { slug: string; id: string }) 
       </div>
       {a && <div className="mt-2 h-1 bg-muted rounded-full overflow-hidden"><div className={cx('h-full transition-all', terminado ? 'bg-success' : 'bg-primary')} style={{ width: `${Math.max(3, pct)}%` }} /></div>}
       <p className="mt-1.5 text-[11px] text-muted-foreground">
-        Lotes de até {s.conta.limites.paginas * 12} posts que continuam de onde o anterior parou. Para proteger a conta secundária: até {s.conta.limites.lotesPorDia} lotes por dia ({s.conta.lotes24h} nas últimas 24 h), 2 h entre lotes, e qualquer aviso do Instagram pausa tudo por 24 h.
+        Lotes de até {s.conta.limites.paginas * 12} posts que continuam de onde o anterior parou, devagar (12–24 s entre páginas). Para proteger a conta secundária: até {s.conta.limites.lotesPorDia} lotes por dia ({s.conta.lotes24h} nas últimas 24 h), {Math.round(s.conta.limites.intervaloMs / 3_600_000)} h entre lotes, só das {s.conta.limites.horario[0]}h às {s.conta.limites.horario[1]}h, e qualquer aviso do Instagram pausa tudo por 48 h.
         {ultimo?.erro && <span className="text-warning-ink"> Último lote: {ultimo.erro}</span>}
       </p>
     </section>

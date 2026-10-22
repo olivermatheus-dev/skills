@@ -10,7 +10,8 @@ import { env } from './env';
 import { keyFor } from './keys';
 import { attachMedia } from './media';
 import { realRunner } from './runner';
-import type { Adapter, CollectResult, IgOptions, Runner, SnapshotDraft } from './types';
+import type { Adapter, CollectResult, IgGuard, IgOptions, Runner, SnapshotDraft } from './types';
+import { guarda } from './ig-conta';
 
 export type { CollectResult } from './types';
 
@@ -20,6 +21,8 @@ export interface CollectOptions {
   maxItems?: number;
   /** Instagram logado: sobrepõe o intel/coleta.json do projeto */
   instagram?: Partial<IgOptions>;
+  /** guarda da conta do Instagram (padrão: a do projeto; nos testes com runner, nenhuma) */
+  conta?: IgGuard;
   /** testes/demonstração: troca rede e processos por fixtures */
   runner?: Runner;
   adapters?: Record<string, Adapter>;
@@ -72,6 +75,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
   const adapters = opt.adapters ?? ADAPTERS;
   const maxItems = Math.max(1, Math.min(200, opt.maxItems ?? 30));
   const instagram = cleanIg({ ...readColetaConfig(slug).instagram, ...(opt.instagram ?? {}) });
+  const conta = opt.conta ?? (opt.runner ? undefined : guarda(slug));
   const compDir = join(S.ROOT, P.competitor(slug, id));
   // perfis sem coletor (Facebook, LinkedIn, X, lojas) são só links de referência: não entram na coleta nem viram erro
   const profiles = comp.profiles.filter((p) => (opt.platforms?.length ? opt.platforms.includes(p.platform) : !!adapters[p.platform]));
@@ -87,7 +91,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
     if (!adapter) { res.errors.push(`coleta automática de ${p.platform} ainda não existe (por enquanto: YouTube, TikTok, Instagram e site)`); return res; }
     let snap: SnapshotDraft;
     try {
-      snap = await adapter.collect(p, { runner, maxItems, instagram, env: (k: string) => env(k, slug), now: opt.now ?? new Date() });
+      snap = await adapter.collect(p, { runner, maxItems, instagram, conta, env: (k: string) => env(k, slug), now: opt.now ?? new Date() });
     } catch (e) {
       res.errors.push(String((e as Error)?.message ?? e));
       return res;

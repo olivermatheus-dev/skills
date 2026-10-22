@@ -145,9 +145,13 @@ export interface IgOptions { modo: 'quantidade' | 'periodo'; quantidade: number;
 export interface AcervoInfo {
   temInstagram: boolean; handle: string | null; sessao: boolean;
   acervo: { alvoDias: number; maisAntigo: string | null; terminado: boolean; posts: number; updated: string; lotes: { at: string; posts: number; novos: number; ate?: string | null; erro?: string | null }[] } | null;
-  conta: { ok: boolean; motivo: string | null; liberaEm: string | null; lotes24h: number; restamHoje?: number; limites: { lotesPorDia: number; intervaloMs: number; paginas: number } };
+  conta: { ok: boolean; motivo: string | null; liberaEm: string | null; lotes24h: number; aberturas24h: number; restamHoje?: number; limites: { lotesPorDia: number; intervaloMs: number; paginas: number; aberturasPorDia: number; horario: readonly [number, number] } };
 }
-export interface ColetaConfigInfo { instagram: IgOptions; sessao: 'projeto' | 'geral' | null }
+export interface ColetaConfigInfo {
+  instagram: IgOptions; sessao: 'projeto' | 'geral' | null;
+  /** guarda da conta secundária (tools/intel/ig-conta.ts) */
+  conta?: { ok: boolean; motivo: string | null; liberaEm: string | null; aberturas24h: number; aberturasPorDia: number; pausadoAte: string | null };
+}
 import type { Matrix, CellStatus } from '../../schema/matrix';
 export type { Matrix, CellStatus };
 import type { Gaps, GapTheme } from '../../schema/gaps';
