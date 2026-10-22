@@ -169,6 +169,7 @@ export function ItemCard({ r, media, showPlatform, onMark, onIdea, onOpen, ideaB
           <Metric icon={Heart} v={r.item.metrics.likes} title="Curtidas" />
           <Metric icon={MessageCircle} v={r.item.metrics.comments} title="Comentários" />
           <Metric icon={Send} v={r.item.metrics.shares} title="Envios / compartilhamentos" />
+          {r.item.seenAt && <span className="text-[10px] text-muted-foreground" title="Este post não veio na última coleta: as métricas são da última vez em que ele foi medido (acervo).">medido {fmtDate(r.item.seenAt)}</span>}
         </div>
         {/* 4. engajamento + 5. data relativa */}
         <div className="flex items-center justify-between gap-2 text-xs">

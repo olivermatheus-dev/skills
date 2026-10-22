@@ -141,6 +141,12 @@ export interface WeeklyInfo {
 }
 /** opções de coleta do projeto (tools/intel/coleta-config.ts) + onde está a sessão do Instagram */
 export interface IgOptions { modo: 'quantidade' | 'periodo'; quantidade: number; dias: number; conteudo: 'reels' | 'tudo' }
+/** coleta longa do Instagram em lotes (tools/intel/acervo.ts → status) */
+export interface AcervoInfo {
+  temInstagram: boolean; handle: string | null; sessao: boolean;
+  acervo: { alvoDias: number; maisAntigo: string | null; terminado: boolean; posts: number; updated: string; lotes: { at: string; posts: number; novos: number; ate?: string | null; erro?: string | null }[] } | null;
+  conta: { ok: boolean; motivo: string | null; liberaEm: string | null; lotes24h: number; restamHoje?: number; limites: { lotesPorDia: number; intervaloMs: number; paginas: number } };
+}
 export interface ColetaConfigInfo { instagram: IgOptions; sessao: 'projeto' | 'geral' | null }
 import type { Matrix, CellStatus } from '../../schema/matrix';
 export type { Matrix, CellStatus };
@@ -316,6 +322,8 @@ export const api = {
   deleteMatrixFeature: (slug: string, id: string) => req<Matrix>('DELETE', `${pj(slug)}/matrix/features/${encodeURIComponent(id)}`),
   renameMatrixGroup: (slug: string, from: string, to: string) => req<Matrix>('POST', `${pj(slug)}/matrix/rename-group`, { from, to }),
   referencia: (slug: string) => req<Referencia | null>('GET', `${pj(slug)}/referencia`),
+  acervo: (slug: string, id: string) => req<AcervoInfo>('GET', `${pj(slug)}/competitors/${id}/acervo`),
+  runAcervo: (slug: string, id: string, alvoDias?: number) => bg<{ novos: number; posts: number; ate: string | null; terminado: boolean; erros: string[] }>(slug, `/competitors/${id}/acervo`, { alvoDias }),
   coletaConfig: (slug: string) => req<ColetaConfigInfo>('GET', `${pj(slug)}/coleta-config`),
   saveColetaConfig: (slug: string, instagram: Partial<IgOptions>) => req<ColetaConfigInfo>('PUT', `${pj(slug)}/coleta-config`, { instagram }),
   weekly: (slug: string) => req<WeeklyInfo>('GET', `${pj(slug)}/weekly`),

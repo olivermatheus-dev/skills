@@ -26,6 +26,8 @@ export const P = {
   adsMarks: (s: string, id: string) => join(company(s), 'competitors', id, 'ads', 'marks.json'),
   adsSalvos: (s: string, id: string) => join(company(s), 'competitors', id, 'ads', 'salvos'),
   snapshots: (s: string, id: string) => join(company(s), 'competitors', id, 'snapshots'),
+  /** coleta longa em lotes: acervo/<platform>-<handle>.json (posts antigos + onde continuar) */
+  acervo: (s: string, id: string) => join(company(s), 'competitors', id, 'acervo'),
   /** análise por módulo (analysis/<modulo>.json, pedido.json, notas.json) */
   analysis: (s: string, id: string) => join(company(s), 'competitors', id, 'analysis'),
   /** texto extraído do site pelo script (local, fora do git; refazível) */

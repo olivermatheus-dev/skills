@@ -50,8 +50,35 @@ export const ContentItem = z.object({
   /** cópia local relativa à pasta do concorrente (media/…), fora do git */
   thumbnailLocal: nullish(z.string()),
   metrics: Metrics.prefault({}),
+  /** só no acervo da tela: quando o item foi visto (e medido) pela última vez; ausente = está na última coleta */
+  seenAt: nullish(IsoDateTime),
 });
 export type ContentItem = z.infer<typeof ContentItem>;
+
+/**
+ * companies/<slug>/competitors/<id>/acervo/<platform>-<handle>.json — coleta longa em lotes (1–2 anos para trás).
+ * Os posts antigos ficam aqui (não viram "coleta"), com as métricas do dia do lote; `progresso` diz onde o próximo lote continua.
+ */
+export const AcervoProgress = z.object({
+  /** até quantos dias para trás */
+  alvoDias: z.number().int().positive(),
+  /** posição da grade onde o próximo lote começa (null = do começo) */
+  cursor: nullish(z.string()),
+  clipsCursor: nullish(z.string()),
+  /** data do post mais antigo lido até agora */
+  maisAntigo: nullish(z.string()),
+  terminado: z.boolean().default(false),
+  lotes: z.array(z.object({ at: IsoDateTime, posts: z.number().int().nonnegative(), novos: z.number().int().nonnegative(), ate: nullish(z.string()), erro: nullish(z.string()) })).default([]),
+});
+export const AcervoFile = z.object({
+  schema: z.literal(1).default(1),
+  platform: Platform,
+  profileUrl: Url,
+  updated: IsoDateTime,
+  progresso: AcervoProgress,
+  items: z.array(ContentItem).default([]),
+});
+export type AcervoFile = z.infer<typeof AcervoFile>;
 
 export const ProfileInfo = z.object({
   name: nullish(z.string()),

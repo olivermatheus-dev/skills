@@ -6,7 +6,8 @@ import { join } from 'node:path';
 import YAML from 'yaml';
 import { Ficha, fichaFileName, issuesFicha, type VocabCtx } from '../../schema/ficha';
 import { Vocabulario } from '../../schema/vocabulario';
-import { Snapshot } from '../../schema/competitor';
+import { AcervoFile, Snapshot } from '../../schema/competitor';
+import { acervoItems } from '../intel/acervo-merge';
 
 export const ROOT = process.env.HUB_ROOT ?? process.cwd();
 export const compDir = (slug: string, comp: string) => join(ROOT, 'companies', slug, 'competitors', comp);
@@ -81,14 +82,41 @@ export function readSnapshots(slug: string, comp: string): SnapEntry[] {
     readdirSync(join(sd, d.name)).filter((f) => f.endsWith('.json')).map((f) => ({ key: d.name, file: `snapshots/${d.name}/${f}`, data: Snapshot.parse(readJson(join(sd, d.name, f))) })));
 }
 
-/** a coleta mais recente que traz o item */
+/** acervo da coleta longa (acervo/<key>.json), por perfil */
+export function readAcervos(slug: string, comp: string): Record<string, AcervoFile> {
+  const d = join(compDir(slug, comp), 'acervo');
+  if (!existsSync(d)) return {};
+  return Object.fromEntries(readdirSync(d).filter((f) => f.endsWith('.json')).map((f) => [f.replace(/\.json$/, ''), AcervoFile.parse(readJson(join(d, f)))]));
+}
+
+/** coletas com a última de cada perfil virando o ACERVO (igual à tela: tools/intel/acervo-merge.ts) */
+export function readSnapshotsComAcervo(slug: string, comp: string): SnapEntry[] {
+  const snaps = readSnapshots(slug, comp).sort((a, b) => a.data.collectedAt.localeCompare(b.data.collectedAt));
+  const acervos = readAcervos(slug, comp);
+  const byKey = new Map<string, SnapEntry[]>();
+  for (const s of snaps) byKey.set(s.key, [...(byKey.get(s.key) ?? []), s]);
+  return [...byKey].flatMap(([k, list]) => {
+    const last = list.at(-1)!;
+    return [...list.slice(0, -1), { ...last, data: { ...last.data, items: acervoItems(list.map((s) => s.data), acervos[k]) } }];
+  });
+}
+
+/** a coleta mais recente que traz o item; se ele só existe no acervo da coleta longa, a entrada vem de lá */
 export function findItem(slug: string, comp: string, key: string) {
   const { plataforma, id } = parseKey(key);
-  const hits = readSnapshots(slug, comp).filter((s) => s.data.platform === plataforma && s.data.items.some((i) => i.id === id))
+  const all = readSnapshots(slug, comp);
+  const hits = all.filter((s) => s.data.platform === plataforma && s.data.items.some((i) => i.id === id))
     .sort((a, b) => a.data.collectedAt.localeCompare(b.data.collectedAt));
   const s = hits.at(-1);
-  if (!s) throw new Error(`item ${key} não está em nenhuma coleta de ${comp} (rode npm run collect antes)`);
-  return { snap: s, item: s.data.items.find((i) => i.id === id)!, plataforma, id };
+  if (s) return { snap: s, item: s.data.items.find((i) => i.id === id)!, plataforma, id };
+  for (const [k, a] of Object.entries(readAcervos(slug, comp))) {
+    const item = a.platform === plataforma ? a.items.find((i) => i.id === id) : undefined;
+    if (!item) continue;
+    const perfil = all.filter((x) => x.key === k).sort((x, y) => x.data.collectedAt.localeCompare(y.data.collectedAt)).at(-1);
+    const snap: SnapEntry = { key: k, file: `acervo/${k}.json`, data: Snapshot.parse({ collectedAt: item.seenAt ?? a.updated, platform: a.platform, profileUrl: a.profileUrl, source: 'instagram-login', profile: perfil?.data.profile ?? {}, items: [item] }) };
+    return { snap, item, plataforma, id };
+  }
+  throw new Error(`item ${key} não está em nenhuma coleta de ${comp} (rode npm run collect antes)`);
 }
 
 // ───────────────────────── texto ─────────────────────────

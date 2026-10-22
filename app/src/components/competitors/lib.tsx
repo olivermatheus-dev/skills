@@ -152,7 +152,8 @@ export function buildRows(series: ProfileSeries[], marks: Record<string, ItemMar
         mk, profileKey: g.key, platform, item, outlier, outlierBasis: useViews ? 'views' : 'likes', porSeguidor, porSeguidorBasis: useViews ? 'views' : 'likes',
         interacoes: item.metrics.likes != null || item.metrics.comments != null ? inter : undefined, seguidores: fol,
         engagement: v && (item.metrics.likes != null || item.metrics.comments != null) ? inter / v : undefined,
-        viewsDelta: prev?.metrics.views != null && v != null ? v - prev.metrics.views : undefined,
+        // post do acervo (fora da última coleta): sem "cresceu desde", as métricas são de quando foi visto
+        viewsDelta: !item.seenAt && prev?.metrics.views != null && v != null ? v - prev.metrics.views : undefined,
         prevAt: prev ? g.prev!.data.collectedAt : undefined,
         history: g.all.map((s) => { const x = s.data.items.find((i) => i.id === item.id); return x ? { at: s.data.collectedAt, views: x.metrics.views, likes: x.metrics.likes } : null; }).filter(Boolean) as Row['history'],
         mark: marks[mk],

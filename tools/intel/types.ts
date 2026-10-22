@@ -36,6 +36,21 @@ export interface IgBrowseOpts {
 /** timeline: posts da grade (formato da API v1: code, taken_at, media_type, caption…) · clips: itens da aba Reels (com play_count) */
 export interface IgBrowseResult { user: IgMedia | null; timeline: IgMedia[]; clips: IgMedia[]; errors: string[] }
 
+export interface IgBackfillOpts {
+  /** onde o lote anterior parou (null = do topo do perfil) */
+  cursor: string | null;
+  clipsCursor: string | null;
+  /** páginas de 12 neste lote */
+  pages: number;
+  /** pausa base entre páginas (sorteia até o dobro) */
+  pauseMs?: number;
+  /** buscar as views dos reels na aba Reels */
+  clips: boolean;
+  /** com os posts deste lote: já chegou na data alvo? */
+  stop: (timeline: IgMedia[]) => boolean;
+}
+export interface IgBackfillResult extends IgBrowseResult { cursor: string | null; hasNext: boolean; clipsCursor: string | null }
+
 /** Tudo que toca rede ou processo passa por aqui — nos testes é trocado por fixtures. */
 export interface Runner {
   /** roda o yt-dlp e devolve o stdout (lança Error com mensagem clara se faltar o binário) */
@@ -43,6 +58,8 @@ export interface Runner {
   fetchText(url: string, init?: { method?: string; headers?: Record<string, string>; body?: string; timeoutMs?: number; redirect?: 'follow' | 'manual' }): Promise<FetchedText>;
   /** Instagram logado: abre o perfil num navegador sem tela com os cookies, rola até `done` e lê o que o site carrega */
   igBrowse?(handle: string, cookies: { name: string; value: string }[], opt: IgBrowseOpts): Promise<IgBrowseResult>;
+  /** coleta longa: um lote a partir do cursor */
+  igBackfill?(handle: string, cookies: { name: string; value: string }[], opt: IgBackfillOpts): Promise<IgBackfillResult>;
   /** baixa uma imagem para `absBase` + extensão; devolve a extensão usada ou null se não deu */
   download(url: string, absBase: string, kind: 'avatar' | 'banner' | 'thumb'): Promise<string | null>;
 }

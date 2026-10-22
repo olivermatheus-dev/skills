@@ -249,6 +249,88 @@ await t('Instagram logado: leitura das respostas do site (grade, aba Reels, perf
   assert.equal((acc.user as unknown as { follower_count: number }).follower_count, 5);
 });
 
+await t('Coleta nova sem duração/legenda: vale o da coleta anterior (o preparo da ficha não acha que o post mudou)', async () => {
+  const { carryForward } = await import('./collect');
+  const items = [{ id: 'A', url: 'https://x/A', metrics: { views: 9 } }, { id: 'B', url: 'https://x/B', caption: 'nova', metrics: {} }];
+  carryForward(items as never, [{ items: [{ id: 'A', url: 'https://x/A', durationS: 31, caption: 'leg A', publishedAt: '2026-01-01T00:00:00Z', metrics: { views: 1 } }, { id: 'B', url: 'https://x/B', caption: 'velha', metrics: {} }] as never }]);
+  assert.equal((items[0] as { durationS?: number }).durationS, 31);
+  assert.equal((items[0] as { caption?: string }).caption, 'leg A');
+  assert.equal(items[0].metrics.views, 9, 'métrica é sempre a da coleta nova');
+  assert.equal(items[1].caption, 'nova', 'o que veio na coleta nova manda');
+});
+
+await t('Acervo na tela: post que saiu da última coleta continua (com "medido em"), a última coleta manda nas métricas', async () => {
+  const { acervoItems } = await import('./acervo-merge');
+  const it = (id: string, views: number, pub: string) => ({ id, url: `https://x/${id}`, type: 'reel' as const, publishedAt: pub, metrics: { views } });
+  const out = acervoItems([
+    { collectedAt: '2026-10-01T00:00:00Z', items: [it('velho', 10, '2025-01-01T00:00:00Z'), it('A', 5, '2026-09-30T00:00:00Z')] },
+    { collectedAt: '2026-10-08T00:00:00Z', items: [it('A', 50, '2026-09-30T00:00:00Z')] },
+  ], { items: [{ ...it('lote', 7, '2024-06-01T00:00:00Z'), seenAt: '2026-10-05T00:00:00Z' }] } as never);
+  assert.deepEqual(out.map((i) => i.id), ['A', 'velho', 'lote'], 'mais novo primeiro');
+  assert.equal(out[0].metrics.views, 50);
+  assert.equal(out[0].seenAt, undefined, 'está na última coleta');
+  assert.equal(out[1].seenAt, '2026-10-01T00:00:00Z');
+  assert.equal(out[2].seenAt, '2026-10-05T00:00:00Z');
+});
+
+await t('Coleta longa: limites da conta (3 lotes/24 h, 2 h entre lotes, pausa de 24 h)', async () => {
+  const A = await import('./acervo');
+  const n = new Date('2026-10-22T12:00:00Z');
+  const h = (x: number) => new Date(n.getTime() - x * 3_600_000).toISOString();
+  assert.ok(A.liberacao({ lotes: [] }, n).ok);
+  assert.match(A.liberacao({ lotes: [h(1)] }, n).motivo!, /2 h/);
+  assert.ok(A.liberacao({ lotes: [h(3)] }, n).ok);
+  assert.match(A.liberacao({ lotes: [h(20), h(10), h(3)] }, n).motivo!, /3 lotes/);
+  assert.equal(A.liberacao({ lotes: [h(20), h(10), h(3)] }, n).liberaEm, new Date(Date.parse(h(20)) + 86_400_000).toISOString());
+  assert.match(A.liberacao({ lotes: [], pausadoAte: h(-5), ultimoErro: 'verificação' }, n).motivo!, /pausada.*verificação/);
+  const { withCursor } = await import('./ig-browser');
+  const b = new URLSearchParams(withCursor(new URLSearchParams({ doc_id: '1', variables: JSON.stringify({ username: 'x', first: 12, after: null }) }).toString(), 'CUR'));
+  assert.deepEqual(JSON.parse(b.get('variables')!), { username: 'x', first: 12, after: 'CUR' });
+  assert.equal(b.get('doc_id'), '1');
+});
+
+await t('Coleta longa: lote continua do cursor, guarda posts e views no acervo, termina na data e pausa a conta se o Instagram pedir verificação', async () => {
+  const A = await import('./acervo');
+  process.env.INSTAGRAM_SESSIONID = '42%3Aabc%3A9';
+  try {
+    const c = S.saveCompetitor('t', { name: 'Acervo', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/concorrente/', handle: 'concorrente' }] }).data;
+    const all = fakeFeed(80).slice(1); // sem o fixado; 1 post a cada 2 dias
+    const calls: { cursor: string | null }[] = [];
+    const run = fixtureRunner();
+    run.igBackfill = async (_h, _c, o) => {
+      calls.push({ cursor: o.cursor });
+      const start = Number(o.cursor ?? 0);
+      let end = start;
+      for (let p = 0; p < o.pages && end < all.length && !o.stop(all.slice(start, end)); p++) end += 12;
+      const tl = all.slice(start, end).map(({ play_count, ...m }) => m);
+      return { user: null, timeline: tl, clips: all.slice(start, end).filter((m) => m.media_type === 2).map((m) => ({ code: m.code, play_count: m.play_count })), cursor: end < all.length ? String(end) : null, hasNext: end < all.length, clipsCursor: null, errors: [] };
+    };
+    let t0 = now.getTime();
+    const lote = (alvoDias?: number) => { t0 += 3 * 3_600_000; return A.runLote('t', c.id, { runner: run, now: new Date(t0), noMedia: true, alvoDias, ignorarLimites: true }); };
+    const r1 = await lote(180);
+    assert.equal(r1.posts, 60, '1º lote: 5 páginas de 12');
+    assert.ok(!r1.terminado);
+    const r2 = await lote();
+    assert.equal(calls[1].cursor, '60', 'continua de onde parou');
+    assert.ok(r2.terminado, 'acabou o perfil antes dos 180 dias');
+    assert.equal(r2.posts, 79, 'perfil inteiro, sem repetir');
+    const ac = S.getAcervo('t', c.id, 'instagram-concorrente')!;
+    assert.equal(ac.items.filter((i) => i.type === 'reel').every((i) => i.metrics.views != null), true, 'views da aba Reels');
+    assert.ok(ac.items.every((i) => i.seenAt), 'todo post do acervo diz quando foi medido');
+    const view = S.listSnapshotsForView('t', c.id);
+    assert.equal(view.snapshots.length, 0, 'sem coleta normal ainda: a tela mostra o acervo quando houver coleta');
+    const { findItem } = await import('../fichas/lib');
+    assert.equal(findItem('t', c.id, `instagram:${ac.items.at(-1)!.id}`).snap.file, 'acervo/instagram-concorrente.json', 'dá para analisar um post que só está no acervo');
+    assert.deepEqual(await lote(365), { novos: 0, posts: 79, ate: r2.ate, terminado: true, erros: [] }, 'perfil acabou: nem abre o navegador');
+    assert.equal(calls.length, 2);
+    run.igBackfill = async () => { throw new Error(`sessão do Instagram recusada (o Instagram pediu uma verificação na conta)`); };
+    const c2 = S.saveCompetitor('t', { name: 'Acervo 2', profiles: [{ platform: 'instagram', url: 'https://www.instagram.com/outro/', handle: 'outro' }] }).data;
+    await assert.rejects(A.runLote('t', c2.id, { runner: run, now: new Date(t0), noMedia: true, ignorarLimites: true }), /verificação/);
+    const st = A.status('t', c.id, new Date(t0));
+    assert.ok(!st.conta.ok && /pausada/.test(st.conta.motivo!), 'conta pausada por 24 h');
+  } finally { process.env.INSTAGRAM_SESSIONID = ''; }
+});
+
 await t('Instagram logado: sessão recusada cai no acesso público (6 posts) e avisa', async () => {
   process.env.INSTAGRAM_SESSIONID = 'velho';
   try {

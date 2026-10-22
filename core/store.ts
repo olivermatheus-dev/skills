@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import YAML from 'yaml';
 import { z } from 'zod';
 import {
-  Project, TagsFile, Persona, Competitor, Snapshot, MarksFile, ItemMark, AdsMarks, AdMark, aplicarMarca, marcaVazia, adKey, type AdMarkPatch, Note, Idea, Task,
+  Project, TagsFile, Persona, Competitor, Snapshot, AcervoFile, MarksFile, ItemMark, AdsMarks, AdMark, aplicarMarca, marcaVazia, adKey, type AdMarkPatch, Note, Idea, Task,
   AnalysisResult, AnalysisRequest, AdsSnapshot, AnalysisNotes, ModuleId, MODULES, Review, Brand, PieceMeta,
   Capture, Mockup, MockupBrand, Format, Matrix, EMPTY_MATRIX, Gaps, type CellStatus, company, FormatExample, COMPANIES, FORMATS, P, STATUS,
   splitTaskBody, joinTaskBody, nowStamp, COMMENT_KINDS, type CommentKind,
@@ -15,6 +15,7 @@ import {
 import { parseMd, stringifyMd, parseSimple, stringifySimple } from './frontmatter';
 import { slugify } from './platform';
 import * as PC from '../tools/lib/pecas.mjs';
+import { acervoItems } from '../tools/intel/acervo-merge';
 
 export const ROOT = process.env.HUB_ROOT ?? process.cwd();
 const abs = (p: string) => join(ROOT, p);
@@ -249,8 +250,12 @@ export function listSnapshotsForView(slug: string, compId: string, { full = 2, m
   const all = listSnapshots(slug, compId);
   const byKey = new Map<string, typeof all>();
   for (const s of all) byKey.set(s.key, [...(byKey.get(s.key) ?? []), s]);
+  const acervos = new Map(listAcervos(slug, compId).map((a) => [a.key, a.data]));
   const out: typeof all = [];
-  for (const list of byKey.values()) {
+  for (const [key, list0] of byKey) {
+    // a última coleta vira o ACERVO do perfil: nada some da tela entre coletas (ver acervoItems)
+    const last = list0.at(-1)!;
+    const list = [...list0.slice(0, -1), { ...last, data: { ...last.data, items: acervoItems(list0.map((s) => s.data), acervos.get(key)) } }];
     const keep = list.slice(-max);
     keep.forEach((s, i) => {
       if (i >= keep.length - full) return out.push(s);
@@ -258,6 +263,24 @@ export function listSnapshotsForView(slug: string, compId: string, { full = 2, m
     });
   }
   return { snapshots: out.sort((a, b) => a.data.collectedAt.localeCompare(b.data.collectedAt)), snapshotsTotal: all.length };
+}
+
+// ---------- Acervo (coleta longa em lotes) ----------
+const acervoFile = (slug: string, compId: string, key: string) => join(P.acervo(slug, compId), `${key}.json`);
+export function getAcervo(slug: string, compId: string, key: string): AcervoFile | null {
+  const f = acervoFile(slug, compId, key);
+  return exists(f) ? check(AcervoFile, JSON.parse(read(f)), f) : null;
+}
+export function listAcervos(slug: string, compId: string) {
+  const root = P.acervo(slug, compId);
+  if (!exists(root)) return [];
+  return list(root, /\.json$/).map((f) => { const file = join(root, f); return { key: f.replace(/\.json$/, ''), file, data: check(AcervoFile, JSON.parse(read(file)), file) }; });
+}
+export function saveAcervo(slug: string, compId: string, key: string, data: z.input<typeof AcervoFile>) {
+  const f = acervoFile(slug, compId, key);
+  const v = check(AcervoFile, data, f);
+  write(f, `${JSON.stringify(v, null, 2)}\n`);
+  return v;
 }
 
 // ---------- Marcações ----------
@@ -921,6 +944,7 @@ export function validateAll():{ file: string; issues: string[] }[] {
         }
       });
       tryIt(() => listSnapshots(d, id));
+      tryIt(() => listAcervos(d, id));
       if (exists(P.competitorFile(d, id))) {
         tryIt(() => getAnalysisResults(d, id));
         tryIt(() => getAnalysisNotes(d, id));

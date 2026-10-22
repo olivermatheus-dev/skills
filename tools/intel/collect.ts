@@ -44,6 +44,23 @@ function freeCollectedAt(slug: string, id: string, key: string, iso: string) {
   return new Date(t).toISOString().replace(/\.\d+Z$/, 'Z');
 }
 
+/** campos do CONTEÚDO (não mudam depois de publicado): se a fonte desta coleta não trouxe, vale o da coleta anterior.
+ *  Ex.: a coleta logada do Instagram não traz a duração; sem isto, o preparo da ficha acharia que o post mudou. */
+const STABLE = ['durationS', 'caption', 'title', 'publishedAt'] as const;
+export function carryForward(items: NonNullable<SnapshotDraft['items']>, previous: { items?: SnapshotDraft['items'] }[]) {
+  const known = new Map<string, Partial<Record<(typeof STABLE)[number], unknown>>>();
+  for (const s of previous) for (const it of s.items ?? []) {
+    const k = known.get(it.id) ?? {};
+    for (const f of STABLE) if (it[f] != null && it[f] !== '') k[f] = it[f];
+    known.set(it.id, k);
+  }
+  for (const it of items) {
+    const k = known.get(it.id);
+    if (k) for (const f of STABLE) if ((it[f] == null || it[f] === '') && k[f] != null) (it as Record<string, unknown>)[f] = k[f];
+  }
+  return items;
+}
+
 function useful(s: SnapshotDraft) {
   const p = s.profile ?? {};
   return (s.items?.length ?? 0) > 0 || p.followers != null || !!p.name || !!p.bio;
@@ -77,6 +94,7 @@ export async function collectCompetitor(slug: string, id: string, opt: CollectOp
     }
     if (!useful(snap)) { res.errors.push(...(snap.errors ?? []), 'a plataforma não devolveu dados'); return res; }
     if (opt.source) snap.source = opt.source;
+    carryForward(snap.items ?? [], S.listSnapshots(slug, id).filter((s) => s.key === key).map((s) => s.data));
     if (!opt.noMedia) {
       const m = await attachMedia(snap, key, compDir, runner);
       if (m.failed) res.warnings.push(`${m.failed} imagem(ns) não baixada(s) (a tela usa o link remoto)`);

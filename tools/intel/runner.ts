@@ -86,6 +86,10 @@ export const realRunner: Runner = {
     return (await import('./ig-browser')).igBrowse(handle, cookies, opt);
   },
 
+  async igBackfill(handle, cookies, opt) {
+    return (await import('./ig-browser')).igBackfill(handle, cookies, opt);
+  },
+
   async download(url, absBase) {
     try {
       const r = await fetch(url, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(20_000) });

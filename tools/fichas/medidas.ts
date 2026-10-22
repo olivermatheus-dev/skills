@@ -4,7 +4,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Ficha, FichaMedidas } from '../../schema/ficha';
 import { buildRows, groupSnapshots, withMarketOutlier, type Row } from '../../app/src/components/competitors/lib';
-import { ROOT, findItem, readSnapshots } from './lib';
+import { ROOT, findItem, readSnapshotsComAcervo } from './lib';
 import { novaFichaAnuncio } from './anuncios';
 
 let rowsCache: (Row & { comp: string })[] | null = null;
@@ -13,7 +13,7 @@ export function marketRows(slug: string) {
   const dir = join(ROOT, 'companies', slug, 'competitors');
   const all: (Row & { comp: string })[] = [];
   for (const c of readdirSync(dir).filter((x) => statSync(join(dir, x)).isDirectory())) {
-    const snaps = readSnapshots(slug, c);
+    const snaps = readSnapshotsComAcervo(slug, c);
     all.push(...buildRows([...groupSnapshots(snaps as never).values()], {}, (k) => k.split('-')[0]).map((x) => ({ ...x, comp: c })));
   }
   return (rowsCache = withMarketOutlier(all, (x) => x.comp) as (Row & { comp: string })[]);

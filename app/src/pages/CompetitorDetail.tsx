@@ -22,6 +22,7 @@ import { useFichasResumo } from '../components/competitors/ficha/useFichas';
 import AdsView from '../components/competitors/AdsView';
 import { useColetas, segundosDesde } from '../components/atividade/useColeta';
 import ContentsView from '../components/competitors/ContentsView';
+import AcervoPanel from '../components/competitors/AcervoPanel';
 import RelatoriosSection, { RelatorioDialog, useRelatorioPorItem } from '../components/competitors/relatorios/Relatorios';
 import { useMarketRows } from '../components/competitors/market';
 import { AppContent } from '../components/AppContent';
@@ -328,6 +329,7 @@ function Detalhe() {
         </>} />}
         {view !== 'redes' && view !== 'anuncios' && <AnalysisPanel slug={slug} c={c} area={view} onRun={() => { setRunModo('analise'); setRunOpen(true); }} />}
         {view === 'redes' && <>
+        <AcervoPanel slug={slug} id={c.id} />
 
         {/* perfis: os puxados como abas; os sem coleta só como ícone apagado */}
         <div className="mt-4 flex items-center gap-1 border-b border-border overflow-x-auto">

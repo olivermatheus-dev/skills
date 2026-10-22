@@ -148,6 +148,17 @@ on('POST', '/api/projects/:slug/competitors/:id/collect', async (p, b) => {
     (passo) => collectCompetitor(p.slug, p.id, { platforms: b?.platforms, maxItems: b?.maxItems, onPasso: passo }),
     (r) => { const ok = r.filter((x) => x.ok).length; return { resumo: `${ok}/${r.length} perfis · ${r.reduce((n, x) => n + x.items, 0)} posts`, erro: r.length && !ok ? 'nenhum perfil coletado' : null }; });
 });
+// Coleta longa do Instagram em lotes (tools/intel/acervo.ts): estado e "Continuar acervo" (1 lote, no fundo)
+on('GET', '/api/projects/:slug/competitors/:id/acervo', async (p) => (await import('../../tools/intel/acervo')).status(p.slug, p.id));
+on('POST', '/api/projects/:slug/competitors/:id/acervo', async (p, b) => {
+  const A = await import('../../tools/intel/acervo');
+  slugOk(p);
+  const lib = A.status(p.slug, p.id).conta;
+  if (!lib.ok) throw new Error(`${lib.motivo}; libera ${new Date(lib.liberaEm!).toLocaleString('pt-BR')}`);
+  return AV.emSegundoPlano({ slug: p.slug, tipo: 'coleta', fonte: 'acervo', titulo: `Acervo de ${nomeComp(p.slug, p.id)}`, passo: 'Abrindo o perfil e continuando de onde parou', link: linkComp(p.slug, p.id), ref: p.id },
+    () => A.runLote(p.slug, p.id, { alvoDias: Number(b?.alvoDias) || undefined }),
+    (r) => ({ resumo: `${r.novos} posts novos · até ${r.ate ?? '—'}${r.terminado ? ' · terminado' : ''}` }));
+});
 
 // Análise por módulos: resultados, anotações, pedido (fila da IA) e o módulo `site` (script, roda aqui mesmo)
 on('GET', '/api/projects/:slug/competitors/:id/analysis', (p) => S.getAnalysis(p.slug, p.id));
