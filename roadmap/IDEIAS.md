@@ -34,3 +34,4 @@ Tudo o que o usuário mencionar e ainda não virou tarefa. Formato: data · idei
 - 2026-10-07 · Arquivo por peça com tokens gastos, metadados, observações, status, headline, tema, objetivo → 025
 - 2026-10-07 · Abas de Skills e de Agentes no app (mini pastas, rich text, editar, estilo Notion) → 026
 - 2026-10-07 · Framework/galeria global de tipos de conteúdo e formatos; marcar "estilo X" para o Claude seguir → 027
+- 2026-10-27 · App de vídeo dedicado (repo próprio): timeline nossa, marcar por frame/componente, antes × depois, IA integrada, assets e skills de vídeo; Remotion só como referência; primeiro testar o Remotion → APP-VIDEO.md (ideia, não agora)
