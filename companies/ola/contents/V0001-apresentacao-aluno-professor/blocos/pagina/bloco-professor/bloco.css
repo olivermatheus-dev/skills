@@ -1,0 +1,18 @@
+.ret { position: absolute; left: 40px; width: 1000px; height: 500px; border-radius: 32px; background: var(--dobra-verde-fundo); overflow: hidden; }
+.r1 { top: 50px; }
+.r2 { top: 600px; }
+.tx { position: absolute; left: 56px; right: 56px; top: 52px; color: var(--dobra-verde-titulo); }
+.r2 .tx { text-align: right; }
+.tx .l1 { font-size: 64px; line-height: 1.1; }
+.tx .l2 { font-size: 50px; line-height: 1.18; margin-top: 8px; }
+.tx .pw { display: inline-block; }
+.tx .mk { position: relative; display: inline-block; }
+.tx .mk::after { content: ''; position: absolute; left: -4px; right: -4px; bottom: 2px; height: 14px; border-radius: 7px; background: var(--surface-2); z-index: -1; transform: scaleX(var(--mk, 0)); transform-origin: 0 50%; }
+.tx .mk { z-index: 0; isolation: isolate; }
+.masc { position: absolute; bottom: -10px; width: 360px; height: 280px; object-fit: contain; transform-origin: 50% 90%; }
+.r1 .masc { right: 50px; }
+.r2 .masc { left: 50px; width: 330px; height: 250px; }
+.relo { position: absolute; right: 360px; bottom: 120px; width: 96px; height: 96px; border-radius: 50%; background: var(--surface-2); color: var(--dobra-verde-titulo); display: grid; place-items: center; box-shadow: var(--shadow-sm); opacity: 0; }
+.relo .icon { width: 54px; height: 54px; }
+.bolha { position: absolute; left: 360px; bottom: 170px; width: 120px; height: 96px; border-radius: 40px 40px 40px 10px; background: var(--surface-2); color: var(--primary); display: grid; place-items: center; box-shadow: var(--shadow-md); opacity: 0; transform-origin: 0% 100%; }
+.bolha .icon { width: 56px; height: 56px; fill: var(--primary); }

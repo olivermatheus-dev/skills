@@ -1,0 +1,162 @@
+/* brand.css — GERADO de brand.json pelo kit de marca (app → Contexto e marca → Marca, ou `npm run brand -- <slug>`). Não edite à mão: edite o brand.json. */
+/* brand.css — tokens da marca Olá Espanhol. Fontes: Manual de Identidad Visual (Osney Reymy, 2026; páginas em brand/manual/) + CSS do site ola-espanhol.com.br (:root, lido em 2026-10-26).
+   Hex do manual: rojo #cf3f56 · verde #dae069 · azul #a6d1cc · blanco #fffff0 · negro #3f3f3f. Tons de apoio = os do site (nome original entre parênteses na nota).
+   Regra: mantenha TODOS os nomes abaixo (as skills dependem deles). Troque só os valores. */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;700&display=swap');
+
+:root{
+  /* Cores — papéis */
+  --bg:#FFFFF0; /* blanco do manual = fundo do site (color-fondo): fundo das peças, creme */
+  --surface:#F8F7E6; /* card/bloco sobre o creme (site: color-fondo-suave; manual p. 9) */
+  --surface-2:#FFFFFF; /* card elevado, branco puro (site: color-fondo-elevado) */
+  --text:#3F3F3F; /* negro do manual (site: color-texto): títulos, texto, ícones, ilustrações */
+  --muted:#6B6B66; /* texto secundário pequeno (site: color-texto-suave) */
+  --border:#E9E7D3; /* linha de card e divisória (site: color-linea) */
+  --primary:#CF3F56; /* rojo do manual, principal (site: color-primario): logo, palavra de virada, botão principal, faixa do logo */
+  --primary-strong:#AF2F48; /* vermelho forte (site: color-primario-fuerte): texto/contorno do botão secundário, link, hover */
+  --primary-mid:#F3CFD5; /* site: color-primario-medio */
+  --primary-soft:#FBF0F1; /* site: color-primario-suave */
+  --primary-deep:#6D1A22; /* tom-sobre-tom no vermelho: mascote/supergráfico sobre fundo --primary (medido no manual p. 5) */
+  --on-primary:#FFFFFF; /* texto sobre --primary (site: color-texto-invertido; logo branco do manual é creme #FFFFF0) */
+  --accent:#DAE069; /* verde do manual, principal (site: color-acento): laço do L, preenchimento dos ícones, pílulas, formas. Nunca texto sobre claro */
+  --accent-mid:#BAC42B; /* site: color-acento-medio */
+  --accent-strong:#CACA52; /* verde um tom abaixo: bloco alternado sobre --accent, 'Aa' verde sobre creme (medido no manual p. 7–8) */
+  --accent-deep:#918E33; /* verde escuro (site: color-acento-fuerte): mascote tom-sobre-tom sobre --accent; texto verde legível */
+  --accent-soft:#F8F9E1; /* fundo de tag/realce verde (site: color-acento-suave) */
+  --on-accent:#3F3F3F; /* texto sobre --accent */
+  --support:#A6D1CC; /* azul do manual, apoio (site: color-apoyo): fundos, molduras, linha fina acima da faixa do logo */
+  --support-deep:#4A6B66; /* azul escuro (site: color-apoyo-texto): mascote/ilustração tom-sobre-tom sobre --support; texto azul */
+  --on-support:#3F3F3F; /* texto sobre --support */
+  --bg-alt:#FFFEFA; /* creme quase branco: 2ª cor de fundo do site (seções Método e Dúvidas; color-fondo-alt) */
+  --on-inverse-muted:#D6D5C4; /* texto secundário sobre o escuro (site: color-texto-sobre-oscuro-suave) */
+  --support-soft:#E4F1F0; /* selo azul claro ("Melhor valor"; site: color-info-fondo) */
+  --success:#047857; /* status, só dentro de interface (site: color-exito) */
+  --warning:#854D0E; /* site: color-aviso */
+  --danger:#C0360C; /* site: color-error */
+  --inverse-bg:#2D2D2D; /* fundo escuro = rodapé do site (color-fondo-oscuro). Manual usa #3F3F3F na placa do logo */
+  --on-inverse:#FFFFF0; /* texto/logo sobre o escuro */
+
+  /* Combinações — dobras do site (fundo · título · ênfase · texto · card · botão · elemento) */
+  --dobra-creme-fundo:#FFFFF0; /* dobra "creme" do site: Hero, O que prende a sua fala, Pacotes, Saiba mais */
+  --dobra-creme-titulo:#3F3F3F;
+  --dobra-creme-enfase:#CF3F56;
+  --dobra-creme-texto:#3F3F3F;
+  --dobra-creme-card:#F8F7E6;
+  --dobra-creme-card-titulo:#3F3F3F;
+  --dobra-creme-card-texto:#6B6B66;
+  --dobra-creme-botao:#CF3F56;
+  --dobra-creme-botao-texto:#FFFFFF;
+  --dobra-creme-elemento:#DAE069;
+  --dobra-creme-claro-fundo:#FFFEFA; /* dobra "creme-claro" do site: Por que Olá Espanhol (Método), Dúvidas frequentes */
+  --dobra-creme-claro-titulo:#3F3F3F;
+  --dobra-creme-claro-enfase:#3F3F3F;
+  --dobra-creme-claro-texto:#6B6B66;
+  --dobra-creme-claro-card:#FFFFF0;
+  --dobra-creme-claro-card-titulo:#3F3F3F;
+  --dobra-creme-claro-card-texto:#6B6B66;
+  --dobra-creme-claro-botao:#CF3F56;
+  --dobra-creme-claro-botao-texto:#FFFFFF;
+  --dobra-creme-claro-elemento:#DAE069;
+  --dobra-vermelho-fundo:#CF3F56; /* dobra "vermelho" do site: Sem amarras, CTA final (Pronto para começar a falar?) */
+  --dobra-vermelho-titulo:#FFFFFF;
+  --dobra-vermelho-enfase:#FFFFFF;
+  --dobra-vermelho-texto:#FFFFFF;
+  --dobra-vermelho-card:#FFFFF0;
+  --dobra-vermelho-card-titulo:#3F3F3F;
+  --dobra-vermelho-card-texto:#6B6B66;
+  --dobra-vermelho-botao:#FFFFF0;
+  --dobra-vermelho-botao-texto:#3F3F3F;
+  --dobra-vermelho-elemento:#DAE069;
+  --dobra-azul-fundo:#A6D1CC; /* dobra "azul" do site: Como funciona */
+  --dobra-azul-titulo:#3F3F3F;
+  --dobra-azul-enfase:#4A6B66;
+  --dobra-azul-texto:#3F3F3F;
+  --dobra-azul-card:#FFFFF0;
+  --dobra-azul-card-titulo:#3F3F3F;
+  --dobra-azul-card-texto:#6B6B66;
+  --dobra-azul-botao:#CF3F56;
+  --dobra-azul-botao-texto:#FFFFFF;
+  --dobra-azul-elemento:#4A6B66;
+  --dobra-creme-suave-fundo:#F8F7E6; /* dobra "creme-suave" do site: Conheça alguns dos nossos professores */
+  --dobra-creme-suave-titulo:#3F3F3F;
+  --dobra-creme-suave-enfase:#3F3F3F;
+  --dobra-creme-suave-texto:#6B6B66;
+  --dobra-creme-suave-card:#FFFFFF;
+  --dobra-creme-suave-card-titulo:#3F3F3F;
+  --dobra-creme-suave-card-texto:#6B6B66;
+  --dobra-creme-suave-botao:#AF2F48;
+  --dobra-creme-suave-botao-texto:#AF2F48;
+  --dobra-creme-suave-elemento:#E9E7D3;
+  --dobra-verde-fundo:#DAE069; /* dobra "verde" do site: Bloco Para professores nativos (card verde de raio 32 sobre o creme) */
+  --dobra-verde-titulo:#3F3F3F;
+  --dobra-verde-enfase:#3F3F3F;
+  --dobra-verde-texto:#3F3F3F;
+  --dobra-verde-card:#FFFFF0;
+  --dobra-verde-card-titulo:#3F3F3F;
+  --dobra-verde-card-texto:#3F3F3F;
+  --dobra-verde-botao:#CF3F56;
+  --dobra-verde-botao-texto:#FFFFFF;
+  --dobra-verde-elemento:#CF3F56;
+  --dobra-grafite-fundo:#2D2D2D; /* dobra "grafite" do site: Rodapé */
+  --dobra-grafite-titulo:#DAE069;
+  --dobra-grafite-enfase:#DAE069;
+  --dobra-grafite-texto:#FFFFF0;
+  --dobra-grafite-card:#3F3F3F;
+  --dobra-grafite-card-titulo:#FFFFF0;
+  --dobra-grafite-card-texto:#D6D5C4;
+  --dobra-grafite-botao:#FFFFF0;
+  --dobra-grafite-botao-texto:#3F3F3F;
+  --dobra-grafite-elemento:#DAE069;
+
+  /* Tipografia */
+  --font-heading:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; /* Outfit em tudo (manual + site) */
+  --font-body:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; /* Outfit Regular: blocos de texto */
+  --font-accent:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; /* Outfit ExtraLight (--weight-accent): a parte delicada da frase */
+  --weight-heading:700; /* Bold: títulos de seção, palavra de virada */
+  --weight-body:400;
+  --weight-semibold:600; /* botões e links (site: peso-seminegrita) */
+  --weight-accent:200; /* ExtraLight: abertura do título-herói (site: h1 em 200 + virada em 700) */
+  --tracking-heading:0em; /* site: letter-spacing normal */
+  --leading-heading:1.02; /* site: h1 62,7/61,4 */
+  --case-heading:none; /* frase em caixa normal, nunca caixa alta */
+
+  /* Forma */
+  --radius:24px; /* card (site: radio-grande 1,5rem) */
+  --radius-sm:14px; /* site: radio-medio .875rem */
+  --radius-xl:32px; /* card grande/janela (site: radio-xl 2rem; manual) */
+  --radius-pill:999px; /* botões, tags, pílulas (site: radio-circular) */
+  --border-width:2px; /* contorno de botão e pílula (site) */
+  --shadow-sm:0 1px 3px rgba(63,63,63,.06); /* site: sombra-sm */
+  --shadow-md:0 10px 24px -6px rgba(63,63,63,.1); /* site: sombra-md */
+  --shadow-lg:0 20px 40px -10px rgba(63,63,63,.14); /* site: sombra-lg */
+  --shadow-primary:0 8px 24px -8px rgba(207,63,86,.35); /* sombra colorida do botão principal (site: sombra-color-primario) */
+
+  /* Ícones (kit): lucide, traço 2, linha */
+  --icon-stroke:2;
+  --icon-color:var(--text);
+  --icon-fill:none;
+
+  /* Paleta tonal (kit): escala clara→escura da cor principal (automática) · --on-tone-N = tinta legível sobre o tom */
+  --tone-50:#fff4f4;
+  --tone-100:#fee2e3;
+  --tone-200:#fcc1c4;
+  --tone-300:#f49aa0;
+  --tone-400:#e46e79;
+  --tone-500:#cf3f56;
+  --tone-600:#a81938;
+  --tone-700:#860a28;
+  --tone-800:#660a1d;
+  --tone-900:#470712;
+  --tone-950:#2f0309;
+  --on-tone-50:var(--text);
+  --on-tone-100:var(--text);
+  --on-tone-200:var(--text);
+  --on-tone-300:var(--text);
+  --on-tone-400:var(--text);
+  --on-tone-500:#fff;
+  --on-tone-600:#fff;
+  --on-tone-700:#fff;
+  --on-tone-800:#fff;
+  --on-tone-900:#fff;
+  --on-tone-950:#fff;
+}

@@ -1,0 +1,19 @@
+{
+  "id": "abertura/barra-navegador",
+  "tipo": "abertura",
+  "titulo": "Barra do navegador do manual p. 17 na dobra vermelha: URL digitada, Enter, a barra perde os controles e se parte nos dois cards da escolha",
+  "camada": "palco",
+  "slots": ["url", "aba"],
+  "params": {
+    "favicon": { "padrao": "brand/logo/logo-simbolo-cor.svg", "descricao": "SVG do favicon da aba" },
+    "cards": { "padrao": [[80, 305, 440, 560], [560, 305, 440, 560]], "descricao": "retângulos [x, y, w, h] (palco) dos dois cards em que a barra se parte (os da escolha/dois-cards)" }
+  },
+  "cues": ["entra", "digita", "enter", "divide"],
+  "min_s": 0.8,
+  "elastico": true,
+  "formatos": ["4x5", "9x16"],
+  "sfx_sugeridos": { "digita": "teclado curto", "enter": "tic", "divide": "whoosh fino" },
+  "tokens": ["--dobra-vermelho-card", "--primary", "--on-primary", "--text", "--shadow-lg", "--radius-pill"],
+  "origem": "V0001 ola (2026-10-26); caret e digitação inspirados em library/blocos/cta/navegador",
+  "licenca": "própria"
+}

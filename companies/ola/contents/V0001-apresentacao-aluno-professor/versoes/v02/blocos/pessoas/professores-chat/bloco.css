@@ -1,0 +1,28 @@
+.hd { position: absolute; left: 60px; right: 60px; top: 30px; text-align: center; color: var(--dobra-creme-suave-titulo); }
+.hd .l1 { font-size: 78px; }
+.hd .l2 { font-size: 60px; margin-top: 6px; }
+.pc { position: absolute; top: 300px; width: 290px; height: 390px; border-radius: 28px; background: var(--dobra-creme-suave-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.pc:nth-child(1) { left: 80px; }
+.pc:nth-child(2) { left: 395px; opacity: 0; }
+.pc:nth-child(3) { left: 710px; opacity: 0; }
+.pc .av { left: 75px; top: 40px; width: 140px; height: 140px; font-size: 64px; }
+.pc:nth-child(1) .av { background: var(--accent); }
+.pc:nth-child(2) .av { background: var(--support); }
+.pc:nth-child(3) .av { background: var(--primary-mid); }
+.cin { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.nm { font-size: 42px; font-weight: 700; color: var(--dobra-creme-suave-card-titulo); }
+.pa { font-size: 28px; color: var(--dobra-creme-suave-card-texto); }
+.selo { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: var(--radius-pill); background: var(--support-soft); color: var(--support-deep);
+  font-size: 24px; font-weight: 600; white-space: nowrap; opacity: 0; }
+.selo .icon { width: 24px; height: 24px; }
+.selo i { font-style: normal; }
+.fa { position: absolute; left: 80px; top: 830px; width: 120px; height: 90px; opacity: 0; }
+.bal { position: absolute; background: var(--surface-2); box-shadow: var(--shadow-md); padding: 22px 32px; font-size: 38px; color: var(--text); font-weight: 400; white-space: nowrap; }
+.aluno { right: 170px; top: 820px; border-radius: 34px 34px 8px 34px; opacity: 0; display: flex; align-items: center; gap: 14px; }
+.dots { display: inline-flex; gap: 8px; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--text); display: block; }
+.interr { position: absolute; right: 80px; top: 814px; width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--text); display: grid; place-items: center;
+  font-size: 50px; font-weight: 700; color: var(--text); opacity: 0; }
+.resp { position: absolute; left: 80px; top: 990px; display: flex; align-items: flex-end; gap: 18px; opacity: 0; }
+.resp .mm { width: 130px; height: 100px; object-fit: contain; transform-origin: 50% 80%; }
+.prof { position: relative; border-radius: 34px 34px 34px 8px; }

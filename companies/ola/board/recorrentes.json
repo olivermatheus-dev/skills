@@ -1,0 +1,14 @@
+[
+  {
+    "id": "R-01",
+    "title": "Calendário de conteúdo do mês",
+    "every": "mensal:25",
+    "board": "conteudo",
+    "assignee": "agent:estrategista",
+    "priority": "media",
+    "description": "Montar o calendário do próximo mês com a skill content-ideas e levar ao Oliver para escolher as pautas.",
+    "checklist": ["Ler resultados do mês", "Gerar pautas e calendário", "Portão: Oliver escolhe"],
+    "active": false,
+    "last": ""
+  }
+]

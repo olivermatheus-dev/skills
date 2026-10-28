@@ -1,0 +1,28 @@
+.rot { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-size: 26px; font-weight: 600; letter-spacing: 0.14em; color: var(--dobra-creme-claro-texto); }
+.hd { position: absolute; left: 60px; right: 60px; top: 90px; text-align: center; font-size: 84px; color: var(--dobra-creme-claro-titulo); }
+.cf { position: absolute; width: 450px; height: 400px; border-radius: 28px; background: var(--dobra-creme-claro-card); border: 1px solid var(--border); opacity: 0; }
+.k1 { left: 80px; top: 260px; opacity: 1; }
+.k2 { left: 550px; top: 260px; }
+.k3 { left: 80px; top: 700px; }
+.k4 { left: 550px; top: 700px; }
+.ring { position: absolute; inset: -1px; border-radius: 28px; box-shadow: inset 0 0 0 4px var(--primary); opacity: 0; }
+.ci { position: absolute; inset: 0; }
+.ct { position: absolute; left: 32px; top: 32px; width: 290px; font-size: 40px; line-height: 1.08; font-weight: 700; color: var(--dobra-creme-claro-card-titulo); }
+.cic { position: absolute; right: 30px; top: 28px; width: 86px; height: 86px; object-fit: contain; }
+.cic.lu { border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.cic.lu .icon { width: 46px; height: 46px; }
+.hrs { position: absolute; left: 32px; right: 32px; top: 160px; display: flex; flex-direction: column; gap: 22px; }
+.hr { display: flex; align-items: center; justify-content: space-between; font-size: 32px; color: var(--text); }
+.tg { position: relative; width: 84px; height: 46px; border-radius: var(--radius-pill); border: 3px solid var(--text); background: var(--dobra-creme-claro-card); }
+.tg i { position: absolute; left: 5px; top: 5px; width: 30px; height: 30px; border-radius: 50%; background: var(--text); display: block; }
+.tg .on { position: absolute; inset: 0; border-radius: var(--radius-pill); background: var(--accent); opacity: 0; }
+.pp { left: 50%; top: 220px; transform: translateX(-50%); opacity: 0; }
+.pp .icon { width: 38px; height: 38px; }
+.rs { position: absolute; left: 32px; right: 32px; top: 190px; display: flex; flex-direction: column; gap: 30px; }
+.r { position: relative; width: fit-content; font-size: 38px; color: var(--text); }
+.r i { position: absolute; left: -8px; right: -8px; top: 52%; height: 6px; border-radius: 3px; background: var(--primary-strong); transform-origin: 0 50%; transform: scaleX(0); display: block; }
+.rel { position: absolute; left: 32px; top: 200px; width: 150px; height: 150px; }
+.cal { position: absolute; left: 210px; top: 205px; width: 210px; display: grid; grid-template-columns: repeat(5, 34px); gap: 10px; }
+.cal span { width: 34px; height: 34px; border-radius: 9px; border: 2px solid var(--border); display: block; position: relative; }
+.cal span.dia::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 4px solid var(--primary); opacity: var(--m, 0); }
+.k4 .ct { font-size: 34px; width: 300px; }

@@ -1,0 +1,25 @@
+Plano: 11 cenas · 20 ideias · 20 falas · ≈ 67.1 s (estimado a 2,7 palavras/s) (alvo 66 s) · motivo: a pílula do tempo: pílula --primary com texto branco SemiBold, altura fixa (84 px em 1080), raio pill, ponta direita com espaço para um avatar redondo. É o campo da URL no manual p. 17 e vira a hora do aluno, as aulas pagas do professor e a URL do fim
+  s01  0–2.6       int 2 · mostra      novo:abertura/barra-navegador  — o vídeo abre no lugar onde tudo acontece: o endereço do site digitado 
+  s02  2.6–5.4     int 2 · complementa novo:escolha/dois-cards  — o site tem duas portas e o cursor hesita entre elas: quem assiste se p
+  s03  5.4–12      int 3 · complementa novo:pagina/hero-aluno  — a promessa vira uma aula concreta: um cartão 'Sua próxima aula: quarta
+  s04  12–16.8     int 2 · mostra      novo:escolha/planos  — os planos reais do site (1, 2 ou 3 horas por semana) e o gesto de esco
+  s05  16.8–31     int 3 · complementa novo:agenda/hora-divide  — a hora não encolhe ao se dividir: as pílulas mantêm o mesmo compriment
+  s06  31–36.6     int 2 · complementa novo:pessoas/professores-chat  — nome, país e bandeira mostram que são nativos de verdade (e de países 
+  s07  36.6–38.6   int 1 · contrasta   novo:escolha/dois-cards  — as mesmas duas portas, na mesma posição da abertura: agora o cursor va
+  s08  38.6–45.2   int 3 · contrasta   novo:pagina/bloco-professor  — em vez de o professor correr atrás, quem anda são as pílulas: três aul
+  s09  45.2–55.8   int 2 · mostra      novo:cards/como-funciona-professor  — cada frase vira um gesto que prova o que diz: o cursor liga dois horár
+  s10  55.8–60.5   int 4 · complementa novo:agenda/vira-aula  — a meia hora que sobra no dia do professor é exatamente a meia hora que
+  s11  60.5–67.1   int 1 · complementa novo:cta/fecho-ola  — as duas portas voltam a ser uma só barra: aluno e professor se encontr
+⚠ s01: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s02: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s03: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s04: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s05: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s06: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s07: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s08: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s09: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s10: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+⚠ s11: bloco novo sem style_frame (o storyboard precisa de um quadro estático)
+
+✓ sem bloqueios · 11 aviso(s) para a revisão olhar.

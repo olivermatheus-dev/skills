@@ -1,0 +1,19 @@
+{
+  "id": "cta/fecho-ola",
+  "tipo": "cta",
+  "titulo": "Fechamento: o card do aluno em tela cheia na dobra vermelha sai pela direita enquanto o do professor entra pela esquerda (bloco verde sobre o creme), personagens flutuando e seta em retângulo; o botão abre a dobra vermelha em círculo, a frase final entra com o 'olá' sublinhado, o cursor clica nele, o link nasce do 'olá' num retângulo arredondado e o logo aparece por cima",
+  "camada": "palco",
+  "slots": ["frase1", "frase2", "url"],
+  "params": {
+    "logo": { "padrao": "brand/logo/logo-horizontal-branco-laco-verde.svg", "descricao": "logo do fim (sobre o vermelho)" },
+    "palavra": { "padrao": "olá", "descricao": "palavra da frase2 que é sublinhada, clicada e vira o link" }
+  },
+  "cues": ["entra", "troca", "frase", "clique", "link", "logo"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "troca": "whoosh duplo", "frase": "swoosh de abertura", "clique": "clique", "link": "pop + ding gentil", "logo": "brilho suave" },
+  "tokens": ["--dobra-vermelho-*", "--dobra-verde-*", "--dobra-creme-fundo", "--surface-2", "--primary", "--on-primary", "--shadow-lg"],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

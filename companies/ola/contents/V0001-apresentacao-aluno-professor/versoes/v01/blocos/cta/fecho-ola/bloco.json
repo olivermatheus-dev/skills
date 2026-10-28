@@ -1,0 +1,20 @@
+{
+  "id": "cta/fecho-ola",
+  "tipo": "cta",
+  "titulo": "Fechamento na dobra vermelha (CTA do site + manual p. 17): os dois cards voltam a ser a barra do navegador, a palavra 'olá' vira o logo, a barra vira a pílula da URL e o cursor clica; oló pisca e o blob verde sai da borda",
+  "camada": "palco",
+  "slots": ["frase1", "frase2", "url"],
+  "params": {
+    "logo": { "padrao": "brand/logo/logo-horizontal-branco-laco-verde.svg", "descricao": "logo do fim" },
+    "olo": { "padrao": "brand/logo/logo-simbolo-branco.svg", "descricao": "mascote pequeno que pisca" },
+    "palavra": { "padrao": "olá", "descricao": "palavra da frase2 que vira o logo" }
+  },
+  "cues": ["entra", "junta", "frase", "ola", "clique", "pisca"],
+  "min_s": 3,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "entra": "air", "junta": "whoosh reverso", "frase": "air", "ola": "ding gentil", "clique": "clique" },
+  "tokens": ["--dobra-vermelho-*", "--primary", "--on-primary", "--accent", "--shadow-lg"],
+  "origem": "V0001 ola (2026-10-26)",
+  "licenca": "própria"
+}

@@ -1,0 +1,22 @@
+/* Classes de marca da Olá Espanhol usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+#root { font-family: var(--font-heading); }
+/* ênfase da marca = peso (Outfit Bold), não itálico; a cor vem da dobra (só a creme pinta de vermelho) */
+.acc { font-family: var(--font-heading); font-style: normal; font-weight: 700; color: inherit; letter-spacing: -0.01em; }
+.w.acc { font-size: 1em; }
+.tt { font-family: var(--font-heading); font-weight: 200; line-height: 1.04; letter-spacing: -0.012em; color: var(--text); }
+.tt.bd, .bd { font-weight: 700; }
+.tt.lt, .lt { font-weight: 200; }
+.enf-vermelho .acc { color: var(--dobra-creme-enfase); }
+/* a pílula do tempo (motivo do vídeo): vermelha, texto branco SemiBold, altura fixa */
+.pilula { position: absolute; display: flex; align-items: center; justify-content: center; gap: 14px; height: 84px; padding: 0 34px;
+  border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 38px; white-space: nowrap;
+  box-shadow: var(--shadow-primary); }
+.pilula .icon { width: 36px; height: 36px; }
+.rodape-ilustr { position: absolute; left: 80px; bottom: 6px; font-size: 22px; color: var(--muted); font-weight: 400; letter-spacing: 0.02em; opacity: 0; }
+.k-cursor path { fill: var(--text); stroke: var(--bg); }
+.k-ripple { border-color: var(--accent); }
+.ico-brand { display: block; object-fit: contain; }
+.av { position: absolute; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--text); }
+.av .flag { position: absolute; right: -4px; bottom: -4px; width: 38%; height: 38%; border-radius: 50%; border: 3px solid var(--surface-2); object-fit: cover; }
+/* cada cena só aparece no seu intervalo (o bloco liga a raiz em cena.start; a 1ª cena liga no DOM) */
+.layer[data-inst^="s"] { opacity: 0; }

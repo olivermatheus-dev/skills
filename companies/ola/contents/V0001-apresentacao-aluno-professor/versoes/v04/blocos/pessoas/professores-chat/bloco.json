@@ -1,0 +1,66 @@
+{
+  "id": "pessoas/professores-chat",
+  "tipo": "pessoas",
+  "titulo": "Quatro cards de professor (avatar ilustrado, bandeira, país) caem em cascata na dobra creme-suave; três saem e o 1º vira a videochamada (professor grande, aluno pequeno): o aluno começa em espanhol e o professor ajuda em português",
+  "camada": "palco",
+  "slots": [
+    "titulo1",
+    "titulo2",
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "msg_aluno",
+    "msg_prof"
+  ],
+  "params": {
+    "bandeiras": {
+      "padrao": [
+        "assets/flags/co.svg",
+        "assets/flags/ar.svg",
+        "assets/flags/ar.svg",
+        "assets/flags/mx.svg"
+      ],
+      "descricao": "bandeira de cada professor (p1…p4)"
+    },
+    "rodape": {
+      "padrao": "ilustrativo",
+      "descricao": "texto do rodapé"
+    }
+  },
+  "cues": [
+    "entra",
+    "cards",
+    "video",
+    "bolha1",
+    "bolha2",
+    "sai"
+  ],
+  "min_s": 3,
+  "elastico": true,
+  "formatos": [
+    "4x5"
+  ],
+  "sfx_sugeridos": {
+    "cards": "4 batidas leves",
+    "video": "whoosh + chime de chamada",
+    "bolha1": "pop",
+    "bolha2": "pop suave",
+    "sai": "whoosh reverso"
+  },
+  "tokens": [
+    "--dobra-creme-suave-*",
+    "--dobra-creme-card",
+    "--support-soft",
+    "--accent",
+    "--support",
+    "--primary-mid",
+    "--primary",
+    "--on-primary",
+    "--surface-2",
+    "--shadow-sm",
+    "--shadow-md"
+  ],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

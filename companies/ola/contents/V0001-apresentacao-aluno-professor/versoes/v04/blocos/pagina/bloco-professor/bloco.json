@@ -1,0 +1,47 @@
+{
+  "id": "pagina/bloco-professor",
+  "tipo": "pagina",
+  "titulo": "Dois retângulos verdes (raio 32) sobre o creme: o 1º entra pela esquerda com a frase do professor e o mascote professor (tempo libre ganha marca-texto e relógio), o 2º entra pela direita com a frase do aluno, o mascote aluno e um balão com coração; saem cada um pelo lado oposto",
+  "camada": "palco",
+  "slots": [
+    "titulo1",
+    "titulo2",
+    "texto1",
+    "texto2"
+  ],
+  "params": {
+    "marca": {
+      "padrao": "tiempo libre",
+      "descricao": "trecho de titulo2 que ganha marca-texto no cue livre"
+    }
+  },
+  "cues": [
+    "entra",
+    "ret1",
+    "livre",
+    "ret2",
+    "coracao",
+    "sai"
+  ],
+  "min_s": 3,
+  "elastico": true,
+  "formatos": [
+    "4x5"
+  ],
+  "sfx_sugeridos": {
+    "ret1": "swish",
+    "livre": "tique de relógio",
+    "ret2": "swish",
+    "coracao": "pop + brilho",
+    "sai": "whoosh duplo"
+  },
+  "tokens": [
+    "--dobra-verde-*",
+    "--surface-2",
+    "--primary",
+    "--shadow-sm",
+    "--shadow-md"
+  ],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

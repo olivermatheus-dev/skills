@@ -1,0 +1,64 @@
+{
+  "id": "pessoas/professores-chat",
+  "tipo": "pessoas",
+  "titulo": "Cards de professor (avatar ilustrado, bandeira, país, selo 'Fala português ✓') na dobra creme-suave + mini-chat: a frase do aluno trava em espanhol e o professor responde em português",
+  "camada": "palco",
+  "slots": [
+    "titulo1",
+    "titulo2",
+    "p1",
+    "p2",
+    "p3",
+    "selo",
+    "msg_aluno",
+    "msg_prof"
+  ],
+  "params": {
+    "bandeiras": {
+      "padrao": [
+        "assets/flags/co.svg",
+        "assets/flags/ar.svg",
+        "assets/flags/mx.svg"
+      ],
+      "descricao": "bandeira de cada professor (p1, p2, p3)"
+    },
+    "rodape": {
+      "padrao": "ilustrativo",
+      "descricao": "texto do rodapé"
+    }
+  },
+  "cues": [
+    "entra",
+    "cards",
+    "selo",
+    "trava",
+    "responde",
+    "sai"
+  ],
+  "min_s": 3,
+  "elastico": true,
+  "formatos": [
+    "4x5"
+  ],
+  "sfx_sugeridos": {
+    "cards": "2 pops",
+    "selo": "carimbo suave",
+    "responde": "pop suave",
+    "sai": "whoosh reverso"
+  },
+  "tokens": [
+    "--dobra-creme-suave-*",
+    "--support-soft",
+    "--support-deep",
+    "--accent",
+    "--support",
+    "--primary-mid",
+    "--shadow-sm",
+    "--shadow-md"
+  ],
+  "origem": "V0001 ola (2026-10-26)",
+  "licenca": "própria",
+  "sfx_nao": {
+    "trava": "sem som (pedido do Oliver, v02)"
+  }
+}

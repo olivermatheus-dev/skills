@@ -1,0 +1,12 @@
+{
+  "id": "V0001",
+  "criado": "2026-10-26",
+  "familia": "apresentacao",
+  "title": "Apresentação: aluno e professor (os dois lados da Olá Espanhol)",
+  "kind": "video",
+  "tags": ["apresentacao", "motion"],
+  "notes": {
+    "notas": "Roteiro do Oliver + direção visual por tela em roteiro.md. v1 com voz de rascunho grátis (uma faixa por fala); v2 troca pelas faixas do ElevenLabs (o Oliver gera no site, uma por fala, f01…f20) via fit-vo --dir. Tarefa T-0002."
+  },
+  "updatedAt": "2026-10-26T18:00:00Z"
+}

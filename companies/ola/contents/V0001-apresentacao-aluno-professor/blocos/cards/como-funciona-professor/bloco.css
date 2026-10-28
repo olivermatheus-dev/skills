@@ -1,0 +1,39 @@
+.rot { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-size: 26px; font-weight: 600; letter-spacing: 0.14em; color: var(--dobra-creme-claro-texto); }
+.hd { position: absolute; left: 60px; right: 60px; top: 90px; text-align: center; font-size: 84px; color: var(--dobra-creme-claro-titulo); }
+.cf { position: absolute; width: 450px; height: 400px; border-radius: 28px; background: var(--dobra-creme-claro-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); opacity: 0; }
+.k1 { left: 80px; top: 260px; }
+.k2 { left: 550px; top: 260px; }
+.k3 { left: 80px; top: 700px; }
+.k4 { left: 550px; top: 700px; }
+.ring { position: absolute; inset: -1px; border-radius: 28px; box-shadow: inset 0 0 0 4px var(--primary); opacity: 0; }
+.ci { position: absolute; inset: 0; }
+.ct { position: absolute; left: 32px; top: 32px; width: 290px; font-size: 38px; line-height: 1.1; font-weight: 700; color: var(--dobra-creme-claro-card-titulo); }
+.cic { position: absolute; right: 30px; top: 28px; width: 86px; height: 86px; }
+.cic.lu { border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.cic.lu .icon { width: 46px; height: 46px; }
+/* g1: o plano de aula complicado é riscado */
+.doc { position: absolute; left: 32px; top: 205px; width: 230px; height: 160px; border-radius: 16px; border: 3px solid var(--border); background: var(--surface-2); padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+.doc i { display: block; height: 12px; border-radius: 6px; background: var(--border); }
+.doc i:nth-child(2) { width: 80%; }
+.doc i:nth-child(3) { width: 90%; }
+.doc i.cu { width: 55%; }
+.doc em { position: absolute; left: 50%; top: 50%; width: 260px; height: 10px; margin: -5px 0 0 -130px; border-radius: 5px; background: var(--primary-strong); transform: scaleX(0); }
+/* g2: os alunos chegam sozinhos; a negociação é riscada */
+.alu { position: absolute; left: 32px; top: 230px; display: flex; gap: 14px; }
+.alu span { width: 84px; height: 84px; border-radius: 50%; background: var(--dobra-creme-card); border: 3px solid var(--surface-2); box-shadow: var(--shadow-sm); display: grid; place-items: center; opacity: 0; }
+.alu img { width: 64px; height: 50px; object-fit: contain; }
+.neg { position: absolute; right: 40px; top: 234px; width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--border); display: grid; place-items: center; color: var(--muted); }
+.neg .icon { width: 40px; height: 40px; }
+.neg em { position: absolute; left: -6px; right: -6px; top: 50%; height: 7px; margin-top: -3px; border-radius: 4px; background: var(--primary-strong); transform: scaleX(0); }
+/* g3: cobrança e cancelamento riscados; o selo de pago carimba */
+.lin { position: absolute; left: 32px; top: 240px; width: 210px; display: flex; flex-direction: column; gap: 40px; }
+.lin i { position: relative; display: block; height: 16px; border-radius: 8px; background: var(--border); }
+.lin i::after { content: ''; position: absolute; left: -8px; right: -8px; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; background: var(--primary-strong); transform: scaleX(var(--s, 0)); transform-origin: 0 50%; }
+.selo { position: absolute; right: 40px; top: 205px; width: 130px; height: 130px; border-radius: 50%; background: var(--support-soft); color: var(--support-deep); display: grid; place-items: center; opacity: 0; }
+.selo .icon { width: 74px; height: 74px; }
+/* g4: o professor liga os horários que quiser */
+.hrs { position: absolute; left: 32px; right: 32px; top: 175px; display: flex; flex-direction: column; gap: 20px; }
+.hr { display: flex; align-items: center; justify-content: space-between; font-size: 32px; color: var(--text); }
+.tg { position: relative; width: 84px; height: 46px; border-radius: var(--radius-pill); border: 3px solid var(--text); background: var(--dobra-creme-claro-card); }
+.tg i { position: absolute; left: 5px; top: 5px; width: 30px; height: 30px; border-radius: 50%; background: var(--text); display: block; }
+.tg .on { position: absolute; inset: 0; border-radius: var(--radius-pill); background: var(--accent); opacity: 0; }

@@ -1,0 +1,14 @@
+.hd { position: absolute; left: 60px; right: 60px; top: 110px; text-align: center; font-size: 76px; }
+.hd .acc { color: var(--dobra-creme-enfase); }
+.pl { position: absolute; top: 420px; width: 290px; height: 470px; border-radius: 24px; background: var(--dobra-creme-card); opacity: 0; }
+.pl:nth-child(1) { left: 80px; }
+.pl:nth-child(2) { left: 395px; }
+.pl:nth-child(3) { left: 710px; }
+.ring { position: absolute; inset: 0; border-radius: 24px; box-shadow: inset 0 0 0 4px var(--primary); opacity: 0; }
+.in { position: absolute; inset: 0; padding: 34px 30px; }
+.ic { width: 70px; height: 70px; border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.ic .icon { width: 38px; height: 38px; }
+.n { margin-top: 60px; font-size: 170px; line-height: 0.9; font-weight: 700; color: var(--dobra-creme-card-titulo); }
+.u { font-size: 48px; font-weight: 700; color: var(--dobra-creme-card-titulo); margin-top: 6px; }
+.s { font-size: 32px; font-weight: 400; color: var(--dobra-creme-card-texto); margin-top: 4px; }
+.pil { opacity: 0; }

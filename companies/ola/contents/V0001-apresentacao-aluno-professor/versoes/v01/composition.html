@@ -1,0 +1,979 @@
+<!doctype html>
+<!--
+  GERADO por tools/video-kit/scripts/compor.mjs a partir dos blocos da timeline. NÃO edite aqui: edite o bloco
+  (fundo/dobras [projeto], abertura/barra-navegador [projeto], escolha/dois-cards [projeto], pagina/hero-aluno [projeto], escolha/planos [projeto], agenda/hora-divide [projeto], pessoas/professores-chat [projeto], pagina/bloco-professor [projeto], cards/como-funciona-professor [projeto], agenda/vira-aula [projeto], cta/fecho-ola [projeto]) ou a timeline.json e rode o compor/produce de novo.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=__W__, height=__H__" />
+    <script src="kit/gsap.min.js"></script>
+    <script src="kit/motion.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+/* Base de toda composição montada por blocos (compor.mjs). Só tokens do brand.css; nada de marca aqui. */
+html, body { width: __W__px; height: __H__px; margin: 0; background: var(--bg); }
+* { box-sizing: border-box; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg);
+  color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* palco 1080×1170: mesma altura útil no 4:5 e no 9:16 */
+.f-9x16 { --top: 300px; }
+.f-4x5 { --top: 90px; }
+#stage { position: absolute; left: 0; top: var(--top); width: 1080px; height: 1170px; }
+.layer { position: absolute; inset: 0; }
+.icon { width: 1em; height: 1em; display: block; }
+.acc { font-family: var(--font-accent); font-style: italic; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+.w { display: inline-block; opacity: 0; }
+.w.acc { font-size: 1.1em; }
+.hl { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-wrap: balance; }
+.center { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; }
+.tile-ic { display: grid; place-items: center; border-radius: 50%; }
+.burst { position: absolute; border-radius: 50%; border: 3px solid var(--primary); opacity: 0; }
+.k-cursor { position: absolute; left: 0; top: 0; width: 60px; height: 60px; opacity: 0; z-index: 9; }
+.k-ripple { position: absolute; left: -45px; top: -45px; width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--accent); opacity: 0; z-index: 8; }
+
+/* Classes de marca da Olá Espanhol usadas pelos blocos (compor.mjs inclui depois do runtime/base.css). Só tokens do brand.css. */
+#root { font-family: var(--font-heading); }
+/* ênfase da marca = peso (Outfit Bold), não itálico; a cor vem da dobra (só a creme pinta de vermelho) */
+.acc { font-family: var(--font-heading); font-style: normal; font-weight: 700; color: inherit; letter-spacing: -0.01em; }
+.w.acc { font-size: 1em; }
+.tt { font-family: var(--font-heading); font-weight: 200; line-height: 1.04; letter-spacing: -0.012em; color: var(--text); }
+.tt.bd, .bd { font-weight: 700; }
+.tt.lt, .lt { font-weight: 200; }
+.enf-vermelho .acc { color: var(--dobra-creme-enfase); }
+/* a pílula do tempo (motivo do vídeo): vermelha, texto branco SemiBold, altura fixa */
+.pilula { position: absolute; display: flex; align-items: center; justify-content: center; gap: 14px; height: 84px; padding: 0 34px;
+  border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 38px; white-space: nowrap;
+  box-shadow: var(--shadow-primary); }
+.pilula .icon { width: 36px; height: 36px; }
+.rodape-ilustr { position: absolute; left: 80px; bottom: 6px; font-size: 22px; color: var(--muted); font-weight: 400; letter-spacing: 0.02em; opacity: 0; }
+.k-cursor path { fill: var(--text); stroke: var(--bg); }
+.k-ripple { border-color: var(--accent); }
+.ico-brand { display: block; object-fit: contain; }
+.av { position: absolute; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--text); }
+.av .flag { position: absolute; right: -4px; bottom: -4px; width: 38%; height: 38%; border-radius: 50%; border: 3px solid var(--surface-2); object-fit: cover; }
+/* cada cena só aparece no seu intervalo (o bloco liga a raiz em cena.start; a 1ª cena liga no DOM) */
+.layer[data-inst^="s"] { opacity: 0; }
+
+/* ── fundo/dobras (projeto) ── */
+.b-fundo-dobras .pano { position: absolute; inset: 0; }
+.b-fundo-dobras .pano > div { position: absolute; inset: 0; opacity: 0; }
+
+/* ── abertura/barra-navegador (projeto) ── */
+.b-abertura-barra-navegador .nav { position: absolute; left: 90px; top: 470px; width: 900px; height: 190px; }
+.b-abertura-barra-navegador .dots { position: absolute; left: 34px; top: -62px; display: flex; gap: 20px; }
+.b-abertura-barra-navegador .dots i { width: 30px; height: 30px; border-radius: 50%; background: var(--dobra-vermelho-card); display: block; }
+.b-abertura-barra-navegador .tab { position: absolute; left: 250px; top: -104px; width: 470px; height: 120px; border-radius: 40px 40px 0 0; background: var(--dobra-vermelho-card);
+  display: flex; align-items: center; gap: 22px; padding: 0 36px 14px; }
+.b-abertura-barra-navegador .tab .fav { width: 92px; height: 58px; object-fit: contain; }
+.b-abertura-barra-navegador .tab .ttl { font-size: 40px; color: var(--text); font-weight: 400; flex: 1; white-space: nowrap; }
+.b-abertura-barra-navegador .tab .x { color: var(--primary); font-size: 44px; }
+.b-abertura-barra-navegador .bar { position: absolute; inset: 0; border-radius: 48px; background: var(--dobra-vermelho-card); box-shadow: var(--shadow-lg);
+  display: flex; align-items: center; gap: 34px; padding: 0 40px; }
+.b-abertura-barra-navegador .ctl { color: var(--text); font-size: 54px; }
+.b-abertura-barra-navegador .url { position: relative; flex: 1; height: 112px; border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary);
+  display: flex; align-items: center; gap: 18px; padding: 0 38px; overflow: hidden; }
+.b-abertura-barra-navegador .url .lock { font-size: 40px; }
+.b-abertura-barra-navegador .url .txt { font-size: 40px; font-weight: 400; white-space: nowrap; }
+.b-abertura-barra-navegador .url .caret { width: 3px; height: 46px; background: var(--on-primary); }
+.b-abertura-barra-navegador .url .load { position: absolute; left: 0; bottom: 0; height: 8px; width: 100%; background: var(--dobra-vermelho-card); transform-origin: 0 50%; transform: scaleX(0); opacity: 0.85; }
+.b-abertura-barra-navegador .half { position: absolute; background: var(--dobra-vermelho-card); border-radius: 32px; opacity: 0; box-shadow: var(--shadow-lg); transform-origin: 0 0; }
+
+/* ── escolha/dois-cards (projeto) ── */
+.b-escolha-dois-cards .card { position: absolute; top: 305px; width: 440px; height: 560px; border-radius: 32px; background: var(--dobra-vermelho-card); box-shadow: var(--shadow-lg); }
+.b-escolha-dois-cards .c-aluno { left: 80px; }
+.b-escolha-dois-cards .c-prof { left: 560px; }
+.b-escolha-dois-cards .in { position: absolute; inset: 0; }
+.b-escolha-dois-cards .masc { position: absolute; left: 50%; top: 50px; width: 270px; height: 200px; margin-left: -135px; object-fit: contain; transform-origin: 50% 80%; }
+.b-escolha-dois-cards .tx { position: absolute; left: 24px; right: 24px; top: 268px; text-align: center; font-size: 48px; line-height: 1.08; font-weight: 200; color: var(--dobra-vermelho-card-titulo); }
+.b-escolha-dois-cards .btn { position: absolute; left: 50%; bottom: 34px; width: 116px; height: 116px; margin-left: -58px; border-radius: 50%; display: grid; place-items: center; color: var(--on-primary); font-size: 60px; }
+.b-escolha-dois-cards .btn.verde { background: var(--accent); }
+.b-escolha-dois-cards .btn.verm { background: var(--primary); }
+.b-escolha-dois-cards .btn .icon { width: 60px; height: 60px; }
+
+/* ── pagina/hero-aluno (projeto) ── */
+.b-pagina-hero-aluno .ast { position: absolute; left: 950px; top: 20px; width: 80px; height: 80px; }
+.b-pagina-hero-aluno .tag { position: absolute; left: 80px; top: 40px; padding: 10px 26px; border: 2px solid var(--accent); border-radius: var(--radius-pill); background: var(--dobra-creme-fundo);
+  font-size: 30px; color: var(--text); font-weight: 400; white-space: nowrap; }
+.b-pagina-hero-aluno .tag b { font-weight: 700; }
+.b-pagina-hero-aluno .titulo { position: absolute; left: 80px; top: 150px; width: 920px; font-size: 94px; transform-origin: 0 0; }
+.b-pagina-hero-aluno .titulo .l2 { color: var(--dobra-creme-enfase); }
+.b-pagina-hero-aluno .arco { position: absolute; left: 600px; top: 330px; width: 400px; height: 480px; border-radius: 200px 200px 32px 32px; background: var(--dobra-creme-card); overflow: hidden; }
+.b-pagina-hero-aluno .arco .blob { position: absolute; left: 30px; bottom: -40px; width: 340px; height: 220px; object-fit: contain; }
+.b-pagina-hero-aluno .arco .masc { position: absolute; left: 50%; bottom: 110px; width: 300px; height: 225px; margin-left: -150px; object-fit: contain; transform-origin: 50% 80%; }
+.b-pagina-hero-aluno .balao { position: absolute; left: 950px; top: 360px; width: 96px; height: 70px; }
+.b-pagina-hero-aluno .aula { position: absolute; left: 470px; top: 740px; width: 520px; padding: 22px 26px; border-radius: 24px; background: var(--surface-2); box-shadow: var(--shadow-md);
+  display: flex; gap: 20px; align-items: flex-start; }
+.b-pagina-hero-aluno .aula .avt { flex: none; width: 84px; height: 84px; border-radius: 50%; background: var(--dobra-creme-card); display: grid; place-items: center; }
+.b-pagina-hero-aluno .aula .avt img { width: 70px; height: 56px; object-fit: contain; }
+.b-pagina-hero-aluno .aula .quando { display: block; font-size: 27px; font-weight: 600; color: var(--text); }
+.b-pagina-hero-aluno .aula .fala { margin-top: 8px; font-size: 32px; line-height: 1.2; color: var(--text); font-weight: 400; }
+.b-pagina-hero-aluno .prog { position: absolute; left: 610px; top: 990px; width: 380px; padding: 20px 26px; border-radius: 24px; background: var(--surface-2); box-shadow: var(--shadow-md); }
+.b-pagina-hero-aluno .prog .pt { font-size: 28px; color: var(--text); font-weight: 200; }
+.b-pagina-hero-aluno .prog .pt b { font-weight: 700; font-size: 34px; }
+.b-pagina-hero-aluno .trilho { margin-top: 12px; height: 16px; border-radius: 99px; background: var(--dobra-creme-fundo); border: 1px solid var(--border); overflow: hidden; }
+.b-pagina-hero-aluno .enche { height: 100%; width: 100%; background: var(--primary); border-radius: 99px; transform-origin: 0 50%; }
+.b-pagina-hero-aluno .chip { position: absolute; left: 80px; height: 92px; padding: 0 30px 0 16px; display: flex; align-items: center; gap: 16px; border: 2px solid var(--accent); border-radius: var(--radius-pill);
+  background: var(--dobra-creme-fundo); font-size: 36px; color: var(--text); font-weight: 400; white-space: nowrap; opacity: 0; }
+.b-pagina-hero-aluno .chip:nth-child(1) { top: 430px; }
+.b-pagina-hero-aluno .chip:nth-child(2) { top: 545px; }
+.b-pagina-hero-aluno .chip:nth-child(3) { top: 660px; }
+.b-pagina-hero-aluno .chip img { width: 62px; height: 62px; object-fit: contain; }
+.b-pagina-hero-aluno .chip .ic { width: 62px; height: 62px; border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.b-pagina-hero-aluno .chip .ic .icon { width: 34px; height: 34px; }
+
+/* ── escolha/planos (projeto) ── */
+.b-escolha-planos .hd { position: absolute; left: 60px; right: 60px; top: 110px; text-align: center; font-size: 76px; }
+.b-escolha-planos .hd .acc { color: var(--dobra-creme-enfase); }
+.b-escolha-planos .pl { position: absolute; top: 420px; width: 290px; height: 470px; border-radius: 24px; background: var(--dobra-creme-card); opacity: 0; }
+.b-escolha-planos .pl:nth-child(1) { left: 80px; }
+.b-escolha-planos .pl:nth-child(2) { left: 395px; }
+.b-escolha-planos .pl:nth-child(3) { left: 710px; }
+.b-escolha-planos .ring { position: absolute; inset: 0; border-radius: 24px; box-shadow: inset 0 0 0 4px var(--primary); opacity: 0; }
+.b-escolha-planos .in { position: absolute; inset: 0; padding: 34px 30px; }
+.b-escolha-planos .ic { width: 70px; height: 70px; border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.b-escolha-planos .ic .icon { width: 38px; height: 38px; }
+.b-escolha-planos .n { margin-top: 60px; font-size: 170px; line-height: 0.9; font-weight: 700; color: var(--dobra-creme-card-titulo); }
+.b-escolha-planos .u { font-size: 48px; font-weight: 700; color: var(--dobra-creme-card-titulo); margin-top: 6px; }
+.b-escolha-planos .s { font-size: 32px; font-weight: 400; color: var(--dobra-creme-card-texto); margin-top: 4px; }
+.b-escolha-planos .pil { opacity: 0; }
+
+/* ── agenda/hora-divide (projeto) ── */
+.b-agenda-hora-divide .hd { position: absolute; left: 40px; right: 40px; top: 40px; text-align: center; font-size: 62px; color: var(--dobra-azul-titulo); white-space: nowrap; }
+.b-agenda-hora-divide .h2 { opacity: 0; }
+.b-agenda-hora-divide .num { position: absolute; left: 80px; top: 150px; font-size: 104px; line-height: 1; font-weight: 700; color: var(--dobra-azul-enfase); opacity: 0; white-space: nowrap; }
+.b-agenda-hora-divide .agenda { position: absolute; left: 80px; top: 300px; width: 920px; height: 770px; border-radius: 32px; background: var(--dobra-azul-card); overflow: hidden; }
+.b-agenda-hora-divide .cols { position: absolute; inset: 0; display: flex; }
+.b-agenda-hora-divide .col { flex: 1; position: relative; border-left: 2px solid var(--border); }
+.b-agenda-hora-divide .col:first-child { border-left: 0; }
+.b-agenda-hora-divide .col b { display: block; text-align: center; margin-top: 28px; font-size: 30px; font-weight: 600; color: var(--dobra-azul-card-texto); }
+.b-agenda-hora-divide .dch { position: absolute; width: 104px; border-radius: 52px; background: var(--primary); color: var(--on-primary); display: grid; place-items: center;
+  font-size: 32px; font-weight: 600; opacity: 0; box-shadow: var(--shadow-primary); transform-origin: 50% 0; }
+.b-agenda-hora-divide .peca { position: absolute; height: 84px; border-radius: 42px; background: var(--primary); color: var(--on-primary); display: grid; place-items: center;
+  font-size: 30px; font-weight: 600; opacity: 0; }
+.b-agenda-hora-divide .avatar { width: 96px; height: 96px; background: var(--accent); font-size: 46px; opacity: 0; border: 4px solid var(--dobra-azul-card); }
+
+/* ── pessoas/professores-chat (projeto) ── */
+.b-pessoas-professores-chat .hd { position: absolute; left: 60px; right: 60px; top: 30px; text-align: center; color: var(--dobra-creme-suave-titulo); }
+.b-pessoas-professores-chat .hd .l1 { font-size: 78px; }
+.b-pessoas-professores-chat .hd .l2 { font-size: 60px; margin-top: 6px; }
+.b-pessoas-professores-chat .pc { position: absolute; top: 300px; width: 290px; height: 390px; border-radius: 28px; background: var(--dobra-creme-suave-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.b-pessoas-professores-chat .pc:nth-child(1) { left: 80px; }
+.b-pessoas-professores-chat .pc:nth-child(2) { left: 395px; opacity: 0; }
+.b-pessoas-professores-chat .pc:nth-child(3) { left: 710px; opacity: 0; }
+.b-pessoas-professores-chat .pc .av { left: 75px; top: 40px; width: 140px; height: 140px; font-size: 64px; }
+.b-pessoas-professores-chat .pc:nth-child(1) .av { background: var(--accent); }
+.b-pessoas-professores-chat .pc:nth-child(2) .av { background: var(--support); }
+.b-pessoas-professores-chat .pc:nth-child(3) .av { background: var(--primary-mid); }
+.b-pessoas-professores-chat .cin { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.b-pessoas-professores-chat .nm { font-size: 42px; font-weight: 700; color: var(--dobra-creme-suave-card-titulo); }
+.b-pessoas-professores-chat .pa { font-size: 28px; color: var(--dobra-creme-suave-card-texto); }
+.b-pessoas-professores-chat .selo { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: var(--radius-pill); background: var(--support-soft); color: var(--support-deep);
+  font-size: 24px; font-weight: 600; white-space: nowrap; opacity: 0; }
+.b-pessoas-professores-chat .selo .icon { width: 24px; height: 24px; }
+.b-pessoas-professores-chat .selo i { font-style: normal; }
+.b-pessoas-professores-chat .fa { position: absolute; left: 80px; top: 830px; width: 120px; height: 90px; opacity: 0; }
+.b-pessoas-professores-chat .bal { position: absolute; background: var(--surface-2); box-shadow: var(--shadow-md); padding: 22px 32px; font-size: 38px; color: var(--text); font-weight: 400; white-space: nowrap; }
+.b-pessoas-professores-chat .aluno { right: 170px; top: 820px; border-radius: 34px 34px 8px 34px; opacity: 0; display: flex; align-items: center; gap: 14px; }
+.b-pessoas-professores-chat .dots { display: inline-flex; gap: 8px; }
+.b-pessoas-professores-chat .dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--text); display: block; }
+.b-pessoas-professores-chat .interr { position: absolute; right: 80px; top: 814px; width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--text); display: grid; place-items: center;
+  font-size: 50px; font-weight: 700; color: var(--text); opacity: 0; }
+.b-pessoas-professores-chat .resp { position: absolute; left: 80px; top: 990px; display: flex; align-items: flex-end; gap: 18px; opacity: 0; }
+.b-pessoas-professores-chat .resp .mm { width: 130px; height: 100px; object-fit: contain; transform-origin: 50% 80%; }
+.b-pessoas-professores-chat .prof { position: relative; border-radius: 34px 34px 34px 8px; }
+
+/* ── pagina/bloco-professor (projeto) ── */
+.b-pagina-bloco-professor .bloco { position: absolute; left: 40px; top: 40px; width: 1000px; height: 1080px; border-radius: 32px; background: var(--dobra-verde-fundo); transform-origin: 0 0; }
+.b-pagina-bloco-professor .rot { position: absolute; left: 100px; top: 110px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; color: var(--dobra-verde-titulo); }
+.b-pagina-bloco-professor .tit { position: absolute; left: 100px; top: 160px; width: 880px; font-size: 84px; color: var(--dobra-verde-titulo); }
+.b-pagina-bloco-professor .masc { position: absolute; left: 470px; top: 470px; width: 520px; height: 420px; object-fit: contain; transform-origin: 50% 85%; }
+.b-pagina-bloco-professor .pa { position: relative; width: fit-content; margin-bottom: 26px; justify-content: flex-start; padding: 0 34px 0 10px; opacity: 0; }
+.b-pagina-bloco-professor .pils { position: absolute; left: 100px; top: 560px; }
+.b-pagina-bloco-professor .mini { width: 66px; height: 66px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; }
+.b-pagina-bloco-professor .mini img { width: 52px; height: 40px; object-fit: contain; }
+
+/* ── cards/como-funciona-professor (projeto) ── */
+.b-cards-como-funciona-professor .rot { position: absolute; left: 0; right: 0; top: 40px; text-align: center; font-size: 26px; font-weight: 600; letter-spacing: 0.14em; color: var(--dobra-creme-claro-texto); }
+.b-cards-como-funciona-professor .hd { position: absolute; left: 60px; right: 60px; top: 90px; text-align: center; font-size: 84px; color: var(--dobra-creme-claro-titulo); }
+.b-cards-como-funciona-professor .cf { position: absolute; width: 450px; height: 400px; border-radius: 28px; background: var(--dobra-creme-claro-card); border: 1px solid var(--border); opacity: 0; }
+.b-cards-como-funciona-professor .k1 { left: 80px; top: 260px; opacity: 1; }
+.b-cards-como-funciona-professor .k2 { left: 550px; top: 260px; }
+.b-cards-como-funciona-professor .k3 { left: 80px; top: 700px; }
+.b-cards-como-funciona-professor .k4 { left: 550px; top: 700px; }
+.b-cards-como-funciona-professor .ring { position: absolute; inset: -1px; border-radius: 28px; box-shadow: inset 0 0 0 4px var(--primary); opacity: 0; }
+.b-cards-como-funciona-professor .ci { position: absolute; inset: 0; }
+.b-cards-como-funciona-professor .ct { position: absolute; left: 32px; top: 32px; width: 290px; font-size: 40px; line-height: 1.08; font-weight: 700; color: var(--dobra-creme-claro-card-titulo); }
+.b-cards-como-funciona-professor .cic { position: absolute; right: 30px; top: 28px; width: 86px; height: 86px; object-fit: contain; }
+.b-cards-como-funciona-professor .cic.lu { border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.b-cards-como-funciona-professor .cic.lu .icon { width: 46px; height: 46px; }
+.b-cards-como-funciona-professor .hrs { position: absolute; left: 32px; right: 32px; top: 160px; display: flex; flex-direction: column; gap: 22px; }
+.b-cards-como-funciona-professor .hr { display: flex; align-items: center; justify-content: space-between; font-size: 32px; color: var(--text); }
+.b-cards-como-funciona-professor .tg { position: relative; width: 84px; height: 46px; border-radius: var(--radius-pill); border: 3px solid var(--text); background: var(--dobra-creme-claro-card); }
+.b-cards-como-funciona-professor .tg i { position: absolute; left: 5px; top: 5px; width: 30px; height: 30px; border-radius: 50%; background: var(--text); display: block; }
+.b-cards-como-funciona-professor .tg .on { position: absolute; inset: 0; border-radius: var(--radius-pill); background: var(--accent); opacity: 0; }
+.b-cards-como-funciona-professor .pp { left: 50%; top: 220px; transform: translateX(-50%); opacity: 0; }
+.b-cards-como-funciona-professor .pp .icon { width: 38px; height: 38px; }
+.b-cards-como-funciona-professor .rs { position: absolute; left: 32px; right: 32px; top: 190px; display: flex; flex-direction: column; gap: 30px; }
+.b-cards-como-funciona-professor .r { position: relative; width: fit-content; font-size: 38px; color: var(--text); }
+.b-cards-como-funciona-professor .r i { position: absolute; left: -8px; right: -8px; top: 52%; height: 6px; border-radius: 3px; background: var(--primary-strong); transform-origin: 0 50%; transform: scaleX(0); display: block; }
+.b-cards-como-funciona-professor .rel { position: absolute; left: 32px; top: 200px; width: 150px; height: 150px; }
+.b-cards-como-funciona-professor .cal { position: absolute; left: 210px; top: 205px; width: 210px; display: grid; grid-template-columns: repeat(5, 34px); gap: 10px; }
+.b-cards-como-funciona-professor .cal span { width: 34px; height: 34px; border-radius: 9px; border: 2px solid var(--border); display: block; position: relative; }
+.b-cards-como-funciona-professor .cal span.dia::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 4px solid var(--primary); opacity: var(--m, 0); }
+.b-cards-como-funciona-professor .k4 .ct { font-size: 34px; width: 300px; }
+
+/* ── agenda/vira-aula (projeto) ── */
+.b-agenda-vira-aula .hd { position: absolute; left: 60px; right: 60px; top: 60px; text-align: center; font-size: 96px; color: var(--dobra-creme-titulo); white-space: nowrap; }
+.b-agenda-vira-aula .hd .acc { color: var(--dobra-creme-enfase); }
+.b-agenda-vira-aula .h2 { opacity: 0; }
+.b-agenda-vira-aula .ag { position: absolute; left: 200px; top: 220px; width: 680px; height: 860px; border-radius: 32px; background: var(--dobra-creme-card); }
+.b-agenda-vira-aula .hs { position: absolute; left: 220px; top: 0; }
+.b-agenda-vira-aula .hs span { position: absolute; left: 0; font-size: 28px; font-weight: 600; color: var(--dobra-creme-card-texto); white-space: nowrap; }
+.b-agenda-vira-aula .comp { position: absolute; left: 350px; width: 500px; height: 200px; border-radius: 40px; background: var(--border); display: grid; place-items: center; font-size: 36px; color: var(--text); }
+.b-agenda-vira-aula .c1 { top: 260px; }
+.b-agenda-vira-aula .c2 { top: 740px; }
+.b-agenda-vira-aula .vao { position: absolute; left: 350px; top: 490px; width: 500px; height: 220px; border-radius: 40px; border: 4px dashed var(--text); opacity: 0.4; display: grid; place-items: center; }
+.b-agenda-vira-aula .vao span { font-size: 104px; font-weight: 700; color: var(--text); opacity: 0; }
+.b-agenda-vira-aula .relo { position: absolute; left: 900px; top: 470px; width: 130px; height: 130px; }
+.b-agenda-vira-aula .aula { position: absolute; left: 350px; top: 490px; width: 500px; height: 220px; border-radius: 40px; background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-primary);
+  display: flex; align-items: center; justify-content: center; gap: 22px; font-size: 44px; font-weight: 600; opacity: 0; white-space: nowrap; }
+.b-agenda-vira-aula .mini { width: 84px; height: 84px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; }
+.b-agenda-vira-aula .mini img { width: 66px; height: 50px; object-fit: contain; }
+.b-agenda-vira-aula .brilho { position: absolute; left: 810px; top: 400px; width: 120px; height: 120px; opacity: 0; transform-origin: 0 100%; }
+
+/* ── cta/fecho-ola (projeto) ── */
+.b-cta-fecho-ola .blob { position: absolute; left: 770px; top: 900px; width: 460px; height: 380px; object-fit: contain; }
+.b-cta-fecho-ola .brilho { position: absolute; left: 20px; top: 20px; width: 100px; height: 100px; opacity: 0; transform: scaleX(-1); }
+.b-cta-fecho-ola .fr { position: absolute; left: 60px; right: 60px; top: 100px; text-align: center; font-size: 80px; color: var(--dobra-vermelho-titulo); white-space: nowrap; }
+.b-cta-fecho-ola .f1 { font-weight: 700; }
+.b-cta-fecho-ola .f2 { opacity: 0; }
+.b-cta-fecho-ola .f2 .w2 { display: inline-block; }
+.b-cta-fecho-ola .kc { position: absolute; top: 305px; width: 440px; height: 560px; border-radius: 32px; background: var(--dobra-vermelho-card); box-shadow: var(--shadow-lg); }
+.b-cta-fecho-ola .ka { left: 80px; }
+.b-cta-fecho-ola .kp { left: 560px; }
+.b-cta-fecho-ola .kc img { position: absolute; left: 50%; top: 110px; width: 270px; height: 200px; margin-left: -135px; object-fit: contain; }
+.b-cta-fecho-ola .kc .b { position: absolute; left: 50%; bottom: 44px; width: 116px; height: 116px; margin-left: -58px; border-radius: 50%; }
+.b-cta-fecho-ola .b.verde { background: var(--accent); }
+.b-cta-fecho-ola .b.verm { background: var(--primary); }
+.b-cta-fecho-ola .barra { position: absolute; left: 90px; top: 470px; width: 900px; height: 190px; border-radius: 48px; background: var(--dobra-vermelho-card); box-shadow: var(--shadow-lg);
+  display: flex; align-items: center; padding: 0 40px; opacity: 0; }
+.b-cta-fecho-ola .barra .url { flex: 1; height: 112px; border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary); display: flex; align-items: center; gap: 18px; padding: 0 38px; font-size: 42px; }
+.b-cta-fecho-ola .barra .lk .icon { width: 40px; height: 40px; }
+.b-cta-fecho-ola .logo { position: absolute; left: 50%; top: 300px; width: 680px; height: 240px; margin-left: -340px; object-fit: contain; opacity: 0; }
+.b-cta-fecho-ola .urlp { position: absolute; left: 50%; top: 620px; width: 640px; height: 116px; margin-left: -320px; border-radius: var(--radius-pill); background: var(--dobra-vermelho-botao);
+  color: var(--dobra-vermelho-botao-texto); display: grid; place-items: center; font-size: 46px; font-weight: 600; opacity: 0; box-shadow: var(--shadow-lg); }
+.b-cta-fecho-ola .olo { position: absolute; left: 50%; top: 820px; width: 150px; height: 94px; margin-left: -75px; object-fit: contain; opacity: 0; transform-origin: 50% 70%; }
+.b-cta-fecho-ola .kc .b { display: grid; place-items: center; color: var(--on-primary); }
+.b-cta-fecho-ola .kc .b .icon { width: 60px; height: 60px; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" class="f-__FORMAT__" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="__W__" data-height="__H__">
+<div class="layer b-fundo-dobras" data-inst="c1" data-bloco="fundo/dobras">
+<div class="pano"></div>
+</div>
+      <div id="stage">
+<div class="layer b-abertura-barra-navegador" data-inst="s01" data-bloco="abertura/barra-navegador">
+<div class="nav">
+  <div class="dots"><i></i><i></i><i></i></div>
+  <div class="tab"><img class="fav" src="" alt="" /><span class="ttl"></span><span class="x">{{i:x}}</span></div>
+  <div class="bar">
+    <span class="ctl">{{i:arrow-left}}</span><span class="ctl">{{i:arrow-right}}</span><span class="ctl">{{i:rotate-cw}}</span>
+    <div class="url"><span class="lock">{{i:lock}}</span><span class="txt"></span><span class="caret"></span><div class="load"></div></div>
+  </div>
+</div>
+<div class="half h1"></div><div class="half h2"></div>
+</div>
+<div class="layer b-escolha-dois-cards" data-inst="s02" data-bloco="escolha/dois-cards">
+<div class="card c-aluno"><div class="in"><img class="masc" src="brand/vectors/vetor-mascote-aluno.svg" alt="" /><div class="tx"></div><div class="btn verde">{{i:arrow-right}}</div></div></div>
+<div class="card c-prof"><div class="in"><img class="masc" src="brand/vectors/vetor-mascote-professor.svg" alt="" /><div class="tx"></div><div class="btn verm">{{i:arrow-right}}</div></div></div>
+</div>
+<div class="layer b-pagina-hero-aluno" data-inst="s03" data-bloco="pagina/hero-aluno">
+<img class="ast ico-brand" src="brand/vectors/vetor-traco-asterisco.svg" alt="" />
+<div class="tag"></div>
+<div class="titulo tt"><div class="l1"></div><div class="l2 bd"></div></div>
+<div class="arco"><img class="blob" src="brand/vectors/vetor-forma-blob-verde.svg" alt="" /><img class="masc" src="brand/vectors/vetor-mascote-aluno.svg" alt="" /></div>
+<img class="balao ico-brand" src="brand/vectors/vetor-traco-balao.svg" alt="" />
+<div class="aula"><div class="avt"><img src="brand/vectors/vetor-mascote-professor.svg" alt="" /></div><div><b class="quando"></b><div class="fala"></div></div></div>
+<div class="prog"><div class="pt"><b>2 / 3h</b> esta semana</div><div class="trilho"><div class="enche"></div></div></div>
+<div class="chips"><div class="chip"></div><div class="chip"></div><div class="chip"></div></div>
+<div class="lucide-map-pin" style="display:none">{{i:map-pin}}</div>
+<div class="rodape-ilustr"></div>
+</div>
+<div class="layer b-escolha-planos" data-inst="s04" data-bloco="escolha/planos">
+<div class="hd tt"><div class="l1"></div><div class="l2"></div></div>
+<div class="planos">
+  <div class="pl"><div class="ring"></div><div class="in"><span class="ic">{{i:clock}}</span><div class="n"></div><div class="u"></div><div class="s"></div></div></div>
+  <div class="pl"><div class="ring"></div><div class="in"><span class="ic">{{i:clock}}</span><div class="n"></div><div class="u"></div><div class="s"></div></div></div>
+  <div class="pl"><div class="ring"></div><div class="in"><span class="ic">{{i:clock}}</span><div class="n"></div><div class="u"></div><div class="s"></div></div></div>
+</div>
+<div class="pilula pil">{{i:clock}}<span></span></div>
+</div>
+<div class="layer b-agenda-hora-divide" data-inst="s05" data-bloco="agenda/hora-divide">
+<div class="hd tt h1"></div>
+<div class="hd tt h2"></div>
+<div class="num n4"></div><div class="num n2"></div><div class="num n1"></div>
+<div class="agenda"><div class="cols"></div></div>
+<div class="chips"></div>
+<div class="pilula pil">{{i:clock}}<span></span></div>
+<div class="pecas"></div>
+<div class="av avatar"><span class="ini"></span><img class="flag" src="" alt="" /></div>
+<div class="rodape-ilustr"></div>
+</div>
+<div class="layer b-pessoas-professores-chat" data-inst="s06" data-bloco="pessoas/professores-chat">
+<div class="hd tt"><div class="l1 bd"></div><div class="l2 lt"></div></div>
+<div class="cards">
+  <div class="pc"><div class="av"><span class="ini"></span><img class="flag" src="" alt="" /></div><div class="cin"><b class="nm"></b><span class="pa"></span><span class="selo">{{i:check}}<i></i></span></div></div>
+  <div class="pc"><div class="av"><span class="ini"></span><img class="flag" src="" alt="" /></div><div class="cin"><b class="nm"></b><span class="pa"></span><span class="selo">{{i:check}}<i></i></span></div></div>
+  <div class="pc"><div class="av"><span class="ini"></span><img class="flag" src="" alt="" /></div><div class="cin"><b class="nm"></b><span class="pa"></span><span class="selo">{{i:check}}<i></i></span></div></div>
+</div>
+<img class="fa ico-brand" src="brand/icons/icone-falsos-amigos.svg" alt="" />
+<div class="bal aluno"><span class="ma"></span><span class="dots"><i></i><i></i><i></i></span></div>
+<div class="interr">?</div>
+<div class="resp"><img class="mm" src="brand/vectors/vetor-mascote-professor.svg" alt="" /><div class="bal prof"></div></div>
+<div class="rodape-ilustr"></div>
+</div>
+<div class="layer b-escolha-dois-cards" data-inst="s07" data-bloco="escolha/dois-cards">
+<div class="card c-aluno"><div class="in"><img class="masc" src="brand/vectors/vetor-mascote-aluno.svg" alt="" /><div class="tx"></div><div class="btn verde">{{i:arrow-right}}</div></div></div>
+<div class="card c-prof"><div class="in"><img class="masc" src="brand/vectors/vetor-mascote-professor.svg" alt="" /><div class="tx"></div><div class="btn verm">{{i:arrow-right}}</div></div></div>
+</div>
+<div class="layer b-pagina-bloco-professor" data-inst="s08" data-bloco="pagina/bloco-professor">
+<div class="bloco"></div>
+<div class="cont">
+  <div class="rot"></div>
+  <div class="tit tt"><div class="l1 bd"></div><div class="l2 lt"></div></div>
+  <img class="masc" src="brand/vectors/vetor-mascote-professor.svg" alt="" />
+  <div class="pils">
+    <div class="pilula pa"><span class="mini"><img src="brand/vectors/vetor-mascote-aluno.svg" alt="" /></span><span class="t"></span></div>
+    <div class="pilula pa"><span class="mini"><img src="brand/vectors/vetor-mascote-aluno.svg" alt="" /></span><span class="t"></span></div>
+    <div class="pilula pa"><span class="mini"><img src="brand/vectors/vetor-mascote-aluno.svg" alt="" /></span><span class="t"></span></div>
+  </div>
+</div>
+</div>
+<div class="layer b-cards-como-funciona-professor" data-inst="s09" data-bloco="cards/como-funciona-professor">
+<div class="rot"></div>
+<div class="hd tt"></div>
+<div class="cf k1"><div class="ring"></div><div class="ci"><b class="ct"></b><img class="cic ico-brand" src="brand/icons/icone-constancia.svg" alt="" /><div class="hrs"></div></div></div>
+<div class="cf k2"><div class="ring"></div><div class="ci"><b class="ct"></b><span class="cic lu">{{i:badge-check}}</span><div class="pilula pp"><span class="t"></span>{{i:check}}</div></div></div>
+<div class="cf k3"><div class="ring"></div><div class="ci"><b class="ct"></b><span class="cic lu">{{i:banknote}}</span><div class="rs"><div class="r"><span></span><i></i></div><div class="r"><span></span><i></i></div></div></div></div>
+<div class="cf k4"><div class="ring"></div><div class="ci"><b class="ct"></b><span class="cic lu">{{i:calendar-check}}</span><img class="rel ico-brand" src="brand/vectors/vetor-ilustracao-relogio.svg" alt="" /><div class="cal"></div></div></div>
+</div>
+<div class="layer b-agenda-vira-aula" data-inst="s10" data-bloco="agenda/vira-aula">
+<div class="hd tt h1"></div>
+<div class="hd tt h2"></div>
+<div class="ag"></div>
+<div class="hs"></div>
+<div class="comp c1"></div>
+<div class="vao"><span></span></div>
+<div class="comp c2"></div>
+<img class="relo ico-brand" src="brand/vectors/vetor-ilustracao-relogio.svg" alt="" />
+<div class="aula"><span class="mini"><img src="brand/vectors/vetor-mascote-aluno.svg" alt="" /></span><span class="t"></span></div>
+<img class="brilho ico-brand" src="brand/vectors/vetor-traco-brilho.svg" alt="" />
+</div>
+<div class="layer b-cta-fecho-ola" data-inst="s11" data-bloco="cta/fecho-ola">
+<img class="blob ico-brand" src="brand/vectors/vetor-forma-blob-verde.svg" alt="" />
+<img class="brilho ico-brand" src="brand/vectors/vetor-traco-brilho.svg" alt="" />
+<div class="fr f1 tt"></div>
+<div class="fr f2 tt"></div>
+<div class="kc ka"><img src="brand/vectors/vetor-mascote-aluno.svg" alt="" /><span class="b verde">{{i:arrow-right}}</span></div>
+<div class="kc kp"><img src="brand/vectors/vetor-mascote-professor.svg" alt="" /><span class="b verm">{{i:arrow-right}}</span></div>
+<div class="barra"><div class="url"><span class="lk">{{i:lock}}</span><span class="tx"></span></div></div>
+<img class="logo" src="" alt="" />
+<div class="urlp"></div>
+<img class="olo" src="" alt="" />
+</div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__TL = __TIMELINE__
+    </script>
+    <script src="kit/tl.js"></script>
+    <script src="kit/blocos.js"></script>
+    <script>
+BLOCO('fundo/dobras', function ({ tl, $, params }) {
+  const pano = $('.pano')
+  const mapa = params.dobras || {}
+  T.tl.scenes.forEach((s, k) => {
+    const d = mapa[s.id] || 'creme'
+    const el = document.createElement('div')
+    el.style.background = `var(--dobra-${d}-fundo)`
+    pano.appendChild(el)
+    // a 1ª cena já está no 1º quadro (estado do DOM, não um set em 0)
+    if (k === 0) el.style.opacity = 1
+    else tl.set(el, { opacity: 1 }, s.start)
+    if (k < T.tl.scenes.length - 1) tl.set(el, { opacity: 0 }, s.end)
+  })
+})
+    </script>
+    <script>
+BLOCO('abertura/barra-navegador', function ({ tl, root, $, $$, cena, cue, texto, params }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const url = texto('url')
+  $('.fav').src = params.favicon
+  $('.ttl').textContent = texto('aba')
+  const tDig = cue('digita'), tEnter = cue('enter'), tDiv = cue('divide')
+  // caret pisca até a digitação e depois do Enter some
+  tl.to($('.caret'), { opacity: 0, duration: 0.12, repeat: Math.max(1, Math.floor((tDig - cena.start) / 0.24)), yoyo: true, ease: 'none' }, cena.start)
+  // URL letra a letra no intervalo que sobra até o Enter
+  const passo = Math.min(0.045, Math.max(0.012, (tEnter - tDig - 0.06) / url.length))
+  for (let i = 1; i <= url.length; i++) tl.set($('.txt'), { textContent: url.slice(0, i) }, tDig + i * passo)
+  // Enter: a barra afunda e solta; a linha de carregamento corre
+  tl.to($('.nav'), { scale: 0.97, duration: 0.07, ease: 'power2.out' }, tEnter)
+  tl.to($('.nav'), { scale: 1, ...M.FAST, duration: 0.35 }, tEnter + 0.07)
+  tl.to($('.caret'), { opacity: 0, duration: 0.05 }, tEnter)
+  tl.to($('.load'), { scaleX: 1, duration: Math.max(0.15, tDiv - tEnter - 0.02), ease: 'power2.inOut' }, tEnter + 0.02)
+  // divide: controles saem em cascata, a barra vira duas metades que crescem nos dois cards da escolha
+  const sai = [$$('.dots i'), $('.tab'), $$('.ctl'), $('.url')].flat()
+  tl.to(sai, { opacity: 0, y: -14, duration: 0.14, stagger: 0.03, ease: 'power2.in' }, tDiv)
+  const bar = { x: 90, y: 470, w: 900, h: 190 }
+  const [c1, c2] = params.cards
+  const halves = $$('.half')
+  ;[c1, c2].forEach((c, i) => {
+    const h = halves[i]
+    Object.assign(h.style, { left: c[0] + 'px', top: c[1] + 'px', width: c[2] + 'px', height: c[3] + 'px' })
+    const de = { x: bar.x + i * bar.w / 2 - c[0], y: bar.y - c[1], scaleX: (bar.w / 2) / c[2], scaleY: bar.h / c[3] }
+    tl.set(h, { ...de, opacity: 1 }, tDiv + 0.1)
+    tl.to(h, { x: 0, y: 0, scaleX: 1, scaleY: 1, ...M.SOFT, duration: Math.max(0.25, cena.end - tDiv - 0.1) }, tDiv + 0.1 + i * 0.04)
+  })
+  tl.set($('.bar'), { opacity: 0 }, tDiv + 0.1)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('escolha/dois-cards', function ({ tl, root, $, $$, cena, cue, texto, params, box, cursor }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b class="acc">$1</b>')
+  $('.c-aluno .tx').innerHTML = md(texto('aluno'))
+  $('.c-prof .tx').innerHTML = md(texto('professor'))
+  const prof = params.escolha === 'professor'
+  const alvo = prof ? $('.c-prof') : $('.c-aluno'), outro = prof ? $('.c-aluno') : $('.c-prof')
+  // medir antes de qualquer transform
+  const pBtnAlvo = box(alvo.querySelector('.btn'), 0.62, 0.68), pBtnOutro = box(outro.querySelector('.btn'), 0.62, 0.68)
+  const cAlvo = box(alvo, 0.5, 0.5), cAluno = box($('.c-aluno'), 0.5, 0.5)
+  const stage = document.getElementById('stage')
+  const centro = { x: stage.offsetWidth / 2, y: (document.getElementById('root').offsetHeight / 2) - stage.offsetTop }
+  const tE = cue('entra'), tH = cue('hesita'), tC = cue('clique'), tX = cue('expande')
+  const mascs = $$('.masc'), ins = $$('.in')
+
+  if (params.de === 'pagina') {
+    // a página anterior encolhe para dentro do card do aluno; o do professor volta pela direita
+    const s = 2.7
+    tl.fromTo($('.c-aluno'), { x: centro.x - cAluno.x, y: centro.y - cAluno.y, scale: s }, { x: 0, y: 0, scale: 1, ...M.FAST, duration: Math.max(0.3, tH - tE + 0.18) }, tE - 0.02)
+    tl.fromTo($('.c-prof'), { x: 620, opacity: 0 }, { x: 0, opacity: 1, ...M.FAST, duration: 0.3 }, tE)
+    tl.fromTo(ins, { opacity: 0 }, { opacity: 1, duration: 0.14, stagger: 0.04 }, tE + 0.06)
+  } else {
+    // os cards já estão no lugar (nasceram da barra); o conteúdo entra
+    tl.fromTo(mascs, { opacity: 0, scale: 0.7, y: 20 }, { opacity: 1, scale: 1, y: 0, ...M.SOFT, duration: 0.5, stagger: 0.08 }, tE)
+    tl.fromTo($$('.tx'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35, stagger: 0.08 }, tE + 0.04)
+    tl.fromTo($$('.btn'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.45, stagger: 0.08 }, tE + 0.08)
+  }
+  // mascotes vivos: piscam e olham para o cursor (inclinação)
+  mascs.forEach((m, i) => tl.to(m, { scaleY: 0.86, duration: 0.05, yoyo: true, repeat: 1, ease: 'power1.inOut' }, tE + 0.3 + i * 0.12))
+  const C = cursor()
+  tl.set(C.el, { x: 1040, y: 1120 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.08 }, Math.max(cena.start, tH - 0.06))
+  if (params.hesita && !prof) {
+    C.move(pBtnOutro, tH, Math.max(0.15, (tC - tH) * 0.4))
+    tl.to(mascs, { rotation: 7, duration: 0.18, ease: 'power2.out' }, tH + 0.05)
+    tl.to(outro, { y: -6, duration: 0.15, ease: 'power2.out' }, tH + 0.12)
+    tl.to(outro, { y: 0, duration: 0.15, ease: 'power2.in' }, tH + (tC - tH) * 0.55)
+    C.move(pBtnAlvo, tH + (tC - tH) * 0.5, Math.max(0.12, (tC - tH) * 0.45))
+    tl.to(mascs, { rotation: -7, duration: 0.18, ease: 'power2.out' }, tH + (tC - tH) * 0.55)
+  } else {
+    C.move(pBtnAlvo, tH, Math.max(0.12, tC - tH - 0.04))
+    tl.to(mascs, { rotation: prof ? 7 : -7, duration: 0.18, ease: 'power2.out' }, tH + 0.05)
+    if (prof) tl.to(alvo.querySelector('.masc'), { scale: 1.12, duration: 0.12, yoyo: true, repeat: 1, ease: 'power2.out' }, tH + 0.12)
+  }
+  C.click(pBtnAlvo, tC)
+  tl.to(alvo, { scale: 0.97, duration: 0.06, yoyo: true, repeat: 1, ease: 'power2.out' }, tC)
+  // expande: o card escolhido cresce até virar a tela (o creme do card vira o fundo da próxima cena)
+  tl.to(C.el, { opacity: 0, duration: 0.1 }, tX)
+  tl.to(alvo.querySelector('.in'), { opacity: 0, duration: 0.12 }, tX)
+  tl.to(alvo, { x: centro.x - cAlvo.x, y: centro.y - cAlvo.y, scale: 2.9, borderRadius: 0, duration: Math.max(0.2, cena.end - tX), ease: 'power3.in' }, tX)
+  tl.to(outro, { x: prof ? -700 : 700, opacity: 0, duration: Math.max(0.18, cena.end - tX), ease: 'power2.in' }, tX)
+  tl.set([root, C.el], { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('pagina/hero-aluno', function ({ tl, root, $, $$, cena, cue, texto, params, box }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b>$1</b>')
+  $('.tag').innerHTML = md(texto('tag'))
+  $('.titulo .l1').textContent = texto('titulo1').replace(/\*/g, '')
+  $('.titulo .l2').textContent = texto('titulo2').replace(/\*/g, '')
+  $('.aula .quando').textContent = texto('aula')
+  $('.aula .fala').textContent = '“' + texto('fala_prof') + '”'
+  $('.rodape-ilustr').textContent = params.rodape
+  const chips = $$('.chip')
+  chips.forEach((c, i) => {
+    const ic = params.icones[i]
+    const lucide = /^[a-z0-9-]+$/.test(ic) ? $('.lucide-' + ic) : null
+    const icHtml = /\.svg$/.test(ic) ? `<img src="${ic}" alt="" />` : `<span class="ic">${lucide ? lucide.innerHTML : ''}</span>`
+    c.innerHTML = icHtml + `<span>${texto('chip' + (i + 1))}</span>`
+  })
+  const tE = cue('entra'), tA = cue('aula'), tEnc = cue('encolhe'), tS = cue('sai')
+  const destinos = params.destinos
+  const centros = chips.map((c) => box(c, 0.5, 0.5))
+
+  // 1º quadro: tag + título inteiro grande (cascata curta)
+  tl.fromTo($('.tag'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tE)
+  tl.fromTo($$('.titulo > div'), { opacity: 0, y: 34 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.45, stagger: 0.08 }, tE)
+  tl.fromTo($('.ast'), { opacity: 0, scale: 0.3, rotation: -60 }, { opacity: 1, scale: 1, rotation: 0, ...M.SOFT, duration: 0.7 }, tE + 0.1)
+  tl.to($('.ast'), { rotation: 40, duration: cena.dur, ease: 'none' }, tE + 0.8)
+  // cartão de aula
+  tl.fromTo($('.arco'), { opacity: 0, y: 70 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.6 }, tA)
+  tl.fromTo($('.arco .masc'), { y: 40, scale: 0.85 }, { y: 0, scale: 1, ...M.SOFT, duration: 0.6 }, tA + 0.08)
+  tl.fromTo($('.aula'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.55 }, tA + 0.12)
+  tl.fromTo($('.prog'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.55 }, tA + 0.2)
+  tl.fromTo($('.balao'), { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5 }, tA + 0.25)
+  tl.fromTo($('.enche'), { scaleX: params.progresso[0] }, { scaleX: params.progresso[1], duration: Math.max(0.5, tS - tA - 0.3), ease: 'power1.inOut' }, tA + 0.3)
+  tl.fromTo($('.rodape-ilustr'), { opacity: 0 }, { opacity: 1, duration: 0.3 }, tA)
+  // vivo: mascote pisca, balão balança
+  ;[tA + 0.9, tA + 2.6].forEach((t) => { if (t < tS) tl.to($('.arco .masc'), { scaleY: 0.88, duration: 0.05, yoyo: true, repeat: 1 }, t) })
+  tl.to($('.balao'), { y: -10, duration: 0.9, yoyo: true, repeat: 3, ease: 'sine.inOut' }, tA + 0.8)
+  // título encolhe e sobe
+  tl.to($('.titulo'), { scale: 0.62, y: -45, ...M.GENTLE, duration: 0.7 }, tEnc)
+  tl.to($('.tag'), { y: -10, duration: 0.5, ease: 'power2.out' }, tEnc)
+  // chips, um por frase
+  chips.forEach((c, i) => tl.fromTo(c, { opacity: 0, x: -30, scale: 0.9 }, { opacity: 1, x: 0, scale: 1, ...M.SOFT, duration: 0.5 }, cue('chip' + (i + 1))))
+  // saída: o resto sai; os chips voam para os cards de plano da cena seguinte
+  tl.to([$('.tag'), $('.titulo'), $('.arco'), $('.aula'), $('.prog'), $('.balao'), $('.ast'), $('.rodape-ilustr')], { opacity: 0, y: -24, duration: 0.2, stagger: 0.015, ease: 'power2.in' }, tS)
+  chips.forEach((c, i) => tl.to(c, { x: destinos[i][0] - centros[i].x, y: destinos[i][1] - centros[i].y, scale: 0.75, duration: Math.max(0.25, cena.end - tS), ease: 'power3.inOut' }, tS))
+  tl.to(chips, { opacity: 0, duration: 0.1 }, cena.end - 0.08)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('escolha/planos', function ({ tl, root, $, $$, cena, cue, texto, params, box, cursor }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b class="acc">$1</b>')
+  $('.hd .l1').innerHTML = md(texto('titulo1'))
+  $('.hd .l2').innerHTML = md(texto('titulo2'))
+  const pls = $$('.pl')
+  pls.forEach((p, i) => {
+    // "*1 hora* por semana" → número · unidade · resto
+    const t = texto('plano' + (i + 1))
+    const m = t.match(/\*([^*]+)\*\s*(.*)/) || [null, t, '']
+    const [num, ...uni] = m[1].trim().split(/\s+/)
+    p.querySelector('.n').textContent = num
+    p.querySelector('.u').textContent = uni.join(' ')
+    p.querySelector('.s').textContent = m[2]
+  })
+  const k = Math.max(1, Math.min(3, params.escolhido)) - 1
+  const alvo = pls[k]
+  const R = params.pilula
+  const pil = $('.pil')
+  Object.assign(pil.style, { left: R[0] + 'px', top: R[1] + 'px', width: R[2] + 'px', height: R[3] + 'px' })
+  pil.querySelector('span').textContent = params.pilula_texto
+  // medir antes de transform
+  const pts = pls.map((p) => box(p, 0.62, 0.6))
+  const ca = box(alvo, 0.5, 0.5)
+  const vermelho = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+  const tE = cue('entra'), tH = cue('hover'), tC = cue('clique'), tP = cue('comprime')
+
+  // 1º quadro: headline inteira; os cards já estão no lugar (nasceram dos chips)
+  tl.fromTo($$('.hd > div'), { opacity: 0, y: 28 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.4, stagger: 0.07 }, tE)
+  tl.fromTo(pls, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5, stagger: 0.05 }, tE)
+  // cursor passa pelos três (da direita para a esquerda) e para no escolhido
+  const C = cursor()
+  tl.set(C.el, { x: 1020, y: 1100 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.1 }, tH - 0.1)
+  const ordem = [2, 1, 0].filter((i) => i !== k).concat([k])
+  const passo = Math.max(0.12, (tC - tH - 0.05) / ordem.length)
+  ordem.forEach((i, j) => {
+    C.move(pts[i], tH + j * passo, passo * 0.9)
+    tl.to(pls[i], { y: -8, duration: 0.15, ease: 'power2.out' }, tH + j * passo + passo * 0.5)
+    if (i !== k) tl.to(pls[i], { y: 0, duration: 0.15, ease: 'power2.in' }, tH + (j + 1) * passo + passo * 0.4)
+  })
+  C.click(pts[k], tC)
+  tl.to(alvo, { scale: 0.97, duration: 0.06, yoyo: true, repeat: 1 }, tC)
+  tl.to(alvo.querySelector('.ring'), { opacity: 1, duration: 0.15 }, tC + 0.05)
+  pls.forEach((p, i) => { if (i !== k) { tl.to(p, { scale: 0.96, y: 0, duration: 0.3, ease: 'power2.out' }, tC + 0.05); tl.to(p.querySelector('.in'), { opacity: 0.45, duration: 0.3 }, tC + 0.05) } })
+  // vivo: borda do escolhido respira até comprimir
+  tl.to(alvo.querySelector('.ring'), { opacity: 0.6, duration: 0.35, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tC + 0.3)
+  // comprime: o card escolhido vira a pílula da cena seguinte
+  const d = Math.max(0.25, cena.end - tP)
+  tl.to(C.el, { opacity: 0, duration: 0.1 }, tP)
+  tl.to([alvo.querySelector('.in'), alvo.querySelector('.ring')], { opacity: 0, duration: 0.1 }, tP)
+  tl.to(alvo, { x: R[0] + R[2] / 2 - ca.x, y: R[1] + R[3] / 2 - ca.y, scaleX: R[2] / 290, scaleY: R[3] / 470, borderRadius: 160, backgroundColor: vermelho, duration: d, ease: 'power3.inOut' }, tP)
+  pls.forEach((p, i) => { if (i !== k) tl.to(p, { opacity: 0.5, scale: 0.92, duration: d * 0.7, ease: 'power2.in' }, tP) })
+  tl.to($('.hd'), { opacity: 0, y: -20, duration: Math.min(0.15, d * 0.5), ease: 'power2.in' }, tP)
+  tl.set(pil, { opacity: 1 }, cena.end - 0.06)
+  tl.set(alvo, { opacity: 0 }, cena.end - 0.06)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('agenda/hora-divide', function ({ tl, root, $, $$, cena, cue, texto, params, cursor }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b class="acc">$1</b>')
+  $('.h1').innerHTML = md(texto('headline'))
+  $('.h2').innerHTML = md(texto('headline2'))
+  $('.n4').textContent = texto('n4'); $('.n2').textContent = texto('n2'); $('.n1').textContent = texto('n1')
+  $('.rodape-ilustr').textContent = params.rodape
+  const R = params.pilula
+  const pil = $('.pil')
+  Object.assign(pil.style, { left: R[0] + 'px', top: R[1] + 'px', width: R[2] + 'px', height: R[3] + 'px' })
+  pil.querySelector('span').textContent = texto('pilula')
+  params.dias.forEach((d) => $('.cols').insertAdjacentHTML('beforeend', `<div class="col"><b>${d}</b></div>`))
+
+  // geometria da agenda (palco): coluna i tem centro cx(i); minutos viram altura
+  const AG = { x: 80, y: 300, w: 920 }, colW = AG.w / params.dias.length
+  const cx = (i) => AG.x + colW * (i + 0.5)
+  const PX = 7 // px por minuto
+  const topo = { 0: 450, 1: 500, 3: 440, 5: 520 }
+  const chip = (dia, min, rot) => {
+    const el = document.createElement('div')
+    el.className = 'dch'
+    Object.assign(el.style, { left: cx(dia) - 52 + 'px', top: topo[dia] + 'px', height: min * PX + 'px' })
+    el.textContent = rot
+    $('.chips').appendChild(el)
+    return el
+  }
+  const rot = (s) => s.split('×').pop().trim()
+  const c15 = [0, 1, 3, 5].map((d) => chip(d, 15, rot(texto('n4'))))
+  const c30 = { 1: chip(1, 30, rot(texto('n2'))), 3: chip(3, 30, rot(texto('n2'))) }
+  const c60 = chip(3, 60, rot(texto('n1')))
+  // 4 pedaços da pílula (mesmo comprimento total)
+  const pw = (R[2] - 3 * 12) / 4
+  const pecas = [0, 1, 2, 3].map((i) => {
+    const el = document.createElement('div')
+    el.className = 'peca'
+    Object.assign(el.style, { left: R[0] + i * (pw + 12) + 'px', top: R[1] + 'px', width: pw + 'px' })
+    el.textContent = rot(texto('n4'))
+    $('.pecas').appendChild(el)
+    return el
+  })
+  const tE = cue('entra'), tD = cue('divide'), tJ2 = cue('junta2'), tJ1 = cue('junta1'), tEn = cue('encaixa')
+  const tT = cue('troca'), tA = cue('arrasta'), tAs = cue('assenta'), tAv = cue('avatar'), tS = cue('sai')
+
+  // 1º quadro: a pílula já está no lugar (hard cut do fundo); headline e agenda entram
+  tl.set(pil, { opacity: 1 }, cena.start)
+  tl.fromTo($('.h1'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tE)
+  tl.fromTo($('.agenda'), { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.6 }, tE + 0.05)
+  tl.fromTo($$('.col b'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.25, stagger: 0.03 }, tE + 0.2)
+  tl.to(pil, { scale: 1.03, duration: 0.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tE + 0.3)
+  // divide: racha em 4 (sem partículas), cada pedaço cai no seu dia
+  tl.set(pecas, { opacity: 1 }, tD - 0.02)
+  tl.set(pil, { opacity: 0 }, tD - 0.02)
+  tl.to(pecas, { x: (i) => (i - 1.5) * 16, duration: 0.12, ease: 'power2.out' }, tD)
+  pecas.forEach((p, i) => {
+    const dia = [0, 1, 3, 5][i]
+    const dx = cx(dia) - (R[0] + i * (pw + 12) + pw / 2), dy = topo[dia] - R[1]
+    tl.to(p, { x: dx, y: dy, rotation: (i - 1.5) * 6, duration: 0.42, ease: 'power2.in' }, tD + 0.14 + i * 0.06)
+    tl.set(p, { opacity: 0 }, tD + 0.56 + i * 0.06)
+    tl.fromTo(c15[i], { opacity: 0, scaleY: 0.5 }, { opacity: 1, scaleY: 1, ...M.SNAP, duration: 0.3 }, tD + 0.54 + i * 0.06)
+  })
+  tl.fromTo($('.n4'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tD + 0.05)
+  // junta de 2 em 2 → 2 × 30'
+  const junta = (de, para, novo, t) => {
+    de.forEach((el) => tl.to(el, { x: parseFloat(para.style.left) - parseFloat(el.style.left), y: parseFloat(para.style.top) - parseFloat(el.style.top), duration: 0.28, ease: 'power3.inOut' }, t))
+    tl.set(de, { opacity: 0 }, t + 0.28)
+    tl.fromTo(novo, { opacity: 0, scaleY: 0.5 }, { opacity: 1, scaleY: 1, ...M.SOFT, duration: 0.45 }, t + 0.24)
+  }
+  junta([c15[0], c15[1]], c30[1], c30[1], tJ2)
+  junta([c15[2], c15[3]], c30[3], c30[3], tJ2 + 0.05)
+  M.swap(tl, $('.n4'), $('.n2'), tJ2)
+  // vivo entre as junções: as duas aulas de 30' e o número respiram (sem tela parada)
+  const vivo = Math.max(0.4, tJ1 - tJ2 - 0.9)
+  tl.to([c30[1], c30[3]], { scaleY: 1.04, duration: vivo / 2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tJ2 + 0.75)
+  tl.to($('.n2'), { scale: 1.04, transformOrigin: '0 50%', duration: vivo / 2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tJ2 + 0.6)
+  tl.to($('.agenda'), { y: -6, duration: vivo / 2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tJ2 + 0.5)
+  // junta → 1 × 60'
+  junta([c30[1], c30[3]], c60, c60, tJ1)
+  M.swap(tl, $('.n2'), $('.n1'), tJ1)
+  tl.to(c60, { scaleY: 0.94, duration: 0.08, yoyo: true, repeat: 1, ease: 'power2.out' }, tEn)
+  // headline troca inteira
+  M.swap(tl, $('.h1'), $('.h2'), tT)
+  // o cursor pega a aula de qui e leva para sáb
+  const C = cursor()
+  const pega = { x: cx(3) + 10, y: topo[3] + 60 * PX * 0.45 }
+  tl.set(C.el, { x: 1000, y: 1130 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.1 }, tT)
+  C.move(pega, tT, Math.max(0.15, tA - tT))
+  tl.to(c60, { scale: 1.06, duration: 0.12, ease: 'power2.out' }, tA)
+  const dx = cx(5) - cx(3), dy = topo[5] - topo[3]
+  const dArr = Math.max(0.3, tAs - tA - 0.05)
+  tl.to(c60, { x: dx, y: dy, duration: dArr, ease: 'power2.inOut' }, tA + 0.05)
+  tl.to(C.el, { x: pega.x + dx, y: pega.y + dy, duration: dArr, ease: 'power2.inOut' }, tA + 0.05)
+  tl.to(c60, { scale: 1, ...M.SNAP, duration: 0.25 }, tAs)
+  tl.to(C.el, { x: pega.x + dx + 120, y: pega.y + dy + 160, opacity: 0, duration: 0.35, ease: 'power2.in' }, tAs + 0.1)
+  // avatar do professor na ponta da pílula
+  const av = $('.avatar')
+  $('.avatar .ini').textContent = params.professor.nome[0]
+  $('.avatar .flag').src = params.professor.bandeira
+  const avPos = { x: cx(5), y: topo[5] + 60 * PX }
+  Object.assign(av.style, { left: avPos.x - 48 + 'px', top: avPos.y - 48 + 'px' })
+  tl.fromTo(av, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5 }, tAv)
+  tl.fromTo($('.rodape-ilustr'), { opacity: 0 }, { opacity: 1, duration: 0.3 }, tAv)
+  // vivo: número respira
+  tl.to($('.num'), { scale: 1.03, duration: 0.6, yoyo: true, repeat: 1, ease: 'sine.inOut', transformOrigin: '0 50%' }, tEn + 0.2)
+  // saída: o avatar vira o 1º card da cena seguinte
+  const D = params.destino_avatar
+  const dS = Math.max(0.25, cena.end - tS)
+  tl.to([$('.hd'), $('.num'), $('.agenda'), $('.chips'), $('.rodape-ilustr')], { opacity: 0, duration: dS * 0.6, ease: 'power2.in' }, tS)
+  tl.to(av, { x: D[0] - avPos.x, y: D[1] - avPos.y, scale: D[2] / 96, duration: dS, ease: 'power3.inOut' }, tS)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('pessoas/professores-chat', function ({ tl, root, $, $$, cena, cue, texto, params }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const limpa = (s) => s.replace(/\*/g, '')
+  $('.hd .l1').textContent = limpa(texto('titulo1'))
+  $('.hd .l2').textContent = limpa(texto('titulo2'))
+  const pcs = $$('.pc')
+  pcs.forEach((pc, i) => {
+    const [nome, pais] = texto('p' + (i + 1)).split('·').map((x) => x.trim())
+    pc.querySelector('.ini').textContent = nome[0]
+    pc.querySelector('.nm').textContent = nome
+    pc.querySelector('.pa').textContent = pais || ''
+    pc.querySelector('.flag').src = params.bandeiras[i]
+    pc.querySelector('.selo i').textContent = limpa(texto('selo')).replace(/\s*✓\s*$/, '')
+  })
+  $('.aluno .ma').textContent = texto('msg_aluno')
+  $('.prof').textContent = texto('msg_prof')
+  $('.rodape-ilustr').textContent = params.rodape
+  const tE = cue('entra'), tC = cue('cards'), tSe = cue('selo'), tT = cue('trava'), tR = cue('responde'), tS = cue('sai')
+
+  // 1º quadro: headline + card de Carlos (o avatar chegou da pílula)
+  tl.fromTo($$('.hd > div'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35, stagger: 0.07 }, tE)
+  tl.fromTo(pcs[0].querySelector('.cin'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tE + 0.08)
+  tl.fromTo(pcs.slice(1), { opacity: 0, y: 40, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.5, stagger: 0.08 }, tC)
+  tl.fromTo($$('.selo'), { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ...M.SNAP, duration: 0.25, stagger: 0.06 }, tSe)
+  tl.fromTo($('.rodape-ilustr'), { opacity: 0 }, { opacity: 1, duration: 0.3 }, tE + 0.2)
+  // vivo: avatares respiram
+  tl.to($$('.pc .av'), { scale: 1.04, duration: 0.5, yoyo: true, repeat: 3, stagger: 0.15, ease: 'sine.inOut' }, tE + 0.3)
+  // trava: os cards recuam um pouco, o aluno começa a frase em espanhol e os pontinhos param
+  tl.to(pcs, { scale: 0.95, duration: 0.3, ease: 'power2.out' }, tT)
+  tl.to($$('.pc .cin, .pc .av'), { opacity: 0.55, duration: 0.3 }, tT)
+  tl.fromTo($('.fa'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.45 }, tT)
+  tl.fromTo($('.aluno'), { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.45 }, tT)
+  tl.fromTo($$('.dots i'), { opacity: 0.25 }, { opacity: 1, duration: 0.12, stagger: 0.08, yoyo: true, repeat: 1 }, tT + 0.2)
+  tl.to($$('.dots i'), { opacity: 0.25, duration: 0.1 }, tT + 0.6)
+  tl.fromTo($('.interr'), { opacity: 0, scale: 0.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, ...M.SOFT, duration: 0.45 }, tT + 0.55)
+  tl.to($('.interr'), { rotation: 10, duration: 0.25, yoyo: true, repeat: 3, ease: 'sine.inOut' }, tT + 1)
+  // responde: o professor responde em português; o mascote pisca
+  tl.fromTo($('.resp'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.45 }, tR)
+  tl.to($('.resp .mm'), { scaleY: 0.86, duration: 0.05, yoyo: true, repeat: 1 }, tR + 0.4)
+  // saída: a página encolhe (a cena seguinte nasce do card do aluno)
+  tl.to(root, { scale: 0.94, duration: Math.max(0.15, cena.end - tS), ease: 'power2.in', transformOrigin: '30% 50%' }, tS)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('pagina/bloco-professor', function ({ tl, root, $, $$, cena, cue, texto, params }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const limpa = (s) => s.replace(/\*/g, '')
+  $('.rot').textContent = limpa(texto('rotulo'))
+  $('.tit .l1').textContent = limpa(texto('titulo1'))
+  $('.tit .l2').textContent = limpa(texto('titulo2'))
+  const pils = $$('.pa').slice(0, params.quantos)
+  $$('.pa').forEach((p, i) => { if (i >= params.quantos) p.remove(); else p.querySelector('.t').textContent = limpa(texto('pilula')) })
+  const tE = cue('entra'), tP = cue('pisca'), tSo = cue('sorri'), tS = cue('sai')
+  const masc = $('.masc')
+  // 1º quadro: o creme do card virou a página; o bloco verde sobe já com o texto
+  tl.fromTo($('.bloco'), { opacity: 0, scale: 0.94, y: 40 }, { opacity: 1, scale: 1, y: 0, ...M.GENTLE, duration: 0.6 }, tE)
+  tl.fromTo($('.rot'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tE + 0.05)
+  tl.fromTo($$('.tit > div'), { opacity: 0, y: 28 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.4, stagger: 0.07 }, tE + 0.08)
+  tl.fromTo(masc, { opacity: 0, y: 80, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.7 }, tE + 0.12)
+  // vivo: o mascote balança de leve (o fone) e pisca para a câmera
+  tl.to(masc, { rotation: 2.5, duration: 0.7, yoyo: true, repeat: 5, ease: 'sine.inOut' }, tE + 0.7)
+  tl.to(masc, { scaleY: 0.88, duration: 0.05, yoyo: true, repeat: 1 }, tP)
+  // as aulas pagas chegam sozinhas, uma por vez
+  pils.forEach((p, i) => {
+    const t = cue('aluno' + (i + 1))
+    tl.fromTo(p, { opacity: 0, x: 900 }, { opacity: 1, x: 0, ...M.GENTLE, duration: 0.55 }, t - 0.1)
+    tl.to(masc, { rotation: -4, duration: 0.12, yoyo: true, repeat: 1, ease: 'power2.out' }, t + 0.25)
+  })
+  tl.to(masc, { scale: 1.06, y: -12, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' }, tSo)
+  tl.to(masc, { scaleY: 0.88, duration: 0.05, yoyo: true, repeat: 1 }, tSo + 0.3)
+  // saída: o bloco encolhe e vira o 1º card da cena seguinte
+  const D = params.destino
+  const d = Math.max(0.2, cena.end - tS)
+  const card = getComputedStyle(document.documentElement).getPropertyValue('--dobra-creme-claro-card').trim()
+  tl.to($('.cont'), { opacity: 0, duration: d * 0.5, ease: 'power2.in' }, tS)
+  tl.to($('.bloco'), { x: D[0] - 40, y: D[1] - 40, scaleX: D[2] / 1000, scaleY: D[3] / 1080, backgroundColor: card, borderRadius: 60, duration: d, ease: 'power3.inOut' }, tS)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('cards/como-funciona-professor', function ({ tl, root, $, $$, cena, cue, texto, params, box, cursor }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b class="acc">$1</b>')
+  $('.rot').textContent = texto('rotulo').replace(/\*/g, '')
+  $('.hd').innerHTML = md(texto('headline'))
+  const ks = [1, 2, 3, 4].map((i) => $('.k' + i))
+  ks.forEach((k, i) => (k.querySelector('.ct').textContent = texto('c' + (i + 1)).replace(/\*/g, '')))
+  params.horarios.forEach((h) => $('.hrs').insertAdjacentHTML('beforeend', `<div class="hr"><span>${h}</span><span class="tg"><span class="on"></span><i></i></span></div>`))
+  $$('.r span').forEach((s, i) => (s.textContent = params.riscos[i]))
+  $('.pp .t').textContent = params.pilula
+  for (let i = 0; i < 10; i++) $('.cal').insertAdjacentHTML('beforeend', `<span${i === 6 ? ' class="dia"' : ''}></span>`)
+  const tgs = $$('.tg')
+  const pTg = [box(tgs[0], 0.6, 0.6), box(tgs[2], 0.6, 0.6)]
+  const cal = $('.cal'), cCal = box(cal, 0.5, 0.5)
+  const tE = cue('entra'), tTg = cue('toggle'), tS = cue('sai')
+
+  // 1º quadro: rótulo, headline e o card 1 (era o bloco verde)
+  tl.fromTo([$('.rot'), $('.hd')], { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35, stagger: 0.06 }, tE)
+  tl.fromTo(ks[0].querySelector('.ci'), { opacity: 0 }, { opacity: 1, duration: 0.25 }, tE + 0.1)
+  const ativa = (i, t) => {
+    ks.forEach((k, j) => { if (j !== i) tl.to(k.querySelector('.ring'), { opacity: 0, duration: 0.15 }, t) })
+    tl.to(ks[i].querySelector('.ring'), { opacity: 1, duration: 0.15 }, t + 0.05)
+  }
+  ativa(0, tE + 0.2)
+  // card 1: o cursor liga dois horários
+  const C = cursor()
+  tl.set(C.el, { x: 620, y: 700 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.1 }, tE + 0.15)
+  C.move(pTg[0], tE + 0.15, Math.max(0.2, tTg - tE - 0.2))
+  ;[0, 2].forEach((idx, j) => {
+    const t = tTg + j * 0.32
+    if (j) C.move(pTg[1], tTg + 0.08, 0.22)
+    C.click(pTg[j], t)
+    tl.to(tgs[idx].querySelector('.on'), { opacity: 1, duration: 0.12 }, t + 0.02)
+    tl.to(tgs[idx].querySelector('i'), { x: 38, ...M.SNAP, duration: 0.25 }, t + 0.02)
+  })
+  tl.to(C.el, { opacity: 0, duration: 0.15 }, tTg + 0.75)
+  // card 2: entra; a pílula paga pousa
+  tl.fromTo(ks[1], { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.5 }, cue('c2'))
+  ativa(1, cue('c2'))
+  tl.fromTo($('.pp'), { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, ...M.SNAP, duration: 0.3 }, cue('carimbo'))
+  // card 3: duas linhas riscadas
+  tl.fromTo(ks[2], { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.5 }, cue('c3'))
+  ativa(2, cue('c3'))
+  $$('.r i').forEach((r, i) => tl.to(r, { scaleX: 1, duration: 0.28, ease: 'power2.out' }, cue('risco' + (i + 1))))
+  $$('.r span').forEach((s, i) => tl.to(s, { opacity: 0.5, duration: 0.2 }, cue('risco' + (i + 1)) + 0.2))
+  // card 4: relógio e calendário; o dia do pagamento é marcado
+  tl.fromTo(ks[3], { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, ...M.SOFT, duration: 0.5 }, cue('c4'))
+  ativa(3, cue('c4'))
+  tl.fromTo($('.cal .dia'), { '--m': 0, scale: 1 }, { '--m': 1, scale: 1.12, duration: 0.25, ease: 'power2.out' }, cue('marca'))
+  tl.to($('.rel'), { rotation: 8, duration: 0.18, yoyo: true, repeat: 3, ease: 'sine.inOut' }, cue('c4') + 0.4)
+  // saída: o calendário do card 4 cresce e vira a agenda da cena seguinte
+  const D = params.destino
+  const d = Math.max(0.2, cena.end - tS)
+  tl.to([$('.rot'), $('.hd'), ks[0], ks[1], ks[2]], { opacity: 0, duration: d * 0.6, ease: 'power2.in' }, tS)
+  tl.to([ks[3].querySelector('.ct'), ks[3].querySelector('.cic'), $('.rel'), ks[3].querySelector('.ring')], { opacity: 0, duration: d * 0.4 }, tS)
+  tl.to(ks[3], { x: D[0] + D[2] / 2 - (550 + 225), y: D[1] + D[3] / 2 - (700 + 200), scaleX: D[2] / 450, scaleY: D[3] / 400, duration: d, ease: 'power3.inOut' }, tS)
+  tl.to(cal, { opacity: 0, duration: d * 0.5 }, tS + d * 0.3)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('agenda/vira-aula', function ({ tl, root, $, $$, cena, cue, texto, params }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  const md = (s) => s.replace(/\*([^*]+)\*/g, '<b class="acc">$1</b>')
+  $('.h1').innerHTML = md(texto('headline'))
+  $('.h2').innerHTML = md(texto('headline2'))
+  $$('.comp').forEach((c) => (c.textContent = texto('compromisso')))
+  $('.aula .t').textContent = texto('pilula')
+  $('.vao span').textContent = params.vao
+  ;[270, 500, 750].forEach((y, i) => $('.hs').insertAdjacentHTML('beforeend', `<span style="top:${y}px">${params.horas[i]}</span>`))
+  const tE = cue('entra'), tP = cue('pulsa'), tR = cue('relogio'), tV = cue('vira'), tB = cue('brilho'), tS = cue('sai')
+
+  // 1º quadro: a agenda (veio do calendário) e a pergunta inteira
+  tl.fromTo($('.h1'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tE)
+  tl.fromTo([$('.c1'), $('.vao'), $('.c2')], { opacity: 0, y: 24 }, { opacity: (i) => (i === 1 ? 0.4 : 1), y: 0, ...M.FAST, duration: 0.35, stagger: 0.05 }, tE + 0.05)
+  tl.fromTo($$('.hs span'), { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: 0.04 }, tE + 0.1)
+  tl.fromTo($('.relo'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5 }, tE + 0.1)
+  // o vão pulsa e mostra 30'
+  tl.to($('.vao span'), { opacity: 1, duration: 0.2 }, tP)
+  tl.fromTo($('.vao span'), { scale: 0.7 }, { scale: 1, ...M.SOFT, duration: 0.5 }, tP)
+  tl.to($('.vao'), { opacity: 0.75, scale: 1.02, duration: 0.4, yoyo: true, repeat: 3, ease: 'sine.inOut' }, tP)
+  // o relógio pula; o tracejado acende
+  tl.to($('.relo'), { rotation: 18, duration: 0.12, ease: 'power2.out' }, tR)
+  tl.to($('.relo'), { rotation: 0, duration: 0.3, ease: 'power2.inOut' }, tR + 0.12)
+  tl.to($('.vao'), { opacity: 1, duration: 0.2 }, tR)
+  // VIRA AULA: corte seco na batida. O vão já está cheio
+  tl.set([$('.vao'), $('.h1')], { opacity: 0 }, tV)
+  tl.set([$('.aula'), $('.h2')], { opacity: 1 }, tV)
+  tl.fromTo($('.aula'), { scale: 1.08 }, { scale: 1, ...M.SNAP, duration: 0.25, immediateRender: false }, tV)
+  tl.fromTo($('.h2'), { scale: 1.06 }, { scale: 1, ...M.SNAP, duration: 0.25, immediateRender: false }, tV)
+  tl.fromTo($('.brilho'), { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.45, immediateRender: false }, tB)
+  tl.to($('.aula .mini'), { scale: 1.1, duration: 0.12, yoyo: true, repeat: 1 }, tB + 0.1)
+  // saída: a aula sobe e vira o círculo vermelho do card professor (cena seguinte)
+  const D = params.destino
+  const d = Math.max(0.2, cena.end - tS)
+  tl.to([$('.h2'), $('.ag'), $('.hs'), $$('.comp'), $('.relo'), $('.brilho')].flat(), { opacity: 0, duration: d * 0.6, ease: 'power2.in' }, tS)
+  tl.to($('.aula > *'), { opacity: 0, duration: d * 0.4 }, tS)
+  tl.to($('.aula'), { x: D[0] - 600, y: D[1] - 600, scaleX: D[2] / 500, scaleY: D[2] / 220, borderRadius: 120, duration: d, ease: 'power3.inOut' }, tS)
+  tl.set(root, { opacity: 0 }, cena.end)
+})
+    </script>
+    <script>
+BLOCO('cta/fecho-ola', function ({ tl, root, $, $$, cena, cue, texto, params, box, cursor }) {
+  if (cena.start <= 0.001) root.style.opacity = 1; else tl.set(root, { opacity: 1 }, cena.start)
+  $('.f1').textContent = texto('frase1').replace(/\*/g, '')
+  // frase2: cada palavra num span; a palavra "olá" é a que vira o logo
+  const f2 = texto('frase2')
+  $('.f2').innerHTML = f2.split(' ').map((w) => {
+    const acc = /^\*.*\*/.test(w) || w.includes('*')
+    const limpo = w.replace(/\*/g, '')
+    return `<span class="w2${acc ? ' acc' : ''}">${limpo}</span>`
+  }).join(' ')
+  const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w]/g, '')
+  const ws = $$('.f2 .w2')
+  const wOla = ws.find((w) => fold(w.textContent) === fold(params.palavra)) || ws[ws.length - 1]
+  $('.barra .tx').textContent = texto('url')
+  $('.urlp').textContent = texto('url')
+  $('.logo').src = params.logo
+  $('.olo').src = params.olo
+  // medir antes de transform
+  const pOla = box(wOla, 0.5, 0.5), pLogo = box($('.logo'), 0.5, 0.5), pUrl = box($('.urlp'), 0.62, 0.62)
+  const tE = cue('entra'), tJ = cue('junta'), tF = cue('frase'), tO = cue('ola'), tC = cue('clique'), tP = cue('pisca')
+
+  // 1º quadro: os dois cards no lugar da abertura + a frase inteira
+  tl.fromTo($('.f1'), { opacity: 0, y: 26 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.4 }, tE)
+  tl.fromTo($('.brilho'), { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5 }, tE + 0.1)
+  tl.fromTo($$('.kc'), { y: 30 }, { y: 0, ...M.FAST, duration: 0.3, stagger: 0.05 }, tE)
+  tl.fromTo($('.blob'), { x: 160, y: 120, rotation: -10 }, { x: 0, y: 0, rotation: 0, ...M.GENTLE, duration: 0.9 }, tE)
+  tl.to($('.blob'), { rotation: 6, y: -10, duration: Math.max(1, cena.dur - 1), ease: 'sine.inOut' }, tE + 0.9)
+  // junta: os dois cards voltam a ser a barra do navegador (o inverso da abertura)
+  const bar = { x: 90, y: 470, w: 900, h: 190 }
+  $$('.kc').forEach((k, i) => {
+    const c = [i ? 560 : 80, 305, 440, 560]
+    tl.to(k.querySelector('img'), { opacity: 0, duration: 0.12 }, tJ)
+    tl.to(k.querySelector('.b'), { opacity: 0, duration: 0.12 }, tJ)
+    tl.to(k, { x: bar.x + i * bar.w / 2 - c[0], y: bar.y - c[1], scaleX: (bar.w / 2) / c[2], scaleY: bar.h / c[3], transformOrigin: '0 0', duration: 0.32, ease: 'power3.inOut' }, tJ + 0.05)
+  })
+  tl.set($$('.kc'), { opacity: 0 }, tJ + 0.37)
+  tl.set($('.barra'), { opacity: 1 }, tJ + 0.37)
+  tl.fromTo($('.barra .url'), { opacity: 0, scaleX: 0.8 }, { opacity: 1, scaleX: 1, ...M.FAST, duration: 0.3, immediateRender: false }, tJ + 0.37)
+  // frase 2 inteira
+  M.swap(tl, $('.f1'), null, tF - 0.05)
+  tl.to($('.brilho'), { opacity: 0, duration: 0.15 }, tF - 0.05)
+  tl.fromTo($('.f2'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, ...M.FAST, duration: 0.35 }, tF)
+  // "olá" vira o logo; a barra recolhe na pílula da URL
+  tl.to(ws.filter((w) => w !== wOla), { opacity: 0, y: -20, duration: 0.2, ease: 'power2.in' }, tO)
+  tl.to(wOla, { x: pLogo.x - pOla.x, y: pLogo.y - pOla.y, scale: 2.2, opacity: 0, duration: 0.4, ease: 'power3.inOut' }, tO)
+  tl.set($('.logo'), { opacity: 1 }, tO + 0.18)
+  tl.fromTo($('.logo'), { clipPath: 'inset(0% 100% 0% 0%)', scale: 0.92 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 0.6, ease: 'power2.out', immediateRender: false }, tO + 0.18)
+  tl.to($('.barra'), { y: 150 + 3, scaleX: 640 / 900, scaleY: 116 / 190, opacity: 0, duration: 0.35, ease: 'power3.inOut' }, tO + 0.1)
+  tl.fromTo($('.urlp'), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, ...M.SOFT, duration: 0.5, immediateRender: false }, tO + 0.3)
+  tl.fromTo($('.olo'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...M.SOFT, duration: 0.5, immediateRender: false }, tO + 0.45)
+  // o cursor clica na URL
+  const C = cursor()
+  tl.set(C.el, { x: 1000, y: 1150 }, cena.start)
+  tl.to(C.el, { opacity: 1, duration: 0.12 }, tC - 0.5)
+  C.move(pUrl, tC - 0.5, 0.45)
+  C.click(pUrl, tC)
+  tl.to($('.urlp'), { scale: 0.97, duration: 0.07, yoyo: true, repeat: 1 }, tC)
+  tl.to($('.urlp'), { scale: 1.04, duration: 0.25, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tC + 0.2)
+  // oló pisca para a câmera
+  tl.to($('.olo'), { scaleY: 0.82, duration: 0.06, yoyo: true, repeat: 1 }, tP)
+  tl.to($('.olo'), { rotation: -6, duration: 0.25, yoyo: true, repeat: 1, ease: 'sine.inOut' }, tP + 0.15)
+})
+    </script>
+    <script>
+      const tl = gsap.timeline({ paused: true })
+      BLOCOS.montar(tl, [{"inst":"c1","use":"fundo/dobras","cena":null,"slots":[],"padroes":{"dobras":{}},"params":{"dobras":{"s01":"vermelho","s02":"vermelho","s03":"creme","s04":"creme","s05":"azul","s06":"creme-suave","s07":"vermelho","s08":"creme","s09":"creme-claro","s10":"creme","s11":"vermelho"}}},{"inst":"s01","use":"abertura/barra-navegador","cena":"s01","slots":["url","aba"],"padroes":{"favicon":"brand/logo/logo-simbolo-cor.svg","cards":[[80,305,440,560],[560,305,440,560]]}},{"inst":"s02","use":"escolha/dois-cards","cena":"s02","slots":["aluno","professor"],"padroes":{"escolha":"aluno","de":"barra","hesita":true}},{"inst":"s03","use":"pagina/hero-aluno","cena":"s03","slots":["tag","titulo1","titulo2","chip1","chip2","chip3","aula","fala_prof"],"padroes":{"icones":["brand/icons/icone-nativos-verificados.svg","brand/icons/icone-sem-horario-fixo.svg","map-pin"],"progresso":[0.55,0.68],"rodape":"ilustrativo","destinos":[[225,655],[540,655],[855,655]]}},{"inst":"s04","use":"escolha/planos","cena":"s04","slots":["titulo1","titulo2","plano1","plano2","plano3"],"padroes":{"escolhido":1,"pilula":[600,160,360,84],"pilula_texto":"1 hora"}},{"inst":"s05","use":"agenda/hora-divide","cena":"s05","slots":["headline","headline2","pilula","n4","n2","n1"],"padroes":{"dias":["seg","ter","qua","qui","sex","sáb","dom"],"pilula":[600,160,360,84],"professor":{"nome":"Carlos","bandeira":"assets/flags/co.svg"},"destino_avatar":[225,410,140],"rodape":"ilustrativo"}},{"inst":"s06","use":"pessoas/professores-chat","cena":"s06","slots":["titulo1","titulo2","p1","p2","p3","selo","msg_aluno","msg_prof"],"padroes":{"bandeiras":["assets/flags/co.svg","assets/flags/ar.svg","assets/flags/mx.svg"],"rodape":"ilustrativo"}},{"inst":"s07","use":"escolha/dois-cards","cena":"s07","slots":["aluno","professor"],"padroes":{"escolha":"aluno","de":"barra","hesita":true}},{"inst":"s08","use":"pagina/bloco-professor","cena":"s08","slots":["rotulo","titulo1","titulo2","pilula"],"padroes":{"quantos":3,"destino":[80,260,450,400]}},{"inst":"s09","use":"cards/como-funciona-professor","cena":"s09","slots":["rotulo","headline","c1","c2","c3","c4"],"padroes":{"horarios":["Seg 09:00","Qua 14:00","Sex 18:00"],"riscos":["Negociar preço","Cobrar aluno"],"pilula":"Aula paga","destino":[200,220,680,860]}},{"inst":"s10","use":"agenda/vira-aula","cena":"s10","slots":["headline","headline2","compromisso","pilula"],"padroes":{"horas":["14:00","14:30","15:00"],"vao":"30'","destino":[780,763,116]}},{"inst":"s11","use":"cta/fecho-ola","cena":"s11","slots":["frase1","frase2","url"],"padroes":{"logo":"brand/logo/logo-horizontal-branco-laco-verde.svg","olo":"brand/logo/logo-simbolo-branco.svg","palavra":"olá"}}])
+      tl.set({}, {}, T.duration)
+      window.__timelines = window.__timelines || {}
+      window.__timelines['main'] = M.offset(tl, __TIME_OFFSET__)
+    </script>
+  </body>
+</html>

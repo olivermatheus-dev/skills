@@ -1,0 +1,19 @@
+{
+  "id": "cards/como-funciona-professor",
+  "tipo": "cards",
+  "titulo": "Método do site (print 02) na dobra creme-claro: 4 cards 2 × 2 com ícone Lucide, um por fala, cada um com um gesto-prova (plano de aula riscado, alunos chegam e a negociação é riscada, cobranças riscadas + selo de pago, o cursor liga horários); a lista se acumula e o card ativo ganha a borda vermelha",
+  "camada": "palco",
+  "slots": ["rotulo", "headline", "c1", "c2", "c3", "c4"],
+  "params": {
+    "horarios": { "padrao": ["Lun 09:00", "Mié 14:00", "Vie 18:00"], "descricao": "linhas da mini-agenda do card 4 (ilustrativo)" },
+    "icones": { "padrao": ["lucide:book-open", "lucide:users", "lucide:wallet", "lucide:calendar-clock"], "descricao": "ícone de cada card (documentação: os ícones estão fixos no bloco.html via {{i:…}})" }
+  },
+  "cues": ["entra", "c1", "g1", "c2", "g2", "c3", "g3", "c4", "g4", "sai"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "c1": "pop", "g1": "risco duplo", "c2": "pop", "g2": "3 pops + risco", "c3": "pop", "g3": "2 riscos + carimbo", "c4": "pop", "g4": "2 clicks", "sai": "swish" },
+  "tokens": ["--dobra-creme-claro-*", "--primary", "--primary-strong", "--accent", "--border", "--surface-2", "--support-soft", "--support-deep", "--muted", "--shadow-sm"],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

@@ -1,0 +1,2081 @@
+{
+  "status": "plano",
+  "fps": 30,
+  "formats": [
+    "4x5"
+  ],
+  "vo": [
+    {
+      "id": "f01",
+      "text": "Fluência em espanhol se ganha falando.",
+      "start": 1.95,
+      "file": "audio/vo/f01.wav",
+      "length": 1.693,
+      "words": [
+        {
+          "w": "Fluência",
+          "s": 1.99,
+          "e": 2.433
+        },
+        {
+          "w": "em",
+          "s": 2.433,
+          "e": 2.5
+        },
+        {
+          "w": "espanhol",
+          "s": 2.5,
+          "e": 2.933
+        },
+        {
+          "w": "se",
+          "s": 2.933,
+          "e": 3.058
+        },
+        {
+          "w": "ganha",
+          "s": 3.058,
+          "e": 3.25
+        },
+        {
+          "w": "falando",
+          "s": 3.25,
+          "e": 3.643
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 3.643
+    },
+    {
+      "id": "f02",
+      "text": "Com nativos. Na hora que der. De onde você estiver.",
+      "start": 3.843,
+      "file": "audio/vo/f02.wav",
+      "length": 3.245,
+      "words": [
+        {
+          "w": "Com",
+          "s": 3.883,
+          "e": 3.998
+        },
+        {
+          "w": "nativos",
+          "s": 3.998,
+          "e": 4.905
+        },
+        {
+          "w": "Na",
+          "s": 4.905,
+          "e": 5.097
+        },
+        {
+          "w": "hora",
+          "s": 5.097,
+          "e": 5.319
+        },
+        {
+          "w": "que",
+          "s": 5.319,
+          "e": 5.424
+        },
+        {
+          "w": "der.",
+          "s": 5.424,
+          "e": 5.922
+        },
+        {
+          "w": "De",
+          "s": 5.922,
+          "e": 6.143
+        },
+        {
+          "w": "onde",
+          "s": 6.143,
+          "e": 6.412
+        },
+        {
+          "w": "você",
+          "s": 6.412,
+          "e": 6.623
+        },
+        {
+          "w": "estiver",
+          "s": 6.623,
+          "e": 7.088
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 7.088
+    },
+    {
+      "id": "f03",
+      "text": "Quantas horas por semana você quer falar espanhol?",
+      "start": 7.388,
+      "file": "audio/vo/f03.wav",
+      "length": 1.999,
+      "words": [
+        {
+          "w": "Quantas",
+          "s": 7.428,
+          "e": 7.678
+        },
+        {
+          "w": "horas",
+          "s": 7.678,
+          "e": 7.957
+        },
+        {
+          "w": "por",
+          "s": 7.957,
+          "e": 8.063
+        },
+        {
+          "w": "semana",
+          "s": 8.063,
+          "e": 8.418
+        },
+        {
+          "w": "você",
+          "s": 8.418,
+          "e": 8.582
+        },
+        {
+          "w": "quer",
+          "s": 8.582,
+          "e": 8.726
+        },
+        {
+          "w": "falar",
+          "s": 8.726,
+          "e": 8.947
+        },
+        {
+          "w": "espanhol",
+          "s": 8.947,
+          "e": 9.387
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 9.387
+    },
+    {
+      "id": "f04",
+      "text": "Sua hora, do seu jeito:",
+      "start": 9.737,
+      "file": "audio/vo/f04.wav",
+      "length": 1.375,
+      "words": [
+        {
+          "w": "Sua",
+          "s": 9.777,
+          "e": 10.085
+        },
+        {
+          "w": "hora",
+          "s": 10.085,
+          "e": 10.499
+        },
+        {
+          "w": "do",
+          "s": 10.499,
+          "e": 10.585
+        },
+        {
+          "w": "seu",
+          "s": 10.585,
+          "e": 10.758
+        },
+        {
+          "w": "jeito",
+          "s": 10.758,
+          "e": 11.112
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 11.112
+    },
+    {
+      "id": "f05",
+      "text": "4 conversas de 15 minutos,",
+      "say": "Quatro conversas de quinze minutos,",
+      "start": 11.262,
+      "file": "audio/vo/f05.wav",
+      "length": 1.758,
+      "words": [
+        {
+          "w": "Quatro",
+          "s": 11.302,
+          "e": 11.572
+        },
+        {
+          "w": "conversas",
+          "s": 11.572,
+          "e": 12.091
+        },
+        {
+          "w": "de",
+          "s": 12.091,
+          "e": 12.206
+        },
+        {
+          "w": "quinze",
+          "s": 12.206,
+          "e": 12.524
+        },
+        {
+          "w": "minutos",
+          "s": 12.524,
+          "e": 13.02
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 13.02
+    },
+    {
+      "id": "f06",
+      "text": "2 conversas de 30 minutos.",
+      "say": "Duas conversas de trinta minutos.",
+      "start": 13.17,
+      "file": "audio/vo/f06.wav",
+      "length": 1.764,
+      "words": [
+        {
+          "w": "Duas",
+          "s": 13.21,
+          "e": 13.48
+        },
+        {
+          "w": "conversas",
+          "s": 13.48,
+          "e": 14.018
+        },
+        {
+          "w": "de",
+          "s": 14.018,
+          "e": 14.181
+        },
+        {
+          "w": "trinta",
+          "s": 14.181,
+          "e": 14.46
+        },
+        {
+          "w": "minutos",
+          "s": 14.46,
+          "e": 14.934
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 14.934
+    },
+    {
+      "id": "f07",
+      "text": "Ou uma hora inteira, de uma vez.",
+      "start": 15.084,
+      "file": "audio/vo/f07.wav",
+      "length": 1.743,
+      "words": [
+        {
+          "w": "Ou",
+          "s": 15.124,
+          "e": 15.317
+        },
+        {
+          "w": "uma",
+          "s": 15.317,
+          "e": 15.528
+        },
+        {
+          "w": "hora",
+          "s": 15.528,
+          "e": 15.701
+        },
+        {
+          "w": "inteira",
+          "s": 15.701,
+          "e": 16.23
+        },
+        {
+          "w": "de",
+          "s": 16.23,
+          "e": 16.346
+        },
+        {
+          "w": "uma",
+          "s": 16.346,
+          "e": 16.499
+        },
+        {
+          "w": "vez",
+          "s": 16.499,
+          "e": 16.827
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 16.827
+    },
+    {
+      "id": "f08",
+      "text": "Você escolhe o que cabe na sua rotina. E com quem quer falar.",
+      "start": 16.977,
+      "file": "audio/vo/f08.wav",
+      "length": 2.872,
+      "words": [
+        {
+          "w": "Você",
+          "s": 17.017,
+          "e": 17.258
+        },
+        {
+          "w": "escolhe",
+          "s": 17.258,
+          "e": 17.652
+        },
+        {
+          "w": "o",
+          "s": 17.652,
+          "e": 17.681
+        },
+        {
+          "w": "que",
+          "s": 17.681,
+          "e": 17.796
+        },
+        {
+          "w": "cabe",
+          "s": 17.796,
+          "e": 18.027
+        },
+        {
+          "w": "na",
+          "s": 18.027,
+          "e": 18.113
+        },
+        {
+          "w": "sua",
+          "s": 18.113,
+          "e": 18.258
+        },
+        {
+          "w": "rotina",
+          "s": 18.258,
+          "e": 18.94
+        },
+        {
+          "w": "E",
+          "s": 18.94,
+          "e": 19.008
+        },
+        {
+          "w": "com",
+          "s": 19.008,
+          "e": 19.181
+        },
+        {
+          "w": "quem",
+          "s": 19.181,
+          "e": 19.344
+        },
+        {
+          "w": "quer",
+          "s": 19.344,
+          "e": 19.498
+        },
+        {
+          "w": "falar",
+          "s": 19.498,
+          "e": 19.849
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 19.849
+    },
+    {
+      "id": "f09",
+      "text": "Professores nativos que também falam português.",
+      "start": 20.199,
+      "file": "audio/vo/f09.wav",
+      "length": 2.236,
+      "words": [
+        {
+          "w": "Professores",
+          "s": 20.239,
+          "e": 20.739
+        },
+        {
+          "w": "nativos",
+          "s": 20.739,
+          "e": 21.211
+        },
+        {
+          "w": "que",
+          "s": 21.211,
+          "e": 21.336
+        },
+        {
+          "w": "também",
+          "s": 21.336,
+          "e": 21.653
+        },
+        {
+          "w": "falam",
+          "s": 21.653,
+          "e": 21.903
+        },
+        {
+          "w": "português",
+          "s": 21.903,
+          "e": 22.435
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 22.435
+    },
+    {
+      "id": "f10",
+      "text": "Travou? Eles entendem.",
+      "start": 22.635,
+      "file": "audio/vo/f10.wav",
+      "length": 1.423,
+      "words": [
+        {
+          "w": "Travou",
+          "s": 22.675,
+          "e": 23.29
+        },
+        {
+          "w": "Eles",
+          "s": 23.29,
+          "e": 23.512
+        },
+        {
+          "w": "entendem",
+          "s": 23.512,
+          "e": 24.058
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 24.058
+    },
+    {
+      "id": "f11",
+      "text": "Você fala espanhol desde que nasceu.",
+      "start": 25.008,
+      "file": "audio/vo/f11.wav",
+      "length": 1.644,
+      "words": [
+        {
+          "w": "Você",
+          "s": 25.048,
+          "e": 25.26
+        },
+        {
+          "w": "fala",
+          "s": 25.26,
+          "e": 25.452
+        },
+        {
+          "w": "espanhol",
+          "s": 25.452,
+          "e": 25.875
+        },
+        {
+          "w": "desde",
+          "s": 25.875,
+          "e": 26.193
+        },
+        {
+          "w": "que",
+          "s": 26.193,
+          "e": 26.26
+        },
+        {
+          "w": "nasceu",
+          "s": 26.26,
+          "e": 26.652
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 26.652
+    },
+    {
+      "id": "f12",
+      "text": "Agora pode ganhar com isso sem correr atrás de aluno.",
+      "start": 26.852,
+      "file": "audio/vo/f12.wav",
+      "length": 2.334,
+      "words": [
+        {
+          "w": "Agora",
+          "s": 26.892,
+          "e": 27.267
+        },
+        {
+          "w": "pode",
+          "s": 27.267,
+          "e": 27.412
+        },
+        {
+          "w": "ganhar",
+          "s": 27.412,
+          "e": 27.642
+        },
+        {
+          "w": "com",
+          "s": 27.642,
+          "e": 27.796
+        },
+        {
+          "w": "isso",
+          "s": 27.796,
+          "e": 28.037
+        },
+        {
+          "w": "sem",
+          "s": 28.037,
+          "e": 28.248
+        },
+        {
+          "w": "correr",
+          "s": 28.248,
+          "e": 28.508
+        },
+        {
+          "w": "atrás",
+          "s": 28.508,
+          "e": 28.787
+        },
+        {
+          "w": "de",
+          "s": 28.787,
+          "e": 28.835
+        },
+        {
+          "w": "aluno",
+          "s": 28.835,
+          "e": 29.186
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 29.186
+    },
+    {
+      "id": "f13",
+      "text": "Você define seus horários.",
+      "start": 29.466,
+      "file": "audio/vo/f13.wav",
+      "length": 1.328,
+      "words": [
+        {
+          "w": "Você",
+          "s": 29.506,
+          "e": 29.718
+        },
+        {
+          "w": "define",
+          "s": 29.718,
+          "e": 30.16
+        },
+        {
+          "w": "seus",
+          "s": 30.16,
+          "e": 30.304
+        },
+        {
+          "w": "horários",
+          "s": 30.304,
+          "e": 30.794
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 30.794
+    },
+    {
+      "id": "f14",
+      "text": "O aluno chega com a aula já paga.",
+      "start": 30.944,
+      "file": "audio/vo/f14.wav",
+      "length": 1.594,
+      "words": [
+        {
+          "w": "O",
+          "s": 30.984,
+          "e": 31.061
+        },
+        {
+          "w": "aluno",
+          "s": 31.061,
+          "e": 31.417
+        },
+        {
+          "w": "chega",
+          "s": 31.417,
+          "e": 31.677
+        },
+        {
+          "w": "com",
+          "s": 31.677,
+          "e": 31.821
+        },
+        {
+          "w": "a",
+          "s": 31.821,
+          "e": 31.859
+        },
+        {
+          "w": "aula",
+          "s": 31.859,
+          "e": 32.08
+        },
+        {
+          "w": "já",
+          "s": 32.08,
+          "e": 32.186
+        },
+        {
+          "w": "paga",
+          "s": 32.186,
+          "e": 32.538
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 32.538
+    },
+    {
+      "id": "f15",
+      "text": "Sem negociar preço. Sem cobrar ninguém.",
+      "start": 32.688,
+      "file": "audio/vo/f15.wav",
+      "length": 2.407,
+      "words": [
+        {
+          "w": "Sem",
+          "s": 32.728,
+          "e": 32.998
+        },
+        {
+          "w": "negociar",
+          "s": 32.998,
+          "e": 33.478
+        },
+        {
+          "w": "preço",
+          "s": 33.478,
+          "e": 34.103
+        },
+        {
+          "w": "Sem",
+          "s": 34.103,
+          "e": 34.344
+        },
+        {
+          "w": "cobrar",
+          "s": 34.344,
+          "e": 34.709
+        },
+        {
+          "w": "ninguém",
+          "s": 34.709,
+          "e": 35.095
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 35.095
+    },
+    {
+      "id": "f16",
+      "text": "Cancelamento com regras claras e pagamento em dia.",
+      "start": 35.245,
+      "file": "audio/vo/f16.wav",
+      "length": 2.358,
+      "words": [
+        {
+          "w": "Cancelamento",
+          "s": 35.285,
+          "e": 35.872
+        },
+        {
+          "w": "com",
+          "s": 35.872,
+          "e": 35.968
+        },
+        {
+          "w": "regras",
+          "s": 35.968,
+          "e": 36.305
+        },
+        {
+          "w": "claras",
+          "s": 36.305,
+          "e": 36.66
+        },
+        {
+          "w": "e",
+          "s": 36.66,
+          "e": 36.776
+        },
+        {
+          "w": "pagamento",
+          "s": 36.776,
+          "e": 37.228
+        },
+        {
+          "w": "em",
+          "s": 37.228,
+          "e": 37.305
+        },
+        {
+          "w": "dia",
+          "s": 37.305,
+          "e": 37.603
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 37.603
+    },
+    {
+      "id": "f17",
+      "text": "Sobrou meia hora entre um compromisso e outro?",
+      "start": 37.933,
+      "file": "audio/vo/f17.wav",
+      "length": 2.2,
+      "words": [
+        {
+          "w": "Sobrou",
+          "s": 37.973,
+          "e": 38.348
+        },
+        {
+          "w": "meia",
+          "s": 38.348,
+          "e": 38.685
+        },
+        {
+          "w": "hora",
+          "s": 38.685,
+          "e": 39.031
+        },
+        {
+          "w": "entre",
+          "s": 39.031,
+          "e": 39.214
+        },
+        {
+          "w": "um",
+          "s": 39.214,
+          "e": 39.252
+        },
+        {
+          "w": "compromisso",
+          "s": 39.252,
+          "e": 39.771
+        },
+        {
+          "w": "e",
+          "s": 39.771,
+          "e": 39.848
+        },
+        {
+          "w": "outro",
+          "s": 39.848,
+          "e": 40.133
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 40.133
+    },
+    {
+      "id": "f18",
+      "text": "Vira aula.",
+      "start": 40.433,
+      "file": "audio/vo/f18.wav",
+      "length": 0.734,
+      "words": [
+        {
+          "w": "Vira",
+          "s": 40.473,
+          "e": 40.829
+        },
+        {
+          "w": "aula",
+          "s": 40.829,
+          "e": 41.167
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 41.167
+    },
+    {
+      "id": "f19",
+      "text": "Conversação é treino.",
+      "start": 41.517,
+      "file": "audio/vo/f19.wav",
+      "length": 1.159,
+      "words": [
+        {
+          "w": "Conversação",
+          "s": 41.557,
+          "e": 42.25
+        },
+        {
+          "w": "é",
+          "s": 42.25,
+          "e": 42.279
+        },
+        {
+          "w": "treino",
+          "s": 42.279,
+          "e": 42.676
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 42.676
+    },
+    {
+      "id": "f20",
+      "text": "Comece com um olá.",
+      "start": 42.826,
+      "file": "audio/vo/f20.wav",
+      "length": 0.989,
+      "words": [
+        {
+          "w": "Comece",
+          "s": 42.866,
+          "e": 43.28
+        },
+        {
+          "w": "com",
+          "s": 43.28,
+          "e": 43.433
+        },
+        {
+          "w": "um",
+          "s": 43.433,
+          "e": 43.52
+        },
+        {
+          "w": "olá",
+          "s": 43.52,
+          "e": 43.815
+        }
+      ],
+      "voice": "edge-thalita-rapida",
+      "end": 43.815
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "use": "abertura/barra-navegador",
+      "block": "gancho",
+      "len": 0.9,
+      "on_screen": "ola-espanhol.com.br|Olá Espanhol",
+      "params": {
+        "dobra": "vermelho",
+        "favicon": "brand/logo/logo-simbolo-cor.svg"
+      },
+      "note": "o vídeo abre no lugar onde tudo acontece: o endereço do site digitado na barra do manual (p. 17); o campo vermelho da URL é a pílula que vai virar a hora de conversa",
+      "start": 0,
+      "end": 0.9
+    },
+    {
+      "id": "s02",
+      "use": "escolha/dois-cards",
+      "block": "conceito",
+      "len": 1,
+      "on_screen": "Quero *aprender espanhol*|Quero *ensinar espanhol*",
+      "params": {
+        "dobra": "vermelho",
+        "escolha": "aluno",
+        "de": "barra"
+      },
+      "note": "o site tem duas portas e o cursor hesita entre elas: quem assiste se pergunta 'qual sou eu?'; os olhos dos dois mascotes seguem o cursor (a marca está viva)",
+      "start": 0.9,
+      "end": 1.9
+    },
+    {
+      "id": "s03",
+      "use": "pagina/hero-aluno",
+      "block": "conceito",
+      "vo": [
+        "f01",
+        "f02"
+      ],
+      "lead": 0.05,
+      "tail": 0.2,
+      "on_screen": "Conversa de verdade com *nativos*|Fluência em espanhol|*se ganha falando.*|Com nativos|Na hora que der|De onde você estiver|Sua próxima aula: quarta, 19:30|¿Cómo te fue en la entrevista?",
+      "params": {
+        "dobra": "creme",
+        "progresso": [
+          0.55,
+          0.66
+        ],
+        "rodape": "ilustrativo"
+      },
+      "note": "a promessa vira uma aula concreta: um cartão 'Sua próxima aula: quarta, 19:30' com um professor perguntando em espanhol '¿Cómo te fue en la entrevista?' (conversa de vida real, não exercício) e a barra de horas da semana enchendo; os chips dão ícone a cada condição",
+      "start": 1.9,
+      "end": 7.288
+    },
+    {
+      "id": "s04",
+      "use": "escolha/planos",
+      "block": "produto",
+      "vo": [
+        "f03"
+      ],
+      "lead": 0.1,
+      "tail": 0.25,
+      "on_screen": "Quantas horas por semana|você quer *falar espanhol?*|*1 hora* por semana|*2 horas* por semana|*3 horas* por semana",
+      "params": {
+        "dobra": "creme",
+        "escolhido": 1,
+        "selo": null
+      },
+      "note": "os planos reais do site (1, 2 ou 3 horas por semana) e o gesto de escolher: o cursor passa pelos três e escolhe o menor, mostrando que dá para começar pequeno",
+      "start": 7.288,
+      "end": 9.637
+    },
+    {
+      "id": "s05",
+      "use": "agenda/hora-divide",
+      "block": "produto",
+      "vo": [
+        "f04",
+        "f05",
+        "f06",
+        "f07",
+        "f08"
+      ],
+      "lead": 0.1,
+      "tail": 0.25,
+      "on_screen": "*Sua hora,* do seu jeito:|Na sua rotina, *com quem quiser.*|1 hora|4 × 15'|2 × 30'|1 × 60'",
+      "params": {
+        "dobra": "azul",
+        "dias": [
+          "seg",
+          "ter",
+          "qua",
+          "qui",
+          "sex",
+          "sáb",
+          "dom"
+        ],
+        "professor": {
+          "nome": "Carlos",
+          "bandeira": "assets/flags/co.svg"
+        },
+        "rodape": "ilustrativo"
+      },
+      "note": "a hora não encolhe ao se dividir: as pílulas mantêm o mesmo comprimento total (60') e vão para dias diferentes da semana; depois a escolha é física (o cursor arrasta a aula para outro dia) e o professor vira um rosto na ponta da pílula",
+      "gap": 0.15,
+      "start": 9.637,
+      "end": 20.099
+    },
+    {
+      "id": "s06",
+      "use": "pessoas/professores-chat",
+      "block": "prova",
+      "vo": [
+        "f09",
+        "f10"
+      ],
+      "lead": 0.1,
+      "tail": 0.12,
+      "on_screen": "Professores *nativos*|que também falam português.|Carlos · Colômbia|Lucía · Argentina|Mateo · México|Fala português ✓|Ayer fui al…|Tranquilo, pode falar em português.",
+      "params": {
+        "dobra": "creme-suave",
+        "rodape": "ilustrativo"
+      },
+      "note": "nome, país e bandeira mostram que são nativos de verdade (e de países diferentes); o selo 'Fala português ✓' é a prova; no chat, a frase do aluno trava no meio, em espanhol, e o professor responde em português: o medo de travar vira cena",
+      "start": 20.099,
+      "end": 24.178
+    },
+    {
+      "id": "s07",
+      "use": "escolha/dois-cards",
+      "block": "virada",
+      "len": 0.75,
+      "on_screen": "Quero *aprender espanhol*|Quero *ensinar espanhol*",
+      "params": {
+        "dobra": "vermelho",
+        "escolha": "professor",
+        "de": "pagina"
+      },
+      "note": "as mesmas duas portas, na mesma posição da abertura: agora o cursor vai direto ao outro lado, sem hesitar; o vídeo vira para quem ensina",
+      "start": 24.178,
+      "end": 24.928
+    },
+    {
+      "id": "s08",
+      "use": "pagina/bloco-professor",
+      "block": "virada",
+      "vo": [
+        "f11",
+        "f12"
+      ],
+      "lead": 0.08,
+      "tail": 0.2,
+      "on_screen": "PARA PROFESSORES NATIVOS|Você fala espanhol|desde que nasceu.|Aula paga",
+      "params": {
+        "dobra": "verde",
+        "quantos": 3
+      },
+      "note": "em vez de o professor correr atrás, quem anda são as pílulas: três aulas pagas, cada uma com um mini-mascote aluno, chegam sozinhas e param ao lado dele; é a mesma pílula que o aluno escolheu do outro lado",
+      "start": 24.928,
+      "end": 29.386
+    },
+    {
+      "id": "s09",
+      "use": "cards/como-funciona-professor",
+      "block": "produto",
+      "vo": [
+        "f13",
+        "f14",
+        "f15",
+        "f16"
+      ],
+      "lead": 0.08,
+      "tail": 0.25,
+      "on_screen": "COMO FUNCIONA|Pra quem *ensina*|Seus horários|Aula já paga|Sem negociar, sem cobrar|Regras claras, pagamento em dia",
+      "params": {
+        "dobra": "creme-claro"
+      },
+      "note": "cada frase vira um gesto que prova o que diz: o cursor liga dois horários, a pílula paga pousa no card, 'negociar preço' e 'cobrar aluno' são riscados, e o calendário marca o dia do pagamento; os cards anteriores ficam inteiros (é uma lista que se acumula)",
+      "gap": 0.15,
+      "start": 29.386,
+      "end": 37.853
+    },
+    {
+      "id": "s10",
+      "use": "agenda/vira-aula",
+      "block": "revelacao",
+      "vo": [
+        "f17",
+        "f18"
+      ],
+      "lead": 0.08,
+      "tail": 0.25,
+      "on_screen": "Sobrou *meia hora*?|Vira *aula*.|Compromisso|Aula · 30 min",
+      "params": {
+        "dobra": "creme",
+        "vao_min": 30
+      },
+      "note": "a meia hora que sobra no dia do professor é exatamente a meia hora que o aluno escolheu na s05: a mesma pílula de 30', agora com o mini-mascote aluno, preenche o vão. Os dois lados se encaixam",
+      "gap": 0.3,
+      "start": 37.853,
+      "end": 41.417
+    },
+    {
+      "id": "s11",
+      "use": "cta/fecho-ola",
+      "block": "cartão final",
+      "vo": [
+        "f19",
+        "f20"
+      ],
+      "lead": 0.1,
+      "tail": 2.1,
+      "on_screen": "Conversação é treino.|Comece com um *olá*.|ola-espanhol.com.br",
+      "params": {
+        "dobra": "vermelho",
+        "logo": "brand/logo/logo-horizontal-branco-laco-verde.svg"
+      },
+      "note": "as duas portas voltam a ser uma só barra: aluno e professor se encontram no mesmo endereço; o 'olá' da frase vira o próprio logo (o nome da marca é o primeiro passo) e o cursor clica na URL",
+      "gap": 0.15,
+      "start": 41.417,
+      "end": 45.915
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s01",
+      "at": 0.02,
+      "t": 0.02
+    },
+    {
+      "id": "e2",
+      "cue": "digita",
+      "type": "reveal",
+      "scene": "s01",
+      "at": 0.05,
+      "t": 0.05
+    },
+    {
+      "id": "e3",
+      "cue": "enter",
+      "type": "reveal",
+      "scene": "s01",
+      "at": 0.5,
+      "t": 0.5
+    },
+    {
+      "id": "e4",
+      "cue": "divide",
+      "type": "reveal",
+      "scene": "s01",
+      "before_end": 0.3,
+      "t": 0.6
+    },
+    {
+      "id": "e5",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s02",
+      "at": 0.02,
+      "t": 0.92
+    },
+    {
+      "id": "e6",
+      "cue": "hesita",
+      "type": "reveal",
+      "scene": "s02",
+      "at": 0.12,
+      "t": 1.02
+    },
+    {
+      "id": "e7",
+      "cue": "clique",
+      "type": "reveal",
+      "scene": "s02",
+      "at": 0.55,
+      "t": 1.45
+    },
+    {
+      "id": "e8",
+      "cue": "expande",
+      "type": "reveal",
+      "scene": "s02",
+      "before_end": 0.3,
+      "t": 1.6
+    },
+    {
+      "id": "e9",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s03",
+      "at": 0.02,
+      "t": 1.92
+    },
+    {
+      "id": "e10",
+      "cue": "aula",
+      "type": "reveal",
+      "scene": "s03",
+      "word": "f01:falando",
+      "offset": -0.1,
+      "t": 3.15
+    },
+    {
+      "id": "e11",
+      "cue": "encolhe",
+      "type": "reveal",
+      "scene": "s03",
+      "word": "f02:Com",
+      "offset": -0.2,
+      "t": 3.683
+    },
+    {
+      "id": "e12",
+      "cue": "chip1",
+      "type": "reveal",
+      "scene": "s03",
+      "word": "f02:nativos",
+      "offset": -0.1,
+      "t": 3.898
+    },
+    {
+      "id": "e13",
+      "cue": "chip2",
+      "type": "reveal",
+      "scene": "s03",
+      "word": "f02:hora",
+      "offset": -0.1,
+      "t": 4.997
+    },
+    {
+      "id": "e14",
+      "cue": "chip3",
+      "type": "reveal",
+      "scene": "s03",
+      "word": "f02:onde",
+      "offset": -0.1,
+      "t": 6.043
+    },
+    {
+      "id": "e15",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s03",
+      "before_end": 0.4,
+      "t": 6.888
+    },
+    {
+      "id": "e16",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s04",
+      "at": 0.02,
+      "t": 7.308
+    },
+    {
+      "id": "e17",
+      "cue": "hover",
+      "type": "reveal",
+      "scene": "s04",
+      "word": "f03:semana",
+      "offset": -0.1,
+      "t": 7.963
+    },
+    {
+      "id": "e18",
+      "cue": "clique",
+      "type": "reveal",
+      "scene": "s04",
+      "word": "f03:falar",
+      "offset": -0.1,
+      "t": 8.626
+    },
+    {
+      "id": "e19",
+      "cue": "comprime",
+      "type": "reveal",
+      "scene": "s04",
+      "before_end": 0.4,
+      "t": 9.237
+    },
+    {
+      "id": "e20",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s05",
+      "at": 0.02,
+      "t": 9.657
+    },
+    {
+      "id": "e21",
+      "cue": "divide",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f05:Quatro",
+      "offset": -0.1,
+      "t": 11.202
+    },
+    {
+      "id": "e22",
+      "cue": "junta2",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f06:Duas",
+      "offset": -0.1,
+      "t": 13.11
+    },
+    {
+      "id": "e23",
+      "cue": "junta1",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f07:hora",
+      "offset": -0.1,
+      "t": 15.428
+    },
+    {
+      "id": "e24",
+      "cue": "encaixa",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f07:vez",
+      "t": 16.499
+    },
+    {
+      "id": "e25",
+      "cue": "troca",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f08:Você",
+      "offset": -0.15,
+      "t": 16.867
+    },
+    {
+      "id": "e26",
+      "cue": "arrasta",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f08:escolhe",
+      "offset": -0.1,
+      "t": 17.158
+    },
+    {
+      "id": "e27",
+      "cue": "assenta",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f08:rotina",
+      "t": 18.258
+    },
+    {
+      "id": "e28",
+      "cue": "avatar",
+      "type": "reveal",
+      "scene": "s05",
+      "word": "f08:quem",
+      "offset": -0.1,
+      "t": 19.081
+    },
+    {
+      "id": "e29",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s05",
+      "before_end": 0.4,
+      "t": 19.699
+    },
+    {
+      "id": "e30",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s06",
+      "at": 0.02,
+      "t": 20.119
+    },
+    {
+      "id": "e31",
+      "cue": "cards",
+      "type": "reveal",
+      "scene": "s06",
+      "word": "f09:nativos",
+      "offset": -0.1,
+      "t": 20.639
+    },
+    {
+      "id": "e32",
+      "cue": "selo",
+      "type": "reveal",
+      "scene": "s06",
+      "word": "f09:português",
+      "offset": -0.1,
+      "t": 21.803
+    },
+    {
+      "id": "e33",
+      "cue": "trava",
+      "type": "reveal",
+      "scene": "s06",
+      "word": "f10:Travou",
+      "offset": -0.15,
+      "t": 22.525
+    },
+    {
+      "id": "e34",
+      "cue": "responde",
+      "type": "reveal",
+      "scene": "s06",
+      "word": "f10:entendem",
+      "offset": -0.1,
+      "t": 23.412
+    },
+    {
+      "id": "e35",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s06",
+      "before_end": 0.35,
+      "t": 23.828
+    },
+    {
+      "id": "e36",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s07",
+      "at": 0.02,
+      "t": 24.198
+    },
+    {
+      "id": "e37",
+      "cue": "hesita",
+      "type": "reveal",
+      "scene": "s07",
+      "at": 0.12,
+      "t": 24.298
+    },
+    {
+      "id": "e38",
+      "cue": "clique",
+      "type": "reveal",
+      "scene": "s07",
+      "at": 0.38,
+      "t": 24.558
+    },
+    {
+      "id": "e39",
+      "cue": "expande",
+      "type": "reveal",
+      "scene": "s07",
+      "before_end": 0.25,
+      "t": 24.678
+    },
+    {
+      "id": "e40",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s08",
+      "at": 0.02,
+      "t": 24.948
+    },
+    {
+      "id": "e41",
+      "cue": "pisca",
+      "type": "reveal",
+      "scene": "s08",
+      "word": "f11:nasceu",
+      "t": 26.26
+    },
+    {
+      "id": "e42",
+      "cue": "aluno1",
+      "type": "reveal",
+      "scene": "s08",
+      "word": "f12:ganhar",
+      "offset": -0.1,
+      "t": 27.312
+    },
+    {
+      "id": "e43",
+      "cue": "aluno2",
+      "type": "reveal",
+      "scene": "s08",
+      "word": "f12:correr",
+      "offset": -0.1,
+      "t": 28.148
+    },
+    {
+      "id": "e44",
+      "cue": "aluno3",
+      "type": "reveal",
+      "scene": "s08",
+      "word": "f12:aluno",
+      "offset": -0.1,
+      "t": 28.735
+    },
+    {
+      "id": "e45",
+      "cue": "sorri",
+      "type": "reveal",
+      "scene": "s08",
+      "word": "f12:aluno",
+      "offset": 0.12,
+      "t": 28.955
+    },
+    {
+      "id": "e46",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s08",
+      "before_end": 0.15,
+      "t": 29.236
+    },
+    {
+      "id": "e47",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s09",
+      "at": 0.02,
+      "t": 29.406
+    },
+    {
+      "id": "e48",
+      "cue": "toggle",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f13:horários",
+      "offset": -0.1,
+      "t": 30.204
+    },
+    {
+      "id": "e49",
+      "cue": "c2",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f14:aluno",
+      "offset": -0.15,
+      "t": 30.911
+    },
+    {
+      "id": "e50",
+      "cue": "carimbo",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f14:paga",
+      "offset": -0.1,
+      "t": 32.086
+    },
+    {
+      "id": "e51",
+      "cue": "c3",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f15:Sem",
+      "offset": -0.15,
+      "t": 32.578
+    },
+    {
+      "id": "e52",
+      "cue": "risco1",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f15:preço",
+      "offset": -0.1,
+      "t": 33.378
+    },
+    {
+      "id": "e53",
+      "cue": "risco2",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f15:ninguém",
+      "offset": -0.1,
+      "t": 34.609
+    },
+    {
+      "id": "e54",
+      "cue": "c4",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f16:Cancelamento",
+      "offset": -0.15,
+      "t": 35.135
+    },
+    {
+      "id": "e55",
+      "cue": "marca",
+      "type": "reveal",
+      "scene": "s09",
+      "word": "f16:pagamento",
+      "offset": -0.1,
+      "t": 36.676
+    },
+    {
+      "id": "e56",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s09",
+      "before_end": 0.4,
+      "t": 37.453
+    },
+    {
+      "id": "e57",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s10",
+      "at": 0.02,
+      "t": 37.873
+    },
+    {
+      "id": "e58",
+      "cue": "pulsa",
+      "type": "reveal",
+      "scene": "s10",
+      "word": "f17:meia",
+      "offset": -0.1,
+      "t": 38.248
+    },
+    {
+      "id": "e59",
+      "cue": "relogio",
+      "type": "reveal",
+      "scene": "s10",
+      "word": "f17:outro",
+      "offset": -0.1,
+      "t": 39.748
+    },
+    {
+      "id": "e60",
+      "cue": "vira",
+      "type": "reveal",
+      "scene": "s10",
+      "word": "f18:Vira",
+      "offset": -0.03,
+      "t": 40.443
+    },
+    {
+      "id": "e61",
+      "cue": "brilho",
+      "type": "reveal",
+      "scene": "s10",
+      "word": "f18:aula",
+      "t": 40.829
+    },
+    {
+      "id": "e62",
+      "cue": "sai",
+      "type": "reveal",
+      "scene": "s10",
+      "before_end": 0.35,
+      "t": 41.067
+    },
+    {
+      "id": "e63",
+      "cue": "entra",
+      "type": "reveal",
+      "scene": "s11",
+      "at": 0.02,
+      "t": 41.437
+    },
+    {
+      "id": "e64",
+      "cue": "junta",
+      "type": "reveal",
+      "scene": "s11",
+      "word": "f19:treino",
+      "t": 42.279
+    },
+    {
+      "id": "e65",
+      "cue": "frase",
+      "type": "reveal",
+      "scene": "s11",
+      "word": "f20:Comece",
+      "offset": -0.15,
+      "t": 42.716
+    },
+    {
+      "id": "e66",
+      "cue": "ola",
+      "type": "reveal",
+      "scene": "s11",
+      "word": "f20:olá",
+      "offset": -0.05,
+      "t": 43.47
+    },
+    {
+      "id": "e67",
+      "cue": "clique",
+      "type": "reveal",
+      "scene": "s11",
+      "before_end": 1.5,
+      "t": 44.415
+    },
+    {
+      "id": "e68",
+      "cue": "pisca",
+      "type": "reveal",
+      "scene": "s11",
+      "before_end": 0.6,
+      "t": 45.315
+    }
+  ],
+  "sfx": [
+    {
+      "event": "e2",
+      "synth": "typing",
+      "until": "e3",
+      "gain_db": -8
+    },
+    {
+      "event": "e3",
+      "synth": "click",
+      "gain_db": -7,
+      "pan": 0
+    },
+    {
+      "event": "e4",
+      "asset": "whoosh-whoosh-fino-01",
+      "align": "peak",
+      "delay": 0.15,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e5",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": -0.2
+    },
+    {
+      "event": "e5",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": 0.2,
+      "delay": 0.08
+    },
+    {
+      "event": "e7",
+      "asset": "foley-clique-mouse-01",
+      "align": "start",
+      "gain_db": -2,
+      "pan": 0.1
+    },
+    {
+      "event": "e8",
+      "asset": "whoosh-whoosh-fino-02",
+      "align": "peak",
+      "delay": 0.12,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e10",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": 0
+    },
+    {
+      "event": "e12",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": -0.15
+    },
+    {
+      "event": "e13",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": 0
+    },
+    {
+      "event": "e14",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": 0.15
+    },
+    {
+      "event": "e15",
+      "synth": "swish",
+      "gain_db": -10,
+      "pan": 0.2
+    },
+    {
+      "event": "e17",
+      "synth": "click",
+      "gain_db": -10,
+      "pan": -0.1
+    },
+    {
+      "event": "e18",
+      "synth": "click",
+      "gain_db": -7,
+      "pan": 0
+    },
+    {
+      "event": "e19",
+      "synth": "swish",
+      "gain_db": -10,
+      "pan": -0.2
+    },
+    {
+      "event": "e21",
+      "synth": "click",
+      "gain_db": -11,
+      "pan": -0.3
+    },
+    {
+      "event": "e21",
+      "synth": "click",
+      "gain_db": -12,
+      "pan": -0.1,
+      "delay": 0.07
+    },
+    {
+      "event": "e21",
+      "synth": "click",
+      "gain_db": -12,
+      "pan": 0.1,
+      "delay": 0.14
+    },
+    {
+      "event": "e21",
+      "synth": "click",
+      "gain_db": -13,
+      "pan": 0.3,
+      "delay": 0.21
+    },
+    {
+      "event": "e22",
+      "synth": "swish",
+      "gain_db": -10,
+      "pan": 0.15
+    },
+    {
+      "event": "e23",
+      "synth": "swish",
+      "gain_db": -10,
+      "pan": -0.15
+    },
+    {
+      "event": "e24",
+      "synth": "click",
+      "gain_db": -7,
+      "pan": 0
+    },
+    {
+      "event": "e26",
+      "synth": "click",
+      "gain_db": -9,
+      "pan": 0.1
+    },
+    {
+      "event": "e27",
+      "synth": "click",
+      "gain_db": -8,
+      "pan": 0
+    },
+    {
+      "event": "e28",
+      "synth": "pop",
+      "gain_db": -9,
+      "pan": 0.2
+    },
+    {
+      "event": "e29",
+      "asset": "whoosh-whoosh-fino-03",
+      "align": "peak",
+      "delay": 0.1,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e31",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": -0.2
+    },
+    {
+      "event": "e31",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": 0.2,
+      "delay": 0.09
+    },
+    {
+      "event": "e32",
+      "asset": "impact-soft-01",
+      "align": "start",
+      "gain_db": -16
+    },
+    {
+      "event": "e33",
+      "synth": "click",
+      "gain_db": -13,
+      "pan": 0.15
+    },
+    {
+      "event": "e33",
+      "synth": "click",
+      "gain_db": -14,
+      "pan": 0.15,
+      "delay": 0.16
+    },
+    {
+      "event": "e34",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": -0.15
+    },
+    {
+      "event": "e35",
+      "asset": "whoosh-whoosh-fino-04",
+      "align": "peak",
+      "delay": 0.1,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e38",
+      "asset": "foley-clique-mouse-01",
+      "align": "start",
+      "gain_db": -2,
+      "pan": 0.1
+    },
+    {
+      "event": "e39",
+      "asset": "whoosh-whoosh-fino-05",
+      "align": "peak",
+      "delay": 0.12,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e42",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": -0.25
+    },
+    {
+      "event": "e43",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": 0
+    },
+    {
+      "event": "e44",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": 0.25
+    },
+    {
+      "event": "e46",
+      "synth": "swish",
+      "gain_db": -10,
+      "pan": 0.2
+    },
+    {
+      "event": "e48",
+      "synth": "click",
+      "gain_db": -9,
+      "pan": 0
+    },
+    {
+      "event": "e48",
+      "synth": "click",
+      "gain_db": -10,
+      "pan": 0,
+      "delay": 0.12
+    },
+    {
+      "event": "e49",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": -0.1
+    },
+    {
+      "event": "e50",
+      "asset": "impact-soft-02",
+      "align": "start",
+      "gain_db": -16
+    },
+    {
+      "event": "e51",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": 0.1
+    },
+    {
+      "event": "e54",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": -0.1
+    },
+    {
+      "event": "e55",
+      "synth": "click",
+      "gain_db": -10,
+      "pan": 0
+    },
+    {
+      "event": "e56",
+      "asset": "whoosh-whoosh-fino-06",
+      "align": "peak",
+      "delay": 0.1,
+      "gain_db": -18,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e58",
+      "synth": "click",
+      "gain_db": -11,
+      "pan": 0
+    },
+    {
+      "event": "e59",
+      "synth": "click",
+      "gain_db": -10,
+      "pan": 0
+    },
+    {
+      "event": "e60",
+      "synth": "ding",
+      "gain_db": -11
+    },
+    {
+      "event": "e60",
+      "synth": "pop",
+      "gain_db": -11,
+      "pan": 0
+    },
+    {
+      "event": "e60",
+      "asset": "impact-soft-01",
+      "align": "start",
+      "gain_db": -18
+    },
+    {
+      "event": "e62",
+      "asset": "whoosh-whoosh-fino-07",
+      "align": "peak",
+      "delay": 0.1,
+      "gain_db": -16,
+      "pan": 0,
+      "max": 1.2
+    },
+    {
+      "event": "e64",
+      "asset": "whoosh-whoosh-reverso-01",
+      "align": "peak",
+      "gain_db": -22,
+      "max": 0.7
+    },
+    {
+      "event": "e66",
+      "synth": "pop",
+      "gain_db": -10,
+      "pan": 0
+    },
+    {
+      "event": "e67",
+      "asset": "foley-clique-mouse-01",
+      "align": "start",
+      "gain_db": -2,
+      "pan": 0.1
+    }
+  ],
+  "voice": {
+    "current": "edge-thalita-rapida",
+    "stage": "draft"
+  },
+  "duration": 45.915,
+  "camadas": [
+    {
+      "use": "fundo/dobras",
+      "params": {
+        "dobras": {
+          "s01": "vermelho",
+          "s02": "vermelho",
+          "s03": "creme",
+          "s04": "creme",
+          "s05": "azul",
+          "s06": "creme-suave",
+          "s07": "vermelho",
+          "s08": "creme",
+          "s09": "creme-claro",
+          "s10": "creme",
+          "s11": "vermelho"
+        }
+      }
+    }
+  ],
+  "music": {
+    "id": "ola-violao-percussao-106-01",
+    "file": "library/audio/music/ola/Ola_Violao_Percussao_106_01.wav",
+    "bpm": 105.87,
+    "start": 0,
+    "gain_db": -5,
+    "duck": 0.5,
+    "license": "própria (sintetizada no hub)",
+    "candidates": [
+      "ola-violao-percussao-106-01",
+      "ola-violao-shaker-106-01",
+      "ola-synth-leve-107-01"
+    ]
+  },
+  "mix": {
+    "vo_db": 0,
+    "sfx_db": 0
+  }
+}

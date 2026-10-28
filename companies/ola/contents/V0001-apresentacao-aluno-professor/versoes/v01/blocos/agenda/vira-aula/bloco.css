@@ -1,0 +1,17 @@
+.hd { position: absolute; left: 60px; right: 60px; top: 60px; text-align: center; font-size: 96px; color: var(--dobra-creme-titulo); white-space: nowrap; }
+.hd .acc { color: var(--dobra-creme-enfase); }
+.h2 { opacity: 0; }
+.ag { position: absolute; left: 200px; top: 220px; width: 680px; height: 860px; border-radius: 32px; background: var(--dobra-creme-card); }
+.hs { position: absolute; left: 220px; top: 0; }
+.hs span { position: absolute; left: 0; font-size: 28px; font-weight: 600; color: var(--dobra-creme-card-texto); white-space: nowrap; }
+.comp { position: absolute; left: 350px; width: 500px; height: 200px; border-radius: 40px; background: var(--border); display: grid; place-items: center; font-size: 36px; color: var(--text); }
+.c1 { top: 260px; }
+.c2 { top: 740px; }
+.vao { position: absolute; left: 350px; top: 490px; width: 500px; height: 220px; border-radius: 40px; border: 4px dashed var(--text); opacity: 0.4; display: grid; place-items: center; }
+.vao span { font-size: 104px; font-weight: 700; color: var(--text); opacity: 0; }
+.relo { position: absolute; left: 900px; top: 470px; width: 130px; height: 130px; }
+.aula { position: absolute; left: 350px; top: 490px; width: 500px; height: 220px; border-radius: 40px; background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-primary);
+  display: flex; align-items: center; justify-content: center; gap: 22px; font-size: 44px; font-weight: 600; opacity: 0; white-space: nowrap; }
+.mini { width: 84px; height: 84px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; }
+.mini img { width: 66px; height: 50px; object-fit: contain; }
+.brilho { position: absolute; left: 810px; top: 400px; width: 120px; height: 120px; opacity: 0; transform-origin: 0 100%; }

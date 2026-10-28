@@ -1,0 +1,600 @@
+{
+  "header": "brand.css — tokens da marca Olá Espanhol. Fontes: Manual de Identidad Visual (Osney Reymy, 2026; páginas em brand/manual/) + CSS do site ola-espanhol.com.br (:root, lido em 2026-10-26).\n   Hex do manual: rojo #cf3f56 · verde #dae069 · azul #a6d1cc · blanco #fffff0 · negro #3f3f3f. Tons de apoio = os do site (nome original entre parênteses na nota).\n   Regra: mantenha TODOS os nomes abaixo (as skills dependem deles). Troque só os valores.",
+  "style": {
+    "do": [
+      "Antes de qualquer peça, abrir as páginas do manual (brand/manual/) e os prints do site ola-espanhol.com.br (brand/screenshots/) e seguir aquele estilo exato",
+      "Título-herói: abertura em Outfit ExtraLight grafite + virada em Outfit Bold vermelho",
+      "Visual minimalista e claro: fundo creme, cores fortes usadas com equilíbrio",
+      "Vermelho e verde são as cores principais; azul, creme e grafite são de apoio",
+      "Cards de cantos bem arredondados",
+      "Título em Outfit Bold; palavra delicada em Outfit ExtraLight; texto corrido em Outfit Regular",
+      "Ícones e ilustrações com traço redondo, grafite, com detalhe em verde",
+      "Elementos de apoio (formas geométricas do estilo do logo) em traço ou preenchidos, em qualquer cor da paleta"
+    ],
+    "dont": [
+      "Alterar cor, distorcer ou reordenar o logotipo",
+      "Mascote em branco sem os detalhes internos (olhos) sobre fundo escuro"
+    ]
+  },
+  "icons": {
+    "library": "lucide",
+    "stroke": 2,
+    "style": "linha",
+    "color": "text"
+  },
+  "fonts": [
+    {
+      "family": "Outfit",
+      "source": "google",
+      "files": [],
+      "google": "Outfit:wght@200;400;600;700",
+      "display": "swap"
+    }
+  ],
+  "groups": [
+    {
+      "label": "Cores — papéis",
+      "tokens": [
+        {
+          "name": "bg",
+          "value": "#FFFFF0",
+          "note": "blanco do manual = fundo do site (color-fondo): fundo das peças, creme"
+        },
+        {
+          "name": "surface",
+          "value": "#F8F7E6",
+          "note": "card/bloco sobre o creme (site: color-fondo-suave; manual p. 9)"
+        },
+        {
+          "name": "surface-2",
+          "value": "#FFFFFF",
+          "note": "card elevado, branco puro (site: color-fondo-elevado)"
+        },
+        {
+          "name": "text",
+          "value": "#3F3F3F",
+          "note": "negro do manual (site: color-texto): títulos, texto, ícones, ilustrações"
+        },
+        {
+          "name": "muted",
+          "value": "#6B6B66",
+          "note": "texto secundário pequeno (site: color-texto-suave)"
+        },
+        {
+          "name": "border",
+          "value": "#E9E7D3",
+          "note": "linha de card e divisória (site: color-linea)"
+        },
+        {
+          "name": "primary",
+          "value": "#CF3F56",
+          "note": "rojo do manual, principal (site: color-primario): logo, palavra de virada, botão principal, faixa do logo"
+        },
+        {
+          "name": "primary-strong",
+          "value": "#AF2F48",
+          "note": "vermelho forte (site: color-primario-fuerte): texto/contorno do botão secundário, link, hover"
+        },
+        {
+          "name": "primary-mid",
+          "value": "#F3CFD5",
+          "note": "site: color-primario-medio"
+        },
+        {
+          "name": "primary-soft",
+          "value": "#FBF0F1",
+          "note": "site: color-primario-suave"
+        },
+        {
+          "name": "primary-deep",
+          "value": "#6D1A22",
+          "note": "tom-sobre-tom no vermelho: mascote/supergráfico sobre fundo --primary (medido no manual p. 5)"
+        },
+        {
+          "name": "on-primary",
+          "value": "#FFFFFF",
+          "note": "texto sobre --primary (site: color-texto-invertido; logo branco do manual é creme #FFFFF0)"
+        },
+        {
+          "name": "accent",
+          "value": "#DAE069",
+          "note": "verde do manual, principal (site: color-acento): laço do L, preenchimento dos ícones, pílulas, formas. Nunca texto sobre claro"
+        },
+        {
+          "name": "accent-mid",
+          "value": "#BAC42B",
+          "note": "site: color-acento-medio"
+        },
+        {
+          "name": "accent-strong",
+          "value": "#CACA52",
+          "note": "verde um tom abaixo: bloco alternado sobre --accent, 'Aa' verde sobre creme (medido no manual p. 7–8)"
+        },
+        {
+          "name": "accent-deep",
+          "value": "#918E33",
+          "note": "verde escuro (site: color-acento-fuerte): mascote tom-sobre-tom sobre --accent; texto verde legível"
+        },
+        {
+          "name": "accent-soft",
+          "value": "#F8F9E1",
+          "note": "fundo de tag/realce verde (site: color-acento-suave)"
+        },
+        {
+          "name": "on-accent",
+          "value": "#3F3F3F",
+          "note": "texto sobre --accent"
+        },
+        {
+          "name": "support",
+          "value": "#A6D1CC",
+          "note": "azul do manual, apoio (site: color-apoyo): fundos, molduras, linha fina acima da faixa do logo"
+        },
+        {
+          "name": "support-deep",
+          "value": "#4A6B66",
+          "note": "azul escuro (site: color-apoyo-texto): mascote/ilustração tom-sobre-tom sobre --support; texto azul"
+        },
+        {
+          "name": "on-support",
+          "value": "#3F3F3F",
+          "note": "texto sobre --support"
+        },
+        {
+          "name": "bg-alt",
+          "value": "#FFFEFA",
+          "note": "creme quase branco: 2ª cor de fundo do site (seções Método e Dúvidas; color-fondo-alt)"
+        },
+        {
+          "name": "on-inverse-muted",
+          "value": "#D6D5C4",
+          "note": "texto secundário sobre o escuro (site: color-texto-sobre-oscuro-suave)"
+        },
+        {
+          "name": "support-soft",
+          "value": "#E4F1F0",
+          "note": "selo azul claro (\"Melhor valor\"; site: color-info-fondo)"
+        },
+        {
+          "name": "success",
+          "value": "#047857",
+          "note": "status, só dentro de interface (site: color-exito)"
+        },
+        {
+          "name": "warning",
+          "value": "#854D0E",
+          "note": "site: color-aviso"
+        },
+        {
+          "name": "danger",
+          "value": "#C0360C",
+          "note": "site: color-error"
+        },
+        {
+          "name": "inverse-bg",
+          "value": "#2D2D2D",
+          "note": "fundo escuro = rodapé do site (color-fondo-oscuro). Manual usa #3F3F3F na placa do logo"
+        },
+        {
+          "name": "on-inverse",
+          "value": "#FFFFF0",
+          "note": "texto/logo sobre o escuro"
+        }
+      ]
+    },
+    {
+      "label": "Combinações — dobras do site (fundo · título · ênfase · texto · card · botão · elemento)",
+      "tokens": [
+        {
+          "name": "dobra-creme-fundo",
+          "value": "#FFFFF0",
+          "note": "dobra \"creme\" do site: Hero, O que prende a sua fala, Pacotes, Saiba mais"
+        },
+        {
+          "name": "dobra-creme-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-enfase",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-creme-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-card",
+          "value": "#F8F7E6"
+        },
+        {
+          "name": "dobra-creme-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-card-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-creme-botao",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-creme-botao-texto",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-creme-elemento",
+          "value": "#DAE069"
+        },
+        {
+          "name": "dobra-creme-claro-fundo",
+          "value": "#FFFEFA",
+          "note": "dobra \"creme-claro\" do site: Por que Olá Espanhol (Método), Dúvidas frequentes"
+        },
+        {
+          "name": "dobra-creme-claro-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-claro-enfase",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-claro-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-creme-claro-card",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-creme-claro-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-claro-card-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-creme-claro-botao",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-creme-claro-botao-texto",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-creme-claro-elemento",
+          "value": "#DAE069"
+        },
+        {
+          "name": "dobra-vermelho-fundo",
+          "value": "#CF3F56",
+          "note": "dobra \"vermelho\" do site: Sem amarras, CTA final (Pronto para começar a falar?)"
+        },
+        {
+          "name": "dobra-vermelho-titulo",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-vermelho-enfase",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-vermelho-texto",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-vermelho-card",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-vermelho-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-vermelho-card-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-vermelho-botao",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-vermelho-botao-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-vermelho-elemento",
+          "value": "#DAE069"
+        },
+        {
+          "name": "dobra-azul-fundo",
+          "value": "#A6D1CC",
+          "note": "dobra \"azul\" do site: Como funciona"
+        },
+        {
+          "name": "dobra-azul-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-azul-enfase",
+          "value": "#4A6B66"
+        },
+        {
+          "name": "dobra-azul-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-azul-card",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-azul-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-azul-card-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-azul-botao",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-azul-botao-texto",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-azul-elemento",
+          "value": "#4A6B66"
+        },
+        {
+          "name": "dobra-creme-suave-fundo",
+          "value": "#F8F7E6",
+          "note": "dobra \"creme-suave\" do site: Conheça alguns dos nossos professores"
+        },
+        {
+          "name": "dobra-creme-suave-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-suave-enfase",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-suave-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-creme-suave-card",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-creme-suave-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-creme-suave-card-texto",
+          "value": "#6B6B66"
+        },
+        {
+          "name": "dobra-creme-suave-botao",
+          "value": "#AF2F48"
+        },
+        {
+          "name": "dobra-creme-suave-botao-texto",
+          "value": "#AF2F48"
+        },
+        {
+          "name": "dobra-creme-suave-elemento",
+          "value": "#E9E7D3"
+        },
+        {
+          "name": "dobra-verde-fundo",
+          "value": "#DAE069",
+          "note": "dobra \"verde\" do site: Bloco Para professores nativos (card verde de raio 32 sobre o creme)"
+        },
+        {
+          "name": "dobra-verde-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-verde-enfase",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-verde-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-verde-card",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-verde-card-titulo",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-verde-card-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-verde-botao",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-verde-botao-texto",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "dobra-verde-elemento",
+          "value": "#CF3F56"
+        },
+        {
+          "name": "dobra-grafite-fundo",
+          "value": "#2D2D2D",
+          "note": "dobra \"grafite\" do site: Rodapé"
+        },
+        {
+          "name": "dobra-grafite-titulo",
+          "value": "#DAE069"
+        },
+        {
+          "name": "dobra-grafite-enfase",
+          "value": "#DAE069"
+        },
+        {
+          "name": "dobra-grafite-texto",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-grafite-card",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-grafite-card-titulo",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-grafite-card-texto",
+          "value": "#D6D5C4"
+        },
+        {
+          "name": "dobra-grafite-botao",
+          "value": "#FFFFF0"
+        },
+        {
+          "name": "dobra-grafite-botao-texto",
+          "value": "#3F3F3F"
+        },
+        {
+          "name": "dobra-grafite-elemento",
+          "value": "#DAE069"
+        }
+      ]
+    },
+    {
+      "label": "Tipografia",
+      "tokens": [
+        {
+          "name": "font-heading",
+          "value": "\"Outfit\",ui-sans-serif,system-ui,-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif",
+          "note": "Outfit em tudo (manual + site)"
+        },
+        {
+          "name": "font-body",
+          "value": "\"Outfit\",ui-sans-serif,system-ui,-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif",
+          "note": "Outfit Regular: blocos de texto"
+        },
+        {
+          "name": "font-accent",
+          "value": "\"Outfit\",ui-sans-serif,system-ui,-apple-system,\"Segoe UI\",Roboto,Arial,sans-serif",
+          "note": "Outfit ExtraLight (--weight-accent): a parte delicada da frase"
+        },
+        {
+          "name": "weight-heading",
+          "value": "700",
+          "note": "Bold: títulos de seção, palavra de virada"
+        },
+        {
+          "name": "weight-body",
+          "value": "400"
+        },
+        {
+          "name": "weight-semibold",
+          "value": "600",
+          "note": "botões e links (site: peso-seminegrita)"
+        },
+        {
+          "name": "weight-accent",
+          "value": "200",
+          "note": "ExtraLight: abertura do título-herói (site: h1 em 200 + virada em 700)"
+        },
+        {
+          "name": "tracking-heading",
+          "value": "0em",
+          "note": "site: letter-spacing normal"
+        },
+        {
+          "name": "leading-heading",
+          "value": "1.02",
+          "note": "site: h1 62,7/61,4"
+        },
+        {
+          "name": "case-heading",
+          "value": "none",
+          "note": "frase em caixa normal, nunca caixa alta"
+        }
+      ]
+    },
+    {
+      "label": "Forma",
+      "tokens": [
+        {
+          "name": "radius",
+          "value": "24px",
+          "note": "card (site: radio-grande 1,5rem)"
+        },
+        {
+          "name": "radius-sm",
+          "value": "14px",
+          "note": "site: radio-medio .875rem"
+        },
+        {
+          "name": "radius-xl",
+          "value": "32px",
+          "note": "card grande/janela (site: radio-xl 2rem; manual)"
+        },
+        {
+          "name": "radius-pill",
+          "value": "999px",
+          "note": "botões, tags, pílulas (site: radio-circular)"
+        },
+        {
+          "name": "border-width",
+          "value": "2px",
+          "note": "contorno de botão e pílula (site)"
+        },
+        {
+          "name": "shadow-sm",
+          "value": "0 1px 3px rgba(63,63,63,.06)",
+          "note": "site: sombra-sm"
+        },
+        {
+          "name": "shadow-md",
+          "value": "0 10px 24px -6px rgba(63,63,63,.1)",
+          "note": "site: sombra-md"
+        },
+        {
+          "name": "shadow-lg",
+          "value": "0 20px 40px -10px rgba(63,63,63,.14)",
+          "note": "site: sombra-lg"
+        },
+        {
+          "name": "shadow-primary",
+          "value": "0 8px 24px -8px rgba(207,63,86,.35)",
+          "note": "sombra colorida do botão principal (site: sombra-color-primario)"
+        }
+      ]
+    }
+  ],
+  "tonal": {
+    "base": "#cf3f56",
+    "auto": true,
+    "steps": {
+      "50": "#fff4f4",
+      "100": "#fee2e3",
+      "200": "#fcc1c4",
+      "300": "#f49aa0",
+      "400": "#e46e79",
+      "500": "#cf3f56",
+      "600": "#a81938",
+      "700": "#860a28",
+      "800": "#660a1d",
+      "900": "#470712",
+      "950": "#2f0309"
+    },
+    "overrides": {}
+  }
+}

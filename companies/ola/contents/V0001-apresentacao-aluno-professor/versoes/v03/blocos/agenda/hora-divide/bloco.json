@@ -1,0 +1,22 @@
+{
+  "id": "agenda/hora-divide",
+  "tipo": "agenda",
+  "titulo": "A pílula do tempo na dobra azul: '1 hora' racha em 4 × 15' que caem numa agenda semanal, junta em 2 × 30' e em 1 × 60'; o cursor arrasta a aula para outro dia e ela ganha o avatar do professor",
+  "camada": "palco",
+  "slots": ["headline", "headline2", "pilula", "n4", "n2", "n1"],
+  "params": {
+    "dias": { "padrao": ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"], "descricao": "rótulos das colunas" },
+    "pilula": { "padrao": [600, 160, 360, 84], "descricao": "retângulo da pílula de 60' (igual ao da cena anterior)" },
+    "professor": { "padrao": { "nome": "Carlos", "bandeira": "assets/flags/co.svg" }, "descricao": "avatar que entra na ponta da pílula" },
+    "destino_avatar": { "padrao": [225, 410, 140], "descricao": "centro x, y e diâmetro (palco) do avatar no 1º card da cena seguinte" },
+    "rodape": { "padrao": "ilustrativo", "descricao": "texto do rodapé" }
+  },
+  "cues": ["entra", "divide", "junta2", "junta1", "encaixa", "troca", "arrasta", "assenta", "avatar", "sai"],
+  "min_s": 6,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "divide": "crack suave + 4 clicks", "junta2": "swoosh", "junta1": "swoosh", "encaixa": "click", "troca": "air", "arrasta": "tique", "assenta": "click", "avatar": "pop", "sai": "whoosh fino" },
+  "tokens": ["--dobra-azul-*", "--primary", "--on-primary", "--accent", "--border", "--shadow-primary"],
+  "origem": "V0001 ola (2026-10-26)",
+  "licenca": "própria"
+}

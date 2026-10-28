@@ -1,0 +1,57 @@
+{
+  "id": "agenda/vira-aula",
+  "tipo": "agenda",
+  "titulo": "Agenda do dia na dobra creme com um vão tracejado de 30' entre dois compromissos e o relógio num círculo verde por cima; na batida, corte seco: o vão já está cheio pela pílula vermelha da aula (com mini-mascote aluno); na saída a pílula cresce até virar o fundo vermelho do fecho",
+  "camada": "palco",
+  "slots": [
+    "headline",
+    "headline2",
+    "compromisso",
+    "pilula"
+  ],
+  "params": {
+    "horas": {
+      "padrao": [
+        "14:00",
+        "14:30",
+        "15:00"
+      ],
+      "descricao": "rótulos de hora (ilustrativo)"
+    },
+    "vao": {
+      "padrao": "30'",
+      "descricao": "rótulo do vão"
+    }
+  },
+  "cues": [
+    "entra",
+    "pulsa",
+    "relogio",
+    "vira",
+    "brilho",
+    "sai"
+  ],
+  "min_s": 2,
+  "elastico": true,
+  "formatos": [
+    "4x5"
+  ],
+  "sfx_sugeridos": {
+    "pulsa": "tique de relógio",
+    "relogio": "tique",
+    "vira": "ding + pop forte (único)",
+    "sai": "whoosh fino"
+  },
+  "tokens": [
+    "--dobra-creme-*",
+    "--dobra-verde-fundo",
+    "--dobra-verde-titulo",
+    "--primary",
+    "--on-primary",
+    "--border",
+    "--surface-2",
+    "--shadow-sm"
+  ],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

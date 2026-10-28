@@ -1,0 +1,12 @@
+.card { position: absolute; top: 305px; width: 440px; height: 560px; border-radius: 32px; background: var(--dobra-vermelho-card); box-shadow: var(--shadow-lg); }
+.c-aluno { left: 80px; }
+.c-prof { left: 560px; }
+.in { position: absolute; inset: 0; }
+.masc { position: absolute; left: 50%; top: 50px; width: 270px; height: 200px; margin-left: -135px; object-fit: contain; transform-origin: 50% 80%; }
+.tx { position: absolute; left: 24px; right: 24px; top: 268px; text-align: center; font-size: 48px; line-height: 1.08; font-weight: 200; color: var(--dobra-vermelho-card-titulo); }
+.btn { position: absolute; left: 50%; bottom: 34px; width: 116px; height: 116px; margin-left: -58px; border-radius: 50%; display: grid; place-items: center; color: var(--on-primary); font-size: 60px; }
+.btn.verde { background: var(--accent); }
+.btn.verm { background: var(--primary); }
+.btn .icon { width: 60px; height: 60px; }
+.c-aluno .masc { width: 215px; height: 160px; margin-left: -107px; top: 82px; }
+.card { transform-origin: 50% 50%; }

@@ -1,0 +1,29 @@
+.ast { position: absolute; left: 950px; top: 20px; width: 80px; height: 80px; }
+.tag { position: absolute; left: 80px; top: 40px; padding: 10px 26px; border: 2px solid var(--accent); border-radius: var(--radius-pill); background: var(--dobra-creme-fundo);
+  font-size: 30px; color: var(--text); font-weight: 400; white-space: nowrap; }
+.tag b { font-weight: 700; }
+.titulo { position: absolute; left: 80px; top: 150px; width: 920px; font-size: 94px; transform-origin: 0 0; }
+.titulo .l2 { color: var(--dobra-creme-enfase); }
+.arco { position: absolute; left: 600px; top: 330px; width: 400px; height: 480px; border-radius: 200px 200px 32px 32px; background: var(--dobra-creme-card); overflow: hidden; }
+.arco .blob { position: absolute; left: 30px; bottom: -40px; width: 340px; height: 220px; object-fit: contain; }
+.arco .masc { position: absolute; left: 50%; bottom: 110px; width: 300px; height: 225px; margin-left: -150px; object-fit: contain; transform-origin: 50% 80%; }
+.balao { position: absolute; left: 950px; top: 360px; width: 96px; height: 70px; }
+.aula { position: absolute; left: 470px; top: 740px; width: 520px; padding: 22px 26px; border-radius: 24px; background: var(--surface-2); box-shadow: var(--shadow-md);
+  display: flex; gap: 20px; align-items: flex-start; }
+.aula .avt { flex: none; width: 84px; height: 84px; border-radius: 50%; background: var(--dobra-creme-card); display: grid; place-items: center; }
+.aula .avt img { width: 70px; height: 56px; object-fit: contain; }
+.aula .quando { display: block; font-size: 27px; font-weight: 600; color: var(--text); }
+.aula .fala { margin-top: 8px; font-size: 32px; line-height: 1.2; color: var(--text); font-weight: 400; }
+.prog { position: absolute; left: 610px; top: 990px; width: 380px; padding: 20px 26px; border-radius: 24px; background: var(--surface-2); box-shadow: var(--shadow-md); }
+.prog .pt { font-size: 28px; color: var(--text); font-weight: 200; }
+.prog .pt b { font-weight: 700; font-size: 34px; }
+.trilho { margin-top: 12px; height: 16px; border-radius: 99px; background: var(--dobra-creme-fundo); border: 1px solid var(--border); overflow: hidden; }
+.enche { height: 100%; width: 100%; background: var(--primary); border-radius: 99px; transform-origin: 0 50%; }
+.chip { position: absolute; left: 80px; height: 92px; padding: 0 30px 0 16px; display: flex; align-items: center; gap: 16px; border: 2px solid var(--accent); border-radius: var(--radius-pill);
+  background: var(--dobra-creme-fundo); font-size: 36px; color: var(--text); font-weight: 400; white-space: nowrap; opacity: 0; }
+.chip:nth-child(1) { top: 430px; }
+.chip:nth-child(2) { top: 545px; }
+.chip:nth-child(3) { top: 660px; }
+.chip img { width: 62px; height: 62px; object-fit: contain; }
+.chip .ic { width: 62px; height: 62px; border-radius: 50%; background: var(--accent); color: var(--text); display: grid; place-items: center; }
+.chip .ic .icon { width: 34px; height: 34px; }

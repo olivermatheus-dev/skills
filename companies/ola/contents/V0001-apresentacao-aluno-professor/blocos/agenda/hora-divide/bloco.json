@@ -1,0 +1,23 @@
+{
+  "id": "agenda/hora-divide",
+  "tipo": "agenda",
+  "titulo": "A pílula do tempo na dobra azul: headline palavra a palavra; a hora cai inteira na agenda (1 × 60'), parte em 2 × 30' e em 4 × 15', cada aula com o avatar e a bandeira do professor; o cursor arrasta uma aula de 15' para outro dia",
+  "camada": "palco",
+  "slots": ["headline", "headline2", "pilula", "n60", "n30", "n15"],
+  "params": {
+    "dias": { "padrao": ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"], "descricao": "rótulos das colunas" },
+    "pilula": { "padrao": [600, 160, 360, 84], "descricao": "retângulo da pílula de 60' (igual ao da cena anterior)" },
+    "avatares": { "padrao": { "60": ["CO"], "30": ["AR", "AR"], "15": ["AR", "AR", "CO", "MX"] }, "descricao": "bandeira de cada aula, por duração (CO, AR, MX)" },
+    "elenco": { "padrao": { "CO": ["Carlos"], "AR": ["Lucía", "Martín"], "MX": ["Mateo"] }, "descricao": "nomes por país, na ordem em que aparecem (a inicial vai no avatar)" },
+    "destino_avatar": { "padrao": [305, 365, 150], "descricao": "centro x, y e diâmetro (palco) do avatar no 1º card da cena seguinte" },
+    "rodape": { "padrao": "ilustrativo", "descricao": "texto do rodapé" }
+  },
+  "cues": ["entra", "p1", "p2", "p3", "p4", "p5", "v60", "av60", "v30", "av30", "v15", "av15", "troca", "arrasta", "assenta", "destaca", "sai"],
+  "min_s": 6,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "v60": "click de encaixe", "av60": "pop", "v30": "crack suave + 2 clicks", "av30": "2 pops", "v15": "crack suave + 4 clicks", "av15": "4 pops", "troca": "air", "arrasta": "tique", "assenta": "click", "sai": "whoosh fino" },
+  "tokens": ["--dobra-azul-*", "--primary", "--on-primary", "--accent", "--support", "--primary-mid", "--support-soft", "--border", "--shadow-primary"],
+  "origem": "V0001 ola (2026-10-26; v04 2026-10-28)",
+  "licenca": "própria"
+}

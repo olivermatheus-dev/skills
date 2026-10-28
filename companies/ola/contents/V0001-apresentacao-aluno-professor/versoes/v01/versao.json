@@ -1,0 +1,54 @@
+{
+  "versao": "v01",
+  "criado": "2026-10-26T19:55:01",
+  "hash": "eb5be805d472",
+  "formatos": {
+    "4x5": "exports/V0001-4x5-v01.mp4"
+  },
+  "blocos": [
+    {
+      "use": "fundo/dobras",
+      "escopo": "projeto"
+    },
+    {
+      "use": "abertura/barra-navegador",
+      "escopo": "projeto"
+    },
+    {
+      "use": "escolha/dois-cards",
+      "escopo": "projeto"
+    },
+    {
+      "use": "pagina/hero-aluno",
+      "escopo": "projeto"
+    },
+    {
+      "use": "escolha/planos",
+      "escopo": "projeto"
+    },
+    {
+      "use": "agenda/hora-divide",
+      "escopo": "projeto"
+    },
+    {
+      "use": "pessoas/professores-chat",
+      "escopo": "projeto"
+    },
+    {
+      "use": "pagina/bloco-professor",
+      "escopo": "projeto"
+    },
+    {
+      "use": "cards/como-funciona-professor",
+      "escopo": "projeto"
+    },
+    {
+      "use": "agenda/vira-aula",
+      "escopo": "projeto"
+    },
+    {
+      "use": "cta/fecho-ola",
+      "escopo": "projeto"
+    }
+  ]
+}

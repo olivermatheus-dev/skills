@@ -1,0 +1,2300 @@
+{
+  "versao": 1,
+  "nivel": "alto",
+  "recorte": "A Olá Espanhol pelos dois lados: o brasileiro que quer ganhar fluência conversando com nativos no horário dele, e o nativo que quer dar aula sem correr atrás de aluno; tudo começa em ola-espanhol.com.br",
+  "duracao_alvo": null,
+  "fps": 30,
+  "formatos": [
+    "4x5"
+  ],
+  "entrada": {
+    "tipo": "roteiro",
+    "fonte": "roteiro.md (Oliver, 2026-10-26, com direção visual por tela e ajustes aprovados)",
+    "tempos": false
+  },
+  "conceito": {
+    "nome": "A hora que muda de lado",
+    "mundo": "o site é uma bifurcação: a mesma barra do navegador (manual p. 17) se abre em duas portas, aluno e professor; o tempo de conversa é um objeto, a pílula vermelha, que o aluno escolhe e divide do lado dele e que chega pronta e paga na agenda do professor do outro lado; no fim as duas portas voltam a ser um endereço só",
+    "motivo": "a pílula do tempo: pílula --primary com texto branco SemiBold, altura fixa (84 px em 1080), raio pill, ponta direita com espaço para um avatar redondo. É o campo da URL no manual p. 17 e vira a hora do aluno, as aulas pagas do professor e a URL do fim",
+    "identidade": "sempre a mesma cor (--primary), a mesma altura, o mesmo raio e o mesmo texto branco SemiBold; do lado do aluno, a soma das pílulas é sempre 60' (a hora não encolhe ao se dividir); o avatar da ponta diz de quem é a hora (Carlos do lado do aluno, mini-mascote aluno do lado do professor)",
+    "evolucao": "s01 é o campo da URL vermelho dentro da barra creme → s03 vira a barra de progresso '2 / 3h esta semana' do hero → s04 o card '1 hora' escolhido se comprime na pílula '1 hora' → s05 a pílula se parte em 4 × 15', junta em 2 × 30', junta em 1 × 60', é arrastada e ganha o avatar de Carlos → s06 o avatar sai da pílula e vira o card do professor → s08 três pílulas 'Aula paga' chegam sozinhas ao mascote professor → s09 a pílula 'Aula paga ✓' pousa no card 2 → s10 a pílula 'Aula · 30 min' preenche o vão da agenda do professor (a mesma de 30' que o aluno escolheu na s05) → s11 volta a ser o campo da URL embaixo do logo",
+    "forma_das_palavras": "'4 conversas de 15', '2 de 30', 'uma hora inteira' = a mesma pílula partida e reunida, com comprimento proporcional; 'na hora que der' / 'você define seus horários' = pílula arrastada para outro dia; 'sem correr atrás de aluno' = as pílulas é que andam até o professor; 'meia hora entre um compromisso e outro' = o vão tracejado que a pílula ocupa",
+    "transicao": "match cut no motivo e na forma (barra → 2 cards → card cresce até virar a página → chips/planos → pílula → avatar → card) em quase tudo; hard cut na batida só em s04→s05 (o fundo vira azul) e no 'Vira aula.' da s10. 2 tipos no vídeo inteiro. Nenhum fade.",
+    "fio_vivo": "o mascote 'oló' (olhos) pisca e os olhos seguem o cursor em toda cena em que ele aparece (s01 favicon, s02/s07 cards, s03 cartão de aula, s08 professor, s11 logo)",
+    "curva": [
+      2,
+      2,
+      3,
+      2,
+      3,
+      2,
+      1,
+      3,
+      2,
+      4,
+      1
+    ],
+    "estilo": "Premium Educational (primário) + Organic (secundário): revelação progressiva, formas redondas, molas SOFT/GENTLE, um único SNAP no 'Vira aula.'",
+    "tom": "acolhedor e animado, ~104 BPM; sobe nas agendas (s05, s10) e respira na volta aos botões (s07)",
+    "evitar": [
+      "bandeira da Espanha, sombrero, mariachi, touro, castanhola, paella (clichê de espanhol)",
+      "globo girando, avião, mapa-múndi (clichê de idioma/viagem)",
+      "lâmpada, foguete, gráfico subindo, dinheiro voando, aperto de mão",
+      "foto de banco ou rosto real (o vídeo é 100% motion; pessoas = mascotes e avatares ilustrados)",
+      "fade e dissolve como transição; partículas; glitch",
+      "gradiente, fundo-tom-*, combinação fora das 7 dobras, verde como texto sobre claro",
+      "preço na tela (muda e não está na fala)",
+      "professores reais do site (só o elenco fictício Carlos, Lucía, Mateo)"
+    ],
+    "alternativas": [
+      "B · O oló que acompanha: o mascote é o guia e aparece em toda cena (favicon → card → cartão de aula → professor → logo), olhando o cursor; mais simpático e mais fácil de animar, mas o mascote em toda cena cansa e não dá forma às palavras de quantidade (4 de 15, 2 de 30). Fica como fio vivo do conceito A.",
+      "C · Duas agendas lado a lado: tela dividida aluno | professor o vídeo inteiro, a mesma semana dos dois lados, e cada hora que o aluno marca aparece no vão do professor; é o conceito mais claro, mas espreme tudo no 9:16 e briga com o roteiro, que conta um lado de cada vez."
+    ]
+  },
+  "dobras": {
+    "regra": "BRAND.md > Combinações: cada cena usa uma dobra inteira (tokens --dobra-<nome>-*); nunca duas coloridas seguidas sem creme no meio; grafite não entra",
+    "por_cena": {
+      "s01": "vermelho",
+      "s02": "vermelho",
+      "s03": "creme",
+      "s04": "creme",
+      "s05": "azul",
+      "s06": "creme-suave",
+      "s07": "vermelho",
+      "s08": "creme + bloco verde",
+      "s09": "creme-claro",
+      "s10": "creme",
+      "s11": "vermelho"
+    },
+    "mudanca_do_roteiro": "s10 (tela 8) sai do azul para o creme: azul → vermelho (tela 8 → 9) seriam duas coloridas seguidas, o que o BRAND.md proíbe. A rima com a s05 fica na forma (a mesma agenda em card creme, a mesma pílula), não na cor."
+  },
+  "vo": [
+    {
+      "id": "f03",
+      "text": "Quantas horas por semana você quer falar espanhol?",
+      "file": "audio/vo/f03.wav",
+      "start": 7.57,
+      "end": 10.198,
+      "length": 2.628,
+      "words": [
+        {
+          "w": "Quantas",
+          "s": 7.61,
+          "e": 8.047
+        },
+        {
+          "w": "horas",
+          "s": 8.047,
+          "e": 8.287
+        },
+        {
+          "w": "por",
+          "s": 8.287,
+          "e": 8.507
+        },
+        {
+          "w": "semana",
+          "s": 8.507,
+          "e": 8.907
+        },
+        {
+          "w": "você",
+          "s": 8.907,
+          "e": 9.247
+        },
+        {
+          "w": "quer",
+          "s": 9.247,
+          "e": 9.407
+        },
+        {
+          "w": "falar",
+          "s": 9.407,
+          "e": 9.687
+        },
+        {
+          "w": "espanhol?",
+          "s": 9.687,
+          "e": 10.198
+        }
+      ],
+      "voice": "el-carla"
+    },
+    {
+      "id": "f04",
+      "text": "Sua hora, do seu jeito:",
+      "file": "audio/vo/f04.wav",
+      "start": 11.198,
+      "end": 13.325,
+      "length": 2.127,
+      "words": [
+        {
+          "w": "Sua",
+          "s": 11.238,
+          "e": 11.805
+        },
+        {
+          "w": "hora,",
+          "s": 11.805,
+          "e": 12.218
+        },
+        {
+          "w": "do",
+          "s": 12.218,
+          "e": 12.678
+        },
+        {
+          "w": "seu",
+          "s": 12.678,
+          "e": 12.958
+        },
+        {
+          "w": "jeito:",
+          "s": 12.958,
+          "e": 13.325
+        }
+      ],
+      "voice": "el-carla"
+    },
+    {
+      "id": "f05",
+      "text": "Uma hora inteira, de uma vez.",
+      "file": "audio/vo/f05.wav",
+      "start": 13.675,
+      "end": 16.128,
+      "length": 2.453,
+      "words": [
+        {
+          "w": "Uma",
+          "s": 13.715,
+          "e": 13.909
+        },
+        {
+          "w": "hora",
+          "s": 13.909,
+          "e": 14.197
+        },
+        {
+          "w": "inteira",
+          "s": 14.197,
+          "e": 15.099
+        },
+        {
+          "w": "de",
+          "s": 15.099,
+          "e": 15.243
+        },
+        {
+          "w": "uma",
+          "s": 15.243,
+          "e": 15.566
+        },
+        {
+          "w": "vez",
+          "s": 15.566,
+          "e": 16.128
+        }
+      ],
+      "voice": "win-maria"
+    },
+    {
+      "id": "f06",
+      "text": "Duas conversas de trinta minutos.",
+      "file": "audio/vo/f06.wav",
+      "start": 16.478,
+      "end": 19.182,
+      "length": 2.704,
+      "words": [
+        {
+          "w": "Duas",
+          "s": 16.518,
+          "e": 16.889
+        },
+        {
+          "w": "conversas",
+          "s": 16.889,
+          "e": 17.659
+        },
+        {
+          "w": "de",
+          "s": 17.659,
+          "e": 17.82
+        },
+        {
+          "w": "trinta",
+          "s": 17.82,
+          "e": 18.332
+        },
+        {
+          "w": "minutos",
+          "s": 18.332,
+          "e": 19.182
+        }
+      ],
+      "voice": "win-maria"
+    },
+    {
+      "id": "f07",
+      "text": "Ou quatro conversas de quinze minutos.",
+      "file": "audio/vo/f07.wav",
+      "start": 19.532,
+      "end": 22.567,
+      "length": 3.035,
+      "words": [
+        {
+          "w": "Ou",
+          "s": 19.572,
+          "e": 19.774
+        },
+        {
+          "w": "quatro",
+          "s": 19.774,
+          "e": 20.296
+        },
+        {
+          "w": "conversas",
+          "s": 20.296,
+          "e": 21.069
+        },
+        {
+          "w": "de",
+          "s": 21.069,
+          "e": 21.258
+        },
+        {
+          "w": "quinze",
+          "s": 21.258,
+          "e": 21.732
+        },
+        {
+          "w": "minutos",
+          "s": 21.732,
+          "e": 22.567
+        }
+      ],
+      "voice": "win-maria"
+    },
+    {
+      "id": "f08",
+      "text": "Você escolhe o que cabe na sua rotina. E com quem quer falar.",
+      "file": "audio/vo/f08.wav",
+      "start": 22.917,
+      "end": 27.181,
+      "length": 4.264,
+      "words": [
+        {
+          "w": "Você",
+          "s": 22.957,
+          "e": 23.521
+        },
+        {
+          "w": "escolhe",
+          "s": 23.521,
+          "e": 24.021
+        },
+        {
+          "w": "o",
+          "s": 24.021,
+          "e": 24.141
+        },
+        {
+          "w": "que",
+          "s": 24.141,
+          "e": 24.401
+        },
+        {
+          "w": "cabe",
+          "s": 24.401,
+          "e": 24.581
+        },
+        {
+          "w": "na",
+          "s": 24.581,
+          "e": 24.881
+        },
+        {
+          "w": "sua",
+          "s": 24.881,
+          "e": 25.081
+        },
+        {
+          "w": "rotina.",
+          "s": 25.081,
+          "e": 25.828
+        },
+        {
+          "w": "E",
+          "s": 25.828,
+          "e": 26.188
+        },
+        {
+          "w": "com",
+          "s": 26.188,
+          "e": 26.237
+        },
+        {
+          "w": "quem",
+          "s": 26.237,
+          "e": 26.437
+        },
+        {
+          "w": "quer",
+          "s": 26.437,
+          "e": 26.657
+        },
+        {
+          "w": "falar.",
+          "s": 26.657,
+          "e": 27.181
+        }
+      ],
+      "voice": "el-carla"
+    },
+    {
+      "id": "f09",
+      "text": "Todos eles são professores nativos que também falam português.",
+      "file": "audio/vo/f09.wav",
+      "start": 28.181,
+      "end": 33.06,
+      "length": 4.879,
+      "words": [
+        {
+          "w": "Todos",
+          "s": 28.221,
+          "e": 28.702
+        },
+        {
+          "w": "eles",
+          "s": 28.702,
+          "e": 29.083
+        },
+        {
+          "w": "são",
+          "s": 29.083,
+          "e": 29.345
+        },
+        {
+          "w": "professores",
+          "s": 29.345,
+          "e": 30.227
+        },
+        {
+          "w": "nativos",
+          "s": 30.227,
+          "e": 31.021
+        },
+        {
+          "w": "que",
+          "s": 31.021,
+          "e": 31.175
+        },
+        {
+          "w": "também",
+          "s": 31.175,
+          "e": 31.647
+        },
+        {
+          "w": "falam",
+          "s": 31.647,
+          "e": 32.138
+        },
+        {
+          "w": "português",
+          "s": 32.138,
+          "e": 33.06
+        }
+      ],
+      "voice": "win-maria"
+    },
+    {
+      "id": "f10",
+      "text": "Não precisa ter medo de travar, eles te ajudam!",
+      "file": "audio/vo/f10.wav",
+      "start": 33.56,
+      "end": 37.388,
+      "length": 3.828,
+      "words": [
+        {
+          "w": "Não",
+          "s": 33.6,
+          "e": 33.816
+        },
+        {
+          "w": "precisa",
+          "s": 33.816,
+          "e": 34.496
+        },
+        {
+          "w": "ter",
+          "s": 34.496,
+          "e": 34.729
+        },
+        {
+          "w": "medo",
+          "s": 34.729,
+          "e": 35.073
+        },
+        {
+          "w": "de",
+          "s": 35.073,
+          "e": 35.244
+        },
+        {
+          "w": "travar",
+          "s": 35.244,
+          "e": 36.177
+        },
+        {
+          "w": "eles",
+          "s": 36.177,
+          "e": 36.496
+        },
+        {
+          "w": "te",
+          "s": 36.496,
+          "e": 36.677
+        },
+        {
+          "w": "ajudam",
+          "s": 36.677,
+          "e": 37.388
+        }
+      ],
+      "voice": "win-maria"
+    },
+    {
+      "id": "f11",
+      "text": "¡Ahora podrás dar clases de conversación en tu tiempo libre!",
+      "lang": "es",
+      "file": "audio/vo/f11.wav",
+      "start": 38.358,
+      "end": 41.669,
+      "length": 3.311,
+      "words": [
+        {
+          "w": "Ahora",
+          "s": 38.398,
+          "e": 38.835
+        },
+        {
+          "w": "podrás",
+          "s": 38.835,
+          "e": 39.198
+        },
+        {
+          "w": "dar",
+          "s": 39.198,
+          "e": 39.435
+        },
+        {
+          "w": "clases",
+          "s": 39.435,
+          "e": 39.848
+        },
+        {
+          "w": "de",
+          "s": 39.848,
+          "e": 39.973
+        },
+        {
+          "w": "conversación",
+          "s": 39.973,
+          "e": 40.673
+        },
+        {
+          "w": "en",
+          "s": 40.673,
+          "e": 40.823
+        },
+        {
+          "w": "tu",
+          "s": 40.823,
+          "e": 40.973
+        },
+        {
+          "w": "tiempo",
+          "s": 40.973,
+          "e": 41.311
+        },
+        {
+          "w": "libre",
+          "s": 41.311,
+          "e": 41.669
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f12",
+      "text": "El español de tu día a día es valioso para quien está aprendiendo.",
+      "lang": "es",
+      "file": "audio/vo/f12.wav",
+      "start": 42.169,
+      "end": 45.52,
+      "length": 3.351,
+      "words": [
+        {
+          "w": "El",
+          "s": 42.209,
+          "e": 42.372
+        },
+        {
+          "w": "español",
+          "s": 42.372,
+          "e": 42.909
+        },
+        {
+          "w": "de",
+          "s": 42.909,
+          "e": 43.047
+        },
+        {
+          "w": "tu",
+          "s": 43.047,
+          "e": 43.196
+        },
+        {
+          "w": "día",
+          "s": 43.196,
+          "e": 43.321
+        },
+        {
+          "w": "a",
+          "s": 43.321,
+          "e": 43.421
+        },
+        {
+          "w": "día",
+          "s": 43.421,
+          "e": 43.597
+        },
+        {
+          "w": "es",
+          "s": 43.597,
+          "e": 43.734
+        },
+        {
+          "w": "valioso",
+          "s": 43.734,
+          "e": 44.221
+        },
+        {
+          "w": "para",
+          "s": 44.221,
+          "e": 44.459
+        },
+        {
+          "w": "quien",
+          "s": 44.459,
+          "e": 44.622
+        },
+        {
+          "w": "está",
+          "s": 44.622,
+          "e": 44.846
+        },
+        {
+          "w": "aprendiendo",
+          "s": 44.846,
+          "e": 45.52
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f13",
+      "text": "Sin preocuparte por elaborar clases complicadas.",
+      "lang": "es",
+      "file": "audio/vo/f13.wav",
+      "start": 46.52,
+      "end": 49.32,
+      "length": 2.8,
+      "words": [
+        {
+          "w": "Sin",
+          "s": 46.56,
+          "e": 46.822
+        },
+        {
+          "w": "preocuparte",
+          "s": 46.822,
+          "e": 47.448
+        },
+        {
+          "w": "por",
+          "s": 47.448,
+          "e": 47.56
+        },
+        {
+          "w": "elaborar",
+          "s": 47.56,
+          "e": 48.11
+        },
+        {
+          "w": "clases",
+          "s": 48.11,
+          "e": 48.51
+        },
+        {
+          "w": "complicadas",
+          "s": 48.51,
+          "e": 49.32
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f14",
+      "text": "No necesitas buscar alumnos ni negociar,",
+      "lang": "es",
+      "file": "audio/vo/f14.wav",
+      "start": 49.82,
+      "end": 52.395,
+      "length": 2.575,
+      "words": [
+        {
+          "w": "No",
+          "s": 49.86,
+          "e": 50.085
+        },
+        {
+          "w": "necesitas",
+          "s": 50.085,
+          "e": 50.748
+        },
+        {
+          "w": "buscar",
+          "s": 50.748,
+          "e": 51.097
+        },
+        {
+          "w": "alumnos",
+          "s": 51.097,
+          "e": 51.597
+        },
+        {
+          "w": "ni",
+          "s": 51.597,
+          "e": 51.748
+        },
+        {
+          "w": "negociar",
+          "s": 51.748,
+          "e": 52.395
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f15",
+      "text": "ni preocuparte por cobros o cancelaciones.",
+      "lang": "es",
+      "file": "audio/vo/f15.wav",
+      "start": 52.895,
+      "end": 55.493,
+      "length": 2.598,
+      "words": [
+        {
+          "w": "ni",
+          "s": 52.935,
+          "e": 53.197
+        },
+        {
+          "w": "preocuparte",
+          "s": 53.197,
+          "e": 53.847
+        },
+        {
+          "w": "por",
+          "s": 53.847,
+          "e": 54.047
+        },
+        {
+          "w": "cobros",
+          "s": 54.047,
+          "e": 54.422
+        },
+        {
+          "w": "o",
+          "s": 54.422,
+          "e": 54.523
+        },
+        {
+          "w": "cancelaciones",
+          "s": 54.523,
+          "e": 55.493
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f16",
+      "text": "Tú escoges tus horarios disponibles.",
+      "lang": "es",
+      "file": "audio/vo/f16.wav",
+      "start": 55.993,
+      "end": 58.038,
+      "length": 2.045,
+      "words": [
+        {
+          "w": "Tú",
+          "s": 56.033,
+          "e": 56.133
+        },
+        {
+          "w": "escoges",
+          "s": 56.133,
+          "e": 56.595
+        },
+        {
+          "w": "tus",
+          "s": 56.595,
+          "e": 56.758
+        },
+        {
+          "w": "horarios",
+          "s": 56.758,
+          "e": 57.183
+        },
+        {
+          "w": "disponibles",
+          "s": 57.183,
+          "e": 58.038
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f17",
+      "text": "¿Te sobra media hora entre un compromiso y otro?",
+      "lang": "es",
+      "file": "audio/vo/f17.wav",
+      "start": 59.038,
+      "end": 61.363,
+      "length": 2.325,
+      "words": [
+        {
+          "w": "Te",
+          "s": 59.078,
+          "e": 59.228
+        },
+        {
+          "w": "sobra",
+          "s": 59.228,
+          "e": 59.566
+        },
+        {
+          "w": "media",
+          "s": 59.566,
+          "e": 59.903
+        },
+        {
+          "w": "hora",
+          "s": 59.903,
+          "e": 60.091
+        },
+        {
+          "w": "entre",
+          "s": 60.091,
+          "e": 60.278
+        },
+        {
+          "w": "un",
+          "s": 60.278,
+          "e": 60.391
+        },
+        {
+          "w": "compromiso",
+          "s": 60.391,
+          "e": 61.016
+        },
+        {
+          "w": "y",
+          "s": 61.016,
+          "e": 61.078
+        },
+        {
+          "w": "otro",
+          "s": 61.078,
+          "e": 61.363
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f18",
+      "text": "¡Conviértela en clase!",
+      "lang": "es",
+      "file": "audio/vo/f18.wav",
+      "start": 61.863,
+      "end": 63.138,
+      "length": 1.275,
+      "words": [
+        {
+          "w": "Conviértela",
+          "s": 61.903,
+          "e": 62.528
+        },
+        {
+          "w": "en",
+          "s": 62.528,
+          "e": 62.678
+        },
+        {
+          "w": "clase",
+          "s": 62.678,
+          "e": 63.138
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f19",
+      "text": "¡Puedes comenzar ahora!",
+      "lang": "es",
+      "file": "audio/vo/f19.wav",
+      "start": 63.938,
+      "end": 65.199,
+      "length": 1.261,
+      "words": [
+        {
+          "w": "Puedes",
+          "s": 63.978,
+          "e": 64.316
+        },
+        {
+          "w": "comenzar",
+          "s": 64.316,
+          "e": 64.79
+        },
+        {
+          "w": "ahora",
+          "s": 64.79,
+          "e": 65.199
+        }
+      ],
+      "voice": "edge-salome"
+    },
+    {
+      "id": "f20",
+      "text": "Empieza con un olá.",
+      "lang": "es",
+      "file": "audio/vo/f20.wav",
+      "start": 65.699,
+      "end": 66.865,
+      "length": 1.166,
+      "words": [
+        {
+          "w": "Empieza",
+          "s": 65.739,
+          "e": 66.252
+        },
+        {
+          "w": "con",
+          "s": 66.252,
+          "e": 66.401
+        },
+        {
+          "w": "un",
+          "s": 66.401,
+          "e": 66.539
+        },
+        {
+          "w": "olá",
+          "s": 66.539,
+          "e": 66.865
+        }
+      ],
+      "voice": "edge-salome"
+    }
+  ],
+  "ideias": [
+    {
+      "id": "i01",
+      "fala": null,
+      "trecho": "ola-espanhol.com.br (sem fala)",
+      "tipo": "marca",
+      "ancora": "Enter",
+      "emocao": "curiosidade",
+      "entender": "é um site, e é este endereço",
+      "prova": "manual p. 17 (navegador)"
+    },
+    {
+      "id": "i02",
+      "fala": null,
+      "trecho": "Quero aprender / Quero ensinar (sem fala)",
+      "tipo": "identificacao",
+      "ancora": "clique no card",
+      "emocao": "reconhecimento: qual dos dois sou eu",
+      "entender": "o site tem duas portas, aluno e professor",
+      "prova": "manual p. 20 (cards professor/aluno)"
+    },
+    {
+      "id": "i05",
+      "fala": "f03",
+      "trecho": "Quantas horas por semana você quer falar espanhol?",
+      "tipo": "pergunta",
+      "ancora": "horas",
+      "emocao": "envolvimento: eu escolho",
+      "entender": "o plano é em horas por semana (1, 2 ou 3)",
+      "prova": "site, Como funciona 01 (print 04)"
+    },
+    {
+      "id": "i06",
+      "fala": "f04",
+      "trecho": "Sua hora, do seu jeito: 1 de 60, 2 de 30 ou 4 de 15",
+      "tipo": "numero",
+      "ancora": "Uma · Duas · quatro",
+      "emocao": "liberdade, surpresa (dá para picar a hora)",
+      "entender": "a mesma hora se divide em 1 × 60, 2 × 30 ou 4 × 15, com professores diferentes",
+      "prova": "site, Como funciona 03: duração 15, 30, 45 ou 60 min (print 04)"
+    },
+    {
+      "id": "i07",
+      "fala": "f08",
+      "trecho": "Você escolhe o que cabe na sua rotina. E com quem quer falar.",
+      "tipo": "beneficio",
+      "ancora": "escolhe · quem",
+      "emocao": "controle",
+      "entender": "eu escolho o dia e o professor",
+      "prova": "site, Como funciona 03: escolha professor, horário e duração (print 04)"
+    },
+    {
+      "id": "i08",
+      "fala": "f09",
+      "trecho": "Todos eles são professores nativos que também falam português.",
+      "tipo": "beneficio",
+      "ancora": "nativos",
+      "emocao": "segurança",
+      "entender": "o professor é nativo e entende português",
+      "prova": "site, Só nativos verificados: 'Falam português também' (print 02)"
+    },
+    {
+      "id": "i09",
+      "fala": "f10",
+      "trecho": "Não precisa ter medo de travar, eles te ajudam!",
+      "tipo": "objecao",
+      "ancora": "travar",
+      "emocao": "medo de travar → alívio",
+      "entender": "travar não é problema: o professor ajuda em português",
+      "prova": "site (print 02): 'nunca trava por não saber uma palavra'"
+    },
+    {
+      "id": "i10",
+      "fala": null,
+      "trecho": "volta aos botões (sem fala)",
+      "tipo": "virada",
+      "ancora": "clique em Quero ensinar",
+      "emocao": "virada: e quem está do outro lado?",
+      "entender": "agora o vídeo fala com o professor",
+      "prova": "manual p. 20"
+    },
+    {
+      "id": "i11",
+      "fala": "f11",
+      "trecho": "¡Ahora podrás dar clases de conversación en tu tiempo libre!",
+      "tipo": "identificacao",
+      "ancora": "clases",
+      "emocao": "orgulho",
+      "entender": "o nativo pode dar aula de conversa no tempo livre",
+      "prova": "site, Para professores nativos (print 07)"
+    },
+    {
+      "id": "i12",
+      "fala": "f12",
+      "trecho": "El español de tu día a día es valioso para quien está aprendiendo.",
+      "tipo": "promessa",
+      "ancora": "valioso",
+      "emocao": "alívio",
+      "entender": "o espanhol do dia a dia dele vale para quem aprende",
+      "prova": "site (print 07): 'recebe alunos brasileiros com pacotes já pagos'"
+    },
+    {
+      "id": "i13",
+      "fala": "f13",
+      "trecho": "Sin preocuparte por elaborar clases complicadas.",
+      "tipo": "beneficio",
+      "ancora": "complicadas",
+      "emocao": "controle",
+      "entender": "não precisa preparar aula complicada (é conversa)",
+      "prova": "site (print 07): 'define sua disponibilidade semanal'"
+    },
+    {
+      "id": "i14",
+      "fala": "f14",
+      "trecho": "No necesitas buscar alumnos ni negociar,",
+      "tipo": "funcionalidade",
+      "ancora": "alumnos",
+      "emocao": "segurança",
+      "entender": "o aluno chega pela plataforma, sem negociar",
+      "prova": "site (print 07): 'pacotes já pagos'"
+    },
+    {
+      "id": "i15",
+      "fala": "f15",
+      "trecho": "ni preocuparte por cobros o cancelaciones.",
+      "tipo": "funcionalidade",
+      "ancora": "cobros",
+      "emocao": "alívio do chato",
+      "entender": "cobrança e cancelamento ficam com a plataforma",
+      "prova": "site (print 07): 'Nada de cobrar ou negociar preço'"
+    },
+    {
+      "id": "i16",
+      "fala": "f16",
+      "trecho": "Tú escoges tus horarios disponibles.",
+      "tipo": "funcionalidade",
+      "ancora": "horarios",
+      "emocao": "confiança",
+      "entender": "o professor escolhe os horários",
+      "prova": "site (print 07): 'cancelamento regulamentado, pagamentos regulares'"
+    },
+    {
+      "id": "i17",
+      "fala": "f17",
+      "trecho": "¿Te sobra media hora entre un compromiso y otro?",
+      "tipo": "pergunta",
+      "ancora": "media",
+      "emocao": "reconhecimento",
+      "entender": "o vão do dia do professor",
+      "prova": null
+    },
+    {
+      "id": "i18",
+      "fala": "f18",
+      "trecho": "¡Conviértela en clase!",
+      "tipo": "revelacao",
+      "ancora": "Conviértela",
+      "emocao": "satisfação (ponto alto)",
+      "entender": "a meia hora livre vira renda: uma aula de 30 min",
+      "prova": "site: aulas de 30 min (print 04)"
+    },
+    {
+      "id": "i19",
+      "fala": "f19",
+      "trecho": "¡Puedes comenzar ahora!",
+      "tipo": "cta",
+      "ancora": "comenzar",
+      "emocao": "convicção",
+      "entender": "dá para começar já, dos dois lados",
+      "prova": null
+    },
+    {
+      "id": "i20",
+      "fala": "f20",
+      "trecho": "Empieza con un olá.",
+      "tipo": "cta",
+      "ancora": "olá",
+      "emocao": "convite",
+      "entender": "o próximo passo é o site",
+      "prova": "ola-espanhol.com.br"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "ideias": [
+        "i01"
+      ],
+      "block": "gancho",
+      "intensidade": 2,
+      "relacao": "mostra",
+      "acrescenta": "o vídeo abre no lugar onde tudo acontece: o endereço do site digitado na barra do manual (p. 17); o campo vermelho da URL é a pílula que vai virar a hora de conversa",
+      "motivo": "nasce como o campo da URL: pílula --primary com cadeado e texto branco",
+      "composicao": "9:16: barra creme (largura 900, raio 48, --shadow-lg) centrada em y≈820, aba com favicon oló + 'Olá Espanhol' em cima dela, três pontinhos creme à esquerda da aba; nada abaixo de y 1440 · 4:5: a mesma barra em y≈560, largura 920",
+      "olhar": "centro (campo da URL)",
+      "poses": [
+        "início: fundo vermelho chapado, barra creme já inteira com aba e favicon oló; campo da URL vermelho vazio com o caret piscando",
+        "meio: ola-espanhol.com.br digitada rápido; Enter afunda a barra (0,97)",
+        "fim: setas, recarregar, cadeado e URL saem em cascata; a barra creme fica lisa e começa a se esticar e partir no meio"
+      ],
+      "novo": {
+        "tipo": "abertura",
+        "id": "barra-navegador",
+        "spec": "Barra do navegador do manual p. 17 sobre a dobra vermelha (não é a janela do cta/navegador: só aba + barra). Slots: url | aba. Cues: entra (barra inteira no 1º quadro, caret piscando), digita (URL letra a letra, ~1 s, foley), enter (barra afunda 0,97 e solta com SOFT; linha de carregamento), divide (controles saem em cascata 40 ms, a barra estica e se parte em duas metades que viram os dois cards da s02, mesma posição e raio). Params: dobra (vermelho), favicon (logo-simbolo-cor.svg), largura/y por formato. Reaproveita do cta/navegador o código do caret e da digitação.",
+        "slots": [
+          "url",
+          "aba"
+        ],
+        "cues": [
+          "entra",
+          "digita",
+          "enter",
+          "divide"
+        ]
+      },
+      "on_screen": "ola-espanhol.com.br|Olá Espanhol",
+      "params": {
+        "dobra": "vermelho",
+        "favicon": "brand/logo/logo-simbolo-cor.svg"
+      },
+      "headline": null,
+      "icone": "brand:logo-simbolo-cor (favicon) + Lucide lock no campo",
+      "gestos": [
+        {
+          "cue": "entra",
+          "o_que": "barra inteira já no 1º quadro, caret piscando no campo vermelho; o oló do favicon pisca",
+          "sfx": "nenhum (a trilha abre)",
+          "at": 0.02
+        },
+        {
+          "cue": "digita",
+          "o_que": "URL digitada rápido (~0,4 s, ritmo de autocompletar)",
+          "sfx": "foley de teclado (máx. 1 por tecla, variantes)",
+          "at": 0.35
+        },
+        {
+          "cue": "enter",
+          "o_que": "barra afunda 0,97 e solta; linha de carregamento creme corre dentro do campo",
+          "sfx": "tic do Enter",
+          "at": 2.75
+        },
+        {
+          "cue": "divide",
+          "o_que": "controles saem em cascata, a barra estica e se parte em duas metades",
+          "sfx": "whoosh fino",
+          "before_end": 0.55
+        }
+      ],
+      "vivo": "caret piscando; favicon oló pisca; linha de carregamento",
+      "entra": "1º quadro já com a barra inteira no vermelho (sem fade do preto)",
+      "sai": "match cut: as duas metades da barra viram os dois cards da s02, na mesma região e com o mesmo raio",
+      "som": "trilha abre no 1º quadro · teclado · tic · whoosh fino",
+      "fontes": [
+        {
+          "afirmacao": "ola-espanhol.com.br",
+          "fonte": "site (BRAND.md > Referência obrigatória)",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [],
+      "len": 4
+    },
+    {
+      "id": "s02",
+      "ideias": [
+        "i02"
+      ],
+      "block": "conceito",
+      "intensidade": 2,
+      "relacao": "complementa",
+      "acrescenta": "o site tem duas portas e o cursor hesita entre elas: quem assiste se pergunta 'qual sou eu?'; os olhos dos dois mascotes seguem o cursor (a marca está viva)",
+      "motivo": "a barra partida vira as duas portas; a pílula some dentro do card escolhido",
+      "composicao": "9:16: dois cards creme (raio 32, 760×520) empilhados, centro em y≈620 e y≈1180; mascote no alto do card, texto no meio, botão-círculo embaixo · 4:5: lado a lado (440×560), centro em y≈675, como no manual p. 20",
+      "olhar": "card de cima (aluno) → card de baixo (professor) → volta ao de cima",
+      "poses": [
+        "início: os dois cards acabaram de nascer das metades da barra, já com mascotes e textos ('Quero *aprender* espanhol' com mascote aluno e círculo verde; 'Quero *ensinar* espanhol' com mascote professor e círculo vermelho)",
+        "meio: cursor-mão parado sobre o card do professor (card sobe 6 px, seta do círculo desliza); os olhos dos dois mascotes olham para ele",
+        "fim: o cursor voltou e clicou no card do aluno: o card afunda 0,97 e começa a crescer"
+      ],
+      "novo": {
+        "tipo": "escolha",
+        "id": "dois-cards",
+        "spec": "Os dois cards do manual p. 20 sobre a dobra vermelha (card --dobra-vermelho-card, sem borda, sombra suave). Slots: aluno | professor (texto com *ênfase* = Bold, resto ExtraLight). Cues: entra (cards no lugar no 1º quadro, vindos da barra ou da página encolhendo, conforme param de), hesita (cursor seta → mão no hover; card sobe 6 px; olhos dos mascotes seguem a ponta do cursor), clique (eco só no instante, card 0,97 → 1 com FAST), expande (o card escolhido cresce até virar a tela; o creme do card vira o fundo creme da próxima cena; o outro card sai pela borda). Params: escolha (aluno|professor), de (barra|pagina), dobra (vermelho).",
+        "slots": [
+          "aluno",
+          "professor"
+        ],
+        "cues": [
+          "entra",
+          "hesita",
+          "clique",
+          "expande",
+          "hover2"
+        ]
+      },
+      "on_screen": "Quero *aprender espanhol*|Quero *ensinar espanhol*",
+      "params": {
+        "dobra": "vermelho",
+        "escolha": "aluno",
+        "de": "barra"
+      },
+      "headline": null,
+      "icone": "brand:vetor-mascote-aluno + vetor-mascote-professor; Lucide arrow-right nos círculos",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "os dois cards assentam (vindos da barra), conteúdo em cascata",
+          "sfx": "2 pops"
+        },
+        {
+          "cue": "hesita",
+          "at": 0.75,
+          "o_que": "hover no card do aluno: o card cresce um pouco e o personagem dá um pulinho suave",
+          "sfx": "tique suave"
+        },
+        {
+          "cue": "hover2",
+          "at": 1.35,
+          "o_que": "hover no card do professor (cresce + pulinho)",
+          "sfx": "tique suave"
+        },
+        {
+          "cue": "clique",
+          "at": 2.05,
+          "o_que": "volta e clica no card do aluno",
+          "sfx": "clique de mouse"
+        },
+        {
+          "cue": "expande",
+          "before_end": 0.45,
+          "o_que": "o card do aluno cresce até virar a tela",
+          "sfx": "whoosh de expansão"
+        }
+      ],
+      "vivo": "mascotes piscando; olhos seguindo o cursor",
+      "entra": "match no motivo: os cards nascem das duas metades da barra da s01",
+      "sai": "match cut card → página: o creme do card vira o fundo creme da s03",
+      "som": "pops · tique · clique · whoosh",
+      "fontes": [],
+      "alternativas": [],
+      "ajuste_v04": "personagem do estudante menor; hover sem balanço lateral: card cresce (scale 1,04) e o personagem dá um pulinho; cursor mais rápido entre os cards",
+      "len": 2.75
+    },
+    {
+      "id": "s04",
+      "ideias": [
+        "i05"
+      ],
+      "block": "produto",
+      "intensidade": 2,
+      "vo": [
+        "f03"
+      ],
+      "relacao": "mostra",
+      "acrescenta": "os planos reais do site (1, 2 ou 3 horas por semana) e o gesto de escolher: o cursor passa pelos três e escolhe o menor, mostrando que dá para começar pequeno",
+      "motivo": "o card '1 hora' escolhido se comprime na pílula vermelha '1 hora'",
+      "composicao": "9:16: headline y 300–560; 3 cards de plano empilhados (760×200, raio 24) y 640–1340 · 4:5: headline y 120–330; 3 cards lado a lado (290×380) y 480–860",
+      "olhar": "topo (pergunta) → card '1 hora'",
+      "poses": [
+        "início: 'Quantas horas por semana' (ExtraLight) / 'você quer *falar espanhol?*' (Bold vermelho) inteira + os 3 cards (nascidos dos chips) com '1 hora', '2 horas', '3 horas' grandes em Bold grafite e 'por semana' embaixo",
+        "meio: cursor-mão desliza pelos três cards (cada um sobe 4 px no hover)",
+        "fim: '1 hora' com borda 2 px --primary (destaque do site); os outros dois recuam a 0,96 com o conteúdo esmaecido (nunca o card)"
+      ],
+      "novo": {
+        "tipo": "escolha",
+        "id": "planos",
+        "spec": "Cards de plano do site (print 06) na dobra creme: fundo --dobra-creme-card, raio 24, número grande Bold grafite, sem preço. Slots: titulo1 | titulo2 | plano1 | plano2 | plano3. Cues: entra (headline inteira + cards no lugar), hover (cursor passa pelos 3; cada um sobe 4 px), clique (eco; o escolhido ganha borda 2 px --primary; os outros recuam 0,96 e o conteúdo a 0,5), comprime (o escolhido se comprime na pílula --primary '1 hora' e o fundo corta seco para o azul). Params: escolhido (1), dobra (creme), selo (opcional, só com fonte).",
+        "slots": [
+          "titulo1",
+          "titulo2",
+          "plano1",
+          "plano2",
+          "plano3"
+        ],
+        "cues": [
+          "entra",
+          "hover",
+          "clique",
+          "comprime"
+        ]
+      },
+      "on_screen": "Quantas horas por semana|você quer *falar espanhol?*|*1* hora|*2* horas|*3* horas",
+      "params": {
+        "dobra": "creme",
+        "escolhido": 1,
+        "selo": null,
+        "sub": "por semana"
+      },
+      "headline": "Quantas horas por semana você quer falar espanhol?",
+      "icone": "Lucide clock em cada card (área --accent) — a confirmar no style frame; pode ficar só o número",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline inteira em cascata ≤ 0,4 s; cards já no lugar (vieram dos chips)",
+          "sfx": "nenhum (match)"
+        },
+        {
+          "cue": "hover",
+          "word": "f03:semana",
+          "offset": -0.1,
+          "o_que": "cursor-mão passa pelos três cards, de baixo para cima",
+          "sfx": "tique suave por card (3 variantes, baixos)"
+        },
+        {
+          "cue": "clique",
+          "word": "f03:falar",
+          "offset": -0.1,
+          "o_que": "clique no '1 hora': borda vermelha, os outros recuam",
+          "sfx": "clique + ding gentil"
+        },
+        {
+          "cue": "comprime",
+          "before_end": 0.4,
+          "o_que": "o card '1 hora' se comprime na pílula vermelha '1 hora'",
+          "sfx": "swish curto"
+        }
+      ],
+      "vivo": "borda do escolhido respira; cursor em leve deriva",
+      "entra": "match: o card do aluno da s02 cresceu e é esta página; a pergunta já entra (sem a cena do hero)",
+      "sai": "match no motivo + hard cut de fundo na batida: a pílula '1 hora' fica no mesmo lugar e o fundo corta seco do creme para o azul da s05",
+      "som": "tiques · clique · ding gentil · swish",
+      "fontes": [
+        {
+          "afirmacao": "planos de 1, 2 ou 3 horas por semana",
+          "fonte": "site, Como funciona 01 (print 04): 'Escolha quantas horas quer praticar: 1, 2 ou 3h por semana'",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [],
+      "lead": 0.82,
+      "tail": 0.75
+    },
+    {
+      "id": "s05",
+      "ideias": [
+        "i06",
+        "i07"
+      ],
+      "block": "produto",
+      "intensidade": 3,
+      "vo": [
+        "f04",
+        "f05",
+        "f06",
+        "f07",
+        "f08"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "a mesma hora vira 1 aula longa, 2 médias ou 4 curtas, e cada uma ganha um professor: dá para escolher mais de um (Colômbia, Argentina, México)",
+      "motivo": "a pílula '1 hora' se parte em 4 × 15', junta em 2 × 30', junta em 1 × 60', é arrastada para outro dia e ganha o avatar de Carlos",
+      "composicao": "9:16: headline y 290–420; número teal grande y 460–600 (à esquerda) e pílula '1 hora' à direita; agenda semanal em card creme (raio 32) y 660–1400, 7 colunas seg…dom com rótulo pequeno, linhas --border · 4:5: headline y 100–200; número + pílula y 230–360; agenda y 420–1240",
+      "olhar": "pílula (topo) → agenda (dias) → avatar na ponta da pílula",
+      "poses": [
+        "início: fundo azul; 'Sua hora, do seu jeito:' entrando palavra a palavra; pílula '1 hora' sobre a agenda vazia",
+        "meio: 1 × 60' encaixada com o avatar CO; depois 2 × 30' com dois avatares AR; número centralizado",
+        "fim: 4 × 15' com avatares AR, AR, CO, MX; o cursor arrastou uma de 15' para outro dia; headline 'Na sua rotina, com quem quiser.'"
+      ],
+      "novo": {
+        "tipo": "agenda",
+        "id": "hora-divide",
+        "spec": "Agenda semanal na dobra azul e a pílula do tempo. Headline entra palavra a palavra (cues p1…p5, de baixo, suave). Ordem 60 → 30 → 15: v60 (a pílula cai inteira num dia), v30 (parte em 2), v15 (parte em 4); número grande centralizado acima da agenda com swap; av60/av30/av15 = avatares redondos com bandeira na ponta de cada aula. troca (headline 2), arrasta/assenta (cursor leva UMA aula de 15 para outro dia), destaca (avatares pulsam), sai (zoom no avatar CO).",
+        "slots": [
+          "headline",
+          "headline2",
+          "pilula",
+          "n4",
+          "n2",
+          "n1"
+        ],
+        "cues": [
+          "entra",
+          "p1",
+          "p2",
+          "p3",
+          "p4",
+          "p5",
+          "v60",
+          "av60",
+          "v30",
+          "av30",
+          "v15",
+          "av15",
+          "troca",
+          "arrasta",
+          "assenta",
+          "destaca",
+          "sai"
+        ]
+      },
+      "on_screen": "*Sua hora,* do seu jeito:|Na sua rotina, *com quem quiser.*|1 hora|1 × 60'|2 × 30'|4 × 15'",
+      "params": {
+        "dobra": "azul",
+        "dias": [
+          "seg",
+          "ter",
+          "qua",
+          "qui",
+          "sex",
+          "sáb",
+          "dom"
+        ],
+        "professor": {
+          "nome": "Carlos",
+          "pais": "Colômbia",
+          "bandeira": "library/visual/flags/flag-icons/co.svg"
+        },
+        "rodape": "ilustrativo",
+        "ordem": [
+          60,
+          30,
+          15
+        ],
+        "avatares": {
+          "15": [
+            "AR",
+            "AR",
+            "CO",
+            "MX"
+          ],
+          "30": [
+            "AR",
+            "AR"
+          ],
+          "60": [
+            "CO"
+          ]
+        }
+      },
+      "headline": "Sua hora, do seu jeito:",
+      "icone": "a própria pílula com Lucide clock à esquerda; avatar com bandeira",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "corte seco para o azul com a pílula no lugar; agenda entra",
+          "sfx": "nenhum (hard cut)"
+        },
+        {
+          "cue": "p1",
+          "word": "f04:Sua",
+          "offset": -0.08,
+          "o_que": "'Sua' surge de baixo, suave",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "p2",
+          "word": "f04:hora",
+          "offset": -0.08,
+          "o_que": "'hora,' surge de baixo",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "p3",
+          "word": "f04:do",
+          "offset": -0.08,
+          "o_que": "'do' surge de baixo",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "p4",
+          "word": "f04:seu",
+          "offset": -0.08,
+          "o_que": "'seu' surge de baixo",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "p5",
+          "word": "f04:jeito",
+          "offset": -0.08,
+          "o_que": "'jeito:' surge de baixo",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "v60",
+          "word": "f05:Uma",
+          "offset": -0.1,
+          "o_que": "a pílula cai inteira na agenda: 1 × 60' (número centralizado)",
+          "sfx": "click de encaixe"
+        },
+        {
+          "cue": "av60",
+          "word": "f05:inteira",
+          "offset": -0.05,
+          "o_que": "avatar com bandeira da Colômbia na ponta da aula de 60",
+          "sfx": "pop"
+        },
+        {
+          "cue": "v30",
+          "word": "f06:Duas",
+          "offset": -0.1,
+          "o_que": "a de 60 se parte em 2 × 30' em dois dias",
+          "sfx": "crack suave + 2 clicks"
+        },
+        {
+          "cue": "av30",
+          "word": "f06:trinta",
+          "offset": -0.05,
+          "o_que": "dois avatares da Argentina",
+          "sfx": "2 pops"
+        },
+        {
+          "cue": "v15",
+          "word": "f07:quatro",
+          "offset": -0.1,
+          "o_que": "as de 30 se partem em 4 × 15' em quatro dias",
+          "sfx": "crack suave + 4 clicks"
+        },
+        {
+          "cue": "av15",
+          "word": "f07:quinze",
+          "offset": -0.05,
+          "o_que": "avatares AR, AR, CO, MX",
+          "sfx": "4 pops"
+        },
+        {
+          "cue": "troca",
+          "word": "f08:Você",
+          "offset": -0.15,
+          "o_que": "headline troca para 'Na sua rotina, com quem quiser.'",
+          "sfx": "air"
+        },
+        {
+          "cue": "arrasta",
+          "word": "f08:escolhe",
+          "offset": -0.1,
+          "o_que": "o cursor pega UMA das aulas de 15' e leva para outro dia",
+          "sfx": "tique no pegar"
+        },
+        {
+          "cue": "assenta",
+          "word": "f08:rotina",
+          "o_que": "a aula assenta no dia novo",
+          "sfx": "click de encaixe"
+        },
+        {
+          "cue": "destaca",
+          "word": "f08:quem",
+          "offset": -0.1,
+          "o_que": "os 4 avatares pulsam em sequência (com quem quiser)",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.4,
+          "o_que": "zoom no avatar da Colômbia, que vira o 1º card da s06",
+          "sfx": "whoosh fino"
+        }
+      ],
+      "vivo": "número teal respira; dias livres com leve brilho; cursor em deriva",
+      "entra": "hard cut na batida: a pílula '1 hora' da s04 continua no mesmo ponto, só o fundo muda para azul",
+      "sai": "match no motivo: o avatar da ponta da pílula vira o card de Carlos na s06",
+      "som": "crack · clicks de encaixe · swooshes · pop",
+      "fontes": [
+        {
+          "afirmacao": "conversas de 15, 30 ou 60 minutos",
+          "fonte": "site, Como funciona 03 (print 04): duração 15, 30, 45 ou 60 minutos",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "escolher professor e horário",
+          "fonte": "site, Como funciona 03 (print 04)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "avatares CO, AR, AR, AR, AR, CO, MX",
+          "fonte": "elenco fictício, rodapé ilustrativo",
+          "status": "ok (ilustrativo)"
+        }
+      ],
+      "alternativas": [
+        "Relógio de 60' que se fatia como pizza em 4, 2 e 1 fatias, e cada fatia voa para a agenda (mais 'número', mas troca a pílula por outro objeto e quebra o motivo)",
+        "Sem agenda: a pílula se parte e se junta sozinha no centro, grande, e só no f08 aparece a semana (mais limpo, perde o 'espalhar pela semana', que é o acrescenta)"
+      ],
+      "lead": 0.25,
+      "gap": 0.35,
+      "tail": 0.7,
+      "pause": true
+    },
+    {
+      "id": "s06",
+      "ideias": [
+        "i08",
+        "i09"
+      ],
+      "block": "prova",
+      "intensidade": 2,
+      "vo": [
+        "f09",
+        "f10"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "quatro professores reais de países diferentes (dá para escolher), e a videochamada mostra a cena da aula: o aluno trava em espanhol, o professor ajuda em português",
+      "motivo": "o avatar que saiu da pílula é o card de Carlos (o primeiro)",
+      "composicao": "9:16: headline y 290–480; 3 cards brancos (760×190, raio 28) empilhados y 540–1180, avatar à esquerda, nome + bandeira + país, selo à direita; no f10 os cards recuam para cima (0,9, conteúdo a 0,4) e o chat entra y 900–1400 · 4:5: headline y 100–260; 3 cards lado a lado (300×360) y 330–700; chat y 760–1220",
+      "olhar": "headline → card de Carlos → chat",
+      "poses": [
+        "início: headline 'Professores nativos / que também falam português.' e o card de Carlos (veio do avatar)",
+        "meio: 4 cards 2 × 2, cada um caindo de cima, rápido, um depois do outro",
+        "fim: 3 cards saem; o 1º vira uma videochamada (professor no retângulo grande, aluno no pequeno) com as bolhas 'Ayer fui al…' e 'Pode falar em português que eu te ajudo!'"
+      ],
+      "novo": {
+        "tipo": "pessoas",
+        "id": "professores-chat",
+        "spec": "Creme-suave. 4 cards de professor 2 × 2 (avatar ilustrado + bandeira + país + selo), caindo de cima em cascata rápida (cue cards). cue video: 3 cards saem e o 1º vira uma videochamada (retângulo grande = professor, retângulo pequeno = aluno, os dois com avatar ilustrado). bolha1 (aluno) e bolha2 (professor) sobre cada retângulo. Sem chat e sem o mascote de bigode.",
+        "slots": [
+          "titulo1",
+          "titulo2",
+          "p1",
+          "p2",
+          "p3",
+          "selo",
+          "msg_aluno",
+          "msg_prof"
+        ],
+        "cues": [
+          "entra",
+          "cards",
+          "video",
+          "bolha1",
+          "bolha2",
+          "sai"
+        ]
+      },
+      "on_screen": "Professores *nativos*|que também falam português.|Carlos · Colômbia|Lucía · Argentina|Martín · Argentina|Mateo · México|Ayer fui al…|Pode falar em português que eu te ajudo!",
+      "params": {
+        "dobra": "creme-suave",
+        "elenco": [
+          {
+            "nome": "Carlos",
+            "pais": "Colômbia",
+            "bandeira": "library/visual/flags/flag-icons/co.svg"
+          },
+          {
+            "nome": "Lucía",
+            "pais": "Argentina",
+            "bandeira": "library/visual/flags/flag-icons/ar.svg"
+          },
+          {
+            "nome": "Mateo",
+            "pais": "México",
+            "bandeira": "library/visual/flags/flag-icons/mx.svg"
+          }
+        ],
+        "rodape": "ilustrativo",
+        "bandeiras": [
+          "assets/flags/co.svg",
+          "assets/flags/ar.svg",
+          "assets/flags/ar.svg",
+          "assets/flags/mx.svg"
+        ]
+      },
+      "headline": "Professores nativos que também falam português.",
+      "icone": "bandeiras (flag-icons) + selo com check; brand:icone-falsos-amigos pequeno ao lado do chat",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "headline inteira + card de Carlos no lugar",
+          "sfx": "nenhum (match)"
+        },
+        {
+          "cue": "cards",
+          "word": "f09:professores",
+          "offset": -0.1,
+          "o_que": "cards 2, 3 e 4 caem de cima, um depois do outro (2 × 2)",
+          "sfx": "3 pops rápidos"
+        },
+        {
+          "cue": "video",
+          "word": "f09:falam",
+          "offset": -0.1,
+          "o_que": "3 cards somem; o 1º cresce e vira a videochamada",
+          "sfx": "swish"
+        },
+        {
+          "cue": "bolha1",
+          "word": "f10:travar",
+          "offset": -0.1,
+          "o_que": "bolha do aluno 'Ayer fui al…' no retângulo pequeno",
+          "sfx": "pop suave"
+        },
+        {
+          "cue": "bolha2",
+          "word": "f10:ajudam",
+          "offset": -0.1,
+          "o_que": "bolha do professor 'Pode falar em português que eu te ajudo!' no retângulo grande",
+          "sfx": "pop suave"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.35,
+          "o_que": "a página encolhe para dentro do card do aluno da s07",
+          "sfx": "whoosh reverso"
+        }
+      ],
+      "vivo": "avatares com respiração leve; '?' balança; mascote pisca",
+      "entra": "match no motivo: o avatar de Carlos da ponta da pílula cresce e é o 1º card",
+      "sai": "match card ← página (o inverso da s02 → s03): a tela encolhe para dentro do card do aluno da s07",
+      "som": "pops · carimbo · pop suave · whoosh reverso",
+      "fontes": [
+        {
+          "afirmacao": "professores nativos que falam português",
+          "fonte": "site, Só nativos verificados (print 02): 'Falam português também'",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "Carlos (CO), Lucía (AR), Martín (AR), Mateo (MX)",
+          "fonte": "elenco fictício, rodapé ilustrativo",
+          "status": "ok (ilustrativo)"
+        }
+      ],
+      "alternativas": [],
+      "lead": 0.3,
+      "gap": 0.5,
+      "tail": 0.15,
+      "pause": true
+    },
+    {
+      "id": "s07",
+      "ideias": [
+        "i10"
+      ],
+      "block": "virada",
+      "intensidade": 1,
+      "relacao": "contrasta",
+      "acrescenta": "as mesmas duas portas, na mesma posição da abertura: agora o cursor vai direto ao outro lado, sem hesitar; o vídeo vira para quem ensina",
+      "motivo": "rima com a s02: a bifurcação de volta",
+      "composicao": "idêntica à s02 (mesma posição e tamanho dos cards nos dois formatos)",
+      "olhar": "card de cima → card de baixo (professor)",
+      "poses": [
+        "início: a página encolheu para dentro do card do aluno; os dois cards na posição exata da s02",
+        "meio: cursor-mão sobe direto ao card do professor; olhos do mascote professor se arregalam (micro scale)",
+        "fim: clique no card do professor; ele começa a crescer"
+      ],
+      "novo": {
+        "tipo": "escolha",
+        "id": "dois-cards",
+        "spec": "O mesmo bloco da s02 (mesmo contrato), com escolha=professor e de=pagina: os cards entram com a página encolhendo para dentro do card do aluno.",
+        "slots": [
+          "aluno",
+          "professor"
+        ],
+        "cues": [
+          "entra",
+          "hesita",
+          "clique",
+          "expande",
+          "hover2"
+        ]
+      },
+      "on_screen": "Quero *aprender espanhol*|Quero *ensinar espanhol*",
+      "params": {
+        "dobra": "vermelho",
+        "escolha": "professor",
+        "de": "pagina"
+      },
+      "headline": null,
+      "icone": "brand:vetor-mascote-professor (olhos arregalam)",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "a página encolhe para o card do aluno; os dois cards no lugar",
+          "sfx": "whoosh reverso"
+        },
+        {
+          "cue": "hesita",
+          "at": 0.08,
+          "o_que": "cursor vai direto ao card do professor (sem vaivém)",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "clique",
+          "at": 0.36,
+          "o_que": "clique no card do professor",
+          "sfx": "clique de mouse"
+        },
+        {
+          "cue": "expande",
+          "before_end": 0.3,
+          "o_que": "o card do professor cresce até virar a tela",
+          "sfx": "whoosh de expansão"
+        }
+      ],
+      "vivo": "mascotes piscando; olhos no cursor",
+      "entra": "match card ← página: a s06 encolhe para dentro do card do aluno",
+      "sai": "match card → página: o creme do card do professor vira o creme da s08",
+      "som": "whoosh reverso · tique · clique · whoosh",
+      "fontes": [],
+      "alternativas": [],
+      "len": 0.72
+    },
+    {
+      "id": "s08",
+      "ideias": [
+        "i11",
+        "i12"
+      ],
+      "block": "virada",
+      "intensidade": 3,
+      "vo": [
+        "f11",
+        "f12"
+      ],
+      "relacao": "contrasta",
+      "acrescenta": "os dois lados lado a lado: o professor ganha tempo livre com aula; o espanhol dele vale para o aluno (o coração)",
+      "motivo": "três pílulas 'Aula paga' (com mini-mascote aluno na ponta) chegam ao mascote professor",
+      "composicao": "9:16: bloco verde (raio 32) ocupando x 40–1040, y 260–1460 sobre o creme; rótulo y 320; título y 370–560; mascote professor grande embaixo y 760–1220; pílulas chegam pela direita e param empilhadas à esquerda do mascote y 1240–1420 · 4:5: bloco x 60–1020, y 120–1230; texto à esquerda, mascote à direita (como o print 07); pílulas embaixo y 980–1180",
+      "olhar": "título → mascote professor → pílulas chegando",
+      "poses": [
+        "início: o card verde se divide; o 1º retângulo entra pela esquerda com a f11 no topo e o mascote professor",
+        "meio: o 2º retângulo entra pela direita com a f12 e o mascote aluno; bolha com coração sobre o aluno",
+        "fim: os retângulos saem na direção oposta à que entraram"
+      ],
+      "novo": {
+        "tipo": "pagina",
+        "id": "bloco-professor",
+        "spec": "Creme com o bloco verde que se divide em dois retângulos verdes (raio 32): ret1 entra pela esquerda (f11 no topo, mascote professor), ret2 entra pela direita (f12, mascote aluno), coracao = bolha com coração sobre o aluno (vetor-traco-coracao/elemento da dobra), sai = cada um sai pelo lado oposto ao que entrou.",
+        "slots": [
+          "rotulo",
+          "titulo1",
+          "titulo2",
+          "pilula"
+        ],
+        "cues": [
+          "entra",
+          "ret1",
+          "livre",
+          "ret2",
+          "coracao",
+          "sai"
+        ]
+      },
+      "on_screen": "¡Ahora podrás dar clases|de conversación en tu tiempo libre!|El español de tu día a día|es valioso para quien está aprendiendo.",
+      "params": {
+        "dobra": "verde",
+        "quantos": 3
+      },
+      "headline": "Você fala espanhol desde que nasceu.",
+      "icone": "brand:vetor-mascote-professor + mini-mascote aluno nas pílulas",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "o creme do card vira a página; o bloco verde se divide em dois retângulos",
+          "sfx": "air"
+        },
+        {
+          "cue": "ret1",
+          "word": "f11:Ahora",
+          "offset": -0.05,
+          "o_que": "retângulo 1 entra pela esquerda: f11 no topo + mascote professor",
+          "sfx": "whoosh fino"
+        },
+        {
+          "cue": "livre",
+          "word": "f11:libre",
+          "offset": -0.1,
+          "o_que": "chip 'tiempo libre' com relógio pisca no retângulo 1",
+          "sfx": "tique suave"
+        },
+        {
+          "cue": "ret2",
+          "word": "f12:El",
+          "offset": -0.15,
+          "o_que": "retângulo 2 entra pela direita: f12 + mascote aluno",
+          "sfx": "whoosh fino"
+        },
+        {
+          "cue": "coracao",
+          "word": "f12:valioso",
+          "offset": -0.05,
+          "o_que": "bolha de conversa com coração sobre o aluno",
+          "sfx": "pop suave"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.45,
+          "o_que": "retângulo 1 sai pela esquerda, retângulo 2 pela direita",
+          "sfx": "whoosh"
+        }
+      ],
+      "vivo": "fio do fone balança; mascote pisca; pílulas com leve deriva",
+      "entra": "match card → página: o card do professor da s07 cresceu e é esta página",
+      "sai": "match: o bloco verde encolhe no 1º card da grade da s09",
+      "som": "air · 3 pops · swish",
+      "fontes": [
+        {
+          "afirmacao": "aulas de conversação no tempo livre, alunos brasileiros",
+          "fonte": "site, Para professores nativos (print 07)",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [
+        "Contraste literal: o mascote professor começa a correr para a direita e para, enquanto as pílulas entram pela esquerda (mais engraçado; mais animação de personagem, mais risco de parecer infantil)",
+        "Um telefone do professor recebe 3 notificações 'Nova aula paga' (mais 'produto', mas inventa uma UI que não temos print)"
+      ],
+      "lead": 0.1,
+      "gap": 0.5,
+      "tail": 0.7,
+      "pause": true
+    },
+    {
+      "id": "s09",
+      "ideias": [
+        "i13",
+        "i14",
+        "i15",
+        "i16"
+      ],
+      "block": "produto",
+      "intensidade": 2,
+      "vo": [
+        "f13",
+        "f14",
+        "f15",
+        "f16"
+      ],
+      "relacao": "mostra",
+      "acrescenta": "cada frase vira um gesto que prova o que diz: o cursor liga dois horários, a pílula paga pousa no card, 'negociar preço' e 'cobrar aluno' são riscados, e o calendário marca o dia do pagamento; os cards anteriores ficam inteiros (é uma lista que se acumula)",
+      "motivo": "no card 2 a pílula vermelha 'Aula paga ✓' pousa (a mesma que chegou na s08)",
+      "composicao": "9:16: rótulo + headline y 290–470; 4 cards (760×220, raio 28) em coluna y 520–1440, cada um com título Bold à esquerda e ícone/gesto à direita · 4:5: rótulo + headline y 90–260; grade 2 × 2 (440×440) y 300–1240",
+      "olhar": "headline → card da vez (desce a coluna)",
+      "poses": [
+        "início: 'COMO FUNCIONA' + 'Pra quem *ensina*' (Bold + ExtraLight) e o card 1 'Seus horários' (nasceu do bloco verde) com mini-agenda de 3 horários",
+        "meio: card 2 'Aula já paga' com a pílula 'Aula paga ✓' pousada; card 3 'Sem negociar, sem cobrar' com as duas linhas sendo riscadas",
+        "fim: os 4 cards completos; card 4 'Regras claras, pagamento em dia' com relógio e calendário com o dia marcado, borda 2 px --primary (ativo)"
+      ],
+      "novo": {
+        "tipo": "cards",
+        "id": "como-funciona-professor",
+        "spec": "Creme-claro, 4 cards 2 × 2 em espanhol, um por fala (c1…c4), cada um com ícone Lucide do tópico (book-open, users, wallet, calendar-clock) e um gesto que mostra a frase (g1…g4: riscar, aluno chegando, selo pago, toggles). Card ativo com borda vermelha.",
+        "slots": [
+          "rotulo",
+          "headline",
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "cues": [
+          "entra",
+          "c1",
+          "g1",
+          "c2",
+          "g2",
+          "c3",
+          "g3",
+          "c4",
+          "g4",
+          "sai"
+        ]
+      },
+      "on_screen": "CÓMO FUNCIONA|Para quien *enseña*|Sin clases complicadas|Sin buscar alumnos ni negociar|Sin cobros ni cancelaciones|Tú escoges tus horarios",
+      "params": {
+        "dobra": "creme-claro",
+        "icones": [
+          "lucide:book-open",
+          "lucide:users",
+          "lucide:wallet",
+          "lucide:calendar-clock"
+        ]
+      },
+      "headline": "Pra quem ensina",
+      "icone": "brand:icone-constancia · Lucide badge-check · Lucide banknote · vetor-ilustracao-relogio",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "rótulo, headline e o card 1 (era o bloco verde)",
+          "sfx": "nenhum (match)"
+        },
+        {
+          "cue": "c1",
+          "word": "f13:Sin",
+          "offset": -0.15,
+          "o_que": "card 1 'Sin clases complicadas' (ícone livro)",
+          "sfx": "pop"
+        },
+        {
+          "cue": "g1",
+          "word": "f13:complicadas",
+          "offset": -0.1,
+          "o_que": "uma pilha de folhas de 'plano de aula' é riscada / some",
+          "sfx": "risco"
+        },
+        {
+          "cue": "c2",
+          "word": "f14:No",
+          "offset": -0.15,
+          "o_que": "card 2 'Sin buscar alumnos ni negociar' (ícone pessoas)",
+          "sfx": "pop"
+        },
+        {
+          "cue": "g2",
+          "word": "f14:negociar",
+          "offset": -0.1,
+          "o_que": "o aluno chega sozinho; 'negociar' riscado",
+          "sfx": "risco"
+        },
+        {
+          "cue": "c3",
+          "word": "f15:ni",
+          "offset": -0.15,
+          "o_que": "card 3 'Sin cobros ni cancelaciones' (ícone carteira)",
+          "sfx": "pop"
+        },
+        {
+          "cue": "g3",
+          "word": "f15:cancelaciones",
+          "offset": -0.1,
+          "o_que": "selo 'pago ✓' pousa; 'cobros' e 'cancelaciones' riscados",
+          "sfx": "carimbo"
+        },
+        {
+          "cue": "c4",
+          "word": "f16:Tú",
+          "offset": -0.15,
+          "o_que": "card 4 'Tú escoges tus horarios' (ícone calendário)",
+          "sfx": "pop"
+        },
+        {
+          "cue": "g4",
+          "word": "f16:horarios",
+          "offset": -0.1,
+          "o_que": "o cursor liga dois horários (toggles)",
+          "sfx": "2 clicks"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.4,
+          "o_que": "o calendário do card 4 cresce e vira a agenda da s10",
+          "sfx": "swish"
+        }
+      ],
+      "vivo": "ponteiro do relógio anda; card ativo respira",
+      "entra": "match: o bloco verde da s08 encolhe e vira o card 1",
+      "sai": "match: o calendário do card 4 cresce e é a agenda da s10",
+      "som": "clicks · pops · carimbo · riscos · tique · swish",
+      "fontes": [
+        {
+          "afirmacao": "o professor define a disponibilidade",
+          "fonte": "site (print 07)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "alunos com pacote já pago, sem cobrar nem negociar",
+          "fonte": "site (print 07)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "cancelamento regulamentado, pagamentos regulares",
+          "fonte": "site (print 07)",
+          "status": "ok"
+        },
+        {
+          "afirmacao": "sem preparar aula complicada (é conversa)",
+          "fonte": "roteiro v04 do Oliver (método de conversação do site, print 02)",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [],
+      "lead": 0.3,
+      "gap": 0.5,
+      "tail": 0.7,
+      "pause": true
+    },
+    {
+      "id": "s10",
+      "ideias": [
+        "i17",
+        "i18"
+      ],
+      "block": "revelacao",
+      "intensidade": 4,
+      "vo": [
+        "f17",
+        "f18"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "a meia hora que sobra no dia do professor é exatamente a meia hora que o aluno escolheu na s05: a mesma pílula de 30', agora com o mini-mascote aluno, preenche o vão. Os dois lados se encaixam",
+      "motivo": "a pílula 'Aula · 30 min' (--primary) preenche o vão tracejado",
+      "composicao": "9:16: headline y 290–440; agenda do dia em card (raio 32) y 520–1380: compromisso (pílula #E9E7D3 'Compromisso') em cima, vão tracejado de 30' no meio, compromisso embaixo; relógio pequeno à direita; '30'' grande à esquerda do vão · 4:5: headline y 100–220; agenda y 280–1220",
+      "olhar": "o vão tracejado no centro",
+      "poses": [
+        "início: fundo creme; 'Sobrou *meia hora*?' inteira; agenda do dia com dois compromissos e o vão tracejado entre eles",
+        "meio: o vão pulsa devagar; '30'' grande em Bold grafite ao lado; ponteiro do relógio anda",
+        "fim: corte seco: o vão está cheio pela pílula vermelha 'Aula · 30 min' com mini-mascote aluno e o traço de brilho verde saindo dela; headline virou 'Vira *aula*.'"
+      ],
+      "novo": {
+        "tipo": "agenda",
+        "id": "vira-aula",
+        "spec": "Agenda do dia na dobra creme: card --dobra-creme-card, compromissos em pílula neutra (#E9E7D3 via token --border, texto grafite), vão tracejado 2 px grafite a 40%. Slots: headline | headline2 | compromisso | pilula. Cues: entra (headline + agenda + vão), pulsa (o vão pulsa devagar e '30'' entra), relogio (o ponteiro do relógio pula para o início do vão e o tracejado se acende de cima a baixo), vira (hard cut na batida: o vão já está cheio pela pílula --primary; headline troca para headline2; é o único SNAP do vídeo), brilho (vetor-traco-brilho verde se desenha saindo da pílula), sai (a pílula sai para cima e vira o círculo vermelho do card professor da s11; corte para o vermelho). Params: dobra (creme).",
+        "slots": [
+          "headline",
+          "headline2",
+          "compromisso",
+          "pilula"
+        ],
+        "cues": [
+          "entra",
+          "pulsa",
+          "relogio",
+          "vira",
+          "brilho",
+          "sai"
+        ]
+      },
+      "on_screen": "¿Te sobra *media hora*?|¡Conviértela en *clase*!|Compromiso|Clase · 30 min",
+      "params": {
+        "dobra": "creme",
+        "vao_min": 30
+      },
+      "headline": "Sobrou meia hora?",
+      "icone": "brand:vetor-ilustracao-relogio + vetor-traco-brilho",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "a agenda do dia (veio do calendário) e a pergunta inteira",
+          "sfx": "nenhum (match)"
+        },
+        {
+          "cue": "pulsa",
+          "word": "f17:media",
+          "offset": -0.1,
+          "o_que": "o vão pulsa e mostra 30'",
+          "sfx": "tique de relógio"
+        },
+        {
+          "cue": "relogio",
+          "word": "f17:compromiso",
+          "offset": -0.1,
+          "o_que": "o relógio, num círculo verde em cima do vão, pula; o tracejado acende",
+          "sfx": "tique"
+        },
+        {
+          "cue": "vira",
+          "word": "f18:Conviértela",
+          "offset": -0.03,
+          "o_que": "corte seco: o vão já está cheio pela pílula 'Clase · 30 min'",
+          "sfx": "ding + pop forte (único)"
+        },
+        {
+          "cue": "brilho",
+          "word": "f18:clase",
+          "o_que": "traço de brilho verde",
+          "sfx": "nenhum"
+        },
+        {
+          "cue": "sai",
+          "before_end": 0.35,
+          "o_que": "a pílula sobe e sai; corte para o vermelho",
+          "sfx": "whoosh fino"
+        }
+      ],
+      "vivo": "o vão pulsa; ponteiro do relógio anda; brilho desenhando",
+      "entra": "match: o calendário do card 4 da s09 cresce e vira a agenda do dia",
+      "sai": "match no motivo + corte para o vermelho: a pílula vira o círculo vermelho do card professor na s11",
+      "som": "tique de relógio · silêncio curto · ding + pop forte · whoosh",
+      "fontes": [
+        {
+          "afirmacao": "aula de 30 minutos",
+          "fonte": "site, Como funciona 03 (print 04)",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [
+        "Sem corte seco: a pílula entra deslizando de cima e encaixa no vão com SNAP (mais suave e mais 'marca'; menos impacto no ponto alto)",
+        "O vão se expande e a câmera mergulha nele: dentro está o cartão 'Sua próxima aula' da s03 visto do lado do professor (rima mais rica, mais caro e menos legível no celular)"
+      ],
+      "ajuste_v04": "relógio dentro de um círculo verde em cima do bloco (não ao lado); textos em espanhol",
+      "lead": 0.3,
+      "gap": 0.5,
+      "tail": 0.5,
+      "pause": true
+    },
+    {
+      "id": "s11",
+      "ideias": [
+        "i19",
+        "i20"
+      ],
+      "block": "cartão final",
+      "intensidade": 1,
+      "vo": [
+        "f19",
+        "f20"
+      ],
+      "relacao": "complementa",
+      "acrescenta": "os dois lados de novo, um de cada vez em tela cheia; o \"olá\" da frase é o próprio link e vira o site",
+      "motivo": "a pílula volta a ser o campo da URL, agora embaixo do logo",
+      "composicao": "9:16: frase y 420–620 centrada (Bold creme); os dois cards no lugar da s02 se juntam na barra em y≈900; no fim: logo horizontal branco com laço verde y 700–860, pílula creme da URL y 960–1060, oló pequeno y 1180, blob verde saindo do canto inferior direito · 4:5: frase y 260–420; logo y 520–660; URL y 740–830; blob no canto",
+      "olhar": "centro (frase → logo → URL)",
+      "poses": [
+        "início: fundo vermelho, card branco do aluno em tela cheia, personagem centralizado flutuando, seta num retângulo",
+        "meio: o card do aluno sai para a direita enquanto o do professor entra pela esquerda (fundo verde); '¡Puedes comenzar ahora!'",
+        "fim: 'Empieza con un olá.' com o olá sublinhado; o cursor clica e o olá se expande no link ola-espanhol.com.br num retângulo arredondado; o logo surge em cima, sutil"
+      ],
+      "novo": {
+        "tipo": "cta",
+        "id": "fecho-ola",
+        "spec": "Fechamento em dois tempos. 1) cards em tela cheia: aluno (dobra vermelha: fundo --primary, card branco, mascote centralizado flutuando, seta num retângulo arredondado), troca = sai para a direita enquanto o professor entra pela esquerda (fundo vira a dobra verde, card branco, seta em retângulo). 2) 'Empieza con un olá.' com animação de encerramento; olá sublinhado; clique (cursor); link (o olá se expande no retângulo com ola-espanhol.com.br); logo (sutil, em cima). 'Conversação é treino' saiu.",
+        "slots": [
+          "frase1",
+          "frase2",
+          "url"
+        ],
+        "cues": [
+          "entra",
+          "troca",
+          "frase",
+          "clique",
+          "link",
+          "logo"
+        ]
+      },
+      "on_screen": "¡Puedes comenzar ahora!|Empieza con un *olá*.|ola-espanhol.com.br",
+      "params": {
+        "dobra": "vermelho",
+        "logo": "brand/logo/logo-horizontal-branco-laco-verde.svg"
+      },
+      "headline": "Conversação é treino.",
+      "icone": "vetor-traco-brilho + logo + oló",
+      "gestos": [
+        {
+          "cue": "entra",
+          "at": 0.02,
+          "o_que": "card do aluno em tela cheia no vermelho; personagem flutua",
+          "sfx": "air"
+        },
+        {
+          "cue": "troca",
+          "word": "f19:comenzar",
+          "offset": -0.2,
+          "o_que": "card do aluno sai para a direita, o do professor entra pela esquerda (fundo vira verde)",
+          "sfx": "whoosh"
+        },
+        {
+          "cue": "frase",
+          "word": "f20:Empieza",
+          "offset": -0.15,
+          "o_que": "'Empieza con un olá.' entra com animação de encerramento (o olá sublinhado)",
+          "sfx": "air"
+        },
+        {
+          "cue": "clique",
+          "word": "f20:olá",
+          "offset": 0.45,
+          "o_que": "o cursor aparece e clica no 'olá' sublinhado",
+          "sfx": "clique"
+        },
+        {
+          "cue": "link",
+          "word": "f20:olá",
+          "offset": 0.75,
+          "o_que": "do olá se expande o link ola-espanhol.com.br num retângulo arredondado",
+          "sfx": "swish suave"
+        },
+        {
+          "cue": "logo",
+          "word": "f20:olá",
+          "offset": 1.35,
+          "o_que": "o logo surge em cima, sutil",
+          "sfx": "ding gentil"
+        }
+      ],
+      "vivo": "blob verde em deriva lenta; brilho respira; oló pisca",
+      "entra": "match no motivo: a pílula 'Aula' da s10 é o círculo vermelho do card professor; corte para o vermelho",
+      "sai": "fim do vídeo: cauda de ~3 s com a trilha resolvendo (sem fade para preto)",
+      "som": "air · whoosh reverso · ding gentil · clique · cauda da trilha",
+      "fontes": [
+        {
+          "afirmacao": "ola-espanhol.com.br",
+          "fonte": "site",
+          "status": "ok"
+        }
+      ],
+      "alternativas": [],
+      "lead": 0.3,
+      "gap": 0.5,
+      "tail": 3,
+      "pause": true
+    }
+  ],
+  "revisao": [],
+  "status": "v04 · fase 1 (voz de rascunho + timeline), ajustes-v04.md"
+}

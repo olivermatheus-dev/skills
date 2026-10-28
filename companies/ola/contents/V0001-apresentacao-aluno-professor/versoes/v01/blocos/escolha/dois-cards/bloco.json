@@ -1,0 +1,20 @@
+{
+  "id": "escolha/dois-cards",
+  "tipo": "escolha",
+  "titulo": "Os dois cards do manual p. 20 (Quero aprender / Quero ensinar) na dobra vermelha: o cursor escolhe um e o card cresce até virar a próxima página",
+  "camada": "palco",
+  "slots": ["aluno", "professor"],
+  "params": {
+    "escolha": { "padrao": "aluno", "descricao": "aluno | professor: o card clicado" },
+    "de": { "padrao": "barra", "descricao": "barra (cards já no lugar, vindos da barra) | pagina (o card do aluno chega encolhendo da página anterior)" },
+    "hesita": { "padrao": true, "descricao": "o cursor passa pelo outro card antes de clicar" }
+  },
+  "cues": ["entra", "hesita", "clique", "expande"],
+  "min_s": 0.7,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "entra": "2 pops", "hesita": "tique suave", "clique": "clique de mouse", "expande": "whoosh" },
+  "tokens": ["--dobra-vermelho-card", "--primary", "--accent", "--on-primary", "--text", "--shadow-lg"],
+  "origem": "V0001 ola (2026-10-26); composição do manual p. 20",
+  "licenca": "própria"
+}

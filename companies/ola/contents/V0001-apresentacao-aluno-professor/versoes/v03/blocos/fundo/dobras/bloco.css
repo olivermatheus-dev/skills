@@ -1,0 +1,2 @@
+.pano { position: absolute; inset: 0; }
+.pano > div { position: absolute; inset: 0; opacity: 0; }

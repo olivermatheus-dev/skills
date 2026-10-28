@@ -1,0 +1,8 @@
+.bloco { position: absolute; left: 40px; top: 40px; width: 1000px; height: 1080px; border-radius: 32px; background: var(--dobra-verde-fundo); transform-origin: 0 0; }
+.rot { position: absolute; left: 100px; top: 110px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; color: var(--dobra-verde-titulo); }
+.tit { position: absolute; left: 100px; top: 160px; width: 880px; font-size: 84px; color: var(--dobra-verde-titulo); }
+.masc { position: absolute; left: 470px; top: 470px; width: 520px; height: 420px; object-fit: contain; transform-origin: 50% 85%; }
+.pa { position: relative; width: fit-content; margin-bottom: 26px; justify-content: flex-start; padding: 0 34px 0 10px; opacity: 0; }
+.pils { position: absolute; left: 100px; top: 560px; }
+.mini { width: 66px; height: 66px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; }
+.mini img { width: 52px; height: 40px; object-fit: contain; }

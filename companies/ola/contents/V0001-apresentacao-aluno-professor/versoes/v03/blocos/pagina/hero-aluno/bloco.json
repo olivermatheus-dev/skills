@@ -1,0 +1,21 @@
+{
+  "id": "pagina/hero-aluno",
+  "tipo": "pagina",
+  "titulo": "Hero do site (print 01) na dobra creme, sem foto: título-herói grande que encolhe, cartão em arco com o mascote aluno, chip 'Sua próxima aula' com fala em espanhol, barra de horas e 3 chips com ícone",
+  "camada": "palco",
+  "slots": ["tag", "titulo1", "titulo2", "chip1", "chip2", "chip3", "aula", "fala_prof"],
+  "params": {
+    "icones": { "padrao": ["brand/icons/icone-nativos-verificados.svg", "brand/icons/icone-sem-horario-fixo.svg", "map-pin"], "descricao": "ícone de cada chip: caminho de SVG da marca ou 'map-pin' (Lucide embutido no bloco)" },
+    "progresso": { "padrao": [0.55, 0.68], "descricao": "barra de horas da semana: de, até (fração)" },
+    "rodape": { "padrao": "ilustrativo", "descricao": "texto pequeno no rodapé" },
+    "destinos": { "padrao": [[225, 655], [540, 655], [855, 655]], "descricao": "centros (palco) para onde os chips voam na saída (os cards de plano da cena seguinte)" }
+  },
+  "cues": ["entra", "aula", "encolhe", "chip1", "chip2", "chip3", "sai"],
+  "min_s": 3,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "entra": "air", "aula": "pop suave", "encolhe": "air", "chip1": "pop", "chip2": "pop", "chip3": "pop", "sai": "swish" },
+  "tokens": ["--dobra-creme-*", "--accent", "--primary", "--surface-2", "--shadow-md", "--muted"],
+  "origem": "V0001 ola (2026-10-26)",
+  "licenca": "própria"
+}

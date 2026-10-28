@@ -1,0 +1,21 @@
+{
+  "id": "cards/como-funciona-professor",
+  "tipo": "cards",
+  "titulo": "Método do site (print 02) na dobra creme-claro: 4 cards 2 × 2, um por fala, cada um com um gesto-prova (liga horários, pílula paga pousa, riscos, dia do pagamento marcado); card ativo com borda vermelha",
+  "camada": "palco",
+  "slots": ["rotulo", "headline", "c1", "c2", "c3", "c4"],
+  "params": {
+    "horarios": { "padrao": ["Seg 09:00", "Qua 14:00", "Sex 18:00"], "descricao": "linhas da mini-agenda do card 1 (ilustrativo)" },
+    "riscos": { "padrao": ["Negociar preço", "Cobrar aluno"], "descricao": "as duas linhas riscadas do card 3" },
+    "pilula": { "padrao": "Aula paga", "descricao": "texto da pílula do card 2" },
+    "destino": { "padrao": [200, 220, 680, 860], "descricao": "retângulo (palco) da agenda da cena seguinte, onde o calendário do card 4 cresce" }
+  },
+  "cues": ["entra", "toggle", "c2", "carimbo", "c3", "risco1", "risco2", "c4", "marca", "sai"],
+  "min_s": 4,
+  "elastico": true,
+  "formatos": ["4x5"],
+  "sfx_sugeridos": { "toggle": "2 clicks", "c2": "pop", "carimbo": "carimbo", "c3": "pop", "risco1": "risco", "risco2": "risco", "c4": "pop", "marca": "tique", "sai": "swish" },
+  "tokens": ["--dobra-creme-claro-*", "--primary", "--primary-strong", "--accent", "--border"],
+  "origem": "V0001 ola (2026-10-26)",
+  "licenca": "própria"
+}
